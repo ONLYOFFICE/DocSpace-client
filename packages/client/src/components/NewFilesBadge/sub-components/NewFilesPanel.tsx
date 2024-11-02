@@ -75,22 +75,20 @@ export const NewFilesPanelComponent = ({
 
   const markAsReadAction = async () => {
     if (isMarkAsReadRunning) return;
+
     setIsMarkAsReadRunning(true);
-    const folderIDs = isRooms
-      ? data.map(({ items }) => {
-          const roomsIds = items.map((item) => {
-            if ("room" in item) return item.room.id;
 
-            return null;
-          });
+    const folderIDs: (string | number)[] = [];
 
-          // remove duplicate and null
-          return roomsIds.filter((r, index) => {
-            if (!r || index !== roomsIds.indexOf(r)) return false;
-            return true;
-          });
-        })
-      : [folderId];
+    if (isRooms) {
+      data.forEach(({ items }) => {
+        items.forEach((item) => {
+          if ("room" in item) folderIDs.push(item.room.id);
+        });
+      });
+    } else {
+      folderIDs.push(folderId);
+    }
 
     await markAsRead?.(folderIDs, []);
     setIsMarkAsReadRunning(false);
@@ -132,6 +130,7 @@ export const NewFilesPanelComponent = ({
         setIsLoading(false);
       } catch (e) {
         requestRunning.current = false;
+        onClose();
         setIsLoading(false);
         toastr.error(e as string);
       }
@@ -140,7 +139,7 @@ export const NewFilesPanelComponent = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId, isRooms, setIsLoading]);
+  }, [folderId, isRooms, onClose, setIsLoading]);
 
   const isMobileDevice = !isDesktop();
 

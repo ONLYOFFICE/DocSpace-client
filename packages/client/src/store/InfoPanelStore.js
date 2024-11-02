@@ -262,11 +262,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return (
-      this.infoPanelCurrentSelection?.access ===
-        ShareAccessRights.RoomManager ||
-      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
-    );
+    return this.infoPanelCurrentSelection?.security?.EditAccess;
   }
 
   getViewItem = () => {
@@ -424,7 +420,7 @@ class InfoPanelStore {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
-      "/accounts/people",
+      user.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -509,9 +505,9 @@ class InfoPanelStore {
 
     if (
       this.getIsContacts() &&
-      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+      (!infoPanelSelection?.email || !infoPanelSelection?.displayName)
     ) {
-      this.infoPanelSelection = !infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection?.length
         ? infoPanelSelection
         : null;
       return;
@@ -890,6 +886,10 @@ class InfoPanelStore {
 
   openShareTab = () => {
     this.setView(infoShare);
+    this.isVisible = true;
+  };
+  openMembersTab = () => {
+    this.setView(infoMembers);
     this.isVisible = true;
   };
 

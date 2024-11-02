@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Вижте подробности за потребителите тук",
   "AddedRoomTags": "Добавени тагове.",
   "Administration": "Администрация",
   "AndMoreLabel": "и <1>още {{count}}</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Актуализиран файл.",
   "Users": "Потребители",
+  "UsersEmptyScreenText": "Вижте подробности за потребителите тук",
   "Versions": "Версии"
 }

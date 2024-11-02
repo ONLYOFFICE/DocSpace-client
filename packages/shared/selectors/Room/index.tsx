@@ -109,7 +109,7 @@ const RoomSelector = ({
   }, [setIsDataReady]);
 
   const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+    (value: string, callback?: VoidFunction) => {
       isFirstLoad.current = true;
       afterSearch.current = true;
       setSearchValue(() => {
@@ -120,7 +120,7 @@ const RoomSelector = ({
     [],
   );
 
-  const onClearSearchAction = React.useCallback((callback?: Function) => {
+  const onClearSearchAction = React.useCallback((callback?: VoidFunction) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {

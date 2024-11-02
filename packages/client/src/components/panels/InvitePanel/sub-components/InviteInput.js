@@ -104,7 +104,6 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   isPaidUserAccess,
-  setInvitePaidUsersCount,
   isUserTariffLimit,
   removeExist,
   inputValue,
@@ -203,8 +202,6 @@ const InviteInput = ({
               userAccess = FreeUser;
               isShowErrorToast = true;
             }
-          } else {
-            setInvitePaidUsersCount();
           }
         }
 
@@ -234,8 +231,6 @@ const InviteInput = ({
           userAccess = FreeUser;
           toastr.error(<PaidQuotaLimitError />);
         }
-      } else {
-        setInvitePaidUsersCount();
       }
     }
 
@@ -706,7 +701,7 @@ export default inject(
       inviteItems,
       setInviteLanguage,
       culture,
-      setInvitePaidUsersCount,
+
       isPaidUserAccess,
     } = dialogsStore;
 
@@ -724,7 +719,6 @@ export default inject(
       isOwner,
       isAdmin,
       isPaidUserAccess,
-      setInvitePaidUsersCount,
       isUserTariffLimit,
     };
   },

@@ -557,7 +557,13 @@ const SectionFilterContent = ({
         : filter.search
           ? filter.search
           : "";
-  }, [isRooms, isContactsPage, roomsFilter.filterValue, filter.search]);
+  }, [
+    isRooms,
+    isContactsPage,
+    roomsFilter.filterValue,
+    filter.search,
+    usersFilter.search,
+  ]);
 
   const getSelectedSortData = React.useCallback(() => {
     const currentFilter = isContactsPage

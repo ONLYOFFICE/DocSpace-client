@@ -31,6 +31,7 @@ import { Nullable } from "@docspace/shared/types";
 
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 export type NewFilesBadgeProps = {
   newFilesCount: number;
@@ -93,11 +94,15 @@ export type NewFilesPanelItemDateProps = {
 
 export type NewFilesPanelItemRoomProps = {
   room: TRoom;
+
+  onClose: VoidFunction;
+  openItemAction?: FilesActionStore["openItemAction"];
 };
 
 export type NewFilesPanelItemFileInjectStore = {
   filesSettingsStore: FilesSettingsStore;
   filesActionsStore: FilesActionStore;
+  filesStore: FilesStore;
 };
 
 type GetIcon = FilesSettingsStore["getIcon"];
@@ -109,6 +114,9 @@ export type NewFilesPanelItemFileProps = {
 
   getIcon?: GetIcon;
   checkAndOpenLocationAction?: CheckAndOpenLocationAction;
+  markAsRead?: FilesActionStore["markAsRead"];
+  openDocEditor?: FilesStore["openDocEditor"];
+  openItemAction?: FilesActionStore["openItemAction"];
 
   displayFileExtension?: boolean;
 };

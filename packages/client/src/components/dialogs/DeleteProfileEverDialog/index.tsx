@@ -105,8 +105,7 @@ const DeleteProfileEverDialogComponent = ({
     onlyOneUser &&
     (usersToDelete[0].isRoomAdmin ||
       usersToDelete[0].isOwner ||
-      usersToDelete[0].isAdmin ||
-      usersToDelete[0].isCollaborator);
+      usersToDelete[0].isAdmin);
 
   const onlyGuests = usersToDelete.every((user) => user.isVisitor);
 
@@ -248,6 +247,7 @@ const DeleteProfileEverDialogComponent = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
       isLarge
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {onlyOneUser

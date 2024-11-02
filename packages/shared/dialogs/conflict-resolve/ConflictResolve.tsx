@@ -80,6 +80,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
         </div>
       ),
       value: ConflictResolveType.Overwrite as unknown as string,
+      autoFocus: true,
     },
     {
       label: (
@@ -106,11 +107,12 @@ const ConflictResolve = (props: ConflictResolveProps) => {
 
   return (
     <ModalDialog
-      isLoading={isLoading}
-      visible={visible}
-      onClose={onClose}
+      withForm
       isLarge
       zIndex={312}
+      onClose={onClose}
+      visible={visible}
+      isLoading={isLoading}
       displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
@@ -138,6 +140,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
           label={submitButtonLabel}
           size={ButtonSize.normal}
           primary
+          type="submit"
           onClick={onSubmitAction}
         />
         <Button

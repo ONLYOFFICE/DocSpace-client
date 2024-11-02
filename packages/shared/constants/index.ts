@@ -55,6 +55,7 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
+export const PUBLIC_STORAGE_KEY = "public-auth";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
@@ -175,7 +176,9 @@ export const NO_COMPRESSION_RATIO = 1;
 export const SYSTEM_FONT_FAMILY =
   "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
 
-export const HTML_EXST = [".htm", ".mht", ".html"];
+export const HTML_EXST = [".htm", ".mht", ".html", ".mhtml"];
+
+export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 

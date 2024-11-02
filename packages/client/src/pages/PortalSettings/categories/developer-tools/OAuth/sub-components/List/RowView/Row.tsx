@@ -16,6 +16,7 @@ export const OAuthRow = (props: RowProps) => {
     inProgress,
     getContextMenuItems,
     setSelection,
+    setBufferSelection,
   } = props;
   const navigate = useNavigate();
 
@@ -78,6 +79,12 @@ export const OAuthRow = (props: RowProps) => {
       inProgress={inProgress}
       onSelect={() => setSelection && setSelection(item.clientId)}
       className={`oauth2-row${isChecked ? " oauth2-row-selected" : ""}`}
+      isIndexEditingMode={false}
+      onContextClick={(isRightClick) => {
+        if (isRightClick) return;
+        setSelection!("");
+        setBufferSelection!(item.clientId);
+      }}
     >
       <RowContent
         sectionWidth={sectionWidth}

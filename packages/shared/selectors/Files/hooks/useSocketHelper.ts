@@ -54,20 +54,38 @@ const useSocketHelper = ({
 }: UseSocketHelperProps) => {
   const { getIcon } = React.useContext(SettingsContext);
 
+  const folderSubscribers = React.useRef(new Set<string>());
+
   const initRef = React.useRef(false);
 
   const subscribedId = React.useRef<null | number>(null);
 
-  const unsubscribe = React.useCallback((id: number, clear = true) => {
-    if (clear) {
-      subscribedId.current = null;
-    }
+  const unsubscribe = React.useCallback((id?: number | string) => {
+    if (!id) {
+      const roomParts = [...folderSubscribers.current];
 
-    if (id && !SocketHelper.socketSubscribers.has(`DIR-${id}`)) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: `DIR-${id}`,
+        roomParts,
         individual: true,
       });
+
+      folderSubscribers.current = new Set<string>();
+
+      return;
+    }
+
+    const path = `DIR-${id}`;
+
+    if (
+      SocketHelper.socketSubscribers.has(path) &&
+      folderSubscribers.current.has(path)
+    ) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: path,
+        individual: true,
+      });
+
+      folderSubscribers.current.delete(path);
     }
   }, []);
 
@@ -75,31 +93,33 @@ const useSocketHelper = ({
     (id: number) => {
       const roomParts = `DIR-${id}`;
 
-      if (SocketHelper.socketSubscribers.has(roomParts))
-        return (subscribedId.current = id);
+      if (SocketHelper.socketSubscribers.has(roomParts)) {
+        subscribedId.current = id;
 
-      if (
-        subscribedId.current &&
-        !SocketHelper.socketSubscribers.has(roomParts)
-      ) {
-        unsubscribe(subscribedId.current, false);
+        return;
       }
 
+      if (subscribedId.current) unsubscribe(subscribedId.current);
+
+      folderSubscribers.current.add(roomParts);
+      subscribedId.current = id;
+
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: `DIR-${id}`,
+        roomParts,
         individual: true,
       });
-
-      subscribedId.current = id;
     },
     [unsubscribe],
   );
 
   const addItem = React.useCallback(
     (opt: TOptSocket) => {
+      console.log("add");
       if (!opt?.data) return;
 
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
+
+      console.log({ ...data }, data.parentId, subscribedId.current);
 
       if (
         "folderId" in data && data.folderId
@@ -300,6 +320,12 @@ const useSocketHelper = ({
       }
     });
   }, [addItem, updateItem, deleteItem]);
+
+  React.useEffect(() => {
+    return () => {
+      unsubscribe();
+    };
+  }, [unsubscribe]);
 
   return { subscribe, unsubscribe };
 };

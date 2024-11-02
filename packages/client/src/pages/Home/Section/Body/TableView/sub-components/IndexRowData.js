@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
@@ -66,36 +66,28 @@ const IndexRowDataComponent = (props) => {
     columnStorageName,
     isIndexEditingMode,
     changeIndex,
+    isIndexedFolder,
   } = props;
 
-  const [lastColumn, setLastColumn] = React.useState(
+  const [lastColumn, setLastColumn] = useState(
     getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     ),
   );
 
-  const onResize = React.useCallback(() => {
+  useEffect(() => {
     const newLastColumn = getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     );
 
-    setLastColumn(newLastColumn);
-  }, [
-    localStorage.getItem(columnStorageName),
-    isIndexEditingMode,
-    tableStorageName,
-  ]);
-
-  React.useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, [isIndexEditingMode, localStorage.getItem(columnStorageName)]);
+    if (newLastColumn && newLastColumn !== lastColumn) {
+      setLastColumn(newLastColumn);
+    }
+  });
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -180,8 +172,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Author" ? "no-extra-space" : "",
-            lastColumn === "Author" && isIndexEditingMode
+            lastColumn === "AuthorIndexing" ? "no-extra-space" : "",
+            lastColumn === "AuthorIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -190,7 +182,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? lastColumnContent : <></>}
+          {lastColumn === "AuthorIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -202,8 +194,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Created" ? "no-extra-space" : "",
-            lastColumn === "Created" && isIndexEditingMode
+            lastColumn === "CreatedIndexing" ? "no-extra-space" : "",
+            lastColumn === "CreatedIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -213,7 +205,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? lastColumnContent : <></>}
+          {lastColumn === "CreatedIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -225,8 +217,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Modified" ? "no-extra-space" : "",
-            lastColumn === "Modified" && isIndexEditingMode
+            lastColumn === "ModifiedIndexing" ? "no-extra-space" : "",
+            lastColumn === "ModifiedIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -235,7 +227,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? lastColumnContent : <></>}
+          {lastColumn === "ModifiedIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -247,15 +239,17 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Size" ? "no-extra-space" : "",
-            lastColumn === "Size" && isIndexEditingMode ? "index-buttons" : "",
+            lastColumn === "SizeIndexing" ? "no-extra-space" : "",
+            lastColumn === "SizeIndexing" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? lastColumnContent : <></>}
+          {lastColumn === "SizeIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -267,15 +261,17 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Type" ? "no-extra-space" : "",
-            lastColumn === "Type" && isIndexEditingMode ? "index-buttons" : "",
+            lastColumn === "TypeIndexing" ? "no-extra-space" : "",
+            lastColumn === "TypeIndexing" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? lastColumnContent : <></>}
+          {lastColumn === "TypeIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -284,7 +280,7 @@ const IndexRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, selectedFolderStore }) => {
   const {
     authorVDRColumnIsEnabled,
     modifiedVDRColumnIsEnabled,
@@ -295,6 +291,8 @@ export default inject(({ tableStore }) => {
     columnStorageName,
   } = tableStore;
 
+  const { isIndexedFolder } = selectedFolderStore;
+
   return {
     authorVDRColumnIsEnabled,
     modifiedVDRColumnIsEnabled,
@@ -303,5 +301,7 @@ export default inject(({ tableStore }) => {
     typeVDRColumnIsEnabled,
     tableStorageName,
     columnStorageName,
+
+    isIndexedFolder,
   };
 })(observer(IndexRowDataComponent));

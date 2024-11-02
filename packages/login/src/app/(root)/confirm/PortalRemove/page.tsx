@@ -43,7 +43,7 @@ async function Page() {
         <>
           <GreetingContainer greetingText={settings?.greetingSettings} />
           <FormWrapper id="remove-portal-form">
-            <RemovePortalForm siteUrl={companyInfoSettings.site} />
+            <RemovePortalForm siteUrl={companyInfoSettings?.site} />
           </FormWrapper>
         </>
       )}

@@ -29,8 +29,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
-import { Tabs } from "@docspace/shared/components/tabs";
-import { Box } from "@docspace/shared/components/box";
+import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
@@ -133,10 +132,10 @@ const ContactsTabs = ({
 
   if (showFilterLoader) return <SectionSubmenuSkeleton />;
 
-  const items = [
+  const items: TTabItem[] = [
     {
       id: "people",
-      name: t("Common:People"),
+      name: t("Common:Employees"),
       onClick: onPeople,
       content: null,
     },
@@ -151,18 +150,16 @@ const ContactsTabs = ({
   if (!isVisitor && !isCollaborator) {
     items.splice(2, 0, {
       id: "guests",
-      name: (
-        <Box displayProp="flex" gapProp="8px">
-          {t("Common:Guests")}
-          <Badge
-            label={t("Files:New")}
-            backgroundColor={globalColors.redRomb}
-            noHover
-          />
-        </Box>
-      ),
+      name: t("Common:Guests"),
       onClick: onGuests,
       content: null,
+      badge: (
+        <Badge
+          label={t("Files:New")}
+          backgroundColor={globalColors.redRomb}
+          noHover
+        />
+      ),
     });
   }
 

@@ -85,19 +85,29 @@ const LoginContainer = styled.div<{
   }
 
   .recover-link {
-    min-height: 19px;
-    margin-top: 20px;
+    min-height: 20px;
+    margin-top: 27px;
+    line-height: 15px;
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     max-width: 480px;
-    padding-bottom: 32px;
+    padding-bottom: 29px;
     min-height: 32px;
+    line-height: 28px;
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
-      padding-top: 34px;
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+
+      padding-top: 32px;
+      padding-bottom: 32px;
     }
   }
 
@@ -117,8 +127,8 @@ const LoginContainer = styled.div<{
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
 
-    @media ${mobile} {
-      padding: 24px 0;
+    p {
+      line-height: 20px;
     }
   }
 
@@ -165,6 +175,7 @@ const LoginContainer = styled.div<{
           align-items: flex-start;
 
           svg {
+            padding-top: 2px;
             margin-inline-end: 8px !important;
             rect {
               fill: ${(props) => props.theme.checkbox.fillColor};
@@ -177,6 +188,9 @@ const LoginContainer = styled.div<{
           }
 
           .help-button {
+            margin-inline-start: 2px;
+            margin-top: 1px;
+
             svg {
               path {
                 fill: ${(props) => props.theme.login.helpButton};
@@ -186,6 +200,7 @@ const LoginContainer = styled.div<{
 
           .checkbox-text {
             color: ${(props) => props.theme.checkbox.arrowColor};
+            line-height: 20px;
           }
 
           label {
@@ -200,13 +215,13 @@ const LoginContainer = styled.div<{
       }
 
       .login-link {
-        line-height: 18px;
+        line-height: 20px;
         margin-inline-start: auto;
       }
     }
 
     .login-button {
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .login-button-dialog {
@@ -233,6 +248,18 @@ const LoginContainer = styled.div<{
         margin-top: 24px;
       }
     } */
+
+    @keyframes autofill {
+      from {
+      }
+      to {
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: autofill;
+      animation-duration: 1ms;
+    }
   }
 
   .logo-wrapper {
@@ -267,6 +294,14 @@ const LoginContainer = styled.div<{
 
   .code-description {
     color: ${(props) => props.theme.login.textColor};
+  }
+
+  .input-block-icon {
+    padding-inline-end: 12px;
+  }
+
+  .wrapper {
+    height: 20px;
   }
 `;
 

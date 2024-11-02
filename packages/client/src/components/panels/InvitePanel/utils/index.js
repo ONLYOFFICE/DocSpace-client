@@ -182,7 +182,7 @@ export const getAccessOptions = (
   switch (roomType) {
     case RoomsType.FillingFormsRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
         accesses.contentCreator,
         accesses.formFiller,
@@ -222,7 +222,6 @@ export const getAccessOptions = (
         { key: "s1", isSeparator: withSeparator },
         accesses.contentCreator,
         accesses.editor,
-        accesses.formFiller,
         accesses.reviewer,
         accesses.commentator,
         accesses.viewer,
@@ -243,7 +242,7 @@ export const getAccessOptions = (
 
     case RoomsType.VirtualDataRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
         accesses.contentCreator,
         accesses.editor,

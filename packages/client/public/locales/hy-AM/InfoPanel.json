@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Դիտեք օգտվողների մանրամասները այստեղ",
   "AddedRoomTags": "Պիտակները ավելացվել են։",
   "Administration": "Ադմինիստրացիա",
   "AndMoreLabel": "և <1>{{count}} ավելի</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Պատմություն",
   "UserFileUpdated": "Ֆայլը թարմացվել է:",
   "Users": "Օգտատերեր",
+  "UsersEmptyScreenText": "Դիտեք օգտվողների մանրամասները այստեղ",
   "Versions": "Տարբերակներ"
 }

@@ -37,7 +37,6 @@
   "DateLastOpened": "最終閲覧日",
   "DaysRemaining": "残りの日数：{{daysRemaining}}",
   "DeleteLink": "リンクを削除する",
-  "DeleteLinkNote": "リンクは永久に削除されます。この操作を元に戻すことはできません。",
   "DeleteSharedLink": "以前のリンクは利用できなくなります。新しい共有リンクが作成されます。",
   "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",
   "DisableNotifications": "通知をオフする",

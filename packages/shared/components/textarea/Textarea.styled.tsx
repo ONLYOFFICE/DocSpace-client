@@ -80,17 +80,6 @@ const StyledScrollbar = styled(ClearScrollbar)`
       }} + 2px
   ) !important;
 
-  textarea {
-    height: ${(props) => {
-      return props.heightScale
-        ? "65vh"
-        : props.isFullHeight
-          ? `${props.fullHeight}px`
-          : props.heightTextAreaProp
-            ? props.heightTextAreaProp
-            : "89px";
-    }};
-  }
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;
@@ -110,6 +99,7 @@ const ClearTextareaAutosize = React.forwardRef(
       isJSONField,
       enableCopy,
       heightTextArea,
+      minHeight,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
@@ -122,9 +112,18 @@ const ClearTextareaAutosize = React.forwardRef(
 ClearTextareaAutosize.displayName = "ClearTextareaAutosize";
 
 const StyledTextarea = styled(ClearTextareaAutosize).attrs(
-  ({ autoFocus, dir }: { autoFocus?: boolean; dir?: string }) => ({
+  ({
     autoFocus,
     dir,
+    minHeight,
+  }: {
+    autoFocus?: boolean;
+    dir?: string;
+    minHeight?: string;
+  }) => ({
+    autoFocus,
+    dir,
+    style: { minHeight },
   }),
 )`
   ${commonInputStyles};

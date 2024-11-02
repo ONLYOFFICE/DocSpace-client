@@ -25,13 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-
+import { useState, useEffect } from "react";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { isMobile } from "@docspace/shared/utils";
+import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -47,6 +50,7 @@ import {
   getAccessOptions,
   getRoomAccessOptions,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -70,8 +74,11 @@ const LinkRow = ({
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
+  removedExpiredLink,
+  isFormRoom,
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
+  const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
 
   const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
@@ -80,7 +87,23 @@ const LinkRow = ({
 
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
+  const onCheckHeight = () => {
+    setIsMobileViewLink(isMobile());
+  };
+
+  useEffect(() => {
+    onCheckHeight();
+    window.addEventListener("resize", onCheckHeight);
+    return () => {
+      window.removeEventListener("resize", onCheckHeight);
+    };
+  }, []);
+
   const onCopyLink = (link: TFileLink) => {
+    if (isRoomsLink) {
+      return copyRoomShareLink(link, t);
+    }
+
     copyDocumentShareLink(link, t);
   };
 
@@ -151,7 +174,7 @@ const LinkRow = ({
                 scaledOptions={false}
                 showDisabledItems
                 size={ComboBoxSize.content}
-                manualWidth="fit-content"
+                manualWidth="auto"
                 fillIcon={false}
                 modernView
                 isDisabled={isLoaded}
@@ -167,6 +190,7 @@ const LinkRow = ({
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
                 changeAccessOption={changeAccessOption}
+                removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>
@@ -183,17 +207,29 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                <AccessRightSelect
-                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                  onSelect={onAccessRightsSelect}
-                  accessOptions={roomAccessOptions}
-                  noBorder
-                  directionX="right"
-                  directionY="bottom"
-                  type="onlyIcon"
-                  manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                />
+                {isFormRoom ? (
+                  <HelpButton
+                    size={16}
+                    openOnClick={false}
+                    isClickable={false}
+                    tooltipContent={t("Translations:RoleFormFillerDescription")}
+                    iconName={FormFillRectSvgUrl}
+                  />
+                ) : (
+                  <AccessRightSelect
+                    selectedOption={roomSelectedOptions ?? ({} as TOption)}
+                    onSelect={onAccessRightsSelect}
+                    accessOptions={roomAccessOptions}
+                    noBorder
+                    directionX="right"
+                    directionY="bottom"
+                    type="onlyIcon"
+                    manualWidth="300px"
+                    isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                    isMobileView={isMobileViewLink}
+                    fixedDirection={isMobileViewLink}
+                  />
+                )}
                 {!isArchiveFolder && (
                   <ContextMenuButton
                     getData={getData}
@@ -219,7 +255,7 @@ const LinkRow = ({
                 modernView
                 type="onlyIcon"
                 isDisabled={isExpiredLink || isLoaded}
-                manualWidth="fit-content"
+                manualWidth="auto"
                 withBackdrop={false}
               />
             )}

@@ -29,10 +29,19 @@ import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
-import { getFileExtension } from "@docspace/shared/utils/common";
+import {
+  getFileExtension,
+  getObjectByLocation,
+} from "@docspace/shared/utils/common";
+import config from "PACKAGE_FILE";
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryBlockFile,
@@ -40,15 +49,20 @@ import {
 } from "../../../styles/history";
 
 import { ActionByTarget, FeedAction } from "../FeedInfo";
+import { Feed } from "./HistoryBlockContent.types";
 
 const EXPANSION_THRESHOLD = 3;
 
 type HistoryItemListProps = {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
+
   nameWithoutExtension?: (title: string) => string;
   getInfoPanelItemIcon?: (item: any, size: number) => string;
-  checkAndOpenLocationAction?: (item: any) => void;
+  checkAndOpenLocationAction?: (item: any, actionType: string) => void;
+  openItemAction?: FilesActionStore["openItemAction"];
+  getFileInfo?: FilesStore["getFileInfo"];
+  getFolderInfo?: FilesStore["getFolderInfo"];
 } & (
   | {
       actionType: ActionByTarget<"file">;
@@ -60,7 +74,7 @@ type HistoryItemListProps = {
     }
 );
 
-export const HistoryItemList = ({
+const HistoryItemList = ({
   t,
   feed,
   actionType,
@@ -68,15 +82,20 @@ export const HistoryItemList = ({
   nameWithoutExtension,
   getInfoPanelItemIcon,
   checkAndOpenLocationAction,
+  openItemAction,
+  getFileInfo,
+  getFolderInfo,
 }: HistoryItemListProps) => {
   const totalItems = feed.related.length + 1;
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
+  const [isExpanded, setIsExpanded] = useState(!isExpandable);
+
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
 
-  const [isExpanded, setIsExpanded] = useState(!isExpandable);
-
   const onExpand = () => setIsExpanded(true);
+
+  const isFolder = targetType === "folder";
 
   const items = [
     feed.data,
@@ -86,7 +105,7 @@ export const HistoryItemList = ({
       ...item,
       title: nameWithoutExtension!(item.title || item.newTitle),
       fileExst: getFileExtension(item.title || item.newTitle),
-      isFolder: targetType === "folder",
+      isFolder,
     };
   });
 
@@ -97,77 +116,120 @@ export const HistoryItemList = ({
 
   const isDisabledOpenLocationButton = !(isStartedFilling || isSubmitted);
 
+  const handleOpenFile = async (item) => {
+    try {
+      const isMedia =
+        item?.accessibility?.ImageView || item?.accessibility?.MediaView;
+      if (isMedia) {
+        return window.open(
+          combineUrl(
+            window.ClientConfig?.proxy?.url,
+            config.homepage,
+            MEDIA_VIEW_URL,
+            item.id,
+          ),
+        );
+      }
+
+      if (isFolder) {
+        const folderId = getObjectByLocation(window.location)?.folder;
+        if (Number(folderId) === item.id) return;
+        return await getFolderInfo(item.id).then((res) => {
+          openItemAction!({ ...res, isFolder: true });
+        });
+      }
+      await getFileInfo(item.id).then((res) => {
+        openItemAction!({ ...res });
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <StyledHistoryBlockFilesList>
       {items.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
-          <StyledHistoryBlockFile
-            isRoom={false}
-            key={`${feed.action.id}_${item.id}`}
-          >
-            <ReactSVG className="icon" src={getInfoPanelItemIcon!(item, 24)} />
-            {actionType === "changeIndex" ? (
-              <>
-                <div className="index old-index"> {item.oldIndex}</div>
-                <div className="index new-index"> {item.newIndex} </div>
-              </>
-            ) : (
-              <></>
-            )}
-
-            <div className="item-title">
-              {item.title ? (
-                <>
-                  <span className="name" key="hbil-item-name">
-                    {item.title}
-                  </span>
-                  {item.fileExst && (
-                    <span className="exst" key="hbil-item-exst">
-                      {item.fileExst}
-                    </span>
+          <>
+            <StyledHistoryBlockFile
+              isRoom={false}
+              key={`${feed.action.id}_${item.id}`}
+            >
+              <div
+                className="item-wrapper"
+                onClick={() => handleOpenFile(item)}
+              >
+                <ReactSVG
+                  className="icon"
+                  src={getInfoPanelItemIcon!(item, 24)}
+                />
+                {actionType === "changeIndex" ? (
+                  <>
+                    <div className="index old-index"> {item.oldIndex}</div>
+                    <div className="index new-index"> {item.newIndex} </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <div className="item-title">
+                  {item.title ? (
+                    <>
+                      <span className="name" key="hbil-item-name">
+                        {item.title}
+                      </span>
+                      {item.fileExst && (
+                        <span className="exst" key="hbil-item-exst">
+                          {item.fileExst}
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="name">{item.fileExst}</span>
                   )}
-                </>
-              ) : (
-                <span className="name">{item.fileExst}</span>
+                </div>
+              </div>
+              {isDisabledOpenLocationButton && (
+                <IconButton
+                  className="location-btn"
+                  iconName={FolderLocationReactSvgUrl}
+                  size={16}
+                  isFill
+                  onClick={() => checkAndOpenLocationAction!(item, actionType)}
+                  title={t("Files:OpenLocation")}
+                />
               )}
-            </div>
-            {isDisabledOpenLocationButton && (
-              <IconButton
-                className="location-btn"
-                iconName={FolderLocationReactSvgUrl}
-                size={16}
-                isFill
-                onClick={() => checkAndOpenLocationAction!(item, actionType)}
-                title={t("Files:OpenLocation")}
-              />
+            </StyledHistoryBlockFile>
+
+            {actionType === "rename" && oldItem && (
+              <StyledHistoryBlockFile>
+                <div className="old-item-wrapper">
+                  <ReactSVG
+                    className="icon"
+                    src={getInfoPanelItemIcon!(item, 24)}
+                  />
+                  <div className="item-title old-item-title">
+                    {oldItem.title ? (
+                      <>
+                        <span className="name" key="hbil-item-name">
+                          {oldItem.title}
+                        </span>
+                        {oldItem.fileExst && (
+                          <span className="exst" key="hbil-item-exst">
+                            {oldItem.fileExst}
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="name">{oldItem.fileExst}</span>
+                    )}
+                  </div>
+                </div>
+              </StyledHistoryBlockFile>
             )}
-          </StyledHistoryBlockFile>
+          </>
         );
       })}
-
-      {actionType === "rename" && oldItem && (
-        <StyledHistoryBlockFile>
-          <div style={{ width: "24px", height: "24px" }} />
-          <div className="item-title old-item-title">
-            {oldItem.title ? (
-              <>
-                <span className="name" key="hbil-item-name">
-                  {oldItem.title}
-                </span>
-                {oldItem.fileExst && (
-                  <span className="exst" key="hbil-item-exst">
-                    {oldItem.fileExst}
-                  </span>
-                )}
-              </>
-            ) : (
-              <span className="name">{oldItem.fileExst}</span>
-            )}
-          </div>
-        </StyledHistoryBlockFile>
-      )}
-
       {isExpandable && !isExpanded && (
         <StyledHistoryBlockExpandLink
           className="files-list-expand-link"
@@ -186,17 +248,23 @@ export const HistoryItemList = ({
   );
 };
 
-export default inject<TStore>(({ infoPanelStore, filesActionsStore }) => {
-  const { getInfoPanelItemIcon } = infoPanelStore;
-  const { nameWithoutExtension, checkAndOpenLocationAction } =
-    filesActionsStore;
+export default inject<TStore>(
+  ({ infoPanelStore, filesActionsStore, filesStore }) => {
+    const { getInfoPanelItemIcon } = infoPanelStore;
+    const { getFileInfo, getFolderInfo } = filesStore;
+    const { nameWithoutExtension, checkAndOpenLocationAction, openItemAction } =
+      filesActionsStore;
 
-  return {
-    getInfoPanelItemIcon,
-    nameWithoutExtension,
-    checkAndOpenLocationAction,
-  };
-})(
+    return {
+      getInfoPanelItemIcon,
+      nameWithoutExtension,
+      checkAndOpenLocationAction,
+      openItemAction,
+      getFileInfo,
+      getFolderInfo,
+    };
+  },
+)(
   withTranslation(["InfoPanel", "Common", "Translations"])(
     observer(HistoryItemList),
   ),

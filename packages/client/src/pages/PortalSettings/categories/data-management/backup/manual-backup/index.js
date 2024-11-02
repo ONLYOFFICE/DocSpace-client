@@ -104,7 +104,6 @@ class ManualBackup extends React.Component {
     try {
       getProgress(t);
 
-      //if (isDocSpace) {
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
         getBackupStorage(),
@@ -181,8 +180,7 @@ class ManualBackup extends React.Component {
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+      toastr.error(e);
     }
   };
   onClickDownloadBackup = () => {
@@ -244,9 +242,7 @@ class ManualBackup extends React.Component {
       setTemporaryLink("");
       getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
-      //clearLocalStorage();
+      toastr.error(err);
     }
   };
   render() {
@@ -256,12 +252,13 @@ class ManualBackup extends React.Component {
       downloadingProgress,
       //commonThirdPartyList,
       buttonSize,
-      //isDocSpace,
+
       rootFoldersTitles,
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
       pageIsDisabled,
+      isBackupProgressVisible,
     } = this.props;
     const {
       isInitialLoading,
@@ -273,10 +270,6 @@ class ManualBackup extends React.Component {
     } = this.state;
 
     const isMaxProgress = downloadingProgress === 100;
-
-    // const isDisabledThirdParty = isDocSpace
-    //   ? false
-    //   : commonThirdPartyList?.length === 0;
 
     const commonRadioButtonProps = {
       fontSize: "13px",
@@ -417,7 +410,7 @@ class ManualBackup extends React.Component {
           )}
         </StyledModules>
 
-        {downloadingProgress > 0 && downloadingProgress !== 100 && (
+        {isBackupProgressVisible && (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
@@ -448,6 +441,7 @@ export default inject(
       setStorageRegions,
       saveToLocalStorage,
       setConnectedThirdPartyAccount,
+      isBackupProgressVisible,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -479,6 +473,7 @@ export default inject(
       dataBackupUrl,
       currentColorScheme,
       pageIsDisabled,
+      isBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
+import styled, { css } from "styled-components";
+import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/shared/utils";
 
 import { TPanelPosition } from "./NewFilesBadge.types";
@@ -64,16 +64,17 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 `;
 
 export const StyledItem = styled.div<{
-  isRooms: boolean;
-  isFirst: boolean;
-  isLoader: boolean;
+  isRooms?: boolean;
+  isFirst?: boolean;
+  isLoader?: boolean;
 }>`
   padding: 0;
   margin: 0;
 
   .date-item {
-    margin-bottom: ${(props) => (props.isLoader ? "8px" : "12px")};
-    margin-top: ${(props) => (props.isFirst ? "20px" : "8px")};
+    margin-bottom: 0;
+    margin-top: ${(props) =>
+      props.isFirst ? (props.isLoader ? "16px" : "20px") : "8px"};
   }
 
   .room-items-container {
@@ -92,12 +93,11 @@ export const StyledItem = styled.div<{
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
 
-    padding: ${(props) => (props.isRooms ? 0 : "16px 0 ")};
+    padding: ${(props) => (props.isRooms ? "8px 0 0" : "16px 0")};
 
     .more-items {
-      padding-top: 4px;
+      padding-top: 8px;
       padding-inline-start: ${(props) => (props.isRooms ? "32px" : 0)};
 
       .more-items__link {
@@ -109,11 +109,20 @@ export const StyledItem = styled.div<{
 
 export const StyledRoomItem = styled.div`
   height: 24px;
+  width: fit-content;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
+
+  cursor: pointer;
+
+  :hover {
+    .room-item-title {
+      text-decoration: underline dashed;
+    }
+  }
 
   .room-icon {
     min-width: 24px;
@@ -125,7 +134,10 @@ export const StyledRoomItem = styled.div`
 
 export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   width: 100%;
-  height: 32px;
+  height: 36px;
+
+  padding-bottom: 2px;
+  padding-top: 2px;
 
   padding-inline-start: ${(props) => (props.isRooms ? "32px" : 0)};
 
@@ -134,22 +146,31 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
+  gap: 16px;
+
+  curstor: pointer;
 
   .info-container {
-    width: auto;
-    max-width: calc(100% - 20px);
+    max-width: calc(100% - 32px);
     height: 100%;
-    box-sizing: border-box;
     border: 1px solid
       ${(props) => props.theme.newFilesPanel.fileItem.borderColor};
     border-radius: 6px;
+
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: row;
     align-items: center;
 
+    cursor: pointer;
+
     padding-inline-end: 8px;
+
+    &:hover {
+      background-color: ${(props) =>
+        props.theme.newFilesPanel.fileItem.borderColor};
+    }
 
     .file-icon {
       min-width: 32px;
@@ -164,6 +185,11 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
     cursor: pointer;
 
     display: none;
+
+    ${isMobile &&
+    css`
+      display: block;
+    `}
 
     @media ${tablet} {
       display: block;

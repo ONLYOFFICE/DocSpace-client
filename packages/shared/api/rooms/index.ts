@@ -467,11 +467,13 @@ export function validatePublicRoomKey(key) {
 export async function validatePublicRoomPassword(
   key: string,
   passwordHash: string,
+  signal?: AbortSignal,
 ) {
   const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
+    signal,
   })) as TPublicRoomPassword;
 
   return res;

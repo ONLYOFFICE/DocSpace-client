@@ -37,7 +37,6 @@
   "DateLastOpened": "Päivä, jolloin viimeksi avattu",
   "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}",
   "DeleteLink": "Poista linkki",
-  "DeleteLinkNote": "Linkki poistetaan pysyvästi. Et voi perua tätä toimintoa.",
   "DeleteSharedLink": "Edellistä linkkiä ei voi enää käyttää. Luodaan uusi jaettu linkki.",
   "DisableDownload": "Rajoita tiedostosisällön kopiointia, latausta ja tulostusta",
   "DisableNotifications": "Poista ilmoitukset käytöstä",

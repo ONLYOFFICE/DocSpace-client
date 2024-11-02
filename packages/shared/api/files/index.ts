@@ -623,11 +623,16 @@ export async function removeFiles(
 export async function setFileOwner(userId: string, folderIds: number[]) {
   const data = { userId, folderIds };
 
-  const res = (await request({
-    method: "post",
-    url: "/files/owner",
-    data,
-  })) as TFolder[];
+  const skipRedirect = true;
+
+  const res = (await request(
+    {
+      method: "post",
+      url: "/files/owner",
+      data,
+    },
+    skipRedirect,
+  )) as TFolder[];
 
   return res;
 }
@@ -1518,4 +1523,14 @@ export async function checkIsPDFForm(fileId: string | number) {
     method: "get",
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
+}
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
 }

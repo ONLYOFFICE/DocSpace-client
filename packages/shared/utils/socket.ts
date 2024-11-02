@@ -106,7 +106,7 @@ export type TConfig = {
  * @property {string | string[]} roomParts - The parts of the room to which the data is emitted.
  * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual.
  */
-export type TEmitData = { roomParts: string | []; individual?: boolean };
+export type TEmitData = { roomParts: string | string[]; individual?: boolean };
 
 /**
  * Represents the structure of an emit event for a socket connection.
@@ -397,7 +397,12 @@ class SocketHelper {
    * @returns {void}
    */
   public emit = (command: SocketCommands, data?: TEmitData) => {
-    if (command === SocketCommands.Subscribe && !data?.roomParts) return;
+    if (
+      (command === SocketCommands.Subscribe ||
+        command === SocketCommands.Unsubscribe) &&
+      !data?.roomParts?.length
+    )
+      return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [emit] is not ready -> save in a queue", {

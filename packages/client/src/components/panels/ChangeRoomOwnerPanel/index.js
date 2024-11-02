@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
@@ -43,8 +43,8 @@ const StyledChangeRoomOwner = styled.div`
     overflow: visible;
   }
 
-  ${({ showBackButton }) =>
-    !showBackButton &&
+  ${({ withFooterCheckbox }) =>
+    withFooterCheckbox &&
     css`
       .arrow-button {
         display: none;
@@ -114,6 +114,9 @@ const ChangeRoomOwner = (props) => {
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+  filter.employeeStatus = EmployeeStatus.Active;
+
+  const ownerIsCurrentUser = roomOwnerId === userId;
 
   const selectorComponent = (
     <PeopleSelector
@@ -131,7 +134,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton}
+      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -159,7 +162,9 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner showBackButton={showBackButton}>
+        <StyledChangeRoomOwner
+          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+        >
           {selectorComponent}
         </StyledChangeRoomOwner>
       </ModalDialog.Body>

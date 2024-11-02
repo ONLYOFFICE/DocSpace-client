@@ -35,6 +35,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isSafari } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
@@ -58,6 +59,7 @@ import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -103,6 +105,7 @@ const LoginForm = ({
   const referenceUrl = searchParams.get("referenceUrl");
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
   const deletePortalData = searchParams.get("deletePortalData");
 
   const isDesktop =
@@ -166,6 +169,11 @@ const LoginForm = ({
           return window.location.replace(response.confirmUrl);
         }
 
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
 
@@ -182,7 +190,7 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl, currentCulture],
+    [t, referenceUrl, currentCulture, isPublicAuth],
   );
 
   useEffect(() => {
@@ -300,6 +308,7 @@ const LoginForm = ({
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);
+
           // deleteCookie("x-redirect-authorization-uri");
 
           window.open(
@@ -314,10 +323,13 @@ const LoginForm = ({
 
         const portalsString = JSON.stringify({ portals });
 
-        searchParams.set("portals", portalsString);
+        // searchParams.set("portals", portalsString);
         searchParams.set("clientId", client.clientId);
 
+        sessionStorage.setItem("tenant-list", portalsString);
+
         router.push(`/tenant-list?${searchParams.toString()}`);
+
         setIsLoading(false);
         return;
       } catch (error) {
@@ -372,6 +384,11 @@ const LoginForm = ({
         return res;
       })
       .then(async (res: string | object | undefined) => {
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -445,9 +462,10 @@ const LoginForm = ({
     isCaptchaSuccessful,
     linkData,
     router,
-    baseDomain,
     clientId,
     referenceUrl,
+    baseDomain,
+    isPublicAuth,
     deletePortalData,
   ]);
 
@@ -502,6 +520,13 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  const handleAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+    if (!isSafari) return;
+    if (e.animationName === "autofill") {
+      onSubmit();
+    }
+  };
+
   const passwordErrorMessage = errorMessage();
 
   if (authError && ready) {
@@ -542,6 +567,7 @@ const LoginForm = ({
         onValidateEmail={onValidateEmail}
         isLdapLogin={isLdapLoginChecked}
         ldapDomain={ldapDomain}
+        handleAnimationStart={handleAnimationStart}
       />
       <PasswordContainer
         isLoading={isLoading}

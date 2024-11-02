@@ -225,6 +225,12 @@ export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
   });
 }
 
+export function deleteBruteForceProtection() {
+  return request({
+    method: "delete",
+    url: `settings/security/loginSettings`,
+  });
+}
 export function getLoginHistoryReport() {
   return request({
     method: "post",

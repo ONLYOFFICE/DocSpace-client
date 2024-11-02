@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "../../components/selector";
 import {
   TBreadCrumb,
   TInfoBar,
@@ -42,6 +42,11 @@ import { TRoomSecurity } from "../../api/rooms/types";
 export type TCreateDefineRoom = {
   label: string;
   type: RoomsType;
+};
+
+export type FormPropsType = {
+  message: string;
+  isRoomFormAccessible: boolean;
 };
 
 export interface UseRootHelperProps {
@@ -85,7 +90,7 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  subscribe: (id: number) => string | number | undefined;
+  subscribe: (id: number) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -217,4 +222,5 @@ export type FilesSelectorProps = TSelectorHeader &
     withCreate: boolean;
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
+    formProps?: FormPropsType;
   };

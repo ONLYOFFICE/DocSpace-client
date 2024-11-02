@@ -108,7 +108,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       isAutoFocussed,
       tooltipAllowedCharacters,
       isSimulateType,
-      simulateSymbol,
+      simulateSymbol = "•",
     }: PasswordInputProps,
     ref,
   ) => {
@@ -120,7 +120,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       return inputValueRef.current;
     };
 
-    const prevInputValue = usePrevious(inputValue ?? "");
+    const prevInputValue = usePrevious(inputValue ?? "") ?? "";
 
     const [state, setState] = useState<TState>({
       type: inputType,
@@ -490,7 +490,10 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     }, [caretPosition, state.type, state.value, isSimulateType]);
 
     useEffect(() => {
-      if (isSimulateType && inputValue !== prevInputValue) {
+      if (
+        (isSimulateType && inputValue !== prevInputValue) ||
+        (inputValue === "" && prevInputValue !== "")
+      ) {
         onChangeAction?.({
           target: { value: inputValue },
         } as ChangeEvent<HTMLInputElement>);
@@ -711,7 +714,6 @@ PasswordInput.defaultProps = {
   },
   isFullWidth: false,
   isSimulateType: false,
-  simulateSymbol: "•",
 };
 
 export { PasswordInput };

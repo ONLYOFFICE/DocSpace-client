@@ -330,9 +330,7 @@ const StyledTableHeaderCell = styled.div<{
       height: 12px;
       path {
         fill: ${(props) =>
-          props.isActive
-            ? props.theme.tableContainer.header.activeIconColor
-            : props.theme.tableContainer.header.iconColor} !important;
+          props.theme.tableContainer.header.iconColor} !important;
       }
     }
 
@@ -383,10 +381,7 @@ const StyledTableHeaderCell = styled.div<{
     overflow: hidden;
     text-overflow: ellipsis;
 
-    color: ${(props) =>
-      props.isActive
-        ? props.theme.tableContainer.header.activeTextColor
-        : props.theme.tableContainer.header.textColor};
+    color: ${(props) => props.theme.tableContainer.header.textColor};
 
     ${(props) =>
       props.showIcon &&

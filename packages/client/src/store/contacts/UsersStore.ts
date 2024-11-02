@@ -469,7 +469,10 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole !== EmployeeType.Guest) {
+          if (
+            userRole !== EmployeeType.Guest &&
+            userRole !== EmployeeType.User
+          ) {
             options.push("reassign-data");
           }
 
@@ -930,6 +933,14 @@ class UsersStore {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 
     const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    return users.length > 0;
+  }
+
+  get hasUsersToChangeType() {
+    const { canChangeUserType } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canChangeUserType(x));
 
     return users.length > 0;
   }

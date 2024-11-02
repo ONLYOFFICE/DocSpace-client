@@ -2,10 +2,10 @@ name: Frontend tests
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, release/v*]
     paths: [packages/**, common/**]
   pull_request:
-    branches: [develop]
+    branches: [develop, release/v*]
     paths: [packages/**, common/**]
 jobs:
   playwright:

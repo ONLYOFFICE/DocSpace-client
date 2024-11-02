@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "../../enums";
 import type { TFile } from "../../api/files/types";
-import { iconSize24, iconSize96 } from "../../utils/image-helpers";
+import { iconSize32, iconSize96 } from "../../utils/image-helpers";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 import { Portal } from "../portal";
@@ -101,7 +101,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
     };
 
     const icons: Record<number, Map<string, string>> = {
-      24: iconSize24,
+      32: iconSize32,
       96: iconSize96,
     };
 

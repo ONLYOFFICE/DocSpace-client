@@ -114,6 +114,20 @@ const BasicBlock = ({
     const file =
       e.target.files && e.target.files?.length > 0 && e.target.files[0];
 
+    if (file && file.type === "image/svg+xml") {
+      if (file.size > maxImageSize)
+        return toastr.error(t("Common:SizeImageLarge"));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result && typeof reader.result === "string")
+          changeValue("logo", reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      return;
+    }
+
     if (file) {
       try {
         const imageBitMap = await createImageBitmap(file);

@@ -305,7 +305,7 @@ const ImageWatermark = ({
                 options={[]}
                 selectedOption={{}}
               >
-                <div>{selectedScale.label}&#37;</div>
+                <div className="options">{selectedScale.label}&#37;</div>
               </ComboBox>
             </div>
             <div>
@@ -323,7 +323,7 @@ const ImageWatermark = ({
                 advancedOptionsCount={rotateOptions.length}
                 fillIcon={false}
               >
-                <div>{selectedRotate.label}&deg;</div>
+                <div className="options">{selectedRotate.label}&deg;</div>
               </ComboBox>
             </div>
           </div>

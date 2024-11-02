@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TViewAs, TTranslation } from "@docspace/shared/types";
+import { TViewAs, TTranslation, Nullable } from "@docspace/shared/types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { DeviceType } from "@docspace/shared/enums";
+import SessionsStore from "SRC_DIR/store/SessionsStore";
+import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
 
 export type TUserStatus = "online" | "offline";
 
@@ -107,13 +109,25 @@ export interface SessionsProps {
 
 export interface SessionsTableProps {
   t: TTranslation;
-  userId?: string;
   viewAs?: TViewAs;
   sectionWidth: number;
   setSelection?: (selection: unknown) => void;
   setBufferSelection?: (selection: unknown | null) => void;
-  sessionsData: IAllSessions[];
 }
+
+export interface SessionsTableViewProps {
+  t: TTranslation;
+  viewAs?: TViewAs;
+  sectionWidth: number;
+  storeProps?: SessionsTableViewStoreProps;
+}
+
+export type SessionsTableViewStoreProps = {
+  userId: Nullable<string>;
+} & Pick<
+  SessionsStore,
+  "portalSessionsIds" | "portalSessionsMap" | "selection" | "bufferSelection"
+>;
 
 export interface SessionsTableHeaderProps {
   t: TTranslation;
@@ -127,34 +141,26 @@ export interface SessionsTableHeaderProps {
 
 export interface SessionsTableRowProps {
   t: TTranslation;
-  item: IAllSessions[];
-  element: React.ReactNode;
-  sectionWidth?: number;
-  onContentRowSelect?: (checked: boolean, item: IAllSessions[]) => void;
-  onContentRowClick?: (event: React.MouseEvent, item: IAllSessions[]) => void;
-  onUserContextClick?: (item: IAllSessions[], rightClick: boolean) => void;
-  isActive?: boolean;
-  checkedProps?: { checked: boolean };
-  displayName: string;
+  item: TPortalSession;
+  isChecked: boolean;
+  isActive: boolean;
   hideColumns?: boolean;
-  status: string;
-  userId: string;
-  connections: IConnections[];
-  isMe: boolean;
-  locale: string;
-  setLogoutAllDialogVisible: (visible: boolean) => void;
-  setDisableDialogVisible: (visible: boolean) => void;
-  setUserSessionPanelVisible: (visible: boolean) => void;
-  setItems: (item: IAllSessions[]) => void;
-  setDisplayName: (name: string) => void;
-  convertDate: (
-    t: (key: string) => string,
-    date: string,
-    locale: string,
-  ) => string;
-  getFromDateAgo: (userId: string) => string;
-  setFromDateAgo: (userId: string, fromDateAgo: string | null) => void;
+  storeProps?: SessionsTableRowStoreProps;
 }
+
+export type SessionsTableRowStoreProps = {
+  locale: string;
+} & Pick<
+  SessionsStore,
+  | "convertDate"
+  | "getFromDateAgo"
+  | "setFromDateAgo"
+  | "selectRow"
+  | "selectCheckbox"
+  | "singleContextMenuAction"
+  | "multipleContextMenuAction"
+  | "getContextOptions"
+>;
 
 export interface SessionsRowProps {
   t: TTranslation;

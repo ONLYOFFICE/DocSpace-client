@@ -33,7 +33,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
-import { SessionsTableProps } from "../../SecuritySessions.types";
+import { SessionsTableViewProps } from "../../SecuritySessions.types";
 
 const TABLE_VERSION = "4";
 const COLUMNS_SIZE = `securitySessionsColumnsSize_ver-${TABLE_VERSION}`;
@@ -154,14 +154,17 @@ const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   }
 `;
 
-const TableView = ({
-  t,
-  userId,
-  sectionWidth,
-  sessionsData,
-  selection,
-  bufferSelection,
-}: SessionsTableProps) => {
+const TableView = (props: SessionsTableViewProps) => {
+  const { t, sectionWidth, storeProps } = props;
+
+  const {
+    userId,
+    portalSessionsIds,
+    portalSessionsMap,
+    selection,
+    bufferSelection,
+  } = storeProps!;
+
   const [hideColumns, setHideColumns] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -185,19 +188,26 @@ const TableView = ({
         infoPanelVisible={false}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={sessionsData.length}
+        filesLength={portalSessionsIds.length}
         hasMoreFiles={false}
-        itemCount={sessionsData.length}
+        itemCount={portalSessionsIds.length}
         fetchMoreFiles={() => {}}
       >
-        {sessionsData.map((item) => {
-          const isChecked = selection.some((s) => s.userId === item.userId);
-          const isActive = bufferSelection?.userId === item.userId;
+        {portalSessionsIds.map((sessionId) => {
+          const session = portalSessionsMap.get(sessionId);
+
+          if (!session) {
+            return null;
+          }
+
+          const isChecked = selection.some((s) => s.userId === session.userId);
+          const isActive = bufferSelection?.userId === session.userId;
+
           return (
             <SessionsTableRow
               t={t}
-              key={item.userId}
-              item={item}
+              key={sessionId}
+              item={session}
               isChecked={isChecked}
               isActive={isActive}
             />
@@ -211,11 +221,16 @@ const TableView = ({
 export default inject<TStore>(({ userStore, sessionsStore }) => {
   const userId = userStore.user?.id ?? null;
 
-  const { selection, bufferSelection } = sessionsStore;
+  const { portalSessionsIds, portalSessionsMap, selection, bufferSelection } =
+    sessionsStore;
 
   return {
-    userId,
-    selection,
-    bufferSelection,
+    storeProps: {
+      userId,
+      selection,
+      bufferSelection,
+      portalSessionsIds,
+      portalSessionsMap,
+    },
   };
 })(observer(TableView));

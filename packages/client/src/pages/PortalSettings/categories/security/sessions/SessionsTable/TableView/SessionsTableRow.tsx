@@ -33,7 +33,11 @@ import { decode } from "he";
 import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 
@@ -41,7 +45,10 @@ const Wrapper = styled.div`
   display: contents;
 `;
 
-const StyledTableRow = styled(TableRow)`
+const StyledTableRow = styled(TableRow)<{
+  checked: boolean;
+  isActive: boolean;
+}>`
   :hover {
     .table-container_cell {
       cursor: pointer;
@@ -165,10 +172,9 @@ const StyledTableRow = styled(TableRow)`
 StyledTableRow.defaultProps = { theme: Base };
 
 const SessionsTableRow = (props: SessionsTableRowProps) => {
+  const { t, item, isChecked, isActive, storeProps } = props;
+
   const {
-    t,
-    item,
-    hideColumns,
     locale,
     convertDate,
     getFromDateAgo,
@@ -177,12 +183,9 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     selectCheckbox,
     singleContextMenuAction,
     multipleContextMenuAction,
-    isChecked,
-    isActive,
     getContextOptions,
-  } = props;
+  } = storeProps!;
 
-  // const { platform, browser, ip, city, country, date } = connections[0] ?? {};
   const { userId, displayName, avatar, session } = item;
   const { platform, browser, ip, city, country, date, status } = session;
 
@@ -256,7 +259,6 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
         isActive={isActive}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
-        hideColumns={hideColumns}
         contextOptions={contextOptions}
         getContextModel={getContextModel}
       >
@@ -269,7 +271,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
             <div className="table-container_element">
               <Avatar
                 size={AvatarSize.min}
-                // role={role}
+                role={AvatarRole.none}
                 userName={displayName}
                 source={avatar}
               />
@@ -285,13 +287,13 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
           </Text>
         </TableCell>
 
-        <TableCell>
+        <TableCell className="table-cell_status">
           <Text className={isOnline ? "online" : "session-info"} truncate>
             {t(`Common:${fromDateAgo}`)}
           </Text>
         </TableCell>
 
-        <TableCell>
+        <TableCell className="table-cell_platform">
           <Text className="session-info" truncate>
             {platform},&nbsp;
           </Text>
@@ -300,7 +302,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
           </Text>
         </TableCell>
 
-        <TableCell>
+        <TableCell className="table-cell_location">
           <Text className="session-info" truncate>
             {(country || city) && (
               <>
@@ -335,14 +337,16 @@ export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
   } = sessionsStore;
 
   return {
-    locale,
-    convertDate,
-    getFromDateAgo,
-    setFromDateAgo,
-    selectRow,
-    selectCheckbox,
-    singleContextMenuAction,
-    multipleContextMenuAction,
-    getContextOptions,
+    storeProps: {
+      locale,
+      convertDate,
+      getFromDateAgo,
+      setFromDateAgo,
+      selectRow,
+      selectCheckbox,
+      singleContextMenuAction,
+      multipleContextMenuAction,
+      getContextOptions,
+    },
   };
 })(observer(SessionsTableRow));

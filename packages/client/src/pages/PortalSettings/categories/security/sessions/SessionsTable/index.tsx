@@ -36,10 +36,8 @@ import RowView from "./RowView";
 const SessionsTable = ({
   t,
   viewAs,
-  userId,
   setSelection,
   setBufferSelection,
-  sessionsData,
 }: SessionsTableProps) => {
   useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
@@ -70,32 +68,21 @@ const SessionsTable = ({
     <Consumer>
       {(context) => {
         return viewAs === "table" ? (
-          <TableView
-            t={t}
-            userId={userId}
-            sectionWidth={context.sectionWidth as number}
-            sessionsData={sessionsData}
-          />
+          <TableView t={t} sectionWidth={context.sectionWidth as number} />
         ) : (
-          <RowView
-            t={t}
-            sectionWidth={context.sectionWidth as number}
-            sessionsData={sessionsData}
-          />
+          <RowView t={t} sectionWidth={context.sectionWidth as number} />
         );
       }}
     </Consumer>
   );
 };
 
-export default inject<TStore>(({ setup, userStore, sessionsStore }) => {
-  const userId = userStore.user?.id ?? null;
+export default inject<TStore>(({ setup, sessionsStore }) => {
   const { viewAs } = setup;
   const { setSelection, setBufferSelection } = sessionsStore;
 
   return {
     viewAs,
-    userId,
     setSelection,
     setBufferSelection,
   };

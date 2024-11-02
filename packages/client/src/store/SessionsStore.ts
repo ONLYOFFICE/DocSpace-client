@@ -31,8 +31,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import SocketHelper from "@docspace/shared/utils/socket";
 import {
-  TLastPortalSession,
+  TPortalSession,
+  TPortalSessionsMap,
   TSession,
+  TSessionsInPortal,
   TSessionsSelected,
 } from "@docspace/shared/types/ActiveSessions";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -45,9 +47,17 @@ import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import DialogsStore from "./DialogsStore";
 
 class SessionsStore {
-  lastPortalSessions: TLastPortalSession[] = [];
+  portalSessionsMap: TPortalSessionsMap = new Map();
+
+  onlineSessionsIds: string[] = [];
+
+  offlineSessionsIds: string[] = [];
+
+  lastPortalSessions: TPortalSession[] = [];
 
   userSessions: TSession[] = [];
+
+  total: number = 0;
 
   sessionsData = []; // Sessions inited in fetchData.
 
@@ -69,9 +79,9 @@ class SessionsStore {
 
   isDisabled = false;
 
-  selection: TLastPortalSession[] = [];
+  selection: TPortalSession[] = [];
 
-  bufferSelection: Nullable<TLastPortalSession> = null;
+  bufferSelection: Nullable<TPortalSession> = null;
 
   selected: TSessionsSelected = "none";
 
@@ -87,11 +97,12 @@ class SessionsStore {
     makeAutoObservable(this);
   }
 
-  fetchLastPortalSessions = () => {
+  fetchPortalSessions = (startIndex: number = 0) => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessionsInPortal");
-      SocketHelper.on("sessions-in-portal", (data: TLastPortalSession[]) => {
-        this.setLastPortalSessions(data);
+      SocketHelper.emit("getSessionsInPortal", { index: startIndex });
+      SocketHelper.on("sessions-in-portal", (data: TSessionsInPortal) => {
+        this.addPortalSessions(data.users);
+        this.setTotal(data.total);
         resolve();
       });
     });
@@ -112,7 +123,47 @@ class SessionsStore {
     });
   };
 
-  subscribeToLastPortalSessions = () => {
+  addPortalSessions = (portalSessions: TPortalSession[]) => {
+    portalSessions.forEach((ps) => {
+      const alreadyExists = this.portalSessionsMap.has(ps.userId);
+
+      if (alreadyExists) {
+        return;
+      }
+
+      this.portalSessionsMap.set(ps.userId, ps);
+
+      if (ps.session.status === "online") {
+        this.onlineSessionsIds.push(ps.userId);
+      } else {
+        this.offlineSessionsIds.push(ps.userId);
+      }
+    });
+  };
+
+  moveToOnlineSessions = (portalSessionId: string) => {
+    const index = this.offlineSessionsIds.indexOf(portalSessionId);
+    if (index !== -1) {
+      this.offlineSessionsIds.splice(index, 1);
+    }
+
+    this.onlineSessionsIds.unshift(portalSessionId);
+  };
+
+  moveToOfflineSessions = (portalSessionId: string) => {
+    const index = this.onlineSessionsIds.indexOf(portalSessionId);
+    if (index !== -1) {
+      this.onlineSessionsIds.splice(index, 1);
+    }
+
+    this.offlineSessionsIds.unshift(portalSessionId);
+  };
+
+  get portalSessionsIds() {
+    return [...this.onlineSessionsIds, ...this.offlineSessionsIds];
+  }
+
+  subscribeToPortalSessions = () => {
     SocketHelper.emit("subscribeToPortal");
     SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);
     SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
@@ -124,42 +175,52 @@ class SessionsStore {
     // SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
   };
 
-  handleUserEnterPortal = (data: TLastPortalSession) => {
+  handleUserEnterPortal = ({ u: newPortalSession }: { u: TPortalSession }) => {
     // Todo: Fix type after changing back
-    const newObj = { ...data.u, userId: data.u.id };
-    this.lastPortalSessions.forEach((s) => {
-      // Todo: Fix type after changing back
-      if (s.userId === newObj.userId) {
-        s.session = newObj.session;
-      }
-    });
+    const currentSession = this.portalSessionsMap.get(newPortalSession.userId);
+
+    if (!currentSession) {
+      this.addPortalSessions([newPortalSession]);
+      return;
+    }
+
+    const statusChanged =
+      currentSession.session.status !== newPortalSession.session.status;
+
+    if (statusChanged) {
+      this.moveToOnlineSessions(newPortalSession.userId);
+    }
+
+    this.portalSessionsMap.set(newPortalSession.userId, newPortalSession);
   };
 
-  handleUserLeavePortal = (data: { userId: string }) => {
-    this.lastPortalSessions.forEach((s) => {
-      if (s.userId === data.userId) {
-        s.session.status = "offline";
-      }
-    });
-  };
+  handleUserLeavePortal = ({ userId }: { userId: string }) => {
+    const currentSession = this.portalSessionsMap.get(userId);
+    if (!currentSession) return;
 
-  setLastPortalSessions = (lastPortalSessions: TLastPortalSession[]) => {
-    this.lastPortalSessions = lastPortalSessions;
+    currentSession.session.status = "offline";
+    currentSession.session.date = new Date().toISOString();
+
+    this.moveToOfflineSessions(userId);
   };
 
   setUserSessions = (userSessions: TSession[]) => {
     this.userSessions = userSessions;
   };
 
-  setSelection = (selection: TLastPortalSession[]) => {
+  setTotal = (total: number) => {
+    this.total = total;
+  };
+
+  setSelection = (selection: TPortalSession[]) => {
     this.selection = selection;
   };
 
-  setBufferSelection = (bufferSelection: Nullable<TLastPortalSession>) => {
+  setBufferSelection = (bufferSelection: Nullable<TPortalSession>) => {
     this.bufferSelection = bufferSelection;
   };
 
-  selectRow = (item: TLastPortalSession) => {
+  selectRow = (item: TPortalSession) => {
     const isItemSelected = this.selection.some((s) => s.userId === item.userId);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 
@@ -175,7 +236,7 @@ class SessionsStore {
     }
   };
 
-  selectCheckbox = (isChecked: boolean, item: TLastPortalSession) => {
+  selectCheckbox = (isChecked: boolean, item: TPortalSession) => {
     this.setBufferSelection(null);
 
     if (isChecked) {
@@ -185,11 +246,11 @@ class SessionsStore {
     }
   };
 
-  selectSession = (session: TLastPortalSession) => {
+  selectSession = (session: TPortalSession) => {
     this.setSelection([...this.selection, session]);
   };
 
-  deselectSession = (session: TLastPortalSession) => {
+  deselectSession = (session: TPortalSession) => {
     if (!this.selection.length) return;
 
     const newSelection = this.selection.filter(
@@ -207,7 +268,7 @@ class SessionsStore {
     this.setBufferSelection(item);
   };
 
-  multipleContextMenuAction = (item: TLastPortalSession) => {
+  multipleContextMenuAction = (item: TPortalSession) => {
     const isItemSelected = this.selection.some((s) => s.userId === item.userId);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 

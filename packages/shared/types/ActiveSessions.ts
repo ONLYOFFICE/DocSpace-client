@@ -26,7 +26,7 @@
 
 export type TOnlineStatus = "online" | "offline";
 
-export type TLastPortalSession = {
+export type TPortalSession = {
   userId: string;
   avatar: string;
   displayName: string;
@@ -39,6 +39,14 @@ export type TSession = {
   ip: string;
   platform: string;
   status: TOnlineStatus;
+  date?: string;
 };
 
 export type TSessionsSelected = "all" | "none" | TOnlineStatus;
+
+export type TSessionsInPortal = {
+  users: TPortalSession[];
+  total: number;
+};
+
+export type TPortalSessionsMap = Map<string, TPortalSession>;

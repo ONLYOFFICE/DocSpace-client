@@ -126,8 +126,8 @@ export interface TableRowProps {
   style?: React.CSSProperties;
   title?: string;
   getContextModel: () => ContextMenuModel[];
-  badgeUrl: string;
-  isIndexEditingMode: boolean;
+  badgeUrl?: string;
+  isIndexEditingMode?: boolean;
   onClick?: (e: React.MouseEvent) => void;
 }
 

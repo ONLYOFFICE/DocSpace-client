@@ -34,7 +34,6 @@ import SessionsLoader from "@docspace/shared/skeletons/sessions";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TTranslation } from "@docspace/shared/types";
-import SocketHelper from "@docspace/shared/utils/socket";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { DisableUserDialog } from "SRC_DIR/components/dialogs/DisableUserDialog";
@@ -123,9 +122,9 @@ const Sessions = ({
   setUserSessionPanelVisible,
   isSeveralSelection,
   isSessionsLoaded,
-  lastPortalSessions,
-  fetchLastPortalSessions,
-  subscribeToLastPortalSessions,
+  portalSessionsIds,
+  fetchPortalSessions,
+  subscribeToPortalSessions,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -136,16 +135,16 @@ const Sessions = ({
 
   useEffect(() => {
     // SocketHelper.emit("getSessionsInPortal");
-    fetchLastPortalSessions();
-    subscribeToLastPortalSessions();
+    fetchPortalSessions();
+    subscribeToPortalSessions();
 
     fetchData();
     return () => {
       clearSelection();
     };
   }, [
-    fetchLastPortalSessions,
-    subscribeToLastPortalSessions,
+    fetchPortalSessions,
+    subscribeToPortalSessions,
     fetchData,
     clearSelection,
   ]);
@@ -162,13 +161,13 @@ const Sessions = ({
     ? [bufferSelection.userId]
     : [...selectionUserId];
 
-  if (!lastPortalSessions.length) return <SessionsLoader viewAs={viewAs} />;
+  if (!portalSessionsIds.length) return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>
       <Text className="subtitle">{t("SessionsSubtitle")}</Text>
 
-      <SessionsTable t={t} sessionsData={lastPortalSessions} sectionWidth={0} />
+      <SessionsTable t={t} sectionWidth={0} />
 
       <DownLoadWrapper>
         <Button
@@ -246,9 +245,9 @@ export const SecuritySessions = inject<TStore>(
       onClickLogoutAllExceptThis,
       onClickRemoveSession,
       isSessionsLoaded,
-      lastPortalSessions,
-      fetchLastPortalSessions,
-      subscribeToLastPortalSessions,
+      portalSessionsIds,
+      fetchPortalSessions,
+      subscribeToPortalSessions,
     } = sessionsStore;
 
     const {
@@ -290,9 +289,9 @@ export const SecuritySessions = inject<TStore>(
       setUserSessionPanelVisible,
       isSeveralSelection,
       isSessionsLoaded,
-      lastPortalSessions,
-      fetchLastPortalSessions,
-      subscribeToLastPortalSessions,
+      portalSessionsIds,
+      fetchPortalSessions,
+      subscribeToPortalSessions,
     };
   },
 )(observer(Sessions));

@@ -42,7 +42,6 @@ import { RoomsType, FilterType } from "@docspace/shared/enums";
 const Sdk = ({
   t,
   frameConfig,
-  match,
   setFrameConfig,
   login,
   logout,
@@ -50,7 +49,7 @@ const Sdk = ({
   getIcon,
   isLoaded,
   getSettings,
-  user,
+  userId,
   updateProfileCulture,
   getRoomsIcon,
   getFilePrimaryLink,
@@ -146,9 +145,9 @@ const Sdk = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                user &&
+                userId &&
                   data.locale &&
-                  updateProfileCulture(user.id, data.locale),
+                  updateProfileCulture(userId, data.locale),
               ]);
               res = requests[0];
             }
@@ -180,7 +179,7 @@ const Sdk = ({
             res = await logout();
             break;
           default:
-            res = "Wrong method";
+            res = "Wrong method for this mode";
         }
       } catch (e) {
         res = e;
@@ -337,7 +336,7 @@ export const Component = inject(
       getRoomsIcon,
       isLoaded,
       updateProfileCulture,
-      user,
+      userId: user?.id,
       getFilePrimaryLink,
       getFilesSettings,
       getPrimaryLink,

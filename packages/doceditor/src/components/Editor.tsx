@@ -50,6 +50,7 @@ import {
   onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
+import useSDK from "@/hooks/useSDK";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
 type IConfigType = IConfig & {
@@ -93,6 +94,8 @@ const Editor = ({
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
+  const { frameConfig } = useSDK();
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -122,6 +125,7 @@ const Editor = ({
     isSkipError,
     openOnNewPage,
     t,
+    frameConfig,
   });
 
   useInit({
@@ -152,7 +156,7 @@ const Editor = ({
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const editorGoBack = frameConfig?.editorGoBack;
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -174,7 +178,7 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.ClientConfig?.editor?.requestClose ?? false
+            ? (window.ClientConfig?.editor?.requestClose ?? false)
             : false,
         text: openFileLocationText,
         blank: openOnNewPage,
@@ -188,11 +192,9 @@ const Editor = ({
     }
   }
 
-  const customization = new URLSearchParams(search).get("customization");
-
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
-  >["customization"] = JSON.parse(customization || "{}");
+  >["customization"] = frameConfig?.editorCustomization;
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 

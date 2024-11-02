@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Se permite",
+  "ConsentDescription": "Datele partajate cu <strong>{{displayName}}</strong> vor fi reglementate de <strong>{{nameApp}}</strong> <6> politica de confidențialitate</6>  și <6>termenii și condiții de utilizare</6>. Puteți revoca oricând consimțământul dvs în setările contului dumneavoastră.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> ar dori să aibă accesul la datele următoare din <strong>contul dvs {{productName}} </strong>:",
+  "DenyButton": "Interzice",
+  "NotYou": "Este altcineva?",
+  "SignedInAs": "V-ați conectat ca",
+  "ToContinue": "Procedează la"
+}

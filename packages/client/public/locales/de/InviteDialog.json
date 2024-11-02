@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Link wurde kopiert",
   "ResetChange": "Änderung zurücksetzen",
   "SendInvitation": "Einladung versenden",
+  "UserMaxAvailableRoleWarning": "Gäste und Benutzer können nicht als Raum-Manager zugewiesen werden. Nur Raum- und {{productName}}-Administratoren sind für die angegebene Rolle geeignet.",
   "UsersAlreadyAdded": "Einige Benutzer wurden bereits hinzugefügt"
 }

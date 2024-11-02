@@ -467,10 +467,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId, recentFolder, isRecentFolder } =
-      treeFoldersStore;
-
-    console.log(isRecentFolder, currentFolderIdProp, id);
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,

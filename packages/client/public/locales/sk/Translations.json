@@ -34,7 +34,7 @@
   "RoleFormFillerDescription": "Operácie s existujúcimi súbormi: prezeranie, vypĺňanie formulárov, kontrola, komentovanie.",
   "RoleFormFillerFormRoomDescription": "Používatelia, ktorí vyplňujú formuláre môžu vypĺňať formuláre a prezerať len svoje dokončené/začaté formuláre v priečinkoch Vyplnené a V procese.",
   "RolePortalAdminDescription": "Administrátori {{productName}} majú prístup k nastaveniam {{productName}}, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role, ktoré sú nižšie ako pozícia administrátora. Všetci administrátori majú prístup do sekcie Dokumenty.",
-  "RolePowerUserFormRoomDescription": "Oprávnení používatelia môžu nahrávať formuláre do miestnosti a majú úplný prístup k priečinkom Vyplnené a V procese.",
+  "RolePowerUserFormRoomDescription": "Používatelia môžu nahrávať formuláre do miestnosti a majú úplný prístup k priečinkom Vyplnené a V procese.",
   "RoleReviewer": "Recenzent",
   "RoleReviewerDescription": "Operácie s existujúcimi súbormi: prezeranie, kontrola, komentovanie.",
   "RoleRoomAdminDescription": "Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti a podradené roly. Všetci administrátori majú prístup do sekcie Dokumenti.",

@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "De limiet is bereikt voor het aantal kamers: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "De limiet voor opslagruimte en het aantal kamers wordt bijna overschreden",
   "StorageAndRoomLimitHeader": "De limiet voor opslagruimte en het aantal kamers is bereikt",
-  "StorageAndUserHeader": "De beperkingen voor opslag en beheerders/power users worden binnenkort overschreden.",
-  "StorageAndUserTariffLimitHeader": "De limiet is bereikt voor opslagruimte en het aantal beheerders/power users",
+  "StorageAndUserHeader": "De beperkingen voor opslag en beheerders worden binnenkort overschreden.",
+  "StorageAndUserTariffLimitHeader": "De limiet is bereikt voor opslagruimte en het aantal beheerders",
   "StorageLimitHeader": "De limiet voor opslagruimte is bereikt: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "De hoeveelheid opslagruimte staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "U kunt de onnodige bestanden verwijderen of de quota wijzigen in de <1>Instellingen voor opslagbeheer.</1>",
-  "UserQuotaHeader": "Het aantal beheerders/power users staan op het punt overschreden te worden: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Zodra de limiet is bereikt, worden alle gebruikers uitsluitend met gebruikersrechten toegevoegd. Om meer admins/power users toe te kunnen voegen, neemt u contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
-  "UserTariffAlmostReachedForAdmins": "Zodra de limiet is bereikt, worden alle gebruikers uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders/power users toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden.",
-  "UserTariffLimitHeader": "De limiet voor het aantal beheerders/power users is bereikt: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer admins/power users toe te kunnen voegen, neemt u contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
-  "UserTariffReachedForAdmins": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders/power users toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden."
+  "UserQuotaHeader": "Het aantal beheerders staan op het punt overschreden te worden: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Zodra de limiet is bereikt, worden alle gebruikers uitsluitend met gebruikersrechten toegevoegd. Om meer admins toe te kunnen voegen, neemt u contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
+  "UserTariffAlmostReachedForAdmins": "Zodra de limiet is bereikt, worden alle gebruikers uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden.",
+  "UserTariffLimitHeader": "De limiet voor het aantal beheerders is bereikt: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer admins toe te kunnen voegen, neemt u contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
+  "UserTariffReachedForAdmins": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden."
 }

@@ -46,6 +46,10 @@ import {
   TMigrationStatusResult,
 } from "@docspace/shared/api/settings/types";
 
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
+import { getUserByEmail } from "@docspace/shared/api/people";
+
 type TUsers = {
   new: TEnhancedMigrationUser[];
   existing: TEnhancedMigrationUser[];
@@ -66,6 +70,8 @@ type LoadingState = "none" | "upload" | "proceed" | "done";
 type TMigrationPhase = "" | "setup" | "migrating" | "complete";
 
 class ImportAccountsStore {
+  private currentQuotaStore: CurrentQuotasStore | null = null;
+
   services: TWorkspaceService[] = [];
 
   users: TUsers = {
@@ -114,7 +120,8 @@ class ImportAccountsStore {
 
   migrationPhase: TMigrationPhase = "";
 
-  constructor() {
+  constructor(currentQuotaStoreConst: CurrentQuotasStore) {
+    this.currentQuotaStore = currentQuotaStoreConst;
     makeAutoObservable(this);
   }
 
@@ -139,8 +146,36 @@ class ImportAccountsStore {
       (user) =>
         !this.users.existing.some(
           (existingUser) => existingUser.key === user.key,
+        ) &&
+        !this.users.withoutEmail.some(
+          (withoutEmailUser) =>
+            !!withoutEmailUser.email &&
+            withoutEmailUser.isDuplicate &&
+            withoutEmailUser.key === user.key,
         ),
     );
+  }
+
+  get quota() {
+    return parseQuota(this.currentQuotaStore?.quotaCharacteristics[1]);
+  }
+
+  get totalUsedUsers() {
+    const totalPaidUsers =
+      this.quota.used +
+      this.finalUsers.filter((user) => user.userType !== "User").length;
+
+    return totalPaidUsers;
+  }
+
+  get numberOfSelectedUsers() {
+    return (
+      this.checkedUsers.withEmail.length + this.checkedUsers.withoutEmail.length
+    );
+  }
+
+  get totalUsers() {
+    return this.withEmailUsers.length + this.users.withoutEmail.length;
   }
 
   setStep = (step: number) => {
@@ -240,12 +275,43 @@ class ImportAccountsStore {
   };
 
   changeEmail = (key: string, email: string) => {
-    this.users = {
-      ...this.users,
-      withoutEmail: this.users.withoutEmail.map((user) =>
-        user.key === key ? { ...user, email } : user,
-      ),
-    };
+    getUserByEmail(email)
+      .then((response) => {
+        console.log(`getUserByEmail(email='${email}') user found:`, {
+          response,
+        });
+
+        runInAction(() => {
+          this.users = {
+            ...this.users,
+            withoutEmail: this.users.withoutEmail.map((user) =>
+              user.key === key ? { ...user, email, isDuplicate: true } : user,
+            ),
+          };
+        });
+
+        console.log("changeEmail", {
+          users: this.users,
+          checkedUsers: this.checkedUsers,
+        });
+      })
+      .catch((error) => {
+        console.log(
+          `getUserByEmail(email='${email}') ${error.response.status !== 404 ? "search user failed" : "user not found"} :`,
+          {
+            error,
+          },
+        );
+
+        runInAction(() => {
+          this.users = {
+            ...this.users,
+            withoutEmail: this.users.withoutEmail.map((user) =>
+              user.key === key ? { ...user, email } : user,
+            ),
+          };
+        });
+      });
   };
 
   toggleAccount = (

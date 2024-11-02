@@ -77,6 +77,7 @@ const WhiteLabelComponent = (props) => {
 
     isWhitelableLoaded,
     displayAbout,
+    showNotAvailable,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -288,7 +289,7 @@ const WhiteLabelComponent = (props) => {
       isSettingPaid={isSettingPaid}
     >
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-      {!isSettingPaid && standalone && <NotAvailable />}
+      {showNotAvailable && <NotAvailable />}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
@@ -601,11 +602,14 @@ export const WhiteLabel = inject(
       checkEnablePortalSettings,
       standalone,
       displayAbout,
+      portals,
     } = settingsStore;
     const { isCustomizationAvailable } = currentQuotaStore;
 
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
-
+    const showNotAvailable = isManagement()
+      ? !isCustomizationAvailable
+      : !isSettingPaid && standalone;
     return {
       setLogoText,
       theme: settingsStore.theme,
@@ -627,6 +631,7 @@ export const WhiteLabel = inject(
 
       isWhitelableLoaded,
       displayAbout,
+      showNotAvailable,
     };
   },
 )(

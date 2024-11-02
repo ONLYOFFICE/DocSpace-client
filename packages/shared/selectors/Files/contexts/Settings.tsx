@@ -26,8 +26,8 @@
 
 import { createContext, ReactNode, useMemo } from "react";
 
-import { TFilesSettings } from "../../../api/files/types";
-import { TGetIcon } from "../FilesSelector.types";
+import type { TFilesSettings } from "../../../api/files/types";
+import type { TGetIcon } from "../FilesSelector.types";
 import useFilesSettings from "../hooks/useFilesSettings";
 
 export const SettingsContext = createContext<{
@@ -56,7 +56,7 @@ export const SettingsContextProvider = ({
 
   let displayExts = displayFileExtension;
 
-  if ("displayFileExtension" in window.DocSpace) {
+  if (window.DocSpace && "displayFileExtension" in window.DocSpace) {
     displayExts = window.DocSpace.displayFileExtension as boolean;
   }
 

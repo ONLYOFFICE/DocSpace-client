@@ -73,7 +73,16 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return null;
       }
 
+      const redirectPath = sessionStorage.getItem("referenceUrl");
+      if (redirectPath) {
+        sessionStorage.removeItem("referenceUrl");
+        window.location.href = redirectPath;
+
+        return null;
+      }
+
       // console.log("PrivateRoute returned null");
+
       return null;
     }
 

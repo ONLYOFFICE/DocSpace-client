@@ -29,7 +29,7 @@
   "NewUsersWillExceedMembersLimit": "Uusien maksettujen käyttäjien lisääminen ei ole mahdollista, koska tilaukseesi kuuluvien pääkäyttäjien määrän raja on saavutettu.",
   "NotPossibleRoomRestoring": "Tämän huoneen palauttaminen ei ole mahdollista, koska tilaukseesi kuuluvien huoneiden määrän raja on saavutettu.",
   "NumberOfRoomsAccordingToTariff": "Huoneiden määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "Pääkäyttäjien/tehokäyttäjien määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "Pääkäyttäjien määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
   "Pay": "Maksa",
   "Payer": "Maksaja",
   "PayerDescription": "Tällä käyttäjällä on pääsy maksutietoihin ja on ainoa käyttäjä, joka voi muokata kiintiötä ja suorittaa maksuja. {{productName}}-n omistaja ja maksava johtaja voivat määrätä uudelleen maksavan johtajan rooliin käyttäen Stripe-asiakasportaalia.",

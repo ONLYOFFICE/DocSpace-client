@@ -28,7 +28,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { FileInput } from "@docspace/shared/components/file-input";
+import { Portal } from "@docspace/shared/components/portal";
 
 import FilesSelector from "../FilesSelector";
 import { StyledBodyWrapper } from "./StyledComponents";
@@ -106,6 +109,39 @@ const FilesSelectorInput = (props) => {
     onSetBaseFolderPath: onSetBasePath,
   };
 
+  const selectorComponent = (
+    <>
+      <Backdrop
+        visible={isPanelVisible}
+        isAside
+        withBackground
+        zIndex={309}
+        onClick={onClose}
+      />
+      <Aside
+        visible={isPanelVisible}
+        withoutBodyScroll
+        zIndex={310}
+        onClose={onClose}
+        withoutHeader
+      >
+        <FilesSelector
+          isRoomBackup={isRoomBackup}
+          descriptionText={descriptionText}
+          filterParam={filterParam}
+          rootThirdPartyId={rootThirdPartyId}
+          isThirdParty={isThirdParty}
+          isRoomsOnly={isRoomsOnly}
+          isSelectFolder={isSelectFolder}
+          id={id}
+          onClose={onClose}
+          isPanelVisible={isPanelVisible}
+          isSelect={isSelect}
+          {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+        />
+      </Aside>
+    </>
+  );
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
@@ -120,19 +156,9 @@ const FilesSelectorInput = (props) => {
         placeholder={t("SelectAction")}
       />
 
-      <FilesSelector
-        isRoomBackup={isRoomBackup}
-        descriptionText={descriptionText}
-        filterParam={filterParam}
-        rootThirdPartyId={rootThirdPartyId}
-        isThirdParty={isThirdParty}
-        isRoomsOnly={isRoomsOnly}
-        isSelectFolder={isSelectFolder}
-        id={id}
-        onClose={onClose}
-        isPanelVisible={isPanelVisible}
-        isSelect={isSelect}
-        {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+      <Portal
+        visible={isPanelVisible}
+        element={<div>{selectorComponent}</div>}
       />
     </StyledBodyWrapper>
   );

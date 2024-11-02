@@ -53,6 +53,8 @@ const CreateRoomEvent = ({
   deleteThirdParty,
   startRoomType,
   isCorrectWatermark,
+  processCreatingRoomFromData,
+  selectionItems,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -110,6 +112,8 @@ const CreateRoomEvent = ({
       deleteThirdParty={deleteThirdParty}
       fetchThirdPartyProviders={fetchThirdPartyProviders}
       enableThirdParty={enableThirdParty}
+      processCreatingRoomFromData={processCreatingRoomFromData}
+      selectionItems={selectionItems}
     />
   );
 };
@@ -121,11 +125,17 @@ export default inject(
     tagsStore,
     dialogsStore,
     filesSettingsStore,
+    filesStore,
+    filesActionsStore,
   }) => {
     const { fetchTags } = tagsStore;
+    const { selection, bufferSelection } = filesStore;
+
+    const { processCreatingRoomFromData } = filesActionsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
       filesSettingsStore.thirdPartyStore;
+
     const { enableThirdParty } = filesSettingsStore;
 
     const {
@@ -147,6 +157,9 @@ export default inject(
       isCorrectWatermark,
     } = createEditRoomStore;
 
+    const selectionItems =
+      selection && selection.length > 0 ? selection : [bufferSelection];
+
     return {
       fetchTags,
       setRoomParams,
@@ -165,6 +178,8 @@ export default inject(
 
       isCorrectWatermark,
       setCover,
+      selectionItems,
+      processCreatingRoomFromData,
     };
   },
 )(observer(CreateRoomEvent));

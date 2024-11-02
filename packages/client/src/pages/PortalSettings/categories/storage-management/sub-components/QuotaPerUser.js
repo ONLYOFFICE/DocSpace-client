@@ -47,6 +47,7 @@ const QuotaPerUserComponent = (props) => {
       saveQuota={(size) => setUserQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
+      tabIndex={2}
     />
   );
 };

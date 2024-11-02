@@ -68,6 +68,10 @@ export const createRequest = (
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
+  console.log("origin", baseURL);
+  console.log("apiUrl", apiURL);
+  console.log("paths", paths);
+
   // hdrs.set("x-docspace-address", baseURL);
 
   const authToken = cookieStore.get("asc_auth_key")?.value;
@@ -91,6 +95,8 @@ export const createRequest = (
     });
 
   const urls = paths.map((path) => `${apiURL}${path}`);
+
+  console.log("urls: ", urls);
 
   const requests = urls.map(
     (url) => new Request(url, { headers: hdrs, method, body }),

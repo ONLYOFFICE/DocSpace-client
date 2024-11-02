@@ -74,6 +74,8 @@ const Modal = ({
   withoutPadding,
   hideContent,
 
+  isInvitePanelLoader = false,
+
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -173,6 +175,7 @@ const Modal = ({
                     withoutAside
                     isPanel={false}
                     withFooterBorder={withFooterBorder}
+                    isInvitePanelLoader={isInvitePanelLoader}
                   />
                 )
               ) : container &&

@@ -231,7 +231,7 @@ const Editor = ({
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
     onRequestEditRights: () =>
-      onSDKRequestEditRights(fileInfo, newConfig.documentType),
+      onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,

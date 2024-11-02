@@ -43,6 +43,7 @@ export default inject<TStore>(
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
+    backup,
   }) => {
     const {
       isLiveChatAvailable,
@@ -64,9 +65,14 @@ export default inject<TStore>(
     const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
     const { visible: secondaryProgressDataStoreVisible } =
       secondaryProgressDataStore;
+    const { downloadingProgress } = backup;
+    const isBackupProgressVisible =
+      downloadingProgress > 0 && downloadingProgress < 100;
 
     const showProgress =
-      primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+      primaryProgressDataVisible ||
+      secondaryProgressDataStoreVisible ||
+      isBackupProgressVisible;
 
     const {
       showText,

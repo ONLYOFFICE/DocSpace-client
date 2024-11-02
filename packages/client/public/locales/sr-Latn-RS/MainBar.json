@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Dostignut je limit za broj prostorija: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limit za skladišni prostor i broj prostorija će uskoro biti prekoračen",
   "StorageAndRoomLimitHeader": "Dostignut je limit za skladišni prostor i broj prostorija",
-  "StorageAndUserHeader": "Ograničenja skladišta i administratora/naprednih korisnika će uskoro biti prekoračena.",
-  "StorageAndUserTariffLimitHeader": "Dostignut je limit za skladišni prostor i broj admina/naprednih korisnika",
+  "StorageAndUserHeader": "Ograničenja skladišta i administratora će uskoro biti prekoračena.",
+  "StorageAndUserTariffLimitHeader": "Dostignut je limit za skladišni prostor i broj admina",
   "StorageLimitHeader": "Dostignut je limit za skladišni prostor: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Količina memorijskog prostora će uskoro biti prekoračena: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Možete ukloniti nepotrebne datoteke ili promeniti kvotu u <1>Storage management settings.</1>",
-  "UserQuotaHeader": "Broj administratora/naprednih korisnika će uskoro biti prekoračen: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Kada se dostigne limit, svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine/napredne korisnike, kontaktirajte {{productName}} administratora da biste nadogradili tarifni plan.",
-  "UserTariffAlmostReachedForAdmins": "Kada se dostigne limit, svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine/napredne korisnike, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan.",
-  "UserTariffLimitHeader": "Dostignut je limit za broj admina/naprednih korisnika: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine/napredne korisnike, kontaktirajte {{productName}} administratora da biste nadogradili tarifni plan.",
-  "UserTariffReachedForAdmins": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine/napredne korisnike, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan."
+  "UserQuotaHeader": "Broj administratora će uskoro biti prekoračen: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Kada se dostigne limit, svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, kontaktirajte {{productName}} administratora da biste nadogradili tarifni plan.",
+  "UserTariffAlmostReachedForAdmins": "Kada se dostigne limit, svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan.",
+  "UserTariffLimitHeader": "Dostignut je limit za broj admina: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, kontaktirajte {{productName}} administratora da biste nadogradili tarifni plan.",
+  "UserTariffReachedForAdmins": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan."
 }

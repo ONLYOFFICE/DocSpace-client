@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Huoneiden määrän raja on saavutettu: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Muistin tilan raja ja huoneiden määrä on täyttymässä",
   "StorageAndRoomLimitHeader": "Muistin tilan ja huoneiden määrän raja on saavutettu",
-  "StorageAndUserHeader": "Muisti ja ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä.",
-  "StorageAndUserTariffLimitHeader": "Muistin tilan ja pääkäyttäjien/tehokäyttäjien määrän raja on saavutettu",
+  "StorageAndUserHeader": "Muisti ja ylläpitäjien määrän raja on ylittymässä.",
+  "StorageAndUserTariffLimitHeader": "Muistin tilan ja pääkäyttäjien määrän raja on saavutettu",
   "StorageLimitHeader": "Muistin tilan raja on saavutettu:{{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",
-  "UserQuotaHeader": "Ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}",
-  "UserTariffAlmostReached": "Kaikille käyttäjille lisätään vain Käyttäjäoikeudet, kun raja on saavutettu. Voidaksesi lisätä pääkäyttäjiä/tehokäyttäjiä, ota yhteyttä {{productName}}:n pääkäyttäjään päivittääksesi tilauksesi.",
-  "UserTariffAlmostReachedForAdmins": "Kun raja on saavutettu, kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä/tehokäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi.",
-  "UserTariffLimitHeader": "Pääkäyttäjien/tehokäyttäjien määrän raja on saavutettu: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeude. Voidaksesi lisätä pääkäyttäjiä/tehokäyttäjiä, ota yhteyttä {{productName}} pääkäyttäjään päivittääksesi tilauksesi.",
-  "UserTariffReachedForAdmins": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä/tehokäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi."
+  "UserQuotaHeader": "Ylläpitäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}",
+  "UserTariffAlmostReached": "Kaikille käyttäjille lisätään vain Käyttäjäoikeudet, kun raja on saavutettu. Voidaksesi lisätä pääkäyttäjiä, ota yhteyttä {{productName}}:n pääkäyttäjään päivittääksesi tilauksesi.",
+  "UserTariffAlmostReachedForAdmins": "Kun raja on saavutettu, kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi.",
+  "UserTariffLimitHeader": "Pääkäyttäjien määrän raja on saavutettu: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeude. Voidaksesi lisätä pääkäyttäjiä, ota yhteyttä {{productName}} pääkäyttäjään päivittääksesi tilauksesi.",
+  "UserTariffReachedForAdmins": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi."
 }

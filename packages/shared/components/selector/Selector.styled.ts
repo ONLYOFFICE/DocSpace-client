@@ -274,7 +274,7 @@ const StyledItem = styled.div<{
     display: flex;
     align-items: center;
     gap: 6px;
-    width: 100%;
+    width: calc(100% - 32px);
 
     .label {
       width: unset;

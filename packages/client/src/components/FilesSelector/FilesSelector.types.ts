@@ -46,6 +46,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
+  currentDeviceType: DeviceType;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
   setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
   getIcon: (size: number, fileExst: string) => string;

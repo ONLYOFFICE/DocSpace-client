@@ -65,7 +65,7 @@
   "RedirectsURLSHelpButton": "After a user successfully authorizes an application, the authorization server will redirect the user back to the application with sensitive information.",
   "RegisterNewApp": "Register a new application",
   "Reset": "Reset",
-  "ResetDescription": "If you reset client secret, all active consents and authorization will be revoked. For apply next consent need use new client secret. Note that all users will again be required to complete the consent screen.",
+  "ResetDescription": "If you reset client secret, all active consents and authorizations will be revoked. To apply the next consent, you need to use a new client secret. Note that all users will again be required to complete the consent screen.",
   "ResetHeader": "Reset client secret",
   "Revoke": "Revoke",
   "RevokeConsent": "Revoke consent",

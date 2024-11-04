@@ -28,16 +28,20 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+
+import { injectDefaultTheme, mobileMore } from "@docspace/shared/utils";
+
 import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-zone";
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
+import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import CustomizationNavbar from "./customization-navbar";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
+
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { injectDefaultTheme, mobileMore } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
@@ -139,6 +143,8 @@ const Customization = (props) => {
           <PortalRenaming isMobileView={viewMobile} />
         </>
       )}
+      <StyledSettingsSeparator />
+      <ConfigureDeepLink />
     </StyledComponent>
   );
 };

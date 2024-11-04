@@ -45,6 +45,7 @@ const QuotaPerRoomComponent = (props) => {
       saveQuota={(size) => setRoomQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}
+      tabIndex={1}
     />
   );
 };

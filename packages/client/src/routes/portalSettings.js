@@ -157,6 +157,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/configure-deep-link",
+      async lazy() {
+        const { ConfigureDeepLink } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"
+            ),
+        );
+
+        return { Component: ConfigureDeepLink };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },

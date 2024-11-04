@@ -269,7 +269,11 @@ export const CompletedForm = ({
               />
             )}
           </ButtonWrapper>
-          <Link className="link" href={`/?${fillAgainSearchParams.toString()}`}>
+          <Link
+            className="link"
+            href={`/?${fillAgainSearchParams.toString()}`}
+            prefetch={false}
+          >
             {t("CompletedForm:FillItOutAgain")}
           </Link>
         </CompletedFormLayout>

@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Задавайте въпроси относно покупките на <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Получете техническа помощ <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Използвайте официалната документация за надграждане:",
-  "UpgradeToProBannerInstructionHeader": "За достъп до професионални функции, започнете безплатна 30-дневна пробна версия на {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "За достъп до професионални функции, започнете безплатна 30-дневна пробна версия на {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Докер инструкции.",
   "UpgradeToProBannerInstructionItemLinux": "Linux инструкции.",
   "UpgradeToProBannerInstructionItemWindows": "Windows инструкции.",

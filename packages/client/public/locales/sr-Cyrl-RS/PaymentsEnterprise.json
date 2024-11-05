@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Поставите питања о куповини на <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Добијте техничку помоћ <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Користите званичну документацију за надоградњу:",
-  "UpgradeToProBannerInstructionHeader": "Да бисте приступили напредним функцијама, започните бесплатни пробни период од 30 дана за {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "Да бисте приступили напредним функцијама, започните бесплатни пробни период од 30 дана за {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Docker упутство.",
   "UpgradeToProBannerInstructionItemLinux": "Linux упутство.",
   "UpgradeToProBannerInstructionItemWindows": "Windows упутство.",

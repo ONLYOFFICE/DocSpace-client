@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Щоб поставити запитання щодо придбання, напишіть на адресу <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Щоб отримати технічну допомогу, перейдіть за посиланням <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Скористайтеся офіційною документацією для оновлення:",
-  "UpgradeToProBannerInstructionHeader": "Щоб отримати доступ до професійних функцій, запустіть безплатну 30-денну пробну версію {{organizationName}} Enterprise.",
+  "UpgradeToProBannerInstructionHeader": "Щоб отримати доступ до професійних функцій, запустіть безплатну 30-денну пробну версію {{organizationName}} {{license}}.",
   "UpgradeToProBannerInstructionItemDocker": "Інструкція для Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Інструкція для Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Інструкція для Windows.",

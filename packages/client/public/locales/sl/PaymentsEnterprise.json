@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Vprašanja glede nakupa pošljite na <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Zahtevajte pomoč <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Za nadgradnjo uporabite uradno dokumentacijo:",
-  "UpgradeToProBannerInstructionHeader": "Za dostop do profesionalnih funkcij preizkusite brezplačno 30-dnevno različico {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "Za dostop do profesionalnih funkcij preizkusite brezplačno 30-dnevno različico {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Navodila za Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Navodila za Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Navodila za Windows.",

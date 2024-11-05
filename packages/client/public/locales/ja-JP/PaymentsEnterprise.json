@@ -17,7 +17,7 @@
   "UpgradeToProBannerInformationPurchase": "購入に関するご質問がありましたら<1>{{email}}</1>までご連絡ください",
   "UpgradeToProBannerInformationSupport": "技術的なサポートを受ける <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "アップグレードには公式ドキュメントを使用します：",
-  "UpgradeToProBannerInstructionHeader": "プロ機能にアクセスするには、{{organizationName}} Enterprise版の30日間の無料トライアルを開始してください。",
+  "UpgradeToProBannerInstructionHeader": "プロ機能にアクセスするには、{{organizationName}} {{license}}版の30日間の無料トライアルを開始してください。",
   "UpgradeToProBannerInstructionItemDocker": "Dockerの説明。",
   "UpgradeToProBannerInstructionItemLinux": "Linuxの説明。",
   "UpgradeToProBannerInstructionItemWindows": "Windowsの説明。",

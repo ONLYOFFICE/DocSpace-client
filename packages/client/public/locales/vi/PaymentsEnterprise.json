@@ -14,7 +14,6 @@
   "UpgradeToProBannerInformationPurchase": "Đặt câu hỏi mua hàng tại <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Nhận hỗ trợ kỹ thuật< 1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Sử dụng tài liệu chính thức để nâng cấp:",
-  "UpgradeToProBannerInstructionHeader": "Để truy cập các tính năng chuyên nghiệp, hãy bắt đầu dùng thử {{organizationName}} Phiên bản Doanh Nghiệp miễn phí 30 ngày.",
   "UpgradeToProBannerInstructionItemDocker": "Hướng dẫn Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Hướng dẫn Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Hướng dẫn Windows.",

@@ -17,7 +17,7 @@
   "UpgradeToProBannerInformationPurchase": "Գնման հարցեր տվեք <1>{{email}}</1> հասցեով",
   "UpgradeToProBannerInformationSupport": "Ստացեք տեխնիկական աջակցություն <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Թարմացնելու համար օգտագործեք պաշտոնական փաստաթղթերը՝",
-  "UpgradeToProBannerInstructionHeader": "Պրոֆեսիոնալ(Pro) գործառույթներից օգտվելու համար սկսեք {{organizationName}} Enterprise Edition-ի 30-օրյա անվճար  փորձարկումը:",
+  "UpgradeToProBannerInstructionHeader": "Պրոֆեսիոնալ(Pro) գործառույթներից օգտվելու համար սկսեք {{organizationName}} {{license}} Edition-ի 30-օրյա անվճար  փորձարկումը:",
   "UpgradeToProBannerInstructionItemDocker": "Docker հրահանգ.",
   "UpgradeToProBannerInstructionItemLinux": "Linux հրահանգ.",
   "UpgradeToProBannerInstructionItemWindows": "Windows հրահանգ.",

@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Položte dotazy k nákupu na <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Získejte technickou pomoc <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "K upgradu použijte oficiální dokumentaci:",
-  "UpgradeToProBannerInstructionHeader": "Pro přístup k profesionálním funkcím spusťte bezplatnou 30denní zkušební verzi {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "Pro přístup k profesionálním funkcím spusťte bezplatnou 30denní zkušební verzi {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Pokyny pro práci s nástrojem Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Návod pro Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Návod pro systém Windows.",

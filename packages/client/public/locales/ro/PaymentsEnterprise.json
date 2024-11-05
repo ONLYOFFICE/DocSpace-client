@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Adresați întrebarea legată de cumpărarea <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Solicitați asistența tehnică <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Utilizați documentația oficială pentru actualizare:",
-  "UpgradeToProBannerInstructionHeader": "Pentru a accesa caracteristicile Pro, demarați versiunea de încercare a spaţiului {{organizationName}} Ediția Enterprise pe o perioada de 30 de zile.",
+  "UpgradeToProBannerInstructionHeader": "Pentru a accesa caracteristicile Pro, demarați versiunea de încercare a spaţiului {{organizationName}} Ediția {{license}} pe o perioada de 30 de zile.",
   "UpgradeToProBannerInstructionItemDocker": "Instrucţiuni pentu Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Instrucțiuni pentru Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Instrucțiunei pentru Windows.",

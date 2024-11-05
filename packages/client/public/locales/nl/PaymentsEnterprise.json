@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Stel vragen over de aankoop per <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Ontvang technische ondersteuning <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Gebruik de officiële documentatie om te upgraden:",
-  "UpgradeToProBannerInstructionHeader": "Om toegang te krijgen tot pro functionaliteiten, begin met de gratis 30-daagse proefversie van {{organizationName}} Enterprise Editie.",
+  "UpgradeToProBannerInstructionHeader": "Om toegang te krijgen tot pro functionaliteiten, begin met de gratis 30-daagse proefversie van {{organizationName}} {{license}} Editie.",
   "UpgradeToProBannerInstructionItemDocker": "Docker instructies.",
   "UpgradeToProBannerInstructionItemLinux": "Linux instructies.",
   "UpgradeToProBannerInstructionItemWindows": "Windows instructies.",

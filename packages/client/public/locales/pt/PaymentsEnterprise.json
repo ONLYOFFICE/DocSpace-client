@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Colocar questões relacionadas com a compra em <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Obter assistência técnica <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Utilize a documentação oficial para atualizar:",
-  "UpgradeToProBannerInstructionHeader": "Para aceder a funcionalidades profissionais, inicie um período de avaliação gratuito de 30 dias da Edição Enterprise da {{organizationName}}.",
+  "UpgradeToProBannerInstructionHeader": "Para aceder a funcionalidades profissionais, inicie um período de avaliação gratuito de 30 dias da Edição {{license}} da {{organizationName}}.",
   "UpgradeToProBannerInstructionItemDocker": "Instruções para Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Instruções para Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Instruções para Windows.",

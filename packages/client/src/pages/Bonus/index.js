@@ -51,6 +51,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
           organizationName: t("Common:OrganizationName"),
+          license: t("Common:EnterpriseLicense"),
         })}
       </Text>
       <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>

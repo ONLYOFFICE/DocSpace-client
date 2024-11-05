@@ -14,7 +14,7 @@
   "UpgradeToProBannerInformationPurchase": "Esitä kysymyksiä ostoon liittyen <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Hanki teknistä apua <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Käytä virallista dokumentaatiota päivittääksesi:",
-  "UpgradeToProBannerInstructionHeader": "Aloit {{organizationName}} Enterprise Edition:n 30 päivän ilmainen kokeilujakso saadaksesi pro-ominaisuudet käyttöön.",
+  "UpgradeToProBannerInstructionHeader": "Aloit {{organizationName}} {{license}} Edition:n 30 päivän ilmainen kokeilujakso saadaksesi pro-ominaisuudet käyttöön.",
   "UpgradeToProBannerInstructionItemDocker": "Dockerin ohje.",
   "UpgradeToProBannerInstructionItemLinux": "Linuxin ohje.",
   "UpgradeToProBannerInstructionItemWindows": "Windowsin ohje.",

@@ -20,7 +20,7 @@
   "UpgradeToProBannerInformationPurchase": "Ask purchase questions at <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Get tech assistance <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Use the official documentation to upgrade:",
-  "UpgradeToProBannerInstructionHeader": "To access pro features, start free 30-day trial of {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "To access pro features, start free 30-day trial of {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Docker instruction.",
   "UpgradeToProBannerInstructionItemLinux": "Linux instruction.",
   "UpgradeToProBannerInstructionItemWindows": "Windows instruction.",

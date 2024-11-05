@@ -14,7 +14,6 @@
   "UpgradeToProBannerInformationPurchase": "اطرح أسئلة الشراء على <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "احصل على المساعدة الفنية <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "استخدم الوثائق الرسمية للترقية:",
-  "UpgradeToProBannerInstructionHeader": "للوصول إلى الميزات الاحترافية، ابدأ تجربة مجانية لمدة 30 يومًا من {{organizationName}} إصدار المؤسسات.",
   "UpgradeToProBannerInstructionItemDocker": " تعليمات دوكر.",
   "UpgradeToProBannerInstructionItemLinux": "تعليمات لينكس.",
   "UpgradeToProBannerInstructionItemWindows": "تعليمات ويندوز.",

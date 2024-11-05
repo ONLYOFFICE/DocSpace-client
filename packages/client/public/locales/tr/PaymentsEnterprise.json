@@ -18,7 +18,7 @@
   "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1> adresinden satın alma soruları sorun",
   "UpgradeToProBannerInformationSupport": "Teknik yardım alın <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Yükseltmek için resmî belgeleri kullanın:",
-  "UpgradeToProBannerInstructionHeader": "Profesyonel özelliklere erişmek için {{organizationName}} Enterprise Edition'ın 30 günlük ücretsiz denemesini başlatın.",
+  "UpgradeToProBannerInstructionHeader": "Profesyonel özelliklere erişmek için {{organizationName}} {{license}} Edition'ın 30 günlük ücretsiz denemesini başlatın.",
   "UpgradeToProBannerInstructionItemDocker": "Docker talimatı.",
   "UpgradeToProBannerInstructionItemLinux": "Linux talimatı.",
   "UpgradeToProBannerInstructionItemWindows": "Windows talimatı.",

@@ -14,7 +14,6 @@
   "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1>로 구매 관련 질문을 보내주세요",
   "UpgradeToProBannerInformationSupport": "기술 지원을 이용하세요: <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "업그레이드하려면 공식 문서를 사용하세요:",
-  "UpgradeToProBannerInstructionHeader": "프로 기능을 이용하려면 {{organizationName}} 엔터프라이즈 에디션 30일 무료 평가판을 시작하세요.",
   "UpgradeToProBannerInstructionItemDocker": "Docker 설명서.",
   "UpgradeToProBannerInstructionItemLinux": "Linux설명서.",
   "UpgradeToProBannerInstructionItemWindows": "Windows설명서.",

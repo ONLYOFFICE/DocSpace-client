@@ -19,7 +19,7 @@
   "UpgradeToProBannerInformationPurchase": "Задать вопросы по покупке <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "Получить техническую помощь <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "Используйте официальную документацию по обновлению:",
-  "UpgradeToProBannerInstructionHeader": "Чтобы получить доступ к профессиональным возможностям, начните бесплатный 30-дневный пробный период {{organizationName}} Enterprise Edition.",
+  "UpgradeToProBannerInstructionHeader": "Чтобы получить доступ к профессиональным возможностям, начните бесплатный 30-дневный пробный период {{organizationName}} {{license}} Edition.",
   "UpgradeToProBannerInstructionItemDocker": "Инструкция для Docker.",
   "UpgradeToProBannerInstructionItemLinux": "Инструкция для Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Инструкция для Windows.",

@@ -125,6 +125,7 @@ const Sessions = ({
   portalSessionsIds,
   fetchPortalSessions,
   subscribeToPortalSessions,
+  unsubscribeToPortalSessions,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -134,17 +135,18 @@ const Sessions = ({
   ]);
 
   useEffect(() => {
-    // SocketHelper.emit("getSessionsInPortal");
     fetchPortalSessions();
     subscribeToPortalSessions();
 
     fetchData();
     return () => {
       clearSelection();
+      unsubscribeToPortalSessions();
     };
   }, [
     fetchPortalSessions,
     subscribeToPortalSessions,
+    unsubscribeToPortalSessions,
     fetchData,
     clearSelection,
   ]);
@@ -248,6 +250,7 @@ export const SecuritySessions = inject<TStore>(
       portalSessionsIds,
       fetchPortalSessions,
       subscribeToPortalSessions,
+      unsubscribeToPortalSessions,
     } = sessionsStore;
 
     const {
@@ -292,6 +295,7 @@ export const SecuritySessions = inject<TStore>(
       portalSessionsIds,
       fetchPortalSessions,
       subscribeToPortalSessions,
+      unsubscribeToPortalSessions,
     };
   },
 )(observer(Sessions));

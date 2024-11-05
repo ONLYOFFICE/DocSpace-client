@@ -166,6 +166,11 @@ class SessionsStore {
     SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
   };
 
+  unsubscribeToPortalSessions = () => {
+    SocketHelper.off("enter-in-portal", this.handleUserEnterPortal);
+    SocketHelper.off("leave-in-portal", this.handleUserLeavePortal);
+  };
+
   subscribeToUserSessions = (id: string) => {
     SocketHelper.emit("subscribeToUser", { id });
     // SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);

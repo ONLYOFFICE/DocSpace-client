@@ -113,7 +113,7 @@ const useSocketHelper = ({
     return () => {
       SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
-  }, [user?.loginEventId]);
+  }, [user, user?.loginEventId]);
 };
 
 export default useSocketHelper;

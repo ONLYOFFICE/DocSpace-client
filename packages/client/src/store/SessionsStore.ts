@@ -99,7 +99,7 @@ class SessionsStore {
 
   fetchPortalSessions = (startIndex: number = 0) => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessionsInPortal", { index: startIndex });
+      SocketHelper.emit("getSessionsInPortal", { startIndex });
       SocketHelper.on("sessions-in-portal", (data: TSessionsInPortal) => {
         this.addPortalSessions(data.users);
         this.setTotal(data.total);

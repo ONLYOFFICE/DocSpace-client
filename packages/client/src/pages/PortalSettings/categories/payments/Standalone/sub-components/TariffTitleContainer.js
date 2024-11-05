@@ -74,14 +74,14 @@ const TariffTitleContainer = ({
   const expiresDate = () => {
     if (isTrial) {
       return getTwoDotsReplacing(
-        t("ActivateTariffEnterpriseTrialExpiration", {
+        t("ActivateTariffLicenseTrialExpiration", {
           date: paymentDate,
         }),
       );
     }
 
     return getTwoDotsReplacing(
-      t("ActivateTariffEnterpriseExpiration", {
+      t("ActivatePaidTariffExpiration", {
         date: paymentDate,
       }),
     );

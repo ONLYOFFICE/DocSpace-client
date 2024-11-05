@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Aktivovať licenciu",
   "ActivateLicenseActivated": "Licencia aktivovaná",
+  "ActivatePaidTariffExpiration": "Platnosť vášho predplatného vyprší {{date}}.",
   "ActivatePurchaseBuyLicense": "Ak si chcete kúpiť licenciu, kliknite na tlačidlo nižšie.",
   "ActivatePurchaseBuyNow": "Kúpiť teraz",
   "ActivatePurchaseRenewLicense": "Kúpte si obnovenie, aby ste aj naďalej získavali podporu a aktualizácie.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Obnoviť predplatné pre verziu Enterprise",
   "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}",
   "ActivateTariffDescr": "Používate {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Platnosť vášho predplatného vyprší {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Platnosť vašej skúšobnej verzie vyprší {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Platnosť vašej skúšobnej verzie vyprší {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakúpením plnej verzie Enterprise získate:",
   "ActivateUploadDescr": "Aby ste aktivovali licenciu, nahrajte ju nižšie a kliknite na Aktivovať.",
   "FreeDaysLeft": "Bezplatná verzia bude aktívna {{count}} deň (dní)",

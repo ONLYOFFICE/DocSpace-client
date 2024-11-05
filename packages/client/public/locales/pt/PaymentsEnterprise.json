@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Ativar licença",
   "ActivateLicenseActivated": "Licença ativada",
+  "ActivatePaidTariffExpiration": "A sua subscrição expira a {{date}}.",
   "ActivatePurchaseBuyLicense": "Para comprar uma licença, por favor clique no botão abaixo.",
   "ActivatePurchaseBuyNow": "Comprar agora",
   "ActivatePurchaseRenewLicense": "Para continuar a ter suporte e atualizações, compre uma renovação.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Renovar a subscrição para o {{license}}",
   "ActivateSwithToProHeader": "Alterar para a versão completa {{license}}",
   "ActivateTariffDescr": "Está a utilizar a versão {{license}} do {{productName}} da {{organizationName}} ",
-  "ActivateTariffEnterpriseExpiration": "A sua subscrição expira a {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "O seu período de avaliação termina a {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "O seu período de avaliação termina a {{date}}.",
   "ActivateToProBannerHeaderTrial": "Compre a versão completa {{license}} para obter:",
   "ActivateUploadDescr": "Para ativar a sua licença, carregue-a abaixo e clique em Ativar.",
   "FreeDaysLeft": "Ainda tem {{count}} dias gratuitos",

@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Активирайте лиценза",
   "ActivateLicenseActivated": "Лицензът е активиран",
+  "ActivatePaidTariffExpiration": "Вашият абонамент изтича на {{date}}.",
   "ActivatePurchaseBuyLicense": "За да купите лиценз, щракнете върху бутона по-долу.",
   "ActivatePurchaseBuyNow": "Купи сега",
   "ActivatePurchaseRenewLicense": "За да продължите да получавате поддръжка и актуализации, купете подновяване.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Подновете абонамента за {{license}}",
   "ActivateSwithToProHeader": "Преминете към пълна {{license}} версия",
   "ActivateTariffDescr": "Вие използвате {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Вашият абонамент изтича на {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Вашият пробен период изтича на {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Вашият пробен период изтича на {{date}}.",
   "ActivateToProBannerHeaderTrial": "Купете пълната {{license}} версия, за да получите:",
   "ActivateUploadDescr": "За да активирате своя лиценз, качете го по-долу и щракнете върху Активиране.",
   "FreeDaysLeft": "Остават {{count}} безплатни дни",

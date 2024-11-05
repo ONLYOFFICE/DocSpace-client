@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Aktivacija licence",
   "ActivateLicenseActivated": "Licenca aktivirana",
+  "ActivatePaidTariffExpiration": "Vaša naročnina poteče dne {{date}}.",
   "ActivatePurchaseBuyLicense": "Za nakup licence kliknite spodnji na gumb.",
   "ActivatePurchaseBuyNow": "Kupi zdaj",
   "ActivatePurchaseRenewLicense": "Če želite nadaljno podporo in prejemanje posodobitev, kupite obnovitev.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Obnovite naročnino za {{license}}",
   "ActivateSwithToProHeader": "Preklopite na polno verzijo {{license}}",
   "ActivateTariffDescr": "Uporabljate {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Vaša naročnina poteče dne {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Vaš preizkus poteče dne {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Vaš preizkus poteče dne {{date}}.",
   "ActivateToProBannerHeaderTrial": "Kupite polno verzijo {{license}} in dobite:",
   "ActivateUploadDescr": "Če želite aktivirati svojo licenco, jo prenesite spodaj in kliknite Aktiviraj.",
   "FreeDaysLeft": "{{count}} preostalih brezplačnih dni",

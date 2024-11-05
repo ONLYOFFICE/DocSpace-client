@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Licentie activeren",
   "ActivateLicenseActivated": "Licentie geactiveerd",
+  "ActivatePaidTariffExpiration": "Uw abonnement verloopt op {{date}}.",
   "ActivatePurchaseBuyLicense": "Klik op de knop hieronder om een licentie te kopen.",
   "ActivatePurchaseBuyNow": "Koop nu",
   "ActivatePurchaseRenewLicense": "Koop een verlenging om ondersteuning en updates te blijven ontvangen.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Abonnement verlengen voor {{license}}",
   "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie",
   "ActivateTariffDescr": "U gebruikt {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Uw abonnement verloopt op {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Uw proefperiode verloopt op {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Uw proefperiode verloopt op {{date}}.",
   "ActivateToProBannerHeaderTrial": "Koop de volledige {{license}} versie en ontvang het volgende:",
   "ActivateUploadDescr": "Om uw licentie te activeren, uploadt u deze hieronder en klikt u op Activeren.",
   "FreeDaysLeft": "{{count}} Gratis dagen over",

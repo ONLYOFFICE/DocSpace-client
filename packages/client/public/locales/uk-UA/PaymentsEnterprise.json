@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Активувати ліцензію",
   "ActivateLicenseActivated": "Ліцензію активовано",
+  "ActivatePaidTariffExpiration": "Термін дії вашої підписки закінчується {{date}}.",
   "ActivatePurchaseBuyLicense": "Щоб купити ліцензію, натисніть кнопку нижче.",
   "ActivatePurchaseBuyNow": "Купити зараз",
   "ActivatePurchaseRenewLicense": "Щоб і надалі отримувати підтримку й оновлення, придбайте поновлення.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Поновити підписку на {{license}}",
   "ActivateSwithToProHeader": "Перемкнутися на повну версію {{license}}",
   "ActivateTariffDescr": "Ви використовуєте {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Термін дії вашої підписки закінчується {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Термін дії вашої пробної версії закінчується {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Термін дії вашої пробної версії закінчується {{date}}.",
   "ActivateToProBannerHeaderTrial": "Придбайте повну версію {{license}}, щоб отримати:",
   "ActivateUploadDescr": "Щоб активувати ліцензію, завантажте її нижче та натисніть «Активувати».",
   "FreeDaysLeft": "Залишилося безплатних днів: {{count}}",

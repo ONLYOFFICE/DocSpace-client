@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Aktivizēt licenci",
   "ActivateLicenseActivated": "Licence ir aktivizēta",
+  "ActivatePaidTariffExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",
   "ActivatePurchaseBuyLicense": "Lai iegādātos licenci, noklikšķiniet uz zemāk esošās pogas.",
   "ActivatePurchaseBuyNow": "Pirkt tagad",
   "ActivatePurchaseRenewLicense": "Lai turpinātu saņemt atbalstu un atjauninājumus, iegādājieties atjaunošanu.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Atjaunojiet {{license}} abonementu",
   "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",
   "ActivateTariffDescr": "Jūs izmantojat {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
   "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",
   "FreeDaysLeft": "Atlikušas {{count}} bezmaksas dienas",
   "UpgradeToProBannerHeader": "Saņemiet bezmaksas piekļuvi uzņēmumam gatavam biroja komplektam uz 30 dienām",

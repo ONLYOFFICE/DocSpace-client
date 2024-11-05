@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Ενεργοποίηση άδειας χρήσης",
   "ActivateLicenseActivated": "Η άδεια ενεργοποιήθηκε",
+  "ActivatePaidTariffExpiration": "Η συνδρομή σας λήγει στις {{date}}.",
   "ActivatePurchaseBuyLicense": "Για να αγοράσετε άδεια χρήσης, κάντε κλικ στο παρακάτω κουμπί.",
   "ActivatePurchaseBuyNow": "Αγορά τώρα",
   "ActivatePurchaseRenewLicense": "Για να συνεχίσετε να λαμβάνετε υποστήριξη και ενημερώσεις, αγοράστε μια ανανέωση.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Ανανέωση συνδρομής για {{license}}",
   "ActivateSwithToProHeader": "Αλλαγή σε πλήρη έκδοση {{license}}",
   "ActivateTariffDescr": "Χρησιμοποιείτε το {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Η συνδρομή σας λήγει στις {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Η δοκιμαστική σας συνδρομή λήγει στις {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Η δοκιμαστική σας συνδρομή λήγει στις {{date}}.",
   "ActivateToProBannerHeaderTrial": "Αγοράστε την πλήρη έκδοση {{license}} για να αποκτήσετε τα παρακάτω:",
   "ActivateUploadDescr": "Για να ενεργοποιήσετε την άδειά σας, ανεβάστε την παρακάτω και κάντε κλικ στο Ενεργοποίηση.",
   "FreeDaysLeft": "Απομένουν {{count}} δωρεάν ημέρες",

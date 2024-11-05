@@ -1,6 +1,7 @@
 {
   "ActivateLicense": "Aktivovat licenci",
   "ActivateLicenseActivated": "Licence aktivována",
+  "ActivatePaidTariffExpiration": "Vaše předplatné vyprší dne {{date}}.",
   "ActivatePurchaseBuyLicense": "Chcete-li zakoupit licenci, klikněte na tlačítko níže.",
   "ActivatePurchaseBuyNow": "Koupit teď",
   "ActivatePurchaseRenewLicense": "Chcete-li i nadále dostávat podporu a aktualizace, zakupte si obnovení.",
@@ -8,8 +9,7 @@
   "ActivateRenewSubscriptionHeader": "Obnovení firemního předplatného {{license}}",
   "ActivateSwithToProHeader": "Přechod na plnou verzi {{license}}",
   "ActivateTariffDescr": "Používáte aplikaci {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffEnterpriseExpiration": "Vaše předplatné vyprší dne {{date}}.",
-  "ActivateTariffEnterpriseTrialExpiration": "Platnost vaší zkušební verze končí dne {{date}}.",
+  "ActivateTariffLicenseTrialExpiration": "Platnost vaší zkušební verze končí dne {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakoupením plné verze {{license}} získáte:",
   "ActivateUploadDescr": "Chcete-li aktivovat licenci, nahrajte ji níže a klikněte na tlačítko Aktivovat.",
   "FreeDaysLeft": "Počet zbývajících volných dnů: {{count}}",

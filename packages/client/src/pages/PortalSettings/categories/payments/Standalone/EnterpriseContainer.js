@@ -36,14 +36,19 @@ import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
+import { license } from "@docspace/shared/__mocks__/e2e/handlers/settings/license";
 
 const EnterpriseContainer = (props) => {
-  const { salesEmail, t, isLicenseDateExpired } = props;
+  const { salesEmail, t, isLicenseDateExpired, isDeveloper } = props;
 
   return (
     <StyledEnterpriseComponent>
       <Text fontWeight={700} fontSize={"16px"}>
-        {t("ActivateRenewSubscriptionHeader")}
+        {t("ActivateRenewSubscriptionHeader", {
+          license: isDeveloper
+            ? t("Common:DeveloperLicense")
+            : t("Common:EnterpriseLicense"),
+        })}
       </Text>
 
       <TariffTitleContainer />
@@ -80,6 +85,6 @@ const EnterpriseContainer = (props) => {
 export default inject(({ paymentStore, currentTariffStatusStore }) => {
   const { buyUrl, salesEmail } = paymentStore;
 
-  const { isLicenseDateExpired } = currentTariffStatusStore;
-  return { buyUrl, salesEmail, isLicenseDateExpired };
+  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
+  return { buyUrl, salesEmail, isLicenseDateExpired, isDeveloper };
 })(observer(EnterpriseContainer));

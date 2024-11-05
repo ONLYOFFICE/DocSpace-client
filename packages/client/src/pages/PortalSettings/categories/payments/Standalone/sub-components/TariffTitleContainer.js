@@ -32,12 +32,14 @@ import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
 
 import { getTwoDotsReplacing } from "../../utils";
+import { license } from "@docspace/shared/__mocks__/e2e/handlers/settings/license";
 
 const TariffTitleContainer = ({
   isLicenseDateExpired,
   isTrial,
   trialDaysLeft,
   paymentDate,
+  isDeveloper,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
   const alertComponent = () => {
@@ -97,6 +99,9 @@ const TariffTitleContainer = ({
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
               organizationName: t("Common:OrganizationName"),
+              license: isDeveloper
+                ? t("Common:DeveloperLicense")
+                : t("Common:EnterpriseLicense"),
             })}
           </Text>{" "}
           {!isLicenseDateExpired && (
@@ -112,7 +117,7 @@ const TariffTitleContainer = ({
 };
 
 export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
-  const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
+  const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
     currentTariffStatusStore;
   const { isTrial } = currentQuotaStore;
 
@@ -121,5 +126,6 @@ export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
     trialDaysLeft,
     paymentDate,
     isLicenseDateExpired,
+    isDeveloper,
   };
 })(observer(TariffTitleContainer));

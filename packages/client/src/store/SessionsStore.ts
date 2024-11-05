@@ -113,13 +113,10 @@ class SessionsStore {
       SocketHelper.emit("getSessions", {
         id: userId,
       });
-      SocketHelper.on(
-        "user-sessions",
-        (data: { id: string; sessions: TSession[] }) => {
-          this.setUserSessions(data.sessions);
-          resolve();
-        },
-      );
+      SocketHelper.on("user-sessions", (data: TSession[]) => {
+        this.setUserSessions(data);
+        resolve();
+      });
     });
   };
 
@@ -175,8 +172,7 @@ class SessionsStore {
     // SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
   };
 
-  handleUserEnterPortal = ({ u: newPortalSession }: { u: TPortalSession }) => {
-    // Todo: Fix type after changing back
+  handleUserEnterPortal = (newPortalSession: TPortalSession) => {
     const currentSession = this.portalSessionsMap.get(newPortalSession.userId);
 
     if (!currentSession) {

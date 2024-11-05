@@ -174,11 +174,18 @@ const LoginForm = ({
           window.close();
         }
 
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
+          sessionStorage.removeItem("referenceUrl");
+        }
 
         if (redirectPath) {
-          sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
         } else {
           window.location.replace("/");
@@ -305,16 +312,20 @@ const LoginForm = ({
               ? portals[0].portalName
               : `${portals[0].portalName}.${baseDomain}`;
 
-          const redirectUrl = getCookie(
-            "x-redirect-authorization-uri",
-          )?.replace(window.location.origin, name);
+          let redirectUrl = getCookie("x-redirect-authorization-uri");
+          let portalLink = portals[0].portalLink;
+
+          const isLocalhost = name === "http://localhost";
+
+          if (!isLocalhost && redirectUrl)
+            redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+          if (isLocalhost)
+            portalLink = portalLink.replace(name, window.location.origin);
 
           // deleteCookie("x-redirect-authorization-uri");
 
-          window.open(
-            `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
-            "_self",
-          );
+          window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
 
           return;
         }
@@ -337,8 +348,8 @@ const LoginForm = ({
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
-            (error as { response: { data: { error: { message: string } } } })
-              ?.response?.data?.error?.message ||
+            (error as { response: { data: { message: string } } })?.response
+              ?.data?.message ||
             (error as { statusText: string })?.statusText ||
             (error as { message: string })?.message ||
             "";
@@ -390,10 +401,19 @@ const LoginForm = ({
         }
 
         const isConfirm = typeof res === "string" && res.includes("confirm");
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
-        if (redirectPath && !isConfirm) {
+
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
           sessionStorage.removeItem("referenceUrl");
+        }
+
+        if (redirectPath && !isConfirm) {
           window.location.href = redirectPath;
           return;
         }

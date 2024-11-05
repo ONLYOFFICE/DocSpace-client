@@ -220,10 +220,15 @@ class ContextOptionsStore {
       this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
       this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
 
-    if (!item.startFilling && item.isPDFForm && !isFormRoom)
+    if (
+      !item.startFilling &&
+      item.isPDFForm &&
+      !isFormRoom &&
+      !this.publicRoomStore.isPublicRoom
+    )
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
-    return this.gotoDocEditor(false, item);
+    return this.gotoDocEditor(false, item, null, false, !isFormRoom);
   };
 
   onClickReconnectStorage = async (item, t) => {

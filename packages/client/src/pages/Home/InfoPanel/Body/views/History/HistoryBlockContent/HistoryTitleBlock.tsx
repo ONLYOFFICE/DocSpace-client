@@ -42,8 +42,9 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
   const hasRelatedItems = feed.related.length > 0;
 
   const isDisplayFolderInfo =
-    (targetType === "file" || targetType === "folder") &&
-    actionType !== "delete";
+    ((targetType === "file" || targetType === "folder") &&
+      actionType !== "delete") ||
+    actionType === "reorderIndex";
 
   return (
     <div
@@ -80,7 +81,9 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
             {`(${feed.related.length + 1}).`}
           </Text>
         )}
-        {isDisplayFolderInfo && <HistoryMainTextFolderInfo feed={feed} />}
+        {isDisplayFolderInfo && (
+          <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
+        )}
         {feed.related.length === 0 &&
           targetType === "group" &&
           actionType !== "update" && (

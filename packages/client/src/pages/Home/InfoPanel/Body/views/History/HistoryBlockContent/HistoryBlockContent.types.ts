@@ -52,6 +52,8 @@ interface UserData {
   fromParentType: number;
   fromParentTitle: string;
   title?: string;
+  oldIndex?: number;
+  newIndex?: number;
 }
 
 interface RelatedAction {

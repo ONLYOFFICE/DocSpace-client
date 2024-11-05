@@ -300,16 +300,26 @@ const StyledHistoryBlockFile = styled.div`
 
   .index {
     font-weight: 600;
-    font-size: 14px;
-    margin-left: -4px;
+    font-size: 12px;
+    line-height: 16px;
   }
 
-  .new-index {
-    margin-right: -4px;
-  }
+  .change-index {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 
-  .old-index {
-    ${strikethroughStyles}
+    .arrow-index {
+      transform: rotate(-90deg);
+
+      path {
+        fill: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+      }
+    }
+
+    .old-index {
+      ${strikethroughStyles}
+    }
   }
 `;
 

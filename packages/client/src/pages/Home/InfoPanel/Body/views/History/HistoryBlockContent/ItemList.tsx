@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-
+import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
@@ -156,6 +156,17 @@ const HistoryItemList = ({
               isRoom={false}
               key={`${feed.action.id}_${item.id}`}
             >
+              {actionType === "changeIndex" ? (
+                <div className="change-index">
+                  <div className="index old-index"> {item.oldIndex}</div>
+
+                  <SortDesc className="arrow-index" />
+                  <div className="index"> {item.newIndex} </div>
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div
                 className="item-wrapper"
                 onClick={() => handleOpenFile(item)}
@@ -164,14 +175,7 @@ const HistoryItemList = ({
                   className="icon"
                   src={getInfoPanelItemIcon!(item, 24)}
                 />
-                {actionType === "changeIndex" ? (
-                  <>
-                    <div className="index old-index"> {item.oldIndex}</div>
-                    <div className="index new-index"> {item.newIndex} </div>
-                  </>
-                ) : (
-                  <></>
-                )}
+
                 <div className="item-title">
                   {item.title ? (
                     <>

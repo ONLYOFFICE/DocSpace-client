@@ -29,14 +29,18 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
 
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
+
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 interface Props {
   isMobileView: boolean;
+  deepLinkType: DeepLinkType;
 }
 
 const StyledWrapper = styled.div`
@@ -46,6 +50,7 @@ const StyledWrapper = styled.div`
   gap: 8px;
 
   .radio-button-group {
+    width: fit-content;
     margin-top: 8px;
   }
 
@@ -55,14 +60,26 @@ const StyledWrapper = styled.div`
 `;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
-  const { isMobileView } = props;
+  const { isMobileView, deepLinkType } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const getSettings = () => {
+    const currentSettings = getFromSessionStorage("currentConfigureDeepLink");
+    saveToSessionStorage("defaultConfigureDeepLink", deepLinkType);
+
+    if (currentSettings) {
+      setType(currentSettings);
+    } else {
+      setType(deepLinkType);
+    }
+  };
 
   const checkWidth = () => {
     if (!isMobileView && location.pathname.includes("configure-deep-link")) {
@@ -71,16 +88,38 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   };
 
   useEffect(() => {
+    const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
+
+    if (isEqual(defaultSettings, type)) {
+      setShowReminder(false);
+    } else {
+      setShowReminder(true);
+    }
+  }, [type]);
+
+  useEffect(() => {
+    getSettings();
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
-  const onSelect = () => {};
+  const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type !== e.target.value) {
+      saveToSessionStorage("currentConfigureDeepLink", e.target.value);
+      setType(e.target.value);
+    }
+  };
 
   const onSave = () => {};
 
-  const onCancel = () => {};
+  const onCancel = () => {
+    const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
+    const defaultType = defaultSettings || DeepLinkType.Choice;
+    setType(defaultType);
+    saveToSessionStorage("currentConfigureDeepLink", defaultType);
+    setShowReminder(false);
+  };
 
   return (
     <StyledWrapper>
@@ -113,7 +152,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
             value: "app",
           },
         ]}
-        selected="choice"
+        selected={type}
         onClick={onSelect}
       />
       <SaveCancelButtons
@@ -132,9 +171,11 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   );
 };
 
-export const ConfigureDeepLink = inject(({ settingsStore }) => {
+export const ConfigureDeepLink = inject<TStore>(({ settingsStore }) => {
   const isMobileView = settingsStore.currentDeviceType === DeviceType.mobile;
+  const { deepLinkType } = settingsStore;
   return {
     isMobileView,
+    deepLinkType,
   };
 })(observer(ConfigureDeepLinkComponent));

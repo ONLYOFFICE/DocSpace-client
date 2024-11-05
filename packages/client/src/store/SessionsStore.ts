@@ -366,14 +366,14 @@ class SessionsStore {
   getSessionsBySelected = (selected: TSessionsSelected) => {
     switch (selected) {
       case "all":
-        return [...this.lastPortalSessions];
+        return Array.from(this.portalSessionsMap.values());
 
       case "none":
         return [];
 
       case "online":
       case "offline":
-        return this.lastPortalSessions.filter(
+        return Array.from(this.portalSessionsMap.values()).filter(
           (s) => s.session.status === selected,
         );
 
@@ -389,14 +389,14 @@ class SessionsStore {
   get isHeaderChecked() {
     return (
       this.isHeaderVisible &&
-      this.selection.length === this.lastPortalSessions.length
+      this.selection.length === this.portalSessionsMap.size
     );
   }
 
   get isHeaderIndeterminate() {
     return (
       this.isHeaderVisible &&
-      this.selection.length !== this.lastPortalSessions.length
+      this.selection.length !== this.portalSessionsMap.size
     );
   }
 

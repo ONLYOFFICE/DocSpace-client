@@ -945,5 +945,6 @@ export default inject(
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
+    "Notifications",
   ])(observer(SectionHeaderContent)),
 );

@@ -72,6 +72,7 @@ import {
   TenantStatus,
   UrlActionType,
   RecaptchaType,
+  DeepLinkType,
 } from "../enums";
 import {
   LANGUAGE,
@@ -324,6 +325,8 @@ class SettingsStore {
   recaptchaType: RecaptchaType | null = null;
 
   displayAbout: boolean = false;
+
+  deepLinkType: DeepLinkType = DeepLinkType.Choice;
 
   constructor() {
     makeAutoObservable(this);

@@ -652,3 +652,9 @@ export enum ValidationStatus {
   InvalidPassword = 4,
   ExternalAccessDenied = 5,
 }
+
+export enum DeepLinkType {
+  Choice = "choice",
+  Web = "web",
+  App = "app",
+}

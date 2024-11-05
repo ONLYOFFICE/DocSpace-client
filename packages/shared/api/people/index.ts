@@ -378,7 +378,21 @@ export async function updateUserStatus(
     data: { userIds },
   })) as TUser[];
 
-  return users;
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
+  });
+
+  return res;
 }
 
 export async function updateUserType(type: EmployeeType, userIds: string[]) {
@@ -387,6 +401,20 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
     url: `/people/type/${type}`,
     data: { userIds },
   })) as TUser[];
+
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
+  });
 
   return users;
 }

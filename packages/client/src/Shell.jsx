@@ -79,7 +79,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     roomsMode,
     setSnackbarExist,
     userTheme,
-    // user,
+    //user,
     userId,
     userLoginEventId,
     currentDeviceType,
@@ -173,6 +173,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
         sessionStorage.setItem("referenceUrl", window.location.href);
+        sessionStorage.setItem("loggedOutUserId", userId);
 
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),

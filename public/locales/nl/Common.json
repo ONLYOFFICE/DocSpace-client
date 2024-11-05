@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Kamer voor het invullen van formulieren",
   "FormRoom": "Formulier kamer",
   "Free": "Gratis",
-  "FreeAccessToLicensedVersion": "Gratis toegang tot Enterprise oplossing",
+  "FreeAccessToLicensedVersion": "Gratis toegang tot {{license}} oplossing",
   "FromDevice": "Van apparaat",
   "FromPortal": "Van {{productName}}",
   "FullAccess": "Volledige toegang",

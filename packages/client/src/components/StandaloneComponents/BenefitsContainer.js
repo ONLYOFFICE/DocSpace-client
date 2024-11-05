@@ -38,11 +38,15 @@ import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url"
 
 import { StyledBenefitsBody } from "./StyledComponent";
 
-const BenefitsContainer = ({ isTrial, isEnterprise }) => {
+const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const title = isEnterprise
-    ? t("ActivateToProBannerHeaderTrial")
+    ? t("ActivateToProBannerHeaderTrial", {
+        license: isDeveloper
+          ? t("Common:DeveloperLicense")
+          : t("Common:EnterpriseLicense"),
+      })
     : t("UpgradeToProBannerHeader");
 
   const features = () => {
@@ -111,13 +115,14 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
 export default inject(
   ({ currentTariffStatusStore, currentQuotaStore, paymentQuotasStore }) => {
     const { portalPaymentQuotasFeatures } = paymentQuotasStore;
-    const { isEnterprise } = currentTariffStatusStore;
+    const { isEnterprise, isDeveloper } = currentTariffStatusStore;
 
     const { isTrial } = currentQuotaStore;
     return {
       features: portalPaymentQuotasFeatures,
       isTrial,
       isEnterprise,
+      isDeveloper,
     };
   },
 )(observer(BenefitsContainer));

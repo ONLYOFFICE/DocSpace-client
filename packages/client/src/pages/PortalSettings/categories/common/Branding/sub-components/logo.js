@@ -32,6 +32,12 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { isMobile } from "@docspace/shared/utils";
 
+import DocumentSample from "PUBLIC_DIR/images/logo/document_sample.svg?url";
+import PdfFormSample from "PUBLIC_DIR/images/logo/pdf_form_sample.svg?url";
+import SpreadsheetSample from "PUBLIC_DIR/images/logo/spreadsheet_sample.svg?url";
+import PresentationSample from "PUBLIC_DIR/images/logo/presentation_sample.svg?url";
+import EditorSample from "PUBLIC_DIR/images/logo/embedded_sample.svg?url";
+
 const Logo = (props) => {
   const {
     title,
@@ -43,6 +49,7 @@ const Logo = (props) => {
     linkId,
     imageClass,
     isEditor,
+    isEditorHeader,
   } = props;
 
   const currentLogo = getLogoFromPath(src);
@@ -65,22 +72,45 @@ const Logo = (props) => {
         )}
         {isEditor ? (
           <div className="logos-editor-wrapper" onClick={onLogoClick}>
+            <div className="logos-editor-container">
+              <img
+                className="logo-docs-editor background-blue"
+                src={currentLogo}
+              />
+              <img src={DocumentSample} />
+            </div>
+            <div className="logos-editor-container">
+              <img
+                className="logo-docs-editor background-orange"
+                src={currentLogo}
+              />
+              <img src={PresentationSample} />
+            </div>
+
+            <div className="logos-editor-container">
+              <img
+                className="logo-docs-editor background-green"
+                src={currentLogo}
+              />
+              <img src={SpreadsheetSample} />
+            </div>
+
+            <div className="logos-editor-container">
+              <img
+                className="logo-docs-editor background-red"
+                src={currentLogo}
+              />
+              <img src={PdfFormSample} />
+            </div>
+          </div>
+        ) : isEditorHeader ? (
+          <div className="editor-header-container">
             <img
-              className="logo-docs-editor background-blue"
+              className={`${imageClass} editor-logo-header`}
               src={currentLogo}
+              onClick={onLogoClick}
             />
-            <img
-              className="logo-docs-editor background-red"
-              src={currentLogo}
-            />
-            <img
-              className="logo-docs-editor background-orange"
-              src={currentLogo}
-            />
-            <img
-              className="logo-docs-editor background-green"
-              src={currentLogo}
-            />
+            <img src={EditorSample} />
           </div>
         ) : (
           <img className={imageClass} src={currentLogo} onClick={onLogoClick} />

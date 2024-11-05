@@ -305,16 +305,20 @@ const LoginForm = ({
               ? portals[0].portalName
               : `${portals[0].portalName}.${baseDomain}`;
 
-          const redirectUrl = getCookie(
-            "x-redirect-authorization-uri",
-          )?.replace(window.location.origin, name);
+          let redirectUrl = getCookie("x-redirect-authorization-uri");
+          let portalLink = portals[0].portalLink;
+
+          const isLocalhost = name === "http://localhost";
+
+          if (!isLocalhost && redirectUrl)
+            redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+          if (isLocalhost)
+            portalLink = portalLink.replace(name, window.location.origin);
 
           // deleteCookie("x-redirect-authorization-uri");
 
-          window.open(
-            `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
-            "_self",
-          );
+          window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
 
           return;
         }

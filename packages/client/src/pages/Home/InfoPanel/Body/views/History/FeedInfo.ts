@@ -8,8 +8,16 @@ export enum FeedAction {
   Move = "move",
   Copy = "copy",
   Revoke = "revoke",
+  Change = "changeIndex",
+  Reorder = "reorderIndex",
   Submitted = "submitted",
   StartedFilling = "startedFilling",
+  Locked = "locked",
+  Unlocked = "unlocked",
+  Archived = "archived",
+  Unarchived = "unarchived",
+  Export = "export",
+  Invite = "invite",
 }
 
 enum FeedTarget {
@@ -78,6 +86,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Delete}`,
   },
   {
+    key: "FileIndexChanged",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Change}`,
+  },
+  {
     key: "FormSubmit",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Submitted}`,
@@ -87,7 +100,16 @@ export const feedInfo = [
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.StartedFilling}`,
   },
-  //
+  {
+    key: "FileLocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Locked}`,
+  },
+  {
+    key: "FileUnlocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Unlocked}`,
+  },
   // FOLDER
   {
     key: "FolderCreated",
@@ -114,6 +136,16 @@ export const feedInfo = [
     targetType: `${FeedTarget.Folder}`,
     actionType: `${FeedAction.Delete}`,
   },
+  {
+    key: "FolderIndexChanged",
+    targetType: `${FeedTarget.Folder}`,
+    actionType: `${FeedAction.Change}`,
+  },
+  {
+    key: "FolderIndexReordered",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Reorder}`,
+  },
   //
   // ROOM
   {
@@ -130,6 +162,61 @@ export const feedInfo = [
     key: "RoomCopied",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Copy}`,
+  },
+  {
+    key: "RoomWatermarkSet",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomWatermarkDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomIndexingEnabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomIndexingDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomLifeTimeSet",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomLifeTimeDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomDenyDownloadEnabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomDenyDownloadDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomArchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Archived}`,
+  },
+  {
+    key: "RoomUnarchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Unarchived}`,
+  },
+  {
+    key: "RoomIndexExportSaved",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Export}`,
   },
   // ROOM TAGS
   {
@@ -190,6 +277,11 @@ export const feedInfo = [
     key: "RoomRemoveUser",
     targetType: `${FeedTarget.User}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomInviteResend",
+    targetType: `${FeedTarget.User}`,
+    actionType: `${FeedAction.Invite}`,
   },
   //
   // GROUP

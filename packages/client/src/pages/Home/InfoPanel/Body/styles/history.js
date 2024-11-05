@@ -28,6 +28,11 @@ import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
 
+const strikethroughStyles = css`
+  color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+  text-decoration: line-through;
+`;
+
 const StyledHistoryList = styled.div`
   display: flex;
   flex-direction: column;
@@ -271,14 +276,12 @@ const StyledHistoryBlockFile = styled.div`
       color: ${(props) => props.theme.infoPanel.history.fileExstColor};
     }
 
-    &.old-item-title {
+    &.old-item-value {
       .name {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
       .exst {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
     }
   }
@@ -292,6 +295,30 @@ const StyledHistoryBlockFile = styled.div`
   &:hover {
     .location-btn {
       opacity: 1;
+    }
+  }
+
+  .index {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .change-index {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .arrow-index {
+      transform: rotate(-90deg);
+
+      path {
+        fill: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+      }
+    }
+
+    .old-index {
+      ${strikethroughStyles}
     }
   }
 `;

@@ -33,7 +33,7 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import SessionsLoader from "@docspace/shared/skeletons/sessions";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TTranslation } from "@docspace/shared/types";
+import { TTranslation, TViewAs } from "@docspace/shared/types";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { DisableUserDialog } from "SRC_DIR/components/dialogs/DisableUserDialog";
@@ -96,37 +96,39 @@ const DownLoadWrapper = styled.div`
   }
 `;
 
-const Sessions = ({
-  clearSelection,
-  platformData,
-  selection,
-  bufferSelection,
-  fetchData,
-  isLoading,
-  viewAs,
-  setViewAs,
-  currentDeviceType,
-  disableDialogVisible,
-  logoutDialogVisible,
-  logoutAllDialogVisible,
-  setDisableDialogVisible,
-  setLogoutDialogVisible,
-  setLogoutAllDialogVisible,
-  onClickLogoutAllUsers,
-  onClickLogoutAllSessions,
-  onClickLogoutAllExceptThis,
-  onClickRemoveSession,
-  updateUserStatus,
-  getLoginHistoryReport,
-  isLoadingDownloadReport,
-  setUserSessionPanelVisible,
-  isSeveralSelection,
-  isSessionsLoaded,
-  portalSessionsIds,
-  fetchPortalSessions,
-  subscribeToPortalSessions,
-  unsubscribeToPortalSessions,
-}: SessionsProps) => {
+const Sessions = (props: SessionsProps) => {
+  const { storeProps } = props;
+  const {
+    clearSelection,
+    platformData,
+    selection,
+    bufferSelection,
+    fetchData,
+    isLoading,
+    viewAs,
+    setViewAs,
+    currentDeviceType,
+    disableDialogVisible,
+    logoutDialogVisible,
+    logoutAllDialogVisible,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    onClickLogoutAllUsers,
+    onClickLogoutAllSessions,
+    onClickLogoutAllExceptThis,
+    onClickRemoveSession,
+    updateUserStatus,
+    getLoginHistoryReport,
+    isLoadingDownloadReport,
+    setUserSessionPanelVisible,
+    isSeveralSelection,
+    portalSessionsIds,
+    fetchPortalSessions,
+    subscribeToPortalSessions,
+    unsubscribeToPortalSessions,
+  } = storeProps!;
+
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
     "Profile",
@@ -157,13 +159,14 @@ const Sessions = ({
     currentDeviceType,
   });
 
-  const selectionUserId = selection.map((user) => user.id);
+  const selectionUserId = selection.map((s) => s.userId);
 
   const userIds = bufferSelection
     ? [bufferSelection.userId]
     : [...selectionUserId];
 
-  if (!portalSessionsIds.length) return <SessionsLoader viewAs={viewAs} />;
+  if (!portalSessionsIds.length)
+    return <SessionsLoader viewAs={viewAs as TViewAs} />;
 
   return (
     <MainContainer>
@@ -246,7 +249,6 @@ export const SecuritySessions = inject<TStore>(
       onClickLogoutAllSessions,
       onClickLogoutAllExceptThis,
       onClickRemoveSession,
-      isSessionsLoaded,
       portalSessionsIds,
       fetchPortalSessions,
       subscribeToPortalSessions,
@@ -267,35 +269,36 @@ export const SecuritySessions = inject<TStore>(
     } = setup;
 
     return {
-      clearSelection,
-      platformData,
-      selection,
-      bufferSelection,
-      fetchData,
-      viewAs,
-      setViewAs,
-      currentDeviceType,
-      disableDialogVisible,
-      logoutDialogVisible,
-      logoutAllDialogVisible,
-      setDisableDialogVisible,
-      setLogoutDialogVisible,
-      setLogoutAllDialogVisible,
-      isLoading,
-      onClickLogoutAllUsers,
-      onClickLogoutAllSessions,
-      onClickLogoutAllExceptThis,
-      onClickRemoveSession,
-      updateUserStatus,
-      getLoginHistoryReport,
-      isLoadingDownloadReport,
-      setUserSessionPanelVisible,
-      isSeveralSelection,
-      isSessionsLoaded,
-      portalSessionsIds,
-      fetchPortalSessions,
-      subscribeToPortalSessions,
-      unsubscribeToPortalSessions,
+      storeProps: {
+        clearSelection,
+        platformData,
+        selection,
+        bufferSelection,
+        fetchData,
+        viewAs,
+        setViewAs,
+        currentDeviceType,
+        disableDialogVisible,
+        logoutDialogVisible,
+        logoutAllDialogVisible,
+        setDisableDialogVisible,
+        setLogoutDialogVisible,
+        setLogoutAllDialogVisible,
+        isLoading,
+        onClickLogoutAllUsers,
+        onClickLogoutAllSessions,
+        onClickLogoutAllExceptThis,
+        onClickRemoveSession,
+        updateUserStatus,
+        getLoginHistoryReport,
+        isLoadingDownloadReport,
+        setUserSessionPanelVisible,
+        isSeveralSelection,
+        portalSessionsIds,
+        fetchPortalSessions,
+        subscribeToPortalSessions,
+        unsubscribeToPortalSessions,
+      },
     };
   },
 )(observer(Sessions));

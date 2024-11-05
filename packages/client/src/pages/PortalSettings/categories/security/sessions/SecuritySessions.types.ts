@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TViewAs, TTranslation, Nullable } from "@docspace/shared/types";
-import SocketIOHelper from "@docspace/shared/utils/socket";
-import { DeviceType } from "@docspace/shared/enums";
-import SessionsStore from "SRC_DIR/store/SessionsStore";
 import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
+import SessionsStore from "SRC_DIR/store/SessionsStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 export type TUserStatus = "online" | "offline";
 
@@ -77,35 +79,43 @@ export interface IDatafromSocket {
 }
 
 export interface SessionsProps {
-  allSessions: IAllSessions[];
-  displayName: string;
-  clearSelection: () => void;
-  platformData: ISessions;
-  selection: IAllSessions[];
-  bufferSelection?: IAllSessions;
-  fetchData: () => void;
-  isLoading: boolean;
-  viewAs: TViewAs;
-  setViewAs: (view: string) => void;
-  currentDeviceType: DeviceType;
-  disableDialogVisible: boolean;
-  logoutDialogVisible: boolean;
-  logoutAllDialogVisible: boolean;
-  setDisableDialogVisible: (visible: boolean) => void;
-  setLogoutDialogVisible: (visible: boolean) => void;
-  setLogoutAllDialogVisible: (visible: boolean) => void;
-  onClickLogoutAllUsers: () => void;
-  onClickLogoutAllSessions: () => void;
-  onClickLogoutAllExceptThis: () => void;
-  onClickRemoveSession: () => void;
-  updateUserStatus: () => void;
-  getLoginHistoryReport: () => void;
-  isLoadingDownloadReport: boolean;
-  setUserSessionPanelVisible: (visible: boolean) => void;
-  isSeveralSelection: boolean;
-  isSessionsLoaded: boolean;
-  socketHelper: SocketIOHelper;
+  storeProps?: SessionsStoreProps;
 }
+
+type SessionsStoreProps = Pick<
+  SessionsStore,
+  | "clearSelection"
+  | "platformData"
+  | "fetchData"
+  | "selection"
+  | "bufferSelection"
+  | "isLoading"
+  | "isSeveralSelection"
+  | "onClickLogoutAllUsers"
+  | "onClickLogoutAllSessions"
+  | "onClickLogoutAllExceptThis"
+  | "onClickRemoveSession"
+  | "portalSessionsIds"
+  | "fetchPortalSessions"
+  | "subscribeToPortalSessions"
+  | "unsubscribeToPortalSessions"
+> &
+  Pick<DialogsStore, "setUserSessionPanelVisible"> &
+  Pick<SettingsStore, "currentDeviceType"> &
+  Pick<UsersStore, "updateUserStatus"> &
+  Pick<
+    SettingsSetupStore,
+    | "viewAs"
+    | "setViewAs"
+    | "disableDialogVisible"
+    | "logoutDialogVisible"
+    | "logoutAllDialogVisible"
+    | "setDisableDialogVisible"
+    | "setLogoutDialogVisible"
+    | "setLogoutAllDialogVisible"
+    | "getLoginHistoryReport"
+    | "isLoadingDownloadReport"
+  >;
 
 export interface SessionsTableProps {
   t: TTranslation;

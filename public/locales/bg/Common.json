@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Стая за попълване на формуляри",
   "FormRoom": "Стая за формуляри",
   "Free": "Безплатно",
-  "FreeAccessToLicensedVersion": "Безплатен достъп до решение Enterprise",
+  "FreeAccessToLicensedVersion": "Безплатен достъп до решение {{license}}",
   "FromDevice": "От устройство",
   "FromPortal": "От {{productName}}",
   "FullAccess": "Пълен достъп",

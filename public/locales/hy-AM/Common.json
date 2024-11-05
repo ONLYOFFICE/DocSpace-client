@@ -203,7 +203,7 @@
   "FormFilingRoomTitle": "Ձևաթղթերի լրացման սենյակ",
   "FormRoom": "Ձևի սենյակ",
   "Free": "Անվճար",
-  "FreeAccessToLicensedVersion": "Անվճար մուտք դեպի Enterprise տարբերակ",
+  "FreeAccessToLicensedVersion": "Անվճար մուտք դեպի {{license}} տարբերակ",
   "FromDevice": "Սարքից",
   "FromPortal": "{{productName}}-ից",
   "FullAccess": "Լրիվ մատչում",

@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Кімната заповнення форм",
   "FormRoom": "Кімната форм",
   "Free": "Безкоштовно",
-  "FreeAccessToLicensedVersion": "Безплатний доступ до рішення Enterprise",
+  "FreeAccessToLicensedVersion": "Безплатний доступ до рішення {{license}}",
   "FromDevice": "З пристрою",
   "FromPortal": "З {{productName}}",
   "FullAccess": "Повний доступ",

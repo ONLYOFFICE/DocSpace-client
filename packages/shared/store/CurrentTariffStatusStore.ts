@@ -62,6 +62,10 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.enterprise;
   }
 
+  get isDeveloper() {
+    return this.isEnterprise && this.portalTariffStatus?.developer;
+  }
+
   get isCommunity() {
     return this.portalTariffStatus?.openSource;
   }

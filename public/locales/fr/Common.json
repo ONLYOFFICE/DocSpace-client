@@ -204,7 +204,7 @@
   "FormFilingRoomTitle": "Salle de remplissage de formulaires",
   "FormRoom": "Salle de formulaires",
   "Free": "Gratuit",
-  "FreeAccessToLicensedVersion": "Accès gratuit à la solution Entreprise",
+  "FreeAccessToLicensedVersion": "Accès gratuit à la solution {{license}}",
   "FromDevice": "De l'appareil",
   "FromPortal": "De {{productName}}",
   "FullAccess": "Accès complet",

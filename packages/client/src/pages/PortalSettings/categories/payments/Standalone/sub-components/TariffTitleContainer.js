@@ -32,7 +32,6 @@ import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
 
 import { getTwoDotsReplacing } from "../../utils";
-import { license } from "@docspace/shared/__mocks__/e2e/handlers/settings/license";
 
 const TariffTitleContainer = ({
   isLicenseDateExpired,

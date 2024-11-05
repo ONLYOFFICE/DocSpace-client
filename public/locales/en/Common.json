@@ -222,7 +222,7 @@
   "FormFilingRoomTitle": "Form Filling Room",
   "FormRoom": "Form room",
   "Free": "Free",
-  "FreeAccessToLicensedVersion": "Free access to Enterprise solution",
+  "FreeAccessToLicensedVersion": "Free access to {{license}} solution",
   "FromDevice": "From device",
   "FromPortal": "From {{productName}}",
   "FullAccess": "Full access",

@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Miestnosť na vyplnenie formulárov",
   "FormRoom": "Miestnosť s formulármi",
   "Free": "Zadarmo",
-  "FreeAccessToLicensedVersion": "Bezplatný prístup k riešeniu Enterprise",
+  "FreeAccessToLicensedVersion": "Bezplatný prístup k riešeniu {{license}} ",
   "FromDevice": "Zo zariadenia",
   "FromPortal": "Z {{productName}}",
   "FullAccess": "Úplný prístup",

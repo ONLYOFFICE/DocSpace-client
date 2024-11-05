@@ -54,6 +54,7 @@ const ContactContainer = (props) => {
                 i18nKey="UpgradeToProBannerInformationAboutShort"
                 ns="PaymentsEnterprise"
                 t={t}
+                values={{ license: t("Common:EnterpriseLicense") }}
               >
                 Learn more about Enterprise Edition
                 <Link

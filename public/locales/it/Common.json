@@ -204,7 +204,7 @@
   "FormFilingRoomTitle": "Stanza per la compilazione moduli",
   "FormRoom": "Stanza dei moduli",
   "Free": "Gratuito",
-  "FreeAccessToLicensedVersion": "Accesso gratuito alla soluzione Enterprise",
+  "FreeAccessToLicensedVersion": "Accesso gratuito alla soluzione {{license}}",
   "FromDevice": "Dal dispositivo",
   "FromPortal": "Da {{productName}}",
   "FullAccess": "Accesso completo",

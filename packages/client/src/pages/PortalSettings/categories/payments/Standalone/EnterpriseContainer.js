@@ -36,7 +36,6 @@ import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
-import { license } from "@docspace/shared/__mocks__/e2e/handlers/settings/license";
 
 const EnterpriseContainer = (props) => {
   const { salesEmail, t, isLicenseDateExpired, isDeveloper } = props;

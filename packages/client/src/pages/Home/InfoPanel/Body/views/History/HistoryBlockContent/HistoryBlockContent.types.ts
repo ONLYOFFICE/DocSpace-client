@@ -39,7 +39,7 @@ interface UserData {
   avatarOriginal: string;
   displayName: string;
   hasAvatar: boolean;
-  id: string;
+  id: string | number;
   isAnonim: boolean;
   profileUrl: string;
   tags: [];

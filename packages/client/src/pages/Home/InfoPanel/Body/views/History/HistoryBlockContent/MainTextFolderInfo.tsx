@@ -57,12 +57,12 @@ const HistoryMainTextFolderInfo = ({
 
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
-  const isReorderFolder = actionType === FeedAction.Reorder && +id !== parentId;
+  const isReorderFolder = actionType === FeedAction.Reorder && id !== parentId;
 
   if (
     (parentId === selectedFolderId && !isReorderFolder) ||
     toFolderId === selectedFolderId ||
-    (selectedFolderId === +id && isReorderFolder)
+    (selectedFolderId === id && isReorderFolder)
   )
     return null;
 

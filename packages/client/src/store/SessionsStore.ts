@@ -53,8 +53,6 @@ class SessionsStore {
 
   offlineSessionsIds: string[] = [];
 
-  lastPortalSessions: TPortalSession[] = [];
-
   userSessions: TSession[] = [];
 
   total: number = 0;
@@ -113,6 +111,7 @@ class SessionsStore {
       SocketHelper.emit("getSessions", {
         id: userId,
       });
+      // Todo: add unsubscribing
       SocketHelper.on("user-sessions", (data: TSession[]) => {
         this.setUserSessions(data);
         resolve();
@@ -120,22 +119,30 @@ class SessionsStore {
     });
   };
 
+  addPortalSession = (
+    portalSession: TPortalSession,
+    addToTop: boolean = false,
+  ) => {
+    if (this.portalSessionsMap.has(portalSession.userId)) {
+      return;
+    }
+
+    this.portalSessionsMap.set(portalSession.userId, portalSession);
+
+    const sessionIdsArray =
+      portalSession.session.status === "online"
+        ? this.onlineSessionsIds
+        : this.offlineSessionsIds;
+
+    if (addToTop) {
+      sessionIdsArray.unshift(portalSession.userId);
+    } else {
+      sessionIdsArray.push(portalSession.userId);
+    }
+  };
+
   addPortalSessions = (portalSessions: TPortalSession[]) => {
-    portalSessions.forEach((ps) => {
-      const alreadyExists = this.portalSessionsMap.has(ps.userId);
-
-      if (alreadyExists) {
-        return;
-      }
-
-      this.portalSessionsMap.set(ps.userId, ps);
-
-      if (ps.session.status === "online") {
-        this.onlineSessionsIds.push(ps.userId);
-      } else {
-        this.offlineSessionsIds.push(ps.userId);
-      }
-    });
+    portalSessions.forEach((ps) => this.addPortalSession(ps));
   };
 
   moveToOnlineSessions = (portalSessionId: string) => {
@@ -181,7 +188,7 @@ class SessionsStore {
     const currentSession = this.portalSessionsMap.get(newPortalSession.userId);
 
     if (!currentSession) {
-      this.addPortalSessions([newPortalSession]);
+      this.addPortalSession(newPortalSession, true);
       return;
     }
 

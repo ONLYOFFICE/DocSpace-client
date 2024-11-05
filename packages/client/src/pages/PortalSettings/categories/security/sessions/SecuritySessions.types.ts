@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TViewAs, TTranslation, Nullable } from "@docspace/shared/types";
+import { TTranslation, TViewAs } from "@docspace/shared/types";
 import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SessionsStore from "SRC_DIR/store/SessionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
@@ -133,7 +133,7 @@ export interface SessionsTableViewProps {
 }
 
 export type SessionsTableViewStoreProps = {
-  userId: Nullable<string>;
+  userId?: string;
 } & Pick<
   SessionsStore,
   "portalSessionsIds" | "portalSessionsMap" | "selection" | "bufferSelection"

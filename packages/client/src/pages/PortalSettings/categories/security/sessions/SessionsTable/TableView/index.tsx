@@ -191,7 +191,7 @@ const TableView = (props: SessionsTableViewProps) => {
         filesLength={portalSessionsIds.length}
         hasMoreFiles={false}
         itemCount={portalSessionsIds.length}
-        fetchMoreFiles={() => {}}
+        fetchMoreFiles={async () => {}}
       >
         {portalSessionsIds.map((sessionId) => {
           const session = portalSessionsMap.get(sessionId);
@@ -219,7 +219,7 @@ const TableView = (props: SessionsTableViewProps) => {
 };
 
 export default inject<TStore>(({ userStore, sessionsStore }) => {
-  const userId = userStore.user?.id ?? null;
+  const userId = userStore.user?.id;
 
   const { portalSessionsIds, portalSessionsMap, selection, bufferSelection } =
     sessionsStore;

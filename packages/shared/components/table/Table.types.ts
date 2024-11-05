@@ -113,7 +113,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll?: () => void;
   infoPanelVisible?: boolean;
-  isIndexEditingMode: boolean;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableRowProps {

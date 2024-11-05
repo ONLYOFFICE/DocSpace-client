@@ -337,8 +337,8 @@ const LoginForm = ({
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
-            (error as { response: { data: { error: { message: string } } } })
-              ?.response?.data?.error?.message ||
+            (error as { response: { data: { message: string } } })?.response
+              ?.data?.message ||
             (error as { statusText: string })?.statusText ||
             (error as { message: string })?.message ||
             "";

@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Link je kopiran",
   "ResetChange": "Resetuj promene",
   "SendInvitation": "Pošalji pozivnicu",
+  "UserMaxAvailableRoleWarning": "Gosti i Korisnici ne mogu biti postavljeni kao Menadžeri sobe. Samo administratori sobe i {{productName}} su pogodni za određenu ulogu.",
   "UsersAlreadyAdded": "Neki korisnici su već dodati"
 }

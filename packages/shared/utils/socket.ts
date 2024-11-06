@@ -65,6 +65,7 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  Logout = "logout",
 }
 
 /**

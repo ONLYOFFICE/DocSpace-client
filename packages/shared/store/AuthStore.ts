@@ -27,7 +27,10 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -37,10 +40,10 @@ import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
 import {
   frameCallEvent,
-  isAdmin,
-  isPublicRoom,
   insertDataLayer,
+  isAdmin,
   isPublicPreview,
+  isPublicRoom,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
@@ -427,6 +430,8 @@ class AuthStore {
 
   logout = async (reset = true) => {
     const ssoLogoutUrl = await api.user.logout();
+
+    SocketHelper.emit(SocketCommands.Logout);
 
     this.isLogout = true;
 

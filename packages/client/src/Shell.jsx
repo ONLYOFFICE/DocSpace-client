@@ -186,6 +186,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
+
+      SocketHelper.emit(SocketCommands.Logout);
     };
 
     SocketHelper.on(SocketEvents.LogoutSession, callback);

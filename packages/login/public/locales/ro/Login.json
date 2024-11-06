@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Codul v-a fost trimis",
+  "EnterCredentials": "Introduceți datele de autentificare pentru {{productName}} pentru confirmarea ștergerii",
   "ErrorInvalidText": "Veţi fi redirecționat în 10 secunde către <1>{{productName}}</1>",
   "ForgotPassword": "Ați uitat parola?",
   "LDAPUsernamePlaceholder": "Nume de utilizator al {{ldap_domain}}",

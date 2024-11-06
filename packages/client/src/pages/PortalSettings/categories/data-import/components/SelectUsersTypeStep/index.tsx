@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
@@ -80,12 +81,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     setSearchValue("");
   };
 
-  const filteredAccounts = dataPortion.filter(
-    (data) =>
-      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.displayName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
-  );
+  const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
 
   const onCancelMigration = () => {
     cancelMigration();

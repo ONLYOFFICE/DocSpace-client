@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "No authorized apps",
   "NoOAuthAppHeader": "No OAuth applications",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth applications are used to access the {{organizationName} {{productName}} API for authorization and further actions such as accessing files, etc.",
+  "OAuthAppDescription": "OAuth applications are used to access the {{organizationName}} {{productName}} API for authorization and further actions such as accessing files, etc.",
   "OAuthHeaderBlock": "OAuth urls",
   "PrivacyPolicy": "Privacy policy",
   "PrivacyPolicyURL": "Privacy policy URL",

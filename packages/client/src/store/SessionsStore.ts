@@ -180,8 +180,25 @@ class SessionsStore {
 
   subscribeToUserSessions = (id: string) => {
     SocketHelper.emit("subscribeToUser", { id });
-    // SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);
-    // SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
+    SocketHelper.on(
+      "enter-session-in-portal",
+      this.handleUserEnterSessionInPortal,
+    );
+    SocketHelper.on(
+      "leave-session-in-portal",
+      this.handleUserLeaveSessionInPortal,
+    );
+  };
+
+  unsubscribeToUserSessions = () => {
+    SocketHelper.off(
+      "enter-session-in-portal",
+      this.handleUserEnterSessionInPortal,
+    );
+    SocketHelper.off(
+      "leave-session-in-portal",
+      this.handleUserLeaveSessionInPortal,
+    );
   };
 
   handleUserEnterPortal = (newPortalSession: TPortalSession) => {
@@ -210,6 +227,56 @@ class SessionsStore {
     currentSession.session.date = new Date().toISOString();
 
     this.moveToOfflineSessions(userId);
+  };
+
+  handleUserEnterSessionInPortal = ({
+    userId,
+    session,
+  }: {
+    userId: string;
+    session: TSession;
+  }) => {
+    if (userId !== this.bufferSelection?.userId) return;
+
+    const foundSessionIndex = this.userSessions.findIndex(
+      (s) => s.id === session.id,
+    );
+
+    if (foundSessionIndex !== -1) {
+      this.userSessions.splice(foundSessionIndex, 1);
+    }
+
+    this.userSessions.unshift(session);
+  };
+
+  handleUserLeaveSessionInPortal = ({
+    userId,
+    sessionId,
+  }: {
+    userId: string;
+    sessionId: number;
+  }) => {
+    if (userId !== this.bufferSelection?.userId) return;
+
+    const foundSession = this.userSessions.find((s) => s.id === sessionId);
+
+    if (foundSession) {
+      foundSession.status = "offline";
+      foundSession.date = new Date().toISOString();
+      this.sortUserSessions();
+    }
+  };
+
+  sortUserSessions = () => {
+    this.userSessions.sort((a, b) => {
+      const isAOnline = a.status === "online";
+      const isBOnline = b.status === "online";
+
+      if (isAOnline && !isBOnline) return -1;
+      if (isBOnline && !isAOnline) return 1;
+
+      return -a.date.localeCompare(b.date);
+    });
   };
 
   setUserSessions = (userSessions: TSession[]) => {

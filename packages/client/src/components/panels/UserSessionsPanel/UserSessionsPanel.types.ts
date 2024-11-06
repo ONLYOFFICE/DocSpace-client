@@ -30,11 +30,24 @@ import {
   IConnections,
   ISessions,
 } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import SessionsStore from "SRC_DIR/store/SessionsStore";
 
 export interface UserSessionsPanelProps {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
+  storeProps?: UserSessionsPanelStoreProps;
 }
+
+export type UserSessionsPanelStoreProps = {
+  visible: DialogsStore["userSessionsPanelVisible"];
+  setVisible: DialogsStore["setUserSessionPanelVisible"];
+} & Pick<
+  SessionsStore,
+  | "fetchUserSessions"
+  | "subscribeToUserSessions"
+  | "bufferSelection"
+  | "setBufferSelection"
+  | "unsubscribeToUserSessions"
+>;
 
 export interface LastSessionBlockProps {
   t: TTranslation;

@@ -52,14 +52,17 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
+  const { storeProps } = props;
   const {
     visible,
     setVisible,
     fetchUserSessions,
-    currentPortalSession,
+    bufferSelection,
     setBufferSelection,
     subscribeToUserSessions,
-  } = props;
+    unsubscribeToUserSessions,
+  } = storeProps!;
+
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const scrollRef = useRef(null);
 
@@ -69,10 +72,20 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   };
 
   useEffect(() => {
-    fetchUserSessions(currentPortalSession.userId);
-    subscribeToUserSessions(currentPortalSession.userId);
-    // eslint-disable-next-line
-  }, []);
+    if (!bufferSelection) return;
+
+    fetchUserSessions(bufferSelection.userId);
+    subscribeToUserSessions(bufferSelection.userId);
+
+    return () => {
+      unsubscribeToUserSessions();
+    };
+  }, [
+    bufferSelection,
+    fetchUserSessions,
+    subscribeToUserSessions,
+    unsubscribeToUserSessions,
+  ]);
 
   return (
     <StyledSessionsPanel>
@@ -102,15 +115,19 @@ export const SessionsPanel = inject<TStore>(
       subscribeToUserSessions,
       bufferSelection,
       setBufferSelection,
+      unsubscribeToUserSessions,
     } = sessionsStore;
 
     return {
-      visible: userSessionsPanelVisible,
-      setVisible: setUserSessionPanelVisible,
-      fetchUserSessions,
-      subscribeToUserSessions,
-      currentPortalSession: bufferSelection,
-      setBufferSelection,
+      storeProps: {
+        visible: userSessionsPanelVisible,
+        setVisible: setUserSessionPanelVisible,
+        fetchUserSessions,
+        subscribeToUserSessions,
+        bufferSelection,
+        setBufferSelection,
+        unsubscribeToUserSessions,
+      },
     };
   },
 )(observer(UserSessionsPanel));

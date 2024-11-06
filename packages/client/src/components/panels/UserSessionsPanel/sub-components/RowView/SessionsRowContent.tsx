@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { observer } from "mobx-react";
+
 import { Text } from "@docspace/shared/components/text";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { RowContent } from "@docspace/shared/components/row-content";
@@ -73,4 +75,4 @@ const SessionsRowContent = ({ item, sectionWidth }: SessionsRowProps) => {
   );
 };
 
-export default SessionsRowContent;
+export default observer(SessionsRowContent);

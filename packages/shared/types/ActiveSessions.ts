@@ -35,11 +35,11 @@ export type TPortalSession = {
 
 export type TSession = {
   browser: string;
-  id: string;
+  id: number;
   ip: string;
   platform: string;
   status: TOnlineStatus;
-  date?: string;
+  date: string;
 };
 
 export type TSessionsSelected = "all" | "none" | TOnlineStatus;

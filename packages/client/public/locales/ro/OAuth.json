@@ -31,7 +31,7 @@
   "DeveloperTokenCopied": "Token-ul dezvoltatorului a fost copiat cu succes în clipboard",
   "DisableApplication": "Dezactivare aplicație",
   "DisableApplicationDescription": "Dacă dezactivați această aplicație, toate consimțământele și autorizațiile active vor fi revocate. Puteți activa aplicația dezactivată mai târziu, dacă este cazul.",
-  "DisableApplicationNote": "<strong>Mențiune:<strong> Toți utilizatori vor fi obligați să completeze din nou pagina de consimțământ",
+  "DisableApplicationNote": "<strong>Mențiune:</strong> Toți utilizatori vor fi obligați să completeze din nou pagina de consimțământ",
   "DisableApplications": "Dezactivare aplicații",
   "DisableApplicationsDescription": "Dacă dezactivați aceste aplicații, toate consimțământele și autorizațiile active vor fi revocate. Puteți activa aplicația dezactivată mai târziu, dacă este cazul.",
   "EditApp": "Modificare aplicație",

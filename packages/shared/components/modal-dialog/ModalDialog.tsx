@@ -131,8 +131,6 @@ const ModalDialog = ({
     window.addEventListener("touchmove", onSwipe);
     window.addEventListener("touchend", onSwipeEnd);
     return () => {
-      returnWindowPositionAfterKeyboard();
-
       window.removeEventListener("resize", onResize);
       window.removeEventListener("keyup", onKeyPress);
       window.removeEventListener("touchstart", handleTouchStart);
@@ -140,6 +138,12 @@ const ModalDialog = ({
       window.addEventListener("touchend", onSwipeEnd);
     };
   }, [displayType, displayTypeDetailed, onClose, onCloseEvent, visible]);
+
+  useEffect(() => {
+    return () => {
+      returnWindowPositionAfterKeyboard();
+    };
+  }, []);
 
   const [header, body, footer, container] = parseChildren(
     children,

@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Δωμάτιο Συμπλήρωσης Φορμών",
   "FormRoom": "Δωμάτιο φορμών",
   "Free": "Δωρεάν",
-  "FreeAccessToLicensedVersion": "Δωρεάν πρόσβαση στη λύση Enterprise",
+  "FreeAccessToLicensedVersion": "Δωρεάν πρόσβαση στη λύση {{license}}",
   "FromDevice": "Από τη συσκευή",
   "FromPortal": "Από {{productName}}",
   "FullAccess": "Πλήρης πρόσβαση",

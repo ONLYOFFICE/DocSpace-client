@@ -58,7 +58,7 @@ import {
   toUrlParams,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { ButtonKeys, DeviceType } from "@docspace/shared/enums";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -72,12 +72,10 @@ import {
 
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { globalColors } from "@docspace/shared/themes";
 
 export type CreateUserFormProps = {
@@ -110,11 +108,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   } = props;
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
-  const { currentDeviceType } = useDeviceType();
   const router = useRouter();
 
   const currentCultureName = i18n.language;
-  const isDesktopView = currentDeviceType === DeviceType.desktop;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -417,23 +413,20 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsPasswordErrorShow(true);
   };
 
-  const onSocialButtonClick = useCallback(
-    async (e: MouseEvent<Element>) => {
-      const target = e.target as HTMLElement;
-      let targetElement = target;
+  const onSocialButtonClick = useCallback(async (e: MouseEvent<Element>) => {
+    const target = e.target as HTMLElement;
+    let targetElement = target;
 
-      if (
-        !(targetElement instanceof HTMLButtonElement) &&
-        target.parentElement
-      ) {
-        targetElement = target.parentElement;
-      }
+    if (!(targetElement instanceof HTMLButtonElement) && target.parentElement) {
+      targetElement = target.parentElement;
+    }
 
-      const providerName = targetElement.dataset.providername;
-      const url = targetElement.dataset.url || "";
+    const providerName = targetElement.dataset.providername;
+    const url = targetElement.dataset.url || "";
 
-      try {
-        const tokenGetterWin = isDesktopView
+    try {
+      const tokenGetterWin =
+        window.AscDesktopEditor !== undefined
           ? (window.location.href = url)
           : window.open(
               url,
@@ -441,24 +434,22 @@ const CreateUserForm = (props: CreateUserFormProps) => {
               "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
             );
 
-        const code = await getOAuthToken(tokenGetterWin);
+      const code = await getOAuthToken(tokenGetterWin);
 
-        const token = window.btoa(
-          JSON.stringify({
-            auth: providerName,
-            mode: "popup",
-            callback: "authCallback",
-          }),
-        );
+      const token = window.btoa(
+        JSON.stringify({
+          auth: providerName,
+          mode: "popup",
+          callback: "authCallback",
+        }),
+      );
 
-        if (tokenGetterWin && typeof tokenGetterWin === "object")
-          tokenGetterWin.location.href = getLoginLink(token, code);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    [isDesktopView],
-  );
+      if (tokenGetterWin && typeof tokenGetterWin === "object")
+        tokenGetterWin.location.href = getLoginLink(token, code);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const oauthDataExists = () => {
     if (!capabilities?.oauthEnabled) return false;

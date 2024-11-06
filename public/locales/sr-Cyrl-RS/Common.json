@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Просторија за попуњавање формулара",
   "FormRoom": "Образац соба",
   "Free": "Бесплатно",
-  "FreeAccessToLicensedVersion": "Бесплатан приступ Enterprise решењу",
+  "FreeAccessToLicensedVersion": "Бесплатан приступ {{license}} решењу",
   "FromDevice": "Iz uređaja",
   "FromPortal": "Iz {{productName}}",
   "FullAccess": "Потпуни приступ",

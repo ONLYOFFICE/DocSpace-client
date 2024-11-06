@@ -308,6 +308,14 @@ class SelectedFolderStore {
     this.changeDocumentsTabs = changeDocumentsTabs;
   };
 
+  setSecurity = (security: TFolderSecurity | TRoomSecurity) => {
+    this.security = security;
+  };
+
+  setAccess = (access: ShareAccessRights) => {
+    this.access = access;
+  };
+
   updateEditedSelectedRoom: (selectedFolder: TSetSelectedFolder) => void = (
     selectedFolder,
   ) => {

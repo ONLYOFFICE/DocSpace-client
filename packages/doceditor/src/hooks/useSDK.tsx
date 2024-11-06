@@ -31,7 +31,6 @@ import {
   frameCallCommand,
 } from "@docspace/shared/utils/common";
 import { EDITOR_ID } from "@docspace/shared/constants";
-
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const useSDK = () => {
@@ -45,6 +44,8 @@ const useSDK = () => {
       if (eventData.data) {
         const { data, methodName } = eventData.data;
 
+        if (!methodName) return;
+
         let res;
 
         try {
@@ -54,10 +55,9 @@ const useSDK = () => {
               res = data;
               break;
             case "getEditorInstance":
-              res = {
-                instance: window.DocEditor?.instances[EDITOR_ID],
-                asc: window.Asc,
-              };
+              const instance = window.DocEditor?.instances[EDITOR_ID];
+              const asc = window.Asc;
+              res = { instance, asc };
               break;
             default:
               res = "Wrong method for this mode";
@@ -65,6 +65,8 @@ const useSDK = () => {
         } catch (e) {
           res = e;
         }
+
+        console.log("useSDK handleMessage", methodName, res);
 
         frameCallbackData(res);
       }

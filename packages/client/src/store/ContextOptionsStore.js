@@ -224,7 +224,8 @@ class ContextOptionsStore {
       !item.startFilling &&
       item.isPDFForm &&
       !isFormRoom &&
-      !this.publicRoomStore.isPublicRoom
+      !this.publicRoomStore.isPublicRoom &&
+      item?.security?.Copy
     )
       return this.dialogsStore.setFillPDFDialogData(true, item);
 

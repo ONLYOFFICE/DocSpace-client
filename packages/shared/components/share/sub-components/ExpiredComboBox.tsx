@@ -122,6 +122,7 @@ const ExpiredComboBox = ({
     setSevenDays,
     setUnlimited,
     onCalendarOpen,
+    i18n.language,
   );
 
   const getExpirationTrans = () => {

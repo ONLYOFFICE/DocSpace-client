@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Link-ul a fost copiat",
   "ResetChange": "Resetarea modificării",
   "SendInvitation": "Trimitere invitaţie",
+  "UserMaxAvailableRoleWarning": "Invitați și Utilizatori nu pot fi desemnate Administratori de sală. Numai administratori de sală și administratori {{productName}} pot fi atribuite rolul menționat.",
   "UsersAlreadyAdded": "Anumite utilizatori sunt deja adăugate."
 }

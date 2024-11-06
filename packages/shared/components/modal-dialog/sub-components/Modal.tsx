@@ -75,7 +75,7 @@ const Modal = ({
   hideContent,
 
   isInvitePanelLoader = false,
-
+  onSubmit,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -183,7 +183,7 @@ const Modal = ({
                 currentDisplayType !== "modal" ? (
                 containerComponent
               ) : (
-                <FormWrapper withForm={withForm || false}>
+                <FormWrapper withForm={withForm || false} onSubmit={onSubmit}>
                   {header && (
                     <AsideHeader
                       id="modal-header-swipe"

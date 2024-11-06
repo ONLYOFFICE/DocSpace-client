@@ -1,6 +1,7 @@
 {
   "Desc": "Bitte richten Sie die {{productName}}-Registrierungsdaten ein.",
   "ErrorEmail": "Ungültige E-Mail-Adresse",
+  "ErrorInstanceId": "Ungültige Instanz-ID",
   "ErrorLicenseBody": "Lizenz ist ungültig. Wählen Sie die richtige Datei aus.",
   "ErrorPassword": "Passwort erfüllt Anforderungen nicht",
   "ErrorUploadLicenseFile": "Bitte Lizenzdatei auswählen",

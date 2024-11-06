@@ -41,7 +41,9 @@ const TrialContainer = (props) => {
   return (
     <StyledEnterpriseComponent>
       <Text fontWeight={700} fontSize={"16px"}>
-        {t("ActivateSwithToProHeader")}
+        {t("ActivateSwithToProHeader", {
+          license: t("Common:EnterpriseLicense"),
+        })}
       </Text>
       <TariffTitleContainer t={t} />
 

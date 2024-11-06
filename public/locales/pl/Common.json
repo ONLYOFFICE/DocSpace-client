@@ -202,7 +202,7 @@
   "FormFilingRoomTitle": "Pokój do wypełniania formularzy",
   "FormRoom": "Pokój z formularzami",
   "Free": "Darmowy",
-  "FreeAccessToLicensedVersion": "Bezpłatny dostęp do rozwiązania Enterprise",
+  "FreeAccessToLicensedVersion": "Bezpłatny dostęp do rozwiązania {{license}}",
   "FromDevice": "Z urządzenia",
   "FromPortal": "Z {{productName}}",
   "FullAccess": "Pełen dostęp",

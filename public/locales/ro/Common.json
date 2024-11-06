@@ -203,7 +203,7 @@
   "FormFilingRoomTitle": "Sală Completare formular",
   "FormRoom": "Sală Formulare",
   "Free": "Gratuit",
-  "FreeAccessToLicensedVersion": "Acces gratuit la soluția Enterprise",
+  "FreeAccessToLicensedVersion": "Acces gratuit la soluția {{license}}",
   "FromDevice": "De pe dispozitivul",
   "FromPortal": "De la {{productName}}",
   "FullAccess": "Acces complet",

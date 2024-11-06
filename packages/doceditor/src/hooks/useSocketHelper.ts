@@ -94,6 +94,7 @@ const useSocketHelper = ({
         Number(loginEventId) === 0
       ) {
         sessionStorage.setItem("referenceUrl", window.location.href);
+        if (user) sessionStorage.setItem("loggedOutUserId", user.id);
 
         const docEditor =
           typeof window !== "undefined" &&
@@ -112,7 +113,7 @@ const useSocketHelper = ({
     return () => {
       SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
-  }, [user?.loginEventId]);
+  }, [user, user?.loginEventId]);
 };
 
 export default useSocketHelper;

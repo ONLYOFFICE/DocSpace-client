@@ -73,17 +73,21 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return null;
       }
 
-      const redirectPath = sessionStorage.getItem("referenceUrl");
-      if (redirectPath) {
-        sessionStorage.removeItem("referenceUrl");
-        window.location.href = redirectPath;
-
-        return null;
-      }
-
       // console.log("PrivateRoute returned null");
 
       return null;
+    }
+
+    if (user && isAuthenticated && !isLogout) {
+      const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+      const redirectPath = sessionStorage.getItem("referenceUrl");
+
+      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+        window.location.href = redirectPath;
+      }
+
+      sessionStorage.removeItem("referenceUrl");
+      sessionStorage.removeItem("loggedOutUserId");
     }
 
     const isPortalUrl = location.pathname === "/preparation-portal";

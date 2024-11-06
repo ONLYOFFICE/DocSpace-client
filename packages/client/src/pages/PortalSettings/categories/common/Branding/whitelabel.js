@@ -551,6 +551,7 @@ const WhiteLabelComponent = (props) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
+            isEditorHeader={true}
           />
         </div>
       </div>

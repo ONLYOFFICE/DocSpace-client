@@ -261,7 +261,7 @@ class SettingsStore {
 
   hotkeyPanelVisible = false;
 
-  frameConfig: TFrameConfig | null = null;
+  frameConfig: Nullable<TFrameConfig> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -1056,7 +1056,7 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig
-      ? window.name.includes(this.frameConfig?.name)
+      ? window.name.includes(this.frameConfig?.name as string)
       : false;
 
     if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;

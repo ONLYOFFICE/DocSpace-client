@@ -42,6 +42,6 @@ export type CompletedFormProps = {
       isRoomMember: boolean;
     };
   };
-  isShreFile: boolean;
+  isShareFile: boolean;
   share?: string;
 };

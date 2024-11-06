@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-
+import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
@@ -151,11 +151,19 @@ const HistoryItemList = ({
       {items.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
-          <>
-            <StyledHistoryBlockFile
-              isRoom={false}
-              key={`${feed.action.id}_${item.id}`}
-            >
+          <Fragment key={`${feed.action.id}_${item.id}`}>
+            <StyledHistoryBlockFile isRoom={false}>
+              {actionType === "changeIndex" ? (
+                <div className="change-index">
+                  <div className="index old-index"> {item.oldIndex}</div>
+
+                  <SortDesc className="arrow-index" />
+                  <div className="index"> {item.newIndex} </div>
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div
                 className="item-wrapper"
                 onClick={() => handleOpenFile(item)}
@@ -164,6 +172,7 @@ const HistoryItemList = ({
                   className="icon"
                   src={getInfoPanelItemIcon!(item, 24)}
                 />
+
                 <div className="item-title">
                   {item.title ? (
                     <>
@@ -219,7 +228,7 @@ const HistoryItemList = ({
                 </div>
               </StyledHistoryBlockFile>
             )}
-          </>
+          </Fragment>
         );
       })}
       {isExpandable && !isExpanded && (

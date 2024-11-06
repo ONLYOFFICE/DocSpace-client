@@ -214,6 +214,10 @@ const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
 
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .admin_icon {
     rect:nth-child(1) {
       fill: ${(props) => props.theme.avatar.administrator.fill};

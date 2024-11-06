@@ -193,6 +193,13 @@ const AvatarPure = ({
     menu.onClick(inputFilesElement);
   };
 
+  const onClickAvatar = () => {
+    if (hasAvatar) {
+      return onToggleOpenEditLogo();
+    }
+    onUploadClick();
+  };
+
   const dropdownElement = (
     <DropDown
       open={openEditLogo}
@@ -226,7 +233,7 @@ const AvatarPure = ({
       data-testid="avatar"
       className={className}
       onMouseDown={onMouseDown}
-      onClick={onClick}
+      onClick={onClick || onClickAvatar}
       ref={iconRef}
     >
       <AvatarWrapper

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -151,11 +151,8 @@ const HistoryItemList = ({
       {items.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
-          <>
-            <StyledHistoryBlockFile
-              isRoom={false}
-              key={`${feed.action.id}_${item.id}`}
-            >
+          <Fragment key={`${feed.action.id}_${item.id}`}>
+            <StyledHistoryBlockFile isRoom={false}>
               {actionType === "changeIndex" ? (
                 <div className="change-index">
                   <div className="index old-index"> {item.oldIndex}</div>
@@ -231,7 +228,7 @@ const HistoryItemList = ({
                 </div>
               </StyledHistoryBlockFile>
             )}
-          </>
+          </Fragment>
         );
       })}
       {isExpandable && !isExpanded && (

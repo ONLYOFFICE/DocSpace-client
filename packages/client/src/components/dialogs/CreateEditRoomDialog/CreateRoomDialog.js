@@ -29,8 +29,9 @@ import styled, { css } from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import TagHandler from "./handlers/TagHandler";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
+import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 
@@ -136,6 +137,15 @@ const CreateRoomDialog = ({
     }
   };
 
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
+  const handleSubmit = (event) => {
+    const value = event.currentTarget.tagInput?.value;
+
+    if (!isNullOrUndefined(value) && value.length === 0) onCreateRoom();
+  };
+
   const goBack = () => {
     if (isLoading) return;
     setRoomParams({ ...startRoomParams });
@@ -169,6 +179,8 @@ const CreateRoomDialog = ({
       hideContent={isOauthWindowOpen}
       isBackButton={roomParams.type}
       onBackClick={goBack}
+      onSubmit={handleSubmit}
+      withForm
     >
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
@@ -209,9 +221,9 @@ const CreateRoomDialog = ({
             size="normal"
             primary
             scale
-            onClick={onCreateRoom}
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
+            type="submit"
           />
           <Button
             id="shared_create-room-modal_cancel"

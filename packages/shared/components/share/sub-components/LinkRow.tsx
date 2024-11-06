@@ -156,6 +156,7 @@ const LinkRow = ({
               role={AvatarRole.user}
               source={avatar}
               roleIcon={isLocked ? <LockedReactSvg /> : undefined}
+              noClick
             />
           )}
           <div className="link-options">

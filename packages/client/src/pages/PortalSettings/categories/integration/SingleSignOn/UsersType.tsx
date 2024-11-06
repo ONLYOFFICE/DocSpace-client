@@ -41,11 +41,14 @@ interface UsersTypeProps {
   setUsersType: (value: number) => void;
   enableSso: boolean;
   isLoadingXml: boolean;
+  isOwner: boolean;
+  isAdmin: boolean;
 }
 
 const UsersType = (props: UsersTypeProps) => {
   const { t } = useTranslation(["Ldap", "Common"]);
-  const { usersType, setUsersType, enableSso, isLoadingXml } = props;
+  const { usersType, setUsersType, enableSso, isLoadingXml, isOwner, isAdmin } =
+    props;
 
   const onChangeUserType = (option: any) => {
     setUsersType(option.access);
@@ -80,7 +83,8 @@ const UsersType = (props: UsersTypeProps) => {
           roomType={-1}
           defaultAccess={usersType}
           onSelectAccess={onChangeUserType}
-          isOwner
+          isOwner={isOwner}
+          isAdmin={isAdmin}
           isMobileView={isMobile()}
           isDisabled={!enableSso || isLoadingXml}
           directionX="left"
@@ -90,13 +94,18 @@ const UsersType = (props: UsersTypeProps) => {
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject<TStore>(({ ssoStore, userStore }) => {
   const { usersType, setUsersType, enableSso, isLoadingXml } = ssoStore;
+  const { user } = userStore;
+  const isOwner = user?.isOwner;
+  const isAdmin = user?.isAdmin;
 
   return {
     usersType,
     setUsersType,
     enableSso,
     isLoadingXml,
+    isOwner,
+    isAdmin,
   };
 })(observer(UsersType));

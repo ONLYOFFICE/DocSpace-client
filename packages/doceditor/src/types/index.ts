@@ -351,7 +351,7 @@ export interface UseEventsProps {
   openOnNewPage: boolean;
   t: TTranslation;
 
-  frameConfig?: TFrameConfig;
+  frameConfig?: TFrameConfig | null;
 }
 
 export interface UseInitProps {

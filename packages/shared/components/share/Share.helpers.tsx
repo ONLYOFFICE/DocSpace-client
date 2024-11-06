@@ -183,21 +183,31 @@ export const getExpiredOptions = (
   setSevenDays: VoidFunction,
   setUnlimited: VoidFunction,
   onCalendarOpen: VoidFunction,
+  locale: string,
 ) => {
+  const relativeTime = new Intl.RelativeTimeFormat(locale, {
+    numeric: "always",
+    style: "long",
+  });
+
+  const oneDay = relativeTime.format(1, "day");
+  const severalDays = relativeTime.format(7, "day");
+  const severalHours = relativeTime.format(12, "hours");
+
   return [
     {
       key: "twelvehours",
-      label: `12 ${t("Common:Hours")}`,
+      label: severalHours,
       onClick: () => setTwelveHours(),
     },
     {
       key: "oneday",
-      label: `1 ${t("Common:Day")}`,
+      label: oneDay,
       onClick: () => setOneDay(),
     },
     {
       key: "sevendays",
-      label: `7 ${t("Common:Days")}`,
+      label: severalDays,
       onClick: () => setSevenDays(),
     },
     {

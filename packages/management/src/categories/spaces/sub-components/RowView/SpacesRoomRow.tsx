@@ -57,6 +57,13 @@ const StyledRoomRow = styled(Row)`
   .row_context-menu-wrapper {
     margin-inline-end: 18px;
   }
+
+  .logo-icon > div {
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `;
 
 type TRow = {
@@ -79,7 +86,9 @@ const SpacesRoomRow = ({ item }: TRow) => {
     setDeletePortalDialogVisible(true);
   };
 
-  const logoElement = <ReactSVG id={item.portalName} src={DefaultLogoUrl} />;
+  const logoElement = (
+    <ReactSVG id={item.portalName} src={DefaultLogoUrl} className="logo-icon" />
+  );
 
   const protocol = window?.location?.protocol;
 

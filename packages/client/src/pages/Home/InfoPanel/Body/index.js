@@ -93,7 +93,7 @@ const InfoPanelBodyContent = ({
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !infoPanelSelection ||
-    infoPanelSelection.expired ||
+    (infoPanelSelection.expired && infoPanelSelection.external) ||
     isLockedSharedRoom ||
     ((isUsers || isGuests || isGroups) && !selectedItems.length) ||
     isNoItemGallery ||

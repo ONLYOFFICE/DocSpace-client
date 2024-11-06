@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Der Code wurde Ihnen per E-Mail geschickt",
+  "EnterCredentials": "Bitte geben Sie Ihre {{productName}}-Zugangsdaten ein, um die Löschung zu bestätigen",
   "ErrorInvalidText": "In 10 Sekunden werden Sie auf die <1>{{productName}}</1> weitergeleitet",
   "ForgotPassword": "Kennwort vergessen?",
   "LDAPUsernamePlaceholder": "Benutzername von {{ldap_domain}}",

@@ -130,6 +130,7 @@ const AvatarPure = ({
   onChangeFile,
   model,
   hasAvatar,
+  noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -194,6 +195,8 @@ const AvatarPure = ({
   };
 
   const onClickAvatar = () => {
+    if (noClick) return;
+
     if (hasAvatar) {
       return onToggleOpenEditLogo();
     }
@@ -235,6 +238,7 @@ const AvatarPure = ({
       onMouseDown={onMouseDown}
       onClick={onClick || onClickAvatar}
       ref={iconRef}
+      noClick={noClick}
     >
       <AvatarWrapper
         source={source}

@@ -1,7 +1,7 @@
 {
   "Desc": "Please set up the {{productName}} registration data.",
   "ErrorEmail": "Invalid email address",
-  "ErrorInstanceId": "Invalid instance id",
+  "ErrorInstanceId": "Invalid instance ID",
   "ErrorLicenseBody": "The license is not valid. Make sure you select the correct file.",
   "ErrorPassword": "Password does not meet the requirements",
   "ErrorUploadLicenseFile": "Select a license file",

@@ -38,6 +38,7 @@
   "DateLastOpened": "Date last opened",
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
   "DeleteLink": "Delete link",
+  "DeleteSharedCustomPublic": "The link will be deleted permanently. You will not be able to undo this action.",
   "DeleteSharedLink": "The previous link will become unavailable. A new shared link will be created.",
   "DisableDownload": "Restrict file content copy, file download and printing",
   "DisableNotifications": "Disable notifications",

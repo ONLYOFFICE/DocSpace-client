@@ -65,13 +65,8 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const SectionBodyContent = (props) => {
-  const {
-    showProfileLoader,
-    profile,
-    currentDeviceType,
-    identityServerEnabled,
-    t,
-  } = props;
+  const { showProfileLoader, currentDeviceType, identityServerEnabled, t } =
+    props;
   const navigate = useNavigate();
 
   const data = [
@@ -100,12 +95,11 @@ const SectionBodyContent = (props) => {
     });
   }
 
-  if (!profile?.isVisitor)
-    data.splice(2, 0, {
-      id: "file-management",
-      name: t("FileManagement"),
-      content: <FileManagement />,
-    });
+  data.splice(2, 0, {
+    id: "file-management",
+    name: t("FileManagement"),
+    content: <FileManagement />,
+  });
 
   const getCurrentTabId = () => {
     const path = location.pathname;
@@ -136,21 +130,17 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(
-  ({ settingsStore, peopleStore, clientLoadingStore, authStore }) => {
-    const { showProfileLoader } = clientLoadingStore;
-    const { targetUser: profile } = peopleStore.targetUserStore;
+export default inject(({ settingsStore, clientLoadingStore, authStore }) => {
+  const { showProfileLoader } = clientLoadingStore;
 
-    const { identityServerEnabled } = authStore.capabilities;
+  const { identityServerEnabled } = authStore.capabilities;
 
-    return {
-      profile,
-      currentDeviceType: settingsStore.currentDeviceType,
-      showProfileLoader,
-      identityServerEnabled,
-    };
-  },
-)(
+  return {
+    currentDeviceType: settingsStore.currentDeviceType,
+    showProfileLoader,
+    identityServerEnabled,
+  };
+})(
   observer(
     withTranslation([
       "Profile",

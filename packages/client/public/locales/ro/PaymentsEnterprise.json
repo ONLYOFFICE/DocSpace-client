@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Pentru a procura licența, faceți clic pe butonul de mai jos.",
   "ActivatePurchaseBuyNow": "Cumpărare acum",
   "ActivatePurchaseRenewLicense": "Pentru a continua să primiți asistență și actualizări, trebuie să procurați o reînnoire.",
+  "ActivateRenewalDescr": "Pentru a activa actualizarea cumpărată, încărcați-o mai jos și faceți clic pe butonul Activare.",
   "ActivateRenewDescr": "Pentru termeni și condiții de reînnoire personale, contactați managerul dvs personal sau trimiteți un mesaj email la <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Reînnoire abonamentul {{license}}",
   "ActivateSwithToProHeader": "Comutare la versiunea completă {{license}}",

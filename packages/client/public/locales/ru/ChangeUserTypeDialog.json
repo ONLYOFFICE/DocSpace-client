@@ -4,5 +4,6 @@
   "ChangeUserTypeMessage": "Пользователи с типом <strong>'{{ firstType }}'</strong> будут переведены в тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Выбранные пользователи будут перемещены в тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Вы не можете изменить тип для администраторов {{productName}} и для самого себя.",
+  "SuccessChangeGuestType": "Тип гостя был успешно изменен",
   "SuccessChangeUserType": "Тип пользователя успешно изменен"
 }

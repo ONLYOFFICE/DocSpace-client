@@ -57,9 +57,11 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     font-weight: 600;
   }
 
-  .logo-wrapper {
-    width: 386px;
-    height: 44px;
+  @media ${desktop} {
+    .logo-wrapper {
+      width: 386px;
+      height: 44px;
+    }
   }
 
   #container {

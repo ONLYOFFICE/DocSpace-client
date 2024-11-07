@@ -129,6 +129,7 @@ const TagInput = ({
         onBlur={handleBlur}
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
+        name="tagInput"
       />
 
       <TagDropdown

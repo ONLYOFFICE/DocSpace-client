@@ -1,6 +1,7 @@
 {
   "Desc": "Määritä {{productName}}-n rekisteröintitiedot.",
   "ErrorEmail": "Epäkelpo sähköpostiosoite",
+  "ErrorInstanceId": "Virheellinen tunnus",
   "ErrorLicenseBody": "Lisenssi ei ole voimassa. Varmista, että valitset oikean tiedoston.",
   "ErrorPassword": "Salasana ei täytä vaatimuksia",
   "ErrorUploadLicenseFile": "Valitse lisenssitiedosto",

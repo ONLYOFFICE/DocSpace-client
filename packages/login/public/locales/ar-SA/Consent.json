@@ -1,1 +1,8 @@
-{}
+{
+  "AllowButton": "السماح",
+  "ConsentDescription": "سيتم تنظيم البيانات المشتركة مع <strong>{{displayName}}</strong> بواسطة <strong>{{nameApp}}</strong> <6>privacy policy</6> و<6>شروط الخدمة</6>. يمكنك سحب هذا القبول في أي وقت من إعدادات حساب {{productName}} الخاص بك.",
+  "ConsentSubHeader": "يرغب <1>{{nameApp}}</1> في الوصول إلى البيانات التالية في <strong>حساب {{productName}} الخاص بك</strong>:",
+  "NotYou": "ليس هذا أنت؟",
+  "SignedInAs": "تسجيل الدخول باسم",
+  "ToContinue": "للمتابعة إلى"
+}

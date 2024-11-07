@@ -1,6 +1,7 @@
 {
   "Desc": "Prosimo, nastavite podatke za registracijo {{productName}}.",
   "ErrorEmail": "Napačen email naslov",
+  "ErrorInstanceId": "Neveljaven ID instance",
   "ErrorLicenseBody": "Licenca ni veljavna. Izberite pravo datoteko.",
   "ErrorPassword": "Geslo ne ustreza zahtevam",
   "ErrorUploadLicenseFile": "Izberite licenčno datoteko",

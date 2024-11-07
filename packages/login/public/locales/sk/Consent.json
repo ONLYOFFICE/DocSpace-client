@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Povoliť",
+  "ConsentDescription": "Údaje zdieľané s <strong>{{displayName}}</strong> sú regulované <6>zásadami ochrany osobných údajov</6> a <6>podmienkami používania</6> <strong>{{nameApp}}</strong>. Tento súhlas môžete kedykoľvek odvolať v nastaveniach svojho účtu {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> potrebuje možnosť prístupu k nasledujúcim údajom vo <strong>vašom účte {{productName}}:",
+  "DenyButton": "Odmietnuť",
+  "NotYou": "Nie ste to vy?",
+  "SignedInAs": "Ste prihlásený ako",
+  "ToContinue": "Ak chcete pokračovať"
+}

@@ -430,6 +430,7 @@ class SsoFormStore {
       spCertificateAdvanced,
       fieldMapping,
       hideAuthPage,
+      usersType,
     } = config;
     const { entityId, ssoBinding, sloBinding, nameIdFormat } = idpSettings;
     const {
@@ -501,6 +502,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
+    this.usersType = usersType;
   };
 
   setSsoUrls = (o) => {

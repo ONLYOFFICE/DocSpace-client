@@ -95,6 +95,12 @@ const SectionBodyContent = (props) => {
     });
   }
 
+  data.splice(2, 0, {
+    id: "file-management",
+    name: t("FileManagement"),
+    content: <FileManagement />,
+  });
+
   const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));

@@ -56,6 +56,7 @@ const ArticleBodyContent = (props) => {
     toggleArticleOpen,
 
     roomsFolderId,
+    roomsFilter,
     archiveFolderId,
     myFolderId,
     recycleBinFolderId,
@@ -175,6 +176,7 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       hashDate,
+      roomsFilter,
     ],
   );
 
@@ -303,7 +305,7 @@ export default inject(
     campaignsStore,
     peopleStore,
   }) => {
-    const { clearFiles, setSelection } = filesStore;
+    const { clearFiles, setSelection, roomsFilter } = filesStore;
     const {
       showArticleLoader,
 
@@ -360,6 +362,7 @@ export default inject(
       setIsLoading,
 
       clearFiles,
+      roomsFilter,
       selectedFolderId,
       setIsBurgerLoading,
       setSelection,

@@ -47,6 +47,7 @@ export type UserSessionsPanelStoreProps = {
   | "bufferSelection"
   | "setBufferSelection"
   | "unsubscribeToUserSessions"
+  | "clearUserSessions"
 >;
 
 export interface LastSessionBlockProps {

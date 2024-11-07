@@ -127,6 +127,7 @@ const Sessions = (props: SessionsProps) => {
     fetchPortalSessions,
     subscribeToPortalSessions,
     unsubscribeToPortalSessions,
+    clearPortalSessions,
   } = storeProps!;
 
   const { t }: { t: TTranslation } = useTranslation([
@@ -144,6 +145,7 @@ const Sessions = (props: SessionsProps) => {
     return () => {
       clearSelection();
       unsubscribeToPortalSessions();
+      clearPortalSessions();
     };
   }, [
     fetchPortalSessions,
@@ -151,6 +153,7 @@ const Sessions = (props: SessionsProps) => {
     unsubscribeToPortalSessions,
     fetchData,
     clearSelection,
+    clearPortalSessions,
   ]);
 
   useViewEffect({
@@ -253,6 +256,7 @@ export const SecuritySessions = inject<TStore>(
       fetchPortalSessions,
       subscribeToPortalSessions,
       unsubscribeToPortalSessions,
+      clearPortalSessions,
     } = sessionsStore;
 
     const {
@@ -298,6 +302,7 @@ export const SecuritySessions = inject<TStore>(
         fetchPortalSessions,
         subscribeToPortalSessions,
         unsubscribeToPortalSessions,
+        clearPortalSessions,
       },
     };
   },

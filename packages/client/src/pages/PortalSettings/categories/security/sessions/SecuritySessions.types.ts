@@ -99,6 +99,7 @@ type SessionsStoreProps = Pick<
   | "fetchPortalSessions"
   | "subscribeToPortalSessions"
   | "unsubscribeToPortalSessions"
+  | "clearPortalSessions"
 > &
   Pick<DialogsStore, "setUserSessionPanelVisible"> &
   Pick<SettingsStore, "currentDeviceType"> &

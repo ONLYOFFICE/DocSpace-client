@@ -61,6 +61,7 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
     setBufferSelection,
     subscribeToUserSessions,
     unsubscribeToUserSessions,
+    clearUserSessions,
   } = storeProps!;
 
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
@@ -79,12 +80,14 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
 
     return () => {
       unsubscribeToUserSessions();
+      clearUserSessions();
     };
   }, [
     bufferSelection,
     fetchUserSessions,
     subscribeToUserSessions,
     unsubscribeToUserSessions,
+    clearUserSessions,
   ]);
 
   return (
@@ -116,6 +119,7 @@ export const SessionsPanel = inject<TStore>(
       bufferSelection,
       setBufferSelection,
       unsubscribeToUserSessions,
+      clearUserSessions,
     } = sessionsStore;
 
     return {
@@ -127,6 +131,7 @@ export const SessionsPanel = inject<TStore>(
         bufferSelection,
         setBufferSelection,
         unsubscribeToUserSessions,
+        clearUserSessions,
       },
     };
   },

@@ -123,6 +123,7 @@ class SessionsStore {
       // Todo: add unsubscribing
       SocketHelper.on(SocketEvents.UserSessions, (data: TSession[]) => {
         this.setUserSessions(data);
+        this.sortUserSessions();
         resolve();
       });
     });
@@ -309,6 +310,17 @@ class SessionsStore {
 
   setUserSessions = (userSessions: TSession[]) => {
     this.userSessions = userSessions;
+  };
+
+  clearPortalSessions = () => {
+    this.portalSessionsMap.clear();
+    this.onlineSessionsIds = [];
+    this.offlineSessionsIds = [];
+    this.totalPortalSessions = 0;
+  };
+
+  clearUserSessions = () => {
+    this.setUserSessions([]);
   };
 
   setTotalPortalSessions = (total: number) => {

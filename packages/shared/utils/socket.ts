@@ -52,6 +52,13 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+
+  SessionsInPortal = "sessions-in-portal",
+  UserSessions = "user-sessions",
+  EnterInPortal = "enter-in-portal",
+  LeaveInPortal = "leave-in-portal",
+  EnterSessionInPortal = "enter-session-in-portal",
+  LeaveSessionInPortal = "leave-session-in-portal",
 }
 
 /**
@@ -65,6 +72,13 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+
+  GetSessionsInPortal = "getSessionsInPortal",
+  GetSessions = "getSessions",
+  SubscribeToPortal = "subscribeToPortal",
+  UnsubscribeToPortal = "unsubscribeToPortal",
+  SubscribeToUser = "subscribeToUser",
+  UnsubscribeToUser = "unsubscribeToUser",
   Logout = "logout",
 }
 

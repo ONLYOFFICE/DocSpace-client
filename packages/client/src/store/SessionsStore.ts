@@ -29,7 +29,10 @@ import moment from "moment-timezone";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import {
   TPortalSession,
   TPortalSessionsMap,
@@ -95,24 +98,30 @@ class SessionsStore {
     makeAutoObservable(this);
   }
 
-  fetchPortalSessions = (startIndex: number = 0, count = 100) => {
+  fetchPortalSessions = (startIndex: number = 0, count: number = 100) => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessionsInPortal", { startIndex, count });
-      SocketHelper.on("sessions-in-portal", (data: TSessionsInPortal) => {
-        this.addPortalSessions(data.users);
-        this.setTotal(data.total);
-        resolve();
+      SocketHelper.emit(SocketCommands.GetSessionsInPortal, {
+        startIndex,
+        count,
       });
+      SocketHelper.on(
+        SocketEvents.SessionsInPortal,
+        (data: TSessionsInPortal) => {
+          this.addPortalSessions(data.users);
+          this.setTotal(data.total);
+          resolve();
+        },
+      );
     });
   };
 
   fetchUserSessions = (userId: string) => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessions", {
+      SocketHelper.emit(SocketCommands.GetSessions, {
         id: userId,
       });
       // Todo: add unsubscribing
-      SocketHelper.on("user-sessions", (data: TSession[]) => {
+      SocketHelper.on(SocketEvents.UserSessions, (data: TSession[]) => {
         this.setUserSessions(data);
         resolve();
       });
@@ -168,35 +177,37 @@ class SessionsStore {
   }
 
   subscribeToPortalSessions = () => {
-    SocketHelper.emit("subscribeToPortal");
-    SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);
-    SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
+    SocketHelper.emit(SocketCommands.SubscribeToPortal);
+    SocketHelper.on(SocketEvents.EnterInPortal, this.handleUserEnterPortal);
+    SocketHelper.on(SocketEvents.LeaveInPortal, this.handleUserLeavePortal);
   };
 
   unsubscribeToPortalSessions = () => {
-    SocketHelper.off("enter-in-portal", this.handleUserEnterPortal);
-    SocketHelper.off("leave-in-portal", this.handleUserLeavePortal);
+    SocketHelper.emit(SocketCommands.UnsubscribeToPortal);
+    SocketHelper.off(SocketEvents.EnterInPortal, this.handleUserEnterPortal);
+    SocketHelper.off(SocketEvents.LeaveInPortal, this.handleUserLeavePortal);
   };
 
   subscribeToUserSessions = (id: string) => {
-    SocketHelper.emit("subscribeToUser", { id });
+    SocketHelper.emit(SocketCommands.SubscribeToUser, { id });
     SocketHelper.on(
-      "enter-session-in-portal",
+      SocketEvents.EnterSessionInPortal,
       this.handleUserEnterSessionInPortal,
     );
     SocketHelper.on(
-      "leave-session-in-portal",
+      SocketEvents.LeaveSessionInPortal,
       this.handleUserLeaveSessionInPortal,
     );
   };
 
   unsubscribeToUserSessions = () => {
+    SocketHelper.emit(SocketCommands.UnsubscribeToUser);
     SocketHelper.off(
-      "enter-session-in-portal",
+      SocketEvents.EnterSessionInPortal,
       this.handleUserEnterSessionInPortal,
     );
     SocketHelper.off(
-      "leave-session-in-portal",
+      SocketEvents.LeaveSessionInPortal,
       this.handleUserLeaveSessionInPortal,
     );
   };

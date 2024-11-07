@@ -95,9 +95,9 @@ class SessionsStore {
     makeAutoObservable(this);
   }
 
-  fetchPortalSessions = (startIndex: number = 0) => {
+  fetchPortalSessions = (startIndex: number = 0, count = 100) => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessionsInPortal", { startIndex });
+      SocketHelper.emit("getSessionsInPortal", { startIndex, count });
       SocketHelper.on("sessions-in-portal", (data: TSessionsInPortal) => {
         this.addPortalSessions(data.users);
         this.setTotal(data.total);

@@ -30,34 +30,37 @@ const next = require("next");
 
 const config = require("./config/config.json");
 
-const dev = process.env.NODE_ENV === "development";
+import("./src/logger.mjs").then(({ logger }) => {
+  const log = logger.child({ module: "server" });
+  const dev = process.env.NODE_ENV === "development";
 
-const port = config.PORT ?? 5013;
-const hostname = config.HOSTNAME ?? "localhost";
+  const port = config.PORT ?? 5013;
+  const hostname = config.HOSTNAME ?? "localhost";
 
-// when using middleware `hostname` and `port` must be provided below
-const app = next({ dev, hostname, port });
-const handle = app.getRequestHandler();
+  // when using middleware `hostname` and `port` must be provided below
+  const app = next({ dev, hostname, port });
+  const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer(async (req, res) => {
-    try {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
-      const parsedUrl = parse(req.url, true);
+  app.prepare().then(() => {
+    createServer(async (req, res) => {
+      try {
+        // Be sure to pass `true` as the second argument to `url.parse`.
+        // This tells it to parse the query portion of the URL.
+        const parsedUrl = parse(req.url, true);
 
-      await handle(req, res, parsedUrl);
-    } catch (err) {
-      console.error("Error occurred handling", req.url, err);
-      res.statusCode = 500;
-      res.end("internal server error");
-    }
-  })
-    .once("error", (err) => {
-      console.error(err);
-      process.exit(1);
+        await handle(req, res, parsedUrl);
+      } catch (err) {
+        log.error({ url: req.url, error: err }, "Error occurred handling");
+        res.statusCode = 500;
+        res.end("internal server error");
+      }
     })
-    .listen(port, () => {
-      console.info(`Server is listening on port ${port}`);
-    });
+      .once("error", (err) => {
+        log.error(err);
+        process.exit(1);
+      })
+      .listen(port, () => {
+        log.info(`Server is listening on port ${port}`);
+      });
+  });
 });

@@ -29,7 +29,9 @@ import path from "path";
 import fs, { mkdir } from "fs";
 import os from "os";
 import { randomUUID } from "crypto";
-const date = require("date-and-time");
+import "pino-roll";
+import "pino-cloudwatch";
+import "pino-pretty";
 
 const INTERVAL = 5000;
 const MAX_FILE_COUNT = 7;
@@ -43,7 +45,7 @@ const formatters = {
 const timestamp = () => `,"date":"${new Date(Date.now()).toISOString()}"`;
 
 const getLogger = () => {
-  if (process.env["NODE_ENV"] === "production") {
+  if (process.env["NODE_ENV"] !== "development") {
     const dirname = process.cwd();
 
     const configPath = path.join(
@@ -71,7 +73,7 @@ const getLogger = () => {
         .replace("${hostname}", os.hostname())
         .replace("${applicationContext}", "Doceditor")
         .replace("${guid}", randomUUID())
-        .replace("${date}", date.format(new Date(), "YYYY/MM/DDTHH.mm.ss"));
+        .replace("${date}", new Date().toLocaleString());
 
       return pino({
         level: "info",

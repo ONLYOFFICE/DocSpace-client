@@ -25,6 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
+import "pino-roll";
+import "pino-cloudwatch";
+import "pino-pretty";
+import "lodash.reduce";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -33,7 +37,7 @@ import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
-import { logger } from "@/logger";
+import { logger } from "@/logger.mjs";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 
 import "@/styles/globals.scss";

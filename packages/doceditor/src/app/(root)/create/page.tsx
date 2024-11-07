@@ -31,7 +31,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
-import { logger } from "@/logger";
+import { logger } from "@/logger.mjs";
 
 const Editor = dynamic(() => import("@/components/Editor"), {
   ssr: false,

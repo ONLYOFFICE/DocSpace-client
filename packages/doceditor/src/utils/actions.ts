@@ -41,7 +41,7 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 
-import { logger } from "@/logger";
+import { logger } from "@/logger.mjs";
 
 import type {
   ActionType,

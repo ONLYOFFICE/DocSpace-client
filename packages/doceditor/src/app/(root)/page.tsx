@@ -33,7 +33,7 @@ import { getSelectorsByUserAgent } from "react-device-detect";
 import { ValidationStatus } from "@docspace/shared/enums";
 
 import { getData, validatePublicRoomKey } from "@/utils/actions";
-import { logger } from "@/logger";
+import { logger } from "@/logger.mjs";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 

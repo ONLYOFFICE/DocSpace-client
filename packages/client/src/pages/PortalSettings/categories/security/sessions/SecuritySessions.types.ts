@@ -136,7 +136,12 @@ export type SessionsTableViewStoreProps = {
   userId?: string;
 } & Pick<
   SessionsStore,
-  "portalSessionsIds" | "portalSessionsMap" | "selection" | "bufferSelection"
+  | "fetchPortalSessions"
+  | "totalPortalSessions"
+  | "portalSessionsIds"
+  | "portalSessionsMap"
+  | "selection"
+  | "bufferSelection"
 >;
 
 export interface SessionsTableHeaderProps {

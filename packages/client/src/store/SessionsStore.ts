@@ -58,7 +58,7 @@ class SessionsStore {
 
   userSessions: TSession[] = [];
 
-  total: number = 0;
+  totalPortalSessions: number = 0;
 
   sessionsData = []; // Sessions inited in fetchData.
 
@@ -108,7 +108,7 @@ class SessionsStore {
         SocketEvents.SessionsInPortal,
         (data: TSessionsInPortal) => {
           this.addPortalSessions(data.users);
-          this.setTotal(data.total);
+          this.setTotalPortalSessions(data.total);
           resolve();
         },
       );
@@ -311,8 +311,8 @@ class SessionsStore {
     this.userSessions = userSessions;
   };
 
-  setTotal = (total: number) => {
-    this.total = total;
+  setTotalPortalSessions = (total: number) => {
+    this.totalPortalSessions = total;
   };
 
   setSelection = (selection: TPortalSession[]) => {

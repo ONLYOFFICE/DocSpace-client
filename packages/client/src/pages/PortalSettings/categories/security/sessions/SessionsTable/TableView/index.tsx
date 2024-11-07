@@ -27,6 +27,7 @@
 import { useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
+import { IndexRange } from "react-virtualized";
 
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
@@ -163,6 +164,8 @@ const TableView = (props: SessionsTableViewProps) => {
     portalSessionsMap,
     selection,
     bufferSelection,
+    fetchPortalSessions,
+    totalPortalSessions,
   } = storeProps!;
 
   const [hideColumns, setHideColumns] = useState(false);
@@ -170,6 +173,10 @@ const TableView = (props: SessionsTableViewProps) => {
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+  const loadNextPage = async ({ startIndex }: IndexRange) => {
+    fetchPortalSessions(startIndex);
+  };
 
   return (
     <StyledTableContainer forwardedRef={ref} useReactWindow>
@@ -189,9 +196,9 @@ const TableView = (props: SessionsTableViewProps) => {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         filesLength={portalSessionsIds.length}
-        hasMoreFiles={false}
-        itemCount={portalSessionsIds.length}
-        fetchMoreFiles={async () => {}}
+        hasMoreFiles={portalSessionsIds.length < totalPortalSessions}
+        itemCount={totalPortalSessions}
+        fetchMoreFiles={loadNextPage}
       >
         {portalSessionsIds.map((sessionId) => {
           const session = portalSessionsMap.get(sessionId);
@@ -221,12 +228,20 @@ const TableView = (props: SessionsTableViewProps) => {
 export default inject<TStore>(({ userStore, sessionsStore }) => {
   const userId = userStore.user?.id;
 
-  const { portalSessionsIds, portalSessionsMap, selection, bufferSelection } =
-    sessionsStore;
+  const {
+    fetchPortalSessions,
+    totalPortalSessions,
+    portalSessionsIds,
+    portalSessionsMap,
+    selection,
+    bufferSelection,
+  } = sessionsStore;
 
   return {
     storeProps: {
       userId,
+      fetchPortalSessions,
+      totalPortalSessions,
       selection,
       bufferSelection,
       portalSessionsIds,

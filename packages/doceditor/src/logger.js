@@ -26,7 +26,7 @@
 
 import pino from "pino";
 import path from "path";
-import fs from "fs";
+import fs, { mkdir } from "fs";
 import os from "os";
 import { randomUUID } from "crypto";
 const date = require("date-and-time");
@@ -99,11 +99,19 @@ const getLogger = () => {
       transport: {
         target: "pino-roll",
         options: {
-          file: path.join("logs", "doceditor"),
+          file: path.join(
+            process.cwd(),
+            "..",
+            "..",
+            "..",
+            "logs",
+            "web.doceditor",
+          ),
           frequency: "daily",
           limit: { count: MAX_FILE_COUNT },
           dateFormat: "yyyy-MM-dd",
           extension: ".log",
+          mkdir: true,
         },
       },
     });

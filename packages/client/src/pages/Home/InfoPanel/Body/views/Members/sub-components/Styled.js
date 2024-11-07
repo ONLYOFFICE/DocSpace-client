@@ -30,9 +30,12 @@ import { Base } from "@docspace/shared/themes";
 const LinksBlock = styled.div`
   display: flex;
   height: 100%;
-  padding-top: 3px;
+
   align-items: center;
   justify-content: space-between;
+
+  padding-bottom: 3px;
+  box-sizing: border-box;
 
   p {
     color: ${({ theme }) => theme.infoPanel.members.subtitleColor};

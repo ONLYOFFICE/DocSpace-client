@@ -383,6 +383,7 @@ class SsoFormStore {
         phone: this.phone,
       },
       hideAuthPage: this.hideAuthPage,
+      usersType: this.usersType,
     };
   };
   saveSsoSettings = async (t) => {

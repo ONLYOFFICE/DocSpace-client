@@ -213,6 +213,13 @@ class SessionsStore {
   };
 
   handleUserEnterPortal = (newPortalSession: TPortalSession) => {
+    // update userSessions if new session belongs to selected user
+    if (newPortalSession.userId === this.bufferSelection?.userId) {
+      const { userId, session } = newPortalSession;
+      this.handleUserEnterSessionInPortal({ userId, session });
+    }
+
+    // update portalSessions
     const currentSession = this.portalSessionsMap.get(newPortalSession.userId);
 
     if (!currentSession) {
@@ -234,6 +241,16 @@ class SessionsStore {
     const currentSession = this.portalSessionsMap.get(userId);
     if (!currentSession) return;
 
+    // update userSessions if new session belongs to selected user
+    if (userId === this.bufferSelection?.userId) {
+      // Todo: fix when back starts returning sessionId
+      this.handleUserLeaveSessionInPortal({
+        userId,
+        sessionId: currentSession.session.id,
+      });
+    }
+
+    // update portalSessions
     currentSession.session.status = "offline";
     currentSession.session.date = new Date().toISOString();
 

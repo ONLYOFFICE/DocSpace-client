@@ -31,6 +31,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
+import { logger } from "@/logger";
 
 const Editor = dynamic(() => import("@/components/Editor"), {
   ssr: false,
@@ -38,6 +39,8 @@ const Editor = dynamic(() => import("@/components/Editor"), {
 const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
   ssr: false,
 });
+
+const log = logger.child({ module: "Create page" });
 
 type TSearchParams = {
   parentId: string;
@@ -56,6 +59,8 @@ type TSearchParams = {
 
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
   const baseURL = getBaseUrl();
+
+  log.debug("Empty search params at create file");
 
   if (!searchParams) redirect(baseURL);
 
@@ -88,10 +93,27 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     password,
   };
 
+  log.info(
+    { fileTitle, parentId, templateId, open, action },
+    "Create new file",
+  );
+
   let fileId = undefined;
   let fileError: Error | undefined = undefined;
 
-  if (!templateId && fromFile) redirect(baseURL);
+  if (!templateId && fromFile) {
+    log.debug(
+      { fileTitle, parentId, templateId, open, action },
+      "Empty templateId for create file from other file",
+    );
+
+    redirect(baseURL);
+  }
+
+  log.debug(
+    { fileTitle, parentId, templateId, open, action },
+    "Start create file",
+  );
 
   const res =
     fromFile && templateId
@@ -106,6 +128,10 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       : await createFile(parentId, fileTitle, templateId, formId);
 
   if (!res) {
+    log.error(
+      { fileTitle, parentId, templateId, open, action },
+      "File create failed, open empty editor",
+    );
     const documentserverUrl = await getEditorUrl();
 
     return (
@@ -129,6 +155,11 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   ) {
     const documentserverUrl = await getEditorUrl();
 
+    log.debug(
+      { fileTitle, parentId, templateId, open, action, error },
+      "Open empty editor",
+    );
+
     return (
       <Editor
         documentserverUrl={documentserverUrl?.docServiceUrl ?? ""}
@@ -145,10 +176,17 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       searchParams.append("action", action);
     }
 
+    log.debug(
+      { fileTitle, parentId, fileId, searchParams },
+      "File created success",
+    );
+
     const redirectURL = `/doceditor?${searchParams.toString()}`;
 
     return permanentRedirect(redirectURL);
   }
+
+  log.error({ fileTitle, parentId, error: fileError }, "File created error");
 
   return (
     <CreateFileError

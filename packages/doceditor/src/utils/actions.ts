@@ -41,6 +41,8 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 
+import { logger } from "@/logger";
+
 import type {
   ActionType,
   IInitialConfig,
@@ -51,10 +53,14 @@ import type {
 
 import { availableActions, REPLACED_URL_PATH } from "./constants";
 
+const log = logger.child({ module: "API" });
+
 export async function getFillingSession(
   fillingSessionId: string,
   share?: string,
 ) {
+  log.debug("Start GET /files/file/fillresult");
+
   const [request] = createRequest(
     [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
     [
@@ -73,7 +79,7 @@ export async function getFillingSession(
       cause: await response.json(),
     });
   } catch (error) {
-    console.log("File copyas error ", error);
+    log.error({ error, fillingSessionId }, "Get filling session failed");
   }
 }
 
@@ -101,6 +107,8 @@ export async function fileCopyAs(
   | undefined
 > {
   try {
+    log.debug(`Start POST /files/file/${fileId}/copyas`);
+
     const [createFile] = createRequest(
       [`/files/file/${fileId}/copyas`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -116,17 +124,28 @@ export async function fileCopyAs(
 
     const fileRes = await fetch(createFile);
 
-    if (fileRes.status === 401)
+    if (fileRes.status === 401) {
+      log.debug(`POST /files/file/${fileId}/copyas user auth failed`);
+
       return {
         file: undefined,
         error: { status: 401, message: "", type: "", stack: "" },
       };
+    }
 
-    if (!fileRes.ok) return;
+    if (!fileRes.ok) {
+      log.error({ error: fileRes }, `POST /files/file/${fileId}/copyas failed`);
+
+      return;
+    }
 
     const file = await fileRes.json();
 
-    console.log("File copyas success ", file);
+    if (file.error)
+      log.error(
+        { error: file.error },
+        `POST /files/file/${fileId}/copyas failed`,
+      );
 
     return {
       file: file.response,
@@ -143,7 +162,7 @@ export async function fileCopyAs(
         : undefined,
     };
   } catch (e: any) {
-    console.log("File copyas error ", e);
+    log.error({ error: e }, `POST /files/file/${fileId}/copyas failed`);
     return {
       file: undefined,
       error:
@@ -181,6 +200,8 @@ export async function createFile(
   | undefined
 > {
   try {
+    log.debug(`Start POST /files/${parentId}/file`);
+
     const [createFile] = createRequest(
       [`/files/${parentId}/file`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -190,16 +211,22 @@ export async function createFile(
 
     const fileRes = await fetch(createFile);
 
-    if (fileRes.status === 401)
+    if (fileRes.status === 401) {
+      log.debug(`POST /files/${parentId}/file user auth failed`);
+
       return {
         file: undefined,
         error: { status: 401, message: "", type: "", stack: "" },
       };
+    }
 
     if (!fileRes.ok && fileRes.status !== 403) return;
 
     const file = await fileRes.json();
-    console.log("File create success ", file);
+
+    if (file.error)
+      log.error({ error: file.error }, `POST /files/${parentId}/file failed`);
+
     return {
       file: file.response,
       error: file.error
@@ -215,7 +242,7 @@ export async function createFile(
         : undefined,
     };
   } catch (e: any) {
-    console.log("File create error ", e);
+    log.error({ error: e }, `POST /files/${parentId}/file failed`);
     return {
       file: undefined,
       error:
@@ -255,7 +282,6 @@ export async function getData(
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),
-
       getUser(share),
       getSettings(share),
     ]);
@@ -358,6 +384,8 @@ export async function getData(
 }
 
 export async function getUser(share?: string) {
+  log.debug("Start GET /people/@self");
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -373,7 +401,11 @@ export async function getUser(share?: string) {
 
   if (userRes.status === 401) return undefined;
 
-  if (!userRes.ok) return;
+  if (!userRes.ok) {
+    if (!share) log.error({ error: userRes }, `GET /people/@self failed`);
+
+    return;
+  }
 
   const user = await userRes.json();
 
@@ -381,6 +413,8 @@ export async function getUser(share?: string) {
 }
 
 export async function getSettings(share?: string) {
+  log.debug("Start GET /settings");
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -397,7 +431,11 @@ export async function getSettings(share?: string) {
 
   if (settingsRes.status === 403) return `access-restricted`;
 
-  if (!settingsRes.ok) return;
+  if (!settingsRes.ok) {
+    log.error({ error: settingsRes }, `GET /settings failed`);
+
+    return;
+  }
 
   const settings = await settingsRes.json();
 
@@ -405,11 +443,17 @@ export async function getSettings(share?: string) {
 }
 
 export const checkIsAuthenticated = async () => {
+  log.debug("Start GET /authentication");
+
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
 
   const res = await fetch(request);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    log.error({ error: request }, `GET /authentication failed`);
+
+    return;
+  }
 
   const isAuth = await res.json();
 
@@ -417,6 +461,8 @@ export const checkIsAuthenticated = async () => {
 };
 
 export async function validatePublicRoomKey(key: string, fileId?: string) {
+  log.debug("Start GET /files/share");
+
   const [validatePublicRoomKey] = createRequest(
     [`/files/share/${key}?fileid=${fileId}`],
     [key ? ["Request-Token", key] : ["", ""]],
@@ -425,7 +471,11 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
 
   const res = await fetch(validatePublicRoomKey);
   if (res.status === 401) return undefined;
-  if (!res.ok) return;
+  if (!res.ok) {
+    log.error({ error: res }, `GET /files/share failed`);
+
+    return;
+  }
 
   const room = await res.json();
 
@@ -460,7 +510,8 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
-  const startDate = new Date();
+  log.debug(`Start GET /files/file/${fileId}/openedit`);
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -477,12 +528,10 @@ export async function openEdit(
     const config = await res.json();
 
     if (res.ok) {
-      const timer = new Date().getTime() - startDate.getTime();
-
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return { ...config.response, timer } as IInitialConfig;
+      return { ...config.response } as IInitialConfig;
     }
 
     const isAuth = share ? true : await checkIsAuthenticated();
@@ -511,6 +560,8 @@ export async function openEdit(
         : { ...config.error, status, editorUrl }
       : { message: "unauthorized", status, editorUrl };
 
+    log.error({ fileId, error }, `GET /files/file/${fileId}/openedit failed`);
+
     return error as TError;
   }
 
@@ -529,6 +580,8 @@ export async function getEditorUrl(
   editorSearchParams?: string,
   share?: string,
 ) {
+  log.debug(`Start GET /files/docservice`);
+
   const [request] = createRequest(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
@@ -538,7 +591,11 @@ export async function getEditorUrl(
 
   const res = await fetch(request);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    log.error({ error: res }, "GET /files/docservice failed");
+
+    return;
+  }
 
   const editorUrl = await res.json();
 
@@ -546,6 +603,8 @@ export async function getEditorUrl(
 }
 
 export async function getColorTheme() {
+  log.debug(`Start GET /settings/colortheme`);
+
   const [getSettings] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -554,7 +613,10 @@ export async function getColorTheme() {
 
   const res = await fetch(getSettings);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    log.error({ error: res }, "GET /settings/colortheme failed");
+    return;
+  }
 
   const colorTheme = await res.json();
 

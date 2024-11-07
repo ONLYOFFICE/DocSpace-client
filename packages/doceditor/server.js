@@ -27,6 +27,7 @@
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
+
 const config = require("./config/config.json");
 
 const dev = process.env.NODE_ENV === "development";
@@ -57,7 +58,6 @@ app.prepare().then(() => {
       process.exit(1);
     })
     .listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
+      console.info(`Server is listening on port ${port}`);
     });
 });
-

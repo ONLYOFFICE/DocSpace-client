@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 
@@ -33,12 +33,15 @@ import { getSelectorsByUserAgent } from "react-device-detect";
 import { ValidationStatus } from "@docspace/shared/enums";
 
 import { getData, validatePublicRoomKey } from "@/utils/actions";
+import { logger } from "@/logger";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 
 const FilePassword = dynamic(() => import("@/components/file-password"), {
   ssr: false,
 });
+
+const log = logger.child({ module: "Doceditor page" });
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
@@ -54,6 +57,21 @@ async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
 
+  const cookieStore = cookies();
+
+  log.info(
+    {
+      fileId: fileId ?? fileid,
+      action: action ?? "not set",
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+      version: version ?? "not set",
+      editorType: editorType ?? "not set",
+      doc: doc ?? "not set",
+    },
+    "Start open file at edit",
+  );
+
   const hdrs = headers();
 
   let type = editorType;
@@ -62,20 +80,56 @@ async function Page({ searchParams }: RootPageProps) {
   if (ua && !type) {
     const { isMobile } = getSelectorsByUserAgent(ua);
 
-    if (isMobile) type = "mobile";
+    if (isMobile) {
+      type = "mobile";
+
+      log.debug(
+        {
+          file: fileId ?? fileid,
+          isShare: !!share,
+          isAuth: !!cookieStore.get("asc_auth_key")?.value,
+        },
+        "Open mobile view",
+      );
+    }
   }
 
   if (share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
-    if (!roomData) return;
-
+    if (!roomData) {
+      log.error(
+        {
+          fileId: fileId ?? fileid,
+          isShare: !!share,
+          isAuth: !!cookieStore.get("asc_auth_key")?.value,
+        },
+        "Wrong share key",
+      );
+      return;
+    }
     const { status } = roomData.response;
 
     if (status === ValidationStatus.Password) {
+      log.debug(
+        {
+          fileId: fileId ?? fileid,
+          isShare: !!share,
+          isAuth: !!cookieStore.get("asc_auth_key")?.value,
+        },
+        "Open file password component",
+      );
       return <FilePassword {...roomData.response} shareKey={share} />;
     }
   }
 
+  log.debug(
+    {
+      fileId: fileId ?? fileid,
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+    },
+    "Start get data for open file",
+  );
   const data = await getData(
     fileId ?? fileid ?? "",
     version,
@@ -106,6 +160,16 @@ async function Page({ searchParams }: RootPageProps) {
       data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
     }
   }
+
+  log.debug(
+    {
+      fileId: fileId ?? fileid,
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+      docApiUrl,
+    },
+    "Open file",
+  );
 
   return (
     <>

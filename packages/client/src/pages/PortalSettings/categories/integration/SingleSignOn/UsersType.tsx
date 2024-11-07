@@ -88,7 +88,7 @@ const UsersType = (props: UsersTypeProps) => {
           isMobileView={isMobile()}
           isDisabled={!enableSso || isLoadingXml}
           directionX="left"
-          scaledOptions
+          scaledOptions={!isMobile()}
         />
       </StyledInputWrapper>
     </Box>

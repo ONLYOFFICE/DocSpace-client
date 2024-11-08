@@ -639,7 +639,7 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteAccountSearchPlaceholder")
-                : t("InviteRoomSearchPlaceholder")
+                : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed={true}

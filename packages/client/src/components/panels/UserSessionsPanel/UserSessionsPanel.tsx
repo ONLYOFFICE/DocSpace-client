@@ -74,12 +74,13 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
 
   useEffect(() => {
     if (!bufferSelection) return;
+    const userId = bufferSelection.userId;
 
-    fetchUserSessions(bufferSelection.userId);
-    subscribeToUserSessions(bufferSelection.userId);
+    fetchUserSessions(userId);
+    subscribeToUserSessions(userId);
 
     return () => {
-      unsubscribeToUserSessions();
+      unsubscribeToUserSessions(userId);
       clearUserSessions();
     };
   }, [

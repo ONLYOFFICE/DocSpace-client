@@ -181,12 +181,20 @@ class SessionsStore {
     SocketHelper.emit(SocketCommands.SubscribeToPortal);
     SocketHelper.on(SocketEvents.EnterInPortal, this.handleUserEnterPortal);
     SocketHelper.on(SocketEvents.LeaveInPortal, this.handleUserLeavePortal);
+    SocketHelper.on(
+      SocketEvents.NewSessionInPortal,
+      this.handleNewSessionInPortal,
+    );
   };
 
   unsubscribeToPortalSessions = () => {
     SocketHelper.emit(SocketCommands.UnsubscribeToPortal);
     SocketHelper.off(SocketEvents.EnterInPortal, this.handleUserEnterPortal);
     SocketHelper.off(SocketEvents.LeaveInPortal, this.handleUserLeavePortal);
+    SocketHelper.off(
+      SocketEvents.NewSessionInPortal,
+      this.handleNewSessionInPortal,
+    );
   };
 
   subscribeToUserSessions = (id: string) => {
@@ -201,8 +209,8 @@ class SessionsStore {
     );
   };
 
-  unsubscribeToUserSessions = () => {
-    SocketHelper.emit(SocketCommands.UnsubscribeToUser);
+  unsubscribeToUserSessions = (id: string) => {
+    SocketHelper.emit(SocketCommands.UnsubscribeToUser, { id });
     SocketHelper.off(
       SocketEvents.EnterSessionInPortal,
       this.handleUserEnterSessionInPortal,
@@ -294,6 +302,10 @@ class SessionsStore {
       foundSession.date = new Date().toISOString();
       this.sortUserSessions();
     }
+  };
+
+  handleNewSessionInPortal = (newPortalSession: TPortalSession) => {
+    this.handleUserEnterPortal(newPortalSession);
   };
 
   sortUserSessions = () => {

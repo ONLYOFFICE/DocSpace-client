@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników {{productName}}. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",
   "MakeRoomPrivateTitle": "Uczyń pokój prywatnym",
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
-  "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie tylko do odczytu dla wszystkich plików.",
   "PublicRoomSystemFoldersDescription": "Katalogi systemowe przechowują kopie formularzy na różnych etapach ukończenia. Wypełniane formularze są przechowywane w katalogu W toku, a wypełnione w katalogu Gotowe.",
   "PublicRoomSystemFoldersTitle": "Katalogi systemowe",
   "RoomEditing": "Edycja pokoi",

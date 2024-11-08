@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Дозволи",
+  "ConsentDescription": "Подаци дељени са <strong>{{displayName}}</strong> биће регулисани <strong>{{nameApp}}</strong> <6>политиком приватности</6> и <6> условима коришћења </6>. Ову сагласност можете опозвати у било ком тренутку у подешавањима налога {{productName}}.",
+  "ConsentSubHeader": "<1> {{nameApp}}</1> жели да приступи следећим подацима у <strong> вашем налогу {{productName}}</strong>:",
+  "DenyButton": "Одбиј",
+  "NotYou": "Нисте ви?",
+  "SignedInAs": "Пријављени сте као",
+  "ToContinue": "Да наставите до"
+}

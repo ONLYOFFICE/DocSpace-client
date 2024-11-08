@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocí této funkce můžete pozvat pouze stávající uživatele služby {{productName}}. Po vytvoření místnosti nebudete moci seznam uživatelů měnit.",
   "MakeRoomPrivateTitle": "Vytvořte si soukromou místnost",
   "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}",
-  "PublicRoomBarDescription": "Tato místnost je k dispozici každému, kdo má odkaz. Externí uživatelé budou mít oprávnění pouze k prohlížení všech souborů.",
   "PublicRoomSystemFoldersDescription": "V systémových složkách se ukládají kopie formulářů v různých fázích dokončení. Formuláře, které se vyplňují, jsou uloženy ve složce Rozpracované a dokončené formuláře jsou uloženy ve složce Kompletní.",
   "PublicRoomSystemFoldersTitle": "Systémové složky",
   "RoomEditing": "Úprava místnosti",

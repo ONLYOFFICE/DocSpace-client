@@ -1,12 +1,10 @@
 {
   "AddManually": "手動で追加する",
-  "AddManuallyDescriptionAccounts": "新規ユーザーをメールで{{productName}}に招待する",
-  "AddManuallyDescriptionRoom": "既存の{{productName}}ユーザーを名前を使ってルームに追加したり、新しいユーザーをメールアドレスで招待することができます",
   "EmailErrorMessage": "メールアドレスが有効ではありません。メールアドレスをダブルクリックすると編集できます。",
   "GroupMaxAvailableRoleWarning": "グループは{{roleName}}役割を最大として、ルームに追加することができます。ただし、グループの追加に成功した後、グループ内の個々のユーザの役割を変更することができます。",
   "InvitationLanguage": "招待の言語",
   "InviteAccountSearchPlaceholder": "メールで招待する",
-  "InviteRoomSearchPlaceholder": "名前またはメールで招待する",
+  "InviteNewAccountManuallyDescription": "新規ユーザーをメールで{{productName}}に招待する",
   "InviteViaLink": "リンクで招待する",
   "InviteViaLinkDescriptionAccounts": "{{productName}}で自己認証のためのユニバーサルリンクを作成する",
   "InviteViaLinkDescriptionRoom": "ルーム内で自己認証のためのユニバーサルリンクを作成する",

@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Toestaan",
+  "ConsentDescription": "Gegevens die worden gedeeld met <strong>{{displayName}}</strong> vallen onder <strong>{{nameApp}}</strong> <6>privacybeleid</6> en <6>voorwaarden voor diensten</6>. U kunt deze toestemming te allen tijde intrekken in uw {{productName}} accountinstellingen.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> wil toegang tot de volgende gegevens in <strong>uw {{productName}} account</strong>:",
+  "DenyButton": "Weigeren",
+  "NotYou": "Bent u dit niet?",
+  "SignedInAs": "Aangemeld als",
+  "ToContinue": "Om door te gaan naar"
+}

@@ -323,8 +323,8 @@ export async function getUserFromConfirm(
 
   const user = await res.json();
 
-  if (user && user.displayName) {
-    user.displayName = Encoder.htmlDecode(user.displayName);
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
   }
 
   return user.response as TUser;

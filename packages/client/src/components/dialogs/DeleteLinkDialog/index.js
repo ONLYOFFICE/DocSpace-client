@@ -101,6 +101,9 @@ const DeleteLinkDialogComponent = (props) => {
         return t("Files:RevokeSharedLinkDescriptionPublicRoom");
     }
 
+    if (isPublicRoomType || isCustomRoom)
+      return t("Files:DeleteSharedCustomPublic");
+
     return t("Files:DeleteSharedLink");
   };
 

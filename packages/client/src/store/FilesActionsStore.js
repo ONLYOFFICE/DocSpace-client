@@ -303,7 +303,7 @@ class FilesActionStore {
       return !isHidden;
     });
 
-    if (roomFolder && roomFolder.quotaLimit) {
+    if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
 
       const filesSize = withoutHiddenFiles.reduce((acc, file) => {
@@ -2862,6 +2862,9 @@ class FilesActionStore {
       } else {
         if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);
+
+          const operationId = uniqueid("operation_");
+          this.updateCurrentFolder(null, [roomId], null, operationId);
         } else {
           this.filesStore.setInRoomFolder(roomId, false);
         }
@@ -2874,10 +2877,22 @@ class FilesActionStore {
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
-    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
-      this.filesStore;
-    const { isRootFolder, setCreatedBy, id, setInRoom, setSelectedFolder } =
-      this.selectedFolderStore;
+    const {
+      setRoomOwner,
+      setFolder,
+      setFolders,
+      setSelected,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const {
+      isRootFolder,
+      setCreatedBy,
+      id,
+      setInRoom,
+      setSecurity,
+      setAccess,
+    } = this.selectedFolderStore;
 
     const roomId = selection.length
       ? selection[0].id
@@ -2885,12 +2900,15 @@ class FilesActionStore {
         ? bufferSelection.id
         : id;
 
+    console.log("isRootFolder", isRootFolder);
     return setRoomOwner(userId, [roomId])
       .then(async (res) => {
         if (isRootFolder) {
           setFolder(res[0]);
         } else {
           setCreatedBy(res[0].createdBy);
+          setSecurity(res[0].security);
+          setAccess(res[0].access);
 
           const isMe = userId === this.userStore.user.id;
           if (isMe) setInRoom(true);
@@ -2898,9 +2916,6 @@ class FilesActionStore {
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Files:AppointNewOwner"));
-
-        const newInfo = await getRoomInfo(roomId);
-        setSelectedFolder(newInfo);
       })
       .catch((e) => toastr.error(e))
       .finally(() => {
@@ -3131,6 +3146,7 @@ class FilesActionStore {
           label: "",
           alert: false,
           operationId: pbData.operationId,
+          filesCount: pbData.filesCount,
         });
       }
     }
@@ -3170,7 +3186,11 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+    const pbData = {
+      icon: "exportIndex",
+      operationId: uniqueid("operation_"),
+      filesCount: 1,
+    };
 
     setSecondaryProgressBarData({
       icon: pbData.icon,
@@ -3179,6 +3199,7 @@ class FilesActionStore {
       label: "",
       alert: false,
       operationId: pbData.operationId,
+      filesCount: pbData.filesCount,
     });
 
     this.alreadyExportingRoomIndex = true;

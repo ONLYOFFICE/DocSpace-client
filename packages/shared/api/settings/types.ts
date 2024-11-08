@@ -270,6 +270,7 @@ export type TMigrationUser = {
   email: string;
   displayName: string;
   firstName: string;
+  lastName: string;
   userType: string;
   migratingFiles: {
     foldersCount: number;

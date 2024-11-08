@@ -23,32 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useEffect, useLayoutEffect } from "react";
 
-import { inject, observer } from "mobx-react";
-
-import Share from "@docspace/shared/components/share";
-
-export default inject<TStore>(({ infoPanelStore, userStore }) => {
-  const selfId = userStore.user?.id ?? "";
-
-  const {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-  } = infoPanelStore;
-
-  return {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-    selfId,
-  };
-})(observer(Share));
+export const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;

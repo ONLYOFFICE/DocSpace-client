@@ -24,31 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
-import Share from "@docspace/shared/components/share";
-
-export default inject<TStore>(({ infoPanelStore, userStore }) => {
-  const selfId = userStore.user?.id ?? "";
-
-  const {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-  } = infoPanelStore;
-
-  return {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-    selfId,
-  };
-})(observer(Share));
+export const searchMigrationUsers = (
+  accounts: TEnhancedMigrationUser[],
+  searchValue: string,
+) => {
+  const search = searchValue.toLowerCase();
+  return accounts.filter(
+    (data) =>
+      data.firstName?.toLowerCase().startsWith(search) ||
+      data.lastName?.toLowerCase().startsWith(search) ||
+      data.displayName?.toLowerCase().startsWith(search) ||
+      data.email?.toLowerCase().startsWith(search),
+  );
+};

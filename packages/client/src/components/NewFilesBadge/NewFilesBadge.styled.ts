@@ -110,6 +110,7 @@ export const StyledItem = styled.div<{
 export const StyledRoomItem = styled.div`
   height: 24px;
   width: fit-content;
+  max-width: 100%;
 
   display: flex;
   flex-direction: row;

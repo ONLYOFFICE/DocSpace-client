@@ -23,32 +23,28 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useCallback, useRef } from "react";
 
-import { inject, observer } from "mobx-react";
+import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
 
-import Share from "@docspace/shared/components/share";
+export function useEventCallback<Args extends unknown[], R>(
+  fn: (...args: Args) => R,
+): (...args: Args) => R;
+export function useEventCallback<Args extends unknown[], R>(
+  fn: ((...args: Args) => R) | undefined,
+): ((...args: Args) => R) | undefined;
+export function useEventCallback<Args extends unknown[], R>(
+  fn: ((...args: Args) => R) | undefined,
+): ((...args: Args) => R) | undefined {
+  const ref = useRef<typeof fn>(() => {
+    throw new Error("Cannot call an event handler while rendering.");
+  });
 
-export default inject<TStore>(({ infoPanelStore, userStore }) => {
-  const selfId = userStore.user?.id ?? "";
+  useIsomorphicLayoutEffect(() => {
+    ref.current = fn;
+  }, [fn]);
 
-  const {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-  } = infoPanelStore;
-
-  return {
-    setView,
-    getPrimaryFileLink,
-
-    editFileLink,
-    addFileLink,
-    shareChanged,
-    setShareChanged,
-    selfId,
-  };
-})(observer(Share));
+  return useCallback((...args: Args) => ref.current?.(...args), [ref]) as (
+    ...args: Args
+  ) => R;
+}

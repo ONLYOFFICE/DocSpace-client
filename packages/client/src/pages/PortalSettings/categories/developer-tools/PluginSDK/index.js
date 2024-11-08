@@ -38,14 +38,13 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { StyledContainer } from "./StyledPluginSDK";
 
-const LEARN_MORE_LINK = "https://api.onlyoffice.com/docspace/pluginssdk/";
-
 const PluginSDK = ({
   systemPluginList,
   currentDeviceType,
   isLoading,
   isEmptyList,
   theme,
+  apiPluginSDKLink,
 }) => {
   const { t, ready } = useTranslation([
     "WebPlugins",
@@ -143,7 +142,7 @@ const PluginSDK = ({
         primary
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
-        onClick={() => window.open(LEARN_MORE_LINK, "_blank")}
+        onClick={() => window.open(apiPluginSDKLink, "_blank")}
       ></Button>
       {!isEmptyList && list.length > 0 && (
         <>
@@ -158,8 +157,15 @@ const PluginSDK = ({
 };
 
 export default inject(({ pluginStore, settingsStore }) => {
-  const { currentDeviceType, theme } = settingsStore;
+  const { currentDeviceType, theme, apiPluginSDKLink } = settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
-  return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };
+  return {
+    currentDeviceType,
+    systemPluginList,
+    theme,
+    isLoading,
+    isEmptyList,
+    apiPluginSDKLink,
+  };
 })(observer(PluginSDK));

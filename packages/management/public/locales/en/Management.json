@@ -1,5 +1,6 @@
 {
   "ChangeDomainDescription": "Changing the domain name may cause some systems' failure. After changing the domain name you will need to reconfigure the following settings: mail, account, jabber parameters.",
+  "CompleteSetup": "Complete the setup",
   "ConfigurationDescription": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a {{productName}} name. You can change the created {{productName}} name later using the space settings.",
   "ConfigurationHeader": "Current space configuration",
   "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the space address settings, you need to set the future {{productName}} name",

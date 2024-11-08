@@ -303,7 +303,7 @@ class FilesActionStore {
       return !isHidden;
     });
 
-    if (roomFolder && roomFolder.quotaLimit) {
+    if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
 
       const filesSize = withoutHiddenFiles.reduce((acc, file) => {

@@ -499,11 +499,15 @@ class SettingsStore {
   }
 
   get sdkLink() {
-    return `${this.apiDocsLink}/docspace/jssdk/`;
+    return `${this.apiDocsLink}/docspace/javascript-sdk/get-started/basic-concepts/`;
   }
 
   get apiBasicLink() {
-    return `${this.apiDocsLink}/docspace/basic`;
+    return `${this.apiDocsLink}/docspace/`;
+  }
+
+  get apiPluginSDKLink() {
+    return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
   }
 
   get wizardCompleted() {

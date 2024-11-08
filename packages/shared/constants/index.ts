@@ -191,3 +191,5 @@ export const SDK_SCRIPT_URL =
 
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
+
+export const GENERAL_LINK_HEADER_KEY = "general-link_header";

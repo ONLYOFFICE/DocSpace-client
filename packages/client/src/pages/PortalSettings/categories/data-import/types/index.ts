@@ -342,6 +342,7 @@ export interface InjectedTypeSelectTableProps extends AccountsTableProps {
   changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
   UserTypes: TStore["importAccountsStore"]["UserTypes"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isOwner: TStore["userStore"]["user"]["isOwner"];
 }
 
 export interface TypeSelectTableViewProps {

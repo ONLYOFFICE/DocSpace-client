@@ -30,7 +30,10 @@ import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType } from "@docspace/shared/enums";
-import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
+import {
+  GENERAL_LINK_HEADER_KEY,
+  LINKS_LIMIT_COUNT,
+} from "@docspace/shared/constants";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
@@ -147,8 +150,8 @@ const Members = ({
   if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
-        <LinksBlock key="general-link_header">
-          <Text fontSize="14px" fontWeight={600}>
+        <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
+          <Text fontSize="14px" fontWeight={600} lineHeight="16px">
             {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 

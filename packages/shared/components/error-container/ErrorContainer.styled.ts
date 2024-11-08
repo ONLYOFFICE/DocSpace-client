@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
+import { isMobileOnly } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
+
 import { desktop, mobile } from "@docspace/shared/utils";
 
 // doesn't require mirroring for RTL
@@ -57,12 +58,12 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     font-weight: 600;
   }
 
-  @media ${desktop} {
+  ${!isMobileOnly &&
+  css`
     .logo-wrapper {
       width: 386px;
-      height: 44px;
     }
-  }
+  `}
 
   #container {
     position: relative;

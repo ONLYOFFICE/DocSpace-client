@@ -325,7 +325,7 @@
   "NotFoundFilterGuestsDescription": "Niciunul dintre invitații nu se potrivește cu ceea ce căutați. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de invitați.",
   "NotFoundGroups": "Nu s-au găsit grupuri",
   "NotFoundGuests": "Niciun invitat nu a fost deocamdată adăugat",
-  "NotFoundGuestsDescription": "Noii invitați vor fi adăugați aici de îndată ce le invitați la sală. Puteți partaja invitații dvs și puteți adăuga pe lista dvs invitații care au fost invitați de alte persoane.",
+  "NotFoundGuestsDescription": "Noii invitați vor fi adăugați aici de îndată ce le invitați la sală. ",
   "NotFoundGuestsFilter": "Nu s-au găsit invitați",
   "NotFoundLanguage": "Limba dvs nu este afișată? Vă invităm să ne contactați prin email <1>{{supportEmail}}</1> dacă doriți să contribuiți la traducerea și să obțineți beneficii.",
   "NotFoundTitle": "Niciun rezultat",

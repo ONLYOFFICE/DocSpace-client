@@ -326,7 +326,7 @@
   "NotFoundFilterGuestsDescription": "Keine Gäste entsprechen Ihrer Suche. Bitte passen Sie die Suchparameter an oder leeren Sie das Suchfeld, um die vollständige Liste der Gäste anzuzeigen.",
   "NotFoundGroups": "Keine Gruppen gefunden",
   "NotFoundGuests": "Noch keine Gäste hinzugefügt",
-  "NotFoundGuestsDescription": "Neue Gäste werden hier angezeigt, sobald Sie sie in den Raum einladen. Sie können Ihre Gäste teilen und von anderen eingeladene Gäste zu Ihrer Liste hinzufügen.",
+  "NotFoundGuestsDescription": "Neue Gäste werden hier angezeigt, sobald Sie sie in den Raum einladen.",
   "NotFoundGuestsFilter": "Keine Gäste gefunden",
   "NotFoundLanguage": "Sie können Ihre Sprache nicht finden? Kontaktieren Sie uns unter <1>{{supportEmail}}</1>, um am Übersetzungsprogramm teilzunehmen und Belohnungen zu erhalten.",
   "NotFoundTitle": "Keine Suchergebnisse",

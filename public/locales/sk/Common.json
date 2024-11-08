@@ -327,7 +327,7 @@
   "NotFoundFilterGuestsDescription": "Vyhľadávaniu nezodpovedá žiadny hosť. Ak chcete zobraziť úplný zoznam hostí, upravte parametre vyhľadávania alebo vymažte vyhľadávacie políčko.",
   "NotFoundGroups": "Neboli nájdené žiadne skupiny",
   "NotFoundGuests": "Zatiaľ neboli pridaní žiadni hostia",
-  "NotFoundGuestsDescription": "Noví hostia budú pridaní sem, po tom, ako ich pozvete do miestnosti. Svojich hostí môžete zdieľať a pridávať do zoznamu hostí pozvaných inými osobami.",
+  "NotFoundGuestsDescription": "Noví hostia budú pridaní sem, po tom, ako ich pozvete do miestnosti.",
   "NotFoundGuestsFilter": "Nenašli sa žiadni hostia",
   "NotFoundLanguage": "Nenašli ste svoj jazyk? Skontaktujte nás na <1>{{supportEmail}}</1> a môžete sa pridať k prekladateľom a získať odmeny.",
   "NotFoundTitle": "Nenašlo sa nič",

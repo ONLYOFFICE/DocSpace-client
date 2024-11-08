@@ -327,7 +327,7 @@
   "NotFoundFilterGuestsDescription": "Nenhum hóspede corresponde à sua pesquisa. Por favor, ajuste os seus parâmetros de pesquisa ou limpe o campo de pesquisa para ver a lista completa de hóspedes.",
   "NotFoundGroups": "Nenhum grupo encontrado",
   "NotFoundGuests": "Ainda não há hóspedes adicionais",
-  "NotFoundGuestsDescription": "Novos hóspedes serão adicionados aqui assim que você convidá-los para o quarto. Pode partilhar os seus convidados e adicionar convidados por outras pessoas à sua lista.",
+  "NotFoundGuestsDescription": "Novos hóspedes serão adicionados aqui assim que você convidá-los para o quarto. ",
   "NotFoundGuestsFilter": "Nenhum hóspede encontrado",
   "NotFoundLanguage": "Não consegue encontrar o seu idioma? Contacte-nos através do <1>{{supportEmail}}</1> para participar na tradução e ganhar recompensas.",
   "NotFoundTitle": "Nenhum resultado encontrado",

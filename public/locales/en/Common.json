@@ -331,7 +331,7 @@
   "NotFoundFilterGuestsDescription": "No guests match your search. Please adjust your search parameters or clear the search field to view the full list of guests.",
   "NotFoundGroups": "No groups found",
   "NotFoundGuests": "No added guests yet",
-  "NotFoundGuestsDescription": "New guests will be added here once you invite them to the room. You can share your guests and add guests invited by others to your list.",
+  "NotFoundGuestsDescription": "New guests will be added here once you invite them to the room.",
   "NotFoundGuestsFilter": "No guests found",
   "NotFoundLanguage": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "NotFoundTitle": "Nothing found",

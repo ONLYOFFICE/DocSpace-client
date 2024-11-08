@@ -327,7 +327,7 @@
   "NotFoundFilterGuestsDescription": "Nema gostiju koji odgovaraju vašoj pretrazi. Prilagodite parametre pretrage ili očistite polje pretrage da biste prikazali punu listu gostiju.",
   "NotFoundGroups": "Nema pronađenih grupa",
   "NotFoundGuests": "Još nema dodatih gostiju",
-  "NotFoundGuestsDescription": "Novi gosti će biti dodati ovde kada ih pozovete u sobu. Možete deliti svoje goste i dodati goste koje su drugi pozvali na vašu listu.",
+  "NotFoundGuestsDescription": "Novi gosti će biti dodati ovde kada ih pozovete u sobu. ",
   "NotFoundGuestsFilter": "Nema pronađenih gostiju",
   "NotFoundLanguage": "Ne možete pronaći vaš jezik? Kontaktirajte nas na <1>{{supportEmail}}</1> da budete deo programa za prevođenje i dobijete nagrade.",
   "NotFoundTitle": "Ništa nije pronađeno",

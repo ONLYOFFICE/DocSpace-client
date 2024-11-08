@@ -327,7 +327,7 @@
   "NotFoundFilterGuestsDescription": "Nie znaleziono gościa pasującego do wyszukiwanej frazy. Dostosuj parametry wyszukiwania lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę gości.",
   "NotFoundGroups": "Nie znaleziono grup",
   "NotFoundGuests": "Nie dodano jeszcze żadnych gości",
-  "NotFoundGuestsDescription": "Nowi goście zostaną dodani tutaj, gdy zaprosisz ich do pokoju. Możesz udostępniać swoich gości i dodawać gości zaproszonych przez innych do swojej listy.",
+  "NotFoundGuestsDescription": "Nowi goście zostaną dodani tutaj, gdy zaprosisz ich do pokoju.",
   "NotFoundGuestsFilter": "Nie znaleziono gości",
   "NotFoundLanguage": "Nie możesz znaleźć swojego języka? Skontaktuj się z nami pod adresem <1>{{supportEmail}}</1>, aby pomóc w tłumaczeniu i zdobyć za nie nagrody.",
   "NotFoundTitle": "Nie znaleziono",

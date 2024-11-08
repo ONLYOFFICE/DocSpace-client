@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 export const checkIfAccessPaid = (access: ShareAccessRights) => {
   return (
@@ -39,4 +39,31 @@ export const filterPaidRoleOptions = (
   if (!options) return options;
 
   return options.filter((o) => !checkIfAccessPaid(+o.access) && o.key !== "s1");
+};
+
+export const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
+  const startRoomParams = {
+    type: startRoomType,
+    title: title ?? "",
+    tags: [],
+    isPrivate: false,
+    storageLocation: {
+      isThirdparty: false,
+      provider: null,
+      thirdpartyAccount: null,
+      storageFolderId: "",
+      isSaveThirdpartyAccount: false,
+    },
+    icon: {
+      uploadedFile: null,
+      tmpFile: "",
+      x: 0.5,
+      y: 0.5,
+      zoom: 1,
+    },
+    withCover: false,
+    previewIcon: null,
+  };
+
+  return startRoomParams;
 };

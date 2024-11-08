@@ -467,7 +467,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -541,7 +541,7 @@ export default inject(
       rootFolderType === FolderType.TRASH
         ? undefined
         : rootFolderType === FolderType.Recent
-          ? "@my"
+          ? myFolderId
           : selectedId === selectionsWithoutEditing[0]?.id &&
               "isFolder" in selectionsWithoutEditing[0] &&
               selectionsWithoutEditing[0]?.isFolder

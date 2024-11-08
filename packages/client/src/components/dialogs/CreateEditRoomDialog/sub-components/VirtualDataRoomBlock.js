@@ -87,7 +87,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   );
 
   const [watermarksChecked, setWatermarksChecked] = useState(
-    !!roomParams.watermark && isEdit,
+    !!roomParams.watermark,
   );
 
   const onChangeAddWatermarksToDocuments = () => {

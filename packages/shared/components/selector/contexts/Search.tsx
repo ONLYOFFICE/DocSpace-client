@@ -45,8 +45,6 @@ export const SearchDispatchContext = createContext<
 const SearchActionProvider = ({ children }: { children: ReactNode }) => {
   const [isSearch, setIsSearch] = useState(false);
 
-  console.log("==", isSearch);
-
   return (
     <SearchDispatchContext.Provider value={setIsSearch}>
       <SearchValueContext.Provider value={isSearch}>

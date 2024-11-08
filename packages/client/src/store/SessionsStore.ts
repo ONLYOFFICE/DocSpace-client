@@ -41,12 +41,14 @@ import {
   TSessionsSelected,
 } from "@docspace/shared/types/ActiveSessions";
 import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+
 import DialogsStore from "./DialogsStore";
 
 class SessionsStore {
@@ -532,8 +534,6 @@ class SessionsStore {
     );
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-
   get isSeveralSelection() {
     return this.selection.length > 1;
   }
@@ -541,6 +541,44 @@ class SessionsStore {
   clearSelection = () => {
     this.setSelection([]);
   };
+
+  logoutAllSessions = async (
+    t: TTranslation,
+    userId: string,
+    displayName: string,
+    changePassword: boolean,
+  ) => {
+    const { removeAllActiveSessionsById } = this.settingsSetupStore;
+
+    try {
+      this.setIsLoading(true);
+      await removeAllActiveSessionsById(userId, changePassword);
+
+      toastr.success(t("Settings:LoggedOutByUser", { displayName }));
+    } catch (error) {
+      toastr.error(error as TData);
+    } finally {
+      this.setIsLoading(false);
+    }
+  };
+
+  logoutAllSessionsMultiple = async (t: TTranslation, userIds: string[]) => {
+    const { logoutAllUsers } = this.settingsSetupStore;
+
+    try {
+      this.setIsLoading(true);
+      await logoutAllUsers(userIds);
+
+      toastr.success(t("LoggedOutBySelectedUsers"));
+    } catch (error) {
+      toastr.error(error as TData);
+    } finally {
+      this.setIsLoading(false);
+      this.clearSelection();
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
 
   setAllSessions = (allSessions) => {
     this.allSessions = allSessions;
@@ -823,69 +861,6 @@ class SessionsStore {
     }
   };
 
-  onClickLogoutAllSessions = async (t, userId, displayName, changePassword) => {
-    const { removeAllActiveSessionsById } = this.settingsSetupStore;
-
-    try {
-      this.setIsLoading(true);
-      await removeAllActiveSessionsById(userId, changePassword);
-
-      const newData = {
-        ...this.items,
-        sessions: [],
-      };
-      this.setItems(newData);
-      // const index = this.findSessionIndexByUserId(userId);
-      // this.dataFromSocket[index] = newData;
-
-      // Remove all active sessions for this user
-      this.activeSessionsMap.delete(userId);
-
-      toastr.success(
-        t("Settings:LoggedOutByUser", {
-          displayName: displayName,
-        }),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      this.setIsLoading(false);
-      // this.clearSelection();
-    }
-  };
-
-  onClickLogoutAllExceptThis = async (t, exceptId, displayName) => {
-    const { removeAllExceptThisEventId } = this.settingsSetupStore;
-
-    try {
-      this.setIsLoading(true);
-      await removeAllExceptThisEventId(exceptId);
-
-      const filteredConnections = this.items.sessions.filter(
-        (session) => session.id === exceptId,
-      );
-
-      const newData = {
-        ...this.items,
-        sessions: filteredConnections,
-      };
-
-      this.setItems(newData);
-      const index = this.findSessionIndexByUserId(this.items.id);
-      this.dataFromSocket[index] = newData;
-
-      toastr.success(
-        t("Settings:LoggedOutByUserExceptThis", {
-          displayName: displayName,
-        }),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      this.setIsLoading(false);
-    }
-  };
-
   onClickRemoveSession = async (t, sessionId) => {
     const { removeSession } = this.settingsSetupStore;
 
@@ -928,37 +903,6 @@ class SessionsStore {
       toastr.error(error);
     } finally {
       this.setIsLoading(false);
-    }
-  };
-
-  onClickLogoutAllUsers = async (t, userIds) => {
-    const { logoutAllUsers } = this.settingsSetupStore;
-
-    try {
-      this.setIsLoading(true);
-      await logoutAllUsers(userIds);
-
-      // Remove all active sessions for this user
-      this.activeSessionsMap.delete(userIds[0]);
-
-      const newData = {
-        ...this.items,
-        sessions: [],
-      };
-
-      this.setItems(newData);
-      // const indexes = this.findSessionIndexByUserId(userIds);
-
-      // indexes.forEach((index) => {
-      //   this.dataFromSocket[index] = newData;
-      // });
-
-      toastr.success(t("LoggedOutBySelectedUsers"));
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      this.setIsLoading(false);
-      // this.clearSelection();
     }
   };
 }

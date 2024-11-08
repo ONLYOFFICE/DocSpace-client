@@ -48,7 +48,7 @@ export const LogoutAllSessionDialog = ({
   onRemoveAllSessions,
   onRemoveAllExceptThis,
   isSeveralSelection,
-  onLogoutAllUsers,
+  onLogoutAllSessionsMultiple,
   onLogoutAllSessions,
 }: LogoutAllSessionDialogProps) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -58,8 +58,11 @@ export const LogoutAllSessionDialog = ({
 
   const onClickLogout = () => {
     try {
-      if (isChecked) onLogoutAllSessions(t, userIds, displayName, isChecked);
-      if (!isChecked || isSeveralSelection) onLogoutAllUsers(t, userIds);
+      if (!isSeveralSelection) {
+        onLogoutAllSessions(t, userIds[0], displayName, isChecked);
+      } else {
+        onLogoutAllSessionsMultiple(t, userIds);
+      }
       onClosePanel();
     } catch (error) {
       toastr.error(error as TData);

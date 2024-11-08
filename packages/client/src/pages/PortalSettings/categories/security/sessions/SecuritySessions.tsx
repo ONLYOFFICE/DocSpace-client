@@ -114,9 +114,8 @@ const Sessions = (props: SessionsProps) => {
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    onClickLogoutAllUsers,
-    onClickLogoutAllSessions,
-    onClickLogoutAllExceptThis,
+    logoutAllSessionsMultiple,
+    logoutAllSessions,
     onClickRemoveSession,
     updateUserStatus,
     getLoginHistoryReport,
@@ -226,9 +225,8 @@ const Sessions = (props: SessionsProps) => {
           isSeveralSelection={isSeveralSelection}
           onClose={() => setLogoutAllDialogVisible(false)}
           onClosePanel={() => setUserSessionPanelVisible(false)}
-          onLogoutAllUsers={onClickLogoutAllUsers}
-          onLogoutAllSessions={onClickLogoutAllSessions}
-          onLogoutAllExceptThis={onClickLogoutAllExceptThis}
+          onLogoutAllSessions={logoutAllSessions}
+          onLogoutAllSessionsMultiple={logoutAllSessionsMultiple}
         />
       )}
     </MainContainer>
@@ -248,9 +246,8 @@ export const SecuritySessions = inject<TStore>(
       bufferSelection,
       isLoading,
       isSeveralSelection,
-      onClickLogoutAllUsers,
-      onClickLogoutAllSessions,
-      onClickLogoutAllExceptThis,
+      logoutAllSessionsMultiple,
+      logoutAllSessions,
       onClickRemoveSession,
       portalSessionsIds,
       fetchPortalSessions,
@@ -289,9 +286,8 @@ export const SecuritySessions = inject<TStore>(
         setLogoutDialogVisible,
         setLogoutAllDialogVisible,
         isLoading,
-        onClickLogoutAllUsers,
-        onClickLogoutAllSessions,
-        onClickLogoutAllExceptThis,
+        logoutAllSessionsMultiple,
+        logoutAllSessions,
         onClickRemoveSession,
         updateUserStatus,
         getLoginHistoryReport,

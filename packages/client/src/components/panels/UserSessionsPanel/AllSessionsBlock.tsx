@@ -33,10 +33,8 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
 import EmptyScreenSessionsReactSvgUrl from "PUBLIC_DIR/images/empty_screen_from_sessions.svg?url";
-import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
 import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
-
 import RowWrapper from "./sub-components";
 
 const Wrapper = styled.div`
@@ -68,8 +66,6 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
     t,
     isLoading,
     isDisabled,
-    onClickLogoutAllSessions = () => {},
-    activeSessionsMap,
     setDisplayName = () => {},
     setLogoutAllDialogVisible = () => {},
     userSessions,
@@ -115,9 +111,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
 export default inject<TStore>(({ setup, sessionsStore }) => {
   const {
     isLoading,
-    onClickLogoutAllSessions,
     isDisabled,
-    activeSessionsMap,
     setDisplayName,
     userSessions,
     bufferSelection,
@@ -128,8 +122,6 @@ export default inject<TStore>(({ setup, sessionsStore }) => {
   return {
     isDisabled,
     isLoading,
-    onClickLogoutAllSessions,
-    activeSessionsMap,
     setDisplayName,
     setLogoutAllDialogVisible,
     userSessions,

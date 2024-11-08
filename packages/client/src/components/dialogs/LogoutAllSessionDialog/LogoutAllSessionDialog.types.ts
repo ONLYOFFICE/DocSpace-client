@@ -37,16 +37,11 @@ export interface LogoutAllSessionDialogProps {
   onClosePanel: () => void;
   onRemoveAllSessions?: () => Promise<void>;
   onRemoveAllExceptThis?: () => Promise<void>;
-  onLogoutAllUsers: (t: TTranslation, userIds: string[]) => void;
+  onLogoutAllSessionsMultiple: (t: TTranslation, userIds: string[]) => void;
   onLogoutAllSessions: (
     t: TTranslation,
-    userIds: string[],
+    userId: string,
     displayName: string,
     isChecked: boolean,
-  ) => void;
-  onLogoutAllExceptThis: (
-    t: TTranslation,
-    exceptId: number | undefined,
-    displayName: string,
   ) => void;
 }

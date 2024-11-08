@@ -3146,6 +3146,7 @@ class FilesActionStore {
           label: "",
           alert: false,
           operationId: pbData.operationId,
+          filesCount: pbData.filesCount,
         });
       }
     }
@@ -3185,7 +3186,11 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+    const pbData = {
+      icon: "exportIndex",
+      operationId: uniqueid("operation_"),
+      filesCount: 1,
+    };
 
     setSecondaryProgressBarData({
       icon: pbData.icon,
@@ -3194,6 +3199,7 @@ class FilesActionStore {
       label: "",
       alert: false,
       operationId: pbData.operationId,
+      filesCount: pbData.filesCount,
     });
 
     this.alreadyExportingRoomIndex = true;

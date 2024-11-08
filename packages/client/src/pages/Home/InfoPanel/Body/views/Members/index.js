@@ -27,36 +27,39 @@
 import { useContext, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import {
   GENERAL_LINK_HEADER_KEY,
   LINKS_LIMIT_COUNT,
 } from "@docspace/shared/constants";
-import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+
 import MembersHelper from "../../helpers/MembersHelper";
+
 import MembersList from "./sub-components/MembersList";
-import User from "./User";
-import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import EmptyContainer from "./sub-components/EmptyContainer";
+import LinkRow from "./sub-components/LinkRow";
 import {
   LinksBlock,
   StyledLinkRow,
   StyledPublicRoomBarContainer,
 } from "./sub-components/Styled";
-import EmptyContainer from "./sub-components/EmptyContainer";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { isDesktop } from "@docspace/shared/utils";
-import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import LinkRow from "./sub-components/LinkRow";
+import User from "./User";
 
 const Members = ({
   t,
@@ -83,6 +86,11 @@ const Members = ({
   searchValue,
   isMembersPanelUpdating,
 }) => {
+  const [visibleBar, setVisibleBar] = useLocalStorage(
+    `public-room-bar-${selfId}`,
+    true,
+  );
+
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
@@ -239,7 +247,9 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks;
+    !withoutTitlesAndLinks &&
+    visibleBar;
+
   const publicRoomItemsLength = publicRoomItems.length;
 
   if (!membersList.length) {
@@ -261,6 +271,7 @@ const Members = ({
                 ? t("CreateEditRoomDialog:FormRoomBarDescription")
                 : t("CreateEditRoomDialog:PublicRoomBarDescription")
             }
+            onClose={() => setVisibleBar(false)}
           />
         </StyledPublicRoomBarContainer>
       )}

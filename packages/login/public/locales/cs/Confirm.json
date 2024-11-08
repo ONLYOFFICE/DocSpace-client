@@ -18,7 +18,7 @@
   "EnterPhone": "Zadejte telefonní číslo mobilního telefonu",
   "GetCode": "Získat kód",
   "LoginRegistryButton": "Připojit se",
-  "Newsletter": "Chci se přihlásit k odběru newsletteru {{název organizace}}",
+  "Newsletter": "Chci se přihlásit k odběru newsletteru {{organizationName}}",
   "PassworResetTitle": "Nyní si můžete vytvořit nové heslo.",
   "PhoneSubtitle": "Dvoufázové ověření je povoleno k zajištění ještě větší bezpečnosti. Zadejte Vaše telefonní číslo, abyste mohli pokračovat v práci na {{productName}}. Číslo mobilního telefonu musí být zadáno v mezinárodním formátu včetně kódu země.",
   "PortalContinueTitle": "Potvrďte prosím, že chcete znovu aktivovat svůj prostor {{productName}}.",

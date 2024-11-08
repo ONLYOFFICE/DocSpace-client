@@ -472,7 +472,7 @@
   "ShareDocumentDescription": "Poskytnúť prístup k dokumentu a nastaviť úrovne oprávnení.",
   "SharedWithMe": "Zdieľané so mnou",
   "ShareLinkTitle": "<1>Každý</1>, kto má tento odkaz, má <1>{{access}}</1>.",
-  "ShareLinkTitleInternal": "Iba <1>používatelia {{productName}} majú <1>{{access}}</1>.",
+  "ShareLinkTitleInternal": "Iba <1>používatelia {{productName}}</1> majú <1>{{access}}</1>.",
   "ShareToFillOut": "Zdieľať na vyplnenie",
   "ShareVia": "Zdieľať prostredníctvom",
   "ShowMore": "Zobraziť viac",

@@ -246,16 +246,21 @@ class SessionsStore {
     this.portalSessionsMap.set(newPortalSession.userId, newPortalSession);
   };
 
-  handleUserLeavePortal = ({ userId }: { userId: string }) => {
+  handleUserLeavePortal = ({
+    userId,
+    sessionId,
+  }: {
+    userId: string;
+    sessionId: number;
+  }) => {
     const currentSession = this.portalSessionsMap.get(userId);
     if (!currentSession) return;
 
     // update userSessions if new session belongs to selected user
     if (userId === this.bufferSelection?.userId) {
-      // Todo: fix when back starts returning sessionId
       this.handleUserLeaveSessionInPortal({
         userId,
-        sessionId: currentSession.session.id,
+        sessionId,
       });
     }
 

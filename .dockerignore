@@ -1,0 +1,8 @@
+**/node_modules
+**/.next
+**/test-results
+**/Dockerfile
+**/compose.yaml
+**/yarn/cache
+**/dist
+node_modules

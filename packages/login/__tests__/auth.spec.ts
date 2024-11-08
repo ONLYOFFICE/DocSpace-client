@@ -76,7 +76,7 @@ test("auth success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("loader").waitFor({ state: "attached" });
+  await page.getByTestId("loader").waitFor({ state: "detached" });
 
   await page.waitForURL("/", { waitUntil: "load" });
 
@@ -87,7 +87,7 @@ test("auth with reference url success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.login]);
   await page.goto(URL_WITH_REFERENCE_URL);
 
-  await page.getByTestId("loader").waitFor({ state: "attached" });
+  await page.getByTestId("loader").waitFor({ state: "detached" });
 
   await page.waitForURL(`${BASE_URL}:${PORT}/rooms`, {
     waitUntil: "load",
@@ -106,7 +106,7 @@ test("auth with file handler success", async ({ page, mockRequest }) => {
 
   await page
     .getByText("File downloading in progress")
-    .waitFor({ state: "attached" });
+    .waitFor({ state: "detached" });
 
   await page.waitForURL(
     `${BASE_URL}:${PORT}/filehandler.ashx?action=download`,

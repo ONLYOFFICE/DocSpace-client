@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Sie haben Ihre Domain erfolgreich mit Ihrer IP-Adresse verbunden. Um die Space-Adresseinstellungen zu bearbeiten, müssen Sie den zukünftigen {{productName}}-Namen festlegen",
   "CreatingPortal": "Neuen {{productName}} erstellen",
   "CurrentSpace": "Aktuelles Space",
-  "DeletePortalText": "Sie sind dabei, den <1>{{domain}}</1>-Bereich mit allen gespeicherten Daten und Konten dauerhaft zu löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
   "DomainName": "Domain-Name",
   "DomainNotFound": "Die Domain wird nicht gefunden, bitte überprüfen Sie die DNS-Einstellungen",
   "DomainSettings": "Domain-Einstellungen",

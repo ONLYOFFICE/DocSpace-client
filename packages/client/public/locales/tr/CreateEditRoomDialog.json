@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut {{productName}} kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",
   "MakeRoomPrivateTitle": "Odayı Özel Yap",
   "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi odanın sahibi olabilir",
-  "PublicRoomBarDescription": "Bu oda, bağlantıya sahip olan herkesin kullanımına açıktır. Harici kullanıcılar tüm dosyalar için Salt Görüntüleme iznine sahip olacaktır.",
   "PublicRoomSystemFoldersDescription": "Sistem klasörleri, formların farklı tamamlanma aşamalarındaki kopyalarını saklar. Doldurulmakta olan formlar Devam ediyor klasöründe, tamamlanan formlar ise Tamamlandı klasöründe saklanır.",
   "PublicRoomSystemFoldersTitle": "Sistem Klasörleri",
   "RoomEditing": "Oda düzenleme",

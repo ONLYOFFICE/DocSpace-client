@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike {{productName}}. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",
   "MakeRoomPrivateTitle": "Naredi sobo zasebno",
   "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
-  "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje samo za ogled vseh datotek.",
   "PublicRoomSystemFoldersDescription": "Sistemske mape hranijo kopije obrazcev z različnimi stopnjami dokončanja. Obrazci, ki se izpolnjujejo, so shranjeni v mapi V teku, izpolnjeni obrazci pa v mapi Dokončano.",
   "PublicRoomSystemFoldersTitle": "Sistemske mape",
   "RoomEditing": "Urejanje sobe",

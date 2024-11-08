@@ -116,6 +116,7 @@ export const getScopeTKeyDescription = (
       if (type === ScopeType.read) return t("Common:OAuthFilesReadDescription");
       return t("Common:OAuthFilesWriteDescription");
     case ScopeGroup.accounts:
+    case ScopeGroup.contacts:
       if (type === ScopeType.read)
         return t("Common:OAuthAccountsReadDescription");
       return t("Common:OAuthAccountsWriteDescription");
@@ -138,6 +139,7 @@ export const getScopeTKeyName = (group: ScopeGroup, t: TTranslation) => {
     case ScopeGroup.files:
       return t("Common:OAuthFilesName");
     case ScopeGroup.accounts:
+    case ScopeGroup.contacts:
       return t("Common:OAuthAccountsName");
     case ScopeGroup.profiles:
       return t("Common:OAuthProfilesName");

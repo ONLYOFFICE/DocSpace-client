@@ -32,9 +32,7 @@ import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { isMobile } from "@docspace/shared/utils";
-import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";

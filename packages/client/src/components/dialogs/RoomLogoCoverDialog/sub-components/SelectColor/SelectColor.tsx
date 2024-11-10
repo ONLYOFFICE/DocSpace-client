@@ -170,6 +170,8 @@ export const SelectColor = ({
         ) : (
           <DropDown
             directionX="both"
+            directionY="both"
+            topSpace={16}
             forwardedRef={iconRef}
             withBackdrop={false}
             isDefaultMode

@@ -1,6 +1,7 @@
 {
   "Desc": "Lütfən, {{productName}} qeydiyyat məlumatlarını qeyd edin.",
   "ErrorEmail": "Etibarsız e-poçt ünvanı",
+  "ErrorInstanceId": "Etibarsız ID nümunəsi",
   "ErrorLicenseBody": "Lisenziya etibarlı deyil. Düzgün faylı seçdiyinizə əmin olun.",
   "ErrorPassword": "Şifrə tələblərə uyğun deyil",
   "ErrorUploadLicenseFile": "Lisenziya faylını seçin",

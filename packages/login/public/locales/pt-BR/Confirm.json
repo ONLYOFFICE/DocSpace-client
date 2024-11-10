@@ -14,6 +14,7 @@
   "EnterAppCodeDescription": "Insira o código gerado com 6 dígitos a partir do seu aplicativo. Se você não tiver acesso ao seu telefone, use os códigos de backup.",
   "EnterAppCodeTitle": "Insira o código do aplicativo de autenticação",
   "EnterCodePlaceholder": "Inserir código",
+  "EnterEmailHeader": "Inserir e-mail",
   "EnterPhone": "Inserir número de celular",
   "GetCode": "Obtenha código",
   "LoginRegistryButton": "Aderir",

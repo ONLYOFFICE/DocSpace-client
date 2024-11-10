@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Mã đã được gửi qua email cho bạn",
+  "EnterCredentials": "Vui lòng nhập thông tin đăng nhập {{productName}} của bạn để xác nhận xóa",
   "ErrorInvalidText": "Trong 10 giây, bạn sẽ được chuyển hướng đến <1>{{productName}}</1>",
   "ForgotPassword": "Bạn quên mật khẩu?",
   "LDAPUsernamePlaceholder": "Tên người dùng của {{ldap_domain}} ",

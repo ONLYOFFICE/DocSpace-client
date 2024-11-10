@@ -158,8 +158,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         culture: currentCultureName,
       };
 
+      const confirmKey = linkData.confirmHeader;
+
       try {
-        await signupOAuth(signupAccount);
+        await signupOAuth(signupAccount, confirmKey);
 
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
@@ -188,6 +190,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       linkData.emplType,
       linkData.key,
       roomData.roomId,
+      linkData.confirmHeader,
     ],
   );
 

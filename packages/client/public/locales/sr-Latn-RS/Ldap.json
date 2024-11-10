@@ -41,6 +41,7 @@
   "LdapSendWelcomeLetter": "Pošalji dobrodošlo pismo",
   "LdapSendWelcomeLetterTooltip": "Ako je označeno, svi novi korisnici će dobiti pismo dobrodošlice. Dostupno samo kada je Mejl Atribut mapiran na LDAP.",
   "LdapServer": "Server",
+  "LdapServerTooltip": "Unesite LDAP server bez broja porta.",
   "LdapSettings": "LDAP podešavanja",
   "LdapSettingsCertCnNoMatch": "Ime sertifikata se ne poklapa sa imenom hosta",
   "LdapSettingsCertExpired": "Sertifikat je istekao",

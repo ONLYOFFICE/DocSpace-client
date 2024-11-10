@@ -23,7 +23,6 @@
   "MakeRoomPrivateTitle": "Machen Sie den Raum privat",
   "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "Position": "Position",
-  "PublicRoomBarDescription": "Dieser Raum steht jedem mit dem Link zur Verfügung. Externe Benutzer haben für alle Dateien die Berechtigung \"Nur Anzeigen\".",
   "PublicRoomSystemFoldersDescription": "In Systemordnern werden Kopien von Formularen in unterschiedlichen Fertigstellungsstadien gespeichert. Formulare, die ausgefüllt werden, werden im Ordner „In Bearbeitung“ gespeichert, und ausgefüllte Formulare werden im Ordner „Abgeschlossen“ gespeichert.",
   "PublicRoomSystemFoldersTitle": "Systemordner",
   "RestrictCopyAndDownload": "Kopieren und Herunterladen einschränken",

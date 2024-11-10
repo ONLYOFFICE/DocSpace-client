@@ -208,15 +208,7 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                {isFormRoom ? (
-                  <HelpButton
-                    size={16}
-                    openOnClick={false}
-                    isClickable={false}
-                    tooltipContent={t("Translations:RoleFormFillerDescription")}
-                    iconName={FormFillRectSvgUrl}
-                  />
-                ) : (
+                {!isFormRoom && (
                   <AccessRightSelect
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
                     onSelect={onAccessRightsSelect}

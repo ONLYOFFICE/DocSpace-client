@@ -172,4 +172,5 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   hideContent?: boolean;
   blur?: number;
   isInvitePanelLoader?: boolean;
+  withBodyScrollForcibly?: boolean;
 };

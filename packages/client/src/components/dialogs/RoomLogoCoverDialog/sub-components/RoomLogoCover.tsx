@@ -132,6 +132,7 @@ const RoomLogoCover = ({
   currentColorScheme,
   openColorPicker,
   setOpenColorPicker,
+  generalScroll,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -230,7 +231,7 @@ const RoomLogoCover = ({
         />
       </div>
       <div className="select-container">
-        {isMobile() ? (
+        {isMobile() || generalScroll ? (
           selectContainerBody
         ) : (
           <Scrollbar ref={scrollRef} style={{ height: `${scrollHeight}` }}>

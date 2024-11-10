@@ -76,6 +76,7 @@ const Modal = ({
 
   isInvitePanelLoader = false,
   onSubmit,
+  withBodyScrollForcibly = false,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -215,7 +216,8 @@ const Modal = ({
                       {...iOSActions}
                       // embedded={embedded}
                     >
-                      {currentDisplayType === "aside" && withBodyScroll ? (
+                      {withBodyScrollForcibly ||
+                      (currentDisplayType === "aside" && withBodyScroll) ? (
                         <Scrollbar
                           id="modal-scroll"
                           className="modal-scroll"

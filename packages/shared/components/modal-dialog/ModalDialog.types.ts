@@ -97,6 +97,7 @@ export interface ModalDialogProps {
   blur?: number;
   isInvitePanelLoader?: boolean;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  withBodyScrollForcibly?: boolean;
 }
 
 export interface ModalProps {
@@ -172,4 +173,5 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   hideContent?: boolean;
   blur?: number;
   isInvitePanelLoader?: boolean;
+  withBodyScrollForcibly?: boolean;
 };

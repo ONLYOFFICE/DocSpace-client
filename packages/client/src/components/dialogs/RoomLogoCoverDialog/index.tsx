@@ -245,6 +245,7 @@ const RoomLogoCoverDialog = ({
       withBodyScroll
       scrollBodyHeight={scrollBodyHeight}
       withBodyScrollForcibly={!!scrollBodyHeight}
+      isScrollLocked={openColorPicker}
     >
       <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>

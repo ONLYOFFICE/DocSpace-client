@@ -173,8 +173,11 @@ const StyledBody = styled(Box)<{
     props.isScrollLocked &&
     css`
       #modal-scroll > .scroll-wrapper > .scroller {
-        margin-inline-end: 0 !important;
         overflow: hidden !important;
+      }
+
+      #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
+        margin-inline-end: 0 !important;
       }
     `}
 

@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Alan adınızı IP adresinize başarıyla bağladınız. Alan adresi ayarlarını düzenlemek için gelecekteki {{productName}} adını ayarlamanız gerekir",
   "CreatingPortal": "Yeni {{productName}} oluşturma",
   "CurrentSpace": "Mevcut alan",
-  "DeletePortalText": "<1>{{domain}}</1> alanını, depolanan tüm veriler ve hesaplar ile birlikte kalıcı olarak sileceksiniz. Bu eylem geri alınamaz.",
   "DomainName": "Alan(Domain) adı",
   "DomainNotFound": "Alan adı bulunamadı, lütfen DNS ayarlarını kontrol edin",
   "DomainSettings": "Alan(Domain) ayarları",

@@ -100,31 +100,6 @@ const SpacesRoomRow = ({ item }: TRow) => {
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),
     },
     {
-      label: t("Common:Settings"),
-      key: "space_settings",
-      icon: CatalogSettingsReactSvgUrl,
-      onClick: () =>
-        window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
-    },
-    {
-      label: t("Common:ManageStorageQuota"),
-      key: "change_quota",
-      icon: ChangQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        isDisableQuota && setIsDisableQuota(false);
-      },
-    },
-    {
-      key: "disable_quota",
-      label: t("Common:DisableQuota"),
-      icon: DisableQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        setIsDisableQuota(true);
-      },
-    },
-    {
       key: "separator",
       isSeparator: true,
     },
@@ -136,6 +111,37 @@ const SpacesRoomRow = ({ item }: TRow) => {
     },
   ];
 
+  if (item.wizardSettings.completed) {
+    contextOptionsProps.splice(
+      1,
+      0,
+      {
+        label: t("Common:Settings"),
+        key: "space_settings",
+        icon: CatalogSettingsReactSvgUrl,
+        onClick: () =>
+          window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
+      },
+      {
+        label: t("Common:ManageStorageQuota"),
+        key: "change_quota",
+        icon: ChangQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          isDisableQuota && setIsDisableQuota(false);
+        },
+      },
+      {
+        key: "disable_quota",
+        label: t("Common:DisableQuota"),
+        icon: DisableQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          setIsDisableQuota(true);
+        },
+      }
+    );
+  }
   const updateFunction = async () => {
     await getAllPortals();
   };

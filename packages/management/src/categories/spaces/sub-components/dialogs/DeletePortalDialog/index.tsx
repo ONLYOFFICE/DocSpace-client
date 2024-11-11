@@ -82,6 +82,7 @@ const DeletePortalDialog = () => {
           <Trans
             i18nKey="DeleteRequestSuccess"
             values={{
+              productName: t("Common:ProductName"),
               email,
               productName: t("Common:ProductName"),
             }}
@@ -122,6 +123,7 @@ const DeletePortalDialog = () => {
             <Trans
               i18nKey="DeleteSetupPortalText"
               values={{
+                productName: t("Common:ProductName"),
                 domain,
                 email,
                 productName: t("Common:ProductName"),

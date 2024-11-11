@@ -282,8 +282,10 @@ class FilesStore {
     });
 
     SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
-      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
+      const { infoPanelSelection, fetchHistory, isVisible } =
+        this.infoPanelStore;
 
+      if (!isVisible) return;
       let infoPanelSelectionType = "file";
       if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
         infoPanelSelectionType = "folder";

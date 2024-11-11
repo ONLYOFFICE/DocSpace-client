@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile } from "@docspace/shared/utils/device";
@@ -38,6 +38,10 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 
 import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
+
+const IMAGE_CROPPER_HEIGHT = 448;
+const HEADER = 70;
+const BUTTONS = 72;
 
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
@@ -52,6 +56,14 @@ const StyledModalDialog = styled(ModalDialog)`
       box-sizing: border-box;
       max-height: 72px;
     }
+
+    ${(props) =>
+      props.scrollBodyHeight &&
+      css`
+        .modal-body {
+          height: ${`${props.scrollBodyHeight}px`};
+        }
+      `}
   }
   .wrapper-image-editor {
     width: 100%;
@@ -117,6 +129,7 @@ const AvatarEditorDialog = (props) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
 
@@ -125,6 +138,24 @@ const AvatarEditorDialog = (props) => {
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
     : t("RoomLogoCover:RoomCover");
+
+  useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = () => {
+    const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
+    const screenHeight = document.documentElement.clientHeight;
+
+    if (screenHeight < imageCropperModalHeight)
+      setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
+    else setScrollBodyHeight(null);
+  };
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
@@ -169,6 +200,8 @@ const AvatarEditorDialog = (props) => {
       visible={visible}
       onClose={onCloseModal}
       withFooterBorder
+      withBodyScrollForcibly={!!scrollBodyHeight}
+      scrollBodyHeight={scrollBodyHeight}
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>

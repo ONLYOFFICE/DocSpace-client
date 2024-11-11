@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Kod został wysłany",
+  "EnterCredentials": "Wpisz swoje dane uwierzytelniające {{productName}}, aby potwierdzić usunięcie",
   "ErrorInvalidText": "Za 10 sekund nastąpi przekierowanie na <1>{{productName}}</1>",
   "ForgotPassword": "Nie pamiętasz hasła?",
   "LDAPUsernamePlaceholder": "Nazwa użytkownika {{ldap_domain}}",

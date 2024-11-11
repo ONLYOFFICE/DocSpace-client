@@ -39,7 +39,6 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
-    canChangeOwner,
     onLeaveRoomAction,
     updateInfoPanelSelection,
   } = props;
@@ -60,7 +59,7 @@ const LeaveRoomDialog = (props) => {
   };
 
   const onLeaveRoom = async () => {
-    if (canChangeOwner) {
+    if (isRoomOwner) {
       setChangeRoomOwnerIsVisible(true);
       onClose();
     } else {
@@ -131,14 +130,12 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const canChangeOwner = folderItem?.security?.ChangeOwner;
 
     return {
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
-      canChangeOwner: canChangeOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
       updateInfoPanelSelection,
     };

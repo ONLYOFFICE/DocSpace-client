@@ -3,7 +3,7 @@
   "CheckReadyForms": "Kiểm tra các biểu mẫu đã sẵn sàng",
   "Description": "Biểu mẫu của bạn đã được hoàn thành và lưu",
   "DescriptionForAnonymous": "Bạn đã gửi biểu mẫu PDF đã điền và được gán một số riêng biệt. Để kiểm tra trạng thái, hãy liên hệ với chủ sở hữu biểu mẫu cung cấp số được gán.",
-  "DescriptionForRegisteredUser": "Biểu mẫu PDF đã điền được lưu và có sẵn cho bạn trong thư mục Hoàn thành. Để kiểm tra trạng thái, hãy liên hệ với chủ sở hữu biểu mẫu cung cấp số được gán.",
+  "DescriptionForRegisteredUser": "Biểu mẫu PDF đã điền được lưu và có sẵn cho bạn trong thư mục Hoàn thành.",
   "FillItOutAgain": "Điền lại thông tin",
   "FormCompletedSuccessfully": "Biểu mẫu đã được hoàn thành",
   "FormNumber": "Số của biểu mẫu",

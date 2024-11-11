@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Ο κωδικός σας εστάλη με email",
+  "EnterCredentials": "Εισαγάγετε τα στοιχεία σύνδεσής σας στο {{productName}} για να επιβεβαιώσετε τη διαγραφή",
   "ErrorInvalidText": "Σε 10 δευτερόλεπτα θα ανακατευθυνθείτε στη <1>{{productName}}</1>",
   "ForgotPassword": "Ξεχάσατε τον κωδικό σας;",
   "LDAPUsernamePlaceholder": "Όνομα χρήστη του {{ldap_domain}} ",

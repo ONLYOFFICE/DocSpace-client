@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocou tejto funkcie môžete pozývať iba existujúcich používateľov {{productName}}. Po vytvorení miestnosti už nebudete môcť zmeniť zoznam používateľov.",
   "MakeRoomPrivateTitle": "Nastaviť miestnosť ako súkromnú",
   "PeopleSelectorInfo": "Vlastníkom miestnosti sa môže stať iba administrátor miestnosti alebo administrátor priestoru {{productName}}.",
-  "PublicRoomBarDescription": "Táto miestnosť je prístupná každému, kto má na ňu odkaz. Externí používatelia budú mať pre všetky súbory oprávnenie iba na ich zobrazenie.",
   "PublicRoomSystemFoldersDescription": "V systémových priečinkoch sa uchovávajú kópie formulárov v rôznych štádiách dokončenia. Vypĺňané formuláre sa ukladajú do priečinka V procese a dokončené formuláre sa ukladajú do priečinka Vyplnené.",
   "PublicRoomSystemFoldersTitle": "Systémové priečinky",
   "RoomEditing": "Úprava miestnosti",

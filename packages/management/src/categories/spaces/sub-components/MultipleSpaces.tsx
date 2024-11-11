@@ -26,11 +26,15 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { DeviceType } from "@docspace/shared/enums";
+
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";
 
@@ -79,8 +83,11 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
               {t("Settings:YourCurrentDomain")}
             </Text>
             <TextInput
+              value=""
+              type={InputType.text}
+              size={InputSize.base}
               isDisabled={true}
-              placeholder={baseDomain}
+              placeholder={baseDomain || ""}
               className="spaces-input"
             />
           </div>

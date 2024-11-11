@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian, bạn cần đặt tên {{productName}} trong tương lai",
   "CreatingPortal": "Tạo {{productName}} mới",
   "CurrentSpace": "Không gian hiện tại",
-  "DeletePortalText": "Bạn sẽ xóa vĩnh viễn không gian <1>{{domain}}</1> với tất cả dữ liệu và tài khoản được lưu trữ. Hành động này không thể được hoàn tác.",
   "DomainName": "Tên miền",
   "DomainNotFound": "Không tìm thấy tên miền, vui lòng kiểm tra cài đặt DNS",
   "DomainSettings": "Cài đặt tên miền",

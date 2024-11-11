@@ -83,6 +83,7 @@ const DeletePortalDialog = () => {
             i18nKey="DeleteRequestSuccess"
             values={{
               email,
+              productName: t("Common:ProductName"),
             }}
             components={{
               1: <strong />,
@@ -123,6 +124,7 @@ const DeletePortalDialog = () => {
               values={{
                 domain,
                 email,
+                productName: t("Common:ProductName"),
               }}
               components={{
                 1: <strong />,

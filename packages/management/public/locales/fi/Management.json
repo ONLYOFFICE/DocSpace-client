@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi tilan osoiteasetuksia sinun täytyy asettaa tuleva {{productName}}-nimi",
   "CreatingPortal": "Luodaan uutta {{productName}}",
   "CurrentSpace": "Nykyinen tila",
-  "DeletePortalText": "Olet poistamassa pysyvästi <1>{{domain}}</1> tilan kaikkine tallennettuine tietoineen ja tileineen. Tätä toimintoa ei voi perua. ",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",
   "DomainSettings": "Verkkotunnuksen asetukset",

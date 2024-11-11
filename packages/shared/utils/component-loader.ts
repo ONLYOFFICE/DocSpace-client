@@ -40,6 +40,8 @@ export default function componentLoader(lazyComponent: Function) {
           window.sessionStorage.setItem("retry-lazy-refreshed", "true");
           return window.location.reload();
         }
+        console.log(error);
+
         reject(error);
       });
   });

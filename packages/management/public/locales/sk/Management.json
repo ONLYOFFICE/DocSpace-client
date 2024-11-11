@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy priestoru, musíte nastaviť budúce meno {{productName}}",
   "CreatingPortal": "Vytvorenie nového priestoru {{productName}}",
   "CurrentSpace": "Aktuálny priestor",
-  "DeletePortalText": "Chystáte sa nenávratne vymazať priestor <1>{{domain}}</1> so všetkými uloženými údajmi a účtami. Tento krok sa nedá vrátiť späť.",
   "DomainName": "Meno domény",
   "DomainNotFound": "Doména nebola nájdená, skontrolujte ju v nastaveniach DNS",
   "DomainSettings": "Nastavenia domény",

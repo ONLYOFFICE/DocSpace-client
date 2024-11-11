@@ -128,4 +128,6 @@ export type ShareProps = {
     primary: boolean,
     internal: boolean,
   ) => Promise<TFileLink>;
+
+  selfId: string;
 };

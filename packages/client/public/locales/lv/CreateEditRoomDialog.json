@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos {{productName}} lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",
   "MakeRoomPrivateTitle": "Padarīt telpu privātu",
   "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators",
-  "PublicRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs tikai skatīšanas atļauja visiem failiem.",
   "PublicRoomSystemFoldersDescription": "Sistēmas mapes glabā veidlapu kopijas dažādos pabeigšanas posmos. Aizpildītās veidlapas tiek saglabātas mapē Notiek izpilde, un aizpildītās veidlapas tiek saglabātas mapē Pabeigts.",
   "PublicRoomSystemFoldersTitle": "Sistēmas mapes",
   "RoomEditing": "Telpas rediģēšana",

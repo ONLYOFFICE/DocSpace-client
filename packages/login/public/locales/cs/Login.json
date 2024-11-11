@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Kód vám byl zaslán e-mailem",
+  "EnterCredentials": "Pro potvrzení smazání zadejte prosím své přihlašovací údaje pro {{productName}}.",
   "ErrorInvalidText": "Za 10 sekund budete přesměrováni na <1>{{productName}}</1>",
   "ForgotPassword": "Zapomněli jste heslo?",
   "LDAPUsernamePlaceholder": "Uživatelské jméno {{ldap_domain}}",

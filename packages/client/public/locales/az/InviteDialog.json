@@ -1,12 +1,10 @@
 {
   "AddManually": "Əl ilə əlavə edin",
-  "AddManuallyDescriptionAccounts": "Yeni istifadəçiləri e-poçt vasitəsilə şəxsən {{productName}}-ə dəvət edin",
-  "AddManuallyDescriptionRoom": "Mövcud {{productName}} istifadəçilərini adlardan istifadə edərək otağa əlavə edin və ya yeni istifadəçiləri e-poçt vasitəsilə şəxsən dəvət edin",
   "EmailErrorMessage": "E-poçt ünvanı etibarlı deyil. Siz e-poçtun üzərinə iki dəfə klikləməklə redaktə edə bilərsiniz.",
   "GroupMaxAvailableRoleWarning": "Qruplar maksimum {{roleName}} rolu olan otağa əlavə edilə bilər. Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilərsiniz.",
   "InvitationLanguage": "Dəvət dili",
   "InviteAccountSearchPlaceholder": "İnsanları e-məktubla dəvət edin",
-  "InviteRoomSearchPlaceholder": "İnsanları ad və ya e-məktubla dəvət edin",
+  "InviteNewAccountManuallyDescription": "Yeni istifadəçiləri e-poçt vasitəsilə şəxsən {{productName}}-ə dəvət edin",
   "InviteViaLink": "Keçidlə dəvət edin",
   "InviteViaLinkDescriptionAccounts": "{{productName}}-də avtorizasiya üçün universal keçid yaradın",
   "InviteViaLinkDescriptionRoom": "Otağın avtorizasiyası üçün universal keçid yaradın",

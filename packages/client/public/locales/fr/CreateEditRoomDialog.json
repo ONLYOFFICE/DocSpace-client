@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de {{productName}}. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",
   "MakeRoomPrivateTitle": "Rendre la salle privée",
   "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de {{productName}} peut devenir le propriétaire d'une salle",
-  "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. Les utilisateurs externes auront l'autorisation Lecture seule pour tous les fichiers.",
   "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",
   "PublicRoomSystemFoldersTitle": "Dossiers système",
   "RoomEditing": "Salle de l’édition",

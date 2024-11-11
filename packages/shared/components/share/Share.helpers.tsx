@@ -41,12 +41,14 @@ import { toastr } from "../toast";
 import { globalColors } from "../../themes";
 import { ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
+import { isFolder } from "../../utils/typeGuards";
 
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
   TFile,
   TFileLink,
+  TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
 import { Strong } from "./Share.styled";
@@ -288,12 +290,14 @@ export const getTranslationDate = (
 };
 
 export const canShowManageLink = (
-  item: TFile,
-  buffer: TFile,
+  item: TFile | TFolder,
+  buffer: TFile | TFolder,
   infoPanelVisible: boolean,
   infoPanelView: string,
   isRoom: boolean = false,
-) => {
+): boolean => {
+  if (isFolder(item) && !item.security.EditAccess) return false;
+
   const isEqual = equal(item, buffer);
 
   const view =

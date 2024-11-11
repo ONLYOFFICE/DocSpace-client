@@ -40,6 +40,7 @@ import {
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { isDesktop } from "../../utils";
 import { TOption } from "../combobox";
 import { Text } from "../text";
@@ -63,7 +64,7 @@ const Share = (props: ShareProps) => {
     setView,
     infoPanelSelection,
     getPrimaryFileLink,
-
+    selfId,
     editFileLink,
     addFileLink,
     shareChanged,
@@ -73,6 +74,10 @@ const Share = (props: ShareProps) => {
   const [fileLinks, setFileLinks] = useState<TLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
+  const [visibleBar, setVisibleBar] = useLocalStorage(
+    `document-bar-${selfId}`,
+    true,
+  );
 
   const requestRunning = React.useRef(false);
 
@@ -315,11 +320,15 @@ const Share = (props: ShareProps) => {
 
   return (
     <div>
-      <PublicRoomBar
-        headerText={t("Common:ShareDocument")}
-        bodyText={t("Common:ShareDocumentDescription")}
-        iconName={InfoIcon}
-      />
+      {visibleBar && (
+        <PublicRoomBar
+          headerText={t("Common:ShareDocument")}
+          bodyText={t("Common:ShareDocumentDescription")}
+          iconName={InfoIcon}
+          onClose={() => setVisibleBar(false)}
+        />
+      )}
+
       {isLoading ? (
         <ShareLoader t={t} />
       ) : (

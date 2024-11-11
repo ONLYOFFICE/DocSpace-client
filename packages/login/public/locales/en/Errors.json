@@ -10,7 +10,7 @@
   "LoginWithBruteForceCaptcha": "Confirm that you are not a robot",
   "OAuthApplicationDisabled": "This application is disabled",
   "OAuthApplicationEmpty": "Application could not be found",
-  "OAuthClientEmpty": "Client id could not be found",
+  "OAuthClientEmpty": "Client ID could not be found",
   "RecaptchaInvalid": "Invalid Recaptcha",
   "SsoAttributesNotFound": "Authentication failed (assertion attributes not found)",
   "SsoAuthFailed": "Authentication failed",

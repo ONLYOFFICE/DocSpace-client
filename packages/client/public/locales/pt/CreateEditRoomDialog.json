@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Com esta funcionalidade, pode convidar apenas utilizadores já existentes no {{productName}}. Depois de criar uma sala, não será possível alterar a lista de utilizadores.",
   "MakeRoomPrivateTitle": "Tornar a Sala Privada",
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
-  "PublicRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão Somente visualização para todos os arquivos.",
   "PublicRoomSystemFoldersDescription": "As pastas do sistema armazenam cópias de formulários em diferentes estágios de preenchimento. Os formulários que estão sendo preenchidos são armazenados na pasta Em andamento e os formulários preenchidos são armazenados na pasta Concluído.",
   "PublicRoomSystemFoldersTitle": "Pastas do sistema",
   "RoomEditing": "Edição de Salas",

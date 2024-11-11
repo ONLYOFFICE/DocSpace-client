@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Да бисте купили лиценцу, кликните на дугме испод.",
   "ActivatePurchaseBuyNow": "Купи сада",
   "ActivatePurchaseRenewLicense": "Да бисте наставили да добијате подршку и ажурирања, купите обнову.",
+  "ActivateRenewalDescr": "Да бисте активирали обнову коју сте већ купили, поставите је испод и кликните на дугме Активирај.",
   "ActivateRenewDescr": "Да бисте добили ваше личне услове обнове, контактирајте вашег посвећеног менаџера или нам пишите на <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Обновите претплату за {{license}}",
   "ActivateSwithToProHeader": "Пребаците се на пуну {{license}} верзију",

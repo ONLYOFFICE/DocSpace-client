@@ -981,24 +981,19 @@ class SettingsStore {
     this.ipRestrictions = res?.map((el) => el.ip);
   };
 
-  setIpRestrictions = async (ips: string[]) => {
+  setIpRestrictions = async (ips: string[], enable: boolean) => {
     const data = {
       IpRestrictions: ips,
+      enable,
     };
     const res = await api.settings.setIpRestrictions(data);
-    this.ipRestrictions = res?.map((el) => el.ip);
+
+    this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
+    this.ipRestrictionEnable = res?.enable;
   };
 
   getIpRestrictionsEnable = async () => {
     const res = await api.settings.getIpRestrictionsEnable();
-    this.ipRestrictionEnable = res.enable;
-  };
-
-  setIpRestrictionsEnable = async (enable: boolean) => {
-    const data = {
-      enable,
-    };
-    const res = await api.settings.setIpRestrictionsEnable(data);
     this.ipRestrictionEnable = res.enable;
   };
 

@@ -76,7 +76,6 @@ const IpSecurity = (props) => {
   const {
     t,
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
     isInit,
@@ -202,8 +201,7 @@ const IpSecurity = (props) => {
     });
 
     try {
-      await setIpRestrictions(ipsObjectArr);
-      await setIpRestrictionsEnable(enable);
+      await setIpRestrictions(ipsObjectArr, enable);
 
       saveToSessionStorage("currentIPSettings", {
         enable: enable,
@@ -318,7 +316,7 @@ const IpSecurity = (props) => {
 export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
+
     ipRestrictions,
     setIpRestrictions,
     ipSettingsUrl,
@@ -336,7 +334,6 @@ export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   };
   return {
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
     isInit,

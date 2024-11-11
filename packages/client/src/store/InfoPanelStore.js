@@ -262,11 +262,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return (
-      this.infoPanelCurrentSelection?.access ===
-        ShareAccessRights.RoomManager ||
-      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
-    );
+    return this.infoPanelCurrentSelection?.security?.EditAccess;
   }
 
   getViewItem = () => {
@@ -685,7 +681,7 @@ class InfoPanelStore {
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
 
-    links && this.publicRoomStore.setExternalLinks(links);
+    this.publicRoomStore.setExternalLinks(links ?? []);
 
     const { administrators, users, expectedMembers, groups, guests } =
       this.convertMembers(t, data, clearFilter, withoutTitlesAndLinks);
@@ -795,6 +791,7 @@ class InfoPanelStore {
           setExternalLinks(links);
           return historyWithLinks;
         }
+        setExternalLinks([]);
         return data;
       })
       .then((data) => {
@@ -849,6 +846,7 @@ class InfoPanelStore {
           setExternalLinks(links);
           return historyWithLinks;
         }
+        setExternalLinks([]);
         return data;
       })
       .then((data) => {

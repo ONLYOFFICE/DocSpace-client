@@ -32,18 +32,14 @@ import { SearchInput } from "@docspace/shared/components/search-input";
 import { Text } from "@docspace/shared/components/text";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
-
 import { Wrapper } from "../../StyledDataImport";
-
-import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
-
-import { parseQuota } from "../../../../utils/parseQuota";
-
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
+import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -58,8 +54,6 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setSearchValue,
     setResultUsers,
     areCheckedUsersEmpty,
-    checkedUsers,
-    withEmailUsers,
     cancelMigration,
     clearCheckedAccounts,
     setStep,
@@ -68,16 +62,13 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setMigrationPhase,
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-    quotaCharacteristics,
+    totalUsedUsers,
+    quota,
   } = props as InjectedAddEmailsStepProps;
 
   const [dataPortion, setDataPortion] = useState(
     users.withoutEmail.slice(0, PAGE_SIZE),
   );
-  const [quota, setQuota] = useState<{
-    used: number;
-    max: number | null;
-  }>({ used: 0, max: 0 });
 
   const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
     setDataPortion(users.withoutEmail.slice(leftBoundary, rightBoundary));
@@ -91,30 +82,16 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setSearchValue("");
   };
 
-  const filteredAccounts = dataPortion.filter(
-    (data) =>
-      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.displayName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
-  );
+  const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
 
   const handleStepIncrement = () => {
     setResultUsers();
     incrementStep();
   };
 
-  const numberOfSelectedUsers =
-    checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
-
   useEffect(() => {
     setSearchValue("");
-    setQuota(parseQuota(quotaCharacteristics[1]));
-  }, [quotaCharacteristics, setSearchValue]);
-
-  const totalUsedUsers =
-    quota.used +
-    checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
-    checkedUsers.withoutEmail.length;
+  }, [setSearchValue]);
 
   const onCancelMigration = () => {
     cancelMigration();
@@ -155,15 +132,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
         <>
           {Buttons}
 
-          {quota.max && (
-            <UsersInfoBlock
-              t={t}
-              totalUsedUsers={totalUsedUsers}
-              selectedUsers={numberOfSelectedUsers}
-              totalUsers={withEmailUsers.length + users.withoutEmail.length}
-              totalLicenceLimit={quota.max}
-            />
-          )}
+          <UsersInfoBlock />
 
           <SearchInput
             id="search-users-input"
@@ -221,8 +190,6 @@ export default inject<TStore>(
       users,
       setResultUsers,
       areCheckedUsersEmpty,
-      checkedUsers,
-      withEmailUsers,
 
       cancelMigration,
       clearCheckedAccounts,
@@ -230,8 +197,10 @@ export default inject<TStore>(
       setWorkspace,
       setMigratingWorkspace,
       setMigrationPhase,
+      totalUsedUsers,
+      quota,
     } = importAccountsStore;
-    const { quotaCharacteristics } = currentQuotaStore;
+
     const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
       dialogsStore;
 
@@ -243,8 +212,6 @@ export default inject<TStore>(
       users,
       setResultUsers,
       areCheckedUsersEmpty,
-      checkedUsers,
-      withEmailUsers,
 
       cancelMigration,
       clearCheckedAccounts,
@@ -253,10 +220,10 @@ export default inject<TStore>(
       setMigratingWorkspace,
       setMigrationPhase,
 
-      quotaCharacteristics,
-
       cancelUploadDialogVisible,
       setCancelUploadDialogVisible,
+      totalUsedUsers,
+      quota,
     };
   },
 )(observer(AddEmailsStep));

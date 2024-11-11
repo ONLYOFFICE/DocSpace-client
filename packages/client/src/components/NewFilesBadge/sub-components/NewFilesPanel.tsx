@@ -78,7 +78,7 @@ export const NewFilesPanelComponent = ({
 
     setIsMarkAsReadRunning(true);
 
-    const folderIDs = [];
+    const folderIDs: (string | number)[] = [];
 
     if (isRooms) {
       data.forEach(({ items }) => {
@@ -130,6 +130,7 @@ export const NewFilesPanelComponent = ({
         setIsLoading(false);
       } catch (e) {
         requestRunning.current = false;
+        onClose();
         setIsLoading(false);
         toastr.error(e as string);
       }
@@ -138,7 +139,7 @@ export const NewFilesPanelComponent = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId, isRooms, setIsLoading]);
+  }, [folderId, isRooms, onClose, setIsLoading]);
 
   const isMobileDevice = !isDesktop();
 

@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "허용",
+  "ConsentDescription": "<strong>{{displayName}}</strong>와/과 공유된 데이터는 <strong>{{nameApp}}</strong> <6>개인 정보 보호 정책</6> 및 <6>서비스 약관</6>에 따라 관리됩니다. 언제든지 {{productName}} 계정 설정에서 이 동의를 철회할 수 있습니다.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1>에서 고객님의 <strong>{{productName}} 계정</strong>의 다음 데이터에 액세스하고자 합니다:",
+  "DenyButton": "거부",
+  "NotYou": "다른 사용자세요?",
+  "SignedInAs": "로그인한 계정:",
+  "ToContinue": "계속하려면 로그인하세요:"
+}

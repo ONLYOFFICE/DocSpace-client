@@ -41,12 +41,14 @@ import { toastr } from "../toast";
 import { globalColors } from "../../themes";
 import { ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
+import { isFolder } from "../../utils/typeGuards";
 
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
   TFile,
   TFileLink,
+  TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
 import { Strong } from "./Share.styled";
@@ -183,21 +185,31 @@ export const getExpiredOptions = (
   setSevenDays: VoidFunction,
   setUnlimited: VoidFunction,
   onCalendarOpen: VoidFunction,
+  locale: string,
 ) => {
+  const relativeTime = new Intl.RelativeTimeFormat(locale, {
+    numeric: "always",
+    style: "long",
+  });
+
+  const oneDay = relativeTime.format(1, "day");
+  const severalDays = relativeTime.format(7, "day");
+  const severalHours = relativeTime.format(12, "hours");
+
   return [
     {
       key: "twelvehours",
-      label: `12 ${t("Common:Hours")}`,
+      label: severalHours,
       onClick: () => setTwelveHours(),
     },
     {
       key: "oneday",
-      label: `1 ${t("Common:Day")}`,
+      label: oneDay,
       onClick: () => setOneDay(),
     },
     {
       key: "sevendays",
-      label: `7 ${t("Common:Days")}`,
+      label: severalDays,
       onClick: () => setSevenDays(),
     },
     {
@@ -278,12 +290,14 @@ export const getTranslationDate = (
 };
 
 export const canShowManageLink = (
-  item: TFile,
-  buffer: TFile,
+  item: TFile | TFolder,
+  buffer: TFile | TFolder,
   infoPanelVisible: boolean,
   infoPanelView: string,
   isRoom: boolean = false,
-) => {
+): boolean => {
+  if (isFolder(item) && !item.security.EditAccess) return false;
+
   const isEqual = equal(item, buffer);
 
   const view =

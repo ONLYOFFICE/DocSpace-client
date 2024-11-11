@@ -108,9 +108,12 @@ const ImageWatermark = ({
 
   const initialInfo = useRef(null);
   const imageUrl = initialSettings?.imageUrl;
-  const image = roomParams.watermark?.image;
+
+  let watermark = roomParams.watermark;
 
   if (initialInfo.current === null) {
+    if (isImage && initialSettings) watermark = initialSettings;
+
     initialInfo.current = {
       rotate: getInitialRotate(initialSettings?.rotate, isEdit),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
@@ -124,17 +127,6 @@ const ImageWatermark = ({
   const [selectedImageUrl, setImageUrl] = useState(imageUrl);
 
   const previewRef = useRef(null);
-
-  const watermark =
-    isImage && initialSettings
-      ? initialSettings
-      : {
-          rotate: selectedRotate.key,
-          imageScale: selectedScale.key,
-          additions: 0,
-          ...(selectedImageUrl && { imageUrl: selectedImageUrl }),
-          ...(image && { image }),
-        };
 
   useEffect(() => {
     setRoomParams({
@@ -305,7 +297,7 @@ const ImageWatermark = ({
                 options={[]}
                 selectedOption={{}}
               >
-                <div>{selectedScale.label}&#37;</div>
+                <div className="options">{selectedScale.label}&#37;</div>
               </ComboBox>
             </div>
             <div>
@@ -323,7 +315,7 @@ const ImageWatermark = ({
                 advancedOptionsCount={rotateOptions.length}
                 fillIcon={false}
               >
-                <div>{selectedRotate.label}&deg;</div>
+                <div className="options">{selectedRotate.label}&deg;</div>
               </ComboBox>
             </div>
           </div>

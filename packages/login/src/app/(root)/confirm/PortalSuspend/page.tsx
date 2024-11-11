@@ -43,7 +43,7 @@ async function Page() {
         <>
           <GreetingContainer greetingText={settings?.greetingSettings} />
           <FormWrapper id="portal-suspend-form">
-            <DeactivatePortalForm siteUrl={companyInfoSettings.site} />
+            <DeactivatePortalForm siteUrl={companyInfoSettings?.site} />
           </FormWrapper>
         </>
       )}

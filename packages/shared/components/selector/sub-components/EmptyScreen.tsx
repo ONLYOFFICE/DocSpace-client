@@ -50,7 +50,7 @@ import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
-import { SearchContext } from "../contexts/Search";
+import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 
 const linkStyles = {
   isHovered: true,
@@ -78,6 +78,7 @@ const EmptyScreen = ({
   const { t } = useTranslation(["Common"]);
 
   const { onClearSearch } = useContext(SearchContext);
+  const setIsSearch = useContext(SearchDispatchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -179,7 +180,9 @@ const EmptyScreen = ({
               className="empty-folder_container-icon"
               size={12}
               onClick={
-                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
               }
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
@@ -187,7 +190,9 @@ const EmptyScreen = ({
             <Link
               {...linkStyles}
               onClick={
-                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
               }
             >
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}

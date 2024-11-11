@@ -677,7 +677,7 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
-  const mainButtonText = t("Common:Actions");
+  const mainButtonText = isRoomAdmin ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
   if (isFrame) {

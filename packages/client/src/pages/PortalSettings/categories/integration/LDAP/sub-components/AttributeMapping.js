@@ -75,6 +75,9 @@ const AttributeMapping = (props) => {
     isDefaultUsersQuotaSet,
 
     currentColorScheme,
+
+    isOwner,
+    isAdmin,
   } = props;
 
   const { t } = useTranslation("Ldap");
@@ -206,7 +209,9 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           hasError={errors.userQuotaLimit}
           labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
+          tooltipContent={t("LdapUserQuotaTooltip", {
+            contactsName: t("Common:Contacts"),
+          })}
           inlineHelpButton
         >
           <TextInput
@@ -261,7 +266,9 @@ const AttributeMapping = (props) => {
             />
           </Box>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo")}
+            {t("LdapUsersTypeInfo", {
+              contactsName: t("Common:Contacts"),
+            })}
           </Text>
         </Box>
         <Box className="access-selector-wrapper">
@@ -273,7 +280,8 @@ const AttributeMapping = (props) => {
             defaultAccess={userType}
             onSelectAccess={onChangeUserType}
             containerRef={inputsRef}
-            isOwner
+            isOwner={isOwner}
+            isAdmin={isAdmin}
             isMobileView={isMobile()}
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
@@ -286,54 +294,63 @@ const AttributeMapping = (props) => {
   );
 };
 
-export default inject(({ ldapStore, currentQuotaStore, settingsStore }) => {
-  const {
-    setMail,
-    setFirstName,
-    setSecondName,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+export default inject(
+  ({ ldapStore, currentQuotaStore, settingsStore, userStore }) => {
+    const {
+      setMail,
+      setFirstName,
+      setSecondName,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
 
-    requiredSettings,
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
-  } = ldapStore;
+      requiredSettings,
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+    } = ldapStore;
 
-  const {
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
-  } = requiredSettings;
+    const {
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
+    } = requiredSettings;
 
-  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+    const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
-  const { currentColorScheme } = settingsStore;
+    const { currentColorScheme } = settingsStore;
 
-  return {
-    setFirstName,
-    setSecondName,
-    setMail,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+    const { user } = userStore;
+    const isOwner = user?.isOwner;
+    const isAdmin = user?.isAdmin;
 
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
+    return {
+      setFirstName,
+      setSecondName,
+      setMail,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
 
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
 
-    isDefaultUsersQuotaSet,
-    currentColorScheme,
-  };
-})(observer(AttributeMapping));
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+
+      isDefaultUsersQuotaSet,
+      currentColorScheme,
+
+      isOwner,
+      isAdmin,
+    };
+  },
+)(observer(AttributeMapping));

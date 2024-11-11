@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "İcazə verin",
+  "ConsentDescription": "<strong>{{displayName}}</strong> ilə paylaşılan məlumat <strong>{{nameApp}}</strong>-ın <6>məxfilik siyasətinə</6> və <6>xidmət şərtlərinə</6> tabe olacaq . >. İstənilən vaxt {{productName}} hesab ayarlarınızda bu razılığı ləğv edə bilərsiniz.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> <strong>{{productName}} hesabınızda</strong> aşağıdakı məlumatlara giriş əldə etmək istəyir:",
+  "DenyButton": "İmtina",
+  "NotYou": "Siz deyilsiniz?",
+  "SignedInAs": "Aşağıdakı kimi daxil olub:",
+  "ToContinue": "Davam etmək üçün"
+}

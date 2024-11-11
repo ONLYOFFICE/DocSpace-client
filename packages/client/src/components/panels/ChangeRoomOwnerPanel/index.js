@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -43,8 +43,8 @@ const StyledChangeRoomOwner = styled.div`
     overflow: visible;
   }
 
-  ${({ showBackButton }) =>
-    !showBackButton &&
+  ${({ withFooterCheckbox }) =>
+    withFooterCheckbox &&
     css`
       .arrow-button {
         display: none;
@@ -112,9 +112,14 @@ const ChangeRoomOwner = (props) => {
     onClose();
   };
 
-  const filter = Filter.getDefault();
-  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
-  filter.employeeStatus = EmployeeStatus.Active;
+  const filter = useMemo(() => {
+    const filter = Filter.getDefault();
+    filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    filter.employeeStatus = EmployeeStatus.Active;
+    return filter;
+  }, []);
+
+  const ownerIsCurrentUser = roomOwnerId === userId;
 
   const selectorComponent = (
     <PeopleSelector
@@ -132,7 +137,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton}
+      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -160,7 +165,9 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner showBackButton={showBackButton}>
+        <StyledChangeRoomOwner
+          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+        >
           {selectorComponent}
         </StyledChangeRoomOwner>
       </ModalDialog.Body>

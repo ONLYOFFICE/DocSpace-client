@@ -45,7 +45,7 @@ class MembersHelper {
       },
       roomAdmin: {
         key: "roomAdmin",
-        label: this.t("Common:RoomAdmin"),
+        label: this.t("Common:RoomManager"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
@@ -142,7 +142,6 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
-          options.formFiller,
           options.reviewer,
           options.commentator,
           options.viewer,
@@ -160,6 +159,7 @@ class MembersHelper {
         return [options.roomAdmin, options.collaborator, ...deleteOption];
       case RoomsType.VirtualDataRoom:
         return [
+          options.roomAdmin,
           options.collaborator,
           options.editor,
           options.viewer,

@@ -87,6 +87,12 @@ const StyledWrapper = styled.div`
         props.isIndexEditingMode
           ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
           : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+
+      &:hover {
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
       ${marginStyles}
     `}
 

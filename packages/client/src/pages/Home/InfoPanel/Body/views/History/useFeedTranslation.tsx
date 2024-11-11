@@ -1,5 +1,6 @@
 import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
+import moment from "moment";
 import { AnyFeedInfo } from "./FeedInfo";
 import { HistoryText } from "./HistoryText";
 
@@ -36,6 +37,15 @@ export const useFeedTranslation = (
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");
+    case "FileLocked":
+      return `${t("Translations:FileLocked")}.`;
+    case "FileUnlocked":
+      return `${t("Translations:FileUnlocked")}.`;
+    case "FileIndexChanged":
+    case "FolderIndexChanged":
+      return t("InfoPanel:IndexChanged");
+    case "FolderIndexReordered":
+      return t("InfoPanel:FolderIndexReordered");
     case "FolderCreated":
       return t("InfoPanel:FolderCreated");
     case "FolderRenamed":
@@ -141,6 +151,8 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
+    case "RoomInviteResend":
+      return t("InfoPanel:RoomInviteResend");
     case "RoomGroupAdded":
       if (hasRelatedItems) return t("InfoPanel:RoomGroupAdded").slice(0, -1);
       return t("InfoPanel:RoomGroupAdded");
@@ -148,7 +160,58 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
+    case "RoomWatermarkSet":
+      return t("InfoPanel:RoomWatermarkSet");
+    case "RoomWatermarkDisabled":
+      return t("InfoPanel:RoomWatermarkDisabled");
+    case "RoomIndexingEnabled":
+      return t("InfoPanel:RoomIndexingEnabled");
+    case "RoomIndexingDisabled":
+      return t("InfoPanel:RoomIndexingDisabled");
+    case "RoomLifeTimeSet": {
+      const periodLifeTime = feed.data.lifeTime.period;
+      const value = feed.data.lifeTime.value;
+      const maxValue = 9999;
+      const period =
+        periodLifeTime === 0
+          ? "days"
+          : periodLifeTime === 1
+            ? "months"
+            : "years";
 
+      const thresholds =
+        periodLifeTime === 0
+          ? { d: maxValue }
+          : periodLifeTime === 1
+            ? { M: maxValue }
+            : { y: maxValue };
+
+      const data = moment.duration(value, period).humanize(false, thresholds);
+
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="RoomLifeTimeSet"
+          values={{ data }}
+          components={{
+            1: <strong />,
+          }}
+        />
+      );
+    }
+    case "RoomLifeTimeDisabled":
+      return t("InfoPanel:RoomLifeTimeDisabled");
+    case "RoomDenyDownloadEnabled":
+      return t("InfoPanel:RoomDenyDownloadEnabled");
+    case "RoomDenyDownloadDisabled":
+      return t("InfoPanel:RoomDenyDownloadDisabled");
+    case "RoomArchived":
+      return t("InfoPanel:RoomArchived");
+    case "RoomUnarchived":
+      return t("InfoPanel:RoomUnarchived");
+    case "RoomIndexExportSaved":
+      return t("InfoPanel:RoomIndexExportSaved");
     case "FormSubmit":
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":

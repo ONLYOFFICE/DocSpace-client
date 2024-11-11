@@ -81,6 +81,7 @@ const CancelMigrationButton = styled.span`
 
   text-decoration-line: underline;
   text-decoration-style: dashed;
+  text-underline-offset: 0.1em;
 
   @media ${mobile} {
     padding: 0 16px;

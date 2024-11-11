@@ -75,6 +75,7 @@ const StyledDropdownItem = styled.div.attrs(injectDefaultTheme)<{
   isModern?: boolean;
   disabled?: boolean;
   noHover?: boolean;
+  noActive?: boolean;
   isHeader?: boolean;
   isSeparator?: boolean;
   isActiveDescendant?: boolean;
@@ -157,8 +158,9 @@ const StyledDropdownItem = styled.div.attrs(injectDefaultTheme)<{
   }
 
   &:active {
-    ${({ isHeader, theme }) =>
+    ${({ isHeader, theme, noActive }) =>
       !isHeader &&
+      !noActive &&
       css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}

@@ -127,6 +127,7 @@ const PasswordAccessBlock = (props) => {
                 onValidateInput={onValidatePassword}
                 isSimulateType
                 simulateSymbol="•"
+                autoComplete="off"
                 {...tooltipData}
               />
             </FieldContainer>

@@ -104,7 +104,6 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   isPaidUserAccess,
-  setInvitePaidUsersCount,
   isUserTariffLimit,
   removeExist,
   inputValue,
@@ -203,8 +202,6 @@ const InviteInput = ({
               userAccess = FreeUser;
               isShowErrorToast = true;
             }
-          } else {
-            setInvitePaidUsersCount();
           }
         }
 
@@ -234,8 +231,6 @@ const InviteInput = ({
           userAccess = FreeUser;
           toastr.error(<PaidQuotaLimitError />);
         }
-      } else {
-        setInvitePaidUsersCount();
       }
     }
 
@@ -577,10 +572,10 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts", {
+          ? t("InviteNewAccountManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("AddManuallyDescriptionRoom", {
+          : t("InviteToRoomManuallyDescription", {
               productName: t("Common:ProductName"),
             })}
       </StyledDescription>
@@ -644,7 +639,7 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteAccountSearchPlaceholder")
-                : t("InviteRoomSearchPlaceholder")
+                : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed={true}
@@ -706,7 +701,7 @@ export default inject(
       inviteItems,
       setInviteLanguage,
       culture,
-      setInvitePaidUsersCount,
+
       isPaidUserAccess,
     } = dialogsStore;
 
@@ -724,7 +719,6 @@ export default inject(
       isOwner,
       isAdmin,
       isPaidUserAccess,
-      setInvitePaidUsersCount,
       isUserTariffLimit,
     };
   },

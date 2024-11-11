@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
@@ -51,7 +51,14 @@ const CONTENT_SCROLL_DIFF = 260;
 const DESKTOP_HEIGHT = 648;
 const TABLET_HEIGHT = 854;
 
-const StyledModalDialog = styled(ModalDialog)<{ heightProp?: string }>`
+const BREAKPOINT_GENERAL_SCROLL = 640;
+const HEADER = 70;
+const BUTTONS = 80;
+
+const StyledModalDialog = styled(ModalDialog)<{
+  heightProp?: string;
+  scrollBodyHeight?: null | number;
+}>`
   #modal-dialog {
     width: 422px;
     height: ${(props) => props.heightProp};
@@ -67,6 +74,20 @@ const StyledModalDialog = styled(ModalDialog)<{ heightProp?: string }>`
     .modal-body {
       padding: 0;
       padding-inline-start: 16px;
+
+      ${(props) =>
+        props.scrollBodyHeight &&
+        css`
+          height: ${`${props.scrollBodyHeight}px`};
+
+          .room-logo-container {
+            padding-left: 15px;
+          }
+
+          .icon-container {
+            padding-right: 1px;
+          }
+        `}
     }
 
     .modal-footer {
@@ -111,9 +132,25 @@ const RoomLogoCoverDialog = ({
   const [height, setHeight] = React.useState(`${defaultHeight}px`);
   const [view, setView] = React.useState(isDesktop() ? "desktop" : "tablet");
   const [openColorPicker, setOpenColorPicker] = React.useState<boolean>(false);
+  const [scrollBodyHeight, setScrollBodyHeight] = React.useState<null | number>(
+    null,
+  );
+
   const contentRef = React.useRef();
 
   const recalculateHeight = React.useCallback(() => {
+    const screenHeight = document.documentElement.clientHeight;
+
+    const horizontalScreenOrientation =
+      screenHeight < document.documentElement.clientWidth;
+
+    const useGeneralScroll =
+      horizontalScreenOrientation && screenHeight < BREAKPOINT_GENERAL_SCROLL;
+
+    if (useGeneralScroll)
+      setScrollBodyHeight(screenHeight - HEADER - BUTTONS - PADDING_HEIGHT);
+    else if (scrollBodyHeight) setScrollBodyHeight(null);
+
     if (contentRef.current) {
       const contentHeight =
         contentRef?.current?.getBoundingClientRect()?.height;
@@ -145,7 +182,7 @@ const RoomLogoCoverDialog = ({
         setHeight(`${window.innerHeight - PADDING_HEIGHT}px`);
       } else setHeight(`${h}px`);
     }
-  }, [view, roomLogoCoverDialogVisible]);
+  }, [view, roomLogoCoverDialogVisible, scrollBodyHeight]);
 
   const scrollH = React.useMemo(() => {
     return `${Number(height.replace("px", "")) - CONTENT_SCROLL_DIFF}px`;
@@ -206,6 +243,9 @@ const RoomLogoCoverDialog = ({
       onClose={onCloseRoomLogo}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       withBodyScroll
+      scrollBodyHeight={scrollBodyHeight}
+      withBodyScrollForcibly={!!scrollBodyHeight}
+      isScrollLocked={openColorPicker}
     >
       <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -215,6 +255,8 @@ const RoomLogoCoverDialog = ({
           covers={covers}
           openColorPicker={openColorPicker}
           setOpenColorPicker={setOpenColorPicker}
+          generalScroll={!!scrollBodyHeight}
+          isScrollLocked={openColorPicker}
         />
       </ModalDialog.Body>
 

@@ -17,15 +17,7 @@
   "RoomQuotaHeaderLimit": "ルームの数の上限に達しています：{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "ストレージ容量とルーム数の制限がもうすぐ超えそうです。",
   "StorageAndRoomLimitHeader": "ストレージ容量とルーム数の上限に達しています。",
-  "StorageAndUserHeader": "ストレージと管理者/パワーユーザーの制限を超えそうです。",
-  "StorageAndUserTariffLimitHeader": "ストレージ容量と管理者/パワーユーザーの人数が上限に達しています。",
   "StorageLimitHeader": "ストレージ容量の上限に達しています：{{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
-  "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",
-  "UserQuotaHeader": "管理者/パワーユーザー数を超えそうです：{{currentValue}} / {{maxValue}}",
-  "UserTariffAlmostReached": "上限に達すると、すべてのユーザーはユーザー権限のみで追加されます。管理者/パワーユーザーをさらに追加するには、{{productName}}管理者に連絡して料金プランをアップグレードしてください。",
-  "UserTariffAlmostReachedForAdmins": "上限に達すると、すべてのユーザーはユーザー権限のみで追加されます。管理者/パワーユーザーをさらに追加するには、料金プランをアップグレードする必要があります。アップグレードするには、<1>こちらをクリック</1>してください。",
-  "UserTariffLimitHeader": "管理者/パワーユーザーの人数の上限に達しています：{{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "すべてのユーザーはユーザー権限のみで追加されます。管理者/パワーユーザーを追加するには、{{productName}}の管理者に連絡して料金プランをアップグレードしてください。",
-  "UserTariffReachedForAdmins": "すべてのユーザーはユーザー権限のみで追加されます。管理者/パワーユーザーを追加できるようにするには、料金プランをアップグレードするために、<1>こちらをクリック</1>してください。"
+  "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。"
 }

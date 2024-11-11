@@ -154,6 +154,7 @@ const LinkRow = ({
               role={AvatarRole.user}
               source={avatar}
               roleIcon={isLocked ? <LockedReactSvg /> : undefined}
+              noClick
             />
           )}
           <div className="link-options">
@@ -172,7 +173,7 @@ const LinkRow = ({
                 scaledOptions={false}
                 showDisabledItems
                 size={ComboBoxSize.content}
-                manualWidth="fit-content"
+                manualWidth="auto"
                 fillIcon={false}
                 modernView
                 isDisabled={isLoaded}
@@ -205,9 +206,7 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                {isFormRoom ? (
-                  <></>
-                ) : (
+                {!isFormRoom && (
                   <AccessRightSelect
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
                     onSelect={onAccessRightsSelect}
@@ -247,7 +246,7 @@ const LinkRow = ({
                 modernView
                 type="onlyIcon"
                 isDisabled={isExpiredLink || isLoaded}
-                manualWidth="fit-content"
+                manualWidth="auto"
                 withBackdrop={false}
               />
             )}

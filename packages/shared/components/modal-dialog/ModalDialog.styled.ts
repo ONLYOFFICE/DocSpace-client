@@ -168,14 +168,19 @@ const StyledBody = styled(Box)<{
     margin-inline-end: 0 !important;
 
     padding-inline-end: 16px !important;
-
-    ${(props) =>
-      props.isScrollLocked &&
-      css`
-        margin-inline-end: 0 !important;
-        overflow: hidden !important;
-      `}
   }
+
+  ${(props) =>
+    props.isScrollLocked &&
+    css`
+      #modal-scroll > .scroll-wrapper > .scroller {
+        overflow: hidden !important;
+      }
+
+      #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
+        margin-inline-end: 0 !important;
+      }
+    `}
 
   ${(props) =>
     props.currentDisplayType === "aside" &&

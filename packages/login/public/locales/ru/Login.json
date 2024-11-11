@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Код был отправлен вам по эл. почте",
+  "EnterCredentials": "Пожалуйста, введите учетные данные {{productName}}, чтобы подтвердить удаление",
   "ErrorInvalidText": "Через 10 секунд вы будете перенаправлены на <1>{{productName}}</1>",
   "ForgotPassword": "Забыли пароль?",
   "LDAPUsernamePlaceholder": "Имя пользователя {{ldap_domain}}",

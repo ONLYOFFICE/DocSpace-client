@@ -74,6 +74,9 @@ const Modal = ({
   withoutPadding,
   hideContent,
 
+  isInvitePanelLoader = false,
+  onSubmit,
+  withBodyScrollForcibly = false,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -173,6 +176,7 @@ const Modal = ({
                     withoutAside
                     isPanel={false}
                     withFooterBorder={withFooterBorder}
+                    isInvitePanelLoader={isInvitePanelLoader}
                   />
                 )
               ) : container &&
@@ -180,7 +184,7 @@ const Modal = ({
                 currentDisplayType !== "modal" ? (
                 containerComponent
               ) : (
-                <FormWrapper withForm={withForm || false}>
+                <FormWrapper withForm={withForm || false} onSubmit={onSubmit}>
                   {header && (
                     <AsideHeader
                       id="modal-header-swipe"
@@ -212,7 +216,8 @@ const Modal = ({
                       {...iOSActions}
                       // embedded={embedded}
                     >
-                      {currentDisplayType === "aside" && withBodyScroll ? (
+                      {withBodyScrollForcibly ||
+                      (currentDisplayType === "aside" && withBodyScroll) ? (
                         <Scrollbar
                           id="modal-scroll"
                           className="modal-scroll"

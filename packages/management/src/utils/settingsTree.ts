@@ -105,7 +105,7 @@ export const settingsTree = [
   },
   {
     id: "management-settings_catalog-payments",
-    key: "3",
+    key: "2",
     icon: PaymentIconUrl,
     link: "payments",
     tKey: "Common:PaymentsTitle",
@@ -114,10 +114,11 @@ export const settingsTree = [
   },
   {
     id: "management-settings_catalog-bonus",
-    key: "5",
+    key: "3",
     icon: CatalogSettingsGiftReactSvgUrl,
     link: "bonus",
     tKey: "Common:Bonus",
     isHeader: true,
+    isArticle: true,
   },
 ];

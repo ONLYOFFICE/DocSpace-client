@@ -1,5 +1,6 @@
 {
   "CodeTitle": "코드가 이메일로 전송되었습니다",
+  "EnterCredentials": "삭제를 확인하기 위해 {{productName}} 자격 증명을 입력하세요",
   "ErrorInvalidText": "10초 내에 <1>{{productName}}</1>로 리디렉션됩니다",
   "ForgotPassword": "비밀번호를 잊어버리셨나요?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}의 사용자명",

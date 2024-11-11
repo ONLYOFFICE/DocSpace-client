@@ -26,7 +26,7 @@
 
 import moment from "moment-timezone";
 
-export const convertTime = (date: moment.Moment, locale: string) => {
+export const convertTime = (date: moment.MomentInput, locale: string) => {
   return moment(date)
     .tz(window.timezone)
     .locale(locale || "")

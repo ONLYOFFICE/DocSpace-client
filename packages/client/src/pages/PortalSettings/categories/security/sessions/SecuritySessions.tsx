@@ -100,10 +100,10 @@ const Sessions = (props: SessionsProps) => {
   const { storeProps } = props;
   const {
     clearSelection,
-    platformData,
+    logoutModalData,
     selection,
     bufferSelection,
-    isLoading,
+    isLogoutLoading,
     viewAs,
     setViewAs,
     currentDeviceType,
@@ -115,7 +115,7 @@ const Sessions = (props: SessionsProps) => {
     setLogoutAllDialogVisible,
     logoutAllSessionsMultiple,
     logoutAllSessions,
-    onClickRemoveSession,
+    logoutSession,
     getLoginHistoryReport,
     isLoadingDownloadReport,
     setUserSessionPanelVisible,
@@ -193,21 +193,21 @@ const Sessions = (props: SessionsProps) => {
           visible={disableDialogVisible}
           onClose={() => setDisableDialogVisible(false)}
           onClosePanel={() => setUserSessionPanelVisible(false)}
-          isLoading={isLoading}
+          isLoading={isLogoutLoading}
           userIds={userIds}
           onDisable={disableUsers}
           clearSelection={clearSelection}
         />
       )}
 
-      {logoutDialogVisible && (
+      {logoutDialogVisible && logoutModalData && (
         <LogoutSessionDialog
           t={t}
           visible={logoutDialogVisible}
-          data={platformData}
-          isLoading={isLoading}
+          data={logoutModalData}
+          isLoading={isLogoutLoading}
           onClose={() => setLogoutDialogVisible(false)}
-          onRemoveSession={onClickRemoveSession}
+          onRemoveSession={logoutSession}
         />
       )}
 
@@ -215,7 +215,7 @@ const Sessions = (props: SessionsProps) => {
         <LogoutAllSessionDialog
           t={t}
           visible={logoutAllDialogVisible}
-          isLoading={isLoading}
+          isLoading={isLogoutLoading}
           userIds={userIds}
           displayName={bufferSelection?.displayName || ""}
           isSeveralSelection={isSeveralSelection}
@@ -235,14 +235,14 @@ export const SecuritySessions = inject<TStore>(
     const { setUserSessionPanelVisible } = dialogsStore;
     const {
       clearSelection,
-      platformData,
+      logoutModalData,
       selection,
       bufferSelection,
-      isLoading,
+      isLogoutLoading,
       isSeveralSelection,
       logoutAllSessionsMultiple,
       logoutAllSessions,
-      onClickRemoveSession,
+      logoutSession,
       portalSessionsIds,
       fetchPortalSessions,
       subscribeToPortalSessions,
@@ -267,7 +267,7 @@ export const SecuritySessions = inject<TStore>(
     return {
       storeProps: {
         clearSelection,
-        platformData,
+        logoutModalData,
         selection,
         bufferSelection,
         viewAs,
@@ -279,10 +279,10 @@ export const SecuritySessions = inject<TStore>(
         setDisableDialogVisible,
         setLogoutDialogVisible,
         setLogoutAllDialogVisible,
-        isLoading,
+        isLogoutLoading,
         logoutAllSessionsMultiple,
         logoutAllSessions,
-        onClickRemoveSession,
+        logoutSession,
         getLoginHistoryReport,
         isLoadingDownloadReport,
         setUserSessionPanelVisible,

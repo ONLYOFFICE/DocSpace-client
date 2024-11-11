@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "@docspace/shared/types";
-import { ISessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+import { TSession } from "@docspace/shared/types/ActiveSessions";
 
 export interface LogoutSessionDialogProps {
   t: TTranslation;
-  data: ISessions;
+  data: TSession;
   visible: boolean;
   onClose: () => void;
   onRemoveSession: (t: TTranslation, id: number) => void;

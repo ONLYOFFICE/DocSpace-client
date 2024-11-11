@@ -75,9 +75,9 @@ class SessionsStore {
 
   items;
 
-  platformData = [];
+  logoutModalData: Nullable<TSession> = null;
 
-  isLoading = false;
+  isLogoutLoading = false;
 
   isSessionsLoaded = false;
 
@@ -567,6 +567,41 @@ class SessionsStore {
     this.setTotalPortalSessions(this.totalPortalSessions - userIds.length);
   };
 
+  logoutSession = async (t: TTranslation, sessionId: number) => {
+    const { removeSession } = this.settingsSetupStore;
+    const { setUserSessionPanelVisible } = this.dialogsStore;
+
+    const foundSession = this.userSessions.find((s) => s.id === sessionId);
+
+    if (!foundSession) return;
+
+    this.setIsLogoutLoading(true);
+    try {
+      await removeSession(sessionId);
+
+      this.setUserSessions(this.userSessions.filter((s) => s.id !== sessionId));
+
+      const allSessionsLoggedOut = !this.userSessions.length;
+
+      if (allSessionsLoggedOut) {
+        setUserSessionPanelVisible(false);
+      }
+
+      const toastText = allSessionsLoggedOut
+        ? t("LoggedOutBySelectedUsers")
+        : t("Profile:SuccessLogout", {
+            platform: foundSession.platform,
+            browser: foundSession.browser?.split(".")[0] ?? "",
+          });
+
+      toastr.success(toastText);
+    } catch (e) {
+      toastr.error(e as TData);
+    } finally {
+      this.setIsLogoutLoading(false);
+    }
+  };
+
   logoutAllSessions = async (
     t: TTranslation,
     userId: string,
@@ -576,14 +611,14 @@ class SessionsStore {
     const { removeAllActiveSessionsById } = this.settingsSetupStore;
 
     try {
-      this.setIsLoading(true);
+      this.setIsLogoutLoading(true);
       await removeAllActiveSessionsById(userId, changePassword);
 
       toastr.success(t("Settings:LoggedOutByUser", { displayName }));
     } catch (error) {
       toastr.error(error as TData);
     } finally {
-      this.setIsLoading(false);
+      this.setIsLogoutLoading(false);
     }
   };
 
@@ -591,16 +626,28 @@ class SessionsStore {
     const { logoutAllUsers } = this.settingsSetupStore;
 
     try {
-      this.setIsLoading(true);
+      this.setIsLogoutLoading(true);
       await logoutAllUsers(userIds);
 
       toastr.success(t("LoggedOutBySelectedUsers"));
     } catch (error) {
       toastr.error(error as TData);
     } finally {
-      this.setIsLoading(false);
+      this.setIsLogoutLoading(false);
       this.clearSelection();
     }
+  };
+
+  setLogoutModalData = (data: TSession) => {
+    this.logoutModalData = data;
+  };
+
+  setIsLogoutLoading = (isLogoutLoading: boolean) => {
+    this.isLogoutLoading = isLogoutLoading;
+  };
+
+  setDisplayName = (displayName: string) => {
+    this.displayName = displayName;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -617,20 +664,8 @@ class SessionsStore {
     this.dataFromSocket = data;
   };
 
-  setDisplayName = (displayName) => {
-    this.displayName = displayName;
-  };
-
   setItems = (items) => {
     this.items = items;
-  };
-
-  setPlatformData = (data) => {
-    this.platformData = data;
-  };
-
-  setIsLoading = (isLoading) => {
-    this.isLoading = isLoading;
   };
 
   setIsSessionsLoaded = (isSessionsLoaded) => {
@@ -883,51 +918,6 @@ class SessionsStore {
       toastr.error(error);
     } finally {
       this.setIsSessionsLoaded(false);
-    }
-  };
-
-  onClickRemoveSession = async (t, sessionId) => {
-    const { removeSession } = this.settingsSetupStore;
-
-    const foundConnection = this.items.sessions.find(
-      (session) => session.id === sessionId,
-    );
-
-    // Remove specific active session
-    const activeSessions = this.activeSessionsMap.get(this.items.userId);
-    this.activeSessionsMap.set(
-      this.items.userId,
-      activeSessions.filter((item) => item.id !== sessionId),
-    );
-
-    if (!foundConnection) return;
-
-    try {
-      this.setIsLoading(true);
-      await removeSession(sessionId);
-      const filteredConnections = this.items.sessions.filter(
-        (session) => session.id !== sessionId,
-      );
-
-      const newData = {
-        ...this.items,
-        sessions: filteredConnections,
-      };
-
-      this.setItems(newData);
-      const index = this.findSessionIndexByUserId(this.items.id);
-      this.dataFromSocket[index] = newData;
-
-      toastr.success(
-        t("Profile:SuccessLogout", {
-          platform: foundConnection.platform,
-          browser: foundConnection.browser?.split(".")[0] ?? "",
-        }),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      this.setIsLoading(false);
     }
   };
 }

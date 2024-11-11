@@ -38,6 +38,8 @@ export type TSession = {
   id: number;
   ip: string;
   platform: string;
+  country: string;
+  city: string;
   status: TOnlineStatus;
   date: string;
 };

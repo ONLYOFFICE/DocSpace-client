@@ -62,21 +62,18 @@ const Wrapper = styled.div`
 `;
 
 const AllSessionsBlock = (props: AllSessionsBlockProps) => {
+  const { t, storeProps } = props;
   const {
-    t,
-    isLoading,
-    isDisabled,
-    setDisplayName = () => {},
-    setLogoutAllDialogVisible = () => {},
+    bufferSelection,
+    isLogoutLoading,
+    setDisplayName,
+    setLogoutAllDialogVisible,
     userSessions,
-    currentPortalSession,
-  } = props;
-
-  const { displayName } = currentPortalSession;
+  } = storeProps!;
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
-    setDisplayName(displayName);
+    setDisplayName(bufferSelection?.displayName || "");
   };
 
   return (
@@ -90,8 +87,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
             size={ButtonSize.small}
             onClick={onClickLogout}
             scale
-            isDisabled={isDisabled}
-            isLoading={isLoading}
+            isLoading={isLogoutLoading}
           />
         ) : (
           <EmptyScreenContainer
@@ -109,22 +105,18 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
 };
 
 export default inject<TStore>(({ setup, sessionsStore }) => {
-  const {
-    isLoading,
-    isDisabled,
-    setDisplayName,
-    userSessions,
-    bufferSelection,
-  } = sessionsStore;
+  const { isLogoutLoading, setDisplayName, userSessions, bufferSelection } =
+    sessionsStore;
 
   const { setLogoutAllDialogVisible } = setup;
 
   return {
-    isDisabled,
-    isLoading,
-    setDisplayName,
-    setLogoutAllDialogVisible,
-    userSessions,
-    currentPortalSession: bufferSelection,
+    storeProps: {
+      isLogoutLoading,
+      setDisplayName,
+      setLogoutAllDialogVisible,
+      userSessions,
+      bufferSelection,
+    },
   };
 })(observer(AllSessionsBlock));

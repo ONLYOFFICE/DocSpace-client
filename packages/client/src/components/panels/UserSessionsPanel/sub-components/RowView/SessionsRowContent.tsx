@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer } from "mobx-react";
+import styled, { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { RowContent } from "@docspace/shared/components/row-content";
 
-import styled, { useTheme } from "styled-components";
-import { IConnections } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
-import { SessionsRowProps } from "../../UserSessionsPanel.types";
+import { SessionsRowContentProps } from "../../UserSessionsPanel.types";
 
 const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -50,9 +50,13 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const SessionsRowContent = ({ item, sectionWidth }: SessionsRowProps) => {
-  const { id, platform, browser, country, city, date } = item as IConnections;
+const SessionsRowContent = ({
+  item,
+  sectionWidth,
+}: SessionsRowContentProps) => {
+  const { id, platform, browser, country, city, date } = item;
   const theme = useTheme();
+  const { i18n } = useTranslation();
 
   return (
     <StyledRowContent
@@ -62,7 +66,7 @@ const SessionsRowContent = ({ item, sectionWidth }: SessionsRowProps) => {
     >
       <Text fontSize="14px" fontWeight="600" truncate>
         {platform}, {browser?.split(".")[0] ?? ""}
-        <span className="date">{convertTime(new Date(date))}</span>
+        <span className="date">{convertTime(date, i18n.language)}</span>
       </Text>
       <span />
       {(country || city) && (

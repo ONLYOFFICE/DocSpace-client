@@ -84,14 +84,14 @@ export interface SessionsProps {
 type SessionsStoreProps = Pick<
   SessionsStore,
   | "clearSelection"
-  | "platformData"
+  | "logoutModalData"
   | "selection"
   | "bufferSelection"
-  | "isLoading"
+  | "isLogoutLoading"
   | "isSeveralSelection"
+  | "logoutSession"
   | "logoutAllSessionsMultiple"
   | "logoutAllSessions"
-  | "onClickRemoveSession"
   | "portalSessionsIds"
   | "fetchPortalSessions"
   | "subscribeToPortalSessions"

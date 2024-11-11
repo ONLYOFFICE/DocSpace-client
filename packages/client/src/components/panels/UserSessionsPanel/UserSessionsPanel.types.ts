@@ -27,11 +27,12 @@
 import { TTranslation } from "@docspace/shared/types";
 import {
   IAllSessions,
-  IConnections,
   ISessions,
 } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import SessionsStore from "SRC_DIR/store/SessionsStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import { TSession } from "@docspace/shared/types/ActiveSessions";
 
 export interface UserSessionsPanelProps {
   storeProps?: UserSessionsPanelStoreProps;
@@ -60,17 +61,17 @@ export interface LastSessionBlockProps {
   getFromDateAgo?: (userId: string) => string;
 }
 
-export interface AllSessionsBlockProps {
+export type AllSessionsBlockProps = {
   t: TTranslation;
-  isLoading?: boolean;
-  isDisabled?: boolean;
-  items?: IAllSessions;
-  onClickLogoutAllExceptThis?: (
-    t: TTranslation,
-    exceptId: number,
-    displayName: string,
-  ) => void;
-}
+
+  storeProps?: AllSessionsBlockStoreProps;
+};
+
+type AllSessionsBlockStoreProps = Pick<
+  SessionsStore,
+  "isLogoutLoading" | "setDisplayName" | "userSessions" | "bufferSelection"
+> &
+  Pick<SettingsSetupStore, "setLogoutAllDialogVisible">;
 
 export interface RowViewProps {
   t: TTranslation;
@@ -78,12 +79,18 @@ export interface RowViewProps {
   sectionWidth: number;
 }
 
-export interface SessionsRowProps {
+export type SessionsRowProps = {
   t: TTranslation;
-  item: ISessions | IConnections;
-  connections?: IConnections;
-  setIsDisabled: (disabled: boolean) => void;
+  item: TSession;
   sectionWidth: number;
-  setLogoutDialogVisible?: (visible: boolean) => void;
-  setPlatformData?: (item: ISessions) => void;
-}
+
+  storeProps?: SessionsRowStoreProps;
+};
+
+type SessionsRowStoreProps = Pick<SessionsStore, "setLogoutModalData"> &
+  Pick<SettingsSetupStore, "setLogoutDialogVisible">;
+
+export type SessionsRowContentProps = {
+  item: TSession;
+  sectionWidth: number;
+};

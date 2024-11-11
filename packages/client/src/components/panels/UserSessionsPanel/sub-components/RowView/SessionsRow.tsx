@@ -38,23 +38,12 @@ const StyledRow = styled(Row)`
 `;
 
 const SessionsRow = (props: SessionsRowProps) => {
-  const {
-    item,
-    connections,
-    setIsDisabled,
-    setLogoutDialogVisible = () => {},
-    setPlatformData = () => {},
-  } = props;
+  const { item, sectionWidth, storeProps } = props;
+  const { setLogoutModalData, setLogoutDialogVisible } = storeProps!;
 
-  // const isEqualSession = item.id === connections?.id;
-
-  // useEffect(() => {
-  //   setIsDisabled(isEqualSession);
-  // }, [isEqualSession, setIsDisabled]);
-
-  const onClickDisable = () => {
+  const onClickLogout = () => {
     setLogoutDialogVisible(true);
-    setPlatformData(item);
+    setLogoutModalData(item);
   };
 
   const contentElement = (
@@ -62,30 +51,22 @@ const SessionsRow = (props: SessionsRowProps) => {
       size={20}
       iconName={RemoveSessionSvgUrl}
       isClickable
-      onClick={onClickDisable}
+      onClick={onClickLogout}
     />
   );
 
   return (
-    <StyledRow
-      key={item.id}
-      contentElement={contentElement}
-      onRowClick={() => {}}
-    >
-      <SessionsRowContent {...props} />
+    <StyledRow key={item.id} contentElement={contentElement}>
+      <SessionsRowContent item={item} sectionWidth={sectionWidth} />
     </StyledRow>
   );
 };
 
 export default inject<TStore>(({ setup, sessionsStore }) => {
-  const { setLogoutDialogVisible, setPlatformModalData } = setup;
-  const { platformData, setPlatformData, setIsDisabled } = sessionsStore;
+  const { setLogoutDialogVisible } = setup;
+  const { setLogoutModalData } = sessionsStore;
 
   return {
-    setLogoutDialogVisible,
-    setPlatformModalData,
-    platformData,
-    setPlatformData,
-    setIsDisabled,
+    storeProps: { setLogoutDialogVisible, setLogoutModalData },
   };
 })(observer(SessionsRow));

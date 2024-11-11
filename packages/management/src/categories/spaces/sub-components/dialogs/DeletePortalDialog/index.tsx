@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
@@ -48,6 +48,8 @@ const StyledModalDialog = styled(ModalDialog)`
 `;
 
 const DeletePortalDialog = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { spacesStore, settingsStore } = useStore();
   const { getAllPortals } = settingsStore;
 
@@ -66,31 +68,34 @@ const DeletePortalDialog = () => {
   const onClose = () => setDeletePortalDialogVisible(false);
 
   const onDelete = async () => {
-    if (!isWizardCompleted) {
-      try {
-        await deletePortal({ portalName: domain });
+    try {
+      setIsLoading(true);
+      const res = await deletePortal({ portalName: domain });
+
+      if (res?.removed) {
         await getAllPortals();
         toastr.success(
           t("PortalDeleted", { productName: t("Common:ProductName") })
         );
-      } catch (e) {
-        toastr.error(e);
+      } else {
+        toastr.success(
+          <Trans
+            i18nKey="DeleteRequestSuccess"
+            values={{
+              email,
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />
+        );
       }
-    } else {
-      // TODO: send email
-      toastr.success(
-        <Trans
-          i18nKey="DeleteRequestSuccess"
-          values={{
-            email,
-          }}
-          components={{
-            1: <strong />,
-          }}
-        />
-      );
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsLoading(false);
+      onClose();
     }
-    onClose();
   };
 
   return (
@@ -144,12 +149,14 @@ const DeletePortalDialog = () => {
           scale
           primary
           onClick={onDelete}
+          isLoading={isLoading}
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
+          isLoading={isLoading}
           scale
         />
       </ModalDialog.Footer>

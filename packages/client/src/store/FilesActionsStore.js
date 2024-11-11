@@ -2900,7 +2900,6 @@ class FilesActionStore {
         ? bufferSelection.id
         : id;
 
-    console.log("isRootFolder", isRootFolder);
     return setRoomOwner(userId, [roomId])
       .then(async (res) => {
         if (isRootFolder) {

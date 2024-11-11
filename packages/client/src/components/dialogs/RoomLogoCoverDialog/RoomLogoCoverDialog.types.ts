@@ -61,7 +61,8 @@ export interface RoomLogoCoverProps {
   currentColorScheme: TColorScheme;
   openColorPicker: boolean;
   setOpenColorPicker: React.Dispatch<React.SetStateAction<boolean>>;
-  generalScroll?: boolean;
+  generalScroll: boolean;
+  isScrollLocked: boolean;
 }
 
 export type CoverDialogProps = RoomLogoCoverProps & {

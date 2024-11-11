@@ -56,12 +56,13 @@ const SessionsRowContent = ({
   t,
   isOnline,
   fromDateAgo,
-  displayName,
-  connections,
+  item,
   sectionWidth,
 }: SessionsRowContentProps) => {
+  const { userId, displayName, session } = item;
+  const { ip, platform, browser, city, country } = session;
+
   const theme = useTheme();
-  const { userId, platform, browser, ip, city, country } = connections[0] ?? {};
 
   return (
     <StyledRowContent

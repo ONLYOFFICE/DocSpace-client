@@ -42,7 +42,7 @@ export interface RowContainerProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Sets a callback function that is called when the list scroll positions change */
-  onScroll: () => void;
+  onScroll?: () => void;
   /** The property required for the infinite loader */
   filesLength: number;
   /** The property required for the infinite loader */

@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/shared/utils";
+import { IndexRange } from "react-virtualized";
 import styled, { css } from "styled-components";
+
+import { tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
-
 import { RowContainer } from "@docspace/shared/components/row-container";
-import { SessionsRowProps } from "../../SecuritySessions.types";
 
+import { SessionsRowViewProps } from "../../SecuritySessions.types";
 import SessionsRow from "./SessionsRow";
 
 const marginStyles = css`
@@ -109,40 +110,74 @@ const StyledRowContainer = styled(RowContainer)`
   }
 `;
 
-const RowView = (props: SessionsRowProps) => {
-  const { t, sectionWidth, sessionsData } = props;
+const RowView = (props: SessionsRowViewProps) => {
+  const { t, sectionWidth, storeProps } = props;
+  const {
+    fetchPortalSessions,
+    totalPortalSessions,
+    portalSessionsIds,
+    portalSessionsMap,
+    selection,
+    bufferSelection,
+  } = storeProps!;
+
+  const loadNextPage = async ({ startIndex }: IndexRange) => {
+    fetchPortalSessions(startIndex);
+  };
 
   return (
     <StyledRowContainer
       className="people-row-container"
-      useReactWindow={false}
-      hasMoreFiles={false}
+      useReactWindow
       itemHeight={58}
-      itemCount={sessionsData.length}
-      filesLength={sessionsData.length}
-      onScroll={() => {}}
-      fetchMoreFiles={() => Promise.resolve()}
+      itemCount={totalPortalSessions}
+      filesLength={portalSessionsIds.length}
+      hasMoreFiles={portalSessionsIds.length < totalPortalSessions}
+      fetchMoreFiles={loadNextPage}
     >
-      {sessionsData.map((item) => (
-        <SessionsRow
-          t={t}
-          key={item.id}
-          userId={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-          displayName={item.displayName}
-          status={item.status}
-          connections={item.connections}
-        />
-      ))}
+      {portalSessionsIds.map((sessionId) => {
+        const session = portalSessionsMap.get(sessionId);
+
+        if (!session) {
+          return null;
+        }
+
+        const isChecked = selection.some((s) => s.userId === session.userId);
+        const isActive = bufferSelection?.userId === session.userId;
+
+        return (
+          <SessionsRow
+            key={sessionId}
+            t={t}
+            sectionWidth={sectionWidth}
+            item={session}
+            isChecked={isChecked}
+            isActive={isActive}
+          />
+        );
+      })}
     </StyledRowContainer>
   );
 };
 
-export default inject<TStore>(({ userStore }) => {
-  const userId = userStore.user?.id ?? null;
+export default inject<TStore>(({ sessionsStore }) => {
+  const {
+    fetchPortalSessions,
+    totalPortalSessions,
+    portalSessionsIds,
+    portalSessionsMap,
+    selection,
+    bufferSelection,
+  } = sessionsStore;
 
   return {
-    userId,
+    storeProps: {
+      fetchPortalSessions,
+      totalPortalSessions,
+      portalSessionsIds,
+      portalSessionsMap,
+      selection,
+      bufferSelection,
+    },
   };
 })(observer(RowView));

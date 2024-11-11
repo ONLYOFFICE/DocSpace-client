@@ -158,6 +158,8 @@ export interface SessionsTableRowProps {
   isChecked: boolean;
   isActive: boolean;
   hideColumns?: boolean;
+  sectionWidth?: number;
+
   storeProps?: SessionsTableRowStoreProps;
 }
 
@@ -175,17 +177,29 @@ export type SessionsTableRowStoreProps = {
   | "getContextOptions"
 >;
 
-export interface SessionsRowProps {
+export type SessionsRowViewProps = {
   t: TTranslation;
   sectionWidth?: number;
-  sessionsData: IAllSessions[];
-}
+
+  storeProps?: SessionsRowViewStoreProps;
+};
+
+export type SessionsRowViewStoreProps = {
+  userId?: string;
+} & Pick<
+  SessionsStore,
+  | "fetchPortalSessions"
+  | "totalPortalSessions"
+  | "portalSessionsIds"
+  | "portalSessionsMap"
+  | "selection"
+  | "bufferSelection"
+>;
 
 export interface SessionsRowContentProps {
   t: TTranslation;
   isOnline: boolean;
   fromDateAgo: string | null;
-  displayName: string;
-  connections: IConnections[];
+  item: TPortalSession;
   sectionWidth?: number;
 }

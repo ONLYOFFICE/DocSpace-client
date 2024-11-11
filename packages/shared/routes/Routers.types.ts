@@ -50,6 +50,7 @@ export interface PrivateRouteProps
       | "enablePortalRename"
       | "limitedAccessSpace"
       | "baseDomain"
+      | "displayAbout"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {

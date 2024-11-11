@@ -51,14 +51,18 @@ const OAuth = ({
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
+    if (startLoadingRef.current) return;
     const actions = [];
 
     if (!isInit) {
       actions.push(fetchScopes());
     }
+
     actions.push(fetchClients());
 
     await Promise.all(actions);
+
+    startLoadingRef.current = new Date();
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -88,9 +92,8 @@ const OAuth = ({
   React.useEffect(() => {
     if (startLoadingRef.current) return;
     setIsLoading(true);
-    startLoadingRef.current = new Date();
     getData();
-  }, [getData, setIsInit, isInit]);
+  }, [getData]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));

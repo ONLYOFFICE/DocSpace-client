@@ -44,6 +44,10 @@ type TOwner = {
   id: string;
 };
 
+type TWizardSettings = {
+  completed: boolean;
+};
+
 export type TPortals = {
   created: string;
   domain: string;
@@ -59,6 +63,7 @@ export type TPortals = {
   quotaUsage: TQuotaUsage;
   customQuota: number;
   usedSize: number;
+  wizardSettings: TWizardSettings;
 };
 
 export type TNewPortalData = {

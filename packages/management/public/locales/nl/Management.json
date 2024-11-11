@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de ruimte adresinstellingen te bewerken, moet u de toekomstige {{productName}} naam instellen",
   "CreatingPortal": "Een nieuwe {{productName}} aanmaken",
   "CurrentSpace": "Huidige ruimte",
-  "DeletePortalText": "U gaat de ruimte <1>{{domain}}</1> met alle opgeslagen gegevens en accounts definitief verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
   "DomainName": "Domeinnaam",
   "DomainNotFound": "Domein niet gevonden, controleer DNS-instellingen",
   "DomainSettings": "Domein instellingen",

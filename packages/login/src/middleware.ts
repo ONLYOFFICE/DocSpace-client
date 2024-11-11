@@ -104,10 +104,8 @@ export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     const searchParams = new URLSearchParams(request.nextUrl.searchParams);
-    const deletePortalData = searchParams.get("deletePortalData") ?? "";
 
-    if (isAuth && redirectUrl && !deletePortalData)
-      return NextResponse.redirect(redirectUrl);
+    if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
   }
 }
 

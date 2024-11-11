@@ -316,7 +316,6 @@ const IpSecurity = (props) => {
 export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
-
     ipRestrictions,
     setIpRestrictions,
     ipSettingsUrl,

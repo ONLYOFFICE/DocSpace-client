@@ -33,7 +33,6 @@ export interface DisableUserDialogProps {
   onClosePanel: () => void;
   userIds: string[];
   isLoading: boolean;
-  fetchData: () => void;
-  updateUserStatus: (status: string | number, userIds: string[]) => void;
+  onDisable: (userIds: string[]) => Promise<void>;
   clearSelection: () => void;
 }

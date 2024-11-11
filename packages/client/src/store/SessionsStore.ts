@@ -42,6 +42,7 @@ import {
 } from "@docspace/shared/types/ActiveSessions";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import api from "@docspace/shared/api";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
@@ -540,6 +541,30 @@ class SessionsStore {
 
   clearSelection = () => {
     this.setSelection([]);
+  };
+
+  disableUsers = async (userIds: string[]) => {
+    try {
+      const disabledUsers = await api.people.updateUserStatus(
+        EmployeeStatus.Disabled,
+        userIds,
+      );
+
+      this.removePortalSessions(disabledUsers.map((u) => u.id));
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  removePortalSessions = (userIds: string[]) => {
+    userIds.forEach((userId) => this.portalSessionsMap.delete(userId));
+    this.onlineSessionsIds = this.onlineSessionsIds.filter(
+      (userId) => !userIds.includes(userId),
+    );
+    this.offlineSessionsIds = this.offlineSessionsIds.filter(
+      (userId) => !userIds.includes(userId),
+    );
+    this.setTotalPortalSessions(this.totalPortalSessions - userIds.length);
   };
 
   logoutAllSessions = async (

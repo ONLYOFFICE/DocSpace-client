@@ -30,7 +30,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { EmployeeStatus } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { DisableUserDialogProps } from "./DisableUserDialog.types";
@@ -42,8 +41,7 @@ export const DisableUserDialog = ({
   onClosePanel,
   userIds,
   isLoading,
-  fetchData,
-  updateUserStatus,
+  onDisable,
   clearSelection,
 }: DisableUserDialogProps) => {
   const onlyOneUser = userIds.length === 1;
@@ -63,8 +61,7 @@ export const DisableUserDialog = ({
 
   const onClickDisableUser = async () => {
     try {
-      await updateUserStatus(EmployeeStatus.Disabled, userIds);
-      await fetchData();
+      await onDisable(userIds);
       toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
     } catch (error) {
       toastr.error(error as TData);

@@ -103,7 +103,6 @@ const Sessions = (props: SessionsProps) => {
     platformData,
     selection,
     bufferSelection,
-    fetchData,
     isLoading,
     viewAs,
     setViewAs,
@@ -117,7 +116,6 @@ const Sessions = (props: SessionsProps) => {
     logoutAllSessionsMultiple,
     logoutAllSessions,
     onClickRemoveSession,
-    updateUserStatus,
     getLoginHistoryReport,
     isLoadingDownloadReport,
     setUserSessionPanelVisible,
@@ -127,6 +125,7 @@ const Sessions = (props: SessionsProps) => {
     subscribeToPortalSessions,
     unsubscribeToPortalSessions,
     clearPortalSessions,
+    disableUsers,
   } = storeProps!;
 
   const { t }: { t: TTranslation } = useTranslation([
@@ -140,7 +139,6 @@ const Sessions = (props: SessionsProps) => {
     fetchPortalSessions();
     subscribeToPortalSessions();
 
-    fetchData();
     return () => {
       clearSelection();
       unsubscribeToPortalSessions();
@@ -150,7 +148,6 @@ const Sessions = (props: SessionsProps) => {
     fetchPortalSessions,
     subscribeToPortalSessions,
     unsubscribeToPortalSessions,
-    fetchData,
     clearSelection,
     clearPortalSessions,
   ]);
@@ -196,10 +193,9 @@ const Sessions = (props: SessionsProps) => {
           visible={disableDialogVisible}
           onClose={() => setDisableDialogVisible(false)}
           onClosePanel={() => setUserSessionPanelVisible(false)}
-          fetchData={fetchData}
           isLoading={isLoading}
           userIds={userIds}
-          updateUserStatus={updateUserStatus}
+          onDisable={disableUsers}
           clearSelection={clearSelection}
         />
       )}
@@ -234,14 +230,12 @@ const Sessions = (props: SessionsProps) => {
 };
 
 export const SecuritySessions = inject<TStore>(
-  ({ settingsStore, setup, peopleStore, dialogsStore, sessionsStore }) => {
-    const { updateUserStatus } = peopleStore.usersStore;
+  ({ settingsStore, setup, dialogsStore, sessionsStore }) => {
     const { currentDeviceType } = settingsStore;
     const { setUserSessionPanelVisible } = dialogsStore;
     const {
       clearSelection,
       platformData,
-      fetchData,
       selection,
       bufferSelection,
       isLoading,
@@ -254,6 +248,7 @@ export const SecuritySessions = inject<TStore>(
       subscribeToPortalSessions,
       unsubscribeToPortalSessions,
       clearPortalSessions,
+      disableUsers,
     } = sessionsStore;
 
     const {
@@ -275,7 +270,6 @@ export const SecuritySessions = inject<TStore>(
         platformData,
         selection,
         bufferSelection,
-        fetchData,
         viewAs,
         setViewAs,
         currentDeviceType,
@@ -289,7 +283,6 @@ export const SecuritySessions = inject<TStore>(
         logoutAllSessionsMultiple,
         logoutAllSessions,
         onClickRemoveSession,
-        updateUserStatus,
         getLoginHistoryReport,
         isLoadingDownloadReport,
         setUserSessionPanelVisible,
@@ -299,6 +292,7 @@ export const SecuritySessions = inject<TStore>(
         subscribeToPortalSessions,
         unsubscribeToPortalSessions,
         clearPortalSessions,
+        disableUsers,
       },
     };
   },

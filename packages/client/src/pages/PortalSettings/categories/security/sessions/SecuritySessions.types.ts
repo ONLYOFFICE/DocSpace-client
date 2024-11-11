@@ -29,7 +29,6 @@ import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SessionsStore from "SRC_DIR/store/SessionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 export type TUserStatus = "online" | "offline";
@@ -86,7 +85,6 @@ type SessionsStoreProps = Pick<
   SessionsStore,
   | "clearSelection"
   | "platformData"
-  | "fetchData"
   | "selection"
   | "bufferSelection"
   | "isLoading"
@@ -99,10 +97,10 @@ type SessionsStoreProps = Pick<
   | "subscribeToPortalSessions"
   | "unsubscribeToPortalSessions"
   | "clearPortalSessions"
+  | "disableUsers"
 > &
   Pick<DialogsStore, "setUserSessionPanelVisible"> &
   Pick<SettingsStore, "currentDeviceType"> &
-  Pick<UsersStore, "updateUserStatus"> &
   Pick<
     SettingsSetupStore,
     | "viewAs"

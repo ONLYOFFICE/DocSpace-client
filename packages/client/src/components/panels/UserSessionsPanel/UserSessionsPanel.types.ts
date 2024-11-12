@@ -51,15 +51,22 @@ export type UserSessionsPanelStoreProps = {
   | "clearUserSessions"
 >;
 
-export interface LastSessionBlockProps {
+export type LastSessionBlockProps = {
   t: TTranslation;
-  isMe?: boolean;
-  items?: IAllSessions;
-  setDisplayName?: (name: string) => void;
-  setDisableDialogVisible?: (visible: boolean) => void;
-  setLogoutAllDialogVisible?: (visible: boolean) => void;
-  getFromDateAgo?: (userId: string) => string;
-}
+
+  storeProps?: LastSessionBlockStoreProps;
+};
+
+type LastSessionBlockStoreProps = Pick<
+  SessionsStore,
+  "getFromDateAgo" | "bufferSelection" | "userSessions" | "getContextOptions"
+>;
+
+export type LastSessionInfoRowProps = {
+  className?: string;
+  label: string;
+  value: string;
+};
 
 export type AllSessionsBlockProps = {
   t: TTranslation;

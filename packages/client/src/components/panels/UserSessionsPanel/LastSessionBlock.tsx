@@ -36,8 +36,12 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
+import { classNames } from "@docspace/shared/utils";
 
-import { LastSessionBlockProps } from "./UserSessionsPanel.types";
+import {
+  LastSessionBlockProps,
+  LastSessionInfoRowProps,
+} from "./UserSessionsPanel.types";
 
 const StyledUserInfoBlock = styled.div`
   display: flex;
@@ -114,40 +118,31 @@ const StyledLastSessionBlock = styled.div`
     }
   }
 
-  .online {
-    font-weight: 600;
-    padding: 4px;
-    font-size: 13px;
-    width: 100%;
+  .online .session-info-value {
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
-    ::first-letter {
-      text-transform: uppercase;
-    }
   }
 `;
 
+const LastSessionInfoRow = ({
+  className,
+  label,
+  value,
+}: LastSessionInfoRowProps) => {
+  return (
+    <div className={classNames("session-info-row", className)}>
+      <Text className="session-info-label">{label}</Text>
+      <Text className="session-info-value">{value}</Text>
+    </div>
+  );
+};
+
 const LastSessionBlock = (props: LastSessionBlockProps) => {
-  const {
-    t,
-    getFromDateAgo = () => {},
-    currentPortalSession,
-    userSessions,
-    getContextOptions,
-  } = props;
+  const { t, storeProps } = props;
+  const { bufferSelection, getContextOptions, getFromDateAgo, userSessions } =
+    storeProps!;
 
-  // const {
-  //   id,
-  //   avatar,
-  //   isAdmin,
-  //   isOwner,
-  //   isRoomAdmin,
-  //   isCollaborator,
-  //   connections,
-  //   sessions,
-  // } = items;
-
-  const { userId, displayName, avatar } = currentPortalSession;
-  const lastSession = userSessions[0] || currentPortalSession.session;
+  const { userId, displayName, avatar, session } = bufferSelection!;
+  const lastSession = userSessions[0] || session;
   const { platform, browser, ip, city, country } = lastSession;
   const fromDateAgo = getFromDateAgo(userId);
   const isOnline = fromDateAgo === "online";
@@ -197,39 +192,24 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
           getData={getContextData}
         />
       </StyledUserInfoBlock>
-
       <StyledLastSessionBlock>
         <Text className="subtitle">{t("Profile:LastSession")}</Text>
         <Box className="session-info-wrapper">
-          <div className="session-info-row">
-            <Text className="session-info-label">{t("Common:Active")}</Text>
-            <Text className={isOnline ? "online" : "session-info-value"}>
-              {t(`Common:${fromDateAgo}`)}
-            </Text>
-          </div>
-          <div className="session-info-row">
-            <Text className="session-info-label">{t("Common:Platform")}</Text>
-            <Text className="session-info-value">{platform}</Text>
-          </div>
-          <div className="session-info-row">
-            <Text className="session-info-label">{t("Common:Browser")}</Text>
-            <Text className="session-info-value">
-              {browser?.split(".")[0] ?? ""}
-            </Text>
-          </div>
-          <div className="session-info-row">
-            <Text className="session-info-label">{t("Common:Location")}</Text>
-            <Text className="session-info-value" truncate>
-              {(country || city) && (
-                <>
-                  {country}
-                  {country && city && ", "}
-                  {`${city} `}
-                </>
-              )}
-              {ip}
-            </Text>
-          </div>
+          <LastSessionInfoRow
+            className={isOnline ? "online" : undefined}
+            label={t("Common:Active")}
+            value={t(`Common:${fromDateAgo}`)}
+          />
+          <LastSessionInfoRow label={t("Common:Platform")} value={platform} />
+          <LastSessionInfoRow
+            label={t("Common:Browser")}
+            value={browser?.split(".")[0] ?? ""}
+          />
+          <LastSessionInfoRow label={t("Common:IP")} value={ip} />
+          {country && (
+            <LastSessionInfoRow label={t("Common:Country")} value={country} />
+          )}
+          {city && <LastSessionInfoRow label={t("Common:City")} value={city} />}
         </Box>
       </StyledLastSessionBlock>
     </>
@@ -241,9 +221,11 @@ export default inject<TStore>(({ sessionsStore }) => {
     sessionsStore;
 
   return {
-    getFromDateAgo,
-    currentPortalSession: bufferSelection,
-    userSessions,
-    getContextOptions,
+    storeProps: {
+      getFromDateAgo,
+      bufferSelection,
+      userSessions,
+      getContextOptions,
+    },
   };
 })(observer(LastSessionBlock));

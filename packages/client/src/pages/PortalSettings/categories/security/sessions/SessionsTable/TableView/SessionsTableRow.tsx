@@ -26,18 +26,19 @@
 
 import React, { useCallback, useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import { decode } from "he";
 
 import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Base } from "@docspace/shared/themes";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { TSession } from "@docspace/shared/types/ActiveSessions";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 
@@ -171,6 +172,14 @@ const StyledTableRow = styled(TableRow)<{
 
 StyledTableRow.defaultProps = { theme: Base };
 
+const getLocationText = (session: TSession) => {
+  const { country, city, ip } = session;
+
+  if (country && city) return `${country}, ${city}`;
+
+  return country || city || ip;
+};
+
 const SessionsTableRow = (props: SessionsTableRowProps) => {
   const { t, item, isChecked, isActive, storeProps } = props;
 
@@ -187,7 +196,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   } = storeProps!;
 
   const { userId, displayName, avatar, session } = item;
-  const { platform, browser, ip, city, country, date, status } = session;
+  const { platform, browser, date, status } = session;
 
   const fromDateAgo = getFromDateAgo(userId);
   const isOnline = status === "online";
@@ -304,15 +313,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
 
         <TableCell className="table-cell_location">
           <Text className="session-info" truncate>
-            {(country || city) && (
-              <>
-                {country}
-                {country && city && ", "}
-                {city}
-                <span className="divider" />
-              </>
-            )}
-            {ip}
+            {getLocationText(session)}
           </Text>
         </TableCell>
       </StyledTableRow>

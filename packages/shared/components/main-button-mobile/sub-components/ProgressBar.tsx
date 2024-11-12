@@ -71,7 +71,12 @@ const ProgressBarMobile = ({
           {label}
         </Text>
         <div className="progress_info-container">
-          <Text className="progress_count" fontSize="13px" truncate>
+          <Text
+            className="progress_count"
+            fontSize="13px"
+            truncate
+            onClick={onClickHeaderAction}
+          >
             {status}
           </Text>
           <IconButton
@@ -87,7 +92,7 @@ const ProgressBarMobile = ({
         <StyledProgressBarTheme
           $currentColorScheme={currentColorScheme}
           uploadPercent={uploadPercent}
-          error={error}
+          error={!!error}
         />
       </StyledMobileProgressBar>
     </StyledProgressBarContainer>

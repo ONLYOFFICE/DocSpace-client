@@ -95,6 +95,7 @@ const IpSecurity = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [autoFocus, setAutoFocus] = useState(false);
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
@@ -167,7 +168,9 @@ const IpSecurity = (props) => {
   };
 
   const onSelectType = (e) => {
-    setEnable(e.target.value === "enable" ? true : false);
+    const value = e.target.value;
+    if (value === "enable" && !autoFocus) setAutoFocus(true);
+    setEnable(value === "enable" ? true : false);
   };
 
   const onChangeInput = (e, index) => {
@@ -183,37 +186,36 @@ const IpSecurity = (props) => {
   };
 
   const onClickAdd = () => {
+    if (!autoFocus) setAutoFocus(true);
     setIps([...ips, ""]);
   };
 
   const onSaveClick = async () => {
     const newIps = ips.filter((ips) => ips.trim() !== "");
-    const isEmptyNewIps = !newIps.length;
 
     setIps(newIps);
     setIsSaving(true);
-    const valid = ips.map((ip) => regexp.test(ip));
-    if (valid.includes(false) && !isEmptyNewIps) {
+    const valid = newIps.map((ip) => regexp.test(ip));
+
+    if (valid.includes(false)) {
       setIsSaving(false);
       return;
     }
 
-    const ipsObjectArr = isEmptyNewIps
-      ? []
-      : ips.map((ip) => {
-          return { ip: ip };
-        });
+    const ipsObjectArr = newIps.map((ip) => {
+      return { ip: ip };
+    });
 
     try {
       await setIpRestrictions(ipsObjectArr, enable);
 
       saveToSessionStorage("currentIPSettings", {
         enable: enable,
-        ips: ips,
+        ips: newIps,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
-        ips: ips,
+        ips: newIps,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -285,6 +287,7 @@ const IpSecurity = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-allowed-ip-address"
+          isAutoFocussed={autoFocus}
         />
       )}
 

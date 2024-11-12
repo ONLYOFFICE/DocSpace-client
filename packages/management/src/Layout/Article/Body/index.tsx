@@ -26,28 +26,19 @@
 
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { isMobileOnly } from "react-device-detect";
 
 import { isMobile } from "@docspace/shared/utils";
 import { ArticleItem } from "@docspace/shared/components/article-item";
+
 import { settingsTree } from "SRC_DIR/utils/settingsTree";
 import { getItemByLink } from "SRC_DIR/utils";
 import { TSettingsTreeItem } from "SRC_DIR/types/index";
-
 import { useStore } from "SRC_DIR/store";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-const PROXY_BASE_URL = combineUrl(
-  window.ClientConfig?.proxy?.url,
-  "/management"
-);
 
 const ArticleBodyContent = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const { t } = useTranslation(["Settings", "Common"]);

@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Domena została pomyślnie połączona z Twoim adresem IP. Aby móc edytować ustawienia dresu obszaru, musisz skonfigurować przyszłą nazwę {{productName}}",
   "CreatingPortal": "Tworzenie nowego obszaru {{productName}}",
   "CurrentSpace": "Bieżący obszar",
-  "DeletePortalText": "Zamierzasz trwale usunąć obszar roboczy <1>{{domain}}</1> wraz ze wszystkimi zapisanymi danymi i kontami. Nie można cofnąć tej czynności.",
   "DomainName": "Nazwa domeny",
   "DomainNotFound": "Nie znaleziono domeny, sprawdź ustawienia DNS",
   "DomainSettings": "Ustawienia domeny",

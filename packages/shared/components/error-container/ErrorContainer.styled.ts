@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
 
 import { desktop, mobile } from "@docspace/shared/utils";
@@ -57,13 +56,6 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     font-size: 13px;
     font-weight: 600;
   }
-
-  ${!isMobileOnly &&
-  css`
-    .logo-wrapper {
-      width: 386px;
-    }
-  `}
 
   #container {
     position: relative;

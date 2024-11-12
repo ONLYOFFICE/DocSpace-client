@@ -32,18 +32,19 @@ import {
   createNewPortal,
   checkDomain,
 } from "@docspace/shared/api/management";
-import { TNewPortalData } from "SRC_DIR/types/spaces";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TNewPortalData, TPortals } from "SRC_DIR/types/spaces";
 
 class SpacesStore {
-  settingsStore = null;
+  settingsStore: SettingsStore;
 
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
 
-  currentPortal = null;
+  currentPortal: TPortals | null = null;
 
-  constructor(settingsStore) {
+  constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
@@ -84,7 +85,7 @@ class SpacesStore {
     }
   };
 
-  checkDomain = async (domain) => {
+  checkDomain = async (domain: string) => {
     const res = await checkDomain(domain);
     return res;
   };
@@ -94,7 +95,7 @@ class SpacesStore {
     return register;
   };
 
-  setCurrentPortal = (portal) => {
+  setCurrentPortal = (portal: TPortals) => {
     this.currentPortal = portal;
   };
 

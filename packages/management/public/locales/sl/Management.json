@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova prostora, morate nastaviti bodoče {{productName}} ime",
   "CreatingPortal": "Ustvarjanje novega {{productName}}",
   "CurrentSpace": "Trenutni prostor",
-  "DeletePortalText": "Trajno boste izbrisali prostor <1>{{domain}}</1> z vsemi shranjenimi podatki in uporabniškimi računi. Tega dejanja ne bo mogoče razveljaviti.",
   "DomainName": "Ime domene",
   "DomainNotFound": "Domena ni bila najdena, preverite v nastavitvah DNS",
   "DomainSettings": "Nastavitve domene",

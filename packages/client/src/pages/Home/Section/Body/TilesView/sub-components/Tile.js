@@ -142,6 +142,7 @@ const StyledTile = styled.div`
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
     props.inProgress &&
+    !props.isFolder &&
     css`
       pointer-events: none;
       /* cursor: wait; */

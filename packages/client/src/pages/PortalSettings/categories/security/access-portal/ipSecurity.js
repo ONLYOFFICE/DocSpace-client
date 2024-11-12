@@ -188,17 +188,21 @@ const IpSecurity = (props) => {
 
   const onSaveClick = async () => {
     const newIps = ips.filter((ips) => ips.trim() !== "");
+    const isEmptyNewIps = !newIps.length;
+
     setIps(newIps);
     setIsSaving(true);
     const valid = ips.map((ip) => regexp.test(ip));
-    if (valid.includes(false)) {
+    if (valid.includes(false) && !isEmptyNewIps) {
       setIsSaving(false);
       return;
     }
 
-    const ipsObjectArr = ips.map((ip) => {
-      return { ip: ip };
-    });
+    const ipsObjectArr = isEmptyNewIps
+      ? []
+      : ips.map((ip) => {
+          return { ip: ip };
+        });
 
     try {
       await setIpRestrictions(ipsObjectArr, enable);

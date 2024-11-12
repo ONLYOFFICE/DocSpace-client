@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. Domen ünvanı parametrlərini redaktə etmək üçün gələcək {{productName}} adını təyin etməlisiniz",
   "CreatingPortal": "Yeni {{productName}} yaradılır",
   "CurrentSpace": "Cari sahə",
-  "DeletePortalText": "Bütün saxlanılan məlumat və hesabların yerləşdiyi <1>{{domain}}</1> domenini həmişəlik siləcəksiniz. Bu əməliyyat geri qaytarıla bilməz.",
   "DomainName": "Domen adı",
   "DomainNotFound": "Domen adı tapılmadı, zəhmət olmasa, DNS parametrlərini yoxlayın",
   "DomainSettings": "Domen parametrləri",

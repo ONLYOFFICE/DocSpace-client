@@ -134,6 +134,17 @@ const MobileView = ({
           currentSecondaryProgressItem,
         )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
+    const isUploaded = primaryProgressDataPercent === 100 && uploaded;
+
+    let primaryLabel =
+      isUploaded && !primaryProgressDataErrors
+        ? t("FilesUploaded")
+        : `${uploadedFileCount}/${fileLength}`;
+
+    if (isUploaded && primaryProgressDataErrors) {
+      primaryLabel = t("FilesNotLoaded", { count: primaryProgressDataErrors });
+    }
+
     const newProgressOptions = [
       {
         key: "primary-progress",
@@ -141,14 +152,10 @@ const MobileView = ({
         label: t("UploadPanel:Uploads"),
         icon: CrossSidebarReactSvgUrl,
         percent: primaryProgressDataPercent,
-        status:
-          primaryProgressDataPercent === 100 &&
-          !primaryProgressDataErrors &&
-          uploaded
-            ? t("FilesUploaded")
-            : `${uploadedFileCount}/${fileLength}`,
+        status: primaryLabel,
         onClick: showUploadPanel,
         onCancel: clearUploadPanel,
+        error: primaryProgressDataErrors,
       },
       {
         key: "secondary-progress",

@@ -106,7 +106,6 @@ const LoginForm = ({
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
   const isPublicAuth = searchParams.get("publicAuth");
-  const deletePortalData = searchParams.get("deletePortalData");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -418,24 +417,6 @@ const LoginForm = ({
           return;
         }
 
-        if (deletePortalData) {
-          try {
-            const deleteData = decodeURIComponent(deletePortalData);
-            await deletePortal({ portalName: deleteData });
-            window.opener.postMessage(
-              JSON.stringify({ type: "portalDeletedSuccess" }),
-              "*",
-            );
-          } catch (e) {
-            console.error(e);
-            window.opener.postMessage(
-              JSON.stringify({ type: "portalDeletedError", error: e }),
-              "*",
-            );
-          }
-          window.close();
-        }
-
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
@@ -486,7 +467,6 @@ const LoginForm = ({
     referenceUrl,
     baseDomain,
     isPublicAuth,
-    deletePortalData,
   ]);
 
   const onBlurEmail = () => {
@@ -556,15 +536,9 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && !client && !deletePortalData && (
+      {!emailFromInvitation && !client && (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
-        </Text>
-      )}
-
-      {deletePortalData && (
-        <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
-          {t("EnterCredentials", { productName: t("Common:ProductName") })}:
         </Text>
       )}
 
@@ -597,14 +571,12 @@ const LoginForm = ({
         password={password}
         onChangePassword={onChangePassword}
       />
-      {!deletePortalData && (
-        <ForgotContainer
-          cookieSettingsEnabled={cookieSettingsEnabled}
-          isChecked={isChecked}
-          identifier={identifier}
-          onChangeCheckbox={onChangeCheckbox}
-        />
-      )}
+      <ForgotContainer
+        cookieSettingsEnabled={cookieSettingsEnabled}
+        isChecked={isChecked}
+        identifier={identifier}
+        onChangeCheckbox={onChangeCheckbox}
+      />
 
       {ldapDomain && ldapEnabled && (
         <LDAPContainer
@@ -646,11 +618,7 @@ const LoginForm = ({
         size={ButtonSize.medium}
         scale
         label={
-          isLoading
-            ? t("Common:LoadingProcessing")
-            : deletePortalData
-              ? `${t("Common:Delete")} ${t("Common:ProductName")}`
-              : t("Common:LoginButton")
+          isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
         tabIndex={5}
         isDisabled={isLoading}

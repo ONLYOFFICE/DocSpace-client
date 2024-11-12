@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Para comprar una licencia, haga clic en el botón de abajo.",
   "ActivatePurchaseBuyNow": "Comprar ahora",
   "ActivatePurchaseRenewLicense": "Para seguir recibiendo el soporte y las actualizaciones, compre una renovación.",
+  "ActivateRenewalDescr": "Para activar la renovación que ya ha comprado, cárguela a continuación y haga clic en el botón Activar.",
   "ActivateRenewDescr": "Para obtener sus términos de renovación personal, contacte a su gerente dedicado o escríbanos a <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Renovar la suscripción para {{license}}",
   "ActivateSwithToProHeader": "Pasar a la versión completa de {{license}}",

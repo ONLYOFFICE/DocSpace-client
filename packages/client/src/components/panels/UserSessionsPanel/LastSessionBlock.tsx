@@ -29,7 +29,11 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { decode } from "he";
 
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -37,6 +41,10 @@ import {
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
 import { classNames } from "@docspace/shared/utils";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 
 import {
   LastSessionBlockProps,
@@ -141,7 +149,8 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   const { bufferSelection, getContextOptions, getFromDateAgo, userSessions } =
     storeProps!;
 
-  const { userId, displayName, avatar, session } = bufferSelection!;
+  const { userId, displayName, avatar, isAdmin, isOwner, session } =
+    bufferSelection!;
   const lastSession = userSessions[0] || session;
   const { platform, browser, ip, city, country } = lastSession;
   const fromDateAgo = getFromDateAgo(userId);
@@ -156,11 +165,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   //   return t("Common:User");
   // };
 
-  // const role = isOwner
-  //   ? AvatarRole.owner
-  //   : isAdmin
-  //     ? AvatarRole.admin
-  //     : AvatarRole.none;
+  const type = getUserType(bufferSelection!);
+  const typeLabel = getUserTypeTranslation(type, t);
+
+  const avatarRole = isOwner
+    ? AvatarRole.owner
+    : isAdmin
+      ? AvatarRole.admin
+      : AvatarRole.none;
 
   const getContextData = useCallback(
     () => getContextOptions(t, true),
@@ -173,14 +185,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
         <Box displayProp="flex" alignItems="center" justifyContent="center">
           <Avatar
             className="avatar"
-            // role={role}
+            role={avatarRole}
             size={AvatarSize.big}
             userName={displayName}
             source={avatar}
           />
           <Box displayProp="flex" flexDirection="column">
             <Text className="username">{decode(displayName)}</Text>
-            {/*<span>{getUserType()}</span>*/}
+            <Text as="span">{typeLabel}</Text>
           </Box>
         </Box>
 

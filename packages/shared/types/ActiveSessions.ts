@@ -30,6 +30,10 @@ export type TPortalSession = {
   userId: string;
   avatar: string;
   displayName: string;
+  isAdmin: boolean;
+  isCollaborator: boolean;
+  isOwner: boolean;
+  isRoomAdmin: boolean;
   session: TSession;
 };
 

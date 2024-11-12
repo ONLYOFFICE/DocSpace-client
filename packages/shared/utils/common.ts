@@ -1,4 +1,3 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -56,12 +55,11 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
-import { parseAddress } from "./email";
 
+import { AvatarRole } from "../components/avatar/Avatar.enums";
 import {
   FolderType,
   RoomsType,
-  ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
@@ -81,10 +79,12 @@ import { TRoom } from "../api/rooms/types";
 import { TPasswordHash, TTimeZone } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
+import { parseAddress } from "./email";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+import { TPortalSession } from "../types/ActiveSessions";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -272,11 +272,13 @@ export function isMe(user: TUser, userName: string) {
   );
 }
 
-export function isAdmin(currentUser: TUser) {
+export function isAdmin(currentUser: TUser | TPortalSession) {
   return (
     currentUser.isAdmin ||
     currentUser.isOwner ||
-    (currentUser.listAdminModules && currentUser.listAdminModules?.length > 0)
+    ("listAdminModules" in currentUser &&
+      currentUser.listAdminModules &&
+      currentUser.listAdminModules?.length > 0)
   );
 }
 
@@ -294,12 +296,12 @@ export const getUserAvatarRoleByType = (type: EmployeeType) => {
   }
 };
 
-export const getUserType = (user: TUser) => {
+export const getUserType = (user: TUser | TPortalSession) => {
   if (user.isOwner) return EmployeeType.Owner;
   if (isAdmin(user)) return EmployeeType.Admin;
   if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
   if (user.isCollaborator) return EmployeeType.User;
-  if (user.isVisitor) return EmployeeType.Guest;
+  if ("isVisitor" in user && user.isVisitor) return EmployeeType.Guest;
   return EmployeeType.Guest;
 };
 

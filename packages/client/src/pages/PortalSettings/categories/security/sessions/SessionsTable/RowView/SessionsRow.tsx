@@ -140,9 +140,14 @@ const SessionsRow = (props: SessionsTableRowProps) => {
     getContextOptions,
   } = storeProps!;
 
-  const { userId, displayName, avatar, session } = item;
+  const { userId, displayName, avatar, isOwner, isAdmin, session } = item;
   const { date, status } = session;
 
+  const avatarRole = isOwner
+    ? AvatarRole.owner
+    : isAdmin
+      ? AvatarRole.admin
+      : AvatarRole.user;
   const fromDateAgo = getFromDateAgo(item.userId);
   const isOnline = status === "online";
 
@@ -203,7 +208,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
   const element = (
     <Avatar
       size={AvatarSize.min}
-      role={AvatarRole.none}
+      role={avatarRole}
       userName={displayName}
       source={avatar}
     />

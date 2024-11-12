@@ -195,10 +195,15 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     getContextOptions,
   } = storeProps!;
 
-  const { userId, displayName, avatar, session } = item;
+  const { userId, displayName, avatar, session, isAdmin, isOwner } = item;
   const { platform, browser, date, status } = session;
 
   const fromDateAgo = getFromDateAgo(userId);
+  const avatarRole = isOwner
+    ? AvatarRole.owner
+    : isAdmin
+      ? AvatarRole.admin
+      : AvatarRole.user;
   const isOnline = status === "online";
 
   useEffect(() => {
@@ -280,7 +285,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
             <div className="table-container_element">
               <Avatar
                 size={AvatarSize.min}
-                role={AvatarRole.none}
+                role={avatarRole}
                 userName={displayName}
                 source={avatar}
               />

@@ -55,15 +55,24 @@ import ShareLoader from "../../skeletons/share";
 import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
-import { AccessItem, ShareProps, TLink } from "./Share.types";
-import { copyDocumentShareLink } from "./Share.helpers";
+import type {
+  AccessItem,
+  DefaultCreatePropsType,
+  ShareProps,
+  TLink,
+} from "./Share.types";
+import {
+  copyDocumentShareLink,
+  getCreateShareLinkKey,
+  getExpirationDate,
+} from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
   const {
     isRooms,
     setView,
     infoPanelSelection,
-    getPrimaryFileLink,
+    // getPrimaryFileLink,
     selfId,
     editFileLink,
     addFileLink,
@@ -78,6 +87,11 @@ const Share = (props: ShareProps) => {
     `document-bar-${selfId}`,
     true,
   );
+  const [defaultCreate, setDefaultCreate] =
+    useLocalStorage<DefaultCreatePropsType>(getCreateShareLinkKey(selfId), {
+      access: ShareAccessRights.ReadOnly,
+      internal: false,
+    });
 
   const requestRunning = React.useRef(false);
 
@@ -117,8 +131,16 @@ const Share = (props: ShareProps) => {
     try {
       addLoaderLink();
 
-      const link = getPrimaryFileLink
-        ? await getPrimaryFileLink(infoPanelSelection.id)
+      const { access, internal, diffExpirationDate } = defaultCreate;
+
+      const link = addFileLink
+        ? await addFileLink(
+            infoPanelSelection.id,
+            access,
+            true,
+            internal,
+            getExpirationDate(diffExpirationDate),
+          )
         : await getPrimaryLink(infoPanelSelection.id);
 
       if (link) {
@@ -142,12 +164,16 @@ const Share = (props: ShareProps) => {
     setIsLoadedAddLinks(false);
 
     addLoaderLink();
+
+    const { access, internal, diffExpirationDate } = defaultCreate;
+
     const newLink = addFileLink
       ? await addFileLink(
           infoPanelSelection.id,
-          ShareAccessRights.ReadOnly,
+          access,
           false,
-          false,
+          internal,
+          getExpirationDate(diffExpirationDate),
         )
       : await addExternalLink(
           infoPanelSelection.id,
@@ -227,6 +253,11 @@ const Share = (props: ShareProps) => {
       }
       updateLink(link, res);
 
+      setDefaultCreate((prev) => ({
+        ...prev,
+        access: res.access ?? prev.access,
+        internal: res.sharedTo.internal ?? prev.internal,
+      }));
       copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
@@ -266,6 +297,11 @@ const Share = (props: ShareProps) => {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
           copyDocumentShareLink(res, t);
+          setDefaultCreate((prev) => ({
+            ...prev,
+            access: res.access ?? prev.access,
+            internal: res.sharedTo.internal ?? prev.internal,
+          }));
         }
       }
     } catch (e) {
@@ -301,7 +337,10 @@ const Share = (props: ShareProps) => {
           );
 
       updateLink(link, res);
-
+      setDefaultCreate((prev) => ({
+        ...prev,
+        diffExpirationDate: expDate.diff(moment()),
+      }));
       copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);

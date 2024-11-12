@@ -99,6 +99,8 @@ import {
   canShowManageLink,
   copyDocumentShareLink,
   copyRoomShareLink,
+  getCreateShareLinkKey,
+  getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -1649,9 +1651,33 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled: !isShareable,
         onClick: async () => {
-          const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
+          const { getPrimaryFileLink, addFileLink, setShareChanged } =
+            this.infoPanelStore;
 
-          const primaryLink = await getPrimaryFileLink(item.id);
+          /**
+           *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
+           */
+          const value = JSON.parse(
+            localStorage.getItem(
+              getCreateShareLinkKey(this.userStore.user?.id ?? ""),
+            ) ?? "null",
+          );
+
+          console.log({
+            value,
+            key: getCreateShareLinkKey(this.userStore.id ?? ""),
+          });
+
+          const primaryLink = value
+            ? await addFileLink(
+                item.id,
+                value.access,
+                true,
+                value.internal,
+                getExpirationDate(value.diffExpirationDate),
+              )
+            : await getPrimaryFileLink(item.id);
+
           if (primaryLink) {
             copyDocumentShareLink(
               primaryLink,

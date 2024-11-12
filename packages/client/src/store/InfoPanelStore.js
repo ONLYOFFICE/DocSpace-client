@@ -952,10 +952,16 @@ class InfoPanelStore {
     return res;
   };
 
-  addFileLink = async (fileId, access, primary, internal) => {
+  addFileLink = async (fileId, access, primary, internal, expirationDate) => {
     const { getFileInfo } = this.filesStore;
 
-    const res = await addExternalLink(fileId, access, primary, internal);
+    const res = await addExternalLink(
+      fileId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+    );
     await getFileInfo(fileId);
     return res;
   };

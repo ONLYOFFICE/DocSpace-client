@@ -1438,11 +1438,12 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
+  expirationDate?: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { access, primary, internal },
+    data: { access, primary, internal, expirationDate },
   })) as TFileLink;
 
   return res;

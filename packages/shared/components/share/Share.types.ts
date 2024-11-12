@@ -42,6 +42,11 @@ export type ShareCalendarProps = {
   bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
+export type DefaultCreatePropsType = {
+  access: ShareAccessRights;
+  internal: boolean;
+  diffExpirationDate?: number | null;
+};
 
 export type AccessItem = { access?: ShareAccessRights };
 
@@ -127,6 +132,7 @@ export type ShareProps = {
     access: ShareAccessRights,
     primary: boolean,
     internal: boolean,
+    expirationDate?: moment.Moment | null,
   ) => Promise<TFileLink>;
 
   selfId: string;

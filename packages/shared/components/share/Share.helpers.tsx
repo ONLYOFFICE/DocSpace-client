@@ -27,6 +27,8 @@ import moment from "moment";
 import { Trans } from "react-i18next";
 
 import equal from "fast-deep-equal/react";
+import isUndefined from "lodash/isUndefined";
+import isNull from "lodash/isNull";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
@@ -417,4 +419,18 @@ export const copyDocumentShareLink = (
     </span>,
     t("Common:LinkCopiedToClipboard"),
   );
+};
+
+export const getExpirationDate = (
+  diffExpiredDate: number | null | undefined,
+) => {
+  if (isUndefined(diffExpiredDate)) return moment().add(7, "days");
+
+  if (isNull(diffExpiredDate)) return moment(diffExpiredDate);
+
+  return moment().add(diffExpiredDate);
+};
+
+export const getCreateShareLinkKey = (userId: string) => {
+  return `link-create-document-${userId}`;
 };

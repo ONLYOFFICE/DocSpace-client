@@ -205,6 +205,7 @@ const StyledTableRow = styled(TableRow)`
 
     ${(props) =>
       props.inProgress &&
+      !props.isFolder &&
       css`
         pointer-events: none;
         /* cursor: wait; */

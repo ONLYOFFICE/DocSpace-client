@@ -49,6 +49,7 @@ const Error520 = ({
   const { t } = useTranslation(["Common"]);
 
   const [reportDialogVisible, setReportDialogVisible] = useState(false);
+  const [customErrorLog, setCustomErrorLog] = useState<Error>({} as Error);
 
   const autoSendReport = async () => {
     const report = getCrashReport(user.id, version, user.cultureName, errorLog);
@@ -59,8 +60,19 @@ const Error520 = ({
   };
 
   useEffect(() => {
-    if (firebaseHelper.isEnabledDB) autoSendReport();
+    if (firebaseHelper?.isEnabledDB) autoSendReport();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const error = JSON.parse(
+      window.sessionStorage.getItem("errorLog") ?? "",
+    ) as Error;
+
+    if (error) {
+      setCustomErrorLog(error);
+      console.log(error.stack);
+    }
   }, []);
 
   // const showDialog = () => {
@@ -77,11 +89,11 @@ const Error520 = ({
 
   zendeskAPI.addChanges("webWidget", "show");
 
-  if (!firebaseHelper.isEnabledDB)
+  if (!firebaseHelper?.isEnabledDB)
     return (
       <ErrorContainer
         headerText={t("SomethingWentWrong")}
-        customizedBodyText={errorLog?.message}
+        customizedBodyText={errorLog?.message ?? customErrorLog?.message}
       />
     );
 
@@ -91,7 +103,7 @@ const Error520 = ({
         className="container"
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
-        customizedBodyText={errorLog?.message}
+        customizedBodyText={errorLog?.message ?? customErrorLog?.message}
       />
       <Link
         isHovered
@@ -105,7 +117,7 @@ const Error520 = ({
       </Link>
       <ReportDialog
         user={user}
-        error={errorLog}
+        error={errorLog ?? customErrorLog}
         version={version}
         onClose={closeDialog}
         visible={reportDialogVisible}

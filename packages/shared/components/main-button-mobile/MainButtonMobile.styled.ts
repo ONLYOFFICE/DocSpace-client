@@ -293,7 +293,7 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
     justify-content: space-between;
 
     .progress-header {
-      width: 50%;
+      width: 40%;
 
       line-height: 16px;
 
@@ -304,7 +304,7 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
     }
 
     .progress_info-container {
-      width: 50%;
+      width: 60%;
 
       display: flex;
       align-items: center;
@@ -317,6 +317,9 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
 
         text-align: right;
         margin-inline-end: 12px;
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .progress_icon {
@@ -378,11 +381,18 @@ export {
 const getDefaultProgressStyles = ({
   $currentColorScheme,
   theme,
+  error,
 }: ProgressBarMobileDefaultStyles) =>
   $currentColorScheme &&
   css`
     background: ${
-      theme.isBase ? $currentColorScheme?.main?.accent : globalColors.white
+      theme.isBase
+        ? error
+          ? globalColors.lightStatusWarning
+          : $currentColorScheme?.main?.accent
+        : error
+          ? globalColors.darkStatusWarning
+          : globalColors.white
     }};
   `;
 

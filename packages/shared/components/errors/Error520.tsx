@@ -65,9 +65,11 @@ const Error520 = ({
   }, []);
 
   useEffect(() => {
-    const error = JSON.parse(
-      window.sessionStorage.getItem("errorLog") ?? "",
-    ) as Error;
+    const errorString = window.sessionStorage.getItem("errorLog");
+
+    if (!errorString) return;
+
+    const error = JSON.parse(errorString) as Error;
 
     if (error) {
       setCustomErrorLog(error);
@@ -75,9 +77,9 @@ const Error520 = ({
     }
   }, []);
 
-  // const showDialog = () => {
-  //   setReportDialogVisible(true);
-  // };
+  const showDialog = () => {
+    setReportDialogVisible(true);
+  };
 
   const closeDialog = () => {
     setReportDialogVisible(false);

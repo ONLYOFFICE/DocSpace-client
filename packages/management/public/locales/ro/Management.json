@@ -11,9 +11,12 @@
   "EnterDomain": "Introducere nume domeniu",
   "EnterName": "Introducere nume spațiu",
   "NewSpace": "Spaţiu nou",
+  "PortalDeleted": "{{productName}} a fost șters definitiv",
   "PortalName": "Nume {{productName}}",
   "PortalStats": "Săli: {{roomCount}} | Utilizatori: {{userCount}} | Spaţiul de stocare utilizat: {{storageSpace}}",
   "RestrictAccess": "Restricționare acces la gestiunea spațiilor",
+  "SettingsDisabled": "Aceste setări vor deveni disponibile după crearea unui alt spațiu și se vor aplica tuturor spațiilor dvs.",
+  "SettingsForAll": "Aceste setări vor fi valabile pentru toate spațiile dvs.",
   "Subheader": "Folosiți această secțiune pentru a crea mai multe spații și a le face accesibile pentru utilizatorii dvs.",
   "VisitSpace": "Vizitați acest spațiu după creare"
 }

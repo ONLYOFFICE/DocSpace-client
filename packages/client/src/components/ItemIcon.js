@@ -80,6 +80,7 @@ const ItemIcon = ({
   isArchive,
   badgeUrl,
   size,
+  radius,
   withEditing,
   showDefault,
   imgClassName,
@@ -97,6 +98,7 @@ const ItemIcon = ({
           color={color}
           title={title}
           size={size}
+          radius={radius}
           isArchive={isArchive}
           showDefault={showDefault || showDefaultRoomIcon}
           imgClassName={imgClassName || "react-svg-icon"}

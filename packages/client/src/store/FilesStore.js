@@ -282,8 +282,10 @@ class FilesStore {
     });
 
     SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
-      const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
+      const { infoPanelSelection, fetchHistory, isVisible } =
+        this.infoPanelStore;
 
+      if (!isVisible) return;
       let infoPanelSelectionType = "file";
       if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
         infoPanelSelectionType = "folder";
@@ -636,15 +638,13 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) return;
 
+      const foundFile = this.files[foundIndex];
+
       this.selectedFolderStore.setFilesCount(
         this.selectedFolderStore.filesCount - 1,
       );
 
-      console.log(
-        "[WS] delete file",
-        this.files[foundIndex].id,
-        this.files[foundIndex].title,
-      );
+      console.log("[WS] delete file", foundFile.id, foundFile.title);
 
       // this.setFiles(
       //   this.files.filter((_, index) => {
@@ -659,10 +659,11 @@ class FilesStore {
       const tempActionFilesIds = JSON.parse(
         JSON.stringify(this.tempActionFilesIds),
       );
-      tempActionFilesIds.push(this.files[foundIndex].id);
+      tempActionFilesIds.push(foundFile.id);
 
       this.setTempActionFilesIds(tempActionFilesIds);
 
+      this.removeStaleItemFromSelection(foundFile);
       this.debounceRemoveFiles();
 
       // Hide pagination when deleting files
@@ -694,22 +695,21 @@ class FilesStore {
         return;
       }
 
+      const foundFolder = this.folders[foundIndex];
+
       this.selectedFolderStore.setFoldersCount(
         this.selectedFolderStore.foldersCount - 1,
       );
 
-      console.log(
-        "[WS] delete folder",
-        this.folders[foundIndex].id,
-        this.folders[foundIndex].title,
-      );
+      console.log("[WS] delete folder", foundFolder.id, foundFolder.title);
 
       const tempActionFoldersIds = JSON.parse(
         JSON.stringify(this.tempActionFoldersIds),
       );
-      tempActionFoldersIds.push(this.folders[foundIndex].id);
+      tempActionFoldersIds.push(foundFolder.id);
 
       this.setTempActionFoldersIds(tempActionFoldersIds);
+      this.removeStaleItemFromSelection(foundFolder);
       this.debounceRemoveFolders();
 
       runInAction(() => {
@@ -1143,6 +1143,26 @@ class FilesStore {
       this.files[index] = file;
       this.createThumbnail(file);
     }
+  };
+
+  removeStaleItemFromSelection = (item) => {
+    if (!item.parentId) {
+      if (this.activeFiles.some((elem) => elem.id === item.id)) return;
+    } else {
+      if (this.activeFolders.some((elem) => elem.id === item.id)) return;
+    }
+
+    if (
+      this.bufferSelection?.id === item.id &&
+      this.bufferSelection?.fileType === item.fileType
+    ) {
+      return this.setBufferSelection(null);
+    }
+
+    const newSelection = this.selection.filter(
+      (select) => !(select.id === item.id && select.fileType === item.fileType),
+    );
+    this.setSelection(newSelection);
   };
 
   updateSelection = (id) => {
@@ -3179,7 +3199,7 @@ class FilesStore {
 
     if (this.selection.length === 1) {
       return getIcon(
-        24,
+        32,
         this.selection[0].fileExst,
         this.selection[0].providerKey,
       );
@@ -3250,10 +3270,9 @@ class FilesStore {
 
     if (items.length && items[0].id === -1) return; //TODO: if change media collection from state remove this;
 
-    const iconSize = this.viewAs === "table" ? 24 : 32;
     const icon = extension
-      ? getFileIcon(`.${extension}`, iconSize)
-      : getFolderIcon(null, iconSize);
+      ? getFileIcon(`.${extension}`, 32)
+      : getFolderIcon(32);
 
     items.unshift({
       id: -1,
@@ -3405,8 +3424,6 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
-      const iconSize = this.viewAs === "table" ? 24 : 32;
-
       let isFolder = false;
       this.folders.map((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
@@ -3439,7 +3456,7 @@ class FilesStore {
         isRoom && logo?.medium
           ? logo?.medium
           : getIcon(
-              iconSize,
+              32,
               fileExst,
               providerKey,
               contentLength,
@@ -3450,7 +3467,7 @@ class FilesStore {
 
       const defaultRoomIcon = isRoom
         ? getIcon(
-            iconSize,
+            32,
             fileExst,
             providerKey,
             contentLength,

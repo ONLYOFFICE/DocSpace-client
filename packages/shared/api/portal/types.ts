@@ -39,6 +39,7 @@ export type TPortalTariff = {
   portalStatus?: number;
   quotas: TQuotas[];
   enterprise: boolean;
+  developer: boolean;
   openSource: boolean;
 };
 

@@ -11,9 +11,12 @@
   "EnterDomain": "Syötä verkkotunnuksen nimi",
   "EnterName": "Syötä tilan nimi",
   "NewSpace": "Uusi tila",
+  "PortalDeleted": "{{productName}} on pysyvästi poistettu",
   "PortalName": "{{productName}}-nimi",
   "PortalStats": "Huoneet: {{roomCount}} | Käyttäjät: {{userCount}} | Käytetty tilan muisti: {{storageSpace}}",
   "RestrictAccess": "Rajoita pääsyä hallintatiloihin",
+  "SettingsDisabled": "Nämä asetukset avautuvat käyttöön, kun toinen tila on luotu ja asetettu kaikkiin käytössä oleviin tiloihisi. ",
+  "SettingsForAll": "Nämä asetukset tulevat käyttöön  kaikissa tiloissasi. ",
   "Subheader": "Käytä tätä osiota luodaksesi useita tiloja ja lisätäksesi käyttäjillesi niihin oikeudet.",
   "VisitSpace": "Käy tässä tilassa sen luomisen jälkeen"
 }

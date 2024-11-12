@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Koda vam je bila poslana po e-pošti",
+  "EnterCredentials": "Vnesite svoje {{productName}} poverilnice, da potrdite izbris",
   "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>{{productName}}</1>",
   "ForgotPassword": "Ste pozabili geslo?",
   "LDAPUsernamePlaceholder": "Uporabniško ime za {{ldap_domain}} ",

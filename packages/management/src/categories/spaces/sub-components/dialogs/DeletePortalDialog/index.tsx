@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
@@ -48,8 +48,10 @@ const StyledModalDialog = styled(ModalDialog)`
 `;
 
 const DeletePortalDialog = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { spacesStore, settingsStore } = useStore();
-  const { getAllPortals, portals } = settingsStore;
+  const { getAllPortals } = settingsStore;
 
   const {
     currentPortal,
@@ -58,87 +60,45 @@ const DeletePortalDialog = () => {
   } = spacesStore;
 
   const { t } = useTranslation(["Management", "Settings", "Common"]);
-  const [windowIsOpen, setWindowIsOpen] = useState(false);
 
-  const { domain } = currentPortal;
-
-  const receiveMessage = async (e) => {
-    const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-    if (data.type === "portalDeletedSuccess") {
-      toastr.success(
-        t("PortalDeleted", { productName: t("Common:ProductName") })
-      );
-      if (window.location.host === domain) {
-        const protocol = window?.location?.protocol;
-        window.location.replace(`${protocol}//${portals[0].domain}`);
-      } else {
-        await getAllPortals();
-      }
-    } else if (data.type === "portalDeletedError") {
-      toastr.error(data.error.message);
-      if (data.error.status === 401) window.location.replace("/");
-    }
-  };
-
-  const getAuthWindow = () => {
-    return new Promise((res, rej) => {
-      const protocol = window?.location?.protocol;
-      const deletePortalData = encodeURIComponent(domain);
-
-      try {
-        const path = `${protocol}//${domain}/login?deletePortalData=${deletePortalData}`;
-        const authModal = window.open(
-          path,
-          t("Common:Authorization"),
-          "height=800, width=866"
-        );
-
-        const checkConnect = setInterval(() => {
-          if (!authModal || !authModal.closed) {
-            return;
-          }
-
-          clearInterval(checkConnect);
-
-          res(authModal);
-        }, 500);
-      } catch (error) {
-        rej(error);
-      }
-    });
-  };
-
-  const onOpenSignInWindow = async () => {
-    if (windowIsOpen) return;
-    setWindowIsOpen(true);
-    await getAuthWindow();
-    setWindowIsOpen(false);
-  };
+  const { domain, owner } = currentPortal;
+  const { email } = owner;
+  const isWizardCompleted = currentPortal?.wizardSettings.completed;
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
   const onDelete = async () => {
-    if (!currentPortal?.wizardSettings?.completed) {
-      try {
-        await deletePortal({ portalName: domain });
+    try {
+      setIsLoading(true);
+      const res = await deletePortal({ portalName: domain });
+
+      if (res?.removed) {
         await getAllPortals();
         toastr.success(
           t("PortalDeleted", { productName: t("Common:ProductName") })
         );
-      } catch (e) {
-        toastr.error(e);
+      } else {
+        toastr.success(
+          <Trans
+            i18nKey="DeleteRequestSuccess"
+            values={{
+              productName: t("Common:ProductName"),
+              email,
+              productName: t("Common:ProductName"),
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />
+        );
       }
-    } else {
-      onOpenSignInWindow();
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsLoading(false);
+      onClose();
     }
-    onClose();
   };
-
-  useEffect(() => {
-    window.addEventListener("message", receiveMessage, false);
-
-    // return () => window.removeEventListener("message", receiveMessage, false);
-  }, []);
 
   return (
     <StyledModalDialog
@@ -148,36 +108,59 @@ const DeletePortalDialog = () => {
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Settings:DeletePortal", { productName: t("Common:ProductName") })}
+        {isWizardCompleted
+          ? t("SubmitDelete")
+          : t("Settings:DeletePortal", {
+              productName: t("Common:ProductName"),
+            })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text className="warning-text" fontSize="16px" fontWeight={700}>
-          {t("Common:Warning")}!
-        </Text>
-        <Trans
-          i18nKey="DeletePortalText"
-          values={{
-            domain,
-          }}
-          components={{
-            1: <strong />,
-          }}
-        />
+        {isWizardCompleted ? (
+          <>
+            <Text className="warning-text" fontSize="16px" fontWeight={700}>
+              {t("Common:Warning")}!
+            </Text>
+            <Trans
+              i18nKey="DeleteSetupPortalText"
+              values={{
+                productName: t("Common:ProductName"),
+                domain,
+                email,
+                productName: t("Common:ProductName"),
+              }}
+              components={{
+                1: <strong />,
+              }}
+            />
+          </>
+        ) : (
+          <Trans
+            i18nKey="DeleteEmptyPortalText"
+            values={{
+              domain,
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="CreateButton"
-          label={t("Common:ContinueButton")}
+          label={isWizardCompleted ? t("Settings:Submit") : t("Common:Delete")}
           size={ButtonSize.normal}
           scale
           primary
           onClick={onDelete}
+          isLoading={isLoading}
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
+          isLoading={isLoading}
           scale
         />
       </ModalDialog.Footer>

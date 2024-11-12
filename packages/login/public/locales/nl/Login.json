@@ -1,5 +1,6 @@
 {
   "CodeTitle": "De code is naar u gemaild",
+  "EnterCredentials": "Voer uw {{productName}} gegevens in om het verwijderen te bevestigen",
   "ErrorInvalidText": "Over 10 seconden wordt u doorverwezen naar de <1>{{productName}}</1>",
   "ForgotPassword": "Wachtwoord vergeten?",
   "LDAPUsernamePlaceholder": "Gebruikersnaam van {{ldap_domain}} ",

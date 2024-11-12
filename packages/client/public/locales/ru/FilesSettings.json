@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Дополнительные разделы",
   "DisplayFavorites": "Показывать избранное",
+  "DisplayFileExtension": "Отображать расширение файла рядом с именем файла",
   "DisplayNotification": "Показывать оповещение при перемещении элемента в корзину",
   "DisplayRecent": "Показывать последние",
   "DisplayTemplates": "Показывать шаблоны",

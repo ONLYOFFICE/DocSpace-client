@@ -33,6 +33,7 @@ export const enum ScopeType {
 export const enum ScopeGroup {
   files = "files",
   accounts = "accounts",
+  contacts = "contacts",
   profiles = "profiles",
   rooms = "rooms",
   openid = "openid",

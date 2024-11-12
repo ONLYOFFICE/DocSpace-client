@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import isEqual from "lodash/isEqual";
 import {
   generateCerts,
   getCurrentSsoSettings,
@@ -35,6 +36,7 @@ import {
   validateCerts,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { EmployeeType } from "@docspace/shared/enums";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -49,7 +51,6 @@ import {
   SSO_ENCRYPT,
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
-import isEqual from "lodash/isEqual";
 
 class SsoFormStore {
   isSsoEnabled = false;
@@ -110,6 +111,7 @@ class SsoFormStore {
   title = SSO_TITLE;
   phone = SSO_PHONE;
 
+  usersType = EmployeeType.User;
   hideAuthPage = false;
 
   // sp metadata
@@ -209,6 +211,10 @@ class SsoFormStore {
 
   setCheckbox = (e) => {
     this[e.target.name] = e.target.checked;
+  };
+
+  setUsersType = (usersType) => {
+    this.usersType = usersType;
   };
 
   openIdpModal = () => {
@@ -377,6 +383,7 @@ class SsoFormStore {
         phone: this.phone,
       },
       hideAuthPage: this.hideAuthPage,
+      usersType: this.usersType,
     };
   };
   saveSsoSettings = async (t) => {
@@ -423,6 +430,7 @@ class SsoFormStore {
       spCertificateAdvanced,
       fieldMapping,
       hideAuthPage,
+      usersType,
     } = config;
     const { entityId, ssoBinding, sloBinding, nameIdFormat } = idpSettings;
     const {
@@ -494,6 +502,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
+    this.usersType = usersType;
   };
 
   setSsoUrls = (o) => {

@@ -31,9 +31,12 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 const LinksBlock = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   height: 100%;
-  padding-top: 3px;
+
   align-items: center;
   justify-content: space-between;
+
+  padding-bottom: 3px;
+  box-sizing: border-box;
 
   p {
     color: ${({ theme }) => theme.infoPanel.members.subtitleColor};

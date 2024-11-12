@@ -30,18 +30,15 @@ import SpacesStore from "./SpacesStore";
 
 import store from "client/store";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { BannerStore } from "@docspace/shared/store/BannerStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 const {
   authStore,
   userStore,
-  bannerStore,
   settingsStore,
   currentTariffStatusStore,
   dialogsStore,
 }: {
   userStore: UserStore;
-  bannerStore: BannerStore;
   authStore: any;
   currentTariffStatusStore: any;
   settingsStore: SettingsStore;
@@ -51,7 +48,6 @@ const {
 export class RootStore {
   authStore = authStore;
   userStore = userStore;
-  bannerStore = bannerStore;
   settingsStore = settingsStore;
   currentTariffStatusStore = currentTariffStatusStore;
   spacesStore = new SpacesStore(this.settingsStore);

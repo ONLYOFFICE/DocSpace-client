@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Дозволити",
+  "ConsentDescription": "Надання даних <strong>{{displayName}}</strong> буде регулюватися <6>Політикою конфіденційності</6> та <6>Умовами обслуговування</6> <strong>{{nameApp}}</strong>. Ви можете в будь-який час відкликати цю згоду в параметрах вашого облікового запису {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> хоче отримати доступ до таких даних у <strong>вашому обліковому записі {{productName}}</strong>:",
+  "DenyButton": "Заборонити",
+  "NotYou": "Не ви?",
+  "SignedInAs": "Ви увійшли як",
+  "ToContinue": "Продовжити"
+}

@@ -51,23 +51,36 @@ const HistoryMainTextFolderInfo = ({
     parentType,
     fromParentType,
     fromParentTitle,
+    id,
+    title,
   } = feed.data;
 
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
+  const isReorderFolder = actionType === FeedAction.Reorder && id !== parentId;
 
-  if (parentId === selectedFolderId || toFolderId === selectedFolderId)
+  if (
+    (parentId === selectedFolderId && !isReorderFolder) ||
+    toFolderId === selectedFolderId ||
+    (selectedFolderId === id && isReorderFolder)
+  )
     return null;
 
   if (!parentTitle) return null;
 
   const isSection = parentType === FolderType.USER;
   const isFolder =
-    parentType === FolderType.DEFAULT || isSubmitted || isStartedFilling;
+    parentType === FolderType.DEFAULT ||
+    isSubmitted ||
+    isStartedFilling ||
+    isReorderFolder;
+
   const isFromFolder = fromParentType === FolderType.DEFAULT;
 
   const destination = isFolder
-    ? t("FeedLocationLabel", { folderTitle: parentTitle })
+    ? t("FeedLocationLabel", {
+        folderTitle: isReorderFolder ? title : parentTitle,
+      })
     : isSection
       ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })
       : t("FeedLocationRoomLabel", { folderTitle: parentTitle });

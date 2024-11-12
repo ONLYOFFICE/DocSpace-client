@@ -106,7 +106,6 @@ const LoginForm = ({
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
   const isPublicAuth = searchParams.get("publicAuth");
-  const deletePortalData = searchParams.get("deletePortalData");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -174,11 +173,18 @@ const LoginForm = ({
           window.close();
         }
 
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
+          sessionStorage.removeItem("referenceUrl");
+        }
 
         if (redirectPath) {
-          sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
         } else {
           window.location.replace("/");
@@ -305,16 +311,20 @@ const LoginForm = ({
               ? portals[0].portalName
               : `${portals[0].portalName}.${baseDomain}`;
 
-          const redirectUrl = getCookie(
-            "x-redirect-authorization-uri",
-          )?.replace(window.location.origin, name);
+          let redirectUrl = getCookie("x-redirect-authorization-uri");
+          let portalLink = portals[0].portalLink;
+
+          const isLocalhost = name === "http://localhost";
+
+          if (!isLocalhost && redirectUrl)
+            redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+          if (isLocalhost)
+            portalLink = portalLink.replace(name, window.location.origin);
 
           // deleteCookie("x-redirect-authorization-uri");
 
-          window.open(
-            `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
-            "_self",
-          );
+          window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
 
           return;
         }
@@ -337,8 +347,8 @@ const LoginForm = ({
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
-            (error as { response: { data: { error: { message: string } } } })
-              ?.response?.data?.error?.message ||
+            (error as { response: { data: { message: string } } })?.response
+              ?.data?.message ||
             (error as { statusText: string })?.statusText ||
             (error as { message: string })?.message ||
             "";
@@ -390,30 +400,21 @@ const LoginForm = ({
         }
 
         const isConfirm = typeof res === "string" && res.includes("confirm");
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
-        if (redirectPath && !isConfirm) {
+
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
           sessionStorage.removeItem("referenceUrl");
-          window.location.href = redirectPath;
-          return;
         }
 
-        if (deletePortalData) {
-          try {
-            const deleteData = decodeURIComponent(deletePortalData);
-            await deletePortal({ portalName: deleteData });
-            window.opener.postMessage(
-              JSON.stringify({ type: "portalDeletedSuccess" }),
-              "*",
-            );
-          } catch (e) {
-            console.error(e);
-            window.opener.postMessage(
-              JSON.stringify({ type: "portalDeletedError", error: e }),
-              "*",
-            );
-          }
-          window.close();
+        if (redirectPath && !isConfirm) {
+          window.location.href = redirectPath;
+          return;
         }
 
         if (typeof res === "string") window.location.replace(res);
@@ -466,7 +467,6 @@ const LoginForm = ({
     referenceUrl,
     baseDomain,
     isPublicAuth,
-    deletePortalData,
   ]);
 
   const onBlurEmail = () => {
@@ -536,15 +536,9 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && !client && !deletePortalData && (
+      {!emailFromInvitation && !client && (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
-        </Text>
-      )}
-
-      {deletePortalData && (
-        <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
-          {t("EnterCredentials", { productName: t("Common:ProductName") })}:
         </Text>
       )}
 
@@ -577,14 +571,12 @@ const LoginForm = ({
         password={password}
         onChangePassword={onChangePassword}
       />
-      {!deletePortalData && (
-        <ForgotContainer
-          cookieSettingsEnabled={cookieSettingsEnabled}
-          isChecked={isChecked}
-          identifier={identifier}
-          onChangeCheckbox={onChangeCheckbox}
-        />
-      )}
+      <ForgotContainer
+        cookieSettingsEnabled={cookieSettingsEnabled}
+        isChecked={isChecked}
+        identifier={identifier}
+        onChangeCheckbox={onChangeCheckbox}
+      />
 
       {ldapDomain && ldapEnabled && (
         <LDAPContainer
@@ -626,11 +618,7 @@ const LoginForm = ({
         size={ButtonSize.medium}
         scale
         label={
-          isLoading
-            ? t("Common:LoadingProcessing")
-            : deletePortalData
-              ? `${t("Common:Delete")} ${t("Common:ProductName")}`
-              : t("Common:LoginButton")
+          isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
         tabIndex={5}
         isDisabled={isLoading}

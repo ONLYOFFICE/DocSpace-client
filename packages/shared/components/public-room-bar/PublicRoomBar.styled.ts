@@ -29,7 +29,9 @@ import styled from "styled-components";
 import { globalColors } from "../../themes";
 import { injectDefaultTheme } from "../../utils";
 
-const StyledPublicRoomBar = styled.div.attrs(injectDefaultTheme)`
+const StyledPublicRoomBar = styled.div.attrs(injectDefaultTheme)<{
+  barIsVisible?: boolean;
+}>`
   display: flex;
   background-color: ${(props) => props.theme.infoBlock.background};
   color: ${globalColors.black};
@@ -37,6 +39,7 @@ const StyledPublicRoomBar = styled.div.attrs(injectDefaultTheme)`
   padding: 12px 16px;
   border-radius: 6px;
   margin-bottom: 10px;
+  ${(props) => !props.barIsVisible && "margin-top: 20px;"}
 
   .text-container {
     width: 100%;

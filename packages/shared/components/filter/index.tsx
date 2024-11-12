@@ -99,6 +99,9 @@ const FilterInput = React.memo(
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
+
+    const searchRef = React.useRef<HTMLInputElement | null>(null);
+
     React.useEffect(() => {
       const value = getViewSettingsData?.();
 
@@ -115,6 +118,8 @@ const FilterInput = React.memo(
 
     React.useEffect(() => {
       const value = getSelectedInputValue?.();
+
+      if (value) searchRef.current?.focus();
 
       setInputValue(value);
     }, [getSelectedInputValue]);
@@ -200,6 +205,7 @@ const FilterInput = React.memo(
       <StyledFilterInput>
         <div className="filter-input_filter-row">
           <StyledSearchInput
+            forwardedRef={searchRef}
             placeholder={placeholder}
             value={inputValue}
             onChange={onSearch}

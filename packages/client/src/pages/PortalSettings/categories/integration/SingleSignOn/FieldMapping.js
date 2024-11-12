@@ -47,21 +47,6 @@ import {
 } from "SRC_DIR/helpers/constants";
 
 const StyledWrapper = styled.div`
-  .advanced-block {
-    margin: 24px 0;
-
-    .field-label {
-      font-size: 15px;
-      font-weight: 600;
-    }
-  }
-
-  .checkbox-input {
-    width: fit-content;
-    margin-block: 10px 6px;
-    margin-inline: 0 8px;
-  }
-
   .icon-button {
     padding: 0 5px;
   }
@@ -76,10 +61,6 @@ const FieldMapping = (props) => {
     location,
     title,
     phone,
-    hideAuthPage,
-    enableSso,
-    setCheckbox,
-    isLoadingXml,
     firstNameHasError,
     lastNameHasError,
     emailHasError,
@@ -163,30 +144,6 @@ const FieldMapping = (props) => {
         value={phone}
         hasError={phoneHasError}
   />*/}
-
-      <FieldContainer
-        className="advanced-block"
-        inlineHelpButton
-        isVertical
-        labelText={t("AdvancedSettings")}
-        place="top"
-        tooltipContent={
-          <Text fontSize="12px">{t("AdvancedSettingsTooltip")}</Text>
-        }
-        tooltipClass="advanced-settings-tooltip icon-button"
-        labelVisible={true}
-      >
-        <Checkbox
-          id="hide-auth-page"
-          className="checkbox-input"
-          label={t("HideAuthPage")}
-          name="hideAuthPage"
-          tabIndex={22}
-          isChecked={hideAuthPage}
-          isDisabled={!enableSso || isLoadingXml}
-          onChange={setCheckbox}
-        />
-      </FieldContainer>
     </StyledWrapper>
   );
 };
@@ -199,10 +156,6 @@ export default inject(({ ssoStore }) => {
     location,
     title,
     phone,
-    hideAuthPage,
-    enableSso,
-    setCheckbox,
-    isLoadingXml,
     firstNameHasError,
     lastNameHasError,
     emailHasError,
@@ -218,10 +171,6 @@ export default inject(({ ssoStore }) => {
     location,
     title,
     phone,
-    hideAuthPage,
-    enableSso,
-    setCheckbox,
-    isLoadingXml,
     firstNameHasError,
     lastNameHasError,
     emailHasError,

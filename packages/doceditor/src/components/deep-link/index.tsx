@@ -85,7 +85,9 @@ const DeepLink = ({
 
   const getFileIcon = () => {
     const fileExst = `${fileInfo?.fileExst.slice(1)}.svg`;
-    const icon = iconSize32.get(fileExst);
+    const icon = iconSize32.has(fileExst)
+      ? iconSize32.get(fileExst)
+      : iconSize32.get("file.svg");
     return icon;
   };
 

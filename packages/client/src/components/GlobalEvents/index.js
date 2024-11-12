@@ -42,6 +42,7 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { getStartRoomParams } from "SRC_DIR/helpers";
 
 const GlobalEvents = ({
   enablePlugins,
@@ -162,10 +163,13 @@ const GlobalEvents = ({
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    const startRoomParams = getStartRoomParams(
+      e?.payload?.startRoomType,
+      e?.title,
+    );
     setCreateRoomDialogProps({
-      title: e?.title,
+      ...startRoomParams,
       visible: true,
-      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
         setCreateRoomDialogProps({
           visible: false,

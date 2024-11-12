@@ -38,6 +38,7 @@ const TariffTitleContainer = ({
   isTrial,
   trialDaysLeft,
   paymentDate,
+  isDeveloper,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
   const alertComponent = () => {
@@ -73,14 +74,14 @@ const TariffTitleContainer = ({
   const expiresDate = () => {
     if (isTrial) {
       return getTwoDotsReplacing(
-        t("ActivateTariffEnterpriseTrialExpiration", {
+        t("ActivateTariffLicenseTrialExpiration", {
           date: paymentDate,
         }),
       );
     }
 
     return getTwoDotsReplacing(
-      t("ActivateTariffEnterpriseExpiration", {
+      t("ActivatePaidTariffExpiration", {
         date: paymentDate,
       }),
     );
@@ -97,6 +98,9 @@ const TariffTitleContainer = ({
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
               organizationName: t("Common:OrganizationName"),
+              license: isDeveloper
+                ? t("Common:DeveloperLicense")
+                : t("Common:EnterpriseLicense"),
             })}
           </Text>{" "}
           {!isLicenseDateExpired && (
@@ -112,7 +116,7 @@ const TariffTitleContainer = ({
 };
 
 export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
-  const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
+  const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
     currentTariffStatusStore;
   const { isTrial } = currentQuotaStore;
 
@@ -121,5 +125,6 @@ export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
     trialDaysLeft,
     paymentDate,
     isLicenseDateExpired,
+    isDeveloper,
   };
 })(observer(TariffTitleContainer));

@@ -86,6 +86,7 @@ const QuickButtons = (props) => {
     currentDeviceType,
     showLifetimeIcon,
     expiredDate,
+    currentColorScheme,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -119,7 +120,7 @@ const QuickButtons = (props) => {
     : theme.filesQuickButtons.color;
 
   const colorShare = shared
-    ? theme.filesQuickButtons.sharedColor
+    ? currentColorScheme.main?.accent
     : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;

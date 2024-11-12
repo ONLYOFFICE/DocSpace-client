@@ -44,6 +44,7 @@ import {
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -349,6 +350,8 @@ export interface UseEventsProps {
   isSkipError?: boolean;
   openOnNewPage: boolean;
   t: TTranslation;
+
+  frameConfig?: TFrameConfig | null;
 }
 
 export interface UseInitProps {

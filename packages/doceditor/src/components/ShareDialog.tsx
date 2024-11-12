@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-
+import moment from "moment";
+import "moment/min/locales.min";
 import Share from "@docspace/shared/components/share";
 import {
   ModalDialog,
@@ -56,7 +57,11 @@ const SharingDialog = ({
   onCancel,
   isVisible,
 }: SharingDialogProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t, i18n } = useTranslation(["Common"]);
+
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
 
   return (
     <ModalDialog

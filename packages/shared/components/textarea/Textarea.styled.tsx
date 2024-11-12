@@ -95,6 +95,7 @@ const ClearTextareaAutosize = React.forwardRef(
       isJSONField,
       enableCopy,
       heightTextArea,
+      minHeight,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
@@ -106,14 +107,24 @@ const ClearTextareaAutosize = React.forwardRef(
 
 ClearTextareaAutosize.displayName = "ClearTextareaAutosize";
 
-const StyledTextarea = styled(ClearTextareaAutosize).attrs<{
-  autoFocus?: boolean;
-  dir?: string;
-}>(({ autoFocus, dir, theme }) => ({
-  autoFocus,
-  dir,
-  theme: theme || Base,
-}))`
+const StyledTextarea = styled(ClearTextareaAutosize).attrs(
+  ({
+    autoFocus,
+    dir,
+    minHeight,
+    theme,
+  }: {
+    autoFocus?: boolean;
+    dir?: string;
+    minHeight?: string;
+    theme: TTheme;
+  }) => ({
+    autoFocus,
+    dir,
+    style: { minHeight },
+    theme: theme || Base,
+  }),
+)`
   ${commonInputStyles};
 
   white-space: ${(props) => (props.isJSONField ? "pre" : "pre-line")};

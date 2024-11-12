@@ -118,12 +118,11 @@ export const globalColors = {
 
   editorGreenColor: "#40865C",
   editorBlueColor: "#446995",
-  editorOrangeColor: "#AA5252",
+  editorOrangeColor: "#B26A54",
   editorRedColor: "#AA5251",
   windowsColor: "#4C83CD",
   linuxColor: "#F4BB40",
   androidColor: "#A8D548",
-  twitterColor: "#2AA3EF",
   moonstone: "#35A5D2",
   //
 

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { TTheme, globalColors } from "../../themes";
 import {
@@ -208,6 +208,7 @@ const heightStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
 const StyledAvatar = styled.div.attrs(injectDefaultTheme)<{
   size: AvatarSize;
   theme: TTheme;
+  noClick: boolean;
 }>`
   position: relative;
   width: ${(props) => widthStyle(props)};
@@ -217,6 +218,14 @@ const StyledAvatar = styled.div.attrs(injectDefaultTheme)<{
   font-style: normal;
 
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+
+  ${(props) =>
+    !props.noClick &&
+    css`
+      &:hover {
+        cursor: pointer;
+      }
+    `};
 
   .admin_icon {
     rect:nth-child(1) {

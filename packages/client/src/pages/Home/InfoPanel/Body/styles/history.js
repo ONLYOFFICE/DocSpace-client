@@ -24,9 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const strikethroughStyles = css`
+  color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+  text-decoration: line-through;
+`;
 
 const StyledHistoryList = styled.div`
   display: flex;
@@ -239,9 +244,9 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
     padding: 6px 8px;
 
     &:hover {
-      cursor: ${(props) => (props.isFolder ? "auto" : "pointer")};
+      cursor: pointer;
       background-color: ${(props) =>
-        !props.isFolder && props.theme.infoPanel.history.fileBackgroundColor};
+        props.theme.infoPanel.history.fileBackgroundColor};
     }
   }
 
@@ -271,14 +276,12 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
       color: ${(props) => props.theme.infoPanel.history.fileExstColor};
     }
 
-    &.old-item-title {
+    &.old-item-value {
       .name {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
       .exst {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
     }
   }
@@ -292,6 +295,30 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
   &:hover {
     .location-btn {
       opacity: 1;
+    }
+  }
+
+  .index {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .change-index {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .arrow-index {
+      transform: rotate(-90deg);
+
+      path {
+        fill: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+      }
+    }
+
+    .old-index {
+      ${strikethroughStyles}
     }
   }
 `;

@@ -262,7 +262,7 @@ class SettingsStore {
 
   hotkeyPanelVisible = false;
 
-  frameConfig: TFrameConfig | null = null;
+  frameConfig: Nullable<TFrameConfig> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -327,6 +327,10 @@ class SettingsStore {
   displayAbout: boolean = false;
 
   deepLinkType: DeepLinkType = DeepLinkType.Choice;
+
+  isDefaultPasswordProtection: boolean = false;
+
+  isBannerVisible = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -498,11 +502,15 @@ class SettingsStore {
   }
 
   get sdkLink() {
-    return `${this.apiDocsLink}/docspace/jssdk/`;
+    return `${this.apiDocsLink}/docspace/javascript-sdk/get-started/basic-concepts/`;
   }
 
   get apiBasicLink() {
-    return `${this.apiDocsLink}/docspace/basic`;
+    return `${this.apiDocsLink}/docspace/`;
+  }
+
+  get apiPluginSDKLink() {
+    return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
   }
 
   get wizardCompleted() {
@@ -1022,6 +1030,7 @@ class SettingsStore {
     this.numberAttempt = settings.attemptCount;
     this.blockingTime = settings.blockTime;
     this.checkPeriod = settings.checkPeriod;
+    this.isDefaultPasswordProtection = settings.isDefault;
   };
 
   getBruteForceProtection = async () => {
@@ -1054,7 +1063,7 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig
-      ? window.name.includes(this.frameConfig?.name)
+      ? window.name.includes(this.frameConfig?.name as string)
       : false;
 
     if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
@@ -1173,6 +1182,10 @@ class SettingsStore {
 
   checkEnablePortalSettings = (isPaid: boolean) => {
     return isManagement() && this.portals?.length === 1 ? false : isPaid;
+  };
+
+  setIsBannerVisible = (visible: boolean) => {
+    this.isBannerVisible = visible;
   };
 }
 

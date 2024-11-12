@@ -951,19 +951,12 @@ class FilesActionStore {
   };
 
   lockFileAction = async (id, locked) => {
-    let timer = null;
     const { setFile } = this.filesStore;
     try {
-      timer = setTimeout(() => {
-        this.filesStore.setActiveFiles([id]);
-      }, 200);
-      await lockFile(id, locked).then((res) => {
-        setFile(res), this.filesStore.setActiveFiles([]);
-      });
+      const res = await lockFile(id, locked);
+      setFile(res);
     } catch (err) {
       toastr.error(err);
-    } finally {
-      clearTimeout(timer);
     }
   };
 

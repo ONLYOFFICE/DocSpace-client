@@ -319,7 +319,12 @@ class PaymentStore {
     try {
       const { getPaymentInfo } = authStore;
 
-      await acceptLicense();
+      const message = await acceptLicense();
+
+      if (message) {
+        toastr.error(message);
+        return;
+      }
 
       toastr.success(t("ActivateLicenseActivated"));
       localStorage.removeItem("enterpriseAlertClose");

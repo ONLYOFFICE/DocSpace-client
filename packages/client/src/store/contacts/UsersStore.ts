@@ -406,9 +406,8 @@ class UsersStore {
       case "unknown":
         if (isMySelf) {
           options.push("profile");
-        } else {
-          options.push("details");
         }
+        options.push("details");
 
         if (isAdmin || isOwner) {
           options.push("room-list");

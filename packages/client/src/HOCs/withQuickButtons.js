@@ -222,6 +222,7 @@ export default function withQuickButtons(WrappedComponent) {
       infoPanelStore,
       indexingStore,
       contextOptionsStore,
+      selectedFolderStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -263,7 +264,7 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
-        roomLifetime: infoPanelRoom?.lifetime,
+        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         currentColorScheme: settingsStore.currentColorScheme,
       };

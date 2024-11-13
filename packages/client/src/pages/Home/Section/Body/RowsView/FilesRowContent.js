@@ -69,7 +69,6 @@ const StyledLink = styled(Link)`
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     width: 100%;
-    max-width: min-content;
     min-width: inherit;
     margin-inline-end: 0;
 

@@ -195,7 +195,15 @@ const useEditorEvents = ({
 
       history.pushState({}, "", `${pathname}${search}`);
     }
-  }, [config?.Error, errorMessage, isSkipError, searchParams, pathname, t]);
+  }, [
+    config?.Error,
+    errorMessage,
+    isSkipError,
+    searchParams,
+    pathname,
+    t,
+    config?.type,
+  ]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });

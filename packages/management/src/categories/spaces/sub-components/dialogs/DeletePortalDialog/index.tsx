@@ -158,7 +158,6 @@ const DeletePortalDialog = () => {
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          isLoading={isLoading}
           scale
         />
       </ModalDialog.Footer>

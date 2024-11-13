@@ -417,7 +417,7 @@ const PeopleSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
+          headerLabel: headerProps.headerLabel || t("Common:Contacts"),
         },
       }
     : ({} as TSelectorHeader);
@@ -515,7 +515,7 @@ const PeopleSelector = ({
           tabsData: [
             {
               id: PEOPLE_TAB_ID,
-              name: t("Common:Employees"),
+              name: t("Common:Members"),
               onClick: () => changeActiveTab(PEOPLE_TAB_ID),
               content: null,
             },

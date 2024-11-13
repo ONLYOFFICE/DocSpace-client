@@ -54,7 +54,7 @@ interface ImageViewerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
 }
 
 export default ImageViewerProps;

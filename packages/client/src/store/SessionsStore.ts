@@ -135,6 +135,7 @@ class SessionsStore {
   addPortalSession = (
     portalSession: TPortalSession,
     addToTop: boolean = false,
+    increaseTotal: boolean = false,
   ) => {
     if (this.portalSessionsMap.has(portalSession.userId)) {
       return;
@@ -151,6 +152,10 @@ class SessionsStore {
       sessionIdsArray.unshift(portalSession.userId);
     } else {
       sessionIdsArray.push(portalSession.userId);
+    }
+
+    if (increaseTotal) {
+      this.totalPortalSessions += 1;
     }
   };
 
@@ -235,7 +240,7 @@ class SessionsStore {
     const currentSession = this.portalSessionsMap.get(newPortalSession.userId);
 
     if (!currentSession) {
-      this.addPortalSession(newPortalSession, true);
+      this.addPortalSession(newPortalSession, true, true);
       return;
     }
 

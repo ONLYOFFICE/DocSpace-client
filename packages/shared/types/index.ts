@@ -104,6 +104,9 @@ declare global {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location;
     };
+    logs: {
+      socket: string[];
+    };
     ClientConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;

@@ -218,3 +218,11 @@ export const isLockedSharedRoom = (item?: TRoom) => {
 
   return Boolean(item.external && item.passwordProtected && !item.expired);
 };
+
+export const addLog = (log: string, category: "socket") => {
+  if (!window.logs) window.logs = { socket: [] };
+
+  if (!window.logs[category]) window.logs[category] = [];
+
+  window.logs[category].push(log);
+};

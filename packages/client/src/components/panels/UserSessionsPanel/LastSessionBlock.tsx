@@ -46,6 +46,8 @@ import {
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
 
+import { useSessionStatusText } from "SRC_DIR/Hooks/useSessionStatusText";
+
 import {
   LastSessionBlockProps,
   LastSessionInfoRowProps,
@@ -146,24 +148,15 @@ const LastSessionInfoRow = ({
 
 const LastSessionBlock = (props: LastSessionBlockProps) => {
   const { t, storeProps } = props;
-  const { bufferSelection, getContextOptions, getFromDateAgo, userSessions } =
+  const { locale, bufferSelection, getContextOptions, userSessions } =
     storeProps!;
 
-  const { userId, displayName, avatar, isAdmin, isOwner, session } =
-    bufferSelection!;
+  const { displayName, avatar, isAdmin, isOwner, session } = bufferSelection!;
   const lastSession = userSessions[0] || session;
-  const { platform, browser, ip, city, country } = lastSession;
-  const fromDateAgo = getFromDateAgo(userId);
-  const isOnline = fromDateAgo === "online";
+  const { platform, browser, ip, city, country, status } = lastSession;
 
-  // const getUserType = (): string => {
-  //   if (isOwner) return t("Common:Owner");
-  //   if (isAdmin)
-  //     return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
-  //   if (isRoomAdmin) return t("Common:RoomAdmin");
-  //   if (isCollaborator) return t("Common:PowerUser");
-  //   return t("Common:User");
-  // };
+  const isOnline = status === "online";
+  const statusText = useSessionStatusText(lastSession, locale, t);
 
   const type = getUserType(bufferSelection!);
   const typeLabel = getUserTypeTranslation(type, t);
@@ -210,7 +203,7 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
           <LastSessionInfoRow
             className={isOnline ? "online" : undefined}
             label={t("Common:Active")}
-            value={t(`Common:${fromDateAgo}`)}
+            value={statusText}
           />
           <LastSessionInfoRow label={t("Common:Platform")} value={platform} />
           <LastSessionInfoRow
@@ -228,13 +221,16 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ sessionsStore }) => {
-  const { getFromDateAgo, bufferSelection, userSessions, getContextOptions } =
-    sessionsStore;
+export default inject<TStore>(({ userStore, settingsStore, sessionsStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  const { bufferSelection, userSessions, getContextOptions } = sessionsStore;
 
   return {
     storeProps: {
-      getFromDateAgo,
+      locale,
       bufferSelection,
       userSessions,
       getContextOptions,

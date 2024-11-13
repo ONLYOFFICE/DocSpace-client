@@ -167,9 +167,6 @@ export type SessionsTableRowStoreProps = {
   locale: string;
 } & Pick<
   SessionsStore,
-  | "convertDate"
-  | "getFromDateAgo"
-  | "setFromDateAgo"
   | "selectRow"
   | "selectCheckbox"
   | "singleContextMenuAction"

@@ -54,9 +54,11 @@ export type LastSessionBlockProps = {
   storeProps?: LastSessionBlockStoreProps;
 };
 
-type LastSessionBlockStoreProps = Pick<
+type LastSessionBlockStoreProps = {
+  locale: string;
+} & Pick<
   SessionsStore,
-  "getFromDateAgo" | "bufferSelection" | "userSessions" | "getContextOptions"
+  "bufferSelection" | "userSessions" | "getContextOptions"
 >;
 
 export type LastSessionInfoRowProps = {

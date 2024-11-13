@@ -677,34 +677,10 @@ class SessionsStore {
     this.isSessionsLoaded = isSessionsLoaded;
   };
 
-  setFromDateAgo = (id, value) => {
-    this.fromDateAgo[id] = value;
-  };
-
-  setIsDisabled = (isDisabled) => {
-    this.isDisabled = isDisabled;
-  };
-
-  getFromDateAgo = (sessionId) => {
-    return this.fromDateAgo[sessionId] || "";
-  };
-
   get getItems() {
     if (!this.items) return {};
     return this.allSessions.find((item) => item.id === this.items.userId) ?? {};
   }
-
-  convertDate = (t, dateString, locale) => {
-    const parsedDate = moment(new Date(dateString).toISOString());
-    const now = moment();
-    const daysDiff = now.diff(parsedDate, "days");
-    moment.locale(locale);
-
-    if (daysDiff < 1) return parsedDate.fromNow();
-    if (daysDiff === 1) return t("Common:Yesterday");
-    if (daysDiff < 7) return parsedDate.fromNow();
-    return parsedDate.format(locale);
-  };
 
   findSessionIndexByUserId = (userIds) => {
     if (!Array.isArray(userIds)) {

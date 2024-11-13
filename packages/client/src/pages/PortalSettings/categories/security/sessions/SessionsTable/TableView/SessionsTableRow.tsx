@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { decode } from "he";
@@ -39,6 +39,8 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { TSession } from "@docspace/shared/types/ActiveSessions";
+
+import { useSessionStatusText } from "SRC_DIR/Hooks/useSessionStatusText";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 
@@ -185,9 +187,6 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
 
   const {
     locale,
-    convertDate,
-    getFromDateAgo,
-    setFromDateAgo,
     selectRow,
     selectCheckbox,
     singleContextMenuAction,
@@ -196,34 +195,16 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   } = storeProps!;
 
   const { userId, displayName, avatar, session, isAdmin, isOwner } = item;
-  const { platform, browser, date, status } = session;
+  const { platform, browser, status } = session;
 
-  const fromDateAgo = getFromDateAgo(userId);
+  const statusText = useSessionStatusText(session, locale, t);
+
   const avatarRole = isOwner
     ? AvatarRole.owner
     : isAdmin
       ? AvatarRole.admin
       : AvatarRole.user;
   const isOnline = status === "online";
-
-  useEffect(() => {
-    const updateStatus = () => {
-      let statusToShow;
-      if (isOnline && status) {
-        statusToShow = status;
-      } else if (!isOnline && date) {
-        statusToShow = convertDate(t, date, locale);
-      } else {
-        statusToShow = null;
-      }
-      setFromDateAgo(userId, statusToShow);
-    };
-
-    updateStatus();
-    const intervalId = setInterval(updateStatus, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [t, date, status, locale, userId, isOnline, convertDate, setFromDateAgo]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     selectCheckbox(e.target.checked, item);
@@ -304,7 +285,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
 
         <TableCell className="table-cell_status">
           <Text className={isOnline ? "online" : "session-info"} truncate>
-            {t(`Common:${fromDateAgo}`)}
+            {statusText}
           </Text>
         </TableCell>
 
@@ -333,9 +314,6 @@ export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
   const locale = (user && user.cultureName) || culture || "en";
 
   const {
-    convertDate,
-    getFromDateAgo,
-    setFromDateAgo,
     selectRow,
     selectCheckbox,
     singleContextMenuAction,
@@ -346,9 +324,6 @@ export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
   return {
     storeProps: {
       locale,
-      convertDate,
-      getFromDateAgo,
-      setFromDateAgo,
       selectRow,
       selectCheckbox,
       singleContextMenuAction,

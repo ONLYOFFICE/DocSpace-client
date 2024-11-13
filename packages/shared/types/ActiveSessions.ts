@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TOnlineStatus = "online" | "offline";
+export type TSessionStatus = "online" | "offline";
 
 export type TPortalSession = {
   userId: string;
@@ -44,11 +44,11 @@ export type TSession = {
   platform: string;
   country: string;
   city: string;
-  status: TOnlineStatus;
+  status: TSessionStatus;
   date: string;
 };
 
-export type TSessionsSelected = "all" | "none" | TOnlineStatus;
+export type TSessionsSelected = "all" | "none" | TSessionStatus;
 
 export type TSessionsInPortal = {
   users: TPortalSession[];

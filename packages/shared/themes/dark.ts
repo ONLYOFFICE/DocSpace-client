@@ -255,7 +255,7 @@ const Dark: TTheme = {
     buttonColor: mainOrange,
     iconFill: black,
 
-    circleBackground: black,
+    circleBackground: white,
 
     mobileProgressBarBackground: grayDarkStrong,
 

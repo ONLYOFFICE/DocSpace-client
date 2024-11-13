@@ -24,19 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType } from "../enums";
 
-export const checkIfAccessPaid = (access: ShareAccessRights) => {
-  return (
-    access === ShareAccessRights.FullAccess ||
-    access === ShareAccessRights.RoomManager
-  );
+const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
+  const startRoomParams = {
+    type: startRoomType,
+    title: title ?? "",
+    tags: [],
+    isPrivate: false,
+    storageLocation: {
+      isThirdparty: false,
+      provider: null,
+      thirdpartyAccount: null,
+      storageFolderId: "",
+      isSaveThirdpartyAccount: false,
+    },
+    icon: {
+      uploadedFile: null,
+      tmpFile: "",
+      x: 0.5,
+      y: 0.5,
+      zoom: 1,
+    },
+    withCover: false,
+    previewIcon: null,
+  };
+
+  return startRoomParams;
 };
 
-export const filterPaidRoleOptions = (
-  options: { access: ShareAccessRights; key: string }[],
-) => {
-  if (!options) return options;
+const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
+  const additionalParams = {
+    indexing: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    denyDownload: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    lifetime: undefined, // Skip lifetime for now
+    watermark:
+      roomType === RoomsType.VirtualDataRoom
+        ? { rotate: -45, additions: 1 }
+        : undefined,
+  };
 
-  return options.filter((o) => !checkIfAccessPaid(+o.access) && o.key !== "s1");
+  return additionalParams;
 };
+
+export { getStartRoomParams, getRoomCreationAdditionalParams };

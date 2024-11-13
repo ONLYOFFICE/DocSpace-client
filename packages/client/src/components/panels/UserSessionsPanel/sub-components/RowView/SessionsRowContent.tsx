@@ -62,7 +62,9 @@ const SessionsRowContent = ({ item }: SessionsRowContentProps) => {
     >
       <Text fontSize="14px" fontWeight="600" truncate>
         {platform}, {browser?.split(".")[0] ?? ""}
-        <span className="date">{convertTime(date, i18n.language)}</span>
+        <span className="date">
+          {convertTime(date, i18n.language, "L, LT")}
+        </span>
       </Text>
       <span />
       {(country || city) && (

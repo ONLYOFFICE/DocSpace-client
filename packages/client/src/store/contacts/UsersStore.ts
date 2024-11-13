@@ -239,8 +239,6 @@ class UsersStore {
       filterData.group = null;
     }
 
-    console.log(!guestsTabVisitedStorage);
-
     if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
       filterData.inviterId = null;
       window.localStorage.setItem(

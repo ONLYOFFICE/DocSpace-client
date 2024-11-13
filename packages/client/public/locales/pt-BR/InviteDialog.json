@@ -11,5 +11,6 @@
   "LinkCopySuccess": "O link foi copiado",
   "ResetChange": "Redefinir alteração",
   "SendInvitation": "Enviar convite",
+  "UserMaxAvailableRoleWarning": "Convidados e usuários não podem ser designados como gerentes de sala. Somente administradores de salas e de {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados"
 }

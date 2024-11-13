@@ -128,15 +128,29 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
-    if (
+    const selectedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.parentRoomType;
+
+    const archivedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.rootFolderType === FolderType.Archive;
+
+    const isFolderOpenedThroughSectionHeader =
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom &&
-        !this.infoPanelSelectedItems[0]?.inRoom) ||
-      (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
+        this.infoPanelSelectedItems[0].id === this.selectedFolderStore.id) ||
+      this.infoPanelSelectedItems.length === 0;
+
+    if (
+      (selectedFolderIsRoomOrFolderInRoom ||
+        archivedFolderIsRoomOrFolderInRoom) &&
+      isFolderOpenedThroughSectionHeader
     ) {
-      this.setView(infoDetails);
-    } else {
       this.setView(infoMembers);
+    } else {
+      this.setView(infoDetails);
     }
 
     this.isVisible = bool;
@@ -349,6 +363,8 @@ class InfoPanelStore {
     if (!currentFolderRoomId) return;
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
+
+    console.log("newInfoPanelSelection", newInfoPanelSelection);
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,

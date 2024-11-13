@@ -104,6 +104,9 @@ declare global {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location;
     };
+    logs: {
+      socket: string[];
+    };
     ClientConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
@@ -129,6 +132,10 @@ declare global {
       isFrame?: boolean;
       management: {
         checkDomain?: boolean;
+      };
+      logs: {
+        enableLogs: false;
+        logsToConsole: false;
       };
     };
     AscDesktopEditor: {

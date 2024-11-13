@@ -73,7 +73,6 @@
   "FileRemoved": "Die Datei wurde in den Papierkorb verschoben",
   "FileRenamed": "Das Dokument wurde von '{{oldTitle}}' in '{{newTitle}}' umbenannt",
   "FilesWillAppearHere": "Dem Raum hinzugefügte Dateien und Ordner werden hier angezeigt.",
-  "FileWillBeDeleted": "Die Datei wird am {{date}} gelöscht",
   "Filter": "Filter",
   "FinalizeVersion": "Version abschließen",
   "Folder": "Ordner",

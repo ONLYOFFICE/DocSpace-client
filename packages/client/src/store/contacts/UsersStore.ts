@@ -52,6 +52,7 @@ import {
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
+import { GUESTS_TAB_VISITED_NAME } from "SRC_DIR/helpers/contacts/constants";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
@@ -96,6 +97,8 @@ class UsersStore {
   requestRunning = false;
 
   contactsTab: TContactsTab = false;
+
+  guestsTabVisited: boolean = false;
 
   constructor(
     public settingsStore: SettingsStore,
@@ -211,6 +214,13 @@ class UsersStore {
           ? `PeopleFilter=${this.userStore.user?.id}`
           : `GuestsFilter=${this.userStore.user?.id}`;
 
+    const guestsTabVisitedStorage = window.localStorage.getItem(
+      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+    );
+
+    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
+      this.guestsTabVisited = true;
+    }
     const filterStorageItem = localStorage.getItem(localStorageKey);
 
     if (filterStorageItem && withFilterLocalStorage) {
@@ -227,6 +237,15 @@ class UsersStore {
 
     if (filterData.group && filterData.group === "root") {
       filterData.group = null;
+    }
+
+    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
+      filterData.inviterId = null;
+      window.localStorage.setItem(
+        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+        "true",
+      );
+      this.guestsTabVisited = true;
     }
 
     this.requestRunning = true;

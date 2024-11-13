@@ -257,6 +257,7 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
+    isShared,
   } = props;
 
   const location = useLocation();
@@ -421,7 +422,7 @@ const SectionHeaderContent = (props) => {
   const getTitleIcon = () => {
     if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isPublicRoomType && !isPublicRoom) return PublicRoomIconUrl;
+    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isVirtualDataRoomType && selectedFolder.lifetime)
       return LifetimeRoomIconUrl;
@@ -772,8 +773,6 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -932,6 +931,7 @@ export default inject(
       contactsCanCreate,
 
       rootFolderId,
+      isShared,
     };
   },
 )(

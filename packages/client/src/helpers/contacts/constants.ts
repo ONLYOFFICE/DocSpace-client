@@ -34,3 +34,5 @@ export const GROUPS_ROUTE_WITH_FILTER = "/accounts/groups/filter";
 export const GUESTS_ROUTE_WITH_FILTER = "/accounts/guests/filter";
 export const INSIDE_GROUP_ROUTE_WITH_FILTER =
   "/accounts/groups/:groupId/filter";
+
+export const GUESTS_TAB_VISITED_NAME = "guests-tab-visited";

@@ -74,7 +74,6 @@
   "FileRemoved": "Файл перемещен в корзину",
   "FileRenamed": "Документ '{{oldTitle}}' переименован в '{{newTitle}}'",
   "FilesWillAppearHere": "Здесь будут отображаться файлы и папки, добавленные в комнату.",
-  "FileWillBeDeleted": "Файл будет удален {{date}}",
   "Filter": "Фильтр",
   "FinalizeVersion": "Сформировать версию",
   "Folder": "Папка",

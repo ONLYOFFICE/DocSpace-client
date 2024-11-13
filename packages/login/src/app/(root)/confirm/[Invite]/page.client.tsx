@@ -150,10 +150,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const authCallback = useCallback(
     async (profile: string) => {
-      const signupAccount: { [key: string]: string } = {
-        EmployeeType: linkData.emplType ?? "",
-        Email: linkData.email ?? "",
-        Key: linkData.key ?? "",
+      const signupAccount: { [key: string]: string | undefined } = {
+        EmployeeType: linkData.emplType,
+        Email: linkData.email,
+        Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
       };

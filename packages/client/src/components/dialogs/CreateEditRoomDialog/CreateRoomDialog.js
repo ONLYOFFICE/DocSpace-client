@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo, useState } from "react";
-import styled, { css } from "styled-components";
 
+import {
+  getRoomCreationAdditionalParams,
+  getStartRoomParams,
+} from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
@@ -34,8 +37,6 @@ import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import { getStartRoomParams } from "SRC_DIR/helpers";
-import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomDialog = ({
   t,
@@ -90,19 +91,7 @@ const CreateRoomDialog = ({
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   const setRoomType = (newRoomType) => {
-    const additionalParams = {
-      indexing: newRoomType === RoomsType.VirtualDataRoom ? true : undefined,
-      denyDownload:
-        newRoomType === RoomsType.VirtualDataRoom ? true : undefined,
-      lifetime:
-        newRoomType === RoomsType.VirtualDataRoom
-          ? { value: 12, deletePermanently: false, period: 0 }
-          : undefined,
-      watermark:
-        newRoomType === RoomsType.VirtualDataRoom
-          ? { rotate: -45, additions: 1 }
-          : undefined,
-    };
+    const additionalParams = getRoomCreationAdditionalParams(newRoomType);
 
     setRoomParams((prev) => ({
       ...prev,

@@ -26,6 +26,7 @@
 
 import React from "react";
 
+import { getRoomCreationAdditionalParams } from "@docspace/shared/utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
@@ -62,7 +63,8 @@ const useInputItemHelper = ({
 
       if (selectedItemId) createFolder(selectedItemId, value);
       else if (roomType) {
-        createRoom({ roomType, title: value });
+        const additionalParams = getRoomCreationAdditionalParams(roomType);
+        createRoom({ roomType, title: value, ...additionalParams });
       }
     },
     [withCreate, selectedItemId],

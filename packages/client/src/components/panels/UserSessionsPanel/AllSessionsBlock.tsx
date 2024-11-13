@@ -34,8 +34,8 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 
 import EmptyScreenSessionsReactSvgUrl from "PUBLIC_DIR/images/empty_screen_from_sessions.svg?url";
 
+import RowView from "./sub-components/RowView";
 import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
-import RowWrapper from "./sub-components";
 
 const Wrapper = styled.div`
   padding: 20px 20px 12px;
@@ -99,7 +99,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
         )}
       </Wrapper>
 
-      <RowWrapper t={t} sessions={userSessions} sectionWidth={0} />
+      <RowView t={t} sessions={userSessions} />
     </>
   );
 };

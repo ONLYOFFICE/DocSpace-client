@@ -38,7 +38,7 @@ const StyledRow = styled(Row)`
 `;
 
 const SessionsRow = (props: SessionsRowProps) => {
-  const { item, sectionWidth, storeProps } = props;
+  const { item, storeProps } = props;
   const { setLogoutModalData, setLogoutDialogVisible } = storeProps!;
 
   const onClickLogout = () => {
@@ -57,7 +57,7 @@ const SessionsRow = (props: SessionsRowProps) => {
 
   return (
     <StyledRow key={item.id} contentElement={contentElement}>
-      <SessionsRowContent item={item} sectionWidth={sectionWidth} />
+      <SessionsRowContent item={item} />
     </StyledRow>
   );
 };

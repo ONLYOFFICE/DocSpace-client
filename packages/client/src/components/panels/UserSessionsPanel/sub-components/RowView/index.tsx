@@ -34,25 +34,20 @@ const StyledRowContainer = styled(RowContainer)`
 `;
 
 const RowView = (props: RowViewProps) => {
-  const { t, sectionWidth, sessions } = props;
+  const { t, sessions } = props;
 
   return (
     <StyledRowContainer
+      id="allSessionsRowContainer"
       useReactWindow={false}
       hasMoreFiles={false}
       itemHeight={58}
       itemCount={sessions.length}
       filesLength={sessions.length}
       fetchMoreFiles={() => Promise.resolve()}
-      onScroll={() => {}}
     >
       {sessions.map((item) => (
-        <SessionsRow
-          t={t}
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-        />
+        <SessionsRow t={t} key={item.id} item={item} />
       ))}
     </StyledRowContainer>
   );

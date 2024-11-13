@@ -50,10 +50,7 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const SessionsRowContent = ({
-  item,
-  sectionWidth,
-}: SessionsRowContentProps) => {
+const SessionsRowContent = ({ item }: SessionsRowContentProps) => {
   const { id, platform, browser, country, city, date } = item;
   const theme = useTheme();
   const { i18n } = useTranslation();
@@ -61,7 +58,6 @@ const SessionsRowContent = ({
   return (
     <StyledRowContent
       key={id}
-      sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600" truncate>

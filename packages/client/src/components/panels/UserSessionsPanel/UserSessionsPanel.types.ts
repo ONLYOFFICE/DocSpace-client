@@ -25,14 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "@docspace/shared/types";
-import {
-  IAllSessions,
-  ISessions,
-} from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+import { TSession } from "@docspace/shared/types/ActiveSessions";
+
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import SessionsStore from "SRC_DIR/store/SessionsStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
-import { TSession } from "@docspace/shared/types/ActiveSessions";
 
 export interface UserSessionsPanelProps {
   storeProps?: UserSessionsPanelStoreProps;
@@ -82,14 +79,12 @@ type AllSessionsBlockStoreProps = Pick<
 
 export interface RowViewProps {
   t: TTranslation;
-  sessions: ISessions[];
-  sectionWidth: number;
+  sessions: TSession[];
 }
 
 export type SessionsRowProps = {
   t: TTranslation;
   item: TSession;
-  sectionWidth: number;
 
   storeProps?: SessionsRowStoreProps;
 };
@@ -99,5 +94,4 @@ type SessionsRowStoreProps = Pick<SessionsStore, "setLogoutModalData"> &
 
 export type SessionsRowContentProps = {
   item: TSession;
-  sectionWidth: number;
 };

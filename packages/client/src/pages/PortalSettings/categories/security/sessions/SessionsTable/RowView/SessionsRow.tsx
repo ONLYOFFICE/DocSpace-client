@@ -182,6 +182,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
       (e.target?.tagName === "A" ||
         e.target?.closest(".checkbox") ||
         e.target?.closest(".table-container_row-checkbox") ||
+        e.target?.closest(".p-contextmenu") ||
         e.detail === 0)
     ) {
       return;

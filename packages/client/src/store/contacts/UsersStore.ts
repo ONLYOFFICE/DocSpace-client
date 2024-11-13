@@ -406,9 +406,8 @@ class UsersStore {
       case "unknown":
         if (isMySelf) {
           options.push("profile");
-        } else {
-          options.push("details");
         }
+        options.push("details");
 
         if (isAdmin || isOwner) {
           options.push("room-list");
@@ -588,6 +587,7 @@ class UsersStore {
       id,
       displayName,
       avatar,
+      avatarMax,
       hasAvatar,
       email,
       isOwner,
@@ -649,6 +649,7 @@ class UsersStore {
       isVisitor,
       displayName,
       avatar: currentAvatar,
+      avatarMax,
       hasAvatar,
       email,
       userName,

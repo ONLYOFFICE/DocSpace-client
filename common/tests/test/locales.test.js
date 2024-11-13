@@ -709,4 +709,42 @@ describe("Locales Tests", () => {
 
     expect(exists, message).toBe(false);
   });
+
+  test("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
+    let message = `Next keys are not found in 'en' language:\r\n\r\n`;
+
+    let exists = false;
+    let i = 0;
+
+    const allEnKeys = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((item) => item.translations)
+      .map((item) => item.key)
+      .filter((k) => !k.startsWith("Culture_"))
+      .sort();
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+
+      module.availableLanguages.forEach((lng) => {
+        if (lng.language === "en") return;
+
+        const notFoundKeys = lng.translations
+          .filter((f) => f.key && !allEnKeys.includes(f.key))
+          .map((f) => f.key);
+
+        if (!notFoundKeys.length) return;
+
+        exists = true;
+
+        message +=
+          `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). Path '${lng.path}' ` +
+          `Keys:\r\n\r\n`;
+
+        message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+      });
+    });
+
+    expect(exists, message).toBe(false);
+  });
 });

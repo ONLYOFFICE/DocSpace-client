@@ -62,7 +62,10 @@ const SelectGroup = ({
       <div className="select">
         <div
           className="client-logo"
-          style={{ backgroundImage: `url(${value})` }}
+          style={{
+            backgroundImage: `url(${value})`,
+            display: value ? "block" : "none",
+          }}
         />
         {/* <img
           className="client-logo"

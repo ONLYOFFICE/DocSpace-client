@@ -113,8 +113,6 @@ const PluginSDK = ({
 
   const list = getPluginList();
 
-  console.log(list, isEmptyList);
-
   return (
     <StyledContainer>
       <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>

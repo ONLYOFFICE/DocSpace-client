@@ -146,6 +146,16 @@ const useEditorEvents = ({
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
+    // fix the editor sizes - bug 57099
+    if (config?.type === "mobile") {
+      const wrapEl = document.getElementsByTagName("iframe");
+      if (wrapEl.length) {
+        wrapEl[0].style.height = screen.availHeight + "px";
+        window.scrollTo(0, -1);
+        wrapEl[0].style.height = window.innerHeight + "px";
+      }
+    }
+
     frameCallCommand("setIsLoaded");
 
     if (errorMessage || isSkipError)

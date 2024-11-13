@@ -106,12 +106,6 @@ const StyledRow = styled(Row)`
   margin-top: -2px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  .styled-checkbox-container {
-    .checkbox {
-      padding-right: 4px;
-    }
-  }
-
   .styled-element {
     height: 32px;
     ${(props) =>

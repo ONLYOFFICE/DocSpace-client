@@ -133,6 +133,10 @@ declare global {
       management: {
         checkDomain?: boolean;
       };
+      logs: {
+        enableLogs: false;
+        logsToConsole: false;
+      };
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

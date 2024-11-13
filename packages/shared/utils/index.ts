@@ -220,9 +220,14 @@ export const isLockedSharedRoom = (item?: TRoom) => {
 };
 
 export const addLog = (log: string, category: "socket") => {
-  if (!window.logs) window.logs = { socket: [] };
+  if (!window.ClientConfig?.logs.enableLogs) return;
 
-  if (!window.logs[category]) window.logs[category] = [];
+  if (window.ClientConfig.logs.logsToConsole) console.log(log);
+  else {
+    if (!window.logs) window.logs = { socket: [] };
 
-  window.logs[category].push(log);
+    if (!window.logs[category]) window.logs[category] = [];
+
+    window.logs[category].push(log);
+  }
 };

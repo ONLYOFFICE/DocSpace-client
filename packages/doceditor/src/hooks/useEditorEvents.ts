@@ -59,6 +59,8 @@ import { Nullable } from "@docspace/shared/types";
 
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
+import { isMobile } from "react-device-detect";
+
 import { getCurrentDocumentVersion, setDocumentTitle } from "@/utils";
 
 import {
@@ -143,18 +145,26 @@ const useEditorEvents = ({
     [fileInfo?.id, t],
   );
 
+  const fixSize = React.useCallback(() => {
+    try {
+      // fix the editor sizes - bug 57099
+      if (config?.type === "mobile") {
+        const wrapEl = document.getElementsByTagName("iframe");
+        if (wrapEl.length) {
+          wrapEl[0].style.height = screen.availHeight + "px";
+          window.scrollTo(0, -1);
+          wrapEl[0].style.height = window.innerHeight + "px";
+        }
+      }
+    } catch (e) {
+      console.error("fixSize failed", e);
+    }
+  }, [config?.type]);
+
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
-    // fix the editor sizes - bug 57099
-    if (config?.type === "mobile") {
-      const wrapEl = document.getElementsByTagName("iframe");
-      if (wrapEl.length) {
-        wrapEl[0].style.height = screen.availHeight + "px";
-        window.scrollTo(0, -1);
-        wrapEl[0].style.height = window.innerHeight + "px";
-      }
-    }
+    fixSize();
 
     frameCallCommand("setIsLoaded");
 
@@ -202,7 +212,7 @@ const useEditorEvents = ({
     searchParams,
     pathname,
     t,
-    config?.type,
+    fixSize,
   ]);
 
   const onDocumentReady = React.useCallback(() => {
@@ -678,6 +688,31 @@ const useEditorEvents = ({
     url.searchParams.append("title", defaultFileName ?? "");
     setCreateUrl(url.toString());
   }, [config?.documentType, getDefaultFileName, openOnNewPage]);
+
+  const onOrientationChange = React.useCallback(() => {
+    fixSize();
+  }, [fixSize]);
+
+  React.useEffect(() => {
+    if (isMobile) {
+      if (window.screen?.orientation) {
+        window.screen.orientation.addEventListener(
+          "change",
+          onOrientationChange,
+        );
+      } else {
+        window.addEventListener("orientationchange", onOrientationChange);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("orientationchange", onOrientationChange);
+      window.screen?.orientation?.removeEventListener(
+        "change",
+        onOrientationChange,
+      );
+    };
+  }, [onOrientationChange]);
 
   return {
     events,

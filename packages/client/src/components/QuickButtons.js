@@ -87,6 +87,7 @@ const QuickButtons = (props) => {
     showLifetimeIcon,
     expiredDate,
     currentColorScheme,
+    roomLifetime,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -160,7 +161,9 @@ const QuickButtons = (props) => {
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Files:FileWillBeDeleted", { date: expiredDate })}.
+      {roomLifetime?.deletePermanently
+        ? t("Files:FileWillBeDeletedPermanently", { date: expiredDate })
+        : t("Files:FileWillBeMovedToTrash", { date: expiredDate })}
     </Text>
   );
 

@@ -73,7 +73,6 @@
   "FileRemoved": "Датотека померена у Отпад",
   "FileRenamed": "Документ '{{oldTitle}}' је преименован на '{{newTitle}}'",
   "FilesWillAppearHere": "Датотеке и фолдери додати у собу ће се појавити овде.",
-  "FileWillBeDeleted": "Фајл ће бити обрисан {{date}}",
   "Filter": "Филтер",
   "FinalizeVersion": "Заврши верзију",
   "Folder": "Фолдер",

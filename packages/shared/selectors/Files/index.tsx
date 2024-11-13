@@ -155,6 +155,9 @@ const FilesSelectorComponent = ({
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const afterSearch = React.useRef(false);
+  const currentSelectedItemId = React.useRef<undefined | number | string>(
+    undefined,
+  );
 
   const [isInit, setIsInit] = React.useState(true);
 
@@ -413,7 +416,14 @@ const FilesSelectorComponent = ({
     setIsFirstLoad,
   ]);
 
+  React.useEffect(() => {
+    currentSelectedItemId.current = selectedItemId;
+  }, [selectedItemId]);
+
   const onSearchAction = (value: string, callback?: VoidFunction) => {
+    if (selectedItemId !== currentSelectedItemId.current) {
+      return;
+    }
     setSearchValue(value);
 
     callback?.();

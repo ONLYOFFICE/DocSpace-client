@@ -205,7 +205,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{roomName}}</1> කාමරයට ආරාධනා කර ඇත.",
   "Invite": "ආරාධනය",
   "Invited": "ආරාධනා කළා",
-  "InviteUsers": "ආරාධනා කරන්න",
   "Kilobyte": "කි.බ.",
   "Language": "භාෂාව",
   "LastModifiedDate": "අවසාන සංශෝධිත දිනය",

@@ -234,7 +234,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> le invita a unirse a la sala <1>{{roomName}}</1> para una colaboración segura en documentos.",
   "Invite": "Invitar",
   "Invited": "Invitado",
-  "InviteUsers": "Invitar a usuarios",
   "Kilobyte": "KB",
   "Language": "Idioma",
   "LastActivityDate": "Fecha de la última actividad",

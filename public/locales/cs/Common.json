@@ -231,7 +231,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vás zve do místnosti <1>{{roomName}}</1>  pro bezpečnou spolupráci na dokumentech.",
   "Invite": "Pozvat",
   "Invited": "Pozvánka na",
-  "InviteUsers": "Odkaz pozvánky",
   "Kilobyte": "KB",
   "Language": "Jazyk",
   "LastModifiedDate": "Modifikováno",

@@ -231,7 +231,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> sizi güvenli belge iş birliği için <1>{{roomName}}</1> odasına katılmaya davet ediyor.",
   "Invite": "Davet et",
   "Invited": "Davet edildi",
-  "InviteUsers": "Kullanıcıları davet et",
   "Kilobyte": "KB",
   "Language": "Dil",
   "LastModifiedDate": "Son değiştirilme tarihi",

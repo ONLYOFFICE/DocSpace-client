@@ -1636,7 +1636,7 @@ class ContextOptionsStore {
       {
         id: "option_invite-users-to-room",
         key: "invite-users-to-room",
-        label: t("Common:InviteUsers"),
+        label: t("Common:InviteContacts"),
         icon: PersonReactSvgUrl,
         onClick: (e) => this.onClickInviteUsers(e, item.roomType),
         disabled: false,

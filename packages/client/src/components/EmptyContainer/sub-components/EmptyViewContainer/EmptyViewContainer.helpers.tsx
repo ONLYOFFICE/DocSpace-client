@@ -181,12 +181,14 @@ export const getOptions = (
   );
 
   const inviteUser = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersOptionDescription"),
+    t("Common:InviteContacts"),
+    t("EmptyView:InviteUsersOptionDescription", {
+      productName: t("Common:ProductName"),
+    }),
   );
 
   const inviteUserEditingRoom = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
+    t("Common:InviteContacts"),
     t("EmptyView:InviteUsersCollaborationOptionDescription"),
   );
 

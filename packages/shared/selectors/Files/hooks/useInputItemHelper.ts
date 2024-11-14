@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { toastr } from "@docspace/shared/components/toast";
 import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";

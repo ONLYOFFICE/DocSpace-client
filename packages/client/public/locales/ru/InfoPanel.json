@@ -41,6 +41,7 @@
   "ItemsSelected": "Выбрано элементов",
   "LastModifiedBy": "Автор последнего корректива",
   "LifetimeEnds": "Заканчивается срок действия",
+  "MembersEmptyScreenText": "Здесь будут представлены подробности об участниках",
   "NoRecordsFound": "Записи не найдены",
   "Properties": "Cвойства",
   "RoomArchived": "Комната перемещена в Архив",
@@ -75,6 +76,5 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Файл обновлен.",
   "Users": "Пользователи",
-  "UsersEmptyScreenText": "Здесь будут представлены подробности о пользователях",
   "Versions": "Версии"
 }

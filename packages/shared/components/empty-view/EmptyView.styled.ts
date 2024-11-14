@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
-import { globalColors, TColorScheme } from "../../themes";
+import { globalColors } from "../../themes";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;

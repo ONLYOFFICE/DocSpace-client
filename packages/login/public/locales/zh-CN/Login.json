@@ -1,6 +1,5 @@
 {
   "CodeTitle": "代码已通过电子邮件发送给您的",
-  "EnterCredentials": "请输入您的{{productName}}凭据以确认删除",
   "ErrorInvalidText": "10 秒后，您将被重定向到<1>{{productName}}</1>",
   "ForgotPassword": "忘记密码？",
   "LDAPUsernamePlaceholder": "用户名{{ldap_domain}}",

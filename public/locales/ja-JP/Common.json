@@ -249,7 +249,6 @@
   "LinkExpired": "リンクの有効期限が切れています。",
   "LinkIsValid": "リンクは<1>{{date}}</1>の間有効です。",
   "LinkSuccessfullyCopied": "リンクは正常にクリップボードにコピーされました",
-  "ListAccounts": "アカウントのリスト",
   "LiveChat": "ライブチャット",
   "LiveChatOff": "ライブチャットが正常に切断された",
   "LiveChatOn": "ライブチャットが正常に接続された",

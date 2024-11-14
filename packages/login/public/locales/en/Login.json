@@ -1,6 +1,5 @@
 {
   "CodeTitle": "The code was emailed to you",
-  "EnterCredentials": "Please enter your {{productName}} credentials to confirm deletion",
   "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>{{productName}}</1>",
   "ForgotPassword": "Forgot your password?",
   "LDAPUsernamePlaceholder": "Username of {{ldap_domain}}",

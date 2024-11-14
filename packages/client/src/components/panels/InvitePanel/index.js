@@ -54,6 +54,7 @@ import {
 import { fixAccess, getAccessOptions } from "./utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 const InvitePanel = ({
   folders,

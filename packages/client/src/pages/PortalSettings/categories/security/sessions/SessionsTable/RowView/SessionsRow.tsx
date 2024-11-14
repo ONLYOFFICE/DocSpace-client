@@ -24,21 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo } from "react";
-import { inject, observer } from "mobx-react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
 import { Row } from "@docspace/shared/components/row";
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
 
-import { useSessionStatusText } from "SRC_DIR/Hooks/useSessionStatusText";
+import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 import SessionsRowContent from "./SessionsRowContent";
@@ -122,73 +116,19 @@ const StyledRow = styled(Row)`
 `;
 
 const SessionsRow = (props: SessionsTableRowProps) => {
-  const { t, item, isChecked, sectionWidth, storeProps } = props;
-
   const {
-    locale,
-    selectRow,
-    selectCheckbox,
-    singleContextMenuAction,
-    multipleContextMenuAction,
-    getContextOptions,
-  } = storeProps!;
-
-  const { userId, displayName, avatar, isOwner, isAdmin, session } = item;
-  const { status } = session;
-
-  const statusText = useSessionStatusText(session, locale, t);
-
-  const avatarRole = isOwner
-    ? AvatarRole.owner
-    : isAdmin
-      ? AvatarRole.admin
-      : AvatarRole.user;
-  const isOnline = status === "online";
-
-  const onChange = (checked: boolean) => {
-    selectCheckbox(checked, item);
-  };
-
-  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
-    if (rightMouseButtonClick) {
-      multipleContextMenuAction(item);
-    } else {
-      singleContextMenuAction(item);
-    }
-  };
-
-  const onRowClick = (e: React.MouseEvent) => {
-    if (
-      e.target instanceof Element &&
-      (e.target?.tagName === "A" ||
-        e.target?.closest(".checkbox") ||
-        e.target?.closest(".table-container_row-checkbox") ||
-        e.target?.closest(".p-contextmenu") ||
-        e.detail === 0)
-    ) {
-      return;
-    }
-
-    selectRow(item);
-  };
-
-  const contextOptions = useMemo(
-    () => getContextOptions(t),
-    [getContextOptions, t],
-  );
-  const getContextModel = useCallback(
-    () => getContextOptions(t),
-    [getContextOptions, t],
-  );
-
-  const element = (
-    <Avatar
-      size={AvatarSize.min}
-      role={avatarRole}
-      userName={displayName}
-      source={avatar}
-    />
-  );
+    t,
+    item,
+    isChecked,
+    onRowClick,
+    onRowContextClick,
+    contextOptions,
+    getContextModel,
+    onCheckBoxSelect,
+    avatarElement,
+    statusText,
+    sectionWidth,
+  } = props;
 
   return (
     <Wrapper
@@ -196,9 +136,9 @@ const SessionsRow = (props: SessionsTableRowProps) => {
     >
       <div className="user-item">
         <StyledRow
-          key={userId}
-          element={element}
-          onSelect={onChange}
+          key={item.userId}
+          element={avatarElement}
+          onSelect={onCheckBoxSelect}
           checked={isChecked}
           mode="modern"
           className="user-row"
@@ -209,7 +149,6 @@ const SessionsRow = (props: SessionsTableRowProps) => {
         >
           <SessionsRowContent
             t={t}
-            isOnline={isOnline}
             item={item}
             sectionWidth={sectionWidth}
             fromDateAgo={statusText}
@@ -220,31 +159,4 @@ const SessionsRow = (props: SessionsTableRowProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
-  const { culture } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
-
-  const {
-    setItems,
-    setDisplayName,
-    selectRow,
-    selectCheckbox,
-    singleContextMenuAction,
-    multipleContextMenuAction,
-    getContextOptions,
-  } = sessionsStore;
-
-  return {
-    storeProps: {
-      locale,
-      setItems,
-      setDisplayName,
-      selectRow,
-      selectCheckbox,
-      singleContextMenuAction,
-      multipleContextMenuAction,
-      getContextOptions,
-    },
-  };
-})(observer(SessionsRow));
+export default withSessionsContent(SessionsRow);

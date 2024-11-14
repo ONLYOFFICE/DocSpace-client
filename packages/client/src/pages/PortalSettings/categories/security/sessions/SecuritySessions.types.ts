@@ -24,9 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { TTranslation, TViewAs } from "@docspace/shared/types";
 import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
 import SessionsStore from "SRC_DIR/store/SessionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
@@ -138,8 +141,6 @@ export type SessionsTableViewStoreProps = {
   | "totalPortalSessions"
   | "portalSessionsIds"
   | "portalSessionsMap"
-  | "selection"
-  | "bufferSelection"
 >;
 
 export interface SessionsTableHeaderProps {
@@ -157,22 +158,15 @@ export interface SessionsTableRowProps {
   item: TPortalSession;
   isChecked: boolean;
   isActive: boolean;
-  hideColumns?: boolean;
+  onRowClick: () => void;
+  onRowContextClick: (rightMouseButtonClick?: boolean) => boolean;
+  contextOptions: ReturnType<SessionsStore["getContextOptions"]>;
+  getContextModel: () => ReturnType<SessionsStore["getContextOptions"]>;
+  onCheckBoxSelect: (checked: boolean) => void;
+  avatarElement: React.ReactElement;
+  statusText: string;
   sectionWidth?: number;
-
-  storeProps?: SessionsTableRowStoreProps;
 }
-
-export type SessionsTableRowStoreProps = {
-  locale: string;
-} & Pick<
-  SessionsStore,
-  | "selectRow"
-  | "selectCheckbox"
-  | "singleContextMenuAction"
-  | "multipleContextMenuAction"
-  | "getContextOptions"
->;
 
 export type SessionsRowViewProps = {
   t: TTranslation;
@@ -189,13 +183,10 @@ export type SessionsRowViewStoreProps = {
   | "totalPortalSessions"
   | "portalSessionsIds"
   | "portalSessionsMap"
-  | "selection"
-  | "bufferSelection"
 >;
 
 export interface SessionsRowContentProps {
   t: TTranslation;
-  isOnline: boolean;
   fromDateAgo: string | null;
   item: TPortalSession;
   sectionWidth?: number;

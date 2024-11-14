@@ -54,13 +54,12 @@ const StyledRowContent = styled(RowContent)`
 
 const SessionsRowContent = ({
   t,
-  isOnline,
   fromDateAgo,
   item,
   sectionWidth,
 }: SessionsRowContentProps) => {
   const { userId, displayName, session } = item;
-  const { ip, platform, browser, city, country } = session;
+  const { ip, platform, browser, city, country, status } = session;
 
   const theme = useTheme();
 
@@ -72,7 +71,7 @@ const SessionsRowContent = ({
     >
       <Text fontSize="14px" fontWeight="600">
         {displayName}
-        <span className={isOnline ? "online" : "offline"}>
+        <span className={status === "online" ? "online" : "offline"}>
           {t(`Common:${fromDateAgo}`)}
         </span>
       </Text>

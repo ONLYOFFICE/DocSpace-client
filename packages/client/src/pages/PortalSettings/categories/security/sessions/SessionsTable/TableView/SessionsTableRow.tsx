@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo } from "react";
-import { inject, observer } from "mobx-react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { decode } from "he";
 
@@ -33,14 +32,9 @@ import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Base } from "@docspace/shared/themes";
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
 import { TSession } from "@docspace/shared/types/ActiveSessions";
 
-import { useSessionStatusText } from "SRC_DIR/Hooks/useSessionStatusText";
+import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 
@@ -183,64 +177,25 @@ const getLocationText = (session: TSession) => {
 };
 
 const SessionsTableRow = (props: SessionsTableRowProps) => {
-  const { t, item, isChecked, isActive, storeProps } = props;
-
   const {
-    locale,
-    selectRow,
-    selectCheckbox,
-    singleContextMenuAction,
-    multipleContextMenuAction,
-    getContextOptions,
-  } = storeProps!;
+    item,
+    isChecked,
+    isActive,
+    onRowClick,
+    onRowContextClick,
+    contextOptions,
+    getContextModel,
+    onCheckBoxSelect,
+    avatarElement,
+    statusText,
+  } = props;
 
-  const { userId, displayName, avatar, session, isAdmin, isOwner } = item;
-  const { platform, browser, status } = session;
+  const { userId, displayName, session } = item;
+  const { status, browser, platform } = session;
 
-  const statusText = useSessionStatusText(session, locale, t);
-
-  const avatarRole = isOwner
-    ? AvatarRole.owner
-    : isAdmin
-      ? AvatarRole.admin
-      : AvatarRole.user;
-  const isOnline = status === "online";
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    selectCheckbox(e.target.checked, item);
+  const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onCheckBoxSelect(e.target.checked);
   };
-
-  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
-    if (rightMouseButtonClick) {
-      multipleContextMenuAction(item);
-    } else {
-      singleContextMenuAction(item);
-    }
-  };
-
-  const onRowClick = (e: React.MouseEvent) => {
-    if (
-      e.target instanceof Element &&
-      (e.target?.tagName === "A" ||
-        e.target?.closest(".checkbox") ||
-        e.target?.closest(".table-container_row-checkbox") ||
-        e.target?.closest(".p-contextmenu") ||
-        e.detail === 0)
-    ) {
-      return;
-    }
-
-    selectRow(item);
-  };
-
-  const contextOptions = useMemo(
-    () => getContextOptions(t),
-    [getContextOptions, t],
-  );
-  const getContextModel = useCallback(
-    () => getContextOptions(t),
-    [getContextOptions, t],
-  );
 
   return (
     <Wrapper
@@ -264,18 +219,11 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
             checked={isChecked}
             hasAccess
           >
-            <div className="table-container_element">
-              <Avatar
-                size={AvatarSize.min}
-                role={avatarRole}
-                userName={displayName}
-                source={avatar}
-              />
-            </div>
+            <div className="table-container_element">{avatarElement}</div>
             <Checkbox
               className="table-container_row-checkbox"
               isChecked={isChecked}
-              onChange={onChange}
+              onChange={onCheckBoxChange}
             />
           </TableCell>
           <Text className="table-cell_username" fontWeight="600">
@@ -284,7 +232,10 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
         </TableCell>
 
         <TableCell className="table-cell_status">
-          <Text className={isOnline ? "online" : "session-info"} truncate>
+          <Text
+            className={status === "online" ? "online" : "session-info"}
+            truncate
+          >
             {statusText}
           </Text>
         </TableCell>
@@ -308,27 +259,4 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
-  const { culture } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
-
-  const {
-    selectRow,
-    selectCheckbox,
-    singleContextMenuAction,
-    multipleContextMenuAction,
-    getContextOptions,
-  } = sessionsStore;
-
-  return {
-    storeProps: {
-      locale,
-      selectRow,
-      selectCheckbox,
-      singleContextMenuAction,
-      multipleContextMenuAction,
-      getContextOptions,
-    },
-  };
-})(observer(SessionsTableRow));
+export default withSessionsContent(SessionsTableRow);

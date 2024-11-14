@@ -117,8 +117,6 @@ const RowView = (props: SessionsRowViewProps) => {
     totalPortalSessions,
     portalSessionsIds,
     portalSessionsMap,
-    selection,
-    bufferSelection,
   } = storeProps!;
 
   const loadNextPage = async ({ startIndex }: IndexRange) => {
@@ -142,17 +140,12 @@ const RowView = (props: SessionsRowViewProps) => {
           return null;
         }
 
-        const isChecked = selection.some((s) => s.userId === session.userId);
-        const isActive = bufferSelection?.userId === session.userId;
-
         return (
           <SessionsRow
             key={sessionId}
             t={t}
             sectionWidth={sectionWidth}
             item={session}
-            isChecked={isChecked}
-            isActive={isActive}
           />
         );
       })}
@@ -166,8 +159,6 @@ export default inject<TStore>(({ sessionsStore }) => {
     totalPortalSessions,
     portalSessionsIds,
     portalSessionsMap,
-    selection,
-    bufferSelection,
   } = sessionsStore;
 
   return {
@@ -176,8 +167,6 @@ export default inject<TStore>(({ sessionsStore }) => {
       totalPortalSessions,
       portalSessionsIds,
       portalSessionsMap,
-      selection,
-      bufferSelection,
     },
   };
 })(observer(RowView));

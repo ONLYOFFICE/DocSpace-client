@@ -162,8 +162,6 @@ const TableView = (props: SessionsTableViewProps) => {
     userId,
     portalSessionsIds,
     portalSessionsMap,
-    selection,
-    bufferSelection,
     fetchPortalSessions,
     totalPortalSessions,
   } = storeProps!;
@@ -207,18 +205,7 @@ const TableView = (props: SessionsTableViewProps) => {
             return null;
           }
 
-          const isChecked = selection.some((s) => s.userId === session.userId);
-          const isActive = bufferSelection?.userId === session.userId;
-
-          return (
-            <SessionsTableRow
-              t={t}
-              key={sessionId}
-              item={session}
-              isChecked={isChecked}
-              isActive={isActive}
-            />
-          );
+          return <SessionsTableRow t={t} key={sessionId} item={session} />;
         })}
       </TableBody>
     </StyledTableContainer>
@@ -233,8 +220,6 @@ export default inject<TStore>(({ userStore, sessionsStore }) => {
     totalPortalSessions,
     portalSessionsIds,
     portalSessionsMap,
-    selection,
-    bufferSelection,
   } = sessionsStore;
 
   return {
@@ -242,8 +227,6 @@ export default inject<TStore>(({ userStore, sessionsStore }) => {
       userId,
       fetchPortalSessions,
       totalPortalSessions,
-      selection,
-      bufferSelection,
       portalSessionsIds,
       portalSessionsMap,
     },

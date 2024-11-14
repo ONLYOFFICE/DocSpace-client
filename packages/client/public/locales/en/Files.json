@@ -108,6 +108,7 @@
   "MarkedAsFavorite": "Added to favorites",
   "MarkRead": "Mark as read",
   "Media": "Media",
+  "MobileEditPdfNotAvailableInfo": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
   "MoveItem": "<strong>{{title}}</strong> moved",
   "MoveItems": "<strong>{{qty}}</strong> elements have been moved",
   "MoveOrCopy": "Move or copy",

@@ -26,7 +26,8 @@
 
 import React from "react";
 
-import { getRoomCreationAdditionalParams } from "@docspace/shared/utils/rooms";
+import { toastr } from "@docspace/shared/components/toast";
+import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
@@ -61,10 +62,14 @@ const useInputItemHelper = ({
     async (value: string, roomType?: RoomsType) => {
       if (!withCreate || (!selectedItemId && !roomType)) return;
 
-      if (selectedItemId) createFolder(selectedItemId, value);
-      else if (roomType) {
-        const additionalParams = getRoomCreationAdditionalParams(roomType);
-        createRoom({ roomType, title: value, ...additionalParams });
+      try {
+        if (selectedItemId) createFolder(selectedItemId, value);
+        else if (roomType) {
+          const additionalParams = getRoomCreationAdditionalParams(roomType);
+          createRoom({ roomType, title: value, ...additionalParams });
+        }
+      } catch (e) {
+        toastr.error(e as string);
       }
     },
     [withCreate, selectedItemId],

@@ -1,7 +1,5 @@
 {
   "PDFform": "PDF-Formular",
-  "PDFFormEditDialogDescription": "Möchten Sie in den Modus der Formularbearbeitung wechseln? Bitte beachten Sie, dass das Formular dann nicht mehr zum Ausfüllen zur Verfügung steht und Sie nach der Bearbeitung erneut auf die Schaltfläche Ausfüllen beginnen klicken müssen, um es auszufüllen.",
-  "PDFFormEditDialogTitle": "Formularbearbeitung",
   "PDFFormIsReadyToast": "Das PDF-Formular <1>{{filename}}</1> ist bereit zum Ausfüllen.",
   "PDFFormSuccessfullyCreatedDescription": "Ihr PDF-Formular ist bereit zum Ausfüllen. Kopieren Sie den öffentlichen Link, um mit dem Ausfüllen des Formulars zu beginnen, oder laden Sie andere Benutzer zu diesem Raum ein."
 }

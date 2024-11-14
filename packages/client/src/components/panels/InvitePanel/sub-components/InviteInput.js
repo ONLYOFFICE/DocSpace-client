@@ -572,7 +572,7 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
-          ? t("InviteNewAccountManuallyDescription", {
+          ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
           : t("InviteToRoomManuallyInfo", {
@@ -638,7 +638,7 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={
               roomId === -1
-                ? t("InviteAccountSearchPlaceholder")
+                ? t("InviteMembersSearchPlaceholder")
                 : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}

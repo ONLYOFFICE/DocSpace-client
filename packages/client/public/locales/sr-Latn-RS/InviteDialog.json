@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Email adresa nije važeća. Možete urediti email dvostrukim klikom na njega.",
   "GroupMaxAvailableRoleWarning": "Grupe se mogu dodati u prostoriju sa {{roleName}} ulogom kao maksimum. Međutim, možete promeniti ulogu pojedinačnih korisnika u grupi nakon uspešnog dodavanja. ",
   "InvitationLanguage": "Jezik pozivnice",
-  "InviteAccountSearchPlaceholder": "Pozovi ljude preko email-a",
-  "InviteNewAccountManuallyDescription": "Pozovi nove korisnike na {{productName}} lično putem email-a.",
   "InviteViaLink": "Pozovi putem linka",
   "InviteViaLinkDescriptionAccounts": "Stvorite univerzalni link za samopriznanje u {{productName}}-u.",
   "InviteViaLinkDescriptionRoom": "Stvorite univerzalni link za samopriznanje u sobi",

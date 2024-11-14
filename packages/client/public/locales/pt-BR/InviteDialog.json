@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Endereço de email inválido. Você pode editar o e-mail clicando duas vezes nele.",
   "GroupMaxAvailableRoleWarning": "Grupos podem ser adicionados a uma sala com a função {{roleName}} no máximo. No entanto, você pode alterar a função de usuários individuais no grupo após ele ter sido adicionado com êxito.",
   "InvitationLanguage": "Idioma do convite",
-  "InviteAccountSearchPlaceholder": "Convidar pessoas por e-mail",
-  "InviteNewAccountManuallyDescription": "Convide novos usuários para o {{productName}} pessoalmente por e-mail",
   "InviteViaLink": "Convidar pelo link",
   "InviteViaLinkDescriptionAccounts": "Crie um link universal para autoautorização no {{productName}}",
   "InviteViaLinkDescriptionRoom": "Crie um link universal para auto-autorização na sala",

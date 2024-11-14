@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Địa chỉ Email không hợp lệ. Iu chan chỉnh sửa email sẽ tăng gấp đôi trên đó.",
   "GroupMaxAvailableRoleWarning": "Các nhóm có thể được thêm vào một phòng với vai trò {{roleName}} là tối đa. Tuy nhiên, bạn có thể thay đổi vai trò của từng người dùng trong nhóm sau khi được thêm thành công.",
   "InvitationLanguage": "Ngôn ngữ mời",
-  "InviteAccountSearchPlaceholder": "Mời người dùng qua email",
-  "InviteNewAccountManuallyDescription": "Mời người dùng mới vào {{productName}} cá nhân qua email",
   "InviteViaLink": "Mời qua liên kết",
   "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong {{productName}}",
   "InviteViaLinkDescriptionRoom": "Tạo một liên kết universal link để tự ủy quyền trong phòng",

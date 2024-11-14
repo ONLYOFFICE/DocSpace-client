@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Die E-Mail-Adresse ist nicht gültig. Sie können die E-Mail bearbeiten, indem Sie darauf doppelklicken.",
   "GroupMaxAvailableRoleWarning": "Gruppen können maximal mit der Rolle {{roleName}} zum Raum hinzugefügt werden. Sie können jedoch die Rolle der einzelnen Benutzer in der Gruppe ändern, nachdem sie erfolgreich hinzugefügt wurde.",
   "InvitationLanguage": "Sprache der Einladung",
-  "InviteAccountSearchPlaceholder": "Personen per E-Mail einladen",
-  "InviteNewAccountManuallyDescription": "Laden Sie neue Benutzer persönlich per E-Mail zu {{productName}} ein",
   "InviteViaLink": "Über Link einladen",
   "InviteViaLinkDescriptionAccounts": "Erstellen Sie einen allgemeinen Link für die Selbstautorisierung in {{productName}}",
   "InviteViaLinkDescriptionRoom": "Erstellen Sie einen allgemeinen Link für die Selbstautorisierung im Raum",

@@ -40,6 +40,10 @@ import {
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
+import {
+  getCreateShareLinkKey,
+  getExpirationDate,
+} from "@docspace/shared/components/share/Share.helpers";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
@@ -47,6 +51,7 @@ import {
   editExternalLink,
   addExternalLink,
   checkIsPDFForm,
+  getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -934,10 +939,28 @@ class InfoPanelStore {
       }
     }
 
+    /**
+     *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
+     */
+    const value = JSON.parse(
+      localStorage.getItem(
+        getCreateShareLinkKey(this.userStore.user?.id ?? ""),
+      ) ?? "null",
+    );
+
     const { getFileInfo } = this.filesStore;
 
-    const res = await getPrimaryLink(fileId);
+    const res = await (value
+      ? getPrimaryLinkIfNotExistCreate(
+          fileId,
+          value.access,
+          value.internal,
+          getExpirationDate(value.diffExpirationDate),
+        )
+      : getPrimaryLink(fileId));
+
     await getFileInfo(fileId);
+
     return res;
   };
 

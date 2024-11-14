@@ -1653,32 +1653,9 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled: !isShareable,
         onClick: async () => {
-          const { getPrimaryFileLink, addFileLink, setShareChanged } =
-            this.infoPanelStore;
+          const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
 
-          /**
-           *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
-           */
-          const value = JSON.parse(
-            localStorage.getItem(
-              getCreateShareLinkKey(this.userStore.user?.id ?? ""),
-            ) ?? "null",
-          );
-
-          console.log({
-            value,
-            key: getCreateShareLinkKey(this.userStore.id ?? ""),
-          });
-
-          const primaryLink = value
-            ? await addFileLink(
-                item.id,
-                value.access,
-                true,
-                value.internal,
-                getExpirationDate(value.diffExpirationDate),
-              )
-            : await getPrimaryFileLink(item.id);
+          const primaryLink = await getPrimaryFileLink(item.id);
 
           if (primaryLink) {
             copyDocumentShareLink(

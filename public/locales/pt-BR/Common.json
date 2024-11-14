@@ -477,7 +477,7 @@
   "ShareDocument": "Compartilhe este documento",
   "ShareDocumentDescription": "Forneça acesso ao documento e defina os níveis de permissão.",
   "SharedWithMe": "Compartilhou comigo",
-  "ShareLinkTitle": "1>Qualquer pessoa</1> com este link pode <1>{{access}}</1>.",
+  "ShareLinkTitle": "<1>Qualquer pessoa</1> com este link pode <1>{{access}}</1>.",
   "ShareLinkTitleInternal": "<1>{{{productName}} usuários</1> só podem <1>{{{access}}</1>.",
   "ShareToFillOut": "Compartilhe para preencher",
   "ShareVia": "Compartilhar via",

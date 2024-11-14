@@ -4,7 +4,7 @@
   "AllowedOrigins": "Sources autorisées",
   "AllowedOriginsHelpButton": "Les URL ajoutées ici sont utilisées pour améliorer la sécurité de la redirection OAuth.",
   "AllowPKCE": "Autoriser le client public (PKCE)",
-  "AllowPKCEHelpButton": "Le PKCE n'est pas une forme d'authentification du client, et le PKCE ne remplace pas le secret du client ou un autre type d'authentification du client. Le PKCE est recommandé même si un client utilise un secret client ou une autre forme d'authentification du client comme private_key_jwt. <strong>Remarque</strong> : Étant donné que PKCE ne remplace pas l'authentification du client, il ne permet pas de traiter un client public comme un client confidentiel.",
+  "AllowPKCEHelpButton": "Le PKCE n'est pas une forme d'authentification du client, et le PKCE ne remplace pas le secret du client ou un autre type d'authentification du client. Le PKCE est recommandé même si un client utilise un secret client ou une autre forme d'authentification du client comme private_key_jwt.<br/> <strong>Remarque</strong> : Étant donné que PKCE ne remplace pas l'authentification du client, il ne permet pas de traiter un client public comme un client confidentiel.",
   "AppIcon": "Icône de l'application",
   "ApplicationDeletedSuccessfully": "Application supprimée avec succès",
   "ApplicationDisabledSuccessfully": "Application désactivée avec succès",

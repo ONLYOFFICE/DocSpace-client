@@ -116,9 +116,6 @@ const SimpleFilesRowContent = styled(RowContent)`
       .rowMainContainer {
         margin-inline-end: 0;
       }
-
-      flex-direction: ${(props) =>
-        props.theme.interfaceDirection === "rtl" ? "row-reverse" : "row"};
     }
 
     .badges {
@@ -149,9 +146,6 @@ const SimpleFilesRowContent = styled(RowContent)`
   @media ${mobile} {
     .row-main-container-wrapper {
       justify-content: flex-start;
-
-      flex-direction: ${(props) =>
-        props.theme.interfaceDirection === "rtl" ? "row-reverse" : "row"};
     }
 
     .additional-badges {
@@ -275,7 +269,6 @@ const FilesRowContent = ({
       type="page"
       target="_blank"
       {...linkStyles}
-      dir="auto"
     >
       <SimpleFilesRowContent
         sectionWidth={sectionWidth}
@@ -283,7 +276,12 @@ const FilesRowContent = ({
         isFile={fileExst || contentLength}
         sideColor={theme.filesSection.rowView.sideColor}
       >
-        <Text fontSize="15px" fontWeight={600} className="row_update-text">
+        <Text
+          fontSize="15px"
+          fontWeight={600}
+          className="row_update-text"
+          dir="auto"
+        >
           {titleWithoutExt}
           {displayFileExtension && (
             <span className="item-file-exst">{fileExst}</span>

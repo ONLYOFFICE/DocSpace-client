@@ -337,6 +337,8 @@
   "NotFoundUsersDescription": "Нема корисника који се поклапају са вашом претрагом. Молимо вас подесите ваше параметре претраге или обришите поље претраге да бисте видели пуну листу корисника.",
   "NotSupportedFormat": "Извињавамо се, овај формат датотеке није подржан",
   "OAuthAccountsName": "Контакти",
+  "OAuthAccountsReadDescription": "Преглед свих контаката",
+  "OAuthAccountsWriteDescription": "Прегледај и управљај свим контактима",
   "OAuthFilesName": "Фајлови и фасцикле",
   "OAuthFilesReadDescription": "Прикажи све фајлове и фасцикле",
   "OAuthFilesWriteDescription": "Прикажи и управљај свим фајловима и фасциклама",

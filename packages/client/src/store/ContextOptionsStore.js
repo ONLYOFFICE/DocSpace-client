@@ -1300,11 +1300,13 @@ class ContextOptionsStore {
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
+    const { isVisible, infoPanelCurrentSelection } = this.infoPanelStore;
+
     return {
       canShowLink: canShowManageLink(
         item,
-        this.filesStore.bufferSelection,
-        this.infoPanelStore.isVisible,
+        infoPanelCurrentSelection,
+        isVisible,
         infoView,
         isRoom,
       ),

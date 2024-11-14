@@ -26,8 +26,6 @@
 import moment from "moment";
 import { Trans } from "react-i18next";
 
-import equal from "fast-deep-equal/react";
-
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
@@ -298,7 +296,10 @@ export const canShowManageLink = (
 ): boolean => {
   if (isFolder(item) && !item.security.EditAccess) return false;
 
-  const isEqual = equal(item, buffer);
+  const isEqual =
+    item.id === buffer.id &&
+    item.title === buffer.title &&
+    isFolder(item) === isFolder(buffer);
 
   const view =
     (isRoom && infoPanelView !== "info_members") ||

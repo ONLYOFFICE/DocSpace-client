@@ -24,29 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { LoaderTypes } from "./Loader.enums";
-import { TColorScheme } from "../../themes";
+import { PropsWithChildren, forwardRef, useContext } from "react";
+import { ThemeContext } from "styled-components";
 
-export interface LoaderProps {
-  /** Font color */
-  color?: string;
-  /** Type loader */
-  type?: LoaderTypes;
-  /** Font size  */
-  size?: string;
-  /** Text label */
-  label?: string;
-  /** Class name */
-  className?: string;
-  /** Accepts id  */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  primary?: boolean;
-  isDisabled?: boolean;
-}
+import { StyledTrackTheme } from "./Loader.styled";
+import { LoaderThemeProps } from "./Loader.types";
 
-export interface LoaderThemeProps extends LoaderProps {
-  ref: SVGSVGElement;
-  $currentColorScheme?: TColorScheme;
-}
+const TrackTheme = forwardRef<
+  SVGSVGElement,
+  PropsWithChildren<LoaderThemeProps>
+>((props, ref) => {
+  const defaultTheme = useContext(ThemeContext);
+
+  const currentColorScheme = defaultTheme?.currentColorScheme;
+
+  return (
+    <StyledTrackTheme
+      {...props}
+      ref={ref}
+      $currentColorScheme={currentColorScheme}
+    />
+  );
+});
+
+TrackTheme.displayName = "StyledTrackTheme";
+
+export default TrackTheme;

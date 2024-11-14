@@ -197,6 +197,7 @@ export default function withQuickButtons(WrappedComponent) {
           currentDeviceType={currentDeviceType}
           showLifetimeIcon={showLifetimeIcon}
           expiredDate={expiredDate}
+          roomLifetime={roomLifetime}
           currentColorScheme={currentColorScheme}
         />
       );

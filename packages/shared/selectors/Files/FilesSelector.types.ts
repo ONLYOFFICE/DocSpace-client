@@ -90,6 +90,11 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
+  setSelectedItemSecurity: React.Dispatch<
+    React.SetStateAction<
+      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+    >
+  >;
   subscribe: (id: number) => void;
 };
 

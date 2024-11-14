@@ -1302,11 +1302,13 @@ class ContextOptionsStore {
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
+    const { isVisible, infoPanelCurrentSelection } = this.infoPanelStore;
+
     return {
       canShowLink: canShowManageLink(
         item,
-        this.filesStore.bufferSelection,
-        this.infoPanelStore.isVisible,
+        infoPanelCurrentSelection,
+        isVisible,
         infoView,
         isRoom,
       ),
@@ -1638,7 +1640,7 @@ class ContextOptionsStore {
       {
         id: "option_invite-users-to-room",
         key: "invite-users-to-room",
-        label: t("Common:InviteUsers"),
+        label: t("Common:InviteContacts"),
         icon: PersonReactSvgUrl,
         onClick: (e) => this.onClickInviteUsers(e, item.roomType),
         disabled: false,

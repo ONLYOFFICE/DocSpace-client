@@ -40,30 +40,3 @@ export const filterPaidRoleOptions = (
 
   return options.filter((o) => !checkIfAccessPaid(+o.access) && o.key !== "s1");
 };
-
-export const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
-  const startRoomParams = {
-    type: startRoomType,
-    title: title ?? "",
-    tags: [],
-    isPrivate: false,
-    storageLocation: {
-      isThirdparty: false,
-      provider: null,
-      thirdpartyAccount: null,
-      storageFolderId: "",
-      isSaveThirdpartyAccount: false,
-    },
-    icon: {
-      uploadedFile: null,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-    withCover: false,
-    previewIcon: null,
-  };
-
-  return startRoomParams;
-};

@@ -26,7 +26,6 @@
 import moment from "moment";
 import { Trans } from "react-i18next";
 
-import equal from "fast-deep-equal/react";
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
 
@@ -300,7 +299,10 @@ export const canShowManageLink = (
 ): boolean => {
   if (isFolder(item) && !item.security.EditAccess) return false;
 
-  const isEqual = equal(item, buffer);
+  const isEqual =
+    item.id === buffer.id &&
+    item.title === buffer.title &&
+    isFolder(item) === isFolder(buffer);
 
   const view =
     (isRoom && infoPanelView !== "info_members") ||

@@ -73,7 +73,6 @@
   "FileRemoved": "Fișierul mutat în Coșul de gunoi",
   "FileRenamed": "Documentul '{{oldTitle}}' este redenumit în '{{newTitle}}'",
   "FilesWillAppearHere": "Fișierele și folderele adăugate la această sală  vor fi afişate aici.",
-  "FileWillBeDeleted": "Fișierul va fi şters la data de {{date}}",
   "Filter": "Filtrare",
   "FinalizeVersion": "Finalizarea versiunii",
   "Folder": "Dosar",

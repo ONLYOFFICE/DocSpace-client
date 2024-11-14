@@ -24,44 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { DevicesType } from "../../MediaViewer.types";
+import { RoomsType } from "../enums";
 
-interface ViewerPlayerProps {
-  src?: string;
-  isAudio: boolean;
-  isVideo: boolean;
-  isError: boolean;
-  audioIcon: string;
-  errorTitle: string;
-  canDownload: boolean;
-  isLastImage: boolean;
-  isFistImage: boolean;
-  isFullScreen: boolean;
-  panelVisible: boolean;
-  isPreviewFile?: boolean;
-  autoPlay: boolean;
-  isOpenContextMenu: boolean;
-  isThirdParty?: boolean;
-  mobileDetails: JSX.Element;
-  thumbnailSrc?: string;
-  devices: DevicesType;
-  onMask?: VoidFunction;
-  onPrev?: VoidFunction;
-  onNext?: VoidFunction;
-  onDownloadClick?: VoidFunction;
-  contextModel: () => ContextMenuModel[];
-  removeToolbarVisibleTimer: VoidFunction;
-  removePanelVisibleTimeout: VoidFunction;
-  restartToolbarVisibleTimer: VoidFunction;
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
-  setPanelVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
+  const startRoomParams = {
+    type: startRoomType,
+    title: title ?? "",
+    tags: [],
+    isPrivate: false,
+    storageLocation: {
+      isThirdparty: false,
+      provider: null,
+      thirdpartyAccount: null,
+      storageFolderId: "",
+      isSaveThirdpartyAccount: false,
+    },
+    icon: {
+      uploadedFile: null,
+      tmpFile: "",
+      x: 0.5,
+      y: 0.5,
+      zoom: 1,
+    },
+    withCover: false,
+    previewIcon: null,
+  };
 
-  generateContextMenu: (
-    isOpen: boolean,
-    right?: string,
-    bottom?: string,
-  ) => JSX.Element | null;
-}
+  return startRoomParams;
+};
 
-export default ViewerPlayerProps;
+const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
+  const additionalParams = {
+    indexing: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    denyDownload: roomType === RoomsType.VirtualDataRoom ? true : undefined,
+    lifetime: undefined, // Skip lifetime for now
+    watermark:
+      roomType === RoomsType.VirtualDataRoom
+        ? { rotate: -45, additions: 1 }
+        : undefined,
+  };
+
+  return additionalParams;
+};
+
+export { getStartRoomParams, getRoomCreationAdditionalParams };

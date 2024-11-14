@@ -1,5 +1,6 @@
 import React from "react";
 import { P, match } from "ts-pattern";
+import { isMobile } from "react-device-detect";
 
 import {
   EmployeeType,
@@ -16,8 +17,10 @@ import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spr
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
+import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
@@ -176,20 +179,12 @@ export const getOptions = (
     t("EmptyView:UploadDevicePDFFormOptionDescription"),
     "pdf",
   );
-  const uploadFromDeviceAnyFile = createUploadFromDeviceOption(
-    t("EmptyView:UploadDeviceOptionTitle"),
-    t("EmptyView:UploadDeviceOptionDescription"),
-    "file",
-  );
 
   const inviteUser = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersOptionDescription"),
-  );
-
-  const inviteUserEditingRoom = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersCollaborationOptionDescription"),
+    t("Common:InviteContacts"),
+    t("EmptyView:InviteUsersOptionDescription", {
+      productName: t("Common:ProductName"),
+    }),
   );
 
   const shareFillingRoom = {
@@ -266,6 +261,34 @@ export const getOptions = (
     onClick: () => actions.inviteRootUser(EmployeeType.User),
     disabled: false,
   };
+
+  const uploadFromDeviceAnyFile = isMobile
+    ? createUploadFromDeviceOption(
+        t("EmptyView:UploadDeviceOptionTitle"),
+        t("EmptyView:UploadDeviceOptionDescription"),
+        "file",
+      )
+    : {
+        title: t("EmptyView:UploadDeviceOptionTitle"),
+        description: t("EmptyView:UploadDeviceOptionDescription"),
+        icon: <UploadDevicePDFFormIcon />,
+        key: "uploads",
+        disabled: !security?.Create,
+        model: [
+          {
+            key: "upload-files",
+            label: t("Translations:Files"),
+            icon: FormBlankIcon,
+            onClick: () => actions.onUploadAction("file"),
+          },
+          {
+            key: "upload-folder",
+            label: t("Files:Folder"),
+            icon: FolderReactSvgUrl,
+            onClick: () => actions.onUploadAction("folder"),
+          },
+        ],
+      };
 
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
@@ -407,7 +430,7 @@ export const getOptions = (
 
       return [
         createFile,
-        inviteUserEditingRoom,
+        inviteUser,
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];

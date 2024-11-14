@@ -5,6 +5,8 @@
   "InvitationLanguage": "Језик позивнице",
   "InviteAccountSearchPlaceholder": "Позови људе преко емаил-а",
   "InviteNewAccountManuallyDescription": "Позови нове кориснике на {{productName}} лично путем емаил-а.",
+  "InviteToRoomManuallyDescription": "Додај постојеће {{productName}} контакте или лично позови нове кориснике путем емаила. Нови корисници ће бити додати на вашу листу гостију.",
+  "InviteToRoomSearchPlaceholder": "Претражи и позови по имену или емаил",
   "InviteViaLink": "Позови путем линка",
   "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у {{productName}}-у.",
   "InviteViaLinkDescriptionRoom": "Створите универзални линк за самопризнање у соби",

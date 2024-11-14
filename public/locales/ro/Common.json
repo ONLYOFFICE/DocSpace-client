@@ -335,6 +335,8 @@
   "NotFoundUsersDescription": "Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de utilizatori.",
   "NotSupportedFormat": "Ne pare rău, acest format de fișier nu este acceptat",
   "OAuthAccountsName": "Contacte",
+  "OAuthAccountsReadDescription": "Afișează toate persoane de contact",
+  "OAuthAccountsWriteDescription": "Afișează și gestionează toate persoane de contact",
   "OAuthFilesName": "Fișiere și foldere",
   "OAuthFilesReadDescription": "Vizualizarea fișierelor și folderelor",
   "OAuthFilesWriteDescription": "Vizualizarea și gestionarea fișierelor și folderelor",

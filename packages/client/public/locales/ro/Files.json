@@ -37,6 +37,7 @@
   "DateLastOpened": "Deschis ultima dată",
   "DaysRemaining": "Zile rămase: {{daysRemaining}}",
   "DeleteLink": "Ștergere link",
+  "DeleteSharedCustomPublic": "Link-ul va fi şters definitiv. Această acţiune nu poate fi anulată.",
   "DeleteSharedLink": "Link-ul anterior va deveni indisponibil. Un nou link partajat va fi creat.",
   "DisableDownload": "Restricționarea permisiunii la copierea, descărcarea și imprimarea conținutul fișierului",
   "DisableNotifications": "Dezactivare notificări",

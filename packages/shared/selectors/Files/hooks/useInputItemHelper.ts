@@ -26,14 +26,15 @@
 
 import React from "react";
 
+import { toastr } from "@docspace/shared/components/toast";
 import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
+import { toastr } from "../../../components/toast";
 
 import { TUseInputItemHelper } from "../FilesSelector.types";
-import { toastr } from "components/toast";
 
 const useInputItemHelper = ({
   withCreate,

@@ -31,9 +31,9 @@ import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
+import { toastr } from "../../../components/toast";
 
 import { TUseInputItemHelper } from "../FilesSelector.types";
-import { toastr } from "components/toast";
 
 const useInputItemHelper = ({
   withCreate,

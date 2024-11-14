@@ -61,7 +61,7 @@
   "PrivacyPolicyURLHelpButton": "Geben Sie einen URL-Link zu Ihrer Datenschutzrichtlinie an, die den geltenden Gesetzen und Vorschriften entsprechen muss und klar darlegt, wie Sie personenbezogene Daten erheben, nutzen, teilen, speichern und anderweitig verarbeiten.",
   "ProfileDescription": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Auth-Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen.",
   "Read": "Lesen",
-  "RedirectsURLS": "Weiterleitungs-URLs\n",
+  "RedirectsURLS": "Weiterleitungs-URLs",
   "RedirectsURLSHelpButton": "Nachdem ein Benutzer eine Anwendung erfolgreich autorisiert hat, leitet der Autorisierungsserver den Benutzer mit sensiblen Informationen zurück zur Anwendung.",
   "RegisterNewApp": "Neue Anwendung registrieren",
   "Reset": "Zurücksetzen",

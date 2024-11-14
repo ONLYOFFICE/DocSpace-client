@@ -1,6 +1,5 @@
 {
   "CodeTitle": "تم إرسال الرمز إليك عبر البريد الإلكتروني.",
-  "EnterCredentials": "يُرجى إدخال بيانات اعتماد {{productName}} لتأكيد الحذف",
   "ErrorInvalidText": "في غضون 10 ثوانٍ، ستتم إعادة توجيهك إلى <1>{{productName}}</1>",
   "ForgotPassword": "نسيت كلمة السر؟",
   "LDAPUsernamePlaceholder": "اسم المستخدم لـ {{ldap_domain}}",

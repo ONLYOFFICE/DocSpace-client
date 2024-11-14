@@ -121,9 +121,11 @@ const ViewerInfoWatermark = ({
 
   const elements = useRef(null);
   const initialInfo = useRef(null);
+  let watermark = roomParams.watermark;
+  let initialInfoRef = initialInfo.current;
 
-  if (initialInfo.current === null) {
-    initialInfo.current = {
+  if (initialInfoRef === null) {
+    initialInfoRef = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
@@ -131,29 +133,25 @@ const ViewerInfoWatermark = ({
       text: getInitialText(initialSettings?.text, isEdit),
     };
 
-    elements.current = getInitialState(initialInfo.current.tabs);
+    elements.current = getInitialState(initialInfoRef.tabs);
+
+    if (!isImage && initialSettings) watermark = initialSettings;
+    else
+      watermark = {
+        rotate: initialInfoRef.rotate.key,
+        additions:
+          roomParams.watermark?.additions || WatermarkAdditions.UserName,
+        //image: "",
+        imageWidth: 0,
+        imageHeight: 0,
+        imageScale: 0,
+        ...(initialInfoRef.text && { text: initialInfoRef.text }),
+      };
   }
-
-  const initialInfoRef = initialInfo.current;
-
   const [selectedPosition, setSelectedPosition] = useState(
     initialInfoRef.rotate,
   );
   const [textValue, setTextValue] = useState(initialInfoRef.text);
-
-  const watermark =
-    !isImage && initialSettings
-      ? initialSettings
-      : {
-          rotate: selectedPosition.key,
-          additions:
-            roomParams.watermark?.additions || WatermarkAdditions.UserName,
-          //image: "",
-          imageWidth: 0,
-          imageHeight: 0,
-          imageScale: 0,
-          ...(textValue && { text: textValue }),
-        };
 
   useEffect(() => {
     setRoomParams({

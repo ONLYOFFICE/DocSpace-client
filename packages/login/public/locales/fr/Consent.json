@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Autoriser",
+  "ConsentDescription": "Les données partagées avec <strong>{{displayName}}</strong> seront traitées conformément à <strong>{{nameApp}}</strong> <6>la Politique de confidentialité</6> et <6>aux Conditions de service</6>. Vous pouvez révoquer ce consentement à tout moment dans les paramètres de votre compte {{productName}}.",
+  "ConsentSubHeader": "L'application <1>{{nameApp}}</1> souhaite pouvoir accéder aux données suivantes dans <strong>votre compte {{productName}}</strong> :",
+  "DenyButton": "Refuser",
+  "NotYou": "Pas vous ?",
+  "SignedInAs": "S'est connecté en tant que",
+  "ToContinue": "Pour continuer"
+}

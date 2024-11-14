@@ -2207,6 +2207,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.7"
     "@babel/preset-typescript": "npm:^7.25.7"
     "@codemirror/lang-javascript": "npm:^6.2.2"
+    "@onlyoffice/docspace-sdk-js": "npm:^1.1.0"
     "@svgr/webpack": "npm:^5.5.0"
     "@types/crypto-js": "npm:^4.2.2"
     "@types/element-resize-detector": "npm:^1.1.6"
@@ -2393,7 +2394,6 @@ __metadata:
     "@babel/runtime": "npm:^7.25.7"
     "@emotion/babel-preset-css-prop": "npm:^10.2.1"
     "@emotion/styled": "npm:^10.3.0"
-    "@onlyoffice/docspace-sdk-js": "file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz"
     "@playwright/test": "npm:^1.48.0"
     "@react-spring/web": "npm:^9.7.5"
     "@storybook/addon-actions": "npm:7.6.20"
@@ -4261,10 +4261,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz::locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared":
-  version: 0.0.1
-  resolution: "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz#./onlyoffice-docspace-sdk-js-v0.0.1.tgz::hash=6b01b3&locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared"
-  checksum: 10/8c50a0b5db75b89120412d76be9fd88c4e6d5f12f98be88c568a61bd756b5a620ca7039c2df69631b7fd77c330491f9d0229a94c6ba8997cc8eef9de7ada8298
+"@onlyoffice/docspace-sdk-js@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@onlyoffice/docspace-sdk-js@npm:1.1.0"
+  checksum: 10/68865013cc7a566d7a6733ad8638c451c75959397df2befb59f061fef4f80445d3c00d50538d9e95957137adbec1d6a9419ebc39d2442b915742c9ca07973347
   languageName: node
   linkType: hard
 

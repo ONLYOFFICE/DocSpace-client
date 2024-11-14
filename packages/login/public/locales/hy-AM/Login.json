@@ -1,6 +1,5 @@
 {
   "CodeTitle": "Կոդն էլ․փոստով ուղարկվել է ձեզ",
-  "EnterCredentials": "Խնդրում ենք մուտքագրել ձեր {{productName}} հավատարմագրերը՝ ջնջումը հաստատելու համար",
   "ErrorInvalidText": "10 վայրկյանից Դուք կվերուղղորդվեք դեպի <1>{{productName}}</1>",
   "ForgotPassword": "Մոռացե՞լ եք Ձեր գաղտնաբառը․",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}-ի օգտատիրոջ անուն",

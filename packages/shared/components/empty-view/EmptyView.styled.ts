@@ -102,7 +102,9 @@ export const EmptyViewBody = styled.div`
     max-width: fit-content;
     text-decoration: none;
 
-    color: ${(props) => props.theme.emptyView.link.color};
+    color: ${({ theme: { emptyView, currentColorScheme } }) =>
+      currentColorScheme?.main.accent ?? emptyView.link.color};
+
     background: ${(props) => props.theme.emptyView.link.background};
 
     border-radius: 6px;
@@ -124,29 +126,21 @@ export const EmptyViewBody = styled.div`
     }
 
     @media (hover: hover) {
-      :hover {
+      :hover:not(:active) {
         background: ${(props) => props.theme.emptyView.link.hoverBackground};
-        color: ${(props) => `${props.theme.emptyView.link.hoverColor}`};
+        & > * {
+          opacity: 0.86;
+        }
       }
     }
 
     :active {
       background: ${(props) => props.theme.emptyView.link.PressedBackground};
-      color: ${(props) => props.theme.emptyView.link.PressedColor};
+      & > * {
+        filter: brightness(90%);
+      }
     }
-
-    cusros: pointer;
   }
-`;
-
-export const StyledLink = styled(Link)<{
-  $currentColorScheme?: TColorScheme;
-}>`
-  ${(props) =>
-    props.$currentColorScheme &&
-    css`
-      color: ${props.$currentColorScheme.main?.accent};
-    `};
 `;
 
 export const EmptyViewItemWrapper = styled.div`

@@ -135,6 +135,14 @@ class UsersStore {
       this.filter = Filter.getDefault();
     }
     this.contactsTab = contactsTab;
+
+    const guestsTabVisitedStorage = window.localStorage.getItem(
+      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+    );
+
+    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
+      this.guestsTabVisited = true;
+    }
   };
 
   setFilter = (filter: Filter) => {

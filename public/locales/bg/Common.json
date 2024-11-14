@@ -232,7 +232,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> ви кани да се присъедините към стаята <1>{{roomName}}</1> за защитена съвместна работа по документи.",
   "Invite": "Каня",
   "Invited": "Поканени",
-  "InviteUsers": "Поканете потребители",
   "Kilobyte": "KB",
   "Language": "Език",
   "LastModifiedDate": "Дата на последната промяна",

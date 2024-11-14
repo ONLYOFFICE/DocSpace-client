@@ -113,6 +113,7 @@ const ImageWatermark = ({
 
   if (initialInfo.current === null) {
     if (isImage && initialSettings) watermark = initialSettings;
+    else watermark = { ...watermark, additions: 0 };
 
     initialInfo.current = {
       rotate: getInitialRotate(initialSettings?.rotate, isEdit),

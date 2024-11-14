@@ -53,6 +53,8 @@ class CreateEditRoomStore {
   isImageType = false;
   dialogsStore = null;
 
+  selectedRoomType = null;
+
   constructor(
     filesStore,
     filesActionsStore,
@@ -81,6 +83,9 @@ class CreateEditRoomStore {
     this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
+  setSelectedRoomType = (type) => {
+    this.selectedRoomType = type;
+  };
   setRoomParams = (roomParams) => {
     this.roomParams = roomParams;
   };

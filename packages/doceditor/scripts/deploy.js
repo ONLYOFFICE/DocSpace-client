@@ -38,7 +38,7 @@ const publishPath = path.join(
   "editor",
 );
 
-const nextBuild = path.join(process.cwd(), "..", ".next");
+const nextBuild = path.join(process.cwd(), ".next");
 const configFolder = path.join(__dirname, "..", "config");
 const loggerFile = path.join(__dirname, "..", "src", "logger.mjs");
 const serverFile = path.join(__dirname, "..", "server.prod.js");
@@ -50,20 +50,10 @@ const rootNodeModulesPath = path.join(
   "..",
   "node_modules",
 );
-
-fs.cpSync(
-  path.join(rootNodeModulesPath, "pino-pretty"),
-  `${nextBuild}/standalone/node_modules/pino-pretty`,
-  { recursive: true },
-);
+// copy other npm packages
 fs.cpSync(
   path.join(rootNodeModulesPath, "pino-roll"),
   `${nextBuild}/standalone/node_modules/pino-roll`,
-  { recursive: true },
-);
-fs.cpSync(
-  path.join(rootNodeModulesPath, "pino-cloudwatch"),
-  `${nextBuild}/standalone/node_modules/pino-cloudwatch`,
   { recursive: true },
 );
 fs.cpSync(
@@ -71,22 +61,25 @@ fs.cpSync(
   `${nextBuild}/standalone/node_modules/date-fns`,
   { recursive: true },
 );
-fs.cpSync(
-  path.join(rootNodeModulesPath, "chunky-stream"),
-  `${nextBuild}/standalone/node_modules/chunky-stream`,
-  { recursive: true },
-);
-fs.cpSync(
-  path.join(rootNodeModulesPath, "readable-stream"),
-  `${nextBuild}/standalone/node_modules/readable-stream`,
-  { recursive: true },
-);
+
 fs.cpSync(configFolder, `${publishPath}/config`, { recursive: true });
-fs.cpSync(nextBuild, `${publishPath}/.next`, { recursive: true });
+
+fs.cpSync(
+  `${nextBuild}/standalone/packages/doceditor/.next`,
+  `${publishPath}/.next`,
+  {
+    recursive: true,
+  },
+);
+fs.cpSync(`${nextBuild}/static`, `${publishPath}/.next/static`, {
+  recursive: true,
+});
+
 fs.cpSync(
   path.join(nextBuild, "standalone", "node_modules"),
   `${publishPath}/node_modules`,
   { recursive: true },
 );
+
 fs.copyFileSync(serverFile, `${publishPath}/server.js`);
 fs.copyFileSync(loggerFile, `${publishPath}/logger.mjs`);

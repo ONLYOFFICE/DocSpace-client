@@ -29,12 +29,11 @@ import path from "path";
 import fs, { mkdir } from "fs";
 import os from "os";
 import { randomUUID } from "crypto";
-import "pino-roll";
-import "pino-cloudwatch";
-import "pino-pretty";
+
+import config from "./config/config.json";
 
 const INTERVAL = 5000;
-const MAX_FILE_COUNT = 7;
+const MAX_FILE_COUNT = 30;
 
 const formatters = {
   level(label) {
@@ -48,26 +47,18 @@ const getLogger = () => {
   if (process.env["NODE_ENV"] !== "development") {
     const dirname = process.cwd();
 
-    const configPath = path.join(
-      dirname,
-      "..",
-      "..",
-      "..",
-      "buildtools",
-      "config",
-      "appsettings.json",
-    );
+    const configPath = path.join(dirname, config.app.appsettings);
 
-    const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    const configJSON = JSON.parse(fs.readFileSync(configPath, "utf-8"));
 
-    if (config?.aws?.cloudWatch.accessKeyId && secretAccessKey) {
+    if (configJSON?.aws?.cloudWatch.accessKeyId) {
       const {
         accessKeyId,
         secretAccessKey,
         region,
         logGroupName,
         logStreamName,
-      } = config?.aws?.cloudWatch;
+      } = configJSON?.aws?.cloudWatch;
 
       const streamName = logStreamName
         .replace("${hostname}", os.hostname())

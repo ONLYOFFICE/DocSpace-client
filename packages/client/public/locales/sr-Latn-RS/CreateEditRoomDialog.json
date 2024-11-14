@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Napravi Sobu privatnom",
   "PeopleSelectorInfo": "Samo admin sobe ili {{productName}} admin mogu da postanu vlasnici sobe",
   "Position": "Pozicija",
+  "PublicRoomBarDescription": "Ova soba je dostupna svakome ko ima link. Pristup spoljnim korisnicima se omogućava u zavisnosti od odabranog tipa pristupnih prava.",
   "PublicRoomSystemFoldersDescription": "Sistemski folderi čuvaju kopije obrazaca u različitim fazama završetka. Obrasci koji se popunjavaju se čuvaju u folderu U toku, a popunjeni obrasci se čuvaju u Završen folderu.",
   "PublicRoomSystemFoldersTitle": "Sistemski folderi",
   "RestrictCopyAndDownload": "Ograniči kopiranje i preuzimanje",

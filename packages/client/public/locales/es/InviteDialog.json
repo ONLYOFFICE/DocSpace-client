@@ -11,5 +11,6 @@
   "LinkCopySuccess": "El enlace se ha copiado",
   "ResetChange": "Restablecer cambio ",
   "SendInvitation": "Enviar invitación",
+  "UserMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden ser asignados como gestores de sala. Solo los administradores de sala y administradores de {{productName}} son adecuados para el rol especificado.",
   "UsersAlreadyAdded": "Algunos usuarios ya se han añadido"
 }

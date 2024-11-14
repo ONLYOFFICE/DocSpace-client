@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Marcare sala ca privată",
   "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "Position": "Poziția",
+  "PublicRoomBarDescription": "Această sală este disponibilă tuturor la link-ul. Accesul utilizatorilor externi se acordă În funcție de nivelul de acces permis.",
   "PublicRoomSystemFoldersDescription": "Copiile formularelor la diferite etape de completare sunt stocate în foldere de sistem. Formularele în curs de completare sunt stocate în folderul În curs de completare, iar cele completate sunt stocate în folderul Formulare competate.",
   "PublicRoomSystemFoldersTitle": "Foldere de sistem",
   "RestrictCopyAndDownload": "Restricție copiere și încărcare",

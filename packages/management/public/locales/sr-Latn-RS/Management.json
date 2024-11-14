@@ -5,6 +5,8 @@
   "CreateSpaceDescription": "Uspešno ste povezali svoj domen na vašu IP adresu. Da biste uredili podešavanja adrese prostora, potrebno je da postavite buduće ime {{productName}}-a",
   "CreatingPortal": "Kreiranje novog {{productName}}-a",
   "CurrentSpace": "Trenutni prostor",
+  "DeleteEmptyPortalText": "Permanento ćete obrisati prostor <1>{{domain}}</1>. Ova akcija se ne može opozvati.",
+  "DeleteWarning": "Poslednji prostor sa punim pristupom ne može biti obrisan",
   "DomainName": "Domen ime",
   "DomainNotFound": "Domen nije pronađen, molimo vas proverite u DNS podešavanjima",
   "DomainSettings": "Domen podešavanja",

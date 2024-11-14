@@ -5,6 +5,8 @@
   "InvitationLanguage": "Invitația în limba",
   "InviteAccountSearchPlaceholder": "Invitaţi persoane după email",
   "InviteNewAccountManuallyDescription": "Invitaţi utilizatori noi la {{productName}} personal prin email",
+  "InviteToRoomManuallyDescription": "Adăugaţi utilizatorii existenți ai {{productName}}. Sau invitaţi utilizatori noi personal prin email. Noii utilizatori vor fi adăugați pe lista Invitați.",
+  "InviteToRoomSearchPlaceholder": "Căutare și invitare după nume sau adresa de e-mail",
   "InviteViaLink": "Invitaţi prin link",
   "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în {{productName}}",
   "InviteViaLinkDescriptionRoom": "Creaţi un link universal de auto-autentificare în sala",

@@ -84,12 +84,12 @@ const BasicBlock = ({
     }
 
     if (file) {
-      const widthProp = 128;
-      const heightProp = 128;
+      const widthProp = 64;
+      const heightProp = 64;
 
       const img = new Image();
       img.onload = () => {
-        const data = resizeImage.resize(img, widthProp, heightProp);
+        const data = resizeImage.resize(img, widthProp, heightProp, "png");
         changeValue("logo", data);
       };
       img.src = URL.createObjectURL(file);

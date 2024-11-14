@@ -5,7 +5,7 @@
   "InvitationLanguage": "Invitation language",
   "InviteAccountSearchPlaceholder": "Invite people by email",
   "InviteNewAccountManuallyDescription": "Invite new users to {{productName}} personally via email",
-  "InviteToRoomManuallyDescription": "Add existing {{productName}} contacts. Or invite new users personally via email. New users will be added to your Guests list.",
+  "InviteToRoomManuallyInfo": "Add existing {{productName}} contacts. Or invite new guests personally via email. New guests will be added to your Guests list.",
   "InviteToRoomSearchPlaceholder": "Search and invite by name or email",
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in {{productName}}",

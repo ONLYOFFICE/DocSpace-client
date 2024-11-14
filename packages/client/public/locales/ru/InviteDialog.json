@@ -5,7 +5,7 @@
   "InvitationLanguage": "Язык приглашения",
   "InviteAccountSearchPlaceholder": "Пригласить людей по электронной почте",
   "InviteNewAccountManuallyDescription": "Приглашайте новых пользователей в {{productName}} лично по электронной почте",
-  "InviteToRoomManuallyDescription": "Добавьте существующие контакты {{productName}}. Или пригласите новых пользователей лично по электронной почте. Новые пользователи будут добавлены в ваш список гостей.",
+  "InviteToRoomManuallyInfo": "Добавьте существующие контакты {{productName}}. Или пригласите новых гостей лично по электронной почте. Новые гости будут добавлены в ваш список гостей.",
   "InviteToRoomSearchPlaceholder": "Поиск и приглашение по имени или адресу электронной почты",
   "InviteViaLink": "Пригласить по ссылке",
   "InviteViaLinkDescriptionAccounts": "Создать универсальную ссылку для самостоятельной авторизации в {{productName}}",

@@ -575,7 +575,7 @@ const InviteInput = ({
           ? t("InviteNewAccountManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteToRoomManuallyDescription", {
+          : t("InviteToRoomManuallyInfo", {
               productName: t("Common:ProductName"),
             })}
       </StyledDescription>

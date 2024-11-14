@@ -8,7 +8,6 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { imageProcessing } from "@docspace/shared/utils/common";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
 // import { ToggleButton } from "@docspace/shared/components/toggle-button";

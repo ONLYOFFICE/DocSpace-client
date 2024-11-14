@@ -258,6 +258,7 @@ const SectionHeaderContent = (props) => {
     onSignInClick,
     signInButtonIsDisabled,
     isShared,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -430,6 +431,7 @@ const SectionHeaderContent = (props) => {
     return "";
   };
   const onLogoClick = () => {
+    if (isFrame) return;
     moveToPublicRoom(props.rootFolderId);
   };
 
@@ -630,8 +632,10 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={isPublicRoom && logo}
-                burgerLogo={isPublicRoom && burgerLogo}
+                withLogo={(isPublicRoom || (isFrame && displayAbout)) && logo}
+                burgerLogo={
+                  (isPublicRoom || (isFrame && displayAbout)) && burgerLogo
+                }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
@@ -768,7 +772,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
@@ -932,6 +937,7 @@ export default inject(
 
       rootFolderId,
       isShared,
+      displayAbout,
     };
   },
 )(

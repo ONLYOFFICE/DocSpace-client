@@ -3,13 +3,12 @@
   "EmailErrorMessage": "L’adresse e-mail n’est pas valide. Vous pouvez modifier l’e-mail en double-cliquant dessus.",
   "GroupMaxAvailableRoleWarning": "Les groupes peuvent être ajoutés à une salle avec le rôle {{roleName}} comme maximum. Cependant, vous pouvez modifier le rôle des utilisateurs individuels du groupe une fois que celui-ci a été ajouté avec succès.",
   "InvitationLanguage": "Langue de l'invitation",
-  "InviteAccountSearchPlaceholder": "Inviter des personnes par e-mail",
-  "InviteNewAccountManuallyDescription": "Invitez personnellement de nouveaux utilisateurs à {{productName}} par e-mail",
   "InviteViaLink": "Inviter via le lien",
   "InviteViaLinkDescriptionAccounts": "Créez un lien universel pour l’auto-autorisation dans {{productName}}",
   "InviteViaLinkDescriptionRoom": "Créer un lien universel pour l’auto-autorisation dans la salle",
   "LinkCopySuccess": "Le lien a été copié",
   "ResetChange": "Réinitialiser le changement",
   "SendInvitation": "Envoyer une invitation",
+  "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés"
 }

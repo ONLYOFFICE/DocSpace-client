@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "Tous les documents transférés seront convertis au format Office Open XML (docx, xlsx or pptx) pour garantir une édition rapide.",
+  "ConversionXmlMessage": "Le fichier que vous ouvrez sera converti au format Office Open XML (docx ou xlsx) pour une visualisation et une modification plus rapides.",
   "ConvertedFileDestination": "La copie du fichier sera créée dans le dossier <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "Conversion du document",
   "FailedToConvert": "Échec de la conversion",
@@ -7,5 +8,6 @@
   "HideMessage": "Ne plus afficher ce message",
   "InfoCreateFileIn": "Le nouveau fichier '{{fileTitle}}' est créé dans '{{folderTitle}}'",
   "OpenFileMessage": "Le fichier du document que vous ouvrez sera converti au format Office Open XML pour l'affichage et l'édition rapide.",
-  "SaveOriginalFormatMessage": "Enregistrer la copie du fichier dans le format original"
+  "SaveOriginalFormatMessage": "Enregistrer la copie du fichier dans le format original",
+  "SelectFileType": "Sélectionnez le type de fichier :"
 }

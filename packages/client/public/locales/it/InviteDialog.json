@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Indirizzo email non valido. Puoi modificare l'email facendo doppio clic su di essa.",
   "GroupMaxAvailableRoleWarning": "I gruppi possono essere aggiunti a una stanza con al massimo il ruolo {{roleName}}. Tuttavia, puoi modificare il ruolo dei singoli utenti nel gruppo dopo che è stato aggiunto con successo.",
   "InvitationLanguage": "Lingua dell'invito",
-  "InviteAccountSearchPlaceholder": "Invita persone via e-mail",
-  "InviteNewAccountManuallyDescription": "Invita nuovi utenti a {{productName}} personalmente tramite e-mail",
   "InviteViaLink": "Invita tramite link",
   "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in {{productName}}",
   "InviteViaLinkDescriptionRoom": "Crea un link universale per l’auto-autorizzazione nella stanza",

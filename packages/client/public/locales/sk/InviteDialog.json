@@ -3,8 +3,6 @@
   "EmailErrorMessage": "Emailová adresa nie je platná. E-mail môžete upraviť dvojitým kliknutím naň.",
   "GroupMaxAvailableRoleWarning": "Skupiny je možné pridať do miestnosti s maximálnou rolou {{roleName}}. Po úspešnom pridaní skupiny však môžete zmeniť rolu jednotlivých používateľov v skupine.",
   "InvitationLanguage": "Jazyk pozvánky",
-  "InviteAccountSearchPlaceholder": "Pozvať ľudí e-mailom",
-  "InviteNewAccountManuallyDescription": "Pozvite nových používateľov do {{productName}} osobne prostredníctvom e-mailu",
   "InviteViaLink": "Pozvať cez odkaz",
   "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{productName}}",
   "InviteViaLinkDescriptionRoom": "Vytvorte univerzálny odkaz na autorizáciu v miestnosti",

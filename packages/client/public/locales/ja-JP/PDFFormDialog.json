@@ -1,7 +1,5 @@
 {
   "PDFform": "PDFフォーム",
-  "PDFFormEditDialogDescription": "フォーム編集モードに切り替えますか？この場合、フォームの入力はできなくなり、編集後に再度「記入開始」ボタンをクリックして入力する必要がありますのでご注意ください。",
-  "PDFFormEditDialogTitle": "フォーム編集",
   "PDFFormIsReadyToast": "PDFフォーム<1>{{filename}}</1>の記入準備が整いました。",
   "PDFFormSuccessfullyCreatedDescription": "PDFフォームの入力準備が整いました。フォーム記入プロセスを開始するために公開リンクをコピーするか、この部屋に他のユーザーを招待してください。"
 }

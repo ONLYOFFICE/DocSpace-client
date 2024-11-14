@@ -41,6 +41,7 @@
   "LdapSendWelcomeLetter": "Pošalji dobrodošlo pismo",
   "LdapSendWelcomeLetterTooltip": "Ako je označeno, svi novi korisnici će dobiti pismo dobrodošlice. Dostupno samo kada je Mejl Atribut mapiran na LDAP.",
   "LdapServer": "Server",
+  "LdapServerTooltip": "Unesite LDAP server bez broja porta.",
   "LdapSettings": "LDAP podešavanja",
   "LdapSettingsCertCnNoMatch": "Ime sertifikata se ne poklapa sa imenom hosta",
   "LdapSettingsCertExpired": "Sertifikat je istekao",
@@ -66,8 +67,8 @@
   "LdapUserDNTooltip": "Unesite prepoznatljivo ime u direktorijum koji sadrži korisnike koje želite da dodate.",
   "LdapUserFilter": "Korisnički Filter",
   "LdapUserFilterTooltip": "Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni.",
-  "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku Računi.",
+  "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku {{contactsName}}.",
   "LdapUsersType": "Tip korisnika",
-  "LdapUsersTypeInfo": "Korisnici mogu pristupiti samo prostorijama u koje su pozvani od strane administratora i ne mogu kreirati svoje prostorije, foldere ili datoteke. Izaberite drugu vrstu ispod da biste obezbedili više dozvola. U suprotnom, možete promeniti tip ručno u odeljku Nalozi.",
+  "LdapUsersTypeInfo": "Korisnici mogu pristupiti samo prostorijama u koje su pozvani od strane administratora i ne mogu kreirati svoje prostorije, foldere ili datoteke. Izaberite drugu vrstu ispod da biste obezbedili više dozvola. U suprotnom, možete promeniti tip ručno u odeljku {{contactsName}}.",
   "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom."
 }

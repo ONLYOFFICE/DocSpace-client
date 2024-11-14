@@ -54,6 +54,7 @@ const ButtonContainer = (props) => {
     isFormReady,
     getStorageParams,
     uploadLocalFile,
+    isBackupProgressVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -139,7 +140,7 @@ const ButtonContainer = (props) => {
         tabIndex={10}
       />
 
-      {downloadingProgress > 0 && !isMaxProgress && (
+      {isBackupProgressVisible && (
         <FloatingButton
           className="layout-progress-bar"
           icon="file"
@@ -159,6 +160,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     getStorageParams,
     restoreResource,
     uploadLocalFile,
+    isBackupProgressVisible,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -172,5 +174,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     isFormReady,
     getStorageParams,
     restoreResource,
+    isBackupProgressVisible,
   };
 })(observer(ButtonContainer));

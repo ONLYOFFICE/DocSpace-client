@@ -31,10 +31,8 @@ import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
-import CatalogPinReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.pin.react.svg?url";
+import CatalogPinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import MediaMuteReactSvgUrl from "PUBLIC_DIR/images/media.mute.react.svg?url";
-import NavLogoReactSvg from "PUBLIC_DIR/images/nav.logo.react.svg?url";
 import PersonReactSvg from "PUBLIC_DIR/images/person.react.svg?url";
 import QuestionReactSvg from "PUBLIC_DIR/images/question.react.svg?url";
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg?url";
@@ -65,8 +63,6 @@ const meta = {
         MailReactSvgUrl,
         CatalogPinReactSvgUrl,
         CrossReactSvgUrl,
-        MediaMuteReactSvgUrl,
-        NavLogoReactSvg,
         PersonReactSvg,
         QuestionReactSvg,
         SettingsReactSvg,

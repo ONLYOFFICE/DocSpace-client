@@ -103,16 +103,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   });
 
   useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname)) {
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-    }
-  }, []);
-
-  useEffect(() => {
     try {
       loadBaseInfo();
     } catch (err) {
@@ -182,6 +172,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+        sessionStorage.setItem("loggedOutUserId", userId);
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
@@ -290,7 +283,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
-        targetDate: targetDate,
+        targetDate,
         productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
@@ -449,7 +442,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const toast =
     currentDeviceType === DeviceType.mobile ? (
-      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+      <Portal element={<Toast />} appendTo={rootElement} visible />
     ) : (
       <Toast />
     );
@@ -460,16 +453,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu ||
     location.pathname === "/access-restricted";
 
+  const isMobileOnly = currentDeviceType === DeviceType.mobile;
+
   return (
     <Layout>
       {toast}
-      <ReactSmartBanner t={t} ready={ready} />
+      {isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
+        {!isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
         {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />

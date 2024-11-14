@@ -173,7 +173,7 @@ const SubmitToFormGallery = ({
 
         {formItem && (
           <Styled.FormItem>
-            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
+            <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
             <div className="item-title">
               {formItem?.title ? (
                 [

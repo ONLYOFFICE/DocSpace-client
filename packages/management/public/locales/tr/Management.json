@@ -11,9 +11,12 @@
   "EnterDomain": "Alan(Domain) adını girin",
   "EnterName": "Alan adını girin",
   "NewSpace": "Yeni alan",
+  "PortalDeleted": "{{productName}} kalıcı olarak silindi",
   "PortalName": "{{productName}} adı",
   "PortalStats": "Odalar: {{roomCount}} | Kullanıcılar: {{userCount}} | Kullanılan depolama alanı: {{storageSpace}}",
   "RestrictAccess": "Yönetim alanlarına erişimi kısıtlayın",
+  "SettingsDisabled": "Bu ayarlar, ikinci alan oluşturulduktan ve tüm alanlarınıza uygulandıktan sonra kullanılabilir olacaktır.",
+  "SettingsForAll": "Bu ayarlar tüm alanlarınız için geçerli olacaktır.",
   "Subheader": "Çeşitli alanlar oluşturmak ve bunları kullanıcılarınız için erişilebilir kılmak için bu bölümü kullanın",
   "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin"
 }

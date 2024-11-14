@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable no-restricted-syntax */
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -183,6 +183,40 @@ const FilesSelectorWrapper = ({
       disabledItems = [];
     };
   }, []);
+
+  const formProps = useMemo(() => {
+    let isRoomFormAccessible = true;
+
+    if (isCopy || isMove)
+      isRoomFormAccessible = selection.every(
+        (item) => "isPDFForm" in item && item.isPDFForm,
+      );
+
+    const getMessage = () => {
+      const several = selection.length > 1;
+
+      const option = { organizationName: t("Common:OrganizationName") };
+
+      if (isCopy)
+        return several
+          ? t("Files:WarningCopyToFormRoomServal", option)
+          : t("Files:WarningCopyToFormRoom", option);
+
+      if (isMove)
+        return several
+          ? t("Files:WarningMoveToFormRoomServal", option)
+          : t("Files:WarningMoveToFormRoom", option);
+
+      return "";
+    };
+
+    const message = getMessage();
+
+    return {
+      message,
+      isRoomFormAccessible,
+    };
+  }, [selection, isCopy, isMove, t]);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -390,6 +424,7 @@ const FilesSelectorWrapper = ({
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
       filesSettings={filesSettings}
       headerProps={headerProps}
+      formProps={formProps}
     />
   );
 };
@@ -423,6 +458,7 @@ export default inject(
       isPanelVisible,
       id,
       currentFolderId: currentFolderIdProp,
+      isThirdParty,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -431,7 +467,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -504,11 +540,13 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id &&
-            "isFolder" in selectionsWithoutEditing[0] &&
-            selectionsWithoutEditing[0]?.isFolder
-          ? parentId
-          : selectedId);
+        : rootFolderType === FolderType.Recent
+          ? myFolderId
+          : selectedId === selectionsWithoutEditing[0]?.id &&
+              "isFolder" in selectionsWithoutEditing[0] &&
+              selectionsWithoutEditing[0]?.isFolder
+            ? parentId
+            : selectedId);
 
     const folderId = fromFolderId;
 
@@ -547,7 +585,10 @@ export default inject(
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId || currentFolderIdProp,
+      currentFolderId:
+        isThirdParty && currentFolderIdProp
+          ? currentFolderIdProp
+          : folderId || currentFolderIdProp,
       filesSettings,
     };
   },

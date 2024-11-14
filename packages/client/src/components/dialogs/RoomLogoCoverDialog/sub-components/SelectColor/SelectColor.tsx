@@ -170,13 +170,15 @@ export const SelectColor = ({
         ) : (
           <DropDown
             directionX="both"
+            directionY="both"
+            topSpace={16}
             forwardedRef={iconRef}
             withBackdrop={false}
             isDefaultMode
             open={openColorPicker}
             clickOutsideAction={() => setOpenColorPicker(false)}
           >
-            <DropDownItem className="drop-down-item-hex">
+            <DropDownItem className="drop-down-item-hex" noHover noActive>
               <ColorPicker
                 id="accent-hex"
                 onClose={() => setOpenColorPicker(false)}

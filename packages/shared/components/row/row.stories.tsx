@@ -30,7 +30,6 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CheckReactSvgUrl from "PUBLIC_DIR/images/check.react.svg?url";
-import ItemActiveReactSvgUrl from "PUBLIC_DIR/images/item.active.react.svg?url";
 import { IconSizeType, commonIconsStyles } from "../../utils";
 
 import { Text } from "../text";
@@ -85,7 +84,6 @@ const renderElementComboBox = (onSelect?: (option?: TOption) => void) => (
     options={[
       {
         key: 1,
-        icon: ItemActiveReactSvgUrl,
         label: "Open",
       },
       { key: 2, icon: CheckReactSvgUrl, label: "Closed" },
@@ -95,7 +93,6 @@ const renderElementComboBox = (onSelect?: (option?: TOption) => void) => (
     }}
     selectedOption={{
       key: 0,
-      icon: ItemActiveReactSvgUrl,
       label: "",
     }}
     scaled={false}

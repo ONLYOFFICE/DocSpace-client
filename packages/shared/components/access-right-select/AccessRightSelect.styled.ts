@@ -50,7 +50,7 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
       .combo-buttons_arrow-icon,
       .combo-button_selected-icon-container {
         svg path {
-          fill: ${theme.iconButton.color};
+          fill: ${theme.color};
         }
       }
     `}

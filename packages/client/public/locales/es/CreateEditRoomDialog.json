@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Con esta característica, solo puede invitar a los usuarios existentes de {{productName}}. Después de crear una sala, no podrá cambiar la lista de usuarios.",
   "MakeRoomPrivateTitle": "Hacer que la sala sea privada",
   "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario de la sala",
-  "PublicRoomBarDescription": "Esta sala está disponible para cualquiera que tenga el enlace. Los usuarios externos tendrán permiso de Solo visualización para todos los archivos.",
   "PublicRoomSystemFoldersDescription": "Las carpetas del sistema almacenan copias de formularios en diferentes etapas de finalización. Los formularios que se están completando se almacenan en la carpeta En progreso y los formularios completados se almacenan en la carpeta Completado.",
   "PublicRoomSystemFoldersTitle": "Carpetas del sistema",
   "RoomEditing": "Edición de las salas",

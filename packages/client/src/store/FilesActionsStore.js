@@ -105,6 +105,8 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+
 class FilesActionStore {
   settingsStore;
   uploadDataStore;
@@ -301,7 +303,7 @@ class FilesActionStore {
       return !isHidden;
     });
 
-    if (roomFolder && roomFolder.quotaLimit) {
+    if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
 
       const filesSize = withoutHiddenFiles.reduce((acc, file) => {
@@ -2432,7 +2434,8 @@ class FilesActionStore {
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
-    const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
+    const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
+      this.dialogsStore;
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
@@ -2521,6 +2524,9 @@ class FilesActionStore {
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
+        setConvertDialogData({
+          files: item,
+        });
         setConvertDialogVisible(true);
         return;
       }
@@ -2856,6 +2862,9 @@ class FilesActionStore {
       } else {
         if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);
+
+          const operationId = uniqueid("operation_");
+          this.updateCurrentFolder(null, [roomId], null, operationId);
         } else {
           this.filesStore.setInRoomFolder(roomId, false);
         }
@@ -2868,10 +2877,22 @@ class FilesActionStore {
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
-    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
-      this.filesStore;
-    const { isRootFolder, setCreatedBy, id, setInRoom } =
-      this.selectedFolderStore;
+    const {
+      setRoomOwner,
+      setFolder,
+      setFolders,
+      setSelected,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const {
+      isRootFolder,
+      setCreatedBy,
+      id,
+      setInRoom,
+      setSecurity,
+      setAccess,
+    } = this.selectedFolderStore;
 
     const roomId = selection.length
       ? selection[0].id
@@ -2885,6 +2906,8 @@ class FilesActionStore {
           setFolder(res[0]);
         } else {
           setCreatedBy(res[0].createdBy);
+          setSecurity(res[0].security);
+          setAccess(res[0].access);
 
           const isMe = userId === this.userStore.user.id;
           if (isMe) setInRoom(true);
@@ -3122,6 +3145,7 @@ class FilesActionStore {
           label: "",
           alert: false,
           operationId: pbData.operationId,
+          filesCount: pbData.filesCount,
         });
       }
     }
@@ -3161,7 +3185,11 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+    const pbData = {
+      icon: "exportIndex",
+      operationId: uniqueid("operation_"),
+      filesCount: 1,
+    };
 
     setSecondaryProgressBarData({
       icon: pbData.icon,
@@ -3170,6 +3198,7 @@ class FilesActionStore {
       label: "",
       alert: false,
       operationId: pbData.operationId,
+      filesCount: pbData.filesCount,
     });
 
     this.alreadyExportingRoomIndex = true;

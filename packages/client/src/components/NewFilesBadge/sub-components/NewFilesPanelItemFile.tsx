@@ -23,14 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
+import config from "PACKAGE_FILE";
 
 import { StyledFileItem } from "../NewFilesBadge.styled";
 import {
@@ -46,7 +49,7 @@ const NewFilesPanelItemFileComponent = ({
   getIcon,
   checkAndOpenLocationAction,
   markAsRead,
-  openDocEditor,
+  openItemAction,
 
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
@@ -58,9 +61,23 @@ const NewFilesPanelItemFileComponent = ({
   };
 
   const onClick = async () => {
-    openDocEditor!(item.id);
+    const isMedia =
+      item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
 
-    await markAsRead!([], [item.id]);
+    if (isMedia) {
+      return window.open(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          MEDIA_VIEW_URL,
+          item.id,
+        ),
+      );
+    }
+
+    openItemAction!({ ...item });
+    markAsRead!([], [item.id]);
+
     onClose();
   };
 
@@ -103,7 +120,8 @@ export const NewFilesPanelItemFile = inject(
     filesStore,
   }: NewFilesPanelItemFileInjectStore) => {
     const { displayFileExtension, getIcon } = filesSettingsStore;
-    const { checkAndOpenLocationAction, markAsRead } = filesActionsStore;
+    const { checkAndOpenLocationAction, markAsRead, openItemAction } =
+      filesActionsStore;
     const { openDocEditor } = filesStore;
 
     return {
@@ -112,6 +130,7 @@ export const NewFilesPanelItemFile = inject(
       checkAndOpenLocationAction,
       markAsRead,
       openDocEditor,
+      openItemAction,
     };
   },
 )(observer(NewFilesPanelItemFileComponent));

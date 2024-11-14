@@ -247,6 +247,7 @@ const DeleteProfileEverDialogComponent = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
       isLarge
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {onlyOneUser

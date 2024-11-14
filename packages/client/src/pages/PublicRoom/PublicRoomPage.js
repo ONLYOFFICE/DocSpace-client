@@ -34,7 +34,11 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
@@ -64,6 +68,8 @@ const PublicRoomPage = (props) => {
     isFrame,
     isLoading,
     access,
+    roomType,
+    parentRoomType,
   } = props;
 
   const location = useLocation();
@@ -144,23 +150,33 @@ const PublicRoomPage = (props) => {
     const toastIsDisabled =
       sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === "true";
 
+    const isFormRoom =
+      roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
+
     if (!access || !ready || toastIsDisabled) return;
+
     const roomMode = getAccessTranslation().toLowerCase();
 
     sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, "true");
 
+    const content = isFormRoom ? (
+      t("Common:FormAuthorizeToast", { productName: t("Common:ProductName") })
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="PublicAuthorizeToast"
+        values={{ roomMode }}
+        components={{
+          1: <Text as="span" fontSize="12px" fontWeight={700} />,
+        }}
+      />
+    );
+
     const toastText = (
       <StyledToast>
         <Text fontSize="12px" fontWeight={400}>
-          <Trans
-            t={t}
-            ns="Common"
-            i18nKey="PublicAuthorizeToast"
-            values={{ roomMode }}
-            components={{
-              1: <Text as="span" fontSize="12px" fontWeight={700} />,
-            }}
-          />
+          {content}
         </Text>
         <Link
           fontSize="12px"
@@ -174,7 +190,7 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready]);
+  }, [access, ready, roomType, parentRoomType]);
 
   const sectionProps = {
     showSecondaryProgressBar,
@@ -237,6 +253,7 @@ export default inject(
 
     const { fetchFiles, isEmptyPage } = filesStore;
     const { getFilesSettings } = filesSettingsStore;
+    const { access, roomType, parentRoomType } = selectedFolderStore;
 
     const {
       visible: showSecondaryProgressBar,
@@ -267,7 +284,9 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
-      access: selectedFolderStore.access,
+      access,
+      roomType,
+      parentRoomType,
     };
   },
 )(observer(PublicRoomPage));

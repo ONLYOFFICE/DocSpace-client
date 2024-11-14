@@ -11,9 +11,12 @@
   "EnterDomain": "Voer domeinnaam in",
   "EnterName": "Voer de naam van de ruimte in",
   "NewSpace": "Nieuwe ruimte",
+  "PortalDeleted": "{{productName}} definitief verwijderd",
   "PortalName": "{{productName}} naam",
   "PortalStats": "Kamers: {{roomCount}} | Gebruikers: {{userCount}} | Gebruikte opslagruimte: {{storageSpace}}",
   "RestrictAccess": "Beperk de toegang tot het beheer van ruimtes",
+  "SettingsDisabled": "Deze instellingen zullen beschikbaar zijn zodra de tweede ruimte is aangemaakt en worden toegepast op al uw ruimtes.",
+  "SettingsForAll": "Deze instellingen gelden voor al uw ruimtes.",
   "Subheader": "Gebruik dit gedeelte om verschillende ruimtes aan te maken en ze toegankelijk te maken voor uw gebruikers",
   "VisitSpace": "Bezoek deze ruimte na het aanmaken"
 }

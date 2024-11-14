@@ -44,6 +44,10 @@ const StyledWatermark = styled.div`
     display: grid;
     grid-template-rows: 56px 56px;
     gap: 16px;
+
+    .options {
+      color: ${(props) => props.theme.comboBox.label.selectedColor};
+    }
   }
 
   .image-wrapper {

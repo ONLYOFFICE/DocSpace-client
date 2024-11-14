@@ -93,11 +93,15 @@ const useSocketHelper = ({
         Number(loginEventId) === user?.loginEventId ||
         Number(loginEventId) === 0
       ) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+        if (user) sessionStorage.setItem("loggedOutUserId", user.id);
+
         const docEditor =
           typeof window !== "undefined" &&
           window.DocEditor?.instances[EDITOR_ID];
 
         docEditor?.requestClose();
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
@@ -109,7 +113,7 @@ const useSocketHelper = ({
     return () => {
       SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
-  }, [user?.loginEventId]);
+  }, [user, user?.loginEventId]);
 };
 
 export default useSocketHelper;

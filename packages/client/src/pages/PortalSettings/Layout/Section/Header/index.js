@@ -374,7 +374,10 @@ const SectionHeaderContent = (props) => {
                 organizationName: t("Common:OrganizationName"),
               })
             : t("DataImport")
-      : t(header, { organizationName: t("Common:OrganizationName") });
+      : t(header, {
+          organizationName: t("Common:OrganizationName"),
+          license: t("Common:EnterpriseLicense"),
+        });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>

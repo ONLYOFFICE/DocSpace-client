@@ -49,12 +49,10 @@ import {
 } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import hexRgb from "hex-rgb";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
-import { globalColors } from "@docspace/shared/themes";
 
 const Appearance = (props) => {
   const {
@@ -468,22 +466,6 @@ const Appearance = (props) => {
     setOpenHexColorPickerButtons,
     setAppliedColorButtons,
   ]);
-
-  const getTextColor = (color) => {
-    const black = globalColors.black;
-    const white = globalColors.white;
-
-    const rgba = hexRgb(color);
-
-    const r = rgba.red;
-    const g = rgba.green;
-    const b = rgba.blue;
-
-    const textColor =
-      (r * 299 + g * 587 + b * 114) / 1000 > 128 ? black : white;
-
-    return textColor;
-  };
 
   const onAppliedColorAccent = useCallback(
     (color) => {

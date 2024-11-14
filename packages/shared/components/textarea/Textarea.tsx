@@ -178,6 +178,7 @@ const Textarea = ({
           autoFocus={autoFocus}
           ref={areaRef}
           dir="auto"
+          minHeight={stringifiedHeight}
         />
       </TextareaTheme>
     </Wrapper>

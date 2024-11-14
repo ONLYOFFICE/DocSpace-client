@@ -76,7 +76,7 @@ const RevokeDialog = ({
 
     setIsRequestRunning(true);
 
-    if (isGroup) {
+    if (isGroup || selection.length) {
       await onRevoke(selection);
     } else {
       await onRevoke([bufferSelection.clientId]);

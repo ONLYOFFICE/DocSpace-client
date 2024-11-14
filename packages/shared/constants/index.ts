@@ -27,7 +27,7 @@
 import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
 import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
 import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
-import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.react.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
@@ -121,7 +121,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvg,
-    iconOptions: { color: globalColors.twitterColor },
+    iconOptions: { color: globalColors.darkBlack },
   },
   linkedin: {
     label: "linkedin",
@@ -176,7 +176,9 @@ export const NO_COMPRESSION_RATIO = 1;
 export const SYSTEM_FONT_FAMILY =
   "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
 
-export const HTML_EXST = [".htm", ".mht", ".html"];
+export const HTML_EXST = [".htm", ".mht", ".html", ".mhtml"];
+
+export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
@@ -189,3 +191,5 @@ export const SDK_SCRIPT_URL =
 
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
+
+export const GENERAL_LINK_HEADER_KEY = "general-link_header";

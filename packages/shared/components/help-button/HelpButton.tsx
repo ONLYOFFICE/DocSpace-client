@@ -52,6 +52,7 @@ const HelpButton = (props: HelpButtonProps) => {
     tooltipMaxWidth,
     tooltipContent,
     openOnClick = true,
+    isClickable = true,
   } = props;
   const currentId = id || uniqueId();
 
@@ -64,7 +65,7 @@ const HelpButton = (props: HelpButtonProps) => {
       <IconButton
         id={currentId}
         className={classNames([className], "help-icon") || "help-icon"}
-        isClickable
+        isClickable={isClickable}
         iconName={iconName ?? InfoReactSvgUrl}
         size={size}
         color={color}

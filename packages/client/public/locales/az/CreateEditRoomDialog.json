@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud {{productName}} istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",
   "MakeRoomPrivateTitle": "Otağı Şəxsi edin",
   "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
-  "PublicRoomBarDescription": "Bu otaq keçid olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Yalnız Baxış icazəsi olacaq.",
   "PublicRoomSystemFoldersDescription": "Sistem qovluqları formaların surətlərini tamamlamanın müxtəlif mərhələlərində saxlayır. Doldurulan formalar Davam edir qovluğunda, doldurulmuş formalar isə Tamamlanmış qovluğunda saxlanılır.",
   "PublicRoomSystemFoldersTitle": "Sistem Qovluqları",
   "RoomEditing": "Otaq təşkili",

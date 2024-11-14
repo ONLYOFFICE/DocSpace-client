@@ -95,6 +95,9 @@ export interface ModalDialogProps {
   withoutPadding?: boolean;
   hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  withBodyScrollForcibly?: boolean;
 }
 
 export interface ModalProps {
@@ -127,6 +130,7 @@ export interface ModalDialogFormWrapperProps {
   withForm: boolean;
   className?: string;
   children?: React.ReactNode;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export interface ModalDialogBackdropProps {
@@ -164,7 +168,10 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   isCloseable?: boolean;
   embedded?: boolean;
   withForm?: boolean;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   withoutPadding?: boolean;
   hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
+  withBodyScrollForcibly?: boolean;
 };

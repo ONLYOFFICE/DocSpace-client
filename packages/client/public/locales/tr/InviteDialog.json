@@ -1,12 +1,10 @@
 {
   "AddManually": "Manuel olarak ekle",
-  "AddManuallyDescriptionAccounts": "{{productName}}'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
-  "AddManuallyDescriptionRoom": "Adları kullanarak mevcut {{productName}} kullanıcılarını odaya ekleyin veya e-mail yoluyla kişisel olarak yeni kullanıcılar davet edin",
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı çift tıklayarak düzenleyebilirsiniz.",
   "GroupMaxAvailableRoleWarning": "Gruplar bir odaya en fazla {{roleName}} rolü ile eklenebilir. Fakat başarılı bir şekilde eklendikten sonra gruptaki bireysel kullanıcıların rolünü değiştirebilirsiniz.",
   "InvitationLanguage": "Davet dili",
   "InviteAccountSearchPlaceholder": "İnsanları e-posta ile davet et",
-  "InviteRoomSearchPlaceholder": "Kişileri ada veya e-postaya göre davet et",
+  "InviteNewAccountManuallyDescription": "{{productName}}'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
   "InviteViaLinkDescriptionRoom": "Odada kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",

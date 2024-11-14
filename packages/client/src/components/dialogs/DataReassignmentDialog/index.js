@@ -94,6 +94,9 @@ const DataReassignmentDialog = ({
 
   const updateAccountsAfterDeleteUser = () => {
     const filter = Filter.getDefault();
+
+    filter.area = "people";
+
     getUsersList(filter, true);
     return;
   };

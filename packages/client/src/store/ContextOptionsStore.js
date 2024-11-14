@@ -220,10 +220,16 @@ class ContextOptionsStore {
       this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
       this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
 
-    if (!item.startFilling && item.isPDFForm && !isFormRoom)
+    if (
+      !item.startFilling &&
+      item.isPDFForm &&
+      !isFormRoom &&
+      !this.publicRoomStore.isPublicRoom &&
+      item?.security?.Copy
+    )
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
-    return this.gotoDocEditor(false, item);
+    return this.gotoDocEditor(false, item, null, false, !isFormRoom);
   };
 
   onClickReconnectStorage = async (item, t) => {
@@ -547,12 +553,16 @@ class ContextOptionsStore {
   };
 
   onClickLinkEdit = (item) => {
-    const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
+    const { setConvertItem, setConvertDialogVisible, setConvertDialogData } =
+      this.dialogsStore;
     const canConvert =
       item.viewAccessibility?.MustConvert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
+      setConvertDialogData({
+        files: item,
+      });
       setConvertDialogVisible(true);
     } else {
       this.gotoDocEditor(false, item);
@@ -1696,7 +1706,7 @@ class ContextOptionsStore {
         label: t("Files:ExportRoomIndex"),
         icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
-        disabled: !item.indexing,
+        disabled: !item.indexing || !item.security?.IndexExport,
       },
       {
         id: "option_owner-change",

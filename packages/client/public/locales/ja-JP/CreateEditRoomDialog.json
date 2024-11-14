@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存の{{productName}}ユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",
   "MakeRoomPrivateTitle": "このルームをプライベートルームにする",
   "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
-  "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーは、すべてのファイルに対して閲覧のみの権限を持っています。",
   "PublicRoomSystemFoldersDescription": "システムフォルダには、さまざまな完成段階にあるフォームのコピーが保存されます。入力中のフォームは「入力中」フォルダーに、完成したフォームは「記入済み」フォルダーに保存されます。",
   "PublicRoomSystemFoldersTitle": "システムフォルダ",
   "RoomEditing": "ルームの編集",

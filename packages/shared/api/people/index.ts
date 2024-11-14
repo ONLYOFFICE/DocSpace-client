@@ -65,6 +65,13 @@ export async function getUserList(
   res.items = res.items.map((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -85,6 +92,13 @@ export async function getUser(userName = null, headers = null) {
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
+
+    if ("createdBy" in user && user.createdBy?.displayName) {
+      user.createdBy = {
+        ...user.createdBy,
+        displayName: Encoder.htmlDecode(user.createdBy.displayName),
+      };
+    }
   }
 
   return user;
@@ -105,6 +119,12 @@ export async function getUserByEmail(
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
+    if ("createdBy" in user && user.createdBy?.displayName) {
+      user.createdBy = {
+        ...user.createdBy,
+        displayName: Encoder.htmlDecode(user.createdBy.displayName),
+      };
+    }
   }
   return user;
 }
@@ -119,6 +139,12 @@ export function getUserFromConfirm(userId, confirmKey = null) {
   return request(options).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -143,6 +169,12 @@ export function createUser(data, confirmKey: Nullable<string> = null) {
   return request(options).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -195,6 +227,12 @@ export function updateUser(data) {
   }).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -296,6 +334,12 @@ export function updateUserCulture(id, cultureName) {
   }).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -334,7 +378,21 @@ export async function updateUserStatus(
     data: { userIds },
   })) as TUser[];
 
-  return users;
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
+  });
+
+  return res;
 }
 
 export async function updateUserType(type: EmployeeType, userIds: string[]) {
@@ -343,6 +401,20 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
     url: `/people/type/${type}`,
     data: { userIds },
   })) as TUser[];
+
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
+  });
 
   return users;
 }
@@ -480,6 +552,12 @@ export async function getMembersList(
   res.items = res.items.map((member) => {
     if (member && "displayName" in member && member.displayName) {
       member.displayName = Encoder.htmlDecode(member.displayName);
+      if ("createdBy" in member && member.createdBy?.displayName) {
+        member.createdBy = {
+          ...member.createdBy,
+          displayName: Encoder.htmlDecode(member.createdBy.displayName),
+        };
+      }
     }
 
     if ("membersCount" in member) {

@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> će biti premešten u odeljak Osobe i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za Dokumenta, mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
+  "ChangeGuestsTypeMessageMulti": "Izabrani gosti će biti premešteni u odeljak Osobe i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za Dokumenta, mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
   "ChangeUserTypeButton": "Promeni tip",
   "ChangeUserTypeHeader": "Promeni tip korisnika",
   "ChangeUserTypeMessage": "Korisnici sa tipom <strong>'{{ firstType }}'</strong> biće premešteni u tip <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Odabrani korisnici će biti premešteni u <strong>'{{ secondType }}'</strong> tip.",
   "ChangeUserTypeMessageWarning": "Ne možete promeniti tip za {{productName}} administratore i za sebe.",
+  "SuccessChangeGuestType": "Tip gosta je uspešno promenjen.",
   "SuccessChangeUserType": "Korisnički tip je uspešno promenjen"
 }

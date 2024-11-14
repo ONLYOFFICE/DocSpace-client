@@ -1990,6 +1990,8 @@ const Dark: TTheme = {
     hoverBorderColor: grayDarkStrong,
     tableCellBorder: `1px solid ${grayDarkStrong}`,
 
+    indexingSeparator: white,
+
     groupMenu: {
       background: black,
       borderBottom: `1px solid ${grayDarkStrong}`,

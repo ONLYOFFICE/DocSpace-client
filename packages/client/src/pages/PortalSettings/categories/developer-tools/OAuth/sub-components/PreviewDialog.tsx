@@ -108,7 +108,6 @@ const PreviewDialog = ({
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
-  const [state, setState] = React.useState("");
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
@@ -124,11 +123,10 @@ const PreviewDialog = ({
 
   React.useEffect(() => {
     const getData = () => {
-      const { verifier, challenge, state: s } = generatePKCEPair();
+      const { verifier, challenge } = generatePKCEPair();
 
       setCodeVerifier(verifier);
       setCodeChallenge(challenge);
-      setState(s);
     };
 
     getData();
@@ -139,7 +137,7 @@ const PreviewDialog = ({
       window?.ClientConfig?.oauth2.origin || window.location.origin
     }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
       client?.redirectUris[0]
-    }&scope=${encodingScopes}&state=${state}${
+    }&scope=${encodingScopes}${
       isClientSecretPost
         ? ""
         : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
@@ -236,19 +234,6 @@ const PreviewDialog = ({
                 isReadOnly
                 isDisabled
                 value={link}
-              />
-            </div>
-
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
-                {t("Webhooks:State")}
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                isDisabled
-                value={state}
               />
             </div>
 

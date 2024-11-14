@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Con questa funzione, puoi invitare solo gli utenti esistenti di {{productName}}. Dopo aver creato una stanza, non sarai in grado di modificare l’elenco degli utenti.",
   "MakeRoomPrivateTitle": "Rendi la stanza privata",
   "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario della stanza",
-  "PublicRoomBarDescription": "Questa stanza è disponibile per chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione di sola visualizzazione per tutti i file.",
   "PublicRoomSystemFoldersDescription": "Le cartelle di sistema archiviano copie dei moduli in diverse fasi di compilazione. I moduli in fase di compilazione vengono archiviati nella cartella In corso, mentre i moduli compilati vengono archiviati nella cartella Compilati.",
   "PublicRoomSystemFoldersTitle": "Cartelle di sistema",
   "RoomEditing": "Modifica della stanza",

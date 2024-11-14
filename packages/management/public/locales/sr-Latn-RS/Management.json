@@ -11,9 +11,12 @@
   "EnterDomain": "Unesi ime domena",
   "EnterName": "Unesi ime prostora",
   "NewSpace": "Novi prostor",
+  "PortalDeleted": "{{productName}} trajno obrisan",
   "PortalName": "{{productName}} ime",
   "PortalStats": "Sobe: {{roomCount}} | Korisnici: {{userCount}} | Skladišni prostor iskorišćen: {{storageSpace}}",
   "RestrictAccess": "Ograniči pristup upravljanju prostorima",
+  "SettingsDisabled": "Ova podešavanja će biti dostupna kada se kreira drugi prostor i primenjivaće se na sve vaše prostore.",
+  "SettingsForAll": "Ova podešavanja će biti efektivna za sve vaše prostore.",
   "Subheader": "Koristite ovaj odeljak da napravite nekoliko prostora i učinite ih dostupnim svojim korisnicima",
   "VisitSpace": "Posetite ovaj prostor posle kreiranja"
 }

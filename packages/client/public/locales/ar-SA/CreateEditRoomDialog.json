@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "باستخدام هذه الميزة، يمكنك دعوة مستخدمي {{productName}} الحاليين فقط. بعد إنشاء غرفة، لن تتمكن من تغيير قائمة المستخدمين.",
   "MakeRoomPrivateTitle": "اجعل الغرفة خاصة",
   "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول {{productName}} أن يصبح مالك الغرفة",
-  "PublicRoomBarDescription": "هذه الغرفة متاحة لأي شخص لديه الرابط.",
   "PublicRoomSystemFoldersDescription": "تقوم مجلدات النظام بتخزين نسخ النماذج في مراحل مختلفة من الاكتمال. يتم تخزين النماذج التي يتم ملؤها في مجلد قيد التقدم، ويتم تخزين النماذج المكتملة  في المجلد المكتمل.",
   "PublicRoomSystemFoldersTitle": "مجلدات النظام",
   "RoomEditing": "تعديل الغرفة",

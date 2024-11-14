@@ -235,3 +235,66 @@ export const StyledTableContainer = styled(TableContainer).attrs(
     max-width: 618px;
   }
 `;
+
+export const StyledUsersInfoWrapper = styled.div.attrs(injectDefaultTheme)<{
+  selectedUsers: number;
+  totalLicenceLimit: number;
+}>`
+  margin: 16px 0;
+
+  .license-limit-warning {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  }
+
+  .users-info-wrapper {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-width: 660px;
+    background: ${(props) =>
+      props.theme.client.settings.migration.infoBlockBackground};
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+
+    @media (max-width: 1140px) {
+      width: 100%;
+    }
+
+    @media ${mobile} {
+      flex-wrap: wrap;
+      min-width: auto;
+      gap: 12px;
+    }
+
+    .selected-users-count {
+      margin-inline-end: 24px;
+      color: ${(props) =>
+        props.theme.client.settings.migration.infoBlockTextColor};
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .selected-admins-count {
+      margin-inline-end: 8px;
+      color: ${(props) =>
+        props.theme.client.settings.migration.infoBlockTextColor};
+      font-weight: 700;
+      font-size: 14px;
+
+      span {
+        font-weight: 700;
+        font-size: 14px;
+        margin-inline-start: 4px;
+        color: ${(props) =>
+          props.selectedUsers > props.totalLicenceLimit
+            ? props.theme.client.settings.migration.errorTextColor
+            : props.theme.client.settings.migration.infoBlockTextColor};
+      }
+    }
+  }
+`;

@@ -1,5 +1,6 @@
 {
   "CodeTitle": "Код вам је послат емаил-ом",
+  "EnterCredentials": "Унесите своје {{productName}} податке за пријаву како бисте потврдили брисање",
   "ErrorInvalidText": "За 10 секунди биц́ете преусмерени на <1>{{productName}}</1>",
   "ForgotPassword": "Заборавили сте вашу лозинку?",
   "LDAPUsernamePlaceholder": "Корисничко име {{ldap_domain}}",

@@ -46,24 +46,26 @@ const StyledIndexWrapper = styled.div.attrs(injectDefaultTheme)<{
     transform: rotate(90deg);
   }
 
-  &:hover {
-    cursor: pointer;
-    background: ${(props) =>
-      props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
-
-    svg {
+  @media (hover: hover) {
+    &:hover {
       cursor: pointer;
+      background: ${(props) =>
+        props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
 
-      path {
-        fill: ${(props) =>
-          props.theme.filesSection.tableView.row
-            .indexArrowButtonHover} !important;
-      }
+      svg {
+        cursor: pointer;
 
-      circle {
-        stroke: ${(props) =>
-          props.theme.filesSection.tableView.row
-            .indexArrowButtonHover} !important;
+        path {
+          fill: ${(props) =>
+            props.theme.filesSection.tableView.row
+              .indexArrowButtonHover} !important;
+        }
+
+        circle {
+          stroke: ${(props) =>
+            props.theme.filesSection.tableView.row
+              .indexArrowButtonHover} !important;
+        }
       }
     }
   }

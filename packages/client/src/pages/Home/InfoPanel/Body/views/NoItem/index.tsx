@@ -59,7 +59,8 @@ const NoItem = ({
 }: NoItemsProps) => {
   const { t } = useTranslation(["InfoPanel", "FormGallery"]);
 
-  if (infoPanelSelection?.expired) return <ExpiredItem />;
+  if (infoPanelSelection?.expired && infoPanelSelection?.external)
+    return <ExpiredItem />;
   if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
 
   if (isGroups || isUsers || isGuests)

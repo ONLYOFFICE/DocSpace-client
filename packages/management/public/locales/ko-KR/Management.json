@@ -11,9 +11,12 @@
   "EnterDomain": "도메인 이름을 입력하세요",
   "EnterName": "공간 이름을 입력하세요",
   "NewSpace": "새로운 공간",
+  "PortalDeleted": "{{productName}}이/가 영구적으로 삭제되었습니다",
   "PortalName": "{{productName}} 이름",
   "PortalStats": "방: {{roomCount}} | 사용자: {{userCount}} | 사용된 스토리지 공간: {{storageSpace}}",
   "RestrictAccess": "공간 관리에 대한 액세스 제한",
+  "SettingsDisabled": "이러한 설정은 두 번째 공간이 생성되면 사용할 수 있으며 모든 공간에 적용됩니다.",
+  "SettingsForAll": "이 설정은 모든 공간에 적용됩니다.",
   "Subheader": "이 섹션을 이용하여 여러 공간을 생성하고 사용자가 액세스할 수 있도록 만드세요",
   "VisitSpace": "생성 후 이 공간 방문"
 }

@@ -150,12 +150,13 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
         <div className="virtual-data-room_file-lifetime_date">
           <TextInput
             className="virtual-data-room_file-lifetime_input"
-            isAutoFocussed={true}
+            isAutoFocussed={!roomParams.lifetime}
             isDisabled={isLoading}
             tabIndex={1}
             value={inputValue}
             onChange={onChange}
             scale
+            maxLength={3}
           />
           <ComboBox
             className="virtual-data-room_file-lifetime_combo-box"

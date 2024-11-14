@@ -95,6 +95,7 @@ const FileManagement = ({
 
   const onChangeDisplayFileExtension = React.useCallback(() => {
     setDisplayFileExtension(!displayFileExtension);
+    window.DocSpace.displayFileExtension = !displayFileExtension;
   }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {

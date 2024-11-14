@@ -24,15 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import TagHandler from "./handlers/TagHandler";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
+import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
+import { getStartRoomParams } from "SRC_DIR/helpers";
+import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomDialog = ({
   t,
@@ -49,11 +52,24 @@ const CreateRoomDialog = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   startRoomType,
+  processCreatingRoomFromData,
+  selectionItems,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const isMountRef = React.useRef(true);
+
+  const disabledFormRoom = useMemo(() => {
+    if (
+      !processCreatingRoomFromData ||
+      !selectionItems ||
+      selectionItems.length === 0
+    )
+      return false;
+
+    return !selectionItems.every((item) => item.isPDFForm);
+  }, [selectionItems, processCreatingRoomFromData]);
 
   React.useEffect(() => {
     return () => {
@@ -61,31 +77,11 @@ const CreateRoomDialog = ({
     };
   });
 
-  const startRoomParams = {
-    type: startRoomType,
-    title: title ?? "",
-    tags: [],
-    isPrivate: false,
-    storageLocation: {
-      isThirdparty: false,
-      provider: null,
-      thirdpartyAccount: null,
-      storageFolderId: "",
-      isSaveThirdpartyAccount: false,
-    },
-    icon: {
-      uploadedFile: null,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-    indexing: false,
-    denyDownload: false,
-    withCover: false,
-  };
+  const startRoomParams = getStartRoomParams(startRoomType, title);
 
-  const [roomParams, setRoomParams] = useState({ ...startRoomParams });
+  const [roomParams, setRoomParams] = useState({
+    ...startRoomParams,
+  });
   const [isValidTitle, setIsValidTitle] = useState(true);
 
   const setRoomTags = (newTags) =>
@@ -94,12 +90,27 @@ const CreateRoomDialog = ({
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   const setRoomType = (newRoomType) => {
+    const additionalParams = {
+      indexing: newRoomType === RoomsType.VirtualDataRoom ? true : undefined,
+      denyDownload:
+        newRoomType === RoomsType.VirtualDataRoom ? true : undefined,
+      lifetime:
+        newRoomType === RoomsType.VirtualDataRoom
+          ? { value: 12, deletePermanently: false, period: 0 }
+          : undefined,
+      watermark:
+        newRoomType === RoomsType.VirtualDataRoom
+          ? { rotate: -45, additions: 1 }
+          : undefined,
+    };
+
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
       storageLocation: {
         isThirdparty: false,
       },
+      ...additionalParams,
     }));
   };
 
@@ -120,6 +131,15 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
+  const handleSubmit = (event) => {
+    const value = event.currentTarget.tagInput?.value;
+
+    if (!isNullOrUndefined(value) && value.length === 0) onCreateRoom();
   };
 
   const goBack = () => {
@@ -155,12 +175,18 @@ const CreateRoomDialog = ({
       hideContent={isOauthWindowOpen}
       isBackButton={roomParams.type}
       onBackClick={goBack}
+      onSubmit={handleSubmit}
+      withForm
     >
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
         {!roomParams.type ? (
-          <RoomTypeList t={t} setRoomType={setRoomType} />
+          <RoomTypeList
+            t={t}
+            setRoomType={setRoomType}
+            disabledFormRoom={disabledFormRoom}
+          />
         ) : (
           <SetRoomParams
             t={t}
@@ -191,9 +217,9 @@ const CreateRoomDialog = ({
             size="normal"
             primary
             scale
-            onClick={onCreateRoom}
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
+            type="submit"
           />
           <Button
             id="shared_create-room-modal_cancel"

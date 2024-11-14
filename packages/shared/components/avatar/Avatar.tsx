@@ -130,6 +130,7 @@ const AvatarPure = ({
   onChangeFile,
   model,
   hasAvatar,
+  noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -193,6 +194,15 @@ const AvatarPure = ({
     menu.onClick(inputFilesElement);
   };
 
+  const onClickAvatar = () => {
+    if (noClick) return;
+
+    if (hasAvatar) {
+      return onToggleOpenEditLogo();
+    }
+    onUploadClick();
+  };
+
   const dropdownElement = (
     <DropDown
       open={openEditLogo}
@@ -226,8 +236,9 @@ const AvatarPure = ({
       data-testid="avatar"
       className={className}
       onMouseDown={onMouseDown}
-      onClick={onClick}
+      onClick={onClick || onClickAvatar}
       ref={iconRef}
+      noClick={noClick}
     >
       <AvatarWrapper
         source={source}

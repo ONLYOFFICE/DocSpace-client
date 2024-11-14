@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "../../themes";
 
 const Wrapper = styled.div<{ isPickerOnly: boolean }>`
@@ -62,7 +62,7 @@ const Wrapper = styled.div<{ isPickerOnly: boolean }>`
 
     ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 13px;"}
 
-    ${isMobileOnly &&
+    ${isMobile() &&
     css`
       width: calc(100vw - 76px);
     `}
@@ -125,7 +125,7 @@ const Wrapper = styled.div<{ isPickerOnly: boolean }>`
     padding-bottom: 16px;
     width: 195px;
 
-    ${isMobileOnly &&
+    ${isMobile() &&
     css`
       width: calc(100vw - 64px);
     `}

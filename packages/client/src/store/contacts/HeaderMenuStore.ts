@@ -216,7 +216,7 @@ class HeaderMenuStore {
       {
         id: "menu-disable",
         key: "disable",
-        label: t("PeopleTranslations:DisableUserButton"),
+        label: t("Common:DisableUserButton"),
         disabled: !hasUsersToDisable,
         onClick: () =>
           this.contextOptionsStore.onChangeStatus(EmployeeStatus.Disabled),

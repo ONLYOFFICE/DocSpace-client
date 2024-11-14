@@ -185,7 +185,7 @@ const ChangeUserStatusDialogComponent = ({
 
     buttonLabelSave = isGuests
       ? t("Common:Disable")
-      : t("PeopleTranslations:DisableUserButton");
+      : t("Common:DisableUserButton");
   } else {
     header = onlyOneUser
       ? isGuests

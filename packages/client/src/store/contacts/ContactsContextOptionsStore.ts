@@ -220,7 +220,7 @@ class ContactsConextOptionsStore {
             id: "option_disable",
             key: option,
             icon: RemoveReactSvgUrl,
-            label: t("PeopleTranslations:DisableUserButton"),
+            label: t("Common:DisableUserButton"),
             onClick: () => this.onDisableClick(item),
           };
         case "reassign-data":
@@ -434,7 +434,7 @@ class ContactsConextOptionsStore {
       },
       {
         key: "cm-disable",
-        label: t("PeopleTranslations:DisableUserButton"),
+        label: t("Common:DisableUserButton"),
         disabled: !hasUsersToDisable || (isRoomAdmin && isGuests),
         onClick: () => onChangeStatus(EmployeeStatus.Disabled),
         icon: DisableReactSvgUrl,

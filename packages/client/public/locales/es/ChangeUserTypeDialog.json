@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "El invitado <strong>{{userName}}</strong> se moverá a la sección Personas y se le asignará el tipo Usuario. Los usuarios tienen su propia sección Documentos, pueden crear y editar archivos, pero no pueden crear salas.",
-  "ChangeGuestsTypeMessageMulti": "Los invitados seleccionados se moverán a la sección Personas y se les asignará el tipo Usuario. Los usuarios tienen su propia sección Documentos, pueden crear y editar archivos, pero no pueden crear salas. ",
+  "ChangeGuestsTypeMessage": "El invitado <strong>{{userName}}</strong> se moverá a la sección {{membersSection}} y se le asignará el tipo Usuario. Los usuarios tienen su propia sección {{documentsSection}} , pueden crear y editar archivos, pero no pueden crear salas.",
+  "ChangeGuestsTypeMessageMulti": "Los invitados seleccionados se moverán a la sección {{membersSection}} y se les asignará el tipo Usuario. Los usuarios tienen su propia sección {{documentsSection}}, pueden crear y editar archivos, pero no pueden crear salas. ",
   "ChangeUserTypeButton": "Cambiar tipo",
   "ChangeUserTypeHeader": "Cambiar tipo de usuario",
   "ChangeUserTypeMessage": "Los usuarios con el tipo <strong>'{{ firstType }}'</strong> serán movidos al tipo <strong>'{{ secondType }}'</strong>.",

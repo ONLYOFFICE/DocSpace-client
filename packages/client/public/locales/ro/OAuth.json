@@ -70,7 +70,7 @@
   "Revoke": "Revocare",
   "RevokeConsent": "Revocare consimțământ",
   "RevokeConsentDescription": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} de serviciul {{name}}, {{organizationName}} {{productName}} va opri automat autentificarea pentru {{name}}. Contul dvs {{name}} nu va fi șters.",
-  "RevokeConsentDescriptionGroup": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} de serviciul, {{organizationName}} {{productName}} va opri automat autentificarea. Conturile dvs {{name}} nu vor fi șterse.",
+  "RevokeConsentDescriptionGroup": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} de serviciul, {{organizationName}} {{productName}} va opri automat autentificarea. Conturile dvs nu vor fi șterse.",
   "RevokeConsentLogin": "Dacă doriți să reînnoiți autentificarea automată pentru {{name}} cu ajutorul {{organizationName}} {{productName}}, vi se va cere să acordați accesul la datele contului dvs. {{productName}}.",
   "RevokeConsentLoginGroup": "Dacă doriți să reînnoiți autentificarea automată cu ajutorul {{organizationName}} {{productName}}, vi se va cere să acordați accesul la datele contului dvs. {{productName}}.",
   "RevokeDialogDescription": "Soluții de integrare care folosesc acest token nu vor mai putea accesa API. Această acțiune nu poate fi anulată",

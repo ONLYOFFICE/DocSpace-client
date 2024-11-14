@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "Լիազորված հավելվածներ չկան",
   "NoOAuthAppHeader": "OAuth հավելվածներ չկան",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth հավելվածներն օգտագործվում են {{organizationName} {{productName}} API մուտք գործելու համար՝ թույլտվության և հետագա գործողությունների համար, օրինակ՝ ֆայլեր մուտք գործելու և այլն:",
+  "OAuthAppDescription": "OAuth հավելվածներն օգտագործվում են {{organizationName}} {{productName}} API մուտք գործելու համար՝ թույլտվության և հետագա գործողությունների համար, օրինակ՝ ֆայլեր մուտք գործելու և այլն:",
   "OAuthHeaderBlock": "OAuth URLs",
   "PrivacyPolicy": "Գաղտնիության քաղաքականության URL",
   "PrivacyPolicyURL": "Գաղտնիության քաղաքականության URL",

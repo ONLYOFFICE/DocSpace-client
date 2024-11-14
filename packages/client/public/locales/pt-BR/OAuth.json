@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "Nenhum aplicativo autorizado",
   "NoOAuthAppHeader": "Nenhum aplicativo OAuth",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "Os aplicativos OAuth são usados para acessar a API {{organizationName} {{productName}} para autorização e outras ações, como acessar arquivos, etc.",
+  "OAuthAppDescription": "Os aplicativos OAuth são usados para acessar a API {{organizationName}} {{productName}} para autorização e outras ações, como acessar arquivos, etc.",
   "OAuthHeaderBlock": "URLs OAuth",
   "PrivacyPolicy": "Política de privacidade",
   "PrivacyPolicyURL": "URL da política de privacidade",

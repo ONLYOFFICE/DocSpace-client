@@ -232,7 +232,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1>  يدعوك للانضمام للغرفة <1>{{roomName}}</1> للتعاون الآمن في المستندات.",
   "Invite": "دعوة",
   "Invited": "مدعو",
-  "InviteUsers": "دعوة مستخدمين",
   "Kilobyte": "كيلو بايت",
   "Language": "اللغة",
   "LastModifiedDate": "تاريخ التعديل الأخير",

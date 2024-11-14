@@ -98,7 +98,7 @@ class GroupsTableHeader extends React.Component<
       },
       {
         key: "People",
-        title: t!("Common:Employees"),
+        title: t!("Common:Members"),
         enable: peopleGroupsColumnIsEnabled,
         sortBy: "membersCount",
         onClick: this.onFilter,

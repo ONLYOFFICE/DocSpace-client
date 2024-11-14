@@ -233,7 +233,6 @@
   "InvitationToRoom": "Ο <1>{{firstName}} {{lastName}}</1> σας προσκαλεί να συμμετάσχετε στο δωμάτιο <1>{{roomName}}</1> για ασφαλή συνεργασία σε έγγραφα.",
   "Invite": "Πρόσκληση",
   "Invited": "Προσκλήθηκε",
-  "InviteUsers": "Πρόσκληση χρηστών",
   "Kilobyte": "KB",
   "Language": "Γλώσσα",
   "LastModifiedDate": "Ημερομηνία τελευταίας τροποποίησης",

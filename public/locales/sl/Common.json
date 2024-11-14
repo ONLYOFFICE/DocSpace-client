@@ -232,7 +232,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> vas vabi, da se pridružite sobi <1>{{roomName}}</1> za varno sodelovanje pri dokumentih.",
   "Invite": "Povabi",
   "Invited": "Povabljeni",
-  "InviteUsers": "Povabite uporabnike",
   "Kilobyte": "KB",
   "Language": "Jezik",
   "LastModifiedDate": "Datum zadnje spremembe",

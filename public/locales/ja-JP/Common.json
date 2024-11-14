@@ -234,7 +234,6 @@
   "InvitationToRoom": "<1> {{lastName}}{{firstName}}</1>さんは、安全なドキュメント共同作業をするように、あなたをルーム <1>{{roomName}}</1>に招待しています。",
   "Invite": "招待する",
   "Invited": "招待済み",
-  "InviteUsers": "ユーザーを招待する",
   "Kilobyte": "KB",
   "Language": "言語",
   "LastActivityDate": "最終アクティビティ日",

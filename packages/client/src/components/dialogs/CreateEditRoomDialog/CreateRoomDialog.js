@@ -55,6 +55,7 @@ const CreateRoomDialog = ({
   startRoomType,
   processCreatingRoomFromData,
   selectionItems,
+  setSelectedRoomType,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -93,6 +94,7 @@ const CreateRoomDialog = ({
   const setRoomType = (newRoomType) => {
     const additionalParams = getRoomCreationAdditionalParams(newRoomType);
 
+    setSelectedRoomType(newRoomType);
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,

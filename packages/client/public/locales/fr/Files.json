@@ -74,7 +74,6 @@
   "FileRemoved": "Fichier déplacé vers la corbeille",
   "FileRenamed": "Le document '{{oldTitle}}' est renommé en '{{newTitle}}'",
   "FilesWillAppearHere": "Les fichiers et dossiers ajoutés à la salle apparaissent ici.",
-  "FileWillBeDeleted": "Le fichier sera supprimé {{date}}",
   "Filter": "Filtrer",
   "FinalizeVersion": "Finaliser la version",
   "Folder": "Dossier",

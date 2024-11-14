@@ -74,7 +74,6 @@
   "FileRemoved": "Archivo movido a la Papelera",
   "FileRenamed": "El nombre del documento '{{oldTitle}}' se ha cambiado a '{{newTitle}}'",
   "FilesWillAppearHere": "Los archivos y carpetas añadidos a la sala aparecerán aquí.",
-  "FileWillBeDeleted": "El archivo se eliminará {{date}}",
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizar la versión",
   "Folder": "Carpeta",

@@ -232,7 +232,6 @@
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> kutsuu sinut liittymään huoneeseen  <1>{{roomName}}</1> turvallista asiakirjayhteistyötä varten.",
   "Invite": "Kutsu",
   "Invited": "Kutsuttu",
-  "InviteUsers": "Kutsu käyttäjiä",
   "Kilobyte": "KB",
   "Language": "Kieli",
   "LastModifiedDate": "Viimeisin muokkauspäivä",

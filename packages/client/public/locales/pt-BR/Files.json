@@ -74,7 +74,6 @@
   "FileRemoved": "Arquivo movido para a lixeira",
   "FileRenamed": "O documento '{{oldTitle}}' é renomeado para '{{newTitle}}'.",
   "FilesWillAppearHere": "Os arquivos e pastas adicionados à sala aparecerão aqui.",
-  "FileWillBeDeleted": "O arquivo será excluído {{date}}",
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizar versão",
   "Folder": "Pasta",

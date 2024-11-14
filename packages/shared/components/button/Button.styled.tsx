@@ -345,19 +345,21 @@ const getDefaultStyles = ({
         `)}
 
 
-   ${!primary &&
-    !disableHover &&
-    !isDisabled &&
-    css`
-      &:hover,
-      &:focus {
-        border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
-      }
+      ${(props) =>
+      props.theme.isBase &&
+      !primary &&
+      !disableHover &&
+      !isDisabled &&
+      css`
+        &:hover,
+        &:focus {
+          border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
+        }
 
-      &:active {
-        ${activeCss}
-      }
-    `}
+        &:active {
+          ${activeCss}
+        }
+      `}
 
     ${!isDisabled &&
     !isLoading &&

@@ -174,6 +174,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     style,
     withLabel = true,
     displayArrow,
+    topSpace,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -328,6 +329,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
+          topSpace={topSpace}
         >
           {dropDownBody}
         </DropDown>

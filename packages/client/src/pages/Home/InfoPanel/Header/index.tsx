@@ -108,7 +108,7 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Members"),
+    name: t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };

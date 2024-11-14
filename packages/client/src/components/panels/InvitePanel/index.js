@@ -533,7 +533,7 @@ const InvitePanel = ({
             withHeader
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
-              headerLabel: t("Common:ListAccounts"),
+              headerLabel: t("Common:Contacts"),
               withoutBackButton: false,
               withoutBorder: true,
               isCloseable: true,
@@ -547,7 +547,7 @@ const InvitePanel = ({
         </ModalDialog.Container>
       )}
 
-      <ModalDialog.Header>{t("Common:InviteUsers")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

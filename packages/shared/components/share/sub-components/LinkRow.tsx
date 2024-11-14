@@ -213,12 +213,13 @@ const LinkRow = ({
                     accessOptions={roomAccessOptions}
                     noBorder
                     directionX="right"
-                    directionY="bottom"
+                    directionY="both"
                     type="onlyIcon"
                     manualWidth="300px"
                     isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
                     isMobileView={isMobileViewLink}
                     fixedDirection={isMobileViewLink}
+                    topSpace={16}
                   />
                 )}
                 {!isArchiveFolder && (

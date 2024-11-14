@@ -138,7 +138,7 @@ const ContactsTabs = ({
   const items: TTabItem[] = [
     {
       id: "people",
-      name: t("Common:Employees"),
+      name: t("Common:Members"),
       onClick: onPeople,
       content: null,
     },

@@ -8,7 +8,6 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { imageProcessing } from "@docspace/shared/utils/common";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
 // import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -84,12 +83,12 @@ const BasicBlock = ({
     }
 
     if (file) {
-      const widthProp = 128;
-      const heightProp = 128;
+      const widthProp = 64;
+      const heightProp = 64;
 
       const img = new Image();
       img.onload = () => {
-        const data = resizeImage.resize(img, widthProp, heightProp);
+        const data = resizeImage.resize(img, widthProp, heightProp, "png");
         changeValue("logo", data);
       };
       img.src = URL.createObjectURL(file);

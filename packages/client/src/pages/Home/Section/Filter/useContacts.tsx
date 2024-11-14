@@ -819,7 +819,7 @@ export const useContactsFilter = ({
     const people = {
       id: "sort-by_people",
       key: "membersCount",
-      label: t("Common:Employees"),
+      label: t("Common:Members"),
       default: true,
     };
 

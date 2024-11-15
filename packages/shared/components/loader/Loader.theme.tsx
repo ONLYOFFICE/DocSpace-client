@@ -23,4 +23,30 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { PDFFormEditingDialog } from "./PDFFormEditingDialog";
+
+import { PropsWithChildren, forwardRef, useContext } from "react";
+import { ThemeContext } from "styled-components";
+
+import { StyledTrackTheme } from "./Loader.styled";
+import { LoaderThemeProps } from "./Loader.types";
+
+const TrackTheme = forwardRef<
+  SVGSVGElement,
+  PropsWithChildren<LoaderThemeProps>
+>((props, ref) => {
+  const defaultTheme = useContext(ThemeContext);
+
+  const currentColorScheme = defaultTheme?.currentColorScheme;
+
+  return (
+    <StyledTrackTheme
+      {...props}
+      ref={ref}
+      $currentColorScheme={currentColorScheme}
+    />
+  );
+});
+
+TrackTheme.displayName = "StyledTrackTheme";
+
+export default TrackTheme;

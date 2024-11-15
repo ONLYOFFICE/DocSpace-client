@@ -33,7 +33,7 @@ import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobileOnly } from "react-device-detect";
+import { DeviceType, RoomsType } from "@docspace/shared/enums";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {

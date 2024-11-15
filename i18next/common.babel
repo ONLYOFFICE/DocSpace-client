@@ -28799,7 +28799,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormFilingRoomDescription</name>
+								<name>FormFilingRoomInfo</name>
 								<description/>
 								<comment/>
 								<default_text/>
@@ -52955,7 +52955,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>PublicRoomDescription</name>
+								<name>PublicRoomInfo</name>
 								<description/>
 								<comment/>
 								<default_text/>

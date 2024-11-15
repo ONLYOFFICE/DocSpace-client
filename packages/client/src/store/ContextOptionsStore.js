@@ -83,8 +83,7 @@ import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
-import saveAs from "file-saver";
-import { isMobile, isTablet } from "react-device-detect";
+import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -773,8 +772,6 @@ class ContextOptionsStore {
 
   onOpenPDFEditDialog = (id) => {
     this.filesStore.openDocEditor(id, false, null, true);
-
-    // this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -1562,7 +1559,13 @@ class ContextOptionsStore {
         key: "edit-pdf",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
-        onClick: () => this.onOpenPDFEditDialog(item.id),
+        onClick: () => {
+          if (isMobileOnly) {
+            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            return;
+          }
+          this.onOpenPDFEditDialog(item.id);
+        },
         disabled: false,
       },
       {
@@ -1570,7 +1573,15 @@ class ContextOptionsStore {
         key: "edit",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
-        onClick: () => this.onClickLinkEdit(item),
+        onClick: () => {
+          const isPDF = item.fileExst === ".pdf";
+
+          if (isPDF && isMobileOnly) {
+            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            return;
+          }
+          this.onClickLinkEdit(item);
+        },
         disabled: false,
       },
       {

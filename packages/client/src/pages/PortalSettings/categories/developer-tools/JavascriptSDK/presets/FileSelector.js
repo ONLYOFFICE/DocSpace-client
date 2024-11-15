@@ -381,9 +381,7 @@ const FileSelector = (props) => {
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:PublicRoomDescription")}
-                      </Text>
+                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
                   />
                 </LabelGroup>

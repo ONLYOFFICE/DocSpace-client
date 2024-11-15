@@ -30,7 +30,7 @@ const next = require("next");
 
 const config = require("./config/config.json");
 
-import("./src/logger.mjs").then(({ logger }) => {
+import("./logger.mjs").then(({ logger }) => {
   const log = logger.child({ module: "server" });
   const dev = process.env.NODE_ENV === "development";
 

@@ -41,7 +41,7 @@ const publishPath = path.join(
 const nextBuild = path.join(process.cwd(), ".next");
 const nodeModulesBuild = path.join(nextBuild, "standalone", "node_modules");
 const configFolder = path.join(__dirname, "..", "config");
-const loggerFile = path.join(__dirname, "..", "src", "logger.mjs");
+const loggerFile = path.join(__dirname, "..", "logger.mjs");
 const serverFile = path.join(__dirname, "..", "server.prod.js");
 
 const rootNodeModulesPath = path.join(

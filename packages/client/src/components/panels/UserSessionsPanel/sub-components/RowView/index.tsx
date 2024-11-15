@@ -25,19 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RowContainer } from "@docspace/shared/components/row-container";
-import styled from "styled-components";
+
 import SessionsRow from "./SessionsRow";
 import { RowViewProps } from "../../UserSessionsPanel.types";
-
-const StyledRowContainer = styled(RowContainer)`
-  padding: 0px 16px;
-`;
 
 const RowView = (props: RowViewProps) => {
   const { t, sessions } = props;
 
   return (
-    <StyledRowContainer
+    <RowContainer
       id="allSessionsRowContainer"
       useReactWindow={false}
       hasMoreFiles={false}
@@ -49,7 +45,7 @@ const RowView = (props: RowViewProps) => {
       {sessions.map((item) => (
         <SessionsRow t={t} key={item.id} item={item} />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

@@ -57,7 +57,7 @@ const StyledUserInfoBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 20px 20px;
+  padding: 24px 0 20px;
 
   .username {
     font-size: 16px;
@@ -83,8 +83,6 @@ const StyledUserInfoBlock = styled.div`
 `;
 
 const StyledLastSessionBlock = styled.div`
-  padding: 0px 20px;
-
   .subtitle {
     font-size: 14px;
     font-weight: 600;

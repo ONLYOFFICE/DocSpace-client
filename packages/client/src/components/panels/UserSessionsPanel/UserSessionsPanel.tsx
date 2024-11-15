@@ -24,32 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { observer, inject } from "mobx-react";
-import styled from "styled-components";
+import { inject, observer } from "mobx-react";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+
 import AllSessionsBlock from "./AllSessionsBlock";
 import LastSessionBlock from "./LastSessionBlock";
-
 import { UserSessionsPanelProps } from "./UserSessionsPanel.types";
-
-const StyledSessionsPanel = styled.div`
-  .user-sessions-panel {
-    .scroll-body {
-      padding-inline-end: 0px !important;
-    }
-  }
-`;
-
-const StyledScrollbar = styled(Scrollbar)`
-  position: relative;
-  padding: 16px 0;
-  height: calc(100vh - 87px) !important;
-`;
 
 export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   const { storeProps } = props;
@@ -65,7 +51,6 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   } = storeProps!;
 
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
-  const scrollRef = useRef(null);
 
   const onClose = () => {
     setVisible(false);
@@ -92,21 +77,18 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   ]);
 
   return (
-    <StyledSessionsPanel>
-      <Backdrop onClick={onClose} visible={visible} zIndex={210} isAside />
-      <Aside
-        className="user-sessions-panel"
-        visible={visible}
-        onClose={onClose}
-        withoutHeader={false}
-        header={t("Profile:ActiveSessions")}
-      >
-        <StyledScrollbar ref={scrollRef}>
-          <LastSessionBlock t={t} />
-          <AllSessionsBlock t={t} />
-        </StyledScrollbar>
-      </Aside>
-    </StyledSessionsPanel>
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("Profile:ActiveSessions")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <LastSessionBlock t={t} />
+        <AllSessionsBlock t={t} />
+      </ModalDialog.Body>
+    </ModalDialog>
   );
 };
 

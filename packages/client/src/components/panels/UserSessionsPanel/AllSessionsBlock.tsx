@@ -38,7 +38,7 @@ import RowView from "./sub-components/RowView";
 import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
 
 const Wrapper = styled.div`
-  padding: 20px 20px 12px;
+  padding: 20px 0 12px;
 
   .empty-screen-container {
     width: auto;

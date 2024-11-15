@@ -392,7 +392,6 @@
   "PublicAuthorizeToast": "Dieser Raum wird im <1>{{roomMode}}</1>-Modus geöffnet. Um an Dokumenten arbeiten zu können, bitte autorisieren.",
   "PublicLink": "Öffentlicher Link",
   "PublicRoom": "Öffentlicher Raum",
-  "PublicRoomDescription": "Laden Sie Nutzer über externe Links ein, um Dokumente ohne Registrierung einzusehen. Sie können diesen Raum auch in eine beliebige Weboberfläche einbetten.",
   "PublicRoomLabel": "Öffentlich",
   "PunycodeDomain": "Punycode-Domänen werden nicht unterstützt.",
   "PunycodeLocalPart": "Punycode wird beim lokalen Teil nicht unterstützt",

@@ -396,7 +396,6 @@
   "PublicAuthorizeToast": "Esta sala está aberta no modo <1>{{roomMode}}</1>. Para poder trabalhar em documentos, autorize.",
   "PublicLink": "Link público",
   "PublicRoom": "Sala pública",
-  "PublicRoomDescription": "Convide usuários por meio de links externos para visualizar documentos sem registro. Você também pode incorporar esta sala em qualquer interface web.",
   "PublicRoomLabel": "Público",
   "PunycodeDomain": "Os domínios Punycode não são suportados",
   "PunycodeLocalPart": "A peça local Punycode não é suportada",

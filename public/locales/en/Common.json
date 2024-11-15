@@ -400,7 +400,7 @@
   "PublicAuthorizeToast": "This room is opened in the <1>{{roomMode}}</1> mode. To be able to work on documents, please authorize.",
   "PublicLink": "Public link",
   "PublicRoom": "Public room",
-  "PublicRoomDescription": "Invite users via external links to view documents without registration. You can also embed this room into any web interface.",
+  "PublicRoomInfo": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "PublicRoomLabel": "Public",
   "PunycodeDomain": "Punycode domains are not supported",
   "PunycodeLocalPart": "Punycode local part is not supported",

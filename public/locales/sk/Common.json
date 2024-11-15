@@ -393,7 +393,6 @@
   "PublicAuthorizeToast": "Táto miestnosť je otvorená v režime <1>{{roomMode}}</1>. Aby ste mohli pracovať s dokumentmi, autorizujte sa.",
   "PublicLink": "Verejný odkaz",
   "PublicRoom": "Verejná miestnosť",
-  "PublicRoomDescription": "Pozvite používateľov prostredníctvom externých odkazov na prehliadanie dokumentov bez registrácie. Túto miestnosť môžete tiež vložiť do akéhokoľvek webového rozhrania.",
   "PublicRoomLabel": "Verejné",
   "PunycodeDomain": "Domény Punycode nie sú podporované",
   "PunycodeLocalPart": "Miestna časť Punycode nie je podporovaná",

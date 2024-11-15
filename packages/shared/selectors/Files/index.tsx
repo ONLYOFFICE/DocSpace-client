@@ -161,8 +161,6 @@ const FilesSelectorComponent = ({
 
   const [isInit, setIsInit] = React.useState(true);
 
-  console.log(selectedItemSecurity);
-
   const { subscribe, unsubscribe } = useSocketHelper({
     disabledItems,
     filterParam,

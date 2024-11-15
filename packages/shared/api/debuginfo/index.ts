@@ -23,41 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosRequestConfig } from "axios";
+import { request } from "../client";
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
+export function loadDebugInfo() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    baseURL: "/",
+    responseType: "text",
+    url: `/debuginfo.md`,
+  };
 
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-};
+  return request(options);
+}

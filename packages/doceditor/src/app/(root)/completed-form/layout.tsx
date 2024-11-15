@@ -26,7 +26,14 @@
 import React, { PropsWithChildren } from "react";
 
 async function Layout({ children }: PropsWithChildren) {
-  return <>{children}</>;
+  return (
+    <>
+      <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+      <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
+      <link rel="apple-touch-icon" sizes="32x32" href="/logo.ashx?logotype=3" />
+      {children}
+    </>
+  );
 }
 
 export default Layout;

@@ -55,7 +55,7 @@
     showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Size,Type,Tags",
+    viewTableColumns: "Index,Name,Size,Type,Tags",
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,
@@ -488,7 +488,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;
@@ -514,7 +514,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;

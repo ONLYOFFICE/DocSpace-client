@@ -600,7 +600,7 @@ const PeopleSelector = ({
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuestsFilter")
           : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:NotFoundUsers")
+            ? t("Common:NotFoundMembers")
             : t("Common:NotFoundGroups")
       }
       searchEmptyScreenDescription={

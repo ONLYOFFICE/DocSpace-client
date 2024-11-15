@@ -46,7 +46,13 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { Base, globalColors } from "@docspace/shared/themes";
 
-import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
+import {
+  isTablet,
+  isMobile,
+  isDesktop,
+  size,
+  classNames,
+} from "@docspace/shared/utils";
 import NewFilesBadge from "./NewFilesBadge";
 
 const StyledWrapper = styled.div`
@@ -135,6 +141,7 @@ const Badges = ({
 
   const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
   const desktopView = !isTile && isDesktop();
+  const mobileView = !isTile && isMobile();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
 
@@ -253,6 +260,7 @@ const Badges = ({
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
           title={t("Common:EditButton")}
+          isDisabled={mobileView}
         />
       )}
       {item.viewAccessibility?.MustConvert &&
@@ -266,6 +274,7 @@ const Badges = ({
             className="badge tablet-badge icons-group can-convert"
             size={sizeBadge}
             hoverColor={theme.filesBadges.hoverIconColor}
+            isDisabled={mobileView}
           />
         )}
       {version > 1 && (
@@ -278,6 +287,7 @@ const Badges = ({
             {...onShowVersionHistoryProp}
             noHover={true}
             isVersionBadge={true}
+            isDisabled={mobileView}
             title={t("ShowVersionHistory")}
           />
         </BadgeWrapper>
@@ -289,10 +299,11 @@ const Badges = ({
             className="badge-version badge-new-version tablet-badge icons-group"
             label={t("Files:New")}
             onClick={onBadgeClick}
+            isDisabled={mobileView}
           />
         </BadgeWrapper>
       )}
-      {/* {isForm  && ( 
+      {/* {isForm  && (
         <BadgeWrapper isTile={isTile}>
           <HelpButton
             place="bottom"
@@ -318,6 +329,7 @@ const Badges = ({
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
+          isDisabled={mobileView}
         />
       )}
 
@@ -329,6 +341,7 @@ const Badges = ({
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
+          isDisabled={mobileView}
         />
       )}
 
@@ -339,6 +352,7 @@ const Badges = ({
           iconName={iconMute}
           size={sizeBadge}
           className="badge  is-mute tablet-badge"
+          isDisabled={mobileView}
           {...unmuteIconProps}
         />
       )}
@@ -349,6 +363,7 @@ const Badges = ({
           className="badge icons-group is-pinned tablet-badge tablet-pinned"
           iconName={iconPin}
           size={sizeBadge}
+          isDisabled={mobileView}
           {...unpinIconProps}
         />
       )}

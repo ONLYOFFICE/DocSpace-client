@@ -270,7 +270,10 @@ StyledProgressContainer.defaultProps = {
 
 StyledButtonWrapper.defaultProps = { theme: Base };
 
-const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
+const StyledProgressBarContainer = styled.div<{
+  isUploading?: boolean;
+  error: boolean;
+}>`
   display: ${(props) => (props.isUploading ? "flex" : "none")};
 
   align-items: center;
@@ -325,7 +328,12 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
       .progress_icon {
         svg {
           path {
-            fill: ${(props) => props.theme.mainButtonMobile.bar.icon};
+            fill: ${(props) =>
+              props.error
+                ? props.theme.isBase
+                  ? globalColors.lightStatusWarning
+                  : globalColors.darkStatusWarning
+                : props.theme.mainButtonMobile.bar.icon};
           }
         }
       }

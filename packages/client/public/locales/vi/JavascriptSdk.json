@@ -79,7 +79,6 @@
   "MobileOnly": "chỉ thiết bị di động",
   "Page": "Hiển thị trang (số)",
   "PortalDescription": "Nhúng toàn bộ {{productName}} để cho phép người dùng tương tác với tất cả các phòng, tập tin và cài đặt.",
-  "PublicRoomDescription": "Nhúng một phòng công cộng để cho phép người dùng xem tất cả các tài liệu được lưu trữ ở đó mà không cần đăng ký.",
   "RightPanelCollapsed": "Đã thu gọn bảng điều khiển bên phải",
   "RoomFilter": "Bộ Lọc Phòng",
   "RoomOrFolder": "Phòng hoặc Thư mục",

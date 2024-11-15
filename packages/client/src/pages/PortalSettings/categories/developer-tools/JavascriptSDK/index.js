@@ -95,7 +95,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:PublicRoom"),
-      description: t("PublicRoomDescription"),
+      description: t("JavascriptSdk:PublicRoomPresetInfo"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToPublicRoom,
     },

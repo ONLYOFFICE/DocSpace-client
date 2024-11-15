@@ -1262,8 +1262,9 @@ class FilesStore {
   setSelected = (selected, clearBuffer = true) => {
     if (selected === "close" || selected === "none") {
       clearBuffer && this.setBufferSelection(null);
-      this.setHotkeyCaretStart(null);
-      this.setHotkeyCaret(null);
+
+      this.setHotkeyCaretStart(this.selection.at(-1) ?? this.hotkeyCaretStart);
+      this.setHotkeyCaret(this.selection.at(-1) ?? this.hotkeyCaret);
     }
 
     this.selected = selected;

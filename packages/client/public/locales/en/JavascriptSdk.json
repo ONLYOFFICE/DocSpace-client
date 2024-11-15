@@ -81,7 +81,7 @@
   "MobileOnly": "only mobile devices",
   "Page": "Display page (number)",
   "PortalDescription": "Embed the whole {{productName}} to allow users to interact with all rooms, files, and settings.",
-  "PublicRoomDescription": "Embed a public room to allow users to view all the documents stored there without registration.",
+  "PublicRoomPresetInfo": "Embed a public room to allow users to view, edit, comment, or review all the documents stored there without registration",
   "RightPanelCollapsed": "Right panel collapsed",
   "RoomFilter": "Room Filter",
   "RoomOrFolder": "Room or Folder",

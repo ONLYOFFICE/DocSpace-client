@@ -1498,16 +1498,11 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
-export async function changeIndex(
-  id: number,
-  order: number,
-  isFolder: boolean,
-) {
-  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+export async function changeIndex(items) {
   return request({
     method: "put",
-    url,
-    data: { order },
+    url: "files/order",
+    data: { items },
   });
 }
 

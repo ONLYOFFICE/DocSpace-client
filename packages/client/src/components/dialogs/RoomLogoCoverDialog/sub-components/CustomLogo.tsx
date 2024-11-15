@@ -89,6 +89,7 @@ export const CustomLogo = ({
   roomTitle,
 }: CustomLogoProps) => {
   const textColor = color && getTextColor(color, 202);
+
   return (
     <StyledLogo color={color} textColor={textColor} isBase={isBaseTheme}>
       {withoutIcon ? (
@@ -101,9 +102,11 @@ export const CustomLogo = ({
           {roomTitle}
         </Text>
       ) : (
-        <ReactSVG
+        <div
+          {...(icon?.data && {
+            dangerouslySetInnerHTML: { __html: icon.data },
+          })}
           className="custom-logo-cover"
-          src={`data:image/svg+xml;base64, ${window.btoa(icon.data)}`}
         />
       )}
     </StyledLogo>

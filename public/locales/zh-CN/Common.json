@@ -199,7 +199,6 @@
   "FolderActionRequired": "目标位置中已存在名为«<1>{{folderName}} </1>»的文件夹。",
   "FoldersAlreadyContains": "目标位置中已存在同名文件夹。",
   "FoldersAndFilesWillBeCopied": "文件夹和文件将被复制到目标位置",
-  "FormFilingRoomDescription": "将 PDF 表单上传到房间。邀请用户填写 PDF 表单。查看已完成的表单并分析电子表格中自动收集的数据。",
   "FormFilingRoomTitle": "表单填写房间",
   "FormRoom": "表单房间",
   "Free": "免费",

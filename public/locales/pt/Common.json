@@ -214,7 +214,6 @@
   "FolderActionRequired": "O destino já contém uma pasta chamada «<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "O destino já contém pastas com o mesmo nome.",
   "FoldersAndFilesWillBeCopied": "Pastas e arquivos serão copiados no destino",
-  "FormFilingRoomDescription": "Carregue formulários PDF na sala. Convide os usuários a preencher um formulário PDF. Revise os formulários preenchidos e analise os dados coletados automaticamente em uma planilha.",
   "FormFilingRoomTitle": "Sala de preenchimento de formulários",
   "FormRoom": "Sala de formulário",
   "Free": "Grátis",

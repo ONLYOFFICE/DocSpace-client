@@ -200,7 +200,6 @@
   "FolderActionRequired": "コピー先に「<1>{{folderName}}</1>」という名前のフォルダが既に存在します。",
   "FoldersAlreadyContains": "コピー先に同じ名前のフォルダが既に存在します。",
   "FoldersAndFilesWillBeCopied": "フォルダとファイルはコピー先にコピーされます。",
-  "FormFilingRoomDescription": "PDFフォームをルームにアップロード。PDFフォームに記入するユーザーを招待。記入されたフォームをレビューし、スプレッドシートに自動的に収集されたデータを分析できる。",
   "FormFilingRoomTitle": "フォーム記入ルーム",
   "FormRoom": "フォームルーム",
   "Free": "無料",

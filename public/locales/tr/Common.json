@@ -198,7 +198,6 @@
   "FolderActionRequired": "Hedef zaten «<1>{{folderName}}</1>» adlı bir klasör içeriyor.",
   "FoldersAlreadyContains": "Hedef zaten aynı ada sahip klasörler içeriyor.",
   "FoldersAndFilesWillBeCopied": "Klasörler ve dosyalar hedefe kopyalanacak",
-  "FormFilingRoomDescription": "PDF formlarını odaya yükleyin. Kullanıcıları bir PDF formu doldurmaya davet edin. Tamamlanan formları inceleyin ve bir elektronik tabloda otomatik olarak toplanan verileri analiz edin.",
   "FormFilingRoomTitle": "Form Doldurma Odası",
   "FormRoom": "Form odası",
   "Free": "Ücretsiz",

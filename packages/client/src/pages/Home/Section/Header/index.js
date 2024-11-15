@@ -454,7 +454,7 @@ const SectionHeaderContent = (props) => {
         },
         {
           id: "save-index",
-          label: t("Files:APPLY"),
+          label: t("Common:ApplyButton"),
           onClick: onIndexApply,
           iconUrl: CheckIcon,
         },

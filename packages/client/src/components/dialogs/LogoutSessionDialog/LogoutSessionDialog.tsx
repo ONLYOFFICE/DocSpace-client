@@ -51,7 +51,7 @@ export const LogoutSessionDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Logout")}</ModalDialog.Header>
       <ModalDialog.Body>
         {t("Profile:LogoutFrom", {
           platform: data.platform,

@@ -113,7 +113,7 @@ export const LogoutAllSessionDialog = ({
       displayType={ModalDialogType.modal}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Logout")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         {!isSeveralSelection

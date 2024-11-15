@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "Invitatul <strong>{{userName}}</strong> va fi deplasat în secțiunea Persoane și îi se va stabili tip de utilizator. Utilizatorii au propria lor secțiunea Documente, pot crea și modifica fișiere, dar nu pot crea săli.",
-  "ChangeGuestsTypeMessageMulti": "Invitații selectați vor fi deplasați în secțiunea Persoane și li se vor stabili tip de utilizator. Utilizatorii au propria lor secțiunea Documente, pot crea și modifica fișiere, dar nu pot crea săli.",
+  "ChangeGuestsTypeMessage": "Invitatul <strong>{{userName}}</strong> va fi deplasat în secțiunea {{membersSection}} și îi se va stabili tip de utilizator. Utilizatorii au propria lor secțiunea {{documentsSection}} , pot crea și modifica fișiere, dar nu pot crea săli.",
+  "ChangeGuestsTypeMessageMulti": "Invitații selectați vor fi deplasați în secțiunea {{membersSection}} și li se vor stabili tip de utilizator. Utilizatorii au propria lor secțiunea {{documentsSection}}, pot crea și modifica fișiere, dar nu pot crea săli.",
   "ChangeUserTypeButton": "Modificare tip",
   "ChangeUserTypeHeader": "Schimbați tipul utilizatorului",
   "ChangeUserTypeMessage": "Utilizatorii de tipul <strong>'{{ firstType }}'</strong> vor fi transferați la tipul <strong>'{{ secondType }}'</strong>.",

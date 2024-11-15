@@ -57,7 +57,7 @@ const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
           ? t("InfoPanel:GuestsEmptyScreenText")
           : isGroups
             ? t("InfoPanel:GroupsEmptyScreenText")
-            : t("InfoPanel:UsersEmptyScreenText")}
+            : t("InfoPanel:MembersEmptyScreenText")}
       </Text>
     </StyledNoItemContainer>
   );

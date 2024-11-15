@@ -1,6 +1,5 @@
 {
   "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
-  "EnterCredentials": "Lütfən, silinməni təsdiqləmək üçün {{productName}} rekvizitləri daxil edin",
   "ErrorInvalidText": "10 saniyədə <1>{{productName}}</1> yönləndiriləcəksiniz",
   "ForgotPassword": "Parolunuzu unutmusunuz mu?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} istifadəçi adı",

@@ -2,8 +2,6 @@
   "AddManually": "අතින් යොදන්න",
   "EmailErrorMessage": "වි-තැපැල් ලිපිනය වලංගු නොවේ. ඔබට එය මත දෙවරක් ක්ලික් කිරීමෙන් ඊමේල් සංස්කරණය කළ හැකිය.",
   "InvitationLanguage": "ආරාධන භාෂාව",
-  "InviteAccountSearchPlaceholder": "වි-තැපෑලෙන් ආරාධනය",
-  "InviteNewAccountManuallyDescription": "වි-තැපෑලෙන් පෞද්ගලිකව {{productName}} වෙත නව පරිශ්‍රීලකයින්ට ආරාධනා කරන්න",
   "InviteViaLink": "සබැඳියකින් ආරාධනය",
   "InviteViaLinkDescriptionAccounts": "{{productName}} වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",
   "InviteViaLinkDescriptionRoom": "කාමරය වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",

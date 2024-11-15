@@ -1,4 +1,5 @@
 {
+  "ActionCannotUndone": "Ova akcija ne može biti opozvana. Da li ste sigurni da želite da nastavite?",
   "AddedToClipboard": "Stavke dodate u privremenu memoriju",
   "AddMembersDescription": "Možete dodati nove članove tima ručno ili ih pozvati putem linka.",
   "AddNewLink": "Dodaj novi link",
@@ -37,6 +38,7 @@
   "DateLastOpened": "Datum poslednjeg otvaranja",
   "DaysRemaining": "Dani preostali: {{daysRemaining}}",
   "DeleteLink": "Obriši link",
+  "DeleteSharedCustomPublic": "Link će biti trajno izbrisan. Nećete moći da poništite ovu radnju.",
   "DeleteSharedLink": "Prethodni link će postati nedostupan. Novi deljeni link će biti kreiran.",
   "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje",
   "DisableNotifications": "Onemogući notifikacije",
@@ -144,6 +146,9 @@
   "ReorderIndex": "Radnja preuređivanja će ukloniti praznine u indeksima. Fajlovi će biti reindeksirani po redu sa offsetom kako bi popunili nedostajuće indekse.",
   "RestoreAll": "Povrati sve",
   "RevokeLink": "Opozovi link",
+  "RevokeSharedLinkDescriptionCustomRoom": "Linkovi za sve fajlove u sobi će biti obrisani. Prethodni linkovi do fajlova u sobi i ugrađenih dokumenata postaće nedostupni.",
+  "RevokeSharedLinkDescriptionFormRoom": "Linkovi do svih obrazaca u sobi će biti regenerisani. Prethodni linkovi do obrazaca u sobi i ugrađenih obrazaca postaće nedostupni.",
+  "RevokeSharedLinkDescriptionPublicRoom": "Linkovi za sve fajlove u sobi biće ponovo generisani. Prethodni linkovi do fajlova u sobi i ugrađenih dokumenata postaće nedostupni.",
   "RoomAvailableViaExternalLink": "Soba dostupna putem spoljnog linka",
   "RoomAvailableViaSharedLink": "Prostorija dostupna preko podeljenog linka",
   "RoomCreated": "Soba kreirana",
@@ -189,6 +194,11 @@
   "WantLeaveRoom": "Da li zaista želite da napustite ovu sobu? Moći ćete da joj se pridružite ponovo putem nove pozivnice od administratora sobe.",
   "WantToRestoreTheRoom": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Da li želite da obnovite sobu?",
   "WantToRestoreTheRooms": "Svi deljeni linkovi u obnovljenim sobama će postati aktivni, a njihov sadržaj će biti dostupan svima sa linkom sobe. Da li želite da obnovite sobe?",
+  "WarningCopyToFormRoom": "Fajl ne može biti kopiran u ovu sobu. Pokušajte da kopirate {{ organizationName }} PDF obrazac.",
+  "WarningCopyToFormRoomServal": "Kopiranje više fajlova u sobu za popunjavanje obrazaca nije podržano. Kopirajte jedan {{ organizationName }} PDF obrazac u isto vreme.",
+  "WarningCreationFormRoom": "Kreiranje zasnovano na više fajlova i foldera nije dostupno za ovu vrstu sobe. Da biste kreirali takvu sobu, idite na odeljak Sobe ili koristite jedan od PDF obrazaca.",
+  "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
+  "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WithSubfolders": "Sa podfolderima",
   "YouLeftTheRoom": "Napustili ste sobu"
 }

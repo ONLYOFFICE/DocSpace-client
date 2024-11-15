@@ -5,6 +5,8 @@
   "CreateSpaceDescription": "Você conectou com sucesso seu domínio ao seu endereço IP. Para editar as configurações de endereço do espaço, você precisa definir o nome futuro do {{productName}}",
   "CreatingPortal": "Criando novo {{productName}}",
   "CurrentSpace": "Espaço atual",
+  "DeleteEmptyPortalText": "Você excluirá permanentemente o espaço <1>{{domain}}</1>. Essa ação não pode ser desfeita.",
+  "DeleteWarning": "O último espaço de acesso total não pode ser excluído",
   "DomainName": "Nome do domínio",
   "DomainNotFound": "Domínio não encontrado, verifique nas configurações de DNS",
   "DomainSettings": "Configurações de domínio",

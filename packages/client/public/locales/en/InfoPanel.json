@@ -41,6 +41,7 @@
   "ItemsSelected": "Items selected",
   "LastModifiedBy": "Last modified by",
   "LifetimeEnds": "Lifetime ends",
+  "MembersEmptyScreenText": "See members details here",
   "NoRecordsFound": "No records found",
   "Properties": "Properties",
   "RoomArchived": "Room moved to Archive",
@@ -75,6 +76,5 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "UsersEmptyScreenText": "See users details here",
   "Versions": "Versions"
 }

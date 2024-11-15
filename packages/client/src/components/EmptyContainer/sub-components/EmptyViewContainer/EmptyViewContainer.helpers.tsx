@@ -181,13 +181,10 @@ export const getOptions = (
   );
 
   const inviteUser = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersOptionDescription"),
-  );
-
-  const inviteUserEditingRoom = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersCollaborationOptionDescription"),
+    t("Common:InviteContacts"),
+    t("EmptyView:InviteUsersOptionDescription", {
+      productName: t("Common:ProductName"),
+    }),
   );
 
   const shareFillingRoom = {
@@ -433,7 +430,7 @@ export const getOptions = (
 
       return [
         createFile,
-        inviteUserEditingRoom,
+        inviteUser,
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];

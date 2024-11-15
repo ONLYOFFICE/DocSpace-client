@@ -206,6 +206,7 @@
   "RestoreBackupDescription": "Koristi ovu opciju da povratiš svoj prostor od prethodno sačuvane rezervne kopije datoteke.",
   "RestoreBackupResetInfoWarningText": "Sve trenutne lozinke će biti resetovane. {{productName}} korisnici će dobiti email sa pristupom linku za obnovu.",
   "RestoreBackupWarningText": "{{productName}} će postati nedostupan tokom procesa obnavljanja. Nakon što je obnavljanje završeno, sve promene napravljene nakon datuma odabrane tačke obnavljanja će biti izgubljene.",
+  "RestoreToDefault": "Povratak na podrazumevano",
   "RolesAreSet": "Uloge su već postavljene za odabrane korisnike.",
   "RoomQuotaDisabled": "Kvota prostorije je uspešno onemogućena.",
   "RoomQuotaEnabled": "Kvota prostorije je uspešno omogućena.",

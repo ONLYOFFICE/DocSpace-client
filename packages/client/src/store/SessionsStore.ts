@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import moment from "moment-timezone";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
@@ -70,8 +69,6 @@ class SessionsStore {
   activeSessionsMap = new Map();
 
   displayName = "";
-
-  fromDateAgo = {};
 
   items;
 

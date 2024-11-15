@@ -177,6 +177,7 @@ const Modal = ({
                     isPanel={false}
                     withFooterBorder={withFooterBorder}
                     isInvitePanelLoader={isInvitePanelLoader}
+                    hasFooter={!!footer}
                   />
                 )
               ) : container &&

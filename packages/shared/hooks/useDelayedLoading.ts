@@ -24,15 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface DialogSkeletonProps {
-  isLarge: boolean;
-  withFooterBorder: boolean;
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const SHOW_LOADER_TIMER = 200;
+const MIN_LOADER_TIMER = 500;
+
+// Enables isLoading only if more than the minimum time has elapsed.
+function useDelayedLoading() {
+  const [isLoading, setIsLoading] = useState(false);
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  const minimumDisplayTime = useRef<NodeJS.Timeout | null>(null);
+
+  const startLoading = useCallback(() => {
+    timeoutId.current = setTimeout(() => {
+      setIsLoading(true);
+      minimumDisplayTime.current = setTimeout(() => {
+        minimumDisplayTime.current = null;
+      }, SHOW_LOADER_TIMER);
+    }, MIN_LOADER_TIMER);
+  }, []);
+
+  const stopLoading = useCallback(() => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+      timeoutId.current = null;
+    }
+
+    if (!minimumDisplayTime.current) {
+      setIsLoading(false);
+    } else {
+      minimumDisplayTime.current = setTimeout(() => {
+        setIsLoading(false);
+        minimumDisplayTime.current = null;
+      }, SHOW_LOADER_TIMER);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId.current) clearTimeout(timeoutId.current);
+      if (minimumDisplayTime.current) clearTimeout(minimumDisplayTime.current);
+    };
+  }, []);
+
+  return { isLoading, startLoading, stopLoading };
 }
 
-export interface DialogAsideSkeletonProps {
-  isPanel: boolean;
-  withoutAside?: boolean;
-  withFooterBorder: boolean;
-  isInvitePanelLoader?: boolean;
-  hasFooter?: boolean;
-}
+export default useDelayedLoading;

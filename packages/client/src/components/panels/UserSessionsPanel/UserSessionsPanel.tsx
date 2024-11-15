@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -32,6 +32,8 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import useDelayedLoading from "@docspace/shared/hooks/useDelayedLoading";
+import UserSessionsPanelLoader from "@docspace/shared/skeletons/UserSessionsPanel";
 
 import AllSessionsBlock from "./AllSessionsBlock";
 import LastSessionBlock from "./LastSessionBlock";
@@ -51,6 +53,8 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   } = storeProps!;
 
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
+  const [isInit, setIsInit] = useState(false);
+  const { startLoading, stopLoading, isLoading } = useDelayedLoading();
 
   const onClose = () => {
     setVisible(false);
@@ -61,7 +65,16 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
     if (!bufferSelection) return;
     const userId = bufferSelection.userId;
 
-    fetchUserSessions(userId);
+    const loadUserSessions = async () => {
+      startLoading();
+
+      await fetchUserSessions(userId);
+
+      setIsInit(true);
+      stopLoading();
+    };
+
+    loadUserSessions();
     subscribeToUserSessions(userId);
 
     return () => {
@@ -74,6 +87,8 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
     subscribeToUserSessions,
     unsubscribeToUserSessions,
     clearUserSessions,
+    startLoading,
+    stopLoading,
   ]);
 
   return (
@@ -85,8 +100,13 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
     >
       <ModalDialog.Header>{t("Profile:ActiveSessions")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <LastSessionBlock t={t} />
-        <AllSessionsBlock t={t} />
+        {isLoading && <UserSessionsPanelLoader />}
+        {!isLoading && isInit && (
+          <>
+            <LastSessionBlock t={t} />
+            <AllSessionsBlock t={t} />
+          </>
+        )}
       </ModalDialog.Body>
     </ModalDialog>
   );

@@ -38,6 +38,7 @@ const DialogAsideSkeleton = ({
   withoutAside,
   withFooterBorder = false,
   isInvitePanelLoader,
+  hasFooter,
 }: DialogAsideSkeletonProps) => {
   const zIndex = 310;
 
@@ -56,10 +57,12 @@ const DialogAsideSkeleton = ({
           <RectangleSkeleton height="200px" />
         </div>
 
-        <div className="dialog-loader-footer">
-          <RectangleSkeleton height="40px" />
-          <RectangleSkeleton height="40px" />
-        </div>
+        {hasFooter && (
+          <div className="dialog-loader-footer">
+            <RectangleSkeleton height="40px" />
+            <RectangleSkeleton height="40px" />
+          </div>
+        )}
       </StyledDialogAsideLoader>
     );
   };

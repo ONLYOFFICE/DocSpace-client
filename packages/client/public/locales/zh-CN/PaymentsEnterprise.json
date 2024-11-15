@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "要购买许可证，请单击下方按钮。",
   "ActivatePurchaseBuyNow": "立即购买",
   "ActivatePurchaseRenewLicense": "要继续获得支持和更新，请购买续订。",
+  "ActivateRenewalDescr": "如要激活您已购买的续订，请在下方上传，并点击激活按钮。",
   "ActivateRenewDescr": "要获取您的个人续订条款，请联系您的专属经理或给我们发送邮件至<1>{{email}}</1>",
   "ActivateTariffLicenseTrialExpiration": "您的试用期在{{date}}到期。",
   "ActivateUploadDescr": "要激活您的许可证，请在下方上传许可证并单击“激活”。",

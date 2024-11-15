@@ -17,7 +17,14 @@
   "RoomQuotaHeaderLimit": "房间数量已达到限制：{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "存储空间和房间数量即将超出限制",
   "StorageAndRoomLimitHeader": "存储空间和房间数量已达到限制",
+  "StorageAndUserTariffLimitHeader": "存储空间和管理员数量已达到限制",
   "StorageLimitHeader": "存储空间已达到限制：{{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "存储空间数量即将超出限制：{{currentValue}}/{{maxValue}}",
-  "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。"
+  "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。",
+  "UserQuotaHeader": "管理员数量即将超出限制：{{currentValue}} / {{maxValue}}",
+  "UserTariffAlmostReached": "一旦达到限制，所有新添加用户将仅具有用户权限。若要添加更多管理员，请联系{{productName}}管理员升级资费计划。",
+  "UserTariffAlmostReachedForAdmins": "一旦达到限制，所有新添加用户将仅具有用户权限。若要添加更多管理员，<1>点击此处</1>升级您的资费计划。",
+  "UserTariffLimitHeader": "存储空间和管理员数量已达到限制",
+  "UserTariffReached": "所有新添加用户将仅具有用户权限。若要添加更多管理员，请联系{{productName}}管理员升级资费计划。",
+  "UserTariffReachedForAdmins": "所有新添加用户将仅具有用户权限。若要添加更多管理员，<1>点击此处</1>升级您的资费计划。"
 }

@@ -84,13 +84,18 @@ const getInitialText = (text, isEdit) => {
   return isEdit && text ? text : "";
 };
 
+const getTabsInfo = (additions, t, tabs) => {
+  const dataTabs = tabs ?? tabsOptions(t);
+
+  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
+};
+
 const getInitialTabs = (additions, isEdit, t) => {
   const dataTabs = tabsOptions(t);
 
-  if (additions === 0 && isEdit) return [];
   if (!isEdit || !additions) return [dataTabs[0]];
 
-  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
+  return getTabsInfo(additions, t, dataTabs);
 };
 
 const rotateOptions = (t) => [
@@ -185,7 +190,7 @@ const ViewerInfoWatermark = ({
       watermark: { ...watermark, additions: flagsCount },
     });
 
-    const tabs = getInitialTabs(flagsCount, true, t);
+    const tabs = getTabsInfo(flagsCount, t);
     elements.current = getInitialState(tabs);
   };
 

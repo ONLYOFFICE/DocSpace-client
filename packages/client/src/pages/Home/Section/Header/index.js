@@ -28,6 +28,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -259,6 +260,8 @@ const SectionHeaderContent = (props) => {
     signInButtonIsDisabled,
     isShared,
     displayAbout,
+    revokeFilesOrder,
+    saveIndexOfFiles,
   } = props;
 
   const location = useLocation();
@@ -413,11 +416,17 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCloseIndexMenu = () => {
+    revokeFilesOrder();
     setIsIndexEditingMode(false);
   };
 
   const onIndexReorder = () => {
     setReorderDialogVisible(true);
+  };
+
+  const onIndexApply = () => {
+    saveIndexOfFiles();
+    setIsIndexEditingMode(false);
   };
 
   const getTitleIcon = () => {
@@ -442,6 +451,12 @@ const SectionHeaderContent = (props) => {
           label: t("Files:Reorder"),
           onClick: onIndexReorder,
           iconUrl: RoundedArrowSvgUrl,
+        },
+        {
+          id: "save-index",
+          label: t("Files:APPLY"),
+          onClick: onIndexApply,
+          iconUrl: CheckIcon,
         },
       ]
     : isContactsPage
@@ -756,6 +771,8 @@ export default inject(
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
+      revokeFilesOrder,
+      saveIndexOfFiles,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -934,6 +951,8 @@ export default inject(
       createFoldersTree,
       getContactsModel,
       contactsCanCreate,
+      revokeFilesOrder,
+      saveIndexOfFiles,
 
       rootFolderId,
       isShared,

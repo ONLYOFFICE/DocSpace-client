@@ -55,7 +55,7 @@
     showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Size,Type,Tags",
+    viewTableColumns: "Index,Name,Size,Type,Tags",
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,

@@ -80,8 +80,8 @@ const Wrapper = styled.div`
 
 Wrapper.defaultProps = { theme: Base };
 
-const StyledRow = styled(Row)`
-  ${(props) => props.checked && checkedStyle};
+const StyledRow = styled(Row)<{ $isActive?: boolean }>`
+  ${(props) => (props.checked || props.$isActive) && checkedStyle};
 
   ${!isMobile &&
   css`
@@ -120,6 +120,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
     t,
     item,
     isChecked,
+    isActive,
     onRowClick,
     onRowContextClick,
     contextOptions,
@@ -132,7 +133,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
 
   return (
     <Wrapper
-      className={`user-item row-wrapper ${isChecked ? "row-selected" : ""}`}
+      className={`user-item row-wrapper ${isChecked || isActive ? "row-selected" : ""}`}
     >
       <div className="user-item">
         <StyledRow
@@ -146,6 +147,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
           onRowClick={onRowClick}
           onContextClick={onRowContextClick}
           getContextModel={getContextModel}
+          $isActive={isActive}
         >
           <SessionsRowContent
             t={t}

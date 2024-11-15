@@ -2811,7 +2811,6 @@ __metadata:
     "@types/node": "npm:^22.7.5"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.3.1"
-    date-and-time: "npm:^3.6.0"
     eslint: "npm:^8.57.1"
     eslint-config-next: "npm:14.2.15"
     i18next: "npm:^20.6.1"
@@ -2819,7 +2818,6 @@ __metadata:
     nconf: "npm:^0.12.1"
     next: "npm:^14.2.15"
     pino: "npm:^9.5.0"
-    pino-abstract-transport: "npm:^2.0.0"
     pino-pretty: "npm:^11.3.0"
     pino-roll: "npm:^2.2.0"
     prettier: "npm:^3.3.3"
@@ -12711,13 +12709,6 @@ __metadata:
     es-errors: "npm:^1.3.0"
     is-data-view: "npm:^1.0.1"
   checksum: 10/96f34f151bf02affb7b9f98762fb7aca1dd5f4553cb57b80bce750ca609c15d33ca659568ef1d422f7e35680736cbccb893a3d4b012760c758c1446bbdc4c6db
-  languageName: node
-  linkType: hard
-
-"date-and-time@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "date-and-time@npm:3.6.0"
-  checksum: 10/0be075a0d57d305dbffb812df6a4326af7ceba08b78ec4ac7b065ec46d14d2d3f6b9e793c96508c268814ca1f2dba72cfa1e70d477cc6674921274fc11bbcdef
   languageName: node
   linkType: hard
 

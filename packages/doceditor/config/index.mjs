@@ -48,7 +48,7 @@ const logPath = nconf.get("logPath");
 
 if (logPath != null) {
   if (!path.isAbsolute(logPath)) {
-    nconf.set("logPath", path.join(process.cwd(), "..", "..", logPath));
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
   }
 }
 

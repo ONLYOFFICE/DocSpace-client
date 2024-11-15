@@ -15,13 +15,11 @@
   "dependencies": {
     "@onlyoffice/document-editor-react": "^1.5.1",
     "@serdnam/pino-cloudwatch-transport": "^1.0.4",
-    "date-and-time": "^3.6.0",
     "i18next": "^20.6.1",
     "moment": "^2.30.1",
     "nconf": "^0.12.1",
     "next": "^14.2.15",
     "pino": "^9.5.0",
-    "pino-abstract-transport": "^2.0.0",
     "pino-pretty": "^11.3.0",
     "pino-roll": "^2.2.0",
     "react": "^18.3.1",

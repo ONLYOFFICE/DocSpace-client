@@ -88,7 +88,7 @@ const getLogger = () => {
       transport: {
         target: "pino-roll",
         options: {
-          file: logPath,
+          file: `${logPath}/web.doceditor`,
           frequency: "daily",
           limit: { count: MAX_FILE_COUNT },
           dateFormat: "yyyy-MM-dd",

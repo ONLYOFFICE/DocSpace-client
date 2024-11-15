@@ -198,7 +198,6 @@
   "FolderActionRequired": "목표에 이미 «<1>{{folderName}}</1>» 이름의 폴더가 있습니다.",
   "FoldersAlreadyContains": "목표에 이미 같은 이름의 폴더가 있습니다.",
   "FoldersAndFilesWillBeCopied": "폴더와 파일이 목표에 복사됩니다",
-  "FormFilingRoomDescription": "PDF 양식을 룸에 업로드하세요. 사용자를 초대하여 PDF 양식을 작성하세요. 작성이 완료된 양식을 검토하고 스프레드시트에서 자동으로 수집된 데이터를 분석하세요.",
   "FormFilingRoomTitle": "양식 작성 룸에서",
   "FormRoom": "양식 방",
   "Free": "무료",

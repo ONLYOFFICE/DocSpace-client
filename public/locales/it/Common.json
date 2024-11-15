@@ -200,7 +200,6 @@
   "FolderActionRequired": "La destinazione contiene già una cartella denominata «<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "La destinazione contiene già cartelle con lo stesso nome.",
   "FoldersAndFilesWillBeCopied": "Le cartelle e i file verranno copiati nella destinazione",
-  "FormFilingRoomDescription": "Carica i moduli PDF nella stanza. Invita gli utenti a compilare un modulo PDF. Esamina i moduli compilati e analizza i dati raccolti automaticamente in un foglio di calcolo.",
   "FormFilingRoomTitle": "Stanza per la compilazione moduli",
   "FormRoom": "Stanza dei moduli",
   "Free": "Gratuito",

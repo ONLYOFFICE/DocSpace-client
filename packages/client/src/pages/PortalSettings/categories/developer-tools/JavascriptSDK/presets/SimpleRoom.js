@@ -231,7 +231,7 @@ const SimpleRoom = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PublicRoomDescription")}
+      description={t("JavascriptSdk:PublicRoomPresetInfo")}
       header={t("CreateSamplePublicRoom")}
     >
       <Container>

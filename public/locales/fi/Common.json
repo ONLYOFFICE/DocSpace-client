@@ -198,7 +198,6 @@
   "FolderActionRequired": "Kohde sisältää jo kansion nimeltä «<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "Kohde sisältää jo samannimisiä kansioita",
   "FoldersAndFilesWillBeCopied": "Kansiot ja tiedostota kopioidaan kohteeseen",
-  "FormFilingRoomDescription": "Lataa PDF-lomakkeet huoneeseen. Kutsu käyttäjiä täyttämään PDF-lomake. Katsele valmiita lomakkeita ja analysoi automaattisesti taulukkoon kerättyä tietoa.",
   "FormFilingRoomTitle": "Lomakkeen täyttöhuone",
   "FormRoom": "Lomakehuone",
   "Free": "Ilmainen",

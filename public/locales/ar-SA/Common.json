@@ -198,7 +198,6 @@
   "FolderActionRequired": "الوجهة تحتوي بالفعل على مجلد اسمه «</1>{{folderName}}<1>».",
   "FoldersAlreadyContains": "الوجهة تحتوي بالفعل على مجلدات بنفس الاسم.",
   "FoldersAndFilesWillBeCopied": "المجلدات والملفات سيتم نسخها إلى الوجهة",
-  "FormFilingRoomDescription": "تحميل نماذج PDF في الغرفة. قم بدعوة المستخدمين لتعبئة نموذج PDF. قم بمراجعة النماذج المكتملة وتحليل البيانات المجمعة تلقائيًا في جدول بيانات.                  ",
   "FormFilingRoomTitle": "غرفة تعبئة النموذج",
   "FormRoom": "غرفة النموذج",
   "Free": "مجانًا",

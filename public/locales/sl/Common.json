@@ -198,7 +198,6 @@
   "FolderActionRequired": "Destinacija že vsebuje mapo z imenom.«<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "Destinacija že vsebuje mape z istim imenom.",
   "FoldersAndFilesWillBeCopied": "Mape in datoteke bodo kopirane na destinacijo",
-  "FormFilingRoomDescription": "Naloži PDF obrazce v sobo. Povabi uporabnike, da izpolnijo obrazec PDF. Pregleduj izpolnjene obrazce in analiziraj samodejno zbrane podatke v preglednici.",
   "FormFilingRoomTitle": "Soba za izpolnjevanje obrazcev",
   "FormRoom": "Soba obrazcev",
   "Free": "Brezplačen",

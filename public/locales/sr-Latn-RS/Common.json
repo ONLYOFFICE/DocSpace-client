@@ -399,7 +399,6 @@
   "PublicAuthorizeToast": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Da biste mogli da radite na dokumentima, molimo vas da se prijavite.",
   "PublicLink": "Javni link",
   "PublicRoom": "Javna soba",
-  "PublicRoomDescription": "Pozovite korisnike preko spoljnih linkova da pregledaju dokumente bez registracije. Takođe možete da ugradite ovu sobu u bilo koji veb interfejs.",
   "PublicRoomLabel": "Javno",
   "PunycodeDomain": "Punikod domeni nisu podržani",
   "PunycodeLocalPart": "Punikod lokalni deo nije podržan",

@@ -393,7 +393,6 @@
   "PublicAuthorizeToast": "Dany pokój jest otwarty w trybie <1>{{roomMode}}</1>. Aby móc pracować nad dokumentami, należy udzielić autoryzacji.",
   "PublicLink": "Link publiczny",
   "PublicRoom": "Pokój publiczny",
-  "PublicRoomDescription": "Zaproś użytkowników za pomocą linków zewnętrznych do przeglądania dokumentów bez konieczności rejestracji. Możesz również osadzić ten pokój w dowolnym interfejsie internetowym.",
   "PublicRoomLabel": "Publiczny",
   "PunycodeDomain": "Domeny Punycode nie są obsługiwane",
   "PunycodeLocalPart": "Identyfikator użytkownika Punycode nie jest obsługiwany",

@@ -395,7 +395,6 @@
   "PublicAuthorizeToast": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să vă autentificați pentru a putea lucra cu documente.",
   "PublicLink": "Link public",
   "PublicRoom": "Sală publică",
-  "PublicRoomDescription": "Invitați utilizatorii la vizualizarea documentelor fără conectare prin link-uri externe. De asemenea puteți incorpora această sală în orice interfață web.",
   "PublicRoomLabel": "Public",
   "PunycodeDomain": "Domeniile Punycode nu sunt acceptate",
   "PunycodeLocalPart": "Partea locală Punycode nu este acceptată",

@@ -110,10 +110,9 @@ const ImageWatermark = ({
   const imageUrl = initialSettings?.imageUrl;
 
   let watermark = roomParams.watermark;
-  let initialInfoRef = initialInfo.current;
 
-  if (initialInfoRef === null) {
-    initialInfoRef = {
+  if (initialInfo.current === null) {
+    initialInfo.current = {
       rotate: getInitialRotate(initialSettings?.rotate, isEdit),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
@@ -123,10 +122,12 @@ const ImageWatermark = ({
       watermark = {
         ...watermark,
         additions: 0,
-        rotate: initialInfoRef.rotate.key,
-        scale: initialInfoRef.scale.key,
+        rotate: initialInfo.current.rotate.key,
+        scale: initialInfo.current.scale.key,
       };
   }
+
+  const initialInfoRef = initialInfo.current;
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
   const [selectedScale, setScale] = useState(initialInfoRef.scale);

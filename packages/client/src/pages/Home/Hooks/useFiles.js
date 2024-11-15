@@ -129,15 +129,6 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
-    if (location.state?.fromMediaViewer) {
-      const { fromMediaViewer, ...state } = location.state;
-      // remove fromMediaViewer from location state
-      return navigate(location.pathname + location.search, {
-        replace: true,
-        state,
-      });
-    }
-
     if (isContactsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);

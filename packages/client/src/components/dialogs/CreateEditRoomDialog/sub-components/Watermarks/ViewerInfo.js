@@ -87,6 +87,7 @@ const getInitialText = (text, isEdit) => {
 const getInitialTabs = (additions, isEdit, t) => {
   const dataTabs = tabsOptions(t);
 
+  if (additions === 0 && isEdit) return [];
   if (!isEdit || !additions) return [dataTabs[0]];
 
   return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
@@ -122,10 +123,9 @@ const ViewerInfoWatermark = ({
   const elements = useRef(null);
   const initialInfo = useRef(null);
   let watermark = roomParams.watermark;
-  let initialInfoRef = initialInfo.current;
 
-  if (initialInfoRef === null) {
-    initialInfoRef = {
+  if (initialInfo.current === null) {
+    initialInfo.current = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
@@ -133,21 +133,25 @@ const ViewerInfoWatermark = ({
       text: getInitialText(initialSettings?.text, isEdit),
     };
 
-    elements.current = getInitialState(initialInfoRef.tabs);
+    elements.current = getInitialState(initialInfo.current.tabs);
 
     if (!isImage && initialSettings) watermark = initialSettings;
     else
       watermark = {
-        rotate: initialInfoRef.rotate.key,
+        rotate: initialInfo.current.rotate.key,
         additions:
           roomParams.watermark?.additions || WatermarkAdditions.UserName,
         //image: "",
         imageWidth: 0,
         imageHeight: 0,
         imageScale: 0,
-        ...(initialInfoRef.text && { text: initialInfoRef.text }),
+        ...(initialInfo.current.text && {
+          text: initialInfo.current.text,
+        }),
       };
   }
+
+  const initialInfoRef = initialInfo.current;
   const [selectedPosition, setSelectedPosition] = useState(
     initialInfoRef.rotate,
   );
@@ -180,6 +184,9 @@ const ViewerInfoWatermark = ({
       ...roomParams,
       watermark: { ...watermark, additions: flagsCount },
     });
+
+    const tabs = getInitialTabs(flagsCount, true, t);
+    elements.current = getInitialState(tabs);
   };
 
   const onPositionChange = (item) => {

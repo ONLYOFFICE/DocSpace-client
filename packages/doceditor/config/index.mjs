@@ -24,51 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const { createServer } = require("http");
-const { parse } = require("url");
-const next = require("next");
+import nconf from "nconf";
+import path from "path";
 
-const config = require("./config/config.json");
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
 
-import("./logger.mjs").then(({ logger }) => {
-  const log = logger.child({ module: "server" });
-  const dev = process.env.NODE_ENV === "development";
+let appsettings = nconf.get("app").appsettings;
 
-  const port = config.PORT ?? 5013;
-  const hostname = config.HOSTNAME ?? "localhost";
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
+}
 
-  // when using middleware `hostname` and `port` must be provided below
-  const app = next({ dev, hostname, port });
-  const handle = app.getRequestHandler();
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
 
-  app.prepare().then(() => {
-    createServer(async (req, res) => {
-      try {
-        // Be sure to pass `true` as the second argument to `url.parse`.
-        // This tells it to parse the query portion of the URL.
-        const parsedUrl = parse(req.url, true);
+const logPath = nconf.get("logPath");
 
-        await handle(req, res, parsedUrl);
-      } catch (err) {
-        log.error({ url: req.url, error: err }, "Error occurred handling");
-        res.statusCode = 500;
-        res.end("internal server error");
-      }
-    })
-      .once("error", (err) => {
-        log.error(err);
-        process.exit(1);
-      })
-      .listen(port, () => {
-        log.info(`Server is listening on port ${port}`);
-      });
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", "..", logPath));
+  }
+}
 
-    process.on("unhandledRejection", (reason, process) => {
-      log.error({ process, reason }, "Unhandled rejection at");
-    });
-
-    process.on("uncaughtException", (error) => {
-      log.error({ error, stack: error.stack }, `Unhandled exception`);
-    });
-  });
-});
+export default nconf;

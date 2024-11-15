@@ -28,8 +28,7 @@ const path = require("path");
 const fs = require("fs");
 
 const publishPath = path.join(
-  __dirname,
-  "..",
+  process.cwd(),
   "..",
   "..",
   "..",
@@ -40,27 +39,42 @@ const publishPath = path.join(
 
 const nextBuild = path.join(process.cwd(), ".next");
 const nodeModulesBuild = path.join(nextBuild, "standalone", "node_modules");
-const configFolder = path.join(__dirname, "..", "config");
-const loggerFile = path.join(__dirname, "..", "logger.mjs");
-const serverFile = path.join(__dirname, "..", "server.prod.js");
-
+const configFolder = path.join(process.cwd(), "config");
+const loggerFile = path.join(process.cwd(), "logger.mjs");
+const serverFile = path.join(process.cwd(), "server.prod.js");
 const rootNodeModulesPath = path.join(
-  __dirname,
-  "..",
+  process.cwd(),
   "..",
   "..",
   "node_modules",
 );
-fs.cpSync(
-  path.join(rootNodeModulesPath, "pino-roll"),
-  path.join(nodeModulesBuild, "pino-roll"),
-  { recursive: true },
-);
-fs.cpSync(
-  path.join(rootNodeModulesPath, "date-fns"),
-  path.join(nodeModulesBuild, "date-fns"),
-  { recursive: true },
-);
+
+const libsToCopy = [
+  "pino-roll",
+  "date-fns",
+  "@serdnam",
+  "nconf",
+  "async",
+  "y18n",
+  "string-width",
+  "strip-ansi",
+  "ansi-regex",
+  "is-fullwidth-code-point",
+  "wrap-ansi",
+  "ansi-styles",
+  "escalade/sync",
+  "get-caller-file",
+  "require-directory",
+  "secure-keys",
+];
+
+libsToCopy.forEach((dir) => {
+  fs.cpSync(
+    path.join(rootNodeModulesPath, dir),
+    path.join(nodeModulesBuild, dir),
+    { recursive: true },
+  );
+});
 
 fs.cpSync(configFolder, path.join(publishPath, "config"), { recursive: true });
 

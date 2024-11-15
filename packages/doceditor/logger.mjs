@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import pino from "pino";
-import path from "path";
-import fs, { mkdir } from "fs";
 import os from "os";
 import { randomUUID } from "crypto";
 
-import config from "./config/config.json";
+import config from "./config/index.mjs";
 
 const INTERVAL = 5000;
 const MAX_FILE_COUNT = 30;
@@ -45,20 +43,16 @@ const timestamp = () => `,"date":"${new Date(Date.now()).toISOString()}"`;
 
 const getLogger = () => {
   if (process.env["NODE_ENV"] !== "development") {
-    const dirname = process.cwd();
+    const aws = config.get("aws");
 
-    const configPath = path.join(dirname, config.app.appsettings);
-
-    const configJSON = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-
-    if (configJSON?.aws?.cloudWatch.accessKeyId) {
+    if (aws?.cloudWatch.accessKeyId) {
       const {
         accessKeyId,
         secretAccessKey,
         region,
         logGroupName,
         logStreamName,
-      } = configJSON?.aws?.cloudWatch;
+      } = aws?.cloudWatch;
 
       const streamName = logStreamName
         .replace("${hostname}", os.hostname())
@@ -84,6 +78,8 @@ const getLogger = () => {
       });
     }
 
+    const logPath = config.get("logPath");
+
     return pino({
       level: "info",
       formatters,
@@ -92,14 +88,7 @@ const getLogger = () => {
       transport: {
         target: "pino-roll",
         options: {
-          file: path.join(
-            process.cwd(),
-            "..",
-            "..",
-            "..",
-            "logs",
-            "web.doceditor",
-          ),
+          file: logPath,
           frequency: "daily",
           limit: { count: MAX_FILE_COUNT },
           dateFormat: "yyyy-MM-dd",

@@ -238,7 +238,15 @@ import("./logger.mjs").then(({ logger }) => {
     allowRetry: false,
     keepAliveTimeout,
   }).catch((err) => {
-    log.error(err, "Error occurred handling");
+    log.error({ error: err }, "Error occurred handling");
     process.exit(1);
   });
+});
+
+process.on("unhandledRejection", (reason, process) => {
+  log.error({ process, reason }, "Unhandled rejection at");
+});
+
+process.on("uncaughtException", (error) => {
+  log.error({ error, stack: error.stack }, `Unhandled exception`);
 });

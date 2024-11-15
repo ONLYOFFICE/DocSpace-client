@@ -2807,6 +2807,7 @@ __metadata:
     "@onlyoffice/document-editor-react": "npm:^1.5.1"
     "@serdnam/pino-cloudwatch-transport": "npm:^1.0.4"
     "@svgr/webpack": "npm:^8.1.0"
+    "@types/nconf": "npm:^0"
     "@types/node": "npm:^22.7.5"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.3.1"
@@ -2815,6 +2816,7 @@ __metadata:
     eslint-config-next: "npm:14.2.15"
     i18next: "npm:^20.6.1"
     moment: "npm:^2.30.1"
+    nconf: "npm:^0.12.1"
     next: "npm:^14.2.15"
     pino: "npm:^9.5.0"
     pino-abstract-transport: "npm:^2.0.0"
@@ -8565,6 +8567,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nconf@npm:^0":
+  version: 0.10.7
+  resolution: "@types/nconf@npm:0.10.7"
+  checksum: 10/7757d7f87cce90ec40c0b0e6347561d2cc930f2148d3d20b4855b1152865c843e137ac8ccd7789b4f52fd5d62d51419e4ad87b52b8121568e283bce5d50fc69f
+  languageName: node
+  linkType: hard
+
 "@types/node-fetch@npm:^2.6.4":
   version: 2.6.11
   resolution: "@types/node-fetch@npm:2.6.11"
@@ -10399,7 +10408,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async@npm:^3.2.3":
+"async@npm:^3.0.0, async@npm:^3.2.3":
   version: 3.2.6
   resolution: "async@npm:3.2.6"
   checksum: 10/cb6e0561a3c01c4b56a799cc8bab6ea5fef45f069ab32500b6e19508db270ef2dffa55e5aed5865c5526e9907b1f8be61b27530823b411ffafb5e1538c86c368
@@ -16881,6 +16890,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ini@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "ini@npm:2.0.0"
+  checksum: 10/04e24ba05c4f6947e15560824e153b4610bceea2f5a3ab68651d221a4aab3c77d4e3e90a917ebc8bf5ad71a30a8575de56c39d6b4c4b1375a28016b9f3625f9d
+  languageName: node
+  linkType: hard
+
 "ini@npm:~1.3.0":
   version: 1.3.8
   resolution: "ini@npm:1.3.8"
@@ -20884,6 +20900,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nconf@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "nconf@npm:0.12.1"
+  dependencies:
+    async: "npm:^3.0.0"
+    ini: "npm:^2.0.0"
+    secure-keys: "npm:^1.0.0"
+    yargs: "npm:^16.1.1"
+  checksum: 10/4170c83004ec4c7f2809c2125dcc01aaf0b9decdc28f63a42f66e5c87ecaa24c8509d80a1fbe7f28ff16244731640d53ca0488f038ad1bfeb9c707d139c11a4f
+  languageName: node
+  linkType: hard
+
 "nearley@npm:^2.7.10":
   version: 2.20.1
   resolution: "nearley@npm:2.20.1"
@@ -24617,6 +24645,13 @@ __metadata:
   version: 2.7.0
   resolution: "secure-json-parse@npm:2.7.0"
   checksum: 10/974386587060b6fc5b1ac06481b2f9dbbb0d63c860cc73dc7533f27835fdb67b0ef08762dbfef25625c15bc0a0c366899e00076cb0d556af06b71e22f1dede4c
+  languageName: node
+  linkType: hard
+
+"secure-keys@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "secure-keys@npm:1.0.0"
+  checksum: 10/3dd4e64e6717fe6e2dc4c70e172982fcbad87b853e96566ab1cfaec540587f737bac106853ae469cb32d4a6413cfe80a28176cfe7dfcf7ddd35c9f92e58dffed
   languageName: node
   linkType: hard
 
@@ -28390,7 +28425,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:16.2.0":
+"yargs@npm:16.2.0, yargs@npm:^16.1.1":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
   dependencies:

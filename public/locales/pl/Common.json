@@ -214,7 +214,6 @@
   "FolderActionRequired": "Lokalizacja docelowa zawiera już katalog o nazwie «<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "Lokalizacja docelowa zawiera już katalogi o tej samej nazwie.",
   "FoldersAndFilesWillBeCopied": "Pliki i katalogi nie zostaną skopiowane do lokalizacji docelowej",
-  "FormFilingRoomDescription": "Prześlij formularze PDF do pokoju. Zaproś użytkowników do wypełnienia formularza PDF. Sprawdź wypełnione formularze i przeanalizuj dane automatycznie zebrane w arkuszu kalkulacyjnym.",
   "FormFilingRoomTitle": "Pokój do wypełniania formularzy",
   "FormRoom": "Pokój z formularzami",
   "Free": "Darmowy",

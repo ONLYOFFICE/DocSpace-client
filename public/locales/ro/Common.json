@@ -213,7 +213,6 @@
   "FolderActionRequired": "Folderul «<1>{{folderName}}</1>» există deja la destinație.",
   "FoldersAlreadyContains": "Foldere cu acelaşi nume există deja la destinație.",
   "FoldersAndFilesWillBeCopied": "Foldere și fișiere vor fi copiate la destinație",
-  "FormFilingRoomDescription": "Încărcați formulare PDF în sala. Invitaţi utilizatorii pentru completarea formularelor PDF. Revizuiți formularele completate și analizaţi datele colectate automat într-o foaie de calcul.",
   "FormFilingRoomTitle": "Sală Completare formular",
   "FormRoom": "Sală Formulare",
   "Free": "Gratuit",

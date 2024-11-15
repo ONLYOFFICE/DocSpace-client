@@ -198,7 +198,6 @@
   "FolderActionRequired": "Galamērķī jau ir mape ar nosaukumu «<1>{{folderName}}</1>».",
   "FoldersAlreadyContains": "Galamērķī jau ir mapes ar tādu pašu nosaukumu.",
   "FoldersAndFilesWillBeCopied": "Mapes un faili tiks kopēti galamērķī",
-  "FormFilingRoomDescription": "Augšupielādējiet PDF veidlapas telpā. Uzaiciniet lietotājus aizpildīt PDF veidlapu. Pārskatiet aizpildītās veidlapas un analizējiet izklājlapā automātiski apkopotos datus.",
   "FormFilingRoomTitle": "Veidlapu aizpildīšanas telpa",
   "FormRoom": "Veidlapu telpa",
   "Free": "Bezmaksas",

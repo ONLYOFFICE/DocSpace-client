@@ -158,6 +158,7 @@ const StyledSimpleFilesRow = styled(Row)`
     `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
     props.inProgress &&
+    !props.isFolder &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -367,6 +368,7 @@ const SimpleFilesRow = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexUpdated,
+    isFolder,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -422,6 +424,8 @@ const SimpleFilesRow = (props) => {
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
+
+  console.log("isFolder", isFolder);
 
   return (
     <StyledWrapper
@@ -492,6 +496,7 @@ const SimpleFilesRow = (props) => {
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}
+          isFolder={isFolder}
         >
           <FilesRowContent
             item={item}

@@ -11,9 +11,12 @@
   "EnterDomain": "输入域名",
   "EnterName": "输入协作空间名称",
   "NewSpace": "新协作空间",
+  "PortalDeleted": "{{productName}}已永久删除",
   "PortalName": "{{productName}}名称",
   "PortalStats": "房间：{{roomCount}} | 用户：{{userCount}} | 已用存储空间：{{storageSpace}}",
   "RestrictAccess": "对管理协作空间进行访问限制",
+  "SettingsDisabled": "这些设置将在创建第二个空间后可用，并应用于您的所有空间。",
+  "SettingsForAll": "这些设置将对您的所有空间生效。",
   "Subheader": "您可以使用这个板块创建多个协作空间，并让您的用户可以访问",
   "VisitSpace": "协作空间创建后进行访问"
 }

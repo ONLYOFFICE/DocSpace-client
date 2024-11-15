@@ -24,23 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export default function componentLoader(lazyComponent: Function) {
-  return new Promise((resolve, reject) => {
-    const hasRefreshed = JSON.parse(
-      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
-    );
+import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
-    lazyComponent()
-      .then((component: unknown) => {
-        window.sessionStorage.setItem("retry-lazy-refreshed", "false");
-        resolve(component);
-      })
-      .catch((error: unknown) => {
-        if (!hasRefreshed) {
-          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
-          return window.location.reload();
-        }
-        reject(error);
-      });
-  });
-}
+export const searchMigrationUsers = (
+  accounts: TEnhancedMigrationUser[],
+  searchValue: string,
+) => {
+  const search = searchValue.toLowerCase();
+  return accounts.filter(
+    (data) =>
+      data.firstName?.toLowerCase().startsWith(search) ||
+      data.lastName?.toLowerCase().startsWith(search) ||
+      data.displayName?.toLowerCase().startsWith(search) ||
+      data.email?.toLowerCase().startsWith(search),
+  );
+};

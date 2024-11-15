@@ -130,6 +130,7 @@ const AvatarPure = ({
   onChangeFile,
   model,
   hasAvatar,
+  noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -189,11 +190,14 @@ const AvatarPure = ({
   };
 
   const onUploadClick = () => {
+    if (!onChangeFile) return;
     const menu = model[0];
     menu.onClick(inputFilesElement);
   };
 
   const onClickAvatar = () => {
+    if (noClick) return;
+
     if (hasAvatar) {
       return onToggleOpenEditLogo();
     }
@@ -235,6 +239,7 @@ const AvatarPure = ({
       onMouseDown={onMouseDown}
       onClick={onClick || onClickAvatar}
       ref={iconRef}
+      noClick={noClick}
     >
       <AvatarWrapper
         source={source}
@@ -288,16 +293,18 @@ const AvatarPure = ({
           </>
         )
       )}
-      <input
-        id="customFileInput"
-        className="custom-file-input"
-        type="file"
-        onChange={onChangeFile}
-        accept="image/png, image/jpeg"
-        onClick={onInputClick}
-        ref={inputFilesElement}
-        style={{ display: "none" }}
-      />
+      {onChangeFile && (
+        <input
+          id="customFileInput"
+          className="custom-file-input"
+          type="file"
+          onChange={onChangeFile}
+          accept="image/png, image/jpeg"
+          onClick={onInputClick}
+          ref={inputFilesElement}
+          style={{ display: "none" }}
+        />
+      )}
     </StyledAvatar>
   );
 };

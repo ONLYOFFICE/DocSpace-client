@@ -172,6 +172,7 @@ export interface ComboboxProps {
   plusBadgeValue?: number;
   withLabel?: boolean;
   displayArrow?: boolean;
+  topSpace?: number;
 }
 
 export interface ComboButtonProps {

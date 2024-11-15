@@ -76,14 +76,12 @@ import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
-import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
-import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 
 const Panels = (props) => {
@@ -135,7 +133,6 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
-    pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     fillPDFDialogData,
@@ -323,7 +320,6 @@ const Panels = (props) => {
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
     reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
-    pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
@@ -402,7 +398,6 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
@@ -496,7 +491,6 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,

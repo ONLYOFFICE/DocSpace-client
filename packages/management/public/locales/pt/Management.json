@@ -11,9 +11,12 @@
   "EnterDomain": "Insira o nome de domínio",
   "EnterName": "Digite o nome do espaço",
   "NewSpace": "Novo espaço",
+  "PortalDeleted": "{{productName}} permanentemente excluído",
   "PortalName": "Nome do {{productName}}",
   "PortalStats": "Salas: {{roomCount}} | Usuários: {{userCount}} | Espaço de armazenamento usado: {{storageSpace}}",
   "RestrictAccess": "Restringir o acesso ao gerenciamento de espaços",
+  "SettingsDisabled": "Essas configurações estarão disponíveis assim que o segundo espaço for criado e aplicado a todos os seus espaços.",
+  "SettingsForAll": "Essas configurações serão efetivas para todos os seus espaços.",
   "Subheader": "Use esta seção para criar vários espaços e torná-los acessíveis para seus usuários",
   "VisitSpace": "Visite este espaço depois de criar"
 }

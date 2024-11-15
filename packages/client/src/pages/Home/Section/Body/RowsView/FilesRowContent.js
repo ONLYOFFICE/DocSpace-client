@@ -52,10 +52,23 @@ import {
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
+const StyledLink = styled(Link)`
+  width: 100%;
+  text-decoration: none;
+
+  padding-block: 12px 0;
+  padding-inline: 0 12px;
+  margin-top: ${(props) =>
+    props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     width: 100%;
-    max-width: min-content;
     min-width: inherit;
     margin-inline-end: 0;
 
@@ -89,13 +102,6 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: max-content;
   }
 
-  .row-content-link {
-    padding-block: 12px 0;
-    padding-inline: 0 12px;
-    margin-top: ${(props) =>
-      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
-  }
-
   .item-file-exst {
     color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
@@ -105,6 +111,11 @@ const SimpleFilesRowContent = styled(RowContent)`
       display: flex;
       justify-content: space-between;
       max-width: inherit;
+      gap: 8px;
+
+      .rowMainContainer {
+        margin-inline-end: 0;
+      }
     }
 
     .badges {
@@ -149,10 +160,6 @@ const SimpleFilesRowContent = styled(RowContent)`
 
     .can-convert {
       margin: 0 1px;
-    }
-
-    .row-content-link {
-      padding: 12px 0px 0px;
     }
   }
 `;
@@ -257,30 +264,30 @@ const FilesRowContent = ({
   const mainInfo = contentComponent();
 
   return (
-    <>
+    <StyledLink
+      className="row-content-link"
+      type="page"
+      target="_blank"
+      {...linkStyles}
+    >
       <SimpleFilesRowContent
         sectionWidth={sectionWidth}
         isMobile={!isTablet()}
         isFile={fileExst || contentLength}
         sideColor={theme.filesSection.rowView.sideColor}
       >
-        <Link
-          className="row-content-link"
-          containerWidth="55%"
-          type="page"
-          title={title}
-          fontWeight="600"
+        <Text
           fontSize="15px"
-          target="_blank"
-          {...linkStyles}
-          isTextOverflow={true}
+          fontWeight={600}
+          className="row_update-text"
           dir="auto"
         >
           {titleWithoutExt}
           {displayFileExtension && (
             <span className="item-file-exst">{fileExst}</span>
           )}
-        </Link>
+        </Text>
+
         <div className="badges">
           {badgesComponent}
           {!isRoom && !isRooms && quickButtons}
@@ -323,7 +330,7 @@ const FilesRowContent = ({
           </Text>
         )} */}
       </SimpleFilesRowContent>
-    </>
+    </StyledLink>
   );
 };
 

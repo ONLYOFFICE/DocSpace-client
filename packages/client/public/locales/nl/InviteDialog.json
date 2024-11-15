@@ -1,12 +1,8 @@
 {
   "AddManually": "Handmatig toevoegen",
-  "AddManuallyDescriptionAccounts": "Nodig nieuwe gebruikers persoonlijk per e-mail uit voor {{productName}}",
-  "AddManuallyDescriptionRoom": "Bestaande {{productName}} gebruikers toevoegen aan de kamer met behulp van de namen of nieuwe gebruikers persoonlijk uitnodigen per e-mail",
   "EmailErrorMessage": "E-mailadres niet geldig. U kunt de e-mail bewerken door erop te dubbelklikken.",
   "GroupMaxAvailableRoleWarning": "Groepen kunnen aan een kamer worden toegevoegd met de {{roleName}} rol als maximum. U kunt echter de rol van individuele gebruikers in de groep wijzigen nadat deze met succes is toegevoegd.",
   "InvitationLanguage": "Taal van de uitnodiging",
-  "InviteAccountSearchPlaceholder": "Mensen per e-mail uitnodigen",
-  "InviteRoomSearchPlaceholder": "Mensen per e-mail uitnodigen",
   "InviteViaLink": "Uitnodigen via link",
   "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in {{productName}}",
   "InviteViaLinkDescriptionRoom": "Maak een universele link voor zelfautorisatie in de kamer",

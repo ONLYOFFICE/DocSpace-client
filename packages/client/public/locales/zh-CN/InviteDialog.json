@@ -1,12 +1,8 @@
 {
   "AddManually": "手动添加",
-  "AddManuallyDescriptionAccounts": "通过电子邮件亲自邀请新用户加入{{productName}}",
-  "AddManuallyDescriptionRoom": "使用名称将现有{{productName}}用户添加到房间或通过电子邮件亲自邀请新用户",
   "EmailErrorMessage": "邮件地址无效。您可双击邮件以进行编辑。",
   "GroupMaxAvailableRoleWarning": "可以将群组添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。",
   "InvitationLanguage": "邀请语言",
-  "InviteAccountSearchPlaceholder": "通过邮件进行邀请",
-  "InviteRoomSearchPlaceholder": "根据姓名或邮件邀请用户",
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAccounts": "在{{productName}}中创建用于自我授权的通用链接",
   "InviteViaLinkDescriptionRoom": "在房间中创建自我授权通用链接",

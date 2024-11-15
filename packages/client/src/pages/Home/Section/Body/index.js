@@ -103,7 +103,9 @@ const SectionBodyContent = (props) => {
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
       customScrollElm && customScrollElm.scrollTo(0, 0);
     }
+  }, [currentDeviceType]);
 
+  useEffect(() => {
     window.addEventListener("beforeunload", onBeforeunload);
     window.addEventListener("mousedown", onMouseDown);
     startDrag && window.addEventListener("mouseup", onMouseUp);

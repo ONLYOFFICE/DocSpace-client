@@ -257,6 +257,8 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
+    isShared,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -421,7 +423,7 @@ const SectionHeaderContent = (props) => {
   const getTitleIcon = () => {
     if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isPublicRoomType && !isPublicRoom) return PublicRoomIconUrl;
+    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isVirtualDataRoomType && selectedFolder.lifetime)
       return LifetimeRoomIconUrl;
@@ -429,6 +431,7 @@ const SectionHeaderContent = (props) => {
     return "";
   };
   const onLogoClick = () => {
+    if (isFrame) return;
     moveToPublicRoom(props.rootFolderId);
   };
 
@@ -629,8 +632,10 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={isPublicRoom && logo}
-                burgerLogo={isPublicRoom && burgerLogo}
+                withLogo={(isPublicRoom || (isFrame && displayAbout)) && logo}
+                burgerLogo={
+                  (isPublicRoom || (isFrame && displayAbout)) && burgerLogo
+                }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
@@ -767,13 +772,12 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -932,6 +936,8 @@ export default inject(
       contactsCanCreate,
 
       rootFolderId,
+      isShared,
+      displayAbout,
     };
   },
 )(

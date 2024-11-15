@@ -25,12 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo, useState } from "react";
-import styled, { css } from "styled-components";
 
+import {
+  getRoomCreationAdditionalParams,
+  getStartRoomParams,
+} from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import TagHandler from "./handlers/TagHandler";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
+import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 
@@ -51,6 +55,7 @@ const CreateRoomDialog = ({
   startRoomType,
   processCreatingRoomFromData,
   selectionItems,
+  setSelectedRoomType,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -74,32 +79,11 @@ const CreateRoomDialog = ({
     };
   });
 
-  const startRoomParams = {
-    type: startRoomType,
-    title: title ?? "",
-    tags: [],
-    isPrivate: false,
-    storageLocation: {
-      isThirdparty: false,
-      provider: null,
-      thirdpartyAccount: null,
-      storageFolderId: "",
-      isSaveThirdpartyAccount: false,
-    },
-    icon: {
-      uploadedFile: null,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-    indexing: false,
-    denyDownload: false,
-    withCover: false,
-    previewIcon: null,
-  };
+  const startRoomParams = getStartRoomParams(startRoomType, title);
 
-  const [roomParams, setRoomParams] = useState({ ...startRoomParams });
+  const [roomParams, setRoomParams] = useState({
+    ...startRoomParams,
+  });
   const [isValidTitle, setIsValidTitle] = useState(true);
 
   const setRoomTags = (newTags) =>
@@ -108,12 +92,16 @@ const CreateRoomDialog = ({
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   const setRoomType = (newRoomType) => {
+    const additionalParams = getRoomCreationAdditionalParams(newRoomType);
+
+    setSelectedRoomType(newRoomType);
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
       storageLocation: {
         isThirdparty: false,
       },
+      ...additionalParams,
     }));
   };
 
@@ -134,6 +122,15 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
+  const handleSubmit = (event) => {
+    const value = event.currentTarget.tagInput?.value;
+
+    if (!isNullOrUndefined(value) && value.length === 0) onCreateRoom();
   };
 
   const goBack = () => {
@@ -169,6 +166,8 @@ const CreateRoomDialog = ({
       hideContent={isOauthWindowOpen}
       isBackButton={roomParams.type}
       onBackClick={goBack}
+      onSubmit={handleSubmit}
+      withForm
     >
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
@@ -209,9 +208,9 @@ const CreateRoomDialog = ({
             size="normal"
             primary
             scale
-            onClick={onCreateRoom}
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
+            type="submit"
           />
           <Button
             id="shared_create-room-modal_cancel"

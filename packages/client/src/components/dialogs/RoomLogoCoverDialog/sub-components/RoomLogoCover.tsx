@@ -26,7 +26,7 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -40,7 +40,9 @@ import { SelectIcon } from "./SelectIcon";
 
 import { RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
 
-const RoomLogoCoverContainer = styled.div`
+const RoomLogoCoverContainer = styled.div<{
+  isScrollLocked: boolean;
+}>`
   color: ${(props) => props.theme.logoCover.textColor};
   .room-logo-container {
     display: flex;
@@ -117,6 +119,14 @@ const RoomLogoCoverContainer = styled.div`
   .color-name {
     user-select: none;
   }
+
+  ${(props) =>
+    props.isScrollLocked &&
+    css`
+      .scroll-wrapper > .scroller {
+        overflow: hidden !important;
+      }
+    `}
 `;
 
 const RoomLogoCover = ({
@@ -132,6 +142,8 @@ const RoomLogoCover = ({
   currentColorScheme,
   openColorPicker,
   setOpenColorPicker,
+  generalScroll,
+  isScrollLocked,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -219,7 +231,7 @@ const RoomLogoCover = ({
   );
 
   return (
-    <RoomLogoCoverContainer ref={forwardedRef}>
+    <RoomLogoCoverContainer ref={forwardedRef} isScrollLocked={isScrollLocked}>
       <div className="room-logo-container">
         <CustomLogo
           isBaseTheme={!!isBaseTheme}
@@ -230,7 +242,7 @@ const RoomLogoCover = ({
         />
       </div>
       <div className="select-container">
-        {isMobile() ? (
+        {isMobile() || generalScroll ? (
           selectContainerBody
         ) : (
           <Scrollbar ref={scrollRef} style={{ height: `${scrollHeight}` }}>

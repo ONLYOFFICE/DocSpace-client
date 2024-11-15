@@ -57,6 +57,13 @@ const StyledRoomRow = styled(Row)`
   .row_context-menu-wrapper {
     margin-inline-end: 18px;
   }
+
+  .logo-icon > div {
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `;
 
 type TRow = {
@@ -79,7 +86,9 @@ const SpacesRoomRow = ({ item }: TRow) => {
     setDeletePortalDialogVisible(true);
   };
 
-  const logoElement = <ReactSVG id={item.portalName} src={DefaultLogoUrl} />;
+  const logoElement = (
+    <ReactSVG id={item.portalName} src={DefaultLogoUrl} className="logo-icon" />
+  );
 
   const protocol = window?.location?.protocol;
 
@@ -89,31 +98,6 @@ const SpacesRoomRow = ({ item }: TRow) => {
       key: "space_open",
       icon: ExternalLinkIcon,
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),
-    },
-    {
-      label: t("Common:Settings"),
-      key: "space_settings",
-      icon: CatalogSettingsReactSvgUrl,
-      onClick: () =>
-        window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
-    },
-    {
-      label: t("Common:ManageStorageQuota"),
-      key: "change_quota",
-      icon: ChangQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        isDisableQuota && setIsDisableQuota(false);
-      },
-    },
-    {
-      key: "disable_quota",
-      label: t("Common:DisableQuota"),
-      icon: DisableQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        setIsDisableQuota(true);
-      },
     },
     {
       key: "separator",
@@ -127,6 +111,37 @@ const SpacesRoomRow = ({ item }: TRow) => {
     },
   ];
 
+  if (item.wizardSettings.completed) {
+    contextOptionsProps.splice(
+      1,
+      0,
+      {
+        label: t("Common:Settings"),
+        key: "space_settings",
+        icon: CatalogSettingsReactSvgUrl,
+        onClick: () =>
+          window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
+      },
+      {
+        label: t("Common:ManageStorageQuota"),
+        key: "change_quota",
+        icon: ChangQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          isDisableQuota && setIsDisableQuota(false);
+        },
+      },
+      {
+        key: "disable_quota",
+        label: t("Common:DisableQuota"),
+        icon: DisableQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          setIsDisableQuota(true);
+        },
+      }
+    );
+  }
   const updateFunction = async () => {
     await getAllPortals();
   };

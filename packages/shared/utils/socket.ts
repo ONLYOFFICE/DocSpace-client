@@ -30,6 +30,7 @@
 import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { addLog } from ".";
 
 /**
  * Enum representing various socket events used in the application.
@@ -300,19 +301,19 @@ class SocketHelper {
       this.client = io(origin, config);
 
       this.client.on("connect", () => {
-        console.log("[WS] socket is connected");
+        addLog("[WS] socket is connected", "socket");
       });
 
       this.client.on("connect_error", (err) =>
-        console.log("[WS] socket connect error", err),
+        addLog(`[WS] socket connect error: ${err}`, "socket"),
       );
 
       this.client.on("disconnect", () =>
-        console.log("[WS] socket is disconnected"),
+        addLog("[WS] socket is disconnected", "socket"),
       );
 
       this.client.on("connection-init", () => {
-        console.log("[WS] socket is ready (connection-init)");
+        addLog("[WS] socket is ready (connection-init)", "socket");
 
         this.isSocketReady = true;
 
@@ -381,7 +382,10 @@ class SocketHelper {
   public connect(url: string, publicRoomKey: string) {
     if (!url) return;
 
-    console.log("[WS] connect", { url, publicRoomKey });
+    addLog(
+      `[WS] connect. Url: ${url}; publicRoomKey: ${publicRoomKey}`,
+      "socket",
+    );
 
     this.connectionSettings = { url, publicRoomKey } as TSocketConnection;
     this.tryConnect();
@@ -405,15 +409,15 @@ class SocketHelper {
       return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [emit] is not ready -> save in a queue", {
-        command,
-        data,
-      });
+      addLog(
+        `[WS] socket [emit] is not ready -> save in a queue. Command: ${command}, data: ${data}`,
+        "socket",
+      );
       this.emits.push({ command, data });
       return;
     }
 
-    console.log("[WS] emit", { command, data });
+    addLog(`[WS] emit.  Command: ${command}, data: ${data}`, "socket");
 
     const ids =
       !data || !data.roomParts
@@ -450,15 +454,15 @@ class SocketHelper {
     callback: (value: TOnCallback) => void,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [on] is not ready -> save in a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [on] is not ready -> save in a queue. Event name: ${eventName}`,
+        "socket",
+      );
       this.callbacks.push({ eventName, callback });
       return;
     }
 
-    console.log("[WS] on", { eventName, callback });
+    addLog("[WS] on event: ${eventName}", "socket");
 
     this.client.on(eventName, callback);
   };
@@ -476,10 +480,10 @@ class SocketHelper {
     callback: (value: TOnCallback) => void,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [off] is not ready -> remove from a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [off] is not ready -> remove from a queue. Event name: ${eventName}`,
+        "socket",
+      );
 
       this.callbacks = this.callbacks.filter(
         (c) => c.eventName !== eventName || c.callback !== callback,
@@ -488,7 +492,7 @@ class SocketHelper {
       return;
     }
 
-    console.log("[WS] off", { eventName, callback });
+    addLog(`[WS] off event: ${eventName}`, "socket");
 
     this.client.off(eventName, callback);
   };

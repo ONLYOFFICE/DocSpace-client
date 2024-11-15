@@ -199,7 +199,7 @@ const Item = ({
 
   const typeLabel = isEmailInvite
     ? roomId === -1 || isRolePaid
-      ? getUserTypeTranslation(type, t)
+      ? getUserTypeTranslation(roomId !== -1 ? type : defaultAccess.type, t)
       : t("Common:Guest")
     : defaultAccess?.type === EmployeeType.RoomAdmin &&
         type !== EmployeeType.Admin &&

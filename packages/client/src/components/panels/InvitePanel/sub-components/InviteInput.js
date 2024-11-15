@@ -572,10 +572,10 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts", {
+          ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("AddManuallyDescriptionRoom", {
+          : t("InviteToRoomManuallyInfo", {
               productName: t("Common:ProductName"),
             })}
       </StyledDescription>
@@ -638,8 +638,8 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={
               roomId === -1
-                ? t("InviteAccountSearchPlaceholder")
-                : t("InviteRoomSearchPlaceholder")
+                ? t("InviteMembersSearchPlaceholder")
+                : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed={true}

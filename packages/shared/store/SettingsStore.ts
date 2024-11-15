@@ -499,11 +499,15 @@ class SettingsStore {
   }
 
   get sdkLink() {
-    return `${this.apiDocsLink}/docspace/jssdk/`;
+    return `${this.apiDocsLink}/docspace/javascript-sdk/get-started/basic-concepts/`;
   }
 
   get apiBasicLink() {
-    return `${this.apiDocsLink}/docspace/basic`;
+    return `${this.apiDocsLink}/docspace/`;
+  }
+
+  get apiPluginSDKLink() {
+    return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
   }
 
   get wizardCompleted() {
@@ -775,9 +779,13 @@ class SettingsStore {
   };
 
   getAllPortals = async () => {
-    const res = await api.management.getAllPortals();
-    this.setPortals(res.tenants);
-    return res;
+    try {
+      const res = await api.management.getAllPortals();
+      this.setPortals(res.tenants);
+      return res;
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   getPortals = async () => {
@@ -977,24 +985,19 @@ class SettingsStore {
     this.ipRestrictions = res?.map((el) => el.ip);
   };
 
-  setIpRestrictions = async (ips: string[]) => {
+  setIpRestrictions = async (ips: string[], enable: boolean) => {
     const data = {
       IpRestrictions: ips,
+      enable,
     };
     const res = await api.settings.setIpRestrictions(data);
-    this.ipRestrictions = res?.map((el) => el.ip);
+
+    this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
+    this.ipRestrictionEnable = res?.enable;
   };
 
   getIpRestrictionsEnable = async () => {
     const res = await api.settings.getIpRestrictionsEnable();
-    this.ipRestrictionEnable = res.enable;
-  };
-
-  setIpRestrictionsEnable = async (enable: boolean) => {
-    const data = {
-      enable,
-    };
-    const res = await api.settings.setIpRestrictionsEnable(data);
     this.ipRestrictionEnable = res.enable;
   };
 

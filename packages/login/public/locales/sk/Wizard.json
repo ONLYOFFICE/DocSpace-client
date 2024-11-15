@@ -1,6 +1,7 @@
 {
   "Desc": "Nastavte si registračné informácie {{productName}}.",
   "ErrorEmail": "Neplatná e-mailová adresa",
+  "ErrorInstanceId": "Nesprávne instance ID",
   "ErrorLicenseBody": "Licencia je neplatná. Uistite sa, že ste vybrali správny súbor.",
   "ErrorPassword": "Heslo nespĺňa požiadavky",
   "ErrorUploadLicenseFile": "Vyberte licenčný súbor",

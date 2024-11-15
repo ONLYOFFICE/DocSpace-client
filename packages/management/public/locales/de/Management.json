@@ -11,9 +11,12 @@
   "EnterDomain": "Geben Sie den Domainnamen ein",
   "EnterName": "Geben Sie den Space-Namen ein",
   "NewSpace": "Neues Space",
+  "PortalDeleted": "{{productName}} wurde dauerhaft gelöscht",
   "PortalName": "{{productName}}-Name",
   "PortalStats": "Räume: {{roomCount}} | Benutzer: {{userCount}} | Verwendeter Speicherplatz: {{storageSpace}}",
   "RestrictAccess": "Den Zugriff auf Spaceverwaltung beschränken",
+  "SettingsDisabled": "Diese Einstellungen sind verfügbar, sobald der zweite Bereich erstellt und auf alle Ihre Bereiche angewendet wurde.",
+  "SettingsForAll": "Diese Einstellungen gelten für all Ihre Bereiche.",
   "Subheader": "In diesem Abschnitt können Sie mehrere Spaces erstellen und diese für Ihre Benutzer zugänglich machen",
   "VisitSpace": "Besuchen Sie dieses Space nach der Erstellung"
 }

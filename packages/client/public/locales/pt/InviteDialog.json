@@ -1,12 +1,8 @@
 {
   "AddManually": "Adicionar manualmente",
-  "AddManuallyDescriptionAccounts": "Convide novos utilizadores para o {{productName}} pessoalmente através do email",
-  "AddManuallyDescriptionRoom": "Adicionar utilizadores do {{productName}} à sala utilizando os nomes ou convidando novos utilizadores via email",
   "EmailErrorMessage": "O Endereço de email não é válido. Pode editar o email ao clicar duas vezes sobre ele.",
   "GroupMaxAvailableRoleWarning": "Grupos podem ser adicionados a uma sala com a função {{roleName}} no máximo. No entanto, você pode alterar a função de usuários individuais no grupo após ele ter sido adicionado com êxito.",
   "InvitationLanguage": "Idioma do convite",
-  "InviteAccountSearchPlaceholder": "Convidar pessoas por email",
-  "InviteRoomSearchPlaceholder": "Convidar pessoas pelo nome ou pelo email",
   "InviteViaLink": "Convidar através de uma hiperligação",
   "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no {{productName}}",
   "InviteViaLinkDescriptionRoom": "Crie uma hiperligação universal para permitir a auto autorização na sala",

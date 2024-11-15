@@ -108,33 +108,31 @@ const ImageWatermark = ({
 
   const initialInfo = useRef(null);
   const imageUrl = initialSettings?.imageUrl;
-  const image = roomParams.watermark?.image;
 
-  if (initialInfo.current === null) {
-    initialInfo.current = {
+  let watermark = roomParams.watermark;
+  let initialInfoRef = initialInfo.current;
+
+  if (initialInfoRef === null) {
+    initialInfoRef = {
       rotate: getInitialRotate(initialSettings?.rotate, isEdit),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
-  }
 
-  const initialInfoRef = initialInfo.current;
+    if (isImage && initialSettings) watermark = initialSettings;
+    else
+      watermark = {
+        ...watermark,
+        additions: 0,
+        rotate: initialInfoRef.rotate.key,
+        scale: initialInfoRef.scale.key,
+      };
+  }
 
   const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
   const [selectedScale, setScale] = useState(initialInfoRef.scale);
   const [selectedImageUrl, setImageUrl] = useState(imageUrl);
 
   const previewRef = useRef(null);
-
-  const watermark =
-    isImage && initialSettings
-      ? initialSettings
-      : {
-          rotate: selectedRotate.key,
-          imageScale: selectedScale.key,
-          additions: 0,
-          ...(selectedImageUrl && { imageUrl: selectedImageUrl }),
-          ...(image && { image }),
-        };
 
   useEffect(() => {
     setRoomParams({

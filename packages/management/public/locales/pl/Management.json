@@ -11,9 +11,12 @@
   "EnterDomain": "Wpisz nazwę domeny",
   "EnterName": "Wpisz nazwę obszaru",
   "NewSpace": "Nowy obszar",
+  "PortalDeleted": "Trwale usunięto {{productName}}",
   "PortalName": "Nazwa {{productName}}",
   "PortalStats": "Pokoje: {{roomCount}} | Użytkownicy: {{userCount}} | Wykorzystana pamięć: {{storageSpace}}",
   "RestrictAccess": "Ogranicz dostęp do zarządzania obszarami",
+  "SettingsDisabled": "Ustawienia te staną się dostępne, gdy zostanie utworzony drugi obszar roboczy i zostaną zastosowane do wszystkich Twoich obszarów.",
+  "SettingsForAll": "Ustawienia te zostaną zastosowane we wszystkich Twoich obszarach roboczych.",
   "Subheader": "Skorzystaj z tej sekcji, aby utworzyć kilka obszarów i udostępnić je swoim użytkownikom",
   "VisitSpace": "Odwiedź ten obszar po utworzeniu"
 }

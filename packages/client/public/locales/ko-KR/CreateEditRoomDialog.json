@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "이 기능을 사용하면 기존 {{productName}} 사용자만 초대할 수 있습니다. 그리고 방을 만든 후에는 사용자 목록을 변경할 수 없습니다.",
   "MakeRoomPrivateTitle": "방을 비공개로 설정",
   "PeopleSelectorInfo": "방 관리자 또는 {{productName}} 관리자만 방 소유자가 될 수 있습니다",
-  "PublicRoomBarDescription": "이 방은 링크를 가진 모든 사람이 사용할 수 있습니다. 외부 사용자는 모든 파일에 대한 보기 전용 권한을 갖게 됩니다.",
   "PublicRoomSystemFoldersDescription": "시스템 폴더는 다양한 완료 단계에서 양식 사본을 저장합니다. 작성 중인 양식은 진행 중 폴더에 저장되고 완료된 양식은 완료 폴더에 저장됩니다. ",
   "PublicRoomSystemFoldersTitle": "시스템 폴더",
   "RoomEditing": "방 편집 중",

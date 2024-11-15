@@ -11,9 +11,12 @@
   "EnterDomain": "Nhập tên miền",
   "EnterName": "Nhập tên không gian",
   "NewSpace": "Không gian mới",
+  "PortalDeleted": "Đã xóa vĩnh viễn {{productName}} ",
   "PortalName": "Tên {{productName}}",
   "PortalStats": "Phòng: {{roomCount}} | Người dùng: {{userCount}} | Không gian lưu trữ đã sử dụng: {{storageSpace}}",
   "RestrictAccess": "Hạn chế quyền truy cập vào không gian quản lý",
+  "SettingsDisabled": "Những cài đặt này sẽ khả dụng sau khi không gian thứ hai được tạo và được áp dụng cho tất cả các không gian của bạn.",
+  "SettingsForAll": "Những cài đặt này sẽ hiệu lực cho tất cả các không gian của bạn.",
   "Subheader": "Sử dụng phần này để tạo một số không gian và giúp người dùng của bạn có thể truy cập chúng",
   "VisitSpace": "Truy cập không gian này sau khi tạo"
 }

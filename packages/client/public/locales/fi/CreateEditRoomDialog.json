@@ -10,7 +10,6 @@
   "MakeRoomPrivateLimitationsWarningDescription": "Tällä toiminnolla, voit kutsua vai olemassa olevia {{productName}}-käyttäjiä. Huoneen luomisen jälkeen et voi muuttaa käyttäjien listaa.",
   "MakeRoomPrivateTitle": "Tee huoneesta yksityinen",
   "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
-  "PublicRoomBarDescription": "Tämä huone on linkin kautta avoin kaikille. Ulkoisilla käyttäjillä on ainoastaan tiedostojen katseluoikeudet.",
   "PublicRoomSystemFoldersDescription": "Järjestelmäkansiot säilyttävät lomakkeiden kopioita niiden eri täyttövaiheissa. Lomakkeita, joita täytetään, säilytetään Keskeneräiset-kansiossa, ja valmiita lomakkeita säilytetään Valmiit-kansiossa.",
   "PublicRoomSystemFoldersTitle": "Järjestelmän kansiot",
   "RoomEditing": "Huoneen muokkaus",

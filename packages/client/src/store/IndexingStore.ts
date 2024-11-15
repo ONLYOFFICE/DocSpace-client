@@ -94,6 +94,7 @@ class IndexingStore {
 
     if (!mode) {
       this.clearUpdateSelection();
+      this.setPreviousFilesList([]);
     }
 
     if (mode) {

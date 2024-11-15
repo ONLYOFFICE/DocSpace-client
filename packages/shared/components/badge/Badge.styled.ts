@@ -179,8 +179,6 @@ const getDefaultStyles = ({
           : backgroundColor || $currentColorScheme?.main?.accent};
       `}
     }
-
-    pointer-events: none;
   `;
 
 const StyledBadgeTheme = styled(StyledBadge)(getDefaultStyles);

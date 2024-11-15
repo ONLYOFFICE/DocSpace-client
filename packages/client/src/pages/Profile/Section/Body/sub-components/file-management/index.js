@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -67,11 +67,21 @@ const FileManagement = ({
 
   displayFileExtension,
   setDisplayFileExtension,
+  getFilesSettings,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
   const [isLoadingFavorites, setIsLoadingFavorites] = React.useState(false);
   const [isLoadingRecent, setIsLoadingRecent] = React.useState(false);
+
+  const getData = async () => await getFilesSettings();
+
+  useEffect(() => {
+    const prefix =
+      window.DocSpace.location.pathname.includes("portal-settings");
+
+    if (prefix) getData();
+  }, []);
 
   const onChangeOriginalCopy = React.useCallback(() => {
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
@@ -277,6 +287,7 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     displayFileExtension,
     setDisplayFileExtension,
+    getFilesSettings,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -314,5 +325,6 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     displayFileExtension,
     setDisplayFileExtension,
+    getFilesSettings,
   };
 })(observer(FileManagement));

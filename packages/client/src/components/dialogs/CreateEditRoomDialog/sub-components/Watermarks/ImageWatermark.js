@@ -73,10 +73,10 @@ const scaleOptions = [
 
 const rotateOptions = [
   { key: 0, label: "0" },
-  { key: 30, label: "30" },
-  { key: 45, label: "45" },
-  { key: 60, label: "60" },
-  { key: 90, label: "90" },
+  { key: -30, label: "30" },
+  { key: -45, label: "45" },
+  { key: -60, label: "60" },
+  { key: -90, label: "90" },
 ];
 const getInitialScale = (scale, isEdit) => {
   if (!isEdit || !scale) return scaleOptions[0];

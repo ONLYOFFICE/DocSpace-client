@@ -64,6 +64,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  TIndexItems,
 } from "./types";
 
 export async function openEdit(
@@ -1498,7 +1499,7 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
-export async function changeIndex(items) {
+export async function changeIndex(items: TIndexItems[]) {
   return request({
     method: "put",
     url: "files/order",

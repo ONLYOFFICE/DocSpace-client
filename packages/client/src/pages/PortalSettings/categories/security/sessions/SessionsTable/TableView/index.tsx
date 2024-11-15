@@ -78,6 +78,8 @@ const contextCss = css`
 
 const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   margin: 0 0 24px;
+  margin-inline-end: -4px;
+  padding-inline-end: 4px;
 
   .table-container_header {
     position: absolute;

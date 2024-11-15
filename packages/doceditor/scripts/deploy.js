@@ -39,6 +39,7 @@ const publishPath = path.join(
 );
 
 const nextBuild = path.join(process.cwd(), ".next");
+const nodeModulesBuild = path.join(nextBuild, "standalone", "node_modules");
 const configFolder = path.join(__dirname, "..", "config");
 const loggerFile = path.join(__dirname, "..", "src", "logger.mjs");
 const serverFile = path.join(__dirname, "..", "server.prod.js");
@@ -50,36 +51,35 @@ const rootNodeModulesPath = path.join(
   "..",
   "node_modules",
 );
-// copy other npm packages
 fs.cpSync(
   path.join(rootNodeModulesPath, "pino-roll"),
-  `${nextBuild}/standalone/node_modules/pino-roll`,
+  path.join(nodeModulesBuild, "pino-roll"),
   { recursive: true },
 );
 fs.cpSync(
   path.join(rootNodeModulesPath, "date-fns"),
-  `${nextBuild}/standalone/node_modules/date-fns`,
+  path.join(nodeModulesBuild, "date-fns"),
   { recursive: true },
 );
 
-fs.cpSync(configFolder, `${publishPath}/config`, { recursive: true });
+fs.cpSync(configFolder, path.join(publishPath, "config"), { recursive: true });
 
 fs.cpSync(
-  `${nextBuild}/standalone/packages/doceditor/.next`,
-  `${publishPath}/.next`,
-  {
-    recursive: true,
-  },
+  path.join(nextBuild, "standalone", "packages", "doceditor", ".next"),
+  path.join(publishPath, ".next"),
+  { recursive: true },
 );
-fs.cpSync(`${nextBuild}/static`, `${publishPath}/.next/static`, {
-  recursive: true,
-});
+fs.cpSync(
+  path.join(nextBuild, "static"),
+  path.join(publishPath, ".next", "static"),
+  { recursive: true },
+);
 
 fs.cpSync(
   path.join(nextBuild, "standalone", "node_modules"),
-  `${publishPath}/node_modules`,
+  path.join(publishPath, "node_modules"),
   { recursive: true },
 );
 
-fs.copyFileSync(serverFile, `${publishPath}/server.js`);
-fs.copyFileSync(loggerFile, `${publishPath}/logger.mjs`);
+fs.copyFileSync(serverFile, path.join(publishPath, "server.js"));
+fs.copyFileSync(loggerFile, path.join(publishPath, "logger.mjs"));

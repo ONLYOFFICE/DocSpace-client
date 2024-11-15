@@ -38,6 +38,8 @@ class IndexingStore {
 
   updateSelection: any[] = [];
 
+  previousFilesList: any[] = [];
+
   constructor(
     infoPanelStore: InfoPanelStore,
     selectedFolderStore: SelectedFolderStore,
@@ -48,32 +50,50 @@ class IndexingStore {
   }
 
   setUpdateSelection = (selection: any[]) => {
-    this.updateSelection = selection;
+    if (this.updateSelection.length === 0) {
+      return (this.updateSelection = [...selection]);
+    }
+
+    const existItem = this.updateSelection.filter((item) => {
+      return (
+        item.id === selection[0].id && item.fileExst === selection[0].fileExst
+      );
+    });
+
+    if (existItem.length > 0) {
+      if (existItem[0].order === selection[0].order) return;
+      // eslint-disable-next-line no-else-return
+      else if (
+        existItem[0].order &&
+        existItem[0].order !== selection[0].order
+      ) {
+        const filtered = this.updateSelection.filter((item) => {
+          return existItem[0].isFolder === item.isFolder
+            ? item.id !== existItem[0].id
+            : item.id !== existItem[0].id &&
+                item.fileExst !== existItem[0].fileExst;
+        });
+
+        return (this.updateSelection = [...filtered, ...selection]);
+      }
+    }
+
+    return (this.updateSelection = [...this.updateSelection, ...selection]);
   };
 
-  setUpdateItems = (items: any) => {
-    const newSelection = [...this.updateSelection];
+  clearUpdateSelection = () => {
+    this.updateSelection = [];
+  };
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const item of items) {
-      const exist = this.updateSelection.find(
-        (selectionItem) =>
-          selectionItem.id === item.id &&
-          selectionItem.fileExst === item.fileExst,
-      );
-
-      // eslint-disable-next-line no-continue
-      if (exist) continue;
-      newSelection.push(item);
-    }
-    this.setUpdateSelection(newSelection);
+  setPreviousFilesList = (list: any[]) => {
+    this.previousFilesList = list;
   };
 
   setIsIndexEditingMode = (mode: boolean) => {
     const { setIsVisible } = this.infoPanelStore;
 
     if (!mode) {
-      this.setUpdateSelection([]);
+      this.clearUpdateSelection();
     }
 
     if (mode) {

@@ -2994,6 +2994,8 @@ class FilesActionStore {
     const { setFiles, setFolders } = this.filesStore;
     const { previousFilesList } = this.indexingStore;
 
+    if (!previousFilesList.length) return;
+
     const newFolders = previousFilesList.filter((f) => f.isFolder);
     const newFiles = previousFilesList.filter((f) => !f.isFolder);
 

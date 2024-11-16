@@ -31,7 +31,7 @@
   "DeveloperTokenCopied": "Le jeton du développeur a été copié avec succès dans le presse-papiers\\",
   "DisableApplication": "Désactiver l'application",
   "DisableApplicationDescription": "Si vous désactivez cette application, tous les consentements et autorisations actifs seront révoqués. Si nécessaire, vous pouvez activer l'application désactivée ultérieurement.",
-  "DisableApplicationNote": "<strong>Remarque : <strong> Tous les utilisateurs doivent à nouveau remplir l'écran de consentement",
+  "DisableApplicationNote": "<strong>Remarque : </strong> Tous les utilisateurs doivent à nouveau remplir l'écran de consentement",
   "DisableApplications": "Désactiver les applications",
   "DisableApplicationsDescription": "Si vous désactivez ces applications, tous les consentements et autorisations actifs seront révoqués. Si nécessaire, vous pouvez activer l'application désactivée ultérieurement.",
   "EditApp": "Modifier l'application",

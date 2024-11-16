@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "Todos os documentos que carregar serão convertidos no formato Office Open XML (docx, xlsx ou pptx) para uma edição mais rápida.",
+  "ConversionXmlMessage": "O documento aberto será convertido para o formato Office Open XML (docx ou xlsx) para uma visualização e edição mais rápidas.",
   "ConvertedFileDestination": "A copia do ficheiro será criada na pasta <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "Conversão de documentos",
   "FailedToConvert": "Não foi possível converter",

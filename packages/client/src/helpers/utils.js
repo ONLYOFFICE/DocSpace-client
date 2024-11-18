@@ -196,9 +196,9 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
   }
 };
 
-export const removeEmodgi = (value) => {
+export const removeEmojiCharacters = (value) => {
   const regexpEmoji = /(\p{Emoji}|\p{Emoji_Presentation})/gu;
-  const replaceEmodji = value.replaceAll(regexpEmoji, "");
+  const replaceEmojiCharacters = value.replaceAll(regexpEmoji, "");
 
-  return replaceEmodji.replace(/\u200D/g, "");
+  return replaceEmojiCharacters.replace(/\u200D/g, "");
 };

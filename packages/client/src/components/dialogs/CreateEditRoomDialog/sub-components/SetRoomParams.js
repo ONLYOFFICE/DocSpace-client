@@ -55,7 +55,7 @@ import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { globalColors } from "@docspace/shared/themes";
 
-import { removeEmodgi } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -243,7 +243,7 @@ const SetRoomParams = ({
     setIsValidTitle(true);
     let newValue = e.target.value;
 
-    newValue = removeEmodgi(newValue);
+    newValue = removeEmojiCharacters(newValue);
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);

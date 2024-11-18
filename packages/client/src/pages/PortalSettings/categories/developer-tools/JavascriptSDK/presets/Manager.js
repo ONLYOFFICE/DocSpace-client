@@ -123,6 +123,7 @@ const Manager = (props) => {
     columnDisplayOptions[0].value,
   );
   const [selectedColumns, setSelectedColumns] = useState([
+    { key: "Index", label: t("Files:Index") },
     { key: "Name", label: t("Common:Name") },
     { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
@@ -284,7 +285,7 @@ const Manager = (props) => {
     if (e.target.value === "default") {
       setConfig((config) => ({
         ...config,
-        viewTableColumns: "Name,Type,Tags",
+        viewTableColumns: "Index,Name,Type,Tags",
       }));
     } else if (e.target.value === "custom") {
       setConfig((config) => ({
@@ -636,7 +637,9 @@ const Manager = (props) => {
                   {selectedColumns.map((column) => (
                     <SelectedItem
                       key={column.key}
-                      isDisabled={column.key === "Name"}
+                      isDisabled={
+                        column.key === "Name" || column.key === "Index"
+                      }
                       onClick={() => deleteSelectedColumn(column)}
                       onClose={() => {}}
                       label={column.label}

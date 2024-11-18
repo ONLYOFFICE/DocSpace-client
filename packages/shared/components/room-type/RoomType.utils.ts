@@ -47,7 +47,7 @@ export const getRoomTypeDescriptionTranslation = (
     case RoomsType.PublicRoom:
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:
-      return t("Common:FormFilingRoomDescription");
+      return t("Common:FormFilingRoomInfo");
     default:
       return "";
   }

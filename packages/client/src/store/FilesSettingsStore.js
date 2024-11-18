@@ -400,26 +400,26 @@ class FilesSettingsStore {
     let path = "";
 
     if (isArchive) {
-      path = "archive.svg";
+      path = "archiveRoom.svg";
     } else {
       switch (roomType) {
         case RoomsType.CustomRoom:
-          path = "custom.svg";
+          path = "customRoom.svg";
           break;
         case RoomsType.EditingRoom:
-          path = "editing.svg";
+          path = "editingRoom.svg";
           break;
         case RoomsType.PublicRoom:
-          path = "public.svg";
+          path = "publicRoom.svg";
           break;
         case RoomsType.VirtualDataRoom:
-          path = "virtual.data.svg";
+          path = "virtualRoom.svg";
           break;
         case RoomsType.FormRoom:
-          path = "form.svg";
+          path = "formRoom.svg";
           break;
         default:
-          path = "custom.svg";
+          path = "customRoom.svg";
       }
     }
 

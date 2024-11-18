@@ -10,13 +10,18 @@
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r config/* ../../../publish/web/editor/config && shx --silent mkdir -p ../../../publish/web/editor/node_modules && shx --silent mkdir -p ../../../publish/web/editor/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/editor/node_modules && shx cp -r .next/static/* ../../../publish/web/editor/.next/static    && shx cp -r .next/standalone/packages/doceditor/.next/* ../../../publish/web/editor/.next &&  shx cp -f server.prod.js ../../../publish/web/editor/server.js"
+    "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
     "@onlyoffice/document-editor-react": "^1.5.1",
+    "@serdnam/pino-cloudwatch-transport": "^1.0.4",
     "i18next": "^20.6.1",
     "moment": "^2.30.1",
+    "nconf": "^0.12.1",
     "next": "^14.2.15",
+    "pino": "^9.5.0",
+    "pino-pretty": "^11.3.0",
+    "pino-roll": "^2.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^13.5.0",
@@ -25,6 +30,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@types/nconf": "^0",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

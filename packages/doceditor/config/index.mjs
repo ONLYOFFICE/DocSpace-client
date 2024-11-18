@@ -23,29 +23,33 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CompletedForm } from "@/components/completed-form";
-import { logger } from "@/../logger.mjs";
 
-import { getFillingSession } from "@/utils/actions";
+import nconf from "nconf";
+import path from "path";
 
-const log = logger.child({ module: "Create page" });
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
 
-interface PageProps {
-  searchParams: Record<string, string | undefined>;
+let appsettings = nconf.get("app").appsettings;
+
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
 }
 
-async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, is_file } = searchParams;
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
 
-  log.info("Open completed form page");
+const logPath = nconf.get("logPath");
 
-  const session = await getFillingSession(fillingSessionId!, share);
-
-  const isShareFile = is_file === "true";
-
-  return (
-    <CompletedForm session={session} share={share} isShareFile={isShareFile} />
-  );
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
+  }
 }
 
-export default Page;
+export default nconf;

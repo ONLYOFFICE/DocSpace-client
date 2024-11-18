@@ -117,7 +117,7 @@ const StyledInputGroup = styled.div`
       width: 32px;
       height: 32px;
 
-      background-size: cover;
+      object-size: cover;
 
       border-radius: 3px;
     }

@@ -2,6 +2,6 @@
   "PORT": "5013",
   "HOSTNAME": "0.0.0.0",
   "app": {
-    "appsettings": "../../../../buildtools/config"
+    "appsettings": "../../../buildtools/config"
   }
 }

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { permanentRedirect, redirect } from "next/navigation";
+import { permanentRedirect, redirect, RedirectType } from "next/navigation";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
 
@@ -187,9 +187,9 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       "File created success",
     );
 
-    const redirectURL = `/doceditor?${searchParams.toString()}`;
+    const redirectURL = `/?${searchParams.toString()}`;
 
-    return permanentRedirect(redirectURL);
+    return redirect(redirectURL, RedirectType.replace);
   }
 
   log.error(

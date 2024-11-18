@@ -53,13 +53,14 @@ const MultiInputGroup = ({
   const [isError, setIsError] = React.useState(false);
 
   const addRef = React.useRef<null | HTMLDivElement>(null);
+  const withoutSearch = name === "redirect_uris";
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
 
     setValue(v);
 
-    if (isValidUrl(v)) {
+    if (isValidUrl(v, withoutSearch)) {
       setIsAddVisible(true);
     } else {
       setIsAddVisible(false);
@@ -68,14 +69,14 @@ const MultiInputGroup = ({
 
   const onFocus = () => {
     setIsFocus(true);
-    if (isValidUrl(value)) setIsAddVisible(true);
+    if (isValidUrl(value, withoutSearch)) setIsAddVisible(true);
   };
 
   const onBlur = () => {
     setIsFocus(false);
 
     if (value) {
-      if (isValidUrl(value)) {
+      if (isValidUrl(value, withoutSearch)) {
         setIsError(false);
       } else {
         setIsError(true);

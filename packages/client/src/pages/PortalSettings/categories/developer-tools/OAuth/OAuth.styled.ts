@@ -9,6 +9,16 @@ export const OAuthContainer = styled.div`
     margin-top: 8px;
     text-align: center;
   }
+
+  .guide-link {
+    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
+
+    &:hover {
+      color: ${(props) => props.theme.client.settings.webhooks.linkColor};
+    }
+
+    margin-bottom: 20px;
+  }
 `;
 
 export const StyledContainer = styled.div`

@@ -63,12 +63,13 @@ const useInputItemHelper = ({
       if (!withCreate || (!selectedItemId && !roomType)) return;
 
       try {
-        if (selectedItemId) createFolder(selectedItemId, value);
+        if (selectedItemId) await createFolder(selectedItemId, value);
         else if (roomType) {
           const additionalParams = getRoomCreationAdditionalParams(roomType);
-          createRoom({ roomType, title: value, ...additionalParams });
+          await createRoom({ roomType, title: value, ...additionalParams });
         }
       } catch (e) {
+        console.log(e);
         toastr.error(e as string);
       }
     },

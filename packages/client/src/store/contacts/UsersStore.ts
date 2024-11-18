@@ -938,17 +938,17 @@ class UsersStore {
   };
 
   setSelected = (selected: TContactsSelected) => {
+    const { hotkeyCaret, setHotkeyCaret } = this.contactsHotkeysStore;
     this.bufferSelection = null;
     this.selected = selected;
 
+    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
     this.setSelection(this.getUsersBySelected(this.peopleList, selected));
 
     if (selected !== "none" && selected !== "close") {
       this.resetUsersRight();
       this.peopleList.forEach((u) => this.incrementUsersRights(u));
     }
-
-    this.contactsHotkeysStore.setHotkeyCaret(null);
 
     return selected;
   };

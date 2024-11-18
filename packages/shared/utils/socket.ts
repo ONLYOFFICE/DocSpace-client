@@ -220,7 +220,7 @@ export type TCallback = {
  * @property {boolean} isSocketReady - Indicates whether the socket is ready for communication.
  * @property {TCallback[]} callbacks - A queue of callbacks to be registered once the socket is ready.
  * @property {TEmit[]} emits - A queue of messages to be emitted once the socket is ready.
- * @property {Set<string>} subscribers - A set of current socket subscribers.
+ * @property {Map<string, boolean | undefined>} subscribeEmits - All subscribed items as keys and individuals as value.
  *
  * @method static getInstance - Retrieves the singleton instance of the SocketHelper class.
  * @method private tryConnect - Attempts to establish a WebSocket connection using the provided connection settings.
@@ -239,13 +239,19 @@ class SocketHelper {
 
   private client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
+  private reconnectIntervalId: NodeJS.Timeout | undefined = undefined;
+
+  private maxReconnectRetries: number = 5;
+
+  private currentReconnectRetries: number = 0;
+
   private isSocketReady: boolean = false;
 
   private callbacks: TCallback[] = [];
 
   private emits: TEmit[] = [];
 
-  private subscribers = new Set<string>();
+  private subscribeEmits = new Map<string, boolean | undefined>();
 
   private constructor() {
     this.client = null;
@@ -301,16 +307,39 @@ class SocketHelper {
       this.client = io(origin, config);
 
       this.client.on("connect", () => {
+        clearInterval(this.reconnectIntervalId);
+        this.currentReconnectRetries = 0;
         addLog("[WS] socket is connected", "socket");
+        this.subscribeEmits.forEach((individual, roomParts) => {
+          this.client?.emit(SocketCommands.Subscribe, {
+            roomParts,
+            individual,
+          });
+        });
       });
 
       this.client.on("connect_error", (err) =>
         addLog(`[WS] socket connect error: ${err}`, "socket"),
       );
 
-      this.client.on("disconnect", () =>
-        addLog("[WS] socket is disconnected", "socket"),
-      );
+      this.client.on("disconnect", () => {
+        this.reconnectIntervalId = setInterval(() => {
+          if (this.currentReconnectRetries === this.maxReconnectRetries) {
+            clearInterval(this.reconnectIntervalId);
+            return;
+          }
+
+          if (this.client !== null && this.client.connected === false) {
+            this.currentReconnectRetries += 1;
+            addLog(
+              `[WS] socket reconnect attempt: ${this.currentReconnectRetries}`,
+              "socket",
+            );
+            this.client.connect();
+          }
+        }, 1000);
+        addLog("[WS] socket is disconnected", "socket");
+      });
 
       this.client.on("connection-init", () => {
         addLog("[WS] socket is ready (connection-init)", "socket");
@@ -360,7 +389,7 @@ class SocketHelper {
    * @returns {Set} A list of subscribers.
    */
   get socketSubscribers(): Set<string> {
-    return this.subscribers;
+    return new Set(this.subscribeEmits.keys());
   }
 
   /**
@@ -428,13 +457,13 @@ class SocketHelper {
 
     ids.forEach((id: string) => {
       if (command === "subscribe") {
-        if (this.subscribers.has(id)) return;
+        if (this.subscribeEmits.has(id)) return;
 
-        this.subscribers.add(id);
+        this.subscribeEmits.set(id, data?.individual);
       }
 
       if (command === "unsubscribe") {
-        this.subscribers.delete(id);
+        this.subscribeEmits.delete(id);
       }
     });
 

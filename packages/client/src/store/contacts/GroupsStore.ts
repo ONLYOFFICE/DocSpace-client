@@ -221,11 +221,15 @@ class GroupsStore {
     (this.bufferSelection = bufferSelection);
 
   setSelected = (selected: "all" | "none") => {
+    const { hotkeyCaret, setHotkeyCaret } =
+      this.peopleStore.contactsHotkeysStore;
+
     this.bufferSelection = null;
     this.selected = selected;
+
+    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
     this.setSelection(this.getGroupsBySelected(selected));
 
-    this.peopleStore.contactsHotkeysStore!.setHotkeyCaret(null);
     return selected;
   };
 

@@ -60,7 +60,7 @@ const ProgressBarMobile = ({
   const currentColorScheme = defaultTheme?.currentColorScheme;
 
   return (
-    <StyledProgressBarContainer isUploading={open}>
+    <StyledProgressBarContainer isUploading={open} error={!!error}>
       <div className="progress-container">
         <Text
           className="progress-header"
@@ -81,7 +81,7 @@ const ProgressBarMobile = ({
           </Text>
           <IconButton
             className="progress_icon"
-            onClick={onCancel}
+            onClick={error ? onClickHeaderAction : onCancel}
             iconName={icon}
             size={14}
           />

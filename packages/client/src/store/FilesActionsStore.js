@@ -2549,7 +2549,8 @@ class FilesActionStore {
 
         const url = getUrl(id);
 
-        window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
+        window.history.pushState("", "", url);
+
         return;
       }
 

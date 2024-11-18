@@ -31,7 +31,7 @@
   "DeveloperTokenCopied": "Token do desenvolvedor copiado com sucesso para a área de transferência",
   "DisableApplication": "Desabilitar aplicativo",
   "DisableApplicationDescription": "Se você desabilitar este aplicativo, todos os consentimentos e autorizações ativos serão revogados. Se necessário, você pode habilitar o aplicativo desabilitado mais tarde.",
-  "DisableApplicationNote": "<strong>Observação:<strong> Todos os usuários devem preencher a tela de consentimento novamente",
+  "DisableApplicationNote": "<strong>Observação:</strong> Todos os usuários devem preencher a tela de consentimento novamente",
   "DisableApplications": "Desabilitar aplicativos",
   "DisableApplicationsDescription": "Se você desabilitar esses aplicativos, todos os consentimentos e autorizações ativos serão revogados. Se necessário, você pode habilitar o aplicativo desabilitado mais tarde.",
   "EditApp": "Editar aplicativo",

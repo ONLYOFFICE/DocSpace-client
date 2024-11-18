@@ -174,7 +174,7 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_add-user"
             className={"icon"}
-            title={t("Common:AddUsers")}
+            title={t("Common:InviteContacts")}
             iconName={PersonPlusReactSvgUrl}
             isFill={true}
             onClick={onClickInviteUsers}

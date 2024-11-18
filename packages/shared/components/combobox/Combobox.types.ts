@@ -173,6 +173,7 @@ export interface ComboboxProps {
   withLabel?: boolean;
   displayArrow?: boolean;
   topSpace?: number;
+  disableItemClickFirstLevel?: boolean;
 }
 
 export interface ComboButtonProps {

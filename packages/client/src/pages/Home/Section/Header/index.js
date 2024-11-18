@@ -566,10 +566,14 @@ const SectionHeaderContent = (props) => {
   const titleIcon = getTitleIcon();
 
   const titleIconTooltip = selectedFolder.lifetime
-    ? t("Files:RoomFilesLifetime", {
+    ? `${t("Files:RoomFilesLifetime", {
         days: selectedFolder.lifetime.value,
         period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
-      })
+      })}. ${
+        selectedFolder.lifetime.deletePermanently
+          ? t("Files:AfterFilesWillBeDeletedPermanently")
+          : t("Files:AfterFilesWillBeMovedToTrash")
+      }`
     : null;
 
   const navigationButtonLabel = showNavigationButton

@@ -1417,6 +1417,21 @@ export async function getPrimaryLink(fileId: number) {
   return res;
 }
 
+export async function getPrimaryLinkIfNotExistCreate(
+  fileId: number | string,
+  access: ShareAccessRights,
+  internal: boolean,
+  expirationDate: moment.Moment,
+) {
+  const res = (await request({
+    method: "post",
+    url: `/files/file/${fileId}/link`,
+    data: { access, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function editExternalLink(
   fileId: number | string,
   linkId: number | string,
@@ -1439,11 +1454,12 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
+  expirationDate?: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { access, primary, internal },
+    data: { access, primary, internal, expirationDate },
   })) as TFileLink;
 
   return res;

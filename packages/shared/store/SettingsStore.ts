@@ -513,7 +513,7 @@ class SettingsStore {
   }
 
   get apiOAuthLink() {
-    return `${this.apiDocsLink}/administration/docspace-settings.aspx#oauth`;
+    return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
   }
 
   get wizardCompleted() {

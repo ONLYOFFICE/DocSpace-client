@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Dokument bol konvertovaný na {{titul}}, aby bolo možné ho upravovať",
   "DocumentsFileType": "dokumenty",
   "ErrorConnectionLost": "Pripojenie sa stratilo",
   "FileLocation": "Otvoriť umiestnenie súboru",

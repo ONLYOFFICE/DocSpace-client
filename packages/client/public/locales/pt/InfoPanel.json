@@ -59,7 +59,7 @@
   "RoomIndexingEnabled": "Indexação automática de ficheiros ativada na sala",
   "RoomInviteResend": "Reenviar convites:",
   "RoomLifeTimeDisabled": "Tempo de vida do arquivo desativado na sala",
-  "RoomLifeTimeSet": "Defina o tempo de vida de <1>{{date}}</1> para todos os arquivos na sala",
+  "RoomLifeTimeSet": "Defina o tempo de vida de <1>{{data}}</1> para todos os arquivos na sala",
   "RoomLogoChanged": "Ícone alterado",
   "RoomRemoveUser": "Usuário removido.",
   "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> renomeada para <2>«{{roomTitle}}»</2>",

@@ -1,5 +1,5 @@
 {
-  "DocumentConverted": "Dokument je bil pretvorjen v {{naslov}}, da je omogočeno njegovo urejanje",
+  "DocumentConverted": "Dokument je bil pretvorjen v {{title}}, da je omogočeno njegovo urejanje",
   "DocumentsFileType": "dokumenti",
   "ErrorConnectionLost": "Povezava je prekinjena",
   "FileLocation": "Pojdi v dokumente",

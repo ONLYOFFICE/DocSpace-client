@@ -57,6 +57,7 @@ export const enum SocketEvents {
   UserSessions = "user-sessions",
   EnterInPortal = "enter-in-portal",
   LeaveInPortal = "leave-in-portal",
+  LogoutInPortal = "logout-in-portal",
   NewSessionInPortal = "new-session-in-portal",
   EnterSessionInPortal = "enter-session-in-portal",
   LeaveSessionInPortal = "leave-session-in-portal",

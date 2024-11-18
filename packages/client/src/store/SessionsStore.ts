@@ -190,6 +190,8 @@ class SessionsStore {
       SocketEvents.NewSessionInPortal,
       this.handleNewSessionInPortal,
     );
+    // Todo: Add logout handler (when back are ready)
+    SocketHelper.on(SocketEvents.LogoutInPortal, this.handleUserLeavePortal);
   };
 
   unsubscribeToPortalSessions = () => {
@@ -200,6 +202,8 @@ class SessionsStore {
       SocketEvents.NewSessionInPortal,
       this.handleNewSessionInPortal,
     );
+    // Todo: Add logout handler (when back are ready)
+    SocketHelper.off(SocketEvents.LogoutInPortal, this.handleUserLeavePortal);
   };
 
   subscribeToUserSessions = (id: string) => {

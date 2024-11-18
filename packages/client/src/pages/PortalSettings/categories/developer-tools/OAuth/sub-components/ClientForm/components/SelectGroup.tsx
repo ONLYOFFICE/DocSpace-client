@@ -60,19 +60,12 @@ const SelectGroup = ({
         </Text>
       </div>
       <div className="select">
-        <div
-          className="client-logo"
-          style={{
-            backgroundImage: `url(${value})`,
-            display: value ? "block" : "none",
-          }}
-        />
-        {/* <img
+        <img
           className="client-logo"
           style={{ display: value ? "block" : "none" }}
           alt="img"
           src={value}
-        /> */}
+        />
         <SelectorAddButton onClick={onClick} />
         <Text
           fontSize="13px"

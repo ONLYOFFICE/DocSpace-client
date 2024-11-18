@@ -53,8 +53,8 @@ const MultiInputGroup = ({
   const [isError, setIsError] = React.useState(false);
 
   const addRef = React.useRef<null | HTMLDivElement>(null);
-  const withoutSearch = name === "redirect_uris";
-
+  // const withoutSearch = name === "redirect_uris";
+  const withoutSearch = true;
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
 

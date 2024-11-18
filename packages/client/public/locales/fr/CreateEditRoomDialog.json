@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Rendre la salle privée",
   "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de {{productName}} peut devenir le propriétaire d'une salle",
   "Position": "Position",
+  "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. L'accès pour les utilisateurs externes est fourni en fonction du type de droits d'accès sélectionné.",
   "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",
   "PublicRoomSystemFoldersTitle": "Dossiers système",
   "RestrictCopyAndDownload": "Restreindre la copie et le téléchargement",

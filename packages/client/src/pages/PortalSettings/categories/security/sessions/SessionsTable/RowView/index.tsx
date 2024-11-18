@@ -36,16 +36,12 @@ import { SessionsRowViewProps } from "../../SecuritySessions.types";
 import SessionsRow from "./SessionsRow";
 
 const marginStyles = css`
-  margin-left: -24px;
-  margin-right: -24px;
-  padding-left: 24px;
-  padding-right: 24px;
+  margin-inline: -24px;
+  padding-inline: 24px;
 
   @media ${tablet} {
-    margin-left: -16px;
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin-inline: -16px;
+    padding-inline: 16px;
   }
 `;
 

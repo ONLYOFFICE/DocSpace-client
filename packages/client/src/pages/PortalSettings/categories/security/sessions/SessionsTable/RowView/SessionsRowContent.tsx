@@ -34,7 +34,7 @@ const StyledRowContent = styled(RowContent)`
   .online {
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
-    margin-left: 4px;
+    margin-inline-start: 4px;
     font-size: 14px;
     ::first-letter {
       text-transform: uppercase;
@@ -45,7 +45,7 @@ const StyledRowContent = styled(RowContent)`
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
     font-size: 14px;
-    margin-left: 4px;
+    margin-inline-start: 4px;
     ::first-letter {
       text-transform: uppercase;
     }

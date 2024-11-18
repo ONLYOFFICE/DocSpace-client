@@ -57,28 +57,12 @@ const StyledTableRow = styled(TableRow)<{
     }
 
     .table-container_user-name-cell {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-              padding-right: 24px;
-            `
-          : css`
-              margin-left: -24px;
-              padding-left: 24px;
-            `}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
     }
     .table-container_row-context-menu-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -20px;
-              padding-left: 20px;
-            `
-          : css`
-              margin-right: -20px;
-              padding-right: 20px;
-            `}
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 
@@ -92,52 +76,23 @@ const StyledTableRow = styled(TableRow)<{
   }
 
   .table-container_row-checkbox-wrapper {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
     min-width: 48px;
 
     .table-container_row-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -4px;
-              padding: 16px 12px 16px 8px;
-            `
-          : css`
-              margin-left: -4px;
-              padding: 16px 8px 16px 12px;
-            `}
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 8px;
     }
   }
 
   .table-cell_username {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .table-container_row-context-menu-wrapper {
     justify-content: flex-end;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
   }
 
   .session-info {

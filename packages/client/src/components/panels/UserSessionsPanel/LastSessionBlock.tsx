@@ -71,14 +71,7 @@ const StyledUserInfoBlock = styled.div`
   }
 
   .avatar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-          `
-        : css`
-            margin-right: 16px;
-          `}
+    margin-inline-end: 16px;
   }
 `;
 
@@ -103,16 +96,8 @@ const StyledLastSessionBlock = styled.div`
     padding: 4px;
     font-size: 13px;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 24px;
-            padding-right: 0px;
-          `
-        : css`
-            margin-right: 24px;
-            padding-left: 0px;
-          `}
+    margin-inline-end: 24px;
+    padding-inline-start: 0;
   }
 
   .session-info-value {

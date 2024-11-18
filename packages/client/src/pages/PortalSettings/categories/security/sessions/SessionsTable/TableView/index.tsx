@@ -47,31 +47,15 @@ const marginCss = css`
 `;
 
 const userNameCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -24px;
-          padding-right: 24px;
-        `
-      : css`
-          margin-left: -24px;
-          padding-left: 24px;
-        `}
+  margin-inline-start: -24px;
+  padding-inline-start: 24px;
 
   ${marginCss}
 `;
 
 const contextCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -20px;
-          padding-left: 20px;
-        `
-      : css`
-          margin-right: -20px;
-          padding-right: 20px;
-        `}
+  margin-inline-end: -20px;
+  padding-inline-end: 20px;
 
   ${marginCss}
 `;
@@ -123,8 +107,7 @@ const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
       }
       .table-container_user-name-cell {
         ${userNameCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
+        border-inline: 0; //for Safari macOS
 
         border-image-source: ${(props) =>
           `linear-gradient(to right, ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};

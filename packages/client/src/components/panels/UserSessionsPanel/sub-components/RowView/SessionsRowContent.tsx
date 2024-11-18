@@ -46,7 +46,7 @@ const StyledRowContent = styled(RowContent)`
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-    margin-left: 4px;
+    margin-inline-start: 4px;
   }
 `;
 

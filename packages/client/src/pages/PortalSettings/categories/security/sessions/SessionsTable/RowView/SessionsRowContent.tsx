@@ -31,9 +31,9 @@ import { RowContent } from "@docspace/shared/components/row-content";
 import { SessionsRowContentProps } from "../../SecuritySessions.types";
 
 const StyledRowContent = styled(RowContent)`
-  .online {
+  .online,
+  .offline {
     font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
     margin-inline-start: 4px;
     font-size: 14px;
     ::first-letter {
@@ -41,14 +41,12 @@ const StyledRowContent = styled(RowContent)`
     }
   }
 
+  .online {
+    color: ${(props) => props.theme.profile.activeSessions.textOnlineColor};
+  }
+
   .offline {
-    font-weight: 600;
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-    font-size: 14px;
-    margin-inline-start: 4px;
-    ::first-letter {
-      text-transform: uppercase;
-    }
   }
 `;
 
@@ -68,8 +66,8 @@ const SessionsRowContent = ({
       sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
-      <Text fontSize="14px" fontWeight="600">
-        {displayName}
+      <Text fontSize="14px" fontWeight="600" display="flex">
+        <span>{displayName}</span>
         <span className={status === "online" ? "online" : "offline"}>
           {fromDateAgo}
         </span>

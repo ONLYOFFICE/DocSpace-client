@@ -98,7 +98,6 @@ const StyledRow = styled(Row)<{ $isActive?: boolean }>`
 
 const SessionsRow = (props: SessionsTableRowProps) => {
   const {
-    t,
     item,
     isChecked,
     isActive,

@@ -60,8 +60,8 @@ const SessionsRowContent = ({ item }: SessionsRowContentProps) => {
       key={id}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
-      <Text fontSize="14px" fontWeight="600" truncate>
-        {platform}, {browser?.split(".")[0] ?? ""}
+      <Text display="flex" fontSize="14px" fontWeight="600" truncate>
+        <span>{platform}</span>, <span>{browser?.split(".")[0] ?? ""}</span>
         <span className="date">
           {convertTime(date, i18n.language, "L, LT")}
         </span>

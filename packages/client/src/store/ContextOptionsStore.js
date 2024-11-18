@@ -98,6 +98,8 @@ import {
   canShowManageLink,
   copyDocumentShareLink,
   copyRoomShareLink,
+  getCreateShareLinkKey,
+  getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -1665,6 +1667,7 @@ class ContextOptionsStore {
           const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
 
           const primaryLink = await getPrimaryFileLink(item.id);
+
           if (primaryLink) {
             copyDocumentShareLink(
               primaryLink,

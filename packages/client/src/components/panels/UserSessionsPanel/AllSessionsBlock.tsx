@@ -38,7 +38,7 @@ import RowView from "./sub-components/RowView";
 import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
 
 const Wrapper = styled.div`
-  padding: 20px 0 12px;
+  padding: 20px 0 0;
 
   .empty-screen-container {
     width: auto;
@@ -55,9 +55,12 @@ const Wrapper = styled.div`
     margin-bottom: 12px;
   }
 
-  .desciption {
+  .description {
     color: ${(props) => props.theme.profile.activeSessions.subtitleColor};
-    margin-bottom: 20px;
+  }
+
+  .logout-all-button {
+    margin-top: 20px;
   }
 `;
 
@@ -77,32 +80,34 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <Text className="subtitle">{t("Profile:AllSessions")}</Text>
-        <Text className="desciption">
-          {t("Profile:SessionsPanelDescription")}
-        </Text>
-        {userSessions.length > 0 ? (
-          <Button
-            label={t("Profile:LogoutFromAllSessions")}
-            size={ButtonSize.small}
-            onClick={onClickLogout}
-            scale
-            isLoading={isLogoutLoading}
-          />
-        ) : (
-          <EmptyScreenContainer
-            imageSrc={EmptyScreenSessionsReactSvgUrl}
-            className="empty-screen-container"
-            imageAlt="Empty Screen Sessions image"
-            headerText={t("Settings:NoSessionsHere")}
-          />
-        )}
-      </Wrapper>
+    <Wrapper>
+      <Text className="subtitle">{t("Profile:AllSessions")}</Text>
+      <Text className="description">
+        {t("Profile:SessionsPanelDescription")}
+      </Text>
 
-      <RowView t={t} sessions={userSessions} />
-    </>
+      {userSessions.length > 1 && (
+        <Button
+          className="logout-all-button"
+          label={t("Profile:LogoutFromAllSessions")}
+          size={ButtonSize.small}
+          onClick={onClickLogout}
+          scale
+          isLoading={isLogoutLoading}
+        />
+      )}
+
+      {userSessions.length ? (
+        <RowView t={t} sessions={userSessions} />
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={EmptyScreenSessionsReactSvgUrl}
+          className="empty-screen-container"
+          imageAlt="Empty Screen Sessions image"
+          headerText={t("Settings:NoSessionsHere")}
+        />
+      )}
+    </Wrapper>
   );
 };
 

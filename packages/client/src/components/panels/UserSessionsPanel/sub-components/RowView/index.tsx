@@ -24,16 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import styled from "styled-components";
+
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SessionsRow from "./SessionsRow";
 import { RowViewProps } from "../../UserSessionsPanel.types";
 
+const StyledRowContainer = styled(RowContainer)`
+  padding-top: 12px;
+`;
+
 const RowView = (props: RowViewProps) => {
   const { t, sessions } = props;
 
   return (
-    <RowContainer
+    <StyledRowContainer
       id="allSessionsRowContainer"
       useReactWindow={false}
       hasMoreFiles={false}
@@ -45,7 +51,7 @@ const RowView = (props: RowViewProps) => {
       {sessions.map((item) => (
         <SessionsRow t={t} key={item.id} item={item} />
       ))}
-    </RowContainer>
+    </StyledRowContainer>
   );
 };
 

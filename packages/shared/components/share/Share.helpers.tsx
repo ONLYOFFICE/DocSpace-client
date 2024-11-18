@@ -40,7 +40,7 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import { Link } from "../link";
 import { toastr } from "../toast";
 import { globalColors } from "../../themes";
-import { ShareAccessRights } from "../../enums";
+import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 import { isFolder } from "../../utils/typeGuards";
 
@@ -433,6 +433,6 @@ export const getExpirationDate = (
   return moment().add(diffExpiredDate);
 };
 
-export const getCreateShareLinkKey = (userId: string) => {
-  return `link-create-document-${userId}`;
+export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
+  return `link-create-document-${fileType ?? ""}-${userId}`;
 };

@@ -944,7 +944,7 @@ class InfoPanelStore {
      */
     const value = JSON.parse(
       localStorage.getItem(
-        getCreateShareLinkKey(this.userStore.user?.id ?? ""),
+        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
       ) ?? "null",
     );
 

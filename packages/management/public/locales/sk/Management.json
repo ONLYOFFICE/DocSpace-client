@@ -1,10 +1,14 @@
 {
   "ChangeDomainDescription": "Zmena názvu domény môže spôsobiť zlyhanie niektorých systémov. Po zmene názvu domény potrebujete znovu nakonfigurovať nasledujúce nastavenia: mail, účet, parametre jabber.",
+  "CompleteSetup": "Dokončite nastavenie",
   "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov {{productName}}. Vytvorený názov {{productName}} môžete neskôr zmeniť pomocou nastavení priestoru.",
   "ConfigurationHeader": "Aktuálna konfigurácia priestoru",
   "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy priestoru, musíte nastaviť budúce meno {{productName}}",
   "CreatingPortal": "Vytvorenie nového priestoru {{productName}}",
   "CurrentSpace": "Aktuálny priestor",
+  "DeleteEmptyPortalText": "Chystáte sa nenávratne vymazať priestor <1>{{domain}}</1>. Tento krok sa nedá vrátiť späť.",
+  "DeleteRequestSuccess": "Žiadosť o vymazanie bola úspešne odoslaná na e-mail majiteľa {{productName}} <1>{{email}}</1>",
+  "DeleteWarning": "Posledný plný prístupový priestor nie je možné vymazať",
   "DomainName": "Meno domény",
   "DomainNotFound": "Doména nebola nájdená, skontrolujte ju v nastaveniach DNS",
   "DomainSettings": "Nastavenia domény",
@@ -18,5 +22,6 @@
   "SettingsDisabled": "Tieto nastavenia budú dostupné po vytvorení druhého priestoru a budú aplikované na všetky vaše priestory.",
   "SettingsForAll": "Tieto nastavenia budú platné pre všetky vaše priestory.",
   "Subheader": "V tejto časti môžete vytvoriť niekoľko priestorov a sprístupniť ich používateľom",
+  "SubmitDelete": "Odoslať žiadosť o vymazanie",
   "VisitSpace": "Navštívte tento priestor po vytvorení"
 }

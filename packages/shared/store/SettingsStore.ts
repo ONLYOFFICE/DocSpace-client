@@ -245,6 +245,8 @@ class SettingsStore {
 
   debugInfo = false;
 
+  debugInfoData = "";
+
   socketUrl = "";
 
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
@@ -652,6 +654,25 @@ class SettingsStore {
     if (origSettings?.tagManagerId) {
       insertTagManager(origSettings.tagManagerId);
     }
+  };
+
+  getDebugInfo = async () => {
+    let response = this.debugInfoData;
+    try {
+      if (response) return response;
+
+      response = (await api.debuginfo.loadDebugInfo()) as string;
+      this.debugInfoData = response;
+    } catch (e) {
+      console.error("getDebugInfo failed", (e as Error).message);
+      response = `Debug info load failed (${(e as Error).message})`;
+    }
+
+    runInAction(() => {
+      this.debugInfoData = response;
+    });
+
+    return response;
   };
 
   get isPortalDeactivate() {

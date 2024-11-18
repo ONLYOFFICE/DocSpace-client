@@ -19,7 +19,7 @@
   "AuthorizedApps": "Authorized apps",
   "AuthorizeLink": "Authorize link",
   "Client": "Client",
-  "ClientCopy": "Client id successfully copied to clipboard",
+  "ClientCopy": "Client ID successfully copied to clipboard",
   "ClientHelpButton": "Credentials for using OAth 2.0 as your Authentication type.<br/> <strong>Note:</strong> Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI.",
   "ClientSecretResetSuccessfully": "Client secret reset successfully",
   "CodeVerifier": "Code verifier",

@@ -23,51 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosRequestConfig } from "axios";
+import { request } from "../client";
 
-import React from "react";
+export function loadDebugInfo() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    baseURL: "/",
+    responseType: "text",
+    url: `/debuginfo.md`,
+  };
 
-export interface BadgeProps {
-  /** Label */
-  label?: string | number;
-  /** CSS background-color */
-  backgroundColor?: string;
-  /** CSS color */
-  color?: string;
-  /** CSS font-size */
-  fontSize?: string;
-  /** CSS font-weight */
-  fontWeight?: number | string;
-  /** CSS border-radius */
-  borderRadius?: string;
-  /** CSS padding */
-  padding?: string;
-  /** CSS max-width */
-  maxWidth?: string;
-  /** CSS line-height */
-  lineHeight?: string;
-  /** onClick event */
-  onClick?: (e: React.MouseEvent) => void;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets hovered state and link effects */
-  isHovered?: boolean;
-  /** Disables hover styles */
-  noHover?: boolean;
-  /** Type Badge */
-  type?: "high";
-  /** Compact badge */
-  compact?: boolean;
-  /** Border badge */
-  border?: string;
-  height?: string;
-  isVersionBadge?: boolean;
-  isMutedBadge?: boolean;
-  isPaidBadge?: boolean;
-
-  onMouseOver?: VoidFunction;
-  onMouseLeave?: VoidFunction;
+  return request(options);
 }

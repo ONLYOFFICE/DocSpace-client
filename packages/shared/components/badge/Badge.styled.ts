@@ -81,8 +81,6 @@ const StyledBadge = styled.div<BadgeProps>`
 
   ${(props) => !props.noHover && props.isHovered && hoveredCss};
 
-  pointer-events: ${(props) => (props.isDisabled ? "none" : "auto")};
-
   @media ${tablet} {
     ${({ isVersionBadge }) => isVersionBadge && `width: auto;`}
   }

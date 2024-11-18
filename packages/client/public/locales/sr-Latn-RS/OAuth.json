@@ -54,7 +54,6 @@
   "NoAuthorizedApps": "Nema autorizovanih aplikacija",
   "NoOAuthAppHeader": "Nema OAuth aplikacija",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth aplikacije se koriste za pristup {{organizationName}} {{productName}} API za autorizaciju i dalje radnje kao što je pristup fajlovima, itd.",
   "OAuthHeaderBlock": "OAuth URL-ovi",
   "PrivacyPolicy": "Politika privatnosti",
   "PrivacyPolicyURL": "URL politike privatnosti",

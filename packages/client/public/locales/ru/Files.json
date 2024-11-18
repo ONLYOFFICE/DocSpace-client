@@ -3,6 +3,8 @@
   "AddedToClipboard": "Элементы добавлены в буфер обмена",
   "AddMembersDescription": "Вы можете добавить новых участников команды вручную или пригласить их по ссылке.",
   "AddNewLink": "Добавить новую ссылку",
+  "AfterFilesWillBeDeletedPermanently": "Затем файлы будут удалены навсегда.",
+  "AfterFilesWillBeMovedToTrash": "Затем файлы будут перемещены в Корзину.",
   "All": "Все",
   "AllLinksAreDisabled": "Все ссылки отключены",
   "AppointNewOwner": "Вы назначили нового владельца.",
@@ -202,6 +204,8 @@
   "WarningCreationFormRoom": "Создание на основе нескольких файлов и папок недоступно для комнаты этого типа. Чтобы создать такую ​​комнату, перейдите в раздел \"Комнаты\" или воспользуйтесь одной из PDF-форм.",
   "WarningMoveToFormRoom": "Файл не может быть перемещен в эту комнату. Пожалуйста, попробуйте переместить PDF-форму {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Перемещение нескольких файлов в Комнату заполнения форм не поддерживается. Перемещайте по одной PDF-форме {{ organizationName }}.",
+  "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
+  "WillBeMovedToTrash": "{{date}} будет перемещен в Корзину",
   "WithSubfolders": "С подпапками",
   "YouLeftTheRoom": "Вы покинули комнату"
 }

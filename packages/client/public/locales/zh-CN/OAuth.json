@@ -54,7 +54,6 @@
   "NoAuthorizedApps": "无授权应用",
   "NoOAuthAppHeader": "无 OAuth 应用",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth应用程序用于访问{{organizationName}}的{{productName}} API，以进行授权和后续操作，如访问文件等。",
   "OAuthHeaderBlock": "OAuth 网址",
   "PrivacyPolicy": "隐私政策",
   "PrivacyPolicyURL": "隐私政策网址",

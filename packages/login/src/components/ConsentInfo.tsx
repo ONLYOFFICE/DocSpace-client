@@ -18,9 +18,15 @@ const StyledOAuthContainer = styled.div`
 
   margin-bottom: 32px;
 
-  img {
+  .client-logo {
     width: 32px;
     height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+
+    border-radius: 3px;
+
+    object-fit: cover;
   }
 
   .row {
@@ -62,7 +68,7 @@ const OAuthClientInfo = ({
           {t("Common:LoginButton")}
         </Text>
       )}
-      <img src={logo} alt={"client-logo"} />
+      <img src={logo} className="client-logo" alt="client-logo" />
       <Text
         className="row"
         fontWeight={isConsentScreen ? 400 : 600}

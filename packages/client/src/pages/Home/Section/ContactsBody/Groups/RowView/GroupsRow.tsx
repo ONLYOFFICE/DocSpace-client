@@ -83,7 +83,6 @@ const GroupsRowComponent = ({
   };
 
   const onOpenGroup = (e: React.MouseEvent) => {
-    console.log(e);
     openGroupAction!(item.id, true, item.name, e);
   };
 
@@ -130,7 +129,7 @@ const GroupsRowComponent = ({
               fontSize="15px"
               lineHeight="20px"
               isTextOverflow
-              // onClick={onOpenGroup}
+              onClick={onOpenGroup}
             >
               {item.name}
             </Link>
@@ -145,7 +144,7 @@ const GroupsRowComponent = ({
               fontSize="15px"
               lineHeight="20px"
               isTextOverflow
-              // onClick={onOpenGroup}
+              onClick={onOpenGroup}
             >
               {t("PeopleTranslations:PeopleCount", {
                 count: item.membersCount,

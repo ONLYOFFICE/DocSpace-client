@@ -23,32 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosRequestConfig } from "axios";
+import { request } from "../client";
 
-import { Link } from "react-router-dom";
+export function loadDebugInfo() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    baseURL: "/",
+    responseType: "text",
+    url: `/debuginfo.md`,
+  };
 
-import { classNames } from "../../utils";
-
-import { EmptyViewItem } from "./EmptyView.item";
-import { isEmptyLinkOptions } from "./EmptyView.utils";
-
-import type { EmptyViewOptionProps } from "./EmptyView.types";
-
-function EmptyViewOption({ option }: EmptyViewOptionProps) {
-  if (isEmptyLinkOptions(option))
-    return (
-      <Link
-        id={option.key.toString()}
-        className={classNames("ev-link", option.className)}
-        to={option.to}
-        state={option.state}
-        onClick={option.onClick}
-      >
-        {option.icon}
-        <span>{option.description}</span>
-      </Link>
-    );
-
-  return <EmptyViewItem id={option.key.toString()} {...option} />;
+  return request(options);
 }
-
-export default EmptyViewOption;

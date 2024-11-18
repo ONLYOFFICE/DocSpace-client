@@ -1,16 +1,22 @@
 {
   "ActionCannotBeUndone": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
+  "ActionCannotBeUndoneGuests": "Izbrani onemogočeni gostje bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
   "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
+  "DeleteGroupGuestsSuccessMessage": "Gostje so bili uspešno izbrisani.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
+  "DeleteGuest": "Izbriši gosta",
+  "DeleteGuests": "Izbriši goste",
   "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Dokumenti tega uporabnika bodo trajno izbrisane.",
   "DeletePersonalData": "Osebni podatki, vse osebne datoteke in mape v razdelkih Dokumenti in Koš* izbranih uporabnikov bodo trajno izbrisani. Datoteke in mape izbranih uporabnikov, shranjene v skupnih razdelkih*, kot so sobe, bodo ostale v {{productName}}.",
   "DeletePersonalDataApplicable": "*Velja za izbrane uporabnike, ki imajo takšne datoteke in mape.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
+  "DeleteReqassignDescriptionGuest": "{{userCaption}} bo izbrisan iz vseh sob, v katere je bil povabljen. Dokumenti, ki jih je {{userCaption}} ustvaril v sobah, bodo samodejno dodeljeni lastnikom sobe.",
   "DeleteUser": "Izbriši uporabnika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
   "DeletingUsers": "Brisanje uporabnikov",
   "PleaseNote": "Prosimo, upoštevajte:",
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
+  "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",
   "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan",
   "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat."
 }

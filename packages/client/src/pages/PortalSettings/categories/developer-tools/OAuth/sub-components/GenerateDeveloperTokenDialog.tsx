@@ -208,7 +208,7 @@ const GenerateDeveloperTokenDialog = ({
         <Button
           label={
             token
-              ? `${t("Common:Copy")} & ${t("Common:CancelButton")}`
+              ? `${t("Common:Copy")} & ${t("Common:CloseButton")}`
               : t("Webhooks:Generate")
           }
           primary

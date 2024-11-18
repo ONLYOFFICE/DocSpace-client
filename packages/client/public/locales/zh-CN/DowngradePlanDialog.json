@@ -1,5 +1,7 @@
 {
+  "CannotChangePlan": "您无法更改您的计划，因为已使用的存储量或管理员数量超出了所选计划限额：",
   "ChangePricingPlan": "改变定价方案",
   "PlanStorageLimit": "新定价方案的存储量为  <1>{{storageValue}}</1>，而您目前使用的存储量为 <1>{{currentStorageValue}}</1>。",
+  "PlanUsersLimit": "您希望将团队降级至 <1>{{usersCount}}</1> 名管理员，在您的{{productName}}中当前此类用户的数目为 <1>{{currentUsersCount}}</1>。",
   "SaveOrChange": "要更改目前的定价方案，请确保您的需求与该方案所提供的服务相符。"
 }

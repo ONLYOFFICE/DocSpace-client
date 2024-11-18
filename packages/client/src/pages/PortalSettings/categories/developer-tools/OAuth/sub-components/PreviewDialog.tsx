@@ -196,7 +196,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={htmlBlock}
               />
             </div>
@@ -208,7 +207,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={styleBlock}
               />
             </div>
@@ -220,7 +218,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={scriptBlock}
               />
             </div>
@@ -232,7 +229,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={link}
               />
             </div>
@@ -251,7 +247,6 @@ const PreviewDialog = ({
                   heightTextArea={64}
                   enableCopy
                   isReadOnly
-                  isDisabled
                   value={codeVerifier}
                 />
               </div>
@@ -274,19 +269,15 @@ const PreviewDialog = ({
 export default inject(
   ({
     oauthStore,
-    settingsStore,
   }: {
     settingsStore: SettingsStore;
     oauthStore: OAuthStore;
   }) => {
     const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 
-    const { theme } = settingsStore;
-
     return {
       setPreviewDialogVisible,
       client: bufferSelection,
-      theme,
     };
   },
 )(observer(PreviewDialog));

@@ -24,50 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import nconf from "nconf";
+import path from "path";
 
-export interface BadgeProps {
-  /** Label */
-  label?: string | number;
-  /** CSS background-color */
-  backgroundColor?: string;
-  /** CSS color */
-  color?: string;
-  /** CSS font-size */
-  fontSize?: string;
-  /** CSS font-weight */
-  fontWeight?: number | string;
-  /** CSS border-radius */
-  borderRadius?: string;
-  /** CSS padding */
-  padding?: string;
-  /** CSS max-width */
-  maxWidth?: string;
-  /** CSS line-height */
-  lineHeight?: string;
-  /** onClick event */
-  onClick?: (e: React.MouseEvent) => void;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets hovered state and link effects */
-  isHovered?: boolean;
-  /** Disables hover styles */
-  noHover?: boolean;
-  /** Type Badge */
-  type?: "high";
-  /** Compact badge */
-  compact?: boolean;
-  /** Border badge */
-  border?: string;
-  height?: string;
-  isVersionBadge?: boolean;
-  isMutedBadge?: boolean;
-  isPaidBadge?: boolean;
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
 
-  onMouseOver?: VoidFunction;
-  onMouseLeave?: VoidFunction;
+let appsettings = nconf.get("app").appsettings;
+
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
 }
+
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
+
+const logPath = nconf.get("logPath");
+
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
+  }
+}
+
+export default nconf;

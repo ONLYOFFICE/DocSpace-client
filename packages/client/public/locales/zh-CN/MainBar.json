@@ -24,7 +24,6 @@
   "UserQuotaHeader": "管理员数量即将超出限制：{{currentValue}} / {{maxValue}}",
   "UserTariffAlmostReached": "一旦达到限制，所有新添加用户将仅具有用户权限。若要添加更多管理员，请联系{{productName}}管理员升级资费计划。",
   "UserTariffAlmostReachedForAdmins": "一旦达到限制，所有新添加用户将仅具有用户权限。若要添加更多管理员，<1>点击此处</1>升级您的资费计划。",
-  "UserTariffLimitHeader": "存储空间和管理员数量已达到限制",
   "UserTariffReached": "所有新添加用户将仅具有用户权限。若要添加更多管理员，请联系{{productName}}管理员升级资费计划。",
   "UserTariffReachedForAdmins": "所有新添加用户将仅具有用户权限。若要添加更多管理员，<1>点击此处</1>升级您的资费计划。"
 }

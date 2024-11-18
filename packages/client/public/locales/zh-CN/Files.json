@@ -154,7 +154,7 @@
   "RoomEmptyAtTheMoment": "这个房间目前是空的。",
   "RoomEmptyContainerDescription": "请创建首个房间。",
   "RoomEmptyContainerDescriptionUser": "与您共享的房间将出现在这里",
-  "RoomFilesLifetime": "该文件无法复制到此房间。请尝试复制{{ organizationName }}的 PDF 表单。",
+  "RoomFilesLifetime": "此房间中的文件有效期设置为{{days}} {{period}}。",
   "RoomNotificationsDisabled": "房间通知禁用",
   "RoomNotificationsEnabled": "房间通知启用",
   "RoomOwner": "房间所有者",

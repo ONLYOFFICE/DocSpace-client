@@ -203,7 +203,7 @@ const QuickButtons = (props) => {
               data-locked={locked ? true : false}
               onClick={onClickLock}
               color={colorLock}
-              isDisabled={isDisabled || (isMobile && !isTile)}
+              isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("UnblockVersion")}
             />
@@ -216,7 +216,7 @@ const QuickButtons = (props) => {
               size={sizeQuickButton}
               onClick={onClickDownload}
               color={colorLock}
-              isDisabled={isDisabled || (isMobile && !isTile)}
+              isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Common:Download")}
             />
@@ -229,7 +229,7 @@ const QuickButtons = (props) => {
               size={sizeQuickButton}
               onClick={onCopyPrimaryLink}
               color={colorLock}
-              isDisabled={isDisabled || (isMobile && !isTile)}
+              isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />
@@ -244,7 +244,7 @@ const QuickButtons = (props) => {
               size={sizeQuickButton}
               onClick={onClickShare}
               color={colorShare}
-              isDisabled={isDisabled || (isMobile && !isTile)}
+              isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />

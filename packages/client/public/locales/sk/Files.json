@@ -155,7 +155,7 @@
   "RoomEmptyAtTheMoment": "Táto miestnosť je momentálne prázdna.",
   "RoomEmptyContainerDescription": "Prosím vytvorte prvú miestnosť.",
   "RoomEmptyContainerDescriptionUser": "Tu sa zobrazia miestnosti, ktoré s vami niekto zdieľa.",
-  "RoomFilesLifetime": "Súbor nie je možné skopírovať do tejto miestnosti. Pokúste sa skopírovať {{ organizationName }} PDF formulár.",
+  "RoomFilesLifetime": "Doba používania súborov v tejto miestnosti je nastavená na {{days}} {{period}} ",
   "RoomNotificationsDisabled": "Upozornenia o miestnosti sú vypnuté",
   "RoomNotificationsEnabled": "Upozornenia o miestnosti sú zapnuté",
   "RoomOwner": "Majiteľ miestnosti",

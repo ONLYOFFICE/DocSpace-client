@@ -204,6 +204,10 @@ const Share = (props: ShareProps) => {
         ? ((error as { message: string }).message as TData)
         : (error as string);
       toastr.error(message);
+
+      setFileLinks((links) => {
+        return links.filter((link) => !("isLoaded" in link && link.isLoaded));
+      });
     } finally {
       setIsLoadedAddLinks(true);
     }

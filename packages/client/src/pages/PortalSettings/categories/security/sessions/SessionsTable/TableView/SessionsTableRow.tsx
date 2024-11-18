@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { decode } from "he";
 
 import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Base } from "@docspace/shared/themes";
 import { TSession } from "@docspace/shared/types/ActiveSessions";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
 
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   display: contents;
 `;
 
-const StyledTableRow = styled(TableRow)<{
+const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)<{
   checked: boolean;
   isActive: boolean;
 }>`
@@ -120,8 +120,6 @@ const StyledTableRow = styled(TableRow)<{
     }
   }
 `;
-
-StyledTableRow.defaultProps = { theme: Base };
 
 const getLocationText = (session: TSession) => {
   const { country, city, ip } = session;

@@ -28,8 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Base } from "@docspace/shared/themes";
-import { tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { Row } from "@docspace/shared/components/row";
 
 import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
@@ -52,7 +51,7 @@ const checkedStyle = css`
   ${marginStyles}
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs(injectDefaultTheme)`
   .user-item {
     border: 1px solid transparent;
     border-inline: none;
@@ -65,8 +64,6 @@ const Wrapper = styled.div`
     background: none !important;
   }
 `;
-
-Wrapper.defaultProps = { theme: Base };
 
 const StyledRow = styled(Row)<{ $isActive?: boolean }>`
   ${(props) => (props.checked || props.$isActive) && checkedStyle};

@@ -256,6 +256,7 @@ const ImageWatermark = ({
           accept={["image/png", "image/jpeg"]}
           onInput={onInput}
           scale
+          isMultiple={false}
         />
       )}
 

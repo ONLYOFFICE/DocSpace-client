@@ -1,5 +1,5 @@
 {
-  "ChangeGuestsTypeMessage": "Hosť <strong>{{userName}}</strong> bude presunutý do sekcie Ľudia a bude mu priradený typ Používateľ. Používatelia majú vlastnú sekciu Dokumenty, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
+  "ChangeGuestsTypeMessage": "Hosť <strong>{{userName}}</strong> bude presunutý do sekcie {{membersSection}} a bude mu priradený typ Používateľ. Používatelia majú vlastnú sekciu {{documentsSection}}, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
   "ChangeGuestsTypeMessageMulti": "Vybraní hostia budú presunutí do sekcie Ľudia a bude im priradený typ Používateľ. Používatelia majú vlastnú sekciu Dokumenty, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
   "ChangeUserTypeButton": "Zmeniť typ",
   "ChangeUserTypeHeader": "Zmeňte typ používateľa",

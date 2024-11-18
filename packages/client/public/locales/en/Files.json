@@ -3,6 +3,8 @@
   "AddedToClipboard": "Items added to clipboard",
   "AddMembersDescription": "You can add new team members manually or invite them via link.",
   "AddNewLink": "Add new link",
+  "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
+  "AfterFilesWillBeMovedToTrash": "After files will be moved to trash.",
   "All": "All",
   "AllLinksAreDisabled": "All links are disabled",
   "AppointNewOwner": "You have appointed a new owner.",
@@ -77,10 +79,6 @@
   "FilesWillAppearHere": "Files and folders added to the room will appear here.",
   "FileWillBeDeletedPermanently": "The file will be deleted permanently {{date}}",
   "FileWillBeMovedToTrash": "The file will be moved to Trash {{date}}",
-  "WillBeMovedToTrash": "{{date}} will be moved to Trash",
-  "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
-  "AfterFilesWillBeMovedToTrash": "After files will be moved to trash.",
-  "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
   "Filter": "Filter",
   "FinalizeVersion": "Finalize version",
   "Folder": "Folder",
@@ -206,6 +204,8 @@
   "WarningCreationFormRoom": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the Rooms section or use one of the PDF forms.",
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
+  "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
+  "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room"
 }

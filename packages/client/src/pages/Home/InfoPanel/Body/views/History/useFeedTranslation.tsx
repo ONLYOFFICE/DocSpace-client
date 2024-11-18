@@ -54,6 +54,8 @@ export const useFeedTranslation = (
         });
       }
       return t("InfoPanel:FileMoved");
+    case "FileMovedToTrash":
+      return t("InfoPanel:FileMovedToTrash");
     case "FileCopied":
       if (feed.data.fromParentTitle) {
         return t("InfoPanel:FileCopiedTo", {
@@ -79,6 +81,10 @@ export const useFeedTranslation = (
     case "FolderMoved":
       if (hasRelatedItems) return t("InfoPanel:FolderMoved").slice(0, -1);
       return t("InfoPanel:FolderMoved");
+    case "FolderMovedToTrash":
+      if (hasRelatedItems)
+        return t("InfoPanel:FolderMovedToTrash").slice(0, -1);
+      return t("InfoPanel:FolderMovedToTrash");
     case "FolderCopied":
       if (hasRelatedItems) return t("InfoPanel:FolderCopied").slice(0, -1);
       return t("InfoPanel:FolderCopied");

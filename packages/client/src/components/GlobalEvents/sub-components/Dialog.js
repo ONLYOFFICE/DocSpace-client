@@ -37,6 +37,8 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
+import { removeEmodgi } from "SRC_DIR/helpers/utils";
+
 const Dialog = ({
   t,
   title,
@@ -96,6 +98,8 @@ const Dialog = ({
   const onChange = useCallback((e) => {
     let newValue = e.target.value;
 
+
+    newValue = removeEmodgi(newValue);
     if (newValue.match(folderFormValidation)) {
       setIsError(true);
       // toastr.warning(t("Files:ContainsSpecCharacter"));

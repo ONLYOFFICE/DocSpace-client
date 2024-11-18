@@ -195,3 +195,10 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       throw new Error("Unknown category type");
   }
 };
+
+export const removeEmodgi = (value) => {
+  const regexpEmoji = /(\p{Emoji}|\p{Emoji_Presentation})/gu;
+  const replaceEmodji = value.replaceAll(regexpEmoji, "");
+
+  return replaceEmodji.replace(/\u200D/g, "");
+};

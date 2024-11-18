@@ -27,8 +27,8 @@
 import { useEffect, useMemo, useState } from "react";
 import moment from "moment-timezone";
 
-import { TSession } from "@docspace/shared/types/ActiveSessions";
-import { TTranslation } from "@docspace/shared/types";
+import type { TSession } from "@docspace/shared/types/ActiveSessions";
+import type { TTranslation } from "@docspace/shared/types";
 
 /* Return status text -> online, a few seconds ago, one hour ago etc. Automatically updates. */
 export const useSessionStatusText = (

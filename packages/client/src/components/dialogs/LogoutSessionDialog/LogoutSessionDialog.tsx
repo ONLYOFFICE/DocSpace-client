@@ -30,7 +30,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { LogoutSessionDialogProps } from "./LogoutSessionDialog.types";
+import type { LogoutSessionDialogProps } from "./LogoutSessionDialog.types";
 
 export const LogoutSessionDialog = ({
   t,

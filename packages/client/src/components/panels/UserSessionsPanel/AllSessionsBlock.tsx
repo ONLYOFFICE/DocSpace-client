@@ -35,7 +35,7 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 import EmptyScreenSessionsReactSvgUrl from "PUBLIC_DIR/images/empty_screen_from_sessions.svg?url";
 
 import RowView from "./sub-components/RowView";
-import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
+import type { AllSessionsBlockProps } from "./UserSessionsPanel.types";
 
 const Wrapper = styled.div`
   padding: 20px 0 0;

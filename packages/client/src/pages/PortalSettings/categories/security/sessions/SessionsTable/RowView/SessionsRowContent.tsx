@@ -28,7 +28,7 @@ import styled, { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 
-import { SessionsRowContentProps } from "../../SecuritySessions.types";
+import type { SessionsRowContentProps } from "../../SecuritySessions.types";
 
 const StyledRowContent = styled(RowContent)`
   .online,

@@ -31,7 +31,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import SessionsRowContent from "./SessionsRowContent";
-import { SessionsRowProps } from "../../UserSessionsPanel.types";
+import type { SessionsRowProps } from "../../UserSessionsPanel.types";
 
 const StyledRow = styled(Row)`
   min-height: 56px;

@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { IndexRange } from "react-virtualized";
+import type { IndexRange } from "react-virtualized";
 import styled, { css } from "styled-components";
 
 import { tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
-import { SessionsRowViewProps } from "../../SecuritySessions.types";
+import type { SessionsRowViewProps } from "../../SecuritySessions.types";
 import SessionsRow from "./SessionsRow";
 
 const marginStyles = css`

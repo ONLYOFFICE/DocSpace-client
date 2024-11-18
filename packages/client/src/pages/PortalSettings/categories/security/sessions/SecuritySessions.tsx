@@ -33,14 +33,14 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import SessionsLoader from "@docspace/shared/skeletons/sessions";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TTranslation, TViewAs } from "@docspace/shared/types";
+import type { TTranslation, TViewAs } from "@docspace/shared/types";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { DisableUserDialog } from "SRC_DIR/components/dialogs/DisableUserDialog";
 import { LogoutSessionDialog } from "SRC_DIR/components/dialogs/LogoutSessionDialog";
 import { LogoutAllSessionDialog } from "SRC_DIR/components/dialogs/LogoutAllSessionDialog";
 
-import { SessionsProps } from "./SecuritySessions.types";
+import type { SessionsProps } from "./SecuritySessions.types";
 import { MainContainer } from "../StyledSecurity";
 import SessionsTable from "./SessionsTable";
 

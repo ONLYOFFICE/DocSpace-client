@@ -31,12 +31,12 @@ import { decode } from "he";
 import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { TSession } from "@docspace/shared/types/ActiveSessions";
+import type { TSession } from "@docspace/shared/types/ActiveSessions";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
 
-import { SessionsTableRowProps } from "../../SecuritySessions.types";
+import type { SessionsTableRowProps } from "../../SecuritySessions.types";
 
 const Wrapper = styled.div`
   display: contents;

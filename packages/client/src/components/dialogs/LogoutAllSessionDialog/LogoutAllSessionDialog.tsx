@@ -33,9 +33,9 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import { LogoutAllSessionDialogProps } from "./LogoutAllSessionDialog.types";
+import type { LogoutAllSessionDialogProps } from "./LogoutAllSessionDialog.types";
 
 export const LogoutAllSessionDialog = ({
   t,

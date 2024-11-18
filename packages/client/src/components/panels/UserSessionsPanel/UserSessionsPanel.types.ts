@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
-import { TSession } from "@docspace/shared/types/ActiveSessions";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TSession } from "@docspace/shared/types/ActiveSessions";
 
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-import SessionsStore from "SRC_DIR/store/SessionsStore";
-import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import type DialogsStore from "SRC_DIR/store/DialogsStore";
+import type SessionsStore from "SRC_DIR/store/SessionsStore";
+import type SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 export interface UserSessionsPanelProps {
   storeProps?: UserSessionsPanelStoreProps;

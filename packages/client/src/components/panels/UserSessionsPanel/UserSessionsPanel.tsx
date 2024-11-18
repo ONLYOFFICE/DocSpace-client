@@ -37,7 +37,7 @@ import UserSessionsPanelLoader from "@docspace/shared/skeletons/UserSessionsPane
 
 import AllSessionsBlock from "./AllSessionsBlock";
 import LastSessionBlock from "./LastSessionBlock";
-import { UserSessionsPanelProps } from "./UserSessionsPanel.types";
+import type { UserSessionsPanelProps } from "./UserSessionsPanel.types";
 
 export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   const { storeProps } = props;

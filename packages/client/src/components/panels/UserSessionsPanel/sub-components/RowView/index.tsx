@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SessionsRow from "./SessionsRow";
-import { RowViewProps } from "../../UserSessionsPanel.types";
+import type { RowViewProps } from "../../UserSessionsPanel.types";
 
 const StyledRowContainer = styled(RowContainer)`
   padding-top: 12px;

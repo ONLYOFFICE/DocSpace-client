@@ -30,9 +30,9 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import { DisableUserDialogProps } from "./DisableUserDialog.types";
+import type { DisableUserDialogProps } from "./DisableUserDialog.types";
 
 export const DisableUserDialog = ({
   t,

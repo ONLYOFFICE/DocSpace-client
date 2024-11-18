@@ -32,7 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { RowContent } from "@docspace/shared/components/row-content";
 
-import { SessionsRowContentProps } from "../../UserSessionsPanel.types";
+import type { SessionsRowContentProps } from "../../UserSessionsPanel.types";
 
 const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {

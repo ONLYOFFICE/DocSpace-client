@@ -33,7 +33,7 @@ import { Row } from "@docspace/shared/components/row";
 
 import withSessionsContent from "SRC_DIR/HOCs/withSessionsContent";
 
-import { SessionsTableRowProps } from "../../SecuritySessions.types";
+import type { SessionsTableRowProps } from "../../SecuritySessions.types";
 import SessionsRowContent from "./SessionsRowContent";
 
 const marginStyles = css`

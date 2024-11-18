@@ -26,7 +26,7 @@
 
 import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { decode } from "he";
 
 import {
@@ -48,7 +48,7 @@ import {
 
 import { useSessionStatusText } from "SRC_DIR/Hooks/useSessionStatusText";
 
-import {
+import type {
   LastSessionBlockProps,
   LastSessionInfoRowProps,
 } from "./UserSessionsPanel.types";

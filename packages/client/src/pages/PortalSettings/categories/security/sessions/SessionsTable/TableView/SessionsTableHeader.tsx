@@ -25,9 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
 import { useTheme } from "styled-components";
-import { SessionsTableHeaderProps } from "../../SecuritySessions.types";
+
+import {
+  TableHeader,
+  type TTableColumn,
+} from "@docspace/shared/components/table";
+
+import type { SessionsTableHeaderProps } from "../../SecuritySessions.types";
 
 const TABLE_VERSION = "4";
 const TABLE_COLUMNS = `securitySessionsColumns_ver-${TABLE_VERSION}`;

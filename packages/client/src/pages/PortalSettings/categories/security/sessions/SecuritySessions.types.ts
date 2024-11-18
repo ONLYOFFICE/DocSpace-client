@@ -26,13 +26,13 @@
 
 import React from "react";
 
-import { TTranslation, TViewAs } from "@docspace/shared/types";
-import { TPortalSession } from "@docspace/shared/types/ActiveSessions";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation, TViewAs } from "@docspace/shared/types";
+import type { TPortalSession } from "@docspace/shared/types/ActiveSessions";
 
-import SessionsStore from "SRC_DIR/store/SessionsStore";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import type SessionsStore from "SRC_DIR/store/SessionsStore";
+import type DialogsStore from "SRC_DIR/store/DialogsStore";
+import type SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 export type TUserStatus = "online" | "offline";
 

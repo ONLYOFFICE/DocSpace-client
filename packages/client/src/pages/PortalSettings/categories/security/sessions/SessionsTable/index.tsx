@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils";
 
-import { SessionsTableProps } from "../SecuritySessions.types";
+import type { SessionsTableProps } from "../SecuritySessions.types";
 
 import TableView from "./TableView";
 import RowView from "./RowView";

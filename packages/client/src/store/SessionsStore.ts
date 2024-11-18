@@ -32,15 +32,15 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-import {
+import type {
   TPortalSession,
   TPortalSessionsMap,
   TSession,
   TSessionsInPortal,
   TSessionsSelected,
 } from "@docspace/shared/types/ActiveSessions";
-import { Nullable, TTranslation } from "@docspace/shared/types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type { TData } from "@docspace/shared/components/toast/Toast.type";
 import api from "@docspace/shared/api";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";

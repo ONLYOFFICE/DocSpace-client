@@ -27,14 +27,14 @@
 import { useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { IndexRange } from "react-virtualized";
+import type { IndexRange } from "react-virtualized";
 
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
-import { SessionsTableViewProps } from "../../SecuritySessions.types";
+import type { SessionsTableViewProps } from "../../SecuritySessions.types";
 
 const TABLE_VERSION = "4";
 const COLUMNS_SIZE = `securitySessionsColumnsSize_ver-${TABLE_VERSION}`;

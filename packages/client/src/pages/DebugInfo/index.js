@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
@@ -33,8 +33,9 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import axios from "axios";
+import { Loader } from "@docspace/shared/components/loader";
 import styled from "styled-components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const StyledBodyContent = styled.div`
   display: contents;
@@ -85,24 +86,11 @@ const StyledFooterContent = styled.div`
 `;
 
 const DebugInfoDialog = (props) => {
-  const { visible, onClose, user } = props;
-  const [md, setMd] = useState();
+  const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
 
   useEffect(() => {
-    if (md || !visible) return;
-
-    async function loadMD() {
-      try {
-        const response = await axios.get("/debuginfo.md");
-        setMd(response.data);
-      } catch (e) {
-        console.error(e);
-        setMd(`Debug info load failed (${e.message})`);
-      }
-    }
-
-    loadMD();
-  }, [md, visible]);
+    getDebugInfo();
+  }, []);
 
   return (
     <ModalDialog
@@ -136,23 +124,33 @@ const DebugInfoDialog = (props) => {
             heightProp={"362px"}
           >
             <Scrollbar>
-              {md && (
+              {!debugInfoData && <Loader size="20px" type="track" />}
+              {debugInfoData && (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
                     a: ({ node, href, children, ...props }) => (
-                      <a
-                        href={href}
+                      <ColorTheme
+                        fontWeight="600"
                         target="_blank"
-                        rel="noopener noreferrer"
-                        {...props}
+                        tag="a"
+                        href={href}
+                        themeId={ThemeId.Link}
                       >
                         {children}
-                      </a>
+                      </ColorTheme>
+                      // <a
+                      //   href={href}
+                      //   target="_blank"
+                      //   rel="noopener noreferrer"
+                      //   {...props}
+                      // >
+                      //   {children}
+                      // </a>
                     ),
                   }}
                 >
-                  {md}
+                  {debugInfoData}
                 </ReactMarkdown>
               )}
             </Scrollbar>
@@ -169,10 +167,13 @@ DebugInfoDialog.propTypes = {
   buildVersionInfo: PropTypes.object,
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ userStore, settingsStore }) => {
   const { user } = userStore;
+  const { debugInfoData, getDebugInfo } = settingsStore;
 
   return {
     user,
+    debugInfoData,
+    getDebugInfo,
   };
 })(observer(DebugInfoDialog));

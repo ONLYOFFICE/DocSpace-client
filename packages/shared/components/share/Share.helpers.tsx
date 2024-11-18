@@ -26,6 +26,9 @@
 import moment from "moment";
 import { Trans } from "react-i18next";
 
+import isUndefined from "lodash/isUndefined";
+import isNull from "lodash/isNull";
+
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
@@ -37,7 +40,7 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import { Link } from "../link";
 import { toastr } from "../toast";
 import { globalColors } from "../../themes";
-import { ShareAccessRights } from "../../enums";
+import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 import { isFolder } from "../../utils/typeGuards";
 
@@ -418,4 +421,18 @@ export const copyDocumentShareLink = (
     </span>,
     t("Common:LinkCopiedToClipboard"),
   );
+};
+
+export const getExpirationDate = (
+  diffExpiredDate: number | null | undefined,
+) => {
+  if (isUndefined(diffExpiredDate)) return moment().add(7, "days");
+
+  if (isNull(diffExpiredDate)) return moment(diffExpiredDate);
+
+  return moment().add(diffExpiredDate);
+};
+
+export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
+  return `link-create-document-${fileType ?? ""}-${userId}`;
 };

@@ -62,6 +62,9 @@ async function Page({ searchParams }: RootPageProps) {
     searchParams ?? initialSearchParams;
 
   const cookieStore = cookies();
+  const hdrs = headers();
+
+  const hostname = hdrs.get("x-forwarded-host");
 
   log.info(
     {
@@ -72,11 +75,10 @@ async function Page({ searchParams }: RootPageProps) {
       version: version ?? "not set",
       editorType: editorType ?? "not set",
       doc: doc ?? "not set",
+      url: hostname,
     },
     "Start open file at edit",
   );
-
-  const hdrs = headers();
 
   let type = editorType;
 
@@ -171,6 +173,7 @@ async function Page({ searchParams }: RootPageProps) {
       isShare: !!share,
       isAuth: !!cookieStore.get("asc_auth_key")?.value,
       docApiUrl,
+      url: hostname,
     },
     "Open file",
   );

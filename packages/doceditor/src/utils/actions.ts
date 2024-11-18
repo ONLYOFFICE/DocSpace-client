@@ -79,7 +79,13 @@ export async function getFillingSession(
       cause: await response.json(),
     });
   } catch (error) {
-    log.error({ error, fillingSessionId }, "Get filling session failed");
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+    log.error(
+      { error, fillingSessionId, url: hostname },
+      "Get filling session failed",
+    );
   }
 }
 
@@ -133,8 +139,15 @@ export async function fileCopyAs(
       };
     }
 
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
     if (!fileRes.ok) {
-      log.error({ error: fileRes }, `POST /files/file/${fileId}/copyas failed`);
+      log.error(
+        { error: fileRes, url: hostname },
+        `POST /files/file/${fileId}/copyas failed`,
+      );
 
       return;
     }
@@ -143,7 +156,7 @@ export async function fileCopyAs(
 
     if (file.error)
       log.error(
-        { error: file.error },
+        { error: file.error, url: hostname },
         `POST /files/file/${fileId}/copyas failed`,
       );
 
@@ -162,7 +175,14 @@ export async function fileCopyAs(
         : undefined,
     };
   } catch (e: any) {
-    log.error({ error: e }, `POST /files/file/${fileId}/copyas failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error(
+      { error: e, url: hostname },
+      `POST /files/file/${fileId}/copyas failed`,
+    );
     return {
       file: undefined,
       error:
@@ -224,9 +244,16 @@ export async function createFile(
 
     const file = await fileRes.json();
 
-    if (file.error)
-      log.error({ error: file.error }, `POST /files/${parentId}/file failed`);
+    if (file.error) {
+      const hdrs = headers();
 
+      const hostname = hdrs.get("x-forwarded-host");
+
+      log.error(
+        { error: file.error, url: hostname },
+        `POST /files/${parentId}/file failed`,
+      );
+    }
     return {
       file: file.response,
       error: file.error
@@ -242,7 +269,13 @@ export async function createFile(
         : undefined,
     };
   } catch (e: any) {
-    log.error({ error: e }, `POST /files/${parentId}/file failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+    log.error(
+      { error: e, url: hostname },
+      `POST /files/${parentId}/file failed`,
+    );
     return {
       file: undefined,
       error:
@@ -402,7 +435,12 @@ export async function getUser(share?: string) {
   if (userRes.status === 401) return undefined;
 
   if (!userRes.ok) {
-    if (!share) log.error({ error: userRes }, `GET /people/@self failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    if (!share)
+      log.error({ error: userRes, url: hostname }, `GET /people/@self failed`);
 
     return;
   }
@@ -432,7 +470,11 @@ export async function getSettings(share?: string) {
   if (settingsRes.status === 403) return `access-restricted`;
 
   if (!settingsRes.ok) {
-    log.error({ error: settingsRes }, `GET /settings failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: settingsRes, url: hostname }, `GET /settings failed`);
 
     return;
   }
@@ -450,7 +492,11 @@ export const checkIsAuthenticated = async () => {
   const res = await fetch(request);
 
   if (!res.ok) {
-    log.error({ error: request }, `GET /authentication failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: request, url: hostname }, `GET /authentication failed`);
 
     return;
   }
@@ -472,7 +518,11 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
   const res = await fetch(validatePublicRoomKey);
   if (res.status === 401) return undefined;
   if (!res.ok) {
-    log.error({ error: res }, `GET /files/share failed`);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, `GET /files/share failed`);
 
     return;
   }
@@ -524,6 +574,8 @@ export async function openEdit(
 
   const res = await fetch(getConfig);
 
+  const hostname = hdrs.get("x-forwarded-host");
+
   if (res.status !== 404) {
     const config = await res.json();
 
@@ -560,7 +612,10 @@ export async function openEdit(
         : { ...config.error, status, editorUrl }
       : { message: "unauthorized", status, editorUrl };
 
-    log.error({ fileId, error }, `GET /files/file/${fileId}/openedit failed`);
+    log.error(
+      { fileId, error, url: hostname },
+      `GET /files/file/${fileId}/openedit failed`,
+    );
 
     return error as TError;
   }
@@ -592,7 +647,11 @@ export async function getEditorUrl(
   const res = await fetch(request);
 
   if (!res.ok) {
-    log.error({ error: res }, "GET /files/docservice failed");
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /files/docservice failed");
 
     return;
   }
@@ -614,7 +673,11 @@ export async function getColorTheme() {
   const res = await fetch(getSettings);
 
   if (!res.ok) {
-    log.error({ error: res }, "GET /settings/colortheme failed");
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /settings/colortheme failed");
     return;
   }
 

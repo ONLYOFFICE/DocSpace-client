@@ -26,6 +26,7 @@
 
 import { permanentRedirect, redirect } from "next/navigation";
 import dynamic from "next/dynamic";
+import { headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { EditorConfigErrorType } from "@docspace/shared/enums";
@@ -60,9 +61,10 @@ type TSearchParams = {
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
   const baseURL = getBaseUrl();
 
-  log.debug("Empty search params at create file");
-
-  if (!searchParams) redirect(baseURL);
+  if (!searchParams) {
+    log.debug("Empty search params at create file");
+    redirect(baseURL);
+  }
 
   const {
     parentId,
@@ -93,8 +95,12 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     password,
   };
 
+  const hdrs = headers();
+
+  const hostname = hdrs.get("x-forwarded-host");
+
   log.info(
-    { fileTitle, parentId, templateId, open, action },
+    { fileTitle, parentId, templateId, open, action, url: hostname },
     "Create new file",
   );
 
@@ -186,7 +192,10 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     return permanentRedirect(redirectURL);
   }
 
-  log.error({ fileTitle, parentId, error: fileError }, "File created error");
+  log.error(
+    { fileTitle, parentId, error: fileError, url: hostname },
+    "File created error",
+  );
 
   return (
     <CreateFileError

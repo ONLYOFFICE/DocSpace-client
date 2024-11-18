@@ -523,6 +523,10 @@ const ErrorWrapper = styled.div`
   flex-wrap: nowrap;
   gap: 12px;
   margin-inline-start: auto;
+
+  @media ${mobile} {
+    margin-inline-end: 16px;
+  }
 `;
 
 export {

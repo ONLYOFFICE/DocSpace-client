@@ -37,6 +37,7 @@ function EmptyViewOption({ option }: EmptyViewOptionProps) {
   if (isEmptyLinkOptions(option))
     return (
       <Link
+        id={option.key.toString()}
         className={classNames("ev-link", option.className)}
         to={option.to}
         state={option.state}
@@ -47,7 +48,7 @@ function EmptyViewOption({ option }: EmptyViewOptionProps) {
       </Link>
     );
 
-  return <EmptyViewItem {...option} key={option.key} />;
+  return <EmptyViewItem id={option.key.toString()} {...option} />;
 }
 
 export default EmptyViewOption;

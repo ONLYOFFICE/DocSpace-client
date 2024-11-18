@@ -53,7 +53,6 @@ const StyledRowContent = styled(RowContent)`
 `;
 
 const SessionsRowContent = ({
-  t,
   fromDateAgo,
   item,
   sectionWidth,
@@ -72,7 +71,7 @@ const SessionsRowContent = ({
       <Text fontSize="14px" fontWeight="600">
         {displayName}
         <span className={status === "online" ? "online" : "offline"}>
-          {t(`Common:${fromDateAgo}`)}
+          {fromDateAgo}
         </span>
       </Text>
       <span />

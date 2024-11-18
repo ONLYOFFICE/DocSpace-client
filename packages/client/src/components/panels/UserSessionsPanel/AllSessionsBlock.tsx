@@ -80,7 +80,9 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
     <>
       <Wrapper>
         <Text className="subtitle">{t("Profile:AllSessions")}</Text>
-        <Text className="desciption">{t("Profile:PanelDescription")}</Text>
+        <Text className="desciption">
+          {t("Profile:SessionsPanelDescription")}
+        </Text>
         {userSessions.length > 0 ? (
           <Button
             label={t("Profile:LogoutFromAllSessions")}

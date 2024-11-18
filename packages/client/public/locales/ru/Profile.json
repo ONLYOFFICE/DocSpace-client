@@ -22,7 +22,7 @@
   "LogoutCurrentUserDescription": "Внимание. Все активные подключения {{displayName}} будут отключены.",
   "LogoutFrom": "Выйти из {{platform}} {{browser}}?",
   "MyProfile": "Мой профиль",
-  "PanelDescription": "Проверьте последние сессии этого пользователя. При необходимости отключите отдельные сессии или отключите пользователя.",
+  "SessionsPanelDescription": "Проверьте последние сессии этого пользователя. При необходимости отключите отдельные сессии или отключите пользователя.",
   "ProviderSuccessfullyConnected": "Провайдер успешно подключен",
   "ProviderSuccessfullyDisconnected": "Провайдер успешно отключен",
   "SendAgain": "Отправить снова",

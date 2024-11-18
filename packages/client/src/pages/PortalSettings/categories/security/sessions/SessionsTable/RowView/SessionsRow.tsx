@@ -150,7 +150,6 @@ const SessionsRow = (props: SessionsTableRowProps) => {
           $isActive={isActive}
         >
           <SessionsRowContent
-            t={t}
             item={item}
             sectionWidth={sectionWidth}
             fromDateAgo={statusText}

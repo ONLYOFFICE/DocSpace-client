@@ -22,7 +22,7 @@
   "LogoutCurrentUserDescription": "Note. All active connections of {{displayName}} will be logged out.",
   "LogoutFrom": "Log out from {{platform}} {{browser}}?",
   "MyProfile": "My profile",
-  "PanelDescription": "Check the latest sessions of this user. If necessary, disconnect individual sessions or disable a user",
+  "SessionsPanelDescription": "Check the latest sessions of this user. If necessary, disconnect individual sessions or disable a user",
   "ProviderSuccessfullyConnected": "Provider successfully connected",
   "ProviderSuccessfullyDisconnected": "Provider successfully disconnected",
   "SendAgain": "Send again",

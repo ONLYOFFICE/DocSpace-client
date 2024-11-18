@@ -186,7 +186,6 @@ export type SessionsRowViewStoreProps = {
 >;
 
 export interface SessionsRowContentProps {
-  t: TTranslation;
   fromDateAgo: string | null;
   item: TPortalSession;
   sectionWidth?: number;

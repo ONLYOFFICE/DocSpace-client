@@ -540,7 +540,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
-    const { id, displayName, userName, avatar, statusType } = item;
+    const {
+      id,
+      displayName,
+      userName,
+      avatar,
+      statusType,
+      isCollaborator,
+      isVisitor,
+    } = item;
 
     closeDialogs();
 
@@ -550,6 +558,8 @@ class ContactsConextOptionsStore {
       displayName,
       statusType,
       userName,
+      isCollaborator,
+      isVisitor,
     });
 
     setDataReassignmentDialogVisible(true);

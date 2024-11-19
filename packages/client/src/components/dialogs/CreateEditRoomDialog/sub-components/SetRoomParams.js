@@ -55,6 +55,8 @@ import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { globalColors } from "@docspace/shared/themes";
 
+import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+
 const StyledSetRoomParams = styled.div`
   display: flex;
   flex-direction: column;
@@ -239,7 +241,11 @@ const SetRoomParams = ({
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
-    if (e.target.value.match(folderFormValidation)) {
+    let newValue = e.target.value;
+
+    newValue = removeEmojiCharacters(newValue);
+
+    if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
       // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
@@ -247,19 +253,19 @@ const SetRoomParams = ({
     }
 
     if (isEdit) {
-      setPreviewTitle(e.target.value);
+      setPreviewTitle(newValue);
     } else {
-      setCreateRoomTitleTitle(e.target.value);
+      setCreateRoomTitleTitle(newValue);
     }
 
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
-      title: e.target.value,
+      title: newValue,
     });
 
     setRoomParams({
       ...roomParams,
-      title: e.target.value,
+      title: newValue,
     });
 
     if (!cover && !previewIcon && !isEdit) {

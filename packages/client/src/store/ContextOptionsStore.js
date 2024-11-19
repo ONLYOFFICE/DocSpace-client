@@ -1562,7 +1562,7 @@ class ContextOptionsStore {
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => {
-          if (isMobileOnly) {
+          if (isMobile) {
             toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
             return;
           }
@@ -1578,7 +1578,7 @@ class ContextOptionsStore {
         onClick: () => {
           const isPDF = item.fileExst === ".pdf";
 
-          if (isPDF && isMobileOnly) {
+          if (isPDF && isMobile) {
             toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
             return;
           }

@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "Нет авторизованных приложений",
   "NoOAuthAppHeader": "Нет приложений OAuth",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "Приложения OAuth используются для доступа к API {{organizationName}} {{productName}} для авторизации и дальнейших действий, например, доступа к файлам.",
+  "OAuthAppDescription": "Используйте OAuth 2.0 для доступа к API {{organizationName}} {{productName}} для авторизации и дальнейших действий, например, доступа к файлам. Здесь вы можете зарегистрировать новое приложение, управлять созданными приложениями в списке, отключать и включать их.",
   "OAuthHeaderBlock": "URL-адреса OAuth ",
   "PrivacyPolicy": "Политика конфиденциальности",
   "PrivacyPolicyURL": "URL-адреса Политики конфиденциальности",

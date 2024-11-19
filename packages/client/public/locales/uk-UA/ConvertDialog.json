@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "Усі документи, які ви передаєте, буде конвертовано в формат Office Open XML (docx, xlsx або pptx) для більш швидкого редагування.",
+  "ConversionXmlMessage": "Документ, який ви відкриваєте, буде конвертовано у формат Office Open XML (docx або xlsx) для швидшого перегляду та редагування.",
   "ConvertedFileDestination": "Копію файлу буде створено у папці  <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "Перетворення документів",
   "FailedToConvert": "Не вдалося перетворити",
@@ -7,5 +8,6 @@
   "HideMessage": "Більше не показувати це повідомлення",
   "InfoCreateFileIn": "Новий файл '{{fileTitle}}' створено в '{{folderTitle}}'",
   "OpenFileMessage": "Для швидшого перегляду та редагування файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML.",
-  "SaveOriginalFormatMessage": "Зберегти копію файлу в оригінальному форматі"
+  "SaveOriginalFormatMessage": "Зберегти копію файлу в оригінальному форматі",
+  "SelectFileType": "Виберіть тип файлу:"
 }

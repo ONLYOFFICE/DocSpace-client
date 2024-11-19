@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Ek bölümler",
   "DisplayFavorites": "Favorileri Görüntüle",
+  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
   "DisplayNotification": "Öğeleri Çöp Kutusuna taşırken bildirim göster",
   "DisplayRecent": "Son kullanılanları görüntüle",
   "DisplayTemplates": "Şablonları Görüntüle",

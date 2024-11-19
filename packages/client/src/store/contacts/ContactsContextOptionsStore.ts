@@ -645,6 +645,7 @@ class ContactsConextOptionsStore {
         icon: PersonUserReactSvgUrl,
         label: t("Common:Invite"),
         key: "new-user",
+        openByDefault: true,
         items: accountsUserOptions,
       },
       {

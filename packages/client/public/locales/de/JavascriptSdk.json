@@ -81,6 +81,7 @@
   "MobileOnly": "nur mobile Geräte",
   "Page": "Seite",
   "PortalDescription": "Betten Sie den gesamten {{productName}} ein, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen.",
+  "PublicRoomPresetInfo": "Integrieren Sie einen öffentlichen Raum, in dem Benutzer alle dort gespeicherten Dokumente ohne Registrierung anzeigen, bearbeiten, kommentieren oder überprüfen können.",
   "RightPanelCollapsed": "Zusammenklappbare rechte Seite",
   "RoomFilter": "Raumfilter",
   "RoomOrFolder": "Raum oder Ordner",

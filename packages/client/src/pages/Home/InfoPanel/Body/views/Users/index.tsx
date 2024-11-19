@@ -33,6 +33,8 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -152,7 +154,7 @@ const Users = ({
   };
 
   const renderTypeData = () => {
-    const typesOptions = getUsersChangeTypeOptions(t);
+    const typesOptions = getUsersChangeTypeOptions(t, infoPanelSelection);
 
     const typeLabel = getUserTypeTranslation(role, t);
 
@@ -179,12 +181,20 @@ const Users = ({
 
     if (!canChange || isGuests || !selectedOption) return text;
 
+    const onSelect = (
+      option: TContextMenuValueTypeOnClick & {
+        onClick: (e: TContextMenuValueTypeOnClick) => void;
+      },
+    ) => {
+      if (option.onClick) option.onClick({ ...option });
+    };
+
     const combobox = (
       <ComboBox
         id="info-account-type-select"
         className="type-combobox"
         selectedOption={selectedOption}
-        onSelect={() => {}}
+        onSelect={onSelect}
         options={typesOptions}
         scaled={false}
         size={ComboBoxSize.content}

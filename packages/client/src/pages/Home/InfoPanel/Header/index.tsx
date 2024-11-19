@@ -90,6 +90,9 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
+  const expired = "expired" in selection ? selection.expired : false;
+  const external = "external" in selection ? selection.external : false;
+
   const withTabs =
     !isRoot &&
     !isSeveralItems &&
@@ -97,7 +100,7 @@ const InfoPanelHeaderContent = ({
     !isContacts &&
     !isTrash &&
     !isLockedSharedRoom(selection as TRoom) &&
-    !(selection as TRoom).expired;
+    !(external && expired === true);
 
   const closeInfoPanel = () => setIsVisible(false);
 

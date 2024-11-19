@@ -292,12 +292,14 @@ export const getTranslationDate = (
 
 export const canShowManageLink = (
   item: TFile | TFolder,
-  buffer: TFile | TFolder,
+  buffer: TFile | TFolder | null,
   infoPanelVisible: boolean,
   infoPanelView: string,
   isRoom: boolean = false,
 ): boolean => {
   if (isFolder(item) && !item.security.EditAccess) return false;
+
+  if (!buffer) return true;
 
   const isEqual =
     item.id === buffer.id &&

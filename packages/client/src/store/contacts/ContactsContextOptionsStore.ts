@@ -115,6 +115,7 @@ class ContactsConextOptionsStore {
   }
 
   onChangeType = (e: TContextMenuValueTypeOnClick) => {
+    console.log("click");
     const action =
       "action" in e && e.action
         ? e.action

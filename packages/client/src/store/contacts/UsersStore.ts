@@ -1061,7 +1061,7 @@ class UsersStore {
 
     const users = this.selection.filter((x) => canRemoveUser(x));
 
-    return users.length === 1;
+    return users.length > 0;
   }
 
   get hasOnlyOneUserToRemove() {

@@ -512,6 +512,10 @@ class SettingsStore {
     return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
   }
 
+  get apiOAuthLink() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
+  }
+
   get wizardCompleted() {
     return this.isLoaded && !this.wizardToken;
   }

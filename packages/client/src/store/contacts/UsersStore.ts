@@ -495,10 +495,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (
-            userRole !== EmployeeType.Guest &&
-            userRole !== EmployeeType.User
-          ) {
+          if (userRole !== EmployeeType.Guest) {
             options.push("reassign-data");
           }
 
@@ -1064,7 +1061,7 @@ class UsersStore {
 
     const users = this.selection.filter((x) => canRemoveUser(x));
 
-    return users.length > 0;
+    return users.length === 1;
   }
 
   get hasOnlyOneUserToRemove() {

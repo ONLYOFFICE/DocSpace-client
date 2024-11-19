@@ -86,33 +86,37 @@ class SessionsStore {
   }
 
   fetchPortalSessions = (startIndex: number = 0, count: number = 100) => {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       SocketHelper.emit(SocketCommands.GetSessionsInPortal, {
         startIndex,
         count,
       });
-      SocketHelper.on(
-        SocketEvents.SessionsInPortal,
-        (data: TSessionsInPortal) => {
-          this.addPortalSessions(data.users);
-          this.setTotalPortalSessions(data.total);
-          resolve();
-        },
-      );
+
+      const callback = (data: TSessionsInPortal) => {
+        SocketHelper.off(SocketEvents.SessionsInPortal, callback);
+
+        this.addPortalSessions(data.users);
+        this.setTotalPortalSessions(data.total);
+        resolve();
+      };
+
+      SocketHelper.on(SocketEvents.SessionsInPortal, callback);
     });
   };
 
   fetchUserSessions = (userId: string) => {
-    return new Promise((resolve) => {
-      SocketHelper.emit(SocketCommands.GetSessions, {
-        id: userId,
-      });
-      // Todo: add unsubscribing
-      SocketHelper.on(SocketEvents.UserSessions, (data: TSession[]) => {
+    return new Promise<void>((resolve) => {
+      SocketHelper.emit(SocketCommands.GetSessions, { id: userId });
+
+      const callback = (data: TSession[]) => {
+        SocketHelper.off(SocketEvents.UserSessions, callback);
+
         this.setUserSessions(data);
         this.sortUserSessions();
         resolve();
-      });
+      };
+
+      SocketHelper.on(SocketEvents.UserSessions, callback);
     });
   };
 

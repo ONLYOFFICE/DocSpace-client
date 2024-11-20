@@ -198,7 +198,7 @@
   "WantLeaveRoom": "Vuoi lasciare questa stanza? Potrai unirti nuovamente tramite un nuovo invito da parte di un amministratore della sala.",
   "WantToRestoreTheRoom": "Tutti i link esterni in questa stanza diventeranno attivi e i suoi contenuti saranno disponibili a chiunque abbia il collegamento. Vuoi ripristinare la stanza?",
   "WantToRestoreTheRooms": "Tutti i link esterni nelle stanze ripristinate diventeranno attivi e i loro contenuti saranno disponibili a chiunque abbia i link alle stanze. Vuoi ripristinare le stanze?",
-  "WarningCopyToFormRoom": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare un modulo PDF {{nomeorganizzazione }} alla volta.",
+  "WarningCopyToFormRoom": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare un modulo PDF {{organizationName}} alla volta.",
   "WarningCopyToFormRoomServal": "La copia di più file nella stanza di compilazione dei moduli non è supportata. Copia un modulo PDF {{ organizationName }} alla volta.",
   "WarningCreationFormRoom": "La creazione basata su più file e cartelle non è disponibile per questo tipo di stanza. Per creare una stanza di questo tipo, accedi alla sezione Stanze o utilizza uno dei moduli PDF.",
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questa stanza. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",

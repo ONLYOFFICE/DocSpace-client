@@ -6,7 +6,7 @@
   "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de ruimte adresinstellingen te bewerken, moet u de toekomstige {{productName}} naam instellen",
   "CreatingPortal": "Een nieuwe {{productName}} aanmaken",
   "CurrentSpace": "Huidige ruimte",
-  "DeleteEmptyPortalText": "U gaat de ruimte <1>{domain}}</1> definitief verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
+  "DeleteEmptyPortalText": "U gaat de ruimte <1>{{domain}}</1> definitief verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
   "DeleteRequestSuccess": "Verwijderingsverzoek succesvol verzonden naar het e-mailadres van de eigenaar van {{productName}} <1>{{email}}</1>",
   "DeleteWarning": "De laatste volledige toegang tot de ruimte kan niet worden verwijderd",
   "DomainName": "Domeinnaam",

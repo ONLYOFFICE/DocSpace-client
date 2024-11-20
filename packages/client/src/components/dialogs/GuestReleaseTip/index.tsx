@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import {
@@ -123,7 +123,12 @@ const GuestReleaseTip = ({
 
           <StyledBody>
             <Text fontSize="12px" fontWeight={400} lineHeight="16px" noSelect>
-              {t("Translations:GuestReleaseTipDescripton")}
+              <Trans
+                t={t}
+                ns="Translations"
+                i18nKey="GuestReleaseTipDescripton"
+                values={{ productName: t("Common:ProductName") }}
+              />
             </Text>
             <Link
               fontSize="12px"

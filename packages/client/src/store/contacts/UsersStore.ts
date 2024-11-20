@@ -1056,18 +1056,12 @@ class UsersStore {
     return users.length > 0 ? users.map((u) => u.id) : [];
   }
 
-  get hasUsersToRemove() {
-    const { canRemoveUser } = this.accessRightsStore;
-
-    const users = this.selection.filter((x) => canRemoveUser(x));
-
-    return users.length > 0;
-  }
-
   get hasOnlyOneUserToRemove() {
-    const { canRemoveUser } = this.accessRightsStore;
+    const { canRemoveOnlyOneUser } = this.accessRightsStore;
 
-    const users = this.selection.filter((x) => canRemoveUser(x));
+    if (this.selection.length !== 1) return false;
+
+    const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
 
     return users.length === 1;
   }

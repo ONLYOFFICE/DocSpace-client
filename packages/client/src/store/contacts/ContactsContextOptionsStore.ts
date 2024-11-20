@@ -379,7 +379,7 @@ class ContactsConextOptionsStore {
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
-      hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       contactsTab,
     } = this.usersStore;
     const {
@@ -442,7 +442,7 @@ class ContactsConextOptionsStore {
       {
         key: "cm-delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove || (isRoomAdmin && isGuests),
+        disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),
         onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },

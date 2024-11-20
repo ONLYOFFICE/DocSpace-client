@@ -98,8 +98,6 @@ import {
   canShowManageLink,
   copyDocumentShareLink,
   copyRoomShareLink,
-  getCreateShareLinkKey,
-  getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";

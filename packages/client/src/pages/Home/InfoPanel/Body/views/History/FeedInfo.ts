@@ -104,6 +104,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Move}`,
   },
   {
+    key: "FileMovedToTrash",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Move}`,
+  },
+  {
     key: "FileCopied",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Copy}`,
@@ -151,6 +156,11 @@ export const feedInfo = [
   },
   {
     key: "FolderMoved",
+    targetType: `${FeedTarget.Folder}`,
+    actionType: `${FeedAction.Move}`,
+  },
+  {
+    key: "FolderMovedToTrash",
     targetType: `${FeedTarget.Folder}`,
     actionType: `${FeedAction.Move}`,
   },

@@ -2365,10 +2365,8 @@ const Dark: TTheme = {
     link: {
       color: lightBlueMain,
       background: black,
-      hoverBackground: lightDarkGrayHover,
-      hoverColor: lightBlueMainHover,
-      PressedBackground: black,
-      PressedColor: lightBlueMainPressed,
+      hoverBackground: darkGrayLight,
+      PressedBackground: grayDarkStrong,
     },
     items: {
       hoverColor: darkGrayLight,

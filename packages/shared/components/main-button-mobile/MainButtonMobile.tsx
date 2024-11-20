@@ -268,6 +268,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                   recalculateHeight={recalculateHeight}
                   openedSubmenuKey={openedSubmenuKey}
                   setOpenedSubmenuKey={setOpenedSubmenuKey}
+                  openByDefault={option?.openByDefault || false}
                 />
               );
 

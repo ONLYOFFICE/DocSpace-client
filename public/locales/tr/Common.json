@@ -566,5 +566,6 @@
   "Years": "Yıl",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz"
+  "You": "Siz",
+  "WarningCopyToFormRoom": "Dosya bu odaya kopyalanamıyor. Lütfen {{organizationName}} PDF formunu kopyalamayı deneyin."
 }

@@ -11,6 +11,6 @@
   "LinkCopySuccess": "Link is gekopieerd",
   "ResetChange": "Wijziging resetten",
   "SendInvitation": "Stuur uitnodiging",
-  "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productNaam}} beheerders kunnen de opgegeven rol vervullen.",
+  "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen de opgegeven rol vervullen.",
   "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd"
 }

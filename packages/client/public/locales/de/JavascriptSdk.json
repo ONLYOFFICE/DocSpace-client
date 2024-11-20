@@ -79,7 +79,7 @@
   "Menu": "Menü",
   "MenuDescription": "Wenn Benutzer nicht zu anderen Abschnitten navigieren müssen, können Sie das linke Menü deaktivieren.",
   "MobileOnly": "nur mobile Geräte",
-  "Page": "Seite",
+  "Page": "Seite anzeigen (Nummer)",
   "PortalDescription": "Betten Sie den gesamten {{productName}} ein, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen.",
   "PublicRoomPresetInfo": "Integrieren Sie einen öffentlichen Raum, in dem Benutzer alle dort gespeicherten Dokumente ohne Registrierung anzeigen, bearbeiten, kommentieren oder überprüfen können.",
   "RightPanelCollapsed": "Zusammenklappbare rechte Seite",

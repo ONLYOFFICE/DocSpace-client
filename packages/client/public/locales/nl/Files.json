@@ -194,7 +194,6 @@
   "WantLeaveRoom": "Wilt u deze kamer echt verlaten? U kunt er weer aan deelnemen via een nieuwe uitnodiging van de beheerder van de kamer.",
   "WantToRestoreTheRoom": "Alle externe links in deze ruimte worden actief en het materiaal is beschikbaar voor iedereen die de link gebruikt. Wilt u de kamer herstellen?",
   "WantToRestoreTheRooms": "Alle externe links in herstelde kamers zullen actief worden, en hun materiaal zal beschikbaar zijn voor iedereen met een link naar de kamer. Wilt u de kamers herstellen?",
-  "WarningCopyToFormRoom": "Het bestand kan niet naar deze kamer worden gekopieerd. Probeer het {{ organizationName }} PDF formulier te kopiëren.",
   "WarningCopyToFormRoomServal": "Het kopiëren van meerdere bestanden naar de Kamer voor het invullen van formulieren wordt niet ondersteund. Kopieer één {{ organizationName }} PDF formulier tegelijk.",
   "WarningCreationFormRoom": "Aanmaken op basis van meerdere bestanden en mappen is niet beschikbaar voor dit type kamer. Om een dergelijke kamer aan te maken, gaat u naar de sectie Kamers of gebruikt u een van de PDF formulieren.",
   "WarningMoveToFormRoom": "Het bestand kan niet naar deze kamer worden verplaatst. Probeer het {{ organizationName }} PDF formulier te verplaatsen.",

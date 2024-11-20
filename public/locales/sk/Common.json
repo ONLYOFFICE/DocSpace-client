@@ -567,5 +567,6 @@
   "Years": "Roky",
   "Yes": "Áno",
   "Yesterday": "Včera",
-  "You": "Vy"
+  "You": "Vy",
+  "WarningCopyToFormRoom": "Súbor nie je možné skopírovať do tejto miestnosti. Pokúste sa skopírovať {{organizationName}} PDF formulár."
 }

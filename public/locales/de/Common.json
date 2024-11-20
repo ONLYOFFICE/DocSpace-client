@@ -571,5 +571,6 @@
   "Years": "Jahre",
   "Yes": "Ja",
   "Yesterday": "Gestern",
-  "You": "Sie"
+  "You": "Sie",
+  "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Raum kopiert werden. Bitte versuchen Sie, das PDF-Formular {{organizationName}} zu kopieren."
 }

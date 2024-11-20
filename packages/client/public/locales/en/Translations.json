@@ -62,5 +62,7 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleSkyDrive": "OneDrive",
   "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TypeTitleYandex": "Yandex.Disk",
+  "GuestReleaseTipDescripton": "All previously added Users became Guests and now available in the Contacts list of the DocSpace administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
+  "GuestReleaseTipLink": "Learn more about user types"
 }

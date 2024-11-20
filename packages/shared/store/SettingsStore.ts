@@ -331,12 +331,18 @@ class SettingsStore {
 
   isBannerVisible = false;
 
+  showGuestReleaseTip = false;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
+    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get ldapSettingsUrl() {
@@ -514,6 +520,10 @@ class SettingsStore {
 
   get apiOAuthLink() {
     return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
+  }
+
+  get accessRightsLink() {
+    return `${this.helpLink}/userguides/docspace-gettingstarted.aspx#AccessRights_block`;
   }
 
   get wizardCompleted() {

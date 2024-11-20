@@ -59,7 +59,7 @@
   "RoomIndexingEnabled": "Indicizzazione automatica dei file attivata nella stanza",
   "RoomInviteResend": "Inviti mandati di nuovo:",
   "RoomLifeTimeDisabled": "Durata dei file disabilitata nella stanza",
-  "RoomLifeTimeSet": "Imposta la durata di <1>{{data}} per tutti i file nella stanza",
+  "RoomLifeTimeSet": "Imposta la durata di <1>{{data}}</1> per tutti i file nella stanza",
   "RoomLogoChanged": "L'icona è cambiata",
   "RoomRemoveUser": "Utente rimosso.",
   "RoomRenamed": "Stanza <1>«{{oldRoomTitle}}»</1> rinominata <2>«{{roomTitle}}»</2>",

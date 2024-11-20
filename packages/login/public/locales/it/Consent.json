@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Consenti",
+  "ConsentDescription": "I dati condivisi con <strong>{{displayName}}</strong> saranno regolati dalla <strong>{{nameApp}}</strong> <6>politica sulla privacy</6> e <6>dai termini di servizio</6>. Puoi revocare questo consenso in qualsiasi momenti nelle impostazioni del tuo account {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> desidera accedere ai seguenti dati nel <strong>tuo account {{productName}}</strong>:",
+  "DenyButton": "Nega",
+  "NotYou": "Non sei tu?",
+  "SignedInAs": "Accesso come",
+  "ToContinue": "Per continuare a"
+}

@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Gast <strong>{{userName}}</strong> wordt verplaatst naar de Personen sectie en krijgt het type Gebruiker toegewezen. Gebruikers hebben hun eigen Documenten sectie, kunnen bestanden maken en bewerken, maar kunnen geen kamers maken.",
+  "ChangeGuestsTypeMessageMulti": "De geselecteerde gasten worden verplaatst naar de Personen sectie en krijgen het type Gebruiker toegewezen. Gebruikers hebben hun eigen Documenten sectie, kunnen bestanden maken en bewerken, maar kunnen geen kamers maken.",
   "ChangeUserTypeButton": "Wijzig type",
   "ChangeUserTypeHeader": "Wijzig gebruiker type",
   "ChangeUserTypeMessage": "Gebruikers met de <strong>'{{ firstType }}'</strong> type worden verplaatst naar <strong>'{{ secondType }}'</strong> type.",
   "ChangeUserTypeMessageMulti": "De geselecteerde gebruikers worden verplaatst naar het type <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "U kunt het type niet veranderen voor de {{productName}}-beheerders en voor uzelf.",
+  "SuccessChangeGuestType": "Het gasttype is succesvol gewijzigd",
   "SuccessChangeUserType": "Het gebruikerstype werd met succes gewijzigd"
 }

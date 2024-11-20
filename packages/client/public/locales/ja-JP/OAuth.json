@@ -31,7 +31,7 @@
   "DeveloperTokenCopied": "開発者トークンがクリップボードに正常にコピーされました",
   "DisableApplication": "アプリを無効にする",
   "DisableApplicationDescription": "このアプリケーションを無効にすると、すべてのアクティブな同意および承認が取り消されます。必要に応じて、無効にしたアプリケーションを後で有効にすることができます。",
-  "DisableApplicationNote": "ご注意：すべてのユーザーは、再度同意画面を完了する必要があります",
+  "DisableApplicationNote": "<strong>ご注意：</strong>すべてのユーザーは、再度同意画面を完了する必要があります",
   "DisableApplications": "アプリを無効にする",
   "DisableApplicationsDescription": "これらのアプリケーションを無効にすると、すべてのアクティブな同意および承認が取り消されます。必要に応じて、無効にしたアプリケーションを後で有効にすることができます。",
   "EditApp": "アプリを変更する",

@@ -34,6 +34,7 @@
   "RoleFormFiller": "Formularausfüller",
   "RoleFormFillerDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Ausfüllen von Formularen, Überprüfen, Kommentieren.",
   "RoleFormFillerFormRoomDescription": "Benutzer, die Formulare ausfüllen, können in den Ordnern \"Ausgefüllt\" und \"Im Nicht ausgefüllt\" nur ihre ausgefüllten/gestarteten Formulare anzeigen.",
+  "RoleGuestDescriprion": "Gäste können auf die Räume zugreifen, zu denen sie eingeladen wurden, sowie Dokumente erstellen und bearbeiten, wenn ihnen die entsprechenden Rollen im Raum zugewiesen wurden.",
   "RoleNewUserDescription": "Benutzer können Dateien im Raum erstellen und bearbeiten, jedoch keine Räume erstellen, Benutzer verwalten oder auf Einstellungen zugreifen.",
   "RolePortalAdminDescription": "{{productName}}-Administratoren können auf die {{productName}}-Einstellungen zugreifen, Räume verwalten und archivieren, neue Benutzer einladen und Rollen unterhalb ihrer Stufe zuweisen. Alle Administratoren haben Zugriff auf den Bereich Dokumente.",
   "RolePowerUserFormRoomDescription": "User können Formulare in den Raum hochladen und haben vollen Zugriff auf die Ordner \"Ausgefüllt\" und \"Im Nicht ausgefüllt\".",

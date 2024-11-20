@@ -120,7 +120,7 @@
   "ErrorOccuredDownloadLog": "数据导入期间发生错误。下载日志以检查它们。",
   "ErrorsWereFound": "发现 {{errors}} 个错误",
   "ForcePathStyle": "力路风格",
-  "GoogleDriveFiles": "Google Drive 文件\n",
+  "GoogleDriveFiles": "Google Drive 文件",
   "GroupsDescription": "您在前一步选择的用户将被导入到在{{serviceName}}中创建的群组。这些群组将显示在{{contactsName}}部分。",
   "HexCode": "十六进制代码",
   "Import": "导入",

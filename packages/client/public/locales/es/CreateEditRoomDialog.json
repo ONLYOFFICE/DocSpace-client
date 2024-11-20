@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Hacer que la sala sea privada",
   "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario de la sala",
   "Position": "Posición",
+  "PublicRoomBarDescription": "Esta sala está disponible para cualquier persona que tenga el enlace. El acceso para usuarios externos se proporciona en función del tipo de permisos de acceso seleccionados.",
   "PublicRoomSystemFoldersDescription": "Las carpetas del sistema almacenan copias de formularios en diferentes etapas de finalización. Los formularios que se están completando se almacenan en la carpeta En progreso y los formularios completados se almacenan en la carpeta Completado.",
   "PublicRoomSystemFoldersTitle": "Carpetas del sistema",
   "RestrictCopyAndDownload": "Restringir copia y descarga",

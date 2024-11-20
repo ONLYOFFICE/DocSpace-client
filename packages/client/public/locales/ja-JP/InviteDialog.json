@@ -9,5 +9,6 @@
   "LinkCopySuccess": "リンクがコピーされました",
   "ResetChange": "変更をリセット",
   "SendInvitation": "招待を送信する",
+  "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています"
 }

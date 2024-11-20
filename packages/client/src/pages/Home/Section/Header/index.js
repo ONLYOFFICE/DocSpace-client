@@ -241,6 +241,7 @@ const SectionHeaderContent = (props) => {
     isFrame,
     showTitle,
     hideInfoPanel,
+    showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
@@ -258,6 +259,7 @@ const SectionHeaderContent = (props) => {
     onSignInClick,
     signInButtonIsDisabled,
     isShared,
+    isExternal,
     displayAbout,
   } = props;
 
@@ -421,7 +423,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getTitleIcon = () => {
-    if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
+    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
     if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
@@ -577,7 +579,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={selectedFolder.external}
+          isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
@@ -636,9 +638,13 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={(isPublicRoom || (isFrame && displayAbout)) && logo}
+                withLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  logo
+                }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && displayAbout)) && burgerLogo
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  burgerLogo
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -772,6 +778,7 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -842,6 +849,7 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
+    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
@@ -921,6 +929,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
       currentGroup,
@@ -941,6 +950,7 @@ export default inject(
 
       rootFolderId,
       isShared,
+      isExternal,
       displayAbout,
     };
   },

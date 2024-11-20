@@ -193,7 +193,6 @@
   "WantLeaveRoom": "您确定要退出房间吗？您可以通过房间管理员的新邀请再次加入。",
   "WantToRestoreTheRoom": "此房间的所有外部链接都会变为活动状态，所有拥有此链接的人都可以访问房间内容。要还原房间吗？",
   "WantToRestoreTheRooms": "恢复房间后，其所有的共享链接都将重新生效，并且拥有房间链接的人都可以访问其内容。 您确定恢复房间吗？",
-  "WarningCopyToFormRoom": "该文件无法复制到此房间。请尝试复制{{ organizationName }}的 PDF 表单。",
   "WarningCopyToFormRoomServal": "不支持将多个文件复制到表单填写房间。请每次复制一份{{ organizationName }}的 PDF 表单。",
   "WarningCreationFormRoom": "此类型的房间不支持基于多个文件和文件夹的创建。要创建此类房间，请前往房间部分或使用其中一份 PDF 表单。",
   "WarningMoveToFormRoom": "该文件无法移动到此房间。请尝试移动{{ organizationName }}的 PDF 表单。",

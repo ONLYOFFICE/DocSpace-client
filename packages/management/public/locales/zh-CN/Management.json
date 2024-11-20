@@ -5,6 +5,7 @@
   "CreateSpaceDescription": "您已成功将您的域名连接到您的 IP 地址。要编辑空间地址设置，您需要设置未来的{{productName}}名称",
   "CreatingPortal": "创建新的{{productName}}",
   "CurrentSpace": "当前协作空间",
+  "DeleteWarning": "最后一个完全访问空间无法被删除",
   "DomainName": "域名",
   "DomainNotFound": "未找到域，请在 DNS 设置中进行查阅",
   "DomainSettings": "网域设置",

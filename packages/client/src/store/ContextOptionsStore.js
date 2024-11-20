@@ -2000,7 +2000,8 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { selection, allFilesIsEditing } = this.filesStore;
+    const { selection, allFilesIsEditing, canConvertSelected } =
+      this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       this.treeFoldersStore;
@@ -2171,7 +2172,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess,
+        disabled: !hasDownloadAccess || !canConvertSelected,
       },
       {
         key: "move-to",

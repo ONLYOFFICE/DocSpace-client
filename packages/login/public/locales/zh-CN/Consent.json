@@ -2,6 +2,7 @@
   "AllowButton": "允许",
   "ConsentDescription": "与<strong>{{displayName}}</strong>共享的数据将受<strong>{{nameApp}}</strong><6>隐私政策</6>和<6>服务条款</6>的约束。您可以随时在{{productName}}账户设置中撤回授权。",
   "ConsentSubHeader": "<1>{{nameApp}}</1>希望访问<strong>您{{productName}}账户</strong>中的以下数据：",
+  "DenyButton": "拒绝",
   "NotYou": "不是您本人？",
   "SignedInAs": "登录为",
   "ToContinue": "若要继续"

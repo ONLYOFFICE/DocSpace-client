@@ -194,7 +194,6 @@
   "WantLeaveRoom": "Ali res želite zapustiti to sobo? Ponovno se ji boste lahko pridružili z novim povabilom skrbnika sobe.",
   "WantToRestoreTheRoom": "Vse zunanje povezave v tej sobi bodo postale aktivne, njena vsebina pa bo na voljo vsem s povezavo. Ali želite obnoviti sobo?",
   "WantToRestoreTheRooms": "Vse zunanje povezave v obnovljenih sobah bodo postale aktivne, njihova vsebina pa bo na voljo vsem s povezavami do sob. Ali želite obnoviti sobe?",
-  "WarningCopyToFormRoom": "Datoteke ni mogoče kopirati v to sobo. Poskusite kopirati obrazec PDF {{ organizationName }}.",
   "WarningCopyToFormRoomServal": "Kopiranje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Kopirajte po en obrazec PDF {{ organizationName }} naenkrat.",
   "WarningCreationFormRoom": "Ustvarjanje na podlagi več datotek in map ni na voljo za to vrsto sobe. Če želite ustvariti takšno sobo, pojdite v razdelek Sobe ali uporabite enega od obrazcev PDF.",
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{ organizationName }}.",

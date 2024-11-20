@@ -199,7 +199,6 @@
   "WantLeaveRoom": "Souhaitez-vous vraiment quitter cette salle ? Vous pourrez la rejoindre à nouveau via une nouvelle invitation d'un administrateur de la salle.",
   "WantToRestoreTheRoom": "Tous les liens externes de cette salle deviendront actifs et son contenu sera accessible à tous les utilisateurs disposant du lien. Voulez-vous restaurer la salle ?",
   "WantToRestoreTheRooms": "Tous les liens externes des salles restaurées deviendront actifs et leur contenu sera accessible à tous ceux qui possèdent les liens de la salle. Voulez-vous restaurer les salles ?",
-  "WarningCopyToFormRoom": "Le fichier ne peut pas être copié dans cette salle. Veuillez essayer de copier le formulaire PDF de {{ organizationName }}.",
   "WarningCopyToFormRoomServal": "La copie de plusieurs fichiers dans la salle de remplissage des formulaires n'est pas possible. Copiez un formulaire PDF {{ organizationName }} à la fois.",
   "WarningCreationFormRoom": "La création à partir de plusieurs fichiers et dossiers n'est pas disponible pour ce type de salle. Pour créer une telle salle, rendez-vous dans la section Salles ou utilisez l'un des formulaires PDF.",
   "WarningMoveToFormRoom": "Le fichier ne peut pas être déplacé dans cette salle. Veuillez essayer de déplacer le formulaire PDF de {{ organizationName }}.",

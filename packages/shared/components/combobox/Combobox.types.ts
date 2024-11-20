@@ -203,7 +203,7 @@ export interface ComboButtonProps {
 }
 
 export interface ComboButtonThemeProps extends ComboButtonProps {
-  ref: React.LegacyRef<HTMLDivElement>;
+  // ref: React.LegacyRef<HTMLDivElement>;
   $currentColorScheme?: TColorScheme;
   interfaceDirection?: string;
   containOptions?: number;

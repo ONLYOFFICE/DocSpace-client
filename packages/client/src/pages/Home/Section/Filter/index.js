@@ -1161,7 +1161,7 @@ const SectionFilterContent = ({
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
-          )[1];
+          )?.[1];
 
           const label = ROOMS_PROVIDER_TYPE_NAME[key];
 

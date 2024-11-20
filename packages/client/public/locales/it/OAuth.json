@@ -68,7 +68,7 @@
   "ResetHeader": "Reimposta segreto del cliente",
   "Revoke": "Revocare",
   "RevokeConsent": "Revocare consenso",
-  "RevokeConsentDescription": "Una volta revocato il consenso all'uso dei dati di autenticazione di {{organizationName}} {{productName}} nel servizio {{name}}, {{organizationName}} {{productName}} smetterà automaticamente di accedere a {{name}}. Il vostro account in {{nome}} non verrà cancellato.",
+  "RevokeConsentDescription": "Una volta revocato il consenso all'uso dei dati di autenticazione di {{organizationName}} {{productName}} nel servizio {{name}}, {{organizationName}} {{productName}} smetterà automaticamente di accedere a {{name}}. Il vostro account in {{name}} non verrà cancellato.",
   "RevokeConsentDescriptionGroup": "Una volta revocato il consenso all'uso del {{organizationName}} {{productName}} nei servizi, {{organizationName}} {{productName}} smetterà automaticamente di registrare. I tuoi account non verranno cancellati.",
   "RevokeConsentLogin": "Se vuoi rinnovare l'accesso automatico a {{name}} utilizzando {{organizationName}} {{productName}}, ti verrà chiesto di concedere l'accesso ai dati del tuo account {{productName}}.",
   "RevokeConsentLoginGroup": "Se vuoi rinnovare un accesso automatico utilizzando {{organizationName}} {{productName}}, ti verrà chiesto di concedere l'accesso ai dati del tuo account {{productName}}.",

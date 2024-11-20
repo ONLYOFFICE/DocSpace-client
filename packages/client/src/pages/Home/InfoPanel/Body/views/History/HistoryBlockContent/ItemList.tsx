@@ -101,11 +101,13 @@ const HistoryItemList = ({
     feed.data,
     ...feed.related.map((relatedFeeds) => relatedFeeds.data),
   ].map((item) => {
+    const fileExst = getFileExtension(item.title || item.newTitle);
+
     return {
       ...item,
       title: nameWithoutExtension!(item.title || item.newTitle),
-      fileExst: getFileExtension(item.title || item.newTitle),
-      isFolder,
+      fileExst,
+      isFolder: actionType === FeedAction.Change ? !fileExst : isFolder,
     };
   });
 

@@ -3,6 +3,8 @@
   "AddedToClipboard": "Տարրերն ավելացվել են սեղմատախտակին",
   "AddMembersDescription": "Դուք կարող եք ձեռքով ավելացնել թիմի նոր անդամներ կամ հրավիրել նրանց հղման միջոցով:",
   "AddNewLink": "Ավելացնել նոր հղում",
+  "AfterFilesWillBeDeletedPermanently": "Հետո ֆայլերն ընդմիշտ կջնջվեն:",
+  "AfterFilesWillBeMovedToTrash": "Հետո ֆայլերը կտեղափոխվեն աղբարկղ:",
   "All": "Բոլոր",
   "AllLinksAreDisabled": "Բոլոր հղումներն անջատված են",
   "AppointNewOwner": "Դուք նոր սեփականատեր եք նշանակել։",
@@ -38,6 +40,7 @@
   "DateLastOpened": "Վերջին բացման ամսաթիվը",
   "DaysRemaining": "Մնացած օր: {{daysRemaining}}",
   "DeleteLink": "Ջնջել հղումը",
+  "DeleteSharedCustomPublic": "Հղումը ընդմիշտ կջնջվի: Դուք չեք կարողանա հետարկել այս գործողությունը:",
   "DeleteSharedLink": "Նախորդ հղումն անհասանելի կդառնա։ Նոր համօգտագործվող հղում կստեղծվի։",
   "DisableDownload": "Սահմանափակել ֆայլի բովանդակության պատճենումը, ֆայլի ներբեռնումը և տպումը",
   "DisableNotifications": "Անջատել ծանուցումները",
@@ -74,6 +77,7 @@
   "FileRemoved": "Ֆայլը տեղափոխվեց աղբարկղ",
   "FileRenamed": "Փաստաթուղթը '{{oldTitle}}'-ից վերանվանվում է '{{newTitle}}'",
   "FilesWillAppearHere": "Սենյակում ավելացված ֆայլերն ու թղթապանակները կհայտնվեն այստեղ:",
+  "FileWillBeMovedToTrash": "Ֆայլը կտեղափոխվի աղբարկղ {{date}}",
   "Filter": "Զտել",
   "FinalizeVersion": "Ավարտել տաբերակը",
   "Folder": "Պանակ",
@@ -197,6 +201,8 @@
   "WarningCreationFormRoom": "Մի քանի ֆայլերի և թղթապանակների վրա հիմնված ստեղծումը հասանելի չէ այս տեսակի սենյակների համար: Նման սենյակ ստեղծելու համար անցեք Սենյակներ բաժին կամ օգտագործեք PDF ձևերից մեկը։",
   "WarningMoveToFormRoom": "Ֆայլը չի կարող տեղափոխվել այս սենյակ: Խնդրում ենք, փորձել տեղափոխել {{ organizationName }} PDF ձևը:",
   "WarningMoveToFormRoomServal": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև:",
+  "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
+  "WillBeMovedToTrash": "{{date}}-ը կտեղափոխվի աղբարկղ",
   "WithSubfolders": "Ենթաթղթապանակներով",
   "YouLeftTheRoom": "Դուք դուրս եք եկել սենյակից"
 }

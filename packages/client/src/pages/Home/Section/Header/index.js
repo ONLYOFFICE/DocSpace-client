@@ -241,6 +241,7 @@ const SectionHeaderContent = (props) => {
     isFrame,
     showTitle,
     hideInfoPanel,
+    showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
@@ -637,9 +638,13 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={(isPublicRoom || (isFrame && displayAbout)) && logo}
+                withLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  logo
+                }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && displayAbout)) && burgerLogo
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  burgerLogo
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -924,6 +929,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
       currentGroup,

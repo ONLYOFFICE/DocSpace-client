@@ -81,6 +81,7 @@
   "MobileOnly": "仅移动设备",
   "Page": "显示页面（页数）",
   "PortalDescription": "嵌入整个{{productName}}以允许用户与所有房间、文件和设置进行交互。",
+  "PublicRoomPresetInfo": "嵌入公共房间，让用户无需注册即可查看、编辑、评论或审阅存储其中的全部文档",
   "RightPanelCollapsed": "右侧面板已收起",
   "RoomFilter": "房间过滤器",
   "RoomOrFolder": "房间或文件夹",

@@ -264,7 +264,7 @@ export const getOptions = (
     description: t("EmptyView:CreateFormDescription"),
     icon: <CreatePDFFormIcon />,
     key: "create-form-option",
-    onClick: () => actions.onCreate("pdf"),
+    onClick: () => actions.onCreate("pdf", undefined, t),
     disabled: !security?.Create,
   };
 

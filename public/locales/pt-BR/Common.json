@@ -329,11 +329,14 @@
   "NotFoundGuestsDescription": "Novos convidados serão adicionados aqui assim que você os convidar para a sala.",
   "NotFoundGuestsFilter": "Nenhum convidado encontrado",
   "NotFoundLanguage": "Não consegue encontrar seu idioma? Entre em contato conosco em <1>{{supportEmail}}</1> para participar da tradução e receber recompensas.",
+  "NotFoundMembers": "Nenhum membro encontrado",
   "NotFoundTitle": "Nada encontrado",
   "NotFoundUsers": "Usuários não encontrados",
   "NotFoundUsersDescription": "Nenhum usuário corresponde à sua pesquisa. Ajuste seus parâmetros de pesquisa ou limpe o campo de pesquisa para ver a lista completa de usuários.",
   "NotSupportedFormat": "Lamentamos, este tipo arquivo não é suportado",
   "OAuthAccountsName": "Contatos",
+  "OAuthAccountsReadDescription": "Exibir todos os contatos",
+  "OAuthAccountsWriteDescription": "Exibir e gerenciar todos os contatos",
   "OAuthFilesName": "Arquivos e pastas",
   "OAuthFilesReadDescription": "Exibir todos os arquivos e pastas",
   "OAuthFilesWriteDescription": "Exibir e gerenciar todos os arquivos e pastas",
@@ -564,5 +567,6 @@
   "Years": "Anos",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você"
+  "You": "Você",
+  "WarningCopyToFormRoom": "O arquivo não pode ser copiado para esta sala. Tente copiar o formulário em PDF {{organizationName}} PDF form."
 }

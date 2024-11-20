@@ -219,13 +219,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_text {
-    margin-inline-start: -7px;
     margin-top: 5px;
-
-    @media ${tablet} {
-      margin-inline-start: -7px;
-      margin-top: 5px;
-    }
 
     word-break: break-word;
     display: ${(props) => (props.showEditPanel ? "none" : "-webkit-box")};
@@ -239,7 +233,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version-comment-wrapper {
-    margin-inline-start: 85px;
+    margin-inline-start: 72px;
     white-space: normal !important;
 
     .version_text {

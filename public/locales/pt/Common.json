@@ -568,5 +568,6 @@
   "Years": "Anos",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você"
+  "You": "Você",
+  "WarningCopyToFormRoom": "O ficheiro não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}."
 }

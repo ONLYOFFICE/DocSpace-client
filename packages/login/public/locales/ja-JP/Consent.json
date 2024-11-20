@@ -2,6 +2,7 @@
   "AllowButton": "許可",
   "ConsentDescription": "<strong>{{displayName}}</strong>と共有されたデータは、<strong>{{nameApp}}</strong>の<6>プライバシーポリシー</6>および<6>利用規約</6>に従うものとします。この同意は、いつでも{{productName}}のアカウント設定で取り消すことができます。",
   "ConsentSubHeader": "<1>{{nameApp}}</1>は、<strong>お客様の{{productName}}アカウント</strong>で以下のデータにアクセスを要求します：",
+  "DenyButton": "拒否",
   "NotYou": "あなたではありませんか？",
   "SignedInAs": "次のアカウントにサインインしている：",
   "ToContinue": "続ける："

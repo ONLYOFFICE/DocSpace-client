@@ -5,6 +5,7 @@
   "CreateSpaceDescription": "ドメインとIPアドレスの接続が完了しました。スペースアドレスの設定を編集するには、将来の{{productName}}名を設定する必要があります。",
   "CreatingPortal": "新しい{{productName}}の作成",
   "CurrentSpace": "現在のスペース",
+  "DeleteEmptyPortalText": "<1>{{domain}}</1>のスペースを削除しようとしています。この操作は元に戻せません。",
   "DeleteWarning": "最後のフルアクセススペースは削除できません。",
   "DomainName": "ドメイン名",
   "DomainNotFound": "ドメインが見つかりません。DNS設定を確認してください。",

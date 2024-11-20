@@ -81,6 +81,7 @@
   "MobileOnly": "uniquement les appareils mobiles",
   "Page": "Afficher la page (numéro)",
   "PortalDescription": "Intégrez l'ensemble de {{productName}} pour permettre aux utilisateurs d'interagir avec toutes les salles, tous les fichiers et tous les paramètres.",
+  "PublicRoomPresetInfo": "Intégrez une salle publique pour permettre aux utilisateurs de consulter, modifier, commenter ou réviser tous les documents qui y sont stockés sans inscription.",
   "RightPanelCollapsed": "Panneau de droit réduit ",
   "RoomFilter": "Filtre de salles",
   "RoomOrFolder": "Salle ou dossier",

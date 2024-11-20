@@ -98,8 +98,6 @@ import {
   canShowManageLink,
   copyDocumentShareLink,
   copyRoomShareLink,
-  getCreateShareLinkKey,
-  getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -1562,7 +1560,7 @@ class ContextOptionsStore {
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => {
-          if (isMobileOnly) {
+          if (isMobile) {
             toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
             return;
           }
@@ -1578,7 +1576,7 @@ class ContextOptionsStore {
         onClick: () => {
           const isPDF = item.fileExst === ".pdf";
 
-          if (isPDF && isMobileOnly) {
+          if (isPDF && isMobile) {
             toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
             return;
           }

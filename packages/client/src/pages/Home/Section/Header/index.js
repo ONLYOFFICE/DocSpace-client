@@ -259,6 +259,7 @@ const SectionHeaderContent = (props) => {
     onSignInClick,
     signInButtonIsDisabled,
     isShared,
+    isExternal,
     displayAbout,
     revokeFilesOrder,
     saveIndexOfFiles,
@@ -430,7 +431,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getTitleIcon = () => {
-    if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
+    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
     if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
@@ -592,7 +593,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={selectedFolder.external}
+          isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
@@ -789,6 +790,7 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -859,6 +861,7 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
+    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
@@ -960,6 +963,7 @@ export default inject(
 
       rootFolderId,
       isShared,
+      isExternal,
       displayAbout,
     };
   },

@@ -199,7 +199,7 @@
   "WantLeaveRoom": "Willst du diesen Raum wirklich verlassen? Du kannst ihn wieder betreten, wenn du eine neue Einladung von einem Raumadministrator erhältst.",
   "WantToRestoreTheRoom": "Alle externen Links in diesem Raum werden aktiv und der Inhalt ist für jeden mit dem Link zugänglich. Möchten Sie den Raum wiederherstellen?",
   "WantToRestoreTheRooms": "Alle externen Links in wiederhergestellten Räumen werden aktiv und ihre Inhalte sind für alle mit den Raumlinks zugänglich. Möchten Sie die Räume wiederherstellen?",
-  "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Raum kopiert werden. Bitte versuchen Sie, das PDF-Formular {{ organizationName }} zu kopieren.",
+  "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Raum kopiert werden. Bitte versuchen Sie, das PDF-Formular {{organizationName}} zu kopieren.",
   "WarningCopyToFormRoomServal": "Das Kopieren mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Kopieren Sie jeweils ein {{ organizationName }} PDF-Formular.",
   "WarningCreationFormRoom": "Die Erstellung auf Basis mehrerer Dateien und Ordner ist für diesen Raumtyp nicht verfügbar. Um einen solchen Raum zu erstellen, gehen Sie zum Abschnitt Räume oder verwenden Sie eines der PDF-Formulare.",
   "WarningMoveToFormRoom": "Die Datei kann nicht in diesen Raum verschoben werden. Bitte versuchen Sie, das PDF-Formular {{ organizationName }} zu verschieben.",

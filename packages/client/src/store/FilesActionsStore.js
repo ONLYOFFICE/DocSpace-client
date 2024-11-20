@@ -2970,9 +2970,9 @@ class FilesActionStore {
         const splitItem = newFilesList[i].order.split(".");
 
         if (indexMovedFromBottom) {
-          splitItem[1] = +splitItem.at(-1) + 1;
+          splitItem[splitItem.length - 1] = +splitItem.at(-1) + 1;
         } else {
-          splitItem[1] = +splitItem.at(-1) - 1;
+          splitItem[splitItem.length - 1] = +splitItem.at(-1) - 1;
         }
 
         newFilesList[i].order = splitItem.join(".");

@@ -80,6 +80,12 @@ const ChangeDomainDialogComponent = () => {
     setChangeDomainDialogVisible(false);
   };
 
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onClickDomainChange();
+    }
+  };
+
   const onClickDomainChange = async () => {
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
 
@@ -127,6 +133,7 @@ const ChangeDomainDialogComponent = () => {
               size={InputSize.base}
               hasError={!!domainNameError}
               onChange={onHandleDomain}
+              onKeyDown={onKeyDown}
               value={domain}
               placeholder={t("EnterDomain")}
               className="create-portal-input"

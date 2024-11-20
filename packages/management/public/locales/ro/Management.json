@@ -8,6 +8,8 @@
   "CurrentSpace": "Spațiul actual",
   "DeleteEmptyPortalText": "Intenționați să vă ștergeți definitiv spațiul <1>{{domain}}</1>. Această acțiune nu poate fi anulată.",
   "DeleteRequestSuccess": "Solicitarea de ștergere a fost trimisă cu succes la adresa de e-mail <1>{{email}}</1> care aparține proprietarului {{productName}}",
+  "DeleteSetupPortalText": "Intenţionaţi să vă ștergeți definitiv spațiul <1>{{domain}}</1> și toate datele și conturile. O solicitare de ștergere a <1>{{domain}}</1> va fi trimisă proprietarului {{productName}} la adresa de e-mail <1>{{email}}</1>.",
+  "DeleteWarning": "Ultimul spaţiu cu acces complet nu poate fi șters",
   "DomainName": "Nume de domeniu",
   "DomainNotFound": "Domeniul nu a fost găsit, verificați setările DNS",
   "DomainSettings": "Setări domeniu",

@@ -440,6 +440,7 @@
   "Rooms": "Raum",
   "RoomShareLinkPassword": "Passwortzugriff aktiviert.",
   "RoomShareLinkRestrictionActivated": "Kopier-, Download- und Druckbeschränkung für Dateiinhalte aktiviert.",
+  "RoomShareLinkRole": "Der Link für die Rolle <1>{{role}}</1> wurde erfolgreich in die Zwischenablage kopiert.",
   "RoomSpaceQuotaExceeded": "Raumkontingent überschritten ({{size}})",
   "SameEmail": "Dasselbe E-Mail darf nicht benutzt werden",
   "SaveButton": "Speichern",

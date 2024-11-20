@@ -48,7 +48,8 @@ function EmptyViewOption({ option }: EmptyViewOptionProps) {
       </Link>
     );
 
-  return <EmptyViewItem id={option.key.toString()} {...option} />;
+  const { key, ...other } = option;
+  return <EmptyViewItem id={option.key.toString()} {...other} />;
 }
 
 export default EmptyViewOption;

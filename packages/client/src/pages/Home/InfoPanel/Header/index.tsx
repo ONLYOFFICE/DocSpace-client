@@ -90,8 +90,10 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
-  const expired = "expired" in selection ? selection.expired : false;
-  const external = "external" in selection ? selection.external : false;
+  const expired =
+    selection && "expired" in selection ? selection.expired : false;
+  const external =
+    selection && "external" in selection ? selection.external : false;
 
   const withTabs =
     !isRoot &&

@@ -211,7 +211,7 @@ const LinkRow = ({
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
                     onSelect={onAccessRightsSelect}
                     accessOptions={roomAccessOptions}
-                    noBorder
+                    modernView
                     directionX="right"
                     directionY="both"
                     type="onlyIcon"

@@ -115,6 +115,7 @@ export type TFile = {
   providerItem?: boolean;
   thumbnailUrl?: string;
   expired?: string;
+  isForm?: boolean;
 };
 
 export type TOpenEditRequest = {

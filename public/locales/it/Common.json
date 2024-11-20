@@ -571,5 +571,6 @@
   "Years": "Anni",
   "Yes": "Sì",
   "Yesterday": "Ieri",
-  "You": "Tu"
+  "You": "Tu",
+  "WarningCopyToFormRoom": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare un modulo PDF {{organizationName}} alla volta."
 }

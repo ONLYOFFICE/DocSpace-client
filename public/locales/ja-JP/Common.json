@@ -564,5 +564,6 @@
   "Years": "年",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた"
+  "You": "あなた",
+  "WarningCopyToFormRoom": "このルームにファイルをコピーできません。{{organizationName}} PDFフォームをコピーしてみてください。"
 }

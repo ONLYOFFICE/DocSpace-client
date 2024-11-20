@@ -566,5 +566,6 @@
   "Years": "Let",
   "Yes": "Da",
   "Yesterday": "Včeraj",
-  "You": "Vi"
+  "You": "Vi",
+  "WarningCopyToFormRoom": "Datoteke ni mogoče kopirati v to sobo. Poskusite kopirati obrazec PDF {{organizationName}}."
 }

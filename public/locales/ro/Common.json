@@ -571,5 +571,6 @@
   "Years": "Ani",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs"
+  "You": "Dvs",
+  "WarningCopyToFormRoom": "Imposibil de copiat fișierul în acestă sală. Încercați să copiați formularul PDF {{organizationName}}."
 }

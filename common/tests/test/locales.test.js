@@ -31,6 +31,21 @@ let notTranslatedProps = [];
 let moduleFolders = [];
 let commonTranslations = [];
 
+const BASE_LANGUAGES = [
+  "de",
+  "fr",
+  "it",
+  "es",
+  "ru",
+  "ja-JP",
+  "zh-CN",
+  "ro",
+  "pt-BR",
+  "hy-AM",
+  "sr-Cyrl-RS",
+  "sr-Latn-RS",
+];
+
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
 const skipForbiddenKeys = [
   "OrganizationName",
@@ -744,6 +759,57 @@ describe("Locales Tests", () => {
         message += notFoundKeys.join("\r\n") + "\r\n\r\n";
       });
     });
+
+    expect(exists, message).toBe(false);
+  });
+
+  test(`NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`, () => {
+    let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
+
+    let exists = false;
+    let i = 0;
+
+    const enKeys = translationFiles.filter((file) => file.language === "en");
+
+    const allEnKeys = enKeys
+      .flatMap((item) =>
+        item.translations.map((t) => {
+          return item.fileName + " " + t.key;
+        })
+      )
+      .sort();
+
+    const allBaseLanguages = [];
+
+    for (const lng of BASE_LANGUAGES) {
+      const lngKeys = translationFiles.filter((file) => file.language === lng);
+
+      const keys = lngKeys
+        .flatMap((item) =>
+          item.translations
+            .filter((f) => f.value !== "")
+            .map((t) => {
+              return item.fileName + " " + t.key;
+            })
+        )
+        .sort();
+
+      allBaseLanguages.push({ language: lng, keys: keys });
+    }
+
+    for (const lng of allBaseLanguages) {
+      const notFoundKeys = allEnKeys.filter((k) => !lng.keys.includes(k));
+
+      if (!notFoundKeys.length) continue;
+
+      exists = true;
+
+      message +=
+        `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
+        `Keys:\r\n\r\n`;
+
+      message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+    }
 
     expect(exists, message).toBe(false);
   });

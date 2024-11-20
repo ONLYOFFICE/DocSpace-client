@@ -570,5 +570,6 @@
   "Years": "Godine",
   "Yes": "Da",
   "Yesterday": "Juče",
-  "You": "Vi"
+  "You": "Vi",
+  "WarningCopyToFormRoom": "Fajl ne može biti kopiran u ovu sobu. Pokušajte da kopirate {{organizationName}} PDF obrazac."
 }

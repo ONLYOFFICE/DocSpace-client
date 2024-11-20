@@ -43,8 +43,8 @@ const StyledContainer = styled.div<{
   isTrashFolder?: boolean;
   isRootFolder?: boolean;
   withLogo: boolean;
+  isFrame?: boolean;
   isDesktopClient?: boolean;
-  width?: number;
   isPublicRoom?: boolean;
   showNavigationButton?: boolean;
 }>`
@@ -64,15 +64,22 @@ const StyledContainer = styled.div<{
     isRootFolder,
     withLogo,
     showNavigationButton,
+    isFrame,
   }) =>
     isRootFolder
       ? withLogo
-        ? "1fr auto 1fr"
+        ? isFrame
+          ? "auto auto 1fr"
+          : "1fr auto 1fr"
         : "auto 1fr"
       : showNavigationButton
-        ? "49px auto minmax(186px, 1fr)"
+        ? isFrame && withLogo
+          ? "auto 49px auto minmax(186px, 1fr)"
+          : "49px auto minmax(186px, 1fr)"
         : withLogo
-          ? "1fr 49px auto 1fr"
+          ? isFrame
+            ? "auto 49px auto 1fr"
+            : "1fr 49px auto 1fr"
           : "49px auto 1fr"};
 
   .navigation-logo {

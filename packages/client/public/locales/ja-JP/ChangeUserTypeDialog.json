@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "ゲスト <strong>{{userName}}</strong> は「人」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「文書」セクションがあり、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
-  "ChangeGuestsTypeMessageMulti": "選択されたゲストは「人」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「文書」セクションが割り当てられ、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
+  "ChangeGuestsTypeMessage": "ゲスト <strong>{{userName}}</strong> は「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションがあり、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
+  "ChangeGuestsTypeMessageMulti": "選択されたゲストは「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションが割り当てられ、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
   "ChangeUserTypeButton": "タイプの変更",
   "ChangeUserTypeHeader": "ユーザータイプの変更",
   "ChangeUserTypeMessage": "<strong>「{{ firstType }}」</strong>タイプのユーザーは、<strong>「{{ secondType }}」</strong>タイプに移動します。",

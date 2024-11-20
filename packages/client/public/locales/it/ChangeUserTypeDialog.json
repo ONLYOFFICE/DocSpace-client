@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "L'ospite <strong>{{userName}}</strong> verrà spostato nella sezione Persone e gli verrà assegnato il tipo Utente. Gli utenti hanno una propria sezione Documenti, possono creare e modificare i file, ma non possono creare stanze.",
-  "ChangeGuestsTypeMessageMulti": "Gli ospiti selezionati saranno spostati nella sezione Persone e assegnati al tipo di utente. Gli utenti hanno una propria sezione Documenti, possono creare e modificare file, ma non possono creare stanze.",
+  "ChangeGuestsTypeMessage": "L'ospite <strong>{{userName}}</strong> verrà spostato nella sezione {{membersSection}} e gli verrà assegnato il tipo Utente. Gli utenti hanno una propria sezione {{documentsSection}}, possono creare e modificare i file, ma non possono creare stanze.",
+  "ChangeGuestsTypeMessageMulti": "Gli ospiti selezionati saranno spostati nella sezione {{membersSection}} e assegnati al tipo di utente. Gli utenti hanno una propria sezione {{documentsSection}}, possono creare e modificare file, ma non possono creare stanze.",
   "ChangeUserTypeButton": "Cambia tipo",
   "ChangeUserTypeHeader": "Cambia tipo di utente",
   "ChangeUserTypeMessage": "Gli utenti con il tipo <strong>'{{ firstType }}'</strong> verranno spostati nel tipo <strong>'{{ secondType }}'</strong>.",

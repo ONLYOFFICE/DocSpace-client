@@ -194,7 +194,7 @@
   "WantLeaveRoom": "Naozaj chcete opustiť túto miestnosť? Budete sa do nej môcť opäť pripojiť prostredníctvom novej pozvánky od administrátora miestnosti.",
   "WantToRestoreTheRoom": "Všetky externé odkazy v tejto miestnosti sa stanú aktívnymi a jej obsah bude dostupný pre všetkých, ktorí majú na ňu odkaz. Chcete miestnosť obnoviť?",
   "WantToRestoreTheRooms": "Všetky externé odkazy v obnovených miestnostiach sa stanú aktívnymi a ich obsah bude dostupný pre každého, kto má odkaz na miestnosť. Chcete obnoviť miestnosti?",
-  "WarningCopyToFormRoom": "Súbor nie je možné skopírovať do tejto miestnosti. Pokúste sa skopírovať {{ organizationName }} PDF formulár.",
+  "WarningCopyToFormRoom": "Súbor nie je možné skopírovať do tejto miestnosti. Pokúste sa skopírovať {{organizationName}} PDF formulár.",
   "WarningCopyToFormRoomServal": "Kopírovanie viacerých súborov do miestnosti na vyplnenie formulárov nie je podporované. Kopírujte jeden {{ organizationName }} PDF formulár naraz.",
   "WarningCreationFormRoom": "Vytváranie na základe viacerých súborov a priečinkov nie je pre tento typ miestnosti dostupné. Ak chcete vytvoriť takúto miestnosť, prejdite do časti Miestnosti alebo použite jeden z PDF formulárov.",
   "WarningMoveToFormRoom": "Súbor nie je možné presunúť do tejto miestnosti. Pokúste sa presunúť {{ organizationName }} PDF formulár.",

@@ -456,14 +456,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
+      {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
+        {!isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
         {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />

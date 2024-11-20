@@ -85,7 +85,7 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   }
 
   .combo-button {
-    padding-inline-start: 8px;
+    padding-inline-start: 0px;
   }
 
   .link-options {
@@ -107,7 +107,8 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
-    margin: 6px 8px;
+    margin-block: 6px;
+    margin-inline-end: 8px;
 
     ${({ theme, isExpired }) =>
       isExpired &&
@@ -133,7 +134,6 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   }
 
   .expire-text {
-    margin-inline-start: 8px;
     color: ${({ theme }) => theme.infoPanel.links.primaryColor};
   }
 

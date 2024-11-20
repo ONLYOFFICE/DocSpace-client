@@ -67,6 +67,7 @@ import {
   DeletePluginDialog,
   ShareFolderDialog,
   RoomLogoCoverDialog,
+  GuestReleaseTipDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -143,6 +144,7 @@ const Panels = (props) => {
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
     passwordEntryDialogDate,
+    guestReleaseTipDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -224,6 +226,9 @@ const Panels = (props) => {
     ),
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+    ),
+    guestReleaseTipDialogVisible && (
+      <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     (moveToPanelVisible ||
@@ -409,6 +414,7 @@ export default inject(
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -500,6 +506,7 @@ export default inject(
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
     };
   },
 )(observer(Panels));

@@ -92,6 +92,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
+    setShowGuestReleaseTip,
   } = rest;
 
   const theme = useTheme();
@@ -436,6 +437,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (isFrame) return setShowGuestReleaseTip(false);
+
+    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
+
+    setShowGuestReleaseTip(!closed);
+  }, [isFrame, userId, setShowGuestReleaseTip]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -508,6 +517,7 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
+      setShowGuestReleaseTip,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -571,6 +581,7 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
+      setShowGuestReleaseTip,
     };
   },
 )(observer(Shell));

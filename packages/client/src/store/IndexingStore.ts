@@ -54,6 +54,22 @@ class IndexingStore {
       return (this.updateSelection = [...selection]);
     }
 
+    const elementIndexReturned = this.previousFilesList.filter(
+      (item) =>
+        item.order === selection[0].order && item.id === selection[0].id,
+    );
+
+    if (elementIndexReturned.length > 0) {
+      const filtered = this.updateSelection.filter((item) => {
+        return elementIndexReturned[0].isFolder === item.isFolder
+          ? item.id !== elementIndexReturned[0].id
+          : item.id !== elementIndexReturned[0].id &&
+              item.fileExst !== elementIndexReturned[0].fileExst;
+      });
+
+      return (this.updateSelection = [...filtered]);
+    }
+
     const existItem = this.updateSelection.filter((item) => {
       return (
         item.id === selection[0].id && item.fileExst === selection[0].fileExst

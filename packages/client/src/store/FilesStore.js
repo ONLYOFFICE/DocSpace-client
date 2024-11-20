@@ -1661,6 +1661,16 @@ class FilesStore {
                 this.infoPanelStore.setInfoPanelRoom(room);
               } else {
                 const newInfoPanelSelection = this.getFilesListItems([room]);
+
+                if (
+                  !newInfoPanelSelection[0].isFolder &&
+                  !newInfoPanelSelection[0].isRoom &&
+                  data.current.rootFolderId === FolderType.USER &&
+                  this.selectedFolderStore.isFolder
+                ) {
+                  newInfoPanelSelection[0].isFolder = true;
+                }
+
                 this.infoPanelStore.updateInfoPanelSelection(
                   newInfoPanelSelection[0],
                 );

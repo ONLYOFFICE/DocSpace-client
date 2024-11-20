@@ -425,8 +425,6 @@ const SimpleFilesRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
 
-  console.log("isFolder", isFolder);
-
   return (
     <StyledWrapper
       id={id}

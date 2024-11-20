@@ -472,7 +472,6 @@
         }
 
         case "editor": {
-          let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
 
           if (!config.id || config.id === "undefined" || config.id === "null") {
@@ -485,10 +484,10 @@
             config.events.onEditorCloseCallback &&
             typeof config.events.onEditorCloseCallback === "function"
           ) {
-            goBack = "event";
+            config.editorGoBack = "event";
           }
 
-          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;
@@ -498,7 +497,6 @@
         }
 
         case "viewer": {
-          let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
 
           if (!config.id || config.id === "undefined" || config.id === "null") {
@@ -511,10 +509,10 @@
             config.events.onEditorCloseCallback &&
             typeof config.events.onEditorCloseCallback === "function"
           ) {
-            goBack = "event";
+            config.editorGoBack = "event";
           }
 
-          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;

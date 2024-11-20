@@ -570,5 +570,6 @@
   "Years": "Године",
   "Yes": "Да",
   "Yesterday": "Јуче",
-  "You": "Ви"
+  "You": "Ви",
+  "WarningCopyToFormRoom": "Фајл не може бити копиран у ову собу. Покушајте да копирате {{organizationName}} PDF образац."
 }

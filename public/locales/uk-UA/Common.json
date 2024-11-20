@@ -567,5 +567,6 @@
   "Years": "Роки",
   "Yes": "Так",
   "Yesterday": "Вчора",
-  "You": "Ви"
+  "You": "Ви",
+  "WarningCopyToFormRoom": "Неможливо скопіювати файл до цієї кімнати. Спробуйте скопіювати PDF-форму {{organizationName}}."
 }

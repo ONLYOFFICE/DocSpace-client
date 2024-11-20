@@ -572,5 +572,6 @@
   "Years": "年数",
   "Yes": "是",
   "Yesterday": "昨天",
-  "You": "您"
+  "You": "您",
+  "WarningCopyToFormRoom": "该文件无法复制到此房间。请尝试复制{{organizationName}}的 PDF 表单。"
 }

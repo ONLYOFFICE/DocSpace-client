@@ -379,7 +379,7 @@ class ContactsConextOptionsStore {
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
-      hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       contactsTab,
     } = this.usersStore;
     const {
@@ -442,7 +442,7 @@ class ContactsConextOptionsStore {
       {
         key: "cm-delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove || (isRoomAdmin && isGuests),
+        disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),
         onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },
@@ -540,7 +540,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
-    const { id, displayName, userName, avatar, statusType } = item;
+    const {
+      id,
+      displayName,
+      userName,
+      avatar,
+      statusType,
+      isCollaborator,
+      isVisitor,
+    } = item;
 
     closeDialogs();
 
@@ -550,6 +558,8 @@ class ContactsConextOptionsStore {
       displayName,
       statusType,
       userName,
+      isCollaborator,
+      isVisitor,
     });
 
     setDataReassignmentDialogVisible(true);
@@ -645,6 +655,7 @@ class ContactsConextOptionsStore {
         icon: PersonUserReactSvgUrl,
         label: t("Common:Invite"),
         key: "new-user",
+        openByDefault: true,
         items: accountsUserOptions,
       },
       {

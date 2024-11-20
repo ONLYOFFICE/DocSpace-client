@@ -197,7 +197,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 };
 
 export const removeEmojiCharacters = (value) => {
-  const regexpEmoji = /(\p{Emoji}|\p{Emoji_Presentation})/gu;
+  const regexpEmoji = /(\p{Extended_Pictographic}|\p{Emoji_Presentation})/gu;
   const replaceEmojiCharacters = value.replaceAll(regexpEmoji, "");
 
   return replaceEmojiCharacters.replace(/\u200D/g, "");

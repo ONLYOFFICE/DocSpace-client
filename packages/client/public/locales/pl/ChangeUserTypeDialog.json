@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Gość <strong>{{userName}}</strong> zostanie przeniesiony do sekcji Osoby i zostanie mu przypisany Rodzaj użytkownika. Użytkownicy mają własną sekcję Dokumenty, mogą tworzyć i edytować pliki, ale nie mogą tworzyć pokoi.",
+  "ChangeGuestsTypeMessageMulti": "Wybrani goście zostaną przeniesieni do sekcji Osoby i zostanie im przypisany Rodzaj użytkownika. Użytkownicy mają własną sekcję Dokumenty, mogą tworzyć i edytować pliki, ale nie mogą tworzyć pokoi.",
   "ChangeUserTypeButton": "Zmień rodzaj",
   "ChangeUserTypeHeader": "Zmień rodzaj użytkownika",
   "ChangeUserTypeMessage": "Użytkownicy o rodzaju<strong>'{{ firstType }}'</strong> zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Wybrani użytkownicy zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Nie możesz zmienić swojego rodzaju, ani rodzaju administratorów {{productName}}.",
+  "SuccessChangeGuestType": "Rodzaj gościa został pomyślnie zmieniony",
   "SuccessChangeUserType": "Rodzaj użytkownika został pomyślnie zmieniony"
 }

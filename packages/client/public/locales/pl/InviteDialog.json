@@ -9,5 +9,6 @@
   "LinkCopySuccess": "Link został skopiowany",
   "ResetChange": "Zresetuj zmianę",
   "SendInvitation": "Wyślij zaproszenie",
+  "UserMaxAvailableRoleWarning": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i  {{productName}} mogą przyjąć daną rolę.",
   "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani"
 }

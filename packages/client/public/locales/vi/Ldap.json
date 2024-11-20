@@ -8,6 +8,7 @@
   "LdapAutoSyncToggleDescription": "Đồng bộ hóa sẽ cho phép tải lên tất cả dữ liệu từ cổng thông tin và cập nhật dữ liệu mới sau khi thay đổi cài đặt. Đồng bộ hóa mỗi khi bạn có dữ liệu mới về người dùng trong cổng thông tin.",
   "LdapAvatar": "Ảnh đại diện",
   "LdapCertificateConfirm": "Xác nhận chứng nhận",
+  "LdapConnectionType": "Loại Kết Nối\n",
   "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "Bạn có thể làm cho lưu lượng LDAP được bảo mật và an toàn bằng cách sử dụng Lớp Cổng Bảo Mật (SSL)",
   "LdapConnectionTypeStartTls": "StartTLS",
@@ -67,5 +68,6 @@
   "LdapUserFilter": "Bộ lọc Người dùng",
   "LdapUserFilterTooltip": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng phải được nhập.",
   "LdapUsersType": "Loại người dùng",
+  "LdapUsersTypeInfo": "Người dùng chỉ có thể truy cập vào các phòng mà họ được quản trị viên mời và không thể tạo phòng, thư mục hoặc tập tin riêng. Chọn một loại khác bên dưới để cung cấp thêm quyền. Nếu không, bạn có thể thay đổi loại một cách thủ công trong phần {{contactsName}}.",
   "LdapUserTypeTooltip": "Tất cả người dùng sẽ được thêm vào {{productName}} với loại đã chọn."
 }

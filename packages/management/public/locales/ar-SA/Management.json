@@ -5,6 +5,7 @@
   "CreateSpaceDescription": "لقد نجحت في توصيل النطاق الخاص بك بعنوان IP الخاص بك. لتحرير إعدادات عنوان المساحة، يتعين عليك تعيين اسم {{productName}} المستقبلي.",
   "CreatingPortal": "إنشاء {{productName}} جديد",
   "CurrentSpace": "المساحة الحالية",
+  "DeleteRequestSuccess": "تم إرسال طلب الحذف بنجاح إلى عنوان البريد الإلكتروني الخاص</1>{{email}}<1>  بمالك {{productName}}",
   "DomainName": "اسم النطاق",
   "DomainNotFound": "لم يتم العثور على النطاق، يرجى التحقق من إعدادات DNS.",
   "DomainSettings": "إعدادات النطاق",

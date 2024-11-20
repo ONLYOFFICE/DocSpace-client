@@ -5,6 +5,7 @@
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais {{productName}} nosaukums",
   "CreatingPortal": "Jauna {{productName}} izveide",
   "CurrentSpace": "Pašreizējā telpa",
+  "DeleteRequestSuccess": "Dzēšanas pieprasījums ir veiksmīgi nosūtīts uz {{productName}} īpašnieka e-pasta adresi <1>{{email}}</1>",
   "DomainName": "Domēna nosaukums",
   "DomainNotFound": "Domēns nav atrasts. Pārbaudiet DNS iestatījumus",
   "DomainSettings": "Domēna iestatījumi",

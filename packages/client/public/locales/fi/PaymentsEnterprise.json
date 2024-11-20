@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Klikkaa alla olevaa painiketta ostaaksesi lisenssin.",
   "ActivatePurchaseBuyNow": "Osta",
   "ActivatePurchaseRenewLicense": "Osta jatkotilaus saadaksesi jatkossakin tukea ja päivityksiä. ",
+  "ActivateRenewalDescr": "Aktivoidaksesi tilauksen, jonka olet jo ostanut, lataa se alapuolelta ja klikkaa aktivoi-painiketta. ",
   "ActivateRenewDescr": "Saadaksesi henkilökohtaiset jatkotilauksen ehdot, ota yhteyttä omaan yhteyshenkilöösi tai kirjoita meille <1>{{email}}</1>",
   "ActivateTariffLicenseTrialExpiration": "Koekäyttösi vanhenee {{date}}.",
   "ActivateUploadDescr": "Aktivoidaksesi lisenssisi, lataa se alta ja klikkaa aktivoi.",

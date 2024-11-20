@@ -5,6 +5,7 @@
   "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi tilan osoiteasetuksia sinun täytyy asettaa tuleva {{productName}}-nimi",
   "CreatingPortal": "Luodaan uutta {{productName}}",
   "CurrentSpace": "Nykyinen tila",
+  "DeleteRequestSuccess": "Poistopyyntö on onnistuneesti lähetetty {{productName}} omistajan sähköpostiosoitteeseen <1>{{email}}</1>",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",
   "DomainSettings": "Verkkotunnuksen asetukset",

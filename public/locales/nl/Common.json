@@ -567,5 +567,6 @@
   "Years": "Jaren",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U"
+  "You": "U",
+  "WarningCopyToFormRoom": "Het bestand kan niet naar deze kamer worden gekopieerd. Probeer het {{organizationName}} PDF formulier te kopiëren."
 }

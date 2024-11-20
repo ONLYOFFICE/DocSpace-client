@@ -193,7 +193,6 @@
   "WantLeaveRoom": "Você realmente quer sair desta sala? Você poderá participar novamente por meio de um novo convite de um administrador da sala.",
   "WantToRestoreTheRoom": "Todos os links externos desta sala ficarão ativos e seu conteúdo estará disponível para todos que possuem o link. Você quer restaurar a sala?",
   "WantToRestoreTheRooms": "Todos os links externos nas salas restauradas ficarão ativos e seu conteúdo estará disponível para todos com os links das salas. Quer restaurar as salas?",
-  "WarningCopyToFormRoom": "O ficheiro não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}.",
   "WarningCopyToFormRoomServal": "Não há suporte para copiar vários arquivos para a sala de preenchimento de formulários. Copie um formulário PDF {{ organizationName }} de cada vez.",
   "WarningCreationFormRoom": "A criação baseada em vários ficheiros e pastas não está disponível para este tipo de sala. Para criar esta sala, vá para a seção Salas ou use um dos formulários PDF.",
   "WarningMoveToFormRoom": "O ficheiro não pode ser movido para esta sala. Tente mover o formulário PDF {{ organizationName }}.",

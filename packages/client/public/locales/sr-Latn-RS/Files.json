@@ -199,7 +199,6 @@
   "WantLeaveRoom": "Da li zaista želite da napustite ovu sobu? Moći ćete da joj se pridružite ponovo putem nove pozivnice od administratora sobe.",
   "WantToRestoreTheRoom": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Da li želite da obnovite sobu?",
   "WantToRestoreTheRooms": "Svi deljeni linkovi u obnovljenim sobama će postati aktivni, a njihov sadržaj će biti dostupan svima sa linkom sobe. Da li želite da obnovite sobe?",
-  "WarningCopyToFormRoom": "Fajl ne može biti kopiran u ovu sobu. Pokušajte da kopirate {{organizationName}} PDF obrazac.",
   "WarningCopyToFormRoomServal": "Kopiranje više fajlova u sobu za popunjavanje obrazaca nije podržano. Kopirajte jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WarningCreationFormRoom": "Kreiranje zasnovano na više fajlova i foldera nije dostupno za ovu vrstu sobe. Da biste kreirali takvu sobu, idite na odeljak Sobe ili koristite jedan od PDF obrazaca.",
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",

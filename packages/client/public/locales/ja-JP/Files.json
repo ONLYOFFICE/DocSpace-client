@@ -193,7 +193,6 @@
   "WantLeaveRoom": "このまま退室の手続きしてもよろしいですか？ルーム管理者による新たな招待で再び参加することができます。",
   "WantToRestoreTheRoom": "このルームの全ての外部リンクは有効になり、その内容はリンクを持つ全ての人が利用できるようになります。このルームを復元しますか？",
   "WantToRestoreTheRooms": "復元されたルームの共有リンクは全て有効になり、ルームのリンクを持つ全員がその内容を利用できるようになります。ルームを復元しますか？",
-  "WarningCopyToFormRoom": "このルームにファイルをコピーできません。{{organizationName}} PDFフォームをコピーしてみてください。",
   "WarningCopyToFormRoomServal": "フォーム記入ルームに複数のファイルをコピーすることはサポートされていません。{{ organizationName }} PDFフォームを1つずつコピーしてください。",
   "WarningCreationFormRoom": "このタイプのルームでは、複数のファイルやフォルダを基に作成することはできません。このようなルームを作成するには、ルームセクションに移動するか、PDFフォームのいずれかを使用してください。",
   "WarningMoveToFormRoom": "このルームにファイルを移動できません。{{ organizationName }} PDFフォームを移動してみてください。",

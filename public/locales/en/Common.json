@@ -572,5 +572,6 @@
   "Years": "Years",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "WarningCopyToFormRoom": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form."
 }

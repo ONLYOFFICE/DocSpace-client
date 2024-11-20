@@ -195,7 +195,6 @@
   "WantLeaveRoom": "Bu odadan gerçekten ayrılmak istiyor musunuz? Bir oda yöneticisinin yeni davetiyle tekrar katılabileceksiniz.",
   "WantToRestoreTheRoom": "Bu odadaki tüm harici bağlantılar etkin hale gelecek ve içeriği, bağlantıya sahip olan herkesin kullanımına açık olacaktır. Odayı restore etmek istiyor musunuz?",
   "WantToRestoreTheRooms": "Geri yüklenen odalardaki tüm dış bağlantılar aktif hale gelecek ve içerikleri, oda bağlantılarına sahip olan herkesin kullanımına açık olacaktır. Odaları restore etmek istiyor musunuz?",
-  "WarningCopyToFormRoom": "Dosya bu odaya kopyalanamıyor. Lütfen {{organizationName}} PDF formunu kopyalamayı deneyin.",
   "WarningCopyToFormRoomServal": "Form Doldurma odasına birden fazla dosya kopyalama desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu kopyalayın.",
   "WarningCreationFormRoom": "Bu tür bir oda için birkaç dosya ve klasöre dayalı oluşturma mevcut değildir. Böyle bir oda oluşturmak için Odalar bölümüne gidin veya PDF formlarından birini kullanın.",
   "WarningMoveToFormRoom": "Dosya bu odaya taşınamıyor. Lütfen {{ organizationName }} PDF formunu taşımayı deneyin.",

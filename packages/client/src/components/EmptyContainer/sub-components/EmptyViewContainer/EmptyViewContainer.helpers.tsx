@@ -227,10 +227,7 @@ export const getOptions = (
     description: t("EmptyView:SharePublicRoomOptionDescription"),
     icon: <SharedIcon />,
     key: "share-public-room",
-    onClick: () => {
-      actions.createAndCopySharedLink();
-      actions.openInfoPanel();
-    },
+    onClick: actions.createAndCopySharedLink,
     disabled: false,
   };
 

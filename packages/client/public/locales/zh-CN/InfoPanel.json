@@ -41,6 +41,7 @@
   "ItemsSelected": "选定的项目",
   "LastModifiedBy": "上次修改时间",
   "LifetimeEnds": "有效期到期",
+  "MembersEmptyScreenText": "在此处查看成员详情",
   "NoRecordsFound": "未找到记录",
   "Properties": "属性",
   "RoomArchived": "房间已移动到存档",

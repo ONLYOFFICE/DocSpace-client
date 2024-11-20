@@ -143,7 +143,6 @@ const AvatarPure = ({
   const interfaceDirection = defaultTheme?.interfaceDirection;
 
   const onInputClick = () => {
-
     if (inputFilesElement.current) {
       inputFilesElement.current.value = null;
     }
@@ -191,7 +190,7 @@ const AvatarPure = ({
   };
 
   const onUploadClick = () => {
-ё    if (!onChangeFile) return;
+    if (!onChangeFile) return;
     const menu = model[0];
     menu.onClick(inputFilesElement);
   };
@@ -204,7 +203,7 @@ const AvatarPure = ({
       return onToggleOpenEditLogo();
     }
 
-ё    onUploadClick();
+    onUploadClick();
   };
 
   const dropdownElement = (

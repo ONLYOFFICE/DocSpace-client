@@ -227,10 +227,7 @@ export const getOptions = (
     description: t("EmptyView:SharePublicRoomOptionDescription"),
     icon: <SharedIcon />,
     key: "share-public-room",
-    onClick: () => {
-      actions.createAndCopySharedLink();
-      actions.openInfoPanel();
-    },
+    onClick: actions.createAndCopySharedLink,
     disabled: false,
   };
 
@@ -264,7 +261,7 @@ export const getOptions = (
     description: t("EmptyView:CreateFormDescription"),
     icon: <CreatePDFFormIcon />,
     key: "create-form-option",
-    onClick: () => actions.onCreate("pdf"),
+    onClick: () => actions.onCreate("pdf", undefined, t),
     disabled: !security?.Create,
   };
 

@@ -229,6 +229,14 @@ import("./logger.mjs").then(({ logger }) => {
     keepAliveTimeout = undefined;
   }
 
+  process.on("unhandledRejection", (reason, process) => {
+    log.error({ process, reason }, "Unhandled rejection at");
+  });
+
+  process.on("uncaughtException", (error) => {
+    log.error({ error, stack: error.stack }, `Unhandled exception`);
+  });
+
   startServer({
     dir,
     isDev: dev,
@@ -241,12 +249,4 @@ import("./logger.mjs").then(({ logger }) => {
     log.error({ error: err }, "Error occurred handling");
     process.exit(1);
   });
-});
-
-process.on("unhandledRejection", (reason, process) => {
-  log.error({ process, reason }, "Unhandled rejection at");
-});
-
-process.on("uncaughtException", (error) => {
-  log.error({ error, stack: error.stack }, `Unhandled exception`);
 });

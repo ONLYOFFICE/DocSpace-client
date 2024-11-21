@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -34,9 +35,8 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TUser } from "@docspace/shared/api/people/types";
 
@@ -52,12 +52,14 @@ import {
   StyledHeader,
   StyledBody,
 } from "./GuestReleaseTip.styled";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 type GuestReleaseTipProps = {
   userId: TUser["id"];
   accessRightsLink: SettingsStore["accessRightsLink"];
   setShowGuestReleaseTip: SettingsStore["setShowGuestReleaseTip"];
   setGuestReleaseTipDialogVisible: DialogsStore["setGuestReleaseTipDialogVisible"];
+  showBodyLoader: boolean;
 };
 
 const GuestReleaseTip = ({
@@ -65,6 +67,7 @@ const GuestReleaseTip = ({
   accessRightsLink,
   setShowGuestReleaseTip,
   setGuestReleaseTipDialogVisible,
+  showBodyLoader,
 }: GuestReleaseTipProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
   const theme = useTheme();
@@ -81,7 +84,7 @@ const GuestReleaseTip = ({
   return (
     <ModalDialog
       displayType={ModalDialogType.modal}
-      visible
+      visible={!showBodyLoader}
       autoMaxHeight
       onClose={onClose}
       isCloseable
@@ -96,6 +99,7 @@ const GuestReleaseTip = ({
                 lineHeight="22px"
                 noSelect
                 truncate
+                className="main-text"
               >
                 {t("Common:User")}
               </Text>
@@ -130,18 +134,19 @@ const GuestReleaseTip = ({
                 values={{ productName: t("Common:ProductName") }}
               />
             </Text>
-            <Link
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
               fontSize="12px"
               fontWeight={400}
               lineHeight="16px"
-              color={globalColors.link}
-              isHovered
+              href={accessRightsLink}
               target={LinkTarget.blank}
               type={LinkType.page}
-              href={accessRightsLink}
+              isHovered
             >
               {t("Translations:GuestReleaseTipLink")}
-            </Link>
+            </ColorTheme>
           </StyledBody>
 
           <img src={icon} alt="tip" />
@@ -159,17 +164,22 @@ const GuestReleaseTip = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, userStore }: TStore) => {
-  const { accessRightsLink, setShowGuestReleaseTip } = settingsStore;
+export default inject(
+  ({ settingsStore, dialogsStore, userStore, clientLoadingStore }: TStore) => {
+    const { accessRightsLink, setShowGuestReleaseTip } = settingsStore;
 
-  const { setGuestReleaseTipDialogVisible } = dialogsStore;
+    const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
-  const userId = userStore.user!.id;
+    const userId = userStore.user!.id;
 
-  return {
-    userId,
-    accessRightsLink,
-    setShowGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
-  };
-})(observer(GuestReleaseTip));
+    const { showBodyLoader } = clientLoadingStore;
+
+    return {
+      userId,
+      accessRightsLink,
+      setShowGuestReleaseTip,
+      setGuestReleaseTipDialogVisible,
+      showBodyLoader,
+    };
+  },
+)(observer(GuestReleaseTip));

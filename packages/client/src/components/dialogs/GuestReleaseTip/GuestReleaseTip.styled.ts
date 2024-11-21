@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -58,6 +59,18 @@ const StyledHeader = styled.div`
   .close-button {
     cursor: pointer;
     float: right;
+  }
+
+  .main-text {
+    color: ${(props) =>
+      props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
+  }
+
+  .next-step-icon {
+    path {
+      fill: ${(props) =>
+        props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
+    }
   }
 `;
 

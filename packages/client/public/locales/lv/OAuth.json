@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "Nav autorizētu lietotņu",
   "NoOAuthAppHeader": "Nav OAuth lietojumprogrammu",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth lietojumprogrammas tiek izmantotas, lai piekļūtu {{organizationName} {{productName}} API autorizācijai un turpmākām darbībām, piemēram, piekļūšanai failiem utt.",
+  "OAuthAppDescription": "OAuth lietojumprogrammas tiek izmantotas, lai piekļūtu {{organizationName}} {{productName}} API autorizācijai un turpmākām darbībām, piemēram, piekļūšanai failiem utt.",
   "OAuthHeaderBlock": "OAuth vietrāži URL",
   "PrivacyPolicy": "Konfidencialitātes politika",
   "PrivacyPolicyURL": "Konfidencialitātes politikas vietrādis URL",

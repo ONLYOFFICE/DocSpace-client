@@ -195,10 +195,10 @@
   "WantToRestoreTheRoom": "Bu otaqdakı bütün xarici keçidlər aktiv olacaq və onun məzmunu keçidi olan hər kəs üçün əlçatan olacaq. Otağı bərpa etmək istəyirsiniz?",
   "WantToRestoreTheRooms": "Bərpa edilmiş otaqlardakı bütün xarici keçidlər aktiv olacaq və onların məzmunu otaq keçidləri olan hər kəs üçün əlçatan olacaq. Otaqları bərpa etmək istəyirsiniz?",
   "WarningCopyToFormRoom": "Fayl bu otağa nüsxələnə bilməz. {{ OrganizationName }} PDF formasını nüsxələməyə cəhd edin.",
-  "WarningCopyToFormRoomServal": "Forma Doldurma otağına çoxsaylı faylların nüsxələnməsi dəstəklənmir. {{ OrganizationName }} PDF formalarını bir-bir nüsxələyin.",
+  "WarningCopyToFormRoomServal": "Forma Doldurma otağına çoxsaylı faylların nüsxələnməsi dəstəklənmir. {{ organizationName }} PDF formalarını bir-bir nüsxələyin.",
   "WarningCreationFormRoom": "Bu otaq tipində çoxlu fayl və qovluq əsasında yaradılma mümkün deyil. Belə bir otaq yaratmaq üçün Otaqlar bölməsinə keçin və ya PDF formalarından birini istifadə edin.",
-  "WarningMoveToFormRoom": "Fayl bu otağa köçürülə bilməz. {{ OrganizationName }} PDF formasını köçürməyə cəhd edin.",
-  "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{OrganizationName }} PDF formasını köçürün.",
+  "WarningMoveToFormRoom": "Fayl bu otağa köçürülə bilməz. {{ organizationName }} PDF formasını köçürməyə cəhd edin.",
+  "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",
   "WithSubfolders": "Alt qovluqlarla",
   "YouLeftTheRoom": "Otağı tərk etdiniz"
 }

@@ -566,11 +566,11 @@
   "VirtualDataRoomDescription": "Nutzen Sie den VDR für fortschrittliche Dateisicherheit und Transparenz. Setzen Sie Wasserzeichen, indexieren und verfolgen Sie alle Inhalte automatisch, und schränken Sie das Herunterladen und Kopieren ein.",
   "WantToContinue": "Sind Sie sicher, dass Sie fortsetzen wollen?",
   "Warning": "Warnung",
+  "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Raum kopiert werden. Bitte versuchen Sie, das PDF-Formular {{organizationName}} zu kopieren.",
   "Website": "Webseite",
   "WithoutIcon": "Ohne Symbol",
   "Years": "Jahre",
   "Yes": "Ja",
   "Yesterday": "Gestern",
-  "You": "Sie",
-  "WarningCopyToFormRoom": "Die Datei kann nicht in diesen Raum kopiert werden. Bitte versuchen Sie, das PDF-Formular {{organizationName}} zu kopieren."
+  "You": "Sie"
 }

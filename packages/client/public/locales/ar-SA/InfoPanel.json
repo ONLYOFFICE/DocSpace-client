@@ -57,7 +57,7 @@
   "RoomIndexingEnabled": "تم تفعيل الفهرسة التلقائية للملفات في الغرفة",
   "RoomInviteResend": "تم إرسال الدعوات مرة أخرى:",
   "RoomLifeTimeDisabled": "تم تعطيل صلاحية الملف في الغرفة",
-  "RoomLifeTimeSet": "تعيين مدة حياة \n<1>{{data}}</1>\nالجميع الملفات في الغرفة\n",
+  "RoomLifeTimeSet": "تعيين مدة حياة <1>{{data}}</1> الجميع الملفات في الغرفة\n",
   "RoomLogoChanged": "تم تغيير الأيقونة",
   "RoomRemoveUser": "تمت إزالة المستخدم.",
   "RoomsEmptyScreenTent": "انظر تفاصيل الغرف هنا",

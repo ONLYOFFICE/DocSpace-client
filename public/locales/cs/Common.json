@@ -469,7 +469,7 @@
   "ShareDocument": "Sdílet tento dokument",
   "ShareDocumentDescription": "Zajistěte přístup k dokumentu a nastavte úrovně oprávnění.",
   "SharedWithMe": "Sdílel se mnou",
-  "ShareLinkTitle": "<1>Kdokoli s tímto odkazem může <1>{{access}}</1>.",
+  "ShareLinkTitle": "<1>Kdokoli</1> s tímto odkazem může <1>{{access}}</1>.",
   "ShareLinkTitleInternal": "<1>Uživatelé {{productName}}</1> mohou pouze <1>{{access}}</1>.",
   "ShareToFillOut": "Sdílet k vyplnění",
   "ShareVia": "Sdílet prostřednictvím",

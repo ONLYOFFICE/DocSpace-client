@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "Qonaq <strong>{{userName}</strong> Kontaktlar bölməsinə köçürüləcək və İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz Sənədlər bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
-  "ChangeGuestsTypeMessageMulti": "Seçilmiş qonaqlar Kontaktlar bölməsinə köçürüləcək və onlara İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz Sənədlər bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
+  "ChangeGuestsTypeMessage": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
+  "ChangeGuestsTypeMessageMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və onlara İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
   "ChangeUserTypeButton": "Növün dəyişdirilməsi",
   "ChangeUserTypeHeader": "İstifadəçi növünün dəyişdirilməsi",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> tipinə malik olan istifadəçilər <strong>'{{ secondType }}'</strong> istifadəçi tipinə dəyişdirildi.",

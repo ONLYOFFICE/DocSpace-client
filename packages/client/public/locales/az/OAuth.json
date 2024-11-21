@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "Səlahiyyətli tətbiqlər yoxdur",
   "NoOAuthAppHeader": "OAuth tətbiqləri yoxdur",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth tətbiqləri avtorizasiya və fayllara giriş kimi digər əməliyyatlarda {{organizationName} {{productName}} API-yə daxil olmaq üçün istifadə olunur.",
+  "OAuthAppDescription": "OAuth tətbiqləri avtorizasiya və fayllara giriş kimi digər əməliyyatlarda {{organizationName}} {{productName}} API-yə daxil olmaq üçün istifadə olunur.",
   "OAuthHeaderBlock": "OAuth URL-ləri",
   "PrivacyPolicy": "Məxfilik siyasəti",
   "PrivacyPolicyURL": "Məxfilik siyasəti URL",

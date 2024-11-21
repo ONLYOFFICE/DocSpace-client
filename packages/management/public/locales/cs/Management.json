@@ -1,5 +1,6 @@
 {
   "ChangeDomainDescription": "Změna názvu domény může způsobit selhání některých systémů. Po změně názvu domény je třeba znovu nakonfigurovat následující nastavení: pošta, účet, parametry jabberu.",
+  "CompleteSetup": "Dokončení nastavení",
   "ConfigurationDescription": "Chcete-li změnit nastavení adresy, je třeba připojit doménu k aktuální IP adrese. Ujistěte se, že máte přístup k nastavení domény, abyste tento krok mohli provést. Po připojení domény vytvořte název {{productName}}. Vytvořený název {{productName}} můžete později změnit pomocí nastavení prostoru.",
   "ConfigurationHeader": "Konfigurace aktuálního prostoru",
   "CreateSpaceDescription": "Úspěšně jste připojili doménu k vaší IP adrese. Chcete-li upravit nastavení adresy prostoru, musíte nastavit budoucí název {{productName}}",
@@ -19,5 +20,6 @@
   "SettingsDisabled": "Tato nastavení budou k dispozici po vytvoření druhého prostoru a budou použita pro všechny vaše prostory.",
   "SettingsForAll": "Tato nastavení budou účinná pro všechny vaše prostory.",
   "Subheader": "V této části můžete vytvořit několik prostorů a zpřístupnit je uživatelům.",
+  "SubmitDelete": "Odeslat požadavek na vymazání",
   "VisitSpace": "Navštivte tento prostor po vytvoření"
 }

@@ -252,7 +252,7 @@
   "Statistics": "Statistiche",
   "StorageManagement": "Gestione dell'archiviazione",
   "StoragePeriod": "Periodo di conservazione",
-  "StorageQuotaWarningDescription": "La quota di archiviazione è abilitata per questo {{productName}}: {{quotaLimiti}}. Le limitazioni possono verificarsi durante l'importazione dei dati.",
+  "StorageQuotaWarningDescription": "La quota di archiviazione è abilitata per questo {{productName}}: {{quotaLimits}}. Le limitazioni possono verificarsi durante l'importazione dei dati.",
   "StudioTimeLanguageSettings": "Impostazioni della lingua e del fuso orario",
   "Submit": "Invia‎",
   "SuccessfullySaveGreetingSettingsMessage": "Le impostazioni della pagina di benvenuto sono state salvate con successo",

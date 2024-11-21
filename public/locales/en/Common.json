@@ -567,11 +567,11 @@
   "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "WantToContinue": "Are you sure you want to continue?",
   "Warning": "Warning",
+  "WarningCopyToFormRoom": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
   "Website": "Website",
   "WithoutIcon": "Without icon",
   "Years": "Years",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "WarningCopyToFormRoom": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form."
+  "You": "You"
 }

@@ -1,5 +1,6 @@
 {
   "ChangeDomainDescription": "Domēna nosaukuma maiņa var izraisīt dažu sistēmu kļūmi. Pēc domēna nosaukuma maiņas jums būs jāpārkonfigurē šādi iestatījumi: pasts, konts, Jabber parametri.",
+  "CompleteSetup": "Pabeigt iestatīšanu",
   "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet {{productName}} nosaukumu. Vēlāk varat mainīt izveidoto {{productName}} nosaukumu, izmantojot telpas iestatījumus.",
   "ConfigurationHeader": "Pašreizējā telpu konfigurācija",
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais {{productName}} nosaukums",
@@ -16,5 +17,6 @@
   "PortalStats": "Telpas: {{roomCount}} | Lietotāji: {{userCount}} | Izmantotā krātuves vieta: {{storageSpace}}",
   "RestrictAccess": "Ierobežot piekļuvi telpu pārvaldībai",
   "Subheader": "Izmantojiet šo sadaļu, lai izveidotu vairākas telpas un padarītu tās pieejamas lietotājiem",
+  "SubmitDelete": "Iesniegt izdzēšanas pieprasījumu",
   "VisitSpace": "Pēc izveides apmeklējiet šo telpu"
 }

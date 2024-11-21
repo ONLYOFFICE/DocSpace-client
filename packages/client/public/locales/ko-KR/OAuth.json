@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "인증된 앱이 없습니다",
   "NoOAuthAppHeader": "OAuth 애플리케이션이 없습니다",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth 애플리케이션은 인증 및 추가 작업(파일 액세스 등)을 위해 {{organizationName} {{productName}} API에 액세스하는 데 사용됩니다.",
+  "OAuthAppDescription": "OAuth 애플리케이션은 인증 및 추가 작업(파일 액세스 등)을 위해 {{organizationName}} {{productName}} API에 액세스하는 데 사용됩니다.",
   "OAuthHeaderBlock": "OAuth URL",
   "PrivacyPolicy": "개인 정보 보호 정책",
   "PrivacyPolicyURL": "개인 정보 보호 정책 URL",

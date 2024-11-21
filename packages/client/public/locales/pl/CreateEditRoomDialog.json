@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Uczyń pokój prywatnym",
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
   "Position": "Pozycja",
+  "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Dostęp dla użytkowników zewnętrznych jest przyznawany w zależności od wybranego typu praw dostępu.",
   "PublicRoomSystemFoldersDescription": "Katalogi systemowe przechowują kopie formularzy na różnych etapach ukończenia. Wypełniane formularze są przechowywane w katalogu W toku, a wypełnione w katalogu Gotowe.",
   "PublicRoomSystemFoldersTitle": "Katalogi systemowe",
   "RestrictCopyAndDownload": "Ogranicz kopiowanie i pobieranie",

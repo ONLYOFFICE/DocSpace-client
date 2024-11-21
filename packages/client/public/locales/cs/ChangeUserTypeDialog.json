@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "Host <strong>{{userName}}</strong> bude přesunut do sekce Lidé a bude mu přiřazen typ Uživatel. Uživatelé mají vlastní sekci Dokumenty, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
-  "ChangeGuestsTypeMessageMulti": "Vybraní hosté budou přesunuti do sekce Lidé a bude jim přiřazen typ Uživatel. Uživatelé mají vlastní sekci Dokumenty, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
+  "ChangeGuestsTypeMessage": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přiřazen typ Uživatel. Uživatelé mají vlastní sekci {{documentsSection}}, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
+  "ChangeGuestsTypeMessageMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ Uživatel. Uživatelé mají vlastní sekci {{documentsSection}}, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
   "ChangeUserTypeButton": "Změnit typ",
   "ChangeUserTypeHeader": "Změnit typ uživatele",
   "ChangeUserTypeMessage": "Uživatelé s typem <strong>'{{ firstType }}'</strong> budou přesunuti na typ <strong>'{{ secondType }}'</strong>.",

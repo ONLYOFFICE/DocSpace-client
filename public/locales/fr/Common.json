@@ -566,11 +566,11 @@
   "VirtualDataRoomDescription": "Utilisez une salle de données virtuelle pour une sécurité et une transparence avancées des fichiers. Définissez des filigranes, indexez et suivez automatiquement tout le contenu, limitez le téléchargement et la copie.",
   "WantToContinue": "Voulez-vous vraiment continuer?",
   "Warning": "Attention",
+  "WarningCopyToFormRoom": "Le fichier ne peut pas être copié dans cette salle. Veuillez essayer de copier le formulaire PDF de {{organizationName}}.",
   "Website": "Site Web",
   "WithoutIcon": "Sans icône",
   "Years": "Années",
   "Yes": "Oui",
   "Yesterday": "Hier",
-  "You": "Vous",
-  "WarningCopyToFormRoom": "Le fichier ne peut pas être copié dans cette salle. Veuillez essayer de copier le formulaire PDF de {{organizationName}}."
+  "You": "Vous"
 }

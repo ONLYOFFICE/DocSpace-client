@@ -473,7 +473,7 @@
   "ShareDocument": "Bu sənədi paylaşın",
   "ShareDocumentDescription": "Sənədə daxil olun və icazə səviyyələrini təyin edin.",
   "SharedWithMe": "Mənimlə paylaşın",
-  "ShareLinkTitle": "<1>Bu linki olan hər kəs</1> <1>{{access}</1> edə bilər.",
+  "ShareLinkTitle": "<1>Bu linki olan hər kəs</1> <1>{{access}}</1> edə bilər.",
   "ShareLinkTitleInternal": "<1>{{productName}} istifadəçi</1> yalnız <1>{{access}}</1> edə bilər.",
   "ShareToFillOut": "Doldurmaq üçün paylaşın",
   "ShareVia": "Paylaş",

@@ -13,6 +13,7 @@
   "LdapConnectionTypeSSLTooltip": "Bạn có thể làm cho lưu lượng LDAP được bảo mật và an toàn bằng cách sử dụng Lớp Cổng Bảo Mật (SSL)",
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS cung cấp một cách để nâng cấp kết nối văn bản thuần túy thành kết nối được mã hóa (TLS hoặc SSL) thay vì sử dụng một cổng riêng cho việc giao tiếp được mã hóa.",
+  "LdapConnectionTypeUnencrypted": "Liên lạc không được mã hóa",
   "LdapDisclaimer": "Xin hãy lưu ý: email người dùng cổng thông tin sẽ được lấy từ cài đặt 'Thuộc tính thư'. Nếu nó bị thiếu, nó sẽ được hình thành theo cách sau: 'Thuộc tính đăng nhập + @ + Tên miền LDAP'. Trong trường hợp email không tồn tại, người dùng sẽ không nhận được bất kỳ thông báo cổng thông tin nào.",
   "LdapGroupAttribute": "Thuộc tính Nhóm",
   "LdapGroupAttributeTooltip": "Nhập thuộc tính đối tượng nhóm chỉ định những người dùng được bao gồm trong nhóm này.",
@@ -42,6 +43,7 @@
   "LdapSendWelcomeLetter": "Gửi thư chào mừng",
   "LdapSendWelcomeLetterTooltip": "Nếu được chọn, tất cả người dùng mới sẽ nhận được thư chào mừng. Chỉ khả dụng khi Thuộc Tính Thư được ánh xạ tới LDAP.",
   "LdapServer": "Máy chủ",
+  "LdapServerTooltip": "Nhập máy chủ LDAP mà không có số cổng.",
   "LdapSettings": "Cài đặt LDAP",
   "LdapSettingsCertCnNoMatch": "Tên chứng chỉ không khớp với tên máy chủ",
   "LdapSettingsCertExpired": "Chứng chỉ đã hết hạn",
@@ -67,6 +69,7 @@
   "LdapUserDNTooltip": "Nhập tên phân biệt vào thư mục chứa các người dùng bạn muốn thêm.",
   "LdapUserFilter": "Bộ lọc Người dùng",
   "LdapUserFilterTooltip": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng phải được nhập.",
+  "LdapUserQuotaTooltip": "Để đặt hạn mức lưu trữ cho người dùng, hãy thêm một thuộc tính vào thư mục LDAP (ví dụ: UsersQuotaLimit) và nhập một giá trị số nguyên cho thuộc tính này. Nó sẽ hiển thị giá trị hạn mức theo byte. Ở đây, chỉ cần chỉ ra tên thuộc tính. Thuộc tính này sẽ chỉ được áp dụng trong lần thiết lập đầu tiên và có thể được thay đổi thủ công sau đó trong phần {{contactsName}}.",
   "LdapUsersType": "Loại người dùng",
   "LdapUsersTypeInfo": "Người dùng chỉ có thể truy cập vào các phòng mà họ được quản trị viên mời và không thể tạo phòng, thư mục hoặc tập tin riêng. Chọn một loại khác bên dưới để cung cấp thêm quyền. Nếu không, bạn có thể thay đổi loại một cách thủ công trong phần {{contactsName}}.",
   "LdapUserTypeTooltip": "Tất cả người dùng sẽ được thêm vào {{productName}} với loại đã chọn."

@@ -563,11 +563,11 @@
   "VirtualDataRoomDescription": "Use o VDR para segurança e transparência avançadas de arquivos. Defina marcas d'água, indexe e rastreie automaticamente todo o conteúdo, restrinja o download e a cópia.",
   "WantToContinue": "Tem a certeza que pretende continuar?",
   "Warning": "Aviso",
+  "WarningCopyToFormRoom": "O ficheiro não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}.",
   "Website": "Website",
   "WithoutIcon": "Sem ícone",
   "Years": "Anos",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você",
-  "WarningCopyToFormRoom": "O ficheiro não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}."
+  "You": "Você"
 }

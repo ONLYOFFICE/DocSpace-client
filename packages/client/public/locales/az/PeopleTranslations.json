@@ -21,7 +21,7 @@
   "RegistrationDate": "Qeydiyyat tarixi",
   "RemoveData": "Şəxsi məlumatların silinməsi",
   "RemoveGuest": "Qonağı silin",
-  "RemoveGuestDescription": "Qonaq <strong>{{userName}</strong> onları dəvət etdiyiniz bütün otaqlardan silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "RemoveGuestDescription": "Qonaq <strong>{{userName}}</strong> onları dəvət etdiyiniz bütün otaqlardan silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "RemoveGuests": "Qonaqları silin",
   "RemoveGuestsDescription": "Seçilmiş qonaqlar onları dəvət etdiyiniz bütün otaqlardan silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "ResetAuth": "Doğrulamanı sıfırlayın",

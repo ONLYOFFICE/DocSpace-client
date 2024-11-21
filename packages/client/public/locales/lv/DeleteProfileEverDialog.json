@@ -10,7 +10,7 @@
   "DeletePersonalData": "Personas dati, visi personas faili un mapes atlasīto lietotāju sadaļās Dokumenti un Atkritne * tiks neatgriezeniski izdzēsti. Atlasīto lietotāju faili un mapes, kas tiek glabātas kopējās sadaļās*, piemēram, telpās, paliks {{productName}}.",
   "DeletePersonalDataApplicable": "*Attiecas uz atlasītajiem lietotājiem, kuriem ir šādi faili un mapes.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
-  "DeleteReqassignDescriptionGuest": " {{userCaption}} tiks izdzēsts no visām telpām, uz kurām viņi tika uzaicināti. Telpās izveidotie {{userCaption}} dokumenti tiks automātiski piešķirti telpu īpašniekiem.",
+  "DeleteReqassignDescriptionGuest": "{{userCaption}} tiks izdzēsts no visām telpām, uz kurām viņi tika uzaicināti. Telpās izveidotie {{userCaption}} dokumenti tiks automātiski piešķirti telpu īpašniekiem.",
   "DeleteUser": "Dzēst lietotāju",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> tiks izdzēsts. Šo darbību nevar atsaukt.",
   "DeletingUsers": "Lietotāju dzēšana",

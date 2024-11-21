@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz sadaļu Personas un tam tiks piešķirts veids Lietotājs. Lietotājiem ir sava dokumentu sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
-  "ChangeGuestsTypeMessageMulti": "Atlasītie viesi tiks pārvietoti uz sadaļu Personas un tiem tiks piešķirts tips Lietotājs. Lietotājiem ir sava dokumentu sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
+  "ChangeGuestsTypeMessage": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz sadaļu {{membersSection}} un tam tiks piešķirts veids Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
+  "ChangeGuestsTypeMessageMulti": "Atlasītie viesi tiks pārvietoti uz sadaļu {{membersSection}} un tiem tiks piešķirts tips Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
   "ChangeUserTypeButton": "Mainīt veidu",
   "ChangeUserTypeHeader": "Mainiet lietotāja veidu",
   "ChangeUserTypeMessage": "Lietotāji ar <strong>'{{ firstType }}'</strong> veidu tiks pārvietoti uz <strong>'{{ secondType }}'</strong> veidu.",

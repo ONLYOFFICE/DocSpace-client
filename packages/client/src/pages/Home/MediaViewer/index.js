@@ -252,7 +252,6 @@ const FilesMediaViewer = (props) => {
       navigate(url, {
         state: {
           ...location.state,
-          fromMediaViewer: true,
           disableScrollToTop: true,
         },
       });

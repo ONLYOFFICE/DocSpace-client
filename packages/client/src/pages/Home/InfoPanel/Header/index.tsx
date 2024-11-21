@@ -90,6 +90,11 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
+  const expired =
+    selection && "expired" in selection ? selection.expired : false;
+  const external =
+    selection && "external" in selection ? selection.external : false;
+
   const withTabs =
     !isRoot &&
     !isSeveralItems &&
@@ -97,7 +102,7 @@ const InfoPanelHeaderContent = ({
     !isContacts &&
     !isTrash &&
     !isLockedSharedRoom(selection as TRoom) &&
-    !(selection as TRoom).expired;
+    !(external && expired === true);
 
   const closeInfoPanel = () => setIsVisible(false);
 
@@ -108,7 +113,7 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Members"),
+    name: t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };

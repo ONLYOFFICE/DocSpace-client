@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 
 import { desktop, injectDefaultTheme, mobile } from "@docspace/shared/utils";
-import { isMobileOnly } from "react-device-detect";
 
 // doesn't require mirroring for RTL
 
@@ -58,13 +57,6 @@ const StyledErrorContainer = styled.div.attrs(injectDefaultTheme)<{
     font-size: 13px;
     font-weight: 600;
   }
-
-  ${!isMobileOnly &&
-  css`
-    .logo-wrapper {
-      width: 386px;
-    }
-  `}
 
   #container {
     position: relative;

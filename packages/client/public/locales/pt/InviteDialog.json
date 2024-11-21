@@ -3,13 +3,14 @@
   "EmailErrorMessage": "O Endereço de email não é válido. Pode editar o email ao clicar duas vezes sobre ele.",
   "GroupMaxAvailableRoleWarning": "Grupos podem ser adicionados a uma sala com a função {{roleName}} no máximo. No entanto, você pode alterar a função de usuários individuais no grupo após ele ter sido adicionado com êxito.",
   "InvitationLanguage": "Idioma do convite",
-  "InviteAccountSearchPlaceholder": "Convidar pessoas por email",
-  "InviteNewAccountManuallyDescription": "Convide novos utilizadores para o {{productName}} pessoalmente através do email",
+  "InviteToRoomManuallyInfo": "Adicione contatos {{productName}} existentes. Ou convide novos usuários pessoalmente por e-mail. Novos usuários serão adicionados à sua lista de convidados.",
+  "InviteToRoomSearchPlaceholder": "Pesquisar e convidar por nome ou e-mail",
   "InviteViaLink": "Convidar através de uma hiperligação",
   "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no {{productName}}",
   "InviteViaLinkDescriptionRoom": "Crie uma hiperligação universal para permitir a auto autorização na sala",
   "LinkCopySuccess": "A ligação foi copiada",
   "ResetChange": "Redefinir alteração",
   "SendInvitation": "Enviar convite",
+  "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados"
 }

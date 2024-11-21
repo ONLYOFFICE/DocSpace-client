@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz sadaļu {{membersSection}} un tam tiks piešķirts veids Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
+  "ChangeGuestsTypeMessageMulti": "Atlasītie viesi tiks pārvietoti uz sadaļu {{membersSection}} un tiem tiks piešķirts tips Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
   "ChangeUserTypeButton": "Mainīt veidu",
   "ChangeUserTypeHeader": "Mainiet lietotāja veidu",
   "ChangeUserTypeMessage": "Lietotāji ar <strong>'{{ firstType }}'</strong> veidu tiks pārvietoti uz <strong>'{{ secondType }}'</strong> veidu.",
   "ChangeUserTypeMessageMulti": "Atlasītie lietotāji tiks pārvietoti uz<strong>'{{ secondType }}'</strong> tipu.",
   "ChangeUserTypeMessageWarning": "Jūs nevarat mainīt veidu {{productName}} administratoriem un sev.",
+  "SuccessChangeGuestType": "Viesa veids tika veiksmīgi nomainīts",
   "SuccessChangeUserType": "Lietotāja veids ir veiksmīgi nomainīts"
 }

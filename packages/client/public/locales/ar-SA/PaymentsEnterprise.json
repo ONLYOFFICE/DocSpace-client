@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "لشراء الترخيص ، انقر فوق الزر أدناه.",
   "ActivatePurchaseBuyNow": "اشتري الآن",
   "ActivatePurchaseRenewLicense": "للاستمرار في الحصول على الدعم والتحديثات ، قم بشراء تجديد.",
+  "ActivateRenewalDescr": "لتفعيل التجديد الذي اشتريته مسبقًا، قم برفعه أدناه واضغط على زر التفعيل.",
   "ActivateRenewDescr": "للحصول على شروط التجديد الشخصية ، اتصل بمديرك المخصص أو راسلنا على <1> {{email}} </1>",
   "ActivateTariffLicenseTrialExpiration": "تنتهي الفترة التجريبية الخاصة بك في {{date}}.",
   "ActivateUploadDescr": "لتنشيط الترخيص الخاص بك ، قم بتحميله بالأسفل وانقر فوق تنشيط.",

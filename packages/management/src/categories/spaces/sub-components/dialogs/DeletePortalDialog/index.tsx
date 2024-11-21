@@ -84,7 +84,6 @@ const DeletePortalDialog = () => {
             values={{
               productName: t("Common:ProductName"),
               email,
-              productName: t("Common:ProductName"),
             }}
             components={{
               1: <strong />,
@@ -126,7 +125,6 @@ const DeletePortalDialog = () => {
                 productName: t("Common:ProductName"),
                 domain,
                 email,
-                productName: t("Common:ProductName"),
               }}
               components={{
                 1: <strong />,
@@ -160,7 +158,6 @@ const DeletePortalDialog = () => {
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          isLoading={isLoading}
           scale
         />
       </ModalDialog.Footer>

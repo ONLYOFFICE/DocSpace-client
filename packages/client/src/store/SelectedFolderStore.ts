@@ -439,10 +439,6 @@ class SelectedFolderStore {
       });
 
       this.setChangeDocumentsTabs(false);
-
-      selectedFolder.pathParts?.forEach((value) => {
-        if (value.roomType) this.setInRoom(true);
-      });
     }
   };
 }

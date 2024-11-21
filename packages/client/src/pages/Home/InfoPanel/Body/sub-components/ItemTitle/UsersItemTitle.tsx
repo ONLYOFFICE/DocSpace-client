@@ -90,7 +90,7 @@ const UsersItemTitle = ({
   const contextOptions = getData();
 
   const userAvatar = infoPanelSelection.hasAvatar
-    ? infoPanelSelection.avatar
+    ? infoPanelSelection.avatarMax
     : DefaultUserPhoto;
   const isSSO = infoPanelSelection.isSSO || false;
   const isLDAP = infoPanelSelection.isLDAP || false;
@@ -107,6 +107,7 @@ const UsersItemTitle = ({
         role={role}
         size={AvatarSize.big}
         source={userAvatar}
+        noClick
       />
       <div className="info-panel__info-text">
         <div className="info-panel__info-wrapper">

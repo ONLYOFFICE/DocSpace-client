@@ -241,9 +241,12 @@ class SettingsStore {
   buildVersionInfo = {
     docspace: version,
     documentServer: "6.4.1",
+    releaseDate: "",
   };
 
   debugInfo = false;
+
+  debugInfoData = "";
 
   socketUrl = "";
 
@@ -329,12 +332,18 @@ class SettingsStore {
 
   isBannerVisible = false;
 
+  showGuestReleaseTip = false;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
+    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get ldapSettingsUrl() {
@@ -510,6 +519,14 @@ class SettingsStore {
     return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
   }
 
+  get apiOAuthLink() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
+  }
+
+  get accessRightsLink() {
+    return `${this.helpLink}/userguides/docspace-gettingstarted.aspx#AccessRights_block`;
+  }
+
   get wizardCompleted() {
     return this.isLoaded && !this.wizardToken;
   }
@@ -654,6 +671,25 @@ class SettingsStore {
     }
   };
 
+  getDebugInfo = async () => {
+    let response = this.debugInfoData;
+    try {
+      if (response) return response;
+
+      response = (await api.debuginfo.loadDebugInfo()) as string;
+      this.debugInfoData = response;
+    } catch (e) {
+      console.error("getDebugInfo failed", (e as Error).message);
+      response = `Debug info load failed (${(e as Error).message})`;
+    }
+
+    runInAction(() => {
+      this.debugInfoData = response;
+    });
+
+    return response;
+  };
+
   get isPortalDeactivate() {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
@@ -779,9 +815,13 @@ class SettingsStore {
   };
 
   getAllPortals = async () => {
-    const res = await api.management.getAllPortals();
-    this.setPortals(res.tenants);
-    return res;
+    try {
+      const res = await api.management.getAllPortals();
+      this.setPortals(res.tenants);
+      return res;
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   getPortals = async () => {
@@ -930,10 +970,23 @@ class SettingsStore {
   };
 
   setBuildVersionInfo = (versionInfo: TVersionBuild) => {
+    // its release date 3.0.0 for SAAS version
+    const saasV3ReleaseDate = "2024-11-23";
+
+    let releaseDate = this.standalone
+      ? localStorage.getItem(`${versionInfo.docSpace}-release-date`)
+      : new Date(saasV3ReleaseDate).toString();
+
+    if (!releaseDate) {
+      releaseDate = new Date().toString();
+      localStorage.setItem(`${versionInfo.docSpace}-release-date`, releaseDate);
+    }
+
     this.buildVersionInfo = {
       ...this.buildVersionInfo,
       docspace: version,
       ...versionInfo,
+      releaseDate,
     };
 
     if (!this.buildVersionInfo.documentServer)
@@ -981,24 +1034,19 @@ class SettingsStore {
     this.ipRestrictions = res?.map((el) => el.ip);
   };
 
-  setIpRestrictions = async (ips: string[]) => {
+  setIpRestrictions = async (ips: string[], enable: boolean) => {
     const data = {
       IpRestrictions: ips,
+      enable,
     };
     const res = await api.settings.setIpRestrictions(data);
-    this.ipRestrictions = res?.map((el) => el.ip);
+
+    this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
+    this.ipRestrictionEnable = res?.enable;
   };
 
   getIpRestrictionsEnable = async () => {
     const res = await api.settings.getIpRestrictionsEnable();
-    this.ipRestrictionEnable = res.enable;
-  };
-
-  setIpRestrictionsEnable = async (enable: boolean) => {
-    const data = {
-      enable,
-    };
-    const res = await api.settings.setIpRestrictionsEnable(data);
     this.ipRestrictionEnable = res.enable;
   };
 

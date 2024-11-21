@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Əlavə bölmələr",
   "DisplayFavorites": "Ən çox istifadə olunanları göstər",
+  "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
   "DisplayNotification": "Zibil qutusuna atılan zaman bildirişi göstər",
   "DisplayRecent": "Son istifadə olunanları göstər",
   "DisplayTemplates": "Şablonları göstər",

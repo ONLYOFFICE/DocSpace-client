@@ -59,6 +59,7 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 
   .header-logo-wrapper {
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    height: 24px;
   }
 
   .header-logo-min_icon {
@@ -70,7 +71,7 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 
   .header-logo-icon {
     width: 100%;
-    height: 100%;
+    height: 24px;
     padding: 12px 0;
     cursor: pointer;
   }

@@ -79,6 +79,8 @@ const PlayerDesktopContextMenu = memo(
     }
     if (isPreviewFile) return;
 
+    if (!context) return;
+
     return (
       <PlayerDesktopContextMenuWrapper ref={ref} onClick={toggleContext}>
         <MediaContextMenu />

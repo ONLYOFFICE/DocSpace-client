@@ -202,15 +202,18 @@ const useSDK = ({
     [frameCallCommand, frameConfig?.frameId],
   );
 
-  useEffect(() => {
-    if (window.parent && !frameConfig?.frameId) {
-      callSetConfig();
-    }
-  }, [callSetConfig]);
+  const callSetIsLoad = useCallback(
+    () => setTimeout(() => frameCallCommand("setIsLoaded"), 10),
+    [frameCallCommand],
+  );
 
   useEffect(() => {
-    if (!isLoading) frameCallCommand("setIsLoaded");
-  }, [isLoading]);
+    if (window.parent && !frameConfig?.frameId) callSetConfig();
+  }, [callSetConfig, frameConfig?.frameId]);
+
+  useEffect(() => {
+    if (!isLoading) callSetIsLoad();
+  }, [callSetIsLoad, isLoading]);
 };
 
 export default useSDK;

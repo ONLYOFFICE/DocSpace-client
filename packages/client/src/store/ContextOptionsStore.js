@@ -83,8 +83,7 @@ import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
-import saveAs from "file-saver";
-import { isMobile, isTablet } from "react-device-detect";
+import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -773,8 +772,6 @@ class ContextOptionsStore {
 
   onOpenPDFEditDialog = (id) => {
     this.filesStore.openDocEditor(id, false, null, true);
-
-    // this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -1300,11 +1297,13 @@ class ContextOptionsStore {
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
+    const { isVisible, infoPanelCurrentSelection } = this.infoPanelStore;
+
     return {
       canShowLink: canShowManageLink(
         item,
-        this.filesStore.bufferSelection,
-        this.infoPanelStore.isVisible,
+        infoPanelCurrentSelection,
+        isVisible,
         infoView,
         isRoom,
       ),
@@ -1560,7 +1559,13 @@ class ContextOptionsStore {
         key: "edit-pdf",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
-        onClick: () => this.onOpenPDFEditDialog(item.id),
+        onClick: () => {
+          if (isMobile) {
+            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            return;
+          }
+          this.onOpenPDFEditDialog(item.id);
+        },
         disabled: false,
       },
       {
@@ -1568,7 +1573,15 @@ class ContextOptionsStore {
         key: "edit",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
-        onClick: () => this.onClickLinkEdit(item),
+        onClick: () => {
+          const isPDF = item.fileExst === ".pdf";
+
+          if (isPDF && isMobile) {
+            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            return;
+          }
+          this.onClickLinkEdit(item);
+        },
         disabled: false,
       },
       {
@@ -1636,7 +1649,7 @@ class ContextOptionsStore {
       {
         id: "option_invite-users-to-room",
         key: "invite-users-to-room",
-        label: t("Common:InviteUsers"),
+        label: t("Common:InviteContacts"),
         icon: PersonReactSvgUrl,
         onClick: (e) => this.onClickInviteUsers(e, item.roomType),
         disabled: false,
@@ -1652,6 +1665,7 @@ class ContextOptionsStore {
           const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
 
           const primaryLink = await getPrimaryFileLink(item.id);
+
           if (primaryLink) {
             copyDocumentShareLink(
               primaryLink,
@@ -1986,7 +2000,8 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { selection, allFilesIsEditing } = this.filesStore;
+    const { selection, allFilesIsEditing, canConvertSelected } =
+      this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       this.treeFoldersStore;
@@ -2157,7 +2172,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess,
+        disabled: !hasDownloadAccess || !canConvertSelected,
       },
       {
         key: "move-to",
@@ -2254,10 +2269,15 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreate = (format) => {
+  onCreate = (format, t) => {
     const event = new Event(Events.CREATE);
 
     const isPDf = format === FileExtensions.PDF;
+
+    if (isMobile && isPDf) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
 
     const payload = {
       extension: format,
@@ -2270,11 +2290,21 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateFormFromFile = () => {
+  onCreateFormFromFile = (t) => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowGallery = () => {
+  onShowGallery = (t) => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     const { oformsFilter } = this.oformsStore;
 
     const initOformFilter = (
@@ -2329,7 +2359,7 @@ class ContextOptionsStore {
       className: "main-button_drop-down_sub",
       icon: FormGalleryReactSvgUrl,
       label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowGallery(),
+      onClick: () => this.onShowGallery(t),
       key: "form-file",
     };
 
@@ -2475,7 +2505,7 @@ class ContextOptionsStore {
       key: "new-form",
       label: t("Translations:SubNewForm"),
       icon: FormBlankReactSvgUrl,
-      onClick: () => this.onCreate("pdf"),
+      onClick: () => this.onCreate("pdf", t),
     };
 
     const createTemplateNewFormFile = {
@@ -2483,7 +2513,7 @@ class ContextOptionsStore {
       key: "new-form-file",
       label: t("Translations:SubNewFormFile"),
       icon: FormFileReactSvgUrl,
-      onClick: this.onCreateFormFromFile,
+      onClick: () => this.onCreateFormFromFile(t),
       disabled: isPrivacyFolder,
     };
 
@@ -2492,7 +2522,7 @@ class ContextOptionsStore {
       key: "new-form-file",
       label: t("Translations:SubNewFormFile"),
       icon: FormFileReactSvgUrl,
-      onClick: this.onCreateFormFromFile,
+      onClick: () => this.onCreateFormFromFile(t),
       disabled: isPrivacyFolder,
     };
 
@@ -2501,7 +2531,7 @@ class ContextOptionsStore {
       key: "oforms-gallery",
       label: t("Common:OFORMsGallery"),
       icon: FormGalleryReactSvgUrl,
-      onClick: () => this.onShowGallery(),
+      onClick: () => this.onShowGallery(t),
       disabled: isPrivacyFolder,
     };
 

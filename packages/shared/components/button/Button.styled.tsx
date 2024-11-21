@@ -343,6 +343,23 @@ const getDefaultStyles = ({
           }
         `)}
 
+
+      ${(props) =>
+      props.theme.isBase &&
+      !primary &&
+      !disableHover &&
+      !isDisabled &&
+      css`
+        &:hover,
+        &:focus {
+          border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
+        }
+
+        &:active {
+          ${activeCss}
+        }
+      `}
+
     ${!isDisabled &&
     !isLoading &&
     (isClicked

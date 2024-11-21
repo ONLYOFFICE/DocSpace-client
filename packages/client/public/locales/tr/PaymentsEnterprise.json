@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Lisans satın almak için aşağıdaki düğmeye tıklayın.",
   "ActivatePurchaseBuyNow": "Şimdi satın al",
   "ActivatePurchaseRenewLicense": "Destek ve güncelleme almaya devam etmek için yenileme satın alın.",
+  "ActivateRenewalDescr": "Zaten satın aldığınız yenilemeyi etkinleştirmek için aşağıya yükleyin ve Etkinleştir düğmesine tıklayın.",
   "ActivateRenewDescr": "Kişisel yenileme şartlarınızı öğrenmek için özel yöneticinizle iletişime geçin veya <1>{{email}}</1> adresinden bize yazın",
   "ActivateRenewSubscriptionHeader": "{{license}} aboneliğini yenileyin",
   "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin",

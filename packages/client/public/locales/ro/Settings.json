@@ -206,6 +206,7 @@
   "RestoreBackupDescription": "Utilizați această opțiune pentru a restaura spațiul dvs dintr-o copie de rezervă existentă.",
   "RestoreBackupResetInfoWarningText": "Toate parolele curente vor fi resetate. Utilizatorii spațiului {{productName}} vor primi prin email un mesaj cu link-ul pentru restaurarea accesului.",
   "RestoreBackupWarningText": "În timpul procesului de restaurare spațiul {{productName}} va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după crearea unui punct de restaurare vor fi pierdute.",
+  "RestoreToDefault": "Resetează la valorile prestabilite",
   "RolesAreSet": "Roluri sunt deja stabilite pentru utilizatorii selectați.",
   "RoomQuotaDisabled": "Cotă de stocare pentru sală a fost dezactivată cu succes.",
   "RoomQuotaEnabled": "Cotă de stocare pentru sală a fost activată cu succes.",

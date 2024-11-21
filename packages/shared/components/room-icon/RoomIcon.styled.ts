@@ -55,6 +55,10 @@ const StyledIcon = styled.div.attrs(injectDefaultTheme)<{
       min-width: 64px;
     `};
 
+  .react-svg-icon {
+    border-radius: ${(props) => props.radius};
+  }
+
   .room-background {
     height: ${(props) => props.size};
 

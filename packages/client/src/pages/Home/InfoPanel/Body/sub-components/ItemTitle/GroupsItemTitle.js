@@ -41,6 +41,7 @@ import { globalColors } from "@docspace/shared/themes";
 const GroupsItemTitle = ({
   t,
   isRoomAdmin,
+  isUser,
   isSeveralItems,
   infoPanelSelection,
   getGroupContextOptions,
@@ -110,7 +111,7 @@ const GroupsItemTitle = ({
         )}
       </div>
 
-      {!isRoomAdmin && !infoPanelSelection.isLDAP && (
+      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP && (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"
@@ -123,6 +124,7 @@ const GroupsItemTitle = ({
 
 export default inject(({ peopleStore }) => ({
   isRoomAdmin: peopleStore.userStore.user.isRoomAdmin,
+  isUser: peopleStore.userStore.user.isUser,
 }))(
   withTranslation([
     "People",

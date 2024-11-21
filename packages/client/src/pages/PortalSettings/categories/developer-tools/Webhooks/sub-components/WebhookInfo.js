@@ -74,16 +74,6 @@ const WebhookInfo = (props) => {
       >
         {t("WebhooksGuide")}
       </ColorTheme>
-      {/* <StyledGuideLink
-        id="webhooks-info-link"
-        fontWeight={600}
-        isHovered
-        type="page"
-        href={webhooksGuideUrl}
-        target="_blank"
-      >
-        {t("WebhooksGuide")}
-      </StyledGuideLink> */}
     </InfoWrapper>
   );
 };

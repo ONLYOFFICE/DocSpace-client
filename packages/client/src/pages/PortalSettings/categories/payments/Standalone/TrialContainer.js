@@ -36,13 +36,15 @@ import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
 
 const TrialContainer = (props) => {
-  const { t } = props;
+  const { t, isDeveloper } = props;
 
   return (
     <StyledEnterpriseComponent>
       <Text fontWeight={700} fontSize={"16px"}>
         {t("ActivateSwithToProHeader", {
-          license: t("Common:EnterpriseLicense"),
+          license: isDeveloper
+            ? t("Common:DeveloperLicense")
+            : t("Common:EnterpriseLicense"),
         })}
       </Text>
       <TariffTitleContainer t={t} />
@@ -57,7 +59,7 @@ const TrialContainer = (props) => {
 };
 
 export default inject(({ currentTariffStatusStore }) => {
-  const { isLicenseDateExpired } = currentTariffStatusStore;
+  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
 
-  return { isLicenseDateExpired };
+  return { isLicenseDateExpired, isDeveloper };
 })(observer(TrialContainer));

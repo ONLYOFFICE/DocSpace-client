@@ -207,6 +207,14 @@ export type TIpRestriction = {
   ip: string;
 };
 
+export type TIpRestrictionSettings = {
+  ipRestrictions: {
+    ip: string;
+    forAdmin: boolean;
+  }[];
+  enable: boolean;
+};
+
 export type TCookieSettings = {
   lifeTime: number;
   enabled: boolean;

@@ -166,6 +166,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             selectedOption={selectedDate}
             scaledOptions={true}
             onSelect={onSelectDate}
+            directionY="bottom"
           />
         </div>
         <ComboBox
@@ -175,6 +176,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
           selectedOption={selectedDelete}
           scale
           onSelect={onSelectDelete}
+          directionY="bottom"
         />
       </div>
     </StyledFileLifetime>

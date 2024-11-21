@@ -59,6 +59,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     identityServerEnabled,
     baseDomain,
     limitedAccessSpace,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -127,6 +128,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("payments") && isCommunity;
     const isBonusPageUnavailable =
       location.pathname.includes("bonus") && !isCommunity;
+
+    const isAboutPage = location.pathname.includes("about");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -229,6 +232,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           state={{ from: location }}
         />
       );
+    }
+
+    if (isAboutPage && !displayAbout) {
+      return <Navigate replace to="/error/404" />;
     }
 
     if (isManagement && !isPortalManagement && !isFileManagement) {

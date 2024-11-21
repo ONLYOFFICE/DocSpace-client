@@ -200,7 +200,7 @@ const FilesSelectorWrapper = ({
       if (isCopy)
         return several
           ? t("Files:WarningCopyToFormRoomServal", option)
-          : t("Files:WarningCopyToFormRoom", option);
+          : t("Common:WarningCopyToFormRoom", option);
 
       if (isMove)
         return several

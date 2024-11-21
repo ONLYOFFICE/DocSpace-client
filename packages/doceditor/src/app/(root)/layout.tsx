@@ -34,8 +34,11 @@ import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
+import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
+
+const log = logger.child({ module: "Root layout" });
 
 export default async function RootLayout({
   children,
@@ -51,7 +54,7 @@ export default async function RootLayout({
     | undefined;
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    console.log("is health check");
+    log.info("get health check and return empty layout");
     return <></>;
   }
 

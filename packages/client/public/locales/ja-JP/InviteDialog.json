@@ -3,13 +3,12 @@
   "EmailErrorMessage": "メールアドレスが有効ではありません。メールアドレスをダブルクリックすると編集できます。",
   "GroupMaxAvailableRoleWarning": "グループは{{roleName}}役割を最大として、ルームに追加することができます。ただし、グループの追加に成功した後、グループ内の個々のユーザの役割を変更することができます。",
   "InvitationLanguage": "招待の言語",
-  "InviteAccountSearchPlaceholder": "メールで招待する",
-  "InviteNewAccountManuallyDescription": "新規ユーザーをメールで{{productName}}に招待する",
   "InviteViaLink": "リンクで招待する",
   "InviteViaLinkDescriptionAccounts": "{{productName}}で自己認証のためのユニバーサルリンクを作成する",
   "InviteViaLinkDescriptionRoom": "ルーム内で自己認証のためのユニバーサルリンクを作成する",
   "LinkCopySuccess": "リンクがコピーされました",
   "ResetChange": "変更をリセット",
   "SendInvitation": "招待を送信する",
+  "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています"
 }

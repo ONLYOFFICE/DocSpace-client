@@ -14,6 +14,7 @@ export const EmptyViewItem = ({
   onClick,
   disabled,
   model,
+  id,
 }: EmptyViewItemProps) => {
   const contextRef = React.useRef<ContextMenuRefType>(null);
 
@@ -27,9 +28,10 @@ export const EmptyViewItem = ({
 
   return (
     <EmptyViewItemWrapper
-      onClick={handleClick}
+      id={id}
       role="button"
       aria-label={title}
+      onClick={handleClick}
     >
       <ContextMenu ref={contextRef} model={model ?? []} />
       {React.cloneElement(icon, { className: "ev-item__icon" })}

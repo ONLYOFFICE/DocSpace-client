@@ -114,12 +114,9 @@ const useSocketHelper = ({
 
   const addItem = React.useCallback(
     (opt: TOptSocket) => {
-      console.log("add");
       if (!opt?.data) return;
 
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
-
-      console.log({ ...data }, data.parentId, subscribedId.current);
 
       if (
         "folderId" in data && data.folderId

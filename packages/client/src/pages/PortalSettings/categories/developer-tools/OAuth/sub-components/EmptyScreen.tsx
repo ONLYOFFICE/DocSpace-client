@@ -4,13 +4,14 @@ import { useTheme } from "styled-components";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
 
 import RegisterNewButton from "./RegisterNewButton";
 
-const OAuthEmptyScreen = () => {
+const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
   const { t } = useTranslation(["OAuth", "Common"]);
   const theme = useTheme();
 
@@ -35,15 +36,28 @@ const OAuthEmptyScreen = () => {
   const description = (
     <div>
       <Text
-        lineHeight="16px"
-        fontSize="12px"
+        lineHeight="20px"
+        fontSize="13px"
         fontWeight={400}
         color={theme.isBase ? globalColors.grayText : globalColors.darkGrayDark}
         textAlign="center"
-        style={{ marginBottom: "20px" }}
+        style={{ marginBottom: "8px" }}
       >
         {descText}
-      </Text>{" "}
+      </Text>
+      <p>
+        <Link
+          className="guide-link"
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={apiOAuthLink}
+        >
+          {t("OAuth:OAuth")} {t("Common:Guide")}
+        </Link>
+      </p>
+
       <RegisterNewButton />
     </div>
   );

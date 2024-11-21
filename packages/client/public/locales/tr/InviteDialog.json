@@ -3,13 +3,14 @@
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı çift tıklayarak düzenleyebilirsiniz.",
   "GroupMaxAvailableRoleWarning": "Gruplar bir odaya en fazla {{roleName}} rolü ile eklenebilir. Fakat başarılı bir şekilde eklendikten sonra gruptaki bireysel kullanıcıların rolünü değiştirebilirsiniz.",
   "InvitationLanguage": "Davet dili",
-  "InviteAccountSearchPlaceholder": "İnsanları e-posta ile davet et",
-  "InviteNewAccountManuallyDescription": "{{productName}}'e yeni kullanıcıları kişisel olarak e-posta yoluyla davet et",
+  "InviteToRoomManuallyInfo": "Mevcut {{productName}} kişilerini ekleyin. Veya yeni kullanıcıları e-posta yoluyla şahsen davet edin. Yeni kullanıcılar Konuklar listenize eklenecektir.",
+  "InviteToRoomSearchPlaceholder": "İsim veya e-postaya ile ara ve davet et",
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
   "InviteViaLinkDescriptionRoom": "Odada kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
   "LinkCopySuccess": "Bağlantı kopyalandı",
   "ResetChange": "Değişikliği sıfırla",
   "SendInvitation": "Davetiye gönder",
+  "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
   "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş"
 }

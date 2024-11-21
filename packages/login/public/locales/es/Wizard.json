@@ -1,6 +1,7 @@
 {
   "Desc": "Por favor, configure los datos de registro de {{productName}}.",
   "ErrorEmail": "Dirección de correo electrónico no válida",
+  "ErrorInstanceId": "ID de instancia no válido",
   "ErrorLicenseBody": "La licencia no es válida. Asegúrese de que selecciona el archivo correcto.",
   "ErrorPassword": "La contraseña no corresponde a los requisitos",
   "ErrorUploadLicenseFile": "Seleccione un archivo de licencia",

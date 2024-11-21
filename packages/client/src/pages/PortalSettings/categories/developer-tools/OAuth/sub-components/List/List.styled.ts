@@ -7,8 +7,9 @@ export const StyledContainer = styled.div`
   flex-direction: column;
 
   .description {
-    margin-bottom: 20px;
-    max-width: 700px;
+    margin: 0 0 8px;
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .add-button {

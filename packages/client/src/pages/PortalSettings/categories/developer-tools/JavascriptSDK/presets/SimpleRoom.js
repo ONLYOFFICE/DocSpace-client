@@ -231,7 +231,7 @@ const SimpleRoom = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PublicRoomDescription")}
+      description={t("JavascriptSdk:PublicRoomPresetInfo")}
       header={t("CreateSamplePublicRoom")}
     >
       <Container>
@@ -281,9 +281,7 @@ const SimpleRoom = (props) => {
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:PublicRoomDescription")}
-                      </Text>
+                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
                   />
                 </LabelGroup>

@@ -30,6 +30,7 @@
 import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { addLog } from ".";
 
 /**
  * Enum representing various socket events used in the application.
@@ -100,22 +101,50 @@ export type TConfig = {
 };
 
 /**
- * Represents the data to be emitted through a socket connection.
+ * Represents the data to be emitted through a socket connection with subscribe and unsubscribe commands.
  *
- * @typedef {Object} TEmitData
+ * @typedef {Object} TSubscribeEmitData
  * @property {string | string[]} roomParts - The parts of the room to which the data is emitted.
  * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual.
  */
-export type TEmitData = { roomParts: string | string[]; individual?: boolean };
+export type TSubscribeEmitData = {
+  roomParts: string | string[];
+  individual?: boolean;
+};
+
+/**
+ * A mapping between socket commands and their respective data types.
+ * Each key corresponds to a command from the `SocketCommands` enum,
+ */
+export type TEmitEventsDataMap = {
+  [SocketCommands.Subscribe]: TSubscribeEmitData;
+  [SocketCommands.Unsubscribe]: TSubscribeEmitData;
+  [SocketCommands.RefreshFolder]: string;
+  [SocketCommands.RestoreBackup]: never;
+};
+
+/**
+ * Resolves the associated data type for a given socket command.
+ * If the provided command exists in `TEmitEventsDataMap`, it returns the associated data type.
+ * Otherwise, it resolves to `never`.
+ *
+ * @template T - A specific socket command from the `SocketCommands` enum.
+ * @typedef {any} TEmitData<T>
+ */
+export type TEmitData<T extends SocketCommands> =
+  T extends keyof TEmitEventsDataMap ? TEmitEventsDataMap[T] : never;
 
 /**
  * Represents the structure of an emit event for a socket connection.
  *
  * @typedef {Object} TEmit
  * @property {SocketCommands} command - The command to be sent through the socket.
- * @property {TEmitData} [data] - Optional data associated with the command.
+ * @property {TEmitData<SocketCommands>} [data] - Optional data associated with the command.
  */
-export type TEmit = { command: SocketCommands; data?: TEmitData };
+export type TEmit = {
+  command: SocketCommands;
+  data?: TEmitData<SocketCommands>;
+};
 
 /**
  * Represents an optional quota configuration.
@@ -156,37 +185,85 @@ export type TOptSocket = {
 } & TOptQuota;
 
 /**
- * Represents the callback data structure for socket events.
+ * A type defining the mapping between socket events and their respective listener callbacks.
+ * The keys represent events from the `SocketEvents` enum, and the values define the types of
+ * callbacks associated with those events.
  *
- * @typedef {Object} TOnCallback
- * @property {string} featureId - The unique identifier for the feature.
- * @property {number} value - The value associated with the feature.
- * @property {number} usedSpace - The amount of space used.
- * @property {number} quotaLimit - The limit of the quota.
- * @property {string} customQuotaFeature - The custom quota feature identifier.
- * @property {boolean} enableQuota - Flag indicating if the quota is enabled.
- * @property {number} quota - The quota value.
+ * Each callback can have specific parameters and a return type, which are defined for each event.
  */
-export type TOnCallback = {
-  featureId: string;
-  value: number;
-  usedSpace: number;
-  quotaLimit: number;
-  customQuotaFeature: string;
-  enableQuota: boolean;
-  quota: number;
+export type TListenEventCallbackMap = {
+  [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
+  [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
+  [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
+  [SocketEvents.UpdateHistory]: (data: {
+    id: number | string;
+    type: string;
+  }) => void;
+  [SocketEvents.RefreshFolder]: (id: number) => void;
+  [SocketEvents.MarkAsNewFolder]: (data: {
+    folderId: number | string;
+    count: number;
+  }) => void;
+  [SocketEvents.MarkAsNewFile]: (data: {
+    fileId: number | string;
+    count: number;
+  }) => void;
+  [SocketEvents.StartEditFile]: (id: number | string) => void;
+  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
+  [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
 };
+
+/**
+ * A type representing a default listener for socket events not explicitly defined in `TListenEventCallbackMap`.
+ */
+export type TUnmappedSocketListener = () => void;
+
+/**
+ * A type that resolves the appropriate listener type for a given socket event.
+ *
+ * If the event is mapped in `TListenEventCallbackMap`, it resolves to the corresponding callback type.
+ * Otherwise, it defaults to `TUnmappedSocketListener`.
+ */
+export type TSocketListener<T extends SocketEvents> =
+  T extends keyof TListenEventCallbackMap
+    ? TListenEventCallbackMap[T]
+    : TUnmappedSocketListener;
 
 /**
  * Represents a callback function to be used with socket events.
  *
  * @typedef {Object} TCallback
  * @property {SocketEvents} eventName - The name of the socket event.
- * @property {(value: TOnCallback) => void} callback - The function to be called when the event is triggered.
+ * @property {TSocketListener<SocketEvents>} callback - The function to be called when the event is triggered.
  */
 export type TCallback = {
   eventName: SocketEvents;
-  callback: (value: TOnCallback) => void;
+  callback: TSocketListener<SocketEvents>;
+};
+
+const isEmitDataValid = (
+  command: SocketCommands,
+  data?: TEmitData<SocketCommands>,
+) => {
+  if (
+    command !== SocketCommands.Subscribe &&
+    command !== SocketCommands.Unsubscribe
+  ) {
+    return true;
+  }
+
+  if (
+    data &&
+    typeof data === "object" &&
+    "roomParts" in data &&
+    data.roomParts?.length
+  ) {
+    return true;
+  }
+
+  return false;
 };
 
 /**
@@ -219,7 +296,7 @@ export type TCallback = {
  * @property {boolean} isSocketReady - Indicates whether the socket is ready for communication.
  * @property {TCallback[]} callbacks - A queue of callbacks to be registered once the socket is ready.
  * @property {TEmit[]} emits - A queue of messages to be emitted once the socket is ready.
- * @property {Set<string>} subscribers - A set of current socket subscribers.
+ * @property {Map<string, boolean | undefined>} subscribeEmits - All subscribed items as keys and individuals as value.
  *
  * @method static getInstance - Retrieves the singleton instance of the SocketHelper class.
  * @method private tryConnect - Attempts to establish a WebSocket connection using the provided connection settings.
@@ -238,13 +315,19 @@ class SocketHelper {
 
   private client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
+  private reconnectIntervalId: NodeJS.Timeout | undefined = undefined;
+
+  private maxReconnectRetries: number = 5;
+
+  private currentReconnectRetries: number = 0;
+
   private isSocketReady: boolean = false;
 
   private callbacks: TCallback[] = [];
 
   private emits: TEmit[] = [];
 
-  private subscribers = new Set<string>();
+  private subscribeEmits = new Map<string, boolean | undefined>();
 
   private constructor() {
     this.client = null;
@@ -300,19 +383,42 @@ class SocketHelper {
       this.client = io(origin, config);
 
       this.client.on("connect", () => {
-        console.log("[WS] socket is connected");
+        clearInterval(this.reconnectIntervalId);
+        this.currentReconnectRetries = 0;
+        addLog("[WS] socket is connected", "socket");
+        this.subscribeEmits.forEach((individual, roomParts) => {
+          this.client?.emit(SocketCommands.Subscribe, {
+            roomParts,
+            individual,
+          });
+        });
       });
 
       this.client.on("connect_error", (err) =>
-        console.log("[WS] socket connect error", err),
+        addLog(`[WS] socket connect error: ${err}`, "socket"),
       );
 
-      this.client.on("disconnect", () =>
-        console.log("[WS] socket is disconnected"),
-      );
+      this.client.on("disconnect", () => {
+        this.reconnectIntervalId = setInterval(() => {
+          if (this.currentReconnectRetries === this.maxReconnectRetries) {
+            clearInterval(this.reconnectIntervalId);
+            return;
+          }
+
+          if (this.client !== null && this.client.connected === false) {
+            this.currentReconnectRetries += 1;
+            addLog(
+              `[WS] socket reconnect attempt: ${this.currentReconnectRetries}`,
+              "socket",
+            );
+            this.client.connect();
+          }
+        }, 1000);
+        addLog("[WS] socket is disconnected", "socket");
+      });
 
       this.client.on("connection-init", () => {
-        console.log("[WS] socket is ready (connection-init)");
+        addLog("[WS] socket is ready (connection-init)", "socket");
 
         this.isSocketReady = true;
 
@@ -359,7 +465,7 @@ class SocketHelper {
    * @returns {Set} A list of subscribers.
    */
   get socketSubscribers(): Set<string> {
-    return this.subscribers;
+    return new Set(this.subscribeEmits.keys());
   }
 
   /**
@@ -381,7 +487,10 @@ class SocketHelper {
   public connect(url: string, publicRoomKey: string) {
     if (!url) return;
 
-    console.log("[WS] connect", { url, publicRoomKey });
+    addLog(
+      `[WS] connect. Url: ${url}; publicRoomKey: ${publicRoomKey}`,
+      "socket",
+    );
 
     this.connectionSettings = { url, publicRoomKey } as TSocketConnection;
     this.tryConnect();
@@ -391,46 +500,43 @@ class SocketHelper {
    * Emits a command with associated data to a specified room or globally.
    * If the socket is not ready, the command is saved in a queue for later emission.
    *
-   * @param {SocketCommands} command - The command to emit.
-   * @param {TEmitData} data - The parameters for the emit function.
+   * @param {T} command - The socket command to be emitted.
+   * @param {TEmitData<T>} [data] - Optional data associated with the command. The type of data is resolved based on the command.
    *
    * @returns {void}
    */
-  public emit = (command: SocketCommands, data?: TEmitData) => {
-    if (
-      (command === SocketCommands.Subscribe ||
-        command === SocketCommands.Unsubscribe) &&
-      !data?.roomParts?.length
-    )
-      return;
+  public emit = <T extends SocketCommands>(command: T, data?: TEmitData<T>) => {
+    if (!isEmitDataValid(command, data)) return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [emit] is not ready -> save in a queue", {
-        command,
-        data,
-      });
+      addLog(
+        `[WS] socket [emit] is not ready -> save in a queue. Command: ${command}, data: ${data}`,
+        "socket",
+      );
       this.emits.push({ command, data });
       return;
     }
 
-    console.log("[WS] emit", { command, data });
+    addLog(`[WS] emit.  Command: ${command}, data: ${data}`, "socket");
 
-    const ids =
-      !data || !data.roomParts
-        ? []
-        : typeof data.roomParts === "object"
-          ? data.roomParts
-          : [data.roomParts];
+    const dataHasRoomParts =
+      typeof data === "object" && "roomParts" in data && data.roomParts;
+
+    const ids = !dataHasRoomParts
+      ? []
+      : typeof data.roomParts === "object"
+        ? data.roomParts
+        : [data.roomParts];
 
     ids.forEach((id: string) => {
       if (command === "subscribe") {
-        if (this.subscribers.has(id)) return;
+        if (this.subscribeEmits.has(id)) return;
 
-        this.subscribers.add(id);
+        this.subscribeEmits.set(id, data?.individual);
       }
 
       if (command === "unsubscribe") {
-        this.subscribers.delete(id);
+        this.subscribeEmits.delete(id);
       }
     });
 
@@ -445,22 +551,22 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public on = (
-    eventName: SocketEvents,
-    callback: (value: TOnCallback) => void,
+  public on = <T extends SocketEvents>(
+    eventName: T,
+    callback: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [on] is not ready -> save in a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [on] is not ready -> save in a queue. Event name: ${eventName}`,
+        "socket",
+      );
       this.callbacks.push({ eventName, callback });
       return;
     }
 
-    console.log("[WS] on", { eventName, callback });
+    addLog(`[WS] on event: ${eventName}`, "socket");
 
-    this.client.on(eventName, callback);
+    this.client.on(eventName satisfies string, callback);
   };
 
   /**
@@ -471,15 +577,15 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public off = (
-    eventName: SocketEvents,
-    callback: (value: TOnCallback) => void,
+  public off = <T extends SocketEvents>(
+    eventName: T,
+    callback: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [off] is not ready -> remove from a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [off] is not ready -> remove from a queue. Event name: ${eventName}`,
+        "socket",
+      );
 
       this.callbacks = this.callbacks.filter(
         (c) => c.eventName !== eventName || c.callback !== callback,
@@ -488,9 +594,9 @@ class SocketHelper {
       return;
     }
 
-    console.log("[WS] off", { eventName, callback });
+    addLog(`[WS] off event: ${eventName}`, "socket");
 
-    this.client.off(eventName, callback);
+    this.client.off(eventName satisfies string, callback);
   };
 }
 

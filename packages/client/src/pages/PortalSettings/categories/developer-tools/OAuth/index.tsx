@@ -43,6 +43,7 @@ const OAuth = ({
   deleteDialogVisible,
   generateDeveloperTokenDialogVisible,
   revokeDeveloperTokenDialogVisible,
+  apiOAuthLink,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -104,12 +105,13 @@ const OAuth = ({
       {isLoading ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen />
+        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} />
       ) : (
         <List
           clients={clientList}
           viewAs={viewAs}
           currentDeviceType={currentDeviceType}
+          apiOAuthLink={apiOAuthLink}
         />
       )}
 
@@ -131,7 +133,7 @@ export default inject(
     oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, apiOAuthLink } = settingsStore;
     const {
       isEmptyClientList,
       clientList,
@@ -171,6 +173,7 @@ export default inject(
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
+      apiOAuthLink,
     };
   },
 )(observer(OAuth));

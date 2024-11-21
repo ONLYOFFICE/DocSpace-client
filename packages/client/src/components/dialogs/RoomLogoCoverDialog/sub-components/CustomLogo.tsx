@@ -56,9 +56,16 @@ const StyledLogo = styled.div<StyledLogoProps>`
       }
     }
   }
+  .logo-cover_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
 
-  .logo-cover-text {
-    font-size: 41px;
+    .logo-cover-text {
+      width: fit-content;
+      height: fit-content;
+      margin: auto;
+    }
   }
 
   ${(props) =>
@@ -89,21 +96,26 @@ export const CustomLogo = ({
   roomTitle,
 }: CustomLogoProps) => {
   const textColor = color && getTextColor(color, 202);
+
   return (
     <StyledLogo color={color} textColor={textColor} isBase={isBaseTheme}>
       {withoutIcon ? (
-        <Text
-          className="logo-cover-text"
-          fontSize="41"
-          color={textColor || globalColors.white}
-          fontWeight={700}
-        >
-          {roomTitle}
-        </Text>
+        <div className="logo-cover_wrapper">
+          <Text
+            className="logo-cover-text"
+            fontSize="41px"
+            color={textColor || globalColors.white}
+            fontWeight={700}
+          >
+            {roomTitle}
+          </Text>
+        </div>
       ) : (
-        <ReactSVG
+        <div
+          {...(icon?.data && {
+            dangerouslySetInnerHTML: { __html: icon.data },
+          })}
           className="custom-logo-cover"
-          src={`data:image/svg+xml;base64, ${window.btoa(icon.data)}`}
         />
       )}
     </StyledLogo>

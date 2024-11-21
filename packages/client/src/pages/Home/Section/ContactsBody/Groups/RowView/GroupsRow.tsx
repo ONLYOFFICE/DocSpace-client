@@ -83,6 +83,7 @@ const GroupsRowComponent = ({
   };
 
   const onOpenGroup = (e: React.MouseEvent) => {
+    console.log("open", item.id, true, item.name, e);
     openGroupAction!(item.id, true, item.name, e);
   };
 
@@ -102,7 +103,6 @@ const GroupsRowComponent = ({
           key={item.id}
           onContextClick={onRowContextClick}
           onSelect={onSelect}
-          onRowClick={onOpenGroup!}
           isIndexEditingMode={false}
           element={
             <Avatar

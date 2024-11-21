@@ -55,6 +55,7 @@ const CreateRoomEvent = ({
   isCorrectWatermark,
   processCreatingRoomFromData,
   selectionItems,
+  setSelectedRoomType,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -114,6 +115,7 @@ const CreateRoomEvent = ({
       enableThirdParty={enableThirdParty}
       processCreatingRoomFromData={processCreatingRoomFromData}
       selectionItems={selectionItems}
+      setSelectedRoomType={setSelectedRoomType}
     />
   );
 };
@@ -155,6 +157,7 @@ export default inject(
       confirmDialogIsLoading,
 
       isCorrectWatermark,
+      setSelectedRoomType,
     } = createEditRoomStore;
 
     const selectionItems =
@@ -180,6 +183,7 @@ export default inject(
       setCover,
       selectionItems,
       processCreatingRoomFromData,
+      setSelectedRoomType,
     };
   },
 )(observer(CreateRoomEvent));

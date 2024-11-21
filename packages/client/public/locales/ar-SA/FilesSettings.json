@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "أقسام إضافية",
   "DisplayFavorites": "اعرض المفضلة",
+  "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "DisplayNotification": "اعرض الإشعار عند نقل العناصر إلى المهملات",
   "DisplayRecent": "اعرض الأخيرة",
   "DisplayTemplates": "اعرض النماذج",

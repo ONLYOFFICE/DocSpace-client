@@ -24,7 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { CompletedForm } from "@/components/completed-form";
+import { logger } from "@/../logger.mjs";
+
 import { getFillingSession } from "@/utils/actions";
+
+const log = logger.child({ module: "Create page" });
 
 interface PageProps {
   searchParams: Record<string, string | undefined>;
@@ -32,6 +36,8 @@ interface PageProps {
 
 async function Page({ searchParams }: PageProps) {
   const { share, fillingSessionId, is_file } = searchParams;
+
+  log.info("Open completed form page");
 
   const session = await getFillingSession(fillingSessionId!, share);
 

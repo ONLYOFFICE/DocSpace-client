@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Гост <strong>{{userName}}</strong> ще бъде преместен в секцията {{membersSection}} и ще му бъде назначен тип потребител. Потребителите имат свой собствен раздел {{documentsSection}} и могат да създават и редактират файлове, но не могат да създават стаи.",
+  "ChangeGuestsTypeMessageMulti": "Избраните гости ще бъдат преместени в раздел {{membersSection}} и ще им бъде назначен тип потребител. Потребителите имат свой собствен раздел {{documentsSection}} и могат да създават и редактират файлове, но не могат да създават стаи.",
   "ChangeUserTypeButton": "Промени тип",
   "ChangeUserTypeHeader": "Промени потребителски тип",
   "ChangeUserTypeMessage": "Потребителите с  <strong>'{{ firstType }}'</strong> тип ще бъдат преместени в тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Избраните потребители ще бъдат преместени към тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Не можете да сменяте типа за администраторите на {{productName}} и за себе си.",
+  "SuccessChangeGuestType": "Видът на гостите бе променен успешно",
   "SuccessChangeUserType": "Потребителският тип беше сменен успешно"
 }

@@ -85,6 +85,7 @@ const ContextButton = ({
         ref={menuRef}
         onHide={onHide}
         scaled={false}
+        withBackdrop
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
       />
     </div>

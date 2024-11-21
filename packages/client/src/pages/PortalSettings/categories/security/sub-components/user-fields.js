@@ -92,6 +92,7 @@ const UserFields = (props) => {
     inputs,
     regexp,
     classNameAdditional,
+    isAutoFocussed = false,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
@@ -144,7 +145,7 @@ const UserFields = (props) => {
               <TextInput
                 className={`${classNameAdditional}-input`}
                 id={`user-input-${index}`}
-                isAutoFocussed={false}
+                isAutoFocussed={isAutoFocussed}
                 value={input}
                 onChange={(e) => onChangeInput(e, index)}
                 onBlur={() => onBlur(index)}

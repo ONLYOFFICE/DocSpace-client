@@ -170,8 +170,9 @@ const Row = (props: RowProps) => {
       {inProgress ? (
         <Loader
           className="row-progress-loader"
-          type={LoaderTypes.oval}
-          size="16px"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
       ) : (
         <>

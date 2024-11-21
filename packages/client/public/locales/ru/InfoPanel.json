@@ -20,6 +20,7 @@
   "FileExtension": "Расширение файла",
   "FileMoved": "Файлы перемещены.",
   "FileMovedTo": "Файл перемещен в «{{folderTitle}}»",
+  "FileMovedToTrash": "Файлы перемещены в корзину.",
   "FileRenamed": "Файл переименован.",
   "FilesEmptyScreenText": "Здесь будут представлены свойства файлов и папок",
   "FileUploaded": "Файлы добавлены.",
@@ -29,6 +30,7 @@
   "FolderDeleted": "Папки удалены.",
   "FolderIndexReordered": "Индексы переназначены",
   "FolderMoved": "Папки перемещены.",
+  "FolderMovedToTrash": "Папки перемещены в корзину.",
   "FolderRenamed": "Папка переименована.",
   "GalleryEmptyScreenText": "Здесь будут представлены подробности о шаблонах форм",
   "GroupsEmptyScreenText": "Здесь будут представлены подробности о группах",
@@ -40,7 +42,8 @@
   "IndexChanged": "Индекс изменен",
   "ItemsSelected": "Выбрано элементов",
   "LastModifiedBy": "Автор последнего корректива",
-  "LifetimeEnds": "Заканчивается срок действия",
+  "LifetimeEnds": "Срок действия",
+  "MembersEmptyScreenText": "Здесь будут представлены подробности об участниках",
   "NoRecordsFound": "Записи не найдены",
   "Properties": "Cвойства",
   "RoomArchived": "Комната перемещена в Архив",
@@ -75,6 +78,5 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Файл обновлен.",
   "Users": "Пользователи",
-  "UsersEmptyScreenText": "Здесь будут представлены подробности о пользователях",
   "Versions": "Версии"
 }

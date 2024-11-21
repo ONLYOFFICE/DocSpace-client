@@ -93,6 +93,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isFrame,
     barTypeInFrame,
     setShowGuestReleaseTip,
+
+    isOwner,
+    isAdmin,
   } = rest;
 
   const theme = useTheme();
@@ -440,10 +443,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     if (isFrame) return setShowGuestReleaseTip(false);
 
+    console.log(isAdmin, isOwner);
+
+    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
+
     const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
 
     setShowGuestReleaseTip(!closed);
-  }, [isFrame, userId, setShowGuestReleaseTip]);
+  }, [isFrame, userId, setShowGuestReleaseTip, isAdmin, isOwner]);
 
   const rootElement = document.getElementById("root");
 
@@ -572,6 +579,8 @@ const ShellWrapper = inject(
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
+      isOwner: userStore?.user?.isOwner,
+      isAdmin: userStore?.user?.isAdmin,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,

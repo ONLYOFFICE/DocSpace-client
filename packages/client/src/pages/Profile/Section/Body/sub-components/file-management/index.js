@@ -150,7 +150,7 @@ const FileManagement = ({
           isChecked={thumbnails1280x720}
           style={{ display: "none" }}
         />
-        {!isVisitor && (
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="ask-again toggle-btn"
@@ -159,7 +159,7 @@ const FileManagement = ({
             />
             <Text>{t("Common:DontAskAgain")}</Text>
           </div>
-        )}
+        }
         <div className="toggle-btn-wrapper">
           <ToggleButton
             className="save-copy-original toggle-btn"
@@ -168,7 +168,7 @@ const FileManagement = ({
           />
           <Text>{t("OriginalCopy")}</Text>
         </div>
-        {!isVisitor && (
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="display-notification toggle-btn"
@@ -177,8 +177,8 @@ const FileManagement = ({
             />
             <Text>{t("DisplayNotification")}</Text>
           </div>
-        )}
-        {!isVisitor && (
+        }
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="open-same-tab toggle-btn"
@@ -191,8 +191,8 @@ const FileManagement = ({
               })}
             </Text>
           </div>
-        )}
-        {!isVisitor && (
+        }
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="display-file-extension toggle-btn"
@@ -201,7 +201,7 @@ const FileManagement = ({
             />
             <Text>{t("DisplayFileExtension")}</Text>
           </div>
-        )}
+        }
       </Box>
 
       {/* <Box className="settings-section">

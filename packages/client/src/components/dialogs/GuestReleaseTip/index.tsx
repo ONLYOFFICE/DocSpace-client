@@ -35,9 +35,8 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TUser } from "@docspace/shared/api/people/types";
 
@@ -53,6 +52,7 @@ import {
   StyledHeader,
   StyledBody,
 } from "./GuestReleaseTip.styled";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 type GuestReleaseTipProps = {
   userId: TUser["id"];
@@ -134,18 +134,19 @@ const GuestReleaseTip = ({
                 values={{ productName: t("Common:ProductName") }}
               />
             </Text>
-            <Link
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
               fontSize="12px"
               fontWeight={400}
               lineHeight="16px"
-              color={globalColors.link}
-              isHovered
+              href={accessRightsLink}
               target={LinkTarget.blank}
               type={LinkType.page}
-              href={accessRightsLink}
+              isHovered
             >
               {t("Translations:GuestReleaseTipLink")}
-            </Link>
+            </ColorTheme>
           </StyledBody>
 
           <img src={icon} alt="tip" />

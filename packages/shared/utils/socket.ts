@@ -194,18 +194,21 @@ export type TListenEventCallbackMap = {
   [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
   [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
   [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
-  [SocketEvents.UpdateHistory]: (data: { id: number; type: string }) => void;
+  [SocketEvents.UpdateHistory]: (data: {
+    id: number | string;
+    type: string;
+  }) => void;
   [SocketEvents.RefreshFolder]: (id: number) => void;
   [SocketEvents.MarkAsNewFolder]: (data: {
-    folderId: number;
+    folderId: number | string;
     count: number;
   }) => void;
   [SocketEvents.MarkAsNewFile]: (data: {
-    fileId: number;
+    fileId: number | string;
     count: number;
   }) => void;
-  [SocketEvents.StartEditFile]: (id: number) => void;
-  [SocketEvents.StopEditFile]: (id: number) => void;
+  [SocketEvents.StartEditFile]: (id: number | string) => void;
+  [SocketEvents.StopEditFile]: (id: number | string) => void;
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;

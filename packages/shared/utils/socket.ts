@@ -55,6 +55,9 @@ export const enum SocketEvents {
   AddUser = "s:add-user",
   UpdateUser = "s:update-user",
   DeleteUser = "s:delete-user",
+  AddGroup = "s:add-group",
+  UpdateGroup = "s:update-group",
+  DeleteGroup = "s:delete-group",
 }
 
 /**

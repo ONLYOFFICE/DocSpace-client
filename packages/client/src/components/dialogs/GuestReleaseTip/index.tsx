@@ -59,6 +59,7 @@ type GuestReleaseTipProps = {
   accessRightsLink: SettingsStore["accessRightsLink"];
   setShowGuestReleaseTip: SettingsStore["setShowGuestReleaseTip"];
   setGuestReleaseTipDialogVisible: DialogsStore["setGuestReleaseTipDialogVisible"];
+  showBodyLoader: boolean;
 };
 
 const GuestReleaseTip = ({
@@ -66,6 +67,7 @@ const GuestReleaseTip = ({
   accessRightsLink,
   setShowGuestReleaseTip,
   setGuestReleaseTipDialogVisible,
+  showBodyLoader,
 }: GuestReleaseTipProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
   const theme = useTheme();
@@ -82,7 +84,7 @@ const GuestReleaseTip = ({
   return (
     <ModalDialog
       displayType={ModalDialogType.modal}
-      visible
+      visible={!showBodyLoader}
       autoMaxHeight
       onClose={onClose}
       isCloseable
@@ -161,17 +163,22 @@ const GuestReleaseTip = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, userStore }: TStore) => {
-  const { accessRightsLink, setShowGuestReleaseTip } = settingsStore;
+export default inject(
+  ({ settingsStore, dialogsStore, userStore, clientLoadingStore }: TStore) => {
+    const { accessRightsLink, setShowGuestReleaseTip } = settingsStore;
 
-  const { setGuestReleaseTipDialogVisible } = dialogsStore;
+    const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
-  const userId = userStore.user!.id;
+    const userId = userStore.user!.id;
 
-  return {
-    userId,
-    accessRightsLink,
-    setShowGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
-  };
-})(observer(GuestReleaseTip));
+    const { showBodyLoader } = clientLoadingStore;
+
+    return {
+      userId,
+      accessRightsLink,
+      setShowGuestReleaseTip,
+      setGuestReleaseTipDialogVisible,
+      showBodyLoader,
+    };
+  },
+)(observer(GuestReleaseTip));

@@ -96,6 +96,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     isOwner,
     isAdmin,
+    releaseDate,
+    registrationDate,
   } = rest;
 
   const theme = useTheme();
@@ -443,12 +445,27 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     if (isFrame) return setShowGuestReleaseTip(false);
 
+    if (!releaseDate || !registrationDate) return;
+
     if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
 
     const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
 
-    setShowGuestReleaseTip(!closed);
-  }, [isFrame, userId, setShowGuestReleaseTip, isAdmin, isOwner]);
+    if (closed) return setShowGuestReleaseTip(false);
+
+    const regDate = new Date(registrationDate).getTime();
+    const release = new Date(releaseDate).getTime();
+
+    setShowGuestReleaseTip(regDate < release);
+  }, [
+    isFrame,
+    userId,
+    setShowGuestReleaseTip,
+    isAdmin,
+    isOwner,
+    releaseDate,
+    registrationDate,
+  ]);
 
   const rootElement = document.getElementById("root");
 
@@ -523,6 +540,7 @@ const ShellWrapper = inject(
       isPortalDeactivate,
       isPortalRestoring,
       setShowGuestReleaseTip,
+      buildVersionInfo,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -579,6 +597,8 @@ const ShellWrapper = inject(
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
       isAdmin: userStore?.user?.isAdmin,
+      registrationDate: userStore?.user?.registrationDate,
+
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
@@ -589,6 +609,7 @@ const ShellWrapper = inject(
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
       setShowGuestReleaseTip,
+      releaseDate: buildVersionInfo.releaseDate,
     };
   },
 )(observer(Shell));

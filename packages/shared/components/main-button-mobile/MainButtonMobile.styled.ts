@@ -265,6 +265,7 @@ const StyledProgressContainer = styled.div.attrs(injectDefaultTheme)<{
 
 const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)<{
   isUploading?: boolean;
+  error: boolean;
 }>`
   display: ${(props) => (props.isUploading ? "flex" : "none")};
 
@@ -288,7 +289,7 @@ const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)<{
     justify-content: space-between;
 
     .progress-header {
-      width: 50%;
+      width: 40%;
 
       line-height: 16px;
 
@@ -299,7 +300,7 @@ const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)<{
     }
 
     .progress_info-container {
-      width: 50%;
+      width: 60%;
 
       display: flex;
       align-items: center;
@@ -312,12 +313,20 @@ const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)<{
 
         text-align: right;
         margin-inline-end: 12px;
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .progress_icon {
         svg {
           path {
-            fill: ${(props) => props.theme.mainButtonMobile.bar.icon};
+            fill: ${(props) =>
+              props.error
+                ? props.theme.isBase
+                  ? globalColors.lightStatusWarning
+                  : globalColors.darkStatusWarning
+                : props.theme.mainButtonMobile.bar.icon};
           }
         }
       }
@@ -369,11 +378,18 @@ export {
 const getDefaultProgressStyles = ({
   $currentColorScheme,
   theme,
+  error,
 }: ProgressBarMobileDefaultStyles) =>
   $currentColorScheme &&
   css`
     background: ${
-      theme.isBase ? $currentColorScheme?.main?.accent : globalColors.white
+      theme.isBase
+        ? error
+          ? globalColors.lightStatusWarning
+          : $currentColorScheme?.main?.accent
+        : error
+          ? globalColors.darkStatusWarning
+          : globalColors.white
     }};
   `;
 

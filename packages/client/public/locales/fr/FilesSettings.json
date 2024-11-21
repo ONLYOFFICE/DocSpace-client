@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Sections supplémentaires",
   "DisplayFavorites": "Afficher les favoris",
+  "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
   "DisplayNotification": "Afficher une notification lors du déplacement d'éléments vers la corbeille",
   "DisplayRecent": "Afficher les fichiers récents",
   "DisplayTemplates": "Afficher les modèles",

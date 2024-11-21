@@ -1,6 +1,6 @@
 {
-  "ChangeGuestsTypeMessage": "Guest <strong>{{userName}}</strong> will be moved to the People section and assigned the User type. Users have their own Documents section, are able to create and edit files, but aren't able to create rooms.",
-  "ChangeGuestsTypeMessageMulti": "The selected guests will be moved to the People section and assigned the User type. Users have their own Documents section, are able to create and edit files, but aren't able to create rooms.",
+  "ChangeGuestsTypeMessage": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
+  "ChangeGuestsTypeMessageMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
   "ChangeUserTypeButton": "Change type",
   "ChangeUserTypeHeader": "Change user type",
   "ChangeUserTypeMessage": "Users with the <strong>'{{ firstType }}'</strong> type will be moved to <strong>'{{ secondType }}'</strong> type.",

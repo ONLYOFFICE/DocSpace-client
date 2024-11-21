@@ -81,7 +81,7 @@
   "MobileOnly": "samo mobilni uređaji",
   "Page": "Prikaz stranice (broj)",
   "PortalDescription": "Ugradite ceo {{productName}} da biste omogućili korisnicima interakciju sa svim sobama, datotekama i podešavanjima.",
-  "PublicRoomDescription": "Ugradite javnu sobu da biste omogućili korisnicima da vide sve dokumente koji se tamo čuvaju bez registracije.",
+  "PublicRoomPresetInfo": "Ugradite javnu sobu kako bi korisnici mogli da pregledaju, uređuju, komentarišu ili pregledaju sve dokumente koji su tamo sačuvani, bez registracije.",
   "RightPanelCollapsed": "Desni panel je srušen",
   "RoomFilter": "Filter Prostorije",
   "RoomOrFolder": "Soba ili Folder",

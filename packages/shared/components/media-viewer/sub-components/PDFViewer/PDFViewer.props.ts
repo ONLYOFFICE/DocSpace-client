@@ -44,7 +44,7 @@ interface PDFViewerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   setIsPDFSidebarOpen: Dispatch<SetStateAction<boolean>>;
 

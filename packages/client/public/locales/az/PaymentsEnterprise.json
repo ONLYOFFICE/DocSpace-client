@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Lisenziyanı almaq üçün aşağıdakı düyməyə klikləyin.",
   "ActivatePurchaseBuyNow": "İndi al",
   "ActivatePurchaseRenewLicense": "Dəstək və yeniliklər əldə etməyə davam etmək üçün yeniləməni alın",
+  "ActivateRenewalDescr": "Əvvəllər aldığınız yeniləməni aktivləşdirmək üçün onu aşağıda yükləyin və Aktivləşdir düyməsinə klikləyin.",
   "ActivateRenewDescr": "Şəxsi yeniləmə şərtlərinizi əldə etmək üçün müvafiq menecerlə əlaqə saxlayın və ya bizə yazın <1>{{email}}</1>",
   "ActivateSwithToProHeader": "Tam {{license}} versiyasına təkmilləşdirin",
   "ActivateTariffDescr": "Siz {{organizationName}} {{productName}} {{license}} istifadə edirsiniz.",

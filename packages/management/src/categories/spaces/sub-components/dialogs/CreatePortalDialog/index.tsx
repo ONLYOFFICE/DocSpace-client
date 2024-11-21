@@ -99,6 +99,12 @@ const CreatePortalDialog = () => {
     if (registerError) setRegisterError(null);
   };
 
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onHandleClick();
+    }
+  };
+
   const onHandleClick = async () => {
     const { user } = userStore;
 
@@ -180,6 +186,7 @@ const CreatePortalDialog = () => {
               type={InputType.text}
               size={InputSize.base}
               onChange={onHandleName}
+              onKeyDown={onKeyDown}
               value={name}
               hasError={!!registerError}
               placeholder={t("EnterName")}

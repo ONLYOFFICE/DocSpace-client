@@ -34,6 +34,7 @@
   "RoleFormFiller": "Popunjivač obrazaca",
   "RoleFormFillerDescription": "Operacije sa postojećim datotekama: pregledanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
   "RoleFormFillerFormRoomDescription": "Popunjači formulara mogu popuniti formulare i pregledati samo svoje završene/započete formulare unutar foldera Završeno i U Procesu.",
+  "RoleGuestDescriprion": "Gosti mogu pristupiti sobama u koje su pozvani, kao i kreirati i uređivati dokumente ako su im dodeljene odgovarajuće uloge u sobi.",
   "RoleNewUserDescription": "Korisnici mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu kreirati prostorije, upravljati korisnicima niti pristupiti podešavanjima.",
   "RolePortalAdminDescription": "Administratori {{productName}}-a mogu pristupiti podešavanjima {{productName}}-a, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovih nivoa. Svi administratori imaju pristup Ličnom odeljku.",
   "RolePowerUserFormRoomDescription": "Korisnici mogu otpremiti formulare u prostoriju i imati pun pristup Završeno i U Procesu folderima.",

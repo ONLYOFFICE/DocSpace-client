@@ -1,5 +1,32 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { P, match } from "ts-pattern";
+import { isMobile } from "react-device-detect";
 
 import {
   EmployeeType,
@@ -10,14 +37,16 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
+import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
@@ -176,20 +205,12 @@ export const getOptions = (
     t("EmptyView:UploadDevicePDFFormOptionDescription"),
     "pdf",
   );
-  const uploadFromDeviceAnyFile = createUploadFromDeviceOption(
-    t("EmptyView:UploadDeviceOptionTitle"),
-    t("EmptyView:UploadDeviceOptionDescription"),
-    "file",
-  );
 
   const inviteUser = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersOptionDescription"),
-  );
-
-  const inviteUserEditingRoom = createInviteOption(
-    t("EmptyView:InviteUsersOptionTitle"),
-    t("EmptyView:InviteUsersCollaborationOptionDescription"),
+    t("Common:InviteContacts"),
+    t("EmptyView:InviteUsersOptionDescription", {
+      productName: t("Common:ProductName"),
+    }),
   );
 
   const shareFillingRoom = {
@@ -198,7 +219,7 @@ export const getOptions = (
     icon: <SharedIcon />,
     key: "share-room",
     onClick: actions.createAndCopySharedLink,
-    disabled: false,
+    disabled: !security?.EditAccess,
   };
 
   const sharePublicRoom = {
@@ -206,10 +227,7 @@ export const getOptions = (
     description: t("EmptyView:SharePublicRoomOptionDescription"),
     icon: <SharedIcon />,
     key: "share-public-room",
-    onClick: () => {
-      actions.createAndCopySharedLink();
-      actions.openInfoPanel();
-    },
+    onClick: actions.createAndCopySharedLink,
     disabled: false,
   };
 
@@ -219,7 +237,7 @@ export const getOptions = (
     icon: <CreateNewFormIcon />,
     key: "create-doc-option",
     onClick: () => actions.onCreate("docx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
   const createSpreadsheet = {
     title: t("EmptyView:CreateSpreadsheet"),
@@ -227,7 +245,7 @@ export const getOptions = (
     icon: <CreateNewSpreadsheetIcon />,
     key: "create-spreadsheet-option",
     onClick: () => actions.onCreate("xlsx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
   const createPresentation = {
     title: t("EmptyView:CreatePresentation"),
@@ -235,16 +253,16 @@ export const getOptions = (
     icon: <CreateNewPresentation />,
     key: "create-presentation-option",
     onClick: () => actions.onCreate("pptx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
 
   const createForm = {
     title: t("EmptyView:CreateForm"),
     description: t("EmptyView:CreateFormDescription"),
-    icon: <UploadPDFFormIcon />,
+    icon: <CreatePDFFormIcon />,
     key: "create-form-option",
-    onClick: () => actions.onCreate("pdf"),
-    disabled: false,
+    onClick: () => actions.onCreate("pdf", undefined, t),
+    disabled: !security?.Create,
   };
 
   const createRoom = {
@@ -266,6 +284,34 @@ export const getOptions = (
     onClick: () => actions.inviteRootUser(EmployeeType.User),
     disabled: false,
   };
+
+  const uploadFromDeviceAnyFile = isMobile
+    ? createUploadFromDeviceOption(
+        t("EmptyView:UploadDeviceOptionTitle"),
+        t("EmptyView:UploadDeviceOptionDescription"),
+        "file",
+      )
+    : {
+        title: t("EmptyView:UploadDeviceOptionTitle"),
+        description: t("EmptyView:UploadDeviceOptionDescription"),
+        icon: <UploadDevicePDFFormIcon />,
+        key: "uploads",
+        disabled: !security?.Create,
+        model: [
+          {
+            key: "upload-files",
+            label: t("Translations:Files"),
+            icon: FormBlankIcon,
+            onClick: () => actions.onUploadAction("file"),
+          },
+          {
+            key: "upload-folder",
+            label: t("Files:Folder"),
+            icon: FolderReactSvgUrl,
+            onClick: () => actions.onUploadAction("folder"),
+          },
+        ],
+      };
 
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
@@ -407,7 +453,7 @@ export const getOptions = (
 
       return [
         createFile,
-        inviteUserEditingRoom,
+        inviteUser,
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];

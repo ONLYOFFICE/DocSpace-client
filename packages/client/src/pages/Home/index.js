@@ -165,6 +165,8 @@ const PureHome = (props) => {
     disableUploadPanelOpen,
     setContactsTab,
     isUsersEmptyView,
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -255,6 +257,9 @@ const PureHome = (props) => {
     getUsersList,
     getGroups,
     updateCurrentGroup,
+
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   });
 
   useSettings({
@@ -437,6 +442,7 @@ export const Component = inject(
     settingsStore,
     contextOptionsStore,
     indexingStore,
+    dialogsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -544,6 +550,7 @@ export const Component = inject(
       showCatalog,
       enablePlugins,
       getSettings,
+      showGuestReleaseTip,
     } = settingsStore;
 
     const {
@@ -680,6 +687,9 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
+      showGuestReleaseTip,
+      setGuestReleaseTipDialogVisible:
+        dialogsStore.setGuestReleaseTipDialogVisible,
     };
   },
 )(observer(Home));

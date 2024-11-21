@@ -30,6 +30,7 @@
 import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { addLog } from ".";
 
 /**
  * Enum representing various socket events used in the application.
@@ -219,7 +220,7 @@ export type TCallback = {
  * @property {boolean} isSocketReady - Indicates whether the socket is ready for communication.
  * @property {TCallback[]} callbacks - A queue of callbacks to be registered once the socket is ready.
  * @property {TEmit[]} emits - A queue of messages to be emitted once the socket is ready.
- * @property {Set<string>} subscribers - A set of current socket subscribers.
+ * @property {Map<string, boolean | undefined>} subscribeEmits - All subscribed items as keys and individuals as value.
  *
  * @method static getInstance - Retrieves the singleton instance of the SocketHelper class.
  * @method private tryConnect - Attempts to establish a WebSocket connection using the provided connection settings.
@@ -238,13 +239,19 @@ class SocketHelper {
 
   private client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
+  private reconnectIntervalId: NodeJS.Timeout | undefined = undefined;
+
+  private maxReconnectRetries: number = 5;
+
+  private currentReconnectRetries: number = 0;
+
   private isSocketReady: boolean = false;
 
   private callbacks: TCallback[] = [];
 
   private emits: TEmit[] = [];
 
-  private subscribers = new Set<string>();
+  private subscribeEmits = new Map<string, boolean | undefined>();
 
   private constructor() {
     this.client = null;
@@ -300,19 +307,42 @@ class SocketHelper {
       this.client = io(origin, config);
 
       this.client.on("connect", () => {
-        console.log("[WS] socket is connected");
+        clearInterval(this.reconnectIntervalId);
+        this.currentReconnectRetries = 0;
+        addLog("[WS] socket is connected", "socket");
+        this.subscribeEmits.forEach((individual, roomParts) => {
+          this.client?.emit(SocketCommands.Subscribe, {
+            roomParts,
+            individual,
+          });
+        });
       });
 
       this.client.on("connect_error", (err) =>
-        console.log("[WS] socket connect error", err),
+        addLog(`[WS] socket connect error: ${err}`, "socket"),
       );
 
-      this.client.on("disconnect", () =>
-        console.log("[WS] socket is disconnected"),
-      );
+      this.client.on("disconnect", () => {
+        this.reconnectIntervalId = setInterval(() => {
+          if (this.currentReconnectRetries === this.maxReconnectRetries) {
+            clearInterval(this.reconnectIntervalId);
+            return;
+          }
+
+          if (this.client !== null && this.client.connected === false) {
+            this.currentReconnectRetries += 1;
+            addLog(
+              `[WS] socket reconnect attempt: ${this.currentReconnectRetries}`,
+              "socket",
+            );
+            this.client.connect();
+          }
+        }, 1000);
+        addLog("[WS] socket is disconnected", "socket");
+      });
 
       this.client.on("connection-init", () => {
-        console.log("[WS] socket is ready (connection-init)");
+        addLog("[WS] socket is ready (connection-init)", "socket");
 
         this.isSocketReady = true;
 
@@ -359,7 +389,7 @@ class SocketHelper {
    * @returns {Set} A list of subscribers.
    */
   get socketSubscribers(): Set<string> {
-    return this.subscribers;
+    return new Set(this.subscribeEmits.keys());
   }
 
   /**
@@ -381,7 +411,10 @@ class SocketHelper {
   public connect(url: string, publicRoomKey: string) {
     if (!url) return;
 
-    console.log("[WS] connect", { url, publicRoomKey });
+    addLog(
+      `[WS] connect. Url: ${url}; publicRoomKey: ${publicRoomKey}`,
+      "socket",
+    );
 
     this.connectionSettings = { url, publicRoomKey } as TSocketConnection;
     this.tryConnect();
@@ -405,15 +438,15 @@ class SocketHelper {
       return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [emit] is not ready -> save in a queue", {
-        command,
-        data,
-      });
+      addLog(
+        `[WS] socket [emit] is not ready -> save in a queue. Command: ${command}, data: ${data}`,
+        "socket",
+      );
       this.emits.push({ command, data });
       return;
     }
 
-    console.log("[WS] emit", { command, data });
+    addLog(`[WS] emit.  Command: ${command}, data: ${data}`, "socket");
 
     const ids =
       !data || !data.roomParts
@@ -424,13 +457,13 @@ class SocketHelper {
 
     ids.forEach((id: string) => {
       if (command === "subscribe") {
-        if (this.subscribers.has(id)) return;
+        if (this.subscribeEmits.has(id)) return;
 
-        this.subscribers.add(id);
+        this.subscribeEmits.set(id, data?.individual);
       }
 
       if (command === "unsubscribe") {
-        this.subscribers.delete(id);
+        this.subscribeEmits.delete(id);
       }
     });
 
@@ -450,15 +483,15 @@ class SocketHelper {
     callback: (value: TOnCallback) => void,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [on] is not ready -> save in a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [on] is not ready -> save in a queue. Event name: ${eventName}`,
+        "socket",
+      );
       this.callbacks.push({ eventName, callback });
       return;
     }
 
-    console.log("[WS] on", { eventName, callback });
+    addLog(`[WS] on event: ${eventName}`, "socket");
 
     this.client.on(eventName, callback);
   };
@@ -476,10 +509,10 @@ class SocketHelper {
     callback: (value: TOnCallback) => void,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [off] is not ready -> remove from a queue", {
-        eventName,
-        callback,
-      });
+      addLog(
+        `[WS] socket [off] is not ready -> remove from a queue. Event name: ${eventName}`,
+        "socket",
+      );
 
       this.callbacks = this.callbacks.filter(
         (c) => c.eventName !== eventName || c.callback !== callback,
@@ -488,7 +521,7 @@ class SocketHelper {
       return;
     }
 
-    console.log("[WS] off", { eventName, callback });
+    addLog(`[WS] off event: ${eventName}`, "socket");
 
     this.client.off(eventName, callback);
   };

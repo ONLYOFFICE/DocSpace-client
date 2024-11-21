@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Các phần bổ sung",
   "DisplayFavorites": "Hiển thị Yêu thích",
+  "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "DisplayNotification": "Hiển thị thông báo khi chuyển các mục vào Thùng rác",
   "DisplayRecent": "Hiển thị Gần đây",
   "DisplayTemplates": "Hiển thị mẫu",

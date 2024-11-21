@@ -1,6 +1,5 @@
 {
   "CodeTitle": "O código foi enviado por e-mail para você",
-  "EnterCredentials": "Digite suas credenciais {{productName}} para confirmar a exclusão",
   "ErrorInvalidText": "Em 10 segundos, você será redirecionado para a <1>{{productName}}</1>",
   "ForgotPassword": "Esqueceu-se da senha?",
   "LDAPUsernamePlaceholder": "Nome de usuário de {{ldap_domain}}",

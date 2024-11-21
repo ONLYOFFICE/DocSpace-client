@@ -23,26 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { AxiosRequestConfig } from "axios";
+import { request } from "../client";
 
-export default function componentLoader(lazyComponent: Function) {
-  return new Promise((resolve, reject) => {
-    const hasRefreshed = JSON.parse(
-      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
-    );
+export function loadDebugInfo() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    baseURL: "/",
+    responseType: "text",
+    url: `/debuginfo.md`,
+  };
 
-    lazyComponent()
-      .then((component: unknown) => {
-        window.sessionStorage.setItem("retry-lazy-refreshed", "false");
-        resolve(component);
-      })
-      .catch((error: unknown) => {
-        if (!hasRefreshed) {
-          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
-          return window.location.reload();
-        }
-        console.log(error);
-
-        reject(error);
-      });
-  });
+  return request(options);
 }

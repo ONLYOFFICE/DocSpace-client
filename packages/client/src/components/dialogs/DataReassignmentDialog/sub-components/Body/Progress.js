@@ -131,6 +131,7 @@ const Progress = ({
   isReassignCurrentUser,
   percent,
   isAbortTransfer,
+  noRooms,
   t,
 }) => {
   const inProgressNode = (
@@ -195,20 +196,23 @@ const Progress = ({
       <div className="data-start"> {reassigningDataStart}</div>
       <div className="progress-container">
         <div className="progress-section">
-          <Text className="progress-section-text" noSelect>
-            {t("Common:Rooms")}
-          </Text>
+          {!noRooms && (
+            <Text className="progress-section-text" noSelect>
+              {t("Common:Rooms")}
+            </Text>
+          )}
           <Text className="progress-section-text" noSelect>
             {t("Common:Documents")}
           </Text>
         </div>
 
         <div className="progress-status">
-          {percent < percentRoomReassignment
-            ? isAbortTransfer && percent !== percentAllReassignment
-              ? interruptedNode
-              : inProgressNode
-            : allDataTransferredNode}
+          {!noRooms &&
+            (percent < percentRoomReassignment
+              ? isAbortTransfer && percent !== percentAllReassignment
+                ? interruptedNode
+                : inProgressNode
+              : allDataTransferredNode)}
 
           {isAbortTransfer && percent !== percentAllReassignment
             ? interruptedNode

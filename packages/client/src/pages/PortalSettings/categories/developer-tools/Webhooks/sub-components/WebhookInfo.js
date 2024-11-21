@@ -28,11 +28,13 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/shared/components/link";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
 import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const InfoWrapper = styled.div`
   margin-bottom: 25px;
@@ -44,14 +46,6 @@ const InfoText = styled(Text).attrs(injectDefaultTheme)`
   margin: 0 0 8px;
   line-height: 20px;
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
-`;
-
-const StyledGuideLink = styled(Link).attrs(injectDefaultTheme)`
-  color: ${(props) => props.theme.client.settings.webhooks.linkColor};
-
-  &:hover {
-    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
-  }
 `;
 
 const WebhookInfo = (props) => {
@@ -66,16 +60,18 @@ const WebhookInfo = (props) => {
           organizationName: t("Common:OrganizationName"),
         })}
       </InfoText>
-      <StyledGuideLink
+      <ColorTheme
         id="webhooks-info-link"
+        tag="a"
+        themeId={ThemeId.Link}
         fontWeight={600}
-        isHovered
-        type="page"
         href={webhooksGuideUrl}
-        target="_blank"
+        target={LinkTarget.blank}
+        type={LinkType.page}
+        isHovered
       >
         {t("WebhooksGuide")}
-      </StyledGuideLink>
+      </ColorTheme>
     </InfoWrapper>
   );
 };

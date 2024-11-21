@@ -206,6 +206,7 @@
   "RestoreBackupDescription": "Nutzen Sie diese Option, um Ihr Bereich aus der vorher gespeicherten Sicherungsdatei wiederherzustellen.",
   "RestoreBackupResetInfoWarningText": "Alle aktuellen Passwörter werden zurückgesetzt. {{productName}}-Benutzer erhalten eine E-Mail mit dem Link zur Wiederherstellung des Zugangs.",
   "RestoreBackupWarningText": "Während der Wiederherstellung wird {{productName}} nicht verfügbar sein. Nach Abschluss der Wiederherstellung gehen alle Änderungen verloren, die nach dem Datum des ausgewählten Wiederherstellungspunktes vorgenommen wurden.",
+  "RestoreToDefault": "Auf Standard zurücksetzen",
   "RolesAreSet": "Die Rollen für die ausgewählten Benutzer sind bereits festgelegt.",
   "RoomQuotaDisabled": "Raumquote wurde erfolgreich deaktiviert.",
   "RoomQuotaEnabled": "Raumquote wurde erfolgreich aktiviert.",

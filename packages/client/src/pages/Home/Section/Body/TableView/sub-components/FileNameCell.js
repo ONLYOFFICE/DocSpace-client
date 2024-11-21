@@ -30,7 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const FileNameCell = ({
   item,
@@ -61,8 +61,9 @@ const FileNameCell = ({
       {inProgress ? (
         <Loader
           className="table-container_row-loader"
-          type="oval"
-          size="16px"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
       ) : (
         <TableCell

@@ -29,6 +29,7 @@ import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { FileAction } from "@docspace/shared/enums";
+import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -42,7 +43,6 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
-import { getStartRoomParams } from "SRC_DIR/helpers";
 
 const GlobalEvents = ({
   enablePlugins,

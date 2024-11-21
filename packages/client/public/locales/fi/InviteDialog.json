@@ -3,13 +3,14 @@
   "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia kaksoisnapsauttamalla sitä.",
   "GroupMaxAvailableRoleWarning": "Maksimimäärän ryhmiä voi nyt lisätä huoneeseen {{roleName}}-roolissa. Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä sen jälkeen, kun se on lisätty.",
   "InvitationLanguage": "Kutsukieli",
-  "InviteAccountSearchPlaceholder": "Kutsu ihmisiä sähköpostilla",
-  "InviteNewAccountManuallyDescription": "Kutsu uusia käyttäjiä {{productName}}:n henkilökohtaisesti sähköpostilla",
+  "InviteToRoomManuallyInfo": "Lisää olemassa oleva {{productName}} yhteystietoihin. Tai kutsu uusia käyttäjiä henkilökohtaisesti sähköpostilla. Uudet käyttäjät lisätään vieraslistaasi.",
+  "InviteToRoomSearchPlaceholder": "Etsi ja kutsu nimellä tai sähköpostilla",
   "InviteViaLink": "Kutsu linkin kautta",
   "InviteViaLinkDescriptionAccounts": "Luo universaali linkki itsevaltuutukselle {{productName}}:lla.",
   "InviteViaLinkDescriptionRoom": "Luo yleinen linkki huoneeseen itsevaltuutusta varten",
   "LinkCopySuccess": "Linkki on kopioitu",
   "ResetChange": "Nollaa muutos",
   "SendInvitation": "Lähetä kutsu",
+  "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
   "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty."
 }

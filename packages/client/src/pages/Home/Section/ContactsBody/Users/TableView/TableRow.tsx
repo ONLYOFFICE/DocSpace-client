@@ -179,7 +179,7 @@ const PeopleTableRow = ({
           directionY="both"
           size={ComboBoxSize.content}
           modernView
-          manualWidth="fit-content"
+          manualWidth="unset"
           optionStyle={{ maxWidth: "400px" }}
           textOverflow
         />

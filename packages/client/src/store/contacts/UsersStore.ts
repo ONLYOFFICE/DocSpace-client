@@ -212,8 +212,10 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
-    this.setSelection([]);
-    this.setBufferSelection(null);
+    if (!window.DocSpace?.location?.state?.user) {
+      this.setSelection([]);
+      this.setBufferSelection(null);
+    }
 
     const localStorageKey =
       this.contactsTab === "inside_group"

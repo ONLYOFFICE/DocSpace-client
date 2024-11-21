@@ -70,8 +70,8 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
   .table-container_index-cell {
-    margin-right: 0;
-    padding-right: 0;
+    margin-inline-end: 0;
+    padding-inline-end: 0;
   }
 
   .table-row-selected + .table-row-selected {

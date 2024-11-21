@@ -32,7 +32,7 @@ import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
-import { isMobile } from "@docspace/shared/utils";
+import { classNames, isMobile } from "@docspace/shared/utils";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -159,7 +159,10 @@ const LinkRow = ({
           )}
           <div className="link-options">
             {isRoomsLink ? (
-              <Text className="link-options_title" truncate>
+              <Text
+                className="link-options_title link-options-title-room"
+                truncate
+              >
                 {linkTitle}
               </Text>
             ) : !isExpiredLink ? (

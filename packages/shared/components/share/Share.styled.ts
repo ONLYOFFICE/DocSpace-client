@@ -85,7 +85,7 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   }
 
   .combo-button {
-    padding-inline-start: 0px;
+    padding-inline-start: 8px;
   }
 
   .link-options {
@@ -107,14 +107,17 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
-    margin-block: 6px;
-    margin-inline-end: 8px;
+    margin: 6px 8px;
 
     ${({ theme, isExpired }) =>
       isExpired &&
       css`
         color: ${theme.infoPanel.members.linkAccessComboboxExpired};
       `};
+  }
+
+  .link-options-title-room {
+    margin-inline-start: 0px;
   }
 
   .expired-options {
@@ -134,7 +137,12 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   }
 
   .expire-text {
+    margin-inline-start: 8px;
     color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  .expire-text-room {
+    margin-inline-start: 0px;
   }
 
   .link-actions {

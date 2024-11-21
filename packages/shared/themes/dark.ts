@@ -3128,6 +3128,7 @@ const Dark: TTheme = {
       color: gray,
       errorColor: darkErrorStatus,
     },
+    editInputColor: grayDark,
     requiredColor: darkErrorStatus,
   },
 

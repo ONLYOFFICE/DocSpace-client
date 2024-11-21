@@ -92,6 +92,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
+    setShowGuestReleaseTip,
+
+    isOwner,
+    isAdmin,
   } = rest;
 
   const theme = useTheme();
@@ -436,6 +440,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (isFrame) return setShowGuestReleaseTip(false);
+
+    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
+
+    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
+
+    setShowGuestReleaseTip(!closed);
+  }, [isFrame, userId, setShowGuestReleaseTip, isAdmin, isOwner]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -508,6 +522,7 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
+      setShowGuestReleaseTip,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -562,6 +577,8 @@ const ShellWrapper = inject(
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
+      isOwner: userStore?.user?.isOwner,
+      isAdmin: userStore?.user?.isAdmin,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
@@ -571,6 +588,7 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
+      setShowGuestReleaseTip,
     };
   },
 )(observer(Shell));

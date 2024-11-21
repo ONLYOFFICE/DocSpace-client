@@ -42,6 +42,8 @@ import type { TTranslation } from "@docspace/shared/types";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
+import { isMobile } from "react-device-detect";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getDescription,
   getIcon,
@@ -244,10 +246,15 @@ export const useOptions = (
   );
 
   const onCreate = useCallback(
-    (extension: ExtensionType, withoutDialog?: boolean) => {
+    (extension: ExtensionType, withoutDialog?: boolean, t?: TTranslation) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
       const edit = extension === FileExtensions.PDF;
+
+      if (isMobile && edit && t) {
+        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
 
       const payload = {
         id: -1,

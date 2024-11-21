@@ -3139,6 +3139,7 @@ export const getBaseTheme = () => {
         color: gray,
         errorColor: lightErrorStatus,
       },
+      editInputColor: grayText,
       requiredColor: lightErrorStatus,
     },
 

@@ -24,38 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ComboboxProps } from "../combobox";
+import { globalColors } from "@docspace/shared/themes";
+import styled from "styled-components";
 
-type PropsFromCombobox = Pick<
-  ComboboxProps,
-  | "className"
-  | "selectedOption"
-  | "advancedOptions"
-  | "scaled"
-  | "scaledOptions"
-  | "size"
-  | "manualWidth"
-  | "onSelect"
-  | "directionX"
-  | "directionY"
-  | "fixedDirection"
-  | "isAside"
-  | "manualY"
-  | "withoutBackground"
-  | "withBackground"
-  | "withBlur"
-  | "type"
-  | "noBorder"
-  | "isDisabled"
-  | "isMobileView"
->;
+const StyledContainer = styled.div`
+  padding: 16px 0 8px;
 
-export type AccessRightSelectProps = PropsFromCombobox & {
-  /** List of access options */
-  accessOptions: ComboboxProps["options"];
-  isSelectionDisabled?: boolean;
-  selectionErrorText?: React.ReactNode;
-  availableAccess?: number[];
-  topSpace?: number;
-  modernView?: boolean;
-};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
+
+const StyledHeader = styled.div`
+  width: 100%;
+  height: 22px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .main-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .accent-text {
+    color: ${(props) => props.theme.currentColorScheme?.main.accent};
+  }
+
+  .close-button {
+    cursor: pointer;
+    float: right;
+  }
+
+  .main-text {
+    color: ${(props) =>
+      props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
+  }
+
+  .next-step-icon {
+    path {
+      fill: ${(props) =>
+        props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
+    }
+  }
+`;
+
+const StyledBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+`;
+
+export { StyledContainer, StyledHeader, StyledBody };

@@ -54,6 +54,7 @@
   "NoAuthorizedApps": "Nessuna app autorizzata",
   "NoOAuthAppHeader": "Nessuna applicazione OAuth",
   "OAuth": "OAuth 2.0",
+  "OAuthAppDescription": "Usa OAuth 2.0 per accedere all'apice di {{productName}} di {{organizationName}} per l'autorizzazione e altre azioni come l'accesso ai file, ecc. Qui puoi registrare una nuova applicazione, gestire le tue applicazioni create nella lista, disabilitarle e abilitarle.",
   "OAuthHeaderBlock": "URL OAuth",
   "PrivacyPolicy": "Informativa sulla privacy ",
   "PrivacyPolicyURL": "URL dell’informativa sulla privacy",

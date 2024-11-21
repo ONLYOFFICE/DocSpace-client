@@ -2000,7 +2000,8 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { selection, allFilesIsEditing } = this.filesStore;
+    const { selection, allFilesIsEditing, canConvertSelected } =
+      this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       this.treeFoldersStore;
@@ -2171,7 +2172,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess,
+        disabled: !hasDownloadAccess || !canConvertSelected,
       },
       {
         key: "move-to",
@@ -2268,10 +2269,15 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreate = (format) => {
+  onCreate = (format, t) => {
     const event = new Event(Events.CREATE);
 
     const isPDf = format === FileExtensions.PDF;
+
+    if (isMobile && isPDf) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
 
     const payload = {
       extension: format,
@@ -2284,11 +2290,21 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateFormFromFile = () => {
+  onCreateFormFromFile = (t) => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowGallery = () => {
+  onShowGallery = (t) => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     const { oformsFilter } = this.oformsStore;
 
     const initOformFilter = (
@@ -2343,7 +2359,7 @@ class ContextOptionsStore {
       className: "main-button_drop-down_sub",
       icon: FormGalleryReactSvgUrl,
       label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowGallery(),
+      onClick: () => this.onShowGallery(t),
       key: "form-file",
     };
 
@@ -2489,7 +2505,7 @@ class ContextOptionsStore {
       key: "new-form",
       label: t("Translations:SubNewForm"),
       icon: FormBlankReactSvgUrl,
-      onClick: () => this.onCreate("pdf"),
+      onClick: () => this.onCreate("pdf", t),
     };
 
     const createTemplateNewFormFile = {
@@ -2497,7 +2513,7 @@ class ContextOptionsStore {
       key: "new-form-file",
       label: t("Translations:SubNewFormFile"),
       icon: FormFileReactSvgUrl,
-      onClick: this.onCreateFormFromFile,
+      onClick: () => this.onCreateFormFromFile(t),
       disabled: isPrivacyFolder,
     };
 
@@ -2506,7 +2522,7 @@ class ContextOptionsStore {
       key: "new-form-file",
       label: t("Translations:SubNewFormFile"),
       icon: FormFileReactSvgUrl,
-      onClick: this.onCreateFormFromFile,
+      onClick: () => this.onCreateFormFromFile(t),
       disabled: isPrivacyFolder,
     };
 
@@ -2515,7 +2531,7 @@ class ContextOptionsStore {
       key: "oforms-gallery",
       label: t("Common:OFORMsGallery"),
       icon: FormGalleryReactSvgUrl,
-      onClick: () => this.onShowGallery(),
+      onClick: () => this.onShowGallery(t),
       disabled: isPrivacyFolder,
     };
 

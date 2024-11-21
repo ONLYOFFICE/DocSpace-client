@@ -119,6 +119,7 @@ export type TEmitEventsDataMap = {
   [SocketCommands.Subscribe]: TSubscribeEmitData;
   [SocketCommands.Unsubscribe]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
+  [SocketCommands.RestoreBackup]: never;
 };
 
 /**

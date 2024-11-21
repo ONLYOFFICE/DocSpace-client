@@ -241,6 +241,7 @@ class SettingsStore {
   buildVersionInfo = {
     docspace: version,
     documentServer: "6.4.1",
+    releaseDate: "",
   };
 
   debugInfo = false;
@@ -969,10 +970,23 @@ class SettingsStore {
   };
 
   setBuildVersionInfo = (versionInfo: TVersionBuild) => {
+    // its release date 3.0.0 for SAAS version
+    const saasV3ReleaseDate = "2024-11-23";
+
+    let releaseDate = this.standalone
+      ? localStorage.getItem(`${versionInfo.docSpace}-release-date`)
+      : new Date(saasV3ReleaseDate).toString();
+
+    if (!releaseDate) {
+      releaseDate = new Date().toString();
+      localStorage.setItem(`${versionInfo.docSpace}-release-date`, releaseDate);
+    }
+
     this.buildVersionInfo = {
       ...this.buildVersionInfo,
       docspace: version,
       ...versionInfo,
+      releaseDate,
     };
 
     if (!this.buildVersionInfo.documentServer)

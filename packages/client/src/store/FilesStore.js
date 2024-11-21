@@ -2252,7 +2252,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || (shouldFillForm && canFillForm)) {
+      if (!isPdf || (shouldFillForm && canFillForm) || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 

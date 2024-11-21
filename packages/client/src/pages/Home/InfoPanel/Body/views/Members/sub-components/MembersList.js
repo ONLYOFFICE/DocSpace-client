@@ -50,6 +50,10 @@ const MainStyles = styled.div`
     padding: 0;
     z-index: 1;
     background: ${(props) => props.theme.infoPanel.backgroundColor};
+
+    @media ${mobile} {
+      padding-inline-end: 16px;
+    }
   }
 `;
 

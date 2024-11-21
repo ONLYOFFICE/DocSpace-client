@@ -559,11 +559,11 @@
   "VirtualDataRoomDescription": "高度なファイルセキュリティと透明性のためにVDRを使用する。透かしを設定し、すべてのコンテンツを自動的にインデックス化して追跡し、ダウンロードとコピーを制限する。",
   "WantToContinue": "このまま続けますか?",
   "Warning": "警告",
+  "WarningCopyToFormRoom": "このルームにファイルをコピーできません。{{organizationName}} PDFフォームをコピーしてみてください。",
   "Website": "ウェブサイト",
   "WithoutIcon": "アイコンなし",
   "Years": "年",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた",
-  "WarningCopyToFormRoom": "このルームにファイルをコピーできません。{{organizationName}} PDFフォームをコピーしてみてください。"
+  "You": "あなた"
 }

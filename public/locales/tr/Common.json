@@ -561,11 +561,11 @@
   "VirtualDataRoomDescription": "Gelişmiş dosya güvenliği ve şeffaflık için VDR kullanın. Filigranlar ayarlayın, tüm içerikleri otomatik olarak dizinleyin ve izleyin, indirme ve kopyalamayı kısıtlayın.",
   "WantToContinue": "Devam etmek istediğinize emin misiniz?",
   "Warning": "Uyarı",
+  "WarningCopyToFormRoom": "Dosya bu odaya kopyalanamıyor. Lütfen {{organizationName}} PDF formunu kopyalamayı deneyin.",
   "Website": "İnternet Sitesi",
   "WithoutIcon": "Simge olmadan",
   "Years": "Yıl",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz",
-  "WarningCopyToFormRoom": "Dosya bu odaya kopyalanamıyor. Lütfen {{organizationName}} PDF formunu kopyalamayı deneyin."
+  "You": "Siz"
 }

@@ -562,11 +562,11 @@
   "VirtualDataRoomDescription": "Gebruik VDR voor geavanceerde bestandsbeveiliging en transparantie. Stel watermerken in, indexeer en volg automatisch al het materiaal, beperk het downloaden en kopiëren.",
   "WantToContinue": "Weet u zeker dat u door wilt gaan?",
   "Warning": "Waarschuwing",
+  "WarningCopyToFormRoom": "Het bestand kan niet naar deze kamer worden gekopieerd. Probeer het {{organizationName}} PDF formulier te kopiëren.",
   "Website": "Website",
   "WithoutIcon": "Zonder icoon",
   "Years": "Jaren",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U",
-  "WarningCopyToFormRoom": "Het bestand kan niet naar deze kamer worden gekopieerd. Probeer het {{organizationName}} PDF formulier te kopiëren."
+  "You": "U"
 }

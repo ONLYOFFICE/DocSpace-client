@@ -566,11 +566,11 @@
   "VirtualDataRoomDescription": "Folosiți CVD pentru a oferi securitatea și transparență avansată a fișierelor. Adăugați incripționări, indexați și urmăriți conținutul, restricționați încărcarea și copierea.",
   "WantToContinue": "Sigur doriţi să continuați?",
   "Warning": "Avertisment",
+  "WarningCopyToFormRoom": "Imposibil de copiat fișierul în acestă sală. Încercați să copiați formularul PDF {{organizationName}}.",
   "Website": "Pagină web",
   "WithoutIcon": "Nicio pictogramă",
   "Years": "Ani",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs",
-  "WarningCopyToFormRoom": "Imposibil de copiat fișierul în acestă sală. Încercați să copiați formularul PDF {{organizationName}}."
+  "You": "Dvs"
 }

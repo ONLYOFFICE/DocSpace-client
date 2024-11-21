@@ -565,11 +565,11 @@
   "VirtualDataRoomDescription": "Koristite VDR za naprednu sigurnost i transparentnost fajlova. Postavite vodene žigove, automatski indeksirajte i pratite sav sadržaj, ograničite preuzimanje i kopiranje.",
   "WantToContinue": "Da li ste sigurni da želite da nastavite?",
   "Warning": "Upozorenje",
+  "WarningCopyToFormRoom": "Fajl ne može biti kopiran u ovu sobu. Pokušajte da kopirate {{organizationName}} PDF obrazac.",
   "Website": "Vebsajt",
   "WithoutIcon": "Bez ikone",
   "Years": "Godine",
   "Yes": "Da",
   "Yesterday": "Juče",
-  "You": "Vi",
-  "WarningCopyToFormRoom": "Fajl ne može biti kopiran u ovu sobu. Pokušajte da kopirate {{organizationName}} PDF obrazac."
+  "You": "Vi"
 }

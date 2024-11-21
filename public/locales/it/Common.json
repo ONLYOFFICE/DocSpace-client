@@ -566,11 +566,11 @@
   "VirtualDataRoomDescription": "Utilizza la VDR per la sicurezza e la trasparenza avanzate dei file. Imposta filigrane, indicizza e traccia automaticamente tutti i contenuti, limita il download e la copia.",
   "WantToContinue": "Sei sicuro di voler continuare?",
   "Warning": "Avviso",
+  "WarningCopyToFormRoom": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare un modulo PDF {{organizationName}} alla volta.",
   "Website": "Sito web",
   "WithoutIcon": "Senza icona",
   "Years": "Anni",
   "Yes": "Sì",
   "Yesterday": "Ieri",
-  "You": "Tu",
-  "WarningCopyToFormRoom": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare un modulo PDF {{organizationName}} alla volta."
+  "You": "Tu"
 }

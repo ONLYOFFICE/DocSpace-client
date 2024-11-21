@@ -554,6 +554,7 @@
   "VirtualDataRoomDescription": "Käytä VDR:ää parantaaksesi tiedostojen suojausta ja läpinäkyvyyttä. Aseta vesileimat, indeksoi ja seuraa kaikkea sisältöä automaattisesti sekä rajoita lataamista ja kopiointia.",
   "WantToContinue": "Haluatko varmasti jatkaa?",
   "Warning": "Varoitus",
+  "WarningCopyToFormRoom": "Tiedostoa ei voi kopioida tähän huoneeseen. Ole hyvä ja kopioi {{organizationName}} PDF-lomake.",
   "Website": "Sivusto",
   "WithoutIcon": "Ilman kuvaketta",
   "Years": "Vuosia",

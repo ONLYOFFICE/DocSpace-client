@@ -194,7 +194,6 @@
   "WantLeaveRoom": "Opravdu chcete opustit tuto místnost? Budete se do ní moci znovu připojit prostřednictvím nového pozvání od správce místnosti.",
   "WantToRestoreTheRoom": "Všechny externí odkazy v této místnosti se stanou aktivními a její obsah bude dostupný všem, kteří na ni odkazují. Chcete místnost obnovit?",
   "WantToRestoreTheRooms": "Všechny externí odkazy v obnovených místnostech se stanou aktivními a jejich obsah bude dostupný všem, kteří mají odkazy na místnosti. Chcete místnosti obnovit?",
-  "WarningCopyToFormRoom": "Do této místnosti nelze soubor zkopírovat. Zkuste prosím zkopírovat {{ organizationName }} PDF formulář.",
   "WarningCopyToFormRoomServal": "Kopírování více souborů do místnosti pro vyplňování formulářů není podporováno. Kopírujte PDF formuláře {{ organizationName }} po jednom.",
   "WarningCreationFormRoom": "Vytváření na základě několika souborů a složek není pro tento typ místnosti k dispozici. Chcete-li takovou místnost vytvořit, přejděte do části Místnosti nebo použijte některý z formulářů PDF.",
   "WarningMoveToFormRoom": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.",

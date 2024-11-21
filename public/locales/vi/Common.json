@@ -560,6 +560,7 @@
   "VirtualDataRoom": "Phòng Dữ Liệu Ảo (VDR)",
   "WantToContinue": "Bạn có muốn tiếp tục?",
   "Warning": "Cảnh báo",
+  "WarningCopyToFormRoom": "Không thể sao chép tập tin vào phòng này. Xin hãy thử sao chép biểu mẫu PDF {{organizationName}}.",
   "Website": "Website",
   "WithoutIcon": "Không có biểu tượng",
   "Years": "Năm",

@@ -554,6 +554,7 @@
   "VirtualDataRoomDescription": "VDR을 사용하여 문서를 단계별로 작성하고 서명하는 동안 고급 파일 보안 및 투명성을 확보하세요. 워터마크를 설정하고, 모든 콘텐츠를 자동으로 인덱싱하고 추적하며, 다운로드 및 복사를 제한하세요. ",
   "WantToContinue": "정말로 계속하시겠어요?",
   "Warning": "경고",
+  "WarningCopyToFormRoom": "파일을 이 룸으로 복사할 수 없습니다. {{organizationName}} PDF 양식을 복사해 보세요.",
   "Website": "웹사이트",
   "WithoutIcon": "아이콘 없이",
   "Years": "년",

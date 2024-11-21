@@ -554,6 +554,7 @@
   "VirtualDataRoomDescription": "Použijte VDR pro pokročilé zabezpečení a transparentnost souborů. Nastavte vodoznaky, automaticky indexujte a sledujte veškerý obsah, omezte stahování a kopírování.",
   "WantToContinue": "Jste si jistý, že chcete pokračovat?",
   "Warning": "Varování",
+  "WarningCopyToFormRoom": "Do této místnosti nelze soubor zkopírovat. Zkuste prosím zkopírovat {{organizationName}} PDF formulář.",
   "Website": "Webová stránka",
   "WithoutIcon": "Bez ikony",
   "Years": "Roky",

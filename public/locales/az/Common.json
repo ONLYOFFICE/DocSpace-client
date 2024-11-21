@@ -558,6 +558,7 @@
   "VirtualDataRoomDescription": "Sənədləri addım-addım doldurub imzalayarkən təkmilləşdirilmiş fayl təhlükəsizliyi və şəffaflıq üçün VDR-dən istifadə edin. Su nişanlarını təyin edin, bütün məzmunu avtomatik indeksləşdirib izləyin, yükləmə və kopyalamağı məhdudlaşdırın.",
   "WantToContinue": "Davam etmək istədiyinizə əminsiniz?",
   "Warning": "Xəbərdarlıq",
+  "WarningCopyToFormRoom": "Fayl bu otağa nüsxələnə bilməz. {{organizationName}} PDF formasını nüsxələməyə cəhd edin.",
   "Website": "Veb-sayt",
   "WithoutIcon": "İkonasız",
   "Years": "İllər",

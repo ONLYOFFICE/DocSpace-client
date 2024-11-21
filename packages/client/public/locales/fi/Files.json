@@ -194,7 +194,6 @@
   "WantLeaveRoom": "Haluatko todella poistua tästä huoneesta? Voit liittyä siihen uudelleen huoneen järjestelmänvalvojan lähettämän uuden kutsun kautta. ",
   "WantToRestoreTheRoom": "Kaikki ulkoiset linkit tässä huoneessa tulevat aktiivisiksi ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko palauttaa huoneen?",
   "WantToRestoreTheRooms": "Kaikki ulkoiset linkit palautetuista huoneissa tulevat aktiivisiksi ja niiden sisältö saataville kaikille, joilla on huoneen linkit. Haluatko palauttaa huoneet?",
-  "WarningCopyToFormRoom": "Tiedostoa ei voi kopioida tähän huoneeseen. Ole hyvä ja kopioi {{ organizationName }} PDF-lomake.",
   "WarningCopyToFormRoomServal": "Useiden tiedostojen kopiointia lomakkeentäyttöhuoneeseen ei tueta. Kopioi yksi {{ organizationName }} PDF-lomake kerrallaan. ",
   "WarningCreationFormRoom": "Useisiin tiedostoihin ja kansioihin perustuva luonti ei ole käytössä tämäntyyppisessä huoneessa. Kopioi yksi {{ organizationName }} PDF-lomake kerrallaan.",
   "WarningMoveToFormRoom": "Tiedostoa ei voi kopioida tähän huoneeseen. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake. ",

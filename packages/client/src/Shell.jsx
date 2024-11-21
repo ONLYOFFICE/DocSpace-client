@@ -443,8 +443,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     if (isFrame) return setShowGuestReleaseTip(false);
 
-    console.log(isAdmin, isOwner);
-
     if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
 
     const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);

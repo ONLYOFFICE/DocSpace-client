@@ -27,6 +27,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
+import { ReactSVG } from "react-svg";
 
 import {
   ModalDialog,
@@ -39,6 +40,7 @@ import { LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TUser } from "@docspace/shared/api/people/types";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import NextStepSvg from "PUBLIC_DIR/images/next_step.react.svg";
 import ChangeTypeTipSvgUrl from "PUBLIC_DIR/images/change_type.tip.svg?url";
@@ -52,7 +54,6 @@ import {
   StyledHeader,
   StyledBody,
 } from "./GuestReleaseTip.styled";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 type GuestReleaseTipProps = {
   userId: TUser["id"];
@@ -149,7 +150,7 @@ const GuestReleaseTip = ({
             </ColorTheme>
           </StyledBody>
 
-          <img src={icon} alt="tip" />
+          <ReactSVG src={icon} alt="tip" />
 
           <Button
             primary

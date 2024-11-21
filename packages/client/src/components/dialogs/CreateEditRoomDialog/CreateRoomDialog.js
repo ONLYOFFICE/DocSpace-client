@@ -32,7 +32,6 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -128,9 +127,17 @@ const CreateRoomDialog = ({
    * @param {React.FormEvent<HTMLFormElement>} event
    */
   const handleSubmit = (event) => {
-    const value = event.currentTarget.tagInput?.value;
+    /**
+     * @type {HTMLInputElement=}
+     */
+    const tagInput = event.currentTarget.tagInput;
 
-    if (!isNullOrUndefined(value) && value.length === 0) onCreateRoom();
+    if (!tagInput) onCreateRoom();
+
+    const value = tagInput.value ?? "";
+    const hasFocus = tagInput === document.activeElement;
+
+    if ((hasFocus && value.length === 0) || !hasFocus) onCreateRoom();
   };
 
   const goBack = () => {

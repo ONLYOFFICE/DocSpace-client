@@ -191,8 +191,8 @@ class UsersStore {
             ? "users"
             : "groups";
 
-      if (!SocketHelper.socketSubscribers.has(roomParts))
-        SocketHelper.emit(SocketCommands.Subscribe, {
+      if (SocketHelper.socketSubscribers.has(roomParts))
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
           roomParts,
         });
     }

@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
 import { ChangeQuotaDialog } from "../dialogs";
 
@@ -41,7 +42,6 @@ const ChangeQuotaEvent = (props) => {
     bodyDescription,
     headerTitle,
     onClose,
-    setCustomUserQuota,
     setCustomRoomQuota,
     successCallback,
     abortCallback,
@@ -64,8 +64,8 @@ const ChangeQuotaEvent = (props) => {
 
   const updateFunction = (size) => {
     return type === "user"
-      ? setCustomUserQuota(size, ids)
-      : setCustomRoomQuota(size, ids, inRoom);
+      ? api.people.setCustomUserQuota(ids, size)
+      : setCustomRoomQuota(ids, size, inRoom);
   };
   const onSaveClick = async () => {
     if (!size || size.trim() === "") {
@@ -135,8 +135,7 @@ export default inject(
     { type },
   ) => {
     const { usersStore } = peopleStore;
-    const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
-      usersStore;
+    const { getPeopleListItem, needResetUserSelection } = usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
     const {
@@ -150,7 +149,6 @@ export default inject(
       type === "user" ? needResetUserSelection : needResetFilesSelection;
 
     return {
-      setCustomUserQuota,
       setCustomRoomQuota,
       inRoom,
       setNewInfoPanelSelection,

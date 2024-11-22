@@ -32,6 +32,7 @@ import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
 import { StyledBody, StyledText } from "./StyledComponent";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
@@ -125,7 +126,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota(-1, [item.id], inRoom);
+        const items = await updateQuota([item.id], -1, inRoom);
 
         options.map((item) => {
           if (item.key === "no-quota") item.label = t("Common:Unlimited");
@@ -216,12 +217,8 @@ export default inject(
     { type },
   ) => {
     const { usersStore } = peopleStore;
-    const {
-      setCustomUserQuota,
-      resetUserQuota,
-      needResetUserSelection,
-      setSelected: setUsersSelected,
-    } = usersStore;
+    const { needResetUserSelection, setSelected: setUsersSelected } =
+      usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
@@ -242,9 +239,10 @@ export default inject(
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota =
-      type === "user" ? setCustomUserQuota : setCustomRoomQuota;
+      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
 
-    const resetQuota = type === "user" ? resetUserQuota : resetRoomQuota;
+    const resetQuota =
+      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
 
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;

@@ -422,24 +422,6 @@ class UsersStore {
     return removedGuests;
   };
 
-  setCustomUserQuota = async (
-    quotaSize: string | number,
-    userIds: string[],
-  ) => {
-    const updatedUsers = await api.people.setCustomUserQuota(
-      userIds,
-      +quotaSize,
-    );
-
-    return updatedUsers;
-  };
-
-  resetUserQuota = async (userIds: string[]) => {
-    const updatedUsers = await api.people.resetUserQuota(userIds);
-
-    return updatedUsers;
-  };
-
   updateProfileInUsers = async (updatedProfile?: TUser) => {
     const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {

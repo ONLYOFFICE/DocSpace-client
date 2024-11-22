@@ -104,7 +104,7 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
-      location: Location;
+      location: Location & { state: object };
     };
     logs: {
       socket: string[];

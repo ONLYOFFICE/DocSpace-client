@@ -3118,7 +3118,9 @@ class FilesActionStore {
         ];
       }, []);
 
-      await changeIndex(items);
+      if (items.length > 0) {
+        await changeIndex(items);
+      }
     } catch (e) {
       toastr.error(t("Files:ErrorChangeIndex"));
     }

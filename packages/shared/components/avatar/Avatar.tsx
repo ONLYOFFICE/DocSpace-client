@@ -189,7 +189,8 @@ const AvatarPure = ({
     if (onClick) onClick(e);
   };
 
-  const onUploadClick = () => {
+  const onUploadClick = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (!onChangeFile) return;
     const menu = model[0];
     menu.onClick(inputFilesElement);

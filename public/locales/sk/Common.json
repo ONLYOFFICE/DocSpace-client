@@ -562,6 +562,7 @@
   "VirtualDataRoomDescription": "Používajte VDM na pokročilé zabezpečenie a transparentnosť súborov. Nastavte vodoznaky, automaticky indexujte a sledujte všetok obsah, obmedzte sťahovanie a kopírovanie.",
   "WantToContinue": "Ste si istý, že chcete pokračovať?",
   "Warning": "Upozornenie",
+  "WarningCopyToFormRoom": "Súbor nie je možné skopírovať do tejto miestnosti. Pokúste sa skopírovať {{organizationName}} PDF formulár.",
   "Website": "Web stránka",
   "WithoutIcon": "Bez ikony",
   "Years": "Roky",

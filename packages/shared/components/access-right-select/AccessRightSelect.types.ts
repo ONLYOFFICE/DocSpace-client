@@ -57,4 +57,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   selectionErrorText?: React.ReactNode;
   availableAccess?: number[];
   topSpace?: number;
+  modernView?: boolean;
 };

@@ -285,8 +285,8 @@ const StyledTableRow = styled(TableRow)`
     ${(props) =>
       props.isIndexing &&
       css`
-        margin-left: 0px;
-        padding-left: 0px;
+        margin-inline-start: 0px;
+        padding-inline-start: 0px;
       `}
   }
 
@@ -294,13 +294,13 @@ const StyledTableRow = styled(TableRow)`
     props.isIndexing &&
     css`
       .table-container_file-name-cell {
-        margin-left: 0px !important;
-        padding-left: 0px !important;
+        margin-inline-start: 0px !important;
+        padding-inline-start: 0px !important;
       }
       &:hover {
         .table-container_file-name-cell {
-          margin-left: 0px !important;
-          padding-left: 0px !important;
+          margin-inline-start: 0px !important;
+          padding-inline-start: 0px !important;
         }
 
         ${indexHoverStyles}

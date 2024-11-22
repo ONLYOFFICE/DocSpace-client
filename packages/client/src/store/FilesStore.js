@@ -1243,6 +1243,8 @@ class FilesStore {
         return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
         return roomType === RoomsType.PublicRoom;
+      case `room-${RoomsType.VirtualDataRoom}`:
+        return roomType === RoomsType.VirtualDataRoom;
       default:
         return false;
     }
@@ -1648,7 +1650,7 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
-            let shared, quotaLimit, usedSpace;
+            let shared, quotaLimit, usedSpace, external;
             if (idx === 1) {
               let room = data.current;
 
@@ -1656,11 +1658,22 @@ class FilesStore {
                 room = await api.files.getFolderInfo(folderId);
 
                 shared = room.shared;
+                external = room.external;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
                 this.infoPanelStore.setInfoPanelRoom(room);
               } else {
                 const newInfoPanelSelection = this.getFilesListItems([room]);
+
+                if (
+                  !newInfoPanelSelection[0].isFolder &&
+                  !newInfoPanelSelection[0].isRoom &&
+                  data.current.rootFolderType === FolderType.USER &&
+                  this.selectedFolderStore.isFolder
+                ) {
+                  newInfoPanelSelection[0].isFolder = true;
+                }
+
                 this.infoPanelStore.updateInfoPanelSelection(
                   newInfoPanelSelection[0],
                 );
@@ -1679,6 +1692,7 @@ class FilesStore {
               roomType,
               isRootRoom,
               shared,
+              external,
               quotaLimit,
               usedSpace,
             };
@@ -2238,7 +2252,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || (shouldFillForm && canFillForm)) {
+      if (!isPdf || (shouldFillForm && canFillForm) || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
@@ -3662,7 +3676,8 @@ class FilesStore {
         elem !== `room-${RoomsType.ReviewRoom}` &&
         elem !== `room-${RoomsType.FormRoom}` &&
         elem !== `room-${RoomsType.ReadOnlyRoom}` &&
-        elem !== `room-${RoomsType.PublicRoom}`,
+        elem !== `room-${RoomsType.PublicRoom}` &&
+        elem !== `room-${RoomsType.VirtualDataRoom}`,
     );
 
     if (hasFiles) cbMenu.push(FilterType.FilesOnly);
@@ -3706,6 +3721,8 @@ class FilesStore {
         return t("Common:ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
         return t("Common:PublicRoomLabel");
+      case `room-${RoomsType.VirtualDataRoom}`:
+        return t("Common:VirtualDataRoom");
 
       default:
         return "";
@@ -3744,6 +3761,9 @@ class FilesStore {
         return "selected-only-view-rooms";
       case `room-${RoomsType.PublicRoom}`:
         return "selected-only-public-rooms";
+      case `room-${RoomsType.VirtualDataRoom}`:
+        return "selected-only-vdr-rooms";
+
       default:
         return "";
     }

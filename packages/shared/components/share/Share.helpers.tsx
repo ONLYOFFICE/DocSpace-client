@@ -261,6 +261,26 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
   }
 };
 
+export const getRoleNameByAccessRight = (
+  access: ShareAccessRights,
+  t: TTranslation,
+) => {
+  switch (access) {
+    case ShareAccessRights.Editing:
+      return t("Common:Editor");
+    case ShareAccessRights.Review:
+      return t("Translations:RoleReviewer");
+    case ShareAccessRights.Comment:
+      return t("Common:Commentator");
+    case ShareAccessRights.ReadOnly:
+      return t("JavascriptSdk:Viewer");
+    case ShareAccessRights.FormFilling:
+      return t("Translations:RoleFormFiller");
+    default:
+      return "";
+  }
+};
+
 export const getTranslationDate = (
   expirationDate: TFileLink["sharedTo"]["expirationDate"],
   t: TTranslation,
@@ -292,12 +312,14 @@ export const getTranslationDate = (
 
 export const canShowManageLink = (
   item: TFile | TFolder,
-  buffer: TFile | TFolder,
+  buffer: TFile | TFolder | null,
   infoPanelVisible: boolean,
   infoPanelView: string,
   isRoom: boolean = false,
 ): boolean => {
   if (isFolder(item) && !item.security.EditAccess) return false;
+
+  if (!buffer) return true;
 
   const isEqual =
     item.id === buffer.id &&
@@ -322,7 +344,7 @@ export const copyRoomShareLink = (
 ) => {
   const { password, shareLink, expirationDate, denyDownload } = link.sharedTo;
   const hasPassword = Boolean(password);
-  const role = getNameAccess(link.access, t).toLowerCase();
+  const role = getRoleNameByAccessRight(link.access, t).toLowerCase(); //
 
   if (!role) return;
   if (withCopy) copy(shareLink);

@@ -7,6 +7,7 @@
   "CreatingPortal": "Yeni {{productName}} yaradılır",
   "CurrentSpace": "Cari sahə",
   "DeleteEmptyPortalText": "<1>{{domain}}</1> domenini həmişəlik siləcəksiniz. Bu əməliyyat geri qaytarıla bilməz.",
+  "DeleteRequestSuccess": "Silinmə sorğusu uğurla {{productName}} adlı istifadəçinin <1>{{email}}</1> e-poçt ünvanına göndərildi",
   "DeleteWarning": "Sonuncu tam giriş domeni silinə bilməz",
   "DomainName": "Domen adı",
   "DomainNotFound": "Domen adı tapılmadı, zəhmət olmasa, DNS parametrlərini yoxlayın",

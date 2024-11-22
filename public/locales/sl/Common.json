@@ -561,6 +561,7 @@
   "VirtualDataRoomDescription": "Uporabite VDR za napredno varnost in preglednost datotek. Nastavite vodne žige, samodejno indeksirajte in sledite vsebini, omejite nalaganje in kopiranje.",
   "WantToContinue": "Ali ste prepričani, da želite nadaljevati?",
   "Warning": "Opozorilo",
+  "WarningCopyToFormRoom": "Datoteke ni mogoče kopirati v to sobo. Poskusite kopirati obrazec PDF {{organizationName}}.",
   "Website": "Spletna stran",
   "WithoutIcon": "Brez ikone",
   "Years": "Let",

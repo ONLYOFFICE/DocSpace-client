@@ -33,7 +33,7 @@ import type {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import type { Nullable } from "@docspace/shared/types";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
@@ -102,7 +102,11 @@ export type EmptyViewContainerProps = OutEmptyViewContainerProps &
 export type OptionActions = {
   navigate: NavigateFunction;
   inviteUser: VoidFunction;
-  onCreate: (extension: ExtensionType, withoutDialog?: boolean) => void;
+  onCreate: (
+    extension: ExtensionType,
+    withoutDialog?: boolean,
+    t?: TTranslation,
+  ) => void;
   uploadFromDocspace: (
     filterParam: FilesSelectorFilterTypes | FilterType,
     openRoot?: boolean,

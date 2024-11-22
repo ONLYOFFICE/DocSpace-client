@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Chcete-li zakoupit licenci, klikněte na tlačítko níže.",
   "ActivatePurchaseBuyNow": "Koupit teď",
   "ActivatePurchaseRenewLicense": "Chcete-li i nadále dostávat podporu a aktualizace, zakupte si obnovení.",
+  "ActivateRenewalDescr": "Chcete-li aktivovat již zakoupené obnovení, nahrajte jej níže a klikněte na tlačítko Aktivovat.",
   "ActivateRenewDescr": "Chcete-li získat osobní podmínky obnovení, kontaktujte svého specializovaného manažera nebo nám napište na <1>{{email}}</1>.",
   "ActivateRenewSubscriptionHeader": "Obnovení firemního předplatného {{license}}",
   "ActivateSwithToProHeader": "Přechod na plnou verzi {{license}}",

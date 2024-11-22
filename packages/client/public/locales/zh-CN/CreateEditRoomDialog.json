@@ -1,5 +1,5 @@
 {
-  "ActivationRequired": " 需要激活",
+  "ActivationRequired": "需要激活",
   "AddStaticText": "添加静态文本",
   "AddWatermarkElements": "添加水印元素",
   "AddWatermarksToDocuments": "添加水印到文档",
@@ -21,8 +21,9 @@
   "MakeRoomPrivateDescription": "此房间中的所有文件都将被加密。",
   "MakeRoomPrivateLimitationsWarningDescription": " 使用此功能，您只能邀请现有的{{productName}}用户。创建房间后，您将无法更改用户列表。",
   "MakeRoomPrivateTitle": "将房间设为私密",
-  "PeopleSelectorInfo": " 只有房间管理员或{{productName}}管理员才能成为房间的所有者",
+  "PeopleSelectorInfo": "只有房间管理员或{{productName}}管理员才能成为房间的所有者",
   "Position": "位置",
+  "PublicRoomBarDescription": "任何人都能通过此链接访问该房间。外部用户的访问权限取决于您的设置。",
   "PublicRoomSystemFoldersDescription": "不同完成阶段的表单副本存储在“系统”文件夹中。正在填写的表单存储在“处理中”文件夹中，填写完成的表单存储在“完成”文件夹中。",
   "PublicRoomSystemFoldersTitle": "系统文件夹",
   "RestrictCopyAndDownload": "限制复制和下载",

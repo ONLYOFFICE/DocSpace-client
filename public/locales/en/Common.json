@@ -227,11 +227,13 @@
   "GeneratePassword": "Generate password",
   "Gigabyte": "GB",
   "GoBack": "Go back",
+  "GotIt": "Got it",
   "Group": "Group",
   "Groups": "Groups",
   "GroupsNotFoundDescription": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
   "Guest": "Guest",
   "Guests": "Guests",
+  "Guide": "Guide",
   "HasFullAccess": "He has full access to the room",
   "HeadOfGroup": "Head of group",
   "HelpCenter": "Help Center",
@@ -566,11 +568,11 @@
   "VirtualDataRoomDescription": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "WantToContinue": "Are you sure you want to continue?",
   "Warning": "Warning",
+  "WarningCopyToFormRoom": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
   "Website": "Website",
   "WithoutIcon": "Without icon",
   "Years": "Years",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "Guide": "Guide"
+  "You": "You"
 }

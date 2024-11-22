@@ -491,7 +491,7 @@ class SocketHelper {
       return;
     }
 
-    addLog("[WS] on event: ${eventName}", "socket");
+    addLog(`[WS] on event: ${eventName}`, "socket");
 
     this.client.on(eventName, callback);
   };

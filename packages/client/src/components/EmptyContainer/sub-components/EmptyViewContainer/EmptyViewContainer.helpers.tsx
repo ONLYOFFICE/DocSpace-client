@@ -37,8 +37,8 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
@@ -227,10 +227,7 @@ export const getOptions = (
     description: t("EmptyView:SharePublicRoomOptionDescription"),
     icon: <SharedIcon />,
     key: "share-public-room",
-    onClick: () => {
-      actions.createAndCopySharedLink();
-      actions.openInfoPanel();
-    },
+    onClick: actions.createAndCopySharedLink,
     disabled: false,
   };
 
@@ -240,7 +237,7 @@ export const getOptions = (
     icon: <CreateNewFormIcon />,
     key: "create-doc-option",
     onClick: () => actions.onCreate("docx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
   const createSpreadsheet = {
     title: t("EmptyView:CreateSpreadsheet"),
@@ -248,7 +245,7 @@ export const getOptions = (
     icon: <CreateNewSpreadsheetIcon />,
     key: "create-spreadsheet-option",
     onClick: () => actions.onCreate("xlsx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
   const createPresentation = {
     title: t("EmptyView:CreatePresentation"),
@@ -256,16 +253,16 @@ export const getOptions = (
     icon: <CreateNewPresentation />,
     key: "create-presentation-option",
     onClick: () => actions.onCreate("pptx"),
-    disabled: false,
+    disabled: !security?.Create,
   };
 
   const createForm = {
     title: t("EmptyView:CreateForm"),
     description: t("EmptyView:CreateFormDescription"),
-    icon: <UploadPDFFormIcon />,
+    icon: <CreatePDFFormIcon />,
     key: "create-form-option",
-    onClick: () => actions.onCreate("pdf"),
-    disabled: false,
+    onClick: () => actions.onCreate("pdf", undefined, t),
+    disabled: !security?.Create,
   };
 
   const createRoom = {

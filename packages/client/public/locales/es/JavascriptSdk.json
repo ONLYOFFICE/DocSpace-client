@@ -81,6 +81,7 @@
   "MobileOnly": "solo dispositivos móviles",
   "Page": "Mostrar página (número)",
   "PortalDescription": "Incruste todo el {{productName}} para permitir a los usuarios interactuar con todas las salas, archivos y configuraciones.",
+  "PublicRoomPresetInfo": "Incruste una sala pública para que los usuarios puedan ver, editar, comentar o revisar todos los documentos almacenados en ella sin necesidad de registrarse.",
   "RightPanelCollapsed": "Panel derecho colapsado",
   "RoomFilter": "Filtro de salas",
   "RoomOrFolder": "Sala o carpeta",

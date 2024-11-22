@@ -50,6 +50,10 @@ const MainStyles = styled.div`
     padding: 0;
     z-index: 1;
     background: ${(props) => props.theme.infoPanel.backgroundColor};
+
+    @media ${mobile} {
+      padding-inline-end: 16px;
+    }
   }
 `;
 
@@ -178,14 +182,20 @@ const MembersList = (props) => {
     const headerTitle = header.children[0];
     const scrollOffset = e.target.scrollTop;
 
+    // First item is links header. Its size is different from link item size
+    const linksBlockHeight = linksBlockLength
+      ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
+      : 0;
+
     for (let titleIndex in listOfTitles) {
       const title = listOfTitles[titleIndex];
-      const titleOffsetTop = title.index * itemSize;
+      const titleOffsetTop =
+        linksBlockHeight + (title.index - linksBlockLength) * itemSize;
 
       if (scrollOffset > titleOffsetTop) {
         if (title.displayName) headerTitle.innerText = title.displayName;
         header.style.display = "flex";
-      } else if (scrollOffset <= linksBlockLength * itemSize) {
+      } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
     }

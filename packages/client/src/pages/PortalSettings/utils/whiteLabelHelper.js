@@ -42,7 +42,6 @@ export const generateLogo = (
   canvas.width = width;
   canvas.height = height;
 
-  console.log("isEditor", isEditor);
   const ctx = canvas.getContext("2d");
   const x = alignCenter ? width / 2 : isEditor ? 10 : 0;
   const y = (height - fontSize) / 2;
@@ -79,7 +78,7 @@ export const getLogoOptions = (index, text, width, height) => {
     case 2:
       return {
         fontSize,
-        text: text.trim().charAt(0),
+        text: Array.from(text)[0],
         width,
         height,
         alignCenter: true,
@@ -105,7 +104,7 @@ export const getLogoOptions = (index, text, width, height) => {
     case 5:
       return {
         fontSize,
-        text: text.trim().charAt(0),
+        text: Array.from(text)[0],
         width,
         height,
         alignCenter: true,

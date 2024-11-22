@@ -85,6 +85,8 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
+  setGuestReleaseTipDialogVisible,
+  showGuestReleaseTip,
 }) => {
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `public-room-bar-${selfId}`,
@@ -99,6 +101,10 @@ const Members = ({
   useEffect(() => {
     updateInfoPanelMembers(t);
   }, [infoPanelSelection, searchValue]);
+
+  useEffect(() => {
+    if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
+  }, [showGuestReleaseTip, setGuestReleaseTipDialogVisible]);
 
   useEffect(() => {
     if (isMembersPanelUpdating) return;
@@ -319,6 +325,7 @@ export default inject(
     treeFoldersStore,
     dialogsStore,
     infoPanelStore,
+    settingsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -336,7 +343,11 @@ export default inject(
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -352,6 +363,8 @@ export default inject(
 
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
+
+    const { showGuestReleaseTip } = settingsStore;
 
     return {
       infoPanelSelection: infoSelection,
@@ -377,6 +390,8 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
+      setGuestReleaseTipDialogVisible,
+      showGuestReleaseTip,
     };
   },
 )(

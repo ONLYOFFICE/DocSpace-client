@@ -1,10 +1,12 @@
 {
   "ChangeDomainDescription": "Zmiana nazwy domeny może spowodować awarię niektórych systemów. Po zmianie należy ponownie skonfigurować następujące parametry: e-mail, konto, parametry jabber.",
+  "CompleteSetup": "Zakończ konfigurację",
   "ConfigurationDescription": "Aby zmienić ustawienia adresu, należy połączyć domenę ze swoim bieżącym adresem IP. Upewnij się, że masz dostęp do ustawień domeny, aby móc to zrobić. Po połączeniu domeny utwórz nazwę {{productName}}. Możesz zmienić utworzoną nazwę {{productName}} później z poziomu ustawień obszaru.",
   "ConfigurationHeader": "Konfiguracja bieżącego obszaru",
   "CreateSpaceDescription": "Domena została pomyślnie połączona z Twoim adresem IP. Aby móc edytować ustawienia dresu obszaru, musisz skonfigurować przyszłą nazwę {{productName}}",
   "CreatingPortal": "Tworzenie nowego obszaru {{productName}}",
   "CurrentSpace": "Bieżący obszar",
+  "DeleteRequestSuccess": "Prośba o usunięcie została pomyślnie wysłana na adres e-mail właściciela {{productName}}: <1>{{email}}</1>",
   "DomainName": "Nazwa domeny",
   "DomainNotFound": "Nie znaleziono domeny, sprawdź ustawienia DNS",
   "DomainSettings": "Ustawienia domeny",
@@ -18,5 +20,6 @@
   "SettingsDisabled": "Ustawienia te staną się dostępne, gdy zostanie utworzony drugi obszar roboczy i zostaną zastosowane do wszystkich Twoich obszarów.",
   "SettingsForAll": "Ustawienia te zostaną zastosowane we wszystkich Twoich obszarach roboczych.",
   "Subheader": "Skorzystaj z tej sekcji, aby utworzyć kilka obszarów i udostępnić je swoim użytkownikom",
+  "SubmitDelete": "Prześlij prośbę o usunięcie",
   "VisitSpace": "Odwiedź ten obszar po utworzeniu"
 }

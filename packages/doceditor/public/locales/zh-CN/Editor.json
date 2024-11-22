@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "文档已转换为 {{title}} 以允许编辑",
   "DocumentsFileType": "文档",
   "ErrorConnectionLost": "已断开连接",
   "FileLocation": "打开文件的位置",

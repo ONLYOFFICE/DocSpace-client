@@ -280,13 +280,13 @@ const Navigation = ({
           )}
           <StyledContainer
             ref={containerRef}
-            width={context.sectionWidth || 0}
             isRootFolder={isRootFolder}
             isTrashFolder={isTrashFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
             withLogo={!!withLogo}
+            isFrame={isFrame}
             isPublicRoom={isPublicRoom}
             className="navigation-container"
             showNavigationButton={showNavigationButton}

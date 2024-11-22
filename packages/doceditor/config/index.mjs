@@ -32,7 +32,7 @@ nconf
   .env()
   .file("config", path.join(process.cwd(), "config", "config.json"));
 
-let appsettings = nconf.get("app").appsettings;
+let appsettings = nconf.get("app")?.appsettings;
 
 if (!path.isAbsolute(appsettings)) {
   appsettings = path.join(process.cwd(), appsettings);

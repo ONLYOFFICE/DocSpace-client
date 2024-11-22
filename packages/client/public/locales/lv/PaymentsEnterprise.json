@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Lai iegādātos licenci, noklikšķiniet uz zemāk esošās pogas.",
   "ActivatePurchaseBuyNow": "Pirkt tagad",
   "ActivatePurchaseRenewLicense": "Lai turpinātu saņemt atbalstu un atjauninājumus, iegādājieties atjaunošanu.",
+  "ActivateRenewalDescr": "Lai aktivizētu jau iegādāto atjaunošanu, augšupielādējiet to zemāk un noklikšķiniet uz pogas Aktivizēt.",
   "ActivateRenewDescr": "Lai uzzinātu savus personīgos atjaunošanas noteikumus, sazinieties ar savu īpašo pārvaldnieku šajā jomā vai rakstiet mums uz <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Atjaunojiet {{license}} abonementu",
   "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",

@@ -202,6 +202,9 @@ export const EmptyViewItemWrapper = styled.div`
 
   .ev-item__arrow-icon {
     flex: 0 0 12px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
   }
 
   @media (hover: hover) {

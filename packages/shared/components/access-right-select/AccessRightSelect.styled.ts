@@ -76,6 +76,7 @@ const StyledItem = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   align-content: center;
+  gap: 8px;
 
   padding: 7px 0px;
 
@@ -98,7 +99,7 @@ const StyledItemDescription = styled.div`
 StyledItemDescription.defaultProps = { theme: Base };
 
 const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
-  margin-inline-end: 8px;
+  /* margin-inline-end: 8px; */
 
   path[fill] {
     fill: ${(props) => props.theme.dropDownItem.icon.color};
@@ -108,8 +109,8 @@ const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
     isShortenIcon &&
     css`
       padding-top: 2px;
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
     `}
 `;
 

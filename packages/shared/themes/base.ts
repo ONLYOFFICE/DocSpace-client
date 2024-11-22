@@ -3270,6 +3270,12 @@ export const getBaseTheme = () => {
       backgroundColor: white,
       borderColor: grayLightMid,
     },
+
+    formFillingTips: {
+      circleColor: grayLightMid,
+      selectedColor: white,
+      circleBorder: `3px solid ${lightSecondMain}`,
+    },
   };
 };
 

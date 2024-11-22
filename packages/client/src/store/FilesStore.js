@@ -1668,7 +1668,7 @@ class FilesStore {
                 if (
                   !newInfoPanelSelection[0].isFolder &&
                   !newInfoPanelSelection[0].isRoom &&
-                  data.current.rootFolderId === FolderType.USER &&
+                  data.current.rootFolderType === FolderType.USER &&
                   this.selectedFolderStore.isFolder
                 ) {
                   newInfoPanelSelection[0].isFolder = true;

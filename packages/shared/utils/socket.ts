@@ -32,6 +32,7 @@ import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 import { TUser } from "../api/people/types";
+import { TGroup } from "../api/groups/types";
 
 import { addLog } from ".";
 
@@ -225,9 +226,9 @@ export type TListenEventCallbackMap = {
   [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
   [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
   [SocketEvents.DeleteUser]: (data: { id: string }) => void;
-  [SocketEvents.AddGroup]: (data: TOptSocket) => void;
-  [SocketEvents.UpdateGroup]: (data: TOptSocket) => void;
-  [SocketEvents.DeleteGroup]: (data: TOptSocket) => void;
+  [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.DeleteGroup]: (data: { id: string }) => void;
 };
 
 /**

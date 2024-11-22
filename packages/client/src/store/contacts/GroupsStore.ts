@@ -35,6 +35,7 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
@@ -92,6 +93,42 @@ class GroupsStore {
     this.dialogStore = dialogStore;
 
     makeAutoObservable(this);
+
+    SocketHelper.on(SocketEvents.AddGroup, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      runInAction(() => {
+        this.groups.push(data);
+        this.groupsFilter.total += 1;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.UpdateGroup, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.groups.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      runInAction(() => {
+        this.groups[idx] = data;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.DeleteGroup, (value) => {
+      const { id } = value;
+
+      const idx = this.groups.findIndex((x) => x.id === id);
+
+      runInAction(() => {
+        this.groups.splice(idx, 1);
+        this.groupsFilter.total -= 1;
+      });
+    });
   }
 
   setIsGroupsFetched = (isGroupsFetched: boolean) => {
@@ -222,7 +259,7 @@ class GroupsStore {
 
   setSelected = (selected: "all" | "none") => {
     const { hotkeyCaret, setHotkeyCaret } =
-      this.peopleStore.contactsHotkeysStore;
+      this.peopleStore.contactsHotkeysStore!;
 
     this.bufferSelection = null;
     this.selected = selected;

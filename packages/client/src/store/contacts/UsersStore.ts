@@ -104,6 +104,8 @@ class UsersStore {
 
   guestsTabVisited: boolean = false;
 
+  roomParts: string = "";
+
   constructor(
     public settingsStore: SettingsStore,
     public infoPanelStore: InfoPanelStore,
@@ -179,20 +181,18 @@ class UsersStore {
             ? "users"
             : "groups";
 
+      if (
+        SocketHelper.socketSubscribers.has(this.roomParts) &&
+        this.roomParts !== roomParts
+      )
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: this.roomParts,
+        });
+
+      this.roomParts = roomParts;
+
       if (!SocketHelper.socketSubscribers.has(roomParts))
         SocketHelper.emit(SocketCommands.Subscribe, {
-          roomParts,
-        });
-    } else {
-      const roomParts =
-        this.contactsTab === "guests"
-          ? `${this.userStore.user!.id}-guests`
-          : this.contactsTab === "people" || this.contactsTab === "inside_group"
-            ? "users"
-            : "groups";
-
-      if (SocketHelper.socketSubscribers.has(roomParts))
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
           roomParts,
         });
     }
@@ -375,11 +375,7 @@ class UsersStore {
     return updatedUsers;
   };
 
-  updateUserType = async (
-    type: EmployeeType,
-    userIds: string[],
-    filter: Filter = this.filter,
-  ) => {
+  updateUserType = async (type: EmployeeType, userIds: string[]) => {
     let toType = type ?? 0;
 
     switch (type) {

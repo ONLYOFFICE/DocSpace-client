@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "Tornar o quarto privado",
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "Position": "Posição",
+  "PublicRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. O acesso para usuários externos é fornecido de acordo com o tipo de direitos de acesso selecionado.",
   "PublicRoomSystemFoldersDescription": "As pastas do sistema armazenam cópias de formulários em diferentes estágios de preenchimento. Os formulários que estão sendo preenchidos são armazenados na pasta Em andamento e os formulários preenchidos são armazenados na pasta Concluído.",
   "PublicRoomSystemFoldersTitle": "Pastas do sistema",
   "RestrictCopyAndDownload": "Restringir cópia e download",

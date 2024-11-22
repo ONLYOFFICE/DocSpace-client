@@ -7,6 +7,7 @@
   "CreatingPortal": "创建新的{{productName}}",
   "CurrentSpace": "当前协作空间",
   "DeleteEmptyPortalText": "您将永久删除<1>{{domain}}</1>空间。此操作无法撤销。",
+  "DeleteRequestSuccess": "删除请求已成功发送至 {{productName}} 所有者的电子邮件地址<1>{{email}}</1>",
   "DeleteSetupPortalText": "您将永久删除<1>{{domain}}</1> 空间及其所有数据和帐户。删除 <1>{{domain}}</1> 的请求将发送到 {{productName}} 所有者的电子邮件地址 <1>{{email}}</1>",
   "DeleteWarning": "最后一个完全访问空间无法被删除",
   "DomainName": "域名",

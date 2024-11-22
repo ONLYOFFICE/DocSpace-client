@@ -31,6 +31,8 @@ import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { isLockedSharedRoom } from "@docspace/shared/utils";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
@@ -88,8 +90,19 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
+  const expired =
+    selection && "expired" in selection ? selection.expired : false;
+  const external =
+    selection && "external" in selection ? selection.external : false;
+
   const withTabs =
-    !isRoot && !isSeveralItems && !isGallery && !isContacts && !isTrash;
+    !isRoot &&
+    !isSeveralItems &&
+    !isGallery &&
+    !isContacts &&
+    !isTrash &&
+    !isLockedSharedRoom(selection as TRoom) &&
+    !(external && expired === true);
 
   const closeInfoPanel = () => setIsVisible(false);
 
@@ -100,7 +113,7 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Members"),
+    name: t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };

@@ -34,15 +34,14 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { Base } from "@docspace/shared/themes";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import { ThirdPartyServicesUrlName } from "@docspace/shared/constants";
-import { isDesktop } from "@docspace/shared/utils";
+import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
 
-const StyledStorageLocation = styled.div`
+const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
 
@@ -93,8 +92,6 @@ const StyledStorageLocation = styled.div`
     color: ${(props) => props.theme.dropDownItem.disableColor};
   }
 `;
-
-StyledStorageLocation.defaultProps = { theme: Base };
 
 const StyledComboBoxItem = styled.div`
   display: flex;

@@ -78,6 +78,7 @@ const ManualBackup = ({
   rootFoldersTitles,
   currentColorScheme,
   downloadingProgress,
+  isBackupProgressVisible,
 
   getProgress,
   fetchTreeFolders,
@@ -163,8 +164,7 @@ const ManualBackup = ({
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+      toastr.error(err as Error);
     }
   };
 
@@ -227,8 +227,7 @@ const ManualBackup = ({
       setTemporaryLink("");
       getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+      toastr.error(err as Error);
     }
   };
 
@@ -397,7 +396,7 @@ const ManualBackup = ({
         )}
       </StyledModules>
 
-      {downloadingProgress > 0 && downloadingProgress !== 100 && (
+      {isBackupProgressVisible && (
         <FloatingButton
           alert={false}
           percent={downloadingProgress}

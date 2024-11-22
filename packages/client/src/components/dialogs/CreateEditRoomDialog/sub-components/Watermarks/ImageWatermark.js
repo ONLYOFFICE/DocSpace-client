@@ -73,10 +73,10 @@ const scaleOptions = [
 
 const rotateOptions = [
   { key: 0, label: "0" },
-  { key: 30, label: "30" },
-  { key: 45, label: "45" },
-  { key: 60, label: "60" },
-  { key: 90, label: "90" },
+  { key: -30, label: "30" },
+  { key: -45, label: "45" },
+  { key: -60, label: "60" },
+  { key: -90, label: "90" },
 ];
 const getInitialScale = (scale, isEdit) => {
   if (!isEdit || !scale) return scaleOptions[0];
@@ -108,13 +108,23 @@ const ImageWatermark = ({
 
   const initialInfo = useRef(null);
   const imageUrl = initialSettings?.imageUrl;
-  const image = roomParams.watermark?.image;
+
+  let watermark = roomParams.watermark;
 
   if (initialInfo.current === null) {
     initialInfo.current = {
       rotate: getInitialRotate(initialSettings?.rotate, isEdit),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
+
+    if (isImage && initialSettings) watermark = initialSettings;
+    else
+      watermark = {
+        ...watermark,
+        additions: 0,
+        rotate: initialInfo.current.rotate.key,
+        scale: initialInfo.current.scale.key,
+      };
   }
 
   const initialInfoRef = initialInfo.current;
@@ -124,17 +134,6 @@ const ImageWatermark = ({
   const [selectedImageUrl, setImageUrl] = useState(imageUrl);
 
   const previewRef = useRef(null);
-
-  const watermark =
-    isImage && initialSettings
-      ? initialSettings
-      : {
-          rotate: selectedRotate.key,
-          imageScale: selectedScale.key,
-          additions: 0,
-          ...(selectedImageUrl && { imageUrl: selectedImageUrl }),
-          ...(image && { image }),
-        };
 
   useEffect(() => {
     setRoomParams({
@@ -257,6 +256,7 @@ const ImageWatermark = ({
           accept={["image/png", "image/jpeg"]}
           onInput={onInput}
           scale
+          isMultiple={false}
         />
       )}
 
@@ -305,7 +305,7 @@ const ImageWatermark = ({
                 options={[]}
                 selectedOption={{}}
               >
-                <div>{selectedScale.label}&#37;</div>
+                <div className="options">{selectedScale.label}&#37;</div>
               </ComboBox>
             </div>
             <div>
@@ -323,7 +323,7 @@ const ImageWatermark = ({
                 advancedOptionsCount={rotateOptions.length}
                 fillIcon={false}
               >
-                <div>{selectedRotate.label}&deg;</div>
+                <div className="options">{selectedRotate.label}&deg;</div>
               </ComboBox>
             </div>
           </div>

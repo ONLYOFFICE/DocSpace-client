@@ -28,8 +28,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
+import { isMobile } from "react-device-detect";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -111,9 +112,11 @@ export default function withFileActions(WrappedFileItem) {
       if (this.props.isIndexEditingMode) {
         if (
           e.target.closest(".change-index_icon") ||
-          e.target.querySelector(".change-index_icon")
-        )
+          e.target.querySelector(".change-index_icon") ||
+          isMobile
+        ) {
           return;
+        }
 
         setBufferSelection(item);
         setStartDrag(true);
@@ -322,13 +325,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const showPlanetIcon =
-        (item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.FormRoom ||
-          item.roomType === RoomsType.CustomRoom) &&
-        item.shared;
-
-      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+      const badgeUrl = getRoomBadgeUrl(item);
 
       return (
         <WrappedFileItem

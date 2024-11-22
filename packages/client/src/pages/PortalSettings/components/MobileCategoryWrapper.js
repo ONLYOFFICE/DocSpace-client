@@ -32,7 +32,6 @@ import styled, { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
-import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
@@ -128,10 +127,6 @@ const MobileCategoryWrapper = (props) => {
       <Text className="category-item-description">{subtitle}</Text>
     </StyledMobileCategoryWrapper>
   );
-};
-
-MobileCategoryWrapper.defaultProps = {
-  theme: Base,
 };
 
 export default MobileCategoryWrapper;

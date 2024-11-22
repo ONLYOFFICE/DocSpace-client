@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -42,6 +42,7 @@ import { Selector, TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
+import { toastr } from "../../components/toast";
 import {
   RowLoader,
   SearchLoader,
@@ -68,8 +69,6 @@ import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 
 const FilesSelectorComponent = ({
-  socketHelper,
-  socketSubscribers,
   disabledItems,
   filterParam,
 
@@ -116,6 +115,7 @@ const FilesSelectorComponent = ({
   infoBarData,
   headerProps,
   shareKey,
+  formProps,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -155,12 +155,13 @@ const FilesSelectorComponent = ({
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const afterSearch = React.useRef(false);
+  const currentSelectedItemId = React.useRef<undefined | number | string>(
+    undefined,
+  );
 
   const [isInit, setIsInit] = React.useState(true);
 
   const { subscribe, unsubscribe } = useSocketHelper({
-    socketHelper,
-    socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
@@ -191,6 +192,7 @@ const FilesSelectorComponent = ({
     getRootData,
     setSelectedItemType,
     subscribe,
+    setSelectedItemSecurity,
 
     searchValue,
     isRoomsOnly,
@@ -305,6 +307,13 @@ const FilesSelectorComponent = ({
       doubleClickCallback: () => Promise<void>,
     ) => {
       if (item.isFolder) {
+        if (isDoubleClick) return;
+
+        const isFormRoom = item.roomType === RoomsType.FormRoom;
+
+        if (isFormRoom && formProps?.isRoomFormAccessible === false)
+          return toastr.warning(formProps.message);
+
         setIsFirstLoad(true);
 
         // setItems([]);
@@ -350,7 +359,12 @@ const FilesSelectorComponent = ({
         }
       }
     },
-    [breadCrumbs, setIsFirstLoad],
+    [
+      breadCrumbs,
+      setIsFirstLoad,
+      formProps?.isRoomFormAccessible,
+      formProps?.message,
+    ],
   );
 
   React.useEffect(() => {
@@ -403,21 +417,31 @@ const FilesSelectorComponent = ({
     setIsFirstLoad,
   ]);
 
-  const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+  React.useEffect(() => {
+    currentSelectedItemId.current = selectedItemId;
+  }, [selectedItemId]);
+
+  const onSearchAction = (value: string, callback?: VoidFunction) => {
+    if (selectedItemId !== currentSelectedItemId.current) {
+      return;
+    }
+    setSearchValue(value);
+
+    callback?.();
+    afterSearch.current = true;
+  };
+
+  React.useEffect(() => {
+    if (!selectedItemType) return;
+
+    if (searchValue) {
       setIsFirstLoad(true);
       setItems([]);
-
-      setSearchValue(value);
-
-      callback?.();
-      afterSearch.current = true;
-    },
-    [setIsFirstLoad],
-  );
+    }
+  }, [searchValue, selectedItemType, setIsFirstLoad]);
 
   const onClearSearchAction = React.useCallback(
-    (callback?: Function) => {
+    (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);

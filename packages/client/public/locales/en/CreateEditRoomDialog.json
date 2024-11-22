@@ -23,7 +23,7 @@
   "MakeRoomPrivateTitle": "Make the Room Private",
   "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "Position": "Position",
-  "PublicRoomBarDescription": "This room is available to anyone with the link. External users will have View Only permission for all the files.",
+  "PublicRoomBarDescription": "This room is available to anyone with the link. Access for external users is provided depending on the selected type of access rights.",
   "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",
   "PublicRoomSystemFoldersTitle": "System Folders",
   "RestrictCopyAndDownload": "Restrict copy and download",

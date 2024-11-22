@@ -68,9 +68,9 @@ class PeopleStore {
 
   dialogStore: Nullable<DialogStore> = null;
 
-  contextOptionsStore: Nullable<ContactsConextOptionsStore> = null;
+  contextOptionsStore!: ContactsConextOptionsStore;
 
-  usersStore: Nullable<UsersStore> = null;
+  usersStore: UsersStore;
 
   constructor(
     public accessRightsStore: AccessRightsStore,

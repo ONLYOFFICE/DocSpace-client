@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme, TTheme, globalColors } from "../../../themes";
+import { TColorScheme, TTheme, globalColors } from "../../../themes";
 import StyledWrapper from "../sub-components/StyledWrapper";
+import { injectDefaultTheme } from "../../../utils";
 
 const getDefaultStyles = ({
   $currentColorScheme,
@@ -49,5 +50,6 @@ const getDefaultStyles = ({
       }
     }
   `;
-StyledWrapper.defaultProps = { theme: Base };
-export default styled(StyledWrapper)(getDefaultStyles);
+export default styled(StyledWrapper).attrs(injectDefaultTheme)(
+  getDefaultStyles,
+);

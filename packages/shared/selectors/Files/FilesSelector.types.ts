@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "../../components/selector";
 import {
   HeaderProps,
   TBreadCrumb,
@@ -36,13 +36,17 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import SocketIOHelper from "../../utils/socket";
 import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 
 export type TCreateDefineRoom = {
   label: string;
   type: RoomsType;
+};
+
+export type FormPropsType = {
+  message: string;
+  isRoomFormAccessible: boolean;
 };
 
 export interface UseRootHelperProps {
@@ -58,8 +62,6 @@ export interface UseRootHelperProps {
 }
 
 export type UseSocketHelperProps = {
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
@@ -88,7 +90,12 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  subscribe: (id: number) => string | number | undefined;
+  setSelectedItemSecurity: React.Dispatch<
+    React.SetStateAction<
+      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+    >
+  >;
+  subscribe: (id: number) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -153,8 +160,6 @@ export type FilesSelectorProps = TInfoBar &
       }
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
-    socketHelper: SocketIOHelper;
-    socketSubscribers: Set<string>;
     disabledItems: (string | number)[];
     filterParam?: string;
     withoutBackButton: boolean;
@@ -222,4 +227,5 @@ export type FilesSelectorProps = TInfoBar &
     withCreate: boolean;
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
+    formProps?: FormPropsType;
   };

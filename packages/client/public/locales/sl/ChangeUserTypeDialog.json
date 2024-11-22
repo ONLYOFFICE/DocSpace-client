@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> bo premaknjen v razdelek {{membersSection}} in dodeljen mu bo tip uporabnika. Uporabniki imajo svoj razdelek za {{documentsSection}}, lahko ustvarjajo in urejajo datoteke, ne morejo pa ustvarjati sob.",
+  "ChangeGuestsTypeMessageMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in dodeljen jim bo tip uporabnika. Uporabniki imajo svoj razdelek za {{documentsSection}}, lahko ustvarjajo in urejajo datoteke, ne morejo pa ustvarjati sob.",
   "ChangeUserTypeButton": "Spremeni tip",
   "ChangeUserTypeHeader": "Spremeni tip uporabnika",
   "ChangeUserTypeMessage": "Uporabniki tipa <strong>'{{ firstType }}'</strong> bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
   "ChangeUserTypeMessageMulti": "Izbrani uporabniki bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
   "ChangeUserTypeMessageWarning": "Za skrbnike {{productName}} in zase ne morete spremeniti vrste.",
+  "SuccessChangeGuestType": "Tip gosta je bil uspešno spremenjen",
   "SuccessChangeUserType": "Vrsta uporabnika je bila uspešno spremenjena"
 }

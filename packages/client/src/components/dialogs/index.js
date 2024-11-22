@@ -69,6 +69,7 @@ import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
+import GuestReleaseTipDialog from "./GuestReleaseTip";
 
 export {
   EmptyTrashDialog,
@@ -116,4 +117,5 @@ export {
   DeleteGroupDialog,
   RoomLogoCoverDialog,
   RemoveGuestDialog,
+  GuestReleaseTipDialog,
 };

@@ -32,19 +32,18 @@ import { Text } from "@docspace/shared/components/text";
 
 import { InputSize } from "@docspace/shared/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
-import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 import { Wrapper } from "../../StyledDataImport";
-
-import { parseQuota } from "../../../../utils/parseQuota";
 
 import {
   SelectUsersStepProps,
   InjectedSelectUsersStepProps,
 } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
+import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 
 const REFRESH_TIMEOUT = 100;
 const PAGE_SIZE = 25;
@@ -60,8 +59,6 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     withEmailUsers,
     searchValue,
     setSearchValue,
-    checkedUsers,
-    users,
     areCheckedUsersEmpty,
     setResultUsers,
     cancelMigration,
@@ -73,25 +70,17 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-
-    quotaCharacteristics,
+    totalUsedUsers,
+    quota,
   } = props as InjectedSelectUsersStepProps;
 
   const [dataPortion, setDataPortion] = useState(
     withEmailUsers.slice(0, PAGE_SIZE),
   );
-  const [quota, setQuota] = useState<{
-    used: number;
-    max: number | null;
-  }>({
-    used: 0,
-    max: 0,
-  });
 
   useEffect(() => {
     setSearchValue("");
-    setQuota(parseQuota(quotaCharacteristics[1]));
-  }, [quotaCharacteristics, setSearchValue]);
+  }, [setSearchValue]);
 
   const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
     setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));
@@ -105,20 +94,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     setSearchValue("");
   };
 
-  const filteredAccounts = dataPortion.filter(
-    (data) =>
-      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.displayName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
-  );
-
-  const numberOfSelectedUsers =
-    checkedUsers.withEmail.length + checkedUsers.withoutEmail.length;
-
-  const totalUsedUsers =
-    quota.used +
-    checkedUsers.withEmail.filter((user) => !user.isDuplicate).length +
-    checkedUsers.withoutEmail.length;
+  const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
 
   const handleStepIncrement = shouldSetUsers
     ? () => {
@@ -164,15 +140,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
         <>
           {Buttons}
 
-          {quota.max && (
-            <UsersInfoBlock
-              t={t}
-              totalUsedUsers={totalUsedUsers}
-              selectedUsers={numberOfSelectedUsers}
-              totalUsers={withEmailUsers.length + users.withoutEmail.length}
-              totalLicenceLimit={quota.max}
-            />
-          )}
+          <UsersInfoBlock />
 
           <SearchInput
             id="search-users-input"
@@ -220,51 +188,49 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
-    const {
-      incrementStep,
-      decrementStep,
-      users,
-      withEmailUsers,
-      searchValue,
-      setSearchValue,
-      cancelMigration,
-      checkedUsers,
-      areCheckedUsersEmpty,
-      setResultUsers,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
-    } = importAccountsStore;
-    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-      dialogsStore;
+export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
+  const {
+    incrementStep,
+    decrementStep,
+    users,
+    withEmailUsers,
+    searchValue,
+    setSearchValue,
+    cancelMigration,
+    checkedUsers,
+    areCheckedUsersEmpty,
+    setResultUsers,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+    totalUsedUsers,
+    quota,
+  } = importAccountsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
-    const { quotaCharacteristics } = currentQuotaStore;
+  return {
+    incrementStep,
+    decrementStep,
+    users,
+    withEmailUsers,
+    searchValue,
+    setSearchValue,
+    cancelMigration,
+    checkedUsers,
+    areCheckedUsersEmpty,
+    setResultUsers,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
 
-    return {
-      incrementStep,
-      decrementStep,
-      users,
-      withEmailUsers,
-      searchValue,
-      setSearchValue,
-      cancelMigration,
-      checkedUsers,
-      areCheckedUsersEmpty,
-      setResultUsers,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
-
-      quotaCharacteristics,
-
-      cancelUploadDialogVisible,
-      setCancelUploadDialogVisible,
-    };
-  },
-)(observer(SelectUsersStep));
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
+    totalUsedUsers,
+    quota,
+  };
+})(observer(SelectUsersStep));

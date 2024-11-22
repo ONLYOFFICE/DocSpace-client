@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { tablet } from "../../utils";
-import { Base } from "../../themes";
+import styled from "styled-components";
 
-const StyledContextMenu = styled.div`
+import { injectDefaultTheme, tablet } from "../../utils";
+
+const StyledContextMenu = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 32px;
   display: grid;
@@ -48,7 +48,5 @@ const StyledContextMenu = styled.div`
     margin-inline-start: 8px;
   }
 `;
-
-StyledContextMenu.defaultProps = { theme: Base };
 
 export { StyledContextMenu };

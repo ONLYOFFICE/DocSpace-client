@@ -32,6 +32,9 @@ import { DeviceType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { FileInput } from "@docspace/shared/components/file-input";
+import { Portal } from "@docspace/shared/components/portal";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
@@ -177,6 +180,64 @@ const FilesSelectorInput = ({
     return onClose();
   };
 
+  const selectorComponent = (
+    <>
+      <Backdrop
+        visible={isPanelVisible}
+        isAside
+        withBackground
+        zIndex={309}
+        onClick={onClose}
+      />
+      <Aside
+        visible={isPanelVisible}
+        withoutBodyScroll
+        zIndex={310}
+        onClose={onClose}
+        withoutHeader
+      >
+        <FilesSelector
+          withHeader
+          withSearch
+          withBreadCrumbs
+          withoutBackButton
+          withCancelButton
+          isRoomsOnly={isRoomsOnly}
+          headerLabel={headerLabel}
+          currentFolderId={id ?? ""}
+          filterParam={filterParam}
+          isThirdParty={isThirdParty}
+          socketHelper={socketHelper}
+          isPanelVisible={isPanelVisible}
+          rootThirdPartyId={rootThirdPartyId}
+          submitButtonLabel={acceptButtonLabel}
+          descriptionText={descriptionText ?? ""}
+          cancelButtonId="select-file-modal-cancel"
+          cancelButtonLabel={t("Common:CancelButton")}
+          socketSubscribers={socketHelper.socketSubscribers}
+          onCancel={onClose}
+          onSubmit={onSubmit}
+          onSetBaseFolderPath={onSetBasePath}
+          getIsDisabled={getIsDisabledAction}
+          // default
+          parentId={0}
+          disabledItems={[]}
+          embedded={false}
+          withCreate={false}
+          withFooterInput={false}
+          withFooterCheckbox={false}
+          footerInputHeader=""
+          footerCheckboxLabel=""
+          currentFooterInputValue=""
+          getFilesArchiveError={() => ""}
+          rootFolderType={FolderType.Rooms}
+          currentDeviceType={currentDeviceType ?? DeviceType.desktop}
+          {...filesSelectorSettings}
+        />
+      </Aside>
+    </>
+  );
+
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
@@ -191,43 +252,9 @@ const FilesSelectorInput = ({
         isDocumentIcon={isDocumentIcon}
         placeholder={t("SelectAction")}
       />
-      <FilesSelector
-        withHeader
-        withSearch
-        withBreadCrumbs
-        withoutBackButton
-        withCancelButton
-        isRoomsOnly={isRoomsOnly}
-        headerLabel={headerLabel}
-        currentFolderId={id ?? ""}
-        filterParam={filterParam}
-        isThirdParty={isThirdParty}
-        socketHelper={socketHelper}
-        isPanelVisible={isPanelVisible}
-        rootThirdPartyId={rootThirdPartyId}
-        submitButtonLabel={acceptButtonLabel}
-        descriptionText={descriptionText ?? ""}
-        cancelButtonId="select-file-modal-cancel"
-        cancelButtonLabel={t("Common:CancelButton")}
-        socketSubscribers={socketHelper.socketSubscribers}
-        onCancel={onClose}
-        onSubmit={onSubmit}
-        onSetBaseFolderPath={onSetBasePath}
-        getIsDisabled={getIsDisabledAction}
-        // default
-        parentId={0}
-        disabledItems={[]}
-        embedded={false}
-        withCreate={false}
-        withFooterInput={false}
-        withFooterCheckbox={false}
-        footerInputHeader=""
-        footerCheckboxLabel=""
-        currentFooterInputValue=""
-        getFilesArchiveError={() => ""}
-        rootFolderType={FolderType.Rooms}
-        currentDeviceType={currentDeviceType ?? DeviceType.desktop}
-        {...filesSelectorSettings}
+      <Portal
+        visible={isPanelVisible}
+        element={<div>{selectorComponent}</div>}
       />
     </StyledBodyWrapper>
   );

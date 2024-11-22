@@ -39,4 +39,5 @@ export interface QuotaFormProps {
   isAutoFocussed: boolean;
   checkboxLabel: string;
   label: string;
+  tabIndex?: number;
 }

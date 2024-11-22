@@ -1,17 +1,17 @@
 {
   "AddManually": "Додај ручно",
-  "AddManuallyDescriptionAccounts": "Позови нове кориснике на {{productName}} лично путем емаил-а.",
-  "AddManuallyDescriptionRoom": "Додајте постојеће кориснике {{productName}}-а у собу користећи њихова имена или позовите нове кориснике лично путем емаил-а.",
   "EmailErrorMessage": "Емаил адреса није важећа. Можете уредити емаил двоструким кликом на њега.",
   "GroupMaxAvailableRoleWarning": "Групе се могу додати у просторију са {{roleName}} улогом као максимум. Међутим , можете променити улогу појединачних корисника у групи након успешног додавања.",
   "InvitationLanguage": "Језик позивнице",
-  "InviteAccountSearchPlaceholder": "Позови људе преко емаил-а",
-  "InviteRoomSearchPlaceholder": "Позови људе именом или емаил-ом",
+  "InviteMembersManuallyDescription": "Позовите нове чланове у {{productName}} лично путем е-поште",
+  "InviteMembersSearchPlaceholder": "Позовите чланове путем е-поште",
+  "InviteToRoomSearchPlaceholder": "Претражи и позови по имену или емаил",
   "InviteViaLink": "Позови путем линка",
   "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у {{productName}}-у.",
   "InviteViaLinkDescriptionRoom": "Створите универзални линк за самопризнање у соби",
   "LinkCopySuccess": "Линк је копиран",
   "ResetChange": "Ресетуј промене",
   "SendInvitation": "Пошаљи позивницу",
+  "UserMaxAvailableRoleWarning": "Гости и Корисници не могу бити постављени као Менаџери собе. Само администратори собе и {{productName}} су погодни за одређену улогу.",
   "UsersAlreadyAdded": "Неки корисници су већ додати"
 }

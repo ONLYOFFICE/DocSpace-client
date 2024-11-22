@@ -26,6 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
@@ -44,15 +45,17 @@ const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
 const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
-const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 class TableStore {
@@ -93,8 +96,8 @@ class TableStore {
   sizeTrashColumnIsEnabled = true;
   typeTrashColumnIsEnabled = false;
 
-  peopleAccountsGroupsColumnIsEnabled = true;
-  managerAccountsGroupsColumnIsEnabled = true;
+  peopleGroupsColumnIsEnabled = true;
+  managerGroupsColumnIsEnabled = true;
 
   typePeopleColumnIsEnabled = true;
   groupPeopleColumnIsEnabled = true;
@@ -236,10 +239,10 @@ class TableStore {
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
-  setAccountsGroupsColumnPeople = (enable) =>
-    (this.peopleAccountsGroupsColumnIsEnabled = enable);
-  setAccountsGroupsColumnManager = (enable) =>
-    (this.managerAccountsGroupsColumnIsEnabled = enable);
+  setGroupsColumnPeople = (enable) =>
+    (this.peopleGroupsColumnIsEnabled = enable);
+  setGroupsColumnManager = (enable) =>
+    (this.managerGroupsColumnIsEnabled = enable);
 
   setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
   setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
@@ -275,10 +278,20 @@ class TableStore {
       const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
         this.treeFoldersStore;
 
-      const isContactsPeople = contactsTab === "people";
-      const isContactsGuests = contactsTab === "guests";
-      const isContactsGroups = contactsTab === "groups";
-      const isContactsInsideGroup = contactsTab === "inside_group";
+      const contactsView = getContactsView();
+
+      const isContactsPeople = !contactsTab
+        ? contactsView === "people"
+        : contactsTab === "people";
+      const isContactsGuests = !contactsTab
+        ? contactsView === "guests"
+        : contactsTab === "guests";
+      const isContactsGroups = !contactsTab
+        ? contactsView === "groups"
+        : contactsTab === "groups";
+      const isContactsInsideGroup = !contactsTab
+        ? contactsView === "inside_group"
+        : contactsTab === "inside_group";
 
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -292,10 +305,8 @@ class TableStore {
       }
 
       if (isContactsGroups) {
-        this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
-        this.setAccountsGroupsColumnManager(
-          splitColumns.includes("Head of Group"),
-        );
+        this.setGroupsColumnPeople(splitColumns.includes("People"));
+        this.setGroupsColumnManager(splitColumns.includes("Head of Group"));
         return;
       }
 
@@ -367,9 +378,14 @@ class TableStore {
 
     const { contactsTab } = this.peopleStore.usersStore;
 
-    const isContactsPeople = contactsTab === "people";
+    const contactsView = getContactsView();
 
-    const isContactsInsideGroup = contactsTab === "inside_group";
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -510,15 +526,11 @@ class TableStore {
         return;
 
       case "People":
-        this.setAccountsGroupsColumnPeople(
-          !this.peopleAccountsGroupsColumnIsEnabled,
-        );
+        this.setGroupsColumnPeople(!this.peopleGroupsColumnIsEnabled);
         return;
 
       case "Head of Group":
-        this.setAccountsGroupsColumnManager(
-          !this.managerAccountsGroupsColumnIsEnabled,
-        );
+        this.setGroupsColumnManager(!this.managerGroupsColumnIsEnabled);
         return;
 
       default:
@@ -563,16 +575,27 @@ class TableStore {
       this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
-
-    const isContactsPeople = contactsTab === "people";
-    const isContactsGuests = contactsTab === "guests";
-    const isContactsGroups = contactsTab === "groups";
-    const isContactsInsideGroup = contactsTab === "inside_group";
-
     const { isIndexedFolder } = this.selectedFolderStore;
+
+    const contactsView = getContactsView();
+
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+    const isDocumentsFolder = !isRooms;
 
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
@@ -590,9 +613,13 @@ class TableStore {
                   ? `${TABLE_RECENT_COLUMNS}=${userId}`
                   : isIndexedFolder
                     ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
-                    : `${TABLE_COLUMNS}=${userId}`;
+                    : isDocumentsFolder
+                      ? `${TABLE_COLUMNS}=${userId}`
+                      : "";
 
-    return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
+    return isFrame && tableStorageName
+      ? `SDK_${tableStorageName}`
+      : tableStorageName;
   }
 
   // Table column sizes
@@ -601,15 +628,27 @@ class TableStore {
       this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
+    const { isIndexedFolder } = this.selectedFolderStore;
 
-    const isContactsPeople = contactsTab === "people";
-    const isContactsGuests = contactsTab === "guests";
-    const isContactsInsideGroup = contactsTab === "inside_group";
+    const contactsView = getContactsView();
+
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
-    const { isIndexedFolder } = this.selectedFolderStore;
+    const isDocumentsFolder = !isRooms;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -625,9 +664,15 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE}=${userId}`;
+                  : isContactsGroups
+                    ? `${COLUMNS_GROUPS_SIZE}=${userId}`
+                    : isDocumentsFolder
+                      ? `${COLUMNS_SIZE}=${userId}`
+                      : "";
 
-    return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
+    return isFrame && columnStorageName
+      ? `SDK_${columnStorageName}`
+      : columnStorageName;
   }
 
   // Column names for info-panel
@@ -638,13 +683,25 @@ class TableStore {
     const { isIndexedFolder } = this.selectedFolderStore;
     const { contactsTab } = this.peopleStore.usersStore;
 
-    const isContactsPeople = contactsTab === "people";
-    const isContactsGuests = contactsTab === "guests";
-    const isContactsInsideGroup = contactsTab === "inside_group";
+    const contactsView = getContactsView();
+
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+    const isDocumentsFolder = !isRooms;
 
     const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`
@@ -660,9 +717,13 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+                  : isContactsGroups
+                    ? `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`
+                    : isDocumentsFolder
+                      ? `${COLUMNS_SIZE_INFO_PANEL}=${userId}`
+                      : "";
 
-    return isFrame
+    return isFrame && columnInfoPanelStorageName
       ? `SDK_${columnInfoPanelStorageName}`
       : columnInfoPanelStorageName;
   }

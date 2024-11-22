@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -69,7 +70,7 @@ const StyledInputBlock = styled.div`
   }
 `;
 
-const StyledInputGroup = styled.div`
+const StyledInputGroup = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: auto;
 
@@ -117,6 +118,8 @@ const StyledInputGroup = styled.div`
       width: 32px;
       height: 32px;
 
+      object-size: cover;
+
       border-radius: 3px;
     }
 
@@ -139,8 +142,6 @@ const StyledInputGroup = styled.div`
     }
   }
 `;
-
-StyledInputGroup.defaultProps = { theme: Base };
 
 const StyledInputRow = styled.div`
   width: 100%;
@@ -167,7 +168,9 @@ const StyledChipsContainer = styled.div`
   gap: 4px;
 `;
 
-const StyledScopesContainer = styled.div`
+const StyledScopesContainer = styled.div.attrs(injectDefaultTheme)<{
+  isRequiredError?: boolean;
+}>`
   width: 100%;
 
   display: grid;
@@ -184,7 +187,18 @@ const StyledScopesContainer = styled.div`
     padding-right: 24px;
     margin-right: -12px;
 
-    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
+    border-bottom: ${(props) =>
+      props.isRequiredError
+        ? `1px solid ${
+            props.theme.isBase
+              ? globalColors.lightErrorStatus
+              : globalColors.darkErrorStatus
+          }`
+        : props.theme.oauth.clientForm.headerBorder};
+  }
+
+  .header-error {
+    margin-top: -8px;
   }
 
   .header-last {
@@ -197,9 +211,7 @@ const StyledScopesContainer = styled.div`
   }
 `;
 
-StyledScopesContainer.defaultProps = { theme: Base };
-
-const StyledScopesName = styled.div`
+const StyledScopesName = styled.div.attrs(injectDefaultTheme)`
   display: flex;
 
   align-content: flex-start;
@@ -213,8 +225,6 @@ const StyledScopesName = styled.div`
     color: ${(props) => props.theme.oauth.clientForm.scopeDesc};
   }
 `;
-
-StyledScopesName.defaultProps = { theme: Base };
 
 const StyledScopesCheckbox = styled.div`
   width: 100%;

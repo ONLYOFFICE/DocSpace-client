@@ -123,6 +123,13 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
   justify-content: center;
   align-items: center;
   margin-top: 8px;
+  box-sizing: border-box;
+
+  ${(props) =>
+    props.color === globalColors.white &&
+    css`
+      border: 2px solid ${globalColors.black};
+    `}
 
   @media ${tablet} {
     width: 40px;
@@ -147,13 +154,16 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
   ${(props) =>
     props.isSelected &&
     css`
-      width: 26px;
-      height: 26px;
+      width: 30px;
+      height: 30px;
 
-      border: ${() => `solid 2px ${props.color}`};
+      border: ${(props) =>
+        props.color === globalColors.white
+          ? `solid 2px ${globalColors.black}`
+          : `solid 2px ${props.color}`};
       @media ${tablet} {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
       }
     `}
 
@@ -165,11 +175,17 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
 
   svg {
     path {
-      fill: ${globalColors.white};
+      fill: ${(props) =>
+        props.color === globalColors.white
+          ? globalColors.black
+          : globalColors.white};
     }
     &:hover {
       path {
-        fill: ${globalColors.white};
+        fill: ${(props) =>
+          props.color === globalColors.white
+            ? globalColors.black
+            : globalColors.white};
       }
     }
   }

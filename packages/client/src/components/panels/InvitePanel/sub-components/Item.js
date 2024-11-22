@@ -90,8 +90,6 @@ const Item = ({
   setIsOpenItemAccess,
   isMobileView,
   standalone,
-  isPaidUserAccess,
-  setInvitePaidUsersCount,
   isUserTariffLimit,
   roomId,
   style,
@@ -201,7 +199,7 @@ const Item = ({
 
   const typeLabel = isEmailInvite
     ? roomId === -1 || isRolePaid
-      ? getUserTypeTranslation(type, t)
+      ? getUserTypeTranslation(roomId !== -1 ? type : defaultAccess.type, t)
       : t("Common:Guest")
     : defaultAccess?.type === EmployeeType.RoomAdmin &&
         type !== EmployeeType.Admin &&
@@ -278,8 +276,6 @@ const Item = ({
 
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);
-
-    if (isPaidUserAccess(item.access)) setInvitePaidUsersCount(-1);
 
     setInviteItems(newItems);
   };
@@ -416,13 +412,10 @@ const Item = ({
 };
 
 export default inject(({ dialogsStore, currentQuotaStore }) => {
-  const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
-    dialogsStore;
+  const { invitePanelOptions } = dialogsStore;
   const { isUserTariffLimit } = currentQuotaStore;
 
   return {
-    isPaidUserAccess,
-    setInvitePaidUsersCount,
     isUserTariffLimit,
     roomId: invitePanelOptions.roomId,
   };

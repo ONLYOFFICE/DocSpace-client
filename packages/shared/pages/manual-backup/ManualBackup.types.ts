@@ -45,6 +45,7 @@ export interface ManualBackupProps {
   dataBackupUrl: string;
   currentColorScheme: TColorScheme;
   buttonSize?: ButtonSize;
+  isBackupProgressVisible?: boolean;
 
   saveToLocalStorage: (
     isStorage: boolean,

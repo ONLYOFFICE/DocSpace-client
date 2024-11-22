@@ -54,6 +54,7 @@ import {
 import { fixAccess, getAccessOptions } from "./utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 const InvitePanel = ({
   folders,
@@ -74,16 +75,13 @@ const InvitePanel = ({
   getUsersList,
   filter,
   isRoomAdmin,
-  maxCountManagersByQuota,
-  invitePaidUsersCount,
   setIsNewUserByCurrentUser,
-  setInvitePaidUsersCount,
+
   isOwner,
   isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
-  isPaidUserAccess,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -265,7 +263,7 @@ const InvitePanel = ({
     });
   };
 
-  const getError = () => {
+  const getError = (error) => {
     const paymentLink = (
       <Trans
         t={t}
@@ -286,17 +284,13 @@ const InvitePanel = ({
 
     return (
       <>
-        <Text as="span">
-          {t("Common:PaidUsersExceedsLimit", {
-            count: maxCountManagersByQuota + invitePaidUsersCount,
-            limit: maxCountManagersByQuota,
-          })}
-        </Text>
+        {error}
         &nbsp;
         {!isRoomAdmin && paymentLink}
       </>
     );
   };
+
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
       let newItem = {};
@@ -332,7 +326,6 @@ const InvitePanel = ({
         setIsNewUserByCurrentUser(true);
       }
       setIsLoading(false);
-      setInvitePaidUsersCount(0);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
@@ -348,7 +341,15 @@ const InvitePanel = ({
       let error = err;
 
       if (err?.response?.status === 402) {
-        error = getError();
+        error = getError(err?.response?.data?.error?.message);
+      }
+
+      if (err.response?.data?.response?.errors) {
+        const { Invitations } = err.response.data.response.errors;
+
+        if (Invitations) {
+          error = Invitations[0];
+        }
       }
 
       toastr.error(error);
@@ -375,9 +376,6 @@ const InvitePanel = ({
       const isUnique = !unique.some((obj) =>
         obj.isGroup ? obj.id === current.id : obj.email === current.email,
       );
-
-      if (!isUnique && isPaidUserAccess(current.access))
-        setInvitePaidUsersCount(-1);
 
       isUnique && unique.push(current);
 
@@ -510,6 +508,7 @@ const InvitePanel = ({
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
       withBodyScroll
+      isInvitePanelLoader={true}
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
@@ -535,11 +534,12 @@ const InvitePanel = ({
             withHeader
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
-              headerLabel: t("Common:ListAccounts"),
+              headerLabel: t("Common:Contacts"),
               withoutBackButton: false,
               withoutBorder: true,
-              onBackClick: onClose,
-              onClose: () => {
+              isCloseable: true,
+              onBackClick: closeUsersPanel,
+              onCloseClick: () => {
                 onClose();
                 closeUsersPanel();
               },
@@ -548,7 +548,7 @@ const InvitePanel = ({
         </ModalDialog.Container>
       )}
 
-      <ModalDialog.Header>{t("Common:InviteUsers")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -600,10 +600,7 @@ export default inject(
       setInviteItems,
       setInvitePanelOptions,
       setInviteLanguage,
-      invitePaidUsersCount,
       setIsNewUserByCurrentUser,
-      setInvitePaidUsersCount,
-      isPaidUserAccess,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -611,7 +608,7 @@ export default inject(
 
     const { isRoomAdmin } = authStore;
 
-    const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
+    const { isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner, isAdmin } = userStore.user;
 
@@ -634,15 +631,12 @@ export default inject(
       getUsersList,
       filter,
       isRoomAdmin,
-      maxCountManagersByQuota,
-      invitePaidUsersCount,
+
       setIsNewUserByCurrentUser,
-      setInvitePaidUsersCount,
       isOwner,
       standalone,
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
-      isPaidUserAccess,
       isAdmin,
     };
   },

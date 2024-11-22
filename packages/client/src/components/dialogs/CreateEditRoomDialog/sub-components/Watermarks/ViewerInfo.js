@@ -84,12 +84,18 @@ const getInitialText = (text, isEdit) => {
   return isEdit && text ? text : "";
 };
 
+const getTabsInfo = (additions, t, tabs) => {
+  const dataTabs = tabs ?? tabsOptions(t);
+
+  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
+};
+
 const getInitialTabs = (additions, isEdit, t) => {
   const dataTabs = tabsOptions(t);
 
   if (!isEdit || !additions) return [dataTabs[0]];
 
-  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
+  return getTabsInfo(additions, t, dataTabs);
 };
 
 const rotateOptions = (t) => [
@@ -121,6 +127,7 @@ const ViewerInfoWatermark = ({
 
   const elements = useRef(null);
   const initialInfo = useRef(null);
+  let watermark = roomParams.watermark;
 
   if (initialInfo.current === null) {
     initialInfo.current = {
@@ -132,28 +139,28 @@ const ViewerInfoWatermark = ({
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);
+
+    if (!isImage && initialSettings) watermark = initialSettings;
+    else
+      watermark = {
+        rotate: initialInfo.current.rotate.key,
+        additions:
+          roomParams.watermark?.additions || WatermarkAdditions.UserName,
+        //image: "",
+        imageWidth: 0,
+        imageHeight: 0,
+        imageScale: 0,
+        ...(initialInfo.current.text && {
+          text: initialInfo.current.text,
+        }),
+      };
   }
 
   const initialInfoRef = initialInfo.current;
-
   const [selectedPosition, setSelectedPosition] = useState(
     initialInfoRef.rotate,
   );
   const [textValue, setTextValue] = useState(initialInfoRef.text);
-
-  const watermark =
-    !isImage && initialSettings
-      ? initialSettings
-      : {
-          rotate: selectedPosition.key,
-          additions:
-            roomParams.watermark?.additions || WatermarkAdditions.UserName,
-          //image: "",
-          imageWidth: 0,
-          imageHeight: 0,
-          imageScale: 0,
-          ...(textValue && { text: textValue }),
-        };
 
   useEffect(() => {
     setRoomParams({
@@ -182,6 +189,9 @@ const ViewerInfoWatermark = ({
       ...roomParams,
       watermark: { ...watermark, additions: flagsCount },
     });
+
+    const tabs = getTabsInfo(flagsCount, t);
+    elements.current = getInitialState(tabs);
   };
 
   const onPositionChange = (item) => {

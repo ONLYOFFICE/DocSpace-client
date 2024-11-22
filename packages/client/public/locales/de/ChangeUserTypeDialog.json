@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Gast <strong>{{userName}}</strong> wird in den Bereich \"{{membersSection}}\" verschoben und dem Benutzertyp \"User\" zugewiesen. Benutzer haben ihren eigenen {{documentsSection}} bereich, können Dateien erstellen und bearbeiten, jedoch keine Räume erstellen.",
+  "ChangeGuestsTypeMessageMulti": "Die ausgewählten Gäste werden in den Bereich \"{{membersSection}}\" verschoben und dem Benutzertyp \"User\" zugewiesen. Benutzer haben ihren eigenen {{documentsSection}} bereich, können Dateien erstellen und bearbeiten, jedoch keine Räume erstellen.",
   "ChangeUserTypeButton": "Typ ändern",
   "ChangeUserTypeHeader": "Benutzertyp ändern",
   "ChangeUserTypeMessage": "Benutzer mit dem Typ <strong>'{{ firstType }}'</strong> bekommen den Typ <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Die ausgewählten Benutzer werden zum Typ <strong>'{{ secondType }}'</strong> verschoben.",
   "ChangeUserTypeMessageWarning": "Sie können Typ für Sie oder Administratoren von {{productName}} nicht ändern.",
+  "SuccessChangeGuestType": "Der Gasttyp wurde erfolgreich geändert.",
   "SuccessChangeUserType": "Der Benutzertyp wurde erfolgreich geändert"
 }

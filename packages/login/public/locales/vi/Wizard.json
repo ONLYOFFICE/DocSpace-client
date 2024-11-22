@@ -1,10 +1,10 @@
 {
   "Desc": "Vui lòng thiết lập dữ liệu đăng ký {{productName}}.",
   "ErrorEmail": "Địa chỉ email không hợp lệ",
+  "ErrorInstanceId": "Mã phiên bản (instance id) không hợp lệ",
   "ErrorLicenseBody": "Giấy phép không hợp lệ. Hãy đảm bảo rằng bạn chọn đúng tệp.",
   "ErrorPassword": "Mật khẩu không đáp ứng yêu cầu",
   "ErrorUploadLicenseFile": "Chọn tệp giấy phép",
-  "GeneratePassword": "Tạo mật khẩu",
   "License": "Chấp nhận các điều khoản của",
   "LicenseLink": "Thỏa thuận giấy phép",
   "PlaceholderLicense": "Tệp giấy phép của bạn",

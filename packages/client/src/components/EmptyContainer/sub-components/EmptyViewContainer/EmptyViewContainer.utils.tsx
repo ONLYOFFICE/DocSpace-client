@@ -281,7 +281,13 @@ export const getRootTitle = (
     .with(
       [
         FolderType.Rooms,
-        P.union(ShareAccessRights.None, ShareAccessRights.ReadOnly),
+        P.union(
+          ShareAccessRights.None,
+          ShareAccessRights.Comment,
+          ShareAccessRights.Review,
+          ShareAccessRights.Editing,
+          ShareAccessRights.ReadOnly,
+        ),
       ],
       () =>
         t("Files:EmptyRootRoomHeader", {
@@ -439,7 +445,14 @@ export const getRootIcon = (
     .with(
       [
         FolderType.Rooms,
-        P.union(ShareAccessRights.DenyAccess, ShareAccessRights.ReadOnly),
+        P.union(
+          ShareAccessRights.DenyAccess,
+          ShareAccessRights.None,
+          ShareAccessRights.Comment,
+          ShareAccessRights.Review,
+          ShareAccessRights.Editing,
+          ShareAccessRights.ReadOnly,
+        ),
       ],
       () =>
         isBaseTheme ? (

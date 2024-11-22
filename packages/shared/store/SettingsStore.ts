@@ -64,7 +64,7 @@ import {
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
-import SocketIOHelper from "../utils/socket";
+import SocketHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
 import {
@@ -241,9 +241,12 @@ class SettingsStore {
   buildVersionInfo = {
     docspace: version,
     documentServer: "6.4.1",
+    releaseDate: "",
   };
 
   debugInfo = false;
+
+  debugInfoData = "";
 
   socketUrl = "";
 
@@ -261,7 +264,7 @@ class SettingsStore {
 
   hotkeyPanelVisible = false;
 
-  frameConfig: TFrameConfig | null = null;
+  frameConfig: Nullable<TFrameConfig> = null;
 
   appearanceTheme: TColorScheme[] = [];
 
@@ -325,12 +328,22 @@ class SettingsStore {
 
   displayAbout: boolean = false;
 
+  isDefaultPasswordProtection: boolean = false;
+
+  isBannerVisible = false;
+
+  showGuestReleaseTip = false;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
+    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get ldapSettingsUrl() {
@@ -495,11 +508,23 @@ class SettingsStore {
   }
 
   get sdkLink() {
-    return `${this.apiDocsLink}/docspace/jssdk/`;
+    return `${this.apiDocsLink}/docspace/javascript-sdk/get-started/basic-concepts/`;
   }
 
   get apiBasicLink() {
-    return `${this.apiDocsLink}/docspace/basic`;
+    return `${this.apiDocsLink}/docspace/`;
+  }
+
+  get apiPluginSDKLink() {
+    return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
+  }
+
+  get apiOAuthLink() {
+    return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
+  }
+
+  get accessRightsLink() {
+    return `${this.helpLink}/userguides/docspace-gettingstarted.aspx#AccessRights_block`;
   }
 
   get wizardCompleted() {
@@ -564,13 +589,20 @@ class SettingsStore {
 
     Object.keys(newSettings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
+
       if (key in this && newSettings) {
+        if (key === "socketUrl") {
+          this.setSocketUrl(newSettings[key]);
+          return;
+        }
+
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
             ? combineUrl(window.ClientConfig?.proxy?.url, newSettings[key])
             : newSettings[key],
         );
+
         if (key === "culture") {
           if (newSettings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
@@ -637,6 +669,25 @@ class SettingsStore {
     if (origSettings?.tagManagerId) {
       insertTagManager(origSettings.tagManagerId);
     }
+  };
+
+  getDebugInfo = async () => {
+    let response = this.debugInfoData;
+    try {
+      if (response) return response;
+
+      response = (await api.debuginfo.loadDebugInfo()) as string;
+      this.debugInfoData = response;
+    } catch (e) {
+      console.error("getDebugInfo failed", (e as Error).message);
+      response = `Debug info load failed (${(e as Error).message})`;
+    }
+
+    runInAction(() => {
+      this.debugInfoData = response;
+    });
+
+    return response;
   };
 
   get isPortalDeactivate() {
@@ -764,9 +815,13 @@ class SettingsStore {
   };
 
   getAllPortals = async () => {
-    const res = await api.management.getAllPortals();
-    this.setPortals(res.tenants);
-    return res;
+    try {
+      const res = await api.management.getAllPortals();
+      this.setPortals(res.tenants);
+      return res;
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   getPortals = async () => {
@@ -889,16 +944,22 @@ class SettingsStore {
     return window.firebaseHelper;
   }
 
-  setPublicRoomKey = (key: string) => {
-    this.publicRoomKey = key;
-  };
+  setSocketUrl = (url: string) => {
+    this.socketUrl = url;
 
-  get socketHelper() {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    return new SocketIOHelper(socketUrl, this.publicRoomKey);
-  }
+    SocketHelper.connect(socketUrl, this.publicRoomKey);
+  };
+
+  setPublicRoomKey = (key: string) => {
+    this.publicRoomKey = key;
+
+    const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
+
+    SocketHelper.connect(socketUrl, key);
+  };
 
   getBuildVersionInfo = async () => {
     let versionInfo = null;
@@ -909,10 +970,23 @@ class SettingsStore {
   };
 
   setBuildVersionInfo = (versionInfo: TVersionBuild) => {
+    // its release date 3.0.0 for SAAS version
+    const saasV3ReleaseDate = "2024-11-23";
+
+    let releaseDate = this.standalone
+      ? localStorage.getItem(`${versionInfo.docSpace}-release-date`)
+      : new Date(saasV3ReleaseDate).toString();
+
+    if (!releaseDate) {
+      releaseDate = new Date().toString();
+      localStorage.setItem(`${versionInfo.docSpace}-release-date`, releaseDate);
+    }
+
     this.buildVersionInfo = {
       ...this.buildVersionInfo,
       docspace: version,
       ...versionInfo,
+      releaseDate,
     };
 
     if (!this.buildVersionInfo.documentServer)
@@ -960,24 +1034,19 @@ class SettingsStore {
     this.ipRestrictions = res?.map((el) => el.ip);
   };
 
-  setIpRestrictions = async (ips: string[]) => {
+  setIpRestrictions = async (ips: string[], enable: boolean) => {
     const data = {
       IpRestrictions: ips,
+      enable,
     };
     const res = await api.settings.setIpRestrictions(data);
-    this.ipRestrictions = res?.map((el) => el.ip);
+
+    this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
+    this.ipRestrictionEnable = res?.enable;
   };
 
   getIpRestrictionsEnable = async () => {
     const res = await api.settings.getIpRestrictionsEnable();
-    this.ipRestrictionEnable = res.enable;
-  };
-
-  setIpRestrictionsEnable = async (enable: boolean) => {
-    const data = {
-      enable,
-    };
-    const res = await api.settings.setIpRestrictionsEnable(data);
     this.ipRestrictionEnable = res.enable;
   };
 
@@ -1006,6 +1075,7 @@ class SettingsStore {
     this.numberAttempt = settings.attemptCount;
     this.blockingTime = settings.blockTime;
     this.checkPeriod = settings.checkPeriod;
+    this.isDefaultPasswordProtection = settings.isDefault;
   };
 
   getBruteForceProtection = async () => {
@@ -1038,7 +1108,7 @@ class SettingsStore {
 
   get isFrame() {
     const isFrame = this.frameConfig
-      ? window.name.includes(this.frameConfig?.name)
+      ? window.name.includes(this.frameConfig?.name as string)
       : false;
 
     if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
@@ -1157,6 +1227,10 @@ class SettingsStore {
 
   checkEnablePortalSettings = (isPaid: boolean) => {
     return isManagement() && this.portals?.length === 1 ? false : isPaid;
+  };
+
+  setIsBannerVisible = (visible: boolean) => {
+    this.isBannerVisible = visible;
   };
 }
 

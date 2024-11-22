@@ -133,10 +133,11 @@ class HeaderMenuStore {
   getContactsHeaderMenu = (t: TTranslation, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
+      hasUsersToChangeType,
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
-      hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       hasUsersToChangeQuota,
       hasUsersToResetQuota,
       hasUsersToDisableQuota,
@@ -144,7 +145,8 @@ class HeaderMenuStore {
       contactsTab,
       getUsersToMakeEmployees,
     } = this.usersStore!;
-    const { setSendInviteDialogVisible } = this.dialogStore;
+    const { setSendInviteDialogVisible, setRemoveGuestDialogVisible } =
+      this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
     const { isVisible } = this.infoPanelStore;
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
@@ -169,7 +171,7 @@ class HeaderMenuStore {
         id: "menu-change-type",
         key: "change-user",
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-        disabled: !hasUsersToMakeEmployees,
+        disabled: isGuests ? !hasUsersToMakeEmployees : !hasUsersToChangeType,
         iconUrl: ChangeToEmployeeReactSvgUrl,
         onClick: isGuests
           ? () =>
@@ -249,9 +251,16 @@ class HeaderMenuStore {
         id: "menu-delete",
         key: "delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove,
+        disabled: !hasOnlyOneUserToRemove,
         onClick: () => toggleDeleteProfileEverDialog(selection),
         iconUrl: DeleteReactSvgUrl,
+      },
+      {
+        key: "menu-remove",
+        label: t("Common:Remove"),
+        disabled: !isGuests || !isRoomAdmin,
+        onClick: () => setRemoveGuestDialogVisible(true),
+        iconUrl: DisableReactSvgUrl,
       },
     ];
 

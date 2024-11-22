@@ -55,6 +55,8 @@ import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { globalColors } from "@docspace/shared/themes";
 
+import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+
 const StyledSetRoomParams = styled.div`
   display: flex;
   flex-direction: column;
@@ -148,14 +150,14 @@ const SetRoomParams = ({
   covers,
   setCover,
 }) => {
-  const [previewIcon, setPreviewIcon] = useState(null);
+  const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
-  const [createRoomTitle, setCreateRoomTitleTitle] = useState("");
+  const [createRoomTitle, setCreateRoomTitleTitle] = useState(roomParams.title);
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -178,6 +180,15 @@ const SetRoomParams = ({
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  React.useEffect(() => {
+    if (roomParams.previewIcon !== previewIcon) {
+      setRoomParams({
+        ...roomParams,
+        previewIcon: previewIcon,
+      });
+    }
+  }, [previewIcon, roomParams.previewIcon]);
 
   const getCoverLogo = () => {
     if (cover) {
@@ -230,7 +241,11 @@ const SetRoomParams = ({
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
-    if (e.target.value.match(folderFormValidation)) {
+    let newValue = e.target.value;
+
+    newValue = removeEmojiCharacters(newValue);
+
+    if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
       // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
@@ -238,19 +253,19 @@ const SetRoomParams = ({
     }
 
     if (isEdit) {
-      setPreviewTitle(e.target.value);
+      setPreviewTitle(newValue);
     } else {
-      setCreateRoomTitleTitle(e.target.value);
+      setCreateRoomTitleTitle(newValue);
     }
 
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
-      title: e.target.value,
+      title: newValue,
     });
 
     setRoomParams({
       ...roomParams,
-      title: e.target.value,
+      title: newValue,
     });
 
     if (!cover && !previewIcon && !isEdit) {
@@ -342,6 +357,7 @@ const SetRoomParams = ({
       }
       color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       withEditing={true}
       model={isEditRoomModel}
       onChangeFile={onChangeFile}
@@ -354,6 +370,7 @@ const SetRoomParams = ({
         cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
       }
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       imgClassName={"react-svg-icon"}
       model={model}
       className="room-params-icon"
@@ -389,6 +406,17 @@ const SetRoomParams = ({
           forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
+      {isEdit && (
+        <PermanentSettings
+          t={t}
+          title={roomParams.title}
+          isThirdparty={roomParams.isThirdparty}
+          storageLocation={roomParams.storageLocation}
+          isPrivate={roomParams.isPrivate}
+          isDisabled={isDisabled}
+        />
+      )}
+
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -420,16 +448,6 @@ const SetRoomParams = ({
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
       />
-      {isEdit && (
-        <PermanentSettings
-          t={t}
-          title={roomParams.title}
-          isThirdparty={roomParams.isThirdparty}
-          storageLocation={roomParams.storageLocation}
-          isPrivate={roomParams.isPrivate}
-          isDisabled={isDisabled}
-        />
-      )}
 
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (

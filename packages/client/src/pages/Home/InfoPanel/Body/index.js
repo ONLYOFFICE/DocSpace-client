@@ -27,13 +27,14 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
+import { RoomsType } from "@docspace/shared/enums";
+import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
-
 import { StyledInfoPanelBody } from "./styles/common";
-import { RoomsType } from "@docspace/shared/enums";
-import { useParams } from "react-router-dom";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -84,12 +85,16 @@ const InfoPanelBodyContent = ({
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
+  const isLockedSharedRoom = isLockedSharedRoomUtil(infoPanelSelection);
+
   const isNoItemGallery = isGallery && !gallerySelected;
   const isRoot =
     infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !infoPanelSelection ||
+    (infoPanelSelection.expired && infoPanelSelection.external) ||
+    isLockedSharedRoom ||
     ((isUsers || isGuests || isGroups) && !selectedItems.length) ||
     isNoItemGallery ||
     (isRoot && !isGallery);
@@ -105,6 +110,7 @@ const InfoPanelBodyContent = ({
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
+    isLockedSharedRoom,
   };
 
   const viewHelper = new ViewHelper({

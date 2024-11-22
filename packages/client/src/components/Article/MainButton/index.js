@@ -65,7 +65,7 @@ import {
 import styled, { css } from "styled-components";
 
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
-import { isMobile, isTablet } from "react-device-detect";
+import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
@@ -208,6 +208,11 @@ const ArticleMainButtonContent = (props) => {
 
       const isPDF = format === "pdf";
 
+      if (isPDF && isMobile) {
+        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
       const payload = {
         extension: format,
         id: -1,
@@ -231,6 +236,10 @@ const ArticleMainButtonContent = (props) => {
   }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
     setSelectFileDialogVisible(true);
   }, [setSelectFileDialogVisible]);
 
@@ -284,6 +293,11 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     const initOformFilter = (
       oformsFilter || oformsFilter.getDefault()
     ).toUrlParams();
@@ -677,7 +691,8 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
-  const mainButtonText = t("Common:Actions");
+  const mainButtonText =
+    isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
   if (isFrame) {
@@ -762,7 +777,7 @@ const ArticleMainButtonContent = (props) => {
 
       <input
         id="customFileInput"
-        className="custom-file-input"
+        className="custom-file-input custom-file-input-article"
         multiple
         type="file"
         onChange={onFileChange}

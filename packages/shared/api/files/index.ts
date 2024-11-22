@@ -623,11 +623,16 @@ export async function removeFiles(
 export async function setFileOwner(userId: string, folderIds: number[]) {
   const data = { userId, folderIds };
 
-  const res = (await request({
-    method: "post",
-    url: "/files/owner",
-    data,
-  })) as TFolder[];
+  const skipRedirect = true;
+
+  const res = (await request(
+    {
+      method: "post",
+      url: "/files/owner",
+      data,
+    },
+    skipRedirect,
+  )) as TFolder[];
 
   return res;
 }
@@ -1015,7 +1020,12 @@ export function saveThirdParty(
     providerId,
     isRoomsStorage,
   };
-  return request({ method: "post", url: "files/thirdparty", data });
+  const skipRedirect = true;
+
+  return request(
+    { method: "post", url: "files/thirdparty", data },
+    skipRedirect,
+  );
 }
 
 // TODO: Need update res type
@@ -1406,6 +1416,21 @@ export async function getPrimaryLink(fileId: number) {
   return res;
 }
 
+export async function getPrimaryLinkIfNotExistCreate(
+  fileId: number | string,
+  access: ShareAccessRights,
+  internal: boolean,
+  expirationDate: moment.Moment,
+) {
+  const res = (await request({
+    method: "post",
+    url: `/files/file/${fileId}/link`,
+    data: { access, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function editExternalLink(
   fileId: number | string,
   linkId: number | string,
@@ -1428,11 +1453,12 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
+  expirationDate?: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { access, primary, internal },
+    data: { access, primary, internal, expirationDate },
   })) as TFileLink;
 
   return res;
@@ -1513,4 +1539,14 @@ export async function checkIsPDFForm(fileId: string | number) {
     method: "get",
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
+}
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
 }

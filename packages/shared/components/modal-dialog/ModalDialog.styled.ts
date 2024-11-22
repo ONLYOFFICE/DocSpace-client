@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 
 import { Box } from "../box";
 import { ModalDialogType } from "./ModalDialog.enums";
@@ -50,7 +50,7 @@ const StyledModal = styled.div<{ modalSwipeOffset?: number; blur?: number }>`
   }
 `;
 
-const Dialog = styled.div`
+const Dialog = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,13 +59,14 @@ const Dialog = styled.div`
   min-height: 100%;
 `;
 
-const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
+const Content = styled.div.attrs<{ modalSwipeOffset?: number }>((props) => ({
   style: {
     marginBottom:
       props.modalSwipeOffset && props.modalSwipeOffset < 0
         ? `${props.modalSwipeOffset * 1.1}px`
         : "0px",
   },
+  theme: props.theme || Base,
 }))<{
   autoMaxHeight?: boolean;
   autoMaxWidth?: boolean;
@@ -167,14 +168,19 @@ const StyledBody = styled(Box)<{
     margin-inline-end: 0 !important;
 
     padding-inline-end: 16px !important;
-
-    ${(props) =>
-      props.isScrollLocked &&
-      css`
-        margin-inline-end: 0 !important;
-        overflow: hidden !important;
-      `}
   }
+
+  ${(props) =>
+    props.isScrollLocked &&
+    css`
+      #modal-scroll > .scroll-wrapper > .scroller {
+        overflow: hidden !important;
+      }
+
+      #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
+        margin-inline-end: 0 !important;
+      }
+    `}
 
   ${(props) =>
     props.currentDisplayType === "aside" &&
@@ -217,8 +223,5 @@ const StyledFooter = styled.div<{
       }
     `}
 `;
-
-Dialog.defaultProps = { theme: Base };
-Content.defaultProps = { theme: Base };
 
 export { StyledModal, Content, Dialog, StyledBody, StyledFooter };

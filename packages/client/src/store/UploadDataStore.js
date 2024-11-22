@@ -31,6 +31,8 @@ import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import uniqBy from "lodash/uniqBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   getFileInfo,
   getFolderInfo,
@@ -55,7 +57,6 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { Link } from "@docspace/shared/components/link";
 import { globalColors } from "@docspace/shared/themes";
 
 class UploadDataStore {
@@ -1490,7 +1491,9 @@ class UploadDataStore {
                 i18nKey="Files:PasswordProtectedFiles"
                 t={t}
                 components={[
-                  <Link
+                  <ColorTheme
+                    tag="a"
+                    themeId={ThemeId.Link}
                     isHovered
                     color={globalColors.link}
                     onClick={() => {
@@ -1535,11 +1538,8 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
-        const { socketHelper } = this.settingsStore;
-
-        socketHelper.emit({
-          command: "refresh-folder",
-          data: toFolderId,
+        SocketHelper.emit(SocketCommands.RefreshFolder, {
+          toFolderId,
         });
       }
     }

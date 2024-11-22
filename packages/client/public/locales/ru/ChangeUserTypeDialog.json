@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Гость <strong>{{userName}}</strong> будет перемещен в раздел «{{membersSection}}», и ему будет назначен тип «Пользователь». У пользователей есть собственный раздел «{{documentsSection}}», они могут создавать и редактировать файлы, но не могут создавать комнаты.",
+  "ChangeGuestsTypeMessageMulti": "Выбранные гости будут перемещены в раздел «{{membersSection}}», и им будет назначен тип «Пользователь». У пользователей есть собственный раздел «{{documentsSection}}», они могут создавать и редактировать файлы, но не могут создавать комнаты.",
   "ChangeUserTypeButton": "Изменить тип",
   "ChangeUserTypeHeader": "Изменение типа пользователя",
   "ChangeUserTypeMessage": "Пользователи с типом <strong>'{{ firstType }}'</strong> будут переведены в тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageMulti": "Выбранные пользователи будут перемещены в тип <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Вы не можете изменить тип для администраторов {{productName}} и для самого себя.",
+  "SuccessChangeGuestType": "Тип гостя был успешно изменен",
   "SuccessChangeUserType": "Тип пользователя успешно изменен"
 }

@@ -41,7 +41,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -56,7 +56,7 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}
@@ -70,8 +70,8 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
   .table-container_index-cell {
-    margin-right: 0;
-    padding-right: 0;
+    margin-inline-end: 0;
+    padding-inline-end: 0;
   }
 
   .table-row-selected + .table-row-selected {
@@ -122,8 +122,6 @@ const StyledTableContainer = styled(TableContainer)`
       `}
   }
 `;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",

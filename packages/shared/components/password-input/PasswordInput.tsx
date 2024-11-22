@@ -70,16 +70,25 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       inputValue,
       clipActionResource,
       emailInputName,
-      passwordSettings,
+      passwordSettings = {
+        minLength: 8,
+        upperCase: false,
+        digits: false,
+        specSymbols: false,
+        digitsRegexStr: "(?=.*\\d)",
+        upperCaseRegexStr: "(?=.*[A-Z])",
+        specSymbolsRegexStr:
+          "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+      },
       onBlur,
       onKeyDown,
       onValidateInput,
       onChange,
-      isDisabled,
-      simpleView,
-      generatorSpecial,
+      isDisabled = false,
+      simpleView = false,
+      generatorSpecial = "!@#$%^&*",
 
-      clipCopiedResource,
+      clipCopiedResource = "Copied",
 
       tooltipPasswordTitle,
       tooltipPasswordLength,
@@ -87,8 +96,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       tooltipPasswordCapital,
       tooltipPasswordSpecial,
       generatePasswordTitle,
-      inputName,
-      scale,
+      inputName = "passwordInput",
+      scale = true,
       size,
       hasError,
       hasWarning,
@@ -96,19 +105,21 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       tabIndex,
       maxLength,
       id,
-      autoComplete,
+      autoComplete = "new-password",
       forwardedRef,
-      isDisableTooltip,
+      isDisableTooltip = false,
       inputWidth,
-      className,
+      className = "",
       style,
-      isFullWidth,
+      isFullWidth = false,
       tooltipOffsetLeft,
       tooltipOffsetTop,
       isAutoFocussed,
       tooltipAllowedCharacters,
-      isSimulateType,
+      isSimulateType = false,
       simulateSymbol = "•",
+      // clipEmailResource = "E-mail ",
+      // clipPasswordResource = "Password ",
     }: PasswordInputProps,
     ref,
   ) => {
@@ -120,7 +131,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       return inputValueRef.current;
     };
 
-    const prevInputValue = usePrevious(inputValue ?? "");
+    const prevInputValue = usePrevious(inputValue ?? "") ?? "";
 
     const [state, setState] = useState<TState>({
       type: inputType,
@@ -338,7 +349,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     );
 
     const onChangeAction = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
+      (e: ChangeEvent<HTMLInputElement>, isGenerated?: boolean) => {
         if (refTooltip.current) {
           const tooltip = refTooltip.current as TooltipRefProps;
           if (tooltip?.isOpen) {
@@ -347,7 +358,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
         }
 
         let value = e.target.value;
-        if (isSimulateType) {
+        if (isSimulateType && !isGenerated) {
           value = setPasswordSettings(e.target.value);
         }
 
@@ -433,9 +444,12 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
         }
 
         checkPassword(newPassword);
-        onChangeAction?.({
-          target: { value: newPassword },
-        } as ChangeEvent<HTMLInputElement>);
+        onChangeAction?.(
+          {
+            target: { value: newPassword },
+          } as ChangeEvent<HTMLInputElement>,
+          true,
+        );
       },
       [checkPassword, getNewPassword, isDisabled, onChangeAction, state.type],
     );
@@ -487,7 +501,10 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     }, [caretPosition, state.type, state.value, isSimulateType]);
 
     useEffect(() => {
-      if (isSimulateType && inputValue !== prevInputValue) {
+      if (
+        (isSimulateType && inputValue !== prevInputValue) ||
+        (inputValue === "" && prevInputValue !== "")
+      ) {
         onChangeAction?.({
           target: { value: inputValue },
         } as ChangeEvent<HTMLInputElement>);
@@ -679,37 +696,6 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
 );
 
 PasswordInput.displayName = "PasswordInput";
-
-PasswordInput.defaultProps = {
-  inputName: "passwordInput",
-  autoComplete: "new-password",
-  isDisabled: false,
-
-  scale: true,
-
-  isDisableTooltip: false,
-  isTextTooltipVisible: false,
-
-  clipEmailResource: "E-mail ",
-  clipPasswordResource: "Password ",
-  clipCopiedResource: "Copied",
-
-  generatorSpecial: "!@#$%^&*",
-  className: "",
-  simpleView: false,
-  passwordSettings: {
-    minLength: 8,
-    upperCase: false,
-    digits: false,
-    specSymbols: false,
-    digitsRegexStr: "(?=.*\\d)",
-    upperCaseRegexStr: "(?=.*[A-Z])",
-    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-  },
-  isFullWidth: false,
-  isSimulateType: false,
-  simulateSymbol: "•",
-};
 
 export { PasswordInput };
 

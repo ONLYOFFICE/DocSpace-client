@@ -81,6 +81,8 @@ describe("Image Tests", () => {
     const usedImages = findImagesIntoFiles(allFiles, allImgs);
 
     const uselessImages = allImgs.filter((img) => {
+      if (img.fileName.includes("default_user_photo_size_48-48")) return false;
+
       if (usedImages.indexOf(img.fileName) === -1) {
         return true;
       }

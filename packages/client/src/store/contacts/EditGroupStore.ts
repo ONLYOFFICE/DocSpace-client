@@ -28,10 +28,10 @@ import { makeAutoObservable } from "mobx";
 
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import AccountsFilter from "@docspace/shared/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
+
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 class EditGroupStore {
   isInit = false;
@@ -50,7 +50,7 @@ class EditGroupStore {
 
   initialTotal: number = 0;
 
-  filter = AccountsFilter.getDefault();
+  filter = Filter.getDefault();
 
   peopleStore: PeopleStore;
 
@@ -89,7 +89,7 @@ class EditGroupStore {
     this.addedMembersMap = new Map();
     this.removedMembersMap = new Map();
     this.initialTotal = 0;
-    this.filter = AccountsFilter.getDefault();
+    this.filter = Filter.getDefault();
   };
 
   loadMembers = async (startIndex: number) => {
@@ -121,7 +121,7 @@ class EditGroupStore {
     try {
       if (!this.group) return;
 
-      const { updateGroup } = this.peopleStore.groupsStore! as GroupsStore;
+      const { updateGroup } = this.peopleStore.groupsStore!;
 
       const addedIds = Array.from(this.addedMembersMap.keys());
       const removedIds = Array.from(this.removedMembersMap.keys());

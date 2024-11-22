@@ -86,6 +86,8 @@ const QuickButtons = (props) => {
     currentDeviceType,
     showLifetimeIcon,
     expiredDate,
+    currentColorScheme,
+    roomLifetime,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -119,7 +121,7 @@ const QuickButtons = (props) => {
     : theme.filesQuickButtons.color;
 
   const colorShare = shared
-    ? theme.filesQuickButtons.sharedColor
+    ? currentColorScheme.main?.accent
     : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
@@ -159,7 +161,9 @@ const QuickButtons = (props) => {
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Files:FileWillBeDeleted", { date: expiredDate })}.
+      {roomLifetime?.deletePermanently
+        ? t("Files:FileWillBeDeletedPermanently", { date: expiredDate })
+        : t("Files:FileWillBeMovedToTrash", { date: expiredDate })}
     </Text>
   );
 

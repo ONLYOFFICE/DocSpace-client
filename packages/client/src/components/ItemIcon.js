@@ -28,11 +28,10 @@ import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { NoUserSelect } from "@docspace/shared/utils";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div.attrs(injectDefaultTheme)`
   ${(props) =>
     props.isRoom &&
     css`
@@ -55,13 +54,10 @@ const IconWrapper = styled.div`
     ${(props) =>
       props.isRoom &&
       css`
-        border-radius: 6px;
         vertical-align: middle;
       `}
   }
 `;
-
-IconWrapper.defaultProps = { theme: Base };
 
 const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
@@ -83,6 +79,7 @@ const ItemIcon = ({
   isArchive,
   badgeUrl,
   size,
+  radius,
   withEditing,
   showDefault,
   imgClassName,
@@ -100,6 +97,7 @@ const ItemIcon = ({
           color={color}
           title={title}
           size={size}
+          radius={radius}
           isArchive={isArchive}
           showDefault={showDefault || showDefaultRoomIcon}
           imgClassName={imgClassName || "react-svg-icon"}

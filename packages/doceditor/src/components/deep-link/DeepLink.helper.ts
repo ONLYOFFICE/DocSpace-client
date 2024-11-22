@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { isSafari } from "react-device-detect";
 import { TFile } from "@docspace/shared/api/files/types";
 
 export type TDeepLinkConfig = {
@@ -44,6 +45,7 @@ const openDeepLink = (
     onFail?: () => void;
   }>,
 ) => {
+  const time = isSafari ? 3000 : 1000;
   let timeout: NodeJS.Timeout;
   let interval: NodeJS.Timer;
   let visible: DocumentVisibilityState = "visible";
@@ -63,14 +65,14 @@ const openDeepLink = (
       "visibilitychange",
       (e) => (visible = (e.target as Document)?.visibilityState),
     );
-    timeout = setTimeout(handleResponse, 1000);
+    timeout = setTimeout(handleResponse, time);
 
     interval = setInterval(() => {
       if (visible === "hidden") {
         clearTimeout(timeout);
         handleResponse();
       }
-    }, 1000);
+    }, time);
 
     window.location.href = url;
   } catch (error) {

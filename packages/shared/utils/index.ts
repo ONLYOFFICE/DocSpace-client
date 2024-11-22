@@ -41,6 +41,8 @@ import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
+import { getTextColor } from "./getTextColor";
+
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
 import {
@@ -78,6 +80,8 @@ import {
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
+import type { TRoom } from "../api/rooms/types";
+import { injectDefaultTheme } from "./injectDefaultTheme";
 
 export {
   isBetaLanguage,
@@ -131,6 +135,8 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  injectDefaultTheme,
+  getTextColor,
 };
 
 export const getModalType = () => {
@@ -172,7 +178,7 @@ export const getTitleWithoutExtension = (
 export const getLastColumn = (
   tableStorageName: string,
   storageColumnsSize?: string,
-  isIndexEditingMode?: boolean,
+  isIndexedFolder?: boolean,
 ) => {
   if (!tableStorageName) return;
 
@@ -185,17 +191,45 @@ export const getLastColumn = (
   );
   let hideColumnsTable = false;
 
-  if (isIndexEditingMode) {
-    hideColumnsTable = !storageColumnsSize
-      ?.split(" ")
-      .filter(
-        (item, index, array) =>
-          index !== 0 && index !== 1 && index !== array.length - 1,
-      )
+  if (storageColumnsSize) {
+    const enabledColumn = storageColumnsSize
+      .split(" ")
+      .filter((_, index, array) => {
+        if (isIndexedFolder) {
+          return index !== 0 && index !== 1 && index !== array.length - 1;
+        }
+        return index !== 0 && index !== array.length - 1;
+      })
       .find((item) => item !== "0px");
+
+    hideColumnsTable = !enabledColumn;
   }
 
-  if (hideColumnsTable) return filterColumns[1];
-  if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
+  if (hideColumnsTable) {
+    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
+  }
+
+  if (filterColumns.length > 0) {
+    return filterColumns[filterColumns.length - 1];
+  }
   return null;
+};
+
+export const isLockedSharedRoom = (item?: TRoom) => {
+  if (!item) return false;
+
+  return Boolean(item.external && item.passwordProtected && !item.expired);
+};
+
+export const addLog = (log: string, category: "socket") => {
+  if (!window.ClientConfig?.logs.enableLogs) return;
+
+  if (window.ClientConfig.logs.logsToConsole) console.log(log);
+  else {
+    if (!window.logs) window.logs = { socket: [] };
+
+    if (!window.logs[category]) window.logs[category] = [];
+
+    window.logs[category].push(log);
+  }
 };

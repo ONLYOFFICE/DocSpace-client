@@ -671,7 +671,7 @@ export const useContactsFilter = ({
         if (isPeople) filterOptions.push(...groupItems);
         filterOptions.push(...statusItems);
         if (!isGuests) filterOptions.push(...typeItems);
-        if (!standalone) filterOptions.push(...accountItems);
+        if (!standalone && !isGuests) filterOptions.push(...accountItems);
         filterOptions.push(...accountLoginTypeItems);
         if (showStorageInfo && isDefaultRoomsQuotaSet && !isGuests)
           filterOptions.push(...quotaFilter);
@@ -819,7 +819,7 @@ export const useContactsFilter = ({
     const people = {
       id: "sort-by_people",
       key: "membersCount",
-      label: t("Common:People"),
+      label: t("Common:Members"),
       default: true,
     };
 

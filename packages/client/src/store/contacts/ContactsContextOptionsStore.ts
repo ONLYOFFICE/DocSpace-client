@@ -244,7 +244,9 @@ class ContactsConextOptionsStore {
             id: "option_delete-user",
             key: option,
             icon: TrashReactSvgUrl,
-            label: t("DeleteProfileEverDialog:DeleteUser"),
+            label: item.isVisitor
+              ? t("DeleteProfileEverDialog:DeleteGuest")
+              : t("DeleteProfileEverDialog:DeleteUser"),
             onClick: () => this.toggleDeleteProfileEverDialog([item]),
           };
 
@@ -324,6 +326,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
+      action: EmployeeType.Admin,
       key: EmployeeType.Admin,
       isActive: item ? isAdmin : userSelectionRole === EmployeeType.Admin,
     };
@@ -335,6 +338,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
+      action: EmployeeType.RoomAdmin,
       key: EmployeeType.RoomAdmin,
       isActive: item
         ? isRoomAdmin
@@ -347,6 +351,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
       "data-action": EmployeeType.User,
+      action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
@@ -374,7 +379,7 @@ class ContactsConextOptionsStore {
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
-      hasUsersToRemove,
+      hasOnlyOneUserToRemove,
       contactsTab,
     } = this.usersStore;
     const {
@@ -437,7 +442,7 @@ class ContactsConextOptionsStore {
       {
         key: "cm-delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove || (isRoomAdmin && isGuests),
+        disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),
         onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },
@@ -535,7 +540,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
-    const { id, displayName, userName, avatar, statusType } = item;
+    const {
+      id,
+      displayName,
+      userName,
+      avatar,
+      statusType,
+      isCollaborator,
+      isVisitor,
+    } = item;
 
     closeDialogs();
 
@@ -545,6 +558,8 @@ class ContactsConextOptionsStore {
       displayName,
       statusType,
       userName,
+      isCollaborator,
+      isVisitor,
     });
 
     setDataReassignmentDialogVisible(true);
@@ -640,6 +655,7 @@ class ContactsConextOptionsStore {
         icon: PersonUserReactSvgUrl,
         label: t("Common:Invite"),
         key: "new-user",
+        openByDefault: true,
         items: accountsUserOptions,
       },
       {

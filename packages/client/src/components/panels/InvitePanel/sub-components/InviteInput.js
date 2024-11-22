@@ -104,7 +104,6 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   isPaidUserAccess,
-  setInvitePaidUsersCount,
   isUserTariffLimit,
   removeExist,
   inputValue,
@@ -113,8 +112,6 @@ const InviteInput = ({
   setUsersList,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
-  const [invitedUsers, setInvitedUsers] = useState(new Map());
 
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -205,8 +202,6 @@ const InviteInput = ({
               userAccess = FreeUser;
               isShowErrorToast = true;
             }
-          } else {
-            setInvitePaidUsersCount();
           }
         }
 
@@ -236,8 +231,6 @@ const InviteInput = ({
           userAccess = FreeUser;
           toastr.error(<PaidQuotaLimitError />);
         }
-      } else {
-        setInvitePaidUsersCount();
       }
     }
 
@@ -533,7 +526,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue]);
+  }, [usersList, inputValue, selectedAccess]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -561,14 +554,6 @@ const InviteInput = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
-  useEffect(() => {
-    const newInviteItems = new Map();
-
-    inviteItems.forEach((item) => newInviteItems.set(item?.id, item));
-
-    setInvitedUsers((value) => new Map([...value, ...newInviteItems]));
-  }, [inviteItems]);
-
   return (
     <>
       <StyledSubHeader>
@@ -587,10 +572,10 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts", {
+          ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("AddManuallyDescriptionRoom", {
+          : t("InviteToRoomManuallyInfo", {
               productName: t("Common:ProductName"),
             })}
       </StyledDescription>
@@ -653,8 +638,8 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={
               roomId === -1
-                ? t("InviteAccountSearchPlaceholder")
-                : t("InviteRoomSearchPlaceholder")
+                ? t("InviteMembersSearchPlaceholder")
+                : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed={true}
@@ -716,7 +701,7 @@ export default inject(
       inviteItems,
       setInviteLanguage,
       culture,
-      setInvitePaidUsersCount,
+
       isPaidUserAccess,
     } = dialogsStore;
 
@@ -734,7 +719,6 @@ export default inject(
       isOwner,
       isAdmin,
       isPaidUserAccess,
-      setInvitePaidUsersCount,
       isUserTariffLimit,
     };
   },

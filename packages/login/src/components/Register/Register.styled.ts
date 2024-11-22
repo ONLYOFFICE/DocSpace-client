@@ -27,9 +27,9 @@
 import styled from "styled-components";
 
 import { Box } from "@docspace/shared/components/box";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-export const StyledRegister = styled(Box)`
+export const StyledRegister = styled(Box).attrs(injectDefaultTheme)`
   position: absolute;
   display: flex;
   align-items: center;
@@ -44,5 +44,3 @@ export const StyledRegister = styled(Box)`
   background-color: ${(props) => props.theme.login.register.backgroundColor};
   cursor: pointer;
 `;
-
-StyledRegister.defaultProps = { theme: Base };

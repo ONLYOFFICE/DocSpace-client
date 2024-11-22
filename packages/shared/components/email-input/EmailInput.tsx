@@ -66,6 +66,7 @@ const EmailInput = ({
   withBorder = true,
   value = "",
   emailSettings,
+  handleAnimationStart,
   ...rest
 }: EmailInputProps & TextInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
@@ -157,6 +158,7 @@ const EmailInput = ({
       type={InputType.text}
       onValidateInput={onValidateInput}
       onBlur={onBlurAction}
+      onAnimationStart={handleAnimationStart}
     />
   );
 };

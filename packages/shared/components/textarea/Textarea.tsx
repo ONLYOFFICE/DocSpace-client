@@ -49,27 +49,27 @@ const WrappedStyledCopyIcon = ({
 const Textarea = ({
   className,
   id,
-  isDisabled,
-  isReadOnly,
-  hasError,
-  heightScale,
+  isDisabled = false,
+  isReadOnly = false,
+  hasError = false,
+  heightScale = false,
   maxLength,
   name,
   onChange,
-  placeholder,
+  placeholder = " ",
   style,
-  tabIndex,
-  value,
+  tabIndex = -1,
+  value = "",
   fontSize = 13,
   heightTextArea,
   color,
   autoFocus,
-  areaSelect,
-  isJSONField,
-  copyInfoText,
-  enableCopy,
-  hasNumeration,
-  isFullHeight,
+  areaSelect = false,
+  isJSONField = false,
+  copyInfoText = "Content was copied successfully!",
+  enableCopy = false,
+  hasNumeration = false,
+  isFullHeight = false,
   classNameCopyIcon,
 }: TextareaProps) => {
   const areaRef = useRef<null | HTMLTextAreaElement>(null);
@@ -178,27 +178,11 @@ const Textarea = ({
           autoFocus={autoFocus}
           ref={areaRef}
           dir="auto"
+          minHeight={stringifiedHeight}
         />
       </TextareaTheme>
     </Wrapper>
   );
-};
-
-Textarea.defaultProps = {
-  isDisabled: false,
-  isReadOnly: false,
-  hasError: false,
-  heightScale: false,
-  placeholder: " ",
-  tabIndex: -1,
-  value: "",
-  isAutoFocussed: false,
-  areaSelect: false,
-  isJSONField: false,
-  copyInfoText: "Content was copied successfully!",
-  enableCopy: false,
-  hasNumeration: false,
-  isFullHeight: false,
 };
 
 export { Textarea };

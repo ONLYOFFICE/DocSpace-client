@@ -26,10 +26,9 @@
 
 import styled from "styled-components";
 
-import { Base } from "../../themes";
-import { tablet } from "../../utils";
+import { injectDefaultTheme, tablet } from "../../utils";
 
-const StyledDragAndDrop = styled.div<{
+const StyledDragAndDrop = styled.div.attrs(injectDefaultTheme)<{
   dragging?: boolean;
   isDragAccept?: boolean;
 }>`
@@ -59,7 +58,5 @@ user-select: none;*/
     background: ${(props) => props.theme.dragAndDrop.acceptBackground};
   }
 `;
-
-StyledDragAndDrop.defaultProps = { theme: Base };
 
 export default StyledDragAndDrop;

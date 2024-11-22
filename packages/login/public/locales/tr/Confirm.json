@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Uygulamanızdan oluşturulan 6 haneli kodu girin. Eğer telefonunuza erişiminiz yoksa yedek kodları kullanın.",
   "EnterAppCodeTitle": "Kimlik doğrulama uygulamasından kodu girin",
   "EnterCodePlaceholder": "Kodu girin",
+  "EnterEmailHeader": "E-posta girin",
   "EnterPhone": "Cep telefonu numarası giriniz",
   "GetCode": "Kod al",
   "LoginRegistryButton": "Katıl",
+  "Newsletter": "{{organizationName}} haber bültenine abone olmak istiyorum",
   "PassworResetTitle": "Şimdi yeni şifre oluşturabilirsiniz.",
   "PhoneSubtitle": "İki aşamalı doğrulama ekstra güvenliği sağlamak için etkinleştirilmiştir. {{productName}}'te çalışmaya devam etmek için mobil telefon numaranızı giriniz. Mobil telefon numarası ülke koduyla girilmelidir.",
   "PortalContinueTitle": "Lütfen {{productName}}'inizi yeniden etkinleştirmek istediğinizi onaylayın.",
@@ -30,5 +32,6 @@
   "SignUp": "Kaydol",
   "SuccessDeactivate": "Hesabınız başarıyla devre dışı bırakıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz",
   "SuccessReactivate": "Hesabınız başarıyla yeniden etkinleştirildi. 10 saniye içinde <1>portal</1>'a yönlendirileceksiniz.",
-  "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz."
+  "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz.",
+  "TermsAndConditions": "Devam ederek, <1>Şartlar ve koşullar</1> ve <2>Gizlilik bildirimimizi</2> anlıyor ve kabul ediyor olduğunuzu beyan etmiş olursunuz."
 }

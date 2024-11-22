@@ -52,7 +52,6 @@ import {
 import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
 
 import { Trans } from "react-i18next";
-//import TimezoneCombo from "./timezoneCombo";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -100,23 +99,31 @@ const MainProfile = (props) => {
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
+  const [directionY, setDirectionY] = useState("both");
   const { interfaceDirection } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile;
 
   const comboBoxRef = useRef(null);
 
   const updateDropDownMaxHeight = () => {
-    const newDimension = window.innerHeight;
-
     if (comboBoxRef.current) {
+      const padding = 32;
       const comboBoxRect = comboBoxRef.current.getBoundingClientRect();
-      let availableSpaceBottom = newDimension - comboBoxRect.bottom - 20;
+      const availableSpaceBottom =
+        window.innerHeight - comboBoxRect.bottom - padding;
+      const availableSpaceTop = comboBoxRect.top - padding;
 
-      availableSpaceBottom = Math.max(availableSpaceBottom, 100);
+      const max = Math.max(availableSpaceBottom, availableSpaceTop);
 
-      const newDropDownMaxHeight = Math.min(availableSpaceBottom, 352);
+      if (max === availableSpaceBottom) setDirectionY("bottom");
+      else setDirectionY("top");
+
+      const newDropDownMaxHeight = Math.min(max, 352);
+
       setDropDownMaxHeight(newDropDownMaxHeight);
     }
   };
@@ -203,8 +210,6 @@ const MainProfile = (props) => {
       </Box>
     </Text>
   );
-
-  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -418,7 +423,7 @@ const MainProfile = (props) => {
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
               className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+              directionY={isMobileHorizontalOrientation ? "bottom" : directionY}
               options={cultureNames}
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}

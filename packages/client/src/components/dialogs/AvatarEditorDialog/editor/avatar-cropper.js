@@ -36,9 +36,9 @@ import AvatarEditor from "react-avatar-editor";
 
 import { Slider } from "@docspace/shared/components/slider";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledAvatarCropper = styled.div`
+const StyledAvatarCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 216px;
 
   .icon_cropper-crop_area {
@@ -123,8 +123,6 @@ const StyledAvatarCropper = styled.div`
     }
   }
 `;
-
-StyledAvatarCropper.defaultProps = { theme: Base };
 
 const AvatarCropper = ({
   t,

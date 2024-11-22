@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -57,15 +58,8 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { Integration } from "../sub-components/Integration";
-import { loadFrame } from "../utils";
 
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -92,9 +86,10 @@ const SimpleRoom = (props) => {
   const [selectedLink, setSelectedLink] = useState(null);
 
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "manager",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     showHeader: false,
     showTitle: true,
@@ -113,16 +108,18 @@ const SimpleRoom = (props) => {
     },
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    sdk.init(config);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
+    initFrame();
     return () => destroyFrame();
   });
 
@@ -218,10 +215,10 @@ const SimpleRoom = (props) => {
           ? config.height
           : undefined
       }
-      targetId={frameId}
+      targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={frameId}></Box>
+        <Box id={config.frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}
@@ -234,16 +231,16 @@ const SimpleRoom = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PublicRoomDescription")}
+      description={t("JavascriptSdk:PublicRoomPresetInfo")}
       header={t("CreateSamplePublicRoom")}
     >
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
@@ -284,9 +281,7 @@ const SimpleRoom = (props) => {
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:PublicRoomDescription")}
-                      </Text>
+                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
                   />
                 </LabelGroup>
@@ -315,16 +310,16 @@ const SimpleRoom = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}

@@ -1,10 +1,10 @@
 {
   "Desc": "Молимо поставите {{productName}} податке за регистрацију.",
   "ErrorEmail": "Неважећа емаил адреса",
+  "ErrorInstanceId": "Неважећи ID инстанце",
   "ErrorLicenseBody": "Лиценца није важећа. Уверите се да сте изабрали исправну датотеку.",
   "ErrorPassword": "Лозинка не испуњава захтеве",
   "ErrorUploadLicenseFile": "Изабери датотеку лиценце",
-  "GeneratePassword": "Генериши лозинку",
   "License": "Прихватите услове",
   "LicenseLink": "Уговори лиценце",
   "PlaceholderLicense": "Ваша датотека лиценце",

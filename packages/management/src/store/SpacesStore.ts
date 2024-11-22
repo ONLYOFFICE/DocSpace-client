@@ -32,21 +32,19 @@ import {
   createNewPortal,
   checkDomain,
 } from "@docspace/shared/api/management";
-import { TNewPortalData } from "SRC_DIR/types/spaces";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TNewPortalData, TPortals } from "SRC_DIR/types/spaces";
 
 class SpacesStore {
-  settingsStore = null;
+  settingsStore: SettingsStore;
 
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
-  spaceCreatedDialogVisible = false;
 
-  referenceLink: URL | string = "";
+  currentPortal: TPortals | null = null;
 
-  currentPortal = null;
-
-  constructor(settingsStore) {
+  constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
@@ -87,7 +85,7 @@ class SpacesStore {
     }
   };
 
-  checkDomain = async (domain) => {
+  checkDomain = async (domain: string) => {
     const res = await checkDomain(domain);
     return res;
   };
@@ -97,12 +95,8 @@ class SpacesStore {
     return register;
   };
 
-  setCurrentPortal = (portal) => {
+  setCurrentPortal = (portal: TPortals) => {
     this.currentPortal = portal;
-  };
-
-  setReferenceLink = (link: URL | string) => {
-    this.referenceLink = link;
   };
 
   setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {
@@ -115,9 +109,6 @@ class SpacesStore {
 
   setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
     this.deletePortalDialogVisible = deletePortalDialogVisible;
-  };
-  setSpaceCreatedDialogVisible = (spaceCreatedDialogVisible: boolean) => {
-    this.spaceCreatedDialogVisible = spaceCreatedDialogVisible;
   };
 }
 

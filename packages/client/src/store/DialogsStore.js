@@ -124,11 +124,14 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   editMembersGroup = null;
-  pdfFormEditVisible = false;
-  pdfFormEditData = null;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
+  passwordEntryDialogDate = {
+    visible: false,
+    item: null,
+    isDownload: false,
+  };
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
@@ -142,8 +145,9 @@ class DialogsStore {
   };
 
   warningQuotaDialogVisible = false;
-  invitePaidUsersCount = 0;
   isNewQuotaItemsByCurrentUser = false;
+
+  guestReleaseTipDialogVisible = false;
 
   covers = null;
   cover = null;
@@ -192,6 +196,10 @@ class DialogsStore {
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
+  };
+
+  setGuestReleaseTipDialogVisible = (visible) => {
+    this.guestReleaseTipDialogVisible = visible;
   };
 
   setEditRoomDialogProps = (props) => {
@@ -436,11 +444,6 @@ class DialogsStore {
     this.inviteItems = inviteItems;
   };
 
-  setInvitePaidUsersCount = (modifier = 1) => {
-    this.invitePaidUsersCount = this.invitePaidUsersCount + modifier;
-    if (this.invitePaidUsersCount === -1) this.invitePaidUsersCount = 0;
-  };
-
   isPaidUserAccess = (selectedAccess) => {
     return (
       selectedAccess === EmployeeType.Admin ||
@@ -451,18 +454,6 @@ class DialogsStore {
   changeInviteItem = async (item) =>
     runInAction(() => {
       const index = this.inviteItems.findIndex((iItem) => iItem.id === item.id);
-
-      const isPrevAccessPaid = this.isPaidUserAccess(
-        this.inviteItems[index].access,
-      );
-      const isCurrAccessPaid = this.isPaidUserAccess(item.access);
-
-      let modifier = 0;
-
-      if (isPrevAccessPaid && !isCurrAccessPaid) modifier = -1;
-      if (!isPrevAccessPaid && isCurrAccessPaid) modifier = 1;
-
-      this.setInvitePaidUsersCount(modifier);
 
       this.inviteItems[index] = {
         ...this.inviteItems[index],
@@ -552,13 +543,25 @@ class DialogsStore {
     this.shareFolderDialogVisible = visible;
   };
 
-  setCancelUploadDialogVisible = (visible) => {
-    this.cancelUploadDialogVisible = visible;
+  /**
+   * @param {boolean =} visible
+   * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
+   * @returns {void}
+   */
+  setPasswordEntryDialog = (
+    visible = false,
+    item = null,
+    isDownload = false,
+  ) => {
+    this.passwordEntryDialogDate = {
+      visible,
+      item,
+      isDownload,
+    };
   };
 
-  setPdfFormEditVisible = (visible, data) => {
-    this.pdfFormEditVisible = visible;
-    this.pdfFormEditData = data;
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
   };
 
   setReorderDialogVisible = (visible) => {

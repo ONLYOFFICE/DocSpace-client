@@ -28,10 +28,10 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils/device";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-export const LoginContent = styled.div`
+export const LoginContent = styled.div.attrs(injectDefaultTheme)`
   min-height: calc(100vh - 112px);
   display: flex;
   flex-direction: column;
@@ -42,5 +42,3 @@ export const LoginContent = styled.div`
     width: 100%;
   }
 `;
-
-LoginContent.defaultProps = { theme: Base };

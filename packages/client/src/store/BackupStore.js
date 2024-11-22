@@ -560,8 +560,8 @@ class BackupStore {
           const { progress, link, error } = response;
 
           if (error.length > 0 && progress !== 100) {
-            clearInterval(timerId);
-            this.timerId && toastr.error(t("BackupCreatedError"));
+            clearInterval(this.timerId);
+            this.timerId && toastr.error(error);
             this.timerId = null;
             //this.clearLocalStorage();
             this.downloadingProgress = 100;
@@ -599,7 +599,7 @@ class BackupStore {
         clearInterval(this.timerId);
         // this.clearLocalStorage();
         this.downloadingProgress = 100;
-        this.timerId && toastr.error(t("BackupCreatedError"));
+        this.timerId && toastr.error(e);
         this.timerId = null;
       }
     }, 1000);
@@ -608,7 +608,19 @@ class BackupStore {
   clearProgressInterval = () => {
     this.timerId && clearInterval(this.timerId);
     this.timerId = null;
+
+    if (
+      typeof window !== "undefined" &&
+      !window.location.pathname.includes("data-backup") &&
+      !window.location.pathname.includes("restore-backup")
+    ) {
+      this.downloadingProgress = 100;
+    }
   };
+
+  get isBackupProgressVisible() {
+    return this.downloadingProgress > 0 && this.downloadingProgress !== 100;
+  }
 
   setDownloadingProgress = (progress) => {
     this.downloadingProgress = progress;

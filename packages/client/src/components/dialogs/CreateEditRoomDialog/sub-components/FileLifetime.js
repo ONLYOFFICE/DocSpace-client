@@ -150,12 +150,13 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
         <div className="virtual-data-room_file-lifetime_date">
           <TextInput
             className="virtual-data-room_file-lifetime_input"
-            isAutoFocussed={true}
+            isAutoFocussed={!roomParams.lifetime}
             isDisabled={isLoading}
             tabIndex={1}
             value={inputValue}
             onChange={onChange}
             scale
+            maxLength={3}
           />
           <ComboBox
             className="virtual-data-room_file-lifetime_combo-box"
@@ -165,6 +166,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             selectedOption={selectedDate}
             scaledOptions={true}
             onSelect={onSelectDate}
+            directionY="bottom"
           />
         </div>
         <ComboBox
@@ -174,6 +176,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
           selectedOption={selectedDelete}
           scale
           onSelect={onSelectDelete}
+          directionY="bottom"
         />
       </div>
     </StyledFileLifetime>

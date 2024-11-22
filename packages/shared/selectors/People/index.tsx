@@ -229,6 +229,7 @@ const PeopleSelector = ({
   const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
+  const searchTab = useRef(PEOPLE_TAB_ID);
 
   const onSelect = (
     item: TSelectorItem,
@@ -275,6 +276,11 @@ const PeopleSelector = ({
 
   const loadNextPage = useCallback(
     async (startIndex: number) => {
+      if (searchTab.current !== activeTabId && searchValue) {
+        setSearchValue("");
+        searchTab.current = activeTabId;
+        return;
+      }
       const pageCount = 100;
 
       setIsNextPageLoading(true);
@@ -378,16 +384,22 @@ const PeopleSelector = ({
     ],
   );
 
-  const onSearch = useCallback((value: string, callback?: Function) => {
-    isFirstLoadRef.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return value;
-    });
-    callback?.();
-  }, []);
+  const onSearch = useCallback(
+    (value: string, callback?: VoidFunction) => {
+      isFirstLoadRef.current = true;
+      afterSearch.current = true;
 
-  const onClearSearch = useCallback((callback?: Function) => {
+      searchTab.current = activeTabId;
+
+      setSearchValue(() => {
+        return value;
+      });
+      callback?.();
+    },
+    [activeTabId],
+  );
+
+  const onClearSearch = useCallback((callback?: VoidFunction) => {
     isFirstLoadRef.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -405,7 +417,7 @@ const PeopleSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
+          headerLabel: headerProps.headerLabel || t("Common:Contacts"),
         },
       }
     : ({} as TSelectorHeader);
@@ -452,7 +464,9 @@ const PeopleSelector = ({
     status?: EmployeeStatus,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+      >
         <Box displayProp="flex" alignItems="center" gapProp="8px">
           <Text
             className="label"
@@ -485,10 +499,14 @@ const PeopleSelector = ({
     );
   };
 
-  const changeActiveTab = useCallback((tab: number | string) => {
-    setActiveTabId(`${tab}`);
-    isFirstLoadRef.current = true;
-  }, []);
+  const changeActiveTab = useCallback(
+    (tab: number | string) => {
+      setActiveTabId(`${tab}`);
+      onSearch("");
+      isFirstLoadRef.current = true;
+    },
+    [onSearch],
+  );
 
   const withTabsProps: TSelectorTabs =
     (withGroups || withGuests) && !isGroupsOnly && !isGuestsOnly
@@ -497,7 +515,7 @@ const PeopleSelector = ({
           tabsData: [
             {
               id: PEOPLE_TAB_ID,
-              name: t("Common:People"),
+              name: t("Common:Members"),
               onClick: () => changeActiveTab(PEOPLE_TAB_ID),
               content: null,
             },
@@ -582,7 +600,7 @@ const PeopleSelector = ({
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuestsFilter")
           : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:NotFoundUsers")
+            ? t("Common:NotFoundMembers")
             : t("Common:NotFoundGroups")
       }
       searchEmptyScreenDescription={

@@ -131,6 +131,7 @@ export type TCreateUserData = {
   lastName: string;
   key?: string;
   type?: number;
+  spam: boolean;
 };
 
 export type TActivateConfirmUser = {

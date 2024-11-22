@@ -1078,14 +1078,15 @@ export const getLogoFromPath = (path: string) => {
 };
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
+
 export const getIconPathByFolderType = (
   folderType?: FolderTypeValueOf,
 ): string => {
   const defaultPath = "folder.svg";
 
   const folderIconPath: Partial<Record<FolderTypeValueOf, string>> = {
-    [FolderType.Done]: "done.svg",
-    [FolderType.InProgress]: "inProgress.svg",
+    [FolderType.Done]: "folderComplete.svg",
+    [FolderType.InProgress]: "folderInProgress.svg",
     [FolderType.DEFAULT]: defaultPath,
   };
 
@@ -1219,7 +1220,7 @@ export const getUserTypeName = (
 
   if (isCollaborator) return t("Common:User");
 
-  return t("Common:User");
+  return t("Common:Guest");
 };
 
 export const getUserTypeDescription = (
@@ -1237,7 +1238,7 @@ export const getUserTypeDescription = (
 
   if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
-  return t("Translations:RoleViewerDescription");
+  return t("Translations:RoleGuestDescriprion");
 };
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {

@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Link } from "@docspace/shared/components/link";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
@@ -104,15 +104,17 @@ const Providers = (props: ProvidersProps) => {
             onClick={() => setWorkspace(workspace.title)}
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
-            <Link
-              className="link"
+
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
               type={LinkType.page}
               fontWeight="600"
               isHovered
               isTextOverflow
             >
               {t("Import")}
-            </Link>
+            </ColorTheme>
           </Box>
         ))}
       </Box>

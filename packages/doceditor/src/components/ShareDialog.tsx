@@ -24,28 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-
+import moment from "moment";
+import "moment/min/locales.min";
 import Share from "@docspace/shared/components/share";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { Base } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
   margin-top: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 type SharingDialogProps = {
   fileInfo: TFile;
@@ -58,7 +57,11 @@ const SharingDialog = ({
   onCancel,
   isVisible,
 }: SharingDialogProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t, i18n } = useTranslation(["Common"]);
+
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
 
   return (
     <ModalDialog

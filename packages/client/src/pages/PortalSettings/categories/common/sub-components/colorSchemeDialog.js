@@ -142,14 +142,16 @@ const ColorSchemeDialog = (props) => {
       visible={visible}
       onClose={onClose}
       displayType="aside"
-      currentColorAccent={currentColorAccent}
-      currentColorButtons={currentColorButtons}
       withFooterBorder={showSaveButtonDialog}
       withBodyScroll={true}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent className="new-colors-container">
+        <StyledBodyContent
+          className="new-colors-container"
+          currentColorAccent={currentColorAccent}
+          currentColorButtons={currentColorButtons}
+        >
           <div className="flex relative">
             <div className="name-color">{t("Settings:AccentColor")}</div>
             <div

@@ -47,7 +47,7 @@ const QuotaPerItemComponent = (props) => {
     isQuotaSet,
     type,
 
-    defaultQuota,
+    tabIndex,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -121,6 +121,7 @@ const QuotaPerItemComponent = (props) => {
             onSave={onSaveQuota}
             onCancel={onCancel}
             initialSize={initialSize}
+            tabIndex={tabIndex}
           />
         )}
       </div>

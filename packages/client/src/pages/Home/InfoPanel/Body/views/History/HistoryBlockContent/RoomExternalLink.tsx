@@ -69,6 +69,7 @@ interface HistoryRoomExternalLinkProps {
     isFormRoom?: boolean;
   }) => void;
   isFormRoom?: boolean;
+  withWrapping?: boolean;
 }
 
 const HistoryRoomExternalLink = ({
@@ -79,6 +80,7 @@ const HistoryRoomExternalLink = ({
   setLinkParams,
   roomId,
   isFormRoom,
+  withWrapping,
 }: HistoryRoomExternalLinkProps) => {
   const onEditLink = () => {
     if (!feedData.sharedTo) {
@@ -96,9 +98,16 @@ const HistoryRoomExternalLink = ({
   };
 
   return (
-    <StyledHistoryLink>
+    <StyledHistoryLink
+      style={withWrapping && { display: "inline", wordBreak: "break-all" }}
+    >
       {canEditLink ? (
-        <Link className="text link" onClick={onEditLink}>
+        <Link
+          className="text link"
+          onClick={onEditLink}
+          isTextOverflow
+          style={withWrapping && { display: "inline", textWrap: "wrap" }}
+        >
           {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
         </Link>
       ) : (

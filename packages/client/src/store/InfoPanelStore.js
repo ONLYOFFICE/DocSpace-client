@@ -40,6 +40,10 @@ import {
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
+import {
+  getCreateShareLinkKey,
+  getExpirationDate,
+} from "@docspace/shared/components/share/Share.helpers";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
@@ -47,6 +51,7 @@ import {
   editExternalLink,
   addExternalLink,
   checkIsPDFForm,
+  getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -128,15 +133,29 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
-    if (
+    const selectedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.parentRoomType;
+
+    const archivedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.rootFolderType === FolderType.Archive;
+
+    const isFolderOpenedThroughSectionHeader =
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom &&
-        !this.infoPanelSelectedItems[0]?.inRoom) ||
-      (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
+        this.infoPanelSelectedItems[0].id === this.selectedFolderStore.id) ||
+      this.infoPanelSelectedItems.length === 0;
+
+    if (
+      (selectedFolderIsRoomOrFolderInRoom ||
+        archivedFolderIsRoomOrFolderInRoom) &&
+      isFolderOpenedThroughSectionHeader
     ) {
-      this.setView(infoDetails);
-    } else {
       this.setView(infoMembers);
+    } else {
+      this.setView(infoDetails);
     }
 
     this.isVisible = bool;
@@ -209,9 +228,11 @@ class InfoPanelStore {
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    const isGroups = this.getIsContacts() === "groups";
+    const contactsTab = this.peopleStore.usersStore.contactsTab;
 
-    if (!isGroups) {
+    const isGroups = contactsTab === "groups";
+
+    if (!isGroups && contactsTab) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
@@ -260,11 +281,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return (
-      this.infoPanelCurrentSelection?.access ===
-        ShareAccessRights.RoomManager ||
-      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
-    );
+    return this.infoPanelCurrentSelection?.security?.EditAccess;
   }
 
   getViewItem = () => {
@@ -352,6 +369,8 @@ class InfoPanelStore {
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
+    console.log("newInfoPanelSelection", newInfoPanelSelection);
+
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,
     );
@@ -422,7 +441,7 @@ class InfoPanelStore {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
-      "/accounts/people",
+      user.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -507,9 +526,9 @@ class InfoPanelStore {
 
     if (
       this.getIsContacts() &&
-      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+      (!infoPanelSelection?.email || !infoPanelSelection?.displayName)
     ) {
-      this.infoPanelSelection = !infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection?.length
         ? infoPanelSelection
         : null;
       return;
@@ -683,7 +702,7 @@ class InfoPanelStore {
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
 
-    links && this.publicRoomStore.setExternalLinks(links);
+    this.publicRoomStore.setExternalLinks(links ?? []);
 
     const { administrators, users, expectedMembers, groups, guests } =
       this.convertMembers(t, data, clearFilter, withoutTitlesAndLinks);
@@ -793,6 +812,7 @@ class InfoPanelStore {
           setExternalLinks(links);
           return historyWithLinks;
         }
+        setExternalLinks([]);
         return data;
       })
       .then((data) => {
@@ -847,6 +867,7 @@ class InfoPanelStore {
           setExternalLinks(links);
           return historyWithLinks;
         }
+        setExternalLinks([]);
         return data;
       })
       .then((data) => {
@@ -890,6 +911,10 @@ class InfoPanelStore {
     this.setView(infoShare);
     this.isVisible = true;
   };
+  openMembersTab = () => {
+    this.setView(infoMembers);
+    this.isVisible = true;
+  };
 
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);
@@ -914,10 +939,28 @@ class InfoPanelStore {
       }
     }
 
+    /**
+     *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
+     */
+    const value = JSON.parse(
+      localStorage.getItem(
+        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
+      ) ?? "null",
+    );
+
     const { getFileInfo } = this.filesStore;
 
-    const res = await getPrimaryLink(fileId);
+    const res = await (value
+      ? getPrimaryLinkIfNotExistCreate(
+          fileId,
+          value.access,
+          value.internal,
+          getExpirationDate(value.diffExpirationDate),
+        )
+      : getPrimaryLink(fileId));
+
     await getFileInfo(fileId);
+
     return res;
   };
 
@@ -948,10 +991,16 @@ class InfoPanelStore {
     return res;
   };
 
-  addFileLink = async (fileId, access, primary, internal) => {
+  addFileLink = async (fileId, access, primary, internal, expirationDate) => {
     const { getFileInfo } = this.filesStore;
 
-    const res = await addExternalLink(fileId, access, primary, internal);
+    const res = await addExternalLink(
+      fileId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+    );
     await getFileInfo(fileId);
     return res;
   };

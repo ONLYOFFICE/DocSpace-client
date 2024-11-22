@@ -106,6 +106,7 @@ class DetailsHelper {
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
+    this.roomLifetime = props.roomLifetime;
   }
 
   getPropertyList = () => {
@@ -359,7 +360,17 @@ class DetailsHelper {
   };
 
   getItemExpiredDate = () => {
-    return text(parseAndFormatDate(this.item.expired, this.culture));
+    return this.roomLifetime?.deletePermanently
+      ? text(
+          this.t("Files:WillBeDeletedPermanently", {
+            date: parseAndFormatDate(this.item.expired, this.culture),
+          }),
+        )
+      : text(
+          this.t("Files:WillBeMovedToTrash", {
+            date: parseAndFormatDate(this.item.expired, this.culture),
+          }),
+        );
   };
 
   getItemVersions = () => {

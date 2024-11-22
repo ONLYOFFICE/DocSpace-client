@@ -30,15 +30,15 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { isMobile } from "@docspace/shared/utils";
-
-import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
+import { FileType, FolderType } from "@docspace/shared/enums";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
   selection,
@@ -54,6 +54,7 @@ const Details = ({
   setNewInfoPanelSelection,
   getLogoCoverModel,
   onChangeFile,
+  roomLifetime,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -73,6 +74,7 @@ const Details = ({
     selectTag,
     isDefaultRoomsQuotaSet,
     setNewInfoPanelSelection,
+    roomLifetime,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -103,6 +105,8 @@ const Details = ({
     : selection?.logo?.cover
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
+
+  const badgeUrl = getRoomBadgeUrl(selection, 24);
 
   //console.log("InfoPanel->Details render", { selection });
 
@@ -148,10 +152,11 @@ const Details = ({
             logo={currentIcon}
             model={model}
             withEditing={
-              (selection.isRoom && selection?.security?.EditRoom) || false
+              (selection.isRoom && selection.security?.EditRoom) || false
             }
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
+            badgeUrl={badgeUrl}
           />
         </StyledNoThumbnail>
       )}
@@ -190,12 +195,14 @@ export default inject(
     currentQuotaStore,
     dialogsStore,
     avatarEditorDialogStore,
+    selectedFolderStore,
   }) => {
     const {
       infoPanelSelection,
       getInfoPanelItemIcon,
       openUser,
       setNewInfoPanelSelection,
+      infoPanelRoom,
     } = infoPanelStore;
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
@@ -223,6 +230,7 @@ export default inject(
       setNewInfoPanelSelection,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
+      roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
     };
   },
 )(

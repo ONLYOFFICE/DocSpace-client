@@ -87,6 +87,12 @@ const StyledIconContainer = styled.div<{
   }
   border-radius: 4px;
 
+  svg {
+    path {
+      fill: ${(props) => props.theme.logoCover.iconColor};
+    }
+  }
+
   &:hover {
     cursor: pointer;
     svg {
@@ -140,10 +146,13 @@ export const SelectIcon = ({
 
   return (
     <div>
-      <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-      <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
-        {t("WithoutIcon")}
-      </StyledWithoutIcon>
+      <div className="icon-container">
+        <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
+        <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
+          {t("WithoutIcon")}
+        </StyledWithoutIcon>
+      </div>
+
       <div className="cover-icon-container">
         {covers &&
           covers?.map((icon) => {

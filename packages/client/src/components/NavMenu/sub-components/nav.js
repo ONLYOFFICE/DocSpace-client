@@ -29,9 +29,10 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledNav = styled.nav`
+const StyledNav = styled.nav.attrs(injectDefaultTheme)`
   background-color: ${(props) => props.theme.nav.backgroundColor};
   height: 100%;
 
@@ -70,8 +71,6 @@ const StyledNav = styled.nav`
     }
   }
 `;
-
-StyledNav.defaultProps = { theme: Base };
 
 const StyledScrollbar = styled(Scrollbar)`
   width: ${(props) => (props.opened ? 240 : 56)};

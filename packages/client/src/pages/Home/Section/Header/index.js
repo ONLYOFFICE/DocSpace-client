@@ -27,6 +27,7 @@
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
+import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -57,6 +58,7 @@ import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
@@ -126,11 +128,27 @@ const StyledContainer = styled.div`
     .title-icon {
       svg {
         path {
-          fill: ${(props) => props.theme.backgroundColor};
+          fill: ${({ theme, isExternalFolder }) =>
+            isExternalFolder
+              ? theme.roomIcon.linkIcon.path
+              : theme.backgroundColor};
         }
         rect {
           stroke: ${(props) => props.theme.backgroundColor};
         }
+      }
+    }
+
+    .header_sign-in-button {
+      margin-inline-start: auto;
+      display: block;
+
+      @media ${tablet} {
+        margin-inline-start: 16px;
+      }
+
+      @media ${mobile} {
+        display: none;
       }
     }
   }
@@ -223,6 +241,7 @@ const SectionHeaderContent = (props) => {
     isFrame,
     showTitle,
     hideInfoPanel,
+    showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
@@ -236,6 +255,12 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible,
     setGroupsBufferSelection,
     createFoldersTree,
+    showSignInButton,
+    onSignInClick,
+    signInButtonIsDisabled,
+    isShared,
+    isExternal,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -397,7 +422,18 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const getTitleIcon = () => {
+    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
+
+    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
+
+    if (isVirtualDataRoomType && selectedFolder.lifetime)
+      return LifetimeRoomIconUrl;
+
+    return "";
+  };
   const onLogoClick = () => {
+    if (isFrame) return;
     moveToPublicRoom(props.rootFolderId);
   };
 
@@ -514,15 +550,17 @@ const SectionHeaderContent = (props) => {
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
 
-  const titleIcon =
-    (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
-    (isVirtualDataRoomType && selectedFolder.lifetime && LifetimeRoomIconUrl);
+  const titleIcon = getTitleIcon();
 
   const titleIconTooltip = selectedFolder.lifetime
-    ? t("Files:RoomFilesLifetime", {
+    ? `${t("Files:RoomFilesLifetime", {
         days: selectedFolder.lifetime.value,
         period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
-      })
+      })}. ${
+        selectedFolder.lifetime.deletePermanently
+          ? t("Files:AfterFilesWillBeDeletedPermanently")
+          : t("Files:AfterFilesWillBeMovedToTrash")
+      }`
     : null;
 
   const navigationButtonLabel = showNavigationButton
@@ -541,6 +579,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
+          isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
@@ -599,8 +638,14 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={isPublicRoom && logo}
-                burgerLogo={isPublicRoom && burgerLogo}
+                withLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  logo
+                }
+                burgerLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  burgerLogo
+                }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
@@ -615,6 +660,16 @@ const SectionHeaderContent = (props) => {
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
               />
+              {showSignInButton && (
+                <Button
+                  className="header_sign-in-button"
+                  label={t("Common:LoginButton")}
+                  size={ButtonSize.small}
+                  onClick={onSignInClick}
+                  isDisabled={signInButtonIsDisabled}
+                  primary
+                />
+              )}
             </div>
           )}
           {isFrame && (
@@ -723,17 +778,17 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -794,6 +849,7 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
+    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
@@ -873,6 +929,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
       currentGroup,
@@ -892,6 +949,9 @@ export default inject(
       contactsCanCreate,
 
       rootFolderId,
+      isShared,
+      isExternal,
+      displayAbout,
     };
   },
 )(
@@ -905,5 +965,6 @@ export default inject(
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
+    "Notifications",
   ])(observer(SectionHeaderContent)),
 );

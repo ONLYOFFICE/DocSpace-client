@@ -100,7 +100,6 @@ const PureHome = (props) => {
     refreshFiles,
 
     setFrameConfig,
-    user,
     folders,
     files,
     selection,
@@ -166,6 +165,8 @@ const PureHome = (props) => {
     disableUploadPanelOpen,
     setContactsTab,
     isUsersEmptyView,
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -179,7 +180,7 @@ const PureHome = (props) => {
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
-    (contactsView === "groups" && isEmptyGroups) || isUsersEmptyView;
+    contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
@@ -256,6 +257,9 @@ const PureHome = (props) => {
     getUsersList,
     getGroups,
     updateCurrentGroup,
+
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   });
 
   useSettings({
@@ -273,7 +277,7 @@ const PureHome = (props) => {
     files,
     filesList,
     selection,
-    user,
+    userId,
     createFile,
     createFolder,
     createRoom,
@@ -438,6 +442,7 @@ export const Component = inject(
     settingsStore,
     contextOptionsStore,
     indexingStore,
+    dialogsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -545,6 +550,7 @@ export const Component = inject(
       showCatalog,
       enablePlugins,
       getSettings,
+      showGuestReleaseTip,
     } = settingsStore;
 
     const {
@@ -640,7 +646,6 @@ export const Component = inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: userStore.user,
       folders,
       files,
       selection,
@@ -682,6 +687,9 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
+      showGuestReleaseTip,
+      setGuestReleaseTipDialogVisible:
+        dialogsStore.setGuestReleaseTipDialogVisible,
     };
   },
 )(observer(Home));

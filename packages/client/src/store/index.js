@@ -28,7 +28,6 @@ import {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -313,7 +312,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore();
+const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -330,7 +329,6 @@ const store = {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,

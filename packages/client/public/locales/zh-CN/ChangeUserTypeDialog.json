@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "访客<strong>{{userName}}</strong>将被移动到“{{membersSection}}”部分，并分配为用户类型。用户拥有自己的“{{documentsSection}}”部分，可以创建和编辑文件，但无法创建房间。",
+  "ChangeGuestsTypeMessageMulti": "所选访客将被移动到“{{membersSection}}”部分，并分配为用户类型。用户拥有自己的“{{documentsSection}}”部分，可以创建和编辑文件，但无法创建房间。",
   "ChangeUserTypeButton": "变更类型",
   "ChangeUserTypeHeader": "变更用户类型",
   "ChangeUserTypeMessage": "<strong>‘{{ firstType }}’</strong>类型的用户将被移动至<strong>‘{{ secondType }}’</strong>类型。",
   "ChangeUserTypeMessageMulti": "选择的用户将被移动至<strong>'{{ secondType }}'</strong>类型。",
   "ChangeUserTypeMessageWarning": " 您无法更改{{productName}}管理员和您自己的类型。",
+  "SuccessChangeGuestType": "该访客类型已成功更改",
   "SuccessChangeUserType": "用户类型已成功变更"
 }

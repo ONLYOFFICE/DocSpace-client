@@ -39,6 +39,7 @@ import { ExpiredComboBoxProps } from "../Share.types";
 import ShareCalendar from "./ShareCalendar";
 import { globalColors } from "../../../themes";
 import { ShareAccessRights } from "../../../enums";
+import { classNames } from "../../../utils";
 
 const ExpiredComboBox = ({
   link,
@@ -47,6 +48,7 @@ const ExpiredComboBox = ({
   isRoomsLink,
   changeAccessOption,
   availableExternalRights,
+  removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -97,6 +99,8 @@ const ExpiredComboBox = ({
   };
 
   const onRemoveLink = () => {
+    if (isRoomsLink) return removedExpiredLink?.(link);
+
     if (availableExternalRights.None)
       changeAccessOption(
         {
@@ -119,6 +123,7 @@ const ExpiredComboBox = ({
     setSevenDays,
     setUnlimited,
     onCalendarOpen,
+    i18n.language,
   );
 
   const getExpirationTrans = () => {
@@ -168,7 +173,14 @@ const ExpiredComboBox = ({
   return (
     <div ref={bodyRef}>
       {isExpired ? (
-        <Text className="expire-text" as="div" fontSize="12px" fontWeight="400">
+        <Text
+          className={classNames("expire-text", {
+            "expire-text-room": Boolean(isRoomsLink),
+          })}
+          as="div"
+          fontSize="12px"
+          fontWeight="400"
+        >
           {t("Common:LinkExpired")}{" "}
           <Link
             type={LinkType.action}
@@ -181,7 +193,14 @@ const ExpiredComboBox = ({
           </Link>
         </Text>
       ) : (
-        <Text className="expire-text" as="div" fontSize="12px" fontWeight="400">
+        <Text
+          className={classNames("expire-text", {
+            "expire-text-room": Boolean(isRoomsLink),
+          })}
+          as="div"
+          fontSize="12px"
+          fontWeight="400"
+        >
           {getExpirationTrans()}
         </Text>
       )}

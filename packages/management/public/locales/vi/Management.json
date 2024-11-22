@@ -1,10 +1,14 @@
 {
   "ChangeDomainDescription": "Việc thay đổi tên miền có thể gây ra một số lỗi hệ thống. Sau khi thay đổi tên miền, bạn sẽ cần định lại cấu hình các cài đặt sau: thư, tài khoản, tham số jabber.",
+  "CompleteSetup": "Hoàn thành thiết lập",
   "ConfigurationDescription": "Bạn cần kết nối tên miền của mình với IP hiện tại để thay đổi cài đặt địa chỉ. Xin hãy đảm bảo bạn có quyền truy cập vào cài đặt tên miền để có thể thực hiện điều đó. Sau khi kết nối tên miền, hãy tạo tên {{productName}}. Bạn có thể thay đổi tên {{productName}} đã tạo sau này bằng cách sử dụng cài đặt không gian.",
   "ConfigurationHeader": "Cấu hình không gian hiện tại",
   "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian, bạn cần đặt tên {{productName}} trong tương lai",
   "CreatingPortal": "Tạo {{productName}} mới",
   "CurrentSpace": "Không gian hiện tại",
+  "DeleteEmptyPortalText": "Bạn sẽ xóa vĩnh viễn không gian <1>{{domain}}</1>. Hành động này không thể được hoàn tác.",
+  "DeleteRequestSuccess": "Yêu cầu xóa đã được gửi thành công đến địa chỉ email <1>{{email}}</1> của chủ sở hữu {{productName}}",
+  "DeleteWarning": "Không thể xóa không gian truy cập đầy đủ cuối cùng",
   "DomainName": "Tên miền",
   "DomainNotFound": "Không tìm thấy tên miền, vui lòng kiểm tra cài đặt DNS",
   "DomainSettings": "Cài đặt tên miền",
@@ -18,5 +22,6 @@
   "SettingsDisabled": "Những cài đặt này sẽ khả dụng sau khi không gian thứ hai được tạo và được áp dụng cho tất cả các không gian của bạn.",
   "SettingsForAll": "Những cài đặt này sẽ hiệu lực cho tất cả các không gian của bạn.",
   "Subheader": "Sử dụng phần này để tạo một số không gian và giúp người dùng của bạn có thể truy cập chúng",
+  "SubmitDelete": "Gửi yêu cầu xóa",
   "VisitSpace": "Truy cập không gian này sau khi tạo"
 }

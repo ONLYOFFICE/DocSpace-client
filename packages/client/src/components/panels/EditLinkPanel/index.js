@@ -27,7 +27,6 @@
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
@@ -35,6 +34,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
@@ -139,10 +140,10 @@ const EditLinkPanel = (props) => {
         setLinkParams({ link, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
-          copy(linkValue);
+          copyShareLink(linkValue);
           // toastr.success(t("Files:LinkEditedSuccessfully"));
         } else {
-          copy(link?.sharedTo?.shareLink);
+          copyShareLink(link?.sharedTo?.shareLink);
 
           // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }

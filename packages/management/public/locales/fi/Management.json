@@ -1,10 +1,12 @@
 {
   "ChangeDomainDescription": "Verkkotunnuksen muuttaminen saattaa aiheuttaa järjestelmävirheen. Verkkotunnuksen muuttamisen jälkeen sinun täytyy määrittää seuraavat asetukset uudelleen: posti, tili, jabberin parametrit.",
+  "CompleteSetup": "Viimeistele asennus",
   "ConfigurationDescription": "Sinun täytyy yhdistää verkkotunnuksesi nykyiseen IP:en muuttaaksesi osoiteasetuksia. Ole hyvä ja varmista, että sinulla on pääsy verkkotunnuksen asetuksiin voidaksesi tehdä sen. Verkkotunnuksen yhdistämisen jälkeen luo {{productName}}-nimi. Voit muuttaa luotua {{productName}}-nimeä myöhemmin käyttäen tilan asetuksia.",
   "ConfigurationHeader": "Nykyinen tilan kokoonpano.",
   "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi tilan osoiteasetuksia sinun täytyy asettaa tuleva {{productName}}-nimi",
   "CreatingPortal": "Luodaan uutta {{productName}}",
   "CurrentSpace": "Nykyinen tila",
+  "DeleteRequestSuccess": "Poistopyyntö on onnistuneesti lähetetty {{productName}} omistajan sähköpostiosoitteeseen <1>{{email}}</1>",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",
   "DomainSettings": "Verkkotunnuksen asetukset",
@@ -18,5 +20,6 @@
   "SettingsDisabled": "Nämä asetukset avautuvat käyttöön, kun toinen tila on luotu ja asetettu kaikkiin käytössä oleviin tiloihisi. ",
   "SettingsForAll": "Nämä asetukset tulevat käyttöön  kaikissa tiloissasi. ",
   "Subheader": "Käytä tätä osiota luodaksesi useita tiloja ja lisätäksesi käyttäjillesi niihin oikeudet.",
+  "SubmitDelete": "Lähetä poistopyyntö",
   "VisitSpace": "Käy tässä tilassa sen luomisen jälkeen"
 }

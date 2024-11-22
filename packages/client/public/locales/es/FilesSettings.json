@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Secciones adicionales",
   "DisplayFavorites": "Mostrar Favoritos",
+  "DisplayFileExtension": "Mostrar la extensión del archivo junto al nombre del archivo",
   "DisplayNotification": "Mostrar notificación al mover elementos a la Papelera",
   "DisplayRecent": "Mostrar Recientes",
   "DisplayTemplates": "Mostrar plantillas",

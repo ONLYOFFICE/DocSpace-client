@@ -139,8 +139,6 @@ class PublicRoomStore {
       })
       .finally(() => {
         this.setIsSectionLoading(false);
-
-        frameCallCommand("setIsLoaded");
       });
   };
 

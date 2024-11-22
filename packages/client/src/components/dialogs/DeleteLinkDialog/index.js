@@ -84,7 +84,7 @@ const DeleteLinkDialogComponent = (props) => {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
-      .catch((err) => toastr.error(err?.message))
+      .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
         setIsLoading(false);
         onClose();

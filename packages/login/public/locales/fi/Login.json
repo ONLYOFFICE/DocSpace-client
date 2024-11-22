@@ -1,6 +1,5 @@
 {
   "CodeTitle": "Koodi lähetettiin sinulle sähköpostitse",
-  "EnterCredentials": "Ole hyvä ja syötä {{productName}} käyttäjätietosi vahvistaaksesi poisto",
   "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{productName}}</1>",
   "ForgotPassword": "Unohditko salasanasi?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}:n käyttäjänimi",

@@ -3,13 +3,14 @@
   "EmailErrorMessage": "Невалиден имейл адрес. Можете да редактирате имейла, като щракнете двукратно върху него.",
   "GroupMaxAvailableRoleWarning": "Групи могат да се добавят към стая с роля {{roleName}} като максимум. Въпреки това, можете да промените ролята на отделните потребители в групата, след като бъде добавена успешно.",
   "InvitationLanguage": "Език на поканата",
-  "InviteAccountSearchPlaceholder": "Поканете хора по имейл",
-  "InviteNewAccountManuallyDescription": "Поканете нови потребители в {{productName}} лично чрез имейл",
+  "InviteToRoomManuallyInfo": "Добавете съществуващи {{productName}} контакти. Или поканете нови потребители лично чрез имейл. Нови потребители ще бъдат добавени към вашия списък с гости.",
+  "InviteToRoomSearchPlaceholder": "Търси и покани по име или имейл",
   "InviteViaLink": "Поканете чрез линк",
   "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в {{productName}}",
   "InviteViaLinkDescriptionRoom": "Създайте универсален линк за самоупълномощаване в стаята",
   "LinkCopySuccess": "Връзката беше копирана",
   "ResetChange": "Нулирай промяна",
   "SendInvitation": "Изпращане на покана",
+  "UserMaxAvailableRoleWarning": "Гостите и потребителите не могат да бъдат назначени като мениджъри на стаи. Само администратори на стая и {{productName}} са подходящи за посочената роля.",
   "UsersAlreadyAdded": "Някои потребители вече са добавени"
 }

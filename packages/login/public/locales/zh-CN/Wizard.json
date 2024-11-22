@@ -1,6 +1,7 @@
 {
   "Desc": "请设置{{productName}}注册数据。",
   "ErrorEmail": "无效邮件地址",
+  "ErrorInstanceId": "无效的实例 id",
   "ErrorLicenseBody": "许可无效。确保选择正确的文件",
   "ErrorPassword": "密码不符合要求",
   "ErrorUploadLicenseFile": "选择许可文件",

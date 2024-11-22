@@ -67,10 +67,17 @@ const ChangeUserTypeDialog = ({
         i18nKey="ChangeGuestsTypeMessage"
         ns="ChangeUserTypeDialog"
         t={t}
-        values={{ userName: userNames[0] }}
+        values={{
+          userName: userNames[0],
+          membersSection: t("Common:Members"),
+          documentsSection: t("Common:Documents"),
+        }}
       />
     ) : (
-      t("ChangeGuestsTypeMessageMulti")
+      t("ChangeGuestsTypeMessageMulti", {
+        membersSection: t("Common:Members"),
+        documentsSection: t("Common:Documents"),
+      })
     );
 
   return (

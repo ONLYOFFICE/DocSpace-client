@@ -303,12 +303,11 @@ const SectionBodyContent = (props) => {
     clearEdgeScrollingTimer();
     setStartDrag(false);
 
-    droppableSeparator && droppableSeparator.remove();
-
     setTimeout(() => {
       isDragActive = false;
       setDragging(false);
       document.body.classList.remove("drag-cursor");
+      droppableSeparator && droppableSeparator.remove();
     }, 0);
 
     const treeElem = e.target.closest(".tree-drag");

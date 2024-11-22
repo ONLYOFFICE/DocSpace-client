@@ -24,8 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface FormEditingDialogProps
-  extends Partial<
-      Pick<TStore["dialogsStore"], "setPdfFormEditVisible" | "pdfFormEditData">
-    >,
-    Partial<Pick<TStore["filesStore"], "openDocEditor">> {}
+export default function componentLoader(lazyComponent: () => Promise<unknown>) {
+  return new Promise((resolve) => {
+    const hasRefreshed = JSON.parse(
+      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
+    );
+
+    lazyComponent()
+      .then((component: unknown) => {
+        resolve(component);
+      })
+      .catch((error: unknown) => {
+        const { message, stack } = error as Error;
+
+        const isChunkError = message?.includes("Loading chunk");
+
+        if (!hasRefreshed && isChunkError) {
+          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
+          return window.location.reload();
+        }
+
+        window.sessionStorage.setItem(
+          "errorLog",
+          JSON.stringify({ message, stack }),
+        );
+
+        window.location.replace(`/error/520`);
+      });
+  });
+}

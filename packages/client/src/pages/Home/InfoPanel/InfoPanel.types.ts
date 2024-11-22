@@ -38,4 +38,5 @@ export type TInfoPanelSelection =
   | TUser
   | TUser[]
   | TGroup
-  | TGroup[];
+  | TGroup[]
+  | null;

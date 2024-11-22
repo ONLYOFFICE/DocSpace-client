@@ -46,6 +46,12 @@ enum IconNames {
   Folder = "folder.svg",
   FolderComplete = "folderComplete.svg",
   FolderInProgress = "folderInProgress.svg",
+  CustomRoom = "room/custom.svg",
+  EditingRoom = "room/editing.svg",
+  FormRoom = "room/form.svg",
+  PublicRoom = "room/public.svg",
+  VirtualRoom = "room/virtual-data.svg",
+  ArchiveRoom = "room/archive.svg",
 }
 
 const iconsMap: Record<IconNames, string[]> = {
@@ -119,6 +125,12 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.Folder]: ["folder"],
   [IconNames.FolderComplete]: ["folderComplete"],
   [IconNames.FolderInProgress]: ["folderInProgress"],
+  [IconNames.CustomRoom]: ["customRoom"],
+  [IconNames.EditingRoom]: ["editingRoom"],
+  [IconNames.FormRoom]: ["formRoom"],
+  [IconNames.PublicRoom]: ["publicRoom"],
+  [IconNames.VirtualRoom]: ["virtualRoom"],
+  [IconNames.ArchiveRoom]: ["archiveRoom"],
 };
 
 const getSvgByName = (name: string): string => `${name.replace(/^\./, "")}.svg`;
@@ -138,15 +150,15 @@ const generateSvgUrlPair = (format: string, size: number): [string, string] => {
 };
 
 const getIconsMap = (size: number): Map<string, string> => {
-  const iconMap = new Map<string, string>();
-  const formats = Object.values(iconsMap).flat();
+  const entries = Object.values(iconsMap)
+    .flat()
+    .filter((format) => !format.includes("Room") || size === 32)
+    .map<[string, string]>((format) => {
+      const [svg, url] = generateSvgUrlPair(format, size);
+      return [svg, url];
+    });
 
-  formats.forEach((format) => {
-    const [svg, url] = generateSvgUrlPair(format, size);
-    iconMap.set(svg, url);
-  });
-
-  return iconMap;
+  return new Map(entries);
 };
 
 export const iconSize24 = getIconsMap(24);

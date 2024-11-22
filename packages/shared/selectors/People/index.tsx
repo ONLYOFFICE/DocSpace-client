@@ -417,7 +417,7 @@ const PeopleSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
+          headerLabel: headerProps.headerLabel || t("Common:Contacts"),
         },
       }
     : ({} as TSelectorHeader);
@@ -515,7 +515,7 @@ const PeopleSelector = ({
           tabsData: [
             {
               id: PEOPLE_TAB_ID,
-              name: t("Common:Employees"),
+              name: t("Common:Members"),
               onClick: () => changeActiveTab(PEOPLE_TAB_ID),
               content: null,
             },
@@ -600,7 +600,7 @@ const PeopleSelector = ({
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuestsFilter")
           : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:NotFoundUsers")
+            ? t("Common:NotFoundMembers")
             : t("Common:NotFoundGroups")
       }
       searchEmptyScreenDescription={

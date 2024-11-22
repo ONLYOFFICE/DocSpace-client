@@ -2,8 +2,6 @@
   "AddManually": "ເພີ່ມດ້ວຍຕົນເອງ",
   "EmailErrorMessage": "ທີ່ຢູ່ອີເມວບໍ່ຖືກຕ້ອງ. ທ່ານສາມາດແກ້ໄຂອີເມວໂດຍການຄລິກສອງຄັ້ງໃສ່ມັນ.",
   "InvitationLanguage": "ພາສາເຊີນ",
-  "InviteAccountSearchPlaceholder": "ເຊີນຄົນທາງອີເມວ",
-  "InviteNewAccountManuallyDescription": "ເຊີນຜູ້ໃຊ້ໃໝ່ເຂົ້າມາ {{productName}} ສ່ວນຕົວຜ່ານທາງອີເມວ",
   "InviteViaLink": "ເຊີນຜ່ານລິ້ງ",
   "InviteViaLinkDescriptionAccounts": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນ {{productName}}",
   "InviteViaLinkDescriptionRoom": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນຫ້ອງ",

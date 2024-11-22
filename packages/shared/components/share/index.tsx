@@ -55,8 +55,17 @@ import ShareLoader from "../../skeletons/share";
 import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
-import { AccessItem, ShareProps, TLink } from "./Share.types";
-import { copyDocumentShareLink } from "./Share.helpers";
+import type {
+  AccessItem,
+  DefaultCreatePropsType,
+  ShareProps,
+  TLink,
+} from "./Share.types";
+import {
+  copyDocumentShareLink,
+  getCreateShareLinkKey,
+  getExpirationDate,
+} from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
   const {
@@ -78,12 +87,31 @@ const Share = (props: ShareProps) => {
     `document-bar-${selfId}`,
     true,
   );
+  const [defaultCreate, setDefaultCreate] =
+    useLocalStorage<DefaultCreatePropsType>(
+      getCreateShareLinkKey(selfId, infoPanelSelection?.fileType),
+      {
+        access: ShareAccessRights.ReadOnly,
+        internal: false,
+      },
+    );
 
   const requestRunning = React.useRef(false);
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
+
+  const updateDefaultCreate = (
+    value: React.SetStateAction<DefaultCreatePropsType>,
+    link: TFileLink,
+  ) => {
+    const lastFile = fileLinks
+      .filter((fileLink): fileLink is TFileLink => !("isLoaded" in fileLink))
+      .at(-1);
+
+    if (lastFile?.sharedTo.id === link.sharedTo.id) setDefaultCreate(value);
+  };
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
@@ -142,30 +170,47 @@ const Share = (props: ShareProps) => {
     setIsLoadedAddLinks(false);
 
     addLoaderLink();
-    const newLink = addFileLink
-      ? await addFileLink(
-          infoPanelSelection.id,
-          ShareAccessRights.ReadOnly,
-          false,
-          false,
-        )
-      : await addExternalLink(
-          infoPanelSelection.id,
-          ShareAccessRights.ReadOnly,
-          false,
-          false,
-        );
-    setFileLinks((links) => {
-      const newLinks: TLink[] = [...links];
 
-      const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
+    try {
+      const { access, internal, diffExpirationDate } = defaultCreate;
 
-      if (typeof idx !== "undefined") newLinks[idx] = { ...newLink };
+      const newLink = addFileLink
+        ? await addFileLink(
+            infoPanelSelection.id,
+            access,
+            false,
+            internal,
+            getExpirationDate(diffExpirationDate),
+          )
+        : await addExternalLink(
+            infoPanelSelection.id,
+            ShareAccessRights.ReadOnly,
+            false,
+            false,
+          );
+      setFileLinks((links) => {
+        const newLinks: TLink[] = [...links];
 
-      return newLinks;
-    });
+        const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
 
-    setIsLoadedAddLinks(true);
+        if (typeof idx !== "undefined") newLinks[idx] = { ...newLink };
+
+        return newLinks;
+      });
+    } catch (error) {
+      console.error({ error });
+
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+      toastr.error(message);
+
+      setFileLinks((links) => {
+        return links.filter((link) => !("isLoaded" in link && link.isLoaded));
+      });
+    } finally {
+      setIsLoadedAddLinks(true);
+    }
   };
 
   const updateLink = (link: TFileLink, newItem: TFileLink) => {
@@ -227,6 +272,14 @@ const Share = (props: ShareProps) => {
       }
       updateLink(link, res);
 
+      updateDefaultCreate(
+        (prev) => ({
+          ...prev,
+          access: res.access ?? prev.access,
+          internal: res.sharedTo.internal ?? prev.internal,
+        }),
+        res,
+      );
       copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
@@ -266,6 +319,14 @@ const Share = (props: ShareProps) => {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
           copyDocumentShareLink(res, t);
+          updateDefaultCreate(
+            (prev) => ({
+              ...prev,
+              access: res.access ?? prev.access,
+              internal: res.sharedTo.internal ?? prev.internal,
+            }),
+            res,
+          );
         }
       }
     } catch (e) {
@@ -301,7 +362,13 @@ const Share = (props: ShareProps) => {
           );
 
       updateLink(link, res);
-
+      updateDefaultCreate(
+        (prev) => ({
+          ...prev,
+          diffExpirationDate: expDate.diff(moment()),
+        }),
+        res,
+      );
       copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);

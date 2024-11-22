@@ -215,8 +215,7 @@ const CopyIconWrapper = styled.div.attrs(injectDefaultTheme)<{
   height: 20px;
   z-index: 2;
 
-  inset-inline-end: ${(props) =>
-    props.isJSONField && props.heightScale ? "18px" : "10px"};
+  inset-inline-end: 18px;
   top: 6px;
 
   display: flex;

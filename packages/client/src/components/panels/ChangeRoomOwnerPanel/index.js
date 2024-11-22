@@ -148,7 +148,7 @@ const ChangeRoomOwner = (props) => {
       infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
         productName: t("Common:ProductName"),
       })}
-      emptyScreenHeader={t("Common:NotFoundUsers")}
+      emptyScreenHeader={t("Common:NotFoundMembers")}
       emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
         productName: t("Common:ProductName"),
       })}

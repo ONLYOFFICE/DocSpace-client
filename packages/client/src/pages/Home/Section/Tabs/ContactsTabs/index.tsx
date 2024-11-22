@@ -54,6 +54,7 @@ type ContactsTabsProps = {
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   isUsersFetched: UsersStore["isUsersFetched"];
   setContactsTab: UsersStore["setContactsTab"];
+  guestsTabVisited: UsersStore["guestsTabVisited"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
@@ -83,6 +84,8 @@ const ContactsTabs = ({
   isGroupsFetched,
 
   setContactsTab,
+
+  guestsTabVisited,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -135,7 +138,7 @@ const ContactsTabs = ({
   const items: TTabItem[] = [
     {
       id: "people",
-      name: t("Common:Employees"),
+      name: t("Common:Members"),
       onClick: onPeople,
       content: null,
     },
@@ -153,13 +156,13 @@ const ContactsTabs = ({
       name: t("Common:Guests"),
       onClick: onGuests,
       content: null,
-      badge: (
+      badge: !guestsTabVisited ? (
         <Badge
           label={t("Files:New")}
           backgroundColor={globalColors.redRomb}
           noHover
         />
-      ),
+      ) : undefined,
     });
   }
 
@@ -199,6 +202,8 @@ export default inject(
       isUsersFetched,
 
       setContactsTab,
+
+      guestsTabVisited,
     } = usersStore!;
     const {
       setSelection: setGroupsSelection,
@@ -225,6 +230,8 @@ export default inject(
       isGroupsFetched,
 
       setContactsTab,
+
+      guestsTabVisited,
     };
   },
 )(observer(ContactsTabs));

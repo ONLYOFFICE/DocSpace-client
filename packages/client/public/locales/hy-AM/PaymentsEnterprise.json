@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Լիցենզիա գնելու համար սեղմեք ստորև նշված կոճակը:",
   "ActivatePurchaseBuyNow": "Գնիր հիմա",
   "ActivatePurchaseRenewLicense": "Աջակցություն և թարմացումներ ստանալը շարունակելու համար գնեք նորացում:",
+  "ActivateRenewalDescr": "Արդեն գնած թարմացումը ակտիվացնելու համար վերբեռնեք այն ստորև և սեղմեք Ակտիվացնել կոճակը:",
   "ActivateRenewDescr": "Ձեր անձնական նորացման պայմանները ստանալու համար դիմեք ձեր հատուկ մենեջերին կամ գրեք մեզ <1>{{email}}</1> հասցեով",
   "ActivateRenewSubscriptionHeader": "Թարմացրեք բաժանորդագրությունը {{license}}-ի համար",
   "ActivateSwithToProHeader": "Անցում ամբողջական {{license}} տարբերակին",

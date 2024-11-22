@@ -159,6 +159,7 @@ const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
     `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
     props.inProgress &&
+    !props.isFolder &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -366,6 +367,7 @@ const SimpleFilesRow = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexUpdated,
+    isFolder,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -491,6 +493,7 @@ const SimpleFilesRow = (props) => {
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}
+          isFolder={isFolder}
         >
           <FilesRowContent
             item={item}

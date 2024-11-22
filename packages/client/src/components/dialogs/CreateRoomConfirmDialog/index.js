@@ -39,6 +39,7 @@ const CreateRoomConfirmDialog = ({
 
   confirmDialogIsLoading,
   onCreateRoom,
+  selectedRoomType,
 }) => {
   const onContinue = async () => {
     await onCreateRoom(true);
@@ -46,10 +47,10 @@ const CreateRoomConfirmDialog = ({
   };
 
   const onClose = () => setVisible(false);
-
-  const bodyText = RoomsType.VirtualDataRoom
-    ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")
-    : t("CreateEditRoomDialog:CreateRoomConfirmation");
+  const bodyText =
+    selectedRoomType === RoomsType.VirtualDataRoom
+      ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")
+      : t("CreateEditRoomDialog:CreateRoomConfirmation");
 
   return (
     <ModalDialog
@@ -84,7 +85,8 @@ export default inject(({ dialogsStore, createEditRoomStore }) => {
     setCreateRoomConfirmDialogVisible: setVisible,
   } = dialogsStore;
 
-  const { confirmDialogIsLoading, onCreateRoom } = createEditRoomStore;
+  const { confirmDialogIsLoading, onCreateRoom, selectedRoomType } =
+    createEditRoomStore;
 
   return {
     visible,
@@ -92,5 +94,6 @@ export default inject(({ dialogsStore, createEditRoomStore }) => {
 
     confirmDialogIsLoading,
     onCreateRoom,
+    selectedRoomType,
   };
 })(withTranslation(["Common", "Files"])(observer(CreateRoomConfirmDialog)));

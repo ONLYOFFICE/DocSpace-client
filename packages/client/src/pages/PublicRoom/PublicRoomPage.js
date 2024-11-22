@@ -153,7 +153,7 @@ const PublicRoomPage = (props) => {
     const isFormRoom =
       roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
 
-    if (!access || !ready || toastIsDisabled) return;
+    if (!access || !ready || toastIsDisabled || isFrame) return;
 
     const roomMode = getAccessTranslation().toLowerCase();
 
@@ -208,7 +208,7 @@ const PublicRoomPage = (props) => {
       >
         <Section.SectionHeader>
           <SectionHeaderContent
-            showSignInButton
+            showSignInButton={!isFrame}
             onSignInClick={onOpenSignInWindow}
             signInButtonIsDisabled={windowIsOpen}
           />
@@ -246,10 +246,11 @@ export default inject(
     filesSettingsStore,
     mediaViewerDataStore,
     selectedFolderStore,
+    clientLoadingStore,
   }) => {
     const { frameConfig, setFrameConfig, isFrame } = settingsStore;
-    const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
-      publicRoomStore;
+    const { isLoaded, roomStatus, fetchPublicRoom } = publicRoomStore;
+    const { isLoading } = clientLoadingStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
     const { getFilesSettings } = filesSettingsStore;

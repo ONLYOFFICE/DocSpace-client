@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
@@ -59,6 +59,16 @@ const SelectFolderDialog = ({
   const withFooterCheckbox =
     fileSaveAsExtension !== "zip" && fileInfo.fileExst !== "fb2";
 
+  const formProps = useMemo(() => {
+    return {
+      message: t("Common:WarningCopyToFormRoom", {
+        organizationName: t("Common:OrganizationName"),
+      }),
+      isRoomFormAccessible:
+        Boolean(fileInfo.isForm) && fileSaveAsExtension === "pdf",
+    };
+  }, [fileInfo.isForm, t, fileSaveAsExtension]);
+
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
@@ -90,6 +100,7 @@ const SelectFolderDialog = ({
       parentId={0}
       getIsDisabled={getIsDisabled}
       withCreate
+      formProps={formProps}
     />
   );
 };

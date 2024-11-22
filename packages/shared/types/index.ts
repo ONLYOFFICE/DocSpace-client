@@ -30,7 +30,7 @@ import {
   TVersionBuild,
 } from "../api/settings/types";
 import { RoomsType } from "../enums";
-import { TTheme } from "../themes";
+import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
 export type TDirectionX = "left" | "right";
@@ -80,7 +80,9 @@ export type TI18n = {
 };
 
 declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {}
+  export interface DefaultTheme extends TTheme {
+    currentColorScheme?: TColorScheme;
+  }
 }
 declare global {
   interface Window {
@@ -103,6 +105,9 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location;
+    };
+    logs: {
+      socket: string[];
     };
     ClientConfig?: {
       pdfViewerUrl: string;
@@ -129,6 +134,10 @@ declare global {
       isFrame?: boolean;
       management: {
         checkDomain?: boolean;
+      };
+      logs: {
+        enableLogs: false;
+        logsToConsole: false;
       };
     };
     AscDesktopEditor: {

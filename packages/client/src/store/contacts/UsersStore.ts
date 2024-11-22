@@ -52,6 +52,7 @@ import {
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
+import { GUESTS_TAB_VISITED_NAME } from "SRC_DIR/helpers/contacts/constants";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
@@ -97,6 +98,8 @@ class UsersStore {
 
   contactsTab: TContactsTab = false;
 
+  guestsTabVisited: boolean = false;
+
   constructor(
     public settingsStore: SettingsStore,
     public infoPanelStore: InfoPanelStore,
@@ -132,6 +135,14 @@ class UsersStore {
       this.filter = Filter.getDefault();
     }
     this.contactsTab = contactsTab;
+
+    const guestsTabVisitedStorage = window.localStorage.getItem(
+      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+    );
+
+    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
+      this.guestsTabVisited = true;
+    }
   };
 
   setFilter = (filter: Filter) => {
@@ -201,8 +212,10 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
-    this.setSelection([]);
-    this.setBufferSelection(null);
+    if (!window.DocSpace?.location?.state?.user) {
+      this.setSelection([]);
+      this.setBufferSelection(null);
+    }
 
     const localStorageKey =
       this.contactsTab === "inside_group"
@@ -211,6 +224,13 @@ class UsersStore {
           ? `PeopleFilter=${this.userStore.user?.id}`
           : `GuestsFilter=${this.userStore.user?.id}`;
 
+    const guestsTabVisitedStorage = window.localStorage.getItem(
+      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+    );
+
+    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
+      this.guestsTabVisited = true;
+    }
     const filterStorageItem = localStorage.getItem(localStorageKey);
 
     if (filterStorageItem && withFilterLocalStorage) {
@@ -227,6 +247,15 @@ class UsersStore {
 
     if (filterData.group && filterData.group === "root") {
       filterData.group = null;
+    }
+
+    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
+      filterData.inviterId = null;
+      window.localStorage.setItem(
+        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
+        "true",
+      );
+      this.guestsTabVisited = true;
     }
 
     this.requestRunning = true;
@@ -406,9 +435,8 @@ class UsersStore {
       case "unknown":
         if (isMySelf) {
           options.push("profile");
-        } else {
-          options.push("details");
         }
+        options.push("details");
 
         if (isAdmin || isOwner) {
           options.push("room-list");
@@ -469,10 +497,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (
-            userRole !== EmployeeType.Guest &&
-            userRole !== EmployeeType.User
-          ) {
+          if (userRole !== EmployeeType.Guest) {
             options.push("reassign-data");
           }
 
@@ -588,6 +613,7 @@ class UsersStore {
       id,
       displayName,
       avatar,
+      avatarMax,
       hasAvatar,
       email,
       isOwner,
@@ -649,6 +675,7 @@ class UsersStore {
       isVisitor,
       displayName,
       avatar: currentAvatar,
+      avatarMax,
       hasAvatar,
       email,
       userName,
@@ -910,17 +937,17 @@ class UsersStore {
   };
 
   setSelected = (selected: TContactsSelected) => {
+    const { hotkeyCaret, setHotkeyCaret } = this.contactsHotkeysStore;
     this.bufferSelection = null;
     this.selected = selected;
 
+    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
     this.setSelection(this.getUsersBySelected(this.peopleList, selected));
 
     if (selected !== "none" && selected !== "close") {
       this.resetUsersRight();
       this.peopleList.forEach((u) => this.incrementUsersRights(u));
     }
-
-    this.contactsHotkeysStore.setHotkeyCaret(null);
 
     return selected;
   };
@@ -1031,18 +1058,12 @@ class UsersStore {
     return users.length > 0 ? users.map((u) => u.id) : [];
   }
 
-  get hasUsersToRemove() {
-    const { canRemoveUser } = this.accessRightsStore;
-
-    const users = this.selection.filter((x) => canRemoveUser(x));
-
-    return users.length > 0;
-  }
-
   get hasOnlyOneUserToRemove() {
-    const { canRemoveUser } = this.accessRightsStore;
+    const { canRemoveOnlyOneUser } = this.accessRightsStore;
 
-    const users = this.selection.filter((x) => canRemoveUser(x));
+    if (this.selection.length !== 1) return false;
+
+    const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
 
     return users.length === 1;
   }

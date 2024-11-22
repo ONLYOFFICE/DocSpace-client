@@ -255,7 +255,7 @@ const Dark: TTheme = {
     buttonColor: mainOrange,
     iconFill: black,
 
-    circleBackground: black,
+    circleBackground: white,
 
     mobileProgressBarBackground: grayDarkStrong,
 
@@ -2365,10 +2365,8 @@ const Dark: TTheme = {
     link: {
       color: lightBlueMain,
       background: black,
-      hoverBackground: lightDarkGrayHover,
-      hoverColor: lightBlueMainHover,
-      PressedBackground: black,
-      PressedColor: lightBlueMainPressed,
+      hoverBackground: darkGrayLight,
+      PressedBackground: grayDarkStrong,
     },
     items: {
       hoverColor: darkGrayLight,
@@ -3130,6 +3128,7 @@ const Dark: TTheme = {
       color: gray,
       errorColor: darkErrorStatus,
     },
+    editInputColor: grayDark,
     requiredColor: darkErrorStatus,
   },
 

@@ -25,7 +25,9 @@ export type EmptyViewItemType = {
 
 export type EmptyViewOptionsType = (EmptyViewItemType | EmptyViewLinkType)[];
 
-export interface EmptyViewItemProps extends Omit<EmptyViewItemType, "key"> {}
+export interface EmptyViewItemProps extends Omit<EmptyViewItemType, "key"> {
+  id?: string;
+}
 
 export type EmptyViewOptionProps = {
   option: EmptyViewOptionsType[number];

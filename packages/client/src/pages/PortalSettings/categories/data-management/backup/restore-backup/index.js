@@ -70,7 +70,7 @@ const RestoreBackup = (props) => {
     setThirdPartyStorage,
     setStorageRegions,
     setConnectedThirdPartyAccount,
-    clearProgressInterval,
+    resetDownloadingProgress,
     isEnableRestore,
     setRestoreResource,
     buttonSize,
@@ -90,7 +90,7 @@ const RestoreBackup = (props) => {
 
   const startRestoreBackup = useCallback(async () => {
     try {
-      getProgress(t);
+      getProgress();
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
@@ -112,7 +112,7 @@ const RestoreBackup = (props) => {
     setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
     return () => {
-      clearProgressInterval();
+      resetDownloadingProgress();
       setRestoreResource(null);
     };
   }, []);
@@ -305,7 +305,7 @@ export const Component = inject(
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const {
       getProgress,
-      clearProgressInterval,
+      resetDownloadingProgress,
       setStorageRegions,
       setThirdPartyStorage,
       setConnectedThirdPartyAccount,
@@ -326,7 +326,7 @@ export const Component = inject(
       setThirdPartyStorage,
       buttonSize,
       setConnectedThirdPartyAccount,
-      clearProgressInterval,
+      resetDownloadingProgress,
       getProgress,
       setRestoreResource,
     };

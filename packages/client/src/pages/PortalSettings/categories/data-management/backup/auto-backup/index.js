@@ -116,7 +116,7 @@ class AutomaticBackup extends React.PureComponent {
     } = this.props;
 
     try {
-      getProgress(t);
+      getProgress();
 
       const [
         ///thirdPartyList,
@@ -178,10 +178,10 @@ class AutomaticBackup extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
+    const { resetDownloadingProgress } = this.props;
     clearTimeout(this.timerId);
     this.timerId = null;
-    clearProgressInterval();
+    resetDownloadingProgress();
   }
 
   getTime = () => {
@@ -636,7 +636,7 @@ export default inject(
       downloadingProgress,
       backupSchedule,
       //commonThirdPartyList,
-      clearProgressInterval,
+      resetDownloadingProgress,
       deleteSchedule,
       getProgress,
       setThirdPartyStorage,
@@ -691,7 +691,7 @@ export default inject(
       isFormReady,
       backupSchedule,
       //commonThirdPartyList,
-      clearProgressInterval,
+      resetDownloadingProgress,
       deleteSchedule,
       getProgress,
       setThirdPartyStorage,

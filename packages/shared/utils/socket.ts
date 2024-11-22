@@ -53,6 +53,7 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  BackupProgress = "s:backup-progress",
 }
 
 /**

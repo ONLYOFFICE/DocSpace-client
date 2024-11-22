@@ -40,6 +40,7 @@ import {
   uploadBackup,
 } from "@docspace/shared/api/files";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
@@ -110,6 +111,14 @@ class BackupStore {
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
+
+    SocketHelper.on(SocketEvents.BackupProgress, (progress) => {
+      this.downloadingProgress = progress;
+
+      if (progress === 100) {
+        this.getProgress();
+      }
+    });
   }
 
   setConnectedThirdPartyAccount = (account) => {
@@ -489,7 +498,7 @@ class BackupStore {
     }
   };
 
-  getProgress = async (t) => {
+  getProgress = async () => {
     try {
       const response = await getBackupProgress();
 
@@ -501,92 +510,16 @@ class BackupStore {
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
-
-          if (progress !== 100) {
-            this.getIntervalProgress(t);
-          } else {
-            //this.clearLocalStorage();
-          }
         } else {
           this.downloadingProgress = 100;
-          clearInterval(this.timerId);
-          //this.clearLocalStorage();
         }
       }
     } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      // this.clearLocalStorage();
+      toastr.error(e);
     }
   };
-  getIntervalProgress = (t) => {
-    if (this.timerId) {
-      return;
-    }
 
-    let isWaitRequest = false;
-    this.timerId = setInterval(async () => {
-      try {
-        if (isWaitRequest) {
-          return;
-        }
-
-        isWaitRequest = true;
-
-        const response = await getBackupProgress();
-
-        if (response) {
-          const { progress, link, error } = response;
-
-          if (error.length > 0 && progress !== 100) {
-            clearInterval(this.timerId);
-            this.timerId && toastr.error(error);
-            this.timerId = null;
-            //this.clearLocalStorage();
-            this.downloadingProgress = 100;
-            return;
-          }
-
-          if (progress > 0 && progress !== this.downloadingProgress) {
-            this.downloadingProgress = progress;
-          }
-
-          if (progress === 100) {
-            clearInterval(this.timerId);
-            //this.clearLocalStorage();
-
-            if (link && link.slice(0, 1) === "/") {
-              this.temporaryLink = link;
-            }
-
-            this.timerId && toastr.success(t("BackupCreatedSuccess"));
-            this.timerId = null;
-
-            return;
-          }
-        } else {
-          this.timerId && toastr.error(t("BackupCreatedError"));
-          this.downloadingProgress = 100;
-          clearInterval(this.timerId);
-          // this.clearLocalStorage();
-          this.timerId = null;
-          return;
-        }
-
-        isWaitRequest = false;
-      } catch (e) {
-        clearInterval(this.timerId);
-        // this.clearLocalStorage();
-        this.downloadingProgress = 100;
-        this.timerId && toastr.error(e);
-        this.timerId = null;
-      }
-    }, 1000);
-  };
-
-  clearProgressInterval = () => {
-    this.timerId && clearInterval(this.timerId);
-    this.timerId = null;
-
+  resetDownloadingProgress = () => {
     if (
       typeof window !== "undefined" &&
       !window.location.pathname.includes("data-backup") &&

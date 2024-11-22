@@ -49,6 +49,7 @@ import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -96,13 +97,13 @@ class ManualBackup extends React.Component {
     const {
       getProgress,
       // setCommonThirdPartyList,
-      t,
+
       setThirdPartyStorage,
       setStorageRegions,
       setConnectedThirdPartyAccount,
     } = this.props;
     try {
-      getProgress(t);
+      getProgress();
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
@@ -157,20 +158,15 @@ class ManualBackup extends React.Component {
   }
 
   componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
+    const { resetDownloadingProgress } = this.props;
     clearTimeout(this.timerId);
     this.timerId = null;
 
-    clearProgressInterval();
+    resetDownloadingProgress();
   }
 
   onMakeTemporaryBackup = async () => {
-    const {
-      getIntervalProgress,
-      setDownloadingProgress,
-      t,
-      clearLocalStorage,
-    } = this.props;
+    const { setDownloadingProgress, t, clearLocalStorage } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
@@ -178,7 +174,6 @@ class ManualBackup extends React.Component {
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
-      getIntervalProgress(t);
     } catch (e) {
       toastr.error(e);
     }
@@ -209,7 +204,7 @@ class ManualBackup extends React.Component {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
       t,
-      getIntervalProgress,
+
       setDownloadingProgress,
       clearLocalStorage,
       setTemporaryLink,
@@ -240,7 +235,6 @@ class ManualBackup extends React.Component {
       await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
-      getIntervalProgress(t);
     } catch (err) {
       toastr.error(err);
     }
@@ -426,12 +420,12 @@ class ManualBackup extends React.Component {
 export default inject(
   ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
     const {
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+
       setDownloadingProgress,
       setTemporaryLink,
       // setCommonThirdPartyList,
@@ -453,12 +447,12 @@ export default inject(
     return {
       isNotPaidPeriod,
       setThirdPartyStorage,
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+
       setDownloadingProgress,
       setTemporaryLink,
       setStorageRegions,

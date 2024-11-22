@@ -42,6 +42,10 @@ import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -124,6 +128,45 @@ class UsersStore {
     this.contactsTab = getContactsView();
 
     makeAutoObservable(this);
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "users",
+    });
+    SocketHelper.on(SocketEvents.AddUser, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      runInAction(() => {
+        this.users.push(data);
+        this.filter.total += 1;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.UpdateUser, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      runInAction(() => {
+        this.users[idx] = data;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.DeleteUser, (value) => {
+      const { id } = value;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      runInAction(() => {
+        this.users.splice(idx, 1);
+        this.filter.total -= 1;
+      });
+    });
   }
 
   setIsUsersFetched = (value: boolean) => {
@@ -289,9 +332,7 @@ class UsersStore {
 
     await api.people.deleteUsers(userIds);
 
-    const actions: (Promise<TUser[]> | Promise<void>)[] = [
-      this.getUsersList(this.filter, true, false),
-    ];
+    const actions: Promise<void>[] = [];
 
     if (this.contactsTab === "inside_group" && this.filter.group) {
       actions.push(updateCurrentGroup(this.filter.group));
@@ -303,11 +344,6 @@ class UsersStore {
   updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
     const updatedUsers = await api.people.updateUserStatus(status, userIds);
     if (updatedUsers) {
-      updatedUsers.forEach((user) => {
-        const userIndex = this.users.findIndex((x) => x.id === user.id);
-        if (userIndex !== -1) this.users[userIndex] = user;
-      });
-
       if (!this.needResetUserSelection) {
         this.updateSelection();
       }
@@ -348,8 +384,6 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    await this.getUsersList(filter, true);
-
     if (updatedUsers && !this.needResetUserSelection) {
       this.updateSelection();
     }
@@ -361,8 +395,6 @@ class UsersStore {
     if (this.contactsTab !== "guests" || !ids.length) return;
 
     const removedGuests = await api.people.deleteGuests(ids);
-
-    await this.getUsersList(this.filter, true);
 
     if (!!removedGuests && !this.needResetUserSelection) {
       this.updateSelection();
@@ -380,15 +412,11 @@ class UsersStore {
       +quotaSize,
     );
 
-    await this.getUsersList(this.filter, true);
-
     return updatedUsers;
   };
 
   resetUserQuota = async (userIds: string[]) => {
     const updatedUsers = await api.people.resetUserQuota(userIds);
-
-    await this.getUsersList(this.filter, true);
 
     return updatedUsers;
   };

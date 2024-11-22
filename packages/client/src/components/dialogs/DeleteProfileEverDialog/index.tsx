@@ -49,7 +49,6 @@ export type DeleteProfileEvenerDialogComponentsProps = {
   usersToDelete: UsersStore["selection"];
   filter: UsersStore["filter"];
   contactsTab: UsersStore["contactsTab"];
-  getUsersList: UsersStore["getUsersList"];
   removeUsers: UsersStore["removeUsers"];
   setSelected: UsersStore["setSelected"];
 
@@ -73,7 +72,6 @@ const DeleteProfileEverDialogComponent = ({
   userIds,
   filter,
   contactsTab,
-  getUsersList,
   removeUsers,
   setSelected,
 
@@ -120,9 +118,7 @@ const DeleteProfileEverDialogComponent = ({
       api.people
         .deleteUser(id)
         .then(async () => {
-          const actions: Promise<unknown>[] = [
-            getUsersList(filter, true, false),
-          ];
+          const actions: Promise<unknown>[] = [];
 
           if (isInsideGroup && filter.group)
             actions.push(updateCurrentGroup(filter.group));
@@ -145,7 +141,6 @@ const DeleteProfileEverDialogComponent = ({
     },
     [
       filter,
-      getUsersList,
       isGuests,
       isInsideGroup,
       isRequestRunning,
@@ -304,7 +299,6 @@ export default inject(
     const { updateCurrentGroup } = groupsStore!;
 
     const {
-      getUsersList,
       needResetUserSelection,
       filter,
       removeUsers,
@@ -343,7 +337,6 @@ export default inject(
       needResetUserSelection,
       filter,
       updateCurrentGroup,
-      getUsersList,
       deleteWithoutReassign,
       onlyOneUser,
       userIds,

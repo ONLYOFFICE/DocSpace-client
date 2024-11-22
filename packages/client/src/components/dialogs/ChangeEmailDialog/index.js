@@ -80,14 +80,8 @@ class ChangeEmailDialogComponent extends React.Component {
 
   onSendEmailChangeInstructions = () => {
     const { email } = this.state;
-    const {
-      user,
-      updateProfile,
-      updateProfileInUsers,
-      fromList,
-      profile,
-      getUsersList,
-    } = this.props;
+    const { user, updateProfile, updateProfileInUsers, fromList, profile } =
+      this.props;
     const { id } = user;
     const newProfile = user;
     newProfile.email = email;

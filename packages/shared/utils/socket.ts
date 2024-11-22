@@ -30,6 +30,9 @@
 import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+
+import { TUser } from "../api/people/types";
+
 import { addLog } from ".";
 
 /**
@@ -219,6 +222,12 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteUser]: (data: { id: string }) => void;
+  [SocketEvents.AddGroup]: (data: TOptSocket) => void;
+  [SocketEvents.UpdateGroup]: (data: TOptSocket) => void;
+  [SocketEvents.DeleteGroup]: (data: TOptSocket) => void;
 };
 
 /**

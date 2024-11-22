@@ -73,7 +73,6 @@ const DataReassignmentDialog = ({
   isDeletingUserWithReassignment,
   t,
   tReady,
-  getUsersList,
   setIsDeletingUserWithReassignment,
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
@@ -91,15 +90,6 @@ const DataReassignmentDialog = ({
   const [isAbortTransfer, setIsAbortTransfer] = useState(false);
 
   const [percent, setPercent] = useState(0);
-
-  const updateAccountsAfterDeleteUser = () => {
-    const filter = Filter.getDefault();
-
-    filter.area = "people";
-
-    getUsersList(filter, true);
-    return;
-  };
 
   useEffect(() => {
     //If click Delete user
@@ -165,7 +155,6 @@ const DataReassignmentDialog = ({
         if (res.status === statusTerminateCompleted) return;
 
         toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
       })
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
@@ -196,7 +185,6 @@ const DataReassignmentDialog = ({
         setPercent(res.percentage);
         setIsAbortTransfer(true);
         toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
       })
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
@@ -310,8 +298,7 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection, setSelected } =
-    peopleStore.usersStore;
+  const { needResetUserSelection, setSelected } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
@@ -323,7 +310,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     dataReassignmentTerminate,
     deleteProfile: dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
-    getUsersList,
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
     dataReassignmentUrl,

@@ -31,6 +31,11 @@ import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { addLog } from ".";
+import type {
+  TPortalSession,
+  TSession,
+  TSessionsInPortal,
+} from "../types/ActiveSessions";
 
 /**
  * Enum representing various socket events used in the application.
@@ -138,6 +143,12 @@ export type TEmitEventsDataMap = {
   [SocketCommands.Unsubscribe]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
   [SocketCommands.RestoreBackup]: never;
+  [SocketCommands.GetSessionsInPortal]: { startIndex: number; count: number };
+  [SocketCommands.GetSessions]: { id: string };
+  [SocketCommands.SubscribeToPortal]: never;
+  [SocketCommands.UnsubscribeToPortal]: never;
+  [SocketCommands.SubscribeToUser]: { id: string };
+  [SocketCommands.UnsubscribeToUser]: { id: string };
 };
 
 /**
@@ -230,6 +241,26 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.SessionsInPortal]: (data: TSessionsInPortal) => void;
+  [SocketEvents.UserSessions]: (data: TSession[]) => void;
+  [SocketEvents.EnterInPortal]: (data: TPortalSession) => void;
+  [SocketEvents.LeaveInPortal]: (data: {
+    userId: string;
+    sessionId: number;
+  }) => void;
+  [SocketEvents.NewSessionInPortal]: (data: TPortalSession) => void;
+  [SocketEvents.LogoutInPortal]: (data: {
+    userId: string;
+    sessionId: number;
+  }) => void;
+  [SocketEvents.EnterSessionInPortal]: (data: {
+    userId: string;
+    session: TSession;
+  }) => void;
+  [SocketEvents.LeaveSessionInPortal]: (data: {
+    userId: string;
+    sessionId: number;
+  }) => void;
 };
 
 /**

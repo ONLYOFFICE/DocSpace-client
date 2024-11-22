@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import { injectDefaultTheme } from "../../utils";
+import { TColorScheme, TTheme } from "../../themes";
 
 const BounceAnimation = keyframes`
 0% { margin-bottom: 0; display: none; }
@@ -100,6 +101,27 @@ const StyledTrack = styled.svg.attrs(injectDefaultTheme)<{
     (primary ? theme.button.loader.primary : theme.button.loader.base)};
 `;
 
+const getDefaultStyles = ({
+  primary,
+  $currentColorScheme,
+  theme,
+  isDisabled,
+}: {
+  primary?: boolean;
+  $currentColorScheme?: TColorScheme;
+  theme?: TTheme;
+  isDisabled?: boolean;
+}) =>
+  $currentColorScheme &&
+  !primary &&
+  theme?.isBase &&
+  css`
+    color: ${$currentColorScheme.main?.buttons};
+    opacity: ${isDisabled && "0.6"};
+  `;
+
+const StyledTrackTheme = styled(StyledTrack)(getDefaultStyles);
+
 export {
   LoadingLabel,
   LoadingWrapper,
@@ -108,4 +130,5 @@ export {
   StyledOval,
   StyledDualRing,
   StyledTrack,
+  StyledTrackTheme,
 };

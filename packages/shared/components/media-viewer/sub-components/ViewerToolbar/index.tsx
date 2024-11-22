@@ -80,6 +80,9 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
 
     function getContextMenu(item: ToolbarItemType) {
       const contextMenu = generateContextMenu(isOpen);
+
+      if (!contextMenu) return;
+
       return (
         <ToolbarItem
           ref={contextMenuRef}

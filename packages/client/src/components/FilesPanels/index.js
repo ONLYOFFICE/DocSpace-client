@@ -67,6 +67,7 @@ import {
   DeletePluginDialog,
   ShareFolderDialog,
   RoomLogoCoverDialog,
+  GuestReleaseTipDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -76,15 +77,13 @@ import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { SessionsPanel } from "../panels/UserSessionsPanel";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
-import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
-import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 
 const Panels = (props) => {
@@ -137,7 +136,6 @@ const Panels = (props) => {
     deletePluginDialogVisible,
     shareFolderDialogVisible,
     userSessionsPanelVisible,
-    pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     fillPDFDialogData,
@@ -148,6 +146,7 @@ const Panels = (props) => {
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
     passwordEntryDialogDate,
+    guestReleaseTipDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -229,6 +228,9 @@ const Panels = (props) => {
     ),
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+    ),
+    guestReleaseTipDialogVisible && (
+      <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     (moveToPanelVisible ||
@@ -325,7 +327,6 @@ const Panels = (props) => {
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
     reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
-    pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
@@ -407,7 +408,6 @@ export default inject(
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
       userSessionsPanelVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
@@ -419,6 +419,7 @@ export default inject(
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -502,7 +503,6 @@ export default inject(
       deletePluginDialogVisible,
       shareFolderDialogVisible,
       userSessionsPanelVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
@@ -512,6 +512,7 @@ export default inject(
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
     };
   },
 )(observer(Panels));

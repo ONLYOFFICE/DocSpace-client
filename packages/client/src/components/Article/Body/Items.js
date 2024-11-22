@@ -366,7 +366,7 @@ const Items = ({
         );
       });
 
-      if (!isVisitor)
+      if (!isVisitor && !isCollaborator)
         items.splice(
           3,
           0,

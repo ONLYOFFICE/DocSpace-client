@@ -48,7 +48,6 @@ const {
   black,
   darkBlack,
   moonstone,
-  lightGrayBlackout,
   grayLight,
   darkGrayLight,
   lightGrayHover,
@@ -2383,9 +2382,7 @@ export const getBaseTheme = () => {
         color: lightBlueMain,
         background: white,
         hoverBackground: lightGrayHover,
-        hoverColor: lightBlueMainHover,
         PressedBackground: lightGraySelected,
-        PressedColor: lightBlueMainPressed,
       },
 
       items: {
@@ -3144,6 +3141,7 @@ export const getBaseTheme = () => {
         color: gray,
         errorColor: lightErrorStatus,
       },
+      editInputColor: grayText,
       requiredColor: lightErrorStatus,
     },
 

@@ -2,6 +2,7 @@
   "AllowButton": "Erlauben",
   "ConsentDescription": "Daten, die mit <strong>{{displayName}}</strong> geteilt werden, unterliegen der <strong>{{nameApp}}</strong> <6>Datenschutzrichtlinie</6> und den <6>Nutzungsbedingungen</6>. Sie können diese Einwilligung jederzeit in den Einstellungen Ihres {{productName}}-Kontos widerrufen.",
   "ConsentSubHeader": "<1>{{nameApp}}</1> möchte Zugriff auf die folgenden Daten in Ihrem <strong>{{productName}}-Konto</strong> haben:",
+  "DenyButton": "Ablehnen",
   "NotYou": "Nicht Sie?",
   "SignedInAs": "Angemeldet als",
   "ToContinue": "Weiter zu"

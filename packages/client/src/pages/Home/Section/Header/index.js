@@ -241,6 +241,7 @@ const SectionHeaderContent = (props) => {
     isFrame,
     showTitle,
     hideInfoPanel,
+    showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
@@ -257,6 +258,9 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
+    isShared,
+    isExternal,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -419,9 +423,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const getTitleIcon = () => {
-    if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
+    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isPublicRoomType && !isPublicRoom) return PublicRoomIconUrl;
+    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isVirtualDataRoomType && selectedFolder.lifetime)
       return LifetimeRoomIconUrl;
@@ -429,6 +433,7 @@ const SectionHeaderContent = (props) => {
     return "";
   };
   const onLogoClick = () => {
+    if (isFrame) return;
     moveToPublicRoom(props.rootFolderId);
   };
 
@@ -548,10 +553,14 @@ const SectionHeaderContent = (props) => {
   const titleIcon = getTitleIcon();
 
   const titleIconTooltip = selectedFolder.lifetime
-    ? t("Files:RoomFilesLifetime", {
+    ? `${t("Files:RoomFilesLifetime", {
         days: selectedFolder.lifetime.value,
         period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
-      })
+      })}. ${
+        selectedFolder.lifetime.deletePermanently
+          ? t("Files:AfterFilesWillBeDeletedPermanently")
+          : t("Files:AfterFilesWillBeMovedToTrash")
+      }`
     : null;
 
   const navigationButtonLabel = showNavigationButton
@@ -570,7 +579,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={selectedFolder.external}
+          isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
@@ -629,8 +638,14 @@ const SectionHeaderContent = (props) => {
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
-                withLogo={isPublicRoom && logo}
-                burgerLogo={isPublicRoom && burgerLogo}
+                withLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  logo
+                }
+                burgerLogo={
+                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
+                  burgerLogo
+                }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
@@ -763,17 +778,17 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -834,6 +849,7 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
+    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
@@ -913,6 +929,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
       currentGroup,
@@ -932,6 +949,9 @@ export default inject(
       contactsCanCreate,
 
       rootFolderId,
+      isShared,
+      isExternal,
+      displayAbout,
     };
   },
 )(

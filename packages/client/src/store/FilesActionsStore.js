@@ -951,19 +951,12 @@ class FilesActionStore {
   };
 
   lockFileAction = async (id, locked) => {
-    let timer = null;
     const { setFile } = this.filesStore;
     try {
-      timer = setTimeout(() => {
-        this.filesStore.setActiveFiles([id]);
-      }, 200);
-      await lockFile(id, locked).then((res) => {
-        setFile(res), this.filesStore.setActiveFiles([]);
-      });
+      const res = await lockFile(id, locked);
+      setFile(res);
     } catch (err) {
       toastr.error(err);
-    } finally {
-      clearTimeout(timer);
     }
   };
 
@@ -2556,7 +2549,8 @@ class FilesActionStore {
 
         const url = getUrl(id);
 
-        window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
+        window.history.pushState("", "", url);
+
         return;
       }
 
@@ -2976,9 +2970,9 @@ class FilesActionStore {
         const splitItem = newFilesList[i].order.split(".");
 
         if (indexMovedFromBottom) {
-          splitItem[1] = +splitItem.at(-1) + 1;
+          splitItem[splitItem.length - 1] = +splitItem.at(-1) + 1;
         } else {
-          splitItem[1] = +splitItem.at(-1) - 1;
+          splitItem[splitItem.length - 1] = +splitItem.at(-1) - 1;
         }
 
         newFilesList[i].order = splitItem.join(".");

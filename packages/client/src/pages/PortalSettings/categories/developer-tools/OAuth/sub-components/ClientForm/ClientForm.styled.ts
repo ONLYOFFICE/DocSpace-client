@@ -118,6 +118,8 @@ const StyledInputGroup = styled.div.attrs(injectDefaultTheme)`
       width: 32px;
       height: 32px;
 
+      object-size: cover;
+
       border-radius: 3px;
     }
 

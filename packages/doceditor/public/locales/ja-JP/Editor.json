@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "文書は編集できるように{{title}}に変換されました。",
   "DocumentsFileType": "ドキュメント",
   "ErrorConnectionLost": "接続が切断されました",
   "FileLocation": "ファイルの場所を開く",

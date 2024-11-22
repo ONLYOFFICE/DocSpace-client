@@ -163,6 +163,10 @@ export const StyledSimpleUserRow = styled(Row)<{
 `;
 
 export const StyledRowContent = styled(RowContent)`
+  .row-content_tablet-side-info {
+    white-space: nowrap;
+  }
+
   @media ${tablet} {
     .row-main-container-wrapper {
       width: 100%;

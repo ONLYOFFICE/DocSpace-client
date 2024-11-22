@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
-import { globalColors, TColorScheme } from "../../themes";
+import { globalColors } from "../../themes";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;
@@ -102,7 +101,9 @@ export const EmptyViewBody = styled.div`
     max-width: fit-content;
     text-decoration: none;
 
-    color: ${(props) => props.theme.emptyView.link.color};
+    color: ${({ theme: { emptyView, currentColorScheme } }) =>
+      currentColorScheme?.main.accent ?? emptyView.link.color};
+
     background: ${(props) => props.theme.emptyView.link.background};
 
     border-radius: 6px;
@@ -124,29 +125,21 @@ export const EmptyViewBody = styled.div`
     }
 
     @media (hover: hover) {
-      :hover {
+      :hover:not(:active) {
         background: ${(props) => props.theme.emptyView.link.hoverBackground};
-        color: ${(props) => `${props.theme.emptyView.link.hoverColor}`};
+        & > * {
+          opacity: 0.86;
+        }
       }
     }
 
     :active {
       background: ${(props) => props.theme.emptyView.link.PressedBackground};
-      color: ${(props) => props.theme.emptyView.link.PressedColor};
+      & > * {
+        filter: brightness(90%);
+      }
     }
-
-    cusros: pointer;
   }
-`;
-
-export const StyledLink = styled(Link)<{
-  $currentColorScheme?: TColorScheme;
-}>`
-  ${(props) =>
-    props.$currentColorScheme &&
-    css`
-      color: ${props.$currentColorScheme.main?.accent};
-    `};
 `;
 
 export const EmptyViewItemWrapper = styled.div`
@@ -209,6 +202,9 @@ export const EmptyViewItemWrapper = styled.div`
 
   .ev-item__arrow-icon {
     flex: 0 0 12px;
+
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
   }
 
   @media (hover: hover) {

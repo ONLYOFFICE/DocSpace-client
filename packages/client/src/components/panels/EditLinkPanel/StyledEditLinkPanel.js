@@ -48,6 +48,10 @@ const StyledEditLinkBodyContent = styled.div`
     .edit-link_link-input {
       margin-bottom: 8px;
       margin-top: 16px;
+
+      -webkit-text-fill-color: ${({ theme }) =>
+        theme.editLink.editInputColor} !important;
+      color: ${({ theme }) => theme.editLink.editInputColor};
     }
   }
 

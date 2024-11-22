@@ -34,6 +34,7 @@
   "RoleFormFiller": "Form filler",
   "RoleFormFillerDescription": "Operaţii cu fişiere existente: vizualizare, completare formulare, revizuire, comentare.",
   "RoleFormFillerFormRoomDescription": "Completator de formulare poate completa formulare și poate afișa numai formularele sale completate/în curs de completare din foldere Formulare completate și În curs de completare.",
+  "RoleGuestDescriprion": "Invitații pot accesa sălile la care au fost invitați, precum și să creeze și să editeze documente dacă li s-au atribuit rolurile corespunzătoare în sală.",
   "RoleNewUserDescription": "Utilizatori pot crea și modifica fişiere în sală, dar nu pot crea sălile, gestiona utilizatorii sau accesa setările.",
   "RolePortalAdminDescription": "Administratorii {{productName}} pot accesa setările {{productName}}, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor. Toţi administratorii pot accesa secţiunea Documente.",
   "RolePowerUserFormRoomDescription": "Avansați pot încărca formulare în sala și sunt oferite acces complet la foldere Formulare completate și În curs de completare.",

@@ -54,7 +54,6 @@ const IconWrapper = styled.div.attrs(injectDefaultTheme)`
     ${(props) =>
       props.isRoom &&
       css`
-        border-radius: 6px;
         vertical-align: middle;
       `}
   }

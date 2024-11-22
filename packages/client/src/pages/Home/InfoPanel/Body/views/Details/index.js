@@ -54,6 +54,7 @@ const Details = ({
   setNewInfoPanelSelection,
   getLogoCoverModel,
   onChangeFile,
+  roomLifetime,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -73,6 +74,7 @@ const Details = ({
     selectTag,
     isDefaultRoomsQuotaSet,
     setNewInfoPanelSelection,
+    roomLifetime,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -193,12 +195,14 @@ export default inject(
     currentQuotaStore,
     dialogsStore,
     avatarEditorDialogStore,
+    selectedFolderStore,
   }) => {
     const {
       infoPanelSelection,
       getInfoPanelItemIcon,
       openUser,
       setNewInfoPanelSelection,
+      infoPanelRoom,
     } = infoPanelStore;
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
@@ -226,6 +230,7 @@ export default inject(
       setNewInfoPanelSelection,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
+      roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
     };
   },
 )(

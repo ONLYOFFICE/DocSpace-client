@@ -120,8 +120,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   editMembersGroup = null;
-  pdfFormEditVisible = false;
-  pdfFormEditData = null;
+
   shareFolderDialogVisible = false;
   userSessionsPanelVisible = false;
   cancelUploadDialogVisible = false;
@@ -144,6 +143,8 @@ class DialogsStore {
 
   warningQuotaDialogVisible = false;
   isNewQuotaItemsByCurrentUser = false;
+
+  guestReleaseTipDialogVisible = false;
 
   covers = null;
   cover = null;
@@ -192,6 +193,10 @@ class DialogsStore {
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
+  };
+
+  setGuestReleaseTipDialogVisible = (visible) => {
+    this.guestReleaseTipDialogVisible = visible;
   };
 
   setEditRoomDialogProps = (props) => {
@@ -550,11 +555,6 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
-  };
-
-  setPdfFormEditVisible = (visible, data) => {
-    this.pdfFormEditVisible = visible;
-    this.pdfFormEditData = data;
   };
 
   setUserSessionPanelVisible = (visible) => {

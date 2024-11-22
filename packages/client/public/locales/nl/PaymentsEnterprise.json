@@ -5,6 +5,7 @@
   "ActivatePurchaseBuyLicense": "Klik op de knop hieronder om een licentie te kopen.",
   "ActivatePurchaseBuyNow": "Koop nu",
   "ActivatePurchaseRenewLicense": "Koop een verlenging om ondersteuning en updates te blijven ontvangen.",
+  "ActivateRenewalDescr": "Om de verlenging die u al gekocht hebt te activeren, uploadt u deze hieronder en klikt u op de knop Activeren.",
   "ActivateRenewDescr": "Om uw persoonlijke verlengvoorwaarden te ontvangen, neemt u contact op met uw aangewezen manager of schrijft u ons op <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Abonnement verlengen voor {{license}}",
   "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie",

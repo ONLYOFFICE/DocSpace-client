@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.25.7",
-    "@onlyoffice/docspace-sdk-js": "file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz",
     "@react-spring/web": "^9.7.5",
     "@use-gesture/react": "^10.3.1",
     "attr-accept": "^2.2.4",

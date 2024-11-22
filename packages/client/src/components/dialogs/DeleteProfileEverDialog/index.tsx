@@ -101,11 +101,13 @@ const DeleteProfileEverDialogComponent = ({
   const isInsideGroup = contactsTab === "inside_group";
   const isGuests = contactsTab === "guests";
 
-  const needReassignData =
-    onlyOneUser &&
-    (usersToDelete[0].isRoomAdmin ||
-      usersToDelete[0].isOwner ||
-      usersToDelete[0].isAdmin);
+  // const needReassignData =
+  //   onlyOneUser &&
+  //   (usersToDelete[0].isRoomAdmin ||
+  //     usersToDelete[0].isOwner ||
+  //     usersToDelete[0].isAdmin);
+
+  const needReassignData = true;
 
   const onlyGuests = usersToDelete.every((user) => user.isVisitor);
 
@@ -322,10 +324,12 @@ export default inject(
 
     const usersToDelete = users.length ? users : selection;
 
-    const onlyGuests = usersToDelete.every(
-      (el) => el.role === EmployeeType.Guest,
-    );
-    const deleteWithoutReassign = usersToDelete.length > 1 && !onlyGuests;
+    // const onlyGuests = usersToDelete.every(
+    //   (el) => el.role === EmployeeType.Guest,
+    // );
+
+    // const deleteWithoutReassign = usersToDelete.length > 1 && !onlyGuests;
+    const deleteWithoutReassign = false;
     const onlyOneUser = usersToDelete.length === 1;
 
     return {

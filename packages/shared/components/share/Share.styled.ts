@@ -116,6 +116,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
       `};
   }
 
+  .link-options-title-room {
+    margin-inline-start: 0px;
+  }
+
   .expired-options {
     padding: 0px;
 
@@ -135,6 +139,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   .expire-text {
     margin-inline-start: 8px;
     color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  .expire-text-room {
+    margin-inline-start: 0px;
   }
 
   .link-actions {

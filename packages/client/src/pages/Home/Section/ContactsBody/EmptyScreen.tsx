@@ -71,6 +71,7 @@ const EmptyScreen = ({
 }: EmptyScreenProps) => {
   const { t } = useTranslation([
     "People",
+    "PeopleTranslations",
     "Common",
     "EmptyView",
     "DeleteDialog",
@@ -84,7 +85,7 @@ const EmptyScreen = ({
     ? isFiltered
       ? t("Common:NotFoundGuestsFilter")
       : t("Common:NotFoundGuests")
-    : t("Common:NotFoundUsers");
+    : t("Common:NotFoundMembers");
 
   const description = isEmptyGuests
     ? isFiltered
@@ -117,7 +118,7 @@ const EmptyScreen = ({
       return [
         {
           key: "group-add-user",
-          title: t("Common:AddUsers"),
+          title: t("PeopleTranslations:AddMembers"),
           description: t("EmptyView:EmptyGroupAddedUserOptionDescription"),
           disabled: isRoomAdmin || currentGroup?.isLDAP,
           icon: <InviteUserIcon />,

@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Допълнителни секции",
   "DisplayFavorites": "Покажи Любими",
+  "DisplayFileExtension": "Покажи файловото разширение до името на файла",
   "DisplayNotification": "Показвай известие, когато се изхвърлят елементи в Кошчето",
   "DisplayRecent": "Покажи Скорошни",
   "DisplayTemplates": "Покажи Шаблони",

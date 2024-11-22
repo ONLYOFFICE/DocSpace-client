@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
+    "@onlyoffice/docspace-sdk-js": "^1.1.0",
     "@uiw/codemirror-theme-github": "^4.23.5",
     "@uiw/react-codemirror": "^4.23.5",
     "copy-to-clipboard": "^3.3.3",

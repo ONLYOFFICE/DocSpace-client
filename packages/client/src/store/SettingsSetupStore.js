@@ -39,6 +39,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -413,9 +414,18 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const { openOnNewPage } = this.filesSettingsStore;
-    const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
-    return this.setAuditTrailReport(res);
+
+    try {
+      const res = await api.settings.getLoginHistoryReport();
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); //hack for ios
+      return this.setAuditTrailReport(res);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
 
   getAuditTrailReport = async () => {
@@ -430,6 +440,7 @@ class SettingsSetupStore {
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
+      toastr.error(error);
     } finally {
       this.setIsLoadingDownloadReport(false);
     }

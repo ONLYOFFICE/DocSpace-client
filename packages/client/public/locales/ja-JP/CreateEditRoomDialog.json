@@ -23,6 +23,7 @@
   "MakeRoomPrivateTitle": "このルームをプライベートルームにする",
   "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "Position": "ポジション",
+  "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーのアクセスは、選択されたアクセス権の種類に応じて提供されます。",
   "PublicRoomSystemFoldersDescription": "システムフォルダには、さまざまな完成段階にあるフォームのコピーが保存されます。入力中のフォームは「入力中」フォルダーに、完成したフォームは「記入済み」フォルダーに保存されます。",
   "PublicRoomSystemFoldersTitle": "システムフォルダ",
   "RestrictCopyAndDownload": "コピーとダウンロードを制限する",

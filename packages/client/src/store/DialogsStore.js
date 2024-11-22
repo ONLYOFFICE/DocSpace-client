@@ -171,6 +171,8 @@ class DialogsStore {
   };
 
   newFilesPanelFolderId = null;
+  formFillingTipsDialogVisible = true;
+  formFillingTipsNumber = 1;
 
   constructor(
     authStore,
@@ -585,6 +587,13 @@ class DialogsStore {
 
   setRoomLogoCoverDialogVisible = (visible) => {
     this.roomLogoCoverDialogVisible = visible;
+  };
+
+  setFormFillingTipsDialog = (visible) => {
+    this.formFillingTipsDialogVisible = visible;
+  };
+  setFormFillingTipsNumber = (number) => {
+    this.formFillingTipsNumber = number;
   };
 
   setCovers = (covers) => {

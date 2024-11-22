@@ -68,6 +68,7 @@ import {
   ShareFolderDialog,
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
+  FormFillingTipsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -143,6 +144,7 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
+    formFillingTipsDialogVisible,
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
   } = props;
@@ -347,6 +349,9 @@ const Panels = (props) => {
         isDownload={passwordEntryDialogDate.isDownload}
       />
     ),
+    formFillingTipsDialogVisible && (
+      <FormFillingTipsDialog key="form-filling_tips_dialog" />
+    ),
   ];
 };
 
@@ -382,6 +387,7 @@ export default inject(
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
+      formFillingTipsDialogVisible,
 
       unsavedChangesDialogVisible,
       createMasterForm,
@@ -503,6 +509,7 @@ export default inject(
       shareCollectSelector,
       roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
+      formFillingTipsDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,

@@ -129,9 +129,6 @@ class UsersStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "users",
-    });
     SocketHelper.on(SocketEvents.AddUser, (value) => {
       const { id, data } = value;
 
@@ -174,6 +171,32 @@ class UsersStore {
   };
 
   setContactsTab = (contactsTab: TContactsTab) => {
+    if (contactsTab) {
+      const roomParts =
+        contactsTab === "guests"
+          ? `${this.userStore.user!.id}-guests`
+          : contactsTab === "people" || contactsTab === "inside_group"
+            ? "users"
+            : "groups";
+
+      if (!SocketHelper.socketSubscribers.has(roomParts))
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts,
+        });
+    } else {
+      const roomParts =
+        this.contactsTab === "guests"
+          ? `${this.userStore.user!.id}-guests`
+          : this.contactsTab === "people" || this.contactsTab === "inside_group"
+            ? "users"
+            : "groups";
+
+      if (!SocketHelper.socketSubscribers.has(roomParts))
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts,
+        });
+    }
+
     if (contactsTab !== this.contactsTab) {
       this.filter = Filter.getDefault();
     }

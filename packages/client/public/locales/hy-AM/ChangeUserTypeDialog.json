@@ -1,4 +1,6 @@
 {
+  "ChangeGuestsTypeMessage": "Հյուր <strong>{{userName}}</strong>-ը կտեղափոխվի {{membersSection}} բաժին և կնշանակվի Օգտատիրոջ տեսակը: Օգտատերերն ունեն իրենց սեփական {{documentsSection}} բաժինը, կարող են ստեղծել և խմբագրել ֆայլեր, բայց չեն կարողանում ստեղծել սենյակներ:",
+  "ChangeGuestsTypeMessageMulti": "Ընտրված հյուրերը կտեղափոխվեն {{membersSection}} բաժին և կնշանակվի Օգտատիրոջ տեսակը: Օգտատերերն ունեն իրենց սեփական {{documentsSection}} բաժինը, կարող են ստեղծել և խմբագրել ֆայլեր, բայց չեն կարող ստեղծել սենյակներ:",
   "ChangeUserTypeButton": "Փոխել տեսակը",
   "ChangeUserTypeHeader": "Փոխել օգտվողի տեսակը",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> տեսակի օգտատերերը կտեղափոխվեն <strong>'{{ secondType }}'</strong> տեսակի.",

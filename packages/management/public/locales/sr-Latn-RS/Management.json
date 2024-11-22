@@ -8,6 +8,7 @@
   "CurrentSpace": "Trenutni prostor",
   "DeleteEmptyPortalText": "Permanento ćete obrisati prostor <1>{{domain}}</1>. Ova akcija se ne može opozvati.",
   "DeleteRequestSuccess": "Zahtev za brisanje je uspešno poslat na email adresu vlasnika {{productName}} <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Trajno ćete obrisati prostor <1>{{domain}}</1> sa svim podacima i nalozima. Zahtev za brisanje <1>{{domain}} </1> biće poslat vlasniku {{productName}} na adresu e- pošte <1>{{email}}</1>.",
   "DeleteWarning": "Poslednji prostor sa punim pristupom ne može biti obrisan",
   "DomainName": "Domen ime",
   "DomainNotFound": "Domen nije pronađen, molimo vas proverite u DNS podešavanjima",

@@ -65,6 +65,11 @@ class PrimaryProgressDataStore {
     return primaryOperations.filter((item) => item.visible);
   }
 
+  get isFinishedActiveOperations() {
+    return this.primaryActiveOperations.every(
+      (item) => item.percent === 100 || item.percent > 100,
+    );
+  }
   setConversionProgress = (primaryProgressData) => {
     const progressDataItems = Object.keys(primaryProgressData);
     for (let key of progressDataItems) {
@@ -83,7 +88,6 @@ class PrimaryProgressDataStore {
     this.conversionProgress = {
       visible: false,
       percent: 0,
-      label: "",
       icon: "",
       alert: false,
       errors: 0,
@@ -93,10 +97,9 @@ class PrimaryProgressDataStore {
 
   clearUploadProgress = () => {
     this.uploadProgress = {
+      ...this.uploadProgress,
       visible: false,
       percent: 0,
-      label: "",
-      icon: "",
       alert: false,
       errors: 0,
       disableUploadPanelOpen: false,

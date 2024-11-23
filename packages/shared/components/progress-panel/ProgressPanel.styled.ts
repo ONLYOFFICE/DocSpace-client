@@ -59,10 +59,6 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
 
       line-height: 16px;
       color: ${(props) => props.theme.progressPanel.textColor};
-
-      &:hover {
-        cursor: pointer;
-      }
     }
     .progress-loader {
       margin: auto;

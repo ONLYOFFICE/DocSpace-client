@@ -37,9 +37,9 @@ import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
 import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
 import RefreshIcon from "PUBLIC_DIR/images/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
-import VerticalDotsIcon from "PUBLIC_DIR/images/vertical-dots.react.svg";
-import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-
+import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg";
+import ArrowIcon from "PUBLIC_DIR/images/icons/16/top-arrow.react.svg";
+import SuccessIcon from "PUBLIC_DIR/images/icons/12/success.react.svg";
 import { FloatingButtonTheme } from "./FloatingButton.theme";
 
 import { IconSizeType, classNames, commonIconsStyles } from "../../utils";
@@ -47,7 +47,7 @@ import { IconSizeType, classNames, commonIconsStyles } from "../../utils";
 import {
   StyledFloatingButtonWrapper,
   StyledFloatingButton,
-  StyledAlertIcon,
+  StyledIcon,
   StyledCircle,
   IconBox,
 } from "./FloatingButton.styled";
@@ -55,6 +55,9 @@ import { FloatingButtonProps } from "./FloatingButton.types";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 
 const StyledButtonAlertIcon = styled(ButtonAlertIcon)`
+  ${commonIconsStyles}
+`;
+const StyledSuccessIcon = styled(SuccessIcon)`
   ${commonIconsStyles}
 `;
 
@@ -69,7 +72,7 @@ const icons = {
   minus: <ButtonMinusIcon />,
   refresh: <RefreshIcon />,
   duplicate: <ButtonDuplicateIcon />,
-  dots: <VerticalDotsIcon />,
+  dots: <HorizontalDotsIcon />,
   arrow: <ArrowIcon />,
 };
 
@@ -147,11 +150,15 @@ const FloatingButton = (props: FloatingButtonProps) => {
 
           <StyledFloatingButton className="circle__background" color={color}>
             <IconBox className="icon-box">{iconComponent}</IconBox>
-            <StyledAlertIcon>
-              {alert ? (
-                <StyledButtonAlertIcon size={IconSizeType.medium} />
-              ) : null}
-            </StyledAlertIcon>
+            <StyledIcon>
+              {alert && (
+                <StyledButtonAlertIcon
+                  size={IconSizeType.medium}
+                  className="alert-icon"
+                />
+              )}
+              {percent === 100 && !alert && <StyledSuccessIcon />}
+            </StyledIcon>
           </StyledFloatingButton>
         </StyledCircle>
       </FloatingButtonTheme>

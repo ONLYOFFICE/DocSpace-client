@@ -66,18 +66,18 @@ class UploadPanelComponent extends React.Component {
       uploadPanelVisible,
       clearUploadedFiles,
       setUploadPanelVisible,
-      clearPrimaryProgressData,
+      clearUploadProgress,
     } = this.props;
 
     setUploadPanelVisible(!uploadPanelVisible);
 
     if (uploaded) {
-      if (converted) {
-        clearUploadData();
-        clearPrimaryProgressData();
-      } else {
-        clearUploadedFiles();
-      }
+      // if (converted) {
+      clearUploadData();
+      clearUploadProgress();
+      // } else {
+      //   clearUploadedFiles();
+      // }
     }
   };
   componentDidMount() {
@@ -95,11 +95,13 @@ class UploadPanelComponent extends React.Component {
 
   clearUploadPanel = () => {
     this.props.clearUploadData();
+    this.props.clearUploadProgress();
     this.onClose();
   };
 
   onCancelUpload = () => {
     this.props.cancelUpload(this.props.t);
+    this.props.clearUploadProgress();
   };
 
   render() {
@@ -128,12 +130,13 @@ class UploadPanelComponent extends React.Component {
     const url =
       uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;
 
-    const clickEvent =
-      uploaded && converted
-        ? this.clearUploadPanel
-        : uploaded
-          ? cancelConversion
-          : this.onCancelUpload;
+    // const clickEvent =
+    //   uploaded && converted
+    //     ? this.clearUploadPanel
+    //     : uploaded
+    //       ? cancelConversion
+    //       : this.onCancelUpload;
+    const clickEvent = uploaded ? this.clearUploadPanel : this.onCancelUpload;
 
     return (
       <StyledModal
@@ -173,7 +176,7 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     isUploadingAndConversion,
   } = uploadDataStore;
 
-  const { clearPrimaryProgressData } = primaryProgressDataStore;
+  const { clearUploadProgress } = primaryProgressDataStore;
 
   return {
     uploadPanelVisible,
@@ -186,7 +189,7 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     cancelConversion,
     clearUploadedFiles,
     uploadDataFiles: files,
-    clearPrimaryProgressData,
+    clearUploadProgress,
     isUploading,
     isUploadingAndConversion,
 

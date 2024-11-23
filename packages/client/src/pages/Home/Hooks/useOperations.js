@@ -35,7 +35,7 @@ const useOperations = ({
   primaryProgressDataVisible,
   uploaded,
   converted,
-  clearPrimaryProgressData,
+  clearUploadProgress,
   isProgressFinished,
   refreshFiles,
   itemsSelectionTitle,
@@ -77,8 +77,7 @@ const useOperations = ({
     if (disableUploadPanelOpen) return;
     setUploadPanelVisible(true);
 
-    if (primaryProgressDataVisible && uploaded && converted)
-      clearPrimaryProgressData();
+    if (primaryProgressDataVisible && uploaded) clearUploadProgress();
   };
 
   const showOperationToast = React.useCallback(

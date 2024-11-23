@@ -185,7 +185,7 @@ const IconBox = styled.div`
 
 IconBox.defaultProps = { theme: Base };
 
-const StyledAlertIcon = styled.div`
+const StyledIcon = styled.div`
   position: absolute;
   width: 12px;
   height: 12px;
@@ -193,12 +193,14 @@ const StyledAlertIcon = styled.div`
   inset-inline-start: 20px;
   top: 0px;
 
-  svg {
-    circle {
-      fill: ${(props) => props.theme.floatingButton?.alert.fill};
-    }
-    path {
-      fill: ${(props) => props.theme.floatingButton?.alert.path};
+  .alert-icon {
+    svg {
+      circle {
+        fill: ${(props) => props.theme.floatingButton?.alert.fill};
+      }
+      path {
+        fill: ${(props) => props.theme.floatingButton?.alert.path};
+      }
     }
   }
 `;
@@ -208,7 +210,7 @@ export {
   StyledCircle,
   StyledCircleWrap,
   StyledFloatingButton,
-  StyledAlertIcon,
+  StyledIcon,
   IconBox,
 };
 

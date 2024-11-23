@@ -87,7 +87,7 @@ const PureHome = (props) => {
     uploaded,
     converted,
     setUploadPanelVisible,
-    clearPrimaryProgressData,
+    clearUploadProgress,
     primaryProgressDataVisible,
     isProgressFinished,
     secondaryProgressDataStoreIcon,
@@ -166,6 +166,7 @@ const PureHome = (props) => {
 
     secondaryActiveOperations,
     primaryActiveOperations,
+    isFinishedActiveOperations,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -225,7 +226,7 @@ const PureHome = (props) => {
     primaryProgressDataVisible,
     uploaded,
     converted,
-    clearPrimaryProgressData,
+    clearUploadProgress,
     isProgressFinished,
     refreshFiles,
     itemsSelectionTitle,
@@ -368,7 +369,7 @@ const PureHome = (props) => {
   sectionProps.getContextModel = getContextModel;
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.primaryActiveOperations = primaryActiveOperations;
-
+  sectionProps.isFinishedActiveOperations = isFinishedActiveOperations;
   return (
     <>
       {isSettingsPage ? (
@@ -538,9 +539,9 @@ export const Component = inject(
       icon: primaryProgressDataIcon,
       alert: primaryProgressDataAlert,
       disableUploadPanelOpen,
-      clearPrimaryProgressData,
+      clearUploadProgress,
       uploadProgress,
-
+      isFinishedActiveOperations,
       primaryActiveOperations,
     } = primaryProgressDataStore;
     const { percent: primaryProgressDataPercent } = uploadProgress;
@@ -618,7 +619,7 @@ export const Component = inject(
       primaryProgressDataPercent,
       primaryProgressDataIcon,
       primaryProgressDataAlert,
-      clearPrimaryProgressData,
+      clearUploadProgress,
       disableUploadPanelOpen,
 
       clearUploadedFilesHistory,
@@ -711,6 +712,7 @@ export const Component = inject(
       wsCreatedPDFForm,
       secondaryActiveOperations,
       primaryActiveOperations,
+      isFinishedActiveOperations,
     };
   },
 )(observer(Home));

@@ -118,6 +118,7 @@ const Section = (props: SectionProps) => {
     getContextModel,
     secondaryActiveOperations,
     primaryActiveOperations,
+    isFinishedActiveOperations,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -296,6 +297,8 @@ const Section = (props: SectionProps) => {
           <OperationsProgress
             primaryActiveOperations={primaryActiveOperations}
             secondaryActiveOperations={secondaryActiveOperations}
+            isFinishedActiveOperations={isFinishedActiveOperations}
+            onClick={onOpenUploadPanel}
           />
           {/* {currentDeviceType === DeviceType.desktop ? (
             showTwoProgress ? (

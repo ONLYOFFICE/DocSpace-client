@@ -54,7 +54,7 @@ import {
   MainButtonMobileProps,
   ProgressOption,
 } from "./MainButtonMobile.types";
-import { ProgressBarMobile } from "../progress-panel/ProgressPanel";
+import { ProgressPanel } from "../progress-panel/ProgressPanel";
 
 const StyledButtonAlertIcon = styled(ButtonAlertReactSvg)`
   cursor: pointer;
@@ -273,7 +273,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
         <StyledProgressContainer isUploading={isUploading}>
           {progressOptions &&
             progressOptions.map((option: ProgressOption) => (
-              <ProgressBarMobile
+              <ProgressPanel
                 key={option.key}
                 label={option.label}
                 icon={option.icon || ""}

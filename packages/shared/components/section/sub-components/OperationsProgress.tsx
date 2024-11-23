@@ -35,13 +35,22 @@ import { ProgressPanel } from "../../progress-panel/ProgressPanel";
 const OperationsProgress = ({
   primaryActiveOperations,
   secondaryActiveOperations,
+  isFinishedActiveOperations,
+  onClick,
 }) => {
   const [isOpenPanel, setIsOpenPanel] = useState<boolean>(false);
 
+  const onClickAction = () => {
+    onClick?.();
+    setIsOpenPanel(false);
+  };
   console.log(
     "secondaryActiveOperations",
     secondaryActiveOperations,
-    secondaryActiveOperations.length,
+    "primaryActiveOperations",
+    primaryActiveOperations,
+    "isFinishedActiveOperations",
+    isFinishedActiveOperations,
   );
 
   if (!primaryActiveOperations && !secondaryActiveOperations) return <></>;
@@ -93,12 +102,10 @@ const OperationsProgress = ({
               percent={item.percent}
               open
               iconUrl={getIcon(item.icon)}
-
-              //status="Done"
+              onClickAction={onClickAction}
             />
           </div>
         ))}
-        ;
       </div>
     );
   };
@@ -112,6 +119,7 @@ const OperationsProgress = ({
           //alert={showPrimaryButtonAlert}
           onClick={onOpenProgressPanel}
           // clearUploadedFilesHistory={clearUploadedFilesHistory}
+          percent={isFinishedActiveOperations ? 100 : 0}
         />
 
         <StyledDropDown

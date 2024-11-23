@@ -36,7 +36,7 @@ import {
   StyledProgressBarContainer,
 } from "./ProgressPanel.styled";
 import { ProgressBarMobileProps } from "./ProgressPanel.types";
-import { Loader } from "../loader";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 const ProgressPanel = ({
   label,
@@ -68,27 +68,22 @@ const ProgressPanel = ({
             iconName={iconUrl}
             size={16}
           />
-          <Text
-            className="progress-header"
-            fontSize="14px"
-            onClick={onClickHeaderAction}
-            truncate
-          >
+          <Text className="progress-header" fontSize="14px" truncate>
             {label}
           </Text>
         </div>
         {withoutProgress && <div className="progress-loader" />}
-        {/* <div className="progress_info-container">
-          <Text className="progress_count" fontSize="13px" truncate>
+        <div className="progress_info-container">
+          {/* <Text className="progress_count" fontSize="13px" truncate>
             {status}
-          </Text>
+          </Text> */}
           <IconButton
             className="progress_icon"
-            onClick={onCancel}
-            iconName={icon}
+            onClick={onClickHeaderAction}
+            iconName={ArrowIcon}
             size={14}
           />
-        </div> */}
+        </div>
       </div>
 
       {!withoutProgress && (

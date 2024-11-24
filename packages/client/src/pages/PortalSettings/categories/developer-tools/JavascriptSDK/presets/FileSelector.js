@@ -34,19 +34,19 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { inject, observer } from "mobx-react";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FilterType } from "@docspace/shared/enums";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TooltipContent } from "../sub-components/TooltipContent";
+import { Integration } from "../sub-components/Integration";
 
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
 import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
-
-import { toastr } from "@docspace/shared/components/toast";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -57,15 +57,7 @@ import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 
-import { loadFrame } from "../utils";
-
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -81,7 +73,7 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const FileSelector = (props) => {
-  const { t, fetchExternalLinks, theme } = props;
+  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -140,9 +132,10 @@ const FileSelector = (props) => {
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
 
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "file-selector",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: true,
     showSelectorCancel: true,
@@ -152,11 +145,11 @@ const FileSelector = (props) => {
     cancelButtonLabel: t("Common:CancelButton"),
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
-    isButtonMode: true,
+    isButtonMode: false,
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
-        //toastr.success(items[0].label);
+        console.log("onSelectCallback", items);
       },
       onCloseCallback: null,
       onAppReady: null,
@@ -167,16 +160,18 @@ const FileSelector = (props) => {
     },
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    sdk.init(config);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
+    initFrame();
     return () => destroyFrame();
   });
 
@@ -256,9 +251,9 @@ const FileSelector = (props) => {
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
       height={config.height.includes("px") ? config.height : undefined}
-      targetId={frameId}
+      targetId={config.frameId}
     >
-      <Box id={frameId}></Box>
+      <Box id={config.frameId}></Box>
     </Frame>
   );
 
@@ -270,10 +265,10 @@ const FileSelector = (props) => {
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
@@ -290,16 +285,16 @@ const FileSelector = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}
@@ -386,9 +381,7 @@ const FileSelector = (props) => {
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:PublicRoomDescription")}
-                      </Text>
+                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
                   />
                 </LabelGroup>
@@ -432,18 +425,33 @@ const FileSelector = (props) => {
               </>
             )}
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
-export default inject(({ settingsStore, publicRoomStore }) => {
-  const { theme } = settingsStore;
+export const Component = inject(({ settingsStore, publicRoomStore }) => {
+  const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
+    currentColorScheme,
     fetchExternalLinks,
   };
 })(

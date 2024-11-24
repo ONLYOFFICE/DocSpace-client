@@ -31,6 +31,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { ColorPicker } from "./ColorPicker";
 import { ColorPickerProps } from "./ColorPicker.types";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/ColorPicker",
@@ -57,7 +58,7 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     isPickerOnly: false,
-    appliedColor: "#4781D1",
+    appliedColor: globalColors.lightBlueMain,
     onClose: () => console.log("close"),
     applyButtonLabel: "Apply",
     cancelButtonLabel: "Cancel",

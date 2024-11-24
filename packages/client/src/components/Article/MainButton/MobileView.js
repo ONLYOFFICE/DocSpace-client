@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CrossSidebarReactSvgUrl from "PUBLIC_DIR/images/cross.sidebar.react.svg?url";
+import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
@@ -39,32 +40,16 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
   z-index: 200;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: ${isMobileOnly
-            ? "calc(16px + env(safe-area-inset-left))"
-            : "24px"};
-        `
-      : css`
-          right: ${isMobileOnly
-            ? "calc(16px + env(safe-area-inset-right))"
-            : "24px"};
-        `}
+  inset-inline-end: ${({ theme }) => {
+    const side = theme.interfaceDirection === "rtl" ? "left" : "right";
+    return isMobileOnly ? `calc(16px + env(safe-area-inset-${side}))` : "24px";
+  }};
 
   bottom: 24px;
 
   @media ${mobile} {
     position: absolute;
-    bottom: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 16px;
-          `
-        : css`
-            right: 16px;
-          `}
+    inset-inline-end: 16px;
     bottom: 16px;
   }
 `;
@@ -150,21 +135,29 @@ const MobileView = ({
           currentSecondaryProgressItem,
         )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
+    const isUploaded = primaryProgressDataPercent === 100 && uploaded;
+    const isError = isUploaded && primaryProgressDataErrors;
+
+    let primaryLabel =
+      isUploaded && !primaryProgressDataErrors
+        ? t("FilesUploaded")
+        : `${uploadedFileCount}/${fileLength}`;
+
+    if (isError) {
+      primaryLabel = t("FilesNotLoaded", { count: primaryProgressDataErrors });
+    }
+
     const newProgressOptions = [
       {
         key: "primary-progress",
         open: primaryProgressDataVisible,
         label: t("UploadPanel:Uploads"),
-        icon: CrossSidebarReactSvgUrl,
+        icon: isError ? InfoEditReactSvgUrl : CrossSidebarReactSvgUrl,
         percent: primaryProgressDataPercent,
-        status:
-          primaryProgressDataPercent === 100 &&
-          !primaryProgressDataErrors &&
-          uploaded
-            ? t("FilesUploaded")
-            : `${uploadedFileCount}/${fileLength}`,
+        status: primaryLabel,
         onClick: showUploadPanel,
         onCancel: clearUploadPanel,
+        error: primaryProgressDataErrors,
       },
       {
         key: "secondary-progress",

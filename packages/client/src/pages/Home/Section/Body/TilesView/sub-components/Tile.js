@@ -35,8 +35,8 @@ import { tablet, isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
-import { Loader } from "@docspace/shared/components/loader";
-import { Base } from "@docspace/shared/themes";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -142,6 +142,7 @@ const StyledTile = styled.div`
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
     props.inProgress &&
+    !props.isFolder &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -154,10 +155,11 @@ const StyledTile = styled.div`
     isRooms
       ? theme.filesSection.tilesView.tile.roomsBorderRadius
       : theme.filesSection.tilesView.tile.borderRadius};
-  ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
   ${(props) =>
-    props.isFolder && !props.isRooms && "border-top-left-radius: 6px;"}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
+  ${(props) =>
+    props.isFolder && !props.isRooms && "border-start-start-radius: 6px;"}
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) => props.isFolder && (props.isRoom ? roomsStyles : FlexBoxStyles)};
   ${(props) => (props.isFolder ? FolderStyles : FileStyles)};
@@ -200,7 +202,9 @@ const StyledTile = styled.div`
 
   &:before,
   &:after {
-    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+    ${(props) =>
+      props.showHotkeyBorder &&
+      `border-color: ${globalColors.lightSecondMain}`};
   }
 
   &:before,
@@ -223,14 +227,7 @@ const StyledTile = styled.div`
     display: ${(props) => (props.checked ? "flex" : "none")};
     flex: 0 0 16px;
     padding-top: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: ${(props) => (props.isFolder ? "8px" : "7px")};
-          `
-        : css`
-            padding-left: ${(props) => (props.isFolder ? "8px" : "7px")};
-          `}
+    padding-inline-start: ${(props) => (props.isFolder ? "8px" : "7px")};
   }
 
   .file-icon {
@@ -243,36 +240,21 @@ const StyledTile = styled.div`
   .file-icon_container {
     width: 32px;
     height: 32px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: ${(props) =>
-              props.isFolder ? (props.isRoom ? "16px" : "15px") : "16px"};
-            margin-left: ${(props) =>
-              props.isFolder ? (props.isRoom ? "12px" : "7px") : "8px"};
-          `
-        : css`
-            margin-left: ${(props) =>
-              props.isFolder ? (props.isRoom ? "16px" : "15px") : "16px"};
-            margin-right: ${(props) =>
-              props.isFolder ? (props.isRoom ? "12px" : "7px") : "8px"};
-          `}
+    margin-inline-start: ${(props) =>
+      props.isFolder ? (props.isRoom ? "16px" : "15px") : "16px"};
+    margin-inline-end: ${(props) =>
+      props.isFolder ? (props.isRoom ? "12px" : "7px") : "8px"};
   }
 
   .tile-folder-loader {
-    padding-top: 16px;
+    padding-top: 12px;
     width: 32px;
     height: 32px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 21px;
-            margin-left: 14px;
-          `
-        : css`
-            margin-left: 21px;
-            margin-right: 14px;
-          `}
+    margin-inline: 21px 13px;
+  }
+
+  .tile-room {
+    margin-inline: 21px 19px;
   }
 
   .file-icon_container:hover {
@@ -364,19 +346,10 @@ const StyledFileTileBottom = styled.div`
   box-sizing: border-box;
 
   .tile-file-loader {
-    padding-top: 16px;
+    padding-top: 12px;
     width: 32px;
     height: 32px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 23px;
-            margin-left: 14px;
-          `
-        : css`
-            margin-left: 23px;
-            margin-right: 14px;
-          `}
+    margin-inline: 23px 13px;
   }
 `;
 
@@ -402,7 +375,7 @@ const StyledContent = styled.div`
   }
 
   .new-items {
-    margin-left: 12px;
+    margin-inline-start: 12px;
   }
 
   .badges {
@@ -430,14 +403,7 @@ const StyledContent = styled.div`
 const StyledElement = styled.div`
   flex: 0 0 auto;
   display: flex;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: ${(props) => (props.isRoom ? "8px" : "4px")};
-        `
-      : css`
-          margin-right: ${(props) => (props.isRoom ? "8px" : "4px")};
-        `}
+  margin-inline-end: ${(props) => (props.isRoom ? "8px" : "4px")};
   user-select: none;
   margin-top: 3px;
 
@@ -449,28 +415,15 @@ const StyledOptionButton = styled.div`
   display: block;
 
   .expandButton > div:first-child {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 8px 12px 8px 21px;
-          `
-        : css`
-            padding: 8px 21px 8px 12px;
-          `}
+    padding-block: 8px;
+    padding-inline: 12px 21px;
   }
 `;
 
 StyledOptionButton.defaultProps = { theme: Base };
 
 const badgesPosition = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 9px;
-        `
-      : css`
-          left: 9px;
-        `}
+  inset-inline-start: 9px;
 
   .badges {
     display: grid;
@@ -498,14 +451,7 @@ const badgesPosition = css`
 `;
 
 const quickButtonsPosition = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 9px;
-        `
-      : css`
-          right: 9px;
-        `}
+  inset-inline-end: 9px;
 
   .badges {
     display: grid;
@@ -530,7 +476,7 @@ const StyledIcons = styled.div`
     background: ${(props) =>
       props.theme.filesSection.tilesView.tile.backgroundBadgeColor};
     border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
+    box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
   }
 `;
 
@@ -701,6 +647,8 @@ class Tile extends React.PureComponent {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
       color: children[0].props.item.logo?.color,
+      cover: children[0].props.item.logo?.cover,
+      logo: children[0].props.item.logo?.medium,
     };
 
     const title = item.isFolder
@@ -785,9 +733,10 @@ class Tile extends React.PureComponent {
                       </div>
                     ) : (
                       <Loader
-                        className="tile-folder-loader"
-                        type="oval"
-                        size="16px"
+                        className="tile-folder-loader tile-room"
+                        color=""
+                        size="20px"
+                        type={LoaderTypes.track}
                       />
                     )}
                   </>
@@ -880,8 +829,9 @@ class Tile extends React.PureComponent {
                   ) : (
                     <Loader
                       className="tile-folder-loader"
-                      type="oval"
-                      size="16px"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
                     />
                   )}
                 </>
@@ -962,8 +912,9 @@ class Tile extends React.PureComponent {
                   ) : (
                     <Loader
                       className="tile-file-loader"
-                      type="oval"
-                      size="16px"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
                     />
                   )}
                 </>

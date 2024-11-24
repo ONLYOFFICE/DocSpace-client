@@ -27,7 +27,7 @@ import debounce from "lodash.debounce";
 
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
+import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
 
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
@@ -35,15 +35,26 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, RoomsType } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  EmployeeStatus,
+  EmployeeType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
+  getTopFreeRole,
+  isPaidUserRole,
 } from "../utils";
 import {
   StyledEditInput,
@@ -54,12 +65,15 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
   ErrorWrapper,
+  StyledRow,
 } from "../StyledInvitePanel";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const Item = ({
   t,
@@ -71,14 +85,14 @@ const Item = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
   standalone,
-  isPaidUserAccess,
-  setInvitePaidUsersCount,
   isUserTariffLimit,
   roomId,
+  style,
 }) => {
   const {
     avatar,
@@ -91,6 +105,9 @@ const Item = ({
     name: groupName,
     warning,
     isVisitor,
+    status,
+    isEmailInvite,
+    userType,
   } = item;
 
   const name = isGroup
@@ -144,38 +161,51 @@ const Item = ({
     [],
   );
 
+  const type = isEmailInvite ? userType : (getUserType(item) ?? userType);
+
   const accesses = getAccessOptions(
     t,
     roomType,
     true,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
-  const filteredAccesses = item.isGroup
-    ? filterGroupRoleOptions(accesses)
-    : filterUserRoleOptions(accesses, item, true);
+  const isRolePaid = isPaidUserRole(access);
+  const isUserRolesFilterd =
+    roomId === -1
+      ? false
+      : isRolePaid &&
+        (type === EmployeeType.Guest || type === EmployeeType.User);
 
-  const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access,
-  );
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
-  };
+  const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
-  const type = getUserType(item);
+  const filteredAccesses =
+    roomId === -1
+      ? accesses
+      : item.isGroup ||
+          isUserRolesFilterd ||
+          type === EmployeeType.Guest ||
+          type === EmployeeType.User
+        ? filterPaidRoleOptions(accesses)
+        : accesses;
 
-  const typeLabel = item?.isEmailInvite
-    ? getUserTypeLabel(defaultAccess.type, t)
-    : (type === "user" && defaultAccess?.type !== type) ||
-        (defaultAccess?.type === "manager" && type !== "admin")
-      ? getUserTypeLabel(defaultAccess.type, t)
-      : getUserTypeLabel(type, t);
+  const defaultAccess =
+    isUserRolesFilterd || isGroupRoleFiltered
+      ? getTopFreeRole(t, roomType)
+      : filteredAccesses.find((option) => option.access === +access);
+
+  const typeLabel = isEmailInvite
+    ? roomId === -1 || isRolePaid
+      ? getUserTypeTranslation(roomId !== -1 ? type : defaultAccess.type, t)
+      : t("Common:Guest")
+    : defaultAccess?.type === EmployeeType.RoomAdmin &&
+        type !== EmployeeType.Admin &&
+        type !== EmployeeType.Owner
+      ? getUserTypeTranslation(defaultAccess.type, t)
+      : getUserTypeTranslation(type, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -247,8 +277,6 @@ const Item = ({
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);
 
-    if (isPaidUserAccess(item.access)) setInvitePaidUsersCount(-1);
-
     setInviteItems(newItems);
   };
 
@@ -266,17 +294,24 @@ const Item = ({
   const displayBody = (
     <>
       <StyledInviteUserBody>
-        <Text {...textProps} truncate noSelect>
-          {inputValue}
-        </Text>
+        <Box
+          displayProp="flex"
+          alignItems="center"
+          gapProp="8px"
+          className={isGroup && "group-name"}
+        >
+          <Text {...textProps} truncate noSelect>
+            {inputValue}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
 
         {!isGroup && (
           <Text
-            className="label"
+            className="label about-label"
             fontWeight={400}
             fontSize="12px"
             noSelect
-            color="#A3A9AE"
             truncate
           >
             {`${typeLabel} | ${email}`}
@@ -302,12 +337,18 @@ const Item = ({
           />
         </ErrorWrapper>
       ) : (
-        <>
+        <Box
+          displayProp="flex"
+          alignItems="right"
+          gapProp="8px"
+          className="role-access"
+        >
           {warning && (
-            <div className="warning">
+            <div className="role-warning">
               <StyledHelpButton
                 tooltipContent={warning}
-                iconName={AlertSvgUrl}
+                iconName={InfoRoleSvgUrl}
+                size={16}
               />
             </div>
           )}
@@ -330,7 +371,7 @@ const Item = ({
               availableAccess,
             })}
           />
-        </>
+        </Box>
       )}
     </>
   );
@@ -351,7 +392,13 @@ const Item = ({
   );
 
   return (
-    <>
+    <StyledRow
+      key={item.id}
+      style={style}
+      className="row-item"
+      hasWarning={!!item.warning}
+      edit={edit}
+    >
       <Avatar
         size="min"
         role={type}
@@ -360,18 +407,15 @@ const Item = ({
         userName={groupName}
       />
       {edit ? editBody : displayBody}
-    </>
+    </StyledRow>
   );
 };
 
 export default inject(({ dialogsStore, currentQuotaStore }) => {
-  const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
-    dialogsStore;
+  const { invitePanelOptions } = dialogsStore;
   const { isUserTariffLimit } = currentQuotaStore;
 
   return {
-    isPaidUserAccess,
-    setInvitePaidUsersCount,
     isUserTariffLimit,
     roomId: invitePanelOptions.roomId,
   };

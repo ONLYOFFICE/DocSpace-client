@@ -254,10 +254,6 @@ const HoveredTemplate = () => {
   );
 };
 
-const InterfaceDirectionTemplate = () => {
-  return <Button label="أزرار" size={ButtonSize.normal} icon={<Icon />} />;
-};
-
 export const PrimaryButtons: Story = {
   render: () => <PrimaryTemplate />,
 };
@@ -281,7 +277,4 @@ export const ClickedButtons: Story = {
 };
 export const HoveredButtons: Story = {
   render: () => <HoveredTemplate />,
-};
-export const InterfaceDirection: Story = {
-  render: () => <InterfaceDirectionTemplate />,
 };

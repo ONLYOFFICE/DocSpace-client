@@ -35,7 +35,12 @@ import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
-import { getMessageFromKey, getMessageKeyTranslate } from "@/utils";
+import {
+  getMessageFromKey,
+  getMessageKeyTranslate,
+  getOAuthMessageKeyTranslation,
+} from "@/utils";
+import { OAuth2ErrorKey } from "@/utils/enums";
 
 const homepage = "/";
 
@@ -61,9 +66,16 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   }, [router]);
 
   const message = getMessageFromKey(match?.messageKey ? +match.messageKey : 1);
-  const errorTitle = match?.messageKey
-    ? getMessageKeyTranslate(t, message)
-    : t("Common:ExpiredLink");
+  const oauthError = getOAuthMessageKeyTranslation(
+    t,
+    match?.oauthMessageKey as OAuth2ErrorKey | undefined,
+  );
+
+  const errorTitle = oauthError
+    ? oauthError
+    : match?.messageKey
+      ? getMessageKeyTranslate(t, message)
+      : t("Common:ExpiredLink");
 
   return (
     <ErrorContainer headerText={errorTitle}>

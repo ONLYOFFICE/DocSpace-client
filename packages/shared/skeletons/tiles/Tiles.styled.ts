@@ -78,10 +78,7 @@ export const StyledBottom = styled.div<StyledBottomProps>`
   .second-content {
     width: 100%;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 
   ${(props) =>
@@ -93,10 +90,7 @@ export const StyledBottom = styled.div<StyledBottomProps>`
 
   .option-button {
     min-width: 16px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 `;
 

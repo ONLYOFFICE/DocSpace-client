@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Additional sections",
   "DisplayFavorites": "Display Favorites",
+  "DisplayFileExtension": "Display file extension next to file name",
   "DisplayNotification": "Display notification when moving items to Trash",
   "DisplayRecent": "Display Recent",
   "DisplayTemplates": "Display Templates",

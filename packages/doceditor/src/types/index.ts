@@ -38,13 +38,13 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 import {
   ConflictResolveType,
   FilesSelectorFilterTypes,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -53,7 +53,7 @@ export type TGoBack = {
   url?: string;
 };
 
-export type ActionType = "view" | "edit";
+export type ActionType = "view" | "edit" | "fill";
 
 export type TDocumentInfoSharingSettings = {
   user: string;
@@ -268,7 +268,6 @@ export interface UseSelectFileDialogProps {
 }
 
 export interface SelectFolderDialogProps {
-  socketHelper: SocketIOHelper;
   titleSelectorFolder: string;
   isVisible: boolean;
   getIsDisabled: (
@@ -301,7 +300,6 @@ export interface SelectFolderDialogProps {
 }
 
 export interface SelectFileDialogProps {
-  socketHelper: SocketIOHelper;
   fileTypeDetection: {
     isSelect: boolean;
     filterParam: FilesSelectorFilterTypes;
@@ -339,6 +337,7 @@ export interface SelectFileDialogProps {
 export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
+  shareKey?: string;
 }
 
 export interface UseEventsProps {
@@ -351,6 +350,8 @@ export interface UseEventsProps {
   isSkipError?: boolean;
   openOnNewPage: boolean;
   t: TTranslation;
+
+  frameConfig?: TFrameConfig | null;
 }
 
 export interface UseInitProps {
@@ -410,7 +411,6 @@ export type TCatchError =
   | string;
 
 export type StartFillingSelectorDialogPprops = {
-  socketHelper: SocketIOHelper;
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;

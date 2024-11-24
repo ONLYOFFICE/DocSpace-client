@@ -31,7 +31,7 @@ import React, {
   useState,
 } from "react";
 
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
 import { useClickOutside } from "../../../../utils/useClickOutside";
 
@@ -45,6 +45,7 @@ import {
   ListTools,
   ToolbarItem,
 } from "./ViewerToolbar.styled";
+import { globalColors } from "../../../../themes";
 
 const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
   (
@@ -69,20 +70,19 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       setIsOpen(false);
     });
 
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          setPercentValue(percentArg: number) {
-            setPercent(Math.round(percentArg * 100));
-          },
-        };
-      },
-      [],
-    );
+    useImperativeHandle(ref, () => {
+      return {
+        setPercentValue(percentArg: number) {
+          setPercent(Math.round(percentArg * 100));
+        },
+      };
+    }, []);
 
     function getContextMenu(item: ToolbarItemType) {
       const contextMenu = generateContextMenu(isOpen);
+
+      if (!contextMenu) return;
+
       return (
         <ToolbarItem
           ref={contextMenuRef}
@@ -106,7 +106,11 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       return (
         <div
           className="iconContainer zoomPercent"
-          style={{ width: "auto", color: "#fff", userSelect: "none" }}
+          style={{
+            width: "auto",
+            color: globalColors.white,
+            userSelect: "none",
+          }}
         >
           {`${percent}%`}
         </div>

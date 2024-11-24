@@ -41,6 +41,8 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import AuthorizedApps from "./sub-components/authorized-apps";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
@@ -63,7 +65,8 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const SectionBodyContent = (props) => {
-  const { showProfileLoader, profile, currentDeviceType, t } = props;
+  const { showProfileLoader, currentDeviceType, identityServerEnabled, t } =
+    props;
   const navigate = useNavigate();
 
   const data = [
@@ -84,17 +87,24 @@ const SectionBodyContent = (props) => {
     },
   ];
 
-  if (!profile?.isVisitor)
-    data.splice(2, 0, {
-      id: "file-management",
-      name: t("FileManagement"),
-      content: <FileManagement />,
+  if (identityServerEnabled) {
+    data.push({
+      id: "authorized-apps",
+      name: t("OAuth:AuthorizedApps"),
+      content: <AuthorizedApps />,
     });
+  }
+
+  data.splice(2, 0, {
+    id: "file-management",
+    name: t("FileManagement"),
+    content: <FileManagement />,
+  });
 
   const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+    return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const currentTabId = getCurrentTabId();
@@ -120,14 +130,15 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
+export default inject(({ settingsStore, clientLoadingStore, authStore }) => {
   const { showProfileLoader } = clientLoadingStore;
-  const { targetUser: profile } = peopleStore.targetUserStore;
+
+  const { identityServerEnabled } = authStore.capabilities;
 
   return {
-    profile,
     currentDeviceType: settingsStore.currentDeviceType,
     showProfileLoader,
+    identityServerEnabled,
   };
 })(
   observer(
@@ -140,6 +151,7 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
+      "OAuth",
     ])(SectionBodyContent),
   ),
 );

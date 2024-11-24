@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { Base } from "@docspace/shared/themes";
 
-export const StyledAccountsLoader = styled.div`
+export const StyledUsersLoader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ export const StyledAccountsLoader = styled.div`
 
 export const StyledSubtitleLoader = styled.div`
   width: 100%;
-  padding: 24px 0 24px 0;
+  padding: 24px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -71,7 +71,7 @@ export const StyledDetailsLoader = styled.div`
 
 export const StyledDetailsSubtitleLoader = styled.div`
   width: 100%;
-  padding: 24px 0 24px 0;
+  padding: 24px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,7 +108,7 @@ export const StyledGalleryLoader = styled.div`
 
 export const StyledGallerySubtitleLoader = styled.div`
   width: 100%;
-  padding: 24px 0 24px 0;
+  padding: 24px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -142,7 +142,7 @@ export const StyledHistoryLoader = styled.div`
 
 export const StyledHistorySubtitleLoader = styled.div`
   width: 100%;
-  padding: 8px 0 12px 0;
+  padding: 8px 0 12px;
 
   display: flex;
   flex-direction: row;
@@ -176,10 +176,7 @@ export const StyledHistoryBlockLoader = styled.div`
       gap: 6px;
     }
     .date {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: auto;`
-          : `margin-left: auto;`}
+      margin-inline-start: auto;
     }
   }
 `;
@@ -197,7 +194,7 @@ export const StyledMembersLoader = styled.div`
 
 export const StyledMemberSubtitleLoader = styled.div`
   width: 100%;
-  padding: 8px 0 12px 0;
+  padding: 8px 0 12px;
   .pending_users {
     padding-top: 20px;
   }
@@ -224,10 +221,7 @@ export const StyledMemberLoader = styled.div`
   }
 
   .role-selector {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
   }
 `;
 

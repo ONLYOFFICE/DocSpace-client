@@ -80,18 +80,11 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 9px;
-          `
-        : css`
-            margin-right: 9px;
-          `}
+    margin-inline-end: 9px;
   }
 `;
 
-const AdditionalResources = (props) => {
+const AdditionalResourcesComponent = (props) => {
   const {
     t,
     tReady,
@@ -148,7 +141,7 @@ const AdditionalResources = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/management/settings/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       !isMobileView &&
@@ -327,32 +320,36 @@ const AdditionalResources = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
-    common;
+export const AdditionalResources = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
+      common;
 
-  const {
-    getAdditionalResources,
+    const {
+      getAdditionalResources,
 
-    additionalResourcesData,
-    additionalResourcesIsDefault,
-    deviceType,
-  } = settingsStore;
+      additionalResourcesData,
+      additionalResourcesIsDefault,
+      checkEnablePortalSettings,
+    } = settingsStore;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
+    const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
-  return {
-    getAdditionalResources,
+    return {
+      getAdditionalResources,
 
-    additionalResourcesData,
-    additionalResourcesIsDefault,
-    setIsLoadedAdditionalResources,
-    isLoadedAdditionalResources,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    deviceType,
-  };
-})(
+      additionalResourcesData,
+      additionalResourcesIsDefault,
+      setIsLoadedAdditionalResources,
+      isLoadedAdditionalResources,
+      isSettingPaid,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(AdditionalResources)),
+    withTranslation(["Settings", "Common"])(
+      observer(AdditionalResourcesComponent),
+    ),
   ),
 );

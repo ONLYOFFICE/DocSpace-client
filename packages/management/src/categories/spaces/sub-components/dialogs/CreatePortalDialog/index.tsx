@@ -26,22 +26,28 @@
 
 import React from "react";
 import styled from "styled-components";
-import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 import toLower from "lodash/toLower";
-import { useStore } from "SRC_DIR/store";
+
+import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
-const StyledModal = styled(ModalDialogContainer)`
-  #modal-dialog {
-    min-height: 326px;
-  }
+import { useStore } from "SRC_DIR/store";
+
+const StyledBodyContent = styled.div`
+  display: contents;
 
   .create-portal-input-block {
     padding: 16px 0;
@@ -49,10 +55,7 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .cancel-btn {
     display: inline-block;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 
   .create-portal-checkbox {
@@ -61,6 +64,14 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .create-portal-input {
     width: 100%;
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
+  }
+
+  .sub-text {
+    color: ${({ theme }) => theme.management.textColor};
   }
 `;
 
@@ -86,6 +97,12 @@ const CreatePortalDialog = () => {
   const onHandleName = (e) => {
     setName(toLower(e.target.value));
     if (registerError) setRegisterError(null);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onHandleClick();
+    }
   };
 
   const onHandleClick = async () => {
@@ -139,70 +156,77 @@ const CreatePortalDialog = () => {
   };
 
   return (
-    <StyledModal
+    <ModalDialog
       isLarge
       visible={visible}
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {t("CreatingPortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
-      <ModalDialog.Body className="create-docspace-body">
-        <Text noSelect={true}>
-          {t("CreateSpaceDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-        <div className="create-portal-input-block">
-          <Text
-            fontSize="13px"
-            fontWeight="600"
-            style={{ paddingBottom: "5px" }}
-          >
-            {t("PortalName")}
+      <ModalDialog.Body>
+        <StyledBodyContent>
+          <Text noSelect={true}>
+            {t("CreateSpaceDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
-          <TextInput
-            onChange={onHandleName}
-            value={name}
-            hasError={!!registerError}
-            placeholder={t("EnterName")}
-            className="create-portal-input"
-          />
-          <div>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
-              {registerError}
-            </Text>
-          </div>
-          <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
+          <div className="create-portal-input-block">
             <Text
-              fontSize="12px"
-              fontWeight="400"
-              color="#A3A9AE"
-            >{`${name}.${baseDomain}`}</Text>
+              fontSize="13px"
+              fontWeight="600"
+              style={{ paddingBottom: "5px" }}
+            >
+              {t("PortalName")}
+            </Text>
+            <TextInput
+              isAutoFocussed
+              type={InputType.text}
+              size={InputSize.base}
+              onChange={onHandleName}
+              onKeyDown={onKeyDown}
+              value={name}
+              hasError={!!registerError}
+              placeholder={t("EnterName")}
+              className="create-portal-input"
+            />
+            <div>
+              <Text className="error-text" fontSize="12px" fontWeight="400">
+                {registerError}
+              </Text>
+            </div>
+            <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
+              <Text
+                className="sub-text"
+                fontSize="12px"
+                fontWeight="400"
+              >{`${name}.${baseDomain}`}</Text>
+            </div>
           </div>
-        </div>
-        <div>
-          <Checkbox
-            className="create-portal-checkbox"
-            label={t("VisitSpace")}
-            onChange={() => setVisit((visit) => !visit)}
-            isChecked={visit}
-          />
+          <div>
+            <Checkbox
+              className="create-portal-checkbox"
+              label={t("VisitSpace")}
+              onChange={() => setVisit((visit) => !visit)}
+              isChecked={visit}
+            />
 
-          <Checkbox
-            label={t("RestrictAccess")}
-            onChange={() => setRestrictAccess((access) => !access)}
-            isChecked={restrictAccess}
-          />
-        </div>
+            <Checkbox
+              label={t("RestrictAccess")}
+              onChange={() => setRestrictAccess((access) => !access)}
+              isChecked={restrictAccess}
+            />
+          </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Create")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           primary
           onClick={onHandleClick}
@@ -210,12 +234,12 @@ const CreatePortalDialog = () => {
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

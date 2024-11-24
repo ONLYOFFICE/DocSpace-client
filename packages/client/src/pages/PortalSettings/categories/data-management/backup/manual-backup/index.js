@@ -104,7 +104,6 @@ class ManualBackup extends React.Component {
     try {
       getProgress(t);
 
-      //if (isDocSpace) {
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
         getBackupStorage(),
@@ -181,8 +180,7 @@ class ManualBackup extends React.Component {
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+      toastr.error(e);
     }
   };
   onClickDownloadBackup = () => {
@@ -244,9 +242,7 @@ class ManualBackup extends React.Component {
       setTemporaryLink("");
       getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
-      //clearLocalStorage();
+      toastr.error(err);
     }
   };
   render() {
@@ -256,11 +252,13 @@ class ManualBackup extends React.Component {
       downloadingProgress,
       //commonThirdPartyList,
       buttonSize,
-      //isDocSpace,
+
       rootFoldersTitles,
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
+      isBackupProgressVisible,
     } = this.props;
     const {
       isInitialLoading,
@@ -272,10 +270,6 @@ class ManualBackup extends React.Component {
     } = this.state;
 
     const isMaxProgress = downloadingProgress === 100;
-
-    // const isDisabledThirdParty = isDocSpace
-    //   ? false
-    //   : commonThirdPartyList?.length === 0;
 
     const commonRadioButtonProps = {
       fontSize: "13px",
@@ -297,34 +291,36 @@ class ManualBackup extends React.Component {
     ) : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
-      <StyledManualBackup>
+      <StyledManualBackup pageIsDisabled={pageIsDisabled}>
         <div className="backup_modules-header_wrapper">
-          <Text className="backup_modules-description">
+          <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={dataBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() && (
+            <Link
+              className="link-learn-more"
+              href={dataBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          )}
         </div>
 
-        <StyledModules>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
             name={"isCheckedTemporaryStorage"}
             key={0}
             isChecked={isCheckedTemporaryStorage}
-            isDisabled={!isMaxProgress}
+            isDisabled={!isMaxProgress || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("TemporaryStorageDescription")}
           </Text>
           {isCheckedTemporaryStorage && (
@@ -334,7 +330,7 @@ class ManualBackup extends React.Component {
                 label={t("Common:Create")}
                 onClick={this.onMakeTemporaryBackup}
                 primary
-                isDisabled={!isMaxProgress}
+                isDisabled={!isMaxProgress || pageIsDisabled}
                 size={buttonSize}
               />
               {temporaryLink?.length > 0 && isMaxProgress && (
@@ -342,9 +338,9 @@ class ManualBackup extends React.Component {
                   id="download-copy"
                   label={t("DownloadCopy")}
                   onClick={this.onClickDownloadBackup}
-                  isDisabled={false}
+                  isDisabled={pageIsDisabled}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
               {!isMaxProgress && (
@@ -352,23 +348,23 @@ class ManualBackup extends React.Component {
                   label={t("Common:CopyOperation") + "..."}
                   isDisabled={true}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
             </div>
           )}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
             name={"isCheckedDocuments"}
             key={1}
             isChecked={isCheckedDocuments}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description module-documents">
+          <Text className="backup-description module-documents settings_unavailable">
             <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
               {{ roomName }}
             </Trans>
@@ -381,32 +377,32 @@ class ManualBackup extends React.Component {
           )}
         </StyledModules>
 
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
             name={"isCheckedThirdParty"}
             key={2}
             isChecked={isCheckedThirdParty}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyResourceDescription")}
           </Text>
           {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
             name={"isCheckedThirdPartyStorage"}
             key={3}
             isChecked={isCheckedThirdPartyStorage}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyStorageDescription")}
           </Text>
           {isCheckedThirdPartyStorage && (
@@ -414,7 +410,7 @@ class ManualBackup extends React.Component {
           )}
         </StyledModules>
 
-        {downloadingProgress > 0 && downloadingProgress !== 100 && (
+        {isBackupProgressVisible && (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
@@ -445,11 +441,14 @@ export default inject(
       setStorageRegions,
       saveToLocalStorage,
       setConnectedThirdPartyAccount,
+      isBackupProgressVisible,
     } = backup;
 
-    const { currentColorScheme, dataBackupUrl } = settingsStore;
+    const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const pageIsDisabled = isManagement() && portals?.length === 1;
 
     return {
       isNotPaidPeriod,
@@ -473,6 +472,8 @@ export default inject(
 
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
+      isBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

@@ -27,7 +27,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { tablet, mobile } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 import { Text } from "../text";
 
@@ -62,6 +62,7 @@ const StyledInput = styled(SimpleInput)<{
   input {
     flex: inherit;
     width: calc(100% - 40px);
+    // logical property won't work because of dir: auto
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? "right" : "left"};
     &::-ms-reveal {
@@ -104,6 +105,7 @@ const StyledInput = styled(SimpleInput)<{
     top: 50%;
     transform: translate(-50%, -50%);
 
+    // logical properties won't work correctly here
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -113,7 +115,7 @@ const StyledInput = styled(SimpleInput)<{
         : css`
             padding-right: 2px;
             right: -16px;
-          `}
+          `};
   }
 
   .prepend-children {
@@ -184,7 +186,10 @@ StyledTooltipContainer.defaultProps = { theme: Base };
 
 const StyledTooltipItem = styled(Text)<{ valid?: boolean }>`
   //height: 24px;
-  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")} !important;
+  color: ${(props) =>
+    props.valid
+      ? globalColors.lightStatusPositive
+      : globalColors.lightErrorStatus} !important;
 `;
 
 export {

@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Hosť <strong>{{userName}}</strong> bude presunutý do sekcie {{membersSection}} a bude mu priradený typ Používateľ. Používatelia majú vlastnú sekciu {{documentsSection}}, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
+  "ChangeGuestsTypeMessageMulti": "Vybraní hostia budú presunutí do sekcie Ľudia a bude im priradený typ {{membersSection}}. Používatelia majú vlastnú sekciu {{documentsSection}}, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
   "ChangeUserTypeButton": "Zmeniť typ",
   "ChangeUserTypeHeader": "Zmeňte typ používateľa",
-  "ChangeUserTypeMessage": "Používatelia s typom '{{ firstType }}' budú presunutí do typu '{{ secondType }}' .",
-  "ChangeUserTypeMessageMulti": "Vybraní používatelia budú presunutí do typu '{{secondType}}'.",
+  "ChangeUserTypeMessage": "Používatelia s typom <strong>'{{ firstType }}'</strong> budú presunutí do typu <strong>'{{ secondType }}'</strong> .",
+  "ChangeUserTypeMessageMulti": "Vybraní používatelia budú presunutí do typu <strong>'{{secondType}}'</strong>.",
   "ChangeUserTypeMessageWarning": "Nemôžete zmeniť typ pre správcov {{productName}} a pre seba.",
+  "SuccessChangeGuestType": "Typ hosťa bol úspešne zmenený",
   "SuccessChangeUserType": "Typ používateľa bol úspešne zmenený"
 }

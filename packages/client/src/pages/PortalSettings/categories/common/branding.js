@@ -31,10 +31,10 @@ import { inject, observer } from "mobx-react";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import Whitelabel from "./Branding/whitelabel";
-import CompanyInfoSettings from "./Branding/companyInfoSettings";
+import { WhiteLabel } from "./Branding/whitelabel";
+import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import styled from "styled-components";
-import AdditionalResources from "./Branding/additionalResources";
+import { AdditionalResources } from "./Branding/additionalResources";
 import { isManagement } from "@docspace/shared/utils/common";
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 
@@ -88,6 +88,7 @@ const Branding = ({
   standalone,
   deviceType,
   portals,
+  displayAbout,
 }) => {
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -102,7 +103,6 @@ const Branding = ({
       }
     };
   }, []);
-
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
 
   const showSettings = standalone && !hideBlock;
@@ -110,28 +110,34 @@ const Branding = ({
   if (isMobileView)
     return (
       <MobileView
-        isSettingPaid={isSettingPaid}
-        isManagement={isManagement()}
+        isSettingPaid={isSettingPaid || standalone}
         showSettings={showSettings}
+        displayAbout={displayAbout}
       />
     );
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
-      <Whitelabel />
+      <WhiteLabel />
       {showSettings && (
         <>
           <hr />
-          {isLoadedCompanyInfoSettingsData ? (
-            <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription", {
-                productName: t("Common:ProductName"),
-              })}
-            </div>
+          {displayAbout ? (
+            <>
+              {isLoadedCompanyInfoSettingsData ? (
+                <div className="section-description settings_unavailable">
+                  {t("Settings:BrandingSectionDescription", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </div>
+              ) : (
+                <LoaderBrandingDescription />
+              )}
+              <CompanyInfoSettings />
+            </>
           ) : (
-            <LoaderBrandingDescription />
+            <></>
           )}
-          <CompanyInfoSettings />
           <AdditionalResources />
         </>
       )}
@@ -140,15 +146,23 @@ const Branding = ({
 };
 
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, portals, deviceType } = settingsStore;
-
-  return {
-    isLoadedCompanyInfoSettingsData,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+  const {
     standalone,
     portals,
     deviceType,
+    checkEnablePortalSettings,
+    displayAbout,
+  } = settingsStore;
+  const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
+
+  return {
+    isLoadedCompanyInfoSettingsData,
+    isSettingPaid,
+    standalone,
+    portals,
+    deviceType,
+    displayAbout,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

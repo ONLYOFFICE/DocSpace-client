@@ -40,22 +40,12 @@ const HeaderContainer = styled.div`
   max-width: calc(100vw - 32px);
 
   .arrow-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 12px;`
-        : `margin-right: 12px;`}
+    margin-inline-end: 12px;
 
     @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
+      padding-block: 8px;
+      padding-inline: 8px 0;
+      margin-inline-start: -8px;
     }
 
     svg {

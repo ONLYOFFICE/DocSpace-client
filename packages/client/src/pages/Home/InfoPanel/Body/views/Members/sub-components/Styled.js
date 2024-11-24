@@ -25,32 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-
-import { commonIconsStyles } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
-
-const StyledCrossIcon = styled(CrossReactSvg)`
-  ${commonIconsStyles}
-
-  g {
-    path {
-      fill: #657077;
-    }
-  }
-
-  path {
-    fill: #999976;
-  }
-`;
 
 const LinksBlock = styled.div`
   display: flex;
   height: 100%;
-  padding-top: 3px;
+
   align-items: center;
   justify-content: space-between;
+
+  padding-bottom: 3px;
+  box-sizing: border-box;
 
   p {
     color: ${({ theme }) => theme.infoPanel.members.subtitleColor};
@@ -101,7 +86,7 @@ const StyledLinkRow = styled.div`
   }
 
   .external-row-icons {
-    margin-left: auto;
+    margin-inline-start: auto;
     display: flex;
     gap: 16px;
   }
@@ -120,7 +105,7 @@ const StyledLinkRow = styled.div`
     svg {
       position: absolute;
       top: 0px;
-      left: 0px;
+      inset-inline-start: 0px;
     }
 
     width: 12px;
@@ -158,4 +143,4 @@ export const StyledPublicRoomBarContainer = styled.div`
 
 StyledLinkRow.defaultProps = { theme: Base };
 
-export { StyledCrossIcon, LinksBlock, StyledLinkRow };
+export { LinksBlock, StyledLinkRow };

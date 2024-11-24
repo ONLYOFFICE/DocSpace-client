@@ -125,7 +125,7 @@ const WebhookHistory = (props) => {
   );
 };
 
-export default inject(({ webhooksStore }) => {
+export const Component = inject(({ webhooksStore }) => {
   const {
     historyItems,
     fetchHistoryItems,

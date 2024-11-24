@@ -49,14 +49,7 @@ const StyledComponent = styled.div`
     display: flex;
 
     span {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 2px;
-            `
-          : css`
-              margin-left: 2px;
-            `}
+      margin-inline-start: 2px;
     }
   }
   .smtp-settings_input {

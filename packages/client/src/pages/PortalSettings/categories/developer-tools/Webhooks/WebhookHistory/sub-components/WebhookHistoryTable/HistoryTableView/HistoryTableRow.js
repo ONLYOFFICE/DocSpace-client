@@ -39,7 +39,7 @@ import StatusBadge from "../../../../sub-components/StatusBadge";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useTranslation } from "react-i18next";
@@ -66,7 +66,8 @@ const StyledTableRow = styled(TableRow)`
     props.isHighlight &&
     css`
       .table-container_cell {
-        background-color: #f3f4f4;
+        background-color: ${(props) =>
+          props.theme.client.settings.webhooks.tableCellBackground};
       }
     `}
 `;

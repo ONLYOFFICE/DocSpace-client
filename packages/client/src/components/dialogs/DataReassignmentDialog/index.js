@@ -32,7 +32,6 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { useNavigate } from "react-router-dom";
 
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
@@ -40,7 +39,9 @@ import api from "@docspace/shared/api";
 import { EmployeeType } from "@docspace/shared/enums";
 const { Filter } = api;
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .avatar-name,
   .delete-profile-container {
     display: flex;
@@ -93,6 +94,9 @@ const DataReassignmentDialog = ({
 
   const updateAccountsAfterDeleteUser = () => {
     const filter = Filter.getDefault();
+
+    filter.area = "people";
+
     getUsersList(filter, true);
     return;
   };
@@ -199,17 +203,16 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   if (selectorVisible) {
     return (
-      <StyledModalDialog
+      <ModalDialog
         displayType="aside"
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder
         withBodyScroll
       >
         <Backdrop
@@ -219,55 +222,56 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             excludeItems={[user.id]}
             currentUserId={user.id}
             withCancelButton
+            onCancel={onClosePeopleSelector}
             cancelButtonLabel=""
+            withHeader
             headerProps={{
               onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
-            onBackClick={onTogglePeopleSelector}
             filter={filter}
-            withHeader
             disableDisabledUsers
           />
         </ModalDialog.Container>
-      </StyledModalDialog>
+      </ModalDialog>
     );
   }
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder
       withBodyScroll
     >
       <ModalDialog.Header>
         {t("DataReassignmentDialog:DataReassignment")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Body
-          t={t}
-          tReady={tReady}
-          showProgress={showProgress}
-          isReassignCurrentUser={isReassignCurrentUser}
-          user={user}
-          selectedUser={selectedUser}
-          percent={percent}
-          isAbortTransfer={isAbortTransfer}
-          dataReassignmentUrl={dataReassignmentUrl}
-          currentColorScheme={currentColorScheme}
-          onTogglePeopleSelector={onTogglePeopleSelector}
-        />
+        <StyledBodyContent>
+          <Body
+            t={t}
+            tReady={tReady}
+            showProgress={showProgress}
+            isReassignCurrentUser={isReassignCurrentUser}
+            user={user}
+            selectedUser={selectedUser}
+            percent={percent}
+            isAbortTransfer={isAbortTransfer}
+            dataReassignmentUrl={dataReassignmentUrl}
+            currentColorScheme={currentColorScheme}
+            onTogglePeopleSelector={onTogglePeopleSelector}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -285,7 +289,7 @@ const DataReassignmentDialog = ({
           onStartAgain={onStartAgain}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 
@@ -298,7 +302,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -307,7 +310,8 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection, setSelected } =
+    peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,

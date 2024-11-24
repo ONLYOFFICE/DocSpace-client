@@ -29,8 +29,10 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
+import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 import AccessPortal from "./access-portal/index.js";
 import SecurityLoader from "./sub-components/loaders/security-loader";
@@ -39,13 +41,13 @@ import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loade
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+
+import config from "PACKAGE_FILE";
 
 const SecurityWrapper = (props) => {
-  const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
-  const [currentTabId, setCurrentTabId] = useState();
+  const { t, initSettings, isInit, resetIsInit, currentDeviceType } = props;
   const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -67,25 +69,28 @@ const SecurityWrapper = (props) => {
     },
   ];
 
+  const getCurrentTabId = () => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab && data.length ? currentTab.id : data[0].id;
+  };
+
+  const currentTabId = getCurrentTabId();
+
   const load = async () => {
-    await loadBaseInfo();
+    !isInit &&
+      currentDeviceType !== DeviceType.mobile &&
+      (await initSettings());
     setIsLoading(true);
   };
 
   useEffect(() => {
+    load();
     return () => {
       resetIsInit();
       resetSessionStorage();
     };
   }, []);
-
-  useEffect(() => {
-    const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
-
-    load();
-  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
@@ -95,7 +100,6 @@ const SecurityWrapper = (props) => {
         `/portal-settings/security/${e.id}`,
       ),
     );
-    setCurrentTabId(e.id);
   };
 
   if (!isLoading && data.length)
@@ -119,13 +123,12 @@ const SecurityWrapper = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
-  const { initSettings, resetIsInit } = setup;
+export const Component = inject(({ settingsStore, setup }) => {
+  const { resetIsInit, initSettings, isInit } = setup;
 
   return {
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
+    isInit,
+    initSettings,
     resetIsInit,
     currentDeviceType: settingsStore.currentDeviceType,
   };

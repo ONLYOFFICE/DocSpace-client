@@ -43,6 +43,7 @@ import {
   ElementWrapper,
 } from "./DropDownItem.styled";
 import { DropDownItemProps } from "./DropDownItem.types";
+import { globalColors } from "../../themes";
 
 const DropDownItem = (props: DropDownItemProps) => {
   const {
@@ -61,6 +62,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     isActive = false,
     withoutIcon = false,
     noHover = false,
+    noActive = false,
 
     isSelected,
     isActiveDescendant,
@@ -80,7 +82,6 @@ const DropDownItem = (props: DropDownItemProps) => {
     label = "",
     tabIndex = -1,
     textOverflow = false,
-
     ...rest
   } = props;
 
@@ -109,6 +110,7 @@ const DropDownItem = (props: DropDownItemProps) => {
       tabIndex={tabIndex}
       textOverflow={textOverflow}
       noHover={noHover}
+      noActive={noActive}
       className={className}
       onClick={onClickAction}
       disabled={disabled}
@@ -181,7 +183,7 @@ const DropDownItem = (props: DropDownItemProps) => {
             fontSize="9px"
             isHovered={false}
             borderRadius="50px"
-            backgroundColor={theme.isBase ? "#533ED1" : "#5447A3"}
+            backgroundColor={globalColors.mainPurple}
             label={t("Common:BetaLabel")}
           />
         </WrapperBadge>
@@ -192,11 +194,6 @@ const DropDownItem = (props: DropDownItemProps) => {
       )}
     </StyledDropdownItem>
   );
-};
-
-DropDownItem.defaultProps = {
-  height: 32,
-  heightTablet: 36,
 };
 
 export { DropDownItem };

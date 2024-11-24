@@ -1,9 +1,10 @@
 import { create } from "@storybook/theming/create";
-import Logo from "./darksmall.svg?url";
+import Logo from "../../../public/images/logo/dark_lightsmall.svg?url";
+import { globalColors } from "../themes";
 
 export default create({
   base: "dark",
-  appBg: "#333",
+  appBg: globalColors.black,
 
   brandTitle: "ONLYOFFICE",
   brandUrl: "https://www.onlyoffice.com/docspace.aspx",

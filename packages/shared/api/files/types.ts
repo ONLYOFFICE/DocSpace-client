@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -35,6 +35,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
+import { TUser } from "../people/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -113,6 +114,8 @@ export type TFile = {
   providerKey?: string;
   providerItem?: boolean;
   thumbnailUrl?: string;
+  expired?: string;
+  isForm?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -297,6 +300,7 @@ export type TFilesSettings = {
   templatesSection: boolean;
   updateIfExist: boolean;
   openEditorInSameTab: boolean;
+  displayFileExtension: boolean;
 };
 
 export type TPresignedUri = {
@@ -395,9 +399,11 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
-    expirationDate?: string;
+    expirationDate?: moment.Moment | null;
     internal?: boolean;
+    password?: string;
   };
+  subjectType: number;
 };
 
 export type TFilesUsedSpace = {

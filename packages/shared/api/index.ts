@@ -39,6 +39,8 @@ import * as rooms from "./rooms";
 import * as plugins from "./plugins";
 import * as management from "./management";
 import * as oforms from "./oforms";
+import * as oauth from "./oauth";
+import * as debuginfo from "./debuginfo";
 
 export default {
   Filter,
@@ -55,5 +57,7 @@ export default {
   rooms,
   plugins,
   oforms,
+  oauth,
   management,
+  debuginfo,
 };

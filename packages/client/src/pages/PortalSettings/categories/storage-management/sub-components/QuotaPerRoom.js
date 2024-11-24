@@ -45,11 +45,12 @@ const QuotaPerRoomComponent = (props) => {
       saveQuota={(size) => setRoomQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}
+      tabIndex={1}
     />
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {
   const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } =
     currentQuotaStore;
 

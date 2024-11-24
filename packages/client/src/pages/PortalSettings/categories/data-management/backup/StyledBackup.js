@@ -31,6 +31,7 @@ import {
 } from "../../../utils/commonSettingsStyles";
 
 import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -38,7 +39,7 @@ const TEXT_LENGTH = "700px";
 const floatingButtonStyles = css`
   .layout-progress-bar {
     position: fixed;
-    right: 24px;
+    inset-inline-end: 24px;
     bottom: 24px;
   }
 `;
@@ -51,31 +52,17 @@ const commonStyles = css`
 
   .backup_modules-header_wrapper {
     svg {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 5px 4px 0px 0px;
-            `
-          : css`
-              margin: 5px 0px 0px 4px;
-            `}
+      margin-block: 5px 0;
+      margin-inline: 4px 0;
     }
     .link-learn-more {
       display: inline-block;
-      margin-bottom: 20px;
       font-weight: 600;
     }
   }
 
   .radio-button_text {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 7px;
-          `
-        : css`
-            margin-right: 7px;
-          `}
+    margin-inline-end: 7px;
     font-size: 13px;
     font-weight: 600;
   }
@@ -124,7 +111,7 @@ const commonStyles = css`
     max-width: fit-content;
     font-size: 12px;
     line-height: 15px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 
@@ -135,28 +122,14 @@ const StyledManualBackup = styled.div`
 
   .manual-backup_buttons {
     margin-top: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 
     button:first-child {
       max-width: 124px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      margin-inline-end: 8px;
     }
     button:last-child {
       max-width: 153px;
@@ -181,45 +154,17 @@ const StyledManualBackup = styled.div`
     }
   }
   .manual-backup_storages-module {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
     .manual-backup_buttons {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 0;
-            `
-          : css`
-              margin-left: 0;
-            `}
+      margin-inline-start: 0;
     }
   }
   .manual-backup_third-party-module {
     margin-top: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
   }
   .manual-backup_folder-input {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
     margin-top: 16px;
   }
 `;
@@ -230,14 +175,7 @@ const StyledAutoBackup = styled.div`
   ${floatingButtonStyles}
   .auto-backup_third-party-module {
     margin-top: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
     button {
       margin-bottom: 16px;
     }
@@ -264,47 +202,20 @@ const StyledAutoBackup = styled.div`
     max-width: ${INPUT_LENGTH};
   }
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
   .auto-backup_storages-module {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
     .backup_schedule-component {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 0;
-            `
-          : css`
-              margin-left: 0;
-            `}
+      margin-inline-start: 0;
     }
   }
   .auto-backup_folder-input {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
   }
   .backup_toggle-wrapper {
     display: flex;
+    margin-top: 20px;
     margin-bottom: 16px;
     border-radius: 6px;
     background-color: ${(props) =>
@@ -321,31 +232,17 @@ const StyledAutoBackup = styled.div`
     .toggle-caption_title {
       display: flex;
       .auto-backup_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }
   }
 
-  ${(props) => !props.isEnableAuto && UnavailableStyles}
+  ${(props) => props.pageIsDisabled && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`
   .backup_storages-buttons {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -63px;
-          `
-        : css`
-            margin-left: -63px;
-          `}
+    margin-inline-start: -63px;
     margin-top: 40px;
   }
 `;
@@ -447,30 +344,18 @@ const StyledRestoreBackup = styled.div`
   ${(props) => !props.isEnableRestore && UnavailableStyles}
 `;
 const StyledModules = styled.div`
+  margin-top: 20px;
   margin-bottom: 24px;
+
   .backup-description {
-    ${(props) => props.isDisabled && `color: #A3A9AE`};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 25px;
-          `
-        : css`
-            margin-left: 25px;
-          `}
+    margin-inline-start: 25px;
     max-width: 700px;
+    color: ${(props) => props.isDisabled && props.theme.text.disableColor};
   }
 `;
 
 const StyledScheduleComponent = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 24px;
-        `
-      : css`
-          margin-left: 24px;
-        `}
+  margin-inline-start: 24px;
   .days_option {
     grid-area: days;
     width: 100%;
@@ -554,14 +439,8 @@ const StyledScheduleComponent = styled.div`
   .schedule_help-section {
     display: flex;
     .schedule_help-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 3px 4px 0 0;
-            `
-          : css`
-              margin: 3px 0 0 4px;
-            `}
+      margin-block: 3px 0;
+      margin-inline: 4px 0;
     }
   }
 `;
@@ -612,14 +491,8 @@ const StyledBackup = styled.div`
         line-height: 22px;
       }
       .backup-section_arrow-button {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin: auto 7.29px auto 0;
-              `
-            : css`
-                margin: auto 0 auto 7.29px;
-              `}
+        margin-block: auto;
+        margin-inline: 7.29px 0;
       }
     }
   }
@@ -659,7 +532,7 @@ const StyledBackupList = styled.div`
     margin-top: -3px;
     grid-area: trash;
     path {
-      fill: #a3a9ae;
+      fill: ${globalColors.gray};
     }
   }
   .backup-list_icon {
@@ -673,7 +546,7 @@ const StyledBackupList = styled.div`
     white-space: nowrap;
   }
   .backup-list_file-exst {
-    color: #a3a9ae;
+    color: ${globalColors.gray};
     grid-area: ext;
   }
   .backup-list_radio-button {
@@ -681,14 +554,7 @@ const StyledBackupList = styled.div`
   }
   .radio-button {
     margin: 0 !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 10px;
-          `
-        : css`
-            padding-left: 10px;
-          `}
+    padding-inline-start: 10px;
   }
   .backup-list_item {
     border-radius: 3px;
@@ -704,36 +570,18 @@ const StyledBackupList = styled.div`
         background: ${(props) =>
           props.theme.client.settings.backup.backupCheckedListItemBackground};
       `}
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-inline: 16px;
   }
   .backup-restore_dialog-scroll-body {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -16px;
-            margin-left: -17px;
-          `
-        : css`
-            margin-left: -16px;
-            margin-right: -17px;
-          `}
+    margin-inline: -16px 17px;
 
     .nav-thumb-vertical {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -8px !important;
-            `
-          : css`
-              margin-left: -8px !important;
-            `}
+      margin-inline-start: -8px !important;
     }
   }
   .backup-restore_empty-list {
     margin-top: 96px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-inline: 16px;
     color: ${(props) => props.theme.client.settings.backup.textColor};
   }
 
@@ -752,19 +600,12 @@ const StyledSettingsHeader = styled.div`
   -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
   -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
   -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-  background-color: #fff;
+  background-color: ${globalColors.white};
   z-index: 149;
   width: 100%;
   height: 50px;
   .backup_header {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 14.5px;
-          `
-        : css`
-            margin-left: 14.5px;
-          `}
+    margin-inline-start: 14.5px;
   }
   .backup_arrow-button {
     margin: auto 0;

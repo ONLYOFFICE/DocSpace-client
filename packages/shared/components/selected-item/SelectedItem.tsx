@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { IconButton } from "../icon-button";
 
@@ -45,6 +45,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     group,
     forwardedRef,
     classNameCloseButton,
+    hideCross,
     title,
   } = props;
   if (!label) return null;
@@ -78,14 +79,16 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       >
         {label}
       </StyledLabel>
-      <IconButton
-        className={`selected-tag-removed ${classNameCloseButton}`}
-        iconName={CrossReactSvgUrl}
-        size={12}
-        onClick={onCloseClick}
-        isFill
-        isDisabled={isDisabled}
-      />
+      {!hideCross && (
+        <IconButton
+          className={`selected-tag-removed ${classNameCloseButton}`}
+          iconName={CrossReactSvgUrl}
+          size={12}
+          onClick={onCloseClick}
+          isFill
+          isDisabled={isDisabled}
+        />
+      )}
     </StyledSelectedItem>
   );
 };

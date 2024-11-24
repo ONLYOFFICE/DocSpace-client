@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, TColorScheme, TTheme } from "../../themes";
 
 const BounceAnimation = keyframes`
 0% { margin-bottom: 0; display: none; }
@@ -46,7 +46,7 @@ const Dot = styled.div<{ color?: string; size: number; delay: string }>`
 
   width: ${(props) => props.size / 9}px;
   height: ${(props) => props.size / 9}px;
-  margin-right: ${(props) => props.theme.loader.marginRight};
+  margin-inline-end: ${(props) => props.theme.loader.marginRight};
   /* Animation */
   animation: ${BounceAnimation} 0.5s linear infinite;
   animation-delay: ${(props) => props.delay};
@@ -64,7 +64,7 @@ const LoadingWrapper = styled.div<{ color?: string; size: string }>`
 `;
 
 const LoadingLabel = styled.span`
-  margin-right: ${(props) => props.theme.loader.marginRight};
+  margin-inline-end: ${(props) => props.theme.loader.marginRight};
 `;
 LoadingLabel.defaultProps = { theme: Base };
 
@@ -99,6 +99,27 @@ const StyledTrack = styled.svg<{
 `;
 StyledTrack.defaultProps = { theme: Base };
 
+const getDefaultStyles = ({
+  primary,
+  $currentColorScheme,
+  theme,
+  isDisabled,
+}: {
+  primary?: boolean;
+  $currentColorScheme?: TColorScheme;
+  theme?: TTheme;
+  isDisabled?: boolean;
+}) =>
+  $currentColorScheme &&
+  !primary &&
+  theme?.isBase &&
+  css`
+    color: ${$currentColorScheme.main?.buttons};
+    opacity: ${isDisabled && "0.6"};
+  `;
+
+const StyledTrackTheme = styled(StyledTrack)(getDefaultStyles);
+
 export {
   LoadingLabel,
   LoadingWrapper,
@@ -107,4 +128,5 @@ export {
   StyledOval,
   StyledDualRing,
   StyledTrack,
+  StyledTrackTheme,
 };

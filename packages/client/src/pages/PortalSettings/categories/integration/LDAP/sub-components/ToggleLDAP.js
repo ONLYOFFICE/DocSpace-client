@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -110,7 +111,11 @@ const ToggleLDAP = ({
           </Text>
           {!isLdapAvailable && (
             <Badge
-              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
               isPaidBadge={true}

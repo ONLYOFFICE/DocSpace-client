@@ -41,6 +41,8 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { globalColors } from "@docspace/shared/themes";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -57,18 +59,13 @@ const StyledInvitePanel = styled.div`
     background: ${(props) => props.theme.infoPanel.blurColor};
     z-index: 309;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
 
     .invite_panel {
       background-color: ${(props) => props.theme.infoPanel.backgroundColor};
-      border-left: ${(props) =>
-        `1px solid ${props.theme.infoPanel.borderColor}`};
       position: absolute;
       border: none;
-      right: 0;
+      inset-inline-end: 0;
       bottom: 0;
       height: calc(100% - 64px);
       width: 100vw;
@@ -80,36 +77,19 @@ const StyledInvitePanel = styled.div`
     height: calc(100% - 55px - 73px);
 
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0px !important;
-            `
-          : css`
-              padding-right: 0px !important;
-            `}
+      padding-inline-end: 0 !important;
 
       @media ${desktop} {
         width: 480px;
         min-width: auto !important;
       }
     }
-
-    ${(props) =>
-      !props.addUsersPanelVisible &&
-      isMobile() &&
-      props.theme.interfaceDirection !== "rtl" &&
-      css`
-        .trackYVisible {
-          .scroller {
-            margin-right: -20px !important;
-          }
-        }
-      `}
   }
 `;
 
 const ScrollList = styled.div`
+  position: absolute;
+
   width: 100%;
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight
@@ -130,14 +110,20 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  .group-name {
+    padding-top: 8px;
+  }
+
+  .about-label {
+    color: ${(props) => props.theme.filesPanels.invite.textColor};
+  }
 `;
 
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
   font-size: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin: 16px 0 8px 0;
+  margin: 16px 0 8px;
 
   ${(props) =>
     props.inline &&
@@ -149,8 +135,6 @@ const StyledSubHeader = styled(Heading)`
 `;
 
 const StyledDescription = styled(Text)`
-  padding-left: 16px;
-  padding-right: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -163,15 +147,13 @@ const StyledDescription = styled(Text)`
 StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
-  width: calc(100% - 32px) !important;
-
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
   gap: 8px;
 
   min-height: 41px;
 
-  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 
@@ -191,23 +173,20 @@ const StyledRow = styled.div`
   .warning {
     margin-inline-start: auto;
   }
+
+  .role-access {
+    .role-warning {
+      padding-top: 4px;
+    }
+  }
 `;
 
 const StyledInviteInput = styled.div`
   ${fillAvailableWidth}
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 16px;
-          margin-left: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `
-      : css`
-          margin-left: 16px;
-          margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `}
 
+  margin-inline-end: ${(props) => (props.hideSelector ? "16px" : "8px")};
 
-    .input-link {
+  .input-link {
     height: 32px;
     border: 0px;
 
@@ -217,7 +196,7 @@ const StyledInviteInput = styled.div`
   }
 
   display: flex;
-  border: 1px solid rgb(208, 213, 218);
+  border: ${(props) => props.theme.filesPanels.invite.border};
   border-radius: 3px;
 
   .copy-link-icon {
@@ -258,20 +237,14 @@ const StyledInviteInput = styled.div`
 
 const StyledEditInput = styled(TextInput)`
   width: 100%;
+  height: 32px;
 `;
 
 const StyledComboBox = styled(ComboBox)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  margin-inline-start: auto;
 
   .combo-button-label,
-    .combo-button-label:hover {
+  .combo-button-label:hover {
     text-decoration: none;
   }
 
@@ -280,14 +253,7 @@ const StyledComboBox = styled(ComboBox)`
   justify-content: center;
 
   .combo-buttons_arrow-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 2px;
-          `
-        : css`
-            margin-left: 2px;
-          `}
+    margin-inline-start: 2px;
   }
 
   padding: 0px;
@@ -329,6 +295,28 @@ const StyledInviteInputContainer = styled.div`
       }
     }
   }
+
+  .access-selector {
+    margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    .dropdown-container {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
+      }
+    }
+  }
+
+  .add-manually-dropdown {
+    inset-inline-start: 0;
+    border: ${`1px solid ${globalColors.grayStrong}`};
+  }
 `;
 
 const StyledDropDown = styled(DropDown)`
@@ -338,7 +326,7 @@ const StyledDropDown = styled(DropDown)`
     display: flex;
     align-items: center;
     gap: 8px;
-    height: 48px;
+    height: 53px;
 
     .list-item_content {
       text-overflow: ellipsis;
@@ -352,27 +340,29 @@ const StyledDropDown = styled(DropDown)`
       overflow: hidden;
     }
 
+    .email-list_email-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 16px;
+
+      .email-list_invite-as-guest {
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+      }
+    }
+
     .email-list_add-button {
       display: flex;
       margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
-      p {
-        color: ${(props) => props.theme.currentColorScheme.main.accent};
-        ${(props) =>
-          props.isRequestRunning &&
-          css`
-            opacity: 0.65;
-          `}
-      }
-
       svg {
         ${({ theme }) =>
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          fill: ${(props) => props.theme.inputBlock.iconColor};
           ${(props) =>
             props.isRequestRunning &&
             css`
@@ -385,8 +375,7 @@ const StyledDropDown = styled(DropDown)`
 `;
 
 const SearchItemText = styled(Text)`
-  line-height: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+  line-height: 16px;
 
   text-overflow: ellipsis;
   overflow: hidden;
@@ -457,13 +446,11 @@ const StyledButtons = styled(Box)`
 `;
 
 const StyledLink = styled(Link)`
-  float: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left` : `right`};
+  float: inline-end;
 `;
 
 const ResetLink = styled(Link)`
-  float: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right` : `left`};
+  float: inline-start;
   padding: 0 16px;
   margin-bottom: 16px;
   font-size: 13px;
@@ -475,20 +462,11 @@ const ResetLink = styled(Link)`
 StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 8px;
-        `
-      : css`
-          right: 8px;
-        `}
+  inset-inline-end: 8px;
   margin-top: -4px;
 `;
 
 const StyledInviteLanguage = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
   margin-top: -12px;
   display: flex;
   align-items: center;
@@ -502,7 +480,7 @@ const StyledInviteLanguage = styled.div`
   font-weight: 600;
   line-height: 20px;
   .list-link {
-    margin-left: 4px;
+    margin-inline-start: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
 
@@ -512,23 +490,20 @@ const StyledInviteLanguage = styled.div`
   }
   .language-combo-box {
     .combo-button {
-      padding-left: 6px;
-      padding-right: 6px;
+      padding-inline: 6px;
     }
 
     .combo-buttons_arrow-icon {
-      margin-left: 0px;
+      margin-inline-start: 0;
     }
 
     .combo-button_closed:not(:hover) .combo-button-label {
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+      color: ${(props) => props.theme.linkWithDropdown.color.active};
     }
     .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+          fill: ${(props) => props.theme.linkWithDropdown.color.active};
         }
       }
     }
@@ -548,6 +523,10 @@ const ErrorWrapper = styled.div`
   flex-wrap: nowrap;
   gap: 12px;
   margin-inline-start: auto;
+
+  @media ${mobile} {
+    margin-inline-end: 16px;
+  }
 `;
 
 export {

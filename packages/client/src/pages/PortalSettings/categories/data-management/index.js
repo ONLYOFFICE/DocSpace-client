@@ -129,10 +129,11 @@ const DataManagementWrapper = (props) => {
 
   const onSelect = (e) => {
     const url = isManagement()
-      ? `/backup/${e.id}`
+      ? `/management/settings/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
-    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
-    setCurrentTabId(e.id);
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
   };
 
   if (!isLoading) return <AppLoader />;
@@ -149,7 +150,7 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(
+export const Component = inject(
   ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
     const { initSettings } = setup;
 

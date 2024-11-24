@@ -31,13 +31,14 @@ import { SectionHeaderContent, SectionPagingContent } from "./Section";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 
 import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
-import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
+import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
 
 const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
   const onLogoClickAction = () => {
@@ -88,6 +89,8 @@ const Layout = ({
 
   const webhookHistoryPath = `/portal-settings/developer-tools/webhooks/${id}`;
   const webhookDetailsPath = `/portal-settings/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `/portal-settings/developer-tools/oauth/create`;
+  const oauthEditPath = `/portal-settings/developer-tools/oauth/${id}`;
   const currentPath = window.location.pathname;
 
   return (
@@ -107,6 +110,9 @@ const Layout = ({
               <HistoryHeader />
             ) : currentPath === webhookDetailsPath ? (
               <DetailsNavigationHeader />
+            ) : currentPath === oauthCreatePath ||
+              currentPath === oauthEditPath ? (
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
             ) : (
               <SectionHeaderContent />
             )}

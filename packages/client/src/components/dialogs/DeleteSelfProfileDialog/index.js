@@ -28,13 +28,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Link } from "@docspace/shared/components/link";
-import { Trans, withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
+import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
@@ -71,24 +70,21 @@ class DeleteSelfProfileDialogComponent extends React.Component {
     const { isRequestRunning } = this.state;
 
     return (
-      <ModalDialogContainer
-        isLoading={!tReady}
-        visible={visible}
-        onClose={onClose}
-      >
+      <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
             {t("DeleteProfileInfo")}{" "}
-            <Link
+            <ColorTheme
               type="page"
               href={`mailto:${email}`}
               noHover
-              color={theme.peopleDialogs.deleteSelf.linkColor}
+              themeId={ThemeId.Link}
               title={email}
+              tag="a"
             >
               {email}
-            </Link>
+            </ColorTheme>
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -110,7 +106,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

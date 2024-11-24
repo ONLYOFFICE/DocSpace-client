@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { DesktopDetails } from "../DesktopDetails";
 import { ViewerToolbar } from "../ViewerToolbar";
+import { globalColors } from "../../../../themes";
 
 type Panel = { isPanelOpen?: boolean };
 
@@ -61,6 +62,8 @@ export const PDFViewerWrapper = styled.div`
   }
   #id_viewer {
     background: none !important;
+
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" &&
       css`
@@ -74,6 +77,7 @@ export const PDFViewerWrapper = styled.div`
     margin: 0;
   }
   #id_vertical_scroll {
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" && "left: 0 !important;"}
   }
@@ -95,26 +99,18 @@ export const ErrorMessage = styled.p`
   padding: 20px 30px;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 4px;
-  color: rgb(238, 238, 238);
+  color: ${globalColors.white};
 `;
 
 export const DesktopTopBar = styled(DesktopDetails)<Panel>`
   display: flex;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: ${props.isPanelOpen ? "306px" : 0};
-        `
-      : css`
-          left: ${props.isPanelOpen ? "306px" : 0};
-        `}
+  inset-inline-start: ${(props) => (props.isPanelOpen ? "306px" : 0)};
   width: ${(props) => (props.isPanelOpen ? "calc(100%  - 306px)" : "100%")};
 
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `left: 12px;` : `right: 12px;`}
+    inset-inline-end: 12px;
     height: 17px;
     &:hover {
       background-color: transparent;
@@ -127,11 +123,12 @@ export const DesktopTopBar = styled(DesktopDetails)<Panel>`
   }
 
   .title {
-    padding-right: 16px;
+    padding-inline-end: 16px;
   }
 `;
 
 export const PDFToolbar = styled(ViewerToolbar)<Panel>`
+  // logical property won't work correctly
   left: ${({ theme, isPanelOpen }) => {
     const value = isPanelOpen ? 306 / 2 : 0;
     const operator = theme.interfaceDirection === "rtl" ? "-" : "+";

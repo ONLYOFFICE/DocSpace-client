@@ -28,13 +28,10 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
-import { ImageEditor } from "@docspace/shared/components/image-editor";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
@@ -44,15 +41,7 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 
-import { loadFrame } from "../utils";
-
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -66,31 +55,35 @@ import {
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "../sub-components/Integration";
 
 const Viewer = (props) => {
-  const { t, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "viewer",
     editorType: "embedded",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: false,
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    sdk.init(config);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
+    initFrame();
     return () => destroyFrame();
   });
 
@@ -132,10 +125,10 @@ const Viewer = (props) => {
           ? config.height
           : undefined
       }
-      targetId={frameId}
+      targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={frameId}></Box>
+        <Box id={config.frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -154,10 +147,10 @@ const Viewer = (props) => {
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
@@ -185,16 +178,16 @@ const Viewer = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}
@@ -203,81 +196,33 @@ const Viewer = (props) => {
             />
           </ControlsSection>
 
-          {/* <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
-            <Checkbox
-              className="checkbox"
-              label={t("TabPlugins")}
-              onChange={() => {}}
-              isChecked
-            />
-            <RowContainer>
-              <Checkbox label={t("Chat")} onChange={() => {}} isChecked />
-              <Text color="gray">({t("InLeftPanel")})</Text>
-            </RowContainer>
-            <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
-              <Text color="gray">({t("InLeftPanel")})</Text>
-            </RowContainer>
-          </InterfaceElements>
-          <CategorySubHeader>{t("AddWatermarks")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("SelectImage")} />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFileId} isSelect />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          <Label className="label" text={t("Scale")} />
-          <ComboBox
-            onSelect={() => {}}
-            options={[
-              { key: "1", label: "100%", default: true },
-              { key: "2", label: "50%" },
-              { key: "3", label: "25%" },
-            ]}
-            scaled
-            selectedOption={{ key: "1", label: "100%", default: true }}
-            displaySelectedOption
-            directionY="top"
-          />
-          <Label className="label" text={t("Rotate")} />
-          <ComboBox
-            onSelect={() => {}}
-            options={[
-              { key: "1", label: "45%", default: true },
-              { key: "2", label: "75%" },
-              { key: "3", label: "90%" },
-              { key: "4", label: "180%" },
-            ]}
-            scaled
-            selectedOption={{ key: "1", label: "45%", default: true }}
-            displaySelectedOption
-            directionY="top"
-          />
-          <Label className="label" text={t("CreateEditRoomDialog:Icon")} />
-          <ImageEditor
+          <Integration
+            className="integration-examples"
             t={t}
-            className="wrapper-image-editor"
-            classNameWrapperImageCropper="avatar-editor"
-            image={{}}
-            setPreview={() => {}}
-            onChangeImage={() => {}}
-          /> */}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
-export default inject(({ settingsStore, filesStore }) => {
-  const { theme } = settingsStore;
+export const Component = inject(({ settingsStore, filesStore }) => {
+  const { theme, currentColorScheme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
     getFilePrimaryLink,
+    currentColorScheme,
   };
 })(
   withTranslation([

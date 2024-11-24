@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { inject, observer } from "mobx-react";
@@ -97,7 +97,7 @@ const InviteUsersComponent = (props) => {
   return (
     <>
       <div className="second-description">
-        <Text as="span" color="#6A7378" fontSize="12px" noSelect>
+        <Text as="span" fontSize="12px" noSelect>
           {t("AddMembersDescription")}
         </Text>
       </div>

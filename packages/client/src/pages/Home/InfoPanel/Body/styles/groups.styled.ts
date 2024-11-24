@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 
 export const GroupsContent = styled.div<{}>`
-  padding-top: 128px;
   margin-inline-start: auto;
 
   .group-member {
@@ -45,13 +44,16 @@ export const GroupsContent = styled.div<{}>`
       display: flex;
       flex-direction: column;
       justify-content: start;
+      width: 100%;
+      overflow: hidden;
 
       .name-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 4px;
+        align-items: center;
+        gap: 8px;
+
         .name {
-          max-width: 180px;
           font-size: 14px;
           font-weight: 600;
           line-height: 16px;
@@ -64,8 +66,7 @@ export const GroupsContent = styled.div<{}>`
       }
 
       .email {
-        max-width: 180px;
-        color: #a3a9ae;
+        color: ${(props) => props.theme.infoPanel.groups.textColor};
         font-size: 12px;
         line-height: 16px;
         font-style: normal;
@@ -80,14 +81,18 @@ export const GroupsContent = styled.div<{}>`
       display: flex;
       flex-direction: row;
       gap: 16px;
-      margin-inline-start: auto;
+      margin-inline-start: 8px;
       .group-manager-tag {
         white-space: nowrap;
-        color: #d0d5da;
+        color: ${(props) => props.theme.infoPanel.groups.tagColor};
         font-size: 12px;
         font-weight: 600;
         line-height: 16px;
       }
+    }
+
+    .context-btn-wrapper:empty {
+      display: none;
     }
   }
 `;

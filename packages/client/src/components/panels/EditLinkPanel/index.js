@@ -27,14 +27,16 @@
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
+import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+
+import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
@@ -65,6 +67,8 @@ const EditLinkPanel = (props) => {
     isFormRoom,
     currentDeviceType,
     setLinkParams,
+    passwordSettings,
+    getPortalPasswordSettings,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -80,6 +84,7 @@ const EditLinkPanel = (props) => {
   const [isExpired, setIsExpired] = useState(isExpiredDate);
 
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [linkValue, setLinkValue] = useState(shareLink);
   const [hasChanges, setHasChanges] = useState(false);
@@ -101,10 +106,12 @@ const EditLinkPanel = (props) => {
 
   const onClose = () => setIsVisible(false);
   const onSave = () => {
-    const isPasswordValid = !!passwordValue.trim();
-
-    if (!isPasswordValid && passwordAccessIsChecked) {
+    if (
+      (!passwordValue.trim() || !isPasswordValid) &&
+      passwordAccessIsChecked
+    ) {
       setIsPasswordValid(false);
+      setIsPasswordErrorShow(true);
 
       return;
     }
@@ -133,18 +140,22 @@ const EditLinkPanel = (props) => {
         setLinkParams({ link, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
-          copy(linkValue);
-          toastr.success(t("Files:LinkEditedSuccessfully"));
+          copyShareLink(linkValue);
+          // toastr.success(t("Files:LinkEditedSuccessfully"));
         } else {
-          copy(link?.sharedTo?.shareLink);
+          copyShareLink(link?.sharedTo?.shareLink);
 
-          toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+          // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
+        copyRoomShareLink(link, t, false);
+        onClose();
       })
-      .catch((err) => toastr.error(err?.message))
+      .catch((err) => {
+        const error = err?.response?.data?.error?.message ?? err?.message;
+        toastr.error(error);
+      })
       .finally(() => {
         setIsLoading(false);
-        onClose();
       });
   };
 
@@ -183,6 +194,18 @@ const EditLinkPanel = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, [onKeyPress]);
 
+  const getPasswordSettings = async () => {
+    setIsLoading(true);
+    await getPortalPasswordSettings();
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (!passwordSettings) {
+      getPasswordSettings();
+    }
+  }, [passwordSettings]);
+
   const linkNameIsValid = !!linkNameValue.trim();
 
   const expiredLinkText = isExpired
@@ -197,15 +220,15 @@ const EditLinkPanel = (props) => {
     !hasChanges || isLoading || !linkNameIsValid || isExpired;
 
   const editLinkPanelComponent = (
-    <StyledEditLinkPanel
+    <ModalDialog
       isExpired={isExpired}
       displayType="aside"
       visible={visible}
       onClose={onClosePanel}
       isLarge
       zIndex={310}
-      withBodyScroll={true}
-      withFooterBorder={true}
+      withBodyScroll
+      withoutPadding
     >
       <ModalDialog.Header>
         {isEdit
@@ -217,7 +240,7 @@ const EditLinkPanel = (props) => {
           : t("Files:CreateNewLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="edit-link_body">
+        <StyledEditLinkBodyContent className="edit-link_body">
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -239,6 +262,9 @@ const EditLinkPanel = (props) => {
             setPasswordValue={setPasswordValue}
             setIsPasswordValid={setIsPasswordValid}
             onChange={onPasswordAccessChange}
+            passwordSettings={passwordSettings}
+            isPasswordErrorShow={isPasswordErrorShow}
+            setIsPasswordErrorShow={setIsPasswordErrorShow}
           />
           {!isFormRoom && (
             <ToggleBlock
@@ -262,7 +288,7 @@ const EditLinkPanel = (props) => {
               language={language}
             />
           )}
-        </div>
+        </StyledEditLinkBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -281,7 +307,7 @@ const EditLinkPanel = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledEditLinkPanel>
+    </ModalDialog>
   );
 
   const renderPortal = () => {
@@ -313,11 +339,13 @@ export default inject(
     } = dialogsStore;
     const { externalLinks, editExternalLink, setExternalLink } =
       publicRoomStore;
+    const { currentDeviceType, passwordSettings, getPortalPasswordSettings } =
+      settingsStore;
+
     const { isEdit, roomId, isPublic, isFormRoom } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
-
     const shareLink = link?.sharedTo?.shareLink;
 
     return {
@@ -340,8 +368,10 @@ export default inject(
       language: authStore.language,
       isPublic,
       isFormRoom,
-      currentDeviceType: settingsStore.currentDeviceType,
+      currentDeviceType,
       setLinkParams,
+      passwordSettings,
+      getPortalPasswordSettings,
     };
   },
 )(

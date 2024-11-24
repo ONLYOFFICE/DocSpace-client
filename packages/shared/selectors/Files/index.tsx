@@ -42,6 +42,7 @@ import { Selector, TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
+import { toastr } from "../../components/toast";
 import {
   RowLoader,
   SearchLoader,
@@ -68,8 +69,6 @@ import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 
 const FilesSelectorComponent = ({
-  socketHelper,
-  socketSubscribers,
   disabledItems,
   filterParam,
 
@@ -116,6 +115,7 @@ const FilesSelectorComponent = ({
   infoBarData,
   headerProps,
   shareKey,
+  formProps,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -145,6 +145,7 @@ const FilesSelectorComponent = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);
   const [total, setTotal] = React.useState<number>(0);
@@ -154,12 +155,13 @@ const FilesSelectorComponent = ({
   const [searchValue, setSearchValue] = React.useState<string>("");
 
   const afterSearch = React.useRef(false);
+  const currentSelectedItemId = React.useRef<undefined | number | string>(
+    undefined,
+  );
 
   const [isInit, setIsInit] = React.useState(true);
 
   const { subscribe, unsubscribe } = useSocketHelper({
-    socketHelper,
-    socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
@@ -190,6 +192,7 @@ const FilesSelectorComponent = ({
     getRootData,
     setSelectedItemType,
     subscribe,
+    setSelectedItemSecurity,
 
     searchValue,
     isRoomsOnly,
@@ -304,6 +307,13 @@ const FilesSelectorComponent = ({
       doubleClickCallback: () => Promise<void>,
     ) => {
       if (item.isFolder) {
+        if (isDoubleClick) return;
+
+        const isFormRoom = item.roomType === RoomsType.FormRoom;
+
+        if (isFormRoom && formProps?.isRoomFormAccessible === false)
+          return toastr.warning(formProps.message);
+
         setIsFirstLoad(true);
 
         // setItems([]);
@@ -340,6 +350,7 @@ const FilesSelectorComponent = ({
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          viewUrl: item.viewUrl,
           inPublic,
         });
 
@@ -348,7 +359,12 @@ const FilesSelectorComponent = ({
         }
       }
     },
-    [breadCrumbs, setIsFirstLoad],
+    [
+      breadCrumbs,
+      setIsFirstLoad,
+      formProps?.isRoomFormAccessible,
+      formProps?.message,
+    ],
   );
 
   React.useEffect(() => {
@@ -357,6 +373,10 @@ const FilesSelectorComponent = ({
 
     subscribe(+selectedItemId);
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
+
+  React.useEffect(() => {
+    setSelectedItemId(currentFolderId);
+  }, [currentFolderId]);
 
   React.useEffect(() => {
     setIsFirstLoad(true);
@@ -372,8 +392,7 @@ const FilesSelectorComponent = ({
       setSelectedItemType("rooms");
       return;
     }
-
-    setSelectedItemId(currentFolderId);
+    // setSelectedItemId(currentFolderId);
 
     if (
       needRoomList ||
@@ -398,21 +417,31 @@ const FilesSelectorComponent = ({
     setIsFirstLoad,
   ]);
 
-  const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+  React.useEffect(() => {
+    currentSelectedItemId.current = selectedItemId;
+  }, [selectedItemId]);
+
+  const onSearchAction = (value: string, callback?: VoidFunction) => {
+    if (selectedItemId !== currentSelectedItemId.current) {
+      return;
+    }
+    setSearchValue(value);
+
+    callback?.();
+    afterSearch.current = true;
+  };
+
+  React.useEffect(() => {
+    if (!selectedItemType) return;
+
+    if (searchValue) {
       setIsFirstLoad(true);
       setItems([]);
-
-      setSearchValue(value);
-
-      callback?.();
-      afterSearch.current = true;
-    },
-    [setIsFirstLoad],
-  );
+    }
+  }, [searchValue, selectedItemType, setIsFirstLoad]);
 
   const onClearSearchAction = React.useCallback(
-    (callback?: Function) => {
+    (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
@@ -472,7 +501,8 @@ const FilesSelectorComponent = ({
       getRootData();
       return;
     }
-    if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
+
+    if (selectedItemType === "files" && (selectedItemId || isUserOnly))
       getFileList(0);
   }, [
     getFileList,
@@ -481,6 +511,7 @@ const FilesSelectorComponent = ({
     selectedItemId,
     getRootData,
     openRoot,
+    isUserOnly,
   ]);
 
   const headerSelectorProps: TSelectorHeader = withHeader

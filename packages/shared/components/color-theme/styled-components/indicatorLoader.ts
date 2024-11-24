@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme, TTheme } from "../../../themes";
+import { Base, TColorScheme, TTheme, globalColors } from "../../../themes";
 import StyledWrapper from "../sub-components/StyledWrapper";
 
 const getDefaultStyles = ({
@@ -40,12 +40,12 @@ const getDefaultStyles = ({
     #ipl-progress-indicator {
       background-color: ${theme.isBase
         ? $currentColorScheme.main?.accent
-        : "#FFFFFF"};
+        : globalColors.white};
 
       &:hover {
         background-color: ${theme.isBase
           ? $currentColorScheme.main?.accent
-          : "#FFFFFF"};
+          : globalColors.white};
       }
     }
   `;

@@ -35,20 +35,15 @@ import FileActionsLockedIcon from "PUBLIC_DIR/images/file.actions.locked.react.s
 import EditFormIcon from "PUBLIC_DIR/images/access.edit.form.react.svg";
 import { Base } from "@docspace/shared/themes";
 
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+
 export const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
   height: 16px;
   position: absolute;
   width: 16px;
   margin-top: 14px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 12px;
-        `
-      : css`
-          margin-left: 12px;
-        `}
+  margin-inline-start: 12px;
 `;
 
 export const StyledFavoriteIcon = styled(FavoriteIcon)`
@@ -100,3 +95,12 @@ export const StyledFileActionsEditFormIcon = styled(EditFormIcon)`
 `;
 
 StyledFileActionsEditFormIcon.defaultProps = { theme: Base };
+
+export const StyledSendClockIcon = styled(SendClockIcon)`
+  min-width: 12px;
+
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
+  }
+`;

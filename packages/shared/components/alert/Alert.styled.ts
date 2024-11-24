@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
 import { commonIconsStyles } from "../../utils";
 
@@ -74,16 +74,9 @@ const StyledArrowRightIcon = styled(ArrowRightIcon)`
 const StyledCrossIcon = styled(CrossReactSvg)`
   position: absolute;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? css`
-          left: 0px;
-          margin-left: 8px;
-        `
-      : css`
-          right: 0px;
-          margin-right: 8px;
-        `}
+  inset-inline-end: 0px;
+  margin-inline-end: 8px;
+
   margin-top: 8px;
   cursor: pointer;
 

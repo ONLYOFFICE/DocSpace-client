@@ -40,8 +40,7 @@ export const StyledRegister = styled(Box)`
   padding: 1.5em;
   bottom: 0;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 0;` : `right: 0;`}
+  inset-inline-end: 0;
   background-color: ${(props) => props.theme.login.register.backgroundColor};
   cursor: pointer;
 `;

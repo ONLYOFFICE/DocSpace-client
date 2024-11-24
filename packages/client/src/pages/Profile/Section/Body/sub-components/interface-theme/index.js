@@ -54,21 +54,14 @@ const StyledWrapper = styled.div`
 
   .checkbox {
     height: 20px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px !important;
-          `
-        : css`
-            margin-right: 8px !important;
-          `}
+    margin-inline-end: 8px !important;
   }
 
   .system-theme-description {
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
-    padding-left: 24px;
+    padding-inline-start: 24px;
     max-width: 295px;
     color: ${(props) => props.theme.profile.themePreview.descriptionColor};
   }
@@ -88,7 +81,7 @@ const StyledWrapper = styled.div`
 
     @media ${mobile} {
       display: flex;
-      padding-left: 30px;
+      padding-inline-start: 30px;
     }
   }
 `;

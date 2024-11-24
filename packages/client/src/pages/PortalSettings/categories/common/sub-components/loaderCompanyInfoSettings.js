@@ -47,14 +47,7 @@ const StyledLoader = styled.div`
   }
 
   .save {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 8px;
-          `
-        : css`
-            padding-right: 8px;
-          `}
+    padding-inline-end: 8px;
   }
 `;
 

@@ -33,8 +33,7 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 const StyledBody = styled.div`
   .select-total-size_title {
     margin-bottom: 8px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
 
     color: ${(props) =>
       props.isDisabled

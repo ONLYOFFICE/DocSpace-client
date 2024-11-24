@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import Dropzone from "react-dropzone";
 import equal from "fast-deep-equal/react";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
 
 import { IconButton } from "../icon-button";
@@ -40,6 +40,7 @@ import { toastr } from "../toast";
 
 import StyledFileInput from "./FileInput.styled";
 import { FileInputProps } from "./FileInput.types";
+import { globalColors } from "../../themes";
 
 const FileInputPure = ({
   onInput,
@@ -183,7 +184,7 @@ const FileInputPure = ({
                       ? DocumentReactSvgUrl
                       : CatalogFolderReactSvgUrl
                   }
-                  color="#A3A9AE"
+                  color={globalColors.gray}
                   size={iconSize}
                   isDisabled={isDisabled}
                 />

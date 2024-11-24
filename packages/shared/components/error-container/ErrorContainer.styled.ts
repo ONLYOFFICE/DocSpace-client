@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
 import { Base } from "@docspace/shared/themes";
+
 import { desktop, mobile } from "@docspace/shared/utils";
+
+// doesn't require mirroring for RTL
 
 const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
@@ -50,7 +52,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   box-sizing: border-box;
 
   .error_description_link {
-    color: #2da7db;
+    color: ${(props) => props.theme.errorContainer.linkColor};
     font-size: 13px;
     font-weight: 600;
   }

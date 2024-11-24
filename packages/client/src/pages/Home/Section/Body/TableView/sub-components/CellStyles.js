@@ -29,14 +29,25 @@ import { Text } from "@docspace/shared/components/text";
 
 const StyledText = styled(Text)`
   display: inline-block;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 12px;
-        `
-      : css`
-          margin-right: 12px;
-        `}
+  margin-inline-end: 12px;
+`;
+
+const StyledIndexCell = styled(Text)`
+  display: inline-block;
+  margin-inline: 0;
+  padding-inline-start: 16px;
+
+  overflow: hidden;
+  direction: rtl;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" &&
+    css`
+      padding-inline-start: 0;
+      margin-inline-end: 16px;
+    `}
 `;
 
 const StyledTypeCell = styled(StyledText)`
@@ -73,15 +84,8 @@ const StyledAuthorCell = styled.div`
     width: 16px;
     min-width: 16px;
     height: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 `;
 
-export { StyledText, StyledAuthorCell, StyledTypeCell };
+export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };

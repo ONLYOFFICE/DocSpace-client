@@ -34,6 +34,7 @@ export const PageCountWrapper = styled.div<{ isPanelOpen: boolean }>`
 
   position: fixed;
   bottom: ${isMobile ? "12px" : "108px"};
+  // logical property won't work correctly
   left: ${({ theme, isPanelOpen }) => {
     const value = isPanelOpen ? 306 / 2 : 0;
     const operator = theme.interfaceDirection === "rtl" ? "-" : "+";

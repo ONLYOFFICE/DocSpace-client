@@ -23,18 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Base from "@docspace/shared/themes/base";
 
 const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
+  margin-inline-end: 16px;
 `;
 
 StyledAccessSelector.defaultProps = { theme: Base };

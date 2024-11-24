@@ -28,10 +28,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { ContextMenuButton } from "./ContextMenuButton";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
+import { globalColors } from "../../themes";
 
 const baseData = () => [
   {
@@ -45,7 +46,7 @@ const baseProps = {
   title: "Actions",
   iconName: VerticalDotsReactSvgUrl,
   size: 16,
-  color: "#A3A9AE",
+  color: globalColors.gray,
   getData: baseData,
   isDisabled: false,
 };

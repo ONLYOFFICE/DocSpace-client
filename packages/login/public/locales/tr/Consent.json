@@ -1,0 +1,9 @@
+{
+  "AllowButton": "İzin ver",
+  "ConsentDescription": "<strong>{{displayName}}</strong> ile paylaşılan veriler <strong>{{nameApp}}</strong> <6>gizlilik politikası</6> ve <6>hizmet şartları</6> tarafından yönetilecektir. Bu izni istediğiniz zaman {{productName}} hesap ayarlarınızdan iptal edebilirsiniz.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1>, <strong>{{productName}} hesabınızdaki</strong> şu verilere erişmek istiyor:",
+  "DenyButton": "Reddet",
+  "NotYou": "Siz değil misiniz?",
+  "SignedInAs": "Giriş yapan kullanıcı:",
+  "ToContinue": "Devam etmek için:"
+}

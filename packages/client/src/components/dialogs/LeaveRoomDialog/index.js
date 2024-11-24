@@ -38,7 +38,7 @@ const LeaveRoomDialog = (props) => {
     visible,
     setIsVisible,
     setChangeRoomOwnerIsVisible,
-    isOwner,
+    isRoomOwner,
     onLeaveRoomAction,
     updateInfoPanelSelection,
   } = props;
@@ -59,12 +59,12 @@ const LeaveRoomDialog = (props) => {
   };
 
   const onLeaveRoom = async () => {
-    if (isOwner) {
+    if (isRoomOwner) {
       setChangeRoomOwnerIsVisible(true);
       onClose();
     } else {
       setIsLoading(true);
-      await onLeaveRoomAction(t, isOwner);
+      await onLeaveRoomAction(t, isRoomOwner);
       setIsLoading(false);
       updateInfoPanelSelection();
       onClose();
@@ -79,7 +79,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
           <Text noSelect>
-            {isOwner
+            {isRoomOwner
               ? t("Files:LeaveRoomDescription")
               : t("Files:WantLeaveRoom")}
           </Text>
@@ -88,7 +88,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={isOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
+          label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
           size="normal"
           primary
           scale
@@ -135,7 +135,7 @@ export default inject(
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
-      isOwner: isRoomOwner,
+      isRoomOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
       updateInfoPanelSelection,
     };

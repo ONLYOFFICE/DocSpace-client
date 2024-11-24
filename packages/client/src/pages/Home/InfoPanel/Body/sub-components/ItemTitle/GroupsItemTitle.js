@@ -31,15 +31,17 @@ import { matchPath } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { StyledAccountsItemTitle } from "../../styles/accounts";
+import { StyledUsersTitle } from "../../styles/Users";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { globalColors } from "@docspace/shared/themes";
 
 const GroupsItemTitle = ({
   t,
   isRoomAdmin,
+  isUser,
   isSeveralItems,
   infoPanelSelection,
   getGroupContextOptions,
@@ -62,7 +64,7 @@ const GroupsItemTitle = ({
   if (isSeveralItems) return null;
 
   return (
-    <StyledAccountsItemTitle ref={itemTitleRef}>
+    <StyledUsersTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
         size={AvatarSize.big}
@@ -95,8 +97,8 @@ const GroupsItemTitle = ({
               id="ldap-badge-info-panel"
               className="ldap-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+              color={globalColors.white}
+              backgroundColor={globalColors.secondPurple}
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -109,19 +111,20 @@ const GroupsItemTitle = ({
         )}
       </div>
 
-      {!isRoomAdmin && !infoPanelSelection.isLDAP && (
+      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP && (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"
           getData={getContextOptions}
         />
       )}
-    </StyledAccountsItemTitle>
+    </StyledUsersTitle>
   );
 };
 
 export default inject(({ peopleStore }) => ({
   isRoomAdmin: peopleStore.userStore.user.isRoomAdmin,
+  isUser: peopleStore.userStore.user.isUser,
 }))(
   withTranslation([
     "People",

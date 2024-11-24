@@ -85,6 +85,7 @@ const commonInputStyles = css<{
   cursor: ${(props) =>
     props.isReadOnly || props.isDisabled ? "default" : "text"};
 
+  // doesn't require mirroring for LTR
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`

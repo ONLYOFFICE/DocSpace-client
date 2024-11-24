@@ -93,6 +93,7 @@ const QuotaForm = ({
   checkboxLabel,
   description,
   isAutoFocussed = false,
+  tabIndex,
 }) => {
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
@@ -206,9 +207,10 @@ const QuotaForm = ({
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          pattern="^-?\d+(?:\.\d{0,2})?"
+          pattern="^\d+(?:\.\d{0,2})?"
           scale
           withBorder
+          tabIndex={tabIndex}
         />
         <ComboBox
           className="quota_value"

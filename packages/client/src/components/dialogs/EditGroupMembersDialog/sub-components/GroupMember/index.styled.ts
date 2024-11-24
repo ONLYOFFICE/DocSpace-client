@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 export const GroupMember = styled.div<{ isExpect: boolean }>`
   display: flex;
@@ -40,6 +41,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .user_body-wrapper {
     overflow: auto;
+    ${TextUserSelect}
   }
 
   .info,
@@ -54,8 +56,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
   .name {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -75,8 +76,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
   .me-label {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
     padding-inline-start: 8px;
     margin-inline-start: -8px;

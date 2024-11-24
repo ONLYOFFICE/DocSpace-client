@@ -30,7 +30,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
-import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
+import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 
 import { RoomsTypeValues } from "../../utils";
 
@@ -39,6 +39,7 @@ import { AvatarRole } from "../avatar";
 
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
+import { globalColors } from "../../themes";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -210,7 +211,7 @@ const Template = (args: SelectorProps) => {
       style={{
         width: "480px",
         height: "485px",
-        border: "1px solid #eee",
+        border: `1px solid ${globalColors.grayLightMid}`,
         margin: "auto",
       }}
     >

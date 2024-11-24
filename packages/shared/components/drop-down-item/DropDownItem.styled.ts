@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { tablet } from "../../utils";
 
 const itemTruncate = css`
@@ -75,6 +75,7 @@ const StyledDropdownItem = styled.div<{
   isModern?: boolean;
   disabled?: boolean;
   noHover?: boolean;
+  noActive?: boolean;
   isHeader?: boolean;
   isSeparator?: boolean;
   isActiveDescendant?: boolean;
@@ -100,7 +101,7 @@ const StyledDropdownItem = styled.div<{
   text-decoration: none;
   user-select: none;
   outline: 0 !important;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .drop-down-item_icon {
     svg {
@@ -149,17 +150,17 @@ const StyledDropdownItem = styled.div<{
       !props.isHeader &&
       css`
         background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
-        text-align: left;
-        ${props.theme.interfaceDirection === "rtl" &&
-        css`
-          text-align: right;
-        `}
+
+        // logical property won't work because of "dir: auto"
+        text-align: ${({ theme }) =>
+          theme.interfaceDirection === "rtl" ? "right" : "left"};
       `}
   }
 
   &:active {
-    ${({ isHeader, theme }) =>
+    ${({ isHeader, theme, noActive }) =>
       !isHeader &&
+      !noActive &&
       css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}
@@ -193,8 +194,8 @@ const StyledDropdownItem = styled.div<{
     css`
       align-items: center;
       height: 48px;
-      padding: 13px 16px 18.2px 16px;
-      margin: 0 0 6px 0;
+      padding: 13px 16px 18.2px;
+      margin: 0 0 6px;
       border-bottom: ${theme.dropDownItem.separator.borderBottom};
       font-size: 15px;
       font-weight: 600;
@@ -227,11 +228,12 @@ const StyledDropdownItem = styled.div<{
 
   .submenu-arrow {
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;
-           transform: scaleX(-1);
-        `
-        : `margin-left: auto;`}
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform-box: content-box;
+        transform: scaleX(-1);
+      `}
+    margin-inline-start: auto;
     ${(props) =>
       props.isActive &&
       css`
@@ -257,13 +259,7 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   width: ${(props) => props.theme.dropDownItem.icon.width};
-  margin-right: ${(props) => props.theme.dropDownItem.icon.marginRight};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: 0;
-      margin-left: ${props.theme.dropDownItem.icon.marginRight};
-    `}
+  margin-inline-end: ${(props) => props.theme.dropDownItem.icon.marginRight};
 
   height: 20px;
 
@@ -289,14 +285,7 @@ IconWrapper.defaultProps = { theme: Base };
 const ElementWrapper = styled.div`
   display: flex;
   align-items: center;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  margin-inline-start: auto;
 `;
 
 export {

@@ -31,6 +31,7 @@ import React, { useState } from "react";
 import { StyledText } from "./CellStyles";
 import { getFolderPath } from "@docspace/shared/api/files";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const RoomCell = ({ sideColor, item }) => {
   const { originRoomTitle, originId, originTitle } = item;
@@ -78,7 +79,7 @@ const RoomCell = ({ sideColor, item }) => {
       getContent={() => (
         <span>
           {isTooltipLoading ? (
-            <Loader color="#333333" size="12px" type="track" />
+            <Loader color={globalColors.black} size="12px" type="track" />
           ) : (
             path.map((pathPart, i) => (
               <Text key={pathPart.id} isBold={i === 0} isInline fontSize="12px">

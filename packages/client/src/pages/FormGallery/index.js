@@ -96,7 +96,6 @@ const FormGallery = ({
       <SectionWrapper
         // withBodyScroll
         // withBodyAutoFocus={!isMobile}
-        withPaging={false}
         isFormGallery
       >
         <Section.SectionHeader isFormGallery>
@@ -127,7 +126,7 @@ const FormGallery = ({
   );
 };
 
-export default inject(({ oformsStore }) => ({
+export const WrappedComponent = inject(({ oformsStore }) => ({
   oformsLoadError: oformsStore.oformsLoadError,
 
   currentCategory: oformsStore.currentCategory,

@@ -37,7 +37,7 @@ import {
   desktop,
   NoUserSelect,
 } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
 
 import { Scrollbar } from "../scrollbar";
@@ -49,30 +49,15 @@ const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
   ${({ $isScrollLocked }) =>
     $isScrollLocked &&
     css`
-      & .scroll-wrapper > .scroller {
+      &:first-child > .scroll-wrapper > .scroller {
         overflow: hidden !important;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: -1px !important;
-              `
-            : css`
-                margin-right: -1px !important;
-              `}
+        margin-inline-end: -1px !important;
       }
       ${isMobileOnly &&
       css`
         & .scroll-wrapper > .scroller {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  padding-left: 20px !important;
-                  margin-left: -21px !important;
-                `
-              : css`
-                  padding-right: 20px !important;
-                  margin-right: -21px !important;
-                `}
+          padding-inline-end: 20px !important;
+          margin-inline-end: -21px !important;
         }
       `}
     `}
@@ -89,10 +74,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   @media ${tablet} {
     z-index: 309;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
   }
 `;
 
@@ -100,14 +82,7 @@ const StyledInfoPanel = styled.div`
   height: 100%;
   width: ${INFO_PANEL_WIDTH}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          border-right: ${`1px solid ${props.theme.infoPanel.borderColor}`};
-        `
-      : css`
-          border-left: ${`1px solid ${props.theme.infoPanel.borderColor}`};
-        `}
+  border-inline-start: 1px solid ${({ theme }) => theme.infoPanel.borderColor};
   display: flex;
   flex-direction: column;
 
@@ -118,14 +93,7 @@ const StyledInfoPanel = styled.div`
   @media ${tablet} {
     position: absolute;
     border: none;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0;
-          `
-        : css`
-            right: 0;
-          `}
+    inset-inline-end: 0;
     width: 480px;
     max-width: calc(100vw - 69px);
   }
@@ -155,29 +123,15 @@ const StyledControlContainer = styled.div`
     display: flex;
 
     top: 18px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: -27px;
-          `
-        : css`
-            left: -27px;
-          `}
+    inset-inline-start: -27px;
   }
 
   @media ${mobile} {
     display: flex;
 
     top: -27px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 10px;
-          `
-        : css`
-            right: 10px;
-          `}
-    left: unset;
+    inset-inline-end: 10px;
+    inset-inline-start: unset;
   }
 `;
 
@@ -200,72 +154,34 @@ const settingsStudioStyles = css<{ settingsStudio?: boolean }>`
   ${({ settingsStudio }) =>
     settingsStudio &&
     css`
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 0 20px 16px 7px;
-            `
-          : css`
-              padding: 0 7px 16px 20px;
-            `}
+      padding-block: 0 16px;
+      padding-inline: 20px 7px;
 
       @media ${tablet} {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 0 24px 16px 0;
-              `
-            : css`
-                padding: 0 0 16px 24px;
-              `}
+        padding-inline: 24px 0;
       }
 
       @media ${mobile} {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 0 24px 16px 0;
-              `
-            : css`
-                padding: 0 0 16px 24px;
-              `}
+        padding-inline: 24px 0;
       }
     `}
 `;
 
 const paddingStyles = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding: 19px 20px 16px 3px;
-        `
-      : css`
-          padding: 19px 3px 16px 20px;
-        `}
+  padding-block: 19px 16px;
+  padding-inline: 20px 3px;
+
   outline: none;
 
   ${settingsStudioStyles};
 
   @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 24px 16px 0;
-          `
-        : css`
-            padding: 0px 0 16px 24px;
-          `}
+    padding-block: 0 16px;
+    padding-inline: 24px 0;
   }
 
   @media ${mobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 24px 16px 8px;
-          `
-        : css`
-            padding: 0px 8px 16px 24px;
-          `}
+    padding-inline: 24px 8px;
   }
 `;
 
@@ -281,8 +197,7 @@ const commonStyles = css<{
   ${(props) => (props.isDesktop ? "height: auto" : "height: 100%")};
 
   ${(props) => !props.withScroll && `height: 100%;`}
-  border-left: none;
-  border-right: none;
+  border-inline: none;
   border-top: none;
 
   .section-wrapper {
@@ -302,17 +217,7 @@ const commonStyles = css<{
     ${paddingStyles}
     flex: 1 0 auto;
     outline: none;
-    ${(props) =>
-      props.viewAs === "tile" &&
-      css`
-        ${props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 20px;
-            `
-          : css`
-              padding-left: 20px;
-            `}
-      `}
+    ${(props) => props.viewAs === "tile" && "padding-inline-start: 20px;"}
 
     ${(props) =>
       (props.viewAs === "settings" || props.viewAs === "profile") &&
@@ -325,23 +230,17 @@ const commonStyles = css<{
       `};
 
     @media ${`${mobileMore} and ${tablet}`} {
-      ${({ isFormGallery, theme }) =>
+      ${({ isFormGallery }) =>
         isFormGallery &&
         css`
-          padding: ${theme.interfaceDirection === "rtl"
-            ? "0 16px 20px 0"
-            : "0 0    20px 16px"} !important;
+          padding-block: 0 20px !important;
+          padding-inline: 16px 0 !important;
         `}
     }
 
     @media ${mobile} {
-      ${({ isFormGallery, theme }) =>
-        isFormGallery &&
-        css`
-          padding: ${theme.interfaceDirection === "rtl"
-            ? "0px 16px 16px 16px"
-            : "0px 16px 16px 16px"} !important;
-        `}
+      ${({ isFormGallery }) =>
+        isFormGallery && "padding: 0px 16px 16px !important;"}
     }
 
     .section-wrapper {
@@ -388,22 +287,10 @@ const StyledSectionBody = styled.div`
   ${(props) =>
     props.withScroll &&
     css`
-      ${props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -20px;
-          `
-        : css`
-            margin-left: -20px;
-          `}
+      margin-inline-start: -20px;
 
       @media ${tablet} {
-        ${props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-            `
-          : css`
-              margin-left: -24px;
-            `}
+        margin-inline-start: -24px;
       }
     `}
 
@@ -411,13 +298,9 @@ const StyledSectionBody = styled.div`
     isFormGallery &&
     css`
       @media ${tablet} {
-        margin: ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? "0 -16px 0 0 "
-            : "0 0 0 -16px"};
-
-        padding: ${(props) =>
-          props.theme.interfaceDirection === "rtl" ? "0 0 0 0 " : "0 0 0 0"};
+        margin-block: 0;
+        margin-inline: -16px 0;
+        padding: 0;
       }
     `}
 
@@ -443,22 +326,10 @@ const StyledDropZoneBody = styled(DragAndDrop)`
   ${(props) =>
     props.withScroll &&
     css`
-      ${props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -20px;
-          `
-        : css`
-            margin-left: -20px;
-          `}
+      margin-inline-start: -20px;
 
       @media ${tablet} {
-        ${props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-            `
-          : css`
-              margin-left: -24px;
-            `}
+        margin-inline-start: -24px;
       }
     `}
 `;
@@ -478,16 +349,9 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
     position: sticky;
     top: 0;
     background: ${(props) => props.theme.section.header.backgroundColor};
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0;
-          `
-        : css`
-            padding-right: 0;
-          `}
+    padding-inline-end: 0;
     z-index: 201;
+
     @media ${mobile} {
       min-width: 100vw;
       margin-inline-start: -16px;
@@ -585,9 +449,7 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
         ${(props) =>
           props.showTwoProgress &&
           css`
-            ${props.theme.interfaceDirection === "rtl"
-              ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
-              : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
+            margin-inline-start: calc(${closeIconSize} + ${sizeBetweenIcons});
           `}
       }
 
@@ -596,21 +458,12 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
         width: ${closeIconSize};
         height: ${closeIconSize};
 
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: ${sizeBetweenIcons};
-              `
-            : css`
-                margin-right: ${sizeBetweenIcons};
-              `}
+        margin-inline-end: ${sizeBetweenIcons};
 
         ${(props) =>
           props.showTwoProgress &&
           css`
-            ${props.theme.interfaceDirection === "rtl"
-              ? `margin-left:-${closeIconSize}`
-              : `margin-right:-${closeIconSize}`}
+            margin-inline-end: -${closeIconSize};
           `}
       }
     }
@@ -629,14 +482,7 @@ StyledSectionContainer.defaultProps = { theme: Base };
 
 const StyledSectionFilter = styled.div`
   @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-          `
-        : css`
-            margin-right: 16px;
-          `}
+    margin-inline-end: 16px;
   }
 `;
 
@@ -670,7 +516,7 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
 
     .header-container {
       margin-bottom: 1px;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
     }
   }
 
@@ -702,24 +548,10 @@ StyledSectionHeader.defaultProps = { theme: Base };
 
 const StyledSectionPaging = styled.div`
   margin: 16px 0 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-left: 3px;
-        `
-      : css`
-          padding-right: 3px;
-        `}
+  padding-inline-end: 3px;
 
   @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
   }
 `;
 

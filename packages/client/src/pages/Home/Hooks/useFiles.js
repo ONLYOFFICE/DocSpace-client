@@ -60,7 +60,7 @@ const useFiles = ({
   fetchRooms,
   setIsLoading,
 
-  isAccountsPage,
+  isContactsPage,
   isSettingsPage,
 
   location,
@@ -93,7 +93,7 @@ const useFiles = ({
   };
 
   const fetchDefaultRooms = () => {
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const categoryType = getCategoryType(location);
 
@@ -129,16 +129,7 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
-    if (location.state?.fromMediaViewer) {
-      const { fromMediaViewer, ...state } = location.state;
-      // remove fromMediaViewer from location state
-      return navigate(location.pathname + location.search, {
-        replace: true,
-        state,
-      });
-    }
-
-    if (isAccountsPage || isSettingsPage) return;
+    if (isContactsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
@@ -333,7 +324,7 @@ const useFiles = ({
         scrollToTop();
         setIsLoading(false);
       });
-  }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);
+  }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
 
   return { onDrop };
 };

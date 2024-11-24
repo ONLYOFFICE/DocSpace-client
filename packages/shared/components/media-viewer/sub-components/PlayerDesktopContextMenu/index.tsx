@@ -27,7 +27,7 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg";
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
 import {
   DownloadIconWrapper,
@@ -78,6 +78,8 @@ const PlayerDesktopContextMenu = memo(
       );
     }
     if (isPreviewFile) return;
+
+    if (!context) return;
 
     return (
       <PlayerDesktopContextMenuWrapper ref={ref} onClick={toggleContext}>

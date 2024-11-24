@@ -26,6 +26,8 @@
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
+
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -34,15 +36,19 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 const User = ({
   t,
@@ -68,6 +74,8 @@ const User = ({
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
 
+  const theme = useTheme();
+
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
   const canInviteUserInRoomAbility = security?.EditAccess;
@@ -83,9 +91,10 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  const userRoleOptions = user.isGroup
-    ? filterGroupRoleOptions(fullRoomRoleOptions)
-    : filterUserRoleOptions(fullRoomRoleOptions, user);
+  const userRoleOptions =
+    user.isGroup || (!user.isAdmin && !user.isOwner && !user.isRoomAdmin)
+      ? filterPaidRoleOptions(fullRoomRoleOptions)
+      : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)
@@ -116,6 +125,7 @@ const User = ({
               (m) => m.id !== user.id,
             ),
             groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
+            guests: infoPanelMembers.guests?.filter((m) => m.id !== user.id),
           };
 
           const roomId = infoPanelSelection.id;
@@ -133,12 +143,16 @@ const User = ({
           const newGroups =
             newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
+          const newGuests =
+            newMembers.guests.length > minItemsCount ? newMembers?.guests : [];
+
           setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
             groups: newGroups,
+            guests: newGuests,
           });
 
           newMembersFilter.total -= 1;
@@ -166,6 +180,7 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
+              guests: [...newMembersFilter.guests],
             };
 
             setInfoPanelMembers({
@@ -193,6 +208,9 @@ const User = ({
             groups: infoPanelMembers.groups?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
+            guests: infoPanelMembers.guests?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
           });
         }
       })
@@ -209,67 +227,12 @@ const User = ({
   const onOptionClick = (option) => {
     if (option.access === userRole.access) return;
 
-    const userType =
-      option.key === "owner"
-        ? "admin"
-        : option.key === "roomAdmin"
-          ? "manager"
-          : option.key === "collaborator"
-            ? "collaborator"
-            : "user";
-
-    const successCallback = () => {
-      updateRole(option);
-    };
-
     setIsLoading(true);
-
-    const needChangeUserType =
-      ((user.isVisitor || user.isCollaborator) && userType === "manager") ||
-      (user.isVisitor && userType === "collaborator");
-
-    if (needChangeUserType) {
-      changeUserType(userType, [user], successCallback, abortCallback);
-    } else {
-      updateRole(option);
-    }
-  };
-
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
+    updateRole(option);
   };
 
   const type = getUserType(user);
-  const role = getUserRole(user, userRole?.type);
-
-  const typeLabel =
-    (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
-      ? getUserTypeLabel(userRole?.type, t)
-      : getUserTypeLabel(type, t);
-
-  const getTooltipContent = () => (
-    <div>
-      <Text fontSize="14px" fontWeight={600} noSelect truncate>
-        {decode(user.displayName)}
-      </Text>
-      <Text
-        className="label"
-        fontWeight={400}
-        fontSize="12px"
-        noSelect
-        truncate
-        color="#A3A9AE !important"
-        dir="auto"
-      >
-        {`${typeLabel} | ${user.email}`}
-      </Text>
-    </div>
-  );
+  const typeLabel = getUserTypeTranslation(type, t);
 
   const onOpenGroup = (group) => {
     setEditMembersGroup(group);
@@ -310,7 +273,7 @@ const User = ({
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
       <Avatar
-        role={role}
+        role={type}
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}
@@ -354,9 +317,8 @@ const User = ({
               className="label"
               fontWeight={400}
               fontSize="12px"
-              noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.infoPanel.members.subtitleColor}
               dir="auto"
             >
               {`${typeLabel} | ${user.email}`}
@@ -413,7 +375,7 @@ export default inject(
       setMembersFilter,
     } = filesStore;
 
-    const { changeType: changeUserType } = peopleStore;
+    const { changeType: changeUserType } = peopleStore.usersStore;
 
     const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
       dialogsStore;

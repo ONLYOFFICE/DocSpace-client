@@ -127,7 +127,7 @@ const PublicRoom = (props) => {
   );
 };
 
-export default inject(
+export const WrappedComponent = inject(
   ({
     settingsStore,
     publicRoomStore,

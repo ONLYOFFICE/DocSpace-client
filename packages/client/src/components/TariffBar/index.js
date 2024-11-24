@@ -47,7 +47,7 @@ const StyledWrapper = styled.div`
   }
 
   .hidden {
-    visibility: hidden;
+    display: none;
   }
 `;
 

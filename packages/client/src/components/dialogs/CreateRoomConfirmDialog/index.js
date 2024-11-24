@@ -29,6 +29,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
+import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomConfirmDialog = ({
   t,
@@ -38,6 +39,7 @@ const CreateRoomConfirmDialog = ({
 
   confirmDialogIsLoading,
   onCreateRoom,
+  selectedRoomType,
 }) => {
   const onContinue = async () => {
     await onCreateRoom(true);
@@ -45,6 +47,10 @@ const CreateRoomConfirmDialog = ({
   };
 
   const onClose = () => setVisible(false);
+  const bodyText =
+    selectedRoomType === RoomsType.VirtualDataRoom
+      ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")
+      : t("CreateEditRoomDialog:CreateRoomConfirmation");
 
   return (
     <ModalDialog
@@ -54,9 +60,7 @@ const CreateRoomConfirmDialog = ({
       zIndex={310}
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        {t("CreateEditRoomDialog:CreateRoomConfirmation")}
-      </ModalDialog.Body>
+      <ModalDialog.Body>{bodyText}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           label={t("Common:ContinueButton")}
@@ -81,7 +85,8 @@ export default inject(({ dialogsStore, createEditRoomStore }) => {
     setCreateRoomConfirmDialogVisible: setVisible,
   } = dialogsStore;
 
-  const { confirmDialogIsLoading, onCreateRoom } = createEditRoomStore;
+  const { confirmDialogIsLoading, onCreateRoom, selectedRoomType } =
+    createEditRoomStore;
 
   return {
     visible,
@@ -89,5 +94,6 @@ export default inject(({ dialogsStore, createEditRoomStore }) => {
 
     confirmDialogIsLoading,
     onCreateRoom,
+    selectedRoomType,
   };
 })(withTranslation(["Common", "Files"])(observer(CreateRoomConfirmDialog)));

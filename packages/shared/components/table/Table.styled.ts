@@ -25,13 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
-import {
-  mobile,
-  tablet,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "../../utils";
+import { Base, globalColors } from "../../themes";
+import { mobile, tablet } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
 import { ColorTheme } from "../color-theme";
@@ -59,18 +54,19 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     min-width: 10%;
   }
 
+  .indexing-separator {
+    background-color: ${(props) =>
+      props.theme.tableContainer.indexingSeparator};
+  }
+
   .resize-handle {
     display: block;
     cursor: ew-resize;
     height: 10px;
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("14px 0px 0 auto", theme.interfaceDirection)};
+    margin-block: 14px 0;
+    margin-inline: auto 0;
     z-index: 1;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `border-left: ${theme.tableContainer.borderRight};`
-        : `border-right: ${theme.tableContainer.borderRight};`}
+    border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
 
     &:hover {
       border-color: ${(props) => props.theme.tableContainer.hoverBorderColor};
@@ -88,10 +84,7 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
       props.theme.tableContainer.header.borderImageSource};
     border-top: 0;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `border-right: 0;`
-        : `border-left: 0;`}
+    border-inline-start: 0;
   }
 
   @media (hover: hover) {
@@ -152,8 +145,8 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
   border-bottom: ${(props) =>
     props.theme.tableContainer.groupMenu.borderBottom};
   box-shadow: ${(props) => props.theme.tableContainer.groupMenu.boxShadow};
-  border-radius: ${({ theme }) =>
-    getCorrectBorderRadius("0px 0px 6px 6px", theme.interfaceDirection)};
+  border-end-end-radius: 6px;
+  border-end-start-radius: 6px;
 
   display: flex;
   flex-direction: row;
@@ -166,39 +159,45 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
 
   margin: 0;
 
-  .table-container_group-menu-checkbox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 28px;
-            ${props.checkboxMargin && `margin-right: ${props.checkboxMargin};`}
-          `
-        : css`
-            margin-left: 28px;
-            ${props.checkboxMargin && `margin-left: ${props.checkboxMargin};`}
-          `}
+  .table-header_icon {
+    display: flex;
 
-    @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 24px;
-            `
-          : css`
-              margin-left: 24px;
-            `}
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: auto 20px;
+    height: 100%;
+    width: auto;
+
+    padding-inline-start: 20px;
+    padding-inline-end: 0;
+
+    .table-header_icon-button {
+      margin-inline-end: 8px;
     }
   }
 
+  .table-container_label-element,
+  .table-container_group-menu-checkbox {
+    margin-inline-start: ${({ checkboxMargin }) => checkboxMargin ?? "28px"};
+
+    @media ${tablet} {
+      margin-inline-start: 24px;
+    }
+  }
+
+  .table-container_label-element {
+    white-space: nowrap;
+  }
+
   .table-container_group-menu-separator {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `border-left: ${props.theme.tableContainer.groupMenu.borderRight};`
-        : `border-right: ${props.theme.tableContainer.groupMenu.borderRight};`}
+    border-inline-end: ${({ theme }) =>
+      theme.tableContainer.groupMenu.borderRight};
     width: 1px;
     height: 21px;
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 16px 0 20px", theme.interfaceDirection)};
+    margin-block: 0;
+    margin-inline: 20px 16px;
 
     @media ${tablet} {
       height: 36px;
@@ -210,23 +209,20 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
   }
 
   .table-container_group-menu_button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
   }
 
   .table-container_group-menu-combobox {
     height: 24px;
     width: 16px;
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("7px 2px 0px 9px", theme.interfaceDirection)};
+    margin-block: 7px 0;
+    margin-inline: 9px 2px;
     background: transparent;
 
     .combo-button {
       .combo-buttons_arrow-icon {
-        margin: ${({ theme }) =>
-          getCorrectFourValuesStyle("1px 16px 0 0", theme.interfaceDirection)};
+        margin-block: 1px 0;
+        margin-inline: 0 16px;
       }
     }
   }
@@ -241,20 +237,6 @@ StyledTableGroupMenu.defaultProps = { theme: Base };
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
   isInfoPanelVisible?: boolean;
 }>`
-  display: flex;
-
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 20px 0 auto", theme.interfaceDirection)};
-  height: 100%;
-  width: auto;
-
-  .info-panel-toggle {
-    margin-inline-end: 8px;
-  }
-
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -271,19 +253,10 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
       }
     `}
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `
-      padding-right: 20px;
-      padding-left: 0;`
-      : `
-      padding-left: 20px;
-      padding-right: 0;`}
-
   @media ${tablet} {
     display: none;
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 16px 0 auto", theme.interfaceDirection)};
+    margin-block: 0;
+    margin-inline: auto 16px;
   }
 
   margin-top: 1px;
@@ -316,9 +289,7 @@ const StyledTableHeader = styled.div<{
 
   .table-container_header-checkbox {
     ${(props) =>
-      props.checkboxMargin && props.interfaceDirection === "rtl"
-        ? `margin-right: ${props.checkboxMargin}`
-        : `margin-left: ${props.checkboxMargin}`}
+      props.checkboxMargin && `margin-inline-start: ${props.checkboxMargin};`}
   }
 
   .table-container_header-cell {
@@ -334,14 +305,15 @@ const StyledTableHeaderCell = styled.div<{
   showIcon?: boolean;
   sortingVisible?: boolean;
   isActive?: boolean;
+  isShort?: boolean;
   sorted?: boolean;
 }>`
   cursor: ${(props) =>
     props.showIcon && props.sortingVisible ? "pointer" : "default"};
 
   .header-container-text-icon {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("13px 0 0 4px", theme.interfaceDirection)};
+    padding-block: 13px 0;
+    padding-inline: 4px 0;
 
     display: ${(props) =>
       props.isActive && props.showIcon ? "block" : "none"};
@@ -349,10 +321,8 @@ const StyledTableHeaderCell = styled.div<{
       !props.sorted &&
       css`
         transform: scale(1, -1);
-        padding: ${getCorrectFourValuesStyle(
-          "14px 0 14px 4px",
-          props.theme.interfaceDirection,
-        )};
+        padding-block: 14px;
+        padding-inline: 4px 0;
       `}
 
     svg {
@@ -360,9 +330,7 @@ const StyledTableHeaderCell = styled.div<{
       height: 12px;
       path {
         fill: ${(props) =>
-          props.isActive
-            ? props.theme.tableContainer.header.activeIconColor
-            : props.theme.tableContainer.header.iconColor} !important;
+          props.theme.tableContainer.header.iconColor} !important;
       }
     }
 
@@ -388,10 +356,13 @@ const StyledTableHeaderCell = styled.div<{
     display: grid;
     grid-template-columns: 1fr 22px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    ${(isShort) =>
+      isShort &&
+      css`
+        grid-template-columns: 1fr 12px;
+      `};
+
+    margin-inline-end: 8px;
 
     user-select: none;
   }
@@ -410,10 +381,7 @@ const StyledTableHeaderCell = styled.div<{
     overflow: hidden;
     text-overflow: ellipsis;
 
-    color: ${(props) =>
-      props.isActive
-        ? props.theme.tableContainer.header.activeTextColor
-        : props.theme.tableContainer.header.textColor};
+    color: ${(props) => props.theme.tableContainer.header.textColor};
 
     ${(props) =>
       props.showIcon &&
@@ -447,8 +415,31 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{ dragging?: boolean }>`
+const StyledTableRow = styled.div<{
+  dragging?: boolean;
+  isIndexEditingMode?: boolean;
+  isActive?: boolean;
+  checked?: boolean;
+}>`
   display: contents;
+
+  @media (hover: hover) {
+    .create-share-link {
+      display: none;
+    }
+
+    &:hover .create-share-link {
+      display: block;
+    }
+
+    ${({ isActive, checked }) =>
+      (isActive || checked) &&
+      css`
+        .create-share-link {
+          display: block;
+        }
+      `}
+  }
 
   .table-container_header-checkbox {
     svg {
@@ -462,7 +453,7 @@ const StyledTableRow = styled.div<{ dragging?: boolean }>`
 
   .droppable-hover {
     background: ${(props) =>
-      props.dragging
+      props.dragging && !props.isIndexEditingMode
         ? `${props.theme.dragAndDrop.acceptBackground} !important`
         : "none"};
   }
@@ -482,11 +473,6 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
   display: flex;
   align-items: center;
 
-  /* ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-left: 30px;`
-      : `padding-right: 30px;`} */
-
   .react-svg-icon svg {
     margin-top: 2px;
   }
@@ -498,10 +484,7 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
     display: ${(props) => (props.checked ? "flex" : "none")};
     padding: 16px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: -4px;`
-        : `margin-left: -4px;`}
+    margin-inline-start: -4px;
   }
 
   ${(props) =>
@@ -523,12 +506,12 @@ StyledTableCell.defaultProps = {
 };
 
 const StyledTableSettings = styled.div`
-  margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("14px 2px 0px 0px", theme.interfaceDirection)};
+  margin-block: 14px 0px;
+  margin-inline: 0 2px;
   display: inline-block;
   position: relative;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .table-container_settings-checkbox {
     padding: 8px 16px;

@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const ORANGE = "#F97A0B";
-const RED = "#F2665A";
+import { globalColors } from "@docspace/shared/themes";
+
+const ORANGE = globalColors.mainOrange;
+const RED = globalColors.mainRed;
 
 export const getSaasBar = (
   t,
@@ -34,12 +36,9 @@ export const getSaasBar = (
   isFreeTariff,
   isGracePeriod,
 ) => {
-  if (
-    isPaymentPageAvailable &&
-    !isNonProfit &&
-    (isFreeTariff || isGracePeriod)
-  ) {
-    if (isFreeTariff) return { label: t("Common:TryBusiness"), color: ORANGE };
+  if (isPaymentPageAvailable) {
+    if (isFreeTariff && !isNonProfit)
+      return { label: t("Common:TryBusiness"), color: ORANGE };
     if (isGracePeriod) return { label: t("Common:LatePayment"), color: RED };
   }
 };

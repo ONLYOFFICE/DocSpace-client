@@ -70,7 +70,6 @@ const ErrorFileUpload = ({
           <Text
             className="enter-password"
             fontWeight="600"
-            color="#A3A9AE"
             onClick={onTextClick}
           >
             {showPasswordInput ? t("HideInput") : t("EnterPassword")}

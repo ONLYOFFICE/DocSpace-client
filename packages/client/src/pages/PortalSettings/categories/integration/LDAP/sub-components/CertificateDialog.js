@@ -114,34 +114,34 @@ const CertificateDialog = ({
             </Text>
           </Box>
           <Box className="ldap-settings-crt-details">
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsSerialNumber")}: {cerficateIssue.serialNumber}
             </Text>
 
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsIssuerName")}: {cerficateIssue.issuerName}
             </Text>
 
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsSubjectName")}: {cerficateIssue.subjectName}
             </Text>
 
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsValidFrom")}: {cerficateIssue.validFrom}
             </Text>
 
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsValidUntil")}: {cerficateIssue.validUntil}
             </Text>
 
-            <Text as="p" color="#A3A9AE">
+            <Text as="p">
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
           </Box>
           {hasError && (
             <Box>
-              {cerficateIssue.errors.map((err, index) => (
-                <Text color="#F24724" key={`err-${index}`}>
+              {cerficateIssue.errors.map((err) => (
+                <Text className="ldap-error-text" key={`err-${index}`}>
                   {mapError(err)}
                 </Text>
               ))}

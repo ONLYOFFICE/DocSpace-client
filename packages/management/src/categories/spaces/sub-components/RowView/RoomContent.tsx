@@ -24,28 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
 
 import { RowContent } from "@docspace/shared/components/row-content";
 import { Text } from "@docspace/shared/components/text";
-import { getConvertedSize } from "@docspace/shared/utils/common";
-import { mobile } from "@docspace/shared/utils";
-import { TPortals } from "SRC_DIR/types/spaces";
 
-const StyledRowContent = styled(RowContent)`
+import { getConvertedSize } from "@docspace/shared/utils/common";
+import { TTheme } from "@docspace/shared/themes";
+
+import { mobile } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+
+import { TPortals } from "SRC_DIR/types/spaces";
+import { useStore } from "SRC_DIR/store";
+
+const StyledRowContent = styled(RowContent)<{ isWizardCompleted: boolean }>`
   padding-bottom: 10px;
+
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
+  }
+
+  .user-container-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .arrow-icon > div,
+    .arrow-icon > div > svg {
+      width: 12px;
+      height: 12px;
+      path {
+        fill: ${(props) => props.theme.color};
+      }
+    }
+
+    ${(props) =>
+      !props.isWizardCompleted &&
+      css`
+        .domain-text {
+          color: ${({ theme }) => theme.management.textColor};
+        }
+      `}
   }
 
   .mainIcons {
     height: 20px;
   }
 
+  .mainIcons:empty {
+    height: 0px;
+  }
+
+  .spaces_row-current,
+  .complete-setup {
+    color: ${({ theme }) => theme.management.textColor};
+  }
+
   @media ${mobile} {
+    display: flex;
+    align-items: center;
+
     .row-main-container-wrapper {
       flex-direction: column;
     }
@@ -59,10 +104,14 @@ const StyledRowContent = styled(RowContent)`
 type TRoomContent = {
   item: TPortals;
   isCurrentPortal: boolean;
+  theme: TTheme;
 };
 
-export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
+export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
+  const { settingsStore } = useStore();
+
+  const { currentDeviceType } = settingsStore;
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
     item?.quotaUsage || {
@@ -72,42 +121,83 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
     };
   const { customQuota } = item;
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   const maxStorage = customQuota && getConvertedSize(t, customQuota);
   const usedStorage = getConvertedSize(t, usedSize);
 
   const storageSpace =
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
+  const protocol = window?.location?.protocol;
+
+  const onSpaceClick = () => {
+    if (isMobileView) {
+      window.open(`${protocol}//${item.domain}/`, "_blank");
+    }
+  };
+
+  const isWizardCompleted = item.wizardSettings.completed;
+
   return (
     <StyledRowContent
-      sectionWidth={"620px"}
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      isWizardCompleted={isWizardCompleted}
+      sectionWidth={620}
+      sideColor={theme?.management?.sideColor}
       className="spaces_row-content"
     >
-      <div className="user-container-wrapper">
-        <Text fontWeight={600} fontSize="14px" truncate={true}>
+      <div className="user-container-wrapper" onClick={onSpaceClick}>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          truncate={true}
+          className="domain-text"
+        >
           {`${item.domain}`}
         </Text>
+        {currentDeviceType === DeviceType.mobile && (
+          <ReactSVG src={ArrowIcon} className="arrow-icon" />
+        )}
       </div>
 
-      <Text
-        containerMinWidth="120px"
-        fontSize="14px"
-        fontWeight={600}
-        truncate={true}
-        color="#A3A9AE"
-        className="spaces_row-current"
-      >
-        {isCurrentPortal && t("CurrentSpace")}
-      </Text>
-      <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
-        {`${t("PortalStats", {
-          roomCount: roomsCount,
-          userCount: roomAdminCount + usersCount,
-          storageSpace,
-        })}`}
-      </Text>
+      {isCurrentPortal ? (
+        <Text
+          fontSize="14px"
+          fontWeight={600}
+          truncate={true}
+          className="spaces_row-current"
+        >
+          {t("CurrentSpace")}
+        </Text>
+      ) : !isWizardCompleted && isMobileView ? (
+        <Text
+          fontSize="12px"
+          fontWeight={600}
+          truncate={true}
+          className="complete-setup"
+        >
+          {t("CompleteSetup")}
+        </Text>
+      ) : null}
+
+      {isWizardCompleted ? (
+        <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
+          {`${t("PortalStats", {
+            roomCount: roomsCount,
+            userCount: roomAdminCount + usersCount,
+            storageSpace,
+          })}`}
+        </Text>
+      ) : (
+        <Text
+          fontSize="12px"
+          fontWeight={600}
+          truncate={true}
+          className="complete-setup"
+        >
+          {t("CompleteSetup")}
+        </Text>
+      )}
     </StyledRowContent>
   );
 };

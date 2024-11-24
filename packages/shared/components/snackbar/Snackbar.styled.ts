@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { Box } from "../box";
 import { tablet } from "../../utils";
+import { globalColors } from "../../themes";
 
 const StyledIframe = styled.iframe<{ sectionWidth: number }>`
   border: none;
@@ -107,20 +108,15 @@ const StyledSnackBar = styled(Box)<{
     display: inline-block;
     border: none;
     font-size: inherit;
-    color: "#333";
-    margin: 0px 4px 4px 24px;
+    color: ${globalColors.black};
+    margin-block: 0 4px;
+    margin-inline: 24px 4px;
 
     padding: 0;
 
     min-width: min-content;
     cursor: pointer;
-    margin-left: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 12px;
-        margin-left: 4px;
-      `}
+    margin-inline-start: 12px;
     text-decoration: underline;
   }
 
@@ -128,7 +124,7 @@ const StyledSnackBar = styled(Box)<{
     background: inherit;
     border: none;
     font-size: 13px;
-    color: "#000";
+    color: ${globalColors.darkBlack};
     cursor: pointer;
     line-height: 14px;
 
@@ -138,16 +134,18 @@ const StyledSnackBar = styled(Box)<{
 
 const StyledAction = styled.div`
   position: absolute;
+  // doesn't require mirroring for RTL
   right: 8px;
   top: 8px;
   background: inherit;
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: "#333";
+  color: ${globalColors.black};
   cursor: pointer;
   text-decoration: underline;
   @media ${tablet} {
+    // doesn't require mirroring for RTL
     right: 14px;
   }
 `;

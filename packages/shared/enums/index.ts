@@ -24,6 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const enum ScopeType {
+  read = "read",
+  write = "write",
+  openid = "openid",
+}
+
+export const enum ScopeGroup {
+  files = "files",
+  accounts = "accounts",
+  contacts = "contacts",
+  profiles = "profiles",
+  rooms = "rooms",
+  openid = "openid",
+}
+
+export const enum AuthenticationMethod {
+  none = "none",
+  "client_secret_post" = "client_secret_post",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly
@@ -48,15 +68,11 @@ export const enum EmployeeStatus {
  * @readonly
  */
 export const enum EmployeeType {
-  User = 1,
+  RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
-  Collaborator = 4,
-  UserString = "user",
-  RoomAdmin = "manager",
-  PortalAdmin = "admin",
-  Owner = "Owner",
-  CollaboratorString = "collaborator",
+  User = 4,
+  Owner = "owner",
 }
 /**
  * Enum for user payments type.
@@ -228,11 +244,12 @@ export const enum FolderType {
   ReadOnlyRoom = 18,
   CustomRoom = 19,
   Archive = 20,
-
+  PublicRoom = 22,
   Done = 25,
   InProgress = 26,
   SubFolderDone = 27,
   SubFolderInProgress = 28,
+  VirtualDataRoom = 29,
 }
 
 export const enum ShareAccessRights {
@@ -422,6 +439,12 @@ export const enum FilterGroups {
   filterGroup = "filter-group",
   groupsFilterMember = "filter-group-member",
   groupsFilterManager = "filter-group-manager",
+
+  filterLoginType = "filter-login-type",
+  filterStatus = "filter-status",
+  filterAccount = "filter-account",
+  filterOther = "filter-other",
+  filterInviter = "filter-inviter",
 }
 
 export const enum FilterKeys {
@@ -461,7 +484,8 @@ export const enum ParseErrorTypes {
 }
 
 export const enum ButtonKeys {
-  enter = "enter",
+  enter = "Enter",
+  numpadEnter = "NumpadEnter",
   esc = "Escape",
   tab = "Tab",
 }
@@ -487,6 +511,7 @@ export enum RoomsType {
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
+  VirtualDataRoom = 8,
   CustomRoom = 5,
 }
 
@@ -555,9 +580,27 @@ export const enum EditorConfigErrorType {
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
 
+/**
+ * Enum for watermarks.
+ * @readonly
+ */
+export const enum WatermarkAdditions {
+  UserName = 1,
+  UserEmail = 2,
+  UserIpAdress = 4,
+  CurrentDate = 8,
+  RoomName = 16,
+}
+
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
+}
+
+export const enum VDRIndexingAction {
+  HigherIndex = "HigherIndex",
+  LowerIndex = "LowerIndex",
+  MoveIndex = "MoveIndex",
 }
 
 export const enum LDAPOperation {
@@ -583,6 +626,14 @@ export const enum LDAPCertificateProblem {
   CertWrongUsage = -2146762480,
   CertUntrustedCa = -2146762478,
   CertUnrecognizedError = -2146762477,
+}
+
+export const enum ExportRoomIndexTaskStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
 }
 
 export enum FileExtensions {

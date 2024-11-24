@@ -39,6 +39,7 @@ export interface ArticleHeaderProps {
   showText: boolean;
   children: React.ReactNode;
   onClick?: () => void;
+  onIconClick: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;
@@ -105,7 +106,6 @@ export interface ArticleProps {
   setArticleOpen: (value: boolean) => void;
   withSendAgain: boolean;
   mainBarVisible: boolean;
-  isBannerVisible: boolean;
 
   isLiveChatAvailable: boolean;
   isShowLiveChat: boolean;
@@ -143,5 +143,4 @@ export interface ArticleProps {
   standalone?: boolean;
   currentTariffPlanTitle?: string;
   trialDaysLeft?: number;
-  organizationName: string;
 }

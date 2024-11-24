@@ -45,7 +45,7 @@ let requestsCount = 0;
 
 let timerId: ReturnType<typeof setInterval> | null;
 
-const PreparationPortal = (props: IPreparationPortal) => {
+export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, style, isDialog } = props;
 
   const { t } = useTranslation(["PreparationPortal", "Common"]);
@@ -167,5 +167,3 @@ const PreparationPortal = (props: IPreparationPortal) => {
     </StyledPreparationPortal>
   );
 };
-
-export default PreparationPortal;

@@ -24,19 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { StyledDeleteLinkDialog } from "./StyledDeleteLinkDialog";
-
 import { withTranslation } from "react-i18next";
-
-import { inject, observer } from "mobx-react";
-import { RoomsType } from "@docspace/shared/enums";
+import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -49,6 +45,8 @@ const DeleteLinkDialogComponent = (props) => {
     deleteExternalLink,
     editExternalLink,
     isPublicRoomType,
+    isFormRoom,
+    isCustomRoom,
     setRoomShared,
   } = props;
 
@@ -86,32 +84,52 @@ const DeleteLinkDialogComponent = (props) => {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
-      .catch((err) => toastr.error(err?.message))
+      .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
         setIsLoading(false);
         onClose();
       });
   };
 
+  const getDescription = () => {
+    if (link.sharedTo.primary) {
+      if (isCustomRoom) return t("Files:RevokeSharedLinkDescriptionCustomRoom");
+
+      if (isFormRoom) return t("Files:RevokeSharedLinkDescriptionFormRoom");
+
+      if (isPublicRoomType)
+        return t("Files:RevokeSharedLinkDescriptionPublicRoom");
+    }
+
+    if (isPublicRoomType || isCustomRoom)
+      return t("Files:DeleteSharedCustomPublic");
+
+    return t("Files:DeleteSharedLink");
+  };
+
+  console.debug({
+    primary: link.sharedTo.primary,
+    isPublicRoomType,
+  });
+
   return (
-    <StyledDeleteLinkDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
         {link.sharedTo.primary && isPublicRoomType
           ? t("Files:RevokeLink")
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="modal-dialog-content-body">
-          <Text noSelect>
-            {link.sharedTo.primary && isPublicRoomType
-              ? t("Files:DeleteSharedLink")
-              : t("Files:DeleteLinkNote")}
+        <DeleteLinkDialogContainer className="modal-dialog-content-body">
+          <Text lineHeight="20px" noSelect>
+            {getDescription()}
           </Text>
-        </div>
+          {link.sharedTo.primary && (
+            <Text lineHeight="20px" noSelect>
+              {t("Files:ActionCannotUndone")}
+            </Text>
+          )}
+        </DeleteLinkDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -138,7 +156,7 @@ const DeleteLinkDialogComponent = (props) => {
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledDeleteLinkDialog>
+    </ModalDialog>
   );
 };
 
@@ -153,6 +171,7 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     linkParams,
   } = dialogsStore;
   const { editExternalLink, deleteExternalLink } = publicRoomStore;
+  const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
     visible,
@@ -161,6 +180,8 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     link: linkParams.link,
     editExternalLink,
     deleteExternalLink,
+    isFormRoom,
+    isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
   };

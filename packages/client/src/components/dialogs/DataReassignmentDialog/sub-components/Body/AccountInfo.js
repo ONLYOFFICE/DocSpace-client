@@ -29,16 +29,16 @@ import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 
-import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 import { commonIconsStyles } from "@docspace/shared/utils";
 import capitalize from "lodash/capitalize";
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {
-    fill: #f21c0e;
+    fill: ${(props) => props.theme.dialogs.errorText};
   }
-  padding-left: 8px;
+  padding-inline-start: 8px;
 `;
 
 const AccountInfo = ({ user }) => {

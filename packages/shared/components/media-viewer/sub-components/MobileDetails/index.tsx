@@ -33,12 +33,13 @@ import {
   TContextMenuRef,
 } from "@docspace/shared/components/context-menu";
 
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 
 import { StyledMobileDetails } from "../../MediaViewer.styled";
 
 import type MobileDetailsProps from "./MobileDetails.props";
+import { globalColors } from "../../../../themes";
 
 const MobileDetails = memo(
   forwardRef(
@@ -69,7 +70,7 @@ const MobileDetails = memo(
           {!isPublicFile && (
             <BackArrow className="mobile-close" onClick={onMaskClick} />
           )}
-          <Text fontSize="14px" color="#fff" className="title">
+          <Text fontSize="14px" color={globalColors.white} className="title">
             {title}
           </Text>
           {!isPreviewFile && !isError && (

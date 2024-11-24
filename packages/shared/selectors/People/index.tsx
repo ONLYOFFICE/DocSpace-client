@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -32,99 +32,147 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
-import { Selector } from "../../components/selector";
+import { Selector, SelectorAccessRightsMode } from "../../components/selector";
 import {
+  TSelectorAccessRights,
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
   TSelectorInfo,
   TSelectorItem,
   TSelectorSearch,
+  TSelectorTabs,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
-import { EmployeeStatus } from "../../enums";
+import { AccountsSearchArea, EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
-import { getUserRole } from "../../utils/common";
+import { getUserAvatarRoleByType, getUserType } from "../../utils/common";
 import Filter from "../../api/people/filter";
-import { getUserList } from "../../api/people";
+import { getMembersList, getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
+import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
-import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
+import { Box } from "../../components/box";
+import { globalColors } from "../../themes";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
+import { StyledSendClockIcon } from "./PeopleSelector.styled";
+
+const PEOPLE_TAB_ID = "0";
+const GROUP_TAB_ID = "1";
+const GUESTS_TAB_ID = "2";
 
 const toListItem = (
-  item: TUser,
+  item: TUser | TGroup,
   t: TTranslation,
   disableDisabledUsers?: boolean,
   disableInvitedUsers?: string[],
-) => {
+  isRoom?: boolean,
+  checkIfUserInvited?: (user: TUser) => void,
+): TSelectorItem => {
+  if ("displayName" in item) {
+    const {
+      id: userId,
+      email,
+      avatar,
+      displayName,
+      hasAvatar,
+      isOwner,
+      isAdmin,
+      isVisitor,
+      isCollaborator,
+      isRoomAdmin,
+      status,
+      shared,
+      groups,
+      access,
+    } = item;
+
+    const role = getUserType(item);
+
+    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+    const isInvited = checkIfUserInvited
+      ? checkIfUserInvited(item)
+      : disableInvitedUsers?.includes(userId) || (isRoom && shared);
+
+    const isDisabled =
+      disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+    const disabledText = isInvited
+      ? t("Common:Invited")
+      : isDisabled
+        ? t("Common:Disabled")
+        : "";
+
+    const avatarRole = getUserAvatarRoleByType(role);
+
+    const i: TSelectorItem = {
+      id: userId,
+      email,
+      avatar: userAvatar,
+      label: displayName || email,
+      displayName: displayName || email,
+      role: avatarRole,
+      userType: role,
+      isOwner,
+      isAdmin,
+      isVisitor,
+      isCollaborator,
+      isRoomAdmin,
+      hasAvatar,
+      isDisabled: isInvited || isDisabled,
+      disabledText,
+      status,
+      groups,
+      access,
+    };
+
+    return i;
+  }
+
   const {
-    id: userId,
-    email,
-    avatar,
-    displayName,
-    hasAvatar,
-    isOwner,
-    isAdmin,
-    isVisitor,
-    isCollaborator,
-    isRoomAdmin,
-    status,
+    id,
+
+    name: groupName,
+    shared,
   } = item;
 
-  const role = getUserRole(item);
+  const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
+  const disabledText = isInvited ? t("Common:Invited") : "";
 
-  const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
-
-  const isInvited = disableInvitedUsers?.includes(userId);
-  const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
-
-  const disabledText = isInvited
-    ? t("Common:Invited")
-    : isDisabled
-      ? t("Common:Disabled")
-      : "";
-
-  const i: TSelectorItem = {
-    id: userId,
-    email,
-    avatar: userAvatar,
-    label: displayName || email,
-    role: AvatarRole[role],
-    isOwner,
-    isAdmin,
-    isVisitor,
-    isCollaborator,
-    isRoomAdmin,
-    hasAvatar,
-    isDisabled: isInvited || isDisabled,
+  return {
+    id,
+    name: groupName,
+    isGroup: true,
+    label: groupName,
     disabledText,
+    isDisabled: isInvited,
   };
-
-  return i;
 };
 
 const PeopleSelector = ({
   submitButtonLabel,
   submitButtonId,
-  onSubmit,
   disableSubmitButton,
+  onSubmit,
 
   id,
   className,
   style,
 
+  withCancelButton,
   cancelButtonLabel,
   onCancel,
-  withCancelButton,
 
   filter,
+
   excludeItems,
-  currentUserId,
-  withOutCurrentAuthorizedUser,
 
   filterUserId,
+  currentUserId,
+  withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
   footerCheckboxLabel,
@@ -142,10 +190,35 @@ const PeopleSelector = ({
 
   emptyScreenHeader,
   emptyScreenDescription,
+
+  roomId,
+
+  checkIfUserInvited,
+
+  withGroups,
+  isGroupsOnly,
+
+  withGuests,
+  isGuestsOnly,
+
+  withAccessRights,
+  accessRights,
+  selectedAccessRight,
+  onAccessRightsChange,
+  accessRightsMode,
+
+  useAside,
+  onClose,
+  withoutBackground,
+  withBlur,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
   const theme = useTheme();
+
+  const [activeTabId, setActiveTabId] = useState<string>(
+    isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
+  );
 
   const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
   const [searchValue, setSearchValue] = useState("");
@@ -156,6 +229,7 @@ const PeopleSelector = ({
   const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
+  const searchTab = useRef(PEOPLE_TAB_ID);
 
   const onSelect = (
     item: TSelectorItem,
@@ -202,19 +276,43 @@ const PeopleSelector = ({
 
   const loadNextPage = useCallback(
     async (startIndex: number) => {
+      if (searchTab.current !== activeTabId && searchValue) {
+        setSearchValue("");
+        searchTab.current = activeTabId;
+        return;
+      }
       const pageCount = 100;
 
       setIsNextPageLoading(true);
 
-      const currentFilter =
-        typeof filter === "function" ? filter() : filter ?? Filter.getDefault();
+      let searchArea = AccountsSearchArea.People;
+
+      if (withGroups || withGuests) {
+        searchArea =
+          activeTabId !== GROUP_TAB_ID
+            ? AccountsSearchArea.People
+            : AccountsSearchArea.Groups;
+      }
+
+      const currentFilter: Filter =
+        typeof filter === "function"
+          ? filter()
+          : (filter ?? Filter.getDefault());
 
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
 
-      currentFilter.search = searchValue || null;
+      currentFilter.search = searchValue || "";
 
-      const response = await getUserList(currentFilter);
+      if (activeTabId === GUESTS_TAB_ID) {
+        currentFilter.area = "guests";
+      } else if (activeTabId === PEOPLE_TAB_ID) {
+        currentFilter.area = "people";
+      }
+
+      const response = !roomId
+        ? await getUserList(currentFilter)
+        : await getMembersList(searchArea, roomId, currentFilter);
 
       let totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
@@ -227,7 +325,14 @@ const PeopleSelector = ({
           return true;
         })
         .map((item) =>
-          toListItem(item, t, disableDisabledUsers, disableInvitedUsers),
+          toListItem(
+            item,
+            t,
+            disableDisabledUsers,
+            disableInvitedUsers,
+            !!roomId,
+            checkIfUserInvited,
+          ),
         );
 
       const newTotal = withOutCurrentAuthorizedUser
@@ -262,28 +367,39 @@ const PeopleSelector = ({
       isFirstLoadRef.current = false;
     },
     [
+      activeTabId,
+      checkIfUserInvited,
       disableDisabledUsers,
       disableInvitedUsers,
       excludeItems,
       filter,
       moveCurrentUserToTopOfList,
       removeCurrentUserFromList,
+      roomId,
       searchValue,
       t,
+      withGroups,
+      withGuests,
       withOutCurrentAuthorizedUser,
     ],
   );
 
-  const onSearch = useCallback((value: string, callback?: Function) => {
-    isFirstLoadRef.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return value;
-    });
-    callback?.();
-  }, []);
+  const onSearch = useCallback(
+    (value: string, callback?: VoidFunction) => {
+      isFirstLoadRef.current = true;
+      afterSearch.current = true;
 
-  const onClearSearch = useCallback((callback?: Function) => {
+      searchTab.current = activeTabId;
+
+      setSearchValue(() => {
+        return value;
+      });
+      callback?.();
+    },
+    [activeTabId],
+  );
+
+  const onClearSearch = useCallback((callback?: VoidFunction) => {
     isFirstLoadRef.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -301,7 +417,7 @@ const PeopleSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
+          headerLabel: headerProps.headerLabel || t("Common:Contacts"),
         },
       }
     : ({} as TSelectorHeader);
@@ -345,19 +461,25 @@ const PeopleSelector = ({
     userType?: string,
     email?: string,
     isGroup?: boolean,
+    status?: EmployeeStatus,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize="14px"
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {label}
-        </Text>
+      <div
+        style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+      >
+        <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize="14px"
+            noSelect
+            truncate
+            dir="auto"
+          >
+            {label}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
         {!isGroup && (
           <div style={{ display: "flex" }}>
             <Text
@@ -366,7 +488,7 @@ const PeopleSelector = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={globalColors.gray}
               dir="auto"
             >
               {`${userType} | ${email}`}
@@ -377,41 +499,131 @@ const PeopleSelector = ({
     );
   };
 
+  const changeActiveTab = useCallback(
+    (tab: number | string) => {
+      setActiveTabId(`${tab}`);
+      onSearch("");
+      isFirstLoadRef.current = true;
+    },
+    [onSearch],
+  );
+
+  const withTabsProps: TSelectorTabs =
+    (withGroups || withGuests) && !isGroupsOnly && !isGuestsOnly
+      ? {
+          withTabs: true,
+          tabsData: [
+            {
+              id: PEOPLE_TAB_ID,
+              name: t("Common:Members"),
+              onClick: () => changeActiveTab(PEOPLE_TAB_ID),
+              content: null,
+            },
+            ...[
+              withGroups && {
+                id: GROUP_TAB_ID,
+                name: t("Common:Groups"),
+                onClick: () => changeActiveTab(GROUP_TAB_ID),
+                content: null,
+              },
+            ],
+            ...[
+              withGuests && {
+                id: GUESTS_TAB_ID,
+                name: t("Common:Guests"),
+                onClick: () => changeActiveTab(GUESTS_TAB_ID),
+                content: null,
+              },
+            ],
+          ].filter((i) => !!i),
+          activeTabId,
+        }
+      : {};
+
+  const withAccessRightsProps: TSelectorAccessRights =
+    withAccessRights && isMultiSelect
+      ? {
+          withAccessRights: true,
+          accessRights,
+          selectedAccessRight,
+          onAccessRightsChange,
+          accessRightsMode:
+            accessRightsMode ?? SelectorAccessRightsMode.Detailed,
+        }
+      : {};
+
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
+      {...headerSelectorProps}
+      {...searchSelectorProps}
+      {...checkboxSelectorProps}
+      {...cancelButtonSelectorProps}
+      {...infoProps}
+      {...withTabsProps}
+      {...withAccessRightsProps}
+      {...withAside}
       id={id}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
-      {...headerSelectorProps}
-      {...searchSelectorProps}
-      {...checkboxSelectorProps}
-      {...cancelButtonSelectorProps}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenHeader={
+        emptyScreenHeader ??
+        (activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuests")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:EmptyHeader")
+            : t("Common:NotFoundGroups"))
+      }
       emptyScreenDescription={
         emptyScreenDescription ??
-        t("Common:EmptyDescription", { productName: t("Common:ProductName") })
+        (activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuestsDescription")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:EmptyDescription", {
+                productName: t("Common:ProductName"),
+              })
+            : t("Common:GroupsNotFoundDescription"))
       }
       searchEmptyScreenImage={emptyScreenImage}
-      searchEmptyScreenHeader={t("Common:NotFoundUsers")}
-      searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
+      searchEmptyScreenHeader={
+        activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuestsFilter")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:NotFoundMembers")
+            : t("Common:NotFoundGroups")
+      }
+      searchEmptyScreenDescription={
+        activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundFilterGuestsDescription")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:NotFoundUsersDescription")
+            : t("Common:GroupsNotFoundDescription")
+      }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
       isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
       isLoading={isFirstLoadRef.current}
-      searchLoader={<SearchLoader />}
-      rowLoader={<RowLoader isUser isContainer={isFirstLoadRef.current} />}
+      rowLoader={
+        <RowLoader
+          isUser
+          isContainer={isFirstLoadRef.current}
+          isMultiSelect={isMultiSelect}
+        />
+      }
       onSelect={onSelect}
-      {...infoProps}
     />
   );
 };

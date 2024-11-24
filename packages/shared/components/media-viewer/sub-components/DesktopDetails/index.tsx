@@ -35,6 +35,7 @@ import { ControlBtn } from "../../MediaViewer.styled";
 
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
 import { DesktopDetailsContainer } from "./DesktopDetails.styled";
+import { globalColors } from "../../../../themes";
 
 export const DesktopDetails = ({
   onMaskClick,
@@ -51,7 +52,7 @@ export const DesktopDetails = ({
       {showCloseButton && (
         <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
           <IconButton
-            color="#fff"
+            color={globalColors.white}
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable

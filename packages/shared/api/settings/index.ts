@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, { AxiosRequestConfig } from "axios";
+
+import { Nullable } from "../../types";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { request } from "../client";
 import {
@@ -40,12 +42,17 @@ import {
   TVersionBuild,
   TMailDomainSettings,
   TIpRestriction,
+  TIpRestrictionSettings,
   TCookieSettings,
   TLoginSettings,
   TCapabilities,
   TThirdPartyProvider,
   TPaymentSettings,
   TGetSsoSettings,
+  TWorkspaceService,
+  TWorkspaceStatusResponse,
+  TMigrationData,
+  TSendWelcomeEmailData,
   TPortalCultures,
 } from "./types";
 
@@ -73,7 +80,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: Nullable<string> = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -136,12 +145,15 @@ export async function getIpRestrictions() {
   return res;
 }
 
-export async function setIpRestrictions(data) {
+export async function setIpRestrictions(data: {
+  IpRestrictions: string[];
+  enable: boolean;
+}) {
   const res = (await request({
     method: "put",
     url: "/settings/iprestrictions",
     data,
-  })) as TIpRestriction[];
+  })) as TIpRestrictionSettings;
 
   return res;
 }
@@ -150,16 +162,6 @@ export async function getIpRestrictionsEnable() {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
-  })) as { enable: boolean };
-
-  return res;
-}
-
-export async function setIpRestrictionsEnable(data) {
-  const res = (await request({
-    method: "put",
-    url: "/settings/iprestrictions/settings",
-    data,
   })) as { enable: boolean };
 
   return res;
@@ -217,6 +219,12 @@ export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
   });
 }
 
+export function deleteBruteForceProtection() {
+  return request({
+    method: "delete",
+    url: `settings/security/loginSettings`,
+  });
+}
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -531,7 +539,10 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(
+  ownerId: string,
+  confirmKey: Nullable<string> = null,
+) {
   const data = { ownerId };
 
   const options = {
@@ -565,17 +576,24 @@ export function setPortalOwner(
   timeZone,
   confirmKey,
   analytics,
+  amiId: string | null = null,
 ) {
+  const data = {
+    email,
+    PasswordHash: hash,
+    lng,
+    timeZone,
+    analytics,
+  };
+
+  if (amiId) {
+    data.amiId = amiId;
+  }
+
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
-    data: {
-      email,
-      PasswordHash: hash,
-      lng,
-      timeZone,
-      analytics,
-    },
+    data,
   };
 
   if (confirmKey) {
@@ -711,7 +729,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   const data = {
     code,
   };
@@ -1075,28 +1093,30 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function migrationList() {
-  return request({
+export async function migrationList() {
+  const res = (await request({
     method: "get",
     url: `/migration/list`,
-  });
+  })) as TWorkspaceService[];
+  return res;
 }
 
-export function migrationName(name) {
+export function initMigration(name: TWorkspaceService) {
   return request({
     method: "post",
     url: `/migration/init/${name}`,
   });
 }
 
-export function migrationStatus() {
-  return request({
+export async function migrationStatus() {
+  const res = (await request({
     method: "get",
     url: `/migration/status`,
-  });
+  })) as TWorkspaceStatusResponse;
+  return res;
 }
 
-export function migrateFile(data) {
+export function migrateFile(data: TMigrationData) {
   return request({
     method: "post",
     url: `/migration/migrate`,
@@ -1135,11 +1155,13 @@ export function migrationClear() {
   });
 }
 
-export function migrationLog() {
-  return axios.get("/api/2.0/migration/logs");
+export async function migrationLog() {
+  const response = await axios.get("/api/2.0/migration/logs");
+  if (!response || !response.data) return null;
+  return response.data as string;
 }
 
-export function migrationFinish(data) {
+export function migrationFinish(data: TSendWelcomeEmailData) {
   return request({
     method: "post",
     url: `/migration/finish`,

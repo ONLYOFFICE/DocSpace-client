@@ -32,13 +32,20 @@ import { Scrollbar } from "./custom-scrollbar";
 import { Base } from "../../themes";
 import { mobile, desktop, tablet } from "../../utils";
 
-const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
+const StyledScrollbar = styled(Scrollbar)<{
+  $fixedSize?: boolean;
+  $paddingAfterLastItem?: string;
+}>`
   .scroller::-webkit-scrollbar {
     ${(isIOS || isIOS13 || isIPad13) && `display: none;`}
   }
 
   .scroll-body {
     padding-inline-end: ${(props) => props.theme.scrollbar.paddingInlineEnd};
+    ${({ $paddingAfterLastItem }) =>
+      $paddingAfterLastItem &&
+      `padding-bottom: ${$paddingAfterLastItem} !important;`}
+
     position: relative;
     outline: none;
     tab-index: -1;
@@ -92,6 +99,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     align-items: flex-end;
     direction: ltr;
 
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `left: unset !important; right: 0 !important;`

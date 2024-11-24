@@ -31,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -48,7 +48,7 @@ import { useParams } from "react-router-dom";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import Base from "@docspace/shared/themes/base";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -62,10 +62,8 @@ const HeaderContainer = styled.div`
   flex-wrap: wrap;
 
   @media ${mobile} {
-    margin-left: -14px;
-    padding-left: 14px;
-    margin-right: -14px;
-    padding-right: 14px;
+    margin-inline: -14px;
+    padding-inline: 14px;
   }
 
   .arrow-button {
@@ -103,7 +101,7 @@ const HeaderContainer = styled.div`
     margin-block: 0;
     margin-inline: -20px 0;
 
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     flex: 0 0 auto;
 
@@ -114,7 +112,7 @@ const HeaderContainer = styled.div`
       svg {
         path {
           fill: ${(props) =>
-            props.isDisabled ? "#d0d5da" : props.theme.color};
+            props.isDisabled ? globalColors.grayStrong : props.theme.color};
         }
       }
     }
@@ -245,11 +243,6 @@ const HistoryHeader = (props) => {
       <Headline type="content" truncate={true} className="headline">
         {t("InfoPanel:SubmenuHistory")}
       </Headline>
-      {/* <Hint
-        backgroundColor={theme.isBase ? "#F8F9F9" : "#3D3D3D"}
-        color={theme.isBase ? "#555F65" : "#FFFFFF"}>
-        {t("EventHint")}
-      </Hint> */}
     </>
   );
 

@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
+import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
@@ -57,8 +58,9 @@ const LoginSettings = (props) => {
     useState(false);
 
   useEffect(() => {
-    if (location?.state?.openBackupCodesDialog) {
+    if (sessionStorage.getItem(OPEN_BACKUP_CODES_DIALOG)) {
       setBackupCodesDialogVisible(true);
+      sessionStorage.removeItem(OPEN_BACKUP_CODES_DIALOG);
     }
   }, []);
 
@@ -68,7 +70,7 @@ const LoginSettings = (props) => {
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Settings:TwoFactorAuth")}
         </Text>
-        <Text color="#A3A9AE">{t("TwoFactorDescription")}</Text>
+        <Text className="description">{t("TwoFactorDescription")}</Text>
       </div>
       <div className="actions">
         <Button

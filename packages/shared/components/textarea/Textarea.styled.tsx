@@ -80,17 +80,6 @@ const StyledScrollbar = styled(ClearScrollbar)`
       }} + 2px
   ) !important;
 
-  textarea {
-    height: ${(props) => {
-      return props.heightScale
-        ? "65vh"
-        : props.isFullHeight
-          ? `${props.fullHeight}px`
-          : props.heightTextAreaProp
-            ? props.heightTextAreaProp
-            : "89px";
-    }};
-  }
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;
@@ -110,6 +99,7 @@ const ClearTextareaAutosize = React.forwardRef(
       isJSONField,
       enableCopy,
       heightTextArea,
+      minHeight,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
@@ -122,9 +112,18 @@ const ClearTextareaAutosize = React.forwardRef(
 ClearTextareaAutosize.displayName = "ClearTextareaAutosize";
 
 const StyledTextarea = styled(ClearTextareaAutosize).attrs(
-  ({ autoFocus, dir }: { autoFocus?: boolean; dir?: string }) => ({
+  ({
     autoFocus,
     dir,
+    minHeight,
+  }: {
+    autoFocus?: boolean;
+    dir?: string;
+    minHeight?: string;
+  }) => ({
+    autoFocus,
+    dir,
+    style: { minHeight },
   }),
 )`
   ${commonInputStyles};
@@ -142,10 +141,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
   overflow: ${(props) => (props.isJSONField ? "visible !important" : "hidden")};
   padding: 5px 8px 2px;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `padding-right: ${props.paddingLeftProp};`
-      : `padding-left: ${props.paddingLeftProp};`}
+  padding-inline-start: ${(props) => props.paddingLeftProp};
 
   font-size: ${(props) => `${props.fontSize}px`};
   font-family: ${(props) => props.theme.fontFamily};
@@ -189,6 +185,7 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
     user-select: none;
   }
 
+  // doesn't require mirroring for LTR
   ${({ theme }) =>
     theme.interfaceDirection === "rtl" &&
     `
@@ -223,10 +220,7 @@ const CopyIconWrapper = styled.div<{
   height: 20px;
   z-index: 2;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `left: ${props.isJSONField && props.heightScale ? "18px" : "10px"};`
-      : `right: ${props.isJSONField && props.heightScale ? "18px" : "10px"};`}
+  inset-inline-end: 18px;
   top: 6px;
 
   display: flex;
@@ -258,7 +252,7 @@ const Wrapper = styled.div<{
   }};
 
   .scroll-wrapper {
-    margin-right: ${(props) =>
+    margin-inline-end: ${(props) =>
       props.enableCopy ? (props.isJSONField ? "36px" : "8px") : "0"};
   }
 `;
@@ -271,10 +265,9 @@ const Numeration = styled.pre<{ fontSize: string }>`
   line-height: 1.5;
   margin: 0;
   top: 6px;
-  text-align: right;
+  text-align: end;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 18px;` : `left: 18px;`}
+  inset-inline-start: 18px;
   color: ${(props) => props.theme.textArea.numerationColor};
 
   -webkit-user-select: none; /* Safari */

@@ -47,24 +47,17 @@ const StyledDropDown = styled(DropDown)`
   top: ${(props) =>
     props.isBannerVisible && props.withPortal ? "134px" : "54px"} !important;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `left: 20px !important;`
-      : `right: 20px !important;`}
+  inset-inline-end: 20px !important;
 
   @media ${tablet} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `left: 16px !important;`
-        : `right: 16px !important;`}
+    inset-inline-end: 16px !important;
   }
 
   @media ${mobile} {
     position: fixed;
 
     top: unset !important;
-    right: 0 !important;
-    left: 0 !important;
+    inset-inline: 0 !important;
     bottom: 0 !important;
     width: 100vw;
 
@@ -79,8 +72,7 @@ const StyledControlContainer = styled.div`
   height: 24px;
   position: absolute;
   top: -34px;
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 10px;` : `right: 10px;`}
+  inset-inline-end: 10px;
   border-radius: 100px;
   cursor: pointer;
   display: none;
@@ -140,8 +132,6 @@ export const MenuContainer = styled.div`
   padding: 16px;
   cursor: default;
   box-sizing: border-box;
-
-  background: red;
 
   @media ${mobile} {
     max-width: 100vw;
@@ -263,8 +253,8 @@ ProfileMenu.propTypes = {
   clickOutsideAction: PropTypes.func,
 };
 
-export default inject(({ bannerStore }) => {
-  const { isBannerVisible } = bannerStore;
+export default inject(({ settingsStore }) => {
+  const { isBannerVisible } = settingsStore;
 
   return { isBannerVisible };
 })(observer(withTheme(ProfileMenu)));

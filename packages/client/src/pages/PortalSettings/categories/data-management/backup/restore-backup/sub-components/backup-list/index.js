@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -51,35 +52,33 @@ import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 
-const StyledModalDialog = styled(ModalDialog)`
-  .restore_footer {
-    width: 100%;
-    .restore_dialog-button {
-      display: flex;
-      button:first-child {
-        margin-right: 10px;
-        width: 50%;
-      }
-      button:last-child {
-        width: 50%;
-      }
+const StyledFooterContent = styled.div`
+  width: 100%;
+  .restore_dialog-button {
+    display: flex;
+    button:first-child {
+      margin-inline-end: 10px;
+      width: 50%;
     }
-    #backup-list_help {
-      display: flex;
-      background-color: ${(props) => props.theme.backgroundColor};
-      margin-bottom: 16px;
+    button:last-child {
+      width: 50%;
     }
+  }
+  #backup-list_help {
+    display: flex;
+    background-color: ${(props) => props.theme.backgroundColor};
+    margin-bottom: 16px;
+  }
 
-    .backup-list_agreement-text {
-      user-select: none;
-      div:first-child {
-        display: inline-block;
-      }
+  .backup-list_agreement-text {
+    user-select: none;
+    div:first-child {
+      display: inline-block;
     }
+  }
 
-    .backup-list_tooltip {
-      margin-left: 8px;
-    }
+  .backup-list_tooltip {
+    margin-inline-start: 8px;
   }
 `;
 
@@ -149,7 +148,7 @@ const BackupListModalDialog = (props) => {
   };
   const onRestorePortal = () => {
     const { selectedFileId } = state;
-    const { isNotify, socketHelper, t, setTenantStatus } = props;
+    const { isNotify, t, setTenantStatus } = props;
 
     if (!selectedFileId) {
       toastr.error(t("RecoveryFileNotSelected"));
@@ -168,9 +167,7 @@ const BackupListModalDialog = (props) => {
     startRestore(backupId, storageType, storageParams, isNotify)
       .then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        socketHelper.emit({
-          command: "restore-backup",
-        });
+        SocketHelper.emit(SocketCommands.RestoreBackup);
       })
       .then(() =>
         navigate(
@@ -224,11 +221,10 @@ const BackupListModalDialog = (props) => {
   );
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       visible={isVisibleDialog}
       onClose={onModalClose}
-      withFooterBorder
     >
       <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -283,7 +279,7 @@ const BackupListModalDialog = (props) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <div className="restore_footer">
+        <StyledFooterContent className="restore_footer">
           <div id="backup-list_help">
             <Checkbox
               truncate
@@ -319,9 +315,9 @@ const BackupListModalDialog = (props) => {
               onClick={onModalClose}
             />
           </div>
-        </div>
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 
@@ -332,13 +328,12 @@ BackupListModalDialog.propTypes = {
 
 export default inject(({ settingsStore, backup }) => {
   const { downloadingProgress } = backup;
-  const { socketHelper, theme, setTenantStatus, standalone } = settingsStore;
+  const { theme, setTenantStatus, standalone } = settingsStore;
   const isCopyingToLocal = downloadingProgress !== 100;
 
   return {
     setTenantStatus,
     theme,
-    socketHelper,
     isCopyingToLocal,
     standalone,
   };

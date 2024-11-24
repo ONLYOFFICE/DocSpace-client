@@ -139,8 +139,6 @@ class PublicRoomStore {
       })
       .finally(() => {
         this.setIsSectionLoading(false);
-
-        frameCallCommand("setIsLoaded");
       });
   };
 
@@ -208,20 +206,25 @@ class PublicRoomStore {
     );
   };
 
+  gotoFolder = (res) => {
+    const filter = FilesFilter.getDefault();
+
+    const subFolder = new URLSearchParams(window.location.search).get("folder");
+
+    const url = getCategoryUrl(CategoryType.Shared);
+
+    filter.folder = subFolder ? subFolder : res.id;
+
+    window.location.replace(`${url}?${filter.toUrlParams()}`);
+  };
+
   validatePublicRoomKey = (key) => {
     this.setIsLoading(true);
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
         if (res?.shared) {
-          const filter = FilesFilter.getDefault();
-          const subFolder = new URLSearchParams(window.location.search).get(
-            "folder",
-          );
-          const url = getCategoryUrl(CategoryType.Shared);
-          filter.folder = subFolder ? subFolder : res.id;
-
-          return window.location.replace(`${url}?${filter.toUrlParams()}`);
+          return this.gotoFolder(res);
         }
 
         this.publicRoomKey = key;

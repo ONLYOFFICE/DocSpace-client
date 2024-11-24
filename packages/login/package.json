@@ -1,6 +1,6 @@
 {
   "name": "@docspace/login",
-  "version": "2.6.3",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
@@ -8,33 +8,37 @@
     "start-prod": "NODE_ENV=production node server.js",
     "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
-    "lint": "next lint",
+    "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js",
+    "test:build": "node ./scripts/buildTranslations.js && E2E_TEST=true next build",
+    "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
+    "test:e2e": "npx playwright test",
+    "test:e2e:model": "npx playwright test --update-snapshots"
   },
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "^1.10.1",
+    "@hcaptcha/react-hcaptcha": "^1.11.0",
     "i18next": "^20.6.1",
-    "next": "14.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-google-recaptcha": "^3.1.0",
     "react-hcaptcha": "^0.1.1",
-    "react-i18next": "^13.2.1",
-    "sass": "^1.59.3",
-    "styled-components": "^5.3.9"
+    "react-i18next": "^13.5.0",
+    "sass": "^1.79.5",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
     "@types/react-google-recaptcha": "^2.1.9",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "prettier": "^3.2.4",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.15",
+    "prettier": "^3.3.3",
     "shx": "^0.3.4",
-    "typescript": "^5"
+    "typescript": "5.6.3"
   }
 }

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { mobile } from "../../utils";
 
 import { Calendar } from "../calendar";
@@ -48,8 +48,7 @@ const DropDownStyle = styled.div`
     @media ${mobile} {
       position: fixed;
       top: unset;
-      right: 0;
-      left: 0;
+      inset-inline: 0;
       bottom: 0;
       width: 100%;
       width: -moz-available;
@@ -106,7 +105,7 @@ const Wrapper = styled.div`
       height: 12px;
       padding: 0 10px 0 2px;
       path {
-        fill: #657077;
+        fill: ${globalColors.lightGrayDark};
       }
     }
   }
@@ -120,13 +119,7 @@ const DateSelector = styled.div`
   align-items: center;
 
   .mr-8 {
-    margin-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0px;
-        margin-left: 8px;
-      `}
+    margin-inline-end: 8px;
   }
 `;
 
@@ -141,7 +134,7 @@ const StyledCalendar = styled(Calendar)`
   @media ${mobile} {
     position: fixed;
     bottom: 0;
-    left: 0;
+    inset-inline-start: 0;
   }
 `;
 

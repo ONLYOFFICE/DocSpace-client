@@ -45,12 +45,11 @@ import Loader from "./sub-components/loaderAppearance";
 import {
   StyledComponent,
   StyledTheme,
-  StyledModalDialog,
+  StyledBodyContent,
 } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import hexRgb from "hex-rgb";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
@@ -468,22 +467,6 @@ const Appearance = (props) => {
     setAppliedColorButtons,
   ]);
 
-  const getTextColor = (color) => {
-    const black = "#333333";
-    const white = "#FFFFFF";
-
-    const rgba = hexRgb(color);
-
-    const r = rgba.red;
-    const g = rgba.green;
-    const b = rgba.blue;
-
-    const textColor =
-      (r * 299 + g * 587 + b * 114) / 1000 > 128 ? black : white;
-
-    return textColor;
-  };
-
   const onAppliedColorAccent = useCallback(
     (color) => {
       if (color.toUpperCase() !== currentColorAccent) {
@@ -605,23 +588,26 @@ const Appearance = (props) => {
   };
 
   const nodeHexColorPickerButtons = isMobile() ? (
-    <StyledModalDialog
+    <ModalDialog
       visible={openHexColorPickerButtons}
       onClose={onCloseHexColorPickerButtons}
       blur={8}
+      autoMaxHeight
     >
       <ModalDialog.Body>
-        <ColorPicker
-          id="buttons-hex"
-          onClose={onCloseHexColorPickerButtons}
-          onApply={onAppliedColorButtons}
-          appliedColor={appliedColorButtons}
-          applyButtonLabel={t("Common:ApplyButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          hexCodeLabel={t("Settings:HexCode")}
-        />
+        <StyledBodyContent>
+          <ColorPicker
+            id="buttons-hex"
+            onClose={onCloseHexColorPickerButtons}
+            onApply={onAppliedColorButtons}
+            appliedColor={appliedColorButtons}
+            applyButtonLabel={t("Common:ApplyButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+            hexCodeLabel={t("Settings:HexCode")}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </StyledModalDialog>
+    </ModalDialog>
   ) : (
     <DropDown
       directionX="right"
@@ -646,22 +632,25 @@ const Appearance = (props) => {
   );
 
   const nodeHexColorPickerAccent = isMobile() ? (
-    <StyledModalDialog
+    <ModalDialog
       visible={openHexColorPickerAccent}
       onClose={onCloseHexColorPickerAccent}
       blur={8}
+      autoMaxHeight
     >
       <ModalDialog.Body>
-        <ColorPicker
-          id="accent-hex"
-          onClose={onCloseHexColorPickerAccent}
-          onApply={onAppliedColorAccent}
-          appliedColor={appliedColorAccent}
-          applyButtonLabel={t("Common:ApplyButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-        />
+        <StyledBodyContent>
+          <ColorPicker
+            id="accent-hex"
+            onClose={onCloseHexColorPickerAccent}
+            onApply={onAppliedColorAccent}
+            appliedColor={appliedColorAccent}
+            applyButtonLabel={t("Common:ApplyButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </StyledModalDialog>
+    </ModalDialog>
   ) : (
     <DropDown
       directionX="right"

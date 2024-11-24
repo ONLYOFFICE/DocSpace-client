@@ -33,7 +33,7 @@ export const StyledWrapper = styled.div`
   max-width: 660px;
 
   display: flex;
-  padding: 24px 24px 18px 24px;
+  padding: 24px 24px 18px;
   gap: 40px;
   background: ${(props) => props.theme.profile.main.background};
   border-radius: 12px;
@@ -71,15 +71,7 @@ export const StyledAvatarWrapper = styled.div`
     @media ${mobile} {
       display: flex;
       position: absolute;
-      right: 16px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              left: 16px;
-            `
-          : css`
-              right: 16px;
-            `}
+      inset-inline-end: 16px;
     }
   }
 `;
@@ -117,14 +109,7 @@ export const StyledInfo = styled.div`
 
     .sso-badge,
     .ldap-badge {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+      margin-inline-start: 4px;
     }
 
     .email-container {
@@ -144,25 +129,10 @@ export const StyledInfo = styled.div`
       align-items: center;
       gap: 8px;
 
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -8px;
-            `
-          : css`
-              margin-left: -8px;
-            `}
+      margin-inline-start: -8px;
 
       .language-combo-box .combo-button {
-        padding-inline-end: 0px;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-right: 8px;
-              `
-            : css`
-                padding-left: 8px;
-              `}
+        padding-inline: 8px 0;
       }
     }
   }
@@ -175,21 +145,14 @@ export const StyledInfo = styled.div`
     min-width: 12px;
 
     svg path {
-      fill: ${(props) => props.theme.isBase && `#657077`};
+      fill: ${(props) => props.theme.profile.main.iconFill};
     }
   }
 
   .email-edit-container {
     display: flex;
     align-items: center;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 16px;
-          `
-        : css`
-            padding-right: 16px;
-          `}
+    padding-inline-end: 16px;
     line-height: 20px;
 
     .email-text-container {
@@ -202,15 +165,7 @@ export const StyledInfo = styled.div`
 
     .email-edit-button {
       display: block;
-      padding-left: 8px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 8px;
-            `
-          : css`
-              padding-left: 8px;
-            `}
+      padding-inline-start: 8px;
     }
   }
 
@@ -224,15 +179,7 @@ export const StyledInfo = styled.div`
     height: 18px;
 
     .send-again-text {
-      margin-left: 5px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 5px;
-            `
-          : css`
-              margin-left: 5px;
-            `}
+      margin-inline-start: 5px;
       line-height: 15px;
       color: ${(props) => props.currentColorScheme.main?.accent};
       border-bottom: 1px solid
@@ -304,18 +251,18 @@ export const StyledInfo = styled.div`
           font-size: 12px !important;
           line-height: 16px !important;
           white-space: nowrap;
-          color: rgb(163, 169, 174);
+          color: ${(props) => props.theme.profile.main.mobileLabel};
         }
 
         .mobile-profile-label-field {
-          padding-left: 0px;
+          padding-inline-start: 0;
           max-width: 100%;
           font-size: 12px !important;
           line-height: 16px;
         }
 
         .email-container {
-          padding-left: 0px;
+          padding-inline-start: 0;
 
           display: flex;
           flex-wrap: wrap;
@@ -323,18 +270,11 @@ export const StyledInfo = styled.div`
         }
 
         .edit-button {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  margin-right: auto;
-                `
-              : css`
-                  margin-left: auto;
-                `}
+          margin-inline-start: auto;
           min-width: 12px;
 
           svg path {
-            fill: ${(props) => props.theme.isBase && `#657077`};
+            fill: ${(props) => props.theme.profile.main.iconFill};
           }
         }
 

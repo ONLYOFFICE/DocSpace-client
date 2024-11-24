@@ -26,7 +26,7 @@
 
 import React, { useRef } from "react";
 
-import { ContextMenu } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -49,20 +49,11 @@ const TableRow = (props: TableRowProps) => {
     title,
     getContextModel,
     badgeUrl,
+    isIndexEditingMode,
     ...rest
   } = props;
 
-  const cm = useRef<null | {
-    show: (e: React.MouseEvent | MouseEvent) => void;
-    hide: (
-      e:
-        | React.MouseEvent
-        | MouseEvent
-        | Event
-        | React.ChangeEvent<HTMLInputElement>,
-    ) => void;
-    menuRef: { current: HTMLDivElement };
-  }>(null);
+  const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
   const onContextMenu = (e: React.MouseEvent) => {
@@ -75,51 +66,59 @@ const TableRow = (props: TableRowProps) => {
 
   const renderContext =
     Object.prototype.hasOwnProperty.call(props, "contextOptions") &&
+    contextOptions &&
     contextOptions.length > 0;
 
   const getOptions = () => {
     fileContextClick?.();
-    return contextOptions;
+    return contextOptions || [];
   };
 
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
+      isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
       {...rest}
     >
       {children}
-      <div>
-        <TableCell
-          {...selectionProp}
-          style={style}
-          forwardedRef={row}
-          className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
-        >
-          <ContextMenu
-            onHide={onHideContextMenu}
-            ref={cm}
-            model={contextOptions}
-            getContextModel={getContextModel}
-            withBackdrop
-            badgeUrl={badgeUrl}
-          />
-          {renderContext ? (
-            <ContextMenuButton
-              isFill
-              className="expandButton"
-              getData={getOptions}
-              directionX="right"
-              displayType={ContextMenuButtonDisplayType.toggle}
-              onClick={onContextMenu}
-              onClose={onHideContextMenu}
-              title={title}
-            />
-          ) : (
-            <div className="expandButton"> </div>
-          )}
-        </TableCell>
-      </div>
+      {isIndexEditingMode ? (
+        <></>
+      ) : (
+        <div>
+          <TableCell
+            {...selectionProp}
+            style={style}
+            forwardedRef={row}
+            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+          >
+            <>
+              <ContextMenu
+                onHide={onHideContextMenu}
+                ref={cm}
+                model={contextOptions || []}
+                getContextModel={getContextModel}
+                withBackdrop
+                badgeUrl={badgeUrl}
+              />
+              {renderContext ? (
+                <ContextMenuButton
+                  isFill
+                  className="expandButton"
+                  getData={getOptions}
+                  directionX="right"
+                  displayType={ContextMenuButtonDisplayType.toggle}
+                  onClick={onContextMenu}
+                  onClose={onHideContextMenu}
+                  title={title}
+                />
+              ) : (
+                <div className="expandButton"> </div>
+              )}
+            </>
+          </TableCell>
+        </div>
+      )}
     </StyledTableRow>
   );
 };

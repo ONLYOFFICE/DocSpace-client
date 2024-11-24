@@ -32,8 +32,8 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import HideButton from "./sub-components/HideButton";
-import SPSettings from "./SPSettings";
-import ProviderMetadata from "./ProviderMetadata";
+import { SPSettingsSection } from "./SPSettings";
+import { ProviderMetadataSection } from "./ProviderMetadata";
 import StyledSsoPage from "./styled-containers/StyledSsoPageContainer";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import ToggleSSO from "./sub-components/ToggleSSO";
@@ -93,7 +93,7 @@ const SingleSignOn = (props) => {
             //isDisabled={!isSSOAvailable}
           />
 
-          <SPSettings />
+          <SPSettingsSection />
           <StyledSettingsSeparator />
 
           <HideButton
@@ -107,7 +107,7 @@ const SingleSignOn = (props) => {
           />
 
           <Box className="sp-metadata">
-            <ProviderMetadata />
+            <ProviderMetadataSection />
           </Box>
         </>
       )}

@@ -5,7 +5,6 @@
   "BusinessExpired": "ඔබගේ {{planName}} සැලසුම {{date}} දී ඉකුත් වී ඇත",
   "BusinessFinalDateInfo": "යාවත්කාලීන මිලකරණය සහ පිරිවිතර සමඟ දායකත්‍වය {{finalDate}} දී ස්වයංක්‍රීයව අළුත් වේ. ඔබට එය අවලංගු කිරීමට හෝ ස්ට්‍රයිප් පාරිභෝගික ද්වාරයෙහි ඔබගේ ලදුපත් තොරතුරු වෙනස් කිරීමට හැකිය.",
   "BusinessPlanPaymentOverdue": "{{planName}} සැලසුමට ගෙවීම ප්‍රමාද බැවින් නව පරිශ්‍රීලකයින් එක් කිරීමට සහ නව කාමර සෑදීමට නොහැකිය.",
-  "BusinessRequestDescription": "තවත් පරිපාලකයින්/බලවත් පරිශ්‍රීලකයින් {{peopleNumber}} ක් සඳහා මිලකරණ සැලසුම් ඉල්ලීමකින් පමණක් ලද හැකිය.",
   "BusinessSuggestion": "ඔබගේ {{planName}} සැලසුම අභිරුචිකරණය",
   "BusinessTitle": "ඔබ {{planName}} සැලසුම භාවිතා කරයි",
   "BusinessUpdated": "{{planName}} සැලසුම යාවත්කාල විය",

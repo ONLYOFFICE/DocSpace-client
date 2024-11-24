@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
@@ -33,25 +33,8 @@ import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { isMobile } from "@docspace/shared/utils";
 
-const StyledComponent = styled(ModalDialog)`
-  .modal-dialog-aside-footer {
-    width: 100%;
-    bottom: 0 !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
-    padding: 16px;
-    box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
-  }
-
-  .new-colors-container {
-    margin-top: 20px;
-  }
+const StyledBodyContent = styled.div`
+  margin-top: 20px;
 
   .flex {
     display: flex;
@@ -81,18 +64,14 @@ const StyledComponent = styled(ModalDialog)`
     background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent
-        : props.theme.isBase
-          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
+        : `${props.theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
   }
 
   .buttons-box {
     background: ${(props) =>
       props.currentColorButtons
         ? props.currentColorButtons
-        : props.theme.isBase
-          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
+        : `${props.theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
   }
 
   .modal-add-theme {
@@ -159,18 +138,20 @@ const ColorSchemeDialog = (props) => {
   });
 
   return (
-    <StyledComponent
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType="aside"
-      currentColorAccent={currentColorAccent}
-      currentColorButtons={currentColorButtons}
       withFooterBorder={showSaveButtonDialog}
       withBodyScroll={true}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="new-colors-container">
+        <StyledBodyContent
+          className="new-colors-container"
+          currentColorAccent={currentColorAccent}
+          currentColorButtons={currentColorButtons}
+        >
           <div className="flex relative">
             <div className="name-color">{t("Settings:AccentColor")}</div>
             <div
@@ -192,7 +173,7 @@ const ColorSchemeDialog = (props) => {
 
             {!viewMobile && nodeHexColorPickerButtons}
           </div>
-        </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -213,7 +194,7 @@ const ColorSchemeDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledComponent>
+    </ModalDialog>
   );
 };
 

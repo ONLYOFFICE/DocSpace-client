@@ -49,7 +49,7 @@ const BodyWrapper = inject(({ settingsStore }) => {
   };
 })(withTranslation(["About", "Common"])(observer(Body)));
 
-const About = (props) => {
+export const About = (props) => {
   return (
     <SectionWrapper>
       <Section.SectionHeader>
@@ -61,5 +61,3 @@ const About = (props) => {
     </SectionWrapper>
   );
 };
-
-export default About;

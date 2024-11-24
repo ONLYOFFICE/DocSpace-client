@@ -24,29 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import { useEffect } from "react";
 
-import ModalDialogContainer from "../ModalDialogContainer";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
-const StyledModal = styled(ModalDialogContainer)`
-  max-width: 400px;
-
-  .cancel-btn {
-    display: inline-block;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
-  }
-`;
 
 const ArchiveDialogComponent = (props) => {
   const {
@@ -91,7 +76,7 @@ const ArchiveDialogComponent = (props) => {
   const description = getDescription();
 
   return (
-    <StyledModal
+    <ModalDialog
       isLoading={!tReady}
       visible={visible}
       onClose={onClose}
@@ -122,7 +107,7 @@ const ArchiveDialogComponent = (props) => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

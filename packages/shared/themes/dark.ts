@@ -33,54 +33,97 @@ import { TTheme } from "./base";
 import { DEFAULT_FONT_FAMILY } from "../constants";
 
 const {
-  black,
   white,
+  black,
+  darkBlack,
+  blueRomb,
 
   grayLight,
+  darkGrayLight,
+  lightGrayHover,
+  lightDarkGrayHover,
   grayLightMid,
-  grayMid,
   grayDarkMid,
-  graySilver,
+  lightGraySelected,
+  grayStrong,
+  grayDarkStrong,
   gray,
-  grayMain,
   grayDark,
-  shuttleGrey,
+  lightGrayDark,
+  darkGrayDark,
+  grayText,
+  grayDarkText,
+  lightBlueMain,
+  lightBlueMainHover,
+  lightBlueMainDisabled,
+  lightBlueMainPressed,
+  lightSecondMain,
+  lightSecondMainHover,
+  lightSecondMainDisabled,
 
-  blueMain,
-
-  orangePressed,
-
-  warningColor,
-  red,
-
-  grayMaxLight,
-  cyanBlueDarkShade,
-
-  darkBlack,
-  silver,
-  strongBlue,
-
-  darkRed,
+  mainOrange,
+  mainRed,
 
   darkErrorStatus,
-  charlestonGreen,
-  outerSpace,
+  favoritesStatus,
+  lightStatusWarning,
+  darkStatusWarning,
+  darkStatusPositive,
+
+  darkIcon,
+  link,
+  darkLink,
+  blueLightMid,
+  bigGrayDarkMid,
+
+  darkToastDone,
+  darkToastInfo,
+  darkToastAlert,
+  darkToastWarning,
+
+  dndColor,
+  dndDarkColor,
+  dndHoverColor,
+  dndDarkHover,
+
+  onWhiteColor,
+  boxShadowDarkColor,
+  loaderDark,
+
+  editorGreenColor,
+  editorBlueColor,
+  editorOrangeColor,
+  editorRedColor,
+  windowsColor,
+  linuxColor,
+  androidColor,
+  badgeShadow,
+  popupShadow,
+  menuShadow,
+  darkScroll,
+  darkScrollHover,
+  darkScrollActive,
+  silver,
+  highlandGray,
 
   blurDark,
+  darkGreyAction,
+  darkActive,
+  darkGreyHover,
 } = globalColors;
 
 const Dark: TTheme = {
   ...CommonTheme,
   isBase: false,
-  color: grayMaxLight,
+  color: white,
   backgroundColor: black,
   fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: "13px",
 
   text: {
-    color: grayMaxLight,
-    disableColor: "#5c5c5c",
-    emailColor: "#a3a9ae",
+    color: white,
+    disableColor: grayDarkText,
+    emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -95,13 +138,13 @@ const Dark: TTheme = {
     },
 
     fontWeight: 600,
-    color: grayMaxLight,
+    color: white,
   },
 
-  backgroundAndSubstrateColor: "#282828",
+  backgroundAndSubstrateColor: darkGrayLight,
 
   betaBadgeTooltip: {
-    boxShadowColor: "rgba(0, 0, 0, 0.40)",
+    boxShadowColor: badgeShadow,
   },
 
   button: {
@@ -154,39 +197,39 @@ const Dark: TTheme = {
     },
 
     color: {
-      base: "#FFFFFF",
-      baseHover: "#FFFFFF",
-      baseActive: "#FFFFFF",
-      baseDisabled: "#474747",
+      base: white,
+      baseHover: white,
+      baseActive: white,
+      baseDisabled: grayDarkStrong,
 
-      primary: "#FFFFFF",
-      primaryHover: "#FFFFFF",
-      primaryActive: "#FFFFFF",
-      primaryDisabled: "#FFFFFF",
+      primary: white,
+      primaryHover: white,
+      primaryActive: white,
+      primaryDisabled: white,
     },
 
     backgroundColor: {
-      base: "#333333",
-      baseHover: "#333333",
-      baseActive: "#282828",
-      baseDisabled: "#282828",
+      base: black,
+      baseHover: black,
+      baseActive: darkGrayLight,
+      baseDisabled: darkGrayLight,
 
-      primary: "#5299E0",
-      primaryHover: "#4D8AC7",
-      primaryActive: "#427CB7",
-      primaryDisabled: "#45709B",
+      primary: lightSecondMain,
+      primaryHover: lightSecondMainHover,
+      primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+      primaryDisabled: lightSecondMainDisabled,
     },
 
     border: {
-      base: `1px solid #474747`,
-      baseHover: `1px solid #858585`,
-      baseActive: `1px solid #CCCCCC`,
-      baseDisabled: `1px solid #474747`,
+      base: `1px solid ${grayDarkStrong}`,
+      baseHover: `1px solid ${grayDark}`,
+      baseActive: `1px solid ${grayDarkStrong}`,
+      baseDisabled: `1px solid ${grayDarkStrong}`,
 
-      primary: `1px solid #5299E0`,
-      primaryHover: `1px solid #4D8AC7`,
-      primaryActive: `1px solid #427CB7`,
-      primaryDisabled: `1px solid #45709B`,
+      primary: `1px solid ${lightSecondMain}`,
+      primaryHover: `1px solid ${lightSecondMainHover}`,
+      primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+      primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
     },
 
     loader: {
@@ -202,35 +245,32 @@ const Dark: TTheme = {
     margin: "0",
     lineHeight: "56px",
     fontWeight: "700",
-    borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
     padding: "0 16px 16px",
     bodyPadding: "16px 0",
   },
 
   mainButtonMobile: {
-    textColor: "rgba(255, 255, 255, 0.6)",
+    textColor: darkGrayDark,
 
-    buttonColor: "#F58D31",
+    buttonColor: mainOrange,
     iconFill: black,
 
-    circleBackground: black,
+    circleBackground: white,
 
-    mobileProgressBarBackground: "#606060",
+    mobileProgressBarBackground: grayDarkStrong,
 
     bar: {
-      errorBackground: orangePressed,
-
-      icon: "#858585",
+      icon: grayDark,
     },
 
     buttonWrapper: {
-      background: "#333333",
-      uploadingBackground: "#242424",
+      background: black,
+      uploadingBackground: grayDarkMid,
     },
 
     buttonOptions: {
-      backgroundColor: "#242424",
-      color: "#ff0000",
+      backgroundColor: grayDarkMid,
+      color: black,
     },
 
     dropDown: {
@@ -253,11 +293,11 @@ const Dark: TTheme = {
 
       separatorBackground: white,
 
-      buttonColor: grayMaxLight,
+      buttonColor: white,
 
       hoverButtonColor: black,
 
-      backgroundActionMobile: "rgba(255, 255, 255, 0.92)",
+      backgroundActionMobile: bigGrayDarkMid,
     },
 
     dropDownItem: {
@@ -266,10 +306,10 @@ const Dark: TTheme = {
   },
 
   mainButton: {
-    backgroundColor: "#4781D1",
-    disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
-    hoverBackgroundColor: "rgba(71, 129, 209, .85)",
-    clickBackgroundColor: "#4074BC",
+    backgroundColor: lightBlueMain,
+    disableBackgroundColor: lightBlueMainDisabled,
+    hoverBackgroundColor: lightBlueMainHover,
+    clickBackgroundColor: lightBlueMainPressed,
 
     padding: "5px 14px 5px 12px",
     borderRadius: "3px",
@@ -285,7 +325,7 @@ const Dark: TTheme = {
     svg: {
       margin: "auto",
       height: "100%",
-      fill: black,
+      fill: white,
     },
 
     dropDown: {
@@ -317,28 +357,27 @@ const Dark: TTheme = {
     outline: "none",
     width: "100%",
 
-    border: "1px solid #474747",
+    border: `1px solid ${grayDarkStrong}`,
     background: black,
 
     borderConnect: "none",
-    connectBackground:
-      "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
+    connectBackground: darkIcon,
 
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+    disableBackgroundColor: darkGrayLight,
 
     hoverBackground: black,
-    hoverBorder: "1px solid #858585",
-    hoverConnectBackground: "#FFFFFF",
+    hoverBorder: `1px solid ${grayDark}`,
+    hoverConnectBackground: white,
     hoverConnectBorder: "none",
 
-    activeBackground: "#282828",
-    activeBorder: "1px solid #CCCCCC",
-    activeConnectBackground: "rgba(255, 255, 255, 0.64)",
+    activeBackground: darkGrayLight,
+    activeBorder: `1px solid ${grayDarkStrong}`,
+    activeConnectBackground: bigGrayDarkMid,
     activeConnectBorder: "none",
 
-    color: "rgba(0, 0, 0, 0.54)",
-    disableColor: "rgba(0, 0, 0, 0.4)",
-    disabledSvgColor: "#474747",
+    color: grayDark,
+    disableColor: darkGrayDark,
+    disabledSvgColor: grayDarkStrong,
 
     text: {
       width: "100%",
@@ -351,8 +390,8 @@ const Dark: TTheme = {
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
-      color: grayMaxLight,
-      hoverColor: grayMaxLight,
+      color: white,
+      hoverColor: white,
       connectColor: darkBlack,
     },
 
@@ -369,15 +408,15 @@ const Dark: TTheme = {
   groupButton: {
     fontSize: "14px",
     lineHeight: "19px",
-    color: "#858585",
-    disableColor: "#474747",
+    color: grayDark,
+    disableColor: grayDarkStrong,
     float: "left",
     height: "19px",
     overflow: "hidden",
     padding: "0px",
 
     separator: {
-      border: `1px solid #474747`,
+      border: `1px solid ${grayDarkStrong}`,
       width: "0px",
       height: "24px",
       margin: "16px 12px 0 12px",
@@ -392,7 +431,7 @@ const Dark: TTheme = {
   groupButtonsMenu: {
     top: "0",
     background: black,
-    boxShadow: " 0px 10px 18px -8px rgba(0, 0, 0, 0.100306)",
+    boxShadow: `0px 10px 18px -8px ${menuShadow}`,
     height: "48px",
     tabletHeight: "56px",
     padding: "0 18px 19px 0",
@@ -407,20 +446,20 @@ const Dark: TTheme = {
       width: "20px",
       height: "20px",
       padding: "8px",
-      hoverBackgroundColor: grayMaxLight,
-      backgroundColor: "#858585",
+      hoverBackgroundColor: white,
+      backgroundColor: grayDark,
     },
   },
 
-  iconButton: { color: "#858585", hoverColor: grayMaxLight },
+  iconButton: { color: grayDark, hoverColor: white },
   selectorAddButton: {
-    background: "#242424",
-    hoverBackground: "#282828",
-    activeBackground: "#242424",
+    background: grayDarkMid,
+    hoverBackground: darkGrayLight,
+    activeBackground: grayDarkMid,
 
-    iconColor: "#858585",
-    iconColorHover: "#FFFFFF",
-    iconColorActive: "#CCCCCC",
+    iconColor: grayDark,
+    iconColorHover: white,
+    iconColorActive: darkGrayDark,
 
     border: `none`,
     boxSizing: "border-box",
@@ -428,8 +467,8 @@ const Dark: TTheme = {
     height: " 32px",
     width: "32px",
     padding: "10px",
-    color: "#858585",
-    hoverColor: grayMaxLight,
+    color: grayDark,
+    hoverColor: white,
   },
 
   saveCancelButtons: {
@@ -442,121 +481,60 @@ const Dark: TTheme = {
     unsavedColor: gray,
   },
 
-  selectedItem: {
-    background: "#242424",
-    border: `1px solid #242424`,
-    borderRadius: "3px",
-
-    textBox: {
-      padding: "0 8px",
-      height: "32px",
-      alignItems: "center",
-      borderRight: `1px solid #242424`,
-    },
-
-    text: {
-      color: grayMaxLight,
-      disabledColor: "#474747",
-    },
-
-    closeButton: {
-      alignItems: "center",
-      padding: "0 8px",
-      color: grayMaxLight,
-      colorHover: grayMaxLight,
-      backgroundColor: "#242424",
-    },
-  },
-
   checkbox: {
-    fillColor: "#282828",
-    borderColor: "#474747",
+    fillColor: darkGrayLight,
+    borderColor: grayDarkStrong,
     arrowColor: white,
     indeterminateColor: white,
 
-    disableArrowColor: "#474747",
-    disableBorderColor: "#545454",
-    disableFillColor: "#545454",
-    disableIndeterminateColor: "#474747",
+    disableArrowColor: grayDarkStrong,
+    disableBorderColor: grayDarkMid,
+    disableFillColor: darkGrayLight,
+    disableIndeterminateColor: grayDarkStrong,
 
-    hoverBorderColor: "#858585",
+    hoverBorderColor: grayDark,
     hoverIndeterminateColor: white,
 
-    pressedBorderColor: "#474747",
+    pressedBorderColor: grayDarkStrong,
     pressedFillColor: black,
 
-    focusColor: "#858585",
+    focusColor: grayDark,
 
-    errorColor: "#E06451",
+    errorColor: darkErrorStatus,
   },
-
-  // slider: {
-  //   sliderBarColorProgress: blueMain,
-  //   sliderBarColorProgressDisabled: grayMid,
-  //   sliderBarColor: grayLightMid,
-  //   sliderBarDisableColor: grayLightMid,
-
-  //   sliderBarBorderActive: `1px solid ${globalColors.grayMid}`,
-  //   sliderBarBorderDisable: `1px solid ${globalColors.grayMid}`,
-
-  //   thumbFillDisable: grayLightMid,
-  //   thumbFillActive: grayLightMid,
-
-  //   thumbBorderColorActive: `1px solid ${globalColors.gray}`,
-  //   thumbBorderColorDisable: `1px solid ${globalColors.grayMid}`,
-
-  //   sliderWidth: "202px",
-
-  //   arrowHover: blueMain,
-  //   arrowColor: grayMid,
-  // },
 
   viewSelector: {
     fillColor: black,
-    checkedFillColor: "#858585",
+    checkedFillColor: grayDark,
     fillColorDisabled: grayLight,
     disabledFillColor: grayLightMid,
-    disabledFillColorInner: grayMid,
-    hoverBorderColor: "#858585",
-    borderColor: "#474747",
+    disabledFillColorInner: grayStrong,
+    hoverBorderColor: grayDark,
+    borderColor: grayDarkStrong,
   },
 
   radioButton: {
-    textColor: grayMaxLight,
-    textDisableColor: "#5c5c5c",
+    textColor: white,
+    textDisableColor: grayDarkText,
 
     marginBeforeLabel: "8px",
 
-    background: "#292929",
-    disableBackground: "#545454",
+    background: black,
+    disableBackground: darkGrayLight,
 
-    fillColor: grayMaxLight,
-    disableFillColor: "#474747",
+    fillColor: white,
+    disableFillColor: grayDarkStrong,
 
-    borderColor: "#646464",
+    borderColor: grayDarkStrong,
     disableBorderColor: "none",
-    hoverBorderColor: grayMaxLight,
-  },
-
-  requestLoader: {
-    backgroundColor: white,
-    border: `1px solid ${globalColors.veryLightGrey}`,
-    overflow: "hidden",
-    padding: "5px 10px",
-    lineHeight: "16px",
-    borderRadius: "5px",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
-
-    marginRight: "10px",
-    top: "10px",
-    width: "100%",
+    hoverBorderColor: white,
   },
 
   row: {
     minHeight: "47px",
     width: "100%",
-    borderBottom: "#474747",
-    backgroundColor: globalColors.veryDarkGrey,
+    borderBottom: grayDarkStrong,
+    backgroundColor: globalColors.lightDarkGrayHover,
     minWidth: "160px",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -599,7 +577,7 @@ const Dark: TTheme = {
   },
 
   rowContainer: {
-    borderColor: "#474747",
+    borderColor: grayDarkStrong,
   },
 
   badge: {
@@ -608,14 +586,14 @@ const Dark: TTheme = {
     lineHeight: "0.8",
     overflow: "hidden",
     color: white,
-    backgroundColor: "#F59931",
-    disableBackgroundColor: "#858585",
+    backgroundColor: darkStatusWarning,
+    disableBackgroundColor: grayDark,
   },
 
   scrollbar: {
-    bgColor: "rgba(136, 136, 136, 0.4)",
-    hoverBgColor: "rgba(136, 136, 136, 0.64)",
-    pressBgColor: "rgba(136, 136, 136, 0.8)",
+    bgColor: darkScroll,
+    hoverBgColor: darkScrollHover,
+    pressBgColor: darkScrollActive,
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -623,14 +601,14 @@ const Dark: TTheme = {
   modalDialog: {
     backgroundColor: black,
     textColor: white,
-    headerBorderColor: "#474747",
-    footerBorderColor: "#474747",
+    headerBorderColor: grayDarkStrong,
+    footerBorderColor: grayDarkStrong,
     width: "auto",
     maxwidth: "560px",
     margin: " 0 auto",
     minHeight: "100%",
 
-    colorDisabledFileIcons: "#5c5c5c",
+    colorDisabledFileIcons: grayDarkText,
 
     backdrop: {
       backgroundRGBA: {
@@ -659,14 +637,8 @@ const Dark: TTheme = {
       },
     },
 
-    header: {
-      borderBottom: `1px solid #474747`,
-    },
-
     closeButton: {
-      // backgroundColor: "#9A9EA3",
-
-      fillColor: "#9A9EA3",
+      fillColor: darkGrayDark,
     },
   },
 
@@ -688,11 +660,11 @@ const Dark: TTheme = {
   },
 
   input: {
-    color: grayMaxLight,
-    disableColor: "#6c6c6c",
+    color: white,
+    disableColor: grayDarkText,
 
-    backgroundColor: "#292929",
-    disableBackgroundColor: "#474747",
+    backgroundColor: darkGrayLight,
+    disableBackgroundColor: grayDarkStrong,
 
     width: {
       base: "173px",
@@ -707,20 +679,20 @@ const Dark: TTheme = {
     boxSizing: "border-box",
     border: "solid 1px",
 
-    borderColor: "#474747",
-    errorBorderColor: "#E06451",
-    warningBorderColor: warningColor,
-    disabledBorderColor: "#474747",
+    borderColor: grayDarkStrong,
+    errorBorderColor: darkErrorStatus,
+    warningBorderColor: darkStatusWarning,
+    disabledBorderColor: grayDarkStrong,
 
-    hoverBorderColor: "#858585",
-    hoverErrorBorderColor: "#E06451",
-    hoverWarningBorderColor: warningColor,
-    hoverDisabledBorderColor: "#474747",
+    hoverBorderColor: grayDark,
+    hoverErrorBorderColor: darkErrorStatus,
+    hoverWarningBorderColor: darkStatusWarning,
+    hoverDisabledBorderColor: grayDarkStrong,
 
-    focusBorderColor: grayMaxLight,
-    focusErrorBorderColor: "#E06451",
-    focusWarningBorderColor: warningColor,
-    focusDisabledBorderColor: "#474747",
+    focusBorderColor: white,
+    focusErrorBorderColor: darkErrorStatus,
+    focusWarningBorderColor: darkStatusWarning,
+    focusDisabledBorderColor: grayDarkStrong,
   },
 
   fileInput: {
@@ -749,7 +721,7 @@ const Dark: TTheme = {
     },
 
     icon: {
-      background: "#292929",
+      background: black,
 
       border: "1px solid",
       borderRadius: "0 3px 3px 0",
@@ -782,13 +754,13 @@ const Dark: TTheme = {
   },
 
   passwordInput: {
-    color: "#858585",
-    disableColor: "#858585",
+    color: grayDark,
+    disableColor: grayDark,
 
     tooltipTextColor: black,
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: grayDarkStrong,
+    hoverIconColor: grayDark,
 
     hoverColor: gray,
 
@@ -828,26 +800,26 @@ const Dark: TTheme = {
     fontSize: "14px",
     fontWeight: "600",
 
-    iconColor: "#646464",
-    hoverIconColor: "#858585",
+    iconColor: grayDarkStrong,
+    hoverIconColor: grayDark,
   },
 
   inputPhone: {
-    activeBorderColor: "#2da7db",
-    inactiveBorderColor: "#474747",
-    errorBorderColor: "#f21c0e",
-    backgroundColor: "#33333",
-    color: "#fff",
-    scrollBackground: "#858585",
-    placeholderColor: "#858585",
-    dialCodeColor: "#858585",
+    activeBorderColor: lightSecondMain,
+    inactiveBorderColor: grayDarkStrong,
+    errorBorderColor: darkErrorStatus,
+    backgroundColor: black,
+    color: white,
+    scrollBackground: grayDark,
+    placeholderColor: grayDark,
+    dialCodeColor: grayDark,
     width: "320px",
     height: "44px",
   },
   textInput: {
     fontWeight: "normal",
-    placeholderColor: "rgba(255, 255, 255, 0.2)",
-    disablePlaceholderColor: "#6c6c6c",
+    placeholderColor: grayDark,
+    disablePlaceholderColor: grayDarkStrong,
 
     transition: "all 0.2s ease 0s",
     appearance: "none",
@@ -892,30 +864,30 @@ const Dark: TTheme = {
     padding: "2px 0px 2px 2px",
     margin: "0",
 
-    borderColor: grayMaxLight,
+    borderColor: white,
 
-    iconColor: "#858585",
-    hoverIconColor: "#FFFFFF",
+    iconColor: grayDark,
+    hoverIconColor: white,
   },
 
   textArea: {
-    disabledColor: "#474747",
+    disabledColor: grayDarkStrong,
 
-    focusBorderColor: grayMaxLight,
-    focusErrorBorderColor: "#E06451",
+    focusBorderColor: white,
+    focusErrorBorderColor: darkErrorStatus,
     focusOutline: "none",
 
     scrollWidth: "100%",
     scrollHeight: "91px",
 
-    numerationColor: "#858585",
+    numerationColor: grayDark,
 
     copyIconFilter:
       "invert(62%) sepia(0%) saturate(0%) hue-rotate(119deg) brightness(85%) contrast(87%)",
   },
 
   link: {
-    color: grayMaxLight,
+    color: white,
     lineHeight: "calc(100% + 6px)",
     opacity: "0.5",
     textDecoration: "none",
@@ -932,7 +904,7 @@ const Dark: TTheme = {
     paddingRight: "20px",
     semiTransparentOpacity: "0.5",
     textDecoration: "none",
-    disableColor: "#5c5c5c",
+    disableColor: grayDarkText,
 
     svg: {
       opacity: "1",
@@ -947,17 +919,17 @@ const Dark: TTheme = {
       iconColor: white,
     },
     color: {
-      default: "#858585",
-      hover: "#ADADAD",
-      active: "#FFFFFF",
-      focus: "#FFFFFF",
+      default: grayDark,
+      hover: darkGrayDark,
+      active: white,
+      focus: white,
     },
 
     background: {
       default: "transparent",
-      hover: "#474747",
-      active: "#282828",
-      focus: "#242424",
+      hover: grayDarkStrong,
+      active: darkGrayLight,
+      focus: grayDarkMid,
     },
     caret: {
       width: "5px",
@@ -978,14 +950,14 @@ const Dark: TTheme = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.40)",
+    boxShadow: `0px 10px 15px ${popupShadow}`,
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#242424",
+    color: grayDarkMid,
     textColor: white,
-    backgroundColor: "#282828",
+    backgroundColor: darkGrayLight,
 
     before: {
       border: "none",
@@ -1040,7 +1012,7 @@ const Dark: TTheme = {
     },
 
     errorLabel: {
-      color: "#E06451",
+      color: darkErrorStatus,
     },
   },
 
@@ -1099,8 +1071,8 @@ const Dark: TTheme = {
     },
 
     imageContainer: {
-      backgroundImage: "#606060",
-      background: "#606060",
+      backgroundImage: grayDarkStrong,
+      background: grayDarkStrong,
       groupBackground: grayDarkMid,
       borderRadius: "50%",
       height: "100%",
@@ -1110,24 +1082,24 @@ const Dark: TTheme = {
         width: "50%",
         height: "100%",
         margin: "auto",
-        fill: "#858585",
+        fill: grayDark,
       },
     },
 
     administrator: {
-      fill: "#A15B1D",
+      fill: darkStatusWarning,
       stroke: darkBlack,
       color: white,
     },
 
     guest: {
-      fill: "#575757",
+      fill: darkIcon,
       stroke: darkBlack,
       color: white,
     },
 
     owner: {
-      fill: "#A38A1A",
+      fill: favoritesStatus,
       stroke: darkBlack,
       color: white,
     },
@@ -1136,7 +1108,7 @@ const Dark: TTheme = {
       right: "0px",
       bottom: "0px",
       fill: black,
-      backgroundColor: "#b2b2b2",
+      backgroundColor: bigGrayDarkMid,
       borderRadius: "50%",
       height: "32px",
       width: "32px",
@@ -1149,8 +1121,8 @@ const Dark: TTheme = {
     },
 
     icon: {
-      background: "#242424",
-      color: "#ADADAD",
+      background: grayDarkMid,
+      color: darkGrayDark,
     },
 
     width: {
@@ -1182,8 +1154,8 @@ const Dark: TTheme = {
     maxWidth: "400px",
 
     selectLink: {
-      color: "#474747",
-      linkColor: "#E06A1B",
+      color: grayDarkStrong,
+      linkColor: darkLink,
     },
 
     slider: {
@@ -1192,9 +1164,9 @@ const Dark: TTheme = {
       backgroundColor: "transparent",
 
       runnableTrack: {
-        background: "#242424",
-        focusBackground: "#242424",
-        border: `1.4px solid #242424`,
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "5.6px",
         width: "100%",
         height: "8px",
@@ -1204,28 +1176,28 @@ const Dark: TTheme = {
         marginTop: "-9.4px",
         width: "24px",
         height: "24px",
-        background: grayMaxLight,
-        disabledBackground: "#A6DCF2",
+        background: white,
+        disabledBackground: darkGrayDark,
         borderWidth: "6px",
         borderStyle: "solid",
         borderColor: `${black}`,
         borderRadius: "30px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       thumb: {
         width: "24px",
         height: "24px",
-        background: grayMaxLight,
+        background: white,
         border: `6px solid ${black}`,
         borderRadius: "30px",
         marginTop: "0px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       rangeTrack: {
-        background: "#242424",
-        border: `1.4px solid #242424`,
+        background: grayDarkMid,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "5.6px",
         width: "100%",
         height: "8px",
@@ -1234,10 +1206,10 @@ const Dark: TTheme = {
       rangeThumb: {
         width: "14px",
         height: "14px",
-        background: grayMaxLight,
+        background: white,
         border: `6px solid ${black}`,
         borderRadius: "30px",
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+        boxShadow: `0px 5px 20px ${popupShadow}`,
       },
 
       track: {
@@ -1250,48 +1222,44 @@ const Dark: TTheme = {
       },
 
       trackNumber: {
-        color: "#A3A9AE",
+        color: gray,
       },
 
       fillLower: {
-        background: "#242424",
-        focusBackground: "#242424",
-        border: `1.4px solid #242424`,
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "11.2px",
       },
 
       fillUpper: {
-        background: "#242424",
-        focusBackground: "#242424",
-        border: `1.4px solid #242424`,
+        background: grayDarkMid,
+        focusBackground: grayDarkMid,
+        border: `1.4px solid ${grayDarkMid}`,
         borderRadius: "11.2px",
       },
-    },
-
-    dropZone: {
-      border: `1px dashed #474747`,
     },
 
     container: {
       miniPreview: {
         width: "160px",
-        border: `1px solid #242424`,
+        border: `1px solid ${grayDarkMid}`,
         borderRadius: "6px",
         padding: "8px",
       },
 
       buttons: {
         height: "32px",
-        background: "#292929",
+        background: black,
         mobileWidth: "40px",
         mobileHeight: "100%",
         mobileBackground: "none",
       },
 
       button: {
-        background: "#b6b6b6",
-        fill: "#858585",
-        hoverFill: grayMaxLight,
+        background: grayDark,
+        fill: grayDark,
+        hoverFill: white,
         padding: "0 12px",
         height: "40px",
         borderRadius: "6px",
@@ -1311,77 +1279,20 @@ const Dark: TTheme = {
     unsetBackgroundColor: "unset",
   },
 
-  treeMenu: {
-    disabledColor: "#5c5c5c",
-  },
-
-  treeNode: {
-    background: "#3D3D3D",
-    disableColor: "#858585",
-
-    icon: {
-      color: "#ADADAD",
-    },
-
-    dragging: {
-      draggable: {
-        background: "rgba(230, 211, 138, 0.12)",
-        hoverBackgroundColor: "rgba(204, 184, 102, 0.2)",
-        borderRadius: "3px",
-      },
-
-      title: {
-        width: "85%",
-        // color: "#000",
-      },
-    },
-
-    draggable: {
-      color: cyanBlueDarkShade,
-      dragOverBackgroundColor: strongBlue,
-      border: `1px ${strongBlue} solid`,
-      dragOverColor: white,
-
-      gapTop: {
-        borderTop: `2px blue solid`,
-      },
-
-      gapBottom: {
-        borderBottom: `2px blue solid`,
-      },
-    },
-
-    contentWrapper: {
-      color: darkRed,
-    },
-
-    title: {
-      color: "#a9a9a9",
-    },
-
-    selected: {
-      background: black,
-      hoverBackgroundColor: black,
-      borderRadius: "3px",
-    },
-
-    checkbox: {
-      border: `2px solid ${white}`,
-      borderTop: 0,
-      borderLeft: 0,
-    },
-  },
-
   progressBar: {
-    backgroundColor: "#858585",
+    backgroundColor: grayDark,
+
+    animation: {
+      background: white,
+    },
 
     percent: {
-      background: "#E17415",
+      background: darkStatusWarning,
     },
 
     color: {
       error: darkErrorStatus,
-      status: grayMaxLight,
+      status: white,
     },
   },
 
@@ -1389,20 +1300,19 @@ const Dark: TTheme = {
     fontWeight: "600",
     fontSize: "13px",
     zIndex: "400",
-    background: "#333333",
+    background: black,
     borderRadius: "6px",
-    boxShadow: "0px 8px 16px 0px #040F1B29",
-    // boxShadowMobile: "0px -4px 60px rgba(0, 0, 0, 0.25)",
-    border: "1px solid #474747",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+    border: `1px solid ${grayDarkStrong}`,
   },
 
   dropDownItem: {
-    color: grayMaxLight,
+    color: white,
     disableColor: gray,
     backgroundColor: black,
-    hoverBackgroundColor: "#3D3D3D",
+    hoverBackgroundColor: lightDarkGrayHover,
     hoverDisabledBackgroundColor: black,
-    selectedBackgroundColor: "#282828",
+    selectedBackgroundColor: darkGrayLight,
     fontWeight: "600",
     fontSize: "13px",
     width: "100%",
@@ -1419,13 +1329,13 @@ const Dark: TTheme = {
       marginRight: "8px",
       lineHeight: "10px",
 
-      color: grayMaxLight,
-      disableColor: grayMaxLight,
+      color: white,
+      disableColor: white,
     },
 
     separator: {
       padding: "0px 16px",
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${grayDarkStrong}`,
       margin: " 4px 16px 4px",
       lineHeight: "1px",
       height: "1px",
@@ -1435,35 +1345,35 @@ const Dark: TTheme = {
 
   toast: {
     active: {
-      success: "#292929",
-      error: "#292929",
-      info: "#292929",
-      warning: "#292929",
+      success: black,
+      error: black,
+      info: black,
+      warning: black,
     },
     hover: {
-      success: "#292929",
-      error: "#292929",
-      info: "#292929",
-      warning: "#292929",
+      success: black,
+      error: black,
+      info: black,
+      warning: black,
     },
     border: {
-      success: "2px solid #9de051",
-      error: "2px solid #e0b051",
-      info: "2px solid #e0d751",
-      warning: "2px solid #e07751",
+      success: `2px solid ${darkToastDone}`,
+      error: `2px solid ${darkToastAlert}`,
+      info: `2px solid ${darkToastInfo}`,
+      warning: `2px solid ${darkToastWarning}`,
     },
 
     zIndex: "9999",
     position: "fixed",
     padding: "4px",
     width: "320px",
-    color: grayMaxLight,
+    color: white,
     top: "16px",
     right: "24px",
     marginTop: "0px",
 
     closeButton: {
-      color: grayMaxLight,
+      color: white,
       fontWeight: "700",
       fontSize: "14px",
       background: "transparent",
@@ -1475,11 +1385,11 @@ const Dark: TTheme = {
 
     main: {
       marginBottom: "1rem",
-      boxShadow: "0px 16px 16px rgba(0, 0, 0, 0.16)",
+      boxShadow: `0px 16px 16px ${popupShadow}`,
       maxHeight: "800px",
       overflow: "hidden",
       borderRadius: "6px",
-      color: grayMaxLight,
+      color: white,
       margin: "0 0 12px",
       padding: "12px",
       minHeight: "32px",
@@ -1496,17 +1406,17 @@ const Dark: TTheme = {
       height: "16px",
       minHeight: "16px",
       color: {
-        success: "#9DE051",
-        error: "#E0B151",
-        info: "#E0D751",
-        warning: "#E07751",
+        success: darkToastDone,
+        error: darkToastAlert,
+        info: darkToastInfo,
+        warning: darkToastWarning,
       },
     },
 
     text: {
       lineHeight: " 1.3",
       fontSize: "12px",
-      color: grayMaxLight,
+      color: white,
     },
 
     title: {
@@ -1515,95 +1425,45 @@ const Dark: TTheme = {
       marginBottom: "5px",
       lineHeight: "16px",
       color: {
-        success: "#9DE051",
-        error: "#E0B151",
-        info: "#E0D751",
-        warning: "#E07751",
+        success: darkToastDone,
+        error: darkToastAlert,
+        info: darkToastInfo,
+        warning: darkToastWarning,
       },
       fontSize: "12px",
     },
 
-    closeButtonColor: grayMaxLight,
+    closeButtonColor: white,
   },
 
   loader: {
-    color: shuttleGrey,
+    color: loaderDark,
     size: "40px",
     marginRight: "2px",
     borderRadius: "50%",
   },
   rombsLoader: {
     blue: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
       colorStep_4: "#323032",
     },
     red: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
     },
     green: {
-      colorStep_1: "#333",
-      colorStep_2: "#333",
+      colorStep_1: black,
+      colorStep_2: black,
       colorStep_3: "#323032",
       colorStep_4: "#323032",
     },
   },
   dialogLoader: {
-    borderBottom: "1px solid #292929",
+    borderBottom: `1px solid ${black}`,
   },
-
-  // dropDownItem: {
-  //   width: "100%",
-  //   maxWidth: "240px",
-  //   border: "none",
-  //   cursor: "pointer",
-  //   padding: "0px 16px",
-  //   lineHeight: "32px",
-  //   textAlign: "left",
-  //   background: "none",
-  //   textDecoration: "none",
-  //   fontStyle: "normal",
-  //   fontWeight: "600",
-  //   fontSize: "13px",
-
-  //   whiteSpace: "nowrap",
-  //   overflow: "hidden",
-  //   textOverflow: "ellipsis",
-
-  //   outline: "none",
-  //   color: black,
-  //   textTransform: "none",
-
-  //   hoverBackgroundColor: grayLight,
-  //   noHoverBackgroundColor: white,
-
-  //   header: {
-  //     color: gray,
-  //     hoverCursor: "default",
-  //     hoverBackgroundColor: "white",
-  //     textTransform: "uppercase",
-  //   },
-
-  //   disabled: {
-  //     color: gray,
-  //     hoverCursor: "default",
-  //     hoverBackgroundColor: "white",
-  //   },
-
-  //   separator: {
-  //     padding: "0px 16px",
-  //     border: `0.5px solid ${grayLightMid}`,
-  //     cursor: "default",
-  //     margin: "6px 16px 6px",
-  //     lineHeight: "1px",
-  //     height: "1px",
-  //     width: "calc(100% - 32px)",
-  //   },
-
-  //   tablet: { lineHeight: "36px" },
 
   comboBox: {
     padding: "6px 0px",
@@ -1638,36 +1498,36 @@ const Dark: TTheme = {
       selectPaddingRightNoArrow: "14px",
       selectPaddingRight: "8px",
 
-      color: "#858585",
-      disabledColor: "#858585",
-      background: "#292929",
+      color: grayDark,
+      disabledColor: grayDark,
+      background: black,
       backgroundWithBorder: "none",
       backgroundModernView: "none",
 
-      border: `1px solid #474747`,
+      border: `1px solid ${grayDarkStrong}`,
       borderRadius: "3px",
 
-      borderColor: "#474747",
-      openBorderColor: grayMaxLight,
+      borderColor: grayDarkStrong,
+      openBorderColor: white,
 
-      disabledBorderColor: "#474747",
-      disabledBackground: "#474747",
+      disabledBorderColor: grayDarkStrong,
+      disabledBackground: grayDarkStrong,
 
-      hoverBorderColor: "#858585",
-      hoverBorderColorOpen: grayMaxLight,
-      hoverDisabledBorderColor: "#474747",
+      hoverBorderColor: grayDark,
+      hoverBorderColorOpen: white,
+      hoverDisabledBorderColor: grayDarkStrong,
 
-      hoverBackgroundModernView: "#474747",
-      activeBackgroundModernView: "#282828",
-      focusBackgroundModernView: "#242424",
+      hoverBackgroundModernView: grayDarkStrong,
+      activeBackgroundModernView: darkGrayLight,
+      focusBackgroundModernView: grayDarkMid,
     },
 
     label: {
       marginRightWithBorder: "13px",
       marginRight: "4px",
 
-      disabledColor: "#858585",
-      color: "#858585",
+      disabledColor: grayDark,
+      color: grayDark,
       alternativeColor: grayDark,
       selectedColor: white,
 
@@ -1682,9 +1542,9 @@ const Dark: TTheme = {
       width: "16px",
       height: "16px",
 
-      defaultDisabledColor: "#858585",
+      defaultDisabledColor: grayDark,
       defaultColor: white,
-      disabledColor: "#858585",
+      disabledColor: grayDark,
       color: white,
       selectedColor: white,
     },
@@ -1692,7 +1552,7 @@ const Dark: TTheme = {
     plusBadge: {
       color: black,
       bgColor: grayDark,
-      selectedBgColor: "#ADADAD",
+      selectedBgColor: darkGrayDark,
     },
   },
 
@@ -1712,12 +1572,12 @@ const Dark: TTheme = {
   },
 
   toggleButton: {
-    fillColorDefault: "#4781D1",
-    fillColorOff: "#292929",
-    hoverFillColorOff: "#3D3D3D",
+    fillColorDefault: lightBlueMain,
+    fillColorOff: grayDarkMid,
+    hoverFillColorOff: lightDarkGrayHover,
 
-    fillCircleColor: "#FFFFFF",
-    fillCircleColorOff: "#FFFFFF",
+    fillCircleColor: white,
+    fillCircleColorOff: white,
   },
 
   contextMenuButton: {
@@ -1732,7 +1592,7 @@ const Dark: TTheme = {
       margin: "0",
       lineHeight: "56px",
       fontWeight: "700",
-      borderBottom: `1px solid #474747`,
+      borderBottom: `1px solid ${grayDarkStrong}`,
     },
 
     bodyContent: {
@@ -1741,17 +1601,17 @@ const Dark: TTheme = {
   },
 
   calendar: {
-    color: "#FFFFFF",
-    disabledColor: "#474747",
-    pastColor: "#858585",
-    onHoverBackground: "#3D3D3D",
-    titleColor: "#ADADAD",
-    outlineColor: "#474747",
-    arrowColor: "#F6F9FC",
-    disabledArrow: "#474747",
-    weekdayColor: "#858585",
-    accent: "#4781d1",
-    boxShadow: "0px 12px 40px 0px rgba(0, 0, 0, 0.40)",
+    color: white,
+    disabledColor: grayDarkStrong,
+    pastColor: grayDark,
+    onHoverBackground: lightDarkGrayHover,
+    titleColor: darkGrayDark,
+    outlineColor: grayDarkStrong,
+    arrowColor: grayDarkText,
+    disabledArrow: grayDarkStrong,
+    weekdayColor: grayDark,
+    accent: lightBlueMain,
+    boxShadow: `0px 12px 40px 0px ${popupShadow}`,
   },
 
   datePicker: {
@@ -1760,14 +1620,14 @@ const Dark: TTheme = {
     contentPadding: "0 16px 16px",
     bodyPadding: "16px 0",
     backgroundColor: black,
-    inputBorder: blueMain,
+    inputBorder: lightSecondMain,
     iconPadding: "8px 8px 7px 0px",
 
     contentMaxWidth: "500px",
     contentLineHeight: "56px",
     contentFontWeight: "700",
 
-    borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+    borderBottom: `1px solid ${grayDarkStrong}`,
   },
 
   aside: {
@@ -1785,120 +1645,52 @@ const Dark: TTheme = {
 
   dragAndDrop: {
     height: "100%",
-    border: `1px solid ${globalColors.darkSilver}`,
     transparentBorder: "1px solid transparent",
-    acceptBackground: "rgba(204, 184, 102, 0.2)",
-    background: "rgba(230, 211, 138, 0.12)",
+    acceptBackground: dndDarkHover,
+    background: dndDarkColor,
   },
 
-  // phoneInput: {
-  //   width: "304px",
-  //   height: "44px",
-  //   itemTextColor: black,
-  //   itemBackgroundColor: white,
-  //   itemHoverColor: grayLightMid,
-  //   scrollBackground: "rgba(0, 0, 0, 0.1)",
-  //   placeholderColor: gray,
-  // },
-
-  // squareButton: {
-  //   height: "32px",
-  //   width: "32px",
-  //   color: gray,
-  //   backgroundColor: white,
-  //   border: `1px solid ${grayMid}`,
-  //   borderRadius: "3px",
-  //   outline: "none",
-  //   hover: {
-  //     backgroundColor: white,
-  //     border: `1px solid ${gray}`,
-  //   },
-  //   click: {
-  //     backgroundColor: grayLightMid,
-  //     border: `1px solid ${gray}`,
-  //   },
-  //   disable: {
-  //     backgroundColor: grayLight,
-  //     border: `1px solid ${grayLightMid}`,
-  //   },
-  //   crossShape: {
-  //     color: graySilver,
-  //     disable: {
-  //       color: gray,
-  //     },
-  //   },
-  // },
-
-  // roundButton: {
-  //   height: "40px",
-  //   width: "40px",
-  //   backgroundColor: grayLight,
-  //   borderRadius: {
-  //     plus: "112px",
-  //     minus: "81px",
-  //   },
-  //   borderStyle: "none",
-  //   outline: "none",
-  //   hover: {
-  //     backgroundColor: grayLightMid,
-  //   },
-  //   click: {
-  //     backgroundColor: grayMid,
-  //   },
-  //   disable: {
-  //     backgroundColor: grayLight,
-  //   },
-  //   plus: {
-  //     color: grayMid,
-  //     disable: {
-  //       color: black,
-  //     },
-  //   },
-  // },
   catalog: {
-    background: "#292929",
+    background: darkGrayLight,
 
     header: {
-      borderBottom: "1px solid #474747",
-      iconFill: "#a9a9a9",
+      borderBottom: `1px solid ${grayDarkStrong}`,
+      iconFill: darkGrayDark,
     },
     control: {
-      background: "#a3a3a3",
-      fill: "#ffffff",
+      fill: white,
     },
 
-    headerBurgerColor: "#606060",
+    headerBurgerColor: darkGrayDark,
 
-    verticalLine: "1px solid #474747",
+    verticalLine: `1px solid ${grayDarkStrong}`,
 
     profile: {
-      borderTop: "1px solid #474747",
-      background: "#3D3D3D",
+      borderTop: `1px solid ${grayDarkStrong}`,
+      background: lightDarkGrayHover,
     },
 
     paymentAlert: {
-      color: "#ed7309",
-      warningColor: "#E06451",
-    },
-
-    teamTrainingAlert: {
-      titleColor: "#FFFFFF",
-      borderColor: "#388BDE",
-      linkColor: "#5299E0",
+      color: lightStatusWarning,
+      warningColor: darkErrorStatus,
     },
   },
 
   alertComponent: {
-    descriptionColor: "#ADADAD",
-    iconColor: "#ADADAD",
+    descriptionColor: darkGrayDark,
+    iconColor: darkGrayDark,
   },
 
   catalogItem: {
+    header: {
+      color: grayDark,
+      background: grayDarkStrong,
+    },
     container: {
       width: "100%",
       height: "36px",
       padding: "0 12px",
-      background: "#1b1c1d",
+      background: black,
       marginBottom: "16px",
       tablet: {
         height: "44px",
@@ -1919,8 +1711,8 @@ const Dark: TTheme = {
         width: "16px",
         height: "16px",
 
-        fill: "#a9a9a9",
-        isActiveFill: "#FFFFFF",
+        fill: darkGrayDark,
+        isActiveFill: white,
         tablet: {
           width: "20px",
           height: "20px",
@@ -1931,8 +1723,8 @@ const Dark: TTheme = {
       width: "100%",
       marginLeft: "8px",
       lineHeight: "20px",
-      color: "#a9a9a9",
-      isActiveColor: "#FFFFFF",
+      color: darkGrayDark,
+      isActiveColor: white,
       fontSize: "13px",
       fontWeight: 600,
       tablet: {
@@ -1965,235 +1757,227 @@ const Dark: TTheme = {
       },
     },
     badgeWithoutText: {
-      backgroundColor: "#F58D31",
+      backgroundColor: mainOrange,
 
       size: "8px",
       position: "-4px",
     },
-    trashIconFill: "#858585",
+    trashIconFill: grayDark,
   },
 
   navigation: {
-    expanderColor: "#eeeeee",
+    expanderColor: white,
     background: black,
-    rootFolderTitleColor: "#ADADAD",
-    boxShadow: "0px 8px 16px 0px #040F1B29",
+    rootFolderTitleColor: darkGrayDark,
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: mainRed,
 
     icon: {
-      fill: "#E06A1B",
-      stroke: "#474747",
+      fill: darkLink,
+      stroke: grayDarkStrong,
     },
   },
 
   nav: {
-    backgroundColor: "#292929",
+    backgroundColor: black,
   },
 
   navItem: {
-    baseColor: "#a9a9a9",
+    baseColor: darkGrayDark,
     activeColor: white,
-    separatorColor: "#474747",
+    separatorColor: grayDarkStrong,
 
     wrapper: {
-      hoverBackground: "#474747",
+      hoverBackground: grayDarkStrong,
     },
   },
 
   header: {
-    backgroundColor: "#282828 ",
-    recoveryColor: "#4C4C4C",
-    linkColor: "#606060",
-    productColor: "#eeeeee",
+    backgroundColor: darkGrayLight,
+    recoveryColor: darkGrayDark,
+    linkColor: darkGrayDark,
+    productColor: white,
     height: "48px",
   },
 
   menuContainer: {
-    background: "#3d3d3d",
-    color: "rgba(255, 255, 255, 0.92)",
+    background: lightDarkGrayHover,
+    color: white,
   },
 
   article: {
-    background: "#292929",
-    pinBorderColor: "#474747",
-    catalogItemHeader: "#858585",
-    catalogItemText: "rgba(255, 255, 255, 0.6)",
-    catalogItemActiveBackground: "#333333",
-    catalogShowText: "#adadad",
+    background: black,
+    pinBorderColor: grayDarkStrong,
+    catalogItemHeader: grayDark,
+    catalogItemText: grayDarkText,
+    catalogItemActiveBackground: black,
+    catalogShowText: darkGrayDark,
   },
 
   section: {
-    toggler: {
-      background: white,
-      fill: black,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-    },
-
     header: {
       backgroundColor: black,
-      background: `linear-gradient(180deg, #333333 2.81%, rgba(51, 51, 51, 0.9) 63.03%, rgba(51, 51, 51, 0) 100%);`,
-      trashErasureLabelBackground: "#292929",
-      trashErasureLabelText: "#ADADAD",
+      background: `linear-gradient(180deg, ${black} 2.81%, ${grayText} 63.03%, rgba(51, 51, 51, 0) 100%);`,
+      trashErasureLabelBackground: black,
+      trashErasureLabelText: darkGrayDark,
     },
   },
 
   infoPanel: {
-    sectionHeaderToggleIcon: "#858585",
-    sectionHeaderToggleIconActive: "#c4c4c4",
+    sectionHeaderToggleIcon: grayDark,
+    sectionHeaderToggleIconActive: grayStrong,
     sectionHeaderToggleBg: "transparent",
-    sectionHeaderToggleBgActive: "#292929",
+    sectionHeaderToggleBgActive: black,
 
     backgroundColor: black,
     blurColor: blurDark,
-    borderColor: "#474747",
+    borderColor: grayDarkStrong,
     thumbnailBorderColor: grayLightMid,
     textColor: white,
-    errorColor: "#E06451",
+    errorColor: darkErrorStatus,
 
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
     closeButtonSize: "12px",
-    closeButtonBg: "#a2a2a2",
 
-    nameColor: "#A3A9AE",
+    nameColor: gray,
+    avatarColor: gray,
 
     links: {
-      iconColor: "#858585",
-      iconErrorColor: "#E06451",
-      primaryColor: "#ADADAD",
+      color: lightBlueMain,
+      iconColor: grayDark,
+      iconErrorColor: darkErrorStatus,
+      primaryColor: darkGrayDark,
     },
 
     members: {
-      iconColor: "#858585",
-      iconHoverColor: "#ffffff",
-      isExpectName: "#A3A9AE",
-      subtitleColor: "#a3a9ae",
-      meLabelColor: "#a3a9ae",
-      roleSelectorColor: "#a3a9ae",
-      disabledRoleSelectorColor: "#a3a9ae",
-      roleSelectorArrowColor: "#a3a9ae",
-      createLink: "#858585",
-      linkAccessComboboxExpired: "#a3a9ae",
+      iconColor: grayDark,
+      iconHoverColor: white,
+      isExpectName: gray,
+      subtitleColor: gray,
+      meLabelColor: gray,
+      roleSelectorColor: gray,
+      disabledRoleSelectorColor: gray,
+      roleSelectorArrowColor: gray,
+      createLink: grayDark,
+      linkAccessComboboxExpired: gray,
+      crossFill: lightGrayDark,
     },
 
     history: {
-      subtitleColor: "#A3A9AE",
-      fileBlockBg: "#292929",
-      dateColor: "#A3A9AE",
-      fileExstColor: "#A3A9AE",
-      locationIconColor: "#A3A9AE",
-      folderLabelColor: "#A3A9AE",
-      renamedItemColor: "#A3A9AE",
-      oldRoleColor: "#A3A9AE",
-      messageColor: "#FFFFFF",
+      subtitleColor: gray,
+      fileBlockBg: darkGrayLight,
+      dateColor: gray,
+      fileExstColor: gray,
+      locationIconColor: gray,
+      folderLabelColor: gray,
+      renamedItemColor: gray,
+      oldRoleColor: gray,
+      messageColor: white,
+      itemBorderColor: grayDarkStrong,
+      fileBackgroundColor: darkGrayLight,
     },
 
     details: {
-      customLogoBorderColor: "#474747",
-      commentEditorIconColor: "#eee",
-      tagBackground: "#242424",
+      customLogoBorderColor: grayDarkStrong,
+      commentEditorIconColor: white,
+      tagBackground: grayDarkMid,
     },
 
     gallery: {
-      borderColor: "#292929",
-      descriptionColor: "#eeeeee",
+      borderColor: black,
+      descriptionColor: white,
     },
 
     search: {
-      boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
+      boxShadow: `0px 5px 20px 0px ${popupShadow}`,
+    },
+
+    groups: {
+      textColor: grayDark,
+      tagColor: grayDarkStrong,
+    },
+    expired: {
+      color: darkGrayDark,
     },
   },
 
   filesArticleBody: {
     background: black,
-    panelBackground: "#474747",
+    panelBackground: grayDarkStrong,
 
-    fill: "#C4C4C4",
-    expanderColor: "#C4C4C4",
+    fill: grayStrong,
+    expanderColor: grayStrong,
 
     downloadAppList: {
-      textColor: "#858585",
-      color: "#5C5C5C",
-      winHoverColor: "#3785D3",
-      macHoverColor: "#fff",
-      linuxHoverColor: "#FFB800",
-      androidHoverColor: "#9BD71C",
-      iosHoverColor: "#fff",
-    },
-
-    thirdPartyList: {
-      color: "#818b91",
-      linkColor: "#DDDDDD",
+      textColor: grayDark,
+      color: grayDarkText,
+      winHoverColor: windowsColor,
+      macHoverColor: white,
+      linuxHoverColor: linuxColor,
+      androidHoverColor: androidColor,
+      iosHoverColor: white,
     },
     devTools: {
-      border: "1px solid #474747",
-      color: "#858585",
+      border: `1px solid ${grayDarkStrong}`,
+      color: grayDark,
     },
   },
 
   peopleArticleBody: {
-    iconColor: "#C4C4C4",
-    expanderColor: "#C4C4C4",
+    iconColor: grayStrong,
+    expanderColor: grayStrong,
   },
 
   peopleTableRow: {
-    fill: graySilver,
+    nameColor: white,
+    pendingNameColor: grayDark,
 
-    nameColor: grayMaxLight,
-    pendingNameColor: "#6f6f6f",
-
-    sideInfoColor: "#858585",
-    pendingSideInfoColor: "#5a5a5a",
+    sideInfoColor: grayDark,
+    pendingSideInfoColor: grayDarkStrong,
   },
 
   filterInput: {
     button: {
-      border: "1px solid #474747",
-      hoverBorder: "1px solid #858585",
+      border: `1px solid ${grayDarkStrong}`,
+      hoverBorder: `1px solid ${grayDark}`,
 
-      openBackground: "#a3a9ae",
+      openBackground: gray,
 
-      openFill: "#eeeeee",
+      openFill: white,
     },
 
     filter: {
-      background: "#333333",
-      border: "1px solid #474747",
-      color: "#a3a9ae",
+      background: black,
+      border: `1px solid ${grayDarkStrong}`,
+      color: gray,
 
-      separatorColor: "#474747",
-      indicatorColor: "#F58D31",
+      separatorColor: grayDarkStrong,
+      indicatorColor: mainOrange,
 
       selectedItem: {
-        background: "#eeeeee",
-        border: "#eeeeee",
-        color: "#333333",
+        background: white,
+        border: white,
+        color: black,
       },
     },
 
     sort: {
-      background: "#333333",
-      hoverBackground: "#292929",
-      selectedViewIcon: "rgba(255, 255, 255, 0.88)",
-      viewIcon: "#858585",
-      sortFill: "rgba(255, 255, 255, 0.6)",
+      background: black,
+      hoverBackground: black,
+      selectedViewIcon: lightGraySelected,
+      viewIcon: grayDark,
+      sortFill: darkGrayDark,
 
-      tileSortFill: "#eeeeee",
-      tileSortColor: "#eeeeee",
+      tileSortFill: white,
+      tileSortColor: white,
     },
 
     selectedItems: {
-      background: "#242424",
-      hoverBackground: "#3d3d3d",
+      background: grayDarkMid,
+      hoverBackground: lightDarkGrayHover,
     },
-  },
-
-  profileInfo: {
-    color: "#858585",
-    iconButtonColor: grayMaxLight,
-    linkColor: grayMaxLight,
-
-    tooltipLinkColor: "#e06a1b",
-    iconColor: "#C96C27",
   },
 
   updateUserForm: {
@@ -2202,394 +1986,404 @@ const Dark: TTheme = {
   },
 
   tableContainer: {
-    borderRight: "2px solid #474747",
-    hoverBorderColor: "#474747",
-    tableCellBorder: "1px solid #474747",
+    borderRight: `2px solid ${grayDarkStrong}`,
+    hoverBorderColor: grayDarkStrong,
+    tableCellBorder: `1px solid ${grayDarkStrong}`,
+
+    indexingSeparator: white,
 
     groupMenu: {
       background: black,
-      borderBottom: "1px solid #474747",
-      borderRight: "1px solid #474747",
-      boxShadow: "0px 40px 60px rgba(0, 0, 0, 0.12)",
+      borderBottom: `1px solid ${grayDarkStrong}`,
+      borderRight: `1px solid ${grayDarkStrong}`,
+      boxShadow: `0px 40px 60px ${menuShadow}`,
     },
 
     header: {
       background: black,
-      borderBottom: "1px solid #474747",
-      textColor: "#858585",
-      activeTextColor: "#858585",
-      hoverTextColor: grayMaxLight,
+      borderBottom: `1px solid ${grayDarkStrong}`,
+      textColor: grayDark,
+      activeTextColor: grayDark,
+      hoverTextColor: white,
 
-      iconColor: "#858585",
-      activeIconColor: "#858585",
-      hoverIconColor: grayMaxLight,
+      iconColor: grayDark,
+      activeIconColor: grayDark,
+      hoverIconColor: white,
 
-      borderImageSource: `linear-gradient(to right,${black} 21px,#474747 21px,#474747 calc(100% - 20px),${black} calc(100% - 20px))`,
-      borderHoverImageSource: `linear-gradient(to right,${black} 0px,#474747 0px,#474747 100% ,${black} 100%)`,
-      lengthenBorderImageSource: `linear-gradient(to right, #474747, #474747)`,
-      hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
+      borderImageSource: `linear-gradient(to right,${black} 21px,${grayDarkStrong} 21px,${grayDarkStrong} calc(100% - 20px),${black} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${black} 0px,${grayDarkStrong} 0px,${grayDarkStrong} 100% ,${black} 100%)`,
+      lengthenBorderImageSource: `linear-gradient(to right, ${grayDarkStrong}, ${grayDarkStrong})`,
+      hotkeyBorderBottom: `1px solid ${lightSecondMain}`,
 
-      settingsIconDisableColor: "#474747",
+      settingsIconDisableColor: grayDarkStrong,
     },
 
     tableCell: {
-      border: "1px solid #474747",
+      border: `1px solid ${grayDarkStrong}`,
     },
   },
   filesSection: {
     rowView: {
-      checkedBackground: "#3D3D3D",
+      checkedBackground: lightDarkGrayHover,
 
-      draggingBackground: "rgba(230, 211, 138, 0.12)",
-      draggingHoverBackground: "rgba(204, 184, 102, 0.2)2",
+      draggingBackground: dndColor,
+      draggingHoverBackground: dndHoverColor,
 
       shareButton: {
-        color: "#858585",
-        fill: "#858585",
+        color: grayDark,
+        fill: grayDark,
       },
 
-      sideColor: "#858585",
-      linkColor: grayMaxLight,
-      textColor: "#858585",
+      sideColor: grayDark,
+      linkColor: white,
+      textColor: grayDark,
 
-      editingIconColor: "#eeeeee",
-      shareHoverColor: "#eeeeee",
-      pinColor: "#FFFFFF",
+      editingIconColor: white,
+      shareHoverColor: white,
+      pinColor: white,
     },
 
     tableView: {
       fileName: {
-        linkColor: grayMaxLight,
-        textColor: "#858585",
+        linkColor: white,
+        textColor: grayDark,
       },
+      fileExstColor: gray,
 
       row: {
-        checkboxChecked: `linear-gradient(to right, ${black} 24px, #474747 24px)`,
-        checkboxDragging:
-          "linear-gradient(to right, rgba(230, 211, 138, 0.12) 24px, #474747 24px)",
-        checkboxDraggingHover:
-          "inear-gradient(to right,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
+        checkboxChecked: `linear-gradient(to right, ${black} 24px, ${grayDarkStrong} 24px)`,
+        checkboxDragging: `linear-gradient(to right, ${dndDarkColor} 24px, ${grayDarkStrong} 24px)`,
+        checkboxDraggingHover: `inear-gradient(to right, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
-        contextMenuWrapperChecked: `linear-gradient(to left, ${black} 24px, #474747 24px)`,
-        contextMenuWrapperDragging:
-          "border-image-source: linear-gradient(to left, rgba(230, 211, 138, 0.12) 24px, #474747 24px)",
-        contextMenuWrapperDraggingHover:
-          "linear-gradient(to left,rgba(204, 184, 102, 0.2) 24px, #474747 24px)",
+        contextMenuWrapperChecked: `linear-gradient(to left, ${black} 24px, ${grayDarkStrong} 24px)`,
+        contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${dndDarkColor} 24px, ${grayDarkStrong} 24px)`,
+        contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
-        backgroundActive: "#3D3D3D",
+        backgroundActive: lightDarkGrayHover,
 
-        borderImageCheckbox:
-          "linear-gradient(to right, #474747 24px, #474747 24px)",
-        borderImageContextMenu:
-          "linear-gradient(to left, #474747 24px, #474747 24px)",
+        indexBackgroundButtonHover: darkGreyHover,
+        indexUpdate: darkActive,
+        indexActive: darkGreyAction,
+        indexArrowButtonHover: white,
 
-        borderHover: "#474747",
+        borderImageCheckbox: `linear-gradient(to right, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,
+        borderImageContextMenu: `linear-gradient(to left, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,
+
+        borderHover: grayDarkStrong,
         sideColor: gray,
 
-        shareHoverColor: "#eeeeee",
+        shareHoverColor: white,
 
-        borderImageRight:
-          "linear-gradient(to right, #333333 25px, #474747 24px)",
-        borderImageLeft: "linear-gradient(to left, #333333 20px, #474747 24px)",
+        borderImageRight: `linear-gradient(to right, ${black} 25px, ${grayDarkStrong} 24px)`,
+        borderImageLeft: `linear-gradient(to left, ${black} 20px, ${grayDarkStrong} 24px)`,
 
-        borderColor: "#474747",
-        borderColorTransition: "#474747",
+        borderColor: grayDarkStrong,
+        borderColorTransition: grayDarkStrong,
+
+        color: white,
+        backgroundGroup: grayDarkMid,
       },
     },
 
     tilesView: {
       tile: {
-        draggingColor: "rgba(230, 211, 138, 0.12)",
-        draggingHoverColor: "rgba(204, 184, 102, 0.2)",
-        checkedColor: "#3d3d3d",
+        draggingColor: dndDarkColor,
+        draggingHoverColor: dndDarkHover,
+        checkedColor: lightDarkGrayHover,
         roomsCheckedColor: black,
-        border: "1px solid #474747",
+        border: `1px solid ${grayDarkStrong}`,
         backgroundBadgeColor: black,
-        backgroundColor: "#282828",
+        backgroundColor: darkGrayLight,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
         roomsBottomBorderRadius: "0 0 12px 12px",
         upperBorderRadius: "6px 6px 0 0",
         roomsUpperBorderRadius: "12px 12px 0 0",
-        backgroundColorTop: "#292929",
+        backgroundColorTop: black,
       },
 
-      sideColor: grayMaxLight,
-      color: grayMaxLight,
-      textColor: "#858585",
+      sideColor: white,
+      color: white,
+      textColor: grayDark,
     },
 
-    animationColor: "rgba(82, 153, 224, 0.16)",
+    animationColor: lightSecondMain,
   },
 
   advancedSelector: {
-    footerBorder: "1px solid #474747",
+    footerBorder: `1px solid ${grayDarkStrong}`,
 
-    hoverBackgroundColor: "#474747",
-    selectedBackgroundColor: "#474747",
-    borderLeft: "1px solid #474747",
+    hoverBackgroundColor: grayDarkStrong,
+    selectedBackgroundColor: grayDarkStrong,
+    borderLeft: `1px solid ${grayDarkStrong}`,
 
     searcher: {
-      hoverBorderColor: "#858585",
-      focusBorderColor: grayMaxLight,
-      placeholderColor: "#474747",
+      hoverBorderColor: grayDark,
+      focusBorderColor: white,
+      placeholderColor: grayDarkStrong,
     },
   },
 
   selector: {
-    border: `1px solid #474747`,
+    border: `1px solid ${grayDarkStrong}`,
 
     breadCrumbs: {
-      prevItemColor: "#CCCCCC",
-      arrowRightColor: "#ADADAD",
+      prevItemColor: darkGrayDark,
+      arrowRightColor: darkGrayDark,
     },
 
     info: {
-      backgroundColor: "#282828",
-      color: "#ADADAD",
+      backgroundColor: darkGrayLight,
+      color: darkGrayDark,
     },
 
-    bodyDescriptionText: "#858585",
+    bodyDescriptionText: grayDark,
 
     item: {
-      hoverBackground: "#3d3d3d",
-      selectedBackground: "#3d3d3d",
+      hoverBackground: lightDarkGrayHover,
+      selectedBackground: lightDarkGrayHover,
 
-      inputButtonBorder: "#474747",
-      inputButtonBorderHover: grayMaxLight,
+      inputButtonBorder: grayDarkStrong,
+      inputButtonBorderHover: white,
 
-      disableTextColor: "#858585",
+      disableTextColor: grayDark,
     },
 
     emptyScreen: {
-      descriptionColor: "#ADADAD",
-      buttonColor: "#ADADAD",
-      hoverButtonColor: "#FFFFFF",
-      pressedButtonColor: "#CCCCCC",
+      descriptionColor: darkGrayDark,
+      buttonColor: darkGrayDark,
+      hoverButtonColor: white,
+      pressedButtonColor: grayDarkText,
     },
   },
 
   floatingButton: {
     backgroundColor: white,
     color: black,
-    boxShadow: "0px 12px 24px rgba(0, 0, 0, 0.12)",
+    boxShadow: `0px 12px 24px ${popupShadow}`,
     fill: black,
 
     alert: {
-      fill: "#F58D31",
+      fill: mainOrange,
       path: black,
     },
   },
 
   mediaViewer: {
-    color: "#d1d1d1",
-    background: "rgba(17, 17, 17, 0.867)",
-    backgroundColor: "rgba(11, 11, 11, 0.7)",
+    color: grayDarkStrong,
+    backgroundColor: highlandGray,
     fill: white,
     titleColor: white,
     iconColor: white,
 
     controlBtn: {
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: silver,
     },
 
     imageViewer: {
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
-      inactiveBackgroundColor: "rgba(11,11,11,0.7)",
+      backgroundColor: silver,
+      inactiveBackgroundColor: highlandGray,
       fill: white,
     },
 
     progressBar: {
-      background: "#d1d1d1",
-      backgroundColor: "rgba(200, 200, 200, 0.2)",
+      background: grayDarkStrong,
+      backgroundColor: silver,
     },
 
     scrollButton: {
-      backgroundColor: "rgba(11, 11, 11, 0.7)",
-      background: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: highlandGray,
+      background: silver,
       border: `solid ${white}`,
     },
 
     videoViewer: {
       fill: white,
       stroke: white,
-      color: "#d1d1d1",
+      color: grayDarkStrong,
       colorError: white,
       backgroundColorError: darkBlack,
-      backgroundColor: "rgba(11, 11, 11, 0.7)",
-      background: "rgba(200, 200, 200, 0.2)",
+      backgroundColor: highlandGray,
+      background: silver,
     },
-  },
-
-  connectCloud: {
-    connectBtnContent: silver,
-    connectBtnTextBg: "none",
-    connectBtnIconBg: "#none",
-    connectBtnTextBorder: silver,
-    connectBtnIconBorder: "#474747",
   },
 
   createEditRoomDialog: {
     commonParam: {
-      descriptionColor: "#a3a9ae",
-      textColor: "#858585",
+      descriptionColor: gray,
+      textColor: grayDark,
     },
 
     roomType: {
       listItem: {
         background: "none",
-        hoverBackground: "#282828",
-        borderColor: "#474747",
-        descriptionText: "#A3A9AE",
+        hoverBackground: darkGrayLight,
+        borderColor: grayDarkStrong,
+        descriptionText: gray,
       },
       dropdownButton: {
         background: "none",
-        hoverBackground: "#282828",
-        borderColor: "#474747",
-        isOpenBorderColor: "#F97A0B",
-        descriptionText: "#A3A9AE",
+        hoverBackground: darkGrayLight,
+        borderColor: grayDarkStrong,
+        descriptionText: gray,
       },
       dropdownItem: {
-        background: "#333333",
-        hoverBackground: "#282828",
-        descriptionText: "#A3A9AE",
+        background: black,
+        hoverBackground: darkGrayLight,
+        descriptionText: gray,
       },
       displayItem: {
-        background: "#282828",
-        borderColor: "#282828",
-        descriptionText: "#a3a9ae",
+        background: darkGrayLight,
+        borderColor: darkGrayLight,
+        descriptionText: gray,
       },
     },
 
     roomTypeDropdown: {
       desktop: {
-        background: "#333333",
-        borderColor: "#474747",
+        background: black,
+        borderColor: grayDarkStrong,
       },
       mobile: {
-        background: "#333333",
+        background: black,
       },
     },
 
     permanentSettings: {
-      background: "#474747",
-      isPrivateIcon: "#35ad17",
-      descriptionColor: "#a3a9ae",
+      background: grayDarkStrong,
+      isPrivateIcon: darkStatusPositive,
+      descriptionColor: gray,
     },
 
     dropdown: {
-      background: "#333333",
-      borderColor: "#474747",
+      background: black,
+      borderColor: grayDarkStrong,
       item: {
-        hoverBackground: "#282828",
+        hoverBackground: darkGrayLight,
       },
     },
 
     isPrivate: {
       limitations: {
-        background: "#474747",
-        iconColor: "#ed7309",
-        titleColor: "#ed7309",
-        descriptionColor: "#a3a9ae",
-        linkColor: "#e8e8e9",
+        background: grayDarkStrong,
+        iconColor: lightStatusWarning,
+        titleColor: lightStatusWarning,
+        descriptionColor: gray,
+        linkColor: grayDarkText,
       },
     },
 
     thirdpartyStorage: {
       combobox: {
-        background: "#292929",
-        dropdownBorderColor: "#474747",
-        hoverDropdownBorderColor: "#858585",
-        isOpenDropdownBorderColor: "#e8e8e9",
-        arrowFill: "#474747",
+        background: black,
+        dropdownBorderColor: grayDarkStrong,
+        hoverDropdownBorderColor: grayDark,
+        isOpenDropdownBorderColor: grayDarkText,
+        arrowFill: grayDarkStrong,
       },
       folderInput: {
-        background: "#292929",
-        borderColor: "#474747",
-        hoverBorderColor: "#858585",
-        focusBorderColor: "#e8e8e9",
-        rootLabelColor: "#a3a9ae",
-        iconFill: "#657177",
+        background: black,
+        borderColor: grayDarkStrong,
+        hoverBorderColor: grayDark,
+        rootLabelColor: gray,
+        iconFill: darkGrayDark,
       },
     },
 
     iconCropper: {
-      gridColor: "#333333",
+      gridColor: black,
       deleteButton: {
-        background: "#292929",
-        hoverBackground: "#333333",
-        borderColor: "#292929",
-        hoverBorderColor: "#fafafa",
-        color: "#858585",
-        iconColor: "#858585",
+        background: grayDarkMid,
+        hoverBackground: grayDarkStrong,
+        borderColor: gray,
+        hoverBorderColor: lightDarkGrayHover,
+        hoverColor: white,
+        color: darkGrayDark,
+        iconColor: darkGrayDark,
       },
     },
 
     previewTile: {
-      background: "#292929",
-      borderColor: "#474747",
-      iconBorderColor: "#eceef1",
+      background: black,
+      borderColor: grayDarkStrong,
+      iconBorderColor: grayLightMid,
     },
 
     dropzone: {
-      borderColor: "#474747",
-      linkMainColor: "#F97A0B",
-      linkSecondaryColor: "#ffffff",
-      exstsColor: "#a3a9ae",
+      borderColor: grayDarkStrong,
+      linkMainColor: link,
+      linkSecondaryColor: white,
+      exstsColor: gray,
+    },
+    helpButton: {
+      background: grayDark,
+      fill: white,
     },
   },
 
+  createEditGroupDialog: {
+    textColor: grayDark,
+    iconFill: grayDark,
+  },
+
   filesThirdPartyDialog: {
-    border: "1px solid #474747",
+    border: `1px solid ${grayDarkStrong}`,
   },
 
   connectedClouds: {
-    color: "#eeeeee",
-    borderBottom: `1px solid #474747`,
-    borderRight: `1px solid #474747`,
+    color: white,
+    borderBottom: `1px solid ${grayDarkStrong}`,
+    borderRight: `1px solid ${grayDarkStrong}`,
   },
 
   filesModalDialog: {
-    border: `1px solid #474747`,
+    border: `1px solid ${grayDarkStrong}`,
   },
 
   filesDragTooltip: {
     background: black,
-    boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-    color: grayMaxLight,
+    boxShadow: `0px 5px 20px ${popupShadow}`,
+    color: white,
   },
 
   emptyContent: {
     header: {
-      color: "#FFFFFF",
+      color: white,
     },
 
     description: {
-      color: "#ADADAD",
+      color: darkGrayDark,
     },
     button: {
-      colorLink: "#ADADAD",
-      colorText: "#ADADAD",
+      colorLink: darkGrayDark,
+      colorText: darkGrayDark,
     },
   },
 
   emptyView: {
+    link: {
+      color: lightBlueMain,
+      background: black,
+      hoverBackground: darkGrayLight,
+      PressedBackground: grayDarkStrong,
+    },
     items: {
-      hoverColor: charlestonGreen,
-      pressColor: outerSpace,
+      hoverColor: darkGrayLight,
+      pressColor: grayDarkStrong,
     },
   },
 
   filesEmptyContainer: {
-    linkColor: "#adadad",
+    linkColor: darkGrayDark,
     privateRoom: {
-      linkColor: "#E06A1B",
+      linkColor: darkLink,
     },
+    descriptionColor: darkGrayDark,
   },
 
   filesPanels: {
-    color: grayMaxLight,
+    color: white,
 
     aside: {
       backgroundColor: black,
@@ -2603,6 +2397,7 @@ const Dark: TTheme = {
     addUsers: {
       iconColor: gray,
       arrowColor: darkBlack,
+      textColor: grayDark,
     },
 
     changeOwner: {
@@ -2611,82 +2406,76 @@ const Dark: TTheme = {
     },
 
     embedding: {
-      textAreaColor: "#858585",
-      iconColor: grayMaxLight,
+      textAreaColor: grayDark,
+      iconColor: white,
       color: gray,
+      border: `1px solid ${grayDarkMid}`,
+      linkBackground: blueLightMid,
+      linkColor: white,
     },
 
     versionHistory: {
-      borderTop: "1px solid #474747",
+      borderTop: `1px solid ${grayDarkStrong}`,
     },
 
     content: {
       backgroundColor: black,
-      fill: grayMaxLight,
-      disabledFill: "#5c5c5c",
+      fill: white,
+      disabledFill: grayDarkText,
     },
 
     body: {
       backgroundColor: black,
-      fill: grayMaxLight,
+      fill: white,
     },
 
     footer: {
       backgroundColor: black,
-      borderTop: "1px solid #474747",
+      borderTop: `1px solid ${grayDarkStrong}`,
     },
 
     linkRow: {
       backgroundColor: black,
-      fill: grayMaxLight,
-      disabledFill: "#5c5c5c",
+      fill: white,
+      disabledFill: grayDarkText,
     },
 
     selectFolder: {
       color: gray,
     },
 
-    selectFile: {
-      color: gray,
-      background: black,
-      borderBottom: "1px solid #474747",
-      borderRight: "1px solid #474747",
-
-      buttonsBackground: black,
-    },
-
     filesList: {
-      color: grayMaxLight,
+      color: white,
       backgroundColor: black,
-      borderBottom: "1px solid #474747",
+      borderBottom: `1px solid ${grayDarkStrong}`,
     },
 
     modalRow: {
       backgroundColor: black,
       fill: gray,
-      disabledFill: "#5c5c5c",
+      disabledFill: grayDarkText,
     },
 
     sharing: {
-      color: grayMaxLight,
+      color: white,
 
-      fill: grayMaxLight,
-      loadingFill: grayMaxLight,
+      fill: white,
+      loadingFill: white,
 
-      borderBottom: "1px solid #474747",
-      borderTop: "1px solid #474747",
-      externalLinkBackground: "#292929",
-      externalLinkSvg: "#eeeeee",
+      borderBottom: `1px solid ${grayDarkStrong}`,
+      borderTop: `1px solid ${grayDarkStrong}`,
+      externalLinkBackground: black,
+      externalLinkSvg: white,
 
-      internalLinkBorder: "1px dashed #eeeeee",
+      internalLinkBorder: `1px dashed ${white}`,
 
-      itemBorder: "1px dashed #333333",
+      itemBorder: `1px dashed ${black}`,
 
-      itemOwnerColor: "#858585",
+      itemOwnerColor: grayDark,
 
-      backgroundButtons: "#333333",
+      backgroundButtons: black,
 
-      dropdownColor: grayMaxLight,
+      dropdownColor: white,
 
       loader: {
         foregroundColor: black,
@@ -2695,19 +2484,24 @@ const Dark: TTheme = {
     },
 
     upload: {
-      color: black,
-      tooltipColor: "#F5E9BA",
+      color: white,
+      tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
 
       shareButton: {
         color: gray,
-        sharedColor: grayMain,
+        sharedColor: lightGrayDark,
       },
 
       loadingButton: {
-        color: "#eeeeee",
+        color: white,
         background: black,
       },
+    },
+    invite: {
+      textColor: grayDark,
+      addButtonColor: lightBlueMain,
+      border: `1px solid ${grayDarkStrong}`,
     },
   },
 
@@ -2721,10 +2515,9 @@ const Dark: TTheme = {
       },
     },
     separator: {
-      borderBottom: `1px solid #474747 !important`,
+      borderBottom: `1px solid ${grayDarkStrong} !important`,
       margin: "6px 16px 6px 16px !important",
       height: "1px !important",
-      width: "calc(100% - 32px) !important",
     },
     text: {
       header: {
@@ -2739,14 +2532,14 @@ const Dark: TTheme = {
       lineHeight: "30px",
       fontWeight: "600",
       margin: "0 0 0 8px",
-      color: "#eeeeee",
+      color: white,
     },
     hover: black,
     background: "none",
-    svgFill: "#eeeeee",
+    svgFill: white,
     header: {
-      height: "49px",
-      borderBottom: `1px solid #474747`,
+      height: "55px",
+      borderBottom: `1px solid ${grayDarkStrong}`,
       marginBottom: "6px",
     },
     height: "30px",
@@ -2755,16 +2548,15 @@ const Dark: TTheme = {
     padding: "0 12px",
     mobile: {
       height: "36px",
-      padding: "0 16px 6px",
+      padding: "6px 16px",
     },
   },
   newContextMenu: {
     background: black,
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
-    boxShadow: "0px 8px 16px 0px #040F1B29",
-    padding: "6px 0px",
-    border: "1px solid #474747",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+    border: `1px solid ${grayDarkStrong}`,
     devices: {
       maxHeight: "calc(100vh - 64px)",
       tabletWidth: "375px",
@@ -2776,102 +2568,109 @@ const Dark: TTheme = {
     },
   },
   filesSettings: {
-    color: cyanBlueDarkShade,
+    color: grayText,
 
-    linkColor: grayMaxLight,
+    linkColor: white,
   },
 
   filesBadges: {
-    iconColor: "#858585",
-    hoverIconColor: grayMaxLight,
+    iconColor: grayDark,
+    hoverIconColor: white,
 
     color: white,
     backgroundColor: black,
 
     badgeColor: black,
-    badgeBackgroundColor: "#858585",
+    badgeBackgroundColor: grayDark,
+  },
+
+  accountsBadges: {
+    pendingColor: grayDark,
+    disabledColor: darkErrorStatus,
   },
 
   filesEditingWrapper: {
-    color: grayMaxLight,
-    border: "1px solid #474747",
-    borderBottom: "1px solid #474747",
+    color: white,
+    border: `1px solid ${grayDarkStrong}`,
+    borderBottom: `1px solid ${grayDarkStrong}`,
 
     tile: {
       background: globalColors.black,
-      itemBackground: "#242424",
+      itemBackground: grayDarkMid,
       itemBorder: gray,
-      itemActiveBorder: "#eeeeee",
+      itemActiveBorder: white,
     },
 
     row: {
       itemBackground: globalColors.black,
     },
 
-    fill: "#858585",
-    hoverFill: "#eeeeee",
+    fill: grayDark,
+    hoverFill: white,
+    disabledBackground: white,
   },
 
   filesIcons: {
-    fill: "#858585",
-    hoverFill: "#eeeeee",
+    fill: grayDark,
+    hoverFill: white,
   },
 
   filesQuickButtons: {
-    color: "#858585",
-    sharedColor: "#eeeeee",
-    hoverColor: "#eeeeee",
+    color: grayDark,
+    sharedColor: white,
+    hoverColor: white,
   },
 
   filesSharedButton: {
-    color: "#858585",
-    sharedColor: "#eeeeee",
+    color: grayDark,
+    sharedColor: white,
   },
 
   filesPrivateRoom: {
-    borderBottom: "1px solid #d3d3d3",
-    linkColor: "#E06A1B",
-    textColor: "#83888D",
+    borderBottom: `1px solid ${grayDarkMid}`,
+    linkColor: darkLink,
+    textColor: grayDarkText,
   },
 
   filesVersionHistory: {
     row: {
-      color: grayMaxLight,
-      fill: grayMaxLight,
+      color: white,
+      fill: white,
     },
 
     badge: {
       color: black,
-      stroke: "#ADADAD",
-      fill: "#ADADAD",
+      stroke: darkGrayDark,
+      fill: darkGrayDark,
       defaultFill: black,
-      badgeFill: "#F58D31",
+      badgeFill: mainOrange,
     },
 
     versionList: {
-      fill: grayMaxLight,
-      stroke: grayMaxLight,
-      color: grayMaxLight,
+      fill: white,
+      stroke: white,
+      color: white,
     },
+    commentColor: grayDark,
   },
 
   login: {
-    linkColor: "#E06A1B",
-    textColor: "#858585",
-    navBackground: "#282828",
+    linkColor: darkLink,
+    textColor: grayDark,
+    navBackground: darkGrayLight,
     headerColor: white,
-    helpButton: "#D8D8D8",
-    orLineColor: "#474747",
-    orTextColor: "#858585",
+    helpButton: grayDark,
+    orLineColor: grayDarkStrong,
+    orTextColor: grayDark,
     titleColor: white,
 
     register: {
-      backgroundColor: "#292929",
-      textColor: "#E06A1B",
+      backgroundColor: black,
+      textColor: darkLink,
     },
 
     container: {
-      backgroundColor: "#474747",
+      backgroundColor: grayDarkStrong,
     },
 
     captcha: {
@@ -2880,56 +2679,52 @@ const Dark: TTheme = {
     },
 
     backTitle: {
-      color: "#A3A9AE",
+      color: gray,
     },
   },
 
-  facebookButton: {
-    background: black,
-    border: "1px solid #474747",
-    color: grayMaxLight,
-  },
-
   peopleSelector: {
-    textColor: grayMaxLight,
+    textColor: white,
   },
 
   peopleWithContent: {
-    color: "#858585",
-    pendingColor: "#474747",
+    color: grayDark,
+    pendingColor: grayDarkStrong,
   },
 
   peopleDialogs: {
     modal: {
-      border: "1px solid #474747",
+      border: `1px solid ${grayDarkStrong}`,
     },
 
     deleteUser: {
-      textColor: red,
+      textColor: darkErrorStatus,
     },
 
     deleteSelf: {
-      linkColor: "#e06a1b",
+      linkColor: darkLink,
     },
 
     changePassword: {
-      linkColor: "#e06a1b",
+      linkColor: darkLink,
     },
   },
 
   downloadDialog: {
-    background: "#282828",
+    background: darkGrayLight,
+    textColor: grayDark,
+    iconFill: black,
   },
 
   client: {
     about: {
-      linkColor: "#E06A1B",
-      border: "1px solid #474747",
+      linkColor: darkLink,
+      border: `1px solid ${grayDarkStrong}`,
       logoColor: white,
     },
 
     comingSoon: {
-      linkColor: "#858585",
+      linkColor: grayDark,
       linkIconColor: black,
       backgroundColor: black,
       foregroundColor: black,
@@ -2937,210 +2732,248 @@ const Dark: TTheme = {
 
     confirm: {
       activateUser: {
-        textColor: "#E06A1B",
-        textColorError: red,
+        textColor: darkLink,
+        textColorError: darkErrorStatus,
       },
       change: {
-        titleColor: "#E06A1B",
+        titleColor: darkLink,
       },
     },
 
     home: {
-      logoColor: "rgba(255, 255, 255, 0.92)",
-      textColorError: red,
+      logoColor: white,
+      textColorError: darkErrorStatus,
     },
 
     payments: {
-      linkColor: "#E06A1B",
-      delayColor: "#F21C0E",
-    },
-
-    paymentsEnterprise: {
-      background: black,
-
-      buttonBackground: "#292929",
-
-      linkColor: "#E06A1B",
-      headerColor: orangePressed,
+      linkColor: darkLink,
+      delayColor: darkErrorStatus,
     },
 
     settings: {
       iconFill: white,
-      headerTitleColor: "#FFFFFF",
-      trashIcon: "#858585",
+      headerTitleColor: white,
+      descriptionColor: grayDarkText,
+      trashIcon: grayDark,
       article: {
-        titleColor: "#c4c4c4",
-        fillIcon: "#c4c4c4",
-        expanderColor: "#c4c4c4",
+        titleColor: grayStrong,
+        fillIcon: grayStrong,
+        expanderColor: grayStrong,
       },
 
-      separatorBorder: "1px solid #474747",
+      separatorBorder: `1px solid ${grayDarkStrong}`,
 
       security: {
         arrowFill: white,
-        descriptionColor: "#858585",
+        descriptionColor: grayDark,
+
+        tfa: {
+          textColor: grayDark,
+        },
 
         admins: {
           backgroundColor: black,
-          backgroundColorWrapper: blueMain,
-          roleColor: grayMid,
+          backgroundColorWrapper: lightSecondMain,
+          roleColor: grayStrong,
 
-          color: "#E06A1B",
-          departmentColor: "#858585",
+          color: darkLink,
+          departmentColor: grayDark,
 
-          tooltipColor: "#F5E9BA",
+          tooltipColor: darkToastInfo,
 
-          nameColor: grayMaxLight,
-          pendingNameColor: "#858585",
+          nameColor: white,
+          pendingNameColor: grayDark,
 
           textColor: black,
-          iconColor: blueMain,
+          iconColor: lightSecondMain,
         },
 
         owner: {
           backgroundColor: black,
-          linkColor: "#E06A1B",
-          departmentColor: "#858585",
-          tooltipColor: "#F5E9BA",
+          linkColor: darkLink,
+          departmentColor: grayDark,
+          tooltipColor: darkToastInfo,
         },
         auditTrail: {
-          sideColor: "#858585",
-          nameColor: "#eeeeee",
-          downloadReportDescriptionColor: "#858585",
+          sideColor: grayDark,
+          nameColor: white,
+          downloadReportDescriptionColor: grayDark,
         },
         loginHistory: {
-          sideColor: "#858585",
-          nameColor: "#eeeeee",
+          sideColor: grayDark,
+          nameColor: white,
+          textColor: grayDark,
+          subheaderColor: darkGrayDark,
+        },
+        ip: {
+          errorColor: darkErrorStatus,
         },
       },
 
       common: {
-        linkColor: "#858585",
-        linkColorHelp: "#E06A1B",
-        tooltipLinkColor: "#e06a1b",
+        linkColor: grayDark,
+        linkColorHelp: darkLink,
+        tooltipLinkColor: darkLink,
         arrowColor: white,
-        descriptionColor: "#ADADAD",
-        brandingDescriptionColor: "#858585",
+        descriptionColor: grayDark,
+        brandingDescriptionColor: grayDark,
+
+        appearance: {
+          themeAddBackground: grayDarkStrong,
+          accentBoxBackground: grayDarkStrong,
+          buttonBoxBackground: grayDarkStrong,
+          iconFill: grayDark,
+          addThemeBackground: grayDarkStrong,
+        },
 
         whiteLabel: {
-          borderImg: "1px solid #474747",
+          borderImg: `1px solid ${grayDarkStrong}`,
 
           backgroundColorWhite: white,
-          backgroundColorLight: "#F8F9F9",
-          backgroundColorDark: "#282828",
-          greenBackgroundColor: "#40865C",
-          blueBackgroundColor: "#446995",
-          orangeBackgroundColor: "#BE6650",
-          redBackgroundColor: "#AA5251",
+          backgroundColorLight: grayLight,
+          backgroundColorDark: darkGrayLight,
+          greenBackgroundColor: editorGreenColor,
+          blueBackgroundColor: editorBlueColor,
+          orangeBackgroundColor: editorOrangeColor,
+          redBackgroundColor: editorRedColor,
 
           dataFontColor: white,
           dataFontColorBlack: white,
+          notAvailableBackground: grayDark,
+          textColor: white,
+        },
+
+        companyInfo: {
+          border: `1px dashed ${white}`,
+          color: grayDark,
+        },
+
+        dns: {
+          errorColor: darkErrorStatus,
         },
       },
 
       integration: {
-        separatorBorder: "1px solid #474747",
-        linkColor: "#E06A1B",
-
+        separatorBorder: `1px solid ${grayDarkStrong}`,
+        linkColor: darkLink,
+        textColor: grayDark,
         sso: {
           textColor: grayDark,
           errorColor: darkErrorStatus,
-          toggleContentBackground: "#474747",
+          toggleContentBackground: grayDarkStrong,
           iconButton: white,
-          iconButtonDisabled: "#333",
-          border: "1px solid #474747",
+          iconButtonDisabled: black,
+          border: `1px solid ${grayDarkStrong}`,
         },
-
+        ldap: {
+          border: `1px solid ${grayDarkStrong}`,
+          errorBorder: `1px solid ${darkErrorStatus}`,
+          certificateBackground: grayDarkStrong,
+          textColor: grayDark,
+          errorColor: darkErrorStatus,
+        },
         smtp: {
-          requirementColor: "#E06451",
+          requirementColor: darkErrorStatus,
         },
       },
 
       backup: {
-        rectangleBackgroundColor: "#3D3D3D",
-        separatorBorder: "1px solid #474747",
-        warningColor: "#E06451",
-        textColor: "#ADADAD",
-        backupCheckedListItemBackground: "#3D3D3D",
+        rectangleBackgroundColor: lightDarkGrayHover,
+        separatorBorder: `1px solid ${grayDarkStrong}`,
+        warningColor: darkErrorStatus,
+        textColor: darkGrayDark,
+        backupCheckedListItemBackground: lightDarkGrayHover,
       },
 
       payment: {
-        priceColor: "#ADADAD",
-        storageSizeTitle: "#A3A9AE",
+        priceColor: darkGrayDark,
+        storageSizeTitle: gray,
 
-        backgroundColor: "#282828",
-        linkColor: "#316DAA",
-        tariffText: "#858585",
-        border: "1px solid #474747",
-        backgroundBenefitsColor: "#3333",
-        rectangleColor: "#3D3D3D",
+        backgroundColor: darkGrayLight,
+        linkColor: link,
+        tariffText: grayDark,
+        border: `1px solid ${grayDarkStrong}`,
+        backgroundBenefitsColor: black,
+        rectangleColor: lightDarkGrayHover,
 
         priceContainer: {
-          backgroundText: "#3D3D3D",
-          background: "#282828",
-          border: "1px solid #282828",
-          featureTextColor: "#858585",
-          disableColor: "#858585",
-          trackNumberColor: "#858585",
-          disablePriceColor: "#5C5C5C",
+          backgroundText: lightDarkGrayHover,
+          background: darkGrayLight,
+          border: `1px solid ${darkGrayLight}`,
+          featureTextColor: grayDark,
+          disableColor: grayDark,
+          trackNumberColor: grayDark,
+          disablePriceColor: grayDarkText,
         },
 
         benefitsContainer: {
-          iconsColor: "#858585",
+          iconsColor: grayDark,
         },
         contactContainer: {
-          textColor: "#ADADAD",
-          linkColor: "#858585",
+          textColor: darkGrayDark,
+          linkColor: grayDark,
         },
-        warningColor: "#E06451",
-        color: "#E17415",
+        warningColor: darkErrorStatus,
+        color: darkStatusWarning,
       },
 
       migration: {
-        descriptionColor: "#ADADAD",
-        subtitleColor: "#FFFFFF",
-        workspaceBackground: "#333333",
-        workspaceBorder: "1px solid #474747",
-        stepDescriptionColor: "#FFFFFF",
-        fileInputIconColor: "#5c5c5c",
-        infoBlockBackground: "#282828",
-        infoBlockTextColor: "#858585",
-        errorTextColor: "#E06451",
-        existingTextColor: "#3BA420",
-        tableHeaderText: "#858585",
-        tableRowHoverColor: "#3D3D3D",
-        tableRowTextColor: "#858585",
-        comboBoxLabelColor: "#FFFFFF",
-        importSectionBackground: "#282828",
-        importSectionTextColor: "#858585",
-        importItemBackground: "#333333",
-        importItemDisableBackground: "#3D3D3D",
-        importItemTextColor: "#ADADAD",
-        importItemDisableTextColor: "#5C5C5C",
-        importItemDescription: "#A3A9AE",
-        importIconColor: "#a9a9a9",
-        groupMenuBackground: "#333333",
-        groupMenuBorder: "1px solid #474747",
-        groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+        descriptionColor: darkGrayDark,
+        subtitleColor: white,
+        workspaceBackground: black,
+        workspaceBorder: `1px solid ${grayDarkStrong}`,
+        workspaceHover: lightBlueMain,
+        stepDescriptionColor: white,
+        fileInputIconColor: grayDarkText,
+        infoBlockBackground: darkGrayLight,
+        infoBlockTextColor: grayDark,
+        errorTextColor: darkErrorStatus,
+        existingTextColor: darkStatusPositive,
+        tableHeaderText: grayDark,
+        tableRowHoverColor: lightDarkGrayHover,
+        tableRowTextColor: grayDark,
+        comboBoxLabelColor: white,
+        importSectionBackground: darkGrayLight,
+        importSectionTextColor: grayDark,
+        importItemBackground: black,
+        importItemDisableBackground: lightDarkGrayHover,
+        importItemTextColor: darkGrayDark,
+        importItemDisableTextColor: grayDarkText,
+        importItemDescription: gray,
+        importIconColor: darkGrayDark,
+        groupMenuBackground: black,
+        groupMenuBorder: `1px solid ${grayDarkStrong}`,
+        groupMenuBoxShadow: `${menuShadow} 0px 5px 5px 0px`,
+        linkColor: lightBlueMain,
+        background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: "#858585",
-        descriptionColor: "#ADADAD",
+        grayBackgroundText: grayDark,
+        descriptionColor: darkGrayDark,
+        dividerColor: grayDarkMid,
+      },
+      deleteData: {
+        borderTop: `1px solid ${grayDarkMid}`,
+      },
+      webhooks: {
+        border: `1px solid ${grayDarkMid}`,
+        historyRowBackground: lightDarkGrayHover,
+        tableCellBackground: lightGrayHover,
+        barBackground: lightDarkGrayHover,
+        color: grayDark,
+        linkColor: lightBlueMain,
+        spanBackground: lightBlueMain,
+        filterBorder: `1px solid ${black}`,
+        toastBackground: darkToastWarning,
+        background: darkGrayLight,
       },
     },
 
     wizard: {
-      linkColor: "#E06A1B",
-      generatePasswordColor: "#a9a9a9",
+      linkColor: darkLink,
+      generatePasswordColor: darkGrayDark,
+      textColor: grayDark,
     },
-  },
-
-  campaignsBanner: {
-    border: "1px solid #CCCCCC",
-    color: darkBlack,
-
-    btnColor: black,
-    btnBackgroundActive: blueMain,
   },
 
   tileLoader: {
@@ -3151,176 +2984,220 @@ const Dark: TTheme = {
 
   errorContainer: {
     background: black,
-    bodyText: "#858585",
+    bodyText: grayDark,
+    linkColor: darkLink,
   },
 
   editor: {
-    color: "#eeeeee",
+    color: white,
     background: black,
   },
 
   tabs: {
     gradientColor: black,
-    lineColor: "#474747",
+    lineColor: grayDarkStrong,
 
-    textColorPrimary: "#ADADAD",
+    textColorPrimary: darkGrayDark,
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
-    pressedTextColorPrimary: "#CCCCCC",
-    backgroundColorPrimary: "#333",
+    pressedTextColorPrimary: grayDarkText,
+    backgroundColorPrimary: black,
 
-    textColorSecondary: "#FFFFFF",
-    activeTextColorSecondary: "#333333",
+    textColorSecondary: white,
+    activeTextColorSecondary: black,
 
-    backgroundColorSecondary: "#333",
-    hoverBackgroundColorSecondary: "#474747",
-    pressedBackgroundColorSecondary: "#282828",
-    activeBackgroundColorSecondary: "#FFFFFF",
+    backgroundColorSecondary: black,
+    hoverBackgroundColorSecondary: grayDarkStrong,
+    pressedBackgroundColorSecondary: darkGrayLight,
+    activeBackgroundColorSecondary: white,
   },
 
   hotkeys: {
     key: {
-      color: "#C4C4C4",
+      color: grayStrong,
     },
   },
 
   tag: {
     color: white,
-    deletedColor: "#A3A9AE",
-    background: "#474747",
-    hoverBackground: "#282828",
-    disabledBackground: "#858585",
-    deletedBackground: "#282828",
+    deletedColor: gray,
+    background: grayDarkStrong,
+    hoverBackground: darkGrayLight,
+    disabledBackground: grayDark,
+    deletedBackground: darkGrayLight,
     defaultTagColor: white,
-    newTagBackground: "#242424",
-    newTagHoverBackground: "#3D3D3D",
+    newTagBackground: grayDarkMid,
+    newTagHoverBackground: lightDarkGrayHover,
   },
 
   profile: {
     main: {
-      background: "#3D3D3D",
+      background: lightDarkGrayHover,
       textColor: white,
 
-      descriptionTextColor: "#858585",
-      pendingEmailTextColor: "#858585",
+      descriptionTextColor: grayDark,
+      pendingEmailTextColor: grayDark,
 
-      mobileRowBackground: "#3D3D3D",
+      mobileRowBackground: lightDarkGrayHover,
+
+      iconFill: darkGrayDark,
+      mobileLabel: grayDark,
+    },
+    login: {
+      textColor: grayDark,
     },
     themePreview: {
-      descriptionColor: "#ADADAD",
-      border: "1px solid #474747",
+      descriptionColor: darkGrayDark,
+      border: `1px solid ${grayDarkStrong}`,
     },
     notifications: {
-      textDescriptionColor: "#858585",
+      textDescriptionColor: grayDark,
     },
     activeSessions: {
-      color: "#eeeeee",
-      borderColor: "#474747",
-      tickIconColor: "#3BA420",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#474747",
-      tableCellColor: "#858585",
-      dividerColor: "#474747",
+      color: white,
+      borderColor: grayDarkStrong,
+      tickIconColor: darkStatusPositive,
+      removeIconColor: gray,
+      sortHeaderColor: grayDarkStrong,
+      tableCellColor: grayDark,
+      dividerColor: grayDarkStrong,
     },
   },
 
   formWrapper: {
     background: black,
-    boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.16);",
+    boxShadow: `0px 5px 20px ${badgeShadow}`,
   },
 
   preparationPortalProgress: {
-    backgroundColor: "#282828",
-    colorPercentSmall: "#FFFFFF",
-    colorPercentBig: "#333333",
-    errorTextColor: "#E06451",
-    descriptionTextColor: "#858585",
+    backgroundColor: darkGrayLight,
+    colorPercentSmall: white,
+    colorPercentBig: black,
+    errorTextColor: darkErrorStatus,
+    descriptionTextColor: grayDark,
   },
 
   codeInput: {
-    background: "#282828",
-    border: "1px solid #474747",
+    background: darkGrayLight,
+    border: `1px solid ${grayDarkStrong}`,
     color: white,
-    lineColor: "#858585",
-    disabledBackground: "#474747",
-    disabledBorder: "1px solid #474747",
-    disabledColor: "#858585",
+    lineColor: grayDark,
+    disabledBackground: grayDarkStrong,
+    disabledBorder: `1px solid ${grayDarkStrong}`,
+    disabledColor: grayDark,
+    focusBorder: `1px solid ${lightSecondMain}`,
   },
 
   accessRightSelect: {
-    descriptionColor: "#858585",
+    descriptionColor: grayDark,
   },
 
   itemIcon: {
-    borderColor: "#474747",
+    borderColor: grayDarkStrong,
+    editIconColor: grayDarkMid,
   },
 
   invitePage: {
-    borderColor: "#474747",
+    borderColor: grayDarkStrong,
+    textColor: grayDark,
   },
 
   portalUnavailable: {
-    textDescriptionColor: "#858585",
+    textDescriptionColor: grayDark,
   },
 
   deepLink: {
-    navBackground: "#282828",
-    fileTileBackground: "#3D3D3D",
+    navBackground: darkGrayLight,
+    fileTileBackground: lightDarkGrayHover,
   },
 
   emailChips: {
-    borderColor: "#858585",
-    dashedBorder: "1px dashed #fff",
+    borderColor: grayDark,
+    dashedBorder: `1px dashed ${white}`,
   },
 
   dialogs: {
-    disableText: "#858585",
+    disableText: grayDark,
+    errorText: darkErrorStatus,
+    linkColor: lightBlueMain,
+    borderColor: grayDarkMid,
   },
 
   editLink: {
     text: {
-      color: "#A3A9AE",
-      errorColor: "#F21C0E",
+      color: gray,
+      errorColor: darkErrorStatus,
     },
+    editInputColor: grayDark,
+    requiredColor: darkErrorStatus,
   },
 
   oformGallery: {
     errorView: {
-      subHeaderTextColor: "#ADADAD",
+      subHeaderTextColor: darkGrayDark,
     },
     submitToGalleryTile: {
-      bodyText: "#ADADAD",
-      closeIconFill: "#a9a9a9",
+      bodyText: darkGrayDark,
+      closeIconFill: darkGrayDark,
     },
   },
 
   infoBlock: {
-    background: "#282828",
-    headerColor: "#FFF",
-    descriptionColor: "#ADADAD",
+    background: darkGrayLight,
+    headerColor: white,
+    descriptionColor: darkGrayDark,
   },
 
   infoBar: {
-    background: "#282828",
+    background: darkGrayLight,
     title: white,
-    description: "#ADADAD",
+    description: darkGrayDark,
+    textColor: white,
+    iconFill: darkStatusWarning,
   },
 
   roomIcon: {
-    backgroundArchive: "#FFFFFF",
+    backgroundArchive: white,
     opacityBackground: "0.1",
+    plusIcon: black,
+    emptyBorder: `2px dashed ${grayDarkStrong}`,
+
+    linkIcon: {
+      background: black,
+      path: blueRomb,
+    },
   },
 
   plugins: {
-    borderColor: "#474747",
-    pluginName: "#A3A9AE",
-    descriptionColor: "#ADADAD",
+    borderColor: grayDarkStrong,
+    pluginName: gray,
+    descriptionColor: darkGrayDark,
+    color: grayDark,
   },
 
+  oauth: {
+    previewDialog: {
+      border: `1px solid ${grayDarkMid}`,
+    },
+    infoDialog: {
+      descLinkColor: darkGrayDark,
+      blockHeaderColor: grayDark,
+      separatorColor: grayDarkStrong,
+    },
+    list: {
+      descriptionColor: grayDark,
+    },
+    clientForm: {
+      descriptionColor: grayDark,
+      headerBorder: `1px solid ${grayDarkStrong}`,
+      scopeDesc: grayDark,
+    },
+  },
   sdkPresets: {
-    borderColor: "#474747",
-    secondaryColor: "#ADADAD",
-    previewBackgroundColor: "#3D3D3D",
+    borderColor: grayDarkStrong,
+    secondaryColor: darkGrayDark,
+    previewBackgroundColor: lightDarkGrayHover,
+    linkHelpColor: darkGrayDark,
   },
 
   sideBarRow: {
@@ -3329,21 +3206,58 @@ const Dark: TTheme = {
   },
 
   dateTimePicker: {
-    colorClockIcon: "#ADADAD",
+    colorClockIcon: darkGrayDark,
   },
 
   embeddingPanel: {
-    descriptionTextColor: "#ADADAD",
-    iconColor: "#ADADAD",
+    descriptionTextColor: darkGrayDark,
+    iconColor: darkGrayDark,
   },
   completedForm: {
     linkColor: white,
-    descriptionColor: globalColors.silverChalice,
+    descriptionColor: darkGrayDark,
+    labelColor: darkGrayDark,
 
-    labelColor: globalColors.silverChalice,
     box: {
-      background: globalColors.charlestonGreen,
+      background: darkGrayLight,
     },
+  },
+
+  management: {
+    textColor: grayDark,
+    errorColor: darkErrorStatus,
+    sideColor: grayDark,
+    nameColor: grayDarkStrong,
+    barBackground: darkGrayLight,
+  },
+
+  publicRoom: {
+    border: `1px solid ${lightGraySelected}`,
+    linkColor: lightBlueMain,
+  },
+  newFilesPanel: {
+    borderColor: globalColors.grayDarkStrong,
+
+    borderRadius: "6px",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+
+    fileItem: {
+      borderColor: globalColors.grayDarkStrong,
+      fileExstColor: globalColors.grayDark,
+    },
+  },
+
+  logoCover: {
+    selectColor: {
+      backgroundColor: lightDarkGrayHover,
+    },
+
+    iconColor: darkGrayDark,
+    textColor: darkGrayDark,
+    selectedBackgroundColor: grayDarkMid,
+    selectedBorderColor: grayDarkMid,
+    backgroundColor: black,
+    borderColor: grayDarkStrong,
   },
 };
 

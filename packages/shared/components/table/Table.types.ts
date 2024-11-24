@@ -50,6 +50,7 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
+  isShort?: boolean;
   checkbox?: {
     value: boolean;
     isIndeterminate: boolean;
@@ -58,24 +59,26 @@ export type TTableColumn = {
 };
 
 export interface TableHeaderProps {
-  containerRef: { current: HTMLDivElement };
+  containerRef: { current: HTMLDivElement | null };
   columns: TTableColumn[];
-  sortBy: string;
-  sorted: boolean;
+  sortBy?: string;
+  sorted?: boolean;
   columnStorageName: string;
   tableStorageName: string;
   sectionWidth: number;
-  onClick: () => void;
-  resetColumnsSize: boolean;
-  isLengthenHeader: boolean;
-  sortingVisible: boolean;
-  infoPanelVisible: boolean;
+  onClick?: () => void;
+  resetColumnsSize?: boolean;
+  isLengthenHeader?: boolean;
+  sortingVisible?: boolean;
+  infoPanelVisible?: boolean;
   useReactWindow: boolean;
   showSettings: boolean;
-  setHideColumns: (value: boolean) => void;
-  columnInfoPanelStorageName: string;
+  setHideColumns?: (value: boolean) => void;
+  columnInfoPanelStorageName?: string;
   settingsTitle?: string;
-  tagRef: React.ForwardedRef<HTMLDivElement>;
+  tagRef?:
+    | React.ForwardedRef<HTMLDivElement>
+    | ((node: HTMLDivElement) => void);
   theme: TTheme;
 }
 
@@ -88,7 +91,9 @@ export interface TableHeaderCellProps {
   sortBy: string;
   defaultSize?: number;
   sortingVisible: boolean;
-  tagRef: React.ForwardedRef<HTMLDivElement>;
+  tagRef?:
+    | React.ForwardedRef<HTMLDivElement>
+    | ((node: HTMLDivElement) => void);
 }
 
 export interface TableSettingsProps {
@@ -98,7 +103,7 @@ export interface TableSettingsProps {
 
 export interface TableBodyProps {
   columnStorageName: string;
-  columnInfoPanelStorageName: string;
+  columnInfoPanelStorageName?: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   children: React.ReactNode[];
   filesLength: number;
@@ -106,27 +111,32 @@ export interface TableBodyProps {
   itemCount: number;
   itemHeight: number;
   useReactWindow: boolean;
-  onScroll: () => void;
-  infoPanelVisible: boolean;
+  onScroll?: () => void;
+  infoPanelVisible?: boolean;
+  isIndexEditingMode: boolean;
 }
 
 export interface TableRowProps {
-  fileContextClick: (value?: boolean) => void;
+  fileContextClick?: (value?: boolean) => void;
   children: React.ReactNode;
-  contextOptions: ContextMenuModel[];
-  onHideContextMenu: () => void;
-  selectionProp: { className: string };
-  className: string;
-  style: React.CSSProperties;
-  title: string;
+  contextOptions?: ContextMenuModel[];
+  onHideContextMenu?: () => void;
+  selectionProp?: { className: string };
+  className?: string;
+  style?: React.CSSProperties;
+  title?: string;
   getContextModel: () => ContextMenuModel[];
   badgeUrl: string;
+  isIndexEditingMode: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export interface TableCellProps {
   className: string;
-  forwardedRef: React.ForwardedRef<HTMLDivElement>;
-  style: React.CSSProperties;
+  hasAccess?: boolean;
+  checked?: boolean;
+  forwardedRef?: React.ForwardedRef<HTMLDivElement>;
+  style?: React.CSSProperties;
   children?: React.ReactNode;
 }
 
@@ -141,7 +151,7 @@ export type TGroupMenuItem = {
   id: string;
 };
 
-export interface TableGroupMenuProps {
+interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
@@ -155,4 +165,11 @@ export interface TableGroupMenuProps {
   isBlocked?: boolean;
   toggleInfoPanel: () => void;
   withComboBox?: boolean;
+  headerLabel?: string;
 }
+export type TableGroupMenuProps =
+  | (TableGroupmenuBased & {
+      isCloseable?: undefined;
+      onCloseClick?: undefined;
+    })
+  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });

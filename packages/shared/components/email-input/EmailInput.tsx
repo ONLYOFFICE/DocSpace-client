@@ -66,8 +66,9 @@ const EmailInput = ({
   withBorder = true,
   value = "",
   emailSettings,
+  handleAnimationStart,
   ...rest
-}: EmailInputProps) => {
+}: EmailInputProps & TextInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
   const [isValidEmail, setIsValidEmail] = React.useState<TValidate>(
     {} as TValidate,
@@ -157,6 +158,7 @@ const EmailInput = ({
       type={InputType.text}
       onValidateInput={onValidateInput}
       onBlur={onBlurAction}
+      onAnimationStart={handleAnimationStart}
     />
   );
 };

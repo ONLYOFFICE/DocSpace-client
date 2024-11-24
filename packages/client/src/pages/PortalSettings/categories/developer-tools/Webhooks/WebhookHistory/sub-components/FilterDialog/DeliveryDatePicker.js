@@ -37,6 +37,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const Selectors = styled.div`
   position: relative;
@@ -235,7 +236,7 @@ const DeliveryDatePicker = ({
                 <Text
                   isInline
                   fontWeight={600}
-                  color="#A3A9AE"
+                  color={globalColors.gray}
                   className="mr-8"
                 >
                   {t("From")}
@@ -250,7 +251,12 @@ const DeliveryDatePicker = ({
                 />
               </span>
 
-              <Text isInline fontWeight={600} color="#A3A9AE" className="mr-8">
+              <Text
+                isInline
+                fontWeight={600}
+                color={globalColors.gray}
+                className="mr-8"
+              >
                 {t("Before")}
               </Text>
               <TimePicker
@@ -270,7 +276,7 @@ const DeliveryDatePicker = ({
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"
               />
-              <Text isInline fontWeight={600} color="#A3A9AE">
+              <Text isInline fontWeight={600} color={globalColors.gray}>
                 {t("SelectDeliveryTime")}
               </Text>
             </TimePickerCell>

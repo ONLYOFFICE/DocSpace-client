@@ -26,16 +26,18 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Section from "@docspace/shared/components/section";
-import SectionWrapper from "SRC_DIR/components/Section";
-import { SectionHeaderContent, SectionBodyContent } from "./Section";
-
-import Dialogs from "../Home/Section/AccountsBody/Dialogs";
-
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+import Section from "@docspace/shared/components/section";
+
+import SectionWrapper from "SRC_DIR/components/Section";
+import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
+import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+
+import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -137,7 +139,7 @@ Profile.propTypes = {
   language: PropTypes.string,
 };
 
-export default inject(
+const ComponentPure = inject(
   ({
     authStore,
     settingsStore,
@@ -193,3 +195,13 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));
+
+export const Component = () => {
+  return (
+    <PrivateRoute>
+      <ComponentPure />
+    </PrivateRoute>
+  );
+};
+
+Component.displayName = "Profile";

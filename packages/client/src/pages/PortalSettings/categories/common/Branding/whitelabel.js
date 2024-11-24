@@ -28,6 +28,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import isEqual from "lodash/isEqual";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -39,22 +40,21 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
-
 import Logo from "./sub-components/logo";
 import {
   generateLogo,
   getLogoOptions,
   uploadLogo,
 } from "../../../utils/whiteLabelHelper";
+import NotAvailable from "../../../components/NotAvailable";
 
-import isEqual from "lodash/isEqual";
-import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
-
-const WhiteLabel = (props) => {
+const WhiteLabelComponent = (props) => {
   const {
     t,
     isSettingPaid,
@@ -76,6 +76,8 @@ const WhiteLabel = (props) => {
     theme,
 
     isWhitelableLoaded,
+    displayAbout,
+    showNotAvailable,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,7 +87,7 @@ const WhiteLabel = (props) => {
   const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
-  const showAbout = standalone && isManagement();
+  const showAbout = standalone && isManagement() && displayAbout;
 
   const init = async () => {
     const isWhiteLabelPage = standalone
@@ -115,7 +117,7 @@ const WhiteLabel = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/management/settings/branding"
       : "/portal-settings/customization/branding";
 
     window.innerWidth > size.mobile &&
@@ -181,7 +183,7 @@ const WhiteLabel = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        isDocsEditorName ? "#fff" : "#000",
+        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
         options.alignCenter,
         options.isEditor,
       );
@@ -190,7 +192,7 @@ const WhiteLabel = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        "#fff",
+        globalColors.white,
         options.alignCenter,
         options.isEditor,
       );
@@ -282,18 +284,25 @@ const WhiteLabel = (props) => {
   return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
+    <WhiteLabelWrapper
+      showReminder={!saveButtonDisabled}
+      isSettingPaid={isSettingPaid}
+    >
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-
+      {showNotAvailable && <NotAvailable />}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && (
+        {!isSettingPaid && !standalone && (
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             isPaidBadge={true}
           />
@@ -323,6 +332,7 @@ const WhiteLabel = (props) => {
           isVertical={true}
           className="settings_unavailable"
           hasError={isEmpty}
+          labelVisible={true}
         >
           <TextInput
             className="company-name input"
@@ -541,6 +551,7 @@ const WhiteLabel = (props) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
+            isEditorHeader={true}
           />
         </div>
       </div>
@@ -569,48 +580,63 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setLogoText,
-    whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    restoreWhiteLabelSettings,
-    initSettings,
-    saveWhiteLabelSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
-    resetIsInit,
-    isWhitelableLoaded,
-  } = common;
+export const WhiteLabel = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      setLogoText,
+      whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      restoreWhiteLabelSettings,
+      initSettings,
+      saveWhiteLabelSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
+      resetIsInit,
+      isWhitelableLoaded,
+    } = common;
 
-  const {
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-    deviceType,
-    standalone,
-  } = settingsStore;
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const {
+      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+      deviceType,
+      checkEnablePortalSettings,
+      standalone,
+      displayAbout,
+      portals,
+    } = settingsStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    setLogoText,
-    theme: settingsStore.theme,
-    logoText: whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    saveWhiteLabelSettings,
-    restoreWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
+    const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
+    const showNotAvailable = isManagement()
+      ? !isCustomizationAvailable
+      : !isSettingPaid && standalone;
+    return {
+      setLogoText,
+      theme: settingsStore.theme,
+      logoText: whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      saveWhiteLabelSettings,
+      restoreWhiteLabelSettings,
+      defaultWhiteLabelLogoUrls,
+      isSettingPaid,
+      initSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
 
-    deviceType,
-    resetIsInit,
-    standalone,
+      deviceType,
+      resetIsInit,
+      standalone,
 
-    isWhitelableLoaded,
-  };
-})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+      isWhitelableLoaded,
+      displayAbout,
+      showNotAvailable,
+    };
+  },
+)(
+  withTranslation(["Settings", "Profile", "Common"])(
+    observer(WhiteLabelComponent),
+  ),
+);

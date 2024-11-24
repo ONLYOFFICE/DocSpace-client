@@ -40,16 +40,17 @@ import LoaderSectionHeader from "../loaderSectionHeader";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import {
   getKeyByLink,
   settingsTree,
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -58,14 +59,7 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     .settings-section_badge {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
       cursor: auto;
     }
 
@@ -80,45 +74,17 @@ const HeaderContainer = styled.div`
     flex-grow: 1;
 
     .action-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
     }
   }
 
   .arrow-button {
     flex-shrink: 0;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
 
     svg {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-
-    @media ${tablet} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
     }
   }
 
@@ -144,32 +110,30 @@ const HeaderContainer = styled.div`
   }
 
   .tariff-bar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 `;
 
-const StyledContainer = styled.div`
-  .group-button-menu-container {
-    ${(props) =>
-      props.viewAs === "table"
-        ? css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `
-        : css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `}
+export const StyledContainer = styled.div`
+  .table-container_group-menu {
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+
+    width: calc(100% + 40px);
+    height: 68px;
 
     @media ${tablet} {
-      margin: 0 -16px;
+      height: 61px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+    }
+
+    @media ${mobile} {
+      height: 52px !important;
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }
@@ -177,16 +141,22 @@ const StyledContainer = styled.div`
 
 const SectionHeaderContent = (props) => {
   const {
-    isBrandingAndCustomizationAvailable,
+    isCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
+    workspace,
+    standalone,
+    getHeaderMenuItems,
+    setSelections,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+
+  const isOAuth = location.pathname.includes("oauth");
 
   const [state, setState] = React.useState({
     header: "",
@@ -198,15 +168,15 @@ const SectionHeaderContent = (props) => {
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "WhiteLabel":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "AdditionalResources":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -292,6 +262,11 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCheck = (checked) => {
+    if (isOAuth) {
+      setSelections(checked);
+      return;
+    }
+
     const { setSelected } = props;
     setSelected(checked ? "all" : "close");
   };
@@ -330,28 +305,46 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  const headerMenu = [
-    {
-      label: t("Common:Delete"),
-      disabled: !selection || !selection.length > 0,
-      onClick: removeAdmins,
-      iconUrl: DeleteReactSvgUrl,
-    },
-  ];
+  const headerMenu = isOAuth
+    ? getHeaderMenuItems(t, true)
+    : [
+        {
+          label: t("Common:Delete"),
+          disabled: !selection || !selection.length > 0,
+          onClick: removeAdmins,
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
+
+  const translatedHeader =
+    header === IMPORT_HEADER_CONST
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", {
+                organizationName: t("Common:OrganizationName"),
+              })
+            : t("DataImport")
+      : t(header, {
+          organizationName: t("Common:OrganizationName"),
+          license: t("Common:EnterpriseLicense"),
+        });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
-        <div className="group-button-menu-container">
-          <TableGroupMenu
-            checkboxOptions={menuItems}
-            onChange={onCheck}
-            isChecked={isHeaderChecked}
-            isIndeterminate={isHeaderIndeterminate}
-            headerMenu={headerMenu}
-            withComboBox
-          />
-        </div>
+        <TableGroupMenu
+          checkboxOptions={menuItems}
+          onChange={onCheck}
+          isChecked={isHeaderChecked}
+          isIndeterminate={isHeaderIndeterminate}
+          headerMenu={headerMenu}
+          withComboBox={false}
+          withoutInfoPanelToggler
+          isMobileView={false}
+        />
       ) : !isLoadedSectionHeader ? (
         <LoaderSectionHeader />
       ) : (
@@ -370,14 +363,14 @@ const SectionHeaderContent = (props) => {
             )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header">
-                {t(header, {
-                  organizationName: t("Common:OrganizationName"),
-                })}
-              </div>
+              <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
@@ -409,51 +402,73 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
-  const {
-    selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection,
-  } = setup.selectionStore;
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+export default inject(
+  ({
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+    settingsStore,
+    oauthStore,
+  }) => {
+    const {
+      isCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { toggleSelector } = setup;
+    const {
+      selected,
+      setSelected,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection,
+    } = setup.selectionStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    setSelected,
-    admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    selection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  };
-})(
+    const { workspace } = importAccountsStore;
+    const { standalone } = settingsStore;
+
+    const { getHeaderMenuItems } = oauthStore;
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      setSelected,
+      admins,
+      isHeaderIndeterminate:
+        isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
+      isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
+      isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      selection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      workspace,
+      standalone,
+      getHeaderMenuItems,
+      setSelections: oauthStore.setSelections,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
-      observer(SectionHeaderContent),
-    ),
+    withTranslation([
+      "Settings",
+      "SingleSignOn",
+      "Common",
+      "JavascriptSdk",
+      "OAuth",
+    ])(observer(SectionHeaderContent)),
   ),
 );

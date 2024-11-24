@@ -26,13 +26,13 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledOuter = styled.div<{ displayIconBorder?: boolean }>`
   display: inline-block;
   position: relative;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) =>
     props.displayIconBorder &&

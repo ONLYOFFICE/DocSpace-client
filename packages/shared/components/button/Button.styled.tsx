@@ -28,7 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { NoUserSelect } from "../../utils";
-import { Base, TTheme } from "../../themes";
+import { Base, TTheme, globalColors } from "../../themes";
 import { ButtonProps, ButtonThemeProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 
@@ -139,12 +139,7 @@ const heightStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
 const fontSizeStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
   props.theme.button.fontSize[props.size || ButtonSize.normal];
 
-const ButtonWrapper = React.forwardRef<
-  HTMLButtonElement,
-  ButtonProps & {
-    interfaceDirection?: boolean | string;
-  }
->(
+const ButtonWrapper = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       primary,
@@ -172,7 +167,6 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   tabIndex: props.tabIndex,
 }))`
   position: relative;
-  direction: ${(props) => props?.interfaceDirection && "rtl"};
   height: ${(props) => heightStyle(props)};
   font-size: ${(props) => fontSizeStyle(props)};
 
@@ -217,7 +211,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   overflow: ${(props) => props.theme.button.overflow};
   text-overflow: ${(props) => props.theme.button.textOverflow};
   white-space: ${(props) => props.theme.button.whiteSpace};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) =>
     !props.isDisabled &&
@@ -255,10 +249,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
 
     position: absolute;
 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
 
     width: 100%;
     height: 100%;
@@ -352,6 +343,23 @@ const getDefaultStyles = ({
             ${themeHoverCss}
           }
         `)}
+
+
+      ${(props) =>
+      props.theme.isBase &&
+      !primary &&
+      !disableHover &&
+      !isDisabled &&
+      css`
+        &:hover,
+        &:focus {
+          border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
+        }
+
+        &:active {
+          ${activeCss}
+        }
+      `}
 
     ${!isDisabled &&
     !isLoading &&

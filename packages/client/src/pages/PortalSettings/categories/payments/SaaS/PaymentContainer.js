@@ -101,14 +101,7 @@ const StyledBody = styled.div`
       margin: auto 0;
     }
     .payment-info_managers-price {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
+      margin-inline-end: 6px;
     }
   }
 `;
@@ -160,8 +153,8 @@ const PaymentContainer = (props) => {
               <Text isBold>{t("Common:RoomAdmin")}</Text>
               <Text>{t("RoomManagerDescription")}</Text>
               <br />
-              <Text isBold>{t("Common:PowerUser")}</Text>
-              <Text>{t("Translations:RolePowerUserDescription")}</Text>
+              <Text isBold>{t("Common:User")}</Text>
+              <Text>{t("Translations:RoleNewUserDescription")}</Text>
             </>
           }
         />
@@ -207,9 +200,7 @@ const PaymentContainer = (props) => {
   };
 
   const planSuggestion = () => {
-    if (isNonProfit) return;
-
-    if (isFreeTariff) {
+    if (isFreeTariff && !isNonProfit) {
       return (
         <Text
           noSelect
@@ -224,7 +215,7 @@ const PaymentContainer = (props) => {
       );
     }
 
-    if (isPaidPeriod) {
+    if (isPaidPeriod && !isNonProfit) {
       return (
         <Text
           noSelect
@@ -274,7 +265,7 @@ const PaymentContainer = (props) => {
   };
 
   const planDescription = () => {
-    if (isFreeTariff || isNonProfit) return;
+    if (isFreeTariff) return;
 
     if (isGracePeriod)
       return (
@@ -295,7 +286,7 @@ const PaymentContainer = (props) => {
         </Text>
       );
 
-    if (isPaidPeriod && isPaymentDateValid)
+    if (isPaidPeriod && isPaymentDateValid && !isNonProfit)
       return (
         <Text
           noSelect
@@ -346,7 +337,7 @@ const PaymentContainer = (props) => {
                 >
                   <Trans t={t} i18nKey="PerUserMonth" ns="Common">
                     From {{ currencySymbol }}
-                    {{ price: startValue }} per admin/power user /month
+                    {{ price: startValue }} per admin/month
                   </Trans>
                 </Text>
 

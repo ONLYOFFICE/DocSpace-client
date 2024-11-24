@@ -64,7 +64,7 @@ const IconButton = ({
   const [currentIconName, setCurrentIconName] = React.useState(iconName);
   const [currentIconColor, setCurrentIconColor] = React.useState<
     string | undefined
-  >(iconName);
+  >(color);
 
   const onMouseEnterAction = (e: React.MouseEvent) => {
     if (isDisabled) return;

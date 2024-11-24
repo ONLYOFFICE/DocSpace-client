@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import { Base } from "../../themes";
 import { mobile, tablet } from "../../utils";
@@ -75,6 +74,7 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
   isLarge?: boolean;
   visible?: boolean;
   embedded?: boolean;
+  isHuge?: boolean;
 }>`
   box-sizing: border-box;
   position: relative;
@@ -102,6 +102,8 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
               ? "520px"
               : "400px"};
 
+          max-width: ${props.isHuge ? "730px" : "unset"};
+
           border-radius: 6px;
           @media ${mobile} {
             transform: translateY(${props.visible ? "0" : "100%"});
@@ -121,15 +123,15 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
           top: 0;
           bottom: 0;
 
-          ${props.theme.interfaceDirection === "rtl"
-            ? css<{ visible?: boolean }>`
-                left: 0;
-                transform: translateX(${props.visible ? "0" : "-100%"});
-              `
-            : css<{ visible?: boolean }>`
-                right: 0;
-                transform: translateX(${props.visible ? "0" : "100%"});
-              `}
+          inset-inline-end: 0;
+
+          transform: translateX(
+            ${props.visible
+              ? "0"
+              : props.theme.interfaceDirection === "rtl"
+                ? "-100%"
+                : "100%"}
+          );
 
           transition: transform 0.3s ease-in-out;
 
@@ -137,10 +139,8 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
             transform: translateY(${props.visible ? "0" : "100%"});
             height: calc(100% - 64px);
             width: 100%;
-            left: 0;
-
+            inset-inline: 0;
             top: ${props.embedded ? "0" : "auto"};
-            right: 0;
             top: auto;
             bottom: 0;
           }
@@ -152,47 +152,48 @@ const StyledBody = styled(Box)<{
   hasFooter?: boolean;
   isScrollLocked?: boolean;
   withBodyScroll?: boolean;
+  withoutPadding?: boolean;
 }>`
   position: relative;
   padding: 0 16px;
-  padding-bottom: ${(props) =>
-    props.currentDisplayType === "aside" || props.hasFooter ? "8px" : "16px"};
+
+  ${({ currentDisplayType, hasFooter }) =>
+    currentDisplayType === "modal" &&
+    `padding-bottom: ${hasFooter ? "8px" : "16px"};`}
 
   white-space: pre-line;
 
   #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
-    ${(props) =>
-      isMobile && props.theme.interfaceDirection === "rtl"
-        ? `margin-left: 0 !important;`
-        : `margin-right: 0 !important;`}
+    margin-inline-end: 0 !important;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `padding-left: 16px !important;`
-        : `padding-right: 16px !important;`}
-
-    ${(props) =>
-      props.isScrollLocked &&
-      css`
-        ${props.theme.interfaceDirection === "rtl"
-          ? `margin-left: 0 !important;`
-          : `margin-right: 0 !important;`}
-
-        overflow: hidden !important;
-      `}
+    padding-inline-end: 16px !important;
   }
+
+  ${(props) =>
+    props.isScrollLocked &&
+    css`
+      #modal-scroll > .scroll-wrapper > .scroller {
+        overflow: hidden !important;
+      }
+
+      #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
+        margin-inline-end: 0 !important;
+      }
+    `}
 
   ${(props) =>
     props.currentDisplayType === "aside" &&
     css<{ withBodyScroll?: boolean }>`
-      ${props.theme.interfaceDirection === "rtl"
-        ? `margin-left: ${props.withBodyScroll ? "-16px" : "0"};`
-        : `margin-right: ${props.withBodyScroll ? "-16px" : "0"};`}
-
-      padding-bottom: 8px;
+      margin-inline-end: ${props.withBodyScroll ? "-16px" : "0"};
       height: 100%;
       min-height: auto;
     `}
+
+  ${(props) =>
+    props.withoutPadding &&
+    css`
+      padding: 0;
+    `};
 `;
 
 const StyledFooter = styled.div<{

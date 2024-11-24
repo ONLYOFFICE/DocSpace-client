@@ -83,8 +83,8 @@ const StyledHeading = styled.div`
   }
 
   @media ${mobile} {
-    margin: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? "0 12px 0 0 " : "0 0 0 12px"};
+    margin-block: 0;
+    margin-inline: 12px 0;
     width: 100%;
     max-width: calc(100vw - 68px);
   }
@@ -110,14 +110,7 @@ const StyledHeadline = styled(Headline)`
 `;
 
 const StyledSubmitToGalleryButton = styled(Button)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  margin-inline-start: auto;
 
   @media ${mobile} {
     display: none;
@@ -133,8 +126,8 @@ const StyledInfoPanelToggleWrapper = styled.div`
   width: 16px;
   height: 16px;
 
-  margin: ${({ theme }) =>
-    theme.interfaceDirection !== "rtl" ? "0 8px 0 28px" : "0 28px 0 8px"};
+  margin-block: 0;
+  margin-inline: 28px 8px;
 
   @media ${tablet} {
     display: none;

@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { mobile, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
@@ -38,7 +38,7 @@ import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import i18n from "../../../i18n";
 
 const Header = styled.header`
-  align-items: left;
+  align-items: start;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: flex;
   width: 100vw;
@@ -58,7 +58,8 @@ const Header = styled.header`
   }
 
   .header-logo-wrapper {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    height: 24px;
   }
 
   .header-logo-min_icon {
@@ -70,7 +71,7 @@ const Header = styled.header`
 
   .header-logo-icon {
     width: 100%;
-    height: 100%;
+    height: 24px;
     padding: 12px 0;
     cursor: pointer;
   }
@@ -79,7 +80,7 @@ const Header = styled.header`
     //margin: auto;
     // margin-right: 8px;
     position: absolute;
-    right: 8px;
+    inset-inline-end: 8px;
     top: 6px;
   }
 `;

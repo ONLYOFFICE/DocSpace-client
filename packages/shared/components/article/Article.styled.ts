@@ -24,19 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-  desktop,
-} from "../../utils";
+import { mobile, tablet, desktop } from "../../utils";
 
-import { Base, TColorScheme } from "../../themes";
+import { Base, TColorScheme, globalColors } from "../../themes";
 
 const StyledArticle = styled.article<{
   showText?: boolean;
@@ -55,11 +50,7 @@ const StyledArticle = styled.article<{
   box-sizing: border-box;
 
   user-select: none;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `border-left: ${theme.catalog.verticalLine};`
-      : `border-right: ${theme.catalog.verticalLine};`}
+  border-inline-end: ${({ theme }) => theme.catalog.verticalLine};
 
   @media ${tablet} {
     min-width: ${(props) => (props.showText ? "243px" : "60px")};
@@ -97,7 +88,6 @@ const StyledArticle = styled.article<{
 
     @media ${mobile} {
       height: 100% !important;
-      margin-top: 32px;
     }
 
     .article-scroller {
@@ -136,8 +126,8 @@ StyledArticle.defaultProps = { theme: Base };
 
 const StyledArticleHeader = styled.div<{ showText?: boolean }>`
   height: 24px;
-  padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("23px 21px 22px 20px", theme.interfaceDirection)};
+  padding-block: 23px 22px;
+  padding-inline: 20px 21px;
   margin: 0;
   display: flex;
   justify-content: flex-start;
@@ -159,7 +149,7 @@ const StyledArticleHeader = styled.div<{ showText?: boolean }>`
     padding: 12px 0;
   }
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
 StyledArticleHeader.defaultProps = { theme: Base };
@@ -186,17 +176,11 @@ const StyledHeading = styled.div<{ showText?: boolean }>`
 
   @media ${tablet} {
     display: ${(props) => (props.showText ? "block" : "none")};
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 9px;`
-        : `margin-left: 9px;`}
+    margin-inline-start: 9px;
   }
 
   @media ${mobile} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 0;`
-        : `margin-left: 0;`}
+    margin-inline-start: 0;
   }
 `;
 
@@ -243,24 +227,6 @@ const StyledArticleMainButton = styled.div`
   }
 `;
 
-const StyledControlContainer = styled.div`
-  width: 17px;
-  height: 17px;
-  position: absolute;
-  top: 37px;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 10px;` : `right: 10px;`}
-  border-radius: 100px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 290;
-`;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
 const StyledCrossIcon = styled(CrossIcon)`
   width: 17px;
   height: 17px;
@@ -280,10 +246,7 @@ const StyledArticleProfile = styled.div`
 
   border-top: ${(props) => props.theme.catalog.profile.borderTop};
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `border-left: ${theme.catalog.verticalLine};`
-      : `border-right: ${theme.catalog.verticalLine};`}
+  border-inline-end: ${({ theme }) => theme.catalog.verticalLine};
   background-color: ${(props) => props.theme.catalog.profile.background};
 
   @media ${tablet} {
@@ -295,10 +258,7 @@ const StyledArticleProfile = styled.div`
   }
 
   .option-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
     height: 32px;
     width: 32px;
 
@@ -322,14 +282,7 @@ const StyledUserName = styled.div`
   flex-wrap: wrap;
   max-width: 131px;
   min-width: 131px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 12px;
-        `
-      : css`
-          padding-left: 12px;
-        `}
+  padding-inline-start: 12px;
   cursor: pointer;
 `;
 
@@ -339,14 +292,7 @@ const StyledProfileWrapper = styled.div<{
   z-index: 209;
   position: absolute;
   bottom: 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 0;
-        `
-      : css`
-          left: 0;
-        `}
+  inset-inline-start: 0;
   min-width: 251px;
   max-width: 251px;
   background-color: ${(props) => props.theme.catalog.profile.background};
@@ -369,14 +315,7 @@ const StyledArticleApps = styled.div<{
   margin-bottom: 16px;
 
   @media ${tablet} {
-    ${(props) =>
-      props.showText &&
-      css`
-        ${({ theme }) =>
-          theme.interfaceDirection === "rtl"
-            ? `margin-right: 8px;`
-            : `margin-left: 8px;`}
-      `}
+    ${(props) => props.showText && "margin-inline-start: 8px;"}
   }
 
   @media ${mobile} {
@@ -452,16 +391,9 @@ const StyledHideArticleMenuButton = styled.div<{
   bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
   background: ${(props) => props.theme.catalog.background};
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 0;
-        `
-      : css`
-          left: 0;
-        `}
+  inset-inline-start: 0;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   min-width: ${({ showText }) => (showText ? "243px" : "60px")};
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};
@@ -476,23 +408,9 @@ const StyledHideArticleMenuButton = styled.div<{
 
   .article-hide-menu-container {
     align-items: center;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-          `
-        : css`
-            margin-left: 16px;
-          `}
+    margin-inline-start: 16px;
     .article-hide-menu-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
       color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
     }
 
@@ -513,19 +431,13 @@ const StyledHideArticleMenuButton = styled.div<{
   .article-hide-menu-icon_svg,
   .article-show-menu-icon_svg {
     height: 20px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        transform: scaleX(-1);
-      `}
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   .article-hide-menu-icon_svg {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        transform: scaleX(-1);
-      `}
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     svg {
       path {
         fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
@@ -553,7 +465,6 @@ export {
   StyledIconBox,
   StyledMenuIcon,
   StyledArticleMainButton,
-  StyledControlContainer,
   StyledCrossIcon,
   StyledArticleProfile,
   StyledUserName,

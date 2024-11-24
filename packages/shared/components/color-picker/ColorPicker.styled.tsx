@@ -25,18 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "../../themes";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isPickerOnly: boolean }>`
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    inset-inline-end: 10px;
+  }
+
+  .hex-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  .hex-text {
+    &:hover {
+      cursor: default;
+    }
   }
 
   .hex-color-picker .react-colorful {
@@ -46,17 +53,24 @@ const Wrapper = styled.div`
   }
 
   .react-colorful__saturation {
-    margin: 16px 0 26px 0;
+    margin-block: 16px 26px;
     border-radius: 3px;
   }
 
   .hex-color-picker .react-colorful__interactive {
     width: 183px;
 
-    ${isMobileOnly &&
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 13px;"}
+
+    ${isMobile() &&
     css`
       width: calc(100vw - 76px);
     `}
+  }
+
+  .react-colorful__last-control .react-colorful__interactive {
+    left: 6px;
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
   }
 
   .hex-color-picker .react-colorful__saturation-pointer {
@@ -74,19 +88,23 @@ const Wrapper = styled.div`
     width: 30px;
     height: 30px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-    border: 8px solid #fff;
+    border: 8px solid ${globalColors.white};
   }
 
   .hex-value {
     height: 32px;
     outline: none;
     padding: 6px 8px;
-    border: 1px solid ${(props) => (props.theme.isBase ? "#d0d5da" : "#474747")};
+    border: 1px solid
+      ${(props) =>
+        props.theme.isBase
+          ? globalColors.grayStrong
+          : globalColors.grayDarkStrong};
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-    background: ${(props) => !props.theme.isBase && "#282828"};
-    color: ${(props) => !props.theme.isBase && "#5C5C5C"};
+    background: ${(props) => !props.theme.isBase && globalColors.darkGrayLight};
+    color: ${(props) => !props.theme.isBase && globalColors.grayDarkText};
   }
 
   .hex-value-label {
@@ -97,14 +115,7 @@ const Wrapper = styled.div`
     display: flex;
 
     .apply-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      inset-inline-end: 8px;
     }
   }
 
@@ -114,7 +125,7 @@ const Wrapper = styled.div`
     padding-bottom: 16px;
     width: 195px;
 
-    ${isMobileOnly &&
+    ${isMobile() &&
     css`
       width: calc(100vw - 64px);
     `}
@@ -132,6 +143,18 @@ const Wrapper = styled.div`
   .hex-button {
     order: 3;
   }
+
+  ${(props) =>
+    props.isPickerOnly &&
+    css`
+      .react-colorful__saturation {
+        margin-block: 16px 24px;
+      }
+
+      .hex-color-picker {
+        padding-bottom: 0px;
+      }
+    `}
 `;
 
 export default Wrapper;

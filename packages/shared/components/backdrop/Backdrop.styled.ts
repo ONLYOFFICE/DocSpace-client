@@ -40,6 +40,8 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
   width: 100vw;
 
   z-index: ${(props) => props.zIndex};
+
+  // doesn't require mirroring for RTL
   left: 0;
   top: 0;
   cursor: ${(props) =>

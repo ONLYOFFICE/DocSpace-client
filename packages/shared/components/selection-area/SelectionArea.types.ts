@@ -47,10 +47,10 @@ export interface SelectionAreaProps {
   scrollClass: string;
   viewAs: TViewAs;
   itemsContainerClass: string;
-  isRooms: boolean;
-  folderHeaderHeight: number;
-  countTilesInRow: number;
-  defaultHeaderHeight: number;
-  arrayTypes: TArrayTypes[];
+  isRooms?: boolean;
+  folderHeaderHeight?: number;
+  countTilesInRow?: number;
+  defaultHeaderHeight?: number;
+  arrayTypes?: TArrayTypes[];
   itemClass: string;
 }

@@ -33,15 +33,22 @@ import { Text } from "../../text";
 import { LinkWithDropdown } from "../../link-with-dropdown";
 import { Link, LinkType } from "../../link";
 
-import { getExpiredOptions } from "../Share.helpers";
+import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
+import { globalColors } from "../../../themes";
+import { ShareAccessRights } from "../../../enums";
+import { classNames } from "../../../utils";
 
 const ExpiredComboBox = ({
   link,
   changeExpirationOption,
   isDisabled,
+  isRoomsLink,
+  changeAccessOption,
+  availableExternalRights,
+  removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -91,24 +98,16 @@ const ExpiredComboBox = ({
     changeExpirationOption(link, currentDate);
   };
 
-  const getDate = () => {
-    if (!expirationDate) return;
-    const currentDare = moment(new Date());
-    const expDate = moment(new Date(expirationDate));
-    const calculatedDate = expDate.diff(currentDare, "days");
+  const onRemoveLink = () => {
+    if (isRoomsLink) return removedExpiredLink?.(link);
 
-    if (calculatedDate < 1) {
-      return {
-        date: expDate.diff(currentDare, "hours") + 1,
-        label: t("Common:Hours"),
-      };
-    }
-
-    return { date: calculatedDate + 1, label: t("Common:Days") };
-  };
-
-  const onRegenerateClick = () => {
-    setSevenDays();
+    if (availableExternalRights.None)
+      changeAccessOption(
+        {
+          access: ShareAccessRights.None,
+        },
+        link,
+      );
   };
 
   useEffect(() => {
@@ -124,19 +123,19 @@ const ExpiredComboBox = ({
     setSevenDays,
     setUnlimited,
     onCalendarOpen,
+    i18n.language,
   );
 
   const getExpirationTrans = () => {
     if (expirationDate) {
-      const dateObj = getDate();
-      const date = `${dateObj?.date} ${dateObj?.label}`;
+      const date = getDate(expirationDate);
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
           The link will expire after
           <LinkWithDropdown
             className="expired-options"
-            color="#4781D1"
+            color={globalColors.lightBlueMain}
             dropdownType="alwaysDashed"
             data={expiredOptions}
             fontSize="12px"
@@ -150,14 +149,14 @@ const ExpiredComboBox = ({
         </Trans>
       );
     }
-    const date = t("Common:Unlimited");
+    const date = t("Common:Unlimited").toLowerCase();
 
     return (
       <Trans t={t} i18nKey="LinkIsValid" ns="Common">
         The link is valid for
         <LinkWithDropdown
           className="expired-options"
-          color="#4781D1"
+          color={globalColors.lightBlueMain}
           dropdownType="alwaysDashed"
           data={expiredOptions}
           fontSize="12px"
@@ -174,29 +173,45 @@ const ExpiredComboBox = ({
   return (
     <div ref={bodyRef}>
       {isExpired ? (
-        <Text className="expire-text" as="div" fontSize="12px" fontWeight="400">
+        <Text
+          className={classNames("expire-text", {
+            "expire-text-room": Boolean(isRoomsLink),
+          })}
+          as="div"
+          fontSize="12px"
+          fontWeight="400"
+        >
           {t("Common:LinkExpired")}{" "}
           <Link
             type={LinkType.action}
             fontWeight={400}
             fontSize="12px"
-            color="#4781D1"
-            onClick={onRegenerateClick}
+            color={globalColors.lightBlueMain}
+            onClick={onRemoveLink}
           >
-            {t("Common:Regenerate")}
+            {t("Common:RemoveLink")}
           </Link>
         </Text>
       ) : (
-        <Text className="expire-text" as="div" fontSize="12px" fontWeight="400">
+        <Text
+          className={classNames("expire-text", {
+            "expire-text-room": Boolean(isRoomsLink),
+          })}
+          as="div"
+          fontSize="12px"
+          fontWeight="400"
+        >
           {getExpirationTrans()}
         </Text>
       )}
       {showCalendar && (
         <ShareCalendar
+          bodyRef={bodyRef}
           onDateSet={setDateFromCalendar}
           calendarRef={calendarRef}
           closeCalendar={onCalendarClose}
           locale={i18n.language}
+          useDropDown={isRoomsLink}
         />
       )}
     </div>

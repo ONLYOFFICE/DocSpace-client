@@ -65,14 +65,7 @@ const StyledScrollbar = styled(Scrollbar)`
 
 const StyledSettingsComponent = styled.div`
   .dns-setting_helpbutton {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 4px;
-          `
-        : css`
-            margin-right: 4px;
-          `}
+    margin-inline-end: 4px;
   }
 
   .paid-badge {
@@ -84,6 +77,10 @@ const StyledSettingsComponent = styled.div`
       color: ${(props) => props.theme.text.disableColor};
     }
     ${(props) => props.standalone && "margin-top: 14px"};
+  }
+
+  .dns-error-text {
+    color: ${(props) => props.theme.client.settings.common.dns.errorColor};
   }
 
   .combo-button-label {
@@ -99,7 +96,7 @@ const StyledSettingsComponent = styled.div`
   .errorText {
     position: absolute;
     font-size: 10px;
-    color: #f21c0e;
+    color: ${(props) => props.theme.client.settings.common.dns.errorColor};
   }
 
   .settings-block__wrapper-language {
@@ -151,27 +148,13 @@ const StyledSettingsComponent = styled.div`
       props.hasScroll &&
       css`
         width: ${isMobileOnly ? "100vw" : "calc(100vw - 52px)"};
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: -16px;
-              `
-            : css`
-                left: -16px;
-              `}
+        inset-inline-start: -16px;
         position: relative;
 
         .settings-block {
           width: ${isMobileOnly ? "calc(100vw - 32px)" : "calc(100vw - 84px)"};
           max-width: none;
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  padding-right: 16px;
-                `
-              : css`
-                  padding-left: 16px;
-                `}
+          padding-inline-start: 16px;
         }
       `}
 

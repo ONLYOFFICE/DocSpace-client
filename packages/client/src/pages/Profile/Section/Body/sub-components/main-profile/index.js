@@ -44,7 +44,7 @@ import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import {
-  getUserRole,
+  getUserType,
   convertLanguage,
   getUserTypeName,
   getUserTypeDescription,
@@ -52,7 +52,6 @@ import {
 import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
 
 import { Trans } from "react-i18next";
-//import TimezoneCombo from "./timezoneCombo";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -67,9 +66,10 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { useTheme } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 const MainProfile = (props) => {
-  const { t } = useTranslation(["Profile", "Common"]);
+  const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
   const {
     theme,
@@ -89,33 +89,51 @@ const MainProfile = (props) => {
     updateProfileCulture,
     documentationEmail,
     setDialogData,
+    getProfileModel,
+    avatarEditorDialogVisible,
+    setAvatarEditorDialogVisible,
+    onChangeFile,
+    image,
+    setImage,
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
+  const [directionY, setDirectionY] = useState("both");
   const { interfaceDirection } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
+  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile;
 
   const comboBoxRef = useRef(null);
 
   const updateDropDownMaxHeight = () => {
-    const newDimension = window.innerHeight;
-
     if (comboBoxRef.current) {
+      const padding = 32;
       const comboBoxRect = comboBoxRef.current.getBoundingClientRect();
-      let availableSpaceBottom = newDimension - comboBoxRect.bottom - 20;
+      const availableSpaceBottom =
+        window.innerHeight - comboBoxRect.bottom - padding;
+      const availableSpaceTop = comboBoxRect.top - padding;
 
-      availableSpaceBottom = Math.max(availableSpaceBottom, 100);
+      const max = Math.max(availableSpaceBottom, availableSpaceTop);
 
-      const newDropDownMaxHeight = Math.min(availableSpaceBottom, 352);
+      if (max === availableSpaceBottom) setDirectionY("bottom");
+      else setDirectionY("top");
+
+      const newDropDownMaxHeight = Math.min(max, 352);
+
       setDropDownMaxHeight(newDropDownMaxHeight);
     }
   };
 
   const checkScroll = () => {
     updateDropDownMaxHeight();
+  };
+
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
   };
 
   useEffect(() => {
@@ -138,7 +156,7 @@ const MainProfile = (props) => {
     }
   }, []);
 
-  const role = getUserRole(profile);
+  const role = getUserType(profile);
 
   const sendActivationLinkAction = () => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);
@@ -155,12 +173,18 @@ const MainProfile = (props) => {
     setChangePasswordVisible(true);
   };
 
+  const model = getProfileModel(t);
+
+  const onChangeIcon = (icon) => {
+    setImage(icon);
+  };
+
   const userAvatar = profile.hasAvatar
     ? profile.avatarMax
     : DefaultUserAvatarMax;
 
   const tooltipLanguage = (
-    <Text as="div" fontSize="12px" color="#333333">
+    <Text as="div" fontSize="12px">
       <Trans t={t} i18nKey="NotFoundLanguage" ns="Common">
         "In case you cannot find your language in the list of the available
         ones, feel free to write to us at
@@ -186,8 +210,6 @@ const MainProfile = (props) => {
       </Box>
     </Text>
   );
-
-  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
@@ -220,15 +242,22 @@ const MainProfile = (props) => {
           source={userAvatar}
           userName={profile.displayName}
           editing={!profile.isLDAP}
+          hasAvatar={!!profile.hasAvatar}
+          model={model}
           editAction={() => setChangeAvatarVisible(true)}
+          onChangeFile={onChangeFileContext}
         />
         {profile.isSSO && (
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
               label={t("Common:SSO")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -241,8 +270,12 @@ const MainProfile = (props) => {
             <Badge
               className="sso-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -267,8 +300,12 @@ const MainProfile = (props) => {
                   id="sso-badge-profile"
                   className="sso-badge"
                   label={t("Common:SSO")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+                  color={globalColors.white}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondGreen
+                      : globalColors.secondGreenDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -286,8 +323,12 @@ const MainProfile = (props) => {
                   id="ldap-badge-profile"
                   className="ldap-badge"
                   label={t("Common:LDAP")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+                  color={globalColors.white}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondPurple
+                      : globalColors.secondPurpleDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -382,7 +423,7 @@ const MainProfile = (props) => {
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
               className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+              directionY={isMobileHorizontalOrientation ? "bottom" : directionY}
               options={cultureNames}
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
@@ -592,48 +633,75 @@ const MainProfile = (props) => {
         </div>
       </StyledInfo>
 
-      {changeAvatarVisible && (
+      {avatarEditorDialogVisible && (
         <AvatarEditorDialog
           t={t}
-          visible={changeAvatarVisible}
-          onClose={() => setChangeAvatarVisible(false)}
+          visible={image.uploadedFile}
+          image={image}
+          isProfileUpload={true}
+          onChangeImage={onChangeIcon}
+          onChangeFile={onChangeFileContext}
+          onClose={() => setAvatarEditorDialogVisible(false)}
         />
       )}
     </StyledWrapper>
   );
 };
 
-export default inject(({ settingsStore, peopleStore, userStore }) => {
-  const { withActivationBar, sendActivationLink } = userStore;
-  const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-    settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    peopleStore,
+    userStore,
+    dialogsStore,
+    avatarEditorDialogStore,
+  }) => {
+    const { withActivationBar, sendActivationLink } = userStore;
+    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
+      settingsStore;
 
-  const {
-    targetUser: profile,
-    setChangePasswordVisible,
-    setChangeNameVisible,
-    changeAvatarVisible,
-    setChangeAvatarVisible,
-    updateProfileCulture,
-  } = peopleStore.targetUserStore;
-  const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
+    const {
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      onChangeFile,
+      image,
+      setImage,
+    } = avatarEditorDialogStore;
 
-  return {
-    theme,
-    profile,
-    culture,
-    helpLink,
+    const {
+      targetUser: profile,
+      setChangePasswordVisible,
+      setChangeNameVisible,
+      changeAvatarVisible,
+      setChangeAvatarVisible,
+      updateProfileCulture,
+      getProfileModel,
+    } = peopleStore.targetUserStore;
+    const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
 
-    setChangeEmailVisible,
-    setChangePasswordVisible,
-    setChangeNameVisible,
-    changeAvatarVisible,
-    setChangeAvatarVisible,
-    withActivationBar,
-    sendActivationLink,
-    currentColorScheme,
-    updateProfileCulture,
-    documentationEmail,
-    setDialogData,
-  };
-})(withCultureNames(observer(MainProfile)));
+    return {
+      theme,
+      profile,
+      culture,
+      helpLink,
+
+      setChangeEmailVisible,
+      setChangePasswordVisible,
+      setChangeNameVisible,
+      changeAvatarVisible,
+      setChangeAvatarVisible,
+      withActivationBar,
+      sendActivationLink,
+      currentColorScheme,
+      updateProfileCulture,
+      documentationEmail,
+      setDialogData,
+      getProfileModel,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      image,
+      onChangeFile,
+      setImage,
+    };
+  },
+)(withCultureNames(observer(MainProfile)));

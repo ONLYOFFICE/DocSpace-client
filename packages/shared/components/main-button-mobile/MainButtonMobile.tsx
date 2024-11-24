@@ -104,6 +104,25 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     setIsOpen(opened);
   }, [opened]);
 
+  const usePrevious = (value?: string) => {
+    const prevRef = useRef<string>();
+
+    useEffect(() => {
+      prevRef.current = value;
+    });
+
+    return prevRef.current;
+  };
+
+  const currentLocation = window.location.href;
+  const prevLocation = usePrevious(window.location.href);
+
+  useEffect(() => {
+    if (prevLocation !== currentLocation) {
+      setIsOpen(false);
+    }
+  }, [prevLocation, currentLocation]);
+
   const setDialogBackground = (scrollHeight: number) => {
     if (!buttonBackground) {
       document
@@ -249,6 +268,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                   recalculateHeight={recalculateHeight}
                   openedSubmenuKey={openedSubmenuKey}
                   setOpenedSubmenuKey={setOpenedSubmenuKey}
+                  openByDefault={option?.openByDefault || false}
                 />
               );
 

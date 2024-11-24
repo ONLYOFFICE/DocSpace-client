@@ -292,7 +292,7 @@ const TrustedMail = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export const TrustedMailSection = inject(({ settingsStore }) => {
   const {
     trustedDomainsType,
     trustedDomains,

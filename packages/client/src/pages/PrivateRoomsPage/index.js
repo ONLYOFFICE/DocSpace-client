@@ -65,15 +65,12 @@ const StyledPrivacyPage = styled.div`
 
   .privacy-rooms-text-separator {
     width: 70%;
-    margin: 28px 0 42px 0;
+    margin: 28px 0 42px;
     border-bottom: ${(props) => props.theme.filesPrivateRoom.borderBottom};
   }
 
   .privacy-rooms-install-text {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `text-align: right;`
-        : `text-align: left;`}
+    text-align: start;
 
     @media ${mobile} {
       text-align: center;
@@ -90,10 +87,7 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-link {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 4px;`
-        : `margin-left: 4px;`}
+    margin-inline-start: 4px;
     color: ${(props) => props.theme.filesPrivateRoom.linkColor};
   }
 
@@ -106,22 +100,11 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-avatar {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            text-align: right;
-            padding-right: 66px;
-          `
-        : css`
-            text-align: left;
-            padding-left: 66px;
-          `}
+    text-align: start;
+    padding-inline-start: 66px;
 
     @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-right: 74px;`
-          : `padding-left: 74px;`}
+      padding-inline-start: 74px;
     }
 
     @media ${mobile} {

@@ -55,15 +55,8 @@ const getHorizontalCss = css<{ removeMargin?: boolean; labelWidth?: string }>`
     position: relative;
     margin-top: ${(props) =>
       props.theme.fieldContainer.horizontal.iconButton.marginTop};
-    margin-left: ${(props) =>
+    margin-inline-start: ${(props) =>
       props.theme.fieldContainer.horizontal.iconButton.marginLeft};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: ${props.theme.fieldContainer.horizontal.iconButton
-          .marginLeft};
-      `}
   }
 `;
 

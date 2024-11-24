@@ -60,9 +60,8 @@ const StyledBox2 = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 16px;
   grid-row-gap: 4px;
-  justify-items: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right` : `left`};
-  align-items: left;
+  justify-items: start;
+  align-items: start;
 
   .first-row-content__mobile {
     width: 80%;

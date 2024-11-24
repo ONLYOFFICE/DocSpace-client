@@ -1,16 +1,22 @@
 {
   "ActionCannotBeUndone": "Vybraní deaktivovaní používatelia budú z {{productName}} odstránení. Tento úkon sa nedá vrátiť späť.",
+  "ActionCannotBeUndoneGuests": "Vybraní deaktivovaní hostia budú odstránení z {{productName}}. Tento krok sa nedá vrátiť späť.",
   "CannotReassignFiles": "Ak vymažete viacerých používateľov naraz, ich súbory nemôžete opätovne priradiť iným používateľom.",
+  "DeleteGroupGuestsSuccessMessage": "Hostia boli úspešne odstránení.",
   "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
+  "DeleteGuest": "Odstrániť hosťa",
+  "DeleteGuests": "Odstrániť hostí",
   "DeleteMyDocumentsUser": "Všetky osobné súbory a priečinky v časti Dokumenty tohto používateľa budú natrvalo vymazané.",
   "DeletePersonalData": "Osobné údaje, všetky osobné súbory a priečinky v častiach Dokumenty a Kôš* vybraných používateľov budú natrvalo vymazané. Súbory a priečinky vybraných používateľov uchovávané v spoločných častiach*, napríklad v miestnostiach, zostanú v {{productName}}.",
   "DeletePersonalDataApplicable": "*Platí pre vybraných používateľov, ktorí majú takéto súbory a priečinky.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
+  "DeleteReqassignDescriptionGuest": "{{userCaption}} bude odstránený zo všetkých miestností, do ktorých bol pozvaný. Dokumenty, ktoré {{userCaption}} vytvoril v miestnostiach, budú automaticky priradené vlastníkom miestností.",
   "DeleteUser": "Odstrániť používateľa",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude vymazaný. Tento úkon sa nedá odvolať.",
   "DeletingUsers": "Vymazávanie používateľov",
   "PleaseNote": "Upozornenie:",
   "ReassignDataToAnotherUser": "Opätovné priradenie údajov inému používateľovi",
+  "SuccessfullyDeleteGuestInfoMessage": "Hosť bol úspešne odstránený",
   "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený",
   "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi."
 }

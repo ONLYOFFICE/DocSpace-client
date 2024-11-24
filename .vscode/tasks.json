@@ -3,7 +3,7 @@
   "problemMatcher": [],
   "tasks": [
     {
-      "label": "Backend | build EE",
+      "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
       "group": {
@@ -18,53 +18,53 @@
       }
     },
     {
+      "label": "Backend | run CE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run EE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | rebuild EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build CE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -c",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e enterprise",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -79,7 +79,187 @@
     },
     {
       "label": "Backend | build EE + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build EE + identity",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build EE + dnsmasq + identity",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build DE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run DE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | rebuild DE",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build DE + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build DE + identity",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build DE + dnsmasq + identity",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e developer",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -s -d -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | build SAAS + dnsmasq + identity",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -i -e enterprise",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | rebuild SAAS + dnsmasq",
+      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f -e enterprise",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -303,9 +483,9 @@
       }
     },
     {
-      "label": "Test | frontend-translations",
+      "label": "Test | Jest:common",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -318,9 +498,9 @@
       }
     },
     {
-      "label": "Test | frontend-translations-spellcheck",
+      "label": "Test | Jest:translations",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -333,9 +513,24 @@
       }
     },
     {
-      "label": "Test | frontend-translations-spellcheck-force-save",
+      "label": "Test | Jest:images",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py -f",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; open reports/tests-results.html",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:colors",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -381,6 +576,66 @@
       "label": "Frontend | Eslint:fix",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn lint:fix ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:build ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e model",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:model ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | e2e playwright setup",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; npx playwright install ; ",
       "group": {
         "kind": "build",
         "isDefault": true

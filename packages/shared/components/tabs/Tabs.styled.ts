@@ -31,9 +31,14 @@ import { TabsTypes } from "./Tabs.enums";
 
 export const StyledTabs = styled.div<{
   stickyTop?: string;
+  multiple: boolean;
 }>`
-  display: flex;
-  flex-direction: column;
+  ${(props) =>
+    props.multiple &&
+    css`
+      display: flex;
+      flex-direction: column;
+    `};
 
   .sticky {
     height: 33px;
@@ -78,17 +83,8 @@ export const StyledTabs = styled.div<{
     position: absolute;
     height: 32px;
     width: 60px;
-
+    inset-inline-end: 0;
     pointer-events: none;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "ltr"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
 
     background: ${(props) =>
       props.theme.interfaceDirection === "ltr"
@@ -150,6 +146,7 @@ export const ScrollbarTabs = styled(Scrollbar)<{
 
 export const TabList = styled.div<{
   $type?: TabsTypes;
+  multiple: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -157,6 +154,13 @@ export const TabList = styled.div<{
 
   width: 100%;
   height: 32px;
+
+  ${(props) =>
+    props.multiple &&
+    css`
+      flex-wrap: wrap;
+      height: fit-content;
+    `};
 
   gap: ${(props) => (props.$type === TabsTypes.Primary ? "20px" : "8px")};
 
@@ -171,11 +175,11 @@ export const Tab = styled.div<{
   isActive: boolean;
   isDisabled?: boolean;
   $type?: TabsTypes;
+  multiple?: boolean;
 }>`
-  display: flex;
-  white-space: nowrap;
-  flex-direction: column;
-  gap: 4px;
+    white-space: nowrap;
+    display: grid;
+    gap: 4px;
 
   width: max-content;
   height: inhert;
@@ -183,11 +187,11 @@ export const Tab = styled.div<{
   line-height: 20px;
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
-  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || props.isActive) && "none"};
+  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || (!props.multiple && props.isActive)) && "none"};
   user-select: none;
 
   padding: ${(props) =>
-    props.$type === TabsTypes.Primary ? "4px 0 0 0" : "4px 16px"};
+    props.$type === TabsTypes.Primary ? "4px 0 0" : "4px 16px"};
 
 
   color: ${(props) =>
@@ -255,10 +259,19 @@ export const Tab = styled.div<{
 
 Tab.defaultProps = { theme: Base };
 
+export const TabText = styled.div`
+  grid-area: 1/1;
+`;
+
+export const TabBadge = styled.div`
+  grid-area: 1/2;
+`;
+
 export const TabSubLine = styled.div<{
   isActive?: boolean;
   $type?: TabsTypes;
 }>`
+  grid-area: 2/1;
   z-index: 1;
   width: 100%;
   height: 4px;

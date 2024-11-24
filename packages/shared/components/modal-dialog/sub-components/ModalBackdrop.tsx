@@ -50,6 +50,7 @@ const StyledModalBackdrop = styled.div<{ zIndex?: number }>`
   width: 100vw;
   overflow: hidden;
   position: fixed;
+  // doesn't require mirroring for RTL
   left: 0;
   top: 0;
 

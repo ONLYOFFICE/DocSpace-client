@@ -32,6 +32,7 @@ import { isSeparator } from "@docspace/shared/utils/typeGuards";
 
 import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
 import type PlayerMessageErrorProps from "./MessageError.props";
+import { globalColors } from "../../../../themes";
 
 export const MessageError = ({
   model,
@@ -39,14 +40,21 @@ export const MessageError = ({
   errorTitle,
   onMaskClick,
 }: PlayerMessageErrorProps) => {
-  const items = !isMobile
-    ? model.filter((el) => el.key !== "rename")
-    : model.filter((el) => el.key === "delete" || el.key === "download");
+  const items = (
+    !isMobile
+      ? model.filter((el) => el.key !== "rename")
+      : model.filter((el) => el.key === "delete" || el.key === "download")
+  ).filter((m) => !m.disabled);
 
   return (
     <div>
       <StyledMediaError>
-        <Text fontSize="15px" color="#fff" textAlign="center" className="title">
+        <Text
+          fontSize="15px"
+          color={globalColors.white}
+          textAlign="center"
+          className="title"
+        >
           {errorTitle}
         </Text>
       </StyledMediaError>

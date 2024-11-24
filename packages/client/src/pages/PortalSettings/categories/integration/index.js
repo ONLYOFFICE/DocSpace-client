@@ -41,6 +41,7 @@ import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -112,7 +113,7 @@ const IntegrationWrapper = (props) => {
   const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+    return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const currentTabId = getCurrentTabId();
@@ -137,20 +138,22 @@ const IntegrationWrapper = (props) => {
   );
 };
 
-export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
-  const { standalone, enablePlugins, currentDeviceType } = settingsStore;
-  const { load: toDefault } = ssoStore;
+export const Component = inject(
+  ({ settingsStore, ssoStore, currentQuotaStore }) => {
+    const { standalone, enablePlugins, currentDeviceType } = settingsStore;
+    const { load: toDefault } = ssoStore;
 
-  const { isSSOAvailable } = currentQuotaStore;
+    const { isSSOAvailable } = currentQuotaStore;
 
-  return {
-    toDefault,
-    isSSOAvailable,
-    standalone,
-    currentDeviceType,
-    enablePlugins,
-  };
-})(
+    return {
+      toDefault,
+      isSSOAvailable,
+      standalone,
+      currentDeviceType,
+      enablePlugins,
+    };
+  },
+)(
   withTranslation([
     "Settings",
     "SingleSignOn",

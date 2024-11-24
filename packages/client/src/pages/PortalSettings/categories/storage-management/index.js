@@ -75,7 +75,7 @@ const StorageManagement = ({
   );
 };
 
-export default inject(({ authStore, storageManagement }) => {
+export const Component = inject(({ authStore, storageManagement }) => {
   const { language } = authStore;
   const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
   return {

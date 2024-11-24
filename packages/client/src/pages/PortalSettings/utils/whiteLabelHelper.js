@@ -27,13 +27,14 @@
 import axios from "axios";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { globalColors } from "@docspace/shared/themes";
 
 export const generateLogo = (
   width,
   height,
   text,
   fontSize = 18,
-  fontColor = "#000",
+  fontColor = globalColors.darkBlack,
   alignCenter = false,
   isEditor = false,
 ) => {
@@ -41,7 +42,6 @@ export const generateLogo = (
   canvas.width = width;
   canvas.height = height;
 
-  console.log("isEditor", isEditor);
   const ctx = canvas.getContext("2d");
   const x = alignCenter ? width / 2 : isEditor ? 10 : 0;
   const y = (height - fontSize) / 2;
@@ -78,7 +78,7 @@ export const getLogoOptions = (index, text, width, height) => {
     case 2:
       return {
         fontSize,
-        text: text.trim().charAt(0),
+        text: Array.from(text)[0],
         width,
         height,
         alignCenter: true,
@@ -104,7 +104,7 @@ export const getLogoOptions = (index, text, width, height) => {
     case 5:
       return {
         fontSize,
-        text: text.trim().charAt(0),
+        text: Array.from(text)[0],
         width,
         height,
         alignCenter: true,

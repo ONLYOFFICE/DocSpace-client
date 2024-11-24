@@ -29,6 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { FillingRoleSelector } from "./FillingRoleSelector";
 import { FillingRoleSelectorProps } from "./FillingRoleSelector.types";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/FillingRoleSelector",
@@ -43,13 +44,13 @@ type Story = StoryObj<typeof FillingRoleSelector>;
 export default meta;
 
 const mockRoles = [
-  { id: "3", name: "Director", order: 3, color: "#BB85E7" },
-  { id: "2", name: "Accountant", order: 2, color: "#70D3B0" },
+  { id: "3", name: "Director", order: 3, color: globalColors.secondPurple },
+  { id: "2", name: "Accountant", order: 2, color: globalColors.secondGreen },
   {
     id: "1",
     name: "Employee",
     order: 1,
-    color: "#FBCC86",
+    color: globalColors.favoritesStatus,
     everyone: "@Everyone",
   },
 ];

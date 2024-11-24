@@ -54,9 +54,9 @@ export interface RowProps {
   /** If true, this state is shown as a rectangle in the checkbox */
   indeterminate?: boolean;
   /** Sets a callback function that is triggered when a row element is selected. Returns data value. */
-  onSelect?: (checked: boolean, data?: TData) => void;
+  onSelect?: (checked: boolean, data?: unknown) => void;
   /** Sets a callback function that is triggered when any element except the checkbox and context menu is clicked. */
-  onRowClick: () => void;
+  onRowClick?: (e: React.MouseEvent) => void;
   /** Function that is invoked on clicking the icon button in the context-menu */
   onContextClick?: (value?: boolean) => void;
   /** Accepts css style  */
@@ -69,6 +69,7 @@ export interface RowProps {
   mode?: TMode;
   /** Removes the borders */
   withoutBorder?: boolean;
+  isIndexEditingMode: boolean;
   isRoom?: boolean;
   contextTitle?: string;
   badgesComponent?: React.ReactNode;

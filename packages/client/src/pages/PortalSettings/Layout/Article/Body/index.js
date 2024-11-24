@@ -234,12 +234,6 @@ const ArticleBodyContent = (props) => {
         return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
-      case "ImportFromGoogle":
-        return t("ImportFromGoogle");
-      case "ImportFromNextcloud":
-        return t("ImportFromNextcloud");
-      case "ImportFromPortal":
-        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:

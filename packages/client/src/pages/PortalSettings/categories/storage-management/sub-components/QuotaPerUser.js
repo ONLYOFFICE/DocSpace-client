@@ -47,11 +47,12 @@ const QuotaPerUserComponent = (props) => {
       saveQuota={(size) => setUserQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
+      tabIndex={2}
     />
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export const QuotaPerUserComponentSection = inject(({ currentQuotaStore }) => {
   const { setUserQuota, defaultUsersQuota, isDefaultUsersQuotaSet } =
     currentQuotaStore;
 

@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { DropDown } from "../drop-down";
+import { globalColors } from "../../themes";
 
 const StyledLinks = styled.div`
   margin-top: 20px;
@@ -32,7 +34,7 @@ const StyledLinks = styled.div`
   .title-link {
     margin-bottom: 12px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: ${globalColors.gray};
   }
 
   .additional-link {
@@ -49,11 +51,34 @@ const StyledLinks = styled.div`
   }
 `;
 
-const StyledLinkRow = styled.div`
-  padding: 8px 0;
+const Strong = styled.strong`
+  font-weight: 600;
+`;
+
+const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   display: flex;
   gap: 8px;
   align-items: center;
+  height: 68px;
+
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
+
+  .avatar-wrapper,
+  .avatar-wrapper:hover {
+    svg {
+      path {
+        fill: ${({ theme }) => theme.infoPanel.avatarColor};
+      }
+    }
+  }
+
+  .avatar_role-wrapper {
+    svg {
+      path:nth-child(3) {
+        fill: ${({ theme }) => theme.backgroundColor};
+      }
+    }
+  }
 
   .combo-box {
     padding: 0;
@@ -67,22 +92,44 @@ const StyledLinkRow = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0;
+    overflow: hidden;
   }
 
   .internal-combobox {
     padding: 0px;
+
+    .combo-button-label {
+      font-size: 14px;
+    }
   }
 
-  .internal-combobox_expiered {
+  .link-options_title {
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
     margin: 6px 8px;
-    color: ${({ theme }) => theme.infoPanel.members.linkAccessComboboxExpired};
+
+    ${({ theme, isExpired }) =>
+      isExpired &&
+      css`
+        color: ${theme.infoPanel.members.linkAccessComboboxExpired};
+      `};
+  }
+
+  .link-options-title-room {
+    margin-inline-start: 0px;
   }
 
   .expired-options {
     padding: 0px;
+
+    .text {
+      color: ${({ theme }) => theme.infoPanel.links.color};
+      :hover {
+        color: ${({ theme }) => theme.infoPanel.links.color};
+        background: unset;
+      }
+    }
 
     & > span > a {
       padding: 0px !important;
@@ -91,6 +138,11 @@ const StyledLinkRow = styled.div`
 
   .expire-text {
     margin-inline-start: 8px;
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  .expire-text-room {
+    margin-inline-start: 0px;
   }
 
   .link-actions {
@@ -98,6 +150,16 @@ const StyledLinkRow = styled.div`
     gap: 16px;
     align-items: center;
     margin-inline-start: auto;
+
+    .link-row_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
+
+    .link-actions_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
   }
 
   .loader {
@@ -131,4 +193,10 @@ const StyledSquare = styled.div`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare };
+const StyledDropDown = styled(DropDown)`
+  .share-link_calendar {
+    position: fixed;
+  }
+`;
+
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };

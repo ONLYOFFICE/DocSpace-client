@@ -40,6 +40,7 @@ import {
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
+import { globalColors } from "@docspace/shared/themes";
 
 export const MainElementParameter = ({
   t,
@@ -108,6 +109,7 @@ export const MainElementParameter = ({
         selected={selectedElementType}
         onClick={toggleButtonMode}
         spacing="8px"
+        isDisabled={true}
       />
       {config.isButtonMode && (
         <>
@@ -117,7 +119,7 @@ export const MainElementParameter = ({
             <ColorInput
               scale
               handleChange={setButtonColor}
-              defaultColor={"#5299E0"}
+              defaultColor={globalColors.lightSecondMain}
             />
           </ControlsGroup>
           <ControlsGroup>

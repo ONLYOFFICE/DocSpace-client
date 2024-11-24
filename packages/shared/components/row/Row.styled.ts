@@ -72,10 +72,7 @@ const StyledRow = styled.div<{
   align-content: center;
 
   .row-progress-loader {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 9px;`
-        : `margin-left: 9px;`}
+    margin-inline-start: 9px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -89,26 +86,12 @@ const StyledRow = styled.div<{
       .checkbox {
         display: ${props.checked ? "flex" : "none"};
 
-        padding: ${getCorrectFourValuesStyle(
-          "10px 1px 10px 8px",
-          props.theme.interfaceDirection,
-        )};
-        ${props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -4px;
-            `
-          : css`
-              margin-left: -4px;
-            `}
+        padding-block: 10px;
+        padding-inline: 8px 1px;
+        margin-inline-start: -4px;
 
         @media ${tablet} {
-          ${props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: -6px;
-              `
-            : css`
-                margin-left: -6px;
-              `}
+          margin-inline-start: -6px;
         }
       }
 
@@ -134,7 +117,10 @@ const StyledContent = styled.div`
 `;
 StyledContent.defaultProps = { theme: Base };
 
-const StyledCheckbox = styled.div<{ mode: TMode }>`
+const StyledCheckbox = styled.div<{
+  mode: TMode;
+  isIndexEditingMode?: boolean;
+}>`
   display: flex;
   flex: 0 0 16px;
   height: 56px;
@@ -146,6 +132,7 @@ const StyledCheckbox = styled.div<{ mode: TMode }>`
   width: 41px;
   ${(props) =>
     props.mode === "modern" &&
+    !props.isIndexEditingMode &&
     !isMobile &&
     css`
       :hover {
@@ -164,16 +151,8 @@ const StyledCheckbox = styled.div<{ mode: TMode }>`
 const StyledElement = styled.div`
   flex: 0 0 auto;
   display: flex;
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `
-      margin-left: ${theme.row.element.marginRight};
-      margin-right: ${theme.row.element.marginLeft};
-        `
-      : `
-      margin-right: ${theme.row.element.marginRight};
-      margin-left: ${theme.row.element.marginLeft};
-        `}
+  margin-inline-end: ${({ theme }) => theme.row.element.marginRight};
+  margin-inline-start: ${({ theme }) => theme.row.element.marginLeft};
   user-select: none;
 
   .react-svg-icon svg {
@@ -189,16 +168,10 @@ const StyledContentElement = styled.div`
   margin-top: 0px;
   user-select: none;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 24px;
-        `
-      : css`
-          margin-left: 24px;
-        `}
+  margin-inline-start: 24px;
 
-  :empty, :has(.badges__quickButtons:empty) {
+  :empty,
+  :has(.badges__quickButtons:empty) {
     display: none;
   }
 `;
@@ -217,22 +190,13 @@ const StyledOptionButton = styled.div<{ spacerWidth?: string }>`
         theme.interfaceDirection,
       )};
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 0px;`
-        : `margin-right: 0px;`}
+    margin-inline-end: 0px;
 
     @media ${desktop} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-left: -1px;`
-          : `margin-right: -1px;`}
+      margin-inline-end: -1px;
     }
     @media ${mobile} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-right: 10px;`
-          : `padding-left: 10px;`}
+      padding-inline-start: 10px;
     }
   }
 

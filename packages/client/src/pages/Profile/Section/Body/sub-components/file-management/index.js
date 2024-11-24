@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -64,11 +64,24 @@ const FileManagement = ({
 
   openEditorInSameTab,
   setOpenEditorInSameTab,
+
+  displayFileExtension,
+  setDisplayFileExtension,
+  getFilesSettings,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
   const [isLoadingFavorites, setIsLoadingFavorites] = React.useState(false);
   const [isLoadingRecent, setIsLoadingRecent] = React.useState(false);
+
+  const getData = async () => await getFilesSettings();
+
+  useEffect(() => {
+    const prefix =
+      window.DocSpace.location.pathname.includes("portal-settings");
+
+    if (prefix) getData();
+  }, []);
 
   const onChangeOriginalCopy = React.useCallback(() => {
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
@@ -89,6 +102,11 @@ const FileManagement = ({
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
+
+  const onChangeDisplayFileExtension = React.useCallback(() => {
+    setDisplayFileExtension(!displayFileExtension);
+    window.DocSpace.displayFileExtension = !displayFileExtension;
+  }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -132,7 +150,7 @@ const FileManagement = ({
           isChecked={thumbnails1280x720}
           style={{ display: "none" }}
         />
-        {!isVisitor && (
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="ask-again toggle-btn"
@@ -141,7 +159,7 @@ const FileManagement = ({
             />
             <Text>{t("Common:DontAskAgain")}</Text>
           </div>
-        )}
+        }
         <div className="toggle-btn-wrapper">
           <ToggleButton
             className="save-copy-original toggle-btn"
@@ -150,7 +168,7 @@ const FileManagement = ({
           />
           <Text>{t("OriginalCopy")}</Text>
         </div>
-        {!isVisitor && (
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="display-notification toggle-btn"
@@ -159,8 +177,8 @@ const FileManagement = ({
             />
             <Text>{t("DisplayNotification")}</Text>
           </div>
-        )}
-        {!isVisitor && (
+        }
+        {
           <div className="toggle-btn-wrapper">
             <ToggleButton
               className="open-same-tab toggle-btn"
@@ -173,7 +191,17 @@ const FileManagement = ({
               })}
             </Text>
           </div>
-        )}
+        }
+        {
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="display-file-extension toggle-btn"
+              onChange={onChangeDisplayFileExtension}
+              isChecked={displayFileExtension}
+            />
+            <Text>{t("DisplayFileExtension")}</Text>
+          </div>
+        }
       </Box>
 
       {/* <Box className="settings-section">
@@ -256,6 +284,10 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     openEditorInSameTab,
     setOpenEditorInSameTab,
+
+    displayFileExtension,
+    setDisplayFileExtension,
+    getFilesSettings,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -290,5 +322,9 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     openEditorInSameTab,
     setOpenEditorInSameTab,
+
+    displayFileExtension,
+    setDisplayFileExtension,
+    getFilesSettings,
   };
 })(observer(FileManagement));

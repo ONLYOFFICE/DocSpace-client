@@ -23,18 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useContext } from "react";
-
 import { observer, inject } from "mobx-react";
-//import { useLocation } from "react-router-dom";
 
-import { Context } from "@docspace/shared/utils";
-import { Events, FileExtensions } from "@docspace/shared/enums";
-
-import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
-import EmptyFolderContainer from "./EmptyFolderContainer";
-import RoomNoAccessContainer from "./RoomNoAccessContainer";
+
+import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
 
 const linkStyles = {
   isHovered: true,
@@ -51,76 +44,31 @@ const EmptyContainer = ({
   theme,
   type,
 
-  isRoomNotFoundOrMoved,
-  isGracePeriod,
-  setQuotaWarningDialogVisible,
   isRoot,
   isPublicRoom,
-  isEmptyPage,
-  isWarningRoomsDialog,
+  // isEmptyPage,
+  roomType,
+  parentRoomType,
+  folderId,
+  isArchiveFolderRoot,
 }) => {
-  //const location = useLocation();
-
-  const { sectionWidth } = useContext(Context);
+  const isRoom = !!roomType;
 
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
-  const onCreate = (e) => {
-    const format = e.currentTarget.dataset.format || null;
-
-    const event = new Event(Events.CREATE);
-
-    const isPDF = format === FileExtensions.PDF;
-
-    const payload = {
-      extension: format,
-      id: -1,
-      edit: isPDF,
-    };
-    event.payload = payload;
-
-    window.dispatchEvent(event);
-  };
-
-  const onCreateRoom = (e) => {
-    if (isWarningRoomsDialog) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    const event = new Event(Events.ROOM_CREATE);
-    window.dispatchEvent(event);
-  };
-
-  if (isRoomNotFoundOrMoved) {
-    return (
-      <RoomNoAccessContainer
-        linkStyles={linkStyles}
-        sectionWidth={sectionWidth}
-      />
-    );
-  }
-
   const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
 
-  //isLoading && location?.state ? location.state?.isRoot : parentId === 0;
+  if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
 
-  return isFiltered ? (
-    <EmptyFilterContainer linkStyles={linkStyles} />
-  ) : isRootEmptyPage ? (
-    <RootFolderContainer
-      onCreate={onCreate}
-      linkStyles={linkStyles}
-      onCreateRoom={onCreateRoom}
-      sectionWidth={sectionWidth}
-    />
-  ) : (
-    <EmptyFolderContainer
-      sectionWidth={sectionWidth}
-      onCreate={onCreate}
-      linkStyles={linkStyles}
-      type={type}
-      isEmptyPage={isEmptyPage}
+  return (
+    <EmptyViewContainer
+      type={roomType}
+      folderType={type}
+      isFolder={!isRoom && !isRootEmptyPage}
+      folderId={folderId}
+      isRootEmptyPage={isRootEmptyPage}
+      parentRoomType={parentRoomType}
+      isArchiveFolderRoot={isArchiveFolderRoot}
     />
   );
 };
@@ -135,20 +83,20 @@ export default inject(
     clientLoadingStore,
     currentTariffStatusStore,
     publicRoomStore,
+    treeFoldersStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = currentTariffStatusStore;
-
-    const { setQuotaWarningDialogVisible } = dialogsStore;
     const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
       isFiltered === null && isErrorRoomNotAvailable;
 
+    const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
+
     const isRoot = selectedFolderStore.pathParts?.length === 1;
-    const { isWarningRoomsDialog } = currentQuotaStore;
 
     return {
       theme: settingsStore.theme,
@@ -157,12 +105,13 @@ export default inject(
 
       parentId: selectedFolderStore.parentId,
       isRoomNotFoundOrMoved,
-      isGracePeriod,
-      setQuotaWarningDialogVisible,
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,
-      isWarningRoomsDialog,
+      roomType,
+      parentRoomType,
+      folderId,
+      isArchiveFolderRoot,
     };
   },
 )(observer(EmptyContainer));

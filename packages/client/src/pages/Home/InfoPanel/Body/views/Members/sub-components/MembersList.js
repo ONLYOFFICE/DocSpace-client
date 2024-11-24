@@ -39,6 +39,7 @@ import { isMobile, mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { StyledUserTypeHeader } from "../../../styles/members";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -61,6 +62,7 @@ const StyledList = styled(List)`
   margin-bottom: 24px;
 
   .members-list-item {
+    // doesn't require mirroring for RTL
     left: unset !important;
     inset-inline-start: 0;
     width: calc(100% - 20px) !important;
@@ -77,6 +79,8 @@ const StyledList = styled(List)`
 `;
 
 const itemSize = 48;
+const shareLinkItemSize = 68;
+const GENERAL_LINK_HEADER_HEIGHT = 38;
 
 const MembersList = (props) => {
   const {
@@ -150,6 +154,20 @@ const MembersList = (props) => {
     [isNextPageLoading, loadNextPage],
   );
 
+  const getItemSize = ({ index }) => {
+    const elem = list[index];
+
+    if (elem?.key === GENERAL_LINK_HEADER_KEY) {
+      return GENERAL_LINK_HEADER_HEIGHT;
+    }
+
+    if (elem?.props?.isShareLink) {
+      return shareLinkItemSize;
+    }
+
+    return itemSize;
+  };
+
   const onScroll = (e) => {
     const header = document.getElementById("members-list-header");
 
@@ -160,14 +178,20 @@ const MembersList = (props) => {
     const headerTitle = header.children[0];
     const scrollOffset = e.target.scrollTop;
 
+    // First item is links header. Its size is different from link item size
+    const linksBlockHeight = linksBlockLength
+      ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
+      : 0;
+
     for (let titleIndex in listOfTitles) {
       const title = listOfTitles[titleIndex];
-      const titleOffsetTop = title.index * itemSize;
+      const titleOffsetTop =
+        linksBlockHeight + (title.index - linksBlockLength) * itemSize;
 
       if (scrollOffset > titleOffsetTop) {
         if (title.displayName) headerTitle.innerText = title.displayName;
         header.style.display = "flex";
-      } else if (scrollOffset <= linksBlockLength * itemSize) {
+      } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
     }
@@ -220,7 +244,7 @@ const MembersList = (props) => {
                       onRowsRendered={onRowsRendered}
                       ref={registerChild}
                       rowCount={itemsCount}
-                      rowHeight={itemSize}
+                      rowHeight={getItemSize}
                       rowRenderer={renderRow}
                       width={width}
                       isScrolling={isScrolling}
@@ -228,6 +252,7 @@ const MembersList = (props) => {
                       scrollTop={scrollTop}
                       // React virtualized sets "LTR" by default.
                       style={{ direction: "inherit" }}
+                      tabIndex={null}
                     />
                   );
                 }}

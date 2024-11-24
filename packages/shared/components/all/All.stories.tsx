@@ -32,9 +32,8 @@ import React from "react";
 import moment from "moment";
 
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg";
-import CatalogFolderReactSvg from "PUBLIC_DIR/images/catalog.folder.react.svg";
-import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/catalog.employee.react.svg?url";
-import ItemActiveReactSvgUrl from "PUBLIC_DIR/images/item.active.react.svg?url";
+import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { Button, ButtonSize } from "../button";
@@ -61,6 +60,7 @@ import { Text } from "../text";
 import { Toast, toastr } from "../toast";
 import { ToggleContent } from "../toggle-content";
 import { Tooltip } from "../tooltip";
+import { globalColors } from "../../themes";
 
 const arrayItems = [
   {
@@ -141,13 +141,13 @@ const elementIcon = <CatalogFolderReactSvg />;
 const elementComboBox = (
   <ComboBox
     options={[
-      { key: 1, icon: ItemActiveReactSvgUrl, label: "Open" },
+      { key: 1, icon: CatalogEmployeeReactSvgUrl, label: "Open" },
       { key: 2, icon: "CheckIcon", label: "Closed" },
     ]}
     onSelect={() => {}}
     selectedOption={{
       key: 0,
-      icon: ItemActiveReactSvgUrl,
+      icon: CatalogEmployeeReactSvgUrl,
       label: "",
     }}
     scaled={false}
@@ -170,18 +170,17 @@ const elementProps = getElementProps(element);
 
 const rowContent = (
   <Row
-    key="1"
     {...checkedProps}
     {...elementProps}
     onRowClick={() => {}}
     contextOptions={[
       {
-        key: "key1",
+        key: "key-1",
         label: "Edit",
         onClick: () => {},
       },
       {
-        key: "key2",
+        key: "key-2",
         label: "Delete",
         onClick: () => {},
       },
@@ -259,7 +258,7 @@ const Template = () => (
                 <Text isBold fontSize="16px">
                   {arrayUsers[+content].name}
                 </Text>
-                <Text color="#A3A9AE" fontSize="13px">
+                <Text color={globalColors.gray} fontSize="13px">
                   {arrayUsers[+content].email}
                 </Text>
                 <Text fontSize="13px">{arrayUsers[+content].position}</Text>
@@ -270,7 +269,7 @@ const Template = () => (
       </div>
       <div style={{ padding: "8px 0" }}>
         <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 16 }}>
+          <div style={{ marginInlineEnd: 16 }}>
             <Button
               size={ButtonSize.normal}
               isDisabled={false}
@@ -302,40 +301,6 @@ const Template = () => (
           }
         />
       </div>
-      {/*
-          <div style={{ padding: "8px 0" }}>
-          <ContextMenuButton
-            iconName={VerticalDotsReactSvgUrl}
-            size={16}
-            color="#A3A9AE"
-            isDisabled={false}
-            title="Actions"
-            getData={() => [
-              {
-                key: "key",
-                label: "label",
-                onClick: () => {}
-              }
-            ]}
-          />
-        </div>
-        */}
-      {/* <div style={{ padding: "8px 0" }}>
-          <div style={{ display: "flex" }}>
-            <div style={{ marginRight: 16 }}>
-              <IconButton
-                size="25"
-                isDisabled={false}
-                onClick={() => {}}
-                iconName={VerticalDotsReactSvgUrl}
-                isFill
-                isClickable={false}
-              />
-            </div>
-            <HelpButton tooltipContent="Paste you tooltip content here" />
-          </div>
-        </div>
-        */}
     </div>
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
@@ -386,26 +351,6 @@ const Template = () => (
         </StringValue> */}
       </div>
 
-      {/* <div style={{ padding: "8px 0" }}>
-        <DatePicker
-          onChange={(date) => {
-            console.log("Selected date", date);
-          }}
-          selectedDate={new Date()}
-          minDate={new Date("1970/01/01")}
-          maxDate={new Date(new Date().getFullYear() + 1 + "/01/01")}
-          isDisabled={false}
-          isReadOnly={false}
-          hasError={false}
-          isOpen={false}
-          themeColor="#ED7309"
-          locale="en"
-          setSelectedDate={(date) => {
-            console.log("Selected date", date);
-          }}
-        />
-      </div> */}
-
       <div style={{ padding: "8px 0" }}>
         {/* <StringValue>
           {({ value, set }: any) => ( */}
@@ -449,7 +394,7 @@ const Template = () => (
         {/* <BooleanValue>
           {({ value, toggle }: any) => ( */}
         <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 24 }}>
+          <div style={{ marginInlineEnd: 24 }}>
             <Checkbox
               id="id"
               name="name"
@@ -491,7 +436,6 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         <Calendar
           onChange={() => {}}
-          //   themeColor="#ED7309"
           selectedDate={moment()}
           minDate={new Date("1970/01/01")}
           maxDate={new Date("3000/01/01")}
@@ -502,9 +446,10 @@ const Template = () => (
     </div>
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
-        {rowArray[0]}
-        {rowArray.map((item) => {
-          return <div key={`${item.key}`}>{item}</div>;
+        {/* {rowArray[0]} */}
+        {rowArray.map((item, idx) => {
+          // eslint-disable-next-line react/no-array-index-key
+          return <div key={`${idx}`}>{item}</div>;
         })}
       </div>
     </div>
@@ -529,7 +474,7 @@ const Template = () => (
           label="Loading..."
         />
       </div>
-      <div style={{ padding: "8px 0", marginLeft: 45 }}>
+      <div style={{ padding: "8px 0", marginInlineStart: 45 }}>
         <Loader
           type={LoaderTypes.oval}
           color="black"
@@ -537,7 +482,7 @@ const Template = () => (
           label="Loading"
         />
       </div>
-      <div style={{ padding: "8px 0", marginLeft: 45 }}>
+      <div style={{ padding: "8px 0", marginInlineStart: 45 }}>
         <Loader
           type={LoaderTypes.dualRing}
           color="black"

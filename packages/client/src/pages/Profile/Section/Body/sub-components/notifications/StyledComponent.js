@@ -83,15 +83,8 @@ const StyledSectionHeader = styled.div`
   display: flex;
   align-items: center;
   .arrow-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-            transform: scaleX(-1);
-          `
-        : css`
-            margin-right: 16px;
-          `}
-  }
+    margin-inline-end: 16px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 `;
 export { StyledTextContent, StyledSectionBodyContent, StyledSectionHeader };

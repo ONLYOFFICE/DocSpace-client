@@ -39,6 +39,7 @@ export const Tags: FC<TagsProps> = ({
   className,
   columnCount,
   onSelectTag,
+  removeTagIcon,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
 
@@ -183,6 +184,7 @@ export const Tags: FC<TagsProps> = ({
               label={tag.label}
               onClick={onSelectTag}
               isLast={idx === renderedTags.length - 1}
+              removeTagIcon={removeTagIcon}
               roomType={tag.roomType}
             />
           );

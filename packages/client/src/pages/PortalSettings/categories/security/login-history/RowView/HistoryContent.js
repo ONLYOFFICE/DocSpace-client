@@ -51,7 +51,11 @@ const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
-    width: min-content;
+  }
+
+  .date-text {
+    color: ${(props) =>
+      props.theme.client.settings.security.loginHistory.textColor};
   }
 
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
@@ -82,8 +86,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
         fontSize="12px"
         fontWeight={600}
         truncate={true}
-        color="#A3A9AE"
-        className="settings_unavailable"
+        className="settings_unavailable date-text"
       >
         {dateStr}
       </Text>

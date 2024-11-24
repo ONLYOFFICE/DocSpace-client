@@ -1,12 +1,16 @@
 import PropTypes from "prop-types";
 import { ThemeProvider } from "../../components/theme-provider";
+import { globalColors } from "../../themes";
 
 const ThemeWrapper = ({ theme, children }) => {
   return (
     <ThemeProvider
       theme={theme}
       currentColorScheme={{
-        main: { accent: "#4781D1", buttons: "#5299E0" },
+        main: {
+          accent: globalColors.lightBlueMain,
+          buttons: globalColors.lightSecondMain,
+        },
       }}
     >
       {children}

@@ -25,13 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile, mobile, tablet } from "@docspace/shared/utils/device";
+import {
+  isMobile,
+  mobile,
+  tablet,
+  desktop,
+} from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
 import Base from "@docspace/shared/themes/base";
+import { showPreviewThreshold } from "../constants";
 
 export const SDKContainer = styled(Box)`
+  .integration-examples-bottom {
+    display: none;
+  }
+
   @media ${tablet} {
     width: 100%;
+
+    @media (min-width: ${showPreviewThreshold}px) {
+      .integration-examples-bottom {
+        display: block;
+        margin-top: 40px;
+      }
+    }
   }
 
   ${isMobile() &&
@@ -40,13 +57,15 @@ export const SDKContainer = styled(Box)`
   `}
 
   .tabs-body {
-    height: calc(100lvh - 260px);
     display: block;
+    @media ${desktop} {
+      height: calc(100lvh - 260px);
+    }
   }
 
   .linkHelp {
     display: inline;
-    color: "#657077";
+    color: ${(props) => props.theme.sdkPresets.linkHelpColor};
   }
 `;
 
@@ -74,6 +93,20 @@ export const Controls = styled(Box)`
 
   .checkbox {
     max-width: fit-content;
+  }
+
+  .integration-examples {
+    .integration-header {
+      margin-top: 0px;
+    }
+  }
+
+  @media ${tablet} {
+    @media (min-width: ${showPreviewThreshold}px) {
+      .integration-examples {
+        display: none;
+      }
+    }
   }
 `;
 
@@ -171,7 +204,7 @@ export const Frame = styled(Box)`
   position: relative;
 
   border-radius: 6px;
-  border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
+  border: 1px solid ${(props) => props.theme.sdkPresets?.borderColor};
 
   width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
   height: calc(${(props) => (props.height ? props.height : "100%")} + 2px);
@@ -194,6 +227,10 @@ export const Frame = styled(Box)`
     css`
       min-height: 400px;
       max-height: 600px;
+
+      @media ${tablet} {
+        height: calc(-260px + 100lvh);
+      }
     `}
 
 
@@ -272,6 +309,10 @@ export const Preview = styled(Box)`
   width: 100%;
   min-width: 660px;
   flex-direction: row;
+
+  .preview-description {
+    color: ${(props) => props.theme.sdkPresets.secondaryColor};
+  }
 
   @media ${tablet} {
     margin-top: 0;

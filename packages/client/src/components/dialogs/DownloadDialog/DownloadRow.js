@@ -51,9 +51,7 @@ const DownloadRow = (props) => {
 
   const getItemIcon = (item) => {
     const extension = item.fileExst;
-    const icon = extension
-      ? getIcon(32, extension)
-      : getFolderIcon(item.providerKey, 32);
+    const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
     return (
       <ReactSVG

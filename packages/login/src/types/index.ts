@@ -1,3 +1,4 @@
+import { isSeparator } from "@docspace/shared/utils/typeGuards";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -24,6 +25,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ReactNode } from "react";
+
 import {
   TCapabilities,
   TGetColorTheme,
@@ -33,7 +36,49 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import {
+  EmployeeActivationStatus,
+  RecaptchaType,
+  ThemeKeys,
+} from "@docspace/shared/enums";
+
+import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+
+export type TError =
+  | {
+      response?: {
+        status?: number | string;
+        data?: {
+          error?: {
+            message: string;
+          };
+        };
+      };
+      statusText?: string;
+      message?: string;
+    }
+  | string;
+
+export type TTimeZoneOption = {
+  key: string | number;
+  label: string;
+};
+
+export type TPortal = { portalLink: string; portalName: string };
+
+export type TCulturesOption =
+  | {
+      isBeta?: boolean;
+      key: string | number;
+      label: string;
+      icon?: string;
+    }
+  | {
+      isBeta?: boolean;
+      key: string | number;
+      icon?: string;
+    };
 
 export type TDataContext = {
   settings?: TSettings;
@@ -41,9 +86,89 @@ export type TDataContext = {
   systemTheme?: ThemeKeys;
 };
 
-export type GreetingContainersProps = {
-  greetingSettings?: string;
+export type TConfirmRouteContext = {
+  linkData: {
+    confirmHeader?: string;
+    key?: string;
+    emplType?: string;
+    email?: string;
+    uid?: string;
+    type?: string;
+    first?: string;
+    roomId?: string;
+    firstname?: string;
+    lastname?: string;
+  };
+  roomData: {
+    roomId?: string;
+    title?: string;
+  };
+};
+
+export type TConfirmLinkParams = {
+  key: string;
+  emplType?: string;
+  email: string;
+  uid?: string;
+  type?: string;
+  first?: string;
+  roomId?: string;
+};
+
+export type TConfirmLinkResult = {
+  result: ValidationResult;
+  roomId?: string;
+  title?: string;
+};
+
+export type TCreateUserData = {
+  fromInviteLink: boolean;
+  userName: string;
+  passwordHash: string;
+  cultureName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  key?: string;
+  type?: number;
+  spam: boolean;
+};
+
+export type TActivateConfirmUser = {
+  personalData: {
+    firstname?: string;
+    lastname?: string;
+  };
+  loginData: {
+    userName: string;
+    passwordHash: string;
+  };
+  key: string;
+  userId: string;
+  activationStatus: EmployeeActivationStatus;
+};
+
+export type TTfaSecretKeyAndQR = {
+  account: string;
+  manualEntryKey: string;
+  qrCodeSetupImageUrl: string;
+};
+
+export interface ConfirmRouteProps {
+  doAuthenticated?: AuthenticatedAction;
+  defaultPage?: string;
+  socketUrl?: string;
+  children: ReactNode;
+  confirmLinkResult: TConfirmLinkResult;
+  confirmLinkParams: TConfirmLinkParams;
+}
+
+export type GreetingCreateUserContainerProps = {
+  type: string;
+  firstName?: string;
+  lastName?: string;
   culture?: string;
+  hostName?: string;
 };
 
 export type LoginProps = {
@@ -87,8 +212,11 @@ export type LoginFormProps = {
   reCaptchaPublicKey?: string;
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
+  clientId?: string;
+  client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;
+  baseDomain?: string;
 };
 
 export type ForgotPasswordModalDialogProps = {

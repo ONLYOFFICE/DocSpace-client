@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { ViewerLoaderProps } from "./ViewerLoader.types";
+import { globalColors } from "../../../../themes";
 
 export const StyledLoaderWrapper = styled.div<
   Pick<ViewerLoaderProps, "withBackground">
@@ -45,7 +46,7 @@ export const StyledLoaderWrapper = styled.div<
 export const StyledLoader = styled.div`
   width: 48px;
   height: 48px;
-  border: 4px solid #fff;
+  border: 4px solid ${globalColors.white};
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;

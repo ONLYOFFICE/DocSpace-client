@@ -64,6 +64,7 @@ const MainContainer = styled.div`
 
   .warning-text {
     margin-bottom: 9px;
+    color: ${(props) => props.theme.client.settings.security.ip.errorColor};
   }
 
   .save-cancel-buttons {
@@ -75,14 +76,13 @@ const IpSecurity = (props) => {
   const {
     t,
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
-    initSettings,
     isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    loadSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -95,6 +95,7 @@ const IpSecurity = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [autoFocus, setAutoFocus] = useState(false);
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
@@ -125,14 +126,14 @@ const IpSecurity = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("ip").then(() => setIsLoading(true));
+    if (!isInit) loadSettings().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isLoading) return;
     const currentSettings = getFromSessionStorage("currentIPSettings");
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
 
@@ -167,7 +168,9 @@ const IpSecurity = (props) => {
   };
 
   const onSelectType = (e) => {
-    setEnable(e.target.value === "enable" ? true : false);
+    const value = e.target.value;
+    if (value === "enable" && !autoFocus) setAutoFocus(true);
+    setEnable(value === "enable" ? true : false);
   };
 
   const onChangeInput = (e, index) => {
@@ -183,34 +186,36 @@ const IpSecurity = (props) => {
   };
 
   const onClickAdd = () => {
+    if (!autoFocus) setAutoFocus(true);
     setIps([...ips, ""]);
   };
 
   const onSaveClick = async () => {
     const newIps = ips.filter((ips) => ips.trim() !== "");
+
     setIps(newIps);
     setIsSaving(true);
-    const valid = ips.map((ip) => regexp.test(ip));
+    const valid = newIps.map((ip) => regexp.test(ip));
+
     if (valid.includes(false)) {
       setIsSaving(false);
       return;
     }
 
-    const ipsObjectArr = ips.map((ip) => {
+    const ipsObjectArr = newIps.map((ip) => {
       return { ip: ip };
     });
 
     try {
-      await setIpRestrictions(ipsObjectArr);
-      await setIpRestrictionsEnable(enable);
+      await setIpRestrictions(ipsObjectArr, enable);
 
       saveToSessionStorage("currentIPSettings", {
         enable: enable,
-        ips: ips,
+        ips: newIps,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
-        ips: ips,
+        ips: newIps,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -228,7 +233,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <IpSecurityLoader />;
   }
 
@@ -282,17 +287,13 @@ const IpSecurity = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-allowed-ip-address"
+          isAutoFocussed={autoFocus}
         />
       )}
 
       {enable && (
         <>
-          <Text
-            color="#F21C0E"
-            fontSize="16px"
-            fontWeight="700"
-            className="warning-text"
-          >
+          <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
           </Text>
           <Text className="ip-security_warning">
@@ -319,28 +320,32 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getIpRestrictionsEnable,
+    getIpRestrictions,
   } = settingsStore;
 
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
+  const loadSettings = async () => {
+    await getIpRestrictionsEnable();
+    await getIpRestrictions();
+  };
   return {
     ipRestrictionEnable,
-    setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
-    initSettings,
     isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    loadSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

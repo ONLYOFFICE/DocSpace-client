@@ -1,0 +1,12 @@
+{
+  "Desc": "Lūdzu, iestatiet {{productName}} reģistrācijas datus.",
+  "ErrorEmail": "Nederīga e-pasta adrese",
+  "ErrorLicenseBody": "Licence nav derīga. Pārliecinieties, ka esat izvēlējies pareizo failu.",
+  "ErrorPassword": "Parole neatbilst prasībām",
+  "ErrorUploadLicenseFile": "Atlasiet licences failu",
+  "License": "Piekrītiet noteikumiem",
+  "LicenseLink": "Licences līgumi",
+  "PlaceholderLicense": "Jūsu licences fails",
+  "Timezone": "Laika zona:",
+  "WelcomeTitle": "Laipni lūdzam jūsu {{productName}}!"
+}

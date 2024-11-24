@@ -28,8 +28,8 @@ import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import copy from "copy-to-clipboard";
 
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 
@@ -52,8 +52,14 @@ import {
   StyledDescription,
   StyledExternalLink,
 } from "../StyledInvitePanel";
+import { globalColors } from "@docspace/shared/themes";
 
-import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+} from "../utils";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 const ExternalLinks = ({
   t,
@@ -64,6 +70,7 @@ const ExternalLinks = ({
   setShareLinks,
   setInvitationLinks,
   isOwner,
+  isAdmin,
   onChangeExternalLinksVisible,
   externalLinksVisible,
   setActiveLink,
@@ -71,6 +78,7 @@ const ExternalLinks = ({
   isMobileView,
   getPortalInviteLink,
   isUserTariffLimit,
+  standalone,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -157,7 +165,8 @@ const ExternalLinks = ({
           days_count: 7,
         })}`,
       );
-      copy(link);
+
+      copyShareLink(link);
     }
   };
 
@@ -211,6 +220,19 @@ const ExternalLinks = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    isAdmin,
+    standalone,
+  );
+
+  const filteredAccesses =
+    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
@@ -220,8 +242,8 @@ const ExternalLinks = ({
             <IconButton
               size={16}
               iconName={MediaDownloadReactSvgUrl}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
+              hoverColor={globalColors.black}
+              iconColor={globalColors.gray}
               onClick={toggleActionLinks}
             />
             <DropDown
@@ -249,7 +271,7 @@ const ExternalLinks = ({
           isDisabled={isLinksToggling}
         />
       </StyledSubHeader>
-      <StyledDescription>
+      <StyledDescription noSelect>
         {roomId === -1
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
@@ -281,6 +303,7 @@ const ExternalLinks = ({
             isMobileView={isMobileView}
             isSelectionDisabled={isUserTariffLimit}
             selectionErrorText={<PaidQuotaLimitError />}
+            filteredAccesses={filteredAccesses}
             availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
@@ -290,13 +313,21 @@ const ExternalLinks = ({
 };
 
 export default inject(
-  ({ userStore, dialogsStore, filesStore, peopleStore, currentQuotaStore }) => {
-    const { isOwner } = userStore.user;
+  ({
+    userStore,
+    dialogsStore,
+    filesStore,
+    peopleStore,
+    currentQuotaStore,
+    settingsStore,
+  }) => {
+    const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
+    const { standalone } = settingsStore;
 
     return {
       setInvitationLinks,
@@ -304,8 +335,10 @@ export default inject(
       hideSelector,
       defaultAccess,
       isOwner,
+      isAdmin,
       getPortalInviteLink,
       isUserTariffLimit,
+      standalone,
     };
   },
 )(observer(ExternalLinks));

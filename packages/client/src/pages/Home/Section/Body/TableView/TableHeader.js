@@ -40,325 +40,393 @@ class FilesTableHeader extends React.Component {
     this.isBeginScrolling = false;
   }
 
+  getRoomsColumns = () => {
+    const { t, isDefaultRoomsQuotaSet, showStorageInfo, isArchiveFolder } =
+      this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "Type",
+        title: t("Common:Type"),
+        enable: this.props.roomColumnTypeIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.RoomType,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "Tags",
+        title: t("Common:Tags"),
+        enable: this.props.roomColumnTagsIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Tags,
+        withTagRef: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "Owner",
+        title: t("Common:Owner"),
+        enable: this.props.roomColumnOwnerIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "Activity",
+        title: t("LastActivity"),
+        enable: this.props.roomColumnActivityIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+
+    showStorageInfo &&
+      columns.splice(columns.length, 0, {
+        key: "Storage",
+        title:
+          isDefaultRoomsQuotaSet && !isArchiveFolder
+            ? t("Common:StorageAndQuota")
+            : t("Common:Storage"),
+        enable: this.props.roomQuotaColumnIsEnable,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      });
+
+    return [...columns];
+  };
+
+  getTrashFolderColumns = () => {
+    const { t } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      {
+        key: "Room",
+        title: t("Common:Room"),
+        enable: this.props.roomColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Room,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "AuthorTrash",
+        title: t("ByAuthor"),
+        enable: this.props.authorTrashColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "CreatedTrash",
+        title: t("ByCreation"),
+        enable: this.props.createdTrashColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "Erasure",
+        title: t("ByErasure"),
+        enable: this.props.erasureColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeTrash",
+        title: t("Common:Size"),
+        enable: this.props.sizeTrashColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeTrash",
+        title: t("Common:Type"),
+        enable: this.props.typeTrashColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Type,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return [...columns];
+  };
+
+  getRecentTabColumns = () => {
+    const { t, isPublicRoom } = this.props;
+
+    const authorBlock = !isPublicRoom
+      ? {
+          key: "AuthorRecent",
+          title: t("ByAuthor"),
+          enable: this.props.authorRecentColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Author,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      { ...authorBlock },
+      {
+        key: "CreatedRecent",
+        title: t("ByCreation"),
+        enable: this.props.createdRecentColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "LastOpened",
+        title: t("DateLastOpened"),
+        enable: this.props.lastOpenedColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.LastOpened,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedRecent",
+        title: t("ByLastModified"),
+        enable: this.props.modifiedRecentColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeRecent",
+        title: t("Common:Size"),
+        enable: this.props.sizeRecentColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeRecent",
+        title: t("Common:Type"),
+        enable: this.props.typeRecentColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Type,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+    return [...columns];
+  };
+
+  getIndexingColumns = () => {
+    const { t, isPublicRoom, indexColumnSize } = this.props;
+
+    const authorBlock = !isPublicRoom
+      ? {
+          key: "AuthorIndexing",
+          title: t("ByAuthor"),
+          enable: this.props.authorVDRColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Author,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const columns = [
+      {
+        key: "Index",
+        title: "#",
+        enable: this.props.indexVDRColumnIsEnabled,
+        minWidth: indexColumnSize,
+        resizable: false,
+        isShort: true,
+      },
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      { ...authorBlock },
+      {
+        key: "CreatedIndexing",
+        title: t("ByCreation"),
+        enable: this.props.createdVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedIndexing",
+        title: t("ByLastModified"),
+        enable: this.props.modifiedVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeIndexing",
+        title: t("Common:Size"),
+        enable: this.props.sizeVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeIndexing",
+        title: t("Common:Type"),
+        enable: this.props.typeVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Type,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return [...columns];
+  };
+
+  getFilesColumns = () => {
+    const { t, isPublicRoom } = this.props;
+
+    const authorBlock = !isPublicRoom
+      ? {
+          key: "Author",
+          title: t("ByAuthor"),
+          enable: this.props.authorColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Author,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      { ...authorBlock },
+      {
+        key: "Created",
+        title: t("ByCreation"),
+        enable: this.props.createdColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "Modified",
+        title: t("ByLastModified"),
+        enable: this.props.modifiedColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "Size",
+        title: t("Common:Size"),
+        enable: this.props.sizeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "Type",
+        title: t("Common:Type"),
+        enable: this.props.typeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Type,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return [...columns];
+  };
+
+  getDefaultColumns = () => {
+    const { isRooms, isTrashFolder, isRecentTab, isIndexing } = this.props;
+
+    if (isRooms) return this.getRoomsColumns();
+    else if (isTrashFolder) return this.getTrashFolderColumns();
+    else if (isRecentTab) return this.getRecentTabColumns();
+    else if (isIndexing) return this.getIndexingColumns();
+    else return this.getFilesColumns();
+  };
+
   getTableColumns = (fromUpdate = false) => {
     const {
-      t,
       isRooms,
-      isTrashFolder,
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
-      isPublicRoom,
       isRecentTab,
-      isDefaultRoomsQuotaSet,
-      showStorageInfo,
-      isArchiveFolder,
       tableStorageName,
       roomsFilter,
       filter,
     } = this.props;
 
-    const defaultColumns = [];
-
-    if (isRooms) {
-      const columns = [
-        {
-          key: "Name",
-          title: t("Common:Name"),
-          resizable: true,
-          enable: this.props.roomColumnNameIsEnabled,
-          default: true,
-          sortBy: SortByFieldName.Name,
-          minWidth: 210,
-          onClick: this.onRoomsFilter,
-        },
-        {
-          key: "Type",
-          title: t("Common:Type"),
-          enable: this.props.roomColumnTypeIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.RoomType,
-          onChange: this.onColumnChange,
-          onClick: this.onRoomsFilter,
-        },
-        {
-          key: "Tags",
-          title: t("Common:Tags"),
-          enable: this.props.roomColumnTagsIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Tags,
-          withTagRef: true,
-          onChange: this.onColumnChange,
-          onClick: this.onRoomsFilter,
-        },
-        {
-          key: "Owner",
-          title: t("Common:Owner"),
-          enable: this.props.roomColumnOwnerIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Author,
-          onChange: this.onColumnChange,
-          onClick: this.onRoomsFilter,
-        },
-        {
-          key: "Activity",
-          title: t("LastActivity"),
-          enable: this.props.roomColumnActivityIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.ModifiedDate,
-          onChange: this.onColumnChange,
-          onClick: this.onRoomsFilter,
-        },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.roomColumnQuickButtonsIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
-      ];
-
-      showStorageInfo &&
-        columns.splice(columns.length - 1, 0, {
-          key: "Storage",
-          title:
-            isDefaultRoomsQuotaSet && !isArchiveFolder
-              ? t("Common:StorageAndQuota")
-              : t("Common:Storage"),
-          enable: this.props.roomQuotaColumnIsEnable,
-          sortBy: SortByFieldName.UsedSpace,
-          resizable: true,
-          onChange: this.onColumnChange,
-          onClick: this.onRoomsFilter,
-        });
-
-      defaultColumns.push(...columns);
-    } else if (isTrashFolder) {
-      const columns = [
-        {
-          key: "Name",
-          title: t("Common:Name"),
-          resizable: true,
-          enable: this.props.nameColumnIsEnabled,
-          default: true,
-          sortBy: SortByFieldName.Name,
-          minWidth: 210,
-          onClick: this.onFilter,
-        },
-        {
-          key: "Room",
-          title: t("Common:Room"),
-          enable: this.props.roomColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Room,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "AuthorTrash",
-          title: t("ByAuthor"),
-          enable: this.props.authorTrashColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Author,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "CreatedTrash",
-          title: t("ByCreation"),
-          enable: this.props.createdTrashColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.CreationDate,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "Erasure",
-          title: t("ByErasure"),
-          enable: this.props.erasureColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.ModifiedDate,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "SizeTrash",
-          title: t("Common:Size"),
-          enable: this.props.sizeTrashColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Size,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "TypeTrash",
-          title: t("Common:Type"),
-          enable: this.props.typeTrashColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Type,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
-      ];
-      defaultColumns.push(...columns);
-    } else if (isRecentTab) {
-      const authorBlock = !isPublicRoom
-        ? {
-            key: "AuthorRecent",
-            title: t("ByAuthor"),
-            enable: this.props.authorRecentColumnIsEnabled,
-            resizable: true,
-            sortBy: SortByFieldName.Author,
-            // onClick: this.onFilter,
-            onChange: this.onColumnChange,
-          }
-        : {};
-
-      const columns = [
-        {
-          key: "Name",
-          title: t("Common:Name"),
-          resizable: true,
-          enable: this.props.nameColumnIsEnabled,
-          default: true,
-          sortBy: SortByFieldName.Name,
-          minWidth: 210,
-          onClick: this.onFilter,
-        },
-
-        { ...authorBlock },
-        {
-          key: "CreatedRecent",
-          title: t("ByCreation"),
-          enable: this.props.createdRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.CreationDate,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "LastOpened",
-          title: t("DateLastOpened"),
-          enable: this.props.lastOpenedColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.LastOpened,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "ModifiedRecent",
-          title: t("ByLastModified"),
-          enable: this.props.modifiedRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.ModifiedDate,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "SizeRecent",
-          title: t("Common:Size"),
-          enable: this.props.sizeRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Size,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "TypeRecent",
-          title: t("Common:Type"),
-          enable: this.props.typeRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Type,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
-      ];
-      defaultColumns.push(...columns);
-    } else {
-      const authorBlock = !isPublicRoom
-        ? {
-            key: "Author",
-            title: t("ByAuthor"),
-            enable: this.props.authorColumnIsEnabled,
-            resizable: true,
-            sortBy: SortByFieldName.Author,
-            // onClick: this.onFilter,
-            onChange: this.onColumnChange,
-          }
-        : {};
-
-      const columns = [
-        {
-          key: "Name",
-          title: t("Common:Name"),
-          resizable: true,
-          enable: this.props.nameColumnIsEnabled,
-          default: true,
-          sortBy: SortByFieldName.Name,
-          minWidth: 210,
-          onClick: this.onFilter,
-        },
-        { ...authorBlock },
-        {
-          key: "Created",
-          title: t("ByCreation"),
-          enable: this.props.createdColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.CreationDate,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "Modified",
-          title: t("ByLastModified"),
-          enable: this.props.modifiedColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.ModifiedDate,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "Size",
-          title: t("Common:Size"),
-          enable: this.props.sizeColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Size,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "Type",
-          title: t("Common:Type"),
-          enable: this.props.typeColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Type,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
-      ];
-      defaultColumns.push(...columns);
-    }
+    const defaultColumns = this.getDefaultColumns();
 
     let columns = getColumns(defaultColumns, isRecentTab);
     const storageColumns = localStorage.getItem(tableStorageName);
@@ -436,7 +504,9 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      isIndexEditingMode,
       showStorageInfo,
+      indexColumnSize,
       roomsFilter,
       filter,
       changeDocumentsTabs,
@@ -445,18 +515,18 @@ class FilesTableHeader extends React.Component {
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
-    const tabChangeCompleted = !(this.state.isRecentTab && changeDocumentsTabs);
-
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
+      indexColumnSize !== prevProps.indexColumnSize ||
+      isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
-      (tabChangeCompleted && sortBy !== this.state.sortBy) ||
-      (tabChangeCompleted && sortOrder !== this.state.sortOrder)
+      (!changeDocumentsTabs && sortBy !== this.state.sortBy) ||
+      (!changeDocumentsTabs && sortOrder !== this.state.sortOrder)
     ) {
       return this.getTableColumns(true);
     }
@@ -555,11 +625,13 @@ class FilesTableHeader extends React.Component {
       sortingVisible,
       infoPanelVisible,
 
-      withPaging,
       tagRef,
       setHideColumns,
       isFrame,
       showSettings,
+
+      isIndexing,
+      isIndexEditingMode,
     } = this.props;
 
     const {
@@ -582,9 +654,11 @@ class FilesTableHeader extends React.Component {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         resetColumnsSize={resetColumnsSize}
-        sortingVisible={sortingVisible}
+        isIndexing={isIndexing}
+        sortingVisible={isIndexing ? false : sortingVisible}
+        isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
@@ -605,10 +679,13 @@ export default inject(
     clientLoadingStore,
     infoPanelStore,
     currentQuotaStore,
+    indexingStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
+
+    const { isIndexEditingMode } = indexingStore;
 
     const {
       isHeaderChecked,
@@ -620,11 +697,12 @@ export default inject(
       headerBorder,
       roomsFilter,
       setRoomsFilter,
+      indexColumnSize,
     } = filesStore;
     const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
-    const { withPaging, isFrame, frameConfig } = settingsStore;
+    const { isFrame, frameConfig } = settingsStore;
 
     const {
       tableStorageName,
@@ -643,14 +721,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
@@ -660,12 +736,19 @@ export default inject(
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
 
+      indexVDRColumnIsEnabled,
+      authorVDRColumnIsEnabled,
+      modifiedVDRColumnIsEnabled,
+      createdVDRColumnIsEnabled,
+      sizeVDRColumnIsEnabled,
+      typeVDRColumnIsEnabled,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    const { changeDocumentsTabs } = selectedFolderStore;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -675,6 +758,8 @@ export default inject(
       withContent,
       sortingVisible,
 
+      isIndexing: isIndexedFolder,
+
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
       roomsFilter,
@@ -683,7 +768,6 @@ export default inject(
       headerBorder,
 
       infoPanelVisible,
-      withPaging,
 
       tableStorageName,
       columnStorageName,
@@ -701,14 +785,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
@@ -717,6 +799,13 @@ export default inject(
       createdRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
+
+      indexVDRColumnIsEnabled,
+      authorVDRColumnIsEnabled,
+      modifiedVDRColumnIsEnabled,
+      createdVDRColumnIsEnabled,
+      sizeVDRColumnIsEnabled,
+      typeVDRColumnIsEnabled,
 
       getColumns,
       setColumnEnable,
@@ -730,6 +819,9 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isIndexEditingMode,
+
+      indexColumnSize,
       changeDocumentsTabs,
     };
   },

@@ -41,10 +41,12 @@ export default inject(
     settingsStore,
     dialogsStore,
     infoPanelStore,
+    indexingStore,
   }: {
     settingsStore: any;
     dialogsStore: any;
     infoPanelStore: any;
+    indexingStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -59,6 +61,8 @@ export default inject(
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
       infoPanelStore;
 
+    const { isIndexEditingMode } = indexingStore;
+
     const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
 
     const canDisplay = getCanDisplay();
@@ -71,7 +75,7 @@ export default inject(
     return {
       isDesktop,
       currentDeviceType,
-      isInfoPanelVisible: isVisible,
+      isInfoPanelVisible: isVisible && !isIndexEditingMode,
       isMobileHidden,
       setIsInfoPanelVisible: setIsVisible,
       canDisplay,

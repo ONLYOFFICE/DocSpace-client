@@ -29,13 +29,13 @@ import { Trans, withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
-import TfaSection from "./tfa";
-import PasswordStrengthSection from "./passwordStrength";
-import TrustedMailSection from "./trustedMail";
-import IpSecuritySection from "./ipSecurity";
-import AdminMessageSection from "./adminMessage";
-import SessionLifetimeSection from "./sessionLifetime";
-import BruteForceProtectionSection from "./bruteForceProtection";
+import { TfaSection } from "./tfa";
+import { PasswordStrengthSection } from "./passwordStrength";
+import { TrustedMailSection } from "./trustedMail";
+import { IpSecuritySection } from "./ipSecurity";
+import { AdminMessageSection } from "./adminMessage";
+import { SessionLifetimeSection } from "./sessionLifetime";
+import { BruteForceProtectionSection } from "./bruteForceProtection";
 import MobileView from "./mobileView";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { size } from "@docspace/shared/utils";
@@ -54,12 +54,15 @@ const AccessPortal = (props) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     isMobileView,
+    resetIsInit,
   } = props;
 
   useEffect(() => {
     setDocumentTitle(
       t("PortalAccess", { productName: t("Common:ProductName") }),
     );
+
+    return () => resetIsInit();
   }, []);
 
   if (isMobileView) return <MobileView />;
@@ -224,7 +227,7 @@ const AccessPortal = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -235,6 +238,7 @@ export default inject(({ settingsStore }) => {
     ipSettingsUrl,
     currentDeviceType,
   } = settingsStore;
+  const { resetIsInit } = setup;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -247,5 +251,6 @@ export default inject(({ settingsStore }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     isMobileView,
+    resetIsInit,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

@@ -41,6 +41,7 @@ interface AccessSelectorProps {
   containerRef: React.RefObject<HTMLDivElement>;
   defaultAccess: number;
   isOwner: boolean;
+  isAdmin: boolean;
   withRemove?: boolean;
   filteredAccesses: any[];
   setIsOpenItemAccess: (isOpen: boolean) => void;
@@ -55,6 +56,7 @@ interface AccessSelectorProps {
   isSelectionDisabled?: boolean;
   selectionErrorText: React.ReactNode;
   availableAccess?: number[];
+  scaledOptions?: boolean;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -64,6 +66,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   containerRef,
   defaultAccess,
   isOwner,
+  isAdmin,
   withRemove = false,
   filteredAccesses,
   setIsOpenItemAccess,
@@ -78,6 +81,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isSelectionDisabled,
   selectionErrorText,
   availableAccess,
+  scaledOptions,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -96,11 +100,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     withRemove,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
   const selectedOption = accessOptions.filter(
-    (access) => access.access === +defaultAccess,
+    (access) => access?.access === +defaultAccess,
   )[0];
 
   const checkWidth = () => {
@@ -142,6 +147,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
+          scaledOptions={scaledOptions}
         />
       )}
 
@@ -167,6 +173,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
+          scaledOptions={scaledOptions}
         />
       )}
     </StyledAccessSelector>

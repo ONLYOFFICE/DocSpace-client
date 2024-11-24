@@ -24,25 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
 import { useStore } from "SRC_DIR/store";
 import { toastr } from "@docspace/shared/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
 
-const StyledModal = styled(ModalDialogContainer)`
+const StyledBodyContent = styled.div`
   .create-portal-input-block {
     padding-top: 16px;
   }
   .create-portal-input {
     width: 100%;
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
   }
 `;
 
@@ -61,13 +71,19 @@ const ChangeDomainDialogComponent = () => {
 
   const [domain, setDomain] = React.useState("");
 
-  const onHandleDomain = (e) => {
+  const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (domainNameError) setDomainNameError(null);
     setDomain(e.target.value);
   };
 
   const onClose = () => {
     setChangeDomainDialogVisible(false);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onClickDomainChange();
+    }
   };
 
   const onClickDomainChange = async () => {
@@ -91,46 +107,52 @@ const ChangeDomainDialogComponent = () => {
   };
 
   return (
-    <StyledModal
+    <ModalDialog
       visible={visible}
       isLarge
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true} fontSize="13px">
-          {t("ChangeDomainDescription")}
-        </Text>
-        <div className="create-portal-input-block">
-          <Text
-            fontSize="13px"
-            fontWeight="600"
-            style={{ paddingBottom: "5px" }}
-          >
-            {t("DomainName")}
+        <StyledBodyContent>
+          <Text noSelect={true} fontSize="13px">
+            {t("ChangeDomainDescription")}
           </Text>
-          <TextInput
-            hasError={!!domainNameError}
-            onChange={onHandleDomain}
-            value={domain}
-            placeholder={t("EnterDomain")}
-            className="create-portal-input"
-          />
-          <div>
-            {domainNameError &&
-              domainNameError.map((err, index) => (
-                <Text
-                  key={index}
-                  fontSize="12px"
-                  fontWeight="400"
-                  color="#F24724"
-                >
-                  {err}
-                </Text>
-              ))}
+          <div className="create-portal-input-block">
+            <Text
+              fontSize="13px"
+              fontWeight="600"
+              style={{ paddingBottom: "5px" }}
+            >
+              {t("DomainName")}
+            </Text>
+            <TextInput
+              isAutoFocussed
+              type={InputType.text}
+              size={InputSize.base}
+              hasError={!!domainNameError}
+              onChange={onHandleDomain}
+              onKeyDown={onKeyDown}
+              value={domain}
+              placeholder={t("EnterDomain")}
+              className="create-portal-input"
+            />
+            <div>
+              {domainNameError &&
+                domainNameError.map((err, index) => (
+                  <Text
+                    className="error-text"
+                    key={index}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err}
+                  </Text>
+                ))}
+            </div>
           </div>
-        </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -138,19 +160,19 @@ const ChangeDomainDialogComponent = () => {
           key="CreateButton"
           label={t("Common:ChangeButton")}
           onClick={onClickDomainChange}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           scale={true}
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale={true}
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

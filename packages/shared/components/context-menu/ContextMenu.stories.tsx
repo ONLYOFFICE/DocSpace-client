@@ -27,9 +27,10 @@
 import React, { useRef } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import { ContextMenu, ContextMenuModel } from ".";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/ContextMenu",
@@ -183,11 +184,11 @@ const Template = () => {
         style={{
           width: "200px",
           height: "200px",
-          backgroundColor: "#7dadfa",
+          backgroundColor: globalColors.lightSecondMain,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          color: "#fff",
+          color: globalColors.white,
           fontSize: "18px",
         }}
         onContextMenu={(e) => {

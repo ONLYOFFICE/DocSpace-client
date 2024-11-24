@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
 
 import { Base } from "../../themes";
 import { mobile } from "../../utils";
@@ -33,15 +34,27 @@ import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
-    padding-left: 8px;
-    padding-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        padding-left: 8px;
-        padding-right: 8px;
-      `}
+    padding-inline: 8px;
   }
+
+  ${({ type, theme }) =>
+    type === "onlyIcon" &&
+    css`
+      .combo-button {
+        padding-right: 4px;
+      }
+
+      .combo-button_selected-icon-container {
+        margin-right: 0px;
+      }
+
+      .combo-buttons_arrow-icon,
+      .combo-button_selected-icon-container {
+        svg path {
+          fill: ${theme.color};
+        }
+      }
+    `}
 
   @media ${mobile} {
     .backdrop-active {
@@ -63,6 +76,7 @@ const StyledItem = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   align-content: center;
+  gap: 8px;
 
   padding: 7px 0px;
 
@@ -84,8 +98,20 @@ const StyledItemDescription = styled.div`
 
 StyledItemDescription.defaultProps = { theme: Base };
 
-const StyledItemIcon = styled.img`
-  margin-right: 8px;
+const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
+  /* margin-inline-end: 8px; */
+
+  path[fill] {
+    fill: ${(props) => props.theme.dropDownItem.icon.color};
+  }
+
+  ${({ isShortenIcon }) =>
+    isShortenIcon &&
+    css`
+      padding-top: 2px;
+      width: 16px;
+      height: 16px;
+    `}
 `;
 
 const StyledItemContent = styled.div`

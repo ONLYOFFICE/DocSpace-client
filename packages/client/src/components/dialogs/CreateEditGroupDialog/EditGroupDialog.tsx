@@ -40,7 +40,7 @@ import {
 } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import EditGroupStore from "SRC_DIR/store/EditGroupStore";
 
-import { StyledModal } from "./CreateEditGroupDialog.styled";
+import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
@@ -180,46 +180,49 @@ const EditGroupDialog = ({
 
   return (
     <>
-      <StyledModal
+      <ModalDialog
         displayType={ModalDialogType.aside}
         withBodyScroll
         visible={visible}
         onClose={closeModal}
-        withFooterBorder
       >
         <ModalDialog.Header>
           {t("PeopleTranslations:EditGroup")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          {showLoader ? (
-            <BodyLoader />
-          ) : (
-            isInit && (
-              <>
-                <GroupNameParam
-                  groupName={title}
-                  onChangeGroupName={onChangeGroupName}
-                />
-                <HeadOfGroup
-                  groupManager={manager}
-                  onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-                  removeManager={removeManager}
-                />
+          <StyledBodyContent>
+            {showLoader ? (
+              <BodyLoader />
+            ) : (
+              isInit && (
+                <>
+                  <GroupNameParam
+                    groupName={title}
+                    onChangeGroupName={onChangeGroupName}
+                  />
+                  <HeadOfGroup
+                    groupManager={manager}
+                    onShowSelectGroupManagerPanel={
+                      onShowSelectGroupManagerPanel
+                    }
+                    removeManager={removeManager}
+                  />
 
-                <MembersParam
-                  groupManager={manager}
-                  groupMembers={members}
-                  removeMember={removeMember}
-                  onShowSelectMembersPanel={onShowSelectMembersPanel}
-                  withInfiniteLoader
-                  total={currentTotal}
-                  loadNextPage={loadMembers}
-                  hasNextPage={!!members && members.length < currentTotal}
-                />
-              </>
-            )
-          )}
+                  <MembersParam
+                    groupManager={manager}
+                    groupMembers={members}
+                    removeMember={removeMember}
+                    onShowSelectMembersPanel={onShowSelectMembersPanel}
+                    withInfiniteLoader
+                    total={currentTotal}
+                    loadNextPage={loadMembers}
+                    hasNextPage={!!members && members.length < currentTotal}
+                  />
+                </>
+              )
+            )}
+          </StyledBodyContent>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -244,23 +247,27 @@ const EditGroupDialog = ({
             onClick={closeModal}
           />
         </ModalDialog.Footer>
-      </StyledModal>
+      </ModalDialog>
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel
-          isVisible={selectGroupMangerPanelIsVisible}
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
-          setGroupManager={addManager}
+          setGroupManager={(user) => {
+            addManager(user);
+            setSelectGroupMangerPanelIsVisible(false);
+          }}
         />
       )}
 
       {selectMembersPanelIsVisible && (
         <SelectMembersPanel
-          isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
-          addMembers={addMembers}
+          addMembers={(users) => {
+            addMembers(users);
+            setSelectMembersPanelIsVisible(false);
+          }}
         />
       )}
     </>

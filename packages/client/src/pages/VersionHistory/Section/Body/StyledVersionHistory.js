@@ -26,12 +26,13 @@
 
 import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/row";
-import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   height: 100%;
-  width: 100%;
+  width: calc(100% + 16px);
+
   .version-list {
     height: 100%;
     width: 100%;
@@ -39,11 +40,7 @@ const StyledBody = styled.div`
 
   .loader-history-rows {
     padding-top: 12px;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 16px;`
-        : `padding-right: 16px;`}
+    padding-inline-end: 16px;
   }
 `;
 
@@ -147,26 +144,13 @@ const StyledVersionRow = styled(Row)`
     padding-top: 13px;
     padding-bottom: 12px;
     height: auto;
-    ${(props) =>
-      !props.isTabletView &&
-      (props.theme.interfaceDirection === "rtl"
-        ? "padding-left:16px"
-        : "padding-right:16px")};
+    ${(props) => !props.isTabletView && "padding-inline-end: 16px"};
   }
 
   .version_badge {
     cursor: ${(props) => (props.canEdit ? "pointer" : "default")};
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-            margin-right: 0;
-          `
-        : css`
-            margin-right: 16px;
-            margin-left: 0;
-          `}
+    margin-inline: 0 16px;
 
     svg {
       ${({ theme }) =>
@@ -191,16 +175,8 @@ const StyledVersionRow = styled(Row)`
     width: 10px;
     height: 10px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 9px;
-            margin-left: 32px;
-          `
-        : css`
-            margin-left: 9px;
-            margin-right: 32px;
-          `}
+    margin-inline: 9px 32px;
+
     @media ${tablet} {
       margin-top: -1px;
     }
@@ -211,18 +187,14 @@ const StyledVersionRow = styled(Row)`
   }
 
   .textarea-wrapper {
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("6px 31px 1px -7px", theme.interfaceDirection)};
+    margin-block: 6px 1px;
+    margin-inline: -7px 31px;
     width: 100%;
   }
 
   .version_content-length {
     display: block;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
 
     @media ${tablet} {
       display: none;
@@ -235,10 +207,7 @@ const StyledVersionRow = styled(Row)`
     /* text-decoration: underline dashed; */
     white-space: break-spaces;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: -7px;`
-        : `margin-left: -7px;`}
+    margin-inline-start: -7px;
     margin-top: 4px;
 
     cursor: ${(props) => (props.isEditing ? "default" : "pointer")};
@@ -250,19 +219,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_text {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: -7px;`
-        : `margin-left: -7px;`}
     margin-top: 5px;
-
-    @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: -7px;`
-          : `margin-left: -7px;`}
-      margin-top: 5px;
-    }
 
     word-break: break-word;
     display: ${(props) => (props.showEditPanel ? "none" : "-webkit-box")};
@@ -276,17 +233,19 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version-comment-wrapper {
+    margin-inline-start: 72px;
     white-space: normal !important;
+
+    .version_text {
+      color: ${(props) => props.theme.filesVersionHistory.commentColor};
+    }
   }
 
   .row_context-menu-wrapper {
     display: block;
     position: absolute;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `left: 13px !important;`
-        : `right: 13px !important;`}
+    inset-inline-end: 13px !important;
     top: 6px;
 
     .expandButton {
@@ -333,10 +292,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_edit-comment-button-primary {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
     width: 87px;
   }
   .version_edit-comment-button-second {

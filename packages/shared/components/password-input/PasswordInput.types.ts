@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { MouseEvent } from "react";
 import { InputSize, InputType } from "../text-input";
 
 export type TPasswordSettings = {
@@ -46,13 +46,31 @@ export type TPasswordValidation = {
   length: boolean;
 };
 
+export type PasswordInputHandle = {
+  onGeneratePassword: (e: MouseEvent) => void;
+  setState(state: TState): void;
+  value?: string;
+};
+
+export type TState = {
+  type: InputType.text | InputType.password;
+  value?: string;
+  copyLabel?: string;
+  disableCopyAction?: boolean;
+  displayTooltip: boolean;
+  validLength: boolean;
+  validDigits: boolean;
+  validCapital: boolean;
+  validSpecial: boolean;
+};
+
 export interface PasswordInputProps {
   /** Allows setting the component id  */
   id?: string;
   /** Allows setting the component auto-complete */
   autoComplete?: string;
   /** Facilitates the correct display of values inside the input */
-  inputType: InputType.text | InputType.password;
+  inputType?: InputType.text | InputType.password;
   /** Input name */
   inputName?: string;
   /** Required to associate the password field with the email field */
@@ -60,7 +78,7 @@ export interface PasswordInputProps {
   /** Input value */
   inputValue?: string;
   /** Sets a callback function that is triggered on PasswordInput */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
   /** Default event that is triggered when the button is already pressed but not released */
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Event that is triggered when the focused item is lost  */
@@ -135,4 +153,8 @@ export interface PasswordInputProps {
   isFullWidth?: boolean;
   /** Focus the input field on initial render */
   isAutoFocussed?: boolean;
+  /** Indicating the password type simulation. Disables the browser password window */
+  isSimulateType?: boolean;
+  /** Sets simulate input symbol */
+  simulateSymbol?: string;
 }

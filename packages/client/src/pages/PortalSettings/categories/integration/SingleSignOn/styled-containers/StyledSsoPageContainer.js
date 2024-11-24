@@ -90,15 +90,6 @@ const StyledSsoPage = styled.div`
     display: ${(props) => (!props.hideMetadata ? "none" : "block")};
   }
 
-  .advanced-block {
-    margin: 24px 0;
-
-    .field-label {
-      font-size: 15px;
-      font-weight: 600;
-    }
-  }
-
   .metadata-field {
     display: flex;
     flex-direction: column;

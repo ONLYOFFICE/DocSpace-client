@@ -113,7 +113,7 @@ class SsoFormStore {
 
   usersType = EmployeeType.User;
   hideAuthPage = false;
-
+  disableEmailVerification = false;
   // sp metadata
   spEntityId = "";
   spAssertionConsumerUrl = "";
@@ -383,6 +383,7 @@ class SsoFormStore {
         phone: this.phone,
       },
       hideAuthPage: this.hideAuthPage,
+      disableEmailVerification: this.disableEmailVerification,
       usersType: this.usersType,
     };
   };
@@ -430,6 +431,7 @@ class SsoFormStore {
       spCertificateAdvanced,
       fieldMapping,
       hideAuthPage,
+      disableEmailVerification,
       usersType,
     } = config;
     const { entityId, ssoBinding, sloBinding, nameIdFormat } = idpSettings;
@@ -502,6 +504,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
+    this.disableEmailVerification = disableEmailVerification;
     this.usersType = usersType;
   };
 

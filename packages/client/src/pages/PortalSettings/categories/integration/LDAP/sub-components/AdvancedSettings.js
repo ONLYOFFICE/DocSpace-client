@@ -32,13 +32,22 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
-  const { t } = useTranslation("Ldap");
+const AdvancedSettings = ({
+  isSendWelcomeEmail,
+  setIsSendWelcomeEmail,
+  disableEmailVerification,
+  setDisableEmailVerification,
+}) => {
+  const { t } = useTranslation(["Ldap", "Settings", "Common"]);
 
-  const onChange = (e) => {
+  const onChangeSendWelcomeEmail = (e) => {
     const checked = e.target.checked;
-
     setIsSendWelcomeEmail(checked);
+  };
+
+  const onChangeDisableEmailVerification = (e) => {
+    const checked = e.target.checked;
+    setDisableEmailVerification(checked);
   };
 
   return (
@@ -52,18 +61,39 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
           className="ldap_checkbox-send-welcome-email"
           label={t("LdapSendWelcomeLetter")}
           isChecked={isSendWelcomeEmail}
-          onChange={onChange}
+          onChange={onChangeSendWelcomeEmail}
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
+      </div>
+
+      <div className="ldap_advanced-settings-header">
+        <Checkbox
+          className="ldap_checkbox-disable-email-verification"
+          label={t("Settings:DisableEmailVerification")}
+          isChecked={disableEmailVerification}
+          onChange={onChangeDisableEmailVerification}
+        />
+        <HelpButton
+          tooltipContent={t("DisableEmailDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        />
       </div>
     </Box>
   );
 };
 
 export default inject(({ ldapStore }) => {
-  const { setIsSendWelcomeEmail, isSendWelcomeEmail } = ldapStore;
+  const {
+    setIsSendWelcomeEmail,
+    isSendWelcomeEmail,
+    disableEmailVerification,
+    setDisableEmailVerification,
+  } = ldapStore;
   return {
     setIsSendWelcomeEmail,
     isSendWelcomeEmail,
+    disableEmailVerification,
+    setDisableEmailVerification,
   };
 })(observer(AdvancedSettings));

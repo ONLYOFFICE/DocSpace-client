@@ -1,4 +1,5 @@
 {
+  "DisableEmailDescription": "If this box is checked, LDAP users will not need to verify their email after the first authorization in {{productName}}.",
   "LdapAddCertificateToStoreConfirmation": "Do you want to add this certificate to certificate store and continue with user import?",
   "LdapAdvancedSettings": "Advanced Settings",
   "LdapAdvancedSettingsTooltip": "Choose user attributes which you want to be synchronized with your LDAP server.",

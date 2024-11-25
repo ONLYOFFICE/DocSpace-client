@@ -142,10 +142,13 @@ const AvatarPure = ({
 
   const interfaceDirection = defaultTheme?.interfaceDirection;
 
-  const onInputClick = () => {
-    if (inputFilesElement.current) {
-      inputFilesElement.current.value = null;
-    }
+  const onInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    target.value = "";
+
+    // if (inputFilesElement.current) {
+    //   inputFilesElement.current.value = null;
+    // }
   };
 
   useClickOutside(iconRef, () => {
@@ -191,6 +194,8 @@ const AvatarPure = ({
 
   const onUploadClick = (e?: React.MouseEvent) => {
     e?.stopPropagation();
+    e?.preventDefault();
+
     if (!onChangeFile) return;
     const menu = model[0];
     menu.onClick(inputFilesElement);
@@ -198,6 +203,7 @@ const AvatarPure = ({
 
   const onClickAvatar = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     if (noClick) return;
 
     if (hasAvatar) {
@@ -300,7 +306,7 @@ const AvatarPure = ({
       </StyledAvatar>
       {onChangeFile && (
         <input
-          id="customFileInput"
+          id="customAvatarInput"
           className="custom-file-input"
           type="file"
           onChange={onChangeFile}

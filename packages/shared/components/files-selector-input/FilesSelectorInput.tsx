@@ -76,7 +76,6 @@ const FilesSelectorInput = ({
   isSelect,
   isRoomBackup,
   isDocumentIcon,
-  socketHelper,
   currentDeviceType,
   setBackupToPublicRoomVisible,
   filesSelectorSettings,
@@ -207,14 +206,12 @@ const FilesSelectorInput = ({
           currentFolderId={id ?? ""}
           filterParam={filterParam}
           isThirdParty={isThirdParty}
-          socketHelper={socketHelper}
           isPanelVisible={isPanelVisible}
           rootThirdPartyId={rootThirdPartyId}
           submitButtonLabel={acceptButtonLabel}
           descriptionText={descriptionText ?? ""}
           cancelButtonId="select-file-modal-cancel"
           cancelButtonLabel={t("Common:CancelButton")}
-          socketSubscribers={socketHelper.socketSubscribers}
           onCancel={onClose}
           onSubmit={onSubmit}
           onSetBaseFolderPath={onSetBasePath}

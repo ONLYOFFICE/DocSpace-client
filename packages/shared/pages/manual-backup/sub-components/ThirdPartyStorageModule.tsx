@@ -39,7 +39,6 @@ import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage"
 import { ButtonSize } from "@docspace/shared/components/button";
 
 import type {
-  Nullable,
   SelectedStorageType,
   StorageRegionsType,
 } from "@docspace/shared/types";
@@ -74,7 +73,7 @@ interface ThirdPartyStorageModuleProps {
   storageRegions: StorageRegionsType[];
   isFormReady: () => boolean;
   onMakeCopy: (
-    selectedFolder: Nullable<string | number>,
+    selectedFolder: string | number,
     moduleName: string,
     moduleType: string,
     selectedStorageId?: string,
@@ -160,7 +159,7 @@ const ThirdPartyStorageModule = ({
     try {
       setIsStartCopy(true);
       await onMakeCopy(
-        null,
+        "",
         "ThirdPartyStorage",
         `${BackupStorageType.StorageModuleType}`,
         selectedId,

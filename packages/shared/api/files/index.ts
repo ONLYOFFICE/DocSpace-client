@@ -64,6 +64,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  SettingsThirdPartyType,
 } from "./types";
 
 export async function openEdit(
@@ -1054,7 +1055,10 @@ export function saveSettingsThirdParty(
 
 // TODO: Need update res type
 export function getSettingsThirdParty() {
-  return request({ method: "get", url: "files/thirdparty/backup" });
+  return request<SettingsThirdPartyType>({
+    method: "get",
+    url: "files/thirdparty/backup",
+  });
 }
 
 export function deleteThirdParty(providerId: string) {

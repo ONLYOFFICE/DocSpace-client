@@ -33,7 +33,6 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
-import type SocketIOHelper from "@docspace/shared/utils/socket";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
 
@@ -54,7 +53,6 @@ export interface RoomsModuleProps {
   newPath: string;
   basePath: string;
   isErrorPath: boolean;
-  socketHelper: SocketIOHelper;
   currentDeviceType?: DeviceType;
 
   toDefault: VoidFunction;
@@ -73,7 +71,6 @@ const RoomsModule = ({
   maxWidth,
   setBasePath,
   setNewPath,
-  socketHelper,
   toDefault,
   currentDeviceType,
   settingsFileSelector,
@@ -134,7 +131,6 @@ const RoomsModule = ({
           setNewPath={setNewPath}
           isErrorPath={isErrorPath}
           setBasePath={setBasePath}
-          socketHelper={socketHelper}
           isDisabled={isModuleDisabled}
           onSelectFolder={onSelectFolder}
           withoutInitPath={!selectedFolder}

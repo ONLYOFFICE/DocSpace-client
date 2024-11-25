@@ -79,7 +79,41 @@ const ManualBackup = ({
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
-
+  basePath,
+  isErrorPath,
+  newPath,
+  providers,
+  accounts,
+  selectedThirdPartyAccount,
+  setBasePath,
+  setNewPath,
+  settingsFileSelector,
+  toDefault,
+  isFormReady,
+  currentDeviceType,
+  maxWidth,
+  removeItem,
+  isValidForm,
+  deleteThirdPartyDialogVisible,
+  connectDialogVisible,
+  isTheSameThirdPartyAccount,
+  connectedThirdPartyAccount,
+  isNeedFilePath = false,
+  thirdPartyStorage,
+  formSettings,
+  errorsFieldsBeforeSafe,
+  defaultRegion,
+  storageRegions,
+  setThirdPartyProviders,
+  deleteThirdParty,
+  setThirdPartyAccountsInfo,
+  setSelectedThirdPartyAccount,
+  setDeleteThirdPartyDialogVisible,
+  openConnectWindow,
+  deleteValueFormSetting,
+  setRequiredFormSettings,
+  addValueInFormSettings,
+  setCompletedFormFields,
   getProgress,
   fetchTreeFolders,
   setDocumentTitle,
@@ -93,6 +127,8 @@ const ManualBackup = ({
   clearProgressInterval,
   setDownloadingProgress,
   setConnectedThirdPartyAccount,
+  setConnectDialogVisible,
+  setIsThirdStorageChanged,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -124,15 +160,15 @@ const ManualBackup = ({
     try {
       getProgress(t);
 
-      const [account, backupStorage, storageRegions] = await Promise.all([
+      const [account, backupStorage, storageRegionsS3] = await Promise.all([
         getSettingsThirdParty(),
         getBackupStorage(),
         getStorageRegions(),
       ]);
 
-      setConnectedThirdPartyAccount(account);
+      setConnectedThirdPartyAccount(account ?? null);
       setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegions);
+      setStorageRegions(storageRegionsS3);
     } catch (error) {
       toastr.error(error as Error);
     } finally {
@@ -357,8 +393,20 @@ const ManualBackup = ({
         </Text>
         {isCheckedDocuments && (
           <RoomsModule
+            newPath={newPath}
+            basePath={basePath}
+            isErrorPath={isErrorPath}
+            toDefault={toDefault}
+            setBasePath={setBasePath}
+            setNewPath={setNewPath}
+            settingsFileSelector={settingsFileSelector}
             {...commonModulesProps}
-            isCheckedDocuments={isCheckedDocuments}
+            // isCheckedDocuments={isCheckedDocuments}
+            // isMaxProgress,
+            // onMakeCopy,
+            // buttonSize,
+            currentDeviceType={currentDeviceType}
+            maxWidth={maxWidth}
           />
         )}
       </StyledModules>
@@ -376,7 +424,35 @@ const ManualBackup = ({
         <Text className="backup-description">
           {t("ThirdPartyResourceDescription")}
         </Text>
-        {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
+        {isCheckedThirdParty && (
+          <ThirdPartyModule
+            newPath={newPath}
+            accounts={accounts}
+            basePath={basePath}
+            providers={providers}
+            removeItem={removeItem}
+            isErrorPath={isErrorPath}
+            connectDialogVisible={connectDialogVisible}
+            filesSelectorSettings={settingsFileSelector}
+            selectedThirdPartyAccount={selectedThirdPartyAccount}
+            connectedThirdPartyAccount={connectedThirdPartyAccount}
+            isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+            deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+            setBasePath={setBasePath}
+            toDefault={toDefault}
+            setNewPath={setNewPath}
+            deleteThirdParty={deleteThirdParty}
+            openConnectWindow={openConnectWindow}
+            clearLocalStorage={clearLocalStorage}
+            setThirdPartyProviders={setThirdPartyProviders}
+            setConnectDialogVisible={setConnectDialogVisible}
+            setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+            setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+            setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+            setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+            {...commonModulesProps}
+          />
+        )}
       </StyledModules>
       <StyledModules isDisabled={isNotPaidPeriod}>
         <RadioButton
@@ -392,7 +468,23 @@ const ManualBackup = ({
           {t("ThirdPartyStorageDescription")}
         </Text>
         {isCheckedThirdPartyStorage && (
-          <ThirdPartyStorageModule {...commonModulesProps} />
+          <ThirdPartyStorageModule
+            isValidForm={isValidForm}
+            formSettings={formSettings}
+            defaultRegion={defaultRegion}
+            storageRegions={storageRegions}
+            isNeedFilePath={isNeedFilePath}
+            thirdPartyStorage={thirdPartyStorage}
+            errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+            isFormReady={isFormReady}
+            deleteValueFormSetting={deleteValueFormSetting}
+            setCompletedFormFields={setCompletedFormFields}
+            addValueInFormSettings={addValueInFormSettings}
+            setRequiredFormSettings={setRequiredFormSettings}
+            setIsThirdStorageChanged={setIsThirdStorageChanged}
+            isMaxProgress={isMaxProgress}
+            onMakeCopy={onMakeCopy} // {...commonModulesProps}
+          />
         )}
       </StyledModules>
 

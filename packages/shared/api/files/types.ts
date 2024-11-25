@@ -434,3 +434,10 @@ export type TConnectingStorage = {
 };
 
 export type TConnectingStorages = TConnectingStorage[];
+
+export type SettingsThirdPartyType = {
+  id: string;
+  title: string;
+  providerId: string;
+  providerKey: string;
+};

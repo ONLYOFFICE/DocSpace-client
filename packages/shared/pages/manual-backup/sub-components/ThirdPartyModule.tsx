@@ -43,7 +43,6 @@ import type {
   ThirdPartyAccountType,
   TTranslation,
 } from "@docspace/shared/types";
-import type SocketIOHelper from "@docspace/shared/utils/socket";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 
@@ -85,7 +84,6 @@ interface ThirdPartyModuleProps {
   newPath: string;
   basePath: string;
   isErrorPath: boolean;
-  socketHelper: SocketIOHelper;
   filesSelectorSettings: FilesSelectorSettings;
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
@@ -119,7 +117,6 @@ const ThirdPartyModule = ({
   basePath,
   isErrorPath,
   newPath,
-  socketHelper,
   filesSelectorSettings,
   setBasePath,
   setNewPath,
@@ -201,7 +198,6 @@ const ThirdPartyModule = ({
         newPath={newPath}
         basePath={basePath}
         isErrorPath={isErrorPath}
-        socketHelper={socketHelper}
         filesSelectorSettings={filesSelectorSettings}
         setBasePath={setBasePath}
         toDefault={toDefault}

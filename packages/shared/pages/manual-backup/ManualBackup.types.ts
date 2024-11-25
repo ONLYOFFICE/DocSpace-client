@@ -25,10 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFolder } from "api/files/types";
-import type { FolderType } from "../../enums";
-import type { Nullable, TTranslation } from "../../types";
+import type { DeviceType, FolderType } from "../../enums";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  ProviderType,
+  SelectedStorageType,
+  StorageRegionsType,
+  ThirdPartyAccountType,
+  TTranslation,
+} from "../../types";
 import type { TColorScheme } from "../../themes";
 import type { ButtonSize } from "../../components/button";
+import type { FilesSelectorSettings } from "../../components/files-selector-input";
+import type { TBreadCrumb } from "../../components/selector/Selector.types";
+import type { RemoveItemType } from "../../components/direct-third-party-connection";
 
 type StorageParamsType = {
   key: string;
@@ -36,40 +47,108 @@ type StorageParamsType = {
 };
 
 export interface ManualBackupProps {
-  isNotPaidPeriod: boolean;
-  rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
-  temporaryLink: Nullable<string>;
-  downloadingProgress: number;
-  pageIsDisabled: boolean;
-
-  dataBackupUrl: string;
-  currentColorScheme: TColorScheme;
+  maxWidth?: string;
   buttonSize?: ButtonSize;
-  isBackupProgressVisible?: boolean;
+  isNeedFilePath?: boolean;
+  settingsFileSelector: FilesSelectorSettings;
+  setDocumentTitle: (title: string) => void; // SRC_DIR/helpers/utils
 
-  saveToLocalStorage: (
-    isStorage: boolean,
-    moduleName: string,
-    selectedId: string | number | undefined,
-    selectedStorageTitle?: string,
+  // backup store
+  isValidForm: boolean;
+  defaultRegion: string; //  defaultFormSettings.region;
+  downloadingProgress: number;
+  temporaryLink: Nullable<string>;
+  accounts: ThirdPartyAccountType[];
+  isBackupProgressVisible?: boolean;
+  isTheSameThirdPartyAccount: boolean;
+  storageRegions: StorageRegionsType[];
+  formSettings: Record<string, string>;
+  thirdPartyStorage: SelectedStorageType[];
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
+  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
+  isFormReady: () => boolean;
+  clearLocalStorage: VoidFunction;
+  clearProgressInterval: VoidFunction;
+  setTemporaryLink: (link: string) => void;
+  setStorageRegions: (regions: unknown) => void;
+  setThirdPartyStorage: (list: unknown) => void;
+  deleteValueFormSetting: (key: string) => void;
+  getIntervalProgress: (t: TTranslation) => void;
+  getProgress: (t: TTranslation) => Promise<void>;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setDownloadingProgress: (progress: number) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+  setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setSelectedThirdPartyAccount: (
+    elem: Nullable<Partial<ThirdPartyAccountType>>,
   ) => void;
   getStorageParams: (
     isCheckedThirdPartyStorage: boolean,
     selectedFolderId: string | number,
     selectedStorageId?: string,
   ) => StorageParamsType[];
+  saveToLocalStorage: (
+    isStorage: boolean,
+    moduleName: string,
+    selectedId: string | number | undefined,
+    selectedStorageTitle?: string,
+  ) => void;
+  setConnectedThirdPartyAccount: (
+    account: Nullable<ConnectedThirdPartyAccountType>,
+  ) => void;
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+  // end back store
 
-  setDocumentTitle: (title: string) => void;
-  setTemporaryLink: (link: string) => void;
-  setDownloadingProgress: (progress: number) => void;
-  getIntervalProgress: (t: TTranslation) => void;
-  clearLocalStorage: VoidFunction;
-  clearProgressInterval: VoidFunction;
+  // filesSelectorInput Store
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
+  toDefault: VoidFunction;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  // end filesSelectorInput
+
+  // SettingsStore store
+  dataBackupUrl: string;
+  currentDeviceType?: DeviceType;
+  currentColorScheme: TColorScheme;
+  // end SettingsStore
+
+  // dialogsStore Store
+  pageIsDisabled: boolean; //  isManagement() && portals?.length === 1;
+  connectDialogVisible: boolean;
+  deleteThirdPartyDialogVisible: boolean;
+  setConnectDialogVisible: (visible: boolean) => void;
+  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
+  // end dialogsStore
+
+  // currentTariffStatusStore Store
+  isNotPaidPeriod: boolean;
+  // end currentTariffStatusStore
+
+  // treeFoldersStore Store
+  rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  getProgress: (t: TTranslation) => Promise<void>;
-  setThirdPartyStorage: (list: unknown) => void;
-  setStorageRegions: (regions: unknown) => void;
-  setConnectedThirdPartyAccount: (account: unknown) => void;
+  // end treeFoldersStore
+
+  // selectedThirdPartyAccount from backupStore
+  // storeItem from dialogsStore
+  removeItem: RemoveItemType; // selectedThirdPartyAccount ?? storeItem
+
+  // thirdPartyStore store
+  providers: ProviderType[];
+  deleteThirdParty: (id: number) => Promise<void>;
+  setThirdPartyProviders: (providers: ProviderType[]) => void;
+  openConnectWindow: (
+    serviceName: string,
+    modal: Window | null,
+  ) => Promise<Window | null>;
+  // end thirdPartyStore
 }
 
 export interface StyledModulesProps {

@@ -46,11 +46,11 @@ const DeleteThirdPartyDialog = ({
   providers,
   removeItem,
   currentFolderId,
+  isConnectionViaBackupModule,
+  updateInfo,
   deleteThirdParty,
   setThirdPartyProviders,
   setDeleteThirdPartyDialogVisible,
-  isConnectionViaBackupModule,
-  updateInfo,
   setConnectedThirdPartyAccount,
 }: DeleteThirdPartyDialogProps) => {
   const { t, ready } = useTranslation([

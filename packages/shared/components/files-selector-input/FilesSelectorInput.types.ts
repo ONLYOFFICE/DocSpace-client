@@ -27,7 +27,6 @@
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TGetIcon } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
-import type SocketIOHelper from "@docspace/shared/utils/socket";
 import type { DeviceType } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";
 
@@ -78,7 +77,6 @@ export type FilesSelectorInputProps = {
   isSelect?: boolean;
   isRoomBackup?: boolean;
   isDocumentIcon?: boolean;
-  socketHelper: SocketIOHelper;
   filesSelectorSettings: FilesSelectorSettings;
 
   setBasePath: (folders: TBreadCrumb[]) => void;

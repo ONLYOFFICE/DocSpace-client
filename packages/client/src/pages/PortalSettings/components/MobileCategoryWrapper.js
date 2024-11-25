@@ -35,7 +35,6 @@ import { Link } from "@docspace/shared/components/link";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
-import { isManagement } from "@docspace/shared/utils/common";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}

@@ -99,7 +99,6 @@ const DirectThirdPartyConnection = ({
   newPath,
   setBasePath,
   setNewPath,
-  socketHelper,
   toDefault,
 }: DirectThirdPartyConnectionProps) => {
   const [state, setState] = useReducer<
@@ -363,7 +362,6 @@ const DirectThirdPartyConnection = ({
             newPath={newPath}
             basePath={basePath}
             isErrorPath={isErrorPath}
-            socketHelper={socketHelper}
             setBasePath={setBasePath}
             toDefault={toDefault}
             setNewPath={setNewPath}

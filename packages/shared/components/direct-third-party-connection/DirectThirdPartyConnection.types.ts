@@ -37,7 +37,6 @@ import type {
   FileInfoType,
   FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type SocketIOHelper from "@docspace/shared/utils/socket";
 
 export type StyledComboBoxItemProps = {
   isDisabled?: boolean;
@@ -95,7 +94,6 @@ export interface DirectThirdPartyConnectionProps {
   newPath: string;
   basePath: string;
   isErrorPath: boolean;
-  socketHelper: SocketIOHelper;
   filesSelectorSettings: FilesSelectorSettings;
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;

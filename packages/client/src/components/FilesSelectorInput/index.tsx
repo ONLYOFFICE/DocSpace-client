@@ -44,7 +44,7 @@ export default inject<
   const { basePath, newPath, setNewPath, setBasePath, toDefault, isErrorPath } =
     filesSelectorInput;
 
-  const { socketHelper, currentDeviceType } = settingsStore;
+  const { currentDeviceType } = settingsStore;
   const { getIcon, filesSettings } = filesSettingsStore;
   const { setBackupToPublicRoomVisible } = dialogsStore;
 
@@ -61,7 +61,6 @@ export default inject<
     setNewPath,
     setBasePath,
 
-    socketHelper,
     currentDeviceType,
     filesSelectorSettings,
     setBackupToPublicRoomVisible,

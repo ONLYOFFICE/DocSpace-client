@@ -32,7 +32,6 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
   getContactsCheckboxItemLabel,
   getContactsMenuItemId,
-  TContactsSelected,
 } from "SRC_DIR/helpers/contacts";
 import HeaderMenuStore from "SRC_DIR/store/contacts/HeaderMenuStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -61,15 +60,6 @@ export const useContactsHeader = ({
   const getContactsMenuItems = React.useCallback(() => {
     if (isContactsGroupsPage) return null;
 
-    const onSelect = (
-      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      const key = (e.currentTarget as HTMLElement).dataset
-        .key as TContactsSelected;
-
-      setUsersSelected(key);
-    };
-
     return (
       <>
         {cbContactsMenuItems.map((key) => {
@@ -81,7 +71,7 @@ export const useContactsHeader = ({
               key={key}
               label={label}
               data-key={key}
-              onClick={onSelect}
+              onClick={() => setUsersSelected(key)}
             />
           );
         })}

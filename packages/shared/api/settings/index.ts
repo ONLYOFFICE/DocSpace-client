@@ -42,6 +42,7 @@ import {
   TVersionBuild,
   TMailDomainSettings,
   TIpRestriction,
+  TIpRestrictionSettings,
   TCookieSettings,
   TLoginSettings,
   TCapabilities,
@@ -144,12 +145,15 @@ export async function getIpRestrictions() {
   return res;
 }
 
-export async function setIpRestrictions(data) {
+export async function setIpRestrictions(data: {
+  IpRestrictions: string[];
+  enable: boolean;
+}) {
   const res = (await request({
     method: "put",
     url: "/settings/iprestrictions",
     data,
-  })) as TIpRestriction[];
+  })) as TIpRestrictionSettings;
 
   return res;
 }
@@ -158,16 +162,6 @@ export async function getIpRestrictionsEnable() {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
-  })) as { enable: boolean };
-
-  return res;
-}
-
-export async function setIpRestrictionsEnable(data) {
-  const res = (await request({
-    method: "put",
-    url: "/settings/iprestrictions/settings",
-    data,
   })) as { enable: boolean };
 
   return res;
@@ -225,6 +219,12 @@ export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
   });
 }
 
+export function deleteBruteForceProtection() {
+  return request({
+    method: "delete",
+    url: `settings/security/loginSettings`,
+  });
+}
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -576,17 +576,24 @@ export function setPortalOwner(
   timeZone,
   confirmKey,
   analytics,
+  amiId: string | null = null,
 ) {
+  const data = {
+    email,
+    PasswordHash: hash,
+    lng,
+    timeZone,
+    analytics,
+  };
+
+  if (amiId) {
+    data.amiId = amiId;
+  }
+
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
-    data: {
-      email,
-      PasswordHash: hash,
-      lng,
-      timeZone,
-      analytics,
-    },
+    data,
   };
 
   if (confirmKey) {

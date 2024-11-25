@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import { OAuthRow } from "./Row";
 
@@ -16,6 +16,7 @@ const RowView = (props: RowViewProps) => {
     changeClientStatus,
     selection,
     setSelection,
+    setBufferSelection,
 
     activeClients,
     getContextMenuItems,
@@ -30,6 +31,12 @@ const RowView = (props: RowViewProps) => {
     },
     [fetchNextClients],
   );
+
+  React.useEffect(() => {
+    return () => {
+      setSelection!("");
+    };
+  }, [setSelection]);
 
   return (
     <StyledRowContainer
@@ -48,6 +55,7 @@ const RowView = (props: RowViewProps) => {
           isChecked={selection?.includes(item.clientId) || false}
           inProgress={activeClients?.includes(item.clientId) || false}
           setSelection={setSelection}
+          setBufferSelection={setBufferSelection}
           changeClientStatus={changeClientStatus}
           getContextMenuItems={getContextMenuItems}
           sectionWidth={sectionWidth}
@@ -57,11 +65,12 @@ const RowView = (props: RowViewProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     viewAs,
     setViewAs,
     selection,
+    setBufferSelection,
     setSelection,
     changeClientStatus,
     getContextMenuItems,
@@ -77,6 +86,7 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     changeClientStatus,
     selection,
     setSelection,
+    setBufferSelection,
     activeClients,
     getContextMenuItems,
     hasNextPage,

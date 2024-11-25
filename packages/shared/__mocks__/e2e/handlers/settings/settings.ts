@@ -1,4 +1,11 @@
-import { API_PREFIX, BASE_URL, HEADER_WIZARD_SETTINGS } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_WIZARD_SETTINGS,
+  HEADER_WIZARD_WITH_AMI_SETTINGS,
+  HEADER_PORTAL_DEACTIVATE_SETTINGS,
+  HEADER_NO_STANDALONE_SETTINGS,
+} from "../../utils";
 
 const PATH = "settings";
 
@@ -38,6 +45,7 @@ export const settingsWizzard = {
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
+    isAmi: false,
   },
   count: 1,
   links: [
@@ -49,6 +57,11 @@ export const settingsWizzard = {
   status: 0,
   statusCode: 200,
   ok: true,
+};
+
+export const settingsWizzardWithAmi = {
+  ...settingsWizzard,
+  response: { ...settingsWizzard.response, isAmi: true },
 };
 
 export const settingsAuth = {};
@@ -98,14 +111,85 @@ export const settingsNoAuth = {
   statusCode: 200,
 };
 
+export const settingsNoAuthNoStandalone = {
+  response: {
+    trustedDomainsType: 0,
+    culture: "en-GB",
+    utcOffset: "00:00:00",
+    utcHoursOffset: 0,
+    greetingSettings: "Web Office",
+    ownerId: "00000000-0000-0000-0000-000000000000",
+    enabledJoin: false,
+    enableAdmMess: false,
+    thirdpartyEnable: false,
+    docSpace: true,
+    standalone: false,
+    baseDomain: "docspace.site",
+    passwordHash: {
+      size: 256,
+      iterations: 100000,
+      salt: "4d9abe238e2f7b14a30a4565d62214a795a15abb798ed61118a69820d6a6146c",
+    },
+    version: ".",
+    recaptchaType: 0,
+    recaptchaPublicKey: "6Ld7iToqAAAAAMxFUP5Sn3gfzRDb7iEYjlokMdTj",
+    debugInfo: false,
+    tenantStatus: 0,
+    tenantAlias: "localhost",
+    forumLink: "https://forum.onlyoffice.com",
+    legalTerms:
+      "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
+    licenseUrl: "https://www.gnu.org/licenses/agpl-3.0.en.html",
+    cookieSettingsEnabled: false,
+    limitedAccessSpace: false,
+    userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
+    maxImageUploadSize: 0,
+  },
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const settingsPortalDeactivate = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, tenantStatus: 1 },
+};
+
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
+  let isWizardWithAmi = false;
+  let isPortalDeactivate = false;
+  let isNoStandalone = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
   }
 
+  if (headers?.get(HEADER_WIZARD_WITH_AMI_SETTINGS)) {
+    isWizardWithAmi = true;
+  }
+
+  if (headers?.get(HEADER_PORTAL_DEACTIVATE_SETTINGS)) {
+    isPortalDeactivate = true;
+  }
+
+  if (headers?.get(HEADER_NO_STANDALONE_SETTINGS)) {
+    isNoStandalone = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
+  if (isWizardWithAmi)
+    return new Response(JSON.stringify(settingsWizzardWithAmi));
+  if (isPortalDeactivate)
+    return new Response(JSON.stringify(settingsPortalDeactivate));
+  if (isNoStandalone)
+    return new Response(JSON.stringify(settingsNoAuthNoStandalone));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
 const Selectors = styled.div<{ hasError?: boolean }>`
   position: relative;
@@ -46,7 +47,7 @@ const Selectors = styled.div<{ hasError?: boolean }>`
   }
 `;
 
-const TimeCell = styled.span<{ hasError?: boolean }>`
+const TimeCell = styled.span.attrs(injectDefaultTheme)<{ hasError?: boolean }>`
   display: flex;
   align-items: center;
 
@@ -84,14 +85,10 @@ const TimeCell = styled.span<{ hasError?: boolean }>`
     `}
 `;
 
-TimeCell.defaultProps = { theme: Base };
-
-const TimeSelector = styled.span`
+const TimeSelector = styled.span.attrs(injectDefaultTheme)`
   margin-inline-start: 4px;
   display: inline-flex;
   align-items: center;
 `;
-
-TimeSelector.defaultProps = { theme: Base };
 
 export { TimeSelector, TimeCell, Selectors };

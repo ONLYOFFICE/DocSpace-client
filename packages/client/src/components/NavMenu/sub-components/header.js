@@ -38,13 +38,14 @@ import {
   mobile,
   NoUserSelect,
   getLogoUrl,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-const Header = styled.header`
+const Header = styled.header.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
 
@@ -87,9 +88,7 @@ const Header = styled.header`
   }
 `;
 
-Header.defaultProps = { theme: Base };
-
-const StyledLink = styled.div`
+const StyledLink = styled.div.attrs(injectDefaultTheme)`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
@@ -105,8 +104,6 @@ const StyledLink = styled.div`
     text-decoration: underline;
   }
 `;
-
-StyledLink.defaultProps = { theme: Base };
 
 const versionBadgeProps = {
   fontWeight: "600",

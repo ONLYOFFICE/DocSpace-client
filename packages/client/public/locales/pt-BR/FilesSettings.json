@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Seções adicionais",
   "DisplayFavorites": "Mostrar Favoritos",
+  "DisplayFileExtension": "Exibir a extensão do arquivo ao lado do nome do arquivo",
   "DisplayNotification": "Exibir notificação ao mover itens para a Lixeira",
   "DisplayRecent": "Mostrar Recentes",
   "DisplayTemplates": "Modelos de exibição",

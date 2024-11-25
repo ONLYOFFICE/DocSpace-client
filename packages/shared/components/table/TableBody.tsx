@@ -47,6 +47,8 @@ const TableBodyPure = (props: TableBodyProps) => {
     isIndexEditingMode = false,
   } = props;
 
+  if (!columnStorageName || !columnInfoPanelStorageName) return <div />;
+
   return useReactWindow ? (
     <StyledTableBody
       useReactWindow={useReactWindow}

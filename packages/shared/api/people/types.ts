@@ -29,6 +29,21 @@ import {
   EmployeeStatus,
   ThemeKeys,
 } from "../../enums";
+import { TCreatedBy } from "../../types";
+
+export type TFilterSortBy =
+  | "AZ"
+  | "displayname"
+  | "type"
+  | "department"
+  | "email"
+  | "usedspace"
+  | "registrationDate"
+  | "createdby";
+
+export type TFilterArea = "all" | "people" | "guests";
+
+export type TSortOrder = "descending" | "ascending";
 
 export type TUserGroup = {
   id: string;
@@ -72,6 +87,11 @@ export type TUser = {
   groups?: TUserGroup[];
   shared?: boolean;
   loginEventId?: number;
+  notes?: string;
+  isCustomQuota?: string;
+  title?: string;
+  registrationDate?: string;
+  createdBy?: TCreatedBy;
 };
 
 export type TGetUserList = {

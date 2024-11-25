@@ -625,7 +625,6 @@ class FilesTableHeader extends React.Component {
       sortingVisible,
       infoPanelVisible,
 
-      withPaging,
       tagRef,
       setHideColumns,
       isFrame,
@@ -659,7 +658,7 @@ class FilesTableHeader extends React.Component {
         sortingVisible={isIndexing ? false : sortingVisible}
         isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
@@ -703,7 +702,7 @@ export default inject(
     const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
-    const { withPaging, isFrame, frameConfig } = settingsStore;
+    const { isFrame, frameConfig } = settingsStore;
 
     const {
       tableStorageName,
@@ -769,7 +768,6 @@ export default inject(
       headerBorder,
 
       infoPanelVisible,
-      withPaging,
 
       tableStorageName,
       columnStorageName,

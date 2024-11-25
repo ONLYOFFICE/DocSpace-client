@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef } from "react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledTooltip = styled.div`
+const StyledTooltip = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   display: none;
   padding: 8px;
@@ -56,8 +56,6 @@ const StyledTooltip = styled.div`
     color: ${(props) => props.theme.filesDragTooltip.color};
   }
 `;
-
-StyledTooltip.defaultProps = { theme: Base };
 
 const DragTooltip = (props) => {
   const tooltipRef = useRef(null);

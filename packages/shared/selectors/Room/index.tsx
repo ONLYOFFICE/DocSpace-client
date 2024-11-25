@@ -109,7 +109,7 @@ const RoomSelector = ({
   }, [setIsDataReady]);
 
   const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+    (value: string, callback?: VoidFunction) => {
       isFirstLoad.current = true;
       afterSearch.current = true;
       setSearchValue(() => {
@@ -120,7 +120,7 @@ const RoomSelector = ({
     [],
   );
 
-  const onClearSearchAction = React.useCallback((callback?: Function) => {
+  const onClearSearchAction = React.useCallback((callback?: VoidFunction) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -139,10 +139,11 @@ const RoomSelector = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-      filter.type = roomType;
+      filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
 
-      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
+      if (disableThirdParty)
+        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
 
       const {
         folders,

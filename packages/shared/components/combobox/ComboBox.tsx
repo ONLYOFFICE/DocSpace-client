@@ -26,6 +26,7 @@
 
 import React from "react";
 import equal from "fast-deep-equal/react";
+import { isMobileOnly, isMobile, isTablet } from "react-device-detect";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
@@ -84,6 +85,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       onToggle,
       isLoading,
       setIsOpenItemAccess,
+      disableItemClickFirstLevel = false,
     } = props;
 
     const target = e.target as HTMLElement;
@@ -92,6 +94,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
       isDisabled ||
       disableItemClick ||
       isLoading ||
+      (disableItemClickFirstLevel &&
+        target.closest(".item-by-first-level") &&
+        (isMobileOnly || isMobile || isTablet)) ||
       (disableIconClick && e && target.closest(".optionalBlock")) ||
       target.classList.contains("ScrollbarsCustom") ||
       target.classList.contains("ScrollbarsCustom-Thumb") ||
@@ -175,6 +180,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     style,
     withLabel = true,
     displayArrow,
+    topSpace,
     onToggle,
   } = props;
 
@@ -242,14 +248,14 @@ const ComboBoxPure = (props: ComboboxProps) => {
   const disableMobileView = optionsCount < 4 || hideMobileView;
 
   const dropDownBody =
-    extractChildrenFromReactFragment(advancedOptions) ||
-    (options.map((option: TOption) => {
+    extractChildrenFromReactFragment(advancedOptions as React.ReactNode) ||
+    (options?.map((option: TOption) => {
       const disabled =
         option.disabled ||
-        (!displaySelectedOption && option.label === selectedOption.label);
+        (!displaySelectedOption && option?.label === selectedOption?.label);
 
       const isActiveOption = withLabel
-        ? option.label === selectedOption.label
+        ? option.label === selectedOption?.label
         : option.key === selectedOption.key;
 
       const isActive = displaySelectedOption && isActiveOption;
@@ -337,6 +343,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
+          topSpace={topSpace}
           onCloseDropdown={onCloseCombobox}
           enableKeyboardEvents
         >

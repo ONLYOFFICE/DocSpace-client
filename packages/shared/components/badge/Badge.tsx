@@ -34,21 +34,22 @@ const Badge = React.forwardRef(
   (props: BadgeProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const {
       onClick,
-      fontSize,
+      fontSize = "11px",
       color,
-      fontWeight,
+      fontWeight = 800,
       backgroundColor,
-      borderRadius,
-      padding,
-      maxWidth,
+      borderRadius = "11px",
+      padding = "0px 5px",
+      maxWidth = "50px",
       height,
       type,
       compact,
-      isHovered,
+      isHovered = false,
       border,
-      label,
+      label = 0,
       onMouseLeave,
       onMouseOver,
+      noHover = false,
     } = props;
 
     const onClickAction = React.useCallback(
@@ -64,7 +65,14 @@ const Badge = React.forwardRef(
     return (
       <BadgeTheme
         {...props}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
+        borderRadius={borderRadius}
+        padding={padding}
+        maxWidth={maxWidth}
+        label={label}
         isHovered={isHovered}
+        noHover={noHover}
         onClick={onClickAction}
         onMouseLeave={onMouseLeave}
         onMouseOver={onMouseOver}
@@ -97,16 +105,5 @@ const Badge = React.forwardRef(
 );
 
 Badge.displayName = "Badge";
-
-Badge.defaultProps = {
-  label: 0,
-  fontSize: "11px",
-  fontWeight: 800,
-  borderRadius: "11px",
-  padding: "0px 5px",
-  maxWidth: "50px",
-  isHovered: false,
-  noHover: false,
-};
 
 export { Badge };

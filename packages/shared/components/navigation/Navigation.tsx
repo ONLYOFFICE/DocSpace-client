@@ -85,6 +85,7 @@ const Navigation = ({
   tariffBar,
   showNavigationButton,
   onContextOptionsClick,
+  onLogoClick,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -279,13 +280,13 @@ const Navigation = ({
           )}
           <StyledContainer
             ref={containerRef}
-            width={context.sectionWidth || 0}
             isRootFolder={isRootFolder}
             isTrashFolder={isTrashFolder}
             isDesktop={isDesktop}
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
             withLogo={!!withLogo}
+            isFrame={isFrame}
             isPublicRoom={isPublicRoom}
             className="navigation-container"
             showNavigationButton={showNavigationButton}
@@ -295,6 +296,7 @@ const Navigation = ({
                 className="navigation-logo"
                 logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
+                onClick={onLogoClick}
               />
             )}
             <ArrowButton

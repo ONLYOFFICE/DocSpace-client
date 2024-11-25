@@ -62,13 +62,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
     React.useState<null | Array<object>>(null);
 
   const { spacesStore, settingsStore } = useStore();
-  const {
-    checkDomain,
-    setDomainName,
-    setPortalName,
-    setReferenceLink,
-    setSpaceCreatedDialogVisible,
-  } = spacesStore;
+  const { checkDomain, setDomainName, setPortalName } = spacesStore;
 
   const onConfigurationPortal = async () => {
     if (window?.ClientConfig?.management?.checkDomain) {
@@ -98,11 +92,10 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         setIsLoading(true);
         await setDomainName(domain);
         await setPortalName(name).then((result) => {
-          setReferenceLink(result);
-          setSpaceCreatedDialogVisible(true);
+          let url = new URL(result);
+          url.searchParams.append("referenceUrl", "/management");
+          return window.location.replace(url);
         });
-
-        await settingsStore.getAllPortals();
       } catch (err) {
         toastr.error(err);
       } finally {

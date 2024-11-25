@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Zezwalaj",
+  "ConsentDescription": "Dane udostępniane <strong>{{displayName}}</strong> będą podlegać <6>polityce prywatności</6> oraz <6>regulaminowi</6> <strong>{{nameApp}}</strong>. Użytkownik może wycofać tę zgodę, kiedykolwiek zechce w ustawieniach konta {{productName}}.",
+  "ConsentSubHeader": "Aplikacja <1>{{nameApp}}</1> chciałaby uzyskać dostęp do następujących danych na <strong>Twoim koncie {{productName}}</strong>:",
+  "DenyButton": "Odmów",
+  "NotYou": "To nie Ty?",
+  "SignedInAs": "Zalogowano jako",
+  "ToContinue": "Aby kontynuować,"
+}

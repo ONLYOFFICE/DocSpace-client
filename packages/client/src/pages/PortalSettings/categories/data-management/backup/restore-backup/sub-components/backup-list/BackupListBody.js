@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import { StyledBackupList } from "../../../StyledBackup";
-import FileArchive24SvgUrl from "PUBLIC_DIR/images/icons/24/file_archive.svg?url";
+import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const VirtualScroll = (props) => (
@@ -72,7 +72,7 @@ const BackupListBody = ({
           <StyledBackupList isChecked={isChecked}>
             <div className="backup-list_item">
               <ReactSVG
-                src={FileArchive24SvgUrl}
+                src={FileArchive32SvgUrl}
                 className="backup-list_icon"
               />
 

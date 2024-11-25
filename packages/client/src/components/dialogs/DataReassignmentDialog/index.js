@@ -94,6 +94,9 @@ const DataReassignmentDialog = ({
 
   const updateAccountsAfterDeleteUser = () => {
     const filter = Filter.getDefault();
+
+    filter.area = "people";
+
     getUsersList(filter, true);
     return;
   };
@@ -200,8 +203,8 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   if (selectorVisible) {
     return (
@@ -219,22 +222,22 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             excludeItems={[user.id]}
             currentUserId={user.id}
             withCancelButton
+            onCancel={onClosePeopleSelector}
             cancelButtonLabel=""
+            withHeader
             headerProps={{
               onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
-            onBackClick={onTogglePeopleSelector}
             filter={filter}
-            withHeader
             disableDisabledUsers
           />
         </ModalDialog.Container>
@@ -299,7 +302,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -308,7 +310,8 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection, setSelected } =
+    peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,

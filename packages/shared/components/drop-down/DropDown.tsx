@@ -68,6 +68,7 @@ const DropDown = ({
   manualY,
   className,
   style,
+  topSpace,
   onCloseDropdown,
 }: DropDownProps) => {
   const theme = useTheme();
@@ -117,6 +118,7 @@ const DropDown = ({
         parentRects.bottom + dropDownHeight > viewport.height)
     ) {
       bottom -= parent.current.clientHeight + dropDownHeight;
+      if (topSpace && bottom < 0) bottom = topSpace;
     }
 
     if (dropDown) {

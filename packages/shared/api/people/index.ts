@@ -26,36 +26,34 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { AccountsSearchArea } from "@docspace/shared/enums";
-// import axios from "axios";
-import { Encoder } from "@docspace/shared/utils/encoder";
-import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { Encoder } from "../../utils/encoder";
+import { checkFilterInstance } from "../../utils/common";
+import { TReqOption } from "../../utils/axiosClient";
+import {
+  EmployeeActivationStatus,
+  ThemeKeys,
+  AccountsSearchArea,
+  EmployeeStatus,
+  EmployeeType,
+} from "../../enums";
 import { Nullable } from "../../types";
+
+import { TGroup } from "../groups/types";
 import { request } from "../client";
 
 import Filter from "./filter";
-
 import { TChangeTheme, TGetUserList, TUser } from "./types";
-
-import { TReqOption } from "../../utils/axiosClient";
-import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
-import { TGroup } from "../groups/types";
 
 export async function getUserList(
   filter = Filter.getDefault(),
   signal?: AbortSignal,
 ) {
   let params = "";
-  // if (fake) {
-  //   return fakePeople.getUserList(filter);
-  // }
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams(
-      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
-    )}`;
+    params = `/filter?${filter.toApiUrlParams()}`;
   }
 
   const res = (await request({
@@ -67,6 +65,13 @@ export async function getUserList(
   res.items = res.items.map((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -87,6 +92,13 @@ export async function getUser(userName = null, headers = null) {
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
+
+    if ("createdBy" in user && user.createdBy?.displayName) {
+      user.createdBy = {
+        ...user.createdBy,
+        displayName: Encoder.htmlDecode(user.createdBy.displayName),
+      };
+    }
   }
 
   return user;
@@ -107,6 +119,12 @@ export async function getUserByEmail(
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
+    if ("createdBy" in user && user.createdBy?.displayName) {
+      user.createdBy = {
+        ...user.createdBy,
+        displayName: Encoder.htmlDecode(user.createdBy.displayName),
+      };
+    }
   }
   return user;
 }
@@ -121,6 +139,12 @@ export function getUserFromConfirm(userId, confirmKey = null) {
   return request(options).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -145,6 +169,12 @@ export function createUser(data, confirmKey: Nullable<string> = null) {
   return request(options).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -197,6 +227,12 @@ export function updateUser(data) {
   }).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -282,8 +318,8 @@ export async function resendUserInvites(userIds: string[]) {
   });
 }
 
-export function resendInvitesAgain() {
-  return request({
+export async function resendInvitesAgain() {
+  await request({
     method: "put",
     url: "/people/invite",
     data: { userIds: [], resendAll: true },
@@ -298,6 +334,12 @@ export function updateUserCulture(id, cultureName) {
   }).then((user) => {
     if (user && user.displayName) {
       user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
     }
     return user;
   });
@@ -326,20 +368,55 @@ export function deleteAvatar(profileId) {
   });
 }
 
-export function updateUserStatus(status, userIds) {
-  return request({
+export async function updateUserStatus(
+  status: EmployeeStatus,
+  userIds: string[],
+) {
+  const users = (await request({
     method: "put",
     url: `/people/status/${status}`,
     data: { userIds },
+  })) as TUser[];
+
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
   });
+
+  return res;
 }
 
-export function updateUserType(type, userIds) {
-  return request({
+export async function updateUserType(type: EmployeeType, userIds: string[]) {
+  const users = (await request({
     method: "put",
     url: `/people/type/${type}`,
     data: { userIds },
+  })) as TUser[];
+
+  const res = users.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+      if ("createdBy" in user && user.createdBy?.displayName) {
+        user.createdBy = {
+          ...user.createdBy,
+          displayName: Encoder.htmlDecode(user.createdBy.displayName),
+        };
+      }
+    }
+
+    return user;
   });
+
+  return users;
 }
 
 export function linkOAuth(serializedProfile) {
@@ -384,14 +461,22 @@ export function sendInstructionsToChangeEmail(userId, email) {
   });
 }
 
-export function deleteUser(userId) {
-  return request({
+export async function deleteUser(userId: string) {
+  await request({
     method: "delete",
     url: `/people/${userId}`,
   });
 }
 
-export function deleteUsers(userIds) {
+export async function deleteGuests(userIds: string[]) {
+  return request({
+    method: "delete",
+    url: `/people/guests`,
+    data: { userIds },
+  });
+}
+
+export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",
     url: "/people/delete",
@@ -435,18 +520,16 @@ export async function getMembersList(
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `?${filter.toApiUrlParams(
-      "id,email,avatar,icon,displayName,hasAvatar,isOwner,isAdmin,isVisitor,isCollaborator,",
-    )}`;
+    params = `?${filter.toApiUrlParams()}`;
   }
 
-  const excludeShared = filter.excludeShared ? filter.excludeShared : false;
+  // const excludeShared = filter.excludeShared ? filter.excludeShared : false;
 
-  if (params) {
-    params += `&excludeShared=${excludeShared}`;
-  } else {
-    params = `excludeShared=${excludeShared}`;
-  }
+  // if (params) {
+  //   params += `&excludeShared=${excludeShared}`;
+  // } else {
+  //   params = `excludeShared=${excludeShared}`;
+  // }
 
   let url = "";
 
@@ -469,6 +552,12 @@ export async function getMembersList(
   res.items = res.items.map((member) => {
     if (member && "displayName" in member && member.displayName) {
       member.displayName = Encoder.htmlDecode(member.displayName);
+      if ("createdBy" in member && member.createdBy?.displayName) {
+        member.createdBy = {
+          ...member.createdBy,
+          displayName: Encoder.htmlDecode(member.createdBy.displayName),
+        };
+      }
     }
 
     if ("membersCount" in member) {
@@ -481,28 +570,32 @@ export async function getMembersList(
   return res;
 }
 
-export function setCustomUserQuota(userIds, quota) {
+export async function setCustomUserQuota(userIds: string[], quota: number) {
   const data = {
     userIds,
     quota,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/userquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }
-export function resetUserQuota(userIds) {
+export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/resetquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }

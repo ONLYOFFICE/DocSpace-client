@@ -44,7 +44,7 @@ const Block = ({
   return (
     <div className="virtual-data-room-block">
       <div className="virtual-data-room-block_header">
-        <Text fontWeight={600} fontSize="13px">
+        <Text noSelect fontWeight={600} fontSize="13px">
           {headerText}
         </Text>
         <ToggleButton
@@ -58,6 +58,7 @@ const Block = ({
         fontWeight={400}
         fontSize="12px"
         className="virtual-data-room-block_description"
+        noSelect
       >
         {bodyText}
       </Text>
@@ -86,7 +87,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   );
 
   const [watermarksChecked, setWatermarksChecked] = useState(
-    !!roomParams.watermark && isEdit,
+    !!roomParams.watermark,
   );
 
   const onChangeAddWatermarksToDocuments = () => {

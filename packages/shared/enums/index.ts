@@ -33,6 +33,7 @@ export const enum ScopeType {
 export const enum ScopeGroup {
   files = "files",
   accounts = "accounts",
+  contacts = "contacts",
   profiles = "profiles",
   rooms = "rooms",
   openid = "openid",
@@ -67,15 +68,11 @@ export const enum EmployeeStatus {
  * @readonly
  */
 export const enum EmployeeType {
-  User = 1,
+  RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
-  Collaborator = 4,
-  UserString = "user",
-  RoomAdmin = "manager",
-  PortalAdmin = "admin",
-  Owner = "Owner",
-  CollaboratorString = "collaborator",
+  User = 4,
+  Owner = "owner",
 }
 /**
  * Enum for user payments type.
@@ -442,6 +439,12 @@ export const enum FilterGroups {
   filterGroup = "filter-group",
   groupsFilterMember = "filter-group-member",
   groupsFilterManager = "filter-group-manager",
+
+  filterLoginType = "filter-login-type",
+  filterStatus = "filter-status",
+  filterAccount = "filter-account",
+  filterOther = "filter-other",
+  filterInviter = "filter-inviter",
 }
 
 export const enum FilterKeys {

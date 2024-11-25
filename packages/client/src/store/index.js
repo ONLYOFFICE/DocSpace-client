@@ -28,7 +28,6 @@ import {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -65,7 +64,7 @@ import ContextOptionsStore from "./ContextOptionsStore";
 import HotkeyStore from "./HotkeyStore";
 
 import TagsStore from "./TagsStore";
-import PeopleStore from "./PeopleStore";
+import PeopleStore from "./contacts/PeopleStore";
 import OformsStore from "./OformsStore";
 
 import AccessRightsStore from "./AccessRightsStore";
@@ -81,7 +80,7 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 import IndexingStore from "./IndexingStore";
-import EditGroupStore from "./EditGroupStore";
+import EditGroupStore from "./contacts/EditGroupStore";
 
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
@@ -185,17 +184,31 @@ const dialogsStore = new DialogsStore(
   infoPanelStore,
 );
 
-const peopleStore = new PeopleStore(
+const profileActionsStore = new ProfileActionsStore(
   authStore,
-  setupStore,
+  filesStore,
+  peopleStore,
+  treeFoldersStore,
+  selectedFolderStore,
+  pluginStore,
+  userStore,
+  settingsStore,
+  currentTariffStatusStore,
+);
+
+const peopleStore = new PeopleStore(
   accessRightsStore,
-  dialogsStore,
   infoPanelStore,
   userStore,
   tfaStore,
   settingsStore,
   clientLoadingStore,
+  profileActionsStore,
+  dialogsStore,
+  currentQuotaStore,
 );
+
+profileActionsStore.peopleStore = peopleStore;
 
 const uploadDataStore = new UploadDataStore(
   settingsStore,
@@ -261,20 +274,6 @@ const hotkeyStore = new HotkeyStore(
   selectedFolderStore,
 );
 
-const profileActionsStore = new ProfileActionsStore(
-  authStore,
-  filesStore,
-  peopleStore,
-  treeFoldersStore,
-  selectedFolderStore,
-  pluginStore,
-  userStore,
-  settingsStore,
-  currentTariffStatusStore,
-);
-
-peopleStore.profileActionsStore = profileActionsStore;
-
 const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
@@ -282,6 +281,7 @@ const tableStore = new TableStore(
   settingsStore,
   indexingStore,
   selectedFolderStore,
+  peopleStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -312,7 +312,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore();
+const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -329,7 +329,6 @@ const store = {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,

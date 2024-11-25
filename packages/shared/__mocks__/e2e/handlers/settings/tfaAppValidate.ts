@@ -30,17 +30,6 @@ export const PATH = "settings/tfaapp/validate";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-export const tfaAppNotValidateError = {
-  error: {
-    message: "Incorrect code",
-    type: "System.ArgumentException",
-    stack: "",
-    hresult: -2147024809,
-  },
-  status: 1,
-  statusCode: 400,
-};
-
 export const tfaAppValidateSuccess = {
   response: true,
   count: 1,
@@ -54,8 +43,20 @@ export const tfaAppValidateSuccess = {
   statusCode: 200,
 };
 
-export const tfaAppValidate = (isValidate: boolean = true): Response => {
-  if (!isValidate) return new Response(JSON.stringify(tfaAppNotValidateError));
+export const tfaAppNotValidateError = {
+  error: {
+    message: "Incorrect code",
+    type: "System.ArgumentException",
+    stack: "",
+    hresult: -2147024809,
+  },
+  status: 1,
+  statusCode: 400,
+};
+
+export const tfaAppValidate = (errorSatus: 400 | null = null): Response => {
+  if (errorSatus === 400)
+    return new Response(JSON.stringify(tfaAppNotValidateError));
 
   return new Response(JSON.stringify(tfaAppValidateSuccess));
 };

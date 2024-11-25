@@ -69,6 +69,7 @@ import {
   confirmHandler,
   tfaAppHandler,
   scopesHandler,
+  companyInfoHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -92,9 +93,13 @@ export async function getSettings() {
     "GET",
   );
 
+  console.log("start requests settings");
+
   const settingsRes = IS_TEST
     ? settingsHandler(headers())
     : await fetch(getSettings);
+
+  console.log("end request settings", settingsRes);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -124,6 +129,8 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
+  console.log("start requests color theme");
+
   const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -131,6 +138,8 @@ export async function getColorTheme() {
   );
 
   const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
+
+  console.log("end requests color theme", res);
 
   if (!res.ok) return;
 
@@ -266,9 +275,11 @@ export async function getCompanyInfoSettings() {
     "GET",
   );
 
-  const res = await fetch(getCompanyInfoSettings);
+  const res = IS_TEST
+    ? companyInfoHandler()
+    : await fetch(getCompanyInfoSettings);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) return;
 
   const passwordSettings = await res.json();
 
@@ -304,14 +315,16 @@ export async function getUserFromConfirm(
     "GET",
   );
 
-  const res = await fetch(getUserFromConfirm);
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserFromConfirm);
 
   if (!res.ok) return;
 
   const user = await res.json();
 
-  if (user && user.displayName) {
-    user.displayName = Encoder.htmlDecode(user.displayName);
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
   }
 
   return user.response as TUser;

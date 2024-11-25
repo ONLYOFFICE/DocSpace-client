@@ -35,6 +35,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isSafari } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
@@ -52,11 +53,13 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
+import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -102,6 +105,7 @@ const LoginForm = ({
   const referenceUrl = searchParams.get("referenceUrl");
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -164,11 +168,23 @@ const LoginForm = ({
           return window.location.replace(response.confirmUrl);
         }
 
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
+          sessionStorage.removeItem("referenceUrl");
+        }
 
         if (redirectPath) {
-          sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
         } else {
           window.location.replace("/");
@@ -180,7 +196,7 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl, currentCulture],
+    [t, referenceUrl, currentCulture, isPublicAuth],
   );
 
   useEffect(() => {
@@ -295,15 +311,20 @@ const LoginForm = ({
               ? portals[0].portalName
               : `${portals[0].portalName}.${baseDomain}`;
 
-          const redirectUrl = getCookie(
-            "x-redirect-authorization-uri",
-          )?.replace(window.location.origin, name);
+          let redirectUrl = getCookie("x-redirect-authorization-uri");
+          let portalLink = portals[0].portalLink;
+
+          const isLocalhost = name === "http://localhost";
+
+          if (!isLocalhost && redirectUrl)
+            redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+          if (isLocalhost)
+            portalLink = portalLink.replace(name, window.location.origin);
+
           // deleteCookie("x-redirect-authorization-uri");
 
-          window.open(
-            `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
-            "_self",
-          );
+          window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
 
           return;
         }
@@ -312,10 +333,13 @@ const LoginForm = ({
 
         const portalsString = JSON.stringify({ portals });
 
-        searchParams.set("portals", portalsString);
+        // searchParams.set("portals", portalsString);
         searchParams.set("clientId", client.clientId);
 
+        sessionStorage.setItem("tenant-list", portalsString);
+
         router.push(`/tenant-list?${searchParams.toString()}`);
+
         setIsLoading(false);
         return;
       } catch (error) {
@@ -323,8 +347,8 @@ const LoginForm = ({
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
-            (error as { response: { data: { error: { message: string } } } })
-              ?.response?.data?.error?.message ||
+            (error as { response: { data: { message: string } } })?.response
+              ?.data?.message ||
             (error as { statusText: string })?.statusText ||
             (error as { message: string })?.message ||
             "";
@@ -369,12 +393,26 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object | undefined) => {
+      .then(async (res: string | object | undefined) => {
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
-        const redirectPath =
-          referenceUrl || sessionStorage.getItem("referenceUrl");
-        if (redirectPath && !isConfirm) {
+
+        const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+        const redirectPathStorage = loggedOutUserId
+          ? null
+          : sessionStorage.getItem("referenceUrl");
+
+        const redirectPath = referenceUrl || redirectPathStorage;
+
+        if (redirectPathStorage) {
           sessionStorage.removeItem("referenceUrl");
+        }
+
+        if (redirectPath && !isConfirm) {
           window.location.href = redirectPath;
           return;
         }
@@ -423,11 +461,12 @@ const LoginForm = ({
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,
+    linkData,
     router,
     clientId,
     referenceUrl,
     baseDomain,
-    linkData,
+    isPublicAuth,
   ]);
 
   const onBlurEmail = () => {
@@ -481,6 +520,13 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  const handleAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+    if (!isSafari) return;
+    if (e.animationName === "autofill") {
+      onSubmit();
+    }
+  };
+
   const passwordErrorMessage = errorMessage();
 
   if (authError && ready) {
@@ -515,6 +561,7 @@ const LoginForm = ({
         onValidateEmail={onValidateEmail}
         isLdapLogin={isLdapLoginChecked}
         ldapDomain={ldapDomain}
+        handleAnimationStart={handleAnimationStart}
       />
       <PasswordContainer
         isLoading={isLoading}

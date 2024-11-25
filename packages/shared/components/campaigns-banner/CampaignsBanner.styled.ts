@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import styled from "styled-components";
+import { globalColors } from "../../themes";
 import { tablet, mobile } from "../../utils/device";
+import { injectDefaultTheme } from "../../utils";
 
-const BannerWrapper = styled.div<{
+const BannerWrapper = styled.div.attrs(injectDefaultTheme)<{
   background?: string;
   borderColor?: string;
 }>`
@@ -71,8 +72,6 @@ const BannerWrapper = styled.div<{
     }
   }
 `;
-
-BannerWrapper.defaultProps = { theme: Base };
 
 const BannerContent = styled.div`
   padding: 16px 14px;

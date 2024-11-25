@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
@@ -37,6 +37,7 @@ import {
   mobile,
   tablet,
   classNames,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
@@ -44,7 +45,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
@@ -86,6 +87,12 @@ const StyledWrapper = styled.div`
         props.isIndexEditingMode
           ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
           : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+
+      &:hover {
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
       ${marginStyles}
     `}
 
@@ -141,7 +148,7 @@ const StyledWrapper = styled.div`
     `}
 `;
 
-const StyledSimpleFilesRow = styled(Row)`
+const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
   height: 56px;
 
   position: unset;
@@ -320,8 +327,6 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 `;
 
-StyledSimpleFilesRow.defaultProps = { theme: Base };
-
 const SimpleFilesRow = (props) => {
   const {
     t,
@@ -361,6 +366,9 @@ const SimpleFilesRow = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexUpdated,
+    isFolder,
+    icon,
+    isDownload,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -471,7 +479,11 @@ const SimpleFilesRow = (props) => {
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
           isActive={isActive}
-          inProgress={inProgress}
+          inProgress={
+            inProgress && isFolder
+              ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
+              : inProgress
+          }
           isThirdPartyFolder={item.isThirdPartyFolder}
           className="files-row"
           withAccess={withAccess}
@@ -486,6 +498,7 @@ const SimpleFilesRow = (props) => {
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}
+          isFolder={isFolder}
         >
           <FilesRowContent
             item={item}

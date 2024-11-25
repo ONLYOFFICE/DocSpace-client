@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled from "styled-components";
 
-import { Base, TColorScheme } from "../../../themes";
+import { TColorScheme } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledIndexWrapper = styled.div<{
+const StyledIndexWrapper = styled.div.attrs(injectDefaultTheme)<{
   $currentColorScheme: TColorScheme | undefined;
 }>`
   width: 24px;
@@ -45,29 +46,29 @@ const StyledIndexWrapper = styled.div<{
     transform: rotate(90deg);
   }
 
-  &:hover {
-    cursor: pointer;
-    background: ${(props) =>
-      props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
-
-    svg {
+  @media (hover: hover) {
+    &:hover {
       cursor: pointer;
+      background: ${(props) =>
+        props.theme.filesSection.tableView.row.indexBackgroundButtonHover};
 
-      path {
-        fill: ${(props) =>
-          props.theme.filesSection.tableView.row
-            .indexArrowButtonHover} !important;
-      }
+      svg {
+        cursor: pointer;
 
-      circle {
-        stroke: ${(props) =>
-          props.theme.filesSection.tableView.row
-            .indexArrowButtonHover} !important;
+        path {
+          fill: ${(props) =>
+            props.theme.filesSection.tableView.row
+              .indexArrowButtonHover} !important;
+        }
+
+        circle {
+          stroke: ${(props) =>
+            props.theme.filesSection.tableView.row
+              .indexArrowButtonHover} !important;
+        }
       }
     }
   }
 `;
-
-StyledIndexWrapper.defaultProps = { theme: Base };
 
 export default StyledIndexWrapper;

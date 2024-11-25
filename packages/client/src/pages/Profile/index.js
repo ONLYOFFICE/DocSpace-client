@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -35,7 +34,7 @@ import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
-import Dialogs from "SRC_DIR/pages/Home/Section/AccountsBody/Dialogs";
+import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
@@ -198,12 +197,8 @@ const ComponentPure = inject(
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));
 
 export const Component = () => {
-  const location = useLocation();
-
-  const fileManagement = location.pathname.includes("file-management");
-
   return (
-    <PrivateRoute withCollaborator={fileManagement} restricted={fileManagement}>
+    <PrivateRoute>
       <ComponentPure />
     </PrivateRoute>
   );

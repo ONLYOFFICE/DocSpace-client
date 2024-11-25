@@ -30,6 +30,7 @@ import { observer, inject } from "mobx-react";
 
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
+import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
@@ -87,9 +88,7 @@ const SectionBodyContent = (props) => {
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
-    parentRoomType,
-    roomType,
-    indexing,
+    isErrorRoomNotAvailable,
   } = props;
 
   useEffect(() => {
@@ -104,7 +103,9 @@ const SectionBodyContent = (props) => {
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
       customScrollElm && customScrollElm.scrollTo(0, 0);
     }
+  }, [currentDeviceType]);
 
+  useEffect(() => {
     window.addEventListener("beforeunload", onBeforeunload);
     window.addEventListener("mousedown", onMouseDown);
     startDrag && window.addEventListener("mouseup", onMouseUp);
@@ -302,12 +303,11 @@ const SectionBodyContent = (props) => {
     clearEdgeScrollingTimer();
     setStartDrag(false);
 
-    droppableSeparator && droppableSeparator.remove();
-
     setTimeout(() => {
       isDragActive = false;
       setDragging(false);
       document.body.classList.remove("drag-cursor");
+      droppableSeparator && droppableSeparator.remove();
     }, 0);
 
     const treeElem = e.target.closest(".tree-drag");
@@ -391,6 +391,8 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
+
   if (isEmptyFilesList && movingInProgress) return <></>;
 
   if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
@@ -429,9 +431,8 @@ export default inject(
       filesList,
       isEmptyPage,
       movingInProgress,
+      isErrorRoomNotAvailable,
     } = filesStore;
-
-    const { parentRoomType, roomType, indexing, order } = selectedFolderStore;
 
     return {
       dragging,
@@ -461,9 +462,7 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
-      parentRoomType,
-      roomType,
-      indexing: indexing || Boolean(order),
+      isErrorRoomNotAvailable,
     };
   },
 )(

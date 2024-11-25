@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve Kullanıcı türüne atanacaktır. Kullanıcıların kendi «{{documentsSection}} » bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
+  "ChangeGuestsTypeMessageMulti": "Seçilen konuklar {{membersSection}} bölümüne taşınacak ve Kullanıcı türü atanacaktır. Kullanıcıların kendi {{documentsSection}} bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
   "ChangeUserTypeButton": "Türü değiştir",
   "ChangeUserTypeHeader": "Kullanıcı türünü değiştir",
-  "ChangeUserTypeMessage": "'{{ firstType }}' türündeki kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
-  "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
+  "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> türündeki kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
+  "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
   "ChangeUserTypeMessageWarning": "{{productName}} yöneticileri ve kendiniz için türü değiştiremezsiniz.",
+  "SuccessChangeGuestType": "Konuk türü başarıyla değiştirildi",
   "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi"
 }

@@ -1,10 +1,10 @@
 {
   "Desc": "{{productName}}登録データの設定をお願いします。",
   "ErrorEmail": "無効なEメールアドレス",
+  "ErrorInstanceId": "無効なインスタンスID",
   "ErrorLicenseBody": "ライセンスが有効ではありません。正しいファイルを選択してください。",
   "ErrorPassword": "パスワードが要件を満たしていない",
   "ErrorUploadLicenseFile": "ライセンスファイルの選択",
-  "GeneratePassword": "パスワードの生成",
   "License": "の条件を受け入れます ",
   "LicenseLink": "ライセンス契約",
   "PlaceholderLicense": "ライセンスファイル",

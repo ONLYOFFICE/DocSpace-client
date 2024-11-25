@@ -27,13 +27,16 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
-import { toastr } from "@docspace/shared/components/toast";
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
 
-import QuickButtons from "../components/QuickButtons";
+import { toastr } from "@docspace/shared/components/toast";
+import {
+  copyDocumentShareLink,
+  copyRoomShareLink,
+} from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+
+import QuickButtons from "../components/QuickButtons";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -100,11 +103,17 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink } = this.props;
+      const { t, item, getPrimaryLink, getManageLinkOptions } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkSuccessfullyCopied"));
+        copyRoomShareLink(
+          primaryLink,
+          t,
+          true,
+          getManageLinkOptions(item, true),
+        );
+        // copyShareLink(primaryLink.sharedTo.shareLink);
+        // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -158,6 +167,7 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         currentDeviceType,
         roomLifetime,
+        currentColorScheme,
       } = this.props;
 
       const showLifetimeIcon =
@@ -187,6 +197,8 @@ export default function withQuickButtons(WrappedComponent) {
           currentDeviceType={currentDeviceType}
           showLifetimeIcon={showLifetimeIcon}
           expiredDate={expiredDate}
+          roomLifetime={roomLifetime}
+          currentColorScheme={currentColorScheme}
         />
       );
 
@@ -211,11 +223,12 @@ export default function withQuickButtons(WrappedComponent) {
       infoPanelStore,
       indexingStore,
       contextOptionsStore,
+      selectedFolderStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
       const {
-        isPersonalFolderRoot,
+        isDocumentsFolder,
         isArchiveFolderRoot,
         isTrashFolder,
         isPersonalRoom,
@@ -227,7 +240,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
-        isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
+        isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
 
       const { isPublicRoom } = publicRoomStore;
       const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
@@ -252,8 +265,9 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
-        roomLifetime: infoPanelRoom?.lifetime,
+        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
+        currentColorScheme: settingsStore.currentColorScheme,
       };
     },
   )(observer(WithQuickButtons));

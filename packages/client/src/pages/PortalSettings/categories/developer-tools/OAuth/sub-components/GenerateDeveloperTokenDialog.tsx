@@ -4,7 +4,6 @@ import { useTheme } from "styled-components";
 import { i18n } from "i18next";
 import { useTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
-import moment from "moment-timezone";
 
 import api from "@docspace/shared/api";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
@@ -20,10 +19,11 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Link } from "@docspace/shared/components/link";
+import { getCorrectDate } from "@docspace/shared/utils";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
 
 type GenerateDeveloperTokenDialogProps = {
@@ -35,10 +35,7 @@ type GenerateDeveloperTokenDialogProps = {
 };
 
 const getDate = (date: Date, i18nArg: i18n) => {
-  return moment(date)
-    .locale(i18nArg.language)
-    .tz(window.timezone)
-    .format("MMM D, YYYY, h:mm:ss A");
+  return getCorrectDate(i18nArg.language, date);
 };
 
 const GenerateDeveloperTokenDialog = ({
@@ -62,10 +59,10 @@ const GenerateDeveloperTokenDialog = ({
   });
   const [requestRunning, setRequestRunning] = React.useState(false);
 
-  const onCopyClick = async () => {
+  const onCopyClick = React.useCallback(async () => {
     copy(token);
     toastr.success(t("DeveloperTokenCopied"));
-  };
+  }, [t, token]);
 
   const onClose = async () => {
     if (requestRunning) return;
@@ -92,6 +89,10 @@ const GenerateDeveloperTokenDialog = ({
 
     onClose();
   };
+
+  React.useEffect(() => {
+    if (token) onCopyClick();
+  }, [token, onCopyClick]);
 
   const onGenerate = async () => {
     if (!client || requestRunning) return;
@@ -126,12 +127,10 @@ const GenerateDeveloperTokenDialog = ({
 
       if (accessToken) {
         setToken(accessToken);
-        copy(accessToken);
         setDates({
           created: getDate(created, i18nParam),
           expires: getDate(expires, i18nParam),
         });
-        toastr.success(t("DeveloperTokenCopied"));
       }
     } catch (e) {
       toastr.error(e as TData);
@@ -158,7 +157,7 @@ const GenerateDeveloperTokenDialog = ({
               </Text>
               <Text style={{ marginBottom: "16px" }} noSelect>
                 {t("OAuth:GenerateTokenScope")}
-              </Text>
+              </Text>{" "}
               <Text noSelect>
                 <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
               </Text>
@@ -185,6 +184,9 @@ const GenerateDeveloperTokenDialog = ({
                   {`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
                 </Trans>
               </Text>
+              <Text style={{ marginBottom: "16px" }} noSelect>
+                <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
+              </Text>
               <InputBlock
                 value={token}
                 scale
@@ -208,7 +210,7 @@ const GenerateDeveloperTokenDialog = ({
         <Button
           label={
             token
-              ? `${t("Common:Copy")} & ${t("Common:CancelButton")}`
+              ? `${t("Common:Copy")} & ${t("Common:CloseButton")}`
               : t("Webhooks:Generate")
           }
           primary
@@ -234,7 +236,7 @@ export default inject(
     oauthStore,
     userStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
     const { setGenerateDeveloperTokenDialogVisible, bufferSelection } =

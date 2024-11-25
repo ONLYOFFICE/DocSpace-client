@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
+import { useLocation, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-
 import Section from "@docspace/shared/components/section";
+
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import {
   SectionFilterContent,
@@ -43,21 +44,21 @@ import {
   SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
-import AccountsDialogs from "./Section/AccountsBody/Dialogs";
+import AccountsDialogs from "./Section/ContactsBody/Dialogs";
+
+import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
+import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
+
+import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
-import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
-import AccountsSelectionArea from "./SelectionArea/AccountsSelectionArea";
-import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
 
 import {
   useFiles,
   useSDK,
   useOperations,
-  useAccounts,
+  useContacts,
   useSettings,
-  useGroups,
-  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -66,7 +67,9 @@ const PureHome = (props) => {
     fetchRooms,
 
     //homepage,
-    setIsLoading,
+    setIsSectionHeaderLoading,
+    setIsSectionBodyLoading,
+    setIsSectionFilterLoading,
     isLoading,
 
     setToPreviewFile,
@@ -97,7 +100,6 @@ const PureHome = (props) => {
     refreshFiles,
 
     setFrameConfig,
-    user,
     folders,
     files,
     selection,
@@ -132,15 +134,12 @@ const PureHome = (props) => {
     showTitle,
     showFilter,
     frameConfig,
-    withPaging,
     isEmptyPage,
 
-    setPortalTariff,
-
-    accountsViewAs,
-    fetchPeople,
-    fetchGroups,
-    fetchGroup,
+    contactsViewAs,
+    getUsersList,
+    getGroups,
+    updateCurrentGroup,
     setSelectedNode,
     onClickBack,
 
@@ -159,30 +158,42 @@ const PureHome = (props) => {
     setSelectedFolder,
     userId,
     getFolderModel,
+    getContactsModel,
     scrollToTop,
     isEmptyGroups,
-    isCurrentGroupEmpty,
     wsCreatedPDFForm,
     disableUploadPanelOpen,
+    setContactsTab,
+    isUsersEmptyView,
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   } = props;
 
   //console.log(t("ComingSoon"))
 
   const location = useLocation();
-  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
-  const isAccountsPage = location.pathname.includes("/accounts");
-  const isPeopleAccounts = location.pathname.includes("accounts/people");
-  const isGroupsAccounts =
-    location.pathname.includes("accounts/groups") && !groupId;
-  const isInsideGroup =
-    location.pathname.includes("accounts/groups") && groupId;
-  const isAccountsEmptyFilter =
-    (isGroupsAccounts && isEmptyGroups) ||
-    (isInsideGroup && isCurrentGroupEmpty);
+
+  const contactsView = getContactsView(location);
+  const isContactsPage = !!contactsView;
+  const isContactsEmptyView =
+    contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
+
+  const setIsLoading = React.useCallback(
+    (param, withoutTimer, withHeaderLoader) => {
+      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      setIsSectionFilterLoading(param, !withoutTimer);
+      setIsSectionBodyLoading(param, !withoutTimer);
+    },
+    [
+      setIsSectionHeaderLoading,
+      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
+    ],
+  );
 
   const { onDrop } = useFiles({
     t,
@@ -195,7 +206,7 @@ const PureHome = (props) => {
     fetchRooms,
     setIsLoading,
 
-    isAccountsPage,
+    isContactsPage,
     isSettingsPage,
 
     location,
@@ -233,44 +244,22 @@ const PureHome = (props) => {
     setItemsSelectionTitle,
   });
 
-  useAccounts({
-    t,
-    isAccountsPage,
-    isPeopleAccounts,
-    location,
+  useContacts({
+    isContactsPage,
+    contactsView,
+
+    setContactsTab,
 
     setIsLoading,
-
+    scrollToTop,
     setSelectedNode,
-    fetchPeople,
-    setPortalTariff,
 
-    scrollToTop,
-  });
+    getUsersList,
+    getGroups,
+    updateCurrentGroup,
 
-  useGroups({
-    t,
-    isAccountsPage,
-    isGroupsAccounts,
-    location,
-
-    setIsLoading,
-
-    setSelectedNode,
-    fetchGroups,
-
-    scrollToTop,
-  });
-
-  useInsideGroup({
-    t,
-    groupId,
-    location,
-    setIsLoading,
-    setPortalTariff,
-    fetchGroup,
-
-    scrollToTop,
+    showGuestReleaseTip,
+    setGuestReleaseTipDialogVisible,
   });
 
   useSettings({
@@ -288,7 +277,7 @@ const PureHome = (props) => {
     files,
     filesList,
     selection,
-    user,
+    userId,
     createFile,
     createFolder,
     createRoom,
@@ -308,6 +297,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
+    if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   };
 
@@ -327,16 +317,15 @@ const PureHome = (props) => {
     sectionProps.viewAs = "settings";
   } else {
     sectionProps = {
-      withPaging,
       withBodyScroll: true,
       withBodyAutoFocus: !isMobile,
       firstLoad,
       isLoaded: !firstLoad,
-      viewAs: accountsViewAs,
-      isAccounts: isAccountsPage,
+      viewAs: contactsViewAs,
+      isAccounts: isContactsPage,
     };
 
-    if (!isAccountsPage) {
+    if (!isContactsPage) {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = true;
       sectionProps.onDrop =
@@ -350,7 +339,7 @@ const PureHome = (props) => {
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
     } else {
-      sectionProps.isAccounts = isAccountsPage;
+      sectionProps.isAccounts = isContactsPage;
     }
   }
 
@@ -370,10 +359,10 @@ const PureHome = (props) => {
     <>
       {isSettingsPage ? (
         <></>
-      ) : isAccountsPage ? (
+      ) : isContactsPage ? (
         <>
           <AccountsDialogs />
-          <AccountsSelectionArea />
+          <ContactsSelectionArea />
         </>
       ) : (
         <>
@@ -383,7 +372,7 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
+        {(!isErrorRoomNotAvailable || isContactsPage || isSettingsPage) && (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -399,10 +388,8 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) &&
-          !isAccountsEmptyFilter &&
-          !isErrorRoomNotAvailable) ||
-          (!isAccountsEmptyFilter && isAccountsPage)) &&
+        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
+          (!isContactsEmptyView && isContactsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -413,7 +400,7 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody isAccounts={isAccountsPage}>
+        <Section.SectionBody isAccounts={isContactsPage}>
           <>
             <Outlet />
           </>
@@ -426,11 +413,11 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
 
-        {withPaging && !isSettingsPage && (
+        {/* {withPaging && !isSettingsPage && (
           <Section.SectionPaging>
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
-        )}
+        )} */}
       </SectionWrapper>
     </>
   );
@@ -452,10 +439,10 @@ export const Component = inject(
     selectedFolderStore,
     clientLoadingStore,
     userStore,
-    currentTariffStatusStore,
     settingsStore,
     contextOptionsStore,
     indexingStore,
+    dialogsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -475,11 +462,7 @@ export const Component = inject(
 
     const { getFolderModel } = contextOptionsStore;
 
-    const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
-      setIsSectionFilterLoading(param, !withoutTimer);
-      setIsSectionBodyLoading(param, !withoutTimer);
-    };
+    const { getContactsModel } = peopleStore.contextOptionsStore;
 
     const {
       fetchFiles,
@@ -513,8 +496,6 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
     } = filesStore;
-
-    const { updateProfileCulture } = peopleStore.targetUserStore;
 
     const { createTag } = tagsStore;
 
@@ -562,28 +543,28 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { setPortalTariff } = currentTariffStatusStore;
-
     const {
       setFrameConfig,
       frameConfig,
       isFrame,
-      withPaging,
       showCatalog,
       enablePlugins,
       getSettings,
+      showGuestReleaseTip,
     } = settingsStore;
 
-    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
-
-    const { getUsersList: fetchPeople } = usersStore;
     const {
-      getGroups: fetchGroups,
-      fetchGroup,
-      groups,
-      groupsIsFiltered,
-      isCurrentGroupEmpty,
-    } = groupsStore;
+      usersStore,
+      groupsStore,
+      targetUserStore,
+      viewAs: contactsViewAs,
+    } = peopleStore;
+    const { updateProfileCulture } = targetUserStore;
+    const { getUsersList, setContactsTab, isUsersEmptyView, isFiltered } =
+      usersStore;
+    const { getGroups, updateCurrentGroup, groups, groupsIsFiltered } =
+      groupsStore;
+
     const isEmptyGroups =
       !groupsIsFiltered &&
       ((groups && groups.length === 0) || !Boolean(groups));
@@ -641,7 +622,9 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsLoading,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
       isLoading,
       fetchFiles,
       fetchRooms,
@@ -663,7 +646,6 @@ export const Component = inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: userStore.user,
       folders,
       files,
       selection,
@@ -674,15 +656,8 @@ export const Component = inject(
       createRoom,
       refreshFiles,
       setViewAs,
-      withPaging,
       isEmptyPage,
 
-      setPortalTariff,
-
-      accountsViewAs,
-      fetchPeople,
-      fetchGroups,
-      fetchGroup,
       setSelectedNode,
       onClickBack,
 
@@ -696,14 +671,25 @@ export const Component = inject(
       addTagsToRoom,
       removeTagsFromRoom,
       loadCurrentUser: userStore.loadCurrentUser,
-      updateProfileCulture,
       getRooms,
       setSelectedFolder,
       getFolderModel,
+      getContactsModel,
       scrollToTop,
-      isEmptyGroups,
-      isCurrentGroupEmpty,
       wsCreatedPDFForm,
+
+      // contacts store
+      setContactsTab,
+      contactsViewAs,
+      getUsersList,
+      getGroups,
+      updateCurrentGroup,
+      isEmptyGroups,
+      updateProfileCulture,
+      isUsersEmptyView: isUsersEmptyView && !isFiltered,
+      showGuestReleaseTip,
+      setGuestReleaseTipDialogVisible:
+        dialogsStore.setGuestReleaseTipDialogVisible,
     };
   },
 )(observer(Home));

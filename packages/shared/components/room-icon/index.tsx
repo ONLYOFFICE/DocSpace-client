@@ -39,7 +39,7 @@ import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
 import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
-import { classNames } from "../../utils";
+import { classNames, getTextColor } from "../../utils";
 
 import { getRoomTitle } from "./RoomIcon.utils";
 import { StyledIcon, EditWrapper } from "./RoomIcon.styled";
@@ -154,12 +154,16 @@ const RoomIcon = ({
     prefetchImage();
   }, [prefetchImage]);
 
+  const isBigSize = size === "96px";
+
   const coverSize = size.replace("px", "") * 0.625;
+  const textColor = color && getTextColor(`#${color}`, 202);
 
   return (
     <StyledIcon
       ref={iconRef}
       color={color}
+      textColor={textColor}
       size={size}
       radius={radius}
       isArchive={isArchive}
@@ -218,12 +222,12 @@ const RoomIcon = ({
         </div>
       )}
 
-      {badgeUrl && (
+      {badgeUrl && !withEditing && (
         <div className="room-icon_badge">
           <IconButton
             onClick={onBadgeClick}
             iconName={badgeUrl}
-            size={12}
+            size={isBigSize ? 28 : 12}
             className="room-icon-button"
             isFill
           />

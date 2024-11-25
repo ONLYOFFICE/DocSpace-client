@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
+import { TColorScheme, TTheme } from "../../themes";
 
 const BounceAnimation = keyframes`
 0% { margin-bottom: 0; display: none; }
@@ -39,7 +40,11 @@ const DotWrapper = styled.div`
   align-items: flex-end;
 `;
 
-const Dot = styled.div<{ color?: string; size: number; delay: string }>`
+const Dot = styled.div.attrs(injectDefaultTheme)<{
+  color?: string;
+  size: number;
+  delay: string;
+}>`
   background-color: ${(props) =>
     props.color ? props.color : props.theme.loader.color};
   border-radius: ${(props) => props.theme.loader.borderRadius};
@@ -52,8 +57,6 @@ const Dot = styled.div<{ color?: string; size: number; delay: string }>`
   animation-delay: ${(props) => props.delay};
 `;
 
-Dot.defaultProps = { theme: Base };
-
 const LoadingWrapper = styled.div<{ color?: string; size: string }>`
   display: flex;
   align-items: baseline;
@@ -63,28 +66,28 @@ const LoadingWrapper = styled.div<{ color?: string; size: string }>`
   font-size: ${(props) => props.size};
 `;
 
-const LoadingLabel = styled.span`
+const LoadingLabel = styled.span.attrs(injectDefaultTheme)`
   margin-inline-end: ${(props) => props.theme.loader.marginRight};
 `;
-LoadingLabel.defaultProps = { theme: Base };
 
-const StyledOval = styled.svg<{ size?: string }>`
+const StyledOval = styled.svg.attrs(injectDefaultTheme)<{ size?: string }>`
   width: ${(props) => (props.size ? props.size : props.theme.loader.size)};
 
   height: ${(props) => (props.size ? props.size : props.theme.loader.size)};
   stroke: ${(props) => (props.color ? props.color : props.theme.loader.color)};
 `;
-StyledOval.defaultProps = { theme: Base };
 
-const StyledDualRing = styled.svg<{ size?: string; color?: string }>`
+const StyledDualRing = styled.svg.attrs(injectDefaultTheme)<{
+  size?: string;
+  color?: string;
+}>`
   width: ${(props) => (props.size ? props.size : props.theme.loader.size)};
 
   height: ${(props) => (props.size ? props.size : props.theme.loader.size)};
   stroke: ${(props) => (props.color ? props.color : props.theme.loader.color)};
 `;
-StyledDualRing.defaultProps = { theme: Base };
 
-const StyledTrack = styled.svg<{
+const StyledTrack = styled.svg.attrs(injectDefaultTheme)<{
   size?: string;
   color?: string;
   primary?: boolean;
@@ -97,7 +100,27 @@ const StyledTrack = styled.svg<{
     color ||
     (primary ? theme.button.loader.primary : theme.button.loader.base)};
 `;
-StyledTrack.defaultProps = { theme: Base };
+
+const getDefaultStyles = ({
+  primary,
+  $currentColorScheme,
+  theme,
+  isDisabled,
+}: {
+  primary?: boolean;
+  $currentColorScheme?: TColorScheme;
+  theme?: TTheme;
+  isDisabled?: boolean;
+}) =>
+  $currentColorScheme &&
+  !primary &&
+  theme?.isBase &&
+  css`
+    color: ${$currentColorScheme.main?.buttons};
+    opacity: ${isDisabled && "0.6"};
+  `;
+
+const StyledTrackTheme = styled(StyledTrack)(getDefaultStyles);
 
 export {
   LoadingLabel,
@@ -107,4 +130,5 @@ export {
   StyledOval,
   StyledDualRing,
   StyledTrack,
+  StyledTrackTheme,
 };

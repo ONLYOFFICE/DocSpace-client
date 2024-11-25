@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { OAuthContainer } from "./OAuth.styled";
@@ -43,6 +43,7 @@ const OAuth = ({
   deleteDialogVisible,
   generateDeveloperTokenDialogVisible,
   revokeDeveloperTokenDialogVisible,
+  apiOAuthLink,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -51,14 +52,18 @@ const OAuth = ({
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
+    if (startLoadingRef.current) return;
     const actions = [];
 
     if (!isInit) {
       actions.push(fetchScopes());
     }
+
     actions.push(fetchClients());
 
     await Promise.all(actions);
+
+    startLoadingRef.current = new Date();
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -88,9 +93,8 @@ const OAuth = ({
   React.useEffect(() => {
     if (startLoadingRef.current) return;
     setIsLoading(true);
-    startLoadingRef.current = new Date();
     getData();
-  }, [getData, setIsInit, isInit]);
+  }, [getData]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
@@ -101,12 +105,13 @@ const OAuth = ({
       {isLoading ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen />
+        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} />
       ) : (
         <List
           clients={clientList}
           viewAs={viewAs}
           currentDeviceType={currentDeviceType}
+          apiOAuthLink={apiOAuthLink}
         />
       )}
 
@@ -125,10 +130,10 @@ export default inject(
     oauthStore,
     settingsStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, apiOAuthLink } = settingsStore;
     const {
       isEmptyClientList,
       clientList,
@@ -168,6 +173,7 @@ export default inject(
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
+      apiOAuthLink,
     };
   },
 )(observer(OAuth));

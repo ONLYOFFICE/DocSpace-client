@@ -29,15 +29,17 @@ import {
   TSettings,
   TVersionBuild,
 } from "../api/settings/types";
-import { TUser } from "../api/people/types";
 import { RoomsType } from "../enums";
-import { TTheme } from "../themes";
+import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
+
+export type TSortOrder = "descending" | "ascending";
+export type TSortBy = "DateAndTime" | "Tags" | "AZ";
 
 export type TTranslation = (
   key: string,
@@ -78,13 +80,15 @@ export type TI18n = {
 };
 
 declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {}
+  export interface DefaultTheme extends TTheme {
+    currentColorScheme?: TColorScheme;
+  }
 }
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     __ASC_INITIAL_EDITOR_STATE__?: {
-      user: TUser;
+      user: unknown;
       portalSettings: TSettings;
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
@@ -100,6 +104,10 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
+      location: Location;
+    };
+    logs: {
+      socket: string[];
     };
     ClientConfig?: {
       pdfViewerUrl: string;
@@ -126,6 +134,10 @@ declare global {
       isFrame?: boolean;
       management: {
         checkDomain?: boolean;
+      };
+      logs: {
+        enableLogs: false;
+        logsToConsole: false;
       };
     };
     AscDesktopEditor: {

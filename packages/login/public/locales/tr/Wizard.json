@@ -1,10 +1,10 @@
 {
   "Desc": "Lütfen {{productName}} kayıt verilerini ayarlayın.",
   "ErrorEmail": "Geçersiz e-posta adresi",
+  "ErrorInstanceId": "Geçersiz örnek kimliği",
   "ErrorLicenseBody": "Lisans geçerli değil. Doğru dosyayı seçtiğinizden emin olun.",
   "ErrorPassword": "Şifre gereksinimleri karşılamıyor",
   "ErrorUploadLicenseFile": "Lisans dosyası seçin",
-  "GeneratePassword": "Şifre üret",
   "License": "Şartlarını kabul edin ",
   "LicenseLink": "Lisans anlaşması",
   "PlaceholderLicense": "Lisans dosyanız",

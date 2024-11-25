@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Permitir",
+  "ConsentDescription": "Os dados partilhados com <strong>{{displayName}}</strong> serão regidos por <strong>{{nameApp}}</strong> <6>privacy policy</6> e <6>terms of service</6>. Pode revogar este consentimento a qualquer momento nas definições da sua conta {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> gostaria de ter a capacidade de acessar os seguintes dados em <strong>your {{productName}} account</strong>:",
+  "DenyButton": "Negar",
+  "NotYou": "Tu não?",
+  "SignedInAs": "Entrou como",
+  "ToContinue": "Para continuar a"
+}

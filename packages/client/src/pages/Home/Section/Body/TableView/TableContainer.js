@@ -41,7 +41,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -56,7 +56,7 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}
@@ -70,8 +70,8 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
   .table-container_index-cell {
-    margin-right: 0;
-    padding-right: 0;
+    margin-inline-end: 0;
+    padding-inline-end: 0;
   }
 
   .table-row-selected + .table-row-selected {
@@ -123,8 +123,6 @@ const StyledTableContainer = styled(TableContainer)`
   }
 `;
 
-StyledTableContainer.defaultProps = { theme: Base };
-
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
   callOnAdd: false,
@@ -144,13 +142,14 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
-  withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
   onEditIndex,
   isIndexing,
+  icon,
+  isDownload,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -228,6 +227,8 @@ const Table = ({
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
+        icon={icon}
+        isDownload={isDownload}
       />
     ));
   }, [
@@ -243,11 +244,13 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
+    icon,
+    isDownload,
   ]);
 
   return (
     <StyledTableContainer
-      useReactWindow={!withPaging}
+      useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
     >
@@ -269,7 +272,7 @@ const Table = ({
         filesLength={filesList.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
-        useReactWindow={!withPaging}
+        useReactWindow
         infoPanelVisible={infoPanelVisible}
         isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -294,6 +297,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -301,6 +305,8 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
+
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const {
       filesList,
@@ -318,7 +324,7 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
-    const { withPaging, theme, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
 
     return {
       filesList,
@@ -336,12 +342,13 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
-      withPaging,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
+      icon,
+      isDownload,
     };
   },
 )(observer(Table));

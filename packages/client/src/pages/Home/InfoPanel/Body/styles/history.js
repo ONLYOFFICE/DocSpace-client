@@ -26,36 +26,40 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const strikethroughStyles = css`
+  color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+  text-decoration: line-through;
+`;
 
 const StyledHistoryList = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const StyledHistorySubtitle = styled.div`
+const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
   z-index: 99;
 
-  padding: 8px 0 12px;
+  padding: 16px 0 12px;
   font-weight: 600;
   font-size: 13px;
   line-height: 20px;
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
-const StyledHistoryBlock = styled.div`
+const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: flex;
   gap: 8px;
   padding: 8px 0;
 
   ${({ withBottomDivider, theme }) =>
-    withBottomDivider
-      ? ` border-bottom: solid 1px ${theme.infoPanel.borderColor}; `
-      : ` margin-bottom: 12px; `}
+    withBottomDivider &&
+    ` border-bottom: solid 1px ${theme.infoPanel.borderColor}; `}
 
   .avatar {
     min-width: 32px;
@@ -66,34 +70,64 @@ const StyledHistoryBlock = styled.div`
     overflow: hidden;
 
     .title {
+      font-size: 14px;
+      font-weight: 600;
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 4px;
+      word-break: break-all;
       .name {
         font-weight: 600;
         font-size: 14px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
       .date {
         white-space: nowrap;
         display: inline-block;
+        align-self: flex-start;
         margin-inline-start: auto;
         font-weight: 600;
         font-size: 12px;
         color: ${(props) => props.theme.infoPanel.history.dateColor};
       }
+
+      .users-counter {
+        margin-bottom: 1px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+    .without-break {
+      word-break: unset;
+    }
+
+    .action-title {
+      text-wrap: nowrap;
+      &-text {
+        font-size: 14px;
+        font-weight: 600;
+        text-wrap: wrap;
+      }
+
+      .text-combined {
+        text-wrap: nowrap;
+        padding-right: 4px;
+      }
     }
   }
 `;
 
-const StyledHistoryBlockMessage = styled.div`
-  font-weight: 400;
-  font-size: 13px;
+const StyledHistoryDisplaynameBlock = styled.div`
+  .name {
+    color: ${(props) => props.theme.infoPanel.history.subtitleColor};
+  }
+`;
+
+const StyledHistoryBlockMessage = styled.span.attrs(injectDefaultTheme)`
+  font-weight: 600;
+  font-size: 14px;
   line-height: 20px;
 
-  display: inline-flex;
   gap: 4px;
   max-width: 100%;
 
@@ -119,9 +153,7 @@ const StyledHistoryBlockMessage = styled.div`
   .source-folder-label {
     max-width: 100%;
     color: ${(props) => props.theme.infoPanel.history.locationIconColor};
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    text-wrap: wrap;
   }
 
   .source-folder-label {
@@ -139,12 +171,12 @@ const StyledHistoryLink = styled.div`
   width: fit-content;
   max-width: 100%;
   display: inline-flex;
-
-  white-space: normal;
-  margin: 1px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .text {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     display: inline-block;
   }
@@ -173,17 +205,15 @@ const StyledHistoryBlockTagList = styled.div`
   gap: 4px;
 `;
 
-const StyledHistoryBlockFilesList = styled.div`
-  margin-top: 8px;
+const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
   padding: 8px 0;
-  background: ${(props) => props.theme.infoPanel.history.fileBlockBg};
   border-radius: 3px;
 `;
 
-const StyledHistoryBlockFile = styled.div`
-  padding: 4px 16px;
+const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
+  padding: 4px 0px;
   display: flex;
   gap: 8px;
   flex-direction: row;
@@ -193,15 +223,44 @@ const StyledHistoryBlockFile = styled.div`
   .icon {
     width: 24px;
     height: 24px;
+    margin-inline-end: 5px;
     svg {
       width: 24px;
       height: 24px;
     }
   }
 
+  .item-wrapper,
+  .old-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid
+      ${(props) => props.theme.infoPanel.history.itemBorderColor};
+    border-radius: 6px;
+    padding: 6px 8px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${(props) =>
+        props.theme.infoPanel.history.fileBackgroundColor};
+    }
+  }
+
+  .old-item-wrapper {
+    border: none;
+    &:hover {
+      cursor: auto;
+      background-color: transparent;
+    }
+  }
+
   .item-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     min-width: 0;
     gap: 0;
@@ -217,21 +276,50 @@ const StyledHistoryBlockFile = styled.div`
       color: ${(props) => props.theme.infoPanel.history.fileExstColor};
     }
 
-    &.old-item-title {
+    &.old-item-value {
       .name {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
       .exst {
-        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
-        text-decoration: line-through;
+        ${strikethroughStyles}
       }
     }
   }
 
   .location-btn {
-    margin-inline-start: auto;
+    margin-inline-start: 8px;
     min-width: 16px;
+    opacity: 0;
+  }
+
+  &:hover {
+    .location-btn {
+      opacity: 1;
+    }
+  }
+
+  .index {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .change-index {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .arrow-index {
+      transform: rotate(-90deg);
+
+      path {
+        fill: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+      }
+    }
+
+    .old-index {
+      ${strikethroughStyles}
+    }
   }
 `;
 
@@ -243,11 +331,13 @@ const StyledHistoryBlockExpandLink = styled.div`
 
   &.files-list-expand-link {
     margin-top: 8px;
-    margin-inline-start: 20px;
+    margin-inline-start: 5px;
   }
 
   &.user-list-expand-link {
     display: inline-block;
+    position: relative;
+    top: 0;
   }
 
   strong {
@@ -257,12 +347,6 @@ const StyledHistoryBlockExpandLink = styled.div`
     text-underline-offset: 2px;
   }
 `;
-
-StyledHistorySubtitle.defaultProps = { theme: Base };
-StyledHistoryBlock.defaultProps = { theme: Base };
-StyledHistoryBlockMessage.defaultProps = { theme: Base };
-StyledHistoryBlockFilesList.defaultProps = { theme: Base };
-StyledHistoryBlockFile.defaultProps = { theme: Base };
 
 export {
   StyledHistoryList,
@@ -274,4 +358,5 @@ export {
   StyledHistoryBlockFile,
   StyledHistoryBlockTagList,
   StyledHistoryBlockExpandLink,
+  StyledHistoryDisplaynameBlock,
 };

@@ -31,10 +31,11 @@ import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import ConsumerToggle from "./consumerToggle";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledItem = styled.div`
+const StyledItem = styled.div.attrs(injectDefaultTheme)`
   .consumer-description {
     ${(props) =>
       !props.isThirdPartyAvailable &&
@@ -45,9 +46,7 @@ const StyledItem = styled.div`
   }
 `;
 
-StyledItem.defaultProps = { theme: Base };
-
-const StyledBox = styled(Box)`
+const StyledBox = styled(Box).attrs(injectDefaultTheme)`
   .consumer-icon {
     ${(props) =>
       !props.theme.isBase &&
@@ -79,8 +78,6 @@ const StyledBox = styled(Box)`
       `}
   }
 `;
-
-StyledBox.defaultProps = { theme: Base };
 
 class ConsumerItem extends React.Component {
   render() {

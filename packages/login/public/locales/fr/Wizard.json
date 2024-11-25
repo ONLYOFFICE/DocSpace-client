@@ -1,10 +1,10 @@
 {
   "Desc": "Veuillez configurer les données d'enregistrement de {{productName}}.",
   "ErrorEmail": "Adresse mail invalide",
+  "ErrorInstanceId": "Identité d'instance non valide",
   "ErrorLicenseBody": "La licence n'est pas valide. Vérifiez que vous avez sélectionné le bon fichier.",
   "ErrorPassword": "le mot de passe ne répond pas aux pré-requis de sécurité",
   "ErrorUploadLicenseFile": "Sélectionnez un fichier de licence",
-  "GeneratePassword": "Générer un mot de passe",
   "License": "Acceptez les termes du",
   "LicenseLink": "Accords de licence",
   "PlaceholderLicense": "Votre fichier de licence",

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
-import { tablet, size } from "../../utils";
+
+import { tablet, size, injectDefaultTheme } from "../../utils";
 
 const truncateCss = css`
   white-space: nowrap;
@@ -69,7 +69,7 @@ const sideInfoTabletStyle = css<{ color?: string }>`
   ${truncateCss};
 `;
 
-const StyledRowContent = styled.div<{
+const StyledRowContent = styled.div.attrs(injectDefaultTheme)<{
   disableSideInfo?: boolean;
   widthProp?: number;
   isMobile: boolean;
@@ -89,9 +89,8 @@ const StyledRowContent = styled.div<{
     }
   `}
 `;
-StyledRowContent.defaultProps = { theme: Base };
 
-const MainContainerWrapper = styled.div<{
+const MainContainerWrapper = styled.div.attrs(injectDefaultTheme)<{
   disableSideInfo?: boolean;
   widthProp?: number;
   isMobile: boolean;
@@ -124,9 +123,7 @@ const MainContainerWrapper = styled.div<{
   }
 `;
 
-MainContainerWrapper.defaultProps = { theme: Base };
-
-const MainContainer = styled.div<{
+const MainContainer = styled.div.attrs(injectDefaultTheme)<{
   widthProp?: number;
   isMobile: boolean;
   mainContainerWidth?: string;
@@ -146,16 +143,14 @@ const MainContainer = styled.div<{
     }
   `}
 `;
-MainContainer.defaultProps = { theme: Base };
 
-const MainIcons = styled.div`
+const MainIcons = styled.div.attrs(injectDefaultTheme)`
   height: ${(props) => props.theme.rowContent.icons.height};
   align-self: center;
   white-space: nowrap;
 `;
-MainIcons.defaultProps = { theme: Base };
 
-const SideContainerWrapper = styled.div<{
+const SideContainerWrapper = styled.div.attrs(injectDefaultTheme)<{
   disableSideInfo?: boolean;
   widthProp?: number;
   isMobile: boolean;
@@ -198,9 +193,8 @@ const SideContainerWrapper = styled.div<{
     }
   `}
 `;
-SideContainerWrapper.defaultProps = { theme: Base };
 
-const TabletSideInfo = styled.div<{
+const TabletSideInfo = styled.div.attrs(injectDefaultTheme)<{
   color?: string;
   widthProp?: number;
   isMobile?: boolean;
@@ -216,7 +210,6 @@ const TabletSideInfo = styled.div<{
     }
   `}
 `;
-TabletSideInfo.defaultProps = { theme: Base };
 
 export {
   TabletSideInfo,

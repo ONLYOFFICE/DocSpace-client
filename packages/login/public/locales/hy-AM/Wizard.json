@@ -1,10 +1,10 @@
 {
   "Desc": "Խնդրում ենք կարգավորել {{productName}}-ի գրանցման տվյալները:",
   "ErrorEmail": "Անվավեր էլ․ հասցե",
+  "ErrorInstanceId": "Անվավեր օրինակի ID",
   "ErrorLicenseBody": "Լիցենզիան վավեր չէ:Համոզվեք, որ ընտրել եք ճիշտ ֆայլը։",
   "ErrorPassword": "Գաղտնաբառը չի համապատասխանում պահանջներին",
   "ErrorUploadLicenseFile": "Ընտրեք լիցենզիայի ֆայլ",
-  "GeneratePassword": "Ստեղծեք գաղտնաբառ",
   "License": "Ընդունեք պայմանները՝ ",
   "LicenseLink": "Լիցենզային պայմանագրեր",
   "PlaceholderLicense": "Ձեր լիցենզիայի ֆայլը",

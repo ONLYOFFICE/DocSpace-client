@@ -129,6 +129,7 @@ export type TSettings = {
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
+  isAmi: boolean;
 };
 
 export type TCustomSchema = {
@@ -206,6 +207,14 @@ export type TIpRestriction = {
   ip: string;
 };
 
+export type TIpRestrictionSettings = {
+  ipRestrictions: {
+    ip: string;
+    forAdmin: boolean;
+  }[];
+  enable: boolean;
+};
+
 export type TCookieSettings = {
   lifeTime: number;
   enabled: boolean;
@@ -215,6 +224,7 @@ export type TLoginSettings = {
   attemptCount: number;
   blockTime: number;
   checkPeriod: number;
+  isDefault: boolean;
 };
 
 export type TCapabilities = {
@@ -268,6 +278,7 @@ export type TMigrationUser = {
   email: string;
   displayName: string;
   firstName: string;
+  lastName: string;
   userType: string;
   migratingFiles: {
     foldersCount: number;

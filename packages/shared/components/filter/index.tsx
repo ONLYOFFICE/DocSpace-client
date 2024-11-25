@@ -66,10 +66,11 @@ const FilterInput = React.memo(
     removeSelectedItem,
 
     isRooms,
-    isAccounts,
-    isPeopleAccounts,
-    isGroupsAccounts,
-    isInsideGroup,
+    isContactsPage,
+    isContactsPeoplePage,
+    isContactsGroupsPage,
+    isContactsInsideGroupPage,
+    isContactsGuestsPage,
     isIndexing,
     isIndexEditingMode,
 
@@ -98,6 +99,9 @@ const FilterInput = React.memo(
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
+
+    const searchRef = React.useRef<HTMLInputElement | null>(null);
+
     React.useEffect(() => {
       const value = getViewSettingsData?.();
 
@@ -114,6 +118,8 @@ const FilterInput = React.memo(
 
     React.useEffect(() => {
       const value = getSelectedInputValue?.();
+
+      if (value) searchRef.current?.focus();
 
       setInputValue(value);
     }, [getSelectedInputValue]);
@@ -199,6 +205,7 @@ const FilterInput = React.memo(
       <StyledFilterInput>
         <div className="filter-input_filter-row">
           <StyledSearchInput
+            forwardedRef={searchRef}
             placeholder={placeholder}
             value={inputValue}
             onChange={onSearch}
@@ -217,10 +224,11 @@ const FilterInput = React.memo(
               filterHeader={filterHeader}
               selectorLabel={selectorLabel}
               isRooms={isRooms}
-              isAccounts={isAccounts}
-              isPeopleAccounts={isPeopleAccounts}
-              isGroupsAccounts={isGroupsAccounts}
-              isInsideGroup={isInsideGroup}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
               title={filterTitle}
               userId={userId}
               disableThirdParty={disableThirdParty}

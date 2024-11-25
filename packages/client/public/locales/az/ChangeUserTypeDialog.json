@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
+  "ChangeGuestsTypeMessageMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və onlara İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
   "ChangeUserTypeButton": "Növün dəyişdirilməsi",
   "ChangeUserTypeHeader": "İstifadəçi növünün dəyişdirilməsi",
-  "ChangeUserTypeMessage": "'{{ firstType }}' tipinə malik olan istifadəçilər '{{ secondType }}' istifadəçi tipinə dəyişdirildi.",
-  "ChangeUserTypeMessageMulti": "Seçilmiş istifadəçilər '{{ secondType }}' növünə köçürüləcək.",
+  "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> tipinə malik olan istifadəçilər <strong>'{{ secondType }}'</strong> istifadəçi tipinə dəyişdirildi.",
+  "ChangeUserTypeMessageMulti": "Seçilmiş istifadəçilər <strong>'{{ secondType }}'</strong> növünə köçürüləcək.",
   "ChangeUserTypeMessageWarning": "{{productName}} inzibatçının və özüvüzün istifadəçi tipini dəyişdirə bilməzsiniz.",
+  "SuccessChangeGuestType": "Qonaq növü uğurla dəyişdirildi",
   "SuccessChangeUserType": "İstifadəçi tipi müvəffəqiyyətlə dəyişdirildi"
 }

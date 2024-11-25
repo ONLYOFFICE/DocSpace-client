@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
@@ -132,6 +133,7 @@ const StyledTableRow = styled(TableRow)`
               ? `${props.theme.filesSection.tableView.row.indexActive} !important`
               : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
+
         .table-container_file-name-cell,
         .table-container_index-cell {
           margin-inline-start: -24px;
@@ -155,6 +157,12 @@ const StyledTableRow = styled(TableRow)`
             ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
             : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
       }
+
+      &:hover .table-container_cell {
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
       .table-container_file-name-cell,
       .table-container_index-cell {
         ${(props) =>
@@ -208,6 +216,14 @@ const StyledTableRow = styled(TableRow)`
       css`
         z-index: 1;
         border-color: ${globalColors.lightSecondMain} !important;
+      `}
+  }
+
+  .context-menu-container {
+    ${(props) =>
+      props.inProgress &&
+      css`
+        pointer-events: none;
       `}
   }
 
@@ -277,8 +293,8 @@ const StyledTableRow = styled(TableRow)`
     ${(props) =>
       props.isIndexing &&
       css`
-        margin-left: 0px;
-        padding-left: 0px;
+        margin-inline-start: 0px;
+        padding-inline-start: 0px;
       `}
   }
 
@@ -286,13 +302,13 @@ const StyledTableRow = styled(TableRow)`
     props.isIndexing &&
     css`
       .table-container_file-name-cell {
-        margin-left: 0px !important;
-        padding-left: 0px !important;
+        margin-inline-start: 0px !important;
+        padding-inline-start: 0px !important;
       }
       &:hover {
         .table-container_file-name-cell {
-          margin-left: 0px !important;
-          padding-left: 0px !important;
+          margin-inline-start: 0px !important;
+          padding-inline-start: 0px !important;
         }
 
         ${indexHoverStyles}
@@ -447,7 +463,7 @@ const StyledBadgesContainer = styled.div`
   }
 `;
 
-const StyledQuickButtonsContainer = styled.div`
+const StyledQuickButtonsContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -482,8 +498,6 @@ const StyledQuickButtonsContainer = styled.div`
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
-
-StyledQuickButtonsContainer.defaultProps = { theme: Base };
 
 export {
   StyledBadgesContainer,

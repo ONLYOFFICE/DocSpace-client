@@ -34,7 +34,6 @@ import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { SelectFileDialogProps } from "@/types";
 
 const SelectFileDialog = ({
-  socketHelper,
   fileTypeDetection,
   getIsDisabled,
   isVisible,
@@ -42,14 +41,15 @@ const SelectFileDialog = ({
   onSubmit,
   fileInfo,
   filesSettings,
+  shareKey,
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
 
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const headerLabel = fileTypeDetection.filterParam
-    ? t?.("Common:SelectFile") ?? ""
-    : t?.("Common:SelectAction") ?? "";
+    ? (t?.("Common:SelectFile") ?? "")
+    : (t?.("Common:SelectAction") ?? "");
 
   const getFileTypeTranslation = React.useCallback(() => {
     switch (fileTypeDetection.filterParam) {
@@ -75,21 +75,21 @@ const SelectFileDialog = ({
 
   const listTitle = selectFilesListTitle();
 
+  const openRoot = Boolean(shareKey);
+
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
       withoutBackButton
       withSearch
       withBreadCrumbs
-      socketHelper={socketHelper}
-      socketSubscribers={socketHelper.socketSubscribers}
       disabledItems={[]}
       isPanelVisible={isVisible}
       onCancel={onClose}
       onSubmit={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={fileInfo.folderId}
+      currentFolderId={openRoot ? "" : fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerLabel={headerLabel}
@@ -111,6 +111,8 @@ const SelectFileDialog = ({
       cancelButtonId="select-file-modal-cancel"
       {...fileTypeDetection}
       withCreate={false}
+      shareKey={shareKey}
+      openRoot={openRoot}
     />
   );
 };

@@ -151,7 +151,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Guest,
+      userType: EmployeeType.User,
     };
 
     this.authentication = authentication;
@@ -186,6 +186,8 @@ class LdapFormStore {
   };
 
   load = async (t) => {
+    if (this.isLoaded) return;
+
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
@@ -287,6 +289,11 @@ class LdapFormStore {
 
   setIsAuthentication = () => {
     this.authentication = !this.authentication;
+
+    if (!this.authentication) {
+      this.errors.login = false;
+      this.errors.password = false;
+    }
   };
 
   setIsSendWelcomeEmail = (sendWelcomeEmail) => {
@@ -319,6 +326,8 @@ class LdapFormStore {
 
   restoreToDefault = async (t) => {
     const settingsRes = await getLdapDefaultSettings();
+    settingsRes.password = "";
+
     this.mapSettings(settingsRes);
 
     this.save(t, true);
@@ -404,7 +413,7 @@ class LdapFormStore {
         }
       }
 
-      if (this.authentication) {
+      if (this.authentication && !isErrorExist) {
         this.errors.login = this.login.trim() === "";
         this.errors.password = this.password.trim() === "";
 
@@ -420,6 +429,10 @@ class LdapFormStore {
     const settings = this.getSettings();
     const respose = await saveLdapSettings(settings);
     this.setServerSettings();
+
+    if (turnOff) {
+      this.password = "";
+    }
 
     if (respose?.id) {
       this.inProgress = true;

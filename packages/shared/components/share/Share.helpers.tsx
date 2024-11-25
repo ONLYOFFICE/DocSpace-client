@@ -26,7 +26,8 @@
 import moment from "moment";
 import { Trans } from "react-i18next";
 
-import equal from "fast-deep-equal/react";
+import isUndefined from "lodash/isUndefined";
+import isNull from "lodash/isNull";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
@@ -39,14 +40,16 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import { Link } from "../link";
 import { toastr } from "../toast";
 import { globalColors } from "../../themes";
-import { ShareAccessRights } from "../../enums";
+import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
+import { isFolder } from "../../utils/typeGuards";
 
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
   TFile,
   TFileLink,
+  TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
 import { Strong } from "./Share.styled";
@@ -183,21 +186,31 @@ export const getExpiredOptions = (
   setSevenDays: VoidFunction,
   setUnlimited: VoidFunction,
   onCalendarOpen: VoidFunction,
+  locale: string,
 ) => {
+  const relativeTime = new Intl.RelativeTimeFormat(locale, {
+    numeric: "always",
+    style: "long",
+  });
+
+  const oneDay = relativeTime.format(1, "day");
+  const severalDays = relativeTime.format(7, "day");
+  const severalHours = relativeTime.format(12, "hours");
+
   return [
     {
       key: "twelvehours",
-      label: `12 ${t("Common:Hours")}`,
+      label: severalHours,
       onClick: () => setTwelveHours(),
     },
     {
       key: "oneday",
-      label: `1 ${t("Common:Day")}`,
+      label: oneDay,
       onClick: () => setOneDay(),
     },
     {
       key: "sevendays",
-      label: `7 ${t("Common:Days")}`,
+      label: severalDays,
       onClick: () => setSevenDays(),
     },
     {
@@ -241,6 +254,28 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
       return t("Common:Comment");
     case ShareAccessRights.ReadOnly:
       return t("Common:ReadOnly");
+    case ShareAccessRights.FormFilling:
+      return t("Common:FillInOut");
+    default:
+      return "";
+  }
+};
+
+export const getRoleNameByAccessRight = (
+  access: ShareAccessRights,
+  t: TTranslation,
+) => {
+  switch (access) {
+    case ShareAccessRights.Editing:
+      return t("Common:Editor");
+    case ShareAccessRights.Review:
+      return t("Translations:RoleReviewer");
+    case ShareAccessRights.Comment:
+      return t("Common:Commentator");
+    case ShareAccessRights.ReadOnly:
+      return t("JavascriptSdk:Viewer");
+    case ShareAccessRights.FormFilling:
+      return t("Translations:RoleFormFiller");
     default:
       return "";
   }
@@ -276,14 +311,84 @@ export const getTranslationDate = (
 };
 
 export const canShowManageLink = (
-  item: TFile,
-  buffer: TFile,
+  item: TFile | TFolder,
+  buffer: TFile | TFolder | null,
   infoPanelVisible: boolean,
   infoPanelView: string,
-) => {
-  const isEqual = equal(item, buffer);
+  isRoom: boolean = false,
+): boolean => {
+  if (isFolder(item) && !item.security.EditAccess) return false;
 
-  return !isEqual || infoPanelView !== "info_share" || !infoPanelVisible;
+  if (!buffer) return true;
+
+  const isEqual =
+    item.id === buffer.id &&
+    item.title === buffer.title &&
+    isFolder(item) === isFolder(buffer);
+
+  const view =
+    (isRoom && infoPanelView !== "info_members") ||
+    (!isRoom && infoPanelView !== "info_share");
+
+  return !isEqual || view || !infoPanelVisible;
+};
+
+export const copyRoomShareLink = (
+  link: TFileLink,
+  t: TTranslation,
+  withCopy = true,
+  linkOptions?: {
+    canShowLink: boolean;
+    onClickLink: VoidFunction;
+  },
+) => {
+  const { password, shareLink, expirationDate, denyDownload } = link.sharedTo;
+  const hasPassword = Boolean(password);
+  const role = getRoleNameByAccessRight(link.access, t).toLowerCase(); //
+
+  if (!role) return;
+  if (withCopy) copy(shareLink);
+
+  const roleText = (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="RoomShareLinkRole"
+      values={{ role }}
+      components={{ 1: <Strong /> }}
+    />
+  );
+
+  const passwordText = hasPassword ? t("Common:RoomShareLinkPassword") : "";
+  const restrictionText = denyDownload
+    ? t("Common:RoomShareLinkRestrictionActivated")
+    : "";
+
+  const date = expirationDate ? (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="LinkIsValid"
+      values={{ date: moment(expirationDate).format("lll") }}
+      components={{ 1: <Strong /> }}
+    />
+  ) : null;
+
+  toastr.success(
+    <span>
+      {roleText} {passwordText} {restrictionText} {date}
+      {date && <Strong>.</Strong>}
+      {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+        <Link
+          color={globalColors.lightBlueMain}
+          isHovered
+          onClick={linkOptions.onClickLink}
+        >
+          {t("Notifications:ManageNotifications")}
+        </Link>
+      )}
+    </span>,
+  );
 };
 
 export const copyDocumentShareLink = (
@@ -338,4 +443,18 @@ export const copyDocumentShareLink = (
     </span>,
     t("Common:LinkCopiedToClipboard"),
   );
+};
+
+export const getExpirationDate = (
+  diffExpiredDate: number | null | undefined,
+) => {
+  if (isUndefined(diffExpiredDate)) return moment().add(7, "days");
+
+  if (isNull(diffExpiredDate)) return moment(diffExpiredDate);
+
+  return moment().add(diffExpiredDate);
+};
+
+export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
+  return `link-create-document-${fileType ?? ""}-${userId}`;
 };

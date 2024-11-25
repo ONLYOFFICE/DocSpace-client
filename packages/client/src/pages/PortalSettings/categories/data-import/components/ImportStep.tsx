@@ -106,7 +106,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: usersExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}
@@ -117,13 +117,16 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importGroups}
         onChange={(e) => onChange(e, "importGroups")}
         sectionName={t("Common:Groups")}
-        description={t("Settings:GroupsDescription", { serviceName })}
+        description={t("Settings:GroupsDescription", {
+          serviceName,
+          contactsName: t("Common:Contacts"),
+        })}
         exportSection={{
           sectionName: t("Common:Groups"),
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}

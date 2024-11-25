@@ -29,6 +29,7 @@ import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { FileAction } from "@docspace/shared/enums";
+import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -162,10 +163,13 @@ const GlobalEvents = ({
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    const startRoomParams = getStartRoomParams(
+      e?.payload?.startRoomType,
+      e?.title,
+    );
     setCreateRoomDialogProps({
-      title: e?.title,
+      ...startRoomParams,
       visible: true,
-      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
         setCreateRoomDialogProps({
           visible: false,

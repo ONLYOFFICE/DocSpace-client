@@ -59,4 +59,5 @@ export interface AvatarProps {
   isGroup?: boolean;
   /** Accepts roleIcon */
   roleIcon?: React.ReactElement;
+  noClick?: boolean;
 }

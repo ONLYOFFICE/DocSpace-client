@@ -1,10 +1,10 @@
 {
   "Desc": "يرجى تعيين بيانات تسجيل {{productName}}.",
   "ErrorEmail": "عنوان بريد إلكتروني غير صالح",
+  "ErrorInstanceId": "معرّف المثال غير صالح",
   "ErrorLicenseBody": "الترخيص غير صالح. تأكد من اختيار الملف الصحيح.",
   "ErrorPassword": "كلمة المرور لا تفي بالمتطلبات",
   "ErrorUploadLicenseFile": "اختر ملف ترخيص",
-  "GeneratePassword": "إنشاء كلمة مرور",
   "License": "قبول شروط اتفاقية الترخيص",
   "LicenseLink": "اتفاقيات الترخيص",
   "PlaceholderLicense": "ملف الترخيص الخاص بك",

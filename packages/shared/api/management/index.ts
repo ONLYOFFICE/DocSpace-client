@@ -154,6 +154,7 @@ export const getAvailablePortals = async (data: {
     method: "post",
     url: `/portal/signin`,
     data,
+    skipUnauthorized: true,
   })) as { tenants: { portalLink: string; portalName: string }[] };
 
   return res.tenants;

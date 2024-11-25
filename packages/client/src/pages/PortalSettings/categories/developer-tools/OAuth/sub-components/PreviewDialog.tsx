@@ -18,7 +18,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import {
   StyledContainer,
   StyledPreviewContainer,
@@ -89,7 +89,7 @@ const styleBlock = `<style>
 </style>`;
 
 const linkParams =
-  "width=800,height=800,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no";
+  "width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
 
 interface PreviewDialogProps {
   visible: boolean;
@@ -108,7 +108,6 @@ const PreviewDialog = ({
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
-  const [state, setState] = React.useState("");
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
@@ -124,11 +123,10 @@ const PreviewDialog = ({
 
   React.useEffect(() => {
     const getData = () => {
-      const { verifier, challenge, state: s } = generatePKCEPair();
+      const { verifier, challenge } = generatePKCEPair();
 
       setCodeVerifier(verifier);
       setCodeChallenge(challenge);
-      setState(s);
     };
 
     getData();
@@ -139,7 +137,7 @@ const PreviewDialog = ({
       window?.ClientConfig?.oauth2.origin || window.location.origin
     }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
       client?.redirectUris[0]
-    }&scope=${encodingScopes}&state=${state}${
+    }&scope=${encodingScopes}${
       isClientSecretPost
         ? ""
         : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
@@ -198,7 +196,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={htmlBlock}
               />
             </div>
@@ -210,7 +207,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={styleBlock}
               />
             </div>
@@ -222,7 +218,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={scriptBlock}
               />
             </div>
@@ -234,21 +229,7 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={link}
-              />
-            </div>
-
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
-                {t("Webhooks:State")}
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                isDisabled
-                value={state}
               />
             </div>
 
@@ -266,7 +247,6 @@ const PreviewDialog = ({
                   heightTextArea={64}
                   enableCopy
                   isReadOnly
-                  isDisabled
                   value={codeVerifier}
                 />
               </div>
@@ -289,19 +269,15 @@ const PreviewDialog = ({
 export default inject(
   ({
     oauthStore,
-    settingsStore,
   }: {
     settingsStore: SettingsStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const { setPreviewDialogVisible, bufferSelection } = oauthStore;
-
-    const { theme } = settingsStore;
 
     return {
       setPreviewDialogVisible,
       client: bufferSelection,
-      theme,
     };
   },
 )(observer(PreviewDialog));

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "../../themes";
 
 const Wrapper = styled.div<{ isPickerOnly: boolean }>`
@@ -59,14 +59,18 @@ const Wrapper = styled.div<{ isPickerOnly: boolean }>`
 
   .hex-color-picker .react-colorful__interactive {
     width: 183px;
-    left: 6px;
 
-    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 13px;"}
 
-    ${isMobileOnly &&
+    ${isMobile() &&
     css`
       width: calc(100vw - 76px);
     `}
+  }
+
+  .react-colorful__last-control .react-colorful__interactive {
+    left: 6px;
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
   }
 
   .hex-color-picker .react-colorful__saturation-pointer {
@@ -121,7 +125,7 @@ const Wrapper = styled.div<{ isPickerOnly: boolean }>`
     padding-bottom: 16px;
     width: 195px;
 
-    ${isMobileOnly &&
+    ${isMobile() &&
     css`
       width: calc(100vw - 64px);
     `}

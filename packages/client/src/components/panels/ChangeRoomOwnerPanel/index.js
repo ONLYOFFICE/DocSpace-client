@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
@@ -43,8 +43,8 @@ const StyledChangeRoomOwner = styled.div`
     overflow: visible;
   }
 
-  ${({ showBackButton }) =>
-    !showBackButton &&
+  ${({ withFooterCheckbox }) =>
+    withFooterCheckbox &&
     css`
       .arrow-button {
         display: none;
@@ -112,19 +112,23 @@ const ChangeRoomOwner = (props) => {
     onClose();
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = useMemo(() => {
+    const filter = Filter.getDefault();
+    filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    filter.employeeStatus = EmployeeStatus.Active;
+    return filter;
+  }, []);
+
+  const ownerIsCurrentUser = roomOwnerId === userId;
 
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
-      cancelButtonLabel=""
       onCancel={onClose}
-      onSubmit={onChangeRoomOwner}
-      submitButtonLabel={
-        showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
-      }
+      cancelButtonLabel=""
       disableSubmitButton={false}
+      submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
+      onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{
         onCloseClick: onClose,
@@ -133,8 +137,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      isLoading={isLoading}
-      withFooterCheckbox={!showBackButton}
+      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -145,7 +148,7 @@ const ChangeRoomOwner = (props) => {
       infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
         productName: t("Common:ProductName"),
       })}
-      emptyScreenHeader={t("Common:NotFoundUsers")}
+      emptyScreenHeader={t("Common:NotFoundMembers")}
       emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
         productName: t("Common:ProductName"),
       })}
@@ -162,7 +165,9 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner showBackButton={showBackButton}>
+        <StyledChangeRoomOwner
+          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+        >
           {selectorComponent}
         </StyledChangeRoomOwner>
       </ModalDialog.Body>

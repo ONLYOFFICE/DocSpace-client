@@ -27,5 +27,5 @@ export interface CardProps {
   title: string;
   description: string;
   buttonLabel: string;
-  onCick: VoidFunction;
+  onClick: VoidFunction;
 }

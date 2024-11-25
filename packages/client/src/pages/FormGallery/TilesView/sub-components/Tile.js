@@ -48,14 +48,14 @@ import { isMobile } from "@docspace/shared/utils";
 const Tile = ({
   t,
   thumbnailClick,
-  item,
+  item = {},
 
   onCreateOform,
   getFormGalleryContextOptions,
 
   setGallerySelected,
   children,
-  contextButtonSpacerWidth,
+  contextButtonSpacerWidth = "32px",
   tileContextClick,
   isActive,
   isSelected,
@@ -168,11 +168,6 @@ Tile.propTypes = {
   data: PropTypes.object,
   id: PropTypes.string,
   tileContextClick: PropTypes.func,
-};
-
-Tile.defaultProps = {
-  contextButtonSpacerWidth: "32px",
-  item: {},
 };
 
 export default inject(

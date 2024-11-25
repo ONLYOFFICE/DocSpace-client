@@ -1,15 +1,17 @@
 import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
 import { RefObject } from "react";
-import { Base, globalColors, TColorScheme } from "../../themes";
+import { globalColors, TColorScheme } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
 const COVER_DEFAULT_SIZE = 20;
 
-const StyledIcon = styled.div<{
+const StyledIcon = styled.div.attrs(injectDefaultTheme)<{
   size: string;
   radius: string;
   isArchive?: boolean;
   color?: string;
+  textColor?: string;
   wrongImage: boolean;
   withHover: boolean;
   coverSize: number;
@@ -48,10 +50,14 @@ const StyledIcon = styled.div<{
       position: relative;
       box-sizing: border-box;
 
-      border: 2px dashed rgb(208, 213, 218);
+      border: ${props.theme.roomIcon.emptyBorder};
       border-radius: 10px;
       min-width: 64px;
     `};
+
+  .react-svg-icon {
+    border-radius: ${(props) => props.radius};
+  }
 
   .room-background {
     height: ${(props) => props.size};
@@ -86,7 +92,7 @@ const StyledIcon = styled.div<{
         props.coverSize &&
         `scale(${props.coverSize / COVER_DEFAULT_SIZE}) translateY(0)`};
       path {
-        fill: ${globalColors.white};
+        fill: ${(props) => props.textColor};
       }
     }
 
@@ -94,8 +100,8 @@ const StyledIcon = styled.div<{
       display: flex;
       justify-content: center;
       align-items: center;
-      height: ${(props) => `${props.coverSize}px`};
-      width: ${(props) => `${props.coverSize}px`};
+      height: ${(props) => props.size};
+      width: ${(props) => props.size};
     }
   }
 
@@ -122,7 +128,7 @@ const StyledIcon = styled.div<{
     color: ${(props) =>
       props.wrongImage && props.theme.isBase
         ? globalColors.black
-        : globalColors.white};
+        : props.textColor};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&
@@ -135,15 +141,10 @@ const StyledIcon = styled.div<{
   .room-icon_badge {
     z-index: 2;
     position: absolute;
-    margin-block: 24px 0;
-    margin-inline: 24px 0;
+    margin-block: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
 
     .room-icon-button {
-      width: 12px;
-      height: 12px;
-      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-      border-radius: 50%;
-
       svg {
         path {
           fill: ${(props) => props.theme.backgroundColor};
@@ -152,7 +153,30 @@ const StyledIcon = styled.div<{
           stroke: ${(props) => props.theme.backgroundColor};
         }
       }
+
+      .link {
+        path {
+          fill: ${(props) => props.theme.roomIcon.linkIcon.path};
+        }
+
+        .link-background {
+          stroke: ${(props) => props.theme.roomIcon.linkIcon.background};
+          fill: ${(props) => props.theme.roomIcon.linkIcon.background};
+        }
+      }
     }
+
+    .room-icon-button:has(svg:not(.link)) {
+      width: ${({ size }) => (size === "96px" ? "28px" : "12px")};
+      height: ${({ size }) => (size === "96px" ? "28px" : "12px")};
+      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      border-radius: 50%;
+    }
+  }
+
+  .room-icon_badge:has(.link) {
+    margin-block: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
   }
 
   .room-icon-container {
@@ -199,8 +223,6 @@ const StyledIcon = styled.div<{
       }
     `}
 `;
-
-StyledIcon.defaultProps = { theme: Base };
 
 const EditWrapper = styled.div<{
   size: string;

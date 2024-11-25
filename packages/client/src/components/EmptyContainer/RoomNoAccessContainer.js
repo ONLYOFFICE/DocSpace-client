@@ -42,7 +42,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const RoomNoAccessContainer = (props) => {
-  const { t, setIsLoading, linkStyles, theme, isFrame, userId } = props;
+  const { t, setIsLoading, theme, isFrame, userId } = props;
 
   const descriptionRoomNoAccess = t("NoAccessRoomDescription");
   const titleRoomNoAccess = t("NoAccessRoomTitle");
@@ -86,12 +86,15 @@ const RoomNoAccessContainer = (props) => {
     ),
     options: isFrame
       ? []
-      : {
-          description: t("GoToMyRooms"),
-          icon: <FolderIcon />,
-          to: "",
-          onClick: onGoToShared,
-        },
+      : [
+          {
+            to: "",
+            icon: <FolderIcon />,
+            onClick: onGoToShared,
+            key: "empty-view-goto-rooms",
+            description: t("GoToMyRooms"),
+          },
+        ],
   };
 
   return <EmptyView {...propsRoomNotFoundOrMoved} />;

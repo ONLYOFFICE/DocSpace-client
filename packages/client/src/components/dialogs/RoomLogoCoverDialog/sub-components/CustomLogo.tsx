@@ -29,12 +29,14 @@ import styled, { css } from "styled-components";
 import hexRgb from "hex-rgb";
 import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
+import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 
 interface StyledLogoProps {
   isBase: boolean;
   color: string | null;
+  textColor: string | null;
 }
 
 const StyledLogo = styled.div<StyledLogoProps>`
@@ -50,14 +52,20 @@ const StyledLogo = styled.div<StyledLogoProps>`
     svg {
       transform: scale(3);
       path {
-        fill: ${globalColors.white};
+        fill: ${(props) => props.textColor};
       }
     }
   }
+  .logo-cover_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
 
-  .logo-cover-text {
-    color: ${globalColors.white};
-    font-size: 41px;
+    .logo-cover-text {
+      width: fit-content;
+      height: fit-content;
+      margin: auto;
+    }
   }
 
   ${(props) =>
@@ -87,21 +95,27 @@ export const CustomLogo = ({
   isBaseTheme,
   roomTitle,
 }: CustomLogoProps) => {
+  const textColor = color && getTextColor(color, 202);
+
   return (
-    <StyledLogo color={color} isBase={isBaseTheme}>
+    <StyledLogo color={color} textColor={textColor} isBase={isBaseTheme}>
       {withoutIcon ? (
-        <Text
-          className="logo-cover-text"
-          fontSize="41"
-          color={globalColors.white}
-          fontWeight={700}
-        >
-          {roomTitle}
-        </Text>
+        <div className="logo-cover_wrapper">
+          <Text
+            className="logo-cover-text"
+            fontSize="41px"
+            color={textColor || globalColors.white}
+            fontWeight={700}
+          >
+            {roomTitle}
+          </Text>
+        </div>
       ) : (
-        <ReactSVG
+        <div
+          {...(icon?.data && {
+            dangerouslySetInnerHTML: { __html: icon.data },
+          })}
           className="custom-logo-cover"
-          src={`data:image/svg+xml;base64, ${window.btoa(icon.data)}`}
         />
       )}
     </StyledLogo>

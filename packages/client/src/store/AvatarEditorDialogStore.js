@@ -72,25 +72,40 @@ class AvatarEditorDialogStore {
     this.setImage({ ...this.image, uploadedFile: uploadedFile });
   };
 
+  getUploadedLogoData = async () => {
+    const { uploadRoomLogo } = this.filesStore;
+
+    const uploadLogoData = new FormData();
+    uploadLogoData.append(0, this.uploadedFile);
+
+    const responseData = await uploadRoomLogo(uploadLogoData);
+    const url = URL.createObjectURL(this.uploadedFile);
+    const img = new Image();
+
+    this.setImage({ uploadedFile: null, x: 0.5, y: 0.5, zoom: 1 });
+    this.setUploadedFile(null);
+
+    return {
+      responseData,
+      url,
+      img,
+    };
+  };
+
   onSaveRoomLogo = async (roomId, icon, item, needUpdate = false) => {
     let room;
 
     if (!this.uploadedFile) return;
 
     const {
-      uploadRoomLogo,
       addLogoToRoom,
       calculateRoomLogoParams,
       setActiveFolders,
       updateRoom,
     } = this.filesStore;
 
-    const uploadLogoData = new FormData();
-    uploadLogoData.append(0, this.uploadedFile);
-
-    const response = await uploadRoomLogo(uploadLogoData);
-    const url = URL.createObjectURL(this.uploadedFile);
-    const img = new Image();
+    const data = await this.getUploadedLogoData();
+    const { responseData, url, img } = data;
 
     const promise = new Promise((resolve) => {
       img.onload = async () => {
@@ -98,14 +113,14 @@ class AvatarEditorDialogStore {
 
         try {
           room = await addLogoToRoom(roomId, {
-            tmpFile: response.data,
+            tmpFile: responseData.data,
             ...calculateRoomLogoParams(img, x, y, zoom),
           });
         } catch (e) {
           toastr.error(e);
         }
 
-        needUpdate && !this.filesStore.withPaging && updateRoom(item, room);
+        needUpdate && updateRoom(item, room);
         needUpdate && this.infoPanelStore.updateInfoPanelSelection(room);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);
@@ -118,10 +133,6 @@ class AvatarEditorDialogStore {
     await promise;
 
     this.setAvatarEditorDialogVisible(false);
-    this.setImage({ uploadedFile: null, x: 0.5, y: 0.5, zoom: 1 });
-    this.setUploadedFile(null);
-
-    return;
   };
 
   uploadFile = async (t, e) => {

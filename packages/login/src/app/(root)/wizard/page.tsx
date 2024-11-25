@@ -42,9 +42,12 @@ import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
 
 async function Page() {
+  console.log("start wizzard requests");
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  console.log("wizzard token", objectSettings?.wizardToken);
 
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
@@ -81,6 +84,7 @@ async function Page() {
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
             documentationEmail={objectSettings?.documentationEmail}
+            isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>
       </>

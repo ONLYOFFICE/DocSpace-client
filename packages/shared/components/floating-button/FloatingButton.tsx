@@ -76,9 +76,9 @@ const FloatingButton = (props: FloatingButtonProps) => {
     id,
     className,
     style,
-    icon,
-    alert,
-    percent,
+    icon = FloatingButtonIcons.upload,
+    alert = false,
+    percent = 0,
     onClick,
     color,
     clearUploadedFilesHistory,
@@ -124,6 +124,8 @@ const FloatingButton = (props: FloatingButtonProps) => {
         {...props}
         id={id}
         icon={icon}
+        alert={alert}
+        percent={percent}
         color={color}
         style={style}
         onClick={onClick}
@@ -161,15 +163,6 @@ const FloatingButton = (props: FloatingButtonProps) => {
       )}
     </StyledFloatingButtonWrapper>
   );
-};
-
-FloatingButton.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  icon: FloatingButtonIcons.upload,
-  alert: false,
-  percent: 0,
 };
 
 export { FloatingButton };

@@ -2,7 +2,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
-import { ViewAsType } from "SRC_DIR/store/OAuthStore";
+import OAuthStore, { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface RowViewProps {
   items: IClientProps[];
@@ -11,6 +11,7 @@ export interface RowViewProps {
   setViewAs?: (value: ViewAsType) => void;
   selection?: string[];
   setSelection?: (clientId: string) => void;
+  setBufferSelection?: OAuthStore["setBufferSelection"];
   getContextMenuItems?: (
     t: TTranslation,
     item: IClientProps,
@@ -32,6 +33,7 @@ export interface RowProps {
     item: IClientProps,
   ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
+  setBufferSelection?: OAuthStore["setBufferSelection"];
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }
 

@@ -44,15 +44,18 @@ export type ContextMenuRefType = {
   menuRef: React.RefObject<HTMLDivElement | null>;
 };
 
+export type TContextMenuValueTypeOnClick =
+  | {
+      originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
+      action?: string | boolean;
+      item?: ContextMenuType;
+    }
+  | React.MouseEvent
+  | React.ChangeEvent<HTMLInputElement>;
+
 export type ContextMenuTypeOnClick = (
-  value:
-    | {
-        originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-        action?: string | boolean;
-        item?: ContextMenuType;
-      }
-    | React.MouseEvent
-    | React.ChangeEvent<HTMLInputElement>,
+  value: TContextMenuValueTypeOnClick,
+
   item?: ContextMenuType,
 ) => void;
 
@@ -65,7 +68,7 @@ export type ContextMenuType = {
   onClick?: ContextMenuTypeOnClick;
   isSeparator?: undefined;
   url?: string;
-  items?: ContextMenuType[];
+  items?: ContextMenuModel[];
   action?: string;
   className?: string;
   disableColor?: string;

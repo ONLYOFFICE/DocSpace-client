@@ -28,6 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import Article from "@docspace/shared/components/article";
 import { ArticleProps } from "@docspace/shared/components/article/Article.types";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {
   return <Article {...props} />;
@@ -39,10 +40,10 @@ export default inject<TStore>(
     uploadDataStore,
     profileActionsStore,
     userStore,
-    bannerStore,
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
+    backup,
   }) => {
     const {
       isLiveChatAvailable,
@@ -50,12 +51,9 @@ export default inject<TStore>(
       isPaymentPageAvailable,
     } = authStore;
 
-    const { getActions, getUserRole, onProfileClick, isShowLiveChat } =
-      profileActionsStore;
+    const { getActions, onProfileClick, isShowLiveChat } = profileActionsStore;
 
     const { withSendAgain, user } = userStore;
-
-    const { isBannerVisible } = bannerStore;
 
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
@@ -67,9 +65,14 @@ export default inject<TStore>(
     const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
     const { visible: secondaryProgressDataStoreVisible } =
       secondaryProgressDataStore;
+    const { downloadingProgress } = backup;
+    const isBackupProgressVisible =
+      downloadingProgress > 0 && downloadingProgress < 100;
 
     const showProgress =
-      primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+      primaryProgressDataVisible ||
+      secondaryProgressDataStoreVisible ||
+      isBackupProgressVisible;
 
     const {
       showText,
@@ -101,7 +104,7 @@ export default inject<TStore>(
     return {
       onProfileClick,
       user,
-      getUserRole,
+      getUserType,
       getActions,
 
       currentTariffPlanTitle,
@@ -138,8 +141,6 @@ export default inject<TStore>(
       setArticleOpen,
       withSendAgain,
       mainBarVisible,
-      isBannerVisible,
-
       isLiveChatAvailable,
       isShowLiveChat,
 

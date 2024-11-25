@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Aanvullende secties",
   "DisplayFavorites": "Favorieten Tonen",
+  "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
   "DisplayNotification": "Meldingen weergeven wanneer items naar de Prullenbak worden verplaatst",
   "DisplayRecent": "Recent Weergeven",
   "DisplayTemplates": "Sjablonen Weergeven",

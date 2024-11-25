@@ -59,6 +59,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     identityServerEnabled,
     baseDomain,
     limitedAccessSpace,
+    displayAbout,
   } = props;
 
   const location = useLocation();
@@ -74,7 +75,20 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       }
 
       // console.log("PrivateRoute returned null");
+
       return null;
+    }
+
+    if (user && isAuthenticated && !isLogout) {
+      const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+      const redirectPath = sessionStorage.getItem("referenceUrl");
+
+      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+        window.location.href = redirectPath;
+      }
+
+      sessionStorage.removeItem("referenceUrl");
+      sessionStorage.removeItem("loggedOutUserId");
     }
 
     const isPortalUrl = location.pathname === "/preparation-portal";
@@ -105,11 +119,17 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "portal-settings/customization/branding",
     );
 
+    const isPortalManagement = location.pathname.includes(
+      "/portal-settings/management",
+    );
+    const isFileManagement = location.pathname.includes("file-management");
     const isManagement = location.pathname.includes("management");
     const isPaymentPageUnavailable =
       location.pathname.includes("payments") && isCommunity;
     const isBonusPageUnavailable =
       location.pathname.includes("bonus") && !isCommunity;
+
+    const isAboutPage = location.pathname.includes("about");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -214,7 +234,11 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isManagement) {
+    if (isAboutPage && !displayAbout) {
+      return <Navigate replace to="/error/404" />;
+    }
+
+    if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;

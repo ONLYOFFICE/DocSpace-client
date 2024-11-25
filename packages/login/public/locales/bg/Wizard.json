@@ -1,10 +1,10 @@
 {
   "Desc": "Молим да настроите данните за регистрация в {{productName}}.",
   "ErrorEmail": "Невалиден имейл адрес",
+  "ErrorInstanceId": "Невалиден ID на екземпляр",
   "ErrorLicenseBody": "Лицензът не е валиден. Уверете се, че избирате правилния файл.",
   "ErrorPassword": "Паролата не покрива изискванията",
   "ErrorUploadLicenseFile": "Избери лицензионен файл",
-  "GeneratePassword": "Генерирай парола",
   "License": "Приеми условията на ",
   "LicenseLink": "Лицензионни споразумения",
   "PlaceholderLicense": "Вашият лицензионен файл",

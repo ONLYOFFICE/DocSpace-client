@@ -96,7 +96,6 @@ const FormGallery = ({
       <SectionWrapper
         // withBodyScroll
         // withBodyAutoFocus={!isMobile}
-        withPaging={false}
         isFormGallery
       >
         <Section.SectionHeader isFormGallery>

@@ -1,10 +1,10 @@
 {
   "Desc": "Por favor, preencha os dados de registo do {{productName}}.",
   "ErrorEmail": "Endereço de email inválido",
+  "ErrorInstanceId": "ID de instância inválida",
   "ErrorLicenseBody": "A licença não é válida. Certifique-se que escolheu o ficheiro correto.",
   "ErrorPassword": "A palavra-chave não cumpre com os requisitos obrigatórios",
   "ErrorUploadLicenseFile": "Selecione um ficheiro com a licença",
-  "GeneratePassword": "Gerar palavra-passe",
   "License": "Aceitar os termos dos",
   "LicenseLink": "Contratos de licença",
   "PlaceholderLicense": "O seu ficheiro com a licença",

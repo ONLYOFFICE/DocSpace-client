@@ -36,7 +36,7 @@ export class MockRequest {
       await this.page.route(endpoint.url, async (route) => {
         const json = await endpoint.dataHandler().json();
 
-        await route.fulfill({ json });
+        await route.fulfill({ json, status: json.statusCode ?? 200 });
       });
     });
   }

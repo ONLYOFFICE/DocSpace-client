@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { mobile } from "@docspace/shared/utils";
+
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 
-const WhiteLabelWrapper = styled.div`
+const WhiteLabelWrapper = styled.div.attrs(injectDefaultTheme)`
   .subtitle {
     margin-bottom: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
@@ -102,8 +102,7 @@ const WhiteLabelWrapper = styled.div`
 
   .logos-editor-wrapper {
     display: grid;
-    grid-template-columns: 172px 1fr;
-    grid-gap: 8px;
+    grid-gap: 16px;
     margin-bottom: 8px;
 
     @media ${mobile} {
@@ -113,6 +112,22 @@ const WhiteLabelWrapper = styled.div`
     }
   }
 
+  .logos-editor-container,
+  .editor-header-container {
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+  }
+
+  .editor-logo-header {
+    border: none !important;
+    background-color: transparent !important;
+    position: absolute;
+  }
+
+  .editor-header-container {
+    position: relative;
+  }
   .logo-item {
     display: flex;
     flex-direction: column;
@@ -162,14 +177,16 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logo-docs-editor {
-    width: 172px;
-    height: 40px;
+    width: 86px;
+    height: 20px;
     padding: 0;
+    padding-right: 224px;
   }
 
   .logo-embedded-editor {
-    width: 172px;
-    height: 40px;
+    width: 86px;
+    height: 20px;
+    left: 0px;
     padding: 0;
     margin-bottom: 8px;
   }
@@ -230,7 +247,5 @@ const WhiteLabelWrapper = styled.div`
 
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
-
-WhiteLabelWrapper.defaultProps = { theme: Base };
 
 export default WhiteLabelWrapper;

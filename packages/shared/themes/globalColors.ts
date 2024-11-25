@@ -65,7 +65,7 @@ export const globalColors = {
   secondGreenDark: "#2E5E4C",
   mainOrange: "#F97A0B",
   secondOrange: "#FF9933",
-  mainRed: "#F2665A",
+  mainRed: " #F2675A",
   mainPurple: "#533ED1",
   purple: "#6D4EC2",
   secondPurple: "#8570BD",
@@ -118,12 +118,12 @@ export const globalColors = {
 
   editorGreenColor: "#40865C",
   editorBlueColor: "#446995",
-  editorOrangeColor: "#AA5252",
+  editorOrangeColor: "#B26A54",
   editorRedColor: "#AA5251",
   windowsColor: "#4C83CD",
   linuxColor: "#F4BB40",
   androidColor: "#A8D548",
-  twitterColor: "#2AA3EF",
+  moonstone: "#35A5D2",
   //
 
   tickColor: "#20D21F",

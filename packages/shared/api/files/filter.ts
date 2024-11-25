@@ -28,10 +28,7 @@ import queryString from "query-string";
 
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
-import { TViewAs } from "../../types";
-
-export type TSortOrder = "descending" | "ascending";
-export type TSortBy = "DateAndTime" | "Tags" | "AZ";
+import { TViewAs, TSortOrder, TSortBy } from "../../types";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;

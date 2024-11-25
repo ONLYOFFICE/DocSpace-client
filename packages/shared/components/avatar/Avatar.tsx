@@ -130,6 +130,7 @@ const AvatarPure = ({
   onChangeFile,
   model,
   hasAvatar,
+  noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -188,9 +189,22 @@ const AvatarPure = ({
     if (onClick) onClick(e);
   };
 
-  const onUploadClick = () => {
+  const onUploadClick = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!onChangeFile) return;
     const menu = model[0];
     menu.onClick(inputFilesElement);
+  };
+
+  const onClickAvatar = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (noClick) return;
+
+    if (hasAvatar) {
+      return onToggleOpenEditLogo();
+    }
+
+    onUploadClick();
   };
 
   const dropdownElement = (
@@ -221,77 +235,82 @@ const AvatarPure = ({
   );
 
   return (
-    <StyledAvatar
-      size={size}
-      data-testid="avatar"
-      className={className}
-      onMouseDown={onMouseDown}
-      onClick={onClick}
-      ref={iconRef}
-    >
-      <AvatarWrapper
-        source={source}
-        userName={userName || ""}
-        className="avatar-wrapper"
-        isGroup={isGroup}
+    <>
+      <StyledAvatar
+        size={size}
+        data-testid="avatar"
+        className={className}
+        onMouseDown={onMouseDown}
+        onClick={onClick || onClickAvatar}
+        ref={iconRef}
+        noClick={noClick}
       >
-        {avatarContent}
-      </AvatarWrapper>
-      {editing && size === "max" ? (
-        <EditContainer>
-          {hasAvatar ? (
-            <>
+        <AvatarWrapper
+          source={source}
+          userName={userName || ""}
+          className="avatar-wrapper"
+          isGroup={isGroup}
+        >
+          {avatarContent}
+        </AvatarWrapper>
+        {editing && size === "max" ? (
+          <EditContainer>
+            {hasAvatar ? (
+              <>
+                <IconButton
+                  className="edit_icon"
+                  iconName={PencilReactSvgUrl}
+                  onClick={onToggleOpenEditLogo}
+                  size={16}
+                />
+                {dropdownElement}{" "}
+              </>
+            ) : (
               <IconButton
                 className="edit_icon"
-                iconName={PencilReactSvgUrl}
-                onClick={onToggleOpenEditLogo}
+                iconName={PlusSvgUrl}
+                onClick={onUploadClick}
                 size={16}
               />
-              {dropdownElement}{" "}
-            </>
-          ) : (
-            <IconButton
-              className="edit_icon"
-              iconName={PlusSvgUrl}
-              onClick={onUploadClick}
-              size={16}
-            />
-          )}
-        </EditContainer>
-      ) : (
-        !hideRoleIcon && (
-          <>
-            <RoleWrapper
-              size={size}
-              data-tooltip-id={uniqueTooltipId}
-              data-tooltip-content={tooltipContent}
-              className="avatar_role-wrapper"
-            >
-              {roleIcon}
-            </RoleWrapper>
-            {withTooltip && (
-              <Tooltip
-                float
-                id={uniqueTooltipId}
-                getContent={getTooltipContent}
-                place={tooltipPlace}
-                opacity={1}
-              />
             )}
-          </>
-        )
+          </EditContainer>
+        ) : (
+          !hideRoleIcon && (
+            <>
+              <RoleWrapper
+                size={size}
+                data-tooltip-id={uniqueTooltipId}
+                data-tooltip-content={tooltipContent}
+                className="avatar_role-wrapper"
+              >
+                {roleIcon}
+              </RoleWrapper>
+              {withTooltip && (
+                <Tooltip
+                  float
+                  id={uniqueTooltipId}
+                  getContent={getTooltipContent}
+                  place={tooltipPlace}
+                  opacity={1}
+                />
+              )}
+            </>
+          )
+        )}
+      </StyledAvatar>
+      {onChangeFile && (
+        <input
+          id="customFileInput"
+          className="custom-file-input"
+          type="file"
+          onChange={onChangeFile}
+          accept="image/png, image/jpeg"
+          onClick={onInputClick}
+          ref={inputFilesElement}
+          style={{ display: "none" }}
+        />
       )}
-      <input
-        id="customFileInput"
-        className="custom-file-input"
-        type="file"
-        onChange={onChangeFile}
-        accept="image/png, image/jpeg"
-        onClick={onInputClick}
-        ref={inputFilesElement}
-        style={{ display: "none" }}
-      />
-    </StyledAvatar>
+    </>
   );
 };
 

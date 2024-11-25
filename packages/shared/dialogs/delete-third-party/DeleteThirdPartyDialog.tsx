@@ -70,7 +70,7 @@ const DeleteThirdPartyDialog = ({
     setIsLoading(true);
 
     if (isConnectionViaBackupModule) {
-      deleteThirdParty(+removeItem.provider_id)
+      deleteThirdParty(removeItem.provider_id)
         .catch((err) => toastr.error(err))
         .finally(() => {
           setConnectedThirdPartyAccount(null);
@@ -86,7 +86,7 @@ const DeleteThirdPartyDialog = ({
       (x) => x.provider_id !== removeItem.id,
     );
 
-    deleteThirdParty(+removeItem.id)
+    deleteThirdParty(removeItem.id)
       .then(() => {
         setThirdPartyProviders(newProviders);
         if (currentFolderId) {
@@ -120,7 +120,7 @@ const DeleteThirdPartyDialog = ({
       <ModalDialog.Body>
         {t("DisconnectCloudMessage", {
           service: removeItem.title,
-          account: removeItem.providerKey,
+          account: removeItem.provider_key,
         })}
       </ModalDialog.Body>
       <ModalDialog.Footer>

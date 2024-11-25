@@ -97,9 +97,11 @@ class BackupStore {
 
   isThirdStorageChanged = false;
 
+  /** @type {Record<string, string>} */
   formSettings = {};
   requiredFormSettings = {};
   defaultFormSettings = {};
+  /** @type {Record<string, boolean>} */
   errorsFieldsBeforeSafe = {};
 
   selectedEnableSchedule = false;
@@ -296,7 +298,7 @@ class BackupStore {
   };
 
   /**
-   * @param {ThirdPartyAccountType | null} elem
+   * @param {Partial<ThirdPartyAccountType> | null} elem
    */
   setSelectedThirdPartyAccount = (elem) => {
     this.selectedThirdPartyAccount = elem;

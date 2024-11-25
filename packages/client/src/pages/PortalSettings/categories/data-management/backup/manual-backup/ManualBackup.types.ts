@@ -24,24 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  ConnectedThirdPartyAccountType,
-  Nullable,
-  ProviderType,
-  ThirdPartyAccountType,
-} from "../../types";
+import type { ManualBackupProps } from "@docspace/shared/pages/manual-backup/ManualBackup.types";
 
-export interface DeleteThirdPartyDialogProps {
-  visible: boolean;
-  updateInfo?: VoidFunction;
-  isConnectionViaBackupModule?: boolean;
-  currentFolderId?: string | number | null;
-  deleteThirdParty: (id: string) => Promise<void>;
-  setConnectedThirdPartyAccount: (
-    account: Nullable<ConnectedThirdPartyAccountType>,
-  ) => void;
-  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
-  providers: ProviderType[];
-  removeItem: ThirdPartyAccountType;
-}
+export interface InjectedManualBackupProps
+  extends Omit<
+    ManualBackupProps,
+    "maxWidth" | "buttonSize" | "isNeedFilePath" | "setDocumentTitle"
+  > {}
+
+export interface ExternalManualBackupProps
+  extends Pick<
+    ManualBackupProps,
+    "maxWidth" | "buttonSize" | "isNeedFilePath"
+  > {}
+
+export interface ManualBackupWrapperProps
+  extends InjectedManualBackupProps,
+    ExternalManualBackupProps {}

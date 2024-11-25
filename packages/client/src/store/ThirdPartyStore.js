@@ -65,6 +65,11 @@ class ThirdPartyStore {
     this.capabilities = capabilities;
   };
 
+  /**
+   *
+   * @param {string} id
+   * @returns {Promise<void>}
+   */
   deleteThirdParty = (id) => api.files.deleteThirdParty(id);
 
   fetchThirdPartyProviders = async () => {

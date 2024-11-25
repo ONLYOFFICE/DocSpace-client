@@ -31,10 +31,7 @@ import { BackupStorageType } from "@docspace/shared/enums";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import { Button, type ButtonSize } from "@docspace/shared/components/button";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import {
-  DirectThirdPartyConnection,
-  type RemoveItemType,
-} from "@docspace/shared/components/direct-third-party-connection";
+import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-third-party-connection";
 
 import type {
   ConnectedThirdPartyAccountType,
@@ -74,13 +71,13 @@ interface ThirdPartyModuleProps {
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   accounts: ThirdPartyAccountType[];
   setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
-  deleteThirdParty: (id: number) => Promise<void>;
+  deleteThirdParty: (id: string) => Promise<void>;
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
   setThirdPartyProviders: (providers: ProviderType[]) => void;
   providers: ProviderType[];
-  removeItem: RemoveItemType;
+  removeItem: ThirdPartyAccountType;
   newPath: string;
   basePath: string;
   isErrorPath: boolean;

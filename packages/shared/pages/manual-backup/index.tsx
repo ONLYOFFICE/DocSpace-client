@@ -93,7 +93,7 @@ const ManualBackup = ({
   currentDeviceType,
   maxWidth,
   removeItem,
-  isValidForm,
+  isValidForm = false,
   deleteThirdPartyDialogVisible,
   connectDialogVisible,
   isTheSameThirdPartyAccount,
@@ -325,7 +325,7 @@ const ManualBackup = ({
           href={dataBackupUrl}
           target={LinkTarget.blank}
           fontSize="13px"
-          color={currentColorScheme.main?.accent}
+          color={currentColorScheme?.main?.accent}
           isHovered
         >
           {t("Common:LearnMore")}

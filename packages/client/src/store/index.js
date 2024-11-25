@@ -382,6 +382,7 @@ const store = {
   indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
+  thirdPartyStore,
 };
 
 export default store;

@@ -58,8 +58,8 @@ export type ThirdPartyAccountType = {
   provider_link?: string;
   storageIsConnected: boolean;
   connected: boolean;
-  provider_id?: string;
-  id?: string;
+  provider_id: string;
+  id: string;
   disabled: boolean;
   className?: string;
 };

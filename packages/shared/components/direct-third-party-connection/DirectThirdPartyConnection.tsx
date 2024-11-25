@@ -157,9 +157,6 @@ const DirectThirdPartyConnection = ({
         false,
         label,
         provider_key,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        // TODO: fix this?
         provider_id,
       );
 

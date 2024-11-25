@@ -39,7 +39,6 @@ import type { TColorScheme } from "../../themes";
 import type { ButtonSize } from "../../components/button";
 import type { FilesSelectorSettings } from "../../components/files-selector-input";
 import type { TBreadCrumb } from "../../components/selector/Selector.types";
-import type { RemoveItemType } from "../../components/direct-third-party-connection";
 
 type StorageParamsType = {
   key: string;
@@ -54,7 +53,7 @@ export interface ManualBackupProps {
   setDocumentTitle: (title: string) => void; // SRC_DIR/helpers/utils
 
   // backup store
-  isValidForm: boolean;
+  isValidForm?: boolean;
   defaultRegion: string; //  defaultFormSettings.region;
   downloadingProgress: number;
   temporaryLink: Nullable<string>;
@@ -115,12 +114,12 @@ export interface ManualBackupProps {
 
   // SettingsStore store
   dataBackupUrl: string;
+  pageIsDisabled: boolean; //  isManagement() && portals?.length === 1;
   currentDeviceType?: DeviceType;
-  currentColorScheme: TColorScheme;
+  currentColorScheme: Nullable<TColorScheme>;
   // end SettingsStore
 
   // dialogsStore Store
-  pageIsDisabled: boolean; //  isManagement() && portals?.length === 1;
   connectDialogVisible: boolean;
   deleteThirdPartyDialogVisible: boolean;
   setConnectDialogVisible: (visible: boolean) => void;
@@ -137,12 +136,12 @@ export interface ManualBackupProps {
   // end treeFoldersStore
 
   // selectedThirdPartyAccount from backupStore
-  // storeItem from dialogsStore
-  removeItem: RemoveItemType; // selectedThirdPartyAccount ?? storeItem
+  // removeItem from dialogsStore
+  removeItem: ThirdPartyAccountType; // selectedThirdPartyAccount ?? removeItem
 
   // thirdPartyStore store
   providers: ProviderType[];
-  deleteThirdParty: (id: number) => Promise<void>;
+  deleteThirdParty: (id: string) => Promise<void>;
   setThirdPartyProviders: (providers: ProviderType[]) => void;
   openConnectWindow: (
     serviceName: string,

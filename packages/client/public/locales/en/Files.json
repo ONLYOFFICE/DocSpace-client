@@ -84,6 +84,7 @@
   "Folder": "Folder",
   "FolderRemoved": "Folder moved to Trash",
   "FolderRenamed": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> created",
   "Forms": "Forms",
   "GeneralLinkDeletedSuccessfully": "New general link created successfully",
   "GoToMyRooms": "Go to rooms",

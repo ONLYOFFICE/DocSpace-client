@@ -130,6 +130,7 @@ const AvatarPure = ({
   onChangeFile,
   model,
   hasAvatar,
+  currentColorScheme,
   noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
@@ -254,7 +255,10 @@ const AvatarPure = ({
           {avatarContent}
         </AvatarWrapper>
         {editing && size === "max" ? (
-          <EditContainer>
+          <EditContainer
+            hasAvatar={hasAvatar}
+            currentColorScheme={currentColorScheme}
+          >
             {hasAvatar ? (
               <>
                 <IconButton

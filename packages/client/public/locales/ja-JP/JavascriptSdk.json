@@ -81,6 +81,7 @@
   "MobileOnly": "モバイルデバイスのみ",
   "Page": "表示ページ（数）",
   "PortalDescription": "{{productName}}全体を埋め込み、ユーザーがすべてのルーム、ファイル、設定を操作できるようにします。",
+  "PublicRoomPresetInfo": "公開ルームを埋め込み、ユーザーが登録せずに、そこに保存されているすべてのドキュメントの閲覧、編集、コメント、レビューを行うことを許可する",
   "RightPanelCollapsed": "右パネル折りたたみ ",
   "RoomFilter": "ルームフィルター",
   "RoomOrFolder": "ルームまたはフォルダ",

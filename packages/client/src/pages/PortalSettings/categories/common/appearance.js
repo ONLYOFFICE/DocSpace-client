@@ -181,7 +181,7 @@ const Appearance = (props) => {
   };
 
   useEffect(() => {
-    getSettings();
+    // getSettings();
     setDocumentTitle(t("Common:Appearance"));
   }, []);
 
@@ -247,7 +247,7 @@ const Appearance = (props) => {
   useEffect(() => {
     onColorCheck(appearanceTheme);
 
-    if (appearanceTheme.find((theme) => theme.id == selectThemeId).name) {
+    if (appearanceTheme.find((theme) => theme.id == selectThemeId)?.name) {
       setIsDisabledEditButton(true);
       setIsDisabledDeleteButton(true);
       return;

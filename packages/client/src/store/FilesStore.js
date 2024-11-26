@@ -95,49 +95,185 @@ const UnauthorizedHttpCode = 401;
 const THUMBNAILS_CACHE = 500;
 let timerId;
 
+/**
+ * Store for managing files and folders in DocSpace.
+ * Handles file operations, selection, filtering, and state management using MobX.
+ */
 class FilesStore {
+  /**
+   * Authentication store instance
+   * @type {Object}
+   */
   authStore;
+  /**
+   * User store instance
+   * @type {Object}
+   */
   userStore;
+  /**
+   * Current tariff status store instance
+   * @type {Object}
+   */
   currentTariffStatusStore;
+  /**
+   * Selected folder store instance
+   * @type {Object}
+   */
   selectedFolderStore;
+  /**
+   * Tree folders store instance
+   * @type {Object}
+   */
   treeFoldersStore;
+  /**
+   * Files settings store instance
+   * @type {Object}
+   */
   filesSettingsStore;
+  /**
+   * Third party integration store instance
+   * @type {Object}
+   */
   thirdPartyStore;
+  /**
+   * Client loading state store instance
+   * @type {Object}
+   */
   clientLoadingStore;
+  /**
+   * Info panel store instance
+   * @type {Object}
+   */
   infoPanelStore;
+  /**
+   * Access rights store instance
+   * @type {Object}
+   */
   accessRightsStore;
+  /**
+   * Public room store instance
+   * @type {Object}
+   */
   publicRoomStore;
+  /**
+   * Settings store instance
+   * @type {Object}
+   */
   settingsStore;
+  /**
+   * Current quota store instance
+   * @type {Object}
+   */
   currentQuotaStore;
+  /**
+   * Indexing store instance
+   * @type {Object}
+   */
   indexingStore;
 
+  /**
+   * Plugin store instance
+   * @type {Object}
+   */
   pluginStore;
 
+  /**
+   * View mode for files display (tile, row, or table)
+   * @type {string}
+   */
   privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
 
+  /**
+   * Flag indicating if drag operation is in progress
+   * @type {boolean}
+   */
   dragging = false;
+  /**
+   * URL for privacy instructions
+   * @type {string}
+   */
   privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
 
+  /**
+   * Store initialization status
+   * @type {boolean}
+   */
   isInit = false;
+  /**
+   * Flag indicating if a row item is being updated
+   * @type {boolean}
+   */
   isUpdatingRowItem = false;
+  /**
+   * Flag for password entry process
+   * @type {boolean}
+   */
   passwordEntryProcess = false;
 
+  /**
+   * X coordinate for tooltip positioning
+   * @type {number}
+   */
   tooltipPageX = 0;
+  /**
+   * Y coordinate for tooltip positioning
+   * @type {number}
+   */
   tooltipPageY = 0;
+  /**
+   * Flag indicating drag start
+   * @type {boolean}
+   */
   startDrag = false;
 
+  /**
+   * Flag to prevent concurrent room fetching
+   * @type {boolean}
+   */
   alreadyFetchingRooms = false;
 
+  /**
+   * Collection of files
+   * @type {Array}
+   */
   files = [];
+  /**
+   * Collection of folders
+   * @type {Array}
+   */
   folders = [];
 
+  /**
+   * Currently selected items
+   * @type {Array}
+   */
   selection = [];
+  /**
+   * Temporary selection buffer
+   * @type {Object|null}
+   */
   bufferSelection = null;
+  /**
+   * Selection state
+   * @type {string}
+   */
   selected = "close";
 
+  /**
+   * Filter for files
+   * @type {Object}
+   */
   filter = FilesFilter.getDefault();
+  /**
+   * Filter for rooms
+   * @type {Object}
+   */
   roomsFilter = RoomsFilter.getDefault();
+  /**
+   * Filter for members
+   * @type {Object}
+   */
   membersFilter = {
     page: 0,
     pageCount: 100,
@@ -145,58 +281,198 @@ class FilesStore {
     startIndex: 0,
   };
 
+  /**
+   * Category type for the current folder
+   * @type {string}
+   */
   categoryType = getCategoryType(window.location);
 
+  /**
+   * Timeout for loading files
+   * @type {number|null}
+   */
   loadTimeout = null;
+  /**
+   * Hotkey caret
+   * @type {Object|null}
+   */
   hotkeyCaret = null;
+  /**
+   * Hotkey caret start
+   * @type {Object|null}
+   */
   hotkeyCaretStart = null;
+  /**
+   * Active files
+   * @type {Array}
+   */
   activeFiles = [];
+  /**
+   * Active folders
+   * @type {Array}
+   */
   activeFolders = [];
 
+  /**
+   * Flag indicating if the first element is checked
+   * @type {boolean}
+   */
   firstElemChecked = false;
+  /**
+   * Flag indicating if the header border is visible
+   * @type {boolean}
+   */
   headerBorder = false;
 
+  /**
+   * Flag indicating if hotkeys are enabled
+   * @type {boolean}
+   */
   enabledHotkeys = true;
 
+  /**
+   * Created item
+   * @type {Object|null}
+   */
   createdItem = null;
+  /**
+   * Item to scroll to
+   * @type {Object|null}
+   */
   scrollToItem = null;
 
+  /**
+   * Flag indicating if a room has been created
+   * @type {boolean}
+   */
   roomCreated = false;
 
+  /**
+   * Flag indicating if files are being loaded
+   * @type {boolean}
+   */
   isLoadingFilesFind = false;
+  /**
+   * Length of the page items
+   * @type {number|null}
+   */
   pageItemsLength = null;
+  /**
+   * Flag indicating if pagination is hidden
+   * @type {boolean}
+   */
   isHidePagination = false;
+  /**
+   * Flag indicating if the trash is empty
+   * @type {boolean}
+   */
   trashIsEmpty = false;
+  /**
+   * Flag indicating if the main button is visible on mobile
+   * @type {boolean}
+   */
   mainButtonMobileVisible = true;
+  /**
+   * Flag indicating if files are being loaded
+   * @type {boolean}
+   */
   filesIsLoading = false;
 
+  /**
+   * Flag indicating if the page is empty
+   * @type {boolean}
+   */
   isEmptyPage = true;
+  /**
+   * Flag indicating if the page has been loaded
+   * @type {boolean}
+   */
   isLoadedFetchFiles = false;
 
+  /**
+   * Temporary action files IDs
+   * @type {Array}
+   */
   tempActionFilesIds = [];
+  /**
+   * Temporary action folders IDs
+   * @type {Array}
+   */
   tempActionFoldersIds = [];
 
+  /**
+   * Flag indicating if there is an error with the room not being available
+   * @type {boolean}
+   */
   isErrorRoomNotAvailable = false;
 
+  /**
+   * Rooms controller
+   * @type {AbortController}
+   */
   roomsController = null;
+  /**
+   * Files controller
+   * @type {AbortController}
+   */
   filesController = null;
 
+  /**
+   * Flag indicating if the search should be cleared
+   * @type {boolean}
+   */
   clearSearch = false;
 
+  /**
+   * Flag indicating if the page is loaded
+   * @type {boolean}
+   */
   isLoadedEmptyPage = false;
+  /**
+   * Flag indicating if the current room notifications are muted
+   * @type {boolean}
+   */
   isMuteCurrentRoomNotifications = false;
+  /**
+   * Flag indicating if the preview is enabled
+   * @type {boolean}
+   */
   isPreview = false;
+  /**
+   * Temporary filter
+   * @type {Object|null}
+   */
   tempFilter = null;
 
+  /**
+   * Highlighted file
+   * @type {Object}
+   */
   highlightFile = {};
+  /**
+   * Thumbnails
+   * @type {Set}
+   */
   thumbnails = new Set();
+  /**
+   * Flag indicating if a move operation is in progress
+   * @type {boolean}
+   */
   movingInProgress = false;
+  /**
+   * Queue for creating new files
+   * @type {Queue}
+   */
   createNewFilesQueue = new Queue({
     concurrent: 5,
     interval: 500,
     start: true,
   });
 
+  /**
+   * Hotkeys clipboard
+   * @type {Array}
+   */
   hotkeysClipboard = [];
 
   constructor(
@@ -2830,8 +3106,13 @@ class FilesStore {
 
   createFolder(parentFolderId, title) {
     return api.files.createFolder(parentFolderId, title);
-  }
+  };
 
+  /**
+   * Creates a new room with the specified parameters
+   * @param {Object} roomParams - Room parameters
+   * @returns {Promise} Promise object representing the API call
+   */
   createRoom = (roomParams) => {
     this.roomCreated = true;
     return api.rooms.createRoom(roomParams);
@@ -2839,20 +3120,46 @@ class FilesStore {
 
   createRoomInThirdpary(thirpartyFolderId, roomParams) {
     return api.rooms.createRoomInThirdpary(thirpartyFolderId, roomParams);
-  }
+  };
 
+  /**
+   * Edits a room with the specified parameters
+   * @param {string} id - Room ID
+   * @param {Object} roomParams - Room parameters to update
+   * @returns {Promise} Promise object representing the API call
+   */
   editRoom(id, roomParams) {
     return api.rooms.editRoom(id, roomParams);
-  }
+  };
 
+  /**
+   * Adds tags to a room
+   * @param {string} id - Room ID
+   * @param {Array} tagArray - Array of tags to add
+   * @returns {Promise} Promise object representing the API call
+   */
   addTagsToRoom(id, tagArray) {
     return api.rooms.addTagsToRoom(id, tagArray);
-  }
+  };
 
+  /**
+   * Removes tags from a room
+   * @param {string} id - Room ID
+   * @param {Array} tagArray - Array of tags to remove
+   * @returns {Promise} Promise object representing the API call
+   */
   removeTagsFromRoom(id, tagArray) {
     return api.rooms.removeTagsFromRoom(id, tagArray);
-  }
+  };
 
+  /**
+   * Calculates room logo parameters for cropping
+   * @param {Object} img - Image object
+   * @param {number} x - X coordinate
+   * @param {number} y - Y coordinate
+   * @param {number} zoom - Zoom level
+   * @returns {Object} Calculated logo parameters including dimensions and position
+   */
   calculateRoomLogoParams(img, x, y, zoom) {
     let imgWidth, imgHeight, dimensions;
     if (img.width > img.height) {
@@ -2874,20 +3181,40 @@ class FilesStore {
       width: dimensions,
       height: dimensions,
     };
-  }
+  };
 
+  /**
+   * Uploads a room logo
+   * @param {Object} formData - Form data containing the logo image
+   * @returns {Promise} Promise object representing the API call
+   */
   uploadRoomLogo(formData) {
     return api.rooms.uploadRoomLogo(formData);
-  }
+  };
 
+  /**
+   * Adds a logo to a room
+   * @param {string} id - Room ID
+   * @param {Object} icon - Logo icon object
+   * @returns {Promise} Promise object representing the API call
+   */
   addLogoToRoom(id, icon) {
     return api.rooms.addLogoToRoom(id, icon);
-  }
+  };
 
+  /**
+   * Removes a logo from a room
+   * @param {string} id - Room ID
+   * @returns {Promise} Promise object representing the API call
+   */
   removeLogoFromRoom(id) {
     return api.rooms.removeLogoFromRoom(id);
-  }
+  };
 
+  /**
+   * Gets the default members filter configuration
+   * @returns {Object} Default filter configuration with pagination settings
+   */
   getDefaultMembersFilter = () => {
     return {
       page: 0,
@@ -2897,10 +3224,21 @@ class FilesStore {
     };
   };
 
+  /**
+   * Sets the room members filter
+   * @param {Object} roomMembersFilter - Filter configuration
+   */
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };
 
+  /**
+   * Gets the room members
+   * @param {string} id - Room ID
+   * @param {boolean} clearFilter - Flag to clear the filter
+   * @param {Object} membersFilter - Filter configuration
+   * @returns {Promise} Promise object representing the API call
+   */
   getRoomMembers = (id, clearFilter = true, membersFilter) => {
     let newFilter = membersFilter ? membersFilter : clone(this.membersFilter);
 
@@ -2928,20 +3266,44 @@ class FilesStore {
     });
   };
 
+  /**
+   * Sets the members filter
+   * @param {Object} filter - Filter configuration
+   */
   setMembersFilter = (filter) => {
     this.membersFilter = filter;
   };
 
+  /**
+   * Gets the room links
+   * @param {string} id - Room ID
+   * @returns {Promise} Promise object representing the API call
+   */
   getRoomLinks = (id) => {
     return api.rooms
       .getRoomMembers(id, { filterType: 2 }) // 2 (External link)
       .then((res) => res.items);
   };
 
-  updateRoomMemberRole(id, data) {
+  /**
+   * Updates a room member's role
+   * @param {string} id - Room ID
+   * @param {Object} data - Role update data
+   * @returns {Promise} Promise object representing the API call
+   */
+  updateRoomMemberRole = (id, data) => {
     return api.rooms.updateRoomMemberRole(id, data);
-  }
+  };
 
+  /**
+   * Gets the history for a selection type
+   * @param {string} selectionType - Selection type (file or folder)
+   * @param {string} id - ID of the selection
+   * @param {Object} signal - Abort signal
+   * @param {string} requestToken - Request token
+   * @param {Object} filter - Filter configuration
+   * @returns {Promise} Promise object representing the API call
+   */
   getHistory(selectionType, id, signal = null, requestToken, filter) {
     return api.rooms.getHistory(
       selectionType,
@@ -2950,15 +3312,25 @@ class FilesStore {
       requestToken,
       filter,
     );
-  }
+  };
 
-  getRoomHistory(id) {
+  /**
+   * Gets the room history
+   * @param {string} id - Room ID
+   * @returns {Promise} Promise object representing the API call
+   */
+  getRoomHistory = (id) => {
     return api.rooms.getRoomHistory(id);
-  }
+  };
 
-  getFileHistory(id) {
+  /**
+   * Gets the file history
+   * @param {string} id - File ID
+   * @returns {Promise} Promise object representing the API call
+   */
+  getFileHistory = (id) => {
     return api.rooms.getFileHistory(id);
-  }
+  };
 
   // updateFolderBadge = (id, count) => {
   //   const folder = this.folders.find((x) => x.id === id);
@@ -2982,6 +3354,10 @@ class FilesStore {
   //   }
   // };
 
+  /**
+   * Updates the room pin status
+   * @param {string} item - Room ID
+   */
   updateRoomPin = (item) => {
     const idx = this.folders.findIndex((folder) => folder.id === item);
 
@@ -2989,6 +3365,9 @@ class FilesStore {
     this.folders[idx].pinned = !this.folders[idx].pinned;
   };
 
+  /**
+   * Scrolls to the top of the page
+   */
   scrollToTop = () => {
     if (this.selectedFolderStore.isIndexedFolder) return;
 
@@ -2999,6 +3378,11 @@ class FilesStore {
     scrollElm && scrollElm.scrollTo(0, 0);
   };
 
+  /**
+   * Adds an item to the selection
+   * @param {Object} item - Item to add
+   * @param {boolean} isFolder - Flag indicating if the item is a folder
+   */
   addItem = (item, isFolder) => {
     if (!this.showNewFilesInList) {
       return;
@@ -3043,6 +3427,13 @@ class FilesStore {
     this.scrollToTop();
   };
 
+  /**
+   * Removes files
+   * @param {Array} fileIds - Array of file IDs to remove
+   * @param {Array} folderIds - Array of folder IDs to remove
+   * @param {Function} showToast - Function to show a toast notification
+   * @param {string} destFolderId - Destination folder ID
+   */
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 
@@ -3194,23 +3585,43 @@ class FilesStore {
     }
   };
 
+  /**
+   * Updates a file
+   * @param {string} fileId - File ID
+   * @param {string} title - New file title
+   * @returns {Promise} Promise object representing the API call
+   */
   updateFile = (fileId, title) => {
     return api.files
       .updateFile(fileId, title)
       .then((file) => this.setFile(file));
   };
 
+  /**
+   * Renames a folder
+   * @param {string} folderId - Folder ID
+   * @param {string} title - New folder title
+   * @returns {Promise} Promise object representing the API call
+   */
   renameFolder = (folderId, title) => {
     return api.files.renameFolder(folderId, title).then((folder) => {
       this.setFolder(folder);
     });
   };
 
+  /**
+   * Gets the total count of files
+   * @returns {number} Total count of files
+   */
   getFilesCount = () => {
     const { filesCount, foldersCount } = this.selectedFolderStore;
     return filesCount + this.folders ? this.folders.length : foldersCount;
   };
 
+  /**
+   * Gets the total count of files and folders
+   * @returns {number} Total count of files and folders
+   */
   getServiceFilesCount = () => {
     const filesLength = this.files ? this.files.length : 0;
     const foldersLength = this.folders ? this.folders.length : 0;
@@ -3390,6 +3801,11 @@ class FilesStore {
     }
   };
 
+  /**
+   * Gets the list of files and folders
+   * @param {Array} items - Array of items
+   * @returns {Array} List of files and folders
+   */
   getFilesListItems = (items) => {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -3730,7 +4146,7 @@ class FilesStore {
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
 
     return cbMenu;
-  }
+  };
 
   getCheckboxItemLabel = (t, key) => {
     switch (key) {

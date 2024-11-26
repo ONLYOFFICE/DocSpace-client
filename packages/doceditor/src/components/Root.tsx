@@ -49,6 +49,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
+import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
 
@@ -107,6 +108,8 @@ const Root = ({
   useRootInit({
     documentType: config?.documentType,
   });
+
+  const { frameConfig } = useSDK();
 
   const { getErrorMessage } = useError({
     error,
@@ -230,6 +233,7 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
+          frameConfig={frameConfig}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}

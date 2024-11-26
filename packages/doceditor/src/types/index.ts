@@ -228,6 +228,7 @@ export type EditorProps = {
   doc?: string;
   documentserverUrl: string;
   fileInfo?: TFile;
+  frameConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;

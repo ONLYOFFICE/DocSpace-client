@@ -76,7 +76,7 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
-  frameConfig,
+  sdkConfig,
 
   filesSettings,
 
@@ -124,7 +124,7 @@ const Editor = ({
     isSkipError,
     openOnNewPage,
     t,
-    frameConfig,
+    sdkConfig,
   });
 
   useInit({
@@ -155,7 +155,7 @@ const Editor = ({
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const editorGoBack = frameConfig?.editorGoBack;
+    const editorGoBack = sdkConfig?.editorGoBack;
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -193,7 +193,7 @@ const Editor = ({
 
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
-  >["customization"] = frameConfig?.editorCustomization;
+  >["customization"] = sdkConfig?.editorCustomization;
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 

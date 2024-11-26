@@ -24,4 +24,98 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Backdrop } from "./Backdrop";
+import React from "react";
+
+import { isMobile, isTablet } from "../../utils";
+
+import StyledBackdrop from "./Backdrop.styled";
+import { BackdropProps } from "./Backdrop.types";
+
+const Backdrop: React.FC<BackdropProps> = ({
+  visible = false,
+  className,
+  withBackground = false,
+  withoutBlur = false,
+  isAside = false,
+  withoutBackground = false,
+  isModalDialog = false,
+  zIndex = 203,
+  ...restProps
+}) => {
+  const backdropRef = React.useRef<HTMLDivElement | null>(null);
+  const [needBackdrop, setNeedBackdrop] = React.useState(false);
+  const [needBackground, setNeedBackground] = React.useState(false);
+
+  const updateBackdropState = React.useCallback(() => {
+    if (!visible) {
+      setNeedBackground(false);
+      setNeedBackdrop(false);
+      return;
+    }
+
+    const isTabletOrMobile = isTablet() || isMobile();
+    const existingBackdrops = document.querySelectorAll(".backdrop-active");
+    const backdropCount = existingBackdrops.length;
+
+    // Determine if backdrop is needed
+    const shouldShowBackdrop =
+      backdropCount < 1 || (isAside && backdropCount <= 2);
+
+    // Determine if background is needed
+    const shouldShowBackground =
+      shouldShowBackdrop &&
+      ((isTabletOrMobile && !withoutBlur) ||
+        withBackground ||
+        (isAside && !withoutBackground));
+
+    setNeedBackdrop(shouldShowBackdrop);
+    setNeedBackground(shouldShowBackground);
+  }, [visible, isAside, withBackground, withoutBlur, withoutBackground]);
+
+  const getComposedClassName = React.useCallback((): string => {
+    const baseClasses = new Set(["backdrop-active", "not-selectable"]);
+
+    if (typeof className === "string") {
+      baseClasses.add(className);
+    } else if (Array.isArray(className)) {
+      className.forEach((cls) => baseClasses.add(cls));
+    }
+
+    return Array.from(baseClasses).join(" ");
+  }, [className]);
+
+  const handleTouch = React.useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      if (!isModalDialog) {
+        e.preventDefault();
+      }
+      backdropRef.current?.click();
+    },
+    [isModalDialog],
+  );
+
+  // Single effect to handle backdrop state updates
+  React.useEffect(() => {
+    updateBackdropState();
+  }, [updateBackdropState]);
+
+  if (!visible || (!needBackdrop && !isAside)) {
+    return null;
+  }
+
+  return (
+    <StyledBackdrop
+      {...restProps}
+      ref={backdropRef}
+      zIndex={zIndex}
+      className={getComposedClassName()}
+      needBackground={needBackground}
+      visible={visible}
+      onTouchMove={handleTouch}
+      onTouchEnd={handleTouch}
+      data-testid="backdrop"
+    />
+  );
+};
+
+export { Backdrop };

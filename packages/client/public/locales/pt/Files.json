@@ -1,4 +1,5 @@
 {
+  "ActionCannotUndone": "Esta ação não pode ser desfeita. Tem certeza de que deseja continuar?",
   "AddedToClipboard": "Itens adicionados à área de transferência",
   "AddMembersDescription": "Pode adicionar novos membros da equipa manualmente ou convidá-los através de um link.",
   "AddNewLink": "Adicionar novo link",

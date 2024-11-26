@@ -7,6 +7,7 @@
   "CreatingPortal": "새 {{productName}} 생성 중",
   "CurrentSpace": "현재 공간",
   "DeleteRequestSuccess": "삭제 요청이 {{productName}} 소유자의 이메일 주소(<1>{{email}}</1>)로 전송되었습니다.",
+  "DeleteWarning": "마지막 전체 액세스 공간은 삭제할 수 없습니다",
   "DomainName": "도메인 이름",
   "DomainNotFound": "도메인을 찾을 수 없습니다. DNS 설정을 확인하세요",
   "DomainSettings": "도메인 설정",

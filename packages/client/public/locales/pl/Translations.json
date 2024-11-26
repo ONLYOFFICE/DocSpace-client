@@ -34,6 +34,7 @@
   "RoleFormFiller": "Wypełniający formularze",
   "RoleFormFillerDescription": "Operacje na istniejących plikach: przeglądanie, wypełnianie formularzy, recenzowanie, komentowanie.",
   "RoleFormFillerFormRoomDescription": "Osoby wypełniające formularze mogą wypełniać formularze i wyświetlać tylko wypełnione/rozpoczęte formularze w katalogach Gotowe oraz W toku.",
+  "RoleGuestDescriprion": "Goście mają dostęp do pokoi, do których zostali zaproszeni i mogą tworzyć oraz edytować dokumenty, jeśli przypisano im odpowiednie role w pokoju.",
   "RoleNewUserDescription": "Użytkownicy mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą tworzyć pokoi, zarządzać użytkownikami, ani nie mają dostępu do ustawień.",
   "RolePortalAdminDescription": "Administratorzy {{productName}} mogą uzyskać dostęp do ustawień {{productName}}, zarządzać pokojami i archiwizować je, zapraszać nowych użytkowników oraz przypisywać role poniżej swojego poziomu. Wszyscy administratorzy mają dostęp do sekcji Dokumenty.",
   "RolePowerUserFormRoomDescription": "Użytkownicy mogą przesyłać formularze do pokoju i mają pełen dostęp do katalogów Gotowe oraz W toku.",

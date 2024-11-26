@@ -64,6 +64,7 @@
   "EmptyRootRoomHeader": "Welkom bij {{productName}}!",
   "EmptyScreenFolder": "Hier nog geen docs",
   "EnableNotifications": "Meldingen inschakelen",
+  "ErrorChangeIndex": "Fout bij het wijzigen van index. Het probleem kan aan de serverkant worden veroorzaakt. Laad de pagina opnieuw of controleer de instellingen van uw internetverbinding.",
   "ExcludeSubfolders": "Submappen uitsluiten",
   "ExportRoomIndex": "Exporteer kamer index",
   "ExportRoomIndexAlreadyInProgressError": "De export van de kamer index is al bezig. Wacht tot de huidige export is voltooid om de nieuwe export te starten.",

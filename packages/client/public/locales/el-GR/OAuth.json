@@ -54,7 +54,6 @@
   "NoAuthorizedApps": "Δεν υπάρχουν εξουσιοδοτημένες εφαρμογές",
   "NoOAuthAppHeader": "Δεν υπάρχουν εφαρμογές OAuth",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "Οι εφαρμογές OAuth χρησιμοποιούνται για την πρόσβαση στο API του {{productName}} της {{organizationName}} για εξουσιοδότηση και περαιτέρω ενέργειες, όπως πρόσβαση σε αρχεία κ.λπ.",
   "OAuthHeaderBlock": "URL OAuth",
   "PrivacyPolicy": "Πολιτική απορρήτου",
   "PrivacyPolicyURL": "URL πολιτικής απορρήτου",

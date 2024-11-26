@@ -54,7 +54,6 @@
   "NoAuthorizedApps": "Ei valtuutettuja sovelluksia",
   "NoOAuthAppHeader": "Ei OAuth sovelluksia",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth-sovelluksia käytetään {{organizationName}} {{productName}} API:n kirjautumiseen valtuutustas ja muita toimintoja, kuten tiedostojen käyttöä varten, jne. ",
   "OAuthHeaderBlock": "OAuth urlit",
   "PrivacyPolicy": "Tietosuojakäytäntö",
   "PrivacyPolicyURL": "Tietosuojakäytäntö URL",

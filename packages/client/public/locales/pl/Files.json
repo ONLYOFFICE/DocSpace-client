@@ -1,4 +1,5 @@
 {
+  "ActionCannotUndone": "Nie można cofnąć tej czynności. Czy na pewno chcesz kontynuować?",
   "AddedToClipboard": "Pozycje zostały dodane do schowka",
   "AddMembersDescription": "Możesz dodać nowych członków zespołu ręcznie lub zaprosić ich za pomocą linku.",
   "AddNewLink": "Dodaj nowy link",
@@ -145,6 +146,9 @@
   "ReorderIndex": "Działanie Uporządkuj usunie spacje w indeksach. Pliki zostaną ponownie zindeksowane zgodnie z offsetem, aby uzupełnić brakujące indeksy.",
   "RestoreAll": "Przywróć wszystko",
   "RevokeLink": "Unieważnij link",
+  "RevokeSharedLinkDescriptionCustomRoom": "Linki do wszystkich plików w pokoju zostaną usunięte. Poprzednie linki do plików w pokoju i osadzonych dokumentów staną się niedostępne.",
+  "RevokeSharedLinkDescriptionFormRoom": "Linki do wszystkich formularzy w pokoju zostaną wygenerowane ponownie. Poprzednie linki do formularzy w pokoju i osadzonych formularzy staną się niedostępne.",
+  "RevokeSharedLinkDescriptionPublicRoom": "Linki do wszystkich plików w pokoju zostaną wygenerowane ponownie. Poprzednie linki do plików w pokoju i osadzonych dokumentów staną się niedostępne.",
   "RoomAvailableViaExternalLink": "Pokój dostępny za pośrednictwem linku zewnętrznego",
   "RoomAvailableViaSharedLink": "Pokój dostępny za pośrednictwem linku udostępniania",
   "RoomCreated": "Pokój został utworzony",
@@ -190,6 +194,10 @@
   "WantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój? Będziesz w stanie ponownie do niego dołączyć po otrzymaniu nowego zaproszenia od administratora pokoju.",
   "WantToRestoreTheRoom": "Wszystkie linki zewnętrzne w tym pokoju staną się aktywne, a jego zawartość będzie dostępna dla wszystkich użytkowników posiadających link. Czy chcesz przywrócić pokój?",
   "WantToRestoreTheRooms": "Wszystkie linki zewnętrzne w przywróconych pokojach staną się aktywne, a ich zawartość będzie dostępna dla wszystkich użytkowników posiadających linki do pokoi. Czy chcesz przywrócić pokoje?",
+  "WarningCopyToFormRoomServal": "Kopiowanie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Kopiuj po jednym formularzu PDF {{ organizationName }} na raz.",
+  "WarningCreationFormRoom": "Tworzenie na podstawie kilku plików i katalogów jest niedostępne dla tego typu pokoju. Aby utworzyć taki pokój, przejdź do sekcji Pokoje lub skorzystaj z jednego z formularzy PDF.",
+  "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego pokoju. Spróbuj przenieść formularz PDF {{ organizationName }}.",
+  "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WithSubfolders": "Z podkatalogami",
   "YouLeftTheRoom": "Opuszczono pokój"
 }

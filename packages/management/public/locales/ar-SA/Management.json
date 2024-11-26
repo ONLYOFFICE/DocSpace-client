@@ -7,6 +7,7 @@
   "CreatingPortal": "إنشاء {{productName}} جديد",
   "CurrentSpace": "المساحة الحالية",
   "DeleteRequestSuccess": "تم إرسال طلب الحذف بنجاح إلى عنوان البريد الإلكتروني الخاص</1>{{email}}<1>  بمالك {{productName}}",
+  "DeleteWarning": "لا يمكن حذف آخر مساحة ذات وصول كامل",
   "DomainName": "اسم النطاق",
   "DomainNotFound": "لم يتم العثور على النطاق، يرجى التحقق من إعدادات DNS.",
   "DomainSettings": "إعدادات النطاق",

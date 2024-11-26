@@ -54,7 +54,6 @@
   "NoAuthorizedApps": "Няма удостоверени приложения",
   "NoOAuthAppHeader": "Няма OAuth приложения",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "OAuth приложенията се използват за достъп до API на {{organizationName}} {{productName}} за оторизация и допълнителни действия, като например достъп до файлове и др.",
   "OAuthHeaderBlock": "OAuth url адреси",
   "PrivacyPolicy": "Политика за поверителност",
   "PrivacyPolicyURL": "URL за Политика за поверителност",

@@ -31,6 +31,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
+import heic2any from "heic2any";
 
 import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 import { getFileExtension } from "@docspace/shared/utils/common";
@@ -82,6 +83,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   } = props;
 
   const TiffAbortSignalRef = useRef<AbortController>();
+  const HeicAbortSignalRef = useRef<AbortController>();
+
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>();
 
@@ -348,6 +351,27 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       });
   }, []);
 
+  const fetchAndSetHeicDataURL = useCallback((src: string) => {
+    HeicAbortSignalRef.current?.abort();
+    HeicAbortSignalRef.current = new AbortController();
+
+    fetch(src, { signal: HeicAbortSignalRef.current.signal })
+      .then((res) => res.blob())
+      .then((blob) => heic2any({ blob }))
+      .then((conversionResult) => {
+        if (conversionResult) {
+          setFileUrl(URL.createObjectURL(conversionResult));
+        }
+      })
+      .catch((error: Error) => {
+        if (error.name === "AbortError") {
+          return;
+        }
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  }, []);
+
   const onSetSelectionFile = useCallback(() => {
     setBufferSelection?.(targetFile);
   }, [setBufferSelection, targetFile]);
@@ -384,9 +408,14 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       setFileUrl(src);
     }
 
-    if (extension === ".tiff" || extension === ".tif") {
+    if (extension !== ".heic") {
+      HeicAbortSignalRef.current?.abort();
+      setFileUrl(src);
+    }
+
+    if (extension === ".heic") {
       setFileUrl(undefined);
-      fetchAndSetTiffDataURL(src);
+      fetchAndSetHeicDataURL(src);
     }
 
     const foundFile = files.find((file) => file.id === fileId);
@@ -404,6 +433,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,
+    fetchAndSetHeicDataURL,
   ]);
 
   useEffect(() => {

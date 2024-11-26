@@ -33,45 +33,56 @@ import {
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
-const useSDK = () => {
-  const [frameConfig, setFrameConfig] = useState<TFrameConfig | null>(null);
+const useSDK = ({
+  sdkConfig,
+  setSdkConfig,
+}: {
+  sdkConfig: TFrameConfig | null;
+  setSdkConfig: (data: TFrameConfig) => void;
+}) => {
+  const parseEventData = useCallback((data: string | object) => {
+    if (typeof data === "string") {
+      try {
+        return JSON.parse(data);
+      } catch {
+        return null;
+      }
+    }
+    return data;
+  }, []);
+
+  const getEditorInstance = useCallback(() => {
+    const instance = window.DocEditor?.instances[EDITOR_ID];
+    return { instance, asc: window.Asc };
+  }, []);
 
   const handleMessage = useCallback(
     (e: MessageEvent) => {
-      const eventData =
-        typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      const eventData = parseEventData(e.data);
+      if (!eventData?.data?.methodName) return;
 
-      if (eventData.data) {
-        const { data, methodName } = eventData.data;
+      const { data, methodName } = eventData.data;
+      let res;
 
-        if (!methodName) return;
-
-        let res;
-
-        try {
-          switch (methodName) {
-            case "setConfig":
-              setFrameConfig(data);
-              res = data;
-              break;
-            case "getEditorInstance":
-              const instance = window.DocEditor?.instances[EDITOR_ID];
-              const asc = window.Asc;
-              res = { instance, asc };
-              break;
-            default:
-              res = "Wrong method for this mode";
-          }
-        } catch (e) {
-          res = e;
+      try {
+        switch (methodName) {
+          case "setConfig":
+            setSdkConfig(data);
+            res = data;
+            break;
+          case "getEditorInstance":
+            res = getEditorInstance();
+            break;
+          default:
+            res = "Wrong method for this mode";
         }
-
-        console.log("useSDK handleMessage", methodName, res);
-
-        frameCallbackData(res);
+      } catch (e) {
+        res = e;
       }
+
+      frameCallbackData(res);
     },
-    [setFrameConfig],
+    [parseEventData, getEditorInstance, setSdkConfig],
   );
 
   useEffect(() => {
@@ -87,12 +98,10 @@ const useSDK = () => {
   }, []);
 
   useEffect(() => {
-    if (window.parent && !frameConfig?.frameId) {
+    if (window.parent && !sdkConfig?.frameId) {
       callSetConfig();
     }
-  }, [callSetConfig, frameConfig?.frameId]);
-
-  return { frameConfig };
+  }, [sdkConfig?.frameId, callSetConfig]);
 };
 
 export default useSDK;

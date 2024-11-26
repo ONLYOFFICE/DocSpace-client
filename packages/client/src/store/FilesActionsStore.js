@@ -1505,14 +1505,13 @@ class FilesActionStore {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
-    const { rootFolderType } = this.selectedFolderStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
 
-    const { title, fileExst } = item;
+    const { title, fileExst, id, rootFolderType } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
@@ -1533,10 +1532,9 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const isTrash = actionType === "delete";
     const url = getCategoryUrl(
-      isTrash ? CategoryType.Trash : categoryType,
-      parentId,
+      getCategoryTypeByFolderType(rootFolderType, id),
+      id,
     );
 
     const newFilter = FilesFilter.getDefault();

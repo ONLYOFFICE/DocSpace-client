@@ -49,4 +49,6 @@ export interface LoaderProps {
 export interface LoaderThemeProps extends LoaderProps {
   ref: SVGSVGElement;
   $currentColorScheme?: TColorScheme;
+  viewBox?: string;
+  xmlns?: string;
 }

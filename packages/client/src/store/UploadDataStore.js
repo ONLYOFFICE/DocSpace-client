@@ -663,7 +663,7 @@ class UploadDataStore {
     }
 
     if (this.uploaded) {
-      this.primaryProgressDataStore.clearPrimaryProgressData();
+      this.primaryProgressDataStore.clearUploadProgress();
     }
   };
 

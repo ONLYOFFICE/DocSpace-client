@@ -76,6 +76,7 @@ const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
 });
 
 import { calculateAsideHeight } from "@/utils";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const Root = ({
   settings,
@@ -91,6 +92,7 @@ const Root = ({
   shareKey,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
+  const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
 
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
@@ -109,7 +111,7 @@ const Root = ({
     documentType: config?.documentType,
   });
 
-  const { frameConfig } = useSDK();
+  useSDK({ sdkConfig, setSdkConfig });
 
   const { getErrorMessage } = useError({
     error,
@@ -233,7 +235,7 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
-          frameConfig={frameConfig}
+          sdkConfig={sdkConfig}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}

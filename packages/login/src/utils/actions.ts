@@ -223,17 +223,29 @@ export async function getScopeList() {
 }
 
 export async function getOAuthClient(clientId: string) {
-  const [getOAuthClient] = createRequest(
-    [`/clients/${clientId}/public/info`],
-    [["", ""]],
-    "GET",
+  const config = await getConfig();
+
+  const route = `/clients/${clientId}/public/info`;
+  const path = `api/2.0${route}`;
+
+  const urls: string[] = config.oauth2.identity.map(
+    (url: string) => `${url}/${path}`,
+  );
+
+  const actions = await Promise.allSettled(
+    urls.map((url: string) => fetch(url)),
   );
 
   const oauthClient = IS_TEST
     ? getClientHandler()
-    : await fetch(getOAuthClient);
+    : actions.length
+      ? actions
+          .filter((action) => action.status === "fulfilled")
+          .filter((action) => action.value.ok && action.value.status !== 404)[0]
+          .value
+      : await fetch(createRequest([route], [["", ""]], "GET")[0]);
 
-  if (!oauthClient.ok) return;
+  if (!oauthClient) return;
 
   const client = await oauthClient.json();
 

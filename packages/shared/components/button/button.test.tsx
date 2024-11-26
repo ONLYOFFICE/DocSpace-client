@@ -27,6 +27,10 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import { ThemeProvider } from "styled-components";
+import { Base } from "../../themes";
+import type { TColorScheme, TInterfaceDirection } from "../../themes";
 
 import { Button } from ".";
 import { ButtonSize } from "./Button.enums";
@@ -35,187 +39,379 @@ const baseProps = {
   size: ButtonSize.extraSmall,
   isDisabled: false,
   label: "OK",
-  onClick: () => {},
+  onClick: jest.fn(),
+};
+
+const mockColorScheme: TColorScheme = {
+  id: 1,
+  name: "Mock Theme",
+  main: {
+    accent: "#4781D1",
+    buttons: "#4781D1",
+  },
+  text: {
+    accent: "#FFFFFF",
+    buttons: "#FFFFFF",
+  },
+};
+
+const mockTheme = {
+  ...Base,
+  isBase: true,
+  currentColorScheme: mockColorScheme,
+  interfaceDirection: "ltr" as TInterfaceDirection,
+  button: {
+    ...Base.button,
+    color: {
+      base: "#333333",
+      baseHover: "#666666",
+      baseActive: "#000000",
+      baseDisabled: "#999999",
+      primary: "#4781D1",
+      primaryHover: "#5D95E5",
+      primaryActive: "#366AAF",
+      primaryDisabled: "#A6C5EF",
+    },
+    backgroundColor: {
+      base: "#FFFFFF",
+      baseHover: "#F8F9F9",
+      baseActive: "#ECEEF1",
+      baseDisabled: "#FFFFFF",
+      primary: "#4781D1",
+      primaryHover: "#5D95E5",
+      primaryActive: "#366AAF",
+      primaryDisabled: "#A6C5EF",
+    },
+    border: {
+      base: "1px solid #D0D5DA",
+      baseHover: "1px solid #A3A9AE",
+      baseActive: "1px solid #666666",
+      baseDisabled: "1px solid #ECEEF1",
+      primary: "1px solid #4781D1",
+      primaryHover: "1px solid #5D95E5",
+      primaryActive: "1px solid #366AAF",
+      primaryDisabled: "1px solid #A6C5EF",
+    },
+    boxSizing: "border-box",
+    display: "inline-block",
+    fontWeight: "600",
+    margin: "0",
+    height: {
+      ...Base.button.height,
+      [ButtonSize.extraSmall]: "24px",
+      [ButtonSize.small]: "32px",
+      [ButtonSize.normal]: "40px",
+      medium: "44px",
+    },
+    fontSize: {
+      ...Base.button.fontSize,
+      [ButtonSize.extraSmall]: "12px",
+      [ButtonSize.small]: "13px",
+      [ButtonSize.normal]: "14px",
+    },
+    padding: {
+      [ButtonSize.extraSmall]: "2px 12px",
+      [ButtonSize.small]: "0 16px",
+      [ButtonSize.normal]: "0 28px",
+      medium: "0 28px",
+    },
+  },
+  fontFamily: "Open Sans, sans-serif, Arial",
+};
+
+const renderWithTheme = (component: React.ReactNode, theme = mockTheme) => {
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
 describe("<Button />", () => {
-  test("renders without error", () => {
-    render(<Button {...baseProps} />);
-
-    expect(screen.getByTestId("button")).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  // /* it('not re-render test', () => {
-  //   const onClick = () => alert('Button clicked');
+  test("renders without error", () => {
+    renderWithTheme(<Button {...baseProps} />);
+    expect(screen.getByTestId("button")).toBeInTheDocument();
+    expect(screen.getByText("OK")).toBeInTheDocument();
+  });
 
-  //   const wrapper = shallow(<Button {...baseProps} onClick={onClick} />).instance();
+  test("handles click events", async () => {
+    renderWithTheme(<Button {...baseProps} />);
+    const button = screen.getByTestId("button");
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(wrapper.props);
+    await userEvent.click(button);
+    expect(baseProps.onClick).toHaveBeenCalledTimes(1);
+  });
 
-  //   expect(shouldUpdate).toBe(false);
-  // });
+  test("renders icon when provided", () => {
+    const icon = <span data-testid="test-icon">🔍</span>;
+    renderWithTheme(<Button {...baseProps} icon={icon} />);
+    expect(screen.getByTestId("test-icon")).toBeInTheDocument();
+  });
 
-  // it('re-render test by value', () => {
-  //   const onClick = () => alert('Button clicked');
+  test("applies different sizes correctly", () => {
+    const { rerender } = renderWithTheme(
+      <Button {...baseProps} size={ButtonSize.extraSmall} />,
+    );
+    expect(screen.getByTestId("button")).toHaveStyle({
+      height: mockTheme.button.height[ButtonSize.extraSmall],
+      fontSize: mockTheme.button.fontSize[ButtonSize.extraSmall],
+    });
 
-  //   const wrapper = shallow(<Button {...baseProps} onClick={onClick} />).instance();
+    rerender(
+      <ThemeProvider theme={mockTheme}>
+        <Button {...baseProps} size={ButtonSize.normal} />
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId("button")).toHaveStyle({
+      height: mockTheme.button.height[ButtonSize.normal],
+      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
+    });
+  });
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate({
-  //     ...wrapper.props,
-  //     label: "Cancel"
-  //   });
+  test("uses default size when no size is provided", () => {
+    renderWithTheme(<Button {...baseProps} size={undefined} />);
+    expect(screen.getByTestId("button")).toHaveStyle({
+      height: mockTheme.button.height[ButtonSize.normal],
+      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
+    });
+  });
 
-  //   expect(shouldUpdate).toBe(true);
-  // }); */
+  test("disables button when isDisabled is true", async () => {
+    const onClick = jest.fn();
+    renderWithTheme(<Button {...baseProps} isDisabled onClick={onClick} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; size: string; isDisabled: bool... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} id="testId" />);
+    const button = screen.getByTestId("button");
+    expect(button).toBeDisabled();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    await userEvent.click(button);
+    expect(onClick).not.toHaveBeenCalled();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; size: string; isDisable... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} className="test" />);
+  test("applies custom className", () => {
+    renderWithTheme(<Button {...baseProps} className="custom-class" />);
+    expect(screen.getByTestId("button")).toHaveClass("custom-class");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  test("applies custom style", () => {
+    const customStyle = { backgroundColor: "red" };
+    renderWithTheme(<Button {...baseProps} style={customStyle} />);
+    expect(screen.getByTestId("button")).toHaveStyle(customStyle);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   // @ts-expect-error TS(2322): Type '{ style: { color: string; }; size: string; i... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} style={{ color: "red" }} />);
+  test("applies minWidth when provided", () => {
+    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
+    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  test("applies minWidth when provided", () => {
+    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
+    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with isHovered prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isHovered: true; size: string; isDisabled:... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} isHovered />);
+  test("sets correct tab index", () => {
+    renderWithTheme(<Button {...baseProps} tabIndex={2} />);
+    expect(screen.getByTestId("button")).toHaveAttribute("tabindex", "2");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isHovered")).toEqual(true);
-  // });
+  test("applies theme styles for primary button", () => {
+    renderWithTheme(<Button {...baseProps} primary />);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      background: mockColorScheme.main.buttons,
+      color: mockColorScheme.text.buttons,
+      borderColor: mockColorScheme.main.buttons,
+    });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with isClicked prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isClicked: true; size: string; isDisabled:... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} isClicked />);
+  test("applies disabled styles for primary button", () => {
+    renderWithTheme(<Button {...baseProps} primary isDisabled />);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      opacity: "0.6",
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isClicked")).toEqual(true);
-  // });
+  test("disables hover effect when disableHover is true", () => {
+    renderWithTheme(<Button {...baseProps} primary disableHover />);
+    const button = screen.getByTestId("button");
+    expect(button).not.toHaveAttribute("data-hover-enabled");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with isDisabled prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isDisabled: true; size: string; label: str... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} isDisabled />);
+  test("applies brightness filter for primary button in base theme", () => {
+    renderWithTheme(<Button {...baseProps} primary isClicked />);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      filter: "brightness(90%)",
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+  test("applies brightness filter for primary button in non-base theme", () => {
+    const nonBaseTheme = { ...mockTheme, isBase: false };
+    renderWithTheme(<Button {...baseProps} primary isClicked />, nonBaseTheme);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      filter: "brightness(82%)",
+    });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with isLoading prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isLoading: true; size: string; isDisabled:... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} isLoading />);
+  test("uses base theme styles when no theme is provided", () => {
+    const { container } = render(
+      <ThemeProvider theme={Base}>
+        <Button {...baseProps} />
+      </ThemeProvider>,
+    );
+    const button = container.firstChild as HTMLElement;
+    expect(button).toHaveStyle({
+      color: Base.button.color.base,
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isLoading")).toEqual(true);
+  test("applies primary button color when theme is missing base color", () => {
+    const themeWithoutBaseColor = {
+      ...mockTheme,
+      button: {
+        ...mockTheme.button,
+        color: {
+          ...mockTheme.button.color,
+          base: mockTheme.button.color.primary,
+          baseHover: mockTheme.button.color.primaryHover,
+          baseActive: mockTheme.button.color.primaryActive,
+          baseDisabled: mockTheme.button.color.primaryDisabled,
+          primary: mockTheme.button.color.primary,
+          primaryHover: mockTheme.button.color.primaryHover,
+          primaryActive: mockTheme.button.color.primaryActive,
+          primaryDisabled: mockTheme.button.color.primaryDisabled,
+        },
+      },
+    };
 
-  //   wrapper.setProps({ primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isLoading")).toEqual(true);
-  // });
+    renderWithTheme(<Button {...baseProps} />, themeWithoutBaseColor);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      color: themeWithoutBaseColor.button.color.primary,
+    });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with various size", () => {
-  //   // @ts-expect-error TS(2559): Type '{ size: string; isDisabled: boolean; label: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} />);
+  test("applies primary button background color", () => {
+    renderWithTheme(<Button {...baseProps} primary />);
+    expect(screen.getByTestId("button")).toHaveStyle({
+      backgroundColor: mockTheme.button.backgroundColor.primary,
+    });
+  });
 
-  //   wrapper.setProps({ size: "extraSmall" });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("extraSmall");
+  test("uses base theme styles when no theme is provided", () => {
+    const { container } = render(
+      <ThemeProvider theme={Base}>
+        <Button {...baseProps} />
+      </ThemeProvider>,
+    );
+    const button = container.firstChild as HTMLElement;
+    expect(button).toHaveStyle({
+      color: Base.button.color.base,
+    });
+  });
 
-  //   wrapper.setProps({ size: "small" });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("small");
+  test("applies scale style when scale prop is true", () => {
+    renderWithTheme(<Button {...baseProps} scale />);
+    expect(screen.getByTestId("button")).toHaveStyle({
+      width: "100%",
+    });
+  });
 
-  //   wrapper.setProps({ size: "normal" });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("normal");
+  test("applies correct size styles", () => {
+    renderWithTheme(<Button {...baseProps} size={ButtonSize.normal} />);
+    expect(screen.getByTestId("button")).toHaveStyle({
+      height: mockTheme.button.height[ButtonSize.normal],
+      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
+      padding: mockTheme.button.padding[ButtonSize.normal],
+    });
+  });
 
-  //   wrapper.setProps({ size: "medium" });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("medium");
+  test("uses base theme styles when no theme is provided", () => {
+    const { container } = render(
+      <ThemeProvider theme={Base}>
+        <Button {...baseProps} />
+      </ThemeProvider>,
+    );
+    const button = container.firstChild as HTMLElement;
+    expect(button).toHaveStyle({
+      color: Base.button.color.base,
+    });
+  });
 
-  //   wrapper.setProps({ size: "extraSmall", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("extraSmall");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
+  test("applies minWidth when provided", () => {
+    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
+    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
+  });
 
-  //   wrapper.setProps({ size: "normal", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("normal");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
+  test("applies primary styles correctly", () => {
+    renderWithTheme(<Button {...baseProps} primary />);
+    const button = screen.getByTestId("button");
+    expect(button).toHaveStyle({
+      backgroundColor: mockTheme.button.backgroundColor.primary,
+      borderColor: mockTheme.button.color.primary,
+    });
+  });
 
-  //   wrapper.setProps({ size: "medium", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("medium");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
+  test("applies scale styles correctly", () => {
+    renderWithTheme(<Button {...baseProps} scale />);
+    expect(screen.getByTestId("button")).toHaveStyle({ width: "100%" });
+  });
 
-  //   wrapper.setProps({ scale: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("scale")).toEqual(true);
-  // });
+  test("handles ref forwarding", () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    renderWithTheme(<Button {...baseProps} ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render with icon", () => {
-  //   const icon = <>1</>;
-  //   // @ts-expect-error TS(2322): Type '{ icon: Element; size: string; isDisabled: b... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} icon={icon} />);
+  test("handles click events with keyboard", async () => {
+    const onClick = jest.fn();
+    renderWithTheme(<Button {...baseProps} onClick={onClick} />);
+    const button = screen.getByTestId("button");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("icon")).toEqual(icon);
+    await userEvent.tab();
+    expect(button).toHaveFocus();
 
-  //   wrapper.setProps({ size: "extraSmall", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("extraSmall");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
+    await userEvent.keyboard("{enter}");
+    expect(onClick).toHaveBeenCalledTimes(1);
 
-  //   wrapper.setProps({ size: "normal", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("normal");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
+    await userEvent.keyboard(" ");
+    expect(onClick).toHaveBeenCalledTimes(2);
+  });
 
-  //   wrapper.setProps({ size: "medium", primary: true });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toEqual("medium");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("primary")).toEqual(true);
-  // });
+  test("maintains focus styles when tabbed", async () => {
+    renderWithTheme(<Button {...baseProps} />);
+    const button = screen.getByTestId("button");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts minWidth", () => {
-  //   // @ts-expect-error TS(2559): Type '{ size: string; isDisabled: boolean; label: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<Button {...baseProps} />);
+    await userEvent.tab();
+    expect(button).toHaveFocus();
+    expect(button).toHaveStyle({ outline: mockTheme.button.outline });
+  });
 
-  //   wrapper.setProps({ minWidth: "40px" });
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("minWidth")).toEqual("40px");
-  // });
+  test("combines className with base styles", () => {
+    renderWithTheme(<Button {...baseProps} className="custom-class" />);
+    const button = screen.getByTestId("button");
+
+    expect(button).toHaveClass("custom-class");
+    const computedStyles = window.getComputedStyle(button);
+    expect(computedStyles.display).toBe("inline-block");
+    expect(computedStyles.alignItems).toBe("flex-start");
+  });
+
+  describe("Color scheme integration", () => {
+    test("applies color scheme correctly for primary buttons", () => {
+      renderWithTheme(<Button {...baseProps} primary />);
+      expect(screen.getByTestId("button")).toHaveStyle({
+        backgroundColor: mockColorScheme.main.buttons,
+        color: mockColorScheme.text.buttons,
+      });
+    });
+
+    test("maintains base styles when no color scheme is provided", () => {
+      renderWithTheme(<Button {...baseProps} primary />);
+      expect(screen.getByTestId("button")).toHaveStyle({
+        backgroundColor: mockTheme.button.backgroundColor.primary,
+      });
+    });
+  });
 });

@@ -24,44 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme } from "../../themes";
+import type { TColorScheme } from "../../themes";
 import { ButtonSize } from "./Button.enums";
 
-export interface ButtonProps {
-  /** Button text */
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Text content displayed inside the button */
   label: string;
+  /** Tooltip text shown on hover */
   title?: string;
-  /** Sets the button primary */
+  /** When true, applies primary button styling with brand colors */
   primary?: boolean;
-  /** Size of the button.
-   The normal size equals 36px and 40px in height on the Desktop and Touchcreen devices. */
+  /** Controls the button dimensions. Normal size is 36px height on Desktop and 40px on Touchscreen */
   size?: ButtonSize;
-  /** Scales the width of the button to 100% */
+  /** When true, button width expands to fill its container (width: 100%) */
   scale?: boolean;
-  /** Icon node element */
+  /** Optional icon element rendered before the label */
   icon?: React.ReactNode;
-  /** Button tab index */
+  /** Overrides the default tab order of the button */
   tabIndex?: number;
-  /** Accepts class */
+  /** Additional CSS classes to apply to the button */
   className?: string;
-  /** Accepts id */
+  /** HTML id attribute for the button element */
   id?: string;
-  /** Accepts CSS style */
+  /** Custom inline styles to apply to the button */
   style?: React.CSSProperties;
-  /** Sets the button to show a hovered state */
+  /** Forces the button to display its hover state */
   isHovered?: boolean;
-  /** Disable hover effect */
+  /** When true, hover effects are not applied even on mouse hover */
   disableHover?: boolean;
-  /** Sets the button to show a clicked state */
+  /** Forces the button to display its active/clicked state */
   isClicked?: boolean;
-  /** Sets the button to show a disabled state */
+  /** Disables button interactions and applies disabled styling */
   isDisabled?: boolean;
-  /** Sets a button to show a loader icon */
+  /** Shows a loading spinner and disables the button */
   isLoading?: boolean;
-  /** Sets the minimal button width */
+  /** Sets a minimum width for the button (CSS value) */
   minWidth?: string;
-  /** Sets the action initiated upon clicking the button */
-  onClick?: (e: React.MouseEvent) => void;
+  /** Click event handler function */
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** HTML button type attribute (submit, button, reset) */
   type?: HTMLButtonElement["type"];
 }
 

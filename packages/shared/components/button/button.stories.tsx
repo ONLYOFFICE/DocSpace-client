@@ -1,46 +1,56 @@
-// (c) Copyright Ascensio System SIA 2009-2024
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 /* eslint-disable no-alert */
 import React from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-
 import Icon from "PUBLIC_DIR/images/button.alert.react.svg";
-
 import { Button, ButtonSize } from ".";
-import { ButtonProps } from "./Button.types";
 
-const meta = {
+const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
   parameters: {
     docs: {
       description: {
-        component: "Button is used for a action on a page.",
+        component: `
+Button is a versatile component for triggering actions in the UI.
+
+Features:
+- Multiple sizes (small, normal, medium, big)
+- Primary and secondary variants
+- Support for icons
+- Loading state
+- Disabled state
+- Hover and active states
+- Full-width (scale) option
+- Themeable through styled-components
+
+Usage:
+\`\`\`tsx
+import { Button, ButtonSize } from "@docspace/components";
+
+// Primary button
+<Button primary label="Click me" />
+
+// Secondary button with icon
+<Button 
+  label="With Icon" 
+  icon={<Icon />} 
+  size={ButtonSize.normal} 
+/>
+
+// Loading state
+<Button 
+  primary 
+  label="Loading" 
+  isLoading 
+/>
+
+// Full width button
+<Button 
+  label="Full Width" 
+  scale 
+/>
+\`\`\`
+`,
       },
     },
     design: {
@@ -48,10 +58,47 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=62-3582&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    primary: {
+      control: "boolean",
+      description: "Primary variant with filled background",
+      defaultValue: false,
+    },
+    size: {
+      control: "select",
+      options: Object.values(ButtonSize),
+      description: "Button size variant",
+      defaultValue: ButtonSize.normal,
+    },
+    label: {
+      control: "text",
+      description: "Button text content",
+    },
+    icon: {
+      control: { type: "boolean" },
+      description: "Optional icon element",
+    },
+    isLoading: {
+      control: "boolean",
+      description: "Shows loading spinner",
+      defaultValue: false,
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables button interactions",
+      defaultValue: false,
+    },
+    scale: {
+      control: "boolean",
+      description: "Makes button full width",
+      defaultValue: false,
+    },
+  },
 } satisfies Meta<typeof Button>;
-type Story = StoryObj<typeof Button>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const Wrapper = (props: { isScale: boolean; children: React.ReactNode }) => {
   const { isScale, children } = props;
@@ -71,91 +118,175 @@ const Wrapper = (props: { isScale: boolean; children: React.ReactNode }) => {
   );
 };
 
-const Template = (args: ButtonProps) => (
-  <Button {...args} onClick={() => alert("Button clicked")} />
-);
-
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
-  args: { size: ButtonSize.small, label: "Button" },
+  args: {
+    size: ButtonSize.normal,
+    label: "Button",
+    onClick: () => alert("Button clicked"),
+  },
 };
 
 const PrimaryTemplate = () => {
   return (
-    <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
+    <>
+      <h3>Sizes</h3>
+      <Wrapper isScale={false}>
+        {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
+          <Button
+            key={`primary-${size}`}
+            primary
+            size={size}
+            label={`${size[0].toUpperCase()}${size.slice(1)}`}
+            onClick={() => {}}
+          />
+        ))}
+      </Wrapper>
+
+      <h3 style={{ marginTop: "24px" }}>States</h3>
+      <Wrapper isScale={false}>
+        <Button primary size={ButtonSize.normal} label="Default" />
         <Button
-          key={`all-primary-${size}`}
           primary
-          scale={false}
-          size={size}
-          label={`Primary ${size[0].toUpperCase()}${size.slice(1)}`}
-          onClick={() => {}}
+          size={ButtonSize.normal}
+          icon={<Icon />}
+          label="With Icon"
         />
-      ))}
-    </Wrapper>
+        <Button primary size={ButtonSize.normal} isLoading label="Loading" />
+        <Button primary size={ButtonSize.normal} isDisabled label="Disabled" />
+      </Wrapper>
+
+      <h3 style={{ marginTop: "24px" }}>Interactions</h3>
+      <Wrapper isScale={false}>
+        <Button primary size={ButtonSize.normal} isHovered label="Hover" />
+        <Button primary size={ButtonSize.normal} isClicked label="Active" />
+        <Button
+          primary
+          size={ButtonSize.normal}
+          scale
+          label="Full Width"
+          style={{ gridColumn: "1 / -1" }}
+        />
+      </Wrapper>
+    </>
   );
 };
 
 const SecondaryTemplate = () => {
   return (
-    <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
+    <>
+      <h3>Sizes</h3>
+      <Wrapper isScale={false}>
+        {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
+          <Button
+            key={`secondary-${size}`}
+            size={size}
+            label={`${size[0].toUpperCase()}${size.slice(1)}`}
+          />
+        ))}
+      </Wrapper>
+
+      <h3 style={{ marginTop: "24px" }}>States</h3>
+      <Wrapper isScale={false}>
+        <Button size={ButtonSize.normal} label="Default" />
+        <Button size={ButtonSize.normal} icon={<Icon />} label="With Icon" />
+        <Button size={ButtonSize.normal} isLoading label="Loading" />
+        <Button size={ButtonSize.normal} isDisabled label="Disabled" />
+      </Wrapper>
+
+      <h3 style={{ marginTop: "24px" }}>Interactions</h3>
+      <Wrapper isScale={false}>
+        <Button size={ButtonSize.normal} isHovered label="Hover" />
+        <Button size={ButtonSize.normal} isClicked label="Active" />
         <Button
-          key={`all-secondary-${size}`}
-          scale={false}
-          size={size}
-          label={`Secondary ${size[0].toUpperCase()}${size.slice(1)}`}
+          size={ButtonSize.normal}
+          scale
+          label="Full Width"
+          style={{ gridColumn: "1 / -1" }}
         />
-      ))}
-    </Wrapper>
+      </Wrapper>
+    </>
   );
 };
 
 const WithIconTemplate = () => {
   return (
     <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-icon-prim-${size}`}
-          primary
-          size={size}
-          icon={<Icon />}
-          label={`With Icon ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-icon-sec-${size}`}
-          size={size}
-          icon={<Icon />}
-          label={`With Icon ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
+      <Button
+        primary
+        size={ButtonSize.normal}
+        icon={<Icon />}
+        label="Primary with Icon"
+      />
+      <Button
+        size={ButtonSize.normal}
+        icon={<Icon />}
+        label="Secondary with Icon"
+      />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        icon={<Icon />}
+        isDisabled
+        label="Disabled with Icon"
+      />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        icon={<Icon />}
+        isLoading
+        label="Loading with Icon"
+      />
     </Wrapper>
   );
 };
 
-const IsLoadingTemplate = () => {
+const StateTemplate = () => {
   return (
     <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-load-prim-${size}`}
-          primary
-          size={size}
-          isLoading
-          label={`Loading ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-load-sec-${size}`}
-          size={size}
-          isLoading
-          label={`Loading ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
+      <Button primary size={ButtonSize.normal} label="Primary Default" />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        isHovered
+        label="Primary Hover"
+      />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        isClicked
+        label="Primary Active"
+      />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        isDisabled
+        label="Primary Disabled"
+      />
+      <Button size={ButtonSize.normal} label="Secondary Default" />
+      <Button size={ButtonSize.normal} isHovered label="Secondary Hover" />
+      <Button size={ButtonSize.normal} isClicked label="Secondary Active" />
+      <Button size={ButtonSize.normal} isDisabled label="Secondary Disabled" />
+    </Wrapper>
+  );
+};
+
+const LoadingTemplate = () => {
+  return (
+    <Wrapper isScale={false}>
+      <Button
+        primary
+        size={ButtonSize.normal}
+        isLoading
+        label="Primary Loading"
+      />
+      <Button size={ButtonSize.normal} isLoading label="Secondary Loading" />
+      <Button
+        primary
+        size={ButtonSize.normal}
+        isLoading
+        isDisabled
+        label="Disabled Loading"
+      />
     </Wrapper>
   );
 };
@@ -163,118 +294,79 @@ const IsLoadingTemplate = () => {
 const ScaleTemplate = () => {
   return (
     <Wrapper isScale>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-scale-prim-${size}`}
-          primary
-          size={size}
-          label={`Scale ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-scale-sec-${size}`}
-          size={size}
-          label={`Scale ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-    </Wrapper>
-  );
-};
-
-const DisabledTemplate = () => {
-  return (
-    <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-disabled-prim-${size}`}
-          primary
-          size={size}
-          isDisabled
-          label={`Disabled ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-disabled-sec-${size}`}
-          size={size}
-          isDisabled
-          label={`Disabled ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-    </Wrapper>
-  );
-};
-
-const ClickedTemplate = () => {
-  return (
-    <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-clicked-prim-${size}`}
-          primary
-          size={size}
-          isClicked
-          label={`Clicked ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-clicked-sec-${size}`}
-          size={size}
-          isClicked
-          label={`Clicked ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-    </Wrapper>
-  );
-};
-
-const HoveredTemplate = () => {
-  return (
-    <Wrapper isScale={false}>
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-hovered-prim-${size}`}
-          primary
-          size={size}
-          isHovered
-          label={`Hovered ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
-      {(Object.keys(ButtonSize) as Array<ButtonSize>).map((size) => (
-        <Button
-          key={`all-hovered-sec-${size}`}
-          size={size}
-          isHovered
-          label={`Hovered ${size[0].toUpperCase()}${size.slice(1)}`}
-        />
-      ))}
+      <Button
+        primary
+        scale
+        size={ButtonSize.normal}
+        label="Full Width Primary"
+      />
+      <Button scale size={ButtonSize.normal} label="Full Width Secondary" />
     </Wrapper>
   );
 };
 
 export const PrimaryButtons: Story = {
   render: () => <PrimaryTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Primary buttons with different sizes",
+      },
+    },
+  },
 };
+
 export const SecondaryButtons: Story = {
   render: () => <SecondaryTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Secondary buttons with different sizes",
+      },
+    },
+  },
 };
+
 export const WithIconButtons: Story = {
   render: () => <WithIconTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Buttons with icons in different states",
+      },
+    },
+  },
 };
-export const IsLoadingButtons: Story = {
-  render: () => <IsLoadingTemplate />,
+
+export const ButtonStates: Story = {
+  render: () => <StateTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Button states: default, hover, active, and disabled",
+      },
+    },
+  },
 };
+
+export const LoadingButtons: Story = {
+  render: () => <LoadingTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Buttons in loading state",
+      },
+    },
+  },
+};
+
 export const ScaleButtons: Story = {
   render: () => <ScaleTemplate />,
-};
-export const DisabledButtons: Story = {
-  render: () => <DisabledTemplate />,
-};
-export const ClickedButtons: Story = {
-  render: () => <ClickedTemplate />,
-};
-export const HoveredButtons: Story = {
-  render: () => <HoveredTemplate />,
+  parameters: {
+    docs: {
+      description: {
+        story: "Full width buttons",
+      },
+    },
+  },
 };

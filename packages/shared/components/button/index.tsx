@@ -24,8 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
+import { Loader, LoaderTypes } from "../loader";
+
+import { ButtonProps } from "./Button.types";
+import ButtonTheme from "./Button.theme";
 import { ButtonSize } from "./Button.enums";
 
 export { ButtonSize };
 
-export { Button } from "./Button";
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  React.PropsWithChildren<ButtonProps>
+>((props, ref) => {
+  const { isLoading, icon, label, primary, isDisabled } = props;
+  return (
+    <ButtonTheme {...props} ref={ref} data-testid="button">
+      {isLoading && (
+        <Loader
+          className="loader"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
+          label={label}
+          primary={primary || false}
+          isDisabled={isDisabled || false}
+        />
+      )}
+      <div className="button-content not-selectable">
+        {icon && <div className="icon">{icon}</div>}
+        {label}
+      </div>
+    </ButtonTheme>
+  );
+});
+
+Button.displayName = "Button";
+
+export { Button };

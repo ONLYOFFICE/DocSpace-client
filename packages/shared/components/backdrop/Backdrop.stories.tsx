@@ -99,7 +99,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       },
     },
     withBackground: {
-      description: "Enables background visibility for the backdrop. Note: Background is not displayed if viewport width > 1024px",
+      description:
+        "Enables background visibility for the backdrop. Note: Background is not displayed if viewport width > 1024px",
       control: "boolean",
       defaultValue: false,
       table: {
@@ -108,7 +109,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       },
     },
     isAside: {
-      description: "Indicates if the backdrop is being used with an Aside component. Affects backdrop stacking and background behavior",
+      description:
+        "Indicates if the backdrop is being used with an Aside component. Affects backdrop stacking and background behavior",
       control: "boolean",
       defaultValue: false,
       table: {
@@ -117,7 +119,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       },
     },
     withoutBlur: {
-      description: "Disables the blur effect, typically used with context menus",
+      description:
+        "Disables the blur effect, typically used with context menus",
       control: "boolean",
       defaultValue: false,
       table: {
@@ -126,7 +129,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       },
     },
     withoutBackground: {
-      description: "Forces the backdrop to render without a background. Takes precedence over withBackground",
+      description:
+        "Forces the backdrop to render without a background. Takes precedence over withBackground",
       control: "boolean",
       defaultValue: false,
       table: {
@@ -135,7 +139,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       },
     },
     isModalDialog: {
-      description: "Indicates if the backdrop is being used with a modal dialog. Affects touch event handling",
+      description:
+        "Indicates if the backdrop is being used with a modal dialog. Affects touch event handling",
       control: "boolean",
       defaultValue: false,
       table: {

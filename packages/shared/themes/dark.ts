@@ -413,7 +413,7 @@ const Dark: TTheme = {
     float: "left",
     height: "19px",
     overflow: "hidden",
-    padding: "0px",
+    padding: "",
 
     separator: {
       border: `1px solid ${grayDarkStrong}`,
@@ -2299,7 +2299,7 @@ const Dark: TTheme = {
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
         hoverColor: white,
-        color: darkGrayDark,
+        color: white,
         iconColor: darkGrayDark,
       },
     },

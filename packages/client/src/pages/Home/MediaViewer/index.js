@@ -249,12 +249,7 @@ const FilesMediaViewer = (props) => {
         setScrollToItem({ id: targetFile.id, type: "file" });
       }
 
-      navigate(url, {
-        state: {
-          ...location.state,
-          disableScrollToTop: true,
-        },
-      });
+      window.history.pushState("", "", url);
     },
     [
       files,

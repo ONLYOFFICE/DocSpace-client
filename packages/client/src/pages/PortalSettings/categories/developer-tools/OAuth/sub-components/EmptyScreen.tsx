@@ -4,7 +4,8 @@ import { useTheme } from "styled-components";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
@@ -46,16 +47,17 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
         {descText}
       </Text>
       <p>
-        <Link
-          className="guide-link"
+        <ColorTheme
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
           href={apiOAuthLink}
+          tag="a"
+          themeId={ThemeId.Link}
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
-        </Link>
+        </ColorTheme>
       </p>
 
       <RegisterNewButton />

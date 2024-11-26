@@ -158,7 +158,6 @@ const StyledSimpleFilesRow = styled(Row)`
     `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
     props.inProgress &&
-    !props.isFolder &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -369,6 +368,8 @@ const SimpleFilesRow = (props) => {
     changeIndex,
     isIndexUpdated,
     isFolder,
+    icon,
+    isDownload,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -479,7 +480,11 @@ const SimpleFilesRow = (props) => {
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
           isActive={isActive}
-          inProgress={inProgress}
+          inProgress={
+            inProgress && isFolder
+              ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
+              : inProgress
+          }
           isThirdPartyFolder={item.isThirdPartyFolder}
           className="files-row"
           withAccess={withAccess}

@@ -141,8 +141,11 @@ const StyledTile = styled.div`
   cursor: ${(props) =>
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
-    props.inProgress &&
-    !props.isFolder &&
+    (props.inProgress && props.isFolder
+      ? props.iconProgress !== "duplicate" &&
+        props.iconProgress !== "duplicate-room" &&
+        !props.isDownload
+      : props.inProgress) &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -608,6 +611,8 @@ class Tile extends React.PureComponent {
       selectOption,
       isHighlight,
       thumbnails1280x720,
+      iconProgress,
+      isDownload,
     } = this.props;
     const { isFolder, isRoom, id, fileExst } = item;
 
@@ -704,6 +709,8 @@ class Tile extends React.PureComponent {
         onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
+        iconProgress={iconProgress}
+        isDownload={isDownload}
       >
         {isFolder || (!fileExst && id === -1) ? (
           isRoom ? (

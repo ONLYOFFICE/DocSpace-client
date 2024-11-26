@@ -60,45 +60,98 @@ The Backdrop component is designed to be highly flexible and can be used in vari
   },
   argTypes: {
     visible: {
-      description: "Controls the visibility of the backdrop",
+      description: "Sets visible or hidden",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     zIndex: {
       description: "Sets the z-index CSS property for stacking context",
       control: "number",
       defaultValue: 203,
+      table: {
+        type: { summary: "number" },
+        defaultValue: { summary: 203 },
+      },
+    },
+    className: {
+      description: "Custom CSS class name(s) to apply to the backdrop",
+      control: "text",
+      table: {
+        type: { summary: "string | string[]" },
+      },
+    },
+    id: {
+      description: "HTML id attribute for the backdrop element",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    style: {
+      description: "Custom inline styles to apply to the backdrop",
+      control: "object",
+      table: {
+        type: { summary: "React.CSSProperties" },
+      },
     },
     withBackground: {
-      description: "Enables background visibility",
+      description: "Enables background visibility for the backdrop. Note: Background is not displayed if viewport width > 1024px",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     isAside: {
-      description: "Indicates backdrop is used with an Aside component",
+      description: "Indicates if the backdrop is being used with an Aside component. Affects backdrop stacking and background behavior",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     withoutBlur: {
-      description: "Disables the blur effect",
+      description: "Disables the blur effect, typically used with context menus",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     withoutBackground: {
-      description: "Forces backdrop to render without background",
+      description: "Forces the backdrop to render without a background. Takes precedence over withBackground",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     isModalDialog: {
-      description: "Indicates backdrop is used with a modal dialog",
+      description: "Indicates if the backdrop is being used with a modal dialog. Affects touch event handling",
       control: "boolean",
       defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
     },
     onClick: {
-      description: "Click event handler for backdrop interaction",
+      description: "Click event handler for the backdrop",
       action: "clicked",
+      table: {
+        type: { summary: "(e: React.MouseEvent) => void" },
+      },
     },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof Backdrop>;
 
 type Story = StoryObj<typeof Backdrop>;

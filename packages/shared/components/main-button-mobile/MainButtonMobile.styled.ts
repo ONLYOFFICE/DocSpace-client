@@ -33,7 +33,6 @@ import { globalColors } from "../../themes";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { FloatingButton } from "../floating-button";
-import { ProgressBarMobileDefaultStyles } from "./MainButtonMobile.types";
 
 const StyledFloatingButton = styled(FloatingButton).attrs(injectDefaultTheme)`
   position: relative;
@@ -262,12 +261,6 @@ const StyledProgressContainer = styled.div.attrs(injectDefaultTheme)<{
   cursor: default;
   padding: 0 24px 34px;
 `;
-
-StyledProgressContainer.defaultProps = {
-  theme: Base,
-};
-
-StyledButtonWrapper.defaultProps = { theme: Base };
 
 const StyledBar = styled.div<{ uploadPercent: number }>`
   width: ${(props) => props.uploadPercent}%;

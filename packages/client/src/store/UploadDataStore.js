@@ -761,7 +761,7 @@ class UploadDataStore {
 
     const uploadFilesArray = Object.keys(uploadFiles);
 
-    console.log("==hasFolder", hasFolder, "uploadFilesArray", uploadFilesArray);
+    console.log("uploadFilesArray", uploadFilesArray);
 
     for (let index of uploadFilesArray) {
       const file = uploadFiles[index];

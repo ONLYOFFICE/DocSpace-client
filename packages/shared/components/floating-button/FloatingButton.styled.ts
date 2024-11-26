@@ -179,7 +179,7 @@ const IconBox = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledAlertIcon = styled.div`
+const StyledIcon = styled.div`
   position: absolute;
   width: 12px;
   height: 12px;

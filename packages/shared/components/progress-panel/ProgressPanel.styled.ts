@@ -111,8 +111,6 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
   }
 `;
 
-StyledProgressBarContainer.defaultProps = { theme: Base };
-
 const StyledMobileProgressBar = styled.div`
   width: 100%;
   height: 4px;
@@ -120,8 +118,6 @@ const StyledMobileProgressBar = styled.div`
     props.theme.mainButtonMobile.mobileProgressBarBackground};
   border-radius: 2px;
 `;
-
-StyledMobileProgressBar.defaultProps = { theme: Base };
 
 const StyledProgress = styled.div<{ uploadPercent: number; error: boolean }>`
   width: ${(props) => props.uploadPercent}%;

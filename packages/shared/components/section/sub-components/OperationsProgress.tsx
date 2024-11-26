@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState } from "react";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 import DuplicateIconUrl from "PUBLIC_DIR/images/button.duplicate.react.svg?url";
 

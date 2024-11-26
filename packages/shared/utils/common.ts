@@ -1,4 +1,3 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -57,6 +56,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 import { parseAddress } from "./email";
+import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 import {
   FolderType,

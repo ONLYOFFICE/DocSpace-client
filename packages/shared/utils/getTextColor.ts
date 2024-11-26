@@ -26,7 +26,7 @@
 import hexRgb from "hex-rgb";
 import { globalColors } from "../themes";
 
-export const getTextColor = (color, brightnessDiff = 128) => {
+export const getTextColor = (color: string, brightnessDiff: number = 128) => {
   const black = globalColors.black;
   const white = globalColors.white;
 

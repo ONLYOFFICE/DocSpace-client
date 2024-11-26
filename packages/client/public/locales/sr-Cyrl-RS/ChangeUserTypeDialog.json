@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Гост <strong>{{userName}}</strong> ће бити премештен у одељак {{membersSection}} и добиће тип Корисника. Корисници имају сопствени одељак за {{documentsSection}}, могу креирати и уређивати фајлове, али не могу креирати собе.",
+  "ChangeGuestsTypeMessageMulti": "Изабрани гости ће бити премештени у одељак {{membersSection}} и добиће тип Корисника. Корисници имају сопствени одељак за {{documentsSection}}, могу креирати и уређивати фајлове, али не могу креирати собе.",
   "ChangeUserTypeButton": "Промени тип",
   "ChangeUserTypeHeader": "Промени тип корисника",
-  "ChangeUserTypeMessage": "Корисници са типом '{{ firstType }}' биц́е премештени у тип '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Одабрани корисници ће бити премештени у '{{ secondType }}' тип.",
+  "ChangeUserTypeMessage": "Корисници са типом <strong>'{{ firstType }}'</strong> биц́е премештени у тип <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Одабрани корисници ће бити премештени у <strong>'{{ secondType }}'</strong> тип.",
   "ChangeUserTypeMessageWarning": "Не можете променити тип за {{productName}} администраторе и за себе.",
+  "SuccessChangeGuestType": "Тип госта је успешно промењен.",
   "SuccessChangeUserType": "Кориснички тип је успешно промењен"
 }

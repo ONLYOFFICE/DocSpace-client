@@ -36,6 +36,7 @@ import EditingSvg32Url from "PUBLIC_DIR/images/icons/32/room/editing.svg?url";
 // import ViewOnlySvg32Url from "PUBLIC_DIR/images/icons/32/room/view.only.svg?url";
 import PublicRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
+import VirtualDataRoomRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg?url";
 
 import { RoomsType } from "../../enums";
 
@@ -50,10 +51,10 @@ const RoomLogoPure = ({
   style,
   type,
 
-  isArchive,
-  withCheckbox,
-  isChecked,
-  isIndeterminate,
+  isArchive = false,
+  withCheckbox = false,
+  isChecked = false,
+  isIndeterminate = false,
   onChange,
 }: RoomLogoProps) => {
   const getIcon = () => {
@@ -74,6 +75,8 @@ const RoomLogoPure = ({
         return CustomSvg32Url;
       case RoomsType.PublicRoom:
         return PublicRoomSvg32Url;
+      case RoomsType.VirtualDataRoom:
+        return VirtualDataRoomRoomSvg32Url;
       case RoomsType.FormRoom:
         return FormRoomSvg32Url;
       default:
@@ -113,14 +116,6 @@ const RoomLogoPure = ({
       )}
     </StyledContainer>
   );
-};
-
-RoomLogoPure.defaultProps = {
-  isPrivacy: false,
-  isArchive: false,
-  withCheckbox: false,
-  isChecked: false,
-  isIndeterminate: false,
 };
 
 export { RoomLogoPure };

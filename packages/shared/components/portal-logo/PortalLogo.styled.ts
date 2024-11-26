@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { isMobileOnly } from "react-device-detect";
 
 import { mobile } from "@docspace/shared/utils";
 
@@ -32,6 +33,13 @@ export const StyledWrapper = styled.div<{
   isMobile?: boolean;
   isResizable?: boolean;
 }>`
+  ${!isMobileOnly &&
+  css`
+    img {
+      width: 386px;
+    }
+  `}
+
   @media ${mobile} {
     ${(props) => !props.isResizable && "display: none"};
 

@@ -39,7 +39,6 @@ import {
 import { StartFillingSelectorDialogPprops } from "@/types";
 
 function StartFillingSelectorDialog({
-  socketHelper,
   fileInfo,
   getIsDisabled,
   isVisible,
@@ -77,10 +76,8 @@ function StartFillingSelectorDialog({
       createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
       createDefineRoomType={RoomsType.FormRoom}
       isPanelVisible={isVisible}
-      socketHelper={socketHelper}
       filesSettings={filesSettings}
       currentDeviceType={DeviceType.desktop}
-      socketSubscribers={socketHelper.socketSubscribers}
       headerLabel={headerLabel}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}

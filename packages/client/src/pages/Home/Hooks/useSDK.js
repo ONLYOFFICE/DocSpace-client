@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 
 import { Events } from "@docspace/shared/enums";
 import {
   frameCallbackData,
   frameCallCommand,
+  createPasswordHash,
 } from "@docspace/shared/utils/common";
 
 const useSDK = ({
@@ -40,7 +41,7 @@ const useSDK = ({
   files,
   filesList,
   selection,
-  user,
+  userId,
   createFile,
   createFolder,
   createRoom,
@@ -71,9 +72,9 @@ const useSDK = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                user &&
+                userId &&
                   data.locale &&
-                  updateProfileCulture(user.id, data.locale),
+                  updateProfileCulture(userId, data.locale),
               ]);
               res = requests[0];
             }
@@ -97,32 +98,25 @@ const useSDK = ({
             res = await loadCurrentUser();
             break;
           case "getRooms":
-            {
-              res = await getRooms(data);
-            }
+            res = await getRooms(data);
             break;
           case "openModal":
             {
               const { type, options } = data;
 
-              if (type === "CreateFile" || type === "CreateFolder") {
-                const item = new Event(Events.CREATE);
+              const eventType =
+                type === "CreateFile" || type === "CreateFolder"
+                  ? Events.CREATE
+                  : Events.ROOM_CREATE;
 
-                const payload = {
-                  extension: options,
-                  id: -1,
-                };
+              const eventDetail =
+                type === "CreateFile" || type === "CreateFolder"
+                  ? { extension: options, id: -1 }
+                  : undefined;
 
-                item.payload = payload;
-
-                window.dispatchEvent(item);
-              }
-
-              if (type === "CreateRoom") {
-                const room = new Event(Events.ROOM_CREATE);
-
-                window.dispatchEvent(room);
-              }
+              window.dispatchEvent(
+                new CustomEvent(eventType, { detail: eventDetail }),
+              );
             }
             break;
           case "createFile":
@@ -142,11 +136,8 @@ const useSDK = ({
             }
             break;
           case "createRoom":
-            {
-              res = await createRoom(data);
-
-              refreshFiles();
-            }
+            res = await createRoom(data);
+            refreshFiles();
             break;
           case "createTag":
             res = await createTag(data);
@@ -188,7 +179,7 @@ const useSDK = ({
             res = logout();
             break;
           default:
-            res = "Wrong method";
+            res = "Wrong method for this mode";
         }
       } catch (e) {
         res = e;
@@ -206,13 +197,23 @@ const useSDK = ({
     };
   }, [handleMessage]);
 
-  useEffect(() => {
-    frameCallCommand("setConfig");
-  }, [frameConfig?.frameId]);
+  const callSetConfig = useCallback(
+    () => frameCallCommand("setConfig", { src: window.location.origin }),
+    [frameCallCommand, frameConfig?.frameId],
+  );
+
+  const callSetIsLoad = useCallback(
+    () => setTimeout(() => frameCallCommand("setIsLoaded"), 10),
+    [frameCallCommand],
+  );
 
   useEffect(() => {
-    if (!isLoading) frameCallCommand("setIsLoaded");
-  }, [isLoading]);
+    if (window.parent && !frameConfig?.frameId) callSetConfig();
+  }, [callSetConfig, frameConfig?.frameId]);
+
+  useEffect(() => {
+    if (!isLoading) callSetIsLoad();
+  }, [callSetIsLoad, isLoading]);
 };
 
 export default useSDK;

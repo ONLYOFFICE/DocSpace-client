@@ -40,17 +40,21 @@ const PureAccountsItem = ({
   t,
   currentColorScheme,
   getLinkData,
+
+  setContactsTab,
 }) => {
   const onClickAction = React.useCallback(
     (e, id) => {
       onClick && onClick(e, "accounts");
+
+      setContactsTab("people");
     },
     [onClick],
   );
 
   const icon = getCatalogIconUrlByType(PageType.account);
 
-  const title = t("Accounts");
+  const title = t("Common:Contacts");
 
   const linkData = getLinkData("accounts");
 
@@ -72,11 +76,15 @@ const PureAccountsItem = ({
 
 const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, peopleStore }) => {
   const { showText, currentColorScheme } = settingsStore;
+
+  const { setContactsTab } = peopleStore.usersStore;
 
   return {
     showText,
     currentColorScheme,
+
+    setContactsTab,
   };
 })(observer(AccountsItem));

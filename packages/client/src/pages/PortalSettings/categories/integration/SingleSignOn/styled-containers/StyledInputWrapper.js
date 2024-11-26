@@ -57,6 +57,10 @@ const StyledInputWrapper = styled.div`
     overflow: visible;
     white-space: normal;
   }
+
+  .access-selector {
+    margin-top: 16px;
+  }
 `;
 
 export default StyledInputWrapper;

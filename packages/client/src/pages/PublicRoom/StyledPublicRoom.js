@@ -66,4 +66,10 @@ const StyledContainer = styled.div`
   }
 `;
 
-export { StyledHeadline, StyledContainer };
+const StyledToast = styled.div`
+  .public-toast_link {
+    color: ${(props) => props.theme.publicRoom.linkColor} !important;
+  }
+`;
+
+export { StyledHeadline, StyledContainer, StyledToast };

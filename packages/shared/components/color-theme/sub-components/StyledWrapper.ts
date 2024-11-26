@@ -26,10 +26,9 @@
 
 import styled from "styled-components";
 
-import { mobile } from "../../../utils";
-import { Base } from "../../../themes";
+import { injectDefaultTheme, mobile } from "../../../utils";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   #ipl-progress-indicator {
     position: fixed;
     z-index: 390;
@@ -46,7 +45,5 @@ const StyledWrapper = styled.div`
     }
   }
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 export default StyledWrapper;

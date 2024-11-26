@@ -56,6 +56,7 @@ const Body = ({
             ? selectedUser.displayName
             : selectedUser.label
         }
+        noRooms={user.isCollaborator || user.isVisitor}
         percent={percent}
         isAbortTransfer={isAbortTransfer}
         onTerminate={onTerminate}

@@ -37,7 +37,13 @@ import { MainButtonProps } from "./MainButton.types";
 import MainButtonTheme from "./MainButton.theme";
 
 const MainButton = (props: MainButtonProps) => {
-  const { text, model, isDropdown, isDisabled, onAction } = props;
+  const {
+    model,
+    onAction,
+    text = "Button",
+    isDropdown = true,
+    isDisabled = false,
+  } = props;
   const { id, ...rest } = props;
 
   const ref = useRef(null);
@@ -72,7 +78,12 @@ const MainButton = (props: MainButtonProps) => {
 
   return (
     <GroupMainButton {...rest} ref={ref} data-testid="main-button">
-      <MainButtonTheme {...rest} id={id} onClick={onMainButtonClick}>
+      <MainButtonTheme
+        {...rest}
+        isDropdown={isDropdown}
+        id={id}
+        onClick={onMainButtonClick}
+      >
         <Text className="main-button_text">{text}</Text>
         {isDropdown && (
           <>
@@ -87,12 +98,6 @@ const MainButton = (props: MainButtonProps) => {
       </MainButtonTheme>
     </GroupMainButton>
   );
-};
-
-MainButton.defaultProps = {
-  text: "Button",
-  isDisabled: false,
-  isDropdown: true,
 };
 
 export { MainButton };

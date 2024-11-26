@@ -29,8 +29,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { mobile } from "@docspace/shared/utils";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledIconBox = styled.div`
   display: none;
@@ -45,7 +45,7 @@ const StyledIconBox = styled.div`
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
-const StyledMenuIcon = styled(MenuIcon)`
+const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
   width: 20px;
   height: 20px;
 
@@ -55,8 +55,6 @@ const StyledMenuIcon = styled(MenuIcon)`
 
   cursor: pointer;
 `;
-
-StyledMenuIcon.defaultProps = { theme: Base };
 
 const HeaderCatalogBurger = (props) => {
   const { isProduct, onClick, ...rest } = props;

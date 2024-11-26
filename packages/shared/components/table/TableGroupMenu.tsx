@@ -27,8 +27,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { Text } from "@docspace/shared/components/text";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
+import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import { Checkbox } from "../checkbox";
 import { ComboBox, TOption } from "../combobox";
@@ -59,26 +61,43 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
     isMobileView,
     isBlocked,
     withComboBox = true,
+    headerLabel,
+    isCloseable,
+    onCloseClick,
     ...rest
   } = props;
+
   const onCheckboxChange = () => {
     onChange?.(!isChecked);
   };
   const { t } = useTranslation("Common");
+
   return (
     <StyledTableGroupMenu
       className="table-container_group-menu"
       checkboxMargin={checkboxMargin}
       {...rest}
     >
-      <Checkbox
-        id="menu-checkbox_selected-all-file"
-        className="table-container_group-menu-checkbox"
-        onChange={onCheckboxChange}
-        isChecked={isChecked}
-        isIndeterminate={isIndeterminate}
-        title={t("Common:MainHeaderSelectAll")}
-      />
+      {headerLabel ? (
+        <Text
+          fontSize="14px"
+          lineHeight="16px"
+          fontWeight={600}
+          className="table-container_label-element"
+        >
+          {headerLabel}
+        </Text>
+      ) : (
+        <Checkbox
+          id="menu-checkbox_selected-all-file"
+          className="table-container_group-menu-checkbox"
+          onChange={onCheckboxChange}
+          isChecked={isChecked}
+          isIndeterminate={isIndeterminate}
+          title={t("Common:MainHeaderSelectAll")}
+        />
+      )}
+
       {withComboBox && (
         <ComboBox
           id="menu-combobox"
@@ -105,15 +124,27 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           />
         ))}
       </StyledScrollbar>
+      {isCloseable && (
+        <div className="table-header_icon">
+          <IconButton
+            className="table-header_icon-button"
+            size={16}
+            onClick={onCloseClick}
+            iconName={CrossIconSvgUrl}
+            isFill
+          />
+        </div>
+      )}
       {!withoutInfoPanelToggler && (
         <StyledInfoPanelToggleColorThemeWrapper
           themeId={ThemeId.InfoPanelToggle}
           isInfoPanelVisible={isInfoPanelVisible}
+          className="table-header_icon"
         >
           <div className="info-panel-toggle-bg">
             <IconButton
               id="info-panel-toggle--open"
-              className="info-panel-toggle"
+              className="info-panel-toggle table-header_icon-button"
               iconName={PanelReactSvgUrl}
               size={16}
               isFill

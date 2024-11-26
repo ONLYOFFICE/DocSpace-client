@@ -29,7 +29,7 @@ import equal from "fast-deep-equal/react";
 
 import { getProviderLabel } from "@docspace/shared/utils/common";
 
-import VerticalDotsReactSvg from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
 import { SocialButton } from "../social-button";
 import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";

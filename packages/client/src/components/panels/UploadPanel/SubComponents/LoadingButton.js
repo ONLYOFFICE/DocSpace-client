@@ -79,22 +79,8 @@ const LoadingButton = (props) => {
   );
 };
 
-export default inject(({ uploadDataStore }, { item }) => {
-  const { primaryProgressDataStore, isParallel } = uploadDataStore;
-  const { loadingFile: file } = primaryProgressDataStore;
-
-  const loadingFile = !file || !file.uniqueId ? null : file;
-
-  const currentFileUploadProgress =
-    file && loadingFile?.uniqueId === item?.uniqueId
-      ? loadingFile.percent
-      : null;
-
+export default inject(({}, { item }) => {
   return {
-    percent: isParallel
-      ? item?.percent
-        ? item.percent
-        : null
-      : currentFileUploadProgress,
+    percent: item?.percent ? item.percent : null,
   };
 })(observer(LoadingButton));

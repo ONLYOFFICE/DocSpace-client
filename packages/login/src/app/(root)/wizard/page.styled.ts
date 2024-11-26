@@ -155,4 +155,8 @@ export const StyledAcceptTerms = styled.div`
   .wizard-checkbox svg {
     margin-inline-end: 8px;
   }
+
+  .wrapper {
+    height: auto;
+  }
 `;

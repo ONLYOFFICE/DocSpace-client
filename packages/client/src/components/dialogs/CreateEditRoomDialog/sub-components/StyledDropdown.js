@@ -26,17 +26,17 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledDropDownWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
 
-const StyledDropDown = styled(DropDown)`
+const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)`
   margin-top: ${(props) => (props.marginTop ? props.marginTop : "4px")};
   padding: 6px 0;
   background: ${(props) =>
@@ -90,7 +90,5 @@ const StyledDropDown = styled(DropDown)`
     }
   }
 `;
-
-StyledDropDown.defaultProps = { theme: Base };
 
 export { StyledDropDownWrapper, StyledDropDown };

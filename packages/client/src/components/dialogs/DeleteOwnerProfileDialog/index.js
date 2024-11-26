@@ -32,7 +32,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
   constructor(props) {
@@ -50,11 +49,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
     const { t, tReady, visible, onClose } = this.props;
 
     return (
-      <ModalDialogContainer
-        isLoading={!tReady}
-        visible={visible}
-        onClose={onClose}
-      >
+      <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
@@ -80,7 +75,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Öz tətbiqinizdən əldə etdiyiniz 6 rəqəmli kodu daxil edin. Əgər telefonunuz əlçatan deyilsə, o zaman ehtiyat kodlarından istifadə edin.",
   "EnterAppCodeTitle": "Doğrulama tətbiqindən kodu daxil edin",
   "EnterCodePlaceholder": "Kodu daxil edin",
+  "EnterEmailHeader": "E-poçtu daxil edin",
   "EnterPhone": "Mobil telefon nömrəsi daxil edin",
   "GetCode": "Kodu əldə edin",
   "LoginRegistryButton": "Qoşulun",
+  "Newsletter": "{{organizationName}} xəbər bülleteninə abunə olmaq istəyirəm",
   "PassworResetTitle": "İndi yeni şifrə yarada bilərsiniz.",
   "PhoneSubtitle": "Əlavə təhlükəsizliyini təmin etmək üçün iki faktorlu autentifikasiya işə salınıb. {{productName}} işə davam etmək üçün mobil telefon nömrənizi daxil edin. Mobil telefon nömrəsi ölkə kodu ilə beynəlxalq formatda daxil edilməlidir.",
   "PortalContinueTitle": "Lütfən, {{productName}}-i yenidən aktivləşdirmək istədiyinizi təsdiqləyin.",
@@ -30,5 +32,6 @@
   "SignUp": "Qeydiyyatdan keçin",
   "SuccessDeactivate": "Hesabınız uğurla deaktiv edildi. 10 saniyə ərzində <1>sayt</1>a yönləndiriləcəksiniz.",
   "SuccessReactivate": "Hesabınız uğurla yenidən aktivləşdirildi. 10 saniyəyə <1>sahəyə</1> yönləndiriləcəksiniz.",
-  "SuccessRemoved": "Hesabınız uğurla silindi. 10 saniyə ərzində <1>sayt</1>a yönləndiriləcəksiniz."
+  "SuccessRemoved": "Hesabınız uğurla silindi. 10 saniyə ərzində <1>sayt</1>a yönləndiriləcəksiniz.",
+  "TermsAndConditions": "Davam etməklə siz <1>Qaydalar və şərtlərimizi</1> və <2>Məxfilik bəyanatımızı</2> başa düşür və razılaşırsınız."
 }

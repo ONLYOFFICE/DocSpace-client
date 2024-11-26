@@ -177,7 +177,7 @@ export const getMobileMediaContextModel = (
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
       onClick: () => onClickDownload?.(targetFile, t),
-      disabled: false,
+      disabled: !targetFile.security.Download,
     },
     {
       key: "move-to",
@@ -245,7 +245,7 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
       onClick: () => onClickDownload?.(targetFile, t),
-      disabled: false,
+      disabled: !targetFile.security.Download,
     },
     {
       key: "rename",

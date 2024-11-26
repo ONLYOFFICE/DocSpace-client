@@ -27,11 +27,11 @@
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
-import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
-import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
-import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg?url";
-import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
+import AccountsIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import RoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import PortfolioIcon from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
+import ProjectsIcon from "PUBLIC_DIR/images/icons/16/catalog.projects.react.svg?url";
+import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import ImportSection from "../sub-components/ImportSection";
 import { ImportStepProps, InjectedImportStepProps } from "../types";
@@ -106,7 +106,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: usersExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}
@@ -117,13 +117,16 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importGroups}
         onChange={(e) => onChange(e, "importGroups")}
         sectionName={t("Common:Groups")}
-        description={t("Settings:GroupsDescription", { serviceName })}
+        description={t("Settings:GroupsDescription", {
+          serviceName,
+          contactsName: t("Common:Contacts"),
+        })}
         exportSection={{
           sectionName: t("Common:Groups"),
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}

@@ -18,6 +18,7 @@
   "EnterPhone": "Enter mobile phone number",
   "GetCode": "Get code",
   "LoginRegistryButton": "Join",
+  "Newsletter": "I want to subscribe to the {{organizationName}} newsletter",
   "PassworResetTitle": "Now you can create a new password.",
   "PhoneSubtitle": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the {{productName}}. Mobile phone number must be entered using an international format with the country code.",
   "PortalContinueTitle": "Please confirm that you want to reactivate your {{productName}}.",

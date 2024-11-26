@@ -38,7 +38,7 @@ export const CodeToInsert = ({ t, codeBlock, config }) => (
     <Text lineHeight="20px" className="preview-description">
       {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
     </Text>
-    <Textarea value={codeBlock} heightTextArea={153} />
+    <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
     <CategorySubHeader className="copy-window-code">
       {`JavaScript ${t("CodeTitle")}`}
     </CategorySubHeader>

@@ -49,7 +49,7 @@ const Bar = (props) => {
     firstLoad,
 
     isAdmin,
-    isPowerUser,
+    isUser,
     isRoomAdmin,
     userEmail,
     setMaintenanceExist,
@@ -148,7 +148,7 @@ const Bar = (props) => {
         }));
       }
 
-      if (isAdmin || isPowerUser || isRoomAdmin) {
+      if (isAdmin || isUser || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
           storageTariff: !closed.includes(QuotaBarTypes.StorageTariff),
@@ -171,10 +171,10 @@ const Bar = (props) => {
       setBarVisible({
         roomsTariff: isAdmin || isRoomAdmin,
         roomsTariffLimit: isAdmin || isRoomAdmin,
-        storageTariff: isAdmin || isPowerUser || isRoomAdmin,
-        storageTariffLimit: isAdmin || isPowerUser || isRoomAdmin,
-        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
-        storageQuotaLimit: isAdmin || isPowerUser || isRoomAdmin,
+        storageTariff: isAdmin || isUser || isRoomAdmin,
+        storageTariffLimit: isAdmin || isUser || isRoomAdmin,
+        storageQuota: isAdmin || isUser || isRoomAdmin,
+        storageQuotaLimit: isAdmin || isUser || isRoomAdmin,
         usersTariff: isAdmin || isRoomAdmin,
         usersTariffLimit: isAdmin || isRoomAdmin,
         storageAndUserTariff: isAdmin || isRoomAdmin,
@@ -182,7 +182,7 @@ const Bar = (props) => {
         roomsAndStorageTariffLimit: isAdmin || isRoomAdmin,
         storageAndUserTariffLimit: isAdmin || isRoomAdmin,
         confirmEmail: true,
-        personalUserQuota: isAdmin || isPowerUser || isRoomAdmin,
+        personalUserQuota: isAdmin || isUser || isRoomAdmin,
       });
     }
 
@@ -527,7 +527,7 @@ export default inject(
 
     return {
       isAdmin: user?.isAdmin,
-      isPowerUser: user?.isCollaborator,
+      isUser: user?.isCollaborator,
       isRoomAdmin: user?.isRoomAdmin,
       userEmail: user?.email,
       withActivationBar,

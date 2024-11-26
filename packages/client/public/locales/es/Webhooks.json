@@ -11,7 +11,6 @@
   "EnterSecretKey": "Introduzca la clave secreta",
   "EnterUrl": "Introduzca la URL",
   "EnterWebhookName": "Introduzca el nombre del webhook",
-  "EventHint": "Las entregas se eliminan automáticamente después de 15 días",
   "EventID": "ID del evento",
   "FailedToConnect": "No pudimos entregar esta carga útil: error al conectarse al host",
   "From": "Desde",

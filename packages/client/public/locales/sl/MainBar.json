@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Dosežena je omejitev za število sob: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Omejitev prostora za shranjevanje in števila sob bo kmalu presežena",
   "StorageAndRoomLimitHeader": "Dosežena je omejitev prostora za shranjevanje in števila sob",
-  "StorageAndUserHeader": "Omejitve prostora za shranjevanje in število skrbnikov/naprednih uporabnikov bodo kmalu presežene.",
-  "StorageAndUserTariffLimitHeader": "Dosežena je omejitev prostora za shranjevanje in števila skrbnikov/naprednih uporabnikov",
+  "StorageAndUserHeader": "Omejitve prostora za shranjevanje in število skrbnikov bodo kmalu presežene.",
+  "StorageAndUserTariffLimitHeader": "Dosežena je omejitev prostora za shranjevanje in števila skrbnikov",
   "StorageLimitHeader": "Dosežena je omejitev prostora za shranjevanje: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Dovoljen prostor za shranjevanje bo kmalu presežen: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Nepotrebne datoteke lahko odstranite ali spremenite kvoto v <1>Nastavitvah upravljanja shrambe.</1>",
-  "UserQuotaHeader": "Število skrbnikov/naprednih uporabnikov bo kmalu preseženo: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Ko bo omejitev dosežena, bodo uporabniki dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike/izkušene uporabnike, se za nadgradnjo tarifnega načrta obrnite na skrbnika {{productName}}.",
-  "UserTariffAlmostReachedForAdmins": "Ko je omejitev dosežena, bodo uporabniki dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike/izkušene uporabnike, <1>kliknite tukaj</1>, da nadgradite svoj tarifni načrt.",
-  "UserTariffLimitHeader": "Dosežena je omejitev za število skrbnikov/izkušenih uporabnikov: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike/izkušene uporabnike, se za nadgradnjo tarifnega načrta obrnite na skrbnika {{productName}}.",
-  "UserTariffReachedForAdmins": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike/izkušene uporabnike, <1>kliknite tukaj</1>, da nadgradite svoj tarifni načrt."
+  "UserQuotaHeader": "Število skrbnikov bo kmalu preseženo: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Ko bo omejitev dosežena, bodo uporabniki dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, se za nadgradnjo tarifnega načrta obrnite na skrbnika {{productName}}.",
+  "UserTariffAlmostReachedForAdmins": "Ko je omejitev dosežena, bodo uporabniki dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, <1>kliknite tukaj</1>, da nadgradite svoj tarifni načrt.",
+  "UserTariffLimitHeader": "Dosežena je omejitev za število skrbnikov: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, se za nadgradnjo tarifnega načrta obrnite na skrbnika {{productName}}.",
+  "UserTariffReachedForAdmins": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, <1>kliknite tukaj</1>, da nadgradite svoj tarifni načrt."
 }

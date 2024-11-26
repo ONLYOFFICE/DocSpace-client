@@ -11,7 +11,6 @@
   "EnterSecretKey": "Vnesi skrivni ključ",
   "EnterUrl": "Vnesi URL",
   "EnterWebhookName": "Vnesi ime webhook",
-  "EventHint": "Dostavljeno se samodejno izbriše po 15 dneh",
   "EventID": "ID dogodka",
   "FailedToConnect": "Teh uporabnih podatkov nismo mogli dostaviti: povezava z gostiteljem ni uspela",
   "From": "Od",

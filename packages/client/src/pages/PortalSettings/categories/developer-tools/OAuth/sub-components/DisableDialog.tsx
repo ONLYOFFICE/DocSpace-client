@@ -7,18 +7,20 @@ import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalD
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { Text } from "@docspace/shared/components/text";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 interface DisableClientDialogProps {
   isVisible?: boolean;
+  isGroup?: boolean;
   onClose?: () => void;
   onDisable?: () => Promise<void>;
 }
 
 const DisableClientDialog = (props: DisableClientDialogProps) => {
   const { t, ready } = useTranslation(["OAuth", "Common"]);
-  const { isVisible, onClose, onDisable } = props;
+  const { isVisible, isGroup, onClose, onDisable } = props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -28,6 +30,11 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
       await onDisable?.();
 
       setIsRequestRunning(true);
+      toastr.success(
+        isGroup
+          ? t("OAuth:ApplicationsDisabledSuccessfully")
+          : t("OAuth:ApplicationDisabledSuccessfully"),
+      );
       onClose?.();
     } catch (error: unknown) {
       const e = error as TData;
@@ -43,9 +50,19 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("DisableApplication")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isGroup ? t("DisableApplications") : t("DisableApplication")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans t={t} i18nKey="DisableApplicationDescription" ns="OAuth" />
+        <Text style={{ marginBottom: "16px" }}>
+          {isGroup ? (
+            <Trans t={t} i18nKey="DisableApplicationsDescription" ns="OAuth" />
+          ) : (
+            <Trans t={t} i18nKey="DisableApplicationDescription" ns="OAuth" />
+          )}
+        </Text>
+
+        <Trans t={t} i18nKey="DisableApplicationNote" ns="OAuth" />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -72,9 +89,12 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     bufferSelection,
+    selection,
+    selectionToDisable,
+
     setDisableDialogVisible,
     setActiveClient,
     setSelection,
@@ -82,18 +102,35 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     disableDialogVisible,
   } = oauthStore;
 
+  const isGroup = selectionToDisable.length > 1;
+
   const onClose = () => {
     setDisableDialogVisible(false);
   };
 
   const onDisable = async () => {
-    if (!bufferSelection) return;
+    if (selection.length) {
+      const disable = async (item: string) => {
+        await changeClientStatus(item, false);
+      };
 
-    setActiveClient(bufferSelection.clientId);
-    await changeClientStatus(bufferSelection.clientId, false);
-    setActiveClient("");
-    setSelection("");
+      const actions: Promise<void>[] = selectionToDisable.map((item) =>
+        disable(item),
+      );
+
+      await Promise.all(actions);
+
+      setActiveClient("");
+      setSelection("");
+    } else {
+      if (!bufferSelection) return;
+
+      await changeClientStatus(bufferSelection.clientId, false);
+
+      setActiveClient("");
+      setSelection("");
+    }
   };
 
-  return { isVisible: disableDialogVisible, onClose, onDisable };
+  return { isVisible: disableDialogVisible, isGroup, onClose, onDisable };
 })(observer(DisableClientDialog));

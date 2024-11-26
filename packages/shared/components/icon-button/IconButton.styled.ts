@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
 import { IconButtonProps } from "./IconButton.types";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledOuter = styled.div<IconButtonProps>`
+const StyledOuter = styled.div.attrs(injectDefaultTheme)<IconButtonProps>`
   width: ${(props) => (props.size ? `${props.size}px` : "20px")};
   height: ${(props) => (props.size ? `${props.size}px` : "20px")};
   cursor: ${(props) =>
@@ -89,7 +90,5 @@ const StyledOuter = styled.div<IconButtonProps>`
       }
     `}
 `;
-
-StyledOuter.defaultProps = { theme: Base };
 
 export default StyledOuter;

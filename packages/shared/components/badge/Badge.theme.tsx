@@ -26,6 +26,7 @@
 
 import React, { PropsWithChildren, forwardRef, useContext } from "react";
 import { ThemeContext } from "styled-components";
+
 import { TColorScheme } from "../../themes";
 
 import { StyledBadgeTheme } from "./Badge.styled";

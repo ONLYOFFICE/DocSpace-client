@@ -287,7 +287,7 @@ const DNSSettingsComponent = (props) => {
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && (
+          {!isSettingPaid && !standalone && (
             <Badge
               className="paid-badge"
               fontWeight="700"
@@ -343,7 +343,7 @@ export const DNSSettings = inject(
       isDefaultDNS,
     } = common;
 
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
     const { customObj } = dnsSettings;
     const { dnsName, enable } = customObj;
 
@@ -357,7 +357,7 @@ export const DNSSettings = inject(
       helpLink,
       initSettings,
       setIsLoaded,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
+      isSettingPaid: isCustomizationAvailable,
       currentColorScheme,
       standalone,
       setIsEnableDNS,

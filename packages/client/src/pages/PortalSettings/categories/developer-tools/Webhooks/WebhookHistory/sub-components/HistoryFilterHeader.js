@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 
-import { Base } from "@docspace/shared/themes";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
@@ -39,7 +38,7 @@ import StatusBar from "./StatusBar";
 
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 
 const ListHeader = styled.header`
   display: flex;
@@ -63,7 +62,7 @@ const ListHeading = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-const FilterButton = styled.div`
+const FilterButton = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   display: flex;
   box-sizing: border-box;
@@ -110,8 +109,6 @@ const FilterButton = styled.div`
     inset-inline-end: -2px;
   }
 `;
-
-FilterButton.defaultProps = { theme: Base };
 
 const HistoryFilterHeader = (props) => {
   const {

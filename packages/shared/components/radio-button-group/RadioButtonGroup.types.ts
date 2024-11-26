@@ -30,6 +30,7 @@ export type TRadioButtonOption = {
   disabled?: boolean;
   id?: string;
   type?: string;
+  autoFocus?: boolean;
 };
 
 export interface RadioButtonGroupProps {

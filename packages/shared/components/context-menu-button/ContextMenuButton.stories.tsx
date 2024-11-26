@@ -27,7 +27,7 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { ContextMenuButton } from "./ContextMenuButton";
 import { ContextMenuButtonProps } from "./ContextMenuButton.types";

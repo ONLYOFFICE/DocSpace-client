@@ -54,20 +54,21 @@ const ContactContainer = (props) => {
                 i18nKey="UpgradeToProBannerInformationAboutShort"
                 ns="PaymentsEnterprise"
                 t={t}
-              >
-                Learn more about Enterprise Edition
-                <Link
-                  target="_blank"
-                  tag="a"
-                  fontWeight="600"
-                  href={officialWebsiteUrl}
-                  color={
-                    theme.client.settings.payment.contactContainer.linkColor
-                  }
-                >
-                  on the official website
-                </Link>
-              </Trans>
+                values={{ license: t("Common:EnterpriseLicense") }}
+                components={{
+                  1: (
+                    <Link
+                      target="_blank"
+                      tag="a"
+                      fontWeight="600"
+                      href={officialWebsiteUrl}
+                      color={
+                        theme.client.settings.payment.contactContainer.linkColor
+                      }
+                    />
+                  ),
+                }}
+              />
             </Text>
           </div>
           <div className="payments_contact">

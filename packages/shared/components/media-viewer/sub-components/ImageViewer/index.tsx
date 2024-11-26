@@ -221,6 +221,7 @@ export const ImageViewer = ({
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setIsLoading(false);
+      setIsError(false);
 
       if (isTiff && src) {
         URL.revokeObjectURL(src);

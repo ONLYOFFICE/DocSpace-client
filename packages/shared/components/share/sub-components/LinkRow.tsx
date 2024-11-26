@@ -25,21 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-
+import { useState, useEffect } from "react";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
+import { classNames, isMobile } from "@docspace/shared/utils";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
-import { copyShareLink } from "../../../utils/copy";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Link } from "../../link";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
-import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
 import { Text } from "../../text";
 
@@ -48,6 +47,8 @@ import {
   getShareOptions,
   getAccessOptions,
   getRoomAccessOptions,
+  copyDocumentShareLink,
+  copyRoomShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -71,19 +72,37 @@ const LinkRow = ({
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
+  removedExpiredLink,
+  isFormRoom,
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
+  const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
 
-  const shareOptions = getShareOptions(t) as TOption[];
+  const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
     ? getAccessOptions(t, availableExternalRights)
     : [];
 
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
+  const onCheckHeight = () => {
+    setIsMobileViewLink(isMobile());
+  };
+
+  useEffect(() => {
+    onCheckHeight();
+    window.addEventListener("resize", onCheckHeight);
+    return () => {
+      window.removeEventListener("resize", onCheckHeight);
+    };
+  }, []);
+
   const onCopyLink = (link: TFileLink) => {
-    copyShareLink(link.sharedTo.shareLink);
-    toastr.success(t("Common:LinkSuccessfullyCopied"));
+    if (isRoomsLink) {
+      return copyRoomShareLink(link, t);
+    }
+
+    copyDocumentShareLink(link, t);
   };
 
   return !links?.length ? (
@@ -135,11 +154,15 @@ const LinkRow = ({
               role={AvatarRole.user}
               source={avatar}
               roleIcon={isLocked ? <LockedReactSvg /> : undefined}
+              noClick
             />
           )}
           <div className="link-options">
             {isRoomsLink ? (
-              <Text className="link-options_title" truncate>
+              <Text
+                className="link-options_title link-options-title-room"
+                truncate
+              >
                 {linkTitle}
               </Text>
             ) : !isExpiredLink ? (
@@ -153,6 +176,7 @@ const LinkRow = ({
                 scaledOptions={false}
                 showDisabledItems
                 size={ComboBoxSize.content}
+                manualWidth="auto"
                 fillIcon={false}
                 modernView
                 isDisabled={isLoaded}
@@ -163,11 +187,12 @@ const LinkRow = ({
             {!isPrimaryLink && (
               <ExpiredComboBox
                 link={link}
-                accessOptions={accessOptions}
+                availableExternalRights={availableExternalRights}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
                 changeAccessOption={changeAccessOption}
+                removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>
@@ -184,17 +209,22 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                <AccessRightSelect
-                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                  onSelect={onAccessRightsSelect}
-                  accessOptions={roomAccessOptions}
-                  noBorder
-                  directionX="right"
-                  directionY="bottom"
-                  type="onlyIcon"
-                  manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                />
+                {!isFormRoom && (
+                  <AccessRightSelect
+                    selectedOption={roomSelectedOptions ?? ({} as TOption)}
+                    onSelect={onAccessRightsSelect}
+                    accessOptions={roomAccessOptions}
+                    modernView
+                    directionX="right"
+                    directionY="both"
+                    type="onlyIcon"
+                    manualWidth="300px"
+                    isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                    isMobileView={isMobileViewLink}
+                    fixedDirection={isMobileViewLink}
+                    topSpace={16}
+                  />
+                )}
                 {!isArchiveFolder && (
                   <ContextMenuButton
                     getData={getData}
@@ -220,7 +250,7 @@ const LinkRow = ({
                 modernView
                 type="onlyIcon"
                 isDisabled={isExpiredLink || isLoaded}
-                manualWidth="fit-content"
+                manualWidth="auto"
                 withBackdrop={false}
               />
             )}

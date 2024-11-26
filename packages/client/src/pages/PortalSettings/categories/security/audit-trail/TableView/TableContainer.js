@@ -35,6 +35,10 @@ import { TableBody } from "@docspace/shared/components/table";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 
+const TABLE_VERSION = "5";
+const COLUMNS_SIZE = `auditColumnsSize_ver-${TABLE_VERSION}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelAuditTrailColumnsSize_ver-${TABLE_VERSION}`;
+
 const Table = ({
   auditTrailUsers,
   sectionWidth,
@@ -43,8 +47,11 @@ const Table = ({
   theme,
   isSettingNotPaid,
   currentDeviceType,
+  userId,
 }) => {
   const ref = useRef(null);
+  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   useViewEffect({
     view: viewAs,
@@ -54,8 +61,19 @@ const Table = ({
 
   return auditTrailUsers && auditTrailUsers.length > 0 ? (
     <TableContainer forwardedRef={ref} useReactWindow={false}>
-      <TableHeader sectionWidth={sectionWidth} containerRef={ref} />
-      <TableBody useReactWindow={false}>
+      <TableHeader
+        sectionWidth={sectionWidth}
+        containerRef={ref}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
+      />
+      <TableBody
+        useReactWindow={false}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
+        itemHeight={48}
+        filesLength={auditTrailUsers.length}
+      >
         {auditTrailUsers.map((item) => (
           <TableRow
             theme={theme}
@@ -71,9 +89,10 @@ const Table = ({
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export default inject(({ settingsStore, setup, userStore }) => {
   const { security, viewAs, setViewAs } = setup;
   const { theme, currentDeviceType } = settingsStore;
+  const userId = userStore.user?.id;
 
   return {
     auditTrailUsers: security.auditTrail.users,
@@ -81,5 +100,6 @@ export default inject(({ settingsStore, setup }) => {
     viewAs,
     setViewAs,
     currentDeviceType,
+    userId,
   };
 })(observer(Table));

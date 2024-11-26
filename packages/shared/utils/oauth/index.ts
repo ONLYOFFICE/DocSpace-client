@@ -2,6 +2,7 @@
 import crypto from "crypto-js";
 import sha256 from "crypto-js/sha256";
 
+import { TTranslation } from "../../types";
 import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
 import {
   IClientResDTO,
@@ -105,24 +106,56 @@ export const transformToClientReqDTO = (
   return client;
 };
 
-export const getScopeTKeyDescription = (group: ScopeGroup, type: ScopeType) => {
-  const tKey = `OAuth${group.replace(
-    /^./,
-    group[0].toUpperCase(),
-  )}${type.replace(/^./, type[0].toUpperCase())}Description`;
-
-  return tKey;
+export const getScopeTKeyDescription = (
+  group: ScopeGroup,
+  type: ScopeType,
+  t: TTranslation,
+) => {
+  switch (group) {
+    case ScopeGroup.files:
+      if (type === ScopeType.read) return t("Common:OAuthFilesReadDescription");
+      return t("Common:OAuthFilesWriteDescription");
+    case ScopeGroup.accounts:
+    case ScopeGroup.contacts:
+      if (type === ScopeType.read)
+        return t("Common:OAuthAccountsReadDescription");
+      return t("Common:OAuthAccountsWriteDescription");
+    case ScopeGroup.profiles:
+      if (type === ScopeType.read)
+        return t("Common:OAuthProfilesReadDescription");
+      return t("Common:OAuthProfilesWriteDescription");
+    case ScopeGroup.rooms:
+      if (type === ScopeType.read) return t("Common:OAuthRoomsReadDescription");
+      return t("Common:OAuthRoomsWriteDescription");
+    case ScopeGroup.openid:
+      return t("Common:OAuthOpenidOpenidDescription");
+    default:
+      return "";
+  }
 };
 
-export const getScopeTKeyName = (group: ScopeGroup) => {
-  const tKey = `OAuth${group.replace(/^./, group[0].toUpperCase())}Name`;
-
-  return tKey;
+export const getScopeTKeyName = (group: ScopeGroup, t: TTranslation) => {
+  switch (group) {
+    case ScopeGroup.files:
+      return t("Common:OAuthFilesName");
+    case ScopeGroup.accounts:
+    case ScopeGroup.contacts:
+      return t("Common:OAuthAccountsName");
+    case ScopeGroup.profiles:
+      return t("Common:OAuthProfilesName");
+    case ScopeGroup.rooms:
+      return t("Common:OAuthRoomsName");
+    case ScopeGroup.openid:
+      return t("Common:OAuthOpenidName");
+    default:
+      return "";
+  }
 };
 
 export const filterScopeByGroup = (
   checkedScopes: string[],
   scopes: TScope[],
+  t: TTranslation,
 ) => {
   const filteredScopes: TFilteredScopes = {};
 
@@ -130,7 +163,7 @@ export const filterScopeByGroup = (
     const isChecked = checkedScopes.includes(scope.name);
     const isRead = ScopeType.read === scope.type;
 
-    const tKey = getScopeTKeyDescription(scope.group, scope.type);
+    const tKey = getScopeTKeyDescription(scope.group, scope.type, t);
     const read = isRead ? { ...scope, tKey } : ({} as TScope);
     const write = !isRead ? { ...scope, tKey } : ({} as TScope);
 
@@ -177,8 +210,12 @@ export function generatePKCEPair() {
   // const HASH_ALG = "sha256";
 
   const randomVerifier = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
-  const randomState = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
   const hash = sha256(randomVerifier).toString(crypto.enc.Base64);
 
-  return { verifier: randomVerifier, challenge: hash, state: randomState };
+  const challenge = hash
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, ""); // Clean base64 to make it URL safe
+
+  return { verifier: randomVerifier, challenge };
 }

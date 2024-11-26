@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Додатни одељци",
   "DisplayFavorites": "Прикажи Омиљено",
+  "DisplayFileExtension": "Приказ екстензије фајла поред имена фајла",
   "DisplayNotification": "Прикажи нотификацију када померате ставке у Отпад",
   "DisplayRecent": "Прикажи Скорашње",
   "DisplayTemplates": "Прикажи Шаблоне",

@@ -35,7 +35,7 @@ import ButtonDuplicateIcon from "PUBLIC_DIR/images/button.duplicate.react.svg";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
 import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
-import RefreshIcon from "PUBLIC_DIR/images/refresh.react.svg";
+import RefreshIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/icons/16/top-arrow.react.svg";
@@ -81,9 +81,9 @@ const FloatingButton = (props: FloatingButtonProps) => {
     id,
     className,
     style,
-    icon,
-    alert,
-    percent,
+    icon = FloatingButtonIcons.upload,
+    alert = false,
+    percent = 0,
     onClick,
     color,
     clearUploadedFilesHistory,
@@ -129,6 +129,8 @@ const FloatingButton = (props: FloatingButtonProps) => {
         {...props}
         id={id}
         icon={icon}
+        alert={alert}
+        percent={percent}
         color={color}
         style={style}
         onClick={onClick}
@@ -170,15 +172,6 @@ const FloatingButton = (props: FloatingButtonProps) => {
       )}
     </StyledFloatingButtonWrapper>
   );
-};
-
-FloatingButton.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  icon: FloatingButtonIcons.upload,
-  alert: false,
-  percent: 0,
 };
 
 export { FloatingButton };

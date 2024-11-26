@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
 
-export const GroupMember = styled.div<{ isExpect: boolean }>`
+import { injectDefaultTheme, TextUserSelect } from "@docspace/shared/utils";
+
+export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
+  isExpect: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -40,6 +43,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .user_body-wrapper {
     overflow: auto;
+    ${TextUserSelect}
   }
 
   .info,
@@ -102,5 +106,3 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
     }
   }
 `;
-
-GroupMember.defaultProps = { theme: Base };

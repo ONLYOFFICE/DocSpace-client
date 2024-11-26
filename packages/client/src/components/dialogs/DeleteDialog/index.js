@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
-import { StyledDeleteDialog } from "./StyledDeleteDialog";
 
 import { withTranslation } from "react-i18next";
 
@@ -263,12 +262,10 @@ const DeleteDialogComponent = (props) => {
   };
 
   return (
-    <StyledDeleteDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="modal-dialog-content-body">
-          <Text noSelect>{noteText}</Text>
-        </div>
+        <Text noSelect>{noteText}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -292,7 +289,7 @@ const DeleteDialogComponent = (props) => {
           isLoading={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledDeleteDialog>
+    </ModalDialog>
   );
 };
 

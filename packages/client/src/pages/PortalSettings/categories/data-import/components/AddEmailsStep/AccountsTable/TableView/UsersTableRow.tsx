@@ -34,13 +34,12 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { EmailInput } from "@docspace/shared/components/email-input";
-import { Button } from "@docspace/shared/components/button";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
-import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
-import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-
-import { Base, globalColors } from "@docspace/shared/themes";
+import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { globalColors } from "@docspace/shared/themes";
 
 import { InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
@@ -78,16 +77,6 @@ const StyledTableRow = styled(TableRow)`
     width: 357.67px;
   }
 `;
-
-const DecisionButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  path {
-    fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-  }
-`;
-
-DecisionButton.defaultProps = { theme: Base };
 
 const UsersTableRow = (props: AddEmailTableRowProps) => {
   const {
@@ -222,12 +211,22 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               isAutoFocussed
             />
 
-            <DecisionButton
-              label=""
-              icon={<CheckSvg />}
+            <IconButton
+              className="import-check-container-button"
+              size={32}
               onClick={handleSaveClick}
+              iconName={CheckSvgUrl}
+              isFill={true}
+              isClickable={true}
             />
-            <DecisionButton label="" icon={<CrossSvg />} onClick={clearEmail} />
+            <IconButton
+              className="import-clear-container-button"
+              size={32}
+              onClick={clearEmail}
+              iconName={CrossSvgUrl}
+              isFill={true}
+              isClickable={true}
+            />
           </EmailInputWrapper>
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>

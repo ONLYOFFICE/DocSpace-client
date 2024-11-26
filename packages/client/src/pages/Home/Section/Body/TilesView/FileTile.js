@@ -110,6 +110,9 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+      }
       title={item.title}
       logo={item.logo}
       color={item.logo?.color}

@@ -63,7 +63,7 @@ const ShareCollectSelector = inject<TStore>(
     infoPanelStore,
     filesStore,
   }) => {
-    const { socketHelper, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
     const { setShareCollectSelector, conflictResolveDialogVisible } =
       dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
@@ -75,7 +75,6 @@ const ShareCollectSelector = inject<TStore>(
 
     const { getIcon } = filesSettingsStore;
     return {
-      socketHelper,
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
@@ -94,7 +93,6 @@ const ShareCollectSelector = inject<TStore>(
     ({
       file,
       visible,
-      socketHelper,
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
@@ -243,8 +241,6 @@ const ShareCollectSelector = inject<TStore>(
           rootFolderType={file.rootFolderType}
           createDefineRoomType={RoomsType.FormRoom}
           isPanelVisible={visible && !conflictResolveDialogVisible}
-          socketHelper={socketHelper}
-          socketSubscribers={socketHelper.socketSubscribers}
           currentDeviceType={currentDeviceType}
           headerLabel={t("Common:ShareAndCollect")}
           createDefineRoomLabel={t("Common:CreateFormFillingRoom")}

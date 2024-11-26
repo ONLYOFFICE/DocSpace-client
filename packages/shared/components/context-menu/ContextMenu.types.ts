@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { ICover } from "api/rooms/types";
 
 export type ContextMenuRefType = {
   show: (e: React.MouseEvent | MouseEvent) => void;
@@ -43,15 +44,18 @@ export type ContextMenuRefType = {
   menuRef: React.RefObject<HTMLDivElement | null>;
 };
 
+export type TContextMenuValueTypeOnClick =
+  | {
+      originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
+      action?: string | boolean;
+      item?: ContextMenuType;
+    }
+  | React.MouseEvent
+  | React.ChangeEvent<HTMLInputElement>;
+
 export type ContextMenuTypeOnClick = (
-  value:
-    | {
-        originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-        action?: string | boolean;
-        item?: ContextMenuType;
-      }
-    | React.MouseEvent
-    | React.ChangeEvent<HTMLInputElement>,
+  value: TContextMenuValueTypeOnClick,
+
   item?: ContextMenuType,
 ) => void;
 
@@ -64,7 +68,7 @@ export type ContextMenuType = {
   onClick?: ContextMenuTypeOnClick;
   isSeparator?: undefined;
   url?: string;
-  items?: ContextMenuType[];
+  items?: ContextMenuModel[];
   action?: string;
   className?: string;
   disableColor?: string;
@@ -95,6 +99,8 @@ export type HeaderType = {
   icon?: string;
   avatar?: string;
   color?: string;
+  cover?: ICover;
+  logo?: string;
 };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;

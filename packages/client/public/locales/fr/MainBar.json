@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "La limite est atteinte pour le nombre de salles : {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "La limite de l'espace de stockage et du nombre de salles est sur le point d'être dépassée",
   "StorageAndRoomLimitHeader": "La limite de l'espace de stockage et du nombre de salles est atteinte",
-  "StorageAndUserHeader": "Les limites de stockage et d'administrateurs/utilisateurs avancés sont sur le point d'être dépassées.",
-  "StorageAndUserTariffLimitHeader": "La limite de l'espace de stockage et du nombre d'administrateurs/utilisateurs avancés est atteinte",
+  "StorageAndUserHeader": "Les limites de stockage et d'administrateurs sont sur le point d'être dépassées.",
+  "StorageAndUserTariffLimitHeader": "La limite de l'espace de stockage et du nombre d'administrateurs est atteinte",
   "StorageLimitHeader": "La limite de l'espace de stockage est atteinte : {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "L’espace de stockage est sur le point d’être dépassé : {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Vous pouvez supprimer les fichiers inutiles ou modifier le quota dans la section <1>Paramètres de gestion du stockage.</1>",
-  "UserQuotaHeader": "Le nombre d'administrateurs/utilisateurs avancés est sur le point d'être dépassé : {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Une fois la limite atteinte, tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs/utilisateurs avancés, contactez l'administrateur de {{productName}} pour mettre à niveau le plan tarifaire.",
-  "UserTariffAlmostReachedForAdmins": "Une fois la limite atteinte, tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs/utilisateurs avancés, <1>cliquez ici</1> pour mettre à niveau votre plan tarifaire.",
-  "UserTariffLimitHeader": "La limite est atteinte pour le nombre d'administrateurs/utilisateurs avancés: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs/utilisateurs avancés, contactez l'administrateur de {{productName}} pour mettre à niveau le plan tarifaire.",
-  "UserTariffReachedForAdmins": "Tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs/utilisateurs avancées, <1>cliquez ici</1> pour mettre à niveau votre plan tarifaire."
+  "UserQuotaHeader": "Le nombre d'administrateurs est sur le point d'être dépassé : {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Une fois la limite atteinte, tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs, contactez l'administrateur de {{productName}} pour mettre à niveau le plan tarifaire.",
+  "UserTariffAlmostReachedForAdmins": "Une fois la limite atteinte, tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs, <1>cliquez ici</1> pour mettre à niveau votre plan tarifaire.",
+  "UserTariffLimitHeader": "La limite est atteinte pour le nombre d'administrateurs: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs, contactez l'administrateur de {{productName}} pour mettre à niveau le plan tarifaire.",
+  "UserTariffReachedForAdmins": "Tous les utilisateurs seront ajoutés avec des autorisations d'utilisateur uniquement. Pour pouvoir ajouter d'autres administrateurs, <1>cliquez ici</1> pour mettre à niveau votre plan tarifaire."
 }

@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Otaq sayı limitinə çatıldı: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Yaddaş sahəsi və otaq sayı limiti keçmək üzrədir",
   "StorageAndRoomLimitHeader": "Yaddaş sahəsi və otaq sayı limitinə çatıldı",
-  "StorageAndUserHeader": "Yaddaş və administratorlar/ekspert istifadəçilər limitləri aşmaq üzrədir.",
-  "StorageAndUserTariffLimitHeader": "Yaddaş sahəsi və administrator/güc istifadəçilərinin sayı limitinə çatıldı",
+  "StorageAndUserHeader": "Yaddaş və administratorlar limitləri aşmaq üzrədir.",
+  "StorageAndUserTariffLimitHeader": "Yaddaş sahəsi və administrator limiti çatdı",
   "StorageLimitHeader": "Yaddaş limitinə çatıldı: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",
-  "UserQuotaHeader": "Admin/ekspert istifadəçilərin sayı keçmək üzrədir: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Limitə çatdıqdan sonra bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox idarəçi/güc istifadəçisi əlavə etmək üçün tarif planını təkmilləşdirmək üçün {{productName}} administratoru ilə əlaqə saxlayın.",
-  "UserTariffAlmostReachedForAdmins": "Limitə çatdıqdan sonra bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator/güc istifadəçisi əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin.",
-  "UserTariffLimitHeader": "Administrator/ekspert istifadəçi limitinə çatıldı: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox idarəçi/güc istifadəçisi əlavə etmək üçün tarif planını təkmilləşdirmək üçün {{productName}} administratoru ilə əlaqə saxlayın.",
-  "UserTariffReachedForAdmins": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator/güc istifadəçisi əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin."
+  "UserQuotaHeader": "Admin sayı keçmək üzrədir: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Limitə çatdıqdan sonra bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox idarəçi əlavə etmək üçün tarif planını təkmilləşdirmək üçün {{productName}} administratoru ilə əlaqə saxlayın.",
+  "UserTariffAlmostReachedForAdmins": "Limitə çatdıqdan sonra bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin.",
+  "UserTariffLimitHeader": "Administrator limitinə çatıldı: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox idarəçi əlavə etmək üçün tarif planını təkmilləşdirmək üçün {{productName}} administratoru ilə əlaqə saxlayın.",
+  "UserTariffReachedForAdmins": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin."
 }

@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "追加セクション",
   "DisplayFavorites": "お気に入りの表示",
+  "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "DisplayNotification": "ゴミ箱への移動時に通知を表示",
   "DisplayRecent": "最近の表示",
   "DisplayTemplates": "テンプレートの表示",

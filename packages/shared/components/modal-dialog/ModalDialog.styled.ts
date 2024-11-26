@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import { Base } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 
 import { Box } from "../box";
 import { ModalDialogType } from "./ModalDialog.enums";
@@ -51,7 +50,7 @@ const StyledModal = styled.div<{ modalSwipeOffset?: number; blur?: number }>`
   }
 `;
 
-const Dialog = styled.div`
+const Dialog = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,13 +59,14 @@ const Dialog = styled.div`
   min-height: 100%;
 `;
 
-const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
+const Content = styled.div.attrs<{ modalSwipeOffset?: number }>((props) => ({
   style: {
     marginBottom:
       props.modalSwipeOffset && props.modalSwipeOffset < 0
         ? `${props.modalSwipeOffset * 1.1}px`
         : "0px",
   },
+  theme: props.theme || Base,
 }))<{
   autoMaxHeight?: boolean;
   autoMaxWidth?: boolean;
@@ -75,6 +75,7 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
   isLarge?: boolean;
   visible?: boolean;
   embedded?: boolean;
+  isHuge?: boolean;
 }>`
   box-sizing: border-box;
   position: relative;
@@ -101,6 +102,8 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
             : props.isLarge
               ? "520px"
               : "400px"};
+
+          max-width: ${props.isHuge ? "730px" : "unset"};
 
           border-radius: 6px;
           @media ${mobile} {
@@ -150,11 +153,14 @@ const StyledBody = styled(Box)<{
   hasFooter?: boolean;
   isScrollLocked?: boolean;
   withBodyScroll?: boolean;
+  withoutPadding?: boolean;
 }>`
   position: relative;
   padding: 0 16px;
-  padding-bottom: ${(props) =>
-    props.currentDisplayType === "aside" || props.hasFooter ? "8px" : "16px"};
+
+  ${({ currentDisplayType, hasFooter }) =>
+    currentDisplayType === "modal" &&
+    `padding-bottom: ${hasFooter ? "8px" : "16px"};`}
 
   white-space: pre-line;
 
@@ -162,23 +168,33 @@ const StyledBody = styled(Box)<{
     margin-inline-end: 0 !important;
 
     padding-inline-end: 16px !important;
-
-    ${(props) =>
-      props.isScrollLocked &&
-      css`
-        margin-inline-end: 0 !important;
-        overflow: hidden !important;
-      `}
   }
+
+  ${(props) =>
+    props.isScrollLocked &&
+    css`
+      #modal-scroll > .scroll-wrapper > .scroller {
+        overflow: hidden !important;
+      }
+
+      #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
+        margin-inline-end: 0 !important;
+      }
+    `}
 
   ${(props) =>
     props.currentDisplayType === "aside" &&
     css<{ withBodyScroll?: boolean }>`
       margin-inline-end: ${props.withBodyScroll ? "-16px" : "0"};
-      padding-bottom: 8px;
       height: 100%;
       min-height: auto;
     `}
+
+  ${(props) =>
+    props.withoutPadding &&
+    css`
+      padding: 0;
+    `};
 `;
 
 const StyledFooter = styled.div<{
@@ -207,8 +223,5 @@ const StyledFooter = styled.div<{
       }
     `}
 `;
-
-Dialog.defaultProps = { theme: Base };
-Content.defaultProps = { theme: Base };
 
 export { StyledModal, Content, Dialog, StyledBody, StyledFooter };

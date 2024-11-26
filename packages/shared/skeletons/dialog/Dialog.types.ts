@@ -33,4 +33,5 @@ export interface DialogAsideSkeletonProps {
   isPanel: boolean;
   withoutAside?: boolean;
   withFooterBorder: boolean;
+  isInvitePanelLoader?: boolean;
 }

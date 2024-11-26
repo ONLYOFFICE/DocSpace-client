@@ -3,19 +3,19 @@ import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { TableSkeleton } from "@docspace/shared/skeletons/table";
 import { RowsSkeleton } from "@docspace/shared/skeletons/rows";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
-import { OAuthContainer } from "../../StyledOAuth";
-import { StyledContainer } from ".";
+import { OAuthContainer } from "../../OAuth.styled";
+import { StyledContainer } from "./List.styled";
 
 const OAuthLoader = ({
   viewAs,
   currentDeviceType,
 }: {
   viewAs: ViewAsType;
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
 }) => {
   const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
 

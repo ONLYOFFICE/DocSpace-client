@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Dodatkowe sekcje",
   "DisplayFavorites": "Wyświetlaj ulubione",
+  "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "DisplayNotification": "Wyświetlaj powiadomienia podczas przenoszenia elementów do kosza",
   "DisplayRecent": "Wyświetlaj ostatnie",
   "DisplayTemplates": "Wyświetlaj szablony",

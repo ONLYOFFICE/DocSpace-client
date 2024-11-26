@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "تم تحويل المستند إلى {{title}} للسماح بتعديله",
   "DocumentsFileType": "وثائق",
   "ErrorConnectionLost": "الاتصال مفقود",
   "FileLocation": "افتح موقع ملف",

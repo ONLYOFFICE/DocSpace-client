@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "Nous avons envoyé un code à 6 chiffres à {{email}}. Le code a une durée de validité limitée, saisissez-le dès que possible.",
   "CodeTitle": "Le code vous a été envoyé par e-mail",
   "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>{{productName}}</1>",
-  "ExpiredCode": "Ce code n'est plus valide. Veuillez demander un nouveau code et réessayer.",
   "ForgotPassword": "Mot de passe oublié ?",
-  "InvalidCode": "Ce code n'est pas valide. Veuillez réessayer.",
   "LDAPUsernamePlaceholder": "Nom d'utilisateur de {{ldap_domain}}",
   "MessageAuthorize": "Veuillez vous connecter pour continuer",
   "MessageEmailConfirmed": "Votre adresse e-mail est activée avec succès.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Merci de renseigner l'adresse e-mail que vous avez utilisé lors de votre inscription sur le portail. Les instructions de récupération de votre mot de passe seront envoyées à cette adresse.",
-  "NotFoundCode": "Vous n'avez pas trouvé le code ? Veuillez vérifier votre dossier 'Spam'.",
   "PasswordRecoveryTitle": "Récupération du mot de passe",
   "RecoverAccess": "Récupérer l'accès",
   "RecoverContactEmailPlaceholder": "E-mail de contact",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Demande d'inscription",
   "RegistrationEmailWatermark": "Adresse de courriel",
   "RememberHelper": "Par défaut, la durée de validité de la session est de 20 minutes. Cochez cette option pour la définir sur 1 an. Vous pouvez définir votre propre valeur en accédant aux paramètres.",
-  "ResendCode": "Renvoyer le code",
   "SignInLDAP": "Se connecter à : {{ldap_domain}}",
   "SignInLdapHelper": "Utiliser les informations d'identification du domaine de l'entreprise",
   "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans ce {{productName}}, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail."

@@ -31,7 +31,7 @@ import CloudServicesOnedriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.o
 import CloudServicesKdriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.kdrive.react.svg?url";
 import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yandex.react.svg?url";
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { FileType, RoomsType } from "@docspace/shared/enums";
@@ -86,6 +86,10 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
+
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoom");
+
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
   }

@@ -24,25 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import ModalDialogContainer from "../ModalDialogContainer";
+import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType } from "@docspace/shared/enums";
-
-const StyledModal = styled(ModalDialogContainer)`
-  max-width: 400px;
-
-  .cancel-btn {
-    display: inline-block;
-
-    margin-inline-start: 8px;
-  }
-`;
 
 const RestoreRoomDialogComponent = (props) => {
   const {
@@ -102,7 +90,7 @@ const RestoreRoomDialogComponent = (props) => {
   const description = getDescription();
 
   return (
-    <StyledModal
+    <ModalDialog
       isLoading={!tReady}
       visible={visible}
       onClose={onClose}
@@ -131,7 +119,7 @@ const RestoreRoomDialogComponent = (props) => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

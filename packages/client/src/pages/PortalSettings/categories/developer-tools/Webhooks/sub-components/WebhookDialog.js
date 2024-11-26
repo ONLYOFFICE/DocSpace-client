@@ -24,22 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { LabledInput } from "./LabledInput";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-body {
-    overflow-y: auto;
-  }
-`;
 
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
@@ -188,11 +182,11 @@ const WebhookDialog = (props) => {
     (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
-    <ModalDialogContainer
-      withFooterBorder
+    <ModalDialog
       visible={visible}
       onClose={onModalClose}
       displayType="aside"
+      withBodyScroll
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -270,7 +264,7 @@ const WebhookDialog = (props) => {
           />
         </Footer>
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledLabel = styled.label<{
+const StyledLabel = styled.label.attrs(injectDefaultTheme)<{
   isDisabled: boolean;
   isIndeterminate: boolean;
   hasError: boolean;
@@ -183,7 +184,6 @@ const StyledLabel = styled.label<{
     margin-inline-start: 4px;
   }
 `;
-StyledLabel.defaultProps = { theme: Base };
 
 const HiddenInput = styled.input`
   opacity: 0.0001;

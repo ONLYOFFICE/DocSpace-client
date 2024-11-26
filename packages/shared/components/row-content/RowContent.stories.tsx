@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
-import CatalogSpamReactSvg from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
 import { IconSizeType, commonIconsStyles } from "../../utils";
 import { Link, LinkType } from "../link";

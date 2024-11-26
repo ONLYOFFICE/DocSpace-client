@@ -38,7 +38,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { getProviderLabel } from "@docspace/shared/utils/common";
 
-import { Modal, ProviderRow } from "./MoreLoginModal.styled";
+import { ProviderRow } from "./MoreLoginModal.styled";
 import type {
   MoreLoginModalProps,
   ProvidersDataType,
@@ -56,7 +56,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
   } = props;
 
   return (
-    <Modal
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
@@ -114,7 +114,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
           );
         })}
       </ModalDialog.Body>
-    </Modal>
+    </ModalDialog>
   );
 };
 

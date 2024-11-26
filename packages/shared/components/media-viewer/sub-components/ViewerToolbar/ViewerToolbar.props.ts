@@ -33,7 +33,7 @@ interface ImageViewerToolbarProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
   percentValue: number;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   toolbarEvent: (item: ToolbarItemType) => void;

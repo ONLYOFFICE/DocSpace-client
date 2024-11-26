@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "앱에서 생성한 6자리 코드를 입력해주세요. 휴대 전화를 이용할 수 없는 경우, 백업 코드를 사용하세요.",
   "EnterAppCodeTitle": "인증 앱 코드 입력",
   "EnterCodePlaceholder": "코드를 입력해주세요",
+  "EnterEmailHeader": "이메일 입력",
   "EnterPhone": "휴대 전화 번호를 입력",
   "GetCode": "코드 받기",
   "LoginRegistryButton": "참여",
+  "Newsletter": "{{organizationName}} 뉴스레터를 구독하고 싶습니다",
   "PassworResetTitle": "이제 새 비밀번호를 설정하실 수 있습니다.",
   "PhoneSubtitle": "추가 보안을 제공하기 위해 이중 인증이 활성화됩니다. {{productName}}에서 계속 작업하려면 휴대폰 번호를 입력해주세요. 휴대폰 번호는 국가 코드와 함께 국제 형식으로 입력해야 합니다.",
   "PortalContinueTitle": "{{productName}}를 다시 활성화할 것인지 확인해주세요.",
@@ -30,5 +32,6 @@
   "SignUp": "가입하기",
   "SuccessDeactivate": "계정이 성공적으로 비활성화되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
   "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>{{productName}}</1>로 리디렉션됩니다.",
-  "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다."
+  "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
+  "TermsAndConditions": "계속 하는 것은 당사의 <1>이용 약관</1> 및 <2>개인 정보 처리 방침</2>을 이해하고 동의하는 것으로 간주됩니다."
 }

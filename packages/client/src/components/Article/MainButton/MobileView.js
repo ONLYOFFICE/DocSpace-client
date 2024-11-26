@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CrossSidebarReactSvgUrl from "PUBLIC_DIR/images/cross.sidebar.react.svg?url";
+import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
@@ -134,21 +135,29 @@ const MobileView = ({
           currentSecondaryProgressItem,
         )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
+    const isUploaded = primaryProgressDataPercent === 100 && uploaded;
+    const isError = isUploaded && primaryProgressDataErrors;
+
+    let primaryLabel =
+      isUploaded && !primaryProgressDataErrors
+        ? t("FilesUploaded")
+        : `${uploadedFileCount}/${fileLength}`;
+
+    if (isError) {
+      primaryLabel = t("FilesNotLoaded", { count: primaryProgressDataErrors });
+    }
+
     const newProgressOptions = [
       {
         key: "primary-progress",
         open: primaryProgressDataVisible,
         label: t("UploadPanel:Uploads"),
-        icon: CrossSidebarReactSvgUrl,
+        icon: isError ? InfoEditReactSvgUrl : CrossSidebarReactSvgUrl,
         percent: primaryProgressDataPercent,
-        status:
-          primaryProgressDataPercent === 100 &&
-          !primaryProgressDataErrors &&
-          uploaded
-            ? t("FilesUploaded")
-            : `${uploadedFileCount}/${fileLength}`,
+        status: primaryLabel,
         onClick: showUploadPanel,
         onCancel: clearUploadPanel,
+        error: primaryProgressDataErrors,
       },
       {
         key: "secondary-progress",

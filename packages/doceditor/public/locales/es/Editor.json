@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "El documento convertido a {{title}} para permitir su edición",
   "DocumentsFileType": "documentos",
   "ErrorConnectionLost": "Se ha perdido la conexión",
   "FileLocation": "Abrir ubicación del archivo",

@@ -47,6 +47,10 @@ export type ScrollbarProps = {
   createContext?: boolean;
   /** Set focus on scroll content element after first render */
   autoFocus?: boolean;
+  /** Set scroll body tabindex */
+  tabIndex?: number | null;
+  /** Add padding bottom to scroll-body */
+  paddingAfterLastItem?: string;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   children?: React.ReactNode;
@@ -54,7 +58,13 @@ export type ScrollbarProps = {
 
 export type CustomScrollbarsVirtualListProps = Pick<
   ScrollbarProps,
-  "style" | "onScroll" | "children" | "className" | "autoFocus" | "scrollClass"
+  | "style"
+  | "onScroll"
+  | "children"
+  | "className"
+  | "autoFocus"
+  | "scrollClass"
+  | "paddingAfterLastItem"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
   contentRef?: React.MutableRefObject<HTMLDivElement | null>;

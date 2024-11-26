@@ -36,6 +36,8 @@ import IdpSettings from "./IdpSettings";
 import Certificates from "./Certificates";
 import FieldMapping from "./FieldMapping";
 import SubmitResetButtons from "./SubmitButton";
+import AdvancedSettings from "./AdvancedSettings";
+import UsersType from "./UsersType";
 
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -63,6 +65,8 @@ const SPSettings = ({ currentDeviceType }) => {
       <Certificates provider="IdentityProvider" />
       <Certificates provider="ServiceProvider" />
       <FieldMapping />
+      <UsersType />
+      <AdvancedSettings />
       <SubmitResetButtons />
     </Box>
   );

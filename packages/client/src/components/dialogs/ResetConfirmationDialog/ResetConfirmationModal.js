@@ -24,21 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 
-import StyledModalDialog from "./StyledModalDialog";
-
 const ResetConfirmationModal = (props) => {
   const { t } = useTranslation(["Common"]);
   const { closeResetModal, confirmationResetModal, confirmReset } = props;
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       contentHeight="100%"
       displayType="modal"
       onClose={closeResetModal}
@@ -67,7 +64,7 @@ const ResetConfirmationModal = (props) => {
           size="normal"
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

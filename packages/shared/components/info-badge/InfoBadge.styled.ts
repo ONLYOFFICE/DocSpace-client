@@ -28,9 +28,9 @@ import styled from "styled-components";
 
 import { Tooltip } from "../tooltip";
 import { mobile } from "../../utils/device";
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-export const StyledToolTip = styled(Tooltip)`
+export const StyledToolTip = styled(Tooltip).attrs(injectDefaultTheme)`
   .__react_component_tooltip {
     padding: 16px;
     box-shadow: 0px 12px 40px 0px
@@ -43,8 +43,6 @@ export const StyledToolTip = styled(Tooltip)`
     }
   }
 `;
-
-StyledToolTip.defaultProps = { theme: Base };
 
 export const InfoBadgeContent = styled.div`
   display: flex;
@@ -63,7 +61,7 @@ export const InfoBadgeHeader = styled.div`
   }
 `;
 
-export const InfoBadgeTitle = styled.h3`
+export const InfoBadgeTitle = styled.h3.attrs(injectDefaultTheme)`
   margin: 0;
   font-size: 16px;
   font-weight: 700;
@@ -71,8 +69,6 @@ export const InfoBadgeTitle = styled.h3`
 
   color: ${(props) => props.theme.tooltip.textColor};
 `;
-
-InfoBadgeTitle.defaultProps = { theme: Base };
 
 export const InfoBadgeDescription = styled.p`
   margin: 0;

@@ -42,6 +42,7 @@ const LicenseContainer = (props) => {
     isLicenseCorrect,
     setIsLoading,
     isLoading,
+    isTrial,
   } = props;
 
   const [isLicenseUploading, setIsLicenseUploading] = useState(false);
@@ -89,7 +90,7 @@ const LicenseContainer = (props) => {
         fontSize="14px"
         className="payments_license-description"
       >
-        {t("ActivateUploadDescr")}
+        {!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
       </Text>
       <FileInput
         className="payments_file-input"
@@ -115,7 +116,7 @@ const LicenseContainer = (props) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, currentQuotaStore }) => {
   const {
     setPaymentsLicense,
     acceptPaymentsLicense,
@@ -124,11 +125,14 @@ export default inject(({ paymentStore }) => {
     isLoading,
   } = paymentStore;
 
+  const { isTrial } = currentQuotaStore;
+
   return {
     setPaymentsLicense,
     acceptPaymentsLicense,
     isLicenseCorrect,
     setIsLoading,
     isLoading,
+    isTrial,
   };
 })(observer(LicenseContainer));

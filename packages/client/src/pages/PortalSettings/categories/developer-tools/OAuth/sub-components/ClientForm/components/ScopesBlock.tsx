@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "styled-components";
 
 import {
   IClientReqDTO,
@@ -13,6 +14,7 @@ import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { globalColors } from "@docspace/shared/themes";
 
 import BlockHeader from "./BlockHeader";
 
@@ -28,6 +30,7 @@ interface TScopesBlockProps {
   onAddScope: (name: keyof IClientReqDTO, scope: string) => void;
   t: TTranslation;
   isEdit: boolean;
+  requiredErrorFields: string[];
 }
 
 const ScopesBlock = ({
@@ -36,18 +39,19 @@ const ScopesBlock = ({
   onAddScope,
   t,
   isEdit,
+  requiredErrorFields,
 }: TScopesBlockProps) => {
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
   const [filteredScopes, setFilteredScopes] = React.useState<TFilteredScopes>(
-    filterScopeByGroup(selectedScopes, scopes),
+    filterScopeByGroup(selectedScopes, scopes, t),
   );
 
   React.useEffect(() => {
-    const filtered = filterScopeByGroup(selectedScopes, scopes);
+    const filtered = filterScopeByGroup(selectedScopes, scopes, t);
 
     setCheckedScopes([...selectedScopes]);
     setFilteredScopes({ ...filtered });
-  }, [scopes, selectedScopes]);
+  }, [scopes, selectedScopes, t]);
 
   const onAddCheckedScope = (
     group: ScopeGroup,
@@ -99,7 +103,7 @@ const ScopesBlock = ({
     const list: React.ReactNode[] = [];
 
     Object.entries(filteredScopes).forEach(([key, value]) => {
-      const name = getScopeTKeyName(key as ScopeGroup);
+      const name = getScopeTKeyName(key as ScopeGroup, t);
 
       const isReadDisabled = value.checkedType === ScopeType.write;
       const isReadChecked = value.isChecked;
@@ -195,12 +199,17 @@ const ScopesBlock = ({
 
   const list = getRenderedScopeList();
 
+  const theme = useTheme();
+
+  const isRequiredError = requiredErrorFields.includes("scopes");
+
   return (
-    <StyledScopesContainer>
+    <StyledScopesContainer isRequiredError={isRequiredError}>
       <BlockHeader
         className="header"
         header={t("ScopesHeader")}
         helpButtonText={t("ScopesHelp")}
+        isRequired
       />
 
       <Text
@@ -220,6 +229,25 @@ const ScopesBlock = ({
       >
         {t("Write")}
       </Text>
+      {isRequiredError && (
+        <>
+          <Text
+            className="header-error"
+            fontWeight={400}
+            fontSize="12px"
+            lineHeight="16px"
+            color={
+              theme.isBase
+                ? globalColors.lightErrorStatus
+                : globalColors.darkErrorStatus
+            }
+          >
+            {t("Common:SectionRequired")}
+          </Text>
+          <span />
+          <span />
+        </>
+      )}
       {list.map((item) => item)}
     </StyledScopesContainer>
   );

@@ -55,9 +55,10 @@ import {
   createPasswordHash,
   getLoginLink,
   getOAuthToken,
+  toUrlParams,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { ButtonKeys, DeviceType } from "@docspace/shared/enums";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -71,11 +72,11 @@ import {
 
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+import { globalColors } from "@docspace/shared/themes";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -88,6 +89,7 @@ export type CreateUserFormProps = {
   thirdPartyProviders?: TThirdPartyProvider[];
   firstName?: string;
   lastName?: string;
+  isStandalone: boolean;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -102,14 +104,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     lastName,
     licenseUrl,
     legalTerms,
+    isStandalone,
   } = props;
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
-  const { currentDeviceType } = useDeviceType();
   const router = useRouter();
 
   const currentCultureName = i18n.language;
-  const isDesktopView = currentDeviceType === DeviceType.desktop;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -129,6 +130,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [sname, setSname] = useState("");
   const [snameValid, setSnameValid] = useState(true);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
 
@@ -147,16 +150,18 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const authCallback = useCallback(
     async (profile: string) => {
-      const signupAccount: { [key: string]: string } = {
-        EmployeeType: linkData.emplType ?? "",
-        Email: linkData.email ?? "",
-        Key: linkData.key ?? "",
+      const signupAccount: { [key: string]: string | undefined } = {
+        EmployeeType: linkData.emplType,
+        Email: linkData.email,
+        Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
       };
 
+      const confirmKey = linkData.confirmHeader;
+
       try {
-        await signupOAuth(signupAccount);
+        await signupOAuth(signupAccount, confirmKey);
 
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
@@ -185,6 +190,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       linkData.emplType,
       linkData.key,
       roomData.roomId,
+      linkData.confirmHeader,
     ],
   );
 
@@ -223,18 +229,24 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      const loginData = JSON.stringify({
-        type: "invitation",
-        email,
-        roomName,
-        firstName,
-        lastName,
-        linkData,
-      });
+      const loginData = toUrlParams(
+        {
+          type: "invitation",
+          email,
+          roomName,
+          firstName,
+          lastName,
+          spaceAddress: window.location.host,
+        },
+        true,
+      );
 
-      sessionStorage.setItem("loginData", loginData);
+      const encodedData = encodeURIComponent(loginData);
+      const base64Data = btoa(JSON.stringify(linkData));
 
-      router.push("/");
+      const url = `/?loginData=${encodedData}&linkData=${base64Data}`;
+
+      router.push(url);
     } catch (error) {
       const knownError = error as TError;
       const status =
@@ -293,6 +305,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       lastName: sname.trim(),
       email: email,
       cultureName: currentCultureName,
+      spam: isChecked,
     };
 
     confirmUser.fromInviteLink = fromInviteLink;
@@ -341,6 +354,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const { userName, passwordHash } = confirmUserData;
     const res = await login(userName, passwordHash);
 
+    if (res && res.tfa && res.confirmUrl) {
+      return window.location.replace(res.confirmUrl);
+    }
+
     const finalUrl = roomData.roomId
       ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;
@@ -377,6 +394,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsPasswordErrorShow(false);
   };
 
+  const onChangeCheckbox = () => {
+    setIsChecked(!isChecked);
+  };
+
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ButtonKeys.enter) {
       registrationForm ? onSubmit() : onContinue();
@@ -395,23 +416,20 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsPasswordErrorShow(true);
   };
 
-  const onSocialButtonClick = useCallback(
-    async (e: MouseEvent<Element>) => {
-      const target = e.target as HTMLElement;
-      let targetElement = target;
+  const onSocialButtonClick = useCallback(async (e: MouseEvent<Element>) => {
+    const target = e.target as HTMLElement;
+    let targetElement = target;
 
-      if (
-        !(targetElement instanceof HTMLButtonElement) &&
-        target.parentElement
-      ) {
-        targetElement = target.parentElement;
-      }
+    if (!(targetElement instanceof HTMLButtonElement) && target.parentElement) {
+      targetElement = target.parentElement;
+    }
 
-      const providerName = targetElement.dataset.providername;
-      const url = targetElement.dataset.url || "";
+    const providerName = targetElement.dataset.providername;
+    const url = targetElement.dataset.url || "";
 
-      try {
-        const tokenGetterWin = isDesktopView
+    try {
+      const tokenGetterWin =
+        window.AscDesktopEditor !== undefined
           ? (window.location.href = url)
           : window.open(
               url,
@@ -419,24 +437,22 @@ const CreateUserForm = (props: CreateUserFormProps) => {
               "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
             );
 
-        const code = await getOAuthToken(tokenGetterWin);
+      const code = await getOAuthToken(tokenGetterWin);
 
-        const token = window.btoa(
-          JSON.stringify({
-            auth: providerName,
-            mode: "popup",
-            callback: "authCallback",
-          }),
-        );
+      const token = window.btoa(
+        JSON.stringify({
+          auth: providerName,
+          mode: "popup",
+          callback: "authCallback",
+        }),
+      );
 
-        if (tokenGetterWin && typeof tokenGetterWin === "object")
-          tokenGetterWin.location.href = getLoginLink(token, code);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    [isDesktopView],
-  );
+      if (tokenGetterWin && typeof tokenGetterWin === "object")
+        tokenGetterWin.location.href = getLoginLink(token, code);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const oauthDataExists = () => {
     if (!capabilities?.oauthEnabled) return false;
@@ -510,11 +526,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             onChangeFname={onChangeFname}
             onChangeSname={onChangeSname}
             onChangePassword={onChangePassword}
+            onChangeCheckbox={onChangeCheckbox}
+            isChecked={isChecked}
             onBlurPassword={onBlurPassword}
             onKeyPress={onKeyPress}
             onValidatePassword={onValidatePassword}
             onClickBack={onClickBack}
             onSubmit={onSubmit}
+            isStandalone={isStandalone}
           />
         )}
       </div>
@@ -522,7 +541,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       {!emailFromLink && (oauthDataExists() || ssoExists()) && (
         <>
           <div className="line">
-            <Text color="#A3A9AE" className="or-label">
+            <Text color={globalColors.gray} className="or-label">
               {t("Common:orContinueWith")}
             </Text>
           </div>

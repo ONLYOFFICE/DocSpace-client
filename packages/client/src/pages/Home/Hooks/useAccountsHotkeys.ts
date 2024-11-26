@@ -30,7 +30,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 interface AccountsHotkeysProps {
   enabledHotkeys: boolean;
-  accountsIsIsLoading: boolean;
+  isUsersLoading: boolean;
 
   selectBottom: () => void;
   selectUpper: () => void;
@@ -43,7 +43,7 @@ interface AccountsHotkeysProps {
 
 const useAccountsHotkeys = ({
   enabledHotkeys,
-  accountsIsIsLoading,
+  isUsersLoading,
   selectBottom,
   selectUpper,
   activateHotkeys,
@@ -64,7 +64,7 @@ const useAccountsHotkeys = ({
     },
     filterPreventDefault: false,
     enableOnTags: ["INPUT"],
-    enabled: enabledHotkeys && !accountsIsIsLoading && isEnabled,
+    enabled: enabledHotkeys && !isUsersLoading && isEnabled,
   } as Options;
 
   const onKeyDown = useCallback(

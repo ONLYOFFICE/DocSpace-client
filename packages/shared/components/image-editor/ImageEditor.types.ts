@@ -46,6 +46,8 @@ export interface ImageEditorProps {
   className?: string;
   disableImageRescaling?: boolean;
   maxImageSize?: number;
+  editorBorderRadius: number;
+  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface ImageCropperProps {
@@ -57,4 +59,6 @@ export interface ImageCropperProps {
   setPreviewImage: TSetPreview;
   isDisabled: boolean;
   disableImageRescaling?: boolean;
+  editorBorderRadius: number;
+  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

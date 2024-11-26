@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
 import { commonIconsStyles } from "../../utils";
 

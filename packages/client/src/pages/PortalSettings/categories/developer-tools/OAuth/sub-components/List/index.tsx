@@ -1,57 +1,67 @@
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
-
+import { DeviceType } from "@docspace/shared/enums";
 import { Consumer } from "@docspace/shared/utils/context";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+
+import RegisterNewButton from "../RegisterNewButton";
 
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-import RegisterNewButton from "../RegisterNewButton";
-
-export const StyledContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  .description {
-    margin-bottom: 20px;
-    max-width: 700px;
-  }
-
-  .add-button {
-    width: fit-content;
-
-    margin-bottom: 12px;
-  }
-`;
+import { StyledContainer } from "./List.styled";
 
 interface ListProps {
   clients: IClientProps[];
   viewAs: ViewAsType;
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
+  apiOAuthLink: string;
 }
 
-const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
+const List = ({
+  clients,
+  viewAs,
+  currentDeviceType,
+  apiOAuthLink,
+}: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
+
+  const descText = (
+    <Trans
+      ns="OAuth"
+      t={t}
+      i18nKey="OAuthAppDescription"
+      values={{
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
+  );
 
   return (
     <StyledContainer>
       <Text
-        fontSize="12px"
+        fontSize="13px"
         fontWeight={400}
-        lineHeight="16px"
-        title={t("OAuthAppDescription")}
+        lineHeight="20px"
         className="description"
       >
-        {t("OAuthAppDescription")}
+        {descText}
       </Text>
+      <Link
+        className="guide-link"
+        target={LinkTarget.blank}
+        type={LinkType.page}
+        fontWeight={600}
+        isHovered
+        href={apiOAuthLink}
+      >
+        {t("OAuth:OAuth")} {t("Common:Guide")}
+      </Link>
       <RegisterNewButton currentDeviceType={currentDeviceType} />
       <Consumer>
         {(context) =>

@@ -32,8 +32,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 const DeletePluginDialog = (props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
   const { isVisible, onClose, onDelete } = props;
@@ -54,7 +52,7 @@ const DeletePluginDialog = (props) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={isVisible}
       onClose={onClose}
@@ -85,7 +83,7 @@ const DeletePluginDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

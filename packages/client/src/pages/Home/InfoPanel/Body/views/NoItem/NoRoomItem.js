@@ -29,7 +29,7 @@ import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_c
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const NoRoomItem = ({ t, theme }) => {
   const imageSrc = theme.isBase

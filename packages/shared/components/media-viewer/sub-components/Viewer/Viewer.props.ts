@@ -60,7 +60,7 @@ interface ViewerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
   onSetSelectionFile: VoidFunction;
 }
 

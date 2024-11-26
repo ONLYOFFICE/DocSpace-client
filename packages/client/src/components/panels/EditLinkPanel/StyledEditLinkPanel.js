@@ -27,90 +27,87 @@
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-const StyledEditLinkPanel = styled(ModalDialog)`
+const StyledEditLinkBodyContent = styled.div`
+  padding: 4px 0px 0px;
+
+  .edit-link_link-block {
+    padding: 16px 16px 20px;
+
+    .edit-link-text {
+      display: inline-flex;
+      margin-bottom: 8px;
+    }
+
+    .edit-link_required-icon {
+      display: inline-flex;
+      color: ${(props) => props.theme.editLink.requiredColor};
+      margin-inline-start: 2px;
+    }
+
+    .edit-link_link-input {
+      margin-bottom: 8px;
+      margin-top: 16px;
+
+      -webkit-text-fill-color: ${({ theme }) =>
+        theme.editLink.editInputColor} !important;
+      color: ${({ theme }) => theme.editLink.editInputColor};
+    }
+  }
+
+  .edit-link-toggle-block {
+    padding: 0 16px 20px;
+    border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+
+    .edit-link-toggle-header {
+      display: flex;
+      padding-top: 20px;
+      padding-bottom: 8px;
+      gap: 8px;
+
+      .edit-link-toggle {
+        margin-inline: auto 28px;
+      }
+    }
+    .edit-link_password-block {
+      margin-top: 8px;
+    }
+
+    .password-field-wrapper {
+      width: 100%;
+    }
+  }
+
+  .edit-link-toggle-description {
+    color: ${({ theme }) => theme.editLink.text.color};
+  }
+
+  .edit-link-toggle-description_expired {
+    color: ${({ theme }) => theme.editLink.text.errorColor};
+  }
+
+  .edit-link_password-block {
+    width: 100%;
+    display: flex;
+
+    .edit-link_password-input {
+      width: 100%;
+    }
+
+    .edit-link_generate-icon {
+      margin-block: 16px 0;
+      margin-inline: 8px 0;
+    }
+  }
+
   .edit-link-panel {
     .scroll-body {
       padding-inline-end: 0 !important;
     }
   }
 
-  .modal-body {
-    padding: 0;
-  }
-
   .field-label-icon {
     display: none;
-  }
-
-  .edit-link_body {
-    padding: 4px 0px 0px;
-
-    .edit-link_link-block {
-      padding: 16px 16px 20px;
-
-      .edit-link-text {
-        display: inline-flex;
-        margin-bottom: 8px;
-      }
-
-      .edit-link_required-icon {
-        display: inline-flex;
-        color: ${(props) => props.theme.editLink.requiredColor};
-        margin-inline-start: 2px;
-      }
-
-      .edit-link_link-input {
-        margin-bottom: 8px;
-        margin-top: 16px;
-      }
-    }
-
-    .edit-link-toggle-block {
-      padding: 0 16px 20px;
-      border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-      .edit-link-toggle-header {
-        display: flex;
-        padding-top: 20px;
-        padding-bottom: 8px;
-        gap: 8px;
-
-        .edit-link-toggle {
-          margin-inline: auto 28px;
-        }
-      }
-      .edit-link_password-block {
-        margin-top: 8px;
-      }
-
-      .password-field-wrapper {
-        width: 100%;
-      }
-    }
-
-    .edit-link-toggle-description {
-      color: ${({ theme }) => theme.editLink.text.color};
-    }
-
-    .edit-link-toggle-description_expired {
-      color: ${({ theme }) => theme.editLink.text.errorColor};
-    }
-
-    .edit-link_password-block {
-      width: 100%;
-      display: flex;
-
-      .edit-link_password-input {
-        width: 100%;
-      }
-
-      .edit-link_generate-icon {
-        margin-block: 16px 0;
-        margin-inline: 8px 0;
-      }
-    }
   }
 
   .edit-link_password-links {
@@ -158,4 +155,9 @@ const StyledButtons = styled(Box)`
   border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
 `;
 
-export { StyledEditLinkPanel, StyledScrollbar, StyledButtons };
+export {
+  // StyledEditLinkPanel,
+  StyledScrollbar,
+  StyledButtons,
+  StyledEditLinkBodyContent,
+};

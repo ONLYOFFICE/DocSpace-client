@@ -9,7 +9,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 interface ResetDialogProps {
   isVisible?: boolean;
@@ -30,7 +30,8 @@ const ResetDialog = (props: ResetDialogProps) => {
       setIsRequestRunning(true);
       if (id) await onReset?.(id);
 
-      setIsRequestRunning(true);
+      setIsRequestRunning(false);
+      toastr.success(t("OAuth:ClientSecretResetSuccessfully"));
       onClose?.();
     } catch (error: unknown) {
       const e = error as TData;
@@ -75,7 +76,7 @@ const ResetDialog = (props: ResetDialogProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const { setResetDialogVisible, regenerateSecret, resetDialogVisible } =
     oauthStore;
 

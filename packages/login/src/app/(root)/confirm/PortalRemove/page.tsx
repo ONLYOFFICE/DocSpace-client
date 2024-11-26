@@ -41,9 +41,9 @@ async function Page() {
     <>
       {settings && typeof settings !== "string" && (
         <>
-          <GreetingContainer greetingSettings={settings?.greetingSettings} />
+          <GreetingContainer greetingText={settings?.greetingSettings} />
           <FormWrapper id="remove-portal-form">
-            <RemovePortalForm siteUrl={companyInfoSettings.site} />
+            <RemovePortalForm siteUrl={companyInfoSettings?.site} />
           </FormWrapper>
         </>
       )}

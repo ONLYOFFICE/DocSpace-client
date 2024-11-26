@@ -31,7 +31,7 @@ import { useSpring, config } from "@react-spring/web";
 
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import { Bookmarks } from "../Bookmarks";
 
 import {

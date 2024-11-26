@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css, keyframes } from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
 const rotate360 = keyframes`
   from {
@@ -36,7 +36,7 @@ const rotate360 = keyframes`
   }
 `;
 
-const StyledCircle = styled.div<{
+const StyledCircle = styled.div.attrs(injectDefaultTheme)<{
   percent: number;
   isAnimation?: boolean;
   inConversion?: boolean;
@@ -88,7 +88,5 @@ const StyledCircle = styled.div<{
     }
   }
 `;
-
-StyledCircle.defaultProps = { theme: Base };
 
 export default StyledCircle;

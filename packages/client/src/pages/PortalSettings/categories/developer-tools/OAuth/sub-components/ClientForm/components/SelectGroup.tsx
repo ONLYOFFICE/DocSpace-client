@@ -50,7 +50,6 @@ const SelectGroup = ({
           fontSize="13px"
           fontWeight={600}
           lineHeight="20px"
-          title=""
           tag=""
           as="p"
           color=""
@@ -72,7 +71,6 @@ const SelectGroup = ({
           fontSize="13px"
           fontWeight={600}
           lineHeight="20px"
-          title=""
           tag=""
           as="p"
           color=""
@@ -85,7 +83,6 @@ const SelectGroup = ({
         fontSize="12px"
         fontWeight={600}
         lineHeight="16px"
-        title=""
         tag=""
         as="p"
         color=""
@@ -103,7 +100,7 @@ const SelectGroup = ({
         onChange={onSelect}
         onClick={onInputClick}
         style={{ display: "none" }}
-        accept="image/png, image/jpeg, svg"
+        accept="image/png, image/jpeg, image/svg+xml"
       />
     </StyledInputGroup>
   );

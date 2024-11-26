@@ -35,7 +35,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
-import { dataDimensions } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
+import { dimensionsModel } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 
 type DisplayBlockProps = {
   label: string;
@@ -70,7 +70,7 @@ const DisplayBlock = ({
           scaled={false}
           scaledOptions
           onSelect={onSelectDimension}
-          options={dataDimensions}
+          options={dimensionsModel}
           selectedOption={selectedOption}
           displaySelectedOption
           directionY="bottom"

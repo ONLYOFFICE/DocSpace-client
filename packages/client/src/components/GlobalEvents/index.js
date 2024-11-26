@@ -29,6 +29,7 @@ import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { FileAction } from "@docspace/shared/enums";
+import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -43,7 +44,15 @@ import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
-const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
+const GlobalEvents = ({
+  enablePlugins,
+  eventListenerItemsList,
+  editRoomDialogProps,
+  setEditRoomDialogProps,
+  createRoomDialogProps,
+  setCreateRoomDialogProps,
+  setCover,
+}) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -57,18 +66,6 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
-    visible: false,
-    item: null,
-    onClose: null,
-  });
-
-  const [createRoomDialogProps, setCreateRoomDialogProps] = useState({
-    title: "",
-    visible: false,
-    onClose: null,
-  });
-
-  const [editRoomDialogProps, setEditRoomDialogProps] = useState({
     visible: false,
     item: null,
     onClose: null,
@@ -166,10 +163,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    const startRoomParams = getStartRoomParams(
+      e?.payload?.startRoomType,
+      e?.title,
+    );
     setCreateRoomDialogProps({
-      title: e?.title,
+      ...startRoomParams,
       visible: true,
-      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
         setCreateRoomDialogProps({
           visible: false,
@@ -186,6 +186,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       visible: visible,
       item: e.item,
       onClose: () => {
+        setCover();
         setEditRoomDialogProps({
           visible: false,
           item: null,
@@ -433,10 +434,26 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   ];
 };
 
-export default inject(({ settingsStore, pluginStore }) => {
+export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
   const { enablePlugins } = settingsStore;
+
+  const {
+    editRoomDialogProps,
+    setEditRoomDialogProps,
+    createRoomDialogProps,
+    setCreateRoomDialogProps,
+    setCover,
+  } = dialogsStore;
 
   const { eventListenerItemsList } = pluginStore;
 
-  return { enablePlugins, eventListenerItemsList };
+  return {
+    enablePlugins,
+    eventListenerItemsList,
+    editRoomDialogProps,
+    setEditRoomDialogProps,
+    createRoomDialogProps,
+    setCreateRoomDialogProps,
+    setCover,
+  };
 })(observer(GlobalEvents));

@@ -36,6 +36,7 @@ const SubmenuItem = ({
   recalculateHeight,
   openedSubmenuKey,
   setOpenedSubmenuKey,
+  openByDefault,
 }: SubmenuItemProps) => {
   const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
 
@@ -48,6 +49,13 @@ const SubmenuItem = ({
 
     setIsOpenSubMenu(false);
   }, [openedSubmenuKey, option.key]);
+
+  useEffect(() => {
+    if (openByDefault) {
+      setOpenedSubmenuKey(option.key);
+      setIsOpenSubMenu(true);
+    }
+  }, []);
 
   const onClick = () => {
     setOpenedSubmenuKey(option.key);

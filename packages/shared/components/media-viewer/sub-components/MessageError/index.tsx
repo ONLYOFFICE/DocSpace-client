@@ -40,9 +40,11 @@ export const MessageError = ({
   errorTitle,
   onMaskClick,
 }: PlayerMessageErrorProps) => {
-  const items = !isMobile
-    ? model.filter((el) => el.key !== "rename")
-    : model.filter((el) => el.key === "delete" || el.key === "download");
+  const items = (
+    !isMobile
+      ? model.filter((el) => el.key !== "rename")
+      : model.filter((el) => el.key === "delete" || el.key === "download")
+  ).filter((m) => !m.disabled);
 
   return (
     <div>

@@ -50,6 +50,7 @@ import {
   StyledBody,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 const DeepLink = ({
   fileInfo,
@@ -83,9 +84,11 @@ const DeepLink = ({
   };
 
   const getFileIcon = () => {
-    const fileExst = fileInfo?.fileExst.slice(1);
-    const iconPath = "/static/images/icons/32/";
-    return `${iconPath}${fileExst}.svg`;
+    const fileExst = `${fileInfo?.fileExst.slice(1)}.svg`;
+    const icon = iconSize32.has(fileExst)
+      ? iconSize32.get(fileExst)
+      : iconSize32.get("file.svg");
+    return icon;
   };
 
   const getFileTitle = () => {
@@ -109,7 +112,7 @@ const DeepLink = ({
               <StyledBodyWrapper>
                 <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
                 <StyledFileTile>
-                  <img src={getFileIcon()} alt="portal-logo" />
+                  <img src={getFileIcon() ?? ""} alt="portal-logo" />
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>

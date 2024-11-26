@@ -44,6 +44,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     changeGroupType,
     UserTypes,
     toggleAllAccounts,
+    isOwner,
   } = props as InjectedTypeSelectTableProps;
 
   const { t, ready } = useTranslation(["ChangeUserTypeDialog", "People"]);
@@ -63,23 +64,26 @@ const AccountsTable = (props: AccountsTableProps) => {
 
   const typeOptions = [
     {
-      key: UserTypes.PortalAdmin,
-      label: t(`Common:PortalAdmin`, {
-        productName: t("Common:ProductName"),
-      }),
-      onClick: setTypePortalAdmin,
-    },
-    {
       key: UserTypes.RoomAdmin,
       label: t("Common:RoomAdmin"),
       onClick: setTypeRoomAdmin,
     },
     {
       key: UserTypes.User,
-      label: t(`Common:PowerUser`),
+      label: t(`Common:User`),
       onClick: setTypeUser,
     },
   ];
+
+  if (isOwner) {
+    typeOptions.unshift({
+      key: UserTypes.PortalAdmin,
+      label: t(`Common:PortalAdmin`, {
+        productName: t("Common:ProductName"),
+      }),
+      onClick: setTypePortalAdmin,
+    });
+  }
 
   if (!ready) return;
 
@@ -105,14 +109,16 @@ const AccountsTable = (props: AccountsTableProps) => {
     </Consumer>
   );
 };
-export default inject<TStore>(({ setup, importAccountsStore }) => {
+export default inject<TStore>(({ setup, userStore, importAccountsStore }) => {
   const { viewAs } = setup;
   const { changeGroupType, UserTypes, toggleAllAccounts } = importAccountsStore;
+  const { isOwner } = userStore.user;
 
   return {
     viewAs,
     changeGroupType,
     UserTypes,
     toggleAllAccounts,
+    isOwner,
   };
 })(observer(AccountsTable));

@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Secţiuni suplimentare",
   "DisplayFavorites": "Afișare Preferințe",
+  "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
   "DisplayNotification": "Afișează notificare când elemente sunt mutate în Coșul de gunoi",
   "DisplayRecent": "Afișează recente",
   "DisplayTemplates": "Afișează Șabloane",

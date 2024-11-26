@@ -27,11 +27,10 @@
 import { List } from "react-virtualized";
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
-import { desktop, mobile, tablet } from "../../utils";
+import { desktop, injectDefaultTheme, mobile, tablet } from "../../utils";
 import { TViewAs } from "../../types";
 
-const StyledScroll = styled.div`
+const StyledScroll = styled.div.attrs(injectDefaultTheme)`
   overflow: scroll;
 
   /* Chrome, Edge и Safari */
@@ -55,8 +54,6 @@ const StyledScroll = styled.div`
   scrollbar-width: thin;
   scrollbar-color: ${({ theme }) => theme.scrollbar.pressBgColor};
 `;
-
-StyledScroll.defaultProps = { theme: Base };
 
 const rowStyles = css<{ width: number }>`
   margin-inline-start: -20px;
@@ -150,10 +147,6 @@ const StyledList = styled(List)<{ viewAs: TViewAs; width: number }>`
         ? tableStyles
         : tileStyles}
 `;
-
-StyledScroll.defaultProps = {
-  theme: Base,
-};
 
 const paddingCss = css`
   @media ${desktop} {

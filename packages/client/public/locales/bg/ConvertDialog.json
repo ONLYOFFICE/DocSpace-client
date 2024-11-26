@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "Всички документи, които качвате, ще бъдат конвертирани във формат Office Open XML (docx, xlsx или pptx) за по-бързо редактиране.",
+  "ConversionXmlMessage": "Документът, който отваряте, ще бъде конвертиран във формат Office Open XML (docx или xlsx) за по-бърз преглед и редактиране.",
   "ConvertedFileDestination": "Копие на файла ще бъде създадено в папката <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "Конвертиране на документи",
   "FailedToConvert": "Конвертирането не беше успешно",
@@ -7,5 +8,6 @@
   "HideMessage": "Не показвай това съобщение отново",
   "InfoCreateFileIn": "Новият файл '{{fileTitle}}' се създава в '{{folderTitle}}'",
   "OpenFileMessage": "Файлът с документи, който отваряте, ще бъде преобразуван в Office Open XML формат за бързо гледане и редактиране.",
-  "SaveOriginalFormatMessage": "Запази копието на файла в оригиналния формат"
+  "SaveOriginalFormatMessage": "Запази копието на файла в оригиналния формат",
+  "SelectFileType": "Моля, изберете тип на файла:"
 }

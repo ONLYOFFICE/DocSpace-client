@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 
-const StyledSettingsSeparator = styled.hr`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledSettingsSeparator = styled.hr.attrs(injectDefaultTheme)`
   margin: 24px 0;
   border: none;
   border-top: ${(props) => props.theme.client.settings.separatorBorder};
   max-width: 700px;
 `;
-
-StyledSettingsSeparator.defaultProps = { theme: Base };
 
 export default StyledSettingsSeparator;

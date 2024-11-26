@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Unesite šestocifreni generisani kod iz vaše aplikacije. Ako nemate pristup vašem telefonu, koristite rezervne kodove.",
   "EnterAppCodeTitle": "Unesi kod iz aplikacije za autentifikaciju",
   "EnterCodePlaceholder": "Unesi kod",
+  "EnterEmailHeader": "Unesite email",
   "EnterPhone": "Unesi broj mobilnog telefona",
   "GetCode": "Dobavi kod",
   "LoginRegistryButton": "Pridruži se",
+  "Newsletter": "Želim da se pretplatim na newsletter {{organizationName}}",
   "PassworResetTitle": "Sada možete kreirati novu lozinku.",
   "PhoneSubtitle": "Dvofaktorska autentifikacija je omogućena radi dodatne sigurnosti. Unesite svoj broj mobilnog telefona kako biste nastavili sa radom u {{productName}}-u. Broj mobilnog telefona mora biti unet u međunarodnom formatu sa pozivnim brojem zemlje.",
   "PortalContinueTitle": "Potvrdite da želite da ponovo aktivirate svoj {{productName}}.",
@@ -30,5 +32,6 @@
   "SignUp": "Registruj se",
   "SuccessDeactivate": "Vaš nalog je uspešno deaktiviran. Za 10 sekundi bićete preusmereni na <1>site</1>.",
   "SuccessReactivate": "Vaš nalog je uspešno ponovo aktiviran. Za 10 sekundi bićete preusmereni na <1>portal</1>.",
-  "SuccessRemoved": "Vaš nalog je uspešno uklonjen. Za 10 sekundi bićete preusmereni na <1>site</1>."
+  "SuccessRemoved": "Vaš nalog je uspešno uklonjen. Za 10 sekundi bićete preusmereni na <1>site</1>.",
+  "TermsAndConditions": "Nastavkom potvrđujete da ste saglasni sa našim <1>Uslovima korišćenja</1> i <2>Izjavom o privatnosti</2>."
 }

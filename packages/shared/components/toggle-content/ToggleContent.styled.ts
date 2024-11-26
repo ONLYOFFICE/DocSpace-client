@@ -26,9 +26,10 @@
 
 import styled, { css } from "styled-components";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledContainer = styled.div<{
+const StyledContainer = styled.div.attrs(injectDefaultTheme)<{
   enableToggle?: boolean;
   isOpen?: boolean;
 }>`
@@ -86,15 +87,14 @@ const StyledContainer = styled.div<{
           `}
   }
 `;
-StyledContainer.defaultProps = { theme: Base };
 
-const StyledContent = styled.div<{ isOpen?: boolean }>`
+const StyledContent = styled.div.attrs(injectDefaultTheme)<{
+  isOpen?: boolean;
+}>`
   color: ${(props) => props.theme.toggleContent.childrenContent.color};
   padding-top: ${(props) =>
     props.theme.toggleContent.childrenContent.paddingTop};
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
-
-StyledContent.defaultProps = { theme: Base };
 
 export { StyledContent, StyledContainer };

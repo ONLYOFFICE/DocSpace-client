@@ -1,12 +1,8 @@
-import {
-  IClientProps,
-  IClientReqDTO,
-  TScope,
-} from "@docspace/shared/utils/oauth/types";
+import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { DeviceType } from "@docspace/shared/enums";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 export interface InputProps {
   value: string;
@@ -45,13 +41,11 @@ export interface ClientFormProps {
 
   fetchScopes?: () => Promise<void>;
 
-  saveClient?: (client: IClientReqDTO) => Promise<void>;
-  updateClient?: (clientId: string, client: IClientReqDTO) => Promise<void>;
-
   resetDialogVisible?: boolean;
   setResetDialogVisible?: (value: boolean) => void;
 
-  currentDeviceType?: DeviceUnionType;
+  currentDeviceType?: DeviceType;
+  maxImageUploadSize?: number;
 
   setClientSecretProps?: (value: string) => void;
   clientSecretProps?: string;
@@ -59,5 +53,5 @@ export interface ClientFormProps {
 
 export interface ClientStore {
   settingsStore: SettingsStore;
-  oauthStore: OAuthStoreProps;
+  oauthStore: OAuthStore;
 }

@@ -53,13 +53,14 @@ const MultiInputGroup = ({
   const [isError, setIsError] = React.useState(false);
 
   const addRef = React.useRef<null | HTMLDivElement>(null);
-
+  // const withoutSearch = name === "redirect_uris";
+  const withoutSearch = true;
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
 
     setValue(v);
 
-    if (isValidUrl(v)) {
+    if (isValidUrl(v, withoutSearch)) {
       setIsAddVisible(true);
     } else {
       setIsAddVisible(false);
@@ -68,12 +69,14 @@ const MultiInputGroup = ({
 
   const onFocus = () => {
     setIsFocus(true);
+    if (isValidUrl(value, withoutSearch)) setIsAddVisible(true);
   };
 
   const onBlur = () => {
     setIsFocus(false);
+
     if (value) {
-      if (isValidUrl(value)) {
+      if (isValidUrl(value, withoutSearch)) {
         setIsError(false);
       } else {
         setIsError(true);
@@ -111,6 +114,24 @@ const MultiInputGroup = ({
   }, [isAddVisible, isFocus, onAddAction]);
 
   React.useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as Element;
+
+      if (target.closest(`.multi-input-group-${label}`) || isFocus) return;
+
+      setIsAddVisible(false);
+    };
+
+    if (isAddVisible) {
+      window.addEventListener("click", onClick);
+    }
+
+    return () => {
+      window.removeEventListener("click", onClick);
+    };
+  }, [isAddVisible, isFocus, label]);
+
+  React.useEffect(() => {
     if (!addRef.current) return;
     if (isAddVisible) {
       addRef.current.style.display = "flex";
@@ -120,7 +141,7 @@ const MultiInputGroup = ({
   }, [isAddVisible]);
 
   return (
-    <StyledInputGroup>
+    <StyledInputGroup className={`multi-input-group-${label}`}>
       <InputGroup
         label={label}
         helpButtonText={helpButtonText}

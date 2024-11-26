@@ -42,12 +42,12 @@ export const getMonthElements = (
   isMobile: boolean,
 ) => {
   const onDateClick = (dateString: string) => {
-    setObservedDate((prevObservedDate) =>
+    setObservedDate(() =>
       moment(
         `${moment(dateString, "YYYY-M").format("YYYY")}-${moment(
           dateString,
           "YYYY-M",
-        ).format("MM")}-${prevObservedDate.format("DD")}`,
+        ).format("MM")}-01`,
         "YYYY-MM-DD",
       ),
     );

@@ -44,7 +44,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
     const timelineRef = useRef<HTMLDivElement>(null);
     const hoverProgressRef = useRef<HTMLDivElement>(null);
     const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>();
-    const pregressRef = useRef<HTMLDivElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
 
     const showTimelineTooltip = () => {
       if (!timelineTooltipRef.current) return;
@@ -74,7 +74,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
 
       const offsetX = clientWidth * percent;
 
-      const time = Math.floor(percent * duration);
+      const time = percent * duration;
 
       const left =
         offsetX < 20
@@ -121,19 +121,15 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
       timelineTooltipRef.current.innerText = formatTime(percent);
     };
 
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          setProgress: (progress: number) => {
-            if (!pregressRef.current) return;
+    useImperativeHandle(ref, () => {
+      return {
+        setProgress: (progress: number) => {
+          if (!progressRef.current) return;
 
-            pregressRef.current.style.width = `${progress * 100}%`;
-          },
-        };
-      },
-      [],
-    );
+          progressRef.current.style.width = `${progress * 100}%`;
+        },
+      };
+    }, []);
 
     return (
       <PlayerTimelineWrapper
@@ -143,7 +139,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
         onMouseLeave={onMouseLeave}
       >
         <time ref={timelineTooltipRef}>00:00</time>
-        <Progress ref={pregressRef} />
+        <Progress ref={progressRef} />
         <HoverProgress ref={hoverProgressRef} />
         <input
           min="0"

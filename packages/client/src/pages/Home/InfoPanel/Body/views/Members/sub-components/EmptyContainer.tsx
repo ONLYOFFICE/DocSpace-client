@@ -49,7 +49,7 @@ const EmptyContainer = () => {
     <StyledEmptyScreen
       imageSrc={imageSrc}
       imageAlt="Empty screen image"
-      headerText={t("NotFoundUsers")}
+      headerText={t("NotFoundMembers")}
       descriptionText={t("NotFoundUsersDescription")}
     />
   );

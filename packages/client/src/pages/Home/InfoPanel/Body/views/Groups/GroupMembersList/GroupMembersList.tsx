@@ -145,6 +145,7 @@ export const GroupMembersList = ({
                 scrollTop={scrollTop}
                 // React virtualized sets "LTR" by default.
                 style={{ direction: "inherit" }}
+                tabIndex={null}
               />
             );
           }}

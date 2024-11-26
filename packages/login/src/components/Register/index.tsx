@@ -128,7 +128,11 @@ const Register = (props: RegisterProps) => {
   return enabledJoin && !isAuthenticated ? (
     <>
       <StyledRegister id={id} onClick={onRegisterClick}>
-        <Text as="span" color={theme.currentColorScheme?.main?.accent}>
+        <Text
+          as="span"
+          color={theme.currentColorScheme?.main?.accent}
+          lineHeight="20px"
+        >
           {t("Register")}
         </Text>
       </StyledRegister>

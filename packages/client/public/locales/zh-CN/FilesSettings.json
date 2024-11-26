@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "额外部分",
   "DisplayFavorites": "显示收藏",
+  "DisplayFileExtension": "在文件名称旁显示文件扩展名",
   "DisplayNotification": "将项目移至垃圾箱时展示消息通知",
   "DisplayRecent": "显示最近",
   "DisplayTemplates": "显示模板",

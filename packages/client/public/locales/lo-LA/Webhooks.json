@@ -11,7 +11,6 @@
   "EnterSecretKey": "ໃສ່ລະຫັດລັບ",
   "EnterUrl": "ໃສ່ URL",
   "EnterWebhookName": "ໃສ່ຊື່ webhook",
-  "EventHint": "ການຈັດສົ່ງຈະຖືກລຶບອັດຕະໂນມັດຫຼັງຈາກ 15 ມື້",
   "EventID": "ID ເຫດການ",
   "FailedToConnect": "ພວກ​ເຮົາ​ບໍ່​ສາ​ມາດ​ສົ່ງ payload ນີ້​: ບໍ່​ສໍາ​ເລັດ​ໃນ​ການ​ເຊື່ອມ​ຕໍ່​ກັບ​ແມ່​ຂ່າຍ",
   "From": "ຈາກ",

@@ -93,6 +93,7 @@ const withHotkeys = (Component) => {
       isGroupMenuBlocked,
       isFormRoom,
       isParentFolderFormRoom,
+      isIndexEditingMode,
     } = props;
 
     const navigate = useNavigate();
@@ -113,6 +114,9 @@ const withHotkeys = (Component) => {
     const onKeyDown = (e) => {
       const someDialogIsOpen = checkDialogsOpen();
       setIsEnabled(!someDialogIsOpen);
+
+      if (isIndexEditingMode) return;
+
       activateHotkeys(e);
     };
 
@@ -194,7 +198,8 @@ const withHotkeys = (Component) => {
       (e) => {
         const someDialogIsOpen = checkDialogsOpen();
 
-        if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;
+        if (e.shiftKey || e.ctrlKey || someDialogIsOpen || isIndexEditingMode)
+          return;
 
         switch (e.key) {
           case "ArrowDown":
@@ -440,6 +445,7 @@ const withHotkeys = (Component) => {
       treeFoldersStore,
       selectedFolderStore,
       userStore,
+      indexingStore,
       currentQuotaStore,
     }) => {
       const {
@@ -549,6 +555,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         selection,
         setFavoriteAction,

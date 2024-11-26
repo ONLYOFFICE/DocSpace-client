@@ -45,13 +45,13 @@ class MembersHelper {
       },
       roomAdmin: {
         key: "roomAdmin",
-        label: this.t("Common:RoomAdmin"),
+        label: this.t("Common:RoomManager"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
       collaborator: {
         key: "collaborator",
-        label: this.t("Common:PowerUser"),
+        label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
         type: "collaborator",
       },
@@ -142,7 +142,6 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
-          options.formFiller,
           options.reviewer,
           options.commentator,
           options.viewer,
@@ -158,6 +157,14 @@ class MembersHelper {
         ];
       case RoomsType.PublicRoom:
         return [options.roomAdmin, options.collaborator, ...deleteOption];
+      case RoomsType.VirtualDataRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.editor,
+          options.viewer,
+          ...deleteOption,
+        ];
       default:
         return [];
     }

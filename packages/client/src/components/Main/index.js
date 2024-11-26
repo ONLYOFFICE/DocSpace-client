@@ -50,7 +50,7 @@ const StyledMain = styled.main`
 `;
 
 const Main = (props) => {
-  const { mainBarVisible, isBannerVisible, isFrame } = props;
+  const { mainBarVisible, isFrame } = props;
   //console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
@@ -67,7 +67,7 @@ const Main = (props) => {
 
   React.useEffect(() => {
     onResize();
-  }, [mainBarVisible, isBannerVisible, isFrame]);
+  }, [mainBarVisible, isFrame]);
 
   const onResize = React.useCallback(
     (e) => {
@@ -84,28 +84,6 @@ const Main = (props) => {
         }
       }
 
-      const isTouchDevice =
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0;
-
-      const path = window.location.pathname.toLowerCase();
-
-      if (
-        isBannerVisible &&
-        isMobile &&
-        isTouchDevice &&
-        (path.includes("rooms") || path.includes("files"))
-      ) {
-        correctHeight -= 80;
-
-        if (e?.target?.height) {
-          const diff = window.innerHeight - e.target.height;
-
-          correctHeight -= diff;
-        }
-      }
-
       // 48 - its nav menu with burger, logo and user avatar
       if (isMobileUtils() && !isFrame) {
         correctHeight -= 48;
@@ -113,20 +91,17 @@ const Main = (props) => {
 
       setMainHeight(correctHeight);
     },
-    [mainBarVisible, isBannerVisible, isFrame],
+    [mainBarVisible, isFrame],
   );
   return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
 };
 
 Main.displayName = "Main";
 
-export default inject(({ settingsStore, bannerStore }) => {
-  const { isBannerVisible } = bannerStore;
-
+export default inject(({ settingsStore }) => {
   const { mainBarVisible, isFrame } = settingsStore;
   return {
     mainBarVisible,
-    isBannerVisible,
     isFrame,
   };
 })(observer(Main));

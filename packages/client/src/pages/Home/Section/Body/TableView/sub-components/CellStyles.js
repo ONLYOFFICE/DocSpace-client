@@ -32,6 +32,24 @@ const StyledText = styled(Text)`
   margin-inline-end: 12px;
 `;
 
+const StyledIndexCell = styled(Text)`
+  display: inline-block;
+  margin-inline: 0;
+  padding-inline-start: 16px;
+
+  overflow: hidden;
+  direction: rtl;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" &&
+    css`
+      padding-inline-start: 0;
+      margin-inline-end: 16px;
+    `}
+`;
+
 const StyledTypeCell = styled(StyledText)`
   ${({ theme }) =>
     theme.interfaceDirection === "rtl" &&
@@ -70,4 +88,4 @@ const StyledAuthorCell = styled.div`
   }
 `;
 
-export { StyledText, StyledAuthorCell, StyledTypeCell };
+export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };

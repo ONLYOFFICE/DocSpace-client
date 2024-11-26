@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { NoUserSelect } from "../../utils";
-import { TColorScheme, TTheme, Base, globalColors } from "../../themes";
+import { injectDefaultTheme, NoUserSelect } from "../../utils";
+import { TColorScheme, TTheme, globalColors } from "../../themes";
 
 const hoveredCss = css`
   background-color: ${(props) => props.theme.mainButton.hoverBackgroundColor};
@@ -59,7 +59,7 @@ const GroupMainButton = styled.div`
   grid-template-columns: 1fr;
 `;
 
-const StyledMainButton = styled.div<{
+const StyledMainButton = styled.div.attrs(injectDefaultTheme)<{
   isDisabled?: boolean;
   isDropdown?: boolean;
 }>`
@@ -113,7 +113,6 @@ const StyledMainButton = styled.div<{
     }
   }
 `;
-StyledMainButton.defaultProps = { theme: Base };
 
 export { StyledMainButton, GroupMainButton };
 

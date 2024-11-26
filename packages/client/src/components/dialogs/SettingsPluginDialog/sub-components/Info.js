@@ -31,10 +31,13 @@ import { LANGUAGE } from "@docspace/shared/constants";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import {
+  getCorrectDate,
+  getCookie,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
-import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -46,7 +49,7 @@ const StyledContainer = styled.div`
     `}
 `;
 
-const StyledSeparator = styled.div`
+const StyledSeparator = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 1px;
 
@@ -54,8 +57,6 @@ const StyledSeparator = styled.div`
 
   background-color: ${(props) => props.theme.plugins.borderColor};
 `;
-
-StyledSeparator.defaultProps = { theme: Base };
 
 const StyledInfo = styled.div`
   margin-top: 24px;

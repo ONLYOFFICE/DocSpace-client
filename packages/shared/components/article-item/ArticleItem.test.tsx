@@ -28,8 +28,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import ArticleFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import ArticleTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import ArticleFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import ArticleTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import { ArticleItem } from "./ArticleItem";
 

@@ -53,12 +53,13 @@ const InputParam = React.forwardRef(
       onFocus,
       onBlur,
       isDisabled,
-      isValidTitle,
+      isValidTitle = true,
       isWrongTitle,
       errorMessage,
       isAutoFocussed,
       onKeyUp,
       onKeyDown,
+      name,
     },
     ref,
   ) => {
@@ -95,15 +96,12 @@ const InputParam = React.forwardRef(
             onKeyUp={onKeyUp}
             onKeyDown={onKeyDown}
             maxLength={170}
+            name={name}
           />
         </FieldContainer>
       </StyledInputParam>
     );
   },
 );
-
-InputParam.defaultProps = {
-  isValidTitle: true,
-};
 
 export default InputParam;

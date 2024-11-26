@@ -24,14 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg";
 import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledFillingRoleSelector = styled.div`
+const StyledFillingRoleSelector = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -138,8 +139,6 @@ const StyledTooltip = styled.div`
   box-sizing: border-box;
   margin: 8px 0;
 `;
-
-StyledFillingRoleSelector.defaultProps = { theme: Base };
 
 export {
   StyledFillingRoleSelector,

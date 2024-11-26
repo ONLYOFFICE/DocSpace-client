@@ -78,7 +78,7 @@ export interface ConflictResolveDialogProps {
   setMoveToPublicRoomVisible: (value: boolean) => void;
   setShareCollectSelector: TStore["dialogsStore"]["setShareCollectSelector"];
   openFileAction: TStore["filesActionsStore"]["openFileAction"];
-  handleFilesUpload: (
+  conflictDialogUploadHandler: (
     data: {
       files: {
         file: {
@@ -95,4 +95,5 @@ export interface ConflictResolveDialogProps {
   isFolderDialog: boolean;
   files: TFile[];
   folders: TFolder[];
+  cancelUploadAction: () => void;
 }

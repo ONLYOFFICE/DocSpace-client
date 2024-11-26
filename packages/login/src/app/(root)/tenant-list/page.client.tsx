@@ -40,14 +40,18 @@ import Item from "./_sub-components/Item";
 type TenantListProps = {
   baseDomain: string;
   clientId: string;
-  portals: TPortal[];
 };
 
-const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
+const TenantList = ({ clientId, baseDomain }: TenantListProps) => {
   const router = useRouter();
   const { t } = useTranslation(["TenantList"]);
 
+  const data: { portals: TPortal[] } =
+    JSON.parse(sessionStorage.getItem("tenant-list") ?? "") || [];
+
   const goToLogin = () => {
+    sessionStorage.removeItem("tenant-list");
+
     router.push(`/?type=oauth2&client_id=${clientId}`);
   };
 
@@ -55,7 +59,7 @@ const TenantList = ({ portals, clientId, baseDomain }: TenantListProps) => {
     <StyledTenantList>
       <Text className="more-accounts">{t("MorePortals")}</Text>
       <div className="items-list">
-        {portals.map((item) => (
+        {data.portals.map((item) => (
           <Item portal={item} key={item.portalName} baseDomain={baseDomain} />
         ))}
       </div>

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   width: 32px;
   height: 32px;
 
@@ -48,8 +48,6 @@ const StyledContainer = styled.div`
     }
   }
 `;
-
-StyledContainer.defaultProps = { theme: Base };
 
 const StyledLogoContainer = styled.div`
   width: 32px;

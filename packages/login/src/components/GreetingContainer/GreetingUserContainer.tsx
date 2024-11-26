@@ -76,8 +76,8 @@ export const GreetingUserContainer = ({
           defaults={DEFAULT_CREATION_TEXT}
           values={{
             email,
+            productName: t("Common:ProductName"),
           }}
-          productName={t("Common:ProductName")}
           components={{
             1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}

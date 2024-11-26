@@ -63,7 +63,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
       getUserFromConfirm(uid, confirmKey),
       getThirdPartyProviders(),
       getCapabilities(),
-      getPortalPasswordSettings(),
+      getPortalPasswordSettings(confirmKey),
     ]);
 
   const settingsCulture =
@@ -93,6 +93,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               thirdPartyProviders={thirdParty}
               legalTerms={settings.legalTerms}
               licenseUrl={settings.licenseUrl}
+              isStandalone={settings.standalone}
             />
           </FormWrapper>
         </>

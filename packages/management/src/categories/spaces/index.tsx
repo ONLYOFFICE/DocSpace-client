@@ -26,30 +26,30 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
-import MultipleSpaces from "./sub-components/MultipleSpaces";
-import { SpaceContainer } from "./StyledSpaces";
-import ConfigurationSection from "./sub-components/ConfigurationSection";
 import { observer } from "mobx-react";
-import { useStore } from "SRC_DIR/store";
+import { Text } from "@docspace/shared/components/text";
+
+import MultipleSpaces from "./sub-components/MultipleSpaces";
+import ConfigurationSection from "./sub-components/ConfigurationSection";
 import ChangeDomainDialog from "./sub-components/dialogs/ChangeDomainDialog";
 import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
 import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
-import SpaceCreatedDialog from "./sub-components/dialogs/SpaceCreatedDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
+import { SpaceContainer } from "./StyledSpaces";
+
+import { useStore } from "SRC_DIR/store";
 import { setDocumentTitle } from "SRC_DIR/utils";
 
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  const { spacesStore, authStore, settingsStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
 
   const {
     isConnected,
     domainDialogVisible,
     createPortalDialogVisible,
     deletePortalDialogVisible,
-    spaceCreatedDialogVisible,
   } = spacesStore;
 
   const { portals } = settingsStore;
@@ -67,9 +67,6 @@ const Spaces = () => {
         <DeletePortalDialog key="delete-portal-dialog" />
       )}
       {domainDialogVisible && <ChangeDomainDialog key="change-domain-dialog" />}
-      {spaceCreatedDialogVisible && (
-        <SpaceCreatedDialog key="space-created-dialog" />
-      )}
       {createPortalDialogVisible && (
         <CreatePortalDialog key="create-portal-dialog" />
       )}

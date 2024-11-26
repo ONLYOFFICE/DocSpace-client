@@ -25,9 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledButton = styled.div<{ isDisabled?: boolean; isAction?: boolean }>`
+const StyledButton = styled.div.attrs(injectDefaultTheme)<{
+  isDisabled?: boolean;
+  isAction?: boolean;
+}>`
   display: inline-block;
   background: ${(props) => props.theme.selectorAddButton.background};
   border: ${(props) => props.theme.selectorAddButton.border};
@@ -130,7 +134,5 @@ const StyledButton = styled.div<{ isDisabled?: boolean; isAction?: boolean }>`
       }
     `}
 `;
-
-StyledButton.defaultProps = { theme: Base };
 
 export default StyledButton;

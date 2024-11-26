@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -70,14 +70,14 @@ const AuthHandler = () => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        // const redirectUrl = getCookie("x-redirect-authorization-uri");
 
-        deleteCookie("x-redirect-authorization-uri");
+        // // deleteCookie("x-redirect-authorization-uri");
 
-        if (redirectUrl) {
-          window.location.replace(redirectUrl);
-          return;
-        }
+        // if (redirectUrl) {
+        //   window.location.replace(redirectUrl);
+        //   return;
+        // }
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
           const newUrl = location.search.split("referenceUrl=")[1];

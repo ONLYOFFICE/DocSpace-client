@@ -38,6 +38,7 @@ export const Months = ({
   minDate,
   maxDate,
   isMobile,
+  isScroll,
 }: MonthsProps) => {
   return (
     <>
@@ -57,6 +58,7 @@ export const Months = ({
         minDate={minDate}
         maxDate={maxDate}
         isMobile={isMobile}
+        isScroll={isScroll}
       />
     </>
   );

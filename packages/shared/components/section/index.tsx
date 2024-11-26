@@ -116,6 +116,7 @@ const Section = (props: SectionProps) => {
     canDisplay,
     anotherDialogOpen,
     getContextModel,
+    isIndexEditingMode,
     secondaryActiveOperations,
     primaryActiveOperations,
     isFinishedActiveOperations,
@@ -258,6 +259,7 @@ const Section = (props: SectionProps) => {
               isFormGallery={isFormGallery}
               currentDeviceType={currentDeviceType}
               getContextModel={getContextModel}
+              isIndexEditingMode={isIndexEditingMode}
             >
               {isSectionHeaderAvailable &&
                 currentDeviceType === DeviceType.mobile && (

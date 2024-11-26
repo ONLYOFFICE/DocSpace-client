@@ -59,7 +59,7 @@ const ProgressPanel = ({
   };
 
   return (
-    <StyledProgressBarContainer isUploading={open}>
+    <StyledProgressBarContainer isUploading={open} error={!!error}>
       <div className="progress-container">
         <div className="progress_main-container">
           <IconButton

@@ -48,6 +48,8 @@ async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
+  console.log("start login page requests");
+
   const clientId = searchParams.client_id;
 
   const [settings, thirdParty, capabilities, ssoSettings, client] =
@@ -105,6 +107,7 @@ async function Page({
                   reCaptchaType={settings?.recaptchaType}
                   ldapDomain={capabilities?.ldapDomain}
                   ldapEnabled={capabilities?.ldapEnabled || false}
+                  baseDomain={settings?.baseDomain}
                 />
                 {!clientId && (
                   <ThirdParty

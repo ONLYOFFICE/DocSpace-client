@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Zusätzliche Bereiche",
   "DisplayFavorites": "Favoriten anzeigen",
+  "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "DisplayNotification": "Benachrichtigung beim Verschieben in den Papierkorb anzeigen",
   "DisplayRecent": "Neuste anzeigen",
   "DisplayTemplates": "Vorlagen anzeigen",

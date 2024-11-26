@@ -26,7 +26,7 @@
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -49,8 +49,11 @@ import {
   TypeSelectTableViewProps,
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const UserSelectTableContainer = styled(StyledTableContainer)`
+const UserSelectTableContainer = styled(StyledTableContainer).attrs(
+  injectDefaultTheme,
+)`
   .table-group-menu {
     height: 69px;
     position: sticky;
@@ -82,8 +85,6 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     }
   }
 `;
-
-UserSelectTableContainer.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;

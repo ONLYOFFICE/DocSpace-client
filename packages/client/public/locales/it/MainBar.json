@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Il limite per il numero di stanze è stato raggiunto: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Il limite dello spazio di archiviazione e del numero di stanze sta per essere superato",
   "StorageAndRoomLimitHeader": "È stato raggiunto il limite per lo spazio di archiviazione e il numero di stanze",
-  "StorageAndUserHeader": "I limiti di spazio di archiviazione e amministratori/utenti esperti stanno per essere superati.",
-  "StorageAndUserTariffLimitHeader": "È stato raggiunto il limite per lo spazio di archiviazione e il numero di amministratori/power user",
+  "StorageAndUserHeader": "I limiti di spazio di archiviazione e amministratori stanno per essere superati.",
+  "StorageAndUserTariffLimitHeader": "È stato raggiunto il limite per lo spazio di archiviazione e il numero di amministratori",
   "StorageLimitHeader": "Il limite per lo spazio di archiviazione è stato raggiunto: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Lo spazio di archiviazione sta per essere esaurito: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Puoi rimuovere i file non necessari o modificare la quota nelle <1>mpostazioni di gestione dello spazio di archiviazione.</1>",
-  "UserQuotaHeader": "Il numero di amministratori/utenti esperti sta per essere superato: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Una volta raggiunto il limite, tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori/utenti, contatta l'amministratore di {{productName}} per effettuare l'upgrade del piano tariffario.",
-  "UserTariffAlmostReachedForAdmins": "Una volta raggiunto il limite, tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori/utenti, <1>clicca qui</1> per effettuare l'upgrade del tuo piano tariffario.",
-  "UserTariffLimitHeader": "Il numero massimo di amministratori/power user è stato raggiunto: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori/power user, contatta l'amministratore di {{productName}} per effettuare l'upgrade del piano tariffario.",
-  "UserTariffReachedForAdmins": "Tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori/power user, <1>clicca qui</1> per effettuare l'upgrade del piano tariffario."
+  "UserQuotaHeader": "Il numero di amministratori sta per essere superato: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Una volta raggiunto il limite, tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori, contatta l'amministratore di {{productName}} per effettuare l'upgrade del piano tariffario.",
+  "UserTariffAlmostReachedForAdmins": "Una volta raggiunto il limite, tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori, <1>clicca qui</1> per effettuare l'upgrade del tuo piano tariffario.",
+  "UserTariffLimitHeader": "Il numero massimo di amministratori è stato raggiunto: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori, contatta l'amministratore di {{productName}} per effettuare l'upgrade del piano tariffario.",
+  "UserTariffReachedForAdmins": "Tutti gli utenti verranno aggiunti con i soli permessi Utente. Per poter aggiungere altri amministratori, <1>clicca qui</1> per effettuare l'upgrade del piano tariffario."
 }

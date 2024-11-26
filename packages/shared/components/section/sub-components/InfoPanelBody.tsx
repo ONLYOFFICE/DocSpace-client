@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Scrollbar from "react-scrollbars-custom";
 
 import { SubInfoPanelBodyProps } from "../Section.types";
@@ -35,11 +35,42 @@ const SubInfoPanelBody = ({
   isInfoPanelScrollLocked,
 }: SubInfoPanelBodyProps) => {
   const scrollRef = useRef<Scrollbar | null>(null);
-  let scrollYPossible = false;
-  if (scrollRef.current)
-    // @ts-expect-error check later private
-    scrollYPossible = scrollRef?.current?.scrollValues?.scrollYPossible;
-  const scrollLocked = scrollYPossible && isInfoPanelScrollLocked;
+  const [scrollYPossible, setScrollYPossible] = useState(false);
+  const [scrollLocked, setScrollLocked] = useState(
+    scrollYPossible && isInfoPanelScrollLocked,
+  );
+
+  useEffect(() => {
+    const valueScrollYPossible =
+      scrollRef.current.scrollValues?.scrollYPossible;
+
+    if (scrollRef.current && valueScrollYPossible !== scrollYPossible)
+      setScrollYPossible(valueScrollYPossible);
+  }, [scrollRef?.current?.scrollValues.scrollYPossible, scrollYPossible]);
+
+  useEffect(() => {
+    if (scrollYPossible && isInfoPanelScrollLocked !== scrollLocked)
+      setScrollLocked(scrollYPossible && isInfoPanelScrollLocked);
+  }, [scrollYPossible, isInfoPanelScrollLocked, scrollLocked]);
+
+  // Prevent triggering main scroll if infopanel's scroll is focused
+  useEffect(() => {
+    const scrollBody = scrollRef.current?.contentElement;
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isScrollKey =
+        ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+
+      if (isScrollKey) {
+        e.stopPropagation();
+      }
+    };
+
+    scrollBody?.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      scrollBody?.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   return (
     <StyledScrollbar

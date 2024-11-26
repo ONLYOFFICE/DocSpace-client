@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../../themes";
+import { globalColors } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
 const selectedItemTag = css`
   background: ${(props) =>
@@ -34,7 +35,9 @@ const selectedItemTag = css`
     props.theme.filterInput.filter.selectedItem.border};
 `;
 
-const StyledFilterBlockItemTag = styled.div<{ isSelected?: boolean }>`
+const StyledFilterBlockItemTag = styled.div.attrs(injectDefaultTheme)<{
+  isSelected?: boolean;
+}>`
   height: 28px;
   max-height: 28px;
 
@@ -57,7 +60,5 @@ const StyledFilterBlockItemTag = styled.div<{ isSelected?: boolean }>`
 
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
-
-StyledFilterBlockItemTag.defaultProps = { theme: Base };
 
 export default StyledFilterBlockItemTag;

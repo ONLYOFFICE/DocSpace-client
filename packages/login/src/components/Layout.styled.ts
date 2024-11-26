@@ -28,10 +28,11 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
-export const ContentWrapper = styled.div<{ bgPattern: string }>`
+export const ContentWrapper = styled.div.attrs(injectDefaultTheme)<{
+  bgPattern: string;
+}>`
   width: 100%;
   height: 100dvh;
 
@@ -56,7 +57,7 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
   }
 
   .greeting-container {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     max-width: 380px;
     min-width: 380px;
 
@@ -97,21 +98,15 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
   .sign-in-subtitle {
     margin-bottom: 32px;
     text-align: center;
-
-    @media ${mobile} {
-      margin-bottom: 24px;
-    }
+    line-height: 22px;
   }
 
   .invitation-info-container {
     margin-bottom: 32px;
 
-    @media ${mobile} {
-      margin-bottom: 24px;
-    }
-
     p {
       text-align: center;
+      line-height: 20px;
     }
 
     .sign-in-container {
@@ -121,10 +116,6 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
       position: relative;
 
       margin-bottom: 32px;
-
-      @media ${mobile} {
-        margin-bottom: 24px;
-      }
 
       .back-title {
         position: absolute;
@@ -140,6 +131,7 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
           ${(props) =>
             props.theme.interfaceDirection === "rtl" &&
             " transform: rotate(180deg)"};
+          padding-top: 2px;
         }
 
         p {
@@ -153,8 +145,6 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
     }
   }
 `;
-
-ContentWrapper.defaultProps = { theme: Base };
 
 export const StyledPage = styled.div`
   display: flex;

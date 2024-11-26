@@ -42,7 +42,7 @@ export const getUserRoleOptions = (t: TTranslation) => ({
   },
   collaborator: {
     key: "collaborator",
-    label: t("Common:PowerUser"),
+    label: t("Common:User"),
     access: ShareAccessRights.Collaborator,
     type: "collaborator",
   },

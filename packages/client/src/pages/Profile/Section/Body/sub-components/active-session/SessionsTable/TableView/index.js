@@ -26,7 +26,6 @@
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import SessionsTableHeader from "./SessionsTableHeader";
@@ -34,12 +33,13 @@ import SessionsTableRow from "./SessionsTableRow";
 
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   margin: 0 0 20px;
 
   .table-container_header {
@@ -54,8 +54,6 @@ const StyledTableContainer = styled(TableContainer)`
     font-size: 12px;
   }
 `;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   const [hideColumns, setHideColumns] = useState(false);

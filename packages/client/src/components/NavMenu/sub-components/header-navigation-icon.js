@@ -29,9 +29,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import { Badge } from "@docspace/shared/components/badge";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   width: 20px;
   height: 20px;
@@ -92,8 +92,6 @@ const StyledContainer = styled.div`
     }
   }
 `;
-
-StyledContainer.defaultProps = { theme: Base };
 
 const HeaderNavigationIcon = ({
   id,

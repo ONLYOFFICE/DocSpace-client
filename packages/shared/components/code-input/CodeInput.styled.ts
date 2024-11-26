@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,7 +89,5 @@ const InputWrapper = styled.div`
     direction: ltr;
   }
 `;
-
-InputWrapper.defaultProps = { theme: Base };
 
 export default InputWrapper;

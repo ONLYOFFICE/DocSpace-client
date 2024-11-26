@@ -30,7 +30,7 @@ import InputWrapper from "./CodeInput.styled";
 import { CodeInputProps } from "./CodeInput.types";
 
 const CodeInput = (props: CodeInputProps) => {
-  const { onSubmit, onChange, isDisabled, ...rest } = props;
+  const { onSubmit, onChange, isDisabled = false, ...rest } = props;
 
   const inputsRef = useRef<HTMLInputElement[]>([]);
   const characters = 6;
@@ -136,10 +136,6 @@ const CodeInput = (props: CodeInputProps) => {
       {elements}
     </InputWrapper>
   );
-};
-
-CodeInput.defaultProps = {
-  isDisabled: false,
 };
 
 export { CodeInput };

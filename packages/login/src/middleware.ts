@@ -103,6 +103,7 @@ export function middleware(request: NextRequest) {
   } else {
     const url = request.nextUrl.clone();
     url.pathname = "/";
+    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
 
     if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
   }

@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "2.6.1",
+  "version": "3.0.1",
   "private": true,
   "workspaces": {
     "packages": [
@@ -28,8 +28,12 @@
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
     "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspace @docspace/shared lint",
-    "lint:fix": "yarn workspace @docspace/shared lint:fix"
+    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint",
+    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint:fix",
+    "test:build": "yarn workspace @docspace/login test:build",
+    "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
+    "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
+    "test:e2e:docker:clear": "yarn workspace @docspace/login test:e2e:docker:clear"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",
@@ -44,7 +48,7 @@
     "he": "^1.2.0",
     "madge": "^6.1.0",
     "shx": "^0.3.4",
-    "terser": "^5.16.6"
+    "terser": "^5.34.1"
   },
   "packageManager": "yarn@4.3.0"
 }

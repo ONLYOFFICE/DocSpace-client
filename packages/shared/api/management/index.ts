@@ -146,12 +146,15 @@ export const checkDomain = async (domain: string) => {
 export const getAvailablePortals = async (data: {
   Email: string;
   PasswordHash: string;
+  recaptchaResponse?: string | null;
+  recaptchaType?: number;
 }) => {
   const res = (await request({
     baseURL,
     method: "post",
-    url: `/portal/signin?Email=${data.Email}&PasswordHash=${data.PasswordHash}`,
+    url: `/portal/signin`,
     data,
+    skipUnauthorized: true,
   })) as { tenants: { portalLink: string; portalName: string }[] };
 
   return res.tenants;

@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const FillingStatusContainer = styled.div<{
+const FillingStatusContainer = styled.div.attrs(injectDefaultTheme)<{
   isDone?: boolean;
   isInterrupted?: boolean;
 }>`
@@ -65,9 +66,7 @@ const FillingStatusContainer = styled.div<{
   }
 `;
 
-FillingStatusContainer.defaultProps = { theme: Base };
-
-const AccordionItem = styled.div<{
+const AccordionItem = styled.div.attrs(injectDefaultTheme)<{
   isInterrupted?: boolean;
   isDone?: boolean;
   isOpen?: boolean;
@@ -157,7 +156,5 @@ const AccordionItem = styled.div<{
     }
   }
 `;
-
-AccordionItem.defaultProps = { theme: Base };
 
 export { FillingStatusContainer, AccordionItem };

@@ -80,7 +80,7 @@ const BIG_FORM_NUMBER = 9_999_999;
 export const CompletedForm = ({
   session,
   share,
-  isShreFile,
+  isShareFile,
 }: CompletedFormProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
@@ -132,9 +132,9 @@ export const CompletedForm = ({
     },
   } = session;
 
-  const isAnonim = Boolean(share) && !isRoomMember;
+  const isAnonym = Boolean(share) && !isRoomMember;
 
-  const getFolderUrl = (folderId: number, isAnonim: boolean): string => {
+  const getFolderUrl = (folderId: number, isAnonym: boolean): string => {
     if (isNullOrUndefined(folderId)) return "";
 
     const origin = window.location.origin;
@@ -143,7 +143,7 @@ export const CompletedForm = ({
 
     filter.folder = folderId.toString();
 
-    const path = isAnonim
+    const path = isAnonym
       ? `/rooms/share?key=${share}&`
       : `/rooms/shared/${roomId}?`;
 
@@ -169,14 +169,14 @@ export const CompletedForm = ({
   };
 
   const handleBackToRoom = () => {
-    const url = getFolderUrl(roomId, isAnonim);
+    const url = getFolderUrl(roomId, isAnonym);
     window.location.assign(url);
   };
 
   const fillAgainSearchParams = new URLSearchParams({
     fileId: originalForm.id.toString(),
     ...(share ? { share } : {}),
-    ...(isShreFile ? { is_file: "true" } : {}),
+    ...(isShareFile ? { is_file: "true" } : {}),
   });
 
   return (
@@ -193,7 +193,7 @@ export const CompletedForm = ({
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
             <Text noSelect>
-              {isAnonim
+              {isAnonym
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}
             </Text>
@@ -210,8 +210,8 @@ export const CompletedForm = ({
               <IconButton
                 size={16}
                 className="completed-form__download"
-                iconName={isAnonim ? DownloadIconUrl : LinkIconUrl}
-                onClick={isAnonim ? handleDownload : copyLinkFile}
+                iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
+                onClick={isAnonym ? handleDownload : copyLinkFile}
               />
             </Box>
             <FormNumberWrapper>
@@ -248,19 +248,19 @@ export const CompletedForm = ({
               </Box>
             </ManagerWrapper>
           </MainContent>
-          <ButtonWrapper isShreFile={isShreFile && !isRoomMember}>
+          <ButtonWrapper isShareFile={isShareFile && !isRoomMember}>
             <Button
               scale
               primary
               size={ButtonSize.medium}
               label={
-                isAnonim
+                isAnonym
                   ? t("Common:Download")
                   : t("CompletedForm:CheckReadyForms")
               }
-              onClick={isAnonim ? handleDownload : gotoCompleteFolder}
+              onClick={isAnonym ? handleDownload : gotoCompleteFolder}
             />
-            {(!isShreFile || isRoomMember) && (
+            {(!isShareFile || isRoomMember) && (
               <Button
                 scale
                 size={ButtonSize.medium}
@@ -269,7 +269,11 @@ export const CompletedForm = ({
               />
             )}
           </ButtonWrapper>
-          <Link className="link" href={`/?${fillAgainSearchParams.toString()}`}>
+          <Link
+            className="link"
+            href={`/?${fillAgainSearchParams.toString()}`}
+            prefetch={false}
+          >
             {t("CompletedForm:FillItOutAgain")}
           </Link>
         </CompletedFormLayout>

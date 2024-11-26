@@ -32,6 +32,7 @@ import api from "../api";
 import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
+import { getUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
@@ -196,11 +197,7 @@ class UserStore {
   }
 
   get userType() {
-    if (this.user?.isOwner) return "owner";
-    if (this.user?.isAdmin) return "admin";
-    if (this.user?.isRoomAdmin) return "roomAdmin";
-    if (this.user?.isCollaborator) return "powerUser";
-    if (this.user?.isVisitor) return "user";
+    return getUserType(this.user!);
   }
 }
 

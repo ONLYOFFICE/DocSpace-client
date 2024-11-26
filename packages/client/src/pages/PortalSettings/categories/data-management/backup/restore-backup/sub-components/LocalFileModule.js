@@ -43,12 +43,10 @@ const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
   );
 };
 
-export default inject(({ currentQuotaStore, backup }) => {
+export default inject(({ backup }) => {
   const { setRestoreResource } = backup;
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
 
   return {
-    isEnableRestore: isRestoreAndAutoBackupAvailable,
     setRestoreResource,
   };
 })(observer(LocalFile));

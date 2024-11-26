@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
+import { TFile, TTranslation } from "@docspace/shared/api/files/types";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 
 import { convertDocumentUrl } from ".";
@@ -73,6 +73,7 @@ export const onSDKRequestHistoryClose = () => {
 };
 
 export const onSDKRequestEditRights = async (
+  t: TTranslation,
   fileInfo?: TFile,
   documentType?: string,
 ) => {
@@ -82,6 +83,7 @@ export const onSDKRequestEditRights = async (
   const isPDF = documentType === "pdf";
 
   let newURL = new URL(url);
+  let title = "";
 
   if (
     !isPDF &&
@@ -90,7 +92,9 @@ export const onSDKRequestEditRights = async (
   ) {
     try {
       const response = await convertDocumentUrl(fileInfo.id);
+
       if (response && response.webUrl) {
+        title = response.title;
         newURL = new URL(response.webUrl);
       } else {
         throw new Error("Invalid response data");
@@ -105,7 +109,13 @@ export const onSDKRequestEditRights = async (
     newURL.searchParams.append("action", "edit");
   }
 
-  history.pushState({}, "", newURL.toString());
+  const messageAfterConversion = t("Editor:DocumentConverted", { title });
+  const stringURL = newURL.toString();
+  const concatURL = title
+    ? stringURL.concat(`#message/${messageAfterConversion}`)
+    : stringURL;
+
+  history.pushState({}, "", concatURL);
   document.location.reload();
 };
 

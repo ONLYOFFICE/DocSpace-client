@@ -27,33 +27,39 @@
 import { useContext, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType } from "@docspace/shared/enums";
-import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
-import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import MembersHelper from "../../helpers/MembersHelper";
-import MembersList from "./sub-components/MembersList";
-import User from "./User";
+import { isDesktop } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import {
+  GENERAL_LINK_HEADER_KEY,
+  LINKS_LIMIT_COUNT,
+} from "@docspace/shared/constants";
+
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+
+import MembersHelper from "../../helpers/MembersHelper";
+
+import MembersList from "./sub-components/MembersList";
+import EmptyContainer from "./sub-components/EmptyContainer";
+import LinkRow from "./sub-components/LinkRow";
 import {
   LinksBlock,
   StyledLinkRow,
   StyledPublicRoomBarContainer,
 } from "./sub-components/Styled";
-import EmptyContainer from "./sub-components/EmptyContainer";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { isDesktop } from "@docspace/shared/utils";
-import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import LinkRow from "./sub-components/LinkRow";
+import User from "./User";
 
 const Members = ({
   t,
@@ -79,7 +85,14 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
+  setGuestReleaseTipDialogVisible,
+  showGuestReleaseTip,
 }) => {
+  const [visibleBar, setVisibleBar] = useLocalStorage(
+    `public-room-bar-${selfId}`,
+    true,
+  );
+
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
@@ -88,6 +101,10 @@ const Members = ({
   useEffect(() => {
     updateInfoPanelMembers(t);
   }, [infoPanelSelection, searchValue]);
+
+  useEffect(() => {
+    if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
+  }, [showGuestReleaseTip, setGuestReleaseTipDialogVisible]);
 
   useEffect(() => {
     if (isMembersPanelUpdating) return;
@@ -105,21 +122,29 @@ const Members = ({
     (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected, groups } = infoPanelMembers;
+  const { administrators, users, expected, groups, guests } = infoPanelMembers;
 
-  const membersList = [...administrators, ...groups, ...users, ...expected];
+  const membersList = [
+    ...administrators,
+    ...groups,
+    ...users,
+    ...guests,
+    ...expected,
+  ];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
   const groupsTitleCount = groups.length ? 1 : 0;
+  const guestsTitleCount = guests.length ? 1 : 0;
 
   const headersCount = withoutTitlesAndLinks
     ? 0
     : adminsTitleCount +
       usersTitleCount +
       expectedTitleCount +
-      groupsTitleCount;
+      groupsTitleCount +
+      guestsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -139,8 +164,8 @@ const Members = ({
   if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
-        <LinksBlock key="general-link_header">
-          <Text fontSize="14px" fontWeight={600}>
+        <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
+          <Text fontSize="14px" fontWeight={600} lineHeight="16px">
             {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
@@ -228,7 +253,9 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks;
+    !withoutTitlesAndLinks &&
+    visibleBar;
+
   const publicRoomItemsLength = publicRoomItems.length;
 
   if (!membersList.length) {
@@ -250,6 +277,7 @@ const Members = ({
                 ? t("CreateEditRoomDialog:FormRoomBarDescription")
                 : t("CreateEditRoomDialog:PublicRoomBarDescription")
             }
+            onClose={() => setVisibleBar(false)}
           />
         </StyledPublicRoomBarContainer>
       )}
@@ -297,6 +325,7 @@ export default inject(
     treeFoldersStore,
     dialogsStore,
     infoPanelStore,
+    settingsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -314,7 +343,11 @@ export default inject(
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -330,6 +363,8 @@ export default inject(
 
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
+
+    const { showGuestReleaseTip } = settingsStore;
 
     return {
       infoPanelSelection: infoSelection,
@@ -355,6 +390,8 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
+      setGuestReleaseTipDialogVisible,
+      showGuestReleaseTip,
     };
   },
 )(

@@ -30,8 +30,11 @@ import styled, { css } from "styled-components";
 import RadioButtonReactSvg from "PUBLIC_DIR/images/radiobutton.react.svg";
 import RadioButtonCheckedReactSvg from "PUBLIC_DIR/images/radiobutton.checked.react.svg";
 
-import { NoUserSelect, commonIconsStyles } from "../../utils";
-import { Base } from "../../themes";
+import {
+  NoUserSelect,
+  commonIconsStyles,
+  injectDefaultTheme,
+} from "../../utils";
 
 export const RadioButtonIcon = styled(RadioButtonReactSvg)`
   ${commonIconsStyles}
@@ -55,7 +58,7 @@ const ClearLabel = ({
   children?: React.ReactNode;
 }) => <label {...props} />;
 
-const Label = styled(ClearLabel)`
+const Label = styled(ClearLabel).attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   position: relative;
@@ -127,7 +130,6 @@ const Label = styled(ClearLabel)`
       `};
   }
 `;
-Label.defaultProps = { theme: Base };
 const Input = styled.input`
   position: absolute;
   z-index: -1;

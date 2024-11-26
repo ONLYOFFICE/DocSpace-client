@@ -41,9 +41,7 @@ export const getYearElements = (
   const onDateClick = (year: string) => {
     setObservedDate((prevObservedDate) =>
       moment(
-        `${moment(year, "YYYY").format("YYYY")}-${prevObservedDate.format(
-          "MM-DD",
-        )}`,
+        `${moment(year, "YYYY").format("YYYY")}-${prevObservedDate.format("MM")}-01`,
         "YYYY-MM-DD",
       ),
     );

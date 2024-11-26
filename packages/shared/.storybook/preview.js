@@ -29,7 +29,6 @@ const preview = {
       },
     },
     darkMode: {
-      current: "light",
       light: lightTheme,
       dark: darkTheme,
     },

@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../../themes";
-import { tablet } from "../../../utils";
+import { injectDefaultTheme, tablet } from "../../../utils";
 
-const StyledInfoPanelToggleWrapper = styled.div<{
+const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)<{
   isInfoPanelVisible?: boolean;
 }>`
   display: flex;
@@ -59,7 +58,5 @@ const StyledInfoPanelToggleWrapper = styled.div<{
     }
   }
 `;
-
-StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
 export default StyledInfoPanelToggleWrapper;

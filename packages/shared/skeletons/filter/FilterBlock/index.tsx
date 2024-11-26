@@ -36,10 +36,11 @@ const FilterBlockLoader = ({
   className,
   style,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
 
   ...rest
 }: FilterBlockProps) => {
@@ -64,7 +65,7 @@ const FilterBlockLoader = ({
 
   return (
     <StyledContainer id={id} className={className} style={style} {...rest}>
-      {!isRooms && !isAccounts && (
+      {!isRooms && !isContactsPage && (
         <StyledBlock>
           <RectangleSkeleton
             width="50"
@@ -95,8 +96,8 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {!isInsideGroup && (
-        <StyledBlock isLast={isGroupsAccounts}>
+      {!isContactsInsideGroupPage && (
+        <StyledBlock isLast={isContactsGroupsPage}>
           <RectangleSkeleton
             width="51"
             height="16"
@@ -105,7 +106,7 @@ const FilterBlockLoader = ({
           />
           <div className="row-loader">
             <RectangleSkeleton
-              width={isPeopleAccounts ? "120" : "51"}
+              width={isContactsPeoplePage ? "120" : "51"}
               height="28"
               borderRadius="16"
               className="loader-item"
@@ -117,7 +118,7 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-          {(isRooms || isGroupsAccounts) && (
+          {(isRooms || isContactsGroupsPage) && (
             <div className="row-loader">
               <RectangleSkeleton
                 width="16"
@@ -126,7 +127,7 @@ const FilterBlockLoader = ({
                 className="loader-item"
               />
               <RectangleSkeleton
-                width={isGroupsAccounts ? "150" : "137"}
+                width={isContactsGroupsPage ? "150" : "137"}
                 height="20"
                 borderRadius="3"
                 className="loader-item"
@@ -136,7 +137,7 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {(isRooms || isPeopleAccounts || isInsideGroup) && (
+      {(isRooms || isContactsPeoplePage || isContactsInsideGroupPage) && (
         <StyledBlock>
           <RectangleSkeleton
             width="50"
@@ -145,7 +146,7 @@ const FilterBlockLoader = ({
             className="loader-item"
           />
           <div className="row-loader">
-            {isPeopleAccounts || isInsideGroup ? (
+            {isContactsPeoplePage || isContactsInsideGroupPage ? (
               <>
                 <RectangleSkeleton
                   width="67"
@@ -173,7 +174,9 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {(isPeopleAccounts || isInsideGroup) && (
+      {(isContactsPeoplePage ||
+        isContactsGuestsPage ||
+        isContactsInsideGroupPage) && (
         <StyledBlock>
           <RectangleSkeleton
             width="50"
@@ -210,7 +213,7 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {!isGroupsAccounts && (
+      {!isContactsGroupsPage && (
         <StyledBlock isLast>
           <RectangleSkeleton
             width="50"
@@ -219,7 +222,7 @@ const FilterBlockLoader = ({
             className="loader-item"
           />
           <div className="row-loader">
-            {isAccounts ? (
+            {isContactsPage ? (
               <>
                 <RectangleSkeleton
                   width="57"

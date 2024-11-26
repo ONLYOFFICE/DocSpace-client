@@ -56,12 +56,16 @@ import {
   ComboBoxSize,
   TOption,
 } from "@docspace/shared/components/combobox";
-import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
+import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
@@ -72,7 +76,7 @@ import {
   TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
@@ -94,10 +98,14 @@ type WizardFormProps = {
   isRequiredLicense?: boolean;
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
+
+  forumLink?: string;
+  documentationEmail?: string;
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
   licenseUrl?: string;
+  isAmi?: boolean;
 };
 
 const emailSettings = new EmailSettings();
@@ -114,6 +122,9 @@ function WizardForm(props: WizardFormProps) {
     culture,
     wizardToken,
     passwordHash,
+    forumLink,
+    documentationEmail,
+    isAmi,
   } = props;
 
   const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>(
@@ -127,13 +138,20 @@ function WizardForm(props: WizardFormProps) {
 
   const [email, setEmail] = useState("");
   const [hasErrorEmail, setHasErrorEmail] = useState(false);
+
   const [password, setPassword] = useState("");
   const [hasErrorPass, setHasErrorPass] = useState(false);
+
+  const [instanceId, setInstanceId] = useState("");
+  const [hasErrorInstanceId, setHasErrorInstanceId] = useState(false);
+
   const [hasErrorLicense, setHasErrorLicense] = useState(false);
   const [invalidLicense, setInvalidLicense] = useState(false);
   const [licenseUpload, setLicenseUpload] = useState<Nullable<string>>(null);
+
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [hasErrorAgree, setHasErrorAgree] = useState(false);
+
   const [isCreated, setIsCreated] = useState(false);
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
@@ -150,7 +168,7 @@ function WizardForm(props: WizardFormProps) {
 
   useEffect(() => {
     setUserCulture(
-      window.navigator ? window.navigator.language : culture ?? "en",
+      window.navigator ? window.navigator.language : (culture ?? "en"),
     );
   }, [culture]);
 
@@ -217,6 +235,11 @@ function WizardForm(props: WizardFormProps) {
     refPassInput.current.onGeneratePassword(e);
   };
 
+  const onChangeInstanceId = (e: ChangeEvent<HTMLInputElement>) => {
+    setInstanceId(e.target.value);
+    setHasErrorInstanceId(e.target.value.trim() === "");
+  };
+
   const onLanguageSelect = (lang: TOption) => {
     const cultures = mapCulturesToArray(portalCultures!, true, i18n);
     const select = cultures.filter((culture) => culture.key === lang.key);
@@ -268,10 +291,16 @@ function WizardForm(props: WizardFormProps) {
     let anyError = false;
     const emptyEmail = email.trim() === "";
     const emptyPassword = password.trim() === "";
+    const emptyInstanceId = instanceId.trim() === "";
 
     if (emptyEmail || emptyPassword) {
       emptyEmail && setHasErrorEmail(true);
       emptyPassword && setHasErrorPass(true);
+      anyError = true;
+    }
+
+    if (isAmi && emptyInstanceId) {
+      emptyInstanceId && setHasErrorInstanceId(true);
       anyError = true;
     }
 
@@ -298,6 +327,7 @@ function WizardForm(props: WizardFormProps) {
     const emailTrim = email.trim();
     const analytics = true;
     const hash = createPasswordHash(password, passwordHash);
+    const amiId = instanceId.trim();
 
     try {
       await api.settings.setPortalOwner(
@@ -307,6 +337,7 @@ function WizardForm(props: WizardFormProps) {
         selectedTimezone.key,
         wizardToken,
         analytics,
+        isAmi && amiId ? amiId : null,
       );
 
       setCookie(LANGUAGE, selectedLanguage.key.toString(), {
@@ -402,9 +433,33 @@ function WizardForm(props: WizardFormProps) {
           isHovered={true}
           onClick={generatePassword}
         >
-          {t("GeneratePassword")}
+          {t("Common:GeneratePassword")}
         </Link>
       </StyledLink>
+
+      {isAmi && (
+        <FieldContainer
+          className="wizard-field instance-id-field"
+          isVertical={true}
+          labelVisible={false}
+          hasError={hasErrorInstanceId}
+          errorMessage={t("ErrorInstanceId")}
+        >
+          <TextInput
+            id="instance-id"
+            name="instance-id"
+            type={InputType.text}
+            size={InputSize.large}
+            hasError={hasErrorInstanceId}
+            value={instanceId}
+            placeholder={t("Common:InstanceId")}
+            scale={true}
+            tabIndex={3}
+            isDisabled={isCreated}
+            onChange={onChangeInstanceId}
+          />
+        </FieldContainer>
+      )}
 
       {isRequiredLicense && (
         <FieldContainer
@@ -460,7 +515,13 @@ function WizardForm(props: WizardFormProps) {
             modernView={true}
           />
           {selectedLanguage?.isBeta && (
-            <BetaBadge withOutFeedbackLink place="bottom" />
+            <BetaBadge
+              withOutFeedbackLink
+              place="bottom"
+              forumLink={forumLink}
+              currentDeviceType={currentDeviceType}
+              documentationEmail={documentationEmail}
+            />
           )}
         </div>
       </StyledInfo>

@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Sezioni aggiuntive",
   "DisplayFavorites": "Visualizza i preferiti",
+  "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
   "DisplayNotification": "Visualizza la notifica quando sposti gli elementi nel Cestino",
   "DisplayRecent": "Visualizza i documenti recenti",
   "DisplayTemplates": "Visualizza modelli documento",

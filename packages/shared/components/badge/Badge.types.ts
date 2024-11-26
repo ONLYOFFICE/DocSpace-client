@@ -67,4 +67,7 @@ export interface BadgeProps {
   isVersionBadge?: boolean;
   isMutedBadge?: boolean;
   isPaidBadge?: boolean;
+
+  onMouseOver?: VoidFunction;
+  onMouseLeave?: VoidFunction;
 }

@@ -41,6 +41,8 @@ import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
+import { getTextColor } from "./getTextColor";
+
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
 import {
@@ -63,7 +65,7 @@ import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, { IconSizeType } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect } from "./commonStyles";
+import { NoUserSelect, TextUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
@@ -78,6 +80,8 @@ import {
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
+import type { TRoom } from "../api/rooms/types";
+import { injectDefaultTheme } from "./injectDefaultTheme";
 
 export {
   isBetaLanguage,
@@ -89,6 +93,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
+  TextUserSelect,
   commonInputStyles,
   commonTextStyles,
   INFO_PANEL_WIDTH,
@@ -130,6 +135,8 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  injectDefaultTheme,
+  getTextColor,
 };
 
 export const getModalType = () => {
@@ -168,7 +175,11 @@ export const getTitleWithoutExtension = (
     : item.title;
 };
 
-export const getLastColumn = (tableStorageName: string) => {
+export const getLastColumn = (
+  tableStorageName: string,
+  storageColumnsSize?: string,
+  isIndexedFolder?: boolean,
+) => {
   if (!tableStorageName) return;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -178,8 +189,47 @@ export const getLastColumn = (tableStorageName: string) => {
   const filterColumns = columns.filter(
     (column) => column !== "false" && column !== "QuickButtons",
   );
+  let hideColumnsTable = false;
 
-  if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
+  if (storageColumnsSize) {
+    const enabledColumn = storageColumnsSize
+      .split(" ")
+      .filter((_, index, array) => {
+        if (isIndexedFolder) {
+          return index !== 0 && index !== 1 && index !== array.length - 1;
+        }
+        return index !== 0 && index !== array.length - 1;
+      })
+      .find((item) => item !== "0px");
 
+    hideColumnsTable = !enabledColumn;
+  }
+
+  if (hideColumnsTable) {
+    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
+  }
+
+  if (filterColumns.length > 0) {
+    return filterColumns[filterColumns.length - 1];
+  }
   return null;
+};
+
+export const isLockedSharedRoom = (item?: TRoom) => {
+  if (!item) return false;
+
+  return Boolean(item.external && item.passwordProtected && !item.expired);
+};
+
+export const addLog = (log: string, category: "socket") => {
+  if (!window.ClientConfig?.logs.enableLogs) return;
+
+  if (window.ClientConfig.logs.logsToConsole) console.log(log);
+  else {
+    if (!window.logs) window.logs = { socket: [] };
+
+    if (!window.logs[category]) window.logs[category] = [];
+
+    window.logs[category].push(log);
+  }
 };

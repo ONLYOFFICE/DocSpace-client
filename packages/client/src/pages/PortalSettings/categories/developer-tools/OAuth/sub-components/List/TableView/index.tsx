@@ -5,10 +5,10 @@ import elementResizeDetectorMaker from "element-resize-detector";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TableBody } from "@docspace/shared/components/table";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
-import Row from "./Row";
-import Header from "./Header";
+import Row from "./sub-components/Row";
+import Header from "./sub-components/Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
@@ -27,12 +27,14 @@ const TableView = ({
   selection,
   activeClients,
   setSelection,
+  setBufferSelection,
   getContextMenuItems,
   changeClientStatus,
   userId,
   hasNextPage,
   itemCount,
   fetchNextClients,
+  isGroupDialogVisible,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
   const tagRef = React.useRef<HTMLDivElement | null>(null);
@@ -76,6 +78,8 @@ const TableView = ({
 
   const clickOutside = React.useCallback(
     (e: MouseEvent) => {
+      if (isGroupDialogVisible) return;
+
       const target = e.target as HTMLElement;
       if (!target) return;
       if (
@@ -88,7 +92,7 @@ const TableView = ({
 
       setSelection?.("");
     },
-    [setSelection],
+    [setSelection, isGroupDialogVisible],
   );
 
   React.useEffect(() => {
@@ -108,6 +112,12 @@ const TableView = ({
     [fetchNextClients],
   );
 
+  React.useEffect(() => {
+    return () => {
+      setSelection!("");
+    };
+  }, [setSelection]);
+
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header
@@ -125,6 +135,7 @@ const TableView = ({
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasNextPage || false}
         itemCount={itemCount || 0}
+        isIndexEditingMode={false}
       >
         {items.map((item) => (
           <Row
@@ -133,6 +144,7 @@ const TableView = ({
             isChecked={selection?.includes(item.clientId) || false}
             inProgress={activeClients?.includes(item.clientId) || false}
             setSelection={setSelection}
+            setBufferSelection={setBufferSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
             tagCount={tagCount}
@@ -149,7 +161,7 @@ export default inject(
     oauthStore,
   }: {
     userStore: UserStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const userId = userStore.user?.id;
 
@@ -165,7 +177,11 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      disableDialogVisible,
+      deleteDialogVisible,
     } = oauthStore;
+
+    const isGroupDialogVisible = disableDialogVisible || deleteDialogVisible;
 
     return {
       viewAs,
@@ -180,6 +196,7 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      isGroupDialogVisible,
     };
   },
 )(observer(TableView));

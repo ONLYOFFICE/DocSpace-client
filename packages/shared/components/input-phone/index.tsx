@@ -48,13 +48,18 @@
 // const PLUS = "+";
 
 // const InputPhone = ({
-//   defaultCountry,
+//   defaultCountry = {
+//     locale: options[182].code, // default locale RU
+//     dialCode: options[182].dialCode, // default dialCode +7
+//     mask: options[182].mask, // default Russia mask
+//     icon: options[182].flag, // default Russia flag
+//   },
 //   onChange,
-//   scaled,
-//   phonePlaceholderText,
-//   searchPlaceholderText,
-//   searchEmptyMessage,
-//   errorMessage,
+//   scaled = false,
+//   phonePlaceholderText = "",
+//   searchPlaceholderText = "",
+//   searchEmptyMessage = "",
+//   errorMessage = "",
 // // @ts-expect-error TS(2304): Cannot find name 'props'.
 // } = props) => {
 //   const [country, setCountry] = useState(defaultCountry);
@@ -292,20 +297,6 @@
 //   searchEmptyMessage: PropTypes.string,
 //   /** Text displayed in case of the invalid country dial code */
 //   errorMessage: PropTypes.string,
-// };
-
-// InputPhone.defaultProps = {
-//   defaultCountry: {
-//     locale: options[182].code, // default locale RU
-//     dialCode: options[182].dialCode, // default dialCode +7
-//     mask: options[182].mask, // default Russia mask
-//     icon: options[182].flag, // default Russia flag
-//   },
-//   phonePlaceholderText: "",
-//   searchPlaceholderText: "",
-//   scaled: false,
-//   searchEmptyMessage: "",
-//   errorMessage: "",
 // };
 
 // InputPhone.displayName = "InputPhone";

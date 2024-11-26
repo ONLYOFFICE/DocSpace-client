@@ -70,16 +70,18 @@ const LdapFieldComponent = (props) => {
   if (isTextArea)
     return <Textarea name={name} onChange={onChangeFn} {...rest} />;
 
-  if (isPassword)
+  if (isPassword) {
     return (
       <PasswordInput
         inputName={name}
+        inputValue={rest?.value || ""}
         onBlur={onBlur}
         //onFocus={onFocus}
         onChange={onChangeFn}
         {...rest}
       />
     );
+  }
 
   return (
     <TextInput

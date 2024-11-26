@@ -36,12 +36,9 @@ export const getSaasBar = (
   isFreeTariff,
   isGracePeriod,
 ) => {
-  if (
-    isPaymentPageAvailable &&
-    !isNonProfit &&
-    (isFreeTariff || isGracePeriod)
-  ) {
-    if (isFreeTariff) return { label: t("Common:TryBusiness"), color: ORANGE };
+  if (isPaymentPageAvailable) {
+    if (isFreeTariff && !isNonProfit)
+      return { label: t("Common:TryBusiness"), color: ORANGE };
     if (isGracePeriod) return { label: t("Common:LatePayment"), color: RED };
   }
 };

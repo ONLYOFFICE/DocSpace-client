@@ -59,6 +59,7 @@ export type ActionOption = {
   onClick?: ({ action }: { action?: string }) => void;
   items?: ActionOption[];
   withoutIcon?: boolean;
+  openByDefault?: boolean;
 };
 
 export interface MainButtonMobileProps {
@@ -109,4 +110,5 @@ export interface SubmenuItemProps {
   recalculateHeight: () => void;
   openedSubmenuKey: string;
   setOpenedSubmenuKey: (value: string) => void;
+  openByDefault: boolean;
 }

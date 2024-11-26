@@ -99,7 +99,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const ext = useMemo(() => getFileExtension(title), [title]);
   const audioIcon = useMemo(() => getIcon(96, ext), [ext, getIcon]);
-  const headerIcon = useMemo(() => getIcon(24, ext), [ext, getIcon]);
+  const headerIcon = useMemo(() => getIcon(32, ext), [ext, getIcon]);
 
   let isVideo = false;
   let isAudio = false;

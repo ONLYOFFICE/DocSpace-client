@@ -31,7 +31,7 @@ export interface ShareCollectSelectorProps {
 }
 
 export interface InjectShareCollectSelectorProps
-  extends Pick<TStore["settingsStore"], "socketHelper" | "currentDeviceType">,
+  extends Pick<TStore["settingsStore"], "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "getIcon">,
     Pick<
       TStore["dialogsStore"],

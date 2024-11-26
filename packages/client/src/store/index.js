@@ -28,7 +28,6 @@ import {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -65,7 +64,7 @@ import ContextOptionsStore from "./ContextOptionsStore";
 import HotkeyStore from "./HotkeyStore";
 
 import TagsStore from "./TagsStore";
-import PeopleStore from "./PeopleStore";
+import PeopleStore from "./contacts/PeopleStore";
 import OformsStore from "./OformsStore";
 
 import AccessRightsStore from "./AccessRightsStore";
@@ -80,7 +79,10 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
-import EditGroupStore from "./EditGroupStore";
+import IndexingStore from "./IndexingStore";
+import EditGroupStore from "./contacts/EditGroupStore";
+
+import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 
@@ -114,6 +116,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
+const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -158,6 +161,7 @@ const filesStore = new FilesStore(
   userStore,
   currentTariffStatusStore,
   settingsStore,
+  indexingStore,
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -180,17 +184,31 @@ const dialogsStore = new DialogsStore(
   infoPanelStore,
 );
 
-const peopleStore = new PeopleStore(
+const profileActionsStore = new ProfileActionsStore(
   authStore,
-  setupStore,
+  filesStore,
+  peopleStore,
+  treeFoldersStore,
+  selectedFolderStore,
+  pluginStore,
+  userStore,
+  settingsStore,
+  currentTariffStatusStore,
+);
+
+const peopleStore = new PeopleStore(
   accessRightsStore,
-  dialogsStore,
   infoPanelStore,
   userStore,
   tfaStore,
   settingsStore,
   clientLoadingStore,
+  profileActionsStore,
+  dialogsStore,
+  currentQuotaStore,
 );
+
+profileActionsStore.peopleStore = peopleStore;
 
 const uploadDataStore = new UploadDataStore(
   settingsStore,
@@ -221,6 +239,7 @@ const filesActionsStore = new FilesActionsStore(
   currentTariffStatusStore,
   peopleStore,
   currentQuotaStore,
+  indexingStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -241,6 +260,7 @@ const contextOptionsStore = new ContextOptionsStore(
   currentTariffStatusStore,
   currentQuotaStore,
   userStore,
+  indexingStore,
   clientLoadingStore,
 );
 
@@ -254,25 +274,14 @@ const hotkeyStore = new HotkeyStore(
   selectedFolderStore,
 );
 
-const profileActionsStore = new ProfileActionsStore(
-  authStore,
-  filesStore,
-  peopleStore,
-  treeFoldersStore,
-  selectedFolderStore,
-  pluginStore,
-  userStore,
-  settingsStore,
-  currentTariffStatusStore,
-);
-
-peopleStore.profileActionsStore = profileActionsStore;
-
 const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
   userStore,
   settingsStore,
+  indexingStore,
+  selectedFolderStore,
+  peopleStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -281,6 +290,12 @@ infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
 infoPanelStore.publicRoomStore = publicRoomStore;
+
+const avatarEditorDialogStore = new AvatarEditorDialogStore(
+  filesStore,
+  settingsStore,
+  infoPanelStore,
+);
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,
@@ -293,10 +308,11 @@ const createEditRoomStore = new CreateEditRoomStore(
   currentQuotaStore,
   clientLoadingStore,
   dialogsStore,
+  avatarEditorDialogStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore();
+const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -313,7 +329,6 @@ const store = {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -364,7 +379,9 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  indexingStore,
   editGroupStore,
+  avatarEditorDialogStore,
 };
 
 export default store;

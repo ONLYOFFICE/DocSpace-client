@@ -54,12 +54,15 @@ const AccessPortal = (props) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     isMobileView,
+    resetIsInit,
   } = props;
 
   useEffect(() => {
     setDocumentTitle(
       t("PortalAccess", { productName: t("Common:ProductName") }),
     );
+
+    return () => resetIsInit();
   }, []);
 
   if (isMobileView) return <MobileView />;
@@ -224,7 +227,7 @@ const AccessPortal = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -235,6 +238,7 @@ export default inject(({ settingsStore }) => {
     ipSettingsUrl,
     currentDeviceType,
   } = settingsStore;
+  const { resetIsInit } = setup;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -247,5 +251,6 @@ export default inject(({ settingsStore }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     isMobileView,
+    resetIsInit,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

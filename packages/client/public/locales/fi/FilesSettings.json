@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Lisäosiot",
   "DisplayFavorites": "Näytä suosikit",
+  "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "DisplayNotification": "Näytä ilmoitus, kun siirrät kohteita roskakoriin",
   "DisplayRecent": "Näytä viimeisimmät",
   "DisplayTemplates": "Näytä mallit",

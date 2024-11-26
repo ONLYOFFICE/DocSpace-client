@@ -27,8 +27,6 @@
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 const LogoutSessionDialog = ({
   t,
   data,
@@ -42,11 +40,7 @@ const LogoutSessionDialog = ({
   };
 
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>
         {t("Profile:LogoutActiveConnection")}
       </ModalDialog.Header>
@@ -75,7 +69,7 @@ const LogoutSessionDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

@@ -58,6 +58,7 @@ const link = (text, onClick) => (
     className="property-content"
     isHovered={true}
     onClick={onClick}
+    enableUserSelect
   >
     {text}
   </Link>
@@ -105,6 +106,7 @@ class DetailsHelper {
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
+    this.roomLifetime = props.roomLifetime;
   }
 
   getPropertyList = () => {
@@ -144,6 +146,8 @@ class DetailsHelper {
         return "info_details_comments";
       case "Tags":
         return "info_details_tags";
+      case "Lifetime ends":
+        return "info_details_lifetime";
       case "Storage":
         return "info_details_storage";
     }
@@ -172,6 +176,7 @@ class DetailsHelper {
               "Date modified",
               "Last modified by",
               "Creation date",
+              this.item.order && "Index",
             ]
           : [
               "Owner",
@@ -182,7 +187,9 @@ class DetailsHelper {
               "Date modified",
               "Last modified by",
               "Creation date",
+              this.item.expired && "Lifetime ends",
               "Versions",
+              this.item.order && "Index",
               "Comments",
             ]
     ).filter((nP) => !!nP);
@@ -214,6 +221,11 @@ class DetailsHelper {
         return this.t("LastModifiedBy");
       case "Creation date":
         return this.t("CreationDate");
+      case "Lifetime ends":
+        return this.t("LifetimeEnds");
+
+      case "Index":
+        return this.t("Files:Index");
 
       case "Versions":
         return this.t("InfoPanel:Versions");
@@ -240,6 +252,9 @@ class DetailsHelper {
       case "Location":
         return this.getItemLocation();
 
+      case "Index":
+        return this.getItemIndex();
+
       case "Type":
         return this.getItemType();
       case "Storage Type":
@@ -261,6 +276,8 @@ class DetailsHelper {
         return this.getAuthorDecoration("updatedBy");
       case "Creation date":
         return this.getItemCreationDate();
+      case "Lifetime ends":
+        return this.getItemExpiredDate();
 
       case "Versions":
         return this.getItemVersions();
@@ -330,12 +347,30 @@ class DetailsHelper {
     return text(this.item.contentLength);
   };
 
+  getItemIndex = () => {
+    return text(this.item.order);
+  };
+
   getItemDateModified = () => {
     return text(parseAndFormatDate(this.item.updated, this.culture));
   };
 
   getItemCreationDate = () => {
     return text(parseAndFormatDate(this.item.created, this.culture));
+  };
+
+  getItemExpiredDate = () => {
+    return this.roomLifetime?.deletePermanently
+      ? text(
+          this.t("Files:WillBeDeletedPermanently", {
+            date: parseAndFormatDate(this.item.expired, this.culture),
+          }),
+        )
+      : text(
+          this.t("Files:WillBeMovedToTrash", {
+            date: parseAndFormatDate(this.item.expired, this.culture),
+          }),
+        );
   };
 
   getItemVersions = () => {

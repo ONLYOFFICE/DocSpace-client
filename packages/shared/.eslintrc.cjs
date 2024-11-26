@@ -57,6 +57,11 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { exceptAfterSingleLine: true },
+    ],
   },
   ignorePatterns: [
     "./tsconfig.json",

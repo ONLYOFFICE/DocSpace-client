@@ -56,6 +56,7 @@ const ArticleBodyContent = (props) => {
     toggleArticleOpen,
 
     roomsFolderId,
+    roomsFilter,
     archiveFolderId,
     myFolderId,
     recycleBinFolderId,
@@ -73,12 +74,16 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
+    setContactsTab,
   } = props;
 
   const location = useLocation();
 
+  const getHashDate = () => new Date().getTime();
+
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
+  const [hashDate, setHashDate] = React.useState(getHashDate);
 
   const getLinkData = React.useCallback(
     (folderId, title, rootFolderType, canCreate) => {
@@ -160,7 +165,7 @@ const ArticleBodyContent = (props) => {
           break;
       }
 
-      path += `?${params}&date=${new Date().getTime()}`;
+      path += `?${params}&date=${hashDate}`;
 
       return { path, state };
     },
@@ -170,6 +175,8 @@ const ArticleBodyContent = (props) => {
       myFolderId,
       recycleBinFolderId,
       activeItemId,
+      hashDate,
+      roomsFilter,
     ],
   );
 
@@ -183,7 +190,14 @@ const ArticleBodyContent = (props) => {
 
       let withTimer = isAccountsClick ? false : !!selectedFolderId;
 
-      if (isAccountsClick) clearFiles();
+      if (isAccountsClick) {
+        clearFiles();
+        setContactsTab("people");
+      } else {
+        setContactsTab(false);
+      }
+
+      setHashDate(getHashDate);
 
       setSelection?.([]);
 
@@ -200,22 +214,9 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-
+      setContactsTab,
       setSelection,
     ],
-  );
-
-  const onShowNewFilesPanel = React.useCallback(
-    async (folderId) => {
-      if (disableBadgeClick) return;
-
-      setDisableBadgeClick(true);
-
-      await props.setNewFilesPanelVisible(true, [`${folderId}`]);
-
-      setDisableBadgeClick(false);
-    },
-    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -278,7 +279,6 @@ const ArticleBodyContent = (props) => {
     <>
       <Items
         onClick={onClick}
-        onBadgeClick={onShowNewFilesPanel}
         getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
@@ -299,13 +299,13 @@ export default inject(
     settingsStore,
     filesStore,
     treeFoldersStore,
-    dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
     campaignsStore,
+    peopleStore,
   }) => {
-    const { clearFiles, setSelection } = filesStore;
+    const { clearFiles, setSelection, roomsFilter } = filesStore;
     const {
       showArticleLoader,
 
@@ -321,8 +321,6 @@ export default inject(
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
       treeFoldersStore;
-
-    const { setNewFilesPanelVisible } = dialogsStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -350,8 +348,6 @@ export default inject(
       isVisitor: userStore.user.isVisitor,
       userId: userStore.user?.id,
 
-      setNewFilesPanelVisible,
-
       firstLoad,
       isDesktopClient,
       FirebaseHelper,
@@ -366,12 +362,14 @@ export default inject(
       setIsLoading,
 
       clearFiles,
+      roomsFilter,
       selectedFolderId,
       setIsBurgerLoading,
       setSelection,
       currentDeviceType,
       campaigns,
       isFrame,
+      setContactsTab: peopleStore.usersStore.setContactsTab,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

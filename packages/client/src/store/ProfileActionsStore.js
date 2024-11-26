@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HotkeysReactSvgUrl from "PUBLIC_DIR/images/hotkeys.react.svg?url";
 import ProfileReactSvgUrl from "PUBLIC_DIR/images/profile.react.svg?url";
 import PaymentsReactSvgUrl from "PUBLIC_DIR/images/payments.react.svg?url";
@@ -122,16 +122,6 @@ class ProfileActionsStore {
 
   setIsDebugDialogVisible = (visible) => {
     this.isDebugDialogVisible = visible;
-  };
-
-  getUserRole = (user) => {
-    let isModuleAdmin =
-      user?.listAdminModules && user?.listAdminModules?.length;
-
-    if (user.isOwner) return "owner";
-    if (user.isAdmin || isModuleAdmin) return "admin";
-    if (user.isVisitor) return "user";
-    return "manager";
   };
 
   onProfileClick = (obj) => {
@@ -248,6 +238,7 @@ class ProfileActionsStore {
       baseDomain,
       tenantAlias,
       limitedAccessSpace,
+      displayAbout,
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
@@ -356,6 +347,17 @@ class ProfileActionsStore {
       };
     }
 
+    let about = null;
+
+    if (displayAbout) {
+      about = {
+        key: "user-menu-about",
+        icon: InfoOutlineReactSvgUrl,
+        label: t("Common:AboutCompanyTitle"),
+        onClick: this.onAboutClick,
+      };
+    }
+
     const feedbackAndSupportEnabled =
       this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
     const videoGuidesEnabled =
@@ -412,12 +414,7 @@ class ProfileActionsStore {
         onClick: this.onSupportClick,
       },
       bookTraining,
-      {
-        key: "user-menu-about",
-        icon: InfoOutlineReactSvgUrl,
-        label: t("Common:AboutCompanyTitle"),
-        onClick: this.onAboutClick,
-      },
+      about,
     ];
 
     if (showFrameSignOut) {

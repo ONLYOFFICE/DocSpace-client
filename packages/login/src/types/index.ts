@@ -131,6 +131,7 @@ export type TCreateUserData = {
   lastName: string;
   key?: string;
   type?: number;
+  spam: boolean;
 };
 
 export type TActivateConfirmUser = {
@@ -161,12 +162,6 @@ export interface ConfirmRouteProps {
   confirmLinkResult: TConfirmLinkResult;
   confirmLinkParams: TConfirmLinkParams;
 }
-
-export type GreetingContainersProps = {
-  greetingSettings?: string;
-  culture?: string;
-  welcomeTitle?: string;
-};
 
 export type GreetingCreateUserContainerProps = {
   type: string;
@@ -221,6 +216,7 @@ export type LoginFormProps = {
   client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;
+  baseDomain?: string;
 };
 
 export type ForgotPasswordModalDialogProps = {

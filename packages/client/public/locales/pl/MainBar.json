@@ -18,14 +18,14 @@
   "StorageAndRoomHeader": "Limit pamięci oraz liczby pokoi zostanie wkrótce przekroczony",
   "StorageAndRoomLimitHeader": "Osiągnięto limit pamięci i liczby pokoi",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",
-  "StorageAndUserTariffLimitHeader": "Osiągnięto limit pamięci oraz liczby administratorów/użytkowników z większą liczbą uprawnień",
+  "StorageAndUserTariffLimitHeader": "Osiągnięto limit pamięci i liczbę administratorów",
   "StorageLimitHeader": "Osiągnięto limit pamięci: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Możesz usunąć niepotrzebne pliki lub zmienić limit w <1>ustawieniach zarządzania pamięcią.</1>",
-  "UserQuotaHeader": "Liczba administratorów/użytkowników z większą liczbą uprawnień zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Po osiągnięciu limitu wszyscy użytkownicy będą dodawani tylko z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów/użytkowników z większą liczbą uprawnień, skontaktuj się z administratorem {{productName}} w celu uaktualnienia planu cenowego.",
-  "UserTariffAlmostReachedForAdmins": "Po osiągnięciu limitu wszyscy użytkownicy będą dodawani tylko z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów/użytkowników z większą liczbą uprawnień, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy.",
-  "UserTariffLimitHeader": "Osiągnięto limit liczby administratorów/użytkowników z większą liczbą uprawnień: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów/użytkowników z większą liczbą uprawnień, skontaktuj się z administratorem {{productName}} w celu uaktualnienia planu cenowego.",
-  "UserTariffReachedForAdmins": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów/użytkowników z większą liczbą uprawnień, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy."
+  "UserQuotaHeader": "Liczba administratorów wkrótce przekroczona: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Po osiągnięciu limitu wszyscy użytkownicy będą dodawani tylko z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, skontaktuj się z administratorem {{productName}} w celu uaktualnienia planu cenowego.",
+  "UserTariffAlmostReachedForAdmins": "Po osiągnięciu limitu wszyscy użytkownicy będą dodawani tylko z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy.",
+  "UserTariffLimitHeader": "Osiągnięto limit liczby administratorów: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, skontaktuj się z administratorem {{productName}} w celu uaktualnienia planu cenowego.",
+  "UserTariffReachedForAdmins": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy."
 }

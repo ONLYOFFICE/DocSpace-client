@@ -44,6 +44,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   disabled: props.isDisabled ? "disabled" : "",
   tabIndex: props.tabIndex,
   isConnect: props.isConnect,
+  theme: props.theme || Base,
 }))`
   font-family: ${(props) => props.theme.fontFamily};
 
@@ -205,7 +206,5 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     gap: 16px;
   }
 `;
-
-StyledSocialButton.defaultProps = { theme: Base };
 
 export default StyledSocialButton;

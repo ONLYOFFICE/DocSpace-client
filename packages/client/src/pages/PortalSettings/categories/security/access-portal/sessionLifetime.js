@@ -68,11 +68,11 @@ const SessionLifetime = (props) => {
     lifetime,
     enabled,
     setSessionLifetimeSettings,
-    initSettings,
     isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   } = props;
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
@@ -117,7 +117,7 @@ const SessionLifetime = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings("lifetime").then(() => setIsLoading(true));
+    if (!isInit) getSessionLifetime().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -125,7 +125,7 @@ const SessionLifetime = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isLoading) return;
     const currentSettings = getFromSessionStorage(
       "currentSessionLifetimeSettings",
     );
@@ -226,7 +226,7 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <SessionLifetimeLoader />;
   }
 
@@ -313,17 +313,18 @@ export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
   return {
     enabled: enabledSessionLifetime,
     lifetime: sessionLifetime,
     setSessionLifetimeSettings,
-    initSettings,
     isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   };
 })(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

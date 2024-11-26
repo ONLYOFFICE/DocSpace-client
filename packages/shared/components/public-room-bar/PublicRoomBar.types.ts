@@ -33,4 +33,5 @@ export interface PublicRoomBarProps {
   onClose?: () => void;
   className?: string;
   style?: React.CSSProperties;
+  barIsVisible?: boolean;
 }

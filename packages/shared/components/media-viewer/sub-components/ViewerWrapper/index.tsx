@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import equal from "fast-deep-equal/react";
-import { useTheme } from "styled-components";
+// import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
 import { isSeparator } from "@docspace/shared/utils/typeGuards";
@@ -68,8 +68,8 @@ const ViewerWrapper = memo(
       onSetSelectionFile,
     } = props;
 
-    const { interfaceDirection } = useTheme();
-    const isRtl = interfaceDirection === "rtl";
+    // const { interfaceDirection } = useTheme();
+    // const isRtl = interfaceDirection === "rtl";
 
     const onClickContextItem = useCallback(
       (
@@ -92,6 +92,8 @@ const ViewerWrapper = memo(
       bottom?: string,
     ) => {
       const model = contextModel();
+
+      if (model.filter((m) => !m.disabled).length === 0) return null;
 
       return (
         <StyledDropDown

@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Wpisz 6-cyfrowy kod wygenerowany przez Twoją aplikację. Jeśli nie masz dostępu do swojego telefonu, skorzystaj z kodów zapasowych.",
   "EnterAppCodeTitle": "Wpisz kod z aplikacji uwierzytelniającej",
   "EnterCodePlaceholder": "Wpisz kod",
+  "EnterEmailHeader": "Wpisz adres e-mail",
   "EnterPhone": "Wpisz numer telefonu komórkowego",
   "GetCode": "Uzyskaj kod",
   "LoginRegistryButton": "Dołącz",
+  "Newsletter": "Chcę otrzymywać newsletter {{organizationName}}",
   "PassworResetTitle": "Teraz możesz utworzyć nowe hasło.",
   "PhoneSubtitle": "Uwierzytelnianie dwuskładnikowe umożliwia udostępnienie dodatkowego zabezpieczenia. Wpisz numer telefonu komórkowego, aby kontynuować pracę w {{productName}}. Numer telefonu komórkowego należy wprowadzić przy użyciu międzynarodowego formatu z kodem kraju.",
   "PortalContinueTitle": "Potwierdź, że chcesz reaktywować {{productName}}.",
@@ -30,5 +32,6 @@
   "SignUp": "Zarejestruj się",
   "SuccessDeactivate": "Twoje konto zostało dezaktywowane. Za 10 sekund nastąpi przekierowanie na <1>site</1>.",
   "SuccessReactivate": "Twoje konto zostało reaktywowane. Za 10 sekund nastąpi przekierowanie do <1>portal</1>.",
-  "SuccessRemoved": "Twoje konto zostało usunięte. Za 10 sekund nastąpi przekierowanie na <1>site</1>."
+  "SuccessRemoved": "Twoje konto zostało usunięte. Za 10 sekund nastąpi przekierowanie na <1>site</1>.",
+  "TermsAndConditions": "Kontynuując, użytkownik potwierdza, że rozumie i wyraża zgodę na warunki naszego <1>Regulaminu użytkowania</1> oraz <2>Polityki prywatności</2>."
 }

@@ -26,15 +26,21 @@
 
 import { createContext, ReactNode, useMemo } from "react";
 
-import { TFilesSettings } from "../../../api/files/types";
-import { TGetIcon } from "../FilesSelector.types";
+import type { TFilesSettings } from "../../../api/files/types";
+import type { TGetIcon } from "../FilesSelector.types";
 import useFilesSettings from "../hooks/useFilesSettings";
 
 export const SettingsContext = createContext<{
   getIcon: (fileExst: string) => string;
   filesSettingsLoading: boolean;
   extsWebEdited: string[];
-}>({ getIcon: () => "", extsWebEdited: [], filesSettingsLoading: false });
+  displayFileExtension: boolean;
+}>({
+  getIcon: () => "",
+  extsWebEdited: [],
+  filesSettingsLoading: false,
+  displayFileExtension: false,
+});
 
 export const SettingsContextProvider = ({
   settings,
@@ -45,18 +51,23 @@ export const SettingsContextProvider = ({
   getIcon?: TGetIcon;
   children: ReactNode;
 }) => {
-  const { getIcon, extsWebEdited, isLoading } = useFilesSettings(
-    getIconProp,
-    settings,
-  );
+  const { getIcon, extsWebEdited, isLoading, displayFileExtension } =
+    useFilesSettings(getIconProp, settings);
+
+  let displayExts = displayFileExtension;
+
+  if (window.DocSpace && "displayFileExtension" in window.DocSpace) {
+    displayExts = window.DocSpace.displayFileExtension as boolean;
+  }
 
   const value = useMemo(
     () => ({
       getIcon,
       extsWebEdited: extsWebEdited ?? [],
       filesSettingsLoading: isLoading,
+      displayFileExtension: displayExts,
     }),
-    [getIcon, extsWebEdited, isLoading],
+    [getIcon, extsWebEdited, isLoading, displayExts],
   );
 
   return (

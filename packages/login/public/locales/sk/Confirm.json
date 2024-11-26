@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Zadajte 6-miestny kód vygenerovaný z vašej aplikácie. Ak nemáte prístup k telefónu, použite záložné kódy.",
   "EnterAppCodeTitle": "Zadajte kód z aplikácie na overenie totožnosti",
   "EnterCodePlaceholder": "Zadajte kód",
+  "EnterEmailHeader": "Zadajte e-mail",
   "EnterPhone": "Zadajte číslo mobilného telefónu",
   "GetCode": "Získať kód",
   "LoginRegistryButton": "Pripojiť",
+  "Newsletter": "Chcem sa prihlásiť na odber noviniek od {{organizationName}}",
   "PassworResetTitle": "Teraz si môžete vytvoriť nové heslo.",
   "PhoneSubtitle": "Dvojfaktorové overenie je povolené na zabezpečenie dodatočnej bezpečnosti. Ak chcete pokračovať v práci v {{productName}}, zadajte číslo svojho mobilného telefónu. Číslo mobilného telefónu musí byť zadané v medzinárodnom formáte s kódom krajiny.",
   "PortalContinueTitle": "Potvrďte, že chcete znova aktivovať svoj {{productName}}.",
@@ -30,5 +32,6 @@
   "SignUp": "Zaregistrujte sa",
   "SuccessDeactivate": "Váš účet bol úspešne deaktivovaný. Po 10 sekundách budete presmerovaní na <1>webovú stránku</1>.",
   "SuccessReactivate": "Váš účet bol úspešne znovu aktivovaný. Po 10 sekundách budete presmerovaní do <1>priestoru</1>.",
-  "SuccessRemoved": "Váš účet bol úspešne odstránený. O 10 sekúnd budete presmerovaní na <1>webovú stránku</1>."
+  "SuccessRemoved": "Váš účet bol úspešne odstránený. O 10 sekúnd budete presmerovaní na <1>webovú stránku</1>.",
+  "TermsAndConditions": "Pokračovaním beriete na vedomie a súhlasíte s našimi <1>Všeobecnými obchodnými podmienkami</1> a <2>Vyhlásením o ochrane osobných údajov</2>."
 }

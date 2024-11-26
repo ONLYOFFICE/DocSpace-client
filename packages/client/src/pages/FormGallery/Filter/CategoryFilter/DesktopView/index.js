@@ -45,7 +45,10 @@ const CategoryFilterDesktop = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onOpenDropdown = () => setIsOpen(true);
-  const onCloseDropdown = () => setIsOpen(false);
+  const onCloseDropdown = () => {
+    setIsOpen(false);
+    setHoveredSub(null);
+  };
 
   const onBackdropClick = (e) => {
     if (
@@ -82,6 +85,7 @@ const CategoryFilterDesktop = ({
         disableItemClick={false}
         isDefaultMode={false}
         fixedDirection={true}
+        disableItemClickFirstLevel={true}
         advancedOptionsCount={5}
         selectedOption={{
           label:
@@ -104,10 +108,9 @@ const CategoryFilterDesktop = ({
                 id={item.key}
                 key={item.key}
                 title={item.label}
-                className={`item-by-${item.key}`}
+                className={`item-by-${item.key} item-by-first-level`}
                 label={item.label}
                 onMouseEnter={() => setHoveredSub(item.key)}
-                onMouseLeave={() => setHoveredSub(null)}
                 isSubMenu
               />
             ))}

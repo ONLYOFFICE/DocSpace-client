@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled from "styled-components";
-import Base from "@docspace/shared/themes/base";
 
-const StyledAccessSelector = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledAccessSelector = styled.div.attrs(injectDefaultTheme)`
   margin-inline-end: 16px;
 `;
-
-StyledAccessSelector.defaultProps = { theme: Base };
 
 export default StyledAccessSelector;

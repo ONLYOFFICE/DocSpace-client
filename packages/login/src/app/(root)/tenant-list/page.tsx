@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
 
-import { GreetingLoginContainer } from "@/components/GreetingContainer";
-import { getSettings } from "@/utils/actions";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
+
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { getSettings } from "@/utils/actions";
 
 import TenantList from "./page.client";
 
@@ -14,7 +15,7 @@ export default async function Page({
 }) {
   const settings = await getSettings();
 
-  const { portals } = JSON.parse(searchParams.portals);
+  // const { portals } = JSON.parse(searchParams.portals);
   const clientId = searchParams.clientId;
 
   const isRegisterContainerVisible =
@@ -36,11 +37,7 @@ export default async function Page({
               greetingSettings={settings?.greetingSettings}
               culture={culture}
             />
-            <TenantList
-              portals={portals}
-              clientId={clientId}
-              baseDomain={settings.baseDomain}
-            />
+            <TenantList clientId={clientId} baseDomain={settings.baseDomain} />
           </>
         </ColorTheme>
       )}

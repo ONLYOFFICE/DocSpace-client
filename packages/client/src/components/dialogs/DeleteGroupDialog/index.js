@@ -31,7 +31,6 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const DeleteGroupDialog = (props) => {
   const {
@@ -75,11 +74,7 @@ const DeleteGroupDialog = (props) => {
   };
 
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>
         {hasMoreGroups
           ? t("DeleteDialog:DeleteAllGroupsTitle")
@@ -117,7 +112,7 @@ const DeleteGroupDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

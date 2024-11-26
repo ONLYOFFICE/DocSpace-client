@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "O limite foi atingido para o número de salas: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "O limite de espaço de armazenamento e o número de salas está prestes a ser excedido",
   "StorageAndRoomLimitHeader": "O limite foi atingido para o espaço de armazenamento e o número de salas",
-  "StorageAndUserHeader": "Os limites de armazenamento e administradores/usuários avançados estão prestes a ser excedidos.",
-  "StorageAndUserTariffLimitHeader": "O limite foi atingido para o espaço de armazenamento e o número de administradores/usuários avançados",
+  "StorageAndUserHeader": "Os limites de armazenamento e administradores estão prestes a ser excedidos.",
+  "StorageAndUserTariffLimitHeader": "O limite foi atingido para o espaço de armazenamento e o número de administradores",
   "StorageLimitHeader": "O limite foi atingido para o espaço de armazenamento: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "A quantidade de espaço de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Você pode remover os arquivos desnecessários ou alterar a cota nas <1>Configurações de gerenciamento de armazenamento.</1>",
-  "UserQuotaHeader": "O número de administradores/usuários avançados está prestes a ser excedido: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Quando o limite for atingido, todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores/usuários avançados, entre em contato com o administrador do {{productName}} para atualizar o plano tarifário.",
-  "UserTariffAlmostReachedForAdmins": "Quando o limite for atingido, todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores/usuários avançados, <1>clique aqui</1> para atualizar seu plano tarifário.",
-  "UserTariffLimitHeader": "O limite é atingido para o número de administradores/usuários avançados: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores/usuários avançados, entre em contato com o administrador do {{productName}} para atualizar o plano tarifário.",
-  "UserTariffReachedForAdmins": "Todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores/usuários avançados, <1>clique aqui</1> para atualizar seu plano tarifário."
+  "UserQuotaHeader": "O número de administradores está prestes a ser excedido: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Quando o limite for atingido, todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores, entre em contato com o administrador do {{productName}} para atualizar o plano tarifário.",
+  "UserTariffAlmostReachedForAdmins": "Quando o limite for atingido, todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores, <1>clique aqui</1> para atualizar seu plano tarifário.",
+  "UserTariffLimitHeader": "O limite é atingido para o número de administradores: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores, entre em contato com o administrador do {{productName}} para atualizar o plano tarifário.",
+  "UserTariffReachedForAdmins": "Todos os usuários serão adicionados somente com permissões de Usuário. Para poder adicionar mais administradores, <1>clique aqui</1> para atualizar seu plano tarifário."
 }

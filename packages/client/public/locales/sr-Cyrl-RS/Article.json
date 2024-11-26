@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Фајлови нису учитани: {{count}}",
   "FilesUploaded": "Датотеке отпремљене",
   "Upload": "Отпреми",
   "UploadFiles": "Отпреми датотеке",

@@ -25,20 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledTableRow = styled(TableRow)`
+const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
   .session-platform {
     font-weight: 600;
     margin-inline-end: 5px;
@@ -66,8 +65,6 @@ const StyledTableRow = styled(TableRow)`
     justify-content: flex-end;
   }
 `;
-
-StyledTableRow.defaultProps = { theme: Base };
 
 const SessionsTableRow = (props) => {
   const {

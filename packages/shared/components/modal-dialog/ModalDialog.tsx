@@ -33,10 +33,10 @@ import { Portal } from "../portal";
 import { Modal } from "./sub-components/Modal";
 
 import {
+  getCurrentDisplayType,
   handleTouchMove,
   handleTouchStart,
   parseChildren,
-  getCurrentDisplayType,
 } from "./ModalDialog.utils";
 import {
   MODAL_DIALOG_BODY_NAME,
@@ -80,13 +80,16 @@ const ModalDialog = ({
   embedded,
   withForm,
   blur,
+  withFooterBorder,
   zIndex = 310,
   isLarge = false,
+  isHuge = false,
   isLoading = false,
   isCloseable = true,
   withBodyScroll = false,
-  withFooterBorder = false,
   containerVisible = false,
+  withoutPadding = false,
+  hideContent = false,
 
   ...rest
 }: ModalDialogProps) => {
@@ -128,8 +131,6 @@ const ModalDialog = ({
     window.addEventListener("touchmove", onSwipe);
     window.addEventListener("touchend", onSwipeEnd);
     return () => {
-      returnWindowPositionAfterKeyboard();
-
       window.removeEventListener("resize", onResize);
       window.removeEventListener("keyup", onKeyPress);
       window.removeEventListener("touchstart", handleTouchStart);
@@ -137,6 +138,12 @@ const ModalDialog = ({
       window.addEventListener("touchend", onSwipeEnd);
     };
   }, [displayType, displayTypeDetailed, onClose, onCloseEvent, visible]);
+
+  useEffect(() => {
+    return () => {
+      returnWindowPositionAfterKeyboard();
+    };
+  }, []);
 
   const [header, body, footer, container] = parseChildren(
     children,
@@ -159,10 +166,13 @@ const ModalDialog = ({
           withBodyScroll={withBodyScroll}
           isScrollLocked={isScrollLocked}
           isLarge={isLarge || false}
+          isHuge={isHuge || false}
           zIndex={zIndex}
           autoMaxHeight={autoMaxHeight}
           autoMaxWidth={autoMaxWidth}
-          withFooterBorder={withFooterBorder || false}
+          withFooterBorder={
+            withFooterBorder ?? displayType === ModalDialogType.aside
+          }
           onClose={onCloseEvent}
           isLoading={isLoading}
           header={header}
@@ -175,6 +185,8 @@ const ModalDialog = ({
           isCloseable={isCloseable && !embedded}
           embedded={embedded}
           blur={blur}
+          withoutPadding={withoutPadding}
+          hideContent={hideContent}
           {...rest}
         />
       }

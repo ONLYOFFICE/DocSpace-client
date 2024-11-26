@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 
-import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
+import DeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { DeviceType } from "../../../enums";

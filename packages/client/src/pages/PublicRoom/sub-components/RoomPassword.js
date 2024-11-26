@@ -42,8 +42,14 @@ import { ValidationStatus } from "@docspace/shared/enums";
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
 const RoomPassword = (props) => {
-  const { t, roomKey, validatePublicRoomPassword, setRoomData, roomTitle } =
-    props;
+  const {
+    t,
+    roomKey,
+    validatePublicRoomPassword,
+    setRoomData,
+    roomTitle,
+    gotoFolder,
+  } = props;
 
   console.log("render");
 
@@ -86,6 +92,10 @@ const RoomPassword = (props) => {
 
       switch (res?.status) {
         case ValidationStatus.Ok: {
+          if (res.shared) {
+            return gotoFolder(res);
+          }
+
           setRoomData(res); // Ok
           return;
         }
@@ -191,12 +201,14 @@ const RoomPassword = (props) => {
 };
 
 export default inject(({ publicRoomStore }) => {
-  const { validatePublicRoomPassword, setRoomData } = publicRoomStore;
+  const { validatePublicRoomPassword, setRoomData, gotoFolder } =
+    publicRoomStore;
   const { roomTitle } = publicRoomStore;
 
   return {
     validatePublicRoomPassword,
     setRoomData,
     roomTitle,
+    gotoFolder,
   };
 })(withTranslation(["Common", "UploadPanel"])(observer(RoomPassword)));

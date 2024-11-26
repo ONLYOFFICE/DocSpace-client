@@ -25,12 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-export const StyledModalDialog = styled(ModalDialog)`
-  .modal-body {
-    padding: 0;
-  }
+import { Text } from "@docspace/shared/components/text";
+
+export const StyledHeaderText = styled(Text)`
+  margin-inline-end: 16px;
+`;
+
+export const StyledBodyContent = styled.div`
+  height: 100%;
 
   .search-input {
     margin: 16px 16px 12px;

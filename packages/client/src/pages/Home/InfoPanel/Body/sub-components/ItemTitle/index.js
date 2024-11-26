@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import AccountsItemTitle from "./AccountsItemTitle";
+import UsersItemTitle from "./UsersItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
 import GroupsItemTitle from "./GroupsItemTitle";
@@ -35,7 +35,9 @@ const ItemTitle = ({
   infoPanelSelection,
   gallerySelected,
   isNoItem,
-  isPeople,
+  isUsers,
+  isGuests,
+  isInsideGroup,
   isGroups,
   isGallery,
   isSeveralItems,
@@ -43,14 +45,17 @@ const ItemTitle = ({
   currentColorScheme,
   getIcon,
   getUserContextOptions,
+  setCalendarDay,
+  roomsView,
   getGroupContextOptions,
+  isVDR,
 }) => {
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
 
-  if (isPeople)
+  if (isUsers || isInsideGroup || isGuests)
     return (
-      <AccountsItemTitle
+      <UsersItemTitle
         infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}
@@ -77,16 +82,29 @@ const ItemTitle = ({
       />
     );
 
-  return <RoomsItemHeader />;
+  const openHistory = isVDR && roomsView === "info_history";
+  return (
+    <RoomsItemHeader
+      openHistory={openHistory}
+      setCalendarDay={setCalendarDay}
+    />
+  );
 };
 
 export default inject(
-  ({ settingsStore, filesSettingsStore, peopleStore, oformsStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    peopleStore,
+    oformsStore,
+    infoPanelStore,
+  }) => {
     const { currentColorScheme } = settingsStore;
     const { getIcon } = filesSettingsStore;
     const { getUserContextOptions } = peopleStore.contextOptionsStore;
     const { getGroupContextOptions } = peopleStore.groupsStore;
     const { gallerySelected } = oformsStore;
+    const { roomsView, setCalendarDay } = infoPanelStore;
 
     return {
       currentColorScheme,
@@ -94,6 +112,8 @@ export default inject(
       getUserContextOptions,
       getGroupContextOptions,
       getIcon,
+      roomsView,
+      setCalendarDay,
     };
   },
 )(observer(ItemTitle));

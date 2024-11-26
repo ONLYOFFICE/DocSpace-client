@@ -24,7 +24,5 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const INDEX_NOT_FOUND = -1;
-
 export const OFFSET_RIGHT = 48;
 export const OFFSET_LEFT = 48;

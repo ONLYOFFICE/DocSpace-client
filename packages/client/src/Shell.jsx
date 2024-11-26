@@ -33,6 +33,10 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
+import SocketHelper, {
+  SocketEvents,
+  SocketCommands,
+} from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -57,7 +61,7 @@ import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
 
-// import ReactSmartBanner from "./components/SmartBanner";
+import ReactSmartBanner from "./components/SmartBanner";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -68,7 +72,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     language,
     FirebaseHelper,
     setCheckedMaintenance,
-    socketHelper,
     setPreparationPortalDialogVisible,
     isBase,
     setTheme,
@@ -89,6 +92,12 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
+    setShowGuestReleaseTip,
+
+    isOwner,
+    isAdmin,
+    releaseDate,
+    registrationDate,
   } = rest;
 
   const theme = useTheme();
@@ -98,16 +107,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
-
-  useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname)) {
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-    }
-  }, []);
 
   useEffect(() => {
     try {
@@ -133,12 +132,26 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    socketHelper.on("restore-backup", () => {
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
+    });
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+  }, [userId]);
+
+  useEffect(() => {
+    const callback = () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
@@ -152,40 +165,36 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
-    });
+    };
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "quota" },
-    });
+    return () => {
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+    };
+  }, [setPreparationPortalDialogVisible]);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "QUOTA", individual: true },
-    });
-
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: userId },
-    });
-
-    socketHelper.on("s:logout-session", (loginEventId) => {
+  useEffect(() => {
+    const callback = (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+        sessionStorage.setItem("loggedOutUserId", userId);
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
-  }, [
-    socketHelper,
-    userLoginEventId,
-    setPreparationPortalDialogVisible,
-    userId,
-  ]);
+    };
 
-  const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId]);
+
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -278,7 +287,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
-        targetDate: targetDate,
+        targetDate,
         productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
@@ -433,11 +442,36 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (isFrame) return setShowGuestReleaseTip(false);
+
+    if (!releaseDate || !registrationDate) return;
+
+    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
+
+    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
+
+    if (closed) return setShowGuestReleaseTip(false);
+
+    const regDate = new Date(registrationDate).getTime();
+    const release = new Date(releaseDate).getTime();
+
+    setShowGuestReleaseTip(regDate < release);
+  }, [
+    isFrame,
+    userId,
+    setShowGuestReleaseTip,
+    isAdmin,
+    isOwner,
+    releaseDate,
+    registrationDate,
+  ]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
     currentDeviceType === DeviceType.mobile ? (
-      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+      <Portal element={<Toast />} appendTo={rootElement} visible />
     ) : (
       <Toast />
     );
@@ -448,16 +482,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu ||
     location.pathname === "/access-restricted";
 
+  const isMobileOnly = currentDeviceType === DeviceType.mobile;
+
   return (
     <Layout>
       {toast}
-      {/* <ReactSmartBanner t={t} ready={ready} /> */}
+      {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
+        {!isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
         {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />
@@ -496,13 +533,14 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setSnackbarExist,
-      socketHelper,
       setTheme,
       currentDeviceType,
       isFrame,
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
+      setShowGuestReleaseTip,
+      buildVersionInfo,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -549,7 +587,6 @@ const ShellWrapper = inject(
       FirebaseHelper: firebaseHelper,
       setCheckedMaintenance,
       setMaintenanceExist,
-      socketHelper,
       setPreparationPortalDialogVisible,
       isBase,
       setTheme,
@@ -558,6 +595,10 @@ const ShellWrapper = inject(
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
+      isOwner: userStore?.user?.isOwner,
+      isAdmin: userStore?.user?.isAdmin,
+      registrationDate: userStore?.user?.registrationDate,
+
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
@@ -567,6 +608,8 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
+      setShowGuestReleaseTip,
+      releaseDate: buildVersionInfo.releaseDate,
     };
   },
 )(observer(Shell));

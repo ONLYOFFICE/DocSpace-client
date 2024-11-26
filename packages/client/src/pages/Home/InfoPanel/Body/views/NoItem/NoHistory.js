@@ -31,7 +31,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const NoHistory = ({ t, theme }) => {
   const imageSrc = theme.isBase

@@ -29,7 +29,6 @@ import { redirect } from "next/navigation";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { GreetingContainer } from "@/components/GreetingContainer";
 import {
   getMachineName,
   getPortalPasswordSettings,
@@ -40,11 +39,15 @@ import {
 } from "@/utils/actions";
 
 import WizardForm from "./page.client";
+import WizardGreeting from "@/components/WizardGreeting/index.client";
 
 async function Page() {
+  console.log("start wizzard requests");
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  console.log("wizzard token", objectSettings?.wizardToken);
 
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
@@ -67,10 +70,7 @@ async function Page() {
   return (
     <ColorTheme themeId={ThemeId.LinkForgotPassword}>
       <>
-        <GreetingContainer
-          greetingSettings={objectSettings?.greetingSettings}
-          welcomeTitle="Wizard:WelcomeTitle"
-        />
+        <WizardGreeting />
         <FormWrapper id="wizard-form">
           <WizardForm
             passwordSettings={passwordSettings}
@@ -80,8 +80,11 @@ async function Page() {
             portalTimeZones={portalTimeZones}
             licenseUrl={objectSettings?.licenseUrl}
             culture={objectSettings?.culture}
+            forumLink={objectSettings?.forumLink}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
+            documentationEmail={objectSettings?.documentationEmail}
+            isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>
       </>

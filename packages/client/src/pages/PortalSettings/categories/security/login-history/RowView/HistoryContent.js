@@ -51,7 +51,6 @@ const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
-    width: min-content;
   }
 
   .date-text {

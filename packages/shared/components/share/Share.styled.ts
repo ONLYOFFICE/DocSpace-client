@@ -51,6 +51,10 @@ const StyledLinks = styled.div`
   }
 `;
 
+const Strong = styled.strong`
+  font-weight: 600;
+`;
+
 const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   display: flex;
   gap: 8px;
@@ -112,6 +116,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
       `};
   }
 
+  .link-options-title-room {
+    margin-inline-start: 0px;
+  }
+
   .expired-options {
     padding: 0px;
 
@@ -131,6 +139,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   .expire-text {
     margin-inline-start: 8px;
     color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  .expire-text-room {
+    margin-inline-start: 0px;
   }
 
   .link-actions {
@@ -187,4 +199,4 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown };
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };

@@ -11,7 +11,6 @@
   "EnterSecretKey": "Saisir la clé secrète",
   "EnterUrl": "Saisir l'URL",
   "EnterWebhookName": "Saisir le nom du webhook",
-  "EventHint": "Les livraisons sont automatiquement supprimées après 15 jours",
   "EventID": "Identifiant de l'événement",
   "FailedToConnect": "Nous n'avons pas pu délivrer cette commande : la connexion à l'hôte a échoué.",
   "From": "De",

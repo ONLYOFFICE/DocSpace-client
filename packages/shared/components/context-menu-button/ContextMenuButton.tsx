@@ -29,7 +29,7 @@ import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";
 import { isTablet as Tablet } from "react-device-detect";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { desktop, isTablet, isMobile } from "../../utils";
 
@@ -50,37 +50,37 @@ import { ContextMenuButtonProps } from "./ContextMenuButton.types";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 
 const ContextMenuButtonPure = ({
-  opened,
-  data,
+  opened = false,
+  data = [],
   displayType = ContextMenuButtonDisplayType.dropdown,
   onClose,
-  isDisabled,
+  isDisabled = false,
   getData,
   onClick,
   className,
   iconOpenName,
   id,
   style,
-  displayIconBorder,
+  displayIconBorder = false,
   iconClassName,
   color,
   hoverColor,
   clickColor,
-  size,
+  size = 16,
   iconHoverName,
   iconClickName,
-  isFill,
+  isFill = true,
   onMouseEnter,
   onMouseLeave,
   onMouseOut,
   onMouseOver,
-  title,
+  title = "",
   dropDownClassName,
-  directionX,
+  directionX = "left",
   directionY,
   columnCount,
   zIndex,
-  usePortal,
+  usePortal = true,
   asideHeader,
   iconName = VerticalDotsReactSvgUrl,
 }: ContextMenuButtonProps) => {
@@ -338,19 +338,6 @@ const ContextMenuButtonPure = ({
       )}
     </StyledOuter>
   );
-};
-
-ContextMenuButtonPure.defaultProps = {
-  opened: false,
-  data: [],
-  title: "",
-  size: 16,
-  isDisabled: false,
-  directionX: "left",
-  isFill: true,
-
-  usePortal: true,
-  displayIconBorder: false,
 };
 
 export { ContextMenuButtonPure };

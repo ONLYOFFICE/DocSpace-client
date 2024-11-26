@@ -26,29 +26,26 @@
 
 import React from "react";
 import { useId } from "../../../utils";
-import { StyledTrack } from "../Loader.styled";
+import TrackTheme from "../Loader.theme";
+import { LoaderProps } from "../Loader.types";
 
-const Track = ({
-  size,
-  color = "",
-  label,
-  primary,
-}: {
-  size?: string;
-  color?: string;
-  label?: string;
-  primary?: boolean;
-}) => {
+const Track = React.forwardRef<
+  SVGSVGElement,
+  React.PropsWithChildren<LoaderProps>
+>((props, ref) => {
   const id = useId();
+  const { size, color = "", label, primary, isDisabled = false } = props;
 
   return (
-    <StyledTrack
+    <TrackTheme
+      ref={ref}
       viewBox="-10 -10 220 220"
       xmlns="http://www.w3.org/2000/svg"
       size={size}
       color={color}
       primary={primary}
       aria-label={label}
+      isDisabled={isDisabled}
     >
       <defs>
         <linearGradient
@@ -202,8 +199,9 @@ const Track = ({
           />
         </path>
       </g>
-    </StyledTrack>
+    </TrackTheme>
   );
-};
+});
 
+Track.displayName = "Track";
 export { Track };

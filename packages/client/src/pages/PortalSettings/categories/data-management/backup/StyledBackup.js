@@ -57,7 +57,6 @@ const commonStyles = css`
     }
     .link-learn-more {
       display: inline-block;
-      margin-bottom: 20px;
       font-weight: 600;
     }
   }
@@ -216,6 +215,7 @@ const StyledAutoBackup = styled.div`
   }
   .backup_toggle-wrapper {
     display: flex;
+    margin-top: 20px;
     margin-bottom: 16px;
     border-radius: 6px;
     background-color: ${(props) =>
@@ -238,7 +238,7 @@ const StyledAutoBackup = styled.div`
     }
   }
 
-  ${(props) => !props.isEnableAuto && UnavailableStyles}
+  ${(props) => props.pageIsDisabled && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`
   .backup_storages-buttons {
@@ -344,11 +344,13 @@ const StyledRestoreBackup = styled.div`
   ${(props) => !props.isEnableRestore && UnavailableStyles}
 `;
 const StyledModules = styled.div`
+  margin-top: 20px;
   margin-bottom: 24px;
+
   .backup-description {
-    ${(props) => props.isDisabled && `color: ${globalColors.gray};`};
     margin-inline-start: 25px;
     max-width: 700px;
+    color: ${(props) => props.isDisabled && props.theme.text.disableColor};
   }
 `;
 

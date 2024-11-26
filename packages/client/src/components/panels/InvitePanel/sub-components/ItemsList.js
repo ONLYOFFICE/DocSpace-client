@@ -33,9 +33,16 @@ import Item from "./Item";
 
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
-const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualList
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -46,6 +53,7 @@ const Row = memo(({ data, index, style }) => {
     setHasErrors,
     roomType,
     isOwner,
+    isAdmin,
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
@@ -57,28 +65,24 @@ const Row = memo(({ data, index, style }) => {
   const item = inviteItems[index];
 
   return (
-    <StyledRow
+    <Item
+      t={t}
+      item={item}
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-    >
-      <Item
-        t={t}
-        item={item}
-        theme={theme}
-        setInviteItems={setInviteItems}
-        changeInviteItem={changeInviteItem}
-        inviteItems={inviteItems}
-        setHasErrors={setHasErrors}
-        roomType={roomType}
-        isOwner={isOwner}
-        inputsRef={inputsRef}
-        setIsOpenItemAccess={setIsOpenItemAccess}
-        isMobileView={isMobileView}
-        standalone={standalone}
-      />
-    </StyledRow>
+      theme={theme}
+      setInviteItems={setInviteItems}
+      changeInviteItem={changeInviteItem}
+      inviteItems={inviteItems}
+      setHasErrors={setHasErrors}
+      roomType={roomType}
+      isOwner={isOwner}
+      isAdmin={isAdmin}
+      inputsRef={inputsRef}
+      setIsOpenItemAccess={setIsOpenItemAccess}
+      isMobileView={isMobileView}
+      standalone={standalone}
+    />
   );
 });
 
@@ -90,6 +94,7 @@ const ItemsList = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   externalLinksVisible,
   scrollAllPanelContent,
   inputsRef,
@@ -120,7 +125,7 @@ const ItemsList = ({
           listAreaHeight,
           isOpenItemAccess ? heightWitchOpenItemAccess : 0,
         )
-      : heightList - FOOTER_HEIGHT;
+      : heightList;
 
     const finalHeight = scrollAllPanelContent
       ? isOpenItemAccess
@@ -180,13 +185,14 @@ const ItemsList = ({
           setHasErrors,
           roomType,
           isOwner,
+          isAdmin,
           inputsRef,
           setIsOpenItemAccess,
           isMobileView,
           t,
           standalone,
         }}
-        outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
+        outerElementType={!scrollAllPanelContent && VirtualScroll}
       >
         {Row}
       </List>
@@ -196,7 +202,7 @@ const ItemsList = ({
 
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner } = userStore.user;
+  const { isOwner, isAdmin } = userStore.user;
   const { theme, standalone } = settingsStore;
 
   return {
@@ -204,6 +210,7 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     inviteItems,
     changeInviteItem,
     isOwner,
+    isAdmin,
     standalone,
     theme,
   };

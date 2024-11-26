@@ -29,6 +29,7 @@ import { headers } from "next/headers";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
+import { getStringFromSearchParams } from "@/utils";
 
 import ActivateUserForm from "./page.client";
 
@@ -38,13 +39,14 @@ type ActivationProps = {
 
 async function Page({ searchParams }: ActivationProps) {
   const type = searchParams.type;
+  const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
   const [settings, passwordSettings] = await Promise.all([
     getSettings(),
-    getPortalPasswordSettings(),
+    getPortalPasswordSettings(confirmKey),
   ]);
 
   return (

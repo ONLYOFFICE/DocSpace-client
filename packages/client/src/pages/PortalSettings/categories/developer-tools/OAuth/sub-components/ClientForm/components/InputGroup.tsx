@@ -15,7 +15,7 @@ interface InputGroupProps {
 
   name: string;
   value: string;
-  placeholder: string;
+  placeholder?: string;
 
   error: string;
 

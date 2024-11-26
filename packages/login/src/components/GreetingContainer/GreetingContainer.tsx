@@ -29,20 +29,17 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { GreetingContainersProps } from "@/types";
-
 export const GreetingContainer = ({
-  greetingSettings,
-  welcomeTitle,
-}: GreetingContainersProps) => {
-  const { t } = useTranslation(["Wizard", "Login", "Confirm"]);
+  greetingText,
+}: {
+  greetingText?: string | undefined;
+}) => {
   const theme = useTheme();
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
@@ -50,16 +47,14 @@ export const GreetingContainer = ({
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      {(welcomeTitle || greetingSettings) && (
+      {greetingText && (
         <Text
           fontSize="23px"
           fontWeight={700}
           textAlign="center"
           className="greeting-title"
         >
-          {welcomeTitle
-            ? t(`${welcomeTitle}`, { productName: t("Common:ProductName") })
-            : greetingSettings}
+          {greetingText}
         </Text>
       )}
     </>

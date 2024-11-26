@@ -28,8 +28,7 @@ import styled, { css } from "styled-components";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
 export const CategoryFilterMobileWrapper = styled.div`
   width: 100%;
@@ -78,7 +77,9 @@ export const CategoryFilterMobile = styled(DropDown)`
   }
 `;
 
-export const CategoryFilterItemMobile = styled(DropDownItem)`
+export const CategoryFilterItemMobile = styled(DropDownItem).attrs(
+  injectDefaultTheme,
+)`
   width: 100%;
   height: 36px;
   box-sizing: border-box;
@@ -111,8 +112,6 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
       `}
   }
 `;
-
-CategoryFilterItemMobile.defaultProps = { theme: Base };
 
 export const StyledSubItemMobile = styled(DropDownItem)`
   padding-inline-start: 28px;

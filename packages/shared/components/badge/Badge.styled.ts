@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme, TTheme } from "../../themes";
-import { tablet } from "../../utils";
+import { TColorScheme, TTheme } from "../../themes";
+import { injectDefaultTheme, tablet } from "../../utils";
 
 import { Text } from "../text";
 import { BadgeProps } from "./Badge.types";
@@ -55,7 +55,7 @@ const noBorderCss = css`
   border-radius: 6px;
 `;
 
-const StyledBadge = styled.div<BadgeProps>`
+const StyledBadge = styled.div.attrs(injectDefaultTheme)<BadgeProps>`
   display: ${(props) => (props.label || props.label !== "0" ? "flex" : "none")};
   align-items: center;
   justify-content: center;
@@ -85,9 +85,8 @@ const StyledBadge = styled.div<BadgeProps>`
     ${({ isVersionBadge }) => isVersionBadge && `width: auto;`}
   }
 `;
-StyledBadge.defaultProps = { theme: Base };
 
-const StyledInner = styled.div<{
+const StyledInner = styled.div.attrs(injectDefaultTheme)<{
   backgroundColor?: string;
   borderRadius?: string;
   maxWidth?: string;
@@ -116,15 +115,13 @@ const StyledInner = styled.div<{
   ${(props) => props.type === "high" && highCss}
 `;
 
-StyledInner.defaultProps = { theme: Base };
-
-const StyledText = styled(Text)<{ borderRadius?: string }>`
+const StyledText = styled(Text).attrs(injectDefaultTheme)<{
+  borderRadius?: string;
+}>`
   color: ${(props) =>
     props.color ? props.color : props.theme.badge.color} !important;
   border-radius: ${(props) => props.borderRadius};
 `;
-
-StyledText.defaultProps = { theme: Base };
 
 const getDefaultStyles = ({
   $currentColorScheme,

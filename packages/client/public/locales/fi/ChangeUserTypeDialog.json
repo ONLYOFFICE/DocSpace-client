@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}}-osioon ja hänelle osoitetaan käyttäjätyyppi. Käyttäjillä on oma {{documentsSection}}-osio, he voivat luoda ja muokata tiedostoja, mutta eivät voi luoda huoneita.",
+  "ChangeGuestsTypeMessageMulti": "Valitut vieraat siirretään {{membersSection}}-osioon ja heille osoitetaan käyttäjätyyppi. Käyttäjillä on oma {{documentsSection}}-osionsa, he voivat luoda ja muokata tiedostoja, mutta eivät voi luoda huoneita. ",
   "ChangeUserTypeButton": "Vaihda tyyppiä",
   "ChangeUserTypeHeader": "Muuta käyttäjän tyyppiä",
-  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on ’{{firstType}}’, siirretään tyypiksi ’{{secondType}}’.",
-  "ChangeUserTypeMessageMulti": "Valitut käyttäjät siirretään '{{secondType}}.",
+  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{firstType}}’</strong>, siirretään tyypiksi <strong>’{{secondType}}’</strong>.",
+  "ChangeUserTypeMessageMulti": "Valitut käyttäjät siirretään <strong>'{{secondType}}'</strong>.",
   "ChangeUserTypeMessageWarning": "Et voi muuttaa {{productName}}-järjestelmänvalvojien tai omaa tilaasi.",
+  "SuccessChangeGuestType": "Vierastyyppi on onnistuneesti muutettu",
   "SuccessChangeUserType": "Käyttäjän tila muutettu onnistuneesti"
 }

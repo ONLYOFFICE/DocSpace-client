@@ -3,7 +3,7 @@
 *.suo
 *.user
 .vs/
-*-lock.json
+
 **/node_modules/
 **/storybook-static/
 **/dist
@@ -32,3 +32,5 @@ licenses.csv
 
 .idea
 packages/runtime.json
+playwright-report
+common/tests/reports/tests-results.html

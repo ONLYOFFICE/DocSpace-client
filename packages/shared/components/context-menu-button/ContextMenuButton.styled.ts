@@ -26,9 +26,12 @@
 
 import styled, { css } from "styled-components";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledOuter = styled.div<{ displayIconBorder?: boolean }>`
+const StyledOuter = styled.div.attrs(injectDefaultTheme)<{
+  displayIconBorder?: boolean;
+}>`
   display: inline-block;
   position: relative;
   cursor: pointer;
@@ -51,9 +54,8 @@ const StyledOuter = styled.div<{ displayIconBorder?: boolean }>`
       }
     `}
 `;
-StyledOuter.defaultProps = { theme: Base };
 
-const StyledContent = styled.div`
+const StyledContent = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   position: relative;
   width: ${(props) => props.theme.contextMenuButton.content.width};
@@ -71,17 +73,15 @@ const StyledContent = styled.div`
       props.theme.contextMenuButton.headerContent.fontWeight} !important;
   }
 `;
-StyledContent.defaultProps = { theme: Base };
 
-// const StyledHeaderContent = styled.div`
+// const StyledHeaderContent = styled.div.attrs(injectDefaultTheme)`
 //   display: flex;
 //   align-items: center;
 //   border-bottom: ${(props) =>
 //     props.theme.contextMenuButton.headerContent.borderBottom};
 // `;
-// StyledHeaderContent.defaultProps = { theme: Base };
 
-const StyledBodyContent = styled.div`
+const StyledBodyContent = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   padding: ${(props) => props.theme.contextMenuButton.bodyContent.padding};
   display: flex;
@@ -99,6 +99,5 @@ const StyledBodyContent = styled.div`
     margin-top: 50px;
   }
 `;
-StyledBodyContent.defaultProps = { theme: Base };
 
 export { StyledBodyContent, StyledContent, StyledOuter };

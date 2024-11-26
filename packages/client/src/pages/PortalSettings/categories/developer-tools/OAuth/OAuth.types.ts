@@ -1,6 +1,6 @@
+import { DeviceType } from "@docspace/shared/enums";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface OAuthProps {
@@ -12,7 +12,7 @@ export interface OAuthProps {
   fetchClients: () => Promise<void>;
   fetchScopes: () => Promise<void>;
 
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
 
   infoDialogVisible?: boolean;
   previewDialogVisible?: boolean;
@@ -23,4 +23,6 @@ export interface OAuthProps {
 
   isInit: boolean;
   setIsInit: (value: boolean) => void;
+
+  apiOAuthLink: string;
 }

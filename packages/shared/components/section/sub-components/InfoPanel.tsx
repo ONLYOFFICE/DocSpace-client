@@ -83,12 +83,16 @@ const InfoPanel = ({
     );
   };
 
+  const isMobileView =
+    currentDeviceType === DeviceType.mobile ||
+    currentDeviceType === DeviceType.tablet;
+
   return !isVisible ||
     !canDisplay ||
     (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : currentDeviceType === DeviceType.mobile
+    : isMobileView
       ? renderPortalInfoPanel()
       : infoPanelComponent;
 };

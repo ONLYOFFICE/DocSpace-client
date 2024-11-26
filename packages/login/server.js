@@ -30,7 +30,7 @@ const next = require("next");
 
 const dev = process.env.NODE_ENV === "development";
 
-const port = 5011;
+const port = process.env.PORT ?? 5011;
 const hostname = "0.0.0.0";
 
 // when using middleware `hostname` and `port` must be provided below

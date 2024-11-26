@@ -28,10 +28,9 @@
 
 import React from "react";
 import styled from "styled-components";
-import { tablet, mobile } from "../../utils";
-import { Base } from "../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,8 +55,6 @@ const StyledWrapper = styled.div`
     background: transparent !important;
   }
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 interface FormWrapperProps {
   children: React.ReactNode;

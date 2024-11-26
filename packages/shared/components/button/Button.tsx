@@ -38,7 +38,7 @@ const Button = React.forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<ButtonProps>
 >((props, ref) => {
-  const { isLoading, icon, label, primary } = props;
+  const { isLoading, icon, label, primary, isDisabled } = props;
   return (
     <ButtonTheme {...props} ref={ref} data-testid="button">
       {isLoading && (
@@ -49,6 +49,7 @@ const Button = React.forwardRef<
           type={LoaderTypes.track}
           label={label}
           primary={primary || false}
+          isDisabled={isDisabled || false}
         />
       )}
       <div className="button-content not-selectable">

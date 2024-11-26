@@ -44,7 +44,7 @@ export const getBackUrl = (
 
   if (rootFolderType === FolderType.Rooms) {
     if (key) {
-      backUrl = `/rooms/share?key=${key}`;
+      backUrl = `/rooms/share?key=${key}&folder=${folderId}`;
     } else {
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }
@@ -61,8 +61,8 @@ export const getBackUrl = (
     }
   }
 
-  const url = window.location.href;
-  const origin = url.substring(0, url.indexOf("/doceditor"));
+  // const origin = url.substring(0, url.indexOf("/doceditor"));
+  const origin = window.location.origin;
 
   return `${combineUrl(origin, backUrl)}`;
 };
@@ -82,8 +82,9 @@ export const showDocEditorMessage = async (
 };
 
 export const convertDocumentUrl = async (fileId: number | string) => {
-  const convert = await convertFile(fileId, null, true);
-  return convert && convert[0]?.result;
+  const conversionInfo = await convertFile(fileId, null, null, true);
+
+  return conversionInfo && conversionInfo[0]?.result;
 };
 
 export const getDataSaveAs = async (params: string) => {

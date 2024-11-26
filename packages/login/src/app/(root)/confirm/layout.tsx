@@ -60,7 +60,7 @@ export default async function Layout({
 
   const isUserExisted =
     confirmLinkResult?.result == ValidationResult.UserExisted;
-  const isUserUserExcluded =
+  const isUserExcluded =
     confirmLinkResult?.result == ValidationResult.UserExcluded;
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
@@ -72,7 +72,7 @@ export default async function Layout({
     redirect(finalUrl ?? "/");
   }
 
-  if (isUserUserExcluded) {
+  if (isUserExcluded) {
     redirect(objectSettings?.defaultPage ?? "/");
   }
 

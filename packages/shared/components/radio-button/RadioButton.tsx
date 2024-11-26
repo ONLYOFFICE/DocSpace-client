@@ -67,6 +67,7 @@ const RadioButton = ({
   fontSize,
   fontWeight,
   label,
+  autoFocus,
 }: RadioButtonProps) => {
   const [isCheckedState, setIsCheckedState] = React.useState(isChecked);
 
@@ -102,6 +103,7 @@ const RadioButton = ({
         checked={isCheckedState}
         onChange={onChange || onChangeAction}
         disabled={isDisabled}
+        autoFocus={autoFocus}
         {...setClassNameInput}
       />
       <RadiobuttonIcon isChecked={isCheckedState} />

@@ -48,8 +48,8 @@ const Preview = (props) => {
     previewAccent,
     themePreview,
     selectThemeId,
-    withBorder,
-    withTileActions,
+    withBorder = true,
+    withTileActions = true,
     floatingButtonClass,
     colorCheckImg,
   } = props;
@@ -614,11 +614,6 @@ const Preview = (props) => {
       </div>
     </StyledComponent>
   );
-};
-
-Preview.defaultProps = {
-  withBorder: true,
-  withTileActions: true,
 };
 
 export default Preview;

@@ -1,0 +1,9 @@
+{
+  "AllowButton": "Salli",
+  "ConsentDescription": "Käyttäjälle <strong>{{displayName}}</strong> jaettuihin tietoihin sovelletaan <strong>{{nameApp}}</strong>:n <6>tietosuojakäytäntöä</6> ja and <6>käyttöehtoja </6>. Voit peruuttaa tämän suostumuksen million tahansa {{productName}} tilin asetuksissa.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> haluaa saada seuraavat tiedot <strong> {{productName}} tilistäsi </strong>:",
+  "DenyButton": "Kiellä",
+  "NotYou": "Eikö tämä ole tilisi?",
+  "SignedInAs": "Kirjautunut sisään",
+  "ToContinue": "Jatkaaksesi"
+}

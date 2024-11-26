@@ -29,13 +29,15 @@
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
 
-import { Base, globalColors } from "../../themes";
-import { tablet, mobile } from "../../utils";
+import { globalColors } from "../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
 
 import { IconButton } from "../icon-button";
 import { ToastType } from "./Toast.enums";
 
-const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
+const StyledToastContainer = styled(ToastContainer).attrs(injectDefaultTheme)<{
+  $topOffset: number;
+}>`
   z-index: ${(props) => props.theme.toast.zIndex};
   -webkit-transform: translateZ(9999px);
   position: fixed;
@@ -225,11 +227,10 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
     }
   }
 `;
-StyledToastContainer.defaultProps = { theme: Base };
 
 export default StyledToastContainer;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div.attrs(injectDefaultTheme)`
   align-self: start;
   display: flex;
   svg {
@@ -260,9 +261,8 @@ const IconWrapper = styled.div`
     }
   }
 `;
-IconWrapper.defaultProps = { theme: Base };
 
-const StyledDiv = styled.div<{ type: ToastType }>`
+const StyledDiv = styled.div.attrs(injectDefaultTheme)<{ type: ToastType }>`
   margin: 0 15px;
 
   .toast-title {
@@ -283,7 +283,6 @@ const StyledDiv = styled.div<{ type: ToastType }>`
     word-break: break-word;
   }
 `;
-StyledDiv.defaultProps = { theme: Base };
 
 const StyledCloseWrapper = styled.div`
   .closeButton {
@@ -295,14 +294,12 @@ const StyledCloseWrapper = styled.div`
   }
 `;
 
-const StyledIconButton = styled(IconButton)`
+const StyledIconButton = styled(IconButton).attrs(injectDefaultTheme)`
   svg {
     path {
       fill: ${(props) => props.theme.toastr.closeButtonColor};
     }
   }
 `;
-
-StyledIconButton.defaultProps = { theme: Base };
 
 export { StyledCloseWrapper, StyledDiv, IconWrapper, StyledIconButton };

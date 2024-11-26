@@ -18,9 +18,15 @@ const StyledOAuthContainer = styled.div`
 
   margin-bottom: 32px;
 
-  img {
+  .client-logo {
     width: 32px;
     height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+
+    border-radius: 3px;
+
+    object-fit: cover;
   }
 
   .row {
@@ -62,7 +68,7 @@ const OAuthClientInfo = ({
           {t("Common:LoginButton")}
         </Text>
       )}
-      <img src={logo} alt={"client-logo"} />
+      <img src={logo} className="client-logo" alt="client-logo" />
       <Text
         className="row"
         fontWeight={isConsentScreen ? 400 : 600}
@@ -70,22 +76,26 @@ const OAuthClientInfo = ({
         lineHeight="22px"
       >
         {isConsentScreen ? (
-          <Trans t={t} i18nKey={"ConsentSubHeader"} ns="Consent">
-            <Link
-              className={"login-link"}
-              type={LinkType.page}
-              isHovered={false}
-              href={websiteUrl}
-              target={LinkTarget.blank}
-              noHover
-              fontWeight={600}
-              fontSize="16px"
-            >
-              {name}
-            </Link>{" "}
-            would like the ability to access the following data in{" "}
-            <strong>your DocSpace account</strong>:
-          </Trans>
+          <Trans
+            t={t}
+            i18nKey="ConsentSubHeader"
+            ns="Consent"
+            values={{ nameApp: name, productName: t("Common:ProductName") }}
+            components={{
+              1: (
+                <Link
+                  className={"login-link"}
+                  type={LinkType.page}
+                  isHovered={false}
+                  href={websiteUrl}
+                  target={LinkTarget.blank}
+                  noHover
+                  fontWeight={600}
+                  fontSize="16px"
+                />
+              ),
+            }}
+          />
         ) : (
           <>
             {t("Consent:ToContinue")}{" "}

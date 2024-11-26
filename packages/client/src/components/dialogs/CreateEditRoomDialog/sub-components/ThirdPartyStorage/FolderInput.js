@@ -29,11 +29,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Base } from "@docspace/shared/themes";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledFolderInput = styled.div`
+const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -124,7 +124,6 @@ const StyledFolderInput = styled.div`
     }
   }
 `;
-StyledFolderInput.defaultProps = { theme: Base };
 
 const FolderInput = ({
   t,

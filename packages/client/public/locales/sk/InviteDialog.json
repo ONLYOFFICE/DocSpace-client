@@ -1,17 +1,16 @@
 {
   "AddManually": "Pridať ručne",
-  "AddManuallyDescriptionAccounts": "Pozvite nových používateľov do {{productName}} osobne prostredníctvom e-mailu",
-  "AddManuallyDescriptionRoom": "Pridajte existujúcich používateľov {{productName}} do miestnosti tak, že použijete ich mena alebo osobne pozvite nových používateľov prostredníctvom e-mailu",
   "EmailErrorMessage": "Emailová adresa nie je platná. E-mail môžete upraviť dvojitým kliknutím naň.",
   "GroupMaxAvailableRoleWarning": "Skupiny je možné pridať do miestnosti s maximálnou rolou {{roleName}}. Po úspešnom pridaní skupiny však môžete zmeniť rolu jednotlivých používateľov v skupine.",
   "InvitationLanguage": "Jazyk pozvánky",
-  "InviteAccountSearchPlaceholder": "Pozvať ľudí e-mailom",
-  "InviteRoomSearchPlaceholder": "Pozvať ľudí podľa mena alebo e-mailu",
+  "InviteToRoomManuallyInfo": "Pridajte existujúce kontakty {{productName}}. Alebo pozvite nových používateľov osobne cez e-mail. Noví používatelia budú pridaní do vášho zoznamu hostí.",
+  "InviteToRoomSearchPlaceholder": "Vyhľadať a pozvať podľa mena alebo e-mailu",
   "InviteViaLink": "Pozvať cez odkaz",
   "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{productName}}",
   "InviteViaLinkDescriptionRoom": "Vytvorte univerzálny odkaz na autorizáciu v miestnosti",
   "LinkCopySuccess": "Odkaz bol skopírovaný",
   "ResetChange": "Zrušiť zmenu",
   "SendInvitation": "Poslať pozvánku",
+  "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní"
 }

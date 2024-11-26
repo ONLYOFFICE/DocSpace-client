@@ -26,9 +26,9 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "../../utils";
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   width: 100vw;
   height: 100vh;
 
@@ -48,5 +48,3 @@ export const StyledContainer = styled.div`
     top: 35%;
   }
 `;
-
-StyledContainer.defaultProps = { theme: Base };

@@ -82,6 +82,9 @@ export const CompletedFormLayout = styled.div`
   picture {
     margin-bottom: clamp(40px, 8vh, 125px);
     user-select: none;
+    img {
+      height: 44px;
+    }
   }
 
   .link {
@@ -136,7 +139,7 @@ export const CompletedFormLayout = styled.div`
   }
 `;
 
-export const ButtonWrapper = styled.footer<{ isShreFile: boolean }>`
+export const ButtonWrapper = styled.footer<{ isShareFile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,7 +148,7 @@ export const ButtonWrapper = styled.footer<{ isShreFile: boolean }>`
 
   margin-bottom: 24px;
   max-width: 600px;
-  width: ${(props) => (props.isShreFile ? "298px" : "100%;")};
+  width: ${(props) => (props.isShareFile ? "298px" : "100%;")};
 
   @media ${mobile} {
     flex-wrap: wrap;

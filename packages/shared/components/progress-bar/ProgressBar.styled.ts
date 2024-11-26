@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { keyframes } from "styled-components";
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledProgressBarContainer = styled.div`
+const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)`
   .progress-bar_full-text {
     display: block;
     margin-top: 8px;
@@ -43,8 +43,6 @@ const StyledProgressBarContainer = styled.div`
     color: ${(props) => props.theme.progressBar.color.error} !important;
   }
 `;
-
-StyledProgressBarContainer.defaultProps = { theme: Base };
 
 const getLoadingAnimation = (dir: "ltr" | "rtl") => {
   const isRtl = dir === "rtl";
@@ -62,7 +60,9 @@ const getLoadingAnimation = (dir: "ltr" | "rtl") => {
 `;
 };
 
-const StyledProgressBar = styled.div<{ percent: number }>`
+const StyledProgressBar = styled.div.attrs(injectDefaultTheme)<{
+  percent: number;
+}>`
   width: 100%;
   height: 4px;
   overflow: hidden;
@@ -90,7 +90,5 @@ const StyledProgressBar = styled.div<{ percent: number }>`
       2s linear infinite;
   }
 `;
-
-StyledProgressBar.defaultProps = { theme: Base };
 
 export { StyledProgressBarContainer, StyledProgressBar };

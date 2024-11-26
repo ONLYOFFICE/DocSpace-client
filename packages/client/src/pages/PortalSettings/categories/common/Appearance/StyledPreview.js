@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledComponent = styled.div`
+const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   display: inline-flex;
   width: 100%;
 
@@ -338,7 +339,7 @@ const StyledComponent = styled.div`
   }
 `;
 
-const StyledFloatingButton = styled.div`
+const StyledFloatingButton = styled.div.attrs(injectDefaultTheme)`
   bottom: 24px;
   inset-inline-end: 24px;
   width: 48px;
@@ -352,8 +353,6 @@ const StyledFloatingButton = styled.div`
   justify-content: center;
   box-shadow: 0px 12px 40px ${globalColors.popupShadow};
 `;
-
-StyledFloatingButton.defaultProps = { theme: Base };
 
 const IconBox = styled.div`
   display: flex;
@@ -593,7 +592,5 @@ const StyledMobilePreview = styled.div`
     }
   }
 `;
-
-StyledComponent.defaultProps = { theme: Base };
 
 export { StyledComponent, StyledFloatingButton, IconBox, StyledMobilePreview };

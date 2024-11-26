@@ -37,7 +37,7 @@ const StyledSelectionArea = styled.div`
   display: none;
 
   background: rgba(68, 170, 255, 0.5);
-  border: 1px solid ${globalColors.lightSecondMain}
+  border: 1px solid ${globalColors.lightSecondMain};
   z-index: 1000;
 `;
 

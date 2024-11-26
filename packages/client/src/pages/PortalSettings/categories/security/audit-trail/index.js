@@ -54,6 +54,7 @@ const AuditTrail = (props) => {
     securityLifetime,
     isAuditAvailable,
     isLoadingDownloadReport,
+    resetIsInit,
   } = props;
 
   const [isLoading, setIsLoading] = useState(!auditTrailUsers.length);
@@ -75,6 +76,8 @@ const AuditTrail = (props) => {
     setDocumentTitle(t("AuditTrailNav"));
     initAudit();
     getLifetimeAuditSettings();
+
+    return () => resetIsInit();
   }, []);
 
   const getContent = () => {
@@ -162,6 +165,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     getAuditTrailReport,
     securityLifetime,
     isLoadingDownloadReport,
+    resetIsInit,
   } = setup;
 
   const { theme } = settingsStore;
@@ -177,5 +181,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     securityLifetime,
     isAuditAvailable,
     isLoadingDownloadReport,
+    resetIsInit,
   };
 })(withTranslation("Settings")(AuditTrail));

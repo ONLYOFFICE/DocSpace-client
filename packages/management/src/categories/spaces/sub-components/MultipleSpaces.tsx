@@ -25,13 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { observer } from "mobx-react";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { isMobile } from "react-device-detect";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { DeviceType } from "@docspace/shared/enums";
+
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";
+
 import { useStore } from "SRC_DIR/store";
 import { TranslationType } from "SRC_DIR/types/spaces";
 
@@ -45,9 +51,12 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
   const { setChangeDomainDialogVisible, setCreatePortalDialogVisible } =
     spacesStore;
 
-  const { portals, baseDomain } = settingsStore;
+  const { portals, baseDomain, currentDeviceType } = settingsStore;
 
-  const buttonSize = isMobile ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop
+      ? ButtonSize.small
+      : ButtonSize.normal;
 
   return (
     <StyledMultipleSpaces>
@@ -74,8 +83,11 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
               {t("Settings:YourCurrentDomain")}
             </Text>
             <TextInput
+              value=""
+              type={InputType.text}
+              size={InputSize.base}
               isDisabled={true}
-              placeholder={baseDomain}
+              placeholder={baseDomain || ""}
               className="spaces-input"
             />
           </div>

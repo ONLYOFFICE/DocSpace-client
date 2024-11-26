@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 
-export const StyledAccountsLoader = styled.div`
+import { injectDefaultTheme } from "../../../utils";
+
+export const StyledUsersLoader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -150,7 +151,7 @@ export const StyledHistorySubtitleLoader = styled.div`
   align-items: center;
 `;
 
-export const StyledHistoryBlockLoader = styled.div`
+export const StyledHistoryBlockLoader = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 70px;
 
@@ -180,8 +181,6 @@ export const StyledHistoryBlockLoader = styled.div`
     }
   }
 `;
-
-StyledHistoryBlockLoader.defaultProps = { theme: Base };
 
 export const StyledMembersLoader = styled.div`
   width: 100%;

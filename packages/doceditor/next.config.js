@@ -36,6 +36,10 @@ const version = pkg.version;
 const nextConfig = {
   basePath: "/doceditor",
   output: "standalone",
+  experimental: {
+    instrumentationHook: true,
+    serverComponentsExternalPackages: ["pino", "pino-pretty"],
+  },
   compiler: {
     styledComponents: true,
   },

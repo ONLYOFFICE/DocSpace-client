@@ -28,7 +28,7 @@ import { useRef } from "react";
 import ToggleBlock from "./ToggleBlock";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/shared/components/toast";
@@ -97,7 +97,7 @@ const PasswordAccessBlock = (props) => {
     tooltipPasswordDigits: `${t("Common:PasswordLimitDigits")}`,
     tooltipPasswordCapital: `${t("Common:PasswordLimitUpperCase")}`,
     tooltipPasswordSpecial: `${t("Common:PasswordLimitSpecialSymbols")}`,
-    generatePasswordTitle: t("Wizard:GeneratePassword"),
+    generatePasswordTitle: t("Common:GeneratePassword"),
     tooltipAllowedCharacters: `${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`,
   };
 
@@ -127,6 +127,7 @@ const PasswordAccessBlock = (props) => {
                 onValidateInput={onValidatePassword}
                 isSimulateType
                 simulateSymbol="•"
+                autoComplete="off"
                 {...tooltipData}
               />
             </FieldContainer>

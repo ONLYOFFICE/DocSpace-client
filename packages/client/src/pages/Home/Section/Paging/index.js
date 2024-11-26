@@ -357,10 +357,9 @@ export default inject(
 
     const totalPages = Math.ceil(currentFilter.total / currentFilter.pageCount);
 
-    const { usersStore, filterStore } = peopleStore;
-    const { filter: accountsFilter } = filterStore;
+    const { usersStore } = peopleStore;
 
-    const { getUsersList: fetchPeople } = usersStore;
+    const { getUsersList: fetchPeople, filter: accountsFilter } = usersStore;
 
     return {
       files,

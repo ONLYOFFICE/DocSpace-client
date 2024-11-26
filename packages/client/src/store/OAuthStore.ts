@@ -1,8 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  addClient,
-  updateClient,
   changeClientStatus,
   regenerateSecret,
   deleteClient,
@@ -14,11 +12,9 @@ import {
 import {
   IClientListProps,
   IClientProps,
-  IClientReqDTO,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -29,114 +25,16 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
+import GenerateIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
+import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
 export type ViewAsType = "table" | "row";
 
-export interface OAuthStoreProps {
-  isInit: boolean;
-  setIsInit: (value: boolean) => void;
-
-  viewAs: ViewAsType;
-  setViewAs: (value: ViewAsType) => void;
-
-  infoDialogVisible: boolean;
-  setInfoDialogVisible: (value: boolean) => void;
-
-  revokeDialogVisible: boolean;
-  setRevokeDialogVisible: (value: boolean) => void;
-
-  previewDialogVisible: boolean;
-  setPreviewDialogVisible: (value: boolean) => void;
-
-  disableDialogVisible: boolean;
-  setDisableDialogVisible: (value: boolean) => void;
-
-  resetDialogVisible: boolean;
-  setResetDialogVisible: (value: boolean) => void;
-
-  generateDeveloperTokenDialogVisible: boolean;
-  setGenerateDeveloperTokenDialogVisible: (value: boolean) => void;
-
-  revokeDeveloperTokenDialogVisible: boolean;
-  setRevokeDeveloperTokenDialogVisible: (value: boolean) => void;
-
-  deleteDialogVisible: boolean;
-  setDeleteDialogVisible: (value: boolean) => void;
-
-  clientsIsLoading: boolean;
-  setClientsIsLoading: (value: boolean) => void;
-
-  consentsIsLoading: boolean;
-  setConsentsIsLoading: (value: boolean) => void;
-
-  clientSecret: string;
-  setClientSecret: (value: string) => void;
-
-  editClient: (clientId: string) => void;
-
-  clients: IClientProps[];
-
-  fetchClients: () => Promise<void>;
-  fetchNextClients: (startIndex: number) => Promise<void>;
-
-  consents: IClientProps[];
-
-  fetchConsents: () => Promise<void>;
-  fetchNextConsents: (startIndex: number) => Promise<void>;
-
-  saveClient: (client: IClientReqDTO) => Promise<void>;
-
-  updateClient: (clientId: string, client: IClientReqDTO) => Promise<void>;
-
-  changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
-
-  regenerateSecret: (clientId: string) => Promise<string | undefined>;
-
-  deleteClient: (clientId: string[]) => Promise<void>;
-
-  revokeClient: (clientId: string[]) => Promise<void>;
-
-  userStore: Nullable<UserStore>;
-
-  currentPage: number;
-  nextPage: Nullable<number>;
-  itemCount: number;
-
-  consentCurrentPage: number;
-  consentNextPage: Nullable<number>;
-  consentItemCount: number;
-
-  selection: string[];
-  setSelection: (clientId: string) => void;
-
-  bufferSelection: IClientProps | null;
-  setBufferSelection: (clientId: string) => void;
-
-  activeClients: string[];
-  setActiveClient: (clientId: string) => void;
-
-  scopes: TScope[];
-  fetchScopes: () => Promise<void>;
-
-  getContextMenuItems: (
-    t: TTranslation,
-    item: IClientProps,
-    isInfo?: boolean,
-    isSettings?: boolean,
-  ) => ContextMenuModel[];
-
-  clientList: IClientProps[];
-  isEmptyClientList: boolean;
-  hasNextPage: boolean;
-  consentHasNextPage: boolean;
-  scopeList: TScope[];
-}
-
-class OAuthStore implements OAuthStoreProps {
+class OAuthStore {
   userStore: Nullable<UserStore> = null;
 
   viewAs: ViewAsType = "table";
@@ -387,58 +285,6 @@ class OAuthStore implements OAuthStoreProps {
     this.setConsentsIsLoading(false);
   };
 
-  saveClient = async (client: IClientReqDTO) => {
-    try {
-      const newClient = await addClient(client);
-
-      const creatorDisplayName = this.userStore?.user?.displayName;
-      const creatorAvatar = this.userStore?.user?.avatarSmall;
-
-      runInAction(() => {
-        this.clients = [
-          { ...newClient, enabled: true, creatorDisplayName, creatorAvatar },
-          ...this.clients,
-        ];
-      });
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
-  updateClient = async (clientId: string, client: IClientReqDTO) => {
-    try {
-      await updateClient(clientId, client);
-
-      const idx = this.clients.findIndex((c) => c.clientId === clientId);
-
-      const newClient = { ...this.clients[idx] };
-
-      newClient.name = client.name;
-      newClient.allowedOrigins = client.allowed_origins;
-      newClient.logo = client.logo;
-      newClient.description = client.description;
-      newClient.isPublic = client.is_public;
-
-      if (
-        client.allow_pkce &&
-        !newClient.authenticationMethods.includes(AuthenticationMethod.none)
-      )
-        newClient.authenticationMethods.push(AuthenticationMethod.none);
-
-      if (idx > -1) {
-        runInAction(() => {
-          this.clients[idx] = {
-            ...newClient,
-          };
-        });
-      }
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
   changeClientStatus = async (clientId: string, status: boolean) => {
     try {
       await changeClientStatus(clientId, status);
@@ -509,7 +355,7 @@ class OAuthStore implements OAuthStoreProps {
       const requests: Promise<void>[] = [];
 
       clientsId.forEach((id) => {
-        this.setActiveClient(id);
+        // this.setActiveClient(id);
         requests.push(revokeUserClient(id));
       });
 
@@ -521,11 +367,111 @@ class OAuthStore implements OAuthStoreProps {
         );
       });
 
-      this.setActiveClient("");
+      // this.setActiveClient("");
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
     }
+  };
+
+  onEnable = async (t: TTranslation, clientId: string) => {
+    this.setPreviewDialogVisible(false);
+    this.setInfoDialogVisible(false);
+    this.setRevokeDialogVisible(false);
+    this.setDisableDialogVisible(false);
+    this.setDeleteDialogVisible(false);
+    this.setGenerateDeveloperTokenDialogVisible(false);
+    this.setRevokeDeveloperTokenDialogVisible(false);
+
+    const isGroup = this.selection.length;
+
+    if (isGroup) {
+      try {
+        const actions: Promise<void>[] = [];
+
+        this.selectionToEnable.forEach((s) => {
+          if (!this.clientList.find((c) => c.clientId === s)?.enabled)
+            actions.push(this.changeClientStatus(s, true));
+        });
+
+        await Promise.all(actions);
+
+        this.setSelection("");
+        if (this.selectionToEnable.length > 1)
+          toastr.success(t("OAuth:ApplicationsEnabledSuccessfully"));
+        else {
+          toastr.success(t("OAuth:ApplicationEnabledSuccessfully"));
+        }
+      } catch (e) {
+        const err = e as TData;
+        toastr.error(err);
+      }
+    } else {
+      // this.setActiveClient(clientId);
+
+      await this.changeClientStatus(clientId, true);
+
+      // this.setActiveClient("");
+      this.setSelection("");
+
+      toastr.success(t("OAuth:ApplicationEnabledSuccessfully"));
+    }
+  };
+
+  onDisable = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
+    this.setPreviewDialogVisible(false);
+    this.setInfoDialogVisible(false);
+    this.setRevokeDialogVisible(false);
+    this.setDisableDialogVisible(true);
+    this.setDeleteDialogVisible(false);
+    this.setGenerateDeveloperTokenDialogVisible(false);
+    this.setRevokeDeveloperTokenDialogVisible(false);
+  };
+
+  onDelete = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
+
+    this.setPreviewDialogVisible(false);
+    this.setInfoDialogVisible(false);
+    this.setRevokeDialogVisible(false);
+    this.setDisableDialogVisible(false);
+    this.setDeleteDialogVisible(true);
+    this.setGenerateDeveloperTokenDialogVisible(false);
+    this.setRevokeDeveloperTokenDialogVisible(false);
+  };
+
+  onRevoke = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
+
+    this.setPreviewDialogVisible(false);
+    this.setInfoDialogVisible(false);
+    this.setRevokeDialogVisible(true);
+    this.setDisableDialogVisible(false);
+    this.setDeleteDialogVisible(false);
+    this.setGenerateDeveloperTokenDialogVisible(false);
+    this.setRevokeDeveloperTokenDialogVisible(false);
   };
 
   getContextMenuItems = (
@@ -539,7 +485,15 @@ class OAuthStore implements OAuthStoreProps {
     const isGroupContext = this.selection.length > 1;
 
     const onShowInfo = () => {
-      this.setBufferSelection(clientId);
+      if (isGroupContext) return;
+
+      if (!this.selection.length) this.setBufferSelection(clientId);
+
+      if (this.selection.length === 1) {
+        this.setBufferSelection(this.selection[0]);
+        this.setSelection("");
+      }
+
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(true);
       this.setDisableDialogVisible(false);
@@ -548,30 +502,16 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDeveloperTokenDialogVisible(false);
     };
 
-    const onRevoke = () => {
-      if (!isGroupContext) this.setBufferSelection(clientId);
-      this.setPreviewDialogVisible(false);
-      this.setInfoDialogVisible(false);
-      this.setRevokeDialogVisible(true);
-      this.setDisableDialogVisible(false);
-      this.setDeleteDialogVisible(false);
-      this.setGenerateDeveloperTokenDialogVisible(false);
-      this.setRevokeDeveloperTokenDialogVisible(false);
-    };
-
-    const onDisable = () => {
-      this.setBufferSelection(clientId);
-      this.setPreviewDialogVisible(false);
-      this.setInfoDialogVisible(false);
-      this.setRevokeDialogVisible(false);
-      this.setDisableDialogVisible(true);
-      this.setDeleteDialogVisible(false);
-      this.setGenerateDeveloperTokenDialogVisible(false);
-      this.setRevokeDeveloperTokenDialogVisible(false);
-    };
-
     const onGenerateDeveloperToken = () => {
-      this.setBufferSelection(clientId);
+      if (isGroupContext) return;
+
+      if (!this.selection.length) this.setBufferSelection(clientId);
+
+      if (this.selection.length === 1) {
+        this.setBufferSelection(this.selection[0]);
+        this.setSelection("");
+      }
+
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(false);
       this.setRevokeDialogVisible(false);
@@ -582,7 +522,15 @@ class OAuthStore implements OAuthStoreProps {
     };
 
     const onRevokeDeveloperToken = () => {
-      this.setBufferSelection(clientId);
+      if (isGroupContext) return;
+
+      if (!this.selection.length) this.setBufferSelection(clientId);
+
+      if (this.selection.length === 1) {
+        this.setBufferSelection(this.selection[0]);
+        this.setSelection("");
+      }
+
       this.setPreviewDialogVisible(false);
       this.setInfoDialogVisible(false);
       this.setRevokeDialogVisible(false);
@@ -592,31 +540,40 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDeveloperTokenDialogVisible(true);
     };
 
+    const onShowPreview = () => {
+      if (isGroupContext) return;
+
+      if (!this.selection.length) this.setBufferSelection(clientId);
+
+      if (this.selection.length === 1) {
+        this.setBufferSelection(this.selection[0]);
+        this.setSelection("");
+      }
+
+      this.setPreviewDialogVisible(true);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
+      this.setRevokeDeveloperTokenDialogVisible(false);
+    };
+
     const openOption = {
       key: "open",
       icon: ExternalLinkReactSvgUrl,
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
 
     const infoOption = {
       key: "info",
-      icon: SettingsIcon,
+      icon: SettingsIconUrl,
       label: t("Common:Info"),
       onClick: onShowInfo,
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
-
-    const revokeOptions = [
-      {
-        key: "revoke",
-        icon: OauthRevokeSvgUrl,
-        label: t("Revoke"),
-        onClick: onRevoke,
-        isDisabled: false,
-      },
-    ];
 
     if (!isSettings) {
       const items: ContextMenuModel[] = [];
@@ -632,75 +589,21 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
 
-      items.push(...revokeOptions);
+      items.push({
+        key: "revoke",
+        icon: OauthRevokeSvgUrl,
+        label: t("Revoke"),
+        onClick: () => this.onRevoke(clientId),
+        disabled: false,
+      });
 
       return items;
     }
 
-    const onDelete = () => {
-      this.setBufferSelection(clientId);
-      this.setPreviewDialogVisible(false);
-      this.setInfoDialogVisible(false);
-      this.setRevokeDialogVisible(false);
-      this.setDisableDialogVisible(false);
-      this.setDeleteDialogVisible(true);
-      this.setGenerateDeveloperTokenDialogVisible(false);
-      this.setRevokeDeveloperTokenDialogVisible(false);
-    };
-
-    const onShowPreview = () => {
-      this.setBufferSelection(clientId);
-      this.setPreviewDialogVisible(true);
-      this.setInfoDialogVisible(false);
-      this.setRevokeDialogVisible(false);
-      this.setDisableDialogVisible(false);
-      this.setDeleteDialogVisible(false);
-      this.setGenerateDeveloperTokenDialogVisible(false);
-      this.setRevokeDeveloperTokenDialogVisible(false);
-    };
-
-    const onEnable = async (status: boolean) => {
-      this.setPreviewDialogVisible(false);
-      this.setInfoDialogVisible(false);
-      this.setRevokeDialogVisible(false);
-      this.setDisableDialogVisible(false);
-      this.setDeleteDialogVisible(false);
-      this.setGenerateDeveloperTokenDialogVisible(false);
-      this.setRevokeDeveloperTokenDialogVisible(false);
-
-      if (isGroupContext) {
-        try {
-          const actions: Promise<void>[] = [];
-
-          this.selection.forEach((s) => {
-            this.setActiveClient(s);
-            actions.push(this.changeClientStatus(s, status));
-          });
-
-          await Promise.all(actions);
-
-          this.setActiveClient("");
-          this.setSelection("");
-        } catch (e) {
-          const err = e as TData;
-          toastr.error(err);
-        }
-      } else {
-        this.setActiveClient(clientId);
-
-        await this.changeClientStatus(clientId, status);
-
-        this.setActiveClient("");
-        this.setSelection("");
-
-        // TODO OAuth, show toast
-      }
-    };
-
     const editOption = {
       key: "edit",
       icon: PencilReactSvgUrl,
-      label: t("Common:Edit"),
+      label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
     };
 
@@ -715,57 +618,45 @@ class OAuthStore implements OAuthStoreProps {
       key: "enable",
       icon: EnableReactSvgUrl,
       label: t("Common:Enable"),
-      onClick: () => onEnable(true),
+      onClick: () => this.onEnable(t, clientId),
     };
 
     const disableOption = {
       key: "disable",
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
-      onClick: onDisable,
+      onClick: () => this.onDisable(clientId),
     };
 
     const generateDeveloperTokenOption = {
       key: "generate-token",
-      icon: EnableReactSvgUrl,
-      label: "Generate developer token",
+      icon: GenerateIconUrl,
+      label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
     };
 
     const revokeDeveloperTokenOption = {
       key: "revoke-token",
-      icon: EnableReactSvgUrl,
-      label: "Revoke developer token",
+      icon: RevokeIconUrl,
+      label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
     };
 
-    const contextOptions = [
-      {
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      },
+    const contextOptions: ContextMenuModel[] = [
       {
         key: "delete",
         label: t("Common:Delete"),
-        icon: DeleteIcon,
-        onClick: () => onDelete(),
+        icon: DeleteIconUrl,
+        onClick: () => this.onDelete(clientId),
       },
     ];
 
     if (isGroupContext) {
-      let enabled = false;
-
-      this.selection.forEach((s) => {
-        enabled =
-          enabled ||
-          this.clientList.find((client) => client.clientId === s)?.enabled ||
-          false;
-      });
-
-      if (enabled) {
-        contextOptions.unshift(disableOption);
-      } else {
+      if (this.withEnabledOptions) {
         contextOptions.unshift(enableOption);
+      }
+      if (this.withDisabledOptions) {
+        contextOptions.unshift(disableOption);
       }
     } else {
       if (item.enabled) {
@@ -774,8 +665,18 @@ class OAuthStore implements OAuthStoreProps {
         contextOptions.unshift(enableOption);
       }
 
+      contextOptions.unshift({
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      });
+
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);
+
+      contextOptions.unshift({
+        key: "Separator-2 dropdownItem",
+        isSeparator: true,
+      });
 
       if (!isInfo) contextOptions.unshift(infoOption);
       contextOptions.unshift(authButtonOption);
@@ -783,6 +684,50 @@ class OAuthStore implements OAuthStoreProps {
     }
 
     return contextOptions;
+  };
+
+  getHeaderMenuItems = (t: TTranslation, isSettings?: boolean) => {
+    if (!isSettings)
+      return [
+        {
+          key: "revoke",
+          iconUrl: OauthRevokeSvgUrl,
+          label: t("OAuth:Revoke"),
+          onClick: this.onRevoke,
+          disabled: false,
+        },
+      ];
+
+    return [
+      {
+        key: "enable",
+        iconUrl: EnableReactSvgUrl,
+        label: t("Common:Enable"),
+        onClick: () => this.onEnable(t, ""),
+        disabled: !this.withEnabledOptions,
+      },
+      {
+        key: "disable",
+        iconUrl: RemoveReactSvgUrl,
+        label: t("Common:Disable"),
+        onClick: this.onDisable,
+        disabled: !this.withDisabledOptions,
+      },
+      {
+        key: "delete",
+        label: t("Common:Delete"),
+        iconUrl: DeleteIconUrl,
+        onClick: this.onDelete,
+      },
+    ];
+  };
+
+  setSelections = (isChecked: boolean) => {
+    if (isChecked) {
+      this.selection = this.clientList.map((c) => c.clientId);
+    } else {
+      this.selection = [];
+    }
   };
 
   get clientList() {
@@ -803,6 +748,54 @@ class OAuthStore implements OAuthStoreProps {
 
   get scopeList() {
     return this.scopes;
+  }
+
+  get isHeaderVisible() {
+    return this.selection.length;
+  }
+
+  get isHeaderIndeterminate() {
+    return this.selection.length !== this.clientList.length;
+  }
+
+  get isHeaderChecked() {
+    return this.selection.length === this.clientList.length;
+  }
+
+  get withEnabledOptions() {
+    return this.selection
+      .map((s) => {
+        return !this.clientList.find((c) => c.clientId === s)?.enabled;
+      })
+      .some((s) => s);
+  }
+
+  get selectionToEnable() {
+    return this.selection
+      .map((s) => {
+        if (!this.clientList.find((c) => c.clientId === s)?.enabled) return s;
+
+        return "";
+      })
+      .filter((s) => !!s);
+  }
+
+  get withDisabledOptions() {
+    return this.selection
+      .map((s) => {
+        return this.clientList.find((c) => c.clientId === s)?.enabled;
+      })
+      .some((s) => s);
+  }
+
+  get selectionToDisable() {
+    return this.selection
+      .map((s) => {
+        if (this.clientList.find((c) => c.clientId === s)?.enabled) return s;
+
+        return "";
+      })
+      .filter((s) => !!s);
   }
 }
 

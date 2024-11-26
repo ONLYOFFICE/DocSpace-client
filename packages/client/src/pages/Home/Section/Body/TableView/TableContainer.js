@@ -41,7 +41,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -56,9 +56,12 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
+      ${fileNameCss}
+    }
+    .table-container_index-cell {
       ${fileNameCss}
     }
 
@@ -66,14 +69,20 @@ const StyledTableContainer = styled(TableContainer)`
       ${contextCss}
     }
   }
+  .table-container_index-cell {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
 
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_file-name-cell,
+      .table-container_index-cell,
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
         border-inline: 0; //for Safari macOS
 
@@ -91,7 +100,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
       }
 
@@ -100,9 +110,18 @@ const StyledTableContainer = styled(TableContainer)`
       }
     }
   }
-`;
 
-StyledTableContainer.defaultProps = { theme: Base };
+  .resize-handle {
+    ${(props) =>
+      props.isIndexEditingMode &&
+      css`
+        cursor: default;
+        &:hover {
+          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
+        }
+      `}
+  }
+`;
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
@@ -122,11 +141,13 @@ const Table = ({
   filterTotal,
   isRooms,
   isTrashFolder,
-  withPaging,
+  isIndexEditingMode,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  onEditIndex,
+  isIndexing,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -191,6 +212,9 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        onEditIndex={onEditIndex}
+        isIndexEditingMode={isIndexEditingMode}
+        isIndexing={isIndexing}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -214,10 +238,16 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
   ]);
 
   return (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer
+      useReactWindow
+      forwardedRef={ref}
+      isIndexEditingMode={isIndexEditingMode}
+    >
       <TableHeader
         sectionWidth={sectionWidth}
         containerRef={ref}
@@ -226,6 +256,7 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
+        isIndexing={isIndexing}
         filesList={filesList}
       />
 
@@ -235,8 +266,9 @@ const Table = ({
         filesLength={filesList.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
-        useReactWindow={!withPaging}
+        useReactWindow
         infoPanelVisible={infoPanelVisible}
+        isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={48}
       >
@@ -255,6 +287,10 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
+
+    indexingStore,
+    filesActionsStore,
+    selectedFolderStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -271,12 +307,15 @@ export default inject(
       setHeaderBorder,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
+      filter,
     } = filesStore;
 
-    const { withPaging, theme, currentDeviceType } = settingsStore;
+    const { isIndexEditingMode } = indexingStore;
+    const { changeIndex } = filesActionsStore;
+    const { isIndexedFolder } = selectedFolderStore;
+    const { theme, currentDeviceType } = settingsStore;
 
     return {
       filesList,
@@ -289,14 +328,16 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
-      withPaging,
+      isIndexEditingMode,
+      isIndexing: isIndexedFolder,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      onEditIndex: changeIndex,
     };
   },
 )(observer(Table));

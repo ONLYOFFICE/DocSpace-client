@@ -1,10 +1,10 @@
 {
   "AdditionalSections": "Additional sections",
   "DisplayFavorites": "Display Favorites",
+  "DisplayFileExtension": "Display file extension next to file name",
   "DisplayNotification": "Display notification when moving items to Trash",
   "DisplayRecent": "Display Recent",
   "DisplayTemplates": "Display Templates",
-  "DisplayFileExtension": "Display file extension next to file name",
   "IntermediateVersion": "Keep all saved intermediate versions",
   "KeepIntermediateVersion": "Keep intermediate versions when editing",
   "OpenSameTab": "Open {{organizationName}} editor in same tab",

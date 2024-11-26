@@ -164,7 +164,7 @@ class MediaViewerDataStore {
 
   changeUrl = (id) => {
     const url = this.getUrl(id);
-    window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
+    window.history.pushState("", "", url);
   };
 
   nextMedia = () => {

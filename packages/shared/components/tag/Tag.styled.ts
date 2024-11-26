@@ -29,9 +29,10 @@ import styled, { css } from "styled-components";
 
 import { Text } from "../text";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledTag = styled.div<{
+const StyledTag = styled.div.attrs(injectDefaultTheme)<{
   tagMaxWidth?: string;
   isLast?: boolean;
   isDisabled?: boolean;
@@ -119,8 +120,6 @@ const StyledTag = styled.div<{
       }
     `}
 `;
-
-StyledTag.defaultProps = { theme: Base };
 
 const StyledDropdownIcon = styled(ReactSVG)`
   display: flex;

@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import StyledModalDialog from "../styled-containers/StyledModalDialog";
+import StyledBodyContent from "../styled-containers/StyledModalDialog";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 
@@ -46,7 +46,7 @@ const AddIdpCertificateModal = (props) => {
   } = props;
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       autoMaxHeight
       autoMaxWidth
       displayType="modal"
@@ -56,19 +56,21 @@ const AddIdpCertificateModal = (props) => {
       <ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <Text isBold className="text-area-label" noSelect>
-          {t("OpenCertificate")}
-        </Text>
+        <StyledBodyContent>
+          <Text isBold className="text-area-label" noSelect>
+            {t("OpenCertificate")}
+          </Text>
 
-        <Textarea
-          className="text-area"
-          id="idp-certificate"
-          name="idpCertificate"
-          onChange={setInput}
-          value={idpCertificate}
-          placeholder={t("PlaceholderCert")}
-          heightTextArea="72px"
-        />
+          <Textarea
+            className="text-area"
+            id="idp-certificate"
+            name="idpCertificate"
+            onChange={setInput}
+            value={idpCertificate}
+            placeholder={t("PlaceholderCert")}
+            heightTextArea="72px"
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -91,7 +93,7 @@ const AddIdpCertificateModal = (props) => {
           isDisabled={isCertificateLoading}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

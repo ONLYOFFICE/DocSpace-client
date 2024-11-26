@@ -62,6 +62,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     isActive = false,
     withoutIcon = false,
     noHover = false,
+    noActive = false,
 
     isSelected,
     isActiveDescendant,
@@ -109,6 +110,7 @@ const DropDownItem = (props: DropDownItemProps) => {
       tabIndex={tabIndex}
       textOverflow={textOverflow}
       noHover={noHover}
+      noActive={noActive}
       className={className}
       onClick={onClickAction}
       disabled={disabled}

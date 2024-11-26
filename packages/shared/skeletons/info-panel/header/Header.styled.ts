@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { tablet } from "@docspace/shared/utils";
+
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
+
 import { StyledInfoPanelHeaderProps } from "./Header.types";
 
 const getHeaderHeight = ({
@@ -47,7 +48,9 @@ const getMainHeight = ({
   return `${res}px`;
 };
 
-const StyledInfoPanelHeader = styled.div<StyledInfoPanelHeaderProps>`
+const StyledInfoPanelHeader = styled.div.attrs(
+  injectDefaultTheme,
+)<StyledInfoPanelHeaderProps>`
   width: 100%;
   max-width: 100%;
 
@@ -90,7 +93,5 @@ const StyledInfoPanelHeader = styled.div<StyledInfoPanelHeaderProps>`
       `1px solid ${props.theme.infoPanel.borderColor}`};
   }
 `;
-
-StyledInfoPanelHeader.defaultProps = { theme: Base };
 
 export { StyledInfoPanelHeader };

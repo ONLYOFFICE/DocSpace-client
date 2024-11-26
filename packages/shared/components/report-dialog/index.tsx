@@ -27,7 +27,7 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import FileReactSvgUrl from "PUBLIC_DIR/images/icons/24/file.svg?url";
+import FileReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 
 import {
@@ -44,7 +44,7 @@ import { Textarea } from "../textarea";
 import { IconButton } from "../icon-button";
 import { ModalDialogType, ModalDialog } from "../modal-dialog";
 
-import { ModalDialogContainer } from "./ReportDialog.styled";
+import { StyledBodyContent } from "./ReportDialog.styled";
 import type { ReportDialogProps } from "./ReportDialog.types";
 import { globalColors } from "../../themes";
 
@@ -100,42 +100,50 @@ const ReportDialog = (props: ReportDialogProps) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
       displayType={ModalDialogType.modal}
+      isLarge
     >
       <ModalDialog.Header>{t("ErrorReport")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text className="report-description" noSelect>
-          {t("ErrorReportDescription")}
-        </Text>
-        <Textarea
-          placeholder={t("RecoverDescribeYourProblemPlaceholder")}
-          value={description}
-          onChange={onChangeTextareaValue}
-          autoFocus
-          areaSelect
-          heightTextArea="72px"
-          fontSize={13}
-        />
-        <div className="report-wrapper">
-          <img src={FileReactSvgUrl} className="file-icon" alt="" />
-          <Text as="div" fontWeight={600} noSelect className="report-filename">
-            {fileTitle}
-            <Text fontWeight={600} noSelect color={globalColors.gray}>
-              .json
-            </Text>
+        <StyledBodyContent>
+          <Text className="report-description" noSelect>
+            {t("ErrorReportDescription")}
           </Text>
-          <IconButton
-            isFill
-            size={16}
-            className="icon-button"
-            onClick={onClickDownload}
-            iconName={DownloadReactSvgUrl}
+          <Textarea
+            placeholder={t("RecoverDescribeYourProblemPlaceholder")}
+            value={description}
+            onChange={onChangeTextareaValue}
+            autoFocus
+            areaSelect
+            heightTextArea="72px"
+            fontSize={13}
           />
-        </div>
+          <div className="report-wrapper">
+            <img src={FileReactSvgUrl} className="file-icon" alt="" />
+            <Text
+              as="div"
+              fontWeight={600}
+              noSelect
+              className="report-filename"
+            >
+              {fileTitle}
+              <Text fontWeight={600} noSelect color={globalColors.gray}>
+                .json
+              </Text>
+            </Text>
+            <IconButton
+              isFill
+              size={16}
+              className="icon-button"
+              onClick={onClickDownload}
+              iconName={DownloadReactSvgUrl}
+            />
+          </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -154,7 +162,7 @@ const ReportDialog = (props: ReportDialogProps) => {
           scale={currentDeviceType === DeviceType.mobile}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

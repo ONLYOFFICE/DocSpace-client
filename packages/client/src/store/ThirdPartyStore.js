@@ -70,6 +70,7 @@ class ThirdPartyStore {
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
     this.setThirdPartyProviders(list);
+    return list;
   };
 
   fetchConnectingStorages = async () => {

@@ -11,7 +11,6 @@
   "EnterSecretKey": "Gizli anahtarı gir",
   "EnterUrl": "URL gir",
   "EnterWebhookName": "Webhook adını gir",
-  "EventHint": "Teslimatlar 15 gün sonra otomatik olarak silinir",
   "EventID": "Etkinlik Kimliği",
   "FailedToConnect": "Bu payload teslim edilemedi: ana makineye bağlanılamadı",
   "From": "İtibaren",

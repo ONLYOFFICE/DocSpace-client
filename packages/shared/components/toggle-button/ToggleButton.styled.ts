@@ -26,8 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { Base, globalColors } from "../../themes";
-import { NoUserSelect } from "../../utils";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, NoUserSelect } from "../../utils";
 
 import {
   ContainerToggleButtonThemeProps,
@@ -38,7 +38,9 @@ const Container = styled.div`
   display: inline-block;
 `;
 
-const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
+const ToggleButtonContainer = styled.label.attrs(
+  injectDefaultTheme,
+)<StyledToggleButtonProps>`
   position: absolute;
   -webkit-appearance: none;
   align-items: start;
@@ -100,6 +102,14 @@ const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
                 props.theme.toggleButton.hoverFillColorOff};
               }
             }
+            ${!props.isDisabled &&
+            `
+               &:active {
+                rect {
+                  fill: ${props.theme.toggleButton.fillColorOff};
+                }
+               }
+              `}
           `}
     ${(props) =>
       props.theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
@@ -116,8 +126,6 @@ const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
         : props.theme.text.color};
   }
 `;
-
-ToggleButtonContainer.defaultProps = { theme: Base };
 
 const HiddenInput = styled.input`
   opacity: 0.0001;

@@ -57,8 +57,9 @@ const NameCell = ({
       {inProgress ? (
         <Loader
           className="table-container_row-loader"
-          type={LoaderTypes.oval}
-          size="16px"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
       ) : (
         <TableCell

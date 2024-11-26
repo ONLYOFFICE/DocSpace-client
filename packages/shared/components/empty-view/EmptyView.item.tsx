@@ -14,24 +14,26 @@ export const EmptyViewItem = ({
   onClick,
   disabled,
   model,
+  id,
 }: EmptyViewItemProps) => {
-  const contexRef = React.useRef<ContextMenuRefType>(null);
+  const contextRef = React.useRef<ContextMenuRefType>(null);
 
   if (disabled) return;
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!model) return onClick?.(event);
 
-    contexRef.current?.show(event);
+    contextRef.current?.show(event);
   };
 
   return (
     <EmptyViewItemWrapper
-      onClick={handleClick}
+      id={id}
       role="button"
       aria-label={title}
+      onClick={handleClick}
     >
-      <ContextMenu ref={contexRef} model={model ?? []} />
+      <ContextMenu ref={contextRef} model={model ?? []} />
       {React.cloneElement(icon, { className: "ev-item__icon" })}
       <EmptyViewItemBody>
         <Text

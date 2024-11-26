@@ -142,14 +142,8 @@ const StyledTheme = styled.div`
   }
 `;
 
-const StyledModalDialog = styled(ModalDialog)`
-  .modal-close {
-    display: none;
-  }
-
-  #modal-dialog {
-    max-height: none;
-  }
+const StyledBodyContent = styled.div`
+  display: contents;
 
   .hex-color-picker {
     padding-bottom: 0 !important;
@@ -172,4 +166,4 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-export { StyledComponent, StyledTheme, StyledModalDialog };
+export { StyledComponent, StyledTheme, StyledBodyContent };

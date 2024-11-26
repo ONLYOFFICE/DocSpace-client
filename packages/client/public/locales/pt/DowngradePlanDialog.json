@@ -1,7 +1,7 @@
 {
-  "CannotChangePlan": "Não pode alterar o seu plano porque o volume de armazenamento utilizado ou o número de administradores/utilizadores com poder excede as limitações do plano selecionado:",
+  "CannotChangePlan": "Não pode alterar o seu plano porque o volume de armazenamento utilizado ou o número de administradores excede as limitações do plano selecionado:",
   "ChangePricingPlan": "Alterar o plano de preços",
   "PlanStorageLimit": "O limite de armazenamento do novo plano de preços é <1>{{storageValue}}</1>, e está atualmente a utilizar <1>{{currentStorageValue}}</1>.",
-  "PlanUsersLimit": "Deseja diminuir a equipa para <1>{{usersCount}}</1> administradores/utilizadores com poder, e o número atual deste tipo de utilizadores no seu {{productName}} é <1>{{currentUsersCount}}</1>.",
+  "PlanUsersLimit": "Deseja diminuir a equipa para <1>{{usersCount}}</1> administradores, e o número atual deste tipo de utilizadores no seu {{productName}} é <1>{{currentUsersCount}}</1>.",
   "SaveOrChange": "Elimine a incompatibilidade no parâmetro conflitante para prosseguir ou manter seu plano de preços ativo."
 }

@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Документ преобразован в {{title}}, чтобы его можно было редактировать",
   "DocumentsFileType": "документы",
   "ErrorConnectionLost": "Соединение потеряно",
   "FileLocation": "Открыть расположение файла",

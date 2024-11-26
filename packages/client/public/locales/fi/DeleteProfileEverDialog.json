@@ -1,16 +1,22 @@
 {
   "ActionCannotBeUndone": "Valitut käytöstä poistetut käyttäjät poistetaan {{productName}}-sta. Tätä toimintoa ei voi peruuttaa.",
+  "ActionCannotBeUndoneGuests": "Valitut käytöstä poistetut vieraat poistetaan {{productName}}. Tätä toimintoa ei voi peruuttaa.",
   "CannotReassignFiles": "Jos poistat useita käyttäjiä kerralla, et voi siirtää heidän tiedostojaan muille käyttäjille.",
+  "DeleteGroupGuestsSuccessMessage": "Vieraat on poistettu onnistuneesti.",
   "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",
+  "DeleteGuest": "Poista vieras",
+  "DeleteGuests": "Poista vieraat",
   "DeleteMyDocumentsUser": "Kaikki henkilökohtaiset tiedostot ja kansiot tämän käyttäjän Asiakirjani-osiossa poistetaan pysyvästi.",
   "DeletePersonalData": "Valittujen käyttäjien henkilökohtaiset tiedot, kaikki henkilökohtaiset tiedostot ja kansiot Asiakirjat- ja Roskakori-osioissa* poistetaan lopullisesti. Valittujen käyttäjien tiedostot ja kansiot yleisissä osioissa* kuten huoneissa säilyvät {{productName}}:ssa.",
   "DeletePersonalDataApplicable": "*Valituille käyttäjille, joilla on sellaisia tiedostoja ja kansioita.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat siirretään automaattisesti järjestelmänvalvojalle, joka suorittaa poiston:<strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Siirrä tiedot manuaalisesti valitaksesi toinen kohdekäyttäjä tietojen siirrolle.",
+  "DeleteReqassignDescriptionGuest": "{{userCaption}} poistetaan kaikista huoneista, joihin heidät on kutsuttu. Tämän {{userCaption}} luomat huoneissa olevat asiakirjat siirretään automaattisesti huoneen omistajalle.",
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
   "DeletingUsers": "Käyttäjien poistaminen",
   "PleaseNote": "Ole hyvä ja huomioi:",
   "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
+  "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",
   "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti",
   "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja."
 }

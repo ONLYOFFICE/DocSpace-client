@@ -96,6 +96,7 @@ const RadioButtonGroup = ({
             fontWeight={fontWeight}
             spacing={spacing}
             orientation={orientation}
+            autoFocus={option.autoFocus}
           />
         );
       })}

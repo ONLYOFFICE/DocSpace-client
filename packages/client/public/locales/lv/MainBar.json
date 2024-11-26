@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Ir sasniegts telpu skaita ierobežojums: {{currentValue}}/{{maxValue}}",
   "StorageAndRoomHeader": "Uzglabāšanas vietu un telpu skaita ierobežojums drīzumā tiks pārsniegts",
   "StorageAndRoomLimitHeader": "Ir sasniegts uzglabāšanas vietas un telpu skaita ierobežojums",
-  "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru/prasmīgo lietotāju ierobežojumi.",
-  "StorageAndUserTariffLimitHeader": "Ir sasniegts krātuves vietas un administratoru/prasmīgo lietotāju skaita ierobežojums",
+  "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru ierobežojumi.",
+  "StorageAndUserTariffLimitHeader": "Ir sasniegts krātuves vietas un administratoru skaita ierobežojums",
   "StorageLimitHeader": "Ir sasniegts krātuves vietas ierobežojums: {{currentValue}}/{{maxValue}}",
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Jūs varat noņemt nevajadzīgos failus vai mainīt kvotu <1>Krātuves pārvaldības iestatījumos.</1>",
-  "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru/prasmīgo lietotāju skaits:{{currentValue}}/{{maxValue}}.",
-  "UserTariffAlmostReached": "Kad limits ir sasniegts, visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus/prasmīgos lietotājus, sazinieties ar {{productName}} administratoru, lai jauninātu tarifu plānu.",
-  "UserTariffAlmostReachedForAdmins": "Kad limits ir sasniegts, visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus/prasmīgos lietotājus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu.",
-  "UserTariffLimitHeader": "Ir sasniegts administratoru/prasmīgo lietotāju skaita ierobežojums: {{currentValue}}/{{maxValue}}",
-  "UserTariffReached": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus/prasmīgos lietotājus, sazinieties ar {{productName}} administratoru, lai jauninātu tarifu plānu.",
-  "UserTariffReachedForAdmins": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus/prasmīgos lietotājus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu."
+  "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru skaits:{{currentValue}}/{{maxValue}}.",
+  "UserTariffAlmostReached": "Kad limits ir sasniegts, visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, sazinieties ar {{productName}} administratoru, lai jauninātu tarifu plānu.",
+  "UserTariffAlmostReachedForAdmins": "Kad limits ir sasniegts, visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu.",
+  "UserTariffLimitHeader": "Ir sasniegts administratoru skaita ierobežojums: {{currentValue}}/{{maxValue}}",
+  "UserTariffReached": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, sazinieties ar {{productName}} administratoru, lai jauninātu tarifu plānu.",
+  "UserTariffReachedForAdmins": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu."
 }

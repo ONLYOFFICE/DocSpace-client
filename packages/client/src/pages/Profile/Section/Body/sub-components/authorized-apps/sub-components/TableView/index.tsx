@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { TableBody } from "@docspace/shared/components/table";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import Row from "./Row";
 import Header from "./Header";
@@ -79,6 +79,7 @@ const TableView = ({
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasNextPage || false}
         itemCount={itemCount || 0}
+        isIndexEditingMode={false}
       >
         {items.map((item) => (
           <Row
@@ -102,7 +103,7 @@ export default inject(
     oauthStore,
   }: {
     userStore: UserStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const userId = userStore.user?.id;
 

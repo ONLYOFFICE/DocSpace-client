@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Ֆայլերը բեռնված չեն՝ {{count}}",
   "FilesUploaded": "Վերբեռնված ֆայլեր",
   "Upload": "Վերբեռնել",
   "UploadFiles": "Վերբեռնել ֆայլեր",

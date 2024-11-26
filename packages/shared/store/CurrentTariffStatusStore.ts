@@ -62,6 +62,10 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.enterprise;
   }
 
+  get isDeveloper() {
+    return this.isEnterprise && this.portalTariffStatus?.developer;
+  }
+
   get isCommunity() {
     return this.portalTariffStatus?.openSource;
   }
@@ -141,7 +145,12 @@ class CurrentTariffStatusStore {
   get gracePeriodEndDate() {
     moment.locale(this.language);
     if (this.delayDueDate === null) return "";
-    return moment(this.delayDueDate).tz(window.timezone).format("LL");
+
+    const endDate = isValidDate(this.delayDueDate)
+      ? this.delayDueDate
+      : this.dueDate;
+
+    return moment(endDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {

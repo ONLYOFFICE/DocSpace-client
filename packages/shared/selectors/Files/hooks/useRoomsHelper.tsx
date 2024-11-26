@@ -66,6 +66,7 @@ const useRoomsHelper = ({
   getRootData,
   setSelectedItemType,
   subscribe,
+  setSelectedItemSecurity,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -153,9 +154,11 @@ const useRoomsHelper = ({
 
         setIsBreadCrumbsLoading(false);
       }
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders);
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t);
 
       setHasNextPage(count === PAGE_COUNT);
+
+      setSelectedItemSecurity(current.security);
 
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
@@ -233,6 +236,7 @@ const useRoomsHelper = ({
       setSelectedItemType,
       getRootData,
       subscribe,
+      setSelectedItemSecurity,
     ],
   );
   return { getRoomList };

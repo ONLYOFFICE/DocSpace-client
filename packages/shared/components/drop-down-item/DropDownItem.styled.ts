@@ -26,8 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { Base, globalColors } from "../../themes";
-import { tablet } from "../../utils";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, tablet } from "../../utils";
 
 const itemTruncate = css`
   white-space: nowrap;
@@ -69,12 +69,13 @@ const WrapperToggle = styled.div`
   }
 `;
 
-const StyledDropdownItem = styled.div<{
+const StyledDropdownItem = styled.div.attrs(injectDefaultTheme)<{
   textOverflow?: boolean;
   minWidth?: string;
   isModern?: boolean;
   disabled?: boolean;
   noHover?: boolean;
+  noActive?: boolean;
   isHeader?: boolean;
   isSeparator?: boolean;
   isActiveDescendant?: boolean;
@@ -157,8 +158,9 @@ const StyledDropdownItem = styled.div<{
   }
 
   &:active {
-    ${({ isHeader, theme }) =>
+    ${({ isHeader, theme, noActive }) =>
       !isHeader &&
+      !noActive &&
       css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}
@@ -251,9 +253,8 @@ const StyledDropdownItem = styled.div<{
 
   max-width: 100%;
 `;
-StyledDropdownItem.defaultProps = { theme: Base };
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   width: ${(props) => props.theme.dropDownItem.icon.width};
@@ -278,7 +279,6 @@ const IconWrapper = styled.div`
     margin-top: 12px;
   }
 `;
-IconWrapper.defaultProps = { theme: Base };
 
 const ElementWrapper = styled.div`
   display: flex;

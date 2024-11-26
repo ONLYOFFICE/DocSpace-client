@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
+import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
@@ -51,6 +52,7 @@ const RoomType = ({
   isOpen,
   id,
   selectedId,
+  disabledFormRoom,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -59,6 +61,10 @@ const RoomType = ({
     title: getRoomTypeTitleTranslation(t, roomType),
     description: getRoomTypeDescriptionTranslation(t, roomType),
   };
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+
+  const disabled = isFormRoom && disabledFormRoom;
 
   const arrowClassName =
     type === "dropdownButton"
@@ -96,9 +102,10 @@ const RoomType = ({
   return type === "listItem" ? (
     <StyledListItem
       id={id}
-      title={t(room.title)}
+      title={disabled ? "" : t(room.title)}
       onClick={onClick}
       isOpen={isOpen}
+      data-tooltip-id={disabled ? "create-room-tooltip" : ""}
     >
       {content}
     </StyledListItem>

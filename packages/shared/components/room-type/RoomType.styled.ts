@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+
+import { injectDefaultTheme } from "../../utils";
 
 const StyledRoomType = styled.div`
   cursor: pointer;
@@ -52,7 +53,9 @@ const StyledRoomType = styled.div`
   }
 `;
 
-const StyledListItem = styled(StyledRoomType)<{ isOpen: boolean }>`
+const StyledListItem = styled(StyledRoomType).attrs(injectDefaultTheme)<{
+  isOpen: boolean;
+}>`
   background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.listItem.background};
   border: 1px solid
@@ -74,7 +77,9 @@ const StyledListItem = styled(StyledRoomType)<{ isOpen: boolean }>`
   }
 `;
 
-const StyledDropdownButton = styled(StyledRoomType)<{ isOpen: boolean }>`
+const StyledDropdownButton = styled(StyledRoomType).attrs(injectDefaultTheme)<{
+  isOpen: boolean;
+}>`
   border-radius: 6px;
   background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.dropdownButton.background};
@@ -111,7 +116,7 @@ const StyledDropdownButton = styled(StyledRoomType)<{ isOpen: boolean }>`
   }
 `;
 
-const StyledDropdownItem = styled(StyledRoomType)`
+const StyledDropdownItem = styled(StyledRoomType).attrs(injectDefaultTheme)`
   background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.dropdownItem.background};
 
@@ -130,7 +135,7 @@ const StyledDropdownItem = styled(StyledRoomType)`
   }
 `;
 
-const StyledDisplayItem = styled(StyledRoomType)`
+const StyledDisplayItem = styled(StyledRoomType).attrs(injectDefaultTheme)`
   cursor: default;
   background-color: ${(props) =>
     props.theme.createEditRoomDialog.roomType.displayItem.background};
@@ -148,11 +153,6 @@ const StyledDisplayItem = styled(StyledRoomType)`
     display: none;
   }
 `;
-
-StyledListItem.defaultProps = { theme: Base };
-StyledDropdownButton.defaultProps = { theme: Base };
-StyledDropdownItem.defaultProps = { theme: Base };
-StyledDisplayItem.defaultProps = { theme: Base };
 
 export {
   StyledDisplayItem,

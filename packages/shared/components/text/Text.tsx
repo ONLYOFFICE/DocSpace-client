@@ -40,6 +40,7 @@ const TextPure = ({
   onClick,
   dir,
   children,
+  view,
   ...rest
 }: TextProps) => {
   const isAutoDir = dir === "auto";
@@ -59,7 +60,9 @@ const TextPure = ({
       {...rest}
     >
       {isAutoDir ? (
-        <StyledAutoDirSpan dir="auto">{children}</StyledAutoDirSpan>
+        <StyledAutoDirSpan view={view} dir="auto">
+          {children}
+        </StyledAutoDirSpan>
       ) : (
         children
       )}

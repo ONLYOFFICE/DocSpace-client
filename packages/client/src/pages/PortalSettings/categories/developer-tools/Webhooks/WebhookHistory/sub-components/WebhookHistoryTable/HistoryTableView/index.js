@@ -29,15 +29,15 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { Base } from "@docspace/shared/themes";
 import { TableBody } from "@docspace/shared/components/table";
 import { TableContainer } from "@docspace/shared/components/table";
 
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const TableWrapper = styled(TableContainer)`
+const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
   margin-top: -2px;
 
   .table-container_header {
@@ -87,8 +87,6 @@ const TableWrapper = styled(TableContainer)`
       props.theme.filesSection.tableView.row.backgroundActive};
   }
 `;
-
-TableWrapper.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `webhooksHistoryColumnsSize_ver-${TABLE_VERSION}`;

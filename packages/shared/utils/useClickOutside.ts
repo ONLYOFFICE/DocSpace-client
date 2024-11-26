@@ -37,7 +37,7 @@ export const useClickOutside = <T extends HTMLElement>(
 ) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      e.stopPropagation();
+      // e.stopPropagation();
       const target = e.target as HTMLElement;
       if (ref.current && !ref.current.contains(target)) handler();
     };

@@ -26,9 +26,9 @@
 
 import styled from "styled-components";
 
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledSocialButtonsGroup = styled.div`
+const StyledSocialButtonsGroup = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
 
   .sso-button {
@@ -56,7 +56,5 @@ const StyledSocialButtonsGroup = styled.div`
     }
   }
 `;
-
-StyledSocialButtonsGroup.defaultProps = { theme: Base };
 
 export default StyledSocialButtonsGroup;

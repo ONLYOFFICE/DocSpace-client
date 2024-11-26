@@ -31,11 +31,19 @@ import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
 import FileRow from "./FileRow";
 import { isDesktop } from "@docspace/shared/utils";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const mobileRowHeight = 48;
 const desktopRowHeight = 48;
 const mobileRowIncreasedHeight = 92;
 const desktopRowIncreasedHeight = 88;
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualListWithAutoFocus
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const FileList = ({ uploadDataFiles }) => {
   const [rowSizes, setRowSizes] = useState({});
@@ -88,7 +96,7 @@ const FileList = ({ uploadDataFiles }) => {
           itemSize={getSize}
           itemCount={uploadDataFiles.length}
           itemData={uploadDataFiles}
-          outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
+          outerElementType={VirtualScroll}
         >
           {renderRow}
         </List>

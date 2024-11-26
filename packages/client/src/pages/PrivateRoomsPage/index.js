@@ -27,22 +27,21 @@
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import React, { useState } from "react";
 import { observer, inject } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
-import Base from "@docspace/shared/themes/base";
 
-const StyledPrivacyPage = styled.div`
+const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   margin-top: ${isMobile ? "80px" : "36px"};
 
   .privacy-rooms-body {
@@ -121,8 +120,6 @@ const StyledPrivacyPage = styled.div`
     max-height: 35px;
   }
 `;
-
-StyledPrivacyPage.defaultProps = { theme: Base };
 
 const PrivacyPageComponent = ({ t, tReady }) => {
   const [isDisabled, setIsDisabled] = useState(false);

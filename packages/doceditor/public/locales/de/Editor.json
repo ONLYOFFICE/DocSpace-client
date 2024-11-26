@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Das Dokument wurde in {{title}} konvertiert, um seine Bearbeitung zu ermöglichen",
   "DocumentsFileType": "Dokumente",
   "ErrorConnectionLost": "Verbindung ist unterbrochen",
   "FileLocation": "Dateispeicherort öffnen",

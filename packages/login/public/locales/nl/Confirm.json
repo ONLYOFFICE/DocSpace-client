@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Voer de 6-cijferige gegenereerde code van uw app in. Als u geen toegang hebt tot uw telefoon, gebruik dan de back-up codes.",
   "EnterAppCodeTitle": "Voer code in van authenticatie app",
   "EnterCodePlaceholder": "Voer code in",
+  "EnterEmailHeader": "Voer e-mail in",
   "EnterPhone": "Mobiel telefoonnummer invoeren",
   "GetCode": "Code ontvangen",
   "LoginRegistryButton": "Lid worden van",
+  "Newsletter": "Ik wil me abonneren op de {{organizationName}} nieuwsbrief",
   "PassworResetTitle": "Nu kunt u een nieuw wachtwoord aanmaken.",
   "PhoneSubtitle": "De twee-factor authenticatie is ingeschakeld om extra beveiliging te bieden. Voer uw mobiele telefoonnummer in om door te gaan met werken in de {{productName}}. Het mobiele telefoonnummer moet ingevoerd worden in een internationaal formaat, met landcode.",
   "PortalContinueTitle": "Bevestig dat u uw {{productName}} opnieuw wilt activeren.",
@@ -30,5 +32,6 @@
   "SignUp": "Inschrijven",
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>ruimte</1>.",
-  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>."
+  "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
+  "TermsAndConditions": "Door verder te gaan, gaat u akkoord met onze <1>Algemene voorwaarden</1> en <2>Privacyverklaring</2>."
 }

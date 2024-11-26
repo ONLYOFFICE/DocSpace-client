@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { IconButton } from "../icon-button";
 

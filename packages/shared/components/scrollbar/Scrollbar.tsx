@@ -45,6 +45,8 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       fixedSize = false,
       className,
       autoFocus,
+      tabIndex = -1,
+      paddingAfterLastItem,
       ...rest
     } = props;
 
@@ -127,6 +129,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
 
     const autoHideContentProps =
       autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
+    const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
 
     return (
       <StyledScrollbar
@@ -134,13 +137,14 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
         data-testid="scrollbar"
         disableTracksWidthCompensation
         $fixedSize={fixedSize}
+        $paddingAfterLastItem={paddingAfterLastItem}
         rtl={isRtl}
         className={className}
         wrapperProps={{ className: "scroll-wrapper" }}
         scrollerProps={{ renderer: renderScroller }}
         contentProps={{
           className: "scroll-body",
-          tabIndex: -1,
+          ...tabIndexProp,
           ...autoHideContentProps,
         }}
         thumbYProps={{ className: "thumb thumb-vertical" }}

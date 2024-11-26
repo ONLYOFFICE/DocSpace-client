@@ -1,7 +1,5 @@
 {
   "PDFform": "Modulo PDF",
-  "PDFFormEditDialogDescription": "Vuoi passare alla modalità di modifica del modulo? Tieni presente che il modulo non sarà più disponibile per la compilazione e dovrai fare nuovamente clic sul pulsante Inizia compilazione dopo la modifica per compilarlo.",
-  "PDFFormEditDialogTitle": "Modifica del modulo",
   "PDFFormIsReadyToast": "Il modulo PDF <1>{{filename}}</1> è pronto per essere compilato.",
   "PDFFormSuccessfullyCreatedDescription": "Il tuo modulo PDF è pronto per essere compilato. Copia il link pubblico per avviare il processo di compilazione del modulo o invita altri utenti in questa stanza."
 }

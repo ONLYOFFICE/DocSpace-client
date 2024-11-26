@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { commonInputStyles } from "../../utils";
-import { Base } from "../../themes";
+import { commonInputStyles, injectDefaultTheme } from "../../utils";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   .hex-value {
     ${commonInputStyles}
@@ -47,9 +46,9 @@ export const Wrapper = styled.div`
   }
 `;
 
-Wrapper.defaultProps = { theme: Base };
-
-export const InputWrapper = styled.div<{ scale?: boolean }>`
+export const InputWrapper = styled.div.attrs(injectDefaultTheme)<{
+  scale?: boolean;
+}>`
   position: relative;
   display: flex;
   align-items: center;
@@ -60,8 +59,6 @@ export const InputWrapper = styled.div<{ scale?: boolean }>`
     font-family: ${(props) => props.theme.fontFamily};
   }
 `;
-
-InputWrapper.defaultProps = { theme: Base };
 
 export const ColorBlock = styled.span<{ isDisabled?: boolean }>`
   position: absolute;

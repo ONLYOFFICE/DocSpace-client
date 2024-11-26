@@ -37,6 +37,7 @@ export const DaysBody = ({
   minDate,
   maxDate,
   isMobile,
+  isScroll,
 }: DaysBodyProps) => {
   const daysElements = getDayElements(
     observedDate,
@@ -49,7 +50,7 @@ export const DaysBody = ({
   const weekdayElements = getWeekdayElements(isMobile);
 
   return (
-    <CalendarContainer isMobile={isMobile}>
+    <CalendarContainer isMobile={isMobile} isScroll={isScroll}>
       {weekdayElements} {daysElements}
     </CalendarContainer>
   );

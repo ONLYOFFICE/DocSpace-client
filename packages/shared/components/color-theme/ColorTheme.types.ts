@@ -77,6 +77,10 @@ export interface IndicatorFilterButtonColorTheme
   themeId: ThemeId.IndicatorFilterButton;
 }
 
+export interface IndexIconButton extends DefaultColorThemeProps {
+  themeId: ThemeId.IndexIconButton;
+}
+
 export interface IndicatorLoaderColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.IndicatorLoader;
 }
@@ -134,4 +138,5 @@ export type ColorThemeProps =
   | ProgressColorTheme
   | VersionBadgeTheme
   | LinkColorTheme
+  | IndexIconButton
   | SubmenuTextTheme;

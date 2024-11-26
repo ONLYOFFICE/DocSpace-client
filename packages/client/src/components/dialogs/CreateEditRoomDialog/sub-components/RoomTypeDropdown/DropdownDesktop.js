@@ -28,10 +28,11 @@ import React from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledDropdownDesktop = styled.div`
+const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
   max-width: 100%;
   position: relative;
 
@@ -59,8 +60,6 @@ const StyledDropdownDesktop = styled.div`
     border-radius: 6px;
   }
 `;
-
-StyledDropdownDesktop.defaultProps = { theme: Base };
 
 const DropdownDesktop = ({ t, open, chooseRoomType }) => {
   return (

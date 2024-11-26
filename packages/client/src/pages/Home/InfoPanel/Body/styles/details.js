@@ -26,9 +26,10 @@
 
 import styled from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
 
-const StyledThumbnail = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledThumbnail = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,7 @@ const StyledThumbnail = styled.div`
   }
 `;
 
-const StyledNoThumbnail = styled.div`
+const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
   height: auto;
   width: 100%;
   display: flex;
@@ -68,8 +69,5 @@ const StyledNoThumbnail = styled.div`
     line-height: 56px;
   }
 `;
-
-StyledThumbnail.defaultProps = { theme: Base };
-StyledNoThumbnail.defaultProps = { theme: Base };
 
 export { StyledThumbnail, StyledNoThumbnail };

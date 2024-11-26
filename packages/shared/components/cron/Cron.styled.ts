@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, mobile } from "../../utils";
 
 export const CronWrapper = styled.div`
   display: flex;
@@ -38,15 +37,13 @@ export const CronWrapper = styled.div`
   }
 `;
 
-export const Suffix = styled.span`
+export const Suffix = styled.span.attrs(injectDefaultTheme)`
   font-size: 13px;
   line-height: 20px;
   font-weight: 400;
 `;
 
-Suffix.defaultProps = { theme: Base };
-
-export const SelectWrapper = styled.div`
+export const SelectWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -55,8 +52,6 @@ export const SelectWrapper = styled.div`
     font-size: 13px;
   }
 `;
-
-SelectWrapper.defaultProps = { theme: Base };
 
 export const Wrapper = styled.div`
   display: flex;

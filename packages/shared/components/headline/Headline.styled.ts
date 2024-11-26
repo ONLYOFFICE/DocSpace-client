@@ -26,14 +26,19 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
 import { Heading } from "@docspace/shared/components/heading";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import {
+  injectDefaultTheme,
+  NoUserSelect,
+  tablet,
+} from "@docspace/shared/utils";
 
 import { size, weight } from "./Headline.constants";
 import type { StyledHeadingProps } from "./Headline.types";
 
-const StyledHeading = styled(Heading)<StyledHeadingProps>`
+const StyledHeading = styled(Heading).attrs(
+  injectDefaultTheme,
+)<StyledHeadingProps>`
   margin: 0;
   line-height: 50px;
   font-size: ${(props) =>
@@ -45,6 +50,5 @@ const StyledHeading = styled(Heading)<StyledHeadingProps>`
     ${(props) => props.headlineType === "content" && `font-size: 18px`};
   }
 `;
-StyledHeading.defaultProps = { theme: Base };
 
 export default StyledHeading;

@@ -40,6 +40,7 @@ const NewItem = ({
   onCreateClick,
   hotkey,
   inputItemVisible,
+  listHeight,
 }: {
   label: string;
   style: React.CSSProperties;
@@ -47,6 +48,7 @@ const NewItem = ({
   onCreateClick?: VoidFunction;
   hotkey?: string;
   inputItemVisible?: boolean;
+  listHeight: number;
 }) => {
   const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
     useCreateDropDown();
@@ -112,6 +114,7 @@ const NewItem = ({
         <NewItemDropDown
           dropDownItems={dropDownItems}
           onCloseDropDown={onCloseDropDown}
+          listHeight={listHeight}
         />
       )}
     </StyledItem>

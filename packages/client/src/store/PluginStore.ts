@@ -234,7 +234,7 @@ class PluginStore {
 
     this.setPluginFrame(frame);
 
-    this.updatePlugins();
+    this.updatePlugins(true);
 
     this.setIsInit(true);
   };

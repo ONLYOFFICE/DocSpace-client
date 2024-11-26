@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
-import { mobileMore, mobile } from "../../utils";
+import { globalColors } from "../../themes";
+import { mobileMore, mobile, injectDefaultTheme } from "../../utils";
 
 const displaySettings = css<{
   hasScroll?: boolean;
@@ -115,7 +115,7 @@ const tabletButtons = css`
   }
 `;
 
-const StyledSaveCancelButtons = styled.div<{
+const StyledSaveCancelButtons = styled.div.attrs(injectDefaultTheme)<{
   displaySettings?: boolean;
   showReminder?: boolean;
   hasScroll?: boolean;
@@ -166,5 +166,5 @@ const StyledSaveCancelButtons = styled.div<{
       `}
   }
 `;
-StyledSaveCancelButtons.defaultProps = { theme: Base };
+
 export default StyledSaveCancelButtons;

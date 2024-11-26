@@ -27,8 +27,12 @@
 import styled from "styled-components";
 
 import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledTooltip = styled.div<{ maxWidthProp?: string; color?: string }>`
+const StyledTooltip = styled.div.attrs(injectDefaultTheme)<{
+  maxWidthProp?: string;
+  color?: string;
+}>`
   .__react_component_tooltip {
     background-color: ${(props) =>
       props.color ? props.color : props.theme.tooltip.color};
@@ -103,9 +107,5 @@ const StyledTooltip = styled.div<{ maxWidthProp?: string; color?: string }>`
     display: none;
   }
 `;
-
-StyledTooltip.defaultProps = {
-  theme: Base,
-};
 
 export default StyledTooltip;

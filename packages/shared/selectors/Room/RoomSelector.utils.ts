@@ -45,6 +45,7 @@ export const convertToItems = (folders: TRoom[]) => {
     const icon = logo.medium;
     const iconOriginal = logo.original;
     const color = logo.color;
+    const cover = logo?.cover;
 
     return {
       id,
@@ -60,6 +61,7 @@ export const convertToItems = (folders: TRoom[]) => {
       foldersCount,
       rootFolderType,
       security,
+      cover,
     };
   });
 

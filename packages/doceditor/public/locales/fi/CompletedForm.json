@@ -2,11 +2,11 @@
   "BackToRoom": "Takaisin huoneeseen",
   "CheckReadyForms": "Katso valmiit lomakkeet",
   "Description": "Lomakkeesi on täytetty ja tallennettu",
-  "DescriptionForAnonymous": "Lähetit täytetyn PDF-lomakkeen, jolle annettiin oma numero. Ota yhteyttä lomakkeen omistajaan saadaksesi annetun numeron ja tarkistaaksesi tilan.",
-  "DescriptionForRegisteredUser": "Täytetty PDF-lomake on tallennettu ja löytyy Valmiit-kansiosta. Ota yhteyttä lomakkeen omistajaan annettua numeroa varten tarkistaaksesi tilan.",
+  "DescriptionForAnonymous": "Lähetit täytetyn PDF-lomakkeen, jolle annettiin oma numero. Ota yhteyttä lomakkeen omistajaanja tarkistaaksesi tilan.",
+  "DescriptionForRegisteredUser": "Täytetty PDF-lomake löytyy Valmiit-kansiosta.",
   "FillItOutAgain": "Täytä uudelleen",
   "FormCompletedSuccessfully": "Lomakkeen täyttö onnistui",
-  "FormNumber": "Lomakkeen numero:",
+  "FormNumber": "Lomakkeen numero",
   "FormOwner": "Lomakkeen omistaja",
   "Title": "Lomake on valmis"
 }

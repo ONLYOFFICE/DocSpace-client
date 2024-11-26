@@ -25,30 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useContext } from "react";
-
-import { DeviceType } from "@docspace/shared/enums";
-//@ts-ignore
-import { isTablet, isMobile, Context } from "@docspace/shared/utils";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-export type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
+import { DeviceType } from "@docspace/shared/enums";
+import { isTablet, isMobile, Context } from "@docspace/shared/utils";
 
-type useViewEffectProps = {
+type UseViewEffectProps = {
   view: string;
   setView: (view: string) => void;
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
 };
 
 type ContextType = {
-  sectionWidth: number;
-  sectionHeight: number;
+  sectionWidth?: number;
+  sectionHeight?: number;
 };
 
 const useViewEffect = ({
   view,
   setView,
   currentDeviceType,
-}: useViewEffectProps) => {
+}: UseViewEffectProps) => {
   const { sectionWidth } = useContext<ContextType>(Context);
 
   useEffect(() => {
@@ -61,11 +58,11 @@ const useViewEffect = ({
       isMobileDevice ||
       ((isTablet() || isMobile()) && currentDeviceType !== DeviceType.desktop)
     ) {
-      isNotRowView && setView("row");
-    } else {
-      isNotTableView && setView("table");
+      if (isNotRowView) setView("row");
+    } else if (isNotTableView) {
+      setView("table");
     }
-  }, [sectionWidth, currentDeviceType]);
+  }, [sectionWidth, currentDeviceType, view, setView]);
 };
 
 export default useViewEffect;

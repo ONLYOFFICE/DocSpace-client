@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "Na adresu {{email}} jsme zaslali šestimístný kód. Kód má omezenou dobu platnosti, zadejte jej co nejdříve.",
   "CodeTitle": "Kód vám byl zaslán e-mailem",
   "ErrorInvalidText": "Za 10 sekund budete přesměrováni na <1>{{productName}}</1>",
-  "ExpiredCode": "Tento kód již není platný. Vyžádejte si nový kód a zkuste to znovu.",
   "ForgotPassword": "Zapomněli jste heslo?",
-  "InvalidCode": "Tento kód je neplatný. Zkuste to znovu.",
   "LDAPUsernamePlaceholder": "Uživatelské jméno {{ldap_domain}}",
   "MessageAuthorize": "Přihlaste se a pokračujte",
   "MessageEmailConfirmed": "Váš e-mail byl úspěšně aktivován.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Zadejte prosím e-mail, který jste použili při registraci. Budou na něj zaslány pokyny k obnovení hesla.",
-  "NotFoundCode": "Nemůžete najít kód? Zkontrolujte složku «Spam».",
   "PasswordRecoveryTitle": "Obnovení hesla",
   "RecoverAccess": "Obnovit přístup",
   "RecoverContactEmailPlaceholder": "Kontaktní emailová adresa",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Žádost o registraci",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Výchozí doba trvání relace je 20 minut. Zaškrtnutím této možnosti ji nastavíte na 1 rok. Chcete-li nastavit vlastní hodnotu, přejděte do Nastavení.",
-  "ResendCode": "Opětovné zaslání kódu",
   "SignInLDAP": "Přihlaste se do: {{ldap_domain}}",
   "SignInLdapHelper": "Použijte pověření pro firemní doménu",
   "UserIsAlreadyRegistered": "Uživatel <1>{{email}}</1> je již v tomto {{productName}} zaregistrován, zadejte své heslo nebo se vraťte zpět a pokračujte jiným e-mailem."

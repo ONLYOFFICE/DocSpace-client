@@ -61,7 +61,7 @@ const ArticleApps = React.memo(
     const theme = useTheme();
 
     const baseUrl = getLink();
-    const desktopLink = `${baseUrl}/desktop.aspx`;
+    const desktopLink = `${baseUrl}/download-desktop.aspx`;
     const androidLink = `${baseUrl}/office-for-android.aspx`;
     const iosLink = `${baseUrl}/office-for-ios.aspx`;
 

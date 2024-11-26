@@ -88,7 +88,11 @@ const ProfileRemoveForm = ({
   if (isProfileDeleted) {
     return (
       <>
-        <GreetingContainer welcomeTitle="Confirm:DeleteProfileSuccessMessage" />
+        <GreetingContainer
+          greetingText={t("Confirm:DeleteProfileSuccessMessage", {
+            productName: t("Common:ProductName"),
+          })}
+        />
         <FormWrapper>
           <Text>
             {t("DeleteProfileSuccessDescription", {
@@ -114,7 +118,7 @@ const ProfileRemoveForm = ({
 
   return (
     <>
-      <GreetingContainer greetingSettings={greetingSettings} />
+      <GreetingContainer greetingText={greetingSettings} />
       <FormWrapper>
         <div className="subtitle">
           <Text

@@ -28,7 +28,7 @@ import React, { useState, useRef } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import { DeviceType } from "../../../enums";

@@ -28,8 +28,8 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import moment from "moment";
-import "moment/locale/ar-sa";
 
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
 import { getValidDates } from "./utils";
@@ -49,6 +49,7 @@ const Calendar = ({
   onChange,
   isMobile,
   forwardedRef,
+  isScroll = false,
 }: CalendarProps) => {
   moment.locale(locale);
 
@@ -105,6 +106,49 @@ const Calendar = ({
     setObservedDate(date);
   }, [initialDate, maxDate, minDate]);
 
+  const CalendarBodyNode =
+    selectedScene === 0 ? (
+      <Days
+        observedDate={observedDate}
+        setObservedDate={setObservedDate}
+        setSelectedScene={setSelectedScene}
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+        minDate={resultMinDate}
+        maxDate={resultMaxDate}
+        isMobile={isMobile || false}
+        isScroll={isScroll}
+      />
+    ) : selectedScene === 1 ? (
+      <Months
+        observedDate={observedDate}
+        setObservedDate={setObservedDate}
+        setSelectedScene={setSelectedScene}
+        selectedDate={selectedDate}
+        minDate={resultMinDate}
+        maxDate={resultMaxDate}
+        isMobile={isMobile || false}
+        isScroll={isScroll}
+      />
+    ) : (
+      <Years
+        observedDate={observedDate}
+        setObservedDate={setObservedDate}
+        setSelectedScene={setSelectedScene}
+        selectedDate={selectedDate}
+        minDate={resultMinDate}
+        maxDate={resultMaxDate}
+        isMobile={isMobile || false}
+        isScroll={isScroll}
+      />
+    );
+
+  const CalendarNode = isScroll ? (
+    <Scrollbar>{CalendarBodyNode}</Scrollbar>
+  ) : (
+    CalendarBodyNode
+  );
+
   return (
     <StyledContainerTheme
       id={id}
@@ -114,39 +158,9 @@ const Calendar = ({
       ref={forwardedRef}
       $currentColorScheme={theme?.currentColorScheme}
       data-testid="calendar"
+      isScroll={isScroll}
     >
-      {selectedScene === 0 ? (
-        <Days
-          observedDate={observedDate}
-          setObservedDate={setObservedDate}
-          setSelectedScene={setSelectedScene}
-          selectedDate={selectedDate}
-          handleDateChange={handleDateChange}
-          minDate={resultMinDate}
-          maxDate={resultMaxDate}
-          isMobile={isMobile || false}
-        />
-      ) : selectedScene === 1 ? (
-        <Months
-          observedDate={observedDate}
-          setObservedDate={setObservedDate}
-          setSelectedScene={setSelectedScene}
-          selectedDate={selectedDate}
-          minDate={resultMinDate}
-          maxDate={resultMaxDate}
-          isMobile={isMobile || false}
-        />
-      ) : (
-        <Years
-          observedDate={observedDate}
-          setObservedDate={setObservedDate}
-          setSelectedScene={setSelectedScene}
-          selectedDate={selectedDate}
-          minDate={resultMinDate}
-          maxDate={resultMaxDate}
-          isMobile={isMobile || false}
-        />
-      )}
+      {CalendarNode}
     </StyledContainerTheme>
   );
 };

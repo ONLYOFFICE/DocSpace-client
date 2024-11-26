@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { LoaderTypes } from "./Loader.enums";
+import { TColorScheme } from "../../themes";
 
 export interface LoaderProps {
   /** Font color */
@@ -42,4 +43,10 @@ export interface LoaderProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   primary?: boolean;
+  isDisabled?: boolean;
+}
+
+export interface LoaderThemeProps extends LoaderProps {
+  ref: SVGSVGElement;
+  $currentColorScheme?: TColorScheme;
 }

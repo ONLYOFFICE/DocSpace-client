@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 
-const StyledOwnerInfo = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledOwnerInfo = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: start;
@@ -55,9 +56,7 @@ const StyledOwnerInfo = styled.div`
   }
 `;
 
-StyledOwnerInfo.defaultProps = { theme: Base };
-
-const StyledPeopleSelectorInfo = styled.div`
+const StyledPeopleSelectorInfo = styled.div.attrs(injectDefaultTheme)`
   margin-bottom: 12px;
 
   .new-owner {
@@ -76,9 +75,7 @@ const StyledPeopleSelectorInfo = styled.div`
   }
 `;
 
-StyledPeopleSelectorInfo.defaultProps = { theme: Base };
-
-const StyledPeopleSelector = styled.div`
+const StyledPeopleSelector = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
 
@@ -95,9 +92,7 @@ const StyledPeopleSelector = styled.div`
   }
 `;
 
-StyledPeopleSelector.defaultProps = { theme: Base };
-
-const StyledAvailableList = styled.div`
+const StyledAvailableList = styled.div.attrs(injectDefaultTheme)`
   display: flex;
 
   flex-direction: column;
@@ -121,9 +116,7 @@ const StyledAvailableList = styled.div`
   }
 `;
 
-StyledAvailableList.defaultProps = { theme: Base };
-
-const StyledFooterWrapper = styled.div`
+const StyledFooterWrapper = styled.div.attrs(injectDefaultTheme)`
   height: 100%;
   width: 100%;
 
@@ -150,9 +143,7 @@ const StyledFooterWrapper = styled.div`
   }
 `;
 
-StyledFooterWrapper.defaultProps = { theme: Base };
-
-const StyledSelectedOwnerContainer = styled.div`
+const StyledSelectedOwnerContainer = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
 
   box-sizing: border-box;
@@ -166,9 +157,7 @@ const StyledSelectedOwnerContainer = styled.div`
   margin-bottom: 24px;
 `;
 
-StyledSelectedOwnerContainer.defaultProps = { theme: Base };
-
-const StyledSelectedOwner = styled.div`
+const StyledSelectedOwner = styled.div.attrs(injectDefaultTheme)`
   width: fit-content;
   height: 28px;
 
@@ -205,8 +194,6 @@ const StyledSelectedOwner = styled.div`
     }
   }
 `;
-
-StyledSelectedOwner.defaultProps = { theme: Base };
 
 export {
   StyledOwnerInfo,

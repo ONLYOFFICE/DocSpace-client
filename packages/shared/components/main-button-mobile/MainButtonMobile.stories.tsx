@@ -28,9 +28,12 @@ import React, { useEffect, useReducer, useState } from "react";
 import styled, { css } from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
-import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.folder.react.svg?url";
+import MobileActionsDocumentReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
+import MobileActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
+import MobileActionsSpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
+import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
-import MobileStartReactSvgUrl from "PUBLIC_DIR/images/mobile.star.react.svg?url";
+import MobileUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 import { MainButtonMobile } from "./MainButtonMobile";
 
@@ -179,17 +182,17 @@ const Template = ({ ...args }) => {
     {
       key: "1",
       label: "New document",
-      icon: MobileActionsFolderReactSvgUrl,
+      icon: MobileActionsDocumentReactSvgUrl,
     },
     {
       key: "2",
       label: "New presentation",
-      icon: MobileActionsFolderReactSvgUrl,
+      icon: MobileActionsPresentationReactSvgUrl,
     },
     {
       key: "3",
       label: "New spreadsheet",
-      icon: MobileActionsFolderReactSvgUrl,
+      icon: MobileActionsSpreadsheetReactSvgUrl,
     },
     {
       key: "4",
@@ -202,13 +205,13 @@ const Template = ({ ...args }) => {
     {
       key: "1",
       label: "Import point",
-      icon: MobileStartReactSvgUrl,
+      icon: MobileUploadReactSvgUrl,
       onClick: () => setIsOpenButton(false),
     },
     {
       key: "2",
       label: "Import point",
-      icon: MobileStartReactSvgUrl,
+      icon: MobileUploadReactSvgUrl,
       onClick: () => setIsOpenButton(false),
     },
     {
@@ -219,7 +222,7 @@ const Template = ({ ...args }) => {
     {
       key: "4",
       label: "Import point",
-      icon: MobileStartReactSvgUrl,
+      icon: MobileUploadReactSvgUrl,
       onClick: () => setIsOpenButton(false),
     },
   ];

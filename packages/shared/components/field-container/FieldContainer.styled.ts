@@ -26,8 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { tablet } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, tablet } from "../../utils";
 
 const getHorizontalCss = css<{ removeMargin?: boolean; labelWidth?: string }>`
   display: flex;
@@ -92,7 +91,7 @@ const getVerticalCss = css<{ removeMargin?: boolean }>`
   }
 `;
 
-const Container = styled.div<{
+const Container = styled.div.attrs(injectDefaultTheme)<{
   maxwidth?: string;
 
   color?: string;
@@ -113,5 +112,4 @@ const Container = styled.div<{
   }
 `;
 
-Container.defaultProps = { theme: Base };
 export default Container;

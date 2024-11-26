@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "Alle documenten die u uploadt zullen worden geconverteerd naar Office Open XML-indeling (docx, xlsx of pptx) voor snellere bewerking.",
+  "ConversionXmlMessage": "Het document dat u opent, wordt omgezet naar het Office Open XML formaat (docx of xlsx) zodat u het sneller kunt bekijken en bewerken.",
   "ConvertedFileDestination": "De kopie van het bestand zal worden aangemaakt in de <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "Documenten omzetten",
   "FailedToConvert": "Conversie mislukt",
@@ -7,5 +8,6 @@
   "HideMessage": "Laat dit bericht niet meer zien",
   "InfoCreateFileIn": "Het nieuwe bestand '{{fileTitle}}' is aangemaakt in '{{folderTitle}}'",
   "OpenFileMessage": "Het bestand dat je opent zal worden geconverteerd naar het Open Office XML formaat voor snellere weergave en bewerking. ",
-  "SaveOriginalFormatMessage": "Bewaar de bestandskopie in het oorspronkelijke formaat"
+  "SaveOriginalFormatMessage": "Bewaar de bestandskopie in het oorspronkelijke formaat",
+  "SelectFileType": "Selecteer een bestandstype:"
 }

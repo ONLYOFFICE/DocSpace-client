@@ -1,0 +1,9 @@
+{
+  "AllowButton": "Cho phép",
+  "ConsentDescription": "Dữ liệu được chia sẻ với <strong>{{displayName}}</strong> sẽ được điều chỉnh bởi <strong>{{nameApp}}</strong> <6> chính sách quyền riêng tư </6> và <6>điều khoản dịch vụ</6>. Bạn có thể thu hồi sự đồng ý này bất kỳ lúc nào trong phần cài đặt tài khoản {{productName}} của mình.",
+  "ConsentSubHeader": "<1>{{nameApp}} </1> muốn được truy cập các dữ liệu sau trong <strong>tài khoản {{productName}} của bạn</strong>:",
+  "DenyButton": "Từ chối",
+  "NotYou": "Không phải là bạn?",
+  "SignedInAs": "Đã đăng nhập với tư cách",
+  "ToContinue": "Tiếp tục"
+}

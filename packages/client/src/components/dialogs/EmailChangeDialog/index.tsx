@@ -36,7 +36,6 @@ import { EmailInput } from "@docspace/shared/components/email-input";
 import { InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { Text } from "@docspace/shared/components/text";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const DialogBodyWrapper = styled.div`
   display: flex;
@@ -73,7 +72,7 @@ const EmailChangeDialog = ({
   const { t } = useTranslation(["Settings", "SMTPSettings", "Common"]);
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
@@ -112,7 +111,7 @@ const EmailChangeDialog = ({
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

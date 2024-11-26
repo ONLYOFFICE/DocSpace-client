@@ -1,6 +1,7 @@
 {
   "AdditionalSections": "Додаткові розділи",
   "DisplayFavorites": "Відображати вподобання",
+  "DisplayFileExtension": "Показувати розширення файлу поряд з ім'ям файлу",
   "DisplayNotification": "Відображати сповіщення при переміщенні елементів до кошика",
   "DisplayRecent": "Відображати нещодавні",
   "DisplayTemplates": "Відображати шаблони",

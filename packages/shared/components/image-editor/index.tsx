@@ -27,6 +27,8 @@
 import React from "react";
 import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
+import ButtonDelete from "./ButtonDelete";
+
 import { ImageEditorProps } from "./ImageEditor.types";
 import AvatarPreview from "./AvatarPreview";
 
@@ -40,7 +42,9 @@ const ImageEditor = ({
   classNameWrapperImageCropper,
   className,
   disableImageRescaling,
+  editorBorderRadius,
   maxImageSize,
+  onChangeFile,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
     onChangeImage({ ...image, uploadedFile: f });
@@ -63,18 +67,20 @@ const ImageEditor = ({
             setPreviewImage={setPreview}
             isDisabled={isDisabled}
             disableImageRescaling={disableImageRescaling}
+            onChangeFile={onChangeFile}
+            editorBorderRadius={editorBorderRadius}
           />
           {Preview}
         </div>
       )}
-      <Dropzone
+      {/* <Dropzone
         t={t}
         setUploadedFile={setUploadedFile}
         isDisabled={isDisabled}
         maxImageSize={maxImageSize}
-      />
+      /> */}
     </div>
   );
 };
 
-export { ImageEditor, AvatarPreview };
+export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };

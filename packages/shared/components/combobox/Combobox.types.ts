@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types";
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
@@ -48,6 +49,9 @@ export type TOption =
       internal?: boolean;
       access?: ShareAccessRights;
       className?: string;
+      title?: string;
+      action?: unknown;
+      onClick?: (opt: TContextMenuValueTypeOnClick) => void;
     }
   | {
       key: string | number;
@@ -65,6 +69,9 @@ export type TOption =
       internal?: undefined;
       access?: ShareAccessRights;
       className?: string;
+      title?: string;
+      action?: unknown;
+      onClick?: (opt: TContextMenuValueTypeOnClick) => void;
     };
 
 export interface ComboboxProps {
@@ -168,6 +175,8 @@ export interface ComboboxProps {
   plusBadgeValue?: number;
   withLabel?: boolean;
   displayArrow?: boolean;
+  topSpace?: number;
+  disableItemClickFirstLevel?: boolean;
 }
 
 export interface ComboButtonProps {
@@ -194,7 +203,7 @@ export interface ComboButtonProps {
 }
 
 export interface ComboButtonThemeProps extends ComboButtonProps {
-  ref: React.LegacyRef<HTMLDivElement>;
+  // ref: React.LegacyRef<HTMLDivElement>;
   $currentColorScheme?: TColorScheme;
   interfaceDirection?: string;
   containOptions?: number;

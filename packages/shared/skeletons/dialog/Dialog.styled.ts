@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
-import { mobile } from "../../utils";
+
+import { injectDefaultTheme, mobile } from "../../utils";
 import { DialogAsideSkeletonProps, DialogSkeletonProps } from "./Dialog.types";
 
-const StyledDialogLoader = styled.div<DialogSkeletonProps>`
+const StyledDialogLoader = styled.div.attrs(
+  injectDefaultTheme,
+)<DialogSkeletonProps>`
   height: auto;
 
   width: ${(props) => (props.isLarge ? "520px" : "400px")};
@@ -56,8 +58,6 @@ const StyledDialogLoader = styled.div<DialogSkeletonProps>`
     padding: 16px;
   }
 `;
-
-StyledDialogLoader.defaultProps = { theme: Base };
 
 const StyledDialogAsideLoader = styled.div<DialogAsideSkeletonProps>`
   ${(props) =>

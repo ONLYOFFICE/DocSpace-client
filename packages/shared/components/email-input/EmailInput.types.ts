@@ -76,4 +76,5 @@ export interface EmailInputProps {
   withBorder?: boolean;
   maxLength?: number;
   title?: string;
+  handleAnimationStart: (e: React.AnimationEvent<HTMLInputElement>) => void;
 }

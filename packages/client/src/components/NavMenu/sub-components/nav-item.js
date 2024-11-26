@@ -32,20 +32,22 @@ import styled, { css } from "styled-components";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { commonIconsStyles, tablet } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  tablet,
+} from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-const NavItemSeparator = styled.div`
+const NavItemSeparator = styled.div.attrs(injectDefaultTheme)`
   border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}
     ${(props) => props.theme.navItem.separatorColor};
   margin: 0 16px;
 `;
 
-NavItemSeparator.defaultProps = { theme: Base };
-
-const NavItemWrapper = styled(Link)`
+const NavItemWrapper = styled(Link).attrs(injectDefaultTheme)`
   display: flex;
   min-width: 48px;
   min-height: 50px;
@@ -94,9 +96,7 @@ const NavItemWrapper = styled(Link)`
   }
 `;
 
-NavItemWrapper.defaultProps = { theme: Base };
-
-const NavItemLabel = styled(Text)`
+const NavItemLabel = styled(Text).attrs(injectDefaultTheme)`
   margin-block: 0;
   margin-inline: 16px auto;
 
@@ -106,8 +106,6 @@ const NavItemLabel = styled(Text)`
       ? props.theme.navItem.activeColor
       : props.theme.navItem.baseColor};
 `;
-
-NavItemLabel.defaultProps = { theme: Base };
 
 const badgeCss = css`
   position: absolute;
@@ -135,7 +133,7 @@ const VersionBadge = styled.div`
   inset-inline-start: 10px;
 `;
 
-const StyledMenuIcon = styled(MenuIcon)`
+const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) =>
@@ -145,7 +143,6 @@ const StyledMenuIcon = styled(MenuIcon)`
   }
 `;
 
-StyledMenuIcon.defaultProps = { theme: Base };
 const NavItem = React.memo((props) => {
   //console.log("NavItem render");
   const {

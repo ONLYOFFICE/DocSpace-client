@@ -37,10 +37,10 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleStore from "SRC_DIR/store/PeopleStore";
-import GroupsStore from "SRC_DIR/store/GroupsStore";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
-import { StyledModal } from "./CreateEditGroupDialog.styled";
+import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -60,7 +60,11 @@ const CreateGroupDialog = ({
   getGroups,
 }: CreateGroupDialogProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(["Common", "PeopleTranslations"]);
+  const { t } = useTranslation([
+    "Common",
+    "PeopleTranslations",
+    "InviteDialog",
+  ]);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
@@ -69,23 +73,23 @@ const CreateGroupDialog = ({
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
+    useState<boolean>(false);
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
     setGroupParams({ ...groupParams, groupName: e.target.value });
 
-  const setGroupManager = (groupManager: TUser | null) =>
+  const onHideSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(false);
+  const setGroupManager = (groupManager: TUser | null) => {
     setGroupParams({ ...groupParams, groupManager });
-
+    setSelectGroupMangerPanelIsVisible(false);
+  };
   const setGroupMembers = (groupMembers: TUser[]) =>
     setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
-  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
-    useState<boolean>(false);
-
   const onShowSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(true);
-  const onHideSelectGroupManagerPanel = () =>
-    setSelectGroupMangerPanelIsVisible(false);
 
   const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
     useState<boolean>(false);
@@ -118,10 +122,11 @@ const CreateGroupDialog = ({
     });
 
     if (showErrorWasSelected) {
-      toastr.warning("Some users have already been added");
+      toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
     }
 
     setGroupMembers(resultGroupMembers);
+    onHideSelectMembersPanel();
   };
 
   const removeMember = (member: TUser) => {
@@ -149,12 +154,11 @@ const CreateGroupDialog = ({
 
   return (
     <>
-      <StyledModal
+      <ModalDialog
         displayType={ModalDialogType.aside}
         withBodyScroll
         visible={visible}
         onClose={onClose}
-        withFooterBorder
         //   isScrollLocked={isScrollLocked}
         //   isOauthWindowOpen={isOauthWindowOpen}
       >
@@ -163,21 +167,23 @@ const CreateGroupDialog = ({
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <GroupNameParam
-            groupName={groupParams.groupName}
-            onChangeGroupName={onChangeGroupName}
-          />
-          <HeadOfGroup
-            groupManager={groupParams.groupManager}
-            removeManager={removeManager}
-            onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-          />
-          <MembersParam
-            groupManager={groupParams.groupManager}
-            groupMembers={groupParams.groupMembers}
-            removeMember={removeMember}
-            onShowSelectMembersPanel={onShowSelectMembersPanel}
-          />
+          <StyledBodyContent>
+            <GroupNameParam
+              groupName={groupParams.groupName}
+              onChangeGroupName={onChangeGroupName}
+            />
+            <HeadOfGroup
+              groupManager={groupParams.groupManager}
+              removeManager={removeManager}
+              onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+            />
+            <MembersParam
+              groupManager={groupParams.groupManager}
+              groupMembers={groupParams.groupMembers}
+              removeMember={removeMember}
+              onShowSelectMembersPanel={onShowSelectMembersPanel}
+            />
+          </StyledBodyContent>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -205,11 +211,10 @@ const CreateGroupDialog = ({
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </StyledModal>
+      </ModalDialog>
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel
-          isVisible={selectGroupMangerPanelIsVisible}
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
@@ -218,7 +223,6 @@ const CreateGroupDialog = ({
 
       {selectMembersPanelIsVisible && (
         <SelectMembersPanel
-          isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Row } from "@docspace/shared/components/row";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";
@@ -15,6 +16,7 @@ export const OAuthRow = (props: RowProps) => {
     inProgress,
     getContextMenuItems,
     setSelection,
+    setBufferSelection,
   } = props;
   const navigate = useNavigate();
 
@@ -26,7 +28,17 @@ export const OAuthRow = (props: RowProps) => {
 
   const handleToggleEnabled = async () => {
     if (!changeClientStatus) return;
-    await changeClientStatus(item.clientId, !item.enabled);
+    try {
+      await changeClientStatus(item.clientId, !item.enabled);
+
+      if (!item.enabled) {
+        toastr.success(t("ApplicationEnabledSuccessfully"));
+      } else {
+        toastr.success(t("ApplicationDisabledSuccessfully"));
+      }
+    } catch (e) {
+      toastr.error(e as string);
+    }
   };
 
   const handleRowClick = (e: React.MouseEvent) => {
@@ -67,6 +79,12 @@ export const OAuthRow = (props: RowProps) => {
       inProgress={inProgress}
       onSelect={() => setSelection && setSelection(item.clientId)}
       className={`oauth2-row${isChecked ? " oauth2-row-selected" : ""}`}
+      isIndexEditingMode={false}
+      onContextClick={(isRightClick) => {
+        if (isRightClick) return;
+        setSelection!("");
+        setBufferSelection!(item.clientId);
+      }}
     >
       <RowContent
         sectionWidth={sectionWidth}

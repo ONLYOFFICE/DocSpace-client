@@ -32,6 +32,10 @@ import RoomType from "@docspace/shared/components/room-type";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { RoomsType } from "@docspace/shared/enums";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledRoomTypeList = styled.div`
   margin-top: 20px;
@@ -42,9 +46,26 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
-const RoomTypeList = ({ t, setRoomType }) => {
+const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
+  const handleClick = (roomType) => {
+    if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
+
+    setRoomType(roomType);
+  };
+
   return (
     <StyledRoomTypeList>
+      <Tooltip
+        place="bottom"
+        id="create-room-tooltip"
+        openOnClick={false}
+        getContent={() => (
+          <Text fontSize="12px" noSelect>
+            {t("Files:WarningCreationFormRoom")}
+          </Text>
+        )}
+      />
+
       {RoomsTypeValues.map((roomType) => (
         <RoomType
           id={roomType}
@@ -52,7 +73,8 @@ const RoomTypeList = ({ t, setRoomType }) => {
           key={roomType}
           roomType={roomType}
           type={"listItem"}
-          onClick={() => setRoomType(roomType)}
+          onClick={() => handleClick(roomType)}
+          disabledFormRoom={disabledFormRoom}
         />
       ))}
     </StyledRoomTypeList>

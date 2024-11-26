@@ -78,7 +78,6 @@
     },
     editorCustomization: {},
     keysForReload: [
-      "src",
       "rootPath",
       "width",
       "height",

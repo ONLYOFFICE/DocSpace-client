@@ -50,7 +50,6 @@ import {
   onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
-import useSDK from "@/hooks/useSDK";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
 type IConfigType = IConfig & {
@@ -77,6 +76,8 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  frameConfig,
+
   filesSettings,
 
   onDownloadAs,
@@ -93,8 +94,6 @@ const Editor = ({
   const searchParams = useSearchParams();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
-
-  const { frameConfig } = useSDK();
 
   const {
     onDocumentReady,

@@ -221,13 +221,13 @@ export async function getOAuthClient(clientId: string) {
   const route = `/clients/${clientId}/public/info`;
   const path = `api/2.0${route}`;
 
-  const urls: string[] = config.oauth2.identity.map(
+  const urls: string[] = config?.oauth2?.identity.map(
     (url: string) => `https://${url}/${path}`,
   );
 
-  const actions = await Promise.allSettled(
-    urls.map((url: string) => fetch(url)),
-  );
+  const actions = urls
+    ? await Promise.allSettled(urls.map((url: string) => fetch(url)))
+    : [];
 
   const oauthClient = IS_TEST
     ? getClientHandler()
@@ -432,7 +432,7 @@ export async function getAvailablePortals(data: {
 
   const path = `/portal/signin`;
 
-  if (config.oauth2.apiSystem.length) {
+  if (config?.oauth2?.apiSystem.length) {
     const urls: string[] = config.oauth2.apiSystem.map(
       (url: string) => `https://${url}/apisystem${path}`,
     );

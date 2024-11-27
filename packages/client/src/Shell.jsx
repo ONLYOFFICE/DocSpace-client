@@ -39,6 +39,7 @@ import SocketHelper, {
 } from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Guidance } from "@docspace/shared/components/guidance";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
@@ -486,6 +487,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   return (
     <Layout>
+      <Guidance />
       {toast}
       {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}

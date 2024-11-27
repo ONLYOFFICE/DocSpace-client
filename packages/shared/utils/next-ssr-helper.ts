@@ -64,9 +64,9 @@ export const createRequest = (
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
 
-  const baseURL = !apiSystem ? getBaseUrl() : "https://oauth.onlyoffice.io";
+  const baseURL = getBaseUrl();
 
-  if (baseURL) hdrs.set("origin", baseURL);
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
   // hdrs.set("x-docspace-address", baseURL);
 

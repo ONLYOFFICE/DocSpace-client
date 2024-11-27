@@ -55,6 +55,7 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
           href={apiOAuthLink}
           tag="a"
           themeId={ThemeId.Link}
+          style={{ marginBottom: "20px" }}
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
         </ColorTheme>

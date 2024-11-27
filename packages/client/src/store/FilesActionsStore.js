@@ -2493,6 +2493,8 @@ class FilesActionStore {
         isRoom,
         rootRoomTitle: !!roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+        isLifetimeEnabled:
+          itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
       };
 
       setSelection([]);

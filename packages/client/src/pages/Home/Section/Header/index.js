@@ -155,7 +155,7 @@ const StyledContainer = styled.div`
   }
 
   ${(props) =>
-    props.isVirtualDataRoomType &&
+    props.isLifetimeEnabled &&
     css`
       .title-icon {
         svg {
@@ -264,6 +264,7 @@ const SectionHeaderContent = (props) => {
     displayAbout,
     revokeFilesOrder,
     saveIndexOfFiles,
+    infoPanelRoom,
   } = props;
 
   const location = useLocation();
@@ -436,8 +437,7 @@ const SectionHeaderContent = (props) => {
 
     if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
-    if (isVirtualDataRoomType && selectedFolder.lifetime)
-      return LifetimeRoomIconUrl;
+    if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
     return "";
   };
@@ -505,11 +505,19 @@ const SectionHeaderContent = (props) => {
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
   const stateIsPublicRoomType = location?.state?.isPublicRoomType;
+  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
 
   const isRoot =
     isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
       : isRootFolder || isContactsPage || isSettingsPage;
+
+  const isLifetimeEnabled = Boolean(
+    !isRoot &&
+      (selectedFolder?.lifetime ||
+        infoPanelRoom?.lifetime ||
+        (isLoading && stateIsLifetimeEnabled)),
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -567,12 +575,14 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon = getTitleIcon();
 
-  const titleIconTooltip = selectedFolder.lifetime
+  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
+
+  const titleIconTooltip = lifetime
     ? `${t("Files:RoomFilesLifetime", {
-        days: selectedFolder.lifetime.value,
-        period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
+        days: lifetime.value,
+        period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
-        selectedFolder.lifetime.deletePermanently
+        lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
           : t("Files:AfterFilesWillBeMovedToTrash")
       }`
@@ -597,6 +607,7 @@ const SectionHeaderContent = (props) => {
           isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
+          isLifetimeEnabled={isLifetimeEnabled}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
@@ -785,7 +796,7 @@ export default inject(
       saveIndexOfFiles,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
 
     const {
       title,
@@ -971,6 +982,7 @@ export default inject(
       isShared,
       isExternal,
       displayAbout,
+      infoPanelRoom,
     };
   },
 )(

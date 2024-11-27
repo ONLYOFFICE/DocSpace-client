@@ -38,3 +38,4 @@ export { default as PreviewManager } from "./modules/preview/previewManager";
 export { default as CacheManager } from "./modules/cache/cacheManager";
 export { default as CollaborationManager } from "./modules/collaboration/collaborationManager";
 export { default as IndexingManager } from "./modules/indexing/indexingManager";
+export { default as ActivityManager } from "./modules/activity/activityManager";

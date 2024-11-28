@@ -92,6 +92,7 @@
   "DeleteTheme": "Delete theme",
   "DeleteThemeForever": "Delete theme forever?",
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
+  "DisableEmailDescription": "If this box is checked, {{sectionName}} users will not need to verify their email after the first authorization in {{productName}}.",
   "DisableEmailVerification": "Disable email verification",
   "DiskSpaceUsed": "Disk space used",
   "DNSSettings": "DNS Settings",

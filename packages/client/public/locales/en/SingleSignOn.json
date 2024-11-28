@@ -8,7 +8,6 @@
   "CertificateExist": "Certificate with same action type already exists",
   "CustomEntryButton": "Custom login button caption",
   "CustomEntryTooltip": "The caption for the button used to login into the space with the Single Sign-On service",
-  "DisableEmailDescription": "If this box is checked, SSO users will not need to verify their email after the first authorization in {{productName}}.",
   "DownloadMetadataXML": "Download SP metadata XML",
   "Encryption": "Encryption",
   "GenerateCertificate": "Generate New Self-Signed Certificate",

@@ -74,7 +74,8 @@ const AdvancedSettings = ({
           onChange={onChangeDisableEmailVerification}
         />
         <HelpButton
-          tooltipContent={t("DisableEmailDescription", {
+          tooltipContent={t("Settings:DisableEmailDescription", {
+            sectionName: t("Common:LDAP"),
             productName: t("Common:ProductName"),
           })}
         />

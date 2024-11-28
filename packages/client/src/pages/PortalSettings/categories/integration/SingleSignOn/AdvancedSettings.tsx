@@ -104,7 +104,8 @@ const AdvancedSettings = (props: InjectedProps) => {
           onChange={setCheckbox}
         />
         <HelpButton
-          tooltipContent={t("DisableEmailDescription", {
+          tooltipContent={t("Settings:DisableEmailDescription", {
+            sectionName: t("Common:SSO"),
             productName: t("Common:ProductName"),
           })}
         />

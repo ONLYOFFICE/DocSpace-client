@@ -303,7 +303,7 @@ class LdapFormStore {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
 
-  setIsDisableEmailVerification = (disableEmailVerification) => {
+  setDisableEmailVerification = (disableEmailVerification) => {
     this.disableEmailVerification = disableEmailVerification;
   };
 

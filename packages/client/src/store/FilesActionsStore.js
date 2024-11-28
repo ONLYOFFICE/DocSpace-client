@@ -125,7 +125,6 @@ class FilesActionStore {
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
-  isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
@@ -172,10 +171,6 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
   }
-
-  setIsBulkDownload = (isBulkDownload) => {
-    this.isBulkDownload = isBulkDownload;
-  };
 
   updateCurrentFolder = async (
     fileIds,
@@ -625,13 +620,6 @@ class FilesActionStore {
     const { addActiveItems } = this.filesStore;
     const { label } = translations;
 
-    if (this.isBulkDownload) {
-      //toastr.error(); TODO: new add cancel download operation and new translation "ErrorMassage_SecondDownload"
-      return;
-    }
-
-    this.setIsBulkDownload(true);
-
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
@@ -669,7 +657,6 @@ class FilesActionStore {
                 );
 
           clearActiveOperations(fileIds, folderIds);
-          this.setIsBulkDownload(false);
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
@@ -686,7 +673,6 @@ class FilesActionStore {
         },
       );
     } catch (err) {
-      this.setIsBulkDownload(false);
       clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({
         visible: true,
@@ -2507,6 +2493,8 @@ class FilesActionStore {
         isRoom,
         rootRoomTitle: !!roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+        isLifetimeEnabled:
+          itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
       };
 
       setSelection([]);

@@ -25,6 +25,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -90,10 +91,6 @@ const GenerateDeveloperTokenDialog = ({
     onClose();
   };
 
-  React.useEffect(() => {
-    if (token) onCopyClick();
-  }, [token, onCopyClick]);
-
   const onGenerate = async () => {
     if (!client || requestRunning) return;
 
@@ -104,37 +101,33 @@ const GenerateDeveloperTokenDialog = ({
       return;
     }
 
-    try {
-      const { clientId, clientSecret, scopes } = client;
+    api.oauth
+      .generateDevelopToken(client.clientId, client.clientSecret, client.scopes)
+      ?.then((data) => {
+        setRequestRunning(false);
 
-      setRequestRunning(true);
+        if (!data) return;
 
-      const data = await api.oauth.generateDevelopToken(
-        clientId,
-        clientSecret,
-        scopes,
-      );
+        const { access_token: accessToken, expires_in: expiresIn } = data;
 
-      setRequestRunning(false);
+        copyShareLink(accessToken);
+        toastr.success(t("DeveloperTokenCopied"));
 
-      if (!data) return;
+        const created = new Date();
+        // convert sec to ms
+        const expires = new Date(created.getTime() + expiresIn * 1000);
 
-      const { access_token: accessToken, expires_in: expiresIn } = data;
-
-      const created = new Date();
-      // convert sec to ms
-      const expires = new Date(created.getTime() + expiresIn * 1000);
-
-      if (accessToken) {
-        setToken(accessToken);
-        setDates({
-          created: getDate(created, i18nParam),
-          expires: getDate(expires, i18nParam),
-        });
-      }
-    } catch (e) {
-      toastr.error(e as TData);
-    }
+        if (accessToken) {
+          setToken(accessToken);
+          setDates({
+            created: getDate(created, i18nParam),
+            expires: getDate(expires, i18nParam),
+          });
+        }
+      })
+      .catch((e) => {
+        toastr.error(e as TData);
+      });
   };
 
   return (

@@ -203,6 +203,8 @@ const AvatarPure = ({
   };
 
   const onClickAvatar = (e: React.MouseEvent) => {
+    if (!onChangeFile) return;
+
     e.stopPropagation();
     e.preventDefault();
     if (noClick) return;

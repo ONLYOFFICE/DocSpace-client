@@ -8,7 +8,6 @@
     "url": ""
   },
   "wrongPortalNameUrl": "",
-  "thumbnails1280x720": true,
   "pdfViewer": false,
   "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": true,

@@ -213,6 +213,7 @@ export type LoginFormProps = {
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
   clientId?: string;
+  oauthUrl?: string;
   client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;

@@ -461,7 +461,7 @@ const LoginForm = ({
     isDesktop,
     isChecked,
     client?.isPublic,
-    client.clientId,
+    client?.clientId,
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,

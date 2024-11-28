@@ -505,7 +505,7 @@ class SsoFormStore {
 
     this.hideAuthPage = hideAuthPage;
     this.disableEmailVerification = disableEmailVerification;
-    this.usersType = usersType;
+    this.usersType = usersType || EmployeeType.User;
   };
 
   setSsoUrls = (o) => {

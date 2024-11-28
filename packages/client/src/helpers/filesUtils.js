@@ -104,7 +104,7 @@ export const getDefaultFileName = (format) => {
     case "pptx":
       return i18n.t("Common:NewPresentation");
     case "pdf":
-      return i18n.t("Common:NewMasterForm");
+      return i18n.t("Common:NewPDFForm");
     default:
       return i18n.t("Common:NewFolder");
   }

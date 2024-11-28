@@ -19,7 +19,9 @@
     "checkDomain": false
   },
   "oauth2": {
-    "origin": ""
+    "origin": "",
+    "apiSystem": [],
+    "identity": []
   },
   "firebase": {
     "fetchTimeoutMillis": 3600000,

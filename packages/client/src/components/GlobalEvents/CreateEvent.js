@@ -32,6 +32,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
+import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
 import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
@@ -57,8 +58,10 @@ const CreateEvent = ({
   setCreatedItem,
 
   parentId,
+  isIndexing,
 
   completeAction,
+  openItemAction,
 
   clearActiveOperations,
 
@@ -147,6 +150,9 @@ const CreateEvent = ({
           setCreatedItem({ id: createdFolderId, type: "folder" });
         })
         .then(() => completeAction(item, type, true))
+        .then(() => {
+          if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
+        })
         .catch((e) => {
           isPaymentRequiredError(e);
           toastr.error(e);
@@ -272,13 +278,13 @@ export default inject(
 
     const { gallerySelected, setGallerySelected } = oformsStore;
 
-    const { completeAction } = filesActionsStore;
+    const { completeAction, openItemAction } = filesActionsStore;
 
     const { clearActiveOperations, fileCopyAs } = uploadDataStore;
 
     const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
-    const { id: parentId } = selectedFolderStore;
+    const { id: parentId, isIndexedFolder } = selectedFolderStore;
 
     const { isDesktopClient } = settingsStore;
 
@@ -308,11 +314,13 @@ export default inject(
       setCreatedItem,
 
       parentId,
+      isIndexing: isIndexedFolder,
 
       isDesktop: isDesktopClient,
       isPrivacy: isPrivacyFolder,
       isTrashFolder: isRecycleBinFolder,
       completeAction,
+      openItemAction,
 
       clearActiveOperations,
       fileCopyAs,

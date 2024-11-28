@@ -80,7 +80,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     roomsMode,
     setSnackbarExist,
     userTheme,
-    //user,
+    // user,
     userId,
     userLoginEventId,
     currentDeviceType,
@@ -99,6 +99,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isAdmin,
     releaseDate,
     registrationDate,
+    formFillingTipsVisible,
+    formFillingTipsNumber,
+    setFormFillingTipsNumber,
+    setFormFillingTipsDialog,
   } = rest;
 
   const theme = useTheme();
@@ -485,9 +489,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
+  const onCloseGuidance = () => {
+    setFormFillingTipsDialog(false);
+  };
+
   return (
     <Layout>
-      <Guidance />
+      {formFillingTipsVisible && (
+        <Guidance
+          formFillingTipsNumber={formFillingTipsNumber}
+          setFormFillingTipsNumber={setFormFillingTipsNumber}
+          onClose={onCloseGuidance}
+        />
+      )}
       {toast}
       {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}
@@ -560,6 +574,10 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
+      setFormFillingTipsNumber,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      formFillingTipsNumber,
 
       setFormCreationInfo,
     } = dialogsStore;
@@ -590,6 +608,10 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
+      setFormFillingTipsNumber,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      formFillingTipsNumber,
       isBase,
       setTheme,
       roomsMode,

@@ -26,58 +26,103 @@
 
 import React from "react";
 
-import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { TTranslation } from "@docspace/shared/types";
+
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { mobile, classNames } from "../../../utils";
+import { Text } from "@docspace/shared/components/text";
+import { classNames } from "../../../utils";
 import { AsideHeader } from "../../aside";
 
 import {
-  StyledModal,
   Content,
-  Dialog,
   StyledBody,
   StyledFooter,
 } from "../../modal-dialog/ModalDialog.styled";
 
+import {
+  StyledClipped,
+  StyledDialog,
+  StyledGuidBackdrop,
+  StyledTipsCircle,
+} from "./Guid.styled";
+
 import { ModalDialogType } from "../../modal-dialog";
 
-const StyledGuidBackdrop = styled.div<{ zIndex?: number }>`
-  display: block;
-  height: 100%;
-  min-height: fill-available;
-  max-height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  position: fixed;
-  // doesn't require mirroring for RTL
-  left: 0;
-  top: 0;
+enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
+}
 
-  background: ${(props) => props.theme.backdrop.backgroundColor};
-  z-index: ${(props) => props.zIndex};
+const getHeaderText = (state: number, t: TTranslation) => {
+  switch (state) {
+    case FormFillingTipsState.Starting:
+      return {
+        header: t("HeaderStarting"),
+        description: t("TitleStarting"),
+      };
+    case FormFillingTipsState.Sharing:
+      return {
+        header: t("HeaderSharing"),
+        description: t("TitleSharing"),
+      };
+    case FormFillingTipsState.Submitting:
+      return {
+        header: t("HeaderSubmitting"),
+        description: t("TitleSubmitting"),
+      };
+    case FormFillingTipsState.Complete:
+      return {
+        header: t("HeaderComplete"),
+        description: t("TitleComplete"),
+      };
+    case FormFillingTipsState.Uploading:
+      return {
+        header: t("HeaderUploading"),
+        description: t("TitleUploading"),
+      };
 
-  @media ${mobile} {
-    position: absolute;
+    default:
+      return null;
+  }
+};
+
+const Guid = ({ formFillingTipsNumber, setFormFillingTipsNumber, onClose }) => {
+  const { t } = useTranslation(["FormFillingTipsDialog"]);
+
+  const modalText = getHeaderText(formFillingTipsNumber, t);
+
+  const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
+
+  const onNextTips = () => {
+    if (isLastTip) {
+      onClose();
+    }
+    setFormFillingTipsNumber(formFillingTipsNumber + 1);
+  };
+
+  const onPrevTips = () => {
+    setFormFillingTipsNumber(formFillingTipsNumber - 1);
+  };
+
+  let tipsCircle = [];
+
+  for (let i = 1; i < 6; i++) {
+    tipsCircle.push(
+      <StyledTipsCircle
+        isSelected={i === formFillingTipsNumber}
+        key={`tips_circle_${i}`}
+      />,
+    );
   }
 
-  transition: opacity 0.2s;
-  opacity: 1;
-`;
-
-const StyledClipped = styled.div`
-  position: absolute;
-  left: 271px;
-  top: 10px;
-  width: 100px;
-  height: 50px;
-  backdrop-filter: contrast(200%);
-`;
-
-const Guid = () => {
   return (
     <StyledGuidBackdrop>
       <StyledClipped className="guid-element" />
-      <Dialog
+      <StyledDialog
         id="modal-onMouseDown-close"
         className={
           classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""
@@ -86,65 +131,60 @@ const Guid = () => {
         <Content
           id="modal-dialog"
           visible
-          //  isLarge={isLarge}
-          //  isHuge={isHuge}
           currentDisplayType={ModalDialogType.modal}
           autoMaxHeight
-          //   autoMaxWidth={autoMaxWidth}
-          //    modalSwipeOffset={modalSwipeOffset}
-          // embedded={embedded}
-          //     ref={contentRef}
         >
-          {true && (
-            <AsideHeader
-              id="modal-header-swipe"
-              className={classNames(["modal-header"]) || "modal-header"}
-              header={<div>HEHEHEHEHEHHHHHHHHH</div>}
-              //  onCloseClick={onClose}
-              // {...(currentDisplayType === "modal" && {
-              //   style: { marginBottom: "16px" },
-              // })}
-            />
-          )}
+          <AsideHeader
+            id="modal-header-swipe"
+            className={classNames(["modal-header"]) || "modal-header"}
+            header={modalText?.header}
+            onCloseClick={onClose}
+          />
 
-          {true && (
-            <StyledBody
-              className={classNames(["modal-body"]) || "modal-body"}
-              currentDisplayType={ModalDialogType.modal}
+          <StyledBody
+            className={classNames(["modal-body"]) || "modal-body"}
+            currentDisplayType={ModalDialogType.modal}
+          >
+            <Text
+              className="tips-description"
+              fontWeight="400"
+              fontSize="12px"
+              lineHeight="16px"
             >
-              <div>
-                Create PDF forms in DocSpace, e.g. in your Documents, and upload
-                the ready ones to the room. Make use of the integrated template
-                library and choose among numerous ready PDF templates.
+              {" "}
+              {modalText?.description}
+            </Text>
+          </StyledBody>
+
+          <StyledFooter
+            className={classNames(["modal-footer"]) || "modal-footer"}
+          >
+            <>
+              <div className="circle-container">{tipsCircle}</div>
+              <div className="button-container">
+                {formFillingTipsNumber !== FormFillingTipsState.Starting && (
+                  <Button
+                    id="form-filling_tips_back"
+                    key="TipsBack"
+                    label={t("Common:Back")}
+                    size={ButtonSize.extraSmall}
+                    onClick={onPrevTips}
+                  />
+                )}
+
+                <Button
+                  id="form-filling_tips_next"
+                  key="TipsNext"
+                  primary
+                  label={isLastTip ? t("Common:GotIt") : t("Common:Next")}
+                  size={ButtonSize.extraSmall}
+                  onClick={onNextTips}
+                />
               </div>
-            </StyledBody>
-          )}
-          {true && (
-            <StyledFooter
-              currentDisplayType={ModalDialogType.modal}
-              className={classNames(["modal-footer"]) || "modal-footer"}
-            >
-              <Button
-                id="form-filling_tips_skip"
-                key="SkipTitle"
-                label="Common:SkipTitle"
-                size={ButtonSize.small}
-                //  onClick={onClose}
-                scale
-              />
-              <Button
-                id="form-filling_tips_start"
-                key="StartTutorial"
-                primary
-                label="WelcomeStartTutorial"
-                size={ButtonSize.small}
-                //  onClick={onNextTips}
-                scale
-              />
-            </StyledFooter>
-          )}
+            </>
+          </StyledFooter>
         </Content>
-      </Dialog>
+      </StyledDialog>
     </StyledGuidBackdrop>
   );
 };

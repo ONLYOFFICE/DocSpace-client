@@ -29,8 +29,22 @@ import React from "react";
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
 
-const Guidance = () => {
-  return <Portal element={<Guid />} />;
+const Guidance = ({
+  formFillingTipsNumber,
+  setFormFillingTipsNumber,
+  onClose,
+}) => {
+  return (
+    <Portal
+      element={
+        <Guid
+          formFillingTipsNumber={formFillingTipsNumber}
+          setFormFillingTipsNumber={setFormFillingTipsNumber}
+          onClose={onClose}
+        />
+      }
+    />
+  );
 };
 
 export { Guidance };

@@ -225,6 +225,8 @@ export async function getOAuthClient(clientId: string) {
     (url: string) => `https://${url}/${path}`,
   );
 
+  let url = "";
+
   const actions = urls
     ? await Promise.allSettled(urls.map((url: string) => fetch(url)))
     : [];
@@ -234,15 +236,17 @@ export async function getOAuthClient(clientId: string) {
     : actions.length
       ? actions
           .filter((action) => action.status === "fulfilled")
-          .filter((action) => action.value.ok && action.value.status !== 404)[0]
-          ?.value
+          .filter((action, index) => {
+            url = config.oauth2.identity[index];
+            return action.value.ok && action.value.status !== 404;
+          })[0]?.value
       : await fetch(createRequest([route], [["", ""]], "GET")[0]);
 
   if (!oauthClient) return;
 
   const client = await oauthClient.json();
 
-  return transformToClientProps(client);
+  return { client: transformToClientProps(client), url };
 }
 
 export async function getPortalCultures() {
@@ -422,20 +426,23 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
   return result.response as TConfirmLinkResult;
 }
 
-export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
-  recaptchaResponse?: string | null | undefined;
-  recaptchaType?: unknown | undefined;
-}) {
+export async function getAvailablePortals(
+  data: {
+    Email: string;
+    PasswordHash: string;
+    recaptchaResponse?: string | null | undefined;
+    recaptchaType?: unknown | undefined;
+  },
+  region?: string,
+) {
   const config = await getConfig();
 
   const path = `/portal/signin`;
 
   if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem.map(
-      (url: string) => `https://${url}/apisystem${path}`,
-    );
+    const urls: string[] = config.oauth2.apiSystem
+      .map((url: string) => `https://${url}/apisystem${path}`)
+      .filter((url: string) => (region ? url.includes(region) : true));
 
     const actions = await Promise.allSettled(
       urls.map((url: string) =>

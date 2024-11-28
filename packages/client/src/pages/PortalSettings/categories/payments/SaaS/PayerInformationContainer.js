@@ -62,13 +62,15 @@ const StyledContainer = styled.div`
     grid-gap: 4px;
 
     .payer-info_description {
+      display: flex;
+      align-items: center;
+
       p {
-        margin-inline-end: 3px;
+        margin-inline-end: 4px;
       }
       div {
         display: inline-block;
         margin: auto 0;
-        height: 14px;
       }
     }
     .payer-info_account-link {
@@ -95,6 +97,7 @@ const PayerInformationContainer = ({
     <HelpButton
       className="payer-tooltip"
       iconName={HelpReactSvgUrl}
+      style={{ height: "15px", margin: "0" }}
       tooltipContent={
         <>
           <Text isBold>{t("Payer")}</Text>

@@ -49,11 +49,9 @@ async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
-  console.log("start login page requests");
-
   const clientId = searchParams.client_id;
 
-  const [settings, thirdParty, capabilities, ssoSettings, client] =
+  const [settings, thirdParty, capabilities, ssoSettings, oauthData] =
     await Promise.all([
       getSettings(),
       getThirdPartyProviders(),
@@ -103,7 +101,8 @@ async function Page({
                   hashSettings={settings?.passwordHash}
                   cookieSettingsEnabled={settings?.cookieSettingsEnabled}
                   clientId={clientId}
-                  client={client}
+                  client={oauthData?.client}
+                  oauthUrl={oauthData?.url}
                   reCaptchaPublicKey={settings?.recaptchaPublicKey}
                   reCaptchaType={settings?.recaptchaType}
                   ldapDomain={capabilities?.ldapDomain}

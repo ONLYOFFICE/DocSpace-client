@@ -308,7 +308,7 @@ const StyledFileTileTop = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    object-fit: ${(props) => (props.thumbnails1280x720 ? "cover" : "none")};
+    object-fit: cover;
     object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
     z-index: 0;
     border-radius: 6px 6px 0 0;
@@ -610,7 +610,6 @@ class Tile extends React.PureComponent {
       selectTag,
       selectOption,
       isHighlight,
-      thumbnails1280x720,
       iconProgress,
       isDownload,
     } = this.props;
@@ -880,7 +879,6 @@ class Tile extends React.PureComponent {
               isActive={isActive}
               isMedia={item.canOpenPlayer}
               isHighlight={isHighlight}
-              thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
                 item?.viewAccessibility?.ImageView ||
                 item?.viewAccessibility?.MediaView

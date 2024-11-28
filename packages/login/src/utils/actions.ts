@@ -70,6 +70,7 @@ import {
   tfaAppHandler,
   scopesHandler,
   companyInfoHandler,
+  oauthSignInHelper,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -93,13 +94,9 @@ export async function getSettings() {
     "GET",
   );
 
-  console.log("start requests settings");
-
   const settingsRes = IS_TEST
     ? settingsHandler(headers())
     : await fetch(getSettings);
-
-  console.log("end request settings", settingsRes);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -129,8 +126,6 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
-  console.log("start requests color theme");
-
   const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -138,8 +133,6 @@ export async function getColorTheme() {
   );
 
   const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
-
-  console.log("end requests color theme", res);
 
   if (!res.ok) return;
 
@@ -223,21 +216,37 @@ export async function getScopeList() {
 }
 
 export async function getOAuthClient(clientId: string) {
-  const [getOAuthClient] = createRequest(
-    [`/clients/${clientId}/public/info`],
-    [["", ""]],
-    "GET",
+  const config = await getConfig();
+
+  const route = `/clients/${clientId}/public/info`;
+  const path = `api/2.0${route}`;
+
+  const urls: string[] = config?.oauth2?.identity.map(
+    (url: string) => `https://${url}/${path}`,
   );
+
+  let url = "";
+
+  const actions = urls
+    ? await Promise.allSettled(urls.map((url: string) => fetch(url)))
+    : [];
 
   const oauthClient = IS_TEST
     ? getClientHandler()
-    : await fetch(getOAuthClient);
+    : actions.length
+      ? actions
+          .filter((action) => action.status === "fulfilled")
+          .filter((action, index) => {
+            url = config.oauth2.identity[index];
+            return action.value.ok && action.value.status !== 404;
+          })[0]?.value
+      : await fetch(createRequest([route], [["", ""]], "GET")[0]);
 
-  if (!oauthClient.ok) return;
+  if (!oauthClient) return;
 
   const client = await oauthClient.json();
 
-  return transformToClientProps(client);
+  return { client: transformToClientProps(client), url };
 }
 
 export async function getPortalCultures() {
@@ -415,4 +424,83 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
   const result = await response.json();
 
   return result.response as TConfirmLinkResult;
+}
+
+export async function getAvailablePortals(
+  data: {
+    Email: string;
+    PasswordHash: string;
+    recaptchaResponse?: string | null | undefined;
+    recaptchaType?: unknown | undefined;
+  },
+  region?: string,
+) {
+  const config = await getConfig();
+
+  const path = `/portal/signin`;
+
+  if (config?.oauth2?.apiSystem.length) {
+    const urls: string[] = config.oauth2.apiSystem
+      .map((url: string) => `https://${url}/apisystem${path}`)
+      .filter((url: string) => (region ? url.includes(region) : true));
+
+    const actions = await Promise.allSettled(
+      urls.map((url: string) =>
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            ...new Headers(headers()),
+          },
+        }),
+      ),
+    );
+
+    const fullFiledActions = actions.filter(
+      (action) => action.status === "fulfilled",
+    );
+
+    if (fullFiledActions.length) {
+      const portalsRes = fullFiledActions
+        .filter((action) => {
+          return action.value.ok;
+        })
+        .map((action) => action.value);
+
+      if (!portalsRes.length) {
+        const portals = await fullFiledActions[0].value.json();
+
+        return { ...portals, status: fullFiledActions[0].status };
+      }
+
+      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
+        .map(
+          (portals: {
+            tenants: { portalLink: string; portalName: string }[];
+          }) => portals.tenants,
+        )
+        .flat();
+
+      return portals;
+    }
+  }
+
+  const portalsRes = IS_TEST
+    ? oauthSignInHelper()
+    : await fetch(
+        createRequest(
+          [path],
+          [["Content-Type", "application/json"]],
+          "POST",
+          JSON.stringify(data),
+          true,
+        )[0],
+      );
+
+  const portals = await portalsRes.json();
+
+  if (portals.error) return portals;
+
+  return portals.tenants as { portalLink: string; portalName: string }[];
 }

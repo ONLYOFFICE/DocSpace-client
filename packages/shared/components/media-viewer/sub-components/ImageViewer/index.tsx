@@ -26,7 +26,6 @@
 
 import { useGesture } from "@use-gesture/react";
 import { useSpring, config } from "@react-spring/web";
-import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import React, {
   SyntheticEvent,
   useCallback,
@@ -697,15 +696,10 @@ export const ImageViewer = ({
       },
 
       onClick: ({ pinching, event }) => {
-        if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
+        if (isDesktop && event.target === imgWrapperRef.current)
           return onMask?.();
 
-        if (
-          !imgRef.current ||
-          !containerRef.current ||
-          pinching ||
-          isDesktopDeviceDetect
-        )
+        if (!imgRef.current || !containerRef.current || pinching || isDesktop)
           return;
 
         const time = new Date().getTime();

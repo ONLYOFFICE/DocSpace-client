@@ -1227,7 +1227,7 @@ class ContextOptionsStore {
         {
           key: "separator0",
           isSeparator: true,
-          disabled: !item.security?.Download,
+          disabled: !item.security?.Download || this.settingsStore.isFrame,
         },
         {
           key: "public-room_edit",

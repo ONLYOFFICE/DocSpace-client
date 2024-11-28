@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React, {
   useRef,
   useState,
@@ -94,16 +93,19 @@ export const Viewer = (props: ViewerProps) => {
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
-  const devices = useMemo(
-    () => ({
+  const devices = useMemo(() => {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isMouse = window.matchMedia("(pointer: fine)").matches;
+
+    return {
       isMobileOnly: currentDeviceType === DeviceType.mobile,
       isMobile:
         currentDeviceType === DeviceType.tablet ||
-        currentDeviceType === DeviceType.mobile,
-      isDesktop: currentDeviceType === DeviceType.desktop,
-    }),
-    [currentDeviceType],
-  );
+        currentDeviceType === DeviceType.mobile ||
+        (isTouch && !isMouse),
+      isDesktop: currentDeviceType === DeviceType.desktop && isMouse,
+    };
+  }, [currentDeviceType]);
   const { isMobile } = devices;
 
   const resetToolbarVisibleTimer = useCallback(() => {

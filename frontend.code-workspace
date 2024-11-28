@@ -37,7 +37,7 @@
       "🔑 @docspace/login",
       "🚀 @docspace/client",
       "📄 @docspace/editor",
-      "📦 @docspace/common",
+      "📦 @docspace/shared",
       "🗂 @docspace/management",
     ],
     "[javascript]": {
@@ -253,6 +253,11 @@
             "label": "unit",
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
+          },
+          {
+            "label": "unit-client",
+            "task": "Test | Jest:unit-client",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit-client\" task",
           },
           {
             "label": "e2e docker build",

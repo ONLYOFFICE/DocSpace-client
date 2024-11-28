@@ -558,6 +558,21 @@
       }
     },
     {
+      "label": "Test | Jest:unit-client",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn workspace @docspace/client test ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | Eslint",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn lint ; ",
@@ -592,14 +607,14 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
@@ -607,14 +622,14 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
@@ -622,15 +637,15 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
       "group": {
-          "kind": "build",
-          "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-          "reveal": "always",
-          "panel": "new",
-          "focus": true,
-          "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
-      }
+    }
   ]
 }

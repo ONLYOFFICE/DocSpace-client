@@ -299,6 +299,7 @@ const LoginForm = ({
 
     if (client?.isPublic && hash) {
       const region = oauthUrl?.replace("identity", "");
+      console.log(region);
       const portals = await getAvailablePortals(
         {
           Email: user,
@@ -461,7 +462,7 @@ const LoginForm = ({
     isDesktop,
     isChecked,
     client?.isPublic,
-    client.clientId,
+    client?.clientId,
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,

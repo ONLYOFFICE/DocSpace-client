@@ -237,7 +237,7 @@ export async function getOAuthClient(clientId: string) {
       ? actions
           .filter((action) => action.status === "fulfilled")
           .filter((action, index) => {
-            url = urls[index];
+            url = config.oauth2.identity[index];
             return action.value.ok && action.value.status !== 404;
           })[0]?.value
       : await fetch(createRequest([route], [["", ""]], "GET")[0]);

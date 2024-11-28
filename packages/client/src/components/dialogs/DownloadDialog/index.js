@@ -110,18 +110,9 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onDownload = () => {
-    const { t, downloadFiles, openUrl } = this.props;
-    const [fileConvertIds, folderIds, singleFileUrl] = this.getDownloadItems();
-    if (fileConvertIds.length === 1 && folderIds.length === 0) {
-      // Single file download as
-      const file = fileConvertIds[0];
-      if (file.value && singleFileUrl) {
-        const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
-        openUrl(viewUrl, UrlActionType.Download);
-      }
-      this.props.setSelected("none");
-      this.onClose();
-    } else if (fileConvertIds.length || folderIds.length) {
+    const { t, downloadFiles } = this.props;
+    const [fileConvertIds, folderIds] = this.getDownloadItems();
+    if (fileConvertIds.length || folderIds.length) {
       downloadFiles(fileConvertIds, folderIds, {
         label: t("Translations:ArchivingData"),
         error: t("Common:ErrorInternalServer"),

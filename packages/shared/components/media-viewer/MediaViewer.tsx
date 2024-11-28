@@ -31,7 +31,6 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import heic2any from "heic2any";
 
 import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 import { getFileExtension } from "@docspace/shared/utils/common";
@@ -351,25 +350,27 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       });
   }, []);
 
-  const fetchAndSetHeicDataURL = useCallback((src: string) => {
+  const fetchAndSetHeicDataURL = useCallback(async (src: string) => {
     HeicAbortSignalRef.current?.abort();
     HeicAbortSignalRef.current = new AbortController();
 
-    fetch(src, { signal: HeicAbortSignalRef.current.signal })
-      .then((res) => res.blob())
-      .then((blob) => heic2any({ blob }))
-      .then((conversionResult) => {
-        if (conversionResult) {
-          setFileUrl(URL.createObjectURL(conversionResult));
-        }
-      })
-      .catch((error: Error) => {
-        if (error.name === "AbortError") {
-          return;
-        }
-        // eslint-disable-next-line no-console
-        console.log(error);
+    try {
+      const { default: heic2any } = await import("heic2any");
+      const response = await fetch(src, {
+        signal: HeicAbortSignalRef.current.signal,
       });
+      const blob = await response.blob();
+      const conversionResult = await heic2any({ blob });
+
+      if (conversionResult && !Array.isArray(conversionResult)) {
+        setFileUrl(URL.createObjectURL(conversionResult));
+      }
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        return;
+      }
+      console.error(error);
+    }
   }, []);
 
   const onSetSelectionFile = useCallback(() => {
@@ -405,10 +406,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     if (extension !== ".tif" && extension !== ".tiff") {
       TiffAbortSignalRef.current?.abort();
-      setFileUrl(src);
-    }
-
-    if (extension !== ".heic") {
       HeicAbortSignalRef.current?.abort();
       setFileUrl(src);
     }

@@ -110,7 +110,7 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onDownload = () => {
-    const { t, downloadFiles, openUrl } = this.props;
+    const { t, downloadFiles } = this.props;
     const [fileConvertIds, folderIds] = this.getDownloadItems();
     if (fileConvertIds.length || folderIds.length) {
       downloadFiles(fileConvertIds, folderIds, {

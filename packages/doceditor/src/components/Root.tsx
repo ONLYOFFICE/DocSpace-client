@@ -111,7 +111,9 @@ const Root = ({
     documentType: config?.documentType,
   });
 
-  useSDK({ sdkConfig, setSdkConfig });
+  const { sdkFrameConfig } = useSDK();
+
+  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
 
   const { getErrorMessage } = useError({
     error,

@@ -35,6 +35,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { includesMethod } from "@docspace/shared/utils/typeGuards";
 import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
 
+import { isHeic, isTiff } from "../../MediaViewer.utils";
 import { StyledViewerContainer } from "../../MediaViewer.styled";
 
 import { NextButton } from "../NextButton";
@@ -228,8 +229,8 @@ export const Viewer = (props: ViewerProps) => {
 
   const playlistFile = playlist[playlistPos];
 
-  const isTiff =
-    playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
+  const isDecodedImage =
+    isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
   return (
     <StyledViewerContainer dir="ltr" visible={visible}>
@@ -254,8 +255,8 @@ export const Viewer = (props: ViewerProps) => {
 
       {isImage ? (
         <ImageViewer
-          key={targetFile?.viewUrl}
-          isTiff={isTiff}
+          key={targetFile?.id}
+          isDecodedImage={isDecodedImage}
           devices={devices}
           toolbar={toolbar}
           errorTitle={errorTitle}

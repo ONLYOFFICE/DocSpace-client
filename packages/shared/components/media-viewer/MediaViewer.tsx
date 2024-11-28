@@ -43,6 +43,7 @@ import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
 import { KeyboardEventKeys } from "./MediaViewer.enums";
+import { isHeic, isTiff } from "./MediaViewer.utils";
 
 import {
   getDesktopMediaContextModel,
@@ -404,15 +405,19 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     if (!src) return onEmptyPlaylistError?.();
 
-    if (extension !== ".tif" && extension !== ".tiff") {
+    if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
       setFileUrl(src);
     }
 
-    if (extension === ".heic") {
+    if (isHeic(extension)) {
       setFileUrl(undefined);
       fetchAndSetHeicDataURL(src);
+    }
+    if (isTiff(extension)) {
+      setFileUrl(undefined);
+      fetchAndSetTiffDataURL(src);
     }
 
     const foundFile = files.find((file) => file.id === fileId);

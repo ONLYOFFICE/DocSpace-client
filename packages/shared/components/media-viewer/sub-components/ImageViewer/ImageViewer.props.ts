@@ -32,7 +32,7 @@ import type { DevicesType } from "../../MediaViewer.types";
 interface ImageViewerProps {
   src?: string;
   thumbnailSrc?: string;
-  isTiff?: boolean;
+  isDecodedImage?: boolean;
   imageId: number;
   version: number;
   errorTitle: string;

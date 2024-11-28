@@ -461,16 +461,17 @@ const LoginForm = ({
     isDesktop,
     isChecked,
     client?.isPublic,
-    client?.clientId,
+    client.clientId,
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,
     linkData,
+    oauthUrl,
     router,
-    clientId,
-    referenceUrl,
     baseDomain,
+    clientId,
     isPublicAuth,
+    referenceUrl,
   ]);
 
   const onBlurEmail = () => {

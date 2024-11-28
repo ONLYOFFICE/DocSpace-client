@@ -171,7 +171,8 @@ class DialogsStore {
   };
 
   newFilesPanelFolderId = null;
-  formFillingTipsDialogVisible = true;
+  formFillingTipsVisible = false;
+  welcomeFormFillingTipsVisible = true;
   formFillingTipsNumber = 1;
 
   constructor(
@@ -590,8 +591,13 @@ class DialogsStore {
   };
 
   setFormFillingTipsDialog = (visible) => {
-    this.formFillingTipsDialogVisible = visible;
+    this.formFillingTipsVisible = visible;
   };
+
+  setWelcomeFormFillingTipsVisible = (visible) => {
+    this.welcomeFormFillingTipsVisible = visible;
+  };
+
   setFormFillingTipsNumber = (number) => {
     this.formFillingTipsNumber = number;
   };

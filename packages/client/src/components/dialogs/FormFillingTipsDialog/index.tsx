@@ -36,165 +36,34 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-const StyledModalDialog = styled(ModalDialog)<{
-  isTourMode: boolean;
-}>`
+const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
     width: 448px;
 
     .modal-header {
-      margin-bottom: 0px !important;
-    }
-
-    .modal-header::after {
-      border: none;
-    }
-
-    .modal-footer {
-      margin-bottom: 8px;
+      height: 50px;
+      min-height: 50px;
     }
   }
-
-  .welcome-tips-description {
-    margin-bottom: 5px;
-  }
-
-  .circle-container {
-    align-items: center;
-    display: flex;
-    gap: 10px;
-  }
-
-  .button-container {
-    gap: 8px;
-    display: flex;
-  }
-
-  ${(props) =>
-    props.isTourMode &&
-    css`
-      #modal-dialog {
-        width: 430px;
-      }
-
-      .modal-header {
-        height: 49px;
-        min-height: 49px;
-      }
-
-      .modal-footer {
-        justify-content: space-between;
-        margin-bottom: 0px !important;
-        padding: 12px 20px 20px;
-      }
-
-      .modal-body {
-        padding: 0px 18px 0px;
-      }
-      .welcome-tips-description {
-        font-size: 13px;
-        line-height: 20px;
-      }
-    `}
 `;
-
-const StyledTipsCircle = styled.div<{ isSelected: boolean }>`
-  width: 7px;
-  height: 7px;
-  background-color: ${(props) => props.theme.formFillingTips.circleColor};
-  border-radius: 50%;
-  ${(props) =>
-    props.isSelected &&
-    css`
-      border: ${props.theme.formFillingTips.circleBorder};
-      background-color: ${props.theme.formFillingTips.selectedColor};
-    `}
-`;
-
-enum FormFillingTipsState {
-  Welcome = 1,
-  Starting = 2,
-  Sharing = 3,
-  Submitting = 4,
-  Complete = 5,
-  Uploading = 6,
-}
-
-const getHeaderText = (state, t) => {
-  switch (state) {
-    case FormFillingTipsState.Welcome:
-      return {
-        header: t("WelcomeFillingForm"),
-        description: t("WelcomeDescription"),
-      };
-    case FormFillingTipsState.Starting:
-      return {
-        header: t("HeaderStarting"),
-        description: t("TitleStarting"),
-      };
-    case FormFillingTipsState.Sharing:
-      return {
-        header: t("HeaderSharing"),
-        description: t("TitleSharing"),
-      };
-    case FormFillingTipsState.Submitting:
-      return {
-        header: t("HeaderSubmitting"),
-        description: t("TitleSubmitting"),
-      };
-    case FormFillingTipsState.Complete:
-      return {
-        header: t("HeaderComplete"),
-        description: t("TitleComplete"),
-      };
-    case FormFillingTipsState.Uploading:
-      return {
-        header: t("HeaderUploading"),
-        description: t("TitleUploading"),
-      };
-
-    default:
-      return null;
-  }
-};
 
 const FormFillingTipsDialog = (props) => {
   const {
     visible,
-    formFillingTipsNumber,
     setFormFillingTipsDialog,
-    setFormFillingTipsNumber,
+    setWelcomeFormFillingTipsVisible,
   } = props;
 
+  const onOpenGuidance = () => {
+    setWelcomeFormFillingTipsVisible(false);
+    setFormFillingTipsDialog(true);
+  };
+
   const onClose = () => {
-    setFormFillingTipsDialog(false);
-    setFormFillingTipsNumber(FormFillingTipsState.Welcome);
-  };
-
-  const onNextTips = () => {
-    setFormFillingTipsNumber(formFillingTipsNumber + 1);
-  };
-
-  const onPrevTips = () => {
-    setFormFillingTipsNumber(formFillingTipsNumber - 1);
+    setWelcomeFormFillingTipsVisible(false);
   };
 
   const { t } = useTranslation(["FormFillingTipsDialog"]);
-
-  const modalText = getHeaderText(formFillingTipsNumber, t);
-
-  const isTourMode = formFillingTipsNumber > 1;
-
-  let tipsCircle = [];
-
-  for (let i = 2; i < 7; i++) {
-    tipsCircle.push(
-      <StyledTipsCircle
-        isSelected={i === formFillingTipsNumber}
-        key={`tips_circle_${i}`}
-      />,
-    );
-  }
 
   return (
     <StyledModalDialog
@@ -202,9 +71,8 @@ const FormFillingTipsDialog = (props) => {
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
-      isTourMode={isTourMode}
     >
-      <ModalDialog.Header>{modalText?.header}</ModalDialog.Header>
+      <ModalDialog.Header>{t("WelcomeFillingForm")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>
           <Text
@@ -213,60 +81,29 @@ const FormFillingTipsDialog = (props) => {
             fontSize="12px"
             lineHeight="16px"
           >
-            {" "}
-            {modalText?.description}
+            {t("WelcomeDescription")}
           </Text>
-          {formFillingTipsNumber < 2 && (
-            <img src={TutorialPreview} alt="tips-preview" />
-          )}
+          <img src={TutorialPreview} alt="tips-preview" />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        {formFillingTipsNumber < 2 ? (
-          <>
-            <Button
-              id="form-filling_tips_skip"
-              key="SkipTitle"
-              label={t("Common:SkipTitle")}
-              size={ButtonSize.small}
-              onClick={onClose}
-              scale
-            />
-            <Button
-              id="form-filling_tips_start"
-              key="StartTutorial"
-              primary
-              label={t("WelcomeStartTutorial")}
-              size={ButtonSize.small}
-              onClick={onNextTips}
-              scale
-            />
-          </>
-        ) : (
-          <>
-            <div className="circle-container">{tipsCircle}</div>
-            <div className="button-container">
-              {formFillingTipsNumber > 2 && (
-                <Button
-                  id="form-filling_tips_back"
-                  key="TipsBack"
-                  label={t("Common:Back")}
-                  size={ButtonSize.extraSmall}
-                  onClick={onPrevTips}
-                />
-              )}
-
-              <Button
-                id="form-filling_tips_next"
-                key="TipsNext"
-                primary
-                label={t("Common:Next")}
-                size={ButtonSize.extraSmall}
-                onClick={onNextTips}
-              />
-            </div>
-          </>
-        )}
+        <Button
+          id="form-filling_tips_skip"
+          key="SkipTitle"
+          label={t("Common:SkipTitle")}
+          size={ButtonSize.small}
+          onClick={onClose}
+          scale
+        />
+        <Button
+          id="form-filling_tips_start"
+          key="StartTutorial"
+          primary
+          label={t("WelcomeStartTutorial")}
+          size={ButtonSize.small}
+          onClick={onOpenGuidance}
+          scale
+        />
       </ModalDialog.Footer>
     </StyledModalDialog>
   );
@@ -274,16 +111,14 @@ const FormFillingTipsDialog = (props) => {
 
 export default inject(({ dialogsStore }) => {
   const {
-    formFillingTipsDialogVisible: visible,
-    formFillingTipsNumber,
+    welcomeFormFillingTipsVisible: visible,
+    setWelcomeFormFillingTipsVisible,
     setFormFillingTipsDialog,
-    setFormFillingTipsNumber,
   } = dialogsStore;
 
   return {
     visible,
-    formFillingTipsNumber,
+    setWelcomeFormFillingTipsVisible,
     setFormFillingTipsDialog,
-    setFormFillingTipsNumber,
   };
 })(observer(FormFillingTipsDialog));

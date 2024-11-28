@@ -144,7 +144,7 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
-    formFillingTipsDialogVisible,
+    welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
   } = props;
@@ -349,9 +349,7 @@ const Panels = (props) => {
         isDownload={passwordEntryDialogDate.isDownload}
       />
     ),
-    formFillingTipsDialogVisible && (
-      <FormFillingTipsDialog key="form-filling_tips_dialog" />
-    ),
+    true && <FormFillingTipsDialog key="form-filling_tips_dialog" />,
   ];
 };
 
@@ -387,7 +385,7 @@ export default inject(
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
-      formFillingTipsDialogVisible,
+      welcomeFormFillingTipsVisible,
 
       unsavedChangesDialogVisible,
       createMasterForm,
@@ -509,7 +507,7 @@ export default inject(
       shareCollectSelector,
       roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
-      formFillingTipsDialogVisible,
+      welcomeFormFillingTipsVisible,
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,

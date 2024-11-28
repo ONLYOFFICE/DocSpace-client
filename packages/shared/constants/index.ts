@@ -24,29 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
-import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
-import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
-import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
-import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
-import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
-import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
-import { globalColors } from "../themes/globalColors";
-
-export const LOADER_STYLE = Object.freeze({
-  title: "",
-  width: "100%",
-  height: "32",
-  backgroundColor: globalColors.darkBlack,
-  foregroundColor: globalColors.darkBlack,
-  backgroundOpacity: 0.1,
-  foregroundOpacity: 0.15,
-  borderRadius: "3",
-  radius: "3",
-  speed: 2,
-  animate: true,
-});
-
 export const MANAGER = "manager";
 export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
@@ -100,44 +77,6 @@ export const FOLDER_NAMES = Object.freeze({
   13: "privacy",
   14: "shared",
   20: "archive",
-});
-
-export const PROVIDERS_DATA = Object.freeze({
-  appleid: {
-    label: "apple",
-    icon: ShareAppleReactSvg,
-    iconOptions: undefined,
-  },
-  google: {
-    label: "google",
-    icon: ShareGoogleReactSvg,
-    iconOptions: undefined,
-  },
-  facebook: {
-    label: "facebook",
-    icon: ShareFacebookReactSvg,
-    iconOptions: undefined,
-  },
-  twitter: {
-    label: "twitter",
-    icon: ShareTwitterReactSvg,
-    iconOptions: { color: globalColors.darkBlack },
-  },
-  linkedin: {
-    label: "linkedin",
-    icon: ShareLinkedinReactSvg,
-    iconOptions: undefined,
-  },
-  microsoft: {
-    label: "microsoft",
-    icon: ShareMicrosoftReactSvg,
-    iconOptions: undefined,
-  },
-  zoom: {
-    label: "zoom",
-    icon: ShareZoomReactSvg,
-    iconOptions: undefined,
-  },
 });
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";

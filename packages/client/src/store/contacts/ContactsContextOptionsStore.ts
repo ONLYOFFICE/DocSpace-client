@@ -66,7 +66,7 @@ import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   createGroup,

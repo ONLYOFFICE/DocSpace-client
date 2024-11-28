@@ -37,7 +37,7 @@ import type {
   SocialButtonProps,
   ProvidersDataType,
 } from "./SocialButtonsGroup.types";
-import { PROVIDERS_DATA } from "../../constants";
+import { PROVIDERS_DATA } from "../../constants/providers";
 import MoreLoginModal from "../more-login-modal";
 
 export const SocialButtonsGroup = memo(

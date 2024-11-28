@@ -46,11 +46,8 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-  PROVIDERS_DATA,
-} from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants/providers";
 import {
   createPasswordHash,
   getLoginLink,

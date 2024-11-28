@@ -53,7 +53,7 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+} from "SRC_DIR/helpers/category";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";

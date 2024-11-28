@@ -31,7 +31,7 @@ import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants/providers";
 import {
   ModalDialog,
   ModalDialogType,

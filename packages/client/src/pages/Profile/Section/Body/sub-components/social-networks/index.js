@@ -39,7 +39,7 @@ import {
   getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants/providers";
 
 import { StyledWrapper } from "./styled-social-networks";
 

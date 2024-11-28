@@ -27,7 +27,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-import { LOADER_STYLE } from "../../constants";
+import { LOADER_STYLE } from "../../constants/loaders";
 import { CircleSkeletonProps } from "./Circle.types";
 
 export type { CircleSkeletonProps };

@@ -79,7 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
-import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
+import { getCategoryUrl } from "@docspace/client/src/helpers/category";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";

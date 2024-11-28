@@ -23,22 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { globalColors } from "../themes/globalColors";
 
-import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants/loaders";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-
-const speed = 2;
-
-export const SettingsHeaderSkeleton = () => (
-  <RectangleSkeleton
-    height="24"
-    width="140"
-    backgroundColor={LOADER_STYLE.backgroundColor}
-    foregroundColor={LOADER_STYLE.foregroundColor}
-    backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-    foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-    speed={speed}
-    animate
-  />
-);
+export const LOADER_STYLE = Object.freeze({
+  title: "",
+  width: "100%",
+  height: "32",
+  backgroundColor: globalColors.darkBlack,
+  foregroundColor: globalColors.darkBlack,
+  backgroundOpacity: 0.1,
+  foregroundOpacity: 0.15,
+  borderRadius: "3",
+  radius: "3",
+  speed: 2,
+  animate: true,
+});

@@ -30,7 +30,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
 

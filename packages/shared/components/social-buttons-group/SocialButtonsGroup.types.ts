@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "../../types";
-import type { PROVIDERS_DATA } from "../../constants";
+import type { PROVIDERS_DATA } from "../../constants/providers";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 

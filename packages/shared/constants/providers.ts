@@ -23,22 +23,49 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
+import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
+import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
+import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
+import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
+import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import { globalColors } from "../themes/globalColors";
 
-import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants/loaders";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-
-const speed = 2;
-
-export const SettingsHeaderSkeleton = () => (
-  <RectangleSkeleton
-    height="24"
-    width="140"
-    backgroundColor={LOADER_STYLE.backgroundColor}
-    foregroundColor={LOADER_STYLE.foregroundColor}
-    backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-    foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-    speed={speed}
-    animate
-  />
-);
+export const PROVIDERS_DATA = Object.freeze({
+  appleid: {
+    label: "apple",
+    icon: ShareAppleReactSvg,
+    iconOptions: undefined,
+  },
+  google: {
+    label: "google",
+    icon: ShareGoogleReactSvg,
+    iconOptions: undefined,
+  },
+  facebook: {
+    label: "facebook",
+    icon: ShareFacebookReactSvg,
+    iconOptions: undefined,
+  },
+  twitter: {
+    label: "twitter",
+    icon: ShareTwitterReactSvg,
+    iconOptions: { color: globalColors.darkBlack },
+  },
+  linkedin: {
+    label: "linkedin",
+    icon: ShareLinkedinReactSvg,
+    iconOptions: undefined,
+  },
+  microsoft: {
+    label: "microsoft",
+    icon: ShareMicrosoftReactSvg,
+    iconOptions: undefined,
+  },
+  zoom: {
+    label: "zoom",
+    icon: ShareZoomReactSvg,
+    iconOptions: undefined,
+  },
+});

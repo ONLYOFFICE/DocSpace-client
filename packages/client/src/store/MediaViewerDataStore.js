@@ -35,7 +35,7 @@ import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 
 import {
   findNearestIndex,

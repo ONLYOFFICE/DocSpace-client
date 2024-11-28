@@ -39,7 +39,7 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import Banner from "./Banner";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";

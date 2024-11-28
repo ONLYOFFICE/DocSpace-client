@@ -78,7 +78,6 @@ import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
-import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -95,9 +94,10 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import {
+  getCategoryType,
   getCategoryTypeByFolderType,
   getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+} from "SRC_DIR/helpers/category";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 

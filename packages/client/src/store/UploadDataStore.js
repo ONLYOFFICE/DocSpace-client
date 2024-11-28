@@ -56,7 +56,7 @@ import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+} from "SRC_DIR/helpers/category";
 import { globalColors } from "@docspace/shared/themes";
 
 class UploadDataStore {

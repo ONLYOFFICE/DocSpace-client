@@ -36,7 +36,7 @@ import {
 } from "@docspace/shared/utils/common";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 
 import { LinkType } from "../helpers/constants";
 import { ValidationStatus } from "@docspace/shared/enums";

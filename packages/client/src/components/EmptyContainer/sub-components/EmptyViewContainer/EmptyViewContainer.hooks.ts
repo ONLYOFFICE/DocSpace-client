@@ -39,7 +39,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import { isMobile } from "react-device-detect";

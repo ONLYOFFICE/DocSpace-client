@@ -26,12 +26,9 @@
 
 import { authStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { CategoryType } from "./constants";
-import { FolderType } from "@docspace/shared/enums";
 
 // import router from "SRC_DIR/router";
 import i18n from "../i18n";
-import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -99,101 +96,6 @@ export const onItemClick = (e) => {
   }
 
   // router.navigate(link);
-};
-
-export const getCategoryType = (location) => {
-  let categoryType = CategoryType.Shared;
-  const { pathname } = location;
-
-  if (pathname.startsWith("/rooms")) {
-    if (pathname.indexOf("personal") > -1) {
-      categoryType = CategoryType.Personal;
-    } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/([\d])\/(shared)/;
-
-      categoryType = !regexp.test(location)
-        ? CategoryType.Shared
-        : CategoryType.SharedRoom;
-    } else if (pathname.indexOf("share") > -1) {
-      categoryType = CategoryType.PublicRoom;
-    } else if (pathname.indexOf("archive") > -1) {
-      categoryType = CategoryType.Archive;
-    }
-  } else if (pathname.startsWith("/favorite")) {
-    categoryType = CategoryType.Favorite;
-  } else if (pathname.startsWith("/recent")) {
-    categoryType = CategoryType.Recent;
-  } else if (pathname.startsWith("/files/trash")) {
-    categoryType = CategoryType.Trash;
-  } else if (pathname.startsWith("/settings")) {
-    categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts")) {
-    categoryType = CategoryType.Accounts;
-  }
-
-  return categoryType;
-};
-
-export const getCategoryTypeByFolderType = (folderType, parentId) => {
-  switch (folderType) {
-    case FolderType.Rooms:
-      return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
-
-    case FolderType.Archive:
-      return CategoryType.Archive;
-
-    case FolderType.Favorites:
-      return CategoryType.Favorite;
-
-    case FolderType.Recent:
-      return CategoryType.Recent;
-
-    case FolderType.TRASH:
-      return CategoryType.Trash;
-
-    default:
-      return CategoryType.Personal;
-  }
-};
-
-export const getCategoryUrl = (categoryType, folderId = null) => {
-  const cType = categoryType;
-
-  switch (cType) {
-    case CategoryType.Personal:
-    case CategoryType.Recent:
-      return "/rooms/personal/filter";
-
-    case CategoryType.Shared:
-      return "/rooms/shared/filter";
-
-    case CategoryType.SharedRoom:
-      return `/rooms/shared/${folderId}/filter`;
-
-    case CategoryType.Archive:
-      return "/rooms/archived/filter";
-
-    case CategoryType.ArchivedRoom:
-      return `/rooms/archived/${folderId}/filter`;
-
-    case CategoryType.Favorite:
-      return "/files/favorite/filter";
-
-    case CategoryType.Trash:
-      return "/files/trash/filter";
-
-    case CategoryType.PublicRoom:
-      return "/rooms/share";
-
-    case CategoryType.Accounts:
-      return PEOPLE_ROUTE_WITH_FILTER;
-
-    case CategoryType.Settings:
-      return "/settings/personal";
-
-    default:
-      throw new Error("Unknown category type");
-  }
 };
 
 export const removeEmojiCharacters = (value) => {

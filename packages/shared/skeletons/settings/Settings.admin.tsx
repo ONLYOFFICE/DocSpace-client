@@ -26,7 +26,7 @@
 
 import React from "react";
 import { Box } from "@docspace/shared/components/box";
-import { LOADER_STYLE } from "@docspace/shared/constants";
+import { LOADER_STYLE } from "@docspace/shared/constants/loaders";
 
 import { RectangleSkeleton } from "../rectangle";
 

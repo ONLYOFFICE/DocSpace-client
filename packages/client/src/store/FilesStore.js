@@ -53,7 +53,7 @@ import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentR
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 
-import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/shared/components/toast"; //TODO: temporary disabled for test purposes
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import {
@@ -71,8 +71,8 @@ import {
   getCategoryType,
   getCategoryUrl,
   getCategoryTypeByFolderType,
-} from "SRC_DIR/helpers/utils";
-import { isDesktop, isMobile } from "@docspace/shared/utils";
+} from "SRC_DIR/helpers/category";
+import { isDesktop, isMobile } from "@docspace/shared/utils/device";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
@@ -2113,7 +2113,8 @@ class FilesStore {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
           } else {
-            toastr.error(err);
+            // toastr.error(err);
+            console.error(err);
             if (isThirdPartyError) {
               const userId = this.userStore?.user?.id;
               const searchArea = window.DocSpace.location.pathname.includes(
@@ -2307,7 +2308,8 @@ class FilesStore {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
           } else {
-            toastr.error(err);
+            // toastr.error(err);
+            console.error(err);
           }
         });
 
@@ -2640,7 +2642,8 @@ class FilesStore {
         isEditing ||
         item.rootFolderType === FolderType.Archive
         // ||
-        // (isFavoritesFolder && !isFavorite) ||
+        // (isRecentFolder ||
+        // isFavoritesFolder) ||
         // isFavoritesFolder ||
         // isRecentFolder
       )
@@ -3106,7 +3109,7 @@ class FilesStore {
 
   createFolder(parentFolderId, title) {
     return api.files.createFolder(parentFolderId, title);
-  };
+  }
 
   /**
    * Creates a new room with the specified parameters
@@ -3120,7 +3123,7 @@ class FilesStore {
 
   createRoomInThirdpary(thirpartyFolderId, roomParams) {
     return api.rooms.createRoomInThirdpary(thirpartyFolderId, roomParams);
-  };
+  }
 
   /**
    * Edits a room with the specified parameters
@@ -3130,7 +3133,7 @@ class FilesStore {
    */
   editRoom(id, roomParams) {
     return api.rooms.editRoom(id, roomParams);
-  };
+  }
 
   /**
    * Adds tags to a room
@@ -3140,7 +3143,7 @@ class FilesStore {
    */
   addTagsToRoom(id, tagArray) {
     return api.rooms.addTagsToRoom(id, tagArray);
-  };
+  }
 
   /**
    * Removes tags from a room
@@ -3150,7 +3153,7 @@ class FilesStore {
    */
   removeTagsFromRoom(id, tagArray) {
     return api.rooms.removeTagsFromRoom(id, tagArray);
-  };
+  }
 
   /**
    * Calculates room logo parameters for cropping
@@ -3181,7 +3184,7 @@ class FilesStore {
       width: dimensions,
       height: dimensions,
     };
-  };
+  }
 
   /**
    * Uploads a room logo
@@ -3190,7 +3193,7 @@ class FilesStore {
    */
   uploadRoomLogo(formData) {
     return api.rooms.uploadRoomLogo(formData);
-  };
+  }
 
   /**
    * Adds a logo to a room
@@ -3200,7 +3203,7 @@ class FilesStore {
    */
   addLogoToRoom(id, icon) {
     return api.rooms.addLogoToRoom(id, icon);
-  };
+  }
 
   /**
    * Removes a logo from a room
@@ -3209,7 +3212,7 @@ class FilesStore {
    */
   removeLogoFromRoom(id) {
     return api.rooms.removeLogoFromRoom(id);
-  };
+  }
 
   /**
    * Gets the default members filter configuration
@@ -3312,7 +3315,7 @@ class FilesStore {
       requestToken,
       filter,
     );
-  };
+  }
 
   /**
    * Gets the room history
@@ -3544,7 +3547,8 @@ class FilesStore {
           showToast && showToast();
         })
         .catch((err) => {
-          toastr.error(err);
+          // toastr.error(err);
+          console.error(err);
         })
         .finally(() => {
           this.setTempActionFilesIds([]);
@@ -3576,7 +3580,8 @@ class FilesStore {
           showToast && showToast();
         })
         .catch((err) => {
-          toastr.error(err);
+          // toastr.error(err);
+          console.error(err);
         })
         .finally(() => {
           this.setTempActionFilesIds([]);
@@ -4146,7 +4151,7 @@ class FilesStore {
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
 
     return cbMenu;
-  };
+  }
 
   getCheckboxItemLabel = (t, key) => {
     switch (key) {

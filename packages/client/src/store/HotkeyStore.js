@@ -35,7 +35,7 @@ import { isDesktop, isMobile } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import config from "PACKAGE_FILE";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 

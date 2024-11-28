@@ -42,7 +42,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";

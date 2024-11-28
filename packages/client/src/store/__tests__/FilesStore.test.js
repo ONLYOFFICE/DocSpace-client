@@ -53,6 +53,13 @@ jest.mock("@docspace/shared/utils/socket", () => ({
   },
 }));
 
+// Mock device utility
+jest.mock("@docspace/shared/utils/device", () => ({
+  isDesktop: () => true,
+  isMobile: () => false,
+  checkIsSSR: () => false,
+}));
+
 describe("FilesStore", () => {
   let store;
   let mockAuthStore;

@@ -88,7 +88,7 @@ export const ImageViewer = ({
   thumbnailSrc,
   // imageId,
   // version,
-  isTiff,
+  isDecodedImage,
   contextModel,
   errorTitle,
   devices,
@@ -222,11 +222,11 @@ export const ImageViewer = ({
       setIsLoading(false);
       setIsError(false);
 
-      if (isTiff && src) {
+      if (isDecodedImage && src) {
         URL.revokeObjectURL(src);
       }
     },
-    [api, isTiff, src],
+    [api, isDecodedImage, src],
   );
 
   const restartScaleAndSize = useCallback(() => {
@@ -854,7 +854,7 @@ export const ImageViewer = ({
     if (
       window.ClientConfig?.imageThumbnails &&
       thumbnailSrc &&
-      (src || isTiff)
+      (src || isDecodedImage)
     ) {
       // if thumbnailSrc is unavailable, try to load original image
       setShowOriginSrc(true);
@@ -862,7 +862,7 @@ export const ImageViewer = ({
     }
 
     setIsError(true);
-  }, [src, thumbnailSrc, isTiff]);
+  }, [src, thumbnailSrc, isDecodedImage]);
 
   const model = React.useMemo(() => contextModel(true), [contextModel]);
 
@@ -890,7 +890,7 @@ export const ImageViewer = ({
   }, [onKeyDown]);
 
   useLayoutEffect(() => {
-    if (unmountRef.current || (isTiff && src)) return;
+    if (unmountRef.current || (isDecodedImage && src)) return;
 
     if (!isLoaded.current) {
       timeoutRef.current = setTimeout(() => {
@@ -905,7 +905,7 @@ export const ImageViewer = ({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [src, isTiff]);
+  }, [src, isDecodedImage]);
 
   // useEffect(() => {
   //   if (!window.ClientConfig?.imageThumbnails) return;

@@ -93,6 +93,8 @@ export const ImageViewer = ({
   errorTitle,
   devices,
   isPublicFile,
+  backgroundBlack,
+  setBackgroundBlack,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -113,7 +115,6 @@ export const ImageViewer = ({
   const [showOriginSrc, setShowOriginSrc] = useState(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [style, api] = useSpring(() => ({
     width: 0,

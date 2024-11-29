@@ -24,46 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { getObjectByLocation } from "@docspace/shared/utils/location";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import Section from "@docspace/shared/components/section";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import SectionWrapper from "SRC_DIR/components/Section";
-const ThirdPartyResponsePage = ({ match }) => {
-  const { params } = match;
-  const { provider } = params;
-  const { t } = useTranslation("Errors");
-  const [error, setError] = useState(null);
+const FRAME_NAME = "frameDocSpace";
 
-  useEffect(() => {
-    const urlParams = getObjectByLocation(window.location);
-    const code = urlParams ? urlParams.code || null : null;
-    const error = urlParams ? urlParams.error || null : null;
-    setDocumentTitle(provider);
-    if (error) {
-      setError(error);
-    } else if (code) {
-      localStorage.setItem("code", code);
-      window.close();
-    } else {
-      setError(t("ErrorEmptyResponse"));
-    }
-  }, [t, provider]);
+const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
 
-  return (
-    <SectionWrapper>
-      <Section.SectionBody>
-        {error ? (
-          <ErrorContainer bodyText={error} />
-        ) : (
-          <RectangleSkeleton height="96vh" />
-        )}
-      </Section.SectionBody>
-    </SectionWrapper>
+export const frameCallbackData = (methodReturnData: unknown) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onMethodReturn",
+      frameId: getFrameId(),
+      methodReturnData,
+    }),
+    "*",
   );
 };
 
-export default ThirdPartyResponsePage;
+export const frameCallEvent = (eventReturnData: unknown) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onEventReturn",
+      frameId: getFrameId(),
+      eventReturnData,
+    }),
+    "*",
+  );
+};
+
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onCallCommand",
+      frameId: getFrameId(),
+      commandName,
+      commandData,
+    }),
+    "*",
+  );
+};

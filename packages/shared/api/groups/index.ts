@@ -27,7 +27,8 @@
 import Filter from "./filter";
 
 import { request } from "../client";
-import { checkFilterInstance, toUrlParams } from "../../utils/common";
+import { checkFilterInstance } from "../../utils/common";
+import { toUrlParams } from "../../utils/location";
 import { Encoder } from "../../utils/encoder";
 
 import {

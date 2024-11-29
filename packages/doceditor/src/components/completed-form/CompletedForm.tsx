@@ -41,7 +41,8 @@ import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
-import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { getBgPattern } from "@docspace/shared/utils/ui";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";

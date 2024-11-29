@@ -30,7 +30,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { TenantStatus } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isPublicPreview, isPublicRoom } from "@docspace/shared/utils/common";
+import { isPublicPreview, isPublicRoom } from "@docspace/shared/utils/location";
 
 import type { PublicRouteProps } from "./Routers.types";
 

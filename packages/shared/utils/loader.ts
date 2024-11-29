@@ -24,46 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { getObjectByLocation } from "@docspace/shared/utils/location";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import Section from "@docspace/shared/components/section";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import SectionWrapper from "SRC_DIR/components/Section";
-const ThirdPartyResponsePage = ({ match }) => {
-  const { params } = match;
-  const { provider } = params;
-  const { t } = useTranslation("Errors");
-  const [error, setError] = useState(null);
+import { isMobile } from "react-device-detect";
+import TopLoaderService from "../components/top-loading-indicator";
 
-  useEffect(() => {
-    const urlParams = getObjectByLocation(window.location);
-    const code = urlParams ? urlParams.code || null : null;
-    const error = urlParams ? urlParams.error || null : null;
-    setDocumentTitle(provider);
-    if (error) {
-      setError(error);
-    } else if (code) {
-      localStorage.setItem("code", code);
-      window.close();
-    } else {
-      setError(t("ErrorEmptyResponse"));
+let timer: null | ReturnType<typeof setTimeout> = null;
+
+export function hideLoader() {
+  if (isMobile) return;
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+  TopLoaderService.end();
+}
+
+export function showLoader() {
+  if (isMobile) return;
+
+  hideLoader();
+  timer = setTimeout(() => TopLoaderService.start(), 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
+}
+
+export function updateTempContent(isAuth = false) {
+  if (isAuth) {
+    const el = document.getElementById("burger-loader-svg");
+    if (el) {
+      el.style.display = "block";
     }
-  }, [t, provider]);
 
-  return (
-    <SectionWrapper>
-      <Section.SectionBody>
-        {error ? (
-          <ErrorContainer bodyText={error} />
-        ) : (
-          <RectangleSkeleton height="96vh" />
-        )}
-      </Section.SectionBody>
-    </SectionWrapper>
-  );
-};
+    const el1 = document.getElementById("logo-loader-svg");
+    if (el1) {
+      el1.style.display = "block";
+    }
 
-export default ThirdPartyResponsePage;
+    const el2 = document.getElementById("avatar-loader-svg");
+    if (el2) {
+      el2.style.display = "block";
+    }
+  } else {
+    const tempElm = document.getElementById("temp-content");
+    if (tempElm) {
+      tempElm.outerHTML = "";
+    }
+  }
+}

@@ -40,10 +40,8 @@ import {
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
 import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
-import {
-  getIconPathByFolderType,
-  isPublicPreview,
-} from "@docspace/shared/utils/common";
+import { getIconPathByFolderType } from "@docspace/shared/utils/common";
+import { isPublicPreview } from "@docspace/shared/utils/location";
 import { toastr } from "@docspace/shared/components/toast";
 
 class FilesSettingsStore {

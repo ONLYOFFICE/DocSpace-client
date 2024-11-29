@@ -33,7 +33,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
+import { showLoader, hideLoader } from "@docspace/shared/utils/loader";
 
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";

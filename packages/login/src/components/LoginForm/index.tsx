@@ -44,10 +44,8 @@ import { Id } from "react-toastify";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  createPasswordHash,
-  frameCallCommand,
-} from "@docspace/shared/utils/common";
+import { createPasswordHash } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "@docspace/shared/utils/frame";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";

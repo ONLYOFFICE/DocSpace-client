@@ -34,7 +34,8 @@ import {
   PaymentsType,
 } from "../../enums";
 import { Nullable } from "../../types";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
+
+import { getObjectByLocation, toUrlParams } from "../../utils/location";
 import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
 
 const DEFAULT_PAGE = 0;

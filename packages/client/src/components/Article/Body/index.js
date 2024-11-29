@@ -43,7 +43,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/category";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { showProgress } from "@docspace/shared/utils/common";
+import { showProgress } from "@docspace/shared/utils/loader";
 
 const ArticleBodyContent = (props) => {
   const {

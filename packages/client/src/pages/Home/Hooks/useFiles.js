@@ -40,7 +40,7 @@ import {
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { getObjectByLocation } from "@docspace/shared/utils/location";
 import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/category";

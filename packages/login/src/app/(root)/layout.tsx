@@ -28,7 +28,7 @@ import React from "react";
 
 import { cookies, headers } from "next/headers";
 
-import { getBgPattern } from "@docspace/shared/utils/common";
+import { getBgPattern } from "@docspace/shared/utils/ui";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";

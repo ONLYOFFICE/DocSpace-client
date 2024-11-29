@@ -28,7 +28,7 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTheme } from "styled-components";
 
-import { getLogoUrl } from "../../../utils";
+import { getLogoUrl } from "../../../utils/logo";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 import {

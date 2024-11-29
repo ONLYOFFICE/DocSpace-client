@@ -36,7 +36,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
+import { showLoader, hideLoader } from "@docspace/shared/utils/loader";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 

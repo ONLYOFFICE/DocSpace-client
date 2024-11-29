@@ -46,11 +46,8 @@ import {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { EDITOR_ID } from "@docspace/shared/constants";
-import {
-  assign,
-  frameCallCommand,
-  frameCallEvent,
-} from "@docspace/shared/utils/common";
+import { assign } from "@docspace/shared/utils/common";
+import { frameCallCommand, frameCallEvent } from "@docspace/shared/utils/frame";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";

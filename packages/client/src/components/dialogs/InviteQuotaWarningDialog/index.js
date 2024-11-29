@@ -32,7 +32,7 @@ import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { getDaysRemaining } from "@docspace/shared/utils/common";
+import { getDaysRemaining } from "@docspace/shared/utils/date";
 
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";

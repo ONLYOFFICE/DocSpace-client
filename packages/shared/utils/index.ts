@@ -73,15 +73,16 @@ import {
   RoomsTypes,
   getSystemTheme,
   getEditorTheme,
-  getLogoFromPath,
   isBetaLanguage,
-  getLogoUrl,
 } from "./common";
+import { getLogoFromPath, getLogoUrl } from "./logo";
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
-import type { TRoom } from "../api/rooms/types";
+
 import { injectDefaultTheme } from "./injectDefaultTheme";
+import { addLog } from "./logger";
+import { isLockedSharedRoom } from "./rooms";
 
 export {
   isBetaLanguage,
@@ -137,6 +138,8 @@ export {
   clearEdgeScrollingTimer,
   injectDefaultTheme,
   getTextColor,
+  addLog,
+  isLockedSharedRoom,
 };
 
 export const getModalType = () => {
@@ -213,23 +216,4 @@ export const getLastColumn = (
     return filterColumns[filterColumns.length - 1];
   }
   return null;
-};
-
-export const isLockedSharedRoom = (item?: TRoom) => {
-  if (!item) return false;
-
-  return Boolean(item.external && item.passwordProtected && !item.expired);
-};
-
-export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs.enableLogs) return;
-
-  if (window.ClientConfig.logs.logsToConsole) console.log(log);
-  else {
-    if (!window.logs) window.logs = { socket: [] };
-
-    if (!window.logs[category]) window.logs[category] = [];
-
-    window.logs[category].push(log);
-  }
 };

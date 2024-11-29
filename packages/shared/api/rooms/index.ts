@@ -30,18 +30,10 @@ import { AxiosRequestConfig } from "axios";
 import moment from "moment";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
-import {
-  checkFilterInstance,
-  decodeDisplayName,
-  toUrlParams,
-} from "../../utils/common";
+import { checkFilterInstance, decodeDisplayName } from "../../utils/common";
+import { toUrlParams } from "../../utils/location";
 import RoomsFilter from "./filter";
-import {
-  TGetRooms,
-  TRoomLifetime,
-  TExportRoomIndexTask,
-  TPublicRoomPassword,
-} from "./types";
+import { TGetRooms, TExportRoomIndexTask, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;

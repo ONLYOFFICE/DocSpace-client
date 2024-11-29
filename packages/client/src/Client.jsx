@@ -34,7 +34,7 @@ import {
   updateTempContent,
   showLoader,
   hideLoader,
-} from "@docspace/shared/utils/common";
+} from "@docspace/shared/utils/loader";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";

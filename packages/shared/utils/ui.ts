@@ -23,47 +23,31 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
+import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
+import BackgroundPatternGreenReactSvgUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
+import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.pattern.red.react.svg?url";
+import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
+import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
+import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { getObjectByLocation } from "@docspace/shared/utils/location";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import Section from "@docspace/shared/components/section";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import SectionWrapper from "SRC_DIR/components/Section";
-const ThirdPartyResponsePage = ({ match }) => {
-  const { params } = match;
-  const { provider } = params;
-  const { t } = useTranslation("Errors");
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const urlParams = getObjectByLocation(window.location);
-    const code = urlParams ? urlParams.code || null : null;
-    const error = urlParams ? urlParams.error || null : null;
-    setDocumentTitle(provider);
-    if (error) {
-      setError(error);
-    } else if (code) {
-      localStorage.setItem("code", code);
-      window.close();
-    } else {
-      setError(t("ErrorEmptyResponse"));
-    }
-  }, [t, provider]);
-
-  return (
-    <SectionWrapper>
-      <Section.SectionBody>
-        {error ? (
-          <ErrorContainer bodyText={error} />
-        ) : (
-          <RectangleSkeleton height="96vh" />
-        )}
-      </Section.SectionBody>
-    </SectionWrapper>
-  );
+export const getBgPattern = (colorSchemeId: number | undefined) => {
+  switch (colorSchemeId) {
+    case 1:
+      return `url('${BackgroundPatternReactSvgUrl}')`;
+    case 2:
+      return `url('${BackgroundPatternOrangeReactSvgUrl}')`;
+    case 3:
+      return `url('${BackgroundPatternGreenReactSvgUrl}')`;
+    case 4:
+      return `url('${BackgroundPatternRedReactSvgUrl}')`;
+    case 5:
+      return `url('${BackgroundPatternPurpleReactSvgUrl}')`;
+    case 6:
+      return `url('${BackgroundPatternLightBlueReactSvgUrl}')`;
+    case 7:
+      return `url('${BackgroundPatternBlackReactSvgUrl}')`;
+    default:
+      return `url('${BackgroundPatternReactSvgUrl}')`;
+  }
 };
-
-export default ThirdPartyResponsePage;

@@ -28,7 +28,7 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { MessageKey, OAuth2ErrorKey } from "./enums";
-import { parseURL } from "@docspace/shared/utils/common";
+import { parseURL } from "@docspace/shared/utils/location";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;

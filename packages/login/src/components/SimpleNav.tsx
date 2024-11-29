@@ -32,7 +32,7 @@ import styled, { useTheme } from "styled-components";
 
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { mobile } from "@docspace/shared/utils/device";
-import { getLogoUrl } from "@docspace/shared/utils/common";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 

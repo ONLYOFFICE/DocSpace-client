@@ -37,9 +37,9 @@ import {
   tablet,
   mobile,
   NoUserSelect,
-  getLogoUrl,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import HeaderCatalogBurger from "./header-catalog-burger";

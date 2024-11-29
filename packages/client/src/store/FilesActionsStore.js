@@ -76,7 +76,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -84,11 +83,8 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
-import {
-  getConvertedQuota,
-  getConvertedSize,
-  getObjectByLocation,
-} from "@docspace/shared/utils/common";
+import { getConvertedSize } from "@docspace/shared/utils/common";
+import { getObjectByLocation } from "@docspace/shared/utils/location";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";

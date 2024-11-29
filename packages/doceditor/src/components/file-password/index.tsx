@@ -48,8 +48,8 @@ import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import { getLogoUrl } from "@docspace/shared/utils";
-import { frameCallCommand } from "@docspace/shared/utils/common";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
+import { frameCallCommand } from "@docspace/shared/utils/frame";
 import { useTheme } from "styled-components";
 import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";

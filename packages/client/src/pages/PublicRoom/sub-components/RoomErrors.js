@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { frameCallCommand } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "@docspace/shared/utils/frame";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 const RoomErrors = ({ t, tReady, isInvalid }) => {

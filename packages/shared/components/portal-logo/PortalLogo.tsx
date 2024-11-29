@@ -29,7 +29,8 @@
 import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { classNames } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { WhiteLabelLogoType } from "../../enums";
 import { size as deviceSize } from "../../utils";
 import { StyledWrapper } from "./PortalLogo.styled";

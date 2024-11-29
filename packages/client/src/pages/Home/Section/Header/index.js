@@ -39,7 +39,8 @@ import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
+import { tablet, mobile, Consumer } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   RoomsType,

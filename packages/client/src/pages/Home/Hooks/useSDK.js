@@ -27,11 +27,11 @@
 import { useEffect, useCallback } from "react";
 
 import { Events } from "@docspace/shared/enums";
+import { createPasswordHash } from "@docspace/shared/utils/common";
 import {
   frameCallbackData,
   frameCallCommand,
-  createPasswordHash,
-} from "@docspace/shared/utils/common";
+} from "@docspace/shared/utils/frame";
 
 const useSDK = ({
   frameConfig,

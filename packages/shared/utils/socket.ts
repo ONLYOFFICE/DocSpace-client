@@ -30,30 +30,10 @@
 import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { addLog } from ".";
+import { addLog } from "./logger";
+import { SocketEvents } from "./socketEvents";
 
-/**
- * Enum representing various socket events used in the application.
- * These events are used for communication between the client and server.
- *
- * @enum {string}
- * @readonly
- */
-export const enum SocketEvents {
-  RestoreBackup = "restore-backup",
-  LogoutSession = "s:logout-session",
-  ModifyFolder = "s:modify-folder",
-  ModifyRoom = "s:modify-room",
-  UpdateHistory = "s:update-history",
-  RefreshFolder = "refresh-folder",
-  MarkAsNewFolder = "s:markasnew-folder",
-  MarkAsNewFile = "s:markasnew-file",
-  StartEditFile = "s:start-edit-file",
-  StopEditFile = "s:stop-edit-file",
-  ChangedQuotaUsedValue = "s:change-quota-used-value",
-  ChangedQuotaFeatureValue = "s:change-quota-feature-value",
-  ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
-}
+export { SocketEvents };
 
 /**
  * Enum representing the various commands that can be sent over a socket connection.

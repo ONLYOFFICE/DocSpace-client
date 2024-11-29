@@ -30,7 +30,7 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
+import { showLoader, hideLoader } from "@docspace/shared/utils/loader";
 import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";

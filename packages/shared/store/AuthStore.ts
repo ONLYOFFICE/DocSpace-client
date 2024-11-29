@@ -35,13 +35,9 @@ import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import {
-  frameCallEvent,
-  isAdmin,
-  isPublicRoom,
-  insertDataLayer,
-  isPublicPreview,
-} from "../utils/common";
+import { isAdmin, insertDataLayer } from "../utils/common";
+import { frameCallEvent } from "../utils/frame";
+import { isPublicRoom, isPublicPreview } from "../utils/location";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";

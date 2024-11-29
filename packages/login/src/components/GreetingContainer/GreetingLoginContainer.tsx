@@ -35,7 +35,7 @@ import { useTheme } from "styled-components";
 import { useSearchParams } from "next/navigation";
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 
 import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";

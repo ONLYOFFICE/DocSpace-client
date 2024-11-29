@@ -28,7 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
-import { getBgPattern } from "@docspace/shared/utils/common";
+import { getBgPattern } from "@docspace/shared/utils/ui";
 import { mobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 

@@ -29,7 +29,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { NoUserSelect, getLogoUrl } from "@docspace/shared/utils";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 

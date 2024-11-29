@@ -27,7 +27,7 @@
 import queryString from "query-string";
 
 import { ApplyFilterOption, FilterType } from "../../enums";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import { getObjectByLocation, toUrlParams } from "../../utils/location";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
 
 const DEFAULT_PAGE = 0;

@@ -26,7 +26,8 @@
 
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
-import { NoUserSelect, tablet, getLogoUrl } from "@docspace/shared/utils";
+import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";

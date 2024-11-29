@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TTranslation } from "@docspace/shared/api/files/types";
-import { frameCallCommand } from "@docspace/shared/utils/common";
+import { TFile } from "@docspace/shared/api/files/types";
+import { frameCallCommand } from "@docspace/shared/utils/frame";
 
 import { convertDocumentUrl } from ".";
 import { updateFile } from "@docspace/shared/api/files";
+import { TTranslation } from "@docspace/shared/types";
 
 export type TInfoEvent = { data: { mode: string } };
 

@@ -41,9 +41,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
 import { inject, observer } from "mobx-react";
-import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { DeviceType } from "@docspace/shared/enums";
-import { isPublicPreview } from "@docspace/shared/utils/common";
+import { isPublicPreview } from "@docspace/shared/utils/location";
 
 const StyledContainer = styled.header.attrs(injectDefaultTheme)`
   height: ${(props) => props.theme.header.height};

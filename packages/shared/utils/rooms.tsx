@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RoomsType } from "../enums";
+import type { TRoom } from "../api/rooms/types";
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {
@@ -67,4 +68,28 @@ const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   return additionalParams;
 };
 
-export { getStartRoomParams, getRoomCreationAdditionalParams };
+const isLockedSharedRoom = (item?: TRoom) => {
+  if (!item) return false;
+
+  return Boolean(item.external && item.passwordProtected && !item.expired);
+};
+
+const RoomsTypeValues = Object.values(RoomsType).filter(
+  (item): item is number => typeof item === "number",
+);
+
+const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
+  (acc, current) => {
+    if (typeof current === "string") return { ...acc };
+    return { ...acc, [current]: current };
+  },
+  {},
+);
+
+export {
+  getStartRoomParams,
+  getRoomCreationAdditionalParams,
+  isLockedSharedRoom,
+  RoomsTypeValues,
+  RoomsTypes,
+};

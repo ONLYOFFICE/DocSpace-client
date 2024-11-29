@@ -30,10 +30,7 @@ import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  frameCallCommand,
-  isPublicRoom as isPublicRoomUtil,
-} from "@docspace/shared/utils/common";
+import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/location";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/category";

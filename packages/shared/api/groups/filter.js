@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import {
+  getObjectByLocation,
+  toUrlParams,
+} from "@docspace/shared/utils/location";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;

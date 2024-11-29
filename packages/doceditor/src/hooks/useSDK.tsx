@@ -29,7 +29,7 @@ import { useEffect, useCallback, useState } from "react";
 import {
   frameCallbackData,
   frameCallCommand,
-} from "@docspace/shared/utils/common";
+} from "@docspace/shared/utils/frame";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 

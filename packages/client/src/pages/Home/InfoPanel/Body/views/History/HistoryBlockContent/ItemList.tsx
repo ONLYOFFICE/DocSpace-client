@@ -37,10 +37,8 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
-import {
-  getFileExtension,
-  getObjectByLocation,
-} from "@docspace/shared/utils/common";
+import { getFileExtension } from "@docspace/shared/utils/common";
+import { getObjectByLocation } from "@docspace/shared/utils/location";
 import config from "PACKAGE_FILE";
 import {
   StyledHistoryBlockExpandLink,

@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import isEmpty from "lodash/isEmpty";
-
 import { RoomSearchArea } from "../../enums";
 import {
   getObjectByLocation,
   toUrlParams,
   tryParseArray,
-} from "../../utils/common";
+} from "../../utils/location";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;

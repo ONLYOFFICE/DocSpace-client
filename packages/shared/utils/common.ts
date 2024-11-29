@@ -1,4 +1,3 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -31,60 +30,33 @@ import { AvatarRole } from "./../components/avatar/Avatar.enums";
 
 import type { Location } from "@remix-run/router";
 import find from "lodash/find";
-import moment from "moment-timezone";
+
 import { findWindows } from "windows-iana";
-import { isMobile } from "react-device-detect";
+
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
-import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
-import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
-import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
-import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
-import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
-import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
-import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
-
-import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
-import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
-import BackgroundPatternGreenReactSvgUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
-import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.pattern.red.react.svg?url";
-import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
-import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
-import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+import { AvatarRole } from "../components/avatar/Avatar.enums";
 import { parseAddress } from "./email";
-
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ThemeKeys,
-  ErrorKeys,
-  WhiteLabelLogoType,
-  EmployeeType,
-} from "../enums";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-  PUBLIC_MEDIA_VIEW_URL,
-  RTL_LANGUAGES,
-} from "../constants";
+import { RoomsTypeValues, RoomsTypes } from "./rooms";
+import { FolderType, ThemeKeys, ErrorKeys, EmployeeType } from "../enums";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
 import { TPasswordHash, TTimeZone } from "../api/settings/types";
-import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+
+export { RoomsTypeValues, RoomsTypes };
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -92,7 +64,6 @@ export const desktopConstants = Object.freeze({
   cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
 });
 
-let timer: null | ReturnType<typeof setTimeout> = null;
 type I18n = I18nextProviderProps["i18n"];
 
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
@@ -129,17 +100,6 @@ export function createPasswordHash(
 
   return hash;
 }
-
-export const isPublicRoom = () => {
-  return (
-    window.location.pathname === "/rooms/share" ||
-    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
-  );
-};
-
-export const isPublicPreview = () => {
-  return window.location.pathname.includes("/share/preview/");
-};
 
 export const parseDomain = (
   domain: string,
@@ -219,52 +179,6 @@ export const getShowText = () => {
 export const isManagement = () => {
   return window.location.pathname.includes("management");
 };
-
-export function updateTempContent(isAuth = false) {
-  if (isAuth) {
-    const el = document.getElementById("burger-loader-svg");
-    if (el) {
-      el.style.display = "block";
-    }
-
-    const el1 = document.getElementById("logo-loader-svg");
-    if (el1) {
-      el1.style.display = "block";
-    }
-
-    const el2 = document.getElementById("avatar-loader-svg");
-    if (el2) {
-      el2.style.display = "block";
-    }
-  } else {
-    const tempElm = document.getElementById("temp-content");
-    if (tempElm) {
-      tempElm.outerHTML = "";
-    }
-  }
-}
-
-export function hideLoader() {
-  if (isMobile) return;
-  if (timer) {
-    clearTimeout(timer);
-    timer = null;
-  }
-  TopLoaderService.end();
-}
-
-export function showLoader() {
-  if (isMobile) return;
-
-  hideLoader();
-  timer = setTimeout(() => TopLoaderService.start(), 500);
-}
-
-export function showProgress() {
-  if (isMobile) return;
-  TopLoaderService.cancel();
-  TopLoaderService.start();
-}
 
 export function isMe(user: TUser, userName: string) {
   return (
@@ -603,49 +517,6 @@ export function getLoginLink(token: string, code: string) {
   );
 }
 
-const FRAME_NAME = "frameDocSpace";
-
-const getFrameId = () => {
-  return window.self.name.replace(`${FRAME_NAME}__#`, "");
-};
-
-export const frameCallbackData = (methodReturnData: unknown) => {
-  window.parent.postMessage(
-    JSON.stringify({
-      type: "onMethodReturn",
-      frameId: getFrameId(),
-      methodReturnData,
-    }),
-    "*",
-  );
-};
-
-export const frameCallEvent = (eventReturnData: unknown) => {
-  window.parent.postMessage(
-    JSON.stringify({
-      type: "onEventReturn",
-      frameId: getFrameId(),
-      eventReturnData,
-    }),
-    "*",
-  );
-};
-
-export const frameCallCommand = (
-  commandName: string,
-  commandData?: unknown,
-) => {
-  window.parent.postMessage(
-    JSON.stringify({
-      type: "onCallCommand",
-      frameId: getFrameId(),
-      commandName,
-      commandData,
-    }),
-    "*",
-  );
-};
-
 // Done in a similar way to server code
 // https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
 export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
@@ -715,38 +586,6 @@ export const conversionToBytes = (size: number, power: number) => {
   const value = Math.ceil(size * 1024 ** power);
 
   return value.toString();
-};
-
-export const getBgPattern = (colorSchemeId: number | undefined) => {
-  switch (colorSchemeId) {
-    case 1:
-      return `url('${BackgroundPatternReactSvgUrl}')`;
-    case 2:
-      return `url('${BackgroundPatternOrangeReactSvgUrl}')`;
-    case 3:
-      return `url('${BackgroundPatternGreenReactSvgUrl}')`;
-    case 4:
-      return `url('${BackgroundPatternRedReactSvgUrl}')`;
-    case 5:
-      return `url('${BackgroundPatternPurpleReactSvgUrl}')`;
-    case 6:
-      return `url('${BackgroundPatternLightBlueReactSvgUrl}')`;
-    case 7:
-      return `url('${BackgroundPatternBlackReactSvgUrl}')`;
-    default:
-      return `url('${BackgroundPatternReactSvgUrl}')`;
-  }
-};
-
-export const getDaysLeft = (date: Date) => {
-  return moment(date).startOf("day").diff(moment().startOf("day"), "days");
-};
-
-export const getDaysRemaining = (autoDelete: Date) => {
-  const daysRemaining = getDaysLeft(autoDelete);
-
-  if (daysRemaining <= 0) return "<1";
-  return `${daysRemaining}`;
 };
 
 export const getFileExtension = (fileTitle: string) => {
@@ -894,114 +733,6 @@ export const checkFilterInstance = (
   return isInstance;
 };
 
-export const toUrlParams = (
-  obj: { [key: string]: unknown },
-  skipNull: boolean,
-) => {
-  let str = "";
-
-  Object.keys(obj).forEach((key) => {
-    if (skipNull && !obj[key]) return;
-
-    if (str !== "") {
-      str += "&";
-    }
-
-    const item = obj[key];
-
-    // added for double employeetype or room type
-    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
-      for (let i = 0; i < item.length; i += 1) {
-        str += `${key}=${encodeURIComponent(item[i])}`;
-        if (i !== item.length - 1) {
-          str += "&";
-        }
-      }
-    } else if (typeof item === "object") {
-      str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (
-      typeof item === "string" ||
-      typeof item === "number" ||
-      typeof item === "boolean"
-    ) {
-      str += `${key}=${encodeURIComponent(item)}`;
-    }
-  });
-
-  return str;
-};
-
-const groupParamsByKey = (params: URLSearchParams) =>
-  Array.from(params.entries()).reduce(
-    (accumulator: { [key: string]: string | string[] }, [key, value]) => {
-      if (accumulator[key]) {
-        accumulator[key] = Array.isArray(accumulator[key])
-          ? [...accumulator[key], value]
-          : [accumulator[key], value];
-      } else {
-        accumulator[key] = value;
-      }
-      return accumulator;
-    },
-    {},
-  );
-
-export const parseURL = (searchUrl: string) => {
-  const params = new URLSearchParams(searchUrl);
-  const entries: { [key: string]: string | string[] } =
-    groupParamsByKey(params);
-  return entries;
-};
-
-export function getObjectByLocation(location: Location) {
-  if (!location.search || !location.search.length) return null;
-
-  try {
-    const searchUrl = location.search.substring(1);
-    const params = parseURL(searchUrl);
-    return params;
-  } catch (e) {
-    console.error(e);
-    return {};
-  }
-}
-
-export function tryParse(str: string) {
-  try {
-    if (!str) return undefined;
-
-    return JSON.parse(str);
-  } catch (e) {
-    console.error(e);
-    return undefined;
-  }
-}
-
-export function tryParseArray(str: string) {
-  try {
-    const res = tryParse(str);
-
-    if (!Array.isArray(res)) return undefined;
-
-    return res;
-  } catch (e) {
-    console.error(e);
-    return undefined;
-  }
-}
-
-export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number => typeof item === "number",
-);
-
-export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
-  (acc, current) => {
-    if (typeof current === "string") return { ...acc };
-    return { ...acc, [current]: current };
-  },
-  {},
-);
-
 export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
@@ -1043,38 +774,6 @@ export const getEditorTheme = (theme?: ThemeKeys) => {
 const languages: string[] = ["ar-SA"];
 export const isBetaLanguage = (language: string): boolean => {
   return languages.includes(language);
-};
-
-export const getLogoFromPath = (path: string) => {
-  if (!path || path.indexOf("images/logo/") === -1) return path;
-
-  const name = path.split("/").pop();
-
-  switch (name) {
-    case "aboutpage.svg":
-    case "loginpage.svg":
-      return LoginPageSvgUrl;
-    case "dark_loginpage.svg":
-      return DarkLoginPageSvgUrl;
-    case "leftmenu.svg":
-    case "dark_leftmenu.svg":
-      return LeftMenuSvgUrl;
-    case "dark_aboutpage.svg":
-    case "dark_lightsmall.svg":
-      return DarkLightSmallSvgUrl;
-    case "docseditor.svg":
-      return DocseditorSvgUrl;
-    case "lightsmall.svg":
-      return LightSmallSvgUrl;
-    case "docseditorembed.svg":
-      return DocsEditoRembedSvgUrl;
-    case "favicon.ico":
-      return FaviconIco;
-    default:
-      break;
-  }
-
-  return path;
 };
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
@@ -1194,15 +893,6 @@ export const getSelectZone = (
     zones.filter((zone) => zone.key === defaultTimezone)
   );
 };
-
-export function getLogoUrl(
-  logoType: WhiteLabelLogoType,
-  dark: boolean = false,
-  def: boolean = false,
-  culture?: string,
-) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
-}
 
 export const getUserTypeName = (
   isOwner: boolean,

@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import { mobile } from "@docspace/shared/utils";
-import { isPublicPreview } from "@docspace/shared/utils/common";
+import { isPublicPreview } from "@docspace/shared/utils/location";
 import Bar from "./Bar";
 
 const StyledContainer = styled.div`
@@ -92,8 +92,12 @@ export default inject(
     filesStore,
     currentTariffStatusStore,
   }) => {
-    const { checkedMaintenance, setMaintenanceExist, snackbarExist, frameConfig } =
-      settingsStore;
+    const {
+      checkedMaintenance,
+      setMaintenanceExist,
+      snackbarExist,
+      frameConfig,
+    } = settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { firstLoad } = clientLoadingStore;
     const { isInit } = filesStore;
@@ -104,7 +108,7 @@ export default inject(
       snackbarExist,
       setMaintenanceExist,
       isNotPaidPeriod,
-      barTypeInFrame: frameConfig?.showHeaderBanner
+      barTypeInFrame: frameConfig?.showHeaderBanner,
     };
   },
 )(observer(MainBar));

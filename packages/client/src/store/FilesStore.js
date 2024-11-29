@@ -37,31 +37,28 @@ import {
   FileStatus,
   RoomsType,
   RoomsProviderType,
-  ShareAccessRights,
   Events,
   FilterKeys,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-} from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
-import { isLockedSharedRoom, RoomsTypes } from "@docspace/shared/utils";
+import { SocketEvents } from "@docspace/shared/utils/socketEvents";
+
+import { isLockedSharedRoom, RoomsTypes } from "@docspace/shared/utils/rooms";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import { isDesktop } from "@docspace/shared/utils/device";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 
 // import { toastr } from "@docspace/shared/components/toast"; //TODO: temporary disabled for test purposes
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
+import { getDaysRemaining } from "@docspace/shared/utils/date";
+import { isPublicRoom } from "@docspace/shared/utils/location";
+import { frameCallEvent } from "@docspace/shared/utils/frame";
+import { updateTempContent } from "@docspace/shared/utils/loader";
 import {
-  getDaysRemaining,
-  frameCallEvent,
-} from "@docspace/shared/utils/common";
-import {
-  LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
@@ -72,7 +69,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/category";
-import { isDesktop, isMobile } from "@docspace/shared/utils/device";
+import { isMobile } from "@docspace/shared/utils/device";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
@@ -80,7 +77,6 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
-import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -490,6 +486,7 @@ class FilesStore {
     currentTariffStatusStore,
     settingsStore,
     indexingStore,
+    socketTurnOn = true,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -513,195 +510,187 @@ class FilesStore {
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
 
-    SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
-      const { socketSubscribers } = SocketHelper;
+    if (socketTurnOn) {
+      SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
+        const { socketSubscribers } = SocketHelper;
 
-      if (opt && opt.data) {
-        const data = JSON.parse(opt.data);
+        if (opt && opt.data) {
+          const data = JSON.parse(opt.data);
 
-        const pathParts = data.folderId
-          ? `DIR-${data.folderId}`
-          : `DIR-${data.parentId}`;
+          const pathParts = data.folderId
+            ? `DIR-${data.folderId}`
+            : `DIR-${data.parentId}`;
 
-        if (
-          !socketSubscribers.has(pathParts) &&
-          !socketSubscribers.has(`DIR-${data.id}`)
-        ) {
-          console.log("[WS] s:modify-folder: SKIP UNSUBSCRIBED", { data });
+          if (
+            !socketSubscribers.has(pathParts) &&
+            !socketSubscribers.has(`DIR-${data.id}`)
+          ) {
+            console.log("[WS] s:modify-folder: SKIP UNSUBSCRIBED", { data });
+            return;
+          }
+        }
+
+        console.log("[WS] s:modify-folder", opt);
+
+        if (opt?.cmd === "create" && !this.showNewFilesInList) {
+          const newFilter = this.filter;
+          newFilter.total += 1;
+          this.setFilter(newFilter);
           return;
         }
-      }
 
-      console.log("[WS] s:modify-folder", opt);
+        if (!this.clientLoadingStore.isLoading)
+          switch (opt?.cmd) {
+            case "create":
+              this.wsModifyFolderCreate(opt);
+              break;
+            case "update":
+              this.wsModifyFolderUpdate(opt);
+              break;
+            case "delete":
+              this.wsModifyFolderDelete(opt);
+              break;
+          }
 
-      if (opt?.cmd === "create" && !this.showNewFilesInList) {
-        const newFilter = this.filter;
-        newFilter.total += 1;
-        this.setFilter(newFilter);
-        return;
-      }
-
-      if (!this.clientLoadingStore.isLoading)
-        switch (opt?.cmd) {
-          case "create":
-            this.wsModifyFolderCreate(opt);
-            break;
-          case "update":
-            this.wsModifyFolderUpdate(opt);
-            break;
-          case "delete":
-            this.wsModifyFolderDelete(opt);
-            break;
-        }
-
-      this.treeFoldersStore.updateTreeFoldersItem(opt);
-    });
-
-    SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
-      const { infoPanelSelection, fetchHistory, isVisible } =
-        this.infoPanelStore;
-
-      if (!isVisible) return;
-      let infoPanelSelectionType = "file";
-      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
-        infoPanelSelectionType = "folder";
-
-      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
-        console.log("[WS] s:update-history", id);
-        fetchHistory();
-      }
-    });
-
-    SocketHelper.on(SocketEvents.RefreshFolder, (id) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `DIR-${id}`;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      if (!id || this.clientLoadingStore.isLoading) return;
-
-      //console.log(
-      //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
-      //);
-    });
-
-    SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `DIR-${folderId}`;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      console.log(`[WS] markasnew-folder ${folderId}:${count}`);
-
-      const foundIndex =
-        folderId && this.folders.findIndex((x) => x.id === folderId);
-
-      const treeFoundIndex =
-        folderId &&
-        this.treeFoldersStore.treeFolders.findIndex((x) => x.id === folderId);
-      if (foundIndex === -1 && treeFoundIndex === -1) return;
-
-      runInAction(() => {
-        if (foundIndex > -1)
-          this.folders[foundIndex].new = count >= 0 ? count : 0;
-        if (treeFoundIndex > -1) this.treeFoldersStore.fetchTreeFolders();
+        this.treeFoldersStore.updateTreeFoldersItem(opt);
       });
-    });
 
-    SocketHelper.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${fileId}`;
+      SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
+        const { infoPanelSelection, fetchHistory, isVisible } =
+          this.infoPanelStore;
 
-      if (!socketSubscribers.has(pathParts)) return;
+        if (!isVisible) return;
+        let infoPanelSelectionType = "file";
+        if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
+          infoPanelSelectionType = "folder";
 
-      console.log(`[WS] markasnew-file ${fileId}:${count}`);
-
-      const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
-
-      this.treeFoldersStore.fetchTreeFolders();
-
-      if (foundIndex == -1) return;
-
-      this.updateFileStatus(
-        foundIndex,
-        count > 0
-          ? this.files[foundIndex].fileStatus | FileStatus.IsNew
-          : this.files[foundIndex].fileStatus & ~FileStatus.IsNew,
-      );
-    });
-
-    //WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper.on(SocketEvents.StartEditFile, (id) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      const foundIndex = this.files.findIndex((x) => x.id === id);
-      if (foundIndex == -1) return;
-
-      console.log(`[WS] s:start-edit-file`, id, this.files[foundIndex].title);
-
-      this.updateSelectionStatus(
-        id,
-        this.files[foundIndex].fileStatus | FileStatus.IsEditing,
-        true,
-      );
-
-      this.updateFileStatus(
-        foundIndex,
-        this.files[foundIndex].fileStatus | FileStatus.IsEditing,
-      );
-    });
-
-    SocketHelper.on(SocketEvents.ModifyRoom, (option) => {
-      switch (option.cmd) {
-        case "create-form":
-          setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
-          break;
-
-        default:
-          break;
-      }
-    });
-
-    SocketHelper.on(SocketEvents.StopEditFile, (id) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
-
-      const { isVisible, infoPanelSelection, setInfoPanelSelection } =
-        this.infoPanelStore;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      const foundIndex = this.files.findIndex((x) => x.id === id);
-      if (foundIndex == -1) return;
-
-      console.log(`[WS] s:stop-edit-file`, id, this.files[foundIndex].title);
-
-      this.updateSelectionStatus(
-        id,
-        this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
-        false,
-      );
-
-      this.updateFileStatus(
-        foundIndex,
-        this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
-      );
-
-      this.getFileInfo(id).then((file) => {
-        if (
-          isVisible &&
-          file.id === infoPanelSelection?.id &&
-          infoPanelSelection?.fileExst === file.fileExst
-        ) {
-          setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
+        if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
+          console.log("[WS] s:update-history", id);
+          fetchHistory();
         }
       });
 
-      this.createThumbnail(this.files[foundIndex]);
-    });
+      SocketHelper.on(SocketEvents.RefreshFolder, (id) => {
+        const { socketSubscribers } = SocketHelper;
+        const pathParts = `DIR-${id}`;
+
+        if (!socketSubscribers.has(pathParts)) return;
+
+        if (!id || this.clientLoadingStore.isLoading) return;
+
+        //console.log(
+        //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
+        //);
+      });
+
+      SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
+        const { socketSubscribers } = SocketHelper;
+        const pathParts = `DIR-${folderId}`;
+
+        if (!socketSubscribers.has(pathParts)) return;
+
+        console.log(`[WS] markasnew-folder ${folderId}:${count}`);
+
+        const foundIndex =
+          folderId && this.folders.findIndex((x) => x.id === folderId);
+
+        const treeFoundIndex =
+          folderId &&
+          this.treeFoldersStore.treeFolders.findIndex((x) => x.id === folderId);
+        if (foundIndex === -1 && treeFoundIndex === -1) return;
+
+        runInAction(() => {
+          if (foundIndex > -1)
+            this.folders[foundIndex].new = count >= 0 ? count : 0;
+          if (treeFoundIndex > -1) this.treeFoldersStore.fetchTreeFolders();
+        });
+      });
+
+      SocketHelper.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
+        const { socketSubscribers } = SocketHelper;
+        const pathParts = `FILE-${fileId}`;
+
+        if (!socketSubscribers.has(pathParts)) return;
+
+        console.log(`[WS] markasnew-file ${fileId}:${count}`);
+
+        const foundIndex =
+          fileId && this.files.findIndex((x) => x.id === fileId);
+
+        this.treeFoldersStore.fetchTreeFolders();
+
+        if (foundIndex == -1) return;
+
+        this.updateFileStatus(
+          foundIndex,
+          count > 0
+            ? this.files[foundIndex].fileStatus | FileStatus.IsNew
+            : this.files[foundIndex].fileStatus & ~FileStatus.IsNew,
+        );
+      });
+
+      //WAIT FOR RESPONSES OF EDITING FILE
+      SocketHelper.on(SocketEvents.StartEditFile, (id) => {
+        const { socketSubscribers } = SocketHelper;
+        const pathParts = `FILE-${id}`;
+
+        if (!socketSubscribers.has(pathParts)) return;
+
+        const foundIndex = this.files.findIndex((x) => x.id === id);
+        if (foundIndex == -1) return;
+
+        console.log(`[WS] s:start-edit-file`, id, this.files[foundIndex].title);
+
+        this.updateSelectionStatus(
+          id,
+          this.files[foundIndex].fileStatus | FileStatus.IsEditing,
+          true,
+        );
+
+        this.updateFileStatus(
+          foundIndex,
+          this.files[foundIndex].fileStatus | FileStatus.IsEditing,
+        );
+      });
+
+      SocketHelper.on(SocketEvents.StopEditFile, (id) => {
+        const { socketSubscribers } = SocketHelper;
+        const pathParts = `FILE-${id}`;
+
+        const { isVisible, infoPanelSelection, setInfoPanelSelection } =
+          this.infoPanelStore;
+
+        if (!socketSubscribers.has(pathParts)) return;
+
+        const foundIndex = this.files.findIndex((x) => x.id === id);
+        if (foundIndex == -1) return;
+
+        console.log(`[WS] s:stop-edit-file`, id, this.files[foundIndex].title);
+
+        this.updateSelectionStatus(
+          id,
+          this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
+          false,
+        );
+
+        this.updateFileStatus(
+          foundIndex,
+          this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
+        );
+
+        this.getFileInfo(id).then((file) => {
+          if (
+            isVisible &&
+            file.id === infoPanelSelection?.id &&
+            infoPanelSelection?.fileExst === file.fileExst
+          ) {
+            setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
+          }
+        });
+
+        this.createThumbnail(this.files[foundIndex]);
+      });
+    }
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
@@ -1842,14 +1831,11 @@ class FilesStore {
 
     const { filterType, searchInContent } = filterData;
 
-    if (!Boolean(filterData.withSubfolders))
-      filterData.withSubfolders = defaultFilter.withSubfolders;
+    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+      filterData.filterType = defaultFilter.filterType;
 
     if (!Boolean(searchInContent))
       filterData.searchInContent = defaultFilter.searchInContent;
-
-    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
-      filterData.filterType = defaultFilter.filterType;
 
     setSelectedNode([folderId + ""]);
 
@@ -1997,8 +1983,6 @@ class FilesStore {
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,
-            inRoom: !!data.current.inRoom,
-            isRoom: !!data.current.roomType,
             pathParts: data.pathParts,
             navigationPath,
             ...{ new: data.new },
@@ -2281,12 +2265,6 @@ class FilesStore {
             this.setFiles([]);
           });
 
-          if (clearFilter) {
-            if (clearSelection) {
-              this.setSelected("close");
-            }
-          }
-
           this.infoPanelStore.setInfoPanelRoom(null);
 
           this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -2324,7 +2302,6 @@ class FilesStore {
             console.error(err);
           }
         });
-
     return request();
   };
 
@@ -2678,7 +2655,7 @@ class FilesStore {
           "open",
           "link-for-room-members",
           // "link-for-portal-users",
-          // "external-link",
+          // "sharing-settings",
           "send-by-email",
           "mark-as-favorite",
         ]);

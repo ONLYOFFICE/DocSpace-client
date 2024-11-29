@@ -34,7 +34,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
 import AppLoader from "@docspace/shared/components/app-loader";
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import { frameCallEvent } from "@docspace/shared/utils/frame";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import OperationContainer from "@docspace/shared/components/operation-container";

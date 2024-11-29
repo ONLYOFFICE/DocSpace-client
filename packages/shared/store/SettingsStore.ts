@@ -54,13 +54,9 @@ import {
   getSystemTheme,
   getDeviceTypeByWidth,
 } from "../utils";
-import {
-  frameCallEvent,
-  getShowText,
-  isPublicRoom,
-  insertTagManager,
-  isManagement,
-} from "../utils/common";
+import { getShowText, insertTagManager, isManagement } from "../utils/common";
+import { isPublicRoom } from "../utils/location";
+import { frameCallEvent } from "../utils/frame";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";

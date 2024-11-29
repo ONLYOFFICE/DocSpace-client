@@ -27,7 +27,7 @@
 import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { frameCallCommand } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "@docspace/shared/utils/frame";
 
 import { TError } from "@/types";
 

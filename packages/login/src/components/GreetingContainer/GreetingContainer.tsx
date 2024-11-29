@@ -33,7 +33,7 @@ import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
+import { getLogoUrl } from "@docspace/shared/utils/logo";
 
 export const GreetingContainer = ({
   greetingText,

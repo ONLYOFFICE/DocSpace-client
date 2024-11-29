@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { getObjectByLocation } from "@docspace/shared/utils/location";
 
 const MyDocumentsTabs = ({
   isPersonalRoom,

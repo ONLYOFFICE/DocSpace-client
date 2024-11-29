@@ -34,7 +34,7 @@ import { getUserByEmail } from "../api/people";
 import { TPortalTariff } from "../api/portal/types";
 import { TUser } from "../api/people/types";
 import { isValidDate } from "../utils";
-import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import { getDaysLeft, getDaysRemaining } from "../utils/date";
 import { Nullable } from "../types";
 
 class CurrentTariffStatusStore {

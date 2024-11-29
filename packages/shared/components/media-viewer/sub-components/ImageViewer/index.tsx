@@ -200,6 +200,10 @@ export const ImageViewer = ({
 
   const imageLoaded = useCallback(
     (event: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (!(window.ClientConfig?.imageThumbnails && thumbnailSrc)) {
+        setShowOriginSrc(true);
+      }
+
       const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
       const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
 
@@ -227,7 +231,7 @@ export const ImageViewer = ({
         URL.revokeObjectURL(src);
       }
     },
-    [api, isDecodedImage, src],
+    [api, isDecodedImage, src, thumbnailSrc],
   );
 
   const restartScaleAndSize = useCallback(() => {

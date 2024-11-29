@@ -3826,6 +3826,16 @@ class FilesStore {
     }
   };
 
+  get passwordFiles() {
+    let selection = this.selection.length
+      ? this.selection
+      : this.bufferSelection
+        ? [this.bufferSelection]
+        : [];
+
+    return selection.filter((item) => item.needPassword);
+  }
+
   get sortedFiles() {
     const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =
       this.filesSettingsStore;

@@ -610,15 +610,16 @@ class FilesActionStore {
     }
   };
 
-  downloadFiles = async (fileConvertIds, folderIds, translations) => {
+  downloadFiles = async (fileConvertIds, folderIds, translations, password) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
     const { openUrl } = this.settingsStore;
 
-    const { addActiveItems } = this.filesStore;
-    const { label } = translations;
+    const { addActiveItems, bufferSelection, selection } = this.filesStore;
+    const { label, passwordError } = translations;
+    const { setDownloadDialogVisible } = this.dialogsStore;
 
     const operationId = uniqueid("operation_");
 
@@ -673,13 +674,38 @@ class FilesActionStore {
         },
       );
     } catch (err) {
-      clearActiveOperations(fileIds, folderIds);
+      //clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
         operationId,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+      const error = err.error;
+
+      if (error.includes("password")) {
+        const filesIds = error.match(/\d+/g).map(Number);
+        const selectedItemsArray = bufferSelection ?? selection;
+
+        selectedItemsArray.forEach((item) => {
+          filesIds.forEach((id) => {
+            if (item.id === id) item.needPassword = true;
+          });
+        });
+        console.log(
+          "filesIds",
+          filesIds,
+          "selectedItemsArray",
+          selectedItemsArray,
+        );
+
+        toastr.error(passwordError);
+
+        setDownloadDialogVisible(true);
+        return;
+      }
+
+      // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
       return toastr.error(err);
     }
   };

@@ -28,11 +28,11 @@ import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBodyContent } from "./StyledDownloadDialog";
+import { PasswordRow } from "./PasswordRow";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
-import { UrlActionType } from "@docspace/shared/enums";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -71,6 +71,7 @@ class DownloadDialogComponent extends React.Component {
         files: other,
       },
       modalDialogToggle: "modalDialogToggle",
+      showPasswordInput: false,
     };
   }
 
@@ -106,18 +107,30 @@ class DownloadDialogComponent extends React.Component {
       }
     }
 
-    return [files, folders, singleFileUrl];
+    return [files, folders, singleFileUrl, itemList];
   };
 
   onDownload = () => {
     const { t, downloadFiles } = this.props;
-    const [fileConvertIds, folderIds] = this.getDownloadItems();
+    const [fileConvertIds, folderIds, , itemList] = this.getDownloadItems();
+
     if (fileConvertIds.length || folderIds.length) {
-      downloadFiles(fileConvertIds, folderIds, {
+      const passwordError = (
+        <Trans
+          t={t}
+          ns="Files"
+          i18nKey="PasswordProtectedFiles"
+          components={{ 1: <span /> }}
+        />
+      );
+      const translations = {
         label: t("Translations:ArchivingData"),
         error: t("Common:ErrorInternalServer"),
-      });
-      this.props.setSelected("none");
+        passwordError,
+      };
+
+      downloadFiles(fileConvertIds, folderIds, translations);
+      // this.props.setSelected("none");
       this.onClose();
     }
   };
@@ -301,6 +314,7 @@ class DownloadDialogComponent extends React.Component {
       isChecked: checkedOtherTitle,
       isIndeterminate: indeterminateOtherTitle,
     } = this.state.other;
+    const { passwordFiles } = this.props;
 
     const isCheckedLength = this.getCheckedFileLength();
 
@@ -341,6 +355,11 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={this.state.modalDialogToggle}>
+          {passwordFiles?.length > 0 &&
+            passwordFiles.map((item) => {
+              return <PasswordRow item={item} />;
+            })}
+
           <StyledBodyContent className="download-dialog-description">
             <Text noSelect>{t("ChooseFormatText")}.</Text>
             {!isSingleFile && (
@@ -452,7 +471,7 @@ export default inject(
     filesSettingsStore,
     settingsStore,
   }) => {
-    const { sortedFiles, setSelected } = filesStore;
+    const { sortedFiles, setSelected, passwordFiles } = filesStore;
     const { extsConvertible } = filesSettingsStore;
     const { theme, openUrl } = settingsStore;
 
@@ -472,6 +491,7 @@ export default inject(
 
       theme,
       openUrl,
+      passwordFiles,
     };
   },
 )(observer(DownloadDialog));

@@ -82,6 +82,11 @@ const StyledDownloadContent = styled.div`
     gap: 12px;
     height: 48px;
 
+    .enter-password {
+      text-decoration: underline dashed;
+      cursor: pointer;
+    }
+
     .download-dialog-main-content {
       min-width: 0;
       display: flex;
@@ -127,6 +132,20 @@ const StyledDownloadContent = styled.div`
         color: ${(props) => props.theme.downloadDialog.textColor};
       }
     }
+  }
+
+  .password-input {
+    position: absolute;
+    top: 48px;
+    inset-inline: 0;
+    max-width: 470px;
+    width: calc(100% - 16px);
+    display: flex;
+  }
+  #conversion-button {
+    margin-inline-start: 8px;
+    width: 100%;
+    max-width: 78px;
   }
 `;
 

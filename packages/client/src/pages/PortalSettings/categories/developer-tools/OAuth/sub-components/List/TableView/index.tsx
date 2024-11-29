@@ -35,6 +35,7 @@ const TableView = ({
   itemCount,
   fetchNextClients,
   isGroupDialogVisible,
+  setDisableDialogVisible,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
   const tagRef = React.useRef<HTMLDivElement | null>(null);
@@ -147,6 +148,7 @@ const TableView = ({
             setBufferSelection={setBufferSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
+            setDisableDialogVisible={setDisableDialogVisible}
             tagCount={tagCount}
           />
         ))}
@@ -179,6 +181,7 @@ export default inject(
       fetchNextClients,
       disableDialogVisible,
       deleteDialogVisible,
+      setDisableDialogVisible,
     } = oauthStore;
 
     const isGroupDialogVisible = disableDialogVisible || deleteDialogVisible;
@@ -197,6 +200,7 @@ export default inject(
       itemCount,
       fetchNextClients,
       isGroupDialogVisible,
+      setDisableDialogVisible,
     };
   },
 )(observer(TableView));

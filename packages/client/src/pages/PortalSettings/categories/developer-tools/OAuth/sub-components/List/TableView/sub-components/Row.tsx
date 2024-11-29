@@ -25,6 +25,7 @@ const Row = (props: RowProps) => {
     setSelection,
     tagCount,
     setBufferSelection,
+    setDisableDialogVisible,
   } = props;
   const navigate = useNavigate();
 
@@ -37,6 +38,11 @@ const Row = (props: RowProps) => {
   const handleToggleEnabled = async () => {
     if (!changeClientStatus) return;
     try {
+      if (item.enabled && setDisableDialogVisible) {
+        setBufferSelection!(item.clientId);
+        setDisableDialogVisible(true);
+        return;
+      }
       await changeClientStatus(item.clientId, !item.enabled);
 
       if (!item.enabled) {

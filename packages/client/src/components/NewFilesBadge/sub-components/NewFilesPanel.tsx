@@ -50,6 +50,7 @@ import { StyledPanel } from "../NewFilesBadge.styled";
 
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
 import { NewFilesPanelItem } from "./NewFilesPanelItem";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const MIN_LOADER_TIMER = 500;
 
@@ -194,10 +195,13 @@ export const NewFilesPanelComponent = ({
   );
 
   const panel = (
-    <StyledPanel className="new-files-panel" position={position}>
-      <Scrollbar>{content}</Scrollbar>
-      {markAsReadButton}
-    </StyledPanel>
+    <>
+      <StyledPanel className="new-files-panel" position={position}>
+        <Scrollbar>{content}</Scrollbar>
+        {markAsReadButton}
+      </StyledPanel>
+      {isMobile() && <Backdrop visible withoutBackground withoutBlur />}
+    </>
   );
 
   const mobilePanel = (

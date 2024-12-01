@@ -59,8 +59,6 @@ const FileManagement = ({
 
   keepNewFileName,
   setKeepNewFileName,
-  setThumbnails1280x720,
-  thumbnails1280x720,
 
   openEditorInSameTab,
   setOpenEditorInSameTab,
@@ -94,10 +92,6 @@ const FileManagement = ({
   const onChangeForceSave = React.useCallback(() => {
     setForceSave(!forceSave);
   }, [setForceSave, forceSave]);
-
-  const onChangeThumbnailsSize = React.useCallback(() => {
-    setThumbnails1280x720(!thumbnails1280x720);
-  }, [setThumbnails1280x720, thumbnails1280x720]);
 
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
@@ -143,13 +137,13 @@ const FileManagement = ({
             {t("Common:Common")}
           </Heading>
         )} */}
-        <ToggleButton
+        {/* <ToggleButton
           className="toggle-btn"
           label={thumbnailsSizeLabel}
           onChange={onChangeThumbnailsSize}
-          isChecked={thumbnails1280x720}
+          isChecked={false}
           style={{ display: "none" }}
-        />
+        /> */}
         {
           <div className="toggle-btn-wrapper">
             <ToggleButton
@@ -279,9 +273,6 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
     keepNewFileName,
     setKeepNewFileName,
 
-    setThumbnails1280x720,
-    thumbnails1280x720,
-
     openEditorInSameTab,
     setOpenEditorInSameTab,
 
@@ -316,9 +307,6 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     keepNewFileName,
     setKeepNewFileName,
-
-    setThumbnails1280x720,
-    thumbnails1280x720,
 
     openEditorInSameTab,
     setOpenEditorInSameTab,

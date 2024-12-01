@@ -86,8 +86,8 @@ const getInitialScale = (scale, isEdit) => {
   });
 };
 
-const getInitialRotate = (rotate, isEdit) => {
-  if (!isEdit) return rotateOptions[0];
+const getInitialRotate = (rotate, isEdit, isImage) => {
+  if (!isEdit || (isEdit && !isImage)) return rotateOptions[0];
 
   const item = rotateOptions.find((item) => {
     return item.key === rotate;
@@ -113,7 +113,7 @@ const ImageWatermark = ({
 
   if (initialInfo.current === null) {
     initialInfo.current = {
-      rotate: getInitialRotate(initialSettings?.rotate, isEdit),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
 

@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React, {
   useRef,
   useState,
@@ -36,6 +35,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { includesMethod } from "@docspace/shared/utils/typeGuards";
 import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
 
+import { isHeic, isTiff } from "../../MediaViewer.utils";
 import { StyledViewerContainer } from "../../MediaViewer.styled";
 
 import { NextButton } from "../NextButton";
@@ -94,16 +94,19 @@ export const Viewer = (props: ViewerProps) => {
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
-  const devices = useMemo(
-    () => ({
+  const devices = useMemo(() => {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isMouse = window.matchMedia("(pointer: fine)").matches;
+
+    return {
       isMobileOnly: currentDeviceType === DeviceType.mobile,
       isMobile:
         currentDeviceType === DeviceType.tablet ||
-        currentDeviceType === DeviceType.mobile,
-      isDesktop: currentDeviceType === DeviceType.desktop,
-    }),
-    [currentDeviceType],
-  );
+        currentDeviceType === DeviceType.mobile ||
+        (isTouch && !isMouse),
+      isDesktop: currentDeviceType === DeviceType.desktop && isMouse,
+    };
+  }, [currentDeviceType]);
   const { isMobile } = devices;
 
   const resetToolbarVisibleTimer = useCallback(() => {
@@ -226,8 +229,8 @@ export const Viewer = (props: ViewerProps) => {
 
   const playlistFile = playlist[playlistPos];
 
-  const isTiff =
-    playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
+  const isDecodedImage =
+    isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
   return (
     <StyledViewerContainer dir="ltr" visible={visible}>
@@ -252,8 +255,8 @@ export const Viewer = (props: ViewerProps) => {
 
       {isImage ? (
         <ImageViewer
-          key={targetFile?.viewUrl}
-          isTiff={isTiff}
+          key={targetFile?.id}
+          isDecodedImage={isDecodedImage}
           devices={devices}
           toolbar={toolbar}
           errorTitle={errorTitle}

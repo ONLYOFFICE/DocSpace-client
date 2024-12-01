@@ -3038,6 +3038,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     framer-motion: "npm:^4.1.17"
     global: "npm:^4.4.0"
+    heic2any: "npm:^0.0.4"
     html-to-react: "npm:^1.7.0"
     i18next: "npm:^20.6.1"
     i18next-http-backend: "npm:^2.6.2"
@@ -16531,6 +16532,13 @@ __metadata:
   bin:
     he: bin/he
   checksum: 10/d09b2243da4e23f53336e8de3093e5c43d2c39f8d0d18817abfa32ce3e9355391b2edb4bb5edc376aea5d4b0b59d6a0482aab4c52bc02ef95751e4b818e847f1
+  languageName: node
+  linkType: hard
+
+"heic2any@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "heic2any@npm:0.0.4"
+  checksum: 10/71188058d5851dcd66685c89d1084458f633e87dcd2f31a0ed5cdadf32329421310ba86cdd2a6d4aba9e46856957e05fc7fc9112b52bfc44984e438f2372701f
   languageName: node
   linkType: hard
 

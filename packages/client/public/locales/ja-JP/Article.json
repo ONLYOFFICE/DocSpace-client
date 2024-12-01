@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "ファイルが読み込まれなかった: {{count}}",
   "FilesUploaded": "アップロードされたファイル",
   "Upload": "アップロード",
   "UploadFiles": "ファイルのアップロード",

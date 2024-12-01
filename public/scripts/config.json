@@ -8,7 +8,6 @@
     "url": ""
   },
   "wrongPortalNameUrl": "",
-  "thumbnails1280x720": true,
   "pdfViewer": false,
   "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": true,
@@ -19,7 +18,9 @@
     "checkDomain": false
   },
   "oauth2": {
-    "origin": ""
+    "origin": "",
+    "apiSystem": [],
+    "identity": []
   },
   "firebase": {
     "fetchTimeoutMillis": 3600000,

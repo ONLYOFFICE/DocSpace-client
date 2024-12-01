@@ -913,6 +913,18 @@ class FilesStore {
     });
   }
 
+  get selections() {
+    if (Array.isArray(this.selection) && this.selection.length !== 0) {
+      return this.selection;
+    }
+
+    if (this.bufferSelection) {
+      return [this.bufferSelection];
+    }
+
+    return [];
+  }
+
   setPageItemsLength = (pageItemsLength) => {
     this.pageItemsLength = pageItemsLength;
   };
@@ -1668,7 +1680,7 @@ class FilesStore {
                 if (
                   !newInfoPanelSelection[0].isFolder &&
                   !newInfoPanelSelection[0].isRoom &&
-                  data.current.rootFolderId === FolderType.USER &&
+                  data.current.rootFolderType === FolderType.USER &&
                   this.selectedFolderStore.isFolder
                 ) {
                   newInfoPanelSelection[0].isFolder = true;
@@ -3047,9 +3059,31 @@ class FilesStore {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
-    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
 
-    const deleteCount = (fileIds?.length ?? 0) + (folderIds?.length ?? 0);
+    let deleteCount = 0;
+
+    if (fileIds) {
+      let i = fileIds.length;
+      while (i !== 0) {
+        const file = this.files.find((x) => x.id === fileIds[i - 1]);
+        if (file) deleteCount += 1;
+
+        i--;
+      }
+    }
+
+    if (folderIds) {
+      let i = folderIds.length;
+      while (i !== 0) {
+        const folder = this.folders.find((x) => x.id === folderIds[i - 1]);
+        if (folder) deleteCount += 1;
+
+        i--;
+      }
+    }
+
+    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
+    newFilter.total -= deleteCount;
 
     if (destFolderId && destFolderId === this.selectedFolderStore.id) return;
 
@@ -3069,7 +3103,6 @@ class FilesStore {
             (f) => !folderIds.includes(f.id) && f.isFolder,
           );
 
-      newFilter.total -= deleteCount;
       this.setIsEmptyPage(newFilter.total <= 0);
 
       runInAction(() => {
@@ -3080,6 +3113,30 @@ class FilesStore {
         this.setHotkeysClipboard(hotkeysClipboard);
         this.setTempActionFoldersIds([]);
       });
+
+      showToast && showToast();
+
+      return;
+    }
+
+    if (this.filesList.length - deleteCount >= this.filter.pageCount) {
+      const files = fileIds
+        ? this.files.filter((x) => !fileIds.includes(x.id))
+        : this.files;
+
+      const folders = folderIds
+        ? this.folders.filter((x) => !folderIds.includes(x.id))
+        : this.folders;
+
+      runInAction(() => {
+        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
+        this.setFiles(files);
+        this.setFolders(folders);
+        this.setTempActionFilesIds([]);
+        this.setTempActionFoldersIds([]);
+      });
+
+      showToast && showToast();
 
       return;
     }
@@ -4282,13 +4339,20 @@ class FilesStore {
     if (isRooms) this.setRoomsFilter(newFilter);
     else this.setFilter(newFilter);
 
-    const newFiles = isRooms
+    const newFilesData = isRooms
       ? await api.rooms.getRooms(newFilter)
       : await api.files.getFolder(newFilter.folder, newFilter);
 
+    const newFiles = [...this.files, ...newFilesData.files].filter(
+      (x, index, self) => index === self.findIndex((i) => i.id === x.id),
+    );
+    const newFolders = [...this.folders, ...newFilesData.folders].filter(
+      (x, index, self) => index === self.findIndex((i) => i.id === x.id),
+    );
+
     runInAction(() => {
-      this.setFiles([...this.files, ...newFiles.files]);
-      this.setFolders([...this.folders, ...newFiles.folders]);
+      this.setFiles(newFiles);
+      this.setFolders(newFolders);
       this.setFilesIsLoading(false);
     });
   };

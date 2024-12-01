@@ -72,7 +72,6 @@ class FilesSettingsStore {
   hideConfirmConvertSave = null;
   keepNewFileName = null;
   openEditorInSameTab = null;
-  thumbnails1280x720 = window.ClientConfig?.thumbnails1280x720 || false;
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
   maxUploadThreadCount = 15;
   maxUploadFilesCount = 5;
@@ -210,10 +209,6 @@ class FilesSettingsStore {
     api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
 
   setStoreForcesave = (val) => (this.storeForcesave = val);
-
-  setThumbnails1280x720 = (enabled) => {
-    this.thumbnails1280x720 = enabled;
-  };
 
   setKeepNewFileName = (data) => {
     api.files

@@ -47,13 +47,15 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [client, scopes, user, settings, config] = await Promise.all([
+  const [oauthData, scopes, user, settings, config] = await Promise.all([
     getOAuthClient(clientId),
     getScopeList(),
     getUser(),
     getSettings(),
     getConfig(),
   ]);
+
+  const client = oauthData?.client;
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";

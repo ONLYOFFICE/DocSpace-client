@@ -78,6 +78,8 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
     displayFileExtension,
+    icon,
+    isDownload,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -195,7 +197,11 @@ const FilesTableRow = (props) => {
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
-        inProgress={inProgress}
+        inProgress={
+          inProgress && item.isFolder
+            ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
+            : inProgress
+        }
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}

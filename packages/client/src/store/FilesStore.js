@@ -28,6 +28,9 @@ import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import merge from "lodash/merge";
 import cloneDeep from "lodash/cloneDeep";
+import debounce from "lodash.debounce";
+import clone from "lodash/clone";
+import Queue from "queue-promise";
 
 import api from "@docspace/shared/api";
 import {
@@ -41,9 +44,11 @@ import {
   FilterKeys,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
-import { SocketEvents } from "@docspace/shared/utils/socketEvents";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import { isLockedSharedRoom, RoomsTypes } from "@docspace/shared/utils/rooms";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
@@ -72,12 +77,9 @@ import {
 import { isMobile } from "@docspace/shared/utils/device";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import debounce from "lodash.debounce";
-import clone from "lodash/clone";
-import Queue from "queue-promise";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
+
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 

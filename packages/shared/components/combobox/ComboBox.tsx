@@ -116,6 +116,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
     option: TOption,
     event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
   ) => {
+    if (option.isSeparator) return;
+
     const { onSelect, setIsOpenItemAccess } = props;
 
     setSelectedOption({ ...option });

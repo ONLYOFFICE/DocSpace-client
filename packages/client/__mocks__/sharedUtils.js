@@ -24,7 +24,6 @@ const getViewForCurrentRoom = jest.fn();
 const updateTempContent = jest.fn();
 const isPublicRoom = jest.fn(() => false);
 const toCommunityHostname = jest.fn();
-const isDesktop = jest.fn(() => false);
 
 export {
   SocketEvents,
@@ -35,6 +34,5 @@ export {
   updateTempContent,
   isPublicRoom,
   toCommunityHostname,
-  isDesktop,
 };
 export default SocketHelper;

@@ -1,12 +1,13 @@
 import { jest } from "@jest/globals";
-import FilesStore from "@docspace/store/FilesStore";
-import api from "@docspace/shared/api";
+// import FilesStore from "../FilesStore.js";
+import FilesStore from "../FilesStore.js";
+// import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
 
 // Mock dependencies
 jest.mock("@docspace/shared/api");
 jest.mock("@docspace/shared/utils");
-jest.mock("mobx");
+// jest.mock("mobx");
 
 jest.mock("@docspace/shared/api", () => ({
   FilesFilter: {
@@ -1886,7 +1887,7 @@ describe("FilesStore", () => {
 
   describe("file filtering and selection", () => {
     beforeEach(() => {
-      store.filesList = [
+      store.setFiles([
         { id: "doc-1", fileType: "document", title: "Document 1" },
         { id: "img-1", fileType: "image", title: "Image 1" },
         { id: "vid-1", fileType: "video", title: "Video 1" },
@@ -1897,7 +1898,7 @@ describe("FilesStore", () => {
           roomType: "FillingFormsRoom",
           title: "Form Room 1",
         },
-      ];
+      ]);
       store.activeFiles = [];
       store.activeFolders = [];
       store.selection = [];

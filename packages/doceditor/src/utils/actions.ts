@@ -145,7 +145,7 @@ export async function fileCopyAs(
 
     const hostname = hdrs.get("x-forwarded-host");
 
-    if (!fileRes.ok && !file.error) {
+    if (!fileRes.ok && !file?.error) {
       log.error(
         { error: fileRes, url: hostname },
         `POST /files/file/${fileId}/copyas failed`,

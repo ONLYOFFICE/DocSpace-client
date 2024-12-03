@@ -290,6 +290,7 @@ const User = ({
               className="name"
               type="action"
               onClick={() => onOpenGroup(user)}
+              title={decode(user.name)}
             >
               {decode(user.name)}
             </Link>

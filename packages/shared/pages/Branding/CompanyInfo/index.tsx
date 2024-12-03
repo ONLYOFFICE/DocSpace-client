@@ -43,7 +43,6 @@ export const CompanyInfo = ({
   t,
   isSettingPaid,
   onShowExample,
-  linkTitle,
   companySettings,
   companySettingsError,
   onChangeCompanyName,
@@ -72,6 +71,8 @@ export const CompanyInfo = ({
     hasErrorPhone ||
     hasErrorSite;
 
+  const link = t("Common:AboutCompanyTitle");
+
   return (
     <StyledCompanyInfo isSettingPaid={isSettingPaid}>
       <div className="header settings_unavailable">
@@ -81,11 +82,11 @@ export const CompanyInfo = ({
         <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Settings">
           &quot;This information will be displayed in the
           {isSettingPaid ? (
-            <Link className="link" onClick={onShowExample}>
-              {{ linkTitle }}
+            <Link className="link" onClick={onShowExample} noHover>
+              {{ link }}
             </Link>
           ) : (
-            <span className="link"> {{ linkTitle }}</span>
+            <span className="link">{{ link }}</span>
           )}
           window.&quot;
         </Trans>

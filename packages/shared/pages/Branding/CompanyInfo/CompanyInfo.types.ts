@@ -30,7 +30,6 @@ export interface ICompanyInfo {
   t: TTranslation;
   isSettingPaid: boolean;
   onShowExample: () => void;
-  linkTitle: string;
   companySettings: ICompanySettings;
   companySettingsError: ICompanySettingsError;
   onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;

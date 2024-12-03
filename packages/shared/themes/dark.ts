@@ -1108,7 +1108,7 @@ const Dark: TTheme = {
       right: "0px",
       bottom: "0px",
       fill: black,
-      backgroundColor: bigGrayDarkMid,
+      backgroundColor: "rgba(255, 255, 255, 0.64)",
       borderRadius: "50%",
       height: "32px",
       width: "32px",

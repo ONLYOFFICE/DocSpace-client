@@ -274,6 +274,7 @@ const hotkeyStore = new HotkeyStore(
   treeFoldersStore,
   uploadDataStore,
   selectedFolderStore,
+  indexingStore,
 );
 
 const tableStore = new TableStore(

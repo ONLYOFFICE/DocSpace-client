@@ -913,6 +913,18 @@ class FilesStore {
     });
   }
 
+  get selections() {
+    if (Array.isArray(this.selection) && this.selection.length !== 0) {
+      return this.selection;
+    }
+
+    if (this.bufferSelection) {
+      return [this.bufferSelection];
+    }
+
+    return [];
+  }
+
   setPageItemsLength = (pageItemsLength) => {
     this.pageItemsLength = pageItemsLength;
   };

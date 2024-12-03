@@ -125,7 +125,6 @@ class FilesActionStore {
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
-  isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
@@ -172,10 +171,6 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
   }
-
-  setIsBulkDownload = (isBulkDownload) => {
-    this.isBulkDownload = isBulkDownload;
-  };
 
   updateCurrentFolder = async (
     fileIds,
@@ -625,13 +620,6 @@ class FilesActionStore {
     const { addActiveItems } = this.filesStore;
     const { label } = translations;
 
-    if (this.isBulkDownload) {
-      //toastr.error(); TODO: new add cancel download operation and new translation "ErrorMassage_SecondDownload"
-      return;
-    }
-
-    this.setIsBulkDownload(true);
-
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
@@ -669,7 +657,6 @@ class FilesActionStore {
                 );
 
           clearActiveOperations(fileIds, folderIds);
-          this.setIsBulkDownload(false);
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
@@ -686,7 +673,6 @@ class FilesActionStore {
         },
       );
     } catch (err) {
-      this.setIsBulkDownload(false);
       clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({
         visible: true,
@@ -1505,14 +1491,13 @@ class FilesActionStore {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
-    const { rootFolderType } = this.selectedFolderStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
 
-    const { title, fileExst } = item;
+    const { title, fileExst, id, rootFolderType } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
@@ -1533,10 +1518,9 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const isTrash = actionType === "delete";
     const url = getCategoryUrl(
-      isTrash ? CategoryType.Trash : categoryType,
-      parentId,
+      getCategoryTypeByFolderType(rootFolderType, id),
+      id,
     );
 
     const newFilter = FilesFilter.getDefault();
@@ -2509,6 +2493,8 @@ class FilesActionStore {
         isRoom,
         rootRoomTitle: !!roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+        isLifetimeEnabled:
+          itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
       };
 
       setSelection([]);
@@ -2962,6 +2948,7 @@ class FilesActionStore {
   };
 
   setListOrder = (startIndex, finalIndex, indexMovedFromBottom = false) => {
+    const { setUpdateSelection } = this.indexingStore;
     const newFilesList = JSON.parse(JSON.stringify(this.filesStore.filesList));
 
     let i = startIndex;
@@ -2983,15 +2970,34 @@ class FilesActionStore {
           newFilesList[i].order = +newFilesList[i].order - 1 + "";
         }
       }
-
+      setUpdateSelection([newFilesList[i]]);
       i++;
     }
 
     return newFilesList;
   };
 
+  revokeFilesOrder = () => {
+    const { setFiles, setFolders } = this.filesStore;
+    const { previousFilesList } = this.indexingStore;
+
+    if (!previousFilesList.length) return;
+
+    const newFolders = previousFilesList.filter((f) => f.isFolder);
+    const newFiles = previousFilesList.filter((f) => !f.isFolder);
+
+    setFiles(newFiles);
+    setFolders(newFolders);
+  };
+
   setFilesOrder = (currentItem, replaceableItem, indexMovedFromBottom) => {
     const { filesList, setFiles, setFolders } = this.filesStore;
+    const { setPreviousFilesList, updateSelection, setUpdateSelection } =
+      this.indexingStore;
+
+    if (updateSelection.length === 0) {
+      setPreviousFilesList(filesList);
+    }
 
     const currentIndex = filesList.findIndex(
       (f) => f.order === currentItem.order,
@@ -3012,6 +3018,7 @@ class FilesActionStore {
       newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
       newFilesList[currentIndex].order = filesList[replaceableIndex].order;
     }
+    setUpdateSelection([newFilesList[currentIndex]]);
 
     const newFolders = newFilesList.filter((f) => f.isFolder);
     const newFiles = newFilesList.filter((f) => !f.isFolder);
@@ -3038,8 +3045,6 @@ class FilesActionStore {
       ? this.filesStore.selection
       : [bufferSelection];
 
-    const { setUpdateItems } = this.indexingStore;
-
     let replaceable;
     let current = item;
 
@@ -3061,8 +3066,6 @@ class FilesActionStore {
     if (!replaceable || current.order === replaceable.order) return;
 
     try {
-      await changeIndex(current?.id, replaceable.order, current?.isFolder);
-
       let indexMovedFromBottom = +current.order > +replaceable.order;
       if (current.order.includes(".")) {
         indexMovedFromBottom =
@@ -3081,9 +3084,29 @@ class FilesActionStore {
 
       this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
       this.filesStore.setSelected("none");
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
+  };
 
-      const items = [current, replaceable];
-      setUpdateItems(items);
+  saveIndexOfFiles = async () => {
+    const { updateSelection } = this.indexingStore;
+
+    try {
+      const items = updateSelection.reduce((res, item) => {
+        return [
+          ...res,
+          {
+            order: item.order,
+            entryId: item.id,
+            entryType: item.isFolder ? 1 : 2,
+          },
+        ];
+      }, []);
+
+      if (items.length > 0) {
+        await changeIndex(items);
+      }
     } catch (e) {
       toastr.error(t("Files:ErrorChangeIndex"));
     }

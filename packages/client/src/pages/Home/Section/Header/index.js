@@ -28,6 +28,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -154,7 +155,7 @@ const StyledContainer = styled.div`
   }
 
   ${(props) =>
-    props.isVirtualDataRoomType &&
+    props.isLifetimeEnabled &&
     css`
       .title-icon {
         svg {
@@ -261,6 +262,9 @@ const SectionHeaderContent = (props) => {
     isShared,
     isExternal,
     displayAbout,
+    revokeFilesOrder,
+    saveIndexOfFiles,
+    infoPanelRoom,
   } = props;
 
   const location = useLocation();
@@ -415,6 +419,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCloseIndexMenu = () => {
+    revokeFilesOrder();
     setIsIndexEditingMode(false);
   };
 
@@ -422,13 +427,17 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const onIndexApply = () => {
+    saveIndexOfFiles();
+    setIsIndexEditingMode(false);
+  };
+
   const getTitleIcon = () => {
     if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
     if (isShared && !isPublicRoom) return PublicRoomIconUrl;
 
-    if (isVirtualDataRoomType && selectedFolder.lifetime)
-      return LifetimeRoomIconUrl;
+    if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
     return "";
   };
@@ -444,6 +453,12 @@ const SectionHeaderContent = (props) => {
           label: t("Files:Reorder"),
           onClick: onIndexReorder,
           iconUrl: RoundedArrowSvgUrl,
+        },
+        {
+          id: "save-index",
+          label: t("Common:ApplyButton"),
+          onClick: onIndexApply,
+          iconUrl: CheckIcon,
         },
       ]
     : isContactsPage
@@ -490,11 +505,19 @@ const SectionHeaderContent = (props) => {
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
   const stateIsPublicRoomType = location?.state?.isPublicRoomType;
+  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
 
   const isRoot =
     isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
       : isRootFolder || isContactsPage || isSettingsPage;
+
+  const isLifetimeEnabled = Boolean(
+    !isRoot &&
+      (selectedFolder?.lifetime ||
+        infoPanelRoom?.lifetime ||
+        (isLoading && stateIsLifetimeEnabled)),
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -552,12 +575,14 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon = getTitleIcon();
 
-  const titleIconTooltip = selectedFolder.lifetime
+  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
+
+  const titleIconTooltip = lifetime
     ? `${t("Files:RoomFilesLifetime", {
-        days: selectedFolder.lifetime.value,
-        period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
+        days: lifetime.value,
+        period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
-        selectedFolder.lifetime.deletePermanently
+        lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
           : t("Files:AfterFilesWillBeMovedToTrash")
       }`
@@ -582,6 +607,7 @@ const SectionHeaderContent = (props) => {
           isExternalFolder={isExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
+          isLifetimeEnabled={isLifetimeEnabled}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
@@ -766,9 +792,11 @@ export default inject(
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
+      revokeFilesOrder,
+      saveIndexOfFiles,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
 
     const {
       title,
@@ -947,11 +975,14 @@ export default inject(
       createFoldersTree,
       getContactsModel,
       contactsCanCreate,
+      revokeFilesOrder,
+      saveIndexOfFiles,
 
       rootFolderId,
       isShared,
       isExternal,
       displayAbout,
+      infoPanelRoom,
     };
   },
 )(

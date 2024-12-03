@@ -1,13 +1,13 @@
 import { makeAutoObservable } from "mobx";
 import { api } from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/shared/components/toast";
 
 export class AccessManager {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 
@@ -72,7 +72,7 @@ export class AccessManager {
       [ShareAccessRights.Comment]: 2,
       [ShareAccessRights.ReadWrite]: 3,
       [ShareAccessRights.CustomFilter]: 4,
-      [ShareAccessRights.Full]: 5
+      [ShareAccessRights.Full]: 5,
     };
 
     return accessLevels[currentAccess] >= accessLevels[requiredAccess];

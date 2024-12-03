@@ -12,7 +12,7 @@ export class HistoryManager {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 
@@ -20,12 +20,13 @@ export class HistoryManager {
     try {
       const response = await this.rootStore.loadingManager.withLoading(
         `fetch-history-${fileId}`,
-        () => api.files.getHistory(fileId, this.historyFilter)
+        () => api.files.getHistory(fileId, this.historyFilter),
       );
 
       const parsedHistory = parseHistory(response.data);
       this.setHistory(parsedHistory);
       return parsedHistory;
+      // return this.rootStore.infoPanelState.fetchHistory(fileId);
     } catch (err) {
       this.rootStore.errorHandler.handleError(err, "Fetch history");
       throw err;
@@ -35,10 +36,10 @@ export class HistoryManager {
   fetchMoreHistory = async (fileId) => {
     try {
       this.historyFilter.startIndex += this.historyFilter.count;
-      
+
       const response = await this.rootStore.loadingManager.withLoading(
         `fetch-more-history-${fileId}`,
-        () => api.files.getHistory(fileId, this.historyFilter)
+        () => api.files.getHistory(fileId, this.historyFilter),
       );
 
       const parsedHistory = parseHistory(response.data);
@@ -73,12 +74,12 @@ export class HistoryManager {
   };
 
   removeHistoryEvent = (eventId) => {
-    this.history = this.history.filter(event => event.id !== eventId);
+    this.history = this.history.filter((event) => event.id !== eventId);
   };
 
   updateHistoryEvent = (eventId, updates) => {
-    this.history = this.history.map(event => 
-      event.id === eventId ? { ...event, ...updates } : event
+    this.history = this.history.map((event) =>
+      event.id === eventId ? { ...event, ...updates } : event,
     );
   };
 

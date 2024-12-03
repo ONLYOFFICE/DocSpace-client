@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
-import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/shared/components/toast";
 
 const HTTP_CODES = {
   NOT_FOUND: 404,
   FORBIDDEN: 403,
   PAYMENT_REQUIRED: 402,
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
 };
 
 export class ErrorHandler {
@@ -16,7 +16,7 @@ export class ErrorHandler {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 
@@ -29,7 +29,7 @@ export class ErrorHandler {
     }
 
     console.error(`Error in ${context}:`, error);
-    toastr.error(error);
+    // toastr.error(error);
     return error;
   };
 
@@ -50,7 +50,8 @@ export class ErrorHandler {
         this.handleNotFound();
         break;
       default:
-        toastr.error(error);
+        console.error("HTTP error:", error);
+      // toastr.error(error); // TODO: Add toastr
     }
 
     return error;
@@ -65,11 +66,11 @@ export class ErrorHandler {
   };
 
   handleForbidden = () => {
-    toastr.error("Access denied");
+    // toastr.error("Access denied"); // TODO: Add toastr
   };
 
   handleNotFound = () => {
-    toastr.error("Resource not found");
+    // toastr.error("Resource not found");  // TODO: Add toastr
   };
 
   addToErrorStack = (error, context) => {
@@ -80,7 +81,7 @@ export class ErrorHandler {
     };
 
     this.errorStack.unshift(errorInfo);
-    
+
     if (this.errorStack.length > this.maxStackSize) {
       this.errorStack.pop();
     }

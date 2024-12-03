@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { api } from "@docspace/shared/api";
-const { FilesFilter, RoomsFilter } = api;
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 export class FilterState {
   filter = FilesFilter.getDefault();
@@ -15,7 +15,7 @@ export class FilterState {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 

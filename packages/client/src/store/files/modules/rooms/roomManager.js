@@ -1,29 +1,30 @@
 import { makeAutoObservable } from "mobx";
 import { api } from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
-import { RoomsType, RoomsProviderType } from "@docspace/shared/enums";
-import { isLockedSharedRoom, isPublicRoom } from "@docspace/shared/utils";
+// import { toastr } from "@docspace/shared/components/toast";
+// import { RoomsType, RoomsProviderType } from "@docspace/shared/enums";
+import { isLockedSharedRoom } from "@docspace/shared/utils/rooms";
+import { isPublicRoom } from "@docspace/shared/utils/location";
 
 export class RoomManager {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 
   fetchRooms = async () => {
     const { filterState } = this.rootStore;
-    
+
     try {
       const response = await api.rooms.getRooms(filterState.currentRoomsFilter);
       const { rooms, ...filterData } = response.data;
-      
+
       filterState.setRoomsFilter(filterData);
       this.rootStore.fileState.setFolders(rooms);
     } catch (err) {
       console.error("Fetch rooms error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -36,7 +37,7 @@ export class RoomManager {
       return newRoom;
     } catch (err) {
       console.error("Create room error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -49,7 +50,7 @@ export class RoomManager {
       return updatedRoom;
     } catch (err) {
       console.error("Update room error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -61,20 +62,23 @@ export class RoomManager {
       this.rootStore.selectionState.clearSelection();
     } catch (err) {
       console.error("Delete room error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
 
   fetchRoomMembers = async (roomId) => {
     const { filterState } = this.rootStore;
-    
+
     try {
-      const response = await api.rooms.getRoomMembers(roomId, filterState.currentMembersFilter);
+      const response = await api.rooms.getRoomMembers(
+        roomId,
+        filterState.currentMembersFilter,
+      );
       return response.data;
     } catch (err) {
       console.error("Fetch room members error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -84,7 +88,7 @@ export class RoomManager {
       await api.rooms.addMember(roomId, userId, access);
     } catch (err) {
       console.error("Add room member error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -94,7 +98,7 @@ export class RoomManager {
       await api.rooms.removeMember(roomId, userId);
     } catch (err) {
       console.error("Remove room member error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };

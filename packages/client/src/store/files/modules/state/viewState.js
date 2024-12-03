@@ -1,11 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "@docspace/shared/utils/device";
 
 export class ViewState {
-  privateViewAs = !isDesktop() && localStorage.getItem("viewAs") !== "tile" 
-    ? "row" 
-    : localStorage.getItem("viewAs") || "table";
-  
+  privateViewAs =
+    !isDesktop() && localStorage.getItem("viewAs") !== "tile"
+      ? "row"
+      : localStorage.getItem("viewAs") || "table";
+
   dragging = false;
   startDrag = false;
   tooltipPageX = 0;
@@ -14,7 +15,7 @@ export class ViewState {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 

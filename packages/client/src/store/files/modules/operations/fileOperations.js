@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { api } from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/shared/components/toast";
 import { FileStatus } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
@@ -12,13 +12,13 @@ export class FileOperations {
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this, {
-      rootStore: false
+      rootStore: false,
     });
   }
 
   initFiles = async () => {
     if (this.isInit) return;
-    
+
     this.loadTimeout = setTimeout(() => {
       this.rootStore.clientLoadingStore?.setIsFolderLoading(true);
     }, LOADER_TIMEOUT);
@@ -28,7 +28,7 @@ export class FileOperations {
       this.isInit = true;
     } catch (err) {
       console.error("Init files error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
     } finally {
       clearTimeout(this.loadTimeout);
       this.rootStore.clientLoadingStore?.setIsFolderLoading(false);
@@ -38,9 +38,12 @@ export class FileOperations {
   fetchFiles = async () => {
     const { selectedFolderStore, fileState, filterState } = this.rootStore;
     const folderId = selectedFolderStore.id;
-    
+
     try {
-      const response = await api.files.getFiles(folderId, filterState.currentFilter);
+      const response = await api.files.getFiles(
+        folderId,
+        filterState.currentFilter,
+      );
       const { files, folders, pathParts, ...filterData } = response.data;
 
       filterState.setFilter(filterData);
@@ -61,7 +64,7 @@ export class FileOperations {
       return newFile;
     } catch (err) {
       console.error("Create file error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -69,13 +72,13 @@ export class FileOperations {
   deleteFiles = async (fileIds) => {
     try {
       await api.files.deleteFiles(fileIds);
-      fileIds.forEach(id => {
+      fileIds.forEach((id) => {
         this.rootStore.fileState.removeFile(id);
       });
       this.rootStore.selectionState.clearSelection();
     } catch (err) {
       console.error("Delete files error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -88,7 +91,7 @@ export class FileOperations {
       return updatedFile;
     } catch (err) {
       console.error("Update file error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -96,13 +99,13 @@ export class FileOperations {
   moveFiles = async (fileIds, destFolderId) => {
     try {
       await api.files.moveFiles(fileIds, destFolderId);
-      fileIds.forEach(id => {
+      fileIds.forEach((id) => {
         this.rootStore.fileState.removeFile(id);
       });
       this.rootStore.selectionState.clearSelection();
     } catch (err) {
       console.error("Move files error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };
@@ -113,7 +116,7 @@ export class FileOperations {
       this.rootStore.selectionState.clearSelection();
     } catch (err) {
       console.error("Copy files error:", err);
-      toastr.error(err);
+      // toastr.error(err); // TODO: Add toastr
       throw err;
     }
   };

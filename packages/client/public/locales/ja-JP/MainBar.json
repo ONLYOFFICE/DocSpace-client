@@ -22,7 +22,7 @@
   "StorageLimitHeader": "ストレージ容量の上限に達しています：{{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",
-  "UserQuotaHeader": "管理者の人数制限に達しようとしています。{{currentValue}} / {{maxValue}}",
+  "UserQuotaHeader": "管理者の人数制限に達しようとしています：{{currentValue}} / {{maxValue}}。",
   "UserTariffAlmostReached": "制限に達すると、すべてのユーザーがユーザー権限のみで追加されます。管理者を追加するには、{{productName}}の管理者に連絡して料金プランをアップグレードしてください。",
   "UserTariffAlmostReachedForAdmins": "上限に達すると、すべてのユーザーはユーザー権限のみで追加されます。管理者を追加できるようにするには、料金プランをアップグレードするために、<1>ここ</1>をクリックしてください。",
   "UserTariffLimitHeader": "管理者の数の上限に達しています。{{currentValue}} / {{maxValue}}",

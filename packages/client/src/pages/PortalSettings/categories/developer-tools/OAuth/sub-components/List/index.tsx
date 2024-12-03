@@ -4,7 +4,8 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
 import { DeviceType } from "@docspace/shared/enums";
 import { Consumer } from "@docspace/shared/utils/context";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
@@ -52,16 +53,17 @@ const List = ({
       >
         {descText}
       </Text>
-      <Link
-        className="guide-link"
+      <ColorTheme
         target={LinkTarget.blank}
         type={LinkType.page}
         fontWeight={600}
         isHovered
         href={apiOAuthLink}
+        tag="a"
+        themeId={ThemeId.Link}
       >
         {t("OAuth:OAuth")} {t("Common:Guide")}
-      </Link>
+      </ColorTheme>
       <RegisterNewButton currentDeviceType={currentDeviceType} />
       <Consumer>
         {(context) =>

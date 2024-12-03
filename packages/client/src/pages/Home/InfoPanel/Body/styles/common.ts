@@ -33,6 +33,17 @@ import {
   TextUserSelect,
 } from "@docspace/shared/utils";
 
+const StyledOverflowText = css`
+  white-space: pre-wrap;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;
+
 const StyledInfoPanelBody = styled.div`
   height: auto;
   padding-block: 0 24px;
@@ -65,6 +76,7 @@ const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
   padding-block: 24px;
   padding-inline: 20px 0;
   margin-inline-start: -20px;
+  padding-inline-end: 20px;
 
   ${TextUserSelect}
 
@@ -153,7 +165,7 @@ const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
     `}
 
   @media ${desktop} {
-    max-width: 360px;
+    width: 360px;
   }
 
   @media ${tablet} {
@@ -164,7 +176,7 @@ const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
   @media ${mobile} {
     width: calc(100vw - 24px);
     padding-block: 24px;
-    padding-inline: 16px 0;
+    padding-inline: 16px 12px;
 
     ${(props) =>
       props.withBottomBorder &&
@@ -314,20 +326,19 @@ const StyledProperties = styled.div`
       }
 
       .property-content {
-        white-space: pre-wrap;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-box;
-        word-break: break-word;
-        overflow: hidden;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+        ${StyledOverflowText}
       }
     }
   }
 
   .info_details_comments {
     align-items: start;
+  }
+
+  .info_details_lifetime {
+    .property-content {
+      ${StyledOverflowText}
+    }
   }
 `;
 

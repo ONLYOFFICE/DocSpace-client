@@ -25,17 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
-import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
 import api from "@docspace/shared/api";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
-import { mobile, size } from "@docspace/shared/utils";
+import { size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -43,46 +40,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
-const mobileCSS = css`
-  margin-top: 0px;
-
-  .header {
-    display: none;
-  }
-`;
-
-const StyledComponent = styled.div`
-  margin-top: 40px;
-
-  @media ${mobile} {
-    ${mobileCSS}
-  }
-
-  ${(props) => props.isMobile && mobileCSS}
-
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-
-  .additional-header {
-    padding-bottom: 2px;
-  }
-
-  .additional-description {
-    padding-bottom: 18px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
-  }
-`;
+import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 const AdditionalResourcesComponent = (props) => {
   const {
@@ -263,60 +221,19 @@ const AdditionalResourcesComponent = (props) => {
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
 
   return (
-    <>
-      <StyledComponent isMobile={isMobileView}>
-        <div className="header">
-          <div className="additional-header settings_unavailable">
-            {t("Settings:AdditionalResources")}
-          </div>
-        </div>
-        <div className="settings_unavailable additional-description">
-          {t("Settings:AdditionalResourcesDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </div>
-        <div className="branding-checkbox">
-          <Checkbox
-            tabIndex={12}
-            className="show-feedback-support checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowFeedbackAndSupport")}
-            isChecked={feedbackAndSupportEnabled}
-            onChange={onChangeFeedback}
-          />
-
-          {/*<Checkbox
-            tabIndex={13}
-            className="show-video-guides checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowVideoGuides")}
-            isChecked={videoGuidesEnabled}
-            onChange={onChangeVideoGuides}
-  />*/}
-          <Checkbox
-            tabIndex={14}
-            className="show-help-center checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowHelpCenter")}
-            isChecked={helpCenterEnabled}
-            onChange={onChangeHelpCenter}
-          />
-        </div>
-        <SaveCancelButtons
-          tabIndex={15}
-          onSaveClick={onSave}
-          onCancelClick={onRestore}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Restore")}
-          displaySettings={true}
-          reminderText={t("YouHaveUnsavedChanges")}
-          showReminder={(isSettingPaid && hasChange) || isLoading}
-          disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
-          additionalClassSaveButton="additional-resources-save"
-          additionalClassCancelButton="additional-resources-cancel"
-        />
-      </StyledComponent>
-    </>
+    <AdditionalResourcesPage
+      t={t}
+      isSettingPaid={isSettingPaid}
+      feedbackAndSupportEnabled={feedbackAndSupportEnabled}
+      onChangeFeedback={onChangeFeedback}
+      helpCenterEnabled={helpCenterEnabled}
+      onChangeHelpCenter={onChangeHelpCenter}
+      onSave={onSave}
+      onRestore={onRestore}
+      hasChange={hasChange}
+      isLoading={isLoading}
+      additionalResourcesIsDefault={additionalResourcesIsDefault}
+    />
   );
 };
 

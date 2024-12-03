@@ -29,17 +29,44 @@ import TemplateManager from "../modules/templates/templateManager";
 
 class FilesStore {
   constructor(
+    // authStore,
+    // userStore,
+    // selectedFolderStore,
+    // settingsStore,
+    // currentQuotaStore
     authStore,
-    userStore,
     selectedFolderStore,
+    treeFoldersStore,
+    filesSettingsStore,
+    thirdPartyStore,
+    accessRightsStore,
+    clientLoadingStore,
+    pluginStore,
+    publicRoomStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
     settingsStore,
-    currentQuotaStore
+    indexingStore,
+    socketTurnOn = true,
   ) {
     this.authStore = authStore;
-    this.userStore = userStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.treeFoldersStore = treeFoldersStore;
+    this.filesSettingsStore = filesSettingsStore;
+    this.thirdPartyStore = thirdPartyStore;
+    this.accessRightsStore = accessRightsStore;
+    this.clientLoadingStore = clientLoadingStore;
+    this.pluginStore = pluginStore;
+    this.publicRoomStore = publicRoomStore;
+    this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
-    this.currentQuotaStore = currentQuotaStore;
+    this.indexingStore = indexingStore;
+
+    this.socketTurnOn = socketTurnOn;
+    //this.currentQuotaStore = currentQuotaStore;
 
     // Initialize sub-modules
     this.loadingManager = new LoadingManager(this);
@@ -281,61 +308,110 @@ class FilesStore {
   };
 
   // Notification proxy methods
-  fetchNotifications = (fileId) => this.notificationManager.fetchNotifications(fileId);
-  fetchMoreNotifications = (fileId) => this.notificationManager.fetchMoreNotifications(fileId);
-  subscribeToNotifications = (fileId, types) => this.notificationManager.subscribeToNotifications(fileId, types);
-  unsubscribeFromNotifications = (fileId) => this.notificationManager.unsubscribeFromNotifications(fileId);
-  markNotificationsAsRead = (fileId, notificationIds) => this.notificationManager.markAsRead(fileId, notificationIds);
-  markAllNotificationsAsRead = (fileId) => this.notificationManager.markAllAsRead(fileId);
-  deleteNotifications = (fileId, notificationIds) => this.notificationManager.deleteNotifications(fileId, notificationIds);
+  fetchNotifications = (fileId) =>
+    this.notificationManager.fetchNotifications(fileId);
+  fetchMoreNotifications = (fileId) =>
+    this.notificationManager.fetchMoreNotifications(fileId);
+  subscribeToNotifications = (fileId, types) =>
+    this.notificationManager.subscribeToNotifications(fileId, types);
+  unsubscribeFromNotifications = (fileId) =>
+    this.notificationManager.unsubscribeFromNotifications(fileId);
+  markNotificationsAsRead = (fileId, notificationIds) =>
+    this.notificationManager.markAsRead(fileId, notificationIds);
+  markAllNotificationsAsRead = (fileId) =>
+    this.notificationManager.markAllAsRead(fileId);
+  deleteNotifications = (fileId, notificationIds) =>
+    this.notificationManager.deleteNotifications(fileId, notificationIds);
 
   // Batch proxy methods
-  startBatchOperation = (type, items, targetFolderId) => this.batchManager.startBatchOperation(type, items, targetFolderId);
-  cancelBatchOperation = (operationId) => this.batchManager.cancelBatchOperation(operationId);
+  startBatchOperation = (type, items, targetFolderId) =>
+    this.batchManager.startBatchOperation(type, items, targetFolderId);
+  cancelBatchOperation = (operationId) =>
+    this.batchManager.cancelBatchOperation(operationId);
   getOperation = (operationId) => this.batchManager.getOperation(operationId);
-  getOperationProgress = (operationId) => this.batchManager.getOperationProgress(operationId);
-  getOperationStatus = (operationId) => this.batchManager.getOperationStatus(operationId);
+  getOperationProgress = (operationId) =>
+    this.batchManager.getOperationProgress(operationId);
+  getOperationStatus = (operationId) =>
+    this.batchManager.getOperationStatus(operationId);
   clearCompletedOperations = () => this.batchManager.clearCompletedOperations();
 
   // Quota proxy methods
   fetchQuota = () => this.quotaManager.fetchQuota();
   updateQuota = () => this.quotaManager.updateQuota();
-  get usedSpace() { return this.quotaManager.usedSpace; }
-  get totalSpace() { return this.quotaManager.totalSpace; }
-  get availableSpace() { return this.quotaManager.availableSpace; }
-  get usagePercentage() { return this.quotaManager.usagePercentage; }
-  get isQuotaExceeded() { return this.quotaManager.isQuotaExceeded; }
-  get isQuotaAlmostExceeded() { return this.quotaManager.isQuotaAlmostExceeded; }
+  get usedSpace() {
+    return this.quotaManager.usedSpace;
+  }
+  get totalSpace() {
+    return this.quotaManager.totalSpace;
+  }
+  get availableSpace() {
+    return this.quotaManager.availableSpace;
+  }
+  get usagePercentage() {
+    return this.quotaManager.usagePercentage;
+  }
+  get isQuotaExceeded() {
+    return this.quotaManager.isQuotaExceeded;
+  }
+  get isQuotaAlmostExceeded() {
+    return this.quotaManager.isQuotaAlmostExceeded;
+  }
 
   // Settings proxy methods
   fetchSettings = () => this.settingsManager.fetchSettings();
   updateSettings = (updates) => this.settingsManager.updateSettings(updates);
-  get thumbnailSize() { return this.settingsManager.thumbnailSize; }
+  get thumbnailSize() {
+    return this.settingsManager.thumbnailSize;
+  }
   setThumbnailSize = (size) => this.settingsManager.setThumbnailSize(size);
-  get showHiddenFiles() { return this.settingsManager.showHiddenFiles; }
+  get showHiddenFiles() {
+    return this.settingsManager.showHiddenFiles;
+  }
   setShowHiddenFiles = (show) => this.settingsManager.setShowHiddenFiles(show);
-  get sortBy() { return this.settingsManager.sortBy; }
-  get sortOrder() { return this.settingsManager.sortOrder; }
+  get sortBy() {
+    return this.settingsManager.sortBy;
+  }
+  get sortOrder() {
+    return this.settingsManager.sortOrder;
+  }
   setSorting = (by, order) => this.settingsManager.setSorting(by, order);
-  get itemsPerPage() { return this.settingsManager.itemsPerPage; }
+  get itemsPerPage() {
+    return this.settingsManager.itemsPerPage;
+  }
   setItemsPerPage = (count) => this.settingsManager.setItemsPerPage(count);
   resetSettingsToDefaults = () => this.settingsManager.resetToDefaults();
 
   // Folder proxy methods
-  get currentFolder() { return this.folderManager.currentFolder; }
-  get folderPath() { return this.folderManager.folderPath; }
-  get folderTree() { return this.folderManager.folderTree; }
-  get recentFolders() { return this.folderManager.recentFolders; }
-  get parentFolderId() { return this.folderManager.parentFolderId; }
-  get isRootFolder() { return this.folderManager.isRootFolder; }
+  get currentFolder() {
+    return this.folderManager.currentFolder;
+  }
+  get folderPath() {
+    return this.folderManager.folderPath;
+  }
+  get folderTree() {
+    return this.folderManager.folderTree;
+  }
+  get recentFolders() {
+    return this.folderManager.recentFolders;
+  }
+  get parentFolderId() {
+    return this.folderManager.parentFolderId;
+  }
+  get isRootFolder() {
+    return this.folderManager.isRootFolder;
+  }
   fetchFolder = (folderId) => this.folderManager.fetchFolder(folderId);
   fetchFolderPath = (folderId) => this.folderManager.fetchFolderPath(folderId);
   fetchFolderTree = () => this.folderManager.fetchFolderTree();
-  createFolder = (parentId, data) => this.folderManager.createFolder(parentId, data);
-  updateFolder = (folderId, updates) => this.folderManager.updateFolder(folderId, updates);
+  createFolder = (parentId, data) =>
+    this.folderManager.createFolder(parentId, data);
+  updateFolder = (folderId, updates) =>
+    this.folderManager.updateFolder(folderId, updates);
   deleteFolder = (folderId) => this.folderManager.deleteFolder(folderId);
-  moveFolder = (folderId, targetId) => this.folderManager.moveFolder(folderId, targetId);
-  copyFolder = (folderId, targetId) => this.folderManager.copyFolder(folderId, targetId);
+  moveFolder = (folderId, targetId) =>
+    this.folderManager.moveFolder(folderId, targetId);
+  copyFolder = (folderId, targetId) =>
+    this.folderManager.copyFolder(folderId, targetId);
 
   // Cleanup method
   dispose = () => {

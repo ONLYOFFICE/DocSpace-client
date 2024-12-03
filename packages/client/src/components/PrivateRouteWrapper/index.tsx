@@ -99,7 +99,7 @@ export default inject<TStore>(
       baseDomain,
       displayAbout,
     } = settingsStore;
-
+    console.log("user", user);
     return {
       isPortalDeactivate,
       isCommunity,

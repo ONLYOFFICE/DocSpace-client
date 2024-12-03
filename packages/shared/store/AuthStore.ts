@@ -180,11 +180,12 @@ class AuthStore {
       this.settingsStore?.socketUrl &&
       !isPublicPreview() &&
       !isPublicRoom() &&
+      this.isAuthenticated &&
       !isPortalDeactivated
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
+          if (!isPortalRestore && this.userStore?.isAuthenticated) {
             this.getPaymentInfo();
           }
         }),
@@ -193,7 +194,11 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    if (this.isAuthenticated && !skipRequest) {
+    if (
+      this.isAuthenticated &&
+      !skipRequest &&
+      this.userStore?.isAuthenticated
+    ) {
       if (!isPortalRestore && !isPortalDeactivated)
         requests.push(this.settingsStore?.getAdditionalResources());
 
@@ -448,10 +453,9 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
-      // || //this.userStore.isAuthenticated
+      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl // ||
+      //! isPublicRoom()
+      //  this.userStore?.isAuthenticated
     );
   }
 

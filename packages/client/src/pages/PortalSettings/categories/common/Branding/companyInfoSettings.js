@@ -25,19 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link } from "@docspace/shared/components/link";
-import { mobile, size } from "@docspace/shared/utils";
+import { size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -46,42 +41,7 @@ import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettin
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
-const StyledComponent = styled.div`
-  .link {
-    font-weight: 600;
-    border-bottom: ${(props) =>
-      props.theme.client.settings.common.companyInfo.border};
-    border-color: ${(props) =>
-      !props.isSettingPaid &&
-      props.theme.client.settings.common.companyInfo.color};
-  }
-
-  .description,
-  .link {
-    color: ${(props) =>
-      !props.isSettingPaid &&
-      props.theme.client.settings.common.companyInfo.color};
-  }
-
-  .text-input {
-    font-size: 13px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-    bottom: 0;
-  }
-
-  .description {
-    padding-bottom: 16px;
-  }
-
-  @media ${mobile} {
-    .header {
-      display: none;
-    }
-  }
-`;
+import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 const CompanyInfoSettingsComponent = (props) => {
   const {
@@ -119,15 +79,6 @@ const CompanyInfoSettingsComponent = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const { address, companyName, email, phone, site } = companySettings;
-  const {
-    hasErrorAddress,
-    hasErrorCompanyName,
-    hasErrorEmail,
-    hasErrorPhone,
-    hasErrorSite,
-  } = companySettingsError;
-
-  const link = t("Common:AboutCompanyTitle");
 
   useEffect(() => {
     checkWidth();
@@ -258,7 +209,7 @@ const CompanyInfoSettingsComponent = (props) => {
     saveToSessionStorage("companySettings", { ...companySettings, email });
   };
 
-  const onChangeСompanyName = (e) => {
+  const onChangeCompanyName = (e) => {
     const companyName = e.target.value;
     validateEmpty(companyName, "companyName");
     setCompanySettings({ ...companySettings, companyName });
@@ -355,13 +306,6 @@ const CompanyInfoSettingsComponent = (props) => {
     setShowModal(false);
   };
 
-  const isDisabled =
-    hasErrorAddress ||
-    hasErrorCompanyName ||
-    hasErrorEmail ||
-    hasErrorPhone ||
-    hasErrorSite;
-
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
@@ -372,130 +316,24 @@ const CompanyInfoSettingsComponent = (props) => {
         buildVersionInfo={buildVersionInfo}
         previewData={companySettings}
       />
-
-      <StyledComponent isSettingPaid={isSettingPaid}>
-        <div className="header settings_unavailable">
-          {t("Settings:CompanyInfoSettings")}
-        </div>
-        <div className="description settings_unavailable">
-          <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Settings">
-            "This information will be displayed in the
-            {isSettingPaid ? (
-              <Link className="link" onClick={onShowExample} noHover={true}>
-                {{ link }}
-              </Link>
-            ) : (
-              <span className="link"> {{ link }}</span>
-            )}
-            window."
-          </Trans>
-        </div>
-        <div className="settings-block">
-          <FieldContainer
-            id="fieldContainerCompanyName"
-            className="field-container-width settings_unavailable"
-            labelText={t("Common:CompanyName")}
-            isVertical={true}
-          >
-            <TextInput
-              id="textInputContainerCompanyName"
-              className="text-input"
-              isDisabled={!isSettingPaid}
-              scale={true}
-              value={companyName}
-              hasError={hasErrorCompanyName}
-              onChange={onChangeСompanyName}
-              tabIndex={5}
-            />
-          </FieldContainer>
-          <FieldContainer
-            id="fieldContainerEmail"
-            isDisabled={!isSettingPaid}
-            className="field-container-width settings_unavailable"
-            labelText={t("Common:Email")}
-            isVertical={true}
-          >
-            <TextInput
-              id="textInputContainerEmail"
-              className="text-input"
-              isDisabled={!isSettingPaid}
-              scale={true}
-              value={email}
-              hasError={hasErrorEmail}
-              onChange={onChangeEmail}
-              tabIndex={6}
-            />
-          </FieldContainer>
-          <FieldContainer
-            id="fieldContainerPhone"
-            className="field-container-width settings_unavailable"
-            labelText={t("Common:Phone")}
-            isVertical={true}
-          >
-            <TextInput
-              id="textInputContainerPhone"
-              className="text-input"
-              isDisabled={!isSettingPaid}
-              scale={true}
-              value={phone}
-              hasError={hasErrorPhone}
-              onChange={onChangePhone}
-              tabIndex={7}
-            />
-          </FieldContainer>
-          <FieldContainer
-            id="fieldContainerWebsite"
-            className="field-container-width settings_unavailable"
-            labelText={t("Common:Website")}
-            isVertical={true}
-          >
-            <TextInput
-              id="textInputContainerWebsite"
-              className="text-input"
-              isDisabled={!isSettingPaid}
-              scale={true}
-              value={site}
-              hasError={hasErrorSite}
-              onChange={onChangeSite}
-              tabIndex={8}
-            />
-          </FieldContainer>
-          <FieldContainer
-            id="fieldContainerAddress"
-            className="field-container-width settings_unavailable"
-            labelText={t("Common:Address")}
-            isVertical={true}
-          >
-            <TextInput
-              id="textInputContainerAddress"
-              className="text-input"
-              isDisabled={!isSettingPaid}
-              scale={true}
-              value={address}
-              hasError={hasErrorAddress}
-              onChange={onChangeAddress}
-              tabIndex={9}
-            />
-          </FieldContainer>
-        </div>
-        <SaveCancelButtons
-          tabIndex={10}
-          className="save-cancel-buttons"
-          onSaveClick={onSave}
-          onCancelClick={onRestore}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Restore")}
-          reminderText={t("YouHaveUnsavedChanges")}
-          displaySettings={true}
-          saveButtonDisabled={isDisabled}
-          hasScroll={true}
-          hideBorder={true}
-          showReminder={(isSettingPaid && showReminder) || isLoading}
-          disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
-          additionalClassSaveButton="company-info-save"
-          additionalClassCancelButton="company-info-cancel"
-        />
-      </StyledComponent>
+      <CompanyInfo
+        t={t}
+        isSettingPaid={isSettingPaid}
+        onShowExample={onShowExample}
+        linkTitle={t("Common:AboutCompanyTitle")}
+        companySettings={companySettings}
+        companySettingsError={companySettingsError}
+        onChangeCompanyName={onChangeCompanyName}
+        onChangeEmail={onChangeEmail}
+        onChangePhone={onChangePhone}
+        onChangeSite={onChangeSite}
+        onChangeAddress={onChangeAddress}
+        onSave={onSave}
+        onRestore={onRestore}
+        isLoading={isLoading}
+        companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
+        showReminder={showReminder}
+      />
     </>
   );
 };

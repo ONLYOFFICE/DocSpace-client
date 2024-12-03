@@ -199,6 +199,9 @@ class FilesStore {
 
   hotkeysClipboard = [];
 
+  roomKey = "";
+  primaryLink = "";
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -772,6 +775,10 @@ class FilesStore {
 
   setTempFilter = (filter) => {
     this.tempFilter = filter;
+  };
+
+  setRoomKey = (roomKey) => {
+    this.roomKey = roomKey;
   };
 
   setHighlightFile = (highlightFile) => {
@@ -1490,12 +1497,12 @@ class FilesStore {
 
     const pathname = `${url}?${filterParamsStr}`;
 
-    const currentUrl = window.location.href.replace(window.location.origin, "");
+    /*  const currentUrl = window.location.href.replace(window.location.origin, "");
     const newUrl = combineUrl(
       window.ClientConfig?.proxy?.url,
       config.homepage,
       pathname,
-    );
+    ); */
 
     if (newUrl === currentUrl) return;
 
@@ -3363,15 +3370,23 @@ class FilesStore {
     return this.filter.search;
   }
 
-  getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
+  getItemUrl = (id, isFolder, needConvert, canOpenPlayer, roomType) => {
     const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
+
+    //console.log("this.categoryType", this.categoryType);
+
+    //console.log("url", url);
+
+    //console.log("canOpenPlayer", canOpenPlayer);
 
     if (canOpenPlayer) {
       if (this.publicRoomStore.isPublicRoom) {
         const key = this.publicRoomStore.publicRoomKey;
         const filterObj = FilesFilter.getFilter(window.location);
+
+        //   console.log("HEREEEE");
 
         return `${combineUrl(
           proxyURL,
@@ -3385,7 +3400,31 @@ class FilesStore {
       return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
     }
 
-    if (isFolder) {
+    //   console.log("publicRoomKey", this.publicRoomStore.publicRoomKey);
+
+    if (roomType && roomType === RoomsType.PublicRoom) {
+      let publicRoomUrl = "";
+
+      if (!this.roomKey) this.getPublicRoomKey(id);
+      // console.log("key", key);
+      //  console.log("this.roomKey", this.roomKey);
+
+      //const key = link.sharedTo.requestToken;
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      publicRoomUrl = `${combineUrl(
+        proxyURL,
+        config.homepage,
+        "/rooms/share",
+      )}?key=${this.roomKey}&${filterObj.toUrlParams()}`;
+      console.log("publicRoomUrl", publicRoomUrl);
+
+      if (publicRoomUrl) {
+        return publicRoomUrl;
+      }
+    }
+
+    /*   if (isFolder) {
       const folderUrl = isFolder
         ? combineUrl(proxyURL, config.homepage, `${url}?folder=${id}`)
         : null;
@@ -3399,7 +3438,14 @@ class FilesStore {
       );
 
       return url;
-    }
+    } */
+  };
+
+  getPublicRoomKey = async (id) => {
+    const link = await this.getPrimaryLink(id);
+    this.setRoomKey(link.sharedTo.requestToken);
+
+    return;
   };
 
   getFilesListItems = (items) => {
@@ -3476,6 +3522,8 @@ class FilesStore {
         watermark,
       } = item;
 
+      // console.log("item", item);
+
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
         item.providerKey,
         "small",
@@ -3490,7 +3538,7 @@ class FilesStore {
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
       const previewUrl = canOpenPlayer
-        ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
+        ? this.getItemUrl(id, false, needConvert, canOpenPlayer, roomType)
         : null;
 
       const contextOptions = this.getFilesContextOptions(item);
@@ -3503,7 +3551,8 @@ class FilesStore {
 
       const { isRecycleBinFolder } = this.treeFoldersStore;
 
-      const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
+      const folderUrl =
+        isFolder && this.getItemUrl(id, isFolder, false, false, roomType);
 
       const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
@@ -3512,7 +3561,7 @@ class FilesStore {
       const docUrl =
         !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);
 
-      const href = isRecycleBinFolder
+      let href = isRecycleBinFolder
         ? null
         : previewUrl
           ? previewUrl
@@ -3521,6 +3570,10 @@ class FilesStore {
               ? item.webUrl
               : docUrl
             : folderUrl;
+
+      if (roomType && roomType === RoomsType.PublicRoom) {
+        href = folderUrl;
+      }
 
       const isRoom = !!roomType;
 
@@ -4542,6 +4595,8 @@ class FilesStore {
     const link = await api.rooms.getPrimaryLink(roomId);
     if (link) {
       this.setRoomShared(roomId, true);
+
+      this.primaryLink = link;
     }
 
     return link;

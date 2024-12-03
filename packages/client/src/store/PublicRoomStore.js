@@ -224,7 +224,7 @@ class PublicRoomStore {
       .validatePublicRoomKey(key)
       .then((res) => {
         if (res?.shared) {
-          return this.gotoFolder(res);
+          // return this.gotoFolder(res);
         }
 
         this.publicRoomKey = key;
@@ -238,7 +238,7 @@ class PublicRoomStore {
   };
 
   get isPublicRoom() {
-    return this.isLoaded && isPublicRoomUtil();
+    return isPublicRoomUtil();
   }
 
   get roomLinks() {

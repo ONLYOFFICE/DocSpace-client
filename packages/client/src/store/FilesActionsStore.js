@@ -106,6 +106,7 @@ import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { authStore } from "@docspace/shared/store";
 
 class FilesActionStore {
   settingsStore;
@@ -2416,7 +2417,13 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
+    console.log("item.roomType", item.roomType);
+
+    if (
+      item.roomType &&
+      item.roomType === RoomsType.PublicRoom &&
+      item.isFolder
+    ) {
       setSelection([]);
       return this.moveToPublicRoom(item.id);
     }
@@ -2659,6 +2666,7 @@ class FilesActionStore {
   };
 
   moveToRoomsPage = () => {
+    const { isAuthenticated } = authStore;
     const categoryType = getCategoryType(window.DocSpace.location);
 
     const filter = RoomsFilter.getDefault();
@@ -2670,7 +2678,11 @@ class FilesActionStore {
           ? CategoryType.Archive
           : categoryType;
 
-    const path = getCategoryUrl(correctCategoryType);
+    let path = getCategoryUrl(correctCategoryType);
+
+    if (isAuthenticated && categoryType === CategoryType.PublicRoom) {
+      path = getCategoryUrl(CategoryType.Shared);
+    }
 
     const state = {
       title:
@@ -2701,6 +2713,7 @@ class FilesActionStore {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
     const { publicRoomKey } = this.publicRoomStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { roomKey } = this.filesStore;
 
     const id = folderId ? folderId : this.selectedFolderStore.parentId;
     const path = getCategoryUrl(CategoryType.PublicRoom);
@@ -2714,7 +2727,7 @@ class FilesActionStore {
     };
 
     window.DocSpace.navigate(
-      `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
+      `${path}?key=${publicRoomKey ?? roomKey}&${filter.toUrlParams()}`,
       { state },
     );
   };

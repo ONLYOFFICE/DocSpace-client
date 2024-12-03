@@ -26,7 +26,12 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useLocation,
+  useSearchParams,
+  Outlet,
+} from "react-router-dom";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
@@ -34,7 +39,12 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import RoomPassword from "./sub-components/RoomPassword";
 import RoomErrors from "./sub-components/RoomErrors";
 
+import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
+
 import PublicRoomPage from "./PublicRoomPage";
+import { FilesView } from "SRC_DIR/pages/Home/View/Files";
+import { Client } from "SRC_DIR/Client";
+import { Component as Home } from "SRC_DIR/pages/Home";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -49,7 +59,10 @@ const PublicRoom = (props) => {
     setPublicRoomKey,
     setIsArticleLoading,
     setClientError,
+    isAuthenticated,
   } = props;
+
+  console.log("PublicRoom");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -71,14 +84,14 @@ const PublicRoom = (props) => {
     if (filterObj?.folder && filterObj?.folder !== "@my") {
       const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
 
-      navigate(url);
+      // navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
 
       const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
 
-      navigate(url);
+      // navigate(url);
     }
   };
 
@@ -118,6 +131,20 @@ const PublicRoom = (props) => {
     }
   };
 
+  console.log("isAuthenticated", isAuthenticated);
+
+  if (isAuthenticated) {
+    return (
+      <PrivateRoute>
+        <Client>
+          <Home>
+            <Outlet />
+          </Home>
+        </Client>
+      </PrivateRoute>
+    );
+  }
+
   return isLoading ? (
     renderLoader()
   ) : isLoaded ? (
@@ -141,7 +168,7 @@ export const WrappedComponent = inject(
     const { getFilesSettings } = filesSettingsStore;
     const { setPublicRoomKey } = settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
-    const { setClientError } = authStore;
+    const { setClientError, isAuthenticated } = authStore;
     return {
       roomId,
       isLoaded,
@@ -154,6 +181,7 @@ export const WrappedComponent = inject(
       setPublicRoomKey,
       setIsArticleLoading,
       setClientError,
+      isAuthenticated,
     };
   },
 )(observer(PublicRoom));

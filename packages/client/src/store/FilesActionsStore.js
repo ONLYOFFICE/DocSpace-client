@@ -1492,12 +1492,13 @@ class FilesActionStore {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
 
-    const { title, fileExst, id, rootFolderType } = item;
+    const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
@@ -1519,7 +1520,7 @@ class FilesActionStore {
     };
 
     const url = getCategoryUrl(
-      getCategoryTypeByFolderType(rootFolderType, id),
+      getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),
       id,
     );
 

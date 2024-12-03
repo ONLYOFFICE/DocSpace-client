@@ -82,6 +82,7 @@ export const Viewer = (props: ViewerProps) => {
   const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);
   const [isOpenContextMenu, setIsOpenContextMenu] = useState<boolean>(false);
+  const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -98,15 +99,22 @@ export const Viewer = (props: ViewerProps) => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     const isMouse = window.matchMedia("(pointer: fine)").matches;
 
+    const isMobileOnly = currentDeviceType === DeviceType.mobile;
+    const isMobile =
+      ((currentDeviceType === DeviceType.tablet || isTouch) && !isMouse) ||
+      isMobileOnly;
+    const isDesktop =
+      (currentDeviceType === DeviceType.desktop || isMouse) &&
+      !isTouch &&
+      !isMobileOnly;
+
     return {
-      isMobileOnly: currentDeviceType === DeviceType.mobile,
-      isMobile:
-        currentDeviceType === DeviceType.tablet ||
-        currentDeviceType === DeviceType.mobile ||
-        (isTouch && !isMouse),
-      isDesktop: currentDeviceType === DeviceType.desktop && isMouse,
+      isMobileOnly,
+      isMobile,
+      isDesktop,
     };
   }, [currentDeviceType]);
+
   const { isMobile } = devices;
 
   const resetToolbarVisibleTimer = useCallback(() => {
@@ -276,6 +284,8 @@ export const Viewer = (props: ViewerProps) => {
           setIsOpenContextMenu={setIsOpenContextMenu}
           resetToolbarVisibleTimer={resetToolbarVisibleTimer}
           isPublicFile={isPublicFile}
+          backgroundBlack={backgroundBlack}
+          setBackgroundBlack={setBackgroundBlack}
         />
       ) : isVideo || isAudio ? (
         <ViewerPlayer

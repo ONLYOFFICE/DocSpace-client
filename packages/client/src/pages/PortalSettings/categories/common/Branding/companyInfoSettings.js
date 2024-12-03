@@ -320,7 +320,6 @@ const CompanyInfoSettingsComponent = (props) => {
         t={t}
         isSettingPaid={isSettingPaid}
         onShowExample={onShowExample}
-        linkTitle={t("Common:AboutCompanyTitle")}
         companySettings={companySettings}
         companySettingsError={companySettingsError}
         onChangeCompanyName={onChangeCompanyName}

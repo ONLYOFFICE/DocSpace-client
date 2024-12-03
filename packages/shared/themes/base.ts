@@ -2849,6 +2849,7 @@ export const getBaseTheme = () => {
             dataFontColorBlack: black,
             notAvailableBackground: grayLight,
             textColor: black,
+            paidBadgeBackground: favoritesStatus,
           },
 
           companyInfo: {

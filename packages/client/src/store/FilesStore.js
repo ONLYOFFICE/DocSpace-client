@@ -1683,7 +1683,6 @@ class FilesStore {
       localStorage.setItem(key, value);
     }
 
-    // this.setFilterUrl(filter);
     this.filter = filter;
 
     runInAction(() => {
@@ -1721,7 +1720,6 @@ class FilesStore {
       localStorage.setItem(key, value);
     }
 
-    // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
 
     runInAction(() => {
@@ -1748,32 +1746,6 @@ class FilesStore {
 
   setRoomOwner = (ownerId, folderIds) => {
     return api.files.setFileOwner(ownerId, folderIds);
-  };
-
-  setFilterUrl = (filter) => {
-    const filterParamsStr = filter.toUrlParams();
-
-    const url = getCategoryUrl(this.categoryType, filter.folder);
-
-    const pathname = `${url}?${filterParamsStr}`;
-
-    const currentUrl = window.location.href.replace(window.location.origin, "");
-    const newUrl = combineUrl(
-      window.ClientConfig?.proxy?.url,
-      config.homepage,
-      pathname,
-    );
-
-    if (newUrl === currentUrl) return;
-
-    // window.DocSpace.navigate(newUrl, {
-    //   state: {
-    //     fromAccounts:
-    //       window.DocSpace.location.pathname.includes("accounts/filter"),
-    //     fromSettings: window.DocSpace.location.pathname.includes("settings"),
-    //   },
-    //   replace: !location.search,
-    // });
   };
 
   refreshFiles = async () => {

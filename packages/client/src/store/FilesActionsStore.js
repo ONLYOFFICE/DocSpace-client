@@ -1440,8 +1440,6 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
-
     const { id, isRoom, title, rootFolderType } = item;
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
 
@@ -1449,6 +1447,8 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
+    const shareKey = await this.getPublicKey(item);
+    if (shareKey) filter.key = shareKey;
 
     if (isRoom) {
       const key =
@@ -1488,12 +1488,13 @@ class FilesActionStore {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
 
-    const { title, fileExst, id, rootFolderType } = item;
+    const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
@@ -1515,7 +1516,7 @@ class FilesActionStore {
     };
 
     const url = getCategoryUrl(
-      getCategoryTypeByFolderType(rootFolderType, id),
+      getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),
       id,
     );
 
@@ -2397,12 +2398,13 @@ class FilesActionStore {
     this.openItemAction(item, t, e);
   };
 
-  openItemAction = (item, t, e) => {
+  openItemAction = async (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
+    const { isOwner, isAdmin } = this.userStore.user;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
@@ -2476,6 +2478,9 @@ class FilesActionStore {
 
       filter.folder = id;
 
+      const shareKey = await this.getPublicKey(item);
+      if (shareKey) filter.key = shareKey;
+
       const url = `${path}?${filter.toUrlParams()}`;
 
       if (openingNewTab(url, e)) return;
@@ -2511,9 +2516,8 @@ class FilesActionStore {
 
       if (canWebEdit || canViewedDocs) {
         const shareWebUrl = new URL(webUrl);
-        const shareKey = isRecentTab
-          ? getObjectByLocation(shareWebUrl)?.share
-          : "";
+
+        const shareKey = getObjectByLocation(shareWebUrl)?.share;
 
         const isPDF = item.fileExst === ".pdf";
 
@@ -2715,7 +2719,7 @@ class FilesActionStore {
     );
   };
 
-  backToParentFolder = () => {
+  backToParentFolder = async () => {
     if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
 
     const id = this.selectedFolderStore.parentId;
@@ -2730,6 +2734,10 @@ class FilesActionStore {
     filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
+
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+    const shareKey = await this.getPublicKey(selectedFolder);
+    if (shareKey) filter.key = shareKey;
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
@@ -3238,6 +3246,33 @@ class FilesActionStore {
 
       setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
+  };
+
+  getPublicKey = async (folder) => {
+    const { isOwner, isAdmin } = this.userStore.user;
+
+    if (
+      folder?.shared &&
+      folder?.rootFolderType === FolderType.Rooms &&
+      (isOwner || isAdmin)
+    ) {
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      if (filterObj.key) {
+        return filterObj.key;
+      }
+
+      try {
+        const link = await this.filesStore.getPrimaryLink(folder.id);
+        const key = link?.sharedTo?.requestToken;
+
+        return key;
+      } catch (error) {
+        toastr.error(error);
+      }
+    }
+
+    return null;
   };
 }
 

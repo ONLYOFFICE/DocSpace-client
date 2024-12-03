@@ -266,6 +266,7 @@ const SectionHeaderContent = (props) => {
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
+    getPublicKey,
   } = props;
 
   const location = useLocation();
@@ -364,7 +365,7 @@ const SectionHeaderContent = (props) => {
       : setSelected(checked ? "all" : "none");
   };
 
-  const onClickFolder = (id, isRootRoom) => {
+  const onClickFolder = async (id, isRootRoom) => {
     if (isPublicRoom) {
       return moveToPublicRoom(id);
     }
@@ -385,6 +386,8 @@ const SectionHeaderContent = (props) => {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
+    const shareKey = await getPublicKey(selectedFolder);
+    if (shareKey) filter.key = shareKey;
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
@@ -795,6 +798,7 @@ export default inject(
       createFoldersTree,
       revokeFilesOrder,
       saveIndexOfFiles,
+      getPublicKey,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
@@ -984,6 +988,7 @@ export default inject(
       isExternal,
       displayAbout,
       infoPanelRoom,
+      getPublicKey,
     };
   },
 )(

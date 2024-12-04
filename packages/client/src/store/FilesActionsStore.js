@@ -3098,19 +3098,10 @@ class FilesActionStore {
   };
 
   saveIndexOfFiles = async () => {
-    const { updateSelection } = this.indexingStore;
+    const { getIndexingArray } = this.indexingStore;
 
     try {
-      const items = updateSelection.reduce((res, item) => {
-        return [
-          ...res,
-          {
-            order: item.order,
-            entryId: item.id,
-            entryType: item.isFolder ? 1 : 2,
-          },
-        ];
-      }, []);
+      const items = getIndexingArray();
 
       if (items.length > 0) {
         await changeIndex(items);

@@ -266,6 +266,8 @@ const SectionHeaderContent = (props) => {
     saveIndexOfFiles,
     infoPanelRoom,
     getPublicKey,
+    getIndexingArray,
+    setCloseEditIndexDialogVisible,
   } = props;
 
   const location = useLocation();
@@ -422,6 +424,13 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCloseIndexMenu = () => {
+    const items = getIndexingArray();
+
+    if (items.length) {
+      setCloseEditIndexDialogVisible(true);
+      return;
+    }
+
     revokeFilesOrder();
     setIsIndexEditingMode(false);
   };
@@ -786,7 +795,8 @@ export default inject(
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
-    const { setReorderDialogVisible } = dialogsStore;
+    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
+      dialogsStore;
 
     const {
       getHeaderMenu,
@@ -864,7 +874,8 @@ export default inject(
 
     const { setSelected: setUsersSelected } = usersStore;
 
-    const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
+    const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
+      indexingStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;
@@ -988,6 +999,8 @@ export default inject(
       displayAbout,
       infoPanelRoom,
       getPublicKey,
+      getIndexingArray,
+      setCloseEditIndexDialogVisible,
     };
   },
 )(

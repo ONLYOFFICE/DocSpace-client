@@ -40,6 +40,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import i18n from "../i18n";
 
 import { request } from "@docspace/shared/api/client";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -209,4 +210,31 @@ export const connectedCloudsTypeIcon = (key) => {
       return CloudServicesWebdavReactSvgUrl;
     default:
   }
+};
+
+// Used to update the number of tiles in a row after the window is resized.
+export const getCountTilesInRow = () => {
+  const isDesktopView = isDesktop();
+  const isMobileView = isMobile();
+  const tileGap = isDesktopView ? 16 : 14;
+  const minTileWidth = 216 + tileGap;
+
+  const elem = document.getElementsByClassName("section-wrapper-content")[0];
+  let containerWidth = 0;
+  if (elem) {
+    const elemPadding = window
+      .getComputedStyle(elem)
+      ?.getPropertyValue("padding");
+
+    containerWidth =
+      elem?.clientWidth -
+      elemPadding.split("px")[1] -
+      elemPadding.split("px")[3];
+  }
+
+  containerWidth += tileGap;
+  if (!isMobileView) containerWidth -= 1;
+  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
+
+  return Math.floor(containerWidth / minTileWidth);
 };

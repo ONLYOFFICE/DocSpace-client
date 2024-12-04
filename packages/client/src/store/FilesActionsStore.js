@@ -1074,8 +1074,6 @@ class FilesActionStore {
   };
 
   setPinAction = async (action, id, t) => {
-    const { pinRoom, unpinRoom } = this.filesStore;
-
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
@@ -1103,7 +1101,7 @@ class FilesActionStore {
     const isPin = action === "pin";
 
     items.forEach((item) => {
-      actions.push(isPin ? pinRoom(item) : unpinRoom(item));
+      actions.push(isPin ? api.rooms.pinRoom(item) : api.rooms.unpinRoom(item));
     });
 
     if (isPin) {

@@ -4116,10 +4116,6 @@ class FilesStore {
     });
   };
 
-  pinRoom = (id) => api.rooms.pinRoom(id);
-
-  unpinRoom = (id) => api.rooms.unpinRoom(id);
-
   getFileInfo = async (id) => {
     const fileInfo = await api.files.getFileInfo(id);
     this.setFile(fileInfo);

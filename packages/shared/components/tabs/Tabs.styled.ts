@@ -40,6 +40,8 @@ export const StyledTabs = styled.div.attrs(injectDefaultTheme)<{
       flex-direction: column;
     `};
 
+  font-family: ${(props) => props.theme.fontFamily};
+
   .sticky {
     height: 33px;
     position: sticky;

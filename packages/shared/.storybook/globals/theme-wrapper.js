@@ -11,6 +11,10 @@ const ThemeWrapper = ({ theme, children }) => {
           accent: globalColors.lightBlueMain,
           buttons: globalColors.lightSecondMain,
         },
+        text: {
+          accent: globalColors.lightBlueMain,
+          buttons: globalColors.lightSecondMain,
+        },
       }}
     >
       {children}

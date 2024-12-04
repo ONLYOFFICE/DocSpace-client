@@ -368,3 +368,15 @@ export const removeSeparator = (options) => {
 
 export const removeOptions = (options, toRemoveArray) =>
   options.filter((o) => !toRemoveArray.includes(o));
+
+export const mappingActiveItems = (items, destFolderId) => {
+  const arrayFormation = items.map((item) =>
+    typeof item === "object"
+      ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
+      : {
+          id: item,
+          destFolderId,
+        },
+  );
+  return arrayFormation;
+};

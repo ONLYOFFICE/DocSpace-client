@@ -85,7 +85,11 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
-import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
+import {
+  mappingActiveItems,
+  removeOptions,
+  removeSeparator,
+} from "SRC_DIR/helpers/filesUtils";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -919,26 +923,14 @@ class FilesStore {
     this.selectedFolderStore.setSelectedFolder(null);
   };
 
-  mappingActiveItems = (items, destFolderId) => {
-    const arrayFormation = items.map((item) =>
-      typeof item === "object"
-        ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
-        : {
-            id: item,
-            destFolderId,
-          },
-    );
-    return arrayFormation;
-  };
-
   setActiveFiles = (activeFiles, destFolderId) => {
-    const arrayFormation = this.mappingActiveItems(activeFiles, destFolderId);
+    const arrayFormation = mappingActiveItems(activeFiles, destFolderId);
 
     this.activeFiles = arrayFormation;
   };
 
   setActiveFolders = (activeFolders, destFolderId) => {
-    const arrayFormation = this.mappingActiveItems(activeFolders, destFolderId);
+    const arrayFormation = mappingActiveItems(activeFolders, destFolderId);
 
     this.activeFolders = arrayFormation;
   };

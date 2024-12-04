@@ -42,7 +42,7 @@
   "LdapSecondName": "Nom",
   "LdapSendWelcomeLetter": "Envoyer une lettre de bienvenue",
   "LdapSendWelcomeLetterTooltip": "Si cette option est cochée, tous les nouveaux utilisateurs recevront une lettre de bienvenue. Cette option n'est disponible que lorsque l'attribut Mail est associé à LDAP.",
-  "LdapServer": "Server",
+  "LdapServer": "Serveur",
   "LdapServerTooltip": "Entrez le serveur LDAP sans le numéro de port.",
   "LdapSettings": "Paramètres LDAP",
   "LdapSettingsCertCnNoMatch": "Le nom du certificat ne correspond pas au nom d'hôte",

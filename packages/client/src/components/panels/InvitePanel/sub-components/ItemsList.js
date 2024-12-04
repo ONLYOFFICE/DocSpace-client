@@ -37,12 +37,13 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = (props) => (
+const VirtualScroll = React.forwardRef((props, ref) => (
   <CustomScrollbarsVirtualList
     {...props}
+    ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-);
+));
 
 const Row = memo(({ data, index, style }) => {
   const {

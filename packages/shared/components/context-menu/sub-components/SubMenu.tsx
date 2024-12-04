@@ -523,7 +523,7 @@ const SubMenu = (props: {
   const active = isActive();
   const submenuLower = renderSubMenuLower();
 
-  if (model.length) {
+  if (model?.length) {
     const newModel = model.filter(
       (item: ContextMenuModel) => item && !item.disabled,
     );

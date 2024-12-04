@@ -36,6 +36,7 @@ const LimitTimeBlock = (props) => {
     setIsExpired,
     isExpired,
     language,
+    isPrimary,
   } = props;
 
   const onChange = (date) => {
@@ -46,6 +47,16 @@ const LimitTimeBlock = (props) => {
     setExpirationDate(date);
     setIsExpired(isExpired);
   };
+
+  if (isPrimary) {
+    return (
+      <ToggleBlock
+        headerText={props.headerText}
+        bodyText={props.bodyText}
+        withToggle={false}
+      />
+    );
+  }
 
   // const minDate = new Date(new Date().getTime());
   // minDate.setDate(new Date().getDate() - 1);

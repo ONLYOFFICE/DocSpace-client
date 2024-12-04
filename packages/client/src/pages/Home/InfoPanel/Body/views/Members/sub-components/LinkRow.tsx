@@ -194,11 +194,13 @@ const LinkRow = (props: LinkRowProps) => {
       {
         key: "delete-link-key",
         label:
-          primary && isPublicRoomType
+          primary && (isPublicRoomType || isFormRoom)
             ? t("Files:RevokeLink")
             : t("Common:Delete"),
         icon:
-          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          primary && (isPublicRoomType || isFormRoom)
+            ? OutlineReactSvgUrl
+            : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
@@ -318,13 +320,13 @@ export default inject<TStore>(
       setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType:
-        roomType === RoomsType.PublicRoom || roomType === RoomsType.FormRoom,
+      isPublicRoomType: roomType === RoomsType.PublicRoom,
       isFormRoom: roomType === RoomsType.FormRoom,
       isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
       deleteExternalLink,
+      roomType,
     };
   },
 )(

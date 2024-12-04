@@ -65,6 +65,7 @@ const EditLinkPanel = (props) => {
     language,
     isPublic,
     isFormRoom,
+    isCustomRoom,
     currentDeviceType,
     setLinkParams,
     passwordSettings,
@@ -200,6 +201,24 @@ const EditLinkPanel = (props) => {
     setIsLoading(false);
   };
 
+  const getExpiredLinkText = () => {
+    if (link?.sharedTo?.primary) {
+      if (isFormRoom) return t("Files:LimitTimeBlockFormRoomDescription");
+      if (isPublic) return t("Files:LimitTimeBlockPublicRoomDescription");
+      if (isCustomRoom) return t("Files:LimitTimeBlockCustomRoomDescription");
+
+      return "";
+    }
+
+    if (isExpired) {
+      return t("Translations:LinkHasExpiredAndHasBeenDisabled");
+    }
+
+    return expirationDate
+      ? `${t("Files:LinkValidUntil")}:`
+      : t("Files:ChooseExpirationDate");
+  };
+
   useEffect(() => {
     if (!passwordSettings) {
       getPasswordSettings();
@@ -208,11 +227,7 @@ const EditLinkPanel = (props) => {
 
   const linkNameIsValid = !!linkNameValue.trim();
 
-  const expiredLinkText = isExpired
-    ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
-    : expirationDate
-      ? `${t("Files:LinkValidUntil")}:`
-      : t("Files:ChooseExpirationDate");
+  const expiredLinkText = getExpiredLinkText();
 
   const isPrimary = link?.sharedTo?.primary;
 
@@ -234,7 +249,7 @@ const EditLinkPanel = (props) => {
         {isEdit
           ? isPrimary
             ? t("Files:EditSharedLink")
-            : isPublic
+            : isPublic || isFormRoom
               ? t("Files:EditAdditionalLink")
               : t("Files:EditLink")
           : t("Files:CreateNewLink")}
@@ -276,18 +291,17 @@ const EditLinkPanel = (props) => {
             />
           )}
 
-          {!isPrimary && (
-            <LimitTimeBlock
-              isExpired={isExpired}
-              isLoading={isLoading}
-              headerText={t("Files:LimitByTimePeriod")}
-              bodyText={expiredLinkText}
-              expirationDate={expirationDate}
-              setExpirationDate={setExpirationDate}
-              setIsExpired={setIsExpired}
-              language={language}
-            />
-          )}
+          <LimitTimeBlock
+            isExpired={isExpired}
+            isLoading={isLoading}
+            headerText={t("Files:LimitByTimePeriod")}
+            bodyText={expiredLinkText}
+            expirationDate={expirationDate}
+            setExpirationDate={setExpirationDate}
+            setIsExpired={setIsExpired}
+            language={language}
+            isPrimary={isPrimary}
+          />
         </StyledEditLinkBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -342,7 +356,7 @@ export default inject(
     const { currentDeviceType, passwordSettings, getPortalPasswordSettings } =
       settingsStore;
 
-    const { isEdit, roomId, isPublic, isFormRoom } = linkParams;
+    const { isEdit, roomId, isPublic, isFormRoom, isCustomRoom } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
@@ -368,6 +382,7 @@ export default inject(
       language: authStore.language,
       isPublic,
       isFormRoom,
+      isCustomRoom,
       currentDeviceType,
       setLinkParams,
       passwordSettings,

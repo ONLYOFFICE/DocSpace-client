@@ -41,6 +41,7 @@ import ThumbnailService from "../services/thumbnail/thumbnailService";
 import SocketService from "../services/socket/socketService";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import FileService from "../services/file/fileService";
+import SelectionService from "../services/selection/selectionService";
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
@@ -88,6 +89,7 @@ class FilesStore {
     this.socketService = new SocketService(this);
     this.thumbnailService = new ThumbnailService(this);
     this.fileService = new FileService(this);
+    this.selectionService = new SelectionService(this);
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
@@ -567,12 +569,7 @@ class FilesStore {
   }
 
   updateSelectionStatus = (id, status, isEditing) => {
-    const index = this.selection.findIndex((x) => x.id === id);
-
-    if (index !== -1) {
-      this.selection[index].fileStatus = status;
-      this.selection[index].isEditing = isEditing;
-    }
+    this.selectionService.updateSelectionStatus(id, status, isEditing);
   };
 
   updateFileStatus = (index, status) => {
@@ -581,22 +578,12 @@ class FilesStore {
     this.files[index].fileStatus = status;
   };
 
-  updateSelectionStatus = (id, status, isEditing) => {
-    const index = this.selection.findIndex((x) => x.id === id);
-
-    if (index !== -1) {
-      this.selection[index].fileStatus = status;
-      this.selection[index].isEditing = isEditing;
-    }
-  };
-
   setSelection = (selection) => {
-    this.selection = selection;
+    this.selectionService.setSelection(selection);
   };
 
   setBufferSelection = (bufferSelection) => {
-    // console.log("setBufferSelection", bufferSelection);
-    this.bufferSelection = bufferSelection;
+    this.selectionService.setBufferSelection(bufferSelection);
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -644,25 +631,7 @@ class FilesStore {
   };
 
   checkSelection = (file) => {
-    if (this.selection) {
-      const foundIndex = this.selection?.findIndex((x) => x.id === file.id);
-      if (foundIndex > -1) {
-        runInAction(() => {
-          this.selection[foundIndex] = file;
-        });
-      }
-    }
-
-    if (this.bufferSelection) {
-      const foundIndex = [this.bufferSelection].findIndex(
-        (x) => x.id === file.id,
-      );
-      if (foundIndex > -1) {
-        runInAction(() => {
-          this.bufferSelection[foundIndex] = file;
-        });
-      }
-    }
+    this.selectionService.checkSelection(file);
   };
 
   setFilter = (filter) => {
@@ -679,23 +648,7 @@ class FilesStore {
   };
 
   removeStaleItemFromSelection = (item) => {
-    if (!item.parentId) {
-      if (this.activeFiles.some((elem) => elem.id === item.id)) return;
-    } else {
-      if (this.activeFolders.some((elem) => elem.id === item.id)) return;
-    }
-
-    if (
-      this.bufferSelection?.id === item.id &&
-      this.bufferSelection?.fileType === item.fileType
-    ) {
-      return this.setBufferSelection(null);
-    }
-
-    const newSelection = this.selection.filter(
-      (select) => !(select.id === item.id && select.fileType === item.fileType),
-    );
-    this.setSelection(newSelection);
+    this.selectionService.removeStaleItemFromSelection(item);
   };
 
   debounceRemoveFiles = debounce(() => {

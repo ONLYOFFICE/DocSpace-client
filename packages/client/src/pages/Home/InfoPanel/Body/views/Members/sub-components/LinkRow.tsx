@@ -120,6 +120,7 @@ const LinkRow = (props: LinkRowProps) => {
       roomId,
       isPublic: isPublicRoomType,
       isFormRoom,
+      isCustomRoom,
     });
     onCloseContextMenu();
   };
@@ -132,7 +133,13 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setLinkParams({
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+      isCustomRoom,
+    });
     setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
   };
@@ -219,6 +226,7 @@ const LinkRow = (props: LinkRowProps) => {
           roomId,
           isPublic: isPublicRoomType,
           isFormRoom,
+          isCustomRoom,
         });
 
         if (linkData) {

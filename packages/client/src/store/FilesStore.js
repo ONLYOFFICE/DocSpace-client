@@ -4102,8 +4102,6 @@ class FilesStore {
 
   markItemAsFavorite = (id) => api.files.markAsFavorite(id);
 
-  removeItemFromFavorite = (id) => api.files.removeFromFavorite(id);
-
   fetchFavoritesFolder = async (folderId) => {
     const favoritesFolder = await api.files.getFolder(folderId);
     this.setFolders(favoritesFolder.folders);

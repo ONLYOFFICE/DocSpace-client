@@ -1043,12 +1043,8 @@ class FilesActionStore {
   };
 
   setFavoriteAction = (action, id) => {
-    const {
-      markItemAsFavorite,
-      removeItemFromFavorite,
-      fetchFavoritesFolder,
-      setSelected,
-    } = this.filesStore;
+    const { markItemAsFavorite, fetchFavoritesFolder, setSelected } =
+      this.filesStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1061,7 +1057,8 @@ class FilesActionStore {
           .then(() => setSelected("close"));
 
       case "remove":
-        return removeItemFromFavorite(items)
+        return api.files
+          .removeFromFavorite(items)
           .then(() => {
             return this.treeFoldersStore.isFavoritesFolder
               ? fetchFavoritesFolder(this.selectedFolderStore.id)

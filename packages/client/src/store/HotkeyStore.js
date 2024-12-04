@@ -47,6 +47,7 @@ class HotkeyStore {
   treeFoldersStore;
   uploadDataStore;
   selectedFolderStore;
+  indexingStore;
 
   elemOffset = 0;
   hotkeysClipboardAction = null;
@@ -59,6 +60,7 @@ class HotkeyStore {
     treeFoldersStore,
     uploadDataStore,
     selectedFolderStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
@@ -68,6 +70,7 @@ class HotkeyStore {
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.indexingStore = indexingStore;
   }
 
   scrollToCaret = () => {
@@ -548,6 +551,15 @@ class HotkeyStore {
 
   deselectAll = () => {
     const { setSelected } = this.filesStore;
+    const { revokeFilesOrder } = this.filesActionsStore;
+    const { isIndexEditingMode, setIsIndexEditingMode } = this.indexingStore;
+
+    if (isIndexEditingMode) {
+      revokeFilesOrder();
+      setIsIndexEditingMode(false);
+
+      return;
+    }
 
     this.elemOffset = 0;
     setSelected("none");

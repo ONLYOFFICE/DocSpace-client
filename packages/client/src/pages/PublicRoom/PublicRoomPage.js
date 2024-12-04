@@ -78,14 +78,14 @@ const PublicRoomPage = (props) => {
 
   const [windowIsOpen, setWindowIsOpen] = useState(false);
 
+  useSDK({ frameConfig, setFrameConfig, isLoading });
+
   usePublic({
     location,
     fetchFiles,
     fetchPublicRoom,
     fetchPreviewMediaFile,
   });
-
-  useSDK({ frameConfig, setFrameConfig, isLoading });
 
   const getAuthWindow = () => {
     return new Promise((res, rej) => {

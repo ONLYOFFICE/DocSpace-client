@@ -48,7 +48,7 @@ import {
 } from "SRC_DIR/helpers/contacts";
 
 type ContactsTabsProps = {
-  showFilterLoader: ClientLoadingStore["showFilterLoader"];
+  showTabsLoader: ClientLoadingStore["showTabsLoader"];
 
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
@@ -69,7 +69,7 @@ type ContactsTabsProps = {
 };
 
 const ContactsTabs = ({
-  showFilterLoader,
+  showTabsLoader,
   setUsersSelection,
   setGroupsSelection,
   setUsersBufferSelection,
@@ -133,7 +133,7 @@ const ContactsTabs = ({
 
   if (contactsView === "inside_group") return null;
 
-  if (showFilterLoader) return <SectionSubmenuSkeleton />;
+  if (showTabsLoader) return <SectionSubmenuSkeleton />;
 
   const items: TTabItem[] = [
     {
@@ -185,7 +185,7 @@ export default inject(
     clientLoadingStore: ClientLoadingStore;
     userStore: UserStore;
   }) => {
-    const { showFilterLoader, setIsSectionBodyLoading } = clientLoadingStore;
+    const { showTabsLoader, setIsSectionBodyLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -213,7 +213,7 @@ export default inject(
     } = groupsStore!;
 
     return {
-      showFilterLoader,
+      showTabsLoader,
       setUsersSelection,
       setUsersBufferSelection,
       setGroupsSelection,

@@ -913,6 +913,18 @@ class FilesStore {
     });
   }
 
+  get selections() {
+    if (Array.isArray(this.selection) && this.selection.length !== 0) {
+      return this.selection;
+    }
+
+    if (this.bufferSelection) {
+      return [this.bufferSelection];
+    }
+
+    return [];
+  }
+
   setPageItemsLength = (pageItemsLength) => {
     this.pageItemsLength = pageItemsLength;
   };
@@ -1404,7 +1416,6 @@ class FilesStore {
       localStorage.setItem(key, value);
     }
 
-    // this.setFilterUrl(filter);
     this.filter = filter;
 
     runInAction(() => {
@@ -1442,7 +1453,6 @@ class FilesStore {
       localStorage.setItem(key, value);
     }
 
-    // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
 
     runInAction(() => {
@@ -1469,32 +1479,6 @@ class FilesStore {
 
   setRoomOwner = (ownerId, folderIds) => {
     return api.files.setFileOwner(ownerId, folderIds);
-  };
-
-  setFilterUrl = (filter) => {
-    const filterParamsStr = filter.toUrlParams();
-
-    const url = getCategoryUrl(this.categoryType, filter.folder);
-
-    const pathname = `${url}?${filterParamsStr}`;
-
-    const currentUrl = window.location.href.replace(window.location.origin, "");
-    const newUrl = combineUrl(
-      window.ClientConfig?.proxy?.url,
-      config.homepage,
-      pathname,
-    );
-
-    if (newUrl === currentUrl) return;
-
-    // window.DocSpace.navigate(newUrl, {
-    //   state: {
-    //     fromAccounts:
-    //       window.DocSpace.location.pathname.includes("accounts/filter"),
-    //     fromSettings: window.DocSpace.location.pathname.includes("settings"),
-    //   },
-    //   replace: !location.search,
-    // });
   };
 
   refreshFiles = async () => {
@@ -3666,8 +3650,8 @@ class FilesStore {
     }
 
     newFolders.sort((a, b) => {
-      const firstValue = a.roomType ? 1 : 0;
-      const secondValue = b.roomType ? 1 : 0;
+      const firstValue = a.pinned ? 1 : 0;
+      const secondValue = b.pinned ? 1 : 0;
 
       return secondValue - firstValue;
     });

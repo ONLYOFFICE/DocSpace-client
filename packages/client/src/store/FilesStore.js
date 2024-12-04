@@ -2974,36 +2974,6 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getRoomHistory(id) {
-    return api.rooms.getRoomHistory(id);
-  }
-
-  getFileHistory(id) {
-    return api.rooms.getFileHistory(id);
-  }
-
-  // updateFolderBadge = (id, count) => {
-  //   const folder = this.folders.find((x) => x.id === id);
-  //   if (folder) folder.new -= count;
-  // };
-
-  // updateFileBadge = (id) => {
-  //   const file = this.files.find((x) => x.id === id);
-  //   if (file) file.fileStatus = file.fileStatus & ~FileStatus.IsEditing;
-  // };
-
-  // updateFilesBadge = () => {
-  //   for (let file of this.files) {
-  //     file.fileStatus = file.fileStatus & ~FileStatus.IsEditing;
-  //   }
-  // };
-
-  // updateFoldersBadge = () => {
-  //   for (let folder of this.folders) {
-  //     folder.new = 0;
-  //   }
-  // };
-
   updateRoomPin = (item) => {
     const idx = this.folders.findIndex((folder) => folder.id === item);
 

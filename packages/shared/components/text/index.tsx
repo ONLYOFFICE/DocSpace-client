@@ -35,10 +35,10 @@ const TextPure = React.forwardRef<HTMLDivElement, TextProps>(
       title,
       tag,
       as,
-      fontSize = "13px",
-      fontWeight = "400",
+      fontSize,
+      fontWeight,
       color,
-      textAlign = "left",
+      textAlign,
       onClick,
       dir,
       children,
@@ -62,7 +62,7 @@ const TextPure = React.forwardRef<HTMLDivElement, TextProps>(
 
     const textStyles = {
       fontSize,
-      fontWeight: isBold ? "700" : fontWeight,
+      fontWeight: isBold ? 700 : fontWeight,
       color,
       textAlign,
       lineHeight,

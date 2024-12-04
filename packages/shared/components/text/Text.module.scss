@@ -3,7 +3,7 @@
 .text {
   outline: 0;
   margin: 0;
-  font-weight: var(--text-font-weight, 400);
+  font-weight: 400;
 
   &.inline {
     display: inline-block;

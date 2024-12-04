@@ -3650,8 +3650,8 @@ class FilesStore {
     }
 
     newFolders.sort((a, b) => {
-      const firstValue = a.roomType ? 1 : 0;
-      const secondValue = b.roomType ? 1 : 0;
+      const firstValue = a.pinned ? 1 : 0;
+      const secondValue = b.pinned ? 1 : 0;
 
       return secondValue - firstValue;
     });

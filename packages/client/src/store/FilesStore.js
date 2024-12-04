@@ -85,6 +85,7 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
+import { removeSeparator } from "SRC_DIR/helpers/filesUtils";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -2123,29 +2124,6 @@ class FilesStore {
   removeOptions = (options, toRemoveArray) =>
     options.filter((o) => !toRemoveArray.includes(o));
 
-  removeSeparator = (options) => {
-    const newOptions = options.map((o, index) => {
-      if (index === 0 && o.includes("separator")) {
-        return false;
-      }
-
-      if (index === options.length - 1 && o.includes("separator")) {
-        return false;
-      }
-
-      if (
-        o?.includes("separator") &&
-        options[index + 1].includes("separator")
-      ) {
-        return false;
-      }
-
-      return o;
-    });
-
-    return newOptions.filter((o) => o);
-  };
-
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
@@ -2522,7 +2500,7 @@ class FilesStore {
       //   // }
       // }
 
-      fileOptions = this.removeSeparator(fileOptions);
+      fileOptions = removeSeparator(fileOptions);
 
       return fileOptions;
     }
@@ -2684,7 +2662,7 @@ class FilesStore {
         }
       }
 
-      roomOptions = this.removeSeparator(roomOptions);
+      roomOptions = removeSeparator(roomOptions);
 
       return roomOptions;
     }
@@ -2846,7 +2824,7 @@ class FilesStore {
       ]);
     }
 
-    folderOptions = this.removeSeparator(folderOptions);
+    folderOptions = removeSeparator(folderOptions);
 
     return folderOptions;
   };

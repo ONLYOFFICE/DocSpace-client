@@ -345,3 +345,23 @@ export const calculateRoomLogoParams = (img, x, y, zoom) => {
     height: dimensions,
   };
 };
+
+export const removeSeparator = (options) => {
+  const newOptions = options.map((o, index) => {
+    if (index === 0 && o.includes("separator")) {
+      return false;
+    }
+
+    if (index === options.length - 1 && o.includes("separator")) {
+      return false;
+    }
+
+    if (o?.includes("separator") && options[index + 1].includes("separator")) {
+      return false;
+    }
+
+    return o;
+  });
+
+  return newOptions.filter((o) => o);
+};

@@ -2831,8 +2831,7 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const { updateRoomMemberRole, removeFiles, selection, bufferSelection } =
-      this.filesStore;
+    const { removeFiles, selection, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2844,33 +2843,35 @@ class FilesActionStore {
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
 
-    return updateRoomMemberRole(roomId, {
-      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
-    }).then(() => {
-      if (!isAdmin) {
-        if (!isRoot) {
-          const filter = RoomsFilter.getDefault();
-          window.DocSpace.navigate(
-            `rooms/shared/filter?${filter.toUrlParams()}`,
-          );
+    return api.rooms
+      .updateRoomMemberRole(roomId, {
+        invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+      })
+      .then(() => {
+        if (!isAdmin) {
+          if (!isRoot) {
+            const filter = RoomsFilter.getDefault();
+            window.DocSpace.navigate(
+              `rooms/shared/filter?${filter.toUrlParams()}`,
+            );
+          } else {
+            removeFiles(null, [roomId]);
+          }
         } else {
-          removeFiles(null, [roomId]);
-        }
-      } else {
-        if (!isRoot) {
-          this.selectedFolderStore.setInRoom(false);
+          if (!isRoot) {
+            this.selectedFolderStore.setInRoom(false);
 
-          const operationId = uniqueid("operation_");
-          this.updateCurrentFolder(null, [roomId], null, operationId);
-        } else {
-          this.filesStore.setInRoomFolder(roomId, false);
+            const operationId = uniqueid("operation_");
+            this.updateCurrentFolder(null, [roomId], null, operationId);
+          } else {
+            this.filesStore.setInRoomFolder(roomId, false);
+          }
         }
-      }
 
-      isOwner
-        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
-        : toastr.success(t("Files:YouLeftTheRoom"));
-    });
+        isOwner
+          ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+          : toastr.success(t("Files:YouLeftTheRoom"));
+      });
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {

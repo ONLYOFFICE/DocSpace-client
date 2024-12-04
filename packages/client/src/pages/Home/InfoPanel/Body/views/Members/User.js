@@ -56,7 +56,6 @@ const User = ({
   user,
   membersHelper,
   currentMember,
-  updateRoomMemberRole,
   infoPanelSelection,
   changeUserType,
   setIsScrollLocked,
@@ -106,11 +105,12 @@ const User = ({
   };
 
   const updateRole = (option) => {
-    return updateRoomMemberRole(infoPanelSelection.id, {
-      invitations: [{ id: user.id, access: option.access }],
-      notify: false,
-      sharingMessage: "",
-    })
+    return api.rooms
+      .updateRoomMemberRole(infoPanelSelection.id, {
+        invitations: [{ id: user.id, access: option.access }],
+        notify: false,
+        sharingMessage: "",
+      })
       .then(async () => {
         setIsLoading(false);
 
@@ -370,8 +370,7 @@ export default inject(
       searchValue,
     } = infoPanelStore;
 
-    const { updateRoomMemberRole, membersFilter, setMembersFilter } =
-      filesStore;
+    const { membersFilter, setMembersFilter } = filesStore;
 
     const { changeType: changeUserType } = peopleStore.usersStore;
 
@@ -381,7 +380,6 @@ export default inject(
     return {
       infoPanelSelection,
       setIsScrollLocked,
-      updateRoomMemberRole,
       changeUserType,
       membersFilter,
       setMembersFilter,

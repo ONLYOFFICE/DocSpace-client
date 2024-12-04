@@ -2970,10 +2970,6 @@ class FilesStore {
       .then((res) => res.items);
   };
 
-  updateRoomMemberRole(id, data) {
-    return api.rooms.updateRoomMemberRole(id, data);
-  }
-
   updateRoomPin = (item) => {
     const idx = this.folders.findIndex((folder) => folder.id === item);
 

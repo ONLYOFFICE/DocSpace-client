@@ -40,6 +40,7 @@ import { getCategoryType } from "SRC_DIR/helpers/category";
 import ThumbnailService from "../services/thumbnail/thumbnailService";
 import SocketService from "../services/socket/socketService";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import FileService from "../services/file/fileService";
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
@@ -86,6 +87,7 @@ class FilesStore {
 
     this.socketService = new SocketService(this);
     this.thumbnailService = new ThumbnailService(this);
+    this.fileService = new FileService(this);
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
@@ -606,17 +608,11 @@ class FilesStore {
   };
 
   getFileInfo = async (id) => {
-    const fileInfo = await api.files.getFileInfo(id);
-    this.setFile(fileInfo);
-    return fileInfo;
+    return this.fileService.getFileInfo(id);
   };
 
   setFile = (file) => {
-    const index = this.files.findIndex((x) => x.id === file.id);
-    if (index !== -1) {
-      this.files[index] = file;
-      this.createThumbnail(file);
-    }
+    this.fileService.setFile(file);
   };
 
   createThumbnail = async (file) => {
@@ -714,156 +710,12 @@ class FilesStore {
    * @param {string} destFolderId - Destination folder ID
    */
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
-
-    const isRooms = isRoomsFolder || isArchiveFolder;
-
-    let deleteCount = 0;
-
-    if (fileIds) {
-      let i = fileIds.length;
-      while (i !== 0) {
-        const file = this.files.find((x) => x.id === fileIds[i - 1]);
-        if (file) deleteCount += 1;
-
-        i--;
-      }
-    }
-
-    if (folderIds) {
-      let i = folderIds.length;
-      while (i !== 0) {
-        const folder = this.folders.find((x) => x.id === folderIds[i - 1]);
-        if (folder) deleteCount += 1;
-
-        i--;
-      }
-    }
-
-    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
-    newFilter.total -= deleteCount;
-
-    if (destFolderId && destFolderId === this.selectedFolderStore.id) return;
-
-    if (newFilter.total <= this.filesList.length) {
-      const files = fileIds
-        ? this.files.filter((x) => !fileIds.includes(x.id))
-        : this.files;
-      const folders = folderIds
-        ? this.folders.filter((x) => !folderIds.includes(x.id))
-        : this.folders;
-
-      const hotkeysClipboard = fileIds
-        ? this.hotkeysClipboard.filter(
-            (f) => !fileIds.includes(f.id) && !f.isFolder,
-          )
-        : this.hotkeysClipboard.filter(
-            (f) => !folderIds.includes(f.id) && f.isFolder,
-          );
-
-      this.setIsEmptyPage(newFilter.total <= 0);
-
-      runInAction(() => {
-        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
-        this.setFiles(files);
-        this.setFolders(folders);
-        this.setTempActionFilesIds([]);
-        this.setHotkeysClipboard(hotkeysClipboard);
-        this.setTempActionFoldersIds([]);
-      });
-
-      showToast && showToast();
-
-      return;
-    }
-
-    if (this.filesList.length - deleteCount >= this.filter.pageCount) {
-      const files = fileIds
-        ? this.files.filter((x) => !fileIds.includes(x.id))
-        : this.files;
-
-      const folders = folderIds
-        ? this.folders.filter((x) => !folderIds.includes(x.id))
-        : this.folders;
-
-      runInAction(() => {
-        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
-        this.setFiles(files);
-        this.setFolders(folders);
-        this.setTempActionFilesIds([]);
-        this.setTempActionFoldersIds([]);
-      });
-
-      showToast && showToast();
-
-      return;
-    }
-
-    newFilter.startIndex =
-      (newFilter.page + 1) * newFilter.pageCount - deleteCount;
-    newFilter.pageCount = deleteCount;
-    if (isRooms) {
-      return api.rooms
-        .getRooms(newFilter)
-        .then((res) => {
-          const folders = folderIds
-            ? this.folders.filter((x) => !folderIds.includes(x.id))
-            : this.folders;
-
-          const newFolders = [...folders, ...res.folders];
-
-          const roomsFilter = this.roomsFilter.clone();
-          roomsFilter.total = res.total;
-
-          runInAction(() => {
-            this.setRoomsFilter(roomsFilter);
-            this.setFolders(newFolders);
-          });
-
-          showToast && showToast();
-        })
-        .catch((err) => {
-          // toastr.error(err);
-          console.error(err);
-        })
-        .finally(() => {
-          this.setTempActionFilesIds([]);
-          this.setTempActionFoldersIds([]);
-        });
-    } else {
-      api.files
-        .getFolder(newFilter.folder, newFilter)
-        .then((res) => {
-          const files = fileIds
-            ? this.files.filter((x) => !fileIds.includes(x.id))
-            : this.files;
-          const folders = folderIds
-            ? this.folders.filter((x) => !folderIds.includes(x.id))
-            : this.folders;
-
-          const newFiles = [...files, ...res.files];
-          const newFolders = [...folders, ...res.folders];
-
-          const filter = this.filter.clone();
-          filter.total = res.total;
-
-          runInAction(() => {
-            this.setFilter(filter);
-            this.setFiles(newFiles);
-            this.setFolders(newFolders);
-          });
-
-          showToast && showToast();
-        })
-        .catch((err) => {
-          // toastr.error(err);
-          console.error(err);
-        })
-        .finally(() => {
-          this.setTempActionFilesIds([]);
-          this.setTempActionFoldersIds([]);
-        });
-    }
+    return this.fileService.removeFiles(
+      fileIds,
+      folderIds,
+      showToast,
+      destFolderId,
+    );
   };
 
   setIsEmptyPage = (isEmptyPage) => {

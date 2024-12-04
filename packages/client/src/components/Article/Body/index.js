@@ -188,7 +188,9 @@ const ArticleBodyContent = (props) => {
 
       const isAccountsClick = folderId === "accounts";
 
-      let withTimer = isAccountsClick ? false : !!selectedFolderId;
+      let withTimer = isAccountsClick
+        ? window.location.pathname.includes("accounts")
+        : !!selectedFolderId;
 
       if (isAccountsClick) {
         clearFiles();

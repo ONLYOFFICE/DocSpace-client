@@ -99,6 +99,13 @@ const UnauthorizedHttpCode = 401;
 const THUMBNAILS_CACHE = 500;
 let timerId;
 
+const DEFAULT_MEMBERS_FILTER = {
+  page: 0,
+  pageCount: 100,
+  total: 0,
+  startIndex: 0,
+};
+
 class FilesStore {
   authStore;
 
@@ -165,12 +172,7 @@ class FilesStore {
 
   roomsFilter = RoomsFilter.getDefault();
 
-  membersFilter = {
-    page: 0,
-    pageCount: 100,
-    total: 0,
-    startIndex: 0,
-  };
+  membersFilter = DEFAULT_MEMBERS_FILTER;
 
   categoryType = getCategoryType(window.location);
 
@@ -2920,15 +2922,6 @@ class FilesStore {
     return api.rooms.removeLogoFromRoom(id);
   }
 
-  getDefaultMembersFilter = () => {
-    return {
-      page: 0,
-      pageCount: 100,
-      total: 0,
-      startIndex: 0,
-    };
-  };
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };
@@ -2937,7 +2930,7 @@ class FilesStore {
     let newFilter = membersFilter || clone(this.membersFilter);
 
     if (clearFilter) {
-      newFilter = this.getDefaultMembersFilter();
+      newFilter = DEFAULT_MEMBERS_FILTER;
     } else if (!membersFilter) {
       newFilter.page += 1;
       newFilter.pageCount = 100;

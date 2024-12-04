@@ -2877,10 +2877,6 @@ class FilesStore {
     return api.rooms.editRoom(id, roomParams);
   }
 
-  addTagsToRoom(id, tagArray) {
-    return api.rooms.addTagsToRoom(id, tagArray);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

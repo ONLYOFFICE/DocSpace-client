@@ -4571,10 +4571,10 @@ class FilesStore {
   updateRoom = (oldRoom, newRoom) => {
     // After rename of room with providerKey, it's id value changes too
     if (oldRoom.providerKey) {
-      let index = getFolderIndex(oldRoom.id);
+      let index = this.getFolderIndex(oldRoom.id);
 
       if (index === -1) {
-        index = getFolderIndex(newRoom.id);
+        index = this.getFolderIndex(newRoom.id);
       }
 
       return this.updateFolder(index, newRoom);

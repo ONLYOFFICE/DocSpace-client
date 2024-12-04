@@ -2914,10 +2914,6 @@ class FilesStore {
     return api.rooms.uploadRoomLogo(formData);
   }
 
-  addLogoToRoom(id, icon) {
-    return api.rooms.addLogoToRoom(id, icon);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

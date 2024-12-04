@@ -40,6 +40,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import i18n from "../i18n";
 
 import { request } from "@docspace/shared/api/client";
+import { getCategoryUrl } from "./category";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -208,5 +210,50 @@ export const connectedCloudsTypeIcon = (key) => {
     case "WebDav":
       return CloudServicesWebdavReactSvgUrl;
     default:
+  }
+};
+
+export const getItemUrl = (
+  id,
+  isFolder,
+  categoryType,
+  needConvert,
+  canOpenPlayer,
+  publicRoomKey = null,
+) => {
+  const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
+
+  const url = getCategoryUrl(categoryType, id);
+
+  if (canOpenPlayer) {
+    if (publicRoomKey) {
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      return `${combineUrl(
+        proxyURL,
+        config.homepage,
+        "/rooms/share",
+        MEDIA_VIEW_URL,
+        id,
+      )}?key=${publicRoomKey}&${filterObj.toUrlParams()}`;
+    }
+
+    return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
+  }
+
+  if (isFolder) {
+    const folderUrl = isFolder
+      ? combineUrl(proxyURL, config.homepage, `${url}?folder=${id}`)
+      : null;
+
+    return folderUrl;
+  } else {
+    const url = combineUrl(
+      proxyURL,
+      config.homepage,
+      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+    );
+
+    return url;
   }
 };

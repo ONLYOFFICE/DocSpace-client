@@ -25,14 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import {
   FileStatus,
   FilterType,
   RoomsProviderType,
 } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils/device";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -43,6 +40,7 @@ import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentR
 import FileService from "../services/file/fileService";
 import SelectionService from "../services/selection/selectionService";
 import FilterService from "../services/filter/filterService";
+import { getItemUrl } from "SRC_DIR/helpers/filesUtils";
 
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -338,7 +336,14 @@ class FilesStore {
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
       const previewUrl = canOpenPlayer
-        ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
+        ? getItemUrl(
+            id,
+            false,
+            this.categoryType,
+            needConvert,
+            canOpenPlayer,
+            this.publicRoomStore.publicRoomKey,
+          )
         : null;
 
       const contextOptions = this.getFilesContextOptions(item);
@@ -351,7 +356,16 @@ class FilesStore {
 
       const { isRecycleBinFolder } = this.treeFoldersStore;
 
-      const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
+      const folderUrl =
+        isFolder &&
+        getItemUrl(
+          id,
+          isFolder,
+          this.categoryType,
+          false,
+          false,
+          this.publicRoomStore.publicRoomKey,
+        );
 
       const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
@@ -501,45 +515,6 @@ class FilesStore {
         watermark,
       };
     });
-  };
-
-  getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
-    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
-
-    const url = getCategoryUrl(this.categoryType, id);
-
-    if (canOpenPlayer) {
-      if (this.publicRoomStore.isPublicRoom) {
-        const key = this.publicRoomStore.publicRoomKey;
-        const filterObj = FilesFilter.getFilter(window.location);
-
-        return `${combineUrl(
-          proxyURL,
-          config.homepage,
-          "/rooms/share",
-          MEDIA_VIEW_URL,
-          id,
-        )}?key=${key}&${filterObj.toUrlParams()}`;
-      }
-
-      return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
-    }
-
-    if (isFolder) {
-      const folderUrl = isFolder
-        ? combineUrl(proxyURL, config.homepage, `${url}?folder=${id}`)
-        : null;
-
-      return folderUrl;
-    } else {
-      const url = combineUrl(
-        proxyURL,
-        config.homepage,
-        `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
-      );
-
-      return url;
-    }
   };
 
   get showNewFilesInList() {

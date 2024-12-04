@@ -100,7 +100,10 @@ import {
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
-import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  getItemUrl,
+} from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
 import {
@@ -480,7 +483,7 @@ class ContextOptionsStore {
 
     const { canConvert } = this.filesSettingsStore;
 
-    const { getItemUrl } = this.filesStore;
+    const { categoryType } = this.filesStore;
 
     const needConvert = canConvert(item.fileExst);
 
@@ -490,8 +493,10 @@ class ContextOptionsStore {
     const url = getItemUrl(
       item.id,
       item.isRoom || item.isFolder,
+      categoryType,
       needConvert,
       canOpenPlayer,
+      this.filesStore.publicRoomStore.publicRoomKey,
     );
 
     copy(url);

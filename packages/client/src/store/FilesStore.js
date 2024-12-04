@@ -4054,52 +4054,6 @@ class FilesStore {
     return false;
   }
 
-  getOptions = (selection, externalAccess = false) => {
-    if (selection[0].encrypted) {
-      return ["FullAccess", "DenyAccess"];
-    }
-
-    const AccessOptions = [];
-
-    AccessOptions.push("ReadOnly", "DenyAccess");
-
-    const webEdit = selection.find((x) => x.viewAccessibility?.WebEdit);
-
-    const webComment = selection.find((x) => x.viewAccessibility?.WebComment);
-
-    const webReview = selection.find((x) => x.viewAccessibility?.WebReview);
-
-    const formFillingDocs = selection.find(
-      (x) => x.viewAccessibility?.WebRestrictedEditing,
-    );
-
-    const webFilter = selection.find(
-      (x) => x.viewAccessibility?.WebCustomFilterEditing,
-    );
-
-    const webNeedConvert = selection.find(
-      (x) => x.viewAccessibility?.MustConvert,
-    );
-
-    if ((webEdit && !webNeedConvert) || !externalAccess)
-      AccessOptions.push("FullAccess"); // t("FullAccess") - "Skip useless issue in UselessTranslationKeysTest"
-
-    if (webComment) AccessOptions.push("Comment");
-    if (webReview) AccessOptions.push("Review");
-    if (formFillingDocs && !externalAccess) AccessOptions.push("FormFilling"); // t("FormFilling") - "Skip useless issue in UselessTranslationKeysTest"
-    if (webFilter) AccessOptions.push("FilterEditing");
-
-    return AccessOptions;
-  };
-
-  getAccessOption = (selection) => {
-    return this.getOptions(selection);
-  };
-
-  getExternalAccessOption = (selection) => {
-    return this.getOptions(selection, true);
-  };
-
   fetchFavoritesFolder = async (folderId) => {
     const favoritesFolder = await api.files.getFolder(folderId);
     this.setFolders(favoritesFolder.folders);

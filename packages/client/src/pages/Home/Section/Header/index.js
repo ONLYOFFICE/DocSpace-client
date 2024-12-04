@@ -61,6 +61,7 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useContactsHeader } from "./useContacts";
+import { getCheckboxItemId } from "SRC_DIR/helpers/filesUtils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -208,7 +209,6 @@ const SectionHeaderContent = (props) => {
     setSelected,
     cbMenuItems,
     getCheckboxItemLabel,
-    getCheckboxItemId,
     setSelectedNode,
     setIsLoading,
 
@@ -766,7 +766,6 @@ export default inject(
       isHeaderChecked,
       cbMenuItems,
       getCheckboxItemLabel,
-      getCheckboxItemId,
       isEmptyFilesList,
 
       roomsForRestore,
@@ -925,7 +924,6 @@ export default inject(
 
       getHeaderMenu,
       getCheckboxItemLabel,
-      getCheckboxItemId,
 
       isRecycleBinFolder,
       isEmptyFilesList,

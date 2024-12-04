@@ -692,7 +692,11 @@ class InfoPanelStore {
       this.withPublicRoomBlock &&
       !withoutTitlesAndLinks
     ) {
-      requests.push(this.filesStore.getRoomLinks(roomId));
+      requests.push(
+        api.rooms
+          .getRoomMembers(roomId, { filterType: 2 }) // 2 (External link)
+          .then((res) => res.items),
+      );
     }
 
     let timerId;
@@ -774,7 +778,6 @@ class InfoPanelStore {
   };
 
   fetchHistory = async (abortControllerSignal = null) => {
-    const { getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
 
     let selectionType = "file";
@@ -809,7 +812,9 @@ class InfoPanelStore {
       )
       .then(async (data) => {
         if (withLinks) {
-          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
           const historyWithLinks = addLinksToHistory(data, links);
           setExternalLinks(links);
           return historyWithLinks;
@@ -828,7 +833,6 @@ class InfoPanelStore {
   };
 
   fetchMoreHistory = async (abortControllerSignal = null) => {
-    const { getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
     const oldHistory = this.selectionHistory;
 
@@ -865,7 +869,9 @@ class InfoPanelStore {
       )
       .then(async (data) => {
         if (withLinks) {
-          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
           const historyWithLinks = addLinksToHistory(data, links);
           setExternalLinks(links);
           return historyWithLinks;

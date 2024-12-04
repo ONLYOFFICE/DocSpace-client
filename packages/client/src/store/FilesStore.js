@@ -2964,12 +2964,6 @@ class FilesStore {
     this.membersFilter = filter;
   };
 
-  getRoomLinks = (id) => {
-    return api.rooms
-      .getRoomMembers(id, { filterType: 2 }) // 2 (External link)
-      .then((res) => res.items);
-  };
-
   updateRoomPin = (item) => {
     const idx = this.folders.findIndex((folder) => folder.id === item);
 

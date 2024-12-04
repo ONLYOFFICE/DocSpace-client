@@ -2874,14 +2874,8 @@ class FilesActionStore {
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
-    const {
-      setRoomOwner,
-      setFolder,
-      setFolders,
-      setSelected,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { setFolder, setFolders, setSelected, selection, bufferSelection } =
+      this.filesStore;
     const {
       isRootFolder,
       setCreatedBy,
@@ -2897,7 +2891,8 @@ class FilesActionStore {
         ? bufferSelection.id
         : id;
 
-    return setRoomOwner(userId, [roomId])
+    return api.files
+      .setFileOwner(userId, [roomId])
       .then(async (res) => {
         if (isRootFolder) {
           setFolder(res[0]);

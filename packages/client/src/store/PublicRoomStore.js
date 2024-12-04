@@ -206,7 +206,7 @@ class PublicRoomStore {
     );
   };
 
-  gotoFolder = (res) => {
+  gotoFolder = (res, key) => {
     const filter = FilesFilter.getDefault();
 
     const subFolder = new URLSearchParams(window.location.search).get("folder");
@@ -214,6 +214,7 @@ class PublicRoomStore {
     const url = getCategoryUrl(CategoryType.Shared);
 
     filter.folder = subFolder ? subFolder : res.id;
+    filter.key = key;
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
   };
@@ -225,6 +226,10 @@ class PublicRoomStore {
       .then((res) => {
         if (res?.shared) {
           // return this.gotoFolder(res);
+        }
+
+        if (res?.isAuthenticated) {
+          return this.gotoFolder(res, key);
         }
 
         this.publicRoomKey = key;

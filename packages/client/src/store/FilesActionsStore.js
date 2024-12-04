@@ -49,7 +49,6 @@ import {
   lockFile,
   markAsRead,
   removeFiles,
-  removeShareFiles,
   createFolder,
   moveToFolder,
   duplicate,

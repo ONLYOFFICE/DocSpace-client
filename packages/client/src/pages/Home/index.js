@@ -31,6 +31,7 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { addTagsToRoom, removeTagsFromRoom } from "@docspace/shared/api/rooms";
+import { createFolder } from "@docspace/shared/api/files";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import Section from "@docspace/shared/components/section";
 
@@ -107,7 +108,7 @@ const PureHome = (props) => {
     filesList,
 
     createFile,
-    createFolder,
+
     createRoom,
 
     setViewAs,
@@ -475,7 +476,7 @@ export const Component = inject(
       filesList,
 
       createFile,
-      createFolder,
+
       createRoom,
       refreshFiles,
       setViewAs,
@@ -644,7 +645,7 @@ export const Component = inject(
       filesList,
       selectedFolderStore,
       createFile,
-      createFolder,
+
       createRoom,
       refreshFiles,
       setViewAs,

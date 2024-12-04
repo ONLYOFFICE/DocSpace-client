@@ -49,7 +49,6 @@ const CreateEvent = ({
   fromTemplate,
   onClose,
 
-  createFolder,
   addActiveItems,
 
   gallerySelected,
@@ -139,7 +138,8 @@ const CreateEvent = ({
     };
 
     if (!extension) {
-      createFolder(parentId, newValue)
+      api.files
+        .createFolder(parentId, newValue)
         .then((folder) => {
           item = folder;
           createdFolderId = folder.id;
@@ -258,7 +258,6 @@ export default inject(
 
     const {
       createFile,
-      createFolder,
       addActiveItems,
 
       setIsUpdatingRowItem,
@@ -293,7 +292,7 @@ export default inject(
       setEventDialogVisible,
       eventDialogVisible,
       createFile,
-      createFolder,
+
       addActiveItems,
 
       setIsUpdatingRowItem,

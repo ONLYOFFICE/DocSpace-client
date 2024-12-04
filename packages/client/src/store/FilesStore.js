@@ -2860,10 +2860,6 @@ class FilesStore {
       .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
   };
 
-  createFolder(parentFolderId, title) {
-    return api.files.createFolder(parentFolderId, title);
-  }
-
   createRoom = (roomParams) => {
     this.roomCreated = true;
     return api.rooms.createRoom(roomParams);

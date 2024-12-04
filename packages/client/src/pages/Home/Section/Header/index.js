@@ -234,7 +234,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    isPublicRoomType,
     isVirtualDataRoomType,
 
     moveToPublicRoom,
@@ -259,8 +258,6 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
-    isShared,
-    isExternal,
     displayAbout,
     revokeFilesOrder,
     saveIndexOfFiles,
@@ -445,9 +442,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const getTitleIcon = () => {
-    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
+    if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
@@ -517,6 +514,8 @@ const SectionHeaderContent = (props) => {
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
   const stateIsPublicRoomType = location?.state?.isPublicRoomType;
+  const stateIsShared = location?.state?.isShared;
+  const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
 
   const isRoot =
@@ -530,6 +529,9 @@ const SectionHeaderContent = (props) => {
         infoPanelRoom?.lifetime ||
         (isLoading && stateIsLifetimeEnabled)),
   );
+
+  const navigationButtonIsVisible =
+    showNavigationButton || stateIsShared ? true : false;
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -611,7 +613,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={isExternal}
+          isExternalFolder={stateIsExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
           isLifetimeEnabled={isLifetimeEnabled}
@@ -824,7 +826,6 @@ export default inject(
       settingsStore;
 
     const isRoom = !!roomType;
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
@@ -887,7 +888,6 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
       !security?.CopyLink || isPublicRoom || isArchive
@@ -943,7 +943,6 @@ export default inject(
 
       moveToRoomsPage,
       onClickBack,
-      isPublicRoomType,
       isVirtualDataRoomType,
       isPublicRoom,
 
@@ -989,8 +988,6 @@ export default inject(
       saveIndexOfFiles,
 
       rootFolderId,
-      isShared,
-      isExternal,
       displayAbout,
       infoPanelRoom,
       getPublicKey,

@@ -2491,6 +2491,12 @@ class FilesActionStore {
 
       setIsLoading(true);
 
+      const isShared =
+        item.shared || item.navigationPath?.findIndex((r) => r.shared) > -1;
+
+      const isExternal =
+        item.external || item.navigationPath?.findIndex((r) => r.external) > -1;
+
       const state = {
         title,
         isRoot: false,
@@ -2498,6 +2504,9 @@ class FilesActionStore {
         isRoom,
         rootRoomTitle: !!roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+        isShared,
+        isExternal,
+        canCreate: item.security?.canCreate,
         isLifetimeEnabled:
           itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
       };

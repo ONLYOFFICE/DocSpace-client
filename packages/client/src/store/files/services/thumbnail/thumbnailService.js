@@ -37,6 +37,29 @@ class ThumbnailService {
 
     return res;
   }
+
+  async createThumbnail(file) {
+    if (
+      this.rootStore.viewAs !== "tile" ||
+      !file ||
+      !file.id ||
+      typeof file.id === "string" ||
+      file.thumbnailStatus !== thumbnailStatuses.WAITING ||
+      this.thumbnails.has(`${file.id}|${file.versionGroup}`)
+    ) {
+      return;
+    }
+
+    if (this.thumbnails.size > THUMBNAILS_CACHE) this.thumbnails.clear();
+
+    this.thumbnails.add(`${file.id}|${file.versionGroup}`);
+
+    console.log("thumbnails", this.thumbnails);
+
+    const res = await api.files.createThumbnails([file.id]);
+
+    return res;
+  }
 }
 
 export default ThumbnailService;

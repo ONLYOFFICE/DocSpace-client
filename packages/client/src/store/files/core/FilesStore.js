@@ -44,8 +44,6 @@ import FileService from "../services/file/fileService";
 import SelectionService from "../services/selection/selectionService";
 import FilterService from "../services/filter/filterService";
 
-const THUMBNAILS_CACHE = 500;
-let timerId;
 const storageViewAs = localStorage.getItem("viewAs");
 
 class FilesStore {
@@ -605,26 +603,7 @@ class FilesStore {
   };
 
   createThumbnail = async (file) => {
-    if (
-      this.viewAs !== "tile" ||
-      !file ||
-      !file.id ||
-      typeof file.id === "string" ||
-      file.thumbnailStatus !== thumbnailStatuses.WAITING ||
-      this.thumbnails.has(`${file.id}|${file.versionGroup}`)
-    ) {
-      return;
-    }
-
-    if (this.thumbnails.size > THUMBNAILS_CACHE) this.thumbnails.clear();
-
-    this.thumbnails.add(`${file.id}|${file.versionGroup}`);
-
-    console.log("thumbnails", this.thumbnails);
-
-    const res = await api.files.createThumbnails([file.id]);
-
-    return res;
+    return this.thumbnailService.createThumbnail(file);
   };
 
   getFolderIndex = (id) => {

@@ -335,8 +335,7 @@ class CreateEditRoomStore {
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, createRoomInThirdpary, selection, bufferSelection } =
-      this.filesStore;
+    const { createRoom, selection, bufferSelection } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
     const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
@@ -427,7 +426,7 @@ class CreateEditRoomStore {
       withConfirm && this.setConfirmDialogIsLoading(true);
 
       const room = isThirdPartyRoom
-        ? await createRoomInThirdpary(storageFolderId, createRoomData)
+        ? await api.rooms.createRoomInThirdpary(storageFolderId, createRoomData)
         : await createRoom(createRoomData);
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);

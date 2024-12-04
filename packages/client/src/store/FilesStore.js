@@ -2869,10 +2869,6 @@ class FilesStore {
     return api.rooms.createRoom(roomParams);
   };
 
-  createRoomInThirdpary(thirpartyFolderId, roomParams) {
-    return api.rooms.createRoomInThirdpary(thirpartyFolderId, roomParams);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

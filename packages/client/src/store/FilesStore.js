@@ -4100,8 +4100,6 @@ class FilesStore {
     return this.getOptions(selection, true);
   };
 
-  markItemAsFavorite = (id) => api.files.markAsFavorite(id);
-
   fetchFavoritesFolder = async (folderId) => {
     const favoritesFolder = await api.files.getFolder(folderId);
     this.setFolders(favoritesFolder.folders);

@@ -1043,14 +1043,14 @@ class FilesActionStore {
   };
 
   setFavoriteAction = (action, id) => {
-    const { markItemAsFavorite, fetchFavoritesFolder, setSelected } =
-      this.filesStore;
+    const { fetchFavoritesFolder, setSelected } = this.filesStore;
 
     const items = Array.isArray(id) ? id : [id];
 
     switch (action) {
       case "mark":
-        return markItemAsFavorite(items)
+        return api.files
+          .markAsFavorite(items)
           .then(() => {
             return this.getFilesInfo(items);
           })

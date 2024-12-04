@@ -270,6 +270,35 @@ export class SocketService {
     }
   }
 
+  subscribeToFolders(folders) {
+    const roomPartsToUnsub = folders
+      .filter(
+        (f) =>
+          !folders.some((nf) => nf.id === f.id) &&
+          SocketHelper.socketSubscribers.has(`DIR-${f.id}`) &&
+          this.rootStore.selectedFolderStore.id !== f.id,
+      )
+      .map((f) => `DIR-${f.id}`);
+
+    const roomPartsToSub = folders
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    if (roomPartsToUnsub.length > 0) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: roomPartsToUnsub,
+        individual: true,
+      });
+    }
+
+    if (roomPartsToSub.length > 0) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: roomPartsToSub,
+        individual: true,
+      });
+    }
+  }
+
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
       const foundIndex = this.rootStore.files.findIndex(

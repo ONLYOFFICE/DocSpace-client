@@ -652,34 +652,9 @@ class FilesStore {
   setFolders = (folders) => {
     if (folders.length === 0 && this.folders.length === 0) return;
 
-    const roomPartsToUnsub = this.folders
-      .filter(
-        (f) =>
-          !folders.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`DIR-${f.id}`) &&
-          this.selectedFolderStore.id !== f.id,
-      )
-      .map((f) => `DIR-${f.id}`);
-
-    const roomPartsToSub = folders
-      .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
-
-    if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: roomPartsToUnsub,
-        individual: true,
-      });
-    }
+    this.socketService.subscribeToFolders(folders);
 
     this.folders = folders;
-
-    if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: roomPartsToSub,
-        individual: true,
-      });
-    }
   };
 
   removeStaleItemFromSelection = (item) => {

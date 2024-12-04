@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { isMobile, isTablet } from "../../utils";
-
-import StyledBackdrop from "./Backdrop.styled";
 import { BackdropProps } from "./Backdrop.types";
+
+import styles from "./Backdrop.module.scss";
 
 const Backdrop: React.FC<BackdropProps> = ({
   visible = false,
@@ -39,7 +40,8 @@ const Backdrop: React.FC<BackdropProps> = ({
   isAside = false,
   withoutBackground = false,
   isModalDialog = false,
-  zIndex = 203,
+  zIndex,
+  onClick,
   ...restProps
 }) => {
   const backdropRef = React.useRef<HTMLDivElement | null>(null);
@@ -72,17 +74,16 @@ const Backdrop: React.FC<BackdropProps> = ({
     setNeedBackground(shouldShowBackground);
   }, [visible, isAside, withBackground, withoutBlur, withoutBackground]);
 
-  const getComposedClassName = React.useCallback((): string => {
-    const baseClasses = new Set(["backdrop-active", "not-selectable"]);
-
-    if (typeof className === "string") {
-      baseClasses.add(className);
-    } else if (Array.isArray(className)) {
-      className.forEach((cls) => baseClasses.add(cls));
-    }
-
-    return Array.from(baseClasses).join(" ");
-  }, [className]);
+  const backdropClasses = classNames(styles.backdrop, className, {
+    [styles.visible]: visible,
+    [styles.withBackground]: needBackground,
+    [styles.withoutBackground]: !needBackground,
+    [styles.withoutBlur]: withoutBlur,
+    [styles.withBlur]: !withoutBlur,
+    [styles.isAside]: isAside,
+    [styles.isModalDialog]: isModalDialog,
+    [styles.mobileView]: isMobile() || isTablet(),
+  });
 
   const handleTouch = React.useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
@@ -104,13 +105,11 @@ const Backdrop: React.FC<BackdropProps> = ({
   }
 
   return (
-    <StyledBackdrop
+    <div
       {...restProps}
       ref={backdropRef}
-      zIndex={zIndex}
-      className={getComposedClassName()}
-      needBackground={needBackground}
-      visible={visible}
+      className={backdropClasses}
+      style={{ zIndex }}
       onTouchMove={handleTouch}
       onTouchEnd={handleTouch}
       data-testid="backdrop"

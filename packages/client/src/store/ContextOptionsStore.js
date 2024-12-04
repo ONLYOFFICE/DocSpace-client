@@ -100,7 +100,10 @@ import {
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
-import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  removeOptions,
+} from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
 import {
@@ -1331,10 +1334,7 @@ class ContextOptionsStore {
       );
       item = { ...item, contextOptions };
     } else {
-      item.contextOptions = this.filesStore.removeOptions(
-        item.contextOptions,
-        optionsToRemove,
-      );
+      item.contextOptions = removeOptions(item.contextOptions, optionsToRemove);
     }
 
     const { isPublicRoom } = this.publicRoomStore;

@@ -365,3 +365,6 @@ export const removeSeparator = (options) => {
 
   return newOptions.filter((o) => o);
 };
+
+export const removeOptions = (options, toRemoveArray) =>
+  options.filter((o) => !toRemoveArray.includes(o));

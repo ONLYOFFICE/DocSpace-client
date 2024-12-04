@@ -29,6 +29,7 @@
   "FormRoomEmptyTitle": "양식 작성 룸에 오신 것을 환영합니다",
   "InviteNewUsers": "새 사용자 초대",
   "InviteRootRoomDescription": "{{productName}}에 새 구성원을 추가하기 위해 초대장을 보내세요",
+  "InviteUsersOptionDescription": "룸에서 공동 편집을 하기 위해 멤버 추가하세요",
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace 또는 Nextcloud에서 {{productName}}에 데이터를 가져오기하세요.",
   "MigrationDataTitle": "마이그레이션 데이터",
   "PublicRoomEmptyTitle": "공용 룸에 오신 것을 환영합니다",

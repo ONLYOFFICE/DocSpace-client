@@ -43,6 +43,7 @@
   "LdapSendWelcomeLetter": "Відправити вітальний лист",
   "LdapSendWelcomeLetterTooltip": "Якщо позначено, усі нові користувачі отримають вітальний лист. Доступно, лише коли атрибут пошти зіставляється з LDAP.",
   "LdapServer": "Сервер",
+  "LdapServerTooltip": "Введіть адресу сервера LDAP без номера порту.",
   "LdapSettings": "Параметри LDAP",
   "LdapSettingsCertCnNoMatch": "Ім'я сертифіката не відповідає імені хоста",
   "LdapSettingsCertExpired": "Строк дії сертифіката закінчився",

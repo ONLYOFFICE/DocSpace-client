@@ -372,7 +372,16 @@ class FilesStore {
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const docUrl =
-        !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);
+        !canOpenPlayer &&
+        !isFolder &&
+        getItemUrl(
+          id,
+          false,
+          this.categoryType,
+          needConvert,
+          false,
+          this.publicRoomStore.publicRoomKey,
+        );
 
       const href = isRecycleBinFolder
         ? null

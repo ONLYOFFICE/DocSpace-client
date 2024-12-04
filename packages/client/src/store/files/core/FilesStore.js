@@ -26,10 +26,6 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-} from "@docspace/shared/utils/socket";
 import {
   FileStatus,
   FilterType,
@@ -37,12 +33,17 @@ import {
 } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
+import { isDesktop } from "@docspace/shared/utils/device";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryType } from "SRC_DIR/helpers/category";
+import ThumbnailService from "../services/thumbnail/thumbnailService";
+import SocketService from "../services/socket/socketService";
+import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
+const storageViewAs = localStorage.getItem("viewAs");
 
 class FilesStore {
   constructor(
@@ -84,6 +85,7 @@ class FilesStore {
     this.filesController = new AbortController();
 
     this.socketService = new SocketService(this);
+    this.thumbnailService = new ThumbnailService(this);
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
@@ -122,12 +124,6 @@ class FilesStore {
    * @type {Object|null}
    */
   bufferSelection = null;
-
-  /**
-   * Thumbnails
-   * @type {Set}
-   */
-  thumbnails = new Set();
 
   /**
    * Queue for creating new files
@@ -192,6 +188,20 @@ class FilesStore {
    * @type {number|null}
    */
   pageItemsLength = null;
+
+  /**
+   * View mode for files display (tile, row, or table)
+   * @type {string}
+   */
+  privateViewAs =
+    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+
+  /**
+   * Thumbnails proxy
+   */
+  get thumbnails() {
+    return this.thumbnailService.thumbnails;
+  }
 
   get filesList() {
     //return [...this.folders, ...this.files];
@@ -537,6 +547,21 @@ class FilesStore {
     }
 
     return true;
+  }
+
+  get viewAs() {
+    const view = this.privateViewAs;
+
+    const { parentRoomType, roomType, isIndexedFolder } =
+      this.selectedFolderStore;
+    const currentDeviceType = this.settingsStore.currentDeviceType;
+
+    return getViewForCurrentRoom(view, {
+      currentDeviceType,
+      parentRoomType,
+      roomType,
+      indexing: isIndexedFolder,
+    });
   }
 
   updateSelectionStatus = (id, status, isEditing) => {
@@ -889,31 +914,7 @@ class FilesStore {
   };
 
   createThumbnails = async (files = null) => {
-    if ((this.viewAs !== "tile" || !this.files) && !files) return;
-
-    const currentFiles = files || this.files;
-
-    const newFiles = currentFiles.filter((f) => {
-      return (
-        typeof f.id !== "string" &&
-        f?.thumbnailStatus === thumbnailStatuses.WAITING &&
-        !this.thumbnails.has(`${f.id}|${f.versionGroup}`)
-      );
-    });
-
-    if (!newFiles.length) return;
-
-    if (this.thumbnails.size > THUMBNAILS_CACHE) this.thumbnails.clear();
-
-    newFiles.forEach((f) => this.thumbnails.add(`${f.id}|${f.versionGroup}`));
-
-    console.log("thumbnails", this.thumbnails);
-
-    const fileIds = newFiles.map((f) => f.id);
-
-    const res = await api.files.createThumbnails(fileIds);
-
-    return res;
+    return this.thumbnailService.createThumbnails(files);
   };
 }
 

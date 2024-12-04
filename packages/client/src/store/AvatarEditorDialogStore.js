@@ -74,12 +74,10 @@ class AvatarEditorDialogStore {
   };
 
   getUploadedLogoData = async () => {
-    const { uploadRoomLogo } = this.filesStore;
-
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, this.uploadedFile);
 
-    const responseData = await uploadRoomLogo(uploadLogoData);
+    const responseData = await api.rooms.uploadRoomLogo(uploadLogoData);
     const url = URL.createObjectURL(this.uploadedFile);
     const img = new Image();
 

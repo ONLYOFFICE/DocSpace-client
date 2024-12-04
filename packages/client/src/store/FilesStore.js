@@ -2910,10 +2910,6 @@ class FilesStore {
     };
   }
 
-  uploadRoomLogo(formData) {
-    return api.rooms.uploadRoomLogo(formData);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

@@ -167,12 +167,10 @@ class CreateEditRoomStore {
       });
     }
 
-    const { uploadRoomLogo } = this.filesStore;
-
     const uploadWatermarkData = new FormData();
     uploadWatermarkData.append(0, watermarkImage);
 
-    const response = await uploadRoomLogo(uploadWatermarkData);
+    const response = await api.rooms.uploadRoomLogo(uploadWatermarkData);
 
     const getMeta = (url) => {
       //url for this.watermarksSettings.image.viewUrl

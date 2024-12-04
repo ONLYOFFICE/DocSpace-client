@@ -567,11 +567,6 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const currentIsPublicRoomType =
-    isLoading && typeof stateIsPublicRoomType === "boolean"
-      ? stateIsPublicRoomType
-      : isPublicRoomType;
-
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
@@ -895,7 +890,7 @@ export default inject(
     const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
-      isLoading || !security?.CopyLink || isPublicRoom || isArchive
+      !security?.CopyLink || isPublicRoom || isArchive
         ? false
         : security?.Read && isShared;
 

@@ -24,23 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect } from "react";
 import { ThemeProvider as Provider } from "styled-components";
-
-import { GlobalStyle } from "../global-style";
-
-import { ThemeProviderProps } from "./ThemeProvider.types";
+import type { ThemeProviderProps } from "./ThemeProvider.types";
+import "./ThemeProvider.scss";
 
 const ThemeProvider = ({
   theme,
   currentColorScheme,
   children,
 }: ThemeProviderProps) => {
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute("data-theme", theme.isBase ? "light" : "dark");
+    root.style.setProperty("--interface-direction", theme.interfaceDirection);
+  }, [theme.isBase, theme.interfaceDirection]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (currentColorScheme) {
+      root.style.setProperty(
+        "--color-scheme-main-accent",
+        currentColorScheme.main.accent,
+      );
+      root.style.setProperty(
+        "--color-scheme-text-accent",
+        currentColorScheme.text.accent,
+      );
+      root.style.setProperty(
+        "--color-scheme-main-buttons",
+        currentColorScheme.main.buttons,
+      );
+      root.style.setProperty(
+        "--color-scheme-text-buttons",
+        currentColorScheme.text.buttons,
+      );
+    }
+  }, [currentColorScheme]);
+
   return (
-    <Provider theme={{ ...theme, currentColorScheme }}>
-      <GlobalStyle />
-      {children}
-    </Provider>
+    <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
   );
 };
 

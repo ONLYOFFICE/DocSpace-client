@@ -78,3 +78,8 @@ declare module "resize-image" {
   const value: ResizeImage;
   export default value;
 }
+
+declare module "*.scss" {
+  const content: { [className: string]: string | string[] };
+  export default content;
+}

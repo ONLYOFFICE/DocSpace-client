@@ -18,6 +18,7 @@
     "store",
     "dialogs",
     "pages",
+    "styles",
     // add all files in which you see
     // the "parserOptions.project" error
     ".eslintrc.cjs",
@@ -28,6 +29,6 @@
     "index.d.ts",
     "tsconfig.eslint.json",
     "routes",
-    "polyfills",
+    "polyfills"
   ]
 }

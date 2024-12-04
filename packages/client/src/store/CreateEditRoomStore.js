@@ -214,7 +214,6 @@ class CreateEditRoomStore {
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
-    const { editRoom } = this.filesStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
@@ -309,7 +308,7 @@ class CreateEditRoomStore {
       }
 
       if (Object.keys(editRoomParams).length)
-        await editRoom(room.id, editRoomParams);
+        await api.rooms.editRoom(room.id, editRoomParams);
 
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, roomOwner.id));

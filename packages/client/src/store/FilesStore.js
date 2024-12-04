@@ -2873,10 +2873,6 @@ class FilesStore {
     return api.rooms.createRoomInThirdpary(thirpartyFolderId, roomParams);
   }
 
-  editRoom(id, roomParams) {
-    return api.rooms.editRoom(id, roomParams);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

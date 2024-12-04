@@ -2918,10 +2918,6 @@ class FilesStore {
     return api.rooms.addLogoToRoom(id, icon);
   }
 
-  removeLogoFromRoom(id) {
-    return api.rooms.removeLogoFromRoom(id);
-  }
-
   setRoomMembersFilter = (roomMembersFilter) => {
     this.roomMembersFilter = roomMembersFilter;
   };

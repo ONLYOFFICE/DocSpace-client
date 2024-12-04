@@ -217,7 +217,7 @@ class CreateEditRoomStore {
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
-    const { editRoom, removeLogoFromRoom } = this.filesStore;
+    const { editRoom } = this.filesStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
@@ -319,7 +319,7 @@ class CreateEditRoomStore {
       }
 
       if (isDeleteLogo) {
-        requests.push(removeLogoFromRoom(room.id));
+        requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
       if (isIndexingChanged)

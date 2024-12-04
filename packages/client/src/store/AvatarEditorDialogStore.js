@@ -36,6 +36,7 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
@@ -96,8 +97,7 @@ class AvatarEditorDialogStore {
 
     if (!this.uploadedFile) return;
 
-    const { calculateRoomLogoParams, setActiveFolders, updateRoom } =
-      this.filesStore;
+    const { setActiveFolders, updateRoom } = this.filesStore;
 
     const data = await this.getUploadedLogoData();
     const { responseData, url, img } = data;

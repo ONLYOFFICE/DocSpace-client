@@ -42,6 +42,7 @@ import SocketService from "../services/socket/socketService";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import FileService from "../services/file/fileService";
 import SelectionService from "../services/selection/selectionService";
+import FilterService from "../services/filter/filterService";
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
@@ -90,6 +91,7 @@ class FilesStore {
     this.thumbnailService = new ThumbnailService(this);
     this.fileService = new FileService(this);
     this.selectionService = new SelectionService(this);
+    this.filterService = new FilterService(this);
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
@@ -635,8 +637,7 @@ class FilesStore {
   };
 
   setFilter = (filter) => {
-    filter.pageCount = 100;
-    this.filter = filter;
+    this.filterService.setFilter(filter);
   };
 
   setFolders = (folders) => {
@@ -676,36 +677,7 @@ class FilesStore {
   };
 
   setRoomsFilter = (filter) => {
-    filter.pageCount = 100;
-
-    const isArchive = this.categoryType === CategoryType.Archive;
-
-    const key = isArchive
-      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
-      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
-
-    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
-    if (sharedStorageFilter) {
-      sharedStorageFilter.sortBy = filter.sortBy;
-      sharedStorageFilter.sortOrder = filter.sortOrder;
-
-      const value = toJSON(sharedStorageFilter);
-      localStorage.setItem(key, value);
-    }
-
-    this.roomsFilter = filter;
-
-    runInAction(() => {
-      if (filter && this.isHidePagination) {
-        this.isHidePagination = false;
-      }
-    });
-
-    runInAction(() => {
-      if (filter && this.isLoadingFilesFind) {
-        this.isLoadingFilesFind = false;
-      }
-    });
+    this.filterService.setRoomsFilter(filter);
   };
 
   setFiles = (files) => {

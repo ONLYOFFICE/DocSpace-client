@@ -2974,16 +2974,6 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(selectionType, id, signal = null, requestToken, filter) {
-    return api.rooms.getHistory(
-      selectionType,
-      id,
-      signal,
-      requestToken,
-      filter,
-    );
-  }
-
   getRoomHistory(id) {
     return api.rooms.getRoomHistory(id);
   }
@@ -3762,48 +3752,6 @@ class FilesStore {
 
     return cbMenu;
   }
-
-  getCheckboxItemLabel = (t, key) => {
-    switch (key) {
-      case "all":
-        return t("All");
-      case FilterType.FoldersOnly:
-        return t("Translations:Folders");
-      case FilterType.DocumentsOnly:
-        return t("Common:Documents");
-      case FilterType.PresentationsOnly:
-        return t("Translations:Presentations");
-      case FilterType.SpreadsheetsOnly:
-        return t("Translations:Spreadsheets");
-      case FilterType.ImagesOnly:
-        return t("Images");
-      case FilterType.MediaOnly:
-        return t("Media");
-      case FilterType.ArchiveOnly:
-        return t("Archives");
-      case FilterType.FilesOnly:
-        return t("Translations:Files");
-      case `room-${RoomsType.FillingFormsRoom}`:
-        return t("Common:FillingFormRooms");
-      case `room-${RoomsType.CustomRoom}`:
-        return t("Common:CustomRooms");
-      case `room-${RoomsType.EditingRoom}`:
-        return t("Common:CollaborationRooms");
-      case `room-${RoomsType.ReviewRoom}`:
-        return t("Common:Review");
-      case `room-${RoomsType.FormRoom}`:
-        return t("Common:FormRoom");
-      case `room-${RoomsType.ReadOnlyRoom}`:
-        return t("Common:ViewOnlyRooms");
-      case `room-${RoomsType.PublicRoom}`:
-        return t("Common:PublicRoomLabel");
-      case `room-${RoomsType.VirtualDataRoom}`:
-        return t("Common:VirtualDataRoom");
-
-      default:
-        return "";
-    }
-  };
 
   get sortedFiles() {
     const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =

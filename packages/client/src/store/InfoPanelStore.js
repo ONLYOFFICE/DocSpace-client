@@ -60,6 +60,7 @@ import {
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import api from "@docspace/shared/api";
 
 const observedKeys = [
   "id",
@@ -773,7 +774,7 @@ class InfoPanelStore {
   };
 
   fetchHistory = async (abortControllerSignal = null) => {
-    const { getHistory, getRoomLinks } = this.filesStore;
+    const { getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
 
     let selectionType = "file";
@@ -798,13 +799,14 @@ class InfoPanelStore {
       count: this.historyFilter.pageCount,
     };
 
-    return getHistory(
-      selectionType,
-      this.infoPanelSelection.id,
-      abortControllerSignal,
-      this.infoPanelSelection?.requestToken,
-      filter,
-    )
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        abortControllerSignal,
+        this.infoPanelSelection?.requestToken,
+        filter,
+      )
       .then(async (data) => {
         if (withLinks) {
           const links = await getRoomLinks(this.infoPanelSelection.id);
@@ -826,7 +828,7 @@ class InfoPanelStore {
   };
 
   fetchMoreHistory = async (abortControllerSignal = null) => {
-    const { getHistory, getRoomLinks } = this.filesStore;
+    const { getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
     const oldHistory = this.selectionHistory;
 
@@ -853,13 +855,14 @@ class InfoPanelStore {
       count: this.historyFilter.pageCount,
     };
 
-    return getHistory(
-      selectionType,
-      this.infoPanelSelection.id,
-      abortControllerSignal,
-      this.infoPanelSelection?.requestToken,
-      filter,
-    )
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        abortControllerSignal,
+        this.infoPanelSelection?.requestToken,
+        filter,
+      )
       .then(async (data) => {
         if (withLinks) {
           const links = await getRoomLinks(this.infoPanelSelection.id);

@@ -466,7 +466,7 @@ class CreateEditRoomStore {
   };
 
   onOpenNewRoom = async (room) => {
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
 
@@ -481,7 +481,7 @@ class CreateEditRoomStore {
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
 
-    setIsSectionFilterLoading(true);
+    setIsSectionBodyLoading(true);
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 

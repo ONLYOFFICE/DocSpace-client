@@ -193,8 +193,6 @@ export const useOptions = (
 
     const path = getCategoryUrl(CategoryType.Personal);
 
-    // setIsSectionFilterLoading(true);
-
     return {
       to: {
         pathname: path,

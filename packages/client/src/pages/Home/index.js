@@ -185,14 +185,9 @@ const PureHome = (props) => {
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
-      setIsSectionFilterLoading(param, !withoutTimer);
       setIsSectionBodyLoading(param, !withoutTimer);
     },
-    [
-      setIsSectionHeaderLoading,
-      setIsSectionFilterLoading,
-      setIsSectionBodyLoading,
-    ],
+    [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
 
   const { onDrop } = useFiles({

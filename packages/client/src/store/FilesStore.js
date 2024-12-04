@@ -4358,10 +4358,6 @@ class FilesStore {
     return Math.floor(containerWidth / minTileWidth);
   };
 
-  setInvitationLinks = async (roomId, title, access, linkId) => {
-    return api.rooms.setInvitationLinks(roomId, linkId, title, access);
-  };
-
   withCtrlSelect = (item) => {
     this.setHotkeyCaret(item);
     this.setHotkeyCaretStart(item);

@@ -25,11 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import {
-  FileStatus,
-  FilterType,
-  RoomsProviderType,
-} from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils/device";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -41,11 +36,386 @@ import FileService from "../services/file/fileService";
 import SelectionService from "../services/selection/selectionService";
 import FilterService from "../services/filter/filterService";
 import ItemService from "../services/item/itemService";
-import { getItemUrl } from "SRC_DIR/helpers/filesUtils";
 
 const storageViewAs = localStorage.getItem("viewAs");
 
 class FilesStore {
+  /**
+   * Authentication store instance
+   * @type {Object}
+   */
+  authStore;
+  /**
+   * User store instance
+   * @type {Object}
+   */
+  userStore;
+  /**
+   * Current tariff status store instance
+   * @type {Object}
+   */
+  currentTariffStatusStore;
+  /**
+   * Selected folder store instance
+   * @type {Object}
+   */
+  selectedFolderStore;
+  /**
+   * Tree folders store instance
+   * @type {Object}
+   */
+  treeFoldersStore;
+  /**
+   * Files settings store instance
+   * @type {Object}
+   */
+  filesSettingsStore;
+  /**
+   * Third party integration store instance
+   * @type {Object}
+   */
+  thirdPartyStore;
+  /**
+   * Client loading state store instance
+   * @type {Object}
+   */
+  clientLoadingStore;
+  /**
+   * Info panel store instance
+   * @type {Object}
+   */
+  infoPanelStore;
+  /**
+   * Access rights store instance
+   * @type {Object}
+   */
+  accessRightsStore;
+  /**
+   * Public room store instance
+   * @type {Object}
+   */
+  publicRoomStore;
+  /**
+   * Settings store instance
+   * @type {Object}
+   */
+  settingsStore;
+  /**
+   * Current quota store instance
+   * @type {Object}
+   */
+  currentQuotaStore;
+  /**
+   * Indexing store instance
+   * @type {Object}
+   */
+  indexingStore;
+  /**
+   * Plugin store instance
+   * @type {Object}
+   */
+  pluginStore;
+
+  /**
+   * View mode for files display (tile, row, or table)
+   * @type {string}
+   */
+  privateViewAs =
+    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+  /**
+   * Flag indicating if drag operation is in progress
+   * @type {boolean}
+   */
+  dragging = false;
+  /**
+   * URL for privacy instructions
+   * @type {string}
+   */
+  privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
+
+  /**
+   * Store initialization status
+   * @type {boolean}
+   */
+  isInit = false;
+  /**
+   * Flag indicating if a row item is being updated
+   * @type {boolean}
+   */
+  isUpdatingRowItem = false;
+  /**
+   * Flag for password entry process
+   * @type {boolean}
+   */
+  passwordEntryProcess = false;
+  /**
+   * X coordinate for tooltip positioning
+   * @type {number}
+   */
+  tooltipPageX = 0;
+  /**
+   * Y coordinate for tooltip positioning
+   * @type {number}
+   */
+  tooltipPageY = 0;
+  /**
+   * Flag indicating drag start
+   * @type {boolean}
+   */
+  startDrag = false;
+
+  /**
+   * Flag to prevent concurrent room fetching
+   * @type {boolean}
+   */
+  alreadyFetchingRooms = false;
+  /**
+   * Collection of files
+   * @type {Array}
+   */
+  files = [];
+  /**
+   * Collection of folders
+   * @type {Array}
+   */
+  folders = [];
+  /**
+   * Currently selected items
+   * @type {Array}
+   */
+  selection = [];
+
+  /**
+   * Temporary selection buffer
+   * @type {Object|null}
+   */
+  bufferSelection = null;
+  /**
+   * Selection state
+   * @type {string}
+   */
+  selected = "close";
+  /**
+   * Filter for files
+   * @type {Object}
+   */
+  filter = FilesFilter.getDefault();
+
+  /**
+   * Filter for rooms
+   * @type {Object}
+   */
+  roomsFilter = RoomsFilter.getDefault();
+
+  /**
+   * Filter for members
+   * @type {Object}
+   */
+  membersFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
+
+  /**
+   * Category type for the current folder
+   * @type {string}
+   */
+  categoryType = getCategoryType(window.location);
+
+  /**
+   * Timeout for loading files
+   * @type {number|null}
+   */
+  loadTimeout = null;
+  /**
+   * Hotkey caret
+   * @type {Object|null}
+   */
+  hotkeyCaret = null;
+  /**
+   * Hotkey caret start
+   * @type {Object|null}
+   */
+  hotkeyCaretStart = null;
+
+  /**
+   * Active files
+   * @type {Array}
+   */
+  activeFiles = [];
+
+  /**
+   * Active folders
+   * @type {Array}
+   */
+  activeFolders = [];
+
+  /**
+   * Flag indicating if the first element is checked
+   * @type {boolean}
+   */
+  firstElemChecked = false;
+  /**
+   * Flag indicating if the header border is visible
+   * @type {boolean}
+   */
+  headerBorder = false;
+
+  /**
+   * Flag indicating if hotkeys are enabled
+   * @type {boolean}
+   */
+  enabledHotkeys = true;
+
+  /**
+   * Created item
+   * @type {Object|null}
+   */
+  createdItem = null;
+  /**
+   * Item to scroll to
+   * @type {Object|null}
+   */
+  scrollToItem = null;
+
+  /**
+   * Flag indicating if a room has been created
+   * @type {boolean}
+   */
+  roomCreated = false;
+
+  /**
+   * Flag indicating if files are being loaded
+   * @type {boolean}
+   */
+  isLoadingFilesFind = false;
+
+  /**
+   * Length of the page items
+   * @type {number|null}
+   */
+  pageItemsLength = null;
+
+  /**
+   * Flag indicating if pagination is hidden
+   * @type {boolean}
+   */
+  isHidePagination = false;
+  /**
+   * Flag indicating if the trash is empty
+   * @type {boolean}
+   */
+  trashIsEmpty = false;
+  /**
+   * Flag indicating if the main button is visible on mobile
+   * @type {boolean}
+   */
+  mainButtonMobileVisible = true;
+  /**
+   * Flag indicating if files are being loaded
+   * @type {boolean}
+   */
+  filesIsLoading = false;
+
+  /**
+   * Flag indicating if the page is empty
+   * @type {boolean}
+   */
+  isEmptyPage = true;
+  /**
+   * Flag indicating if the page has been loaded
+   * @type {boolean}
+   */
+  isLoadedFetchFiles = false;
+  /**
+   * Temporary action files IDs
+   * @type {Array}
+   */
+  tempActionFilesIds = [];
+
+  /**
+   * Temporary action folders IDs
+   * @type {Array}
+   */
+  tempActionFoldersIds = [];
+
+  /**
+   * Flag indicating if there is an error with the room not being available
+   * @type {boolean}
+   */
+  isErrorRoomNotAvailable = false;
+
+  /**
+   * Rooms controller
+   * @type {AbortController}
+   */
+  roomsController = null;
+  /**
+   * Files controller
+   * @type {AbortController}
+   */
+  filesController = null;
+
+  /**
+   * Flag indicating if the search should be cleared
+   * @type {boolean}
+   */
+  clearSearch = false;
+
+  /**
+   * Flag indicating if the page is loaded
+   * @type {boolean}
+   */
+  isLoadedEmptyPage = false;
+  /**
+   * Flag indicating if the current room notifications are muted
+   * @type {boolean}
+   */
+  isMuteCurrentRoomNotifications = false;
+  /**
+   * Flag indicating if the preview is enabled
+   * @type {boolean}
+   */
+  isPreview = false;
+  /**
+   * Temporary filter
+   * @type {Object|null}
+   */
+  tempFilter = null;
+
+  /**
+   * Highlighted file
+   * @type {Object}
+   */
+  highlightFile = {};
+  /**
+   * Thumbnails
+   * @type {Set}
+   */
+  thumbnails = new Set();
+  /**
+   * Flag indicating if a move operation is in progress
+   * @type {boolean}
+   */
+  movingInProgress = false;
+  /**
+   * Queue for creating new files
+   * @type {Queue}
+   */
+  createNewFilesQueue = new Queue({
+    concurrent: 5,
+    interval: 500,
+    start: true,
+  });
+
+  /**
+   * Hotkeys clipboard
+   * @type {Array}
+   */
+  hotkeysClipboard = [];
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -95,112 +465,6 @@ class FilesStore {
   }
 
   /**
-   * Collection of files
-   * @type {Array}
-   */
-  files = [];
-  /**
-   * Collection of folders
-   * @type {Array}
-   */
-  folders = [];
-
-  /**
-   * Filter for files
-   * @type {Object}
-   */
-  filter = FilesFilter.getDefault();
-
-  /**
-   * Filter for rooms
-   * @type {Object}
-   */
-  roomsFilter = RoomsFilter.getDefault();
-
-  /**
-   * Currently selected items
-   * @type {Array}
-   */
-  selection = [];
-
-  /**
-   * Temporary selection buffer
-   * @type {Object|null}
-   */
-  bufferSelection = null;
-
-  /**
-   * Queue for creating new files
-   * @type {Queue}
-   */
-  createNewFilesQueue = new Queue({
-    concurrent: 5,
-    interval: 500,
-    start: true,
-  });
-
-  /**
-   * Flag indicating if a room has been created
-   * @type {boolean}
-   */
-  roomCreated = false;
-
-  /**
-   * Temporary action files IDs
-   * @type {Array}
-   */
-  tempActionFilesIds = [];
-
-  /**
-   * Active files
-   * @type {Array}
-   */
-  activeFiles = [];
-
-  /**
-   * Active folders
-   * @type {Array}
-   */
-  activeFolders = [];
-
-  /**
-   * Flag indicating if the page is empty
-   * @type {boolean}
-   */
-  isEmptyPage = true;
-
-  /**
-   * Category type for the current folder
-   * @type {string}
-   */
-  categoryType = getCategoryType(window.location);
-
-  /**
-   * Flag indicating if pagination is hidden
-   * @type {boolean}
-   */
-  isHidePagination = false;
-
-  /**
-   * Flag indicating if files are being loaded
-   * @type {boolean}
-   */
-  isLoadingFilesFind = false;
-
-  /**
-   * Length of the page items
-   * @type {number|null}
-   */
-  pageItemsLength = null;
-
-  /**
-   * View mode for files display (tile, row, or table)
-   * @type {string}
-   */
-  privateViewAs =
-    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
-
-  /**
    * Thumbnails proxy
    */
   get thumbnails() {
@@ -210,10 +474,6 @@ class FilesStore {
   get filesList() {
     return this.itemService.getFilesList();
   }
-
-  getFilesListItems = (items) => {
-    return this.itemService.getFilesListItems(items);
-  };
 
   get showNewFilesInList() {
     if (
@@ -240,6 +500,10 @@ class FilesStore {
       indexing: isIndexedFolder,
     });
   }
+
+  getFilesListItems = (items) => {
+    return this.itemService.getFilesListItems(items);
+  };
 
   updateSelectionStatus = (id, status, isEditing) => {
     this.selectionService.updateSelectionStatus(id, status, isEditing);

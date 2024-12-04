@@ -782,14 +782,14 @@ export default inject(
     } = filesStore;
 
     const {
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
       showHeaderLoader,
 
       isLoading,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =

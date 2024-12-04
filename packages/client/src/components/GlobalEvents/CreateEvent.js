@@ -48,7 +48,6 @@ const CreateEvent = ({
   templateId,
   fromTemplate,
   onClose,
-  setIsLoading,
 
   createFolder,
   addActiveItems,
@@ -124,8 +123,6 @@ const CreateEvent = ({
 
     const isMakeFormFromFile = templateId ? true : false;
 
-    setIsLoading(true);
-
     let newValue = value;
 
     if (value.trim() === "") {
@@ -163,7 +160,6 @@ const CreateEvent = ({
 
           clearActiveOperations(null, folderIds);
           onCloseAction();
-          return setIsLoading(false);
         });
     } else {
       try {
@@ -222,7 +218,6 @@ const CreateEvent = ({
       } catch (error) {
         toastr.error(error);
       } finally {
-        setIsLoading(false);
         onCloseAction();
       }
     }
@@ -259,12 +254,6 @@ export default inject(
     currentTariffStatusStore,
     publicRoomStore,
   }) => {
-    const { setIsSectionBodyLoading } = clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionBodyLoading(param);
-    };
-
     const publicRoomKey = publicRoomStore.publicRoomKey;
 
     const {
@@ -303,7 +292,6 @@ export default inject(
       setPortalTariff,
       setEventDialogVisible,
       eventDialogVisible,
-      setIsLoading,
       createFile,
       createFolder,
       addActiveItems,

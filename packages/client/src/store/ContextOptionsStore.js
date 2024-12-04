@@ -1139,6 +1139,8 @@ class ContextOptionsStore {
       },
     ];
 
+    const canMute = item.security?.Mute && !this.publicRoomStore.isPublicRoom;
+
     const muteOptions = [
       {
         id: "option_unmute-room",
@@ -1146,7 +1148,7 @@ class ContextOptionsStore {
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: !canMute,
         "data-action": "unmute",
         action: "unmute",
       },
@@ -1156,7 +1158,7 @@ class ContextOptionsStore {
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: !canMute,
         "data-action": "mute",
         action: "mute",
       },

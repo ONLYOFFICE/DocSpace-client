@@ -1491,11 +1491,11 @@ class FilesActionStore {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
@@ -2410,7 +2410,7 @@ class FilesActionStore {
     const { enablePlugins } = this.settingsStore;
     const { isOwner, isAdmin } = this.userStore.user;
 
-    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
@@ -2424,7 +2424,7 @@ class FilesActionStore {
     }
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const isMediaOrImage =
@@ -2574,7 +2574,7 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
-    const { isLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2630,6 +2630,9 @@ class FilesActionStore {
       const contactsTab = getContactsView();
 
       if (insideGroupBackUrl) {
+        console.log("set");
+        setIsSectionBodyLoading(true, false);
+
         setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
@@ -2646,6 +2649,8 @@ class FilesActionStore {
       clearFiles();
 
       if (window.location.search.includes("group")) {
+        setIsSectionBodyLoading(true, false);
+
         setSelectedNode(["accounts", "groups", "filter"]);
         setContactsTab("groups");
 

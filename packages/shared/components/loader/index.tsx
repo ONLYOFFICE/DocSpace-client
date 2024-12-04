@@ -26,60 +26,57 @@
 
 import React from "react";
 
+import { Text } from "../text";
+
 import { Oval } from "./sub-components/Oval";
 import { DualRing } from "./sub-components/DualRing";
 import { Rombs } from "./sub-components/Rombs";
 import { Track } from "./sub-components/Track";
-import { Base } from "./sub-components/Base";
 import { LoaderProps } from "./Loader.types";
 import { LoaderTypes } from "./Loader.enums";
 
 export { LoaderTypes };
+const Loader = ({ ...props }: LoaderProps) => {
+  const { type, color, size, label, className, style, id } = props;
 
-const Loader = ({
-  type = LoaderTypes.base,
-  color,
-  size = "40px",
-  label = "Loading content, please wait.",
-  className,
-  style,
-  id,
-  primary = false,
-  isDisabled = false,
-}: LoaderProps) => {
-  const renderLoader = () => {
-    const commonProps = { color, size, label, primary, isDisabled };
-
-    switch (type) {
+  const svgRenderer = (t?: LoaderTypes) => {
+    switch (t) {
       case LoaderTypes.oval:
-        return <Oval {...commonProps} />;
+        return <Oval {...props} />;
       case LoaderTypes.dualRing:
-        return <DualRing {...commonProps} />;
+        return <DualRing {...props} />;
       case LoaderTypes.rombs:
-        return <Rombs {...commonProps} />;
+        return <Rombs {...props} />;
       case LoaderTypes.track:
-        return <Track {...commonProps} />;
+        return <Track {...props} />;
       default:
-        return <Base {...commonProps} />;
+        return (
+          <span style={{ ...style }}>
+            <Text color={color} fontSize={size}>
+              {label}
+            </Text>
+          </span>
+        );
     }
   };
 
   return (
     <div
+      aria-busy="true"
       className={className}
       style={style}
       id={id}
       data-testid="loader"
-      data-type={type}
-      data-disabled={isDisabled ? "true" : undefined}
-      data-primary={primary ? "true" : undefined}
-      role="status"
-      aria-busy="true"
-      aria-label={label}
     >
-      {renderLoader()}
+      {svgRenderer(type)}
     </div>
   );
+};
+
+Loader.default = {
+  type: LoaderTypes.base,
+  size: "40px",
+  label: "Loading content, please wait.",
 };
 
 export { Loader };

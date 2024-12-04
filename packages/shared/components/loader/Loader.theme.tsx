@@ -24,10 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum LoaderTypes {
-  base = "base",
-  oval = "oval",
-  dualRing = "dual-ring",
-  rombs = "rombs",
-  track = "track",
-}
+import React, { PropsWithChildren, forwardRef, useContext } from "react";
+import { ThemeContext } from "styled-components";
+
+import { StyledTrackTheme } from "./Loader.styled";
+import { LoaderThemeProps } from "./Loader.types";
+
+const TrackTheme = forwardRef<
+  SVGSVGElement,
+  PropsWithChildren<LoaderThemeProps>
+>((props, ref) => {
+  const defaultTheme = useContext(ThemeContext);
+
+  const currentColorScheme = defaultTheme?.currentColorScheme;
+
+  return (
+    <StyledTrackTheme
+      {...props}
+      ref={ref}
+      $currentColorScheme={currentColorScheme}
+    />
+  );
+});
+
+TrackTheme.displayName = "StyledTrackTheme";
+
+export default TrackTheme;

@@ -44,14 +44,13 @@ export const ThemeProvider = ({
     const root = document.documentElement;
 
     if (currentColorScheme) {
-      console.log("currentColorScheme", currentColorScheme);
       root.style.setProperty(
         "--color-scheme-main-accent",
         currentColorScheme.main.accent,
       );
       root.style.setProperty(
         "--color-scheme-text-accent",
-        currentColorScheme.text?.accent,
+        currentColorScheme.text.accent,
       );
       root.style.setProperty(
         "--color-scheme-main-buttons",
@@ -59,7 +58,7 @@ export const ThemeProvider = ({
       );
       root.style.setProperty(
         "--color-scheme-text-buttons",
-        currentColorScheme.text?.buttons,
+        currentColorScheme.text.buttons,
       );
     }
   }, [currentColorScheme]);

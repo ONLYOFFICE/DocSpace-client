@@ -26,67 +26,37 @@
 
 import React from "react";
 
-import { BaseLoaderProps } from "../Loader.types";
+import {
+  LoadingLabel,
+  LoadingWrapper,
+  DotWrapper,
+  Dot,
+} from "../Loader.styled";
 
-import styles from "./Base.module.scss";
+const LoadingDots = (props: {
+  color?: string;
+  size?: string;
+  label?: string;
+}) => {
+  const {
+    label = "Loading content, please wait",
+    size = "18px",
+    color = "",
+    ...rest
+  } = props;
 
-export const Base = React.forwardRef<HTMLDivElement, BaseLoaderProps>(
-  (
-    {
-      label = "Loading content, please wait",
-      size = "18px",
-      color,
-      primary,
-      isDisabled,
-      ...rest
-    },
-    ref,
-  ) => {
-    const dotSize = React.useMemo(() => {
-      const numericSize = parseInt(size, 10);
-      return Number.isNaN(numericSize)
-        ? 4
-        : Math.max(4, Math.floor(numericSize / 4));
-    }, [size]);
+  const numberSize = Number(size?.replace("px", "")) || 18;
 
-    const mergedStyle = React.useMemo(
-      () => ({
-        ...(color && { color }),
-      }),
-      [color],
-    );
+  return (
+    <LoadingWrapper size={size || "18px"} {...rest}>
+      <LoadingLabel>{label}</LoadingLabel>
+      <DotWrapper>
+        <Dot size={numberSize} color={color} {...rest} delay="0s" />
+        <Dot size={numberSize} color={color} {...rest} delay=".2s" />
+        <Dot size={numberSize} color={color} {...rest} delay=".4s" />
+      </DotWrapper>
+    </LoadingWrapper>
+  );
+};
 
-    const dots = ["0s", "0.2s", "0.4s"];
-
-    return (
-      <div
-        ref={ref}
-        className={[styles.wrapper].filter(Boolean).join(" ")}
-        style={mergedStyle}
-        data-primary={primary ? "true" : undefined}
-        data-disabled={isDisabled ? "true" : undefined}
-        role="status"
-        aria-label={label}
-        aria-busy="true"
-        {...rest}
-      >
-        <span className={styles.label}>{label}</span>
-        <div className={styles.dotWrapper}>
-          {dots.map((delay) => (
-            <span
-              key={delay}
-              className={styles.dot}
-              data-delay={delay}
-              style={{
-                width: `${dotSize}px`,
-                height: `${dotSize}px`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  },
-);
-
-Base.displayName = "Base";
+export { LoadingDots };

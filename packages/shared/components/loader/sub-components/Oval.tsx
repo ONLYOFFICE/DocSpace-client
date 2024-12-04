@@ -25,29 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { BaseLoaderProps } from "../Loader.types";
+
 import { StyledOval } from "../Loader.styled";
 
 export const Oval = ({
   size,
   color,
   label,
-  primary,
-  isDisabled,
-}: BaseLoaderProps) => (
+}: {
+  size?: string;
+  color?: string;
+  label?: string;
+}) => (
   <StyledOval
     size={size}
     color={color}
     viewBox="0 0 38 38"
     xmlns="http://www.w3.org/2000/svg"
-    data-primary={primary ? "true" : undefined}
-    data-disabled={isDisabled ? "true" : undefined}
-    role="status"
-    aria-busy="true"
     aria-label={label}
   >
     <g fill="none" fillRule="evenodd">
-      <g transform="translate(1 1)" stroke="currentColor" strokeWidth="2">
+      <g transform="translate(1 1)" strokeWidth="2">
         <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
         <path d="M36 18c0-9.94-8.06-18-18-18">
           <animateTransform
@@ -63,5 +61,3 @@ export const Oval = ({
     </g>
   </StyledOval>
 );
-
-Oval.displayName = "Oval";

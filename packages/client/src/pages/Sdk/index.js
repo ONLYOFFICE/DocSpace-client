@@ -38,6 +38,7 @@ import {
   frameCallCommand,
 } from "@docspace/shared/utils/common";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
 
 const Sdk = ({
   t,
@@ -52,7 +53,6 @@ const Sdk = ({
   userId,
   updateProfileCulture,
   getRoomsIcon,
-  getFilePrimaryLink,
   getFilesSettings,
   getPrimaryLink,
 }) => {
@@ -219,14 +219,14 @@ const Sdk = ({
       };
 
       if (data.inPublic) {
-        const { sharedTo } = await getFilePrimaryLink(data.id);
+        const { sharedTo } = await api.files.getFileLink(data.id);
         const { id, title, requestToken, primary } = sharedTo;
         enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
       frameCallEvent({ event: "onSelectCallback", data: enrichedData });
     },
-    [frameCallEvent, getIcon, getFilePrimaryLink],
+    [frameCallEvent, getIcon],
   );
 
   const onClose = useCallback(() => {
@@ -321,7 +321,7 @@ export const Component = inject(
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { getFilePrimaryLink, getPrimaryLink } = filesStore;
+    const { getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -336,7 +336,6 @@ export const Component = inject(
       isLoaded,
       updateProfileCulture,
       userId: user?.id,
-      getFilePrimaryLink,
       getFilesSettings,
       getPrimaryLink,
     };

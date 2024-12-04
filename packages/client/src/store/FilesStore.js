@@ -37,7 +37,6 @@ import {
   FileStatus,
   RoomsType,
   RoomsProviderType,
-  ShareAccessRights,
   Events,
   FilterKeys,
   RoomSearchArea,
@@ -85,7 +84,6 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
-import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
 
 const { FilesFilter, RoomsFilter } = api;
@@ -4102,51 +4100,6 @@ class FilesStore {
     return this.getOptions(selection, true);
   };
 
-  getShareUsers(folderIds, fileIds) {
-    // return api.files.getShareFiles(fileIds, folderIds);
-  }
-
-  // setShareFiles = (
-  //   folderIds,
-  //   fileIds,
-  //   share,
-  //   notify,
-  //   sharingMessage,
-  //   externalAccess,
-  //   ownerId
-  // ) => {
-  //   let externalAccessRequest = [];
-  //   if (fileIds.length === 1 && externalAccess !== null) {
-  //     externalAccessRequest = fileIds.map((id) =>
-  //       api.files.setExternalAccess(id, externalAccess)
-  //     );
-  //   }
-
-  //   const ownerChangeRequest = ownerId
-  //     ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
-  //     : [];
-
-  //   const shareRequest = !!share.length
-  //     ? [
-  //         api.files.setShareFiles(
-  //           fileIds,
-  //           folderIds,
-  //           share,
-  //           notify,
-  //           sharingMessage
-  //         ),
-  //       ]
-  //     : [];
-
-  //   const requests = [
-  //     ...ownerChangeRequest,
-  //     ...shareRequest,
-  //     ...externalAccessRequest,
-  //   ];
-
-  //   return Promise.all(requests);
-  // };
-
   markItemAsFavorite = (id) => api.files.markAsFavorite(id);
 
   removeItemFromFavorite = (id) => api.files.removeFromFavorite(id);
@@ -4417,10 +4370,6 @@ class FilesStore {
     return api.rooms.getRoomSecurityInfo(id).then((res) => res.items);
   };
 
-  setRoomSecurity = async (id, data) => {
-    return api.rooms.setRoomSecurity(id, data);
-  };
-
   withCtrlSelect = (item) => {
     this.setHotkeyCaret(item);
     this.setHotkeyCaretStart(item);
@@ -4561,10 +4510,6 @@ class FilesStore {
     }
 
     return link;
-  };
-
-  getFilePrimaryLink = async (fileId) => {
-    return api.files.getFileLink(fileId);
   };
 
   setRoomShared = (roomId, shared) => {

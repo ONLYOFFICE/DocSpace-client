@@ -44,7 +44,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 
-import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
@@ -65,7 +64,6 @@ const InvitePanel = ({
   setInvitePanelOptions,
   t,
   visible,
-  setRoomSecurity,
   getRoomSecurityInfo,
   defaultAccess,
   setInfoPanelIsMobileHidden,
@@ -320,7 +318,7 @@ const InvitePanel = ({
       const isRooms = roomId !== -1;
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : await setRoomSecurity(roomId, data);
+        : await api.rooms.setRoomSecurity(roomId, data);
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -603,8 +601,7 @@ export default inject(
       setIsNewUserByCurrentUser,
     } = dialogsStore;
 
-    const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
-      filesStore;
+    const { getFolderInfo, getRoomSecurityInfo, folders } = filesStore;
 
     const { isRoomAdmin } = authStore;
 
@@ -620,7 +617,6 @@ export default inject(
       roomId: invitePanelOptions.roomId,
       setInviteItems,
       setInvitePanelOptions,
-      setRoomSecurity,
       theme,
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,

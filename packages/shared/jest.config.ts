@@ -120,7 +120,7 @@ const config: Config = {
     "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js",
     "react-i18next": "<rootDir>/__mocks__/reacti18nextMock.tsx",
     "PUBLIC_DIR/": "<rootDir>/__mocks__/fileMock.js",
-    "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js"
+    "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

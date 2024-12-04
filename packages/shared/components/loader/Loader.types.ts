@@ -27,7 +27,7 @@
 import { LoaderTypes } from "./Loader.enums";
 import { TColorScheme } from "../../themes";
 
-export interface LoaderProps {
+export type LoaderProps = {
   /** Font color */
   color?: string;
   /** Type loader */
@@ -44,7 +44,12 @@ export interface LoaderProps {
   style?: React.CSSProperties;
   primary?: boolean;
   isDisabled?: boolean;
-}
+};
+
+export type BaseLoaderProps = Pick<
+  LoaderProps,
+  "color" | "size" | "label" | "primary" | "isDisabled"
+>;
 
 export interface LoaderThemeProps extends LoaderProps {
   ref: SVGSVGElement;

@@ -24,6 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ThemeProvider from "./ThemeProvider";
+import React from "react";
+import { ThemeProvider as Provider } from "styled-components";
 
-export { ThemeProvider };
+import { GlobalStyle } from "../global-style";
+
+import { ThemeProviderProps } from "./ThemeProvider.types";
+
+const ThemeProvider = ({
+  theme,
+  currentColorScheme,
+  children,
+}: ThemeProviderProps) => {
+  return (
+    <Provider theme={{ ...theme, currentColorScheme }}>
+      <GlobalStyle />
+      {children}
+    </Provider>
+  );
+};
+
+export default ThemeProvider;

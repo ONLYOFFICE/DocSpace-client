@@ -64,7 +64,6 @@ const InvitePanel = ({
   setInvitePanelOptions,
   t,
   visible,
-  getRoomSecurityInfo,
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
@@ -150,25 +149,28 @@ const InvitePanel = ({
   };
 
   const getInfo = () => {
-    return getRoomSecurityInfo(roomId).then((links) => {
-      const link = links && links[0];
-      if (link) {
-        const { shareLink, id, title, expirationDate } = link.sharedTo;
+    return api.rooms
+      .getRoomSecurityInfo(roomId)
+      .then((res) => res.items)
+      .then((links) => {
+        const link = links && links[0];
+        if (link) {
+          const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-        const activeLink = {
-          id,
-          title,
-          shareLink,
-          expirationDate,
-          access: link.access || defaultAccess,
-        };
+          const activeLink = {
+            id,
+            title,
+            shareLink,
+            expirationDate,
+            access: link.access || defaultAccess,
+          };
 
-        onChangeExternalLinksVisible(!!links.length);
+          onChangeExternalLinksVisible(!!links.length);
 
-        setShareLinks([activeLink]);
-        setActiveLink(activeLink);
-      }
-    });
+          setShareLinks([activeLink]);
+          setActiveLink(activeLink);
+        }
+      });
   };
 
   const clearLoaderTimeout = () => {
@@ -601,7 +603,7 @@ export default inject(
       setIsNewUserByCurrentUser,
     } = dialogsStore;
 
-    const { getFolderInfo, getRoomSecurityInfo, folders } = filesStore;
+    const { getFolderInfo, folders } = filesStore;
 
     const { isRoomAdmin } = authStore;
 
@@ -612,7 +614,6 @@ export default inject(
     return {
       folders,
       setInviteLanguage,
-      getRoomSecurityInfo,
       inviteItems,
       roomId: invitePanelOptions.roomId,
       setInviteItems,

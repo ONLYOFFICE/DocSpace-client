@@ -4366,10 +4366,6 @@ class FilesStore {
     return api.rooms.resendEmailInvitations(id, resendAll);
   };
 
-  getRoomSecurityInfo = async (id) => {
-    return api.rooms.getRoomSecurityInfo(id).then((res) => res.items);
-  };
-
   withCtrlSelect = (item) => {
     this.setHotkeyCaret(item);
     this.setHotkeyCaretStart(item);

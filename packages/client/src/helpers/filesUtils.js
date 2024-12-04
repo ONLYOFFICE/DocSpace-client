@@ -33,13 +33,10 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import { authStore, settingsStore } from "@docspace/shared/store";
-import { FileType, RoomsType } from "@docspace/shared/enums";
-import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
+
 import i18n from "../i18n";
 
-import { request } from "@docspace/shared/api/client";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 export const getFileTypeName = (fileType) => {

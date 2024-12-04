@@ -1,8 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import ThemeProvider from "./index";
+
 import { Base, Dark, TInterfaceDirection } from "../../themes";
+
+import { ThemeProvider } from ".";
 
 const mockColorScheme = {
   id: 1,

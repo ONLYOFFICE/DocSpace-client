@@ -29,7 +29,7 @@ import { ThemeProvider as Provider } from "styled-components";
 import type { ThemeProviderProps } from "./ThemeProvider.types";
 import "./ThemeProvider.scss";
 
-const ThemeProvider = ({
+export const ThemeProvider = ({
   theme,
   currentColorScheme,
   children,
@@ -67,5 +67,3 @@ const ThemeProvider = ({
     <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
   );
 };
-
-export default ThemeProvider;

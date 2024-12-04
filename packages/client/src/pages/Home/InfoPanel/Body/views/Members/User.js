@@ -49,6 +49,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
 import { ShareAccessRights } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
 
 const User = ({
   t,
@@ -67,7 +68,6 @@ const User = ({
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
-  resendEmailInvitations,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
 }) => {
@@ -97,7 +97,8 @@ const User = ({
       : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
-    resendEmailInvitations(infoPanelSelection.id, true)
+    api.rooms
+      .resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
         toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
@@ -369,12 +370,8 @@ export default inject(
       searchValue,
     } = infoPanelStore;
 
-    const {
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      membersFilter,
-      setMembersFilter,
-    } = filesStore;
+    const { updateRoomMemberRole, membersFilter, setMembersFilter } =
+      filesStore;
 
     const { changeType: changeUserType } = peopleStore.usersStore;
 
@@ -385,7 +382,6 @@ export default inject(
       infoPanelSelection,
       setIsScrollLocked,
       updateRoomMemberRole,
-      resendEmailInvitations,
       changeUserType,
       membersFilter,
       setMembersFilter,

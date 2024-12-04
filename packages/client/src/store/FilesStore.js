@@ -4362,10 +4362,6 @@ class FilesStore {
     return api.rooms.setInvitationLinks(roomId, linkId, title, access);
   };
 
-  resendEmailInvitations = async (id, resendAll) => {
-    return api.rooms.resendEmailInvitations(id, resendAll);
-  };
-
   withCtrlSelect = (item) => {
     this.setHotkeyCaret(item);
     this.setHotkeyCaretStart(item);

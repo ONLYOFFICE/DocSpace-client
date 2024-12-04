@@ -906,37 +906,9 @@ class FilesStore {
   setFiles = (files) => {
     if (files.length === 0 && this.files.length === 0) return;
 
-    const roomPartsToUnsub = this.files
-      .filter(
-        (f) =>
-          !files.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
-      )
-      .map((f) => `FILE-${f.id}`);
-
-    const roomPartsToSub = files
-      .map((f) => `FILE-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
-
-    if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: roomPartsToUnsub,
-        individual: true,
-      });
-    }
+    this.socketService.subscribeToFiles(files);
 
     this.files = files;
-
-    if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: roomPartsToSub,
-        individual: true,
-      });
-
-      // this.files?.forEach((file) =>
-      //   console.log("[WS] subscribe to file's changes", file.id, file.title)
-      // );
-    }
 
     this.createThumbnails();
   };

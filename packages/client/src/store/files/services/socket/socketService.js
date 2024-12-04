@@ -242,6 +242,34 @@ export class SocketService {
     this.rootStore.createThumbnail(this.rootStore.files[foundIndex]);
   };
 
+  subscribeToFiles(files) {
+    const roomPartsToUnsub = files
+      .filter(
+        (f) =>
+          !files.some((nf) => nf.id === f.id) &&
+          SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
+      )
+      .map((f) => `FILE-${f.id}`);
+
+    const roomPartsToSub = files
+      .map((f) => `FILE-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    if (roomPartsToUnsub.length > 0) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: roomPartsToUnsub,
+        individual: true,
+      });
+    }
+
+    if (roomPartsToSub.length > 0) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: roomPartsToSub,
+        individual: true,
+      });
+    }
+  }
+
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
       const foundIndex = this.rootStore.files.findIndex(

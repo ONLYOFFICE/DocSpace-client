@@ -107,7 +107,7 @@ export class SocketService {
 
     if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
       console.log("[WS] s:update-history", id);
-      this.rootStore.fetchHistory();
+      fetchHistory();
     }
   };
 
@@ -188,7 +188,7 @@ export class SocketService {
       this.rootStore.files[foundIndex].title,
     );
 
-    this.updateSelectionStatus(
+    this.rootStore.updateSelectionStatus(
       id,
       this.rootStore.files[foundIndex].fileStatus | FileStatus.IsEditing,
       true,
@@ -244,43 +244,50 @@ export class SocketService {
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
-      const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.rootStore.files.findIndex(
+        (x) => x.id === opt?.id,
+      );
 
       const file = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== file.folderId) {
-        const movedToIndex = this.getFolderIndex(file.folderId);
-        if (movedToIndex > -1) this.folders[movedToIndex].filesCount++;
+      if (this.rootStore.selectedFolderStore.id !== file.folderId) {
+        const movedToIndex = this.rootStore.getFolderIndex(file.folderId);
+        if (movedToIndex > -1)
+          this.rootStore.folders[movedToIndex].filesCount++;
         return;
       }
 
       //To update a file version
       if (foundIndex > -1) {
         if (
-          this.files[foundIndex].version !== file.version ||
-          this.files[foundIndex].versionGroup !== file.versionGroup
+          this.rootStore.files[foundIndex].version !== file.version ||
+          this.rootStore.files[foundIndex].versionGroup !== file.versionGroup
         ) {
-          this.files[foundIndex].version = file.version;
-          this.files[foundIndex].versionGroup = file.versionGroup;
+          this.rootStorefiles[foundIndex].version = file.version;
+          this.rootStore.files[foundIndex].versionGroup = file.versionGroup;
         }
         this.checkSelection(file);
       }
 
       if (foundIndex > -1) return;
 
-      this.selectedFolderStore.setFilesCount(
-        this.selectedFolderStore.filesCount + 1,
+      this.rootStore.selectedFolderStore.setFilesCount(
+        this.rootStore.selectedFolderStore.filesCount + 1,
       );
 
       setTimeout(() => {
-        const foundIndex = this.files.findIndex((x) => x.id === file.id);
+        const foundIndex = this.rootStore.files.findIndex(
+          (x) => x.id === file.id,
+        );
         if (foundIndex > -1) {
           //console.log("Skip in timeout");
           return null;
         }
 
-        this.createNewFilesQueue.enqueue(() => {
-          const foundIndex = this.files.findIndex((x) => x.id === file.id);
+        this.rootStore.createNewFilesQueue.enqueue(() => {
+          const foundIndex = this.rootStore.files.findIndex(
+            (x) => x.id === file.id,
+          );
           if (foundIndex > -1) {
             //console.log("Skip in queue");
             return null;
@@ -290,55 +297,58 @@ export class SocketService {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
-      this.selectedFolderStore.setFoldersCount(
-        this.selectedFolderStore.foldersCount + 1,
+      this.rootStore.selectedFolderStore.setFoldersCount(
+        this.rootStore.selectedFolderStore.foldersCount + 1,
       );
 
-      const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
+      const foundIndex = this.rootStore.folders.findIndex(
+        (x) => x.id == opt?.id,
+      );
 
       if (foundIndex > -1) return;
 
       const folder = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id != folder.parentId) {
-        const movedToIndex = this.getFolderIndex(folder.parentId);
-        if (movedToIndex > -1) this.folders[movedToIndex].foldersCount++;
+      if (this.rootStore.selectedFolderStore.id != folder.parentId) {
+        const movedToIndex = this.rootStore.getFolderIndex(folder.parentId);
+        if (movedToIndex > -1)
+          this.rootStore.folders[movedToIndex].foldersCount++;
       }
 
       if (
-        this.selectedFolderStore.id != folder.parentId ||
+        this.rootStore.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
-          folder.createdBy.id === this.userStore.user.id &&
-          this.roomCreated)
+          folder.createdBy.id === this.rootStore.userStore.user.id &&
+          this.rootStore.roomCreated)
       ) {
-        return (this.roomCreated = false);
+        return (this.rootStore.roomCreated = false);
       }
 
       const folderInfo = await api.files.getFolderInfo(folder.id);
 
       console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
-      const newFolders = [folderInfo, ...this.folders];
+      const newFolders = [folderInfo, ...this.rootStore.folders];
 
-      const newFilter = this.filter;
+      const newFilter = this.rootStore.filter;
       newFilter.total += 1;
 
       runInAction(() => {
-        this.setFilter(newFilter);
-        this.setFolders(newFolders);
+        this.rootStore.setFilter(newFilter);
+        this.rootStore.setFolders(newFolders);
       });
     }
   };
 
   wsModifyFolderUpdate = (opt) => {
     const { infoPanelSelection, updateInfoPanelSelection } =
-      this.infoPanelStore;
+      this.rootStore.infoPanelStore;
 
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      this.getFileInfo(file.id); //this.setFile(file);
+      this.rootStore.getFileInfo(file.id); //this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
       if (
@@ -346,11 +356,11 @@ export class SocketService {
         !infoPanelSelection?.isFolder &&
         !infoPanelSelection?.isRoom
       ) {
-        const newInfoPanelSelection = this.getFilesListItems([file]);
+        const newInfoPanelSelection = this.rootStore.getFilesListItems([file]);
         updateInfoPanelSelection(newInfoPanelSelection[0]);
       }
 
-      this.checkSelection(file);
+      this.rootStore.checkSelection(file);
     } else if (opt?.type === "folder" && opt?.data) {
       const folder = JSON.parse(opt?.data);
       if (!folder || !folder.id) return;
@@ -360,25 +370,30 @@ export class SocketService {
         .then((f) => {
           console.log("[WS] update folder", f.id, f.title);
 
-          if (this.selection?.length) {
-            const foundIndex = this.selection?.findIndex((x) => x.id === f.id);
+          if (this.rootStore.selection?.length) {
+            const foundIndex = this.rootStore.selection?.findIndex(
+              (x) => x.id === f.id,
+            );
             if (foundIndex > -1) {
               runInAction(() => {
-                this.selection[foundIndex] = f;
+                this.rootStore.selection[foundIndex] = f;
               });
             }
           }
 
-          if (this.bufferSelection) {
+          if (this.rootStore.bufferSelection) {
             if (
-              this.bufferSelection.id === f.id &&
-              (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+              this.rootStore.bufferSelection.id === f.id &&
+              (this.rootStore.bufferSelection.isFolder ||
+                this.rootStore.bufferSelection.isRoom)
             ) {
-              this.setBufferSelection(f);
+              this.rootStore.setBufferSelection(f);
             }
           }
 
-          const navigationPath = [...this.selectedFolderStore.navigationPath];
+          const navigationPath = [
+            ...this.rootStore.selectedFolderStore.navigationPath,
+          ];
 
           const idx = navigationPath.findIndex((p) => p.id === f.id);
 
@@ -386,8 +401,8 @@ export class SocketService {
             navigationPath[idx].title = f?.title;
           }
 
-          if (f.id === this.selectedFolderStore.id) {
-            this.selectedFolderStore.setSelectedFolder({
+          if (f.id === this.rootStore.selectedFolderStore.id) {
+            this.rootStore.selectedFolderStore.setSelectedFolder({
               ...f,
               navigationPath,
             });
@@ -397,11 +412,11 @@ export class SocketService {
             infoPanelSelection?.id == f.id &&
             (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
           ) {
-            const newInfoPanelSelection = this.getFilesListItems([f]);
+            const newInfoPanelSelection = this.rootStore.getFilesListItems([f]);
             updateInfoPanelSelection(newInfoPanelSelection[0]);
           }
 
-          this.setFolder(f);
+          this.rootStore.setFolder(f);
         })
         .catch(() => {
           // console.log("Folder deleted")
@@ -411,13 +426,15 @@ export class SocketService {
 
   wsModifyFolderDelete = (opt) => {
     if (opt?.type === "file" && opt?.id) {
-      const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.rootStore.files.findIndex(
+        (x) => x.id === opt?.id,
+      );
       if (foundIndex == -1) return;
 
-      const foundFile = this.files[foundIndex];
+      const foundFile = this.rootStore.files[foundIndex];
 
-      this.selectedFolderStore.setFilesCount(
-        this.selectedFolderStore.filesCount - 1,
+      this.rootStore.selectedFolderStore.setFilesCount(
+        this.rootStore.selectedFolderStore.filesCount - 1,
       );
 
       console.log("[WS] delete file", foundFile.id, foundFile.title);
@@ -433,34 +450,36 @@ export class SocketService {
       // this.setFilter(newFilter);
 
       const tempActionFilesIds = JSON.parse(
-        JSON.stringify(this.tempActionFilesIds),
+        JSON.stringify(this.rootStore.tempActionFilesIds),
       );
       tempActionFilesIds.push(foundFile.id);
 
-      this.setTempActionFilesIds(tempActionFilesIds);
+      this.rootStore.setTempActionFilesIds(tempActionFilesIds);
 
-      this.removeStaleItemFromSelection(foundFile);
-      this.debounceRemoveFiles();
+      this.rootStore.removeStaleItemFromSelection(foundFile);
+      this.rootStore.debounceRemoveFiles();
 
       // Hide pagination when deleting files
       runInAction(() => {
-        this.isHidePagination = true;
+        this.rootStore.isHidePagination = true;
       });
 
       runInAction(() => {
         if (
-          this.files.length === 0 &&
-          this.folders.length === 0 &&
-          this.pageItemsLength > 1
+          this.rootStore.files.length === 0 &&
+          this.rootStore.folders.length === 0 &&
+          this.rootStore.pageItemsLength > 1
         ) {
-          this.isLoadingFilesFind = true;
+          this.rootStore.isLoadingFilesFind = true;
         }
       });
     } else if (opt?.type === "folder" && opt?.id) {
-      const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.rootStore.folders.findIndex(
+        (x) => x.id === opt?.id,
+      );
       if (foundIndex == -1) {
         const removedId = opt.id;
-        const pathParts = this.selectedFolderStore.pathParts;
+        const pathParts = this.rootStore.selectedFolderStore.pathParts;
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
@@ -471,34 +490,34 @@ export class SocketService {
         return;
       }
 
-      const foundFolder = this.folders[foundIndex];
+      const foundFolder = this.rootStore.folders[foundIndex];
 
-      this.selectedFolderStore.setFoldersCount(
-        this.selectedFolderStore.foldersCount - 1,
+      this.rootStore.selectedFolderStore.setFoldersCount(
+        this.rootStore.selectedFolderStore.foldersCount - 1,
       );
 
       console.log("[WS] delete folder", foundFolder.id, foundFolder.title);
 
       const tempActionFoldersIds = JSON.parse(
-        JSON.stringify(this.tempActionFoldersIds),
+        JSON.stringify(this.rootStore.tempActionFoldersIds),
       );
       tempActionFoldersIds.push(foundFolder.id);
 
-      this.setTempActionFoldersIds(tempActionFoldersIds);
-      this.removeStaleItemFromSelection(foundFolder);
-      this.debounceRemoveFolders();
+      this.rootStore.setTempActionFoldersIds(tempActionFoldersIds);
+      this.rootStore.removeStaleItemFromSelection(foundFolder);
+      this.rootStore.debounceRemoveFolders();
 
       runInAction(() => {
-        this.isHidePagination = true;
+        this.rootStore.isHidePagination = true;
       });
 
       runInAction(() => {
         if (
-          this.files.length === 0 &&
-          this.folders.length === 0 &&
-          this.pageItemsLength > 1
+          this.rootStore.files.length === 0 &&
+          this.rootStore.folders.length === 0 &&
+          this.rootStore.pageItemsLength > 1
         ) {
-          this.isLoadingFilesFind = true;
+          this.rootStore.isLoadingFilesFind = true;
         }
       });
     }

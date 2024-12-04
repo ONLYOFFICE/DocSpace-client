@@ -1522,10 +1522,6 @@ class FilesStore {
     this.filter = filter;
   };
 
-  setFilesOwner = (folderIds, fileIds, ownerId) => {
-    return api.files.setFileOwner(folderIds, fileIds, ownerId);
-  };
-
   refreshFiles = async () => {
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);
     return res;

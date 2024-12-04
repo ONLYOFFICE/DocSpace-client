@@ -36,7 +36,7 @@ const MyDocumentsTabs = ({
   isPersonalRoom,
   isRecentTab,
   setFilter,
-  showBodyLoader,
+  showTabsLoader,
   isRoot,
   user,
   setChangeDocumentsTabs,
@@ -90,7 +90,7 @@ const MyDocumentsTabs = ({
       ? tabs[1].id
       : tabs[0].id;
 
-  if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showTabs && showTabsLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
     <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
@@ -107,7 +107,7 @@ export default inject(
   }) => {
     const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
-    const { showBodyLoader } = clientLoadingStore;
+    const { showTabsLoader } = clientLoadingStore;
     const { user } = userStore;
     const { setChangeDocumentsTabs } = selectedFolderStore;
 
@@ -115,7 +115,7 @@ export default inject(
       isPersonalRoom,
       isRecentTab,
       setFilter,
-      showBodyLoader,
+      showTabsLoader,
       isRoot,
       user,
       setChangeDocumentsTabs,

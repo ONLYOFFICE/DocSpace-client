@@ -135,6 +135,7 @@ const CSP = ({
   setCSPSettings,
   standalone,
   t,
+  theme,
 }) => {
   useEffect(() => {
     getCSPSettings();

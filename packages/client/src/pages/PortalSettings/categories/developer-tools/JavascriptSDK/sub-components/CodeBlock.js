@@ -43,7 +43,7 @@ const StyledContainer = styled.div`
 
 StyledContainer.defaultProps = { theme: Base };
 
-const CodeBlock = ({ config }) => {
+const CodeBlock = ({ config, theme }) => {
   const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${SDK_SCRIPT_URL}");\nscript.onload = () => window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
 
   const extensions = [javascript({ jsx: true })];

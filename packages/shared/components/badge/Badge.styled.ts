@@ -63,7 +63,7 @@ const StyledBadge = styled.div<BadgeProps>`
 
   border-radius: ${(props) => props.borderRadius};
   width: fit-content;
-  padding: ${(props) => props.theme.badge.padding};
+  padding: ${(props) => (props.noHover ? "0" : props.theme.badge.padding)};
 
   height: ${(props) => props.height};
 

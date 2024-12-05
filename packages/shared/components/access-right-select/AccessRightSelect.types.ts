@@ -60,4 +60,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   modernView?: boolean;
   fillIcon?: boolean;
   isDefaultMode?: boolean;
+  comboIcon?: string;
 };

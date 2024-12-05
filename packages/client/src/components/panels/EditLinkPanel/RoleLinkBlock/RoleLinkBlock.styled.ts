@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 export const RoleLinkBlockWrapper = styled.div`
@@ -35,5 +36,24 @@ export const RoleLinkBlockWrapper = styled.div`
 
   .dropdown-container {
     margin-top: 4px;
+  }
+
+  .combo-button_selected-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .combo-buttons_arrow-icon,
+  .combo-buttons_expander-icon > div {
+    width: 16px;
+    height: 16px;
+
+    svg path {
+      fill: ${globalColors.gray};
+    }
+  }
+
+  .combo-buttons_expander-icon {
+    rotate: 90deg;
   }
 `;

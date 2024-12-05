@@ -32,6 +32,8 @@ import { isMobile } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TOption } from "@docspace/shared/components/combobox";
 
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+
 import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";
 
@@ -74,6 +76,7 @@ const RoleLinkBlock = ({
         withBackground={!isMobileView}
         selectedOption={selectedOption}
         accessOptions={accessOptions}
+        comboIcon={ArrowIcon}
       />
     </RoleLinkBlockWrapper>
   );

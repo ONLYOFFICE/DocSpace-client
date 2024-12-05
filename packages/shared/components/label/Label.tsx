@@ -62,10 +62,21 @@ const Label = (props: LabelProps) => {
       title={title}
       className={className}
       data-testid="label"
+      data-truncate={truncate}
+      data-inline={isInline}
+      data-error={error}
+      aria-required={isRequired}
+      aria-invalid={error}
     >
       {text}{" "}
       {isRequired && (
-        <span style={{ color: globalColors.lightErrorStatus }}> *</span>
+        <span
+          style={{ color: globalColors.lightErrorStatus }}
+          aria-hidden="true"
+          data-testid="required-mark"
+        >
+          *
+        </span>
       )}{" "}
       {children}
     </Text>

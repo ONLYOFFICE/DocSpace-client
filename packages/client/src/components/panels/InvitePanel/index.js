@@ -496,9 +496,7 @@ const InvitePanel = ({
     [invitedUsers],
   );
 
-  const access =
-    defaultAccess ??
-    (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
+  const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   return (
     <ModalDialog

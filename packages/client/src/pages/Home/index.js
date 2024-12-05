@@ -42,7 +42,6 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   SectionFilterContent,
   SectionHeaderContent,
-  SectionPagingContent,
   SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";

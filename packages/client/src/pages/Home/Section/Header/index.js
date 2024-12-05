@@ -439,7 +439,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onIndexApply = () => {
-    saveIndexOfFiles();
+    saveIndexOfFiles(t);
     setIsIndexEditingMode(false);
   };
 

@@ -3101,7 +3101,7 @@ class FilesActionStore {
     }
   };
 
-  saveIndexOfFiles = async () => {
+  saveIndexOfFiles = async (t) => {
     const { getIndexingArray } = this.indexingStore;
 
     try {

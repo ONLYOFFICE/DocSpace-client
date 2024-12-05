@@ -65,6 +65,8 @@ const Row = memo(({ data, index, style }) => {
 
   const item = inviteItems[index];
 
+  const theme = useTheme();
+
   return (
     <Item
       t={t}
@@ -204,7 +206,7 @@ const ItemsList = ({
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
   const { isOwner, isAdmin } = userStore.user;
-  const { theme, standalone } = settingsStore;
+  const { standalone } = settingsStore;
 
   return {
     setInviteItems,
@@ -213,6 +215,5 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     isOwner,
     isAdmin,
     standalone,
-    theme,
   };
 })(observer(ItemsList));

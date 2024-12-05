@@ -44,7 +44,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 
-import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
@@ -65,8 +64,6 @@ const InvitePanel = ({
   setInvitePanelOptions,
   t,
   visible,
-  setRoomSecurity,
-  getRoomSecurityInfo,
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
@@ -152,25 +149,28 @@ const InvitePanel = ({
   };
 
   const getInfo = () => {
-    return getRoomSecurityInfo(roomId).then((links) => {
-      const link = links && links[0];
-      if (link) {
-        const { shareLink, id, title, expirationDate } = link.sharedTo;
+    return api.rooms
+      .getRoomSecurityInfo(roomId)
+      .then((res) => res.items)
+      .then((links) => {
+        const link = links && links[0];
+        if (link) {
+          const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-        const activeLink = {
-          id,
-          title,
-          shareLink,
-          expirationDate,
-          access: link.access || defaultAccess,
-        };
+          const activeLink = {
+            id,
+            title,
+            shareLink,
+            expirationDate,
+            access: link.access || defaultAccess,
+          };
 
-        onChangeExternalLinksVisible(!!links.length);
+          onChangeExternalLinksVisible(!!links.length);
 
-        setShareLinks([activeLink]);
-        setActiveLink(activeLink);
-      }
-    });
+          setShareLinks([activeLink]);
+          setActiveLink(activeLink);
+        }
+      });
   };
 
   const clearLoaderTimeout = () => {
@@ -320,7 +320,7 @@ const InvitePanel = ({
       const isRooms = roomId !== -1;
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : await setRoomSecurity(roomId, data);
+        : await api.rooms.setRoomSecurity(roomId, data);
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -603,8 +603,7 @@ export default inject(
       setIsNewUserByCurrentUser,
     } = dialogsStore;
 
-    const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
-      filesStore;
+    const { getFolderInfo, folders } = filesStore;
 
     const { isRoomAdmin } = authStore;
 
@@ -615,12 +614,10 @@ export default inject(
     return {
       folders,
       setInviteLanguage,
-      getRoomSecurityInfo,
       inviteItems,
       roomId: invitePanelOptions.roomId,
       setInviteItems,
       setInvitePanelOptions,
-      setRoomSecurity,
       theme,
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,

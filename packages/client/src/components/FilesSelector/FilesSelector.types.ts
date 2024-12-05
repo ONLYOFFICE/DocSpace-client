@@ -147,4 +147,6 @@ export type FilesSelectorProps = TSelectorHeader & {
   openRoot?: boolean;
 
   filesSettings: TFilesSettings;
+
+  withCreate?: boolean;
 };

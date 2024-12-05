@@ -188,7 +188,10 @@ const ArticleBodyContent = (props) => {
 
       const isAccountsClick = folderId === "accounts";
 
-      let withTimer = isAccountsClick ? false : !!selectedFolderId;
+      let withTimer = isAccountsClick
+        ? window.location.pathname.includes("accounts") &&
+          !window.location.pathname.includes("groups")
+        : !!selectedFolderId;
 
       if (isAccountsClick) {
         clearFiles();
@@ -309,12 +312,12 @@ export default inject(
     const {
       showArticleLoader,
 
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
       firstLoad,
     } = clientLoadingStore;
 
     const setIsLoading = (param, withTimer) => {
-      setIsSectionFilterLoading(param, withTimer);
+      setIsSectionBodyLoading(param, withTimer);
 
       if (param && withTimer) showProgress();
     };

@@ -210,5 +210,7 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "ExitWithoutSaving": "Exit without saving?",
+  "ExitWithoutSavingDescription": "You have made changes in the index. If you proceed without saving, those changes will not be applied."
 }

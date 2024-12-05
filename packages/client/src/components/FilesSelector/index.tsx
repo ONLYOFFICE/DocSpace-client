@@ -139,6 +139,8 @@ const FilesSelectorWrapper = ({
 
   filesSettings,
   headerProps,
+
+  withCreate,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -421,7 +423,9 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      withCreate={
+        (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
+      }
       filesSettings={filesSettings}
       headerProps={headerProps}
       formProps={formProps}

@@ -30,6 +30,8 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { addTagsToRoom, removeTagsFromRoom } from "@docspace/shared/api/rooms";
+import { createFolder } from "@docspace/shared/api/files";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import Section from "@docspace/shared/components/section";
 
@@ -106,7 +108,7 @@ const PureHome = (props) => {
     filesList,
 
     createFile,
-    createFolder,
+
     createRoom,
 
     setViewAs,
@@ -149,9 +151,7 @@ const PureHome = (props) => {
     getSettings,
     logout,
     login,
-    addTagsToRoom,
     createTag,
-    removeTagsFromRoom,
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
@@ -185,14 +185,9 @@ const PureHome = (props) => {
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
-      setIsSectionFilterLoading(param, !withoutTimer);
       setIsSectionBodyLoading(param, !withoutTimer);
     },
-    [
-      setIsSectionHeaderLoading,
-      setIsSectionFilterLoading,
-      setIsSectionBodyLoading,
-    ],
+    [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
 
   const { onDrop } = useFiles({
@@ -481,7 +476,7 @@ export const Component = inject(
       filesList,
 
       createFile,
-      createFolder,
+
       createRoom,
       refreshFiles,
       setViewAs,
@@ -490,8 +485,6 @@ export const Component = inject(
       disableDrag,
       isErrorRoomNotAvailable,
       setIsPreview,
-      addTagsToRoom,
-      removeTagsFromRoom,
       getRooms,
       scrollToTop,
       wsCreatedPDFForm,
@@ -652,7 +645,7 @@ export const Component = inject(
       filesList,
       selectedFolderStore,
       createFile,
-      createFolder,
+
       createRoom,
       refreshFiles,
       setViewAs,
@@ -668,8 +661,7 @@ export const Component = inject(
       login: authStore.login,
 
       createTag,
-      addTagsToRoom,
-      removeTagsFromRoom,
+
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,
       setSelectedFolder,

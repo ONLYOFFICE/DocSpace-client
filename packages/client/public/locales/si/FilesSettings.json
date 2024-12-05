@@ -1,14 +1,4 @@
 {
-  "AdditionalSections": "අතිරේක අංශ",
-  "DisplayFavorites": "ප්‍රියතමයන් පෙන්වන්න",
   "DisplayNotification": "අථක කුණුකූඩයට ගෙනයන විට දැනුම්දීමක් පෙන්වන්න",
-  "DisplayRecent": "මෑත දෑ පෙන්වන්න",
-  "DisplayTemplates": "අච්චු පෙන්වන්න",
-  "IntermediateVersion": "අතරමැදි අනුවාද සියල්ල තබාගන්න",
-  "KeepIntermediateVersion": "සංස්කරණයේදී අතරමැදි අනුවාද තබාගන්න",
-  "OriginalCopy": "මුල් ආකෘතියෙන් ද ගොනුවේ පිටපතක් සුරකින්න",
-  "StoringFileVersion": "ගොනු අනුවාද ගබඩා කිරීම",
-  "ThirdPartyAccounts": "තෙවන පාර්ශ්ව ගිණුම්",
-  "ThirdPartyBtn": "තෙවන පාර්ශ්ව ආචයන සම්බන්ධතා වලට ඉඩදෙන්න",
-  "UpdateOrCreate": "සමාන නමක් සහිත පවතින ගොනුවට අනුවාදය යාවත්කාල කරන්න. නොඑසේ නම්, ගොනුවේ පිටපතක් සාදනු ලැබේ."
+  "OriginalCopy": "මුල් ආකෘතියෙන් ද ගොනුවේ පිටපතක් සුරකින්න"
 }

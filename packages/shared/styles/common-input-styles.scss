@@ -26,6 +26,30 @@
   --input-warning-border-hover: #{$light-status-warning};
   --input-warning-border-focus: #{$light-status-warning};
 
+  // Dark theme overrides
+  &[data-theme="dark"] {
+    --input-bg: #{$dark-gray-light};
+    --input-color: #{$white};
+    --input-border-color: #{$gray-dark-strong};
+    --input-border-hover: #{$gray-dark};
+    --input-border-focus: #{$white};
+
+    --input-disabled-bg: #{$gray-dark-strong};
+    --input-disabled-color: #{$gray-dark-text};
+    --input-disabled-border: #{$gray-dark-strong};
+
+    --input-error-border: #{$dark-error-status};
+    --input-error-border-hover: #{$dark-error-status};
+    --input-error-border-focus: #{$dark-error-status};
+
+    --input-warning-border: #{$dark-status-warning};
+    --input-warning-border-hover: #{$dark-status-warning};
+    --input-warning-border-focus: #{$dark-status-warning};
+
+    --text-input-placeholder-color: #{$gray-dark};
+    --text-input-placeholder-disabled-color: #{$gray-dark-strong};
+  }
+
   // Dimensions
   --input-border-radius: 3px;
   --input-box-shadow: none;
@@ -65,33 +89,9 @@
   --text-input-placeholder-disabled-color: #{$gray-strong};
 
   // RTL Support
-  [dir="rtl"] {
+  &[dir="rtl"] {
     --input-text-align: right;
     --input-direction: rtl;
-  }
-
-  // Dark theme overrides
-  [data-theme="dark"] {
-    --input-bg: #{$dark-gray-light};
-    --input-color: #{$white};
-    --input-border-color: #{$gray-dark-strong};
-    --input-border-hover: #{$gray-dark};
-    --input-border-focus: #{$white};
-
-    --input-disabled-bg: #{$gray-dark-strong};
-    --input-disabled-color: #{$gray-dark-text};
-    --input-disabled-border: #{$gray-dark-strong};
-
-    --input-error-border: #{$dark-error-status};
-    --input-error-border-hover: #{$dark-error-status};
-    --input-error-border-focus: #{$dark-error-status};
-
-    --input-warning-border: #{$dark-status-warning};
-    --input-warning-border-hover: #{$dark-status-warning};
-    --input-warning-border-focus: #{$dark-status-warning};
-
-    --text-input-placeholder-color: #{$gray-dark};
-    --text-input-placeholder-disabled-color: #{$gray-dark-strong};
   }
 }
 

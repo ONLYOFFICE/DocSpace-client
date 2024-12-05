@@ -70,8 +70,30 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
+    // Add CSS Modules configuration
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+      {
+        test: /\.module\.(scss|sass)$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[local]__[hash:base64:5]",
+              },
+              importLoaders: 1,
+            },
+          },
+          "sass-loader",
+        ],
+      },
+      // Regular SCSS files (non-modules)
+      {
+        test: /(?<!\.module)\.(scss|sass)$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      // Existing asset rules
       {
         type: "asset/resource",
         generator: {
@@ -79,14 +101,13 @@ module.exports = {
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
+      // SVG handling
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         loader: "@svgr/webpack",
         options: {
           prettier: false,

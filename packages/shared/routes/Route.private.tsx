@@ -26,12 +26,16 @@
 
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TenantStatus } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import { commonIconsStyles } from "utils";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -51,6 +55,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
+    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -60,11 +65,38 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     baseDomain,
     limitedAccessSpace,
     displayAbout,
+
+    validatePublicRoomKey,
+    publicRoomKey,
   } = props;
 
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    // console.log("user", user);
+    // console.log("isAuthenticated", isAuthenticated);
+    // console.log("isLoadedUser", isLoadedUser);
+
+    if (key && isLoadedUser && !user) {
+      const path = "/rooms/share";
+      const filter = FilesFilter.getDefault();
+
+      window.DocSpace.navigate(`${path}?key=${key}&${filter.toUrlParams()}`);
+    }
+
+    //  console.log(key, publicRoomKey, location.pathname);
+
+    if (
+      key &&
+      publicRoomKey !== key &&
+      location.pathname.includes("/rooms/shared")
+    ) {
+      validatePublicRoomKey(key);
+    }
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

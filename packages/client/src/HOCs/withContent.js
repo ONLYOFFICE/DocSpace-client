@@ -111,12 +111,11 @@ export default function withContent(WrappedContent) {
         ? { noHover: true }
         : { onClick: onFilesClick };
 
-      console.log("href with content", href);
-      /*  if (!isDesktop && !isTrashFolder && !isArchiveFolder) {
+      if (!isDesktop && !isTrashFolder && !isArchiveFolder) {
         linkStyles.href = isPublicRoom
           ? `${href}&share=${publicRoomKey}`
           : href;
-      } */
+      }
 
       const newItems =
         item.new || (fileStatus & FileStatus.IsNew) === FileStatus.IsNew;

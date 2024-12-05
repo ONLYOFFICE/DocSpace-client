@@ -59,10 +59,7 @@ const PublicRoom = (props) => {
     setPublicRoomKey,
     setIsArticleLoading,
     setClientError,
-    isAuthenticated,
   } = props;
-
-  console.log("PublicRoom");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -84,14 +81,14 @@ const PublicRoom = (props) => {
     if (filterObj?.folder && filterObj?.folder !== "@my") {
       const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
 
-      // navigate(url);
+      navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
 
       const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
 
-      // navigate(url);
+      navigate(url);
     }
   };
 
@@ -131,20 +128,6 @@ const PublicRoom = (props) => {
     }
   };
 
-  console.log("isAuthenticated", isAuthenticated);
-
-  if (isAuthenticated) {
-    return (
-      <PrivateRoute>
-        <Client>
-          <Home>
-            <Outlet />
-          </Home>
-        </Client>
-      </PrivateRoute>
-    );
-  }
-
   return isLoading ? (
     renderLoader()
   ) : isLoaded ? (
@@ -168,7 +151,7 @@ export const WrappedComponent = inject(
     const { getFilesSettings } = filesSettingsStore;
     const { setPublicRoomKey } = settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
-    const { setClientError, isAuthenticated } = authStore;
+    const { setClientError } = authStore;
     return {
       roomId,
       isLoaded,
@@ -181,7 +164,6 @@ export const WrappedComponent = inject(
       setPublicRoomKey,
       setIsArticleLoading,
       setClientError,
-      isAuthenticated,
     };
   },
 )(observer(PublicRoom));

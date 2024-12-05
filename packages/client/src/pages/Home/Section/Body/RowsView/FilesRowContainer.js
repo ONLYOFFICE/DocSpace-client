@@ -86,8 +86,6 @@ const FilesRowContainer = ({
     currentDeviceType,
   });
 
-  console.log("filesList", filesList);
-
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
       <SimpleFilesRow

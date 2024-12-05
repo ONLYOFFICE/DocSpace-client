@@ -105,9 +105,6 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { authStore } from "@docspace/shared/store";
-
 class FilesActionStore {
   settingsStore;
   uploadDataStore;
@@ -2419,13 +2416,7 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    console.log("item.roomType", item.roomType);
-
-    if (
-      item.roomType &&
-      item.roomType === RoomsType.PublicRoom &&
-      item.isFolder
-    ) {
+    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
       setSelection([]);
       return this.moveToPublicRoom(item.id);
     }
@@ -2670,7 +2661,6 @@ class FilesActionStore {
   };
 
   moveToRoomsPage = () => {
-    const { isAuthenticated } = authStore;
     const categoryType = getCategoryType(window.DocSpace.location);
 
     const filter = RoomsFilter.getDefault();
@@ -2683,10 +2673,6 @@ class FilesActionStore {
           : categoryType;
 
     let path = getCategoryUrl(correctCategoryType);
-
-    if (isAuthenticated && categoryType === CategoryType.PublicRoom) {
-      path = getCategoryUrl(CategoryType.Shared);
-    }
 
     const state = {
       title:
@@ -2716,8 +2702,6 @@ class FilesActionStore {
   moveToPublicRoom = (folderId) => {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
     const { publicRoomKey } = this.publicRoomStore;
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
-    const { roomKey } = this.filesStore;
 
     const id = folderId ? folderId : this.selectedFolderStore.parentId;
     const path = getCategoryUrl(CategoryType.PublicRoom);
@@ -2731,7 +2715,7 @@ class FilesActionStore {
     };
 
     window.DocSpace.navigate(
-      `${path}?key=${publicRoomKey ?? roomKey}&${filter.toUrlParams()}`,
+      `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
       { state },
     );
   };
@@ -3267,11 +3251,12 @@ class FilesActionStore {
 
   getPublicKey = async (folder) => {
     const { isOwner, isAdmin } = this.userStore.user;
+    const { setPublicRoomKey } = this.settingsStore;
 
     if (
       folder?.shared &&
-      folder?.rootFolderType === FolderType.Rooms &&
-      (isOwner || isAdmin)
+      folder?.rootFolderType === FolderType.Rooms //&&
+      // (isOwner || isAdmin)
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 
@@ -3282,6 +3267,8 @@ class FilesActionStore {
       try {
         const link = await this.filesStore.getPrimaryLink(folder.id);
         const key = link?.sharedTo?.requestToken;
+
+        //  setPublicRoomKey(key);
 
         return key;
       } catch (error) {

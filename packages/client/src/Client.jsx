@@ -105,8 +105,6 @@ const ClientContent = (props) => {
     isDesktopClientInit,
     setIsDesktopClientInit,
     showArticleLoader,
-
-    children,
   } = props;
 
   const location = useLocation();
@@ -188,7 +186,7 @@ const ClientContent = (props) => {
       ) : (
         <></>
       )}
-      {children || <Outlet />}
+      <Outlet />
     </>
   );
 };

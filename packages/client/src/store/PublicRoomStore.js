@@ -220,19 +220,23 @@ class PublicRoomStore {
   };
 
   validatePublicRoomKey = (key) => {
+    //console.log("key validatePublicRoomKey", key);
     this.setIsLoading(true);
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
+        this.publicRoomKey = key;
+        console.log("res", res);
+
         if (res?.shared) {
-          // return this.gotoFolder(res);
+          //  return this.gotoFolder(res, key);
         }
 
         if (res?.isAuthenticated) {
-          return this.gotoFolder(res, key);
+          //   return this.gotoFolder(res, key);
         }
 
-        this.publicRoomKey = key;
+        //  this.publicRoomKey = key;
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));
@@ -243,7 +247,7 @@ class PublicRoomStore {
   };
 
   get isPublicRoom() {
-    return isPublicRoomUtil();
+    return this.isLoaded && isPublicRoomUtil();
   }
 
   get roomLinks() {

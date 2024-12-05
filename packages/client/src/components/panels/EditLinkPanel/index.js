@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import isEqual from "lodash/isEqual";
@@ -33,7 +33,10 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import {
+  copyRoomShareLink,
+  getRoomAccessOptions,
+} from "@docspace/shared/components/share/Share.helpers";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
@@ -42,8 +45,9 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
 import moment from "moment";
+import { RoleLinkBlock } from "./RoleLinkBlock";
 
 const EditLinkPanel = (props) => {
   const {
@@ -52,6 +56,7 @@ const EditLinkPanel = (props) => {
     isEdit,
     visible,
     password,
+    accessLink,
     setIsVisible,
     editExternalLink,
     setExternalLink,
@@ -71,6 +76,23 @@ const EditLinkPanel = (props) => {
     passwordSettings,
     getPortalPasswordSettings,
   } = props;
+
+  const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
+
+  const [selectedAccessOption, setSelectedAccessOption] = useState(() => {
+    if (isFormRoom) {
+      return {
+        key: "form-filling",
+        access: ShareAccessRights.FormFilling,
+      };
+    }
+
+    return (
+      roomAccessOptions.find((option) => option.access === accessLink) ??
+      roomAccessOptions.at(-1) ??
+      {}
+    );
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -132,6 +154,7 @@ const EditLinkPanel = (props) => {
     newLink.sharedTo.title = linkNameValue;
     newLink.sharedTo.password = passwordAccessIsChecked ? passwordValue : null;
     newLink.sharedTo.denyDownload = denyDownload;
+    newLink.access = selectedAccessOption.access;
     if (!isSameDate) newLink.sharedTo.expirationDate = expirationDate;
 
     setIsLoading(true);
@@ -165,6 +188,7 @@ const EditLinkPanel = (props) => {
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
     linkNameValue: link?.sharedTo?.title || "",
+    accessLink: accessLink ?? ShareAccessRights.ReadOnly,
   };
 
   useEffect(() => {
@@ -173,6 +197,7 @@ const EditLinkPanel = (props) => {
       passwordAccessIsChecked,
       denyDownload,
       linkNameValue,
+      accessLink: selectedAccessOption.access,
     };
 
     const isSameDate = moment(date).isSame(expirationDate);
@@ -225,6 +250,13 @@ const EditLinkPanel = (props) => {
     }
   }, [passwordSettings]);
 
+  /**
+   * @param {import("@docspace/shared/components/combobox").TOption} option
+   */
+  const handleSelectAccessOption = (option) => {
+    setSelectedAccessOption(option);
+  };
+
   const linkNameIsValid = !!linkNameValue.trim();
 
   const expiredLinkText = getExpiredLinkText();
@@ -256,6 +288,15 @@ const EditLinkPanel = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledEditLinkBodyContent className="edit-link_body">
+          {!isFormRoom && (
+            <RoleLinkBlock
+              t={t}
+              accessOptions={roomAccessOptions}
+              selectedOption={selectedAccessOption}
+              currentDeviceType={currentDeviceType}
+              onSelect={handleSelectAccessOption}
+            />
+          )}
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -361,6 +402,7 @@ export default inject(
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
     const shareLink = link?.sharedTo?.shareLink;
+    const accessLink = linkParams.link?.access;
 
     return {
       visible: editLinkPanelIsVisible,
@@ -387,6 +429,7 @@ export default inject(
       setLinkParams,
       passwordSettings,
       getPortalPasswordSettings,
+      accessLink,
     };
   },
 )(

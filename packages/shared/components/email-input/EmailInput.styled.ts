@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { StyledTextInput } from "../text-input";
+import { TextInput } from "../text-input";
 
-const StyledEmailInput = styled(StyledTextInput)`
+const StyledEmailInput = styled(TextInput)`
   // logical property won't work because of "dir: auto"
   text-align: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? "right" : "left"};

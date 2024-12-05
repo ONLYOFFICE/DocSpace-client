@@ -1,9 +1,7 @@
-// Base colors
 $white: #ffffff;
 $black: #333333;
 $dark-black: #000;
 
-// Gray scale
 $gray-light: #f8f9f9;
 $dark-gray-light: #282828;
 $light-gray-hover: #f3f4f4;
@@ -20,7 +18,6 @@ $dark-gray-dark: #adadad;
 $gray-text: #555f65;
 $gray-dark-text: #5c5c5c;
 
-// Blue colors
 $light-blue-main: #4781d1;
 $light-blue-main-hover: rgba(71, 129, 209, 0.85);
 $light-blue-main-disabled: rgba(71, 129, 209, 0.6);
@@ -33,11 +30,9 @@ $dark-grey-action: #515151;
 $light-blue-hover: #bed3ef;
 $dark-grey-hover: #7b7b7b;
 
-// Active states
 $light-active: #f2f6fc;
 $dark-active: #414141;
 
-// Brand colors
 $main-green: #2db482;
 $second-green: #22c386;
 $second-green-dark: #2e5e4c;
@@ -52,11 +47,9 @@ $main-blue-light: #13b7ec;
 $second-blue: #11a3d4;
 $main-yellow: #ffd30f;
 
-// Blur effects
 $blur-light: rgba(6, 22, 38, 0.2);
 $blur-dark: rgba(27, 27, 27, 0.6);
 
-// Status colors
 $light-error-status: #f24724;
 $dark-error-status: #e06451;
 $favorites-status: #edc409;
@@ -66,7 +59,6 @@ $dark-status-warning: #e17415;
 $light-status-positive: #35ad17;
 $dark-status-positive: #3ba420;
 
-// Icons and links
 $light-icons: #3b72a7;
 $dark-icon: #e6e6e6;
 $link: #316daa;
@@ -74,7 +66,6 @@ $dark-link: #e06a1b;
 $blue-light-mid: #265a8f;
 $big-gray-dark-mid: #b5b5b5;
 
-// Toast notifications
 $light-toast-done: #e3f7be;
 $dark-toast-done: #9de051;
 $light-toast-info: #f8f7bf;
@@ -84,7 +75,6 @@ $dark-toast-alert: #e0b151;
 $light-toast-warning: #f7cdbe;
 $dark-toast-warning: #e07751;
 
-// UI elements
 $loader: rgba(0, 0, 0, 0.05);
 $dnd-color: rgba(229, 228, 138, 0.5);
 $dnd-dark-color: rgba(229, 228, 138, 0.12);
@@ -97,7 +87,6 @@ $box-shadow-dark-color: #040f1b29;
 $loader-light: #e7e7e7;
 $loader-dark: #484848;
 
-// Editor colors
 $editor-green-color: #40865c;
 $editor-blue-color: #446995;
 $editor-orange-color: #b26a54;
@@ -107,7 +96,6 @@ $linux-color: #f4bb40;
 $android-color: #a8d548;
 $moonstone: #35a5d2;
 
-// Misc colors
 $tick-color: #20d21f;
 $red-romb: #ff6f3d;
 $blue-romb: #5dc0e8;
@@ -117,7 +105,6 @@ $badge-shadow: rgba(4, 15, 27, 0.16);
 $popup-shadow: rgba(4, 15, 27, 0.08);
 $menu-shadow: rgba(4, 15, 27, 0.04);
 
-// Scrollbar colors
 $light-scroll: rgba(6, 22, 38, 0.16);
 $light-scroll-hover: rgba(6, 22, 38, 0.32);
 $light-scroll-active: rgba(6, 22, 38, 0.5);
@@ -125,7 +112,6 @@ $dark-scroll: rgba(136, 136, 136, 0.4);
 $dark-scroll-hover: rgba(136, 136, 136, 0.64);
 $dark-scroll-active: rgba(136, 136, 136, 0.8);
 
-// Alpha colors
 $silver: rgba(200, 200, 200, 0.2);
 $highland-gray: rgba(11, 11, 11, 0.7);
 $alpha-green-light: rgba(53, 173, 23, 0.1);
@@ -133,7 +119,6 @@ $alpha-green-dark: rgba(59, 164, 32, 0.1);
 $alpha-red-light: rgba(242, 28, 14, 0.1);
 $alpha-red-dark: rgba(224, 100, 81, 0.1);
 
-// Logo colors
 $logo-colors: (
   #ff6680,
   #ff8f40,
@@ -145,114 +130,3 @@ $logo-colors: (
   #7757d9,
   #ff7fd4
 );
-
-:export {
-  white: $white;
-  black: $black;
-  darkBlack: $dark-black;
-  grayLight: $gray-light;
-  darkGrayLight: $dark-gray-light;
-  lightGrayHover: $light-gray-hover;
-  lightDarkGrayHover: $light-dark-gray-hover;
-  grayLightMid: $gray-light-mid;
-  grayDarkMid: $gray-dark-mid;
-  lightGraySelected: $light-gray-selected;
-  grayStrong: $gray-strong;
-  grayDarkStrong: $gray-dark-strong;
-  gray: $gray;
-  grayDark: $gray-dark;
-  lightGrayDark: $light-gray-dark;
-  darkGrayDark: $dark-gray-dark;
-  grayText: $gray-text;
-  grayDarkText: $gray-dark-text;
-  lightBlueMain: $light-blue-main;
-  lightBlueMainHover: $light-blue-main-hover;
-  lightBlueMainDisabled: $light-blue-main-disabled;
-  lightBlueMainPressed: $light-blue-main-pressed;
-  lightSecondMain: $light-second-main;
-  lightSecondMainHover: $light-second-main-hover;
-  lightSecondMainDisabled: $light-second-main-disabled;
-  lightBlueAction: $light-blue-action;
-  darkGreyAction: $dark-grey-action;
-  lightBlueHover: $light-blue-hover;
-  darkGreyHover: $dark-grey-hover;
-  lightActive: $light-active;
-  darkActive: $dark-active;
-  mainGreen: $main-green;
-  secondGreen: $second-green;
-  secondGreenDark: $second-green-dark;
-  mainOrange: $main-orange;
-  secondOrange: $second-orange;
-  mainRed: $main-red;
-  mainPurple: $main-purple;
-  purple: $purple;
-  secondPurple: $second-purple;
-  secondPurpleDark: $second-purple-dark;
-  mainBlueLight: $main-blue-light;
-  secondBlue: $second-blue;
-  mainYellow: $main-yellow;
-  blurLight: $blur-light;
-  blurDark: $blur-dark;
-  lightErrorStatus: $light-error-status;
-  darkErrorStatus: $dark-error-status;
-  favoritesStatus: $favorites-status;
-  favoriteStatusDark: $favorite-status-dark;
-  lightStatusWarning: $light-status-warning;
-  darkStatusWarning: $dark-status-warning;
-  lightStatusPositive: $light-status-positive;
-  darkStatusPositive: $dark-status-positive;
-  lightIcons: $light-icons;
-  darkIcon: $dark-icon;
-  link: $link;
-  darkLink: $dark-link;
-  blueLightMid: $blue-light-mid;
-  bigGrayDarkMid: $big-gray-dark-mid;
-  lightToastDone: $light-toast-done;
-  darkToastDone: $dark-toast-done;
-  lightToastInfo: $light-toast-info;
-  darkToastInfo: $dark-toast-info;
-  lightToastAlert: $light-toast-alert;
-  darkToastAlert: $dark-toast-alert;
-  lightToastWarning: $light-toast-warning;
-  darkToastWarning: $dark-toast-warning;
-  loader: $loader;
-  dndColor: $dnd-color;
-  dndDarkColor: $dnd-dark-color;
-  dndHoverColor: $dnd-hover-color;
-  dndDarkHover: $dnd-dark-hover;
-  onWhiteColor: $on-white-color;
-  onBlackColor: $on-black-color;
-  boxShadowColor: $box-shadow-color;
-  boxShadowDarkColor: $box-shadow-dark-color;
-  loaderLight: $loader-light;
-  loaderDark: $loader-dark;
-  editorGreenColor: $editor-green-color;
-  editorBlueColor: $editor-blue-color;
-  editorOrangeColor: $editor-orange-color;
-  editorRedColor: $editor-red-color;
-  windowsColor: $windows-color;
-  linuxColor: $linux-color;
-  androidColor: $android-color;
-  moonstone: $moonstone;
-  tickColor: $tick-color;
-  redRomb: $red-romb;
-  blueRomb: $blue-romb;
-  greenRomb: $green-romb;
-  tapHighlight: $tap-highlight;
-  badgeShadow: $badge-shadow;
-  popupShadow: $popup-shadow;
-  menuShadow: $menu-shadow;
-  lightScroll: $light-scroll;
-  lightScrollHover: $light-scroll-hover;
-  lightScrollActive: $light-scroll-active;
-  darkScroll: $dark-scroll;
-  darkScrollHover: $dark-scroll-hover;
-  darkScrollActive: $dark-scroll-active;
-  silver: $silver;
-  highlandGray: $highland-gray;
-  alphaGreenLight: $alpha-green-light;
-  alphaGreenDark: $alpha-green-dark;
-  alphaRedLight: $alpha-red-light;
-  alphaRedDark: $alpha-red-dark;
-  logoColors: $logo-colors;
-}

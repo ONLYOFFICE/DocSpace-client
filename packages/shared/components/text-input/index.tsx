@@ -28,9 +28,11 @@ import React from "react";
 import { isMobile, isIOS } from "react-device-detect";
 import equal from "fast-deep-equal/react";
 
-import { StyledTextInput } from "./TextInput.styled";
-import { TextInputProps } from "./TextInput.types";
-import { InputSize } from "./TextInput.enums";
+import type { TextInputProps } from "./TextInput.types";
+import { InputSize, InputType } from "./TextInput.enums";
+import styles from "./TextInput.module.scss";
+
+import { Input } from "./sub-components/Input";
 
 const compare = (
   prevProps: Readonly<TextInputProps>,
@@ -40,15 +42,43 @@ const compare = (
 };
 
 export const TextInputPure = (props: TextInputProps) => {
-  const { withBorder = true, size = InputSize.base, isAutoFocussed } = props;
+  const {
+    withBorder = true,
+    size = InputSize.base,
+    isAutoFocussed,
+    hasError,
+    hasWarning,
+    scale,
+    keepCharPositions,
+    guide,
+    className,
+    isBold,
+    fontWeight,
+    style,
+    ...rest
+  } = props;
+
+  const combinedStyle = {
+    ...style,
+    fontWeight: isBold ? 600 : fontWeight,
+  };
 
   return (
-    <StyledTextInput
-      {...props}
+    <Input
+      {...rest}
+      className={`${styles.textInput} ${className || ""}`}
+      style={combinedStyle}
       isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
+      guide={guide}
       size={size}
-      withBorder={withBorder}
       data-testid="text-input"
+      data-size={size}
+      data-error={hasError ? "true" : undefined}
+      data-warning={hasWarning ? "true" : undefined}
+      data-scale={scale ? "true" : undefined}
+      data-without-border={!withBorder ? "true" : undefined}
+      data-keep-char-positions={keepCharPositions ? "true" : undefined}
+      data-guide={guide ? "true" : undefined}
     />
   );
 };
@@ -57,4 +87,5 @@ const TextInput = React.memo(TextInputPure, compare);
 
 TextInput.displayName = "TextInput";
 
-export { TextInput };
+export { TextInput, InputSize, InputType };
+export type { TextInputProps };

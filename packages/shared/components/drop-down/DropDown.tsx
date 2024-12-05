@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTheme } from "styled-components";
+import { isIOS, isMobile } from "react-device-detect";
 
 import { Portal } from "../portal";
 import { DomHelpers, isTablet } from "../../utils";
@@ -37,7 +38,6 @@ import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
-import { isIOS, isMobile } from "react-device-detect";
 
 const DropDown = ({
   directionY = "bottom",

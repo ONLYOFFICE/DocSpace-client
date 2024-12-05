@@ -38,6 +38,12 @@ export const RoleLinkBlockWrapper = styled.div`
     margin-top: 4px;
   }
 
+  .combo-button_selected-icon-container {
+    svg path {
+      fill: ${({ theme }) => theme.color};
+    }
+  }
+
   .combo-button_selected-icon svg {
     width: 16px;
     height: 16px;

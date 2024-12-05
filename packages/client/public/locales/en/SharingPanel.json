@@ -3,5 +3,6 @@
   "FormFilling": "Form filling",
   "LinkName": "Link name",
   "ShareEmailBody": "You have been granted access to the {{itemName}} document. Click the link below to open the document right now: {{shareLink}}.",
-  "ShareEmailSubject": "You have been granted access to the {{itemName}} document"
+  "ShareEmailSubject": "You have been granted access to the {{itemName}} document",
+  "RoleForLink": "Role for link"
 }

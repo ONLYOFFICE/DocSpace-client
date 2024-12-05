@@ -33,7 +33,7 @@ import SimulatePassword from "../../../components/SimulatePassword";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 
-export const PasswordRow = ({ item }) => {
+export const PasswordRow = ({ item, updateDownloadFiles }) => {
   const [showPasswordInput, setShowPassword] = useState(false);
   const [password, setPassword] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
@@ -49,6 +49,8 @@ export const PasswordRow = ({ item }) => {
   };
   const onButtonClick = () => {
     onInputClick();
+
+    updateDownloadFiles(item.id, password);
   };
 
   const onChangePassword = (password) => {

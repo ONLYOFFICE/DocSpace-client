@@ -37,53 +37,57 @@ import DownloadContent from "./DownloadContent";
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      this.props.sortedFiles;
 
-    this.state = {
-      documents: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: documents,
-      },
-      spreadsheets: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: spreadsheets,
-      },
-      presentations: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: presentations,
-      },
-      masterForms: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: masterForms,
-      },
-      other: {
-        isChecked: true,
-        isIndeterminate: false,
-        files: other,
-      },
-      modalDialogToggle: "modalDialogToggle",
-      showPasswordInput: false,
-    };
+    const { downloadableFiles, sortedFiles, setDownloadFiles } = this.props;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      sortedFiles;
+
+    !downloadableFiles.isProcess &&
+      setDownloadFiles({
+        documents: {
+          isChecked: true,
+          isIndeterminate: false,
+          format: null,
+          files: documents,
+        },
+        spreadsheets: {
+          isChecked: true,
+          isIndeterminate: false,
+          format: null,
+          files: spreadsheets,
+        },
+        presentations: {
+          isChecked: true,
+          isIndeterminate: false,
+          format: null,
+          files: presentations,
+        },
+        masterForms: {
+          isChecked: true,
+          isIndeterminate: false,
+          format: null,
+          files: masterForms,
+        },
+        other: {
+          isChecked: true,
+          isIndeterminate: false,
+          files: other,
+        },
+        isProcess: true,
+      });
   }
 
   onClose = () => this.props.setDownloadDialogVisible(false);
 
   getDownloadItems = () => {
+    const { downloadableFiles } = this.props;
+
     const itemList = [
-      ...this.state.documents.files,
-      ...this.state.spreadsheets.files,
-      ...this.state.presentations.files,
-      ...this.state.masterForms.files,
-      ...this.state.other.files,
+      ...downloadableFiles.documents.files,
+      ...downloadableFiles.spreadsheets.files,
+      ...downloadableFiles.presentations.files,
+      ...downloadableFiles.masterForms.files,
+      ...downloadableFiles.other.files,
     ];
 
     const files = [];
@@ -100,19 +104,23 @@ class DownloadDialogComponent extends React.Component {
           if (!singleFileUrl) {
             singleFileUrl = item.viewUrl;
           }
-          files.push({ key: item.id, value: format });
+          files.push({
+            key: item.id,
+            value: format,
+            ...(item.password && { password: item.password }),
+          });
         } else {
           folders.push(item.id);
         }
       }
     }
 
-    return [files, folders, singleFileUrl, itemList];
+    return [files, folders, singleFileUrl];
   };
 
   onDownload = () => {
     const { t, downloadFiles } = this.props;
-    const [fileConvertIds, folderIds, , itemList] = this.getDownloadItems();
+    const [fileConvertIds, folderIds, ,] = this.getDownloadItems();
 
     if (fileConvertIds.length || folderIds.length) {
       const passwordError = (
@@ -137,6 +145,7 @@ class DownloadDialogComponent extends React.Component {
 
   getNewArrayFiles = (fileId, array, format) => {
     //Set all documents format
+
     if (!fileId) {
       for (let file of array) {
         file.format =
@@ -158,27 +167,32 @@ class DownloadDialogComponent extends React.Component {
 
   onSelectFormat = (e) => {
     const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files;
+    const { downloadableFiles, setDownloadFiles } = this.props;
+    const files = downloadableFiles[type].files;
 
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState[type].files = this.getNewArrayFiles(fileId, files, format);
-      newState[type].format = !fileId ? format : this.props.t("CustomFormat");
+    const newObject = { ...downloadableFiles };
 
-      const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
-      );
+    newObject[type].files = this.getNewArrayFiles(fileId, files, format);
+    newObject[type].format = !fileId ? format : this.props.t("CustomFormat");
 
-      if (index === -1) {
-        newState[type].format = this.props.t("OriginalFormat");
-      }
+    const index = newObject[type].files.findIndex(
+      (f) => f.format && f.format !== this.props.t("OriginalFormat"),
+    );
 
-      return { ...prevState, ...newState };
+    if (index === -1) {
+      newObject[type].format = this.props.t("OriginalFormat");
+    }
+
+    setDownloadFiles({
+      ...downloadableFiles,
+      ...newObject,
     });
   };
 
   updateDocsState = (fieldStateName, itemId) => {
-    const { isChecked, isIndeterminate, files } = this.state[fieldStateName];
+    const { downloadableFiles, setDownloadFiles } = this.props;
+    const { isChecked, isIndeterminate, files } =
+      downloadableFiles[fieldStateName];
 
     if (itemId === "All") {
       const checked = isIndeterminate ? false : !isChecked;
@@ -186,14 +200,15 @@ class DownloadDialogComponent extends React.Component {
         file.checked = checked;
       }
 
-      this.setState((prevState) => {
-        const newState = { ...prevState };
+      const newObject = { ...downloadableFiles };
 
-        newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = false;
-        newState[fieldStateName].isChecked = checked;
+      newObject[fieldStateName].files = files;
+      newObject[fieldStateName].isIndeterminate = false;
+      newObject[fieldStateName].isChecked = checked;
 
-        return { ...prevState, ...newState };
+      setDownloadFiles({
+        ...downloadableFiles,
+        ...newObject,
       });
     } else {
       const file = files.find((x) => x.id == itemId);
@@ -204,14 +219,15 @@ class DownloadDialogComponent extends React.Component {
       const isIndeterminate = !activeFiles ? false : !!disableFiles;
       const isChecked = disableFiles ? false : true;
 
-      this.setState((prevState) => {
-        const newState = { ...prevState };
+      const newObject = { ...downloadableFiles };
 
-        newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = isIndeterminate;
-        newState[fieldStateName].isChecked = isChecked;
+      newObject[fieldStateName].files = files;
+      newObject[fieldStateName].isIndeterminate = isIndeterminate;
+      newObject[fieldStateName].isChecked = isChecked;
 
-        return { ...prevState, ...newState };
+      setDownloadFiles({
+        ...downloadableFiles,
+        ...newObject,
       });
     }
   };
@@ -246,11 +262,13 @@ class DownloadDialogComponent extends React.Component {
    * @returns {number}
    */
   getCheckedFileLength = () => {
-    const documents = this.state.documents.files;
-    const spreadsheets = this.state.spreadsheets.files;
-    const presentations = this.state.presentations.files;
-    const masterForms = this.state.masterForms.files;
-    const other = this.state.other.files;
+    const { downloadableFiles } = this.props;
+
+    const documents = downloadableFiles.documents.files;
+    const spreadsheets = downloadableFiles.spreadsheets.files;
+    const presentations = downloadableFiles.presentations.files;
+    const masterForms = downloadableFiles.masterForms.files;
+    const other = downloadableFiles.other.files;
 
     return (
       documents.filter((f) => f.checked).length +
@@ -279,41 +297,42 @@ class DownloadDialogComponent extends React.Component {
   };
 
   render() {
-    const { t, tReady, visible, extsConvertible, theme } = this.props;
+    const { t, tReady, visible, extsConvertible, theme, downloadableFiles } =
+      this.props;
 
     const {
       files: documents,
       isChecked: checkedDocTitle,
       isIndeterminate: indeterminateDocTitle,
       format: documentsTitleFormat,
-    } = this.state.documents;
+    } = downloadableFiles.documents;
 
     const {
       files: spreadsheets,
       isChecked: checkedSpreadsheetTitle,
       isIndeterminate: isIndeterminateSpreadsheetTitle,
       format: spreadsheetsTitleFormat,
-    } = this.state.spreadsheets;
+    } = downloadableFiles.spreadsheets;
 
     const {
       files: presentations,
       isChecked: checkedPresentationTitle,
       isIndeterminate: indeterminatePresentationTitle,
       format: presentationsTitleFormat,
-    } = this.state.presentations;
+    } = downloadableFiles.presentations;
 
     const {
       files: masterForms,
       isChecked: checkedMasterFormsTitle,
       isIndeterminate: indeterminateMasterFormsTitle,
       format: masterFormsTitleFormat,
-    } = this.state.masterForms;
+    } = downloadableFiles.masterForms;
 
     const {
       files: other,
       isChecked: checkedOtherTitle,
       isIndeterminate: indeterminateOtherTitle,
-    } = this.state.other;
+    } = downloadableFiles.other;
     const { passwordFiles } = this.props;
 
     const isCheckedLength = this.getCheckedFileLength();
@@ -330,16 +349,16 @@ class DownloadDialogComponent extends React.Component {
     };
 
     const totalItemsNum =
-      this.state.documents.files.length +
-      this.state.spreadsheets.files.length +
-      this.state.presentations.files.length +
-      this.state.masterForms.files.length +
-      this.state.other.files.length +
-      (this.state.documents.files.length > 1 && 1) +
-      (this.state.spreadsheets.files.length > 1 && 1) +
-      (this.state.presentations.files.length > 1 && 1) +
-      (this.state.masterForms.files.length > 1 && 1) +
-      (this.state.other.files.length > 1 && 1);
+      downloadableFiles.documents.files.length +
+      downloadableFiles.spreadsheets.files.length +
+      downloadableFiles.presentations.files.length +
+      downloadableFiles.masterForms.files.length +
+      downloadableFiles.other.files.length +
+      (downloadableFiles.documents.files.length > 1 && 1) +
+      (downloadableFiles.spreadsheets.files.length > 1 && 1) +
+      (downloadableFiles.presentations.files.length > 1 && 1) +
+      (downloadableFiles.masterForms.files.length > 1 && 1) +
+      (downloadableFiles.other.files.length > 1 && 1);
 
     return (
       <ModalDialog
@@ -354,10 +373,15 @@ class DownloadDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
-        <ModalDialog.Body className={this.state.modalDialogToggle}>
+        <ModalDialog.Body className={"modalDialogToggle"}>
           {passwordFiles?.length > 0 &&
             passwordFiles.map((item) => {
-              return <PasswordRow item={item} />;
+              return (
+                <PasswordRow
+                  item={item}
+                  updateDownloadFiles={this.props.updateDownloadFiles}
+                />
+              );
             })}
 
           <StyledBodyContent className="download-dialog-description">
@@ -475,8 +499,13 @@ export default inject(
     const { extsConvertible } = filesSettingsStore;
     const { theme, openUrl } = settingsStore;
 
-    const { downloadDialogVisible: visible, setDownloadDialogVisible } =
-      dialogsStore;
+    const {
+      downloadDialogVisible: visible,
+      setDownloadDialogVisible,
+      downloadableFiles,
+      setDownloadFiles,
+      updateDownloadFiles,
+    } = dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
 
@@ -492,6 +521,10 @@ export default inject(
       theme,
       openUrl,
       passwordFiles,
+
+      downloadableFiles,
+      setDownloadFiles,
+      updateDownloadFiles,
     };
   },
 )(observer(DownloadDialog));

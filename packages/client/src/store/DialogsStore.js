@@ -172,6 +172,35 @@ class DialogsStore {
 
   newFilesPanelFolderId = null;
 
+  downloadableFiles = {
+    documents: {
+      files: [],
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+    },
+    spreadsheets: {
+      files: [],
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+    },
+    presentations: {
+      files: [],
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+    },
+    masterForms: {
+      files: [],
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+    },
+    other: { files: [], isChecked: true, isIndeterminate: false, format: null },
+    isProcess: false,
+  };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -308,6 +337,24 @@ class DialogsStore {
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
     this.downloadDialogVisible = downloadDialogVisible;
+  };
+
+  setDownloadFiles = (downloadableFiles) => {
+    this.downloadableFiles = downloadableFiles;
+  };
+
+  updateDownloadFiles = (id, password) => {
+    const items = [
+      ...this.downloadableFiles.documents.files,
+      ...this.downloadableFiles.spreadsheets.files,
+      ...this.downloadableFiles.presentations.files,
+      ...this.downloadableFiles.masterForms.files,
+      ...this.downloadableFiles.other.files,
+    ];
+
+    items.map((item) => {
+      if (item.id === id) item.password = password;
+    });
   };
 
   setEmptyTrashDialogVisible = (emptyTrashDialogVisible) => {

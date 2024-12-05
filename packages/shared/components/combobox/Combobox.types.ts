@@ -30,7 +30,7 @@ import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
 import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
-export type TCombobox = null | "badge" | "onlyIcon";
+export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TOption =
   | {

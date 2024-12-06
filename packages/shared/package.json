@@ -128,7 +128,7 @@
     "@types/sjcl": "^1.0.34",
     "@types/utif": "^3.0.5",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/parser": "^8.17.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^29.7.0",

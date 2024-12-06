@@ -254,6 +254,7 @@ export function hideLoader() {
 }
 
 export function showLoader() {
+  return;
   if (isMobile) return;
 
   hideLoader();

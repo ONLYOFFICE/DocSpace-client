@@ -2750,6 +2750,7 @@ __metadata:
     eslint-config-airbnb: "npm:^19.0.4"
     eslint-config-airbnb-typescript: "npm:^17.1.0"
     eslint-config-prettier: "npm:^9.1.0"
+    eslint-import-resolver-webpack: "npm:^0.13.9"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-jsx-a11y: "npm:^6.10.0"
     eslint-plugin-prettier: "npm:^5.2.1"
@@ -13853,6 +13854,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"enhanced-resolve@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "enhanced-resolve@npm:0.9.1"
+  dependencies:
+    graceful-fs: "npm:^4.1.2"
+    memory-fs: "npm:^0.2.0"
+    tapable: "npm:^0.1.8"
+  checksum: 10/0044dad5e27adb608ba6c87939aef39ac3131d7f189470e5e3643ce78ec6ed06ccaed9e887103c64a2d36718d38e4568c0ffbdce5eed2bc6921cafc38d250ddc
+  languageName: node
+  linkType: hard
+
 "enhanced-resolve@npm:^5.15.0, enhanced-resolve@npm:^5.17.1, enhanced-resolve@npm:^5.8.3":
   version: 5.17.1
   resolution: "enhanced-resolve@npm:5.17.1"
@@ -14401,6 +14413,27 @@ __metadata:
     eslint-plugin-import-x:
       optional: true
   checksum: 10/8158730c11e562c56ed9bf7236dc75bce35b6992dc32c39ac2f4177ab77fca97b95999850204a6458054243607b54aee88c028a61fed4184f24f425fa1afff01
+  languageName: node
+  linkType: hard
+
+"eslint-import-resolver-webpack@npm:^0.13.9":
+  version: 0.13.9
+  resolution: "eslint-import-resolver-webpack@npm:0.13.9"
+  dependencies:
+    debug: "npm:^3.2.7"
+    enhanced-resolve: "npm:^0.9.1"
+    find-root: "npm:^1.1.0"
+    hasown: "npm:^2.0.0"
+    interpret: "npm:^1.4.0"
+    is-core-module: "npm:^2.13.1"
+    is-regex: "npm:^1.1.4"
+    lodash: "npm:^4.17.21"
+    resolve: "npm:^2.0.0-next.5"
+    semver: "npm:^5.7.2"
+  peerDependencies:
+    eslint-plugin-import: ">=1.4.0"
+    webpack: ">=1.11.0"
+  checksum: 10/d359fa2cfe4a19b9a9c5e1d973e2fdc2e95e0374d8a43db1d7b31831fda7ebc8ae1937e8237c1125790d08380fe817a7256d92d7d7dfda128eea83454229a003
   languageName: node
   linkType: hard
 
@@ -16995,7 +17028,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"interpret@npm:^1.0.0":
+"interpret@npm:^1.0.0, interpret@npm:^1.4.0":
   version: 1.4.0
   resolution: "interpret@npm:1.4.0"
   checksum: 10/5beec568d3f60543d0f61f2c5969d44dffcb1a372fe5abcdb8013968114d4e4aaac06bc971a4c9f5bd52d150881d8ebad72a8c60686b1361f5f0522f39c0e1a3
@@ -17186,7 +17219,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.13.0, is-core-module@npm:^2.15.1":
+"is-core-module@npm:^2.13.0, is-core-module@npm:^2.13.1, is-core-module@npm:^2.15.1":
   version: 2.15.1
   resolution: "is-core-module@npm:2.15.1"
   dependencies:
@@ -19973,6 +20006,13 @@ __metadata:
   dependencies:
     map-or-similar: "npm:^1.5.0"
   checksum: 10/72b6b80699777d000f03db6e15fdabcd4afe77feb45be51fe195cb230c64a368fcfcfbb976375eac3283bd8193d6b1a67ac3081cae07f64fca73f1aa568d59e3
+  languageName: node
+  linkType: hard
+
+"memory-fs@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "memory-fs@npm:0.2.0"
+  checksum: 10/67ff4642b7767bf00159c248dbaa1203369866e9224579f8a7c7c0c3b0ed0a6e5eaa38b4753a9aa59e0f063bd09e2c9a2a97a8e593ec395b06ce216f75fc573d
   languageName: node
   linkType: hard
 
@@ -24780,7 +24820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.5.1, semver@npm:^5.6.0, semver@npm:^5.7.1":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.5.1, semver@npm:^5.6.0, semver@npm:^5.7.1, semver@npm:^5.7.2":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
@@ -26321,6 +26361,13 @@ __metadata:
     string-width: "npm:^4.2.3"
     strip-ansi: "npm:^6.0.1"
   checksum: 10/976da6d89841566e39628d1ba107ffab126964c9390a0a877a7c54ebb08820bf388d28fe9f8dcf354b538f19634a572a506c38a3762081640013a149cc862af9
+  languageName: node
+  linkType: hard
+
+"tapable@npm:^0.1.8":
+  version: 0.1.10
+  resolution: "tapable@npm:0.1.10"
+  checksum: 10/c1059b232ff4626dd032bc5620348983071c90edee5ebf779fb11bab59b31663d9d474da0d7c43c2004145f6dac260634a60b8dbd20691f514fc5d84fe5eda1f
   languageName: node
   linkType: hard
 

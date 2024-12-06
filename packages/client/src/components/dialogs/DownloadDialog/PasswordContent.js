@@ -50,30 +50,71 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { PasswordRow } from "./PasswordRow";
+import { Text } from "@docspace/shared/components/text";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+
+import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+
+import PasswordRow from "./PasswordRow";
+import { StyledPasswordContent } from "./StyledDownloadDialog";
 
 const PasswordContent = (props) => {
-  const { updateDownloadFiles, passwordFiles } = props;
+  const { setDownloadFilesPassword, passwordFiles, sortedDownloadFiles } =
+    props;
+  const { t } = useTranslation(["DownloadDialog", "Common"]);
 
-  const updateFiles = (id, password) => {
-    updateDownloadFiles(id, password);
+  const [barIsVisible, setBarIsVisible] = useState(true);
+
+  const onClose = () => {
+    setBarIsVisible(false);
   };
 
+  const { original, other, remove, password } = sortedDownloadFiles;
+
+  const passwordRow = (items, text, type) => {
+    return (
+      <div className="password-row-wrapper">
+        <div className="password-info-text">
+          <Text fontWeight={600} fontSize="14px">
+            {text}
+          </Text>
+        </div>
+        <div>
+          {items.map((item) => {
+            return <PasswordRow item={item} type={type} />;
+          })}
+        </div>
+      </div>
+    );
+  };
   return (
-    <div className="download-dialog-row">
-      {passwordFiles?.length > 0 &&
-        passwordFiles.map((item) => {
-          return <PasswordRow item={item} updateDownloadFiles={updateFiles} />;
-        })}
-    </div>
+    <StyledPasswordContent>
+      {barIsVisible && (
+        <PublicRoomBar
+          headerText={t("ProtectedFiles")}
+          bodyText={t("EnteringPassword")}
+          iconName={InfoSvgUrl}
+          onClose={onClose}
+        />
+      )}
+      {other?.length > 0 &&
+        passwordRow(other, t("Common:PasswordRequired"), "other")}
+      {original?.length > 0 &&
+        passwordRow(original, t("InOriginalFormat"), "original")}
+      {password?.length > 0 &&
+        passwordRow(password, t("PasswordEntered"), "password")}
+      {remove?.length > 0 &&
+        passwordRow(remove, t("RemovedFromList"), "remove")}
+    </StyledPasswordContent>
   );
 };
 
 export default inject(({ filesStore, dialogsStore }) => {
   const { passwordFiles } = filesStore;
-  const { updateDownloadFiles } = dialogsStore;
-
-  return { passwordFiles, updateDownloadFiles };
+  const { setDownloadFilesPassword, sortedDownloadFiles } = dialogsStore;
+  console.log("sortedDownloadFiles", sortedDownloadFiles);
+  return { passwordFiles, setDownloadFilesPassword, sortedDownloadFiles };
 })(observer(PasswordContent));

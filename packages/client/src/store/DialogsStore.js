@@ -173,6 +173,12 @@ class DialogsStore {
   newFilesPanelFolderId = null;
 
   downloadableFiles = {};
+  sortedDownloadFiles = {
+    other: [],
+    password: [],
+    remove: [],
+    original: [],
+  };
 
   constructor(
     authStore,
@@ -320,14 +326,81 @@ class DialogsStore {
     };
   };
 
-  updateDownloadFiles = (id, password) => {
+  setDownloadFilesPassword = (id, password, type) => {
     const { fileConvertIds } = this.downloadableFiles;
+    let originItem;
 
     fileConvertIds.map((item) => {
       if (item.key === id) item.password = password;
     });
 
-    console.log("this.downloadableFiles", this.downloadableFiles);
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else originItem = item;
+    });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.password = [
+      ...this.sortedDownloadFiles.password,
+      originItem,
+    ];
+  };
+
+  setOriginalFormat = (id, fileExst, type) => {
+    const { fileConvertIds } = this.downloadableFiles;
+
+    let originItem;
+
+    fileConvertIds.map((item) => {
+      if (item.key === id) {
+        item.value = fileExst;
+      }
+    });
+
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else originItem = item;
+    });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.original = [
+      ...this.sortedDownloadFiles.original,
+      originItem,
+    ];
+  };
+
+  removeFromDownloadFiles = (id, type) => {
+    let { fileConvertIds } = this.downloadableFiles;
+    let removedItem = null;
+
+    const newFileIds = fileConvertIds.filter((item) => item.key !== id);
+
+    this.downloadableFiles.fileConvertIds = [...newFileIds];
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else {
+        removedItem = item;
+      }
+    });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.remove = [
+      ...this.sortedDownloadFiles.remove,
+      removedItem,
+    ];
+  };
+
+  setSortedDownloadFiles = (object) => {
+    this.sortedDownloadFiles = { ...this.sortedDownloadFiles, ...object };
   };
 
   setEmptyTrashDialogVisible = (emptyTrashDialogVisible) => {

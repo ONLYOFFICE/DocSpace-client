@@ -82,6 +82,9 @@ const StyledDownloadContent = styled.div`
     gap: 12px;
     height: 48px;
 
+    .remove-icon {
+      padding-right: 8px;
+    }
     .enter-password {
       text-decoration: underline dashed;
       cursor: pointer;
@@ -95,7 +98,6 @@ const StyledDownloadContent = styled.div`
       justify-content: start;
       width: 100%;
 
-      .checkbox,
       svg {
         margin: 0 !important;
       }
@@ -111,6 +113,9 @@ const StyledDownloadContent = styled.div`
         min-width: 0;
         width: 100%;
       }
+    }
+    .password-content {
+      cursor: pointer;
     }
 
     .download-dialog-actions {
@@ -135,11 +140,6 @@ const StyledDownloadContent = styled.div`
   }
 
   .password-input {
-    position: absolute;
-    top: 48px;
-    inset-inline: 0;
-    max-width: 470px;
-    width: calc(100% - 16px);
     display: flex;
   }
   #conversion-button {
@@ -149,4 +149,16 @@ const StyledDownloadContent = styled.div`
   }
 `;
 
-export { StyledDownloadContent, StyledBodyContent };
+const StyledPasswordContent = styled.div`
+  margin-top: 16px;
+
+  .password-row-wrapper {
+    padding-left: 8px;
+    .password-info-text {
+      display: flex;
+      height: 36px;
+      align-items: center;
+    }
+  }
+`;
+export { StyledDownloadContent, StyledBodyContent, StyledPasswordContent };

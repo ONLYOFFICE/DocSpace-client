@@ -27,7 +27,7 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledBodyContent } from "./StyledDownloadDialog";
+import isEmpty from "lodash/isEmpty";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
@@ -36,12 +36,13 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
+import { StyledBodyContent } from "./StyledDownloadDialog";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    const { sortedFiles } = this.props;
+    const { sortedFiles, passwordFiles, setSortedDownloadFiles } = this.props;
     const { documents, spreadsheets, presentations, masterForms, other } =
       sortedFiles;
 
@@ -77,9 +78,17 @@ class DownloadDialogComponent extends React.Component {
       },
       modalDialogToggle: "modalDialogToggle",
     };
+
+    !isEmpty(passwordFiles) && setSortedDownloadFiles({ other: passwordFiles });
   }
 
-  onClose = () => this.props.setDownloadDialogVisible(false);
+  onClose = () => {
+    const { downloadableFiles, clearActiveOperations } = this.props;
+    const fileIds = [];
+    const folderIds = [];
+
+    this.props.setDownloadDialogVisible(false);
+  };
 
   getDownloadItems = () => {
     const itemList = [
@@ -139,16 +148,22 @@ class DownloadDialogComponent extends React.Component {
 
       setDownloadFiles(fileConvertIds, folderIds, translations);
       downloadFiles(fileConvertIds, folderIds, translations);
-      // this.props.setSelected("none");
+
       this.onClose();
     }
   };
 
   onReDownload = () => {
-    const { downloadableFiles, downloadFiles } = this.props;
-    console.log("downloadableFiles", downloadableFiles);
+    const { downloadableFiles, downloadFiles, setSortedDownloadFiles } =
+      this.props;
 
     const { fileConvertIds, folderIds, translations } = downloadableFiles;
+    setSortedDownloadFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
     downloadFiles(fileConvertIds, folderIds, translations);
     this.onClose();
   };
@@ -298,8 +313,15 @@ class DownloadDialogComponent extends React.Component {
   };
 
   render() {
-    const { t, tReady, visible, extsConvertible, theme, passwordFiles } =
-      this.props;
+    const {
+      t,
+      tReady,
+      visible,
+      extsConvertible,
+      theme,
+      passwordFiles,
+      isAllFilesViewed,
+    } = this.props;
 
     const {
       files: documents,
@@ -460,11 +482,15 @@ class DownloadDialogComponent extends React.Component {
           <Button
             key="DownloadButton"
             className="download-button"
-            label={t("Common:Download")}
+            label={
+              needPassword ? t("Common:ContinueButton") : t("Common:Download")
+            }
             size="normal"
             primary
             onClick={needPassword ? this.onReDownload : this.onDownload}
-            isDisabled={needPassword ? false : isCheckedLength === 0}
+            isDisabled={
+              needPassword ? !isAllFilesViewed : isCheckedLength === 0
+            }
             scale
           />
           <Button
@@ -494,6 +520,7 @@ export default inject(
     filesActionsStore,
     filesSettingsStore,
     settingsStore,
+    uploadDataStore,
   }) => {
     const { sortedFiles, setSelected, passwordFiles } = filesStore;
     const { extsConvertible } = filesSettingsStore;
@@ -504,9 +531,19 @@ export default inject(
       setDownloadDialogVisible,
       setDownloadFiles,
       downloadableFiles,
+      setSortedDownloadFiles,
+      sortedDownloadFiles,
     } = dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
+
+    const { clearActiveOperations } = uploadDataStore;
+    console.log(
+      "sortedDownloadFiles",
+      sortedDownloadFiles,
+      sortedDownloadFiles.other,
+    );
+    const isAllFilesViewed = sortedDownloadFiles.other?.length === 0;
 
     return {
       sortedFiles,
@@ -522,6 +559,9 @@ export default inject(
       passwordFiles,
       downloadableFiles,
       setDownloadFiles,
+      setSortedDownloadFiles,
+      isAllFilesViewed,
+      clearActiveOperations,
     };
   },
 )(observer(DownloadDialog));

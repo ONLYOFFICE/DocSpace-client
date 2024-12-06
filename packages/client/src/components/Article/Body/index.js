@@ -319,7 +319,7 @@ export default inject(
     const setIsLoading = (param, withTimer) => {
       setIsSectionBodyLoading(param, withTimer);
 
-      if (param && withTimer) showProgress();
+      // if (param && withTimer) showProgress();
     };
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =

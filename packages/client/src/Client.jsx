@@ -151,13 +151,13 @@ const ClientContent = (props) => {
     isDesktop,
   ]);
 
-  // React.useEffect(() => {
-  //   if (isLoading) {
-  //     showLoader();
-  //   } else {
-  //     hideLoader();
-  //   }
-  // }, [isLoading]);
+  React.useEffect(() => {
+    if (isLoading) {
+      showLoader();
+    } else {
+      hideLoader();
+    }
+  }, [isLoading]);
 
   return (
     <>

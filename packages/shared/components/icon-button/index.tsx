@@ -92,7 +92,7 @@ const IconButton = ({
 
     if (currentIcon.color) {
       buttonRef.current.style.setProperty(
-        "--icon-button-default-color",
+        "--icon-button-color",
         currentIcon.color,
       );
       buttonRef.current.style.setProperty(

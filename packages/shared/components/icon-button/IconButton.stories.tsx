@@ -44,14 +44,53 @@ const meta = {
   component: IconButton,
   parameters: {
     docs: {
-      description: { component: "IconButton is used for a action on a page" },
+      description: {
+        component: `
+IconButton is a versatile button component that displays an icon and handles various interaction states.
+
+Features:
+- Supports hover and click states with different icons and colors
+- Customizable size and colors
+- Can be disabled
+- Supports custom icon nodes
+- Handles mouse events (click, hover, down, up)
+        `,
+      },
     },
   },
   argTypes: {
-    color: { control: "color" },
-    clickColor: { control: "color" },
-    hoverColor: { control: "color" },
-    onClick: { action: "onClick" },
+    color: {
+      control: "color",
+      description: "The default color of the icon",
+    },
+    clickColor: {
+      control: "color",
+      description: "The color of the icon when clicked",
+    },
+    hoverColor: {
+      control: "color",
+      description: "The color of the icon when hovered",
+    },
+    onClick: {
+      action: "onClick",
+      description: "Function called when the button is clicked",
+    },
+    size: {
+      control: { type: "number", min: 12, max: 50 },
+      description: "Size of the icon button in pixels",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Whether the button is disabled",
+    },
+    isFill: {
+      control: "boolean",
+      description: "Whether to fill the icon",
+    },
+    isStroke: {
+      control: "boolean",
+      description: "Whether to apply stroke to the icon",
+    },
     iconName: {
       control: {
         type: "select",
@@ -67,9 +106,45 @@ const meta = {
         QuestionReactSvg,
         SettingsReactSvg,
       ],
+      description: "The main icon to display",
+    },
+    iconHoverName: {
+      control: {
+        type: "select",
+      },
+      options: [
+        SearchReactSvgUrl,
+        EyeReactSvgUrl,
+        InfoReactSvgUrl,
+        MailReactSvgUrl,
+        CatalogPinReactSvgUrl,
+        CrossReactSvgUrl,
+        PersonReactSvg,
+        QuestionReactSvg,
+        SettingsReactSvg,
+      ],
+      description: "The icon to display on hover",
+    },
+    iconClickName: {
+      control: {
+        type: "select",
+      },
+      options: [
+        SearchReactSvgUrl,
+        EyeReactSvgUrl,
+        InfoReactSvgUrl,
+        MailReactSvgUrl,
+        CatalogPinReactSvgUrl,
+        CrossReactSvgUrl,
+        PersonReactSvg,
+        QuestionReactSvg,
+        SettingsReactSvg,
+      ],
+      description: "The icon to display when clicked",
     },
   },
 } satisfies Meta<typeof IconButton>;
+
 type Story = StoryObj<typeof IconButton>;
 export default meta;
 
@@ -80,5 +155,66 @@ export const Default: Story = {
     iconName: SearchReactSvgUrl,
     isFill: true,
     isDisabled: false,
+  },
+};
+
+export const WithHoverState: Story = {
+  args: {
+    ...Default.args,
+    iconHoverName: EyeReactSvgUrl,
+    hoverColor: "#333",
+  },
+};
+
+export const WithClickState: Story = {
+  args: {
+    ...Default.args,
+    iconClickName: InfoReactSvgUrl,
+    clickColor: "#666",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
+
+export const CustomSize: Story = {
+  args: {
+    ...Default.args,
+    size: 40,
+  },
+};
+
+export const WithStroke: Story = {
+  args: {
+    ...Default.args,
+    isStroke: true,
+    isFill: false,
+  },
+};
+
+export const WithCustomNode: Story = {
+  args: {
+    ...Default.args,
+    iconNode: (
+      <div
+        style={{
+          width: 25,
+          height: 25,
+          backgroundColor: "blue",
+          borderRadius: "50%",
+        }}
+      />
+    ),
+  },
+};
+
+export const WithTooltip: Story = {
+  args: {
+    ...Default.args,
+    dataTip: "This is a tooltip",
   },
 };

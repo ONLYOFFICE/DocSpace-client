@@ -72,6 +72,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   fromFolderId?: number;
   parentId: number;
   rootFolderType: number;
+  folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
 

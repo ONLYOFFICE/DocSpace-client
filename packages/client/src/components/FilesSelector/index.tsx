@@ -142,6 +142,7 @@ const FilesSelectorWrapper = ({
   headerProps,
 
   withCreate,
+  folderIsShared,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -224,7 +225,7 @@ const FilesSelectorWrapper = ({
   const onAccept = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
-    isPublic: boolean,
+    showMoveToPublicDialog: boolean,
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
@@ -262,7 +263,7 @@ const FilesSelectorWrapper = ({
           },
         };
 
-        if (isPublic) {
+        if (showMoveToPublicDialog) {
           setMoveToPublicRoomVisible(true, operationData);
           return;
         }
@@ -295,7 +296,7 @@ const FilesSelectorWrapper = ({
         toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
-      if (isRoomBackup && isPublic) {
+      if (isRoomBackup && showMoveToPublicDialog) {
         setBackupToPublicRoomVisible(true, {
           selectedItemId,
           breadCrumbs,
@@ -393,6 +394,7 @@ const FilesSelectorWrapper = ({
       currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
+      folderIsShared={folderIsShared}
       currentDeviceType={currentDeviceType}
       onCancel={onCloseAction}
       onSubmit={onAccept}
@@ -467,7 +469,12 @@ export default inject(
       isThirdParty,
     }: FilesSelectorProps,
   ) => {
-    const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
+    const {
+      id: selectedId,
+      parentId,
+      rootFolderType,
+      shared,
+    } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
@@ -596,6 +603,7 @@ export default inject(
           ? currentFolderIdProp
           : folderId || currentFolderIdProp,
       filesSettings,
+      folderIsShared: shared,
     };
   },
 )(observer(FilesSelectorWrapper));

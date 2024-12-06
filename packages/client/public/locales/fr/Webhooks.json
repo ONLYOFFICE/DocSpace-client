@@ -35,7 +35,6 @@
   "SecretKey": "Clé secrète",
   "SecretKeyHint": "La définition d'un secret pour le webhook permet de vérifier les demandes envoyées à l'URL de la charge.",
   "SecretKeyWarning": "Vous ne pouvez pas récupérer votre clé secrète une fois qu'elle a été enregistrée. Si vous avez perdu ou oublié cette clé secrète, vous pouvez la réinitialiser, mais toutes les intégrations utilisant ce secret devront être mises à jour.",
-  "SelectDate": "Sélectionner la date",
   "SelectDeliveryTime": "Sélectionner le délai de livraison",
   "SettingsWebhook": "Paramètres du webhook",
   "SSLHint": "Par défaut, nous vérifions les certificats SSL lors de la livraison des charges utiles.",

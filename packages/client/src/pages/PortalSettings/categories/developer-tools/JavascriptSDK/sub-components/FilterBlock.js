@@ -247,7 +247,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
     if (!query) {
       closeInviteInputPanel();
-      setInputValue("");
+      setAuthor("");
       setUsersList([]);
     }
   };

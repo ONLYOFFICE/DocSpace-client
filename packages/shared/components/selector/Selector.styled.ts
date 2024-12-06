@@ -108,6 +108,7 @@ const StyledBody = styled.div<{
   footerHeight: number;
   headerHeight: number;
   withTabs?: boolean;
+  withPadding?: boolean;
 }>`
   width: 100%;
 
@@ -120,7 +121,8 @@ const StyledBody = styled.div<{
         ? `calc(100% - ${props.headerHeight}px)`
         : "100%"};
 
-  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0")};
+  padding: ${({ withTabs, withPadding }) =>
+    withTabs || !withPadding ? "0" : "16px 0 0"};
 
   .search-input,
   .search-loader {

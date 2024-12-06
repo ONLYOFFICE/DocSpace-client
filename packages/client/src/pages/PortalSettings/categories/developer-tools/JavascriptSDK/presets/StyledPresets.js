@@ -307,7 +307,6 @@ export const ColumnContainer = styled(Box)`
 
 export const Preview = styled(Box)`
   width: 100%;
-  min-width: 660px;
   flex-direction: row;
 
   .preview-description {
@@ -358,7 +357,7 @@ export const CodeWrapper = styled.div`
 
   margin-top: 16px;
 
-  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  width: 100%;
   max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

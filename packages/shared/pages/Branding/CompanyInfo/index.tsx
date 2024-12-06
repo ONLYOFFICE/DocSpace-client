@@ -41,23 +41,17 @@ import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation"
 
 import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
+import { useCompanySettings } from "./useCompanySettings";
 
 export const CompanyInfo = ({
   t,
   isSettingPaid,
   onShowExample,
   companySettings,
-  companySettingsError,
-  onChangeCompanyName,
-  onChangeEmail,
-  onChangePhone,
-  onChangeSite,
-  onChangeAddress,
   onSave,
   onRestore,
   isLoading,
   companyInfoSettingsIsDefault,
-  showReminder,
   deviceType,
 }: ICompanyInfo) => {
   const redirectUrl: string = isManagement()
@@ -70,7 +64,25 @@ export const CompanyInfo = ({
     deviceType,
   });
 
-  const { address, companyName, email, phone, site } = companySettings;
+  const {
+    address,
+    companyName,
+    email,
+    phone,
+    site,
+    companySettingsError,
+    hasChanges,
+    onChangeAddress,
+    onChangeCompanyName,
+    onChangeEmail,
+    onChangePhone,
+    onChangeSite,
+  } = useCompanySettings(companySettings);
+
+  const onSaveAction = () => {
+    onSave(address, companyName, email, phone, site);
+  };
+
   const {
     hasErrorAddress,
     hasErrorCompanyName,
@@ -199,7 +211,7 @@ export const CompanyInfo = ({
       </div>
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={onSave}
+        onSaveClick={onSaveAction}
         onCancelClick={onRestore}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
@@ -208,7 +220,7 @@ export const CompanyInfo = ({
         saveButtonDisabled={isDisabled}
         hasScroll
         hideBorder
-        showReminder={(isSettingPaid && showReminder) || isLoading}
+        showReminder={(isSettingPaid && hasChanges) || isLoading}
         disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
         additionalClassSaveButton="company-info-save"
         additionalClassCancelButton="company-info-cancel"

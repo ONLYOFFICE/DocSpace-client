@@ -32,17 +32,16 @@ export interface ICompanyInfo {
   isSettingPaid: boolean;
   onShowExample: () => void;
   companySettings: ICompanySettings;
-  companySettingsError: ICompanySettingsError;
-  onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePhone: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeSite: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSave: () => void;
+  onSave: (
+    address: string,
+    companyName: string,
+    email: string,
+    phone: string,
+    site: string,
+  ) => void;
   onRestore: () => void;
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
-  showReminder: boolean;
   deviceType: DeviceType;
 }
 
@@ -52,6 +51,8 @@ export interface ICompanySettings {
   email: string;
   phone: string;
   site: string;
+  isDefault: boolean;
+  isLicensor: boolean;
 }
 
 export interface ICompanySettingsError {

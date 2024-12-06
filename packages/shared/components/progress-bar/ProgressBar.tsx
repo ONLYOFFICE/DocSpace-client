@@ -62,6 +62,13 @@ const ProgressBar = ({
         className={className}
         percent={progressPercent}
         data-testid="progress-bar"
+        role="progressbar"
+        aria-valuenow={progressPercent}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={label}
+        data-status={status || undefined}
+        data-error={error || undefined}
       >
         {isInfiniteProgress ? (
           <div className="progress-bar_animation" />

@@ -26,22 +26,14 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
-
-import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 const AdditionalResourcesComponent = (props) => {
   const {
@@ -56,59 +48,10 @@ const AdditionalResourcesComponent = (props) => {
     isLoadedAdditionalResources,
     deviceType,
   } = props;
-
-  const [additionalSettings, setAdditionalSettings] = useState({});
-  const [hasChange, setHasChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { feedbackAndSupportEnabled, videoGuidesEnabled, helpCenterEnabled } =
-    additionalSettings;
-
-  const getSettings = () => {
-    const additionalSettings = getFromSessionStorage("additionalSettings");
-
-    const defaultData = {
-      feedbackAndSupportEnabled:
-        additionalResourcesData?.feedbackAndSupportEnabled,
-      // videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
-      helpCenterEnabled: additionalResourcesData?.helpCenterEnabled,
-    };
-
-    saveToSessionStorage("defaultAdditionalSettings", defaultData);
-
-    if (additionalSettings) {
-      setAdditionalSettings({
-        feedbackAndSupportEnabled:
-          additionalSettings?.feedbackAndSupportEnabled,
-        // videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
-        helpCenterEnabled: additionalSettings?.helpCenterEnabled,
-      });
-    } else {
-      setAdditionalSettings(defaultData);
-    }
-  };
-
-  useEffect(() => {
-    getSettings();
-  }, [additionalResourcesData]);
-
-  useEffect(() => {
-    const defaultAdditionalSettings = getFromSessionStorage(
-      "defaultAdditionalSettings",
-    );
-    const newSettings = {
-      feedbackAndSupportEnabled: additionalSettings.feedbackAndSupportEnabled,
-      // videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
-      helpCenterEnabled: additionalSettings.helpCenterEnabled,
-    };
-    saveToSessionStorage("additionalSettings", newSettings);
-
-    if (isEqual(defaultAdditionalSettings, newSettings)) {
-      setHasChange(false);
-    } else {
-      setHasChange(true);
-    }
-  }, [additionalSettings, additionalResourcesData]);
+  const { feedbackAndSupportEnabled, helpCenterEnabled } =
+    additionalResourcesData;
 
   useEffect(() => {
     if (!(additionalResourcesData && tReady)) return;
@@ -116,45 +59,36 @@ const AdditionalResourcesComponent = (props) => {
     setIsLoadedAdditionalResources(true);
   }, [additionalResourcesData, tReady]);
 
-  const onSave = useCallback(async () => {
-    setIsLoading(true);
+  const onSave = useCallback(
+    async (feedbackEnabled, helpEnabled) => {
+      setIsLoading(true);
 
-    const settings = JSON.parse(JSON.stringify(additionalResourcesData));
+      const settings = JSON.parse(JSON.stringify(additionalResourcesData));
 
-    settings.feedbackAndSupportEnabled = feedbackAndSupportEnabled;
-    settings.videoGuidesEnabled = videoGuidesEnabled;
-    settings.helpCenterEnabled = helpCenterEnabled;
+      settings.feedbackAndSupportEnabled = feedbackEnabled;
+      settings.helpCenterEnabled = helpEnabled;
 
-    await api.settings
-      .setAdditionalResources(settings)
-      .then(() => {
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      })
-      .catch((error) => {
-        toastr.error(error);
-      });
+      await api.settings
+        .setAdditionalResources(settings)
+        .then(() => {
+          toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        })
+        .catch((error) => {
+          toastr.error(error);
+        });
 
-    await getAdditionalResources();
-
-    const data = {
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-      helpCenterEnabled,
-    };
-
-    saveToSessionStorage("additionalSettings", data);
-    saveToSessionStorage("defaultAdditionalSettings", data);
-    setIsLoading(false);
-  }, [setIsLoading, getAdditionalResources, additionalSettings]);
+      await getAdditionalResources();
+      setIsLoading(false);
+    },
+    [setIsLoading, getAdditionalResources],
+  );
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
     await api.settings
       .restoreAdditionalResources()
-      .then((res) => {
-        setAdditionalSettings(res);
-        saveToSessionStorage("additionalSettings", res);
+      .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
       .catch((error) => {
@@ -166,39 +100,6 @@ const AdditionalResourcesComponent = (props) => {
     setIsLoading(false);
   }, [setIsLoading, getAdditionalResources]);
 
-  const onChangeFeedback = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      feedbackAndSupportEnabled: !feedbackAndSupportEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      feedbackAndSupportEnabled: !feedbackAndSupportEnabled,
-    });
-  };
-
-  const onChangeVideoGuides = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      videoGuidesEnabled: !videoGuidesEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      videoGuidesEnabled: !videoGuidesEnabled,
-    });
-  };
-
-  const onChangeHelpCenter = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      helpCenterEnabled: !helpCenterEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      helpCenterEnabled: !helpCenterEnabled,
-    });
-  };
-
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
 
   return (
@@ -206,12 +107,9 @@ const AdditionalResourcesComponent = (props) => {
       t={t}
       isSettingPaid={isSettingPaid}
       feedbackAndSupportEnabled={feedbackAndSupportEnabled}
-      onChangeFeedback={onChangeFeedback}
       helpCenterEnabled={helpCenterEnabled}
-      onChangeHelpCenter={onChangeHelpCenter}
       onSave={onSave}
       onRestore={onRestore}
-      hasChange={hasChange}
       isLoading={isLoading}
       additionalResourcesIsDefault={additionalResourcesIsDefault}
       deviceType={deviceType}

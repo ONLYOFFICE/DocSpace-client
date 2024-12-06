@@ -2640,9 +2640,9 @@ const Dark: TTheme = {
     },
 
     badge: {
-      color: black,
-      stroke: darkGrayDark,
-      fill: darkGrayDark,
+      color: white,
+      stroke: grayDark,
+      fill: grayDark,
       defaultFill: black,
       badgeFill: mainOrange,
     },

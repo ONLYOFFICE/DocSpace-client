@@ -31,15 +31,26 @@ import { Box } from "../../box";
 const getDefaultStyles = ({
   $currentColorScheme,
   $isVersion,
+  $isFirst,
 }: {
   $currentColorScheme?: TColorScheme;
   $isVersion?: boolean;
+  $isFirst?: boolean;
   theme: TTheme;
 }) =>
   $currentColorScheme &&
+  $isVersion &&
+  !$isFirst &&
   css`
+    .version-mark-icon {
+      path {
+        fill: ${$currentColorScheme?.main?.accent};
+        stroke: ${$currentColorScheme?.main?.accent};
+      }
+    }
+
     .version_badge-text {
-      color: ${$isVersion && $currentColorScheme.text?.accent};
+      color: ${$currentColorScheme.text?.accent};
     }
   `;
 

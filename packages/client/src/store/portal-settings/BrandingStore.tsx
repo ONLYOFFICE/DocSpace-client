@@ -24,20 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   setAdditionalResources,
   restoreAdditionalResources,
   setCompanyInfoSettings,
   restoreCompanyInfoSettings,
+  getLogoText as getWhiteLabelText,
+  getIsDefaultWhiteLabel,
+  setWhiteLabelSettings,
+  restoreWhiteLabelSettings,
 } from "@docspace/shared/api/settings";
 import { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
 class BrandingStore {
   isLoadedAdditionalResources = false;
   isLoadedCompanyInfoSettingsData = false;
+  logoUrls: ILogo[] = [];
+  logoText = "";
+  defaultLogoText = "";
+  isDefaultWhiteLabel = false;
 
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -86,6 +97,85 @@ class BrandingStore {
     await restoreCompanyInfoSettings();
     await this.settingsStore.getCompanyInfoSettings();
   };
+
+  setLogoUrls = (urls: ILogo[]) => {
+    this.logoUrls = urls;
+  };
+
+  setLogoText = (text: string) => {
+    this.logoText = text;
+  };
+
+  setDefaultLogoText = (text: string) => {
+    this.defaultLogoText = text;
+  };
+
+  setIsDefaultWhiteLabel = (isDefault: boolean) => {
+    this.isDefaultWhiteLabel = isDefault;
+  };
+
+  getLogoUrls = async () => {
+    const { getWhiteLabelLogoUrls } = this.settingsStore;
+    const logos = await getWhiteLabelLogoUrls();
+    this.setLogoUrls(Object.values(logos));
+    return logos;
+  };
+
+  getLogoText = async () => {
+    const res = (await getWhiteLabelText(isManagement())) as string;
+    this.setLogoText(res);
+    this.setDefaultLogoText(res);
+    return res;
+  };
+
+  getIsDefault = async () => {
+    const res = await getIsDefaultWhiteLabel(isManagement());
+    const isDefaultWhiteLabel = res.map((item) => item.default).includes(false);
+    this.setIsDefaultWhiteLabel(isDefaultWhiteLabel);
+  };
+
+  applyNewLogos = (logos: ILogo[]) => {
+    const theme = this.settingsStore.theme.isBase ? "light" : "dark";
+
+    const favicon = document.getElementById("favicon");
+    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
+    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+
+    runInAction(() => {
+      // eslint-disable-next-line
+      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
+      // eslint-disable-next-line
+      logo && (logo.src = logos?.[0]?.path?.[theme]);
+      // eslint-disable-next-line
+      logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
+    });
+  };
+
+  saveWhiteLabelSettings = async (data) => {
+    await setWhiteLabelSettings(data, isManagement());
+    const logos = await this.getLogoUrls();
+    this.getIsDefault();
+    this.getLogoText();
+    this.applyNewLogos(logos);
+  };
+
+  resetWhiteLabelSettings = async () => {
+    await restoreWhiteLabelSettings(isManagement());
+    const logos = await this.getLogoUrls();
+    this.getIsDefault();
+    this.getLogoText();
+    this.applyNewLogos(logos);
+  };
+
+  initWhiteLabel = () => {
+    this.getLogoUrls();
+    this.getLogoText();
+    this.getIsDefault();
+  };
+
+  get isWhiteLabelLoaded() {
+    return this.logoUrls.length > 0 && this.logoText !== undefined;
+  }
 }
 
 export default BrandingStore;

@@ -1797,6 +1797,7 @@ class FilesStore {
         }
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
+        this.clientLoadingStore.setIsSectionFilterLoading(false);
 
         const selectedFolder = {
           selectedFolder: { ...this.selectedFolderStore },
@@ -2018,6 +2019,7 @@ class FilesStore {
           this.infoPanelStore.setInfoPanelRoom(null);
 
           this.clientLoadingStore.setIsSectionHeaderLoading(false);
+          this.clientLoadingStore.setIsSectionFilterLoading(false);
 
           const selectedFolder = {
             selectedFolder: { ...this.selectedFolderStore },

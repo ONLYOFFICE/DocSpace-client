@@ -446,6 +446,7 @@
   "SectionRequired": "Deze sectie is verplicht",
   "SelectAction": "Kiezen",
   "SelectAll": "Alles selecteren",
+  "SelectDate": "Selecteer datum",
   "SelectDOCXFFormat": "Selecteer .DOCXF-bestand",
   "SelectDOCXFormat": "Selecteer het bestand in .DOCX formaat",
   "SelectExtensionFiles": "Selecteer {{extension}} bestanden",

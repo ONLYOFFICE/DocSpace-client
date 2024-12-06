@@ -452,6 +452,7 @@
   "SectionRequired": "Ovaj deo je obavezan",
   "SelectAction": "Izaberi",
   "SelectAll": "Izaberi sve",
+  "SelectDate": "Odaberi datum",
   "SelectDOCXFFormat": "Izaberi .DOCXF datoteku",
   "SelectDOCXFormat": "Izaberi .DOCX datoteku",
   "SelectExtensionFiles": "Izaberite datoteke {{extension}}",

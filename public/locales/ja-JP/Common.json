@@ -452,6 +452,7 @@
   "SectionRequired": "このセクションは必須です",
   "SelectAction": "選択",
   "SelectAll": "全てを選択",
+  "SelectDate": "日付の選択",
   "SelectDOCXFFormat": ".DOCXF ファイルを選択してください",
   "SelectDOCXFormat": ".DOCX形式のファイルを選択する",
   "SelectExtensionFiles": "{{extension}}ファイルを選択してください",

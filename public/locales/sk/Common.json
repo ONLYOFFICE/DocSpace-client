@@ -446,6 +446,7 @@
   "SectionRequired": "Táto časť je povinná",
   "SelectAction": "Vyberať",
   "SelectAll": "Vybrať všetko",
+  "SelectDate": "Vyberte dátum",
   "SelectDOCXFFormat": "Vyberte súbor .DOCXF",
   "SelectDOCXFormat": "Vyberte súbor vo formáte .DOCX",
   "SelectExtensionFiles": "Vyberte súbory {{extension}}",

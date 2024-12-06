@@ -223,7 +223,7 @@ const DeliveryDatePicker = ({
             outerDate={filters.deliveryDate}
             isMobile={isMobile()}
             onChange={onDateSet}
-            selectedDateText={t("SelectDate")}
+            selectDateText={t("Common:SelectDate")}
             showCalendarIcon={false}
             locale={i18n.language}
           />

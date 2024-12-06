@@ -446,6 +446,7 @@
   "SectionRequired": "Цей розділ обов'язковий",
   "SelectAction": "Виберіть",
   "SelectAll": "Вибрати всі",
+  "SelectDate": "Виберіть дату",
   "SelectDOCXFFormat": "Виберіть файл .DOCXF",
   "SelectDOCXFormat": "Вибрати файл в форматі .DOCX",
   "SelectExtensionFiles": "Виберіть файли {{extension}}",

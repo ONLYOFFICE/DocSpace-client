@@ -74,6 +74,7 @@ const FilesSelectorWrapper = ({
   withSearch = true,
   withBreadCrumbs = true,
   withSubtitle = true,
+  withPadding,
 
   isMove,
   isCopy,
@@ -411,6 +412,7 @@ const FilesSelectorWrapper = ({
       cancelButtonLabel={cancelButtonLabel}
       withBreadCrumbs={withBreadCrumbs}
       withSearch={withSearch}
+      withPadding={withPadding}
       descriptionText={
         !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""

@@ -452,6 +452,7 @@
   "SectionRequired": "此部分为必填项",
   "SelectAction": "选择",
   "SelectAll": "全选",
+  "SelectDate": "选择日期",
   "SelectDOCXFFormat": "选择 .DOCXF 文件",
   "SelectDOCXFormat": "选择.DOCX格式的文件",
   "SelectExtensionFiles": "选择{{extension}}文件",

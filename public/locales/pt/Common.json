@@ -447,6 +447,7 @@
   "SectionRequired": "Esta secção é obrigatória",
   "SelectAction": "Selecionar",
   "SelectAll": "Selecionar tudo",
+  "SelectDate": "Selecione a data",
   "SelectDOCXFFormat": "Selecione o arquivo .DOCXF",
   "SelectDOCXFormat": "Selecionar um ficheiro no formato .DOCX",
   "SelectExtensionFiles": "Selecione {{extension}} arquivos",

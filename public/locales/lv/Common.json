@@ -438,6 +438,7 @@
   "SearchEmptyRoomsDescription": "Šim filtram neatbilst neviena telpa. Izmēģiniet citu vai notīriet filtru, lai skatītu visas telpas.",
   "SelectAction": "Izvēlieties",
   "SelectAll": "Atlasīt visu",
+  "SelectDate": "Atlasīt datumu",
   "SelectDOCXFFormat": "Atlasiet .DOCXF failu",
   "SelectDOCXFormat": "Atlasīt failu .DOCX formātā",
   "SelectExtensionFiles": "Atlasīt {{extension}} failus",

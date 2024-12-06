@@ -34,11 +34,14 @@ import isEqual from "lodash/isEqual";
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
-import { size } from "@docspace/shared/utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
 import {
   generateLogo,

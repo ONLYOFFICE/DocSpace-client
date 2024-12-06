@@ -32,14 +32,17 @@ import isEqual from "lodash/isEqual";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 

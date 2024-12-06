@@ -308,6 +308,7 @@
   "SearchEmptyRoomsDescription": "ບໍ່ມີຫ້ອງໃດກົງກັບຕົວກອງນີ້. ລອງໃຊ້ອັນອື່ນ ຫຼືຕົວກັ່ນຕອງທີ່ຈະແຈ້ງເພື່ອເບິ່ງທຸກຫ້ອງ.",
   "SelectAction": "ເລືອກ",
   "SelectAll": "ເລືອກທັງໝົດ",
+  "SelectDate": "ເລືອກວັນທີ",
   "SelectDOCXFormat": "ເລືອກໄຟລ໌ໃນ . ຮູບແບບ DOCX",
   "SelectFile": "ເລືອກໄຟລ໌",
   "SendButton": "ສົ່ງ",

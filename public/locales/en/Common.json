@@ -454,6 +454,7 @@
   "SectionRequired": "This section is required",
   "SelectAction": "Select",
   "SelectAll": "Select all",
+  "SelectDate": "Select date",
   "SelectDOCXFFormat": "Select .DOCXF file",
   "SelectDOCXFormat": "Select .DOCX file",
   "SelectExtensionFiles": "Select {{extension}} files",

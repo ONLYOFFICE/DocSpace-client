@@ -438,6 +438,7 @@
   "SearchEmptyRoomsDescription": "Tomuto filtru neodpovídají žádné místnosti. Vyzkoušejte jiný filtr nebo vymažte filtr pro zobrazení všech místností.",
   "SelectAction": "Vybrat",
   "SelectAll": "Vybrat vše",
+  "SelectDate": "Zvolte datum",
   "SelectDOCXFFormat": "Vyberte soubor .DOCXF",
   "SelectDOCXFormat": "Vybrat soubor ve formátu .DOCX",
   "SelectExtensionFiles": "Vybrat soubory {{extension}}",

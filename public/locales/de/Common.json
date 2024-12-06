@@ -452,6 +452,7 @@
   "SectionRequired": "Dieser Abschnitt ist erforderlich",
   "SelectAction": "Auswählen",
   "SelectAll": "Alle auswählen",
+  "SelectDate": "Datum auswählen",
   "SelectDOCXFFormat": ".DOCXF-Datei auswählen",
   "SelectDOCXFormat": "Datei im DOCX-Format auswählen",
   "SelectExtensionFiles": "{{extension}}-Dateien auswählen",

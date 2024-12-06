@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ToggleBlock from "./ToggleBlock";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
 
@@ -38,6 +39,8 @@ const LimitTimeBlock = (props) => {
     language,
     isPrimary,
   } = props;
+
+  const { t } = useTranslation(["Common"]);
 
   const onChange = (date) => {
     const isExpired = date
@@ -74,6 +77,7 @@ const LimitTimeBlock = (props) => {
         openDate={new Date()}
         hasError={isExpired}
         locale={language}
+        selectDateText={t("Common:SelectDate")}
       />
     </ToggleBlock>
   );

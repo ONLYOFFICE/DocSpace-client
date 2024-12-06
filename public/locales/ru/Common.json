@@ -452,6 +452,7 @@
   "SectionRequired": "Этот раздел является обязательным",
   "SelectAction": "Выбрать",
   "SelectAll": "Выбрать все",
+  "SelectDate": "Выбрать дату",
   "SelectDOCXFFormat": "Выбрать файл в формате .DOCXF",
   "SelectDOCXFormat": "Выбрать файл в формате .DOCX",
   "SelectExtensionFiles": "Выберите {{extension}} файлы.",

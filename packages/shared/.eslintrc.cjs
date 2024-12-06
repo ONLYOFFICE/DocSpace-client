@@ -52,6 +52,7 @@ module.exports = {
     // "no-unneeded-ternary": "off",
     "react/require-default-props": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "@typescript-eslint/no-throw-literal": ["error"],
     "prettier/prettier": [
       "error",
       {

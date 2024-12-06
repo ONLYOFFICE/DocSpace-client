@@ -1,29 +1,38 @@
+@import "../../styles/common-input-styles.scss";
+
 .iconBlock {
   display: flex;
   align-items: center;
   height: 100%;
   padding-inline-end: 8px;
   padding-inline-start: 1px;
+
+  background-color: inherit;
 }
 
 .childrenBlock {
   display: flex;
   align-items: center;
   padding: 2px 0px 2px 2px;
+  background-color: inherit;
 }
 
 .prepend {
   display: flex;
   align-items: center;
+  background-color: inherit;
 }
 
 .append {
   display: flex;
   align-items: center;
   margin: 0;
+  background-color: inherit;
 }
 
 .inputGroup {
+  @include common-input-color-styles;
+
   display: flex;
 
   input:-webkit-autofill,

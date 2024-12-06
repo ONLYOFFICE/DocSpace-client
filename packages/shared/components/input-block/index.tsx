@@ -149,6 +149,11 @@ const InputBlock = React.memo(
         className={inputGroupClassName}
         style={style}
         data-testid="input-block"
+        data-size={size}
+        data-scale={scale}
+        data-error={hasError}
+        data-warning={hasWarning}
+        data-disabled={isDisabled}
       >
         {children && (
           <div className={styles.prepend}>
@@ -163,6 +168,7 @@ const InputBlock = React.memo(
             <div
               className={`${styles.iconBlock} ${iconButtonClassName}`}
               onClick={handleIconClick}
+              data-size={size}
             >
               <IconButton
                 size={iconButtonSize}

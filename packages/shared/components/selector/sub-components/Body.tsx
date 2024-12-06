@@ -83,6 +83,7 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+  withPadding,
 
   withInfo,
   infoText,
@@ -244,6 +245,7 @@ const Body = ({
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}
+      withPadding={withPadding}
     >
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />

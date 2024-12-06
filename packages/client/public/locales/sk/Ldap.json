@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "Pomocou filtra na vyhľadávanie LDAP vyberte používateľov, ktorí musia byť importovaní.",
   "LdapUserQuotaTooltip": "Ak chcete nastaviť kvótu úložiska pre používateľa, pridajte atribút v priečinku LDAP (napríklad UsersQuotaLimit) a zadajte celočíselnú hodnotu tohto atribútu. Zobrazí sa hodnota kvóty v bajtoch. Tu zadajte iba názov atribútu. Tento atribút sa použije len počas prvého nastavenia a neskôr ho môžete zmeniť ručne v časti {{contactsName}}.",
   "LdapUsersType": "Typ používateľov",
-  "LdapUsersTypeInfo": "Používatelia majú prístup len do miestností, do ktorých ich pozvali administrátori, a nemôžu vytvárať vlastné miestnosti, priečinky alebo súbory. Vyberte iný typ nižšie, ak chcete poskytnúť viac oprávnení. V opačnom prípade môžete typ zmeniť ručne v časti {{contactsName}}.",
   "LdapUserTypeTooltip": "Všetci používatelia budú pridaní do {{productName}} so zvoleným typom."
 }

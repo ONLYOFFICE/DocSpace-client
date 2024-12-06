@@ -145,9 +145,9 @@ const Branding = ({
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, common }) => {
+export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = common;
+  const { isLoadedCompanyInfoSettingsData } = brandingStore;
   const {
     standalone,
     portals,

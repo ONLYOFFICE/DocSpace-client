@@ -40,7 +40,7 @@ const Backdrop: React.FC<BackdropProps> = ({
   isAside = false,
   withoutBackground = false,
   isModalDialog = false,
-  zIndex,
+  zIndex = 203,
   onClick,
   ...restProps
 }) => {
@@ -65,37 +65,42 @@ const Backdrop: React.FC<BackdropProps> = ({
 
     // Determine if background is needed
     const shouldShowBackground =
-      shouldShowBackdrop &&
-      ((isTabletOrMobile && !withoutBlur) ||
-        withBackground ||
+      !withoutBackground &&
+      (withBackground ||
+        (isTabletOrMobile && !withoutBlur) ||
         (isAside && !withoutBackground));
 
     setNeedBackdrop(shouldShowBackdrop);
     setNeedBackground(shouldShowBackground);
   }, [visible, isAside, withBackground, withoutBlur, withoutBackground]);
 
-  const backdropClasses = classNames(styles.backdrop, className, {
-    [styles.visible]: visible,
-    [styles.withBackground]: needBackground,
-    [styles.withoutBackground]: !needBackground,
-    [styles.withoutBlur]: withoutBlur,
-    [styles.withBlur]: !withoutBlur,
-    [styles.isAside]: isAside,
-    [styles.isModalDialog]: isModalDialog,
-    [styles.mobileView]: isMobile() || isTablet(),
-  });
+  const backdropClasses = classNames(
+    styles.backdrop,
+    "backdrop-active",
+    "not-selectable",
+    Array.isArray(className) ? className : className?.split(" "),
+    {
+      [styles.visible]: visible,
+      [styles.withBackground]: needBackground,
+      [styles.withoutBackground]: !needBackground || withoutBackground,
+      [styles.withoutBlur]: withoutBlur,
+      [styles.withBlur]: !withoutBlur,
+      [styles.isAside]: isAside,
+      [styles.isModalDialog]: isModalDialog,
+      [styles.mobileView]: isMobile() || isTablet(),
+    },
+  );
 
   const handleTouch = React.useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
       if (!isModalDialog) {
         e.preventDefault();
       }
-      backdropRef.current?.click();
+      onClick?.(e as unknown as React.MouseEvent);
     },
-    [isModalDialog],
+    [isModalDialog, onClick],
   );
 
-  // Single effect to handle backdrop state updates
   React.useEffect(() => {
     updateBackdropState();
   }, [updateBackdropState]);
@@ -109,7 +114,8 @@ const Backdrop: React.FC<BackdropProps> = ({
       {...restProps}
       ref={backdropRef}
       className={backdropClasses}
-      style={{ zIndex }}
+      style={{ zIndex, ...restProps.style }}
+      onClick={onClick}
       onTouchMove={handleTouch}
       onTouchEnd={handleTouch}
       data-testid="backdrop"

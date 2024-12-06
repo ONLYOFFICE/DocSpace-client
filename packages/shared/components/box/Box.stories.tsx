@@ -24,243 +24,218 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Box } from ".";
 
-import { Box } from "./index";
-
-const containerProps = {
-  widthProp: "100%",
-  paddingProp: "10px",
-  displayProp: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-};
-
-const rowProps = {
-  displayProp: "flex",
-  flexDirection: "row",
-};
-
-const commonBoxProps = {
-  textAlign: "center",
-  marginProp: "10px",
-  paddingProp: "10px",
-};
-
-const meta = {
+const meta: Meta<typeof Box> = {
   title: "Components/Box",
   component: Box,
-  argTypes: {},
+  argTypes: {
+    displayProp: {
+      control: "select",
+      options: ["block", "flex", "grid", "inline", "inline-block", "none"],
+      description: "Sets the display type of the box",
+    },
+    flexDirection: {
+      control: "select",
+      options: ["row", "column", "row-reverse", "column-reverse"],
+      description: "Controls flex direction when displayProp is flex",
+    },
+    alignItems: {
+      control: "select",
+      options: ["flex-start", "center", "flex-end", "stretch", "baseline"],
+      description: "Aligns items along the cross axis",
+    },
+    justifyContent: {
+      control: "select",
+      options: [
+        "flex-start",
+        "center",
+        "flex-end",
+        "space-between",
+        "space-around",
+      ],
+      description: "Aligns items along the main axis",
+    },
+    borderProp: {
+      control: "object",
+      description: "Sets border properties",
+    },
+    paddingProp: {
+      control: "text",
+      description: "Sets padding",
+    },
+    marginProp: {
+      control: "text",
+      description: "Sets margin",
+    },
+    backgroundProp: {
+      control: "color",
+      description: "Sets background color",
+    },
+  },
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "A container that lays out its contents in one direction. Box provides general CSS capabilities like flexbox layout, paddings, background color, border, and animation.",
+          "A versatile container component that provides extensive layout control through flexbox, grid, spacing, and styling props.",
       },
     },
   },
-} satisfies Meta<typeof Box>;
-type Story = StoryObj<typeof Box>;
+};
 
 export default meta;
+type Story = StoryObj<typeof Box>;
 
+// Base example
 export const Default: Story = {
-  render: (args) => <Box {...args}>Example</Box>,
   args: {
-    widthProp: "100%",
-    paddingProp: "10px",
-    displayProp: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    borderProp: "4px dashed gray",
+    children: "Basic Box Content",
+    paddingProp: "16px",
+    backgroundProp: "#f5f5f5",
+    borderProp: "1px solid #ddd",
   },
 };
 
-export const Example: Story = {
+// Layout examples
+export const FlexLayout: Story = {
+  args: {
+    displayProp: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingProp: "16px",
+    gapProp: "8px",
+    children: (
+      <>
+        <Box paddingProp="8px" backgroundProp="#e3e3e3">
+          Item 1
+        </Box>
+        <Box paddingProp="8px" backgroundProp="#e3e3e3">
+          Item 2
+        </Box>
+        <Box paddingProp="8px" backgroundProp="#e3e3e3">
+          Item 3
+        </Box>
+      </>
+    ),
+  },
+};
+
+// Border variations
+export const BorderStyles: Story = {
   render: () => (
-    <Box {...containerProps}>
-      <Box {...rowProps}>
-        <Box {...commonBoxProps} backgroundProp="gray">
-          color background
-        </Box>
+    <Box displayProp="flex" flexDirection="column" gapProp="16px">
+      <Box borderProp="1px solid black" paddingProp="8px">
+        Solid Border
+      </Box>
+      <Box borderProp="1px dashed black" paddingProp="8px">
+        Dashed Border
+      </Box>
+      <Box
+        borderProp={{
+          style: "solid",
+          width: "1px",
+          color: "black",
+          radius: "8px",
+        }}
+        paddingProp="8px"
+      >
+        Rounded Border
+      </Box>
+    </Box>
+  ),
+};
 
-        <Box
-          {...commonBoxProps}
-          backgroundProp="linear-gradient(90deg, white, gray)"
-        >
-          linear gradient background
-        </Box>
+// Responsive layout
+export const ResponsiveGrid: Story = {
+  render: () => (
+    <Box
+      displayProp="grid"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gap: "16px",
+      }}
+    >
+      <Box paddingProp="16px" backgroundProp="#e3e3e3">
+        Grid Item 1
+      </Box>
+      <Box paddingProp="16px" backgroundProp="#e3e3e3">
+        Grid Item 2
+      </Box>
+      <Box paddingProp="16px" backgroundProp="#e3e3e3">
+        Grid Item 3
+      </Box>
+    </Box>
+  ),
+};
 
-        <Box {...commonBoxProps} backgroundProp="radial-gradient(white, gray)">
-          radial gradient background
+// Accessibility example
+export const AccessibleBox: Story = {
+  args: {
+    role: "button",
+    "aria-label": "Interactive box",
+    onClick: () => alert("Box clicked"),
+    paddingProp: "16px",
+    backgroundProp: "#007bff",
+    style: {
+      color: "white",
+      cursor: "pointer",
+    },
+    children: "Click me",
+  },
+};
+
+// RTL support example
+export const RTLSupport: Story = {
+  render: () => (
+    <Box displayProp="flex" flexDirection="row" gapProp="8px">
+      <Box paddingProp="8px" backgroundProp="#e3e3e3">
+        First
+      </Box>
+      <Box paddingProp="8px" backgroundProp="#e3e3e3">
+        Second
+      </Box>
+      <Box paddingProp="8px" backgroundProp="#e3e3e3">
+        Third
+      </Box>
+    </Box>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Box component automatically adjusts layout for RTL languages when interface direction is RTL",
+      },
+    },
+  },
+};
+
+// Nested layout example
+export const NestedLayout: Story = {
+  render: () => (
+    <Box
+      displayProp="flex"
+      flexDirection="column"
+      gapProp="16px"
+      paddingProp="16px"
+      backgroundProp="#f5f5f5"
+    >
+      <Box paddingProp="16px" backgroundProp="white">
+        Header
+      </Box>
+      <Box displayProp="flex" gapProp="16px">
+        <Box flexProp="0 0 200px" paddingProp="16px" backgroundProp="white">
+          Sidebar
+        </Box>
+        <Box flexProp="1" paddingProp="16px" backgroundProp="white">
+          Main Content
         </Box>
       </Box>
-      <Box {...rowProps}>
-        <Box {...commonBoxProps} borderProp="4px solid gray">
-          solid border
-        </Box>
-
-        <Box {...commonBoxProps} borderProp="4px dashed gray">
-          dashed border
-        </Box>
-
-        <Box {...commonBoxProps} borderProp="4px dotted gray">
-          dotted border
-        </Box>
-
-        <Box {...commonBoxProps} borderProp="4px double gray">
-          double border
-        </Box>
-      </Box>
-      <Box {...rowProps}>
-        <Box
-          {...commonBoxProps}
-          borderProp={{ style: "solid", width: "1px 0", color: "gray" }}
-        >
-          Horizontal border
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "0 1px",
-            color: "gray",
-          }}
-        >
-          vertical border
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "0 0 0 1px",
-            color: "gray",
-          }}
-        >
-          left border
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px 0 0 0",
-            color: "gray",
-          }}
-        >
-          top border
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "0 1px 0 0",
-            color: "gray",
-          }}
-        >
-          right border
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "0 0 1px 0",
-            color: "gray",
-          }}
-        >
-          bottom border
-        </Box>
-      </Box>
-      <Box {...rowProps}>
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "100%",
-          }}
-        >
-          full round
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "5px",
-          }}
-        >
-          round
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "5px 0 0 5px",
-          }}
-        >
-          left round
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "5px 5px 0 0",
-          }}
-        >
-          top round
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "0 5px 5px 0",
-          }}
-        >
-          right round
-        </Box>
-
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "solid",
-            width: "1px",
-            color: "gray",
-            radius: "0 0 5px 5px",
-          }}
-        >
-          bottom round
-        </Box>
-      </Box>
-      <Box {...rowProps}>
-        <Box
-          {...commonBoxProps}
-          borderProp={{
-            style: "dashed solid double dotted",
-            width: "2em 1rem 1px 2%",
-            color: "red yellow green blue",
-            radius: "10% 30% 50% 70%",
-          }}
-        >
-          Mix border
-        </Box>
+      <Box paddingProp="16px" backgroundProp="white">
+        Footer
       </Box>
     </Box>
   ),

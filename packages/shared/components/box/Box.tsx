@@ -29,13 +29,47 @@ import { BoxProps } from "./Box.types";
 import { StyledBox } from "./Box.styled";
 
 function Box(props: BoxProps) {
-  const { as, displayProp = "block" } = props;
+  const {
+    as,
+    displayProp = "block",
+    role,
+    "aria-label": ariaLabel,
+    "aria-expanded": ariaExpanded,
+    "aria-hidden": ariaHidden,
+    "aria-controls": ariaControls,
+    "aria-describedby": ariaDescribedby,
+    "aria-labelledby": ariaLabelledby,
+    "aria-modal": ariaModal,
+    tabIndex,
+    ...restProps
+  } = props;
+
+  const dataAttributes = Object.keys(restProps)
+    .filter((key) => key.startsWith("data-"))
+    .reduce(
+      (obj, key) => ({
+        ...obj,
+        [key]: restProps[key as keyof typeof restProps],
+      }),
+      {},
+    );
+
   return (
     <StyledBox
-      {...props}
+      {...restProps}
+      {...dataAttributes}
       displayProp={displayProp}
       as={as || "div"}
       data-testid="box"
+      role={role}
+      aria-label={ariaLabel}
+      aria-expanded={ariaExpanded}
+      aria-hidden={ariaHidden}
+      aria-controls={ariaControls}
+      aria-describedby={ariaDescribedby}
+      aria-labelledby={ariaLabelledby}
+      aria-modal={ariaModal}
+      tabIndex={tabIndex}
     />
   );
 }

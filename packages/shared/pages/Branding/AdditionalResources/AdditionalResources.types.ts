@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "@docspace/shared/types";
+import { DeviceType } from "@docspace/shared/enums";
 
 export interface IAdditionalResources {
   t: TTranslation;
@@ -38,4 +39,5 @@ export interface IAdditionalResources {
   hasChange: boolean;
   isLoading: boolean;
   additionalResourcesIsDefault: boolean;
+  deviceType: DeviceType;
 }

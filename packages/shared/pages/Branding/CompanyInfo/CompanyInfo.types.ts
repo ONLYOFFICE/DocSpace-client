@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "@docspace/shared/types";
+import { DeviceType } from "@docspace/shared/enums";
 
 export interface ICompanyInfo {
   t: TTranslation;
@@ -42,6 +43,7 @@ export interface ICompanyInfo {
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
   showReminder: boolean;
+  deviceType: DeviceType;
 }
 
 export interface ICompanySettings {

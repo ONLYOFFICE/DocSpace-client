@@ -28,6 +28,9 @@ import React from "react";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
@@ -44,7 +47,18 @@ export const AdditionalResources = ({
   hasChange,
   isLoading,
   additionalResourcesIsDefault,
+  deviceType,
 }: IAdditionalResources) => {
+  const redirectUrl: string = isManagement()
+    ? "/management/settings/branding"
+    : "/portal-settings/customization/branding";
+
+  useResponsiveNavigation({
+    redirectUrl,
+    currentLocation: "additional-resources",
+    deviceType,
+  });
+
   return (
     <StyledAdditionalResources>
       <div className="header">

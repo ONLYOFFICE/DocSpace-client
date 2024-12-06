@@ -29,6 +29,9 @@ import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
@@ -53,7 +56,18 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     saveButtonDisabled,
     isSaving,
     enableRestoreButton,
+    deviceType,
   } = props;
+  const redirectUrl: string = isManagement()
+    ? "/management/settings/branding"
+    : "/portal-settings/customization/branding";
+
+  useResponsiveNavigation({
+    redirectUrl,
+    currentLocation: "white-label",
+    deviceType,
+  });
+
   return (
     <WhiteLabelWrapper>
       <WhiteLabelHeader

@@ -35,6 +35,9 @@ import {
   InputSize,
 } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
@@ -55,7 +58,18 @@ export const CompanyInfo = ({
   isLoading,
   companyInfoSettingsIsDefault,
   showReminder,
+  deviceType,
 }: ICompanyInfo) => {
+  const redirectUrl: string = isManagement()
+    ? "/management/settings/branding"
+    : "/portal-settings/customization/branding";
+
+  useResponsiveNavigation({
+    redirectUrl,
+    currentLocation: "company-info-settings",
+    deviceType,
+  });
+
   const { address, companyName, email, phone, site } = companySettings;
   const {
     hasErrorAddress,

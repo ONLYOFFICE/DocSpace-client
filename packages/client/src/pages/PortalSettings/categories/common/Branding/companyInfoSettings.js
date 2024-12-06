@@ -33,12 +33,9 @@ import isEqual from "lodash/isEqual";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import {
-  size,
   saveToSessionStorage,
   getFromSessionStorage,
 } from "@docspace/shared/utils";
-import { isManagement } from "@docspace/shared/utils/common";
-import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
@@ -61,9 +58,6 @@ const CompanyInfoSettingsComponent = (props) => {
     buildVersionInfo,
     deviceType,
   } = props;
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isMobileView = deviceType === DeviceType.mobile;
 
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
@@ -82,22 +76,6 @@ const CompanyInfoSettingsComponent = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const { address, companyName, email, phone, site } = companySettings;
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, [isMobileView]);
-
-  const checkWidth = () => {
-    const url = isManagement()
-      ? "/management/settings/branding"
-      : "portal-settings/customization/branding";
-    window.innerWidth > size.mobile &&
-      !isMobileView &&
-      location.pathname.includes("company-info-settings") &&
-      navigate(url);
-  };
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -335,6 +313,7 @@ const CompanyInfoSettingsComponent = (props) => {
         isLoading={isLoading}
         companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
         showReminder={showReminder}
+        deviceType={deviceType}
       />
     </>
   );

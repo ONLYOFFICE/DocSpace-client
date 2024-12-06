@@ -35,7 +35,6 @@ import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/Wh
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import {
-  size,
   saveToSessionStorage,
   getFromSessionStorage,
 } from "@docspace/shared/utils";
@@ -68,13 +67,11 @@ const WhiteLabelComponent = (props) => {
 
     resetIsInit,
     standalone,
-    theme,
 
     isWhitelableLoaded,
     displayAbout,
     showNotAvailable,
   } = props;
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
@@ -97,29 +94,10 @@ const WhiteLabelComponent = (props) => {
 
   useEffect(() => {
     init();
-    checkWidth();
     return () => {
       resetIsInit();
     };
   }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", checkWidth);
-    return () => {
-      window.removeEventListener("resize", checkWidth);
-    };
-  }, [isMobileView]);
-
-  const checkWidth = () => {
-    const url = isManagement()
-      ? "/management/settings/branding"
-      : "/portal-settings/customization/branding";
-
-    window.innerWidth > size.mobile &&
-      !isMobileView &&
-      location.pathname.includes("white-label") &&
-      navigate(url);
-  };
 
   useEffect(() => {
     if (!isWhitelableLoaded) return;
@@ -296,6 +274,7 @@ const WhiteLabelComponent = (props) => {
       saveButtonDisabled={saveButtonDisabled}
       isSaving={isSaving}
       enableRestoreButton={enableRestoreButton}
+      deviceType={deviceType}
     />
   );
 };
@@ -323,7 +302,6 @@ export const WhiteLabel = inject(
       checkEnablePortalSettings,
       standalone,
       displayAbout,
-      portals,
     } = settingsStore;
     const { isCustomizationAvailable } = currentQuotaStore;
 

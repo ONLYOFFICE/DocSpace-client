@@ -33,11 +33,9 @@ import isEqual from "lodash/isEqual";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import {
-  size,
   saveToSessionStorage,
   getFromSessionStorage,
 } from "@docspace/shared/utils";
-import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -58,10 +56,6 @@ const AdditionalResourcesComponent = (props) => {
     isLoadedAdditionalResources,
     deviceType,
   } = props;
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const isMobileView = deviceType === DeviceType.mobile;
 
   const [additionalSettings, setAdditionalSettings] = useState({});
   const [hasChange, setHasChange] = useState(false);
@@ -92,22 +86,6 @@ const AdditionalResourcesComponent = (props) => {
     } else {
       setAdditionalSettings(defaultData);
     }
-  };
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, [isMobileView]);
-
-  const checkWidth = () => {
-    const url = isManagement()
-      ? "/management/settings/branding"
-      : "portal-settings/customization/branding";
-    window.innerWidth > size.mobile &&
-      !isMobileView &&
-      location.pathname.includes("additional-resources") &&
-      navigate(url);
   };
 
   useEffect(() => {
@@ -236,6 +214,7 @@ const AdditionalResourcesComponent = (props) => {
       hasChange={hasChange}
       isLoading={isLoading}
       additionalResourcesIsDefault={additionalResourcesIsDefault}
+      deviceType={deviceType}
     />
   );
 };

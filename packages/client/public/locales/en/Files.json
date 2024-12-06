@@ -212,5 +212,6 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "FileCannotBeMoved": "The file cannot be moved to this room."
 }

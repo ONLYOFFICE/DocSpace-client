@@ -196,8 +196,16 @@ const FilesSelectorWrapper = ({
         (item) => "isPDFForm" in item && item.isPDFForm,
       );
 
+    // for backup
+    if (!selection.length) {
+      isRoomFormAccessible = false;
+    }
+
     const getMessage = () => {
       const several = selection.length > 1;
+
+      // for backup
+      if (!selection.length) return t("Files:FileCannotBeMoved");
 
       const option = { organizationName: t("Common:OrganizationName") };
 

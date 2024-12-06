@@ -117,18 +117,13 @@ class ClientLoadingStore {
     withTimer: boolean = true,
   ) => {
     if (isLoading) {
-      if (
-        this.loaderStates[type].pendingLoaders ||
-        this.loaderStates[type].isLoading
-      )
-        return;
-
-      if (this.loaderStates[type].timer) return;
-
       this.loaderStates[type].pendingLoaders = isLoading;
       this.loaderStates[type].startTime = new Date();
 
       if (withTimer && !this.firstLoad) {
+        if (this.loaderStates[type].timer) {
+          clearTimeout(this.loaderStates[type].timer);
+        }
         this.loaderStates[type].timer = setTimeout(() => {
           this.updateLoading(type, isLoading);
         }, window.ClientConfig?.loaders.showLoaderTime ?? SHOW_LOADER_TIMER);
@@ -152,6 +147,7 @@ class ClientLoadingStore {
             : Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.loaderStates[type].timer);
+
           this.loaderStates[type].timer = null;
         }
 

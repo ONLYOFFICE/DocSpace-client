@@ -28,18 +28,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
 import isEqual from "lodash/isEqual";
 
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
-import {
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
-import { DeviceType } from "@docspace/shared/enums";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
 import {
@@ -52,104 +46,62 @@ const WhiteLabelComponent = (props) => {
   const {
     t,
     isSettingPaid,
-    logoText,
-    setLogoText,
-    restoreWhiteLabelSettings,
-    saveWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    getWhiteLabelLogoText,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
     deviceType,
-
-    resetIsInit,
     standalone,
-
-    isWhitelableLoaded,
     displayAbout,
     showNotAvailable,
+    defaultWhiteLabelLogoUrls,
+    logoUrls,
+    logoText,
+    defaultLogoText,
+    isDefaultWhiteLabel,
+    isWhiteLabelLoaded,
+    initWhiteLabel,
+    setLogoUrls,
+    setLogoText,
+    saveWhiteLabelSettings,
+    resetWhiteLabelSettings,
   } = props;
-  const location = useLocation();
-
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
+  const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
 
-  const isMobileView = deviceType === DeviceType.mobile;
   const showAbout = standalone && isManagement() && displayAbout;
 
-  const init = async () => {
-    const isWhiteLabelPage = standalone
-      ? location.pathname.includes("white-label")
-      : true;
-
-    if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
-      const page = isMobileView ? "white-label" : "branding";
-      await initSettings(page);
-    }
-  };
-
   useEffect(() => {
-    init();
-    return () => {
-      resetIsInit();
-    };
+    initWhiteLabel();
   }, []);
 
   useEffect(() => {
-    if (!isWhitelableLoaded) return;
-
-    const companyNameFromSessionStorage = getFromSessionStorage("companyName");
-
-    if (!companyNameFromSessionStorage) {
-      setIsEmpty(!logoText);
-      if (!logoText) return;
-
-      setLogoTextWhiteLabel(logoText);
-      saveToSessionStorage("companyName", logoText);
-    } else {
-      setIsEmpty(!companyNameFromSessionStorage);
-      setLogoTextWhiteLabel(companyNameFromSessionStorage);
-      saveToSessionStorage("companyName", companyNameFromSessionStorage);
-    }
-  }, [logoText, isWhitelableLoaded]);
-
-  const onResetCompanyName = async () => {
-    const whlText = await getWhiteLabelLogoText();
-    saveToSessionStorage("companyName", whlText);
+    if (!isWhiteLabelLoaded) return;
+    setIsEmpty(!logoText);
+    if (!logoText) return;
     setLogoTextWhiteLabel(logoText);
-  };
+  }, [logoText, isWhiteLabelLoaded]);
 
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
-
     const trimmedValue = value?.trim();
     setIsEmpty(!trimmedValue);
-    saveToSessionStorage("companyName", trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
-    if (isEmpty) {
-      return;
-    }
+    if (isEmpty) return;
 
-    let newLogos = logoUrlsWhiteLabel;
+    let newLogos = logoUrls;
 
-    for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
+    for (let i = 0; i < logoUrls.length; i++) {
       const options = getLogoOptions(
         i,
         logoTextWhiteLabel,
-        logoUrlsWhiteLabel[i].size.width,
-        logoUrlsWhiteLabel[i].size.height,
+        logoUrls[i].size.width,
+        logoUrls[i].size.height,
       );
 
-      if (!showAbout && logoUrlsWhiteLabel[i].name === "AboutPage") continue;
+      if (!showAbout && logoUrls[i].name === "AboutPage") continue;
 
-      const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
+      const isDocsEditorName = logoUrls[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
         options.width,
@@ -173,13 +125,12 @@ const WhiteLabelComponent = (props) => {
       newLogos[i].path.dark = logoDark;
     }
 
-    setLogoUrlsWhiteLabel(newLogos);
+    setLogoUrls(newLogos);
   };
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings();
-      await onResetCompanyName();
+      await resetWhiteLabelSettings();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -197,7 +148,7 @@ const WhiteLabelComponent = (props) => {
 
     if (data.Success) {
       const url = data.Message;
-      const newArr = logoUrlsWhiteLabel;
+      const newArr = logoUrls;
 
       if (theme === "light") {
         newArr[type - 1].path.light = url;
@@ -205,7 +156,7 @@ const WhiteLabelComponent = (props) => {
         newArr[type - 1].path.dark = url;
       }
 
-      setLogoUrlsWhiteLabel(newArr);
+      setLogoUrls(newArr);
     } else {
       console.error(data.Message);
       toastr.error(data.Message);
@@ -215,8 +166,8 @@ const WhiteLabelComponent = (props) => {
   const onSave = async () => {
     let logosArr = [];
 
-    for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
-      const currentLogo = logoUrlsWhiteLabel[i];
+    for (let i = 0; i < logoUrls.length; i++) {
+      const currentLogo = logoUrls[i];
       const defaultLogo = defaultWhiteLabelLogoUrls[i];
 
       if (!isEqual(currentLogo, defaultLogo)) {
@@ -250,16 +201,16 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
-  const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
-  const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
+  const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
+  const isEqualText = defaultLogoText === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isWhitelableLoaded ? (
+  return !isWhiteLabelLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelPage
       t={t}
-      logoUrls={logoUrlsWhiteLabel}
+      logoUrls={logoUrls}
       onChangeLogo={onChangeLogo}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}
@@ -273,29 +224,26 @@ const WhiteLabelComponent = (props) => {
       onRestoreDefault={onRestoreDefault}
       saveButtonDisabled={saveButtonDisabled}
       isSaving={isSaving}
-      enableRestoreButton={enableRestoreButton}
+      enableRestoreButton={isDefaultWhiteLabel}
       deviceType={deviceType}
     />
   );
 };
 
 export const WhiteLabel = inject(
-  ({ settingsStore, common, currentQuotaStore }) => {
+  ({ settingsStore, currentQuotaStore, brandingStore }) => {
     const {
+      logoUrls,
+      logoText,
+      defaultLogoText,
+      isDefaultWhiteLabel,
+      isWhiteLabelLoaded,
+      initWhiteLabel,
+      setLogoUrls,
       setLogoText,
-      whiteLabelLogoText,
-      getWhiteLabelLogoText,
-      restoreWhiteLabelSettings,
-      initSettings,
       saveWhiteLabelSettings,
-      logoUrlsWhiteLabel,
-      setLogoUrlsWhiteLabel,
-      defaultLogoTextWhiteLabel,
-      enableRestoreButton,
-      resetIsInit,
-      isWhitelableLoaded,
-    } = common;
-
+      resetWhiteLabelSettings,
+    } = brandingStore;
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
       deviceType,
@@ -310,27 +258,23 @@ export const WhiteLabel = inject(
       ? !isCustomizationAvailable
       : !isSettingPaid && standalone;
     return {
-      setLogoText,
       theme: settingsStore.theme,
-      logoText: whiteLabelLogoText,
-      getWhiteLabelLogoText,
-      saveWhiteLabelSettings,
-      restoreWhiteLabelSettings,
-      defaultWhiteLabelLogoUrls,
       isSettingPaid,
-      initSettings,
-      logoUrlsWhiteLabel,
-      setLogoUrlsWhiteLabel,
-      defaultLogoTextWhiteLabel,
-      enableRestoreButton,
-
       deviceType,
-      resetIsInit,
       standalone,
-
-      isWhitelableLoaded,
       displayAbout,
       showNotAvailable,
+      defaultWhiteLabelLogoUrls,
+      logoUrls,
+      logoText,
+      defaultLogoText,
+      isDefaultWhiteLabel,
+      isWhiteLabelLoaded,
+      initWhiteLabel,
+      setLogoUrls,
+      setLogoText,
+      saveWhiteLabelSettings,
+      resetWhiteLabelSettings,
     };
   },
 )(

@@ -69,6 +69,7 @@ const DropDown = ({
   className,
   style,
   topSpace,
+  backDrop,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -393,6 +394,7 @@ const DropDown = ({
 
     return (
       <>
+        {isDefaultMode && backDrop}
         {/* {withBackdrop ? ( //TODO: consider a solution when there will be a structure of correct z index for components
           <Backdrop
             visible={open || false}

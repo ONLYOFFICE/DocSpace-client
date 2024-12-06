@@ -31,12 +31,9 @@ export interface IAdditionalResources {
   t: TTranslation;
   isSettingPaid: boolean;
   feedbackAndSupportEnabled: boolean;
-  onChangeFeedback: () => void;
   helpCenterEnabled: boolean;
-  onChangeHelpCenter: () => void;
-  onSave: () => void;
+  onSave: (feedbackEnabled: boolean, helpEnabled: boolean) => void;
   onRestore: () => void;
-  hasChange: boolean;
   isLoading: boolean;
   additionalResourcesIsDefault: boolean;
   deviceType: DeviceType;

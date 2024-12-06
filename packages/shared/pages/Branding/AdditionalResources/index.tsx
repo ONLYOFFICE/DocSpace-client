@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -39,16 +39,19 @@ export const AdditionalResources = ({
   t,
   isSettingPaid,
   feedbackAndSupportEnabled,
-  onChangeFeedback,
   helpCenterEnabled,
-  onChangeHelpCenter,
   onSave,
   onRestore,
-  hasChange,
   isLoading,
   additionalResourcesIsDefault,
   deviceType,
 }: IAdditionalResources) => {
+  const [feedbackEnabled, setFeedbackEnabled] = useState(
+    feedbackAndSupportEnabled,
+  );
+  const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
+  const [hasChanges, setHasChanges] = useState(false);
+
   const redirectUrl: string = isManagement()
     ? "/management/settings/branding"
     : "/portal-settings/customization/branding";
@@ -58,6 +61,31 @@ export const AdditionalResources = ({
     currentLocation: "additional-resources",
     deviceType,
   });
+
+  useEffect(() => {
+    if (
+      feedbackAndSupportEnabled === feedbackEnabled &&
+      helpCenterEnabled === helpEnabled
+    ) {
+      setHasChanges(false);
+    } else {
+      setHasChanges(true);
+    }
+  }, [
+    feedbackEnabled,
+    helpEnabled,
+    feedbackAndSupportEnabled,
+    helpCenterEnabled,
+  ]);
+
+  useEffect(() => {
+    setFeedbackEnabled(feedbackAndSupportEnabled);
+    setHelpEnabled(helpCenterEnabled);
+  }, [feedbackAndSupportEnabled, helpCenterEnabled]);
+
+  const onSaveAction = () => {
+    onSave(feedbackEnabled, helpEnabled);
+  };
 
   return (
     <StyledAdditionalResources>
@@ -76,26 +104,26 @@ export const AdditionalResources = ({
           className="show-feedback-support checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowFeedbackAndSupport")}
-          isChecked={feedbackAndSupportEnabled}
-          onChange={onChangeFeedback}
+          isChecked={feedbackEnabled}
+          onChange={() => setFeedbackEnabled(!feedbackEnabled)}
         />
 
         <Checkbox
           className="show-help-center checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowHelpCenter")}
-          isChecked={helpCenterEnabled}
-          onChange={onChangeHelpCenter}
+          isChecked={helpEnabled}
+          onChange={() => setHelpEnabled(!helpEnabled)}
         />
       </div>
       <SaveCancelButtons
-        onSaveClick={onSave}
+        onSaveClick={onSaveAction}
         onCancelClick={onRestore}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings
         reminderText={t("YouHaveUnsavedChanges")}
-        showReminder={(isSettingPaid && hasChange) || isLoading}
+        showReminder={(isSettingPaid && hasChanges) || isLoading}
         disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
         additionalClassSaveButton="additional-resources-save"
         additionalClassCancelButton="additional-resources-cancel"

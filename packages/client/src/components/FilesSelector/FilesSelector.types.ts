@@ -57,6 +57,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   withSearch: boolean;
   withBreadCrumbs: boolean;
   withSubtitle: boolean;
+  withPadding?: boolean;
 
   isMove?: boolean;
   isCopy?: boolean;

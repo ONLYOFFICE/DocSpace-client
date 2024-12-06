@@ -116,6 +116,8 @@ const FilesSelectorComponent = ({
   headerProps,
   shareKey,
   formProps,
+
+  withPadding,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -644,6 +646,7 @@ const FilesSelectorComponent = ({
       disableFirstFetch
       withInfoBar={withInfoBar}
       infoBarData={infoBarData}
+      withPadding={withPadding}
     />
   );
 

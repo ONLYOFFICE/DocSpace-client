@@ -228,4 +228,5 @@ export type FilesSelectorProps = TSelectorHeader &
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
     formProps?: FormPropsType;
+    withPadding?: boolean;
   };

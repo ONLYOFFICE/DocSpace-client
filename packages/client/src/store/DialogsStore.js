@@ -172,34 +172,7 @@ class DialogsStore {
 
   newFilesPanelFolderId = null;
 
-  downloadableFiles = {
-    documents: {
-      files: [],
-      isChecked: true,
-      isIndeterminate: false,
-      format: null,
-    },
-    spreadsheets: {
-      files: [],
-      isChecked: true,
-      isIndeterminate: false,
-      format: null,
-    },
-    presentations: {
-      files: [],
-      isChecked: true,
-      isIndeterminate: false,
-      format: null,
-    },
-    masterForms: {
-      files: [],
-      isChecked: true,
-      isIndeterminate: false,
-      format: null,
-    },
-    other: { files: [], isChecked: true, isIndeterminate: false, format: null },
-    isProcess: false,
-  };
+  downloadableFiles = {};
 
   constructor(
     authStore,
@@ -339,22 +312,22 @@ class DialogsStore {
     this.downloadDialogVisible = downloadDialogVisible;
   };
 
-  setDownloadFiles = (downloadableFiles) => {
-    this.downloadableFiles = downloadableFiles;
+  setDownloadFiles = (fileConvertIds, folderIds, translations) => {
+    this.downloadableFiles = {
+      fileConvertIds,
+      folderIds,
+      translations,
+    };
   };
 
   updateDownloadFiles = (id, password) => {
-    const items = [
-      ...this.downloadableFiles.documents.files,
-      ...this.downloadableFiles.spreadsheets.files,
-      ...this.downloadableFiles.presentations.files,
-      ...this.downloadableFiles.masterForms.files,
-      ...this.downloadableFiles.other.files,
-    ];
+    const { fileConvertIds } = this.downloadableFiles;
 
-    items.map((item) => {
-      if (item.id === id) item.password = password;
+    fileConvertIds.map((item) => {
+      if (item.key === id) item.password = password;
     });
+
+    console.log("this.downloadableFiles", this.downloadableFiles);
   };
 
   setEmptyTrashDialogVisible = (emptyTrashDialogVisible) => {

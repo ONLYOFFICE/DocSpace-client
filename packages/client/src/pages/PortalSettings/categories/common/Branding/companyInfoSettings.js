@@ -59,23 +59,8 @@ const CompanyInfoSettingsComponent = (props) => {
     deviceType,
   } = props;
 
-  const defaultCompanySettingsError = {
-    hasErrorAddress: false,
-    hasErrorCompanyName: false,
-    hasErrorEmail: false,
-    hasErrorPhone: false,
-    hasErrorSite: false,
-  };
-
-  const [companySettings, setCompanySettings] = useState({});
-  const [companySettingsError, setCompanySettingsError] = useState(
-    defaultCompanySettingsError,
-  );
-  const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
-  const { address, companyName, email, phone, site } = companySettings;
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -83,142 +68,30 @@ const CompanyInfoSettingsComponent = (props) => {
     setIsLoadedCompanyInfoSettingsData(true);
   }, [companyInfoSettingsData, tReady]);
 
-  const getSettings = () => {
-    //await getCompanyInfoSettings();
-    const companySettings = getFromSessionStorage("companySettings");
-    const defaultCompanySettingsData = {
-      address: companyInfoSettingsData?.address,
-      companyName: companyInfoSettingsData?.companyName,
-      email: companyInfoSettingsData?.email,
-      phone: companyInfoSettingsData?.phone,
-      site: companyInfoSettingsData?.site,
-    };
+  const onSave = useCallback(
+    async (address, companyName, email, phone, site) => {
+      setIsLoading(true);
 
-    saveToSessionStorage("defaultCompanySettings", defaultCompanySettingsData);
+      await api.settings
+        .setCompanyInfoSettings(address, companyName, email, phone, site)
+        .then(() => {
+          toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        })
+        .catch((error) => {
+          toastr.error(error);
+        });
 
-    if (companySettings) {
-      setCompanySettings({
-        address: companySettings?.address,
-        companyName: companySettings?.companyName,
-        email: companySettings?.email,
-        phone: companySettings?.phone,
-        site: companySettings?.site,
-      });
-    } else {
-      setCompanySettings(defaultCompanySettingsData);
-    }
-  };
+      await getCompanyInfoSettings();
+      setIsLoading(false);
+    },
+    [setIsLoading, getCompanyInfoSettings],
+  );
 
-  useEffect(() => {
-    getSettings();
-  }, [companyInfoSettingsData]);
-
-  useEffect(() => {
-    const defaultCompanySettings = getFromSessionStorage(
-      "defaultCompanySettings",
-    );
-
-    const newSettings = {
-      address: companySettings?.address,
-      companyName: companySettings?.companyName,
-      email: companySettings?.email,
-      phone: companySettings?.phone,
-      site: companySettings?.site,
-    };
-
-    saveToSessionStorage("companySettings", newSettings);
-
-    if (isEqual(defaultCompanySettings, newSettings)) {
-      setShowReminder(false);
-    } else {
-      setShowReminder(true);
-    }
-  }, [companySettings, companyInfoSettingsData]);
-
-  const validateSite = (site) => {
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-    const hasErrorSite = !urlRegex.test(site);
-
-    setCompanySettingsError({ ...companySettingsError, hasErrorSite });
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /.+@.+\..+/;
-    const hasErrorEmail = !emailRegex.test(email);
-
-    setCompanySettingsError({ ...companySettingsError, hasErrorEmail });
-  };
-
-  const validateEmpty = (value, type) => {
-    const hasError = value.trim() === "";
-    const phoneRegex = /^[\d\(\)\-\s+]+$/;
-    const hasErrorPhone = !phoneRegex.test(value);
-
-    if (type === "companyName") {
-      setCompanySettingsError({
-        ...companySettingsError,
-        hasErrorCompanyName: hasError,
-      });
-    }
-
-    if (type === "phone") {
-      setCompanySettingsError({
-        ...companySettingsError,
-        hasErrorPhone,
-      });
-    }
-
-    if (type === "address") {
-      setCompanySettingsError({
-        ...companySettingsError,
-        hasErrorAddress: hasError,
-      });
-    }
-  };
-
-  const onChangeSite = (e) => {
-    const site = e.target.value;
-    validateSite(site);
-    setCompanySettings({ ...companySettings, site });
-    saveToSessionStorage("companySettings", { ...companySettings, site });
-  };
-
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    validateEmail(email);
-    setCompanySettings({ ...companySettings, email });
-    saveToSessionStorage("companySettings", { ...companySettings, email });
-  };
-
-  const onChangeCompanyName = (e) => {
-    const companyName = e.target.value;
-    validateEmpty(companyName, "companyName");
-    setCompanySettings({ ...companySettings, companyName });
-    saveToSessionStorage("companySettings", {
-      ...companySettings,
-      companyName,
-    });
-  };
-
-  const onChangePhone = (e) => {
-    const phone = e.target.value;
-    validateEmpty(phone, "phone");
-    setCompanySettings({ ...companySettings, phone });
-    saveToSessionStorage("companySettings", { ...companySettings, phone });
-  };
-
-  const onChangeAddress = (e) => {
-    const address = e.target.value;
-    validateEmpty(address, "address");
-    setCompanySettings({ ...companySettings, address });
-    saveToSessionStorage("companySettings", { ...companySettings, address });
-  };
-
-  const onSave = useCallback(async () => {
+  const onRestore = useCallback(async () => {
     setIsLoading(true);
 
     await api.settings
-      .setCompanyInfoSettings(address, companyName, email, phone, site)
+      .restoreCompanyInfoSettings()
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -227,52 +100,6 @@ const CompanyInfoSettingsComponent = (props) => {
       });
 
     await getCompanyInfoSettings();
-
-    const data = {
-      address,
-      companyName,
-      email,
-      phone,
-      site,
-    };
-
-    saveToSessionStorage("companySettings", data);
-    saveToSessionStorage("defaultCompanySettings", data);
-
-    setCompanySettingsError({
-      hasErrorAddress: false,
-      hasErrorCompanyName: false,
-      hasErrorEmail: false,
-      hasErrorPhone: false,
-      hasErrorSite: false,
-    });
-
-    setIsLoading(false);
-  }, [setIsLoading, getCompanyInfoSettings, companySettings]);
-
-  const onRestore = useCallback(async () => {
-    setIsLoading(true);
-
-    await api.settings
-      .restoreCompanyInfoSettings()
-      .then((res) => {
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-        setCompanySettings(res);
-        saveToSessionStorage("companySettings", res);
-      })
-      .catch((error) => {
-        toastr.error(error);
-      });
-
-    await getCompanyInfoSettings();
-
-    setCompanySettingsError({
-      hasErrorAddress: false,
-      hasErrorCompanyName: false,
-      hasErrorEmail: false,
-      hasErrorPhone: false,
-      hasErrorSite: false,
-    });
 
     setIsLoading(false);
   }, [setIsLoading, getCompanyInfoSettings]);
@@ -295,24 +122,17 @@ const CompanyInfoSettingsComponent = (props) => {
         visible={showModal}
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
-        previewData={companySettings}
+        previewData={companyInfoSettingsData}
       />
       <CompanyInfo
         t={t}
         isSettingPaid={isSettingPaid}
         onShowExample={onShowExample}
-        companySettings={companySettings}
-        companySettingsError={companySettingsError}
-        onChangeCompanyName={onChangeCompanyName}
-        onChangeEmail={onChangeEmail}
-        onChangePhone={onChangePhone}
-        onChangeSite={onChangeSite}
-        onChangeAddress={onChangeAddress}
+        companySettings={companyInfoSettingsData}
         onSave={onSave}
         onRestore={onRestore}
         isLoading={isLoading}
         companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
-        showReminder={showReminder}
         deviceType={deviceType}
       />
     </>

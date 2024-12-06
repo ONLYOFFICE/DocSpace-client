@@ -177,6 +177,7 @@ export interface ComboboxProps {
   displayArrow?: boolean;
   topSpace?: number;
   disableItemClickFirstLevel?: boolean;
+  usePortalBackdrop?: boolean;
 }
 
 export interface ComboButtonProps {

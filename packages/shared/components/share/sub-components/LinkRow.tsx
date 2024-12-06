@@ -229,9 +229,12 @@ const LinkRow = ({
                     type="onlyIcon"
                     manualWidth="300px"
                     isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                    withBlur={isMobileViewLink}
                     isMobileView={isMobileViewLink}
                     fixedDirection={isMobileViewLink}
+                    isAside={isMobileViewLink}
                     topSpace={16}
+                    usePortalBackdrop={isMobileViewLink}
                   />
                 )}
                 {!isArchiveFolder && (

@@ -61,4 +61,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   fillIcon?: boolean;
   isDefaultMode?: boolean;
   comboIcon?: string;
+  usePortalBackdrop?: boolean;
 };

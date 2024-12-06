@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import classNames from "classnames";
 
 import { InputSize, TextInput } from "../text-input";
@@ -99,6 +99,7 @@ const InputBlock = React.memo(
     children,
     forwardedRef,
   }: InputBlockProps) => {
+    const [isFocus, setIsFocus] = useState(false);
     const iconButtonSize = useIconSize(size, iconSize);
 
     const handleChange = useCallback(
@@ -109,6 +110,22 @@ const InputBlock = React.memo(
     const handleIconClick = useCallback(
       (e: React.MouseEvent) => onIconClick?.(e),
       [onIconClick],
+    );
+
+    const handleFocus = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        setIsFocus(true);
+        onFocus?.(e);
+      },
+      [onFocus],
+    );
+
+    const handleBlur = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        setIsFocus(false);
+        onBlur?.(e);
+      },
+      [onBlur],
     );
 
     const inputProps = {
@@ -131,8 +148,8 @@ const InputBlock = React.memo(
       withBorder: false,
       forwardedRef,
       onClick,
-      onBlur,
-      onFocus,
+      onBlur: handleBlur,
+      onFocus: handleFocus,
       onKeyDown,
       tabIndex,
       onChange: handleChange,
@@ -152,6 +169,7 @@ const InputBlock = React.memo(
         data-size={size}
         data-scale={scale}
         data-error={hasError}
+        data-focus={isFocus}
         data-warning={hasWarning}
         data-disabled={isDisabled}
       >

@@ -117,7 +117,8 @@
     &:hover {
       border-color: var(--input-error-border-hover);
     }
-    &:focus {
+    &:focus,
+    &[data-focus="true"] {
       border-color: var(--input-error-border-focus);
     }
   }
@@ -127,7 +128,8 @@
     &:hover {
       border-color: var(--input-warning-border-hover);
     }
-    &:focus {
+    &:focus,
+    &[data-focus="true"] {
       border-color: var(--input-warning-border-focus);
     }
   }
@@ -193,11 +195,12 @@
     @include no-user-select;
   }
 
-  &:not(:disabled) {
+  &:not(:disabled):not(&[data-disabled="true"]) {
     &:hover {
       border-color: var(--input-border-hover);
     }
-    &:focus {
+    &:focus,
+    &[data-focus="true"] {
       border-color: var(--input-border-focus);
     }
     cursor: text;

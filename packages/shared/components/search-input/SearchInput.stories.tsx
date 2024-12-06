@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { InputSize } from "../text-input";
 
-import { SearchInput } from "./SearchInput";
+import { SearchInput } from ".";
 import { SearchInputProps } from "./SearchInput.types";
 
 const meta = {
@@ -43,6 +43,22 @@ const meta = {
   },
   argTypes: {
     onChange: { action: "onChange" },
+    onClearSearch: { action: "onClearSearch" },
+    onFocus: { action: "onFocus" },
+    onClick: { action: "onClick" },
+    size: {
+      control: "select",
+      options: Object.values(InputSize),
+    },
+    isDisabled: {
+      control: "boolean",
+    },
+    showClearButton: {
+      control: "boolean",
+    },
+    autoRefresh: {
+      control: "boolean",
+    },
   },
 } satisfies Meta<typeof SearchInput>;
 type Story = StoryObj<typeof SearchInput>;
@@ -68,11 +84,98 @@ const Template = ({ value, onChange, ...args }: SearchInputProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    id: "",
+    id: "default-search",
     isDisabled: false,
     size: InputSize.base,
     scale: false,
     placeholder: "Search",
     value: "",
+    showClearButton: true,
+    autoRefresh: true,
   },
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <SearchInput
+        size={InputSize.base}
+        value="Base size"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.middle}
+        value="Middle size"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.big}
+        value="Big size"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.huge}
+        value="Huge size"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+    </div>
+  ),
+};
+
+export const States: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <SearchInput
+        size={InputSize.base}
+        value="Normal state"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.base}
+        value="Disabled state"
+        isDisabled
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.base}
+        value="With scale"
+        scale
+        showClearButton
+        style={{ width: "20%" }}
+      />
+    </div>
+  ),
+};
+
+export const Behaviors: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <SearchInput
+        size={InputSize.base}
+        value="With clear button"
+        showClearButton
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.base}
+        value="Auto refresh enabled"
+        autoRefresh
+        refreshTimeout={1000}
+        style={{ width: "20%" }}
+      />
+      <SearchInput
+        size={InputSize.base}
+        placeholder="With placeholder"
+        showClearButton
+        style={{ width: "20%" }}
+        value=""
+      />
+    </div>
+  ),
 };

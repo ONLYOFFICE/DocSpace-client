@@ -257,7 +257,7 @@ const Sdk = ({
             withHeader: true,
             headerProps: { headerLabel: "", isCloseable: false },
           }
-        : {};
+        : { withPadding: false };
 
       component = (
         <RoomSelector
@@ -296,6 +296,7 @@ const Sdk = ({
           openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
           headerProps={{ isCloseable: false }}
+          withPadding={frameConfig?.showSelectorHeader}
         />
       );
       break;

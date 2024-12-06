@@ -40,7 +40,14 @@ const Button = React.forwardRef<
 >((props, ref) => {
   const { isLoading, icon, label, primary, isDisabled } = props;
   return (
-    <ButtonTheme {...props} ref={ref} data-testid="button">
+    <ButtonTheme
+      {...props}
+      ref={ref}
+      data-testid="button"
+      aria-label={label}
+      aria-disabled={isDisabled ? "true" : undefined}
+      aria-busy={isLoading ? "true" : undefined}
+    >
       {isLoading && (
         <Loader
           className="loader"
@@ -61,5 +68,4 @@ const Button = React.forwardRef<
 });
 
 Button.displayName = "Button";
-
 export { Button };

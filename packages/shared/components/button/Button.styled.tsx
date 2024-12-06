@@ -287,7 +287,8 @@ const themeActiveCss = css<ButtonThemeProps>`
     props.primary &&
     (props.theme.isBase ? "brightness(90%)" : "brightness(82%)")};
 
-  color: ${(props) => props.$currentColorScheme?.text?.buttons};
+  color: ${(props) =>
+    !props.primary && props.$currentColorScheme?.text?.buttons};
 `;
 
 const themeHoverCss = css<ButtonThemeProps>`
@@ -299,7 +300,7 @@ const themeHoverCss = css<ButtonThemeProps>`
   opacity: ${(props) => props.primary && !props.isDisabled && "0.85"};
 
   color: ${(props) =>
-    props.primary && props.$currentColorScheme?.text?.buttons};
+    !props.primary && props.$currentColorScheme?.text?.buttons};
 `;
 
 const getDefaultStyles = ({
@@ -320,11 +321,11 @@ const getDefaultStyles = ({
       background: ${$currentColorScheme.main?.buttons};
       opacity: ${isDisabled && "0.6"};
       border: ${`1px solid`} ${$currentColorScheme.main?.buttons};
-      color: ${$currentColorScheme.text?.buttons};
+      color: ${!primary && $currentColorScheme.text?.buttons};
 
       .loader {
         svg {
-          color: ${$currentColorScheme.text?.buttons};
+          color: ${!primary && $currentColorScheme.text?.buttons};
         }
         background-color: ${$currentColorScheme.main?.buttons};
       }

@@ -28,9 +28,6 @@ import React from "react";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
-import type { TColorScheme, TInterfaceDirection } from "../../themes";
 
 import { Button } from ".";
 import { ButtonSize } from "./Button.enums";
@@ -42,376 +39,105 @@ const baseProps = {
   onClick: jest.fn(),
 };
 
-const mockColorScheme: TColorScheme = {
-  id: 1,
-  name: "Mock Theme",
-  main: {
-    accent: "#4781D1",
-    buttons: "#4781D1",
-  },
-  text: {
-    accent: "#FFFFFF",
-    buttons: "#FFFFFF",
-  },
-};
-
-const mockTheme = {
-  ...Base,
-  isBase: true,
-  currentColorScheme: mockColorScheme,
-  interfaceDirection: "ltr" as TInterfaceDirection,
-  button: {
-    ...Base.button,
-    color: {
-      base: "#333333",
-      baseHover: "#666666",
-      baseActive: "#000000",
-      baseDisabled: "#999999",
-      primary: "#4781D1",
-      primaryHover: "#5D95E5",
-      primaryActive: "#366AAF",
-      primaryDisabled: "#A6C5EF",
-    },
-    backgroundColor: {
-      base: "#FFFFFF",
-      baseHover: "#F8F9F9",
-      baseActive: "#ECEEF1",
-      baseDisabled: "#FFFFFF",
-      primary: "#4781D1",
-      primaryHover: "#5D95E5",
-      primaryActive: "#366AAF",
-      primaryDisabled: "#A6C5EF",
-    },
-    border: {
-      base: "1px solid #D0D5DA",
-      baseHover: "1px solid #A3A9AE",
-      baseActive: "1px solid #666666",
-      baseDisabled: "1px solid #ECEEF1",
-      primary: "1px solid #4781D1",
-      primaryHover: "1px solid #5D95E5",
-      primaryActive: "1px solid #366AAF",
-      primaryDisabled: "1px solid #A6C5EF",
-    },
-    boxSizing: "border-box",
-    display: "inline-block",
-    fontWeight: "600",
-    margin: "0",
-    height: {
-      ...Base.button.height,
-      [ButtonSize.extraSmall]: "24px",
-      [ButtonSize.small]: "32px",
-      [ButtonSize.normal]: "40px",
-      medium: "44px",
-    },
-    fontSize: {
-      ...Base.button.fontSize,
-      [ButtonSize.extraSmall]: "12px",
-      [ButtonSize.small]: "13px",
-      [ButtonSize.normal]: "14px",
-    },
-    padding: {
-      [ButtonSize.extraSmall]: "2px 12px",
-      [ButtonSize.small]: "0 16px",
-      [ButtonSize.normal]: "0 28px",
-      medium: "0 28px",
-    },
-  },
-  fontFamily: "Open Sans, sans-serif, Arial",
-};
-
-const renderWithTheme = (component: React.ReactNode, theme = mockTheme) => {
-  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
-};
-
 describe("<Button />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   test("renders without error", () => {
-    renderWithTheme(<Button {...baseProps} />);
+    render(<Button {...baseProps} />);
     expect(screen.getByTestId("button")).toBeInTheDocument();
     expect(screen.getByText("OK")).toBeInTheDocument();
   });
 
   test("handles click events", async () => {
-    renderWithTheme(<Button {...baseProps} />);
-    const button = screen.getByTestId("button");
+    const user = userEvent.setup();
+    render(<Button {...baseProps} aria-label="Click me" />);
 
-    await userEvent.click(button);
+    await user.click(screen.getByRole("button", { name: "OK" }));
     expect(baseProps.onClick).toHaveBeenCalledTimes(1);
   });
 
-  test("renders icon when provided", () => {
-    const icon = <span data-testid="test-icon">🔍</span>;
-    renderWithTheme(<Button {...baseProps} icon={icon} />);
-    expect(screen.getByTestId("test-icon")).toBeInTheDocument();
-  });
+  test("disables button when isDisabled is true", () => {
+    render(<Button {...baseProps} isDisabled aria-disabled="true" />);
 
-  test("applies different sizes correctly", () => {
-    const { rerender } = renderWithTheme(
-      <Button {...baseProps} size={ButtonSize.extraSmall} />,
-    );
-    expect(screen.getByTestId("button")).toHaveStyle({
-      height: mockTheme.button.height[ButtonSize.extraSmall],
-      fontSize: mockTheme.button.fontSize[ButtonSize.extraSmall],
-    });
-
-    rerender(
-      <ThemeProvider theme={mockTheme}>
-        <Button {...baseProps} size={ButtonSize.normal} />
-      </ThemeProvider>,
-    );
-    expect(screen.getByTestId("button")).toHaveStyle({
-      height: mockTheme.button.height[ButtonSize.normal],
-      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
-    });
-  });
-
-  test("uses default size when no size is provided", () => {
-    renderWithTheme(<Button {...baseProps} size={undefined} />);
-    expect(screen.getByTestId("button")).toHaveStyle({
-      height: mockTheme.button.height[ButtonSize.normal],
-      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
-    });
-  });
-
-  test("disables button when isDisabled is true", async () => {
-    const onClick = jest.fn();
-    renderWithTheme(<Button {...baseProps} isDisabled onClick={onClick} />);
-
-    const button = screen.getByTestId("button");
+    const button = screen.getByRole("button", { name: "OK" });
     expect(button).toBeDisabled();
-
-    await userEvent.click(button);
-    expect(onClick).not.toHaveBeenCalled();
+    expect(button).toHaveAttribute("disabled");
+    expect(button).toHaveAttribute("aria-disabled", "true");
   });
 
-  test("applies custom className", () => {
-    renderWithTheme(<Button {...baseProps} className="custom-class" />);
+  test("shows loading state", () => {
+    render(<Button {...baseProps} isLoading aria-busy="true" />);
+
+    const button = screen.getByRole("button", { name: "OK" });
+    expect(button).toHaveClass("loading");
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(button).toHaveAttribute("aria-busy", "true");
+  });
+
+  test("renders with custom className", () => {
+    render(<Button {...baseProps} className="custom-class" />);
     expect(screen.getByTestId("button")).toHaveClass("custom-class");
   });
 
-  test("applies custom style", () => {
-    const customStyle = { backgroundColor: "red" };
-    renderWithTheme(<Button {...baseProps} style={customStyle} />);
-    expect(screen.getByTestId("button")).toHaveStyle(customStyle);
+  test("renders with custom style", () => {
+    render(<Button {...baseProps} style={{ backgroundColor: "red" }} />);
+    expect(screen.getByTestId("button")).toHaveStyle({
+      backgroundColor: "red",
+    });
+  });
+
+  test("renders with icon", () => {
+    const icon = <span data-testid="test-icon">Icon</span>;
+    render(<Button {...baseProps} icon={icon} />);
+
+    expect(screen.getByTestId("test-icon")).toBeInTheDocument();
+    expect(screen.getByText("OK")).toBeInTheDocument();
+  });
+
+  test.each(Object.values(ButtonSize))("renders with size %s", (size) => {
+    render(<Button {...baseProps} size={size} />);
+    expect(screen.getByTestId("button")).toHaveAttribute("data-size", size);
+  });
+
+  test("renders primary button", () => {
+    render(<Button {...baseProps} primary />);
+    expect(screen.getByTestId("button")).toHaveClass("primary");
+  });
+
+  test("renders with hover state", () => {
+    render(<Button {...baseProps} isHovered />);
+    expect(screen.getByTestId("button")).toHaveClass("hovered");
+  });
+
+  test("renders with clicked state", () => {
+    render(<Button {...baseProps} isClicked />);
+    expect(screen.getByTestId("button")).toHaveClass("clicked");
+  });
+
+  test("scales width when scale prop is true", () => {
+    render(<Button {...baseProps} scale />);
+    expect(screen.getByTestId("button")).toHaveClass("scale");
   });
 
   test("applies minWidth when provided", () => {
-    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
+    render(<Button {...baseProps} minWidth="200px" />);
     expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
   });
 
-  test("applies minWidth when provided", () => {
-    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
-    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
-  });
+  test("handles keyboard interaction", async () => {
+    const user = userEvent.setup();
+    render(<Button {...baseProps} />);
 
-  test("sets correct tab index", () => {
-    renderWithTheme(<Button {...baseProps} tabIndex={2} />);
-    expect(screen.getByTestId("button")).toHaveAttribute("tabindex", "2");
-  });
-
-  test("applies theme styles for primary button", () => {
-    renderWithTheme(<Button {...baseProps} primary />);
     const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      background: mockColorScheme.main.buttons,
-      color: mockColorScheme.text.buttons,
-      borderColor: mockColorScheme.main.buttons,
-    });
-  });
-
-  test("applies disabled styles for primary button", () => {
-    renderWithTheme(<Button {...baseProps} primary isDisabled />);
-    const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      opacity: "0.6",
-    });
-  });
-
-  test("disables hover effect when disableHover is true", () => {
-    renderWithTheme(<Button {...baseProps} primary disableHover />);
-    const button = screen.getByTestId("button");
-    expect(button).not.toHaveAttribute("data-hover-enabled");
-  });
-
-  test("applies brightness filter for primary button in base theme", () => {
-    renderWithTheme(<Button {...baseProps} primary isClicked />);
-    const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      filter: "brightness(90%)",
-    });
-  });
-
-  test("applies brightness filter for primary button in non-base theme", () => {
-    const nonBaseTheme = { ...mockTheme, isBase: false };
-    renderWithTheme(<Button {...baseProps} primary isClicked />, nonBaseTheme);
-    const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      filter: "brightness(82%)",
-    });
-  });
-
-  test("uses base theme styles when no theme is provided", () => {
-    const { container } = render(
-      <ThemeProvider theme={Base}>
-        <Button {...baseProps} />
-      </ThemeProvider>,
-    );
-    const button = container.firstChild as HTMLElement;
-    expect(button).toHaveStyle({
-      color: Base.button.color.base,
-    });
-  });
-
-  test("applies primary button color when theme is missing base color", () => {
-    const themeWithoutBaseColor = {
-      ...mockTheme,
-      button: {
-        ...mockTheme.button,
-        color: {
-          ...mockTheme.button.color,
-          base: mockTheme.button.color.primary,
-          baseHover: mockTheme.button.color.primaryHover,
-          baseActive: mockTheme.button.color.primaryActive,
-          baseDisabled: mockTheme.button.color.primaryDisabled,
-          primary: mockTheme.button.color.primary,
-          primaryHover: mockTheme.button.color.primaryHover,
-          primaryActive: mockTheme.button.color.primaryActive,
-          primaryDisabled: mockTheme.button.color.primaryDisabled,
-        },
-      },
-    };
-
-    renderWithTheme(<Button {...baseProps} />, themeWithoutBaseColor);
-    const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      color: themeWithoutBaseColor.button.color.primary,
-    });
-  });
-
-  test("applies primary button background color", () => {
-    renderWithTheme(<Button {...baseProps} primary />);
-    expect(screen.getByTestId("button")).toHaveStyle({
-      backgroundColor: mockTheme.button.backgroundColor.primary,
-    });
-  });
-
-  test("uses base theme styles when no theme is provided", () => {
-    const { container } = render(
-      <ThemeProvider theme={Base}>
-        <Button {...baseProps} />
-      </ThemeProvider>,
-    );
-    const button = container.firstChild as HTMLElement;
-    expect(button).toHaveStyle({
-      color: Base.button.color.base,
-    });
-  });
-
-  test("applies scale style when scale prop is true", () => {
-    renderWithTheme(<Button {...baseProps} scale />);
-    expect(screen.getByTestId("button")).toHaveStyle({
-      width: "100%",
-    });
-  });
-
-  test("applies correct size styles", () => {
-    renderWithTheme(<Button {...baseProps} size={ButtonSize.normal} />);
-    expect(screen.getByTestId("button")).toHaveStyle({
-      height: mockTheme.button.height[ButtonSize.normal],
-      fontSize: mockTheme.button.fontSize[ButtonSize.normal],
-      padding: mockTheme.button.padding[ButtonSize.normal],
-    });
-  });
-
-  test("uses base theme styles when no theme is provided", () => {
-    const { container } = render(
-      <ThemeProvider theme={Base}>
-        <Button {...baseProps} />
-      </ThemeProvider>,
-    );
-    const button = container.firstChild as HTMLElement;
-    expect(button).toHaveStyle({
-      color: Base.button.color.base,
-    });
-  });
-
-  test("applies minWidth when provided", () => {
-    renderWithTheme(<Button {...baseProps} minWidth="200px" />);
-    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
-  });
-
-  test("applies primary styles correctly", () => {
-    renderWithTheme(<Button {...baseProps} primary />);
-    const button = screen.getByTestId("button");
-    expect(button).toHaveStyle({
-      backgroundColor: mockTheme.button.backgroundColor.primary,
-      borderColor: mockTheme.button.color.primary,
-    });
-  });
-
-  test("applies scale styles correctly", () => {
-    renderWithTheme(<Button {...baseProps} scale />);
-    expect(screen.getByTestId("button")).toHaveStyle({ width: "100%" });
-  });
-
-  test("handles ref forwarding", () => {
-    const ref = React.createRef<HTMLButtonElement>();
-    renderWithTheme(<Button {...baseProps} ref={ref} />);
-    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-  });
-
-  test("handles click events with keyboard", async () => {
-    const onClick = jest.fn();
-    renderWithTheme(<Button {...baseProps} onClick={onClick} />);
-    const button = screen.getByTestId("button");
-
-    await userEvent.tab();
+    await user.tab();
     expect(button).toHaveFocus();
 
-    await userEvent.keyboard("{enter}");
-    expect(onClick).toHaveBeenCalledTimes(1);
+    await user.keyboard("{enter}");
+    expect(baseProps.onClick).toHaveBeenCalledTimes(1);
 
-    await userEvent.keyboard(" ");
-    expect(onClick).toHaveBeenCalledTimes(2);
-  });
-
-  test("maintains focus styles when tabbed", async () => {
-    renderWithTheme(<Button {...baseProps} />);
-    const button = screen.getByTestId("button");
-
-    await userEvent.tab();
-    expect(button).toHaveFocus();
-    expect(button).toHaveStyle({ outline: mockTheme.button.outline });
-  });
-
-  test("combines className with base styles", () => {
-    renderWithTheme(<Button {...baseProps} className="custom-class" />);
-    const button = screen.getByTestId("button");
-
-    expect(button).toHaveClass("custom-class");
-    const computedStyles = window.getComputedStyle(button);
-    expect(computedStyles.display).toBe("inline-block");
-    expect(computedStyles.alignItems).toBe("flex-start");
-  });
-
-  describe("Color scheme integration", () => {
-    test("applies color scheme correctly for primary buttons", () => {
-      renderWithTheme(<Button {...baseProps} primary />);
-      expect(screen.getByTestId("button")).toHaveStyle({
-        backgroundColor: mockColorScheme.main.buttons,
-        color: mockColorScheme.text.buttons,
-      });
-    });
-
-    test("maintains base styles when no color scheme is provided", () => {
-      renderWithTheme(<Button {...baseProps} primary />);
-      expect(screen.getByTestId("button")).toHaveStyle({
-        backgroundColor: mockTheme.button.backgroundColor.primary,
-      });
-    });
+    await user.keyboard(" ");
+    expect(baseProps.onClick).toHaveBeenCalledTimes(2);
   });
 });

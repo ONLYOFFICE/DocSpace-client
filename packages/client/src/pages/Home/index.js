@@ -561,13 +561,13 @@ export const Component = inject(
       !groupsIsFiltered &&
       ((groups && groups.length === 0) || !Boolean(groups));
 
-    if (!firstLoad) {
-      if (isLoading) {
-        showLoader();
-      } else {
-        hideLoader();
-      }
-    }
+    // if (!firstLoad) {
+    //   if (isLoading) {
+    //     showLoader();
+    //   } else {
+    //     hideLoader();
+    //   }
+    // }
 
     return {
       //homepage: config.homepage,

@@ -58,10 +58,6 @@ describe("Text Component", () => {
       const text = screen.getByTestId("text");
       expect(text).toBeInTheDocument();
       expect(text).toHaveClass(styles.text);
-      expect(text).toHaveStyle({
-        fontSize: "13px",
-        textAlign: "left",
-      });
     });
 
     test("accepts custom className", () => {

@@ -26,35 +26,26 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
 
-import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
+import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 
-import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
-
 const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
-    getCompanyInfoSettings,
-
     companyInfoSettingsIsDefault,
-
     companyInfoSettingsData,
     tReady,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
+    saveCompanyInfo,
+    resetCompanyInfo,
     buildVersionInfo,
     deviceType,
   } = props;
@@ -72,37 +63,30 @@ const CompanyInfoSettingsComponent = (props) => {
     async (address, companyName, email, phone, site) => {
       setIsLoading(true);
 
-      await api.settings
-        .setCompanyInfoSettings(address, companyName, email, phone, site)
-        .then(() => {
-          toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-        })
-        .catch((error) => {
-          toastr.error(error);
-        });
-
-      await getCompanyInfoSettings();
-      setIsLoading(false);
+      try {
+        await saveCompanyInfo(address, companyName, email, phone, site);
+        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      } catch (error) {
+        toastr.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     },
-    [setIsLoading, getCompanyInfoSettings],
+    [setIsLoading],
   );
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await api.settings
-      .restoreCompanyInfoSettings()
-      .then(() => {
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      })
-      .catch((error) => {
-        toastr.error(error);
-      });
-
-    await getCompanyInfoSettings();
-
-    setIsLoading(false);
-  }, [setIsLoading, getCompanyInfoSettings]);
+    try {
+      await resetCompanyInfo();
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setIsLoading]);
 
   const onShowExample = () => {
     if (!isSettingPaid) return;
@@ -140,35 +124,35 @@ const CompanyInfoSettingsComponent = (props) => {
 };
 
 export const CompanyInfoSettings = inject(
-  ({ settingsStore, common, currentQuotaStore }) => {
+  ({ settingsStore, brandingStore, currentQuotaStore }) => {
     const {
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
-    } = common;
+      saveCompanyInfo,
+      resetCompanyInfo,
+    } = brandingStore;
 
     const {
-      getCompanyInfoSettings,
-
       companyInfoSettingsIsDefault,
-
       companyInfoSettingsData,
       buildVersionInfo,
       checkEnablePortalSettings,
+      deviceType,
     } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
-      getCompanyInfoSettings,
-
       companyInfoSettingsIsDefault,
-
       companyInfoSettingsData,
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
+      saveCompanyInfo,
+      resetCompanyInfo,
       buildVersionInfo,
       isSettingPaid,
+      deviceType,
     };
   },
 )(

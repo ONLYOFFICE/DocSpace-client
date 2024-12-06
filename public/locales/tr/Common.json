@@ -445,6 +445,7 @@
   "SectionRequired": "Bu bölüm gereklidir",
   "SelectAction": "Seç",
   "SelectAll": "Tümünü seç",
+  "SelectDate": "Tarih seç",
   "SelectDOCXFFormat": ".DOCXF dosyasını seçin",
   "SelectDOCXFormat": "Dosyayı .DOCX biçiminde seç",
   "SelectExtensionFiles": "{{extension}} dosyalarını seçin",

@@ -438,6 +438,7 @@
   "SearchEmptyRoomsDescription": "이 필터와 일치하는 방이 없습니다. 다른 필터를 사용하거나 모든 방을 보려면 필터를 지우세요.",
   "SelectAction": "선택",
   "SelectAll": "모두 선택",
+  "SelectDate": "날짜 선택",
   "SelectDOCXFFormat": ".DOCXF 파일 선택",
   "SelectDOCXFormat": ".DOCX 형식의 파일을 선택해주세요",
   "SelectExtensionFiles": "{{extension}} 파일 선택",

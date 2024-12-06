@@ -452,6 +452,7 @@
   "SectionRequired": "Այս բաժինը պարտադիր է",
   "SelectAction": "Ընտրել",
   "SelectAll": "Ընտրել բոլորը",
+  "SelectDate": "Ընտրեք ամսաթիվը",
   "SelectDOCXFFormat": "Ընտրեք .DOCXF ֆայլ",
   "SelectDOCXFormat": "Ընտրեք .DOCX ֆայլ",
   "SelectExtensionFiles": "Ընտրել {{extension}} ֆայլերը",

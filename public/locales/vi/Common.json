@@ -445,6 +445,7 @@
   "SectionRequired": "Phần này là bắt buộc",
   "SelectAction": "Chọn",
   "SelectAll": "Chọn tất cả",
+  "SelectDate": "Chọn ngày",
   "SelectDOCXFFormat": "Lựa chọn tập tin DOCXF",
   "SelectDOCXFormat": "Chọn tệp có định dạng .DOCX",
   "SelectExtensionFiles": "Chọn tập tin {{extension}} ",

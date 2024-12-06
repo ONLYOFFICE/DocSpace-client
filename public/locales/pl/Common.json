@@ -436,6 +436,7 @@
   "SearchEmptyRoomsDescription": "Brak pokoi pasujących do tego filtra. Wypróbuj inny lub wyczyść filtr, aby wyświetlić wszystkie pokoje.",
   "SelectAction": "Wybierz",
   "SelectAll": "Wybierz wszystko",
+  "SelectDate": "Wybierz datę",
   "SelectDOCXFFormat": "Wybierz plik .DOCXF",
   "SelectDOCXFormat": "Wybierz plik w formacie .DOCX",
   "SelectExtensionFiles": "Wybierz pliki {{extension}}",

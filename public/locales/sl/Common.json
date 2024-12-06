@@ -445,6 +445,7 @@
   "SectionRequired": "Ta razdelek je obvezen",
   "SelectAction": "Izberi",
   "SelectAll": "Izberi vse",
+  "SelectDate": "Izberi datum",
   "SelectDOCXFFormat": "Izberi .DOCXF datoteko",
   "SelectDOCXFormat": "Izberi datoteko v .DOCX formatu",
   "SelectExtensionFiles": "Izberi {{extension}} datoteke",

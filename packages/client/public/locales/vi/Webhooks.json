@@ -35,7 +35,6 @@
   "SecretKey": "Khóa bí mật",
   "SecretKeyHint": "Thiết lập webhook secret cho phép bạn xác minh các yêu cầu được gửi đến URL payload.",
   "SecretKeyWarning": "Bạn không thể khôi phục lại khóa bí mật của mình sau khi nó đã được lưu. Nếu bạn đã mất hoặc quên khóa bí mật này, bạn có thể đặt lại, nhưng tất cả các tích hợp sử dụng khóa bí mật này sẽ cần phải được cập nhật.",
-  "SelectDate": "Chọn ngày",
   "SelectDeliveryTime": "Chọn thời gian Gửi",
   "SettingsWebhook": "Cài đặt Webhook",
   "SSLHint": "Theo mặc định, chúng tôi xác minh chứng chỉ SSL khi gửi payloads.",

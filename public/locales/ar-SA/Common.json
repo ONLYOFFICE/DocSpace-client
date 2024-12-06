@@ -438,6 +438,7 @@
   "SearchEmptyRoomsDescription": "لا توجد غرف تطابق هذه التصفية. جرّب تصفية مختلفًا أو أزل التصفية لعرض جميع الغرف.",
   "SelectAction": "تحديد",
   "SelectAll": "تحديد الكل",
+  "SelectDate": "تحديد التاريخ",
   "SelectDOCXFFormat": "اختر ملف بصيغة DOCXF",
   "SelectDOCXFormat": "اختيار ملف .DOCX",
   "SelectExtensionFiles": "اختر ملفات {{extension}}",

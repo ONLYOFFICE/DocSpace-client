@@ -34,7 +34,11 @@ import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
-    padding-inline: 8px;
+    ${({ type }) =>
+      type !== "descriptive" &&
+      css`
+        padding-inline: 8px;
+      `}
   }
 
   ${({ type, theme }) =>

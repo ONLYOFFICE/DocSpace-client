@@ -452,6 +452,7 @@
   "SectionRequired": "Acestă secțiune este obligatorie",
   "SelectAction": "Selectare",
   "SelectAll": "Selectare total",
+  "SelectDate": "Selectare dată",
   "SelectDOCXFFormat": "Selectează fișierul .DOCXF",
   "SelectDOCXFormat": "Selectare fișier format.DOCX",
   "SelectExtensionFiles": "Selectare fișiere {{extension}}",

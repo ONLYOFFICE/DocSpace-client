@@ -98,13 +98,13 @@ class ClientLoadingStore {
 
     setTimeout(() => {
       this.setIsArticleLoading(isArticleLoading, false);
-    }, MIN_LOADER_TIMER);
+    }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
   };
 
   setIsProfileLoaded = (isProfileLoaded: boolean) => {
     setTimeout(() => {
       this.isProfileLoaded = isProfileLoaded;
-    }, MIN_LOADER_TIMER);
+    }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
   };
 
   updateLoading = (type: SectionType, isLoading: boolean) => {
@@ -131,7 +131,7 @@ class ClientLoadingStore {
       if (withTimer && !this.firstLoad) {
         this.loaderStates[type].timer = setTimeout(() => {
           this.updateLoading(type, isLoading);
-        }, SHOW_LOADER_TIMER);
+        }, window.ClientConfig?.loaders.showLoaderTime ?? SHOW_LOADER_TIMER);
 
         return;
       }
@@ -147,18 +147,29 @@ class ClientLoadingStore {
         );
 
         if (this.loaderStates[type].timer) {
-          ms = Math.abs(ms - SHOW_LOADER_TIMER);
+          ms = window.ClientConfig?.loaders.showLoaderTime
+            ? Math.abs(ms - window.ClientConfig.loaders.showLoaderTime)
+            : Math.abs(ms - SHOW_LOADER_TIMER);
 
           clearTimeout(this.loaderStates[type].timer);
           this.loaderStates[type].timer = null;
         }
 
-        if (ms < MIN_LOADER_TIMER) {
-          setTimeout(() => {
-            this.updateLoading(type, isLoading);
-            this.loaderStates[type].startTime = null;
-            this.loaderStates[type].timer = null;
-          }, MIN_LOADER_TIMER - ms);
+        if (
+          window.ClientConfig?.loaders?.loaderTime
+            ? ms < window.ClientConfig?.loaders?.loaderTime
+            : ms < MIN_LOADER_TIMER
+        ) {
+          setTimeout(
+            () => {
+              this.updateLoading(type, isLoading);
+              this.loaderStates[type].startTime = null;
+              this.loaderStates[type].timer = null;
+            },
+            window.ClientConfig?.loaders?.loaderTime
+              ? window.ClientConfig.loaders.loaderTime - ms
+              : MIN_LOADER_TIMER - ms,
+          );
 
           return;
         }

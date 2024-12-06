@@ -29,12 +29,15 @@ import { makeAutoObservable } from "mobx";
 import {
   setAdditionalResources,
   restoreAdditionalResources,
+  setCompanyInfoSettings,
+  restoreCompanyInfoSettings,
 } from "@docspace/shared/api/settings";
 import { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 class BrandingStore {
   isLoadedAdditionalResources = false;
+  isLoadedCompanyInfoSettingsData = false;
 
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -45,6 +48,10 @@ class BrandingStore {
 
   setIsLoadedAdditionalResources = (isLoaded: boolean) => {
     this.isLoadedAdditionalResources = isLoaded;
+  };
+
+  setIsLoadedCompanyInfoSettingsData = (isLoaded: boolean) => {
+    this.isLoadedCompanyInfoSettingsData = isLoaded;
   };
 
   saveAdditionalResources = async (
@@ -62,6 +69,22 @@ class BrandingStore {
   resetAdditionalResources = async () => {
     await restoreAdditionalResources();
     await this.settingsStore.getAdditionalResources();
+  };
+
+  saveCompanyInfo = async (
+    address: string,
+    companyName: string,
+    email: string,
+    phone: string,
+    site: string,
+  ) => {
+    await setCompanyInfoSettings(address, companyName, email, phone, site);
+    await this.settingsStore.getCompanyInfoSettings();
+  };
+
+  resetCompanyInfo = async () => {
+    await restoreCompanyInfoSettings();
+    await this.settingsStore.getCompanyInfoSettings();
   };
 }
 

@@ -28,7 +28,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
@@ -40,11 +39,11 @@ const AdditionalResourcesComponent = (props) => {
     t,
     tReady,
     isSettingPaid,
-    getAdditionalResources,
-
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
+    saveAdditionalResources,
+    resetAdditionalResources,
     isLoadedAdditionalResources,
     deviceType,
   } = props;
@@ -55,53 +54,41 @@ const AdditionalResourcesComponent = (props) => {
 
   useEffect(() => {
     if (!(additionalResourcesData && tReady)) return;
-
     setIsLoadedAdditionalResources(true);
   }, [additionalResourcesData, tReady]);
 
   const onSave = useCallback(
     async (feedbackEnabled, helpEnabled) => {
       setIsLoading(true);
-
-      const settings = JSON.parse(JSON.stringify(additionalResourcesData));
-
-      settings.feedbackAndSupportEnabled = feedbackEnabled;
-      settings.helpCenterEnabled = helpEnabled;
-
-      await api.settings
-        .setAdditionalResources(settings)
-        .then(() => {
-          toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-        })
-        .catch((error) => {
-          toastr.error(error);
-        });
-
-      await getAdditionalResources();
-      setIsLoading(false);
+      try {
+        await saveAdditionalResources(
+          additionalResourcesData,
+          feedbackEnabled,
+          helpEnabled,
+        );
+        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      } catch (error) {
+        toastr.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     },
-    [setIsLoading, getAdditionalResources],
+    [setIsLoading],
   );
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
-
-    await api.settings
-      .restoreAdditionalResources()
-      .then(() => {
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      })
-      .catch((error) => {
-        toastr.error(error);
-      });
-
-    await getAdditionalResources();
-
-    setIsLoading(false);
-  }, [setIsLoading, getAdditionalResources]);
+    try {
+      await resetAdditionalResources();
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setIsLoading]);
 
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
-
   return (
     <AdditionalResourcesPage
       t={t}
@@ -118,29 +105,33 @@ const AdditionalResourcesComponent = (props) => {
 };
 
 export const AdditionalResources = inject(
-  ({ settingsStore, common, currentQuotaStore }) => {
-    const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
-      common;
+  ({ brandingStore, settingsStore, currentQuotaStore }) => {
+    const {
+      setIsLoadedAdditionalResources,
+      isLoadedAdditionalResources,
+      saveAdditionalResources,
+      resetAdditionalResources,
+    } = brandingStore;
 
     const {
-      getAdditionalResources,
-
       additionalResourcesData,
       additionalResourcesIsDefault,
       checkEnablePortalSettings,
+      deviceType,
     } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
-      getAdditionalResources,
-
       additionalResourcesData,
       additionalResourcesIsDefault,
       setIsLoadedAdditionalResources,
       isLoadedAdditionalResources,
       isSettingPaid,
+      saveAdditionalResources,
+      resetAdditionalResources,
+      deviceType,
     };
   },
 )(

@@ -416,7 +416,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   eventTypes="click"
                   {...dropDownMaxHeight}
                 >
-                  {!!usersList.length ? foundUsers : ""}
+                  {usersList.length ? foundUsers : ""}
                 </StyledDropDown>
               )}
             </UserInputContainer>
@@ -490,7 +490,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   eventTypes="click"
                   {...dropDownMaxHeight}
                 >
-                  {!!usersList.length ? foundUsers : ""}
+                  {usersList.length ? foundUsers : ""}
                 </StyledDropDown>
               )}
             </UserInputContainer>
@@ -521,7 +521,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
           <ComboBox
             onSelect={selectRoomType}
             options={roomTypeOptions}
-            scaled={true}
+            scaled
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"

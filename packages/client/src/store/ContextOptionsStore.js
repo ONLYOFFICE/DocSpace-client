@@ -138,23 +138,41 @@ const systemFolders = [
 
 class ContextOptionsStore {
   settingsStore;
+
   dialogsStore;
+
   filesActionsStore;
+
   filesStore;
+
   mediaViewerDataStore;
+
   treeFoldersStore;
+
   uploadDataStore;
+
   versionHistoryStore;
+
   filesSettingsStore;
+
   selectedFolderStore;
+
   publicRoomStore;
+
   oformsStore;
+
   pluginStore;
+
   infoPanelStore;
+
   currentTariffStatusStore;
+
   currentQuotaStore;
+
   userStore;
+
   indexingStore;
+
   clientLoadingStore;
 
   linksIsLoading = false;
@@ -264,7 +282,7 @@ class ContextOptionsStore {
     };
 
     if (provider.isOauth) {
-      let authModal = window.open(
+      const authModal = window.open(
         "",
         t("Common:Authorization"),
         "height=600, width=1020",
@@ -384,7 +402,7 @@ class ContextOptionsStore {
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
-    fetchFileVersions(id + "", security, requestToken);
+    fetchFileVersions(`${id}`, security, requestToken);
     setIsVerHistoryPanel(true);
     setIsMobileHidden(true);
   };
@@ -411,8 +429,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setInfoPanelSelection: setInfoPanelSelection } =
-      this.infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -436,7 +453,7 @@ class ContextOptionsStore {
         ? canOpenPlayer
           ? `${window.location.href}&preview=${id}`
           : webUrl
-        : `${window.location.origin + config.homepage}/filter?folder=${id}`, //TODO: Change url by category
+        : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category
     );
 
     toastr.success(t("Common:LinkCopySuccess"));
@@ -778,7 +795,7 @@ class ContextOptionsStore {
   };
 
   filterModel = (model, filter) => {
-    let options = [];
+    const options = [];
     let index = 0;
     const last = model.length;
 
@@ -937,7 +954,7 @@ class ContextOptionsStore {
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
-        roomId: action ? action : e,
+        roomId: action || e,
         hideSelector: false,
         defaultAccess: getDefaultAccessUser(roomType),
       });
@@ -1019,37 +1036,36 @@ class ContextOptionsStore {
       return (timer = setTimeout(() => {
         this.linksIsLoading = true;
       }, LOADER_TIMER));
-    } else {
-      if (loadingTime) {
-        const currentDate = new Date();
+    }
+    if (loadingTime) {
+      const currentDate = new Date();
 
-        let ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
-
-        if (timer) {
-          let ms = Math.abs(ms - LOADER_TIMER);
-
-          clearTimeout(timer);
-          timer = null;
-        }
-
-        if (ms < LOADER_TIMER) {
-          return setTimeout(() => {
-            this.linksIsLoading = true;
-            loadingTime = null;
-            cb && cb();
-          }, LOADER_TIMER - ms);
-        }
-      }
+      const ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
 
       if (timer) {
+        const ms = Math.abs(ms - LOADER_TIMER);
+
         clearTimeout(timer);
         timer = null;
       }
 
-      loadingTime = null;
-      this.linksIsLoading = false;
-      cb && cb();
+      if (ms < LOADER_TIMER) {
+        return setTimeout(() => {
+          this.linksIsLoading = true;
+          loadingTime = null;
+          cb && cb();
+        }, LOADER_TIMER - ms);
+      }
     }
+
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    loadingTime = null;
+    this.linksIsLoading = false;
+    cb && cb();
   };
 
   onCreateOform = (navigate) => {
@@ -1353,7 +1369,7 @@ class ContextOptionsStore {
 
     const hasInfoPanel = contextOptions.includes("show-info");
 
-    //const emailSendIsDisabled = true;
+    // const emailSendIsDisabled = true;
     const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
 
     const { isGroupMenuBlocked } = this.filesActionsStore;

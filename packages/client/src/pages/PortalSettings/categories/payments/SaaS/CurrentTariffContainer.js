@@ -91,13 +91,13 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
 
         return (
           <div key={index}>
-            <Text isBold noSelect fontSize={"14px"}>
+            <Text isBold noSelect fontSize="14px">
               {item.used.title}
               <Text
                 className="current-tariff_count"
                 as="span"
                 isBold
-                fontSize={"14px"}
+                fontSize="14px"
               >
                 {resultingUsedValue}
                 {resultingMaxValue ? `/${resultingMaxValue}` : ""}

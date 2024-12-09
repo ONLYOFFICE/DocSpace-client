@@ -29,13 +29,13 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 
+import { getConvertedSize } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 import {
   StyledDiagramComponent,
   StyledFolderTagColor,
   StyledFolderTagSection,
 } from "../StyledComponent";
-import { getConvertedSize } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
 
 const calculateSize = (size, common) => {
   if (common === -1) return 0;
@@ -65,7 +65,7 @@ const getTags = (
   if (standalone && tenantCustomQuota < usedPortalSpace)
     commonSize = usedPortalSpace;
 
-  for (let key in catalogs) {
+  for (const key in catalogs) {
     const item = catalogs[key];
     const { usedSpace, title } = item;
 

@@ -39,16 +39,15 @@ const getColumns = (defaultColumns, userId) => {
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (let col of defaultColumns) {
+    for (const col of defaultColumns) {
       const column = splitColumns.find((key) => key === col.key);
       column ? (col.enable = true) : (col.enable = false);
 
       columns.push(col);
     }
     return columns;
-  } else {
-    return defaultColumns;
   }
+  return defaultColumns;
 };
 
 const HistoryTableHeader = (props) => {

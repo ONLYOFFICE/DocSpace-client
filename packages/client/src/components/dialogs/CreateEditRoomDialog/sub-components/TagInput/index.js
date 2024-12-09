@@ -144,7 +144,7 @@ const TagInput = ({
 
       <TagList
         tagHandler={tagHandler}
-        defaultTagLabel={""}
+        defaultTagLabel=""
         isDisabled={isDisabled}
       />
     </StyledTagInput>

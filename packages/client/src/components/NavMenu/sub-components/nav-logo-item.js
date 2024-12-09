@@ -52,7 +52,7 @@ const LogoItem = styled.div`
 `;
 
 const NavLogoItem = (props) => {
-  //console.log("NavLogoItem render");
+  // console.log("NavLogoItem render");
   return (
     <LogoItem opened={props.opened}>
       <Link className="nav-logo-wrapper" to="/" onClick={props.onClick}>

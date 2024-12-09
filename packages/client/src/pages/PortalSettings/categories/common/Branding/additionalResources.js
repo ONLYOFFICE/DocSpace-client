@@ -263,60 +263,58 @@ const AdditionalResourcesComponent = (props) => {
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
 
   return (
-    <>
-      <StyledComponent isMobile={isMobileView}>
-        <div className="header">
-          <div className="additional-header settings_unavailable">
-            {t("Settings:AdditionalResources")}
-          </div>
+    <StyledComponent isMobile={isMobileView}>
+      <div className="header">
+        <div className="additional-header settings_unavailable">
+          {t("Settings:AdditionalResources")}
         </div>
-        <div className="settings_unavailable additional-description">
-          {t("Settings:AdditionalResourcesDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </div>
-        <div className="branding-checkbox">
-          <Checkbox
-            tabIndex={12}
-            className="show-feedback-support checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowFeedbackAndSupport")}
-            isChecked={feedbackAndSupportEnabled}
-            onChange={onChangeFeedback}
-          />
+      </div>
+      <div className="settings_unavailable additional-description">
+        {t("Settings:AdditionalResourcesDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </div>
+      <div className="branding-checkbox">
+        <Checkbox
+          tabIndex={12}
+          className="show-feedback-support checkbox"
+          isDisabled={!isSettingPaid}
+          label={t("ShowFeedbackAndSupport")}
+          isChecked={feedbackAndSupportEnabled}
+          onChange={onChangeFeedback}
+        />
 
-          {/*<Checkbox
+        {/* <Checkbox
             tabIndex={13}
             className="show-video-guides checkbox"
             isDisabled={!isSettingPaid}
             label={t("ShowVideoGuides")}
             isChecked={videoGuidesEnabled}
             onChange={onChangeVideoGuides}
-  />*/}
-          <Checkbox
-            tabIndex={14}
-            className="show-help-center checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowHelpCenter")}
-            isChecked={helpCenterEnabled}
-            onChange={onChangeHelpCenter}
-          />
-        </div>
-        <SaveCancelButtons
-          tabIndex={15}
-          onSaveClick={onSave}
-          onCancelClick={onRestore}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Restore")}
-          displaySettings={true}
-          reminderText={t("YouHaveUnsavedChanges")}
-          showReminder={(isSettingPaid && hasChange) || isLoading}
-          disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
-          additionalClassSaveButton="additional-resources-save"
-          additionalClassCancelButton="additional-resources-cancel"
+  /> */}
+        <Checkbox
+          tabIndex={14}
+          className="show-help-center checkbox"
+          isDisabled={!isSettingPaid}
+          label={t("ShowHelpCenter")}
+          isChecked={helpCenterEnabled}
+          onChange={onChangeHelpCenter}
         />
-      </StyledComponent>
-    </>
+      </div>
+      <SaveCancelButtons
+        tabIndex={15}
+        onSaveClick={onSave}
+        onCancelClick={onRestore}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:Restore")}
+        displaySettings
+        reminderText={t("YouHaveUnsavedChanges")}
+        showReminder={(isSettingPaid && hasChange) || isLoading}
+        disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
+        additionalClassSaveButton="additional-resources-save"
+        additionalClassCancelButton="additional-resources-cancel"
+      />
+    </StyledComponent>
   );
 };
 

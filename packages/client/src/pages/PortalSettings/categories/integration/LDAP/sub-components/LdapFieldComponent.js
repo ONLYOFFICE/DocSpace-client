@@ -76,7 +76,7 @@ const LdapFieldComponent = (props) => {
         inputName={name}
         inputValue={rest?.value || ""}
         onBlur={onBlur}
-        //onFocus={onFocus}
+        // onFocus={onFocus}
         onChange={onChangeFn}
         {...rest}
       />
@@ -87,7 +87,7 @@ const LdapFieldComponent = (props) => {
     <TextInput
       name={name}
       onBlur={onBlur}
-      //onFocus={onFocus}
+      // onFocus={onFocus}
       onChange={onChangeFn}
       {...rest}
     />

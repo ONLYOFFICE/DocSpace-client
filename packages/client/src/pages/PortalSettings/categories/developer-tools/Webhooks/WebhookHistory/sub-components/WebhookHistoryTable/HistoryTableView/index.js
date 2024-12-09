@@ -29,13 +29,12 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { TableBody } from "@docspace/shared/components/table";
-import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/shared/components/table";
 
-import HistoryTableRow from "./HistoryTableRow";
-import HistoryTableHeader from "./HistoryTableHeader";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import HistoryTableRow from "./HistoryTableRow";
+import HistoryTableHeader from "./HistoryTableHeader";
 
 const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
   margin-top: -2px;

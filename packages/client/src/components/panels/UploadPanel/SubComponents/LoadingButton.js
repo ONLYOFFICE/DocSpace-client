@@ -62,10 +62,10 @@ const LoadingButton = (props) => {
         isAnimation={isAnimation}
       >
         <div className="circle__mask circle__full">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
         <div className="circle__mask">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
 
         <StyledLoadingButton

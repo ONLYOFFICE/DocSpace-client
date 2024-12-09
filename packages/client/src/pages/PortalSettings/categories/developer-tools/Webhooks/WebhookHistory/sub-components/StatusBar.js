@@ -68,17 +68,13 @@ const StatusBar = (props) => {
   const SelectedDateTime = () => {
     return (
       <SelectedItem
-        label={
-          moment(historyFilters.deliveryDate)
-            .tz(window.timezone)
-            .format("DD MMM YYYY") +
-          " " +
-          moment(historyFilters.deliveryFrom)
-            .tz(window.timezone)
-            .format("HH:mm") +
-          " - " +
-          moment(historyFilters.deliveryTo).tz(window.timezone).format("HH:mm")
-        }
+        label={`${moment(historyFilters.deliveryDate)
+          .tz(window.timezone)
+          .format("DD MMM YYYY")} ${moment(historyFilters.deliveryFrom)
+          .tz(window.timezone)
+          .format("HH:mm")} - ${moment(historyFilters.deliveryTo)
+          .tz(window.timezone)
+          .format("HH:mm")}`}
         onClose={clearDate}
         onClick={clearDate}
       />
@@ -147,7 +143,7 @@ const StatusBar = (props) => {
         <Link
           type="action"
           fontWeight={600}
-          isHovered={true}
+          isHovered
           onClick={clearAll}
           color={globalColors.gray}
           className="statusActionItem"

@@ -35,9 +35,8 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
-import i18n from "../i18n";
-
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {

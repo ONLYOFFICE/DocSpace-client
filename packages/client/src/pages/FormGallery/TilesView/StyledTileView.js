@@ -26,7 +26,6 @@
 
 import styled, { css } from "styled-components";
 import { Base, globalColors } from "@docspace/shared/themes";
-import TileContent from "./sub-components/TileContent";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
@@ -36,6 +35,7 @@ import {
   mobileMore,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
+import TileContent from "./sub-components/TileContent";
 
 const FlexBoxStyles = css`
   display: flex;

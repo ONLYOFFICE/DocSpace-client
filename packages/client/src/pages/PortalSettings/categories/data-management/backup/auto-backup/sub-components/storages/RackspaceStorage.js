@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
 import ScheduleComponent from "../ScheduleComponent";
 import { StyledStoragesModule } from "../../../StyledBackup";
+
 class RackspaceStorage extends React.Component {
   constructor(props) {
     super(props);

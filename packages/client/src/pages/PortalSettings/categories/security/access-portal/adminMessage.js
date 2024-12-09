@@ -140,7 +140,7 @@ const AdminMessage = (props) => {
   };
 
   const onSaveClick = () => {
-    const turnOn = type === "enable" ? true : false;
+    const turnOn = type === "enable";
     setMessageSettings(turnOn);
     toastr.success(t("SuccessfullySaveSettingsMessage"));
     saveToSessionStorage("currentAdminMessageSettings", type);
@@ -210,7 +210,7 @@ const AdminMessage = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="admin-message-save"
         additionalClassCancelButton="admin-message-cancel"

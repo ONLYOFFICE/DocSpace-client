@@ -33,8 +33,8 @@ import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
-import { StyledWatermark } from "./StyledComponent";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { StyledWatermark } from "./StyledComponent";
 
 const tabsOptions = (t) => [
   {
@@ -146,7 +146,7 @@ const ViewerInfoWatermark = ({
         rotate: initialInfo.current.rotate.key,
         additions:
           roomParams.watermark?.additions || WatermarkAdditions.UserName,
-        //image: "",
+        // image: "",
         imageWidth: 0,
         imageHeight: 0,
         imageScale: 0,
@@ -170,7 +170,7 @@ const ViewerInfoWatermark = ({
   }, []);
 
   const onSelect = (item) => {
-    let elementsData = elements.current;
+    const elementsData = elements.current;
     let flagsCount = 0;
 
     const key = item.id;

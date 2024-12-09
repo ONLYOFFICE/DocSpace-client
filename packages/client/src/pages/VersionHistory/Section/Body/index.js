@@ -26,13 +26,13 @@
 
 import React, { memo } from "react";
 
-import VersionRow from "./VersionRow";
 import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
 import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import VersionRow from "./VersionRow";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 
 const VirtualScroll = (props) => (
@@ -92,6 +92,7 @@ class SectionBodyContent extends React.Component {
         });
     }
   };
+
   onUpdateHeight = (i, itemHeight) => {
     if (this.listRef.current) {
       this.listRef.current.resetAfterIndex(i);
@@ -100,7 +101,7 @@ class SectionBodyContent extends React.Component {
     this.setState((prevState) => ({
       rowSizes: {
         ...prevState.rowSizes,
-        [i]: itemHeight + 27, //composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
+        [i]: itemHeight + 27, // composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
       },
     }));
   };
@@ -123,7 +124,7 @@ class SectionBodyContent extends React.Component {
         <VersionRow
           onClose={onClose}
           getFileVersions={this.getFileVersions}
-          isVersion={true}
+          isVersion
           key={`${versions[index].id}-${index}`}
           info={versions[index]}
           versionsListLength={versions.length}
@@ -135,6 +136,7 @@ class SectionBodyContent extends React.Component {
       </div>
     );
   }, areEqual);
+
   render() {
     const { versions, isLoading } = this.props;
 

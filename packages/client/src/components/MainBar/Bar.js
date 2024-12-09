@@ -38,9 +38,9 @@ import { getBannerAttribute } from "@docspace/shared/utils";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
+import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
-import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const Bar = (props) => {
   const {
@@ -196,7 +196,6 @@ const Bar = (props) => {
     }
 
     localStorage.setItem("barIndex", index);
-    return;
   }, []);
 
   useEffect(() => {
@@ -489,7 +488,7 @@ const Bar = (props) => {
     <SnackBar
       onLoad={onLoad}
       onAction={onClose}
-      isCampaigns={true}
+      isCampaigns
       htmlContent={htmlLink}
     />
   ) : null;

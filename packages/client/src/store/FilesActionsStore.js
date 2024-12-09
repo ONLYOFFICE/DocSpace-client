@@ -68,22 +68,26 @@ import {
   ShareAccessRights,
   ValidationStatus,
   VDRIndexingAction,
+  RoomSearchArea,
+  UrlActionType,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
-import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
-import { getCategoryType } from "SRC_DIR/helpers/utils";
+import {
+  getCategoryType,
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
-import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import {
   getConvertedQuota,
   getConvertedSize,
@@ -93,10 +97,6 @@ import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
-import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
@@ -105,29 +105,51 @@ import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
   settingsStore;
+
   uploadDataStore;
+
   treeFoldersStore;
+
   filesStore;
+
   selectedFolderStore;
+
   filesSettingsStore;
+
   dialogsStore;
+
   mediaViewerDataStore;
+
   accessRightsStore;
+
   clientLoadingStore;
+
   publicRoomStore;
+
   infoPanelStore;
+
   peopleStore;
+
   indexingStore;
+
   userStore = null;
+
   currentTariffStatusStore = null;
+
   currentQuotaStore = null;
+
   isLoadedSearchFiles = false;
+
   isGroupMenuBlocked = false;
+
   emptyTrashInProgress = false;
+
   processCreatingRoomFromData = false;
+
   alreadyExportingRoomIndex = false;
 
   constructor(
@@ -203,7 +225,7 @@ class FilesActionStore {
       if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
         await fetchRooms(
           updatedFolder,
-          newFilter ? newFilter : roomsFilter.clone(),
+          newFilter || roomsFilter.clone(),
           undefined,
           undefined,
           undefined,
@@ -212,7 +234,7 @@ class FilesActionStore {
       } else {
         await fetchFiles(
           updatedFolder,
-          newFilter ? newFilter : filter,
+          newFilter || filter,
           true,
           true,
           clearSelection,
@@ -226,8 +248,8 @@ class FilesActionStore {
   };
 
   convertToTree = (folders) => {
-    let result = [];
-    let level = { result };
+    const result = [];
+    const level = { result };
     try {
       folders.forEach((folder) => {
         const folderPath = folder.path.split("/").filter((name) => name !== "");
@@ -282,7 +304,7 @@ class FilesActionStore {
   };
 
   createFoldersTree = async (t, files, folderId) => {
-    //console.log("createFoldersTree", files, folderId);
+    // console.log("createFoldersTree", files, folderId);
 
     const { setPrimaryProgressBarData, clearPrimaryProgressData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -317,7 +339,7 @@ class FilesActionStore {
       }
     }
 
-    const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
+    const toFolderId = folderId || this.selectedFolderStore.id;
 
     const pbData = {
       icon: "upload",
@@ -373,11 +395,11 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
 
-    let selection = newSelection
-      ? newSelection
-      : this.filesStore.selection.length
+    let selection =
+      newSelection ||
+      (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection];
+        : [bufferSelection]);
 
     selection = selection.filter((item) => item.security.Delete);
 
@@ -387,11 +409,11 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
-    const deleteAfter = false; //Delete after finished TODO: get from settings
-    const immediately = isRecycleBinFolder || isPrivacyFolder ? true : false; //Don't move to the Recycle Bin
+    const deleteAfter = false; // Delete after finished TODO: get from settings
+    const immediately = !!(isRecycleBinFolder || isPrivacyFolder); // Don't move to the Recycle Bin
 
-    let folderIds = [];
-    let fileIds = [];
+    const folderIds = [];
+    const fileIds = [];
 
     let i = 0;
     while (selection.length !== i) {
@@ -700,8 +722,8 @@ class FilesActionStore {
 
     if (!selection.length) return;
 
-    let fileIds = [];
-    let folderIds = [];
+    const fileIds = [];
+    const folderIds = [];
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
@@ -709,7 +731,7 @@ class FilesActionStore {
       return Promise.resolve();
     }
 
-    for (let item of selection) {
+    for (const item of selection) {
       if (item.fileExst) {
         fileIds.push(item.id);
         items.push({ id: item.id, fileExst: item.fileExst });
@@ -771,7 +793,7 @@ class FilesActionStore {
         -1;
 
       if (withSelect) {
-        //TODO: fix double event on context-menu click
+        // TODO: fix double event on context-menu click
         if (isSelected && selection.length === 1 && !isContextItem) {
           setSelected("none");
         } else {
@@ -881,7 +903,8 @@ class FilesActionStore {
           destFolderId,
         );
       });
-    } else if (isRoom) {
+    }
+    if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
       addActiveItems(null, items);
 
@@ -903,24 +926,23 @@ class FilesActionStore {
         .finally(() => {
           this.setGroupMenuBlocked(false);
         });
-    } else {
-      addActiveItems(null, [itemId], destFolderId);
-      return deleteFolder(itemId).then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
-        await this.uploadDataStore.loopFilesOperations(data, pbData);
-
-        this.updateFilesAfterDelete(operationId);
-        this.filesStore.removeFiles(
-          null,
-          [itemId],
-          () => toastr.success(translations.successRemoveFolder),
-          destFolderId,
-        );
-
-        getIsEmptyTrash();
-      });
     }
+    addActiveItems(null, [itemId], destFolderId);
+    return deleteFolder(itemId).then(async (res) => {
+      if (res[0]?.error) return Promise.reject(res[0].error);
+      const data = res[0] ? res[0] : null;
+      await this.uploadDataStore.loopFilesOperations(data, pbData);
+
+      this.updateFilesAfterDelete(operationId);
+      this.filesStore.removeFiles(
+        null,
+        [itemId],
+        () => toastr.success(translations.successRemoveFolder),
+        destFolderId,
+      );
+
+      getIsEmptyTrash();
+    });
   };
 
   unsubscribeAction = async (fileIds, folderIds) => {
@@ -1062,7 +1084,6 @@ class FilesActionStore {
           })
           .then(() => setSelected("close"));
       default:
-        return;
     }
   };
 
@@ -1333,7 +1354,6 @@ class FilesActionStore {
             this.setGroupMenuBlocked(false);
           });
       default:
-        return;
     }
   };
 
@@ -1355,7 +1375,7 @@ class FilesActionStore {
         const idx = tags.findIndex((item) => item === tag.label);
 
         if (idx > -1) {
-          //TODO: remove tag here if already selected
+          // TODO: remove tag here if already selected
           return;
         }
       }
@@ -1419,7 +1439,7 @@ class FilesActionStore {
       setHotkeyCaret,
       setHotkeyCaretStart,
     } = this.filesStore;
-    //selected === "close" && setSelected("none");
+    // selected === "close" && setSelected("none");
     setBufferSelection(null);
     setHotkeyCaret(null);
     setHotkeyCaretStart(file);
@@ -1565,7 +1585,7 @@ class FilesActionStore {
 
     setSecondaryProgressBarData({
       icon: "file",
-      label: "", //TODO: add translation if need "MarkAsRead": "Mark all as read",
+      label: "", // TODO: add translation if need "MarkAsRead": "Mark all as read",
       percent: 0,
       visible: true,
       operationId,
@@ -1580,7 +1600,7 @@ class FilesActionStore {
       .then(() => {
         if (!item) return;
 
-        //this.setNewBadgeCount(item);
+        // this.setNewBadgeCount(item);
 
         const { getFileIndex, updateFileStatus } = this.filesStore;
 
@@ -1621,7 +1641,7 @@ class FilesActionStore {
       isCopy,
     };
 
-    for (let item of selection) {
+    for (const item of selection) {
       if (!item.isFolder) {
         fileIds.push(item.id);
       } else {
@@ -1647,8 +1667,8 @@ class FilesActionStore {
   };
 
   setSelectedItems = (title, length) => {
-    const selectionLength = length ? length : this.filesStore.selection.length;
-    const selectionTitle = title ? title : this.filesStore.selectionTitle;
+    const selectionLength = length || this.filesStore.selection.length;
+    const selectionTitle = title || this.filesStore.selectionTitle;
 
     if (selectionLength !== undefined && selectionTitle) {
       this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(
@@ -1914,6 +1934,7 @@ class FilesActionStore {
 
     window.dispatchEvent(event);
   };
+
   disableRoomQuota = async (items, t) => {
     const { setCustomRoomQuota } = this.filesStore;
 
@@ -1943,6 +1964,7 @@ class FilesActionStore {
       toastr.error(e);
     }
   };
+
   getOption = (option, t) => {
     const {
       // setSharingPanelVisible,
@@ -1957,8 +1979,7 @@ class FilesActionStore {
     switch (option) {
       case "show-info":
         if (isDesktop()) return null;
-        else
-          return {
+        return {
             id: "menu-show-info",
             key: "show-info",
             label: t("Common:Info"),
@@ -1967,8 +1988,7 @@ class FilesActionStore {
           };
       case "copy":
         if (!this.isAvailableOption("copy")) return null;
-        else
-          return {
+        return {
             id: "menu-copy",
             label: t("Common:Copy"),
             onClick: () => setCopyPanelVisible(true),
@@ -1977,8 +1997,7 @@ class FilesActionStore {
 
       case "create-room":
         if (!this.isAvailableOption("create-room")) return null;
-        else
-          return {
+        return {
             id: "menu-create-room",
             label: t("Files:CreateRoom"),
             onClick: this.onClickCreateRoom,
@@ -1987,8 +2006,7 @@ class FilesActionStore {
 
       case "download":
         if (!this.isAvailableOption("download")) return null;
-        else
-          return {
+        return {
             id: "menu-download",
             label: t("Common:Download"),
             onClick: () =>
@@ -2000,8 +2018,7 @@ class FilesActionStore {
 
       case "downloadAs":
         if (!this.isAvailableOption("downloadAs")) return null;
-        else
-          return {
+        return {
             id: "menu-download-as",
             label: t("Translations:DownloadAs"),
             onClick: () => setDownloadDialogVisible(true),
@@ -2010,8 +2027,7 @@ class FilesActionStore {
 
       case "moveTo":
         if (!this.isAvailableOption("moveTo")) return null;
-        else
-          return {
+        return {
             id: "menu-move-to",
             label: t("Common:MoveTo"),
             onClick: () => setMoveToPanelVisible(true),
@@ -2037,8 +2053,7 @@ class FilesActionStore {
         };
       case "archive":
         if (!this.isAvailableOption("archive")) return null;
-        else
-          return {
+        return {
             id: "menu-archive",
             key: "archive",
             label: t("MoveToArchive"),
@@ -2048,8 +2063,7 @@ class FilesActionStore {
           };
       case "unarchive":
         if (!this.isAvailableOption("unarchive")) return null;
-        else
-          return {
+        return {
             id: "menu-unarchive",
             key: "unarchive",
             label: t("Common:Restore"),
@@ -2059,8 +2073,7 @@ class FilesActionStore {
           };
       case "change-quota":
         if (!this.isAvailableOption("change-quota")) return null;
-        else
-          return {
+        return {
             id: "menu-change-quota",
             key: "change-quota",
             label: t("Common:ChangeQuota"),
@@ -2070,8 +2083,7 @@ class FilesActionStore {
           };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
-        else
-          return {
+        return {
             id: "menu-default-quota",
             key: "default-quota",
             label: t("Common:SetToDefault"),
@@ -2312,7 +2324,7 @@ class FilesActionStore {
       isRecentTab,
     } = this.treeFoldersStore;
 
-    let itemsCollection = new Map();
+    const itemsCollection = new Map();
 
     if (isRecycleBinFolder)
       return this.getRecycleBinFolderOptions(itemsCollection, t);
@@ -2492,7 +2504,7 @@ class FilesActionStore {
         isRoot: false,
         rootFolderType,
         isRoom,
-        rootRoomTitle: !!roomType ? currentTitle : "",
+        rootRoomTitle: roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
         isShared,
         isExternal,
@@ -2710,7 +2722,7 @@ class FilesActionStore {
     const { publicRoomKey } = this.publicRoomStore;
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
 
-    const id = folderId ? folderId : this.selectedFolderStore.parentId;
+    const id = folderId || this.selectedFolderStore.parentId;
     const path = getCategoryUrl(CategoryType.PublicRoom);
     const filter = FilesFilter.getDefault();
     filter.folder = id;
@@ -2718,7 +2730,7 @@ class FilesActionStore {
     const state = {
       title: navigationPath[0]?.title || "",
       isRoot: navigationPath.length === 1,
-      rootFolderType: rootFolderType,
+      rootFolderType,
     };
 
     window.DocSpace.navigate(
@@ -2756,7 +2768,7 @@ class FilesActionStore {
       title: (navigationPath && navigationPath[0]?.title) || "",
       isRoom: navigationPath[0]?.isRoom,
       isRoot,
-      rootFolderType: rootFolderType,
+      rootFolderType,
       isPublicRoomType: navigationPath[0]?.isRoom
         ? navigationPath[0]?.roomType === RoomsType.PublicRoom
         : false,
@@ -2774,7 +2786,7 @@ class FilesActionStore {
   };
 
   preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
-    let fileIds = [];
+    const fileIds = [];
     let folderIds = [];
 
     if (!selections.length) return;
@@ -2793,7 +2805,7 @@ class FilesActionStore {
           return;
         }
 
-        const title = !!folders.length ? folders[0].title : files[0].title;
+        const title = folders.length ? folders[0].title : files[0].title;
         this.setSelectedItems(title, total);
       } catch (err) {
         toastr.error(err);
@@ -2812,7 +2824,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
-      folderIds: folderIds,
+      folderIds,
       fileIds,
       deleteAfter: false,
       isCopy: true,
@@ -2852,15 +2864,13 @@ class FilesActionStore {
           } else {
             removeFiles(null, [roomId]);
           }
-        } else {
-          if (!isRoot) {
-            this.selectedFolderStore.setInRoom(false);
+        } else if (!isRoot) {
+          this.selectedFolderStore.setInRoom(false);
 
-            const operationId = uniqueid("operation_");
-            this.updateCurrentFolder(null, [roomId], null, operationId);
-          } else {
-            this.filesStore.setInRoomFolder(roomId, false);
-          }
+          const operationId = uniqueid("operation_");
+          this.updateCurrentFolder(null, [roomId], null, operationId);
+        } else {
+          this.filesStore.setInRoomFolder(roomId, false);
         }
 
         isOwner
@@ -2971,12 +2981,10 @@ class FilesActionStore {
         }
 
         newFilesList[i].order = splitItem.join(".");
+      } else if (indexMovedFromBottom) {
+        newFilesList[i].order = `${+newFilesList[i].order + 1}`;
       } else {
-        if (indexMovedFromBottom) {
-          newFilesList[i].order = +newFilesList[i].order + 1 + "";
-        } else {
-          newFilesList[i].order = +newFilesList[i].order - 1 + "";
-        }
+        newFilesList[i].order = `${+newFilesList[i].order - 1}`;
       }
       setUpdateSelection([newFilesList[i]]);
       i++;
@@ -3049,7 +3057,7 @@ class FilesActionStore {
     )
       return;
 
-    let selection = this.filesStore.selection.length
+    const selection = this.filesStore.selection.length
       ? this.filesStore.selection
       : [bufferSelection];
 
@@ -3126,7 +3134,7 @@ class FilesActionStore {
   };
 
   checkExportRoomIndexProgress = async () => {
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       setTimeout(async () => {
         try {
           const res = await api.rooms.getExportRoomIndexProgress();

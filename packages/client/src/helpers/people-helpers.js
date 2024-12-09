@@ -44,7 +44,7 @@ export const getUserStatus = (user) => {
 };
 
 export const showEmailActivationToast = (email, t) => {
-  //console.log("showEmailActivationToast", { email });
+  // console.log("showEmailActivationToast", { email });
   toastr.success(
     <Trans
       i18nKey="MessageEmailActivationInstuctionsSentOnEmail"

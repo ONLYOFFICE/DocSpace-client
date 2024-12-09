@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef } from "react";
-import ToggleBlock from "./ToggleBlock";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -34,6 +33,7 @@ import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/shared/components/toast";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { PasswordInput } from "@docspace/shared/components/password-input";
+import ToggleBlock from "./ToggleBlock";
 
 const PasswordAccessBlock = (props) => {
   const {

@@ -29,7 +29,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import PropTypes from "prop-types";
 import React from "react";
 import { ReactSVG } from "react-svg";
-import styled, { css } from "styled-components";
+import styled, { css, withTheme } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import {
   tablet,
@@ -37,7 +37,6 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
-import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { Base, globalColors } from "@docspace/shared/themes";
@@ -637,7 +636,7 @@ class Tile extends React.PureComponent {
     const onContextMenu = (e) => {
       tileContextClick && tileContextClick(e.button === 2);
       if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); //TODO: need fix context menu to global
+        this.tile.current.click(e); // TODO: need fix context menu to global
       }
       this.cm.current.show(e);
     };
@@ -772,7 +771,7 @@ class Tile extends React.PureComponent {
                     getContextModel={getContextModel}
                     ref={this.cm}
                     header={contextMenuHeader}
-                    withBackdrop={true}
+                    withBackdrop
                     isRoom={isRoom}
                   />
                 </StyledOptionButton>
@@ -867,7 +866,7 @@ class Tile extends React.PureComponent {
                   getContextModel={getContextModel}
                   ref={this.cm}
                   header={contextMenuHeader}
-                  withBackdrop={true}
+                  withBackdrop
                 />
               </StyledOptionButton>
             </>

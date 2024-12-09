@@ -101,7 +101,7 @@ const Layout = (props) => {
   useEffect(() => {
     setIsTabletView(isTabletUtils());
 
-    let mediaQuery = window.matchMedia(tablet);
+    const mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
 
     return () => {

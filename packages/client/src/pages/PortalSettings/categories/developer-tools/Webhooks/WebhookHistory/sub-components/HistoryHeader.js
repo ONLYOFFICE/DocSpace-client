@@ -27,7 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
@@ -50,7 +50,6 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
@@ -240,11 +239,11 @@ const HistoryHeader = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onBack}
         className="arrow-button"
       />
-      <Headline type="content" truncate={true} className="headline">
+      <Headline type="content" truncate className="headline">
         {t("InfoPanel:SubmenuHistory")}
       </Headline>
     </>

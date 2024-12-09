@@ -30,10 +30,10 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import ConsumerToggle from "./consumerToggle";
 import { globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import ConsumerToggle from "./consumerToggle";
 
 const StyledItem = styled.div.attrs(injectDefaultTheme)`
   .consumer-description {
@@ -92,8 +92,7 @@ class ConsumerItem extends React.Component {
 
     const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
 
-    const isSet =
-      !consumer.canSet || consumer.props.find((p) => p.value) ? true : false;
+    const isSet = !!(!consumer.canSet || consumer.props.find((p) => p.value));
 
     return (
       <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
@@ -111,7 +110,7 @@ class ConsumerItem extends React.Component {
             {logo && (
               <ReactSVG
                 src={logo}
-                className={"consumer-icon"}
+                className="consumer-icon"
                 alt={consumer.name}
               />
             )}

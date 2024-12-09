@@ -79,7 +79,7 @@ const CreateRoomEvent = ({
   };
 
   const fetchTagsAction = useCallback(async () => {
-    let tags = await fetchTags();
+    const tags = await fetchTags();
     setFetchedTags(tags);
   }, []);
 

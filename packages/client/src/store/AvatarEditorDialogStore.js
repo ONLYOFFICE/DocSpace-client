@@ -40,6 +40,7 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
+
   image = {
     uploadedFile: this.uploadedFile,
     x: 0.5,
@@ -71,7 +72,7 @@ class AvatarEditorDialogStore {
 
   onChangeFile = async (e, t) => {
     const uploadedFile = await this.uploadFile(t, e);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
   };
 
   getUploadedLogoData = async () => {
@@ -135,7 +136,7 @@ class AvatarEditorDialogStore {
     const uploadedFile = await this.uploadFileToImageEditor(t, file[0]);
 
     this.setUploadedFile(uploadedFile);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
     this.setAvatarEditorDialogVisible(true);
 
     return uploadedFile;

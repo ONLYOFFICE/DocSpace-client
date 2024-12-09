@@ -110,7 +110,7 @@ const Members = ({
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
-  else if (!infoPanelMembers) return <></>;
+  if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId,
@@ -372,7 +372,7 @@ export default inject(
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-      additionalLinks: additionalLinks,
+      additionalLinks,
       setLinkParams,
       setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,

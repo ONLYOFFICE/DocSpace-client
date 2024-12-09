@@ -67,7 +67,7 @@ const PureHome = (props) => {
     fetchFiles,
     fetchRooms,
 
-    //homepage,
+    // homepage,
     setIsSectionHeaderLoading,
     setIsSectionBodyLoading,
     setIsSectionFilterLoading,
@@ -168,7 +168,7 @@ const PureHome = (props) => {
     setGuestReleaseTipDialogVisible,
   } = props;
 
-  //console.log(t("ComingSoon"))
+  // console.log(t("ComingSoon"))
 
   const location = useLocation();
 
@@ -558,8 +558,7 @@ export const Component = inject(
       groupsStore;
 
     const isEmptyGroups =
-      !groupsIsFiltered &&
-      ((groups && groups.length === 0) || !Boolean(groups));
+      !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -570,7 +569,7 @@ export const Component = inject(
     // }
 
     return {
-      //homepage: config.homepage,
+      // homepage: config.homepage,
       firstLoad,
       dragging,
       viewAs,

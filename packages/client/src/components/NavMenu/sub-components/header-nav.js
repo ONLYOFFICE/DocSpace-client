@@ -27,11 +27,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import ProfileActions from "./profile-actions";
 import { useTranslation } from "react-i18next";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
+import ProfileActions from "./profile-actions";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -76,14 +76,12 @@ const HeaderNav = ({
   return (
     <StyledNav className="profileMenuIcon hidingHeader">
       {isAuthenticated && user && !hideProfileMenu ? (
-        <>
-          <ProfileActions
-            userActions={userActions}
-            user={user}
-            userIsUpdate={userIsUpdate}
-            setUserIsUpdate={setUserIsUpdate}
-          />
-        </>
+        <ProfileActions
+          userActions={userActions}
+          user={user}
+          userIsUpdate={userIsUpdate}
+          setUserIsUpdate={setUserIsUpdate}
+        />
       ) : (
         <></>
       )}

@@ -35,12 +35,11 @@ import React, {
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
-
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
-import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
+import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
+import { getRelativeDateDay } from "../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
 import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
@@ -195,7 +194,7 @@ const History = ({
       return;
     }
 
-    //If there are no entries in the history for the selected day
+    // If there are no entries in the history for the selected day
     const calendarDayModified = new Date(calendarDay);
     let nearestNewerDate = null;
 
@@ -205,12 +204,12 @@ const History = ({
       item.feeds.every((feed) => {
         const date = new Date(feed.date);
 
-        //Stop checking all entries for one day
+        // Stop checking all entries for one day
         if (date > calendarDayModified) return false;
 
-        //Looking for the nearest new date
+        // Looking for the nearest new date
         if (date < calendarDayModified) {
-          //If there are no nearby new entries in the post history, then scroll to the last one
+          // If there are no nearby new entries in the post history, then scroll to the last one
           if (indexItem === 0) {
             nearestNewerDate = feed.date;
             return false;

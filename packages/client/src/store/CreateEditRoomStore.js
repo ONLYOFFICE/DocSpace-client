@@ -37,21 +37,35 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class CreateEditRoomStore {
   roomParams = null;
+
   isLoading = null;
+
   confirmDialogIsLoading = false;
+
   onClose = null;
 
   filesStore = null;
+
   tagsStore = null;
+
   selectedFolderStore = null;
+
   filesActionsStore = null;
+
   thirdPartyStore = null;
+
   settingsStore = null;
+
   infoPanelStore = null;
+
   currentQuotaStore = null;
+
   watermarksSettings = {};
+
   initialWatermarksSettings = {};
+
   isImageType = false;
+
   dialogsStore = null;
 
   selectedRoomType = null;
@@ -87,6 +101,7 @@ class CreateEditRoomStore {
   setSelectedRoomType = (type) => {
     this.selectedRoomType = type;
   };
+
   setRoomParams = (roomParams) => {
     this.roomParams = roomParams;
   };
@@ -174,7 +189,7 @@ class CreateEditRoomStore {
     const response = await api.rooms.uploadRoomLogo(uploadWatermarkData);
 
     const getMeta = (url) => {
-      //url for this.watermarksSettings.image.viewUrl
+      // url for this.watermarksSettings.image.viewUrl
       return new Promise((resolve, reject) => {
         const img = new Image();
         const imgUrl = url ?? URL.createObjectURL(watermarkImage);
@@ -183,7 +198,7 @@ class CreateEditRoomStore {
         img.src = imgUrl;
       });
     };
-    return await getMeta().then((img) => {
+    return getMeta().then((img) => {
       return {
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
@@ -321,7 +336,7 @@ class CreateEditRoomStore {
       if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
-      if (!!requests.length) {
+      if (requests.length) {
         await Promise.all(requests);
       }
     } catch (e) {

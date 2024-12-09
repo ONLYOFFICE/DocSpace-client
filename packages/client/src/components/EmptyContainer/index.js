@@ -39,7 +39,7 @@ const linkStyles = {
 
 const EmptyContainer = ({
   isFiltered,
-  //isLoading,
+  // isLoading,
   parentId,
   theme,
   type,

@@ -108,7 +108,7 @@ const Details = ({
 
   const badgeUrl = getRoomBadgeUrl(selection, 24);
 
-  //console.log("InfoPanel->Details render", { selection });
+  // console.log("InfoPanel->Details render", { selection });
 
   const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
@@ -128,8 +128,8 @@ const Details = ({
           <img
             src={`${selection.thumbnailUrl}&size=1280x720`}
             alt="thumbnail-image"
-            //height={260}
-            //width={360}
+            // height={260}
+            // width={360}
             onError={onThumbnailError}
           />
         </StyledThumbnail>

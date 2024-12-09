@@ -39,14 +39,14 @@ import {
 } from "@docspace/shared/components/share/Share.helpers";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
+import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
+import moment from "moment";
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
-import moment from "moment";
 import { RoleLinkBlock } from "./RoleLinkBlock";
 
 const EditLinkPanel = (props) => {

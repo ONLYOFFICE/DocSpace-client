@@ -136,7 +136,7 @@ const SubmitToFormGallery = ({
         key="select-file-dialog"
         filterParam={FilesSelectorFilterTypes.PDF}
         descriptionText={t("Common:SelectPDFFormat")}
-        isPanelVisible={true}
+        isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
       />
@@ -160,8 +160,8 @@ const SubmitToFormGallery = ({
             <Link
               color={currentColorScheme.main?.accent}
               href={guideLink || "#"}
-              type={"page"}
-              target={"_blank"}
+              type="page"
+              target="_blank"
               isBold
               isHovered
             >
@@ -187,7 +187,7 @@ const SubmitToFormGallery = ({
                   ),
                 ]
               ) : (
-                <span className="name">{"" + formItem.fileExst}</span>
+                <span className="name">{`${formItem.fileExst}`}</span>
               )}
             </div>
           </Styled.FormItem>

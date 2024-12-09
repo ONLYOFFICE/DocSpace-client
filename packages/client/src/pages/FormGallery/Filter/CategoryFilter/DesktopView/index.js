@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./index.styled";
 import SubList from "./SubList";
 
 const CategoryFilterDesktop = ({
@@ -67,25 +66,25 @@ const CategoryFilterDesktop = ({
       <Styled.CategoryFilter
         id="comboBoxLanguage"
         tabIndex={1}
-        className={"combobox"}
+        className="combobox"
         opened={isOpen}
         onToggle={onOpenDropdown}
         onBackdropClick={onBackdropClick}
         onSelect={onCloseDropdown}
         isDisabled={false}
-        showDisabledItems={true}
+        showDisabledItems
         options={[]}
-        directionX={"right"}
-        directionY={"both"}
-        scaled={true}
-        size={"content"}
+        directionX="right"
+        directionY="both"
+        scaled
+        size="content"
         withoutBackground
         withBackdrop
         disableIconClick={false}
         disableItemClick={false}
         isDefaultMode={false}
-        fixedDirection={true}
-        disableItemClickFirstLevel={true}
+        fixedDirection
+        disableItemClickFirstLevel
         advancedOptionsCount={5}
         selectedOption={{
           label:
@@ -94,8 +93,8 @@ const CategoryFilterDesktop = ({
         advancedOptions={
           <>
             <Styled.CategoryFilterItem
-              id={"ViewAllTemplates"}
-              key={"ViewAllTemplates"}
+              id="ViewAllTemplates"
+              key="ViewAllTemplates"
               title={t("FormGallery:ViewAllTemplates")}
               className="dropdown-item"
               label={t("FormGallery:ViewAllTemplates")}

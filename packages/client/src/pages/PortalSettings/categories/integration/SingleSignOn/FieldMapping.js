@@ -35,8 +35,6 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import SsoFormField from "./sub-components/SsoFormField";
-
 import {
   SSO_GIVEN_NAME,
   SSO_SN,
@@ -45,6 +43,7 @@ import {
   SSO_TITLE,
   SSO_PHONE,
 } from "SRC_DIR/helpers/constants";
+import SsoFormField from "./sub-components/SsoFormField";
 
 const StyledWrapper = styled.div`
   .icon-button {
@@ -118,7 +117,7 @@ const FieldMapping = (props) => {
         hasError={emailHasError}
       />
 
-      {/*<SsoFormField
+      {/* <SsoFormField
         labelText={t("Common:Location")}
         name="location"
         placeholder={SSO_LOCATION}
@@ -143,7 +142,7 @@ const FieldMapping = (props) => {
         tabIndex={21}
         value={phone}
         hasError={phoneHasError}
-  />*/}
+  /> */}
     </StyledWrapper>
   );
 };

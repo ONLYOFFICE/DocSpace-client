@@ -40,9 +40,8 @@ import {
   getFileTypeName,
   getRoomTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
-import CommentEditor from "../sub-components/CommentEditor";
-
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import CommentEditor from "../sub-components/CommentEditor";
 
 // Property Content Components
 
@@ -56,7 +55,7 @@ const link = (text, onClick) => (
   <Link
     isTextOverflow
     className="property-content"
-    isHovered={true}
+    isHovered
     onClick={onClick}
     enableUserSelect
   >
@@ -170,7 +169,7 @@ class DetailsHelper {
         : this.item.isFolder
           ? [
               "Owner",
-              //"Location",
+              // "Location",
               "Type",
               "Content",
               "Date modified",
@@ -180,7 +179,7 @@ class DetailsHelper {
             ]
           : [
               "Owner",
-              //"Location",
+              // "Location",
               "Type",
               "File extension",
               "Size",
@@ -302,7 +301,7 @@ class DetailsHelper {
 
     if (isAnonim) name = this.t("Common:Anonymous");
 
-    //console.log("getAuthorDecoration", { name, displayName });
+    // console.log("getAuthorDecoration", { name, displayName });
 
     return this.isVisitor || this.isCollaborator || isAnonim
       ? text(name)

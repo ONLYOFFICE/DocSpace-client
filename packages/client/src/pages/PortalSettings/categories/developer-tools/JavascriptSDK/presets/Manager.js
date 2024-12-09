@@ -39,8 +39,6 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import { TooltipContent } from "../sub-components/TooltipContent";
-import { Integration } from "../sub-components/Integration";
 import { useNavigate } from "react-router-dom";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -57,6 +55,8 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { FilterBlock } from "../sub-components/FilterBlock";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -83,8 +83,8 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "../sub-components/Integration";
+import { TooltipContent } from "../sub-components/TooltipContent";
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -178,9 +178,9 @@ const Manager = (props) => {
   }, []);
 
   const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+    const newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
-    if (!!publicInPath) {
+    if (publicInPath) {
       const links = await fetchExternalLinks(publicInPath.id);
 
       if (links.length > 1) {
@@ -201,7 +201,7 @@ const Manager = (props) => {
           return {
             key: id,
             label: title,
-            requestToken: requestToken,
+            requestToken,
             settings: linkSettings,
           };
         });
@@ -340,7 +340,7 @@ const Manager = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId}></Box>
+      <Box id={config.frameId} />
     </Frame>
   );
 

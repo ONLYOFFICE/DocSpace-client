@@ -121,7 +121,7 @@ const DebugInfoDialog = (props) => {
           <Box
             className="markdown-wrapper"
             overflowProp="auto"
-            heightProp={"362px"}
+            heightProp="362px"
           >
             <Scrollbar>
               {!debugInfoData && <Loader size="20px" type="track" />}

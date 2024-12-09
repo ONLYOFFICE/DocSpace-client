@@ -27,12 +27,12 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledBodyContent } from "./StyledDownloadDialog";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import DownloadContent from "./DownloadContent";
 import { UrlActionType } from "@docspace/shared/enums";
+import DownloadContent from "./DownloadContent";
+import { StyledBodyContent } from "./StyledDownloadDialog";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -89,7 +89,7 @@ class DownloadDialogComponent extends React.Component {
     const folders = [];
     let singleFileUrl = null;
 
-    for (let item of itemList) {
+    for (const item of itemList) {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
@@ -123,9 +123,9 @@ class DownloadDialogComponent extends React.Component {
   };
 
   getNewArrayFiles = (fileId, array, format) => {
-    //Set all documents format
+    // Set all documents format
     if (!fileId) {
-      for (let file of array) {
+      for (const file of array) {
         file.format =
           format === this.props.t("CustomFormat") || file.fileExst === format
             ? this.props.t("OriginalFormat")
@@ -133,14 +133,13 @@ class DownloadDialogComponent extends React.Component {
       }
 
       return array;
-    } else {
-      //Set single document format
-      const newDoc = array.find((x) => x.id == fileId);
-      if (newDoc.format !== format) {
-        newDoc.format = format;
-      }
-      return array;
     }
+    // Set single document format
+    const newDoc = array.find((x) => x.id == fileId);
+    if (newDoc.format !== format) {
+      newDoc.format = format;
+    }
+    return array;
   };
 
   onSelectFormat = (e) => {
@@ -169,7 +168,7 @@ class DownloadDialogComponent extends React.Component {
 
     if (itemId === "All") {
       const checked = isIndeterminate ? false : !isChecked;
-      for (let file of files) {
+      for (const file of files) {
         file.checked = checked;
       }
 
@@ -189,7 +188,7 @@ class DownloadDialogComponent extends React.Component {
       const disableFiles = files.find((x) => x.checked === false);
       const activeFiles = files.find((x) => x.checked === true);
       const isIndeterminate = !activeFiles ? false : !!disableFiles;
-      const isChecked = disableFiles ? false : true;
+      const isChecked = !disableFiles;
 
       this.setState((prevState) => {
         const newState = { ...prevState };
@@ -257,13 +256,13 @@ class DownloadDialogComponent extends React.Component {
     }
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     document.addEventListener("keyup", this.handleKeyUp);
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     document.removeEventListener("keyup", this.handleKeyUp);
-  };
+  }
 
   render() {
     const { t, tReady, visible, extsConvertible, theme } = this.props;

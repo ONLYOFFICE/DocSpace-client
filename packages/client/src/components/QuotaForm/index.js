@@ -38,8 +38,8 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
 
-import StyledBody from "./StyledComponent";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import StyledBody from "./StyledComponent";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   if (!initialSize && initialSize !== 0) return false;
@@ -157,8 +157,6 @@ const QuotaForm = ({
         onSaveClick();
 
         setHasError(false);
-
-        return;
       }
     }
   };

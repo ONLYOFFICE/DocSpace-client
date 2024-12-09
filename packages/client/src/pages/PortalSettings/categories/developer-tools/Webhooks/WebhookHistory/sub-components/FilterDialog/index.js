@@ -32,12 +32,10 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
+import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
-
-import { useParams, useNavigate } from "react-router-dom";
-
-import { useTranslation } from "react-i18next";
 
 const DialogBodyWrapper = styled.div`
   margin-top: 16px;
@@ -164,7 +162,7 @@ const FilterDialog = (props) => {
               className="apply-button"
               label={t("Common:ApplyButton")}
               size="normal"
-              primary={true}
+              primary
               onClick={handleApplyFilters}
               isDisabled={filters.deliveryTo <= filters.deliveryFrom}
             />

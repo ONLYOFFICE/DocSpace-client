@@ -101,7 +101,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
               <Button
                 scale
                 label={t("Common:LogoutButton")}
-                size={"medium"}
+                size="medium"
                 onClick={onClick}
               />
             )}

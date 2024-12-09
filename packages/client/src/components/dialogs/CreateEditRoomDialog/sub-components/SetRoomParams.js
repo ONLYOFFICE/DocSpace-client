@@ -29,22 +29,14 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import RoomTypeDropdown from "./RoomTypeDropdown";
-import TagInput from "./TagInput";
 import RoomType from "@docspace/shared/components/room-type";
-import PermanentSettings from "./PermanentSettings";
-import InputParam from "./Params/InputParam";
-import ThirdPartyStorage from "./ThirdPartyStorage";
 // import IsPrivateParam from "./IsPrivateParam";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
-import ChangeRoomOwner from "./ChangeRoomOwner";
-import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
 
 import { isMobile, mobile } from "@docspace/shared/utils";
@@ -56,6 +48,14 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { globalColors } from "@docspace/shared/themes";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import RoomQuota from "./RoomQuota";
+import ChangeRoomOwner from "./ChangeRoomOwner";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import ThirdPartyStorage from "./ThirdPartyStorage";
+import InputParam from "./Params/InputParam";
+import PermanentSettings from "./PermanentSettings";
+import TagInput from "./TagInput";
+import RoomTypeDropdown from "./RoomTypeDropdown";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -185,7 +185,7 @@ const SetRoomParams = ({
     if (roomParams.previewIcon !== previewIcon) {
       setRoomParams({
         ...roomParams,
-        previewIcon: previewIcon,
+        previewIcon,
       });
     }
   }, [previewIcon, roomParams.previewIcon]);
@@ -232,11 +232,11 @@ const SetRoomParams = ({
 
     setRoomParams({
       ...roomParams,
-      icon: { ...roomParams.icon, uploadedFile: uploadedFile },
+      icon: { ...roomParams.icon, uploadedFile },
       iconWasUpdated: true,
     });
 
-    onChangeIcon({ ...roomParams.icon, uploadedFile: uploadedFile });
+    onChangeIcon({ ...roomParams.icon, uploadedFile });
   };
 
   const onChangeName = (e) => {
@@ -302,7 +302,7 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
+    setRoomParams({ ...roomParams, icon, iconWasUpdated: true });
   };
 
   const onCreateFolderChange = () => {
@@ -329,15 +329,13 @@ const SetRoomParams = ({
         ? true
         : previewIcon
           ? false
-          : createRoomTitle
-            ? false
-            : true;
+          : !createRoomTitle;
 
   const element = isEdit ? (
     <ItemIcon
       id={selection?.id}
       fileExst={selection?.fileExst}
-      isRoom={true}
+      isRoom
       title={previewTitle}
       className="room-params-icon"
       logo={
@@ -358,7 +356,7 @@ const SetRoomParams = ({
       color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
       radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-      withEditing={true}
+      withEditing
       model={isEditRoomModel}
       onChangeFile={onChangeFile}
     />
@@ -371,7 +369,7 @@ const SetRoomParams = ({
       }
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
       radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-      imgClassName={"react-svg-icon"}
+      imgClassName="react-svg-icon"
       model={model}
       className="room-params-icon"
       isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
@@ -436,7 +434,7 @@ const SetRoomParams = ({
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}
-          isAutoFocussed={true}
+          isAutoFocussed
         />
       </div>
 
@@ -509,7 +507,7 @@ const SetRoomParams = ({
             onClose={() => setAvatarEditorDialogVisible(false)}
             onSave={onSaveAvatar}
             onChangeFile={onChangeFile}
-            classNameWrapperImageCropper={"icon-editor"}
+            classNameWrapperImageCropper="icon-editor"
             disableImageRescaling={disableImageRescaling}
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}

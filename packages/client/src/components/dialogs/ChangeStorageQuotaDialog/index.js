@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
 
-import QuotaForm from "../../../components/QuotaForm";
+import QuotaForm from "../../QuotaForm";
 
 const ChangeStorageQuotaDialog = (props) => {
   const {
@@ -103,8 +103,6 @@ const ChangeStorageQuotaDialog = (props) => {
       onSaveClick();
       setSize("");
       setIsError(false);
-
-      return;
     }
   };
   const onCloseClick = () => {

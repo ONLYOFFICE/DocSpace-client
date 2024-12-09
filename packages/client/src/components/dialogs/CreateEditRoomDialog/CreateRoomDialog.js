@@ -105,7 +105,7 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
+  const isRoomTitleChanged = roomParams?.title?.trim() === "";
 
   const onKeyUpHandler = (e) => {
     if (isWrongTitle) return;
@@ -149,7 +149,7 @@ const CreateRoomDialog = ({
   const onCloseAndDisconnectThirdparty = async () => {
     if (isLoading) return;
 
-    if (!!roomParams.storageLocation.thirdpartyAccount) {
+    if (roomParams.storageLocation.thirdpartyAccount) {
       setIsLoading(true);
       await deleteThirdParty(
         roomParams.storageLocation.thirdpartyAccount.providerId,

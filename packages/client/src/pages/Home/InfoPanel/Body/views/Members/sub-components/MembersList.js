@@ -37,9 +37,9 @@ import { RowLoader } from "@docspace/shared/skeletons/selector";
 
 import { isMobile, mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { StyledUserTypeHeader } from "../../../styles/members";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -124,7 +124,7 @@ const MembersList = (props) => {
           className="members-list-item members-list-loader-item"
           style={style}
         >
-          <RowLoader isMultiSelect={false} isContainer={true} isUser={true} />
+          <RowLoader isMultiSelect={false} isContainer isUser />
         </div>
       );
     }
@@ -187,7 +187,7 @@ const MembersList = (props) => {
       ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
       : 0;
 
-    for (let titleIndex in listOfTitles) {
+    for (const titleIndex in listOfTitles) {
       const title = listOfTitles[titleIndex];
       const titleOffsetTop =
         linksBlockHeight + (title.index - linksBlockLength) * itemSize;

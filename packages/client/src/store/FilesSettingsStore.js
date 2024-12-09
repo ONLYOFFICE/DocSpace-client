@@ -48,57 +48,99 @@ import { toastr } from "@docspace/shared/components/toast";
 
 class FilesSettingsStore {
   thirdPartyStore;
+
   treeFoldersStore;
+
   publicRoomStore;
+
   pluginStore;
+
   authStore;
+
   settingsStore;
 
   filesSettings = null;
 
   isErrorSettings = null;
+
   expandedSetting = null;
 
   confirmDelete = null;
+
   enableThirdParty = null;
+
   forcesave = null;
+
   storeForcesave = null;
+
   storeOriginalFiles = null;
+
   favoritesSection = null;
+
   recentSection = null;
+
   hideConfirmConvertSave = null;
+
   keepNewFileName = null;
+
   openEditorInSameTab = null;
+
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
+
   maxUploadThreadCount = 15;
+
   maxUploadFilesCount = 5;
+
   displayFileExtension = null;
 
   settingsIsLoaded = false;
 
   extsImagePreviewed = [];
+
   extsMediaPreviewed = [];
+
   extsWebPreviewed = [];
+
   extsWebEdited = [];
+
   extsWebEncrypt = [];
+
   extsWebReviewed = [];
+
   extsWebCustomFilterEditing = [];
+
   extsWebRestrictedEditing = [];
+
   extsWebCommented = [];
+
   extsWebTemplate = [];
+
   extsCoAuthoring = [];
+
   extsMustConvert = [];
+
   extsConvertible = [];
+
   extsUploadable = [];
+
   extsArchive = [];
+
   extsVideo = [];
+
   extsAudio = [];
+
   extsImage = [];
+
   extsSpreadsheet = [];
+
   extsPresentation = [];
+
   extsDocument = [];
+
   internalFormats = {};
+
   masterFormExtension = "";
+
   canSearchByContent = false;
 
   constructor(
@@ -140,7 +182,7 @@ class FilesSettingsStore {
   setFilesSettings = (settings) => {
     this.filesSettings = settings;
     const settingsItems = Object.keys(settings);
-    for (let key of settingsItems) {
+    for (const key of settingsItems) {
       this[key] = settings[key];
     }
   };
@@ -176,10 +218,10 @@ class FilesSettingsStore {
             api.files.getThirdPartyList(),
           ])
           .then(([capabilities, providers]) => {
-            for (let item of capabilities) {
+            for (const item of capabilities) {
               item.splice(1, 1);
             }
-            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
           });
       })
@@ -239,15 +281,14 @@ class FilesSettingsStore {
           api.files.getThirdPartyList(),
         ])
         .then(([capabilities, providers]) => {
-          for (let item of capabilities) {
+          for (const item of capabilities) {
             item.splice(1, 1);
           }
-          this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+          this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
           this.thirdPartyStore.setThirdPartyProviders(providers);
         });
-    } else {
-      return Promise.resolve();
     }
+    return Promise.resolve();
   };
 
   setForceSave = (data) =>
@@ -361,13 +402,14 @@ class FilesSettingsStore {
         isEbookItem,
       );
       return icon;
-    } else if (roomType) {
-      return this.getRoomsIcon(roomType, isArchive, 32);
-    } else if (folderType) {
-      return this.getIconByFolderType(folderType, size);
-    } else {
-      return this.getFolderIcon(size);
     }
+    if (roomType) {
+      return this.getRoomsIcon(roomType, isArchive, 32);
+    }
+    if (folderType) {
+      return this.getIconByFolderType(folderType, size);
+    }
+    return this.getFolderIcon(size);
   };
 
   getIconByFolderType = (folderType, size = 32) => {
@@ -429,7 +471,7 @@ class FilesSettingsStore {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    let path = `${extension.replace(/^\./, "")}.svg`;
+    const path = `${extension.replace(/^\./, "")}.svg`;
 
     if (enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(

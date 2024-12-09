@@ -28,9 +28,8 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect } from "react-router-dom";
+import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   isDesktop,
@@ -42,8 +41,8 @@ import {
 } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import HeaderCatalogBurger from "./header-catalog-burger";
 import { globalColors } from "@docspace/shared/themes";
+import HeaderCatalogBurger from "./header-catalog-burger";
 
 const Header = styled.header.attrs(injectDefaultTheme)`
   display: flex;
@@ -130,12 +129,12 @@ const StyledNavigationIconsWrapper = styled.div`
 
 const HeaderComponent = ({
   currentProductName,
-  //totalNotifications,
+  // totalNotifications,
   onClick,
   onNavMouseEnter,
   onNavMouseLeave,
   defaultPage,
-  //mainModules,
+  // mainModules,
   isNavOpened,
   currentProductId,
   toggleAside,
@@ -157,7 +156,7 @@ const HeaderComponent = ({
 
   const isFormGallery = location.pathname.includes("/form-gallery");
 
-  //const isNavAvailable = mainModules.length > 0;
+  // const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
   //   history.push(defaultPage);
@@ -178,13 +177,13 @@ const HeaderComponent = ({
   //   backdropClick();
   // }, []);
 
-  //const numberOfModules = mainModules.filter((item) => !item.separator).length;
-  //const needNavMenu = currentProductId !== "home";
+  // const numberOfModules = mainModules.filter((item) => !item.separator).length;
+  // const needNavMenu = currentProductId !== "home";
   // const mainModulesWithoutSettings = mainModules.filter(
   //   (module) => module.id !== "settings"
   // );
 
-  /*const navItems = mainModulesWithoutSettings.map(
+  /* const navItems = mainModulesWithoutSettings.map(
     ({ id, separator, iconUrl, notifications, link, title, dashed }) => {
       const itemLink = getLink(link);
       const shouldRenderIcon = checkIfModuleOld(link);
@@ -208,7 +207,7 @@ const HeaderComponent = ({
         </NavItem>
       );
     }
-  );*/
+  ); */
 
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 
@@ -320,7 +319,7 @@ const HeaderComponent = ({
 HeaderComponent.displayName = "Header";
 
 HeaderComponent.propTypes = {
-  //totalNotifications: PropTypes.number,
+  // totalNotifications: PropTypes.number,
   onClick: PropTypes.func,
 
   defaultPage: PropTypes.string,
@@ -354,12 +353,12 @@ export default inject(({ settingsStore, authStore }) => {
     defaultPage,
     logoUrl,
 
-    //totalNotifications,
+    // totalNotifications,
     isLoaded,
     version,
     isAuthenticated,
     currentProductId,
     toggleArticleOpen,
-    //currentProductName: (product && product.title) || "",
+    // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

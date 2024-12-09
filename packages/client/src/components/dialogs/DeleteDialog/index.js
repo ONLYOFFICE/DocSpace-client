@@ -106,8 +106,8 @@ const DeleteDialogComponent = (props) => {
 
     if (!selection.length) return;
 
-    let filesId = [];
-    let foldersId = [];
+    const filesId = [];
+    const foldersId = [];
 
     selection.map((item) => {
       item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);

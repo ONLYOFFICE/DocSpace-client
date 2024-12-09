@@ -33,6 +33,7 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 
 import { Text } from "@docspace/shared/components/text";
 
+import { Link } from "@docspace/shared/components/link";
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
 import {
   StyledGalleryNoThumbnail,
@@ -44,7 +45,6 @@ import {
   StyledProperties,
   StyledSubtitle,
 } from "../../styles/common";
-import { Link } from "@docspace/shared/components/link";
 
 const Gallery = ({
   t,

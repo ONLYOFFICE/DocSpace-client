@@ -83,37 +83,53 @@ class InfoPanelStore {
   userStore = null;
 
   isVisible = false;
+
   isMobileHidden = false;
 
   infoPanelSelection = null;
+
   selectionHistory = null;
+
   selectionHistoryTotal = null;
 
   roomsView = infoMembers;
+
   fileView = infoHistory;
 
   isScrollLocked = false;
+
   historyWithFileList = false;
 
   filesSettingsStore = null;
+
   peopleStore = null;
+
   filesStore = null;
+
   selectedFolderStore = null;
+
   treeFoldersStore = null;
+
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
   infoPanelRoom = null;
+
   membersIsLoading = false;
+
   isMembersPanelUpdating = false;
 
   shareChanged = false;
+
   calendarDay = null;
 
   showSearchBlock = false;
+
   searchValue = "";
 
   infoPanelSelectedGroup = null;
+
   historyFilter = {
     page: 0,
     pageCount: 100,
@@ -272,9 +288,7 @@ class InfoPanelStore {
       ? this.infoPanelSelection
       : selection.length
         ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
+        : bufferSelection || null;
   }
 
   get isRoomMembersPanelOpen() {
@@ -299,13 +313,12 @@ class InfoPanelStore {
       // if (!this.infoPanelSelection?.id) {
       return this.getInfoPanelSelectedFolder();
       // }
-    } else {
-      return this.infoPanelSelectedItems[0];
     }
+    return this.infoPanelSelectedItems[0];
   };
 
   setNewInfoPanelSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedItems = this.infoPanelSelectedItems; // files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
 
@@ -341,10 +354,10 @@ class InfoPanelStore {
     this.setInfoPanelSelection({
       ...this.infoPanelSelection,
       logo: {
-        small: logo.small.split("?")[0] + "?" + new Date().getTime(),
-        medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
-        large: logo.large.split("?")[0] + "?" + new Date().getTime(),
-        original: logo.original.split("?")[0] + "?" + new Date().getTime(),
+        small: `${logo.small.split("?")[0]}?${new Date().getTime()}`,
+        medium: `${logo.medium.split("?")[0]}?${new Date().getTime()}`,
+        large: `${logo.large.split("?")[0]}?${new Date().getTime()}`,
+        original: `${logo.original.split("?")[0]}?${new Date().getTime()}`,
       },
     });
   };
@@ -356,9 +369,8 @@ class InfoPanelStore {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
       return;
-    } else {
-      this.setNewInfoPanelSelection();
     }
+    this.setNewInfoPanelSelection();
 
     if (!this.getIsRooms) return;
 
@@ -564,7 +576,7 @@ class InfoPanelStore {
     groups,
     guests,
   ) => {
-    let hasPrevAdminsTitle = this.getHasPrevTitle(
+    const hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
     );
@@ -577,7 +589,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
+    const hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
 
     if (groups.length && !hasPrevGroupsTitle) {
       groups.unshift({
@@ -587,7 +599,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+    const hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
       users.unshift({
@@ -597,7 +609,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
+    const hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
 
     if (guests?.length && !hasPrevGuestsTitle) {
       guests.unshift({
@@ -607,7 +619,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevExpectedTitle = this.getHasPrevTitle(
+    const hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
       "expected",
     );
@@ -731,7 +743,7 @@ class InfoPanelStore {
     const newMembers = this.convertMembers(t, data, false, true);
 
     const mergedMembers = {
-      roomId: roomId,
+      roomId,
       administrators: [
         ...oldMembers.administrators,
         ...newMembers.administrators,
@@ -847,7 +859,7 @@ class InfoPanelStore {
         this.infoPanelSelection.roomType,
       );
 
-    let newFilter = clone(this.historyFilter);
+    const newFilter = clone(this.historyFilter);
 
     newFilter.page += 1;
     newFilter.startIndex = newFilter.page * newFilter.pageCount;
@@ -920,6 +932,7 @@ class InfoPanelStore {
     this.setView(infoShare);
     this.isVisible = true;
   };
+
   openMembersTab = () => {
     this.setView(infoMembers);
     this.isVisible = true;

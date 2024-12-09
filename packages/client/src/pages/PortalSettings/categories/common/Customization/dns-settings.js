@@ -36,10 +36,7 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
 import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
@@ -49,6 +46,9 @@ import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
 
 const toggleStyle = {
   position: "static",
@@ -243,11 +243,11 @@ const DNSSettingsComponent = (props) => {
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
             labelText={`${t("YourCurrentDomain")}`}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               {...textInputProps}
-              isDisabled={true}
+              isDisabled
               value={location.hostname?.trim()}
             />
           </FieldContainer>
@@ -276,7 +276,7 @@ const DNSSettingsComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization dnsSettings={true} />
+    <LoaderCustomization dnsSettings />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
@@ -297,7 +297,7 @@ const DNSSettingsComponent = (props) => {
                   : globalColors.favoriteStatusDark
               }
               label={t("Common:Paid")}
-              isPaidBadge={true}
+              isPaidBadge
             />
           )}
         </div>

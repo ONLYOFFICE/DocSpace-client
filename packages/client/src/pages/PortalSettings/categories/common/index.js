@@ -31,14 +31,14 @@ import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { inject, observer } from "mobx-react";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
-import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const TabsCommon = (props) => {
   const {

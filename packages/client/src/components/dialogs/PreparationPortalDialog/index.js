@@ -63,9 +63,7 @@ const PreparationPortalDialogWrapper = inject(({ backup }, { visible }) => {
     setPreparationPortalDialogVisible: setVisible,
   } = backup;
 
-  const preparationPortalVisible = visible
-    ? visible
-    : preparationPortalDialogVisible;
+  const preparationPortalVisible = visible || preparationPortalDialogVisible;
   return {
     preparationPortalVisible,
     setVisible,

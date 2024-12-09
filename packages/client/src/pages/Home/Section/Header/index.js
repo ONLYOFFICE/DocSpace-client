@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -60,11 +60,11 @@ import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { useContactsHeader } from "./useContacts";
 import {
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "SRC_DIR/helpers/filesUtils";
+import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -395,7 +395,7 @@ const SectionHeaderContent = (props) => {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
       isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
-      rootFolderType: rootFolderType,
+      rootFolderType,
       isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
         ? selectedFolder.navigationPath[itemIdx]?.roomType ===
           RoomsType.PublicRoom
@@ -532,8 +532,7 @@ const SectionHeaderContent = (props) => {
         (isLoading && stateIsLifetimeEnabled)),
   );
 
-  const navigationButtonIsVisible =
-    showNavigationButton || stateIsShared ? true : false;
+  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle

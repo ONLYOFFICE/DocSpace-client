@@ -107,7 +107,7 @@ const PureConnectDialogContainer = (props) => {
   const onChangeFolderName = (e) => {
     setIsTitleValid(true);
     let title = e.target.value;
-    //const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
+    // const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
 
     if (title.match(folderFormValidation)) {
       toastr.warning(t("Files:ContainsSpecCharacter"));
@@ -141,19 +141,17 @@ const PureConnectDialogContainer = (props) => {
         setIsTitleValid(!!customerTitle.trim());
         return;
       }
-    } else {
-      if (
-        !isTitleValid ||
-        !isLoginValid ||
-        !isPasswordValid ||
-        (showUrlField && !isUrlValid)
-      ) {
-        setIsTitleValid(isTitleValid);
-        showUrlField && setIsUrlValid(isUrlValid);
-        setIsLoginValid(isLoginValid);
-        setIsPasswordValid(isPasswordValid);
-        return;
-      }
+    } else if (
+      !isTitleValid ||
+      !isLoginValid ||
+      !isPasswordValid ||
+      (showUrlField && !isUrlValid)
+    ) {
+      setIsTitleValid(isTitleValid);
+      showUrlField && setIsUrlValid(isUrlValid);
+      setIsLoginValid(isLoginValid);
+      setIsPasswordValid(isPasswordValid);
+      return;
     }
 
     setIsLoading(true);
@@ -226,7 +224,7 @@ const PureConnectDialogContainer = (props) => {
   ]);
 
   const onReconnect = () => {
-    let authModal = window.open(
+    const authModal = window.open(
       "",
       t("Common:Authorization"),
       "height=600, width=1020",
@@ -300,7 +298,7 @@ const PureConnectDialogContainer = (props) => {
               >
                 <TextInput
                   id="connection-url-input"
-                  isAutoFocussed={true}
+                  isAutoFocussed
                   hasError={!isUrlValid}
                   isDisabled={isLoading}
                   tabIndex={1}
@@ -439,7 +437,7 @@ export default inject(
     } = dialogsStore;
 
     const item = backupConnectionItem ?? connectItem;
-    const isConnectionViaBackupModule = backupConnectionItem ? true : false;
+    const isConnectionViaBackupModule = !!backupConnectionItem;
 
     return {
       selectedFolderId: id,

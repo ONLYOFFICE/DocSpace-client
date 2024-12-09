@@ -34,6 +34,8 @@ import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { useNavigate } from "react-router-dom";
 
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
 import {
   StyledTile,
   StyledFileTileTop,
@@ -42,8 +44,6 @@ import {
   StyledOptionButton,
   StyledContextMenu,
 } from "../StyledTileView";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { isMobile } from "@docspace/shared/utils";
 
 const Tile = ({
   t,
@@ -87,11 +87,11 @@ const Tile = ({
 
   const onOpenContextMenu = (e) => {
     tileContextClick && tileContextClick();
-    if (!cm.current.menuRef.current) tile.current.click(e); //TODO: need fix context menu to global
+    if (!cm.current.menuRef.current) tile.current.click(e); // TODO: need fix context menu to global
     cm.current.show(e);
   };
 
-  //TODO: OFORM isActive
+  // TODO: OFORM isActive
 
   return (
     <StyledTile
@@ -149,7 +149,7 @@ const Tile = ({
             getContextModel={getContextModel}
             header={contextMenuHeader}
             ref={cm}
-            withBackdrop={true}
+            withBackdrop
           />
         </StyledOptionButton>
       </StyledFileTileBottom>

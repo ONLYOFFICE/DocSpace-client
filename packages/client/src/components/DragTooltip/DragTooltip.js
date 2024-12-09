@@ -83,10 +83,10 @@ const DragTooltip = (props) => {
       tooltip.style.display = "block";
 
       const margin = 8;
-      tooltip.style.left =
-        (isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin) +
-        "px";
-      tooltip.style.top = tooltipPageY + margin + "px";
+      tooltip.style.left = `${
+        isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin
+      }px`;
+      tooltip.style.top = `${tooltipPageY + margin}px`;
     }
   }, [tooltipPageX, tooltipPageY]);
 
@@ -94,7 +94,8 @@ const DragTooltip = (props) => {
     const reg = /^([^\\]*)\.(\w+)/;
     const matches = title.match(reg);
 
-    let nameOfMovedObj, fileExtension;
+    let nameOfMovedObj;
+    let fileExtension;
     if (matches) {
       nameOfMovedObj = matches[1];
       fileExtension = matches.pop();
@@ -143,7 +144,7 @@ export default inject(({ filesStore }) => {
   } = filesStore;
 
   const isSingleItem = selection.length === 1 || bufferSelection;
-  const item = bufferSelection ? bufferSelection : selection[0];
+  const item = bufferSelection || selection[0];
 
   return {
     title: item?.title,

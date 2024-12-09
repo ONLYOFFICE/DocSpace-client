@@ -136,8 +136,8 @@ const ChangeNameDialog = (props) => {
           >
             <TextInput
               className="first-name"
-              scale={true}
-              isAutoFocussed={true}
+              scale
+              isAutoFocussed
               value={firstName}
               onChange={handleNameChange}
               placeholder={t("Common:FirstName")}
@@ -161,7 +161,7 @@ const ChangeNameDialog = (props) => {
           >
             <TextInput
               className="last-name"
-              scale={true}
+              scale
               value={lastName}
               onChange={handleSurnameChange}
               placeholder={t("Common:LastName")}
@@ -180,7 +180,7 @@ const ChangeNameDialog = (props) => {
           label={t("Common:SaveButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSaveClick}
           isLoading={isSaving}
           tabIndex={3}

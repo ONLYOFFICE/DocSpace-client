@@ -288,16 +288,12 @@ const ComponentPure = ({
         const isLoading = withLoadingAfterClick
           ? isSaveButton
             ? modalRequestRunning
-            : isRequestRunning
-              ? isRequestRunning
-              : rest.isLoading
+            : isRequestRunning || rest.isLoading
           : rest.isLoading;
         const isDisabled = disableWhileRequestRunning
           ? isSaveButton
             ? modalRequestRunning
-            : isRequestRunning
-              ? isRequestRunning
-              : rest.isDisabled
+            : isRequestRunning || rest.isDisabled
           : rest.isDisabled;
 
         return (
@@ -344,12 +340,12 @@ const ComponentPure = ({
           <iframe
             {...elementProps}
             style={{ minHeight: "100%", border: "none", ...elementProps.style }}
-          ></iframe>
+          />
         );
       }
 
       case PluginComponents.img: {
-        return <img {...elementProps}></img>;
+        return <img {...elementProps} />;
       }
 
       case PluginComponents.skeleton: {

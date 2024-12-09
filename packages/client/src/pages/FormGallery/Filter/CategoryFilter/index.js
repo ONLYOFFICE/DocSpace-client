@@ -26,12 +26,12 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import CategoryFilterDesktop from "./DesktopView";
-import CategoryFilterMobile from "./MobileView";
 import { mobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import styled, { css } from "styled-components";
+import CategoryFilterMobile from "./MobileView";
+import CategoryFilterDesktop from "./DesktopView";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;

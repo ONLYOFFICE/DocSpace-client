@@ -31,18 +31,18 @@ import { inject, observer } from "mobx-react";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import styled from "styled-components";
+import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 import { WhiteLabel } from "./Branding/whitelabel";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
-import styled from "styled-components";
 import { AdditionalResources } from "./Branding/additionalResources";
-import { isManagement } from "@docspace/shared/utils/common";
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 
 import MobileView from "./Branding/MobileView";
 
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -103,7 +103,7 @@ const Branding = ({
       }
     };
   }, []);
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+  const hideBlock = isManagement() ? false : portals?.length > 1;
 
   const showSettings = standalone && !hideBlock;
 

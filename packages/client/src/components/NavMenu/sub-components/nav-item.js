@@ -144,7 +144,7 @@ const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
 `;
 
 const NavItem = React.memo((props) => {
-  //console.log("NavItem render");
+  // console.log("NavItem render");
   const {
     separator,
     opened,

@@ -27,20 +27,20 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { VDRIndexingAction } from "@docspace/shared/enums";
 
 const IndexRowDataComponent = (props) => {
   const {

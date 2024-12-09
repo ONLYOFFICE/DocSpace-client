@@ -172,7 +172,7 @@ const FilesMediaViewer = (props) => {
   };
 
   const onMediaFileClick = (id) => {
-    //const itemId = typeof id !== "object" ? id : this.props.selection[0].id; TODO:
+    // const itemId = typeof id !== "object" ? id : this.props.selection[0].id; TODO:
 
     if (typeof id !== "object") {
       const item = { visible: true, id };
@@ -189,7 +189,7 @@ const FilesMediaViewer = (props) => {
       };
 
       if (files.length > 0) {
-        let file = files.find((file) => file.id === id);
+        const file = files.find((file) => file.id === id);
         if (file) {
           // try to fix with one check later (see deleteAction)
           const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
@@ -217,7 +217,7 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = useCallback(
     (id) => {
       if (playlist.length > 0) {
-        let viewUrlFile = playlist.find((file) => file.fileId === id).src;
+        const viewUrlFile = playlist.find((file) => file.fileId === id).src;
         return openUrl(viewUrlFile, UrlActionType.Download);
       }
     },

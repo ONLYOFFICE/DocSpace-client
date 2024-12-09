@@ -27,8 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
-import { TableSkeleton } from "@docspace/shared/skeletons";
-import { RowsSkeleton } from "@docspace/shared/skeletons";
+import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
 const pathname = window.location.pathname.toLowerCase();
@@ -65,15 +64,14 @@ const withLoader = (WrappedComponent) => (Loader) => {
       (isLoadingFilesFind && !Loader) ||
       !tReady ||
       !isInit ? (
-      Loader ? (
-        Loader
-      ) : !showLoader ? null : currentViewAs === "tile" ? (
-        <TilesSkeleton />
-      ) : currentViewAs === "table" ? (
-        <TableSkeleton />
-      ) : (
-        <RowsSkeleton />
-      )
+      Loader ||
+        (!showLoader ? null : currentViewAs === "tile" ? (
+          <TilesSkeleton />
+        ) : currentViewAs === "table" ? (
+          <TableSkeleton />
+        ) : (
+          <RowsSkeleton />
+        ))
     ) : (
       <WrappedComponent {...props} />
     );

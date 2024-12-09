@@ -65,7 +65,6 @@ export default function withQuickButtons(WrappedComponent) {
             this.setState({ isLoading: false }),
           );
       }
-      return;
     };
 
     onClickDownload = () => {

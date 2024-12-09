@@ -46,12 +46,7 @@ import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/shared/api/settings";
-import { StyledModules, StyledAutoBackup } from "../StyledBackup";
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
-import RoomsModule from "./sub-components/RoomsModule";
-import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
-import ButtonContainer from "./sub-components/ButtonContainer";
+// import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
@@ -60,6 +55,11 @@ import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import ButtonContainer from "./sub-components/ButtonContainer";
+import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
+import RoomsModule from "./sub-components/RoomsModule";
+import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+import { StyledModules, StyledAutoBackup } from "../StyledBackup";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -103,13 +103,14 @@ class AutomaticBackup extends React.PureComponent {
     this.getMonthNumbers();
     this.getMaxNumberCopies();
   }
+
   setBasicSettings = async () => {
     const {
       setDefaultOptions,
       t,
       setThirdPartyStorage,
       setBackupSchedule,
-      //setCommonThirdPartyList,
+      // setCommonThirdPartyList,
       getProgress,
       setStorageRegions,
       setConnectedThirdPartyAccount,
@@ -119,13 +120,13 @@ class AutomaticBackup extends React.PureComponent {
       getProgress(t);
 
       const [
-        ///thirdPartyList,
+        /// thirdPartyList,
         account,
         backupSchedule,
         backupStorage,
         storageRegions,
       ] = await Promise.all([
-        //getThirdPartyCommonFolderTree(),
+        // getThirdPartyCommonFolderTree(),
         getSettingsThirdParty(),
         getBackupSchedule(),
         getBackupStorage(),
@@ -135,7 +136,7 @@ class AutomaticBackup extends React.PureComponent {
       setThirdPartyStorage(backupStorage);
       setBackupSchedule(backupSchedule);
       setStorageRegions(storageRegions);
-      //thirdPartyList && setCommonThirdPartyList(thirdPartyList);
+      // thirdPartyList && setCommonThirdPartyList(thirdPartyList);
 
       setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);
 
@@ -186,37 +187,40 @@ class AutomaticBackup extends React.PureComponent {
 
   getTime = () => {
     for (let item = 0; item < 24; item++) {
-      let obj = {
+      const obj = {
         key: item,
         label: `${item}:00`,
       };
       this.hoursArray.push(obj);
     }
   };
+
   getMonthNumbers = () => {
     for (let item = 1; item <= 31; item++) {
-      let obj = {
+      const obj = {
         key: item,
         label: `${item}`,
       };
       this.monthNumbersArray.push(obj);
     }
   };
+
   getMaxNumberCopies = () => {
     const { t } = this.props;
     for (let item = 1; item <= 30; item++) {
-      let obj = {
+      const obj = {
         key: `${item}`,
         label: `${t("MaxCopies", { copiesCount: item })}`,
       };
       this.maxNumberCopiesArray.push(obj);
     }
   };
+
   getWeekdays = () => {
     const { language } = this.props;
     const gettingWeekdays = moment.weekdays();
     for (let item = 0; item < gettingWeekdays.length; item++) {
-      let obj = {
+      const obj = {
         key: `${item + 1}`,
         label: `${gettingWeekdays[item]}`,
       };
@@ -285,6 +289,7 @@ class AutomaticBackup extends React.PureComponent {
     }
     return true;
   };
+
   onSaveModuleSettings = async () => {
     const {
       isCheckedDocuments,
@@ -307,23 +312,22 @@ class AutomaticBackup extends React.PureComponent {
     }
 
     if (!this.canSave()) return;
-    //return;
+    // return;
     this.setState({ isLoadingData: true }, function () {
-      let day, period;
+      let day;
+      let period;
 
       if (selectedPeriodNumber === "1") {
         period = EveryWeekType;
         day = selectedWeekday;
+      } else if (selectedPeriodNumber === "2") {
+        period = EveryMonthType;
+        day = selectedMonthDay;
       } else {
-        if (selectedPeriodNumber === "2") {
-          period = EveryMonthType;
-          day = selectedMonthDay;
-        } else {
-          period = EveryDayType;
-          day = null;
-        }
+        period = EveryDayType;
+        day = null;
       }
-      let time = selectedHour.substring(0, selectedHour.indexOf(":"));
+      const time = selectedHour.substring(0, selectedHour.indexOf(":"));
 
       const storageType = isCheckedDocuments
         ? DocumentModuleType
@@ -347,6 +351,7 @@ class AutomaticBackup extends React.PureComponent {
       );
     });
   };
+
   createSchedule = async (
     storageType,
     storageParams,
@@ -400,6 +405,7 @@ class AutomaticBackup extends React.PureComponent {
       });
     }
   };
+
   deleteSchedule = () => {
     const { t, deleteSchedule } = this.props;
     this.setState({ isLoadingData: true }, () => {
@@ -427,7 +433,7 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdPartyStorage,
       isCheckedThirdParty,
       isCheckedDocuments,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       buttonSize,
       downloadingProgress,
       theme,
@@ -518,7 +524,7 @@ class AutomaticBackup extends React.PureComponent {
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"
-                  isPaidBadge={true}
+                  isPaidBadge
                 />
               )}
             </div>
@@ -635,7 +641,7 @@ export default inject(
     const {
       downloadingProgress,
       backupSchedule,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       clearProgressInterval,
       deleteSchedule,
       getProgress,
@@ -644,7 +650,7 @@ export default inject(
       setBackupSchedule,
       selectedStorageType,
       seStorageType,
-      //setCommonThirdPartyList,
+      // setCommonThirdPartyList,
       selectedPeriodLabel,
       selectedWeekdayLabel,
       selectedWeekday,
@@ -690,7 +696,7 @@ export default inject(
       language,
       isFormReady,
       backupSchedule,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       clearProgressInterval,
       deleteSchedule,
       getProgress,
@@ -699,7 +705,7 @@ export default inject(
       setBackupSchedule,
       selectedStorageType,
       seStorageType,
-      //setCommonThirdPartyList,
+      // setCommonThirdPartyList,
       selectedPeriodLabel,
       selectedWeekdayLabel,
       selectedWeekday,

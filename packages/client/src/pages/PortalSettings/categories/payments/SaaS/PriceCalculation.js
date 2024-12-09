@@ -28,10 +28,10 @@ import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
+import { Trans } from "react-i18next";
 import SelectUsersCountContainer from "./sub-components/SelectUsersCountContainer";
 import TotalTariffContainer from "./sub-components/TotalTariffContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import { Trans } from "react-i18next";
 import CurrentUsersCountContainer from "./sub-components/CurrentUsersCount";
 
 const StyledBody = styled.div`
@@ -72,8 +72,8 @@ const StyledBody = styled.div`
   }
 `;
 
-let timeout = null,
-  controller;
+let timeout = null;
+let controller;
 const PriceCalculation = ({
   t,
   theme,
@@ -130,7 +130,7 @@ const PriceCalculation = ({
     <div className="payment_price_user">
       <Text
         noSelect
-        fontSize={"13px"}
+        fontSize="13px"
         color={
           isDisabled
             ? theme.client.settings.payment.priceContainer.disablePriceColor

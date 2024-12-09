@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
@@ -39,6 +38,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import FilesSelector from "../../components/FilesSelector";
 
 const Sdk = ({
   t,
@@ -276,10 +276,10 @@ const Sdk = ({
     case "file-selector":
       component = (
         <FilesSelector
-          isPanelVisible={true}
-          embedded={true}
+          isPanelVisible
+          embedded
           withHeader={frameConfig?.showSelectorHeader}
-          isSelect={true}
+          isSelect
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}

@@ -33,10 +33,6 @@ import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
-import CSP from "./sub-components/csp";
-import PresetTile from "./sub-components/PresetTile";
-import { Integration } from "./sub-components/Integration";
-
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
@@ -53,6 +49,9 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "./sub-components/Integration";
+import PresetTile from "./sub-components/PresetTile";
+import CSP from "./sub-components/csp";
 
 import {
   SDKContainer,

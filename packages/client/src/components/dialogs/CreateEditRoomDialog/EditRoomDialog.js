@@ -28,11 +28,11 @@ import { inject, observer } from "mobx-react";
 import { useState, useEffect, useRef } from "react";
 
 import isEqual from "lodash/isEqual";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 const EditRoomDialog = ({

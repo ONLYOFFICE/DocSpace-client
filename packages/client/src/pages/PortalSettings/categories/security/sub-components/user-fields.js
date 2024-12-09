@@ -103,19 +103,19 @@ const UserFields = (props) => {
   }, [inputs]);
 
   const onBlur = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = true;
     setErrors(newErrors);
   };
 
   const onFocus = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = false;
     setErrors(newErrors);
   };
 
   const onDelete = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors.splice(index, 1);
     setErrors(newErrors);
 
@@ -170,7 +170,7 @@ const UserFields = (props) => {
         inputsLength={inputs.length}
       >
         <StyledPlusIcon size="small" />
-        <Link type="action" isHovered={true} fontWeight={600}>
+        <Link type="action" isHovered fontWeight={600}>
           {buttonLabel}
         </Link>
       </StyledAddWrapper>

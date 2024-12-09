@@ -32,6 +32,9 @@ import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
+import { Box } from "@docspace/shared/components/box";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { globalColors } from "@docspace/shared/themes";
 import SSO from "./SingleSignOn";
 import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
@@ -39,9 +42,6 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { Box } from "@docspace/shared/components/box";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
-import { globalColors } from "@docspace/shared/themes";
 
 const IntegrationWrapper = (props) => {
   const {

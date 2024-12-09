@@ -27,19 +27,19 @@
 import { desktopConstants } from "@docspace/shared/utils/common";
 
 export function encryptionUploadDialog(extsWebEncrypt, callback) {
-  const filter = extsWebEncrypt.map((f) => "*" + f).join(" ");
+  const filter = extsWebEncrypt.map((f) => `*${f}`).join(" ");
 
   const data = {
     cryptoEngineId: desktopConstants.cryptoEngineId,
-    filter: filter,
+    filter,
   };
 
   window.AscDesktopEditor.cloudCryptoCommand("upload", data, function (obj) {
-    let bytes = obj.bytes;
-    let filename = obj.name;
-    let file = new File([bytes], filename);
+    const bytes = obj.bytes;
+    const filename = obj.name;
+    const file = new File([bytes], filename);
 
-    if (typeof callback == "function") {
+    if (typeof callback === "function") {
       callback(file, obj.isCrypto !== false);
     }
   });

@@ -64,7 +64,7 @@ const SocialNetworks = (props) => {
     e.preventDefault();
 
     try {
-      //Lifehack for Twitter
+      // Lifehack for Twitter
       if (providerName == "twitter") {
         link += "loginCallback";
       }

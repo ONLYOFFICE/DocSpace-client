@@ -84,7 +84,7 @@ const HistoryRowView = (props) => {
       hasMoreFiles={hasMoreItems}
       itemCount={totalItems}
       draggable
-      useReactWindow={true}
+      useReactWindow
       itemHeight={59}
     >
       {historyItems.map((item) => (

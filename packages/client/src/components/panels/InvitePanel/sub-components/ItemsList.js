@@ -29,11 +29,11 @@ import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
+import { useTheme } from "styled-components";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import Item from "./Item";
 
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
-import { useTheme } from "styled-components";
-import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const USER_ITEM_HEIGHT = 48;
 
@@ -115,7 +115,7 @@ const ItemsList = ({
 
   const onBodyResize = useCallback(() => {
     const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
-    const heightList = height ? height : bodyRef.current.offsetHeight;
+    const heightList = height || bodyRef.current.offsetHeight;
     const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
     const listAreaHeight = heightList;
     const heightBody = invitePanelBodyRef?.current?.clientHeight;

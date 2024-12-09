@@ -44,12 +44,11 @@ import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -171,7 +170,7 @@ class ThirdPartyServices extends React.Component {
 
     const prop = [];
     let i = 0;
-    let objLength = Object.keys(isFill ? obj : obj.props).length;
+    const objLength = Object.keys(isFill ? obj : obj.props).length;
 
     for (i = 0; i < objLength; i++) {
       prop.push({
@@ -299,7 +298,7 @@ class ThirdPartyServices extends React.Component {
                     }
                     fontWeight="700"
                     label={t("Common:Paid")}
-                    isPaidBadge={true}
+                    isPaidBadge
                   />
                 </div>
               )}

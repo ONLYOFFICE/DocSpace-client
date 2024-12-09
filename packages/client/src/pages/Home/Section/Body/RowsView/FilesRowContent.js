@@ -41,6 +41,8 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import withContent from "../../../../../HOCs/withContent";
 
 import {
@@ -48,8 +50,6 @@ import {
   getFileTypeName,
   getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
-import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
   .row-main-container-wrapper {
@@ -254,59 +254,58 @@ const FilesRowContent = ({
   const mainInfo = contentComponent();
 
   return (
-    <>
-      <SimpleFilesRowContent
-        sectionWidth={sectionWidth}
-        isMobile={!isTablet()}
-        isFile={fileExst || contentLength}
-        sideColor={theme.filesSection.rowView.sideColor}
+    <SimpleFilesRowContent
+      sectionWidth={sectionWidth}
+      isMobile={!isTablet()}
+      isFile={fileExst || contentLength}
+      sideColor={theme.filesSection.rowView.sideColor}
+    >
+      <Link
+        className="row-content-link"
+        containerWidth="55%"
+        type="page"
+        title={title}
+        fontWeight="600"
+        fontSize="15px"
+        target="_blank"
+        {...linkStyles}
+        isTextOverflow
+        dir="auto"
       >
-        <Link
-          className="row-content-link"
-          containerWidth="55%"
-          type="page"
-          title={title}
-          fontWeight="600"
-          fontSize="15px"
-          target="_blank"
-          {...linkStyles}
-          isTextOverflow={true}
-          dir="auto"
+        {titleWithoutExt}
+        {displayFileExtension && (
+          <span className="item-file-exst">{fileExst}</span>
+        )}
+      </Link>
+      <div className="badges">
+        {badgesComponent}
+        {!isRoom && !isRooms && quickButtons}
+      </div>
+
+      {isIndexing && (
+        <Text
+          containerMinWidth="200px"
+          containerWidth="15%"
+          fontSize="12px"
+          fontWeight={400}
+          className="row_update-text"
         >
-          {titleWithoutExt}
-          {displayFileExtension && (
-            <span className="item-file-exst">{fileExst}</span>
-          )}
-        </Link>
-        <div className="badges">
-          {badgesComponent}
-          {!isRoom && !isRooms && quickButtons}
-        </div>
+          {`${t("Files:Index")} ${order}`}
+        </Text>
+      )}
+      {mainInfo && (
+        <Text
+          containerMinWidth="200px"
+          containerWidth="15%"
+          fontSize="12px"
+          fontWeight={400}
+          className="row_update-text"
+        >
+          {mainInfo}
+        </Text>
+      )}
 
-        {isIndexing && (
-          <Text
-            containerMinWidth="200px"
-            containerWidth="15%"
-            fontSize="12px"
-            fontWeight={400}
-            className="row_update-text"
-          >
-            {`${t("Files:Index")} ${order}`}
-          </Text>
-        )}
-        {mainInfo && (
-          <Text
-            containerMinWidth="200px"
-            containerWidth="15%"
-            fontSize="12px"
-            fontWeight={400}
-            className="row_update-text"
-          >
-            {mainInfo}
-          </Text>
-        )}
-
-        {/* {additionalInfo && (
+      {/* {additionalInfo && (
           <Text
             containerMinWidth="90px"
             containerWidth="10%"
@@ -319,8 +318,7 @@ const FilesRowContent = ({
             {additionalInfo}
           </Text>
         )} */}
-      </SimpleFilesRowContent>
-    </>
+    </SimpleFilesRowContent>
   );
 };
 

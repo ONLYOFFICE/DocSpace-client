@@ -198,15 +198,15 @@ class ChangeEmailDialogComponent extends React.Component {
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
-              //labelText={t("EnterEmail")}
+              // labelText={t("EnterEmail")}
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}
             >
               <EmailInput
                 id="new-email"
-                scale={true}
-                isAutoFocussed={true}
+                scale
+                isAutoFocussed
                 value={email}
                 onChange={this.onChangeEmailInput}
                 onValidateInput={this.onValidateEmailInput}
@@ -224,7 +224,7 @@ class ChangeEmailDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onValidateEmail}
             isLoading={isRequestRunning}
           />

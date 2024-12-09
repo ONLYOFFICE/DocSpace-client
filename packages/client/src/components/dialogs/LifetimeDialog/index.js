@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
 
 const LifetimeDialogComponent = (props) => {
   const { t, setLifetimeDialogVisible, visible, tReady } = props;

@@ -200,7 +200,7 @@ const QuickButtons = (props) => {
               className="badge lock-file icons-group"
               size={sizeQuickButton}
               data-id={id}
-              data-locked={locked ? true : false}
+              data-locked={!!locked}
               onClick={onClickLock}
               color={colorLock}
               isDisabled={isDisabled}
@@ -239,7 +239,7 @@ const QuickButtons = (props) => {
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                ["create-share-link"]: !item.shared,
+                "create-share-link": !item.shared,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}

@@ -44,6 +44,7 @@ class ChangePasswordDialogComponent extends React.Component {
       isRequestRunning: false,
     };
   }
+
   onSendPasswordChangeInstructions = () => {
     const { email, onClose } = this.props;
 
@@ -125,7 +126,7 @@ class ChangePasswordDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onSendPasswordChangeInstructions}
             isLoading={isRequestRunning}
           />

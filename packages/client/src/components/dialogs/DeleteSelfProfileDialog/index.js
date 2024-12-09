@@ -44,6 +44,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
       isRequestRunning: false,
     };
   }
+
   onDeleteSelfProfileInstructions = () => {
     const { t, email, onClose } = this.props;
     this.setState({ isRequestRunning: true }, () => {
@@ -93,7 +94,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onDeleteSelfProfileInstructions}
             isLoading={isRequestRunning}
           />

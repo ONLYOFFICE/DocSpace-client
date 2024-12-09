@@ -33,9 +33,9 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import config from "PACKAGE_FILE";
 import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
-import config from "PACKAGE_FILE";
 
 let _isMounted = false;
 
@@ -114,7 +114,6 @@ const ConvertPasswordDialogComponent = (props) => {
 
       setIsLoading(false);
       onClose();
-      return;
     }
   }, [isLoading]);
 
@@ -163,8 +162,8 @@ const ConvertPasswordDialogComponent = (props) => {
             </div>
             <div className="password-input">
               <SimulatePassword
-                inputMaxWidth={"512px"}
-                inputBlockMaxWidth={"536px"}
+                inputMaxWidth="512px"
+                inputBlockMaxWidth="536px"
                 onChange={onChangePassword}
                 onKeyDown={onKeyDown}
                 hasError={!passwordValid}

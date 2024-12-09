@@ -27,7 +27,6 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import * as Styled from "./index.styled";
 
 import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
@@ -39,6 +38,7 @@ import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import * as Styled from "./index.styled";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -202,7 +202,7 @@ const DocumentService = ({
               autoComplete="off"
               tabIndex={1}
               scale
-              iconButtonClassName={"icon-button"}
+              iconButtonClassName="icon-button"
               value={docServiceUrl}
               onChange={onChangeDocServiceUrl}
               placeholder={EDITOR_URL_PLACEHOLDER}
@@ -228,7 +228,7 @@ const DocumentService = ({
               autoComplete="off"
               tabIndex={2}
               scale
-              iconButtonClassName={"icon-button"}
+              iconButtonClassName="icon-button"
               value={internalUrl}
               onChange={onChangeInternalUrl}
               placeholder={EDITOR_URL_PLACEHOLDER}
@@ -254,7 +254,7 @@ const DocumentService = ({
               autoComplete="off"
               tabIndex={3}
               scale
-              iconButtonClassName={"icon-button"}
+              iconButtonClassName="icon-button"
               value={portalUrl}
               onChange={onChangePortalUrl}
               placeholder={DNS_PLACEHOLDER}
@@ -279,7 +279,7 @@ const DocumentService = ({
           disableRestoreToDefault={
             isDefaultSettings || isSaveLoading || isResetLoading
           }
-          displaySettings={true}
+          displaySettings
           isSaving={isSaveLoading || isResetLoading}
           showReminder={!saveButtonDisabled}
         />

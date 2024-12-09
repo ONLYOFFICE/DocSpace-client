@@ -31,10 +31,9 @@ import AddDepartmentReactSvgUrl from "PUBLIC_DIR/images/add.department.react.svg
 import AddGuestReactSvgUrl from "PUBLIC_DIR/images/add.guest.react.svg?url";
 import AddEmployeeReactSvgUrl from "ASSETS/images/add.employee.react.svg?url";
 import React from "react";
-//import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { MainButton } from "@docspace/shared/components/main-button";
-import InviteDialog from "../../dialogs/InviteDialog/index";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
@@ -45,10 +44,11 @@ import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "@docspace/shared/utils";
+import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import MobileView from "./MobileView";
 
 import withLoader from "../../../HOCs/withLoader";
-import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
+import InviteDialog from "../../dialogs/InviteDialog/index";
 
 const ArticleMainButtonContent = (props) => {
   const [dialogVisible, setDialogVisible] = React.useState(false);
@@ -118,7 +118,7 @@ const ArticleMainButtonContent = (props) => {
       ) : (
         <MainButton
           isDisabled={false}
-          isDropdown={true}
+          isDropdown
           text={t("Common:Actions")}
           model={[...menuModel, separator, ...links]}
           className="main-button_invitation-link"

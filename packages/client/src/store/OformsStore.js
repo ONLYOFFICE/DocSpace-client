@@ -30,15 +30,13 @@ import OformsFilter from "@docspace/shared/api/oforms/filter";
 import {
   getGuideLinkByLocale,
   submitToGallery,
-} from "@docspace/shared/api/oforms";
-
-import {
   getOformLocales,
   getOforms,
   getCategoryById,
   getCategoryTypes,
   getCategoriesOfCategoryType,
 } from "@docspace/shared/api/oforms";
+
 import { toastr } from "@docspace/shared/components/toast";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
@@ -50,12 +48,17 @@ const myDocumentsFolderId = 2;
 
 class OformsStore {
   settingsStore;
+
   infoPanelStore;
+
   userStore = null;
 
   oformFiles = null;
+
   gallerySelected = null;
+
   oformsIsLoading = false;
+
   oformsLoadError = false;
 
   oformsFilter = OformsFilter.getDefault();
@@ -63,12 +66,17 @@ class OformsStore {
   oformFromFolderId = myDocumentsFolderId;
 
   currentCategory = null;
+
   categoryTitles = [];
 
   oformLocales = null;
+
   filterOformsByLocaleIsLoading = false;
+
   categoryFilterLoaded = false;
+
   languageFilterLoaded = false;
+
   oformFilesLoaded = false;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
@@ -167,7 +175,7 @@ class OformsStore {
     } catch (err) {
       const status = err?.response?.status;
       const isApiError = status === 404 || status === 500;
-      //console.log({ err, isApiError });
+      // console.log({ err, isApiError });
       if (isApiError) {
         this.oformsLoadError = true;
       } else {

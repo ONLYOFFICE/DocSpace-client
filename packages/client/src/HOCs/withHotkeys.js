@@ -139,7 +139,7 @@ const withHotkeys = (Component) => {
       const event = new Event(Events.CREATE);
 
       const payload = {
-        extension: extension,
+        extension,
         id: -1,
       };
 
@@ -190,7 +190,7 @@ const withHotkeys = (Component) => {
       };
     });
 
-    //Select/deselect item
+    // Select/deselect item
     useHotkeys("x", selectFile);
 
     useHotkeys(
@@ -241,74 +241,74 @@ const withHotkeys = (Component) => {
     // //Select item on the right
     // useHotkeys("l, RIGHT", selectRight, hotkeysFilter);
 
-    //Expand Selection DOWN
+    // Expand Selection DOWN
     useHotkeys("shift+DOWN", multiSelectBottom, hotkeysFilter);
 
-    //Expand Selection UP
+    // Expand Selection UP
     useHotkeys("shift+UP", multiSelectUpper, hotkeysFilter);
 
-    //Expand Selection RIGHT
+    // Expand Selection RIGHT
     useHotkeys("shift+RIGHT", () => multiSelectRight(), hotkeysFilter);
 
-    //Expand Selection LEFT
+    // Expand Selection LEFT
     useHotkeys("shift+LEFT", () => multiSelectLeft(), hotkeysFilter);
 
-    //Select all files and folders
+    // Select all files and folders
     useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
-    //Deselect all files and folders
+    // Deselect all files and folders
     useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
 
-    //Move down without changing selection
+    // Move down without changing selection
     useHotkeys("ctrl+DOWN, command+DOWN", moveCaretBottom, hotkeysFilter);
 
-    //Move up without changing selection
+    // Move up without changing selection
     useHotkeys("ctrl+UP, command+UP", moveCaretUpper, hotkeysFilter);
 
-    //Move left without changing selection
+    // Move left without changing selection
     useHotkeys("ctrl+LEFT, command+LEFT", moveCaretLeft, hotkeysFilter);
 
-    //Move right without changing selection
+    // Move right without changing selection
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
-    //Open item
+    // Open item
     useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
-    //Back to parent folder
+    // Back to parent folder
     useHotkeys("Backspace", onClickBack, hotkeysFilter);
 
-    //Change viewAs
+    // Change viewAs
     useHotkeys(
       "v",
       () => (viewAs === "tile" ? setViewAs("table") : setViewAs("tile")),
       hotkeysFilter,
     );
 
-    //Crete document
+    // Crete document
     useHotkeys("Shift+d", () => onCreate("docx"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Crete spreadsheet
+    // Crete spreadsheet
     useHotkeys("Shift+s", () => onCreate("xlsx"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Crete presentation
+    // Crete presentation
     useHotkeys("Shift+p", () => onCreate("pptx"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Crete form template
+    // Crete form template
     useHotkeys("Shift+o", () => onCreate("pdf"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Crete form template from file
+    // Crete form template from file
     useHotkeys(
       "Alt+Shift+o",
       () => {
@@ -319,19 +319,19 @@ const withHotkeys = (Component) => {
       hotkeysFilter,
     );
 
-    //Crete folder
+    // Crete folder
     useHotkeys("Shift+f", () => onCreate(null), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Crete room
+    // Crete room
     useHotkeys("Shift+r", () => onCreateRoom(), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
 
-    //Delete selection
+    // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
@@ -392,7 +392,7 @@ const withHotkeys = (Component) => {
     //   []
     // );
 
-    //Open hotkeys panel
+    // Open hotkeys panel
     useHotkeys(
       "Ctrl+num_divide, Ctrl+/, command+/",
       () => setHotkeyPanelVisible(true),
@@ -408,7 +408,7 @@ const withHotkeys = (Component) => {
 
     useHotkeys("f2", onRename, hotkeysFilter);
 
-    //Upload file
+    // Upload file
     useHotkeys(
       "Shift+u",
       () => {
@@ -419,7 +419,7 @@ const withHotkeys = (Component) => {
       hotkeysFilter,
     );
 
-    //Upload folder
+    // Upload folder
     useHotkeys(
       "Shift+i",
       () => {

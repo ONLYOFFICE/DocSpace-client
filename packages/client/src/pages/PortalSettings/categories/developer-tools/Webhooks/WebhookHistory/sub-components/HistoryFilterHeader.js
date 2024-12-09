@@ -33,12 +33,11 @@ import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
-
-import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 
 const ListHeader = styled.header`
   display: flex;
@@ -157,7 +156,7 @@ const HistoryFilterHeader = (props) => {
             isGroupMenuVisible={isGroupMenuVisible}
           >
             <IconButton iconName={FilterReactSvrUrl} size={16} />
-            <span hidden={historyFilters === null}></span>
+            <span hidden={historyFilters === null} />
           </FilterButton>
         </ListHeader>
       </Suspense>

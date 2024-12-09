@@ -26,7 +26,7 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -41,7 +41,6 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -253,7 +252,7 @@ const useFiles = ({
           Promise.resolve(FilesFilter.getDefault());
         }
 
-        //console.warn("Filter restored by default", err);
+        // console.warn("Filter restored by default", err);
       })
       .then((data) => {
         const filter = data[0];
@@ -280,18 +279,17 @@ const useFiles = ({
               undefined,
               true,
             );
-          } else {
-            const folderId = filter.folder;
-            return fetchFiles(folderId, filter)?.finally(() => {
-              const data = sessionStorage.getItem(CREATED_FORM_KEY);
-              if (data) {
-                wsCreatedPDFForm({
-                  data,
-                });
-                sessionStorage.removeItem(CREATED_FORM_KEY);
-              }
-            });
           }
+          const folderId = filter.folder;
+          return fetchFiles(folderId, filter)?.finally(() => {
+            const data = sessionStorage.getItem(CREATED_FORM_KEY);
+            if (data) {
+              wsCreatedPDFForm({
+                data,
+              });
+              sessionStorage.removeItem(CREATED_FORM_KEY);
+            }
+          });
         }
 
         return Promise.resolve();

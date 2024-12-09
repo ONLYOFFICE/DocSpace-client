@@ -69,11 +69,11 @@ const AboutHeader = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onBack}
         className="arrow-button"
       />
-      <Headline type="content" truncate={true}>
+      <Headline type="content" truncate>
         {t("AboutHeader")}
       </Headline>
     </HeaderContainer>

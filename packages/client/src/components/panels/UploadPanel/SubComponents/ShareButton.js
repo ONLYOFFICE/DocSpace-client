@@ -30,7 +30,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { inject, observer } from "mobx-react";
 
 const ShareButton = (props) => {
-  //console.log("Share button render");
+  // console.log("Share button render");
   const { uploadedFile, theme } = props;
   const isShared = uploadedFile[0].fileInfo
     ? uploadedFile[0].fileInfo.shared

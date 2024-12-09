@@ -68,10 +68,10 @@ const FileNameCell = ({
       ) : (
         <TableCell
           className={classNames("table-container_element-wrapper", {
-            ["table-container-index"]: isIndexEditingMode,
+            "table-container-index": isIndexEditingMode,
           })}
           style={{ background: "none !important" }}
-          hasAccess={true}
+          hasAccess
           checked={checked}
         >
           <div className="table-container_element-container">

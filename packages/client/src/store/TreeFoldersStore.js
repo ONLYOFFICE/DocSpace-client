@@ -31,13 +31,19 @@ import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 class TreeFoldersStore {
   selectedFolderStore;
+
   settingsStore;
+
   publicRoomStore;
 
   treeFolders = [];
+
   selectedTreeNode = [];
+
   expandedPanelKeys = null;
+
   rootFoldersTitles = {};
+
   isLoadingNodes = false;
 
   constructor(selectedFolderStore, settingsStore, publicRoomStore) {
@@ -132,6 +138,7 @@ class TreeFoldersStore {
   setIsLoadingNodes = (isLoadingNodes) => {
     this.isLoadingNodes = isLoadingNodes;
   };
+
   setSelectedNode = (node) => {
     if (node[0]) {
       this.selectedTreeNode = node;
@@ -154,8 +161,11 @@ class TreeFoldersStore {
   // };
 
   isMy = (myType) => myType === FolderType.USER;
+
   isCommon = (commonType) => commonType === FolderType.COMMON;
+
   isShare = (shareType) => shareType === FolderType.SHARE;
+
   isRoomRoot = (type) => type === FolderType.Rooms;
 
   getRootFolder = (rootFolderType) => {
@@ -196,6 +206,7 @@ class TreeFoldersStore {
   get recentFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
+
   /**
    * @type {import("@docspace/shared/api/rooms/types").TRoom=}
    */
@@ -340,7 +351,7 @@ class TreeFoldersStore {
       this.selectedTreeNode[0] !== "@my" &&
       this.selectedTreeNode[0] !== "@common"
         ? this.selectedTreeNode
-        : [this.selectedFolderStore.id + ""];
+        : [`${this.selectedFolderStore.id}`];
     return selectedKeys;
   }
 }

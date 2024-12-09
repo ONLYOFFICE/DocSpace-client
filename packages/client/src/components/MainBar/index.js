@@ -77,7 +77,7 @@ const MainBar = ({
     !isPublicPreview();
 
   return (
-    <StyledContainer id={"main-bar"} className={"main-bar"}>
+    <StyledContainer id="main-bar" className="main-bar">
       {isVisibleBar && checkedMaintenance && !snackbarExist && (
         <Bar firstLoad={firstLoad} setMaintenanceExist={setMaintenanceExist} />
       )}
@@ -92,8 +92,12 @@ export default inject(
     filesStore,
     currentTariffStatusStore,
   }) => {
-    const { checkedMaintenance, setMaintenanceExist, snackbarExist, frameConfig } =
-      settingsStore;
+    const {
+      checkedMaintenance,
+      setMaintenanceExist,
+      snackbarExist,
+      frameConfig,
+    } = settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { firstLoad } = clientLoadingStore;
     const { isInit } = filesStore;
@@ -104,7 +108,7 @@ export default inject(
       snackbarExist,
       setMaintenanceExist,
       isNotPaidPeriod,
-      barTypeInFrame: frameConfig?.showHeaderBanner
+      barTypeInFrame: frameConfig?.showHeaderBanner,
     };
   },
 )(observer(MainBar));

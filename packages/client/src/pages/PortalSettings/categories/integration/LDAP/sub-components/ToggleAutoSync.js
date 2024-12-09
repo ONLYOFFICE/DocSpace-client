@@ -125,7 +125,7 @@ const ToggleAutoSync = ({
               }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
           )}
         </div>

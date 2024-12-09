@@ -83,8 +83,8 @@ const BenefitsContainer = ({ t, features, theme }) => {
   return (
     <StyledBody className="benefits-container">
       <Text
-        fontSize={"16px"}
-        fontWeight={"600"}
+        fontSize="16px"
+        fontWeight="600"
         className="payment-benefits_text"
         noSelect
       >

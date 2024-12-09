@@ -45,7 +45,7 @@ const useOperations = ({
   setItemsSelectionTitle,
 }) => {
   const prevProps = React.useRef({
-    isProgressFinished: isProgressFinished,
+    isProgressFinished,
   });
 
   React.useEffect(() => {

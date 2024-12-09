@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -40,8 +40,6 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
-
-import { useParams } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -115,30 +113,28 @@ const DetailsNavigationHeader = (props) => {
   };
 
   return (
-    <>
-      <HeaderContainer>
-        <div className="headerNavigation">
-          <IconButton
-            iconName={ArrowPathReactSvgUrl}
-            size="17"
-            isFill={true}
-            onClick={onBack}
-            className="arrow-button"
-          />
-          <Headline type="content" truncate={true} className="headline">
-            {t("WebhookDetails")}
-          </Headline>
-        </div>
-
+    <HeaderContainer>
+      <div className="headerNavigation">
         <IconButton
-          className="retry"
-          iconName={RetryIcon}
+          iconName={ArrowPathReactSvgUrl}
           size="17"
-          isFill={true}
-          onClick={handleRetryEvent}
+          isFill
+          onClick={onBack}
+          className="arrow-button"
         />
-      </HeaderContainer>
-    </>
+        <Headline type="content" truncate className="headline">
+          {t("WebhookDetails")}
+        </Headline>
+      </div>
+
+      <IconButton
+        className="retry"
+        iconName={RetryIcon}
+        size="17"
+        isFill
+        onClick={handleRetryEvent}
+      />
+    </HeaderContainer>
   );
 };
 

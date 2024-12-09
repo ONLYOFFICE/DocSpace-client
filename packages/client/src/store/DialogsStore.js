@@ -29,9 +29,9 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/shared/enums";
 
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
@@ -45,84 +45,148 @@ import {
 
 class DialogsStore {
   authStore;
+
   treeFoldersStore;
+
   filesStore;
+
   selectedFolderStore;
+
   versionHistoryStore;
+
   infoPanelStore;
 
   moveToPanelVisible = false;
+
   restorePanelVisible = false;
+
   reorderDialogVisible = false;
+
   copyPanelVisible = false;
+
   deleteThirdPartyDialogVisible = false;
+
   connectDialogVisible = false;
+
   deleteDialogVisible = false;
+
   lifetimeDialogVisible = false;
+
   downloadDialogVisible = false;
+
   emptyTrashDialogVisible = false;
+
   editGroupMembersDialogVisible = false;
+
   conflictResolveDialogVisible = false;
+
   convertDialogVisible = false;
+
   convertDialogData = null;
+
   selectFileDialogVisible = false;
+
   selectFileFormRoomDialogVisible = false;
+
   convertPasswordDialogVisible = false;
+
   inviteQuotaWarningDialogVisible = false;
+
   changeQuotaDialogVisible = false;
+
   unsavedChangesDialogVisible = false;
+
   moveToPublicRoomVisible = false;
+
   moveToPublicRoomData = null;
+
   backupToPublicRoomVisible = false;
+
   backupToPublicRoomData = null;
+
   isFolderActions = false;
+
   roomCreation = false;
+
   culture = {
     key: "",
     label: "",
   };
+
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
     defaultAccess: ShareAccessRights.FullAccess,
   };
+
   restoreAllPanelVisible = false;
+
   archiveDialogVisible = false;
+
   restoreRoomDialogVisible = false;
+
   roomLogoCoverDialogVisible = false;
+
   eventDialogVisible = false;
+
   deleteLinkDialogVisible = false;
 
   removeItem = null;
+
   connectItem = null;
+
   formItem = null;
+
   destFolderId = null;
 
   conflictResolveDialogData = null;
+
   conflictResolveDialogItems = null;
+
   removeMediaItem = null;
+
   unsubscribe = null;
+
   isRoomDelete = false;
+
   convertItem = null;
+
   formCreationInfo = null;
+
   saveThirdpartyResponse = null;
+
   inviteItems = [];
+
   restoreAllArchive = false;
+
   isConnectDialogReconnect = false;
+
   saveAfterReconnectOAuth = false;
+
   createRoomDialogVisible = false;
+
   createRoomConfirmDialogVisible = false;
+
   editLinkPanelIsVisible = false;
+
   embeddingPanelData = { visible: false, item: null };
+
   submitToGalleryDialogVisible = false;
+
   linkParams = null;
+
   leaveRoomDialogVisible = false;
+
   changeRoomOwnerIsVisible = false;
+
   editMembersGroup = null;
+
   closeEditIndexDialogVisible = false;
 
   shareFolderDialogVisible = false;
+
   cancelUploadDialogVisible = false;
+
   passwordEntryDialogDate = {
     visible: false,
     item: null,
@@ -130,23 +194,29 @@ class DialogsStore {
   };
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
+
   selectFileFormRoomOpenRoot = false;
+
   fillPDFDialogData = {
     visible: false,
     data: null,
   };
+
   shareCollectSelector = {
     visible: false,
     file: null,
   };
 
   warningQuotaDialogVisible = false;
+
   isNewQuotaItemsByCurrentUser = false;
 
   guestReleaseTipDialogVisible = false;
 
   covers = null;
+
   cover = null;
+
   coverSelection = null;
 
   roomCoverDialogProps = {
@@ -209,6 +279,7 @@ class DialogsStore {
   setInviteLanguage = (culture) => {
     this.culture = culture;
   };
+
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };
@@ -523,10 +594,12 @@ class DialogsStore {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
   };
+
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;
   };
+
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };

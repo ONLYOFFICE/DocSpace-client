@@ -37,8 +37,8 @@ import config from "PACKAGE_FILE";
 
 import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 
-import Dialog from "./sub-components/Dialog";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
   id,
@@ -94,7 +94,7 @@ const CreateEvent = ({
     const defaultName = getDefaultFileName(extension);
 
     if (title) {
-      const item = { fileExst: extension, title: title };
+      const item = { fileExst: extension, title };
 
       setStartValue(getTitleWithoutExtension(item, fromTemplate));
     } else {
@@ -120,7 +120,7 @@ const CreateEvent = ({
     let item;
     let createdFolderId;
 
-    const isMakeFormFromFile = templateId ? true : false;
+    const isMakeFormFromFile = !!templateId;
 
     let newValue = value;
 
@@ -233,7 +233,7 @@ const CreateEvent = ({
       onSave={onSave}
       onCancel={onCloseAction}
       onClose={onCloseAction}
-      isCreateDialog={true}
+      isCreateDialog
       extension={extension}
     />
   );

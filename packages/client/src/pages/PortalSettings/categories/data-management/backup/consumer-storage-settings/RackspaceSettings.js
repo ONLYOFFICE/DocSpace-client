@@ -64,6 +64,7 @@ class RackspaceSettings extends React.Component {
     this.regionPlaceholder =
       selectedStorage && selectedStorage.properties[2].title;
   }
+
   onChangeText = (event) => {
     const { addValueInFormSettings } = this.props;
 

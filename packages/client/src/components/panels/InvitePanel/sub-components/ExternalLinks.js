@@ -42,6 +42,9 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
+import { globalColors } from "@docspace/shared/themes";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -52,15 +55,12 @@ import {
   StyledDescription,
   StyledExternalLink,
 } from "../StyledInvitePanel";
-import { globalColors } from "@docspace/shared/themes";
 
 import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
 } from "../utils";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
-import api from "@docspace/shared/api";
 
 const ExternalLinks = ({
   t,
@@ -196,12 +196,10 @@ const ExternalLinks = ({
       const subject = t("SharingPanel:ShareEmailSubject", { title });
       const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
 
-      const mailtoLink =
-        "mailto:" +
-        objectToGetParams({
-          subject,
-          body,
-        });
+      const mailtoLink = `mailto:${objectToGetParams({
+        subject,
+        body,
+      })}`;
 
       window.open(mailtoLink, "_self");
 
@@ -214,11 +212,9 @@ const ExternalLinks = ({
     (link) => {
       const { shareLink } = link;
 
-      const twitterLink =
-        "https://twitter.com/intent/tweet" +
-        objectToGetParams({
-          text: shareLink,
-        });
+      const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
+        text: shareLink,
+      })}`;
 
       window.open(twitterLink, "", "width=1000,height=670");
 
@@ -247,7 +243,7 @@ const ExternalLinks = ({
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
         {t("InviteViaLink")}
-        {false && ( //TODO: Change to linksVisible after added link information from backend
+        {false && ( // TODO: Change to linksVisible after added link information from backend
           <div style={{ position: "relative" }}>
             <IconButton
               size={16}
@@ -261,7 +257,7 @@ const ExternalLinks = ({
               clickOutsideAction={closeActionLinks}
               withBackdrop={false}
               isDefaultMode={false}
-              fixedDirection={true}
+              fixedDirection
             >
               <DropDownItem
                 label={`${t("Common:ShareVia")} e-mail`}

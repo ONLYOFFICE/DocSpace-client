@@ -29,9 +29,7 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import { Row } from "@docspace/shared/components/row";
-import FilesRowContent from "./FilesRowContent";
 import { isMobile, isMobileOnly } from "react-device-detect";
-
 import {
   isMobile as isMobileUtile,
   mobile,
@@ -39,15 +37,15 @@ import {
   classNames,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import FilesRowContent from "./FilesRowContent";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { globalColors } from "@docspace/shared/themes";
-
-import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
@@ -460,7 +458,7 @@ const SimpleFilesRow = (props) => {
           data={item}
           isEdit={isEdit}
           element={element}
-          mode={"modern"}
+          mode="modern"
           sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
@@ -494,7 +492,7 @@ const SimpleFilesRow = (props) => {
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
-          withoutBorder={true}
+          withoutBorder
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}

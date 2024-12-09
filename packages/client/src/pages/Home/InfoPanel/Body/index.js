@@ -32,11 +32,10 @@ import { useParams } from "react-router-dom";
 import { RoomsType } from "@docspace/shared/enums";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
-
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -114,7 +113,7 @@ const InfoPanelBodyContent = ({
   };
 
   const viewHelper = new ViewHelper({
-    defaultProps: defaultProps,
+    defaultProps,
     detailsProps: {},
     membersProps: {},
     historyProps: { selectedFolder },
@@ -157,7 +156,7 @@ const InfoPanelBodyContent = ({
     if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();
   };
 
-  //////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////
 
   // Updating SelectedItems only if
   // a) Length of an array changed
@@ -222,7 +221,7 @@ const InfoPanelBodyContent = ({
               onSaveRoomLogo(selection.id, image, selection, true)
             }
             onChangeFile={onChangeFile}
-            classNameWrapperImageCropper={"icon-editor"}
+            classNameWrapperImageCropper="icon-editor"
             visible={image.uploadedFile}
             maxImageSize={maxImageUploadSize}
           />

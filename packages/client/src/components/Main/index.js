@@ -51,7 +51,7 @@ const StyledMain = styled.main`
 
 const Main = (props) => {
   const { mainBarVisible, isFrame } = props;
-  //console.log("Main render");
+  // console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
 

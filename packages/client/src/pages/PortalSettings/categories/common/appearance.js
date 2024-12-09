@@ -33,26 +33,26 @@ import { Button } from "@docspace/shared/components/button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
-import Preview from "./Appearance/preview";
-import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
-import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import api from "@docspace/shared/api";
-import Loader from "./sub-components/loaderAppearance";
 
+import { ReactSVG } from "react-svg";
+import { isMobile, getTextColor } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ColorPicker } from "@docspace/shared/components/color-picker";
+import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import {
   StyledComponent,
   StyledTheme,
   StyledBodyContent,
 } from "./Appearance/StyledApperance.js";
-import { ReactSVG } from "react-svg";
-import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import { isMobile, getTextColor } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ColorPicker } from "@docspace/shared/components/color-picker";
+import Loader from "./sub-components/loaderAppearance";
+import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
+import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
+import Preview from "./Appearance/preview";
 
 const Appearance = (props) => {
   const {
@@ -505,7 +505,7 @@ const Appearance = (props) => {
   const onSaveNewThemes = useCallback(
     async (theme) => {
       try {
-        await api.settings.sendAppearanceTheme({ theme: theme });
+        await api.settings.sendAppearanceTheme({ theme });
         await getAppearanceTheme();
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));

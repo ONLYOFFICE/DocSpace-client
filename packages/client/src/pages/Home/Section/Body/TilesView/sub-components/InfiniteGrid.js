@@ -31,8 +31,8 @@ import uniqueid from "lodash/uniqueId";
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
-import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
 import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
+import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (

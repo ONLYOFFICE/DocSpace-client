@@ -34,15 +34,15 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import PasswordLoader from "../sub-components/loaders/password-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import PasswordLoader from "../sub-components/loaders/password-loader";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -261,7 +261,7 @@ const PasswordStrength = (props) => {
           min="8"
           max="30"
           step="1"
-          withPouring={true}
+          withPouring
           value={passwordLen}
           onChange={onSliderChange}
         />
@@ -302,7 +302,7 @@ const PasswordStrength = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="password-strength-save"

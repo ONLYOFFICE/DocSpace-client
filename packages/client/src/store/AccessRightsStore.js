@@ -36,8 +36,11 @@ import {
 
 class AccessRightsStore {
   authStore = null;
+
   userStore = null;
+
   selectedFolderStore = null;
+
   treeFoldersStore = null;
 
   constructor(authStore, selectedFolderStore, userStore) {
@@ -84,9 +87,8 @@ class AccessRightsStore {
       case EmployeeType.RoomAdmin:
         if (isOwner) {
           return true;
-        } else {
-          return false;
         }
+        return false;
 
       case EmployeeType.User:
       case EmployeeType.Guest:
@@ -123,6 +125,7 @@ class AccessRightsStore {
 
     return false;
   };
+
   canMakeUserType = (user) => {
     const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
       user;
@@ -232,6 +235,7 @@ class AccessRightsStore {
 
     return isDefaultUsersQuotaSet;
   };
+
   canDisableQuota = () => {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
     const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;

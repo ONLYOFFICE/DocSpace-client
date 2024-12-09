@@ -32,12 +32,12 @@ const checkScrollSettingsBlock = () => {
   const scrollBody = settingsDiv?.closest(".scroller");
 
   const height = parseInt(
-    !!settingsDiv ? getComputedStyle(settingsDiv).height.slice(0, -2) : 0,
+    settingsDiv ? getComputedStyle(settingsDiv).height.slice(0, -2) : 0,
     0,
   );
 
   const heightScroll = parseInt(
-    !!scrollBody ? getComputedStyle(scrollBody).height.slice(0, -2) : 0,
+    scrollBody ? getComputedStyle(scrollBody).height.slice(0, -2) : 0,
     0,
   );
 
@@ -55,9 +55,8 @@ const checkScrollSettingsBlock = () => {
 
     if (height > heightScroll) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 };
 

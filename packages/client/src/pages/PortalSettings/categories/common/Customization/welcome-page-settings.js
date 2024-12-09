@@ -31,17 +31,17 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent } from "./StyledSettings";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import checkScrollSettingsBlock from "../utils";
+import { StyledSettingsComponent } from "./StyledSettings";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -255,7 +255,7 @@ const WelcomePageSettingsComponent = (props) => {
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {
-    const defaultValue = JSON.stringify(state[stateName + "Default"]);
+    const defaultValue = JSON.stringify(state[`${stateName}Default`]);
     const currentValue = JSON.stringify(value);
     return defaultValue === currentValue;
   };
@@ -276,7 +276,7 @@ const WelcomePageSettingsComponent = (props) => {
     if (hasChanged !== state.hasChanged) {
       setState((val) => ({
         ...val,
-        hasChanged: hasChanged,
+        hasChanged,
         showReminder: hasChanged,
       }));
     }
@@ -312,12 +312,12 @@ const WelcomePageSettingsComponent = (props) => {
         id="fieldContainerWelcomePage"
         className="field-container-width"
         labelText={`${t("Common:Title")}`}
-        isVertical={true}
+        isVertical
       >
         <TextInput
           tabIndex={5}
           id="textInputContainerWelcomePage"
-          scale={true}
+          scale
           value={state.greetingTitle}
           onChange={onChangeGreetingTitle}
           isDisabled={
@@ -330,7 +330,7 @@ const WelcomePageSettingsComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization welcomePage={true} />
+    <LoaderCustomization welcomePage />
   ) : (
     <StyledSettingsComponent
       hasScroll={state.hasScroll}
@@ -366,7 +366,7 @@ const WelcomePageSettingsComponent = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
-        displaySettings={true}
+        displaySettings
         hasScroll={state.hasScroll}
         disableRestoreToDefault={greetingSettingsIsDefault}
         additionalClassSaveButton="welcome-page-save"

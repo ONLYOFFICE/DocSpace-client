@@ -82,7 +82,7 @@ const ConfirmWrapper = (props) => {
 
   return (
     <StyledWrapper height={height}>
-      {!!height ? content : <Scrollbar>{content}</Scrollbar>}
+      {height ? content : <Scrollbar>{content}</Scrollbar>}
     </StyledWrapper>
   );
 };

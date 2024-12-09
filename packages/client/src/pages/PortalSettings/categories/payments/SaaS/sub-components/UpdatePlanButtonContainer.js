@@ -29,10 +29,10 @@ import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import { toastr } from "@docspace/shared/components/toast";
-import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import api from "@docspace/shared/api";
 import { Trans } from "react-i18next";
 import { updatePayment } from "@docspace/shared/api/portal";
+import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 
 const StyledBody = styled.div`
   button {
@@ -40,10 +40,10 @@ const StyledBody = styled.div`
   }
 `;
 const MANAGER = "manager";
-let timerId = null,
-  intervalId = null,
-  isWaitRequest = false,
-  previousManagersCount = null;
+let timerId = null;
+let intervalId = null;
+let isWaitRequest = false;
+let previousManagersCount = null;
 const UpdatePlanButtonContainer = ({
   setIsLoading,
   paymentLink,
@@ -98,7 +98,6 @@ const UpdatePlanButtonContainer = ({
   useEffect(() => {
     if (intervalId && maxCountManagersByQuota !== previousManagersCount) {
       resetIntervalSuccess();
-      return;
     }
   }, [maxCountManagersByQuota, intervalId, previousManagersCount]);
   const waitingForQuota = () => {
@@ -165,7 +164,7 @@ const UpdatePlanButtonContainer = ({
       <Button
         className="upgrade-now-button"
         label={t("UpgradeNow")}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={goToStripePortal}
@@ -194,7 +193,7 @@ const UpdatePlanButtonContainer = ({
       <Button
         className="upgrade-now-button"
         label={t("UpgradeNow")}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={
           isLessCountThanAcceptable || isTheSameCount || isLoading || isDisabled

@@ -29,15 +29,16 @@ import Section from "@docspace/shared/components/section";
 import { observer, inject } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "./Header";
 import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
-import OformsFilter from "@docspace/shared/api/oforms/filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
-import SectionWrapper from "SRC_DIR/components/Section";
+
 const FormGallery = ({
   oformsLoadError,
   currentCategory,

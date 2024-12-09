@@ -104,7 +104,7 @@ const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
 
   return (
     <StyledBenefitsBody className="benefits-container">
-      <Text fontSize={"16px"} fontWeight={600} className="benefits-title">
+      <Text fontSize="16px" fontWeight={600} className="benefits-title">
         {title}
       </Text>
       {features()}

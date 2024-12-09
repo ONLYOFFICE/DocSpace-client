@@ -28,12 +28,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
-import { SettingsSectionBodyContent } from "../Section";
-
 import {
   SettingsAdminSkeleton,
   SettingsCommonSkeleton,
 } from "@docspace/shared/skeletons/settings";
+import { SettingsSectionBodyContent } from "../Section";
 
 const SettingsView = ({
   isLoading,

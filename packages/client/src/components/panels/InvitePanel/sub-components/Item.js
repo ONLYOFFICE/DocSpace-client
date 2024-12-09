@@ -49,13 +49,13 @@ import {
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-import {
-  getAccessOptions,
-  getFreeUsersRoleArray,
-  getFreeUsersTypeArray,
-  getTopFreeRole,
-  isPaidUserRole,
-} from "../utils";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import Filter from "@docspace/shared/api/people/filter";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import AccessSelector from "../../../AccessSelector";
 import {
   StyledEditInput,
   StyledEditButton,
@@ -67,13 +67,13 @@ import {
   ErrorWrapper,
   StyledRow,
 } from "../StyledInvitePanel";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
-import AccessSelector from "../../../AccessSelector";
-
-import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import Filter from "@docspace/shared/api/people/filter";
-import { Box } from "@docspace/shared/components/box";
-import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+  getTopFreeRole,
+  isPaidUserRole,
+} from "../utils";
 
 const Item = ({
   t,
@@ -112,12 +112,12 @@ const Item = ({
 
   const name = isGroup
     ? groupName
-    : !!avatar
+    : avatar
       ? displayName !== ""
         ? displayName
         : email
       : email;
-  const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
+  const source = avatar || (isGroup ? "" : AtReactSvgUrl);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -254,7 +254,7 @@ const Item = ({
   const validateValue = (value) => {
     const email = parseAddresses(value);
     const parseErrors = email[0].parseErrors;
-    const errors = !!parseErrors.length ? parseErrors : [];
+    const errors = parseErrors.length ? parseErrors : [];
 
     setParseErrors(errors);
     changeInviteItem({ id, email: value, errors, access }).then(() =>
@@ -360,7 +360,7 @@ const Item = ({
             onSelectAccess={selectItemAccess}
             containerRef={inputsRef}
             isOwner={isOwner}
-            withRemove={true}
+            withRemove
             filteredAccesses={filteredAccesses}
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}

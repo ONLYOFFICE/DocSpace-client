@@ -39,6 +39,7 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
 import ThirdPartyResourcesModule from "./sub-components/ThirdPartyResourcesModule";
@@ -46,15 +47,14 @@ import BackupListModalDialog from "./sub-components/backup-list";
 import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-const LOCAL_FILE = "localFile",
-  BACKUP_ROOM = "backupRoom",
-  DISK_SPACE = "thirdPartyDiskSpace",
-  STORAGE_SPACE = "thirdPartyStorageSpace";
+const LOCAL_FILE = "localFile";
+const BACKUP_ROOM = "backupRoom";
+const DISK_SPACE = "thirdPartyDiskSpace";
+const STORAGE_SPACE = "thirdPartyStorageSpace";
 
-const NOTIFICATION = "notification",
-  CONFIRMATION = "confirmation";
+const NOTIFICATION = "notification";
+const CONFIRMATION = "confirmation";
 
 const {
   DocumentModuleType,
@@ -162,33 +162,31 @@ const RestoreBackup = (props) => {
   };
 
   const radioButtonContent = (
-    <>
-      <RadioButtonGroup
-        name="restore_backup"
-        orientation="vertical"
-        fontSize="13px"
-        fontWeight="400"
-        className="backup_radio-button"
-        options={[
-          { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
-          { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
-          {
-            id: "third-party-resource",
-            value: DISK_SPACE,
-            label: t("ThirdPartyResource"),
-          },
-          {
-            id: "third-party-storage",
-            value: STORAGE_SPACE,
-            label: t("Common:ThirdPartyStorage"),
-          },
-        ]}
-        onClick={onChangeRadioButton}
-        selected={radioButtonState}
-        spacing="16px"
-        isDisabled={!isEnableRestore}
-      />
-    </>
+    <RadioButtonGroup
+      name="restore_backup"
+      orientation="vertical"
+      fontSize="13px"
+      fontWeight="400"
+      className="backup_radio-button"
+      options={[
+        { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
+        { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
+        {
+          id: "third-party-resource",
+          value: DISK_SPACE,
+          label: t("ThirdPartyResource"),
+        },
+        {
+          id: "third-party-storage",
+          value: STORAGE_SPACE,
+          label: t("Common:ThirdPartyStorage"),
+        },
+      ]}
+      onClick={onChangeRadioButton}
+      selected={radioButtonState}
+      spacing="16px"
+      isDisabled={!isEnableRestore}
+    />
   );
 
   const backupModules = (
@@ -210,8 +208,7 @@ const RestoreBackup = (props) => {
   const warningContent = (
     <>
       <Text className="restore-backup_warning settings_unavailable" noSelect>
-        {t("Common:Warning")}
-        {"!"}
+        {t("Common:Warning")}!
       </Text>
       <Text
         className="restore-backup_warning-description settings_unavailable"

@@ -27,15 +27,17 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { StyledBadgesContainer } from "../StyledTable";
-import { StyledQuickButtonsContainer } from "../StyledTable";
-import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 
 const RoomsRowDataComponent = (props) => {
   const {
@@ -181,7 +183,7 @@ const RoomsRowDataComponent = (props) => {
       )}
       {showStorageInfo &&
         (roomQuotaColumnIsEnable ? (
-          <TableCell className={"table-cell_Storage/Quota"}>
+          <TableCell className="table-cell_Storage/Quota">
             <SpaceQuota
               item={item}
               type="room"

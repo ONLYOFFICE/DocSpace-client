@@ -36,30 +36,46 @@ class CommonStore {
   settingsStore = null;
 
   logoUrlsWhiteLabel = [];
+
   whiteLabelLogoText = null;
+
   defaultLogoTextWhiteLabel = null;
 
   portalName = null;
+
   dnsSettings = {
     defaultObj: {},
     customObj: {},
   };
 
   isInit = false;
+
   isLoaded = false;
+
   isLoadedArticleBody = false;
+
   isLoadedSectionHeader = false;
+
   isLoadedSubmenu = false;
+
   isLoadedLngTZSettings = false;
+
   isLoadedDNSSettings = false;
+
   isLoadedPortalRenaming = false;
+
   isLoadedCustomization = false;
+
   isLoadedCustomizationNavbar = false;
+
   isLoadedWelcomePageSettings = false;
+
   isLoadedAdditionalResources = false;
+
   isLoadedCompanyInfoSettingsData = false;
 
   greetingSettingsIsDefault = true;
+
   enableRestoreButton = false;
 
   constructor(settingsStore) {
@@ -179,7 +195,7 @@ class CommonStore {
     const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
 
     runInAction(() => {
-      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
+      favicon && (favicon.href = logos?.[2]?.path?.light); // we have single favicon for both themes
       logo && (logo.src = logos?.[0]?.path?.[theme]);
       logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
     });
@@ -232,6 +248,7 @@ class CommonStore {
       defaultObj.enable === customObj.enable
     );
   }
+
   setIsEnableDNS = (value) => {
     this.dnsSettings.customObj.enable = value;
   };
@@ -262,6 +279,7 @@ class CommonStore {
 
     this.setDNSSettings(tempObject);
   };
+
   saveDNSSettings = async () => {
     const { customObj } = this.dnsSettings;
     const { dnsName, enable } = customObj;

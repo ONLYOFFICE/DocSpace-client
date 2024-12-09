@@ -28,13 +28,6 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import FilesRowContainer from "./RowsView/FilesRowContainer";
-import FilesTileContainer from "./TilesView/FilesTileContainer";
-import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
-import EmptyContainer from "../../../../components/EmptyContainer";
-import withLoader from "../../../../HOCs/withLoader";
-import TableView from "./TableView/TableContainer";
-import withHotkeys from "../../../../HOCs/withHotkeys";
 import {
   clearEdgeScrollingTimer,
   isMobile,
@@ -42,8 +35,14 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
-
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+import FilesRowContainer from "./RowsView/FilesRowContainer";
+import FilesTileContainer from "./TilesView/FilesTileContainer";
+import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import EmptyContainer from "../../../../components/EmptyContainer";
+import withLoader from "../../../../HOCs/withLoader";
+import TableView from "./TableView/TableContainer";
+import withHotkeys from "../../../../HOCs/withHotkeys";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
@@ -145,7 +144,7 @@ const SectionBodyContent = (props) => {
 
       if (!targetElement) return;
 
-      let isInViewport = isElementInViewport(targetElement);
+      const isInViewport = isElementInViewport(targetElement);
 
       if (!isInViewport || viewAs === "table") {
         const bodyScroll =
@@ -248,7 +247,7 @@ const SectionBodyContent = (props) => {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          for (let cl of classElements) {
+          for (const cl of classElements) {
             cl.classList.remove("droppable-hover");
           }
           if (isIndexEditingMode) {
@@ -267,7 +266,7 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          for (let cl of classElements) {
+          for (const cl of classElements) {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }
@@ -290,7 +289,7 @@ const SectionBodyContent = (props) => {
       if (wrappedClass === sectionClass) {
         indexSeparatorNode.setAttribute(
           "style",
-          separatorStyles + "bottom: 0px;",
+          `${separatorStyles}bottom: 0px;`,
         );
         return parent.append(indexSeparatorNode);
       }
@@ -359,7 +358,6 @@ const SectionBodyContent = (props) => {
     if (!replaceable) return;
 
     changeIndex(VDRIndexingAction.MoveIndex, replaceable, t, isSectionTarget);
-    return;
   };
 
   const onMoveTo = (destFolderId, title) => {

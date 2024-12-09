@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
 import ScheduleComponent from "../ScheduleComponent";
 import { StyledStoragesModule } from "../../../StyledBackup";
+
 class GoogleCloudStorage extends React.Component {
   constructor(props) {
     super(props);

@@ -60,7 +60,7 @@ const SectionPagingContent = ({
           e.preventDefault();
           return;
         }
-        //console.log("Next Clicked", e);
+        // console.log("Next Clicked", e);
 
         const newFilter = accountsFilter.clone();
         newFilter.page++;
@@ -72,7 +72,7 @@ const SectionPagingContent = ({
           e.preventDefault();
           return;
         }
-        //console.log("Next Clicked", e);
+        // console.log("Next Clicked", e);
 
         const newFilter = filter.clone();
         newFilter.page++;
@@ -109,7 +109,7 @@ const SectionPagingContent = ({
           return;
         }
 
-        //console.log("Prev Clicked", e);
+        // console.log("Prev Clicked", e);
 
         const newFilter = accountsFilter.clone();
         newFilter.page--;
@@ -122,7 +122,7 @@ const SectionPagingContent = ({
           return;
         }
 
-        //console.log("Prev Clicked", e);
+        // console.log("Prev Clicked", e);
 
         const newFilter = filter.clone();
         newFilter.page--;
@@ -151,9 +151,9 @@ const SectionPagingContent = ({
 
   const onChangePageSize = useCallback(
     (pageItem) => {
-      //console.log("Paging onChangePageSize", pageItem);
+      // console.log("Paging onChangePageSize", pageItem);
       if (isAccountsPage) {
-        //console.log("Paging onChangePageSize", pageItem);
+        // console.log("Paging onChangePageSize", pageItem);
 
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
@@ -191,7 +191,7 @@ const SectionPagingContent = ({
 
   const onChangePage = useCallback(
     (pageItem) => {
-      //console.log("Paging onChangePage", pageItem);
+      // console.log("Paging onChangePage", pageItem);
       if (isAccountsPage) {
         const newFilter = accountsFilter.clone();
         newFilter.page = pageItem.key;
@@ -249,18 +249,17 @@ const SectionPagingContent = ({
           }),
         };
       });
-    } else {
-      if (filter.total < filter.pageCount) return [];
-      return [...Array(totalPages).keys()].map((item) => {
-        return {
-          key: item,
-          label: t("Common:PageOfTotalPage", {
-            page: item + 1,
-            totalPage: totalPages,
-          }),
-        };
-      });
     }
+    if (filter.total < filter.pageCount) return [];
+    return [...Array(totalPages).keys()].map((item) => {
+      return {
+        key: item,
+        label: t("Common:PageOfTotalPage", {
+          page: item + 1,
+          totalPage: totalPages,
+        }),
+      };
+    });
   }, [
     filter.total,
     filter.pageCount,
@@ -293,7 +292,7 @@ const SectionPagingContent = ({
       emptyCountSelection
     : countItems.find((x) => x.key === filter.pageCount) || emptyCountSelection;
 
-  //console.log("SectionPagingContent render", filter);
+  // console.log("SectionPagingContent render", filter);
 
   const showCountItem = useMemo(() => {
     if (isAccountsPage) return false;
@@ -327,8 +326,8 @@ const SectionPagingContent = ({
       previousAction={onPrevClick}
       nextAction={onNextClick}
       openDirection="both"
-      selectedPageItem={selectedPageItem} //FILTER CURRENT PAGE
-      selectedCountItem={selectedCountItem} //FILTER PAGE COUNT
+      selectedPageItem={selectedPageItem} // FILTER CURRENT PAGE
+      selectedCountItem={selectedCountItem} // FILTER PAGE COUNT
       showCountItem={showCountItem}
     />
   );

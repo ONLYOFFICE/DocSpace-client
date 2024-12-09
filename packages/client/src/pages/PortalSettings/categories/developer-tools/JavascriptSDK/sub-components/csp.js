@@ -259,9 +259,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error
-          ? error
-          : t("CSPUrlHelp", { productName: t("Common:ProductName") })}
+        {error || t("CSPUrlHelp", { productName: t("Common:ProductName") })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

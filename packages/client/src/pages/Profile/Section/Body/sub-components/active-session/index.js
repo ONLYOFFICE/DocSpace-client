@@ -38,12 +38,11 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import SessionsTable from "./SessionsTable";
-
 import {
   LogoutSessionDialog,
   LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
+import SessionsTable from "./SessionsTable";
 
 const StyledWrapper = styled.div`
   .auto-delete-title {

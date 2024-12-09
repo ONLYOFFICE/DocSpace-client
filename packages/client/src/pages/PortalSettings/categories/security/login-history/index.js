@@ -61,27 +61,21 @@ const LoginHistory = (props) => {
 
   const getContent = () => {
     return (
-      <>
-        <div className="content-wrapper">
-          <Consumer>
-            {(context) =>
-              viewAs === "table" ? (
-                <>
-                  <Table
-                    theme={theme}
-                    historyUsers={historyUsers}
-                    sectionWidth={context.sectionWidth}
-                  />
-                </>
-              ) : (
-                <>
-                  <HistoryRowContainer sectionWidth={context.sectionWidth} />
-                </>
-              )
-            }
-          </Consumer>
-        </div>
-      </>
+      <div className="content-wrapper">
+        <Consumer>
+          {(context) =>
+            viewAs === "table" ? (
+              <Table
+                theme={theme}
+                historyUsers={historyUsers}
+                sectionWidth={context.sectionWidth}
+              />
+            ) : (
+              <HistoryRowContainer sectionWidth={context.sectionWidth} />
+            )
+          }
+        </Consumer>
+      </div>
     );
   };
 
@@ -90,7 +84,7 @@ const LoginHistory = (props) => {
       {securityLifetime && securityLifetime.loginHistoryLifeTime && (
         <HistoryMainContent
           t={t}
-          loginHistory={true}
+          loginHistory
           subHeader={t("LoginSubheaderTitle")}
           latestText={t("LoginLatestText")}
           storagePeriod={t("StoragePeriod")}

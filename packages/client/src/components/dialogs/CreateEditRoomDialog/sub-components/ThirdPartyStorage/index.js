@@ -30,13 +30,13 @@ import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { StyledParam } from "../Params/StyledParam";
 import ToggleParam from "../Params/ToggleParam";
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
 import FolderInput from "./FolderInput";
-import { getOAuthToken } from "@docspace/shared/utils/common";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -118,7 +118,7 @@ const ThirdPartyStorage = ({
   };
 
   const onChangeProvider = async (provider) => {
-    if (!!storageLocation.thirdpartyAccount) {
+    if (storageLocation.thirdpartyAccount) {
       onChangeStorageLocation({
         ...storageLocation,
         provider,

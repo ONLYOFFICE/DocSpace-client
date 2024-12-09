@@ -32,11 +32,11 @@ class TagHandler {
   }
 
   createRandomTagId() {
-    return "_" + Math.random().toString(36).substr(2, 9);
+    return `_${Math.random().toString(36).substr(2, 9)}`;
   }
 
   refreshDefaultTag(name) {
-    let newTags = [...this.tags].filter((tag) => !tag.isDefault);
+    const newTags = [...this.tags].filter((tag) => !tag.isDefault);
     newTags.unshift({
       id: this.createRandomTagId(),
       name,
@@ -47,10 +47,10 @@ class TagHandler {
   }
 
   addTag(name) {
-    let newTags = [...this.tags];
+    const newTags = [...this.tags];
 
     if (this.isAlreadyAdded(name)) {
-      return; //already added
+      return; // already added
     }
 
     newTags.push({
@@ -71,10 +71,10 @@ class TagHandler {
   }
 
   addNewTag(name) {
-    let newTags = [...this.tags];
+    const newTags = [...this.tags];
 
     if (this.isAlreadyAdded(name)) {
-      return; //already added
+      return; // already added
     }
 
     newTags.push({

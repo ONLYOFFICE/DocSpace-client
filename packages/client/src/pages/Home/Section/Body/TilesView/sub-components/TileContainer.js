@@ -241,7 +241,7 @@ class TileContainer extends React.PureComponent {
         {Folders.length > 0 && (
           <Heading
             size="xsmall"
-            id={"folder-tile-heading"}
+            id="folder-tile-heading"
             className="tile-items-heading"
           >
             {headingFolders}

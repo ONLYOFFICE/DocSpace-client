@@ -32,9 +32,9 @@ import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?u
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
-import { EDITOR_PROTOCOL } from "./filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { homepage } from "PACKAGE_FILE";
+import { EDITOR_PROTOCOL } from "./filesConstants";
 
 export const getAccessIcon = (access) => {
   switch (access) {
@@ -55,7 +55,6 @@ export const getAccessIcon = (access) => {
     case 8:
       return CustomFilterReactSvgUrl;
     default:
-      return;
   }
 };
 

@@ -84,7 +84,7 @@ const GroupMember = ({
       <Avatar
         className="avatar"
         role={groupMember.role || "user"}
-        size={"min"}
+        size="min"
         source={groupMember.avatar}
         noClick
       />

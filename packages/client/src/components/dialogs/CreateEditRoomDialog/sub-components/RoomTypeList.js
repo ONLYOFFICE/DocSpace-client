@@ -72,7 +72,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
           t={t}
           key={roomType}
           roomType={roomType}
-          type={"listItem"}
+          type="listItem"
           onClick={() => handleClick(roomType)}
           disabledFormRoom={disabledFormRoom}
         />

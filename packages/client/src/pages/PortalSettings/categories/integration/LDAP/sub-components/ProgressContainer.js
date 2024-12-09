@@ -35,9 +35,9 @@ const ProgressContainer = ({ inProgress, percents, error, source, status }) => {
 
   let progressStatus = status || source ? `${percents}%` : "";
 
-  if (!!progressStatus) {
-    status && (progressStatus += " " + status);
-    source && (progressStatus += (!!status ? ": " : " ") + source);
+  if (progressStatus) {
+    status && (progressStatus += ` ${status}`);
+    source && (progressStatus += (status ? ": " : " ") + source);
   }
 
   return (

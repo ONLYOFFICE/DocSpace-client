@@ -98,7 +98,7 @@ const RestoreRoomDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>{description}</Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

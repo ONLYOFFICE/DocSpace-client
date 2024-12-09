@@ -27,9 +27,9 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType } from "@docspace/shared/enums";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import { getFromLocalStorage } from "../../../../../utils";
 
 let folder = "";
 const Documents = "Documents";
@@ -45,7 +45,7 @@ class RoomsModule extends React.Component {
 
     this.state = {
       isStartCopy: false,
-      selectedFolder: selectedFolder,
+      selectedFolder,
     };
 
     this._isMount = false;
@@ -54,9 +54,11 @@ class RoomsModule extends React.Component {
   componentDidMount() {
     this._isMount = true;
   }
+
   componentWillUnmount() {
     this._isMount = false;
   }
+
   onSelectFolder = (folderId) => {
     this._isMount &&
       this.setState({
@@ -79,6 +81,7 @@ class RoomsModule extends React.Component {
       isStartCopy: false,
     });
   };
+
   render() {
     const { isMaxProgress, t, buttonSize } = this.props;
     const { isStartCopy, selectedFolder } = this.state;

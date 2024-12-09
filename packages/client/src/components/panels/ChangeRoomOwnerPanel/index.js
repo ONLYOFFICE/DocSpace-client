@@ -193,9 +193,7 @@ export default inject(
 
     const room = selection.length
       ? selection[0]
-      : bufferSelection
-        ? bufferSelection
-        : selectedFolderStore;
+      : bufferSelection || selectedFolderStore;
 
     const { id } = userStore.user;
 

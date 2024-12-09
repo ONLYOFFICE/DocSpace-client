@@ -119,7 +119,7 @@ const TariffBar = ({
         lineHeight="16px"
         color={tariffBar.color}
         onClick={onClick}
-        truncate={true}
+        truncate
       >
         {tariffBar.label}
       </Text>

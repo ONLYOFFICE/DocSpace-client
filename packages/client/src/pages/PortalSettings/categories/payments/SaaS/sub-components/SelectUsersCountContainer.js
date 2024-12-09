@@ -197,10 +197,8 @@ const SelectUsersCountContainer = ({
     if (operation === "minus") {
       if (managersCount > maxAvailableManagersCount) {
         value = maxAvailableManagersCount;
-      } else {
-        if (managersCount > minAvailableManagersValue) {
-          value -= step;
-        }
+      } else if (managersCount > minAvailableManagersValue) {
+        value -= step;
       }
     }
 
@@ -232,8 +230,8 @@ const SelectUsersCountContainer = ({
   };
 
   const value = isNeedPlusSign
-    ? maxAvailableManagersCount + "+"
-    : managersCount + "";
+    ? `${maxAvailableManagersCount}+`
+    : `${managersCount}`;
 
   const isUpdatingTariff = isLoading && isAlreadyPaid;
 
@@ -257,7 +255,7 @@ const SelectUsersCountContainer = ({
         <div
           className="circle minus-icon"
           {...onClickProp}
-          data-operation={"minus"}
+          data-operation="minus"
         >
           <MinusIcon {...onClickProp} className="payment-score" />
         </div>
@@ -272,7 +270,7 @@ const SelectUsersCountContainer = ({
         <div
           className="circle plus-icon"
           {...onClickProp}
-          data-operation={"plus"}
+          data-operation="plus"
         >
           <PlusIcon {...onClickProp} className="payment-score" />
         </div>
@@ -280,10 +278,10 @@ const SelectUsersCountContainer = ({
 
       <div className="slider-wrapper">
         <Slider
-          thumbBorderWidth={"8px"}
-          thumbHeight={"32px"}
-          thumbWidth={"32px"}
-          runnableTrackHeight={"12px"}
+          thumbBorderWidth="8px"
+          thumbHeight="32px"
+          thumbWidth="32px"
+          runnableTrackHeight="12px"
           isDisabled={isDisabled || isUpdatingTariff}
           isReadOnly={isDisabled || isUpdatingTariff}
           type="range"
@@ -304,7 +302,7 @@ const SelectUsersCountContainer = ({
             {minAvailableManagersValue}
           </Text>
           <Text className="slider-track-value_max" noSelect>
-            {maxAvailableManagersCount + "+"}
+            {`${maxAvailableManagersCount}+`}
           </Text>
         </div>
       </div>

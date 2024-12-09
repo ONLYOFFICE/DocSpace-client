@@ -84,8 +84,8 @@ export const addLinksToHistory = (fetchedHistory, links) => {
 export const parseHistory = (fetchedHistory) => {
   if (!fetchedHistory) return null;
 
-  let feeds = fetchedHistory?.items;
-  let parsedFeeds = [];
+  const feeds = fetchedHistory?.items;
+  const parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {
     const feedDay = moment(feeds[i].date).format("YYYY-MM-DD");

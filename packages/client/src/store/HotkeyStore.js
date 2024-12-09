@@ -36,21 +36,29 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
+import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {
   filesStore;
+
   dialogsStore;
+
   filesSettingsStore;
+
   filesActionsStore;
+
   treeFoldersStore;
+
   uploadDataStore;
+
   selectedFolderStore;
+
   indexingStore;
 
   elemOffset = 0;
+
   hotkeysClipboardAction = null;
 
   constructor(
@@ -156,7 +164,7 @@ class HotkeyStore {
   };
 
   setCaret = (caret, withScroll = true) => {
-    //TODO: inf-scroll
+    // TODO: inf-scroll
     // const id = caret.isFolder ? `folder_${caret.id}` : `file_${caret.id}`;
     // const elem = document.getElementById(id);
     // if (!elem) return;
@@ -186,11 +194,11 @@ class HotkeyStore {
 
       const offset = el.closest(".window-item")?.offsetTop;
 
-      const offsetTop = offset
-        ? offset
-        : viewAs === "tile"
+      const offsetTop =
+        offset ||
+        (viewAs === "tile"
           ? el.parentElement.parentElement.offsetTop
-          : el.offsetTop;
+          : el.offsetTop);
 
       return { offsetTop, item };
     }
@@ -239,20 +247,17 @@ class HotkeyStore {
       newSelection.push(hotkeyCaret);
       setSelection(newSelection);
       setHotkeyCaretStart(hotkeyCaret);
-    } else {
-      if (selection.length) {
-        this.setCaret(selection[0]);
-        setHotkeyCaretStart(selection[0]);
-      } else this.selectFirstFile();
-    }
+    } else if (selection.length) {
+      this.setCaret(selection[0]);
+      setHotkeyCaretStart(selection[0]);
+    } else this.selectFirstFile();
   };
 
   selectBottom = () => {
     const { viewAs, hotkeyCaret, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
-    else if (viewAs === "tile")
-      this.setSelectionWithCaret([this.nextForTileDown]);
+    if (viewAs === "tile") this.setSelectionWithCaret([this.nextForTileDown]);
     else if (this.nextFile) this.setSelectionWithCaret([this.nextFile]);
   };
 
@@ -260,8 +265,7 @@ class HotkeyStore {
     const { hotkeyCaret, viewAs, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
-    else if (viewAs === "tile")
-      this.setSelectionWithCaret([this.prevForTileUp]);
+    if (viewAs === "tile") this.setSelectionWithCaret([this.prevForTileUp]);
     else if (this.prevFile) this.setSelectionWithCaret([this.prevFile]);
   };
 
@@ -587,20 +591,18 @@ class HotkeyStore {
       if (this.treeFoldersStore.isPrivacyFolder) return;
       const folderInput = document.getElementById("customFolderInput");
       folderInput && folderInput.click();
+    } else if (this.treeFoldersStore.isPrivacyFolder) {
+      encryptionUploadDialog(
+        this.filesSettingsStore.extsWebEncrypt,
+        (encryptedFile, encrypted) => {
+          encryptedFile.encrypted = encrypted;
+          this.goToHomePage(navigate);
+          this.uploadDataStore.startUpload([encryptedFile], null, t);
+        },
+      );
     } else {
-      if (this.treeFoldersStore.isPrivacyFolder) {
-        encryptionUploadDialog(
-          this.filesSettingsStore.extsWebEncrypt,
-          (encryptedFile, encrypted) => {
-            encryptedFile.encrypted = encrypted;
-            this.goToHomePage(navigate);
-            this.uploadDataStore.startUpload([encryptedFile], null, t);
-          },
-        );
-      } else {
-        const fileInput = document.getElementById("customFileInput");
-        fileInput && fileInput.click();
-      }
+      const fileInput = document.getElementById("customFileInput");
+      fileInput && fileInput.click();
     }
   };
 
@@ -620,8 +622,8 @@ class HotkeyStore {
   };
 
   moveFilesFromClipboard = (t) => {
-    let fileIds = [];
-    let folderIds = [];
+    const fileIds = [];
+    const folderIds = [];
 
     const { id: selectedItemId, roomType, security } = this.selectedFolderStore;
     const { activeFiles, activeFolders, hotkeysClipboard } = this.filesStore;
@@ -641,7 +643,7 @@ class HotkeyStore {
 
     const isPublic = roomType === RoomsType.PublicRoom;
 
-    for (let item of selections) {
+    for (const item of selections) {
       if (item.fileExst || item.contentLength) {
         const fileInAction = activeFiles.includes(item.id);
         !fileInAction && fileIds.push(item.id);
@@ -732,26 +734,27 @@ class HotkeyStore {
 
     if (this.caretIndex !== -1) {
       return filesList[this.caretIndex].isFolder;
-    } else return false;
+    }
+    return false;
   }
 
   get caretIndex() {
     const { filesList, hotkeyCaret, selection } = this.filesStore;
 
-    const item = hotkeyCaret
-      ? hotkeyCaret
-      : selection.length
+    const item =
+      hotkeyCaret ||
+      (selection.length
         ? selection.length === 1
           ? selection[0]
           : selection[selection.length - 1]
-        : null;
+        : null);
 
     const caretIndex = filesList.findIndex(
       (f) => f.id === item?.id && f.isFolder === item?.isFolder,
     );
 
     if (caretIndex !== -1) return caretIndex;
-    else return null;
+    return null;
   }
 
   get nextFile() {
@@ -760,7 +763,8 @@ class HotkeyStore {
     if (this.caretIndex !== -1) {
       const nextCaretIndex = this.caretIndex + 1;
       return filesList[nextCaretIndex];
-    } else return null;
+    }
+    return null;
   }
 
   get nextForTileDown() {
@@ -769,14 +773,12 @@ class HotkeyStore {
     const nextTileFile = filesList[this.caretIndex + this.countTilesInRow];
     const foldersLength = folders.length;
 
-    let nextForTileDown = nextTileFile
-      ? nextTileFile
-      : filesList[filesList.length - 1];
+    let nextForTileDown = nextTileFile || filesList[filesList.length - 1];
 
-    //Next tile
+    // Next tile
 
     if (nextForTileDown.isFolder !== this.caretIsFolder) {
-      let indexForNextTile =
+      const indexForNextTile =
         this.caretIndex + this.countTilesInRow - this.countOfMissingFiles;
 
       nextForTileDown =
@@ -806,7 +808,8 @@ class HotkeyStore {
     if (this.caretIndex !== -1) {
       const prevCaretIndex = this.caretIndex - 1;
       return filesList[prevCaretIndex];
-    } else return null;
+    }
+    return null;
   }
 
   get prevForTileUp() {
@@ -814,10 +817,10 @@ class HotkeyStore {
     const foldersLength = folders.length;
 
     const prevTileFile = filesList[this.caretIndex - this.countTilesInRow];
-    let prevForTileUp = prevTileFile ? prevTileFile : filesList[0];
+    let prevForTileUp = prevTileFile || filesList[0];
 
     if (prevForTileUp.isFolder !== this.caretIsFolder) {
-      let indexForPrevTile =
+      const indexForPrevTile =
         this.caretIndex - this.countTilesInRow + this.countOfMissingFiles;
 
       prevForTileUp = filesList[indexForPrevTile]
@@ -880,12 +883,10 @@ class HotkeyStore {
 
         if (fileIndex === -1) {
           selectionsDown.push(filesList[itemIndex]);
-        } else {
-          if (hotkeyCaretStartIndex > itemIndex) {
-            selectionsDown = selectionsDown.filter(
-              (_, index) => index !== fileIndex,
-            );
-          }
+        } else if (hotkeyCaretStartIndex > itemIndex) {
+          selectionsDown = selectionsDown.filter(
+            (_, index) => index !== fileIndex,
+          );
         }
 
         itemIndex++;
@@ -949,12 +950,8 @@ class HotkeyStore {
 
         if (fileIndex === -1) {
           selectionsUp.push(filesList[itemIndex]);
-        } else {
-          if (hotkeyCaretStartIndex < itemIndex) {
-            selectionsUp = selectionsUp.filter(
-              (_, index) => index !== fileIndex,
-            );
-          }
+        } else if (hotkeyCaretStartIndex < itemIndex) {
+          selectionsUp = selectionsUp.filter((_, index) => index !== fileIndex);
         }
 
         itemIndex--;

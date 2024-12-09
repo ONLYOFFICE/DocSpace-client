@@ -170,7 +170,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
               organizationName: t("Common:OrganizationName"),
             }}
             components={{
-              1: <strong></strong>,
+              1: <strong />,
             }}
           />
         </Text>

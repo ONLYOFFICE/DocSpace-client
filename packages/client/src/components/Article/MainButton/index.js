@@ -50,9 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
-import MobileView from "./MobileView";
 import {
   Events,
   DeviceType,
@@ -68,6 +66,8 @@ import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import MobileView from "./MobileView";
+import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -710,15 +710,14 @@ const ArticleMainButtonContent = (props) => {
   let mainButtonVisible = true;
 
   if (currentDeviceType === DeviceType.mobile) {
-    mainButtonVisible =
+    mainButtonVisible = !(
       moveToPanelVisible ||
       restorePanelVisible ||
       copyPanelVisible ||
       selectFileDialogVisible ||
       selectFileFormRoomDialogVisible ||
       versionHistoryPanelVisible
-        ? false
-        : true;
+    );
   }
 
   if (isAccountsPage && !contactsCanCreate) {

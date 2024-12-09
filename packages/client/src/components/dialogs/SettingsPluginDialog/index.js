@@ -124,7 +124,7 @@ const SettingsPluginDialog = ({
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
-              size={"normal"}
+              size="normal"
             />
           )}
         </div>

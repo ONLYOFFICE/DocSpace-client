@@ -37,16 +37,15 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import {
-  //getKeyByLink,
-  settingsTree,
-  getSelectedLinkByKey,
-  //selectKeyOfTreeElement,
-  getCurrentSettingsCategory,
-} from "../../../utils";
-
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import {
+  // getKeyByLink,
+  settingsTree,
+  getSelectedLinkByKey,
+  // selectKeyOfTreeElement,
+  getCurrentSettingsCategory,
+} from "../../../utils";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -175,7 +174,7 @@ const ArticleBodyContent = (props) => {
 
   const getLinkData = (value) => {
     const path = `/portal-settings${getSelectedLinkByKey(
-      value + "-0",
+      `${value}-0`,
       settingsTree,
     )}`;
 

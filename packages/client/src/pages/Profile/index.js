@@ -85,7 +85,7 @@ class Profile extends React.Component {
     }
 
     if (!profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "none";
       }
     }
@@ -102,7 +102,7 @@ class Profile extends React.Component {
     // }
 
     if (profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "";
       }
     }

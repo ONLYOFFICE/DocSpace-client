@@ -26,8 +26,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ToggleBlock from "./ToggleBlock";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
+import ToggleBlock from "./ToggleBlock";
 
 const LimitTimeBlock = (props) => {
   const {

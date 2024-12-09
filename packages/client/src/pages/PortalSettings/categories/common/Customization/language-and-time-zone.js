@@ -30,23 +30,21 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
-import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
-import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
-import LoaderCustomization from "../sub-components/loaderCustomization";
+import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
@@ -210,9 +208,9 @@ const LanguageAndTimeZoneComponent = (props) => {
 
   React.useState(() => {
     prevProps.current = {
-      language: language,
-      tReady: tReady,
-      isLoaded: isLoaded,
+      language,
+      tReady,
+      isLoaded,
     };
   }, [language, tReady, isLoaded]);
 
@@ -378,7 +376,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         valueFromSessionStorage !== null &&
         !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
       ) {
-        const defaultValue = state[settingName + "Default"];
+        const defaultValue = state[`${settingName}Default`];
 
         setState((val) => ({ ...val, [settingName]: defaultValue || null }));
         saveToSessionStorage(settingName, "");
@@ -391,7 +389,7 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const settingIsEqualInitialValue = (settingName, value) => {
-    const defaultValue = JSON.stringify(state[settingName + "Default"]);
+    const defaultValue = JSON.stringify(state[`${settingName}Default`]);
     const currentValue = JSON.stringify(value);
     return defaultValue === currentValue;
   };
@@ -411,7 +409,7 @@ const LanguageAndTimeZoneComponent = (props) => {
     if (hasChanged !== state.hasChanged) {
       setState((val) => ({
         ...val,
-        hasChanged: hasChanged,
+        hasChanged,
         showReminder: hasChanged,
       }));
     }
@@ -460,7 +458,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       <FieldContainer
         id="fieldContainerLanguage"
         labelText={`${t("Common:Language")}`}
-        isVertical={true}
+        isVertical
       >
         <div className="settings-block__wrapper-language">
           <ComboBox
@@ -472,19 +470,19 @@ const LanguageAndTimeZoneComponent = (props) => {
             isDisabled={isLoading}
             directionY="both"
             noBorder={false}
-            scaled={true}
-            scaledOptions={true}
+            scaled
+            scaledOptions
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
-            showDisabledItems={true}
+            showDisabledItems
           />
-          {isBetaLanguage && <BetaBadge place={"right-start"} />}
+          {isBetaLanguage && <BetaBadge place="right-start" />}
         </div>
       </FieldContainer>
       <FieldContainer
         id="fieldContainerTimezone"
         labelText={`${t("TimeZone")}`}
-        isVertical={true}
+        isVertical
       >
         <ComboBox
           tabIndex={2}
@@ -495,18 +493,18 @@ const LanguageAndTimeZoneComponent = (props) => {
           onSelect={onTimezoneSelect}
           isDisabled={isLoading}
           noBorder={false}
-          scaled={true}
-          scaledOptions={true}
+          scaled
+          scaledOptions
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
-          showDisabledItems={true}
+          showDisabledItems
         />
       </FieldContainer>
     </div>
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization lngTZSettings={true} />
+    <LoaderCustomization lngTZSettings />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
@@ -548,7 +546,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={hasScroll}
         additionalClassSaveButton="language-time-zone-save"
         additionalClassCancelButton="language-time-zone-cancel"

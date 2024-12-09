@@ -21,10 +21,13 @@ const constants = {
 
 class LdapFormStore {
   isLoaded = false;
+
   isLdapEnabled = false;
 
   isSettingsShown = false;
+
   isTlsEnabled = false;
+
   isSslEnabled = false;
 
   requiredSettings = {
@@ -41,26 +44,41 @@ class LdapFormStore {
   };
 
   login = "";
+
   password = "";
+
   authentication = true;
+
   acceptCertificate = false;
+
   acceptCertificateHash = null;
+
   isSendWelcomeEmail = false;
+
   errors = {};
 
   groupMembership = false;
+
   groupDN = "";
+
   userAttribute = "distinguishedName";
+
   groupFilter = "(objectClass=group)";
+
   groupAttribute = "member";
+
   groupNameAttribute = "cn";
 
   cron = null;
+
   serverCron = null;
 
   inProgress = false;
+
   progressBarIntervalId = null;
+
   alreadyChecking = false;
+
   lastWarning = "";
 
   progressStatus = {
@@ -86,7 +104,9 @@ class LdapFormStore {
   };
 
   defaultSettings = {};
+
   serverData = {};
+
   serverSettings = {};
 
   currentQuotaStore = null;
@@ -389,7 +409,7 @@ class LdapFormStore {
     if (!toDefault && !turnOff) {
       for (var key in this.requiredSettings) {
         if (
-          typeof this.requiredSettings[key] == "string" &&
+          typeof this.requiredSettings[key] === "string" &&
           this.requiredSettings[key].trim() === ""
         ) {
           isErrorExist = true;
@@ -444,7 +464,7 @@ class LdapFormStore {
   };
 
   scrollToField = () => {
-    for (let key in this.errors) {
+    for (const key in this.errors) {
       const element = document.getElementsByName(key)?.[0];
 
       element?.focus();
@@ -493,10 +513,10 @@ class LdapFormStore {
         }
       }
 
-      var status = data;
+      let status = data;
       if (
         !data ||
-        (typeof data == "object" && Object.keys(data).length === 0)
+        (typeof data === "object" && Object.keys(data).length === 0)
       ) {
         status = {
           completed: true,

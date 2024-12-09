@@ -38,6 +38,7 @@ import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import { globalColors } from "@docspace/shared/themes";
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
 import Api from "./Api";
@@ -45,8 +46,6 @@ import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
-
-import { globalColors } from "@docspace/shared/themes";
 
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
@@ -110,7 +109,7 @@ const DeveloperToolsWrapper = (props) => {
   }
 
   const load = async () => {
-    //await loadBaseInfo();
+    // await loadBaseInfo();
   };
 
   useEffect(() => {

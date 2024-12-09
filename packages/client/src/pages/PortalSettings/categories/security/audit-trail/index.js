@@ -32,12 +32,12 @@ import { inject } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
 
-import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import AuditTrailLoader from "./AuditTrailLoader";
 
 let timerId = null;
@@ -86,21 +86,17 @@ const AuditTrail = (props) => {
         <Consumer>
           {(context) =>
             viewAs === "table" ? (
-              <>
-                <Table
-                  theme={theme}
-                  auditTrailUsers={auditTrailUsers}
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <Table
+                theme={theme}
+                auditTrailUsers={auditTrailUsers}
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             ) : (
-              <>
-                <AuditRowContainer
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <AuditRowContainer
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             )
           }
         </Consumer>

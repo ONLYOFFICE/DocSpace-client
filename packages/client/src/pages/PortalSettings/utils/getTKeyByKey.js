@@ -27,7 +27,7 @@
 export const getTKeyByKey = (key, treeData, depth = 0) => {
   if (!treeData) return;
   const keysCollection = key.split("-");
-  let newKey = keysCollection.slice(0, depth + 1).join("-");
+  const newKey = keysCollection.slice(0, depth + 1).join("-");
 
   const item = treeData.find((item) => item.key === newKey);
 
@@ -37,8 +37,7 @@ export const getTKeyByKey = (key, treeData, depth = 0) => {
 
   if (key === newKey) {
     return item.tKey;
-  } else {
-    const depthLevel = depth + 1;
-    return getTKeyByKey(key, item.children, depthLevel);
   }
+  const depthLevel = depth + 1;
+  return getTKeyByKey(key, item.children, depthLevel);
 };

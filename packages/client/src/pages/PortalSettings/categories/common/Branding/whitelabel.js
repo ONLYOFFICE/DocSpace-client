@@ -164,7 +164,7 @@ const WhiteLabelComponent = (props) => {
       return;
     }
 
-    let newLogos = logoUrlsWhiteLabel;
+    const newLogos = logoUrlsWhiteLabel;
 
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
       const options = getLogoOptions(
@@ -218,7 +218,7 @@ const WhiteLabelComponent = (props) => {
     const type = id[1];
     const theme = id[2];
 
-    let file = e.target.files[0];
+    const file = e.target.files[0];
 
     const { data } = await uploadLogo(file, type);
 
@@ -240,14 +240,14 @@ const WhiteLabelComponent = (props) => {
   };
 
   const onSave = async () => {
-    let logosArr = [];
+    const logosArr = [];
 
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
       const currentLogo = logoUrlsWhiteLabel[i];
       const defaultLogo = defaultWhiteLabelLogoUrls[i];
 
       if (!isEqual(currentLogo, defaultLogo)) {
-        let value = {};
+        const value = {};
 
         if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
           value.light = currentLogo.path.light;
@@ -256,7 +256,7 @@ const WhiteLabelComponent = (props) => {
 
         logosArr.push({
           key: String(i + 1),
-          value: value,
+          value,
         });
       }
     }
@@ -304,7 +304,7 @@ const WhiteLabelComponent = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={t("Common:Paid")}
-            isPaidBadge={true}
+            isPaidBadge
           />
         )}
       </div>
@@ -329,10 +329,10 @@ const WhiteLabelComponent = (props) => {
         <FieldContainer
           id="fieldContainerCompanyName"
           labelText={t("Common:CompanyName")}
-          isVertical={true}
+          isVertical
           className="settings_unavailable"
           hasError={isEmpty}
-          labelVisible={true}
+          labelVisible
         >
           <TextInput
             className="company-name input"
@@ -340,7 +340,7 @@ const WhiteLabelComponent = (props) => {
             onChange={onChangeCompanyName}
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
-            scale={true}
+            scale
             isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
@@ -459,40 +459,38 @@ const WhiteLabelComponent = (props) => {
         </div>
 
         {showAbout && (
-          <>
-            <div className="logo-wrapper">
-              <Text
-                fontSize="15px"
-                fontWeight="600"
-                className="settings_unavailable"
-              >
-                {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
-                {logoUrlsWhiteLabel[6].size.height})
-              </Text>
-              <div className="logos-wrapper">
-                <Logo
-                  title={t("Profile:LightTheme")}
-                  src={logoUrlsWhiteLabel[6].path.light}
-                  imageClass="border-img logo-about background-white"
-                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
-                  linkId="link-about-light"
-                  onChangeText={t("ChangeLogoButton")}
-                  onChange={onChangeLogo}
-                  isSettingPaid={isSettingPaid}
-                />
-                <Logo
-                  title={t("Profile:DarkTheme")}
-                  src={logoUrlsWhiteLabel[6].path.dark}
-                  imageClass="border-img logo-about background-dark"
-                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
-                  linkId="link-about-dark"
-                  onChangeText={t("ChangeLogoButton")}
-                  onChange={onChangeLogo}
-                  isSettingPaid={isSettingPaid}
-                />
-              </div>
+          <div className="logo-wrapper">
+            <Text
+              fontSize="15px"
+              fontWeight="600"
+              className="settings_unavailable"
+            >
+              {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
+              {logoUrlsWhiteLabel[6].size.height})
+            </Text>
+            <div className="logos-wrapper">
+              <Logo
+                title={t("Profile:LightTheme")}
+                src={logoUrlsWhiteLabel[6].path.light}
+                imageClass="border-img logo-about background-white"
+                inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
+                linkId="link-about-light"
+                onChangeText={t("ChangeLogoButton")}
+                onChange={onChangeLogo}
+                isSettingPaid={isSettingPaid}
+              />
+              <Logo
+                title={t("Profile:DarkTheme")}
+                src={logoUrlsWhiteLabel[6].path.dark}
+                imageClass="border-img logo-about background-dark"
+                inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
+                linkId="link-about-dark"
+                onChangeText={t("ChangeLogoButton")}
+                onChange={onChangeLogo}
+                isSettingPaid={isSettingPaid}
+              />
             </div>
-          </>
+          </div>
         )}
         <div className="logo-wrapper">
           <Text
@@ -524,7 +522,7 @@ const WhiteLabelComponent = (props) => {
             {logoUrlsWhiteLabel[3].size.height})
           </Text>
           <Logo
-            isEditor={true}
+            isEditor
             src={logoUrlsWhiteLabel[3].path.light}
             inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
             linkId="link-editors-header"
@@ -551,12 +549,12 @@ const WhiteLabelComponent = (props) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
-            isEditorHeader={true}
+            isEditorHeader
           />
         </div>
       </div>
 
-      <div className="spacer"></div>
+      <div className="spacer" />
 
       <SaveCancelButtons
         tabIndex={3}
@@ -565,9 +563,9 @@ const WhiteLabelComponent = (props) => {
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
-        displaySettings={true}
-        hasScroll={true}
-        hideBorder={true}
+        displaySettings
+        hasScroll
+        hideBorder
         showReminder={!saveButtonDisabled}
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={saveButtonDisabled}

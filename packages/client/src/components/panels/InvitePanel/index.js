@@ -40,9 +40,6 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
-import ItemsList from "./sub-components/ItemsList";
-import InviteInput from "./sub-components/InviteInput";
-import ExternalLinks from "./sub-components/ExternalLinks";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -50,10 +47,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { fixAccess, getAccessOptions } from "./utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { fixAccess, getAccessOptions } from "./utils";
+import ExternalLinks from "./sub-components/ExternalLinks";
+import InviteInput from "./sub-components/InviteInput";
+import ItemsList from "./sub-components/ItemsList";
 
 const InvitePanel = ({
   folders,
@@ -141,11 +141,10 @@ const InvitePanel = ({
     if (room) {
       setSelectedRoom(room);
       return Promise.resolve();
-    } else {
-      return getFolderInfo(roomId).then((info) => {
-        setSelectedRoom(info);
-      });
     }
+    return getFolderInfo(roomId).then((info) => {
+      setSelectedRoom(info);
+    });
   };
 
   const getInfo = () => {
@@ -293,7 +292,7 @@ const InvitePanel = ({
 
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
-      let newItem = {};
+      const newItem = {};
 
       roomId === -1
         ? (newItem.type = item.access)
@@ -506,7 +505,7 @@ const InvitePanel = ({
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
       withBodyScroll
-      isInvitePanelLoader={true}
+      isInvitePanelLoader
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
@@ -551,8 +550,8 @@ const InvitePanel = ({
       <ModalDialog.Footer>
         <Button
           className="send-invitation"
-          scale={true}
-          size={"normal"}
+          scale
+          size="normal"
           isDisabled={hasErrors || !hasInvitedUsers}
           primary
           onClick={onClickSend}
@@ -561,8 +560,8 @@ const InvitePanel = ({
         />
         <Button
           className="cancel-button"
-          scale={true}
-          size={"normal"}
+          scale
+          size="normal"
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}

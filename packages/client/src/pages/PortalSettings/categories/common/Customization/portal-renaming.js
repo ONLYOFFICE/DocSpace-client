@@ -33,15 +33,15 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
 
 const PortalRenamingComponent = (props) => {
   const {
@@ -291,7 +291,7 @@ const PortalRenamingComponent = (props) => {
     setIsShowModal(false);
   };
 
-  const hasError = errorValue === null ? false : true;
+  const hasError = errorValue !== null;
 
   const settingsBlock = (
     <div className="settings-block">
@@ -299,12 +299,12 @@ const PortalRenamingComponent = (props) => {
         id="fieldContainerPortalRenaming"
         className="field-container-width"
         labelText={`${t("PortalRenamingLabelText")}`}
-        isVertical={true}
+        isVertical
       >
         <TextInput
           tabIndex={10}
           id="textInputContainerPortalRenaming"
-          scale={true}
+          scale
           value={portalName}
           onChange={onChangePortalName}
           isDisabled={isLoadingPortalNameSave}
@@ -317,7 +317,7 @@ const PortalRenamingComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization portalRenaming={true} />
+    <LoaderCustomization portalRenaming />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
@@ -358,7 +358,7 @@ const PortalRenamingComponent = (props) => {
         cancelButtonLabel={t("Common:CancelButton")}
         showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
-        displaySettings={true}
+        displaySettings
         hasScroll={hasScroll}
         saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"

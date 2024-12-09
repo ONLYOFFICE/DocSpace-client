@@ -51,8 +51,8 @@ class SendInviteDialogComponent extends React.Component {
       const disabled = userIds.find((x) => x === item.id);
       return (selectedUsers[index] = {
         ...selectedUsers[index],
-        checked: disabled ? true : false,
-        disabled: disabled ? false : true,
+        checked: !!disabled,
+        disabled: !disabled,
       });
     });
 
@@ -91,7 +91,7 @@ class SendInviteDialogComponent extends React.Component {
 
     const newUserIds = [];
 
-    for (let item of newUsersList) {
+    for (const item of newUsersList) {
       if (item.checked === true) {
         newUserIds.push(item.id);
       }
@@ -136,7 +136,7 @@ class SendInviteDialogComponent extends React.Component {
       </List>
     );
 
-    //console.log("SendInviteDialog render");
+    // console.log("SendInviteDialog render");
     return (
       <ModalDialog
         isLoading={!tReady}

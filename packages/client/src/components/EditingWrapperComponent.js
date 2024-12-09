@@ -217,7 +217,7 @@ const EditingWrapperComponent = (props) => {
     renameTitle,
     onClickUpdateItem,
     cancelUpdateItem,
-    //isLoading,
+    // isLoading,
     viewAs,
     elementIcon,
     isUpdatingRowItem,
@@ -239,7 +239,7 @@ const EditingWrapperComponent = (props) => {
   const onKeyUpUpdateItem = (e) => {
     if (isLoading) return;
 
-    var code = e.keyCode || e.which;
+    const code = e.keyCode || e.which;
     if (code === 13) {
       if (!isLoading) setIsLoading(true);
       return onClickUpdateItem(e);
@@ -287,10 +287,10 @@ const EditingWrapperComponent = (props) => {
         <TextInput
           className="edit-text"
           name="title"
-          scale={true}
+          scale
           value={itemTitle}
           tabIndex={1}
-          isAutoFocussed={true}
+          isAutoFocussed
           onChange={renameTitle}
           onKeyPress={onKeyUpUpdateItem}
           onKeyDown={onEscapeKeyPress}

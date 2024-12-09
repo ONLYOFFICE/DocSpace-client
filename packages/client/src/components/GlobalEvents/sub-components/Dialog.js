@@ -69,7 +69,7 @@ const Dialog = ({
   }, [isCreateDialog, keepNewFileName]);
 
   useEffect(() => {
-    let input = document?.getElementById("create-text-input");
+    const input = document?.getElementById("create-text-input");
     if (isMobile && isIOS) return;
     if (input && value === startValue && !isChanged) input.select();
   }, [visible, value]);
@@ -143,8 +143,8 @@ const Dialog = ({
     <ModalDialog
       withForm={withForm}
       visible={visible}
-      displayType={"modal"}
-      scale={true}
+      displayType="modal"
+      scale
       onClose={onCloseAction}
       zIndex={405}
     >
@@ -153,7 +153,7 @@ const Dialog = ({
         <FieldContainer
           hasError={isError}
           labelVisible={false}
-          errorMessageWidth={"100%"}
+          errorMessageWidth="100%"
           errorMessage={t("Files:ContainsSpecCharacter")}
           removeMargin
         >
@@ -161,9 +161,9 @@ const Dialog = ({
             id="create-text-input"
             name="create"
             type="search"
-            scale={true}
+            scale
             value={value}
-            isAutoFocussed={true}
+            isAutoFocussed
             tabIndex={1}
             onChange={onChange}
             onFocus={onFocus}

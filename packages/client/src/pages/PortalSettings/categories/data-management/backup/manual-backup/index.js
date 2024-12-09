@@ -34,12 +34,7 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
-import RoomsModule from "./sub-components/RoomsModule";
-import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-import { StyledModules, StyledManualBackup } from "./../StyledBackup";
-import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
+// import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
@@ -49,6 +44,12 @@ import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
+import { StyledModules, StyledManualBackup } from "../StyledBackup";
+import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
+import RoomsModule from "./sub-components/RoomsModule";
+import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -119,7 +120,7 @@ class ManualBackup extends React.Component {
       //   }
     } catch (error) {
       toastr.error(error);
-      //this.clearLocalStorage();
+      // this.clearLocalStorage();
     }
 
     clearTimeout(this.timerId);
@@ -183,14 +184,16 @@ class ManualBackup extends React.Component {
       toastr.error(e);
     }
   };
+
   onClickDownloadBackup = () => {
     const { temporaryLink } = this.props;
     const url = window.location.origin;
     const downloadUrl = `${url}` + `${temporaryLink}`;
     window.open(downloadUrl, "_self");
   };
+
   onClickShowStorage = (e) => {
-    let newStateObj = {};
+    const newStateObj = {};
     const name = e.target.name;
     newStateObj[name] = true;
     const newState = this.switches.filter((el) => el !== name);
@@ -199,6 +202,7 @@ class ManualBackup extends React.Component {
       ...newStateObj,
     });
   };
+
   onMakeCopy = async (
     selectedFolder,
     moduleName,
@@ -245,12 +249,13 @@ class ManualBackup extends React.Component {
       toastr.error(err);
     }
   };
+
   render() {
     const {
       t,
       temporaryLink,
       downloadingProgress,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       buttonSize,
 
       rootFoldersTitles,
@@ -314,7 +319,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
-            name={"isCheckedTemporaryStorage"}
+            name="isCheckedTemporaryStorage"
             key={0}
             isChecked={isCheckedTemporaryStorage}
             isDisabled={!isMaxProgress || pageIsDisabled}
@@ -345,8 +350,8 @@ class ManualBackup extends React.Component {
               )}
               {!isMaxProgress && (
                 <Button
-                  label={t("Common:CopyOperation") + "..."}
-                  isDisabled={true}
+                  label={`${t("Common:CopyOperation")}...`}
+                  isDisabled
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
@@ -358,7 +363,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
-            name={"isCheckedDocuments"}
+            name="isCheckedDocuments"
             key={1}
             isChecked={isCheckedDocuments}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -381,7 +386,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
-            name={"isCheckedThirdParty"}
+            name="isCheckedThirdParty"
             key={2}
             isChecked={isCheckedThirdParty}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -396,7 +401,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
-            name={"isCheckedThirdPartyStorage"}
+            name="isCheckedThirdPartyStorage"
             key={3}
             isChecked={isCheckedThirdPartyStorage}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}

@@ -65,97 +65,149 @@ class SsoFormStore {
 
   // idpSettings
   entityId = "";
+
   ssoUrlPost = "";
+
   ssoUrlRedirect = "";
+
   ssoBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
+
   sloUrlPost = "";
+
   sloUrlRedirect = "";
+
   sloBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
+
   nameIdFormat = SSO_NAME_ID_FORMAT[0];
 
   idpCertificate = "";
+
   idpPrivateKey = null;
+
   idpAction = SSO_SIGNING;
+
   idpCertificates = [];
 
   // idpCertificateAdvanced
   idpDecryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   // no checkbox for that
   ipdDecryptAssertions = false;
+
   idpVerifyAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+
   idpVerifyAuthResponsesSign = false;
+
   idpVerifyLogoutRequestsSign = false;
+
   idpVerifyLogoutResponsesSign = false;
 
   spCertificate = "";
+
   spPrivateKey = "";
+
   spAction = SSO_SIGNING;
+
   spCertificates = [];
 
   // spCertificateAdvanced
   // null for some reason and no checkbox
   spDecryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   spEncryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   spEncryptAssertions = false;
+
   spSignAuthRequests = false;
+
   spSignLogoutRequests = false;
+
   spSignLogoutResponses = false;
+
   spSigningAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
   // spVerifyAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
 
   // Field mapping
   firstName = SSO_GIVEN_NAME;
+
   lastName = SSO_SN;
+
   email = SSO_EMAIL;
+
   location = SSO_LOCATION;
+
   title = SSO_TITLE;
+
   phone = SSO_PHONE;
 
   usersType = EmployeeType.User;
+
   hideAuthPage = false;
 
   // sp metadata
   spEntityId = "";
+
   spAssertionConsumerUrl = "";
+
   spSingleLogoutUrl = "";
 
   // hide parts of form
   serviceProviderSettings = false;
+
   idpShowAdditionalParameters = true;
+
   spShowAdditionalParameters = true;
+
   spMetadata = false;
+
   idpIsModalVisible = false;
+
   spIsModalVisible = false;
+
   confirmationResetModal = false;
 
   // errors
   uploadXmlUrlHasError = false;
+
   spLoginLabelHasError = false;
 
   entityIdHasError = false;
+
   ssoUrlPostHasError = false;
+
   ssoUrlRedirectHasError = false;
+
   sloUrlPostHasError = false;
+
   sloUrlRedirectHasError = false;
 
   firstNameHasError = false;
+
   lastNameHasError = false;
+
   emailHasError = false;
+
   locationHasError = false;
+
   titleHasError = false;
+
   phoneHasError = false;
 
   // error messages
-  //uploadXmlUrlErrorMessage = null;
+  // uploadXmlUrlErrorMessage = null;
 
   errorMessage = null;
 
   isSubmitLoading = false;
+
   isGeneratedCertificate = false;
+
   isCertificateLoading = false;
 
   defaultSettings = null;
+
   editIndex = 0;
+
   isEdit = false;
 
   isInit = false;
@@ -192,7 +244,7 @@ class SsoFormStore {
       this.hideErrors();
     }
 
-    for (let key in this) {
+    for (const key in this) {
       if (key.includes("ErrorMessage")) this[key] = null;
     }
   };
@@ -349,9 +401,9 @@ class SsoFormStore {
       spLoginLabel: this.spLoginLabel,
       idpSettings: {
         entityId: this.entityId,
-        ssoUrl: ssoUrl,
+        ssoUrl,
         ssoBinding: this.ssoBinding,
-        sloUrl: sloUrl,
+        sloUrl,
         sloBinding: this.sloBinding,
         nameIdFormat: this.nameIdFormat,
       },
@@ -386,6 +438,7 @@ class SsoFormStore {
       usersType: this.usersType,
     };
   };
+
   saveSsoSettings = async (t) => {
     this.checkRequiredFields();
 
@@ -465,10 +518,10 @@ class SsoFormStore {
 
     this.nameIdFormat = nameIdFormat;
 
-    //idpCertificates
+    // idpCertificates
     this.idpCertificates = [...idpCertificates];
 
-    //idpCertificateAdvanced
+    // idpCertificateAdvanced
     this.idpVerifyAlgorithm = verifyAlgorithm;
     this.idpVerifyAuthResponsesSign = verifyAuthResponsesSign;
     this.idpVerifyLogoutRequestsSign = verifyLogoutRequestsSign;
@@ -481,10 +534,10 @@ class SsoFormStore {
 
     this.serviceProviderSettings = false;
 
-    //spCertificates
+    // spCertificates
     this.spCertificates = [...spCertificates];
 
-    //spCertificateAdvanced
+    // spCertificateAdvanced
     this.spSigningAlgorithm = signingAlgorithm;
     this.spSignAuthRequests = signAuthRequests;
     this.spSignLogoutRequests = signLogoutRequests;
@@ -493,7 +546,7 @@ class SsoFormStore {
     this.spDecryptAlgorithm = spDecryptAlgorithm;
     this.spEncryptAssertions = encryptAssertions;
 
-    //fieldMapping
+    // fieldMapping
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -535,9 +588,9 @@ class SsoFormStore {
     if (
       obj.hasOwnProperty("binding") &&
       obj.hasOwnProperty("location") &&
-      obj["binding"] == propName
+      obj.binding == propName
     )
-      return obj["location"];
+      return obj.location;
 
     if (Array.isArray(obj)) {
       obj.forEach(function (item) {
@@ -549,10 +602,9 @@ class SsoFormStore {
         if (
           item.hasOwnProperty("binding") &&
           item.hasOwnProperty("location") &&
-          item["binding"] == propName
+          item.binding == propName
         ) {
-          value = item["location"];
-          return;
+          value = item.location;
         }
       });
     }
@@ -561,7 +613,7 @@ class SsoFormStore {
   };
 
   includePropertyValue = (obj, value) => {
-    let props = Object.getOwnPropertyNames(obj);
+    const props = Object.getOwnPropertyNames(obj);
     for (let i = 0; i < props.length; i++) {
       if (obj[props[i]] === value) return true;
     }
@@ -603,21 +655,21 @@ class SsoFormStore {
 
     if (meta.nameIDFormat) {
       if (Array.isArray(meta.nameIDFormat)) {
-        let formats = meta.nameIDFormat.filter((format) => {
+        const formats = meta.nameIDFormat.filter((format) => {
           return this.includePropertyValue(SSO_NAME_ID_FORMAT, format);
         });
         if (formats.length) {
           this.nameIdFormat = formats[0];
         }
-      } else {
-        if (this.includePropertyValue(SSO_NAME_ID_FORMAT, meta.nameIDFormat)) {
-          this.nameIdFormat = meta.nameIDFormat;
-        }
+      } else if (
+        this.includePropertyValue(SSO_NAME_ID_FORMAT, meta.nameIDFormat)
+      ) {
+        this.nameIdFormat = meta.nameIDFormat;
       }
     }
 
     if (meta.certificate) {
-      let data = [];
+      const data = [];
 
       if (meta.certificate.signing) {
         if (Array.isArray(meta.certificate.signing)) {
@@ -866,7 +918,7 @@ class SsoFormStore {
   getError = (field) => {
     const fieldError = `${field}HasError`;
     console.log("getError", fieldError);
-    return this[fieldError] !== null ? true : false;
+    return this[fieldError] !== null;
   };
 
   setError = (field, value) => {
@@ -891,7 +943,7 @@ class SsoFormStore {
   };
 
   hideErrors = () => {
-    for (let key in this) {
+    for (const key in this) {
       if (key.includes("HasError") && this[key] !== false) {
         console.log("key", key);
         this[key] = false;
@@ -929,7 +981,7 @@ class SsoFormStore {
   };
 
   get hasErrors() {
-    for (let key in this) {
+    for (const key in this) {
       if (key.includes("HasError") && this[key] !== false) return true;
     }
     return false;
@@ -990,7 +1042,7 @@ class SsoFormStore {
   }
 
   scrollToField = () => {
-    for (let key in this) {
+    for (const key in this) {
       if (key.includes("HasError") && this[key] !== false) {
         const name = key.replace("HasError", "");
         const element = document.getElementsByName(name)?.[0];

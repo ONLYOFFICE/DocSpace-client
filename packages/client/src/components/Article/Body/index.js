@@ -31,19 +31,18 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
-import Items from "./Items";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
-
-import Banner from "./Banner";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { showProgress } from "@docspace/shared/utils/common";
+import Banner from "./Banner";
+import Items from "./Items";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -188,7 +187,7 @@ const ArticleBodyContent = (props) => {
 
       const isAccountsClick = folderId === "accounts";
 
-      let withTimer = isAccountsClick
+      const withTimer = isAccountsClick
         ? window.location.pathname.includes("accounts") &&
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;

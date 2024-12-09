@@ -230,7 +230,7 @@ const AvatarEditorDialog = (props) => {
           label={t("Common:SaveButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSave ? () => onSave(image) : onSaveClick}
           isLoading={isLoading}
         />

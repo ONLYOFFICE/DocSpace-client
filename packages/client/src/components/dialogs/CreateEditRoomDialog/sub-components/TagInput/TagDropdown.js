@@ -26,10 +26,9 @@
 
 import React, { useRef, useState, useEffect } from "react";
 
-import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
-
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
+import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
 const TagDropdown = ({
   open,

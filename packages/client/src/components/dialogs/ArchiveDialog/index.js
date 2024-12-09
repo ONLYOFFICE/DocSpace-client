@@ -86,7 +86,7 @@ const ArchiveDialogComponent = (props) => {
         {t("ArchiveDialog:ArchiveHeader")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>{description}</Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

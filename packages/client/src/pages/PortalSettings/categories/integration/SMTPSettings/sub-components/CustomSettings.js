@@ -33,9 +33,9 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { EmailInput } from "@docspace/shared/components/email-input";
 import ButtonContainer from "./ButtonContainer";
 
 const {

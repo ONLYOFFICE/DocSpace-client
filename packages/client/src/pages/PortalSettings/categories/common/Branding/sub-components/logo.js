@@ -26,11 +26,10 @@
 
 import React from "react";
 
-import { getLogoFromPath } from "@docspace/shared/utils";
+import { getLogoFromPath, isMobile } from "@docspace/shared/utils";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { isMobile } from "@docspace/shared/utils";
 
 import DocumentSample from "PUBLIC_DIR/images/logo/document_sample.svg?url";
 import PdfFormSample from "PUBLIC_DIR/images/logo/pdf_form_sample.svg?url";

@@ -42,6 +42,5 @@ export const getStepTitle = (t, stepIndex) => {
     case 6:
       return t("Settings:DataImportComplete");
     default:
-      return;
   }
 };

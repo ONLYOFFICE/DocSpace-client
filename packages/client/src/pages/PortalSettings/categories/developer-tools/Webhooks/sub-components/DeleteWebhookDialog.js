@@ -82,7 +82,7 @@ export const DeleteWebhookDialog = ({
             id="delete-forever-button"
             label={t("EmptyTrashDialog:DeleteForeverButton")}
             size="normal"
-            primary={true}
+            primary
             onClick={handleDeleteClick}
           />
           <Button

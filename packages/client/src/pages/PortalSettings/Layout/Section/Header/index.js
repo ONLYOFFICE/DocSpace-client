@@ -36,19 +36,19 @@ import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import LoaderSectionHeader from "../loaderSectionHeader";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
+import TariffBar from "SRC_DIR/components/TariffBar";
+import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
 import {
   getKeyByLink,
   settingsTree,
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import TariffBar from "SRC_DIR/components/TariffBar";
-import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
+import LoaderSectionHeader from "../loaderSectionHeader";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -230,7 +230,7 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
-    let newArrayOfParams = getArrayOfParams();
+    const newArrayOfParams = getArrayOfParams();
     newArrayOfParams.splice(-1, 1);
     const newPath = newArrayOfParams.join("/");
     navigate(newPath);
@@ -295,14 +295,12 @@ const SectionHeaderContent = (props) => {
   const arrayOfParams = getArrayOfParams();
 
   const menuItems = (
-    <>
-      <DropDownItem
-        key="all"
-        label={t("Common:SelectAll")}
-        data-index={1}
-        onClick={onSelectAll}
-      />
-    </>
+    <DropDownItem
+      key="all"
+      label={t("Common:SelectAll")}
+      data-index={1}
+      onClick={onSelectAll}
+    />
   );
 
   const headerMenu = isOAuth
@@ -356,12 +354,12 @@ const SectionHeaderContent = (props) => {
               <IconButton
                 iconName={ArrowPathReactSvgUrl}
                 size="17"
-                isFill={true}
+                isFill
                 onClick={onBackToParent}
                 className="arrow-button"
               />
             )}
-          <Headline type="content" truncate={true}>
+          <Headline type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
@@ -374,7 +372,7 @@ const SectionHeaderContent = (props) => {
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
-                  isPaidBadge={true}
+                  isPaidBadge
                 />
               ) : (
                 ""
@@ -390,7 +388,7 @@ const SectionHeaderContent = (props) => {
               <IconButton
                 iconName={ActionsHeaderTouchReactSvgUrl}
                 size="17"
-                isFill={true}
+                isFill
                 onClick={onToggleSelector}
                 className="action-button"
               />

@@ -74,7 +74,7 @@ const CommonWhiteLabel = ({
                 : globalColors.favoriteStatusDark
             }
             label={t("Common:Paid")}
-            isPaidBadge={true}
+            isPaidBadge
           />
         )}
       </div>
@@ -95,7 +95,7 @@ const CommonWhiteLabel = ({
         <FieldContainer
           id="fieldContainerCompanyName"
           labelText={t("Common:CompanyName")}
-          isVertical={true}
+          isVertical
           className="settings_unavailable"
         >
           <TextInput
@@ -104,8 +104,8 @@ const CommonWhiteLabel = ({
             onChange={onChangeCompanyName}
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
-            scale={true}
-            isAutoFocussed={true}
+            scale
+            isAutoFocussed
             tabIndex={1}
             maxLength={30}
           />
@@ -275,7 +275,7 @@ const CommonWhiteLabel = ({
             {logoUrlsWhiteLabel[3].size.height})
           </Text>
           <Logo
-            isEditor={true}
+            isEditor
             src={logoUrlsWhiteLabel[3].path.light}
             inputId="logoUploader_4_light"
             onChangeText={t("ChangeLogoButton")}
@@ -311,7 +311,7 @@ const CommonWhiteLabel = ({
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
-        displaySettings={true}
+        displaySettings
         showReminder={isSettingPaid}
         saveButtonDisabled={isEqualLogo && isEqualText}
         isSaving={isSaving}

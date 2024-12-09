@@ -79,7 +79,7 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
     setIsHovered(false);
   };
 
-  const newBadge = React.cloneElement(badge, { isHovered: isHovered });
+  const newBadge = React.cloneElement(badge, { isHovered });
 
   return (
     <StyledWrapper
@@ -280,8 +280,8 @@ const Badges = ({
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
             label={t("VersionBadge", { version: countVersions })}
             {...onShowVersionHistoryProp}
-            noHover={true}
-            isVersionBadge={true}
+            noHover
+            isVersionBadge
             title={t("ShowVersionHistory")}
           />
         </BadgeWrapper>
@@ -310,8 +310,8 @@ const Badges = ({
   ) : (
     <div
       className={classNames("badges", {
-        ["folder__badges"]: isFolder && !isRoom,
-        ["room__badges"]: isRoom,
+        folder__badges: isFolder && !isRoom,
+        room__badges: isRoom,
       })}
     >
       {showCopyLinkIcon && (

@@ -408,10 +408,10 @@ class FilesTableHeader extends React.Component {
     const { isRooms, isTrashFolder, isRecentTab, isIndexing } = this.props;
 
     if (isRooms) return this.getRoomsColumns();
-    else if (isTrashFolder) return this.getTrashFolderColumns();
-    else if (isRecentTab) return this.getRecentTabColumns();
-    else if (isIndexing) return this.getIndexingColumns();
-    else return this.getFilesColumns();
+    if (isTrashFolder) return this.getTrashFolderColumns();
+    if (isRecentTab) return this.getRecentTabColumns();
+    if (isIndexing) return this.getIndexingColumns();
+    return this.getFilesColumns();
   };
 
   getTableColumns = (fromUpdate = false) => {
@@ -428,7 +428,7 @@ class FilesTableHeader extends React.Component {
 
     const defaultColumns = this.getDefaultColumns();
 
-    let columns = getColumns(defaultColumns, isRecentTab);
+    const columns = getColumns(defaultColumns, isRecentTab);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =

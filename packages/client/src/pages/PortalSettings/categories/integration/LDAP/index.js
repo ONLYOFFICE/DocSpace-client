@@ -34,15 +34,15 @@ import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 
-import StyledLdapPage from "./styled-components/StyledLdapPage";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import StyledLdapPage from "./styled-components/StyledLdapPage";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LDAP = ({
   ldapSettingsUrl,

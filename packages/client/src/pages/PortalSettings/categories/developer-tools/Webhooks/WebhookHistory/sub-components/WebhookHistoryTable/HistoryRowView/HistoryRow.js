@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Row } from "@docspace/shared/components/row";
-import { HistoryRowContent } from "./HistoryRowContent";
 
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -38,6 +37,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { useTranslation } from "react-i18next";
+import { HistoryRowContent } from "./HistoryRowContent";
 
 const HistoryRow = (props) => {
   const {
@@ -56,7 +56,7 @@ const HistoryRow = (props) => {
   const { id } = useParams();
 
   const redirectToDetails = () =>
-    navigate(window.location.pathname + `/${historyItem.id}`);
+    navigate(`${window.location.pathname}/${historyItem.id}`);
   const handleRetryEvent = async () => {
     await retryWebhookEvent(historyItem.id);
     await fetchHistoryItems({

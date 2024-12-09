@@ -33,10 +33,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
-import Body from "./sub-components/Body";
-import Footer from "./sub-components/Footer";
 import api from "@docspace/shared/api";
 import { EmployeeType } from "@docspace/shared/enums";
+import Body from "./sub-components/Body";
+import Footer from "./sub-components/Footer";
+
 const { Filter } = api;
 
 const StyledBodyContent = styled.div`
@@ -98,11 +99,10 @@ const DataReassignmentDialog = ({
     filter.area = "people";
 
     getUsersList(filter, true);
-    return;
   };
 
   useEffect(() => {
-    //If click Delete user
+    // If click Delete user
     if (isDeletingUserWithReassignment) onReassign();
 
     return () => {
@@ -146,7 +146,7 @@ const DataReassignmentDialog = ({
   const checkProgress = () => {
     dataReassignmentProgress(user.id)
       .then((res) => {
-        //If the task has already been interrupted and killed
+        // If the task has already been interrupted and killed
         if (!res) return;
 
         if (res.error) {

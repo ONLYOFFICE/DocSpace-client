@@ -28,8 +28,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import Dialog from "./sub-components/Dialog";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import Dialog from "./sub-components/Dialog";
 
 const RenameEvent = ({
   type,
@@ -77,11 +77,10 @@ const RenameEvent = ({
       onCancel();
 
       return completeAction(item, type);
-    } else {
-      timerId = setTimeout(() => {
-        isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
-      }, 500);
     }
+    timerId = setTimeout(() => {
+      isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
+    }, 500);
 
     isFile
       ? updateFile(item.id, value)

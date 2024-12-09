@@ -31,11 +31,9 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import StatusBadge from "../../../../sub-components/StatusBadge";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -43,6 +41,7 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useTranslation } from "react-i18next";
+import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledTableRow = styled(TableRow)`
   .textOverflow {
@@ -93,7 +92,7 @@ const HistoryTableRow = (props) => {
   const { id } = useParams();
 
   const redirectToDetails = () =>
-    navigate(window.location.pathname + `/${item.id}`);
+    navigate(`${window.location.pathname}/${item.id}`);
   const handleRetryEvent = async () => {
     if (isRetryPending) {
       return;
@@ -124,13 +123,10 @@ const HistoryTableRow = (props) => {
     },
   ];
 
-  const formattedDelivery =
-    moment(item.delivery)
-      .tz(window.timezone)
-      .locale(i18n.language)
-      .format("MMM D, YYYY, h:mm:ss A") +
-    " " +
-    t("Common:UTC");
+  const formattedDelivery = `${moment(item.delivery)
+    .tz(window.timezone)
+    .locale(i18n.language)
+    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
 
   const onRowClick = (e) => {
     if (

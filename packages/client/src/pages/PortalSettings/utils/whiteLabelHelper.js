@@ -117,14 +117,14 @@ export const getLogoOptions = (index, text, width, height) => {
         height,
       };
     default:
-      return { fontSize: 32, text: text, width: 422, height: 48 };
+      return { fontSize: 32, text, width: 422, height: 48 };
   }
 };
 
 export const uploadLogo = async (file, type) => {
   try {
     const { width, height } = await getUploadedFileDimensions(file);
-    let data = new FormData();
+    const data = new FormData();
     data.append("file", file);
     data.append("width", width);
     data.append("height", height);
@@ -145,11 +145,11 @@ export const uploadLogo = async (file, type) => {
 const getUploadedFileDimensions = (file) =>
   new Promise((resolve, reject) => {
     try {
-      let img = new Image();
+      const img = new Image();
 
       img.onload = () => {
-        const width = img.naturalWidth,
-          height = img.naturalHeight;
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
 
         window.URL.revokeObjectURL(img.src);
 

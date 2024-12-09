@@ -31,12 +31,12 @@ import styled, { css } from "styled-components";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/shared/components/link";
-import ProfileMenu from "./profile-menu";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Button } from "@docspace/shared/components/button";
 import { getUserType } from "@docspace/shared/utils/common";
+import ProfileMenu from "./profile-menu";
 
 const StyledDiv = styled.div`
   width: 32px;
@@ -71,7 +71,7 @@ class ProfileActions extends React.PureComponent {
   }
 
   setOpened = (opened) => {
-    this.setState({ opened: opened });
+    this.setState({ opened });
   };
 
   componentDidMount() {
@@ -133,11 +133,11 @@ class ProfileActions extends React.PureComponent {
   getAvatar = async () => {
     const user = await api.people.getUser();
     const avatar = user?.hasAvatar ? user.avatar : DefaultUserPhoto;
-    this.setState({ avatar: avatar });
+    this.setState({ avatar });
   };
 
   render() {
-    //console.log("Layout sub-component ProfileActions render");
+    // console.log("Layout sub-component ProfileActions render");
     const { user, opened, avatar } = this.state;
     const userRole = getUserType(user);
 
@@ -170,19 +170,19 @@ class ProfileActions extends React.PureComponent {
                   <StyledButtonWrapper key={action.key}>
                     <Button
                       size="normal"
-                      scale={true}
+                      scale
                       label={action.label}
                       onClick={action.onClick}
                     />
                   </StyledButtonWrapper>
                 ) : (
                   <Link
-                    noHover={true}
+                    noHover
                     key={action.key}
                     href={action.url}
                     onClick={this.onClickItemLink}
                   >
-                    <StyledDropDownItem {...action} noHover={true} />
+                    <StyledDropDownItem {...action} noHover />
                   </Link>
                 )),
             )}

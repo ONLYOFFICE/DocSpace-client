@@ -67,12 +67,12 @@ const SectionHeaderContent = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onClickBack}
         className="arrow-button"
       />
 
-      <Headline className="headline-header" type="content" truncate={true}>
+      <Headline className="headline-header" type="content" truncate>
         {title}
       </Headline>
     </StyledContainer>

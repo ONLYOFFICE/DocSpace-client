@@ -63,7 +63,7 @@ const CancelUploadDialog = ({
           label={t("Common:Yes")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onCancelProcess}
           isLoading={loading}
         />

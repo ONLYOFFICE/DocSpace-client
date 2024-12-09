@@ -34,13 +34,13 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
+import { globalColors } from "@docspace/shared/themes";
 import {
   CategorySubHeader,
   ControlsGroup,
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
-import { globalColors } from "@docspace/shared/themes";
 
 export const MainElementParameter = ({
   t,
@@ -109,7 +109,7 @@ export const MainElementParameter = ({
         selected={selectedElementType}
         onClick={toggleButtonMode}
         spacing="8px"
-        isDisabled={true}
+        isDisabled
       />
       {config.isButtonMode && (
         <>

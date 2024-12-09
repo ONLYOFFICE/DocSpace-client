@@ -158,7 +158,7 @@ class AmazonSettings extends React.Component {
     }
 
     this.state = {
-      region: defaultRegionValue ? defaultRegionValue : this.regions[0],
+      region: defaultRegionValue || this.regions[0],
     };
   }
 
@@ -166,7 +166,7 @@ class AmazonSettings extends React.Component {
     const { formSettings } = this.props;
 
     if (formSettings[region] !== prevProps.formSettings[region]) {
-      for (let value of this.regions) {
+      for (const value of this.regions) {
         if (value.systemName === formSettings[region]) {
           this.region = value.label;
 
@@ -178,6 +178,7 @@ class AmazonSettings extends React.Component {
       }
     }
   }
+
   onSelectEncryptionMethod = (options) => {
     const {
       addValueInFormSettings,
@@ -219,6 +220,7 @@ class AmazonSettings extends React.Component {
     addValueInFormSettings(sse, value);
     setIsThirdStorageChanged(true);
   };
+
   onSelectManagedKeys = (options) => {
     const {
       addValueInFormSettings,
@@ -236,6 +238,7 @@ class AmazonSettings extends React.Component {
 
     setIsThirdStorageChanged(true);
   };
+
   onSelectRegion = (options) => {
     const { addValueInFormSettings, setIsThirdStorageChanged } = this.props;
 
@@ -282,20 +285,16 @@ class AmazonSettings extends React.Component {
 
     const renderTooltip = (helpInfo, className) => {
       return (
-        <>
-          <HelpButton
-            className={className}
-            offsetRight={0}
-            iconName={HelpReactSvgUrl}
-            tooltipContent={
-              <>
-                <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
-                  {helpInfo}
-                </Trans>
-              </>
-            }
-          />
-        </>
+        <HelpButton
+          className={className}
+          offsetRight={0}
+          iconName={HelpReactSvgUrl}
+          tooltipContent={
+            <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
+              {helpInfo}
+            </Trans>
+          }
+        />
       );
     };
 
@@ -346,8 +345,8 @@ class AmazonSettings extends React.Component {
             }}
             onSelect={this.onSelectRegion}
             noBorder={false}
-            scaled={true}
-            scaledOptions={true}
+            scaled
+            scaledOptions
             dropDownMaxHeight={300}
             isDisabled={this.isDisabled}
             tabIndex={2}
@@ -378,7 +377,7 @@ class AmazonSettings extends React.Component {
             id="force-path-style"
             name={forcepathstyle}
             label={this.forcePathStylePlaceholder}
-            isChecked={formSettings[forcepathstyle] === "false" ? false : true}
+            isChecked={formSettings[forcepathstyle] !== "false"}
             isIndeterminate={false}
             isDisabled={this.isDisabled}
             onChange={this.onChangeCheckbox}
@@ -399,7 +398,7 @@ class AmazonSettings extends React.Component {
             className="backup_checkbox"
             name={usehttp}
             label={this.useHttpPlaceholder}
-            isChecked={formSettings[usehttp] === "false" ? false : true}
+            isChecked={formSettings[usehttp] !== "false"}
             isIndeterminate={false}
             isDisabled={this.isDisabled}
             onChange={this.onChangeCheckbox}
@@ -425,8 +424,8 @@ class AmazonSettings extends React.Component {
             }}
             onSelect={this.onSelectEncryptionMethod}
             noBorder={false}
-            scaled={true}
-            scaledOptions={true}
+            scaled
+            scaledOptions
             dropDownMaxHeight={300}
             isDisabled={this.isDisabled}
             tabIndex={7}
@@ -441,7 +440,7 @@ class AmazonSettings extends React.Component {
               className="backup_radio-button-settings"
               value=""
               label={this.sse_s3}
-              isChecked={formSettings[sse] === sse_s3 ? true : false}
+              isChecked={formSettings[sse] === sse_s3}
               onClick={this.onSelectEncryptionMode}
               name={sse_s3}
               isDisabled={this.isDisabled}
@@ -452,7 +451,7 @@ class AmazonSettings extends React.Component {
               className="backup_radio-button-settings"
               value=""
               label={this.sse_kms}
-              isChecked={formSettings[sse] === sse_kms ? true : false}
+              isChecked={formSettings[sse] === sse_kms}
               onClick={this.onSelectEncryptionMode}
               name={sse_kms}
               isDisabled={this.isDisabled}
@@ -460,7 +459,7 @@ class AmazonSettings extends React.Component {
 
             {formSettings[sse] === sse_kms && (
               <>
-                <Text isBold>{"Managed CMK"}</Text>
+                <Text isBold>Managed CMK</Text>
                 <ComboBox
                   className="managed-cmk-combo-box backup_text-input"
                   options={this.managedKeys}
@@ -481,7 +480,7 @@ class AmazonSettings extends React.Component {
 
                 {managedKeys.label === this.customerManager && (
                   <>
-                    <Text isBold>{"KMS Key Id:"}</Text>
+                    <Text isBold>KMS Key Id:</Text>
                     <TextInput
                       id="customer-manager-kms-key-id"
                       name={sse_key}
@@ -502,7 +501,7 @@ class AmazonSettings extends React.Component {
 
         {selectedEncryption === this.clientSideEncryption && (
           <>
-            <Text isBold>{"KMS Key Id:"}</Text>
+            <Text isBold>KMS Key Id:</Text>
             <TextInput
               id="client-side-encryption-kms-key-id"
               name={sse_key}

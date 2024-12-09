@@ -152,7 +152,7 @@ const CompanyInfoSettingsComponent = (props) => {
   }, [companyInfoSettingsData, tReady]);
 
   const getSettings = () => {
-    //await getCompanyInfoSettings();
+    // await getCompanyInfoSettings();
     const companySettings = getFromSessionStorage("companySettings");
     const defaultCompanySettingsData = {
       address: companyInfoSettingsData?.address,
@@ -381,7 +381,7 @@ const CompanyInfoSettingsComponent = (props) => {
           <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Settings">
             "This information will be displayed in the
             {isSettingPaid ? (
-              <Link className="link" onClick={onShowExample} noHover={true}>
+              <Link className="link" onClick={onShowExample} noHover>
                 {{ link }}
               </Link>
             ) : (
@@ -395,13 +395,13 @@ const CompanyInfoSettingsComponent = (props) => {
             id="fieldContainerCompanyName"
             className="field-container-width settings_unavailable"
             labelText={t("Common:CompanyName")}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               id="textInputContainerCompanyName"
               className="text-input"
               isDisabled={!isSettingPaid}
-              scale={true}
+              scale
               value={companyName}
               hasError={hasErrorCompanyName}
               onChange={onChangeСompanyName}
@@ -413,13 +413,13 @@ const CompanyInfoSettingsComponent = (props) => {
             isDisabled={!isSettingPaid}
             className="field-container-width settings_unavailable"
             labelText={t("Common:Email")}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               id="textInputContainerEmail"
               className="text-input"
               isDisabled={!isSettingPaid}
-              scale={true}
+              scale
               value={email}
               hasError={hasErrorEmail}
               onChange={onChangeEmail}
@@ -430,13 +430,13 @@ const CompanyInfoSettingsComponent = (props) => {
             id="fieldContainerPhone"
             className="field-container-width settings_unavailable"
             labelText={t("Common:Phone")}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               id="textInputContainerPhone"
               className="text-input"
               isDisabled={!isSettingPaid}
-              scale={true}
+              scale
               value={phone}
               hasError={hasErrorPhone}
               onChange={onChangePhone}
@@ -447,13 +447,13 @@ const CompanyInfoSettingsComponent = (props) => {
             id="fieldContainerWebsite"
             className="field-container-width settings_unavailable"
             labelText={t("Common:Website")}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               id="textInputContainerWebsite"
               className="text-input"
               isDisabled={!isSettingPaid}
-              scale={true}
+              scale
               value={site}
               hasError={hasErrorSite}
               onChange={onChangeSite}
@@ -464,13 +464,13 @@ const CompanyInfoSettingsComponent = (props) => {
             id="fieldContainerAddress"
             className="field-container-width settings_unavailable"
             labelText={t("Common:Address")}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               id="textInputContainerAddress"
               className="text-input"
               isDisabled={!isSettingPaid}
-              scale={true}
+              scale
               value={address}
               hasError={hasErrorAddress}
               onChange={onChangeAddress}
@@ -486,10 +486,10 @@ const CompanyInfoSettingsComponent = (props) => {
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}
-          displaySettings={true}
+          displaySettings
           saveButtonDisabled={isDisabled}
-          hasScroll={true}
-          hideBorder={true}
+          hasScroll
+          hideBorder
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"

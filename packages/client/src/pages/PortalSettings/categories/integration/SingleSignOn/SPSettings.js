@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { Box } from "@docspace/shared/components/box";
 import { size } from "@docspace/shared/utils";
 
+import { DeviceType } from "@docspace/shared/enums";
 import ToggleSSO from "./sub-components/ToggleSSO";
 import IdpSettings from "./IdpSettings";
 import Certificates from "./Certificates";
@@ -38,8 +39,6 @@ import FieldMapping from "./FieldMapping";
 import SubmitResetButtons from "./SubmitButton";
 import AdvancedSettings from "./AdvancedSettings";
 import UsersType from "./UsersType";
-
-import { DeviceType } from "@docspace/shared/enums";
 
 const SPSettings = ({ currentDeviceType }) => {
   const navigate = useNavigate();

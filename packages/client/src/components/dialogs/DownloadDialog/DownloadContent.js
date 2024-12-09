@@ -50,7 +50,7 @@ const DownloadContent = (props) => {
 
   const getTitleExtensions = () => {
     let arr = [];
-    for (let item of items) {
+    for (const item of items) {
       const exst = item.fileExst;
 
       arr = [...arr, ...extsConvertible[exst]];
@@ -69,7 +69,7 @@ const DownloadContent = (props) => {
       },
     ];
 
-    for (let f of arr) {
+    for (const f of arr) {
       formats.push({
         key: f,
         label: f,
@@ -94,7 +94,7 @@ const DownloadContent = (props) => {
         "data-file-id": item.id,
       },
     ];
-    for (let f of arrayFormats) {
+    for (const f of arrayFormats) {
       formats.push({
         key: f,
         label: f,
@@ -166,8 +166,8 @@ const DownloadContent = (props) => {
                 dropdownType="alwaysDashed"
                 fontSize="13px"
                 fontWeight={600}
-                isAside={true}
-                withoutBackground={true}
+                isAside
+                withoutBackground
                 withExpander
               >
                 {titleFormat}

@@ -38,8 +38,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
+import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -301,12 +301,12 @@ const ThirdPartyComboBox = ({
           scaled
           withBackdrop={isMobile}
           size="content"
-          manualWidth={"auto"}
+          manualWidth="auto"
           isMobileView={isMobileOnly}
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          isDefaultMode={true}
+          isDefaultMode
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions

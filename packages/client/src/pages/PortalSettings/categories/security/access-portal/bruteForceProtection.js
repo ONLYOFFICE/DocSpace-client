@@ -28,7 +28,6 @@ import { useState, useEffect } from "react";
 import api from "@docspace/shared/api";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledBruteForceProtection } from "../StyledSecurity";
 import isEqual from "lodash/isEqual";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
@@ -37,10 +36,11 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { Text } from "@docspace/shared/components/text";
 import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
+import { StyledBruteForceProtection } from "../StyledSecurity";
 
 const BruteForceProtection = (props) => {
   const {
@@ -267,9 +267,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("NumberOfAttempts")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorNumberAttempt}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -287,9 +287,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("BlockingTime")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorBlockingTime}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -307,9 +307,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("CheckPeriod")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorCheckPeriod}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -332,7 +332,7 @@ const BruteForceProtection = (props) => {
         showReminder={showReminder}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("RestoreToDefault")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="brute-force-protection-save"
         additionalClassCancelButton="brute-force-protection-cancel"

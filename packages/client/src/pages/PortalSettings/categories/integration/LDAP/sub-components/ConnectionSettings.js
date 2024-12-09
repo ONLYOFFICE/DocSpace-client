@@ -31,14 +31,14 @@ import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import LdapFieldComponent from "./LdapFieldComponent";
 
-const USER_DN = "userDN",
-  SERVER = "server",
-  LOGIN_ATTRIBUTE = "loginAttribute",
-  PORT_NUMBER = "portNumber",
-  USER_FILTER = "userFilter";
+const USER_DN = "userDN";
+const SERVER = "server";
+const LOGIN_ATTRIBUTE = "loginAttribute";
+const PORT_NUMBER = "portNumber";
+const USER_FILTER = "userFilter";
 
-const FIELD_STYLE = { marginBottom: "12px" },
-  LAST_FIELD_STYLE = { marginBottom: "0px" };
+const FIELD_STYLE = { marginBottom: "12px" };
+const LAST_FIELD_STYLE = { marginBottom: "0px" };
 
 const ConnectionSettings = (props) => {
   const {
@@ -88,7 +88,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.server}
           labelText={t("LdapServer")}
@@ -109,7 +109,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userDN}
           labelText={t("LdapUserDN")}
@@ -130,7 +130,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={LAST_FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.loginAttribute}
           labelText={t("LdapLoginAttribute")}
@@ -153,7 +153,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.portNumber}
           labelText={t("LdapPortNumber")}
@@ -176,7 +176,7 @@ const ConnectionSettings = (props) => {
         <FieldContainer
           style={LAST_FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userFilter}
           labelText={t("LdapUserFilter")}

@@ -98,7 +98,7 @@ const getAuthorType = (filterValues) => {
     "key",
   );
 
-  return authorType ? authorType : null;
+  return authorType || null;
 };
 
 const getRoomId = (filterValues) => {
@@ -151,7 +151,7 @@ const getSubjectId = (filterValues) => {
     "key",
   );
 
-  return filterOwner ? filterOwner : null;
+  return filterOwner || null;
 };
 
 const getFilterContent = (filterValues) => {
@@ -162,7 +162,7 @@ const getFilterContent = (filterValues) => {
     "key",
   );
 
-  return filterContent ? filterContent : null;
+  return filterContent || null;
 };
 
 const getTags = (filterValues) => {
@@ -215,12 +215,12 @@ const SectionFilterContent = ({
   isArchiveFolder,
   canSearchByContent,
 
-  //contacts
+  // contacts
   contactsViewAs,
   contactsTab,
   groups,
 
-  //groups
+  // groups
   groupsFilter,
   setGroupsFilter,
 
@@ -301,8 +301,8 @@ const SectionFilterContent = ({
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
-        newFilter.provider = providerType ? providerType : null;
-        newFilter.type = type ? type : null;
+        newFilter.provider = providerType || null;
+        newFilter.type = type || null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -611,17 +611,17 @@ const SectionFilterContent = ({
         const user = await getUser(roomsFilter.subjectId);
         const isMe = userId === roomsFilter.subjectId;
 
-        let label = isMe ? t("Common:MeLabel") : user.displayName;
+        const label = isMe ? t("Common:MeLabel") : user.displayName;
 
         const subject = {
           key: isMe ? FilterKeys.me : roomsFilter.subjectId,
           group: FilterGroups.roomFilterSubject,
-          label: label,
+          label,
         };
 
         if (roomsFilter.subjectFilter?.toString()) {
           if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
-            subject.selectedLabel = t("Common:Owner") + ": " + label;
+            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
           }
 
           filterValues.push(subject);
@@ -641,8 +641,8 @@ const SectionFilterContent = ({
         const label = getRoomTypeName(key, t);
 
         filterValues.push({
-          key: key,
-          label: label,
+          key,
+          label,
           group: FilterGroups.roomFilterType,
         });
       }
@@ -656,7 +656,7 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: roomsFilter.quotaFilter,
-          label: label,
+          label,
           group: FilterGroups.filterQuota,
         });
       }
@@ -676,7 +676,7 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: provider,
-          label: label,
+          label,
           group: FilterGroups.roomFilterProviderType,
         });
       }
@@ -758,7 +758,7 @@ const SectionFilterContent = ({
               : FilterKeys.me
             : filter.authorType.replace("user_", ""),
           group: FilterGroups.filterAuthor,
-          label: label,
+          label,
         });
       }
 
@@ -769,7 +769,7 @@ const SectionFilterContent = ({
         filterValues.push({
           key: filter.roomId,
           group: FilterGroups.filterRoom,
-          label: label,
+          label,
         });
       }
     }
@@ -799,13 +799,11 @@ const SectionFilterContent = ({
             if (isEqual) return item;
 
             return false;
-          } else {
-            if (item.key === v.key) return item;
-            return false;
           }
-        } else {
+          if (item.key === v.key) return item;
           return false;
         }
+        return false;
       });
 
       const newItems = filterValues.filter(

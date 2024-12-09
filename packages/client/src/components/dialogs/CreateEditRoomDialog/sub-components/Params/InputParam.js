@@ -26,11 +26,12 @@
 
 import React from "react";
 import styled from "styled-components";
-import { StyledParam } from "./StyledParam";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { StyledParam } from "./StyledParam";
+
 const StyledInputParam = styled(StyledParam)`
   flex-direction: column;
   gap: 4px;
@@ -74,11 +75,11 @@ const InputParam = React.forwardRef(
         />
 
         <FieldContainer
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!isValidTitle || isWrongTitle}
           errorMessage={errorMessage}
-          errorMessageWidth={"100%"}
+          errorMessageWidth="100%"
         >
           <TextInput
             forwardedRef={ref}

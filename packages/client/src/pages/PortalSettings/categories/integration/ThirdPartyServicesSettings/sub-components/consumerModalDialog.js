@@ -94,7 +94,7 @@ class ConsumerModalDialog extends React.Component {
     const prop = [];
 
     let i = 0;
-    let stateLength = Object.keys(state).length;
+    const stateLength = Object.keys(state).length;
     for (i = 0; i < stateLength; i++) {
       prop.push({
         name: Object.keys(state)[i],
@@ -255,6 +255,7 @@ class ConsumerModalDialog extends React.Component {
       </React.Fragment>
     );
   };
+
   render() {
     const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
       this.props;
@@ -279,11 +280,11 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
           <Box paddingProp="16px 0 16px">{consumerInstruction}</Box>
-          <React.Fragment>
+          <>
             {selectedConsumer.props.map((prop, i) =>
               this.inputsRender(prop, i),
             )}
-          </React.Fragment>
+          </>
           <Text as="div">{supportTeamDescription}</Text>
           <Text as="div">{helpCenterDescription}</Text>
         </ModalDialog.Body>

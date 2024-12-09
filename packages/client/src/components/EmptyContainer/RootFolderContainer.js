@@ -33,7 +33,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import EmptyContainer from "./EmptyContainer";
 import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
@@ -59,6 +58,7 @@ import EmptyScreenTrashSvgUrl from "PUBLIC_DIR/images/empty_screen_trash.svg?url
 import EmptyScreenTrashSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_trash_dark.svg?url";
 import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?url";
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
+import EmptyContainer from "./EmptyContainer";
 
 import CommonButtons from "./sub-components/CommonButtons";
 

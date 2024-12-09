@@ -105,7 +105,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
               label={t("Common:Paid")}
               fontWeight="700"
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
           )}
         </div>

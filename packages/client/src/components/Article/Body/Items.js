@@ -41,12 +41,11 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
-import BonusItem from "./BonusItem";
-import AccountsItem from "./AccountsItem";
-
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import AccountsItem from "./AccountsItem";
+import BonusItem from "./BonusItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -163,7 +162,7 @@ const Item = ({
       dragging={dragging && isDragging}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className={"document-catalog"}
+      className="document-catalog"
     >
       <ArticleItem
         key={item.id}

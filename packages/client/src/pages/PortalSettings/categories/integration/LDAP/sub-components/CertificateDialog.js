@@ -35,8 +35,8 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 
-import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
 import { LDAPCertificateProblem } from "@docspace/shared/enums";
+import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
 
 const CertificateDialog = ({
   setCertificateDialogVisible,

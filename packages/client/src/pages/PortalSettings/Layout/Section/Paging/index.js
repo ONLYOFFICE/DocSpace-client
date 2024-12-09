@@ -148,7 +148,7 @@ const SectionPagingContent = ({
   const selectedCountItem =
     countItems.find((x) => x.key === filter.pageCount) || emptyCountSelection;
 
-  //console.log("SectionPagingContent render", filter);
+  // console.log("SectionPagingContent render", filter);
 
   return isLoaded ? (
     !filter || filter.total < filter.pageCount ? (
@@ -168,8 +168,8 @@ const SectionPagingContent = ({
         previousAction={onPrevClick}
         nextAction={onNextClick}
         openDirection="top"
-        selectedPageItem={selectedPageItem} //FILTER CURRENT PAGE
-        selectedCountItem={selectedCountItem} //FILTER PAGE COUNT
+        selectedPageItem={selectedPageItem} // FILTER CURRENT PAGE
+        selectedCountItem={selectedCountItem} // FILTER PAGE COUNT
       />
     )
   ) : (

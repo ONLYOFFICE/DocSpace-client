@@ -84,7 +84,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
 
   const isLoadingContent = isLoading || !ready;
 
-  //if (!isLoading && !isContentLoaded) return <></>;
+  // if (!isLoading && !isContentLoaded) return <></>;
 
   const textProps = {
     fontSize: "13px",
@@ -101,9 +101,9 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     <>
       <StyledTextContent>
         {isLoadingContent ? (
-          <RectangleSkeleton height={"22px"} width={"57px"} />
+          <RectangleSkeleton height="22px" width="57px" />
         ) : (
-          <Text fontSize={"14px"} fontWeight={600}>
+          <Text fontSize="14px" fontWeight={600}>
             {t("Badges")}
           </Text>
         )}
@@ -126,9 +126,9 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     <>
       <StyledTextContent>
         {isLoadingContent ? (
-          <RectangleSkeleton height={"22px"} width={"57px"} />
+          <RectangleSkeleton height="22px" width="57px" />
         ) : (
-          <Text fontSize={"14px"} fontWeight={600} className="email-title">
+          <Text fontSize="14px" fontWeight={600} className="email-title">
             {t("Common:Email")}
           </Text>
         )}

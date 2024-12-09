@@ -146,7 +146,7 @@ const IconCropper = ({
   const handleSliderChange = (e, newZoom = null) => {
     if (isDisabled) return;
 
-    onChangeIcon({ ...icon, zoom: newZoom ? newZoom : +e.target.value });
+    onChangeIcon({ ...icon, zoom: newZoom || +e.target.value });
   };
 
   const handleZoomInClick = () => {
@@ -220,7 +220,7 @@ const IconCropper = ({
           size="16"
           onClick={handleZoomOutClick}
           iconName={ZoomMinusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />
@@ -238,7 +238,7 @@ const IconCropper = ({
           size="16"
           onClick={handleZoomInClick}
           iconName={ZoomPlusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />

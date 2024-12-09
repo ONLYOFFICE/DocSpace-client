@@ -33,14 +33,14 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import TfaLoader from "../sub-components/loaders/tfa-loader";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -202,13 +202,13 @@ const TwoFactorAuth = (props) => {
             label: t("Common:Disabled"),
             value: "none",
           },
-          //TODO: hide while 2fa by sms is not working
-          /*{
+          // TODO: hide while 2fa by sms is not working
+          /* {
             id: "by-sms",
             label: t("BySms"),
             value: "sms",
             disabled: !smsAvailable,
-          },*/
+          }, */
           {
             id: "by-app",
             label: t("ByApp"),
@@ -228,7 +228,7 @@ const TwoFactorAuth = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="two-factor-auth-save"

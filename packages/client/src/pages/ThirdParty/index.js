@@ -32,6 +32,7 @@ import Section from "@docspace/shared/components/section";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import SectionWrapper from "SRC_DIR/components/Section";
+
 const ThirdPartyResponsePage = ({ match }) => {
   const { params } = match;
   const { provider } = params;

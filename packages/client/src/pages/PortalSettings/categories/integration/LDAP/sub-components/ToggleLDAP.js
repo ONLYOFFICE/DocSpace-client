@@ -33,8 +33,8 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 import { toastr } from "@docspace/shared/components/toast";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -119,7 +119,7 @@ const ToggleLDAP = ({
               }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
           )}
         </div>

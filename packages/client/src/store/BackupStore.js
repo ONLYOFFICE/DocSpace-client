@@ -26,11 +26,6 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
-import {
-  saveToLocalStorage,
-  getFromLocalStorage,
-  removeLocalStorage,
-} from "../pages/PortalSettings/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -39,47 +34,72 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+  removeLocalStorage,
+} from "../pages/PortalSettings/utils";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
   authStore = null;
+
   thirdPartyStore = null;
 
   restoreResource = null;
 
   backupSchedule = {};
+
   backupStorage = {};
 
   defaultDay = "0";
+
   defaultHour = "12:00";
+
   defaultPeriodNumber = "0";
+
   defaultPeriodLabel = "Every day";
+
   defaultMaxCopiesNumber = "10";
 
   defaultWeekday = null;
+
   defaultWeekdayLabel = "";
+
   defaultStorageType = null;
+
   defaultFolderId = null;
+
   defaultMonthDay = "1";
 
   selectedDay = "0";
+
   selectedHour = "12:00";
+
   selectedPeriodNumber = "0";
+
   selectedPeriodLabel = "Every day";
+
   selectedMaxCopiesNumber = "10";
 
   selectedWeekday = null;
+
   selectedWeekdayLabel = "";
+
   selectedStorageType = null;
+
   selectedFolderId = null;
+
   selectedMonthDay = "1";
 
   selectedStorageId = null;
+
   defaultStorageId = null;
 
   thirdPartyStorage = [];
+
   commonThirdPartyList = [];
 
   preparationPortalDialogVisible = false;
@@ -87,22 +107,31 @@ class BackupStore {
   downloadingProgress = 100;
 
   temporaryLink = null;
+
   timerId = null;
 
   isThirdStorageChanged = false;
 
   formSettings = {};
+
   requiredFormSettings = {};
+
   defaultFormSettings = {};
+
   errorsFieldsBeforeSafe = {};
 
   selectedEnableSchedule = false;
+
   defaultEnableSchedule = false;
 
   storageRegions = [];
+
   selectedThirdPartyAccount = null;
+
   connectedThirdPartyAccount = null;
+
   accounts = [];
+
   connectedAccount = [];
 
   constructor(authStore, thirdPartyStore) {
@@ -162,6 +191,7 @@ class BackupStore {
 
     this.setIsThirdStorageChanged(false);
   };
+
   get isChanged() {
     if (this.selectedHour !== this.defaultHour) {
       return true;
@@ -208,8 +238,8 @@ class BackupStore {
 
     this.setConnectedThirdPartyAccount(connectedAccount);
 
-    let accounts = [],
-      selectedAccount = {};
+    let accounts = [];
+    let selectedAccount = {};
     let index = 0;
 
     providers.map((item) => {
@@ -312,8 +342,8 @@ class BackupStore {
       const { folderId, module } = storageParams;
       const { period, day, hour } = cronParams;
 
-      let defaultFormSettings = {};
-      for (let variable in storageParams) {
+      const defaultFormSettings = {};
+      for (const variable in storageParams) {
         if (variable === "module") continue;
         defaultFormSettings[variable] = storageParams[variable];
       }
@@ -405,6 +435,7 @@ class BackupStore {
   setCommonThirdPartyList = (list) => {
     this.commonThirdPartyList = list;
   };
+
   setPeriod = (options) => {
     const key = options.key;
     const label = options.label;
@@ -505,12 +536,12 @@ class BackupStore {
           if (progress !== 100) {
             this.getIntervalProgress(t);
           } else {
-            //this.clearLocalStorage();
+            // this.clearLocalStorage();
           }
         } else {
           this.downloadingProgress = 100;
           clearInterval(this.timerId);
-          //this.clearLocalStorage();
+          // this.clearLocalStorage();
         }
       }
     } catch (e) {
@@ -518,6 +549,7 @@ class BackupStore {
       // this.clearLocalStorage();
     }
   };
+
   getIntervalProgress = (t) => {
     if (this.timerId) {
       return;
@@ -541,7 +573,7 @@ class BackupStore {
             clearInterval(this.timerId);
             this.timerId && toastr.error(error);
             this.timerId = null;
-            //this.clearLocalStorage();
+            // this.clearLocalStorage();
             this.downloadingProgress = 100;
             return;
           }
@@ -552,7 +584,7 @@ class BackupStore {
 
           if (progress === 100) {
             clearInterval(this.timerId);
-            //this.clearLocalStorage();
+            // this.clearLocalStorage();
 
             if (link && link.slice(0, 1) === "/") {
               this.temporaryLink = link;
@@ -619,12 +651,13 @@ class BackupStore {
   deleteValueFormSetting = (key) => {
     delete this.formSettings[key];
   };
+
   getStorageParams = (
     isCheckedThirdPartyStorage,
     selectedFolderId,
     selectedStorageId,
   ) => {
-    let storageParams = [
+    const storageParams = [
       {
         key: isCheckedThirdPartyStorage ? "module" : "folderId",
         value: isCheckedThirdPartyStorage
@@ -656,6 +689,7 @@ class BackupStore {
   setStorageRegions = (regions) => {
     this.storageRegions = regions;
   };
+
   setDefaultFormSettings = (obj) => {
     this.defaultFormSettings = obj;
   };
@@ -663,18 +697,19 @@ class BackupStore {
   get isValidForm() {
     if (Object.keys(this.requiredFormSettings).length == 0) return;
 
-    for (let key of this.requiredFormSettings) {
+    for (const key of this.requiredFormSettings) {
       const elem = this.formSettings[key];
       if (!elem) return false;
       if (!elem.trim()) return false;
     }
     return true;
   }
+
   isFormReady = () => {
-    let errors = {};
+    const errors = {};
     let firstError = false;
 
-    for (let key of this.requiredFormSettings) {
+    for (const key of this.requiredFormSettings) {
       const elem = this.formSettings[key];
 
       errors[key] = !elem.trim();
@@ -691,8 +726,9 @@ class BackupStore {
   setErrorsFormFields = (errors) => {
     this.errorsFieldsBeforeSafe = errors;
   };
+
   setCompletedFormFields = (values, module) => {
-    let formSettingsTemp = {};
+    const formSettingsTemp = {};
 
     if (module && module === this.defaultStorageId) {
       this.setFormSettings({ ...this.defaultFormSettings });
@@ -719,7 +755,7 @@ class BackupStore {
   };
 
   convertServiceName = (serviceName) => {
-    //Docusign, OneDrive, Wordpress
+    // Docusign, OneDrive, Wordpress
     switch (serviceName) {
       case "GoogleDrive":
         return "google";
@@ -759,6 +795,7 @@ class BackupStore {
 
     return res;
   };
+
   uploadLocalFile = async () => {
     try {
       const url = "/backupFileUpload.ashx";

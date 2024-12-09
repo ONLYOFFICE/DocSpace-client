@@ -59,7 +59,7 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onHideContextMenu = () => {
-      //this.props.setSelected("none");
+      // this.props.setSelected("none");
       this.props.setEnabledHotkeys(true);
     };
 
@@ -380,7 +380,7 @@ export default function withFileActions(WrappedFileItem) {
         selectTag,
         selectOption,
         onSelectItem,
-        //setNewBadgeCount,
+        // setNewBadgeCount,
         openFileAction,
         createFoldersTree,
       } = filesActionsStore;
@@ -429,7 +429,7 @@ export default function withFileActions(WrappedFileItem) {
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
 
-      const isFolder = selectedItem ? false : !item.isFolder ? false : true;
+      const isFolder = selectedItem ? false : !!item.isFolder;
 
       const isProgress = (index, items) => {
         if (index === -1) return false;
@@ -499,13 +499,13 @@ export default function withFileActions(WrappedFileItem) {
         allowShareIn: filesStore.canShare,
 
         isSelected: !!selectedItem,
-        //parentFolder: selectedFolderStore.parentId,
+        // parentFolder: selectedFolderStore.parentId,
         setParentId: selectedFolderStore.setParentId,
         setRoomType: selectedFolderStore.setRoomType,
         isTrashFolder: isRecycleBinFolder,
         getFolderInfo,
         viewAs,
-        //setNewBadgeCount,
+        // setNewBadgeCount,
         isActive,
         inProgress,
         setBufferSelection,

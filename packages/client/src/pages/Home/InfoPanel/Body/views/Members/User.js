@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -44,12 +43,12 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
   t,
@@ -262,10 +261,10 @@ const User = ({
 
       {showInviteIcon && (
         <IconButton
-          className={"icon"}
+          className="icon"
           title={t("Common:RepeatInvitation")}
           iconName={EmailPlusReactSvgUrl}
-          isFill={true}
+          isFill
           onClick={onRepeatInvitation}
           size={16}
         />

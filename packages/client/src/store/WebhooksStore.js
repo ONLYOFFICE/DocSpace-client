@@ -40,15 +40,25 @@ class WebhooksStore {
   settingsStore;
 
   webhooks = [];
+
   checkedEventIds = [];
+
   historyFilters = null;
+
   historyItems = [];
+
   startIndex = 0;
+
   totalItems = 0;
+
   currentWebhook = {};
+
   eventDetails = {};
+
   FETCH_COUNT = 100;
+
   isRetryPending = false;
+
   configName = "";
 
   constructor(settingsStore) {
@@ -145,11 +155,11 @@ class WebhooksStore {
   };
 
   retryWebhookEvent = async (id) => {
-    return await retryWebhook(id);
+    return retryWebhook(id);
   };
 
   retryWebhookEvents = async (ids) => {
-    return await retryWebhooks(ids);
+    return retryWebhooks(ids);
   };
 
   fetchConfigName = async (params) => {
@@ -173,7 +183,7 @@ class WebhooksStore {
     const historyData = await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
-      count: count,
+      count,
     });
     runInAction(() => {
       this.startIndex = count;
@@ -181,22 +191,25 @@ class WebhooksStore {
       this.totalItems = historyData.total;
     });
   };
+
   fetchMoreItems = async (params) => {
     const count = params.count ? params.count : this.FETCH_COUNT;
     const historyData = await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
-      count: count,
+      count,
     });
     runInAction(() => {
-      this.startIndex = this.startIndex + count;
+      this.startIndex += count;
       this.historyItems = [...this.historyItems, ...historyData.items];
     });
   };
+
   fetchEventData = async (eventId) => {
     const data = await getWebhooksJournal({ eventId });
     this.eventDetails = data.items[0];
   };
+
   get hasMoreItems() {
     return this.totalItems > this.startIndex;
   }
@@ -208,12 +221,15 @@ class WebhooksStore {
   setHistoryFilters = (filters) => {
     this.historyFilters = filters;
   };
+
   clearHistoryFilters = () => {
     this.historyFilters = null;
   };
+
   clearDate = () => {
     this.historyFilters = { ...this.historyFilters, deliveryDate: null };
   };
+
   unselectStatus = (statusCode) => {
     this.historyFilters = {
       ...this.historyFilters,
@@ -224,15 +240,13 @@ class WebhooksStore {
   formatFilters = (filters) => {
     const params = {};
     if (filters.deliveryDate !== null) {
-      params.deliveryFrom =
-        filters.deliveryDate.format("YYYY-MM-DD") +
-        "T" +
-        filters.deliveryFrom.format("HH:mm:ss");
+      params.deliveryFrom = `${filters.deliveryDate.format(
+        "YYYY-MM-DD",
+      )}T${filters.deliveryFrom.format("HH:mm:ss")}`;
 
-      params.deliveryTo =
-        filters.deliveryDate.format("YYYY-MM-DD") +
-        "T" +
-        filters.deliveryTo.format("HH:mm:ss");
+      params.deliveryTo = `${filters.deliveryDate.format(
+        "YYYY-MM-DD",
+      )}T${filters.deliveryTo.format("HH:mm:ss")}`;
     }
 
     const statusEnum = {
@@ -259,18 +273,23 @@ class WebhooksStore {
       ? this.checkedEventIds.filter((checkedId) => checkedId !== id)
       : [...this.checkedEventIds, id];
   };
+
   isIdChecked = (id) => {
     return this.checkedEventIds.includes(id);
   };
+
   checkAllIds = () => {
     this.checkedEventIds = this.historyItems.map((event) => event.id);
   };
+
   emptyCheckedIds = () => {
     this.checkedEventIds = [];
   };
+
   get areAllIdsChecked() {
     return this.checkedEventIds.length === this.historyItems.length;
   }
+
   get isIndeterminate() {
     return this.checkedEventIds.length > 0 && !this.areAllIdsChecked;
   }

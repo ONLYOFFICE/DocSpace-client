@@ -36,11 +36,11 @@ import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
-const GROUP_DN = "groupDN",
-  GROUP_ATTRIBUTE = "groupAttribute",
-  GROUP_NAME_ATTRIBUTE = "groupNameAttribute",
-  USER_ATTRIBUTE = "userAttribute",
-  GROUP_FILTER = "groupFilter";
+const GROUP_DN = "groupDN";
+const GROUP_ATTRIBUTE = "groupAttribute";
+const GROUP_NAME_ATTRIBUTE = "groupNameAttribute";
+const USER_ATTRIBUTE = "userAttribute";
+const GROUP_FILTER = "groupFilter";
 
 const GroupMembership = (props) => {
   const {
@@ -105,7 +105,7 @@ const GroupMembership = (props) => {
       <Box className="group_membership-container">
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupDN")}
@@ -126,7 +126,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userAttribute}
@@ -148,7 +148,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupFilter")}
           hasError={errors.groupFilter}
@@ -171,7 +171,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.groupNameAttribute}
           labelText={t("LdapGroupNameAttribute")}
@@ -191,7 +191,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.groupAttribute}
           labelText={t("LdapGroupAttribute")}

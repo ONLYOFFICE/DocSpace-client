@@ -45,7 +45,7 @@ const DownloadRow = (props) => {
     isChecked,
   } = props;
 
-  //console.log("DownloadRow render");
+  // console.log("DownloadRow render");
 
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
 
@@ -104,8 +104,8 @@ const DownloadRow = (props) => {
             fontSize="13px"
             fontWeight={600}
             hasScroll={isMobile()}
-            isAside={true}
-            withoutBackground={true}
+            isAside
+            withoutBackground
             withExpander
             manualWidth={isMobile() ? "148px" : undefined}
           >

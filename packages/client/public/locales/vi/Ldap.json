@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng phải được nhập.",
   "LdapUserQuotaTooltip": "Để đặt hạn mức lưu trữ cho người dùng, hãy thêm một thuộc tính vào thư mục LDAP (ví dụ: UsersQuotaLimit) và nhập một giá trị số nguyên cho thuộc tính này. Nó sẽ hiển thị giá trị hạn mức theo byte. Ở đây, chỉ cần chỉ ra tên thuộc tính. Thuộc tính này sẽ chỉ được áp dụng trong lần thiết lập đầu tiên và có thể được thay đổi thủ công sau đó trong phần {{contactsName}}.",
   "LdapUsersType": "Loại người dùng",
-  "LdapUsersTypeInfo": "Người dùng chỉ có thể truy cập vào các phòng mà họ được quản trị viên mời và không thể tạo phòng, thư mục hoặc tập tin riêng. Chọn một loại khác bên dưới để cung cấp thêm quyền. Nếu không, bạn có thể thay đổi loại một cách thủ công trong phần {{contactsName}}.",
   "LdapUserTypeTooltip": "Tất cả người dùng sẽ được thêm vào {{productName}} với loại đã chọn."
 }

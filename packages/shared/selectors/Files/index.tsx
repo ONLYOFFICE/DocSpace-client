@@ -116,6 +116,9 @@ const FilesSelectorComponent = ({
   headerProps,
   shareKey,
   formProps,
+
+  withPadding,
+  folderIsShared,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -465,16 +468,15 @@ const FilesSelectorComponent = ({
       fileName: string,
       isChecked: boolean,
     ) => {
-      const isPublic =
-        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
-          -1 && rootFolderType !== FolderType.Rooms;
+      const inPublicRoom = breadCrumbs.findIndex((f) => f.shared) > -1;
+      const showMoveToPublicDialog = inPublicRoom && !folderIsShared;
 
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       await onSubmit(
         selectedItemId,
         folderTitle,
-        isPublic,
+        showMoveToPublicDialog,
         breadCrumbs,
         fileName,
         isChecked,
@@ -484,11 +486,11 @@ const FilesSelectorComponent = ({
     },
     [
       breadCrumbs,
-      rootFolderType,
       onSubmit,
       selectedItemId,
       selectedTreeNode,
       selectedFileInfo,
+      folderIsShared,
     ],
   );
 
@@ -644,6 +646,7 @@ const FilesSelectorComponent = ({
       disableFirstFetch
       withInfoBar={withInfoBar}
       infoBarData={infoBarData}
+      withPadding={withPadding}
     />
   );
 

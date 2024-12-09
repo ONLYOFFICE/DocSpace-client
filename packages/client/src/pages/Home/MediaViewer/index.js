@@ -165,7 +165,7 @@ const FilesMediaViewer = (props) => {
 
     if (queryParams.has(queryName)) {
       queryParams.delete(queryName);
-      navigate(_, {
+      window.location.replace({
         search: queryParams.toString(),
       });
     }
@@ -249,12 +249,7 @@ const FilesMediaViewer = (props) => {
         setScrollToItem({ id: targetFile.id, type: "file" });
       }
 
-      navigate(url, {
-        state: {
-          ...location.state,
-          disableScrollToTop: true,
-        },
-      });
+      window.history.pushState("", "", url);
     },
     [
       files,

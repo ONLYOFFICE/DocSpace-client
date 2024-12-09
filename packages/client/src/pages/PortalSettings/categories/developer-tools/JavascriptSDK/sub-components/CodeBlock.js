@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import { Base, globalColors } from "@docspace/shared/themes";
@@ -36,17 +36,22 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 const StyledContainer = styled.div`
   border: 1px solid ${(props) => props.theme.plugins.borderColor};
   border-radius: 6px;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   overflow: hidden;
   background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
+
+  .cm-scroller {
+    overflow-x: hidden;
+  }
 `;
 
 StyledContainer.defaultProps = { theme: Base };
 
-const CodeBlock = ({ config }) => {
+const CodeBlock = ({ config, theme }) => {
   const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${SDK_SCRIPT_URL}");\nscript.onload = () => window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
 
-  const extensions = [javascript({ jsx: true })];
+  const extensions = [javascript({ jsx: true }), EditorView.lineWrapping];
 
   const baseTheme = githubLightInit({
     settings: {
@@ -74,7 +79,6 @@ const CodeBlock = ({ config }) => {
     <StyledContainer dir="ltr">
       <CodeMirror
         value={codeString}
-        maxWidth="800px"
         theme={theme.isBase ? baseTheme : darkTheme}
         extensions={extensions}
         editable={true}

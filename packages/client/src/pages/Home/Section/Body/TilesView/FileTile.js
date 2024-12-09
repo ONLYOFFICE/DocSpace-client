@@ -82,7 +82,6 @@ const FileTile = (props) => {
     withCtrlSelect,
     withShiftSelect,
     isHighlight,
-    thumbnails1280x720,
     onDragOver,
     onDragLeave,
     badgeUrl,
@@ -184,7 +183,6 @@ const FileTile = (props) => {
           withCtrlSelect={withCtrlSelect}
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
-          thumbnails1280x720={thumbnails1280x720}
           iconProgress={icon}
           isDownload={isDownload}
         >
@@ -205,7 +203,7 @@ export default inject(
     { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
     { item },
   ) => {
-    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
+    const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
@@ -224,7 +222,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      thumbnails1280x720,
       icon,
       isDownload,
     };

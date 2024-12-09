@@ -100,7 +100,10 @@ import {
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
-import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  removeOptions,
+} from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
 import {
@@ -1139,6 +1142,8 @@ class ContextOptionsStore {
       },
     ];
 
+    const canMute = item.security?.Mute && !this.publicRoomStore.isPublicRoom;
+
     const muteOptions = [
       {
         id: "option_unmute-room",
@@ -1146,7 +1151,7 @@ class ContextOptionsStore {
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: !canMute,
         "data-action": "unmute",
         action: "unmute",
       },
@@ -1156,7 +1161,7 @@ class ContextOptionsStore {
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: (e) => this.onClickMute(e, item, t),
-        disabled: !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: !canMute,
         "data-action": "mute",
         action: "mute",
       },
@@ -1227,7 +1232,7 @@ class ContextOptionsStore {
         {
           key: "separator0",
           isSeparator: true,
-          disabled: !item.security?.Download,
+          disabled: !item.security?.Download || this.settingsStore.isFrame,
         },
         {
           key: "public-room_edit",
@@ -1329,10 +1334,7 @@ class ContextOptionsStore {
       );
       item = { ...item, contextOptions };
     } else {
-      item.contextOptions = this.filesStore.removeOptions(
-        item.contextOptions,
-        optionsToRemove,
-      );
+      item.contextOptions = removeOptions(item.contextOptions, optionsToRemove);
     }
 
     const { isPublicRoom } = this.publicRoomStore;

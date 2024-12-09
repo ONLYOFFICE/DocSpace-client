@@ -56,13 +56,13 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
-import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
-import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
+import { getAvailablePortals } from "@/utils/actions";
+import { getEmailFromInvitation } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -82,6 +82,7 @@ const LoginForm = ({
   reCaptchaPublicKey,
   clientId,
   client,
+  oauthUrl,
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
@@ -297,52 +298,21 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      try {
-        const portals = await getAvailablePortals({
+      const region = oauthUrl?.replace("identity", "");
+      console.log(region);
+      const portals = await getAvailablePortals(
+        {
           Email: user,
           PasswordHash: hash,
           recaptchaResponse: captchaToken,
           recaptchaType: reCaptchaType,
-        });
+        },
+        region,
+      );
 
-        if (portals.length === 1) {
-          const name =
-            !baseDomain || portals[0].portalName.includes(baseDomain)
-              ? portals[0].portalName
-              : `${portals[0].portalName}.${baseDomain}`;
+      if (portals.error) {
+        const error = portals;
 
-          let redirectUrl = getCookie("x-redirect-authorization-uri");
-          let portalLink = portals[0].portalLink;
-
-          const isLocalhost = name === "http://localhost";
-
-          if (!isLocalhost && redirectUrl)
-            redirectUrl = redirectUrl.replace(window.location.origin, name);
-
-          if (isLocalhost)
-            portalLink = portalLink.replace(name, window.location.origin);
-
-          // deleteCookie("x-redirect-authorization-uri");
-
-          window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
-
-          return;
-        }
-
-        const searchParams = new URLSearchParams();
-
-        const portalsString = JSON.stringify({ portals });
-
-        // searchParams.set("portals", portalsString);
-        searchParams.set("clientId", client.clientId);
-
-        sessionStorage.setItem("tenant-list", portalsString);
-
-        router.push(`/tenant-list?${searchParams.toString()}`);
-
-        setIsLoading(false);
-        return;
-      } catch (error) {
         console.log(error);
         let errorMessage = "";
         if (typeof error === "object") {
@@ -373,14 +343,49 @@ const LoginForm = ({
         setIsLoading(false);
         return;
       }
+
+      if (portals?.length === 1) {
+        const name =
+          !baseDomain || portals[0].portalName.includes(baseDomain)
+            ? portals[0].portalName
+            : `${portals[0].portalName}.${baseDomain}`;
+
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
+        let portalLink = portals[0].portalLink;
+
+        const isLocalhost = name === "http://localhost";
+
+        if (!isLocalhost && redirectUrl)
+          redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+        if (isLocalhost)
+          portalLink = portalLink.replace(name, window.location.origin);
+
+        // deleteCookie("x-redirect-authorization-uri");
+
+        window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
+
+        return;
+      }
+
+      const searchParams = new URLSearchParams();
+
+      const portalsString = JSON.stringify({ portals });
+
+      searchParams.set("clientId", client.clientId);
+
+      sessionStorage.setItem("tenant-list", portalsString);
+
+      router.push(`/tenant-list?${searchParams.toString()}`);
+
+      setIsLoading(false);
+      return;
     }
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
         const redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
-          // deleteCookie("x-redirect-authorization-uri");
-
           window.location.replace(redirectUrl);
 
           return;
@@ -462,11 +467,12 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     linkData,
+    oauthUrl,
     router,
-    clientId,
-    referenceUrl,
     baseDomain,
+    clientId,
     isPublicAuth,
+    referenceUrl,
   ]);
 
   const onBlurEmail = () => {

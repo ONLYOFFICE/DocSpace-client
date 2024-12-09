@@ -126,6 +126,9 @@ const Dark: TTheme = {
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
+    secondary: {
+      color: grayDark,
+    },
   },
 
   heading: {
@@ -2639,9 +2642,9 @@ const Dark: TTheme = {
     },
 
     badge: {
-      color: black,
-      stroke: darkGrayDark,
-      fill: darkGrayDark,
+      color: white,
+      stroke: grayDark,
+      fill: grayDark,
       defaultFill: black,
       badgeFill: mainOrange,
     },

@@ -53,6 +53,7 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   processCreatingRoomFromData,
+  setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
 }) => {
@@ -69,7 +70,7 @@ const CreateRoomDialog = ({
     )
       return false;
 
-    return !selectionItems.every((item) => item.isPDFForm);
+    return !selectionItems.every((item) => item?.isPDFForm);
   }, [selectionItems, processCreatingRoomFromData]);
 
   React.useEffect(() => {
@@ -156,6 +157,11 @@ const CreateRoomDialog = ({
 
       await fetchThirdPartyProviders();
     }
+
+    if (processCreatingRoomFromData) {
+      setProcessCreatingRoomFromData(false);
+    }
+
     onClose();
   };
 

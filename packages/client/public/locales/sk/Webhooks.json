@@ -35,7 +35,6 @@
   "SecretKey": "Tajný kľúč",
   "SecretKeyHint": "Nastavenie tajomstva webhooku umožňuje overiť požiadavky odoslané na adresu URL dátového obsahu.",
   "SecretKeyWarning": "Po uložení tajného kľúča ho už nemôžete vyžiadať. Ak ste tento tajný kľúč stratili alebo zabudli, môžete ho obnoviť, ale všetky integrácie kde sa tento tajný kľúč používa, bude potrebné aktualizovať.",
-  "SelectDate": "Vyberte dátum",
   "SelectDeliveryTime": "Vyberte čas doručenia",
   "SettingsWebhook": "Nastavenia webhooku",
   "SSLHint": "V predvolenom nastavení overujeme certifikáty SSL pri doručovaní dátového obsahu.",

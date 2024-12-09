@@ -1980,59 +1980,59 @@ class FilesActionStore {
       case "show-info":
         if (isDesktop()) return null;
         return {
-            id: "menu-show-info",
-            key: "show-info",
-            label: t("Common:Info"),
-            iconUrl: InfoOutlineReactSvgUrl,
-            onClick: this.onShowInfoPanel,
-          };
+          id: "menu-show-info",
+          key: "show-info",
+          label: t("Common:Info"),
+          iconUrl: InfoOutlineReactSvgUrl,
+          onClick: this.onShowInfoPanel,
+        };
       case "copy":
         if (!this.isAvailableOption("copy")) return null;
         return {
-            id: "menu-copy",
-            label: t("Common:Copy"),
-            onClick: () => setCopyPanelVisible(true),
-            iconUrl: CopyToReactSvgUrl,
-          };
+          id: "menu-copy",
+          label: t("Common:Copy"),
+          onClick: () => setCopyPanelVisible(true),
+          iconUrl: CopyToReactSvgUrl,
+        };
 
       case "create-room":
         if (!this.isAvailableOption("create-room")) return null;
         return {
-            id: "menu-create-room",
-            label: t("Files:CreateRoom"),
-            onClick: this.onClickCreateRoom,
-            iconUrl: CatalogRoomsReactSvgUrl,
-          };
+          id: "menu-create-room",
+          label: t("Files:CreateRoom"),
+          onClick: this.onClickCreateRoom,
+          iconUrl: CatalogRoomsReactSvgUrl,
+        };
 
       case "download":
         if (!this.isAvailableOption("download")) return null;
         return {
-            id: "menu-download",
-            label: t("Common:Download"),
-            onClick: () =>
-              this.downloadAction(t("Translations:ArchivingData")).catch(
-                (err) => toastr.error(err),
-              ),
-            iconUrl: DownloadReactSvgUrl,
-          };
+          id: "menu-download",
+          label: t("Common:Download"),
+          onClick: () =>
+            this.downloadAction(t("Translations:ArchivingData")).catch((err) =>
+              toastr.error(err),
+            ),
+          iconUrl: DownloadReactSvgUrl,
+        };
 
       case "downloadAs":
         if (!this.isAvailableOption("downloadAs")) return null;
         return {
-            id: "menu-download-as",
-            label: t("Translations:DownloadAs"),
-            onClick: () => setDownloadDialogVisible(true),
-            iconUrl: DownloadAsReactSvgUrl,
-          };
+          id: "menu-download-as",
+          label: t("Translations:DownloadAs"),
+          onClick: () => setDownloadDialogVisible(true),
+          iconUrl: DownloadAsReactSvgUrl,
+        };
 
       case "moveTo":
         if (!this.isAvailableOption("moveTo")) return null;
         return {
-            id: "menu-move-to",
-            label: t("Common:MoveTo"),
-            onClick: () => setMoveToPanelVisible(true),
-            iconUrl: MoveReactSvgUrl,
-          };
+          id: "menu-move-to",
+          label: t("Common:MoveTo"),
+          onClick: () => setMoveToPanelVisible(true),
+          iconUrl: MoveReactSvgUrl,
+        };
       case "pin":
         return {
           id: "menu-pin",
@@ -2054,90 +2054,85 @@ class FilesActionStore {
       case "archive":
         if (!this.isAvailableOption("archive")) return null;
         return {
-            id: "menu-archive",
-            key: "archive",
-            label: t("MoveToArchive"),
-            iconUrl: RoomArchiveSvgUrl,
-            onClick: () => this.archiveRooms("archive"),
-            disabled: false,
-          };
+          id: "menu-archive",
+          key: "archive",
+          label: t("MoveToArchive"),
+          iconUrl: RoomArchiveSvgUrl,
+          onClick: () => this.archiveRooms("archive"),
+          disabled: false,
+        };
       case "unarchive":
         if (!this.isAvailableOption("unarchive")) return null;
         return {
-            id: "menu-unarchive",
-            key: "unarchive",
-            label: t("Common:Restore"),
-            iconUrl: MoveReactSvgUrl,
-            onClick: () => this.archiveRooms("unarchive"),
-            disabled: false,
-          };
+          id: "menu-unarchive",
+          key: "unarchive",
+          label: t("Common:Restore"),
+          iconUrl: MoveReactSvgUrl,
+          onClick: () => this.archiveRooms("unarchive"),
+          disabled: false,
+        };
       case "change-quota":
         if (!this.isAvailableOption("change-quota")) return null;
         return {
-            id: "menu-change-quota",
-            key: "change-quota",
-            label: t("Common:ChangeQuota"),
-            iconUrl: ChangQuotaReactSvgUrl,
-            onClick: () => this.changeRoomQuota(selection),
-            disabled: !showStorageInfo,
-          };
+          id: "menu-change-quota",
+          key: "change-quota",
+          label: t("Common:ChangeQuota"),
+          iconUrl: ChangQuotaReactSvgUrl,
+          onClick: () => this.changeRoomQuota(selection),
+          disabled: !showStorageInfo,
+        };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
         return {
-            id: "menu-default-quota",
-            key: "default-quota",
-            label: t("Common:SetToDefault"),
-            iconUrl: DefaultQuotaReactSvgUrl,
-            onClick: () => this.resetRoomQuota(selection, t),
-            disabled: !showStorageInfo,
-          };
+          id: "menu-default-quota",
+          key: "default-quota",
+          label: t("Common:SetToDefault"),
+          iconUrl: DefaultQuotaReactSvgUrl,
+          onClick: () => this.resetRoomQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
       case "disable-quota":
         if (!this.isAvailableOption("disable-quota")) return null;
-        else
-          return {
-            id: "menu-disable-quota",
-            key: "disable-quota",
-            label: t("Common:DisableQuota"),
-            iconUrl: DisableQuotaReactSvgUrl,
-            onClick: () => this.disableRoomQuota(selection, t),
-            disabled: !showStorageInfo,
-          };
+        return {
+          id: "menu-disable-quota",
+          key: "disable-quota",
+          label: t("Common:DisableQuota"),
+          iconUrl: DisableQuotaReactSvgUrl,
+          onClick: () => this.disableRoomQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
 
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
-        else
-          return {
-            id: "menu-delete-room",
-            label: t("Common:Delete"),
-            onClick: () => this.deleteRooms(t),
-            iconUrl: DeleteReactSvgUrl,
-          };
+        return {
+          id: "menu-delete-room",
+          label: t("Common:Delete"),
+          onClick: () => this.deleteRooms(t),
+          iconUrl: DeleteReactSvgUrl,
+        };
 
       case "delete":
         if (!this.isAvailableOption("delete")) return null;
-        else
-          return {
-            id: "menu-delete",
-            label: t("Common:Delete"),
-            onClick: () => {
-              if (this.filesSettingsStore.confirmDelete) {
-                setDeleteDialogVisible(true);
-              } else {
-                const translations = {
-                  deleteOperation: t("Translations:DeleteOperation"),
-                  deleteFromTrash: t("Translations:DeleteFromTrash"),
-                  deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                  FileRemoved: t("Files:FileRemoved"),
-                  FolderRemoved: t("Files:FolderRemoved"),
-                };
+        return {
+          id: "menu-delete",
+          label: t("Common:Delete"),
+          onClick: () => {
+            if (this.filesSettingsStore.confirmDelete) {
+              setDeleteDialogVisible(true);
+            } else {
+              const translations = {
+                deleteOperation: t("Translations:DeleteOperation"),
+                deleteFromTrash: t("Translations:DeleteFromTrash"),
+                deleteSelectedElem: t("Translations:DeleteSelectedElem"),
+                FileRemoved: t("Files:FileRemoved"),
+                FolderRemoved: t("Files:FolderRemoved"),
+              };
 
-                this.deleteAction(translations).catch((err) =>
-                  toastr.error(err),
-                );
-              }
-            },
-            iconUrl: DeleteReactSvgUrl,
-          };
+              this.deleteAction(translations).catch((err) => toastr.error(err));
+            }
+          },
+          iconUrl: DeleteReactSvgUrl,
+        };
       case "remove-from-recent":
         return {
           id: "menu-remove-from-recent",

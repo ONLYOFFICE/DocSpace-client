@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { Label } from "@docspace/shared/components/label";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";

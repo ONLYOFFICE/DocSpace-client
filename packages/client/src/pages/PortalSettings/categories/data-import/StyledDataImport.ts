@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { tablet, mobile } from "@docspace/shared/utils/device";
 
 import { TableContainer } from "@docspace/shared/components/table";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const WorkspacesContainer = styled.div`

@@ -251,6 +251,12 @@ class FilesStore {
     start: true,
   });
 
+  guidanceCoordinates = {
+    pdf: null,
+    ready: null,
+    share: null,
+  };
+
   hotkeysClipboard = [];
 
   constructor(
@@ -4190,6 +4196,10 @@ class FilesStore {
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
     this.selectedFolderStore.setNavigationPath(navigationPath);
+  };
+
+  setGuidanceCoordinates = (value) => {
+    this.guidanceCoordinates = value;
   };
 
   setInRoomFolder = (roomId, inRoom) => {

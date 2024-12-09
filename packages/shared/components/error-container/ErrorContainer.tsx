@@ -28,12 +28,13 @@ import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
+import { Heading } from "@docspace/shared/components/heading";
 import PortalLogo from "../portal-logo/PortalLogo";
-import Headline from "../headline/Headline";
 
 import StyledErrorContainer from "./ErrorContainer.styled";
 import type { ErrorContainerProps } from "./ErrorContainer.types";
 import { Scrollbar } from "../scrollbar";
+
 const ErrorContainer = (props: ErrorContainerProps) => {
   const {
     headerText,
@@ -369,9 +370,9 @@ const ErrorContainer = (props: ErrorContainerProps) => {
           </svg>
         </div>
         {headerText && (
-          <Headline id="header" type="header">
+          <Heading id="header" type="header">
             {headerText}
-          </Headline>
+          </Heading>
         )}
         {bodyText && <Text id="text">{bodyText}</Text>}
         {customizedBodyText && (

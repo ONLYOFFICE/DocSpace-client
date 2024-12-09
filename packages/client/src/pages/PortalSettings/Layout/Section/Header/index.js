@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -361,7 +361,7 @@ const SectionHeaderContent = (props) => {
                 className="arrow-button"
               />
             )}
-          <Headline type="content" truncate={true}>
+          <Heading type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
@@ -380,7 +380,7 @@ const SectionHeaderContent = (props) => {
                 ""
               )}
             </div>
-          </Headline>
+          </Heading>
           <div className="tariff-bar">
             <TariffBar />
           </div>

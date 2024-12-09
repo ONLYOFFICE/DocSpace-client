@@ -27,7 +27,7 @@
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { desktop, tablet } from "@docspace/shared/utils";
 
@@ -72,9 +72,9 @@ const SectionHeaderContent = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="headline-header" type="content" truncate={true}>
+      <Heading className="headline-header" type="content" truncate={true}>
         {title}
-      </Headline>
+      </Heading>
     </StyledContainer>
   );
 };

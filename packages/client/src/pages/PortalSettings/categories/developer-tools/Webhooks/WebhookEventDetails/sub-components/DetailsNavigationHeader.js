@@ -35,7 +35,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
@@ -125,9 +125,9 @@ const DetailsNavigationHeader = (props) => {
             onClick={onBack}
             className="arrow-button"
           />
-          <Headline type="content" truncate={true} className="headline">
+          <Heading type="content" truncate={true} className="headline">
             {t("WebhookDetails")}
-          </Headline>
+          </Heading>
         </div>
 
         <IconButton

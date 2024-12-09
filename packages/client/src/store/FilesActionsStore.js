@@ -727,9 +727,6 @@ class FilesActionStore {
 
   completeAction = async (selectedItem, type, isFolder = false) => {
     switch (type) {
-      case FileAction.Create:
-        this.filesStore.addItem(selectedItem, isFolder);
-        break;
       case FileAction.Rename:
         this.onSelectItem(
           {

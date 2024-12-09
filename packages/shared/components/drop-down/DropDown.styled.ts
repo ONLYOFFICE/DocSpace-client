@@ -127,6 +127,7 @@ const StyledDropdown = styled.div.attrs(injectDefaultTheme)<{
         bottom: 0;
         inset-inline-start: 0;
         width: 100%;
+        box-sizing: border-box;
       `}
   }
 `;

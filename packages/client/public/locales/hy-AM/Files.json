@@ -84,6 +84,7 @@
   "Folder": "Պանակ",
   "FolderRemoved": "Պանակը տեղափոխվեց աղբարկղ",
   "FolderRenamed": "Պանակը '{{folderTitle}}'-ից վերանվանվել է'{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Թղթապանակը <1>{{folderTitle}}</1> ատեղծվել է",
   "Forms": "Ձևեր",
   "GeneralLinkDeletedSuccessfully": "Նոր ընդհանուր հղումը հաջողությամբ ստեղծվեց",
   "GoToMyRooms": "Գնալ Իմ սենյակները",

@@ -130,6 +130,10 @@ export const getBaseTheme = () => {
       emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
+
+      secondary: {
+        color: gray,
+      },
     },
 
     heading: {

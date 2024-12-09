@@ -127,6 +127,9 @@ const Dark: TTheme = {
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
+    secondary: {
+      color: grayDark,
+    },
   },
 
   heading: {

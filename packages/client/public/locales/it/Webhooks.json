@@ -35,7 +35,6 @@
   "SecretKey": "Chiave segreta",
   "SecretKeyHint": "L'impostazione di un segreto webhook consente di verificare le richieste inviate all'URL del carico utile",
   "SecretKeyWarning": "Non potrai recuperare nuovamente la chiave segreta una volta salvata. Se hai perso o dimenticato questa chiave segreta, puoi reimpostarla, ma tutte le integrazioni che utilizzano questo segreto dovranno essere aggiornate.",
-  "SelectDate": "Seleziona la data",
   "SelectDeliveryTime": "Seleziona Tempo di consegna",
   "SettingsWebhook": "Impostazioni del webhook",
   "SSLHint": "Per impostazione predefinita, verifichiamo i certificati SSL durante la consegna dei carichi utili.",

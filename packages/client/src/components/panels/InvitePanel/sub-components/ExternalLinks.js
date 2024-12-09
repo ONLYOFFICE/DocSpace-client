@@ -126,7 +126,7 @@ const ExternalLinks = ({
   const editLink = async () => {
     const type = getDefaultAccessUser(roomType);
 
-    const link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
+    const link = await api.rooms.setInvitationLinks(roomId, type, "Invite");
 
     const { shareLink, id, title, expirationDate } = link.sharedTo;
 

@@ -57,7 +57,6 @@ class DialogsStore {
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
-  thirdPartyMoveDialogVisible = false;
   deleteDialogVisible = false;
   lifetimeDialogVisible = false;
   downloadDialogVisible = false;
@@ -120,6 +119,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   editMembersGroup = null;
+  closeEditIndexDialogVisible = false;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
@@ -590,6 +590,9 @@ class DialogsStore {
     this.roomLogoCoverDialogVisible = visible;
   };
 
+  setCloseEditIndexDialogVisible = (visible) => {
+    this.closeEditIndexDialogVisible = visible;
+  };
   setFormFillingTipsDialog = (visible) => {
     this.formFillingTipsVisible = visible;
   };

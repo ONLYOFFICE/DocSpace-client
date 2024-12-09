@@ -85,6 +85,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
+import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 
 const Panels = (props) => {
   const {
@@ -92,7 +93,6 @@ const Panels = (props) => {
     copyPanelVisible,
     moveToPanelVisible,
     restorePanelVisible,
-    thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
@@ -147,6 +147,7 @@ const Panels = (props) => {
     welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
+    closeEditIndexDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -349,6 +350,9 @@ const Panels = (props) => {
         isDownload={passwordEntryDialogDate.isDownload}
       />
     ),
+    closeEditIndexDialogVisible && (
+      <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
+    ),
     true && <FormFillingTipsDialog key="form-filling_tips_dialog" />,
   ];
 };
@@ -369,7 +373,6 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       deleteDialogVisible,
@@ -419,6 +422,7 @@ export default inject(
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -459,7 +463,6 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
@@ -512,6 +515,7 @@ export default inject(
       isShowWarningDialog,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
     };
   },
 )(observer(Panels));

@@ -68,6 +68,8 @@
   "EnableNotifications": "Enable notifications",
   "ErrorChangeIndex": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",
   "ExcludeSubfolders": "Exclude subfolders",
+  "ExitWithoutSaving": "Exit without saving?",
+  "ExitWithoutSavingDescription": "You have made changes in the index. If you proceed without saving, those changes will not be applied.",
   "ExportRoomIndex": "Export room index",
   "ExportRoomIndexAlreadyInProgressError": "Room index export is already in progress. Please wait until the current export is completed to start the new one.",
   "FavoritesEmptyContainerDescription": "To mark files as favorites or remove them from this list, use the context menu.",
@@ -84,6 +86,7 @@
   "Folder": "Folder",
   "FolderRemoved": "Folder moved to Trash",
   "FolderRenamed": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> created",
   "Forms": "Forms",
   "GeneralLinkDeletedSuccessfully": "New general link created successfully",
   "GoToMyRooms": "Go to rooms",
@@ -98,6 +101,9 @@
   "LifetimeDialogDescription": "Lifetime countdown begins at the file creation date. Some files in this room exceed the proposed lifetime and will be deleted once you enable the setting.",
   "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted",
   "LimitByTimePeriod": "Limit by time period",
+  "LimitTimeBlockCustomRoomDescription": "In a Custom room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
+  "LimitTimeBlockFormRoomDescription": "In a Form Filling room, the main link is valid for an unlimited time period.",
+  "LimitTimeBlockPublicRoomDescription": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "LinkDeletedSuccessfully": "Link deleted successfully",
   "LinkEditedSuccessfully": "Link successfully edited and copied",
   "LinkForPortalUsers": "Link for {{productName}} users",
@@ -206,5 +212,6 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "FileCannotBeMoved": "The file cannot be moved to this room."
 }

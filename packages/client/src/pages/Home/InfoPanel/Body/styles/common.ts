@@ -190,6 +190,7 @@ const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
 `;
 
 const StyledSearchContainer = styled.div`
+  width: 100%;
   box-sizing: border-box;
   position: absolute;
   top: 0;

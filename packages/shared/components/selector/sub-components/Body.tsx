@@ -83,6 +83,7 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+  withPadding,
 
   withInfo,
   infoText,
@@ -108,6 +109,9 @@ const Body = ({
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
+  const resizeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   const isEmptyInput =
     items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
@@ -128,8 +132,10 @@ const Body = ({
 
   const onBodyResize = React.useCallback(() => {
     if (bodyRef && bodyRef.current) {
-      setTimeout(() => {
-        setBodyHeight(bodyRef.current!.offsetHeight);
+      resizeTimerRef.current = setTimeout(() => {
+        if (bodyRef.current) {
+          setBodyHeight(bodyRef.current.offsetHeight);
+        }
       }, 20);
     }
   }, []);
@@ -162,6 +168,14 @@ const Body = ({
   React.useEffect(() => {
     onBodyResize();
   }, [isLoading, footerVisible, onBodyResize]);
+
+  React.useEffect(() => {
+    return () => {
+      if (resizeTimerRef.current) {
+        clearTimeout(resizeTimerRef.current);
+      }
+    };
+  }, []);
 
   React.useEffect(() => {
     resetCache();
@@ -231,6 +245,7 @@ const Body = ({
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}
+      withPadding={withPadding}
     >
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />

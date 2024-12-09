@@ -257,7 +257,10 @@ export function showLoader() {
   if (isMobile) return;
 
   hideLoader();
-  timer = setTimeout(() => TopLoaderService.start(), 500);
+  TopLoaderService.cancel();
+  // timer = setTimeout(() => {
+  TopLoaderService.start();
+  // }, 500);
 }
 
 export function showProgress() {

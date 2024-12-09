@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
 import { ThemeProvider as Provider } from "styled-components";
 import type { ThemeProviderProps } from "./ThemeProvider.types";
 import "./ThemeProvider.scss";

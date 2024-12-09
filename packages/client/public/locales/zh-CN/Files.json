@@ -63,7 +63,7 @@
   "EmptyFormSubFolderHeaderText": "此文件夹中还没有文件",
   "EmptyFormSubFolderProgressDescriptionText": "您可以在此处看到处理中的表单，即用户已开始填写但尚未完成的表单。",
   "EmptyRecycleBin": "清空垃圾箱",
-  "EmptyRootRoomHeader": " 欢迎使用{{productName}}",
+  "EmptyRootRoomHeader": " 欢迎使用{{productName}}",
   "EmptyScreenFolder": "未找到任何文档",
   "EnableNotifications": "启用消息通知",
   "ErrorChangeIndex": "更改索引时发生错误。此问题可能是由服务器端引起的。请重新加载页面或检查您的互联网连接设置。",

@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Bestanden niet geladen: {{count}}",
   "FilesUploaded": "Bestanden Geüpload",
   "Upload": "Uploaden",
   "UploadFiles": "Upload bestanden",

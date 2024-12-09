@@ -84,6 +84,7 @@
   "Folder": "フォルダ",
   "FolderRemoved": "フォルダがゴミ箱に移動",
   "FolderRenamed": "フォルダ'{{folderTitle}}'の名前が'{{newFoldedTitle}}'に変更されます。'",
+  "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1>フォルダが作成された",
   "Forms": "フォーム",
   "GeneralLinkDeletedSuccessfully": "新しい一般リンクが正常に作成されました",
   "GoToMyRooms": "「ルーム」へ",

@@ -727,9 +727,6 @@ class FilesActionStore {
 
   completeAction = async (selectedItem, type, isFolder = false) => {
     switch (type) {
-      case FileAction.Create:
-        this.filesStore.addItem(selectedItem, isFolder);
-        break;
       case FileAction.Rename:
         this.onSelectItem(
           {
@@ -2402,7 +2399,6 @@ class FilesActionStore {
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
-    const { isOwner, isAdmin } = this.userStore.user;
 
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;

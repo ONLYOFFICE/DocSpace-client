@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "Izmantojiet meklēšanas LDAP filtru, lai atlasītu importējamos lietotājus.",
   "LdapUserQuotaTooltip": "Lai iestatītu lietotāja krātuves kvotu, pievienojiet atribūtu LDAP direktorijā (piemēram, UsersQuotaLimit) un ievadiet šim atribūtam veselu skaitļa vērtību. Tas parādīs kvotas vērtību baitos. Šeit norādiet tikai atribūta nosaukumu. Šis atribūts tiks lietots tikai pirmās iestatīšanas laikā, un vēlāk to varēs mainīt manuāli sadaļā {{contactsName}}.",
   "LdapUsersType": "Lietotāju veids",
-  "LdapUsersTypeInfo": "Lietotāji var piekļūt tikai tām telpām, uz kurām viņus uzaicina administratori, un nevar izveidot savas telpas, mapes vai failus. Atlasiet citu veidu zemāk, lai nodrošinātu vairāk atļauju. Pretējā gadījumā veidu varat mainīt manuāli sadaļā {{contactsName}}.",
   "LdapUserTypeTooltip": "Visi lietotāji tiks pievienoti {{productName}} ar atlasīto tipu."
 }

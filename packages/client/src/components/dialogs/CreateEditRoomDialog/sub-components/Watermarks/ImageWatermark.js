@@ -60,6 +60,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
 import { ButtonDelete } from "@docspace/shared/components/image-editor";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledWatermark } from "./StyledComponent";
 

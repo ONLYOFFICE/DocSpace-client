@@ -35,7 +35,6 @@
   "SecretKey": "Clave secreta",
   "SecretKeyHint": "Establecer un secreto webhook le permite verificar las solicitudes enviadas a la URL de carga útil.",
   "SecretKeyWarning": "No podrá recuperar su clave secreta una vez guardada. Si ha perdido u olvidado esta clave secreta, puede restablecerla, pero será necesario actualizar todas las integraciones que utilicen este secreto.",
-  "SelectDate": "Seleccionar fecha",
   "SelectDeliveryTime": "Seleccione plazo de entrega",
   "SettingsWebhook": "Configuración de webhooks",
   "SSLHint": "De forma predeterminada, verificamos los certificados SSL al entregar las cargas útiles.",

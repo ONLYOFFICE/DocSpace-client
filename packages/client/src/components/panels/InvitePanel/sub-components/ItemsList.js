@@ -37,12 +37,13 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = (props) => (
+const VirtualScroll = React.forwardRef((props, ref) => (
   <CustomScrollbarsVirtualList
     {...props}
+    ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-);
+));
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -63,6 +64,8 @@ const Row = memo(({ data, index, style }) => {
   if (inviteItems === undefined) return;
 
   const item = inviteItems[index];
+
+  const theme = useTheme();
 
   return (
     <Item
@@ -203,7 +206,7 @@ const ItemsList = ({
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
   const { isOwner, isAdmin } = userStore.user;
-  const { theme, standalone } = settingsStore;
+  const { standalone } = settingsStore;
 
   return {
     setInviteItems,
@@ -212,6 +215,5 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     isOwner,
     isAdmin,
     standalone,
-    theme,
   };
 })(observer(ItemsList));

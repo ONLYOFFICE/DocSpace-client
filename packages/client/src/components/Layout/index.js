@@ -79,15 +79,18 @@ const Layout = (props) => {
     isFrame,
   } = props;
 
-  const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
 
-  if (window.DocSpace) {
-    window.DocSpace.navigate = useNavigate();
-    window.DocSpace.location = useLocation();
-  } else {
-    window.DocSpace = { navigate: useNavigate(), location: useLocation() };
-  }
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  window.DocSpace = {
+    ...window.DocSpace,
+    navigate,
+    location,
+  };
+
+  const isSDKPath = window.DocSpace.location.pathname.includes("/sdk/");
 
   let intervalHandler;
   let timeoutHandler;
@@ -161,12 +164,12 @@ const Layout = (props) => {
   };
 
   return (
-    <StyledContainer
-      className="Layout"
-      contentHeight={contentHeight}
-      isPortrait={isPortrait}
-    >
-      <Scrollbar id="customScrollBar">{children}</Scrollbar>
+    <StyledContainer className="Layout" isPortrait={isPortrait}>
+      {isSDKPath ? (
+        children
+      ) : (
+        <Scrollbar id="customScrollBar">{children}</Scrollbar>
+      )}
     </StyledContainer>
   );
 };
@@ -182,8 +185,8 @@ export default inject(({ settingsStore }) => {
     isTabletView,
     setIsTabletView,
     setWindowWidth,
-    isFrame,
     setWindowAngle,
+    isFrame,
   } = settingsStore;
   return {
     isTabletView,

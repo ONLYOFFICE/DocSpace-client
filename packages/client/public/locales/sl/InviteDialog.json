@@ -3,6 +3,8 @@
   "EmailErrorMessage": "E-mail naslov ni veljaven. E-mail sporočilo lahko uredite tako, da dvokliknete nanj.",
   "GroupMaxAvailableRoleWarning": "Skupine se lahko dodaja v sobo z najvišjo vlogo {{roleName}}. Vlogo posameznih uporabnikov v skupini lahko spremenite, ko je bil uspešno dodan.",
   "InvitationLanguage": "Jezik povabila",
+  "InviteMembersManuallyDescription": "Po e-mailu osebno povabite nove člane v {{productName}}",
+  "InviteMembersSearchPlaceholder": "Povabite člane z e-mailom",
   "InviteToRoomManuallyInfo": "Dodajte obstoječe stike za {{productName}}. Ali pa osebno povabite nove uporabnike po e-pošti. Novi uporabniki bodo dodani na vaš seznam gostov.",
   "InviteToRoomSearchPlaceholder": "Išči in povabi po imenu ali e-pošti",
   "InviteViaLink": "Povabite s povezavo",

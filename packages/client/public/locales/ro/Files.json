@@ -84,6 +84,7 @@
   "Folder": "Dosar",
   "FolderRemoved": "Dosarul mutat în Coșul de gunoi",
   "FolderRenamed": "Dosarul '{{folderTitle}}' este redenumit în '{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Folderul <1>{{folderTitle}}</1> a fost creat",
   "Forms": "Forms",
   "GeneralLinkDeletedSuccessfully": "Un link general a fost creat cu succes",
   "GoToMyRooms": "Salt la Sălile",

@@ -1,4 +1,5 @@
 {
+  "ActionCannotUndone": "Šo darbību nevarēs atsaukt. Vai tiešām vēlaties turpināt?",
   "AddedToClipboard": "Vienumi pievienoti starpliktuvē",
   "AddMembersDescription": "Jūs varat pievienot jaunus komandas dalībniekus manuāli vai uzaicināt, izmantojot saiti.",
   "AddNewLink": "Pievienot jaunu saiti",
@@ -145,6 +146,9 @@
   "ReorderIndex": "Veicot darbību Pārkārtot, indeksos tiks noņemtas atstarpes. Faili tiks atkārtoti indeksēti, lai ar nobīdi aizpildītu trūkstošos indeksus.",
   "RestoreAll": "Atjaunot visu",
   "RevokeLink": "Atsaukt saiti",
+  "RevokeSharedLinkDescriptionCustomRoom": "Saites uz visiem telpā esošajiem failiem tiks izdzēstas. Iepriekšējās saites uz telpu failiem un iegultiem dokumentiem nebūs pieejamas.",
+  "RevokeSharedLinkDescriptionFormRoom": "Saites uz visām telpā esošajām veidlapām tiks atkārtoti ģenerētas. Iepriekšējās saites uz telpu veidlapām un iegultām veidlapām nebūs pieejamas.",
+  "RevokeSharedLinkDescriptionPublicRoom": "Saites uz visām telpā esošajiem failiem tiks atkārtoti ģenerētas. Iepriekšējās saites uz telpu failiem un iegultiem dokumentiem nebūs pieejamas.",
   "RoomAvailableViaExternalLink": "Numurs ir pieejams, izmantojot ārējo saiti",
   "RoomAvailableViaSharedLink": "Telpa ir pieejama, izmantojot koplietošanas saiti",
   "RoomCreated": "Telpa ir izveidota",
@@ -190,6 +194,10 @@
   "WantLeaveRoom": "Vai tiešām vēlaties atstāt šo telpu? Jūs varēsiet tai atkal pievienoties, izmantojot jaunu telpas administratora ielūgumu.",
   "WantToRestoreTheRoom": "Visas ārējās saites šajā telpā kļūs aktīvas, un tās saturs būs pieejams ikvienam, kam ir saite. Vai vēlaties atjaunot telpu?",
   "WantToRestoreTheRooms": "Visas ārējās saites atjaunotajās telpās kļūs aktīvas, un to saturs būs pieejams ikvienam, kam ir telpas saites. Vai vēlaties atjaunot telpas?",
+  "WarningCopyToFormRoomServal": "Vairāku failu kopēšana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu.",
+  "WarningCreationFormRoom": "Šāda veida telpai nav pieejama izveide, pamatojoties uz vairākiem failiem un mapēm. Lai izveidotu šādu telpu, dodieties uz sadaļu Telpas vai izmantojiet kādu no PDF veidlapām.",
+  "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
+  "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",
   "WithSubfolders": "Ar apakšmapēm",
   "YouLeftTheRoom": "Jūs atstājāt telpu"
 }

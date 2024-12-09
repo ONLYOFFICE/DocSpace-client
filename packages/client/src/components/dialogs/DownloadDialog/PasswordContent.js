@@ -49,43 +49,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { IconButton } from "@docspace/shared/components/icon-button";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
 import PasswordRow from "./PasswordRow";
-import {
-  StyledPasswordContent,
-  StyledSinglePasswordFile,
-} from "./StyledDownloadDialog";
-import SimulatePassword from "../../../components/SimulatePassword";
+import { StyledPasswordContent } from "./StyledDownloadDialog";
 
 const PasswordContent = (props) => {
-  const { setDownloadFilesPassword, getItemIcon, sortedDownloadFiles } = props;
+  const { getItemIcon, sortedDownloadFiles } = props;
   const { t } = useTranslation(["DownloadDialog", "Common"]);
 
   const [barIsVisible, setBarIsVisible] = useState(true);
-  const [showPasswordInput, setShowPassword] = useState(false);
-  const [filePassword, setPassword] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
 
   const onClose = () => {
     setBarIsVisible(false);
   };
 
-  const onChangePassword = (password, item) => {
-    setDownloadFilesPassword(item.id, password, null, true);
-  };
-
   const { original, other, remove, password } = sortedDownloadFiles;
-  //console.log("sortedDownloadFiles", sortedDownloadFiles);
+
   const passwordRow = (items, text, type, className) => {
     return (
       <div className="password-row-wrapper">
@@ -104,25 +91,6 @@ const PasswordContent = (props) => {
       </div>
     );
   };
-  console.log("other", other);
-  // if (other?.length === 1 ) {
-  //   const item = other[0];
-  //   return (
-  //     <StyledSinglePasswordFile>
-  //       <Text>{t("EnteringPasswordForAccess")}</Text>
-  //       <div className="password-row">
-  //         {item.title}
-  //         <IconButton size={16} iconName={ProtectedReactSvgUrl} />
-  //       </div>
-  //       <SimulatePassword
-  //         onChange={(password) => onChangePassword(password, item)}
-  //         //onKeyDown={onKeyDown}
-  //         hasError={!passwordValid}
-  //         forwardedRef={inputRef}
-  //       />
-  //     </StyledSinglePasswordFile>
-  //   );
-  // }
 
   return (
     <StyledPasswordContent>

@@ -313,8 +313,8 @@ class DownloadDialogComponent extends React.Component {
       visible,
       extsConvertible,
       theme,
-      passwordFiles,
-      isAllFilesViewed,
+      needPassword,
+      isAllPasswordFilesSorted,
     } = this.props;
 
     const {
@@ -451,13 +451,9 @@ class DownloadDialogComponent extends React.Component {
       </>
     );
 
-    const needPassword = passwordFiles?.length > 0;
-    const changeType = needPassword && passwordFiles?.length === 1;
-
     return (
       <ModalDialog
         visible={visible}
-        //displayType={changeType ? ModalDialogType.modal : ModalDialogType.aside}
         displayType={ModalDialogType.aside}
         onClose={this.onClose}
         autoMaxHeight
@@ -469,9 +465,6 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={"modalDialogToggle"}>
-          {/* {changeType ? (
-            <PasswordContent />
-          ) : ( */}
           <Scrollbar bodyPadding="0px">
             {needPassword ? (
               <PasswordContent getItemIcon={this.getItemIcon} />
@@ -479,7 +472,6 @@ class DownloadDialogComponent extends React.Component {
               mainContent
             )}
           </Scrollbar>
-          {/* )} */}
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -493,7 +485,7 @@ class DownloadDialogComponent extends React.Component {
             primary
             onClick={needPassword ? this.onReDownload : this.onDownload}
             isDisabled={
-              needPassword ? !isAllFilesViewed : isCheckedLength === 0
+              needPassword ? !isAllPasswordFilesSorted : isCheckedLength === 0
             }
             scale
           />
@@ -546,7 +538,9 @@ export default inject(
 
     const { clearActiveOperations } = uploadDataStore;
 
-    const isAllFilesViewed = sortedDownloadFiles.other?.length === 0;
+    const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
+
+    const needPassword = passwordFiles?.length > 0;
 
     return {
       sortedFiles,
@@ -562,13 +556,15 @@ export default inject(
       passwordFiles,
 
       setSortedPasswordFiles,
-      isAllFilesViewed,
+      isAllPasswordFilesSorted,
       clearActiveOperations,
       getDownloadItems,
       setDownloadItems,
       downloadItems,
       getIcon,
       getFolderIcon,
+
+      needPassword,
     };
   },
 )(observer(DownloadDialog));

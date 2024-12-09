@@ -461,12 +461,13 @@ class DownloadDialogComponent extends React.Component {
     );
 
     const needPassword = passwordFiles?.length > 0;
-
+    const changeType = needPassword && passwordFiles?.length === 1;
 
     return (
       <ModalDialog
         visible={visible}
-        displayType={changeType ? ModalDialogType.modal : ModalDialogType.aside}
+        //displayType={changeType ? ModalDialogType.modal : ModalDialogType.aside}
+        displayType={ModalDialogType.aside}
         onClose={this.onClose}
         autoMaxHeight
         autoMaxWidth

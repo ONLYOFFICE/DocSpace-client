@@ -84,6 +84,7 @@
   "Folder": "Folder",
   "FolderRemoved": "Folder pomeren u Otpad",
   "FolderRenamed": "Folder '{{folderTitle}}' je preimenovan u '{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> kreiran",
   "Forms": "Obrasci",
   "GeneralLinkDeletedSuccessfully": "Novi generalni link uspešno kreiran",
   "GoToMyRooms": "Idi u sobe",

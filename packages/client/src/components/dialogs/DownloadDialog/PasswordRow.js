@@ -46,6 +46,7 @@ const PasswordRow = ({
   setOriginalFormat,
   removeFromDownloadFiles,
   setDownloadFilesPassword,
+  getItemIcon,
   type,
 }) => {
   const [showPasswordInput, setShowPassword] = useState(false);
@@ -115,6 +116,7 @@ const PasswordRow = ({
 
     return options;
   };
+  const element = getItemIcon(item);
 
   return (
     <StyledDownloadContent>
@@ -129,6 +131,7 @@ const PasswordRow = ({
             iconName={ProtectedReactSvgUrl}
             onClick={onInputClick}
           />
+          <div className="download-dialog-icon-contatiner">{element}</div>
           <Text fontWeight="600" fontSize="14px" className="password-title">
             {item.title}
           </Text>
@@ -138,9 +141,7 @@ const PasswordRow = ({
             className="expandButton"
             directionX="right"
             getData={getOptions}
-            // displayType="toggle"
-            //onClick={onOpenContextMenu}
-            title="Hello"
+            title={t("Common:Actions")}
             isDisabled={false}
             usePortal={true}
             iconName={VerticalDotsReactSvgUrl}
@@ -161,7 +162,7 @@ const PasswordRow = ({
             size={"small"}
             scale
             primary
-            label={t("Common:Save")}
+            label={t("Common:SaveButton")}
             onClick={onButtonClick}
             isDisabled={!password}
           />

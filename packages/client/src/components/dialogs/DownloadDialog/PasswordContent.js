@@ -68,8 +68,7 @@ import {
 import SimulatePassword from "../../../components/SimulatePassword";
 
 const PasswordContent = (props) => {
-  const { setDownloadFilesPassword, passwordFiles, sortedDownloadFiles } =
-    props;
+  const { setDownloadFilesPassword, getItemIcon, sortedDownloadFiles } = props;
   const { t } = useTranslation(["DownloadDialog", "Common"]);
 
   const [barIsVisible, setBarIsVisible] = useState(true);
@@ -87,17 +86,19 @@ const PasswordContent = (props) => {
 
   const { original, other, remove, password } = sortedDownloadFiles;
   //console.log("sortedDownloadFiles", sortedDownloadFiles);
-  const passwordRow = (items, text, type) => {
+  const passwordRow = (items, text, type, className) => {
     return (
       <div className="password-row-wrapper">
-        <div className="password-info-text">
+        <div className={`password-info-text ${className}`}>
           <Text fontWeight={600} fontSize="14px">
             {text}
           </Text>
         </div>
         <div>
           {items.map((item) => {
-            return <PasswordRow item={item} type={type} />;
+            return (
+              <PasswordRow item={item} type={type} getItemIcon={getItemIcon} />
+            );
           })}
         </div>
       </div>
@@ -134,7 +135,12 @@ const PasswordContent = (props) => {
         />
       )}
       {other?.length > 0 &&
-        passwordRow(other, t("Common:PasswordRequired"), "other")}
+        passwordRow(
+          other,
+          t("Common:PasswordRequired"),
+          "other",
+          "warning-color",
+        )}
       {original?.length > 0 &&
         passwordRow(original, t("InOriginalFormat"), "original")}
       {password?.length > 0 &&

@@ -159,6 +159,11 @@ const StyledPasswordContent = styled.div`
       height: 36px;
       align-items: center;
     }
+    .warning-color {
+      p {
+        color: ${(props) => props.theme.downloadDialog.warningColor};
+      }
+    }
   }
 `;
 

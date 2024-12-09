@@ -27,7 +27,7 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import isEmpty from "lodash/isEmpty";
+import { ReactSVG } from "react-svg";
 
 import {
   ModalDialog,
@@ -84,6 +84,14 @@ class DownloadDialogComponent extends React.Component {
   }
 
   onClose = () => {
+    const { setSortedPasswordFiles } = this.props;
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
+
     this.props.setDownloadDialogVisible(false);
   };
 
@@ -127,26 +135,13 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onReDownload = () => {
-    const {
-      downloadItems,
-      downloadFiles,
-      setSortedPasswordFiles,
-      getDownloadItems,
-      t,
-    } = this.props;
+    const { downloadItems, downloadFiles, getDownloadItems, t } = this.props;
 
     if (downloadItems.length > 0) {
       const [fileConvertIds, folderIds] = getDownloadItems(downloadItems, t);
 
       downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
     }
-
-    setSortedPasswordFiles({
-      other: [],
-      password: [],
-      remove: [],
-      original: [],
-    });
 
     this.onClose();
   };
@@ -293,6 +288,22 @@ class DownloadDialogComponent extends React.Component {
 
   componentWillUnmount = () => {
     document.removeEventListener("keyup", this.handleKeyUp);
+  };
+
+  getItemIcon = (item) => {
+    const { getIcon, getFolderIcon } = this.props;
+    const extension = item.fileExst;
+    const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
+
+    return (
+      <ReactSVG
+        beforeInjection={(svg) => {
+          svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
+        }}
+        src={icon}
+        loading={() => <div style={{ width: "96px" }} />}
+      />
+    );
   };
 
   render() {
@@ -458,13 +469,17 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={"modalDialogToggle"}>
-          {changeType ? (
+          {/* {changeType ? (
             <PasswordContent />
-          ) : (
-            <Scrollbar>
-              {needPassword ? <PasswordContent /> : mainContent}
-            </Scrollbar>
-          )}
+          ) : ( */}
+          <Scrollbar>
+            {needPassword ? (
+              <PasswordContent getItemIcon={this.getItemIcon} />
+            ) : (
+              mainContent
+            )}
+          </Scrollbar>
+          {/* )} */}
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -512,7 +527,7 @@ export default inject(
     uploadDataStore,
   }) => {
     const { sortedFiles, setSelected } = filesStore;
-    const { extsConvertible } = filesSettingsStore;
+    const { extsConvertible, getIcon, getFolderIcon } = filesSettingsStore;
     const { theme, openUrl } = settingsStore;
 
     const {
@@ -552,6 +567,8 @@ export default inject(
       getDownloadItems,
       setDownloadItems,
       downloadItems,
+      getIcon,
+      getFolderIcon,
     };
   },
 )(observer(DownloadDialog));

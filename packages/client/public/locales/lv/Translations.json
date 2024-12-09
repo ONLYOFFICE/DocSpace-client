@@ -34,6 +34,7 @@
   "RoleFormFiller": "Veidlapas aizpildītājs",
   "RoleFormFillerDescription": "Darbības ar esošajiem failiem: skatīšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
   "RoleFormFillerFormRoomDescription": "Veidlapu aizpildītāji var aizpildīt veidlapas un skatīt tikai aizpildītās/sāktās veidlapas mapēs Complete (Pabeigts) un In Process (Notiekošs).",
+  "RoleGuestDescriprion": "Viesi var piekļūt telpām, uz kurām viņi ir uzaicināti, kā arī izveidot un rediģēt dokumentus, ja viņiem ir piešķirtas atbilstošas lomas telpā.",
   "RoleNewUserDescription": "LietotājI var izveidot un rediģēt failus telpā, bet nevar izveidot telpas, pārvaldīt lietotājus un piekļūt iestatījumiem.",
   "RolePortalAdminDescription": "{{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa. Visiem administratoriem ir piekļuve sadaļai Dokumenti.",
   "RolePowerUserFormRoomDescription": "Lietotāji var augšupielādēt veidlapas telpā un pilnībā piekļūt mapēm Complete (Pabeigts) un In Process (Notiek apstrāde).",

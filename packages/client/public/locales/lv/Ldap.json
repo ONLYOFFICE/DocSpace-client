@@ -8,6 +8,7 @@
   "LdapAutoSyncToggleDescription": "Sinhronizācija ļaus augšupielādēt visus datus no portāla un atjaunināt jaunos datus pēc iestatījumu maiņas. Sinhronizējiet katru reizi, kad portālā ir jauni dati par lietotājiem.",
   "LdapAvatar": "Profila fotoattēls",
   "LdapCertificateConfirm": "Apstiprināt sertifikātu",
+  "LdapConnectionType": "Pieslēguma veids",
   "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "LDAP datplūsmu varat padarīt konfidenciālu un drošu, izmantojot drošligzdu slāni (SSL)",
   "LdapConnectionTypeStartTls": "StartTLS",

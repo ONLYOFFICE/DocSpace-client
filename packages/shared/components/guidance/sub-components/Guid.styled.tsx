@@ -27,10 +27,17 @@ import styled, { css } from "styled-components";
 
 import { Dialog } from "../../modal-dialog/ModalDialog.styled";
 import { mobile } from "../../../utils";
+import { ClippedPosition } from "./Guid.types";
 
 const StyledDialog = styled(Dialog)<{
   isTourMode?: boolean;
+  bottom?: number;
 }>`
+  position: absolute;
+  left: 250px;
+  min-height: auto;
+  top: ${(props) => props.bottom && `${props.bottom}px`};
+
   #modal-dialog {
     width: 430px;
     border-radius: 11px;
@@ -110,12 +117,17 @@ const StyledTipsCircle = styled.div<{ isSelected: boolean }>`
     `}
 `;
 
-const StyledClipped = styled.div`
+const StyledClipped = styled.div<{ position: ClippedPosition }>`
   position: absolute;
-  left: 271px;
-  top: 10px;
-  width: 100px;
-  height: 50px;
+  border-radius: 7px;
+  ${(props) =>
+    props.position &&
+    css`
+      left: ${`${props.position.left}px`};
+      top: ${`${props.position.top}px`};
+      width: ${`${props.position.width}px`};
+      height: ${`${props.position.height}px`};
+    `}
   backdrop-filter: contrast(200%);
 `;
 

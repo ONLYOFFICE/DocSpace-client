@@ -84,6 +84,7 @@
   "Folder": "Carpeta",
   "FolderRemoved": "Carpeta movida a la Papelera",
   "FolderRenamed": "El nombre de la carpeta '{{folderTitle}}' se ha cambiado a '{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "Carpeta <1>{{folderTitle}}</1> creada",
   "Forms": "Formularios",
   "GeneralLinkDeletedSuccessfully": "Se ha creado correctamente un nuevo enlace general ",
   "GoToMyRooms": "Ir a Salas",

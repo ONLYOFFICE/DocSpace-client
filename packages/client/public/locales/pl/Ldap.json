@@ -8,6 +8,7 @@
   "LdapAutoSyncToggleDescription": "Synchronizacja umożliwia przesyłanie wszystkich danych z portalu i aktualizację  nowych danych po zmianie ustawień. Synchronizuj za każdym razem, gdy masz nowe dane na temat użytkowników w portalu.",
   "LdapAvatar": "Zdjęcie profilowe",
   "LdapCertificateConfirm": "Potwierdź certyfikat",
+  "LdapConnectionType": "Typ połączenia",
   "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "Zadbaj o bezpieczeństwo i poufność ruchu LDAP za pomocą Secure Sockets Layer (SSL)",
   "LdapConnectionTypeStartTls": "StartTLS",

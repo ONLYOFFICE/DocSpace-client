@@ -8,6 +8,7 @@
   "CurrentSpace": "Cari sahə",
   "DeleteEmptyPortalText": "<1>{{domain}}</1> domenini həmişəlik siləcəksiniz. Bu əməliyyat geri qaytarıla bilməz.",
   "DeleteRequestSuccess": "Silinmə sorğusu uğurla {{productName}} adlı istifadəçinin <1>{{email}}</1> e-poçt ünvanına göndərildi",
+  "DeleteSetupPortalText": "Siz bütün məlumatların və hesabların yerləşdiyi <1>{{domain}}</1> domenini həmişəlik siləcəksiniz. <1>{{domain}}</1> domen adının silinməsi üçün sorğu {{productName}} sahibinə <1>{{email}}</1> e-poçt ünvanına göndəriləcək.",
   "DeleteWarning": "Sonuncu tam giriş domeni silinə bilməz",
   "DomainName": "Domen adı",
   "DomainNotFound": "Domen adı tapılmadı, zəhmət olmasa, DNS parametrlərini yoxlayın",

@@ -25,18 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { TextProps } from "../text/Text.types";
 
-export interface BadgeProps {
+export type BadgeProps = TextProps & {
   /** Content to be displayed inside the badge. Can be a number (e.g., notification count) or text */
   label?: string | number;
-  /** Custom background color for the badge. Accepts any valid CSS color value */
-  backgroundColor?: string;
-  /** Text color for the badge content. Accepts any valid CSS color value */
-  color?: string;
-  /** Custom font size for the badge text. Accepts CSS size values (px, rem, em) */
-  fontSize?: string;
-  /** Font weight for the badge text. Accepts numbers (400, 500, 600) or strings ('normal', 'bold') */
-  fontWeight?: number | string;
   /** Custom border radius to adjust badge corners. Accepts CSS size values */
   borderRadius?: string;
   /** Custom padding to adjust badge spacing. Accepts CSS padding values */
@@ -45,17 +38,11 @@ export interface BadgeProps {
   maxWidth?: string;
   /** Custom line height for the badge text. Accepts CSS line-height values */
   lineHeight?: string;
-  /** Click handler for interactive badges. Makes the badge focusable and adds button role */
-  onClick?: (e: React.MouseEvent) => void;
-  /** Additional CSS class names to be applied to the badge */
-  className?: string;
-  /** Custom ID attribute for the badge element */
-  id?: string;
-  /** Custom inline styles object for additional styling */
-  style?: React.CSSProperties;
-  /** Controls the hover state of the badge. True applies hover styles */
-  isHovered?: boolean;
-  /** When true, disables hover effects on the badge */
+  /** Mouse leave event handler */
+  onMouseLeave?: (e: React.MouseEvent) => void;
+  /** Mouse over event handler */
+  onMouseOver?: (e: React.MouseEvent) => void;
+  /** Disable hover effect */
   noHover?: boolean;
   /** Sets badge type to high priority. Changes visual appearance */
   type?: "high";
@@ -72,7 +59,4 @@ export interface BadgeProps {
   /** When true, applies special styling for paid/premium features */
   isPaidBadge?: boolean;
   /** Handler for mouse over events. Used for hover state management and interactions */
-  onMouseOver?: VoidFunction;
-  /** Handler for mouse leave events. Used for hover state management and interactions */
-  onMouseLeave?: VoidFunction;
-}
+};

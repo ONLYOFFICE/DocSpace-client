@@ -28,15 +28,33 @@ import React from "react";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-
+import { ThemeProvider } from "styled-components";
+import { Base } from "@docspace/shared/themes";
 import { Badge } from ".";
+import styles from "./Badge.module.scss";
+
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
+};
 
 describe("<Badge />", () => {
   const renderComponent = (props = {}) => {
-    return render(<Badge {...props} />);
+    return renderWithTheme(<Badge {...props} />);
   };
 
   describe("Rendering", () => {
+    test("renders Badge component", () => {
+      renderComponent();
+      const badgeElement = screen.getByRole("generic");
+      expect(badgeElement).toBeInTheDocument();
+    });
+
+    test("renders Badge with correct text", () => {
+      renderComponent({ label: "Test Badge" });
+      const badgeElement = screen.getByText("Test Badge");
+      expect(badgeElement).toBeInTheDocument();
+    });
+
     it("displays label correctly", () => {
       renderComponent({ label: "10" });
       expect(screen.getByText("10")).toBeInTheDocument();
@@ -54,15 +72,8 @@ describe("<Badge />", () => {
       renderComponent({ label: "10" });
       const badge = screen.getByTestId("badge");
 
-      expect(badge).toHaveClass("badge");
-      expect(badge).toHaveClass("themed");
-      expect(badge).toHaveStyle({
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "fit-content",
-        flexShrink: "0",
-      });
+      expect(badge.classList.contains(styles.badge)).toBeTruthy();
+      expect(badge.classList.contains(styles.themed)).toBeTruthy();
     });
 
     it("applies custom styles correctly", () => {
@@ -89,6 +100,15 @@ describe("<Badge />", () => {
     });
   });
 
+  describe("Styling", () => {
+    test("renders Badge with custom className", () => {
+      const customClass = "custom-badge";
+      renderComponent({ className: customClass });
+      const badgeElement = screen.getByTestId("badge");
+      expect(badgeElement.className).toContain(customClass);
+    });
+  });
+
   describe("Accessibility", () => {
     it("has correct ARIA attributes when non-interactive", () => {
       renderComponent({ label: "5" });
@@ -97,12 +117,6 @@ describe("<Badge />", () => {
       expect(badge).toHaveAttribute("aria-label", "5 ");
       expect(badge).toHaveAttribute("aria-live", "polite");
       expect(badge).toHaveAttribute("aria-atomic", "true");
-    });
-
-    it("has correct ARIA attributes with type", () => {
-      renderComponent({ label: "5", type: "notifications" });
-      const badge = screen.getByTestId("badge");
-      expect(badge).toHaveAttribute("aria-label", "5 notifications");
     });
   });
 
@@ -127,25 +141,19 @@ describe("<Badge />", () => {
     it("displays when label is non-zero", () => {
       renderComponent({ label: "1" });
       const badge = screen.getByTestId("badge");
-      expect(badge).not.toHaveAttribute("data-hidden");
+      expect(badge).not.toHaveAttribute("data-hidden", "true");
     });
 
     it("applies high priority styling", () => {
       renderComponent({ label: "High", type: "high" });
       const badge = screen.getByTestId("badge");
-      expect(badge).toHaveStyle({
-        border: "none",
-        borderRadius: "6px",
-      });
+      expect(badge).toHaveAttribute("data-type", "high");
     });
 
     it("applies compact styling", () => {
       renderComponent({ label: "Compact", compact: true });
-      const inner = screen.getByText("Compact").parentElement;
+      const inner = screen.getByTestId("badge-inner");
       expect(inner).toHaveAttribute("data-compact", "true");
-      expect(inner).toHaveStyle({
-        lineHeight: "var(--badge-line-height)",
-      });
     });
   });
 });

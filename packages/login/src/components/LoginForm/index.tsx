@@ -74,8 +74,6 @@ import OAuthClientInfo from "../ConsentInfo";
 
 import { StyledCaptcha } from "./LoginForm.styled";
 
-let showToastr = true;
-
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
@@ -199,6 +197,10 @@ const LoginForm = ({
     },
     [t, referenceUrl, currentCulture, isPublicAuth],
   );
+
+  useEffect(() => {
+    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
+  }, [authError, ready, t]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");
@@ -534,11 +536,6 @@ const LoginForm = ({
   };
 
   const passwordErrorMessage = errorMessage();
-
-  if (authError && ready) {
-    if (showToastr) toastr.error(t("Common:ProviderLoginError"));
-    showToastr = false;
-  }
 
   return (
     <form className="auth-form-container">

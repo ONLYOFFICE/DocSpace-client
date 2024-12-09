@@ -89,6 +89,7 @@ const LoginForm = ({
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
   const toastId = useRef<Id>();
+  const authToastId = useRef<Id>("");
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -199,7 +200,8 @@ const LoginForm = ({
   );
 
   useEffect(() => {
-    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
+    if (authError && ready && !toastr.isActive(authToastId.current))
+      authToastId.current = toastr.error(t("Common:ProviderLoginError"));
   }, [authError, ready, t]);
 
   useEffect(() => {

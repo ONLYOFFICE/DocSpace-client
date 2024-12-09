@@ -62,6 +62,7 @@ module.exports = {
       "always",
       { exceptAfterSingleLine: true },
     ],
+    "no-console": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

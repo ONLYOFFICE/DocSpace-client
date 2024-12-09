@@ -50,6 +50,7 @@ const TableRow = (props: TableRowProps) => {
     getContextModel,
     badgeUrl,
     isIndexEditingMode,
+    forwardedRef,
     ...rest
   } = props;
 
@@ -79,6 +80,7 @@ const TableRow = (props: TableRowProps) => {
       onContextMenu={onContextMenu}
       isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
+      ref={forwardedRef}
       {...rest}
     >
       {children}

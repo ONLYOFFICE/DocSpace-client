@@ -86,6 +86,7 @@ const Navigation = ({
   showNavigationButton,
   onContextOptionsClick,
   onLogoClick,
+  buttonRef,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -307,6 +308,7 @@ const Navigation = ({
             {showTitle && navigationTitleContainerNode}
 
             <ControlButtons
+              buttonRef={buttonRef}
               isRootFolder={isRootFolder}
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}

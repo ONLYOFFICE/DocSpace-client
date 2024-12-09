@@ -38,6 +38,7 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
+import { FolderType } from "@docspace/shared/enums";
 
 const FilesTableRow = (props) => {
   const {
@@ -80,9 +81,13 @@ const FilesTableRow = (props) => {
     displayFileExtension,
     icon,
     isDownload,
+    setGuidanceCoordinates,
+    guidanceCoordinates,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
+
+  const rowRef = React.useRef();
 
   const element = (
     <ItemIcon
@@ -171,6 +176,29 @@ const FilesTableRow = (props) => {
     onChangeIndex(action);
   };
 
+  React.useEffect(() => {
+    if (
+      item?.fileExst === ".pdf" &&
+      rowRef?.current &&
+      !guidanceCoordinates.pdf
+    ) {
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        pdf: rowRef.current.firstChild.offsetParent.getClientRects()[0],
+      });
+    }
+    if (
+      item?.type === FolderType.Done &&
+      rowRef?.current &&
+      !guidanceCoordinates.ready
+    ) {
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        ready: rowRef.current.firstChild.offsetParent.getClientRects()[0],
+      });
+    }
+  }, [guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+
   return (
     <StyledDragAndDrop
       id={id}
@@ -188,6 +216,7 @@ const FilesTableRow = (props) => {
     >
       <StyledTableRow
         className="table-row"
+        forwardedRef={rowRef}
         {...dragStyles}
         isDragging={dragging}
         dragging={dragging && isDragging}

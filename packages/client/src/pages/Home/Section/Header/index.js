@@ -267,6 +267,8 @@ const SectionHeaderContent = (props) => {
     getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
+    setGuidanceCoordinates,
+    guidanceCoordinates,
   } = props;
 
   const location = useLocation();
@@ -277,6 +279,8 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsView === "groups";
   const isContactsInsideGroupPage =
     contactsView === "inside_group" && !!groupId;
+
+  const buttonRef = React.useRef(null);
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -571,6 +575,16 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  React.useEffect(() => {
+    if (buttonRef?.current) {
+      console.log(buttonRef.current.getClientRects()[0]);
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        share: buttonRef.current.getClientRects()[0],
+      });
+    }
+  }, [buttonRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
@@ -696,6 +710,7 @@ const SectionHeaderContent = (props) => {
                 showNavigationButton={!!showNavigationButton}
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
+                buttonRef={buttonRef}
               />
               {showSignInButton && (
                 <Button
@@ -776,6 +791,8 @@ export default inject(
 
       categoryType,
       setBufferSelection,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
     } = filesStore;
 
     const {
@@ -991,6 +1008,8 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
     };
   },
 )(

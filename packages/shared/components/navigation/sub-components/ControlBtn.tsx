@@ -64,6 +64,7 @@ const ControlButtons = ({
   isEmptyPage,
   onCloseDropBox,
   onContextOptionsClick,
+  buttonRef,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -76,6 +77,7 @@ const ControlButtons = ({
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
+        ref={buttonRef}
         onClick={onNavigationButtonClick}
       />
     ) : null;

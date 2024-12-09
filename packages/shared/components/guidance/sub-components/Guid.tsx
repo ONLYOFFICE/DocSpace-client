@@ -49,6 +49,8 @@ import {
 
 import { ModalDialogType } from "../../modal-dialog";
 
+const GUID_MODAL_MARGIN = 16;
+
 enum FormFillingTipsState {
   Starting = 1,
   Sharing = 2,
@@ -56,6 +58,46 @@ enum FormFillingTipsState {
   Complete = 4,
   Uploading = 5,
 }
+
+const getGuidPosition = (guidRects, state) => {
+  switch (state) {
+    case FormFillingTipsState.Starting:
+      return {
+        width: guidRects.pdf.width,
+        height: guidRects.pdf.height,
+        left: guidRects.pdf.left,
+        top: guidRects.pdf.top,
+        bottom: guidRects.pdf.bottom,
+      };
+
+    case FormFillingTipsState.Sharing:
+      return {
+        width: guidRects.share.width,
+        height: guidRects.share.height,
+        left: guidRects.share.left,
+        top: guidRects.share.top,
+        bottom: guidRects.share.bottom,
+      };
+
+    case FormFillingTipsState.Submitting:
+      return {
+        width: guidRects.ready.width,
+        height: guidRects.ready.height,
+        left: guidRects.ready.left,
+        top: guidRects.ready.top,
+        bottom: guidRects.ready.bottom,
+      };
+
+    default:
+      return {
+        width: 0,
+        height: 0,
+        left: 0,
+        top: 0,
+        bottom: 0,
+      };
+  }
+};
 
 const getHeaderText = (state: number, t: TTranslation) => {
   switch (state) {
@@ -90,12 +132,21 @@ const getHeaderText = (state: number, t: TTranslation) => {
   }
 };
 
-const Guid = ({ formFillingTipsNumber, setFormFillingTipsNumber, onClose }) => {
+const Guid = ({
+  formFillingTipsNumber,
+  setFormFillingTipsNumber,
+  onClose,
+  guidRects,
+}) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   const modalText = getHeaderText(formFillingTipsNumber, t);
 
   const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
+
+  const guidPosition = getGuidPosition(guidRects, formFillingTipsNumber);
+
+  console.log(guidRects);
 
   const onNextTips = () => {
     if (isLastTip) {
@@ -121,9 +172,10 @@ const Guid = ({ formFillingTipsNumber, setFormFillingTipsNumber, onClose }) => {
 
   return (
     <StyledGuidBackdrop>
-      <StyledClipped className="guid-element" />
+      <StyledClipped className="guid-element" position={guidPosition} />
       <StyledDialog
         id="modal-onMouseDown-close"
+        bottom={guidPosition.bottom + GUID_MODAL_MARGIN}
         className={
           classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""
         }

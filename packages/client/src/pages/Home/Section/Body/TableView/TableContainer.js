@@ -150,6 +150,8 @@ const Table = ({
   isIndexing,
   icon,
   isDownload,
+  setGuidanceCoordinates,
+  guidanceCoordinates,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -224,6 +226,8 @@ const Table = ({
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
+        setGuidanceCoordinates={setGuidanceCoordinates}
+        guidanceCoordinates={guidanceCoordinates}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
@@ -319,6 +323,8 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -347,6 +353,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
       icon,
       isDownload,
     };

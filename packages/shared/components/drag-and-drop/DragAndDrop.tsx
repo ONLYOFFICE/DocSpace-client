@@ -38,6 +38,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
     children,
     dragging,
     className,
+    forwardedRef,
 
     ...rest
   } = props;
@@ -71,6 +72,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
       {...rest}
       className={`drag-and-drop ${classNameProp}`}
       dragging={dragging}
+      ref={forwardedRef}
       isDragAccept={isDragActive}
       drag={isDragActive && isDropZone && onDrop}
       {...getRootProps()}

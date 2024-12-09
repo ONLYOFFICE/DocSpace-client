@@ -35,13 +35,15 @@ import { mobile, desktop, tablet } from "../../utils";
 const StyledScrollbar = styled(Scrollbar)<{
   $fixedSize?: boolean;
   $paddingAfterLastItem?: string;
+  $bodyPadding?: string;
 }>`
   .scroller::-webkit-scrollbar {
     ${(isIOS || isIOS13 || isIPad13) && `display: none;`}
   }
 
   .scroll-body {
-    padding-inline-end: ${(props) => props.theme.scrollbar.paddingInlineEnd};
+    padding-inline-end: ${(props) =>
+      props.$bodyPadding ?? props.theme.scrollbar.paddingInlineEnd};
     ${({ $paddingAfterLastItem }) =>
       $paddingAfterLastItem &&
       `padding-bottom: ${$paddingAfterLastItem} !important;`}

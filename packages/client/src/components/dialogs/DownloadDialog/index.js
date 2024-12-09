@@ -472,7 +472,7 @@ class DownloadDialogComponent extends React.Component {
           {/* {changeType ? (
             <PasswordContent />
           ) : ( */}
-          <Scrollbar>
+          <Scrollbar bodyPadding="0px">
             {needPassword ? (
               <PasswordContent getItemIcon={this.getItemIcon} />
             ) : (

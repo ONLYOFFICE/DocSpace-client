@@ -64,6 +64,8 @@ const RoomSelector = ({
   withHeader,
   headerProps,
 
+  withPadding,
+
   setIsDataReady,
 
   withCancelButton,
@@ -217,6 +219,7 @@ const RoomSelector = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      withPadding={withPadding}
       onSelect={onSelect}
       items={items}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}

@@ -385,13 +385,13 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  useEffect(() => {
-    const fileId = playlist[playlistPos]?.fileId;
+  const { src, title: currentTitle, fileId } = playlist[playlistPos];
 
+  useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
       onChangeUrl?.(fileId);
     }
-  }, [playlistPos, onChangeUrl, playlist, currentFileId]);
+  }, [fileId, onChangeUrl, currentFileId]);
 
   useEffect(() => {
     return () => {
@@ -400,7 +400,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   }, []);
 
   useEffect(() => {
-    const { src, title: currentTitle, fileId } = playlist[playlistPos];
     const extension = getFileExtension(currentTitle);
 
     if (!src) return onEmptyPlaylistError?.();
@@ -429,9 +428,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     setTitle(currentTitle);
   }, [
+    src,
     files,
-    playlist,
-    playlistPos,
+    fileId,
+    currentTitle,
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,

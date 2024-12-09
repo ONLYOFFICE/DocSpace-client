@@ -49,8 +49,8 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 
   box-sizing: border-box;
 
-  padding-inline-start: 16px;
-  padding-bottom: 16px;
+  padding-inline-start: 12px;
+  padding-bottom: 12px;
 
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 
   .mark-as-read-button {
     min-height: 32px;
-    width: calc(100% - 16px);
+    width: calc(100% - 12px);
   }
 `;
 
@@ -73,19 +73,18 @@ export const StyledItem = styled.div<{
 
   .date-item {
     margin-bottom: 0;
-    margin-top: ${(props) =>
-      props.isFirst ? (props.isLoader ? "16px" : "20px") : "8px"};
+    margin-top: ${(props) => (props.isFirst ? "16px" : "8px")};
   }
 
   .room-items-container {
     box-sizing: border-box;
 
-    padding: 16px 0;
+    padding: ${(props) => (props.isLoader ? "8px 0" : "12px 0 8px")};
     margin: 0;
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
   }
 
   .file-items-container {
@@ -94,7 +93,8 @@ export const StyledItem = styled.div<{
     display: flex;
     flex-direction: column;
 
-    padding: ${(props) => (props.isRooms ? "8px 0 0" : "16px 0")};
+    padding: ${(props) =>
+      props.isRooms ? "0" : props.isLoader ? "12px 0" : "16px 0"};
 
     .more-items {
       padding-top: 8px;
@@ -152,7 +152,7 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   curstor: pointer;
 
   .info-container {
-    max-width: calc(100% - 32px);
+    max-width: calc(100% - 24px);
     height: 100%;
     border: 1px solid
       ${(props) => props.theme.newFilesPanel.fileItem.borderColor};

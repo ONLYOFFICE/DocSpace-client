@@ -45,7 +45,7 @@ class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    const { sortedFiles, passwordFiles, setSortedDownloadFiles } = this.props;
+    const { sortedFiles } = this.props;
     const { documents, spreadsheets, presentations, masterForms, other } =
       sortedFiles;
 
@@ -81,19 +81,32 @@ class DownloadDialogComponent extends React.Component {
       },
       modalDialogToggle: "modalDialogToggle",
     };
-
-    !isEmpty(passwordFiles) && setSortedDownloadFiles({ other: passwordFiles });
   }
 
   onClose = () => {
-    const { downloadableFiles, clearActiveOperations } = this.props;
-    const fileIds = [];
-    const folderIds = [];
-
     this.props.setDownloadDialogVisible(false);
   };
 
-  getDownloadItems = () => {
+  getErrorsTranslation = () => {
+    const { t } = this.props;
+    const passwordError = (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="PasswordProtectedFiles"
+        components={{ 1: <span /> }}
+      />
+    );
+    const translations = {
+      label: t("Translations:ArchivingData"),
+      error: t("Common:ErrorInternalServer"),
+      passwordError,
+    };
+
+    return translations;
+  };
+  onDownload = () => {
+    const { t, downloadFiles, setDownloadItems, getDownloadItems } = this.props;
     const itemList = [
       ...this.state.documents.files,
       ...this.state.spreadsheets.files,
@@ -102,72 +115,39 @@ class DownloadDialogComponent extends React.Component {
       ...this.state.other.files,
     ];
 
-    const files = [];
-    const folders = [];
-    let singleFileUrl = null;
-
-    for (let item of itemList) {
-      if (item.checked) {
-        if (!!item.fileExst || item.contentLength) {
-          const format =
-            !item.format || item.format === this.props.t("OriginalFormat")
-              ? item.fileExst
-              : item.format;
-          if (!singleFileUrl) {
-            singleFileUrl = item.viewUrl;
-          }
-          files.push({
-            key: item.id,
-            value: format,
-            ...(item.password && { password: item.password }),
-          });
-        } else {
-          folders.push(item.id);
-        }
-      }
-    }
-
-    return [files, folders, singleFileUrl];
-  };
-
-  onDownload = () => {
-    const { t, downloadFiles, setDownloadFiles } = this.props;
-    const [fileConvertIds, folderIds, ,] = this.getDownloadItems();
+    const [fileConvertIds, folderIds] = getDownloadItems(itemList, t);
 
     if (fileConvertIds.length || folderIds.length) {
-      const passwordError = (
-        <Trans
-          t={t}
-          ns="Files"
-          i18nKey="PasswordProtectedFiles"
-          components={{ 1: <span /> }}
-        />
-      );
-      const translations = {
-        label: t("Translations:ArchivingData"),
-        error: t("Common:ErrorInternalServer"),
-        passwordError,
-      };
+      setDownloadItems(itemList);
 
-      setDownloadFiles(fileConvertIds, folderIds, translations);
-      downloadFiles(fileConvertIds, folderIds, translations);
+      downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
 
       this.onClose();
     }
   };
 
   onReDownload = () => {
-    const { downloadableFiles, downloadFiles, setSortedDownloadFiles } =
-      this.props;
+    const {
+      downloadItems,
+      downloadFiles,
+      setSortedPasswordFiles,
+      getDownloadItems,
+      t,
+    } = this.props;
 
-    const { fileConvertIds, folderIds, translations } = downloadableFiles;
-    setSortedDownloadFiles({
+    if (downloadItems.length > 0) {
+      const [fileConvertIds, folderIds] = getDownloadItems(downloadItems, t);
+
+      downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
+    }
+
+    setSortedPasswordFiles({
       other: [],
       password: [],
       remove: [],
       original: [],
     });
-    downloadFiles(fileConvertIds, folderIds, translations);
+
     this.onClose();
   };
 
@@ -531,27 +511,26 @@ export default inject(
     settingsStore,
     uploadDataStore,
   }) => {
-    const { sortedFiles, setSelected, passwordFiles } = filesStore;
+    const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = filesSettingsStore;
     const { theme, openUrl } = settingsStore;
 
     const {
       downloadDialogVisible: visible,
       setDownloadDialogVisible,
-      setDownloadFiles,
-      downloadableFiles,
-      setSortedDownloadFiles,
+
+      setSortedPasswordFiles,
       sortedDownloadFiles,
+      getDownloadItems,
+      setDownloadItems,
+      passwordFiles,
+      downloadItems,
     } = dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
 
     const { clearActiveOperations } = uploadDataStore;
-    console.log(
-      "sortedDownloadFiles",
-      sortedDownloadFiles,
-      sortedDownloadFiles.other,
-    );
+
     const isAllFilesViewed = sortedDownloadFiles.other?.length === 0;
 
     return {
@@ -566,11 +545,13 @@ export default inject(
       theme,
       openUrl,
       passwordFiles,
-      downloadableFiles,
-      setDownloadFiles,
-      setSortedDownloadFiles,
+
+      setSortedPasswordFiles,
       isAllFilesViewed,
       clearActiveOperations,
+      getDownloadItems,
+      setDownloadItems,
+      downloadItems,
     };
   },
 )(observer(DownloadDialog));

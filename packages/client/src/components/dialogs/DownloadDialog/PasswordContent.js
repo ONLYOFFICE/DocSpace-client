@@ -145,9 +145,9 @@ const PasswordContent = (props) => {
   );
 };
 
-export default inject(({ filesStore, dialogsStore }) => {
-  const { passwordFiles } = filesStore;
-  const { setDownloadFilesPassword, sortedDownloadFiles } = dialogsStore;
-  console.log("sortedDownloadFiles", sortedDownloadFiles);
+export default inject(({ dialogsStore }) => {
+  const { setDownloadFilesPassword, sortedDownloadFiles, passwordFiles } =
+    dialogsStore;
+
   return { passwordFiles, setDownloadFilesPassword, sortedDownloadFiles };
 })(observer(PasswordContent));

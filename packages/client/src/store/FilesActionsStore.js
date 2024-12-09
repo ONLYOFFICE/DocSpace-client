@@ -621,7 +621,8 @@ class FilesActionStore {
 
     const { addActiveItems, bufferSelection, selection } = this.filesStore;
     const { label, passwordError } = translations;
-    const { setDownloadDialogVisible } = this.dialogsStore;
+    const { setDownloadDialogVisible, downloadItems, setSortedPasswordFiles } =
+      this.dialogsStore;
 
     const operationId = uniqueid("operation_");
 
@@ -692,18 +693,18 @@ class FilesActionStore {
           fileConvertIds[0].key,
         ];
 
-        const selectedItemsArray = bufferSelection
-          ? [bufferSelection]
-          : selection;
+        const passwordArray = [];
 
-        selectedItemsArray.forEach((item) => {
+        downloadItems.forEach((item) => {
           filesIds.forEach((id) => {
-            if (item.id === id) item.needPassword = true;
+            if (item.id === id) {
+              passwordArray.push(item);
+            }
           });
         });
 
         toastr.error(passwordError);
-
+        setSortedPasswordFiles({ other: [...passwordArray] });
         setDownloadDialogVisible(true);
         return;
       }

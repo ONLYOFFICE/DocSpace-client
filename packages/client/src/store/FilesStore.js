@@ -3642,16 +3642,6 @@ class FilesStore {
     return sortedFiles;
   }
 
-get passwordFiles() {
-    let selection = this.selection.length
-      ? this.selection
-      : this.bufferSelection
-        ? [this.bufferSelection]
-        : [];
-
-    return selection.filter((item) => item.needPassword);
-  }
-
   get userAccess() {
     switch (this.selectedFolderStore.rootFolderType) {
       case FolderType.USER:

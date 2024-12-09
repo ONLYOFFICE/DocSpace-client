@@ -693,7 +693,7 @@ class FilesActionStore {
           fileConvertIds[0].key,
         ];
 
-        const selectedItemsArray = bufferSelection ?? selection;
+        const selectedItemsArray = [bufferSelection] ?? selection;
 
         selectedItemsArray.forEach((item) => {
           filesIds.forEach((id) => {

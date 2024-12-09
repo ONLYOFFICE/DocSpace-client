@@ -29,7 +29,10 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEmpty from "lodash/isEmpty";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -459,10 +462,11 @@ class DownloadDialogComponent extends React.Component {
 
     const needPassword = passwordFiles?.length > 0;
 
+
     return (
       <ModalDialog
         visible={visible}
-        displayType="aside"
+        displayType={changeType ? ModalDialogType.modal : ModalDialogType.aside}
         onClose={this.onClose}
         autoMaxHeight
         autoMaxWidth
@@ -473,9 +477,13 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={"modalDialogToggle"}>
-          <Scrollbar>
-            {needPassword ? <PasswordContent /> : mainContent}
-          </Scrollbar>
+          {changeType ? (
+            <PasswordContent />
+          ) : (
+            <Scrollbar>
+              {needPassword ? <PasswordContent /> : mainContent}
+            </Scrollbar>
+          )}
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

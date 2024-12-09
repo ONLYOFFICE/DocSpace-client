@@ -55,11 +55,17 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
 import PasswordRow from "./PasswordRow";
-import { StyledPasswordContent } from "./StyledDownloadDialog";
+import {
+  StyledPasswordContent,
+  StyledSinglePasswordFile,
+} from "./StyledDownloadDialog";
+import SimulatePassword from "../../../components/SimulatePassword";
 
 const PasswordContent = (props) => {
   const { setDownloadFilesPassword, passwordFiles, sortedDownloadFiles } =
@@ -67,13 +73,20 @@ const PasswordContent = (props) => {
   const { t } = useTranslation(["DownloadDialog", "Common"]);
 
   const [barIsVisible, setBarIsVisible] = useState(true);
+  const [showPasswordInput, setShowPassword] = useState(false);
+  const [filePassword, setPassword] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
 
   const onClose = () => {
     setBarIsVisible(false);
   };
 
-  const { original, other, remove, password } = sortedDownloadFiles;
+  const onChangePassword = (password, item) => {
+    setDownloadFilesPassword(item.id, password, null, true);
+  };
 
+  const { original, other, remove, password } = sortedDownloadFiles;
+  //console.log("sortedDownloadFiles", sortedDownloadFiles);
   const passwordRow = (items, text, type) => {
     return (
       <div className="password-row-wrapper">
@@ -90,6 +103,26 @@ const PasswordContent = (props) => {
       </div>
     );
   };
+  console.log("other", other);
+  // if (other?.length === 1 ) {
+  //   const item = other[0];
+  //   return (
+  //     <StyledSinglePasswordFile>
+  //       <Text>{t("EnteringPasswordForAccess")}</Text>
+  //       <div className="password-row">
+  //         {item.title}
+  //         <IconButton size={16} iconName={ProtectedReactSvgUrl} />
+  //       </div>
+  //       <SimulatePassword
+  //         onChange={(password) => onChangePassword(password, item)}
+  //         //onKeyDown={onKeyDown}
+  //         hasError={!passwordValid}
+  //         forwardedRef={inputRef}
+  //       />
+  //     </StyledSinglePasswordFile>
+  //   );
+  // }
+
   return (
     <StyledPasswordContent>
       {barIsVisible && (

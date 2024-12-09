@@ -161,4 +161,20 @@ const StyledPasswordContent = styled.div`
     }
   }
 `;
-export { StyledDownloadContent, StyledBodyContent, StyledPasswordContent };
+
+const StyledSinglePasswordFile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: #f8f9f9;
+  height: 48px;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0 16px;
+  margin-top: 16px;
+`;
+export {
+  StyledDownloadContent,
+  StyledBodyContent,
+  StyledPasswordContent,
+  StyledSinglePasswordFile,
+};

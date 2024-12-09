@@ -8,7 +8,7 @@
   "CurrentSpace": "Nykyinen tila",
   "DeleteEmptyPortalText": "Olet poistamassa pysyvästi <1>{{domain}}</1>. Tätä toimintoa ei voi perua.",
   "DeleteRequestSuccess": "Poistopyyntö on onnistuneesti lähetetty {{productName}} omistajan sähköpostiosoitteeseen <1>{{email}}</1>",
-  "DeleteSetupPortalText": "Olet poistamassa <1>{{domain}}</1 -tilaa  tietoineen ja tileineen pysyvästi. <1>{{domain}}</1> -tilan poistopyyntö lähetetään {{productName}} :n omistajalle sähköpostiosoitteeseen <1>{{email}}</1>.",
+  "DeleteSetupPortalText": "Olet poistamassa <1>{{domain}}</1>-tilaa  tietoineen ja tileineen pysyvästi. <1>{{domain}}</1> -tilan poistopyyntö lähetetään {{productName}} :n omistajalle sähköpostiosoitteeseen <1>{{email}}</1>.",
   "DeleteWarning": "Viimeistä täysien oikeuksien tilaa ei voi poistaa",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",

@@ -1,5 +1,5 @@
 {
-  "FilesNotLoaded": "Pasta <1>{{folderTitle}}</1> criada",
+  "FilesNotLoaded": "Arquivos não carregados: {{count}}",
   "FilesUploaded": "Ficheiros carregados",
   "Upload": "Carregar",
   "UploadFiles": "Carregar ficheiros",

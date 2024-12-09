@@ -220,7 +220,7 @@
   "FormFilingRoomTitle": "غرفة تعبئة النموذج",
   "FormRoom": "غرفة النموذج",
   "Free": "مجانًا",
-  "FreeAccessToLicensedVersion": "الوصول المجاني إلى حل الترخيص",
+  "FreeAccessToLicensedVersion": "الوصول المجاني إلى حل {{license}}",
   "FromDevice": "من الجهاز",
   "FromPortal": "من {{productName}}",
   "FullAccess": "الوصول الكامل",

@@ -71,6 +71,7 @@
   "ExportRoomIndex": "Index exportní místnosti",
   "ExportRoomIndexAlreadyInProgressError": "Export indexu místnosti již probíhá. Se spuštěním nového exportu počkejte, dokud nebude aktuální export dokončen.",
   "FavoritesEmptyContainerDescription": "Chcete-li označit soubory jako oblíbené nebo je z tohoto seznamu odstranit, použijte kontextovou nabídku.",
+  "FileCannotBeMoved": "Soubor nelze do této místnosti přesunout.",
   "FileContents": "Obsah souboru",
   "FileDownloadingIsRestricted": "Stahování souborů je v této místnosti omezeno.",
   "FileExportedToMyDocuments": "Soubor <1>{{fileName}}</1> exportován do Dokumentů",

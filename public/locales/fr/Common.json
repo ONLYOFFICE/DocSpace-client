@@ -338,6 +338,7 @@
   "NotFoundTitle": "Aucun résultat",
   "NotFoundUsers": "Aucun utilisateur trouvé",
   "NotFoundUsersDescription": "Aucun utilisateur ne correspond à votre recherche. Veuillez ajuster vos paramètres de recherche ou effacer le champ de recherche pour afficher la liste complète des utilisateurs.",
+  "NoTimeLimit": "Aucune limite de temps",
   "NotSupportedFormat": "Désolé, ce format de fichier n'est pas pris en charge",
   "OAuthAccountsName": "Contacts",
   "OAuthAccountsReadDescription": "Afficher tous les contacts",

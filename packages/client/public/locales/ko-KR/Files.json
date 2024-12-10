@@ -71,6 +71,7 @@
   "ExportRoomIndex": "룸 인덱스 내보내기",
   "ExportRoomIndexAlreadyInProgressError": "룸 인덱스 내보내기가 이미 진행 중입니다. 진행 중인 내보내기가 완료될 때까지 기다린 후 새로운 내보내기를 시작하세요.",
   "FavoritesEmptyContainerDescription": "파일을 즐겨 찾기로 표시하거나 이 목록에서 삭제하려면, 컨텍스트 메뉴를 사용하세요.",
+  "FileCannotBeMoved": "파일을 이 룸으로 이동할 수 없습니다.",
   "FileContents": "파일 콘텐츠",
   "FileDownloadingIsRestricted": "이 방에서는 파일 다운로드가 제한되어 있습니다.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> 파일이 문서로 내보내기되었습니다",

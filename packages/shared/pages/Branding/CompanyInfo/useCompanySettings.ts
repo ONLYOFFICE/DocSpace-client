@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useReducer, useCallback, useEffect } from "react";
 import isEqual from "lodash/isEqual";
 
 import { ICompanySettings } from "./CompanyInfo.types";
@@ -39,99 +39,100 @@ const defaultCompanySettingsError = {
 
 type TValidators = "site" | "email" | "phone" | "companyName" | "address";
 
+interface IState {
+  fields: Pick<
+    ICompanySettings,
+    "address" | "companyName" | "email" | "phone" | "site"
+  >;
+  errors: typeof defaultCompanySettingsError;
+  hasChanges: boolean;
+}
+
+type Action =
+  | { type: "SET_FIELD"; field: TValidators; value: string }
+  | { type: "RESET"; values: ICompanySettings };
+
+const validators: Record<TValidators, (v: string) => boolean> = {
+  site: (v) => /^(ftp|http|https):\/\/[^ "]+$/.test(v),
+  email: (v) => /.+@.+\..+/.test(v),
+  phone: (v) => /^[\d\(\)\-\s+]+$/.test(v),
+  companyName: (v) => v.trim() !== "",
+  address: (v) => v.trim() !== "",
+};
+
+function reducer(state: IState, action: Action): IState {
+  switch (action.type) {
+    case "SET_FIELD": {
+      const isValid = validators[action.field](action.value);
+      const newFields = { ...state.fields, [action.field]: action.value };
+
+      return {
+        fields: newFields,
+        errors: {
+          ...state.errors,
+          [`hasError${action.field.charAt(0).toUpperCase() + action.field.slice(1)}`]:
+            !isValid,
+        },
+        hasChanges: true,
+      };
+    }
+    case "RESET":
+      return {
+        fields: {
+          address: action.values.address,
+          companyName: action.values.companyName,
+          email: action.values.email,
+          phone: action.values.phone,
+          site: action.values.site,
+        },
+        errors: defaultCompanySettingsError,
+        hasChanges: false,
+      };
+    default:
+      return state;
+  }
+}
+
 export const useCompanySettings = (companySettings: ICompanySettings) => {
-  const [address, setAddress] = useState(companySettings.address);
-  const [companyName, setCompanyName] = useState(companySettings.companyName);
-  const [email, setEmail] = useState(companySettings.email);
-  const [phone, setPhone] = useState(companySettings.phone);
-  const [site, setSite] = useState(companySettings.site);
-  const [companySettingsError, setCompanySettingsError] = useState(
-    defaultCompanySettingsError,
+  const [state, dispatch] = useReducer(reducer, {
+    fields: {
+      address: companySettings.address,
+      companyName: companySettings.companyName,
+      email: companySettings.email,
+      phone: companySettings.phone,
+      site: companySettings.site,
+    },
+    errors: defaultCompanySettingsError,
+    hasChanges: false,
+  });
+
+  const createChangeHandler = useCallback(
+    (field: TValidators) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: "SET_FIELD", field, value: e.target.value });
+    },
+    [],
   );
-  const [hasChanges, setHasChanges] = useState(false);
-
-  const validateField = useCallback((value: string, type: TValidators) => {
-    const validators = {
-      site: (v: string) => /^(ftp|http|https):\/\/[^ "]+$/.test(v),
-      email: (v: string) => /.+@.+\..+/.test(v),
-      phone: (v: string) => /^[\d\(\)\-\s+]+$/.test(v),
-      companyName: (v: string) => v.trim() !== "",
-      address: (v: string) => v.trim() !== "",
-    };
-
-    const isValid = validators[type]?.(value) ?? true;
-    const errorKey = `hasError${type.charAt(0).toUpperCase() + type.slice(1)}`;
-
-    setCompanySettingsError((prev) => ({
-      ...prev,
-      [errorKey]: !isValid,
-    }));
-
-    return isValid;
-  }, []);
-
-  const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateField(e.target.value, "address");
-    setAddress(e.target.value);
-  };
-
-  const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateField(e.target.value, "companyName");
-    setCompanyName(e.target.value);
-  };
-
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateField(e.target.value, "email");
-    setEmail(e.target.value);
-  };
-
-  const onChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateField(e.target.value, "phone");
-    setPhone(e.target.value);
-  };
-
-  const onChangeSite = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateField(e.target.value, "site");
-    setSite(e.target.value);
-  };
 
   useEffect(() => {
-    const settings = {
-      address,
-      companyName,
-      email,
-      phone,
-      site,
+    const currentSettings = {
+      ...state.fields,
       isDefault: companySettings.isDefault,
       isLicensor: companySettings.isLicensor,
     };
-    if (isEqual(companySettings, settings)) {
-      setHasChanges(false);
-    } else {
-      setHasChanges(true);
-    }
-  }, [address, companyName, email, phone, site, companySettings]);
 
-  useEffect(() => {
-    setAddress(companySettings.address);
-    setCompanyName(companySettings.companyName);
-    setEmail(companySettings.email);
-    setPhone(companySettings.phone);
-    setSite(companySettings.site);
-  }, [companySettings]);
+    if (isEqual(companySettings, currentSettings)) {
+      dispatch({ type: "RESET", values: companySettings });
+    }
+  }, [state.fields, companySettings]);
 
   return {
-    address,
-    companyName,
-    email,
-    phone,
-    site,
-    companySettingsError,
-    hasChanges,
-    onChangeAddress,
-    onChangeCompanyName,
-    onChangeEmail,
-    onChangePhone,
-    onChangeSite,
+    ...state.fields,
+    companySettingsError: state.errors,
+    hasChanges: state.hasChanges,
+    onChangeAddress: createChangeHandler("address"),
+    onChangeCompanyName: createChangeHandler("companyName"),
+    onChangeEmail: createChangeHandler("email"),
+    onChangePhone: createChangeHandler("phone"),
+    onChangeSite: createChangeHandler("site"),
   };
 };

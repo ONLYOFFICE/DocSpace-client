@@ -23,42 +23,38 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { RadioButtonProps } from "../radio-button/RadioButton.types";
+
+type PicketRadioButtonPropsForOption = Pick<
+  RadioButtonProps,
+  "id" | "label" | "autoFocus"
+>;
 
 export type TRadioButtonOption = {
   value: string;
-  label?: string | React.ReactNode;
   disabled?: boolean;
-  id?: string;
-  type?: string;
+  type?: "text" | "radio";
   autoFocus?: boolean;
-};
+} & PicketRadioButtonPropsForOption;
 
-export interface RadioButtonGroupProps {
-  /** Disables all radiobuttons in the group */
-  isDisabled?: boolean;
-  /** Used as HTML `value` property for `<input>` tag. Facilitates identification of each RadioButtonGroup */
-  name?: string;
+type PickedDivProps = Pick<
+  React.ComponentProps<"div">,
+  "className" | "style" | "id"
+>;
+
+type PicketRadioButtonProps = Pick<
+  RadioButtonProps,
+  "isDisabled" | "fontWeight" | "fontSize" | "name" | "spacing" | "orientation"
+>;
+
+export type RadioButtonGroupProps = {
   /** Allows handling clicking events on `<RadioButton />` component */
   onClick: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** Array of objects, contains props for each `<RadioButton />` component */
   options: TRadioButtonOption[];
-  /** Value of the selected radiobutton */
+  /** Value of the selected radio button */
   selected?: string;
-  /** Sets margin between radiobuttons. In case the orientation is `horizontal`, `margin-left` is applied for all radiobuttons,
-   * except the first one. If the orientation is `vertical`, `margin-bottom` is applied for all radiobuttons, except the last one */
-  spacing?: string;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Position of radiobuttons  */
-  orientation: "horizontal" | "vertical";
-  /** Width of RadioButtonGroup container */
+  /** Position of radio buttons  */
   width?: string;
-  /** Link font size */
-  fontSize?: string;
-  /** Link font weight  */
-  fontWeight?: number;
-}
+} & PickedDivProps &
+  PicketRadioButtonProps;

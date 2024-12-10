@@ -24,39 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
+.radioButtonGroup {
+  --radio-button-group-width: unset;
 
-const ClearDiv = ({
-  orientation,
-  width,
-  ...props
-}: {
-  orientation?: "horizontal" | "vertical";
-  width?: string;
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-}) => <div {...props} />;
+  width: var(--radio-button-group-width);
 
-const StyledDiv = styled(ClearDiv)`
-  .subtext {
-    margin-top: 16px;
-    margin-bottom: 8px;
+  &.horizontal {
+    display: flex;
   }
 
-  ${(props) =>
-    (props.orientation === "horizontal" &&
-      css`
-        display: flex;
-      `) ||
-    (props.orientation === "vertical" &&
-      css`
-        display: inline-block;
-      `)};
+  &.vertical {
+    display: inline-block;
+  }
+}
 
-  width: ${(props) => props.width};
-`;
-
-export default StyledDiv;
+.subtext {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}

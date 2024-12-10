@@ -27,6 +27,31 @@
 import { TTranslation } from "@docspace/shared/types";
 import { DeviceType } from "@docspace/shared/enums";
 
+export interface ILogoPath {
+  light: string;
+  dark: string;
+}
+
+export interface ILogoSize {
+  width: number;
+  height: number;
+  isEmpty: boolean;
+}
+
+export interface ILogo {
+  path: ILogoPath;
+  size: ILogoSize;
+  name: string;
+}
+
+export interface IWhiteLabelData {
+  logoText: string;
+  logo: Array<{
+    key: string;
+    value: Partial<ILogoPath>;
+  }>;
+}
+
 export interface IHeaderProps {
   t: TTranslation;
   showNotAvailable: boolean;
@@ -38,12 +63,6 @@ export interface IHeaderProps {
   onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface ILogo {
-  path: { light: string; dark: string };
-  size: { width: number; height: number; isEmpty: boolean };
-  name: string;
-}
-
 export interface IWhiteLabel {
   t: TTranslation;
   isSettingPaid: boolean;
@@ -52,7 +71,7 @@ export interface IWhiteLabel {
   logoUrls: ILogo[];
   logoText: string;
   showAbout: boolean;
-  onSave: (data) => void;
+  onSave: (data: IWhiteLabelData) => void;
   onRestoreDefault: () => void;
   isSaving: boolean;
   enableRestoreButton: boolean;
@@ -75,4 +94,23 @@ export interface ILogoProps {
   isEditor?: boolean;
   isEditorHeader?: boolean;
   name: string;
+}
+
+export interface ILogoOptions {
+  fontSize: number;
+  text: string;
+  width: number;
+  height: number;
+  alignCenter?: boolean;
+  isEditor?: boolean;
+}
+
+export interface IUploadedDimensions {
+  width: number;
+  height: number;
+}
+
+export interface IUploadLogoResponse {
+  Success: boolean;
+  Message: string;
 }

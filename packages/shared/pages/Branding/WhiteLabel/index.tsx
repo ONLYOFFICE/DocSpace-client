@@ -38,7 +38,7 @@ import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation"
 
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
-import { IWhiteLabel } from "./WhiteLabel.types";
+import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 
@@ -136,8 +136,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     const theme = id[2];
     const logoName = e.target.name;
 
-    console.log("logoName", logoName);
-    const file = e.target.files[0];
+    const file = e.target.files && e.target.files[0];
 
     const { data } = await uploadLogo(file, type);
 
@@ -151,12 +150,11 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       });
       setLogoUrls(newArr);
     } else {
-      console.error(data.Message);
       toastr.error(data.Message);
     }
   };
 
-  const onSaveAction = () => {
+  const onSaveAction = (): void => {
     const logosArr = [];
 
     for (let i = 0; i < logoUrls.length; i += 1) {
@@ -164,7 +162,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       const defaultLogo = defaultWhiteLabelLogoUrls[i];
 
       if (!isEqual(currentLogo, defaultLogo)) {
-        const value = {};
+        const value: Partial<{ light: string; dark: string }> = {};
 
         if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
           value.light = currentLogo.path.light;
@@ -177,7 +175,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         });
       }
     }
-    const data = {
+    const data: IWhiteLabelData = {
       logoText: logoTextWhiteLabel,
       logo: logosArr,
     };

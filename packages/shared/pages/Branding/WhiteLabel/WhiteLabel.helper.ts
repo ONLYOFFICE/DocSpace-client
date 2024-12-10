@@ -26,16 +26,21 @@
 
 import axios from "axios";
 import { globalColors } from "@docspace/shared/themes";
+import {
+  ILogoOptions,
+  IUploadedDimensions,
+  IUploadLogoResponse,
+} from "./WhiteLabel.types";
 
 export const generateLogo = (
   width: number,
   height: number,
   text: string,
-  fontSize = 18,
-  fontColor = globalColors.darkBlack,
-  alignCenter = false,
-  isEditor = false,
-) => {
+  fontSize: number = 18,
+  fontColor: string = globalColors.darkBlack,
+  alignCenter: boolean = false,
+  isEditor: boolean = false,
+): string => {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -62,7 +67,7 @@ export const getLogoOptions = (
   text: string,
   width: number,
   height: number,
-) => {
+): ILogoOptions => {
   const fontSize = height - 16;
 
   switch (index) {
@@ -127,7 +132,7 @@ export const getLogoOptions = (
   }
 };
 
-const getUploadedFileDimensions = (file: File) =>
+const getUploadedFileDimensions = (file: File): Promise<IUploadedDimensions> =>
   new Promise((resolve, reject) => {
     try {
       const img = new Image();
@@ -147,13 +152,17 @@ const getUploadedFileDimensions = (file: File) =>
     }
   });
 
-export const uploadLogo = async (file: File, type: number) => {
+export const uploadLogo = async (
+  file: File | null,
+  type: string,
+): Promise<{ data: IUploadLogoResponse } | undefined> => {
   try {
+    if (!file) throw new Error("Empty file");
     const { width, height } = await getUploadedFileDimensions(file);
     const data = new FormData();
     data.append("file", file);
-    data.append("width", width);
-    data.append("height", height);
+    data.append("width", width.toString());
+    data.append("height", height.toString());
     data.append("logotype", type);
 
     return await axios.post(

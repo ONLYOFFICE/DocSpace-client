@@ -116,6 +116,9 @@ const StyledDownloadContent = styled.div`
     }
     .password-content {
       cursor: pointer;
+      .password-title {
+        margin-left: 8px;
+      }
     }
 
     .download-dialog-actions {
@@ -153,7 +156,6 @@ const StyledPasswordContent = styled.div`
   margin-top: 16px;
 
   .password-row-wrapper {
-    padding-left: 8px;
     .password-info-text {
       display: flex;
       height: 36px;

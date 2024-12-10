@@ -353,7 +353,10 @@ class DialogsStore {
   };
 
   get passwordFiles() {
-    const { other, original, password, remove } = this.sortedDownloadFiles;
+    const original = this.sortedDownloadFiles.original ?? [];
+    const other = this.sortedDownloadFiles.other ?? [];
+    const password = this.sortedDownloadFiles.password ?? [];
+    const remove = this.sortedDownloadFiles.remove ?? [];
 
     return [...other, ...original, ...password, ...remove];
   }
@@ -380,7 +383,7 @@ class DialogsStore {
     this.sortedDownloadFiles[type] = [...newArray];
 
     this.sortedDownloadFiles.password = [
-      ...this.sortedDownloadFiles.password,
+      ...(this.sortedDownloadFiles.password ?? []),
       originItem,
     ];
   };
@@ -408,7 +411,7 @@ class DialogsStore {
     this.sortedDownloadFiles[type] = [...newArray];
 
     this.sortedDownloadFiles.original = [
-      ...this.sortedDownloadFiles.original,
+      ...(this.sortedDownloadFiles.original ?? []),
       originItem,
     ];
   };
@@ -431,13 +434,13 @@ class DialogsStore {
     this.sortedDownloadFiles[type] = [...newArray];
 
     this.sortedDownloadFiles.remove = [
-      ...this.sortedDownloadFiles.remove,
+      ...(this.sortedDownloadFiles.remove ?? []),
       removedItem,
     ];
   };
 
   setSortedPasswordFiles = (object) => {
-    this.sortedDownloadFiles = { ...this.sortedDownloadFiles, ...object };
+    this.sortedDownloadFiles = { ...object };
   };
 
   setEmptyTrashDialogVisible = (emptyTrashDialogVisible) => {

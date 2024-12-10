@@ -50,7 +50,7 @@ const PasswordRow = ({
   type,
 }) => {
   const [showPasswordInput, setShowPassword] = useState(false);
-  const [password, setPassword] = useState(false);
+  const [password, setPassword] = useState(item.password ?? "");
   const [passwordValid, setPasswordValid] = useState(false);
   const { t } = useTranslation([
     "UploadPanel",
@@ -86,7 +86,7 @@ const PasswordRow = ({
   };
 
   const onKeyUp = (event) => {
-    if (!showPasswordInput) return;
+    if (!showPasswordInput && type === "password") return;
 
     event.stopPropagation();
     event.preventDefault();
@@ -150,7 +150,7 @@ const PasswordRow = ({
             iconName={ProtectedReactSvgUrl}
             onClick={onInputClick}
           />
-          <div className="download-dialog-icon-contatiner">{element}</div>
+          <div>{element}</div>
           <Text fontWeight="600" fontSize="14px" className="password-title">
             {item.title}
           </Text>
@@ -162,7 +162,7 @@ const PasswordRow = ({
             getData={getOptions}
             title={t("Common:Actions")}
             isDisabled={false}
-            usePortal={true}
+            usePortal
             iconName={VerticalDotsReactSvgUrl}
           />
         </div>
@@ -173,6 +173,7 @@ const PasswordRow = ({
             onChange={onChangePassword}
             hasError={!passwordValid}
             forwardedRef={inputRef}
+            inputValue={password}
           />
           <Button
             id="conversion-button"

@@ -96,12 +96,25 @@ class DownloadDialogComponent extends React.Component {
     setDownloadItems([]);
   };
 
+  onClosePanel = () => {
+    const { setDownloadDialogVisible } = this.props;
+
+    this.interruptingConversion();
+
+    setDownloadDialogVisible(false);
+  };
+
   onClose = () => {
-    const { needPassword } = this.props;
+    const { setDownloadDialogVisible, setSortedPasswordFiles } = this.props;
 
-    if (needPassword) this.interruptingConversion();
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
 
-    this.props.setDownloadDialogVisible(false);
+    setDownloadDialogVisible(false);
   };
 
   getErrorsTranslation = () => {
@@ -480,7 +493,7 @@ class DownloadDialogComponent extends React.Component {
       <ModalDialog
         visible={visible}
         displayType={ModalDialogType.aside}
-        onClose={this.onClose}
+        onClose={this.onClosePanel}
         autoMaxHeight
         autoMaxWidth
         isLarge

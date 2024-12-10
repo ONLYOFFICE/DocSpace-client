@@ -120,10 +120,10 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
       isLicensor: companySettings.isLicensor,
     };
 
-    if (isEqual(companySettings, currentSettings)) {
+    if (state.hasChanges && isEqual(companySettings, currentSettings)) {
       dispatch({ type: "RESET", values: companySettings });
     }
-  }, [state.fields, companySettings]);
+  }, [state, companySettings]);
 
   return {
     ...state.fields,

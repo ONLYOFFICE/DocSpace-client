@@ -730,7 +730,7 @@ const Appearance = (props) => {
         </div>
 
         <div className="theme-custom-container">
-          <div className="theme-name">{t("Settings:Custom")}</div>
+          <div className="theme-name">{t("Common:Custom")}</div>
 
           <div className="theme-container">
             <div className="custom-themes">

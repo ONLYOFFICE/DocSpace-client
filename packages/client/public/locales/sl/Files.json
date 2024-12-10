@@ -71,6 +71,7 @@
   "ExportRoomIndex": "Izvozi indeks sobe",
   "ExportRoomIndexAlreadyInProgressError": "Izvoz indeksa sobe že poteka. Počakajte, da se trenutni izvoz zaključi, preden začnete novega.",
   "FavoritesEmptyContainerDescription": "Če želite datoteke označiti kot priljubljene ali jih odstraniti s tega seznama, uporabite kontekstni meni.",
+  "FileCannotBeMoved": "Datoteke ni mogoče premakniti v to sobo.",
   "FileContents": "Vsebine datotek",
   "FileDownloadingIsRestricted": "Prenos datotek je v tej sobi omejen.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> datoteka izvožena v Dokumente",

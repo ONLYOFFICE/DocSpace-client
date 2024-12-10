@@ -63,8 +63,8 @@ const validators: Record<TValidators, (v: string) => boolean> = {
 function reducer(state: IState, action: Action): IState {
   switch (action.type) {
     case "SET_FIELD": {
-      const isValid = validators[action.field](action.value);
       const newFields = { ...state.fields, [action.field]: action.value };
+      const isValid = validators[action.field](action.value);
 
       return {
         fields: newFields,
@@ -114,16 +114,8 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
   );
 
   useEffect(() => {
-    const currentSettings = {
-      ...state.fields,
-      isDefault: companySettings.isDefault,
-      isLicensor: companySettings.isLicensor,
-    };
-
-    if (state.hasChanges && isEqual(companySettings, currentSettings)) {
-      dispatch({ type: "RESET", values: companySettings });
-    }
-  }, [state, companySettings]);
+    dispatch({ type: "RESET", values: companySettings });
+  }, [companySettings]);
 
   return {
     ...state.fields,

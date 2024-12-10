@@ -83,14 +83,23 @@ class DownloadDialogComponent extends React.Component {
     };
   }
 
-  onClose = () => {
-    const { setSortedPasswordFiles } = this.props;
+  interruptingConversion = () => {
+    const { setSortedPasswordFiles, setDownloadItems } = this.props;
+
     setSortedPasswordFiles({
       other: [],
       password: [],
       remove: [],
       original: [],
     });
+
+    setDownloadItems([]);
+  };
+
+  onClose = () => {
+    const { needPassword } = this.props;
+
+    if (needPassword) this.interruptingConversion();
 
     this.props.setDownloadDialogVisible(false);
   };
@@ -115,6 +124,7 @@ class DownloadDialogComponent extends React.Component {
   };
   onDownload = () => {
     const { t, downloadFiles, setDownloadItems, getDownloadItems } = this.props;
+
     const itemList = [
       ...this.state.documents.files,
       ...this.state.spreadsheets.files,
@@ -135,15 +145,21 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onReDownload = () => {
-    const { downloadItems, downloadFiles, getDownloadItems, t } = this.props;
+    const {
+      downloadItems,
+      downloadFiles,
+      getDownloadItems,
+      t,
+      isAllPasswordFilesSorted,
+    } = this.props;
 
-    if (downloadItems.length > 0) {
+    if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
       const [fileConvertIds, folderIds] = getDownloadItems(downloadItems, t);
 
       downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
-    }
 
-    this.onClose();
+      this.onClose();
+    }
   };
 
   getNewArrayFiles = (fileId, array, format) => {
@@ -277,6 +293,15 @@ class DownloadDialogComponent extends React.Component {
    * @param {KeyboardEvent} event
    */
   handleKeyUp = (event) => {
+    const { isAllPasswordFilesSorted, needPassword } = this.props;
+
+    if (event.key === "Enter" && needPassword) {
+      if (!isAllPasswordFilesSorted) return;
+
+      this.onReDownload();
+      return;
+    }
+
     if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
       this.onDownload();
     }

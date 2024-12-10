@@ -178,6 +178,7 @@ class DialogsStore {
     remove: [],
     original: [],
   };
+
   downloadItems = [];
 
   constructor(
@@ -370,7 +371,10 @@ class DialogsStore {
     if (type === "remove") this.downloadItems.push({ ...originItem, password });
     else
       this.downloadItems.map((item) => {
-        if (item.id === id) item.password = password;
+        if (item.id === id) {
+          item.password = password;
+          if (item.oldFormat) item.format = item.oldFormat;
+        }
       });
 
     this.sortedDownloadFiles[type] = [...newArray];
@@ -395,7 +399,10 @@ class DialogsStore {
       this.downloadItems.push({ ...originItem, format: fileExst });
     else
       this.downloadItems.map((item) => {
-        if (item.id === id) item.format = fileExst;
+        if (item.id === id) {
+          item.oldFormat = item.format;
+          item.format = fileExst;
+        }
       });
 
     this.sortedDownloadFiles[type] = [...newArray];

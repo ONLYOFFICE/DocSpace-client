@@ -621,8 +621,12 @@ class FilesActionStore {
 
     const { addActiveItems, bufferSelection, selection } = this.filesStore;
     const { label, passwordError } = translations;
-    const { setDownloadDialogVisible, downloadItems, setSortedPasswordFiles } =
-      this.dialogsStore;
+    const {
+      setDownloadItems,
+      setDownloadDialogVisible,
+      downloadItems,
+      setSortedPasswordFiles,
+    } = this.dialogsStore;
 
     const operationId = uniqueid("operation_");
 
@@ -661,6 +665,7 @@ class FilesActionStore {
                 );
 
           clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);

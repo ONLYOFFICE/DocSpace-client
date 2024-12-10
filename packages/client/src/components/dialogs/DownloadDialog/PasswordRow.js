@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -84,6 +84,25 @@ const PasswordRow = ({
   const removeFromList = () => {
     removeFromDownloadFiles(item.id, type);
   };
+
+  const onKeyUp = (event) => {
+    if (!showPasswordInput) return;
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (event.key === "Enter") {
+      onButtonClick();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyUp, true);
+
+    return () => {
+      window.removeEventListener("keyup", onKeyUp, true);
+    };
+  });
 
   const getOptions = () => {
     const options = [
@@ -152,7 +171,6 @@ const PasswordRow = ({
         <div className="password-input">
           <SimulatePassword
             onChange={onChangePassword}
-            //onKeyDown={onKeyDown}
             hasError={!passwordValid}
             forwardedRef={inputRef}
           />

@@ -1612,6 +1612,8 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
+      containerBorderColor: white,
+
       color: black,
       disabledColor: lightGraySelected,
       pastColor: gray,

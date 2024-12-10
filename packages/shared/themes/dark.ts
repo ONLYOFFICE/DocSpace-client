@@ -1604,6 +1604,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
+    containerBorderColor: grayDarkStrong,
     color: white,
     disabledColor: grayDarkStrong,
     pastColor: grayDark,

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import classNames from "classnames";
 
 import RadioButtonReactSvg from "PUBLIC_DIR/images/radiobutton.react.svg";
@@ -80,7 +80,7 @@ const RadioButton = ({
     onClick?.(e);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!labelRef.current) return;
 
     if (spacing) {

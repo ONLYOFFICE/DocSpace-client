@@ -28,19 +28,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
 
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
-import {
-  generateLogo,
-  getLogoOptions,
-  uploadLogo,
-} from "../../../utils/whiteLabelHelper";
 
 const WhiteLabelComponent = (props) => {
   const {
@@ -62,71 +55,12 @@ const WhiteLabelComponent = (props) => {
     saveWhiteLabelSettings,
     resetWhiteLabelSettings,
   } = props;
-  const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
-
   const showAbout = standalone && isManagement() && displayAbout;
 
   useEffect(() => {
     initWhiteLabel();
   }, []);
-
-  useEffect(() => {
-    if (!isWhiteLabelLoaded) return;
-    setIsEmpty(!logoText);
-    if (!logoText) return;
-    setLogoTextWhiteLabel(logoText);
-  }, [logoText, isWhiteLabelLoaded]);
-
-  const onChangeCompanyName = (e) => {
-    const value = e.target.value;
-    setLogoTextWhiteLabel(value);
-    const trimmedValue = value?.trim();
-    setIsEmpty(!trimmedValue);
-  };
-
-  const onUseTextAsLogo = () => {
-    if (isEmpty) return;
-
-    let newLogos = logoUrls;
-
-    for (let i = 0; i < logoUrls.length; i++) {
-      const options = getLogoOptions(
-        i,
-        logoTextWhiteLabel,
-        logoUrls[i].size.width,
-        logoUrls[i].size.height,
-      );
-
-      if (!showAbout && logoUrls[i].name === "AboutPage") continue;
-
-      const isDocsEditorName = logoUrls[i].name === "DocsEditor";
-
-      const logoLight = generateLogo(
-        options.width,
-        options.height,
-        options.text,
-        options.fontSize,
-        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
-        options.alignCenter,
-        options.isEditor,
-      );
-      const logoDark = generateLogo(
-        options.width,
-        options.height,
-        options.text,
-        options.fontSize,
-        globalColors.white,
-        options.alignCenter,
-        options.isEditor,
-      );
-      newLogos[i].path.light = logoLight;
-      newLogos[i].path.dark = logoDark;
-    }
-
-    setLogoUrls(newLogos);
-  };
 
   const onRestoreDefault = async () => {
     try {
@@ -137,58 +71,7 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
-  const onChangeLogo = async (e) => {
-    const id = e.target.id.split("_");
-    const type = id[1];
-    const theme = id[2];
-
-    let file = e.target.files[0];
-
-    const { data } = await uploadLogo(file, type);
-
-    if (data.Success) {
-      const url = data.Message;
-      const newArr = logoUrls;
-
-      if (theme === "light") {
-        newArr[type - 1].path.light = url;
-      } else if (theme === "dark") {
-        newArr[type - 1].path.dark = url;
-      }
-
-      setLogoUrls(newArr);
-    } else {
-      console.error(data.Message);
-      toastr.error(data.Message);
-    }
-  };
-
-  const onSave = async () => {
-    let logosArr = [];
-
-    for (let i = 0; i < logoUrls.length; i++) {
-      const currentLogo = logoUrls[i];
-      const defaultLogo = defaultWhiteLabelLogoUrls[i];
-
-      if (!isEqual(currentLogo, defaultLogo)) {
-        let value = {};
-
-        if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
-          value.light = currentLogo.path.light;
-        if (!isEqual(currentLogo.path.dark, defaultLogo.path.dark))
-          value.dark = currentLogo.path.dark;
-
-        logosArr.push({
-          key: String(i + 1),
-          value: value,
-        });
-      }
-    }
-    const data = {
-      logoText: logoTextWhiteLabel,
-      logo: logosArr,
-    };
-
+  const onSave = async (data) => {
     try {
       setIsSaving(true);
       await saveWhiteLabelSettings(data);
@@ -201,31 +84,27 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
-  const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
-  const isEqualText = defaultLogoText === logoTextWhiteLabel;
-  const saveButtonDisabled = isEqualLogo && isEqualText;
-
+  console.log("logoUrls", logoUrls);
   return !isWhiteLabelLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelPage
       t={t}
       logoUrls={logoUrls}
-      onChangeLogo={onChangeLogo}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}
       showNotAvailable={showNotAvailable}
       standalone={standalone}
-      onUseTextAsLogo={onUseTextAsLogo}
-      isEmpty={isEmpty}
-      logoTextWhiteLabel={logoTextWhiteLabel}
-      onChangeCompanyName={onChangeCompanyName}
       onSave={onSave}
       onRestoreDefault={onRestoreDefault}
-      saveButtonDisabled={saveButtonDisabled}
       isSaving={isSaving}
       enableRestoreButton={isDefaultWhiteLabel}
       deviceType={deviceType}
+      setLogoUrls={setLogoUrls}
+      isWhiteLabelLoaded={isWhiteLabelLoaded}
+      defaultLogoText={defaultLogoText}
+      defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
+      logoText={logoText}
     />
   );
 };

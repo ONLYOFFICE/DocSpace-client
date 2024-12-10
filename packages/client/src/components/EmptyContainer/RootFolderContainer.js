@@ -380,10 +380,10 @@ export default inject(
   }) => {
     const { isDesktopClient, isEncryptionSupport, theme } = settingsStore;
 
-    const { setIsSectionFilterLoading } = clientLoadingStore;
+    const { setIsSectionBodyLoading } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { filter, privacyInstructions, isEmptyPage } = filesStore;

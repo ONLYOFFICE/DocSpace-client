@@ -120,6 +120,7 @@ const LinkRow = (props: LinkRowProps) => {
       roomId,
       isPublic: isPublicRoomType,
       isFormRoom,
+      isCustomRoom,
     });
     onCloseContextMenu();
   };
@@ -132,7 +133,13 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setLinkParams({
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+      isCustomRoom,
+    });
     setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
   };
@@ -194,11 +201,13 @@ const LinkRow = (props: LinkRowProps) => {
       {
         key: "delete-link-key",
         label:
-          primary && isPublicRoomType
+          primary && (isPublicRoomType || isFormRoom)
             ? t("Files:RevokeLink")
             : t("Common:Delete"),
         icon:
-          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          primary && (isPublicRoomType || isFormRoom)
+            ? OutlineReactSvgUrl
+            : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
@@ -217,6 +226,7 @@ const LinkRow = (props: LinkRowProps) => {
           roomId,
           isPublic: isPublicRoomType,
           isFormRoom,
+          isCustomRoom,
         });
 
         if (linkData) {
@@ -318,13 +328,13 @@ export default inject<TStore>(
       setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType:
-        roomType === RoomsType.PublicRoom || roomType === RoomsType.FormRoom,
+      isPublicRoomType: roomType === RoomsType.PublicRoom,
       isFormRoom: roomType === RoomsType.FormRoom,
       isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
       deleteExternalLink,
+      roomType,
     };
   },
 )(

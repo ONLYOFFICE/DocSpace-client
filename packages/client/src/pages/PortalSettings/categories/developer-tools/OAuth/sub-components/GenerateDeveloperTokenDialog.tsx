@@ -127,6 +127,8 @@ const GenerateDeveloperTokenDialog = ({
       return;
     }
 
+    setRequestRunning(true);
+
     api.oauth
       .generateDevelopToken(client.clientId, client.clientSecret, client.scopes)
       ?.then((data) => {

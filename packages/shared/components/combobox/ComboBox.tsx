@@ -183,6 +183,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     withLabel = true,
     displayArrow,
     topSpace,
+    usePortalBackdrop,
     onToggle,
   } = props;
 
@@ -346,6 +347,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
           topSpace={topSpace}
+          usePortalBackdrop={usePortalBackdrop}
           onCloseDropdown={onCloseCombobox}
           enableKeyboardEvents
         >

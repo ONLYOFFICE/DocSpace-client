@@ -206,6 +206,7 @@
   "RestoreBackupDescription": "Użyj tej opcji do przywrócenia portalu z wcześniej zapisanego pliku kopii zapasowej.",
   "RestoreBackupResetInfoWarningText": "Wszystkie bieżące hasła zostaną zresetowane. Użytkownicy {{productName}} otrzymają wiadomość e-mail z linkiem umożliwiającym odzyskanie dostępu.",
   "RestoreBackupWarningText": "Obszar {{productName}} będzie niedostępny podczas procesu przywracania. Po jego zakończeniu wszystkie zmiany dokonane po dacie wybranego puntu przywracania zostaną utracone.",
+  "RestoreToDefault": "Przywróć domyślne",
   "RolesAreSet": "Role zostały już ustawione dla wybranych użytkowników.",
   "RoomQuotaDisabled": "Limit pokoi został wyłączony.",
   "RoomQuotaEnabled": "Limit pokoi został włączony.",

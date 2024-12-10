@@ -49,7 +49,6 @@ import {
   lockFile,
   markAsRead,
   removeFiles,
-  removeShareFiles,
   createFolder,
   moveToFolder,
   duplicate,
@@ -728,9 +727,6 @@ class FilesActionStore {
 
   completeAction = async (selectedItem, type, isFolder = false) => {
     switch (type) {
-      case FileAction.Create:
-        this.filesStore.addItem(selectedItem, isFolder);
-        break;
       case FileAction.Rename:
         this.onSelectItem(
           {
@@ -1043,25 +1039,22 @@ class FilesActionStore {
   };
 
   setFavoriteAction = (action, id) => {
-    const {
-      markItemAsFavorite,
-      removeItemFromFavorite,
-      fetchFavoritesFolder,
-      setSelected,
-    } = this.filesStore;
+    const { fetchFavoritesFolder, setSelected } = this.filesStore;
 
     const items = Array.isArray(id) ? id : [id];
 
     switch (action) {
       case "mark":
-        return markItemAsFavorite(items)
+        return api.files
+          .markAsFavorite(items)
           .then(() => {
             return this.getFilesInfo(items);
           })
           .then(() => setSelected("close"));
 
       case "remove":
-        return removeItemFromFavorite(items)
+        return api.files
+          .removeFromFavorite(items)
           .then(() => {
             return this.treeFoldersStore.isFavoritesFolder
               ? fetchFavoritesFolder(this.selectedFolderStore.id)
@@ -1074,8 +1067,6 @@ class FilesActionStore {
   };
 
   setPinAction = async (action, id, t) => {
-    const { pinRoom, unpinRoom } = this.filesStore;
-
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
@@ -1103,7 +1094,7 @@ class FilesActionStore {
     const isPin = action === "pin";
 
     items.forEach((item) => {
-      actions.push(isPin ? pinRoom(item) : unpinRoom(item));
+      actions.push(isPin ? api.rooms.pinRoom(item) : api.rooms.unpinRoom(item));
     });
 
     if (isPin) {
@@ -1491,11 +1482,11 @@ class FilesActionStore {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
@@ -2408,9 +2399,8 @@ class FilesActionStore {
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
-    const { isOwner, isAdmin } = this.userStore.user;
 
-    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
@@ -2424,7 +2414,7 @@ class FilesActionStore {
     }
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const isMediaOrImage =
@@ -2491,6 +2481,12 @@ class FilesActionStore {
 
       setIsLoading(true);
 
+      const isShared =
+        item.shared || item.navigationPath?.findIndex((r) => r.shared) > -1;
+
+      const isExternal =
+        item.external || item.navigationPath?.findIndex((r) => r.external) > -1;
+
       const state = {
         title,
         isRoot: false,
@@ -2498,6 +2494,9 @@ class FilesActionStore {
         isRoom,
         rootRoomTitle: !!roomType ? currentTitle : "",
         isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+        isShared,
+        isExternal,
+        canCreate: item.security?.canCreate,
         isLifetimeEnabled:
           itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
       };
@@ -2574,7 +2573,7 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
-    const { isLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2630,6 +2629,9 @@ class FilesActionStore {
       const contactsTab = getContactsView();
 
       if (insideGroupBackUrl) {
+        console.log("set");
+        setIsSectionBodyLoading(true, false);
+
         setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
@@ -2646,6 +2648,8 @@ class FilesActionStore {
       clearFiles();
 
       if (window.location.search.includes("group")) {
+        setIsSectionBodyLoading(true, false);
+
         setSelectedNode(["accounts", "groups", "filter"]);
         setContactsTab("groups");
 
@@ -2822,8 +2826,7 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const { updateRoomMemberRole, removeFiles, selection, bufferSelection } =
-      this.filesStore;
+    const { removeFiles, selection, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2835,44 +2838,40 @@ class FilesActionStore {
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
 
-    return updateRoomMemberRole(roomId, {
-      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
-    }).then(() => {
-      if (!isAdmin) {
-        if (!isRoot) {
-          const filter = RoomsFilter.getDefault();
-          window.DocSpace.navigate(
-            `rooms/shared/filter?${filter.toUrlParams()}`,
-          );
+    return api.rooms
+      .updateRoomMemberRole(roomId, {
+        invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+      })
+      .then(() => {
+        if (!isAdmin) {
+          if (!isRoot) {
+            const filter = RoomsFilter.getDefault();
+            window.DocSpace.navigate(
+              `rooms/shared/filter?${filter.toUrlParams()}`,
+            );
+          } else {
+            removeFiles(null, [roomId]);
+          }
         } else {
-          removeFiles(null, [roomId]);
-        }
-      } else {
-        if (!isRoot) {
-          this.selectedFolderStore.setInRoom(false);
+          if (!isRoot) {
+            this.selectedFolderStore.setInRoom(false);
 
-          const operationId = uniqueid("operation_");
-          this.updateCurrentFolder(null, [roomId], null, operationId);
-        } else {
-          this.filesStore.setInRoomFolder(roomId, false);
+            const operationId = uniqueid("operation_");
+            this.updateCurrentFolder(null, [roomId], null, operationId);
+          } else {
+            this.filesStore.setInRoomFolder(roomId, false);
+          }
         }
-      }
 
-      isOwner
-        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
-        : toastr.success(t("Files:YouLeftTheRoom"));
-    });
+        isOwner
+          ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+          : toastr.success(t("Files:YouLeftTheRoom"));
+      });
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
-    const {
-      setRoomOwner,
-      setFolder,
-      setFolders,
-      setSelected,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { setFolder, setFolders, setSelected, selection, bufferSelection } =
+      this.filesStore;
     const {
       isRootFolder,
       setCreatedBy,
@@ -2888,7 +2887,8 @@ class FilesActionStore {
         ? bufferSelection.id
         : id;
 
-    return setRoomOwner(userId, [roomId])
+    return api.files
+      .setFileOwner(userId, [roomId])
       .then(async (res) => {
         if (isRootFolder) {
           setFolder(res[0]);
@@ -3097,20 +3097,11 @@ class FilesActionStore {
     }
   };
 
-  saveIndexOfFiles = async () => {
-    const { updateSelection } = this.indexingStore;
+  saveIndexOfFiles = async (t) => {
+    const { getIndexingArray } = this.indexingStore;
 
     try {
-      const items = updateSelection.reduce((res, item) => {
-        return [
-          ...res,
-          {
-            order: item.order,
-            entryId: item.id,
-            entryType: item.isFolder ? 1 : 2,
-          },
-        ];
-      }, []);
+      const items = getIndexingArray();
 
       if (items.length > 0) {
         await changeIndex(items);

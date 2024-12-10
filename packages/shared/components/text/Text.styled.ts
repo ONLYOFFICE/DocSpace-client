@@ -77,6 +77,12 @@ const StyledText = styled.p.attrs(injectDefaultTheme)<
 
   ${commonTextStyles};
 
+  ${({ textType, theme }) =>
+    textType === "secondary" &&
+    css`
+      color: ${theme.text.secondary.color};
+    `}
+
   ${(props) => props.noSelect && NoUserSelect}
 `;
 

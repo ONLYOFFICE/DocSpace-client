@@ -798,7 +798,11 @@ export const useContactsFilter = ({
       };
 
       if (isGuests) {
-        options.push(email, inviter, registrationDate);
+        options.push(firstName, email);
+
+        if (!isRoomAdmin) options.push(inviter);
+
+        options.push(registrationDate);
       } else {
         options.push(firstName, type, department, email);
         if (showStorageInfo) options.push(storage);
@@ -833,7 +837,7 @@ export const useContactsFilter = ({
     groupsOptions.push(title, people, manager);
 
     return groupsOptions;
-  }, [isGroups, isGuests, showStorageInfo, t]);
+  }, [isGroups, isGuests, isRoomAdmin, showStorageInfo, t]);
 
   const removeContactsSelectedItem = React.useCallback(
     (group: FilterGroups) => {

@@ -1,16 +1,6 @@
 {
-  "AdditionalSections": "Dodatni odeljci",
-  "DisplayFavorites": "Prikaži Omiljeno",
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "DisplayNotification": "Prikaži notifikaciju kada pomerate stavke u Otpad",
-  "DisplayRecent": "Prikaži Skorašnje",
-  "DisplayTemplates": "Prikaži Šablone",
-  "IntermediateVersion": "Zadrži sve sačuvane međuverzije",
-  "KeepIntermediateVersion": "Zadrži međuverzije kada uređuješ",
   "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
-  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
-  "StoringFileVersion": "Čuvanje verzija datoteka",
-  "ThirdPartyAccounts": "Nalozi treće strane",
-  "ThirdPartyBtn": "Dozvoli konekciju skladišta treće strane",
-  "UpdateOrCreate": "Ažurirajte verziju datoteke za postojeću datoteku sa istim imenom. U suprotnom, biće napravljena kopija datoteke."
+  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe"
 }

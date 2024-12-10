@@ -27,6 +27,7 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
+import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
@@ -51,6 +52,7 @@ const DropDown = (props: DropDownProps) => {
     fixedDirection = false,
     offsetLeft = 0,
     enableKeyboardEvents = false,
+    usePortalBackdrop = false,
   } = props;
 
   const toggleDropDown = () => {
@@ -65,19 +67,21 @@ const DropDown = (props: DropDownProps) => {
         ? { eventTypes }
         : {};
 
+  const backDrop = withBackdrop ? (
+    <Backdrop
+      visible={open || false}
+      zIndex={usePortalBackdrop ? 400 : 199}
+      onClick={toggleDropDown}
+      withoutBlur={!withBlur}
+      isAside={isAside}
+      withBackground={withBackground}
+      withoutBackground={withoutBackground}
+    />
+  ) : null;
+
   return (
     <>
-      {withBackdrop ? (
-        <Backdrop
-          visible={open || false}
-          zIndex={199}
-          onClick={toggleDropDown}
-          withoutBlur={!withBlur}
-          isAside={isAside}
-          withBackground={withBackground}
-          withoutBackground={withoutBackground}
-        />
-      ) : null}
+      {!usePortalBackdrop && backDrop}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}
@@ -85,6 +89,7 @@ const DropDown = (props: DropDownProps) => {
         fixedDirection={fixedDirection}
         offsetLeft={offsetLeft}
         enableKeyboardEvents={enableKeyboardEvents}
+        backDrop={backDrop}
         {...props}
       />
     </>

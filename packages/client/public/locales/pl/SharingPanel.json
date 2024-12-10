@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Link zewnętrzny",
-  "FormFilling": "Wypełnianie formularza",
   "LinkName": "Nazwa linku",
   "ShareEmailBody": "Udzielono Ci dostępu do dokumentu {{itemName}}. Kliknij poniższy link, aby otworzyć go już teraz: {{shareLink}}.",
   "ShareEmailSubject": "Udzielono Ci dostępu do dokumentu {{itemName}}"

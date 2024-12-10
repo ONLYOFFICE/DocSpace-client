@@ -3,6 +3,8 @@
   "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia kaksoisnapsauttamalla sitä.",
   "GroupMaxAvailableRoleWarning": "Maksimimäärän ryhmiä voi nyt lisätä huoneeseen {{roleName}}-roolissa. Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä sen jälkeen, kun se on lisätty.",
   "InvitationLanguage": "Kutsukieli",
+  "InviteMembersManuallyDescription": "Kutsu uusia jäseniä {{productName}} :een henkilökohtaisesti sähköpostilla",
+  "InviteMembersSearchPlaceholder": "Kutsu käyttäjiä sähköpostilla",
   "InviteToRoomManuallyInfo": "Lisää olemassa oleva {{productName}} yhteystietoihin. Tai kutsu uusia käyttäjiä henkilökohtaisesti sähköpostilla. Uudet käyttäjät lisätään vieraslistaasi.",
   "InviteToRoomSearchPlaceholder": "Etsi ja kutsu nimellä tai sähköpostilla",
   "InviteViaLink": "Kutsu linkin kautta",

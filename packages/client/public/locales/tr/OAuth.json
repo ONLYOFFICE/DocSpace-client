@@ -54,6 +54,7 @@
   "NoAuthorizedApps": "Yetkili uygulama yok",
   "NoOAuthAppHeader": "OAuth uygulaması yok",
   "OAuth": "OAuth 2.0",
+  "OAuthAppDescription": "Yetkilendirme ve dosyalara erişim gibi diğer eylemler için {{organizationName}} {{productName}} API'ına erişmek için OAuth 2.0'ı kullanın. Burada yeni bir uygulama kaydedebilir, oluşturduğunuz uygulamaları listeden yönetebilir, devre dışı bırakabilir ve etkinleştirebilirsiniz.",
   "OAuthHeaderBlock": "OAuth bağlantıları",
   "PrivacyPolicy": "Gizlilik politikası",
   "PrivacyPolicyURL": "Gizlilik politikası URL’si",

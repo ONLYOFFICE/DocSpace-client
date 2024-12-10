@@ -59,4 +59,6 @@ export type BadgeProps = TextProps & {
   /** When true, applies special styling for paid/premium features */
   isPaidBadge?: boolean;
   /** Handler for mouse over events. Used for hover state management and interactions */
+  /** When true, applies custom hover styles */
+  isHovered?: boolean;
 };

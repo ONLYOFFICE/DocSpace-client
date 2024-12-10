@@ -31,21 +31,16 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 
 import { Badge } from "../badge";
 import { IconButton } from "../icon-button";
+import { Tooltip } from "../tooltip";
 
-import {
-  InfoBadgeContent,
-  InfoBadgeDescription,
-  InfoBadgeHeader,
-  InfoBadgeTitle,
-  StyledToolTip,
-} from "./InfoBadge.styled";
+import styles from "./InfoBadge.module.scss";
 import type InfoBadgeProps from "./InfoBadge.types";
 import { globalColors } from "../../themes";
 
-export const InfoBadge: FC<InfoBadgeProps> = ({
+const InfoBadge: FC<InfoBadgeProps> = ({
   label,
   offset,
-  place,
+  place = "bottom",
   tooltipDescription,
   tooltipTitle,
 }) => {
@@ -69,28 +64,39 @@ export const InfoBadge: FC<InfoBadgeProps> = ({
         backgroundColor={globalColors.mainPurple}
       />
 
-      <StyledToolTip
+      <Tooltip
         id={id}
+        ref={tooltipRef}
+        place={place}
+        offset={offset || 10}
         clickable
         openOnClick
-        place={place}
-        offset={offset}
-        ref={tooltipRef}
+        className={styles.tooltip}
+        aria-labelledby={id}
+        data-testid="info-tooltip"
       >
-        <InfoBadgeContent>
-          <InfoBadgeHeader>
-            <InfoBadgeTitle>{tooltipTitle}</InfoBadgeTitle>
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h3 className={styles.title} data-testid="tooltip-title">
+              {tooltipTitle}
+            </h3>
             <IconButton
               isFill
               size={16}
               onClick={onClose}
               iconName={CrossIcon}
-              className="info-badge__close"
+              className={styles.close}
             />
-          </InfoBadgeHeader>
-          <InfoBadgeDescription>{tooltipDescription}</InfoBadgeDescription>
-        </InfoBadgeContent>
-      </StyledToolTip>
+          </div>
+          <p className={styles.description} data-testid="tooltip-description">
+            {tooltipDescription}
+          </p>
+        </div>
+      </Tooltip>
     </div>
   );
 };
+
+InfoBadge.displayName = "InfoBadge";
+
+export { InfoBadge };

@@ -27,16 +27,16 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Text } from "@docspace/shared/components/text";
-import { Badge } from "@docspace/shared/components/badge";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Text } from "../../../components/text";
+import { Badge } from "../../../components/badge";
+import { HelpButton } from "../../../components/help-button";
+import { FieldContainer } from "../../../components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/shared/components/text-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+} from "../../../components/text-input";
+import { Button, ButtonSize } from "../../../components/button";
 
 import { NotAvailable } from "./NotAvailable";
 import { StyledHeader } from "./WhiteLabel.styled";

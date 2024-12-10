@@ -32,9 +32,9 @@ import EditorSample from "PUBLIC_DIR/images/logo/embedded_sample.svg?url";
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { getLogoFromPath, isMobile } from "@docspace/shared/utils";
+import { Text } from "../../../components/text";
+import { Link, LinkType } from "../../../components/link";
+import { getLogoFromPath, isMobile } from "../../../utils";
 
 import { ILogoProps } from "./WhiteLabel.types";
 

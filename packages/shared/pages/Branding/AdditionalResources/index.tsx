@@ -26,9 +26,9 @@
 
 import React, { useState, useEffect } from "react";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { isManagement } from "@docspace/shared/utils/common";
+import { Checkbox } from "../../../components/checkbox";
+import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+import { isManagement } from "../../../utils/common";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 

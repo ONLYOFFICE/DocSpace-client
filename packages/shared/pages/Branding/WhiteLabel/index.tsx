@@ -27,12 +27,12 @@
 import React, { useState, useEffect } from "react";
 import isEqual from "lodash/isEqual";
 
-import { Text } from "@docspace/shared/components/text";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { toastr } from "@docspace/shared/components/toast";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { isManagement } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "../../../components/text";
+import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+import { toastr } from "../../../components/toast";
+import { WhiteLabelLogoType } from "../../../enums";
+import { isManagement } from "../../../utils/common";
+import { globalColors } from "../../../themes";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 

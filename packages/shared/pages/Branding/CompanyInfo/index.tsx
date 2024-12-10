@@ -27,15 +27,15 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Link } from "../../../components/link";
+import { FieldContainer } from "../../../components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/shared/components/text-input";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { isManagement } from "@docspace/shared/utils/common";
+} from "../../../components/text-input";
+import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+import { isManagement } from "../../../utils/common";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 

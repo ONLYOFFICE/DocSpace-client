@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "../../../themes";
 import {
   ILogoOptions,
   IUploadedDimensions,

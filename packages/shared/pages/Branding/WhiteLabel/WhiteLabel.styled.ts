@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { mobile } from "../../../utils";
 
 export const StyledHeader = styled.div`
   .subtitle {

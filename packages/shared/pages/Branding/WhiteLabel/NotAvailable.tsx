@@ -29,8 +29,8 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import { Text } from "@docspace/shared/components/text";
-import { TTranslation } from "@docspace/shared/types";
+import { Text } from "../../../components/text";
+import { TTranslation } from "../../../types";
 
 const StyledWrapper = styled.div`
   background: ${(props) =>

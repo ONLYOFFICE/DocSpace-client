@@ -338,6 +338,7 @@
   "NotFoundTitle": "什么也没找到",
   "NotFoundUsers": "未找到用户",
   "NotFoundUsersDescription": "没有与您搜索条件匹配的用户。请调整搜索参数或清除搜索字段，查看完整的用户列表。",
+  "NoTimeLimit": "无时间限制",
   "NotSupportedFormat": "很抱歉，系统暂不支持此文件格式",
   "OAuthAccountsName": "联系人信息",
   "OAuthAccountsReadDescription": "查看所有联系人",

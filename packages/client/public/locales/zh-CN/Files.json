@@ -87,6 +87,7 @@
   "Folder": "文件夹",
   "FolderRemoved": "文件已移至垃圾箱",
   "FolderRenamed": "文件夹'{{folderTitle}}'已重命名为'{{newFoldedTitle}}'",
+  "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1>文件夹已创建",
   "Forms": "表单",
   "GeneralLinkDeletedSuccessfully": "已成功创建新的通用链接",
   "GoToMyRooms": "转到房间",

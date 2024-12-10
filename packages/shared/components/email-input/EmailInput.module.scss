@@ -24,13 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { TextInput } from "../text-input";
-
-const StyledEmailInput = styled(TextInput)`
-  // logical property won't work because of "dir: auto"
-  text-align: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "right" : "left"};
-`;
-
-export default StyledEmailInput;
+.emailInput {
+  text-align: var(--interface-direction);
+}

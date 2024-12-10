@@ -50,18 +50,17 @@ export interface IWhiteLabel {
   showNotAvailable: boolean;
   standalone: boolean;
   logoUrls: ILogo[];
+  logoText: string;
   showAbout: boolean;
-  onChangeLogo: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onUseTextAsLogo: () => void;
-  isEmpty: boolean;
-  logoTextWhiteLabel: string;
-  onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSave: () => void;
+  onSave: (data) => void;
   onRestoreDefault: () => void;
-  saveButtonDisabled: boolean;
   isSaving: boolean;
   enableRestoreButton: boolean;
   deviceType: DeviceType;
+  setLogoUrls: (logoUrls: ILogo[]) => void;
+  isWhiteLabelLoaded: boolean;
+  defaultLogoText: string;
+  defaultWhiteLabelLogoUrls: ILogo[];
 }
 
 export interface ILogoProps {
@@ -75,4 +74,5 @@ export interface ILogoProps {
   imageClass?: string;
   isEditor?: boolean;
   isEditorHeader?: boolean;
+  name: string;
 }

@@ -24,40 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import isEqual from "lodash/isEqual";
 
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { isManagement } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel } from "./WhiteLabel.types";
+import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
     t,
     logoUrls,
-    onChangeLogo,
     isSettingPaid,
     showAbout,
     showNotAvailable,
     standalone,
-    onUseTextAsLogo,
-    isEmpty,
-    logoTextWhiteLabel,
-    onChangeCompanyName,
     onSave,
     onRestoreDefault,
-    saveButtonDisabled,
     isSaving,
     enableRestoreButton,
     deviceType,
+    setLogoUrls,
+    isWhiteLabelLoaded,
+    defaultLogoText,
+    defaultWhiteLabelLogoUrls,
+    logoText,
   } = props;
+  const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
+  const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
+
   const redirectUrl: string = isManagement()
     ? "/management/settings/branding"
     : "/portal-settings/customization/branding";
@@ -67,6 +73,120 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     currentLocation: "white-label",
     deviceType,
   });
+
+  useEffect(() => {
+    if (!isWhiteLabelLoaded) return;
+    setIsEmpty(!logoText);
+    if (!logoText) return;
+    setLogoTextWhiteLabel(logoText);
+  }, [logoText, isWhiteLabelLoaded]);
+
+  const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLogoTextWhiteLabel(value);
+    const trimmedValue = value?.trim();
+    setIsEmpty(!trimmedValue);
+  };
+
+  const onUseTextAsLogo = () => {
+    if (isEmpty) return;
+
+    const newLogos = logoUrls.map((logo, i) => {
+      if (!showAbout && logo.name === "AboutPage") return logo;
+
+      const options = getLogoOptions(
+        i,
+        logoTextWhiteLabel,
+        logo.size.width,
+        logo.size.height,
+      );
+
+      const isDocsEditorName = logo.name === "DocsEditor";
+
+      const logoLight = generateLogo(
+        options.width,
+        options.height,
+        options.text,
+        options.fontSize,
+        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
+        options.alignCenter,
+        options.isEditor,
+      );
+      const logoDark = generateLogo(
+        options.width,
+        options.height,
+        options.text,
+        options.fontSize,
+        globalColors.white,
+        options.alignCenter,
+        options.isEditor,
+      );
+
+      logo.path.light = logoLight;
+      logo.path.dark = logoDark;
+
+      return logo;
+    });
+    setLogoUrls(newLogos);
+  };
+
+  const onChangeLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const id = e.target.id.split("_");
+    const type = id[1];
+    const theme = id[2];
+    const logoName = e.target.name;
+
+    console.log("logoName", logoName);
+    const file = e.target.files[0];
+
+    const { data } = await uploadLogo(file, type);
+
+    if (data.Success) {
+      const url = data.Message;
+      const newArr = logoUrls.map((logo) => {
+        if (logo.name !== logoName) return logo;
+        if (theme === "light") logo.path.light = url;
+        if (theme === "dark") logo.path.dark = url;
+        return logo;
+      });
+      setLogoUrls(newArr);
+    } else {
+      console.error(data.Message);
+      toastr.error(data.Message);
+    }
+  };
+
+  const onSaveAction = () => {
+    const logosArr = [];
+
+    for (let i = 0; i < logoUrls.length; i += 1) {
+      const currentLogo = logoUrls[i];
+      const defaultLogo = defaultWhiteLabelLogoUrls[i];
+
+      if (!isEqual(currentLogo, defaultLogo)) {
+        const value = {};
+
+        if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
+          value.light = currentLogo.path.light;
+        if (!isEqual(currentLogo.path.dark, defaultLogo.path.dark))
+          value.dark = currentLogo.path.dark;
+
+        logosArr.push({
+          key: String(i + 1),
+          value,
+        });
+      }
+    }
+    const data = {
+      logoText: logoTextWhiteLabel,
+      logo: logosArr,
+    };
+    onSave(data);
+  };
+
+  const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
+  const isEqualText = defaultLogoText === logoTextWhiteLabel;
+  const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return (
     <WhiteLabelWrapper>
@@ -93,6 +213,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </Text>
           <div className="logos-wrapper">
             <Logo
+              name={logoUrls[0].name}
               title={t("Profile:LightTheme")}
               src={logoUrls[0].path.light}
               imageClass="logo-header background-light"
@@ -103,6 +224,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
+              name={logoUrls[0].name}
               title={t("Profile:DarkTheme")}
               src={logoUrls[0].path.dark}
               imageClass="logo-header background-dark"
@@ -126,6 +248,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </Text>
           <div className="logos-wrapper">
             <Logo
+              name={logoUrls[5].name}
               title={t("Profile:LightTheme")}
               src={logoUrls[5].path.light}
               imageClass="border-img logo-compact background-light"
@@ -136,6 +259,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
+              name={logoUrls[5].name}
               title={t("Profile:DarkTheme")}
               src={logoUrls[5].path.dark}
               imageClass="border-img logo-compact background-dark"
@@ -159,6 +283,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </Text>
           <div className="logos-login-wrapper">
             <Logo
+              name={logoUrls[1].name}
               title={t("Profile:LightTheme")}
               src={logoUrls[1].path.light}
               imageClass="border-img logo-big background-white"
@@ -169,6 +294,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
+              name={logoUrls[1].name}
               title={t("Profile:DarkTheme")}
               src={logoUrls[1].path.dark}
               imageClass="border-img logo-big background-dark"
@@ -193,6 +319,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             </Text>
             <div className="logos-wrapper">
               <Logo
+                name={logoUrls[6].name}
                 title={t("Profile:LightTheme")}
                 src={logoUrls[6].path.light}
                 imageClass="border-img logo-about background-white"
@@ -203,6 +330,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
                 isSettingPaid={isSettingPaid}
               />
               <Logo
+                name={logoUrls[6].name}
                 title={t("Profile:DarkTheme")}
                 src={logoUrls[6].path.dark}
                 imageClass="border-img logo-about background-dark"
@@ -225,6 +353,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             {logoUrls[2].size.height})
           </Text>
           <Logo
+            name={logoUrls[2].name}
             src={logoUrls[2].path.light}
             imageClass="border-img logo-favicon"
             inputId={`logoUploader_${WhiteLabelLogoType.Favicon}_light`}
@@ -245,6 +374,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             {logoUrls[3].size.height})
           </Text>
           <Logo
+            name={logoUrls[3].name}
             isEditor
             src={logoUrls[3].path.light}
             inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
@@ -265,6 +395,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             {logoUrls[4].size.height})
           </Text>
           <Logo
+            name={logoUrls[4].name}
             src={logoUrls[4].path.light}
             imageClass="border-img logo-embedded-editor background-white"
             inputId={`logoUploader_${WhiteLabelLogoType.DocsEditorEmbed}_light`}
@@ -279,7 +410,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       <StyledSpacer showReminder={!saveButtonDisabled} />
       <SaveCancelButtons
         className="save-cancel-buttons"
-        onSaveClick={onSave}
+        onSaveClick={onSaveAction}
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}

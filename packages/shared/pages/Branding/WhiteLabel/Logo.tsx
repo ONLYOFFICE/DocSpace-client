@@ -50,6 +50,7 @@ export const Logo = (props: ILogoProps) => {
     imageClass,
     isEditor,
     isEditorHeader,
+    name,
   } = props;
 
   const currentLogo = getLogoFromPath(src);
@@ -129,6 +130,7 @@ export const Logo = (props: ILogoProps) => {
       </div>
       <label>
         <input
+          name={name}
           id={inputId}
           type="file"
           className="hidden"

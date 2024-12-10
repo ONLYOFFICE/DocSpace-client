@@ -338,6 +338,7 @@
   "NotFoundTitle": "Ništa nije pronađeno",
   "NotFoundUsers": "Nijedan korisnik pronađen",
   "NotFoundUsersDescription": "Nema korisnika koji se poklapaju sa vašom pretragom. Molimo vas podesite vaše parametre pretrage ili obrišite polje pretrage da biste videli punu listu korisnika.",
+  "NoTimeLimit": "Bez vremenskog ograničenja",
   "NotSupportedFormat": "Izvinjavamo se, ovaj format datoteke nije podržan",
   "OAuthAccountsName": "Kontakti",
   "OAuthAccountsReadDescription": "Pregled svih kontakata",

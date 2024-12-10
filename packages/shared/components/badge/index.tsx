@@ -53,6 +53,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     isVersionBadge,
     isPaidBadge,
     isMutedBadge,
+    ...rest
   } = props;
 
   const onClickAction = React.useCallback(
@@ -92,7 +93,6 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       className={`${styles.badge} ${styles.themed} ${className || ""}`}
       style={badgeStyle}
       onClick={onClickAction}
-      onFocus={onMouseOver}
       onMouseLeave={onMouseLeave}
       onMouseOver={onMouseOver}
       role="status"
@@ -107,6 +107,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       data-version-badge={isVersionBadge}
       data-paid={isPaidBadge}
       data-muted={isMutedBadge}
+      {...rest}
     >
       <div
         className={styles.inner}

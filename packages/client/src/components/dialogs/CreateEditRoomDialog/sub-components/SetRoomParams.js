@@ -29,33 +29,30 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import RoomType from "@docspace/shared/components/room-type";
-// import IsPrivateParam from "./IsPrivateParam";
+import { RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
+import { isMobile, mobile } from "@docspace/shared/utils";
 
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import RoomType from "@docspace/shared/components/room-type";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import ItemIcon from "@docspace/client/src/components/ItemIcon";
-
-import { RoomsType } from "@docspace/shared/enums";
-
-import { isMobile, mobile } from "@docspace/shared/utils";
-import { isMobileOnly } from "react-device-detect";
-
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { globalColors } from "@docspace/shared/themes";
+import ItemIcon from "../../../ItemIcon";
+import withLoader from "../../../../HOCs/withLoader";
+import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
-import RoomQuota from "./RoomQuota";
-import ChangeRoomOwner from "./ChangeRoomOwner";
+
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
-import ThirdPartyStorage from "./ThirdPartyStorage";
-import InputParam from "./Params/InputParam";
-import PermanentSettings from "./PermanentSettings";
+
 import TagInput from "./TagInput";
+import RoomQuota from "./RoomQuota";
+import InputParam from "./Params/InputParam";
+import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
+import PermanentSettings from "./PermanentSettings";
+import ThirdPartyStorage from "./ThirdPartyStorage";
+// import IsPrivateParam from "./IsPrivateParam";
 
 const StyledSetRoomParams = styled.div`
   display: flex;

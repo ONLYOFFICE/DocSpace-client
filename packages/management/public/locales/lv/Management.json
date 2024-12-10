@@ -8,6 +8,7 @@
   "CurrentSpace": "Pašreizējā telpa",
   "DeleteEmptyPortalText": "Jūs gatavojaties neatgriezeniski izdzēst <1>{{domain}}</1>. Šo darbību nevarēs atsaukt.",
   "DeleteRequestSuccess": "Dzēšanas pieprasījums ir veiksmīgi nosūtīts uz {{productName}} īpašnieka e-pasta adresi <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Jūs neatgriezeniski dzēsīsiet <1>{{domain}}</1> vietni ar visiem datiem un kontiem. Pieprasījums dzēst <1>{{domain}}</1> tiks nosūtīts {{productName}} īpašniekam uz e-pasta adresi <1>{{email}}</1>.",
   "DeleteWarning": "Pēdējo pilnās piekļuves vietu nevar izdzēst",
   "DomainName": "Domēna nosaukums",
   "DomainNotFound": "Domēns nav atrasts. Pārbaudiet DNS iestatījumus",

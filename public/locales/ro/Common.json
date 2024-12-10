@@ -338,6 +338,7 @@
   "NotFoundTitle": "Niciun rezultat",
   "NotFoundUsers": "Nu s-au găsit utilizatori",
   "NotFoundUsersDescription": "Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de utilizatori.",
+  "NoTimeLimit": "Fără limită de timp",
   "NotSupportedFormat": "Ne pare rău, acest format de fișier nu este acceptat",
   "OAuthAccountsName": "Contacte",
   "OAuthAccountsReadDescription": "Afișează toate persoane de contact",

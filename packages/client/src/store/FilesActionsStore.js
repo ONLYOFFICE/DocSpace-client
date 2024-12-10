@@ -2406,7 +2406,7 @@ class FilesActionStore {
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
-    const { isOwner, isAdmin } = this.userStore.user;
+    // const { isOwner, isAdmin } = this.userStore.user;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;

@@ -226,14 +226,15 @@ class PublicRoomStore {
       .validatePublicRoomKey(key)
       .then((res) => {
         this.publicRoomKey = key;
-        console.log("res", res);
 
-        if (res?.shared) {
-          //  return this.gotoFolder(res, key);
+        const currentUrl = window.location.href;
+
+        if (res?.shared && !currentUrl.includes("/rooms/shared")) {
+          return this.gotoFolder(res, key);
         }
 
-        if (res?.isAuthenticated) {
-          //   return this.gotoFolder(res, key);
+        if (res?.isAuthenticated && !currentUrl.includes("/rooms/shared")) {
+          return this.gotoFolder(res, key);
         }
 
         //  this.publicRoomKey = key;

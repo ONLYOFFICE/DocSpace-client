@@ -76,18 +76,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const renderComponent = () => {
     const key = searchParams.get("key");
 
-    // console.log("user", user);
-    // console.log("isAuthenticated", isAuthenticated);
-    // console.log("isLoadedUser", isLoadedUser);
-
     if (key && isLoadedUser && !user) {
       const path = "/rooms/share";
       const filter = FilesFilter.getDefault();
 
       window.DocSpace.navigate(`${path}?key=${key}&${filter.toUrlParams()}`);
     }
-
-    //  console.log(key, publicRoomKey, location.pathname);
 
     if (
       key &&

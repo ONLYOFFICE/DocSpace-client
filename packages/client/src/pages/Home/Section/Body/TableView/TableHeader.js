@@ -35,7 +35,28 @@ class FilesTableHeader extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getTableColumns();
+    const defaultColumns = this.getDefaultColumns();
+    const columns = props.getColumns(defaultColumns, props.isRecentTab);
+    const storageColumns = localStorage.getItem(props.tableStorageName);
+    const splitColumns = storageColumns && storageColumns.split(",");
+    const resetColumnsSize =
+      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
+
+    this.state = {
+      columns,
+      resetColumnsSize,
+      columnStorageName: props.columnStorageName,
+      columnInfoPanelStorageName: props.columnInfoPanelStorageName,
+      sortBy: props.isRooms ? props.roomsFilter.sortBy : props.filter.sortBy,
+      sortOrder: props.isRooms
+        ? props.roomsFilter.sortOrder
+        : props.filter.sortOrder,
+      isRecentTab: props.isRecentTab,
+    };
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+
+    this.setTableColumns(tableColumns);
 
     this.isBeginScrolling = false;
   }
@@ -414,7 +435,7 @@ class FilesTableHeader extends React.Component {
     return this.getFilesColumns();
   };
 
-  getTableColumns = (fromUpdate = false) => {
+  updateTableColumns = () => {
     const {
       isRooms,
       getColumns,
@@ -450,16 +471,6 @@ class FilesTableHeader extends React.Component {
         sortOrder,
         isRecentTab,
       });
-    } else {
-      this.state = {
-        columns,
-        resetColumnsSize,
-        columnStorageName,
-        columnInfoPanelStorageName,
-        sortBy,
-        sortOrder,
-        isRecentTab,
-      };
     }
   };
 
@@ -528,7 +539,7 @@ class FilesTableHeader extends React.Component {
       (!changeDocumentsTabs && sortBy !== this.state.sortBy) ||
       (!changeDocumentsTabs && sortOrder !== this.state.sortOrder)
     ) {
-      return this.getTableColumns(true);
+      return this.updateTableColumns();
     }
 
     const { columns } = this.state;

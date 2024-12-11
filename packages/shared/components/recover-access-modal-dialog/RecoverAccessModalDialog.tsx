@@ -169,6 +169,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
               onBlur={onBlurEmail}
               onChange={onChangeEmail}
               onValidateInput={onValidateEmail}
+              maxLength={255}
             />
           </FieldContainer>
           <FieldContainer

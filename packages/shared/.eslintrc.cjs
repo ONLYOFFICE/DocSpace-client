@@ -133,7 +133,6 @@ module.exports = {
     "@typescript-eslint/no-redeclare": "off",
     "no-redeclare": "off",
     "no-var": "off",
-    "vars-on-top": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

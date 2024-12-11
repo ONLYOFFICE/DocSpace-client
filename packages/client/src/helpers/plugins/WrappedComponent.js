@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
@@ -418,16 +418,19 @@ const WrappedComponent = ({
     setContextProps(newProps);
   };
 
+  const contextValue = useMemo(
+    () => ({
+      contextProps,
+      updatePropsContext,
+      isRequestRunning,
+      setIsRequestRunning,
+      setModalRequestRunning,
+    }),
+    [contextProps, isRequestRunning, setModalRequestRunning],
+  );
+
   return (
-    <PropsContext.Provider
-      value={{
-        contextProps,
-        updatePropsContext,
-        isRequestRunning,
-        setIsRequestRunning,
-        setModalRequestRunning,
-      }}
-    >
+    <PropsContext.Provider value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
     </PropsContext.Provider>
   );

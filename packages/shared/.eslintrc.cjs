@@ -137,7 +137,6 @@ module.exports = {
     "@typescript-eslint/default-param-last": "off",
     "no-else-return": "off",
     "jsx-a11y/iframe-has-title": "off",
-    "react/jsx-no-constructed-context-values": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

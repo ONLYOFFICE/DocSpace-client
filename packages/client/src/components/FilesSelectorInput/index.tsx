@@ -33,7 +33,7 @@ import type {
 } from "./FilesSelectorInputWrapper.types";
 
 const FilesSelectorInputWrapper = (props: FilesSelectorInputWrapperProps) => {
-  return <FilesSelectorInput withCreate {...props} />;
+  return <FilesSelectorInput {...props} />;
 };
 
 export default inject<

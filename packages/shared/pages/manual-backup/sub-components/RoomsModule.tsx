@@ -122,6 +122,7 @@ const RoomsModule = ({
     <>
       <div className="manual-backup_folder-input">
         <FilesSelectorInput
+          withCreate
           isRoomBackup
           isSelectFolder
           newPath={newPath}

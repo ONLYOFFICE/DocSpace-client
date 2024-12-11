@@ -48,7 +48,6 @@ class ThirdPartyModule extends React.Component {
       isStartCopy: false,
       selectedFolder,
       isError: false,
-      isLoading: false,
     };
 
     this._isMount = false;

@@ -148,7 +148,6 @@ module.exports = {
     "import/order": "off",
     "no-unneeded-ternary": "off",
     radix: "off",
-    "react/no-unused-state": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

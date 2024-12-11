@@ -76,8 +76,6 @@ class ManualBackup extends React.Component {
     if (tReady) setDocumentTitle(t("DataBackup"));
 
     this.state = {
-      selectedFolder: "",
-      isPanelVisible: false,
       isInitialLoading: false,
       isEmptyContentBeforeLoader: true,
       isCheckedTemporaryStorage: checkedTemporary,

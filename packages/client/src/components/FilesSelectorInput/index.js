@@ -64,6 +64,7 @@ const FilesSelectorInput = (props) => {
     isRoomBackup,
     isDocumentIcon,
     withCreate,
+    checkCreating,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -140,6 +141,7 @@ const FilesSelectorInput = (props) => {
           isSelect={isSelect}
           withCreate={withCreate}
           {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+          checkCreating={checkCreating}
         />
       </Aside>
     </>

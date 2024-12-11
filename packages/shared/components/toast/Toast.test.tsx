@@ -25,32 +25,180 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { render } from "@testing-library/react";
+import { screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
+import { renderWithTheme } from "../../utils/render-with-theme";
 import { Toast } from ".";
 import { toastr } from "./sub-components/Toastr";
 
-describe("<Textarea />", () => {
-  it("renders without error", () => {
-    const { container } = render(
-      // @ts-expect-error maybe its old version toast
-      <Toast>{toastr.success("Some text for toast")}</Toast>,
-    );
+jest.useFakeTimers();
 
-    expect(container.getElementsByClassName("Toastify").length).toBe(1);
+describe("<Toast />", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Clear any existing toasts and reset timers
+    toastr.clear();
+    jest.clearAllTimers();
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Toast id="testId" />);
+  afterEach(() => {
+    // Cleanup after each test
+    act(() => {
+      toastr.clear();
+      jest.runAllTimers();
+    });
+  });
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("shows success toast", () => {
+    renderWithTheme(<Toast />);
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Toast className="test" />);
+    act(() => {
+      toastr.success("Success message", "Success");
+    });
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    expect(screen.getByText("Success message")).toBeInTheDocument();
+    expect(screen.getByText("Success")).toBeInTheDocument();
+  });
+
+  it("shows error toast", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.error("Error message", "Error");
+    });
+
+    expect(screen.getByText("Error message")).toBeInTheDocument();
+    expect(screen.getByText("Error")).toBeInTheDocument();
+  });
+
+  it("shows warning toast", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.warning("Warning message", "Warning");
+    });
+
+    expect(screen.getByText("Warning message")).toBeInTheDocument();
+    expect(screen.getByText("Warning")).toBeInTheDocument();
+  });
+
+  it("shows info toast", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.info("Info message", "Info");
+    });
+
+    expect(screen.getByText("Info message")).toBeInTheDocument();
+    expect(screen.getByText("Info")).toBeInTheDocument();
+  });
+
+  it("shows toast with close button when withCross is true", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.success("With close button", "Title", 5000, true);
+    });
+
+    expect(screen.getByText("With close button")).toBeInTheDocument();
+    expect(document.querySelector(".closeButton")).toBeInTheDocument();
+  });
+
+  it("handles error object with response data", () => {
+    renderWithTheme(<Toast />);
+
+    const errorObj = {
+      response: {
+        data: {
+          error: {
+            message: "API Error",
+          },
+        },
+      },
+    };
+
+    act(() => {
+      toastr.error(errorObj);
+    });
+
+    expect(screen.getByText("API Error")).toBeInTheDocument();
+  });
+
+  it("accepts custom React elements as content", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.success(<div data-testid="custom-content">Custom Element</div>);
+    });
+
+    expect(screen.getByTestId("custom-content")).toBeInTheDocument();
+  });
+
+  it("stays open when timeout is 0", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.success("Persistent message", "Title", 0);
+    });
+
+    expect(screen.getByText("Persistent message")).toBeInTheDocument();
+
+    act(() => {
+      jest.advanceTimersByTime(10000);
+    });
+
+    expect(screen.getByText("Persistent message")).toBeInTheDocument();
+  });
+
+  it("handles multiple toasts simultaneously", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.success("Success message", "Success");
+      toastr.error("Error message", "Error");
+      toastr.warning("Warning message", "Warning");
+    });
+
+    expect(screen.getByText("Success message")).toBeInTheDocument();
+    expect(screen.getByText("Error message")).toBeInTheDocument();
+    expect(screen.getByText("Warning message")).toBeInTheDocument();
+  });
+
+  it("checks toast active status", () => {
+    renderWithTheme(<Toast />);
+
+    let toastId: string | number;
+
+    act(() => {
+      toastId = toastr.success("Active toast") as string | number;
+
+      expect(toastr.isActive(toastId)).toBe(true);
+    });
+
+    act(() => {
+      toastr.clear();
+
+      expect(toastr.isActive(toastId)).toBe(false);
+    });
+  });
+
+  it("handles empty array as toast content", () => {
+    renderWithTheme(<Toast />);
+
+    act(() => {
+      toastr.success([]);
+    });
+
+    // Toast should still be created but with empty content
+    expect(document.querySelector(".Toastify__toast")).toBeInTheDocument();
+  });
+
+  it("handles server-side rendering", () => {
+    renderWithTheme(<Toast isSSR />);
+
+    // Component should not render on server
+    expect(
+      document.querySelector("[data-testid='toast']"),
+    ).not.toBeInTheDocument();
+  });
 });

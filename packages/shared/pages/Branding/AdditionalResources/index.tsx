@@ -28,12 +28,12 @@ import React, { useState, useEffect } from "react";
 
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { isManagement } from "../../../utils/common";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
+import { brandingRedirectUrl } from "../constants";
 
 export const AdditionalResources = ({
   t,
@@ -52,12 +52,8 @@ export const AdditionalResources = ({
   const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
   const [hasChanges, setHasChanges] = useState(false);
 
-  const redirectUrl: string = isManagement()
-    ? "/management/settings/branding"
-    : "/portal-settings/customization/branding";
-
   useResponsiveNavigation({
-    redirectUrl,
+    redirectUrl: brandingRedirectUrl,
     currentLocation: "additional-resources",
     deviceType,
   });

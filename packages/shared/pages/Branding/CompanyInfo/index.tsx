@@ -35,13 +35,13 @@ import {
   InputSize,
 } from "../../../components/text-input";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { isManagement } from "../../../utils/common";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
 
 import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
+import { brandingRedirectUrl } from "../constants";
 
 export const CompanyInfo = ({
   t,
@@ -54,12 +54,8 @@ export const CompanyInfo = ({
   companyInfoSettingsIsDefault,
   deviceType,
 }: ICompanyInfo) => {
-  const redirectUrl: string = isManagement()
-    ? "/management/settings/branding"
-    : "/portal-settings/customization/branding";
-
   useResponsiveNavigation({
-    redirectUrl,
+    redirectUrl: brandingRedirectUrl,
     currentLocation: "company-info-settings",
     deviceType,
   });

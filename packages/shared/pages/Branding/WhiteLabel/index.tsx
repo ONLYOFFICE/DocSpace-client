@@ -31,7 +31,6 @@ import { Text } from "../../../components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { toastr } from "../../../components/toast";
 import { WhiteLabelLogoType } from "../../../enums";
-import { isManagement } from "../../../utils/common";
 import { globalColors } from "../../../themes";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
@@ -41,6 +40,7 @@ import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
+import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
@@ -64,12 +64,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
 
-  const redirectUrl: string = isManagement()
-    ? "/management/settings/branding"
-    : "/portal-settings/customization/branding";
-
   useResponsiveNavigation({
-    redirectUrl,
+    redirectUrl: brandingRedirectUrl,
     currentLocation: "white-label",
     deviceType,
   });

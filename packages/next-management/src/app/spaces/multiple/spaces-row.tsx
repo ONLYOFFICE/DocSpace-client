@@ -53,7 +53,9 @@ export const SpacesRow = ({ item, tenantAlias }) => {
 
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
 
-  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />;
+  const logoElement = (
+    <ReactSVG id={item.key} src={DefaultLogoUrl} className="logo-icon" />
+  );
   const protocol = window?.location?.protocol;
 
   const contextOptions = [

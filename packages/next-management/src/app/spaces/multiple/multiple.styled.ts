@@ -78,6 +78,13 @@ export const StyledSpaceRow = styled(Row)`
         ? `margin-left: 18px;`
         : `margin-right: 18px;`}
   }
+
+  .logo-icon > div {
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `;
 
 export const StyledRowContent = styled(RowContent)`

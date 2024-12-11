@@ -114,9 +114,9 @@ const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) => {
   return iconMap[type] || iconMap[ToastType.info];
 };
 
-const CloseButton = ({ closeToast }: { closeToast?: () => {} }) => (
+const CloseButton = ({ closeToast }: { closeToast?: () => void }) => (
   <IconButton
-    className={`${styles.iconButton}`}
+    className={`${styles.iconButton} closeButton`}
     onClick={closeToast}
     iconName={CrossIconReactSvgUrl}
     size={12}

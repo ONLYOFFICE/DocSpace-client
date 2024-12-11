@@ -165,41 +165,6 @@ class ThirdPartyServices extends React.Component {
     this.props.setSelectedConsumer(e.currentTarget.dataset.consumer);
   };
 
-  updateConsumerValues = (obj, isFill) => {
-    isFill && this.onChangeLoading(true);
-
-    const prop = [];
-    let i = 0;
-    const objLength = Object.keys(isFill ? obj : obj.props).length;
-
-    for (i = 0; i < objLength; i++) {
-      prop.push({
-        name: isFill ? Object.keys(obj)[i] : obj.props[i].name,
-        value: isFill ? Object.values(obj)[i] : "",
-      });
-    }
-
-    const data = {
-      name: isFill ? this.state.selectedConsumer : obj.name,
-      props: prop,
-    };
-
-    this.props
-      .updateConsumerProps(data)
-      .then(() => {
-        isFill && this.onChangeLoading(false);
-        isFill
-          ? toastr.success(this.props.t("ThirdPartyPropsActivated"))
-          : toastr.success(this.props.t("ThirdPartyPropsDeactivated"));
-      })
-      .catch((error) => {
-        isFill && this.onChangeLoading(false);
-        toastr.error(error);
-      })
-
-      .finally(isFill && this.onModalClose());
-  };
-
   render() {
     const {
       t,

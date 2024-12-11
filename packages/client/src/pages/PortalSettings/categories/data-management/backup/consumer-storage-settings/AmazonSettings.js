@@ -37,7 +37,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Trans } from "react-i18next";
 
 const bucket = "bucket";
-const region = "region";
+const REGION = "region";
 const serviceurl = "serviceurl";
 const forcepathstyle = "forcepathstyle";
 const usehttp = "usehttp";
@@ -165,11 +165,9 @@ class AmazonSettings extends React.Component {
   componentDidUpdate(prevProps) {
     const { formSettings } = this.props;
 
-    if (formSettings[region] !== prevProps.formSettings[region]) {
+    if (formSettings[REGION] !== prevProps.formSettings[REGION]) {
       for (const value of this.regions) {
-        if (value.systemName === formSettings[region]) {
-          this.region = value.label;
-
+        if (value.systemName === formSettings[REGION]) {
           this.setState({
             region: value,
           });
@@ -242,11 +240,9 @@ class AmazonSettings extends React.Component {
   onSelectRegion = (options) => {
     const { addValueInFormSettings, setIsThirdStorageChanged } = this.props;
 
-    const key = options.key;
-    const label = options.label;
     const systemName = options.systemName;
 
-    addValueInFormSettings(region, systemName);
+    addValueInFormSettings(REGION, systemName);
     setIsThirdStorageChanged(true);
   };
 

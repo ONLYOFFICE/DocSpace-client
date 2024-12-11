@@ -49,7 +49,7 @@ class SectionBodyContent extends React.Component {
       isRestoreProcess: false,
       rowSizes: {},
     };
-    this.listKey = 0;
+
     this.listRef = React.createRef();
     this.timerId = null;
   }

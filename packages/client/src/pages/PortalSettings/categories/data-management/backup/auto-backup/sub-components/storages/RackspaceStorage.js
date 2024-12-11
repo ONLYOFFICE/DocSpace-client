@@ -34,10 +34,9 @@ import { StyledStoragesModule } from "../../../StyledBackup";
 class RackspaceStorage extends React.Component {
   constructor(props) {
     super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+    const { setCompletedFormFields } = this.props;
 
     setCompletedFormFields(RackspaceSettings.formNames(), "rackspace");
-    this.isDisabled = !selectedStorage?.isSet;
   }
 
   render() {

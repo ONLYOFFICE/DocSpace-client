@@ -44,9 +44,6 @@ import withLoader from "../../../HOCs/withLoader";
 class UploadPanelComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.ref = React.createRef();
-    this.scrollRef = React.createRef();
   }
 
   onClose = () => {

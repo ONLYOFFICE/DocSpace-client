@@ -111,20 +111,6 @@ class AuditTableHeader extends React.Component {
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
   };
 
-  onIconClick = () => {
-    const { filter, setIsLoading, fetchPeople } = this.props;
-    const newFilter = filter.clone();
-
-    if (newFilter.sortOrder === "ascending") {
-      newFilter.sortOrder = "descending";
-    } else {
-      newFilter.sortOrder = "ascending";
-    }
-
-    setIsLoading(true);
-    fetchPeople(newFilter).finally(() => setIsLoading(false));
-  };
-
   render() {
     const { columns } = this.state;
     const {

@@ -60,8 +60,6 @@ class ThirdPartyStorageModule extends React.PureComponent {
       selectedId: storageId || "",
       isStartCopy: false,
     };
-
-    this.isFirstSet = false;
   }
 
   componentDidMount() {

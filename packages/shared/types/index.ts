@@ -174,8 +174,13 @@ declare global {
         checkDomain?: boolean;
       };
       logs: {
-        enableLogs: false;
-        logsToConsole: false;
+        enableLogs: boolean;
+        logsToConsole: boolean;
+      };
+      loaders: {
+        showLoader: boolean;
+        showLoaderTime: number;
+        loaderTime: number;
       };
     };
     AscDesktopEditor: {

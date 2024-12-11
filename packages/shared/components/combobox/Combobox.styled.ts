@@ -250,7 +250,16 @@ const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
   
   ${(props) => props.modernView && modernViewButton}
 
+  ${({ type }) =>
+    type === "descriptive" &&
+    css`
+      height: 100%;
+      padding: 16px;
 
+      .combo-button_selected-icon-container {
+        align-self: flex-start;
+      }
+    `}
   
   ${(props) =>
     props.fillIcon &&
@@ -492,6 +501,12 @@ const getDefaultStyles = ({
 
 const StyledThemeComboButton = styled(StyledComboButton)(getDefaultStyles);
 
+const DescriptiveContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
 export {
   StyledArrowIcon,
   StyledPlusBadge,
@@ -501,4 +516,5 @@ export {
   StyledTriangleDownIcon,
   StyledLoader,
   StyledThemeComboButton,
+  DescriptiveContainer,
 };

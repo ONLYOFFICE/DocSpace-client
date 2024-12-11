@@ -55,6 +55,7 @@ const FilesSelectorInput = ({
   id,
   isThirdParty = false,
   isRoomsOnly = false,
+  withCreate = false,
   isSelectFolder,
   setNewPath,
   newPath,
@@ -216,11 +217,11 @@ const FilesSelectorInput = ({
           onSubmit={onSubmit}
           onSetBaseFolderPath={onSetBasePath}
           getIsDisabled={getIsDisabledAction}
+          withCreate={withCreate}
           // default
           parentId={0}
           disabledItems={[]}
           embedded={false}
-          withCreate={false}
           withFooterInput={false}
           withFooterCheckbox={false}
           footerInputHeader=""

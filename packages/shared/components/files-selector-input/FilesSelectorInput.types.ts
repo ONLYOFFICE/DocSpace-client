@@ -62,6 +62,7 @@ export type FilesSelectorInputProps = {
 
   currentDeviceType?: DeviceType;
 
+  withCreate?: boolean;
   id?: string | number;
   isThirdParty?: boolean;
   isRoomsOnly?: boolean;

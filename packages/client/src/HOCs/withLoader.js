@@ -57,6 +57,8 @@ const withLoader = (WrappedComponent) => (Loader) => {
         ? accountsViewAs
         : viewAs;
 
+    const showLoader = window.ClientConfig.loaders.showLoader;
+
     return (!isEditor && firstLoad && !isGallery) ||
       !isLoaded ||
       showBodyLoader ||
@@ -65,7 +67,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
       !isInit ? (
       Loader ? (
         Loader
-      ) : currentViewAs === "tile" ? (
+      ) : !showLoader ? null : currentViewAs === "tile" ? (
         <TilesSkeleton />
       ) : currentViewAs === "table" ? (
         <TableSkeleton />

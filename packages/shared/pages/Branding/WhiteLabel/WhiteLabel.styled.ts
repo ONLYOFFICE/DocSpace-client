@@ -26,17 +26,12 @@
 
 import styled from "styled-components";
 
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
+import { mobile } from "../../../utils";
 
-const WhiteLabelWrapper = styled.div.attrs(injectDefaultTheme)`
+export const StyledHeader = styled.div`
   .subtitle {
     margin-bottom: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-
-  .paid-badge {
-    cursor: auto;
   }
 
   .header-container {
@@ -62,6 +57,14 @@ const WhiteLabelWrapper = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
+  .paid-badge {
+    cursor: auto;
+    background-color: ${(props) =>
+      props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
+  }
+`;
+
+export const WhiteLabelWrapper = styled.div`
   .use-as-logo {
     margin-top: 12px;
     margin-bottom: 24px;
@@ -229,23 +232,12 @@ const WhiteLabelWrapper = styled.div.attrs(injectDefaultTheme)`
   .hidden {
     display: none;
   }
-
-  .spacer {
-    height: 24px;
-  }
-
-  @media ${mobile} {
-    .subtitle,
-    .header-container {
-      display: none;
-    }
-
-    .spacer {
-      height: ${(props) => (props.showReminder ? "64px" : "24px")};
-    }
-  }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
-export default WhiteLabelWrapper;
+export const StyledSpacer = styled.div<{ showReminder: boolean }>`
+  height: 24px;
+
+  @media ${mobile} {
+    height: ${(props) => (props.showReminder ? "64px" : "24px")};
+  }
+`;

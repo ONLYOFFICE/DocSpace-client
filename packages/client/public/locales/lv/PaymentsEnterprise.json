@@ -11,6 +11,7 @@
   "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",
   "ActivateTariffDescr": "Jūs izmantojat {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
+  "ActivateToProBannerHeaderTrial": "Iegādājieties pilnu {{license}} versiju, lai iegūtu:",
   "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",
   "FreeDaysLeft": "Atlikušas {{count}} bezmaksas dienas",
   "UpgradeToProBannerHeader": "Saņemiet bezmaksas piekļuvi uzņēmumam gatavam biroja komplektam uz 30 dienām",

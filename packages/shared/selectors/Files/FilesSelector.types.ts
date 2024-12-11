@@ -181,6 +181,7 @@ export type FilesSelectorProps = TInfoBar &
     currentFolderId: number | string;
     parentId?: number | string;
     rootFolderType: FolderType;
+    folderIsShared?: boolean;
     onCancel: () => void;
     onSubmit: (
       selectedItemId: string | number | undefined,
@@ -228,4 +229,5 @@ export type FilesSelectorProps = TInfoBar &
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
     formProps?: FormPropsType;
+    withPadding?: boolean;
   };

@@ -86,6 +86,8 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 
+import BrandingStore from "./portal-settings/BrandingStore";
+
 const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
@@ -187,7 +189,6 @@ const dialogsStore = new DialogsStore(
 const profileActionsStore = new ProfileActionsStore(
   authStore,
   filesStore,
-  peopleStore,
   treeFoldersStore,
   selectedFolderStore,
   pluginStore,
@@ -207,8 +208,6 @@ const peopleStore = new PeopleStore(
   dialogsStore,
   currentQuotaStore,
 );
-
-profileActionsStore.peopleStore = peopleStore;
 
 const uploadDataStore = new UploadDataStore(
   settingsStore,
@@ -326,6 +325,8 @@ const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
+const brandingStore = new BrandingStore(settingsStore);
+
 const store = {
   authStore,
   userStore,
@@ -384,6 +385,8 @@ const store = {
   editGroupStore,
   avatarEditorDialogStore,
   thirdPartyStore,
+
+  brandingStore,
 };
 
 export default store;

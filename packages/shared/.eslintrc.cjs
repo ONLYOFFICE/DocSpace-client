@@ -154,9 +154,6 @@ module.exports = {
     "no-new": "off",
     "import/no-named-as-default": "off",
     "no-lone-blocks": "off",
-    "no-unreachable": "off",
-    "no-promise-executor-return": "off",
-    "no-lone-blocks": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

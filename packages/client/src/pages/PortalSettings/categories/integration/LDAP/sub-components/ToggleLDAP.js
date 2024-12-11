@@ -138,9 +138,7 @@ const ToggleLDAP = ({
     </StyledWrapper>
   );
 
-  {
-    /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
-  }
+  /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
 };
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {

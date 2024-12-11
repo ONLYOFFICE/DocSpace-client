@@ -350,19 +350,6 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on(SocketEvents.RefreshFolder, (id) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `DIR-${id}`;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      if (!id || this.clientLoadingStore.isLoading) return;
-
-      // console.log(
-      //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
-      // );
-    });
-
     SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${folderId}`;

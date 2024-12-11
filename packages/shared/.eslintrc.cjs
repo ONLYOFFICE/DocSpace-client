@@ -157,7 +157,6 @@ module.exports = {
     "no-unreachable": "off",
     "no-promise-executor-return": "off",
     "no-lone-blocks": "off",
-    "no-useless-return": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

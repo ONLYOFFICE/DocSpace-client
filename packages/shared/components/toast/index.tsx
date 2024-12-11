@@ -35,12 +35,13 @@ import { useIsServer } from "../../hooks/useIsServer";
 import { Portal } from "../portal";
 
 import type { ToastProps, TData } from "./Toast.type";
+import { toastr } from "./sub-components/Toastr";
 import { ToastType } from "./Toast.enums";
 import styles from "./Toast.module.scss";
 import { useMobileViewport } from "./hooks/useMobileViewport";
 import { getToastClassName } from "./utils/getToastClassName";
 
-export { ToastType, TData };
+export { ToastType, TData, toastr };
 export type { ToastProps };
 
 const Slide = cssTransition({

@@ -40,7 +40,8 @@ import isEqual from "lodash/isEqual";
 
 import { DeviceType } from "@docspace/shared/enums";
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`

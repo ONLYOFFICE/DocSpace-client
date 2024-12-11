@@ -39,8 +39,9 @@ import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import LoaderCustomization from "../sub-components/loaderCustomization";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
 
 const PortalRenamingComponent = (props) => {

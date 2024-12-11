@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -41,7 +41,8 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 
 import { DeviceType } from "@docspace/shared/enums";
 import PasswordLoader from "../sub-components/loaders/password-loader";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`

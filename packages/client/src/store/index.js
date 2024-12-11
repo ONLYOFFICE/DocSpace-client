@@ -86,6 +86,8 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 
+import BrandingStore from "./portal-settings/BrandingStore";
+
 const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
@@ -323,6 +325,8 @@ const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
+const brandingStore = new BrandingStore(settingsStore);
+
 const store = {
   authStore,
   userStore,
@@ -380,6 +384,8 @@ const store = {
   indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
+
+  brandingStore,
 };
 
 export default store;

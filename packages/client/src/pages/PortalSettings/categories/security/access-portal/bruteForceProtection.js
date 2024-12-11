@@ -34,11 +34,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
-import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { StyledBruteForceProtection } from "../StyledSecurity";
 

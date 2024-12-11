@@ -24,23 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import { Provider as MobxProvider } from "mobx-react";
-import store from "SRC_DIR/store";
-import CommonWhiteLabel from "./CommonWhiteLabel";
+import { isManagement } from "../../utils/common";
 
-const { authStore } = store;
-
-const WhiteLabelWrapper = (props) => {
-  useEffect(() => {
-    authStore.init(true);
-  }, []);
-
-  return (
-    <MobxProvider {...store}>
-      <CommonWhiteLabel {...props} />
-    </MobxProvider>
-  );
-};
-
-export default WhiteLabelWrapper;
+export const brandingRedirectUrl: string = isManagement()
+  ? "/management/settings/branding"
+  : "/portal-settings/customization/branding";

@@ -38,8 +38,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
 
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 const MainContainer = styled.div`
   width: 100%;

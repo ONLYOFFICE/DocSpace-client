@@ -39,7 +39,8 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { DeviceType } from "@docspace/shared/enums";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import UserFields from "../sub-components/user-fields";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
 

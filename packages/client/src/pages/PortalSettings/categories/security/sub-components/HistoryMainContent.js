@@ -35,7 +35,8 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;

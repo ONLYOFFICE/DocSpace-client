@@ -33,7 +33,8 @@ import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import {
   StyledComponent,
   StyledFloatingButton,

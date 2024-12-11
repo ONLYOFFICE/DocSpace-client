@@ -42,9 +42,10 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import LoaderCustomization from "../sub-components/loaderCustomization";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 

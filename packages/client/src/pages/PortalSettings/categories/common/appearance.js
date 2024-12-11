@@ -51,7 +51,8 @@ import {
 } from "./Appearance/StyledApperance.js";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
-import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import Preview from "./Appearance/preview";
 
 const Appearance = (props) => {

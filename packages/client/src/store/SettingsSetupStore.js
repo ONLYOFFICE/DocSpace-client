@@ -26,7 +26,6 @@
 
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
-// import CommonStore from "./CommonStore";
 
 import {
   getSMTPSettings,

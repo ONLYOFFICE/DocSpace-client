@@ -90,9 +90,9 @@ const BruteForceProtection = (props) => {
     )
       return;
 
-    setHasErrorNumberAttempt(!parseInt(currentNumberAttempt));
-    setHasErrorBlockingTime(!parseInt(currentBlockingTime));
-    setHasErrorCheckPeriod(!parseInt(currentCheckPeriod));
+    setHasErrorNumberAttempt(!parseInt(currentNumberAttempt, 10));
+    setHasErrorBlockingTime(!parseInt(currentBlockingTime, 10));
+    setHasErrorCheckPeriod(!parseInt(currentCheckPeriod, 10));
   }, [currentNumberAttempt, currentBlockingTime, currentCheckPeriod]);
 
   useEffect(() => {
@@ -210,9 +210,9 @@ const BruteForceProtection = (props) => {
     if (hasErrorNumberAttempt || hasErrorCheckPeriod) return;
     setIsLoadingSave(true);
 
-    const numberCurrentNumberAttempt = parseInt(currentNumberAttempt);
-    const numberCurrentBlockingTime = parseInt(currentBlockingTime);
-    const numberCurrentCheckPeriod = parseInt(currentCheckPeriod);
+    const numberCurrentNumberAttempt = parseInt(currentNumberAttempt, 10);
+    const numberCurrentBlockingTime = parseInt(currentBlockingTime, 10);
+    const numberCurrentCheckPeriod = parseInt(currentCheckPeriod, 10);
 
     api.settings
       .setBruteForceProtection(

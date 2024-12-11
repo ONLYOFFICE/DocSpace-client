@@ -147,7 +147,6 @@ module.exports = {
     "import/no-duplicates": "off",
     "import/order": "off",
     "no-unneeded-ternary": "off",
-    radix: "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

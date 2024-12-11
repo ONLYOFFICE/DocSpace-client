@@ -33,12 +33,12 @@ const checkScrollSettingsBlock = () => {
 
   const height = parseInt(
     settingsDiv ? getComputedStyle(settingsDiv).height.slice(0, -2) : 0,
-    0,
+    10,
   );
 
   const heightScroll = parseInt(
     scrollBody ? getComputedStyle(scrollBody).height.slice(0, -2) : 0,
-    0,
+    10,
   );
 
   return () => {

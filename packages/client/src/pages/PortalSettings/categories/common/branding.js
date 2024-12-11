@@ -95,7 +95,7 @@ const Branding = ({
     setDocumentTitle(t("Branding"));
   }, []);
 
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+  const hideBlock = isManagement() ? false : portals?.length > 1;
 
   const showSettings = standalone && !hideBlock;
 

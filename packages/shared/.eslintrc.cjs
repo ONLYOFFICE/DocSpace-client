@@ -146,7 +146,6 @@ module.exports = {
     "react/no-direct-mutation-state": "off",
     "import/no-duplicates": "off",
     "import/order": "off",
-    "no-unneeded-ternary": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

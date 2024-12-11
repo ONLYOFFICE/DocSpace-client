@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment-timezone";
 
 import { Text } from "@docspace/shared/components/text";
@@ -223,7 +223,7 @@ const DeliveryDatePicker = ({
             outerDate={filters.deliveryDate}
             isMobile={isMobile()}
             onChange={onDateSet}
-            selectedDateText={t("SelectDate")}
+            selectDateText={t("Common:SelectDate")}
             showCalendarIcon={false}
             locale={i18n.language}
           />

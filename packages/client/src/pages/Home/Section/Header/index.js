@@ -61,6 +61,10 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useContactsHeader } from "./useContacts";
+import {
+  getCheckboxItemId,
+  getCheckboxItemLabel,
+} from "SRC_DIR/helpers/filesUtils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -207,8 +211,6 @@ const SectionHeaderContent = (props) => {
 
     setSelected,
     cbMenuItems,
-    getCheckboxItemLabel,
-    getCheckboxItemId,
     setSelectedNode,
     setIsLoading,
 
@@ -234,7 +236,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    isPublicRoomType,
     isVirtualDataRoomType,
 
     moveToPublicRoom,
@@ -259,13 +260,13 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
-    isShared,
-    isExternal,
     displayAbout,
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
     getPublicKey,
+    getIndexingArray,
+    setCloseEditIndexDialogVisible,
   } = props;
 
   const location = useLocation();
@@ -422,6 +423,13 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCloseIndexMenu = () => {
+    const items = getIndexingArray();
+
+    if (items.length) {
+      setCloseEditIndexDialogVisible(true);
+      return;
+    }
+
     revokeFilesOrder();
     setIsIndexEditingMode(false);
   };
@@ -431,14 +439,14 @@ const SectionHeaderContent = (props) => {
   };
 
   const onIndexApply = () => {
-    saveIndexOfFiles();
+    saveIndexOfFiles(t);
     setIsIndexEditingMode(false);
   };
 
   const getTitleIcon = () => {
-    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
+    if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
@@ -508,6 +516,8 @@ const SectionHeaderContent = (props) => {
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
   const stateIsPublicRoomType = location?.state?.isPublicRoomType;
+  const stateIsShared = location?.state?.isShared;
+  const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
 
   const isRoot =
@@ -521,6 +531,9 @@ const SectionHeaderContent = (props) => {
         infoPanelRoom?.lifetime ||
         (isLoading && stateIsLifetimeEnabled)),
   );
+
+  const navigationButtonIsVisible =
+    showNavigationButton || stateIsShared ? true : false;
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -557,11 +570,6 @@ const SectionHeaderContent = (props) => {
       isRootRoom: true,
     },
   ];
-
-  const currentIsPublicRoomType =
-    isLoading && typeof stateIsPublicRoomType === "boolean"
-      ? stateIsPublicRoomType
-      : isPublicRoomType;
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -607,7 +615,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={isExternal}
+          isExternalFolder={stateIsExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
           isLifetimeEnabled={isLifetimeEnabled}
@@ -759,8 +767,6 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       cbMenuItems,
-      getCheckboxItemLabel,
-      getCheckboxItemId,
       isEmptyFilesList,
 
       roomsForRestore,
@@ -773,20 +779,21 @@ export default inject(
     } = filesStore;
 
     const {
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
       showHeaderLoader,
 
       isLoading,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
-    const { setReorderDialogVisible } = dialogsStore;
+    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
+      dialogsStore;
 
     const {
       getHeaderMenu,
@@ -819,7 +826,6 @@ export default inject(
       settingsStore;
 
     const isRoom = !!roomType;
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
@@ -864,7 +870,8 @@ export default inject(
 
     const { setSelected: setUsersSelected } = usersStore;
 
-    const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
+    const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
+      indexingStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;
@@ -881,10 +888,9 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
-      isLoading || !security?.CopyLink || isPublicRoom || isArchive
+      !security?.CopyLink || isPublicRoom || isArchive
         ? false
         : security?.Read && isShared;
 
@@ -918,8 +924,6 @@ export default inject(
       security,
 
       getHeaderMenu,
-      getCheckboxItemLabel,
-      getCheckboxItemId,
 
       isRecycleBinFolder,
       isEmptyFilesList,
@@ -937,7 +941,6 @@ export default inject(
 
       moveToRoomsPage,
       onClickBack,
-      isPublicRoomType,
       isVirtualDataRoomType,
       isPublicRoom,
 
@@ -983,11 +986,11 @@ export default inject(
       saveIndexOfFiles,
 
       rootFolderId,
-      isShared,
-      isExternal,
       displayAbout,
       infoPanelRoom,
       getPublicKey,
+      getIndexingArray,
+      setCloseEditIndexDialogVisible,
     };
   },
 )(

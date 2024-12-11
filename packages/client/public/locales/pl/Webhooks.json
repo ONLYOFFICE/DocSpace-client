@@ -35,7 +35,6 @@
   "SecretKey": "Sekretny klucz",
   "SecretKeyHint": "Konfiguracja sekretnego klucza dla webhooka umożliwia weryfikację żądań wysyłanych pod adres URL danych właściwych.",
   "SecretKeyWarning": "Nie można odzyskać sekretnego klucza po jego zapisaniu. Jeśli go zapomnisz lub zgubisz, trzeba będzie go zresetować – wszystkie korzystające z niego integracje będą musiały zostać zaktualizowane.",
-  "SelectDate": "Wybierz datę",
   "SelectDeliveryTime": "Wybierz czas dostarczenia",
   "SettingsWebhook": "Ustawienia webhooka",
   "SSLHint": "Domyślnie weryfikujemy certyfikaty SSL podczas dostarczania danych właściwych.",

@@ -130,6 +130,10 @@ export const getBaseTheme = () => {
       emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
+
+      secondary: {
+        color: gray,
+      },
     },
 
     heading: {
@@ -1608,6 +1612,8 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
+      containerBorderColor: white,
+
       color: black,
       disabledColor: lightGraySelected,
       pastColor: gray,
@@ -2850,6 +2856,7 @@ export const getBaseTheme = () => {
             dataFontColorBlack: black,
             notAvailableBackground: grayLight,
             textColor: black,
+            paidBadgeBackground: favoritesStatus,
           },
 
           companyInfo: {

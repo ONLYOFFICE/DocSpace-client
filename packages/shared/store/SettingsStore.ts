@@ -65,7 +65,7 @@ import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
-import { TWhiteLabel } from "../utils/whiteLabelHelper";
+import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import {
   ThemeKeys,
@@ -180,7 +180,7 @@ class SettingsStore {
     uploadDashboard: "",
   };
 
-  logoUrl: Nullable<TWhiteLabel> = null;
+  logoUrl: Nullable<ILogo> = null;
 
   isDesktopClient = isDesktopEditors;
 
@@ -286,7 +286,7 @@ class SettingsStore {
 
   companyInfoSettingsIsDefault = true;
 
-  whiteLabelLogoUrls: TWhiteLabel[] = [];
+  whiteLabelLogoUrls: ILogo[] = [];
 
   standalone = false;
 
@@ -783,11 +783,11 @@ class SettingsStore {
     this.companyInfoSettingsIsDefault = companyInfoSettingsIsDefault;
   };
 
-  setLogoUrl = (url: TWhiteLabel[]) => {
+  setLogoUrl = (url: ILogo[]) => {
     this.logoUrl = url[0];
   };
 
-  setLogoUrls = (urls: TWhiteLabel[]) => {
+  setLogoUrls = (urls: ILogo[]) => {
     this.whiteLabelLogoUrls = urls;
   };
 

@@ -80,7 +80,7 @@ const DeleteLinkDialogComponent = (props) => {
         setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
-        if (link.sharedTo.primary && isPublicRoomType) {
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
@@ -115,7 +115,7 @@ const DeleteLinkDialogComponent = (props) => {
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
-        {link.sharedTo.primary && isPublicRoomType
+        {link.sharedTo.primary && (isPublicRoomType || isFormRoom)
           ? t("Files:RevokeLink")
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
@@ -136,7 +136,7 @@ const DeleteLinkDialogComponent = (props) => {
           id="delete-file-modal_submit"
           key="OkButton"
           label={
-            link.sharedTo.primary && isPublicRoomType
+            link.sharedTo.primary && (isPublicRoomType || isFormRoom)
               ? t("Files:RevokeLink")
               : t("Files:DeleteLink")
           }

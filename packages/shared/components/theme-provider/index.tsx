@@ -38,6 +38,7 @@ export const ThemeProvider = ({
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", theme.isBase ? "light" : "dark");
+    root.setAttribute("data-dir", theme.interfaceDirection);
     root.style.setProperty("--interface-direction", theme.interfaceDirection);
   }, [theme.isBase, theme.interfaceDirection]);
 

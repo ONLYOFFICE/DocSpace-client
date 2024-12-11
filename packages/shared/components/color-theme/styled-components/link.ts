@@ -26,11 +26,11 @@
 
 import styled from "styled-components";
 
-import StyledText from "../../link/Link.styled";
+import { Link } from "../../link";
 
 import { LinkColorTheme } from "../ColorTheme.types";
 
-const LinkTheme = styled(StyledText)<LinkColorTheme>`
+const LinkTheme = styled(Link)<LinkColorTheme>`
   color: ${(props) => props.$currentColorScheme?.main?.accent};
 
   &:hover {

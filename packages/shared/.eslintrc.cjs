@@ -135,7 +135,6 @@ module.exports = {
     "no-var": "off",
     "vars-on-top": "off",
     "@typescript-eslint/default-param-last": "off",
-    "no-else-return": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

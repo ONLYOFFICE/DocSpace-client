@@ -3188,15 +3188,15 @@ class FilesStore {
         : null;
 
       return folderUrl;
-    } else {
-      const url = combineUrl(
-        proxyURL,
-        config.homepage,
-        `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
-      );
-
-      return url;
     }
+
+    const newUrl = combineUrl(
+      proxyURL,
+      config.homepage,
+      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+    );
+
+    return newUrl;
   };
 
   getFilesListItems = (items) => {

@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "Koplietojamās mapes tiks importētas sadaļā Telpas kā telpas ar lietotājiem, kuriem tika piešķirta piekļuve. Ņemiet vērā: importēšanas laikā dažas piekļuves tiesības var tikt zaudētas",
   "ShowFeedbackAndSupport": "Rādīt atsauksmju un atbalsta saiti",
   "ShowHelpCenter": "Rādīt saiti uz palīdzības centru",
-  "ShowVideoGuides": "Rādīt saiti uz video ceļvežiem",
   "SingleSignOn": "Vienotā pierakstīšanās",
   "SMTPSettings": "SMTP Iestatījumi",
   "SMTPSettingsDescription": "SMTP iestatījumi ir nepieciešami, lai uzstādītu e-pasta kontu, kas tiks izmantots, lai nosūtītu portāla paziņojumus ar jūsu pašu SMTP serveri nevis {{organizationName}} izmantoto. Lūdzu, aizpildiet visus laukus un nospiediet \"Saglabāt\". Jūs varat izmantot pogu \"Nosūtīt testa ziņu\", lai pārbaudītu, vai visi iestatījumi ir pareizi un darbojas pienācīgi.",

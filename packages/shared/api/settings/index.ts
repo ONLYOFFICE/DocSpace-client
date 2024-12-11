@@ -27,7 +27,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Nullable } from "../../types";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
+import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
 import {
   TCustomSchema,
@@ -336,7 +336,7 @@ export async function getLogoUrls(
 
   const skipRedirect = true;
 
-  const res = (await request(options, skipRedirect)) as TWhiteLabel[];
+  const res = (await request(options, skipRedirect)) as ILogo[];
 
   return res;
 }

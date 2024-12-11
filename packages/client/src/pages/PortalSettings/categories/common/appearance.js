@@ -33,8 +33,11 @@ import { Button } from "@docspace/shared/components/button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import {
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import Preview from "./Appearance/preview";
-import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";

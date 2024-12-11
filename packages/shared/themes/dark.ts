@@ -66,6 +66,7 @@ const {
 
   darkErrorStatus,
   favoritesStatus,
+  favoriteStatusDark,
   lightStatusWarning,
   darkStatusWarning,
   darkStatusPositive,
@@ -2845,6 +2846,7 @@ const Dark: TTheme = {
           dataFontColorBlack: white,
           notAvailableBackground: grayDark,
           textColor: white,
+          paidBadgeBackground: favoriteStatusDark,
         },
 
         companyInfo: {

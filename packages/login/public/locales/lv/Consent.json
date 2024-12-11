@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "Atļaut",
+  "ConsentDescription": "Uz datiem, kas tiek kopīgoti ar, <strong>{{displayName}}</strong> attieksies <strong>{{nameApp}}</strong> <6>konfidencialitātes politika</6> un <6> pakalpojumu sniegšanas noteikumi </6>. Jūs varat jebkurā laikā atsaukt šo piekrišanu sava {{productName}} konta iestatījumos.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> vēlas iespēju piekļūt šādiem datiem <strong>jūsu {{productName}} kontā</strong>:",
+  "DenyButton": "Atteikšanās",
+  "NotYou": "Vai tas neesat jūs?",
+  "SignedInAs": "Pierakstījies kā",
+  "ToContinue": "Lai turpinātu ar"
+}

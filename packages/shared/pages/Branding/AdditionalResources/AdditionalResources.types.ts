@@ -24,6 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const getFromSessionStorage = (key) => {
-  return JSON.parse(sessionStorage.getItem(key));
-};
+import { TTranslation } from "../../../types";
+import { DeviceType } from "../../../enums";
+
+export interface IAdditionalResources {
+  t: TTranslation;
+  isSettingPaid: boolean;
+  feedbackAndSupportEnabled: boolean;
+  helpCenterEnabled: boolean;
+  onSave: (feedbackEnabled: boolean, helpEnabled: boolean) => void;
+  onRestore: () => void;
+  isLoading: boolean;
+  additionalResourcesIsDefault: boolean;
+  deviceType: DeviceType;
+}

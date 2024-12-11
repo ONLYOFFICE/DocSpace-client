@@ -38,6 +38,7 @@ import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 
 class HotkeyStore {
   filesStore;
@@ -714,7 +715,7 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return this.filesStore.getCountTilesInRow();
+    return getCountTilesInRow();
   }
 
   get division() {

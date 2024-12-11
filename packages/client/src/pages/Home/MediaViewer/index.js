@@ -165,7 +165,7 @@ const FilesMediaViewer = (props) => {
 
     if (queryParams.has(queryName)) {
       queryParams.delete(queryName);
-      navigate(_, {
+      window.location.replace({
         search: queryParams.toString(),
       });
     }

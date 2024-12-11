@@ -35,6 +35,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import resizeImage from "resize-image";
+import api from "@docspace/shared/api";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
@@ -73,12 +75,10 @@ class AvatarEditorDialogStore {
   };
 
   getUploadedLogoData = async () => {
-    const { uploadRoomLogo } = this.filesStore;
-
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, this.uploadedFile);
 
-    const responseData = await uploadRoomLogo(uploadLogoData);
+    const responseData = await api.rooms.uploadRoomLogo(uploadLogoData);
     const url = URL.createObjectURL(this.uploadedFile);
     const img = new Image();
 
@@ -97,12 +97,7 @@ class AvatarEditorDialogStore {
 
     if (!this.uploadedFile) return;
 
-    const {
-      addLogoToRoom,
-      calculateRoomLogoParams,
-      setActiveFolders,
-      updateRoom,
-    } = this.filesStore;
+    const { setActiveFolders, updateRoom } = this.filesStore;
 
     const data = await this.getUploadedLogoData();
     const { responseData, url, img } = data;
@@ -112,7 +107,7 @@ class AvatarEditorDialogStore {
         const { x, y, zoom } = icon;
 
         try {
-          room = await addLogoToRoom(roomId, {
+          room = await api.rooms.addLogoToRoom(roomId, {
             tmpFile: responseData.data,
             ...calculateRoomLogoParams(img, x, y, zoom),
           });

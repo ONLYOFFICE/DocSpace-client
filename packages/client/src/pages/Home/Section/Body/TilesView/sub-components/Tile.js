@@ -977,6 +977,7 @@ Tile.propTypes = {
   viewAs: PropTypes.string,
   tileContextClick: PropTypes.func,
   contentElement: PropTypes.element,
+  item: PropTypes.object,
 };
 
 Tile.defaultProps = {

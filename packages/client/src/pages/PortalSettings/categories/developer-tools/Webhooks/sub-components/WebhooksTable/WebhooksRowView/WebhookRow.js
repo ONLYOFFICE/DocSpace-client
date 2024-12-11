@@ -37,7 +37,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { WebhookRowContent } from "./WebhookRowContent";
 
-export const WebhookRow = (props) => {
+const WebhookRow = (props) => {
   const {
     webhook,
     sectionWidth,

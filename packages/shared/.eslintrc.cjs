@@ -152,7 +152,6 @@ module.exports = {
     "no-useless-concat": "off",
     "no-empty": "off",
     "no-new": "off",
-    "import/no-named-as-default": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

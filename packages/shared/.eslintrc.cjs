@@ -106,7 +106,6 @@ module.exports = {
     "no-restricted-exports": "off",
     "no-irregular-whitespace": "off",
     "prefer-const": "off",
-    expected: "off",
     "no-underscore-dangle": "off",
     "react/no-unstable-nested-components": "off",
     "guard-for-in": "off",
@@ -160,7 +159,6 @@ module.exports = {
     "no-lone-blocks": "off",
     "no-useless-return": "off",
     "@typescript-eslint/lines-between-class-members": "off",
-    "prefer-regex-literals": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Text } from "@docspace/shared/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+// import { TextInput } from "@docspace/shared/components/text-input";
+// import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
@@ -38,15 +38,15 @@ import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
-const StyledTextInput = styled(TextInput)`
-  margin-top: 4px;
-  margin-bottom: 24px;
-  width: 350px;
+// const StyledTextInput = styled(TextInput)`
+//   margin-top: 4px;
+//   margin-bottom: 24px;
+//   width: 350px;
 
-  @media ${mobile} {
-    width: 100%;
-  }
-`;
+//   @media ${mobile} {
+//     width: 100%;
+//   }
+// `;
 
 const MainContainer = styled.div`
   width: 100%;
@@ -165,15 +165,15 @@ const DownLoadWrapper = styled.div`
 const HistoryMainContent = (props) => {
   const {
     t,
-    loginHistory,
-    latestText,
+    // loginHistory,
+    // latestText,
     subHeader,
-    storagePeriod,
+    // storagePeriod,
     lifetime,
-    saveButtonLabel,
-    cancelButtonLabel,
-    setLifetimeAuditSettings,
-    securityLifetime,
+    // saveButtonLabel,
+    // cancelButtonLabel,
+    // setLifetimeAuditSettings,
+    // securityLifetime,
     content,
     downloadReport,
     downloadReportDescription,
@@ -184,10 +184,10 @@ const HistoryMainContent = (props) => {
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
-  const [loginLifeTimeReminder, setLoginLifeTimeReminder] = useState(false);
-  const [auditLifeTimeReminder, setAuditLifeTimeReminder] = useState(false);
+  // const [loginLifeTimeReminder, setLoginLifeTimeReminder] = useState(false);
+  // const [auditLifeTimeReminder, setAuditLifeTimeReminder] = useState(false);
 
-  const isLoginHistoryPage = window.location.pathname.includes("login-history");
+  // const isLoginHistoryPage = window.location.pathname.includes("login-history");
 
   const theme = useTheme();
 
@@ -240,74 +240,74 @@ const HistoryMainContent = (props) => {
     }
   };
 
-  const setLifeTimeSettings = async () => {
-    if (loginHistory) {
-      const data = {
-        settings: {
-          loginHistoryLifeTime: loginLifeTime,
-          auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
-        },
-      };
-      try {
-        await setLifetimeAuditSettings(data);
-        saveToSessionStorage("defaultStoragePeriod", {
-          loginHistoryLifeTime: loginLifeTime,
-          auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
-        });
-        setLoginLifeTimeReminder(false);
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
-      } catch (error) {
-        console.error(error);
-        toastr.error(error);
-      }
-    } else {
-      const data = {
-        settings: {
-          loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
-          auditTrailLifeTime: auditLifeTime,
-        },
-      };
+  // const setLifeTimeSettings = async () => {
+  //   if (loginHistory) {
+  //     const data = {
+  //       settings: {
+  //         loginHistoryLifeTime: loginLifeTime,
+  //         auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
+  //       },
+  //     };
+  //     try {
+  //       await setLifetimeAuditSettings(data);
+  //       saveToSessionStorage("defaultStoragePeriod", {
+  //         loginHistoryLifeTime: loginLifeTime,
+  //         auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
+  //       });
+  //       setLoginLifeTimeReminder(false);
+  //       toastr.success(t("SuccessfullySaveSettingsMessage"));
+  //     } catch (error) {
+  //       console.error(error);
+  //       toastr.error(error);
+  //     }
+  //   } else {
+  //     const data = {
+  //       settings: {
+  //         loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
+  //         auditTrailLifeTime: auditLifeTime,
+  //       },
+  //     };
 
-      try {
-        await setLifetimeAuditSettings(data);
-        saveToSessionStorage("defaultStoragePeriod", {
-          loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
-          auditTrailLifeTime: auditLifeTime,
-        });
-        setAuditLifeTimeReminder(false);
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
-      } catch (error) {
-        console.error(error);
-        toastr.error(error);
-      }
-    }
-  };
+  //     try {
+  //       await setLifetimeAuditSettings(data);
+  //       saveToSessionStorage("defaultStoragePeriod", {
+  //         loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
+  //         auditTrailLifeTime: auditLifeTime,
+  //       });
+  //       setAuditLifeTimeReminder(false);
+  //       toastr.success(t("SuccessfullySaveSettingsMessage"));
+  //     } catch (error) {
+  //       console.error(error);
+  //       toastr.error(error);
+  //     }
+  //   }
+  // };
 
-  const onChangeLoginLifeTime = (e) => {
-    const reg = new RegExp(/^(\d){1,3}$/g);
-    const condition = e.target.value === "";
-    if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
-      setLoginLifeTime(e.target.value);
-    }
-  };
+  // const onChangeLoginLifeTime = (e) => {
+  //   const reg = new RegExp(/^(\d){1,3}$/g);
+  //   const condition = e.target.value === "";
+  //   if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
+  //     setLoginLifeTime(e.target.value);
+  //   }
+  // };
 
-  const onChangeAuditLifeTime = (e) => {
-    const reg = new RegExp(/^(\d){1,3}$/g);
-    const condition = e.target.value === "";
-    if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
-      setAuditLifeTime(e.target.value);
-    }
-  };
+  // const onChangeAuditLifeTime = (e) => {
+  //   const reg = new RegExp(/^(\d){1,3}$/g);
+  //   const condition = e.target.value === "";
+  //   if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
+  //     setAuditLifeTime(e.target.value);
+  //   }
+  // };
 
-  const onCancelLoginLifeTime = () => {
-    const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
-    setLoginLifeTime(String(defaultSettings.loginHistoryLifeTime));
-  };
+  // const onCancelLoginLifeTime = () => {
+  //   const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
+  //   setLoginLifeTime(String(defaultSettings.loginHistoryLifeTime));
+  // };
 
-  const onCancelAuditLifeTime = () => {
-    const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
-    setAuditLifeTime(String(defaultSettings.auditTrailLifeTime));
-  };
+  // const onCancelAuditLifeTime = () => {
+  //   const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
+  //   setAuditLifeTime(String(defaultSettings.auditTrailLifeTime));
+  // };
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>

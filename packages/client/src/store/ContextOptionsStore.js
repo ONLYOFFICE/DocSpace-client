@@ -76,7 +76,6 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
@@ -1918,7 +1917,7 @@ class ContextOptionsStore {
         id: "option_change-room-owner",
         key: "change-room-owner",
         label: t("Files:ChangeTheRoomOwner"),
-        icon: ReconnectReactSvgUrl,
+        icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
       },

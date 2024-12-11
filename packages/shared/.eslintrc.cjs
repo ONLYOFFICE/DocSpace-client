@@ -158,7 +158,6 @@ module.exports = {
     "no-promise-executor-return": "off",
     "no-lone-blocks": "off",
     "no-useless-return": "off",
-    "@typescript-eslint/lines-between-class-members": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -40,6 +40,7 @@ const PlusButton = ({
   isFrame,
   id,
   onCloseDropBox,
+  forwardedRef,
   ...rest
 }: IPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +70,7 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div ref={ref} className={className} {...rest}>
+    <div ref={forwardedRef} className={className} {...rest}>
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}
@@ -79,7 +80,7 @@ const PlusButton = ({
       />
       <ContextMenu
         model={model}
-        containerRef={ref}
+        containerRef={forwardedRef}
         ref={menuRef}
         onHide={onHide}
         scaled={false}

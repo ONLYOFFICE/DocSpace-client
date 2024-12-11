@@ -281,6 +281,7 @@ const SectionHeaderContent = (props) => {
     contactsView === "inside_group" && !!groupId;
 
   const buttonRef = React.useRef(null);
+  const addButtonRef = React.useRef(null);
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -576,14 +577,27 @@ const SectionHeaderContent = (props) => {
   ];
 
   React.useEffect(() => {
-    if (buttonRef?.current) {
-      console.log(buttonRef.current.getClientRects()[0]);
+    if (buttonRef?.current && !guidanceCoordinates.share) {
       setGuidanceCoordinates({
         ...guidanceCoordinates,
         share: buttonRef.current.getClientRects()[0],
       });
     }
-  }, [buttonRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+
+    if (addButtonRef?.current && !guidanceCoordinates.uploading) {
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        uploading: addButtonRef.current.getClientRects()[0],
+      });
+    }
+  }, [
+    buttonRef?.current,
+    addButtonRef?.current,
+    guidanceCoordinates.ready,
+    guidanceCoordinates.share,
+    guidanceCoordinates.uploading,
+    guidanceCoordinates.pdf,
+  ]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -711,6 +725,7 @@ const SectionHeaderContent = (props) => {
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
                 buttonRef={buttonRef}
+                addButtonRef={addButtonRef}
               />
               {showSignInButton && (
                 <Button

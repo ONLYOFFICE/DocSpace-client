@@ -496,7 +496,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   return (
     <Layout>
-      {formFillingTipsVisible && (
+      {false && (
         <Guidance
           formFillingTipsNumber={formFillingTipsNumber}
           setFormFillingTipsNumber={setFormFillingTipsNumber}

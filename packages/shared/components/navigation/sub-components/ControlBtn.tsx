@@ -65,6 +65,7 @@ const ControlButtons = ({
   onCloseDropBox,
   onContextOptionsClick,
   buttonRef,
+  addButtonRef,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -100,6 +101,7 @@ const ControlButtons = ({
               getData={getContextOptionsPlus}
               withMenu={withMenu}
               onPlusClick={onPlusClick}
+              forwardedRef={addButtonRef}
               isFrame={isFrame}
               title={titles?.actions}
               onCloseDropBox={onCloseDropBox}

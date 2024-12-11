@@ -87,6 +87,7 @@ const Navigation = ({
   onContextOptionsClick,
   onLogoClick,
   buttonRef,
+  addButtonRef,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -309,6 +310,7 @@ const Navigation = ({
 
             <ControlButtons
               buttonRef={buttonRef}
+              addButtonRef={addButtonRef}
               isRootFolder={isRootFolder}
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}

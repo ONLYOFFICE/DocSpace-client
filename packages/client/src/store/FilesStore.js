@@ -255,6 +255,7 @@ class FilesStore {
     pdf: null,
     ready: null,
     share: null,
+    uploading: null,
   };
 
   hotkeysClipboard = [];

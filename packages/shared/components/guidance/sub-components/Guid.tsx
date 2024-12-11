@@ -50,6 +50,8 @@ import {
 import { ModalDialogType } from "../../modal-dialog";
 
 const GUID_MODAL_MARGIN = 16;
+const GUID_SHARE_OFFSET = 2;
+const GUID_UPLOADING_OFFSET = 5;
 
 enum FormFillingTipsState {
   Starting = 1,
@@ -72,20 +74,31 @@ const getGuidPosition = (guidRects, state) => {
 
     case FormFillingTipsState.Sharing:
       return {
-        width: guidRects.share.width,
-        height: guidRects.share.height,
-        left: guidRects.share.left,
-        top: guidRects.share.top,
+        width: guidRects.share.width + GUID_SHARE_OFFSET * 2,
+        height: guidRects.share.height + GUID_SHARE_OFFSET * 2,
+        left: guidRects.share.left - GUID_SHARE_OFFSET,
+        top: guidRects.share.top - GUID_SHARE_OFFSET,
         bottom: guidRects.share.bottom,
       };
 
     case FormFillingTipsState.Submitting:
+    case FormFillingTipsState.Complete:
       return {
-        width: guidRects.ready.width,
+        width:
+          state === FormFillingTipsState.Complete ? 350 : guidRects.ready.width,
         height: guidRects.ready.height,
         left: guidRects.ready.left,
         top: guidRects.ready.top,
         bottom: guidRects.ready.bottom,
+      };
+
+    case FormFillingTipsState.Uploading:
+      return {
+        width: guidRects.uploading.width + GUID_UPLOADING_OFFSET * 2,
+        height: guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2,
+        left: guidRects.uploading.left - GUID_UPLOADING_OFFSET,
+        top: guidRects.uploading.top - GUID_UPLOADING_OFFSET,
+        bottom: guidRects.uploading.bottom,
       };
 
     default:
@@ -146,8 +159,6 @@ const Guid = ({
 
   const guidPosition = getGuidPosition(guidRects, formFillingTipsNumber);
 
-  console.log(guidRects);
-
   const onNextTips = () => {
     if (isLastTip) {
       onClose();
@@ -200,8 +211,8 @@ const Guid = ({
             <Text
               className="tips-description"
               fontWeight="400"
-              fontSize="12px"
-              lineHeight="16px"
+              fontSize="13px"
+              lineHeight="20px"
             >
               {" "}
               {modalText?.description}

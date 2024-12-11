@@ -44,8 +44,12 @@ const StyledDialog = styled(Dialog)<{
 
     .modal-header {
       margin-bottom: 0px !important;
-      height: 49px;
-      min-height: 49px;
+      height: 54px;
+      min-height: 54px;
+
+      .header-component {
+        font-size: 16px;
+      }
     }
 
     .modal-header::after {

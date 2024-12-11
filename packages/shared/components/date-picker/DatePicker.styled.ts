@@ -24,18 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
-import { mobile } from "../../utils";
+import styled from "styled-components";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, mobile } from "../../utils";
 
 import { Calendar } from "../calendar";
 
-const DateInputStyle = styled.div`
+const DateInputStyle = styled.div.attrs(injectDefaultTheme)`
   width: ${(props) => props.theme.datePicker.width};
 `;
-DateInputStyle.defaultProps = { theme: Base };
 
-const DropDownStyle = styled.div`
+const DropDownStyle = styled.div.attrs(injectDefaultTheme)`
   .drop-down {
     > div {
       > div {
@@ -65,9 +64,8 @@ const DropDownStyle = styled.div`
 
   position: relative;
 `;
-DropDownStyle.defaultProps = { theme: Base };
 
-const Content = styled.div`
+const Content = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   position: relative;
   width: 100%;
@@ -82,20 +80,17 @@ const Content = styled.div`
       props.theme.datePicker.contentFontWeight} !important;
   }
 `;
-Content.defaultProps = { theme: Base };
 
-const Header = styled.div`
+const Header = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   border-bottom: ${(props) => props.theme.datePicker.borderBottom};
 `;
-Header.defaultProps = { theme: Base };
 
-const Body = styled.div`
+const Body = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   padding: ${(props) => props.theme.datePicker.bodyPadding};
 `;
-Body.defaultProps = { theme: Base };
 
 const Wrapper = styled.div`
   .selectedItem {

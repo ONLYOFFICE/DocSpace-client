@@ -23,22 +23,25 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { Feed } from "./HistoryBlockContent.types";
+import { FeedAction } from "../FeedInfo";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
   selectedFolderId?: number;
+  actionType: string;
 };
 
 const HistoryMainTextFolderInfo = ({
   t,
   feed,
+  actionType,
   selectedFolderId,
 }: HistoryMainTextFolderInfoProps) => {
   const {
@@ -48,19 +51,36 @@ const HistoryMainTextFolderInfo = ({
     parentType,
     fromParentType,
     fromParentTitle,
+    id,
+    title,
   } = feed.data;
 
-  if (parentId === selectedFolderId || toFolderId === selectedFolderId)
+  const isStartedFilling = actionType === FeedAction.StartedFilling;
+  const isSubmitted = actionType === FeedAction.Submitted;
+  const isReorderFolder = actionType === FeedAction.Reorder && id !== parentId;
+
+  if (
+    (parentId === selectedFolderId && !isReorderFolder) ||
+    toFolderId === selectedFolderId ||
+    (selectedFolderId === id && isReorderFolder)
+  )
     return null;
 
   if (!parentTitle) return null;
 
   const isSection = parentType === FolderType.USER;
-  const isFolder = parentType === FolderType.DEFAULT;
+  const isFolder =
+    parentType === FolderType.DEFAULT ||
+    isSubmitted ||
+    isStartedFilling ||
+    isReorderFolder;
+
   const isFromFolder = fromParentType === FolderType.DEFAULT;
 
   const destination = isFolder
-    ? t("FeedLocationLabel", { folderTitle: parentTitle })
+    ? t("FeedLocationLabel", {
+        folderTitle: isReorderFolder ? title : parentTitle,
+      })
     : isSection
       ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })
       : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
@@ -73,14 +93,17 @@ const HistoryMainTextFolderInfo = ({
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className={className}>
-        {isFromFolder ? sourceDestination : destination}
+      <span
+        className={className}
+        title={isFromFolder ? fromParentTitle : parentTitle}
+      >
+        {` ${isFromFolder ? sourceDestination : destination}`}
       </span>
     </StyledHistoryBlockMessage>
   );
 };
 
-export default inject(({ selectedFolderStore }) => ({
+export default inject<TStore>(({ selectedFolderStore }) => ({
   selectedFolderId: selectedFolderStore.id,
 }))(
   withTranslation(["InfoPanel", "Common", "Translations"])(

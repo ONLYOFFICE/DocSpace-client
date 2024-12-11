@@ -436,6 +436,7 @@ class AutomaticBackup extends React.PureComponent {
       isEnableAuto,
       automaticBackupUrl,
       currentColorScheme,
+      isBackupProgressVisible,
     } = this.props;
 
     const {
@@ -444,11 +445,6 @@ class AutomaticBackup extends React.PureComponent {
       isError,
       isEmptyContentBeforeLoader,
     } = this.state;
-
-    // const isDisabledThirdPartyList =
-    //   isCheckedThirdParty || isDocSpace
-    //     ? false
-    //     : commonThirdPartyList?.length === 0;
 
     const commonProps = {
       isLoadingData,
@@ -480,16 +476,18 @@ class AutomaticBackup extends React.PureComponent {
               productName: t("Common:ProductName"),
             })}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={automaticBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() && (
+            <Link
+              className="link-learn-more"
+              href={automaticBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          )}
         </div>
 
         <div className="backup_toggle-wrapper">
@@ -510,7 +508,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("EnableAutomaticBackup")}
               </Text>
-              {!isEnableAuto && (
+              {!isEnableAuto && !isManagement() && (
                 <Badge
                   backgroundColor={
                     theme.isBase
@@ -604,7 +602,7 @@ class AutomaticBackup extends React.PureComponent {
           onCancelModuleSettings={this.onCancelModuleSettings}
         />
 
-        {downloadingProgress > 0 && downloadingProgress !== 100 && (
+        {isBackupProgressVisible && (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
@@ -627,7 +625,12 @@ export default inject(
   }) => {
     const { language } = authStore;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
+    const {
+      theme,
+      currentColorScheme,
+      automaticBackupUrl,
+      checkEnablePortalSettings,
+    } = settingsStore;
 
     const {
       downloadingProgress,
@@ -659,6 +662,7 @@ export default inject(
       setConnectedThirdPartyAccount,
       setStorageRegions,
       defaultFolderId,
+      isBackupProgressVisible,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -671,10 +675,14 @@ export default inject(
 
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
 
+    const isEnableAuto = checkEnablePortalSettings(
+      isRestoreAndAutoBackupAvailable,
+    );
+
     return {
       setConnectedThirdPartyAccount,
       defaultFolderId,
-      isEnableAuto: isRestoreAndAutoBackupAvailable,
+      isEnableAuto,
       fetchTreeFolders,
       rootFoldersTitles,
       downloadingProgress,
@@ -719,6 +727,7 @@ export default inject(
 
       automaticBackupUrl,
       currentColorScheme,
+      isBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

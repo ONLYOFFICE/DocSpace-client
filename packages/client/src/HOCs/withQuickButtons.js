@@ -26,8 +26,16 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import moment from "moment";
+
 import { toastr } from "@docspace/shared/components/toast";
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import {
+  copyDocumentShareLink,
+  copyRoomShareLink,
+} from "@docspace/shared/components/share/Share.helpers";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+
 import QuickButtons from "../components/QuickButtons";
 
 export default function withQuickButtons(WrappedComponent) {
@@ -80,24 +88,66 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const { t, item, getPrimaryFileLink, setShareChanged } = this.props;
+      const {
+        t,
+        item,
+        getPrimaryFileLink,
+        setShareChanged,
+        getManageLinkOptions,
+      } = this.props;
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink.sharedTo.shareLink);
-        item.shared
-          ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-          : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink } = this.props;
+      const { t, item, getPrimaryLink, getManageLinkOptions } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkSuccessfullyCopied"));
+        copyRoomShareLink(
+          primaryLink,
+          t,
+          true,
+          getManageLinkOptions(item, true),
+        );
+        // copyShareLink(primaryLink.sharedTo.shareLink);
+        // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
+    };
+
+    getStartDate = () => {
+      const { period, value } = this.props.roomLifetime;
+      const date = new Date(this.props.item.expired);
+
+      switch (period) {
+        case 0:
+          return new Date(date.setDate(date.getDate() - value));
+        case 1:
+          return new Date(date.setMonth(date.getMonth() - value));
+        case 2:
+          return new Date(date.setFullYear(date.getFullYear() - value));
+        default:
+          break;
+      }
+    };
+
+    getShowLifetimeIcon = () => {
+      const { item } = this.props;
+
+      const startDate = this.getStartDate();
+      const dateDiff = moment(startDate).diff(item.expired) * 0.1;
+      const showDate = moment(item.expired).add(dateDiff, "milliseconds");
+
+      return moment().valueOf() >= showDate.valueOf();
+    };
+
+    getItemExpiredDate = () => {
+      const { culture, item } = this.props;
+
+      const locale = getCookie(LANGUAGE) || culture;
+      return getCorrectDate(locale, item.expired);
     };
 
     onCreateRoom = () => {
@@ -118,9 +168,17 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
+        isIndexEditingMode,
         currentDeviceType,
+        roomLifetime,
+        currentColorScheme,
         isTemplatesFolder,
       } = this.props;
+
+      const showLifetimeIcon =
+        item.expired && roomLifetime ? this.getShowLifetimeIcon() : false;
+      const expiredDate =
+        item.expired && roomLifetime ? this.getItemExpiredDate() : null;
 
       const quickButtonsComponent = (
         <QuickButtons
@@ -140,7 +198,12 @@ export default function withQuickButtons(WrappedComponent) {
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isIndexEditingMode={isIndexEditingMode}
           currentDeviceType={currentDeviceType}
+          showLifetimeIcon={showLifetimeIcon}
+          expiredDate={expiredDate}
+          roomLifetime={roomLifetime}
+          currentColorScheme={currentColorScheme}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
         />
@@ -165,6 +228,9 @@ export default function withQuickButtons(WrappedComponent) {
       treeFoldersStore,
       filesStore,
       infoPanelStore,
+      indexingStore,
+      contextOptionsStore,
+      selectedFolderStore,
     }) => {
       const {
         lockFileAction,
@@ -173,7 +239,7 @@ export default function withQuickButtons(WrappedComponent) {
         onCreateRoomFromTemplate,
       } = filesActionsStore;
       const {
-        isPersonalFolderRoot,
+        isDocumentsFolder,
         isArchiveFolderRoot,
         isTrashFolder,
         isPersonalRoom,
@@ -181,16 +247,22 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
       } = treeFoldersStore;
 
+      const { isIndexEditingMode } = indexingStore;
+
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
-        isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
+        isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
+      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
+        infoPanelStore;
+
+      const { getManageLinkOptions } = contextOptionsStore;
 
       return {
         theme: settingsStore.theme,
+        culture: settingsStore.culture,
         currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
         lockFileAction,
@@ -204,6 +276,10 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         getPrimaryFileLink,
         setShareChanged,
+        isIndexEditingMode,
+        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+        getManageLinkOptions,
+        currentColorScheme: settingsStore.currentColorScheme,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
       };

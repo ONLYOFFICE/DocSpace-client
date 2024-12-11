@@ -73,7 +73,7 @@ const TagInput = ({
 
     if (text.trim().length > 0 && !isDropdownOpen) {
       openDropdown();
-    } else if (text.length === 0 && isDropdownOpen) {
+    } else if (text.trim().length === 0 && isDropdownOpen) {
       closeDropdown();
     }
 
@@ -131,6 +131,7 @@ const TagInput = ({
         onBlur={handleBlur}
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
+        name="tagInput"
         tooltipLabel={tooltipLabel}
       />
 

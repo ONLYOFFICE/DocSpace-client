@@ -140,7 +140,7 @@ const CertificateDialog = ({
           </Box>
           {hasError && (
             <Box>
-              {cerficateIssue.errors.map((err) => (
+              {cerficateIssue.errors.map((err, index) => (
                 <Text className="ldap-error-text" key={`err-${index}`}>
                   {mapError(err)}
                 </Text>

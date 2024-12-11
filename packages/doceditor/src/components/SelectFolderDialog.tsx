@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
@@ -36,7 +36,6 @@ import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
 
 const SelectFolderDialog = ({
-  socketHelper,
   onSubmit,
   onClose,
   isVisible,
@@ -60,6 +59,16 @@ const SelectFolderDialog = ({
   const withFooterCheckbox =
     fileSaveAsExtension !== "zip" && fileInfo.fileExst !== "fb2";
 
+  const formProps = useMemo(() => {
+    return {
+      message: t("Common:WarningCopyToFormRoom", {
+        organizationName: t("Common:OrganizationName"),
+      }),
+      isRoomFormAccessible:
+        Boolean(fileInfo.isForm) && fileSaveAsExtension === "pdf",
+    };
+  }, [fileInfo.isForm, t, fileSaveAsExtension]);
+
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
@@ -74,8 +83,6 @@ const SelectFolderDialog = ({
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"
-      socketHelper={socketHelper}
-      socketSubscribers={socketHelper.socketSubscribers}
       footerInputHeader={t("Editor:FileName")}
       currentFooterInputValue={titleSelectorFolder}
       footerCheckboxLabel={t("Editor:OpenSavedDocument")}
@@ -93,6 +100,7 @@ const SelectFolderDialog = ({
       parentId={0}
       getIsDisabled={getIsDisabled}
       withCreate
+      formProps={formProps}
     />
   );
 };

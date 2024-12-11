@@ -56,9 +56,9 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
+import { StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
@@ -396,11 +396,12 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       withBodyScroll
       displayType={ModalDialogType.aside}
+      withoutPadding
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -468,6 +469,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 headerText={barTitle}
                 bodyText={barSubTitle}
                 iconName={TabletLinkReactSvgUrl}
+                barIsVisible={barIsVisible}
               />
             )}
 
@@ -567,7 +569,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           isLoading={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

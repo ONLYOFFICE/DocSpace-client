@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "We sent a 6-digit code to {{email}}. The code has a limited validity period, so enter it as soon as possible.",
   "CodeTitle": "The code was emailed to you",
   "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>{{productName}}</1>",
-  "ExpiredCode": "This code is no longer valid. Request a new code and try again.",
   "ForgotPassword": "Forgot your password?",
-  "InvalidCode": "This code is invalid. Try again.",
   "LDAPUsernamePlaceholder": "Username of {{ldap_domain}}",
   "MessageAuthorize": "Log in to continue",
   "MessageEmailConfirmed": "Your email address was activated successfully.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Please, enter the email address you used for registration. The password recovery instructions will be sent to it.",
-  "NotFoundCode": "Can't find the code? Check your spam folder.",
   "PasswordRecoveryTitle": "Password recovery",
   "RecoverAccess": "Recover access",
   "RecoverContactEmailPlaceholder": "Contact email",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Registration request",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
-  "ResendCode": "Resend code",
   "SignInLDAP": "Sign in to: {{ldap_domain}}",
   "SignInLdapHelper": "Use credentials for the corporate domain",
   "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email."

@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Bạn có muốn chuyển sang chế độ chỉnh sửa biểu mẫu không? Xin lưu ý rằng biểu mẫu sẽ không còn khả dụng để điền và bạn sẽ cần nhấp lại vào nút Bắt đầu điền sau khi chỉnh sửa để điền vào.",
-  "PDFFormEditDialogTitle": "Chỉnh sửa biểu mẫu",
+  "PDFform": "Biểu mẫu PDF",
   "PDFFormIsReadyToast": "Biểu mẫu PDF <1>{{filename}} </1> đã sẵn sàng để được điền.",
   "PDFFormSuccessfullyCreatedDescription": "Biểu mẫu PDF của bạn đã sẵn sàng để được điền. Hãy sao chép liên kết công khai để bắt đầu quá trình điền biểu mẫu hoặc Mời người dùng khác vào phòng này."
 }

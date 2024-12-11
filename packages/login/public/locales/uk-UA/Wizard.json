@@ -1,0 +1,13 @@
+{
+  "Desc": "Налаштуйте реєстраційні дані {{productName}}.",
+  "ErrorEmail": "Неприпустима адреса ел. пошти",
+  "ErrorInstanceId": "Недійсний ідентифікатор екземпляра.",
+  "ErrorLicenseBody": "Ліцензія недійсна. Переконайтеся, що ви вибрали правильний файл.",
+  "ErrorPassword": "Пароль не відповідає вимогам",
+  "ErrorUploadLicenseFile": "Виберіть файл ліцензії",
+  "License": "Прийняти умови ",
+  "LicenseLink": "Ліцензійні угоди",
+  "PlaceholderLicense": "Ваш файл ліцензії",
+  "Timezone": "Часовий пояс:",
+  "WelcomeTitle": "Вітаємо на вашому {{productName}}!"
+}

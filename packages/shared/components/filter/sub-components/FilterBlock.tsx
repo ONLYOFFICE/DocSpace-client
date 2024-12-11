@@ -35,13 +35,10 @@ import RoomSelector from "../../../selectors/Room";
 import { FilterGroups, FilterSelectorTypes } from "../../../enums";
 import { FilterBlockLoader } from "../../../skeletons/filter";
 
-import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Scrollbar } from "../../scrollbar";
-import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
-import { StyledFilterBlock, StyledFilterBlockFooter } from "../Filter.styled";
+import { StyledFilterBlock, StyledFilterBlockHeader } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
 import {
@@ -50,7 +47,8 @@ import {
 } from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
-import { AsideHeader } from "../../aside";
+import { ModalDialog, ModalDialogType } from "../../modal-dialog";
+import { IconButton } from "../../icon-button";
 
 const FilterBlock = ({
   selectedFilterValue,
@@ -61,10 +59,11 @@ const FilterBlock = ({
   selectorLabel,
   userId,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
@@ -81,7 +80,7 @@ const FilterBlock = ({
 
   const [filterData, setFilterData] = React.useState<TItem[]>([]);
   const [filterValues, setFilterValues] = React.useState<TGroupItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(isRooms);
 
   const setFilterDataFn = (data: TItem[]) => {
     const filterSubject = data.find(
@@ -308,7 +307,7 @@ const FilterBlock = ({
   );
 
   const getDefaultFilterData = React.useCallback(async () => {
-    setIsLoading(true);
+    if (isRooms) setIsLoading(true);
     const data = await getFilterData();
 
     const items = data.filter((item) => item.isHeader === true);
@@ -385,7 +384,7 @@ const FilterBlock = ({
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
-  }, [getFilterData, selectedFilterValue]);
+  }, [getFilterData, selectedFilterValue, isRooms]);
 
   React.useEffect(() => {
     getDefaultFilterData();
@@ -475,145 +474,145 @@ const FilterBlock = ({
   const showClearFilterBtn =
     !isLoading && (selectedFilterValue.length > 0 || filterValues.length > 0);
 
-  const filterBlockComponent = (
-    <>
+  return (
+    <ModalDialog
+      displayType={ModalDialogType.aside}
+      visible
+      onClose={hideFilterBlock}
+      withBodyScroll
+      containerVisible={showSelector.show}
+    >
       {showSelector.show ? (
-        <StyledFilterBlock>
-          {showSelector.type === FilterSelectorTypes.people ? (
-            <PeopleSelector
-              withOutCurrentAuthorizedUser
-              className="people-selector"
-              onSubmit={selectOption}
-              submitButtonLabel=""
-              disableSubmitButton={false}
-              withHeader
-              headerProps={{
-                onBackClick: onArrowClick,
-                onCloseClick: hideFilterBlock,
-                headerLabel: selectorLabel,
-                withoutBackButton: false,
-              }}
-              currentUserId={userId}
-              onClose={hideFilterBlock}
-            />
-          ) : showSelector.type === FilterSelectorTypes.groups ? (
-            <GroupsSelector
-              className="group-selector"
-              onSubmit={selectOption}
-              withHeader
-              headerProps={{
-                onBackClick: onArrowClick,
-                onCloseClick: hideFilterBlock,
-                headerLabel: selectorLabel,
-                withoutBackButton: false,
-              }}
-              onClose={hideFilterBlock}
-            />
-          ) : (
-            <RoomSelector
-              className="room-selector"
-              onSubmit={selectOption}
-              withHeader
-              headerProps={{
-                onBackClick: onArrowClick,
-                onCloseClick: hideFilterBlock,
-                headerLabel: selectorLabel,
-                withoutBackButton: false,
-              }}
-              isMultiSelect={false}
-              withSearch
-              disableThirdParty={disableThirdParty}
-              onClose={hideFilterBlock}
-            />
-          )}
-        </StyledFilterBlock>
-      ) : (
-        <StyledFilterBlock>
-          <AsideHeader
-            header={filterHeader}
-            onCloseClick={hideFilterBlock}
-            {...(showClearFilterBtn && {
-              headerIcons: [
-                {
-                  key: "filter-icon",
-                  url: ClearReactSvgUrl,
-                  onClick: onClearFilter,
-                },
-              ],
-            })}
-          />
-
-          <div className="filter-body">
-            {isLoading ? (
-              <FilterBlockLoader
-                isRooms={isRooms}
-                isAccounts={isAccounts}
-                isPeopleAccounts={isPeopleAccounts}
-                isGroupsAccounts={isGroupsAccounts}
-                isInsideGroup={isInsideGroup}
+        <ModalDialog.Container>
+          <StyledFilterBlock>
+            {showSelector.type === FilterSelectorTypes.people ? (
+              <PeopleSelector
+                withOutCurrentAuthorizedUser
+                className="people-selector"
+                onSubmit={selectOption}
+                submitButtonLabel=""
+                disableSubmitButton={false}
+                withHeader
+                headerProps={{
+                  onBackClick: onArrowClick,
+                  onCloseClick: hideFilterBlock,
+                  headerLabel: selectorLabel,
+                  withoutBackButton: false,
+                  withoutBorder: !!isRooms,
+                }}
+                currentUserId={userId}
+                withGuests={!!isRooms}
+              />
+            ) : showSelector.type === FilterSelectorTypes.groups ? (
+              <GroupsSelector
+                className="group-selector"
+                onSubmit={selectOption}
+                withHeader
+                headerProps={{
+                  onBackClick: onArrowClick,
+                  onCloseClick: hideFilterBlock,
+                  headerLabel: selectorLabel,
+                  withoutBackButton: false,
+                  withoutBorder: false,
+                }}
               />
             ) : (
-              <Scrollbar className="filter-body__scrollbar" autoFocus>
-                {filterData.map((item: TItem, index) => {
-                  return (
-                    <FilterBlockItem
-                      key={typeof item.key === "string" ? item.key : ""}
-                      label={item.label}
-                      group={item.group}
-                      groupItem={item.groupItem || []}
-                      isLast={item.isLast || false}
-                      isFirst={index === 0}
-                      withoutHeader={item.withoutHeader || false}
-                      withoutSeparator={item.withoutSeparator || false}
-                      changeFilterValue={changeFilterValue}
-                      showSelector={changeShowSelector}
-                      withMultiItems={item.withMultiItems || false}
-                    />
-                  );
-                })}
-              </Scrollbar>
+              <RoomSelector
+                className="room-selector"
+                onSubmit={selectOption}
+                withHeader
+                headerProps={{
+                  onBackClick: onArrowClick,
+                  onCloseClick: hideFilterBlock,
+                  headerLabel: selectorLabel,
+                  withoutBackButton: false,
+                  withoutBorder: false,
+                }}
+                isMultiSelect={false}
+                withSearch
+                disableThirdParty={disableThirdParty}
+              />
             )}
-          </div>
-
-          <StyledFilterBlockFooter>
-            <Button
-              id="filter_apply-button"
-              size={ButtonSize.normal}
-              primary
-              label={t("Common:ApplyButton")}
-              scale
-              onClick={onFilterAction}
-              isDisabled={!showFooter}
-            />
-            <Button
-              id="filter_cancel-button"
-              size={ButtonSize.normal}
-              label={t("Common:CancelButton")}
-              scale
-              onClick={hideFilterBlock}
-              isDisabled={isLoading}
-            />
-          </StyledFilterBlockFooter>
-        </StyledFilterBlock>
+          </StyledFilterBlock>
+        </ModalDialog.Container>
+      ) : (
+        <></>
       )}
 
-      <Backdrop visible withBackground onClick={hideFilterBlock} zIndex={215} />
-    </>
+      <ModalDialog.Header>
+        <StyledFilterBlockHeader>
+          {filterHeader}
+
+          <div className="additional-icons-container">
+            {showClearFilterBtn && (
+              <IconButton
+                key="filter-icon"
+                size={17}
+                className="close-button"
+                iconName={ClearReactSvgUrl}
+                onClick={onClearFilter}
+                isClickable
+                isFill
+              />
+            )}
+          </div>
+        </StyledFilterBlockHeader>
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <div className="filter-body">
+          {isLoading ? (
+            <FilterBlockLoader
+              isRooms={isRooms}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
+            />
+          ) : (
+            <>
+              {filterData.map((item: TItem, index) => {
+                return (
+                  <FilterBlockItem
+                    key={typeof item.key === "string" ? item.key : ""}
+                    label={item.label}
+                    group={item.group}
+                    groupItem={item.groupItem || []}
+                    isLast={item.isLast || false}
+                    isFirst={index === 0}
+                    withoutHeader={item.withoutHeader || false}
+                    withoutSeparator={item.withoutSeparator || false}
+                    changeFilterValue={changeFilterValue}
+                    showSelector={changeShowSelector}
+                    withMultiItems={item.withMultiItems || false}
+                  />
+                );
+              })}
+            </>
+          )}
+        </div>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="filter_apply-button"
+          size={ButtonSize.normal}
+          primary
+          label={t("Common:ApplyButton")}
+          scale
+          onClick={onFilterAction}
+          isDisabled={!showFooter}
+        />
+        <Button
+          id="filter_cancel-button"
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          scale
+          onClick={hideFilterBlock}
+          isDisabled={isLoading}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
-
-  const renderPortalFilterBlock = () => {
-    const rootElement = document.getElementById("root");
-
-    return (
-      <Portal
-        element={filterBlockComponent}
-        appendTo={rootElement || undefined}
-        visible
-      />
-    );
-  };
-
-  return renderPortalFilterBlock();
 };
 
 export default React.memo(FilterBlock);

@@ -61,6 +61,8 @@
   "HtmlCodeDescription": "使用 <script> 标签嵌入{{productName}}或其部分。复制以下 HTML 代码并将其插入到您的 HTML 文件中。",
   "InitializeSDK": "在建议的模式中选择一项，或使用“自定义”手动配置所有参数。",
   "InLeftPanel": "在左侧面板中",
+  "IntegrationDescription": "查看现成的{{productName}}集成",
+  "IntegrationExamples": "集成示例",
   "InterfaceElements": "界面元素",
   "ItemsCount": "一页上的项目数",
   "ItemsCountDescription": "可指定一页上显示的文件/文件夹的数量，以及指定从哪一页开始显示",
@@ -79,7 +81,7 @@
   "MobileOnly": "仅移动设备",
   "Page": "显示页面（页数）",
   "PortalDescription": "嵌入整个{{productName}}以允许用户与所有房间、文件和设置进行交互。",
-  "PublicRoomDescription": "嵌入公共房间，让用户无需注册即可查看公共房间中的所有文档。",
+  "PublicRoomPresetInfo": "嵌入公共房间，让用户无需注册即可查看、编辑、评论或审阅存储其中的全部文档",
   "RightPanelCollapsed": "右侧面板已收起",
   "RoomFilter": "房间过滤器",
   "RoomOrFolder": "房间或文件夹",
@@ -95,6 +97,7 @@
   "SearchByNameEmail": "按名称或电子邮件搜索",
   "SearchFilterAndSort": "搜索、筛选和排序",
   "SearchTerm": "搜索词",
+  "SeeAllConnectors": "查看所有连接器",
   "SelectButtonText": "选择按钮文本",
   "SelectImage": "选择图片",
   "SelectModeEmbedding": "选择嵌入{{productName}}的模式",
@@ -108,6 +111,6 @@
   "Subtitle": "副标题",
   "SubtitleDescription": "包含当前目录的附加注释或描述的副标题。",
   "TabPlugins": "选项卡插件",
-  "Viewer": "查看器",
+  "Viewer": "查看者",
   "ViewerDescription": "嵌入查看器，让用户能够从对应的房间打开文件并进行查看。"
 }

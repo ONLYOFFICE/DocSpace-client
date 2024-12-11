@@ -35,7 +35,6 @@ import {
 } from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 
 export type FilesSelectorProps = TSelectorHeader & {
   isPanelVisible: boolean;
@@ -47,6 +46,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
+  currentDeviceType: DeviceType;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
   setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
   getIcon: (size: number, fileExst: string) => string;
@@ -57,6 +57,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   withSearch: boolean;
   withBreadCrumbs: boolean;
   withSubtitle: boolean;
+  withPadding?: boolean;
 
   isMove?: boolean;
   isCopy?: boolean;
@@ -72,6 +73,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   fromFolderId?: number;
   parentId: number;
   rootFolderType: number;
+  folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
 
@@ -137,10 +139,6 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   includeFolder?: boolean;
 
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
-  currentDeviceType: DeviceType;
-
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
@@ -152,4 +150,6 @@ export type FilesSelectorProps = TSelectorHeader & {
   openRoot?: boolean;
 
   filesSettings: TFilesSettings;
+
+  withCreate?: boolean;
 };

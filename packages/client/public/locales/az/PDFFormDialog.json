@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Forma redaktə rejiminə keçmək istəyirsiniz? F Nəzərə alın ki, formanı artıq doldurmaq mümkün deyil və formanı doldurmaq üçün redaktə etdikdən sonra yenidən Doldurmağa başla düyməsini sıxmalısınız.",
-  "PDFFormEditDialogTitle": "Forma redaktə etmə",
+  "PDFform": "PDF forması",
   "PDFFormIsReadyToast": "<1>{{filename}}</1> PDF forması doldurulmağa hazırdır.",
   "PDFFormSuccessfullyCreatedDescription": "PDF formanız doldurulmağa hazırdır. Ümumi linki kopyalayın və ya forma doldurma prosesinə başlamaq üçün digər istifadəçiləri bu otağa dəvət edin."
 }

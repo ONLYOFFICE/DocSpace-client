@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export type TextType = "primary" | "secondary";
+
 export interface TextProps {
   /** Sets the tag through which the component is rendered */
   as?: React.ElementType;
@@ -63,6 +65,8 @@ export interface TextProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<Element>) => void;
   htmlFor?: string;
+  view?: string;
+  textType?: TextType;
 }
 
 export interface StyledTextProps {
@@ -70,4 +74,6 @@ export interface StyledTextProps {
   fontWeightProp?: string;
   colorProp?: string;
   textAlign?: string;
+  view?: string;
+  textType?: TextType;
 }

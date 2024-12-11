@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
@@ -47,6 +49,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     style,
     isLoading,
     withoutBorder = false,
+    headerHeight,
   } = props;
 
   const backButtonRender = (
@@ -55,6 +58,8 @@ const AsideHeader = (props: AsideHeaderProps) => {
       iconName={ArrowPathReactSvgUrl}
       size={17}
       onClick={onBackClick}
+      isFill
+      isClickable
     />
   );
 
@@ -65,23 +70,32 @@ const AsideHeader = (props: AsideHeaderProps) => {
       iconName={CrossReactSvgUrl}
       onClick={onCloseClick}
       isClickable
+      isStroke
     />
   );
 
   // TODO: Heading is temporary until all dialogues are checked
 
+  const headerComponent =
+    typeof header === "string" ? (
+      <Text
+        fontSize="21px"
+        fontWeight={700}
+        className="header-component"
+        noSelect
+      >
+        {header}
+      </Text>
+    ) : (
+      <Heading className="heading" size={HeadingSize.medium} truncate>
+        {header}
+      </Heading>
+    );
+
   const mainComponent = (
     <>
       {isBackButton && backButtonRender}
-      {typeof header === "string" ? (
-        <Text fontSize="21px" fontWeight={700} className="header-component">
-          {header}
-        </Text>
-      ) : (
-        <Heading className="heading" size={HeadingSize.medium} truncate>
-          {header}
-        </Heading>
-      )}
+      {header && headerComponent}
       {headerIcons.length > 0 && (
         <div className="additional-icons-container">
           {headerIcons.map((item) => (
@@ -92,6 +106,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
               iconName={item.url}
               onClick={item.onClick}
               isClickable
+              isFill
             />
           ))}
         </div>
@@ -108,6 +123,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       className={className}
       style={style}
       withoutBorder={withoutBorder}
+      headerHeight={headerHeight}
     >
       {isLoading ? loaderComponent : mainComponent}
     </StyledHeaderContainer>

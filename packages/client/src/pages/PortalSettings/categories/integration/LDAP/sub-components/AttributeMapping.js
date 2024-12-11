@@ -41,7 +41,6 @@ import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import LdapFieldComponent from "./LdapFieldComponent";
 import { Link } from "@docspace/shared/components/link";
-import { globalColors } from "@docspace/shared/themes";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -73,6 +72,11 @@ const AttributeMapping = (props) => {
     isUIDisabled,
 
     isDefaultUsersQuotaSet,
+
+    currentColorScheme,
+
+    isOwner,
+    isAdmin,
   } = props;
 
   const { t } = useTranslation("Ldap");
@@ -204,7 +208,9 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           hasError={errors.userQuotaLimit}
           labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
+          tooltipContent={t("LdapUserQuotaTooltip", {
+            contactsName: t("Common:Contacts"),
+          })}
           inlineHelpButton
         >
           <TextInput
@@ -232,7 +238,7 @@ const AttributeMapping = (props) => {
                 components={[
                   <Link
                     type="action"
-                    color={globalColors.link}
+                    color={currentColorScheme.main.accent}
                     onClick={goToStarageManagement}
                   />,
                 ]}
@@ -252,14 +258,11 @@ const AttributeMapping = (props) => {
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-            <HelpButton
-              tooltipContent={t("LdapUserTypeTooltip", {
-                productName: t("Common:ProductName"),
-              })}
-            />
           </Box>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo")}
+            {t("LdapUserTypeTooltip", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </Box>
         <Box className="access-selector-wrapper">
@@ -271,11 +274,13 @@ const AttributeMapping = (props) => {
             defaultAccess={userType}
             onSelectAccess={onChangeUserType}
             containerRef={inputsRef}
-            isOwner
+            isOwner={isOwner}
+            isAdmin={isAdmin}
             isMobileView={isMobile()}
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
             directionX="left"
+            scaledOptions={!isMobile()}
           />
           <div></div>
         </Box>
@@ -284,51 +289,63 @@ const AttributeMapping = (props) => {
   );
 };
 
-export default inject(({ ldapStore, currentQuotaStore }) => {
-  const {
-    setMail,
-    setFirstName,
-    setSecondName,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+export default inject(
+  ({ ldapStore, currentQuotaStore, settingsStore, userStore }) => {
+    const {
+      setMail,
+      setFirstName,
+      setSecondName,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
 
-    requiredSettings,
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
-  } = ldapStore;
+      requiredSettings,
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+    } = ldapStore;
 
-  const {
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
-  } = requiredSettings;
+    const {
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
+    } = requiredSettings;
 
-  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+    const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
-  return {
-    setFirstName,
-    setSecondName,
-    setMail,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+    const { currentColorScheme } = settingsStore;
 
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
+    const { user } = userStore;
+    const isOwner = user?.isOwner;
+    const isAdmin = user?.isAdmin;
 
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
+    return {
+      setFirstName,
+      setSecondName,
+      setMail,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
 
-    isDefaultUsersQuotaSet,
-  };
-})(observer(AttributeMapping));
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
+
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+
+      isDefaultUsersQuotaSet,
+      currentColorScheme,
+
+      isOwner,
+      isAdmin,
+    };
+  },
+)(observer(AttributeMapping));

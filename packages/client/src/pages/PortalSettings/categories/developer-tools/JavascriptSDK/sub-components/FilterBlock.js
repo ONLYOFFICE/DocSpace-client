@@ -44,7 +44,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const UserInputContainer = styled.div`
   position: relative;
@@ -89,7 +89,7 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const SearchItemText = styled(Text)`
+const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   line-height: 16px;
 
   text-overflow: ellipsis;
@@ -104,8 +104,6 @@ const SearchItemText = styled(Text)`
       : props.theme.text.emailColor};
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
-
-SearchItemText.defaultProps = { theme: Base };
 
 const minSearchValue = 3;
 
@@ -247,7 +245,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
     if (!query) {
       closeInviteInputPanel();
-      setInputValue("");
+      setAuthor("");
       setUsersList([]);
     }
   };

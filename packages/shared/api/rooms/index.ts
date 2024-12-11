@@ -36,7 +36,12 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms, TPublicRoomPassword } from "./types";
+import {
+  TGetRooms,
+  TRoomLifetime,
+  TExportRoomIndexTask,
+  TPublicRoomPassword,
+} from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -119,10 +124,16 @@ export function getHistory(
   id,
   signal = null,
   requestToken,
+  filter,
 ) {
+  let params = "";
+
+  const str = toUrlParams(filter, false);
+  if (str) params = `?${str}`;
+
   const options = {
     method: "get",
-    url: `/files/${selectionType}/${id}/log`,
+    url: `/files/${selectionType}/${id}/log${params}`,
     signal,
   };
 
@@ -325,7 +336,7 @@ export function removeLogoFromRoom(id) {
   });
 }
 
-export const setInvitationLinks = async (roomId, linkId, title, access) => {
+export const setInvitationLinks = async (roomId, title, access, linkId) => {
   const options = {
     method: "put",
     url: `/files/rooms/${roomId}/links`,
@@ -456,11 +467,13 @@ export function validatePublicRoomKey(key) {
 export async function validatePublicRoomPassword(
   key: string,
   passwordHash: string,
+  signal?: AbortSignal,
 ) {
   const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
+    signal,
   })) as TPublicRoomPassword;
 
   return res;
@@ -487,6 +500,43 @@ export function resetRoomQuota(roomIds) {
   const options = {
     method: "put",
     url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getRoomCovers() {
+  const options = {
+    method: "get",
+    url: "files/rooms/covers",
+  };
+
+  return request(options);
+}
+
+export function exportRoomIndex(roomId: number) {
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function setRoomCover(roomId, cover) {
+  const data = {
+    Color: cover.color,
+    Cover: cover.cover,
+  };
+  const options = {
+    method: "post",
+    url: `files/rooms/${roomId}/cover`,
     data,
   };
 

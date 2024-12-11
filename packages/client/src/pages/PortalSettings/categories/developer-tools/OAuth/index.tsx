@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -5,40 +31,45 @@ import { useTranslation } from "react-i18next";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import { OAuthContainer } from "./StyledOAuth";
+import { OAuthContainer } from "./OAuth.styled";
 import { OAuthProps } from "./OAuth.types";
 
 import InfoDialog from "./sub-components/InfoDialog";
 import PreviewDialog from "./sub-components/PreviewDialog";
-import OAuthLoader from "./sub-components/List/Loader";
-import DisableDialog from "./sub-components/DisableDialog";
-import DeleteDialog from "./sub-components/DeleteDialog";
-import OAuthEmptyScreen from "./sub-components/EmptyScreen";
-import List from "./sub-components/List";
 import GenerateDeveloperTokenDialog from "./sub-components/GenerateDeveloperTokenDialog";
 import RevokeDeveloperTokenDialog from "./sub-components/RevokeDeveloperTokenDialog";
+import DisableDialog from "./sub-components/DisableDialog";
+import DeleteDialog from "./sub-components/DeleteDialog";
+import OAuthLoader from "./sub-components/List/Loader";
+import OAuthEmptyScreen from "./sub-components/EmptyScreen";
+import List from "./sub-components/List";
 
 const MIN_LOADER_TIME = 500;
 
 const OAuth = ({
+  isEmptyClientList,
   clientList,
   viewAs,
-  isEmptyClientList,
+
   setViewAs,
   fetchClients,
   fetchScopes,
+
   currentDeviceType,
-  infoDialogVisible,
-  previewDialogVisible,
+
   isInit,
   setIsInit,
+
+  infoDialogVisible,
+  previewDialogVisible,
   disableDialogVisible,
   deleteDialogVisible,
   generateDeveloperTokenDialogVisible,
   revokeDeveloperTokenDialogVisible,
+  apiOAuthLink,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -47,12 +78,18 @@ const OAuth = ({
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
-    if (isInit) return;
+    if (startLoadingRef.current) return;
     const actions = [];
 
-    actions.push(fetchScopes(), fetchClients());
+    if (!isInit) {
+      actions.push(fetchScopes());
+    }
+
+    actions.push(fetchClients());
 
     await Promise.all(actions);
+
+    startLoadingRef.current = new Date();
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -69,6 +106,7 @@ const OAuth = ({
     }
 
     setIsLoading(false);
+    startLoadingRef.current = null;
     setIsInit(true);
   }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
@@ -79,10 +117,10 @@ const OAuth = ({
   });
 
   React.useEffect(() => {
-    if (isInit) return setIsLoading(false);
-    startLoadingRef.current = new Date();
+    if (startLoadingRef.current) return;
+    setIsLoading(true);
     getData();
-  }, [getData, setIsInit, isInit]);
+  }, [getData]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
@@ -93,12 +131,13 @@ const OAuth = ({
       {isLoading ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen />
+        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} />
       ) : (
         <List
           clients={clientList}
           viewAs={viewAs}
           currentDeviceType={currentDeviceType}
+          apiOAuthLink={apiOAuthLink}
         />
       )}
 
@@ -117,42 +156,50 @@ export default inject(
     oauthStore,
     settingsStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, apiOAuthLink } = settingsStore;
     const {
-      viewAs,
-      setViewAs,
-      clientList,
       isEmptyClientList,
+      clientList,
+      viewAs,
+
+      setViewAs,
       fetchClients,
       fetchScopes,
-      infoDialogVisible,
-      previewDialogVisible,
+
       isInit,
       setIsInit,
+
+      infoDialogVisible,
+      previewDialogVisible,
       disableDialogVisible,
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
     } = oauthStore;
     return {
-      viewAs,
-      setViewAs,
-      clientList,
       isEmptyClientList,
+      clientList,
+      viewAs,
+
+      setViewAs,
       fetchClients,
-      currentDeviceType,
-      infoDialogVisible,
-      previewDialogVisible,
       fetchScopes,
+
+      currentDeviceType,
+
       isInit,
       setIsInit,
+
+      infoDialogVisible,
+      previewDialogVisible,
       disableDialogVisible,
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
+      apiOAuthLink,
     };
   },
 )(observer(OAuth));

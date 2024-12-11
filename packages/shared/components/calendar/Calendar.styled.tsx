@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import Base, { TColorScheme } from "../../themes/base";
+import { TColorScheme } from "../../themes/base";
+import { injectDefaultTheme } from "../../utils";
 
-const ArrowIcon = styled.span<{
+const ArrowIcon = styled.span.attrs(injectDefaultTheme)<{
   next?: boolean;
   isMobile?: boolean;
   previous?: boolean;
@@ -67,17 +68,16 @@ const ArrowIcon = styled.span<{
         `)}
 `;
 
-ArrowIcon.defaultProps = { theme: Base };
-
 const ButtonsContainer = styled.div`
   display: flex;
 `;
 
 ButtonsContainer.displayName = "ButtonsContainer";
 
-const CalendarContainer = styled.div<{
+const CalendarContainer = styled.div.attrs(injectDefaultTheme)<{
   isMobile?: boolean;
   big?: boolean;
+  isScroll?: boolean;
 }>`
   ${(props) =>
     !props.isMobile &&
@@ -109,24 +109,41 @@ const CalendarContainer = styled.div<{
     props.big ? "repeat(4, 1fr)" : "repeat(7, 1fr)"};
   box-sizing: border-box;
   padding: ${(props) => (props.big ? "14px 6px 6px 6px" : "0 6px")};
+  ${(props) =>
+    props.isScroll &&
+    css`
+      margin-bottom: 28px;
+    `};
 `;
 
-CalendarContainer.defaultProps = { theme: Base };
-
-const Container = styled.div<{ isMobile?: boolean }>`
+const Container = styled.div.attrs(injectDefaultTheme)<{
+  isMobile?: boolean;
+  isScroll?: boolean;
+}>`
   box-sizing: border-box;
   width: ${(props) => (props.isMobile ? "100%" : "362px")};
   height: ${(props) => (props.isMobile ? "420px" : "376px")};
-  padding: ${(props) => (props.isMobile ? "16px" : "30px 28px 28px 28px")};
+  padding: ${(props) =>
+    props.isMobile
+      ? "16px"
+      : props.isScroll
+        ? "0px 0px 0px 28px"
+        : "30px 28px 28px 28px"};
   box-shadow: ${(props) => props.theme.calendar.boxShadow};
   border-radius: 6px;
   z-index: 320;
   background-color: ${(props) => props.theme.backgroundColor};
+
+  ${(props) =>
+    props.isScroll &&
+    css`
+      header {
+        padding: 30px 23px 0 12px !important;
+      }
+    `};
 `;
 
-Container.defaultProps = { theme: Base };
-
-const DateItem = styled.button<{
+const DateItem = styled.button.attrs(injectDefaultTheme)<{
   isMobile?: boolean;
   big?: boolean;
   isCurrent?: boolean;
@@ -217,9 +234,8 @@ const DateItem = styled.button<{
       }
     `}
 `;
-DateItem.defaultProps = { theme: Base };
 
-const HeaderActionIcon = styled(ArrowIcon)`
+const HeaderActionIcon = styled(ArrowIcon).attrs(injectDefaultTheme)`
   width: ${(props) => (props.isMobile ? "5px" : "6px")};
   height: ${(props) => (props.isMobile ? "5px" : "6px")};
   transform: rotate(225deg);
@@ -227,8 +243,6 @@ const HeaderActionIcon = styled(ArrowIcon)`
   left: 104%;
   border-color: ${(props) => props.theme.calendar?.accent};
 `;
-
-HeaderActionIcon.defaultProps = { theme: Base };
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -240,7 +254,9 @@ const HeaderContainer = styled.header`
   margin-bottom: 16px;
 `;
 
-const RoundButton = styled.button<{ isMobile?: boolean }>`
+const RoundButton = styled.button.attrs(injectDefaultTheme)<{
+  isMobile?: boolean;
+}>`
   width: ${(props) => (props.isMobile ? "32px" : "26px")};
   height: ${(props) => (props.isMobile ? "32px" : "26px")};
 
@@ -277,9 +293,10 @@ const RoundButton = styled.button<{ isMobile?: boolean }>`
   }
 `;
 
-RoundButton.defaultProps = { theme: Base };
-
-const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
+const Title = styled.h2.attrs(injectDefaultTheme)<{
+  isMobile?: boolean;
+  disabled?: boolean;
+}>`
   position: relative;
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: 700;
@@ -297,9 +314,7 @@ const Title = styled.h2<{ isMobile?: boolean; disabled?: boolean }>`
   }
 `;
 
-Title.defaultProps = { theme: Base };
-
-const Weekday = styled.span<{ isMobile?: boolean }>`
+const Weekday = styled.span.attrs(injectDefaultTheme)<{ isMobile?: boolean }>`
   pointer-events: none;
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: 400;
@@ -312,15 +327,17 @@ const Weekday = styled.span<{ isMobile?: boolean }>`
   text-align: center;
   padding: 10.7px 0;
 `;
-Weekday.defaultProps = { theme: Base };
 
 const StyledContainerTheme = styled(Container)<{
   $currentColorScheme?: TColorScheme;
   isMobile?: boolean;
+  isScroll?: boolean;
 }>`
   ${HeaderActionIcon} {
     border-color: ${(props) => props.$currentColorScheme?.main?.accent};
   }
+
+  border: 1px solid ${({ theme }) => theme.calendar.containerBorderColor};
 `;
 
 const StyledDateItemTheme = styled(DateItem)<{

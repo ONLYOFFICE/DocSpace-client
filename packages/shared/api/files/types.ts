@@ -26,7 +26,6 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,6 +35,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
+import { TUser } from "../people/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -114,6 +114,8 @@ export type TFile = {
   providerKey?: string;
   providerItem?: boolean;
   thumbnailUrl?: string;
+  expired?: string;
+  isForm?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -298,6 +300,7 @@ export type TFilesSettings = {
   templatesSection: boolean;
   updateIfExist: boolean;
   openEditorInSameTab: boolean;
+  displayFileExtension: boolean;
 };
 
 export type TPresignedUri = {
@@ -428,6 +431,12 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+};
+
+export type TIndexItems = {
+  order: string;
+  entryType: number;
+  entryId: number;
 };
 
 export type TConnectingStorages = TConnectingStorage[];

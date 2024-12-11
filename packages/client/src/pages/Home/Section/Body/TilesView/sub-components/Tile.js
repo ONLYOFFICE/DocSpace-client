@@ -31,11 +31,15 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { tablet, isMobile as isMobileUtils } from "@docspace/shared/utils";
+import {
+  tablet,
+  isMobile as isMobileUtils,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { Base, globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
@@ -153,7 +157,11 @@ const StyledTile = styled.div`
   cursor: ${(props) =>
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
-    props.inProgress &&
+    (props.inProgress && props.isFolder
+      ? props.iconProgress !== "duplicate" &&
+        props.iconProgress !== "duplicate-room" &&
+        !props.isDownload
+      : props.inProgress) &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -258,10 +266,14 @@ const StyledTile = styled.div`
   }
 
   .tile-folder-loader {
-    padding-top: 16px;
+    padding-top: 12px;
     width: 32px;
     height: 32px;
-    margin-inline: 21px 14px;
+    margin-inline: 21px 13px;
+  }
+
+  .tile-room {
+    margin-inline: 21px 19px;
   }
 
   .file-icon_container:hover {
@@ -308,7 +320,7 @@ const StyledFileTileTop = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    object-fit: ${(props) => (props.thumbnails1280x720 ? "cover" : "none")};
+    object-fit: cover;
     object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
     z-index: 0;
     border-radius: 6px 6px 0 0;
@@ -353,10 +365,10 @@ const StyledFileTileBottom = styled.div`
   box-sizing: border-box;
 
   .tile-file-loader {
-    padding-top: 16px;
+    padding-top: 12px;
     width: 32px;
     height: 32px;
-    margin-inline: 23px 14px;
+    margin-inline: 23px 13px;
   }
 `;
 
@@ -418,7 +430,7 @@ const StyledElement = styled.div`
   width: 32px;
 `;
 
-const StyledOptionButton = styled.div`
+const StyledOptionButton = styled.div.attrs(injectDefaultTheme)`
   display: block;
 
   .expandButton > div:first-child {
@@ -426,8 +438,6 @@ const StyledOptionButton = styled.div`
     padding-inline: 12px 21px;
   }
 `;
-
-StyledOptionButton.defaultProps = { theme: Base };
 
 const badgesPosition = css`
   inset-inline-start: 9px;
@@ -468,7 +478,7 @@ const quickButtonsPosition = css`
   }
 `;
 
-const StyledIcons = styled.div`
+const StyledIcons = styled.div.attrs(injectDefaultTheme)`
   position: absolute;
   top: 8px;
 
@@ -486,8 +496,6 @@ const StyledIcons = styled.div`
     box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
   }
 `;
-
-StyledIcons.defaultProps = { theme: Base };
 
 class Tile extends React.PureComponent {
   constructor(props) {
@@ -614,7 +622,8 @@ class Tile extends React.PureComponent {
       selectTag,
       selectOption,
       isHighlight,
-      thumbnails1280x720,
+      iconProgress,
+      isDownload,
     } = this.props;
     const { isFolder, isRoom, isTemplate, id, fileExst } = item;
 
@@ -654,6 +663,8 @@ class Tile extends React.PureComponent {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
       color: children[0].props.item.logo?.color,
+      cover: children[0].props.item.logo?.cover,
+      logo: children[0].props.item.logo?.medium,
     };
 
     const title = item.isFolder
@@ -709,6 +720,8 @@ class Tile extends React.PureComponent {
         onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
+        iconProgress={iconProgress}
+        isDownload={isDownload}
         isTemplate={isTemplate}
       >
         {isFolder || (!fileExst && id === -1) ? (
@@ -755,9 +768,10 @@ class Tile extends React.PureComponent {
                       </div>
                     ) : (
                       <Loader
-                        className="tile-folder-loader"
-                        type="oval"
-                        size="16px"
+                        className="tile-folder-loader tile-room"
+                        color=""
+                        size="20px"
+                        type={LoaderTypes.track}
                       />
                     )}
                   </>
@@ -850,8 +864,9 @@ class Tile extends React.PureComponent {
                   ) : (
                     <Loader
                       className="tile-folder-loader"
-                      type="oval"
-                      size="16px"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
                     />
                   )}
                 </>
@@ -893,7 +908,6 @@ class Tile extends React.PureComponent {
               isActive={isActive}
               isMedia={item.canOpenPlayer}
               isHighlight={isHighlight}
-              thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
                 item?.viewAccessibility?.ImageView ||
                 item?.viewAccessibility?.MediaView
@@ -932,8 +946,9 @@ class Tile extends React.PureComponent {
                   ) : (
                     <Loader
                       className="tile-file-loader"
-                      type="oval"
-                      size="16px"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
                     />
                   )}
                 </>

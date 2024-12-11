@@ -27,21 +27,48 @@ const RevokeDialog = ({
   const name = bufferSelection?.name;
 
   const firstDesc = isGroup ? (
-    t("RevokeConsentDescriptionGroup")
+    <Trans
+      t={t}
+      i18nKey="RevokeConsentDescriptionGroup"
+      ns="OAuth"
+      values={{
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
   ) : (
-    <Trans t={t} i18nKey="RevokeConsentDescription" ns="OAuth">
-      Once you revoke the consent to use the ONLYOFFICE DocSpace auth data in
-      the service {{ name }}, ONLYOFFICE DocSpace will automatically stop
-      logging into {{ name }}. Your account in {{ name }} will not be deleted.
-    </Trans>
+    <Trans
+      t={t}
+      i18nKey="RevokeConsentDescription"
+      ns="OAuth"
+      values={{
+        name,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
   );
   const secondDesc = isGroup ? (
-    t("RevokeConsentLogin")
+    <Trans
+      t={t}
+      i18nKey="RevokeConsentLoginGroup"
+      ns="OAuth"
+      values={{
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
   ) : (
-    <Trans t={t} i18nKey="RevokeConsentLogin" ns="OAuth">
-      If you want to renew an automatic login into {{ name }} using ONLYOFFICE
-      DocSpace, you will be asked to grant access to your DocSpace account data.
-    </Trans>
+    <Trans
+      t={t}
+      i18nKey="RevokeConsentLogin"
+      ns="OAuth"
+      values={{
+        name,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
   );
 
   const onRevokeAction = async () => {
@@ -49,7 +76,7 @@ const RevokeDialog = ({
 
     setIsRequestRunning(true);
 
-    if (isGroup) {
+    if (isGroup || selection.length) {
       await onRevoke(selection);
     } else {
       await onRevoke([bufferSelection.clientId]);

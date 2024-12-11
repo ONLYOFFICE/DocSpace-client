@@ -27,6 +27,8 @@
 (function () {
   const FRAME_NAME = "frameDocSpace";
 
+  const version = "1.0.0";
+
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
@@ -76,7 +78,6 @@
     },
     editorCustomization: {},
     keysForReload: [
-      "src",
       "rootPath",
       "width",
       "height",

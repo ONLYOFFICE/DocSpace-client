@@ -29,6 +29,7 @@ import { makeAutoObservable } from "mobx";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
+  EmployeeType,
   FolderType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -68,26 +69,27 @@ class AccessRightsStore {
   };
 
   canChangeUserType = (user) => {
-    const { id, isOwner, isAdmin } = this.userStore.user;
+    const { id, isOwner, isCollaborator, isRoomAdmin } = this.userStore.user;
+    if (isCollaborator || isRoomAdmin) return false;
 
     const { id: userId, statusType, role } = user;
 
     if (userId === id || statusType === "disabled") return false;
 
     switch (role) {
-      case "owner":
+      case EmployeeType.Owner:
         return false;
 
-      case "admin":
-      case "manager":
+      case EmployeeType.Admin:
+      case EmployeeType.RoomAdmin:
         if (isOwner) {
           return true;
         } else {
           return false;
         }
 
-      case "collaborator":
-      case "user":
+      case EmployeeType.User:
+      case EmployeeType.Guest:
         return true;
 
       default:
@@ -96,7 +98,7 @@ class AccessRightsStore {
   };
 
   canMakeEmployeeUser = (user) => {
-    const { id, isOwner } = this.userStore.user;
+    const { id, isOwner, isAdmin, isRoomAdmin } = this.userStore.user;
 
     const {
       status,
@@ -104,22 +106,24 @@ class AccessRightsStore {
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
       isVisitor: userIsVisitor,
-      isCollaborator: userIsCollaborator,
+      // isCollaborator: userIsCollaborator,
+      isRoomAdmin: userIsRoomAdmin,
     } = user;
 
     const needMakeEmployee =
       status !== EmployeeStatus.Disabled && userId !== id;
 
-    if (isOwner) return needMakeEmployee;
+    if (!needMakeEmployee) return false;
 
-    return (
-      needMakeEmployee &&
-      !userIsAdmin &&
-      !userIsOwner &&
-      (userIsVisitor || userIsCollaborator)
-    );
+    if (isOwner) return true;
+
+    if (isAdmin) return !userIsAdmin && !userIsOwner && !userIsRoomAdmin;
+
+    if (isRoomAdmin && userIsVisitor) return true;
+
+    return false;
   };
-  canMakePowerUser = (user) => {
+  canMakeUserType = (user) => {
     const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
       user;
 
@@ -182,7 +186,8 @@ class AccessRightsStore {
 
     const needInvite =
       activationStatus === EmployeeActivationStatus.Pending &&
-      status === EmployeeStatus.Active &&
+      status !== EmployeeStatus.Disabled &&
+      status !== EmployeeStatus.Active &&
       userId !== id;
 
     if (isOwner) return needInvite;
@@ -207,6 +212,16 @@ class AccessRightsStore {
     if (isAdmin) return needRemove && !userIsAdmin && !userIsOwner;
 
     return false;
+  };
+
+  canRemoveOnlyOneUser = (user) => {
+    const { id } = this.userStore.user;
+
+    const { status, id: userId } = user;
+
+    const needRemove = status === EmployeeStatus.Disabled && userId !== id;
+
+    return needRemove;
   };
 
   canChangeQuota = () => {

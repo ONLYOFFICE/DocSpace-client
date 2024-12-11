@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Deseja mudar para o modo de edição de formulário? Observe que o formulário não estará mais disponível para preenchimento e você precisará clicar novamente no botão Iniciar preenchimento após a edição para preenchê-lo.",
-  "PDFFormEditDialogTitle": "Edição de formulário",
+  "PDFform": "Formulário PDF",
   "PDFFormIsReadyToast": "O formulário PDF <1>{{filename}}</1> está pronto para ser preenchido.",
   "PDFFormSuccessfullyCreatedDescription": "Seu formulário PDF está pronto para ser preenchido. Copie o link público para iniciar o processo de preenchimento do formulário ou convide outros usuários para esta sala."
 }

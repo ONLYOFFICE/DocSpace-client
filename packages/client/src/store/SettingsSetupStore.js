@@ -26,7 +26,6 @@
 
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
-const { Filter } = api;
 import SelectionStore from "./SelectionStore";
 //import CommonStore from "./CommonStore";
 
@@ -39,6 +38,9 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+
+const { Filter } = api;
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -128,53 +130,23 @@ class SettingsSetupStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async (page) => {
+  initSettings = async () => {
     const isMobileView =
       this.settingsStore.currentDeviceType === DeviceType.mobile;
 
     if (this.isInit && isMobileView) return;
 
-    if (this.authStore.isAuthenticated) {
-      if (isMobileView) {
-        switch (page) {
-          case "password":
-            await this.settingsStore.getPortalPasswordSettings();
-            break;
-          case "tfa":
-            await this.tfaStore.getTfaType();
-            break;
-          case "trusted-mail":
-            break;
-          case "ip":
-            await this.settingsStore.getIpRestrictionsEnable();
-            await this.settingsStore.getIpRestrictions();
-            break;
-          case "brute-force-protection":
-            await this.settingsStore.getBruteForceProtection();
-            break;
-          case "admin-message":
-            break;
-          case "lifetime":
-            await this.settingsStore.getSessionLifetime();
-
-            break;
-
-          default:
-            break;
-        }
-      } else {
-        await Promise.all([
-          this.settingsStore.getPortalPasswordSettings(),
-          this.tfaStore.getTfaType(),
-          this.settingsStore.getIpRestrictionsEnable(),
-          this.settingsStore.getIpRestrictions(),
-          this.settingsStore.getSessionLifetime(),
-          this.settingsStore.getBruteForceProtection(),
-        ]);
-      }
+    if (this.authStore.isAuthenticated && !isMobileView) {
+      await Promise.all([
+        this.settingsStore.getPortalPasswordSettings(),
+        this.tfaStore.getTfaType(),
+        this.settingsStore.getIpRestrictionsEnable(),
+        this.settingsStore.getIpRestrictions(),
+        this.settingsStore.getSessionLifetime(),
+        this.settingsStore.getBruteForceProtection(),
+      ]);
+      this.setIsInit(true);
     }
-
-    this.isInit = true;
   };
 
   setIsLoadingDownloadReport = (state) => {
@@ -442,9 +414,18 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const { openOnNewPage } = this.filesSettingsStore;
-    const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
-    return this.setAuditTrailReport(res);
+
+    try {
+      const res = await api.settings.getLoginHistoryReport();
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); //hack for ios
+      return this.setAuditTrailReport(res);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
 
   getAuditTrailReport = async () => {
@@ -459,6 +440,7 @@ class SettingsSetupStore {
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
+      toastr.error(error);
     } finally {
       this.setIsLoadingDownloadReport(false);
     }

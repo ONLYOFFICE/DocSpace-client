@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
@@ -45,7 +46,7 @@ const rowCheckboxDraggingStyle = css`
 
   border-bottom: 1px solid;
   border-image-slice: 1;
-  border-image-source: ${(props) => `linear-gradient(to right, 
+  border-image-source: ${(props) => `linear-gradient(to right,
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
 `;
 
@@ -59,6 +60,27 @@ const contextMenuWrapperDraggingStyle = css`
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
 `;
 
+const indexHoverStyles = css`
+  .index-buttons {
+    padding-inline-end: 20px;
+  }
+
+  .index-buttons-name {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            width: calc(100% + 44px) !important;
+
+            .index-arrows-container {
+              padding-inline-end: 20px;
+            }
+          `
+        : css`
+            padding-inline-end: 20px;
+          `}
+  }
+`;
+
 const StyledTableRow = styled(TableRow)`
   .table-container_cell:not(.table-container_element-wrapper) {
     border-top: ${(props) =>
@@ -66,6 +88,13 @@ const StyledTableRow = styled(TableRow)`
     margin-top: -1px;
     border-inline: 0; //for Safari
   }
+  ${(props) =>
+    props.isIndexEditingMode &&
+    css`
+      .table-container_element {
+        display: flex !important;
+      }
+    `}
 
   .table-container_cell:not(.table-container_element-wrapper) {
     height: auto;
@@ -94,26 +123,80 @@ const StyledTableRow = styled(TableRow)`
     `}
   ${(props) =>
     !props.isDragging &&
+    !props.isIndexUpdated &&
     css`
       :hover {
         .table-container_cell {
           cursor: pointer;
           background: ${(props) =>
-            `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+            props.isIndexEditingMode
+              ? `${props.theme.filesSection.tableView.row.indexActive} !important`
+              : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
-        .table-container_file-name-cell {
+
+        .table-container_file-name-cell,
+        .table-container_index-cell {
           margin-inline-start: -24px;
           padding-inline-start: 24px;
         }
+
         .table-container_row-context-menu-wrapper {
           margin-inline-end: -20px;
           padding-inline-end: 20px;
         }
       }
     `}
+
+    ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      .table-container_cell {
+        cursor: pointer;
+        background: ${(props) =>
+          props.isIndexEditingMode
+            ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
+            : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      }
+
+      &:hover .table-container_cell {
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
+      .table-container_file-name-cell,
+      .table-container_index-cell {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: -24px;
+                padding-right: 24px;
+              `
+            : css`
+                margin-left: -24px;
+                padding-left: 24px;
+              `}
+      }
+
+      .table-container_row-context-menu-wrapper {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: -20px;
+                padding-left: 20px !important;
+              `
+            : css`
+                margin-right: -20px;
+                padding-right: 20px !important;
+              `}
+      }
+
+      ${indexHoverStyles}
+    `}
   .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
+      !props.isIndexUpdated &&
+      !props.isIndexEditingMode &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
     cursor: ${(props) =>
       !props.isThirdPartyFolder &&
@@ -136,6 +219,14 @@ const StyledTableRow = styled(TableRow)`
       `}
   }
 
+  .context-menu-container {
+    ${(props) =>
+      props.inProgress &&
+      css`
+        pointer-events: none;
+      `}
+  }
+
   .table-container_element-wrapper {
   }
 
@@ -145,6 +236,12 @@ const StyledTableRow = styled(TableRow)`
     border-bottom: unset;
     margin-inline-start: -20px;
     padding-inline-start: 20px;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        min-width: 36px;
+      `}
   }
 
   .table-container_element-container {
@@ -154,6 +251,13 @@ const StyledTableRow = styled(TableRow)`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        width: 28px;
+        justify-content: flex-start;
+      `}
   }
 
   .table-container_row-loader {
@@ -164,9 +268,16 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_row-checkbox {
     width: 12px;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        padding-inline-start: 8px;
+      `}
   }
 
-  .table-container_file-name-cell {
+  .table-container_file-name-cell,
+  .table-container_index-cell {
     ${(props) =>
       props.showHotkeyBorder &&
       css`
@@ -177,6 +288,32 @@ const StyledTableRow = styled(TableRow)`
       `};
     ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
+
+  .table-container_element-wrapper {
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        margin-inline-start: 0px;
+        padding-inline-start: 0px;
+      `}
+  }
+
+  ${(props) =>
+    props.isIndexing &&
+    css`
+      .table-container_file-name-cell {
+        margin-inline-start: 0px !important;
+        padding-inline-start: 0px !important;
+      }
+      &:hover {
+        .table-container_file-name-cell {
+          margin-inline-start: 0px !important;
+          padding-inline-start: 0px !important;
+        }
+
+        ${indexHoverStyles}
+      }
+    `}
 
   .table-container_row-context-menu-wrapper {
     padding-inline-end: 0;
@@ -205,6 +342,14 @@ const StyledTableRow = styled(TableRow)`
     padding-inline: 0 8px;
   }
 
+  .item-file-name-index {
+    text-decoration: none;
+  }
+
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+  }
+
   ${(props) =>
     props.isHighlight &&
     css`
@@ -222,7 +367,8 @@ const StyledTableRow = styled(TableRow)`
         }
       }
 
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         margin-inline-start: -24px;
         padding-inline-start: 24px;
       }
@@ -236,6 +382,20 @@ const StyledTableRow = styled(TableRow)`
     p {
       margin-inline-end: 8px !important;
     }
+  }
+
+  .index-buttons {
+    justify-content: space-between;
+    width: calc(100% + 24px);
+  }
+
+  .index-buttons-name {
+    width: calc(100% + 24px);
+  }
+
+  .icon-with-index-column {
+    width: 28px;
+    justify-content: flex-start;
   }
 `;
 
@@ -304,7 +464,7 @@ const StyledBadgesContainer = styled.div`
   }
 `;
 
-const StyledQuickButtonsContainer = styled.div`
+const StyledQuickButtonsContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -339,8 +499,6 @@ const StyledQuickButtonsContainer = styled.div`
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
-
-StyledQuickButtonsContainer.defaultProps = { theme: Base };
 
 export {
   StyledBadgesContainer,

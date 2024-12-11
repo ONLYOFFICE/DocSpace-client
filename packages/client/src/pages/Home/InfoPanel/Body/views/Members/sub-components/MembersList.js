@@ -39,6 +39,7 @@ import { isMobile, mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { StyledUserTypeHeader } from "../../../styles/members";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -49,6 +50,10 @@ const MainStyles = styled.div`
     padding: 0;
     z-index: 1;
     background: ${(props) => props.theme.infoPanel.backgroundColor};
+
+    @media ${mobile} {
+      padding-inline-end: 16px;
+    }
   }
 `;
 
@@ -79,6 +84,7 @@ const StyledList = styled(List)`
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
+const GENERAL_LINK_HEADER_HEIGHT = 38;
 
 const MembersList = (props) => {
   const {
@@ -155,6 +161,10 @@ const MembersList = (props) => {
   const getItemSize = ({ index }) => {
     const elem = list[index];
 
+    if (elem?.key === GENERAL_LINK_HEADER_KEY) {
+      return GENERAL_LINK_HEADER_HEIGHT;
+    }
+
     if (elem?.props?.isShareLink) {
       return shareLinkItemSize;
     }
@@ -172,14 +182,20 @@ const MembersList = (props) => {
     const headerTitle = header.children[0];
     const scrollOffset = e.target.scrollTop;
 
+    // First item is links header. Its size is different from link item size
+    const linksBlockHeight = linksBlockLength
+      ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
+      : 0;
+
     for (let titleIndex in listOfTitles) {
       const title = listOfTitles[titleIndex];
-      const titleOffsetTop = title.index * itemSize;
+      const titleOffsetTop =
+        linksBlockHeight + (title.index - linksBlockLength) * itemSize;
 
       if (scrollOffset > titleOffsetTop) {
         if (title.displayName) headerTitle.innerText = title.displayName;
         header.style.display = "flex";
-      } else if (scrollOffset <= linksBlockLength * itemSize) {
+      } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
     }
@@ -240,6 +256,7 @@ const MembersList = (props) => {
                       scrollTop={scrollTop}
                       // React virtualized sets "LTR" by default.
                       style={{ direction: "inherit" }}
+                      tabIndex={null}
                     />
                   );
                 }}

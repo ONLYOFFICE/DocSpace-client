@@ -122,7 +122,7 @@ const SubMenu = (props: {
 
     onClick?.({ originalEvent: e, action, item });
 
-    if (items && isMobileDevice) {
+    if ((items || item.onLoad) && isMobileDevice) {
       setActiveItem(item);
 
       e.stopPropagation();
@@ -141,7 +141,7 @@ const SubMenu = (props: {
     const options = subMenuRef.current?.getElementsByClassName("p-menuitem");
 
     let subListWidth = subMenuRef.current?.offsetParent
-      ? subMenuRef.current.offsetWidth
+      ? subMenuRef.current.clientWidth
       : DomHelpers.getHiddenElementOuterWidth(subMenuRef.current);
 
     const itemOuterWidth = DomHelpers.getOuterWidth(
@@ -159,8 +159,7 @@ const SubMenu = (props: {
       const widthMaxContent = Math.max(...optionsWidth);
 
       if (root) subListWidth = subListWidth || widthMaxContent;
-      else if (!subMenuRef?.current?.style.width)
-        subListWidth = Math.max(subListWidth, widthMaxContent);
+      else subListWidth = Math.max(subListWidth, widthMaxContent);
     }
 
     if (subMenuRef.current) {
@@ -168,9 +167,7 @@ const SubMenu = (props: {
 
       if (!isMobile()) {
         if (root) subMenuRef.current.style.width = `${subListWidth}px`;
-        else if (!subMenuRef?.current?.style.width) {
-          subMenuRef.current.style.width = `${subListWidth}px`;
-        }
+        else subMenuRef.current.style.width = `${subListWidth}px`;
       }
 
       if (!isMobile() && !root) {
@@ -539,7 +536,7 @@ const SubMenu = (props: {
   const active = isActive();
   const submenuLower = renderSubMenuLower();
 
-  if (model.length) {
+  if (model?.length) {
     const newModel = model.filter(
       (item: ContextMenuModel) => item && !item.disabled,
     );

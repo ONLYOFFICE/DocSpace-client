@@ -28,17 +28,18 @@ import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 
 const SelectionArea = (props) => {
   const {
     dragging,
     viewAs,
     setSelections,
-    getCountTilesInRow,
     isRooms,
     foldersLength,
     filesLength,
     isInfoPanelVisible,
+    isIndexEditingMode,
   } = props;
 
   const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
@@ -87,7 +88,7 @@ const SelectionArea = (props) => {
     },
   ];
 
-  return isMobile || dragging ? (
+  return isMobile || dragging || isIndexEditingMode ? (
     <></>
   ) : (
     <SelectionAreaComponent
@@ -107,28 +108,24 @@ const SelectionArea = (props) => {
   );
 };
 
-export default inject(({ filesStore, treeFoldersStore, infoPanelStore }) => {
-  const {
-    dragging,
-    viewAs,
-    setSelections,
-    getCountTilesInRow,
-    folders,
-    files,
-  } = filesStore;
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
-  const { isVisible: isInfoPanelVisible } = infoPanelStore;
+export default inject(
+  ({ filesStore, treeFoldersStore, infoPanelStore, indexingStore }) => {
+    const { dragging, viewAs, setSelections, folders, files } = filesStore;
+    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isVisible: isInfoPanelVisible } = infoPanelStore;
+    const { isIndexEditingMode } = indexingStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return {
-    dragging,
-    viewAs,
-    setSelections,
-    getCountTilesInRow,
-    isRooms,
-    foldersLength: folders.length,
-    filesLength: files.length,
-    isInfoPanelVisible,
-  };
-})(observer(SelectionArea));
+    return {
+      dragging,
+      viewAs,
+      setSelections,
+      isRooms,
+      foldersLength: folders.length,
+      filesLength: files.length,
+      isInfoPanelVisible,
+      isIndexEditingMode,
+    };
+  },
+)(observer(SelectionArea));

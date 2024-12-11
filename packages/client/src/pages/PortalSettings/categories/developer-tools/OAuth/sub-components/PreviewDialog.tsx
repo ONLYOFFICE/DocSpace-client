@@ -1,7 +1,33 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -10,7 +36,7 @@ import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -18,66 +44,12 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const StyledPreviewContainer = styled.div`
-  width: 100%;
-  height: 152px;
-
-  box-sizing: border-box;
-
-  border: ${(props) => props.theme.oauth.previewDialog.border};
-
-  border-radius: 6px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .social-button {
-    max-width: 226px;
-
-    padding: 11px 16px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    gap: 16px;
-
-    .iconWrapper {
-      padding: 0;
-      margin: 0;
-    }
-  }
-`;
-
-StyledPreviewContainer.defaultProps = { theme: Base };
-
-const StyledBlocksContainer = styled.div`
-  width: 100%;
-  height: auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  .block-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-`;
+import OAuthStore from "SRC_DIR/store/OAuthStore";
+import {
+  StyledContainer,
+  StyledPreviewContainer,
+  StyledBlocksContainer,
+} from "../OAuth.styled";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -143,7 +115,7 @@ const styleBlock = `<style>
 </style>`;
 
 const linkParams =
-  "width=800,height=800,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no";
+  "width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
 
 interface PreviewDialogProps {
   visible: boolean;
@@ -162,7 +134,6 @@ const PreviewDialog = ({
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
-  const [state, setState] = React.useState("");
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
@@ -176,24 +147,23 @@ const PreviewDialog = ({
 
   const encodingScopes = encodeURI(scopesString || "");
 
-  const getData = React.useCallback(() => {
-    const { verifier, challenge, state: s } = generatePKCEPair();
-
-    setCodeVerifier(verifier);
-    setCodeChallenge(challenge);
-    setState(s);
-  }, []);
-
   React.useEffect(() => {
+    const getData = () => {
+      const { verifier, challenge } = generatePKCEPair();
+
+      setCodeVerifier(verifier);
+      setCodeChallenge(challenge);
+    };
+
     getData();
-  }, [getData]);
+  }, []);
 
   const getLink = () => {
     return `${
-      window?.ClientConfig?.oauth2.origin
+      window?.ClientConfig?.oauth2.origin || window.location.origin
     }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
       client?.redirectUris[0]
-    }&scope=${encodingScopes}&state=${state}${
+    }&scope=${encodingScopes}${
       isClientSecretPost
         ? ""
         : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
@@ -221,15 +191,22 @@ const PreviewDialog = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
-      withFooterBorder
+      withBodyScroll
     >
-      <ModalDialog.Header>{t("AuthButton")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer>
           <StyledPreviewContainer>
             <SocialButton
               className="social-button"
-              label={t("SignIn")}
+              label={
+                <Trans
+                  t={t}
+                  ns="OAuth"
+                  i18nKey="SignIn"
+                  values={{ productName: t("Common:ProductName") }}
+                />
+              }
               IconComponent={icon}
               onClick={() => {
                 window.open(link, "login", linkParams);
@@ -245,7 +222,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={htmlBlock}
               />
             </div>
@@ -257,7 +233,6 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={styleBlock}
               />
             </div>
@@ -269,33 +244,18 @@ const PreviewDialog = ({
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={scriptBlock}
               />
             </div>
             <div className="block-container">
               <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
-                {t("AuthorizeLink")}
+                {t("OAuth:AuthorizeLink")}
               </Text>
               <Textarea
                 heightTextArea={64}
                 enableCopy
                 isReadOnly
-                isDisabled
                 value={link}
-              />
-            </div>
-
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
-                {t("Webhooks:State")}
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                isDisabled
-                value={state}
               />
             </div>
 
@@ -307,13 +267,12 @@ const PreviewDialog = ({
                   fontSize="13px"
                   noSelect
                 >
-                  {t("CodeVerifier")}
+                  {t("OAuth:CodeVerifier")}
                 </Text>
                 <Textarea
                   heightTextArea={64}
                   enableCopy
                   isReadOnly
-                  isDisabled
                   value={codeVerifier}
                 />
               </div>
@@ -336,19 +295,15 @@ const PreviewDialog = ({
 export default inject(
   ({
     oauthStore,
-    settingsStore,
   }: {
     settingsStore: SettingsStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const { setPreviewDialogVisible, bufferSelection } = oauthStore;
-
-    const { theme } = settingsStore;
 
     return {
       setPreviewDialogVisible,
       client: bufferSelection,
-      theme,
     };
   },
 )(observer(PreviewDialog));

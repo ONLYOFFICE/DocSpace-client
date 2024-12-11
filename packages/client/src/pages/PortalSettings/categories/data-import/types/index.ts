@@ -34,6 +34,7 @@ import { TPaymentFeature } from "@docspace/shared/api/portal/types";
 
 import { TOption } from "@docspace/shared/components/combobox";
 import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-buttons/SaveCancelButton.types";
+import { TTranslation } from "@docspace/shared/types";
 
 export type TFunciton = ReturnType<typeof useTranslation>["t"];
 
@@ -123,7 +124,7 @@ export interface LayoutProps {
 export type TQuota = TPaymentFeature;
 
 export interface SelectUsersStepProps {
-  t: TFunciton;
+  t: TTranslation;
   canDisable: boolean;
   shouldSetUsers: boolean;
 }
@@ -135,8 +136,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   searchValue: TStore["importAccountsStore"]["searchValue"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
-  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
-  users: TStore["importAccountsStore"]["users"];
+
   areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
   setResultUsers: TStore["importAccountsStore"]["setResultUsers"];
   clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
@@ -148,7 +148,8 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
-  quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
+  totalUsedUsers: TStore["importAccountsStore"]["totalUsedUsers"];
+  quota: TStore["importAccountsStore"]["quota"];
 }
 
 export interface AccountsTableProps {
@@ -254,7 +255,7 @@ export interface UsersRowContentProps {
 }
 
 export interface AddEmailsStepProps {
-  t: TFunciton;
+  t: TTranslation;
 }
 
 export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
@@ -265,8 +266,7 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   setResultUsers: TStore["importAccountsStore"]["setResultUsers"];
   areCheckedUsersEmpty: TStore["importAccountsStore"]["areCheckedUsersEmpty"];
-  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
-  withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
   setStep: TStore["importAccountsStore"]["setStep"];
@@ -277,7 +277,8 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
-  quotaCharacteristics: TStore["currentQuotaStore"]["quotaCharacteristics"];
+  totalUsedUsers: TStore["importAccountsStore"]["totalUsedUsers"];
+  quota: TStore["importAccountsStore"]["quota"];
 }
 
 export interface AddEmailTableRowProps {
@@ -315,7 +316,7 @@ export interface InjectedAddEmailRowContentProps
 }
 
 export interface TypeSelectProps {
-  t: TFunciton;
+  t: TTranslation;
 }
 
 export interface InjectedTypeSelectProps extends TypeSelectProps {
@@ -341,6 +342,7 @@ export interface InjectedTypeSelectTableProps extends AccountsTableProps {
   changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
   UserTypes: TStore["importAccountsStore"]["UserTypes"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
+  isOwner: TStore["userStore"]["user"]["isOwner"];
 }
 
 export interface TypeSelectTableViewProps {
@@ -444,11 +446,10 @@ export interface NoEmailUsersProps {
 }
 
 export interface UsersInfoBlockProps {
-  t: TFunciton;
-  selectedUsers: number;
-  totalUsers: number;
+  quota: { max: number };
   totalUsedUsers: number;
-  totalLicenceLimit: number;
+  numberOfSelectedUsers: number;
+  totalUsers: number;
 }
 
 type TExportDetails = { name: string; icon?: string };

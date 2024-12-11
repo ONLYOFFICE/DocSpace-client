@@ -29,7 +29,7 @@ import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
 
 const Item = ({ t, item, setInviteItems, inviteItems, isDisabled }) => {
@@ -53,7 +53,7 @@ const Item = ({ t, item, setInviteItems, inviteItems, isDisabled }) => {
   };
 
   const type = getUserType(item);
-  const typeLabel = getUserTypeLabel(type, t);
+  const typeLabel = getUserTypeTranslation(type, t);
 
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);

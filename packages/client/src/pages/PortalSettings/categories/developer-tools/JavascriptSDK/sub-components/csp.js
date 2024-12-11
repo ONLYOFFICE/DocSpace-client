@@ -37,8 +37,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { tablet } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
@@ -50,7 +49,7 @@ const CategoryHeader = styled.div`
   line-height: 22px;
 `;
 
-const Container = styled.div`
+const Container = styled.div.attrs(injectDefaultTheme)`
   margin-bottom: 4px;
 
   &.description-holder {
@@ -74,8 +73,6 @@ const Container = styled.div`
     }
   }
 `;
-
-Container.defaultProps = { theme: Base };
 
 const ChipsContainer = styled.div`
   display: flex;
@@ -135,6 +132,7 @@ const CSP = ({
   setCSPSettings,
   standalone,
   t,
+  theme,
 }) => {
   useEffect(() => {
     getCSPSettings();

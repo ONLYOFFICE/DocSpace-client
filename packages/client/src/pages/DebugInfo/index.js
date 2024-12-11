@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
@@ -33,38 +33,12 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import axios from "axios";
+import { Loader } from "@docspace/shared/components/loader";
 import styled from "styled-components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
-const StyledModalDialog = styled(ModalDialog)`
-  #modal-dialog {
-    min-height: 560px;
-    max-height: 560px;
-    max-width: 733px;
-    height: auto;
-    width: auto;
-
-    /* Light theme. */
-    --color-border-default: ${(props) => props.theme.dialogs.borderColor};
-    --color-border-muted: hsla(210, 18%, 87%, 1);
-
-    .modal-footer {
-      padding-inline-end: 4px;
-    }
-
-    a {
-      color: ${(props) => props.theme.dialogs.linkColor};
-    }
-
-    .debug-info-body,
-    .debug-info-footer {
-      user-select: text;
-    }
-  }
-
-  .markdown-wrapper {
-    width: 100%;
-  }
+const StyledBodyContent = styled.div`
+  display: contents;
 
   table {
     border-spacing: 0;
@@ -75,6 +49,13 @@ const StyledModalDialog = styled(ModalDialog)`
     width: max-content;
     max-width: 100%;
     overflow: auto;
+  }
+
+  --color-border-default: ${(props) => props.theme.dialogs.borderColor};
+  --color-border-muted: hsla(210, 18%, 87%, 1);
+
+  a {
+    color: ${(props) => props.theme.dialogs.linkColor};
   }
 
   tr {
@@ -96,75 +77,87 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
+const StyledFooterContent = styled.div`
+  display: contents;
+
+  .markdown-wrapper {
+    width: 100%;
+  }
+`;
+
 const DebugInfoDialog = (props) => {
-  const { visible, onClose, user } = props;
-  const [md, setMd] = useState();
+  const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
 
   useEffect(() => {
-    if (md || !visible) return;
-
-    async function loadMD() {
-      try {
-        const response = await axios.get("/debuginfo.md");
-        setMd(response.data);
-      } catch (e) {
-        console.error(e);
-        setMd(`Debug info load failed (${e.message})`);
-      }
-    }
-
-    loadMD();
-  }, [md, visible]);
+    getDebugInfo();
+  }, []);
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       withFooterBorder
       visible={visible}
       onClose={onClose}
       displayType="modal"
+      autoMaxHeight
+      autoMaxWidth
+      isHuge
     >
       <ModalDialog.Header>Debug Info</ModalDialog.Header>
       <ModalDialog.Body className="debug-info-body">
-        {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
-        <Text>
-          # Version: <span className="version">{VERSION}</span>
-        </Text>
-        <Text>{`# Build date: ${BUILD_AT}`}</Text>
-        {user && (
-          <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
-        )}
-        <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
+        <StyledBodyContent>
+          {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
+          <Text>
+            # Version: <span className="version">{VERSION}</span>
+          </Text>
+          <Text>{`# Build date: ${BUILD_AT}`}</Text>
+          {user && (
+            <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
+          )}
+          <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer className="debug-info-footer">
-        <Box
-          className="markdown-wrapper"
-          overflowProp="auto"
-          heightProp={"362px"}
-        >
-          <Scrollbar>
-            {md && (
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  a: ({ node, href, children, ...props }) => (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      {...props}
-                    >
-                      {children}
-                    </a>
-                  ),
-                }}
-              >
-                {md}
-              </ReactMarkdown>
-            )}
-          </Scrollbar>
-        </Box>
+        <StyledFooterContent>
+          <Box
+            className="markdown-wrapper"
+            overflowProp="auto"
+            heightProp={"362px"}
+          >
+            <Scrollbar>
+              {!debugInfoData && <Loader size="20px" type="track" />}
+              {debugInfoData && (
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, href, children, ...props }) => (
+                      <ColorTheme
+                        fontWeight="600"
+                        target="_blank"
+                        tag="a"
+                        href={href}
+                        themeId={ThemeId.Link}
+                      >
+                        {children}
+                      </ColorTheme>
+                      // <a
+                      //   href={href}
+                      //   target="_blank"
+                      //   rel="noopener noreferrer"
+                      //   {...props}
+                      // >
+                      //   {children}
+                      // </a>
+                    ),
+                  }}
+                >
+                  {debugInfoData}
+                </ReactMarkdown>
+              )}
+            </Scrollbar>
+          </Box>
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 
@@ -174,10 +167,13 @@ DebugInfoDialog.propTypes = {
   buildVersionInfo: PropTypes.object,
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ userStore, settingsStore }) => {
   const { user } = userStore;
+  const { debugInfoData, getDebugInfo } = settingsStore;
 
   return {
     user,
+    debugInfoData,
+    getDebugInfo,
   };
 })(observer(DebugInfoDialog));

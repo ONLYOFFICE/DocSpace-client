@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
-export const ChangeRoomOwner = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+export const ChangeRoomOwner = styled.div.attrs(injectDefaultTheme)`
   .change-owner-display {
     display: flex;
     align-items: center;
@@ -54,5 +55,3 @@ export const ChangeRoomOwner = styled.div`
     }
   }
 `;
-
-ChangeRoomOwner.defaultProps = { theme: Base };

@@ -25,27 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
-const StyledComponent = styled(ModalDialog)`
-  .modal-dialog-aside-footer {
-    width: 100%;
-    bottom: 0 !important;
-    inset-inline-start: 0;
-    padding: 16px;
-    box-shadow: 0px 12px 40px ${globalColors.popupShadow};
-  }
-
-  .new-colors-container {
-    margin-top: 20px;
-  }
+const StyledBodyContent = styled.div`
+  margin-top: 20px;
 
   .flex {
     display: flex;
@@ -55,12 +44,10 @@ const StyledComponent = styled(ModalDialog)`
       padding-bottom: 20px;
     }
 
-    ${
-      !isMobile() &&
-      css`
-        max-width: 448px;
-      `
-    }
+    ${!isMobile() &&
+    css`
+      max-width: 448px;
+    `}
   }
 
   .name-color {
@@ -77,13 +64,15 @@ const StyledComponent = styled(ModalDialog)`
     background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent
-        : `${props.theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`}
+        : `${props.theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
+  }
 
   .buttons-box {
     background: ${(props) =>
       props.currentColorButtons
         ? props.currentColorButtons
-        : `${props.theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`}
+        : `${props.theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
+  }
 
   .modal-add-theme {
     width: 46px;
@@ -93,40 +82,34 @@ const StyledComponent = styled(ModalDialog)`
   }
 
   .drop-down-container-hex {
-    ${
-      isMobileOnly &&
-      css`
-        width: 100%;
-      `
-    }
+    ${isMobileOnly &&
+    css`
+      width: 100%;
+    `}
   }
 
   .drop-down-item-hex {
-    ${
-      isMobileOnly &&
-      css`
-        width: calc(100vw - 32px);
-      `
-    }
+    ${isMobileOnly &&
+    css`
+      width: calc(100vw - 32px);
+    `}
 
     :hover {
       background-color: unset;
     }
 
-    ${
-      !isMobile() &&
-      css`
-        max-width: 227px;
+    ${!isMobile() &&
+    css`
+      max-width: 227px;
 
-        .hex-color-picker {
-          max-width: 195px;
-        }
+      .hex-color-picker {
+        max-width: 195px;
+      }
 
-        .react-colorful__interactive {
-          max-width: 183px;
-        }
-      `
-    }
+      .react-colorful__interactive {
+        max-width: 183px;
+      }
+    `}
   }
 `;
 
@@ -155,18 +138,20 @@ const ColorSchemeDialog = (props) => {
   });
 
   return (
-    <StyledComponent
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType="aside"
-      currentColorAccent={currentColorAccent}
-      currentColorButtons={currentColorButtons}
       withFooterBorder={showSaveButtonDialog}
       withBodyScroll={true}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="new-colors-container">
+        <StyledBodyContent
+          className="new-colors-container"
+          currentColorAccent={currentColorAccent}
+          currentColorButtons={currentColorButtons}
+        >
           <div className="flex relative">
             <div className="name-color">{t("Settings:AccentColor")}</div>
             <div
@@ -188,7 +173,7 @@ const ColorSchemeDialog = (props) => {
 
             {!viewMobile && nodeHexColorPickerButtons}
           </div>
-        </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -209,7 +194,7 @@ const ColorSchemeDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledComponent>
+    </ModalDialog>
   );
 };
 

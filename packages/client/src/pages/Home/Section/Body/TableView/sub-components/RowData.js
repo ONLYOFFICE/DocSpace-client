@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
@@ -37,6 +37,9 @@ import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "@docspace/shared/enums";
 
 const RowDataComponent = (props) => {
   const {
@@ -45,6 +48,7 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
+
     dragStyles,
     selectionProp,
     value,
@@ -56,15 +60,69 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+
     tableStorageName,
+    columnStorageName,
+    isIndexEditingMode,
+    changeIndex,
+    isIndexedFolder,
   } = props;
 
-  const lastColumn = getLastColumn(tableStorageName);
+  const [lastColumn, setLastColumn] = useState(
+    getLastColumn(
+      tableStorageName,
+      localStorage.getItem(columnStorageName),
+      isIndexedFolder,
+    ),
+  );
+
+  useEffect(() => {
+    const newLastColumn = getLastColumn(
+      tableStorageName,
+      localStorage.getItem(columnStorageName),
+      isIndexedFolder,
+    );
+
+    if (newLastColumn && newLastColumn !== lastColumn) {
+      setLastColumn(newLastColumn);
+    }
+  });
+
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
       {quickButtonsComponent}
     </StyledQuickButtonsContainer>
   );
+
+  const indexComponentNode = (
+    <div
+      className="index-arrows-container"
+      style={
+        lastColumn === "Name"
+          ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }
+          : { display: "flex" }
+      }
+    >
+      <ColorTheme
+        themeId={ThemeId.IndexIconButton}
+        iconName={ArrowReactSvgUrl}
+        className="index-up-icon change-index_icon"
+        size="small"
+        onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+      />
+      <ColorTheme
+        themeId={ThemeId.IndexIconButton}
+        iconName={ArrowReactSvgUrl}
+        className="index-down-icon change-index_icon"
+        size="small"
+        onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+      />
+    </div>
+  );
+
+  const lastColumnContent = isIndexEditingMode
+    ? indexComponentNode
+    : quickButtonsComponentNode;
 
   return (
     <>
@@ -73,6 +131,9 @@ const RowDataComponent = (props) => {
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
+          lastColumn === "Name" && isIndexEditingMode
+            ? "index-buttons-name"
+            : "",
         )}
         value={value}
       >
@@ -87,7 +148,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
+        {lastColumn === "Name" ? lastColumnContent : <></>}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -99,13 +160,16 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             lastColumn === "Author" ? "no-extra-space" : "",
+            lastColumn === "Author" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Author" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -122,6 +186,9 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             lastColumn === "Created" ? "no-extra-space" : "",
+            lastColumn === "Created" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <DateCell
@@ -129,7 +196,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Created" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -144,13 +211,16 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             lastColumn === "Modified" ? "no-extra-space" : "",
+            lastColumn === "Modified" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Modified" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -165,13 +235,14 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             lastColumn === "Size" ? "no-extra-space" : "",
+            lastColumn === "Size" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Size" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -188,13 +259,14 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             lastColumn === "Type" ? "no-extra-space" : "",
+            lastColumn === "Type" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Type" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -203,7 +275,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, selectedFolderStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -211,7 +283,10 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
+    columnStorageName,
   } = tableStore;
+
+  const { isIndexedFolder } = selectedFolderStore;
 
   return {
     authorColumnIsEnabled,
@@ -220,5 +295,8 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
+    columnStorageName,
+
+    isIndexedFolder,
   };
 })(observer(RowDataComponent));

@@ -47,16 +47,15 @@ const TabsCommon = (props) => {
     setIsLoadedSubmenu,
     loadBaseInfo,
     isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
     currentDeviceType,
     isMobileView,
+    isCommunity,
   } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
       resetSessionStorage();
-      getWhiteLabelLogoUrls();
     };
   }, []);
 
@@ -74,16 +73,19 @@ const TabsCommon = (props) => {
       content: <Customization />,
     },
     {
-      id: "branding",
-      name: t("Branding"),
-      content: <Branding />,
-    },
-    {
       id: "appearance",
       name: t("Appearance"),
       content: <Appearance />,
     },
   ];
+
+  if (!isCommunity) {
+    data.splice(1, 0, {
+      id: "branding",
+      name: t("Branding"),
+      content: <Branding />,
+    });
+  }
 
   const getCurrentTabId = () => {
     const path = location.pathname;
@@ -125,27 +127,25 @@ const TabsCommon = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, common }) => {
-  const {
-    isLoaded,
-    setIsLoadedSubmenu,
-    initSettings,
-    isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
-  } = common;
+export const Component = inject(
+  ({ settingsStore, common, currentTariffStatusStore }) => {
+    const { isLoaded, setIsLoadedSubmenu, initSettings, isLoadedSubmenu } =
+      common;
 
-  const currentDeviceType = settingsStore.currentDeviceType;
+    const { isCommunity } = currentTariffStatusStore;
+    const currentDeviceType = settingsStore.currentDeviceType;
 
-  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
-  return {
-    loadBaseInfo: async (page) => {
-      await initSettings(page);
-    },
-    isLoaded,
-    setIsLoadedSubmenu,
-    isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
-    currentDeviceType,
-    isMobileView,
-  };
-})(withLoading(withTranslation("Settings")(observer(TabsCommon))));
+    const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+    return {
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
+      isLoaded,
+      setIsLoadedSubmenu,
+      isLoadedSubmenu,
+      currentDeviceType,
+      isMobileView,
+      isCommunity,
+    };
+  },
+)(withLoading(withTranslation("Settings")(observer(TabsCommon))));

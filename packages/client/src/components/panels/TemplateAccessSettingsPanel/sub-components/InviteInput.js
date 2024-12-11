@@ -44,7 +44,7 @@ import {
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import AddUsersPanel from "../../AddUsersPanel";
+import PeopleSelector from "@docspace/shared/selectors/People";
 import { getAccessOptions, getTopFreeRole } from "../utils";
 
 import {
@@ -338,8 +338,8 @@ const InviteInput = ({
             {foundUsers}
           </StyledDropDown>
         )}
-
-        {addUsersPanelVisible && (
+        {/* //TODO: Templates rewrite to PeopleSelector */}
+        {/* {addUsersPanelVisible && (
           <AddUsersPanel
             onParentPanelClose={onClose}
             onClose={closeUsersPanel}
@@ -362,7 +362,7 @@ const InviteInput = ({
             isUsersList
             defaultAccess={getDefaultAccessUser(roomType)}
           />
-        )}
+        )} */}
       </StyledInviteInputContainer>
     </>
   );

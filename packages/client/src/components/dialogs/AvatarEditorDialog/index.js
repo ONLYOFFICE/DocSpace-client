@@ -24,26 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { mobile } from "@docspace/shared/utils/device";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  ImageEditor,
-  AvatarPreview,
-} from "@docspace/shared/components/image-editor";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
 
-import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
+import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
 
-import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
+const IMAGE_CROPPER_HEIGHT = 448;
+const HEADER = 70;
+const BUTTONS = 72;
 
 const StyledModalDialog = styled(ModalDialog)`
+  #modal-dialog {
+    max-height: fit-content;
+
+    .modal-header {
+      height: 54px;
+      min-height: 54px;
+    }
+
+    .modal-footer {
+      box-sizing: border-box;
+      max-height: 72px;
+    }
+
+    ${(props) =>
+      props.scrollBodyHeight &&
+      css`
+        .modal-body {
+          height: ${`${props.scrollBodyHeight}px`};
+        }
+      `}
+  }
+  .wrapper-image-editor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .avatar-editor {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      @media ${mobile} {
+        justify-content: center;
+      }
+    }
+  }
+`;
+
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .wrapper-image-editor {
     width: 100%;
     display: flex;
@@ -61,42 +102,70 @@ const AvatarEditorDialog = (props) => {
   const { t } = useTranslation([
     "Profile",
     "PeopleTranslations",
-    "ProfileAction",
     "Common",
     "CreateEditRoomDialog",
+    "Ldap",
+    "RoomLogoCover",
   ]);
 
   const {
     visible,
     onClose,
+    onSave,
     profile,
     updateCreatedAvatar,
     setHasAvatar,
     maxImageUploadSize,
+    onChangeImage,
+    image,
+    onChangeFile,
+    isProfileUpload,
   } = props;
   const [avatar, setAvatar] = useState({
-    uploadedFile: profile.hasAvatar
-      ? profile.avatarOriginal
-      : DefaultUserAvatarMax,
+    uploadedFile: image.uploadedFile,
     x: 0.5,
     y: 0.5,
     zoom: 1,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
+
+  const editorBorderRadius = isProfileUpload ? 400 : 110;
+
+  const avatarTitle = isProfileUpload
+    ? t("Ldap:LdapAvatar")
+    : t("RoomLogoCover:RoomCover");
+
+  useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const onResize = () => {
+    const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
+    const screenHeight = document.documentElement.clientHeight;
+
+    if (screenHeight < imageCropperModalHeight)
+      setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
+    else setScrollBodyHeight(null);
+  };
+
+  const onCloseModal = () => {
+    onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
+    props.setPreview && props.setPreview("");
+    onClose && onClose();
+  };
 
   const onSaveClick = async () => {
     setIsLoading(true);
 
-    if (!avatar.uploadedFile) {
-      const res = await deleteAvatar(profile.id);
-      updateCreatedAvatar(res);
-      setHasAvatar(false);
-      onClose();
-      return;
-    }
     const file = await dataUrlToFile(preview);
 
     const avatarData = new FormData();
@@ -119,36 +188,40 @@ const AvatarEditorDialog = (props) => {
       console.error(error);
       toastr.error(error);
     } finally {
+      onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
       setIsLoading(false);
     }
   };
 
   return (
     <StyledModalDialog
-      displayType="aside"
+      displayType="modal"
       withBodyScroll
       visible={visible}
-      onClose={onClose}
+      onClose={onCloseModal}
       withFooterBorder
+      withBodyScrollForcibly={!!scrollBodyHeight}
+      scrollBodyHeight={scrollBodyHeight}
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
-          {t("EditPhoto")}
+          {avatarTitle}
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <ImageEditor
-          t={t}
-          className="wrapper-image-editor"
-          classNameWrapperImageCropper="avatar-editor"
-          image={avatar}
-          setPreview={setPreview}
-          onChangeImage={onChangeAvatar}
-          Preview={
-            <AvatarPreview avatar={preview} userName={profile.displayName} />
-          }
-          maxImageSize={maxImageUploadSize}
-        />
+        <StyledBodyContent>
+          <ImageEditor
+            t={t}
+            className="wrapper-image-editor"
+            classNameWrapperImageCropper="avatar-editor"
+            image={image}
+            setPreview={props.setPreview || setPreview}
+            onChangeImage={onChangeImage || onChangeAvatar}
+            onChangeFile={onChangeFile}
+            maxImageSize={maxImageUploadSize}
+            editorBorderRadius={editorBorderRadius}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -158,7 +231,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary={true}
-          onClick={onSaveClick}
+          onClick={onSave ? () => onSave(image) : onSaveClick}
           isLoading={isLoading}
         />
         <Button
@@ -167,7 +240,7 @@ const AvatarEditorDialog = (props) => {
           label={t("Common:CancelButton")}
           size="normal"
           scale
-          onClick={onClose}
+          onClick={onCloseModal}
         />
       </ModalDialog.Footer>
     </StyledModalDialog>

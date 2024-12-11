@@ -70,14 +70,14 @@ const IntegrationWrapper = (props) => {
       content: <LDAP />,
     },
     {
-      id: "third-party-services",
-      name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty />,
-    },
-    {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
+    },
+    {
+      id: "third-party-services",
+      name: t("Translations:ThirdPartyTitle"),
+      content: <ThirdParty />,
     },
     {
       id: "smtp-settings",
@@ -103,7 +103,7 @@ const IntegrationWrapper = (props) => {
       </Box>
     );
 
-    data.splice(1, 0, {
+    data.splice(2, 0, {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
@@ -113,7 +113,7 @@ const IntegrationWrapper = (props) => {
   const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+    return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const currentTabId = getCurrentTabId();

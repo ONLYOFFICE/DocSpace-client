@@ -43,7 +43,10 @@ import { TValidate } from "@docspace/shared/components/email-input/EmailInput.ty
 
 import { sendRecoverRequest } from "@docspace/shared/api/settings";
 
-import { ModalDialogContainer } from "./RecoverAccessModalDialog.styled";
+import {
+  StyledBodyContent,
+  StyledFooterContent,
+} from "./RecoverAccessModalDialog.styled";
 import type { IRecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 
 const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
@@ -120,7 +123,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       id={id}
       isLarge
       visible={visible}
@@ -129,91 +132,96 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
     >
       <ModalDialog.Header>{t("Common:RecoverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text
-          key="text-body"
-          className="text-body"
-          isBold={false}
-          fontSize="13px"
-          noSelect
-        >
-          {textBody}
-        </Text>
-        <FieldContainer
-          isVertical
-          key="e-mail"
-          labelVisible={false}
-          hasError={isShowError && emailErr}
-          errorMessage={
-            emailErrorMessage
-              ? t(`Common:${emailErrorMessage}`)
-              : t("Common:RequiredField")
-          }
-        >
-          <EmailInput
-            scale
-            tabIndex={1}
-            name="e-mail"
-            value={email}
-            isAutoFocussed
-            isDisabled={loading}
-            size={InputSize.base}
-            type={InputType.email}
-            autoComplete="username"
-            id="recover-access-modal_email"
+        <StyledBodyContent>
+          <Text
+            key="text-body"
+            className="text-body"
+            isBold={false}
+            fontSize="13px"
+            noSelect
+          >
+            {textBody}
+          </Text>
+          <FieldContainer
+            isVertical
+            key="e-mail"
+            labelVisible={false}
             hasError={isShowError && emailErr}
-            placeholder={emailPlaceholderText}
-            onBlur={onBlurEmail}
-            onChange={onChangeEmail}
-            onValidateInput={onValidateEmail}
-          />
-        </FieldContainer>
-        <FieldContainer
-          isVertical
-          hasError={descErr}
-          labelVisible={false}
-          className="textarea"
-          key="text-description"
-          errorMessage={t("Common:RequiredField")}
-        >
-          <Textarea
-            tabIndex={2}
+            errorMessage={
+              emailErrorMessage
+                ? t(`Common:${emailErrorMessage}`)
+                : t("Common:RequiredField")
+            }
+          >
+            <EmailInput
+              scale
+              tabIndex={1}
+              name="e-mail"
+              value={email}
+              isAutoFocussed
+              isDisabled={loading}
+              size={InputSize.base}
+              type={InputType.email}
+              autoComplete="username"
+              id="recover-access-modal_email"
+              hasError={isShowError && emailErr}
+              placeholder={emailPlaceholderText}
+              onBlur={onBlurEmail}
+              onChange={onChangeEmail}
+              onValidateInput={onValidateEmail}
+              maxLength={255}
+            />
+          </FieldContainer>
+          <FieldContainer
+            isVertical
             hasError={descErr}
-            heightScale={false}
-            value={description}
-            isDisabled={loading}
-            heightTextArea="70px"
-            id="recover-access-modal_description"
-            placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
-            onChange={onChangeDescription}
-          />
-        </FieldContainer>
+            labelVisible={false}
+            className="textarea"
+            key="text-description"
+            errorMessage={t("Common:RequiredField")}
+          >
+            <Textarea
+              tabIndex={2}
+              hasError={descErr}
+              heightScale={false}
+              value={description}
+              isDisabled={loading}
+              heightTextArea="70px"
+              id="recover-access-modal_description"
+              placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
+              onChange={onChangeDescription}
+            />
+          </FieldContainer>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          primary
-          tabIndex={3}
-          isLoading={loading}
-          isDisabled={loading}
-          key="RecoverySendBtn"
-          size={ButtonSize.normal}
-          id="recover-access-modal_send"
-          className="recover-button-dialog"
-          label={loading ? t("Common:Sending") : t("Common:SendButton")}
-          onClick={onSendRecoverRequest}
-        />
-        <Button
-          tabIndex={4}
-          isLoading={loading}
-          isDisabled={loading}
-          size={ButtonSize.normal}
-          key="SendBtn-recover-close"
-          id="recover-access-modal_cancel"
-          className="recover-button-dialog"
-          label={t("Common:CancelButton")}
-          onClick={onRecoverModalClose}
-        />
+        <StyledFooterContent>
+          <Button
+            primary
+            tabIndex={3}
+            isLoading={loading}
+            isDisabled={loading}
+            key="RecoverySendBtn"
+            size={ButtonSize.normal}
+            id="recover-access-modal_send"
+            className="recover-button-dialog"
+            label={loading ? t("Common:Sending") : t("Common:SendButton")}
+            onClick={onSendRecoverRequest}
+          />
+          <Button
+            tabIndex={4}
+            isLoading={loading}
+            isDisabled={loading}
+            size={ButtonSize.normal}
+            key="SendBtn-recover-close"
+            id="recover-access-modal_cancel"
+            className="recover-button-dialog"
+            label={t("Common:CancelButton")}
+            onClick={onRecoverModalClose}
+          />
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

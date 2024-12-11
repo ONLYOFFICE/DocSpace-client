@@ -41,6 +41,8 @@ import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
+import { getTextColor } from "./getTextColor";
+
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
 import {
@@ -63,7 +65,7 @@ import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, { IconSizeType } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect } from "./commonStyles";
+import { NoUserSelect, TextUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
@@ -78,6 +80,10 @@ import {
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
+import type { TRoom } from "../api/rooms/types";
+import { injectDefaultTheme } from "./injectDefaultTheme";
+import { getFromSessionStorage } from "./getFromSessionStorage";
+import { saveToSessionStorage } from "./saveToSessionStorage";
 
 export {
   isBetaLanguage,
@@ -89,6 +95,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
+  TextUserSelect,
   commonInputStyles,
   commonTextStyles,
   INFO_PANEL_WIDTH,
@@ -130,6 +137,10 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  injectDefaultTheme,
+  getTextColor,
+  getFromSessionStorage,
+  saveToSessionStorage,
 };
 
 export const getModalType = () => {
@@ -168,7 +179,11 @@ export const getTitleWithoutExtension = (
     : item.title;
 };
 
-export const getLastColumn = (tableStorageName: string) => {
+export const getLastColumn = (
+  tableStorageName: string,
+  storageColumnsSize?: string,
+  isIndexedFolder?: boolean,
+) => {
   if (!tableStorageName) return;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -178,71 +193,47 @@ export const getLastColumn = (tableStorageName: string) => {
   const filterColumns = columns.filter(
     (column) => column !== "false" && column !== "QuickButtons",
   );
+  let hideColumnsTable = false;
 
-  if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
+  if (storageColumnsSize) {
+    const enabledColumn = storageColumnsSize
+      .split(" ")
+      .filter((_, index, array) => {
+        if (isIndexedFolder) {
+          return index !== 0 && index !== 1 && index !== array.length - 1;
+        }
+        return index !== 0 && index !== array.length - 1;
+      })
+      .find((item) => item !== "0px");
 
+    hideColumnsTable = !enabledColumn;
+  }
+
+  if (hideColumnsTable) {
+    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
+  }
+
+  if (filterColumns.length > 0) {
+    return filterColumns[filterColumns.length - 1];
+  }
   return null;
 };
 
-export const getNewPassword = (
-  settings: {
-    minLength?: number;
-    upperCase?: boolean;
-    digits?: boolean;
-    specSymbols?: boolean;
-    digitsRegexStr?: string;
-    upperCaseRegexStr?: string;
-    specSymbolsRegexStr?: string;
-    allowedCharactersRegexStr?: string;
-  },
-  generatorSpecial: string = "!@#$%^&*",
-) => {
-  const passwordSettings = settings ?? {
-    minLength: 8,
-    upperCase: false,
-    digits: false,
-    specSymbols: false,
-    digitsRegexStr: "(?=.*\\d)",
-    upperCaseRegexStr: "(?=.*[A-Z])",
-    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-  };
+export const isLockedSharedRoom = (item?: TRoom) => {
+  if (!item) return false;
 
-  const length = passwordSettings?.minLength || 0;
-  const string = "abcdefghijklmnopqrstuvwxyz";
-  const numeric = "0123456789";
-  const special = generatorSpecial || "";
+  return Boolean(item.external && item.passwordProtected && !item.expired);
+};
 
-  let password = "";
-  let character = "";
+export const addLog = (log: string, category: "socket") => {
+  if (!window.ClientConfig?.logs.enableLogs) return;
 
-  while (password.length < length) {
-    const a = Math.ceil(string.length * Math.random() * Math.random());
-    const b = Math.ceil(numeric.length * Math.random() * Math.random());
-    const c = Math.ceil(special.length * Math.random() * Math.random());
+  if (window.ClientConfig.logs.logsToConsole) console.log(log);
+  else {
+    if (!window.logs) window.logs = { socket: [] };
 
-    let hold = string.charAt(a);
+    if (!window.logs[category]) window.logs[category] = [];
 
-    if (passwordSettings?.upperCase) {
-      hold = password.length % 2 === 0 ? hold.toUpperCase() : hold;
-    }
-
-    character += hold;
-
-    if (passwordSettings?.digits) {
-      character += numeric.charAt(b);
-    }
-
-    if (passwordSettings?.specSymbols) {
-      character += special.charAt(c);
-    }
-
-    password = character;
+    window.logs[category].push(log);
   }
-
-  password = password
-    .split("")
-    .sort(() => 0.5 - Math.random())
-    .join("");
-
-  return password.substring(0, length);
 };

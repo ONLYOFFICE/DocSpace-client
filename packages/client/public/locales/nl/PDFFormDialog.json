@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Wilt u overschakelen naar de bewerkingsmodus voor formulieren? Houd er rekening mee dat het formulier niet langer beschikbaar is om in te vullen en dat u na het bewerken opnieuw op de knop Start vullen moet klikken om het in te vullen.",
-  "PDFFormEditDialogTitle": "Formulier bewerken",
+  "PDFform": "PDF formulier",
   "PDFFormIsReadyToast": "PDF formulier <1>{{filename}}</1> is klaar om ingevuld te worden.",
   "PDFFormSuccessfullyCreatedDescription": "Uw PDF formulier is klaar om ingevuld te worden. Kopieer openbare link om het formuliervulproces te starten of Nodig andere gebruikers uit voor deze kamer."
 }

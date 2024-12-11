@@ -36,9 +36,10 @@ const MyDocumentsTabs = ({
   isPersonalRoom,
   isRecentTab,
   setFilter,
-  showBodyLoader,
+  showTabsLoader,
   isRoot,
   user,
+  setChangeDocumentsTabs,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
@@ -77,6 +78,7 @@ const MyDocumentsTabs = ({
       filter.searchArea = 3;
     } else filter.searchArea = null;
 
+    setChangeDocumentsTabs(true);
     setFilter(filter);
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -88,7 +90,7 @@ const MyDocumentsTabs = ({
       ? tabs[1].id
       : tabs[0].id;
 
-  if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showTabs && showTabsLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
     <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
@@ -96,18 +98,27 @@ const MyDocumentsTabs = ({
 };
 
 export default inject(
-  ({ treeFoldersStore, filesStore, clientLoadingStore, userStore }) => {
+  ({
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+    userStore,
+    selectedFolderStore,
+  }) => {
     const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
-    const { showBodyLoader } = clientLoadingStore;
+    const { showTabsLoader } = clientLoadingStore;
     const { user } = userStore;
+    const { setChangeDocumentsTabs } = selectedFolderStore;
+
     return {
       isPersonalRoom,
       isRecentTab,
       setFilter,
-      showBodyLoader,
+      showTabsLoader,
       isRoot,
       user,
+      setChangeDocumentsTabs,
     };
   },
 )(observer(MyDocumentsTabs));

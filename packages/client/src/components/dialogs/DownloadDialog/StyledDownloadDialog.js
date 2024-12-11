@@ -25,21 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-const StyledDownloadDialog = styled(ModalDialog)`
-  .download-dialog-description {
-    margin-bottom: 16px;
-    line-height: 20px;
-    min-height: 40px;
-  }
+const StyledBodyContent = styled.div`
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 20px;
+  min-height: 40px;
 
   .download-dialog-convert-message {
     margin-top: 16px;
-  }
-
-  .modal-header {
-    margin-bottom: 24px;
   }
 `;
 
@@ -121,6 +115,12 @@ const StyledDownloadContent = styled.div`
           padding-inline-end: 0;
           text-underline-offset: 1px;
         }
+
+        .expander {
+          svg {
+            padding-bottom: 2px;
+          }
+        }
       }
       .download-dialog-other-text {
         text-align: end;
@@ -130,4 +130,4 @@ const StyledDownloadContent = styled.div`
   }
 `;
 
-export { StyledDownloadDialog, StyledDownloadContent };
+export { StyledDownloadContent, StyledBodyContent };

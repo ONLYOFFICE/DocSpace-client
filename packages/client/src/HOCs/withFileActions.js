@@ -28,8 +28,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
-import { isMobile } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
+import { isMobile } from "react-device-detect";
+import { isMobile as isMobileUtil } from "@docspace/shared/utils";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -68,9 +70,13 @@ export default function withFileActions(WrappedFileItem) {
 
       dragging && setDragging(false);
 
-      createFoldersTree(files, uploadToFolder).then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      });
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     };
 
     onDrop = (items) => {
@@ -103,6 +109,20 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
       } = this.props;
+
+      if (this.props.isIndexEditingMode) {
+        if (
+          e.target.closest(".change-index_icon") ||
+          e.target.querySelector(".change-index_icon") ||
+          isMobile
+        ) {
+          return;
+        }
+
+        setBufferSelection(item);
+        setStartDrag(true);
+        return;
+      }
 
       const { isThirdPartyFolder } = item;
 
@@ -256,7 +276,7 @@ export default function withFileActions(WrappedFileItem) {
       const { t, item } = this.props;
       const { contentLength, providerKey, foldersCount, filesCount } = item;
 
-      if (!contentLength && !providerKey && !isMobile())
+      if (!contentLength && !providerKey && !isMobileUtil())
         return `${t("Translations:Folders")}: ${foldersCount} | ${t("Translations:Files")}: ${filesCount}`;
 
       return "";
@@ -280,7 +300,9 @@ export default function withFileActions(WrappedFileItem) {
         isDisabledDropItem,
         isRecentTab,
         canDrag,
+        isIndexUpdated,
       } = this.props;
+
       const { id, security } = item;
 
       const isDragging =
@@ -314,13 +336,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const showPlanetIcon =
-        (item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.FormRoom ||
-          item.roomType === RoomsType.CustomRoom) &&
-        item.shared;
-
-      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+      const badgeUrl = getRoomBadgeUrl(item);
 
       const additionalInfo = this.additionalComponent();
 
@@ -342,6 +358,7 @@ export default function withFileActions(WrappedFileItem) {
           value={value}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
+          isIndexUpdated={isIndexUpdated}
           checkedProps={checkedProps}
           dragging={dragging}
           getContextModel={this.getContextModel}
@@ -368,6 +385,7 @@ export default function withFileActions(WrappedFileItem) {
         filesStore,
         uploadDataStore,
         contextOptionsStore,
+        indexingStore,
       },
       { item, t },
     ) => {
@@ -381,6 +399,7 @@ export default function withFileActions(WrappedFileItem) {
         createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
+      const { updateSelection, isIndexEditingMode } = indexingStore;
       const {
         isPrivacyFolder,
         isRecycleBinFolder,
@@ -413,6 +432,10 @@ export default function withFileActions(WrappedFileItem) {
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
+      );
+
+      const isIndexUpdated = !!updateSelection.find(
+        (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
       const isDisabledDropItem = item.security?.Create === false;
@@ -512,8 +535,10 @@ export default function withFileActions(WrappedFileItem) {
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
         isRecentTab,
+        isIndexUpdated,
 
         canDrag: !dragIsDisabled,
+        isIndexEditingMode,
       };
     },
   )(observer(WithFileActions));

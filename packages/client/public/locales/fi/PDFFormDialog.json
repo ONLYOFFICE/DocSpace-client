@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Haluatko vaihtaa lomakkeen muokkaustilaan? Huomioithan, että lomake ei ole enää täytettävissä ja sinun tulee klikata Aloita täyttäminen-painiketta jälleen muokkauksen jälkeen alkaessasi täyttää sitä.",
-  "PDFFormEditDialogTitle": "Lomakkeen muokkaus",
+  "PDFform": "PDF-lomake",
   "PDFFormIsReadyToast": "PDF-lomake <1>{{filename}}</1> on valmiina täytettäväksi.",
   "PDFFormSuccessfullyCreatedDescription": "PDF-lomakkeesi on valmiina täytettäväksi. Kopioi julkinen linkkisi aloittaaksesi lomakkeen täyttämisen tai kutsu muita käyttäjiä tähän huoneeseen."
 }

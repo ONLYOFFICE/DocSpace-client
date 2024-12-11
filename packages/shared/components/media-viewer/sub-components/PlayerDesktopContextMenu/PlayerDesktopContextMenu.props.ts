@@ -29,7 +29,7 @@ interface PlayerDesktopContextMenuProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
   canDownload: boolean;
   isPreviewFile?: boolean;
   hideContextMenu: boolean;

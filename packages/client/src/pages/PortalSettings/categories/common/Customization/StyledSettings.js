@@ -33,8 +33,8 @@ import {
   mobile,
   desktop,
   mobileMore,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 
 const menuHeight = "48px";
@@ -43,14 +43,12 @@ const paddingSectionWrapperContent = "22px";
 const saveCancelButtons = "56px";
 const flex = "4px";
 
-const StyledArrowRightIcon = styled(ArrowRightIcon)`
+const StyledArrowRightIcon = styled(ArrowRightIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.client.settings.common.arrowColor};
   }
 `;
-
-StyledArrowRightIcon.defaultProps = { theme: Base };
 
 const StyledScrollbar = styled(Scrollbar)`
   height: calc(

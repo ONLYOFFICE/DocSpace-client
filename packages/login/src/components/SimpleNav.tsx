@@ -30,14 +30,15 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
 
+import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
-const StyledSimpleNav = styled.div`
+const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   display: none;
   height: 48px;
   align-items: center;
@@ -54,18 +55,26 @@ const StyledSimpleNav = styled.div`
     .language-combo-box {
       position: absolute;
       top: 7px;
-      inset-inline-end: 8px;
+      inset-inline-end: 20px;
+
+      .combo-button {
+        gap: 8px;
+      }
     }
   }
 `;
 
-StyledSimpleNav.defaultProps = { theme: Base };
-
 interface SimpleNavProps {
   culture?: string;
+  initialCultures?: TPortalCultures;
+  isLanguageComboboxVisible?: boolean;
 }
 
-const SimpleNav = ({ culture }: SimpleNavProps) => {
+const SimpleNav = ({
+  culture,
+  initialCultures,
+  isLanguageComboboxVisible = true,
+}: SimpleNavProps) => {
   const theme = useTheme();
 
   const isDark = !theme.isBase;
@@ -80,7 +89,9 @@ const SimpleNav = ({ culture }: SimpleNavProps) => {
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      <LanguageComboboxWrapper />
+      {isLanguageComboboxVisible && (
+        <LanguageComboboxWrapper initialCultures={initialCultures} />
+      )}
     </StyledSimpleNav>
   );
 };

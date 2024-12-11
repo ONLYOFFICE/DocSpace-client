@@ -26,6 +26,7 @@ import { i18n } from "i18next";
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
@@ -34,14 +35,18 @@ import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { TUser } from "@docspace/shared/api/people/types";
+
+type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
+  user?: TUser;
   colorTheme?: TGetColorTheme;
   systemTheme?: ThemeKeys;
   i18n: i18n;
 }
 
-const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
+const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
       if (!colorTheme) return {} as TColorScheme;
@@ -58,11 +63,35 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
         ({} as TColorScheme)
       : ({} as TColorScheme);
 
-    if (systemTheme === ThemeKeys.DarkStr) {
-      return { ...Dark, currentColorScheme: currColorTheme };
+    let newTheme;
+
+    if (user?.theme === ThemeKeys.DarkStr) {
+      newTheme = Dark;
     }
+    if (user?.theme === ThemeKeys.BaseStr) {
+      newTheme = Base;
+    }
+    if (
+      user?.theme === ThemeKeys.SystemStr &&
+      systemTheme === ThemeKeys.BaseStr
+    ) {
+      newTheme = Base;
+    }
+    if (
+      user?.theme === ThemeKeys.SystemStr &&
+      systemTheme === ThemeKeys.DarkStr
+    ) {
+      newTheme = Dark;
+    }
+    if (!user?.theme && systemTheme === ThemeKeys.DarkStr) {
+      newTheme = Dark;
+    }
+    if (!user?.theme && systemTheme === ThemeKeys.BaseStr) {
+      newTheme = Base;
+    }
+
     return {
-      ...Base,
+      ...(newTheme ?? Base),
       currentColorScheme: currColorTheme,
     };
   });
@@ -85,40 +114,28 @@ const useTheme = ({ colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
+    let theme = user?.theme ?? SYSTEM_THEME;
     const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
 
-    if (SYSTEM_THEME === ThemeKeys.BaseStr) {
-      setTheme({
-        ...Base,
-        currentColorScheme: currentColorTheme,
-        interfaceDirection,
-      });
+    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
-      if (window?.AscDesktopEditor !== undefined) {
-        const editorTheme = getEditorTheme(ThemeKeys.Base);
-
-        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
-      }
-
-      setCookie(SYSTEM_THEME_KEY, ThemeKeys.BaseStr);
-
-      return;
-    }
+    const isBaseTheme = theme === ThemeKeys.BaseStr;
 
     setTheme({
-      ...Dark,
+      ...(isBaseTheme ? Base : Dark),
       currentColorScheme: currentColorTheme,
       interfaceDirection,
     });
-
-    setCookie(SYSTEM_THEME_KEY, ThemeKeys.DarkStr);
+    setCookie(SYSTEM_THEME_KEY, SYSTEM_THEME);
 
     if (window?.AscDesktopEditor !== undefined) {
-      const editorTheme = getEditorTheme(ThemeKeys.Dark);
+      const editorTheme = getEditorTheme(
+        isBaseTheme ? ThemeKeys.Base : ThemeKeys.Dark,
+      );
 
       window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
     }
-  }, [currentColorTheme, i18n]);
+  }, [user?.theme, currentColorTheme, i18n]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

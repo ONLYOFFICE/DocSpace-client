@@ -28,19 +28,23 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+
+import { isMobile } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
-import { Text } from "@docspace/shared/components/text";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { Button } from "@docspace/shared/components/button";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
+import { StyledProperties, StyledSubtitle } from "../../styles/common";
+
 import {
   StyledNoThumbnail,
   StyledThumbnail,
   StyledPublicRoomBar,
 } from "../../styles/details.js";
-import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
   selection,
@@ -54,6 +58,9 @@ const Details = ({
   isArchive,
   isDefaultRoomsQuotaSet,
   setNewInfoPanelSelection,
+  getLogoCoverModel,
+  onChangeFile,
+  roomLifetime,
   onCreateRoomFromTemplate,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
@@ -74,6 +81,7 @@ const Details = ({
     selectTag,
     isDefaultRoomsQuotaSet,
     setNewInfoPanelSelection,
+    roomLifetime,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -91,6 +99,10 @@ const Details = ({
     }
   }, [selection]);
 
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
+  };
+
   const onCreateRoom = () => {
     onCreateRoomFromTemplate(selection);
   };
@@ -99,15 +111,21 @@ const Details = ({
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
 
-  const currentIcon =
-    !isArchive && selection?.logo?.large
-      ? selection?.logo?.large
+  const currentIcon = selection?.logo?.large
+    ? selection?.logo?.large
+    : selection?.logo?.cover
+      ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
+
+  const badgeUrl = getRoomBadgeUrl(selection, 24);
 
   //console.log("InfoPanel->Details render", { selection });
 
-  const isLoadedRoomIcon = !!selection.logo?.large;
+  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
+
+  const hasImage = selection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
 
   // const isTemplate = selection.roomType === RoomsType.TemplateRoom; //TODO: Templates
   const isTemplate = true; //TODO: Templates
@@ -161,6 +179,7 @@ const Details = ({
             isArchive={isArchive}
             size="96px"
             radius="16px"
+            isRoom={selection.isRoom}
             showDefault={showDefaultRoomIcon}
             imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
               selection.isRoom &&
@@ -168,7 +187,14 @@ const Details = ({
               selection.logo?.large &&
               "custom-logo"
             }`}
-            imgSrc={currentIcon}
+            logo={currentIcon}
+            model={model}
+            withEditing={
+              (selection.isRoom && selection.security?.EditRoom) || false
+            }
+            dropDownManualX={isMobile() ? "-30px" : "-10px"}
+            onChangeFile={onChangeFileContext}
+            badgeUrl={badgeUrl}
           />
         </StyledNoThumbnail>
       )}
@@ -203,12 +229,16 @@ export default inject(
     infoPanelStore,
     userStore,
     currentQuotaStore,
+    dialogsStore,
+    avatarEditorDialogStore,
+    selectedFolderStore,
   }) => {
     const {
       infoPanelSelection,
       getInfoPanelItemIcon,
       openUser,
       setNewInfoPanelSelection,
+      infoPanelRoom,
     } = infoPanelStore;
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
@@ -234,7 +264,18 @@ export default inject(
       isArchive,
       isDefaultRoomsQuotaSet,
       setNewInfoPanelSelection,
+      getLogoCoverModel: dialogsStore.getLogoCoverModel,
+      onChangeFile: avatarEditorDialogStore.onChangeFile,
+      roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
     };
   },
-)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+)(
+  withTranslation([
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "Files",
+    "RoomLogoCover",
+  ])(Details),
+);

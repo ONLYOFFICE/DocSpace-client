@@ -32,6 +32,7 @@ import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
 import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (
@@ -90,7 +91,7 @@ const InfiniteGrid = (props) => {
     fetchMoreFiles,
     filesLength,
     className,
-    getCountTilesInRow,
+    currentFolderId,
     ...rest
   } = props;
 
@@ -222,6 +223,7 @@ const InfiniteGrid = (props) => {
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
+      currentFolderId={currentFolderId}
       {...rest}
     >
       {list}
@@ -230,15 +232,14 @@ const InfiniteGrid = (props) => {
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, clientLoadingStore }) => {
-    const {
-      filesList,
-      hasMoreFiles,
-      filterTotal,
-      fetchMoreFiles,
-      getCountTilesInRow,
-      roomsFilterTotal,
-    } = filesStore;
+  ({
+    filesStore,
+    treeFoldersStore,
+    clientLoadingStore,
+    selectedFolderStore,
+  }) => {
+    const { filesList, hasMoreFiles, filter, fetchMoreFiles, roomsFilter } =
+      filesStore;
 
     const { isLoading } = clientLoadingStore;
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
@@ -246,14 +247,16 @@ export default inject(
     const filesLength = filesList.length;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
+    const currentFolderId = selectedFolderStore.id;
+
     return {
       filesList,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       filesLength,
-      getCountTilesInRow,
       isLoading,
+      currentFolderId,
     };
   },
 )(observer(InfiniteGrid));

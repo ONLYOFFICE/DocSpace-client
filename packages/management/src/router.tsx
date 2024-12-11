@@ -30,73 +30,73 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "./App";
 
 import Spaces from "./categories/spaces";
-import Branding from "./categories/branding";
-import WhiteLabelPage from "client/WhiteLabelPage";
-import CompanyInfoPage from "client/CompanyInfoPage";
-import AdditionalResPage from "client/AdditionalResPage";
-import Backup from "./categories/backup";
-import Restore from "./categories/restore";
+import Settings from "./categories/settings";
+import { WhiteLabel } from "client/WhiteLabelPage";
+import { CompanyInfoSettings } from "client/CompanyInfoPage";
+import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import PrivateRouteWrapper from "./components/PrivateRouterWrapper";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {
-    path: "/",
+    path: "/management",
     element: (
       <ErrorBoundary>
-        <App />
+        <PrivateRouteWrapper>
+          <App />
+        </PrivateRouteWrapper>
       </ErrorBoundary>
     ),
     errorElement: <Error404 />,
     children: [
-      { index: true, element: <Navigate to="spaces" replace /> },
+      { index: true, element: <Navigate to="/management/spaces" replace /> },
       {
-        path: "spaces",
+        path: "/management/spaces",
         element: <Spaces />,
       },
       {
-        path: "branding",
-        element: <Branding />,
+        path: "/management/settings",
+        element: <Settings />,
       },
       {
-        path: "branding/white-label",
-        element: <WhiteLabelPage />,
+        path: "/management/settings/branding",
+        element: <Settings />,
       },
       {
-        path: "branding/company-info-settings",
-        element: <CompanyInfoPage />,
+        path: "/management/settings/branding/white-label",
+        element: <WhiteLabel />,
       },
       {
-        path: "branding/additional-resources",
-        element: <AdditionalResPage />,
-      },
-
-      {
-        path: "backup",
-        element: <Navigate to="data-backup" />,
+        path: "/management/settings/branding/company-info-settings",
+        element: <CompanyInfoSettings />,
       },
       {
-        path: "backup/data-backup",
-        element: <Backup />,
+        path: "/management/settings/branding/additional-resources",
+        element: <AdditionalResources />,
       },
       {
-        path: "backup/auto-backup",
-        element: <Backup />,
+        path: "/management/settings/data-backup",
+        element: <Settings />,
       },
       {
-        path: "restore",
-        element: <Restore />,
+        path: "/management/settings/auto-backup",
+        element: <Settings />,
       },
       {
-        path: "payments",
+        path: "/management/settings/restore",
+        element: <Settings />,
+      },
+      {
+        path: "/management/payments",
         element: <Payments />,
       },
       {
-        path: "bonus",
+        path: "/management/bonus",
         element: <Bonus />,
       },
       {
@@ -108,7 +108,7 @@ const routes = [
 ];
 
 const router = createBrowserRouter(routes, {
-  basename: "/management",
+  basename: "/",
 });
 
 export default router;

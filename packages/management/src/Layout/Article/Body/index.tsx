@@ -26,28 +26,19 @@
 
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { isMobileOnly } from "react-device-detect";
 
 import { isMobile } from "@docspace/shared/utils";
 import { ArticleItem } from "@docspace/shared/components/article-item";
+
 import { settingsTree } from "SRC_DIR/utils/settingsTree";
 import { getItemByLink } from "SRC_DIR/utils";
 import { TSettingsTreeItem } from "SRC_DIR/types/index";
-
 import { useStore } from "SRC_DIR/store";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-const PROXY_BASE_URL = combineUrl(
-  window.ClientConfig?.proxy?.url,
-  "/management"
-);
 
 const ArticleBodyContent = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const { t } = useTranslation(["Settings", "Common"]);
@@ -63,29 +54,22 @@ const ArticleBodyContent = () => {
   useEffect(() => {
     const path = location.pathname;
     const item = getItemByLink(path);
-    setSelectedKey(item?.key);
+    setSelectedKey(item?.key[0]);
     setIsBurgerLoading(false);
   }, []);
 
   const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
-    const path = item.link;
-    const url = combineUrl(PROXY_BASE_URL, path);
-
-    if (openingNewTab(url, e)) return;
-
-    setSelectedKey(item?.key);
+    setSelectedKey(item?.key[0]);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();
     }
-
-    navigate(path);
   };
 
   const catalogItems = () => {
     const items: Array<React.ReactNode> = [];
 
-    let resultTree = settingsTree.filter((item) => item?.isHeader);
+    let resultTree = settingsTree.filter((item) => item?.isArticle);
 
     const deletionTKey = isCommunity ? "Common:PaymentsTitle" : "Common:Bonus";
 
@@ -96,6 +80,7 @@ const ArticleBodyContent = () => {
     }
 
     resultTree.map((item) => {
+      const itemKey = item.key[0];
       items.push(
         <ArticleItem
           key={item.key}
@@ -104,10 +89,11 @@ const ArticleBodyContent = () => {
           showText={true}
           text={t(item.tKey)}
           value={item.link}
-          isActive={item.key === selectedKey}
+          isActive={itemKey === selectedKey}
           onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
           $currentColorScheme={currentColorScheme}
+          linkData={{ path: item.link, state: {} }}
         />
       );
     });

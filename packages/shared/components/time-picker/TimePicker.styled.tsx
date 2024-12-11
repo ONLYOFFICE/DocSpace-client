@@ -25,9 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
+const TimeInput = styled.div.attrs(injectDefaultTheme)<{
+  hasError?: boolean;
+  isFocused?: boolean;
+}>`
   width: 57px;
   height: 32px;
   box-sizing: border-box;
@@ -70,7 +74,5 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
     -webkit-appearance: none;
   }
 `;
-
-TimeInput.defaultProps = { theme: Base };
 
 export default TimeInput;

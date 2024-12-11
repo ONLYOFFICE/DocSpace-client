@@ -46,11 +46,17 @@ const CreateRoomEvent = ({
   setIsLoading,
   setOnClose,
   setCreateRoomDialogVisible,
+  setCover,
 
   fetchThirdPartyProviders,
   enableThirdParty,
   deleteThirdParty,
   startRoomType,
+  isCorrectWatermark,
+  processCreatingRoomFromData,
+  setProcessCreatingRoomFromData,
+  selectionItems,
+  setSelectedRoomType,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -59,14 +65,17 @@ const CreateRoomEvent = ({
     setRoomParams(roomParams);
     setOnClose(onClose);
 
-    if (
+    const notConnectedThirdparty =
       roomParams.storageLocation.isThirdparty &&
-      !roomParams.storageLocation.storageFolderId
-    ) {
+      !roomParams.storageLocation.storageFolderId;
+
+    if (notConnectedThirdparty || !isCorrectWatermark(roomParams.watermark)) {
       setCreateRoomConfirmDialogVisible(true);
-    } else {
-      onCreateRoom(false, t);
+
+      return;
     }
+
+    onCreateRoom(false, t);
   };
 
   const fetchTagsAction = useCallback(async () => {
@@ -80,7 +89,10 @@ const CreateRoomEvent = ({
 
   useEffect(() => {
     setCreateRoomDialogVisible(true);
-    return () => setCreateRoomDialogVisible(false);
+    return () => {
+      setCreateRoomDialogVisible(false);
+      setCover();
+    };
   }, []);
 
   return (
@@ -102,6 +114,10 @@ const CreateRoomEvent = ({
       deleteThirdParty={deleteThirdParty}
       fetchThirdPartyProviders={fetchThirdPartyProviders}
       enableThirdParty={enableThirdParty}
+      processCreatingRoomFromData={processCreatingRoomFromData}
+      setProcessCreatingRoomFromData={setProcessCreatingRoomFromData}
+      selectionItems={selectionItems}
+      setSelectedRoomType={setSelectedRoomType}
     />
   );
 };
@@ -113,11 +129,18 @@ export default inject(
     tagsStore,
     dialogsStore,
     filesSettingsStore,
+    filesStore,
+    filesActionsStore,
   }) => {
     const { fetchTags } = tagsStore;
+    const { selections } = filesStore;
+
+    const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
+      filesActionsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
       filesSettingsStore.thirdPartyStore;
+
     const { enableThirdParty } = filesSettingsStore;
 
     const {
@@ -125,6 +148,7 @@ export default inject(
       setCreateRoomConfirmDialogVisible,
       connectDialogVisible,
       setCreateRoomDialogVisible,
+      setCover,
     } = dialogsStore;
 
     const {
@@ -134,7 +158,12 @@ export default inject(
       setIsLoading,
       setOnClose,
       confirmDialogIsLoading,
+
+      isCorrectWatermark,
+      setSelectedRoomType,
     } = createEditRoomStore;
+
+    const selectionItems = selections;
 
     return {
       fetchTags,
@@ -151,6 +180,13 @@ export default inject(
       fetchThirdPartyProviders,
       enableThirdParty,
       deleteThirdParty,
+
+      isCorrectWatermark,
+      setCover,
+      selectionItems,
+      processCreatingRoomFromData,
+      setSelectedRoomType,
+      setProcessCreatingRoomFromData,
     };
   },
 )(observer(CreateRoomEvent));

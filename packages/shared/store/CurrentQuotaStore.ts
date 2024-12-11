@@ -153,9 +153,9 @@ class CurrentQuotasStore {
     return result?.used?.value || 0;
   }
 
-  get isBrandingAndCustomizationAvailable() {
+  get isCustomizationAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "whitelabel",
+      (obj) => obj.id === "customization",
     );
 
     return result?.value;
@@ -333,7 +333,12 @@ class CurrentQuotasStore {
   }
 
   showWarningDialog = (type: number) => {
-    if (type && this.isUserTariffLimit && type !== EmployeeType.Guest)
+    if (
+      type &&
+      this.isUserTariffLimit &&
+      type !== EmployeeType.Guest &&
+      type !== EmployeeType.User
+    )
       return true;
 
     return this.currentTariffStatusStore?.isGracePeriod;
@@ -431,8 +436,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultUserQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("UserQuotaEnabled")
+        : t("UserQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {
@@ -446,8 +451,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultRoomQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("RoomQuotaEnabled")
+        : t("RoomQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {

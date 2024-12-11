@@ -35,9 +35,12 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
-import { size } from "@docspace/shared/utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
@@ -50,11 +53,12 @@ const BruteForceProtection = (props) => {
     checkPeriod,
 
     getBruteForceProtection,
-    initSettings,
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
+    isDefaultPasswordProtection,
+    setBruteForceProtectionSettings,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -67,6 +71,7 @@ const BruteForceProtection = (props) => {
     useState(defaultBlockingTime);
   const [currentCheckPeriod, setCurrentCheckPeriod] =
     useState(defaultCheckPeriod);
+  const [isDefault, setIsDefault] = useState(isDefaultPasswordProtection);
 
   const [showReminder, setShowReminder] = useState(false);
   const [isGetSettingsLoaded, setIsGetSettingsLoaded] = useState(false);
@@ -94,15 +99,18 @@ const BruteForceProtection = (props) => {
   }, [currentNumberAttempt, currentBlockingTime, currentCheckPeriod]);
 
   useEffect(() => {
-    isInit && getSettings();
-  }, [isInit]);
+    if (!isGetSettingsLoaded || !numberAttempt || !blockingTime || !checkPeriod)
+      return;
+    getSettings();
+  }, [isGetSettingsLoaded, numberAttempt, blockingTime, checkPeriod]);
 
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("brute-force-protection");
-
+    if (!isInit)
+      getBruteForceProtection().then(() => setIsGetSettingsLoaded(true));
+    else setIsGetSettingsLoaded(true);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
@@ -161,6 +169,7 @@ const BruteForceProtection = (props) => {
     setCurrentNumberAttempt(defaultNumberAttempt);
     setCurrentBlockingTime(defaultBlockingTime);
     setCurrentCheckPeriod(defaultCheckPeriod);
+    setIsDefault(isDefaultPasswordProtection);
     setIsGetSettingsLoaded(true);
   };
 
@@ -231,14 +240,10 @@ const BruteForceProtection = (props) => {
       });
   };
 
-  const onCancelClick = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultBruteForceProtection",
-    );
-    setCurrentNumberAttempt(defaultSettings?.numberAttempt || "5");
-    setCurrentBlockingTime(defaultSettings?.blockingTime || "60");
-    setCurrentCheckPeriod(defaultSettings?.checkPeriod || "60");
-    setShowReminder(false);
+  const onCancelClick = async () => {
+    const result = await api.settings.deleteBruteForceProtection();
+
+    setBruteForceProtectionSettings(result);
   };
 
   if (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded)
@@ -328,14 +333,14 @@ const BruteForceProtection = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:CancelButton")}
+        cancelButtonLabel={t("RestoreToDefault")}
         displaySettings={true}
         hasScroll={false}
         additionalClassSaveButton="brute-force-protection-save"
         additionalClassCancelButton="brute-force-protection-cancel"
         isSaving={isLoadingSave}
+        disableRestoreToDefault={isDefault}
       />
     </StyledBruteForceProtection>
   );
@@ -347,22 +352,23 @@ export const BruteForceProtectionSection = inject(
       numberAttempt,
       blockingTime,
       checkPeriod,
-
+      isDefaultPasswordProtection,
       getBruteForceProtection,
       bruteForceProtectionUrl,
       currentDeviceType,
       currentColorScheme,
+      setBruteForceProtectionSettings,
     } = settingsStore;
 
-    const { initSettings, isInit } = setup;
+    const { isInit } = setup;
 
     return {
       numberAttempt,
       blockingTime,
       checkPeriod,
-
+      isDefaultPasswordProtection,
+      setBruteForceProtectionSettings,
       getBruteForceProtection,
-      initSettings,
       isInit,
       bruteForceProtectionUrl,
       currentDeviceType,

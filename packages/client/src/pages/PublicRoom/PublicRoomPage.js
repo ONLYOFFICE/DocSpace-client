@@ -24,22 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router-dom";
 import Section from "@docspace/shared/components/section";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
 import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
-
 import { usePublic, useSDK } from "../Home/Hooks";
+import { StyledToast } from "./StyledPublicRoom";
+
+const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
 const PublicRoomPage = (props) => {
   const {
-    withPaging,
     fetchFiles,
     isEmptyPage,
 
@@ -54,9 +67,18 @@ const PublicRoomPage = (props) => {
     setFrameConfig,
     isFrame,
     isLoading,
+    access,
+    roomType,
+    parentRoomType,
   } = props;
 
   const location = useLocation();
+
+  const { t, ready } = useTranslation(["Common"]);
+
+  const [windowIsOpen, setWindowIsOpen] = useState(false);
+
+  useSDK({ frameConfig, setFrameConfig, isLoading });
 
   usePublic({
     location,
@@ -65,7 +87,110 @@ const PublicRoomPage = (props) => {
     fetchPreviewMediaFile,
   });
 
-  useSDK({ frameConfig, setFrameConfig, isLoading });
+  const getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      try {
+        const path = combineUrl(
+          window.ClientConfig?.proxy?.url,
+          "/login?publicAuth=true",
+        );
+
+        const authModal = window.open(
+          path,
+          t("Common:Authorization"),
+          "height=800, width=866",
+        );
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  const onOpenSignInWindow = async () => {
+    if (windowIsOpen) return;
+
+    setWindowIsOpen(true);
+    await getAuthWindow();
+    setWindowIsOpen(false);
+
+    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+
+    if (isAuth) {
+      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      window.location.reload();
+    }
+  };
+
+  const getAccessTranslation = () => {
+    switch (access) {
+      case ShareAccessRights.ReadOnly:
+        return t("Common:ViewOnly");
+      case ShareAccessRights.Comment:
+        return t("Common:Commenting");
+      case ShareAccessRights.Review:
+        return t("Common:Reviewing");
+      case ShareAccessRights.Editing:
+        return t("Common:Editor");
+      default:
+        return t("Common:ViewOnly");
+    }
+  };
+
+  useEffect(() => {
+    const toastIsDisabled =
+      sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === "true";
+
+    const isFormRoom =
+      roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
+
+    if (!access || !ready || toastIsDisabled || isFrame) return;
+
+    const roomMode = getAccessTranslation().toLowerCase();
+
+    sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, "true");
+
+    const content = isFormRoom ? (
+      t("Common:FormAuthorizeToast", { productName: t("Common:ProductName") })
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="PublicAuthorizeToast"
+        values={{ roomMode }}
+        components={{
+          1: <Text as="span" fontSize="12px" fontWeight={700} />,
+        }}
+      />
+    );
+
+    const toastText = (
+      <StyledToast>
+        <Text fontSize="12px" fontWeight={400}>
+          {content}
+        </Text>
+        <Link
+          fontSize="12px"
+          fontWeight={400}
+          className="public-toast_link"
+          onClick={onOpenSignInWindow}
+        >
+          {t("Common:LoginButton")}
+        </Link>
+      </StyledToast>
+    );
+
+    toastr.info(toastText);
+  }, [access, ready, roomType, parentRoomType]);
 
   const sectionProps = {
     showSecondaryProgressBar,
@@ -79,11 +204,14 @@ const PublicRoomPage = (props) => {
       <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
-        withPaging={withPaging}
         {...sectionProps}
       >
         <Section.SectionHeader>
-          <SectionHeaderContent />
+          <SectionHeaderContent
+            showSignInButton={!isFrame}
+            onSignInClick={onOpenSignInWindow}
+            signInButtonIsDisabled={windowIsOpen}
+          />
         </Section.SectionHeader>
 
         {!isEmptyPage && (
@@ -117,13 +245,16 @@ export default inject(
     uploadDataStore,
     filesSettingsStore,
     mediaViewerDataStore,
+    selectedFolderStore,
+    clientLoadingStore,
   }) => {
-    const { withPaging, frameConfig, setFrameConfig, isFrame } = settingsStore;
-    const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
-      publicRoomStore;
+    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { isLoaded, roomStatus, fetchPublicRoom } = publicRoomStore;
+    const { isLoading } = clientLoadingStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
     const { getFilesSettings } = filesSettingsStore;
+    const { access, roomType, parentRoomType } = selectedFolderStore;
 
     const {
       visible: showSecondaryProgressBar,
@@ -141,8 +272,6 @@ export default inject(
       fetchFiles,
       getFilesSettings,
 
-      withPaging,
-
       showSecondaryProgressBar,
       secondaryProgressBarValue,
       secondaryProgressBarIcon,
@@ -156,6 +285,9 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
+      access,
+      roomType,
+      parentRoomType,
     };
   },
 )(observer(PublicRoomPage));

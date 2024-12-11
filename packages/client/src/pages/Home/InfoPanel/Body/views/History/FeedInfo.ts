@@ -1,4 +1,30 @@
-enum FeedAction {
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+export enum FeedAction {
   Create = "create",
   Upload = "upload",
   Update = "update",
@@ -8,6 +34,18 @@ enum FeedAction {
   Move = "move",
   Copy = "copy",
   Revoke = "revoke",
+  Change = "changeIndex",
+  Reorder = "reorderIndex",
+  Submitted = "submitted",
+  StartedFilling = "startedFilling",
+  Locked = "locked",
+  Unlocked = "unlocked",
+  Archived = "archived",
+  Unarchived = "unarchived",
+  Export = "export",
+  Invite = "invite",
+  CHANGE_COLOR = "changeColor",
+  CHANGE_COVER = "changeCover",
 }
 
 enum FeedTarget {
@@ -21,7 +59,11 @@ enum FeedTarget {
   Group = "group",
 }
 
-export type AnyFeedInfo = (typeof feedInfo)[number];
+export type AnyFeedInfo = {
+  key: string;
+  actionType: FeedAction;
+  targetType: FeedTarget;
+};
 
 export type ActionByTarget<T extends `${FeedTarget}`> = Extract<
   AnyFeedInfo,
@@ -62,6 +104,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Move}`,
   },
   {
+    key: "FileMovedToTrash",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Move}`,
+  },
+  {
     key: "FileCopied",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Copy}`,
@@ -71,7 +118,31 @@ export const feedInfo = [
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Delete}`,
   },
-  //
+  {
+    key: "FileIndexChanged",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Change}`,
+  },
+  {
+    key: "FormSubmit",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Submitted}`,
+  },
+  {
+    key: "FormOpenedForFilling",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.StartedFilling}`,
+  },
+  {
+    key: "FileLocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Locked}`,
+  },
+  {
+    key: "FileUnlocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Unlocked}`,
+  },
   // FOLDER
   {
     key: "FolderCreated",
@@ -89,6 +160,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Move}`,
   },
   {
+    key: "FolderMovedToTrash",
+    targetType: `${FeedTarget.Folder}`,
+    actionType: `${FeedAction.Move}`,
+  },
+  {
     key: "FolderCopied",
     targetType: `${FeedTarget.Folder}`,
     actionType: `${FeedAction.Copy}`,
@@ -97,6 +173,16 @@ export const feedInfo = [
     key: "FolderDeleted",
     targetType: `${FeedTarget.Folder}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "FolderIndexChanged",
+    targetType: `${FeedTarget.Folder}`,
+    actionType: `${FeedAction.Change}`,
+  },
+  {
+    key: "FolderIndexReordered",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Reorder}`,
   },
   //
   // ROOM
@@ -114,6 +200,61 @@ export const feedInfo = [
     key: "RoomCopied",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Copy}`,
+  },
+  {
+    key: "RoomWatermarkSet",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomWatermarkDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomIndexingEnabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomIndexingDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomLifeTimeSet",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomLifeTimeDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomDenyDownloadEnabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Create}`,
+  },
+  {
+    key: "RoomDenyDownloadDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomArchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Archived}`,
+  },
+  {
+    key: "RoomUnarchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Unarchived}`,
+  },
+  {
+    key: "RoomIndexExportSaved",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Export}`,
   },
   // ROOM TAGS
   {
@@ -136,6 +277,16 @@ export const feedInfo = [
     key: "RoomLogoDeleted",
     targetType: `${FeedTarget.RoomLogo}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomColorChanged",
+    targetType: `${FeedTarget.RoomLogo}`,
+    actionType: `${FeedAction.CHANGE_COLOR}`,
+  },
+  {
+    key: "RoomCoverChanged",
+    targetType: `${FeedTarget.RoomLogo}`,
+    actionType: `${FeedAction.CHANGE_COVER}`,
   },
   // ROOM EXTERNAL LINK
   {
@@ -174,6 +325,11 @@ export const feedInfo = [
     key: "RoomRemoveUser",
     targetType: `${FeedTarget.User}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomInviteResend",
+    targetType: `${FeedTarget.User}`,
+    actionType: `${FeedAction.Invite}`,
   },
   //
   // GROUP

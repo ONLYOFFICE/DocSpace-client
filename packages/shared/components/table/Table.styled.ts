@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
 import { ColorTheme } from "../color-theme";
@@ -41,7 +41,9 @@ const reactWindowBodyStyles = css`
   height: 100%;
 `;
 
-const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
+const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
+  useReactWindow?: boolean;
+}>`
   user-select: none;
   display: grid;
   width: 100%;
@@ -52,6 +54,11 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     user-select: none;
     position: relative;
     min-width: 10%;
+  }
+
+  .indexing-separator {
+    background-color: ${(props) =>
+      props.theme.tableContainer.indexingSeparator};
   }
 
   .resize-handle {
@@ -129,11 +136,9 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
   ${({ useReactWindow }) => useReactWindow && reactWindowContainerStyles}
 `;
 
-StyledTableContainer.defaultProps = {
-  theme: Base,
-};
-
-const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
+const StyledTableGroupMenu = styled.div.attrs(injectDefaultTheme)<{
+  checkboxMargin?: string;
+}>`
   position: relative;
 
   background: ${(props) => props.theme.tableContainer.groupMenu.background};
@@ -154,12 +159,36 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
 
   margin: 0;
 
+  .table-header_icon {
+    display: flex;
+
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: auto 20px;
+    height: 100%;
+    width: auto;
+
+    padding-inline-start: 20px;
+    padding-inline-end: 0;
+
+    .table-header_icon-button {
+      margin-inline-end: 8px;
+    }
+  }
+
+  .table-container_label-element,
   .table-container_group-menu-checkbox {
     margin-inline-start: ${({ checkboxMargin }) => checkboxMargin ?? "28px"};
 
     @media ${tablet} {
       margin-inline-start: 24px;
     }
+  }
+
+  .table-container_label-element {
+    white-space: nowrap;
   }
 
   .table-container_group-menu-separator {
@@ -203,25 +232,11 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
   }
 `;
 
-StyledTableGroupMenu.defaultProps = { theme: Base };
-
-const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
+const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme).attrs(
+  injectDefaultTheme,
+)<{
   isInfoPanelVisible?: boolean;
 }>`
-  display: flex;
-
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  margin-block: 0;
-  margin-inline: auto 20px;
-  height: 100%;
-  width: auto;
-
-  .info-panel-toggle {
-    margin-inline-end: 8px;
-  }
-
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -237,9 +252,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
         }
       }
     `}
-
-  padding-inline-start: 20px;
-  padding-inline-end: 0;
 
   @media ${tablet} {
     display: none;
@@ -258,11 +270,8 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
       theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
   }
 `;
-StyledInfoPanelToggleColorThemeWrapper.defaultProps = {
-  theme: Base,
-};
 
-const StyledTableHeader = styled.div<{
+const StyledTableHeader = styled.div.attrs(injectDefaultTheme)<{
   checkboxMargin?: string;
   interfaceDirection?: string;
 }>`
@@ -285,14 +294,11 @@ const StyledTableHeader = styled.div<{
   }
 `;
 
-StyledTableHeader.defaultProps = {
-  theme: Base,
-};
-
-const StyledTableHeaderCell = styled.div<{
+const StyledTableHeaderCell = styled.div.attrs(injectDefaultTheme)<{
   showIcon?: boolean;
   sortingVisible?: boolean;
   isActive?: boolean;
+  isShort?: boolean;
   sorted?: boolean;
 }>`
   cursor: ${(props) =>
@@ -317,9 +323,7 @@ const StyledTableHeaderCell = styled.div<{
       height: 12px;
       path {
         fill: ${(props) =>
-          props.isActive
-            ? props.theme.tableContainer.header.activeIconColor
-            : props.theme.tableContainer.header.iconColor} !important;
+          props.theme.tableContainer.header.iconColor} !important;
       }
     }
 
@@ -345,6 +349,12 @@ const StyledTableHeaderCell = styled.div<{
     display: grid;
     grid-template-columns: 1fr 22px;
 
+    ${(isShort) =>
+      isShort &&
+      css`
+        grid-template-columns: 1fr 12px;
+      `};
+
     margin-inline-end: 8px;
 
     user-select: none;
@@ -364,10 +374,7 @@ const StyledTableHeaderCell = styled.div<{
     overflow: hidden;
     text-overflow: ellipsis;
 
-    color: ${(props) =>
-      props.isActive
-        ? props.theme.tableContainer.header.activeTextColor
-        : props.theme.tableContainer.header.textColor};
+    color: ${(props) => props.theme.tableContainer.header.textColor};
 
     ${(props) =>
       props.showIcon &&
@@ -379,10 +386,6 @@ const StyledTableHeaderCell = styled.div<{
       `}
   }
 `;
-
-StyledTableHeaderCell.defaultProps = {
-  theme: Base,
-};
 
 const StyledTableBody = styled.div<{
   useReactWindow?: boolean;
@@ -401,8 +404,31 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{ dragging?: boolean }>`
+const StyledTableRow = styled.div.attrs(injectDefaultTheme)<{
+  dragging?: boolean;
+  isIndexEditingMode?: boolean;
+  isActive?: boolean;
+  checked?: boolean;
+}>`
   display: contents;
+
+  @media (hover: hover) {
+    .create-share-link {
+      display: none;
+    }
+
+    &:hover .create-share-link {
+      display: block;
+    }
+
+    ${({ isActive, checked }) =>
+      (isActive || checked) &&
+      css`
+        .create-share-link {
+          display: block;
+        }
+      `}
+  }
 
   .table-container_header-checkbox {
     svg {
@@ -416,7 +442,7 @@ const StyledTableRow = styled.div<{ dragging?: boolean }>`
 
   .droppable-hover {
     background: ${(props) =>
-      props.dragging
+      props.dragging && !props.isIndexEditingMode
         ? `${props.theme.dragAndDrop.acceptBackground} !important`
         : "none"};
   }
@@ -426,7 +452,10 @@ const StyledTableRow = styled.div<{ dragging?: boolean }>`
   }
 `;
 
-const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
+const StyledTableCell = styled.div.attrs(injectDefaultTheme)<{
+  hasAccess?: boolean;
+  checked?: boolean;
+}>`
   /* padding-right: 8px; */
   height: 48px;
   max-height: 48px;
@@ -464,10 +493,6 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
     `}
 `;
 
-StyledTableCell.defaultProps = {
-  theme: Base,
-};
-
 const StyledTableSettings = styled.div`
   margin-block: 14px 0px;
   margin-inline: 0 2px;
@@ -501,9 +526,7 @@ const StyledScrollbar = styled(Scrollbar)`
   }
 `;
 
-StyledTableRow.defaultProps = { theme: Base };
-
-const StyledSettingsIcon = styled(IconButton)`
+const StyledSettingsIcon = styled(IconButton).attrs(injectDefaultTheme)`
   ${(props) =>
     props.isDisabled &&
     css`
@@ -515,10 +538,6 @@ const StyledSettingsIcon = styled(IconButton)`
       }
     `}
 `;
-
-StyledSettingsIcon.defaultProps = {
-  theme: Base,
-};
 
 export {
   StyledTableContainer,

@@ -39,6 +39,8 @@ const Header = (props: HeaderProps) => {
       containerRef={{ current: tableRef }}
       columns={defaultColumns}
       columnStorageName={columnStorageName}
+      columnInfoPanelStorageName="infoPanelAutorizedApps"
+      tableStorageName="autorizedApps"
       sectionWidth={sectionWidth}
       showSettings={false}
       useReactWindow

@@ -31,13 +31,17 @@ import { Backdrop } from "../../components/backdrop";
 import { StyledDialogAsideLoader } from "./Dialog.styled";
 
 import { DialogAsideSkeletonProps } from "./Dialog.types";
+import { DialogInvitePanelSkeleton } from "./Dialog.invite";
 
 const DialogAsideSkeleton = ({
   isPanel,
   withoutAside,
   withFooterBorder = false,
+  isInvitePanelLoader,
 }: DialogAsideSkeletonProps) => {
   const zIndex = 310;
+
+  if (isInvitePanelLoader) return <DialogInvitePanelSkeleton />;
 
   const renderClearDialogAsideLoader = () => {
     return (

@@ -1,17 +1,18 @@
 {
   "AddManually": "Handmatig toevoegen",
-  "AddManuallyDescriptionAccounts": "Nodig nieuwe gebruikers persoonlijk per e-mail uit voor {{productName}}",
-  "AddManuallyDescriptionRoom": "Bestaande {{productName}} gebruikers toevoegen aan de kamer met behulp van de namen of nieuwe gebruikers persoonlijk uitnodigen per e-mail",
-  "EmailErrorMessage": "E-mailadres niet geldig. U kunt de e-mail bewerken door erop te klikken.",
+  "EmailErrorMessage": "E-mailadres niet geldig. U kunt de e-mail bewerken door erop te dubbelklikken.",
   "GroupMaxAvailableRoleWarning": "Groepen kunnen aan een kamer worden toegevoegd met de {{roleName}} rol als maximum. U kunt echter de rol van individuele gebruikers in de groep wijzigen nadat deze met succes is toegevoegd.",
   "InvitationLanguage": "Taal van de uitnodiging",
-  "InviteAccountSearchPlaceholder": "Mensen per e-mail uitnodigen",
-  "InviteRoomSearchPlaceholder": "Mensen per e-mail uitnodigen",
+  "InviteMembersManuallyDescription": "Nodig nieuwe leden persoonlijk per e-mail uit voor {{productName}}",
+  "InviteMembersSearchPlaceholder": "Leden per e-mail uitnodigen",
+  "InviteToRoomManuallyInfo": "Voeg bestaande {{productName}} contacten toe. Of nodig nieuwe gebruikers persoonlijk per e-mail uit. Nieuwe gebruikers worden toegevoegd aan uw Gastenlijst.",
+  "InviteToRoomSearchPlaceholder": "Zoeken en uitnodigen op naam of e-mail",
   "InviteViaLink": "Uitnodigen via link",
   "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in {{productName}}",
   "InviteViaLinkDescriptionRoom": "Maak een universele link voor zelfautorisatie in de kamer",
   "LinkCopySuccess": "Link is gekopieerd",
   "ResetChange": "Wijziging resetten",
   "SendInvitation": "Stuur uitnodiging",
+  "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen de opgegeven rol vervullen.",
   "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd"
 }

@@ -27,10 +27,9 @@
 "use client";
 
 import styled from "styled-components";
-import { tablet, mobile } from "../../../utils";
-import { Base } from "../../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../../utils";
 
-const LoginContainer = styled.div<{
+const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
   type: string;
   isRegisterContainerVisible: boolean;
 }>`
@@ -38,12 +37,12 @@ const LoginContainer = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
 
+  margin-top: 56px;
   margin-bottom: ${(props) =>
-    props.isRegisterContainerVisible ? "100px" : "16px"};
+    props.isRegisterContainerVisible ? "100px" : "56px"};
 
   .remember-wrapper {
     max-width: 170px;
@@ -64,7 +63,10 @@ const LoginContainer = styled.div<{
   @media ${mobile} {
     margin-inline: auto;
     max-width: 100%;
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
+    padding-inline: 16px 8px;
+
+    margin: 0 auto;
   }
 
   .socialButton {
@@ -82,19 +84,29 @@ const LoginContainer = styled.div<{
   }
 
   .recover-link {
-    min-height: 19px;
-    margin-top: 20px;
+    min-height: 20px;
+    margin-top: 27px;
+    line-height: 15px;
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     max-width: 480px;
-    padding-bottom: 32px;
+    padding-bottom: 29px;
     min-height: 32px;
+    line-height: 28px;
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+
       padding-top: 32px;
+      padding-bottom: 32px;
     }
   }
 
@@ -113,6 +125,10 @@ const LoginContainer = styled.div<{
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
+
+    p {
+      line-height: 20px;
+    }
   }
 
   .line:before,
@@ -158,6 +174,7 @@ const LoginContainer = styled.div<{
           align-items: flex-start;
 
           svg {
+            padding-top: 2px;
             margin-inline-end: 8px !important;
             rect {
               fill: ${(props) => props.theme.checkbox.fillColor};
@@ -170,6 +187,9 @@ const LoginContainer = styled.div<{
           }
 
           .help-button {
+            margin-inline-start: 2px;
+            margin-top: 1px;
+
             svg {
               path {
                 fill: ${(props) => props.theme.login.helpButton};
@@ -179,6 +199,7 @@ const LoginContainer = styled.div<{
 
           .checkbox-text {
             color: ${(props) => props.theme.checkbox.arrowColor};
+            line-height: 20px;
           }
 
           label {
@@ -193,13 +214,13 @@ const LoginContainer = styled.div<{
       }
 
       .login-link {
-        line-height: 18px;
+        line-height: 20px;
         margin-inline-start: auto;
       }
     }
 
     .login-button {
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .login-button-dialog {
@@ -226,6 +247,18 @@ const LoginContainer = styled.div<{
         margin-top: 24px;
       }
     } */
+
+    @keyframes autofill {
+      from {
+      }
+      to {
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: autofill;
+      animation-duration: 1ms;
+    }
   }
 
   .logo-wrapper {
@@ -261,8 +294,14 @@ const LoginContainer = styled.div<{
   .code-description {
     color: ${(props) => props.theme.login.textColor};
   }
-`;
 
-LoginContainer.defaultProps = { theme: Base };
+  .input-block-icon {
+    padding-inline-end: 12px;
+  }
+
+  .wrapper {
+    height: 20px;
+  }
+`;
 
 export default LoginContainer;

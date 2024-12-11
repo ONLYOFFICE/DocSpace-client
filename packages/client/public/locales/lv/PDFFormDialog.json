@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Vai vēlaties pārslēgties uz veidlapas rediģēšanas režīmu? Ņemiet vērā, ka veidlapa vairs nebūs pieejama aizpildīšanai, un pēc rediģēšanas jums būs vēlreiz jānoklikšķina uz pogas Sākt aizpildīšanu, lai to aizpildītu.",
-  "PDFFormEditDialogTitle": "Veidlapas rediģēšana",
+  "PDFform": "PDF veidlapa",
   "PDFFormIsReadyToast": "PDF veidlapa <1>{{filename}}</1> ir gatava aizpildīšanai.",
   "PDFFormSuccessfullyCreatedDescription": "Jūsu PDF veidlapa ir gatava aizpildīšanai. Kopējiet publisko saiti, lai sāktu veidlapu aizpildīšanas procesu, vai uzaiciniet citus lietotājus šajā telpā."
 }

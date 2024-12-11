@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Row } from "@docspace/shared/components/row";
-import { tablet } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 
 const StyledBody = styled.div`
   height: 100%;
-  width: 100%;
+  width: calc(100% + 16px);
+
   .version-list {
     height: 100%;
     width: 100%;
@@ -43,7 +43,7 @@ const StyledBody = styled.div`
   }
 `;
 
-const StyledVersionList = styled.div`
+const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
   .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>
@@ -135,9 +135,7 @@ const StyledVersionList = styled.div`
   }
 `;
 
-StyledVersionList.defaultProps = { theme: Base };
-
-const StyledVersionRow = styled(Row)`
+const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   .row_content {
     position: relative;
     padding-top: 13px;
@@ -218,13 +216,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version_text {
-    margin-inline-start: -7px;
     margin-top: 5px;
-
-    @media ${tablet} {
-      margin-inline-start: -7px;
-      margin-top: 5px;
-    }
 
     word-break: break-word;
     display: ${(props) => (props.showEditPanel ? "none" : "-webkit-box")};
@@ -238,6 +230,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version-comment-wrapper {
+    margin-inline-start: 72px;
     white-space: normal !important;
 
     .version_text {
@@ -313,7 +306,5 @@ const StyledVersionRow = styled(Row)`
     max-width: 350px;
   }
 `;
-
-StyledVersionRow.defaultProps = { theme: Base };
 
 export { StyledBody, StyledVersionRow, StyledVersionList };

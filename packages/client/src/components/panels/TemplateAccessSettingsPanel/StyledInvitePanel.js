@@ -33,7 +33,8 @@ import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { mobile, commonIconsStyles } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
-import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
+// import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg"; // TODO: Templates fix
+import CrossIconMobile from "PUBLIC_DIR/images/cross.edit.react.svg"; // TODO: Templates fix
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
 

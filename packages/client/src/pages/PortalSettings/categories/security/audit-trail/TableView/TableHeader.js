@@ -31,7 +31,6 @@ import { withTranslation } from "react-i18next";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `auditTableColumns_ver-${TABLE_VERSION}`;
-const COLUMNS_SIZE = `auditColumnsSize_ver-${TABLE_VERSION}`;
 
 class AuditTableHeader extends React.Component {
   constructor(props) {
@@ -59,7 +58,7 @@ class AuditTableHeader extends React.Component {
       },
       {
         key: "Room",
-        title: t("Common:Context"),
+        title: t("Common:Location"),
         enable: true,
         resizable: true,
         onChange: this.onColumnChange,
@@ -129,14 +128,20 @@ class AuditTableHeader extends React.Component {
 
   render() {
     const { columns } = this.state;
-    const { containerRef, sectionWidth, userId } = this.props;
+    const {
+      containerRef,
+      sectionWidth,
+      columnStorageName,
+      columnInfoPanelStorageName,
+    } = this.props;
 
     return (
       <TableHeader
         checkboxSize="48px"
         containerRef={containerRef}
         columns={columns}
-        columnStorageName={`${COLUMNS_SIZE}=${userId}`}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
         checkboxMargin="12px"
         showSettings={false}
@@ -149,8 +154,4 @@ export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
   };
-})(
-  withTranslation(["Home", "Common", "Translations"])(
-    observer(AuditTableHeader),
-  ),
-);
+})(withTranslation(["Common", "Translations"])(observer(AuditTableHeader)));

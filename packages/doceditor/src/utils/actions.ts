@@ -41,6 +41,8 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 
+import { logger } from "@/../logger.mjs";
+
 import type {
   ActionType,
   IInitialConfig,
@@ -49,12 +51,16 @@ import type {
   TResponse,
 } from "@/types";
 
-import { REPLACED_URL_PATH } from "./constants";
+import { availableActions, REPLACED_URL_PATH } from "./constants";
+
+const log = logger.child({ module: "API" });
 
 export async function getFillingSession(
   fillingSessionId: string,
   share?: string,
 ) {
+  log.debug("Start GET /files/file/fillresult");
+
   const [request] = createRequest(
     [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
     [
@@ -73,7 +79,13 @@ export async function getFillingSession(
       cause: await response.json(),
     });
   } catch (error) {
-    console.log("File copyas error ", error);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+    log.error(
+      { error, fillingSessionId, url: hostname },
+      "Get filling session failed",
+    );
   }
 }
 
@@ -84,20 +96,25 @@ export async function fileCopyAs(
   enableExternalExt?: boolean,
   password?: string,
   toForm?: string,
-): Promise<{
-  file: TFile | undefined;
-  error:
-    | string
-    | {
-        message: string;
-        status: number;
-        type: string;
-        stack: string;
-        statusCode?: number;
-      }
-    | undefined;
-}> {
+): Promise<
+  | {
+      file: TFile | undefined;
+      error:
+        | string
+        | {
+            message: string;
+            status: number;
+            type: string;
+            stack: string;
+            statusCode?: number;
+          }
+        | undefined;
+    }
+  | undefined
+> {
   try {
+    log.debug(`Start POST /files/file/${fileId}/copyas`);
+
     const [createFile] = createRequest(
       [`/files/file/${fileId}/copyas`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -111,9 +128,37 @@ export async function fileCopyAs(
       }),
     );
 
-    const file = await (await fetch(createFile)).json();
+    const fileRes = await fetch(createFile);
 
-    console.log("File copyas success ", file);
+    if (fileRes.status === 401) {
+      log.debug(`POST /files/file/${fileId}/copyas user auth failed`);
+
+      return {
+        file: undefined,
+        error: { status: 401, message: "", type: "", stack: "" },
+      };
+    }
+
+    const file = await fileRes.json();
+
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    if (!fileRes.ok && !file?.error) {
+      log.error(
+        { error: fileRes, url: hostname },
+        `POST /files/file/${fileId}/copyas failed`,
+      );
+
+      return;
+    }
+
+    if (file.error)
+      log.error(
+        { error: file.error, url: hostname },
+        `POST /files/file/${fileId}/copyas failed`,
+      );
 
     return {
       file: file.response,
@@ -130,7 +175,14 @@ export async function fileCopyAs(
         : undefined,
     };
   } catch (e: any) {
-    console.log("File copyas error ", e);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error(
+      { error: e, url: hostname },
+      `POST /files/file/${fileId}/copyas failed`,
+    );
     return {
       file: undefined,
       error:
@@ -151,20 +203,25 @@ export async function createFile(
   title: string,
   templateId?: string,
   formId?: string,
-): Promise<{
-  file: TFile | undefined;
-  error:
-    | string
-    | {
-        message: string;
-        status: number;
-        type: string;
-        stack: string;
-        statusCode?: number;
-      }
-    | undefined;
-}> {
+): Promise<
+  | {
+      file: TFile | undefined;
+      error:
+        | string
+        | {
+            message: string;
+            status: number;
+            type: string;
+            stack: string;
+            statusCode?: number;
+          }
+        | undefined;
+    }
+  | undefined
+> {
   try {
+    log.debug(`Start POST /files/${parentId}/file`);
+
     const [createFile] = createRequest(
       [`/files/${parentId}/file`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -172,8 +229,31 @@ export async function createFile(
       JSON.stringify({ title, templateId, formId }),
     );
 
-    const file = await (await fetch(createFile)).json();
-    console.log("File create success ", file);
+    const fileRes = await fetch(createFile);
+
+    if (fileRes.status === 401) {
+      log.debug(`POST /files/${parentId}/file user auth failed`);
+
+      return {
+        file: undefined,
+        error: { status: 401, message: "", type: "", stack: "" },
+      };
+    }
+
+    if (!fileRes.ok && fileRes.status !== 403) return;
+
+    const file = await fileRes.json();
+
+    if (file.error) {
+      const hdrs = headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      log.error(
+        { error: file.error, url: hostname },
+        `POST /files/${parentId}/file failed`,
+      );
+    }
     return {
       file: file.response,
       error: file.error
@@ -189,7 +269,13 @@ export async function createFile(
         : undefined,
     };
   } catch (e: any) {
-    console.log("File create error ", e);
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+    log.error(
+      { error: e, url: hostname },
+      `POST /files/${parentId}/file failed`,
+    );
     return {
       file: undefined,
       error:
@@ -214,23 +300,21 @@ export async function getData(
   editorType?: string,
 ) {
   const view = action === "view";
-  const edit = action === "edit";
 
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", "true");
+    if (action && availableActions[action]) searchParams.append(action, "true");
+
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
-    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),
-
       getUser(share),
       getSettings(share),
     ]);
@@ -333,6 +417,8 @@ export async function getData(
 }
 
 export async function getUser(share?: string) {
+  log.debug("Start GET /people/@self");
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -348,7 +434,16 @@ export async function getUser(share?: string) {
 
   if (userRes.status === 401) return undefined;
 
-  if (!userRes.ok) return;
+  if (!userRes.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    if (!share)
+      log.error({ error: userRes, url: hostname }, `GET /people/@self failed`);
+
+    return;
+  }
 
   const user = await userRes.json();
 
@@ -356,6 +451,8 @@ export async function getUser(share?: string) {
 }
 
 export async function getSettings(share?: string) {
+  log.debug("Start GET /settings");
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -372,7 +469,15 @@ export async function getSettings(share?: string) {
 
   if (settingsRes.status === 403) return `access-restricted`;
 
-  if (!settingsRes.ok) return;
+  if (!settingsRes.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: settingsRes, url: hostname }, `GET /settings failed`);
+
+    return;
+  }
 
   const settings = await settingsRes.json();
 
@@ -380,11 +485,21 @@ export async function getSettings(share?: string) {
 }
 
 export const checkIsAuthenticated = async () => {
+  log.debug("Start GET /authentication");
+
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
 
   const res = await fetch(request);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: request, url: hostname }, `GET /authentication failed`);
+
+    return;
+  }
 
   const isAuth = await res.json();
 
@@ -392,6 +507,8 @@ export const checkIsAuthenticated = async () => {
 };
 
 export async function validatePublicRoomKey(key: string, fileId?: string) {
+  log.debug("Start GET /files/share");
+
   const [validatePublicRoomKey] = createRequest(
     [`/files/share/${key}?fileid=${fileId}`],
     [key ? ["Request-Token", key] : ["", ""]],
@@ -400,7 +517,15 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
 
   const res = await fetch(validatePublicRoomKey);
   if (res.status === 401) return undefined;
-  if (!res.ok) return;
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, `GET /files/share failed`);
+
+    return;
+  }
 
   const room = await res.json();
 
@@ -435,7 +560,8 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
-  const startDate = new Date();
+  log.debug(`Start GET /files/file/${fileId}/openedit`);
+
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -448,22 +574,22 @@ export async function openEdit(
 
   const res = await fetch(getConfig);
 
+  const hostname = hdrs.get("x-forwarded-host");
+
   if (res.status !== 404) {
     const config = await res.json();
 
     if (res.ok) {
-      const timer = new Date().getTime() - startDate.getTime();
-
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return { ...config.response, timer } as IInitialConfig;
+      return { ...config.response } as IInitialConfig;
     }
 
     const isAuth = share ? true : await checkIsAuthenticated();
 
     const editorUrl = isAuth
-      ? (await getEditorUrl("", share)).docServiceUrl
+      ? (await getEditorUrl("", share))?.docServiceUrl
       : "";
 
     const status =
@@ -486,12 +612,17 @@ export async function openEdit(
         : { ...config.error, status, editorUrl }
       : { message: "unauthorized", status, editorUrl };
 
+    log.error(
+      { fileId, error, url: hostname },
+      `GET /files/file/${fileId}/openedit failed`,
+    );
+
     return error as TError;
   }
 
   const editorUrl =
     cookie?.includes("asc_auth_key") || share
-      ? (await getEditorUrl("", share)).docServiceUrl
+      ? (await getEditorUrl("", share))?.docServiceUrl
       : "";
 
   return {
@@ -504,6 +635,8 @@ export async function getEditorUrl(
   editorSearchParams?: string,
   share?: string,
 ) {
+  log.debug(`Start GET /files/docservice`);
+
   const [request] = createRequest(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
@@ -513,12 +646,24 @@ export async function getEditorUrl(
 
   const res = await fetch(request);
 
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /files/docservice failed");
+
+    return;
+  }
+
   const editorUrl = await res.json();
 
   return editorUrl.response as TDocServiceLocation;
 }
 
 export async function getColorTheme() {
+  log.debug(`Start GET /settings/colortheme`);
+
   const [getSettings] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -527,7 +672,14 @@ export async function getColorTheme() {
 
   const res = await fetch(getSettings);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /settings/colortheme failed");
+    return;
+  }
 
   const colorTheme = await res.json();
 

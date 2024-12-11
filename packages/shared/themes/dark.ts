@@ -36,6 +36,7 @@ const {
   white,
   black,
   darkBlack,
+  blueRomb,
 
   grayLight,
   darkGrayLight,
@@ -61,9 +62,11 @@ const {
   lightSecondMainDisabled,
 
   mainOrange,
+  mainRed,
 
   darkErrorStatus,
   favoritesStatus,
+  favoriteStatusDark,
   lightStatusWarning,
   darkStatusWarning,
   darkStatusPositive,
@@ -105,6 +108,9 @@ const {
   highlandGray,
 
   blurDark,
+  darkGreyAction,
+  darkActive,
+  darkGreyHover,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -121,6 +127,9 @@ const Dark: TTheme = {
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
+    secondary: {
+      color: grayDark,
+    },
   },
 
   heading: {
@@ -250,7 +259,7 @@ const Dark: TTheme = {
     buttonColor: mainOrange,
     iconFill: black,
 
-    circleBackground: black,
+    circleBackground: white,
 
     mobileProgressBarBackground: grayDarkStrong,
 
@@ -1103,7 +1112,7 @@ const Dark: TTheme = {
       right: "0px",
       bottom: "0px",
       fill: black,
-      backgroundColor: bigGrayDarkMid,
+      backgroundColor: "rgba(255, 255, 255, 0.64)",
       borderRadius: "50%",
       height: "32px",
       width: "32px",
@@ -1568,7 +1577,7 @@ const Dark: TTheme = {
 
   toggleButton: {
     fillColorDefault: lightBlueMain,
-    fillColorOff: black,
+    fillColorOff: grayDarkMid,
     hoverFillColorOff: lightDarkGrayHover,
 
     fillCircleColor: white,
@@ -1596,6 +1605,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
+    containerBorderColor: grayDarkStrong,
     color: white,
     disabledColor: grayDarkStrong,
     pastColor: grayDark,
@@ -1765,6 +1775,8 @@ const Dark: TTheme = {
     background: black,
     rootFolderTitleColor: darkGrayDark,
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+    lifetimeIconFill: "none",
+    lifetimeIconStroke: mainRed,
 
     icon: {
       fill: darkLink,
@@ -1868,6 +1880,8 @@ const Dark: TTheme = {
       renamedItemColor: gray,
       oldRoleColor: gray,
       messageColor: white,
+      itemBorderColor: grayDarkStrong,
+      fileBackgroundColor: darkGrayLight,
     },
 
     details: {
@@ -1888,6 +1902,9 @@ const Dark: TTheme = {
     groups: {
       textColor: grayDark,
       tagColor: grayDarkStrong,
+    },
+    expired: {
+      color: darkGrayDark,
     },
   },
 
@@ -1978,6 +1995,8 @@ const Dark: TTheme = {
     hoverBorderColor: grayDarkStrong,
     tableCellBorder: `1px solid ${grayDarkStrong}`,
 
+    indexingSeparator: white,
+
     groupMenu: {
       background: black,
       borderBottom: `1px solid ${grayDarkStrong}`,
@@ -2034,6 +2053,7 @@ const Dark: TTheme = {
         linkColor: white,
         textColor: grayDark,
       },
+      fileExstColor: gray,
 
       row: {
         checkboxChecked: `linear-gradient(to right, ${black} 24px, ${grayDarkStrong} 24px)`,
@@ -2045,6 +2065,11 @@ const Dark: TTheme = {
         contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
         backgroundActive: lightDarkGrayHover,
+
+        indexBackgroundButtonHover: darkGreyHover,
+        indexUpdate: darkActive,
+        indexActive: darkGreyAction,
+        indexArrowButtonHover: white,
 
         borderImageCheckbox: `linear-gradient(to right, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,
         borderImageContextMenu: `linear-gradient(to left, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,
@@ -2275,11 +2300,12 @@ const Dark: TTheme = {
     iconCropper: {
       gridColor: black,
       deleteButton: {
-        background: black,
-        hoverBackground: black,
+        background: grayDarkMid,
+        hoverBackground: grayDarkStrong,
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
-        color: grayDark,
+        hoverColor: white,
+        color: darkGrayDark,
         iconColor: darkGrayDark,
       },
     },
@@ -2342,7 +2368,12 @@ const Dark: TTheme = {
   },
 
   emptyView: {
-    linkColor: lightBlueMain,
+    link: {
+      color: lightBlueMain,
+      background: black,
+      hoverBackground: darkGrayLight,
+      PressedBackground: grayDarkStrong,
+    },
     items: {
       hoverColor: darkGrayLight,
       pressColor: grayDarkStrong,
@@ -2459,7 +2490,7 @@ const Dark: TTheme = {
     },
 
     upload: {
-      color: black,
+      color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
 
@@ -2614,9 +2645,9 @@ const Dark: TTheme = {
     },
 
     badge: {
-      color: black,
-      stroke: darkGrayDark,
-      fill: darkGrayDark,
+      color: white,
+      stroke: grayDark,
+      fill: grayDark,
       defaultFill: black,
       badgeFill: mainOrange,
     },
@@ -2814,6 +2845,9 @@ const Dark: TTheme = {
 
           dataFontColor: white,
           dataFontColorBlack: white,
+          notAvailableBackground: grayDark,
+          textColor: white,
+          paidBadgeBackground: favoriteStatusDark,
         },
 
         companyInfo: {
@@ -2832,6 +2866,7 @@ const Dark: TTheme = {
         textColor: grayDark,
         sso: {
           textColor: grayDark,
+          errorColor: darkErrorStatus,
           toggleContentBackground: grayDarkStrong,
           iconButton: white,
           iconButtonDisabled: black,
@@ -3066,6 +3101,7 @@ const Dark: TTheme = {
 
   itemIcon: {
     borderColor: grayDarkStrong,
+    editIconColor: grayDarkMid,
   },
 
   invitePage: {
@@ -3099,6 +3135,7 @@ const Dark: TTheme = {
       color: gray,
       errorColor: darkErrorStatus,
     },
+    editInputColor: grayDark,
     requiredColor: darkErrorStatus,
   },
 
@@ -3129,6 +3166,13 @@ const Dark: TTheme = {
   roomIcon: {
     backgroundArchive: white,
     opacityBackground: "0.1",
+    plusIcon: black,
+    emptyBorder: `2px dashed ${grayDarkStrong}`,
+
+    linkIcon: {
+      background: black,
+      path: blueRomb,
+    },
   },
 
   plugins: {
@@ -3191,10 +3235,36 @@ const Dark: TTheme = {
     errorColor: darkErrorStatus,
     sideColor: grayDark,
     nameColor: grayDarkStrong,
+    barBackground: darkGrayLight,
   },
 
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
+    linkColor: lightBlueMain,
+  },
+  newFilesPanel: {
+    borderColor: globalColors.grayDarkStrong,
+
+    borderRadius: "6px",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+
+    fileItem: {
+      borderColor: globalColors.grayDarkStrong,
+      fileExstColor: globalColors.grayDark,
+    },
+  },
+
+  logoCover: {
+    selectColor: {
+      backgroundColor: lightDarkGrayHover,
+    },
+
+    iconColor: darkGrayDark,
+    textColor: darkGrayDark,
+    selectedBackgroundColor: grayDarkMid,
+    selectedBorderColor: grayDarkMid,
+    backgroundColor: black,
+    borderColor: grayDarkStrong,
   },
 };
 

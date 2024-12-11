@@ -25,14 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { mobile } from "@docspace/shared/utils";
 
-const StyledModalDialog = styled(ModalDialog)`
-  .heading {
-    font-size: 21px;
-  }
+const StyledBodyContent = styled.div`
+  display: contents;
 
   .generate {
     font-weight: 600;
@@ -40,7 +36,6 @@ const StyledModalDialog = styled(ModalDialog)`
 
   .text-area {
     width: 488px !important;
-    height: 72px !important;
     margin-top: 4px;
 
     &-label {
@@ -61,4 +56,4 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-export default StyledModalDialog;
+export default StyledBodyContent;

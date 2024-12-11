@@ -26,8 +26,11 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
-import { NoUserSelect, commonTextStyles } from "../../utils";
+import {
+  NoUserSelect,
+  commonTextStyles,
+  injectDefaultTheme,
+} from "../../utils";
 
 import { StyledTextProps, TextProps } from "./Text.types";
 
@@ -67,17 +70,23 @@ const styleCss = css<TextProps & StyledTextProps>`
       line-height: ${props.lineHeight};
     `}
 `;
-const StyledText = styled.p<TextProps & StyledTextProps>`
+const StyledText = styled.p.attrs(injectDefaultTheme)<
+  TextProps & StyledTextProps
+>`
   ${styleCss};
 
   ${commonTextStyles};
 
+  ${({ textType, theme }) =>
+    textType === "secondary" &&
+    css`
+      color: ${theme.text.secondary.color};
+    `}
+
   ${(props) => props.noSelect && NoUserSelect}
 `;
 
-StyledText.defaultProps = { theme: Base };
-
-export const StyledAutoDirSpan = styled.span`
+export const StyledAutoDirSpan = styled.span<StyledTextProps>`
   display: inherit;
   white-space: inherit;
   overflow: inherit;
@@ -85,6 +94,16 @@ export const StyledAutoDirSpan = styled.span`
   pointer-events: none;
   width: inherit;
   max-width: inherit;
+  -webkit-line-clamp: inherit;
+  -webkit-box-orient: inherit;
+
+  ${(props) =>
+    props.view === "tile" &&
+    css`
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    `}
 `;
 
 export default StyledText;

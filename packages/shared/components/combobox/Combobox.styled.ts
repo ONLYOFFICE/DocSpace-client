@@ -28,8 +28,13 @@ import styled, { css } from "styled-components";
 
 import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
 
-import { Base, TColorScheme, TTheme, globalColors } from "../../themes";
-import { mobile, NoUserSelect, commonIconsStyles } from "../../utils";
+import { TColorScheme, TTheme, globalColors } from "../../themes";
+import {
+  mobile,
+  NoUserSelect,
+  commonIconsStyles,
+  injectDefaultTheme,
+} from "../../utils";
 
 import { Loader } from "../loader";
 
@@ -69,7 +74,7 @@ const alternativeComboButtonStyles = css<{
   }
 `;
 
-const StyledComboBox = styled.div<{
+const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
   scaled?: boolean;
   size?: ComboBoxSize;
   withoutPadding?: boolean;
@@ -129,10 +134,6 @@ const StyledComboBox = styled.div<{
   }
 `;
 
-StyledComboBox.defaultProps = {
-  theme: Base,
-};
-
 export { StyledComboBox };
 
 const StyledTriangleDownIcon = styled(TriangleDownIcon)`
@@ -159,7 +160,7 @@ const hoverModernViewButton = css<{
       : props.theme.comboBox.button.hoverBackgroundModernView} !important;
 `;
 
-const StyledComboButton = styled.div<{
+const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
   type?: TCombobox;
   noBorder?: boolean;
   scaled?: boolean;
@@ -249,7 +250,16 @@ const StyledComboButton = styled.div<{
   
   ${(props) => props.modernView && modernViewButton}
 
+  ${({ type }) =>
+    type === "descriptive" &&
+    css`
+      height: 100%;
+      padding: 16px;
 
+      .combo-button_selected-icon-container {
+        align-self: flex-start;
+      }
+    `}
   
   ${(props) =>
     props.fillIcon &&
@@ -345,9 +355,8 @@ const StyledComboButton = styled.div<{
 
   ${({ plusBadgeValue }) => plusBadgeValue && alternativeComboButtonStyles}
 `;
-StyledComboButton.defaultProps = { theme: Base };
 
-const StyledOptionalItem = styled.div<{
+const StyledOptionalItem = styled.div.attrs(injectDefaultTheme)<{
   isLoading?: boolean;
   fillIcon?: boolean;
   defaultOption?: boolean;
@@ -372,9 +381,8 @@ const StyledOptionalItem = styled.div<{
       }
     `}
 `;
-StyledOptionalItem.defaultProps = { theme: Base };
 
-const StyledIcon = styled.div<{
+const StyledIcon = styled.div.attrs(injectDefaultTheme)<{
   isLoading?: boolean;
   defaultOption?: boolean;
   isDisabled?: boolean;
@@ -410,7 +418,6 @@ const StyledIcon = styled.div<{
     }
   }
 `;
-StyledIcon.defaultProps = { theme: Base };
 
 const StyledPlusBadge = styled.div<{ isOpen?: boolean }>`
   height: 12px;
@@ -434,7 +441,7 @@ const StyledPlusBadge = styled.div<{ isOpen?: boolean }>`
   }
 `;
 
-const StyledArrowIcon = styled.div<{
+const StyledArrowIcon = styled.div.attrs(injectDefaultTheme)<{
   isLoading?: boolean;
   displayArrow?: boolean;
   isOpen?: boolean;
@@ -466,8 +473,6 @@ const StyledArrowIcon = styled.div<{
   ${(props) => props.isOpen && `transform: scale(1, -1);`}
 `;
 
-StyledArrowIcon.defaultProps = { theme: Base };
-
 const StyledLoader = styled(Loader)<{ displaySize?: ComboBoxSize }>`
   position: absolute;
   margin-inline-start: ${({ displaySize }) =>
@@ -496,6 +501,12 @@ const getDefaultStyles = ({
 
 const StyledThemeComboButton = styled(StyledComboButton)(getDefaultStyles);
 
+const DescriptiveContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
 export {
   StyledArrowIcon,
   StyledPlusBadge,
@@ -505,4 +516,5 @@ export {
   StyledTriangleDownIcon,
   StyledLoader,
   StyledThemeComboButton,
+  DescriptiveContainer,
 };

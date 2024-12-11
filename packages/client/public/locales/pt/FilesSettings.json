@@ -1,15 +1,6 @@
 {
-  "AdditionalSections": "Secções Adicionais",
-  "DisplayFavorites": "Mostrar Favoritos",
+  "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo",
   "DisplayNotification": "Mostrar notificação ao mover itens para a Lixo",
-  "DisplayRecent": "Mostrar recentes",
-  "DisplayTemplates": "Mostrar Modelos",
-  "IntermediateVersion": "Manter todas as versões intermédias guardadas",
-  "KeepIntermediateVersion": "Manter versões intermediárias ao editar",
   "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia",
-  "OriginalCopy": "Guardar a cópia do ficheiro também no formato original",
-  "StoringFileVersion": "Armazenamento de versões de ficheiros",
-  "ThirdPartyAccounts": "Contas de terceiros",
-  "ThirdPartyBtn": "Permitir a conexão de a",
-  "UpdateOrCreate": "Atualizar a versão do ficheiro existente com o mesmo nome. Caso contrário, será criada uma cópia do ficheiro."
+  "OriginalCopy": "Guardar a cópia do ficheiro também no formato original"
 }

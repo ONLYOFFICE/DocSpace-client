@@ -24,7 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { TColorScheme } from "../../themes";
+
+export type TArticleLinkDataState =
+  | {
+      title: string;
+      isRoot: boolean;
+      isPublicRoomType: boolean;
+      rootFolderType: number;
+      canCreate: boolean;
+    }
+  | {};
+
+export type TArticleLinkData = {
+  path: string;
+  state: TArticleLinkDataState;
+};
 
 export interface ArticleItemProps {
   /** Accepts className */
@@ -68,6 +84,8 @@ export interface ArticleItemProps {
   /** Accepts folder id */
   folderId?: string;
   badgeTitle?: string;
+  badgeComponent?: React.ReactNode;
   $currentColorScheme?: TColorScheme;
   title?: string;
+  linkData: TArticleLinkData;
 }

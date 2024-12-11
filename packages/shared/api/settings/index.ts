@@ -25,7 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, { AxiosRequestConfig } from "axios";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
+
+import { Nullable } from "../../types";
+import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
 import {
   TCustomSchema,
@@ -40,6 +42,7 @@ import {
   TVersionBuild,
   TMailDomainSettings,
   TIpRestriction,
+  TIpRestrictionSettings,
   TCookieSettings,
   TLoginSettings,
   TCapabilities,
@@ -77,7 +80,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: Nullable<string> = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -140,12 +145,15 @@ export async function getIpRestrictions() {
   return res;
 }
 
-export async function setIpRestrictions(data) {
+export async function setIpRestrictions(data: {
+  IpRestrictions: string[];
+  enable: boolean;
+}) {
   const res = (await request({
     method: "put",
     url: "/settings/iprestrictions",
     data,
-  })) as TIpRestriction[];
+  })) as TIpRestrictionSettings;
 
   return res;
 }
@@ -154,16 +162,6 @@ export async function getIpRestrictionsEnable() {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
-  })) as { enable: boolean };
-
-  return res;
-}
-
-export async function setIpRestrictionsEnable(data) {
-  const res = (await request({
-    method: "put",
-    url: "/settings/iprestrictions/settings",
-    data,
   })) as { enable: boolean };
 
   return res;
@@ -221,6 +219,12 @@ export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
   });
 }
 
+export function deleteBruteForceProtection() {
+  return request({
+    method: "delete",
+    url: `settings/security/loginSettings`,
+  });
+}
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -332,7 +336,7 @@ export async function getLogoUrls(
 
   const skipRedirect = true;
 
-  const res = (await request(options, skipRedirect)) as TWhiteLabel[];
+  const res = (await request(options, skipRedirect)) as ILogo[];
 
   return res;
 }
@@ -535,7 +539,10 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(
+  ownerId: string,
+  confirmKey: Nullable<string> = null,
+) {
   const data = { ownerId };
 
   const options = {
@@ -569,17 +576,24 @@ export function setPortalOwner(
   timeZone,
   confirmKey,
   analytics,
+  amiId: string | null = null,
 ) {
+  const data = {
+    email,
+    PasswordHash: hash,
+    lng,
+    timeZone,
+    analytics,
+  };
+
+  if (amiId) {
+    data.amiId = amiId;
+  }
+
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
-    data: {
-      email,
-      PasswordHash: hash,
-      lng,
-      timeZone,
-      analytics,
-    },
+    data,
   };
 
   if (confirmKey) {
@@ -715,7 +729,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   const data = {
     code,
   };

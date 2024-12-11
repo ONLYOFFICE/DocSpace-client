@@ -151,12 +151,12 @@ export default function withContent(WrappedContent) {
         uploadDataStore,
         publicRoomStore,
         userStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
       const {
         createFile,
-        createFolder,
 
         renameFolder,
         setIsLoading,
@@ -170,6 +170,7 @@ export default function withContent(WrappedContent) {
       } = filesStore;
 
       const { isPublicRoom, publicRoomKey } = publicRoomStore;
+      const { displayFileExtension } = filesSettingsStore;
 
       const { clearActiveOperations, fileCopyAs } = uploadDataStore;
       const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolder } =
@@ -187,7 +188,6 @@ export default function withContent(WrappedContent) {
 
       return {
         createFile,
-        createFolder,
         culture,
 
         folderFormValidation,
@@ -218,6 +218,7 @@ export default function withContent(WrappedContent) {
         setCreatedItem,
         isPublicRoom,
         publicRoomKey,
+        displayFileExtension,
       };
     },
   )(observer(WithContent));

@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useTheme } from "styled-components";
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router-dom";
@@ -16,6 +42,8 @@ import type { TTranslation } from "@docspace/shared/types";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
+import { isMobile } from "react-device-detect";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getDescription,
   getIcon,
@@ -26,7 +54,7 @@ import {
 import type {
   CreateEvent,
   EmptyViewContainerProps,
-  ExtensiontionType,
+  ExtensionType,
   UploadType,
 } from "./EmptyViewContainer.types";
 
@@ -40,6 +68,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -56,6 +85,7 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      isPublicRoom,
     );
     const title = getTitle(
       type,
@@ -91,6 +121,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   ]);
 
   return emptyViewOptions;
@@ -122,6 +153,7 @@ export const useOptions = (
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
     inviteUser: inviteRootUser,
+    isVisitor,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -133,9 +165,9 @@ export const useOptions = (
     newFilter.searchArea = RoomSearchArea.Active;
 
     const state = {
-      title: roomsFolder.title,
+      title: roomsFolder?.title,
       isRoot: true,
-      rootFolderType: roomsFolder.rootFolderType,
+      rootFolderType: roomsFolder?.rootFolderType,
     };
 
     const path = getCategoryUrl(CategoryType.Shared);
@@ -146,7 +178,7 @@ export const useOptions = (
       },
       state,
     };
-  }, [roomsFolder.rootFolderType, roomsFolder.title, userId]);
+  }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -154,14 +186,12 @@ export const useOptions = (
     newFilter.folder = myFolderId?.toString() ?? "";
 
     const state = {
-      title: myFolder.title,
+      title: myFolder?.title,
       isRoot: true,
-      rootFolderType: myFolder.rootFolderType,
+      rootFolderType: myFolder?.rootFolderType,
     };
 
     const path = getCategoryUrl(CategoryType.Personal);
-
-    // setIsSectionFilterLoading(true);
 
     return {
       to: {
@@ -170,7 +200,7 @@ export const useOptions = (
       },
       state,
     };
-  }, [myFolder.rootFolderType, myFolder.title, myFolderId]);
+  }, [myFolder?.rootFolderType, myFolder?.title, myFolderId]);
 
   const onCreateRoom = useCallback(() => {
     if (isWarningRoomsDialog) {
@@ -191,7 +221,7 @@ export const useOptions = (
   const onUploadAction = useCallback((uploadType: UploadType) => {
     const element =
       uploadType === "file"
-        ? document.getElementById("customFileInput")
+        ? (document.querySelector(".custom-file-input-article") as HTMLElement)
         : uploadType === "pdf"
           ? document.getElementById("customPDFInput")
           : document.getElementById("customFolderInput");
@@ -214,10 +244,15 @@ export const useOptions = (
   );
 
   const onCreate = useCallback(
-    (extension: ExtensiontionType, withoutDialog?: boolean) => {
+    (extension: ExtensionType, withoutDialog?: boolean, t?: TTranslation) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
       const edit = extension === FileExtensions.PDF;
+
+      if (isMobile && edit && t) {
+        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
 
       const payload = {
         id: -1,
@@ -264,6 +299,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        isVisitor,
       ),
     [
       type,
@@ -287,6 +323,7 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      isVisitor,
     ],
   );
 

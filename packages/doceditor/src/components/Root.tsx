@@ -49,6 +49,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
+import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
 
@@ -75,6 +76,7 @@ const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
 });
 
 import { calculateAsideHeight } from "@/utils";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const Root = ({
   settings,
@@ -87,8 +89,10 @@ const Root = ({
   doc,
   fileId,
   hash,
+  shareKey,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
+  const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
 
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
@@ -107,6 +111,10 @@ const Root = ({
     documentType: config?.documentType,
   });
 
+  const { sdkFrameConfig } = useSDK();
+
+  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
+
   const { getErrorMessage } = useError({
     error,
     editorUrl: documentserverUrl,
@@ -118,9 +126,10 @@ const Root = ({
     email: user?.email,
   });
   const { filesSettings } = useFilesSettings({});
-  const { socketHelper } = useSocketHelper({
-    socketUrl: user ? settings?.socketUrl ?? "" : "",
+  useSocketHelper({
+    socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
+    shareKey,
   });
   const {
     onSDKRequestSaveAs,
@@ -228,6 +237,7 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
+          sdkConfig={sdkConfig}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}
@@ -242,9 +252,8 @@ const Root = ({
         />
       )}
 
-      {isVisibleSelectFolderDialog && !!socketHelper && fileInfo && (
+      {isVisibleSelectFolderDialog && fileInfo && (
         <SelectFolderDialog
-          socketHelper={socketHelper}
           isVisible={isVisibleSelectFolderDialog}
           onSubmit={onSubmitSelectFolderDialog}
           onClose={onCloseSelectFolderDialog}
@@ -255,9 +264,8 @@ const Root = ({
           fileSaveAsExtension={extensionSelectorFolderDialog}
         />
       )}
-      {selectFileDialogVisible && !!socketHelper && fileInfo && (
+      {selectFileDialogVisible && fileInfo && (
         <SelectFileDialog
-          socketHelper={socketHelper}
           filesSettings={filesSettings}
           isVisible={selectFileDialogVisible}
           onSubmit={onSubmitSelectFileDialog}
@@ -265,19 +273,19 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFileDialog}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
+          shareKey={shareKey}
         />
       )}
-      {isSharingDialogVisible && !!socketHelper && fileInfo && (
+      {isSharingDialogVisible && fileInfo && (
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
           onCancel={onCloseSharingDialog}
         />
       )}
-      {isVisibleStartFillingSelectDialog && !!socketHelper && fileInfo && (
+      {isVisibleStartFillingSelectDialog && fileInfo && (
         <StartFillingSelectorDialog
           fileInfo={fileInfo}
-          socketHelper={socketHelper}
           filesSettings={filesSettings}
           headerLabel={headerLabelSFSDialog}
           isVisible={

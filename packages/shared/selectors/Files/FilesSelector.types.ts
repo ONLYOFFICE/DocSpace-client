@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "../../components/selector";
 import {
   TBreadCrumb,
   TInfoBar,
@@ -36,13 +36,17 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import SocketIOHelper from "../../utils/socket";
 import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 
 export type TCreateDefineRoom = {
   label: string;
   type: RoomsType;
+};
+
+export type FormPropsType = {
+  message: string;
+  isRoomFormAccessible: boolean;
 };
 
 export interface UseRootHelperProps {
@@ -58,8 +62,6 @@ export interface UseRootHelperProps {
 }
 
 export type UseSocketHelperProps = {
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
@@ -88,7 +90,12 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  subscribe: (id: number) => string | number | undefined;
+  setSelectedItemSecurity: React.Dispatch<
+    React.SetStateAction<
+      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+    >
+  >;
+  subscribe: (id: number) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -124,6 +131,7 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   withCreate: boolean;
+  shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
   setSelectedItemType: (value?: "rooms" | "files") => void;
 };
@@ -153,14 +161,13 @@ export type FilesSelectorProps = TSelectorHeader &
       }
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
-    socketHelper: SocketIOHelper;
-    socketSubscribers: Set<string>;
     disabledItems: (string | number)[];
     filterParam?: string;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;
     withSearch: boolean;
     cancelButtonLabel: string;
+    shareKey?: string;
 
     treeFolders?: TFolder[];
     onSetBaseFolderPath?: (
@@ -175,6 +182,7 @@ export type FilesSelectorProps = TSelectorHeader &
     currentFolderId: number | string;
     parentId?: number | string;
     rootFolderType: FolderType;
+    folderIsShared?: boolean;
     onCancel: () => void;
     onSubmit: (
       selectedItemId: string | number | undefined,
@@ -220,4 +228,6 @@ export type FilesSelectorProps = TSelectorHeader &
     withCreate: boolean;
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
+    formProps?: FormPropsType;
+    withPadding?: boolean;
   };

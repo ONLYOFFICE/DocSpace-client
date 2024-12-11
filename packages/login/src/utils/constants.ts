@@ -24,9 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTimeZoneOption } from "@/types";
+import { TOption } from "@docspace/shared/components/combobox";
+import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
+
 export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_PORTAL_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+
+export const DEFAULT_SELECT_TIMEZONE: TTimeZoneOption = {
+  key: "UTC",
+  label: "(UTC) Coordinated Universal Time",
+};
+
+export const DEFAULT_SELECT_LANGUAGE: TOption = {
+  key: "en-US",
+  label: "English (United States)",
+  icon: EnUSReactSvgUrl,
+};
+
+export const URL_ONLYOFFICE = "https://onlyoffice.com";
+
+export const TFA_ANDROID_APP_URL =
+  "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
+export const TFA_IOS_APP_URL =
+  "https://apps.apple.com/app/google-authenticator/id388497605";
+export const TFA_WIN_APP_URL =
+  "https://www.microsoft.com/ru-ru/p/authenticator/9wzdncrfj3rj?rtc=1&activetab=pivot:overviewtab";
+
+export const TYPE_LINK_WITHOUT_LNG_COMBOBOX = [
+  "Activation",
+  "PasswordChange",
+  "PhoneActivation",
+  "PortalOwnerChange",
+  "ProfileRemove",
+  "TfaActivation",
+  "TfaAuth",
+  "PortalRemove",
+  "PortalSuspend",
+  "PortalContinue",
+];

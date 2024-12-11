@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import Base from "../../themes/base";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledDropdown = styled.div<{
+const StyledDropdown = styled.div.attrs(injectDefaultTheme)<{
   maxHeight?: number;
   manualWidth?: string;
   directionY?: "top" | "bottom" | "both";
@@ -100,8 +100,6 @@ const StyledDropdown = styled.div<{
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
 
-  padding: ${(props) =>
-    !props.maxHeight && props.itemCount && props.itemCount > 1 && `4px 0px`};
   ${(props) =>
     props.columnCount &&
     `
@@ -119,6 +117,8 @@ const StyledDropdown = styled.div<{
     margin-top: 4px;
   }
 
+  padding: 8px 0;
+
   @media (orientation: portrait) {
     ${(props) =>
       props.isMobileView &&
@@ -127,10 +127,9 @@ const StyledDropdown = styled.div<{
         bottom: 0;
         inset-inline-start: 0;
         width: 100%;
+        box-sizing: border-box;
       `}
   }
 `;
-
-StyledDropdown.defaultProps = { theme: Base };
 
 export default StyledDropdown;

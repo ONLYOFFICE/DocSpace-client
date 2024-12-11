@@ -34,8 +34,11 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -53,7 +56,6 @@ const MainContainer = styled.div`
 const TwoFactorAuth = (props) => {
   const {
     t,
-    initSettings,
     isInit,
     setIsInit,
     currentColorScheme,
@@ -62,6 +64,7 @@ const TwoFactorAuth = (props) => {
     smsAvailable,
     appAvailable,
     tfaSettings,
+    getTfaType,
   } = props;
   const [type, setType] = useState("none");
   const [showReminder, setShowReminder] = useState(false);
@@ -93,14 +96,14 @@ const TwoFactorAuth = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
+    if (!isInit) getTfaType().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit || !tfaSettings) return;
+    if (!isLoading || !tfaSettings) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
@@ -150,7 +153,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        navigate(res.replace(window.location.origin, ""));
+        window.location.replace(res);
       }
     } catch (error) {
       toastr.error(error);
@@ -166,7 +169,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <TfaLoader />;
   }
 
@@ -245,9 +248,10 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
+    getTfaType,
   } = tfaStore;
 
-  const { isInit, initSettings, setIsInit } = setup;
+  const { isInit, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
@@ -258,10 +262,10 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     smsAvailable,
     appAvailable,
     isInit,
-    initSettings,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
+    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

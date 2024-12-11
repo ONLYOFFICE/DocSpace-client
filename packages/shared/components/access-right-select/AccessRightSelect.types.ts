@@ -47,6 +47,7 @@ type PropsFromCombobox = Pick<
   | "type"
   | "noBorder"
   | "isDisabled"
+  | "isMobileView"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {
@@ -55,4 +56,10 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   isSelectionDisabled?: boolean;
   selectionErrorText?: React.ReactNode;
   availableAccess?: number[];
+  topSpace?: number;
+  modernView?: boolean;
+  fillIcon?: boolean;
+  isDefaultMode?: boolean;
+  comboIcon?: string;
+  usePortalBackdrop?: boolean;
 };

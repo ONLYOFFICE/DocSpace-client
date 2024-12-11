@@ -42,12 +42,28 @@ const GridComponent = ({
   className,
   scroll,
   showSkeleton,
+  currentFolderId,
 }: GridComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 
+  const usePrevious = (value?: number | string) => {
+    const prevRef = useRef<number | string>();
+
+    useEffect(() => {
+      prevRef.current = value;
+    });
+
+    return prevRef.current;
+  };
+
+  const prevCurrentFolderId = usePrevious(currentFolderId);
+
   useEffect(() => {
-    // listRef?.current?.recomputeRowHeights(); //TODO: return there will be problems with the height of the tile when clicking on the backspace
+    if (currentFolderId !== prevCurrentFolderId) {
+      // TODO: return there will be problems with the height of the tile when clicking on the backspace
+      listRef?.current?.recomputeRowHeights();
+    }
   });
 
   const isItemLoaded = useCallback(
@@ -93,7 +109,11 @@ const GridComponent = ({
 
       while (i < countTilesInRow) {
         list.push(
-          <TileSkeleton key={key} isFolder={isFolder} isRoom={isRoom} />,
+          <TileSkeleton
+            key={`${key}_${i}`}
+            isFolder={isFolder}
+            isRoom={isRoom}
+          />,
         );
         i += 1;
       }

@@ -1,11 +1,41 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { Trans } from "react-i18next";
+import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
+import { toastr } from "@docspace/shared/components/toast";
+import { ONE_MEGABYTE } from "@docspace/shared/constants";
+
 // import { ToggleButton } from "@docspace/shared/components/toggle-button";
 // import { Text } from "@docspace/shared/components/text";
 
@@ -38,41 +68,6 @@ interface BasicBlockProps {
   onBlur: (name: string) => void;
 }
 
-function getImageDimensions(
-  image: HTMLImageElement,
-): Promise<{ width: number; height: number }> {
-  return new Promise((resolve) => {
-    image.onload = () => {
-      const width = image.width;
-      const height = image.height;
-      resolve({ height, width });
-    };
-  });
-}
-
-function compressImage(
-  image: HTMLImageElement,
-  scale: number,
-  initialWidth: number,
-  initialHeight: number,
-): Promise<Blob | undefined | null> {
-  return new Promise((resolve) => {
-    const canvas = document.createElement("canvas");
-
-    canvas.width = scale * initialWidth;
-    canvas.height = scale * initialHeight;
-
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-      ctx.canvas.toBlob((blob) => {
-        resolve(blob);
-      }, "image/png");
-    }
-  });
-}
-
 const BasicBlock = ({
   t,
   nameValue,
@@ -80,7 +75,6 @@ const BasicBlock = ({
   logoValue,
   descriptionValue,
   allowPkce,
-  // isPublic,
   changeValue,
 
   isEdit,
@@ -100,55 +94,36 @@ const BasicBlock = ({
     const file =
       e.target.files && e.target.files?.length > 0 && e.target.files[0];
 
+    if (file && file.type === "image/svg+xml") {
+      if (file.size > ONE_MEGABYTE)
+        return toastr.error(t("Common:SizeImageLarge"));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result && typeof reader.result === "string")
+          changeValue("logo", reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      return;
+    }
+
     if (file) {
-      const imgEl = document.getElementsByClassName(
-        "client-logo",
-      )[0] as HTMLImageElement;
+      const widthProp = 64;
+      const heightProp = 64;
 
-      imgEl.src = URL.createObjectURL(file);
-
-      const { height, width } = await getImageDimensions(imgEl);
-
-      const MAX_WIDTH = 32; // if we resize by width, this is the max width of compressed image
-      const MAX_HEIGHT = 32; // if we resize by height, this is the max height of the compressed image
-
-      const widthRatioBlob = await compressImage(
-        imgEl,
-        MAX_WIDTH / width,
-        width,
-        height,
-      );
-      const heightRatioBlob = await compressImage(
-        imgEl,
-        MAX_HEIGHT / height,
-        width,
-        height,
-      );
-
-      if (widthRatioBlob && heightRatioBlob) {
-        // pick the smaller blob between both
-        const compressedBlob =
-          widthRatioBlob.size > heightRatioBlob.size
-            ? heightRatioBlob
-            : widthRatioBlob;
-
-        const reader = new FileReader();
-        reader.readAsDataURL(compressedBlob);
-
-        reader.onload = () => {
-          const result = reader.result as string;
-
-          changeValue("logo", result);
-        };
-      }
+      const img = new Image();
+      img.onload = () => {
+        const data = resizeImage.resize(img, widthProp, heightProp, "png");
+        changeValue("logo", data);
+      };
+      img.src = URL.createObjectURL(file);
     }
   };
 
   const pkceHelpButtonText = (
     <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
-
-  // const publicClientHelpButtonText = "Help text";
 
   const isNameRequiredError = requiredErrorFields.includes("name");
   const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
@@ -230,25 +205,6 @@ const BasicBlock = ({
             <HelpButton tooltipContent={pkceHelpButtonText} />
           </div>
         </InputGroup>
-        {/* <InputGroup
-          label="Client type"
-          name="public_client"
-          placeholder={t("EnterURL")}
-          value=""
-          error=""
-          onChange={() => {}}
-        >
-          <div className="public_client">
-            <ToggleButton
-              isChecked={isPublic}
-              onChange={(e) => {
-                changeValue("is_public", e.target.checked);
-              }}
-            />
-            <Text>Public client</Text>
-            <HelpButton tooltipContent={publicClientHelpButtonText} />
-          </div>
-        </InputGroup> */}
       </StyledInputBlock>
     </StyledBlock>
   );

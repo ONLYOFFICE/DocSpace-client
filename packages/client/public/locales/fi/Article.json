@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Tiedostoja ei ladattu {{count}}",
   "FilesUploaded": "Tiedostoja lisätty",
   "Upload": "Lataa",
   "UploadFiles": "Lataa tiedostoja",

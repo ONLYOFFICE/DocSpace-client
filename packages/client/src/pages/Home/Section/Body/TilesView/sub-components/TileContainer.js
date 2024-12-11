@@ -30,8 +30,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { Heading } from "@docspace/shared/components/heading";
-import { tablet, desktop } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { tablet, desktop, injectDefaultTheme } from "@docspace/shared/utils";
 import InfiniteGrid from "./InfiniteGrid";
 
 const paddingCss = css`
@@ -71,7 +70,7 @@ const StyledGridWrapper = styled.div`
   }
 `;
 
-const StyledTileContainer = styled.div`
+const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   height: 100%;
   user-select: none;
@@ -179,13 +178,11 @@ const StyledTileContainer = styled.div`
     }
   }
 
-  @media ${tablet} {  
-      margin-top: 16px;
+  @media ${tablet} {
+    margin-top: 16px;
     margin-inline-end: -3px;
   }
 `;
-
-StyledTileContainer.defaultProps = { theme: Base };
 
 class TileContainer extends React.PureComponent {
   constructor(props) {

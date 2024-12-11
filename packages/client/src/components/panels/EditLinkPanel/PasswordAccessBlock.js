@@ -24,15 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useRef } from "react";
 import ToggleBlock from "./ToggleBlock";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/shared/components/toast";
-import SimulatePassword from "../../../components/SimulatePassword";
-import { getNewPassword } from "@docspace/shared/utils";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 const PasswordAccessBlock = (props) => {
   const {
@@ -43,15 +44,21 @@ const PasswordAccessBlock = (props) => {
     setPasswordValue,
     isPasswordValid,
     setIsPasswordValid,
+    passwordSettings,
+    isPasswordErrorShow,
+    setIsPasswordErrorShow,
   } = props;
 
+  const passwordInputRef = useRef(null);
+
   const onGeneratePasswordClick = () => {
-    const password = getNewPassword();
-    setPasswordValue(password);
+    passwordInputRef.current.onGeneratePassword();
   };
 
-  const onCleanClick = () => {
+  const onCleanClick = (e) => {
+    e.stopPropagation();
     setPasswordValue("");
+    setIsPasswordValid(false);
   };
 
   const onCopyClick = () => {
@@ -62,9 +69,36 @@ const PasswordAccessBlock = (props) => {
     }
   };
 
-  const onChangePassword = (password) => {
-    setPasswordValue(password);
+  const onChangePassword = (e, value) => {
+    setPasswordValue(value);
     setIsPasswordValid(true);
+    setIsPasswordErrorShow(false);
+  };
+
+  // const onBlurPassword = () => {
+  //   setIsPasswordErrorShow(true);
+  // };
+
+  const onValidatePassword = (isValidate) => {
+    setIsPasswordValid(isValidate);
+  };
+
+  const errorMessage = !passwordValue
+    ? t("Common:RequiredField")
+    : t("Common:IncorrectPassword");
+
+  const hasError = isPasswordErrorShow && !isPasswordValid;
+
+  const tooltipData = {
+    tooltipPasswordTitle: `${t("Common:PasswordLimitMessage")}:`,
+    tooltipPasswordLength: `${t("Common:PasswordMinimumLength")}: ${
+      passwordSettings ? passwordSettings.minLength : 8
+    }`,
+    tooltipPasswordDigits: `${t("Common:PasswordLimitDigits")}`,
+    tooltipPasswordCapital: `${t("Common:PasswordLimitUpperCase")}`,
+    tooltipPasswordSpecial: `${t("Common:PasswordLimitSpecialSymbols")}`,
+    generatePasswordTitle: t("Common:GeneratePassword"),
+    tooltipAllowedCharacters: `${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`,
   };
 
   return (
@@ -74,17 +108,28 @@ const PasswordAccessBlock = (props) => {
           <div className="edit-link_password-block">
             <FieldContainer
               isVertical
-              hasError={!isPasswordValid}
-              errorMessage={t("Common:RequiredField")}
+              hasError={hasError}
+              errorMessage={errorMessage}
               className="edit-link_password-block"
             >
-              <SimulatePassword
+              <PasswordInput
+                id="conversion-password"
                 className="edit-link_password-input"
+                ref={passwordInputRef}
                 isDisabled={isLoading}
-                hasError={!isPasswordValid}
                 inputValue={passwordValue}
                 onChange={onChangePassword}
-                inputMaxWidth="100%"
+                passwordSettings={passwordSettings}
+                simpleView={false}
+                placeholder={t("Common:Password")}
+                hasError={hasError}
+                isAutoFocussed
+                // onBlur={onBlurPassword}
+                onValidateInput={onValidatePassword}
+                isSimulateType
+                simulateSymbol="•"
+                autoComplete="off"
+                {...tooltipData}
               />
             </FieldContainer>
 

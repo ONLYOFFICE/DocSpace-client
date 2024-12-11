@@ -50,22 +50,18 @@ import EmptyRoomsRootUserLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms
 
 import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
-
 import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
 import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
-
 import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.dark.svg";
 import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
 
 import EmptyCustomRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.dark.svg";
 import EmptyCustomRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.light.svg";
-
 import EmptyCustomRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.dark.svg";
 import EmptyCustomRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.light.svg";
 
 import EmptyPublicRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.dark.svg";
 import EmptyPublicRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.light.svg";
-
 import EmptyPublicRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.dark.svg";
 import EmptyPublicRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.light.svg";
 
@@ -73,6 +69,11 @@ import EmptyCollaborationRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.co
 import EmptyCollaborationRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.light.svg";
 import EmptyCollaborationRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.dark.svg";
 import EmptyCollaborationRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.light.svg";
+
+import EmptyVirtualDataRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.virtual.data.room.dark.svg";
+import EmptyVirtualDataRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.virtual.data.room.light.svg";
+import EmptyVirtualDataRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.virtual.data.room.collaborator.dark.svg";
+import EmptyVirtualDataRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.virtual.data.room.collaborator.light.svg";
 
 import FormDefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
 import FormDefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
@@ -96,7 +97,7 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
 import type {
   AccessType,
-  ExtensiontionType,
+  ExtensionType,
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
@@ -167,10 +168,11 @@ export const getRoomDescription = (
   return t("EmptyView:EmptyDescription");
 };
 
-export const getRootDesctiption = (
+export const getRootDescription = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
+  isPublicRoom: boolean,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
@@ -179,6 +181,13 @@ export const getRootDesctiption = (
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserDescription"),
     )
+    .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
+      <>
+        <span>{t("Files:RoomEmptyAtTheMoment")}</span>
+        <br />
+        <span>{t("Files:FilesWillAppearHere")}</span>
+      </>
+    ))
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
@@ -254,6 +263,8 @@ export const getRoomTitle = (
       return t("EmptyView:CollaborationRoomEmptyTitle");
     case RoomsType.PublicRoom:
       return t("EmptyView:PublicRoomEmptyTitle");
+    case RoomsType.VirtualDataRoom:
+      return t("EmptyView:VirtualDataRoomEmptyTitle");
     case RoomsType.CustomRoom:
       return t("EmptyView:CustomRoomEmptyTitle");
     default:
@@ -267,10 +278,21 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.Rooms, ShareAccessRights.None], () =>
-      t("Files:EmptyRootRoomHeader", {
-        productName: t("Common:ProductName"),
-      }),
+    .with(
+      [
+        FolderType.Rooms,
+        P.union(
+          ShareAccessRights.None,
+          ShareAccessRights.Comment,
+          ShareAccessRights.Review,
+          ShareAccessRights.Editing,
+          ShareAccessRights.ReadOnly,
+        ),
+      ],
+      () =>
+        t("Files:EmptyRootRoomHeader", {
+          productName: t("Common:ProductName"),
+        }),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
@@ -367,6 +389,25 @@ export const getRoomIcon = (
       )
       .with(
         [
+          RoomsType.VirtualDataRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyVirtualDataRoomLightIcon />
+          ) : (
+            <EmptyVirtualDataRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyVirtualDataRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyVirtualDataRoomCollaboratorDarkIcon />
+        ),
+      )
+      .with(
+        [
           RoomsType.CustomRoom,
           P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
         ],
@@ -392,7 +433,7 @@ export const getRoomIcon = (
   );
 };
 
-export const getRootIcom = (
+export const getRootIcon = (
   rootFolderType: Nullable<FolderType>,
   access: AccessType,
   isBaseTheme: boolean,
@@ -401,12 +442,24 @@ export const getRootIcom = (
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
-    .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
-      isBaseTheme ? (
-        <EmptyRoomsRootUserLightIcon />
-      ) : (
-        <EmptyRoomsRootUserDarkIcon />
-      ),
+    .with(
+      [
+        FolderType.Rooms,
+        P.union(
+          ShareAccessRights.DenyAccess,
+          ShareAccessRights.None,
+          ShareAccessRights.Comment,
+          ShareAccessRights.Review,
+          ShareAccessRights.Editing,
+          ShareAccessRights.ReadOnly,
+        ),
+      ],
+      () =>
+        isBaseTheme ? (
+          <EmptyRoomsRootUserLightIcon />
+        ) : (
+          <EmptyRoomsRootUserDarkIcon />
+        ),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
@@ -448,7 +501,7 @@ export const helperOptions = (
   const createCreateFileOption = (
     title: string,
     description: string,
-    extension: ExtensiontionType,
+    extension: ExtensionType,
     withoutDialog: boolean = false,
   ) => ({
     title,

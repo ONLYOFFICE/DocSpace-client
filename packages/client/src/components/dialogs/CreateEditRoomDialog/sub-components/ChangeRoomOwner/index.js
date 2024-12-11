@@ -39,6 +39,7 @@ const ChangeRoomOwner = ({
   roomOwner,
   onOwnerChange,
   currentColorScheme,
+  canChangeOwner,
 }) => {
   const userName = useMemo(
     () => decode(roomOwner.displayName ?? roomOwner.label),
@@ -47,7 +48,12 @@ const ChangeRoomOwner = ({
 
   return (
     <Styled.ChangeRoomOwner>
-      <Text className="change-owner-label" fontWeight={600} fontSize="13px">
+      <Text
+        className="change-owner-label"
+        fontWeight={600}
+        fontSize="13px"
+        noSelect
+      >
         {t("Files:RoomOwner")}
       </Text>
 
@@ -62,7 +68,7 @@ const ChangeRoomOwner = ({
             userName={userName}
           />
           <div className="change-owner-display-name">
-            <Text fontWeight={600} fontSize="13px">
+            <Text fontWeight={600} fontSize="13px" noSelect>
               {userName}
             </Text>
             {roomOwner.id === currentUserId && (
@@ -83,6 +89,20 @@ const ChangeRoomOwner = ({
           {t("Common:ChangeButton")}
         </Link>
       </div>
+
+      {canChangeOwner && (
+        <Link
+          className="change-owner-link"
+          isHovered
+          type="action"
+          fontWeight={600}
+          fontSize="13px"
+          color={currentColorScheme.main?.accent}
+          onClick={onOwnerChange}
+        >
+          {t("Common:ChangeButton")}
+        </Link>
+      )}
     </Styled.ChangeRoomOwner>
   );
 };

@@ -30,13 +30,12 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
-const StyledRowContainer = styled(RowContainer)`
+const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   .row-list-item:first-child {
     .row-wrapper {
       height: 57px;
@@ -59,8 +58,6 @@ const StyledRowContainer = styled(RowContainer)`
   }
 `;
 
-StyledRowContainer.defaultProps = { theme: Base };
-
 const FilesRowContainer = ({
   filesList,
   viewAs,
@@ -71,9 +68,12 @@ const FilesRowContainer = ({
   hasMoreFiles,
   isRooms,
   isTrashFolder,
-  withPaging,
   highlightFile,
   currentDeviceType,
+  isIndexEditingMode,
+  changeIndex,
+  icon,
+  isDownload,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -95,9 +95,13 @@ const FilesRowContainer = ({
         sectionWidth={sectionWidth}
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
+        changeIndex={changeIndex}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
+        isIndexEditingMode={isIndexEditingMode}
+        icon={icon}
+        isDownload={isDownload}
       />
     ));
   }, [
@@ -107,6 +111,8 @@ const FilesRowContainer = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    icon,
+    isDownload,
   ]);
 
   return (
@@ -117,7 +123,7 @@ const FilesRowContainer = ({
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
       draggable
-      useReactWindow={!withPaging}
+      useReactWindow
       itemHeight={58}
     >
       {filesListNode}
@@ -126,36 +132,50 @@ const FilesRowContainer = ({
 };
 
 export default inject(
-  ({ filesStore, settingsStore, infoPanelStore, treeFoldersStore }) => {
+  ({
+    filesStore,
+    settingsStore,
+    infoPanelStore,
+    treeFoldersStore,
+    indexingStore,
+    filesActionsStore,
+    uploadDataStore,
+  }) => {
     const {
       filesList,
       viewAs,
       setViewAs,
-      filterTotal,
+      filter,
       fetchMoreFiles,
       hasMoreFiles,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const { withPaging, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
+    const { isIndexEditingMode } = indexingStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
+
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     return {
       filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,
       isTrashFolder,
-      withPaging,
       highlightFile,
       currentDeviceType,
+      isIndexEditingMode,
+      changeIndex: filesActionsStore.changeIndex,
+      icon,
+      isDownload,
     };
   },
 )(observer(FilesRowContainer));

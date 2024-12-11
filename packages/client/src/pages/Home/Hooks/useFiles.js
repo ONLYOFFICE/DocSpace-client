@@ -45,6 +45,7 @@ import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { toastr } from "@docspace/shared/components/toast";
 
 const useFiles = ({
   t,
@@ -59,7 +60,7 @@ const useFiles = ({
   fetchRooms,
   setIsLoading,
 
-  isAccountsPage,
+  isContactsPage,
   isSettingsPage,
 
   location,
@@ -92,7 +93,7 @@ const useFiles = ({
   };
 
   const fetchDefaultRooms = () => {
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const categoryType = getCategoryType(location);
 
@@ -133,22 +134,17 @@ const useFiles = ({
 
     if (disableDrag) return;
 
-    createFoldersTree(files, uploadToFolder).then((f) => {
-      if (f.length > 0) startUpload(f, null, t);
-    });
+    createFoldersTree(t, files, uploadToFolder)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   React.useEffect(() => {
-    if (location.state?.fromMediaViewer) {
-      const { fromMediaViewer, ...state } = location.state;
-      // remove fromMediaViewer from location state
-      return navigate(location.pathname + location.search, {
-        replace: true,
-        state,
-      });
-    }
-
-    if (isAccountsPage || isSettingsPage) return;
+    if (isContactsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
@@ -344,7 +340,7 @@ const useFiles = ({
         scrollToTop();
         setIsLoading(false);
       });
-  }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);
+  }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
 
   return { onDrop };
 };

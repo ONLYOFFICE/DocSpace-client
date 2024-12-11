@@ -26,9 +26,11 @@
 
 import React from "react";
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const FileNameCell = ({
   item,
@@ -40,8 +42,10 @@ const FileNameCell = ({
   theme,
   t,
   inProgress,
+  isIndexEditingMode,
+  displayFileExtension,
 }) => {
-  const { title, viewAccessibility } = item;
+  const { title, viewAccessibility, fileExst } = item;
 
   const onChange = (e) => {
     onContentSelect && onContentSelect(e.target.checked, item);
@@ -49,44 +53,55 @@ const FileNameCell = ({
 
   const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
+  const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
+  const linkProps = isIndexEditingMode ? null : { ...linkStyles };
+
   return (
     <>
       {inProgress ? (
         <Loader
           className="table-container_row-loader"
-          type="oval"
-          size="16px"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
       ) : (
         <TableCell
-          className="table-container_element-wrapper"
+          className={classNames("table-container_element-wrapper", {
+            ["table-container-index"]: isIndexEditingMode,
+          })}
+          style={{ background: "none !important" }}
           hasAccess={true}
           checked={checked}
         >
           <div className="table-container_element-container">
             <div className="table-container_element">{element}</div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={checked}
-              title={t("Common:TitleSelectFile")}
-            />
+            {!isIndexEditingMode && (
+              <Checkbox
+                className="table-container_row-checkbox"
+                onChange={onChange}
+                isChecked={checked}
+                title={t("Common:TitleSelectFile")}
+              />
+            )}
           </div>
         </TableCell>
       )}
-
       <Link
         type="page"
         title={title}
         fontWeight="600"
         fontSize="13px"
-        {...linkStyles}
         color={theme.filesSection.tableView.fileName.linkColor}
         isTextOverflow
-        className="item-file-name"
+        {...linkProps}
+        className={`item-file-name ${indexingClass}`}
         dir="auto"
       >
         {titleWithoutExt}
+        {displayFileExtension && (
+          <span className="item-file-exst">{fileExst}</span>
+        )}
       </Link>
     </>
   );

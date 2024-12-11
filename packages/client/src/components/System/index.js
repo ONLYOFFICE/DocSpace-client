@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/AppLoader";
 import Error404 from "@docspace/shared/components/errors/Error404";
 
 import ErrorBoundary from "../ErrorBoundaryWrapper";

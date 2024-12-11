@@ -113,6 +113,7 @@ export interface INavigationLogoProps {
   logo?: string;
   burgerLogo: string;
   className: string;
+  onClick?: () => void;
 }
 
 export type TOnNavigationItemClick = (
@@ -204,6 +205,8 @@ export interface INavigationProps {
   onNavigationButtonClick?: () => void;
   tariffBar: React.ReactElement;
   showNavigationButton: boolean;
+  titleIconTooltip?: string;
   badgeLabel?: string;
   onContextOptionsClick?: () => void;
+  onLogoClick?: () => void;
 }

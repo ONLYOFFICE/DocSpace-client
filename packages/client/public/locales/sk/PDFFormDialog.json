@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Chcete sa prepnúť do režimu úpravy formulára? Upozorňujeme, že formulár už nebude k dispozícii na vyplnenie a po úprave budete musieť znova kliknúť na tlačidlo Spustiť vyplnenie, aby ste ho mohli vyplniť.",
-  "PDFFormEditDialogTitle": "Úprava formulára",
+  "PDFform": "Formulár PDF",
   "PDFFormIsReadyToast": "PDF formulár <1>{{filename}}</1> je pripravený na vyplnenie.",
   "PDFFormSuccessfullyCreatedDescription": "Váš formulár PDF je pripravený na vyplnenie. Skopírujte verejné prepojenie a odštartujte proces vyplňovania formulára alebo pozvite ďalších používateľov do tejto miestnosti."
 }

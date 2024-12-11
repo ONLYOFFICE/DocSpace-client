@@ -26,10 +26,11 @@
 
 import styled from "styled-components";
 
-import { ModalDialog } from "../../components/modal-dialog";
 import { globalColors } from "../../themes";
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .radio {
     padding-bottom: 8px;
   }
@@ -39,6 +40,12 @@ const StyledModalDialog = styled(ModalDialog)`
 
     .bold {
       font-weight: 600;
+    }
+
+    .truncate {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 
@@ -73,6 +80,10 @@ const StyledModalDialog = styled(ModalDialog)`
       color: ${globalColors.gray};
     }
   }
+
+  .conflict-resolve_file-name {
+    display: flex;
+  }
 `;
 
-export default StyledModalDialog;
+export { StyledBodyContent };

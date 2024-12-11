@@ -94,6 +94,7 @@ const CategoryFilter = ({
 
   useEffect(() => {
     (async () => {
+      if (!oformsFilter.locale) return;
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
         filterOformsByLocaleIsLoading &&

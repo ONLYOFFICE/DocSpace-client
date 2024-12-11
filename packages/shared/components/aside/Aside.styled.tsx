@@ -27,9 +27,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
 import { MOBILE_FOOTER_HEIGHT } from "../../constants";
-import { tablet, mobile } from "../../utils";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
 import { StyledAsideProps } from "./Aside.types";
 
 const Container = ({
@@ -41,7 +40,7 @@ const Container = ({
   ...props
 }: StyledAsideProps) => <aside ref={forwardRef} {...props} />;
 
-const StyledAside = styled(Container)`
+const StyledAside = styled(Container).attrs(injectDefaultTheme)`
   background-color: ${(props) => props.theme.aside.backgroundColor};
   height: ${(props) => props.theme.aside.height};
 
@@ -69,7 +68,7 @@ const StyledAside = styled(Container)`
   box-sizing: border-box;
 
   @media ${tablet} {
-    max-width: calc(100% - 69px);
+    //max-width: calc(100% - 69px);
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -110,15 +109,18 @@ const StyledAside = styled(Container)`
     }
   }
 `;
-StyledAside.defaultProps = { theme: Base };
 
-const StyledHeaderContainer = styled.div<{ withoutBorder?: boolean }>`
+const StyledHeaderContainer = styled.div<{
+  withoutBorder?: boolean;
+  headerHeight?: string;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 6px;
   margin: 0 16px;
-  height: 53px;
-  min-height: 53px;
+  height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
+  min-height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
   position: relative;
 
   .additional-icons-container {

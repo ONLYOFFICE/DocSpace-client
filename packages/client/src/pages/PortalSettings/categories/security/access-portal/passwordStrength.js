@@ -36,8 +36,11 @@ import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -70,11 +73,11 @@ const PasswordStrength = (props) => {
     t,
     setPortalPasswordSettings,
     passwordSettings,
-    initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -88,6 +91,11 @@ const PasswordStrength = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const load = async () => {
+    if (!isInit) await getPortalPasswordSettings();
+    setIsLoading(true);
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
@@ -124,17 +132,15 @@ const PasswordStrength = (props) => {
   };
 
   useEffect(() => {
+    load();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) initSettings("password").then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit || !passwordSettings) return;
+    if (!isLoading || !passwordSettings) return;
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
@@ -210,7 +216,7 @@ const PasswordStrength = (props) => {
       saveToSessionStorage("defaultPasswordSettings", data);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (error) {
-      toastr.error(e);
+      toastr.error(error);
     }
 
     setIsSaving(false);
@@ -226,7 +232,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <PasswordLoader />;
   }
 
@@ -316,16 +322,17 @@ export const PasswordStrengthSection = inject(({ settingsStore, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
   return {
     setPortalPasswordSettings,
     passwordSettings,
-    initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

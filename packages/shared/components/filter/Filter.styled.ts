@@ -26,8 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "../../utils";
-import { Base, globalColors } from "../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
+import { globalColors } from "../../themes";
 import { TViewAs } from "../../types";
 
 import { SearchInput } from "../search-input";
@@ -76,7 +76,7 @@ const StyledSearchInput = styled(SearchInput)`
   width: 100%;
 `;
 
-const StyledButton = styled.div<{ isOpen: boolean }>`
+const StyledButton = styled.div.attrs(injectDefaultTheme)<{ isOpen: boolean }>`
   width: 32px;
   min-width: 32px;
   height: 32px;
@@ -134,9 +134,7 @@ const StyledButton = styled.div<{ isOpen: boolean }>`
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
-StyledButton.defaultProps = { theme: Base };
-
-const StyledFilterBlock = styled.div`
+const StyledFilterBlock = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   top: 0;
 
@@ -153,13 +151,13 @@ const StyledFilterBlock = styled.div`
   background: ${(props) => props.theme.filterInput.filter.background};
 
   @media ${tablet} {
-    max-width: calc(100% - 69px);
+    max-width: 100%;
   }
 
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: calc(100% - 64px);
+    height: 100%;
     width: 100%;
     max-width: 100%;
   }
@@ -193,15 +191,13 @@ const StyledFilterBlock = styled.div`
   }
 `;
 
-StyledFilterBlock.defaultProps = { theme: Base };
-
 const StyledFilterBlockItem = styled.div<{
   withoutHeader: boolean;
   isFirst?: boolean;
 }>`
   margin: ${(props) =>
     props.withoutHeader ? "0" : props.isFirst ? "12px 0 0" : "16px 0 0"};
-  padding-inline: 16px 24px;
+  padding-inline: 0 16px;
   max-width: 100%;
   box-sizing: border-box;
 
@@ -244,7 +240,9 @@ const StyledFilterBlockItemSelector = styled.div`
   align-items: center;
 `;
 
-const StyledFilterBlockItemSelectorText = styled(Text)`
+const StyledFilterBlockItemSelectorText = styled(Text).attrs(
+  injectDefaultTheme,
+)`
   font-weight: 600;
   font-size: 13px;
   line-height: 15px;
@@ -252,8 +250,6 @@ const StyledFilterBlockItemSelectorText = styled(Text)`
   margin-inline-start: 8px;
   cursor: pointer;
 `;
-
-StyledFilterBlockItemSelectorText.defaultProps = { theme: Base };
 
 // const selectedItemTag = css`
 //   background: ${(props) =>
@@ -267,7 +263,9 @@ const selectedItemTagText = css`
   font-weight: 600;
 `;
 
-const StyledFilterBlockItemTagText = styled(Text)<{ isSelected?: boolean }>`
+const StyledFilterBlockItemTagText = styled(Text).attrs(injectDefaultTheme)<{
+  isSelected?: boolean;
+}>`
   height: 20px;
 
   font-weight: 400;
@@ -277,9 +275,7 @@ const StyledFilterBlockItemTagText = styled(Text)<{ isSelected?: boolean }>`
   ${(props) => props.isSelected && selectedItemTagText}
 `;
 
-StyledFilterBlockItemTagText.defaultProps = { theme: Base };
-
-const StyledFilterBlockItemTagIcon = styled.div`
+const StyledFilterBlockItemTagIcon = styled.div.attrs(injectDefaultTheme)`
   margin-inline-start: 8px;
 
   display: flex;
@@ -292,8 +288,6 @@ const StyledFilterBlockItemTagIcon = styled.div`
     }
   }
 `;
-
-StyledFilterBlockItemTagIcon.defaultProps = { theme: Base };
 
 const StyledFilterBlockItemToggle = styled.div`
   width: 100%;
@@ -311,7 +305,9 @@ const StyledFilterBlockItemToggleText = styled(Text)`
   line-height: 36px;
 `;
 
-const StyledFilterBlockItemToggleButton = styled(ToggleButton)`
+const StyledFilterBlockItemToggleButton = styled(ToggleButton).attrs(
+  injectDefaultTheme,
+)`
   position: static;
 
   grid-gap: 0px;
@@ -334,39 +330,6 @@ const StyledFilterBlockItemSeparator = styled.div`
   background: ${(props) => props.theme.filterInput.filter.separatorColor};
 `;
 
-StyledFilterBlockItemToggleButton.defaultProps = { theme: Base };
-
-const StyledFilterBlockFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  inset-inline-end: 0;
-
-  z-index: 401;
-
-  width: 480px;
-  height: 72px;
-  min-height: 72px;
-
-  border-top: ${(props) => props.theme.filterInput.filter.border};
-
-  box-sizing: border-box;
-
-  padding: 0 16px;
-  margin: 0;
-
-  gap: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media ${mobile} {
-    width: 100%;
-  }
-`;
-
-StyledFilterBlockFooter.defaultProps = { theme: Base };
-
 const selectedViewIcon = css`
   svg {
     path {
@@ -383,7 +346,10 @@ const notSelectedViewIcon = css`
   }
 `;
 
-const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
+const StyledSortButton = styled.div.attrs(injectDefaultTheme)<{
+  viewAs: TViewAs;
+  isDesc: boolean;
+}>`
   .combo-button {
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
@@ -490,7 +456,8 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
       }
 
       .selected-option-item {
-        background: ${(props) => props.theme.filterInput.sort.hoverBackground};
+        background: ${(props) =>
+          props.theme.dropDownItem.selectedBackgroundColor};
         cursor: pointer;
 
         .selected-option-item__icon {
@@ -517,7 +484,15 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
   }
 `;
 
-StyledSortButton.defaultProps = { theme: Base };
+const StyledFilterBlockHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .additional-icons-container {
+    margin-inline: 16px;
+  }
+`;
 
 export {
   StyledSortButton,
@@ -534,7 +509,7 @@ export {
   StyledFilterBlockItemToggleButton,
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
-  StyledFilterBlockFooter,
+  StyledFilterBlockHeader,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

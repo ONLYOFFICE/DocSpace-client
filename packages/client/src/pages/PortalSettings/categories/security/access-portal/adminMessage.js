@@ -29,18 +29,20 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
+
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import isEqual from "lodash/isEqual";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 
-import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
-import { DeviceType } from "@docspace/shared/enums";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -60,15 +62,12 @@ const AdminMessage = (props) => {
 
     enableAdmMess,
     setMessageSettings,
-    initSettings,
-    isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -99,16 +98,11 @@ const AdminMessage = (props) => {
 
   useEffect(() => {
     checkWidth();
-
-    if (!isInit) initSettings("admin-message").then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
     const currentSettings = getFromSessionStorage(
       "currentAdminMessageSettings",
     );
@@ -121,11 +115,9 @@ const AdminMessage = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, isInit]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
-
     const defaultSettings = getFromSessionStorage(
       "defaultAdminMessageSettings",
     );
@@ -166,10 +158,6 @@ const AdminMessage = (props) => {
     setType(defaultSettings || "disabled");
     setShowReminder(false);
   };
-
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
-    return <AdmMsgLoader />;
-  }
 
   return (
     <MainContainer>
@@ -234,23 +222,18 @@ const AdminMessage = (props) => {
   );
 };
 
-export const AdminMessageSection = inject(({ settingsStore, setup }) => {
+export const AdminMessageSection = inject(({ settingsStore }) => {
   const {
     enableAdmMess,
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
 
   return {
     enableAdmMess,
     setMessageSettings,
-    initSettings,
-    isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

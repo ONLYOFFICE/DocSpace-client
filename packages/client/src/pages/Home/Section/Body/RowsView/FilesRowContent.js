@@ -27,13 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import {
   isMobile,
   isTablet,
   mobile,
   tablet,
   desktop,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
 
 import { Link } from "@docspace/shared/components/link";
@@ -41,8 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-
-import { Base } from "@docspace/shared/themes";
 
 import {
   connectedCloudsTypeTitleTranslation,
@@ -54,7 +53,7 @@ import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { decode } from "he";
 
-const SimpleFilesRowContent = styled(RowContent)`
+const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
   .row-main-container-wrapper {
     width: 100%;
     max-width: min-content;
@@ -96,6 +95,10 @@ const SimpleFilesRowContent = styled(RowContent)`
     padding-inline: 0 12px;
     margin-top: ${(props) =>
       props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
+  }
+
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   @media ${tablet} {
@@ -155,8 +158,6 @@ const SimpleFilesRowContent = styled(RowContent)`
   }
 `;
 
-SimpleFilesRowContent.defaultProps = { theme: Base };
-
 const FilesRowContent = ({
   t,
   item,
@@ -175,6 +176,8 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  isIndexing,
+  displayFileExtension,
   additionalInfo: additionalInfoProp,
 }) => {
   const {
@@ -190,6 +193,7 @@ const FilesRowContent = ({
     tags,
     quotaLimit,
     usedSpace,
+    order,
     roomType,
   } = item;
 
@@ -239,18 +243,20 @@ const FilesRowContent = ({
     }
   };
 
-  const additionalComponent = () => {
-    if (isRooms) return getRoomTypeName(item.roomType, t);
+  // const additionalComponent = () => {
+  //   if (isRooms) return getRoomTypeName(item.roomType, t);
 
-    if (!fileExst && !contentLength && !providerKey)
-      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-        "Translations:Files",
-      )}`;
+  //   if (!fileExst && !contentLength && !providerKey)
+  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+  //       "Translations:Files",
+  //     )}`;
 
-    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
 
-    return "";
-  };
+  //   return "";
+  // };
+
+  // const additionalInfo = additionalComponent();
 
   const additionalInfo =
     item.isTemplate && additionalInfoProp
@@ -280,11 +286,25 @@ const FilesRowContent = ({
           dir="auto"
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
         <div className="badges">
           {badgesComponent}
           {!isRoom && !isRooms && quickButtons}
         </div>
+        {isIndexing && (
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
+            {`${t("Files:Index")} ${order}`}
+          </Text>
+        )}
         {mainInfo && (
           <Text
             containerMinWidth="200px"
@@ -296,7 +316,7 @@ const FilesRowContent = ({
             {mainInfo}
           </Text>
         )}
-        {additionalInfo && (
+        {/* {additionalInfo && (
           <Text
             containerMinWidth="90px"
             containerWidth="10%"
@@ -308,7 +328,7 @@ const FilesRowContent = ({
           >
             {additionalInfo}
           </Text>
-        )}
+        )} */}
         {authorInfo && (
           <Text
             containerMinWidth="90px"
@@ -330,12 +350,13 @@ const FilesRowContent = ({
 
 export default inject(
   (
-    { currentQuotaStore, settingsStore, treeFoldersStore, filesStore },
+    { currentQuotaStore, settingsStore, treeFoldersStore, filesStore, selectedFolderStore, },
     { item },
   ) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
+    const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterSortBy = item.isTemplate
@@ -346,6 +367,7 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;
+
     return {
       filterSortBy,
       theme: settingsStore.theme,
@@ -353,6 +375,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isStatisticsAvailable,
       showStorageInfo,
+      isIndexing: isIndexedFolder,
     };
   },
 )(

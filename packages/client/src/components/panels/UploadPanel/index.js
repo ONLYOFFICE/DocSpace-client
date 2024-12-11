@@ -28,11 +28,9 @@ import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
 import React from "react";
-import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   ModalDialog,
   ModalDialogType,
@@ -42,13 +40,6 @@ import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { StyledUploadBody } from "../StyledPanels";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
-import { AsideHeader } from "@docspace/shared/components/aside";
-
-const StyledModal = styled(ModalDialog)`
-  .heading {
-    width: 100%;
-  }
-`;
 
 class UploadPanelComponent extends React.Component {
   constructor(props) {
@@ -136,7 +127,7 @@ class UploadPanelComponent extends React.Component {
           : this.onCancelUpload;
 
     return (
-      <StyledModal
+      <ModalDialog
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
@@ -148,7 +139,7 @@ class UploadPanelComponent extends React.Component {
             <FileList />
           </StyledUploadBody>
         </ModalDialog.Body>
-      </StyledModal>
+      </ModalDialog>
     );
   }
 }

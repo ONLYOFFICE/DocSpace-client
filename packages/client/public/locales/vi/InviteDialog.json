@@ -1,17 +1,18 @@
 {
   "AddManually": "Thêm vào một cách thủ công",
-  "AddManuallyDescriptionAccounts": "Mời người dùng mới vào {{productName}} cá nhân qua email",
-  "AddManuallyDescriptionRoom": "Thêm người dùng {{productName}} hiện có vào phòng bằng cách sử dụng tên hoặc mời người dùng mới qua email",
-  "EmailErrorMessage": "Địa chỉ Email không hợp lệ. Bạn có thể chỉnh sửa email bằng cách nhấp vào nó.",
+  "EmailErrorMessage": "Địa chỉ Email không hợp lệ. Iu chan chỉnh sửa email sẽ tăng gấp đôi trên đó.",
   "GroupMaxAvailableRoleWarning": "Các nhóm có thể được thêm vào một phòng với vai trò {{roleName}} là tối đa. Tuy nhiên, bạn có thể thay đổi vai trò của từng người dùng trong nhóm sau khi được thêm thành công.",
   "InvitationLanguage": "Ngôn ngữ mời",
-  "InviteAccountSearchPlaceholder": "Mời người dùng qua email",
-  "InviteRoomSearchPlaceholder": "Mời người dùng theo tên hoặc email",
+  "InviteMembersManuallyDescription": "Mời thành viên mới vào {{productName}} trực tiếp qua email",
+  "InviteMembersSearchPlaceholder": "Mời thành viên qua email",
+  "InviteToRoomManuallyInfo": "Thêm các liên lạc {{productName}} hiện có. Hoặc đích thân mời người dùng mới qua email. Người dùng mới sẽ được thêm vào danh sách Khách của bạn.",
+  "InviteToRoomSearchPlaceholder": "Tìm kiếm và mời theo tên hoặc email",
   "InviteViaLink": "Mời qua liên kết",
   "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong {{productName}}",
   "InviteViaLinkDescriptionRoom": "Tạo một liên kết universal link để tự ủy quyền trong phòng",
   "LinkCopySuccess": "Liên kết đã được sao chép",
   "ResetChange": "Đặt lại thay đổi",
   "SendInvitation": "Gửi lời mời",
+  "UserMaxAvailableRoleWarning": "Khách và Người dùng không thể được chỉ định làm người quản lý Phòng. Chỉ Phòng và quản trị viên {{productName}} mới phù hợp với vai trò được chỉ định.",
   "UsersAlreadyAdded": "Một số người dùng đã được thêm vào"
 }

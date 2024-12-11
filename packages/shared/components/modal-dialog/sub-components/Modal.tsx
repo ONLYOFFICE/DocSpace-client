@@ -28,6 +28,7 @@ import React from "react";
 import { isIOS, isMobileOnly, isSafari } from "react-device-detect";
 
 import { classNames } from "../../../utils";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
 import { Scrollbar } from "../../scrollbar";
@@ -51,6 +52,7 @@ const Modal = ({
   withBodyScroll,
   isScrollLocked,
   isLarge,
+  isHuge,
   zIndex,
   autoMaxHeight,
   autoMaxWidth,
@@ -69,7 +71,12 @@ const Modal = ({
   embedded,
   withForm,
   blur,
+  withoutPadding,
+  hideContent,
 
+  isInvitePanelLoader = false,
+  onSubmit,
+  withBodyScrollForcibly = false,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -131,7 +138,6 @@ const Modal = ({
         className={visible ? "modal-backdrop-active backdrop-active" : ""}
         visible
         zIndex={zIndex}
-        modalSwipeOffset={modalSwipeOffset}
       >
         <Dialog
           id="modal-onMouseDown-close"
@@ -146,91 +152,101 @@ const Modal = ({
           style={style}
           onMouseDown={validateOnMouseDown}
         >
-          <Content
-            id="modal-dialog"
-            visible={visible}
-            isLarge={isLarge}
-            currentDisplayType={currentDisplayType}
-            autoMaxHeight={autoMaxHeight}
-            autoMaxWidth={autoMaxWidth}
-            modalSwipeOffset={modalSwipeOffset}
-            embedded={embedded}
-            ref={contentRef}
-          >
-            {isLoading ? (
-              currentDisplayType === "modal" ? (
-                <DialogSkeleton
-                  isLarge={isLarge}
-                  withFooterBorder={withFooterBorder}
-                />
-              ) : (
-                <DialogAsideSkeleton
-                  withoutAside
-                  isPanel={false}
-                  withFooterBorder={withFooterBorder}
-                />
-              )
-            ) : container &&
-              containerVisible &&
-              currentDisplayType !== "modal" ? (
-              containerComponent
-            ) : (
-              <FormWrapper withForm={withForm || false}>
-                {header && (
-                  <AsideHeader
-                    id="modal-header-swipe"
-                    className={
-                      classNames(["modal-header", headerProps.className]) ||
-                      "modal-header"
-                    }
-                    header={headerComponent}
-                    onCloseClick={onClose}
-                    {...(currentDisplayType === "modal" && {
-                      style: { marginBottom: "16px" },
-                    })}
-                    {...rest}
-                  />
-                )}
-
-                {body && (
-                  <StyledBody
-                    className={
-                      classNames(["modal-body", bodyProps.className]) ||
-                      "modal-body"
-                    }
-                    withBodyScroll={withBodyScroll}
-                    isScrollLocked={isScrollLocked}
-                    hasFooter={!!footer}
-                    currentDisplayType={currentDisplayType}
-                    {...bodyProps}
-                    {...iOSActions}
-                    // embedded={embedded}
-                  >
-                    {currentDisplayType === "aside" && withBodyScroll ? (
-                      <Scrollbar id="modal-scroll" className="modal-scroll">
-                        {bodyComponent}
-                      </Scrollbar>
-                    ) : (
-                      bodyComponent
-                    )}
-                  </StyledBody>
-                )}
-                {footer && (
-                  <StyledFooter
-                    className={
-                      classNames(["modal-footer", footerProps.className]) ||
-                      "modal-footer"
-                    }
+          {!hideContent && (
+            <Content
+              id="modal-dialog"
+              visible={visible}
+              isLarge={isLarge}
+              isHuge={isHuge}
+              currentDisplayType={currentDisplayType}
+              autoMaxHeight={autoMaxHeight}
+              autoMaxWidth={autoMaxWidth}
+              modalSwipeOffset={modalSwipeOffset}
+              embedded={embedded}
+              ref={contentRef}
+            >
+              {isLoading ? (
+                currentDisplayType === "modal" ? (
+                  <DialogSkeleton
+                    isLarge={isLarge}
                     withFooterBorder={withFooterBorder}
-                    isDoubleFooterLine={isDoubleFooterLine}
-                    {...footerProps}
-                  >
-                    {footerComponent}
-                  </StyledFooter>
-                )}
-              </FormWrapper>
-            )}
-          </Content>
+                  />
+                ) : (
+                  <DialogAsideSkeleton
+                    withoutAside
+                    isPanel={false}
+                    withFooterBorder={withFooterBorder}
+                    isInvitePanelLoader={isInvitePanelLoader}
+                  />
+                )
+              ) : container &&
+                containerVisible &&
+                currentDisplayType !== "modal" ? (
+                containerComponent
+              ) : (
+                <FormWrapper withForm={withForm || false} onSubmit={onSubmit}>
+                  {header && (
+                    <AsideHeader
+                      id="modal-header-swipe"
+                      className={
+                        classNames(["modal-header", headerProps.className]) ||
+                        "modal-header"
+                      }
+                      header={headerComponent}
+                      onCloseClick={onClose}
+                      {...(currentDisplayType === "modal" && {
+                        style: { marginBottom: "16px" },
+                      })}
+                      {...rest}
+                    />
+                  )}
+
+                  {body && (
+                    <StyledBody
+                      className={
+                        classNames(["modal-body", bodyProps.className]) ||
+                        "modal-body"
+                      }
+                      withBodyScroll={withBodyScroll}
+                      isScrollLocked={isScrollLocked}
+                      hasFooter={!!footer}
+                      currentDisplayType={currentDisplayType}
+                      withoutPadding={withoutPadding}
+                      {...bodyProps}
+                      {...iOSActions}
+                      // embedded={embedded}
+                    >
+                      {withBodyScrollForcibly ||
+                      (currentDisplayType === "aside" && withBodyScroll) ? (
+                        <Scrollbar
+                          id="modal-scroll"
+                          className="modal-scroll"
+                          paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                        >
+                          {bodyComponent}
+                        </Scrollbar>
+                      ) : (
+                        bodyComponent
+                      )}
+                    </StyledBody>
+                  )}
+                  {footer && (
+                    <StyledFooter
+                      className={
+                        classNames(["modal-footer", footerProps.className]) ||
+                        "modal-footer"
+                      }
+                      withFooterBorder={withFooterBorder}
+                      isDoubleFooterLine={isDoubleFooterLine}
+                      {...footerProps}
+                    >
+                      {footerComponent}
+                    </StyledFooter>
+                  )}
+                </FormWrapper>
+              )}
+            </Content>
+          )}
         </Dialog>
       </ModalBackdrop>
     </StyledModal>

@@ -24,50 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
-
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { Portal } from "@docspace/shared/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
-
-import AddUsersPanel from "../../../../panels/AddUsersPanel";
-import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { Portal } from "@docspace/shared/components/portal";
 
 interface SelectGroupManagerPanelProps {
-  isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
   setGroupManager: (groupManager: TUser) => void;
 }
 
 const SelectGroupManagerPanel = ({
-  isVisible,
   onClose,
   onParentPanelClose,
   setGroupManager,
 }: SelectGroupManagerPanelProps) => {
-  const { t } = useTranslation(["InviteDialog"]);
-  const accessOptions = getAccessOptions(t);
-
-  const onSelectGroupManager = (newGroupManager: TUser[]) => {
-    setGroupManager(newGroupManager[0]);
+  const onSelectGroupManager = (newGroupManager: TSelectorItem[]) => {
+    setGroupManager(newGroupManager[0] as unknown as TUser);
   };
 
   return (
     <Portal
       element={
-        <AddUsersPanel
-          visible={isVisible}
-          onClose={onClose}
-          onParentPanelClose={onParentPanelClose}
-          setDataItems={onSelectGroupManager}
-          accessOptions={accessOptions}
-          isEncrypted
-          defaultAccess={ShareAccessRights.FullAccess}
+        <PeopleSelector
+          disableDisabledUsers
+          submitButtonLabel=""
+          disableSubmitButton={false}
+          onSubmit={onSelectGroupManager}
+          useAside
+          onClose={() => {
+            onClose();
+            onParentPanelClose();
+          }}
           withoutBackground
           withBlur={false}
-          isMultiSelect={false}
-          disableDisabledUsers
+          withHeader
+          headerProps={{
+            // Todo: Update groups empty screen texts when they are ready
+            headerLabel: "",
+            withoutBackButton: false,
+            withoutBorder: true,
+            onBackClick: onClose,
+            onCloseClick: onParentPanelClose,
+          }}
         />
       }
     />

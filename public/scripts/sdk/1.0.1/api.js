@@ -27,6 +27,8 @@
 (function () {
   const FRAME_NAME = "frameDocSpace";
 
+  const version = "1.0.1";
+
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
@@ -53,7 +55,7 @@
     showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Size,Type,Tags",
+    viewTableColumns: "Index,Name,Size,Type,Tags",
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,
@@ -77,7 +79,6 @@
     },
     editorCustomization: {},
     keysForReload: [
-      "src",
       "rootPath",
       "width",
       "height",
@@ -98,6 +99,7 @@
       onSignOut: null,
       onDownload: null,
       onNoAccess: null,
+      onNotFound: null,
       onContentReady: null,
     },
   };
@@ -470,7 +472,6 @@
         }
 
         case "editor": {
-          let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
 
           if (!config.id || config.id === "undefined" || config.id === "null") {
@@ -483,10 +484,10 @@
             config.events.onEditorCloseCallback &&
             typeof config.events.onEditorCloseCallback === "function"
           ) {
-            goBack = "event";
+            config.editorGoBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;
@@ -496,7 +497,6 @@
         }
 
         case "viewer": {
-          let goBack = config.editorGoBack;
           config.editorCustomization.uiTheme = config.theme;
 
           if (!config.id || config.id === "undefined" || config.id === "null") {
@@ -509,10 +509,10 @@
             config.events.onEditorCloseCallback &&
             typeof config.events.onEditorCloseCallback === "function"
           ) {
-            goBack = "event";
+            config.editorGoBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;

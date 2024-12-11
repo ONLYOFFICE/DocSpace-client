@@ -28,11 +28,10 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
@@ -41,16 +40,9 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { Integration } from "../sub-components/Integration";
 
-import { loadFrame } from "../utils";
-
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -64,30 +56,34 @@ import {
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import api from "@docspace/shared/api";
 
 const Editor = (props) => {
-  const { t, getFilePrimaryLink, theme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "editor",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: false,
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    sdk.init(config);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
+    initFrame();
     return () => destroyFrame();
   });
 
@@ -106,7 +102,7 @@ const Editor = (props) => {
     };
 
     if (file.inPublic) {
-      const link = await getFilePrimaryLink(file.id);
+      const link = await api.files.getFileLink(file.id);
       const { requestToken } = link.sharedTo;
 
       newConfig.requestToken = requestToken;
@@ -129,10 +125,10 @@ const Editor = (props) => {
           ? config.height
           : undefined
       }
-      targetId={frameId}
+      targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={frameId}></Box>
+        <Box id={config.frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -151,10 +147,10 @@ const Editor = (props) => {
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
@@ -182,25 +178,24 @@ const Editor = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}
               defaultFrameId={config.frameId}
               setConfig={setConfig}
             />
-          </ControlsSection>
 
-          {/* <InterfaceElements>
+            {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
@@ -222,20 +217,43 @@ const Editor = (props) => {
               <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
-          </InterfaceElements> */}
+          </InterfaceElements>
+          <CategorySubHeader>{t("AddWatermarks")}</CategorySubHeader>
+          <ControlsGroup>
+            <LabelGroup>
+              <Label className="label" text={t("SelectImage")} />
+            </LabelGroup>
+            <FilesSelectorInputWrapper>
+              <FilesSelectorInput onSelectFolder={() = {}} isSelect />
+            </FilesSelectorInputWrapper>
+          </ControlsGroup> */}
+          </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
-export const Component = inject(({ settingsStore, filesStore }) => {
-  const { theme } = settingsStore;
-  const { getFilePrimaryLink } = filesStore;
+export const Component = inject(({ settingsStore }) => {
+  const { theme, currentColorScheme } = settingsStore;
 
   return {
     theme,
-    getFilePrimaryLink,
+    currentColorScheme,
   };
 })(
   withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(

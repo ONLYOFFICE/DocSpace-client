@@ -32,22 +32,18 @@ import React, {
   useMemo,
   useContext,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
-import { elementResizeDetector, getThumbSize } from "./FileTile.utils";
+import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
 
-const FilesTileContainer = ({
-  filesList,
-  t,
-  withPaging,
-  thumbnails1280x720,
-}) => {
+const FilesTileContainer = ({ filesList }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -55,6 +51,8 @@ const FilesTileContainer = ({
   const [columnCount, setColumnCount] = useState(null);
 
   const { sectionWidth } = useContext(Context);
+
+  const { t } = useTranslation(["Translations"]);
 
   useEffect(() => {
     return () => {
@@ -73,7 +71,7 @@ const FilesTileContainer = ({
 
       if (width === 0) return;
 
-      const size = thumbnails1280x720 ? "1280x720" : getThumbSize(width);
+      const size = "1280x720";
 
       const widthWithoutPadding = width - 32;
 
@@ -89,7 +87,7 @@ const FilesTileContainer = ({
 
       setThumbSize(size);
     },
-    [columnCount, thumbSize, thumbnails1280x720],
+    [columnCount, thumbSize],
   );
 
   const onSetTileRef = React.useCallback((node) => {
@@ -138,7 +136,7 @@ const FilesTileContainer = ({
       <TileContainer
         className="tile-container"
         draggable
-        useReactWindow={!withPaging}
+        useReactWindow
         headingFolders={t("Translations:Folders")}
         headingFiles={t("Translations:Files")}
       >
@@ -150,12 +148,8 @@ const FilesTileContainer = ({
 
 export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
   const { filesList } = filesStore;
-  const { withPaging } = settingsStore;
-  const { thumbnails1280x720 } = filesSettingsStore;
 
   return {
     filesList,
-    withPaging,
-    thumbnails1280x720,
   };
 })(observer(FilesTileContainer));

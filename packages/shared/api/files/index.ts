@@ -38,6 +38,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
+import { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -63,6 +64,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  TIndexItems,
 } from "./types";
 
 export async function openEdit(
@@ -120,10 +122,18 @@ export async function getReferenceData(data: TGetReferenceData) {
 export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
+  share?: string,
 ) {
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
+    headers,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -145,6 +155,7 @@ export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
+  share?: string,
 ) {
   let params = folderId;
 
@@ -158,10 +169,17 @@ export async function getFolder(
     params = `${folderId}?${filter.toApiUrlParams()}`;
   }
 
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/${params}`,
     signal,
+    headers,
   };
 
   const skipRedirect = true;
@@ -606,11 +624,16 @@ export async function removeFiles(
 export async function setFileOwner(userId: string, folderIds: number[]) {
   const data = { userId, folderIds };
 
-  const res = (await request({
-    method: "post",
-    url: "/files/owner",
-    data,
-  })) as TFolder[];
+  const skipRedirect = true;
+
+  const res = (await request(
+    {
+      method: "post",
+      url: "/files/owner",
+      data,
+    },
+    skipRedirect,
+  )) as TFolder[];
 
   return res;
 }
@@ -777,11 +800,20 @@ export async function markAsRead(folderIds: number[], fileIds: number[]) {
   return res;
 }
 
-export async function getNewFiles(folderId: number) {
+export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TFile[];
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFolderFiles(folderId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/rooms/${folderId}/news`,
+  })) as TNewFiles[];
 
   return res;
 }
@@ -931,6 +963,17 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
+export async function enableDisplayFileExtension(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/displayfileextension",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
 export async function changeOpenEditorInSameTab(val: boolean) {
   const data = { set: val };
   const res = (await request({
@@ -978,7 +1021,12 @@ export function saveThirdParty(
     providerId,
     isRoomsStorage,
   };
-  return request({ method: "post", url: "files/thirdparty", data });
+  const skipRedirect = true;
+
+  return request(
+    { method: "post", url: "files/thirdparty", data },
+    skipRedirect,
+  );
 }
 
 // TODO: Need update res type
@@ -1369,6 +1417,21 @@ export async function getPrimaryLink(fileId: number) {
   return res;
 }
 
+export async function getPrimaryLinkIfNotExistCreate(
+  fileId: number | string,
+  access: ShareAccessRights,
+  internal: boolean,
+  expirationDate: moment.Moment,
+) {
+  const res = (await request({
+    method: "post",
+    url: `/files/file/${fileId}/link`,
+    data: { access, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function editExternalLink(
   fileId: number | string,
   linkId: number | string,
@@ -1391,11 +1454,12 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
+  expirationDate?: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { access, primary, internal },
+    data: { access, primary, internal, expirationDate },
   })) as TFileLink;
 
   return res;
@@ -1451,9 +1515,34 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
+export async function changeIndex(items: TIndexItems[]) {
+  return request({
+    method: "put",
+    url: "files/order",
+    data: { items },
+  });
+}
+
+export async function reorderIndex(id: number) {
+  return request({
+    method: "put",
+    url: `/files/rooms/${id}/reorder`,
+  });
+}
+
 export async function checkIsPDFForm(fileId: string | number) {
   return request({
     method: "get",
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
+}
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
 }

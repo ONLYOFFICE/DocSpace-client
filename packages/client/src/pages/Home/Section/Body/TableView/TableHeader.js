@@ -154,24 +154,17 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Activity",
-        title: t("ByLastModified"),
+        title: t("LastActivity"),
         enable: this.props.roomColumnActivityIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         onChange: this.onColumnChange,
         onClick: this.onRoomsFilter,
       },
-      {
-        key: "QuickButtons",
-        title: "",
-        enable: this.props.roomColumnQuickButtonsIsEnabled,
-        defaultSize: 52,
-        resizable: false,
-      },
     ];
 
     showStorageInfo &&
-      columns.splice(columns.length - 1, 0, {
+      columns.splice(columns.length, 0, {
         key: "Storage",
         title:
           isDefaultRoomsQuotaSet && !isArchiveFolder
@@ -255,13 +248,6 @@ class FilesTableHeader extends React.Component {
         // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
-      {
-        key: "QuickButtons",
-        title: "",
-        enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 52,
-        resizable: false,
-      },
     ];
 
     return [...columns];
@@ -272,9 +258,9 @@ class FilesTableHeader extends React.Component {
 
     const authorBlock = !isPublicRoom
       ? {
-          key: "Author",
+          key: "AuthorRecent",
           title: t("ByAuthor"),
-          enable: this.props.authorColumnIsEnabled,
+          enable: this.props.authorRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
@@ -295,9 +281,9 @@ class FilesTableHeader extends React.Component {
       },
       { ...authorBlock },
       {
-        key: "Created",
+        key: "CreatedRecent",
         title: t("ByCreation"),
-        enable: this.props.createdColumnIsEnabled,
+        enable: this.props.createdRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
         // onClick: this.onFilter,
@@ -313,38 +299,106 @@ class FilesTableHeader extends React.Component {
         onChange: this.onColumnChange,
       },
       {
-        key: "Modified",
+        key: "ModifiedRecent",
         title: t("ByLastModified"),
-        enable: this.props.modifiedColumnIsEnabled,
+        enable: this.props.modifiedRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
-        key: "Size",
+        key: "SizeRecent",
         title: t("Common:Size"),
-        enable: this.props.sizeColumnIsEnabled,
+        enable: this.props.sizeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
         onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
-        key: "Type",
+        key: "TypeRecent",
         title: t("Common:Type"),
-        enable: this.props.typeColumnIsEnabled,
+        enable: this.props.typeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
+    ];
+    return [...columns];
+  };
+
+  getIndexingColumns = () => {
+    const { t, isPublicRoom, indexColumnSize } = this.props;
+
+    const authorBlock = !isPublicRoom
+      ? {
+          key: "AuthorIndexing",
+          title: t("ByAuthor"),
+          enable: this.props.authorVDRColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Author,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const columns = [
       {
-        key: "QuickButtons",
-        title: "",
-        enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 52,
+        key: "Index",
+        title: "#",
+        enable: this.props.indexVDRColumnIsEnabled,
+        minWidth: indexColumnSize,
         resizable: false,
+        isShort: true,
+      },
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: this.props.nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      { ...authorBlock },
+      {
+        key: "CreatedIndexing",
+        title: t("ByCreation"),
+        enable: this.props.createdVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedIndexing",
+        title: t("ByLastModified"),
+        enable: this.props.modifiedVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeIndexing",
+        title: t("Common:Size"),
+        enable: this.props.sizeVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeIndexing",
+        title: t("Common:Type"),
+        enable: this.props.typeVDRColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Type,
+        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
       },
     ];
 
@@ -414,43 +468,43 @@ class FilesTableHeader extends React.Component {
         // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
-      {
-        key: "QuickButtons",
-        title: "",
-        enable: this.props.quickButtonsColumnIsEnabled,
-        defaultSize: 52,
-        resizable: false,
-      },
     ];
 
     return [...columns];
   };
 
   getDefaultColumns = () => {
-    const { isRooms, isTrashFolder, isRecentTab, isTemplatesFolder } =
-      this.props;
+    const {
+      isRooms,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+      isIndexing,
+    } = this.props;
 
     if (isTemplatesFolder) return this.getTemplatesColumns();
     else if (isRooms) return this.getRoomsColumns();
     else if (isTrashFolder) return this.getTrashFolderColumns();
     else if (isRecentTab) return this.getRecentTabColumns();
+    else if (isIndexing) return this.getIndexingColumns();
     else return this.getFilesColumns();
   };
 
   getTableColumns = (fromUpdate = false) => {
     const {
+      isRooms,
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
+      isRecentTab,
       tableStorageName,
-      isRooms,
-      filter,
       roomsFilter,
+      filter,
     } = this.props;
 
     const defaultColumns = this.getDefaultColumns();
 
-    let columns = getColumns(defaultColumns);
+    let columns = getColumns(defaultColumns, isRecentTab);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -470,7 +524,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
-        // isRecentTab,
+        isRecentTab,
       });
     } else {
       this.state = {
@@ -480,7 +534,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
-        // isRecentTab,
+        isRecentTab,
       };
     }
   };
@@ -526,9 +580,12 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      isIndexEditingMode,
       showStorageInfo,
+      indexColumnSize,
       roomsFilter,
       filter,
+      changeDocumentsTabs,
     } = this.props;
 
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
@@ -536,14 +593,16 @@ class FilesTableHeader extends React.Component {
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
+      indexColumnSize !== prevProps.indexColumnSize ||
+      isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab || // isRecentTab !== this.state.isRecentTab ||
+      isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
-      sortBy !== this.state.sortBy ||
-      sortOrder !== this.state.sortOrder
+      (!changeDocumentsTabs && sortBy !== this.state.sortBy) ||
+      (!changeDocumentsTabs && sortOrder !== this.state.sortOrder)
     ) {
       return this.getTableColumns(true);
     }
@@ -642,11 +701,13 @@ class FilesTableHeader extends React.Component {
       sortingVisible,
       infoPanelVisible,
 
-      withPaging,
       tagRef,
       setHideColumns,
       isFrame,
       showSettings,
+
+      isIndexing,
+      isIndexEditingMode,
     } = this.props;
 
     const {
@@ -669,9 +730,11 @@ class FilesTableHeader extends React.Component {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         resetColumnsSize={resetColumnsSize}
-        sortingVisible={sortingVisible}
+        isIndexing={isIndexing}
+        sortingVisible={isIndexing ? false : sortingVisible}
+        isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
@@ -692,10 +755,13 @@ export default inject(
     clientLoadingStore,
     infoPanelStore,
     currentQuotaStore,
+    indexingStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
+
+    const { isIndexEditingMode } = indexingStore;
 
     const {
       isHeaderChecked,
@@ -707,11 +773,13 @@ export default inject(
       headerBorder,
       roomsFilter,
       setRoomsFilter,
+      indexColumnSize,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
-    const { withPaging, isFrame, frameConfig } = settingsStore;
+    const { isFrame, frameConfig } = settingsStore;
 
     const {
       tableStorageName,
@@ -739,11 +807,25 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      authorRecentColumnIsEnabled,
+      modifiedRecentColumnIsEnabled,
+      createdRecentColumnIsEnabled,
+      sizeRecentColumnIsEnabled,
+      typeRecentColumnIsEnabled,
+
+      indexVDRColumnIsEnabled,
+      authorVDRColumnIsEnabled,
+      modifiedVDRColumnIsEnabled,
+      createdVDRColumnIsEnabled,
+      sizeVDRColumnIsEnabled,
+      typeVDRColumnIsEnabled,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -753,6 +835,8 @@ export default inject(
       withContent,
       sortingVisible,
 
+      isIndexing: isIndexedFolder,
+
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
       roomsFilter,
@@ -761,7 +845,6 @@ export default inject(
       headerBorder,
 
       infoPanelVisible,
-      withPaging,
 
       tableStorageName,
       columnStorageName,
@@ -788,9 +871,23 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      authorRecentColumnIsEnabled,
+      modifiedRecentColumnIsEnabled,
+      createdRecentColumnIsEnabled,
+      sizeRecentColumnIsEnabled,
+      typeRecentColumnIsEnabled,
+
+      indexVDRColumnIsEnabled,
+      authorVDRColumnIsEnabled,
+      modifiedVDRColumnIsEnabled,
+      createdVDRColumnIsEnabled,
+      sizeVDRColumnIsEnabled,
+      typeVDRColumnIsEnabled,
+
       getColumns,
       setColumnEnable,
       isTrashFolder,
+      isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
 
@@ -800,6 +897,10 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isIndexEditingMode,
+
+      indexColumnSize,
+      changeDocumentsTabs,
     };
   },
 )(

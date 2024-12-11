@@ -34,8 +34,9 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const TileContainer = styled.div`
+const TileContainer = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
 
   width: 100%;
@@ -79,8 +80,6 @@ const TileContainer = styled.div`
     }
   }
 `;
-
-TileContainer.defaultProps = { theme: Base };
 
 const PresetTile = (props) => {
   const { t, title, description, image, handleOnClick } = props;

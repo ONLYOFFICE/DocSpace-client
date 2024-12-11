@@ -27,12 +27,12 @@
 import styled, { keyframes, css } from "styled-components";
 
 import { desktop, tablet } from "../../utils/device";
-import { Base } from "../../themes";
 import { DefaultStylesProps } from "./FloatingButton.types";
+import { injectDefaultTheme } from "../../utils";
 
 const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
 
-const StyledCircleWrap = styled.div`
+const StyledCircleWrap = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   z-index: 500;
   width: 48px;
@@ -43,8 +43,6 @@ const StyledCircleWrap = styled.div`
   cursor: pointer;
   box-shadow: ${(props) => props.theme.floatingButton?.boxShadow};
 `;
-
-StyledCircleWrap.defaultProps = { theme: Base };
 
 const StyledFloatingButtonWrapper = styled.div<{ showTwoProgress?: boolean }>`
   @media ${desktop} {
@@ -154,7 +152,7 @@ const StyledCircle = styled.div<{ percent: number; displayProgress?: boolean }>`
   }
 `;
 
-const StyledFloatingButton = styled.div`
+const StyledFloatingButton = styled.div.attrs(injectDefaultTheme)`
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -168,9 +166,7 @@ const StyledFloatingButton = styled.div`
   justify-content: center;
 `;
 
-StyledFloatingButton.defaultProps = { theme: Base };
-
-const IconBox = styled.div`
+const IconBox = styled.div.attrs(injectDefaultTheme)`
   // padding-top: 12px;
   display: flex;
   align-items: center;
@@ -182,8 +178,6 @@ const IconBox = styled.div`
     }
   }
 `;
-
-IconBox.defaultProps = { theme: Base };
 
 const StyledAlertIcon = styled.div`
   position: absolute;
@@ -239,8 +233,6 @@ const getDefaultStyles = ({
         : $currentColorScheme.text?.accent};
     }
   `;
-
-StyledCircleWrap.defaultProps = { theme: Base };
 
 const StyledFloatingButtonTheme = styled(StyledCircleWrap)(getDefaultStyles);
 

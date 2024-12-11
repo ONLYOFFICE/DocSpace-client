@@ -1,6 +1,5 @@
 {
-  "PDFFormEditDialogDescription": "Da li želite da pređete na režim za uređivanje obrasca? Imajte na umu da obrazac više neće biti dostupan za popunjavanje i da ćete morati ponovo da kliknete na dugme Započni popunjavanje nakon uređivanja da biste ga popunili.",
-  "PDFFormEditDialogTitle": "Uređivanje Formulara",
+  "PDFform": "PDF obrazac",
   "PDFFormIsReadyToast": "PDF formular  <1>{{filename}}</1> je spreman da bude popunjen.",
   "PDFFormSuccessfullyCreatedDescription": "Vaš PDF formular je spreman da bude popunjen. Kopirajte javni link da započnete proces popunjavanja formulara ili Pozovite druge korisnike u ovu prostoriju."
 }

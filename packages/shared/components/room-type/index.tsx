@@ -52,6 +52,7 @@ const RoomType = ({
   isOpen,
   id,
   selectedId,
+  disabledFormRoom,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -60,6 +61,10 @@ const RoomType = ({
     title: getRoomTypeTitleTranslation(t, roomType),
     description: getRoomTypeDescriptionTranslation(t, roomType),
   };
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+
+  const disabled = isFormRoom && disabledFormRoom;
 
   const isTemplate = roomType === RoomsType.TemplateRoom;
 
@@ -110,9 +115,10 @@ const RoomType = ({
   return type === "listItem" ? (
     <StyledListItem
       id={id}
-      title={t(room.title)}
+      title={disabled ? "" : t(room.title)}
       onClick={onClick}
       isOpen={isOpen}
+      data-tooltip-id={disabled ? "create-room-tooltip" : ""}
     >
       {content}
     </StyledListItem>

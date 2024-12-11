@@ -31,6 +31,9 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import { EmployeeStatus } from "@docspace/shared/enums";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const StyledContextMenu = styled(ContextMenu)`
   min-width: auto !important;
@@ -40,7 +43,6 @@ const GroupMember = ({
   userId,
   groupMember,
   isManager,
-  getUserRole,
   getUserContextOptions,
   getUserContextOptionsModel,
 }) => {
@@ -48,7 +50,6 @@ const GroupMember = ({
     "People",
     "Profile",
     "PeopleTranslations",
-    "ProfileAction",
     "Common",
   ]);
 
@@ -72,7 +73,7 @@ const GroupMember = ({
     getUserContextOptions(
       groupMember.id === userId,
       getUserStatus(groupMember),
-      getUserRole(groupMember),
+      getUserType(groupMember),
       groupMember.status,
     ),
     groupMember,
@@ -84,7 +85,8 @@ const GroupMember = ({
         className="avatar"
         role={groupMember.role || "user"}
         size={"min"}
-        source={groupMember.avatarSmall || groupMember.avatar}
+        source={groupMember.avatar}
+        noClick
       />
 
       <div className="main-wrapper">
@@ -92,6 +94,9 @@ const GroupMember = ({
           <div className="name" style={{}} title={groupMember.displayName}>
             {groupMember.displayName}
           </div>
+          {groupMember.status === EmployeeStatus.Pending && (
+            <StyledSendClockIcon />
+          )}
         </div>
         <div className="email" title={groupMember.email}>
           {groupMember.email}
@@ -129,7 +134,6 @@ const GroupMember = ({
 
 export default inject(({ peopleStore }) => ({
   userId: peopleStore.userStore.user.id,
-  getUserRole: peopleStore.getUserRole,
   getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
   getUserContextOptionsModel:
     peopleStore.contextOptionsStore.getUserContextOptions,

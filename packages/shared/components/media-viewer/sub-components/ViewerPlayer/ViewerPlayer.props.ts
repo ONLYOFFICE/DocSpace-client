@@ -61,7 +61,7 @@ interface ViewerPlayerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
 }
 
 export default ViewerPlayerProps;

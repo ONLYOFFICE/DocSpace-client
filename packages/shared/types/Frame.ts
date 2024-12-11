@@ -52,62 +52,101 @@ export type TFrameTheme =
   | ThemeKeys.SystemStr;
 
 export type TFrameFilter = {
-  count: number;
-  page: number;
-  sortorder: "descending" | "ascending";
-  sortby:
+  count?: string;
+  page?: string;
+  sortorder?: "descending" | "ascending";
+  sortby?:
     | "DateAndTime"
     | "AZ"
     | "Type"
     | "Size"
     | "DateAndTimeCreation"
     | "Author";
-  search: string;
-  withSubfolders: boolean;
+  search?: string;
+  withSubfolders?: boolean;
+};
+
+export type TEditorCustomization = {
+  anonymous?: {
+    request?: boolean;
+    label?: string;
+  };
+  autosave?: boolean;
+  comments?: boolean;
+  compactHeader?: boolean;
+  compactToolbar?: boolean;
+  compatibleFeatures?: boolean;
+  forcesave?: boolean;
+  help?: boolean;
+  hideRightMenu?: boolean;
+  hideRulers?: boolean;
+  integrationMode?: string;
+  macros?: boolean;
+  macrosMode?: string;
+  mentionShare?: boolean;
+  mobileForceView?: boolean;
+  plugins?: boolean;
+  toolbarHideFileName?: boolean;
+  toolbarNoTabs?: boolean;
+  uiTheme?: string;
+  unit?: string;
+  zoom?: number;
 };
 
 export type TFrameEvents = {
-  onSelectCallback: null | ((e: Event) => void);
-  onCloseCallback: null | ((e: Event) => void);
-  onAppReady: null | ((e: Event) => void);
-  onAppError: null | ((e: Event) => void);
-  onEditorCloseCallback: null | ((e: Event) => void);
-  onAuthSuccess: null | ((e: Event) => void);
-  onSignOut: null | ((e: Event) => void);
-  onDownload: null | ((e: Event) => void);
-  onNoAccess: null | ((e: Event) => void);
+  onAppError?: null | ((e: Event | string) => void);
+  onAppReady?: null | (() => void);
+  onAuthSuccess?: null | (() => void);
+  onCloseCallback?: null | ((e: Event) => void);
+  onContentReady?: null | (() => void);
+  onDownload?: null | ((e: Event | string) => void);
+  onEditorCloseCallback?: null | ((e: Event) => void);
+  onNoAccess?: null | (() => void);
+  onNotFound?: null | (() => void);
+  onSelectCallback?: null | ((e: Event | object) => void);
+  onSignOut?: null | (() => void);
 };
 
 export type TFrameConfig = {
-  src: string;
-  rootPath: string;
-  requestToken: string | null;
-  width: string;
-  height: string;
-  name: string;
-  type: TFrameType;
+  buttonColor?: string;
+  checkCSP?: boolean;
+  destroyText?: string;
+  disableActionButton?: boolean;
+  downloadToEvent?: boolean;
+  editorCustomization?: TEditorCustomization | object;
+  editorGoBack?: boolean | string;
+  editorType?: string;
+  events?: TFrameEvents;
+  filter?: TFrameFilter;
+  filterParam?: string;
   frameId: string;
-  mode: TFrameMode;
-  id: string | null;
-  locale: string | null;
-  theme: TFrameTheme;
-  editorType: TFrameEditorType;
-  editorGoBack: boolean;
-  selectorType: TFrameSelectorType;
-  showSelectorCancel: boolean;
-  showSelectorHeader: boolean;
-  showHeader: boolean;
-  showHeaderBanner: string;
-  showTitle: boolean;
-  showMenu: boolean;
-  showFilter: boolean;
-  destroyText: string;
-  viewAs: TFrameViewAs;
-  viewTableColumns: string;
-  checkCSP: boolean;
-  downloadToEvent: boolean;
-  filter: TFrameFilter;
-  keysForReload: string[];
-  events: TFrameEvents;
-  showSignOut: boolean;
+  height?: string;
+  id?: string | number | null;
+  infoPanelVisible?: boolean;
+  init?: boolean | null;
+  locale?: string | null;
+  mode: TFrameMode | string;
+  name?: string;
+  requestToken?: string | null;
+  rootPath?: string;
+  selectorType?: TFrameSelectorType;
+  showFilter?: boolean;
+  showHeader?: boolean;
+  showHeaderBanner?: string;
+  showMenu?: boolean;
+  showSelectorCancel?: boolean;
+  showSelectorHeader?: boolean;
+  showSettings?: boolean;
+  showSignOut?: boolean;
+  showTitle?: boolean;
+  src: string;
+  theme?: TFrameTheme | string;
+  type?: TFrameType;
+  viewAs?: TFrameViewAs;
+  viewTableColumns?: string;
+  waiting?: boolean;
+  width?: string;
+  withBreadCrumbs?: boolean;
+  withSearch?: boolean;
+  withSubtitle?: boolean;
 };

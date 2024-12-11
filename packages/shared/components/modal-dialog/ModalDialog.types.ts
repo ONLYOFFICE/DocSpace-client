@@ -60,6 +60,7 @@ export interface ModalDialogProps {
   /** **`MODAL-ONLY`**
   Sets `width: 520px` and `max-height: 400px` */
   isLarge?: boolean;
+  isHuge?: boolean;
 
   /** **`MODAL-ONLY`**
   Sets `max-width: auto` */
@@ -91,7 +92,12 @@ export interface ModalDialogProps {
   isDoubleFooterLine?: boolean;
   embedded?: boolean;
   withForm?: boolean;
+  withoutPadding?: boolean;
+  hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  withBodyScrollForcibly?: boolean;
 }
 
 export interface ModalProps {
@@ -124,6 +130,7 @@ export interface ModalDialogFormWrapperProps {
   withForm: boolean;
   className?: string;
   children?: React.ReactNode;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export interface ModalDialogBackdropProps {
@@ -143,6 +150,7 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBodyScroll?: boolean;
   isScrollLocked?: boolean;
   isLarge: boolean;
+  isHuge: boolean;
   zIndex?: number;
   autoMaxHeight?: boolean;
   autoMaxWidth?: boolean;
@@ -160,5 +168,10 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   isCloseable?: boolean;
   embedded?: boolean;
   withForm?: boolean;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  withoutPadding?: boolean;
+  hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
+  withBodyScrollForcibly?: boolean;
 };

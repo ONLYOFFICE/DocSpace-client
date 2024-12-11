@@ -76,7 +76,6 @@ const Article = ({
   setArticleOpen,
   withSendAgain,
   mainBarVisible,
-  isBannerVisible,
 
   isLiveChatAvailable,
   isShowLiveChat,
@@ -204,31 +203,9 @@ const Article = ({
         }
       }
 
-      const isTouchDevice =
-        "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      // navigator.maxTouchPoints > 0;
-
-      const path = window.location.pathname.toLowerCase();
-
-      if (
-        isBannerVisible &&
-        isMobile &&
-        isTouchDevice &&
-        (path.includes("rooms") || path.includes("files"))
-      ) {
-        tableHeight -= 80;
-
-        const target = e?.target as VisualViewport;
-
-        if (target?.height) {
-          const diff = window.innerHeight - target.height;
-          tableHeight -= diff;
-        }
-      }
-
       setCorrectTabletHeight(tableHeight);
     },
-    [mainBarVisible, isBannerVisible],
+    [mainBarVisible],
   );
 
   React.useEffect(() => {
@@ -266,6 +243,7 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
+          onIconClick={toggleArticleOpen}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -336,7 +314,7 @@ const Article = ({
           ))}
       </StyledArticle>
       {articleOpen && currentDeviceType === DeviceType.mobile && (
-        <SubArticleBackdrop onClick={toggleArticleOpen} />
+        <SubArticleBackdrop />
       )}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (

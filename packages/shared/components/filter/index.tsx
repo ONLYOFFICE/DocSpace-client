@@ -66,10 +66,14 @@ const FilterInput = React.memo(
     removeSelectedItem,
 
     isRooms,
-    isAccounts,
-    isPeopleAccounts,
-    isGroupsAccounts,
-    isInsideGroup,
+    isContactsPage,
+    isContactsPeoplePage,
+    isContactsGroupsPage,
+    isContactsInsideGroupPage,
+    isContactsGuestsPage,
+    isIndexing,
+    isIndexEditingMode,
+
     filterTitle,
     sortByTitle,
 
@@ -95,6 +99,9 @@ const FilterInput = React.memo(
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
+
+    const searchRef = React.useRef<HTMLInputElement | null>(null);
+
     React.useEffect(() => {
       const value = getViewSettingsData?.();
 
@@ -111,6 +118,8 @@ const FilterInput = React.memo(
 
     React.useEffect(() => {
       const value = getSelectedInputValue?.();
+
+      if (value) searchRef.current?.focus();
 
       setInputValue(value);
     }, [getSelectedInputValue]);
@@ -196,49 +205,57 @@ const FilterInput = React.memo(
       <StyledFilterInput>
         <div className="filter-input_filter-row">
           <StyledSearchInput
+            forwardedRef={searchRef}
             placeholder={placeholder}
             value={inputValue}
             onChange={onSearch}
             onClearSearch={onClearSearch}
             id="filter_search-input"
             size={InputSize.base}
+            isDisabled={isIndexEditingMode}
             onFocus={onInputFocus}
           />
-          <FilterButton
-            id="filter-button"
-            onFilter={onFilter}
-            getFilterData={getFilterData}
-            selectedFilterValue={selectedFilterValue}
-            filterHeader={filterHeader}
-            selectorLabel={selectorLabel}
-            isRooms={isRooms}
-            isAccounts={isAccounts}
-            isPeopleAccounts={isPeopleAccounts}
-            isGroupsAccounts={isGroupsAccounts}
-            isInsideGroup={isInsideGroup}
-            title={filterTitle}
-            userId={userId}
-            disableThirdParty={disableThirdParty}
-          />
-          <SortButton
-            id="sort-by-button"
-            onSort={onSort}
-            getSortData={getSortData}
-            getSelectedSortData={getSelectedSortData}
-            view={view}
-            viewAs={viewAs === "table" ? "row" : viewAs}
-            viewSettings={viewSettings}
-            onChangeViewAs={onChangeViewAs}
-            onSortButtonClick={onSortButtonClick}
-            viewSelectorVisible={
-              viewSettings &&
-              viewSelectorVisible &&
-              currentDeviceType !== DeviceType.desktop
-            }
-            title={sortByTitle}
-          />
+          {!isIndexEditingMode && (
+            <FilterButton
+              id="filter-button"
+              onFilter={onFilter}
+              getFilterData={getFilterData}
+              selectedFilterValue={selectedFilterValue}
+              filterHeader={filterHeader}
+              selectorLabel={selectorLabel}
+              isRooms={isRooms}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
+              title={filterTitle}
+              userId={userId}
+              disableThirdParty={disableThirdParty}
+            />
+          )}
 
+          {!isIndexing && (
+            <SortButton
+              id="sort-by-button"
+              onSort={onSort}
+              getSortData={getSortData}
+              getSelectedSortData={getSelectedSortData}
+              view={view}
+              viewAs={viewAs === "table" ? "row" : viewAs}
+              viewSettings={viewSettings}
+              onChangeViewAs={onChangeViewAs}
+              onSortButtonClick={onSortButtonClick}
+              viewSelectorVisible={
+                viewSettings &&
+                viewSelectorVisible &&
+                currentDeviceType !== DeviceType.desktop
+              }
+              title={sortByTitle}
+            />
+          )}
           {viewSettings &&
+            !isIndexing &&
             currentDeviceType === DeviceType.desktop &&
             viewSelectorVisible && (
               <ViewSelector

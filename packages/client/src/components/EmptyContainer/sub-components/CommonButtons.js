@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { inject, observer } from "mobx-react";
@@ -287,10 +287,10 @@ export default inject(
 
     const { onClickInviteUsers } = contextOptionsStore;
 
-    const { setIsSectionFilterLoading, isLoading } = clientLoadingStore;
+    const { setIsSectionBodyLoading, isLoading } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     return {

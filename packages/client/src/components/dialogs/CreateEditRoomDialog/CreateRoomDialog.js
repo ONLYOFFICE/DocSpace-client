@@ -24,19 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import React, { useMemo, useState } from "react";
 
+import {
+  getRoomCreationAdditionalParams,
+  getStartRoomParams,
+} from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import TagHandler from "./handlers/TagHandler";
 
+import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import TemplateBody from "./sub-components/TemplateBody";
 import { RoomsType } from "@docspace/shared/enums";
 
-const StyledModalDialog = styled(ModalDialog)`
+/* const StyledModalDialog = styled(ModalDialog)` // TODO: Templates rewrite with new logic
   .header-with-button {
     display: flex;
     align-items: center;
@@ -69,7 +72,7 @@ const StyledModalDialog = styled(ModalDialog)`
         height: 100%;
       }
     `}
-`;
+`; */
 
 const CreateRoomDialog = ({
   t,
@@ -86,11 +89,26 @@ const CreateRoomDialog = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   startRoomType,
+  processCreatingRoomFromData,
+  setProcessCreatingRoomFromData,
+  selectionItems,
+  setSelectedRoomType,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const isMountRef = React.useRef(true);
+
+  const disabledFormRoom = useMemo(() => {
+    if (
+      !processCreatingRoomFromData ||
+      !selectionItems ||
+      selectionItems.length === 0
+    )
+      return false;
+
+    return !selectionItems.every((item) => item?.isPDFForm);
+  }, [selectionItems, processCreatingRoomFromData]);
 
   React.useEffect(() => {
     return () => {
@@ -98,28 +116,11 @@ const CreateRoomDialog = ({
     };
   });
 
-  const startRoomParams = {
-    type: startRoomType,
-    title: title ?? "",
-    tags: [],
-    isPrivate: false,
-    storageLocation: {
-      isThirdparty: false,
-      provider: null,
-      thirdpartyAccount: null,
-      storageFolderId: "",
-      isSaveThirdpartyAccount: false,
-    },
-    icon: {
-      uploadedFile: null,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-  };
+  const startRoomParams = getStartRoomParams(startRoomType, title);
 
-  const [roomParams, setRoomParams] = useState({ ...startRoomParams });
+  const [roomParams, setRoomParams] = useState({
+    ...startRoomParams,
+  });
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isTemplateSelected, setIsTemplateSelected] = useState(false);
 
@@ -129,12 +130,16 @@ const CreateRoomDialog = ({
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   const setRoomType = (newRoomType) => {
+    const additionalParams = getRoomCreationAdditionalParams(newRoomType);
+
+    setSelectedRoomType(newRoomType);
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
       storageLocation: {
         isThirdparty: false,
       },
+      ...additionalParams,
     }));
   };
 
@@ -155,6 +160,23 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
+  const handleSubmit = (event) => {
+    /**
+     * @type {HTMLInputElement=}
+     */
+    const tagInput = event.currentTarget.tagInput;
+
+    if (!tagInput) onCreateRoom();
+
+    const value = tagInput.value ?? "";
+    const hasFocus = tagInput === document.activeElement;
+
+    if ((hasFocus && value.length === 0) || !hasFocus) onCreateRoom();
   };
 
   const goBack = () => {
@@ -182,6 +204,11 @@ const CreateRoomDialog = ({
 
       await fetchThirdPartyProviders();
     }
+
+    if (processCreatingRoomFromData) {
+      setProcessCreatingRoomFromData(false);
+    }
+
     onClose();
   };
 
@@ -193,23 +220,28 @@ const CreateRoomDialog = ({
     : t("Files:CreateRoom");
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       withBodyScroll={!isTemplate}
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}
-      withFooterBorder
-      isOauthWindowOpen={isOauthWindowOpen}
+      hideContent={isOauthWindowOpen}
       isTemplate={isTemplate}
       isBackButton={roomParams.type}
       onBackClick={goBack}
+      onSubmit={handleSubmit}
+      withForm
     >
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
         {!roomParams.type ? (
-          <RoomTypeList t={t} setRoomType={setRoomType} />
+          <RoomTypeList
+            t={t}
+            setRoomType={setRoomType}
+            disabledFormRoom={disabledFormRoom}
+          />
         ) : isTemplate ? (
           <TemplateBody
             t={t}
@@ -247,9 +279,9 @@ const CreateRoomDialog = ({
             size="normal"
             primary
             scale
-            onClick={onCreateRoom}
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
+            type="submit"
           />
           <Button
             id="shared_create-room-modal_cancel"
@@ -262,7 +294,7 @@ const CreateRoomDialog = ({
           />
         </ModalDialog.Footer>
       )}
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

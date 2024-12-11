@@ -47,8 +47,7 @@ const {
   white,
   black,
   darkBlack,
-
-  lightGrayBlackout,
+  moonstone,
   grayLight,
   darkGrayLight,
   lightGrayHover,
@@ -70,6 +69,7 @@ const {
   lightSecondMainDisabled,
 
   mainGreen,
+  mainRed,
 
   lightErrorStatus,
   favoritesStatus,
@@ -109,6 +109,9 @@ const {
   highlandGray,
 
   blurLight,
+  lightBlueAction,
+  lightActive,
+  lightBlueHover,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -127,6 +130,10 @@ export const getBaseTheme = () => {
       emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
+
+      secondary: {
+        color: gray,
+      },
     },
 
     heading: {
@@ -1605,6 +1612,8 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
+      containerBorderColor: white,
+
       color: black,
       disabledColor: lightGraySelected,
       pastColor: gray,
@@ -1774,6 +1783,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: gray,
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+      lifetimeIconFill: mainRed,
+      lifetimeIconStroke: mainRed,
 
       icon: {
         fill: link,
@@ -1877,6 +1888,8 @@ export const getBaseTheme = () => {
         renamedItemColor: gray,
         oldRoleColor: lightGrayDark,
         messageColor: black,
+        itemBorderColor: grayLightMid,
+        fileBackgroundColor: lightGraySelected,
       },
 
       details: {
@@ -1897,6 +1910,10 @@ export const getBaseTheme = () => {
       groups: {
         textColor: gray,
         tagColor: grayStrong,
+      },
+
+      expired: {
+        color: grayText,
       },
     },
 
@@ -1986,6 +2003,8 @@ export const getBaseTheme = () => {
       hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
+      indexingSeparator: lightBlueMain,
+
       groupMenu: {
         background: white,
         borderBottom: "1px solid transparent",
@@ -2044,6 +2063,7 @@ export const getBaseTheme = () => {
           linkColor: black,
           textColor: gray,
         },
+        fileExstColor: gray,
 
         row: {
           checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
@@ -2055,6 +2075,11 @@ export const getBaseTheme = () => {
           contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
           backgroundActive: lightGrayHover,
+          indexUpdate: lightActive,
+          indexActive: lightBlueAction,
+
+          indexBackgroundButtonHover: lightBlueHover,
+          indexArrowButtonHover: lightBlueMain,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
@@ -2283,7 +2308,7 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: black,
+        gridColor: grayStrong,
         deleteButton: {
           background: grayLight,
           hoverBackground: lightGrayHover,
@@ -2360,7 +2385,12 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
-      linkColor: lightBlueMain,
+      link: {
+        color: lightBlueMain,
+        background: white,
+        hoverBackground: lightGrayHover,
+        PressedBackground: lightGraySelected,
+      },
 
       items: {
         hoverColor: grayLight,
@@ -2824,6 +2854,9 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+            notAvailableBackground: grayLight,
+            textColor: black,
+            paidBadgeBackground: favoritesStatus,
           },
 
           companyInfo: {
@@ -2842,6 +2875,7 @@ export const getBaseTheme = () => {
           textColor: gray,
           sso: {
             textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
@@ -3079,6 +3113,7 @@ export const getBaseTheme = () => {
 
     itemIcon: {
       borderColor: grayLightMid,
+      editIconColor: grayLightMid,
     },
 
     invitePage: {
@@ -3112,6 +3147,7 @@ export const getBaseTheme = () => {
         color: gray,
         errorColor: lightErrorStatus,
       },
+      editInputColor: grayText,
       requiredColor: lightErrorStatus,
     },
 
@@ -3142,6 +3178,13 @@ export const getBaseTheme = () => {
     roomIcon: {
       backgroundArchive: gray,
       opacityBackground: "1",
+      plusIcon: white,
+      emptyBorder: `2px dashed ${grayStrong}`,
+
+      linkIcon: {
+        background: white,
+        path: moonstone,
+      },
     },
 
     plugins: {
@@ -3204,10 +3247,36 @@ export const getBaseTheme = () => {
       errorColor: lightErrorStatus,
       sideColor: gray,
       nameColor: grayStrong,
+      barBackground: grayLight,
     },
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+      linkColor: lightBlueMain,
+    },
+
+    newFilesPanel: {
+      borderColor: globalColors.grayLightMid,
+
+      borderRadius: "6px",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+
+      fileItem: {
+        borderColor: globalColors.grayLightMid,
+        fileExstColor: globalColors.gray,
+      },
+    },
+    logoCover: {
+      selectColor: {
+        backgroundColor: lightGrayHover,
+      },
+
+      iconColor: lightGrayDark,
+      textColor: lightGrayDark,
+      selectedBackgroundColor: grayLightMid,
+      selectedBorderColor: grayLightMid,
+      backgroundColor: white,
+      borderColor: grayLightMid,
     },
   };
 };

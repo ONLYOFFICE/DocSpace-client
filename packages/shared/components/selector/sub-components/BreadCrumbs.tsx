@@ -43,6 +43,7 @@ import {
   StyledArrowRightSvg,
 } from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 
 const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const {
@@ -52,6 +53,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
   } = React.useContext(BreadCrumbsContext);
+  const setIsSearch = React.useContext(SearchDispatchContext);
 
   const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
     [],
@@ -60,10 +62,10 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
       if (isBreadCrumbsLoading) return;
-
+      setIsSearch(false);
       onSelectBreadCrumb?.(item);
     },
-    [isBreadCrumbsLoading, onSelectBreadCrumb],
+    [isBreadCrumbsLoading, onSelectBreadCrumb, setIsSearch],
   );
 
   const calculateDisplayedItems = React.useCallback(
@@ -227,6 +229,8 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             onClick={() => {
               if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
                 return;
+
+              setIsSearch(false);
 
               onSelectBreadCrumb?.({
                 id: item.id,

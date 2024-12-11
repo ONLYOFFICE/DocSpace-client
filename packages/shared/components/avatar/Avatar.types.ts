@@ -26,6 +26,7 @@
 
 import React from "react";
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
+import { TColorScheme } from "../../themes";
 
 export interface AvatarProps {
   /** Size of avatar */
@@ -59,4 +60,8 @@ export interface AvatarProps {
   isGroup?: boolean;
   /** Accepts roleIcon */
   roleIcon?: React.ReactElement;
+  noClick?: boolean;
+  hasAvatar?: boolean;
+  onChangeFile?: () => void;
+  currentColorScheme?: TColorScheme;
 }

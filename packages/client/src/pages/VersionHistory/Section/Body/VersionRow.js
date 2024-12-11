@@ -39,11 +39,14 @@ import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { commonIconsStyles, getCorrectDate } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  getCorrectDate,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { Base } from "@docspace/shared/themes";
 import { UrlActionType } from "@docspace/shared/enums";
 import {
   MAX_FILE_COMMENT_LENGTH,
@@ -52,14 +55,15 @@ import {
 import moment from "moment-timezone";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
+const StyledExternalLinkIcon = styled(ExternalLinkIcon).attrs(
+  injectDefaultTheme,
+)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesVersionHistory.fill};
   }
 `;
 
-StyledExternalLinkIcon.defaultProps = { theme: Base };
 const VersionRow = (props) => {
   const {
     info,
@@ -219,6 +223,7 @@ const VersionRow = (props) => {
       icon: DownloadReactSvgUrl,
       label: `${t("Common:Download")} (${info.contentLength})`,
       onClick: onDownloadAction,
+      disabled: !info.security.Download,
     },
   ];
 

@@ -90,6 +90,7 @@ export const TableVersions = Object.freeze({
   Groups: "6",
   InsideGroup: "6",
   Recent: "1",
+  Guests: "1",
 });
 
 /**

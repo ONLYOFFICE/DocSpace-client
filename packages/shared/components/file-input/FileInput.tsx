@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import Dropzone from "react-dropzone";
 import equal from "fast-deep-equal/react";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
 
 import { IconButton } from "../icon-button";
@@ -46,18 +46,18 @@ const FileInputPure = ({
   onInput,
   size = InputSize.base,
   placeholder,
-  isDisabled,
-  scale,
-  hasError,
-  hasWarning,
-  accept,
+  isDisabled = false,
+  scale = false,
+  hasError = false,
+  hasWarning = false,
+  accept = [""],
   id,
   buttonLabel,
-  isLoading,
+  isLoading = false,
   fromStorage = false,
   path,
   idButton,
-  isDocumentIcon,
+  isDocumentIcon = false,
   isMultiple = true,
   ...rest
 }: FileInputProps) => {
@@ -195,17 +195,6 @@ const FileInputPure = ({
       )}
     </Dropzone>
   );
-};
-
-FileInputPure.defaultProps = {
-  scale: false,
-  hasWarning: false,
-  hasError: false,
-  isDisabled: false,
-  isLoading: false,
-  accept: [""],
-  isDocumentIcon: false,
-  isMultiple: true,
 };
 
 export { FileInputPure };

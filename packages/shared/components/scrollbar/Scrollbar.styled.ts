@@ -29,16 +29,22 @@ import { isIOS, isIOS13, isIPad13 } from "react-device-detect";
 
 import { Scrollbar } from "./custom-scrollbar";
 
-import { Base } from "../../themes";
-import { mobile, desktop, tablet } from "../../utils";
+import { mobile, desktop, tablet, injectDefaultTheme } from "../../utils";
 
-const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
+const StyledScrollbar = styled(Scrollbar).attrs(injectDefaultTheme)<{
+  $fixedSize?: boolean;
+  $paddingAfterLastItem?: string;
+}>`
   .scroller::-webkit-scrollbar {
     ${(isIOS || isIOS13 || isIPad13) && `display: none;`}
   }
 
   .scroll-body {
     padding-inline-end: ${(props) => props.theme.scrollbar.paddingInlineEnd};
+    ${({ $paddingAfterLastItem }) =>
+      $paddingAfterLastItem &&
+      `padding-bottom: ${$paddingAfterLastItem} !important;`}
+
     position: relative;
     outline: none;
     tab-index: -1;
@@ -204,9 +210,5 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     }
   }
 `;
-
-StyledScrollbar.defaultProps = {
-  theme: Base,
-};
 
 export default StyledScrollbar;

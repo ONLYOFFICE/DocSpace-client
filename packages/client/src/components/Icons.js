@@ -27,13 +27,14 @@
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import styled from "styled-components";
 
-import { commonIconsStyles } from "@docspace/shared/utils";
+import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
 
 import FavoriteIcon from "PUBLIC_DIR/images/favorite.react.svg";
 import FileActionsConvertEditDocIcon from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import FileActionsLockedIcon from "PUBLIC_DIR/images/file.actions.locked.react.svg";
 import EditFormIcon from "PUBLIC_DIR/images/access.edit.form.react.svg";
-import { Base } from "@docspace/shared/themes";
+
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 
 export const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
@@ -50,6 +51,21 @@ export const StyledFavoriteIcon = styled(FavoriteIcon)`
 
 export const StyledFileActionsConvertEditDocIcon = styled(
   FileActionsConvertEditDocIcon,
+).attrs(injectDefaultTheme)`
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.filesIcons.fill};
+  }
+
+  &:hover {
+    path {
+      fill: ${(props) => props.theme.filesIcons.hoverFill};
+    }
+  }
+`;
+
+export const StyledFileActionsLockedIcon = styled(FileActionsLockedIcon).attrs(
+  injectDefaultTheme,
 )`
   ${commonIconsStyles}
   path {
@@ -63,9 +79,9 @@ export const StyledFileActionsConvertEditDocIcon = styled(
   }
 `;
 
-StyledFileActionsConvertEditDocIcon.defaultProps = { theme: Base };
-
-export const StyledFileActionsLockedIcon = styled(FileActionsLockedIcon)`
+export const StyledFileActionsEditFormIcon = styled(EditFormIcon).attrs(
+  injectDefaultTheme,
+)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesIcons.fill};
@@ -78,18 +94,11 @@ export const StyledFileActionsLockedIcon = styled(FileActionsLockedIcon)`
   }
 `;
 
-StyledFileActionsLockedIcon.defaultProps = { theme: Base };
-export const StyledFileActionsEditFormIcon = styled(EditFormIcon)`
+export const StyledSendClockIcon = styled(SendClockIcon)`
+  min-width: 12px;
+
   ${commonIconsStyles}
   path {
-    fill: ${(props) => props.theme.filesIcons.fill};
-  }
-
-  &:hover {
-    path {
-      fill: ${(props) => props.theme.filesIcons.hoverFill};
-    }
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
   }
 `;
-
-StyledFileActionsEditFormIcon.defaultProps = { theme: Base };

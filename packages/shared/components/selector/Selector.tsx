@@ -30,6 +30,9 @@ import React from "react";
 
 import { ButtonKeys } from "../../enums";
 
+import { Aside } from "../aside";
+import { Backdrop } from "../backdrop";
+
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
@@ -63,6 +66,8 @@ const Selector = ({
 
   withHeader,
   headerProps,
+
+  withPadding = true,
 
   isBreadCrumbsLoading = false,
   breadCrumbsLoader,
@@ -142,6 +147,11 @@ const Selector = ({
   infoText,
   infoBarData,
   withInfoBar,
+
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
   withInfoBadge,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
@@ -410,6 +420,34 @@ const Selector = ({
     };
   }, [inputItemVisible, onCancel]);
 
+  React.useEffect(() => {
+    const onKeyboardAction = (e: KeyboardEvent) => {
+      if (inputItemVisible) return;
+
+      const isSubmitDisabled = !withFooterInput
+        ? disableSubmitButton
+        : disableSubmitButton || !newFooterInputValue.trim();
+
+      if (
+        (e.key === ButtonKeys.enter || e.key === ButtonKeys.numpadEnter) &&
+        !isSubmitDisabled
+      ) {
+        onSubmitAction();
+      }
+    };
+
+    window.addEventListener("keyup", onKeyboardAction);
+    return () => {
+      window.removeEventListener("keyup", onKeyboardAction);
+    };
+  }, [
+    disableSubmitButton,
+    inputItemVisible,
+    newFooterInputValue,
+    onSubmitAction,
+    withFooterInput,
+  ]);
+
   React.useLayoutEffect(() => {
     if (items) {
       if (
@@ -568,7 +606,7 @@ const Selector = ({
     });
   }, [tabsData]);
 
-  return (
+  const selectorComponent = (
     <StyledSelector
       id={id}
       className={className}
@@ -595,6 +633,7 @@ const Selector = ({
                   {withHeader && <Header {...headerProps} />}
                   <Body
                     withHeader={withHeader}
+                    withPadding={withPadding}
                     footerVisible={footerVisible || !!alwaysShowFooter}
                     items={[...renderedItems]}
                     isMultiSelect={isMultiSelect}
@@ -640,6 +679,30 @@ const Selector = ({
         </InfoBarProvider>
       </EmptyScreenProvider>
     </StyledSelector>
+  );
+
+  return useAside ? (
+    <>
+      <Backdrop
+        onClick={onClose}
+        visible
+        zIndex={310}
+        isAside
+        withoutBackground={withoutBackground}
+        withoutBlur={!withBlur}
+      />
+      <Aside
+        className="header_aside-panel"
+        visible
+        onClose={onClose}
+        withoutBodyScroll
+        withoutHeader
+      >
+        {selectorComponent}
+      </Aside>
+    </>
+  ) : (
+    selectorComponent
   );
 };
 

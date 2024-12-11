@@ -29,12 +29,18 @@ import React, { memo } from "react";
 import styled, { useTheme } from "styled-components";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
 import { IconSizeType, commonIconsStyles } from "../../utils";
 
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TGetTooltipContent, Tooltip } from "../tooltip";
+
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
+
+import { useClickOutside } from "../../utils/useClickOutside";
 
 import {
   EmptyIcon,
@@ -121,10 +127,34 @@ const AvatarPure = ({
   onClick,
   isGroup = false,
   roleIcon: roleIconProp,
+  onChangeFile,
+  model,
+  hasAvatar,
+  currentColorScheme,
+  noClick = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
+  const [openEditLogo, setOpenLogoEdit] = React.useState<boolean>(false);
+  const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
+  const iconRef = React.useRef<HTMLLIElement>(null);
+
+  const inputFilesElement = React.useRef(null);
+
   const interfaceDirection = defaultTheme?.interfaceDirection;
+
+  const onInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    target.value = "";
+
+    // if (inputFilesElement.current) {
+    //   inputFilesElement.current.value = null;
+    // }
+  };
+
+  useClickOutside(iconRef, () => {
+    setOpenLogoEdit(false);
+  });
 
   let isDefault = false;
   let isIcon = false;
@@ -163,55 +193,136 @@ const AvatarPure = ({
     if (onClick) onClick(e);
   };
 
-  return (
-    <StyledAvatar
-      size={size}
-      data-testid="avatar"
-      className={className}
-      onMouseDown={onMouseDown}
-      onClick={onClick}
+  const onUploadClick = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    e?.preventDefault();
+
+    if (!onChangeFile) return;
+    const menu = model[0];
+    menu.onClick(inputFilesElement);
+  };
+
+  const onClickAvatar = (e: React.MouseEvent) => {
+    if (!onChangeFile) return;
+
+    e.stopPropagation();
+    e.preventDefault();
+    if (noClick) return;
+
+    if (hasAvatar) {
+      return onToggleOpenEditLogo();
+    }
+
+    onUploadClick();
+  };
+
+  const dropdownElement = (
+    <DropDown
+      open={openEditLogo}
+      clickOutsideAction={() => setOpenLogoEdit(false)}
+      withBackdrop={false}
+      isDefaultMode={false}
     >
-      <AvatarWrapper
-        source={source}
-        userName={userName || ""}
-        className="avatar-wrapper"
-        isGroup={isGroup}
-      >
-        {avatarContent}
-      </AvatarWrapper>
-      {editing && size === "max" ? (
-        <EditContainer>
-          <IconButton
-            className="edit_icon"
-            iconName={PencilReactSvgUrl}
-            onClick={editAction}
-            size={16}
+      {model?.map((option, i) => {
+        const optionOnClickAction = () => {
+          setOpenLogoEdit(false);
+          if (option.key === "upload") {
+            return option.onClick(inputFilesElement);
+          }
+          option.onClick();
+        };
+        return (
+          <DropDownItem
+            key={i}
+            label={option.label}
+            icon={option.icon}
+            onClick={optionOnClickAction}
           />
-        </EditContainer>
-      ) : (
-        !hideRoleIcon && (
-          <>
-            <RoleWrapper
-              size={size}
-              data-tooltip-id={uniqueTooltipId}
-              data-tooltip-content={tooltipContent}
-              className="avatar_role-wrapper"
-            >
-              {roleIcon}
-            </RoleWrapper>
-            {withTooltip && (
-              <Tooltip
-                float
-                id={uniqueTooltipId}
-                getContent={getTooltipContent}
-                place={tooltipPlace}
-                opacity={1}
+        );
+      })}
+    </DropDown>
+  );
+
+  return (
+    <>
+      <StyledAvatar
+        size={size}
+        data-testid="avatar"
+        className={className}
+        onMouseDown={onMouseDown}
+        onClick={onClick || onClickAvatar}
+        ref={iconRef}
+        noClick={noClick}
+      >
+        <AvatarWrapper
+          source={source}
+          userName={userName || ""}
+          className="avatar-wrapper"
+          isGroup={isGroup}
+        >
+          {avatarContent}
+        </AvatarWrapper>
+        {editing && size === "max" ? (
+          <EditContainer
+            hasAvatar={hasAvatar}
+            currentColorScheme={currentColorScheme}
+          >
+            {hasAvatar ? (
+              <>
+                <IconButton
+                  className="edit_icon"
+                  iconName={PencilReactSvgUrl}
+                  onClick={onToggleOpenEditLogo}
+                  size={16}
+                />
+                {dropdownElement}{" "}
+              </>
+            ) : (
+              <IconButton
+                className="edit_icon"
+                iconName={PlusSvgUrl}
+                onClick={onUploadClick}
+                size={16}
               />
             )}
-          </>
-        )
+          </EditContainer>
+        ) : (
+          !hideRoleIcon && (
+            <>
+              <RoleWrapper
+                size={size}
+                data-tooltip-id={uniqueTooltipId}
+                data-tooltip-content={tooltipContent}
+                className="avatar_role-wrapper"
+              >
+                {roleIcon}
+              </RoleWrapper>
+              {withTooltip && (
+                <Tooltip
+                  float
+                  id={uniqueTooltipId}
+                  getContent={getTooltipContent}
+                  place={tooltipPlace}
+                  opacity={1}
+                />
+              )}
+            </>
+          )
+        )}
+      </StyledAvatar>
+      {onChangeFile && (
+        <input
+          id="customAvatarInput"
+          className="custom-file-input"
+          type="file"
+          onChange={onChangeFile}
+          accept="image/png, image/jpeg"
+          onClick={onInputClick}
+          ref={inputFilesElement}
+          style={{ display: "none" }}
+        />
       )}
-    </StyledAvatar>
+    </>
   );
 };
 

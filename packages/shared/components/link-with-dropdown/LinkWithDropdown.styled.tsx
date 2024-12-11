@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 import ExpanderDownReactSvg from "PUBLIC_DIR/images/expander-down.react.svg";
 
-import { Base } from "../../themes";
 import { Text } from "../text";
 import { TextProps } from "../text/Text.types";
 
@@ -35,6 +34,7 @@ import {
   SimpleLinkWithDropdownProps,
   TDropdownType,
 } from "./LinkWithDropdown.types";
+import { injectDefaultTheme } from "../../utils";
 
 const SimpleLinkWithDropdown = ({
   isBold,
@@ -66,7 +66,9 @@ const ExpanderDownIconWrapper = ({
   isDisabled: boolean;
 }) => <ExpanderDownReactSvg {...props} />;
 
-const Caret = styled(ExpanderDownIconWrapper)<{ color?: string }>`
+const Caret = styled(ExpanderDownIconWrapper).attrs(injectDefaultTheme)<{
+  color?: string;
+}>`
   position: absolute;
 
   width: ${(props) => props.theme.linkWithDropdown.caret.width};
@@ -101,9 +103,10 @@ const Caret = styled(ExpanderDownIconWrapper)<{ color?: string }>`
       transform: ${props.theme.linkWithDropdown.caret.transform};
     `}
 `;
-Caret.defaultProps = { theme: Base };
 
-const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
+const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown).attrs(
+  injectDefaultTheme,
+)`
   ${(props) => !props.isDisabled && "cursor: pointer;"}
   text-decoration: none;
   user-select: none;
@@ -156,7 +159,6 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
     }
   }
 `;
-StyledLinkWithDropdown.defaultProps = { theme: Base };
 
 const StyledTextWithExpander = styled.div<{ isOpen?: boolean }>`
   display: flex;
@@ -179,7 +181,9 @@ const SimpleText = ({ c, ...props }: TextProps & { c?: string }) => (
   <Text as="span" {...props} />
 );
 
-const StyledText = styled(SimpleText)<{ isTextOverflow?: boolean }>`
+const StyledText = styled(SimpleText).attrs(injectDefaultTheme)<{
+  isTextOverflow?: boolean;
+}>`
   color: inherit;
   ${(props) =>
     props.isTextOverflow &&
@@ -188,7 +192,6 @@ const StyledText = styled(SimpleText)<{ isTextOverflow?: boolean }>`
       max-width: ${props.theme.linkWithDropdown.text.maxWidth};
     `};
 `;
-StyledText.defaultProps = { theme: Base };
 
 // const focusColor = css`
 //   color: ${(props) => props.theme.linkWithDropdown.color.focus};
@@ -200,7 +203,7 @@ StyledText.defaultProps = { theme: Base };
 //   }
 // `;
 
-const StyledSpan = styled.span<{ $isOpen?: boolean }>`
+const StyledSpan = styled.span.attrs(injectDefaultTheme)<{ $isOpen?: boolean }>`
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
@@ -240,7 +243,6 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
       background: ${props.theme.linkWithDropdown.background.hover};
     `}
 `;
-StyledSpan.defaultProps = { theme: Base };
 
 export {
   StyledSpan,

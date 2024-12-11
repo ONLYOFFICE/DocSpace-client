@@ -31,6 +31,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 // import router from "SRC_DIR/router";
 import i18n from "../i18n";
+import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -193,7 +194,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/rooms/share";
 
     case CategoryType.Accounts:
-      return "/accounts";
+      return PEOPLE_ROUTE_WITH_FILTER;
 
     case CategoryType.Settings:
       return "/settings/personal";
@@ -201,4 +202,11 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     default:
       throw new Error("Unknown category type");
   }
+};
+
+export const removeEmojiCharacters = (value) => {
+  const regexpEmoji = /(\p{Extended_Pictographic}|\p{Emoji_Presentation})/gu;
+  const replaceEmojiCharacters = value.replaceAll(regexpEmoji, "");
+
+  return replaceEmojiCharacters.replace(/\u200D/g, "");
 };

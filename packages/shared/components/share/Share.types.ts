@@ -42,6 +42,14 @@ export type ShareCalendarProps = {
   bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
+export type DefaultCreatePropsType = {
+  access: ShareAccessRights;
+  internal: boolean;
+  diffExpirationDate?: number | null;
+};
+
+export type AccessItem = { access?: ShareAccessRights };
+
 export type TLink = TFileLink | { isLoaded: boolean };
 
 export type LinkRowProps =
@@ -49,7 +57,7 @@ export type LinkRowProps =
       onAddClick: () => Promise<void>;
       links: TLink[] | null;
       changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
@@ -63,12 +71,15 @@ export type LinkRowProps =
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;
+      isFormRoom?: boolean;
+      isCustomRoom?: boolean;
+      removedExpiredLink?: never;
     }
   | {
       onAddClick: () => Promise<void>;
       links: TLink[] | null;
       changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
@@ -78,10 +89,13 @@ export type LinkRowProps =
       isRoomsLink?: boolean;
       isPrimaryLink: boolean;
       isArchiveFolder: boolean;
+      isFormRoom?: boolean;
+      isCustomRoom?: boolean;
       getData: () => ContextMenuModel[];
       onOpenContextMenu: (e: React.MouseEvent) => void;
       onCloseContextMenu: () => void;
       onAccessRightsSelect: (option: TOption) => void;
+      removedExpiredLink: (link: TFileLink) => void;
     };
 
 export type ExpiredComboBoxProps = {
@@ -92,8 +106,9 @@ export type ExpiredComboBoxProps = {
   ) => Promise<void>;
   isDisabled?: boolean;
   isRoomsLink?: boolean;
-  changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
-  accessOptions: TOption[];
+  changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
+  availableExternalRights: TAvailableExternalRights;
+  removedExpiredLink?: (link: TFileLink) => void;
 };
 
 export type ShareProps = {
@@ -119,5 +134,8 @@ export type ShareProps = {
     access: ShareAccessRights,
     primary: boolean,
     internal: boolean,
+    expirationDate?: moment.Moment | null,
   ) => Promise<TFileLink>;
+
+  selfId: string;
 };

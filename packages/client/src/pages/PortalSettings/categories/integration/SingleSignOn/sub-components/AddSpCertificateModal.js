@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -36,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 
 import ModalComboBox from "./ModalComboBox";
-import StyledModalDialog from "../styled-containers/StyledModalDialog";
+import StyledBodyContent from "../styled-containers/StyledModalDialog";
 
 const AddSpCertificateModal = (props) => {
   const { t, ready } = useTranslation(["SingleSignOn", "Common"]);
@@ -58,7 +56,7 @@ const AddSpCertificateModal = (props) => {
   };
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       zIndex={310}
       isLoading={!ready}
       autoMaxHeight
@@ -69,41 +67,50 @@ const AddSpCertificateModal = (props) => {
       <ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <Link className="generate" isHovered onClick={onGenerate} type="action">
-          {t("GenerateCertificate")}
-        </Link>
-        <Text isBold className="text-area-label" noSelect>
-          {t("OpenCertificate")}
-        </Text>
+        <StyledBodyContent>
+          <Link
+            className="generate"
+            isHovered
+            onClick={onGenerate}
+            type="action"
+          >
+            {t("GenerateCertificate")}
+          </Link>
+          <Text isBold className="text-area-label" noSelect>
+            {t("OpenCertificate")}
+          </Text>
 
-        <Textarea
-          id="sp-certificate"
-          className="text-area"
-          name="spCertificate"
-          onChange={setInput}
-          value={spCertificate}
-          isDisabled={isGeneratedCertificate}
-          placeholder={t("PlaceholderCert")}
-        />
+          <Textarea
+            id="sp-certificate"
+            className="text-area"
+            name="spCertificate"
+            onChange={setInput}
+            value={spCertificate}
+            isDisabled={isGeneratedCertificate}
+            placeholder={t("PlaceholderCert")}
+            heightTextArea="72px"
+          />
 
-        <Text isBold className="text-area-label" noSelect>
-          {t("PrivateKey")}
-        </Text>
+          <Text isBold className="text-area-label" noSelect>
+            {t("PrivateKey")}
+          </Text>
 
-        <Textarea
-          id="sp-privateKey"
-          className="text-area"
-          name="spPrivateKey"
-          onChange={setInput}
-          value={spPrivateKey}
-          isDisabled={isGeneratedCertificate}
-          placeholder={t("PlaceholderCert")}
-        />
+          <Textarea
+            id="sp-privateKey"
+            className="text-area"
+            name="spPrivateKey"
+            onChange={setInput}
+            value={spPrivateKey}
+            isDisabled={isGeneratedCertificate}
+            placeholder={t("PlaceholderCert")}
+            heightTextArea="72px"
+          />
 
-        <ModalComboBox
-          className="modal-combo"
-          isDisabled={isGeneratedCertificate}
-        />
+          <ModalComboBox
+            className="modal-combo"
+            isDisabled={isGeneratedCertificate}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -124,7 +131,7 @@ const AddSpCertificateModal = (props) => {
           isDisabled={isGeneratedCertificate || isCertificateLoading}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

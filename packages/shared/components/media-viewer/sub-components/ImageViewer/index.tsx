@@ -26,7 +26,6 @@
 
 import { useGesture } from "@use-gesture/react";
 import { useSpring, config } from "@react-spring/web";
-import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import React, {
   SyntheticEvent,
   useCallback,
@@ -89,11 +88,13 @@ export const ImageViewer = ({
   thumbnailSrc,
   // imageId,
   // version,
-  isTiff,
+  isDecodedImage,
   contextModel,
   errorTitle,
   devices,
   isPublicFile,
+  backgroundBlack,
+  setBackgroundBlack,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -114,7 +115,6 @@ export const ImageViewer = ({
   const [showOriginSrc, setShowOriginSrc] = useState(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [style, api] = useSpring(() => ({
     width: 0,
@@ -200,6 +200,10 @@ export const ImageViewer = ({
 
   const imageLoaded = useCallback(
     (event: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (!(window.ClientConfig?.imageThumbnails && thumbnailSrc)) {
+        setShowOriginSrc(true);
+      }
+
       const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
       const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
 
@@ -221,12 +225,13 @@ export const ImageViewer = ({
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setIsLoading(false);
+      setIsError(false);
 
-      if (isTiff && src) {
+      if (isDecodedImage && src) {
         URL.revokeObjectURL(src);
       }
     },
-    [api, isTiff, src],
+    [api, isDecodedImage, src, thumbnailSrc],
   );
 
   const restartScaleAndSize = useCallback(() => {
@@ -696,15 +701,10 @@ export const ImageViewer = ({
       },
 
       onClick: ({ pinching, event }) => {
-        if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
+        if (isDesktop && event.target === imgWrapperRef.current)
           return onMask?.();
 
-        if (
-          !imgRef.current ||
-          !containerRef.current ||
-          pinching ||
-          isDesktopDeviceDetect
-        )
+        if (!imgRef.current || !containerRef.current || pinching || isDesktop)
           return;
 
         const time = new Date().getTime();
@@ -859,7 +859,7 @@ export const ImageViewer = ({
     if (
       window.ClientConfig?.imageThumbnails &&
       thumbnailSrc &&
-      (src || isTiff)
+      (src || isDecodedImage)
     ) {
       // if thumbnailSrc is unavailable, try to load original image
       setShowOriginSrc(true);
@@ -867,7 +867,7 @@ export const ImageViewer = ({
     }
 
     setIsError(true);
-  }, [src, thumbnailSrc, isTiff]);
+  }, [src, thumbnailSrc, isDecodedImage]);
 
   const model = React.useMemo(() => contextModel(true), [contextModel]);
 
@@ -895,7 +895,7 @@ export const ImageViewer = ({
   }, [onKeyDown]);
 
   useLayoutEffect(() => {
-    if (unmountRef.current || (isTiff && src)) return;
+    if (unmountRef.current || (isDecodedImage && src)) return;
 
     if (!isLoaded.current) {
       timeoutRef.current = setTimeout(() => {
@@ -910,7 +910,7 @@ export const ImageViewer = ({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [src, isTiff]);
+  }, [src, isDecodedImage]);
 
   // useEffect(() => {
   //   if (!window.ClientConfig?.imageThumbnails) return;

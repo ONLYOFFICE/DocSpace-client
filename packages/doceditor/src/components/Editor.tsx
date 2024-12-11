@@ -76,6 +76,8 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  sdkConfig,
+
   filesSettings,
 
   onDownloadAs,
@@ -122,6 +124,7 @@ const Editor = ({
     isSkipError,
     openOnNewPage,
     t,
+    sdkConfig,
   });
 
   useInit({
@@ -152,7 +155,7 @@ const Editor = ({
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const editorGoBack = sdkConfig?.editorGoBack;
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -174,7 +177,7 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.ClientConfig?.editor?.requestClose ?? false
+            ? (window.ClientConfig?.editor?.requestClose ?? false)
             : false,
         text: openFileLocationText,
         blank: openOnNewPage,
@@ -188,11 +191,9 @@ const Editor = ({
     }
   }
 
-  const customization = new URLSearchParams(search).get("customization");
-
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
-  >["customization"] = JSON.parse(customization || "{}");
+  >["customization"] = sdkConfig?.editorCustomization;
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 
@@ -231,7 +232,7 @@ const Editor = ({
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
     onRequestEditRights: () =>
-      onSDKRequestEditRights(fileInfo, newConfig.documentType),
+      onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,

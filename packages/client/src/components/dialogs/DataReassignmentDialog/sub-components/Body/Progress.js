@@ -31,18 +31,16 @@ import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
-import { commonIconsStyles } from "@docspace/shared/utils";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import { withTranslation, Trans } from "react-i18next";
 
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${globalColors.lightStatusPositive} !important;
   }
 `;
-
-StyledCheckIcon.defaultProps = { theme: Base };
 
 const StyledProgress = styled.div`
   display: flex;
@@ -133,6 +131,7 @@ const Progress = ({
   isReassignCurrentUser,
   percent,
   isAbortTransfer,
+  noRooms,
   t,
 }) => {
   const inProgressNode = (
@@ -197,20 +196,23 @@ const Progress = ({
       <div className="data-start"> {reassigningDataStart}</div>
       <div className="progress-container">
         <div className="progress-section">
-          <Text className="progress-section-text" noSelect>
-            {t("Common:Rooms")}
-          </Text>
+          {!noRooms && (
+            <Text className="progress-section-text" noSelect>
+              {t("Common:Rooms")}
+            </Text>
+          )}
           <Text className="progress-section-text" noSelect>
             {t("Common:Documents")}
           </Text>
         </div>
 
         <div className="progress-status">
-          {percent < percentRoomReassignment
-            ? isAbortTransfer && percent !== percentAllReassignment
-              ? interruptedNode
-              : inProgressNode
-            : allDataTransferredNode}
+          {!noRooms &&
+            (percent < percentRoomReassignment
+              ? isAbortTransfer && percent !== percentAllReassignment
+                ? interruptedNode
+                : inProgressNode
+              : allDataTransferredNode)}
 
           {isAbortTransfer && percent !== percentAllReassignment
             ? interruptedNode

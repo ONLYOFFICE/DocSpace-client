@@ -57,13 +57,14 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setCopyPanelVisible,
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
-    handleFilesUpload,
+    conflictDialogUploadHandler,
     setShareCollectSelector,
     openFileAction,
     isFileDialog,
     isFolderDialog,
     files,
     folders,
+    cancelUploadAction,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -175,6 +176,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 
     if (conflictResolveType === ConflictResolveType.Skip) {
       setSelected("none");
+      cancelUploadAction();
       onClosePanels();
       return;
     }
@@ -197,7 +199,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 
     if (data.files.length === 0) return;
     try {
-      handleFilesUpload(
+      conflictDialogUploadHandler(
         data,
         t,
         conflictResolveType === ConflictResolveType.Duplicate,
@@ -217,7 +219,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         ns="Common"
         i18nKey="FileActionRequired"
         values={{ fileName: items[0].title }}
-        components={{ 1: <span className="bold" /> }}
+        components={{ 1: <span className="bold truncate" /> }}
       />
     );
 
@@ -280,6 +282,13 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         : t("Common:FilesAndFolderWillNotBeCopied");
   };
 
+  const onCloseConflictDialog = () => {
+    if (isUploadConflict) {
+      cancelUploadAction();
+      onCloseDialog();
+    } else onCloseDialog();
+  };
+
   const messageText = getMessageText();
   const overwriteTitle = getOverwriteTitle();
   const overwriteDescription = getOverwriteDescription();
@@ -293,9 +302,9 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       headerLabel={t("Common:ActionRequired")}
       isLoading={!ready}
       onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
-      onClose={onCloseDialog}
-      cancelButtonLabel={t("Common:CancelButton")}
-      submitButtonLabel={t("Common:OKButton")}
+      onClose={onCloseConflictDialog}
+      cancelButtonLabel={t("CancelButton")}
+      submitButtonLabel={t("OKButton")}
       messageText={messageText}
       selectActionText={t("Common:ConflictResolveSelectAction")}
       overwriteTitle={overwriteTitle}
@@ -325,7 +334,11 @@ export default inject<TStore>(
 
     const { openFileAction } = filesActionsStore;
 
-    const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
+    const {
+      itemOperationToFolder,
+      conflictDialogUploadHandler,
+      cancelUploadAction,
+    } = uploadDataStore;
     const {
       activeFiles,
       activeFolders,
@@ -365,13 +378,14 @@ export default inject<TStore>(
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
-      handleFilesUpload,
+      conflictDialogUploadHandler,
       setShareCollectSelector,
       openFileAction,
       files,
       folders,
       isFileDialog: !folders.length,
       isFolderDialog: !files.length,
+      cancelUploadAction,
     };
   },
 )(observer(ConflictResolveDialog));

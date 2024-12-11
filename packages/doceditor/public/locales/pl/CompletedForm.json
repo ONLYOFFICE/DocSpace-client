@@ -2,11 +2,11 @@
   "BackToRoom": "Wróć do pokoju",
   "CheckReadyForms": "Sprawdź gotowe formularze",
   "Description": "Twój formularz został wypełniony i zapisany",
-  "DescriptionForAnonymous": "Przesłano wypełniony formularz PDF, któremu przypisano unikatowy numer. Aby sprawdzić status, skontaktuj się z właścicielem formularza, podając przypisany numer.",
-  "DescriptionForRegisteredUser": "Wypełniony formularz PDF zostanie zapisany i będzie dostępny w katalogu Gotowe. Aby sprawdzić status, skontaktuj się z właścicielem formularza, podając przypisany numer.",
+  "DescriptionForAnonymous": "Przesłano wypełniony formularz PDF, któremu przypisano unikatowy numer. Aby sprawdzić status, skontaktuj się z właścicielem formularza.",
+  "DescriptionForRegisteredUser": "Wypełniony formularz PDF zostanie będzie dostępny w katalogu Gotowe.",
   "FillItOutAgain": "Wypełnij ponownie",
   "FormCompletedSuccessfully": "Formularz został pomyślnie wypełniony",
-  "FormNumber": "Numer formularza:",
+  "FormNumber": "Numer formularza",
   "FormOwner": "Właściciel formularza",
   "Title": "Formularz został wypełniony"
 }

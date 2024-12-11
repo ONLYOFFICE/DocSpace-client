@@ -118,7 +118,6 @@ module.exports = {
     "react/no-danger": "off",
     "no-restricted-syntax": "off",
     "react/prefer-stateless-function": "off",
-    "react/no-this-in-sfc": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

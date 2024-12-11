@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import React from "react";
 
 import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
@@ -110,7 +110,7 @@ class SectionBodyContent extends React.Component {
     return this.state.rowSizes[i] ? this.state.rowSizes[i] : 66;
   };
 
-  renderRow = memo(({ index, style }) => {
+  renderRow = ({ index, style }) => {
     const { versions, culture, onClose } = this.props;
 
     const prevVersion = versions[index > 0 ? index - 1 : index].versionGroup;
@@ -135,29 +135,27 @@ class SectionBodyContent extends React.Component {
         />
       </div>
     );
-  }, areEqual);
+  };
 
   render() {
     const { versions, isLoading } = this.props;
 
-    const renderList = ({ height, width }) => {
-      return (
-        <StyledVersionList isRestoreProcess={this.state.isRestoreProcess}>
-          <List
-            ref={this.listRef}
-            className="List"
-            height={height}
-            width={width}
-            itemSize={this.getSize}
-            itemCount={versions.length}
-            itemData={versions}
-            outerElementType={VirtualScroll}
-          >
-            {this.renderRow}
-          </List>
-        </StyledVersionList>
-      );
-    };
+    const renderList = ({ height, width }) => (
+      <StyledVersionList isRestoreProcess={this.state.isRestoreProcess}>
+        <List
+          ref={this.listRef}
+          className="List"
+          height={height}
+          width={width}
+          itemSize={this.getSize}
+          itemCount={versions.length}
+          itemData={versions}
+          outerElementType={VirtualScroll}
+        >
+          {this.renderRow}
+        </List>
+      </StyledVersionList>
+    );
 
     return (
       <StyledBody>

@@ -24,17 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { FixedSizeList as List, areEqual } from "react-window";
 // import AutoSizer from "react-virtualized-auto-sizer";
 import { withTranslation } from "react-i18next";
 import { resendUserInvites } from "@docspace/shared/api/people";
@@ -45,19 +42,9 @@ class SendInviteDialogComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    const { userIds, selectedUsers } = props;
-
-    const listUsers = selectedUsers.map((item, index) => {
-      const disabled = userIds.find((x) => x === item.id);
-      return (selectedUsers[index] = {
-        ...selectedUsers[index],
-        checked: !!disabled,
-        disabled: !disabled,
-      });
-    });
+    const { userIds } = props;
 
     this.state = {
-      listUsers,
       isRequestRunning: false,
       userIds,
     };
@@ -82,59 +69,9 @@ class SendInviteDialogComponent extends React.Component {
     });
   };
 
-  onChange = (e) => {
-    const userIndex = this.state.listUsers.findIndex(
-      (x) => x.id === e.target.value,
-    );
-    const newUsersList = this.state.listUsers;
-    newUsersList[userIndex].checked = !newUsersList[userIndex].checked;
-
-    const newUserIds = [];
-
-    for (const item of newUsersList) {
-      if (item.checked === true) {
-        newUserIds.push(item.id);
-      }
-    }
-
-    this.setState({ listUsers: newUsersList, userIds: newUserIds });
-  };
-
   render() {
     const { t, tReady, onClose, visible } = this.props;
-    const { listUsers, isRequestRunning, userIds } = this.state;
-    const itemSize = 25;
-    const containerStyles = { height: listUsers.length * 25, maxHeight: 220 };
-
-    const renderItems = memo(({ data, index, style }) => {
-      return (
-        <Checkbox
-          truncate
-          style={style}
-          className="modal-dialog-checkbox"
-          value={data[index].id}
-          onChange={this.onChange}
-          key={`checkbox_${index}`}
-          isChecked={data[index].checked}
-          label={data[index].displayName}
-          isDisabled={data[index].disabled}
-        />
-      );
-    }, areEqual);
-
-    const renderList = ({ height, width }) => (
-      <List
-        className="List"
-        height={height}
-        width={width}
-        itemSize={itemSize}
-        itemCount={listUsers.length}
-        itemData={listUsers}
-        outerElementType={CustomScrollbarsVirtualList}
-      >
-        {renderItems}
-      </List>
-    );
+    const { isRequestRunning, userIds } = this.state;
 
     // console.log("SendInviteDialog render");
     return (

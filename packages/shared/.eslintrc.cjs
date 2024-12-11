@@ -136,7 +136,6 @@ module.exports = {
     "vars-on-top": "off",
     "@typescript-eslint/default-param-last": "off",
     "no-else-return": "off",
-    "jsx-a11y/iframe-has-title": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

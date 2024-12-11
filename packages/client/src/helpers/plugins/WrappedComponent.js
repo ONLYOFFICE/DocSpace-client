@@ -338,6 +338,7 @@ const ComponentPure = ({
       case PluginComponents.iFrame: {
         return (
           <iframe
+            title="Plugin iframe"
             {...elementProps}
             style={{ minHeight: "100%", border: "none", ...elementProps.style }}
           />

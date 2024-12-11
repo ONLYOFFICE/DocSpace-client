@@ -145,7 +145,6 @@ module.exports = {
     "jsx-a11y/img-redundant-alt": "off",
     "react/no-direct-mutation-state": "off",
     "import/no-duplicates": "off",
-    "import/order": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

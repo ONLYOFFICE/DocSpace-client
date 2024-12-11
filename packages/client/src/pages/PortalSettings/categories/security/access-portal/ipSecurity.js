@@ -37,10 +37,10 @@ import { size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { DeviceType } from "@docspace/shared/enums";
-import { LearnMoreWrapper } from "../StyledSecurity";
-import UserFields from "../sub-components/user-fields";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { LearnMoreWrapper } from "../StyledSecurity";
+import UserFields from "../sub-components/user-fields";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
 

@@ -38,11 +38,11 @@ import { isMobileDevice } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
-import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";

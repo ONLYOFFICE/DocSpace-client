@@ -38,9 +38,9 @@ import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { DeviceType } from "@docspace/shared/enums";
-import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import UserFields from "../sub-components/user-fields";
 import { LearnMoreWrapper } from "../StyledSecurity";
 

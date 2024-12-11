@@ -43,6 +43,8 @@ import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import {
   StyledComponent,
@@ -51,8 +53,6 @@ import {
 } from "./Appearance/StyledApperance.js";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
-import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import Preview from "./Appearance/preview";
 
 const Appearance = (props) => {

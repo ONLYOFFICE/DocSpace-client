@@ -38,9 +38,9 @@ import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { DeviceType } from "@docspace/shared/enums";
-import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`

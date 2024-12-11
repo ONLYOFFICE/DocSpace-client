@@ -150,7 +150,6 @@ module.exports = {
     radix: "off",
     "react/no-unused-state": "off",
     "no-useless-concat": "off",
-    "no-empty": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

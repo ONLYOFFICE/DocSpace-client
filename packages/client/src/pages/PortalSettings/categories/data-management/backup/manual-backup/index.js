@@ -188,7 +188,7 @@ class ManualBackup extends React.Component {
   onClickDownloadBackup = () => {
     const { temporaryLink } = this.props;
     const url = window.location.origin;
-    const downloadUrl = `${url}` + `${temporaryLink}`;
+    const downloadUrl = `${url}${temporaryLink}`;
     window.open(downloadUrl, "_self");
   };
 

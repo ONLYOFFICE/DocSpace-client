@@ -801,7 +801,7 @@ class BackupStore {
       const url = "/backupFileUpload.ashx";
 
       const getExst = (fileName) => {
-        if (fileName.endsWith("." + "tar.gz")) {
+        if (fileName.endsWith(".tar.gz")) {
           return "tar.gz";
         }
         return fileName.substring(fileName.lastIndexOf(".") + 1);

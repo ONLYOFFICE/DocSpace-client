@@ -42,7 +42,6 @@ import MobileView from "./Branding/MobileView";
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
-
 const StyledComponent = styled.div`
   max-width: 700px;
   width: 100%;

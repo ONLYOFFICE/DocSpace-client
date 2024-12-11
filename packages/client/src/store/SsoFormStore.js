@@ -593,7 +593,7 @@ class SsoFormStore {
       return obj.location;
 
     if (Array.isArray(obj)) {
-      obj.forEach(function (item) {
+      obj.forEach((item) => {
         if (item.hasOwnProperty(propName)) {
           value = item[propName];
           return;

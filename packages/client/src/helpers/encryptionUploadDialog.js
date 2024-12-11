@@ -34,7 +34,7 @@ export function encryptionUploadDialog(extsWebEncrypt, callback) {
     filter,
   };
 
-  window.AscDesktopEditor.cloudCryptoCommand("upload", data, function (obj) {
+  window.AscDesktopEditor.cloudCryptoCommand("upload", data, (obj) => {
     const bytes = obj.bytes;
     const filename = obj.name;
     const file = new File([bytes], filename);

@@ -313,7 +313,7 @@ class AutomaticBackup extends React.PureComponent {
 
     if (!this.canSave()) return;
     // return;
-    this.setState({ isLoadingData: true }, function () {
+    this.setState({ isLoadingData: true }, () => {
       let day;
       let period;
 

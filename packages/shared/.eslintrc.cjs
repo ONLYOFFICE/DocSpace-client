@@ -63,6 +63,8 @@ module.exports = {
       { exceptAfterSingleLine: true },
     ],
     "no-console": "off",
+    "no-continue": "off",
+
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     "@typescript-eslint/no-unused-expressions": "off",
@@ -126,8 +128,6 @@ module.exports = {
     "@typescript-eslint/no-dupe-class-members": "off",
     "no-dupe-class-members": "off",
     "no-fallthrough": "off",
-    "func-names": "off",
-    "no-continue": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

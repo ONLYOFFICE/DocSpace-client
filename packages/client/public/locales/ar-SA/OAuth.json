@@ -54,7 +54,7 @@
   "NoAuthorizedApps": "لا توجد تطبيقات مصرح بها",
   "NoOAuthAppHeader": "لا توجد تطبيقات OAuth",
   "OAuth": "OAuth 2.0",
-  "OAuthAppDescription": "تُستخدم تطبيقات OAuth للوصول إلى API لـ {{organizationName}} {{productName}} للمصادقة وإجراءات إضافية مثل الوصول إلى الملفات، إلخ.",
+  "OAuthAppDescription": "استخدم OAuth 2.0 للوصول إلى {{organizationName}} {{productName}} API للحصول على إذن وإجراءات أخرى مثل الوصول إلى الملفات ، إلخ. هنا ، يمكنك تسجيل تطبيق جديد وإدارة التطبيقات التي تم إنشاؤها في القائمة وتعطيلها وتمكينها.",
   "OAuthHeaderBlock": "روابط OAuth",
   "PrivacyPolicy": "سياسة الخصوصية",
   "PrivacyPolicyURL": "رابط سياسة الخصوصية",

@@ -24,50 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { TTranslation } from "../../../types";
+import { DeviceType } from "../../../enums";
 
-const StyledSettings = styled.div`
-  margin-top: ${(props) =>
-    props.hideAdminSettings ? 22 : props.showTitle ? 24 : 34}px;
-
-  ${(props) =>
-    props.hideAdminSettings &&
-    css`
-      padding-top: 2px;
-    `}
-
-  @media ${tablet} {
-    margin-top: ${(props) => (props.hideAdminSettings ? 0 : 8)}px;
-    ${(props) =>
-      props.hideAdminSettings &&
-      css`
-        padding-top: 8px;
-      `}
-  }
-
-  width: 100%;
-
-  display: grid;
-  grid-gap: 32px;
-
-  .toggle-btn {
-    position: relative;
-  }
-
-  .heading {
-    margin-bottom: -2px;
-    margin-top: 0;
-  }
-
-  .toggle-button-text {
-    margin-top: -1px;
-  }
-
-  .settings-section {
-    display: grid;
-    grid-gap: 18px;
-  }
-`;
-
-export default StyledSettings;
+export interface IAdditionalResources {
+  t: TTranslation;
+  isSettingPaid: boolean;
+  feedbackAndSupportEnabled: boolean;
+  helpCenterEnabled: boolean;
+  onSave: (feedbackEnabled: boolean, helpEnabled: boolean) => void;
+  onRestore: () => void;
+  isLoading: boolean;
+  additionalResourcesIsDefault: boolean;
+  deviceType: DeviceType;
+}

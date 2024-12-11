@@ -23,53 +23,23 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import type { TOption } from "@docspace/shared/components/combobox";
+import type { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
-import React from "react";
-
-import StyledText from "./Link.styled";
-import { LinkProps } from "./Link.types";
-import { LinkType, LinkTarget } from "./Link.enums";
-
-export { LinkType, LinkTarget };
-
-const Link = ({
-  isTextOverflow,
-  children,
-  className = "",
-  fontSize = "13px",
-  href = undefined,
-  isBold = false,
-  isHovered = false,
-  isSemitransparent = false,
-  noHover = false,
-  rel = "noopener noreferrer",
-  tabIndex = -1,
-  type = LinkType.page,
-  enableUserSelect = false,
-  ...rest
-}: LinkProps) => {
-  return (
-    <StyledText
-      className={className}
-      fontSize={fontSize}
-      href={href}
-      isBold={isBold}
-      isHovered={isHovered}
-      isSemitransparent={isSemitransparent}
-      rel={rel}
-      tabIndex={tabIndex}
-      type={type}
-      tag="a"
-      isTextOverflow={isTextOverflow}
-      noHover={noHover}
-      truncate={isTextOverflow ?? false}
-      enableUserSelect={enableUserSelect}
-      data-testid="link"
-      {...rest}
-    >
-      {children}
-    </StyledText>
-  );
+export type AccessOption = {
+  access: ShareAccessRights;
+  description: string;
+  key: string;
+  label: string;
+  icon: string;
 };
 
-export { Link };
+export interface RoleLinkBlockProps {
+  t: TTranslation;
+  accessOptions: AccessOption[];
+  selectedOption: AccessOption;
+  currentDeviceType: DeviceType;
+
+  onSelect?: (option: TOption) => void;
+}

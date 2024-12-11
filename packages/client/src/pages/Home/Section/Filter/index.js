@@ -876,7 +876,7 @@ const SectionFilterContent = ({
 
     let tags = null;
     let providers = [];
-    if (!isPublicRoom) {
+    if (!isPublicRoom && isRooms) {
       const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
       tags = res[0];
       providers = res[1];

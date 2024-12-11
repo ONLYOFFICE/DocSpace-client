@@ -24,46 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-
 import React from "react";
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
+
+import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 import { Text } from "@docspace/shared/components/text";
+import { isMobile } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import type { TOption } from "@docspace/shared/components/combobox";
 
-const StyledWrapper = styled.div`
-  background: ${(props) =>
-    props.theme.client.settings.common.whiteLabel.notAvailableBackground};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 16px;
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-  .lock-icon {
-    width: 16px;
-    height: 16px;
-    div > svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.common.whiteLabel.textColor};
-      }
-    }
-  }
-`;
+import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
+import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";
 
-const NotAvailable = () => {
-  const { t } = useTranslation("Settings");
+const RoleLinkBlock = ({
+  t,
+  onSelect,
+  selectedOption,
+  accessOptions = [],
+  currentDeviceType,
+}: RoleLinkBlockProps) => {
+  const isMobileView = isMobile() || currentDeviceType === DeviceType.mobile;
+
+  const directionX = isMobileView ? undefined : "right";
+
+  const handleSelect = (option: TOption) => {
+    onSelect?.(option);
+  };
+
   return (
-    <StyledWrapper>
-      <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
+    <RoleLinkBlockWrapper>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("SharingPanel:RoleForLink")}
       </Text>
-    </StyledWrapper>
+      <AccessRightSelect
+        // innerContainer
+        // scaledOptions
+        // manualY="16px"
+        fillIcon
+        onSelect={handleSelect}
+        manualWidth="auto"
+        fixedDirection
+        type="descriptive"
+        directionY="both"
+        directionX={directionX}
+        isDefaultMode={isMobileView}
+        isMobileView={isMobileView}
+        withBlur={isMobileView}
+        isAside={isMobileView}
+        withoutBackground={isMobileView}
+        withBackground={!isMobileView}
+        selectedOption={selectedOption}
+        accessOptions={accessOptions}
+        comboIcon={ArrowIcon}
+      />
+    </RoleLinkBlockWrapper>
   );
 };
 
-export default NotAvailable;
+export default RoleLinkBlock;

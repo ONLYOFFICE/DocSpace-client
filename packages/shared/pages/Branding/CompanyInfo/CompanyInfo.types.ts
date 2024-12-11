@@ -24,39 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
+import { TTranslation } from "../../../types";
+import { DeviceType } from "../../../enums";
 
-const ClearDiv = ({
-  orientation,
-  width,
-  ...props
-}: {
-  orientation?: "horizontal" | "vertical";
-  width?: string;
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-}) => <div {...props} />;
+export interface ICompanyInfo {
+  t: TTranslation;
+  isSettingPaid: boolean;
+  onShowExample: () => void;
+  companySettings: ICompanySettings;
+  onSave: (
+    address: string,
+    companyName: string,
+    email: string,
+    phone: string,
+    site: string,
+  ) => void;
+  onRestore: () => void;
+  isLoading: boolean;
+  companyInfoSettingsIsDefault: boolean;
+  deviceType: DeviceType;
+}
 
-const StyledDiv = styled(ClearDiv)`
-  .subtext {
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
+export interface ICompanySettings {
+  address: string;
+  companyName: string;
+  email: string;
+  phone: string;
+  site: string;
+  isDefault: boolean;
+  isLicensor: boolean;
+}
 
-  ${(props) =>
-    (props.orientation === "horizontal" &&
-      css`
-        display: flex;
-      `) ||
-    (props.orientation === "vertical" &&
-      css`
-        display: inline-block;
-      `)};
-
-  width: ${(props) => props.width};
-`;
-
-export default StyledDiv;
+export interface ICompanySettingsError {
+  hasErrorAddress: boolean;
+  hasErrorCompanyName: boolean;
+  hasErrorEmail: boolean;
+  hasErrorPhone: boolean;
+  hasErrorSite: boolean;
+}

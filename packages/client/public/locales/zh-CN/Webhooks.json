@@ -35,7 +35,6 @@
   "SecretKey": "密钥",
   "SecretKeyHint": "您可以通过设置 webhook 密码，验证发送到负载 URL 的请求。",
   "SecretKeyWarning": "密钥一经保存无法再次取回。如果您丢失或忘记密钥，可以重置，但需要更新使用此密钥的所有集成。",
-  "SelectDate": "选择日期",
   "SelectDeliveryTime": "选择传递时间",
   "SettingsWebhook": "Webhook 设置",
   "SSLHint": "默认情况下，我们会在传递负载时验证 SSL 证书。",

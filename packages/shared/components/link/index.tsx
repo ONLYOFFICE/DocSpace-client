@@ -24,8 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import classNames from "classnames";
+import { Text } from "../text";
+import { LinkProps } from "./Link.types";
 import { LinkType, LinkTarget } from "./Link.enums";
+import styles from "./Link.module.scss";
 
-export { LinkType, LinkTarget };
+const Link: React.FC<LinkProps> = ({
+  className,
+  children,
+  color,
+  fontSize,
+  href,
+  isBold = false,
+  isHovered = false,
+  isSemitransparent = false,
+  lineHeight,
+  rel,
+  tabIndex,
+  type,
+  isTextOverflow = false,
+  noHover = false,
+  enableUserSelect = false,
+  ariaLabel,
+  dataTestId,
+  ...rest
+}: LinkProps) => {
+  const linkClasses = classNames(
+    styles.link,
+    {
+      [styles.semitransparent]: isSemitransparent,
+      [styles.isHovered]: isHovered,
+      [styles.textOverflow]: isTextOverflow,
+      [styles.noHover]: noHover,
+      [styles.enableUserSelect]: enableUserSelect,
+      [styles.page]: type === LinkType.page,
+    },
+    className,
+  );
 
-export { Link } from "./Link";
+  return (
+    <Text
+      className={linkClasses}
+      fontSize={fontSize}
+      as="a"
+      href={href}
+      rel={rel}
+      tabIndex={tabIndex}
+      isBold={isBold}
+      style={{
+        color,
+        lineHeight,
+      }}
+      aria-label={ariaLabel || children}
+      data-testid={dataTestId || "link"}
+      {...rest}
+    >
+      {children}
+    </Text>
+  );
+};
+
+export { LinkType, LinkTarget, Link };

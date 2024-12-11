@@ -140,3 +140,51 @@ export const AllTemplate: Story = {
     );
   },
 };
+
+export const Hovered: Story = {
+  render: () => (
+    <Link type={LinkType.page} href="https://github.com" isHovered>
+      Hovered link
+    </Link>
+  ),
+};
+
+export const Semitransparent: Story = {
+  render: () => (
+    <Link type={LinkType.page} href="https://github.com" isSemitransparent>
+      Semitransparent link
+    </Link>
+  ),
+};
+
+export const TextOverflow: Story = {
+  render: () => (
+    <Link type={LinkType.page} href="https://github.com" isTextOverflow>
+      This is a very long link that should demonstrate text overflow
+    </Link>
+  ),
+};
+
+export const NoHover: Story = {
+  render: () => (
+    <Link type={LinkType.page} href="https://github.com" noHover>
+      No hover effect link
+    </Link>
+  ),
+};
+
+export const EnableUserSelect: Story = {
+  render: () => (
+    <Link type={LinkType.page} href="https://github.com" enableUserSelect>
+      User-select enabled link
+    </Link>
+  ),
+};
+
+export const ActionLink: Story = {
+  render: () => (
+    <Link type={LinkType.action} onClick={() => alert("Action link clicked!")}>
+      Action link
+    </Link>
+  ),
+};

@@ -98,7 +98,7 @@ class AccessRightsStore {
   };
 
   canMakeEmployeeUser = (user) => {
-    const { id, isOwner } = this.userStore.user;
+    const { id, isOwner, isAdmin, isRoomAdmin } = this.userStore.user;
 
     const {
       status,
@@ -106,20 +106,22 @@ class AccessRightsStore {
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
       isVisitor: userIsVisitor,
-      isCollaborator: userIsCollaborator,
+      // isCollaborator: userIsCollaborator,
+      isRoomAdmin: userIsRoomAdmin,
     } = user;
 
     const needMakeEmployee =
       status !== EmployeeStatus.Disabled && userId !== id;
 
-    if (isOwner) return needMakeEmployee;
+    if (!needMakeEmployee) return false;
 
-    return (
-      needMakeEmployee &&
-      !userIsAdmin &&
-      !userIsOwner &&
-      (userIsVisitor || userIsCollaborator)
-    );
+    if (isOwner) return true;
+
+    if (isAdmin) return !userIsAdmin && !userIsOwner && !userIsRoomAdmin;
+
+    if (isRoomAdmin && userIsVisitor) return true;
+
+    return false;
   };
   canMakeUserType = (user) => {
     const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =

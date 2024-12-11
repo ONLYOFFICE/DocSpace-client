@@ -24,6 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const saveToSessionStorage = (key, value) => {
-  sessionStorage.setItem(key, JSON.stringify(value));
-};
+.radioButtonGroup {
+  --radio-button-group-width: unset;
+
+  width: var(--radio-button-group-width);
+
+  &.horizontal {
+    display: flex;
+  }
+
+  &.vertical {
+    display: inline-block;
+  }
+}
+
+.subtext {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}

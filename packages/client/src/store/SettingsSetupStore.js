@@ -26,7 +26,6 @@
 
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
-const { Filter } = api;
 import SelectionStore from "./SelectionStore";
 //import CommonStore from "./CommonStore";
 
@@ -40,6 +39,8 @@ import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+
+const { Filter } = api;
 
 class SettingsSetupStore {
   selectionStore = null;

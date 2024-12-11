@@ -28,6 +28,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import {
+  setAdditionalResources,
+  restoreAdditionalResources,
+} from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
@@ -42,10 +46,9 @@ const AdditionalResourcesComponent = (props) => {
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
-    saveAdditionalResources,
-    resetAdditionalResources,
     isLoadedAdditionalResources,
     deviceType,
+    getAdditionalResources,
   } = props;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -61,11 +64,11 @@ const AdditionalResourcesComponent = (props) => {
     async (feedbackEnabled, helpEnabled) => {
       setIsLoading(true);
       try {
-        await saveAdditionalResources(
-          additionalResourcesData,
-          feedbackEnabled,
-          helpEnabled,
-        );
+        const settings = JSON.parse(JSON.stringify(additionalResources));
+        settings.feedbackAndSupportEnabled = feedbackEnabled;
+        settings.helpCenterEnabled = helpEnabled;
+        await setAdditionalResources(settings);
+        await getAdditionalResources();
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
@@ -79,7 +82,8 @@ const AdditionalResourcesComponent = (props) => {
   const onRestore = useCallback(async () => {
     setIsLoading(true);
     try {
-      await resetAdditionalResources();
+      await restoreAdditionalResources();
+      await getAdditionalResources();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -106,18 +110,15 @@ const AdditionalResourcesComponent = (props) => {
 
 export const AdditionalResources = inject(
   ({ brandingStore, settingsStore, currentQuotaStore }) => {
-    const {
-      setIsLoadedAdditionalResources,
-      isLoadedAdditionalResources,
-      saveAdditionalResources,
-      resetAdditionalResources,
-    } = brandingStore;
+    const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
+      brandingStore;
 
     const {
       additionalResourcesData,
       additionalResourcesIsDefault,
       checkEnablePortalSettings,
       deviceType,
+      getAdditionalResources,
     } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
@@ -129,9 +130,8 @@ export const AdditionalResources = inject(
       setIsLoadedAdditionalResources,
       isLoadedAdditionalResources,
       isSettingPaid,
-      saveAdditionalResources,
-      resetAdditionalResources,
       deviceType,
+      getAdditionalResources,
     };
   },
 )(

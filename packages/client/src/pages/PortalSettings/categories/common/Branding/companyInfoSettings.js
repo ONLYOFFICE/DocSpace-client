@@ -28,6 +28,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import {
+  setCompanyInfoSettings,
+  restoreCompanyInfoSettings,
+} from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
@@ -44,10 +48,9 @@ const CompanyInfoSettingsComponent = (props) => {
     tReady,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
-    saveCompanyInfo,
-    resetCompanyInfo,
     buildVersionInfo,
     deviceType,
+    getCompanyInfoSettings,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +67,8 @@ const CompanyInfoSettingsComponent = (props) => {
       setIsLoading(true);
 
       try {
-        await saveCompanyInfo(address, companyName, email, phone, site);
+        await setCompanyInfoSettings(address, companyName, email, phone, site);
+        await getCompanyInfoSettings();
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
@@ -79,7 +83,8 @@ const CompanyInfoSettingsComponent = (props) => {
     setIsLoading(true);
 
     try {
-      await resetCompanyInfo();
+      await restoreCompanyInfoSettings();
+      await getCompanyInfoSettings();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -128,8 +133,6 @@ export const CompanyInfoSettings = inject(
     const {
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
-      saveCompanyInfo,
-      resetCompanyInfo,
     } = brandingStore;
 
     const {
@@ -138,6 +141,7 @@ export const CompanyInfoSettings = inject(
       buildVersionInfo,
       checkEnablePortalSettings,
       deviceType,
+      getCompanyInfoSettings,
     } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
@@ -148,11 +152,10 @@ export const CompanyInfoSettings = inject(
       companyInfoSettingsData,
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
-      saveCompanyInfo,
-      resetCompanyInfo,
       buildVersionInfo,
       isSettingPaid,
       deviceType,
+      getCompanyInfoSettings,
     };
   },
 )(

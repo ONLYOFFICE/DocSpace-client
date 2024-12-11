@@ -97,8 +97,6 @@ class TableStore {
 
   sizeColumnIsEnabled = true;
 
-  typeColumnIsEnabled = true;
-
   typeColumnIsEnabled = false;
 
   quickButtonsColumnIsEnabled = true;

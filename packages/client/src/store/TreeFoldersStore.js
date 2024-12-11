@@ -182,10 +182,6 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
-  get recycleBinFolderId() {
-    return this.rootFoldersTitles[FolderType.TRASH]?.id;
-  }
-
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */

@@ -64,6 +64,7 @@ module.exports = {
     ],
     "no-console": "off",
     "no-continue": "off",
+    "no-fallthrough": "off",
 
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
@@ -126,8 +127,6 @@ module.exports = {
     "@typescript-eslint/no-loop-func": "off",
     "no-prototype-builtins": "off",
     "@typescript-eslint/no-dupe-class-members": "off",
-    "no-dupe-class-members": "off",
-    "no-fallthrough": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -192,8 +192,6 @@ class InfoPanelStore {
     this.setSearchValue("");
   };
 
-  setSelectionHistory = (obj) => (this.selectionHistory = obj);
-
   setSelectionHistory = (obj, total) => {
     this.selectionHistory = obj;
     this.selectionHistoryTotal = total;

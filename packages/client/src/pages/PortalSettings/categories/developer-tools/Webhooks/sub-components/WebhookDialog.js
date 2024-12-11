@@ -56,12 +56,7 @@ const Footer = styled.div`
 `;
 
 function validateUrl(url) {
-  try {
-    new URL(url);
-  } catch (error) {
-    return false;
-  }
-  return true;
+  return URL.canParse(url);
 }
 
 const WebhookDialog = (props) => {

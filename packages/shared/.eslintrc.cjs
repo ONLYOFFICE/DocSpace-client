@@ -153,7 +153,6 @@ module.exports = {
     "no-empty": "off",
     "no-new": "off",
     "import/no-named-as-default": "off",
-    "no-lone-blocks": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

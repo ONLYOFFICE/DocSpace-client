@@ -106,16 +106,15 @@ class CommonStore {
     } else {
       switch (page) {
         case "general":
-          {
-            requests.push(
-              this.settingsStore.getPortalTimezones(),
-              this.settingsStore.getPortalCultures(),
-            );
+          requests.push(
+            this.settingsStore.getPortalTimezones(),
+            this.settingsStore.getPortalCultures(),
+          );
 
-            if (standalone) {
-              requests.push(this.getDNSSettings());
-            }
+          if (standalone) {
+            requests.push(this.getDNSSettings());
           }
+
           break;
         default:
           break;

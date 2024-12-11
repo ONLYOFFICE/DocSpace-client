@@ -142,7 +142,6 @@ module.exports = {
     "react/default-props-match-prop-types": "off",
     "import/named": "off",
     "no-dupe-keys": "off",
-    "jsx-a11y/img-redundant-alt": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

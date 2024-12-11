@@ -41,7 +41,7 @@ const NoHistory = ({ t, theme }) => {
   return (
     <StyledNoItemContainer className="info-panel_gallery-empty-screen">
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No History Image" />
+        <img src={imageSrc} alt="No History" />
       </div>
       <Text className="no-history-text" textAlign="center">
         {t("HistoryEmptyScreenText")}

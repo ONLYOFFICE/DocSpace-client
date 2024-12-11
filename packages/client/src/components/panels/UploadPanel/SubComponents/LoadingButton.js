@@ -79,7 +79,7 @@ const LoadingButton = (props) => {
   );
 };
 
-export default inject(({}, { item }) => {
+export default inject((_, { item }) => {
   return {
     percent: item?.percent ? item.percent : null,
   };

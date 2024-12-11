@@ -67,6 +67,7 @@ module.exports = {
     "no-fallthrough": "off",
     "no-await-in-loop": "off",
 
+    "react/no-unused-class-component-methods": "off",
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
@@ -119,9 +120,6 @@ module.exports = {
     "react/prefer-stateless-function": "off",
     "react/no-this-in-sfc": "off",
     "no-useless-escape": "off",
-    "no-empty-pattern": "off",
-    "react/no-unused-class-component-methods": "off",
-    "spaced-comment": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -85,7 +85,7 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const SectionFilterContent = ({}) => {
+const SectionFilterContent = () => {
   return (
     <StyledFilter>
       <div className="form-only-filters">

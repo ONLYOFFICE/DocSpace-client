@@ -259,7 +259,6 @@ export default inject(
       roomType,
       setIsScrollLocked,
       isShared: selection?.shared,
-      roomType,
 
       displayFileExtension,
       maxImageUploadSize: settingsStore.maxImageUploadSize,

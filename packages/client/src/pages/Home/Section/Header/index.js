@@ -935,7 +935,6 @@ export default inject(
 
       selectedFolder,
 
-      isEmptyArchive,
       isGroupMenuBlocked,
 
       moveToRoomsPage,

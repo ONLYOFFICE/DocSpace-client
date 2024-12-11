@@ -141,7 +141,6 @@ module.exports = {
     "no-promise-executor-return": "off",
     "react/default-props-match-prop-types": "off",
     "import/named": "off",
-    "no-dupe-keys": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

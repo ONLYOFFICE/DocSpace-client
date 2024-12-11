@@ -185,9 +185,6 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
 
     setConfirmDelete,
 
-    myFolderId,
-    commonFolderId,
-
     keepNewFileName,
     setKeepNewFileName,
 

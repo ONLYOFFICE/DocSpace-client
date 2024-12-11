@@ -172,10 +172,11 @@ class AvatarEditorDialogStore {
       throw new Error("recursion depth exceeded");
     }
 
-    return new Promise((resolve) => {
-      return resolve(file);
-    }).then(() =>
-      this.resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
+    return this.resizeRecursiveAsync(
+      img,
+      canvas,
+      compressionRatio + 1,
+      depth + 1,
     );
   };
 

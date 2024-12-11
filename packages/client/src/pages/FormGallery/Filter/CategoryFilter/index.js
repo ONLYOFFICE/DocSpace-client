@@ -104,9 +104,9 @@ const CategoryFilter = ({
 
       const categoryPromises = newMenuItems.map(
         (item) =>
-          new Promise((res) =>
-            res(fetchCategoriesOfCategoryType(item.attributes.categoryId)),
-          ),
+          new Promise((resolve) => {
+            resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
+          }),
       );
 
       Promise.all(categoryPromises)

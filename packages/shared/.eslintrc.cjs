@@ -138,7 +138,6 @@ module.exports = {
     "no-else-return": "off",
     "jsx-a11y/iframe-has-title": "off",
     "react/jsx-no-constructed-context-values": "off",
-    "no-promise-executor-return": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

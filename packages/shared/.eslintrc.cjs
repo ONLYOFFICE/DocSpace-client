@@ -128,11 +128,6 @@ module.exports = {
     "no-fallthrough": "off",
     "func-names": "off",
     "no-continue": "off",
-    "no-unreachable-loop": "off",
-    "block-scoped-var": "off",
-    "@typescript-eslint/no-redeclare": "off",
-    "no-redeclare": "off",
-    "no-var": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

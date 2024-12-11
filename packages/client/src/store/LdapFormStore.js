@@ -464,12 +464,14 @@ class LdapFormStore {
   };
 
   scrollToField = () => {
-    for (const key in this.errors) {
+    for (let key in this.errors) {
       const element = document.getElementsByName(key)?.[0];
 
-      element?.focus();
-      element?.blur();
-      return;
+      if (element) {
+        element?.focus();
+        element?.blur();
+        return;
+      }
     }
   };
 

@@ -583,25 +583,26 @@ class SsoFormStore {
 
     if (!obj) return value;
 
-    if (obj.hasOwnProperty(propName)) return obj[propName];
+    if (Object.prototype.hasOwnProperty.call(obj, propName))
+      return obj[propName];
 
     if (
-      obj.hasOwnProperty("binding") &&
-      obj.hasOwnProperty("location") &&
+      Object.prototype.hasOwnProperty.call(obj, "binding") &&
+      Object.prototype.hasOwnProperty.call(obj, "location") &&
       obj.binding == propName
     )
       return obj.location;
 
     if (Array.isArray(obj)) {
       obj.forEach((item) => {
-        if (item.hasOwnProperty(propName)) {
+        if (Object.prototype.hasOwnProperty.call(item, propName)) {
           value = item[propName];
           return;
         }
 
         if (
-          item.hasOwnProperty("binding") &&
-          item.hasOwnProperty("location") &&
+          Object.prototype.hasOwnProperty.call(item, "binding") &&
+          Object.prototype.hasOwnProperty.call(item, "location") &&
           item.binding == propName
         ) {
           value = item.location;

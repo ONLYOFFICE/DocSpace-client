@@ -2475,7 +2475,10 @@ class ContextOptionsStore {
 
     const currentCanCreate =
       isLoading &&
-      window?.DocSpace?.location?.state?.hasOwnProperty("canCreate")
+      Object.prototype.hasOwnProperty.call(
+        window?.DocSpace?.location?.state,
+        "canCreate",
+      )
         ? stateCanCreate
         : security?.Create;
 

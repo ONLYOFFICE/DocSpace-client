@@ -108,7 +108,7 @@ const useFiles = ({
   const onDrop = (files, uploadToFolder) => {
     if (
       folderSecurity &&
-      folderSecurity.hasOwnProperty("Create") &&
+      Object.prototype.hasOwnProperty.call(folderSecurity, "Create") &&
       !folderSecurity.Create
     )
       return;

@@ -322,8 +322,14 @@ class UploadDataStore {
   convertFile = (file, t, isOpen) => {
     this.dialogsStore.setConvertItem(null);
 
-    const secondConvertingWithPassword = file.hasOwnProperty("password");
-    const conversionPositionIndex = file.hasOwnProperty("index");
+    const secondConvertingWithPassword = Object.prototype.hasOwnProperty.call(
+      file,
+      "password",
+    );
+    const conversionPositionIndex = Object.prototype.hasOwnProperty.call(
+      file,
+      "index",
+    );
 
     let alreadyConverting = this.files.some(
       (item) => item.fileId === file.fileId,

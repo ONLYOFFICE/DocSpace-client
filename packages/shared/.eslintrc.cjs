@@ -125,8 +125,6 @@ module.exports = {
     "no-await-in-loop": "off",
     "react/jsx-key": "off",
     "@typescript-eslint/no-loop-func": "off",
-    "no-prototype-builtins": "off",
-    "@typescript-eslint/no-dupe-class-members": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

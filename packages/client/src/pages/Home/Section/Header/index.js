@@ -551,7 +551,8 @@ const SectionHeaderContent = (props) => {
         : title;
 
   const currentCanCreate =
-    isLoading && location?.state?.hasOwnProperty("canCreate")
+    isLoading &&
+    Object.prototype.hasOwnProperty.call(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 

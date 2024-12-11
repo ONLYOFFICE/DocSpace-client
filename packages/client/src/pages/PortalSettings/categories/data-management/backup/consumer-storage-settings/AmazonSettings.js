@@ -301,13 +301,13 @@ class AmazonSettings extends React.Component {
     const selectedEncryption =
       formSettings[sse] === sse_kms || formSettings[sse] === sse_s3
         ? this.availableEncryptions[1].label
-        : formSettings.hasOwnProperty(sse)
+        : Object.prototype.hasOwnProperty.call(formSettings, sse)
           ? this.availableEncryptions[2].label
           : this.availableEncryptions[0].label;
 
     const managedKeys =
       formSettings[sse] === sse_kms
-        ? formSettings.hasOwnProperty(sse_key)
+        ? Object.prototype.hasOwnProperty.call(formSettings, sse_key)
           ? this.managedKeys[1]
           : this.managedKeys[0]
         : this.managedKeys[0];

@@ -30,7 +30,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
 import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 

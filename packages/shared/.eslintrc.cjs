@@ -140,7 +140,6 @@ module.exports = {
     "react/jsx-no-constructed-context-values": "off",
     "no-promise-executor-return": "off",
     "react/default-props-match-prop-types": "off",
-    "import/named": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

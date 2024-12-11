@@ -1520,6 +1520,7 @@ class UploadDataStore {
                 t={t}
                 components={[
                   <ColorTheme
+                    key="a"
                     tag="a"
                     themeId={ThemeId.Link}
                     isHovered

@@ -232,6 +232,7 @@ const AttributeMapping = (props) => {
                 ns="Ldap"
                 components={[
                   <Link
+                    key="link"
                     type="action"
                     color={currentColorScheme.main.accent}
                     onClick={goToStarageManagement}

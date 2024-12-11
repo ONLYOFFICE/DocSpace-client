@@ -66,6 +66,7 @@ module.exports = {
     "no-continue": "off",
     "no-fallthrough": "off",
 
+    "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     "@typescript-eslint/no-unused-expressions": "off",
@@ -123,8 +124,6 @@ module.exports = {
     "prettier/prettier": "off",
     "typescript-eslint/lines-between-class-members": "off",
     "no-await-in-loop": "off",
-    "react/jsx-key": "off",
-    "@typescript-eslint/no-loop-func": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

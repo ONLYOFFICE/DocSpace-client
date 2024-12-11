@@ -414,10 +414,10 @@ class FilesSettingsStore {
 
   getIconByFolderType = (folderType, size = 32) => {
     const path = getIconPathByFolderType(folderType);
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
-  getIconBySize = (size = 32, path) => {
+  getIconBySize = (path, size = 32) => {
     const getOrDefault = (container) =>
       container.has(path) ? container.get(path) : container.get("file.svg");
 
@@ -460,11 +460,11 @@ class FilesSettingsStore {
       }
     }
 
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
   getFolderIcon = (size = 32) => {
-    return this.getIconBySize(size, "folder.svg");
+    return this.getIconBySize("folder.svg", size);
   };
 
   getIconUrl = (extension, size) => {
@@ -482,7 +482,7 @@ class FilesSettingsStore {
       }
     }
 
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -506,7 +506,7 @@ class FilesSettingsStore {
 
     if (ebook) path = "ebook.svg";
 
-    if (path) return this.getIconBySize(size, path);
+    if (path) return this.getIconBySize(path, size);
 
     return this.getIconUrl(extension, size);
   };
@@ -524,7 +524,7 @@ class FilesSettingsStore {
 
     if (presentInArray(EBOOK_EXST, ext, true)) path = "ebook.svg";
 
-    if (path) return this.getIconBySize(size, path);
+    if (path) return this.getIconBySize(path, size);
 
     const extension = ext.toLowerCase();
 

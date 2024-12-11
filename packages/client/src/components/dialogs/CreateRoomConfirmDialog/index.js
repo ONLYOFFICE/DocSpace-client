@@ -42,7 +42,7 @@ const CreateRoomConfirmDialog = ({
   selectedRoomType,
 }) => {
   const onContinue = async () => {
-    await onCreateRoom(true);
+    await onCreateRoom(t, true);
     onClose();
   };
 

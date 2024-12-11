@@ -248,7 +248,7 @@ class ContextOptionsStore {
     )
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
-    return this.gotoDocEditor(false, item, null, false, !isFormRoom);
+    return this.gotoDocEditor(item, false, null, false, !isFormRoom);
   };
 
   onClickReconnectStorage = async (item, t) => {
@@ -583,17 +583,17 @@ class ContextOptionsStore {
       });
       setConvertDialogVisible(true);
     } else {
-      this.gotoDocEditor(false, item);
+      this.gotoDocEditor(item, false);
     }
   };
 
   onPreviewClick = (item) => {
-    this.gotoDocEditor(true, item);
+    this.gotoDocEditor(item, true);
   };
 
   gotoDocEditor = (
-    preview = false,
     item,
+    preview = false,
     shareKey = null,
     editForm = false,
     fillForm = false,
@@ -1568,7 +1568,7 @@ class ContextOptionsStore {
         key: "open-pdf",
         label: t("Open"),
         icon: EyeReactSvgUrl,
-        onClick: () => this.gotoDocEditor(false, item),
+        onClick: () => this.gotoDocEditor(item, false),
         disabled: false,
       },
       {

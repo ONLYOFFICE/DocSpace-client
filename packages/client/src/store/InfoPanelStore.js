@@ -683,7 +683,7 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
-    membersFilter,
+    membersFilter = null,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;

@@ -2044,7 +2044,12 @@ class FilesStore {
     return request();
   };
 
-  setCustomRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
+  setCustomRoomQuota = async (
+    quotaSize,
+    itemsIDs,
+    inRoom = false,
+    filter = null,
+  ) => {
     const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
@@ -2052,7 +2057,7 @@ class FilesStore {
     return rooms;
   };
 
-  resetRoomQuota = async (itemsIDs, inRoom = false, filter) => {
+  resetRoomQuota = async (itemsIDs, inRoom = false, filter = null) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
@@ -2805,7 +2810,7 @@ class FilesStore {
     this.roomMembersFilter = roomMembersFilter;
   };
 
-  getRoomMembers = (id, clearFilter = true, membersFilter) => {
+  getRoomMembers = (id, clearFilter = true, membersFilter = null) => {
     let newFilter = membersFilter || clone(this.membersFilter);
 
     if (clearFilter) {

@@ -75,7 +75,7 @@ const CreateRoomEvent = ({
       return;
     }
 
-    onCreateRoom(false, t);
+    onCreateRoom(t, false);
   };
 
   const fetchTagsAction = useCallback(async () => {

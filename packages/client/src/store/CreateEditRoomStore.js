@@ -344,7 +344,7 @@ class CreateEditRoomStore {
     }
   };
 
-  onCreateRoom = async (withConfirm = false, t) => {
+  onCreateRoom = async (t, withConfirm = false) => {
     const roomParams = this.roomParams;
 
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =

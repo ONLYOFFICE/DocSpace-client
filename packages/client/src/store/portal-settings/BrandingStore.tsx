@@ -27,16 +27,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  setAdditionalResources,
-  restoreAdditionalResources,
-  setCompanyInfoSettings,
-  restoreCompanyInfoSettings,
   getLogoText as getWhiteLabelText,
   getIsDefaultWhiteLabel,
   setWhiteLabelSettings,
   restoreWhiteLabelSettings,
 } from "@docspace/shared/api/settings";
-import { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isManagement } from "@docspace/shared/utils/common";
 
@@ -63,39 +58,6 @@ class BrandingStore {
 
   setIsLoadedCompanyInfoSettingsData = (isLoaded: boolean) => {
     this.isLoadedCompanyInfoSettingsData = isLoaded;
-  };
-
-  saveAdditionalResources = async (
-    additionalResources: TAdditionalResources,
-    feedbackEnabled: boolean,
-    helpEnabled: boolean,
-  ) => {
-    const settings = JSON.parse(JSON.stringify(additionalResources));
-    settings.feedbackAndSupportEnabled = feedbackEnabled;
-    settings.helpCenterEnabled = helpEnabled;
-    await setAdditionalResources(settings);
-    await this.settingsStore.getAdditionalResources();
-  };
-
-  resetAdditionalResources = async () => {
-    await restoreAdditionalResources();
-    await this.settingsStore.getAdditionalResources();
-  };
-
-  saveCompanyInfo = async (
-    address: string,
-    companyName: string,
-    email: string,
-    phone: string,
-    site: string,
-  ) => {
-    await setCompanyInfoSettings(address, companyName, email, phone, site);
-    await this.settingsStore.getCompanyInfoSettings();
-  };
-
-  resetCompanyInfo = async () => {
-    await restoreCompanyInfoSettings();
-    await this.settingsStore.getCompanyInfoSettings();
   };
 
   setLogoUrls = (urls: ILogo[]) => {

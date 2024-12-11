@@ -71,6 +71,12 @@ export type TextProps = {
   htmlFor?: string;
   /** Visual style variant */
   view?: string;
+  /** Link href */
+  href?: string;
+  /** Used as HTML `rel` property */
+  rel?: string;
+  /** Used as HTML `tabindex` property */
+  tabIndex?: number;
 };
 
 export type StyledTextProps = {

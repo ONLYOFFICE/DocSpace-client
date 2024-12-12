@@ -461,17 +461,16 @@ class FilesTableHeader extends React.Component {
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
-    if (fromUpdate) {
-      this.setState({
-        columns,
-        resetColumnsSize,
-        columnStorageName,
-        columnInfoPanelStorageName,
-        sortBy,
-        sortOrder,
-        isRecentTab,
-      });
-    }
+
+    this.setState({
+      columns,
+      resetColumnsSize,
+      columnStorageName,
+      columnInfoPanelStorageName,
+      sortBy,
+      sortOrder,
+      isRecentTab,
+    });
   };
 
   setTableColumns = (tableColumns) => {

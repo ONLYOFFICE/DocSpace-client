@@ -108,7 +108,6 @@ module.exports = {
     "react/display-name": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "no-self-compare": "off",
-    "react/sort-comp": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

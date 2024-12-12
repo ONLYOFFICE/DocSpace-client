@@ -104,6 +104,33 @@ class AutomaticBackup extends React.PureComponent {
     this.getMaxNumberCopies();
   }
 
+  componentDidMount() {
+    const { fetchTreeFolders, rootFoldersTitles } = this.props;
+
+    this.getWeekdays();
+
+    this.timerId = setTimeout(() => {
+      this.setState({ isInitialLoading: true });
+    }, 200);
+
+    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
+
+    this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("AutoBackup"));
+  }
+
+  componentWillUnmount() {
+    const { clearProgressInterval } = this.props;
+    clearTimeout(this.timerId);
+    this.timerId = null;
+    clearProgressInterval();
+  }
+
   setBasicSettings = async () => {
     const {
       setDefaultOptions,
@@ -157,33 +184,6 @@ class AutomaticBackup extends React.PureComponent {
       });
     }
   };
-
-  componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles } = this.props;
-
-    this.getWeekdays();
-
-    this.timerId = setTimeout(() => {
-      this.setState({ isInitialLoading: true });
-    }, 200);
-
-    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
-
-    this.setBasicSettings();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
-    if (prevProps.tReady !== tReady && tReady)
-      setDocumentTitle(t("AutoBackup"));
-  }
-
-  componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
-    clearTimeout(this.timerId);
-    this.timerId = null;
-    clearProgressInterval();
-  }
 
   getTime = () => {
     for (let item = 0; item < 24; item++) {

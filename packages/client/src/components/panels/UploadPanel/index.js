@@ -46,6 +46,14 @@ class UploadPanelComponent extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    document.addEventListener("keyup", this.onKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.onKeyPress);
+  }
+
   onClose = () => {
     const {
       uploaded,
@@ -68,14 +76,6 @@ class UploadPanelComponent extends React.Component {
       }
     }
   };
-
-  componentDidMount() {
-    document.addEventListener("keyup", this.onKeyPress);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.onKeyPress);
-  }
 
   onKeyPress = (event) => {
     if (event.key === "Esc" || event.key === "Escape") {

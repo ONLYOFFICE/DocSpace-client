@@ -54,6 +54,47 @@ const maxLength = {
 const defaultMaxLength = 255;
 
 class ConsumerModalDialog extends React.Component {
+  consumerInstruction =
+    this.props.selectedConsumer.instruction &&
+    format(this.props.selectedConsumer.instruction, <Box marginProp="0" />);
+
+  helpCenterDescription = (
+    <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
+      Detailed instructions in our{" "}
+      <Link
+        id="help-center-link"
+        color={this.props.theme.client.settings.integration.linkColor}
+        isHovered={false}
+        target="_blank"
+        href={this.thirdPartyServicesUrl()}
+      >
+        Help Center
+      </Link>
+    </Trans>
+  );
+
+  supportTeamDescription = (
+    <StyledBox>
+      <Trans
+        t={this.props.t}
+        i18nKey="ThirdPartyBottomDescription"
+        ns="Settings"
+      >
+        If you still have some questions on how to connect this service or need
+        technical assistance, please feel free to contact our{" "}
+        <Link
+          id="support-team-link"
+          color={this.props.theme.client.settings.integration.linkColor}
+          isHovered={false}
+          target="_blank"
+          href={this.props.urlSupport}
+        >
+          Support Team
+        </Link>
+      </Trans>
+    </StyledBox>
+  );
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -62,16 +103,9 @@ class ConsumerModalDialog extends React.Component {
     this.requiredRef = required.current;
   }
 
-  mapTokenNameToState = () => {
-    const { selectedConsumer } = this.props;
-    selectedConsumer.props.forEach((prop) => {
-      this.requiredRef.push(prop.name);
-
-      this.setState({
-        [`${prop.name}`]: prop.value,
-      });
-    });
-  };
+  componentDidMount() {
+    this.mapTokenNameToState();
+  }
 
   onChangeHandler = (e) => {
     this.setState({
@@ -127,9 +161,16 @@ class ConsumerModalDialog extends React.Component {
   //   return nextState !== this.state;
   // }
 
-  componentDidMount() {
-    this.mapTokenNameToState();
-  }
+  mapTokenNameToState = () => {
+    const { selectedConsumer } = this.props;
+    selectedConsumer.props.forEach((prop) => {
+      this.requiredRef.push(prop.name);
+
+      this.setState({
+        [`${prop.name}`]: prop.value,
+      });
+    });
+  };
 
   thirdPartyServicesUrl = () => {
     switch (this.props.selectedConsumer.name) {
@@ -179,47 +220,6 @@ class ConsumerModalDialog extends React.Component {
         return this.props.portalSettingsUrl;
     }
   };
-
-  consumerInstruction =
-    this.props.selectedConsumer.instruction &&
-    format(this.props.selectedConsumer.instruction, <Box marginProp="0" />);
-
-  helpCenterDescription = (
-    <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
-      Detailed instructions in our{" "}
-      <Link
-        id="help-center-link"
-        color={this.props.theme.client.settings.integration.linkColor}
-        isHovered={false}
-        target="_blank"
-        href={this.thirdPartyServicesUrl()}
-      >
-        Help Center
-      </Link>
-    </Trans>
-  );
-
-  supportTeamDescription = (
-    <StyledBox>
-      <Trans
-        t={this.props.t}
-        i18nKey="ThirdPartyBottomDescription"
-        ns="Settings"
-      >
-        If you still have some questions on how to connect this service or need
-        technical assistance, please feel free to contact our{" "}
-        <Link
-          id="support-team-link"
-          color={this.props.theme.client.settings.integration.linkColor}
-          isHovered={false}
-          target="_blank"
-          href={this.props.urlSupport}
-        >
-          Support Team
-        </Link>
-      </Trans>
-    </StyledBox>
-  );
 
   inputsRender = (item, index) => {
     const { onChangeHandler, state, props } = this;

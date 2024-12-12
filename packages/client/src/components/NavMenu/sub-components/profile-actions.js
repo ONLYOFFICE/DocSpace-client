@@ -70,10 +70,6 @@ class ProfileActions extends React.PureComponent {
     };
   }
 
-  setOpened = (opened) => {
-    this.setState({ opened });
-  };
-
   componentDidMount() {
     if (this.props.userIsUpdate) {
       this.getAvatar();
@@ -97,6 +93,10 @@ class ProfileActions extends React.PureComponent {
       this.props.setUserIsUpdate(false);
     }
   }
+
+  setOpened = (opened) => {
+    this.setState({ opened });
+  };
 
   onClose = (e) => {
     const path = e.path || (e.composedPath && e.composedPath());

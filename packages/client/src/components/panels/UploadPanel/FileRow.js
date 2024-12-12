@@ -214,17 +214,6 @@ class FileRow extends Component {
     }
   };
 
-  hasError = () => {
-    const { password } = this.state;
-    const pass = password.trim();
-    if (!pass) {
-      this.setState({ passwordValid: false });
-      return true;
-    }
-
-    return false;
-  };
-
   onButtonClick = () => {
     const { password } = this.state;
     const { removeFileFromList, convertFile, item, uploadedFiles } = this.props;
@@ -254,6 +243,17 @@ class FileRow extends Component {
       ...(!prevState.passwordValid && { passwordValid: true }),
     }));
   }
+
+  hasError = () => {
+    const { password } = this.state;
+    const pass = password.trim();
+    if (!pass) {
+      this.setState({ passwordValid: false });
+      return true;
+    }
+
+    return false;
+  };
 
   onKeyDown = (e) => {
     if (e.key === "Enter") {

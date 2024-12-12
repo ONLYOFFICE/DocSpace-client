@@ -37,12 +37,6 @@ import {
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section";
 
 class PureVersionHistoryPanel extends React.Component {
-  onClose = () => {
-    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
-    setIsVerHistoryPanel(false);
-    setInfoPanelIsMobileHidden(false);
-  };
-
   componentDidMount() {
     document.addEventListener("keyup", this.onKeyPress);
   }
@@ -50,6 +44,12 @@ class PureVersionHistoryPanel extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("keyup", this.onKeyPress);
   }
+
+  onClose = () => {
+    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
+    setIsVerHistoryPanel(false);
+    setInfoPanelIsMobileHidden(false);
+  };
 
   onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && this.onClose();
 

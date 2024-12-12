@@ -91,6 +91,39 @@ class ManualBackup extends React.Component {
     ];
   }
 
+  componentDidMount() {
+    const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
+
+    if (isNotPaidPeriod) {
+      this.setState({
+        isEmptyContentBeforeLoader: false,
+      });
+
+      return;
+    }
+    this.timerId = setTimeout(() => {
+      this.setState({ isInitialLoading: true });
+    }, 200);
+
+    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
+    this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("DataBackup"));
+  }
+
+  componentWillUnmount() {
+    const { clearProgressInterval } = this.props;
+    clearTimeout(this.timerId);
+    this.timerId = null;
+
+    clearProgressInterval();
+  }
+
   setBasicSettings = async () => {
     const {
       getProgress,
@@ -129,39 +162,6 @@ class ManualBackup extends React.Component {
       isEmptyContentBeforeLoader: false,
     });
   };
-
-  componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
-
-    if (isNotPaidPeriod) {
-      this.setState({
-        isEmptyContentBeforeLoader: false,
-      });
-
-      return;
-    }
-    this.timerId = setTimeout(() => {
-      this.setState({ isInitialLoading: true });
-    }, 200);
-
-    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
-    this.setBasicSettings();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
-
-    if (prevProps.tReady !== tReady && tReady)
-      setDocumentTitle(t("DataBackup"));
-  }
-
-  componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
-    clearTimeout(this.timerId);
-    this.timerId = null;
-
-    clearProgressInterval();
-  }
 
   onMakeTemporaryBackup = async () => {
     const {

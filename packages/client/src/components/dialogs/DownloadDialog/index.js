@@ -74,93 +74,66 @@ class DownloadDialogComponent extends React.Component {
     };
   }
 
-  onClose = () => this.props.setDownloadDialogVisible(false);
+  componentDidMount() {
+    document.addEventListener("keyup", this.handleKeyUp);
+  }
 
-  getDownloadItems = () => {
-    const itemList = [
-      ...this.state.documents.files,
-      ...this.state.spreadsheets.files,
-      ...this.state.presentations.files,
-      ...this.state.masterForms.files,
-      ...this.state.other.files,
-    ];
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.handleKeyUp);
+  }
 
-    const files = [];
-    const folders = [];
-    let singleFileUrl = null;
-
-    for (const item of itemList) {
-      if (item.checked) {
-        if (!!item.fileExst || item.contentLength) {
-          const format =
-            !item.format || item.format === this.props.t("OriginalFormat")
-              ? item.fileExst
-              : item.format;
-          if (!singleFileUrl) {
-            singleFileUrl = item.viewUrl;
-          }
-          files.push({ key: item.id, value: format });
-        } else {
-          folders.push(item.id);
-        }
-      }
-    }
-
-    return [files, folders, singleFileUrl];
-  };
-
-  onDownload = () => {
-    const { t, downloadFiles } = this.props;
-    const [fileConvertIds, folderIds] = this.getDownloadItems();
-    if (fileConvertIds.length || folderIds.length) {
-      downloadFiles(fileConvertIds, folderIds, {
-        label: t("Translations:ArchivingData"),
-        error: t("Common:ErrorInternalServer"),
-      });
-      this.props.setSelected("none");
-      this.onClose();
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleKeyUp = (event) => {
+    if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
+      this.onDownload();
     }
   };
 
-  getNewArrayFiles = (fileId, array, format) => {
-    // Set all documents format
-    if (!fileId) {
-      for (const file of array) {
-        file.format =
-          format === this.props.t("CustomFormat") || file.fileExst === format
-            ? this.props.t("OriginalFormat")
-            : format;
-      }
+  /**
+   * @returns {number}
+   */
+  getCheckedFileLength = () => {
+    const documents = this.state.documents.files;
+    const spreadsheets = this.state.spreadsheets.files;
+    const presentations = this.state.presentations.files;
+    const masterForms = this.state.masterForms.files;
+    const other = this.state.other.files;
 
-      return array;
-    }
-    // Set single document format
-    const newDoc = array.find((x) => x.id == fileId);
-    if (newDoc.format !== format) {
-      newDoc.format = format;
-    }
-    return array;
+    return (
+      documents.filter((f) => f.checked).length +
+      spreadsheets.filter((f) => f.checked).length +
+      presentations.filter((f) => f.checked).length +
+      masterForms.filter((f) => f.checked).length +
+      other.filter((f) => f.checked).length
+    );
   };
 
-  onSelectFormat = (e) => {
-    const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files;
+  onRowSelect = (e) => {
+    const { itemId, type } = e.currentTarget.dataset;
 
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState[type].files = this.getNewArrayFiles(fileId, files, format);
-      newState[type].format = !fileId ? format : this.props.t("CustomFormat");
+    switch (type) {
+      case "documents":
+        this.updateDocsState("documents", itemId);
 
-      const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
-      );
+        break;
+      case "spreadsheets":
+        this.updateDocsState("spreadsheets", itemId);
+        break;
+      case "presentations":
+        this.updateDocsState("presentations", itemId);
+        break;
+      case "masterForms":
+        this.updateDocsState("masterForms", itemId);
+        break;
+      case "other":
+        this.updateDocsState("other", itemId);
+        break;
 
-      if (index === -1) {
-        newState[type].format = this.props.t("OriginalFormat");
-      }
-
-      return { ...prevState, ...newState };
-    });
+      default:
+        break;
+    }
   };
 
   updateDocsState = (fieldStateName, itemId) => {
@@ -202,67 +175,94 @@ class DownloadDialogComponent extends React.Component {
     }
   };
 
-  onRowSelect = (e) => {
-    const { itemId, type } = e.currentTarget.dataset;
+  onSelectFormat = (e) => {
+    const { format, type, fileId } = e.currentTarget.dataset;
+    const files = this.state[type].files;
 
-    switch (type) {
-      case "documents":
-        this.updateDocsState("documents", itemId);
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState[type].files = this.getNewArrayFiles(fileId, files, format);
+      newState[type].format = !fileId ? format : this.props.t("CustomFormat");
 
-        break;
-      case "spreadsheets":
-        this.updateDocsState("spreadsheets", itemId);
-        break;
-      case "presentations":
-        this.updateDocsState("presentations", itemId);
-        break;
-      case "masterForms":
-        this.updateDocsState("masterForms", itemId);
-        break;
-      case "other":
-        this.updateDocsState("other", itemId);
-        break;
+      const index = newState[type].files.findIndex(
+        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
+      );
 
-      default:
-        break;
+      if (index === -1) {
+        newState[type].format = this.props.t("OriginalFormat");
+      }
+
+      return { ...prevState, ...newState };
+    });
+  };
+
+  getNewArrayFiles = (fileId, array, format) => {
+    // Set all documents format
+    if (!fileId) {
+      for (const file of array) {
+        file.format =
+          format === this.props.t("CustomFormat") || file.fileExst === format
+            ? this.props.t("OriginalFormat")
+            : format;
+      }
+
+      return array;
+    }
+    // Set single document format
+    const newDoc = array.find((x) => x.id == fileId);
+    if (newDoc.format !== format) {
+      newDoc.format = format;
+    }
+    return array;
+  };
+
+  onDownload = () => {
+    const { t, downloadFiles } = this.props;
+    const [fileConvertIds, folderIds] = this.getDownloadItems();
+    if (fileConvertIds.length || folderIds.length) {
+      downloadFiles(fileConvertIds, folderIds, {
+        label: t("Translations:ArchivingData"),
+        error: t("Common:ErrorInternalServer"),
+      });
+      this.props.setSelected("none");
+      this.onClose();
     }
   };
 
-  /**
-   * @returns {number}
-   */
-  getCheckedFileLength = () => {
-    const documents = this.state.documents.files;
-    const spreadsheets = this.state.spreadsheets.files;
-    const presentations = this.state.presentations.files;
-    const masterForms = this.state.masterForms.files;
-    const other = this.state.other.files;
+  getDownloadItems = () => {
+    const itemList = [
+      ...this.state.documents.files,
+      ...this.state.spreadsheets.files,
+      ...this.state.presentations.files,
+      ...this.state.masterForms.files,
+      ...this.state.other.files,
+    ];
 
-    return (
-      documents.filter((f) => f.checked).length +
-      spreadsheets.filter((f) => f.checked).length +
-      presentations.filter((f) => f.checked).length +
-      masterForms.filter((f) => f.checked).length +
-      other.filter((f) => f.checked).length
-    );
-  };
+    const files = [];
+    const folders = [];
+    let singleFileUrl = null;
 
-  /**
-   * @param {KeyboardEvent} event
-   */
-  handleKeyUp = (event) => {
-    if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
-      this.onDownload();
+    for (const item of itemList) {
+      if (item.checked) {
+        if (!!item.fileExst || item.contentLength) {
+          const format =
+            !item.format || item.format === this.props.t("OriginalFormat")
+              ? item.fileExst
+              : item.format;
+          if (!singleFileUrl) {
+            singleFileUrl = item.viewUrl;
+          }
+          files.push({ key: item.id, value: format });
+        } else {
+          folders.push(item.id);
+        }
+      }
     }
+
+    return [files, folders, singleFileUrl];
   };
 
-  componentDidMount() {
-    document.addEventListener("keyup", this.handleKeyUp);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleKeyUp);
-  }
+  onClose = () => this.props.setDownloadDialogVisible(false);
 
   render() {
     const { t, tReady, visible, extsConvertible, theme } = this.props;

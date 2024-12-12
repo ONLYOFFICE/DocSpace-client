@@ -43,7 +43,7 @@ const Link: React.FC<LinkProps> = ({
   lineHeight,
   rel,
   tabIndex,
-  type,
+  type = LinkType.page,
   isTextOverflow = false,
   noHover = false,
   enableUserSelect = false,

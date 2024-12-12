@@ -24,43 +24,99 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import SelectelSettings from "../../../consumer-storage-settings/SelectelSettings";
-import ScheduleComponent from "../ScheduleComponent";
-import { StyledStoragesModule } from "../../../StyledBackup";
-class SelectelStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-    setCompletedFormFields(SelectelSettings.formNames(), "selectel");
-    this.isDisabled = !selectedStorage.isSet;
-  }
+import {
+  SelectelSettings,
+  formNames,
+} from "@docspace/shared/components/selectel-settings";
 
-  render() {
-    const { t, isLoadingData, formErrors, selectedStorage, ...rest } =
-      this.props;
+import { ScheduleComponent } from "../../ScheduleComponent";
 
-    return (
-      <StyledStoragesModule>
-        <SelectelSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
-        />
+import { StyledStoragesModule } from "./SelectelStorage.styled";
+import type { SelectelStorageProps } from "./SelectelStorage.types";
 
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </StyledStoragesModule>
-    );
-  }
-}
+const SelectelStorage = ({
+  setCompletedFormFields,
+  addValueInFormSettings,
+  errorsFieldsBeforeSafe,
+  formSettings,
+  isLoadingData,
+  isNeedFilePath,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  isLoading,
+  selectedStorage,
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+  weekdaysLabelArray,
+}: SelectelStorageProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields } = backup;
+  useEffect(() => {
+    setCompletedFormFields(formNames(), "selectel");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return {
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));
+  return (
+    <StyledStoragesModule>
+      <SelectelSettings
+        t={t}
+        isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        isNeedFilePath={isNeedFilePath}
+        selectedStorage={selectedStorage}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+        addValueInFormSettings={addValueInFormSettings}
+      />
+
+      <ScheduleComponent
+        isLoadingData={isLoadingData}
+        selectedPeriodLabel={selectedPeriodLabel}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedHour={selectedHour}
+        selectedMonthDay={selectedMonthDay}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+        selectedPeriodNumber={selectedPeriodNumber}
+        setMaxCopies={setMaxCopies}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMonthNumber={setMonthNumber}
+        setTime={setTime}
+        periodsObject={periodsObject}
+        weekdaysLabelArray={weekdaysLabelArray}
+        monthNumbersArray={monthNumbersArray}
+        hoursArray={hoursArray}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+      />
+    </StyledStoragesModule>
+  );
+};
+
+export default SelectelStorage;
+
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields } = backup;
+
+//   return {
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));

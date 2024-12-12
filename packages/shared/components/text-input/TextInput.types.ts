@@ -119,4 +119,6 @@ export type TextInputProps = HTMLInputProps & {
     | "search"
     | "email"
     | "url";
+  /** HTML data-testid attribute */
+  testId?: string;
 };

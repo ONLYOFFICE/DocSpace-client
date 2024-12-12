@@ -28,10 +28,10 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
@@ -40,6 +40,7 @@ import { StyledRowContent } from "./multiple.styled";
 export const RowContent = ({ item, tenantAlias }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
   const { currentDeviceType } = useDeviceType();
+  const theme = useTheme();
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
     item?.quotaUsage || {
@@ -48,6 +49,7 @@ export const RowContent = ({ item, tenantAlias }) => {
       roomsCount: null,
     };
   const { customQuota } = item;
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const maxStorage = customQuota && getConvertedSize(t, customQuota);
   const usedStorage = getConvertedSize(t, usedSize);
@@ -57,6 +59,7 @@ export const RowContent = ({ item, tenantAlias }) => {
 
   const isCurrentPortal = tenantAlias === item.portalName;
   const protocol = window?.location?.protocol;
+  const isWizardCompleted = item.wizardSettings.completed;
 
   const onSpaceClick = () => {
     if (currentDeviceType === DeviceType.mobile) {
@@ -66,13 +69,18 @@ export const RowContent = ({ item, tenantAlias }) => {
 
   return (
     <StyledRowContent
-      sectionWidth={"620px"}
-      sideColor={globalColors.gray}
-      nameColor={globalColors.grayStrong}
+      isWizardCompleted={isWizardCompleted}
+      sectionWidth={620}
+      sideColor={theme?.management?.sideColor}
       className="spaces_row-content"
     >
       <div className="user-container-wrapper" onClick={onSpaceClick}>
-        <Text fontWeight={600} fontSize="14px" truncate={true}>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          truncate={true}
+          className="domain-text"
+        >
           {`${item.domain}`}
         </Text>
         {currentDeviceType === DeviceType.mobile && (
@@ -80,26 +88,42 @@ export const RowContent = ({ item, tenantAlias }) => {
         )}
       </div>
 
-      {isCurrentPortal && (
+      {isCurrentPortal ? (
         <Text
-          containerMinWidth="120px"
           fontSize="14px"
           fontWeight={600}
           truncate={true}
-          color={globalColors.gray}
           className="spaces_row-current"
         >
           {t("CurrentSpace")}
         </Text>
-      )}
+      ) : !isWizardCompleted && isMobileView ? (
+        <Text
+          fontSize="12px"
+          fontWeight={600}
+          truncate={true}
+          className="complete-setup"
+        >
+          {t("CompleteSetup")}
+        </Text>
+      ) : null}
 
-      {currentDeviceType !== DeviceType.mobile && (
+      {isWizardCompleted ? (
         <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
           {`${t("PortalStats", {
             roomCount: roomsCount,
             userCount: roomAdminCount + usersCount,
             storageSpace,
           })}`}
+        </Text>
+      ) : (
+        <Text
+          fontSize="12px"
+          fontWeight={600}
+          truncate={true}
+          className="complete-setup"
+        >
+          {t("CompleteSetup")}
         </Text>
       )}
     </StyledRowContent>

@@ -110,6 +110,7 @@ export const WhiteLabelHeader = ({
             size={InputSize.base}
           />
           <Button
+            testId="use-as-logo-button"
             id="btnUseAsLogo"
             className="use-as-logo"
             size={ButtonSize.small}

@@ -37,6 +37,11 @@ jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
 }));
 
+jest.mock("./WhiteLabel.helper", () => ({
+  ...jest.requireActual("./WhiteLabel.helper"),
+  generateLogo: () => "data:image/png;base64,mockedBase64Data",
+}));
+
 export const mockLogos: ILogo[] = [
   {
     name: "LightSmall",
@@ -206,5 +211,31 @@ describe("<WhiteLabel />", () => {
 
     const restoreButton = screen.getByTestId("cancel-button");
     expect(restoreButton).toBeDisabled();
+  });
+
+  it("onUseTextAsLogo should update logos with text-based logos", async () => {
+    const mockSetLogoUrls = jest.fn();
+    const props = {
+      ...defaultProps,
+      setLogoUrls: mockSetLogoUrls,
+    };
+
+    renderWithTheme(<WhiteLabel {...props} />);
+
+    const input = screen.getByTestId("logo-text-input");
+    const button = screen.getByTestId("use-as-logo-button");
+
+    fireEvent.change(input, { target: { value: "Test" } });
+    fireEvent.click(button);
+
+    expect(mockSetLogoUrls).toHaveBeenCalled();
+    const updatedLogos = mockSetLogoUrls.mock.calls[0][0];
+    expect(updatedLogos).toHaveLength(mockLogos.length);
+    expect(updatedLogos[0].path.light).toBe(
+      "data:image/png;base64,mockedBase64Data",
+    );
+    expect(updatedLogos[0].path.dark).toBe(
+      "data:image/png;base64,mockedBase64Data",
+    );
   });
 });

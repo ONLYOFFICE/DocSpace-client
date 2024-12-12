@@ -24,18 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { Text } from "@docspace/shared/components/text";
-import { StyledScheduleComponent } from "../../StyledBackup";
-import { AutoBackupPeriod } from "@docspace/shared/enums";
 
+import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
+
+import { Text } from "@docspace/shared/components/text";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
+import { StyledScheduleComponent } from "./ScheduleComponent.styled";
+import type { ScheduleComponentProps } from "./ScheduleComponent.types";
+
 const ScheduleComponent = ({
   selectedPeriodLabel,
   selectedWeekdayLabel,
@@ -50,13 +51,24 @@ const ScheduleComponent = ({
   isLoadingData,
   periodsObject,
   weekdaysLabelArray,
-  weeklySchedule,
   monthNumbersArray,
   hoursArray,
   maxNumberCopiesArray,
-  monthlySchedule,
-}) => {
+  selectedPeriodNumber,
+}: ScheduleComponentProps) => {
   const { t } = useTranslation("Settings");
+
+  const { weeklySchedule, monthlySchedule } = useMemo(() => {
+    const selectedPeriodNumberConverted = +selectedPeriodNumber;
+
+    return {
+      weeklySchedule:
+        selectedPeriodNumberConverted === AutoBackupPeriod.EveryWeekType,
+      monthlySchedule:
+        selectedPeriodNumberConverted === AutoBackupPeriod.EveryMonthType,
+    };
+  }, [selectedPeriodNumber]);
+
   const renderHelpContent = () => (
     <Text className="schedule_description" fontSize="12px">
       {t("AutoSavePeriodHelp", { productName: t("Common:ProductName") })}
@@ -80,6 +92,7 @@ const ScheduleComponent = ({
           tooltipMaxWidth="310px"
           place="right"
           offsetRight={0}
+          tooltipContent={undefined}
         />
       </div>
       <div className="main_options">
@@ -175,37 +188,41 @@ const ScheduleComponent = ({
   );
 };
 
-export default inject(({ backup }) => {
-  const {
-    selectedPeriodLabel,
-    selectedWeekdayLabel,
-    selectedHour,
-    selectedMonthDay,
-    selectedMaxCopiesNumber,
-    setPeriod,
-    setMonthNumber,
-    setTime,
-    setMaxCopies,
-    setWeekday,
-    selectedPeriodNumber,
-  } = backup;
+export default ScheduleComponent;
 
-  const weeklySchedule = +selectedPeriodNumber === EveryWeekType;
-  const monthlySchedule = +selectedPeriodNumber === EveryMonthType;
+// export default inject(({ backup }) => {
+//   const {
+//     selectedPeriodLabel,
+//     selectedWeekdayLabel,
+//     selectedHour,
+//     selectedMonthDay,
+//     selectedMaxCopiesNumber,
+//     setPeriod,
+//     setMonthNumber,
+//     setTime,
+//     setMaxCopies,
+//     setWeekday,
+//     selectedPeriodNumber,
+//   } = backup;
 
-  return {
-    selectedPeriodLabel,
-    selectedWeekdayLabel,
-    selectedHour,
-    selectedMonthDay,
-    selectedMaxCopiesNumber,
-    setPeriod,
-    setMonthNumber,
-    setTime,
-    setMaxCopies,
-    setWeekday,
+//   const weeklySchedule =
+//     +selectedPeriodNumber === AutoBackupPeriod.EveryWeekType;
+//   const monthlySchedule =
+//     +selectedPeriodNumber === AutoBackupPeriod.EveryMonthType;
 
-    weeklySchedule,
-    monthlySchedule,
-  };
-})(observer(ScheduleComponent));
+//   return {
+//     selectedPeriodLabel,
+//     selectedWeekdayLabel,
+//     selectedHour,
+//     selectedMonthDay,
+//     selectedMaxCopiesNumber,
+//     setPeriod,
+//     setMonthNumber,
+//     setTime,
+//     setMaxCopies,
+//     setWeekday,
+
+//     weeklySchedule,
+//     monthlySchedule,
+//   };
+// })(observer(ScheduleComponent));

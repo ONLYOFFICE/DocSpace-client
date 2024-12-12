@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Metod autentifikacije",
   "AuthorizedApps": "Autorizovane aplikacije",
   "AuthorizeLink": "Veza za autorizaciju",
+  "BasicInfo": "Osnovne informacije",
   "Client": "Klijent",
   "ClientCopy": "Klijentski ID uspešno kopiran u međumemoriju",
   "ClientHelpButton": "Podaci za korišćenje OAuth 2.0 kao vašeg tipa autentifikacije.<br/> <strong>Napomena:</strong> Svaki administrator koji zna ID klijenta moći će da dođe do informacija o aplikaciji uključujući naziv aplikacije, tip autentifikacije, obim aplikacije i preusmeravajući URI.",

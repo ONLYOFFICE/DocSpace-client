@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Kimlik doğrulama yöntemi",
   "AuthorizedApps": "Yetkili uygulamalar",
   "AuthorizeLink": "Yetkilendirme bağlantısı",
+  "BasicInfo": "Temel bilgi",
   "Client": "İstemci",
   "ClientCopy": "İstemci kimliği panoya başarıyla kopyalandı",
   "ClientHelpButton": "Kimlik doğrulama türünüz olarak OAth 2.0'ı kullanmak için kimlik bilgileri.<br/> <strong>Not:</strong> Uygulamanın istemci kimliğini bilen herhangi bir kurumsal yönetici, uygulama adı, kimlik doğrulama türü, uygulama kapsamları ve yönlendirme URI'ı dahil olmak üzere uygulama hakkında bilgi alabilir.",

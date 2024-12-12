@@ -58,7 +58,6 @@ import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";
 import { Text } from "../text";
 import { Toast, toastr } from "../toast";
-import { ToggleContent } from "../toggle-content";
 import { Tooltip } from "../tooltip";
 import { globalColors } from "../../themes";
 

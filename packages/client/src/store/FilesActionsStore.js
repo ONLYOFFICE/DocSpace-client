@@ -710,12 +710,12 @@ class FilesActionStore {
     }
 
     for (let item of selection) {
-      if (item.fileExst) {
-        fileIds.push(item.id);
-        items.push({ id: item.id, fileExst: item.fileExst });
-      } else {
+      if (!item.fileExst && item.isFolder) {
         folderIds.push(item.id);
         items.push({ id: item.id });
+      } else {
+        fileIds.push(item.id);
+        items.push({ id: item.id, fileExst: item.fileExst });
       }
     }
 

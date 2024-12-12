@@ -24,6 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+:root {
+  --email-input-text-align: left;
+
+  &[data-dir="rtl"] {
+    --email-input-text-align: right;
+  }
+}
+
 .emailInput {
-  text-align: var(--interface-direction);
+  text-align: var(--email-input-text-align);
 }

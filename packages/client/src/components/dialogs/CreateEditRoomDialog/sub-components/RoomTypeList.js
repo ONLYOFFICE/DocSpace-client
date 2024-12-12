@@ -46,9 +46,20 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
-const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
+const RoomTypeList = ({
+  t,
+  setRoomType,
+  disabledFormRoom,
+  setTemplateDialogIsVisible,
+}) => {
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
+
+    if (roomType === RoomsType.TemplateRoom) {
+      setTemplateDialogIsVisible(true);
+    }
+
+    console.log("create room handleClick", roomType);
 
     setRoomType(roomType);
   };

@@ -542,3 +542,65 @@ export function setRoomCover(roomId, cover) {
 
   return request(options);
 }
+
+export function createTemplateFromRoom(
+  roomId: number,
+  title: string,
+  logo,
+  share,
+  tags,
+) {
+  const data = {
+    roomId,
+    title,
+    logo,
+    share,
+    tags,
+  };
+  const options = {
+    method: "post",
+    url: `/files/roomtemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateTemplateFromRoomProgress() {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function createRoomFromTemplate(
+  roomId: number,
+  title: string,
+  logo,
+  tags,
+) {
+  const data = {
+    roomId,
+    title,
+    logo,
+    tags,
+  };
+  const options = {
+    method: "post",
+    url: `/files/rooms/fromTemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateRoomFromTemplateProgress() {
+  const options = {
+    method: "get",
+    url: `/files/rooms/fromTemplate/status`,
+  };
+
+  return request(options);
+}

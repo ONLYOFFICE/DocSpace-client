@@ -251,6 +251,7 @@ export const enum FolderType {
   SubFolderDone = 27,
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
+  RoomTemplates = 30,
 }
 
 export const enum ShareAccessRights {

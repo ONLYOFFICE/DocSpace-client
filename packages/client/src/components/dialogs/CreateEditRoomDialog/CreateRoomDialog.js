@@ -36,43 +36,8 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import TemplateBody from "./sub-components/TemplateBody";
+import RoomSelector from "@docspace/shared/selectors/Room";
 import { RoomsType } from "@docspace/shared/enums";
-
-/* const StyledModalDialog = styled(ModalDialog)` // TODO: Templates rewrite with new logic
-  .header-with-button {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 12px;
-  }
-
-  .sharing_panel-arrow svg {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
-  }
-
-  ${(props) =>
-    props.isOauthWindowOpen &&
-    css`
-      #modal-dialog {
-        display: none;
-      }
-    `}
-
-  ${({ isTemplate }) =>
-    isTemplate &&
-    css`
-      .selector_body,
-      .modal-body {
-        padding: 0;
-      }
-
-      .selector_body {
-        height: 100%;
-      }
-    `}
-`; */
 
 const CreateRoomDialog = ({
   t,
@@ -97,6 +62,7 @@ const CreateRoomDialog = ({
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
+  const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(false);
   const isMountRef = React.useRef(true);
 
   const disabledFormRoom = useMemo(() => {
@@ -212,6 +178,21 @@ const CreateRoomDialog = ({
     onClose();
   };
 
+  const onSubmitRoom = (item) => {
+    console.log("onSubmitRoom", item);
+    setIsTemplateSelected(item[0]);
+
+    setRoomParams((prev) => ({
+      ...prev,
+      title: item[0]?.label,
+      type: item[0]?.roomType,
+    }));
+  };
+
+  const onCloseCreateFromTemplateDialog = () => {
+    setTemplateDialogIsVisible(false);
+  };
+
   const isTemplate =
     roomParams.type === RoomsType.TemplateRoom && !isTemplateSelected;
 
@@ -232,7 +213,31 @@ const CreateRoomDialog = ({
       onBackClick={goBack}
       onSubmit={handleSubmit}
       withForm
+      containerVisible={isTemplate && templateDialogIsVisible}
     >
+      {isTemplate && (
+        <ModalDialog.Container>
+          <RoomSelector
+            className="template-body_selector"
+            onSubmit={onSubmitRoom}
+            roomType={RoomsType.CustomRoom}
+            isMultiSelect={false}
+            //
+            withHeader
+            headerProps={{
+              onBackClick: onCloseCreateFromTemplateDialog,
+              onCloseClick: onCloseCreateFromTemplateDialog,
+              headerLabel: t("Common:FromTemplate"),
+              withoutBackButton: false,
+              withoutBorder: false,
+            }}
+            //
+            withSearch
+            emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
+            emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}
+          />
+        </ModalDialog.Container>
+      )}
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -241,12 +246,7 @@ const CreateRoomDialog = ({
             t={t}
             setRoomType={setRoomType}
             disabledFormRoom={disabledFormRoom}
-          />
-        ) : isTemplate ? (
-          <TemplateBody
-            t={t}
-            setIsTemplateSelected={setIsTemplateSelected}
-            setRoomParams={setRoomParams}
+            setTemplateDialogIsVisible={setTemplateDialogIsVisible}
           />
         ) : (
           <SetRoomParams

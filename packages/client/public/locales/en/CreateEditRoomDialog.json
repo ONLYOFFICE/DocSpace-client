@@ -17,7 +17,6 @@
   "FilesOlderThan": "Files older than:",
   "FormRoomBarDescription": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "Horizontal": "Horizontal",
-  "FromTemplateDescription": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "All files in this room will be encrypted.",
   "MakeRoomPrivateLimitationsWarningDescription": "With this feature, you can invite only existing {{productName}} users. After creating a room, you will not be able to change the list of users.",

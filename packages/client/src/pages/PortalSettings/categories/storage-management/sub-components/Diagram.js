@@ -65,7 +65,7 @@ const getTags = (
   if (standalone && tenantCustomQuota < usedPortalSpace)
     commonSize = usedPortalSpace;
 
-  for (const key in catalogs) {
+  Object.keys(catalogs).forEach((key) => {
     const item = catalogs[key];
     const { usedSpace, title } = item;
 
@@ -82,7 +82,7 @@ const getTags = (
     });
 
     i++;
-  }
+  });
 
   return array;
 };

@@ -187,7 +187,7 @@ const MembersList = (props) => {
       ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
       : 0;
 
-    for (const titleIndex in listOfTitles) {
+    Object.keys(listOfTitles).forEach((titleIndex) => {
       const title = listOfTitles[titleIndex];
       const titleOffsetTop =
         linksBlockHeight + (title.index - linksBlockLength) * itemSize;
@@ -198,7 +198,7 @@ const MembersList = (props) => {
       } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
-    }
+    });
   };
 
   useEffect(() => {

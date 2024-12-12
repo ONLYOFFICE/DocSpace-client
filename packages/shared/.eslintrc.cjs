@@ -67,7 +67,9 @@ module.exports = {
     "no-fallthrough": "off",
     "no-await-in-loop": "off",
     "no-useless-escape": "off",
+    "react/no-danger": "off",
 
+    "no-restricted-syntax": "off",
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
@@ -114,9 +116,6 @@ module.exports = {
     "prefer-const": "off",
     "no-underscore-dangle": "off",
     "react/no-unstable-nested-components": "off",
-    "guard-for-in": "off",
-    "react/no-danger": "off",
-    "no-restricted-syntax": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

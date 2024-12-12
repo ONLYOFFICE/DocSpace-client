@@ -133,7 +133,7 @@ const BasicBlock = ({
 
   return (
     <StyledBlock>
-      <BlockHeader header="Basic info" />
+      <BlockHeader header={t("BasicInfo")} />
       <StyledInputBlock>
         <InputGroup
           label={t("AppName")}

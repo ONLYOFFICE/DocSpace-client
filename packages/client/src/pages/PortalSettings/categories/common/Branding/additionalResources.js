@@ -64,7 +64,7 @@ const AdditionalResourcesComponent = (props) => {
     async (feedbackEnabled, helpEnabled) => {
       setIsLoading(true);
       try {
-        const settings = JSON.parse(JSON.stringify(additionalResources));
+        const settings = JSON.parse(JSON.stringify(additionalResourcesData));
         settings.feedbackAndSupportEnabled = feedbackEnabled;
         settings.helpCenterEnabled = helpEnabled;
         await setAdditionalResources(settings);

@@ -24,48 +24,105 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
-import ScheduleComponent from "../ScheduleComponent";
-import { StyledStoragesModule } from "../../../StyledBackup";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-class AmazonStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields, storageRegions } =
-      this.props;
+import {
+  AmazonSettings,
+  formNames,
+} from "@docspace/shared/components/amazon-settings";
 
-    setCompletedFormFields(
-      AmazonSettings.formNames(storageRegions[0].systemName),
-      "s3",
-    );
+import { ScheduleComponent } from "../../ScheduleComponent";
 
-    this.isDisabled = !selectedStorage?.isSet;
-  }
+import { StyledStoragesModule } from "./AmazonStorage.styled";
+import type { AmazonStorageProps } from "./AmazonStorage.types";
 
-  render() {
-    const { t, isLoadingData, selectedStorage, ...rest } = this.props;
+const AmazonStorage = ({
+  isLoading,
+  formSettings,
+  defaultRegion,
+  isLoadingData,
+  storageRegions,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  setCompletedFormFields,
+  addValueInFormSettings,
+  deleteValueFormSetting,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  weekdaysLabelArray,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+}: AmazonStorageProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
 
-    return (
-      <StyledStoragesModule>
-        <AmazonSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
-        />
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </StyledStoragesModule>
-    );
-  }
-}
+  useEffect(() => {
+    setCompletedFormFields(formNames(storageRegions[0].systemName), "s3");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields, storageRegions } = backup;
+  return (
+    <StyledStoragesModule>
+      <AmazonSettings
+        t={t}
+        isLoading={isLoading}
+        isLoadingData={isLoadingData}
+        selectedStorage={selectedStorage}
+        isNeedFilePath={isNeedFilePath}
+        formSettings={formSettings}
+        defaultRegion={defaultRegion}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        storageRegions={storageRegions}
+        deleteValueFormSetting={deleteValueFormSetting}
+        addValueInFormSettings={addValueInFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+        setRequiredFormSettings={setRequiredFormSettings}
+      />
+      <ScheduleComponent
+        setTime={setTime}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMaxCopies={setMaxCopies}
+        setMonthNumber={setMonthNumber}
+        hoursArray={hoursArray}
+        selectedHour={selectedHour}
+        periodsObject={periodsObject}
+        isLoadingData={isLoadingData}
+        selectedMonthDay={selectedMonthDay}
+        monthNumbersArray={monthNumbersArray}
+        weekdaysLabelArray={weekdaysLabelArray}
+        selectedPeriodLabel={selectedPeriodLabel}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedPeriodNumber={selectedPeriodNumber}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+      />
+    </StyledStoragesModule>
+  );
+};
 
-  return {
-    storageRegions,
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));
+export default AmazonStorage;
+
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields, storageRegions } = backup;
+
+//   return {
+//     storageRegions,
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));

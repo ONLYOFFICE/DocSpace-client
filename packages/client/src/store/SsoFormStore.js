@@ -51,6 +51,7 @@ import {
   SSO_ENCRYPT,
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 class SsoFormStore {
   isSsoEnabled = false;
@@ -583,26 +584,25 @@ class SsoFormStore {
 
     if (!obj) return value;
 
-    if (Object.prototype.hasOwnProperty.call(obj, propName))
-      return obj[propName];
+    if (hasOwnProperty(obj, propName)) return obj[propName];
 
     if (
-      Object.prototype.hasOwnProperty.call(obj, "binding") &&
-      Object.prototype.hasOwnProperty.call(obj, "location") &&
+      hasOwnProperty(obj, "binding") &&
+      hasOwnProperty(obj, "location") &&
       obj.binding == propName
     )
       return obj.location;
 
     if (Array.isArray(obj)) {
       obj.forEach((item) => {
-        if (Object.prototype.hasOwnProperty.call(item, propName)) {
+        if (hasOwnProperty(item, propName)) {
           value = item[propName];
           return;
         }
 
         if (
-          Object.prototype.hasOwnProperty.call(item, "binding") &&
-          Object.prototype.hasOwnProperty.call(item, "location") &&
+          hasOwnProperty(item, "binding") &&
+          hasOwnProperty(item, "location") &&
           item.binding == propName
         ) {
           value = item.location;

@@ -123,6 +123,7 @@ import {
 } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -2475,10 +2476,7 @@ class ContextOptionsStore {
 
     const currentCanCreate =
       isLoading &&
-      Object.prototype.hasOwnProperty.call(
-        window?.DocSpace?.location?.state,
-        "canCreate",
-      )
+      hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
         ? stateCanCreate
         : security?.Create;
 

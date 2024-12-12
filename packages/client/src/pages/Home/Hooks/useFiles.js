@@ -40,6 +40,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -108,7 +109,7 @@ const useFiles = ({
   const onDrop = (files, uploadToFolder) => {
     if (
       folderSecurity &&
-      Object.prototype.hasOwnProperty.call(folderSecurity, "Create") &&
+      hasOwnProperty(folderSecurity, "Create") &&
       !folderSecurity.Create
     )
       return;

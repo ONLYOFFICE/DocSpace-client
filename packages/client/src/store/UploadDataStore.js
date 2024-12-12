@@ -58,6 +58,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { globalColors } from "@docspace/shared/themes";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 class UploadDataStore {
   settingsStore;
@@ -322,14 +323,8 @@ class UploadDataStore {
   convertFile = (file, t, isOpen) => {
     this.dialogsStore.setConvertItem(null);
 
-    const secondConvertingWithPassword = Object.prototype.hasOwnProperty.call(
-      file,
-      "password",
-    );
-    const conversionPositionIndex = Object.prototype.hasOwnProperty.call(
-      file,
-      "index",
-    );
+    const secondConvertingWithPassword = hasOwnProperty(file, "password");
+    const conversionPositionIndex = hasOwnProperty(file, "index");
 
     let alreadyConverting = this.files.some(
       (item) => item.fileId === file.fileId,

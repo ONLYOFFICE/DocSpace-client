@@ -43,6 +43,7 @@ import { Base, globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -614,19 +615,12 @@ class Tile extends React.PureComponent {
     } = this.props;
     const { isFolder, isRoom, id, fileExst } = item;
 
-    const renderElement = Object.prototype.hasOwnProperty.call(
-      this.props,
-      "element",
-    );
+    const renderElement = hasOwnProperty(this.props, "element");
 
-    const renderContentElement = Object.prototype.hasOwnProperty.call(
-      this.props,
-      "contentElement",
-    );
+    const renderContentElement = hasOwnProperty(this.props, "contentElement");
 
     const renderContext =
-      Object.prototype.hasOwnProperty.call(item, "contextOptions") &&
-      contextOptions.length > 0;
+      hasOwnProperty(item, "contextOptions") && contextOptions.length > 0;
 
     const getOptions = () => {
       tileContextClick && tileContextClick();

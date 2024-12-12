@@ -65,6 +65,7 @@ import {
   getCheckboxItemLabel,
 } from "SRC_DIR/helpers/filesUtils";
 import { useContactsHeader } from "./useContacts";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -551,8 +552,7 @@ const SectionHeaderContent = (props) => {
         : title;
 
   const currentCanCreate =
-    isLoading &&
-    Object.prototype.hasOwnProperty.call(location?.state, "canCreate")
+    isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 

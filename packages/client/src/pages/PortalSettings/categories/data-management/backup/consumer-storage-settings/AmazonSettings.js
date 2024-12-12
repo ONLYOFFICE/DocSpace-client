@@ -35,6 +35,7 @@ import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Trans } from "react-i18next";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const bucket = "bucket";
 const REGION = "region";
@@ -297,13 +298,13 @@ class AmazonSettings extends React.Component {
     const selectedEncryption =
       formSettings[sse] === sse_kms || formSettings[sse] === sse_s3
         ? this.availableEncryptions[1].label
-        : Object.prototype.hasOwnProperty.call(formSettings, sse)
+        : hasOwnProperty(formSettings, sse)
           ? this.availableEncryptions[2].label
           : this.availableEncryptions[0].label;
 
     const managedKeys =
       formSettings[sse] === sse_kms
-        ? Object.prototype.hasOwnProperty.call(formSettings, sse_key)
+        ? hasOwnProperty(formSettings, sse_key)
           ? this.managedKeys[1]
           : this.managedKeys[0]
         : this.managedKeys[0];

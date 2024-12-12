@@ -69,6 +69,7 @@ module.exports = {
     "no-useless-escape": "off",
     "react/no-danger": "off",
 
+    "no-irregular-whitespace": "off",
     "react/no-unstable-nested-components": "off",
     "no-restricted-syntax": "off",
     "@typescript-eslint/no-loop-func": "off",
@@ -112,8 +113,6 @@ module.exports = {
     "jsx-a11y/aria-role": "off",
     "@typescript-eslint/naming-convention": "off",
     "class-methods-use-this": "off",
-    "no-restricted-exports": "off",
-    "no-irregular-whitespace": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

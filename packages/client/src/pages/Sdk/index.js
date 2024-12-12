@@ -126,7 +126,10 @@ const Sdk = ({
     getFilesSettings();
   }, []);
 
-  const { mode, selectorType } = useParams();
+  const { mode } = useParams();
+  const selectorType = new URLSearchParams(window.location.search).get(
+    "selectorType",
+  );
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;

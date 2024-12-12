@@ -24,39 +24,99 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
-import ScheduleComponent from "../ScheduleComponent";
-import { StyledStoragesModule } from "../../../StyledBackup";
-class GoogleCloudStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-    setCompletedFormFields(GoogleCloudSettings.formNames(), "googlecloud");
+import {
+  GoogleCloudSettings,
+  formNames,
+} from "@docspace/shared/components/google-cloud-settings";
 
-    this.isDisabled = !selectedStorage?.isSet;
-  }
+import { ScheduleComponent } from "../../ScheduleComponent";
 
-  render() {
-    const { t, isLoadingData, selectedStorage, ...rest } = this.props;
+import { StyledStoragesModule } from "./GoogleCloudStorage.styled";
+import type { GoogleCloudStorageProps } from "./GoogleCloudStorage.types";
 
-    return (
-      <StyledStoragesModule>
-        <GoogleCloudSettings selectedStorage={selectedStorage} />
+const GoogleCloudStorage = ({
+  isLoading,
+  selectedStorage,
+  formSettings,
+  isLoadingData,
+  isNeedFilePath,
+  errorsFieldsBeforeSafe,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  addValueInFormSettings,
+  setCompletedFormFields,
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+  weekdaysLabelArray,
+}: GoogleCloudStorageProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
 
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </StyledStoragesModule>
-    );
-  }
-}
+  useEffect(() => {
+    setCompletedFormFields(formNames(), "googlecloud");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields } = backup;
+  return (
+    <StyledStoragesModule>
+      <GoogleCloudSettings
+        t={t}
+        isLoading={isLoading}
+        selectedStorage={selectedStorage}
+        isNeedFilePath={isNeedFilePath}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        addValueInFormSettings={addValueInFormSettings}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+      />
 
-  return {
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(GoogleCloudStorage)));
+      <ScheduleComponent
+        selectedHour={selectedHour}
+        isLoadingData={isLoadingData}
+        selectedMonthDay={selectedMonthDay}
+        selectedPeriodLabel={selectedPeriodLabel}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+        selectedPeriodNumber={selectedPeriodNumber}
+        setMaxCopies={setMaxCopies}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMonthNumber={setMonthNumber}
+        setTime={setTime}
+        periodsObject={periodsObject}
+        weekdaysLabelArray={weekdaysLabelArray}
+        monthNumbersArray={monthNumbersArray}
+        hoursArray={hoursArray}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+      />
+    </StyledStoragesModule>
+  );
+};
+
+export default GoogleCloudStorage;
+
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields } = backup;
+
+//   return {
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation()(GoogleCloudStorage)));

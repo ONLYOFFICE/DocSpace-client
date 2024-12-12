@@ -35,7 +35,7 @@ import { isMobile } from "react-device-detect";
 import { NoUserSelect, tablet } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
-import ErrorFileUpload from "./SubComponents/ErrorFileUpload.js";
+import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
 import SimulatePassword from "../../SimulatePassword";
 import LoadingButton from "./SubComponents/LoadingButton";
 

@@ -50,7 +50,7 @@ import {
   StyledComponent,
   StyledTheme,
   StyledBodyContent,
-} from "./Appearance/StyledApperance.js";
+} from "./Appearance/StyledApperance";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import Preview from "./Appearance/preview";

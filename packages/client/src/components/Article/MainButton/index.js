@@ -33,13 +33,13 @@ import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.rea
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
-import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
-import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
-import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
-import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
+// import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
+// import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
+// import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+// import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+// import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+// import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+// import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React from "react";
 
@@ -63,7 +63,7 @@ import {
 import styled, { css } from "styled-components";
 
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import MobileView from "./MobileView";

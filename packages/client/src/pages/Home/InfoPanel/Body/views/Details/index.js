@@ -35,7 +35,7 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 
-import DetailsHelper from "../../helpers/DetailsHelper.js";
+import DetailsHelper from "../../helpers/DetailsHelper";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 

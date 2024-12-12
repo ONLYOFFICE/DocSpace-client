@@ -35,12 +35,12 @@ import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 import config from "PACKAGE_FILE";
-import AccessPortal from "./access-portal/index.js";
+import AccessPortal from "./access-portal";
 import SecurityLoader from "./sub-components/loaders/security-loader";
-import LoginHistory from "./login-history/index.js";
+import LoginHistory from "./login-history";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
-import AuditTrail from "./audit-trail/index.js";
+import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
 
 const SecurityWrapper = (props) => {

@@ -110,7 +110,6 @@ module.exports = {
     "no-self-compare": "off",
     "react/sort-comp": "off",
     "react/no-access-state-in-setstate": "off",
-    "import/extensions": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -39,7 +39,7 @@ import {
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
-import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
+import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 

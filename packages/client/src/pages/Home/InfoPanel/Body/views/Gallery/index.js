@@ -24,22 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
+import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-
-import withLoader from "@docspace/client/src/HOCs/withLoader";
 
 import { Text } from "@docspace/shared/components/text";
 
 import { Link } from "@docspace/shared/components/link";
-import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
+import { parseAndFormatDate } from "../../helpers/DetailsHelper";
 import {
   StyledGalleryNoThumbnail,
   StyledGalleryThumbnail,
   StyledGalleryFormDescription,
-} from "../../styles/gallery.js";
+} from "../../styles/gallery";
 import {
   StyledLink,
   StyledProperties,

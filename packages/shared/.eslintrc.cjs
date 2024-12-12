@@ -69,6 +69,7 @@ module.exports = {
     "no-useless-escape": "off",
     "react/no-danger": "off",
 
+    "react/no-unstable-nested-components": "off",
     "no-restricted-syntax": "off",
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
@@ -114,8 +115,6 @@ module.exports = {
     "no-restricted-exports": "off",
     "no-irregular-whitespace": "off",
     "prefer-const": "off",
-    "no-underscore-dangle": "off",
-    "react/no-unstable-nested-components": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

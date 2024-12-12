@@ -48,19 +48,19 @@ class RoomsModule extends React.Component {
       selectedFolder,
     };
 
-    this._isMount = false;
+    this.isMount = false;
   }
 
   componentDidMount() {
-    this._isMount = true;
+    this.isMount = true;
   }
 
   componentWillUnmount() {
-    this._isMount = false;
+    this.isMount = false;
   }
 
   onSelectFolder = (folderId) => {
-    this._isMount &&
+    this.isMount &&
       this.setState({
         selectedFolder: folderId,
       });

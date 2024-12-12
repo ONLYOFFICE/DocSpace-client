@@ -37,7 +37,7 @@ import config from "PACKAGE_FILE";
 import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 
-let _isMounted = false;
+let isMounted = false;
 
 const ConvertPasswordDialogComponent = (props) => {
   const {
@@ -118,11 +118,11 @@ const ConvertPasswordDialogComponent = (props) => {
   }, [isLoading]);
 
   useEffect(() => {
-    _isMounted = true;
+    isMounted = true;
     setPasswordEntryProcess(true);
 
     return () => {
-      _isMounted = false;
+      isMounted = false;
       setPasswordEntryProcess(false);
     };
   }, []);

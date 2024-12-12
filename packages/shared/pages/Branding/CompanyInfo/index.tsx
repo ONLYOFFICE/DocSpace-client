@@ -121,6 +121,7 @@ export const CompanyInfo = ({
           isVertical
         >
           <TextInput
+            testId="company-name-input"
             id="textInputContainerCompanyName"
             className="text-input"
             isDisabled={!isSettingPaid}
@@ -139,6 +140,7 @@ export const CompanyInfo = ({
           isVertical
         >
           <TextInput
+            testId="email-input"
             id="textInputContainerEmail"
             className="text-input"
             isDisabled={!isSettingPaid}
@@ -157,6 +159,7 @@ export const CompanyInfo = ({
           isVertical
         >
           <TextInput
+            testId="phone-input"
             id="textInputContainerPhone"
             className="text-input"
             isDisabled={!isSettingPaid}
@@ -175,6 +178,7 @@ export const CompanyInfo = ({
           isVertical
         >
           <TextInput
+            testId="site-input"
             id="textInputContainerWebsite"
             className="text-input"
             isDisabled={!isSettingPaid}
@@ -193,6 +197,7 @@ export const CompanyInfo = ({
           isVertical
         >
           <TextInput
+            testId="address-input"
             id="textInputContainerAddress"
             className="text-input"
             isDisabled={!isSettingPaid}

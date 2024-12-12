@@ -93,25 +93,27 @@ export const CompanyInfo = ({
     hasErrorPhone ||
     hasErrorSite;
 
-  const link = t("Common:AboutCompanyTitle");
-
   return (
     <StyledCompanyInfo isSettingPaid={isSettingPaid}>
       <div className="header settings_unavailable">
         {t("Settings:CompanyInfoSettings")}
       </div>
       <div className="description settings_unavailable">
-        <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Settings">
-          &quot;This information will be displayed in the
-          {isSettingPaid ? (
-            <Link className="link" onClick={onShowExample} noHover>
-              {{ link }}
-            </Link>
-          ) : (
-            <span className="link">{{ link }}</span>
-          )}
-          window.&quot;
-        </Trans>
+        <Trans
+          t={t}
+          ns="Settings"
+          i18nKey="CompanyInfoSettingsDescription"
+          values={{
+            link: t("Common:AboutCompanyTitle"),
+          }}
+          components={{
+            1: isSettingPaid ? (
+              <Link className="link" onClick={onShowExample} noHover />
+            ) : (
+              <span className="link" />
+            ),
+          }}
+        />
       </div>
       <div className="settings-block">
         <FieldContainer

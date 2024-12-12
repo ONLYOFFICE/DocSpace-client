@@ -971,7 +971,6 @@ class UploadDataStore {
     const { uploaded, id: fileId, file: fileInfo } = res.data.data;
 
     let uploadedSize;
-    let newPercent;
 
     if (!uploaded && !allChunkUploaded) {
       uploadedSize =
@@ -985,7 +984,7 @@ class UploadDataStore {
           ? fileSize
           : fileSize - index * this.filesSettingsStore.chunkUploadSize;
     }
-    newPercent = this.getFilesPercent(uploadedSize);
+    const newPercent = this.getFilesPercent(uploadedSize);
 
     const percentCurrentFile = (index / chunksLength) * 100;
 

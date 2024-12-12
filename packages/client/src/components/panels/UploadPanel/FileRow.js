@@ -411,7 +411,6 @@ export default inject(
     { item },
   ) => {
     let ext;
-    let name;
     let splitted;
 
     if (item.file) {
@@ -455,7 +454,7 @@ export default inject(
       }
     }
 
-    name = splitted.join(".");
+    const name = splitted.join(".");
 
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =

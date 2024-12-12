@@ -114,7 +114,6 @@ module.exports = {
     "class-methods-use-this": "off",
     "no-restricted-exports": "off",
     "no-irregular-whitespace": "off",
-    "prefer-const": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

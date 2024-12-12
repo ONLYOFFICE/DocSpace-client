@@ -407,7 +407,7 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      for (let key in this.requiredSettings) {
+      for (const key in this.requiredSettings) {
         if (
           typeof this.requiredSettings[key] === "string" &&
           this.requiredSettings[key].trim() === ""
@@ -426,7 +426,7 @@ class LdapFormStore {
           ["groupNameAttribute", this.groupNameAttribute],
         ];
 
-        for (let key of groupFields) {
+        for (const key of groupFields) {
           if (key[1].trim() === "") {
             this.errors[key[0]] = true;
           }

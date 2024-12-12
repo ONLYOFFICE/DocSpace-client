@@ -11,7 +11,7 @@
   "ArchiveAction": "清空归档",
   "ArchivedRoomsAction": "房间已归档",
   "ArchiveEmptyScreen": " 您可以随时存档不使用的房间并在{{productName}}中恢复它们，也可以永久删除它们。这些房间将显示在此处。",
-  "ArchiveEmptyScreenHeader": "此处暂无已归档房间",
+  "ArchiveEmptyScreenHeader": "暂无已归档房间 —> 暂无已存档房间",
   "ArchiveEmptyScreenUser": "已归档房间将出现在此处。",
   "Archives": "归档",
   "AssignOwner": "分配所有者",

@@ -152,7 +152,7 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   curstor: pointer;
 
   .info-container {
-    max-width: calc(100% - 24px);
+    max-width: calc(100% - 32px);
     height: 100%;
     border: 1px solid
       ${(props) => props.theme.newFilesPanel.fileItem.borderColor};
@@ -183,6 +183,7 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   }
 
   .open-location-button {
+    min-width: 16px;
     cursor: pointer;
 
     display: none;

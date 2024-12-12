@@ -30,6 +30,8 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
+import { Toast } from "@docspace/shared/components/toast";
+
 import StyledComponentsRegistry from "@/lib/registry";
 import { getSettings, getUser, getColorTheme } from "@/lib/actions";
 import Providers from "@/providers";
@@ -69,6 +71,7 @@ export default async function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+            <Toast isSSR />
             <ManagementDialogs settings={settings} user={user} />
             <LayoutWrapper>{children}</LayoutWrapper>
           </Providers>

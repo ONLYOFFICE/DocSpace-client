@@ -114,7 +114,7 @@ class BackupCodesDialogComponent extends React.Component {
 
             <Text className="backup-codes-codes" isBold>
               {backupCodes.length > 0 &&
-                backupCodes.map((item) => {
+                backupCodes.forEach((item) => {
                   if (!item.isUsed) {
                     return (
                       <strong key={item.code} dir="auto">

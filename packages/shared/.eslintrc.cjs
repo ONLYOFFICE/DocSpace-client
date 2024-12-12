@@ -111,7 +111,6 @@ module.exports = {
     "react/sort-comp": "off",
     "react/no-access-state-in-setstate": "off",
     "import/extensions": "off",
-    "array-callback-return": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -180,11 +180,13 @@ const CSP = ({
     const trimmedDomain = domain.trim();
     const domains = trimmedDomain.split(" ");
 
-    domains.map((domain) => {
-      if (domain === "" || domainsSetting.includes(domain)) return;
+    for (let i = 0; i < domains.length; i++) {
+      const domain = domains[i];
+
+      if (domain === "" || domainsSetting.includes(domain)) continue;
 
       domainsSetting.push(domain);
-    });
+    }
 
     try {
       await setCSPSettings({ domains: domainsSetting });

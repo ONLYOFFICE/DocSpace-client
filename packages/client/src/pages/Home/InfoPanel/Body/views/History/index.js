@@ -126,8 +126,8 @@ const History = ({
     if (!selectionHistory) return;
     let feedsRelatedLength = 0;
 
-    selectionHistory.map(({ feeds }) => {
-      feeds.map((feed) => {
+    selectionHistory.forEach(({ feeds }) => {
+      feeds.forEach((feed) => {
         if (feed.related.length) feedsRelatedLength += feed.related.length;
       });
 
@@ -172,7 +172,7 @@ const History = ({
     selectionHistory.every((item) => {
       if (dateCoincidingWithCalendarDay) return false;
 
-      item.feeds.every((feed) => {
+      item.feeds.forEach((feed) => {
         if (feed.date.slice(0, 10) === calendarDay) {
           dateCoincidingWithCalendarDay = feed.date;
         }
@@ -201,23 +201,25 @@ const History = ({
     selectionHistory.every((item, indexItem) => {
       if (nearestNewerDate) return false;
 
-      item.feeds.every((feed) => {
+      for (let i = item.feeds.length - 1; i >= 0; i--) {
+        const feed = item.feeds[i];
+
         const date = new Date(feed.date);
 
         // Stop checking all entries for one day
-        if (date > calendarDayModified) return false;
+        if (date > calendarDayModified) break;
 
         // Looking for the nearest new date
         if (date < calendarDayModified) {
           // If there are no nearby new entries in the post history, then scroll to the last one
           if (indexItem === 0) {
             nearestNewerDate = feed.date;
-            return false;
+            break;
           }
 
           nearestNewerDate = selectionHistory[indexItem - 1].feeds[0].date;
         }
-      });
+      }
 
       return true;
     });

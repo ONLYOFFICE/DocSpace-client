@@ -208,7 +208,7 @@ const Members = ({
     }
 
     if (additionalLinks.length && !withoutTitlesAndLinks) {
-      additionalLinks.map((link) => {
+      additionalLinks.forEach((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}

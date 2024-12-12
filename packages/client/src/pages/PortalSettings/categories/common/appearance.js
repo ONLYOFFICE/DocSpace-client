@@ -435,7 +435,7 @@ const Appearance = (props) => {
   };
 
   const onClickEdit = () => {
-    appearanceTheme.map((item) => {
+    appearanceTheme.forEach((item) => {
       if (item.id === selectThemeId) {
         setCurrentColorAccent(item.main?.accent.toUpperCase());
         setCurrentColorButtons(item.main.buttons.toUpperCase());

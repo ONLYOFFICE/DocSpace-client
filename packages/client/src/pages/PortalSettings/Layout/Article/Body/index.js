@@ -281,7 +281,7 @@ const ArticleBodyContent = (props) => {
 
     if (selectedKeys.length === 0) return <></>;
 
-    resultTree.map((item) => {
+    resultTree.forEach((item) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });

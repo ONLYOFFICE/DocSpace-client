@@ -2808,7 +2808,7 @@ class FilesActionStore {
     }
 
     !oneFolder &&
-      selections.map((item) => {
+      selections.forEach((item) => {
         if (item.fileExst || item.contentLength) fileIds.push(item.id);
         else folderIds.push(item.id);
       });

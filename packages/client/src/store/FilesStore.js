@@ -3299,7 +3299,7 @@ class FilesStore {
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       let isFolder = false;
-      this.folders.map((x) => {
+      this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
       });
 

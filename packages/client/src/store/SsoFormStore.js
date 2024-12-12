@@ -696,7 +696,7 @@ class SsoFormStore {
       const newCertificates = await this.validateCertificate(data);
       this.idpCertificates = [];
 
-      newCertificates.data.map((cert) => {
+      newCertificates.data.forEach((cert) => {
         if (newCertificates.data.length > 1) {
           this.idpCertificates = [...this.idpCertificates, cert];
         } else {
@@ -821,7 +821,7 @@ class SsoFormStore {
         this.spCertificates[this.editIndex] = newCertificates[0];
         this.checkedSpBoxes(newCertificates[0]);
       } else {
-        newCertificates.map((cert) => {
+        newCertificates.forEach((cert) => {
           this.spCertificates = [...this.spCertificates, cert];
           this.checkedSpBoxes(cert);
         });
@@ -882,7 +882,7 @@ class SsoFormStore {
         this.idpCertificates[this.editIndex] = newCertificates[0];
         this.checkedIdpBoxes(newCertificates[0]);
       } else {
-        newCertificates.map((cert) => {
+        newCertificates.forEach((cert) => {
           this.idpCertificates = [...this.idpCertificates, cert];
           this.checkedIdpBoxes(cert);
         });

@@ -73,7 +73,7 @@ const getInitialState = (initialTab) => {
     RoomName: false,
   };
 
-  initialTab.map((item) => {
+  initialTab.forEach((item) => {
     state[item.id] = true;
   });
 

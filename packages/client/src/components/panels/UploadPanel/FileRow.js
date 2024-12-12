@@ -232,11 +232,7 @@ class FileRow extends Component {
 
     if (this.hasError()) return;
 
-    let index;
-
-    uploadedFiles.reduce((acc, rec, id) => {
-      if (rec.fileId === fileId) index = id;
-    }, []);
+    const index = uploadedFiles.findIndex((f) => f.fileId === fileId);
 
     const newItem = {
       fileId,

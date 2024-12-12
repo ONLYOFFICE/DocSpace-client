@@ -52,7 +52,7 @@ const LoginContent = (props) => {
 
       let backupCodesCount = 0;
       if (codes && codes.length > 0) {
-        codes.map((item) => {
+        codes.forEach((item) => {
           if (!item.isUsed) {
             backupCodesCount++;
           }

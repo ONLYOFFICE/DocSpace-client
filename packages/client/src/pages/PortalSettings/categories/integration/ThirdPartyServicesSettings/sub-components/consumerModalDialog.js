@@ -64,7 +64,7 @@ class ConsumerModalDialog extends React.Component {
 
   mapTokenNameToState = () => {
     const { selectedConsumer } = this.props;
-    selectedConsumer.props.map((prop) => {
+    selectedConsumer.props.forEach((prop) => {
       this.requiredRef.push(prop.name);
 
       this.setState({

@@ -639,7 +639,7 @@ class InfoPanelStore {
     const groups = [];
     const guests = [];
 
-    members?.map((fetchedMember) => {
+    members?.forEach((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,

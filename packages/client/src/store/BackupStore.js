@@ -242,10 +242,10 @@ class BackupStore {
     let selectedAccount = {};
     let index = 0;
 
-    providers.map((item) => {
+    providers.forEach((item) => {
       const { account, isConnected } = this.getThirdPartyAccount(item, t);
 
-      if (!account) return;
+      if (!account) return true; // continue
 
       accounts.push(account);
 

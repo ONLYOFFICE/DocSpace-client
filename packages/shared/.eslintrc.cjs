@@ -68,7 +68,10 @@ module.exports = {
     "no-await-in-loop": "off",
     "no-useless-escape": "off",
     "react/no-danger": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "jsx-a11y/aria-role": "off",
 
+    "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
     "react/no-unstable-nested-components": "off",
     "no-restricted-syntax": "off",
@@ -109,10 +112,6 @@ module.exports = {
     "react/no-access-state-in-setstate": "off",
     "import/extensions": "off",
     "array-callback-return": "off",
-    "no-undef": "off",
-    "jsx-a11y/aria-role": "off",
-    "@typescript-eslint/naming-convention": "off",
-    "class-methods-use-this": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

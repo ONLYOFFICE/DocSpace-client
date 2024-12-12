@@ -107,9 +107,10 @@ const DebugInfoDialog = (props) => {
         <StyledBodyContent>
           {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
           <Text>
-            # Version: <span className="version">{VERSION}</span>
+            # Version:{" "}
+            <span className="version">{VERSION /* eslint-disable-line */}</span>
           </Text>
-          <Text>{`# Build date: ${BUILD_AT}`}</Text>
+          <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
           {user && (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
           )}

@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { FolderType } from "@docspace/shared/enums";
 // import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
@@ -87,9 +88,14 @@ const FileTile = (props) => {
     badgeUrl,
     icon,
     isDownload,
+    setGuidanceCoordinates,
+    guidanceCoordinates,
+    refs,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
+
+  const tileRef = React.useRef(null);
 
   const { columnCount, thumbSize } = useContext(FileTileContext);
 
@@ -104,6 +110,29 @@ const FileTile = (props) => {
   );
 
   const { thumbnailUrl } = item;
+
+  React.useEffect(() => {
+    if (
+      item?.fileExst === ".pdf" &&
+      tileRef?.current &&
+      !guidanceCoordinates.pdf
+    ) {
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        pdf: tileRef?.current.getClientRects()[0],
+      });
+    }
+    if (
+      item?.type === FolderType.Done &&
+      tileRef?.current &&
+      !guidanceCoordinates.ready
+    ) {
+      setGuidanceCoordinates({
+        ...guidanceCoordinates,
+        ready: tileRef?.current.getClientRects()[0],
+      });
+    }
+  }, [guidanceCoordinates.ready, guidanceCoordinates.pdf]);
 
   const element = (
     <ItemIcon
@@ -147,6 +176,7 @@ const FileTile = (props) => {
       >
         <Tile
           key={item.id}
+          forwardedRef={tileRef}
           item={item}
           temporaryIcon={temporaryIcon}
           thumbnail={
@@ -204,8 +234,14 @@ export default inject(
     { item },
   ) => {
     const { getIcon } = filesSettingsStore;
-    const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
-      filesStore;
+    const {
+      setSelection,
+      withCtrlSelect,
+      withShiftSelect,
+      highlightFile,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
+    } = filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const isHighlight =
@@ -224,6 +260,8 @@ export default inject(
       isHighlight,
       icon,
       isDownload,
+      setGuidanceCoordinates,
+      guidanceCoordinates,
     };
   },
 )(

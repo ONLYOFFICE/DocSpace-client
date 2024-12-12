@@ -84,8 +84,7 @@ const getGuidPosition = (guidRects, state) => {
     case FormFillingTipsState.Submitting:
     case FormFillingTipsState.Complete:
       return {
-        width:
-          state === FormFillingTipsState.Complete ? 350 : guidRects.ready.width,
+        width: guidRects.ready.width,
         height: guidRects.ready.height,
         left: guidRects.ready.left,
         top: guidRects.ready.top,

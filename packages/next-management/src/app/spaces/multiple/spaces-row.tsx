@@ -58,37 +58,17 @@ export const SpacesRow = ({ item, tenantAlias }) => {
   );
   const protocol = window?.location?.protocol;
 
-  const contextOptions = [
+  const onDelete = () => {
+    setCurrentPortal(item);
+    setDeletePortalDialogVisible(true);
+  };
+
+  const contextOptionsProps = [
     {
       label: t("Files:Open"),
       key: "space_open",
       icon: ExternalLinkIcon,
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),
-    },
-    {
-      label: t("Common:Settings"),
-      key: "space_settings",
-      icon: CatalogSettingsReactSvgUrl,
-      onClick: () =>
-        window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
-    },
-    {
-      label: t("Common:ManageStorageQuota"),
-      key: "change_quota",
-      icon: ChangQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        isDisableQuota && setIsDisableQuota(false);
-      },
-    },
-    {
-      key: "disable_quota",
-      label: t("Common:DisableQuota"),
-      icon: DisableQuotaReactSvgUrl,
-      onClick: () => {
-        setIsVisibleDialog(true);
-        setIsDisableQuota(true);
-      },
     },
     {
       key: "separator",
@@ -98,13 +78,41 @@ export const SpacesRow = ({ item, tenantAlias }) => {
       label: t("Common:Delete"),
       key: "space_delete",
       icon: DeleteReactSvgUrl,
-      onClick: () => {
-        setCurrentPortal(item);
-        setDeletePortalDialogVisible(true);
-      },
+      onClick: onDelete,
     },
   ];
 
+  if (item.wizardSettings.completed) {
+    contextOptionsProps.splice(
+      1,
+      0,
+      {
+        label: t("Common:Settings"),
+        key: "space_settings",
+        icon: CatalogSettingsReactSvgUrl,
+        onClick: () =>
+          window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
+      },
+      {
+        label: t("Common:ManageStorageQuota"),
+        key: "change_quota",
+        icon: ChangQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          isDisableQuota && setIsDisableQuota(false);
+        },
+      },
+      {
+        key: "disable_quota",
+        label: t("Common:DisableQuota"),
+        icon: DisableQuotaReactSvgUrl,
+        onClick: () => {
+          setIsVisibleDialog(true);
+          setIsDisableQuota(true);
+        },
+      },
+    );
+  }
   const updateFunction = async () => {
     router.refresh();
   };
@@ -121,7 +129,7 @@ export const SpacesRow = ({ item, tenantAlias }) => {
       <StyledSpaceRow
         key={item.id}
         element={logoElement}
-        contextOptions={contextOptions}
+        contextOptions={contextOptionsProps}
       >
         <RowContent item={item} tenantAlias={tenantAlias} />
       </StyledSpaceRow>

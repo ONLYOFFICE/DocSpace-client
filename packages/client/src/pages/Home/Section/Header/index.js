@@ -64,8 +64,8 @@ import {
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "SRC_DIR/helpers/filesUtils";
-import { useContactsHeader } from "./useContacts";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
   width: 100%;

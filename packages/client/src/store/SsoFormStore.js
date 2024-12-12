@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeType } from "@docspace/shared/enums";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -51,7 +52,6 @@ import {
   SSO_ENCRYPT,
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 class SsoFormStore {
   isSsoEnabled = false;

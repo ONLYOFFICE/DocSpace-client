@@ -117,7 +117,6 @@ module.exports = {
     "guard-for-in": "off",
     "react/no-danger": "off",
     "no-restricted-syntax": "off",
-    "react/prefer-stateless-function": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

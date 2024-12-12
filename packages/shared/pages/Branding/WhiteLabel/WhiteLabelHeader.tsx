@@ -96,6 +96,7 @@ export const WhiteLabelHeader = ({
           labelVisible
         >
           <TextInput
+            testId="logo-text-input"
             className="company-name input"
             value={logoTextWhiteLabel}
             onChange={onChangeCompanyName}

@@ -249,10 +249,10 @@ class FileRow extends Component {
   };
 
   onChangePassword(password) {
-    this.setState({
+    this.setState((prevState) => ({
       password,
-      ...(!this.state.passwordValid && { passwordValid: true }),
-    });
+      ...(!prevState.passwordValid && { passwordValid: true }),
+    }));
   }
 
   onKeyDown = (e) => {

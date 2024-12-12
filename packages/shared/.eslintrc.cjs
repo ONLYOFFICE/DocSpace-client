@@ -109,7 +109,6 @@ module.exports = {
     "jsx-a11y/control-has-associated-label": "off",
     "no-self-compare": "off",
     "react/sort-comp": "off",
-    "react/no-access-state-in-setstate": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

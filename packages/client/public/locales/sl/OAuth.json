@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Metoda avtentikacije",
   "AuthorizedApps": "Avtorizirane aplikacije",
   "AuthorizeLink": "Avtoriziraj povezavo",
+  "BasicInfo": "Osnovne informacije",
   "Client": "Odjemalec",
   "ClientCopy": "ID odjemalca je bil uspešno kopiran v odložišče",
   "ClientHelpButton": "Poverilnice za uporabo OAth 2.0 za vaš način preverjanja pristnosti.<br/> <strong>Opomba:</strong> Vsak skrbnik podjetja, ki pozna ID odjemalca aplikacije, bo lahko pridobil informacije o aplikaciji, vključno z imenom aplikacije, vrsto preverjanja pristnosti, obsegom aplikacije in preusmeritveni URI.",

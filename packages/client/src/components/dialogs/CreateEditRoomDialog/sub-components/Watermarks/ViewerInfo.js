@@ -177,13 +177,13 @@ const ViewerInfoWatermark = ({
 
     elementsData[key] = !elementsData[item.id];
 
-    for (const key in elementsData) {
+    Object.keys(elementsData).forEach((key) => {
       const value = elementsData[key];
 
       if (value) {
         flagsCount += WatermarkAdditions[key];
       }
-    }
+    });
 
     setRoomParams({
       ...roomParams,

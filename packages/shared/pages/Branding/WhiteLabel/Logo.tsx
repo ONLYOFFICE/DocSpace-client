@@ -131,6 +131,7 @@ export const Logo = (props: ILogoProps) => {
       <label>
         <input
           name={name}
+          data-testid={inputId}
           id={inputId}
           type="file"
           className="hidden"

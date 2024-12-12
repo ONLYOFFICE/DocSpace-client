@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { WhiteLabel } from ".";
-import { DeviceType } from "../../../enums";
+import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ILogo } from "./WhiteLabel.types";
 import { renderWithTheme } from "../../../utils/render-with-theme";
 
@@ -40,6 +40,12 @@ jest.mock("../../../hooks/useResponsiveNavigation", () => ({
 jest.mock("./WhiteLabel.helper", () => ({
   ...jest.requireActual("./WhiteLabel.helper"),
   generateLogo: () => "data:image/png;base64,mockedBase64Data",
+  uploadLogo: jest.fn().mockResolvedValue({
+    data: {
+      Success: true,
+      Message: "https://example.com/uploaded-logo.png",
+    },
+  }),
 }));
 
 export const mockLogos: ILogo[] = [
@@ -213,7 +219,7 @@ describe("<WhiteLabel />", () => {
     expect(restoreButton).toBeDisabled();
   });
 
-  it("onUseTextAsLogo should update logos with text-based logos", async () => {
+  it("onUseTextAsLogo should update logos with text-based logos", () => {
     const mockSetLogoUrls = jest.fn();
     const props = {
       ...defaultProps,
@@ -237,5 +243,37 @@ describe("<WhiteLabel />", () => {
     expect(updatedLogos[0].path.dark).toBe(
       "data:image/png;base64,mockedBase64Data",
     );
+  });
+
+  it("onChangeLogo should update logo when file is uploaded", async () => {
+    const mockSetLogoUrls = jest.fn();
+    const props = {
+      ...defaultProps,
+      setLogoUrls: mockSetLogoUrls,
+    };
+
+    renderWithTheme(<WhiteLabel {...props} />);
+
+    const file = new File(["test"], "test.png", { type: "image/png" });
+    const inputId = `logoUploader_${WhiteLabelLogoType.LightSmall}_light`;
+    const logoName = "LightSmall";
+
+    const input = screen.getByTestId(inputId);
+    fireEvent.change(input, {
+      target: {
+        files: [file],
+        id: inputId,
+        name: logoName,
+      },
+    });
+
+    await waitFor(() => {
+      expect(mockSetLogoUrls).toHaveBeenCalled();
+      const updatedLogos = mockSetLogoUrls.mock.calls[0][0];
+      expect(updatedLogos).toHaveLength(mockLogos.length);
+      expect(updatedLogos[0].path.light).toBe(
+        "https://example.com/uploaded-logo.png",
+      );
+    });
   });
 });

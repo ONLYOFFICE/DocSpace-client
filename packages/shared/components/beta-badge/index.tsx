@@ -31,7 +31,7 @@ import { InfoBadge } from "@docspace/shared/components/info-badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 
-import type BetaBadgeProps from "./BetaBadge.props";
+import { type BetaBadgeProps } from "./BetaBadge.types";
 import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
 
 const BetaBadge = ({
@@ -95,20 +95,4 @@ const BetaBadge = ({
   );
 };
 
-export default BetaBadge;
-
-// export default inject<any>(({ settingsStore }) => {
-//   const {
-//     forumLink,
-//     currentColorScheme,
-//     documentationEmail,
-//     currentDeviceType,
-//   } = settingsStore;
-
-//   return {
-//     documentationEmail,
-//     currentColorScheme,
-//     currentDeviceType,
-//     forumLink,
-//   };
-// })(observer(BetaBadge));
+export { BetaBadge, BetaBadgeProps };

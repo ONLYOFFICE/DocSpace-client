@@ -24,6 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import BetaBadge from "./BetaBadge";
+import type { PlacesType } from "react-tooltip";
+import type { TColorScheme } from "../../themes";
 
-export { BetaBadge };
+export type BetaBadgeProps = {
+  forumLink?: string;
+  documentationEmail?: string;
+  currentColorScheme?: TColorScheme;
+  currentDeviceType?: "desktop" | "tablet" | "mobile";
+
+  place: PlacesType;
+  mobilePlace?: PlacesType;
+  withOutFeedbackLink?: boolean;
+};

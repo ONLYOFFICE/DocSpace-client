@@ -46,6 +46,7 @@ export const Button = React.forwardRef<
     isHovered,
     isClicked,
     className,
+    testId = "button",
     ...rest
   } = props;
 
@@ -74,7 +75,7 @@ export const Button = React.forwardRef<
       type="button"
       className={buttonClasses}
       disabled={isDisabled || isLoading}
-      data-testid="button"
+      data-testid={testId}
       aria-label={label}
       aria-disabled={isDisabled ? "true" : undefined}
       aria-busy={isLoading ? "true" : undefined}

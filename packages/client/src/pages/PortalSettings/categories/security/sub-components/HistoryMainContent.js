@@ -202,11 +202,11 @@ const HistoryMainContent = (props) => {
     };
     saveToSessionStorage("storagePeriod", newSettings);
 
-    if (loginLifeTime === String(lifetime)) {
-      setLoginLifeTimeReminder(false);
-    } else {
-      setLoginLifeTimeReminder(true);
-    }
+    // if (loginLifeTime === String(lifetime)) {
+    //   setLoginLifeTimeReminder(false);
+    // } else {
+    //   setLoginLifeTimeReminder(true);
+    // }
   }, [loginLifeTime]);
 
   useEffect(() => {
@@ -216,11 +216,11 @@ const HistoryMainContent = (props) => {
     };
     saveToSessionStorage("storagePeriod", newSettings);
 
-    if (auditLifeTime === String(lifetime)) {
-      setAuditLifeTimeReminder(false);
-    } else {
-      setAuditLifeTimeReminder(true);
-    }
+    // if (auditLifeTime === String(lifetime)) {
+    //   setAuditLifeTimeReminder(false);
+    // } else {
+    //   setAuditLifeTimeReminder(true);
+    // }
   }, [auditLifeTime]);
 
   const getSettings = () => {

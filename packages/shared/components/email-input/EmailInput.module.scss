@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 :root {
-  --email-input-text-align: left;
+  --input-text-align: left;
 
   &[data-dir="rtl"] {
-    --email-input-text-align: right;
+    --input-text-align: right;
   }
 }
 
 .emailInput {
-  text-align: var(--email-input-text-align);
+  text-align: var(--input-text-align);
 }

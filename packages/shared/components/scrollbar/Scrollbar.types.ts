@@ -24,35 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ScrollbarType } from "./Scrollbar.enums";
+import { ScrollbarProps as ScrollbarLibraryProps } from "./custom-scrollbar";
 
-export type ScrollbarProps = {
-  /** Accepts class */
-  className?: string;
+type PickedScrollbarLibraryProps = Pick<
+  ScrollbarLibraryProps,
+  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+>;
+
+export type ScrollbarProps = PickedScrollbarLibraryProps & {
   /** This class will be placed on scroller element */
   scrollClass?: string;
-  /** Accepts id  */
-  id?: string;
-  /** Accepts css style  */
-  style?: React.CSSProperties;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
   /** Fix scrollbar size. */
   fixedSize?: boolean;
-  /** Disable vertical scrolling. */
-  noScrollY?: boolean;
-  /** Disable horizontal scrolling. */
-  noScrollX?: boolean;
-  /** Wrap children in context that contains scrollbar instance */
-  createContext?: boolean;
   /** Set focus on scroll content element after first render */
   autoFocus?: boolean;
   /** Set scroll body tabindex */
   tabIndex?: number | null;
   /** Add padding bottom to scroll-body */
   paddingAfterLastItem?: string;
-
+  /** Add onScroll handler */
   onScroll?: React.UIEventHandler<HTMLDivElement>;
+  /** Add children */
   children?: React.ReactNode;
 };
 
@@ -68,5 +62,4 @@ export type CustomScrollbarsVirtualListProps = Pick<
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
   contentRef?: React.MutableRefObject<HTMLDivElement | null>;
-  stype?: ScrollbarType;
 };

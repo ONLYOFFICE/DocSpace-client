@@ -26,23 +26,28 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
+import { useRouter } from "next/navigation";
 
+import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+
+import { deletePortal } from "@docspace/shared/api/management";
 
 import { useStores } from "@/hooks/useStores";
 
 export const DeletePortalDialog = observer(() => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { spacesStore } = useStores();
-  const { currentColorScheme } = useTheme();
 
   const {
     currentPortal,
@@ -52,17 +57,43 @@ export const DeletePortalDialog = observer(() => {
 
   const { t } = useTranslation(["Management", "Common"]);
 
-  const { owner, domain } = currentPortal;
-  const { displayName, email } = owner;
+  const { owner, domain, wizardSettings } = currentPortal;
+
+  const { email } = owner;
+  const isWizardCompleted = wizardSettings.completed;
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
-  const onDelete = () => {
-    const protocol = window?.location?.protocol;
-    return window.open(
-      `${protocol}//${domain}/portal-settings/delete-data/deletion`,
-      "_self",
-    );
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      const res = await deletePortal({ portalName: domain });
+
+      if (res?.removed) {
+        toastr.success(
+          t("PortalDeleted", { productName: t("Common:ProductName") }),
+        );
+        router.refresh();
+      } else {
+        toastr.success(
+          <Trans
+            i18nKey="DeleteRequestSuccess"
+            values={{
+              productName: t("Common:ProductName"),
+              email,
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />,
+        );
+      }
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
   };
 
   return (
@@ -72,32 +103,46 @@ export const DeletePortalDialog = observer(() => {
       displayType={ModalDialogType.modal}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isWizardCompleted
+          ? t("SubmitDelete")
+          : t("Settings:DeletePortal", {
+              productName: t("Common:ProductName"),
+            })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans
-          i18nKey="DeletePortalText"
-          values={{
-            productName: t("Common:ProductName"),
-            displayName,
-            email,
-            domain,
-          }}
-          components={{
-            1: <strong />,
-            5: (
-              <Link
-                className="email-link"
-                href={`mailto:${email}`}
-                noHover
-                color={currentColorScheme?.main?.accent}
-                title={email}
-              />
-            ),
-          }}
-        />
+        {isWizardCompleted ? (
+          <>
+            <Text className="warning-text" fontSize="16px" fontWeight={700}>
+              {t("Common:Warning")}!
+            </Text>
+            <Trans
+              i18nKey="DeleteSetupPortalText"
+              values={{
+                productName: t("Common:ProductName"),
+                domain,
+                email,
+              }}
+              components={{
+                1: <strong />,
+              }}
+            />
+          </>
+        ) : (
+          <Trans
+            i18nKey="DeleteEmptyPortalText"
+            values={{
+              domain,
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Delete")}
           size={ButtonSize.normal}

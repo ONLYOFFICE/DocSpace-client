@@ -24,42 +24,99 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
-import ScheduleComponent from "../ScheduleComponent";
-import { StyledStoragesModule } from "../../../StyledBackup";
-class RackspaceStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-    setCompletedFormFields(RackspaceSettings.formNames(), "rackspace");
-    this.isDisabled = !selectedStorage?.isSet;
-  }
+import {
+  RackspaceSettings,
+  formNames,
+} from "@docspace/shared/components/rackspace-settings";
 
-  render() {
-    const { t, isLoadingData, selectedStorage, ...rest } = this.props;
+import { ScheduleComponent } from "../../ScheduleComponent";
 
-    return (
-      <StyledStoragesModule>
-        <RackspaceSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
-        />
+import { StyledStoragesModule } from "./RackspaceStorage.styled";
+import type { RackspaceStorageProps } from "./RackspaceStorage.types";
 
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </StyledStoragesModule>
-    );
-  }
-}
+const RackspaceStorage = ({
+  isLoading,
+  formSettings,
+  isLoadingData,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  addValueInFormSettings,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  setCompletedFormFields,
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+  weekdaysLabelArray,
+}: RackspaceStorageProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields } = backup;
+  useEffect(() => {
+    setCompletedFormFields(formNames(), "rackspace");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return {
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));
+  return (
+    <StyledStoragesModule>
+      <RackspaceSettings
+        t={t}
+        isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        selectedStorage={selectedStorage}
+        isNeedFilePath={isNeedFilePath}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        addValueInFormSettings={addValueInFormSettings}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+      />
+
+      <ScheduleComponent
+        isLoadingData={isLoadingData}
+        selectedPeriodLabel={selectedPeriodLabel}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedHour={selectedHour}
+        selectedMonthDay={selectedMonthDay}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+        selectedPeriodNumber={selectedPeriodNumber}
+        setMaxCopies={setMaxCopies}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMonthNumber={setMonthNumber}
+        setTime={setTime}
+        periodsObject={periodsObject}
+        weekdaysLabelArray={weekdaysLabelArray}
+        monthNumbersArray={monthNumbersArray}
+        hoursArray={hoursArray}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+      />
+    </StyledStoragesModule>
+  );
+};
+
+export default RackspaceStorage;
+
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields } = backup;
+
+//   return {
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));

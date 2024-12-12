@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import api from "@docspace/shared/api";
+import { size } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";

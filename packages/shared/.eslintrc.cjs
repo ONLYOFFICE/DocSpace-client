@@ -70,6 +70,7 @@ module.exports = {
     "react/no-danger": "off",
     "@typescript-eslint/naming-convention": "off",
     "jsx-a11y/aria-role": "off",
+    "react/no-unescaped-entities": "off",
 
     "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
@@ -99,8 +100,6 @@ module.exports = {
     "import/no-unresolved": "off",
     "react-hooks/rules-of-hooks": "off",
     "no-plusplus": "off",
-    "react/no-unknown-property": "off",
-    "react/no-unescaped-entities": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

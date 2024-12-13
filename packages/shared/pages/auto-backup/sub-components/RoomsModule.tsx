@@ -25,70 +25,143 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
-import { BackupStorageType } from "@docspace/shared/enums";
-import ScheduleComponent from "./ScheduleComponent";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
-class RoomsModule extends React.PureComponent {
-  onSelectFolder = (id) => {
-    const { setSelectedFolder } = this.props;
+import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
+import {
+  FilesSelectorInput,
+  type FilesSelectorSettings,
+} from "@docspace/shared/components/files-selector-input";
+import type { Nullable } from "@docspace/shared/types";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
-    setSelectedFolder(`${id}`);
-  };
+import {
+  ScheduleComponent,
+  type ScheduleComponentProps,
+} from "./ScheduleComponent";
 
-  render() {
-    const {
-      isError,
-      isLoadingData,
-      savingProcess,
-      passedId,
-      isSavingProcess,
-      isResetProcess,
-      isDocumentsDefault,
-      ...rest
-    } = this.props;
+interface RoomsModuleProps extends ScheduleComponentProps {
+  isError: boolean;
+  isLoadingData: boolean;
+  settingsFileSelector: FilesSelectorSettings;
+  currentDeviceType?: DeviceType;
 
-    return (
-      <>
-        <div className="auto-backup_folder-input">
-          <FilesSelectorInput
-            onSelectFolder={this.onSelectFolder}
-            {...(passedId && { id: passedId })}
-            withoutInitPath={!isDocumentsDefault}
-            isError={isError}
-            isDisabled={isLoadingData}
-            isRoomBackup
-            isSelectFolder
-          />
-        </div>
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </>
-    );
-  }
+  // backup store
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
+  defaultStorageType: Nullable<string>;
+  setSelectedFolder: (id: string) => void;
+  defaultFolderId: Nullable<string>;
+  toDefault: VoidFunction;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  // end back store
 }
-export default inject(({ backup }) => {
-  const {
-    setSelectedFolder,
-    selectedFolderId,
-    defaultStorageType,
-    defaultFolderId,
-    isSavingProcess,
-    isResetProcess,
-  } = backup;
 
+const RoomsModule = ({
+  isError,
+  setSelectedFolder,
+  defaultStorageType,
+  defaultFolderId,
+  isLoadingData,
+  setBasePath,
+  setNewPath,
+  settingsFileSelector,
+  toDefault,
+  basePath,
+  isErrorPath,
+  newPath,
+  currentDeviceType,
+
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  weekdaysLabelArray,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+}: RoomsModuleProps) => {
   const isDocumentsDefault =
-    defaultStorageType === `${BackupStorageType.DocumentModuleType}`;
+    defaultStorageType === BackupStorageType.DocumentModuleType.toString();
 
   const passedId = isDocumentsDefault ? defaultFolderId : "";
 
-  return {
-    defaultFolderId,
-    selectedFolderId,
-    setSelectedFolder,
-    passedId,
-    isSavingProcess,
-    isResetProcess,
-    isDocumentsDefault,
+  const onSelectFolder = (id: string | number | undefined) => {
+    setSelectedFolder(`${id}`);
   };
-})(observer(RoomsModule));
+
+  return (
+    <>
+      <div className="auto-backup_folder-input">
+        <FilesSelectorInput
+          isRoomBackup
+          isSelectFolder
+          newPath={newPath}
+          isError={isError}
+          basePath={basePath}
+          isErrorPath={isErrorPath}
+          isDisabled={isLoadingData}
+          withoutInitPath={!isDocumentsDefault}
+          currentDeviceType={currentDeviceType}
+          filesSelectorSettings={settingsFileSelector}
+          toDefault={toDefault}
+          setNewPath={setNewPath}
+          setBasePath={setBasePath}
+          onSelectFolder={onSelectFolder}
+          {...(passedId && { id: passedId })}
+        />
+      </div>
+      <ScheduleComponent
+        hoursArray={hoursArray}
+        selectedHour={selectedHour}
+        isLoadingData={isLoadingData}
+        periodsObject={periodsObject}
+        selectedMonthDay={selectedMonthDay}
+        monthNumbersArray={monthNumbersArray}
+        weekdaysLabelArray={weekdaysLabelArray}
+        selectedPeriodLabel={selectedPeriodLabel}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+        selectedPeriodNumber={selectedPeriodNumber}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+        setTime={setTime}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMaxCopies={setMaxCopies}
+        setMonthNumber={setMonthNumber}
+      />
+    </>
+  );
+};
+
+export default RoomsModule;
+
+// export default inject(({ backup }) => {
+//   const {
+//     setSelectedFolder,
+//     defaultStorageType,
+//     defaultFolderId,
+//   } = backup;
+
+//   const isDocumentsDefault =
+//     defaultStorageType === `${BackupStorageType.DocumentModuleType}`;
+
+//   const passedId = isDocumentsDefault ? defaultFolderId : "";
+
+//   return {
+//     defaultFolderId,
+//     setSelectedFolder,
+//     passedId,
+//     isDocumentsDefault,
+//   };
+// })(observer(RoomsModule));

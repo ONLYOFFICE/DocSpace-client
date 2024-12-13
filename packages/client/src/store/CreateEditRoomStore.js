@@ -370,12 +370,12 @@ class CreateEditRoomStore {
       watermark,
     } = roomParams;
 
-    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
-
     const isThirdparty = storageLocation.isThirdparty;
     const storageFolderId = storageLocation.storageFolderId;
     const thirdpartyAccount = storageLocation.thirdpartyAccount;
     const isThirdPartyRoom = isThirdparty && storageFolderId;
+
+    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 

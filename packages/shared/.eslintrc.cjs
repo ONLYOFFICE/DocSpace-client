@@ -73,6 +73,8 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "no-plusplus": "off",
 
+    "jsx-a11y/tabindex-no-positive": "off",
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/no-array-index-key": "off",
@@ -90,9 +92,6 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "off",
     "no-bitwise": "off",
     eqeqeq: "off",
-    "@typescript-eslint/no-use-before-define": "off",
-    "jsx-a11y/tabindex-no-positive": "off",
-    "react-hooks/exhaustive-deps": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

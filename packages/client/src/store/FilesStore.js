@@ -3293,6 +3293,9 @@ class FilesStore {
 
       const canOpenPlayer =
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
+      const needConvert = item.viewAccessibility?.MustConvert;
+      const isEditing =
+        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
@@ -3309,10 +3312,6 @@ class FilesStore {
       const { isRecycleBinFolder } = this.treeFoldersStore;
 
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
-
-      const needConvert = item.viewAccessibility?.MustConvert;
-      const isEditing =
-        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const docUrl =
         !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);

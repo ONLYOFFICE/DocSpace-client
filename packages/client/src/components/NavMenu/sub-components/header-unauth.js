@@ -113,7 +113,7 @@ const HeaderUnAuth = ({
         {!isAuthenticated && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
-              <img className="header-logo-icon" src={logo} />
+              <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
         ) : (

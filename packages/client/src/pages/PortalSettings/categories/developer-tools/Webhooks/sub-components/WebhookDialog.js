@@ -234,7 +234,12 @@ const WebhookDialog = (props) => {
             isDisabled={isLoading}
           />
 
-          <button type="submit" ref={submitButtonRef} hidden />
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
         </StyledWebhookForm>
       </ModalDialog.Body>
 

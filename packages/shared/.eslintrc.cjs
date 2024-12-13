@@ -106,7 +106,6 @@ module.exports = {
     "no-unsafe-optional-chaining": "off",
     "default-case": "off",
     "react/display-name": "off",
-    "jsx-a11y/control-has-associated-label": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

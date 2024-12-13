@@ -32,7 +32,7 @@ import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
 import withLoader from "../../../HOCs/withLoader";
 
 const ArticleHeaderContent = ({ currentModuleName }) => {
-  return <>{currentModuleName}</>;
+  return currentModuleName;
 };
 
 export default inject(({ authStore }) => {

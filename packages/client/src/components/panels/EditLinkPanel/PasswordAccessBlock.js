@@ -164,9 +164,7 @@ const PasswordAccessBlock = (props) => {
             </Link>
           </div>
         </div>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </ToggleBlock>
   );
 };

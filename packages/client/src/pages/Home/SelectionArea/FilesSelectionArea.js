@@ -88,9 +88,7 @@ const SelectionArea = (props) => {
     },
   ];
 
-  return isMobile || dragging || isIndexEditingMode ? (
-    <></>
-  ) : (
+  return isMobile || dragging || isIndexEditingMode ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"

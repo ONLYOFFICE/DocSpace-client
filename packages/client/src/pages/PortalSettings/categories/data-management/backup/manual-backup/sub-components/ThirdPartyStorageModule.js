@@ -168,9 +168,7 @@ class ThirdPartyStorageModule extends React.PureComponent {
                 src={ExternalLinkReactSvgUrl}
                 className="drop-down-item_icon"
               />
-            ) : (
-              <></>
-            )}
+            ) : null}
           </DropDownItem>
         </StyledComboBoxItem>
       );

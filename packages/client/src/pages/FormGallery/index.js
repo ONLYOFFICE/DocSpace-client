@@ -90,7 +90,7 @@ const FormGallery = ({
     }
   }, [fromFolderId]);
 
-  if (isInitLoading) return <></>;
+  if (isInitLoading) return null;
 
   return (
     <>

@@ -238,7 +238,7 @@ const HeaderComponent = ({
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         )}
         {customHeader ? (
-          <>{customHeader}</>
+          { customHeader }
         ) : (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />

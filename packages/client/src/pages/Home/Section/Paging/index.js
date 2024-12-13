@@ -305,9 +305,7 @@ const SectionPagingContent = ({
 
   return !tReady ||
     (filter.total <= filter.pageCount && filter.total < 26) ||
-    isHidePagination ? (
-    <></>
-  ) : (
+    isHidePagination ? null : (
     <Paging
       previousLabel={t("Common:Previous")}
       nextLabel={t("Common:Next")}

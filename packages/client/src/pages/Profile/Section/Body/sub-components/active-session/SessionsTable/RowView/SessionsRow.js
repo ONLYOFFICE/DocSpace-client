@@ -54,25 +54,21 @@ const SessionsRow = (props) => {
     });
   };
 
-  const contentElement = (
-    <>
-      {showTickIcon ? (
-        !isMobile() && (
-          <IconButton
-            size={16}
-            iconName={TickSvgUrl}
-            color={globalColors.tickColor}
-          />
-        )
-      ) : (
-        <IconButton
-          size={20}
-          iconName={RemoveSessionSvgUrl}
-          isClickable
-          onClick={onRemoveClick}
-        />
-      )}
-    </>
+  const contentElement = showTickIcon ? (
+    !isMobile() && (
+      <IconButton
+        size={16}
+        iconName={TickSvgUrl}
+        color={globalColors.tickColor}
+      />
+    )
+  ) : (
+    <IconButton
+      size={20}
+      iconName={RemoveSessionSvgUrl}
+      isClickable
+      onClick={onRemoveClick}
+    />
   );
 
   return (

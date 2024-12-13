@@ -126,9 +126,7 @@ const Branding = ({
               )}
               <CompanyInfoSettings />
             </>
-          ) : (
-            <></>
-          )}
+          ) : null}
           <AdditionalResources />
         </>
       )}

@@ -277,7 +277,7 @@ const History = ({
           )),
         ])}
       </StyledHistoryList>
-      {isLoadingNextPage ? <HistoryItemLoader /> : <></>}
+      {isLoadingNextPage ? <HistoryItemLoader /> : null}
     </>
   );
 };

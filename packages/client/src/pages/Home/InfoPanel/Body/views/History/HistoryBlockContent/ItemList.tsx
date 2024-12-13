@@ -167,9 +167,7 @@ const HistoryItemList = ({
                   <SortDesc className="arrow-index" />
                   <div className="index"> {item.newIndex} </div>
                 </div>
-              ) : (
-                <></>
-              )}
+              ) : null}
 
               <div
                 className="item-wrapper"

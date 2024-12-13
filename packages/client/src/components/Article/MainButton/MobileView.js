@@ -205,26 +205,24 @@ const MobileView = ({
   ]);
 
   return (
-    <>
-      {mainButtonMobileVisible && (
-        <StyledMainButtonMobile
-          actionOptions={actionOptions}
-          isOpenButton={isOpenButton}
-          onUploadClick={openButtonToggler}
-          onClose={openButtonToggler}
-          buttonOptions={buttonOptions}
-          percent={percentProgress}
-          progressOptions={progressOptions}
-          title={titleProp}
-          withoutButton={withoutButton}
-          alert={primaryProgressDataAlert}
-          withMenu={withMenu}
-          onClick={onMainButtonClick}
-          onAlertClick={showUploadPanel}
-          withAlertClick={isRoomsFolder}
-        />
-      )}
-    </>
+    mainButtonMobileVisible && (
+      <StyledMainButtonMobile
+        actionOptions={actionOptions}
+        isOpenButton={isOpenButton}
+        onUploadClick={openButtonToggler}
+        onClose={openButtonToggler}
+        buttonOptions={buttonOptions}
+        percent={percentProgress}
+        progressOptions={progressOptions}
+        title={titleProp}
+        withoutButton={withoutButton}
+        alert={primaryProgressDataAlert}
+        withMenu={withMenu}
+        onClick={onMainButtonClick}
+        onAlertClick={showUploadPanel}
+        withAlertClick={isRoomsFolder}
+      />
+    )
   );
 };
 

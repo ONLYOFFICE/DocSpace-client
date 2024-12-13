@@ -488,7 +488,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     <Layout>
       {toast}
       {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
-      {withoutNavMenu ? <></> : <NavMenu />}
+      {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />

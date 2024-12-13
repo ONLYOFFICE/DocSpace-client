@@ -391,7 +391,7 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (isEmptyFilesList && movingInProgress) return <></>;
+  if (isEmptyFilesList && movingInProgress) return null;
 
   if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
 

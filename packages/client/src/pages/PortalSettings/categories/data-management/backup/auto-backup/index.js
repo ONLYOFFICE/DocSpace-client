@@ -470,9 +470,8 @@ class AutomaticBackup extends React.PureComponent {
 
     const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
-    return isEmptyContentBeforeLoader && !isInitialLoading ? (
-      <></>
-    ) : isInitialLoading ? (
+    return isEmptyContentBeforeLoader &&
+      !isInitialLoading ? null : isInitialLoading ? (
       <AutoBackupLoader />
     ) : (
       <StyledAutoBackup isEnableAuto={isEnableAuto}>

@@ -129,7 +129,7 @@ const SocialNetworks = (props) => {
     providers.map((item) => {
       if (!PROVIDERS_DATA[item.provider]) return;
       const { icon, label, iconOptions } = PROVIDERS_DATA[item.provider];
-      if (!icon || !label) return <></>;
+      if (!icon || !label) return null;
 
       const onClick = (e) => {
         if (item.linked) {
@@ -153,9 +153,9 @@ const SocialNetworks = (props) => {
       );
     });
 
-  if (!capabilities?.oauthEnabled) return <></>;
+  if (!capabilities?.oauthEnabled) return null;
 
-  if (providers.length === 0) return <></>;
+  if (providers.length === 0) return null;
 
   return (
     <StyledWrapper>

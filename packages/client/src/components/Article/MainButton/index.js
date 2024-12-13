@@ -730,22 +730,21 @@ const ArticleMainButtonContent = (props) => {
   return (
     <>
       {isMobileArticle ? (
-        <>
-          {!isProfile && (security?.Create || isAccountsPage) && (
-            <MobileView
-              t={t}
-              titleProp={t("Upload")}
-              actionOptions={actions}
-              buttonOptions={!isAccountsPage && uploadActions}
-              withoutButton={isRoomsFolder || isAccountsPage}
-              withMenu={!isRoomsFolder}
-              mainButtonMobileVisible={
-                mainButtonMobileVisible && mainButtonVisible
-              }
-              onMainButtonClick={onCreateRoom}
-            />
-          )}
-        </>
+        !isProfile &&
+        (security?.Create || isAccountsPage) && (
+          <MobileView
+            t={t}
+            titleProp={t("Upload")}
+            actionOptions={actions}
+            buttonOptions={!isAccountsPage && uploadActions}
+            withoutButton={isRoomsFolder || isAccountsPage}
+            withMenu={!isRoomsFolder}
+            mainButtonMobileVisible={
+              mainButtonMobileVisible && mainButtonVisible
+            }
+            onMainButtonClick={onCreateRoom}
+          />
+        )
       ) : isRoomsFolder ? (
         <StyledButton
           className="create-room-button"

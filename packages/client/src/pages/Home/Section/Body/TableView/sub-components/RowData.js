@@ -148,7 +148,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? lastColumnContent : <></>}
+        {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -169,7 +169,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? lastColumnContent : <></>}
+          {lastColumn === "Author" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -196,7 +196,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? lastColumnContent : <></>}
+          {lastColumn === "Created" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -220,7 +220,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? lastColumnContent : <></>}
+          {lastColumn === "Modified" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -242,7 +242,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? lastColumnContent : <></>}
+          {lastColumn === "Size" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -266,7 +266,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? lastColumnContent : <></>}
+          {lastColumn === "Type" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />

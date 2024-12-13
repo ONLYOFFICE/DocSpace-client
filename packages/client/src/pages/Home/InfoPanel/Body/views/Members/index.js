@@ -110,7 +110,7 @@ const Members = ({
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
-  if (!infoPanelMembers) return <></>;
+  if (!infoPanelMembers) return null;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId,

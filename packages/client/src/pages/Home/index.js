@@ -353,9 +353,7 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? (
-        <></>
-      ) : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage ? (
         <>
           <AccountsDialogs />
           <ContactsSelectionArea />
@@ -397,9 +395,7 @@ const PureHome = (props) => {
           )}
 
         <Section.SectionBody isAccounts={isContactsPage}>
-          <>
-            <Outlet />
-          </>
+          <Outlet />
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>

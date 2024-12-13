@@ -173,9 +173,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
           />
         )
-      ) : (
-        <></>
-      )}
+      ) : null}
       <Outlet />
     </>
   );

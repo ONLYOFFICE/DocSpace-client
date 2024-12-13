@@ -108,7 +108,7 @@ const AuditTrail = (props) => {
     return <AuditTrailLoader />;
   }
 
-  if (isLoading) return <></>;
+  if (isLoading) return null;
 
   if (auditTrailUsers.length === 0) {
     return (
@@ -125,29 +125,28 @@ const AuditTrail = (props) => {
   }
 
   return (
-    <>
-      {securityLifetime && securityLifetime.auditTrailLifeTime && (
-        <HistoryMainContent
-          t={t}
-          subHeader={t("AuditSubheader", {
-            productName: t("Common:ProductName"),
-          })}
-          latestText={t("LoginLatestText")}
-          storagePeriod={t("StoragePeriod")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          securityLifetime={securityLifetime}
-          lifetime={securityLifetime.auditTrailLifeTime}
-          setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
-          downloadReport={t("DownloadReportBtnText")}
-          downloadReportDescription={t("DownloadReportDescription")}
-          getReport={getAuditTrailReport}
-          isSettingNotPaid={!isAuditAvailable}
-          isLoadingDownloadReport={isLoadingDownloadReport}
-        />
-      )}
-    </>
+    securityLifetime &&
+    securityLifetime.auditTrailLifeTime && (
+      <HistoryMainContent
+        t={t}
+        subHeader={t("AuditSubheader", {
+          productName: t("Common:ProductName"),
+        })}
+        latestText={t("LoginLatestText")}
+        storagePeriod={t("StoragePeriod")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        securityLifetime={securityLifetime}
+        lifetime={securityLifetime.auditTrailLifeTime}
+        setLifetimeAuditSettings={setLifetimeAuditSettings}
+        content={getContent()}
+        downloadReport={t("DownloadReportBtnText")}
+        downloadReportDescription={t("DownloadReportDescription")}
+        getReport={getAuditTrailReport}
+        isSettingNotPaid={!isAuditAvailable}
+        isLoadingDownloadReport={isLoadingDownloadReport}
+      />
+    )
   );
 };
 

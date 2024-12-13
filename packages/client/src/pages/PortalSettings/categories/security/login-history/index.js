@@ -80,27 +80,26 @@ const LoginHistory = (props) => {
   };
 
   return (
-    <>
-      {securityLifetime && securityLifetime.loginHistoryLifeTime && (
-        <HistoryMainContent
-          t={t}
-          loginHistory
-          subHeader={t("LoginSubheaderTitle")}
-          latestText={t("LoginLatestText")}
-          storagePeriod={t("StoragePeriod")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          lifetime={securityLifetime.loginHistoryLifeTime}
-          securityLifetime={securityLifetime}
-          setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
-          downloadReport={t("DownloadReportBtnText")}
-          downloadReportDescription={t("DownloadReportDescription")}
-          getReport={getLoginHistoryReport}
-          isSettingNotPaid={!isAuditAvailable}
-        />
-      )}
-    </>
+    securityLifetime &&
+    securityLifetime.loginHistoryLifeTime && (
+      <HistoryMainContent
+        t={t}
+        loginHistory
+        subHeader={t("LoginSubheaderTitle")}
+        latestText={t("LoginLatestText")}
+        storagePeriod={t("StoragePeriod")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        lifetime={securityLifetime.loginHistoryLifeTime}
+        securityLifetime={securityLifetime}
+        setLifetimeAuditSettings={setLifetimeAuditSettings}
+        content={getContent()}
+        downloadReport={t("DownloadReportBtnText")}
+        downloadReportDescription={t("DownloadReportDescription")}
+        getReport={getLoginHistoryReport}
+        isSettingNotPaid={!isAuditAvailable}
+      />
+    )
   );
 };
 

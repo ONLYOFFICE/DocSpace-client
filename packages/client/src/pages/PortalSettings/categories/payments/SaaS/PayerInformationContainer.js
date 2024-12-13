@@ -158,31 +158,27 @@ const PayerInformationContainer = ({
     </div>
   );
 
-  const payerInformation = (
-    <>
-      {isStripePortalAvailable ? (
-        <ColorTheme
-          noSelect
-          fontWeight={600}
-          href={accountLink}
-          className="payer-info_account-link"
-          tag="a"
-          themeId={ThemeId.Link}
-          target="_blank"
-        >
-          {t("StripeCustomerPortal")}
-        </ColorTheme>
-      ) : (
-        <ColorTheme
-          fontWeight={600}
-          href={`mailto:${email}`}
-          tag="a"
-          themeId={ThemeId.Link}
-        >
-          {email}
-        </ColorTheme>
-      )}
-    </>
+  const payerInformation = isStripePortalAvailable ? (
+    <ColorTheme
+      noSelect
+      fontWeight={600}
+      href={accountLink}
+      className="payer-info_account-link"
+      tag="a"
+      themeId={ThemeId.Link}
+      target="_blank"
+    >
+      {t("StripeCustomerPortal")}
+    </ColorTheme>
+  ) : (
+    <ColorTheme
+      fontWeight={600}
+      href={`mailto:${email}`}
+      tag="a"
+      themeId={ThemeId.Link}
+    >
+      {email}
+    </ColorTheme>
   );
 
   const payerName = () => {

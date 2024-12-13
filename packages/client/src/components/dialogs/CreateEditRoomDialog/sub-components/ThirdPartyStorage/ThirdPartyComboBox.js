@@ -274,9 +274,7 @@ const ThirdPartyComboBox = ({
                 src={ExternalLinkReactSvgUrl}
                 className="drop-down-item_icon"
               />
-            ) : (
-              <></>
-            )}
+            ) : null}
           </DropDownItem>
           {isDisabled && (
             <Tooltip

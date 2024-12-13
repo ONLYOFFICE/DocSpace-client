@@ -653,9 +653,7 @@ const InviteInput = ({
             <StyledCrossIcon />
           </div>
         </StyledInviteInput>
-        {isAddEmailPanelBlocked ? (
-          <></>
-        ) : (
+        {isAddEmailPanelBlocked ? null : (
           <StyledDropDown
             width={dropDownWidth}
             isDefaultMode={false}

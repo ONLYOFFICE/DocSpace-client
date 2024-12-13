@@ -279,7 +279,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (selectedKeys.length === 0) return <></>;
+    if (selectedKeys.length === 0) return null;
 
     resultTree.forEach((item) => {
       const icon = getCatalogIconUrlByType(item.type, {
@@ -320,7 +320,7 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    <>{items}</>
+    items
   );
 };
 

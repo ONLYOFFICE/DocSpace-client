@@ -124,45 +124,43 @@ const UserFields = (props) => {
 
   return (
     <div className={className}>
-      {inputs ? (
-        inputs.map((input, index) => {
-          let newInput1;
-          let newInput2;
+      {inputs
+        ? inputs.map((input, index) => {
+            let newInput1;
+            let newInput2;
 
-          if (input?.includes("-")) {
-            newInput1 = input.split("-")[0];
-            newInput2 = input.split("-")[1];
-          }
+            if (input?.includes("-")) {
+              newInput1 = input.split("-")[0];
+              newInput2 = input.split("-")[1];
+            }
 
-          const error = newInput2
-            ? (input && input.split("-").length - 1 > 1) ||
-              !regexp.test(newInput1) ||
-              !regexp.test(newInput2)
-            : !regexp.test(input);
+            const error = newInput2
+              ? (input && input.split("-").length - 1 > 1) ||
+                !regexp.test(newInput1) ||
+                !regexp.test(newInput2)
+              : !regexp.test(input);
 
-          return (
-            <StyledInputWrapper key={`user-input-${index}`}>
-              <TextInput
-                className={`${classNameAdditional}-input`}
-                id={`user-input-${index}`}
-                isAutoFocussed={isAutoFocussed}
-                value={input}
-                onChange={(e) => onChangeInput(e, index)}
-                onBlur={() => onBlur(index)}
-                onFocus={() => onFocus(index)}
-                hasError={errors[index] && error}
-              />
-              <StyledTrashIcon
-                className={`${classNameAdditional}-delete-icon`}
-                size="medium"
-                onClick={() => onDelete(index)}
-              />
-            </StyledInputWrapper>
-          );
-        })
-      ) : (
-        <></>
-      )}
+            return (
+              <StyledInputWrapper key={`user-input-${index}`}>
+                <TextInput
+                  className={`${classNameAdditional}-input`}
+                  id={`user-input-${index}`}
+                  isAutoFocussed={isAutoFocussed}
+                  value={input}
+                  onChange={(e) => onChangeInput(e, index)}
+                  onBlur={() => onBlur(index)}
+                  onFocus={() => onFocus(index)}
+                  hasError={errors[index] && error}
+                />
+                <StyledTrashIcon
+                  className={`${classNameAdditional}-delete-icon`}
+                  size="medium"
+                  onClick={() => onDelete(index)}
+                />
+              </StyledInputWrapper>
+            );
+          })
+        : null}
 
       <StyledAddWrapper
         className={classNameAdditional}

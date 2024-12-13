@@ -153,19 +153,17 @@ const CSP = ({
   });
 
   const getChips = (domains) =>
-    domains ? (
-      domains.map((item, index) => (
-        <SelectedItem
-          key={`${item}-${index}`}
-          isInline
-          label={item}
-          onClose={() => deleteDomain(item)}
-          title={item}
-        />
-      ))
-    ) : (
-      <></>
-    );
+    domains
+      ? domains.map((item, index) => (
+          <SelectedItem
+            key={`${item}-${index}`}
+            isInline
+            label={item}
+            onClose={() => deleteDomain(item)}
+            title={item}
+          />
+        ))
+      : null;
 
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);

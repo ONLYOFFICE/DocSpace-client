@@ -289,9 +289,8 @@ class ManualBackup extends React.Component {
 
     const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
-    return isEmptyContentBeforeLoader && !isInitialLoading ? (
-      <></>
-    ) : isInitialLoading ? (
+    return isEmptyContentBeforeLoader &&
+      !isInitialLoading ? null : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>

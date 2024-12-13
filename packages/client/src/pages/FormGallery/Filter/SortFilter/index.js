@@ -98,23 +98,19 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           options={[]}
           selectedOption={{}}
           manualWidth="auto"
-          advancedOptions={
-            <>
-              {sortData?.map((item) => (
-                <Styled.SortDropdownItem
-                  id={item.id}
-                  onClick={() => onSort(item.key)}
-                  key={item.key}
-                  data-value={item.key}
-                  isSelected={oformsFilter.sortBy === item.key}
-                  isDescending={oformsFilter.sortOrder === "desc"}
-                >
-                  <Text fontWeight={600}>{item.label}</Text>
-                  <SortDesc className="sortorder-arrow" />
-                </Styled.SortDropdownItem>
-              ))}
-            </>
-          }
+          advancedOptions={sortData?.map((item) => (
+            <Styled.SortDropdownItem
+              id={item.id}
+              onClick={() => onSort(item.key)}
+              key={item.key}
+              data-value={item.key}
+              isSelected={oformsFilter.sortBy === item.key}
+              isDescending={oformsFilter.sortOrder === "desc"}
+            >
+              <Text fontWeight={600}>{item.label}</Text>
+              <SortDesc className="sortorder-arrow" />
+            </Styled.SortDropdownItem>
+          ))}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </Styled.SortComboBox>

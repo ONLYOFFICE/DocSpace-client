@@ -708,38 +708,37 @@ class Tile extends React.PureComponent {
           isRoom ? (
             <>
               <div className="room-tile_top-content">
-                {renderElement && !(!fileExst && id === -1) && !isEdit && (
-                  <>
-                    {!inProgress ? (
-                      <div
-                        className="file-icon_container"
-                        ref={this.checkboxContainerRef}
+                {renderElement &&
+                  !(!fileExst && id === -1) &&
+                  !isEdit &&
+                  (!inProgress ? (
+                    <div
+                      className="file-icon_container"
+                      ref={this.checkboxContainerRef}
+                    >
+                      <StyledElement
+                        className="file-icon"
+                        isRoom={isRoom}
+                        onClick={this.onFileIconClick}
                       >
-                        <StyledElement
-                          className="file-icon"
-                          isRoom={isRoom}
-                          onClick={this.onFileIconClick}
-                        >
-                          {element}
-                        </StyledElement>
+                        {element}
+                      </StyledElement>
 
-                        <Checkbox
-                          className="checkbox file-checkbox"
-                          isChecked={checked}
-                          isIndeterminate={indeterminate}
-                          onChange={this.changeCheckbox}
-                        />
-                      </div>
-                    ) : (
-                      <Loader
-                        className="tile-folder-loader tile-room"
-                        color=""
-                        size="20px"
-                        type={LoaderTypes.track}
+                      <Checkbox
+                        className="checkbox file-checkbox"
+                        isChecked={checked}
+                        isIndeterminate={indeterminate}
+                        onChange={this.changeCheckbox}
                       />
-                    )}
-                  </>
-                )}
+                    </div>
+                  ) : (
+                    <Loader
+                      className="tile-folder-loader tile-room"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
+                    />
+                  ))}
                 <StyledContent
                   isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
                 >
@@ -806,35 +805,34 @@ class Tile extends React.PureComponent {
             </>
           ) : (
             <>
-              {renderElement && !(!fileExst && id === -1) && !isEdit && (
-                <>
-                  {!inProgress ? (
-                    <div className="file-icon_container">
-                      <StyledElement
-                        className="file-icon"
-                        isRoom={isRoom}
-                        onClick={this.onFileIconClick}
-                      >
-                        {element}
-                      </StyledElement>
+              {renderElement &&
+                !(!fileExst && id === -1) &&
+                !isEdit &&
+                (!inProgress ? (
+                  <div className="file-icon_container">
+                    <StyledElement
+                      className="file-icon"
+                      isRoom={isRoom}
+                      onClick={this.onFileIconClick}
+                    >
+                      {element}
+                    </StyledElement>
 
-                      <Checkbox
-                        className="checkbox file-checkbox"
-                        isChecked={checked}
-                        isIndeterminate={indeterminate}
-                        onChange={this.changeCheckbox}
-                      />
-                    </div>
-                  ) : (
-                    <Loader
-                      className="tile-folder-loader"
-                      color=""
-                      size="20px"
-                      type={LoaderTypes.track}
+                    <Checkbox
+                      className="checkbox file-checkbox"
+                      isChecked={checked}
+                      isIndeterminate={indeterminate}
+                      onChange={this.changeCheckbox}
                     />
-                  )}
-                </>
-              )}
+                  </div>
+                ) : (
+                  <Loader
+                    className="tile-folder-loader"
+                    color=""
+                    size="20px"
+                    type={LoaderTypes.track}
+                  />
+                ))}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >
@@ -893,30 +891,28 @@ class Tile extends React.PureComponent {
               isEdit={isEdit}
               className="file-tile-bottom"
             >
-              {id !== -1 && !isEdit && (
-                <>
-                  {!inProgress ? (
-                    <div className="file-icon_container">
-                      <div className="file-icon" onClick={this.onFileIconClick}>
-                        {element}
-                      </div>
-                      <Checkbox
-                        className="file-checkbox"
-                        isChecked={checked}
-                        isIndeterminate={indeterminate}
-                        onChange={this.changeCheckbox}
-                      />
+              {id !== -1 &&
+                !isEdit &&
+                (!inProgress ? (
+                  <div className="file-icon_container">
+                    <div className="file-icon" onClick={this.onFileIconClick}>
+                      {element}
                     </div>
-                  ) : (
-                    <Loader
-                      className="tile-file-loader"
-                      color=""
-                      size="20px"
-                      type={LoaderTypes.track}
+                    <Checkbox
+                      className="file-checkbox"
+                      isChecked={checked}
+                      isIndeterminate={indeterminate}
+                      onChange={this.changeCheckbox}
                     />
-                  )}
-                </>
-              )}
+                  </div>
+                ) : (
+                  <Loader
+                    className="tile-file-loader"
+                    color=""
+                    size="20px"
+                    type={LoaderTypes.track}
+                  />
+                ))}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >

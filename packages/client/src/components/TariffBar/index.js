@@ -108,7 +108,7 @@ const TariffBar = ({
         paymentDate,
       );
 
-  if (!tariffBar) return <></>;
+  if (!tariffBar) return null;
   return (
     <StyledWrapper>
       <Text

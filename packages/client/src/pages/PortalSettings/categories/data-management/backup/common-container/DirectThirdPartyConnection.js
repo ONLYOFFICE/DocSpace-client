@@ -241,9 +241,7 @@ const DirectThirdPartyConnection = (props) => {
               src={ExternalLinkReactSvgUrl}
               className="drop-down-item_icon"
             />
-          ) : (
-            <></>
-          )}
+          ) : null}
         </DropDownItem>
       </StyledComboBoxItem>
     );
@@ -304,28 +302,25 @@ const DirectThirdPartyConnection = (props) => {
           isDisabled={isDisabledComponent}
         />
       ) : (
-        <>
-          {folderList.id && selectedThirdPartyAccount && (
-            <FilesSelectorInput
-              className="restore-backup_input"
-              descriptionText={descriptionText}
-              filterParam={filterParam}
-              rootThirdPartyId={selectedThirdPartyAccount.id}
-              onSelectFolder={onSelectFolder}
-              onSelectFile={onSelectFile}
-              id={id || folderList.id}
-              withoutInitPath={withoutInitPath}
-              isError={isError}
-              isDisabled={isDisabledSelector}
-              isThirdParty
-              isSelectFolder={isSelectFolder}
-              isSelect={isSelect}
-              checkCreating={
-                selectedThirdPartyAccount?.provider_key === "WebDav"
-              }
-            />
-          )}
-        </>
+        folderList.id &&
+        selectedThirdPartyAccount && (
+          <FilesSelectorInput
+            className="restore-backup_input"
+            descriptionText={descriptionText}
+            filterParam={filterParam}
+            rootThirdPartyId={selectedThirdPartyAccount.id}
+            onSelectFolder={onSelectFolder}
+            onSelectFile={onSelectFile}
+            id={id || folderList.id}
+            withoutInitPath={withoutInitPath}
+            isError={isError}
+            isDisabled={isDisabledSelector}
+            isThirdParty
+            isSelectFolder={isSelectFolder}
+            isSelect={isSelect}
+            checkCreating={selectedThirdPartyAccount?.provider_key === "WebDav"}
+          />
+        )
       )}
       {deleteThirdPartyDialogVisible && (
         <DeleteThirdPartyDialog

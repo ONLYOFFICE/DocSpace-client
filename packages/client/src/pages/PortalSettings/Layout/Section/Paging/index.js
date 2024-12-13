@@ -151,9 +151,7 @@ const SectionPagingContent = ({
   // console.log("SectionPagingContent render", filter);
 
   return isLoaded ? (
-    !filter || filter.total < filter.pageCount ? (
-      <></>
-    ) : (
+    !filter || filter.total < filter.pageCount ? null : (
       <Paging
         previousLabel={t("Common:Previous")}
         nextLabel={t("Common:Next")}

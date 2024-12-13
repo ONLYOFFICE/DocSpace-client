@@ -242,7 +242,7 @@ class DetailsHelper {
             : this.t("Common:Storage");
         }
 
-        return <></>;
+        return null;
       default:
         break;
     }
@@ -405,7 +405,7 @@ class DetailsHelper {
       );
     }
 
-    return <></>;
+    return null;
   };
 }
 

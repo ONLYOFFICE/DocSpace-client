@@ -97,7 +97,6 @@ module.exports = {
     "react/forbid-prop-types": "off",
     "react/no-unused-prop-types": "off",
     "no-case-declarations": "off",
-    "react/jsx-no-useless-fragment": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

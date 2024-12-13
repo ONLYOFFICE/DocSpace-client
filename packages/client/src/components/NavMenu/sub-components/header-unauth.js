@@ -116,9 +116,7 @@ const HeaderUnAuth = ({
               <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </Box>
 
       {!wizardToken && (

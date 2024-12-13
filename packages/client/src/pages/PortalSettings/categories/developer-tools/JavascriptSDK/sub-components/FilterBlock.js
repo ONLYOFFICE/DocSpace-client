@@ -383,46 +383,43 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
       />
-      {isUserFilterSet && (
-        <>
-          {"authorType" in config.filter ? (
-            <SelectedItem
-              onClick={clearAuthorType}
-              onClose={() => {}}
-              label={selectedUser}
-            />
-          ) : (
-            <UserInputContainer>
-              <UserInput ref={searchRef}>
-                <TextInput
-                  scale
-                  onChange={onChangeAuthor}
-                  placeholder={t("SearchByNameEmail")}
-                  value={author}
-                  onFocus={openInviteInputPanel}
-                  isAutoFocussed
-                  onKeyDown={onKeyDown}
-                  tabIndex={5}
-                />
-              </UserInput>
-              {author.length >= minSearchValue && (
-                <StyledDropDown
-                  width={searchRef?.current?.offsetWidth}
-                  isDefaultMode={false}
-                  open={searchPanelVisible}
-                  manualX="16px"
-                  showDisabledItems
-                  clickOutsideAction={closeInviteInputPanel}
-                  eventTypes="click"
-                  {...dropDownMaxHeight}
-                >
-                  {usersList.length ? foundUsers : ""}
-                </StyledDropDown>
-              )}
-            </UserInputContainer>
-          )}
-        </>
-      )}
+      {isUserFilterSet &&
+        ("authorType" in config.filter ? (
+          <SelectedItem
+            onClick={clearAuthorType}
+            onClose={() => {}}
+            label={selectedUser}
+          />
+        ) : (
+          <UserInputContainer>
+            <UserInput ref={searchRef}>
+              <TextInput
+                scale
+                onChange={onChangeAuthor}
+                placeholder={t("SearchByNameEmail")}
+                value={author}
+                onFocus={openInviteInputPanel}
+                isAutoFocussed
+                onKeyDown={onKeyDown}
+                tabIndex={5}
+              />
+            </UserInput>
+            {author.length >= minSearchValue && (
+              <StyledDropDown
+                width={searchRef?.current?.offsetWidth}
+                isDefaultMode={false}
+                open={searchPanelVisible}
+                manualX="16px"
+                showDisabledItems
+                clickOutsideAction={closeInviteInputPanel}
+                eventTypes="click"
+                {...dropDownMaxHeight}
+              >
+                {usersList.length ? foundUsers : ""}
+              </StyledDropDown>
+            )}
+          </UserInputContainer>
+        ))}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}

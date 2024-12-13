@@ -91,7 +91,7 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -111,7 +111,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Type" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -130,7 +130,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Tags" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -153,7 +153,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Owner" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Owner" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -176,7 +176,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Activity" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Activity" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -189,7 +189,7 @@ const RoomsRowDataComponent = (props) => {
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
-            {lastColumn === "Storage" ? quickButtonsComponentNode : <></>}
+            {lastColumn === "Storage" ? quickButtonsComponentNode : null}
           </TableCell>
         ) : (
           <div />

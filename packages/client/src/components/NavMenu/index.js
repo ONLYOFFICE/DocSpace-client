@@ -161,7 +161,7 @@ const NavMenu = (props) => {
   const hideHeader = (!showHeader && isFrame) || isPublicPreview();
 
   if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
-    return <></>;
+    return null;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
 

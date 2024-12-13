@@ -85,7 +85,7 @@ const RoomsListComponent = (props) => {
     );
   });
 
-  if (roomsListLength === 0) return <></>;
+  if (roomsListLength === 0) return null;
 
   return (
     <StyledStatistics>

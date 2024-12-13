@@ -106,9 +106,7 @@ const ReactSmartBanner = (props) => {
         appMeta={appMeta}
       />
     </Wrapper>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default inject(({ settingsStore }) => {

@@ -82,9 +82,7 @@ const HeaderNav = ({
           userIsUpdate={userIsUpdate}
           setUserIsUpdate={setUserIsUpdate}
         />
-      ) : (
-        <></>
-      )}
+      ) : null}
     </StyledNav>
   );
 };

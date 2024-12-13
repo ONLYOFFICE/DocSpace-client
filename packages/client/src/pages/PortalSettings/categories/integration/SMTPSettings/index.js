@@ -75,7 +75,7 @@ const SMTPSettings = (props) => {
 
   const isLoadingContent = isLoading || !ready;
 
-  if (!isLoading && !isInit) return <></>;
+  if (!isLoading && !isInit) return null;
 
   if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 

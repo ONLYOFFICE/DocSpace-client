@@ -283,9 +283,7 @@ class FileRow extends Component {
       <Text as="span" fontWeight="600" className="file-exst">
         {ext}
       </Text>
-    ) : (
-      <></>
-    );
+    ) : null;
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 

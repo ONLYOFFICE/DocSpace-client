@@ -114,6 +114,7 @@ const CompanyInfoSettingsComponent = (props) => {
         previewData={companyInfoSettingsData}
       />
       <CompanyInfo
+        t={t}
         isSettingPaid={isSettingPaid}
         onShowExample={onShowExample}
         companySettings={companyInfoSettingsData}

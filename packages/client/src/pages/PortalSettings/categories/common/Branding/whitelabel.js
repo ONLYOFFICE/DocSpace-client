@@ -84,10 +84,12 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
+  console.log("logoUrls", logoUrls);
   return !isWhiteLabelLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelPage
+      t={t}
       logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}

@@ -95,6 +95,7 @@ const AdditionalResourcesComponent = (props) => {
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
   return (
     <AdditionalResourcesPage
+      t={t}
       isSettingPaid={isSettingPaid}
       feedbackAndSupportEnabled={feedbackAndSupportEnabled}
       helpCenterEnabled={helpCenterEnabled}

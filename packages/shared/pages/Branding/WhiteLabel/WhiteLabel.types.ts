@@ -64,6 +64,7 @@ export interface IHeaderProps {
 }
 
 export interface IWhiteLabel {
+  t: TTranslation;
   isSettingPaid: boolean;
   showNotAvailable: boolean;
   standalone: boolean;

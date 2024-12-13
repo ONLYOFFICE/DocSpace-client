@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
@@ -37,6 +36,7 @@ import { IAdditionalResources } from "./AdditionalResources.types";
 import { brandingRedirectUrl } from "../constants";
 
 export const AdditionalResources = ({
+  t,
   isSettingPaid,
   feedbackAndSupportEnabled,
   helpCenterEnabled,
@@ -46,8 +46,6 @@ export const AdditionalResources = ({
   additionalResourcesIsDefault,
   deviceType,
 }: IAdditionalResources) => {
-  const { t } = useTranslation(["Settings", "Common"]);
-
   const [feedbackEnabled, setFeedbackEnabled] = useState(
     feedbackAndSupportEnabled,
   );

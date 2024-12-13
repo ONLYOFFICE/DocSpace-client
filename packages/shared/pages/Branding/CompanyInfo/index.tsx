@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import { Link } from "../../../components/link";
 import { FieldContainer } from "../../../components/field-container";
@@ -44,6 +44,7 @@ import { useCompanySettings } from "./useCompanySettings";
 import { brandingRedirectUrl } from "../constants";
 
 export const CompanyInfo = ({
+  t,
   isSettingPaid,
   onShowExample,
   companySettings,
@@ -53,8 +54,6 @@ export const CompanyInfo = ({
   companyInfoSettingsIsDefault,
   deviceType,
 }: ICompanyInfo) => {
-  const { t } = useTranslation(["Settings", "Common"]);
-
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
     currentLocation: "company-info-settings",

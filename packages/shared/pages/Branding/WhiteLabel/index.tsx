@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import isEqual from "lodash/isEqual";
 
 import { Text } from "../../../components/text";
@@ -45,6 +44,7 @@ import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
+    t,
     logoUrls,
     isSettingPaid,
     showAbout,
@@ -61,16 +61,15 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     defaultWhiteLabelLogoUrls,
     logoText,
   } = props;
-  const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
 
-  /*useResponsiveNavigation({
+  useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
     currentLocation: "white-label",
     deviceType,
   });
-*/
+
   useEffect(() => {
     if (!isWhiteLabelLoaded) return;
     setIsEmpty(!logoText);

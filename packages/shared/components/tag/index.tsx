@@ -35,7 +35,7 @@ import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 
-import { TagProps } from "./Tag.types";
+import type { TagProps } from "./Tag.types";
 import styles from "./Tag.module.scss";
 
 const TagPure = ({

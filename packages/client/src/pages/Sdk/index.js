@@ -246,7 +246,7 @@ const Sdk = ({
     !frameConfig?.id;
 
   switch (mode) {
-    case "room-selector":
+    case "room-selector": {
       const cancelButtonProps = frameConfig?.showSelectorCancel
         ? {
             withCancelButton: true,
@@ -276,6 +276,7 @@ const Sdk = ({
         />
       );
       break;
+    }
     case "file-selector":
       component = (
         <FilesSelector

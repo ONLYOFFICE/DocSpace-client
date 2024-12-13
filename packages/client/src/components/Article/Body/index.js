@@ -98,7 +98,7 @@ const ArticleBodyContent = (props) => {
       };
 
       switch (folderId) {
-        case myFolderId:
+        case myFolderId: {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
 
@@ -117,7 +117,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Personal);
 
           break;
-        case archiveFolderId:
+        }
+        case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Archive,
@@ -127,7 +128,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Archive);
 
           break;
-        case recycleBinFolderId:
+        }
+        case recycleBinFolderId: {
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
 
@@ -145,14 +147,15 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Trash);
 
           break;
-        case "accounts":
+        }
+        case "accounts": {
           const accountsFilter = AccountsFilter.getDefault();
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
           break;
-        case roomsFolderId:
-        default:
+        }
+        default: {
           const roomsFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Active,
@@ -162,6 +165,7 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Shared);
 
           break;
+        }
       }
 
       path += `?${params}&date=${hashDate}`;

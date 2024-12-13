@@ -3121,11 +3121,12 @@ class FilesStore {
       case FolderType.USER:
       case FolderType.Rooms:
         return true;
-      case FolderType.SHARE:
+      case FolderType.SHARE: {
         const canCreateInSharedFolder = this.selectedFolderStore.access === 1;
         return (
           !this.selectedFolderStore.isRootFolder && canCreateInSharedFolder
         );
+      }
       case FolderType.Privacy:
         return (
           this.settingsStore.isDesktopClient &&

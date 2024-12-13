@@ -1727,16 +1727,17 @@ class FilesActionStore {
     const canDownload = selection.every((s) => s.security?.Download);
 
     switch (option) {
-      case "copy":
+      case "copy": {
         const canCopy = selection.every((s) => s.security?.Copy);
 
         return hasSelection && canCopy;
+      }
       case "showInfo":
       case "download":
         return hasSelection && canDownload;
       case "downloadAs":
         return canDownload && canConvertSelected;
-      case "moveTo":
+      case "moveTo": {
         const canMove = selection.every((s) => s.security?.Move);
 
         return (
@@ -1745,26 +1746,31 @@ class FilesActionStore {
           canMove &&
           rootFolderType !== FolderType.TRASH
         );
-
-      case "archive":
+      }
+      case "archive": {
         const canArchive = selection.every((s) => s.security?.Move);
 
         return canArchive;
-      case "unarchive":
+      }
+      case "unarchive": {
         const canUnArchive = selection.some((s) => s.security?.Move);
 
         return canUnArchive;
-      case "delete-room":
+      }
+      case "delete-room": {
         const canRemove = selection.some((s) => s.security?.Delete);
 
         return canRemove;
-      case "delete":
+      }
+      case "delete": {
         const canDelete = selection.every((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
-      case "create-room":
+      }
+      case "create-room": {
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
+      }
       case "change-quota":
         return hasRoomsToChangeQuota;
       case "disable-quota":

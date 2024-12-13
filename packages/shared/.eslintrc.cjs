@@ -96,7 +96,6 @@ module.exports = {
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": "off",
     "react/no-unused-prop-types": "off",
-    "no-case-declarations": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

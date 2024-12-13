@@ -24,81 +24,185 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
+import React, { useEffect } from "react";
+
 import { BackupStorageType } from "@docspace/shared/enums";
-import ScheduleComponent from "./ScheduleComponent";
+import {
+  DirectThirdPartyConnection,
+  type DirectThirdPartyConnectionProps,
+} from "@docspace/shared/components/direct-third-party-connection";
 
-import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";
+import type { Nullable } from "@docspace/shared/types";
 
-class ThirdPartyModule extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { setSelectedFolder, isResourcesDefault } = props;
+import {
+  ScheduleComponent,
+  type ScheduleComponentProps,
+} from "./ScheduleComponent";
 
-    this.state = {
-      isPanelVisible: false,
-    };
+interface ThirdPartyModuleProps
+  extends Omit<
+      DirectThirdPartyConnectionProps,
+      | "onSelectFolder"
+      | "isDisabled"
+      | "id"
+      | "withoutInitPath"
+      | "descriptionText"
+      | "filterParam"
+      | "isMobileScale"
+      | "isSelect"
+      | "isSelectFolder"
+      | "onSelectFile"
+    >,
+    ScheduleComponentProps {
+  isLoadingData: boolean;
+  setSelectedFolder: (id: string) => void;
+  defaultStorageType: Nullable<string>;
+  defaultFolderId: Nullable<string>;
+}
 
-    !isResourcesDefault && setSelectedFolder("");
-  }
+const ThirdPartyModule = ({
+  isError,
+  buttonSize,
+  isLoadingData,
+  defaultFolderId,
+  defaultStorageType,
+  setSelectedFolder,
 
-  onSelectFolder = (id) => {
-    const { setSelectedFolder } = this.props;
+  // DirectThirdPartyConnection
+  accounts,
+  basePath,
+  clearLocalStorage,
+  connectDialogVisible,
+  connectedThirdPartyAccount,
+  deleteThirdParty,
+  deleteThirdPartyDialogVisible,
+  filesSelectorSettings,
+  isErrorPath,
+  isTheSameThirdPartyAccount,
+  newPath,
+  openConnectWindow,
+  providers,
+  removeItem,
+  selectedThirdPartyAccount,
+  setBasePath,
+  setConnectDialogVisible,
+  setConnectedThirdPartyAccount,
+  setDeleteThirdPartyDialogVisible,
+  setNewPath,
+  setSelectedThirdPartyAccount,
+  setThirdPartyAccountsInfo,
+  setThirdPartyProviders,
+  toDefault,
 
+  // ScheduleComponent
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodLabel,
+  selectedPeriodNumber,
+  selectedWeekdayLabel,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+  weekdaysLabelArray,
+}: ThirdPartyModuleProps) => {
+  const isResourcesDefault =
+    defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
+  const passedId = isResourcesDefault ? (defaultFolderId ?? "") : "";
+
+  useEffect(() => {
+    if (!isResourcesDefault) setSelectedFolder("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onSelectFolder = (id: string | number | undefined) => {
     setSelectedFolder(`${id}`);
   };
-  render() {
-    const { isPanelVisible } = this.state;
-    const {
-      isError,
-      isLoadingData,
-      isReset,
-      buttonSize,
-      passedId,
-      //commonThirdPartyList,
-      isResourcesDefault,
-      t,
-      ...rest
-    } = this.props;
 
-    return (
-      <>
-        <div className="auto-backup_third-party-module">
-          <DirectThirdPartyConnection
-            t={t}
-            onSelectFolder={this.onSelectFolder}
-            isDisabled={isLoadingData}
-            isPanelVisible={isPanelVisible}
-            withoutInitPath={!isResourcesDefault}
-            isError={isError}
-            id={passedId}
-            buttonSize={buttonSize}
-          />
-        </div>
-        <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
-      </>
-    );
-  }
-}
-export default inject(({ backup }) => {
-  const {
-    setSelectedFolder,
+  return (
+    <>
+      <div className="auto-backup_third-party-module">
+        <DirectThirdPartyConnection
+          id={passedId}
+          isError={isError}
+          buttonSize={buttonSize}
+          isDisabled={isLoadingData}
+          onSelectFolder={onSelectFolder}
+          withoutInitPath={!isResourcesDefault}
+          openConnectWindow={openConnectWindow}
+          connectDialogVisible={connectDialogVisible}
+          deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+          connectedThirdPartyAccount={connectedThirdPartyAccount}
+          setConnectDialogVisible={setConnectDialogVisible}
+          setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+          clearLocalStorage={clearLocalStorage}
+          setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+          isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+          selectedThirdPartyAccount={selectedThirdPartyAccount}
+          accounts={accounts}
+          setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+          deleteThirdParty={deleteThirdParty}
+          setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+          setThirdPartyProviders={setThirdPartyProviders}
+          providers={providers}
+          removeItem={removeItem}
+          newPath={newPath}
+          basePath={basePath}
+          isErrorPath={isErrorPath}
+          filesSelectorSettings={filesSelectorSettings}
+          setBasePath={setBasePath}
+          toDefault={toDefault}
+          setNewPath={setNewPath}
+        />
+      </div>
+      <ScheduleComponent
+        isLoadingData={isLoadingData}
+        selectedPeriodLabel={selectedPeriodLabel}
+        selectedWeekdayLabel={selectedWeekdayLabel}
+        selectedHour={selectedHour}
+        selectedMonthDay={selectedMonthDay}
+        selectedMaxCopiesNumber={selectedMaxCopiesNumber}
+        selectedPeriodNumber={selectedPeriodNumber}
+        setMaxCopies={setMaxCopies}
+        setPeriod={setPeriod}
+        setWeekday={setWeekday}
+        setMonthNumber={setMonthNumber}
+        setTime={setTime}
+        periodsObject={periodsObject}
+        weekdaysLabelArray={weekdaysLabelArray}
+        monthNumbersArray={monthNumbersArray}
+        hoursArray={hoursArray}
+        maxNumberCopiesArray={maxNumberCopiesArray}
+      />
+    </>
+  );
+};
 
-    defaultStorageType,
-    commonThirdPartyList,
-    defaultFolderId,
-  } = backup;
+export default ThirdPartyModule;
 
-  const isResourcesDefault =
-    defaultStorageType === `${BackupStorageType.ResourcesModuleType}`;
-  const passedId = isResourcesDefault ? defaultFolderId : "";
+// export default inject(({ backup }) => {
+//   const {
+//     setSelectedFolder,
 
-  return {
-    setSelectedFolder,
-    passedId,
-    commonThirdPartyList,
-    isResourcesDefault,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));
+//     defaultStorageType,
+//     commonThirdPartyList,
+//     defaultFolderId,
+//   } = backup;
+
+//   const isResourcesDefault =
+//     defaultStorageType === `${BackupStorageType.ResourcesModuleType}`;
+//   const passedId = isResourcesDefault ? defaultFolderId : "";
+
+//   return {
+//     setSelectedFolder,
+//     passedId,
+//     commonThirdPartyList,
+//     isResourcesDefault,
+//   };
+// })(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));

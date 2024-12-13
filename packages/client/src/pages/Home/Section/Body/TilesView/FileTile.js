@@ -132,7 +132,7 @@ const FileTile = (props) => {
         ready: tileRef?.current.getClientRects()[0],
       });
     }
-  }, [guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+  }, [tileRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
 
   const element = (
     <ItemIcon

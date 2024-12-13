@@ -197,7 +197,7 @@ const FilesTableRow = (props) => {
         ready: rowRef.current.firstChild.offsetParent.getClientRects()[0],
       });
     }
-  }, [guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+  }, [rowRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
 
   return (
     <StyledDragAndDrop

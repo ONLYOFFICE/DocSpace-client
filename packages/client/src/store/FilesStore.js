@@ -943,6 +943,7 @@ class FilesStore {
   };
 
   setViewAs = (viewAs) => {
+    this.setGuidanceCoordinates({}, true);
     this.privateViewAs = viewAs;
     localStorage.setItem("viewAs", viewAs);
     viewAs === "tile" && this.createThumbnails();
@@ -2526,6 +2527,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "edit-index",
+        "short-tour",
         "export-room-index",
         "separator1",
         "duplicate-room",
@@ -4199,7 +4201,16 @@ class FilesStore {
     this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
-  setGuidanceCoordinates = (value) => {
+  setGuidanceCoordinates = (value, clear = false) => {
+    if (clear) {
+      return (this.guidanceCoordinates = {
+        pdf: null,
+        ready: null,
+        share: null,
+        uploading: null,
+      });
+    }
+
     if (this.guidanceCoordinates.pdf) {
       return (this.guidanceCoordinates = {
         pdf: this.guidanceCoordinates.pdf,

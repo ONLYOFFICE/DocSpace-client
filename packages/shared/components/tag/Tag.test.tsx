@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { ThemeProvider } from "styled-components";
+import { Base } from "@docspace/shared/themes";
 
-import { Tag } from "./Tag";
+import { Tag } from ".";
 
 const baseProps = {
   tag: "script",
@@ -41,24 +43,25 @@ const baseProps = {
   tagMaxWidth: "160px",
 };
 
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
+};
+
 describe("<Tag />", () => {
   it("renders without error", () => {
-    render(<Tag {...baseProps} />);
-
-    expect(screen.getByTestId("tag")).toBeInTheDocument();
+    const { getByTestId } = renderWithTheme(<Tag {...baseProps} />);
+    expect(getByTestId("tag")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Tag {...baseProps} id="testId" />);
+  it("accepts id", () => {
+    const { getByTestId } = renderWithTheme(<Tag {...baseProps} id="testId" />);
+    expect(getByTestId("tag")).toHaveAttribute("id", "testId");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Tag {...baseProps} className="test" />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("accepts className", () => {
+    const { getByTestId } = renderWithTheme(
+      <Tag {...baseProps} className="test" />,
+    );
+    expect(getByTestId("tag")).toHaveClass("test");
+  });
 });

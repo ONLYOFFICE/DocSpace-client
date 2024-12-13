@@ -34,10 +34,6 @@ import { isMobile } from "react-device-detect";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     onContentFileSelect = (checked, file) => {
       const { selectRowAction } = this.props;
       if (!file || file.id === -1) return;

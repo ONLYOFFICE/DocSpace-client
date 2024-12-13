@@ -163,10 +163,6 @@ export const LabelContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 class ProfileMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderDropDown = () => {
     const {
       avatarRole,

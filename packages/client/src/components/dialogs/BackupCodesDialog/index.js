@@ -55,10 +55,6 @@ const StyledFooterContent = styled.div`
 `;
 
 class BackupCodesDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getNewBackupCodes = async () => {
     const { setBackupCodes } = this.props;
     try {

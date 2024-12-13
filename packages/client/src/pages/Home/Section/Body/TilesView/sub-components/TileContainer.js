@@ -185,10 +185,6 @@ const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 class TileContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       children,

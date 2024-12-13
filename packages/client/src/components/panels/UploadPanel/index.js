@@ -42,10 +42,6 @@ import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 
 class UploadPanelComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     document.addEventListener("keyup", this.onKeyPress);
   }

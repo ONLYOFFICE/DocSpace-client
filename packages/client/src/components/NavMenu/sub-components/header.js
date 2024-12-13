@@ -213,15 +213,13 @@ const HeaderComponent = ({
 
   const onResize = () => {
     const desktop = isDesktop();
-    if (isDesktopView !== desktop) {
-      setIsDesktopView(desktop);
-    }
+    setIsDesktopView((value) => (value !== desktop ? desktop : value));
   };
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  });
+  }, [onResize]);
 
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 

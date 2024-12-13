@@ -139,7 +139,8 @@ const Layout = (props) => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    htmlEl.style.height = bodyEl.style.height = "100dvh";
+    htmlEl.style.height = "100dvh";
+    bodyEl.style.height = "100dvh";
 
     htmlEl.style.overflow = "hidden";
   }, []);

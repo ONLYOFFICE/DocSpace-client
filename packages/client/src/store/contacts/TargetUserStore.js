@@ -200,19 +200,19 @@ class TargetUserStore {
   };
 
   changeSubscription = async (notificationType, isEnabled) => {
-    const setNotificationValue = (notificationType, isEnabled) => {
-      switch (notificationType) {
+    const setNotificationValue = (type, enabled) => {
+      switch (type) {
         case Badges:
-          this.badgesSubscription = isEnabled;
+          this.badgesSubscription = enabled;
           break;
         case DailyFeed:
-          this.dailyFeedSubscriptions = isEnabled;
+          this.dailyFeedSubscriptions = enabled;
           break;
         case RoomsActivity:
-          this.roomsActivitySubscription = isEnabled;
+          this.roomsActivitySubscription = enabled;
           break;
         case UsefulTips:
-          this.usefulTipsSubscription = isEnabled;
+          this.usefulTipsSubscription = enabled;
           break;
         default:
           break;

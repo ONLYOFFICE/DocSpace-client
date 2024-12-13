@@ -1373,7 +1373,7 @@ class UploadDataStore {
           fileSize,
           path,
           operationId,
-          toFolderId,
+          dstFolderId,
         };
       })
       .then(
@@ -1384,7 +1384,7 @@ class UploadDataStore {
           path,
           t,
           operationId,
-          toFolderId,
+          dstFolderId,
         }) => {
           const fileIndex = this.uploadedFilesHistory.findIndex(
             (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
@@ -1401,7 +1401,7 @@ class UploadDataStore {
             path,
             t,
             operationId,
-            toFolderId,
+            dstFolderId,
             createNewIfExist,
           );
         },

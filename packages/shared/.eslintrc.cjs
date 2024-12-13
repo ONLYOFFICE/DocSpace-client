@@ -73,6 +73,7 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "no-plusplus": "off",
 
+    "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": "off",
@@ -93,7 +94,6 @@ module.exports = {
     "jsx-a11y/tabindex-no-positive": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-useless-constructor": "off",
-    "@typescript-eslint/no-shadow": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

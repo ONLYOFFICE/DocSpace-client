@@ -49,7 +49,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -75,7 +75,6 @@ const OnePasswordRow = ({
   visible,
 }) => {
   const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(false);
   const { t } = useTranslation([
     "UploadPanel",
     "DownloadDialog",
@@ -86,59 +85,51 @@ const OnePasswordRow = ({
 
   const onChangePassword = (password) => {
     setPassword(password);
-    !passwordValid && setPasswordValid(true);
+  };
+
+  const updateDownloadItem = (fileId, updates) => {
+    const files = [...downloadItems];
+    const itemToUpdate = files.find((item) => item.id === fileId);
+    Object.assign(itemToUpdate, updates);
+    return files;
   };
 
   const onDowloadInOriginal = () => {
-    const fileExst = item.fileExst;
-    const fileId = item.id;
-
-    const files = [...downloadItems];
-    files.map((item) => {
-      if (item.id === fileId) {
-        item.format = fileExst;
-      }
-    });
-
-    onDownload();
+    const files = updateDownloadItem(item.id, { format: item.fileExst });
+    onDownload(files);
   };
 
   const onDownloadWithPassword = () => {
-    const fileId = item.id;
-
-    const files = [...downloadItems];
-    files.map((item) => {
-      if (item.id === fileId) {
-        item.password = password;
-      }
+    const files = updateDownloadItem(item.id, {
+      password,
     });
-
     onDownload(files);
   };
 
   const onRemoveFromDowload = () => {
     const fileId = item.id;
 
-    const files = [...downloadItems.filter((item) => item.id !== fileId)];
-
+    const files = downloadItems.filter((item) => item.id !== fileId);
     if (!files.length) {
       onClosePanel();
       return;
     }
-
     onDownload(files);
   };
 
-  const onKeyUp = (event) => {
-    if (!password.trim().length) return;
+  const onKeyUp = useCallback(
+    (event) => {
+      if (!password.trim().length) return;
 
-    event.stopPropagation();
-    event.preventDefault();
+      event.stopPropagation();
+      event.preventDefault();
 
-    if (event.key === "Enter") {
-      onDownloadWithPassword();
-    }
-  };
+      if (event.key === "Enter") {
+        onDownloadWithPassword();
+      }
+    },
+    [password, onDownloadWithPassword],
+  );
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUp, true);
@@ -146,10 +137,9 @@ const OnePasswordRow = ({
     return () => {
       window.removeEventListener("keyup", onKeyUp, true);
     };
-  });
+  }, [onKeyUp]);
 
   const element = getItemIcon(item);
-
   const text =
     "This file is protected, please enter the password to access it or download in original format.";
 
@@ -161,7 +151,6 @@ const OnePasswordRow = ({
       autoMaxHeight
     >
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
-
       <ModalDialog.Body>
         <StyledSinglePasswordFile>
           <Text>{text}</Text>
@@ -180,17 +169,12 @@ const OnePasswordRow = ({
           </div>
           <SimulatePassword
             onChange={onChangePassword}
-            hasError={!passwordValid}
             forwardedRef={inputRef}
-            inputValue={password}
           />
         </StyledSinglePasswordFile>
       </ModalDialog.Body>
-
       <ModalDialog.Footer>
         <Button
-          key="DownloadButton"
-          className="download-button"
           label={t("Common:ContinueButton")}
           size="normal"
           primary
@@ -199,9 +183,7 @@ const OnePasswordRow = ({
           scale
         />
         <Button
-          key="CancelButton"
-          className="cancel-button"
-          label={t("Common:CancelButton")}
+          label={t("Files:RemoveFromList")}
           size="normal"
           onClick={onRemoveFromDowload}
           scale

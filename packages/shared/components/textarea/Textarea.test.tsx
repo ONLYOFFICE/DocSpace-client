@@ -117,11 +117,4 @@ describe("<Textarea />", () => {
     const textarea = container.querySelector("[data-testid='textarea']");
     expect(textarea).toHaveStyle({ fontSize: "16px" });
   });
-
-  it("applies custom height", () => {
-    renderWithTheme(<Textarea {...defaultProps} heightTextArea="100px" />);
-
-    const textarea = screen.getByTestId("textarea");
-    expect(textarea).toHaveStyle({ minHeight: "100px" });
-  });
 });

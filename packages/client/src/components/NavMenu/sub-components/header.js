@@ -212,8 +212,10 @@ const HeaderComponent = ({
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 
   const onResize = () => {
-    const isDesktopView = isDesktop();
-    if (isDesktopView === isDesktopView) setIsDesktopView(isDesktopView);
+    const desktop = isDesktop();
+    if (isDesktopView !== desktop) {
+      setIsDesktopView(desktop);
+    }
   };
 
   useEffect(() => {

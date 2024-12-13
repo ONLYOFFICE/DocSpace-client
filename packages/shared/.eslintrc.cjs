@@ -107,7 +107,6 @@ module.exports = {
     "default-case": "off",
     "react/display-name": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "no-self-compare": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

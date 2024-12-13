@@ -27,7 +27,7 @@
 import { TColorScheme } from "../../themes";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 
-export interface FloatingButtonProps {
+export type FloatingButtonProps = {
   /** Accepts id */
   id?: string;
   /** Accepts class */
@@ -46,17 +46,10 @@ export interface FloatingButtonProps {
   color?: string;
   clearUploadedFilesHistory?: () => void;
   showTwoProgress?: boolean;
-}
+};
 
-export interface DefaultStylesProps {
+export type DefaultStylesProps = {
   color?: string;
   displayProgress: boolean;
   $currentColorScheme?: TColorScheme;
-}
-
-export interface FloatingButtonThemeProps extends FloatingButtonProps {
-  ref: React.LegacyRef<HTMLDivElement>;
-  $currentColorScheme?: TColorScheme;
-  icon: FloatingButtonIcons;
-  displayProgress: boolean;
-}
+};

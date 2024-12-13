@@ -45,6 +45,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { ONLYOFFICE_URL } from "@docspace/shared/constants";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -59,8 +60,7 @@ class PaymentStore {
 
   helpUrl = "https://helpdesk.onlyoffice.com";
 
-  buyUrl =
-    "https://www.onlyoffice.com/enterprise-edition.aspx?type=buyenterprise";
+  buyUrl = `${ONLYOFFICE_URL}/enterprise-edition.aspx?type=buyenterprise`;
 
   standaloneMode = true;
 

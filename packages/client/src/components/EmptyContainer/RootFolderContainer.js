@@ -41,6 +41,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { ONLYOFFICE_URL } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -61,6 +62,7 @@ import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?ur
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
 import CommonButtons from "./sub-components/CommonButtons";
+const PRIVACY_INSTRUCTIONS = `${ONLYOFFICE_URL}/private-rooms.aspx`;
 
 const RootFolderContainer = (props) => {
   const {
@@ -69,7 +71,6 @@ const RootFolderContainer = (props) => {
     isPrivacyFolder,
     isDesktop,
     isEncryptionSupport,
-    privacyInstructions,
     title,
     onCreate,
     onCreateRoom,
@@ -267,7 +268,7 @@ const RootFolderContainer = (props) => {
               isBold
               isHovered
               color={theme.filesEmptyContainer.privateRoom.linkColor}
-              href={privacyInstructions}
+              href={PRIVACY_INSTRUCTIONS}
             >
               Instructions
             </Link>
@@ -386,7 +387,7 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { filter, privacyInstructions, isEmptyPage } = filesStore;
+    const { filter, isEmptyPage } = filesStore;
     const { title, rootFolderType, security } = selectedFolderStore;
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
@@ -401,7 +402,6 @@ export default inject(
       userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
-      privacyInstructions,
       title,
       myFolderId,
       filter,

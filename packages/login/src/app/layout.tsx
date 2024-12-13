@@ -28,7 +28,11 @@ import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
-import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import {
+  LANGUAGE,
+  SYSTEM_THEME_KEY,
+  ONLYOFFICE_URL,
+} from "@docspace/shared/constants";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
@@ -78,8 +82,7 @@ export default async function RootLayout({
     const host = hdrs.get("host");
 
     const url = new URL(
-      config.wrongPortalNameUrl ??
-        "https://www.onlyoffice.com/wrongportalname.aspx",
+      config.wrongPortalNameUrl ?? `${ONLYOFFICE_URL}/wrongportalname.aspx`,
     );
 
     url.searchParams.append("url", host ?? "");

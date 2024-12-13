@@ -37,7 +37,7 @@ import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 
-import { LANGUAGE } from "../../../constants";
+import { LANGUAGE, ONLYOFFICE_URL } from "../../../constants";
 import { getLanguage, getCookie } from "../../../utils";
 
 import { StyledArticleApps } from "../Article.styled";
@@ -50,9 +50,9 @@ const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
 const getLink = () => {
   const currentLng = language.split("-")[0];
   if (SUPPORTED_LANGUAGES.includes(currentLng)) {
-    return `https://www.onlyoffice.com/${currentLng}`;
+    return `${ONLYOFFICE_URL}/${currentLng}`;
   }
-  return "https://www.onlyoffice.com";
+  return ONLYOFFICE_URL;
 };
 
 const ArticleApps = React.memo(

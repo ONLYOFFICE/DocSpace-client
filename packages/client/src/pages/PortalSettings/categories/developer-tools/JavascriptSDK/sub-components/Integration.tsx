@@ -30,6 +30,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
+import { ONLYOFFICE_URL } from "@docspace/shared/constants";
 
 import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
 import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";
@@ -41,10 +42,10 @@ import {
   CategoryHeader,
 } from "./StyledPortalIntegration";
 
-const allConnectors = "https://www.onlyoffice.com/all-connectors.aspx";
-const zoom = "https://www.onlyoffice.com/office-for-zoom.aspx";
-const wordPress = "https://www.onlyoffice.com/office-for-wordpress.aspx";
-const drupal = "https://www.onlyoffice.com/office-for-drupal.aspx";
+const allConnectors = `${ONLYOFFICE_URL}/all-connectors.aspx`;
+const zoom = `${ONLYOFFICE_URL}/office-for-zoom.aspx`;
+const wordPress = `${ONLYOFFICE_URL}/office-for-wordpress.aspx`;
+const drupal = `${ONLYOFFICE_URL}/office-for-drupal.aspx`;
 
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";

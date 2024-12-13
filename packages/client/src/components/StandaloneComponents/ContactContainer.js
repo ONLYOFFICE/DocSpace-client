@@ -31,15 +31,15 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-
+import { ONLYOFFICE_URL } from "@docspace/shared/constants";
 import { StyledContactComponent } from "./StyledComponent";
 const ContactContainer = (props) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const { helpUrl, salesEmail, theme, isCommunity } = props;
 
-  const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
-  const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";
+  const OFFICIAL_WEBSITE_URL = `${ONLYOFFICE_URL}/for-enterprises.aspx`;
+  const DEMONSTRATION_URL = `${ONLYOFFICE_URL}/demo-order.aspx `;
 
   return (
     <>
@@ -61,7 +61,7 @@ const ContactContainer = (props) => {
                       target="_blank"
                       tag="a"
                       fontWeight="600"
-                      href={officialWebsiteUrl}
+                      href={OFFICIAL_WEBSITE_URL}
                       color={
                         theme.client.settings.payment.contactContainer.linkColor
                       }
@@ -86,7 +86,7 @@ const ContactContainer = (props) => {
                   target="_blank"
                   tag="a"
                   fontWeight="600"
-                  href={demonstrationUrl}
+                  href={DEMONSTRATION_URL}
                   color={
                     theme.client.settings.payment.contactContainer.linkColor
                   }

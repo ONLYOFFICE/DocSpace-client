@@ -33,6 +33,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
+import { ONLYOFFICE_URL } from "@docspace/shared/constants";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
@@ -120,6 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
     max-height: 35px;
   }
 `;
+const PRIVACY_INSTALL_LINK = `${ONLYOFFICE_URL}/desktop.aspx`;
 
 const PrivacyPageComponent = ({ t, tReady }) => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -210,7 +212,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             className="privacy-rooms-link privacy-rooms-install-text"
             fontSize="16px"
             isHovered
-            href="https://www.onlyoffice.com/desktop.aspx"
+            href={PRIVACY_INSTALL_LINK}
           >
             {t("PrivacyInstall")}
           </Link>

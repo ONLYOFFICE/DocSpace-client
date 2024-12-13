@@ -29,11 +29,8 @@ import React, { useState, useEffect } from "react";
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
-import { brandingRedirectUrl } from "../constants";
 
 export const AdditionalResources = ({
   t,
@@ -44,19 +41,12 @@ export const AdditionalResources = ({
   onRestore,
   isLoading,
   additionalResourcesIsDefault,
-  deviceType,
 }: IAdditionalResources) => {
   const [feedbackEnabled, setFeedbackEnabled] = useState(
     feedbackAndSupportEnabled,
   );
   const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
   const [hasChanges, setHasChanges] = useState(false);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "additional-resources",
-    deviceType,
-  });
 
   useEffect(() => {
     if (

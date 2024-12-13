@@ -36,12 +36,9 @@ import {
 } from "../../../components/text-input";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
-import { brandingRedirectUrl } from "../constants";
 
 export const CompanyInfo = ({
   t,
@@ -52,14 +49,7 @@ export const CompanyInfo = ({
   onRestore,
   isLoading,
   companyInfoSettingsIsDefault,
-  deviceType,
 }: ICompanyInfo) => {
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "company-info-settings",
-    deviceType,
-  });
-
   const {
     address,
     companyName,

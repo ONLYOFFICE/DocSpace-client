@@ -190,13 +190,14 @@ const CreateRoomDialog = ({
   };
 
   const onCloseCreateFromTemplateDialog = () => {
+    setRoomParams({ ...startRoomParams });
     setTemplateDialogIsVisible(false);
   };
 
   const isTemplate =
     roomParams.type === RoomsType.TemplateRoom && !isTemplateSelected;
 
-  const dialogHeader = roomParams.type
+  const dialogHeader = !roomParams.type
     ? t("ChooseRoomType")
     : t("Files:CreateRoom");
 
@@ -222,7 +223,6 @@ const CreateRoomDialog = ({
             onSubmit={onSubmitRoom}
             roomType={RoomsType.CustomRoom}
             isMultiSelect={false}
-            //
             withHeader
             headerProps={{
               onBackClick: onCloseCreateFromTemplateDialog,
@@ -231,7 +231,6 @@ const CreateRoomDialog = ({
               withoutBackButton: false,
               withoutBorder: false,
             }}
-            //
             withSearch
             emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
             emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}

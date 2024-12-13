@@ -77,32 +77,20 @@ const ChangeRoomOwner = ({
           </div>
         </div>
 
-        <Link
-          className="change-owner-link"
-          isHovered
-          type="action"
-          fontWeight={600}
-          fontSize="13px"
-          color={currentColorScheme.main?.accent}
-          onClick={onOwnerChange}
-        >
-          {t("Common:ChangeButton")}
-        </Link>
+        {canChangeOwner && (
+          <Link
+            className="change-owner-link"
+            isHovered
+            type="action"
+            fontWeight={600}
+            fontSize="13px"
+            color={currentColorScheme.main?.accent}
+            onClick={onOwnerChange}
+          >
+            {t("Common:ChangeButton")}
+          </Link>
+        )}
       </div>
-
-      {canChangeOwner && (
-        <Link
-          className="change-owner-link"
-          isHovered
-          type="action"
-          fontWeight={600}
-          fontSize="13px"
-          color={currentColorScheme.main?.accent}
-          onClick={onOwnerChange}
-        >
-          {t("Common:ChangeButton")}
-        </Link>
-      )}
     </Styled.ChangeRoomOwner>
   );
 };

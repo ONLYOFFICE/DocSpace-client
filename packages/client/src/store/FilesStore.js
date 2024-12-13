@@ -2110,7 +2110,7 @@ class FilesStore {
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isTemplate = true; //roomType, isTemplate //TODO: Templates
+    const isTemplate = false; //roomType, isTemplate //TODO: Templates
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
@@ -2825,6 +2825,10 @@ class FilesStore {
       .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
   };
 
+  setRoomCreated = (roomCreated) => {
+    this.roomCreated = roomCreated;
+  };
+
   createRoom = (roomParams) => {
     this.roomCreated = true;
     return api.rooms.createRoom(roomParams);
@@ -3348,7 +3352,7 @@ class FilesStore {
             : folderUrl);
 
       const isRoom = !!roomType;
-      const isTemplate = true; //TODO: Templates
+      const isTemplate = false; //TODO: Templates
 
       const icon =
         isRoom && logo?.medium

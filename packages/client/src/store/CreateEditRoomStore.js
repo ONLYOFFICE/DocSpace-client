@@ -329,13 +329,30 @@ class CreateEditRoomStore {
     }
   };
 
+  getRoomLogo = async (icon) => {
+    try {
+      const [logoParamsData, uploadedData] = await Promise.all([
+        this.getLogoParams(icon.uploadedFile, icon),
+        this.avatarEditorDialogStore.getUploadedLogoData(),
+      ]);
+
+      return {
+        tmpFile: uploadedData.responseData.data,
+        ...logoParamsData,
+      };
+    } catch (err) {
+      toastr.error(err);
+    }
+  };
+
   onCreateRoom = async (withConfirm = false, t) => {
     const roomParams = this.roomParams;
 
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection } = this.filesStore;
+    const { createRoom, selection, bufferSelection, setRoomCreated } =
+      this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
     const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
@@ -353,10 +370,12 @@ class CreateEditRoomStore {
       createAsNewFolder,
       icon,
       watermark,
+      roomType,
     } = roomParams;
 
     const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
-
+    // const isTemplate = roomType === RoomsType.TemplateRoom;
+    const isTemplate = true; // TODO: Templates
     const isThirdparty = storageLocation.isThirdparty;
     const storageFolderId = storageLocation.storageFolderId;
     const thirdpartyAccount = storageLocation.thirdpartyAccount;
@@ -395,39 +414,27 @@ class CreateEditRoomStore {
       createRoomData.watermark = await this.getWatermarkRequest(watermark);
     }
 
-    const additionalRequest = [];
-
-    const uploadedFile = icon.uploadedFile;
-
-    if (uploadedFile) {
-      additionalRequest.push(
-        this.getLogoParams(uploadedFile, icon),
-        getUploadedLogoData(),
-      );
-    }
-
     this.setIsLoading(true);
 
     try {
-      try {
-        if (additionalRequest.length) {
-          const [logoParamsData, uploadedData] =
-            await Promise.all(additionalRequest);
-
-          createRoomData.logo = {
-            tmpFile: uploadedData.responseData.data,
-            ...logoParamsData,
-          };
-        }
-      } catch (e) {
-        toastr.error(e);
+      if (icon.uploadedFile) {
+        const roomLogo = await this.getRoomLogo(icon);
+        createRoomData.logo = roomLogo;
       }
 
       withConfirm && this.setConfirmDialogIsLoading(true);
 
-      const room = isThirdPartyRoom
-        ? await api.rooms.createRoomInThirdpary(storageFolderId, createRoomData)
-        : await createRoom(createRoomData);
+      let room = null;
+      if (isThirdPartyRoom) {
+        room = await api.rooms.createRoomInThirdpary(
+          storageFolderId,
+          createRoomData,
+        );
+      } else if (isTemplate) {
+        room = await this.onCreateTemplateRoom(roomParams);
+      } else {
+        room = await createRoom(createRoomData);
+      }
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
@@ -458,6 +465,61 @@ class CreateEditRoomStore {
 
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
+  };
+
+  getCreateTemplateRoomProgress = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          await api.rooms.getCreateRoomFromTemplateProgress().then((res) => {
+            resolve(res);
+          });
+        } catch (error) {
+          reject(error);
+        }
+      }, 1000);
+    });
+  };
+
+  onCreateTemplateRoom = async (roomParams) => {
+    this.filesStore.setRoomCreated(true);
+
+    console.log("onCreateTemplateRoom", roomParams);
+
+    let isFinished = false;
+    let progressData;
+
+    // const room = await api.rooms.createRoomFromTemplate(roomParams);
+    const room = await api.rooms.createRoomFromTemplate(
+      39, //roomId
+      "template room test", //title
+      null, //logo
+      [], //tags
+    );
+
+    console.log("room", room);
+
+    progressData = room;
+
+    while (!isFinished) {
+      progressData = await this.getCreateTemplateRoomProgress();
+      console.log("progressData", progressData);
+
+      isFinished = progressData.finished;
+      // if (res?.percentage) {
+      //   setSecondaryProgressBarData({
+      //     icon: pbData.icon,
+      //     visible: true,
+      //     percent: res.percentage,
+      //     label: "",
+      //     alert: false,
+      //     operationId: pbData.operationId,
+      //     filesCount: pbData.filesCount,
+      //   });
+      // }
+    }
+
+    return progressData;
   };
 
   onOpenNewRoom = async (room) => {

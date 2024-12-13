@@ -35,7 +35,7 @@ import { Track } from "./sub-components/Track";
 import { LoaderProps } from "./Loader.types";
 import { LoaderTypes } from "./Loader.enums";
 
-export type { LoaderTypes };
+export { LoaderTypes };
 
 const Loader = ({ ...props }: LoaderProps) => {
   const { type, color, size, label, className, style, id } = props;

@@ -36,6 +36,7 @@ import React, {
 import throttle from "lodash/throttle";
 
 import { classNames, isTouchDevice } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Scrollbar as CustomScrollbar } from "./custom-scrollbar";
 import styles from "./Scrollbar.module.scss";
@@ -55,7 +56,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
       ...rest
     } = props;
 
-    const [isRTL, setIsRTL] = useState(false);
+    const { isRTL } = useInterfaceDirection();
 
     const [scrollVisible, setScrollVisible] = useState(false);
     const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
@@ -154,13 +155,6 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
         );
       }
     }, [paddingAfterLastItem]);
-
-    useLayoutEffect(() => {
-      const root = document.documentElement;
-      const dir = root.style.getPropertyValue("--interface-direction");
-
-      setIsRTL(dir === "rtl");
-    }, []);
 
     return (
       <CustomScrollbar

@@ -71,7 +71,9 @@ module.exports = {
     "@typescript-eslint/naming-convention": "off",
     "jsx-a11y/aria-role": "off",
     "react/no-unescaped-entities": "off",
+    "no-plusplus": "off",
 
+    "react-hooks/rules-of-hooks": "off",
     "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
     "react/no-unstable-nested-components": "off",
@@ -97,9 +99,6 @@ module.exports = {
     "no-case-declarations": "off",
     "react/jsx-no-useless-fragment": "off",
     "jsx-a11y/alt-text": "off",
-    "import/no-unresolved": "off",
-    "react-hooks/rules-of-hooks": "off",
-    "no-plusplus": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PrivacySvgUrl from "PUBLIC_DIR/images/privacy.svg?url";
-import PersonSvgUrl from "PUBLIC_DIR/images/12/person.svg?url";
+import PersonSvgUrl from "PUBLIC_DIR/images/icons/12/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 

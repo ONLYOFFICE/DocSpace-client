@@ -52,7 +52,7 @@ const LoaderSectionHeader = () => {
   const height = isTabletView ? "28" : "24";
   const width = isTabletView ? "163" : "140";
 
-  const levelSettings = location.pathname.split("/").length - 1;
+  const levelSettings = window.location.pathname.split("/").length - 1;
 
   const checkInnerWidth = () => {
     const isTabletView = isTablet();

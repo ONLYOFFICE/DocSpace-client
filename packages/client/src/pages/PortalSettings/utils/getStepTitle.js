@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const getStepTitle = (t, stepIndex) => {
-  const isGoogleWorkspace = location.pathname.includes("google");
+  const isGoogleWorkspace = window.location.pathname.includes("google");
   switch (stepIndex) {
     case 1:
       return isGoogleWorkspace

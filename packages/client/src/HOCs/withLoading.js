@@ -65,7 +65,7 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    const pathname = location.pathname;
+    const pathname = window.location.pathname;
     const index = pathname.lastIndexOf("/");
     const setting = pathname.slice(index + 1);
 

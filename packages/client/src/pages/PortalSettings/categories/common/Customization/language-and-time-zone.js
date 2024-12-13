@@ -353,7 +353,8 @@ const LanguageAndTimeZoneComponent = (props) => {
       })
       .then(() => toastr.success(t("SuccessfullySaveSettingsMessage")))
       .then(
-        () => !user.cultureName && lng !== language.key && location.reload(),
+        () =>
+          !user.cultureName && lng !== language.key && window.location.reload(),
       )
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));

@@ -46,11 +46,11 @@ class ChangePasswordDialogComponent extends React.Component {
   }
 
   componentDidMount() {
-    addEventListener("keydown", this.keyPress, false);
+    window.addEventListener("keydown", this.keyPress, false);
   }
 
   componentWillUnmount() {
-    removeEventListener("keydown", this.keyPress, false);
+    window.removeEventListener("keydown", this.keyPress, false);
   }
 
   keyPress = (e) => {

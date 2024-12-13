@@ -248,7 +248,7 @@ const DNSSettingsComponent = (props) => {
             <TextInput
               {...textInputProps}
               isDisabled
-              value={location.hostname?.trim()}
+              value={window.location.hostname?.trim()}
             />
           </FieldContainer>
         </>

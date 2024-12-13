@@ -88,7 +88,7 @@ const TabsCommon = (props) => {
   }
 
   const getCurrentTabId = () => {
-    const path = location.pathname;
+    const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };

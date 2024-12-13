@@ -217,7 +217,7 @@ const SelectUsersCountContainer = ({
 
     const numberValue = +value;
 
-    if (isNaN(numberValue)) return;
+    if (Number.isNaN(numberValue)) return;
 
     if (numberValue === 0) {
       setManagersCount(minAvailableManagersValue);

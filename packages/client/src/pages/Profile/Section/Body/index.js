@@ -102,7 +102,7 @@ const SectionBodyContent = (props) => {
   });
 
   const getCurrentTabId = () => {
-    const path = location.pathname;
+    const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
@@ -110,7 +110,7 @@ const SectionBodyContent = (props) => {
   const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
-    const arrayPaths = location.pathname.split("/");
+    const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });

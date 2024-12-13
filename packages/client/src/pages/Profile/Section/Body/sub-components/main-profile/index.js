@@ -222,7 +222,7 @@ const MainProfile = (props) => {
     if (profile.cultureName === language.key) return;
 
     updateProfileCulture(profile.id, language.key)
-      .then(() => location.reload())
+      .then(() => window.location.reload())
       .catch((error) => {
         toastr.error(error && error.message ? error.message : error);
       });

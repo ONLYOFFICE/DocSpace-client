@@ -335,7 +335,7 @@ const SectionBodyContent = (props) => {
     if (!isIndexEditingMode) return onMoveTo(folderId, title);
     if (filesList.length === 1) return;
 
-    const replaceableItemId = isNaN(+folderId) ? folderId : +folderId;
+    const replaceableItemId = Number.isNaN(+folderId) ? folderId : +folderId;
 
     const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
     const isSectionTarget = elem && elem.className === sectionClass;
@@ -361,7 +361,7 @@ const SectionBodyContent = (props) => {
   };
 
   const onMoveTo = (destFolderId, title) => {
-    const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
+    const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
     moveDragItems(id, title, {
       copy: t("Common:CopyOperation"),
       move: t("Common:MoveToOperation"),

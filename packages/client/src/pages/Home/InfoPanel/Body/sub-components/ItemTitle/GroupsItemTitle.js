@@ -51,7 +51,7 @@ const GroupsItemTitle = ({
 
   const isInsideGroup = matchPath(
     "/accounts/groups/:groupId/filter",
-    location.pathname,
+    window.location.pathname,
   );
 
   const getContextOptions = () =>

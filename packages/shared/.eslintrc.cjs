@@ -73,6 +73,9 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "no-plusplus": "off",
 
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-array-index-key": "off",
+    "react/forbid-prop-types": "off",
     "react-hooks/rules-of-hooks": "off",
     "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
@@ -91,10 +94,6 @@ module.exports = {
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-useless-constructor": "off",
     "@typescript-eslint/no-shadow": "off",
-    "no-restricted-globals": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "react/no-array-index-key": "off",
-    "react/forbid-prop-types": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

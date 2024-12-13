@@ -1817,7 +1817,7 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        const isThirdPartyError = isNaN(+folderId);
+        const isThirdPartyError = Number.isNaN(+folderId);
 
         const isUserError = [
           NotFoundHttpCode,

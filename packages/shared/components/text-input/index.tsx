@@ -55,6 +55,7 @@ export const TextInputPure = (props: TextInputProps) => {
     isBold,
     fontWeight,
     style,
+    testId = "text-input",
     ...rest
   } = props;
 
@@ -71,7 +72,7 @@ export const TextInputPure = (props: TextInputProps) => {
       isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
       guide={guide}
       size={size}
-      data-testid="text-input"
+      data-testid={testId}
       data-size={size}
       data-error={hasError ? "true" : undefined}
       data-warning={hasWarning ? "true" : undefined}

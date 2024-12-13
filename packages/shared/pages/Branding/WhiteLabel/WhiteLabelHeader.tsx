@@ -96,6 +96,7 @@ export const WhiteLabelHeader = ({
           labelVisible
         >
           <TextInput
+            testId="logo-text-input"
             className="company-name input"
             value={logoTextWhiteLabel}
             onChange={onChangeCompanyName}
@@ -109,6 +110,7 @@ export const WhiteLabelHeader = ({
             size={InputSize.base}
           />
           <Button
+            testId="use-as-logo-button"
             id="btnUseAsLogo"
             className="use-as-logo"
             size={ButtonSize.small}

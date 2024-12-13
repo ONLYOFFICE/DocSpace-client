@@ -65,6 +65,8 @@ type BaseButtonProps = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** HTML button type attribute */
   type?: HTMLButtonElement["type"];
+  /** HTML data-testid attribute */
+  testId?: string;
 };
 
 /** Props for the Button component */

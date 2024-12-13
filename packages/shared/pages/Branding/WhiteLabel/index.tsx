@@ -134,7 +134,9 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
     const file = e.target.files && e.target.files[0];
 
-    const { data } = await uploadLogo(file, type);
+    const response = await uploadLogo(file, type);
+    if (!response) return;
+    const { data } = response;
 
     if (data.Success) {
       const url = data.Message;

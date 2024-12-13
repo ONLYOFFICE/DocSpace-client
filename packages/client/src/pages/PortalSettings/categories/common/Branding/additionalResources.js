@@ -33,9 +33,11 @@ import {
   restoreAdditionalResources,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { brandingRedirectUrl } from "./constants";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 
 const AdditionalResourcesComponent = (props) => {
@@ -51,6 +53,12 @@ const AdditionalResourcesComponent = (props) => {
     getAdditionalResources,
   } = props;
   const [isLoading, setIsLoading] = useState(false);
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "additional-resources",
+    deviceType,
+  });
 
   const { feedbackAndSupportEnabled, helpCenterEnabled } =
     additionalResourcesData;
@@ -103,7 +111,6 @@ const AdditionalResourcesComponent = (props) => {
       onRestore={onRestore}
       isLoading={isLoading}
       additionalResourcesIsDefault={additionalResourcesIsDefault}
-      deviceType={deviceType}
     />
   );
 };

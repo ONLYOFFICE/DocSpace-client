@@ -33,11 +33,13 @@ import {
   restoreCompanyInfoSettings,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
+import { brandingRedirectUrl } from "./constants";
 
 const CompanyInfoSettingsComponent = (props) => {
   const {
@@ -55,6 +57,12 @@ const CompanyInfoSettingsComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "company-info-settings",
+    deviceType,
+  });
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -122,7 +130,6 @@ const CompanyInfoSettingsComponent = (props) => {
         onRestore={onRestore}
         isLoading={isLoading}
         companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
-        deviceType={deviceType}
       />
     </>
   );

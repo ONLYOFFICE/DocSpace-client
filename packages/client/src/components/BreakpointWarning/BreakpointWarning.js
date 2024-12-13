@@ -68,7 +68,7 @@ const BreakpointWarning = ({
     <Loader />
   ) : (
     <StyledBreakpointWarning>
-      <img src={img} />
+      <img src={img} alt="Breakpoint warning" />
       <div className="description">
         <div className="text-breakpoint">{textHeader}</div>
         <div className="text-prompt">{textPrompt}</div>

@@ -37,7 +37,12 @@ const NoFileOrFolderItem = ({ t, theme }) => {
   return (
     <StyledNoItemContainer>
       <div className="no-thumbnail-img-wrapper">
-        <img size="96px" className="no-thumbnail-img" src={imgSrc} />
+        <img
+          size="96px"
+          className="no-thumbnail-img"
+          src={imgSrc}
+          alt="No item"
+        />
       </div>
 
       <div className="no-item-text">{t("FilesEmptyScreenText")}</div>

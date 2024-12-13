@@ -415,7 +415,7 @@ const Preview = (props) => {
             />
           </div>
 
-          <img src={PlusPreviewSvgUrl} />
+          <img src={PlusPreviewSvgUrl} alt="Plus" />
         </div>
         <div className="section-search background border-color">
           <div className="section-search-loader">

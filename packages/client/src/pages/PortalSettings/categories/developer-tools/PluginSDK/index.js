@@ -87,7 +87,11 @@ const PluginSDK = ({
     const list = systemPluginList.map((p) => (
       <div key={p.name} className="plugin-list__item">
         <div className="plugin-list__item-info">
-          <img className="plugin-logo" src={`${p.iconUrl}/assets/${p.image}`} />
+          <img
+            className="plugin-logo"
+            src={`${p.iconUrl}/assets/${p.image}`}
+            alt="Plugin logo"
+          />
           <div className="plugin-info-container">
             <Text>{p.name}</Text>
             <Text className="description">

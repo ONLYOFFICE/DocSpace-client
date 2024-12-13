@@ -129,7 +129,11 @@ const Tile = ({
       <StyledFileTileBottom isSelected={isSelected} isActive={isActive}>
         <div className="file-icon_container">
           <div className="file-icon">
-            <img className="react-svg-icon" src={getIcon(32, ".pdf")} />
+            <img
+              className="react-svg-icon"
+              src={getIcon(32, ".pdf")}
+              alt="File"
+            />
           </div>
         </div>
 

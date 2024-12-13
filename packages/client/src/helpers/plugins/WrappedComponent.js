@@ -346,7 +346,7 @@ const ComponentPure = ({
       }
 
       case PluginComponents.img: {
-        return <img {...elementProps} />;
+        return <img alt="Plugin" {...elementProps} />;
       }
 
       case PluginComponents.skeleton: {

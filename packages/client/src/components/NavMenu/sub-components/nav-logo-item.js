@@ -57,6 +57,7 @@ const NavLogoItem = (props) => {
     <LogoItem opened={props.opened}>
       <Link className="nav-logo-wrapper" to="/" onClick={props.onClick}>
         <img
+          alt="logo"
           className="nav-logo-icon"
           src={getLogoUrl(WhiteLabelLogoType.LightSmall)}
         />

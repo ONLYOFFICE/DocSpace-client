@@ -160,7 +160,9 @@ const Guid = ({
 
   const onNextTips = () => {
     if (isLastTip) {
+      setFormFillingTipsNumber(1);
       onClose();
+      return;
     }
     setFormFillingTipsNumber(formFillingTipsNumber + 1);
   };

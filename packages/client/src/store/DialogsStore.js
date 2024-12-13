@@ -172,7 +172,7 @@ class DialogsStore {
 
   newFilesPanelFolderId = null;
   formFillingTipsVisible = false;
-  welcomeFormFillingTipsVisible = true;
+  welcomeFormFillingTipsVisible = false;
   formFillingTipsNumber = 1;
 
   constructor(

@@ -78,6 +78,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
+import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -1008,6 +1009,10 @@ class ContextOptionsStore {
     this.indexingStore.setIsIndexEditingMode(true);
   };
 
+  onEnableFormFillingGuid = () => {
+    this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
+  };
+
   onClickRemoveFromRecent = (item) => {
     this.filesActionsStore.removeFilesFromRecent([item.id]);
   };
@@ -1504,6 +1509,7 @@ class ContextOptionsStore {
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isFormRoom = item.roomType === RoomsType.FormRoom;
 
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
@@ -1915,6 +1921,14 @@ class ContextOptionsStore {
         disabled: false,
         "data-action": "archive",
         action: "archive",
+      },
+      {
+        id: "option_short-tour",
+        key: "short-tour",
+        label: t("Take a short tour"),
+        icon: HelpCenterReactSvgUrl,
+        onClick: this.onEnableFormFillingGuid,
+        disabled: !isFormRoom,
       },
       {
         id: "option_leave-room",

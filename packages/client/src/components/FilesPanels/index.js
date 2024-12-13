@@ -353,7 +353,9 @@ const Panels = (props) => {
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
-    true && <FormFillingTipsDialog key="form-filling_tips_dialog" />,
+    welcomeFormFillingTipsVisible && (
+      <FormFillingTipsDialog key="form-filling_tips_dialog" />
+    ),
   ];
 };
 

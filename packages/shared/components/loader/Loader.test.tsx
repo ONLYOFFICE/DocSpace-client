@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { Loader } from ".";
 import { LoaderTypes } from "./Loader.enums";
@@ -40,47 +41,52 @@ const baseProps = {
 
 describe("<Loader />", () => {
   test("renders without error", () => {
-    render(<Loader {...baseProps} />);
+    renderWithTheme(<Loader {...baseProps} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("dual-ring type", () => {
-  //   const wrapper = mount(<Loader {...baseProps} type="dual-ring" />);
+  test("renders base type with text", () => {
+    renderWithTheme(<Loader {...baseProps} />);
+    expect(screen.getByText("Loading")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("type")).toEqual("dual-ring");
-  // });
+  test("renders oval type", () => {
+    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.oval} />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+    expect(screen.getByTestId("oval-loader")).toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("rombs type", () => {
-  //   const wrapper = mount(<Loader {...baseProps} type="rombs" />);
+  test("renders dual-ring type", () => {
+    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.dualRing} />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+    expect(screen.getByTestId("dual-ring-loader")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("type")).toEqual("rombs");
-  // });
+  test("renders rombs type", () => {
+    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.rombs} />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+    expect(screen.getByTestId("rombs-loader")).toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Loader {...baseProps} id="testId" />);
+  test("renders track type", () => {
+    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.track} />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+    expect(screen.getByTestId("track-loader")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  test("accepts custom className", () => {
+    renderWithTheme(<Loader {...baseProps} className="custom-loader" />);
+    expect(screen.getByTestId("loader")).toHaveClass("custom-loader");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Loader {...baseProps} className="test" />);
+  test("accepts custom style", () => {
+    const customStyle = { marginTop: "20px" };
+    renderWithTheme(<Loader {...baseProps} style={customStyle} />);
+    expect(screen.getByTestId("loader")).toHaveStyle(customStyle);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Loader {...baseProps} style={{ color: "red" }} />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  test("accepts custom id", () => {
+    renderWithTheme(<Loader {...baseProps} id="custom-loader" />);
+    expect(screen.getByTestId("loader")).toHaveAttribute("id", "custom-loader");
+  });
 });

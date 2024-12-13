@@ -24,29 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
-import { ThemeContext } from "styled-components";
+@import "../../styles/variables/_colors.scss";
 
-import { StyledTrackTheme } from "./Loader.styled";
-import { LoaderThemeProps } from "./Loader.types";
+:root {
+  --loader-color: #{$loader-light};
+  --button-loader-primary: #{$white};
+  --button-loader-base: var(--accent-button);
 
-const TrackTheme = forwardRef<
-  SVGSVGElement,
-  PropsWithChildren<LoaderThemeProps>
->((props, ref) => {
-  const defaultTheme = useContext(ThemeContext);
+  &[data-theme="dark"] {
+    --loader-color: #{$loader-dark};
+    --button-loader-primary: #{$white};
+    --button-loader-base: #{$white};
+  }
+}
 
-  const currentColorScheme = defaultTheme?.currentColorScheme;
+.loader {
+  width: var(--loader-size, 40px);
+  height: var(--loader-size, 40px);
+  stroke: var(--loader-color);
+}
 
-  return (
-    <StyledTrackTheme
-      {...props}
-      ref={ref}
-      $currentColorScheme={currentColorScheme}
-    />
-  );
-});
+.loaderTrack {
+  width: var(--loader-size, 20px);
+  height: var(--loader-size, 20px);
 
-TrackTheme.displayName = "StyledTrackTheme";
+  &.primary {
+    color: var(--button-loader-primary);
+  }
 
-export default TrackTheme;
+  &.base {
+    color: var(--button-loader-base);
+  }
+
+  &.disabled {
+    opacity: 0.6;
+  }
+}

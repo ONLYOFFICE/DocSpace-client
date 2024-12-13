@@ -73,10 +73,6 @@ const DragTooltip = (props) => {
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
 
-  useEffect(() => {
-    setTooltipPosition();
-  }, [tooltipPageX, tooltipPageY]);
-
   const setTooltipPosition = useCallback(() => {
     const tooltip = tooltipRef.current;
     if (tooltip) {
@@ -88,7 +84,11 @@ const DragTooltip = (props) => {
       }px`;
       tooltip.style.top = `${tooltipPageY + margin}px`;
     }
-  }, [tooltipPageX, tooltipPageY]);
+  }, [tooltipPageX, tooltipPageY, isRtl]);
+
+  useEffect(() => {
+    setTooltipPosition();
+  }, [tooltipPageX, tooltipPageY, setTooltipPosition]);
 
   const renderFileMoveTooltip = useCallback(() => {
     const reg = /^([^\\]*)\.(\w+)/;

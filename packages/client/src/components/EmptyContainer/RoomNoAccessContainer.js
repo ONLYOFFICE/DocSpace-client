@@ -49,11 +49,6 @@ const RoomNoAccessContainer = (props) => {
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    const timer = setTimeout(onGoToShared, 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
   /**
    * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event
    * @returns {void}
@@ -72,6 +67,11 @@ const RoomNoAccessContainer = (props) => {
 
     navigate(`${path}?${filterParamsStr}`);
   };
+
+  React.useEffect(() => {
+    const timer = setTimeout(onGoToShared, 5000);
+    return () => clearTimeout(timer);
+  }, [onGoToShared]);
 
   /**
    * @type {import("@docspace/shared/components/empty-view/EmptyView.types").EmptyViewProps}

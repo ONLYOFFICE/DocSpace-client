@@ -92,11 +92,11 @@ const RootFolderContainer = (props) => {
     isPublicRoom,
     userId,
   } = props;
-  const personalDescription = t("EmptyFolderDecription");
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const personalDescription = t("EmptyFolderDecription");
   const emptyScreenHeader = t("EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
   const noFilesHeader = t("NoFilesHereYet");
@@ -114,6 +114,7 @@ const RootFolderContainer = (props) => {
   ) : (
     t("RoomEmptyContainerDescription")
   );
+
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
@@ -122,7 +123,9 @@ const RootFolderContainer = (props) => {
   const privateRoomHeader = t("PrivateRoomHeader", {
     organizationName: t("Common:OrganizationName"),
   });
+
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
+
   const privateRoomDescTranslations = [
     t("PrivateRoomDescriptionSafest"),
     t("PrivateRoomDescriptionSecure"),
@@ -134,41 +137,129 @@ const RootFolderContainer = (props) => {
     productName: t("Common:ProductName"),
   });
 
+  const privateRoomDescription = (
+    <>
+      <Text fontSize="15px" as="div">
+        {privateRoomDescTranslations.map((el) => (
+          <Box
+            displayProp="flex"
+            alignItems="center"
+            paddingProp="0 0 13px 0"
+            key={el}
+          >
+            <Box paddingProp="0 7px 0 0">{privacyIcon}</Box>
+            <Box>{el}</Box>
+          </Box>
+        ))}
+      </Text>
+      {!isDesktop && (
+        <Text fontSize="12px">
+          <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
+            Work in Private Room is available via{" "}
+            {{ organizationName: t("Common:OrganizationName") }} desktop app.
+            <Link
+              isBold
+              isHovered
+              color={theme.filesEmptyContainer.privateRoom.linkColor}
+              href={privacyInstructions}
+            >
+              Instructions
+            </Link>
+          </Trans>
+        </Text>
+      )}
+    </>
+  );
+
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();
-
     newFilter.folder = myFolderId;
-
     const state = {
       title: myFolder.title,
       isRoot: true,
       rootFolderType: myFolder.rootFolderType,
     };
-
     const path = getCategoryUrl(CategoryType.Personal);
-
     setIsLoading(true);
-
     navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 
   const onGoToShared = () => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-
     newFilter.searchArea = RoomSearchArea.Active;
-
     const state = {
       title: roomsFolder.title,
       isRoot: true,
       rootFolderType: roomsFolder.rootFolderType,
     };
-
     setIsLoading(true);
-
     const path = getCategoryUrl(CategoryType.Shared);
-
     navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
+
+  const commonButtons = (
+    <CommonButtons onCreate={onCreate} linkStyles={linkStyles} isRoot />
+  );
+
+  const goToPersonalButtons = (
+    <div className="empty-folder_container-links">
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
+        onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
+      />
+      <Link onClick={onGoToPersonal} {...linkStyles}>
+        {t("GoToPersonal")}
+      </Link>
+    </div>
+  );
+
+  const trashButtons = (
+    <div className="empty-folder_container-links">
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
+        onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
+      />
+      <Link onClick={onGoToPersonal} {...linkStyles}>
+        {t("GoToPersonal")}
+      </Link>
+    </div>
+  );
+
+  const roomsButtons = (
+    <div className="empty-folder_container-links">
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
+        onClick={onCreateRoom}
+        iconName={PlusSvgUrl}
+        isFill
+      />
+      <Link onClick={onCreateRoom} {...linkStyles}>
+        {t("CreateRoom")}
+      </Link>
+    </div>
+  );
+
+  const archiveButtons = !isVisitor && (
+    <div className="empty-folder_container-links">
+      <IconButton
+        className="empty-folder_container-icon"
+        size="12"
+        onClick={onGoToShared}
+        iconName={RoomsReactSvgUrl}
+        isFill
+      />
+      <Link onClick={onGoToShared} {...linkStyles}>
+        {t("GoToMyRooms")}
+      </Link>
+    </div>
+  );
 
   const getEmptyFolderProps = () => {
     switch (rootFolderType || location?.state?.rootFolderType) {
@@ -243,118 +334,8 @@ const RootFolderContainer = (props) => {
     }
   };
 
-  const privateRoomDescription = (
-    <>
-      <Text fontSize="15px" as="div">
-        {privateRoomDescTranslations.map((el) => (
-          <Box
-            displayProp="flex"
-            alignItems="center"
-            paddingProp="0 0 13px 0"
-            key={el}
-          >
-            <Box paddingProp="0 7px 0 0">{privacyIcon}</Box>
-            <Box>{el}</Box>
-          </Box>
-        ))}
-      </Text>
-      {!isDesktop && (
-        <Text fontSize="12px">
-          <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
-            Work in Private Room is available via{" "}
-            {{ organizationName: t("Common:OrganizationName") }} desktop app.
-            <Link
-              isBold
-              isHovered
-              color={theme.filesEmptyContainer.privateRoom.linkColor}
-              href={privacyInstructions}
-            >
-              Instructions
-            </Link>
-          </Trans>
-        </Text>
-      )}
-    </>
-  );
-
-  const commonButtons = (
-    <CommonButtons onCreate={onCreate} linkStyles={linkStyles} isRoot />
-  );
-
-  const trashButtons = (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onGoToPersonal}
-        iconName={PersonSvgUrl}
-        isFill
-      />
-
-      <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
-      </Link>
-    </div>
-  );
-
-  const roomsButtons = (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onCreateRoom}
-        iconName={PlusSvgUrl}
-        isFill
-      />
-
-      <Link onClick={onCreateRoom} {...linkStyles}>
-        {t("CreateRoom")}
-      </Link>
-    </div>
-  );
-
-  const archiveButtons = !isVisitor && (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onGoToShared}
-        iconName={RoomsReactSvgUrl}
-        isFill
-      />
-      <Link onClick={onGoToShared} {...linkStyles}>
-        {t("GoToMyRooms")}
-      </Link>
-    </div>
-  );
-
-  const goToPersonalButtons = (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onGoToPersonal}
-        iconName={PersonSvgUrl}
-        isFill
-      />
-      <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
-      </Link>
-    </div>
-  );
-
   const headerText = isPrivacyFolder ? privateRoomHeader : title;
   const emptyFolderProps = getEmptyFolderProps();
-
-  // if (isLoading) {
-  //   return (
-  //     <Loaders.EmptyContainerLoader
-  //       style={{ display: "none", marginTop: 32 }}
-  //       id="empty-container-loader"
-  //       viewAs={viewAs}
-  //     />
-  //   );
-  // }
 
   return (
     emptyFolderProps && (

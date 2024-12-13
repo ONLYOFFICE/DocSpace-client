@@ -43,6 +43,8 @@ const CategoryFilterDesktop = ({
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredSub, setHoveredSub] = useState(null);
+
   const onOpenDropdown = () => setIsOpen(true);
   const onCloseDropdown = () => {
     setIsOpen(false);
@@ -56,8 +58,6 @@ const CategoryFilterDesktop = ({
     )
       onCloseDropdown();
   };
-
-  const [hoveredSub, setHoveredSub] = useState(null);
 
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 

@@ -90,32 +90,6 @@ const CreateEvent = ({
     onClose && onClose(e);
   };
 
-  React.useEffect(() => {
-    const defaultName = getDefaultFileName(extension);
-
-    if (title) {
-      const item = { fileExst: extension, title };
-
-      setStartValue(getTitleWithoutExtension(item, fromTemplate));
-    } else {
-      setStartValue(defaultName);
-    }
-
-    setHeaderTitle(defaultName);
-
-    if (!extension) return setEventDialogVisible(true);
-
-    if (!keepNewFileName && !withoutDialog) {
-      setEventDialogVisible(true);
-    } else {
-      onSave(null, title || defaultName);
-    }
-
-    return () => {
-      setEventDialogVisible(false);
-    };
-  }, [extension, title, fromTemplate, withoutDialog]);
-
   const onSave = async (e, value, open = true) => {
     let item;
     let createdFolderId;
@@ -222,6 +196,32 @@ const CreateEvent = ({
       }
     }
   };
+
+  React.useEffect(() => {
+    const defaultName = getDefaultFileName(extension);
+
+    if (title) {
+      const item = { fileExst: extension, title };
+
+      setStartValue(getTitleWithoutExtension(item, fromTemplate));
+    } else {
+      setStartValue(defaultName);
+    }
+
+    setHeaderTitle(defaultName);
+
+    if (!extension) return setEventDialogVisible(true);
+
+    if (!keepNewFileName && !withoutDialog) {
+      setEventDialogVisible(true);
+    } else {
+      onSave(null, title || defaultName);
+    }
+
+    return () => {
+      setEventDialogVisible(false);
+    };
+  }, [extension, title, fromTemplate, withoutDialog, onSave]);
 
   return (
     <Dialog

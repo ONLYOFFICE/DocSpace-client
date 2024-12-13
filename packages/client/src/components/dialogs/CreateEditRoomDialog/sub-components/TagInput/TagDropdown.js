@@ -44,22 +44,6 @@ const TagDropdown = ({
 
   const [dropdownMaxHeight, setDropdownMaxHeight] = useState(0);
 
-  const onKeyPress = (e) => e.key === "Enter" && addNewTag();
-
-  useEffect(() => {
-    inputRef?.current?.addEventListener("keyup", onKeyPress);
-
-    return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
-  }, [onKeyPress]);
-
-  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
-
-  const tagsForDropdown = tagHandler.fetchedTags.filter(
-    (tag) =>
-      tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
-      !chosenTags.includes(tag.toLowerCase()),
-  );
-
   const preventDefault = (e) => {
     e.preventDefault();
   };
@@ -77,6 +61,21 @@ const TagDropdown = ({
     setTagInputValue("");
     onClickOutside();
   };
+
+  const onKeyPress = (e) => e.key === "Enter" && addNewTag();
+
+  useEffect(() => {
+    inputRef?.current?.addEventListener("keyup", onKeyPress);
+    return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
+  }, [onKeyPress, inputRef]);
+
+  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
+
+  const tagsForDropdown = tagHandler.fetchedTags.filter(
+    (tag) =>
+      tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
+      !chosenTags.includes(tag.toLowerCase()),
+  );
 
   const addFetchedTag = (name) => {
     tagHandler.addTag(name);

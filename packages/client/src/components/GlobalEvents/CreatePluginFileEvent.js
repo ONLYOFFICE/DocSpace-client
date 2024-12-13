@@ -44,15 +44,12 @@ const CreatePluginFile = ({
   selectedOption,
   onSelect,
   extension,
-
   pluginName,
-
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
   setSettingsPluginDialogVisible,
   setPluginDialogVisible,
   setPluginDialogProps,
-
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
@@ -62,6 +59,11 @@ const CreatePluginFile = ({
 }) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
+  const onCloseAction = (e) => {
+    onCancel && onCancel();
+    onClose && onClose();
+  };
+
   const onSaveAction = async (e, value) => {
     if (!onSave) return onCloseAction();
 
@@ -70,16 +72,13 @@ const CreatePluginFile = ({
     messageActions(
       message,
       null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
       null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
@@ -90,11 +89,6 @@ const CreatePluginFile = ({
     onCloseAction();
   };
 
-  const onCloseAction = (e) => {
-    onCancel && onCancel();
-    onClose && onClose();
-  };
-
   const onSelectAction = (option) => {
     if (!onSelect) return;
     const message = onSelect(option);
@@ -102,16 +96,13 @@ const CreatePluginFile = ({
     messageActions(
       message,
       null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
       null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
@@ -131,10 +122,10 @@ const CreatePluginFile = ({
       onCancel={onCloseAction}
       onClose={onCloseAction}
       isCreateDialog={isCreateDialog}
-      extension={extension}
       options={options}
       selectedOption={selectedOption}
       onSelect={onSelectAction}
+      extension={extension}
     />
   );
 };

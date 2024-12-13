@@ -237,9 +237,7 @@ ProfileMenu.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   displayName: PropTypes.string,
-  id: PropTypes.string,
   open: PropTypes.bool,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   clickOutsideAction: PropTypes.func,
 };
 

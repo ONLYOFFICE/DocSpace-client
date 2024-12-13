@@ -95,7 +95,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": "off",
-    "react/no-unused-prop-types": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

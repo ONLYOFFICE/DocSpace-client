@@ -257,7 +257,6 @@ QuotaForm.propTypes = {
   isButtonsEnable: PropTypes.bool,
   onSetQuotaBytesSize: PropTypes.func,
   initialSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  initialPower: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default QuotaForm;

@@ -166,11 +166,7 @@ Tile.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]),
-  className: PropTypes.string,
   contextButtonSpacerWidth: PropTypes.string,
-  contextOptions: PropTypes.array,
-  data: PropTypes.object,
-  id: PropTypes.string,
   tileContextClick: PropTypes.func,
 };
 

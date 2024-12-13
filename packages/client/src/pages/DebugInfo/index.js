@@ -165,7 +165,6 @@ const DebugInfoDialog = (props) => {
 DebugInfoDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  buildVersionInfo: PropTypes.object,
 };
 
 export default inject(({ userStore, settingsStore }) => {

@@ -136,7 +136,6 @@ class Profile extends React.Component {
 Profile.propTypes = {
   fetchProfile: PropTypes.func.isRequired,
   profile: PropTypes.object,
-  language: PropTypes.string,
 };
 
 const ComponentPure = inject(

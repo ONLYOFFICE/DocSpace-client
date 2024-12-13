@@ -316,7 +316,6 @@ class ConsumerModalDialog extends React.Component {
 
 ConsumerModalDialog.propTypes = {
   t: PropTypes.func.isRequired,
-  i18n: PropTypes.object.isRequired,
   selectedConsumer: PropTypes.object,
   onModalClose: PropTypes.func.isRequired,
   dialogVisible: PropTypes.bool.isRequired,

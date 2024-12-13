@@ -414,7 +414,6 @@ Items.propTypes = {
   data: PropTypes.array,
   showText: PropTypes.bool,
   onClick: PropTypes.func,
-  onClickBadge: PropTypes.func,
   onHide: PropTypes.func,
 };
 

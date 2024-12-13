@@ -147,7 +147,7 @@ const Textarea = ({
       })}
       style={
         {
-          "--height-textarea": heightTextArea,
+          "--height-textarea": `${heightTextArea}px`,
           "--full-height": `${fullHeight}px`,
         } as React.CSSProperties
       }

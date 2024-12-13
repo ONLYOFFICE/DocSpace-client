@@ -23,42 +23,25 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { createContext } from "react";
 
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { TInterfaceDirection } from "../../themes";
 
-import { Tag } from "./Tag";
-
-const baseProps = {
-  tag: "script",
-  label: "Script",
-  isNewTag: false,
-  isDisabled: false,
-  onDelete: () => {},
-  onClick: () => {},
-
-  tagMaxWidth: "160px",
+type InterfaceDirectionProviderProps = {
+  interfaceDirection: TInterfaceDirection;
+  children: React.ReactNode;
 };
 
-describe("<Tag />", () => {
-  it("renders without error", () => {
-    render(<Tag {...baseProps} />);
+export const InterfaceDirectionContext =
+  createContext<TInterfaceDirection>("ltr");
 
-    expect(screen.getByTestId("tag")).toBeInTheDocument();
-  });
-
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Tag {...baseProps} id="testId" />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Tag {...baseProps} className="test" />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-});
+export const InterfaceDirectionProvider = ({
+  interfaceDirection,
+  children,
+}: InterfaceDirectionProviderProps) => {
+  return (
+    <InterfaceDirectionContext.Provider value={interfaceDirection}>
+      {children}
+    </InterfaceDirectionContext.Provider>
+  );
+};

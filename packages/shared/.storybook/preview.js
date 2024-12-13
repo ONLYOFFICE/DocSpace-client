@@ -1,6 +1,7 @@
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { Base, Dark } from "../themes/index";
 import "../../../public/css/fonts.css";
+import { InterfaceDirectionProvider } from "../context/InterfaceDirectionContext";
 import ThemeWrapper from "./globals/theme-wrapper";
 import { DocsContainer } from "./DocsContainer";
 import globalTypes from "./globals";
@@ -40,8 +41,10 @@ const preview = {
 
       return (
         <ThemeWrapper theme={{ ...theme, interfaceDirection }}>
-          <StorybookGlobalStyles />
-          <Story />
+          <InterfaceDirectionProvider interfaceDirection={interfaceDirection}>
+            <StorybookGlobalStyles />
+            <Story />
+          </InterfaceDirectionProvider>
         </ThemeWrapper>
       );
     },

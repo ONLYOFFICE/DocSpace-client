@@ -28,11 +28,11 @@ import React, { FC } from "react";
 
 import { Tag } from "../tag";
 
-import StyledTags from "./Tags.styled";
+import styles from "./Tags.module.scss";
 import { isTagType } from "./Tags.utils";
 import type { TagType, TagsProps } from "./Tags.types";
 
-export const Tags: FC<TagsProps> = ({
+const Tags: FC<TagsProps> = ({
   id,
   tags,
   style,
@@ -162,10 +162,11 @@ export const Tags: FC<TagsProps> = ({
   }, [updateRenderedTags]);
 
   return (
-    <StyledTags
+    <div
       data-testid="tags"
+      aria-label="Tags container"
       id={id}
-      className={className}
+      className={`${styles.tags} ${className}`}
       style={style}
       ref={tagsRef}
     >
@@ -189,6 +190,8 @@ export const Tags: FC<TagsProps> = ({
             />
           );
         })}
-    </StyledTags>
+    </div>
   );
 };
+
+export { Tags };

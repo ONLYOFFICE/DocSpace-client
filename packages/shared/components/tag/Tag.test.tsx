@@ -24,15 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import React from "react";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { ThemeProvider } from "styled-components";
+import { Base } from "@docspace/shared/themes";
 
-const StyledTags = styled.div`
-  width: 100%;
-  display: flex;
+import { Tag } from ".";
 
-  align-items: center;
+const baseProps = {
+  tag: "script",
+  label: "Script",
+  isNewTag: false,
+  isDisabled: false,
+  onDelete: () => {},
+  onClick: () => {},
 
-  overflow: hidden;
-`;
+  tagMaxWidth: "160px",
+};
 
-export default StyledTags;
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
+};
+
+describe("<Tag />", () => {
+  it("renders without error", () => {
+    const { getByTestId } = renderWithTheme(<Tag {...baseProps} />);
+    expect(getByTestId("tag")).toBeInTheDocument();
+  });
+
+  it("accepts id", () => {
+    const { getByTestId } = renderWithTheme(<Tag {...baseProps} id="testId" />);
+    expect(getByTestId("tag")).toHaveAttribute("id", "testId");
+  });
+
+  it("accepts className", () => {
+    const { getByTestId } = renderWithTheme(
+      <Tag {...baseProps} className="test" />,
+    );
+    expect(getByTestId("tag")).toHaveClass("test");
+  });
+});

@@ -23,5 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useContext } from "react";
 
-export { Tags } from "./Tags";
+import { InterfaceDirectionContext } from "../context/InterfaceDirectionContext";
+
+export const useInterfaceDirection = () => {
+  const interfaceDirection = useContext(InterfaceDirectionContext);
+
+  const isRTL = interfaceDirection === "rtl";
+
+  return { interfaceDirection, isRTL };
+};

@@ -39,6 +39,7 @@ import i18n from "./i18n";
 import "@docspace/shared/polyfills/broadcastchannel";
 
 import "@docspace/shared/styles/custom.scss";
+import { InterfaceDirectionProvider } from "@docspace/shared/context/InterfaceDirectionContext";
 
 import router from "./router";
 
@@ -56,9 +57,11 @@ const App = () => {
     <MobxProvider {...store}>
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
+          <InterfaceDirectionProvider interfaceDirection={i18n.dir()}>
+            <ErrorBoundary>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
+          </InterfaceDirectionProvider>
         </ThemeProvider>
       </I18nextProvider>
     </MobxProvider>

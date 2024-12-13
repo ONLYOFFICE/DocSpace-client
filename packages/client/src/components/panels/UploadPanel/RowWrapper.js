@@ -38,4 +38,6 @@ const RowWrapper = memo(({ data, index, style }) => {
   );
 }, areEqual);
 
+RowWrapper.displayName = "RowWrapper";
+
 export default RowWrapper;

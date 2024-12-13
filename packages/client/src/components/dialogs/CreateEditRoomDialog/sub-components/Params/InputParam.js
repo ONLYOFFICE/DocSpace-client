@@ -105,4 +105,6 @@ const InputParam = React.forwardRef(
   },
 );
 
+InputParam.displayName = "InputParam";
+
 export default InputParam;

@@ -178,9 +178,12 @@ const SimulatePassword = memo(
   },
 );
 
+SimulatePassword.displayName = "SimulatePassword";
+
 SimulatePassword.propTypes = {
   inputMaxWidth: PropTypes.string,
   hasError: PropTypes.bool,
   onChange: PropTypes.func,
 };
+
 export default SimulatePassword;

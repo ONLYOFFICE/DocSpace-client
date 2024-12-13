@@ -105,7 +105,6 @@ module.exports = {
     "no-multi-assign": "off",
     "no-unsafe-optional-chaining": "off",
     "default-case": "off",
-    "react/display-name": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -45,6 +45,8 @@ const VirtualScroll = React.forwardRef((props, ref) => (
   />
 ));
 
+VirtualScroll.displayName = "VirtualScroll";
+
 const Row = memo(({ data, index, style }) => {
   const {
     inviteItems,
@@ -88,6 +90,8 @@ const Row = memo(({ data, index, style }) => {
     />
   );
 });
+
+Row.displayName = "Row";
 
 const ItemsList = ({
   t,

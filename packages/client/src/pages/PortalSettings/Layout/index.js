@@ -63,6 +63,8 @@ const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
   );
 });
 
+ArticleSettings.displayName = "ArticleSettings";
+
 const Layout = ({
   currentProductId,
   setCurrentProductId,

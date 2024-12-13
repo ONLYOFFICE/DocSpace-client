@@ -243,4 +243,7 @@ const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
   };
 })(observer(withTranslation(["Common"])(NavMenu)));
 
-export default ({ ...props }) => <NavMenuWrapper {...props} />;
+const NavMenuComponent = ({ ...props }) => <NavMenuWrapper {...props} />;
+NavMenuComponent.displayName = "NavMenuComponent";
+
+export default NavMenuComponent;

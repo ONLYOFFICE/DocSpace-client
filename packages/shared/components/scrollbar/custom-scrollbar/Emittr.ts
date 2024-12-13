@@ -114,10 +114,13 @@ export default class Emittr {
         `Expected event handler to be a function, got ${typeof handler}`,
       );
     }
+    // @ts-expect-error error from custom scrollbar
     if (isUndef(emitter._handlers[name]) || !emitter._handlers[name].length) {
       return emitter;
     }
+
     let idx = -1;
+    // @ts-expect-error error from custom scrollbar
     if (emitter._handlers[name].length === 1) {
       if (
         emitter._handlers[name][0] === handler ||
@@ -129,6 +132,7 @@ export default class Emittr {
           emitter._handlers[name][0];
       }
     } else {
+      // @ts-expect-error error from custom scrollbar
       for (idx = emitter._handlers[name].length - 1; idx >= 0; idx--) {
         if (
           emitter._handlers[name][idx] === handler ||
@@ -146,8 +150,10 @@ export default class Emittr {
     }
 
     if (idx === 0) {
+      // @ts-expect-error error from custom scrollbar
       emitter._handlers[name].shift();
     } else {
+      // @ts-expect-error error from custom scrollbar
       emitter._handlers[name].splice(idx, 1);
     }
 

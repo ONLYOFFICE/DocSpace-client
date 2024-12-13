@@ -91,14 +91,14 @@ const RoomPassword = (props) => {
       setIsLoading(false);
 
       switch (res?.status) {
-        case ValidationStatus.Ok: {
+        case ValidationStatus.Ok:
           if (res.shared) {
             return gotoFolder(res);
           }
 
           setRoomData(res); // Ok
           return;
-        }
+
         // case ValidationStatus.Invalid: {
         //   setErrorMessage(""); // Invalid
         //   return;
@@ -107,9 +107,11 @@ const RoomPassword = (props) => {
         //   setErrorMessage(""); // Expired
         //   return;
         // }
-        case ValidationStatus.InvalidPassword: {
+        case ValidationStatus.InvalidPassword:
           setErrorMessage(t("Common:IncorrectPassword"));
-        }
+
+        default:
+          break;
       }
     } catch (error) {
       toastr.error(error);

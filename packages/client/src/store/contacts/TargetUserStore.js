@@ -214,6 +214,8 @@ class TargetUserStore {
         case UsefulTips:
           this.usefulTipsSubscription = isEnabled;
           break;
+        default:
+          break;
       }
     };
 

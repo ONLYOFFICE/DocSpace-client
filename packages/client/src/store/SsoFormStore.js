@@ -566,6 +566,9 @@ class SsoFormStore {
         break;
       case BINDING_REDIRECT:
         this.ssoUrlRedirect = o.ssoUrl;
+        break;
+      default:
+        break;
     }
   };
 
@@ -576,6 +579,9 @@ class SsoFormStore {
         break;
       case BINDING_REDIRECT:
         this.sloUrlRedirect = o.sloUrl;
+        break;
+      default:
+        break;
     }
   };
 

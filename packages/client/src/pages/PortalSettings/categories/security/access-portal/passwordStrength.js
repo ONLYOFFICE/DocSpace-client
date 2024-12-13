@@ -190,6 +190,8 @@ const PasswordStrength = (props) => {
       case "special":
         setUseSpecialSymbols(e.target.checked);
         break;
+      default:
+        break;
     }
   };
 

@@ -62,6 +62,8 @@ const AuthenticationContainer = ({
       case PASSWORD:
         setPassword(value);
         break;
+      default:
+        break;
     }
   };
 

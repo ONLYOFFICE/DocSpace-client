@@ -728,6 +728,8 @@ const SectionFilterContent = ({
           case FilterType.Pdf.toString():
             label = t("Forms");
             break;
+          default:
+            break;
         }
 
         filterValues.push({

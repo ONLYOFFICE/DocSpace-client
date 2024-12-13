@@ -83,6 +83,8 @@ const GroupMembership = (props) => {
       case GROUP_ATTRIBUTE:
         setGroupAttribute(value);
         break;
+      default:
+        break;
     }
   };
 

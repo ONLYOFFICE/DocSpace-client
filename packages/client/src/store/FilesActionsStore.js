@@ -1771,6 +1771,8 @@ class FilesActionStore {
         return hasRoomsToDisableQuota;
       case "default-quota":
         return hasRoomsToResetQuota;
+      default:
+        return false;
     }
   };
 
@@ -2140,6 +2142,8 @@ class FilesActionStore {
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
+      default:
+        break;
     }
   };
 

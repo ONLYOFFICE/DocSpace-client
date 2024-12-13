@@ -267,6 +267,8 @@ export const getAccessOptions = (
 
       options = [...options, accesses.user];
       break;
+    default:
+      break;
   }
 
   const removeOption = [

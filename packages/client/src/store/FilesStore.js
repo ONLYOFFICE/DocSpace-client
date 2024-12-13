@@ -330,6 +330,8 @@ class FilesStore {
           case "delete":
             this.wsModifyFolderDelete(opt);
             break;
+          default:
+            break;
         }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);

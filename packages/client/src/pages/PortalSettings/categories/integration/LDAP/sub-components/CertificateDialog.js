@@ -90,6 +90,8 @@ const CertificateDialog = ({
       case LDAPCertificateProblem.CertRevocationFailure:
       case LDAPCertificateProblem.CertWrongUsage:
         return "";
+      default:
+        break;
     }
 
     return "";

@@ -89,6 +89,8 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
+    default:
+      break;
   }
 };
 

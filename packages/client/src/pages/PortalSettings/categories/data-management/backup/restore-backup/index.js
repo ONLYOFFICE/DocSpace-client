@@ -142,6 +142,8 @@ const RestoreBackup = (props) => {
         return ResourcesModuleType;
       case STORAGE_SPACE:
         return StorageModuleType;
+      default:
+        break;
     }
   };
 

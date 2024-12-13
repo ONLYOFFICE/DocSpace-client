@@ -352,6 +352,8 @@ const ComponentPure = ({
       case PluginComponents.skeleton: {
         return <RectangleSkeleton {...elementProps} />;
       }
+      default:
+        break;
     }
   };
 

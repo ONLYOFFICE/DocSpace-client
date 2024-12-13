@@ -104,7 +104,6 @@ module.exports = {
     "@typescript-eslint/return-await": "off",
     "no-multi-assign": "off",
     "no-unsafe-optional-chaining": "off",
-    "default-case": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

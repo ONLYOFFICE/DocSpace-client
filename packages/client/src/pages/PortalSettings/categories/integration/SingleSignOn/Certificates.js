@@ -87,6 +87,8 @@ const Certificates = (props) => {
       additionalParameters = spShowAdditionalParameters;
       certificates = spCertificates;
       break;
+    default:
+      break;
   }
 
   return (

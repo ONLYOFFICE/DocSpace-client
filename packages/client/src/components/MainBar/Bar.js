@@ -305,6 +305,8 @@ const Bar = (props) => {
       case QuotaBarTypes.PersonalUserQuota:
         setBarVisible((value) => ({ ...value, personalUserQuota: false }));
         break;
+      default:
+        break;
     }
 
     setMaintenanceExist(false);

@@ -79,6 +79,8 @@ const ConnectionSettings = (props) => {
       case USER_FILTER:
         setUserFilter(value);
         break;
+      default:
+        break;
     }
   };
 

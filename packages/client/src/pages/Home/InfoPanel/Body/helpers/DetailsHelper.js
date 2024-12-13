@@ -149,6 +149,8 @@ class DetailsHelper {
         return "info_details_lifetime";
       case "Storage":
         return "info_details_storage";
+      default:
+        break;
     }
   };
 
@@ -241,6 +243,8 @@ class DetailsHelper {
         }
 
         return <></>;
+      default:
+        break;
     }
   };
 
@@ -286,6 +290,8 @@ class DetailsHelper {
         return this.getItemTags();
       case "Storage":
         return this.getQuotaItem();
+      default:
+        break;
     }
   };
 

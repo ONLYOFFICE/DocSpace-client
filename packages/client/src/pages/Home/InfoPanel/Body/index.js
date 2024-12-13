@@ -151,6 +151,8 @@ const InfoPanelBodyContent = ({
         return viewHelper.DetailsView();
       case "info_share":
         return viewHelper.ShareView();
+      default:
+        break;
     }
 
     if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();

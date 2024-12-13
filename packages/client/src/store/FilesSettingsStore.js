@@ -430,6 +430,8 @@ class FilesSettingsStore {
         return getOrDefault(iconSize64);
       case 96:
         return getOrDefault(iconSize96);
+      default:
+        return getOrDefault(iconSize32);
     }
   };
 

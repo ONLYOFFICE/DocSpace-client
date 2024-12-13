@@ -104,6 +104,8 @@ const AttributeMapping = (props) => {
       case QUOTA:
         setUserQuotaLimit(value);
         break;
+      default:
+        break;
     }
   };
 

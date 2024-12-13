@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent } from "react";
-import { TColorScheme } from "themes";
 
-export interface TextareaProps {
+export type TextareaProps = {
   /** Class name */
   className?: string;
   /** Used as HTML `id` property  */
@@ -81,11 +80,4 @@ export interface TextareaProps {
 
   classNameCopyIcon?: string;
   paddingLeftProp?: string;
-}
-
-export interface TextareaThemeProps extends TextareaProps {
-  ref: React.LegacyRef<HTMLTextAreaElement>;
-  heightTextAreaProp?: string;
-  $currentColorScheme?: TColorScheme;
-  interfaceDirection?: string;
-}
+};

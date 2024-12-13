@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import json_beautifier from "csvjson-json_beautifier";
+import jsonBeautifier from "csvjson-json_beautifier";
 
 export function beautifyJSON(jsonString: string) {
-  // @ts-expect-error no types
-  return json_beautifier(JSON.parse(jsonString), {
+  return jsonBeautifier(JSON.parse(jsonString), {
     inlineShortArrays: true,
   });
 }
@@ -42,7 +41,7 @@ export function isJSON(jsonString: string) {
   }
 }
 
-export function jsonify(value?: string, isJSONField?: boolean) {
+export function jsonify(value: string, isJSONField?: boolean) {
   if (isJSONField && value && isJSON(value)) {
     return beautifyJSON(value);
   }

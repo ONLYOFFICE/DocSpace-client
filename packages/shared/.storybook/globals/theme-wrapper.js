@@ -12,8 +12,8 @@ const ThemeWrapper = ({ theme, children }) => {
           buttons: globalColors.lightSecondMain,
         },
         text: {
-          accent: globalColors.lightBlueMain,
-          buttons: globalColors.lightSecondMain,
+          accent: globalColors.white,
+          buttons: globalColors.white,
         },
       }}
     >

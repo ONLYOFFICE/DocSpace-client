@@ -170,14 +170,21 @@ const StyledPasswordContent = styled.div`
 `;
 
 const StyledSinglePasswordFile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background: #f8f9f9;
-  height: 48px;
-  align-items: center;
-  border-radius: 6px;
-  padding: 0 16px;
-  margin-top: 16px;
+  .single-password_content {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9f9;
+    height: 48px;
+    align-items: center;
+    border-radius: 6px;
+    padding: 0 16px;
+    margin: 16px 0;
+
+    .single-password_row {
+      display: flex;
+      align-items: center;
+    }
+  }
 `;
 export {
   StyledDownloadContent,

@@ -1,0 +1,230 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
+
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+
+import { StyledSinglePasswordFile } from "./StyledDownloadDialog";
+import SimulatePassword from "../../../components/SimulatePassword";
+
+const OnePasswordRow = ({
+  item,
+  getItemIcon,
+  onDownload,
+  downloadItems,
+  onClosePanel,
+  visible,
+}) => {
+  const [password, setPassword] = useState("");
+  const [passwordValid, setPasswordValid] = useState(false);
+  const { t } = useTranslation([
+    "UploadPanel",
+    "DownloadDialog",
+    "Files",
+    "Common",
+  ]);
+  const inputRef = useRef(null);
+
+  const onChangePassword = (password) => {
+    setPassword(password);
+    !passwordValid && setPasswordValid(true);
+  };
+
+  const onDowloadInOriginal = () => {
+    const fileExst = item.fileExst;
+    const fileId = item.id;
+
+    const files = [...downloadItems];
+    files.map((item) => {
+      if (item.id === fileId) {
+        item.format = fileExst;
+      }
+    });
+
+    onDownload();
+  };
+
+  const onDownloadWithPassword = () => {
+    const fileId = item.id;
+
+    const files = [...downloadItems];
+    files.map((item) => {
+      if (item.id === fileId) {
+        item.password = password;
+      }
+    });
+
+    onDownload(files);
+  };
+
+  const onRemoveFromDowload = () => {
+    const fileId = item.id;
+
+    const files = [...downloadItems.filter((item) => item.id !== fileId)];
+
+    if (!files.length) {
+      onClosePanel();
+      return;
+    }
+
+    onDownload(files);
+  };
+
+  const onKeyUp = (event) => {
+    if (!password.trim().length) return;
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (event.key === "Enter") {
+      onDownloadWithPassword();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyUp, true);
+
+    return () => {
+      window.removeEventListener("keyup", onKeyUp, true);
+    };
+  });
+
+  const element = getItemIcon(item);
+
+  const text =
+    "This file is protected, please enter the password to access it or download in original format.";
+
+  return (
+    <ModalDialog
+      visible={visible}
+      displayType={ModalDialogType.modal}
+      onClose={onClosePanel}
+      autoMaxHeight
+    >
+      <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <StyledSinglePasswordFile>
+          <Text>{text}</Text>
+          <div className="single-password_content">
+            <div className="single-password_row">
+              {element}
+              <Text fontWeight="600" fontSize="14px" className="password-title">
+                {item.title}
+              </Text>
+            </div>
+            <IconButton
+              size={16}
+              iconName={DownloadAsReactSvgUrl}
+              onClick={onDowloadInOriginal}
+            />
+          </div>
+          <SimulatePassword
+            onChange={onChangePassword}
+            hasError={!passwordValid}
+            forwardedRef={inputRef}
+            inputValue={password}
+          />
+        </StyledSinglePasswordFile>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <Button
+          key="DownloadButton"
+          className="download-button"
+          label={t("Common:ContinueButton")}
+          size="normal"
+          primary
+          onClick={onDownloadWithPassword}
+          isDisabled={!password.trim().length}
+          scale
+        />
+        <Button
+          key="CancelButton"
+          className="cancel-button"
+          label={t("Common:CancelButton")}
+          size="normal"
+          onClick={onRemoveFromDowload}
+          scale
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
+export default inject(({ dialogsStore }) => {
+  const {
+    setDownloadItems,
+    downloadItems,
+    passwordFiles,
+    downloadDialogVisible: visible,
+  } = dialogsStore;
+
+  const item = passwordFiles[0];
+
+  return {
+    item,
+    setDownloadItems,
+    downloadItems,
+    passwordFiles,
+    visible,
+  };
+})(observer(OnePasswordRow));

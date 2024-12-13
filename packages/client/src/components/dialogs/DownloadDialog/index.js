@@ -40,6 +40,7 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
 import { StyledBodyContent } from "./StyledDownloadDialog";
+import OnePasswordRow from "./OnePasswordRow";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -136,7 +137,7 @@ class DownloadDialogComponent extends React.Component {
     return translations;
   };
   onDownload = () => {
-    const { t, downloadFiles, setDownloadItems, getDownloadItems } = this.props;
+    const { setDownloadItems } = this.props;
 
     const itemList = [
       ...this.state.documents.files,
@@ -146,32 +147,30 @@ class DownloadDialogComponent extends React.Component {
       ...this.state.other.files,
     ];
 
-    const [fileConvertIds, folderIds] = getDownloadItems(itemList, t);
-
-    if (fileConvertIds.length || folderIds.length) {
+    if (itemList.length) {
       setDownloadItems(itemList);
 
-      downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
-
-      this.onClose();
+      this.onDownloadFunction(itemList);
     }
   };
 
+  onDownloadFunction = (itemList) => {
+    const { downloadItems, downloadFiles, getDownloadItems, t } = this.props;
+
+    const files = itemList ?? downloadItems;
+
+    const [fileConvertIds, folderIds] = getDownloadItems(files, t);
+
+    downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
+
+    this.onClose();
+  };
+
   onReDownload = () => {
-    const {
-      downloadItems,
-      downloadFiles,
-      getDownloadItems,
-      t,
-      isAllPasswordFilesSorted,
-    } = this.props;
+    const { downloadItems, isAllPasswordFilesSorted } = this.props;
 
     if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
-      const [fileConvertIds, folderIds] = getDownloadItems(downloadItems, t);
-
-      downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
-
-      this.onClose();
+      this.onDownloadFunction();
     }
   };
 
@@ -353,6 +352,7 @@ class DownloadDialogComponent extends React.Component {
       theme,
       needPassword,
       isAllPasswordFilesSorted,
+      isOnePasswordFile,
     } = this.props;
 
     const {
@@ -489,6 +489,16 @@ class DownloadDialogComponent extends React.Component {
       </>
     );
 
+    if (isOnePasswordFile) {
+      return (
+        <OnePasswordRow
+          getItemIcon={this.getItemIcon}
+          onDownload={this.onDownloadFunction}
+          onClosePanel={this.onClosePanel}
+        />
+      );
+    }
+
     return (
       <ModalDialog
         visible={visible}
@@ -505,7 +515,10 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Body className={"modalDialogToggle"}>
           <Scrollbar bodyPadding="0px">
             {needPassword ? (
-              <PasswordContent getItemIcon={this.getItemIcon} />
+              <PasswordContent
+                getItemIcon={this.getItemIcon}
+                onReDownload={this.onReDownload}
+              />
             ) : (
               mainContent
             )}
@@ -577,8 +590,8 @@ export default inject(
     const { clearActiveOperations } = uploadDataStore;
 
     const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
-
     const needPassword = passwordFiles?.length > 0;
+    const isOnePasswordFile = passwordFiles?.length === 1;
 
     return {
       sortedFiles,
@@ -601,7 +614,7 @@ export default inject(
       downloadItems,
       getIcon,
       getFolderIcon,
-
+      isOnePasswordFile,
       needPassword,
     };
   },

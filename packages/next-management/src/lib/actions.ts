@@ -108,3 +108,51 @@ export async function getColorTheme() {
   return colorTheme.response as TGetColorTheme;
 }
 
+export async function getWhiteLabelLogos() {
+  const [getWhiteLabelLogos] = createRequest(
+    [`/settings/whitelabel/logos?isDefault=true`],
+    [["", ""]],
+    "GET",
+  );
+
+  const logosRes = await fetch(getWhiteLabelLogos);
+
+  if (!logosRes.ok) return;
+
+  const logos = await logosRes.json();
+
+  return logos.response;
+}
+
+export async function getWhiteLabelText() {
+  const [getWhiteLabelText] = createRequest(
+    [`/settings/whitelabel/logotext?isDefault=true`],
+    [["", ""]],
+    "GET",
+  );
+
+  const textRes = await fetch(getWhiteLabelText);
+
+  if (!textRes.ok) return;
+
+  const text = await textRes.json();
+
+  return text.response;
+}
+
+export async function getWhiteLabelIsDefault() {
+  const [getWhiteLabelIsDefault] = createRequest(
+    [`/settings/whitelabel/logos/isdefault?isDefault=true`],
+    [["", ""]],
+    "GET",
+  );
+
+  const isDefaultRes = await fetch(getWhiteLabelIsDefault);
+
+  if (!isDefaultRes.ok) return;
+
+  const isDefault = await isDefaultRes.json();
+
+  return isDefault.response;
+}
+

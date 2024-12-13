@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "../../../types";
-import { DeviceType } from "../../../enums";
 
 export interface IAdditionalResources {
   t: TTranslation;
@@ -36,5 +35,4 @@ export interface IAdditionalResources {
   onRestore: () => void;
   isLoading: boolean;
   additionalResourcesIsDefault: boolean;
-  deviceType: DeviceType;
 }

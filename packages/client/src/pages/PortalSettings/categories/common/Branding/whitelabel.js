@@ -29,11 +29,13 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
+import { brandingRedirectUrl } from "./constants";
 
 const WhiteLabelComponent = (props) => {
   const {
@@ -57,6 +59,12 @@ const WhiteLabelComponent = (props) => {
   } = props;
   const [isSaving, setIsSaving] = useState(false);
   const showAbout = standalone && isManagement() && displayAbout;
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "white-label",
+    deviceType,
+  });
 
   useEffect(() => {
     initWhiteLabel();
@@ -84,7 +92,6 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
-  console.log("logoUrls", logoUrls);
   return !isWhiteLabelLoaded ? (
     <LoaderWhiteLabel />
   ) : (
@@ -99,7 +106,6 @@ const WhiteLabelComponent = (props) => {
       onRestoreDefault={onRestoreDefault}
       isSaving={isSaving}
       enableRestoreButton={isDefaultWhiteLabel}
-      deviceType={deviceType}
       setLogoUrls={setLogoUrls}
       isWhiteLabelLoaded={isWhiteLabelLoaded}
       defaultLogoText={defaultLogoText}

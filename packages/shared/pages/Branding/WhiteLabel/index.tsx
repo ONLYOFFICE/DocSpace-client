@@ -33,14 +33,11 @@ import { toastr } from "../../../components/toast";
 import { WhiteLabelLogoType } from "../../../enums";
 import { globalColors } from "../../../themes";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
-import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
@@ -54,7 +51,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     onRestoreDefault,
     isSaving,
     enableRestoreButton,
-    deviceType,
     setLogoUrls,
     isWhiteLabelLoaded,
     defaultLogoText,
@@ -63,12 +59,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   } = props;
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "white-label",
-    deviceType,
-  });
 
   useEffect(() => {
     if (!isWhiteLabelLoaded) return;

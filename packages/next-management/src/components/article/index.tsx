@@ -95,7 +95,7 @@ export const Article = observer(() => {
           icon={SettingsReactSvgUrl}
           showText={showText}
           onClick={() => onItemClick("settings")}
-          isActive={pathname === "/settings"}
+          isActive={pathname.includes("/settings")}
           folderId="management_catalog-settings"
           $currentColorScheme={theme?.currentColorScheme}
         />

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isManagement } from "../../utils/common";
+import { isManagement } from "@docspace/shared/utils/common";
 
 export const brandingRedirectUrl: string = isManagement()
   ? "/management/settings/branding"

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "../../../types";
-import { DeviceType } from "../../../enums";
 
 export interface ICompanyInfo {
   t: TTranslation;
@@ -42,7 +41,6 @@ export interface ICompanyInfo {
   onRestore: () => void;
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
-  deviceType: DeviceType;
 }
 
 export interface ICompanySettings {

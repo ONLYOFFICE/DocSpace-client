@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "../../../types";
-import { DeviceType } from "../../../enums";
 
 export interface ILogoPath {
   light: string;
@@ -75,7 +74,6 @@ export interface IWhiteLabel {
   onRestoreDefault: () => void;
   isSaving: boolean;
   enableRestoreButton: boolean;
-  deviceType: DeviceType;
   setLogoUrls: (logoUrls: ILogo[]) => void;
   isWhiteLabelLoaded: boolean;
   defaultLogoText: string;

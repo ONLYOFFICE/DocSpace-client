@@ -59,7 +59,7 @@ const FileManagement = ({
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
-  const getData = async () => await getFilesSettings();
+  const getData = () => getFilesSettings();
 
   useEffect(() => {
     const prefix =

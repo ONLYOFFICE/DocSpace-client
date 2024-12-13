@@ -207,7 +207,7 @@ const CreateEvent = ({
           return;
         }
 
-        return await createFile(
+        await createFile(
           +parentId,
           `${newValue}.${extension}`,
           templateId,

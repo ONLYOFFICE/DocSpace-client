@@ -101,7 +101,6 @@ module.exports = {
     "no-plusplus": "off",
     "react/no-unknown-property": "off",
     "react/no-unescaped-entities": "off",
-    "@typescript-eslint/return-await": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

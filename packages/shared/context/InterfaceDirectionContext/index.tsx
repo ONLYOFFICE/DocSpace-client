@@ -23,49 +23,25 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { createContext } from "react";
 
-// import "@docspace/shared/utils/wdyr";
-import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router-dom";
-import { Provider as MobxProvider } from "mobx-react";
+import { TInterfaceDirection } from "../../themes";
 
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import store from "SRC_DIR/store";
-import i18n from "./i18n";
-
-import "@docspace/shared/polyfills/broadcastchannel";
-
-import "@docspace/shared/styles/custom.scss";
-import { InterfaceDirectionProvider } from "@docspace/shared/context/InterfaceDirectionContext";
-
-import router from "./router";
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
-
-  return (
-    <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <InterfaceDirectionProvider interfaceDirection={i18n.dir()}>
-            <ErrorBoundary>
-              <RouterProvider router={router} />
-            </ErrorBoundary>
-          </InterfaceDirectionProvider>
-        </ThemeProvider>
-      </I18nextProvider>
-    </MobxProvider>
-  );
+type InterfaceDirectionProviderProps = {
+  interfaceDirection: TInterfaceDirection;
+  children: React.ReactNode;
 };
 
-export default App;
+export const InterfaceDirectionContext =
+  createContext<TInterfaceDirection>("ltr");
+
+export const InterfaceDirectionProvider = ({
+  interfaceDirection,
+  children,
+}: InterfaceDirectionProviderProps) => {
+  return (
+    <InterfaceDirectionContext.Provider value={interfaceDirection}>
+      {children}
+    </InterfaceDirectionContext.Provider>
+  );
+};

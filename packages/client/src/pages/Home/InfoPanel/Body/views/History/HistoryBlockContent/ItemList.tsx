@@ -113,7 +113,7 @@ const HistoryItemList = ({
 
   const sortItems =
     actionType === FeedAction.Change
-      ? items.sort((a, b) => a?.oldIndex - b?.oldIndex)
+      ? items.sort((a, b) => (a?.oldIndex ?? 0) - (b?.oldIndex ?? 0))
       : items;
 
   const oldItem = actionType === "rename" && {

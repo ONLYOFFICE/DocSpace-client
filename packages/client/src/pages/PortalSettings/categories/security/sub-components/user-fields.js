@@ -135,7 +135,7 @@ const UserFields = (props) => {
           }
 
           const error = newInput2
-            ? input?.split("-").length - 1 > 1 ||
+            ? (input && input.split("-").length - 1 > 1) ||
               !regexp.test(newInput1) ||
               !regexp.test(newInput2)
             : !regexp.test(input);

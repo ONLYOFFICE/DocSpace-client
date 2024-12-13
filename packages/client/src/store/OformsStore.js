@@ -234,7 +234,8 @@ class OformsStore {
     const categoryType = this.getTypeOfCategory(category);
     const categoryTitle = category.attributes[categoryType];
 
-    const [localizedCategory] = category.attributes.localizations?.data.filter(
+    const localizations = category.attributes.localizations?.data || [];
+    const [localizedCategory] = localizations.filter(
       (localization) => localization.attributes.locale === locale,
     );
     return localizedCategory?.attributes[categoryType] || categoryTitle;

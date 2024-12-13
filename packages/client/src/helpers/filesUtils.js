@@ -224,10 +224,15 @@ export const getCountTilesInRow = () => {
       .getComputedStyle(elem)
       ?.getPropertyValue("padding");
 
-    containerWidth =
-      elem?.clientWidth -
-      elemPadding.split("px")[1] -
-      elemPadding.split("px")[3];
+    if (elemPadding) {
+      const paddingValues = elemPadding.split("px");
+      if (paddingValues.length >= 4) {
+        containerWidth =
+          (elem.clientWidth || 0) -
+          parseInt(paddingValues[1], 10) -
+          parseInt(paddingValues[3], 10);
+      }
+    }
   }
 
   containerWidth += tileGap;

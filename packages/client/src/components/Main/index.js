@@ -77,10 +77,11 @@ const Main = (props) => {
         const mainBar = document.getElementById("main-bar");
 
         if (mainBar) {
-          if (!mainBar?.offsetHeight)
+          const mainBarHeight = mainBar.offsetHeight || 0;
+          if (mainBarHeight === 0)
             return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 
-          correctHeight -= mainBar?.offsetHeight;
+          correctHeight -= mainBarHeight;
         }
       }
 

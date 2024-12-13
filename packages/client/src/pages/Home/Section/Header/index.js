@@ -559,8 +559,9 @@ const SectionHeaderContent = (props) => {
   const currentRootRoomTitle =
     isLoading && stateRootRoomTitle
       ? stateRootRoomTitle
-      : navigationPath?.length > 1 &&
-        navigationPath[navigationPath?.length - 2].title;
+      : navigationPath &&
+        navigationPath.length > 1 &&
+        navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {

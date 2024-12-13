@@ -2694,8 +2694,9 @@ class FilesActionStore {
     const state = {
       title:
         (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath.length > 0 &&
           this.selectedFolderStore?.navigationPath[
-            this.selectedFolderStore?.navigationPath?.length - 1
+            this.selectedFolderStore.navigationPath.length - 1
           ]?.title) ||
         "",
       isRoot: true,

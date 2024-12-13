@@ -103,7 +103,6 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "@typescript-eslint/return-await": "off",
     "no-multi-assign": "off",
-    "no-unsafe-optional-chaining": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

@@ -581,7 +581,7 @@ export default inject(
       sortedDownloadFiles,
       getDownloadItems,
       setDownloadItems,
-      passwordFiles,
+      sortedPasswordFiles,
       downloadItems,
     } = dialogsStore;
 
@@ -590,8 +590,8 @@ export default inject(
     const { clearActiveOperations } = uploadDataStore;
 
     const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
-    const needPassword = passwordFiles?.length > 0;
-    const isOnePasswordFile = passwordFiles?.length === 1;
+    const needPassword = sortedPasswordFiles?.length > 0;
+    const isOnePasswordFile = sortedPasswordFiles?.length === 1;
 
     return {
       sortedFiles,
@@ -604,7 +604,7 @@ export default inject(
 
       theme,
       openUrl,
-      passwordFiles,
+      sortedPasswordFiles,
 
       setSortedPasswordFiles,
       isAllPasswordFilesSorted,

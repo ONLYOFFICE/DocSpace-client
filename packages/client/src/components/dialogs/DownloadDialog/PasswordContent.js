@@ -82,9 +82,14 @@ const PasswordContent = (props) => {
           </Text>
         </div>
         <div>
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <PasswordRow item={item} type={type} getItemIcon={getItemIcon} />
+              <PasswordRow
+                key={`${item.id}_${index}`}
+                item={item}
+                type={type}
+                getItemIcon={getItemIcon}
+              />
             );
           })}
         </div>
@@ -120,8 +125,15 @@ const PasswordContent = (props) => {
 };
 
 export default inject(({ dialogsStore }) => {
-  const { setDownloadFilesPassword, sortedDownloadFiles, passwordFiles } =
-    dialogsStore;
+  const {
+    updateDownloadedFilePassword,
+    sortedDownloadFiles,
+    sortedPasswordFiles,
+  } = dialogsStore;
 
-  return { passwordFiles, setDownloadFilesPassword, sortedDownloadFiles };
+  return {
+    sortedPasswordFiles,
+    updateDownloadedFilePassword,
+    sortedDownloadFiles,
+  };
 })(observer(PasswordContent));

@@ -100,6 +100,8 @@ const OnePasswordRow = ({
   };
 
   const onDownloadWithPassword = () => {
+    if (!password.trim().length) return;
+
     const files = updateDownloadItem(item.id, {
       password,
     });
@@ -117,19 +119,14 @@ const OnePasswordRow = ({
     onDownload(files);
   };
 
-  const onKeyUp = useCallback(
-    (event) => {
-      if (!password.trim().length) return;
+  const onKeyUp = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
 
-      event.stopPropagation();
-      event.preventDefault();
-
-      if (event.key === "Enter") {
-        onDownloadWithPassword();
-      }
-    },
-    [password, onDownloadWithPassword],
-  );
+    if (event.key === "Enter") {
+      onDownloadWithPassword();
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUp, true);
@@ -196,17 +193,17 @@ export default inject(({ dialogsStore }) => {
   const {
     setDownloadItems,
     downloadItems,
-    passwordFiles,
+    sortedPasswordFiles,
     downloadDialogVisible: visible,
   } = dialogsStore;
 
-  const item = passwordFiles[0];
+  const item = sortedPasswordFiles[0];
 
   return {
     item,
     setDownloadItems,
     downloadItems,
-    passwordFiles,
+    sortedPasswordFiles,
     visible,
   };
 })(observer(OnePasswordRow));

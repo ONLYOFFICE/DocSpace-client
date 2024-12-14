@@ -33,10 +33,7 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
-import {
-  StyledDownloadContent,
-  StyledSinglePasswordFile,
-} from "./StyledDownloadDialog";
+import { StyledDownloadContent } from "./StyledDownloadDialog";
 import SimulatePassword from "../../../components/SimulatePassword";
 
 import { Text } from "@docspace/shared/components/text";
@@ -46,17 +43,15 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 
 const PasswordRow = ({
   item,
-  setOriginalFormat,
-  removeFromDownloadFiles,
-  setDownloadFilesPassword,
+  resetDownloadedFileFormat,
+  discardDownloadedFile,
+  updateDownloadedFilePassword,
   getItemIcon,
   type,
-  isOnePasswordFile,
-  onReDownload,
 }) => {
   const [showPasswordInput, setShowPassword] = useState(false);
-  const [password, setPassword] = useState(item.password ?? "");
-  const [passwordValid, setPasswordValid] = useState(false);
+  const [password, setPassword] = useState("");
+
   const { t } = useTranslation([
     "UploadPanel",
     "DownloadDialog",
@@ -73,25 +68,23 @@ const PasswordRow = ({
 
   const onButtonClick = () => {
     onInputClick();
-
-    setDownloadFilesPassword(item.id, password, type);
+    updateDownloadedFilePassword(item.id, password, type);
   };
 
   const onChangePassword = (password) => {
     setPassword(password);
-    !passwordValid && setPasswordValid(true);
   };
 
   const onChangeInOriginal = () => {
-    setOriginalFormat(item.id, item.fileExst, type);
+    resetDownloadedFileFormat(item.id, item.fileExst, type);
   };
 
   const removeFromList = () => {
-    removeFromDownloadFiles(item.id, type);
+    discardDownloadedFile(item.id, type);
   };
 
   const onKeyUp = (event) => {
-    if (!showPasswordInput && type === "password") return;
+    if ((!showPasswordInput && type === "password") || !password) return;
 
     event.stopPropagation();
     event.preventDefault();
@@ -107,7 +100,7 @@ const PasswordRow = ({
     return () => {
       window.removeEventListener("keyup", onKeyUp, true);
     };
-  });
+  }, [onKeyUp]);
 
   const getOptions = () => {
     const options = [
@@ -142,37 +135,6 @@ const PasswordRow = ({
   };
 
   const element = getItemIcon(item);
-  console.log("item", item);
-
-  const onDowloadInOriginal = () => {
-    setOriginalFormat(item.id, item.fileExst, type);
-    onReDownload();
-  };
-
-  if (isOnePasswordFile) {
-    return (
-      <StyledSinglePasswordFile>
-        <div className="single-password_content">
-          <div>{element}</div>
-          <Text fontWeight="600" fontSize="14px" className="password-title">
-            {item.title}
-          </Text>
-
-          <IconButton
-            size={16}
-            iconName={ProtectedReactSvgUrl}
-            onClick={onDowloadInOriginal}
-          />
-        </div>
-        <SimulatePassword
-          onChange={onChangePassword}
-          hasError={!passwordValid}
-          forwardedRef={inputRef}
-          inputValue={password}
-        />
-      </StyledSinglePasswordFile>
-    );
-  }
 
   return (
     <StyledDownloadContent>
@@ -208,7 +170,6 @@ const PasswordRow = ({
         <div className="password-input">
           <SimulatePassword
             onChange={onChangePassword}
-            hasError={!passwordValid}
             forwardedRef={inputRef}
             inputValue={password}
           />
@@ -229,14 +190,14 @@ const PasswordRow = ({
 };
 export default inject(({ filesStore, dialogsStore }) => {
   const {
-    setOriginalFormat,
-    removeFromDownloadFiles,
-    setDownloadFilesPassword,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
+    updateDownloadedFilePassword,
   } = dialogsStore;
 
   return {
-    setOriginalFormat,
-    removeFromDownloadFiles,
-    setDownloadFilesPassword,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
+    updateDownloadedFilePassword,
   };
 })(observer(PasswordRow));

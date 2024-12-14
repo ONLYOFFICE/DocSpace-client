@@ -352,7 +352,7 @@ class DialogsStore {
     this.downloadItems = downloadItems;
   };
 
-  get passwordFiles() {
+  get sortedPasswordFiles() {
     const original = this.sortedDownloadFiles.original ?? [];
     const other = this.sortedDownloadFiles.other ?? [];
     const password = this.sortedDownloadFiles.password ?? [];
@@ -361,7 +361,7 @@ class DialogsStore {
     return [...other, ...original, ...password, ...remove];
   }
 
-  setDownloadFilesPassword = (id, password, type) => {
+  updateDownloadedFilePassword = (id, password, type) => {
     let originItem;
 
     const currentType = this.sortedDownloadFiles[type];
@@ -388,7 +388,7 @@ class DialogsStore {
     ];
   };
 
-  setOriginalFormat = (id, fileExst, type) => {
+  resetDownloadedFileFormat = (id, fileExst, type) => {
     let originItem;
 
     const currentType = this.sortedDownloadFiles[type];
@@ -399,7 +399,11 @@ class DialogsStore {
     });
 
     if (type === "remove")
-      this.downloadItems.push({ ...originItem, format: fileExst });
+      this.downloadItems.push({
+        ...originItem,
+        format: fileExst,
+        oldFormat: originItem.format,
+      });
     else
       this.downloadItems.map((item) => {
         if (item.id === id) {
@@ -416,7 +420,7 @@ class DialogsStore {
     ];
   };
 
-  removeFromDownloadFiles = (id, type) => {
+  discardDownloadedFile = (id, type) => {
     let removedItem = null;
 
     const newFileIds = this.downloadItems.filter((item) => item.id !== id);

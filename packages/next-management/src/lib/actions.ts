@@ -74,6 +74,28 @@ export async function getSettings(share?: string) {
   return settings.response as TSettings;
 }
 
+export async function getQuota() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getQuota] = createRequest(
+    [`/portal/payment/quota`],
+    [["", ""]],
+    "GET",
+  );
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const quotaRes = await fetch(getQuota);
+
+  if (quotaRes.status === 401) return undefined;
+
+  if (!quotaRes.ok) return;
+
+  const quota = await quotaRes.json();
+
+  return quota.response;
+}
+
 export async function getAllPortals() {
   const [getAllPortals] = createRequest(
     [`/portal/get?statistics=true`],

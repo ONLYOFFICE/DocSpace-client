@@ -24,26 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import React from "react";
+import styled from "styled-components";
 
-import { StyledLayout } from "./layout.styled";
-import { Article } from "../article";
-import { Section } from "../section";
-import { Header } from "../header";
+import { Text } from "@docspace/shared/components/text";
+import { tablet } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
-export const LayoutWrapper = ({
-  children,
-  portals,
-}: {
-  children: React.ReactNode;
-  portals: unknown;
-}) => {
+const StyledBar = styled.div`
+  border-radius: 6px;
+  padding: 12px 16px;
+  background-color: ${({ theme }) => theme.management.barBackground};
+
+  @media ${tablet} {
+    padding: 8px 12px;
+    margin-bottom: 16px;
+  }
+`;
+
+StyledBar.defaultProps = { theme: Base };
+
+export const Bar = ({ title }: { title: string }) => {
   return (
-    <StyledLayout>
-      <Header />
-      <Article />
-      <Section portals={portals}>{children}</Section>
-    </StyledLayout>
+    <StyledBar className="bar">
+      <Text fontSize="12px" fontWeight="400" lineHeight="16px">
+        {title}
+      </Text>
+    </StyledBar>
   );
 };
 

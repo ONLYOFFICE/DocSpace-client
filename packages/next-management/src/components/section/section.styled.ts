@@ -62,3 +62,15 @@ export const StyledSection = styled.section`
   }
 `;
 
+export const StyledSectionHeader = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  @media ${tablet} {
+    gap: 0;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+`;
+

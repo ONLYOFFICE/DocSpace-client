@@ -33,18 +33,31 @@ import { useTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { getHeaderByPathname } from "@/lib";
+import { Bar } from "@/components/bar";
+import { StyledSection, StyledSectionHeader } from "./section.styled";
 
-import { StyledSection } from "./section.styled";
-
-export const Section = ({ children }: { children: React.ReactNode }) => {
+export const Section = ({
+  children,
+  portals,
+}: {
+  children: React.ReactNode;
+  portals: unknown;
+}) => {
   const pathname = usePathname();
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Management", "Common"]);
+  const { tenants } = portals;
+  const showBar = pathname.includes("settings");
+  const barTitle =
+    tenants?.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
 
   return (
     <StyledSection>
-      <Headline className="headline" type="content" truncate={true}>
-        {getHeaderByPathname(pathname, t)}
-      </Headline>
+      <StyledSectionHeader>
+        <Headline className="headline" type="content" truncate={true}>
+          {getHeaderByPathname(pathname, t)}
+        </Headline>
+        {showBar && <Bar title={barTitle} />}
+      </StyledSectionHeader>
       <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
         {children}
       </Scrollbar>

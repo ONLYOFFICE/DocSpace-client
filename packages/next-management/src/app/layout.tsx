@@ -33,7 +33,12 @@ import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { Toast } from "@docspace/shared/components/toast";
 
 import StyledComponentsRegistry from "@/lib/registry";
-import { getSettings, getUser, getColorTheme } from "@/lib/actions";
+import {
+  getSettings,
+  getUser,
+  getColorTheme,
+  getAllPortals,
+} from "@/lib/actions";
 import Providers from "@/providers";
 
 import { LayoutWrapper } from "@/components/layout";
@@ -46,10 +51,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, settings, colorTheme] = await Promise.all([
+  const [user, settings, colorTheme, portals] = await Promise.all([
     getUser(),
     getSettings(),
     getColorTheme(),
+    getAllPortals(),
   ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
@@ -73,7 +79,7 @@ export default async function RootLayout({
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             <Toast isSSR />
             <ManagementDialogs settings={settings} user={user} />
-            <LayoutWrapper>{children}</LayoutWrapper>
+            <LayoutWrapper portals={portals}>{children}</LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>
       </body>

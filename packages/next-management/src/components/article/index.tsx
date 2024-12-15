@@ -88,6 +88,7 @@ export const Article = observer(() => {
           isActive={pathname === "/spaces"}
           folderId="management_catalog-spaces"
           $currentColorScheme={theme?.currentColorScheme}
+          linkData={{ path: "/spaces", state: {} }}
         />
         <ArticleItem
           key="settings"
@@ -98,6 +99,7 @@ export const Article = observer(() => {
           isActive={pathname.includes("/settings")}
           folderId="management_catalog-settings"
           $currentColorScheme={theme?.currentColorScheme}
+          linkData={{ path: "/settings", state: {} }}
         />
         <ArticleItem
           key="payments"
@@ -108,6 +110,7 @@ export const Article = observer(() => {
           isActive={pathname === "/payments"}
           folderId="management_catalog-payments"
           $currentColorScheme={theme?.currentColorScheme}
+          linkData={{ path: "/payments", state: {} }}
         />
       </div>
       <HideButton />

@@ -38,11 +38,10 @@ export const getMinifyTitle = (title: string) => {
 };
 
 export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
+  if (pathname.includes("settings")) return t("Common:Settings");
   switch (pathname) {
     case "/spaces":
       return t("Common:Spaces");
-    case "/settings":
-      return t("Common:Settings");
     case "/payments":
       return t("Common:PaymentsTitle");
     default:

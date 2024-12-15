@@ -29,7 +29,6 @@ import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { tablet } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
 
 const StyledBar = styled.div`
   border-radius: 6px;
@@ -41,8 +40,6 @@ const StyledBar = styled.div`
     margin-bottom: 16px;
   }
 `;
-
-StyledBar.defaultProps = { theme: Base };
 
 export const Bar = ({ title }: { title: string }) => {
   return (

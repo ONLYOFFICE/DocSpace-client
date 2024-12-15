@@ -27,7 +27,6 @@
 "use client";
 
 import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { Row } from "@docspace/shared/components/row";

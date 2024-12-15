@@ -27,7 +27,6 @@
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 import { desktop, tablet, mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 
@@ -79,8 +78,6 @@ export const StyledArticle = styled.article<{
   }
 `;
 
-StyledArticle.defaultProps = { theme: Base };
-
 export const StyledArticleHeader = styled.h1<{ showText: boolean }>`
   padding: 12px 4px;
   font-size: 17px;
@@ -107,8 +104,6 @@ export const StyledCrossIcon = styled(CrossIcon)`
     stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 export const StyledHideButtonWrapper = styled.div<{ showText: boolean }>`
   min-width: ${({ showText }) => (showText ? "243px" : "60px")};
@@ -144,8 +139,6 @@ export const StyledShowButton = styled.div`
     }
   }
 `;
-
-StyledShowButton.defaultProps = { theme: Base };
 
 export const StyledHideButton = styled.div<{
   currentColorScheme?: TColorScheme;

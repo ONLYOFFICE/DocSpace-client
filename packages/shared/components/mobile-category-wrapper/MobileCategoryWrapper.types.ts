@@ -28,8 +28,8 @@ export interface IMobileCategoryWrapperProps {
   title: string;
   url: string;
   subtitle: string;
-  onClickLink: () => void;
-  isDisabled: boolean;
+  onClickLink: (e: Event) => void;
+  isDisabled?: boolean;
   withPaidBadge: boolean;
   badgeLabel: string;
 }

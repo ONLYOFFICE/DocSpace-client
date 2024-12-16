@@ -108,6 +108,111 @@ const Bar = (props) => {
 
   const { loadLanguagePath } = getBannerAttribute();
 
+  const onCloseQuota = (currentBar) => {
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+
+    const closed =
+      closeItems.length > 0 ? [...closeItems, currentBar] : [currentBar];
+
+    localStorage.setItem("barClose", JSON.stringify(closed));
+
+    switch (currentBar) {
+      case QuotaBarTypes.RoomsTariff:
+        setBarVisible((value) => ({ ...value, roomsTariff: false }));
+        break;
+      case QuotaBarTypes.RoomsTariffLimit:
+        setBarVisible((value) => ({ ...value, roomsTariffLimit: false }));
+        break;
+      case QuotaBarTypes.StorageTariff:
+        setBarVisible((value) => ({ ...value, storageTariff: false }));
+        break;
+      case QuotaBarTypes.StorageTariffLimit:
+        setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
+        break;
+      case QuotaBarTypes.StorageQuota:
+        setBarVisible((value) => ({ ...value, storageQuota: false }));
+        break;
+      case QuotaBarTypes.StorageQuotaLimit:
+        setBarVisible((value) => ({ ...value, storageQuotaLimit: false }));
+        break;
+      case QuotaBarTypes.UsersTariff:
+        setBarVisible((value) => ({
+          ...value,
+          usersTariff: false,
+        }));
+        break;
+      case QuotaBarTypes.UsersTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          usersTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.UserAndStorageTariff:
+        setBarVisible((value) => ({ ...value, storageAndUserTariff: false }));
+        break;
+      case QuotaBarTypes.UserAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          storageAndUserTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.RoomsAndStorageTariff:
+        setBarVisible((value) => ({ ...value, roomsAndStorageTariff: false }));
+        break;
+      case QuotaBarTypes.RoomsAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          roomsAndStorageTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.PersonalUserQuota:
+        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
+        break;
+      default:
+        break;
+    }
+
+    setMaintenanceExist(false);
+  };
+
+  const onClickTenantCustomQuota = (type) => {
+    const managementPageUrl = combineUrl(
+      "/portal-settings",
+      "/management/disk-space",
+    );
+
+    navigate(managementPageUrl);
+
+    onCloseQuota(type);
+  };
+
+  const onClickQuota = (type, e) => {
+    type === QuotaBarTypes.StorageQuota ||
+    type === QuotaBarTypes.PersonalUserQuota
+      ? onClickTenantCustomQuota(type)
+      : onPaymentsClick(e);
+
+    onCloseQuota(type);
+  };
+
+  const sendActivationLinkAction = () => {
+    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
+  };
+
+  const onCloseActivationBar = () => {
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+
+    const closed =
+      closeItems.length > 0
+        ? [...closeItems, QuotaBarTypes.ConfirmEmail]
+        : [QuotaBarTypes.ConfirmEmail];
+
+    localStorage.setItem("barClose", JSON.stringify(closed));
+
+    setBarVisible((value) => ({ ...value, confirmEmail: false }));
+    setMaintenanceExist(false);
+  };
+
   const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
@@ -207,123 +312,104 @@ const Bar = (props) => {
     };
   }, []);
 
-  const sendActivationLinkAction = () => {
-    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
-  };
+  const updateBanner = React.useCallback(async () => {
+    const bar = (localStorage.getItem("bar") || "")
+      .split(",")
+      .filter((bar) => bar.length > 0);
 
-  const onCloseActivationBar = () => {
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+    const closed = JSON.parse(localStorage.getItem("barClose"));
 
-    const closed =
-      closeItems.length > 0
-        ? [...closeItems, QuotaBarTypes.ConfirmEmail]
-        : [QuotaBarTypes.ConfirmEmail];
+    const banner = difference(bar, closed);
 
-    localStorage.setItem("barClose", JSON.stringify(closed));
+    let index = Number(localStorage.getItem("barIndex") || 0);
 
-    setBarVisible((value) => ({ ...value, confirmEmail: false }));
-    setMaintenanceExist(false);
-  };
-
-  const onClickQuota = (type, e) => {
-    type === QuotaBarTypes.StorageQuota ||
-    type === QuotaBarTypes.PersonalUserQuota
-      ? onClickTenantCustomQuota()
-      : onPaymentsClick(e);
-
-    onCloseQuota(type);
-  };
-
-  const onClickTenantCustomQuota = (type) => {
-    const managementPageUrl = combineUrl(
-      "/portal-settings",
-      "/management/disk-space",
-    );
-
-    navigate(managementPageUrl);
-
-    onCloseQuota(type);
-  };
-
-  const onCloseQuota = (currentBar) => {
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
-
-    const closed =
-      closeItems.length > 0 ? [...closeItems, currentBar] : [currentBar];
-
-    localStorage.setItem("barClose", JSON.stringify(closed));
-
-    switch (currentBar) {
-      case QuotaBarTypes.RoomsTariff:
-        setBarVisible((value) => ({ ...value, roomsTariff: false }));
-        break;
-      case QuotaBarTypes.RoomsTariffLimit:
-        setBarVisible((value) => ({ ...value, roomsTariffLimit: false }));
-        break;
-      case QuotaBarTypes.StorageTariff:
-        setBarVisible((value) => ({ ...value, storageTariff: false }));
-        break;
-      case QuotaBarTypes.StorageTariffLimit:
-        setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
-        break;
-      case QuotaBarTypes.StorageQuota:
-        setBarVisible((value) => ({ ...value, storageQuota: false }));
-        break;
-      case QuotaBarTypes.StorageQuotaLimit:
-        setBarVisible((value) => ({ ...value, storageQuotaLimit: false }));
-        break;
-      case QuotaBarTypes.UsersTariff:
-        setBarVisible((value) => ({
-          ...value,
-          usersTariff: false,
-        }));
-        break;
-      case QuotaBarTypes.UsersTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          usersTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.UserAndStorageTariff:
-        setBarVisible((value) => ({ ...value, storageAndUserTariff: false }));
-        break;
-      case QuotaBarTypes.UserAndStorageTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          storageAndUserTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.RoomsAndStorageTariff:
-        setBarVisible((value) => ({ ...value, roomsAndStorageTariff: false }));
-        break;
-      case QuotaBarTypes.RoomsAndStorageTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          roomsAndStorageTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.PersonalUserQuota:
-        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
-        break;
-      default:
-        break;
+    if (banner.length < 1 || index + 1 >= banner.length) {
+      index = 0;
+    } else {
+      index++;
     }
 
-    setMaintenanceExist(false);
-  };
+    if (closed) {
+      if (isAdmin || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          roomsTariff: !closed.includes(QuotaBarTypes.RoomsTariff),
+          roomsTariffLimit: !closed.includes(QuotaBarTypes.RoomsTariffLimit),
+          usersTariffLimit: !closed.includes(QuotaBarTypes.UsersTariffLimit),
+          usersTariff: !closed.includes(QuotaBarTypes.UsersTariff),
+          storageAndUserTariff: !closed.includes(
+            QuotaBarTypes.UserAndStorageTariff,
+          ),
+          roomsAndStorageTariff: closed.includes(
+            QuotaBarTypes.RoomsAndStorageTariff,
+          ),
+          roomsAndStorageTariffLimit: closed.includes(
+            QuotaBarTypes.RoomsAndStorageTariffLimit,
+          ),
+          storageAndUserTariffLimit: !closed.includes(
+            QuotaBarTypes.UserAndStorageTariffLimit,
+          ),
+        }));
+      }
 
-  const onClose = () => {
-    setMaintenanceExist(false);
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
-    const closed =
-      closeItems.length > 0 ? [...closeItems, campaigns] : [campaigns];
-    localStorage.setItem("barClose", JSON.stringify(closed));
-    setHtmlLink(null);
-  };
+      if (isAdmin || isUser || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          storageTariff: !closed.includes(QuotaBarTypes.StorageTariff),
+          storageTariffLimit: !closed.includes(
+            QuotaBarTypes.StorageTariffLimit,
+          ),
+          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          storageQuotaLimit: !closed.includes(QuotaBarTypes.StorageQuotaLimit),
+          personalUserQuota: !closed.includes(QuotaBarTypes.PersonalUserQuota),
+        }));
+      }
 
-  const onLoad = () => {
-    setMaintenanceExist(true);
-  };
+      if (!closed.includes(QuotaBarTypes.ConfirmEmail)) {
+        setBarVisible((value) => ({ ...value, confirmEmail: true }));
+      }
+      if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
+        setBarVisible((value) => ({ ...value, personalUserQuota: true }));
+      }
+    } else {
+      setBarVisible({
+        roomsTariff: isAdmin || isRoomAdmin,
+        roomsTariffLimit: isAdmin || isRoomAdmin,
+        storageTariff: isAdmin || isUser || isRoomAdmin,
+        storageTariffLimit: isAdmin || isUser || isRoomAdmin,
+        storageQuota: isAdmin || isUser || isRoomAdmin,
+        storageQuotaLimit: isAdmin || isUser || isRoomAdmin,
+        usersTariff: isAdmin || isRoomAdmin,
+        usersTariffLimit: isAdmin || isRoomAdmin,
+        storageAndUserTariff: isAdmin || isRoomAdmin,
+        roomsAndStorageTariff: isAdmin || isRoomAdmin,
+        roomsAndStorageTariffLimit: isAdmin || isRoomAdmin,
+        storageAndUserTariffLimit: isAdmin || isRoomAdmin,
+        confirmEmail: true,
+        personalUserQuota: isAdmin || isUser || isRoomAdmin,
+      });
+    }
+
+    try {
+      const [htmlUrl, campaigns] = await loadLanguagePath();
+
+      setHtmlLink(htmlUrl);
+      setCampaigns(campaigns);
+    } catch (e) {
+      updateBanner();
+    }
+
+    localStorage.setItem("barIndex", index);
+  }, []);
+
+  useEffect(() => {
+    const updateTimeout = setTimeout(() => updateBanner(), 1000);
+    const updateInterval = setInterval(updateBanner, ADS_TIMEOUT);
+    return () => {
+      clearTimeout(updateTimeout);
+      clearInterval(updateInterval);
+    };
+  }, []);
 
   const getCurrentBar = () => {
     if (
@@ -467,6 +553,19 @@ const Bar = (props) => {
     htmlLink,
     firstLoad,
   ]);
+
+  const onClose = () => {
+    setMaintenanceExist(false);
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+    const closed =
+      closeItems.length > 0 ? [...closeItems, campaigns] : [campaigns];
+    localStorage.setItem("barClose", JSON.stringify(closed));
+    setHtmlLink(null);
+  };
+
+  const onLoad = () => {
+    setMaintenanceExist(true);
+  };
 
   return showQuotasBar ? (
     <QuotasBar

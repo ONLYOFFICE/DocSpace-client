@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { motion } from "framer-motion";
 
 import { Text } from "../text";
 
-import ToggleButtonTheme from "./ToggleButton.theme";
-import { ToggleButtonContainer, HiddenInput } from "./ToggleButton.styled";
-import { ToggleButtonProps, ToggleIconProps } from "./ToggleButton.types";
+import type { ToggleButtonProps, ToggleIconProps } from "./ToggleButton.types";
+import styles from "./ToggleButton.module.scss";
 
 const ToggleIcon = ({
   isChecked,
@@ -42,6 +42,7 @@ const ToggleIcon = ({
 
   return (
     <motion.svg
+      data-testid="toggle-button-icon"
       animate={[
         isChecked ? "checked" : "notChecked",
         isLoading ? "isLoading" : "",
@@ -99,27 +100,29 @@ const ToggleButton = ({
   fontSize,
 }: ToggleButtonProps) => {
   return (
-    <ToggleButtonTheme
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.container, className)}
       style={style}
-      isChecked={isChecked}
-      isDisabled={isDisabled}
       data-testid="toggle-button"
     >
-      <ToggleButtonContainer
+      <label
         id={id}
-        className={className}
+        className={classNames(styles.label, className, {
+          [styles.disabled]: isDisabled,
+          [styles.checked]: isChecked,
+        })}
         style={style}
-        isDisabled={isDisabled}
-        isChecked={isChecked}
+        data-testid="toggle-button-container"
       >
-        <HiddenInput
+        <input
+          className={styles.hiddenInput}
           name={name}
           type="checkbox"
           checked={isChecked}
           disabled={isDisabled}
           onChange={onChange}
+          data-testid="toggle-button-input"
         />
         <ToggleIcon
           isChecked={isChecked}
@@ -128,16 +131,17 @@ const ToggleButton = ({
         />
         {label && (
           <Text
-            className="toggle-button-text"
+            className={styles.toggleButtonText}
             as="span"
             fontWeight={fontWeight}
             fontSize={fontSize}
+            data-testid="toggle-button-label"
           >
             {label}
           </Text>
         )}
-      </ToggleButtonContainer>
-    </ToggleButtonTheme>
+      </label>
+    </div>
   );
 };
 

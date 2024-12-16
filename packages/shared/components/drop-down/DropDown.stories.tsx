@@ -32,7 +32,7 @@ import type { DropDownProps } from "./DropDown.types";
 import { Button } from "../button";
 
 const meta = {
-  title: "Components/DropDown",
+  title: "Drop down components/DropDown",
   component: DropDown,
   parameters: {
     docs: {

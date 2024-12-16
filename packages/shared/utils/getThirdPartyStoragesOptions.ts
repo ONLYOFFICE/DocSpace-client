@@ -28,11 +28,30 @@ import { ThirdPartyStorages } from "@docspace/shared/enums";
 
 import type { SelectedStorageType } from "@docspace/shared/types";
 
+export type ReturnOptions = {
+  comboBoxOptions: {
+    key: string;
+    label: string;
+    disabled: boolean;
+    connected: boolean;
+  }[];
+  storagesInfo: Record<string, SelectedStorageType>;
+  selectedStorageTitle: string;
+  selectedStorageId: string;
+};
+
+const DefaultParameters = {
+  comboBoxOptions: [],
+  storagesInfo: {},
+  selectedStorageTitle: "",
+  selectedStorageId: "",
+};
+
 export const getOptions = (
   storageBackup?: SelectedStorageType[],
   needDefaultParameter = false,
-) => {
-  if (!storageBackup) return;
+): ReturnOptions => {
+  if (!storageBackup || !Array.isArray(storageBackup)) return DefaultParameters;
 
   const googleStorageId = ThirdPartyStorages.GoogleId;
   const comboBoxOptions = [];

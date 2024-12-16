@@ -24,113 +24,161 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import React, { useEffect, useMemo } from "react";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import GoogleCloudStorage from "./storages/GoogleCloudStorage";
-import RackspaceStorage from "./storages/RackspaceStorage";
-import SelectelStorage from "./storages/SelectelStorage";
-import AmazonStorage from "./storages/AmazonStorage";
-import { StyledAutoBackup } from "../../StyledBackup";
-import { getOptions } from "../../common-container/GetThirdPartyStoragesOptions";
+import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
 
-class ThirdPartyStorageModule extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { thirdPartyStorage, defaultStorageId, setStorageId } = this.props;
+import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
+import { RackspaceStorage } from "../storages/RackspaceStorage";
+import { SelectelStorage } from "../storages/SelectelStorage";
+import { AmazonStorage } from "../storages/AmazonStorage";
 
-    this.state = {
-      availableOptions: [],
-      availableStorage: {},
-    };
+import { StyledAutoBackup } from "./ThirdPartyStorageModule.styled";
+import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 
-    const { comboBoxOptions, storagesInfo, selectedStorageId } =
-      getOptions(thirdPartyStorage);
+const ThirdPartyStorageModule = ({
+  thirdPartyStorage,
+  defaultStorageId,
+  setStorageId,
+  isLoadingData,
+  setCompletedFormFields,
+  isNeedFilePath,
+  errorsFieldsBeforeSafe,
+  formSettings,
+  addValueInFormSettings,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+  selectedPeriodLabel,
+  selectedWeekdayLabel,
 
-    !defaultStorageId && setStorageId(selectedStorageId);
+  selectedHour,
+  selectedMaxCopiesNumber,
+  selectedMonthDay,
+  selectedPeriodNumber,
+  setMaxCopies,
+  setMonthNumber,
+  setPeriod,
+  setTime,
+  setWeekday,
+  hoursArray,
+  maxNumberCopiesArray,
+  monthNumbersArray,
+  periodsObject,
+  weekdaysLabelArray,
 
-    this.state = {
-      comboBoxOptions,
-      storagesInfo,
-    };
-  }
+  storageRegions,
+  defaultRegion,
+  deleteValueFormSetting,
+}: ThirdPartyStorageModuleProps) => {
+  const { comboBoxOptions, storagesInfo, selectedStorageId } = useMemo(
+    () => getOptions(thirdPartyStorage),
+    [thirdPartyStorage],
+  );
 
-  onSelect = (option) => {
-    const selectedStorageId = option.key;
-    const { storagesInfo } = this.state;
-    const { setStorageId } = this.props;
-    const storage = storagesInfo[selectedStorageId];
+  useEffect(() => {
+    if (!defaultStorageId) setStorageId(selectedStorageId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onSelect = (option: TOption) => {
+    const key = option.key;
+    const storage = storagesInfo[key];
 
     setStorageId(storage.id);
   };
 
-  render() {
-    const { isLoadingData, selectedStorageId, ...rest } = this.props;
-    const { comboBoxOptions, storagesInfo } = this.state;
+  const commonProps = {
+    selectedStorage: storagesInfo[selectedStorageId],
+    selectedId: selectedStorageId,
+    isLoadingData,
+    setCompletedFormFields,
+    isNeedFilePath,
+    errorsFieldsBeforeSafe,
+    formSettings,
+    addValueInFormSettings,
+    setRequiredFormSettings,
+    setIsThirdStorageChanged,
+    selectedPeriodLabel,
+    selectedWeekdayLabel,
+    selectedHour,
+    selectedMonthDay,
+    selectedMaxCopiesNumber,
+    selectedPeriodNumber,
 
-    const commonProps = {
-      selectedStorage: storagesInfo[selectedStorageId],
-      selectedId: selectedStorageId,
-      isLoadingData,
-    };
-    const { GoogleId, RackspaceId, SelectelId, AmazonId } = ThirdPartyStorages;
+    setMaxCopies,
+    setMonthNumber,
+    setPeriod,
+    setWeekday,
+    setTime,
 
-    const storageTitle = storagesInfo[selectedStorageId]?.title;
-
-    return (
-      <StyledAutoBackup>
-        <div className="auto-backup_storages-module">
-          <ComboBox
-            options={comboBoxOptions}
-            selectedOption={{
-              key: 0,
-              label: storageTitle,
-            }}
-            onSelect={this.onSelect}
-            isDisabled={isLoadingData}
-            noBorder={false}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={300}
-            className="backup_combo"
-            showDisabledItems
-          />
-
-          {selectedStorageId === GoogleId && (
-            <GoogleCloudStorage {...rest} {...commonProps} />
-          )}
-
-          {selectedStorageId === RackspaceId && (
-            <RackspaceStorage {...rest} {...commonProps} />
-          )}
-
-          {selectedStorageId === SelectelId && (
-            <SelectelStorage {...rest} {...commonProps} />
-          )}
-
-          {selectedStorageId === AmazonId && (
-            <AmazonStorage {...rest} {...commonProps} />
-          )}
-        </div>
-      </StyledAutoBackup>
-    );
-  }
-}
-
-export default inject(({ backup }) => {
-  const {
-    thirdPartyStorage,
-    setStorageId,
-    selectedStorageId,
-    defaultStorageId,
-  } = backup;
-
-  return {
-    thirdPartyStorage,
-    setStorageId,
-    selectedStorageId,
-    defaultStorageId,
+    periodsObject,
+    weekdaysLabelArray,
+    monthNumbersArray,
+    hoursArray,
+    maxNumberCopiesArray,
   };
-})(withTranslation("Settings")(observer(ThirdPartyStorageModule)));
+
+  const storageTitle = storagesInfo[selectedStorageId]?.title;
+
+  return (
+    <StyledAutoBackup>
+      <div className="auto-backup_storages-module">
+        <ComboBox
+          options={comboBoxOptions}
+          selectedOption={{
+            key: 0,
+            label: storageTitle,
+          }}
+          onSelect={onSelect}
+          isDisabled={isLoadingData}
+          noBorder={false}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={300}
+          className="backup_combo"
+          showDisabledItems
+        />
+
+        {selectedStorageId === ThirdPartyStorages.GoogleId && (
+          <GoogleCloudStorage {...commonProps} />
+        )}
+
+        {selectedStorageId === ThirdPartyStorages.RackspaceId && (
+          <RackspaceStorage {...commonProps} />
+        )}
+
+        {selectedStorageId === ThirdPartyStorages.SelectelId && (
+          <SelectelStorage {...commonProps} />
+        )}
+
+        {selectedStorageId === ThirdPartyStorages.AmazonId && (
+          <AmazonStorage
+            storageRegions={storageRegions}
+            defaultRegion={defaultRegion}
+            deleteValueFormSetting={deleteValueFormSetting}
+            {...commonProps}
+          />
+        )}
+      </div>
+    </StyledAutoBackup>
+  );
+};
+
+export default ThirdPartyStorageModule;
+
+// export default inject(({ backup }) => {
+//   const {
+//     thirdPartyStorage,
+//     setStorageId,
+//     selectedStorageId,
+//     defaultStorageId,
+//   } = backup;
+
+//   return {
+//     thirdPartyStorage,
+//     setStorageId,
+//     selectedStorageId,
+//     defaultStorageId,
+//   };
+// })(withTranslation("Settings")(observer(ThirdPartyStorageModule)));

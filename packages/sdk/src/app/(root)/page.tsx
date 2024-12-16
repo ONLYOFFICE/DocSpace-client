@@ -34,36 +34,27 @@ import Root from "@/components/Root";
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
-  fileid: undefined,
-  version: undefined,
-  doc: undefined,
-  action: undefined,
-  share: undefined,
-  editorType: undefined,
+  requestToken: undefined,
+  error: undefined,
 };
 
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
+  const { requestToken, error } = searchParams ?? initialSearchParams;
 
-  let type = editorType;
+  const data = await getData(requestToken);
 
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    type,
-  );
-
-  if (data.error?.status === "not-found" && error) {
+  if (data?.error?.status === "not-found" && error) {
     data.error.message = error;
   }
 
+  const rootProps = {
+    shareKey: requestToken,
+    ...(data || {}),
+  };
+
   return (
     <>
-      <Root {...data} shareKey={share} />
+      <Root {...rootProps} />
     </>
   );
 }

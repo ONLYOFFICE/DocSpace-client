@@ -24,34 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { permanentRedirect, redirect, RedirectType } from "next/navigation";
 import dynamic from "next/dynamic";
-import { headers } from "next/headers";
 
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { ValidationStatus } from "@docspace/shared/enums";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { validatePublicRoomKey, getFolder } from "@/utils/actions";
 
-import { logger } from "@/../logger.mjs";
-
-/* const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
+const PublicRoom = dynamic(() => import("@/components/PublicRoom"), {
   ssr: false,
-}); */
+});
 
-const log = logger.child({ module: "Room page" });
+interface PageProps {
+  searchParams: Record<string, string | undefined>;
+}
 
-type TSearchParams = {
-  id?: string;
-  share?: string;
-  password?: string;
-};
+async function Page({ searchParams }: PageProps) {
+  const { requestToken } = searchParams;
+  const res = await validatePublicRoomKey(requestToken as string);
 
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const baseURL = getBaseUrl();
+  const { id, title, tenantId, shared, isAuthenticated, status } = res;
 
-  if (!searchParams) {
-    log.debug("Empty search params at room page");
+  if (status === ValidationStatus.Ok) {
+    const folderData = await getFolder(
+      id,
+      FilesFilter.getDefault(),
+      requestToken,
+    );
+
+    const roomData = {
+      id: id,
+      title: title,
+      status: status,
+      files: folderData?.files,
+      folders: folderData?.folders,
+    };
+
+    return <PublicRoom roomData={roomData} />;
   }
-
-  return <div>Room page</div>;
 }
 
 export default Page;

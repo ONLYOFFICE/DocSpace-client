@@ -173,7 +173,11 @@ const OnePasswordRow = ({
           scale
         />
         <Button
-          label={t("Files:RemoveFromList")}
+          label={
+            downloadItems.length === 1
+              ? t("Common:CancelButton")
+              : t("Files:RemoveFromList")
+          }
           size="normal"
           onClick={onRemoveFromDowload}
           scale

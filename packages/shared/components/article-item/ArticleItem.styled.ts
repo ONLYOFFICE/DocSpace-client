@@ -54,7 +54,7 @@ const badgeWithoutText = css`
   margin: 0 !important;
 `;
 
-const StyledArticleItemHeaderContainer = styled.div<{
+const StyledArticleItemHeaderContainer = styled.div.attrs(injectDefaultTheme)<{
   isFirstHeader?: boolean;
   showText?: boolean;
 }>`

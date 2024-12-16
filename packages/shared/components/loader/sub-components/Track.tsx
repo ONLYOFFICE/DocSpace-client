@@ -31,8 +31,8 @@ import { LoaderProps } from "../Loader.types";
 import styles from "../Loader.module.scss";
 
 const Track = forwardRef<SVGSVGElement, LoaderProps>(
-  ({ size, color, label, className, id, style, primary, isDisabled }, ref) => {
-    const loaderClassNames = classNames(styles.loaderTrack, className, {
+  ({ size, color, label, id, style, primary, isDisabled }, ref) => {
+    const loaderClassNames = classNames(styles.loaderTrack, {
       [styles.primary]: primary,
       [styles.base]: !primary,
       [styles.disabled]: isDisabled,

@@ -37,7 +37,6 @@ import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
 import MobileView from "./Branding/MobileView";
 
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -82,7 +81,6 @@ const StyledComponent = styled.div`
 
 const Branding = ({
   t,
-  isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
   deviceType,
@@ -114,22 +112,8 @@ const Branding = ({
       {showSettings && (
         <>
           <hr />
-          {displayAbout ? (
-            <>
-              {isLoadedCompanyInfoSettingsData ? (
-                <div className="section-description settings_unavailable">
-                  {t("Settings:BrandingSectionDescription", {
-                    productName: t("Common:ProductName"),
-                  })}
-                </div>
-              ) : (
-                <LoaderBrandingDescription />
-              )}
-              <CompanyInfoSettings />
-            </>
-          ) : (
-            <></>
-          )}
+          {displayAbout && <CompanyInfoSettings />}
+          <hr />
           <AdditionalResources />
         </>
       )}
@@ -137,9 +121,8 @@ const Branding = ({
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
+export default inject(({ settingsStore, currentQuotaStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = brandingStore;
   const {
     standalone,
     portals,
@@ -150,7 +133,6 @@ export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
-    isLoadedCompanyInfoSettingsData,
     isSettingPaid,
     standalone,
     portals,

@@ -27,9 +27,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
+
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileView = (props) => {
   const { t } = props;

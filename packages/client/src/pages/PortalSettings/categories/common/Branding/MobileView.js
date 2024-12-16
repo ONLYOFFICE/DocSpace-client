@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { isManagement } from "@docspace/shared/utils/common";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
 const StyledWrapper = styled.div`
   display: flex;

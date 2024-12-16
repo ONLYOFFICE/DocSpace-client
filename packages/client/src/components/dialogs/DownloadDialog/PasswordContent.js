@@ -102,7 +102,7 @@ const PasswordContent = (props) => {
       {barIsVisible && (
         <PublicRoomBar
           headerText={t("ProtectedFiles")}
-          bodyText={t("EnteringPassword")}
+          bodyText={t("FileProtectionMessage")}
           iconName={InfoSvgUrl}
           onClose={onClose}
         />
@@ -115,7 +115,7 @@ const PasswordContent = (props) => {
           "warning-color",
         )}
       {original?.length > 0 &&
-        passwordRow(original, t("InOriginalFormat"), "original")}
+        passwordRow(original, t("DownloadOriginalFormat"), "original")}
       {password?.length > 0 &&
         passwordRow(password, t("PasswordEntered"), "password")}
       {remove?.length > 0 &&

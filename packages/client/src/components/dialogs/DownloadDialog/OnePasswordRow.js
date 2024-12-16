@@ -75,12 +75,7 @@ const OnePasswordRow = ({
   visible,
 }) => {
   const [password, setPassword] = useState("");
-  const { t } = useTranslation([
-    "UploadPanel",
-    "DownloadDialog",
-    "Files",
-    "Common",
-  ]);
+  const { t } = useTranslation(["DownloadDialog", "Files", "Common"]);
   const inputRef = useRef(null);
 
   const onChangePassword = (password) => {
@@ -137,8 +132,6 @@ const OnePasswordRow = ({
   }, [onKeyUp]);
 
   const element = getItemIcon(item);
-  const text =
-    "This file is protected, please enter the password to access it or download in original format.";
 
   return (
     <ModalDialog
@@ -150,7 +143,7 @@ const OnePasswordRow = ({
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledSinglePasswordFile>
-          <Text>{text}</Text>
+          <Text>{t("AccessPasswordMessage")}</Text>
           <div className="single-password_content">
             <div className="single-password_row">
               {element}

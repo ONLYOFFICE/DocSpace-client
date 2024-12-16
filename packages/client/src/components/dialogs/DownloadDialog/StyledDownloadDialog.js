@@ -173,7 +173,7 @@ const StyledSinglePasswordFile = styled.div`
   .single-password_content {
     display: flex;
     justify-content: space-between;
-    background: #f8f9f9;
+    background: ${(props) => props.theme.downloadDialog.background};
     height: 48px;
     align-items: center;
     border-radius: 6px;

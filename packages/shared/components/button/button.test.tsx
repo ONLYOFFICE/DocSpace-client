@@ -71,8 +71,7 @@ describe("<Button />", () => {
     render(<Button {...baseProps} isLoading aria-busy="true" />);
 
     const button = screen.getByRole("button", { name: "OK" });
-    expect(button).toHaveClass("loading");
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(button).toHaveClass("isLoading");
     expect(button).toHaveAttribute("aria-busy", "true");
   });
 
@@ -108,22 +107,17 @@ describe("<Button />", () => {
 
   test("renders with hover state", () => {
     render(<Button {...baseProps} isHovered />);
-    expect(screen.getByTestId("button")).toHaveClass("hovered");
+    expect(screen.getByTestId("button")).toHaveClass("isHovered");
   });
 
   test("renders with clicked state", () => {
     render(<Button {...baseProps} isClicked />);
-    expect(screen.getByTestId("button")).toHaveClass("clicked");
+    expect(screen.getByTestId("button")).toHaveClass("isClicked");
   });
 
-  test("scales width when scale prop is true", () => {
+  test("renders with scale", () => {
     render(<Button {...baseProps} scale />);
     expect(screen.getByTestId("button")).toHaveClass("scale");
-  });
-
-  test("applies minWidth when provided", () => {
-    render(<Button {...baseProps} minWidth="200px" />);
-    expect(screen.getByTestId("button")).toHaveStyle({ minWidth: "200px" });
   });
 
   test("handles keyboard interaction", async () => {

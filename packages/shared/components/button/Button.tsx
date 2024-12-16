@@ -76,6 +76,7 @@ export const Button = React.forwardRef<
       className={buttonClasses}
       disabled={isDisabled || isLoading}
       data-testid={testId}
+      data-size={size}
       aria-label={label}
       aria-disabled={isDisabled ? "true" : undefined}
       aria-busy={isLoading ? "true" : undefined}

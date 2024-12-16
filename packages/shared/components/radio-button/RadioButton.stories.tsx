@@ -31,7 +31,7 @@ import { RadioButton } from ".";
 import { RadioButtonProps } from "./RadioButton.types";
 
 const meta = {
-  title: "Components/RadioButton",
+  title: "Form Controls/RadioButton",
   component: RadioButton,
   parameters: {
     docs: {

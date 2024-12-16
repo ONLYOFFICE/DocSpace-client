@@ -29,7 +29,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Scrollbar } from ".";
 
 const meta = {
-  title: "Components/Scrollbar",
+  title: "Layout components/Scrollbar",
   component: Scrollbar,
   parameters: {
     docs: {

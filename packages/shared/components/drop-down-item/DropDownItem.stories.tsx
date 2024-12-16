@@ -6,7 +6,7 @@ import { DropDownItem } from ".";
 import { DropDownItemProps } from "./DropDownItem.types";
 
 export default {
-  title: "Components/DropDownItem",
+  title: "Base UI Components/DropDownItem",
   component: DropDownItem,
   parameters: {
     docs: {

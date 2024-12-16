@@ -32,7 +32,7 @@ type InfoBadgeType = typeof InfoBadge;
 type Story = StoryObj<InfoBadgeType>;
 
 const meta: Meta<InfoBadgeType> = {
-  title: "Components/InfoBadge",
+  title: "Data Display/InfoBadge",
   component: InfoBadge,
 };
 

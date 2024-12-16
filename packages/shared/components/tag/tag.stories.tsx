@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Tag } from ".";
 
 const meta = {
-  title: "Components/Tag",
+  title: "Data Display/Tag",
   component: Tag,
   parameters: {
     design: {

@@ -31,7 +31,7 @@ import { Textarea } from ".";
 import { TextareaProps } from "./Textarea.types";
 
 const meta = {
-  title: "Components/Textarea",
+  title: "Form Controls/Textarea",
   component: Textarea,
   parameters: {
     docs: {

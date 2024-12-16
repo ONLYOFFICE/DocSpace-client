@@ -33,7 +33,7 @@ import { SearchInput } from ".";
 import { SearchInputProps } from "./SearchInput.types";
 
 const meta = {
-  title: "Components/SearchInput",
+  title: "Form Controls/SearchInput",
   component: SearchInput,
   parameters: {
     design: {

@@ -40,7 +40,7 @@ import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg?url";
 import { IconButton } from ".";
 
 const meta = {
-  title: "Components/IconButton",
+  title: "Interactive Elements/IconButton",
   component: IconButton,
   parameters: {
     docs: {

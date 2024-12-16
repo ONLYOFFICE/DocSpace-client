@@ -32,7 +32,7 @@ import { Tooltip } from ".";
 import { globalColors } from "../../themes";
 
 const meta = {
-  title: "Components/Tooltip",
+  title: "Base UI Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {

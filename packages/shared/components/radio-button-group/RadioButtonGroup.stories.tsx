@@ -30,7 +30,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { RadioButtonGroup } from ".";
 
 const meta = {
-  title: "Components/RadioButtonGroup",
+  title: "Form Controls/RadioButtonGroup",
   component: RadioButtonGroup,
   parameters: {
     docs: {

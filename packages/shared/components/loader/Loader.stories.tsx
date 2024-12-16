@@ -32,7 +32,7 @@ import { LoaderTypes } from "./Loader.enums";
 import { globalColors } from "../../themes";
 
 const meta = {
-  title: "Components/Loader",
+  title: "Status components/Loader",
   component: Loader,
   parameters: {
     docs: {

@@ -31,7 +31,7 @@ import type { ToggleButtonProps } from "./ToggleButton.types";
 import { ToggleButton } from ".";
 
 const meta = {
-  title: "Components/ToggleButton",
+  title: "Form Controls/ToggleButton",
   component: ToggleButton,
   parameters: {
     docs: {

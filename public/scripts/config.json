@@ -38,7 +38,7 @@
   },
   "loaders": {
     "showLoader": true,
-    "showLoaderTime": null,
+    "showLoaderTime": 1000,
     "loaderTime": null
   }
 }

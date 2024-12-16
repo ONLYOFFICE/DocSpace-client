@@ -41,7 +41,9 @@ const EmptyIcon = styled(CameraReactSvg).attrs(injectDefaultTheme)`
   border-radius: ${(props) => props.theme.avatar.image.borderRadius};
 `;
 
-const EditContainer = styled.div.attrs(injectDefaultTheme)`
+const EditContainer = styled.div.attrs(injectDefaultTheme)<{
+  hasAvatar: boolean;
+}>`
   position: absolute;
   display: flex;
 

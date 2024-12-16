@@ -164,7 +164,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         await signupOAuth(signupAccount, confirmKey);
 
         const url = roomData.roomId
-          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
+          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
         window.location.replace(url);
       } catch (error) {

@@ -108,9 +108,11 @@ export const getIsDisabled = (
   isFileSelected?: boolean,
   includeFolder?: boolean,
   isRestore?: boolean,
+  isDisabledFolder?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
+  if (isDisabledFolder) return true;
   if (filterParam) return !isFileSelected;
   if (sameId && !isCopy) return true;
   if (sameId && isCopy && includeFolder) return true;

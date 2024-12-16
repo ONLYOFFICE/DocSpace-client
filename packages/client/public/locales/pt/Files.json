@@ -71,6 +71,7 @@
   "ExportRoomIndex": "Índice de salas de exportação",
   "ExportRoomIndexAlreadyInProgressError": "A exportação do índice de salas já está em andamento. Aguarde até que a exportação atual seja concluída para iniciar a nova.",
   "FavoritesEmptyContainerDescription": "Para marcar os ficheiros como favoritos ou removê-los desta lista, use o menu de contexto.",
+  "FileCannotBeMoved": "O ficheiro não pode ser movido para esta sala.",
   "FileContents": "Conteúdo do ficheiro",
   "FileDownloadingIsRestricted": "O download de arquivos é restrito nesta sala.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> arquivo exportado para Documentos",

@@ -30,7 +30,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Heading } from ".";
 
 const meta = {
-  title: "Components/Heading",
+  title: "Base UI Components/Heading",
   component: Heading,
   argTypes: {
     color: { control: "color" },

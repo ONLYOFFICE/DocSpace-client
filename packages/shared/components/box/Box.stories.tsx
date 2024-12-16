@@ -29,7 +29,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Box } from ".";
 
 const meta: Meta<typeof Box> = {
-  title: "Components/Box",
+  title: "Base UI Components/Box",
   component: Box,
   argTypes: {
     displayProp: {

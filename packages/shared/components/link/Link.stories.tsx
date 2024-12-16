@@ -30,7 +30,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Link, LinkTarget, LinkType } from ".";
 
 const meta = {
-  title: "Components/Link",
+  title: "Base UI Components/Link",
   component: Link,
   parameters: {
     docs: {

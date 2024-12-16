@@ -30,11 +30,17 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus } from "@docspace/shared/enums";
-import { TUser } from "@docspace/shared/api/people/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
   TSettings,
 } from "@docspace/shared/api/settings/types";
+
+import type {
+  TFilesSettings,
+  TGetFolder,
+} from "@docspace/shared/api/files/types";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { logger } from "@/../logger.mjs";
 
@@ -180,6 +186,40 @@ export async function getSettings(share?: string) {
   return settings.response as TSettings;
 }
 
+export async function getFilesSettings(share?: string) {
+  log.debug("Start GET /files/settings");
+
+  const [getFilesSettings] = createRequest(
+    [`files/settings`],
+    [share ? ["Request-Token", share] : ["", ""]],
+    "GET",
+    undefined,
+  );
+
+  const settingsRes = await fetch(getFilesSettings, {
+    next: { revalidate: 600 },
+  });
+
+  if (settingsRes.status === 403) return `access-restricted`;
+
+  if (!settingsRes.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error(
+      { error: settingsRes, url: hostname },
+      `GET /files/settings failed`,
+    );
+
+    return;
+  }
+
+  const settings = await settingsRes.json();
+
+  return settings.response as TFilesSettings;
+}
+
 export const checkIsAuthenticated = async () => {
   log.debug("Start GET /authentication");
 
@@ -211,7 +251,7 @@ export async function validatePublicRoomKey(key: string) {
     "GET",
   );
 
-  const res = await fetch(validatePublicRoomKey, { next: { revalidate: 600 } });
+  const res = await fetch(validatePublicRoomKey, { next: { revalidate: 5 } });
   if (res.status === 401) return undefined;
   if (!res.ok) {
     const hdrs = headers();
@@ -225,7 +265,7 @@ export async function validatePublicRoomKey(key: string) {
 
   const room = await res.json();
 
-  return room;
+  return room.response;
 }
 
 export async function getColorTheme() {
@@ -251,4 +291,40 @@ export async function getColorTheme() {
   const colorTheme = await res.json();
 
   return colorTheme.response as TGetColorTheme;
+}
+
+export async function getFolder(
+  folderId: string | number,
+  filter: FilesFilter,
+  share?: string,
+) {
+  let params = `${folderId}`;
+
+  if (filter) {
+    params = `${folderId}?${filter.toApiUrlParams()}`;
+  }
+
+  log.debug(`Start GET /files/${params}`);
+
+  const [getFolder] = createRequest(
+    [`/files/${params}`],
+    [share ? ["Request-Token", share] : ["", ""]],
+    "GET",
+    undefined,
+  );
+
+  const res = await fetch(getFolder, { next: { revalidate: 5 } });
+
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, `GET /files/${params} failed`);
+    return;
+  }
+
+  const folder = await res.json();
+
+  return folder.response as TGetFolder;
 }

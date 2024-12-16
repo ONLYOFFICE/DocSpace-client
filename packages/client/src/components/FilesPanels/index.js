@@ -42,7 +42,6 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
-  TemplateAccessSettingsPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -87,6 +86,7 @@ import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 
 const Panels = (props) => {
   const {

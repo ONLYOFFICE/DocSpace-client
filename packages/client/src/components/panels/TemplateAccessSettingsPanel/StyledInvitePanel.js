@@ -26,84 +26,19 @@
 
 import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
-import { Box } from "@docspace/shared/components/box";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { mobile, commonIconsStyles } from "@docspace/shared/utils";
+import { commonIconsStyles } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
-// import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg"; // TODO: Templates fix
-import CrossIconMobile from "PUBLIC_DIR/images/cross.edit.react.svg"; // TODO: Templates fix
-import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
+import { isMobile, commonInputStyles } from "@docspace/shared/utils";
 
 const fillAvailableWidth = css`
   width: 100%;
   width: -moz-available;
   width: -webkit-fill-available;
   width: fill-available;
-`;
-
-const StyledInvitePanel = styled.div`
-  @media ${mobile} {
-    user-select: none;
-    height: auto;
-    width: auto;
-    background: ${(props) => props.theme.infoPanel.blurColor};
-    backdrop-filter: blur(3px);
-    z-index: 309;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    .invite_panel {
-      background-color: ${(props) => props.theme.infoPanel.backgroundColor};
-      border-left: ${(props) =>
-        `1px solid ${props.theme.infoPanel.borderColor}`};
-      position: absolute;
-      border: none;
-      right: 0;
-      bottom: 0;
-      height: calc(100% - 64px);
-      width: 100vw;
-      max-width: 100vw;
-    }
-  }
-
-  .invite-panel-body {
-    height: calc(100% - 55px - 73px);
-
-    .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0px !important;
-            `
-          : css`
-              padding-right: 0px !important;
-            `}
-
-      @media ${desktop} {
-        width: 480px;
-        min-width: auto !important;
-      }
-    }
-
-    ${(props) =>
-      !props.addUsersPanelVisible &&
-      isMobile() &&
-      props.theme.interfaceDirection !== "rtl" &&
-      css`
-        .trackYVisible {
-          .scroller {
-            margin-right: -20px !important;
-          }
-        }
-      `}
-  }
 `;
 
 const ScrollList = styled.div`
@@ -122,11 +57,9 @@ const ScrollList = styled.div`
 `;
 
 const StyledBlock = styled.div`
-  padding: ${(props) => (props.noPadding ? "0px" : "0 16px")};
+  padding: 0px;
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
-
-StyledBlock.defaultProps = { theme: Base };
 
 const StyledInviteUserBody = styled.div`
   display: flex;
@@ -134,16 +67,9 @@ const StyledInviteUserBody = styled.div`
   overflow: auto;
 `;
 
-const StyledHeading = styled(Heading)`
-  font-weight: 700;
-  font-size: 21px;
-`;
-
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
   font-size: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
   margin: 16px 0 8px 0;
 
   ${(props) =>
@@ -156,8 +82,6 @@ const StyledSubHeader = styled(Heading)`
 `;
 
 const StyledDescription = styled(Text)`
-  padding-left: 16px;
-  padding-right: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -166,8 +90,6 @@ const StyledDescription = styled(Text)`
   font-size: 12px;
   line-height: 16px;
 `;
-
-StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
   width: calc(100% - 32px) !important;
@@ -220,8 +142,6 @@ const StyledRow = styled.div`
 
 const StyledInviteInput = styled.div`
   ${fillAvailableWidth}
-
-  margin: 0px 16px;
 
   .input-link {
     height: 32px;
@@ -339,8 +259,6 @@ const SearchItemText = styled(Text)`
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
-SearchItemText.defaultProps = { theme: Base };
-
 const iconStyles = css`
   ${commonIconsStyles}
   path {
@@ -355,27 +273,10 @@ const StyledCrossIcon = styled(CrossIcon)`
   ${iconStyles}
 `;
 
-StyledCrossIcon.defaultProps = { theme: Base };
-
-const StyledButtons = styled(Box)`
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  background: ${(props) => props.theme.filesPanels.sharing.backgroundButtons};
-  border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
-`;
-
 const StyledLink = styled(Link)`
   float: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? `left` : `right`};
 `;
-
-StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
   ${(props) =>
@@ -387,35 +288,6 @@ const StyledToggleButton = styled(ToggleButton)`
           right: 8px;
         `}
   margin-top: -4px;
-`;
-
-const StyledControlContainer = styled.div`
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  @media ${mobile} {
-    display: flex;
-
-    top: -27px;
-    right: 10px;
-    left: unset;
-  }
-`;
-
-const StyledCrossIconMobile = styled(CrossIconMobile)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
 `;
 
 const StyledBody = styled.div`
@@ -444,11 +316,8 @@ const StyledBody = styled.div`
         `};
 `;
 
-StyledCrossIcon.defaultProps = { theme: Base };
 export {
   StyledBlock,
-  StyledHeading,
-  StyledInvitePanel,
   StyledRow,
   StyledSubHeader,
   StyledInviteInput,
@@ -456,13 +325,10 @@ export {
   StyledDropDown,
   SearchItemText,
   StyledCrossIcon,
-  StyledButtons,
   StyledLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,
-  StyledControlContainer,
-  StyledCrossIconMobile,
   StyledInviteUserBody,
   StyledBody,
 };

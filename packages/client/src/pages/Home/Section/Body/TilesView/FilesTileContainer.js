@@ -146,7 +146,7 @@ const FilesTileContainer = ({ filesList }) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
+export default inject(({ filesStore }) => {
   const { filesList } = filesStore;
 
   return {

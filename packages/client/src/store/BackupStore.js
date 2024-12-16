@@ -453,14 +453,12 @@ class BackupStore {
   };
 
   setMonthNumber = (options) => {
-    const key = options.key;
     const label = options.label;
 
     this.selectedMonthDay = label;
   };
 
   setTime = (options) => {
-    const key = options.key;
     const label = options.label;
 
     this.selectedHour = label;

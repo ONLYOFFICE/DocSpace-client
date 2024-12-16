@@ -48,15 +48,15 @@ const CertificateDialog = ({
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
-  const onCloseAction = useCallback((e) => {
+  const onCloseAction = useCallback(() => {
     setCertificateDialogVisible(false);
   }, []);
 
-  const onCancelAction = useCallback((e) => {
+  const onCancelAction = useCallback(() => {
     setCertificateDialogVisible(false);
   }, []);
 
-  const onSaveAction = useCallback((e) => {
+  const onSaveAction = useCallback(() => {
     setAcceptCertificate(true);
     setAcceptCertificateHash(cerficateIssue.uniqueHash);
     save(t);

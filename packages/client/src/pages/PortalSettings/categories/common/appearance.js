@@ -44,7 +44,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
-import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import {
   StyledComponent,
@@ -105,8 +105,6 @@ const Appearance = (props) => {
     useState(false);
   const [changeCurrentColorButtons, setChangeCurrentColorButtons] =
     useState(false);
-
-  const [isSmallWindow, setIsSmallWindow] = useState(false);
 
   const [showSaveButtonDialog, setShowSaveButtonDialog] = useState(false);
 
@@ -170,16 +168,16 @@ const Appearance = (props) => {
     [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
 
-  const getSettings = () => {
-    const selectColorId = getFromSessionStorage("selectColorId");
-    const defaultColorId = selectedThemeId;
-    saveToSessionStorage("defaultColorId", defaultColorId);
-    if (selectColorId) {
-      setSelectThemeId(selectColorId);
-    } else {
-      setSelectThemeId(defaultColorId);
-    }
-  };
+  // const getSettings = () => {
+  //   const selectColorId = getFromSessionStorage("selectColorId");
+  //   const defaultColorId = selectedThemeId;
+  //   saveToSessionStorage("defaultColorId", defaultColorId);
+  //   if (selectColorId) {
+  //     setSelectThemeId(selectColorId);
+  //   } else {
+  //     setSelectThemeId(defaultColorId);
+  //   }
+  // };
 
   useEffect(() => {
     // getSettings();
@@ -191,11 +189,7 @@ const Appearance = (props) => {
   }, [selectThemeId]);
 
   useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
     return () => {
-      window.removeEventListener("resize", onCheckView);
       !isMobileView && resetIsInit();
     };
   }, []);
@@ -319,14 +313,6 @@ const Appearance = (props) => {
     },
     [appearanceTheme],
   );
-
-  const onCheckView = () => {
-    if (isMobile()) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
 
   const onColorSelection = useCallback(
     (e) => {

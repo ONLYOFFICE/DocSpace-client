@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   tablet,
   desktop,
   mobile,
-  mobileMore,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import TileContent from "./sub-components/TileContent";

@@ -90,7 +90,7 @@ const HistoryTableHeader = (props) => {
 
   const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
 
-  function onColumnChange(key, e) {
+  function onColumnChange(key) {
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;

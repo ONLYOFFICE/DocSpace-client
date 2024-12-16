@@ -290,7 +290,7 @@ const InvitePanel = ({
     );
   };
 
-  const onClickSend = async (e) => {
+  const onClickSend = async () => {
     const invitations = inviteItems.map((item) => {
       const newItem = {};
 

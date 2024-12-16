@@ -95,15 +95,12 @@ class UploadPanelComponent extends React.Component {
       uploadPanelVisible,
       uploaded,
       converted,
-      uploadDataFiles,
       cancelConversion,
       isUploading,
       isUploadingAndConversion,
-      theme,
     } = this.props;
 
     const visible = uploadPanelVisible;
-    const zIndex = 310;
 
     const title = isUploading
       ? t("Uploads")

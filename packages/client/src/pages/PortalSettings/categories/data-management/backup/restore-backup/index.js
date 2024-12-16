@@ -85,8 +85,6 @@ const RestoreBackup = (props) => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
     useState(false);
-  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
-    useState(false);
 
   const startRestoreBackup = useCallback(async () => {
     try {
@@ -151,12 +149,8 @@ const RestoreBackup = (props) => {
     setIsVisibleBackupListDialog(true);
   };
 
-  const onClickInput = () => {
-    setIsVisibleSelectFileDialog(true);
-  };
   const onModalClose = () => {
     setIsVisibleBackupListDialog(false);
-    setIsVisibleSelectFileDialog(false);
   };
 
   const onSetStorageId = (id) => {

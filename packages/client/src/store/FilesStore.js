@@ -1876,11 +1876,11 @@ class FilesStore {
     folderId,
     filter,
     clearFilter = true,
-    withSubfolders = false,
+    withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
     clearSelection = true,
-    withFilterLocalStorage = false,
+    withFilterLocalStorage = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
   ) => {
-    const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
+    const { setSelectedNode } = this.treeFoldersStore;
 
     const { setIsIndexEditingMode } = this.indexingStore;
 
@@ -2104,10 +2104,7 @@ class FilesStore {
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isFavorite =
-      (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
-    const isThirdPartyItem = !!item.providerKey;
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
     const canConvert = item.viewAccessibility?.CanConvert;
@@ -2485,7 +2482,6 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
-      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
       const canMuteRoom = item.security?.Mute;
@@ -3355,7 +3351,7 @@ class FilesStore {
       const pluginOptions = {};
 
       if (enablePlugins && fileItemsList) {
-        fileItemsList.forEach(({ key, value }) => {
+        fileItemsList.forEach(({ value }) => {
           if (value.extension === fileExst) {
             if (value.fileTypeName)
               pluginOptions.fileTypeName = value.fileTypeName;

@@ -48,7 +48,7 @@ const WebhookEventDetails = (props) => {
   const { fetchEventData, fetchConfigName, configName } = props;
   const { id, eventId } = useParams();
 
-  const [isPending, startTransition] = useTransition();
+  const [startTransition] = useTransition();
 
   const handleDataFetch = async () => {
     fetchConfigName({

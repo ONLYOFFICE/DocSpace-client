@@ -245,7 +245,7 @@ const Manager = (props) => {
     setSortOrder(item);
   };
 
-  const onChangeShowHeader = (e) => {
+  const onChangeShowHeader = () => {
     setConfig((config) => {
       return { ...config, showHeader: !config.showHeader };
     });
@@ -269,13 +269,13 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeShowMenu = (e) => {
+  const onChangeShowMenu = () => {
     setConfig((config) => {
       return { ...config, showMenu: !config.showMenu };
     });
   };
 
-  const onChangeShowFilter = (e) => {
+  const onChangeShowFilter = () => {
     setConfig((config) => {
       return { ...config, showFilter: !config.showFilter };
     });

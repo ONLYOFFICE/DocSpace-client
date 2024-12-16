@@ -29,7 +29,7 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import HistoryRow from "./HistoryRow";

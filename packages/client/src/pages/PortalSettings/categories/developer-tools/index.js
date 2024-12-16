@@ -38,7 +38,6 @@ import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { globalColors } from "@docspace/shared/themes";
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
 import Api from "./Api";
@@ -63,7 +62,7 @@ const DeveloperToolsWrapper = (props) => {
     "Common",
     "OAuth",
   ]);
-  const [isPending, startTransition] = useTransition();
+  const [startTransition] = useTransition();
 
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>

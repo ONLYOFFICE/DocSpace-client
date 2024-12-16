@@ -59,7 +59,6 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
@@ -82,7 +81,7 @@ import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -104,13 +103,11 @@ import {
   removeOptions,
 } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
-import api from "@docspace/shared/api";
 import {
   RoomsType,
   Events,
   FolderType,
   UrlActionType,
-  EmployeeType,
   FilesSelectorFilterTypes,
   FilterType,
   FileExtensions,
@@ -121,7 +118,7 @@ import {
   getFolderLink,
   removeSharedFolder,
 } from "@docspace/shared/api/files";
-import { resendInvitesAgain } from "@docspace/shared/api/people";
+
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 
@@ -2350,28 +2347,7 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter);
   };
 
-  getContextOptionsPlusFormRoom = (t, actions) => {
-    // const {
-    //   // createTemplateForm,
-    //   // createTemplateSelectFormFile,
-    //   // templateOformsGallery,
-    //   // createNewFolder,
-    //   // createNewDoc,
-    //   // createNewPresentation,
-    //   // createNewSpreadsheet,
-    //   // uploadFiles,
-    //   // uploadFolder,
-    // } = actions;
-
-    // const templatePDFForm = {
-    //   id: "personal_template-PDF-form",
-    //   className: "main-button_drop-down",
-    //   icon: FormReactSvgUrl,
-    //   label: t("Common:CreatePDFForm"),
-    //   key: "new-form",
-    //   items: [createTemplateForm, createTemplateSelectFormFile],
-    // };
-
+  getContextOptionsPlusFormRoom = (t) => {
     const showSelectorFormRoomDocx = {
       id: "actions_form-room_template_from-file",
       className: "main-button_drop-down_sub",
@@ -2653,7 +2629,7 @@ class ContextOptionsStore {
   getModel = (item, t) => {
     const { selection } = this.filesStore;
 
-    const { fileExst, contextOptions } = item;
+    const { contextOptions } = item;
 
     const contextOptionsProps =
       contextOptions && contextOptions.length > 0

@@ -72,7 +72,10 @@ module.exports = {
     "jsx-a11y/aria-role": "off",
     "react/no-unescaped-entities": "off",
     "no-plusplus": "off",
+    "no-bitwise": "off",
+    eqeqeq: "off",
 
+    "@typescript-eslint/no-use-before-define": "off",
     "jsx-a11y/tabindex-no-positive": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-shadow": "off",
@@ -89,9 +92,6 @@ module.exports = {
     "react/destructuring-assignment": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "react/jsx-filename-extension": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "no-bitwise": "off",
-    eqeqeq: "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

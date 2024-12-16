@@ -130,7 +130,7 @@ const DebugInfoDialog = (props) => {
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    a: ({ node, href, children, ...props }) => (
+                    a: ({ href, children }) => (
                       <ColorTheme
                         fontWeight="600"
                         target="_blank"

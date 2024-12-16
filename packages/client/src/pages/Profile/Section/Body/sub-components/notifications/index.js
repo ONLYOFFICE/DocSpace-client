@@ -47,7 +47,6 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
   const { t, ready } = useTranslation("Notifications");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isContentLoaded, setIsContentLoaded] = useState(false);
 
   const getData = async () => {
     const requests = [
@@ -69,7 +68,6 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
       );
 
       setIsLoading(false);
-      setIsContentLoaded(true);
     } catch (e) {
       toastr.error(e);
     }

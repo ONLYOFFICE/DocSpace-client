@@ -29,7 +29,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/shared/api/files";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -379,7 +379,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null,
+    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
     contentLength = null,
     roomType = null,
     isArchive = null,

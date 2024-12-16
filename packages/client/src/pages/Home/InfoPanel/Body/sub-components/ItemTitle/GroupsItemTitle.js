@@ -26,7 +26,6 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import { matchPath } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
@@ -47,7 +46,6 @@ const GroupsItemTitle = ({
   getGroupContextOptions,
 }) => {
   const itemTitleRef = useRef();
-  const theme = useTheme();
 
   const isInsideGroup = matchPath(
     "/accounts/groups/:groupId/filter",

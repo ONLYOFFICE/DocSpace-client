@@ -39,7 +39,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
-import { toastr } from "@docspace/shared/components/toast";
+
 import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";

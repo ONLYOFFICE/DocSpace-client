@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo, useEffect } from "react";
+import { useCallback, useMemo, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import { Paging } from "@docspace/shared/components/paging";
@@ -38,7 +38,6 @@ const SectionPagingContent = ({
   fetchFiles,
   fetchRooms,
   setIsLoading,
-  selectedCount,
   selectedFolderId,
   tReady,
   totalPages,

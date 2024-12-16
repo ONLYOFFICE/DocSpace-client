@@ -38,7 +38,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AppLoader from "@docspace/shared/components/app-loader";
+
 import { DeviceType } from "@docspace/shared/enums";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
@@ -149,7 +149,7 @@ const DataManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
+  ({ settingsStore, setup, currentTariffStatusStore }) => {
     const { initSettings } = setup;
 
     const { isNotPaidPeriod } = currentTariffStatusStore;

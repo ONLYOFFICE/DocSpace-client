@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -338,11 +337,6 @@ const WelcomePageSettingsComponent = (props) => {
       </FieldContainer>
     </div>
   );
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
 
   return !isLoadedPage ? (
     <LoaderCustomization welcomePage />

@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import {
-  isMobile,
   isTablet,
   mobile,
   tablet,
@@ -48,7 +46,6 @@ import withContent from "../../../../../HOCs/withContent";
 import {
   connectedCloudsTypeTitleTranslation,
   getFileTypeName,
-  getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
 
 const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
@@ -172,16 +169,12 @@ const FilesRowContent = ({
   createdDate,
   fileOwner,
   isDefaultRoomsQuotaSet,
-  isStatisticsAvailable,
-  showStorageInfo,
   isIndexing,
   displayFileExtension,
 }) => {
   const {
     contentLength,
     fileExst,
-    filesCount,
-    foldersCount,
     providerKey,
     title,
     isRoom,

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -83,8 +83,6 @@ const ChangeRoomOwner = (props) => {
     useModal = true,
   } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const onChangeRoomOwner = async (
     user,
     selectedAccess,
@@ -94,11 +92,8 @@ const ChangeRoomOwner = (props) => {
     if (showBackButton) {
       onOwnerChange && onOwnerChange(user[0]);
     } else {
-      setIsLoading(true);
-
       await changeRoomOwner(t, user[0]?.id, isChecked);
       updateInfoPanelSelection();
-      setIsLoading(false);
     }
     onClose();
   };

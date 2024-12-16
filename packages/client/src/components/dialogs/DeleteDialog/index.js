@@ -38,7 +38,6 @@ const DeleteDialogComponent = (props) => {
   const {
     t,
     deleteAction,
-    unsubscribeAction,
     setBufferSelection,
     setSelected,
     setRemoveMediaItem,
@@ -140,8 +139,6 @@ const DeleteDialogComponent = (props) => {
     selection.forEach((item) => {
       item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);
     });
-
-    unsubscribeAction(filesId, foldersId).catch((err) => toastr.error(err));
   };
 
   const onDeleteRoom = async () => {
@@ -318,8 +315,7 @@ export default inject(
       setBufferSelection,
       setSelected,
     } = filesStore;
-    const { deleteAction, unsubscribeAction, deleteRoomsAction } =
-      filesActionsStore;
+    const { deleteAction, deleteRoomsAction } = filesActionsStore;
     const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
       treeFoldersStore;
 
@@ -346,7 +342,6 @@ export default inject(
 
       setDeleteDialogVisible,
       deleteAction,
-      unsubscribeAction,
       unsubscribe,
 
       setRemoveMediaItem,

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -77,7 +76,7 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
-const infoPlugin = "info_plugin";
+// const infoPlugin = "info_plugin"; // Useless?
 
 class InfoPanelStore {
   userStore = null;

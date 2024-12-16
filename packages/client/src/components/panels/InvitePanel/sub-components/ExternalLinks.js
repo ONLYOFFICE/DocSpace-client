@@ -38,9 +38,6 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 
 import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";

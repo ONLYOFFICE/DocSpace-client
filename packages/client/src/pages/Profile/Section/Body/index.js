@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
@@ -35,7 +34,7 @@ import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";
 
 import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";

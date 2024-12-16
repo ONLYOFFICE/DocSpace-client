@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { isTablet, isDesktop } from "@docspace/shared/utils";
 

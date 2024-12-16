@@ -39,9 +39,9 @@ import {
 import { isMobile } from "react-device-detect";
 import { Link } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
-import { Tag } from "@docspace/shared/components/tag";
+
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 

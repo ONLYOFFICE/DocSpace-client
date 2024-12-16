@@ -245,7 +245,7 @@ const useFiles = ({
 
     axios
       .all(requests)
-      .catch((err) => {
+      .catch(() => {
         if (isRooms) {
           Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
         } else {

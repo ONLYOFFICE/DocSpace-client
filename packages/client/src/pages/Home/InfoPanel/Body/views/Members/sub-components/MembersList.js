@@ -24,18 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useContext,
-} from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";

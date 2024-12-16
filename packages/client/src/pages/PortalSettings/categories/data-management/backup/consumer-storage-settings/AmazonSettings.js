@@ -226,7 +226,7 @@ class AmazonSettings extends React.Component {
       deleteValueFormSetting,
       setIsThirdStorageChanged,
     } = this.props;
-    const key = options.key;
+
     const label = options.label;
 
     if (label === this.customerManager) {

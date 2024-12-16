@@ -452,7 +452,7 @@ class UploadDataStore {
 
     while (index < len) {
       const conversionItem = filesToConversion[index];
-      const { fileId, toFolderId, password, format } = conversionItem;
+      const { fileId, password, format } = conversionItem;
       const itemPassword = password || null;
       const file = this.files.find((f) => f.fileId === fileId);
       if (file) runInAction(() => (file.inConversion = true));
@@ -1335,11 +1335,6 @@ class UploadDataStore {
     const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
     const fileName = file.name;
     const fileSize = file.size;
-    const relativePath = file.path
-      ? file.path.slice(1, -file.name.length)
-      : file.webkitRelativePath
-        ? file.webkitRelativePath.slice(0, -file.name.length)
-        : "";
 
     return startUploadSession(
       toFolderId,
@@ -1489,8 +1484,6 @@ class UploadDataStore {
   };
 
   finishUploadFiles = (t) => {
-    const { fetchFiles, filter } = this.filesStore;
-
     const filesWithErrors = this.files.filter((f) => f.error);
 
     const totalErrorsCount = filesWithErrors.length;
@@ -1817,14 +1810,6 @@ class UploadDataStore {
       this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
-
-    let receivedFolder = destFolderId;
-    let updatedFolder = this.selectedFolderStore.id;
-
-    if (this.dialogsStore.isFolderActions) {
-      receivedFolder = this.selectedFolderStore.parentId;
-      updatedFolder = destFolderId;
-    }
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       !isCopy && removeFiles(fileIds, folderIds);

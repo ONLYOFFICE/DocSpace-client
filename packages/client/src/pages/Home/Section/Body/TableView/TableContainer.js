@@ -38,7 +38,6 @@ import React, {
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
 import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 

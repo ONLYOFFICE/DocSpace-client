@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { withTranslation } from "react-i18next";
 import find from "lodash/find";
@@ -36,20 +36,16 @@ import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/shared/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
-import { getUser, getUserById } from "@docspace/shared/api/people";
+import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
-  AccountLoginType,
   DeviceType,
-  EmployeeStatus,
-  EmployeeType,
   FilterGroups,
   FilterKeys,
   FilterSubject,
   FilterType,
-  PaymentsType,
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
@@ -218,7 +214,6 @@ const SectionFilterContent = ({
   // contacts
   contactsViewAs,
   contactsTab,
-  groups,
 
   // groups
   groupsFilter,
@@ -247,7 +242,7 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
-  const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
+  const [setSelectedFilterValues] = React.useState(null);
 
   const {
     onContactsFilter,
@@ -1355,24 +1350,6 @@ const SectionFilterContent = ({
       default: true,
     };
 
-    const room = {
-      id: "sort-by_room",
-      key: SortByFieldName.Room,
-      label: t("Common:Room"),
-      default: true,
-    };
-    const authorOption = {
-      id: "sort-by_author",
-      key: SortByFieldName.Author,
-      label: t("ByAuthor"),
-      default: true,
-    };
-    const creationDate = {
-      id: "sort-by_created",
-      key: SortByFieldName.CreationDate,
-      label: t("InfoPanel:CreationDate"),
-      default: true,
-    };
     const owner = {
       id: "sort-by_owner",
       key: SortByFieldName.Author,
@@ -1397,12 +1374,7 @@ const SectionFilterContent = ({
       label: t("Common:Size"),
       default: true,
     };
-    const type = {
-      id: "sort-by_type",
-      key: SortByFieldName.Type,
-      label: t("Common:Type"),
-      default: true,
-    };
+
     const roomType = {
       id: "sort-by_room-type",
       key: SortByFieldName.RoomType,

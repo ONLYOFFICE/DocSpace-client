@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet, useParams } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { addTagsToRoom, removeTagsFromRoom } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -70,7 +69,6 @@ const PureHome = (props) => {
     // homepage,
     setIsSectionHeaderLoading,
     setIsSectionBodyLoading,
-    setIsSectionFilterLoading,
     isLoading,
 
     setToPreviewFile,
@@ -130,9 +128,7 @@ const PureHome = (props) => {
 
     secondaryProgressDataStoreAlert,
 
-    tReady,
     isFrame,
-    showTitle,
     showFilter,
     frameConfig,
     isEmptyPage,
@@ -146,7 +142,6 @@ const PureHome = (props) => {
 
     showFilterLoader,
 
-    enablePlugins,
     getSettings,
     logout,
     login,
@@ -537,7 +532,6 @@ export const Component = inject(
       setFrameConfig,
       frameConfig,
       isFrame,
-      showCatalog,
       enablePlugins,
       getSettings,
       showGuestReleaseTip,

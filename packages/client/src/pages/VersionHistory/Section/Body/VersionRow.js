@@ -28,8 +28,7 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import { useNavigate } from "react-router-dom";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
@@ -37,11 +36,7 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import {
-  commonIconsStyles,
-  getCorrectDate,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
@@ -50,19 +45,10 @@ import {
   MAX_FILE_COMMENT_LENGTH,
   MEDIA_VIEW_URL,
 } from "@docspace/shared/constants";
-import moment from "moment-timezone";
+
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import VersionBadge from "./VersionBadge";
-
-const StyledExternalLinkIcon = styled(ExternalLinkIcon).attrs(
-  injectDefaultTheme,
-)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.filesVersionHistory.fill};
-  }
-`;
 
 const VersionRow = (props) => {
   const {

@@ -58,7 +58,6 @@ import {
   reorderIndex,
 } from "@docspace/shared/api/files";
 import {
-  ConflictResolveType,
   Events,
   ExportRoomIndexTaskStatus,
   FileAction,
@@ -76,7 +75,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import {
   getCategoryType,
@@ -89,7 +87,6 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import {
-  getConvertedQuota,
   getConvertedSize,
   getObjectByLocation,
 } from "@docspace/shared/utils/common";
@@ -104,7 +101,6 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
@@ -210,11 +206,6 @@ class FilesActionStore {
 
     let newFilter;
 
-    const selectionFilesLength =
-      fileIds && folderIds
-        ? fileIds.length + folderIds.length
-        : fileIds?.length || folderIds?.length;
-
     let updatedFolder = this.selectedFolderStore.id;
 
     if (this.dialogsStore.isFolderActions) {
@@ -254,7 +245,7 @@ class FilesActionStore {
       folders.forEach((folder) => {
         const folderPath = folder.path.split("/").filter((name) => name !== "");
 
-        folderPath.reduce((r, name, i, a) => {
+        folderPath.reduce((r, name, i) => {
           if (!r[name]) {
             r[name] = { result: [] };
             r.result.push({
@@ -376,11 +367,7 @@ class FilesActionStore {
     setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
   };
 
-  deleteAction = async (
-    translations,
-    newSelection = null,
-    withoutDialog = false,
-  ) => {
+  deleteAction = async (translations, newSelection = null) => {
     const { isRecycleBinFolder, isPrivacyFolder, recycleBinFolderId } =
       this.treeFoldersStore;
     const {
@@ -631,17 +618,14 @@ class FilesActionStore {
     }
   };
 
-  downloadFiles = async (fileConvertIds, folderIds, translations, password) => {
+  downloadFiles = async (fileConvertIds, folderIds, translations) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
-    const {
-      setSecondaryProgressBarData,
-      clearSecondaryProgressData,
-      secondaryOperationsArray,
-    } = secondaryProgressDataStore;
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore;
     const { openUrl } = this.settingsStore;
 
-    const { addActiveItems, bufferSelection, selection } = this.filesStore;
+    const { addActiveItems } = this.filesStore;
     const { label, passwordError } = translations;
     const {
       setDownloadItems,
@@ -782,7 +766,7 @@ class FilesActionStore {
     );
   };
 
-  completeAction = async (selectedItem, type, isFolder = false) => {
+  completeAction = async (selectedItem, type) => {
     switch (type) {
       case FileAction.Rename:
         this.onSelectItem(
@@ -978,15 +962,6 @@ class FilesActionStore {
 
       getIsEmptyTrash();
     });
-  };
-
-  unsubscribeAction = async (fileIds, folderIds) => {
-    const { setUnsubscribe } = this.dialogsStore;
-    const { filter, fetchFiles } = this.filesStore;
-
-    // return removeShareFiles(fileIds, folderIds)
-    //   .then(() => setUnsubscribe(false))
-    //   .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
   };
 
   lockFileAction = async (id, locked) => {
@@ -1227,10 +1202,7 @@ class FilesActionStore {
   setArchiveAction = async (action, folders, t) => {
     const { addActiveItems, setSelected } = this.filesStore;
 
-    const { setSelectedFolder } = this.selectedFolderStore;
-
-    const { roomsFolder, isRoomsFolder, archiveRoomsId, myRoomsId } =
-      this.treeFoldersStore;
+    const { isRoomsFolder, archiveRoomsId, myRoomsId } = this.treeFoldersStore;
 
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
@@ -1533,8 +1505,7 @@ class FilesActionStore {
     return titleWithoutExtension;
   };
 
-  checkAndOpenLocationAction = async (item, actionType) => {
-    const { categoryType } = this.filesStore;
+  checkAndOpenLocationAction = async (item) => {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
@@ -2453,7 +2424,7 @@ class FilesActionStore {
     const { enablePlugins } = this.settingsStore;
 
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
+    const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
       this.dialogsStore;
@@ -2476,15 +2447,7 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const {
-      id,
-      viewUrl,
-      providerKey,
-      fileStatus,
-      encrypted,
-      isFolder,
-      webUrl,
-    } = item;
+    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
@@ -2761,7 +2724,6 @@ class FilesActionStore {
   moveToPublicRoom = (folderId) => {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
     const { publicRoomKey } = this.publicRoomStore;
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
 
     const id = folderId || this.selectedFolderStore.parentId;
     const path = getCategoryUrl(CategoryType.PublicRoom);
@@ -2921,7 +2883,7 @@ class FilesActionStore {
   };
 
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
-    const { setFolder, setFolders, setSelected, selection, bufferSelection } =
+    const { setFolder, setSelected, selection, bufferSelection } =
       this.filesStore;
     const {
       isRootFolder,

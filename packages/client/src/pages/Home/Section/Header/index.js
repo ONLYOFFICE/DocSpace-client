@@ -229,7 +229,6 @@ const SectionHeaderContent = (props) => {
     setUsersSelected,
     setGroupsSelected,
     isRoomAdmin,
-    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -516,7 +515,6 @@ const SectionHeaderContent = (props) => {
   const stateIsRoot = location?.state?.isRoot;
   const stateIsRoom = location?.state?.isRoom;
   const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
@@ -818,7 +816,6 @@ export default inject(
       security,
       rootFolderType,
       shared,
-      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();

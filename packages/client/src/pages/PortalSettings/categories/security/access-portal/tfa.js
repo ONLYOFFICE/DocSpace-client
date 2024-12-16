@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
@@ -59,7 +59,6 @@ const TwoFactorAuth = (props) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    smsAvailable,
     appAvailable,
     tfaSettings,
     getTfaType,

@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
@@ -47,7 +45,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
 
 const toggleStyle = {
@@ -75,7 +73,6 @@ const DNSSettingsComponent = (props) => {
     isLoaded,
     setIsLoadedDNSSettings,
     isLoadedPage,
-    helpLink,
     initSettings,
     setIsLoaded,
     isSettingPaid,

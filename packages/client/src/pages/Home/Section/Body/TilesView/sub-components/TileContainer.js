@@ -296,7 +296,7 @@ TileContainer.defaultProps = {
   id: "tileContainer",
 };
 
-export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
+export default inject(({ filesStore, treeFoldersStore }) => {
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 

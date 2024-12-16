@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";

@@ -40,7 +40,6 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   tablet,
   mobile,
-  isTablet,
   isMobile,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
@@ -150,7 +149,6 @@ const HistoryHeader = (props) => {
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
-    theme,
     historyFilters,
     formatFilters,
     isRetryPending,

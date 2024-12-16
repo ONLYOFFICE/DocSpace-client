@@ -26,7 +26,6 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import { size } from "@docspace/shared/utils";
 import { FileStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
@@ -48,7 +47,7 @@ class VersionHistoryStore {
 
   isEditing = false;
 
-  constructor(filesStore, settingsStore) {
+  constructor(filesStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
 

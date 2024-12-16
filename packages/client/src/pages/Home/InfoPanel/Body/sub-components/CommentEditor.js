@@ -154,7 +154,6 @@ export default inject(({ versionHistoryStore, infoPanelStore }) => {
     updateCommentVersion,
     isEditingVersion,
     isEditing,
-    fileId,
     setVerHistoryFileId,
     setVerHistoryFileSecurity,
   } = versionHistoryStore;

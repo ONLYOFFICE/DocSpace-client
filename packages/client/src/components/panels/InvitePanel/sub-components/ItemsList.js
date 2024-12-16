@@ -33,7 +33,7 @@ import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import Item from "./Item";
 
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
+import { ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 

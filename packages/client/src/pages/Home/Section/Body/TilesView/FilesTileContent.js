@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
@@ -125,9 +123,7 @@ const FilesTileContent = ({
   currentDeviceType,
   displayFileExtension,
 }) => {
-  const { fileExst, title, viewAccessibility } = item;
-
-  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
+  const { fileExst, title } = item;
 
   return (
     <SimpleFilesTileContent

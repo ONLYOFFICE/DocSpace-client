@@ -31,7 +31,6 @@ import {
   EmployeeStatus,
   EmployeeType,
   FolderType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 
 class AccessRightsStore {

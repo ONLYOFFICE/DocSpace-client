@@ -31,7 +31,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import config from "PACKAGE_FILE";

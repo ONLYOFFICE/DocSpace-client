@@ -27,13 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-
-import { isArrayEqual } from "@docspace/shared/utils";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -61,7 +58,6 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
-    limitedAccessSpace,
     currentColorScheme,
     baseDomain,
   } = props;
@@ -70,7 +66,6 @@ const ArticleBodyContent = (props) => {
 
   const prevLocation = React.useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   // React.useEffect(() => {
@@ -181,7 +176,7 @@ const ArticleBodyContent = (props) => {
     return { path, state: {} };
   };
 
-  const onSelect = (value, e) => {
+  const onSelect = () => {
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
@@ -326,7 +321,6 @@ const ArticleBodyContent = (props) => {
 
 export default inject(
   ({
-    authStore,
     settingsStore,
     common,
     clientLoadingStore,

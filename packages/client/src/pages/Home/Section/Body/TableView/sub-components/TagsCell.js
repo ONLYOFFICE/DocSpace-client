@@ -30,14 +30,7 @@ import { Tags } from "@docspace/shared/components/tags";
 
 import { Text } from "@docspace/shared/components/text";
 
-const TagsCell = ({
-  t,
-  item,
-  tagCount,
-  onSelectTag,
-  onSelectOption,
-  sideColor,
-}) => {
+const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
   const styleTagsCell = {
     width: "100%",
     overflow: "hidden",

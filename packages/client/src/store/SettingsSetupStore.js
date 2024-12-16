@@ -391,6 +391,7 @@ class SettingsSetupStore {
 
   setDNSSettings = async (dnsName, enable) => {
     const res = await api.settings.setMailDomainSettings(dnsName, enable);
+    return res;
   };
 
   getLifetimeAuditSettings = async (data) => {

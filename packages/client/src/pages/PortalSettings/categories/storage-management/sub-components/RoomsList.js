@@ -42,7 +42,7 @@ const RoomsListComponent = (props) => {
     textElement,
     quotaElement,
     buttonProps,
-    id,
+
     roomsListLength,
     roomFilterData,
   } = props;

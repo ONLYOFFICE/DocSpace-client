@@ -25,14 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 
 const ProgressContainer = ({ inProgress, percents, error, source, status }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
-
   let progressStatus = status || source ? `${percents}%` : "";
 
   if (progressStatus) {

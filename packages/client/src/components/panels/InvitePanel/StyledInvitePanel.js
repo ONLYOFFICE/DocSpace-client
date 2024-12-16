@@ -39,7 +39,6 @@ import {
   mobile,
   commonIconsStyles,
   injectDefaultTheme,
-  isMobile,
   desktop,
   commonInputStyles,
 } from "@docspace/shared/utils";

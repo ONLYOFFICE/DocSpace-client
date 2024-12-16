@@ -24,18 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";
-import { Button } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
-import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
@@ -49,7 +47,6 @@ const DocumentService = ({
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
-  currentDeviceType,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -162,8 +159,6 @@ const DocumentService = ({
 
   if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
 
-  const buttonSize =
-    currentDeviceType === DeviceType.desktop ? "small" : "normal";
   const saveButtonDisabled =
     isFormEmpty ||
     isValuesInit ||

@@ -41,7 +41,6 @@ import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUse
 import { FolderType } from "@docspace/shared/enums";
 import { StyledTitle } from "../../../styles/common";
 import RoomsContextBtn from "./context-btn";
-import CalendarComponent from "../Calendar";
 
 import Search from "../../Search";
 
@@ -57,14 +56,9 @@ const RoomsItemHeader = ({
   setSelection,
   setBufferSelection,
   isArchive,
-  isShared,
   showSearchBlock,
-  setCalendarDay,
-  openHistory,
   setShowSearchBlock,
   roomType,
-  setIsScrollLocked,
-  i18n,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,

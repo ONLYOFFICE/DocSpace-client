@@ -79,7 +79,6 @@ const MainProfile = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
-    changeAvatarVisible,
     setChangeAvatarVisible,
     withActivationBar,
     sendActivationLink,
@@ -640,13 +639,7 @@ const MainProfile = (props) => {
 };
 
 export default inject(
-  ({
-    settingsStore,
-    peopleStore,
-    userStore,
-    dialogsStore,
-    avatarEditorDialogStore,
-  }) => {
+  ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
     const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
       settingsStore;

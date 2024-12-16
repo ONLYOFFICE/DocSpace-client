@@ -35,7 +35,6 @@ const SectionPagingContent = ({
   fetchPeople,
   filter,
   setIsLoading,
-  selectedCount,
   isLoaded,
   t,
 }) => {

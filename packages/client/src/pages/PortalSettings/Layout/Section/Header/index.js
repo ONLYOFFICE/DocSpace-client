@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -245,20 +245,9 @@ const SectionHeaderContent = (props) => {
     return arrayOfParams;
   };
 
-  const addUsers = (items) => {
-    const { addUsers } = props;
-    if (!addUsers) return;
-    addUsers(items);
-  };
-
   const onToggleSelector = (isOpen = !props.selectorIsOpen) => {
     const { toggleSelector } = props;
     toggleSelector(isOpen);
-  };
-
-  const onClose = () => {
-    const { deselectUser } = props;
-    deselectUser();
   };
 
   const onCheck = (checked) => {

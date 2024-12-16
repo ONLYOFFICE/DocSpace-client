@@ -48,7 +48,6 @@ import {
   EmployeeStatus,
   EmployeeType,
   RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";

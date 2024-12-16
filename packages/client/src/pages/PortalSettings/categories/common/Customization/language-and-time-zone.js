@@ -436,12 +436,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     }
   };
 
-  const onClickLink = (e) => {
-    e.preventDefault();
-
-    navigate(e.target.pathname);
-  };
-
   const {
     isLoading,
 

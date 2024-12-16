@@ -83,7 +83,7 @@ const Webhooks = (props) => {
 
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
 
-  const [isPending, startTranslation] = useTransition();
+  const [startTranslation] = useTransition();
 
   setDocumentTitle(t("Webhooks"));
 
@@ -172,7 +172,7 @@ const Webhooks = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, authStore }) => {
+export default inject(({ webhooksStore }) => {
   const {
     state,
     loadWebhooks,

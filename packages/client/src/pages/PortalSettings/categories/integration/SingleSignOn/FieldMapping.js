@@ -24,25 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
-import { FieldContainer } from "@docspace/shared/components/field-container";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import {
-  SSO_GIVEN_NAME,
-  SSO_SN,
-  SSO_EMAIL,
-  SSO_LOCATION,
-  SSO_TITLE,
-  SSO_PHONE,
-} from "SRC_DIR/helpers/constants";
+import { SSO_GIVEN_NAME, SSO_SN, SSO_EMAIL } from "SRC_DIR/helpers/constants";
 import SsoFormField from "./sub-components/SsoFormField";
 
 const StyledWrapper = styled.div`
@@ -57,15 +47,9 @@ const FieldMapping = (props) => {
     firstName,
     lastName,
     email,
-    location,
-    title,
-    phone,
     firstNameHasError,
     lastNameHasError,
     emailHasError,
-    locationHasError,
-    titleHasError,
-    phoneHasError,
   } = props;
 
   return (

@@ -367,8 +367,6 @@ class ProfileActionsStore {
 
     const feedbackAndSupportEnabled =
       this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
-    const videoGuidesEnabled =
-      this.settingsStore.additionalResourcesData?.videoGuidesEnabled;
     const helpCenterEnabled =
       this.settingsStore.additionalResourcesData?.helpCenterEnabled;
     const showFrameSignOut =

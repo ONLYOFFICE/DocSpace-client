@@ -27,7 +27,7 @@
 import React from "react";
 
 import { inject, observer } from "mobx-react";
-import { VariableSizeList as List, areEqual } from "react-window";
+import { VariableSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
 import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
@@ -114,17 +114,17 @@ class SectionBodyContent extends React.Component {
     const { versions, culture, onClose } = this.props;
 
     const prevVersion = versions[index > 0 ? index - 1 : index].versionGroup;
-    let isVersion = true;
+    let hasVersion = true;
 
     if (index > 0 && prevVersion === versions[index].versionGroup) {
-      isVersion = false;
+      hasVersion = false;
     }
     return (
       <div style={style}>
         <VersionRow
           onClose={onClose}
           getFileVersions={this.getFileVersions}
-          isVersion
+          isVersion={hasVersion}
           key={`${versions[index].id}-${index}`}
           info={versions[index]}
           versionsListLength={versions.length}

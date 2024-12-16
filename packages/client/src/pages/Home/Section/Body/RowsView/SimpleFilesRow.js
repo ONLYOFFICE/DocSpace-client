@@ -348,7 +348,6 @@ const SimpleFilesRow = (props) => {
     isEdit,
     isActive,
     inProgress,
-    isAdmin,
     getContextModel,
     showHotkeyBorder,
     id,

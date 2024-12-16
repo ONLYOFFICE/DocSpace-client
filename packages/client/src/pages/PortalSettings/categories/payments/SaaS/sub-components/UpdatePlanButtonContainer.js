@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
-import { Trans } from "react-i18next";
+
 import { updatePayment } from "@docspace/shared/api/portal";
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 

@@ -91,8 +91,8 @@ class Profile extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { fetchProfile, profile } = this.props;
+  componentDidUpdate() {
+    const { profile } = this.props;
     // const { userId } = match.params;
     // const prevUserId = prevProps.match.params.userId;
 
@@ -111,7 +111,7 @@ class Profile extends React.Component {
   render() {
     // console.log("Profile render");
 
-    const { profile, showCatalog, setIsLoading } = this.props;
+    const { profile, setIsLoading } = this.props;
 
     return (
       <>

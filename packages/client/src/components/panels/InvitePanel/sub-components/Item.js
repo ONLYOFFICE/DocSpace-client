@@ -29,7 +29,7 @@ import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -45,7 +45,6 @@ import {
   EmployeeStatus,
   EmployeeType,
   RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -218,14 +217,14 @@ const Item = ({
     }
   };
 
-  const cancelEdit = (e) => {
+  const cancelEdit = () => {
     setInputValue(name);
     setEdit(false);
     setSearchRequestRunning(false);
     setIsSharedUser(false);
   };
 
-  const saveEdit = async (e) => {
+  const saveEdit = async () => {
     if (searchRequestRunning) return;
 
     if (isSharedUser) {

@@ -44,9 +44,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { ShareAccessRights } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
@@ -56,13 +54,10 @@ const User = ({
   membersHelper,
   currentMember,
   infoPanelSelection,
-  changeUserType,
-  setIsScrollLocked,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
-  showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
@@ -218,10 +213,6 @@ const User = ({
         toastr.error(err);
         setIsLoading(false);
       });
-  };
-
-  const abortCallback = () => {
-    setIsLoading(false);
   };
 
   const onOptionClick = (option) => {

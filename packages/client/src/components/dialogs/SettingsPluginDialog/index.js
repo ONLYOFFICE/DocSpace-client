@@ -51,8 +51,6 @@ const SettingsPluginDialog = ({
   onClose,
   onDelete,
   updatePlugin,
-
-  ...rest
 }) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 

@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";

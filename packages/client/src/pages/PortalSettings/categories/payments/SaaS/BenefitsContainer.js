@@ -79,7 +79,7 @@ const StyledBody = styled.div`
   }
 `;
 
-const BenefitsContainer = ({ t, features, theme }) => {
+const BenefitsContainer = ({ t, features }) => {
   return (
     <StyledBody className="benefits-container">
       <Text

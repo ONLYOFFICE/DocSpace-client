@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import PropTypes from "prop-types";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { useNavigate } from "react-router-dom";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 import {
   StyledTile,

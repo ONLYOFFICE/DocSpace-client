@@ -75,7 +75,6 @@ const FilesMediaViewer = (props) => {
     getIcon,
     onDuplicate,
     extsImagePreviewed,
-    extsMediaPreviewed,
     setIsPreview,
     isPreview,
     nextMedia,
@@ -90,7 +89,6 @@ const FilesMediaViewer = (props) => {
     setActiveFiles,
     pluginContextMenuItems,
     isOpenMediaViewer,
-    someDialogIsOpen,
     currentDeviceType,
     changeUrl,
     fetchPublicRoom,
@@ -224,48 +222,45 @@ const FilesMediaViewer = (props) => {
     [playlist],
   );
 
-  const onMediaViewerClose = useCallback(
-    (e) => {
-      if (isPreview) {
-        setIsPreview(false);
-        resetUrl();
-        if (previewFile) {
-          setScrollToItem({ id: previewFile.id, type: "file" });
-          setBufferSelection(previewFile);
-        }
-        setToPreviewFile(null);
+  const onMediaViewerClose = useCallback(() => {
+    if (isPreview) {
+      setIsPreview(false);
+      resetUrl();
+      if (previewFile) {
+        setScrollToItem({ id: previewFile.id, type: "file" });
+        setBufferSelection(previewFile);
       }
+      setToPreviewFile(null);
+    }
 
-      setMediaViewerData({ visible: false, id: null });
-      const url = getFirstUrl();
+    setMediaViewerData({ visible: false, id: null });
+    const url = getFirstUrl();
 
-      if (!url) {
-        return;
-      }
+    if (!url) {
+      return;
+    }
 
-      const targetFile = files.find((item) => item.id === currentMediaFileId);
-      if (targetFile) {
-        setBufferSelection(targetFile);
-        setScrollToItem({ id: targetFile.id, type: "file" });
-      }
+    const targetFile = files.find((item) => item.id === currentMediaFileId);
+    if (targetFile) {
+      setBufferSelection(targetFile);
+      setScrollToItem({ id: targetFile.id, type: "file" });
+    }
 
-      window.history.pushState("", "", url);
-    },
-    [
-      files,
-      isPreview,
-      previewFile,
+    window.history.pushState("", "", url);
+  }, [
+    files,
+    isPreview,
+    previewFile,
 
-      resetUrl,
-      navigate,
-      getFirstUrl,
-      setIsPreview,
-      setScrollToItem,
-      setToPreviewFile,
-      setMediaViewerData,
-      setBufferSelection,
-    ],
-  );
+    resetUrl,
+    navigate,
+    getFirstUrl,
+    setIsPreview,
+    setScrollToItem,
+    setToPreviewFile,
+    setMediaViewerData,
+    setBufferSelection,
+  ]);
   useEffect(() => {
     if (playlist.length === 0 && isOpenMediaViewer) onMediaViewerClose();
   }, [isOpenMediaViewer, onMediaViewerClose, playlist.length]);

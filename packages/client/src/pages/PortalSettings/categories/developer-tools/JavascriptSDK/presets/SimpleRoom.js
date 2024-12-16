@@ -186,7 +186,7 @@ const SimpleRoom = (props) => {
     });
   };
 
-  const onChangeShowFilter = (e) => {
+  const onChangeShowFilter = () => {
     setConfig((config) => {
       return { ...config, showFilter: !config.showFilter };
     });

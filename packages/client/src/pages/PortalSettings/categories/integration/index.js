@@ -34,7 +34,7 @@ import config from "PACKAGE_FILE";
 
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
-import { globalColors } from "@docspace/shared/themes";
+
 import SSO from "./SingleSignOn";
 import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
@@ -46,7 +46,6 @@ import PluginPage from "./Plugins";
 const IntegrationWrapper = (props) => {
   const {
     t,
-    tReady,
     currentDeviceType,
     toDefault,
     isSSOAvailable,

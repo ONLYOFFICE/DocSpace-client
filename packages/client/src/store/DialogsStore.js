@@ -27,7 +27,6 @@
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
-  FilterType,
   ShareAccessRights,
   Events,
 } from "@docspace/shared/enums";

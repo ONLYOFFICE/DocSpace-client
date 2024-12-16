@@ -87,7 +87,6 @@ export const resetSessionStorage = () => {
     "defaultStoragePeriod",
   );
 
-  const companyNameFromSessionStorage = getFromSessionStorage("companyName");
   const companySettingsFromSessionStorage =
     getFromSessionStorage("companySettings");
   const defaultCompanySettingsFromSessionStorage = getFromSessionStorage(

@@ -54,7 +54,6 @@ const FilesTableRow = (props) => {
     onMouseDown,
     isActive,
     onHideContextMenu,
-    onFilesClick,
     onDoubleClick,
     inProgress,
     index,

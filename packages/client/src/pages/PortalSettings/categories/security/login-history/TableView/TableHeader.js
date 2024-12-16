@@ -90,7 +90,7 @@ class PeopleTableHeader extends React.Component {
     return defaultColumns;
   };
 
-  onColumnChange = (key, e) => {
+  onColumnChange = (key) => {
     const { columns } = this.state;
     const columnIndex = columns.findIndex((c) => c.key === key);
 

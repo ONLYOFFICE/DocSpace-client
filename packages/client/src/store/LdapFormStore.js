@@ -485,6 +485,7 @@ class LdapFormStore {
     getLdapStatus()
       .then((data) => this.onGetStatus(t, data, toDefault))
       .catch((e) => {
+        console.error(e);
         this.alreadyChecking = false;
       });
   };

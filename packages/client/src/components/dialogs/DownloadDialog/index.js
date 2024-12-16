@@ -591,7 +591,11 @@ export default inject(
 
     const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
     const needPassword = sortedPasswordFiles?.length > 0;
-    const isOnePasswordFile = sortedPasswordFiles?.length === 1;
+
+    const isSortedFile =
+      sortedDownloadFiles?.remove?.length === 1 && downloadItems?.length === 1;
+
+    const isOnePasswordFile = !isSortedFile && downloadItems?.length === 1;
 
     return {
       sortedFiles,

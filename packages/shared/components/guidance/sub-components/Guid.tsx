@@ -27,12 +27,13 @@
 import React from "react";
 
 import { useTranslation } from "react-i18next";
-import { TTranslation } from "@docspace/shared/types";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { classNames } from "../../../utils";
 import { AsideHeader } from "../../aside";
+
+import { FormFillingTipsState } from "../../../enums";
 
 import {
   Content,
@@ -48,107 +49,16 @@ import {
 } from "./Guid.styled";
 
 import { ModalDialogType } from "../../modal-dialog";
+import { getHeaderText, getGuidPosition } from "./Guid.utils";
 
 const GUID_MODAL_MARGIN = 16;
-const GUID_SHARE_OFFSET = 2;
-const GUID_UPLOADING_OFFSET = 5;
-
-enum FormFillingTipsState {
-  Starting = 1,
-  Sharing = 2,
-  Submitting = 3,
-  Complete = 4,
-  Uploading = 5,
-}
-
-const getGuidPosition = (guidRects, state) => {
-  switch (state) {
-    case FormFillingTipsState.Starting:
-      return {
-        width: guidRects.pdf.width,
-        height: guidRects.pdf.height,
-        left: guidRects.pdf.left,
-        top: guidRects.pdf.top,
-        bottom: guidRects.pdf.bottom,
-      };
-
-    case FormFillingTipsState.Sharing:
-      return {
-        width: guidRects.share.width + GUID_SHARE_OFFSET * 2,
-        height: guidRects.share.height + GUID_SHARE_OFFSET * 2,
-        left: guidRects.share.left - GUID_SHARE_OFFSET,
-        top: guidRects.share.top - GUID_SHARE_OFFSET,
-        bottom: guidRects.share.bottom,
-      };
-
-    case FormFillingTipsState.Submitting:
-    case FormFillingTipsState.Complete:
-      return {
-        width: guidRects.ready.width,
-        height: guidRects.ready.height,
-        left: guidRects.ready.left,
-        top: guidRects.ready.top,
-        bottom: guidRects.ready.bottom,
-      };
-
-    case FormFillingTipsState.Uploading:
-      return {
-        width: guidRects.uploading.width + GUID_UPLOADING_OFFSET * 2,
-        height: guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2,
-        left: guidRects.uploading.left - GUID_UPLOADING_OFFSET,
-        top: guidRects.uploading.top - GUID_UPLOADING_OFFSET,
-        bottom: guidRects.uploading.bottom,
-      };
-
-    default:
-      return {
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0,
-        bottom: 0,
-      };
-  }
-};
-
-const getHeaderText = (state: number, t: TTranslation) => {
-  switch (state) {
-    case FormFillingTipsState.Starting:
-      return {
-        header: t("HeaderStarting"),
-        description: t("TitleStarting"),
-      };
-    case FormFillingTipsState.Sharing:
-      return {
-        header: t("HeaderSharing"),
-        description: t("TitleSharing"),
-      };
-    case FormFillingTipsState.Submitting:
-      return {
-        header: t("HeaderSubmitting"),
-        description: t("TitleSubmitting"),
-      };
-    case FormFillingTipsState.Complete:
-      return {
-        header: t("HeaderComplete"),
-        description: t("TitleComplete"),
-      };
-    case FormFillingTipsState.Uploading:
-      return {
-        header: t("HeaderUploading"),
-        description: t("TitleUploading"),
-      };
-
-    default:
-      return null;
-  }
-};
 
 const Guid = ({
   formFillingTipsNumber,
   setFormFillingTipsNumber,
   onClose,
   guidRects,
+  viewAs,
 }) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
@@ -156,13 +66,21 @@ const Guid = ({
 
   const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
 
-  const guidPosition = getGuidPosition(guidRects, formFillingTipsNumber);
+  const guidPosition = getGuidPosition(
+    guidRects,
+    formFillingTipsNumber,
+    viewAs,
+  );
+
+  const onCloseBackdrop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  };
 
   const onNextTips = () => {
     if (isLastTip) {
-      setFormFillingTipsNumber(1);
-      onClose();
-      return;
+      return onClose();
     }
     setFormFillingTipsNumber(formFillingTipsNumber + 1);
   };
@@ -183,7 +101,8 @@ const Guid = ({
   }
 
   return (
-    <StyledGuidBackdrop>
+    <div>
+      <StyledGuidBackdrop onClick={onCloseBackdrop} />
       <StyledClipped className="guid-element" position={guidPosition} />
       <StyledDialog
         id="modal-onMouseDown-close"
@@ -249,7 +168,7 @@ const Guid = ({
           </StyledFooter>
         </Content>
       </StyledDialog>
-    </StyledGuidBackdrop>
+    </div>
   );
 };
 

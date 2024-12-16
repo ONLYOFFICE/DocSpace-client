@@ -129,7 +129,7 @@ const StyledClipped = styled.div<{ position: ClippedPosition }>`
     css`
       left: ${`${props.position.left}px`};
       top: ${`${props.position.top}px`};
-      width: ${`${props.position.width}px`};
+      width: ${props.position.width ? `${props.position.width}px` : "100%"};
       height: ${`${props.position.height}px`};
     `}
   backdrop-filter: contrast(200%);

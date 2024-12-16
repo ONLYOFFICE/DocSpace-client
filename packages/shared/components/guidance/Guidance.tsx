@@ -34,6 +34,7 @@ const Guidance = ({
   setFormFillingTipsNumber,
   onClose,
   guidRects,
+  viewAs,
 }) => {
   return (
     <Portal
@@ -43,6 +44,7 @@ const Guidance = ({
           setFormFillingTipsNumber={setFormFillingTipsNumber}
           onClose={onClose}
           guidRects={guidRects}
+          viewAs={viewAs}
         />
       }
     />

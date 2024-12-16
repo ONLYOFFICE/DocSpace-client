@@ -104,6 +104,9 @@ const InfoPanelHeaderContent = ({
     !isLockedSharedRoom(selection as TRoom) &&
     !(external && expired === true);
 
+  // const isTemplate = selection?.rootFolderType === FolderType.Templates;
+  const isTemplate = false; // TODO: Templates
+
   const closeInfoPanel = () => setIsVisible(false);
 
   const setMembers = () => setView("info_members");
@@ -113,10 +116,19 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Contacts"),
+    name: isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };
+
+  const detailsTab = {
+    id: "info_details",
+    name: t("InfoPanel:SubmenuDetails"),
+    onClick: setDetails,
+    content: null,
+  };
+
+  const templateSubmenu = [memberTab, detailsTab];
 
   const tabsData = [
     {
@@ -125,12 +137,7 @@ const InfoPanelHeaderContent = ({
       onClick: setHistory,
       content: null,
     },
-    {
-      id: "info_details",
-      name: t("InfoPanel:SubmenuDetails"),
-      onClick: setDetails,
-      content: null,
-    },
+    detailsTab,
   ];
 
   const isRoomsType =
@@ -140,15 +147,6 @@ const InfoPanelHeaderContent = ({
       selection.rootFolderType === FolderType.Archive);
 
   if (isRoomsType) tabsData.unshift(memberTab);
-  const templateSubmenu = [
-    {
-      id: "info_members",
-      name: t("Common:Accesses"),
-      onClick: setMembers,
-      content: null,
-    },
-    tabsData[2],
-  ];
 
   if (
     selection &&
@@ -213,9 +211,6 @@ const InfoPanelHeaderContent = ({
     });
   }
 
-  // const isTemplate = selection?.rootFolderType === FolderType.Templates;
-  const isTemplate = true; // TODO: Templates
-
   return (
     <StyledInfoPanelHeader withTabs={withTabs}>
       <AsideHeader
@@ -230,16 +225,9 @@ const InfoPanelHeaderContent = ({
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
-            items={tabsData}
+            items={isTemplate ? templateSubmenu : tabsData}
             selectedItemId={isRoomsType ? roomsView : fileView}
           />
-          {isTemplate && ( // TODO: Templates rewrite with new logic
-            <Tabs
-              style={{ width: "100%" }}
-              items={templateSubmenu}
-              selectedItemId={roomsView}
-            />
-          )}
         </div>
       )}
     </StyledInfoPanelHeader>

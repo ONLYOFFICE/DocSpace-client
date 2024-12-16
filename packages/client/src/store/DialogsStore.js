@@ -395,7 +395,7 @@ class DialogsStore {
     const folders = [];
     let singleFileUrl = null;
 
-    for (let item of itemList) {
+    for (const item of itemList) {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
@@ -433,18 +433,20 @@ class DialogsStore {
   }
 
   updateDownloadedFilePassword = (id, password, type) => {
-    let originItem;
-
     const currentType = this.sortedDownloadFiles[type];
 
+    let originItem;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else originItem = item;
+      if (item.id === id) {
+        originItem = item;
+        return false;
+      }
+      return true;
     });
 
     if (type === "remove") this.downloadItems.push({ ...originItem, password });
     else
-      this.downloadItems.map((item) => {
+      this.downloadItems.forEach((item) => {
         if (item.id === id) {
           item.password = password;
           if (item.oldFormat) item.format = item.oldFormat;
@@ -460,13 +462,15 @@ class DialogsStore {
   };
 
   resetDownloadedFileFormat = (id, fileExst, type) => {
-    let originItem;
-
     const currentType = this.sortedDownloadFiles[type];
 
+    let originItem;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else originItem = item;
+      if (item.id === id) {
+        originItem = item;
+        return false;
+      }
+      return true;
     });
 
     if (type === "remove")
@@ -476,7 +480,7 @@ class DialogsStore {
         oldFormat: originItem.format,
       });
     else
-      this.downloadItems.map((item) => {
+      this.downloadItems.forEach((item) => {
         if (item.id === id) {
           item.oldFormat = item.format;
           item.format = fileExst;
@@ -492,18 +496,18 @@ class DialogsStore {
   };
 
   discardDownloadedFile = (id, type) => {
-    let removedItem = null;
-
     const newFileIds = this.downloadItems.filter((item) => item.id !== id);
     this.downloadItems = [...newFileIds];
 
     const currentType = this.sortedDownloadFiles[type];
 
+    let removedItem = null;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else {
+      if (item.id === id) {
         removedItem = item;
+        return false;
       }
+      return true;
     });
 
     this.sortedDownloadFiles[type] = [...newArray];

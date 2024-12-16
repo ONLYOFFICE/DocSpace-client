@@ -68,8 +68,6 @@ const Toast = ({ className, style, isSSR }: ToastProps) => {
 
   if (isServer && isSSR) return null;
 
-  console.log(classNames(className, styles.asdd));
-
   const element = (
     <ToastContainer
       containerId="toast-container"

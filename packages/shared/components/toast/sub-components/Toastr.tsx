@@ -157,7 +157,7 @@ const getToastOptions = (
       ? 0
       : timeout < MIN_TIMEOUT_THRESHOLD
         ? DEFAULT_TIMEOUT
-        : timeout,
+        : timeout || 5000,
   position: centerPosition ? ("top-center" as ToastPosition) : undefined,
   containerId: "toast-container",
 });

@@ -109,8 +109,52 @@
   -webkit-tap-highlight-color: var(--toast-tap-highlight);
 
   :global {
+    .SlideIn {
+      :local {
+        animation: SlideIn 0.7s ease-out;
+      }
+    }
+
+    @keyframes SlideIn {
+      from {
+        transform: var(--toast-transform);
+      }
+
+      50% {
+        visibility: hidden;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .SlideOut {
+      :local {
+        animation: SlideOut 0.3s ease-out both;
+      }
+    }
+
+    @keyframes SlideOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
     .Toastify__progress-bar--animated {
-      animation: Toastify__trackProgress linear 1 forwards;
+      :local {
+        animation: Toastify__trackProgress linear 1 forwards;
+      }
+    }
+
+    @keyframes Toastify__trackProgress {
+      0% {
+        transform: scaleX(1);
+      }
+      to {
+        transform: scaleX(0);
+      }
     }
 
     .Toastify__toast-body {
@@ -140,44 +184,6 @@
       &:hover,
       &:focus {
         opacity: 1;
-      }
-    }
-
-    @keyframes SlideIn {
-      from {
-        transform: var(--toast-transform);
-      }
-
-      50% {
-        visibility: hidden;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    .SlideIn {
-      animation: SlideIn 0.7s ease-out;
-    }
-
-    @keyframes SlideOut {
-      from {
-        opacity: 1;
-      }
-
-      to {
-        opacity: 0;
-      }
-    }
-
-    .SlideOut {
-      animation: SlideOut 0.3s ease-out both;
-    }
-
-    @keyframes Toastify__trackProgress {
-      0% {
-        transform: scaleX(1);
-      }
-      to {
-        transform: scaleX(0);
       }
     }
 

@@ -631,15 +631,24 @@ class FilesActionStore {
     }
   };
 
-  downloadFiles = async (fileConvertIds, folderIds, translations) => {
+  downloadFiles = async (fileConvertIds, folderIds, translations, password) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const {
+      setSecondaryProgressBarData,
+      clearSecondaryProgressData,
+      secondaryOperationsArray,
+    } = secondaryProgressDataStore;
     const { openUrl } = this.settingsStore;
 
-    const { addActiveItems } = this.filesStore;
-    const { label } = translations;
+    const { addActiveItems, bufferSelection, selection } = this.filesStore;
+    const { label, passwordError } = translations;
+    const {
+      setDownloadItems,
+      setDownloadDialogVisible,
+      downloadItems,
+      setSortedPasswordFiles,
+    } = this.dialogsStore;
 
     const operationId = uniqueid("operation_");
 
@@ -678,6 +687,7 @@ class FilesActionStore {
                 );
 
           clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
@@ -695,12 +705,37 @@ class FilesActionStore {
       );
     } catch (err) {
       clearActiveOperations(fileIds, folderIds);
+
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
         operationId,
       });
+      const error = err.error;
+
       setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+      if (error?.includes("password")) {
+        const filesIds = error.match(/\d+/g)?.map(Number) ?? [
+          fileConvertIds[0].key,
+        ];
+
+        const passwordArray = [];
+
+        downloadItems.forEach((item) => {
+          filesIds.forEach((id) => {
+            if (item.id === id) {
+              passwordArray.push(item);
+            }
+          });
+        });
+
+        toastr.error(passwordError);
+        setSortedPasswordFiles({ other: [...passwordArray] });
+        setDownloadDialogVisible(true);
+        return;
+      }
+
       return toastr.error(err);
     }
   };

@@ -46,6 +46,7 @@ const DownloadContent = (props) => {
     isChecked,
     isIndeterminate,
     theme,
+    getItemIcon,
   } = props;
 
   const getTitleExtensions = () => {
@@ -192,6 +193,7 @@ const DownloadContent = (props) => {
               type={type}
               isOther={isOther}
               dropdownItems={dropdownItems}
+              getItemIcon={getItemIcon}
             />
           );
         })}

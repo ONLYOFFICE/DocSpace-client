@@ -178,3 +178,35 @@ export async function getWhiteLabelIsDefault() {
   return isDefault.response;
 }
 
+export async function getAdditionalResources() {
+  const [getAdditionalResources] = createRequest(
+    [`/settings/rebranding/additional`],
+    [["", ""]],
+    "GET",
+  );
+
+  const additionalResourcesRes = await fetch(getAdditionalResources);
+
+  if (!additionalResourcesRes.ok) return;
+
+  const additionalResources = await additionalResourcesRes.json();
+
+  return additionalResources.response;
+}
+
+export async function getCompanyInfo() {
+  const [getCompanyInfo] = createRequest(
+    [`/settings/rebranding/company`],
+    [["", ""]],
+    "GET",
+  );
+
+  const companyInfoRes = await fetch(getCompanyInfo);
+
+  if (!companyInfoRes.ok) return;
+
+  const companyInfo = await companyInfoRes.json();
+
+  return companyInfo.response;
+}
+

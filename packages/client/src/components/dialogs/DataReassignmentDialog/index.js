@@ -230,6 +230,16 @@ const DataReassignmentDialog = ({
     );
   }
 
+  const onTerminate = () => {
+    dataReassignmentTerminate(user.id)
+      .then(() => {
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
+      })
+      .catch((error) => {
+        toastr.error(error?.response?.data?.error?.message);
+      });
+  };
+
   return (
     <ModalDialog
       displayType="aside"

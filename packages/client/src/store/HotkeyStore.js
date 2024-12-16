@@ -643,7 +643,7 @@ class HotkeyStore {
 
     const isPublic = roomType === RoomsType.PublicRoom;
 
-    for (const item of selections) {
+    selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
         const fileInAction = activeFiles.includes(item.id);
         !fileInAction && fileIds.push(item.id);
@@ -654,7 +654,7 @@ class HotkeyStore {
 
         !folderInAction && folderIds.push(item.id);
       }
-    }
+    });
 
     if (folderIds.length || fileIds.length) {
       const operationData = {

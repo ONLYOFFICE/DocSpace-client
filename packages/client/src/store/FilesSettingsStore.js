@@ -182,9 +182,9 @@ class FilesSettingsStore {
   setFilesSettings = (settings) => {
     this.filesSettings = settings;
     const settingsItems = Object.keys(settings);
-    for (const key of settingsItems) {
+    settingsItems.forEach((key) => {
       this[key] = settings[key];
-    }
+    });
   };
 
   setIsErrorSettings = (isError) => {
@@ -218,9 +218,9 @@ class FilesSettingsStore {
             api.files.getThirdPartyList(),
           ])
           .then(([capabilities, providers]) => {
-            for (const item of capabilities) {
+            capabilities.forEach((item) => {
               item.splice(1, 1);
-            }
+            });
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
           });
@@ -281,9 +281,9 @@ class FilesSettingsStore {
           api.files.getThirdPartyList(),
         ])
         .then(([capabilities, providers]) => {
-          for (const item of capabilities) {
+          capabilities.forEach((item) => {
             item.splice(1, 1);
-          }
+          });
           this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
           this.thirdPartyStore.setThirdPartyProviders(providers);
         });

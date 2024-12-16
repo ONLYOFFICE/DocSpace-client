@@ -53,15 +53,15 @@ class SelectFolderDialogStore {
     }
 
     if (foldersArray.length > 1) {
-      for (const item of foldersArray) {
+      foldersArray.forEach((item) => {
         if (!path) {
           path += `${item.label}`;
         } else path = `${path} / ${item.label}`;
-      }
+      });
     } else {
-      for (const item of foldersArray) {
+      foldersArray.forEach((item) => {
         path = `${item.label}`;
-      }
+      });
     }
 
     if (fileName) path = `${path}/${fileName}`;

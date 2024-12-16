@@ -226,10 +226,10 @@ class SettingsSetupStore {
 
     this.integration.smtpSettings.isDefaultSettings = isDefaultSettings;
 
-    for (const key in settings) {
-      if (settings[key] === null) continue;
+    Object.keys(settings).forEach((key) => {
+      if (settings[key] === null) return;
       storeSettings[key] = settings[key];
-    }
+    });
 
     this.integration.smtpSettings.errors = {};
     this.integration.smtpSettings.initialSettings = { ...storeSettings };
@@ -523,9 +523,9 @@ class SettingsSetupStore {
       api.files.getThirdPartyCapabilities(),
       api.files.getThirdPartyList(),
     ]).then(([capabilities, providers]) => {
-      for (const item of capabilities) {
+      capabilities.forEach((item) => {
         item.splice(1, 1);
-      }
+      });
       this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
       this.thirdPartyStore.setThirdPartyProviders(providers);
     });

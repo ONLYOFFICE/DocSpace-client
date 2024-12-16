@@ -49,9 +49,9 @@ class PrimaryProgressDataStore {
 
   setPrimaryProgressBarData = (primaryProgressData) => {
     const progressDataItems = Object.keys(primaryProgressData);
-    for (const key of progressDataItems) {
+    progressDataItems.forEach((key) => {
       this[key] = primaryProgressData[key];
-    }
+    });
   };
 
   clearPrimaryProgressData = () => {

@@ -79,6 +79,9 @@ module.exports = {
     "no-bitwise": "off",
     eqeqeq: "off",
 
+    "@typescript-eslint/no-loop-func": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "jsx-a11y/tabindex-no-positive": "off",
     "react-hooks/exhaustive-deps": "off",
@@ -90,11 +93,6 @@ module.exports = {
     "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
     "react/no-unstable-nested-components": "off",
-    "no-restricted-syntax": "off",
-    "@typescript-eslint/no-loop-func": "off",
-    "react/prop-types": "off",
-    "react/destructuring-assignment": "off",
-    "@typescript-eslint/no-unused-expressions": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

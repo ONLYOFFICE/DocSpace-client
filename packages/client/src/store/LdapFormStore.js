@@ -407,7 +407,8 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      for (const key in this.requiredSettings) {
+      const requiredSettingsKeys = Object.keys(this.requiredSettings);
+      requiredSettingsKeys.forEach((key) => {
         if (
           typeof this.requiredSettings[key] === "string" &&
           this.requiredSettings[key].trim() === ""
@@ -415,7 +416,7 @@ class LdapFormStore {
           isErrorExist = true;
           this.errors[key] = true;
         }
-      }
+      });
 
       if (this.groupMembership) {
         const groupFields = [
@@ -426,11 +427,11 @@ class LdapFormStore {
           ["groupNameAttribute", this.groupNameAttribute],
         ];
 
-        for (const key of groupFields) {
-          if (key[1].trim() === "") {
-            this.errors[key[0]] = true;
+        groupFields.forEach(([key, value]) => {
+          if (value.trim() === "") {
+            this.errors[key] = true;
           }
-        }
+        });
       }
 
       if (this.authentication && !isErrorExist) {

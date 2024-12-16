@@ -158,11 +158,11 @@ class UploadDataStore {
 
   setUploadData = (uploadData) => {
     const uploadDataItems = Object.keys(uploadData);
-    for (const key of uploadDataItems) {
+    uploadDataItems.forEach((key) => {
       if (key in this) {
         this[key] = uploadData[key];
       }
-    }
+    });
   };
 
   setIsConvertSingleFile = (isConvertSingleFile) => {
@@ -786,7 +786,7 @@ class UploadDataStore {
 
     const uploadFilesArray = Object.keys(uploadFiles);
 
-    for (const index of uploadFilesArray) {
+    uploadFilesArray.forEach((index) => {
       const file = uploadFiles[index];
 
       const parts = file.name.split(".");
@@ -817,7 +817,7 @@ class UploadDataStore {
 
       filesSize += file.size;
       convertSize += file.size;
-    }
+    });
 
     const countUploadingFiles = this.removeDuplicate([
       ...this.files,

@@ -1337,7 +1337,7 @@ class FilesStore {
 
     let newSelections = JSON.parse(JSON.stringify(this.selection));
 
-    for (const item of added) {
+    added.forEach((item) => {
       if (!item) return;
 
       const value =
@@ -1372,9 +1372,9 @@ class FilesStore {
           newSelections.push(selectableFolder);
         }
       }
-    }
+    });
 
-    for (const item of removed) {
+    removed.forEach((item) => {
       if (!item) return;
 
       const value =
@@ -1402,7 +1402,7 @@ class FilesStore {
           (f) => !(f.id == id && f.isFolder),
         );
       }
-    }
+    });
 
     const removeDuplicate = (items) => {
       return items.filter(
@@ -3501,16 +3501,16 @@ class FilesStore {
     const filesItems = [...this.files, ...this.folders];
 
     if (this.folders.length) {
-      for (const item of this.folders) {
+      this.folders.forEach((item) => {
         if (item.roomType && RoomsTypes[item.roomType]) {
           cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }
-      }
+      });
     }
 
-    for (const item of filesItems) {
+    filesItems.forEach((item) => {
       if (isDocument(item.fileExst)) cbMenu.push(FilterType.DocumentsOnly);
       else if (isPresentation(item.fileExst))
         cbMenu.push(FilterType.PresentationsOnly);
@@ -3521,7 +3521,7 @@ class FilesStore {
       else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
-    }
+    });
 
     const hasFiles = cbMenu.some(
       (elem) =>
@@ -3564,7 +3564,7 @@ class FilesStore {
 
     selection = JSON.parse(JSON.stringify(selection));
 
-    for (const item of selection) {
+    selection.forEach((item) => {
       item.checked = true;
       item.format = null;
 
@@ -3583,7 +3583,7 @@ class FilesStore {
       } else {
         sortedFiles.other.push(item);
       }
-    }
+    });
 
     return sortedFiles;
   }

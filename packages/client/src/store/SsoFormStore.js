@@ -245,9 +245,9 @@ class SsoFormStore {
       this.hideErrors();
     }
 
-    for (const key in this) {
+    Object.keys(this).forEach((key) => {
       if (key.includes("ErrorMessage")) this[key] = null;
-    }
+    });
   };
 
   setInput = (e) => {
@@ -950,12 +950,12 @@ class SsoFormStore {
   };
 
   hideErrors = () => {
-    for (const key in this) {
+    Object.keys(this).forEach((key) => {
       if (key.includes("HasError") && this[key] !== false) {
         console.log("key", key);
         this[key] = false;
       }
-    }
+    });
   };
 
   validate = (string) => {
@@ -988,10 +988,9 @@ class SsoFormStore {
   };
 
   get hasErrors() {
-    for (const key in this) {
-      if (key.includes("HasError") && this[key] !== false) return true;
-    }
-    return false;
+    return Object.keys(this).some(
+      (key) => key.includes("HasError") && this[key] !== false,
+    );
   }
 
   get hasChanges() {
@@ -1049,15 +1048,18 @@ class SsoFormStore {
   }
 
   scrollToField = () => {
-    for (const key in this) {
+    Object.keys(this).every((key) => {
       if (key.includes("HasError") && this[key] !== false) {
         const name = key.replace("HasError", "");
         const element = document.getElementsByName(name)?.[0];
-        element?.focus();
-        element?.blur();
-        return;
+        if (element) {
+          element.focus();
+          element.blur();
+        }
+        return false;
       }
-    }
+      return true;
+    });
   };
 }
 

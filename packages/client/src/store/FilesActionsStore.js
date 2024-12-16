@@ -750,7 +750,7 @@ class FilesActionStore {
       return Promise.resolve();
     }
 
-    for (const item of selection) {
+    selection.forEach((item) => {
       if (!item.fileExst && item.isFolder) {
         folderIds.push(item.id);
         items.push({ id: item.id });
@@ -758,7 +758,7 @@ class FilesActionStore {
         fileIds.push(item.id);
         items.push({ id: item.id, fileExst: item.fileExst });
       }
-    }
+    });
 
     this.setGroupMenuBlocked(true);
     return this.downloadFiles(fileIds, folderIds, label).finally(() =>
@@ -1647,14 +1647,13 @@ class FilesActionStore {
       isCopy,
     };
 
-    for (const item of selection) {
+    selection.forEach((item) => {
       if (!item.isFolder) {
         fileIds.push(item.id);
-      } else {
-        if (item.providerKey && isRootFolder) continue;
+      } else if (!item.providerKey || !isRootFolder) {
         folderIds.push(item.id);
       }
-    }
+    });
 
     if (!folderIds.length && !fileIds.length) return;
     this.checkOperationConflict(operationData);

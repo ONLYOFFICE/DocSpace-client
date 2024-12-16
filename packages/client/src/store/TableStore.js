@@ -599,12 +599,12 @@ class TableStore {
     if (splitColumns) {
       this.setColumnsEnable(null, isRecentTab);
 
-      for (const col of defaultColumns) {
+      defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
         column ? (col.enable = true) : (col.enable = false);
 
         columns.push(col);
-      }
+      });
       return columns;
     }
     if (isFrame && frameTableColumns) {

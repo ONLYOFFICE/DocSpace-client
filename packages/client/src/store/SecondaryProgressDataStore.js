@@ -61,8 +61,9 @@ class SecondaryProgressDataStore {
     }
 
     if (progressIndex === 0 || this.secondaryOperationsArray.length === 0) {
-      const progressDataItems = Object.keys(secondaryProgressData);
-      for (const key of progressDataItems) {
+      const progressDataItemsArray = Object.keys(secondaryProgressData);
+      for (let index = 0; index < progressDataItemsArray.length; index++) {
+        const key = progressDataItemsArray[index];
         if (key in this) {
           this[key] = secondaryProgressData[key];
         }

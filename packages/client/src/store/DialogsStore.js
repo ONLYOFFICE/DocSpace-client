@@ -394,7 +394,7 @@ class DialogsStore {
     const folders = [];
     let singleFileUrl = null;
 
-    for (const item of itemList) {
+    itemList.forEach((item) => {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
@@ -413,7 +413,7 @@ class DialogsStore {
           folders.push(item.id);
         }
       }
-    }
+    });
 
     return [files, folders, singleFileUrl];
   };

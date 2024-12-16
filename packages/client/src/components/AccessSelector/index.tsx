@@ -86,15 +86,15 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
 
-  const offsetWidth = containerRef?.current?.offsetWidth;
-
   useEffect(() => {
-    if (!offsetWidth) {
+    const offsetWidth = containerRef?.current?.offsetWidth;
+
+    if (typeof offsetWidth !== "number") {
       return;
     }
 
     setWidth(offsetWidth - 32);
-  }, [offsetWidth]);
+  }, [containerRef, containerRef?.current?.offsetWidth]);
 
   const accessOptions = getAccessOptions(
     t,

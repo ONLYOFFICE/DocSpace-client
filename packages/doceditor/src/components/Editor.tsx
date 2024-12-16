@@ -166,7 +166,12 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (editorGoBack === "false" || user?.isVisitor || !user) {
+    if (
+      editorGoBack === "false" ||
+      editorGoBack === false ||
+      user?.isVisitor ||
+      !user
+    ) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,

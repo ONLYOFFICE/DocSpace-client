@@ -18,6 +18,7 @@
   "AuthenticationMethod": "인증 방법",
   "AuthorizedApps": "인증된 앱",
   "AuthorizeLink": "인증 링크",
+  "BasicInfo": "기본 정보",
   "Client": "클라이언트",
   "ClientCopy": "클라이언트 ID가 클립보드에 복사되었습니다",
   "ClientHelpButton": "OAth 2.0을 인증 유형으로 사용하기 위한 자격 증명입니다.<br/> <strong>참고:</strong> 앱의 클라이언트 ID를 아는 모든 엔터프라이즈 관리자는 앱 이름, 인증 유형, 앱 범위, 리디렉션 URL을 포함한 앱에 대한 정보를 검색할 수 있습니다.",

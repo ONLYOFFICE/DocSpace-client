@@ -1,5 +1,5 @@
 {
-  "ArchivedRoomsOrContact": "您可以归档不需要的房间或联系{{productName}}管理员升级费用版本。",
+  "ArchivedRoomsOrContact": "您可以存档不需要的房间或联系{{productName}}管理员升级费用版本。",
   "ClickToUpgradeTariff": "<1>点击此处</1>升级您的费用版本。",
   "ConfirmEmailDescription": "使用激活邮件中提供的链接。没有收到包含激活链接的邮件？",
   "ConfirmEmailHeader": "请激活您的电子邮件 ({{ email }}) 以访问{{productName}}功能。",

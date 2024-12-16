@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Todennustapa",
   "AuthorizedApps": "Valtuutetut sovellukset",
   "AuthorizeLink": "Valtuuta linkki",
+  "BasicInfo": "Perustiedot",
   "Client": "Client",
   "ClientCopy": "Client id onnistuneesti kopioitu leikepöydälle",
   "ClientHelpButton": "Kirjautumistiedot Oath 2.0 käyttämiseen todennustyyppinäsi. .<br/> <strong>Huomio:</strong> Kaikki yrityksen pääkäyttäjät, jotka tietävät sovelluksen client id:n voivat hakea tietoja sovelluksesta, mukaan lukien nimi, todennustyyppi, sovellusten laajuudet ja uudelleenohjaukset.",

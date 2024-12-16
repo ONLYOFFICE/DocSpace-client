@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Metoda ověřování",
   "AuthorizedApps": "Autorizované aplikace",
   "AuthorizeLink": "Autorizační odkaz",
+  "BasicInfo": "Základní informace",
   "Client": "Klient",
   "ClientCopy": "Id klienta úspěšně zkopírováno do schránky",
   "ClientHelpButton": "Pověření pro použití OAth 2.0 jako typu ověřování.<br/> <strong>Poznámka:</strong> Každý podnikový správce, který zná ID klienta aplikace, bude moci získat informace o aplikaci včetně názvu aplikace, typu ověřování, rozsahu aplikace a URI přesměrování.",

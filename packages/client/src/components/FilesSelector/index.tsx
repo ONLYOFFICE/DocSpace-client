@@ -192,6 +192,8 @@ const FilesSelectorWrapper = ({
   const formProps = useMemo(() => {
     let isRoomFormAccessible = true;
 
+    if (isSelect) return;
+
     if (isCopy || isMove)
       isRoomFormAccessible = selection.every(
         (item) => "isPDFForm" in item && item.isPDFForm,

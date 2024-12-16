@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Authenticatiemethode",
   "AuthorizedApps": "Geautoriseerde apps",
   "AuthorizeLink": "Link autoriseren",
+  "BasicInfo": "Basisinformatie",
   "Client": "Client",
   "ClientCopy": "Client ID succesvol gekopieerd naar klembord",
   "ClientHelpButton": "Inloggegevens voor het gebruik van OAth 2.0 als uw Authenticatietype.<br/> <strong>Note:</strong> Elke enterprise admin die het client ID van de app kent, zal in staat zijn om informatie over de app op te vragen, inclusief app naam, authenticatietype, app scopes en redirect URL.",

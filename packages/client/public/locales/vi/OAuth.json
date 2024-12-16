@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Phương thức xác thực",
   "AuthorizedApps": "Ứng dụng được ủy quyền",
   "AuthorizeLink": "Liên kết được ủy quyền",
+  "BasicInfo": "Thông tin cơ bản",
   "Client": "Khách",
   "ClientCopy": "Đã sao chép id khách vào bộ nhớ tạm thành công",
   "ClientHelpButton": "Thông tin xác thực để sử dụng OAth 2.0 làm kiểu Xác thực của bạn.<br/> <strong>Lưu ý:</strong> Bất kỳ quản trị viên doanh nghiệp nào biết ID máy khách của ứng dụng sẽ có thể truy xuất thông tin về ứng dụng bao gồm tên ứng dụng, loại xác thực, phạm vi ứng dụng và URI chuyển hướng.",

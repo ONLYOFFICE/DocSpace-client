@@ -154,6 +154,7 @@ export const useOptions = (
     setSelectFileFormRoomDialogVisible,
     inviteUser: inviteRootUser,
     isVisitor,
+    isFrame,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -300,6 +301,7 @@ export const useOptions = (
           onGoToShared,
         },
         isVisitor,
+        isFrame,
       ),
     [
       type,
@@ -324,6 +326,7 @@ export const useOptions = (
       onGoToPersonal,
       onGoToShared,
       isVisitor,
+      isFrame,
     ],
   );
 

@@ -18,6 +18,7 @@
   "AuthenticationMethod": "認証方法",
   "AuthorizedApps": "認証済みアプリ",
   "AuthorizeLink": "認証リンク",
+  "BasicInfo": "基本情報",
   "Client": "クライアント",
   "ClientCopy": "クライアントIDがクリップボードに正常にコピーされました",
   "ClientHelpButton": "認証タイプとして OAuth 2.0 を使用するための認証情報。<br/> <strong>注意：</strong>アプリのクライアントIDを知っている企業管理者は、アプリ名、認証タイプ、アプリスコープ、リダイレクトURIなど、アプリに関する情報を取得することができます。",

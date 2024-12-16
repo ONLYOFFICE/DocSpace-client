@@ -183,7 +183,9 @@ const PureHome = (props) => {
 
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      if (withHeaderLoader)
+        return setIsSectionHeaderLoading(param, !withoutTimer);
+
       setIsSectionBodyLoading(param, !withoutTimer);
     },
     [setIsSectionHeaderLoading, setIsSectionBodyLoading],

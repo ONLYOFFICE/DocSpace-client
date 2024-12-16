@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Spôsob autorizácie",
   "AuthorizedApps": "Autorizované aplikácie",
   "AuthorizeLink": "Autorizovať odkaz",
+  "BasicInfo": "Základné informácie",
   "Client": "Klient",
   "ClientCopy": "ID klienta úspešne skopírované do schránky ",
   "ClientHelpButton": "Oprávnenia na používanie OAuth 2.0 ako vášho spôsobu autorizácie. <br/> <strong> Poznámka: </strong> Každý firemný administrátor, ktorý pozná ID klienta aplikácie, bude môcť získať informácie o aplikácii vrátane názvu aplikácie, spôsobu autorizácie, rozsahu aplikácie a URI presmerovania.",

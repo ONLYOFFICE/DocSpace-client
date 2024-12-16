@@ -2906,6 +2906,36 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@docspace/sdk@workspace:packages/sdk":
+  version: 0.0.0-use.local
+  resolution: "@docspace/sdk@workspace:packages/sdk"
+  dependencies:
+    "@serdnam/pino-cloudwatch-transport": "npm:^1.0.4"
+    "@svgr/webpack": "npm:^8.1.0"
+    "@types/nconf": "npm:^0"
+    "@types/node": "npm:^22.7.5"
+    "@types/react": "npm:^18.3.11"
+    "@types/react-dom": "npm:^18.3.1"
+    eslint: "npm:^8.57.1"
+    eslint-config-next: "npm:14.2.15"
+    i18next: "npm:^20.6.1"
+    moment: "npm:^2.30.1"
+    nconf: "npm:^0.12.1"
+    next: "npm:^14.2.15"
+    pino: "npm:^9.5.0"
+    pino-pretty: "npm:^11.3.0"
+    pino-roll: "npm:^2.2.0"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    react-i18next: "npm:^13.5.0"
+    sass: "npm:^1.79.5"
+    shx: "npm:^0.3.4"
+    styled-components: "npm:^5.3.11"
+    typescript: "npm:5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "@docspace/shared@workspace:packages/shared":
   version: 0.0.0-use.local
   resolution: "@docspace/shared@workspace:packages/shared"

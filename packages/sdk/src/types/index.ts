@@ -62,12 +62,7 @@ export type TDocumentInfoSharingSettings = {
 export type RootPageProps = {
   searchParams: Partial<{
     fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
+    requestToken: string;
     error?: string;
   }>;
 };
@@ -204,7 +199,7 @@ export type TResponse =
       shareKey?: string;
     }
   | {
-      error: TError;
+      error?: TError;
       user?: undefined;
       settings?: undefined;
       successAuth?: undefined;

@@ -46,6 +46,7 @@ import {
   SeparatorType,
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
+import { globalColors } from "../../../themes";
 
 const submenuListMargin = 4; // Indentation of the second level menu from the first level
 const sectionPadding = 16; // Screen margin
@@ -386,8 +387,8 @@ const SubMenu = (props: {
         {item.badgeLabel && (
           <Badge
             label={item.badgeLabel}
-            className={subMenuIconClassName + " p-submenu-badge"}
-            backgroundColor="#7757D9"
+            className={`${subMenuIconClassName} p-submenu-badge`}
+            backgroundColor={globalColors.mainPurple}
             fontSize="9px"
             fontWeight={700}
             borderRadius="50px"

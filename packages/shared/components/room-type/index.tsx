@@ -44,6 +44,7 @@ import {
   StyledDisplayItem,
 } from "./RoomType.styled";
 import { RoomTypeProps } from "./RoomType.types";
+import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,
@@ -89,7 +90,7 @@ const RoomType = ({
           {isTemplate && (
             <Badge
               label={t("New").toUpperCase()}
-              backgroundColor="#7757D9"
+              backgroundColor={globalColors.mainPurple}
               fontSize="9px"
               fontWeight={700}
               borderRadius="50px"

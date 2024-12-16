@@ -51,6 +51,9 @@ const PermanentSettings = ({
   isPrivate,
   isDisabled,
 }) => {
+  const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
+  const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
+
   const createThirdpartyPath = () => {
     const path = storageLocation.parentId.split("|");
     path.shift();
@@ -59,8 +62,6 @@ const PermanentSettings = ({
     return `(${path.join("/")})`;
   };
 
-  const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
-  const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
   const thirdpartyPath = isThirdparty ? createThirdpartyPath() : "";
 
   return (

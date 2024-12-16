@@ -51,24 +51,15 @@ const ChangeStorageQuotaDialog = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState("");
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUpHandler, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUpHandler, false);
-    };
-  }, [size]);
-
   const isSizeError = () => {
     if (isDisableQuota) return false;
-
     if (size.trim() === "") {
       setIsError(true);
       return true;
     }
-
     return false;
   };
+
   const onSaveClick = async () => {
     if (isSizeError()) return;
 
@@ -82,7 +73,6 @@ const ChangeStorageQuotaDialog = (props) => {
       });
 
       await updateFunction(storageQuota);
-
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
@@ -96,15 +86,23 @@ const ChangeStorageQuotaDialog = (props) => {
   const onSetQuotaBytesSize = (bytes) => {
     setSize(bytes);
   };
+
   const onKeyUpHandler = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isSizeError()) return;
-
       onSaveClick();
       setSize("");
       setIsError(false);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUpHandler, false);
+    return () => {
+      document.removeEventListener("keyup", onKeyUpHandler, false);
+    };
+  }, [size]);
+
   const onCloseClick = () => {
     setSize("");
     setIsError(false);

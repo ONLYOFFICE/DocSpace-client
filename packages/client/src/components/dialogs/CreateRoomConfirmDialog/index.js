@@ -41,12 +41,13 @@ const CreateRoomConfirmDialog = ({
   onCreateRoom,
   selectedRoomType,
 }) => {
+  const onClose = () => setVisible(false);
+
   const onContinue = async () => {
     await onCreateRoom(t, true);
     onClose();
   };
 
-  const onClose = () => setVisible(false);
   const bodyText =
     selectedRoomType === RoomsType.VirtualDataRoom
       ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")

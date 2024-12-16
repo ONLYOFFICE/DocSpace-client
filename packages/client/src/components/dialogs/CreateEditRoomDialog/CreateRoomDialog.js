@@ -107,11 +107,6 @@ const CreateRoomDialog = ({
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";
 
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoom();
-  };
-
   const onCreateRoom = async () => {
     if (!roomParams?.title?.trim()) {
       setIsValidTitle(false);
@@ -122,6 +117,11 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onCreateRoom();
   };
 
   /**

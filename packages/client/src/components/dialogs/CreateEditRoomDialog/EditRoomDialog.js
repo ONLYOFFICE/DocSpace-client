@@ -101,11 +101,6 @@ const EditRoomDialog = ({
       type: newRoomType,
     }));
 
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onEditRoom();
-  };
-
   const onEditRoom = () => {
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
@@ -113,6 +108,11 @@ const EditRoomDialog = ({
     }
 
     onSave(roomParams);
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onEditRoom();
   };
 
   useEffect(() => {

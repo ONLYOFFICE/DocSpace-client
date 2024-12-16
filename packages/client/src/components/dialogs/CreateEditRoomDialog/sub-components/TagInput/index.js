@@ -66,6 +66,17 @@ const TagInput = ({
   const [tagInput, setTagInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const openDropdown = () => {
+    if (isDisabled) return;
+    setIsScrollLocked(true);
+    setIsDropdownOpen(true);
+  };
+
+  const closeDropdown = () => {
+    setIsScrollLocked(false);
+    setIsDropdownOpen(false);
+  };
+
   const onTagInputChange = (e) => {
     const text = e.target.value;
 
@@ -76,17 +87,6 @@ const TagInput = ({
     }
 
     setTagInput(text);
-  };
-
-  const openDropdown = () => {
-    if (isDisabled) return;
-    setIsScrollLocked(true);
-    setIsDropdownOpen(true);
-  };
-
-  const closeDropdown = () => {
-    setIsScrollLocked(false);
-    setIsDropdownOpen(false);
   };
 
   const handleFocus = (event) => {

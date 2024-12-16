@@ -63,13 +63,6 @@ const StyledComponent = styled.div`
     max-width: 433px;
   }
 
-  .section-description {
-    color: ${(props) =>
-      props.theme.client.settings.common.brandingDescriptionColor};
-    line-height: 20px;
-    padding-bottom: 20px;
-  }
-
   hr {
     margin: 24px 0;
     border: none;

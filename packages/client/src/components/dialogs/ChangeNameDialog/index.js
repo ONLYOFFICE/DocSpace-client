@@ -80,10 +80,6 @@ const ChangeNameDialog = (props) => {
     }
   };
 
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 || e.which === 13) onSaveClick();
-  };
-
   const onSaveClick = async () => {
     if (
       !isNameValid ||
@@ -93,22 +89,24 @@ const ChangeNameDialog = (props) => {
     )
       return;
 
-    const newProfile = profile;
-    newProfile.firstName = firstName;
-    newProfile.lastName = lastName;
+    setIsSaving(true);
 
     try {
-      setIsSaving(true);
-      const currentProfile = await updateProfile(newProfile);
-      fromList && (await updateProfileInUsers(currentProfile));
-      toastr.success(t("Common:ChangesSavedSuccessfully"));
-    } catch (error) {
-      console.error(error);
-      toastr.error(error);
-    } finally {
+      await updateProfile({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+      });
+
       setIsSaving(false);
       onClose();
+    } catch (error) {
+      toastr.error(error);
+      setIsSaving(false);
     }
+  };
+
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13 || e.which === 13) onSaveClick();
   };
 
   return (

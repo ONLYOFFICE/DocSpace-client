@@ -98,15 +98,15 @@ const QuotaForm = ({
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
 
-  useEffect(() => {
-    setSize(initSize);
-    setPower(initPower);
-  }, [initialSize]);
-
   const [power, setPower] = useState(initPower);
   const [size, setSize] = useState(initSize);
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(initialSize === -1);
+
+  useEffect(() => {
+    setSize(initSize);
+    setPower(initPower);
+  }, [initialSize]);
 
   const { t } = useTranslation(["Settings", "Common"]);
   const options = getOptions(t);

@@ -139,15 +139,6 @@ const AvatarEditorDialog = (props) => {
     ? t("Ldap:LdapAvatar")
     : t("RoomLogoCover:RoomCover");
 
-  useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
   const onResize = () => {
     const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
     const screenHeight = document.documentElement.clientHeight;
@@ -156,6 +147,15 @@ const AvatarEditorDialog = (props) => {
       setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
     else setScrollBodyHeight(null);
   };
+
+  useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });

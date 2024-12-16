@@ -36,6 +36,21 @@ const BackupToPublicRoomComponent = (props) => {
   const { visible, setIsVisible, backupToPublicRoomData } = props;
   const { t, ready } = useTranslation(["Files", "Common"]);
 
+  const onClose = () => {
+    setIsVisible(false);
+  };
+
+  const onBackupTo = () => {
+    const { backupToPublicRoom, backupToPublicRoomData } = props;
+    backupToPublicRoom(backupToPublicRoomData);
+    onClose();
+  };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onBackupTo();
+  };
+
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
 
@@ -43,29 +58,6 @@ const BackupToPublicRoomComponent = (props) => {
       document.removeEventListener("keyup", onKeyUp, false);
     };
   }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onBackupTo();
-  };
-
-  const onClose = () => {
-    setIsVisible(false);
-  };
-
-  const onBackupTo = () => {
-    const {
-      selectedItemId,
-      breadCrumbs,
-      onSelectFolder,
-      onClose: onCloseAction,
-    } = backupToPublicRoomData;
-
-    onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
-
-    onClose();
-    onCloseAction();
-  };
 
   return (
     <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>

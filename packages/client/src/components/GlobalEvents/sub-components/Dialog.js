@@ -64,13 +64,19 @@ const Dialog = ({
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
-  const onCancelAction = useCallback((e) => {
-    onCancel && onCancel(e);
-  }, [onCancel]);
+  const onCancelAction = useCallback(
+    (e) => {
+      onCancel && onCancel(e);
+    },
+    [onCancel],
+  );
 
-  const onCloseAction = useCallback((e) => {
-    onClose && onClose(e);
-  }, [onClose]);
+  const onCloseAction = useCallback(
+    (e) => {
+      onClose && onClose(e);
+    },
+    [onClose],
+  );
 
   const onSaveAction = useCallback(
     (e) => {
@@ -112,19 +118,22 @@ const Dialog = ({
     };
   }, [onKeyUpHandler]);
 
-  const onChange = useCallback((e) => {
-    let newValue = e.target.value;
+  const onChange = useCallback(
+    (e) => {
+      let newValue = e.target.value;
 
-    newValue = removeEmojiCharacters(newValue);
-    if (newValue.match(folderFormValidation)) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
+      newValue = removeEmojiCharacters(newValue);
+      if (newValue.match(folderFormValidation)) {
+        setIsError(true);
+      } else {
+        setIsError(false);
+      }
 
-    setValue(newValue);
-    setIsChanged(true);
-  }, [folderFormValidation]);
+      setValue(newValue);
+      setIsChanged(true);
+    },
+    [folderFormValidation],
+  );
 
   const onFocus = useCallback((e) => {
     e.target.select();

@@ -69,71 +69,84 @@ const RenameEvent = ({
     setEventDialogVisible(true);
   }, [item]);
 
-  const onUpdate = React.useCallback((e, value) => {
-    const originalTitle = getTitleWithoutExtension(item);
+  const onUpdate = React.useCallback(
+    (e, value) => {
+      const originalTitle = getTitleWithoutExtension(item);
 
-    let timerId;
+      let timerId;
 
-    const isSameTitle =
-      originalTitle.trim() === value.trim() || value.trim() === "";
+      const isSameTitle =
+        originalTitle.trim() === value.trim() || value.trim() === "";
 
-    const isFile = item.fileExst || item.contentLength;
+      const isFile = item.fileExst || item.contentLength;
 
-    if (isSameTitle) {
-      setStartValue(originalTitle);
+      if (isSameTitle) {
+        setStartValue(originalTitle);
 
-      onCancel();
+        onCancel();
 
-      return completeAction(item, type);
-    }
-    timerId = setTimeout(() => {
-      isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
-    }, 500);
+        return completeAction(item, type);
+      }
+      timerId = setTimeout(() => {
+        isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
+      }, 500);
 
-    isFile
-      ? updateFile(item.id, value)
-          .then(() => completeAction(item, type))
-          .then(() =>
-            toastr.success(
-              t("FileRenamed", {
-                oldTitle: item.title,
-                newTitle: value + item.fileExst,
-              }),
-            ),
-          )
-          .catch((err) => {
-            toastr.error(err);
-            completeAction(item, type);
-          })
-          .finally(() => {
-            clearTimeout(timerId);
-            timerId = null;
-            clearActiveOperations([item.id]);
+      isFile
+        ? updateFile(item.id, value)
+            .then(() => completeAction(item, type))
+            .then(() =>
+              toastr.success(
+                t("FileRenamed", {
+                  oldTitle: item.title,
+                  newTitle: value + item.fileExst,
+                }),
+              ),
+            )
+            .catch((err) => {
+              toastr.error(err);
+              completeAction(item, type);
+            })
+            .finally(() => {
+              clearTimeout(timerId);
+              timerId = null;
+              clearActiveOperations([item.id]);
 
-            onCancel();
-          })
-      : renameFolder(item.id, value)
-          .then(() => completeAction(item, type))
-          .then(() => {
-            toastr.success(
-              t("FolderRenamed", {
-                folderTitle: item.title,
-                newFoldedTitle: value,
-              }),
-            );
-          })
-          .catch((err) => {
-            toastr.error(err);
-            completeAction(item, type);
-          })
-          .finally(() => {
-            clearTimeout(timerId);
-            timerId = null;
-            clearActiveOperations(null, [item.id]);
+              onCancel();
+            })
+        : renameFolder(item.id, value)
+            .then(() => completeAction(item, type))
+            .then(() => {
+              toastr.success(
+                t("FolderRenamed", {
+                  folderTitle: item.title,
+                  newFoldedTitle: value,
+                }),
+              );
+            })
+            .catch((err) => {
+              toastr.error(err);
+              completeAction(item, type);
+            })
+            .finally(() => {
+              clearTimeout(timerId);
+              timerId = null;
+              clearActiveOperations(null, [item.id]);
 
-            onCancel();
-          });
-  }, [onCancel, addActiveItems, clearActiveOperations, completeAction, item, t, type, updateFile, renameFolder]);
+              onCancel();
+            });
+    },
+    [
+      onCancel,
+      addActiveItems,
+      clearActiveOperations,
+      completeAction,
+      item,
+      t,
+      type,
+      updateFile,
+      renameFolder,
+    ],
+  );
 
   return (
     <Dialog

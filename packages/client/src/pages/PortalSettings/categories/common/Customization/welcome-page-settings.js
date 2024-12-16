@@ -183,7 +183,16 @@ const WelcomePageSettingsComponent = (props) => {
     return () => {
       window.removeEventListener("resize", checkInnerWidth);
     };
-  }, [isLoaded, isMobileView, t, tReady, greetingSettings, navigate, setIsLoaded, setIsLoadedWelcomePageSettings]);
+  }, [
+    isLoaded,
+    isMobileView,
+    t,
+    tReady,
+    greetingSettings,
+    navigate,
+    setIsLoaded,
+    setIsLoadedWelcomePageSettings,
+  ]);
 
   React.useEffect(() => {
     if (

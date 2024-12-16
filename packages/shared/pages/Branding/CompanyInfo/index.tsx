@@ -87,6 +87,11 @@ export const CompanyInfo = ({
 
   return (
     <StyledCompanyInfo isSettingPaid={isSettingPaid}>
+      <div className="section-description settings_unavailable">
+        {t("Settings:BrandingSectionDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </div>
       <div className="header settings_unavailable">
         {t("Settings:CompanyInfoSettings")}
       </div>

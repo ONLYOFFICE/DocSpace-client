@@ -54,14 +54,62 @@ describe("<DropDown />", () => {
     expect(screen.getByTestId("child")).toHaveTextContent("Test Content");
   });
 
-  it("renders with backdrop when backDrop prop is true", () => {
+  it("applies correct directional classes", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open directionY="top" directionX="right">
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("top");
+    expect(dropdown).toHaveClass("right");
+    expect(dropdown).not.toHaveClass("bottom");
+    expect(dropdown).not.toHaveClass("left");
+  });
+
+  it("applies mobile view class when isMobileView is true", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open isMobileView>
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("mobileView");
+  });
+
+  it("applies maxHeight class when maxHeight prop is provided", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open maxHeight={200}>
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("maxHeight");
+  });
+
+  it("applies withManualWidth class when manualWidth is provided", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open manualWidth="200px">
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("withManualWidth");
+  });
+
+  it("applies notReady class before dropdown is ready", () => {
     renderWithTheme(
       <DropDown {...baseProps} open>
         <div>Content</div>
       </DropDown>,
     );
 
-    expect(document.querySelector(".backdrop")).toBeInTheDocument();
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("notReady");
   });
 
   it("doesn't handle click outside when enableOnClickOutside is false", () => {
@@ -77,5 +125,239 @@ describe("<DropDown />", () => {
 
     fireEvent.mouseDown(screen.getByTestId("outside"));
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("applies custom styles correctly", () => {
+    renderWithTheme(
+      <DropDown
+        {...baseProps}
+        open
+        zIndex={1000}
+        maxHeight={200}
+        manualWidth="300px"
+        manualX="10px"
+        manualY="20px"
+      >
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveStyle({
+      "--z-index": "1000",
+      "--max-height": "200px",
+      "--manual-width": "300px",
+      "--manual-x": "10px",
+      "--manual-y": "20px",
+    });
+  });
+
+  it("doesn't handle keyboard events when enableKeyboardEvents is false", () => {
+    const onClose = jest.fn();
+    renderWithTheme(
+      <DropDown
+        {...baseProps}
+        open
+        enableKeyboardEvents={false}
+        clickOutsideAction={onClose}
+      >
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("renders with custom class name", () => {
+    const customClass = "custom-dropdown";
+    renderWithTheme(
+      <DropDown {...baseProps} open className={customClass}>
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass(customClass);
+  });
+
+  it("applies directionX styles when not disabled", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open directionX="right">
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("right");
+  });
+
+  it("renders virtual list with correct props", () => {
+    const items = [
+      { id: 1, label: "Item 1" },
+      { id: 2, label: "Item 2" },
+    ];
+
+    renderWithTheme(
+      <DropDown {...baseProps} open>
+        {items.map((item) => (
+          <div key={item.id}>{item.label}</div>
+        ))}
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toBeInTheDocument();
+    expect(screen.getByText("Item 1")).toBeInTheDocument();
+    expect(screen.getByText("Item 2")).toBeInTheDocument();
+  });
+
+  it("handles fixed direction prop correctly", () => {
+    renderWithTheme(
+      <DropDown {...baseProps} open fixedDirection>
+        <div>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("bottom");
+    expect(dropdown).toHaveClass("left");
+  });
+
+  it("updates maxHeight based on calculatedHeight", () => {
+    const maxHeight = 200;
+    renderWithTheme(
+      <DropDown {...baseProps} open maxHeight={maxHeight}>
+        <div style={{ height: "300px" }}>Content</div>
+      </DropDown>,
+    );
+
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveStyle({ height: `${maxHeight}px` });
+  });
+
+  describe("backdrop behavior", () => {
+    it("doesn't render backdrop when backDrop is false", () => {
+      renderWithTheme(
+        <DropDown {...baseProps} open withBackdrop={false}>
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      expect(document.querySelector(".backdrop")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("position calculation", () => {
+    const mockViewport = (width: number, height: number) => {
+      const originalGetViewport = window.innerWidth;
+      const originalGetHeight = window.innerHeight;
+
+      Object.defineProperty(window, "innerWidth", {
+        value: width,
+        configurable: true,
+      });
+      Object.defineProperty(window, "innerHeight", {
+        value: height,
+        configurable: true,
+      });
+
+      return () => {
+        Object.defineProperty(window, "innerWidth", {
+          value: originalGetViewport,
+          configurable: true,
+        });
+        Object.defineProperty(window, "innerHeight", {
+          value: originalGetHeight,
+          configurable: true,
+        });
+      };
+    };
+
+    beforeEach(() => {
+      jest
+        .spyOn(Element.prototype, "getBoundingClientRect")
+        .mockImplementation(function (this: Element) {
+          if (this.classList.contains("dropdown")) {
+            return {
+              width: 200,
+              height: 300,
+              top: 100,
+              left: 50,
+              right: 250,
+              bottom: 400,
+              x: 50,
+              y: 100,
+            } as DOMRect;
+          }
+          // Mock parent element rect
+          return {
+            width: 100,
+            height: 50,
+            top: 80,
+            left: 40,
+            right: 140,
+            bottom: 130,
+            x: 40,
+            y: 80,
+          } as DOMRect;
+        });
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it("calculates correct position for bottom-left alignment", () => {
+      const cleanup = mockViewport(1000, 800);
+
+      renderWithTheme(
+        <DropDown {...baseProps} open directionY="bottom" directionX="left">
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveClass("bottom");
+      expect(dropdown).toHaveClass("left");
+
+      cleanup();
+    });
+
+    it("maintains fixed direction when fixedDirection is true", () => {
+      const cleanup = mockViewport(1000, 300); // Small viewport height
+
+      renderWithTheme(
+        <DropDown
+          {...baseProps}
+          open
+          directionY="bottom"
+          directionX="left"
+          fixedDirection
+        >
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveClass("bottom");
+      expect(dropdown).toHaveClass("left");
+
+      cleanup();
+    });
+
+    it("applies manual positioning when provided", () => {
+      renderWithTheme(
+        <DropDown {...baseProps} open manualX="100px" manualY="200px">
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveStyle({
+        "--manual-x": "100px",
+        "--manual-y": "200px",
+      });
+    });
   });
 });

@@ -223,6 +223,13 @@ const SetRoomParams = ({
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
 
+  const onChangeIcon = (icon) => {
+    if (!icon.uploadedFile !== disableImageRescaling)
+      setDisableImageRescaling(!icon.uploadedFile);
+
+    setRoomParams({ ...roomParams, icon, iconWasUpdated: true });
+  };
+
   const onChangeFile = async (e) => {
     const uploadedFile = await uploadFile(t, e);
 
@@ -293,13 +300,6 @@ const SetRoomParams = ({
 
   const onChangeStorageLocation = (storageLocation) =>
     setRoomParams({ ...roomParams, storageLocation });
-
-  const onChangeIcon = (icon) => {
-    if (!icon.uploadedFile !== disableImageRescaling)
-      setDisableImageRescaling(!icon.uploadedFile);
-
-    setRoomParams({ ...roomParams, icon, iconWasUpdated: true });
-  };
 
   const onCreateFolderChange = () => {
     setCreateNewFolderIsChecked(!createNewFolderIsChecked);

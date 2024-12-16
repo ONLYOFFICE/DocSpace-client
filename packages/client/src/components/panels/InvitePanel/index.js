@@ -102,6 +102,26 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
 
+  const onCheckHeight = () => {
+    setScrollAllPanelContent(!isDesktop());
+    setIsMobileView(isMobile());
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target.id === "InvitePanelWrapper") onClose();
+  };
+
+  const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
+    setInfoPanelIsMobileHidden(false);
+    setInvitePanelOptions({
+      visible: false,
+      hideSelector: false,
+      defaultAccess: 1,
+    });
+    setInviteItems([]);
+  };
+
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -216,26 +236,6 @@ const InvitePanel = ({
   useEffect(() => {
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
-
-  const onMouseDown = (e) => {
-    if (e.target.id === "InvitePanelWrapper") onClose();
-  };
-
-  const onCheckHeight = () => {
-    setScrollAllPanelContent(!isDesktop());
-    setIsMobileView(isMobile());
-  };
-
-  const onClose = () => {
-    setInviteLanguage({ key: "", label: "" });
-    setInfoPanelIsMobileHidden(false);
-    setInvitePanelOptions({
-      visible: false,
-      hideSelector: false,
-      defaultAccess: 1,
-    });
-    setInviteItems([]);
-  };
 
   const onKeyPress = (e) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();

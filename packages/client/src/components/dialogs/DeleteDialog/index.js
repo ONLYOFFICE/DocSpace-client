@@ -70,6 +70,39 @@ const DeleteDialogComponent = (props) => {
     i++;
   }
 
+  const onClose = () => {
+    if (
+      selection.length === 1 &&
+      selection[0].isArchive &&
+      selection[0].isRootFolder === false
+    ) {
+      setSelected("none");
+    }
+    setBufferSelection(null);
+    setRemoveMediaItem(null);
+    setIsRoomDelete(false);
+    setDeleteDialogVisible(false);
+  };
+
+  const onDeleteAction = () => {
+    if (isRoomDelete) {
+      onDeleteRoom();
+      return;
+    }
+
+    if (unsubscribe) {
+      onUnsubscribe();
+      return;
+    }
+
+    onDelete();
+  };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
 
@@ -77,11 +110,6 @@ const DeleteDialogComponent = (props) => {
       document.removeEventListener("keyup", onKeyUp, false);
     };
   }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
 
   const onDelete = () => {
     setSelected("none");
@@ -133,20 +161,6 @@ const DeleteDialogComponent = (props) => {
       .map((select) => select.id);
 
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
-  };
-
-  const onClose = () => {
-    if (
-      selection.length === 1 &&
-      selection[0].isArchive &&
-      selection[0].isRootFolder === false
-    ) {
-      setSelected("none");
-    }
-    setBufferSelection(null);
-    setRemoveMediaItem(null);
-    setIsRoomDelete(false);
-    setDeleteDialogVisible(false);
   };
 
   const moveToTrashTitle = () => {
@@ -254,12 +268,6 @@ const DeleteDialogComponent = (props) => {
         : unsubscribe
           ? t("UnsubscribeButton")
           : t("MoveToTrashButton");
-
-  const onDeleteAction = () => {
-    if (isRoomDelete) onDeleteRoom();
-    else if (unsubscribe) onUnsubscribe();
-    else onDelete();
-  };
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

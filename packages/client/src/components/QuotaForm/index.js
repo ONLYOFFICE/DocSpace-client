@@ -149,6 +149,15 @@ const QuotaForm = ({
 
     return false;
   };
+
+  const onSaveClick = async () => {
+    if (isSizeError()) return;
+
+    onSave & onSave(conversionToBytes(size, power));
+
+    setHasError(false);
+  };
+
   const onKeyDownInput = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isButtonsEnable) {
@@ -159,13 +168,6 @@ const QuotaForm = ({
         setHasError(false);
       }
     }
-  };
-  const onSaveClick = async () => {
-    if (isSizeError()) return;
-
-    onSave & onSave(conversionToBytes(size, power));
-
-    setHasError(false);
   };
 
   const onCancelClick = () => {

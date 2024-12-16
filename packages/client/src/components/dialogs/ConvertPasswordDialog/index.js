@@ -55,6 +55,14 @@ const ConvertPasswordDialogComponent = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
 
+  const onChangePassword = useCallback(
+    (password) => {
+      !passwordValid && setPasswordValid(true);
+      setPassword(password);
+    },
+    [passwordValid],
+  );
+
   const makeForm =
     formCreationInfo.fromExst === ".docxf" &&
     formCreationInfo.toExst === ".oform";
@@ -126,14 +134,6 @@ const ConvertPasswordDialogComponent = (props) => {
       setPasswordEntryProcess(false);
     };
   }, []);
-
-  const onChangePassword = useCallback(
-    (password) => {
-      !passwordValid && setPasswordValid(true);
-      setPassword(password);
-    },
-    [onChangePassword, passwordValid],
-  );
 
   return (
     <ModalDialog

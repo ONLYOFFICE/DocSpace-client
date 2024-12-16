@@ -101,44 +101,6 @@ const DataReassignmentDialog = ({
     getUsersList(filter, true);
   };
 
-  useEffect(() => {
-    // If click Delete user
-    if (isDeletingUserWithReassignment) onReassign();
-
-    return () => {
-      setIsDeletingUserWithReassignment(false);
-      setDataReassignmentDeleteProfile(false);
-      clearTimeout(timerId);
-    };
-  }, [isDeletingUserWithReassignment]);
-
-  const onToggleDeleteProfile = () => {
-    setIsDeleteProfile((remove) => !remove);
-  };
-
-  const onTogglePeopleSelector = () => {
-    setSelectorVisible((show) => !show);
-  };
-
-  const onClose = () => {
-    setDataReassignmentDialogVisible(false);
-  };
-
-  const onClosePeopleSelector = () => {
-    setSelectorVisible(false);
-  };
-
-  const onStartAgain = () => {
-    setShowProgress(false);
-    setPercent(0);
-    setIsAbortTransfer(false);
-  };
-
-  const onAccept = (item) => {
-    setSelectorVisible(false);
-    setSelectedUser({ ...item[0] });
-  };
-
   const checkReassignCurrentUser = () => {
     setIsReassignCurrentUser(currentUser.id === selectedUser.id);
   };
@@ -188,19 +150,42 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const onTerminate = () => {
-    clearTimeout(timerId);
+  useEffect(() => {
+    // If click Delete user
+    if (isDeletingUserWithReassignment) onReassign();
 
-    dataReassignmentTerminate(user.id)
-      .then((res) => {
-        setPercent(res.percentage);
-        setIsAbortTransfer(true);
-        toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
-      })
-      .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
-      });
+    return () => {
+      setIsDeletingUserWithReassignment(false);
+      setDataReassignmentDeleteProfile(false);
+      clearTimeout(timerId);
+    };
+  }, [isDeletingUserWithReassignment]);
+
+  const onToggleDeleteProfile = () => {
+    setIsDeleteProfile((remove) => !remove);
+  };
+
+  const onTogglePeopleSelector = () => {
+    setSelectorVisible((show) => !show);
+  };
+
+  const onClose = () => {
+    setDataReassignmentDialogVisible(false);
+  };
+
+  const onClosePeopleSelector = () => {
+    setSelectorVisible(false);
+  };
+
+  const onStartAgain = () => {
+    setShowProgress(false);
+    setPercent(0);
+    setIsAbortTransfer(false);
+  };
+
+  const onAccept = (item) => {
+    setSelectorVisible(false);
+    setSelectedUser({ ...item[0] });
   };
 
   const filter = Filter.getDefault();

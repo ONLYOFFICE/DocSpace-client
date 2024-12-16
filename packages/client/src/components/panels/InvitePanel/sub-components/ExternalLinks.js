@@ -86,29 +86,15 @@ const ExternalLinks = ({
 
   const inputsRef = useRef();
 
-  const toggleLinks = async (e) => {
-    if (isLinksToggling) return;
+  const copyLink = (link) => {
+    if (link) {
+      toastr.success(
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
+      );
 
-    setIsLinksToggling(true);
-
-    try {
-      if (roomId === -1) {
-        if (e?.target?.checked) {
-          const link = shareLinks.find((l) => l.access === defaultAccess);
-
-          link.shareLink = await getPortalInviteLink(defaultAccess);
-
-          setActiveLink(link);
-          copyLink(link.shareLink);
-        }
-      } else {
-        !externalLinksVisible ? await editLink() : await disableLink();
-      }
-      onChangeExternalLinksVisible(!externalLinksVisible);
-    } catch (error) {
-      toastr.error(error.message);
-    } finally {
-      setIsLinksToggling(false);
+      copyShareLink(link);
     }
   };
 
@@ -168,15 +154,29 @@ const ExternalLinks = ({
     copyLink(link.shareLink);
   };
 
-  const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
+  const toggleLinks = async (e) => {
+    if (isLinksToggling) return;
 
-      copyShareLink(link);
+    setIsLinksToggling(true);
+
+    try {
+      if (roomId === -1) {
+        if (e?.target?.checked) {
+          const link = shareLinks.find((l) => l.access === defaultAccess);
+
+          link.shareLink = await getPortalInviteLink(defaultAccess);
+
+          setActiveLink(link);
+          copyLink(link.shareLink);
+        }
+      } else {
+        !externalLinksVisible ? await editLink() : await disableLink();
+      }
+      onChangeExternalLinksVisible(!externalLinksVisible);
+    } catch (error) {
+      toastr.error(error.message);
+    } finally {
+      setIsLinksToggling(false);
     }
   };
 

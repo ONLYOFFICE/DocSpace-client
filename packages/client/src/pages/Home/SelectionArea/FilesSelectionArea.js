@@ -44,6 +44,15 @@ const SelectionArea = (props) => {
 
   const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
 
+  const setTilesCount = () => {
+    const newCount = getCountTilesInRow();
+    setCountTilesInRow(newCount);
+  };
+
+  const onResize = () => {
+    setTilesCount();
+  };
+
   useEffect(() => {
     setTilesCount();
     window.addEventListener("resize", onResize);
@@ -51,16 +60,7 @@ const SelectionArea = (props) => {
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  }, [isInfoPanelVisible]);
-
-  const onResize = () => {
-    setTilesCount();
-  };
-
-  const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
-    setCountTilesInRow(newCount);
-  };
+  }, [isInfoPanelVisible, onResize]);
 
   const onMove = ({ added, removed, clear }) => {
     setSelections(added, removed, clear);

@@ -55,20 +55,6 @@ const Main = (props) => {
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
 
-  React.useEffect(() => {
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-
-      clearTimeout(updateSizeRef.current);
-    };
-  }, [onResize, isFrame]);
-
-  React.useEffect(() => {
-    onResize();
-  }, [mainBarVisible, isFrame]);
-
   const onResize = React.useCallback(
     (e) => {
       let correctHeight = window.innerHeight;
@@ -94,6 +80,20 @@ const Main = (props) => {
     },
     [mainBarVisible, isFrame],
   );
+
+  React.useEffect(() => {
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(updateSizeRef.current);
+    };
+  }, [onResize]);
+
+  React.useEffect(() => {
+    onResize();
+  }, [mainBarVisible, isFrame, onResize]);
+
   return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
 };
 

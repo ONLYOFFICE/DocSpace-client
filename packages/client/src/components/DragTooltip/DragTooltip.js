@@ -88,7 +88,7 @@ const DragTooltip = (props) => {
 
   useEffect(() => {
     setTooltipPosition();
-  }, [tooltipPageX, tooltipPageY, setTooltipPosition]);
+  }, [setTooltipPosition, tooltipPageX, tooltipPageY]);
 
   const renderFileMoveTooltip = useCallback(() => {
     const reg = /^([^\\]*)\.(\w+)/;

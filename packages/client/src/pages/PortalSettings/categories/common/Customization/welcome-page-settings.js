@@ -91,6 +91,53 @@ const WelcomePageSettingsComponent = (props) => {
     greetingSettings: "",
   });
 
+  const settingIsEqualInitialValue = (stateName, value) => {
+    const defaultValue = JSON.stringify(state[`${stateName}Default`]);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    settingNames.forEach((settingName) => {
+      const valueFromSessionStorage = getFromSessionStorage(settingName);
+      if (
+        valueFromSessionStorage !== "none" &&
+        valueFromSessionStorage !== null &&
+        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
+      )
+        hasChanged = true;
+    });
+
+    if (hasChanged !== state.hasChanged) {
+      setState((val) => ({
+        ...val,
+        hasChanged,
+        showReminder: hasChanged,
+      }));
+    }
+  };
+
+  const checkInnerWidth = () => {
+    if (!isMobileDevice()) {
+      setState((val) => ({ ...val, isCustomizationView: true }));
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setState((val) => ({ ...val, isCustomizationView: false }));
+    }
+  };
+
   React.useEffect(() => {
     greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
 
@@ -136,7 +183,7 @@ const WelcomePageSettingsComponent = (props) => {
     return () => {
       window.removeEventListener("resize", checkInnerWidth);
     };
-  }, []);
+  }, [isLoaded, isMobileView, t, tReady, greetingSettings, navigate, setIsLoaded, setIsLoadedWelcomePageSettings]);
 
   React.useEffect(() => {
     if (
@@ -162,12 +209,17 @@ const WelcomePageSettingsComponent = (props) => {
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
     }
+
+    return () => {
+      window.removeEventListener("resize", checkScroll);
+    };
   }, [
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
     state.hasScroll,
     state.greetingTitle,
+    state.greetingTitleDefault,
     state.isLoadingGreetingSave,
     state.isLoadingGreetingRestore,
   ]);
@@ -255,58 +307,6 @@ const WelcomePageSettingsComponent = (props) => {
       });
   };
 
-  const settingIsEqualInitialValue = (stateName, value) => {
-    const defaultValue = JSON.stringify(state[`${stateName}Default`]);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
-
-  const checkChanges = () => {
-    let hasChanged = false;
-
-    settingNames.forEach((settingName) => {
-      const valueFromSessionStorage = getFromSessionStorage(settingName);
-      if (
-        valueFromSessionStorage !== "none" &&
-        valueFromSessionStorage !== null &&
-        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
-      )
-        hasChanged = true;
-    });
-
-    if (hasChanged !== state.hasChanged) {
-      setState((val) => ({
-        ...val,
-        hasChanged,
-        showReminder: hasChanged,
-      }));
-    }
-  };
-
-  const checkInnerWidth = () => {
-    if (!isMobileDevice()) {
-      setState((val) => ({ ...val, isCustomizationView: true }));
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setState((val) => ({ ...val, isCustomizationView: false }));
-    }
-  };
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
-
   const settingsBlock = (
     <div className="settings-block">
       <FieldContainer
@@ -329,6 +329,11 @@ const WelcomePageSettingsComponent = (props) => {
       </FieldContainer>
     </div>
   );
+
+  const onClickLink = (e) => {
+    e.preventDefault();
+    navigate(e.target.pathname);
+  };
 
   return !isLoadedPage ? (
     <LoaderCustomization welcomePage />

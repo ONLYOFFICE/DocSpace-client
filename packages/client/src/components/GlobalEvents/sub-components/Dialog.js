@@ -64,6 +64,32 @@ const Dialog = ({
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
+  const onCancelAction = useCallback((e) => {
+    onCancel && onCancel(e);
+  }, [onCancel]);
+
+  const onCloseAction = useCallback((e) => {
+    onClose && onClose(e);
+  }, [onClose]);
+
+  const onSaveAction = useCallback(
+    (e) => {
+      setIsDisabled(true);
+      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+      onSave && onSave(e, value);
+    },
+    [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
+  );
+
+  const onKeyUpHandler = useCallback(
+    (e) => {
+      if (e.keyCode === 27) onCancelAction(e);
+
+      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
+    },
+    [onCancelAction, onSaveAction, withForm, isError],
+  );
+
   useEffect(() => {
     keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
   }, [isCreateDialog, keepNewFileName]);
@@ -72,20 +98,11 @@ const Dialog = ({
     const input = document?.getElementById("create-text-input");
     if (isMobile && isIOS) return;
     if (input && value === startValue && !isChanged) input.select();
-  }, [visible, value]);
+  }, [visible, value, startValue, isChanged]);
 
   useEffect(() => {
     if (startValue) setValue(startValue);
   }, [startValue]);
-
-  const onKeyUpHandler = useCallback(
-    (e) => {
-      if (e.keyCode === 27) onCancelAction(e);
-
-      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
-    },
-    [value, isError],
-  );
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUpHandler, false);
@@ -101,38 +118,16 @@ const Dialog = ({
     newValue = removeEmojiCharacters(newValue);
     if (newValue.match(folderFormValidation)) {
       setIsError(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsError(false);
     }
 
-    // newValue = newValue.replace(folderFormValidation, "_");
-
-    // console.log(folderFormValidation);
-
     setValue(newValue);
     setIsChanged(true);
-  }, []);
+  }, [folderFormValidation]);
 
   const onFocus = useCallback((e) => {
     e.target.select();
-  }, []);
-
-  const onSaveAction = useCallback(
-    (e) => {
-      setIsDisabled(true);
-      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
-      onSave && onSave(e, value);
-    },
-    [onSave, isCreateDialog, value, isChecked],
-  );
-
-  const onCancelAction = useCallback((e) => {
-    onCancel && onCancel(e);
-  }, []);
-
-  const onCloseAction = useCallback((e) => {
-    onClose && onClose(e);
   }, []);
 
   const onChangeCheckbox = () => {

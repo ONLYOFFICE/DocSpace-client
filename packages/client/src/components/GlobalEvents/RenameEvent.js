@@ -55,6 +55,14 @@ const RenameEvent = ({
 
   const { t } = useTranslation(["Files"]);
 
+  const onCancel = React.useCallback(
+    (e) => {
+      onClose && onClose(e);
+      setEventDialogVisible(false);
+    },
+    [onClose, setEventDialogVisible],
+  );
+
   React.useEffect(() => {
     setStartValue(getTitleWithoutExtension(item, false));
 
@@ -125,15 +133,7 @@ const RenameEvent = ({
 
             onCancel();
           });
-  }, []);
-
-  const onCancel = React.useCallback(
-    (e) => {
-      onClose && onClose(e);
-      setEventDialogVisible(false);
-    },
-    [onClose, setEventDialogVisible],
-  );
+  }, [onCancel, addActiveItems, clearActiveOperations, completeAction, item, t, type, updateFile, renameFolder]);
 
   return (
     <Dialog

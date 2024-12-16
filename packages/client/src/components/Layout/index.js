@@ -95,9 +95,29 @@ const Layout = (props) => {
   let intervalHandler;
   let timeoutHandler;
 
+  const onWidthChange = (e) => {
+    const { matches } = e;
+    setIsTabletView(matches);
+  };
+
+  const onResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const onOrientationChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
+    setWindowAngle(angle);
+    setWindowWidth(window.innerWidth);
+  };
+
   useEffect(() => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
+
   useEffect(() => {
     setIsTabletView(isTabletUtils());
 
@@ -109,7 +129,7 @@ const Layout = (props) => {
       if (intervalHandler) clearInterval(intervalHandler);
       if (timeoutHandler) clearTimeout(timeoutHandler);
     };
-  }, []);
+  }, [onWidthChange]);
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -133,7 +153,7 @@ const Layout = (props) => {
         onOrientationChange,
       );
     };
-  }, [isTabletView]);
+  }, [isTabletView, isFrame, onResize, onOrientationChange]);
 
   useEffect(() => {
     const htmlEl = document.getElementsByTagName("html")[0];
@@ -144,25 +164,6 @@ const Layout = (props) => {
 
     htmlEl.style.overflow = "hidden";
   }, []);
-
-  const onWidthChange = (e) => {
-    const { matches } = e;
-
-    setIsTabletView(matches);
-  };
-
-  const onResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  const onOrientationChange = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
-
-    setWindowAngle(angle);
-    setWindowWidth(window.innerWidth);
-  };
 
   return (
     <StyledContainer className="Layout" isPortrait={isPortrait}>

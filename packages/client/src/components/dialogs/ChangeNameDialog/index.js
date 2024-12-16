@@ -47,15 +47,7 @@ const StyledBodyContent = styled.div`
 
 const ChangeNameDialog = (props) => {
   const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
-  const {
-    visible,
-    onClose,
-    profile,
-    updateProfile,
-    updateProfileInUsers,
-    fromList,
-    userNameRegex,
-  } = props;
+  const { visible, onClose, profile, updateProfile, userNameRegex } = props;
   const [firstName, setFirstName] = useState(profile.firstName);
   const [lastName, setLastName] = useState(profile.lastName);
   const [isSaving, setIsSaving] = useState(false);

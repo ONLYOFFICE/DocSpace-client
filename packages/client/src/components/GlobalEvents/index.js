@@ -220,7 +220,7 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onChangeUserType = useCallback((e) => {
+  const onChangeUserType = useCallback(() => {
     setChangeUserTypeDialogProps({
       visible: true,
       onClose: () => {

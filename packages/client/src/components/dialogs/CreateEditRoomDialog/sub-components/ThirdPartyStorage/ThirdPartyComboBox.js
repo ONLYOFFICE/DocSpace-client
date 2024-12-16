@@ -138,7 +138,6 @@ const ThirdPartyComboBox = ({
   setIsOauthWindowOpen,
 
   isDisabled,
-  setIsScrollLocked,
   isAdmin,
 }) => {
   const defaultSelectedItem = {

@@ -27,12 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobileOnly } from "react-device-detect";
 import Badges from "../components/Badges";
 
 export default function withBadges(WrappedComponent) {
@@ -45,8 +43,6 @@ export default function withBadges(WrappedComponent) {
 
     onShowVersionHistory = () => {
       const {
-        homepage,
-        isTabletView,
         item,
         setIsVerHistoryPanel,
         fetchFileVersions,

@@ -25,14 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
-import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-import {
-  connectedCloudsTypeIcon as getProviderTypeIcon,
-  connectedCloudsTypeTitleTranslation as getProviderTypeTitle,
-} from "@docspace/client/src/helpers/filesUtils";
+import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "@docspace/client/src/helpers/filesUtils";
 
 import PermanentSetting from "./PermanentSetting";
 
@@ -43,26 +39,9 @@ const StyledPermanentSettings = styled.div`
   margin-top: -12px;
 `;
 
-const PermanentSettings = ({
-  t,
-  title,
-  isThirdparty,
-  storageLocation,
-  isPrivate,
-  isDisabled,
-}) => {
+const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
   const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
   const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
-
-  const createThirdpartyPath = () => {
-    const path = storageLocation.parentId.split("|");
-    path.shift();
-    path.unshift(thirdpartyTitle);
-    path.push(thirdpartyFolderName);
-    return `(${path.join("/")})`;
-  };
-
-  const thirdpartyPath = isThirdparty ? createThirdpartyPath() : "";
 
   return (
     <StyledPermanentSettings displayNone={!(isPrivate || isThirdparty)}>

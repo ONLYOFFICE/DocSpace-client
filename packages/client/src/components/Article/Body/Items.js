@@ -214,8 +214,7 @@ const Items = ({
   isVisitor,
   isCollaborator,
   isAdmin,
-  myId,
-  commonId,
+
   currentId,
   draggableItems,
   setBufferSelection,

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 const BackupToPublicRoomComponent = (props) => {
-  const { visible, setIsVisible, backupToPublicRoomData } = props;
+  const { visible, setIsVisible } = props;
   const { t, ready } = useTranslation(["Files", "Common"]);
 
   const onClose = () => {

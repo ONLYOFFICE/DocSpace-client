@@ -35,7 +35,6 @@ import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
-import { isDesktop } from "@docspace/shared/utils";
 
 const StyledRoomTypeList = styled.div`
   margin-top: 20px;

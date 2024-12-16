@@ -130,10 +130,7 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  (
-    { peopleStore, filesStore, auth, currentQuotaStore, infoPanelStore },
-    { type },
-  ) => {
+  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
     const { usersStore } = peopleStore;
     const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
       usersStore;

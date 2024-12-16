@@ -187,7 +187,7 @@ const PasswordRow = ({
     </StyledDownloadContent>
   );
 };
-export default inject(({ filesStore, dialogsStore }) => {
+export default inject(({ dialogsStore }) => {
   const {
     resetDownloadedFileFormat,
     discardDownloadedFile,

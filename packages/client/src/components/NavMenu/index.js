@@ -33,14 +33,14 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { isPublicPreview } from "@docspace/shared/utils/common";
-import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
+
 import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
@@ -86,7 +86,6 @@ const NavMenu = (props) => {
     isLoaded,
     asideContent,
 
-    isDesktop = false,
     isFrame,
     showHeader,
     currentDeviceType,
@@ -101,7 +100,6 @@ const NavMenu = (props) => {
 
   const timeout = React.useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
@@ -211,7 +209,6 @@ NavMenu.propTypes = {
   isNavHoverEnabled: PropTypes.bool,
   isNavOpened: PropTypes.bool,
   isAsideVisible: PropTypes.bool,
-  isDesktop: PropTypes.bool,
 
   asideContent: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

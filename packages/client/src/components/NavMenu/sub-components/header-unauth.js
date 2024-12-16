@@ -86,7 +86,6 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 `;
 
 const HeaderUnAuth = ({
-  enableAdmMess,
   wizardToken,
   isAuthenticated,
   isLoaded,
@@ -136,7 +135,6 @@ const HeaderUnAuth = ({
 HeaderUnAuth.displayName = "Header";
 
 HeaderUnAuth.propTypes = {
-  enableAdmMess: PropTypes.bool,
   wizardToken: PropTypes.string,
   isAuthenticated: PropTypes.bool,
   isLoaded: PropTypes.bool,

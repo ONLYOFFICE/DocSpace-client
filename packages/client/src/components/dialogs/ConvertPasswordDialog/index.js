@@ -37,8 +37,6 @@ import config from "PACKAGE_FILE";
 import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 
-let isMounted = false;
-
 const ConvertPasswordDialogComponent = (props) => {
   const {
     t,
@@ -126,11 +124,9 @@ const ConvertPasswordDialogComponent = (props) => {
   }, [isLoading]);
 
   useEffect(() => {
-    isMounted = true;
     setPasswordEntryProcess(true);
 
     return () => {
-      isMounted = false;
       setPasswordEntryProcess(false);
     };
   }, []);
@@ -213,7 +209,6 @@ export default inject(
     settingsStore,
     dialogsStore,
     uploadDataStore,
-    filesSettingsStore,
   }) => {
     const {
       convertPasswordDialogVisible: visible,

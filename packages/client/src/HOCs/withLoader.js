@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
 import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";

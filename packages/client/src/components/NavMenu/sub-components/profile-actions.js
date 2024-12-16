@@ -26,14 +26,13 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Button } from "@docspace/shared/components/button";
 import { getUserType } from "@docspace/shared/utils/common";
 import ProfileMenu from "./profile-menu";
@@ -78,7 +77,7 @@ class ProfileActions extends React.PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
       this.setState({ user: this.props.user });
       this.getAvatar();
@@ -164,7 +163,7 @@ class ProfileActions extends React.PureComponent {
         >
           <div style={{ paddingTop: "8px" }}>
             {this.props.userActions.map(
-              (action, index) =>
+              (action) =>
                 action &&
                 (action?.isButton ? (
                   <StyledButtonWrapper key={action.key}>

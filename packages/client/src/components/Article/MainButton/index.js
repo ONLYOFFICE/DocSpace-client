@@ -126,7 +126,6 @@ const StyledButton = styled(Button)`
 const ArticleMainButtonContent = (props) => {
   const {
     t,
-    tReady,
     isMobileArticle,
 
     isPrivacy,
@@ -159,9 +158,6 @@ const ArticleMainButtonContent = (props) => {
     isOwner,
     isAdmin,
     isRoomAdmin,
-    isCollaborator,
-
-    setInvitePanelOptions,
 
     mainButtonMobileVisible,
     versionHistoryPanelVisible,
@@ -179,7 +175,6 @@ const ArticleMainButtonContent = (props) => {
     parentRoomType,
     isFolder,
     createFoldersTree,
-    showWarningDialog,
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
@@ -503,16 +498,6 @@ const ArticleMainButtonContent = (props) => {
       key: "form-file",
     };
 
-    const showSelectorFormRoomDocx = {
-      id: "actions_from-room_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormFileReactSvgUrl,
-      label: t("Translations:SubNewFormFile"),
-      onClick: () => onShowFormRoomSelectFileDialog(),
-      disabled: isPrivacy,
-      key: "form-file",
-    };
-
     const formGallery = {
       id: "actions_template_oforms-gallery",
       className: "main-button_drop-down_sub",
@@ -822,7 +807,6 @@ export default inject(
     pluginStore,
     versionHistoryStore,
     userStore,
-    currentTariffStatusStore,
     filesActionsStore,
     currentQuotaStore,
     peopleStore,

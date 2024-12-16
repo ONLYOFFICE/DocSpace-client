@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import { mobile } from "@docspace/shared/utils";

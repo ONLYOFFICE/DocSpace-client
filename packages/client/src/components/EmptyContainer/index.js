@@ -77,11 +77,8 @@ export default inject(
   ({
     settingsStore,
     filesStore,
-    dialogsStore,
-    currentQuotaStore,
     selectedFolderStore,
     clientLoadingStore,
-    currentTariffStatusStore,
     publicRoomStore,
     treeFoldersStore,
   }) => {

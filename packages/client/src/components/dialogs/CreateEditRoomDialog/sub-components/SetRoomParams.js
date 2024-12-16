@@ -141,7 +141,6 @@ const SetRoomParams = ({
   currentColorScheme,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
-  image,
   cover,
   covers,
   setCover,
@@ -160,7 +159,6 @@ const SetRoomParams = ({
 
   const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
 
-  const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const checkWidth = () => {
@@ -294,9 +292,6 @@ const SetRoomParams = ({
       },
     });
   };
-
-  const onChangeIsPrivate = () =>
-    setRoomParams({ ...roomParams, isPrivate: !roomParams.isPrivate });
 
   const onChangeStorageLocation = (storageLocation) =>
     setRoomParams({ ...roomParams, storageLocation });

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
@@ -45,8 +44,6 @@ const DownloadRow = (props) => {
   } = props;
 
   // console.log("DownloadRow render");
-
-  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
 
   const element = getItemIcon(file);
 
@@ -79,7 +76,7 @@ const DownloadRow = (props) => {
           <LinkWithDropdown
             className="download-dialog-link"
             dropDownClassName="download-dialog-dropDown"
-            isOpen={dropDownIsOpen}
+            isOpen={false}
             dropdownType="alwaysDashed"
             containerMinWidth="fit-content"
             data={dropdownItems}

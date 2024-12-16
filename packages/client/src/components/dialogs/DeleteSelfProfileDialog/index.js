@@ -46,7 +46,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
   }
 
   onDeleteSelfProfileInstructions = () => {
-    const { t, email, onClose } = this.props;
+    const { onClose } = this.props;
     this.setState({ isRequestRunning: true }, () => {
       sendInstructionsToDelete()
         .then((res) => {
@@ -67,7 +67,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
 
   render() {
     console.log("DeleteSelfProfileDialog render");
-    const { t, tReady, visible, email, onClose, theme } = this.props;
+    const { t, tReady, visible, email, onClose } = this.props;
     const { isRequestRunning } = this.state;
 
     return (

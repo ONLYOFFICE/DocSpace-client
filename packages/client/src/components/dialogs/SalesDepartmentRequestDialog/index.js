@@ -55,7 +55,8 @@ const SalesDepartmentRequestDialog = ({
     "Common",
   ]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // TODO: setIsLoading is useless
+  const [isLoading, setIsLoading] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);

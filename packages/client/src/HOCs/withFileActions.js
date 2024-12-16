@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
@@ -204,15 +204,8 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFilesClick = (e) => {
-      const {
-        t,
-        item,
-        openFileAction,
-        setParentId,
-        setRoomType,
-        isTrashFolder,
-        isArchiveFolder,
-      } = this.props;
+      const { t, item, openFileAction, setParentId, isTrashFolder } =
+        this.props;
 
       if (
         (e && e.target?.tagName === "INPUT") ||
@@ -274,7 +267,6 @@ export default function withFileActions(WrappedFileItem) {
         allowShareIn,
         isPrivacy,
 
-        sectionWidth,
         isSelected,
         dragging,
         isFolder,

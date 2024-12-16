@@ -40,7 +40,6 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { showProgress } from "@docspace/shared/utils/common";
 import Banner from "./Banner";
 import Items from "./Items";
 
@@ -48,8 +47,6 @@ const ArticleBodyContent = (props) => {
   const {
     isDesktopClient,
     firstLoad,
-    FirebaseHelper,
-    theme,
 
     showText,
     toggleArticleOpen,
@@ -80,7 +77,6 @@ const ArticleBodyContent = (props) => {
 
   const getHashDate = () => new Date().getTime();
 
-  const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
   const [hashDate, setHashDate] = React.useState(getHashDate);
 

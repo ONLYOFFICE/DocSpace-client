@@ -29,8 +29,6 @@ import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
@@ -147,9 +145,6 @@ const Badges = ({
   const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
-
-  const iconForm =
-    sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
   const iconEdit = FileActionsConvertEditDocReactSvgUrl;
 

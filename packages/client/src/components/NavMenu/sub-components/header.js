@@ -24,23 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
-import { isMobileOnly, isMobile } from "react-device-detect";
-import { useTranslation } from "react-i18next";
 import {
   isDesktop,
-  tablet,
-  mobile,
   NoUserSelect,
   getLogoUrl,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { globalColors } from "@docspace/shared/themes";
 import HeaderCatalogBurger from "./header-catalog-burger";
 
@@ -87,71 +82,17 @@ const Header = styled.header.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledLink = styled.div.attrs(injectDefaultTheme)`
-  display: inline;
-  .nav-menu-header_link {
-    color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
-  }
-
-  a {
-    text-decoration: none;
-  }
-  :hover {
-    color: ${(props) => props.theme.header.linkColor};
-    -webkit-text-decoration: underline;
-    text-decoration: underline;
-  }
-`;
-
-const versionBadgeProps = {
-  fontWeight: "600",
-  fontSize: "13px",
-};
-
-const StyledNavigationIconsWrapper = styled.div`
-  height: 20px;
-  position: absolute;
-
-  inset-inline-start: ${isMobile ? "254px" : "275px"};
-  display: ${isMobileOnly ? "none" : "flex"};
-  justify-content: flex-start;
-  align-items: center;
-
-  @media ${tablet} {
-    inset-inline-start: 254px;
-  }
-
-  @media ${mobile} {
-    display: none;
-  }
-`;
-
 const HeaderComponent = ({
   currentProductName,
-  // totalNotifications,
-  onClick,
-  onNavMouseEnter,
-  onNavMouseLeave,
   defaultPage,
-  // mainModules,
-  isNavOpened,
   currentProductId,
-  toggleAside,
   isLoaded,
-  version,
   isAuthenticated,
-  isAdmin,
-  backdropClick,
   isPreparationPortal,
   theme,
   toggleArticleOpen,
-  logoUrl,
   customHeader,
-  ...props
 }) => {
-  const { t } = useTranslation("Common");
-
   const location = useLocation();
 
   const isFormGallery = location.pathname.includes("/form-gallery");
@@ -319,21 +260,9 @@ const HeaderComponent = ({
 HeaderComponent.displayName = "Header";
 
 HeaderComponent.propTypes = {
-  // totalNotifications: PropTypes.number,
-  onClick: PropTypes.func,
-
   defaultPage: PropTypes.string,
-
-  isNavOpened: PropTypes.bool,
-  onNavMouseEnter: PropTypes.func,
-  onNavMouseLeave: PropTypes.func,
-  toggleAside: PropTypes.func,
-  logoUrl: PropTypes.object,
   isLoaded: PropTypes.bool,
-  version: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  isAdmin: PropTypes.bool,
-  needNavMenu: PropTypes.bool,
 };
 
 export default inject(({ settingsStore, authStore }) => {

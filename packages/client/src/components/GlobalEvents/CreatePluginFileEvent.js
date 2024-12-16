@@ -59,7 +59,7 @@ const CreatePluginFile = ({
 }) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
-  const onCloseAction = (e) => {
+  const onCloseAction = () => {
     onCancel && onCancel();
     onClose && onClose();
   };

@@ -37,7 +37,6 @@ const withHotkeys = (Component) => {
     const {
       t,
 
-      setSelected,
       viewAs,
       setViewAs,
       setHotkeyPanelVisible,

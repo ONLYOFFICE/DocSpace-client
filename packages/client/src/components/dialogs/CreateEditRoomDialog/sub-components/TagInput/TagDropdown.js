@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
-import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
+import { StyledDropDown } from "../StyledDropdown";
 
 const TagDropdown = ({
   open,
@@ -36,7 +36,6 @@ const TagDropdown = ({
   tagInputValue,
   setTagInputValue,
   createTagLabel,
-  isDisabled,
   inputRef,
   closeDropdown,
 }) => {
@@ -48,7 +47,7 @@ const TagDropdown = ({
     e.preventDefault();
   };
 
-  const onClickOutside = (e) => {
+  const onClickOutside = () => {
     /*     if (!e) return;
     if (e.target.id === "shared_tags-input") return; */
     // inputRef?.current?.blur();

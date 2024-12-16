@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 

@@ -46,10 +46,6 @@ const RenameEvent = ({
 
   setEventDialogVisible,
   eventDialogVisible,
-
-  selectedFolderId,
-
-  setSelectedFolder,
 }) => {
   const [startValue, setStartValue] = React.useState("");
 

@@ -31,7 +31,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
+
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
@@ -250,7 +250,6 @@ export default inject(
     dialogsStore,
     oformsStore,
     filesSettingsStore,
-    clientLoadingStore,
     currentTariffStatusStore,
     publicRoomStore,
   }) => {

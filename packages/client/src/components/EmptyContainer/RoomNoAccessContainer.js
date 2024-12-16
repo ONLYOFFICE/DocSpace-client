@@ -35,7 +35,6 @@ import { useNavigate } from "react-router-dom";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { frameCallEvent } from "@docspace/shared/utils/common";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

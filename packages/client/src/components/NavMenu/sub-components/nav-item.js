@@ -172,7 +172,7 @@ const NavItem = React.memo((props) => {
       {...rest}
     >
       {iconUrl ? (
-        <ReactSVG src={iconUrl} beforeInjection={(svg) => {}} />
+        <ReactSVG src={iconUrl} beforeInjection={() => {}} />
       ) : (
         <>
           {iconName === "MenuIcon" && <VersionBadge>BETA</VersionBadge>}

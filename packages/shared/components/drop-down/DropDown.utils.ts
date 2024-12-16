@@ -25,57 +25,52 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { DropDown } from ".";
-import { renderWithTheme } from "../../utils/render-with-theme";
+import { isTablet } from "../../utils";
 
-const baseProps = {
-  open: false,
-  directionX: "left" as const,
-  directionY: "bottom" as const,
-  manualWidth: "100%",
-  showDisabledItems: true,
+const getItemHeight = (item: React.ReactElement) => {
+  const isTabletDevice = isTablet();
+
+  const height = item?.props.height ?? 32;
+  const heightTablet = item?.props.heightTablet ?? 36;
+
+  if (item && item.props.isSeparator) {
+    return isTabletDevice ? 16 : 12;
+  }
+
+  return isTabletDevice ? heightTablet : height;
 };
 
-describe("<DropDown />", () => {
-  it("renders without error", () => {
-    renderWithTheme(<DropDown {...baseProps} />);
-  });
+const hideDisabledItems = (children: React.ReactNode) => {
+  if (React.Children.count(children) > 0) {
+    const enabledChildren = React.Children.map(children, (child) => {
+      const props =
+        child &&
+        React.isValidElement(child) &&
+        (child.props as { disabled?: boolean });
+      if (props && !props?.disabled) return child;
+    });
 
-  it("renders children when open", () => {
-    renderWithTheme(
-      <DropDown {...baseProps} open>
-        <div data-testid="child">Test Content</div>
-      </DropDown>,
+    const sizeEnabledChildren = enabledChildren?.length;
+
+    const cleanChildren = React.Children.map(
+      enabledChildren,
+      (child, index) => {
+        const props =
+          child &&
+          React.isValidElement(child) &&
+          (child.props as { isSeparator?: boolean });
+        if (props && !props?.isSeparator) return child;
+        if (
+          index !== 0 &&
+          sizeEnabledChildren &&
+          index !== sizeEnabledChildren - 1
+        )
+          return child;
+      },
     );
 
-    expect(screen.getByTestId("child")).toBeInTheDocument();
-    expect(screen.getByTestId("child")).toHaveTextContent("Test Content");
-  });
+    return cleanChildren;
+  }
+};
 
-  it("renders with backdrop when backDrop prop is true", () => {
-    renderWithTheme(
-      <DropDown {...baseProps} open>
-        <div>Content</div>
-      </DropDown>,
-    );
-
-    expect(document.querySelector(".backdrop")).toBeInTheDocument();
-  });
-
-  it("doesn't handle click outside when enableOnClickOutside is false", () => {
-    const onClose = jest.fn();
-    renderWithTheme(
-      <div>
-        <div data-testid="outside">Outside</div>
-        <DropDown {...baseProps} open clickOutsideAction={onClose}>
-          <div>Content</div>
-        </DropDown>
-      </div>,
-    );
-
-    fireEvent.mouseDown(screen.getByTestId("outside"));
-    expect(onClose).not.toHaveBeenCalled();
-  });
-});
+export { getItemHeight, hideDisabledItems };

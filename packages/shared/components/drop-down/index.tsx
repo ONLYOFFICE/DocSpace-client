@@ -27,7 +27,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";

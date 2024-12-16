@@ -54,6 +54,8 @@ export type ScrollbarProps = {
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   children?: React.ReactNode;
+
+  bodyPadding?: string;
 };
 
 export type CustomScrollbarsVirtualListProps = Pick<

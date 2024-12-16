@@ -56,7 +56,7 @@ const getLogger = () => {
 
       const streamName = logStreamName
         .replace("${hostname}", os.hostname())
-        .replace("${applicationContext}", "Sdk")
+        .replace("${applicationContext}", "SDK")
         .replace("${guid}", randomUUID())
         .replace("${date}", new Date().toLocaleString());
 

@@ -27,15 +27,15 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { mobile, tablet } from "../../utils";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { FloatingButton } from "../floating-button";
 import { ProgressBarMobileDefaultStyles } from "./MainButtonMobile.types";
 
-const StyledFloatingButton = styled(FloatingButton)`
+const StyledFloatingButton = styled(FloatingButton).attrs(injectDefaultTheme)`
   position: relative;
   z-index: 1010;
   background: ${(props) => props.theme.mainButtonMobile.buttonColor};
@@ -83,7 +83,6 @@ const StyledFloatingButton = styled(FloatingButton)`
     }
   }
 `;
-StyledFloatingButton.defaultProps = { theme: Base };
 
 const mobileDropDown = css`
   @media ${mobile} {
@@ -107,7 +106,9 @@ const StyledRenderItem = styled.div`
   background: ${(props) => props.theme.backgroundColor};
 `;
 
-const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
+const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)<{
+  heightProp?: string;
+}>`
   position: ${(props) => props.theme.mainButtonMobile.dropDown.position};
   width: ${(props) => props.theme.mainButtonMobile.dropDown.width};
   max-width: calc(100vw - 48px);
@@ -181,8 +182,6 @@ const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
   }
 `;
 
-StyledDropDown.defaultProps = { theme: Base };
-
 const StyledDropDownItem = styled(DropDownItem)`
   padding: 6px 23px;
 
@@ -191,7 +190,9 @@ const StyledDropDownItem = styled(DropDownItem)`
   }
 `;
 
-const StyledButtonOptions = styled.div<{ withoutButton?: boolean }>`
+const StyledButtonOptions = styled.div.attrs(injectDefaultTheme)<{
+  withoutButton?: boolean;
+}>`
   padding: 16px 0;
   background-color: ${(props) =>
     props.withoutButton
@@ -228,8 +229,6 @@ const StyledButtonOptions = styled.div<{ withoutButton?: boolean }>`
   }
 `;
 
-StyledButtonOptions.defaultProps = { theme: Base };
-
 const StyledContainerAction = styled.div`
   padding: 16px 0px;
 
@@ -238,7 +237,7 @@ const StyledContainerAction = styled.div`
   }
 `;
 
-const StyledButtonWrapper = styled.div<{
+const StyledButtonWrapper = styled.div.attrs(injectDefaultTheme)<{
   isOpenButton?: boolean;
   isUploading?: boolean;
 }>`
@@ -251,9 +250,9 @@ const StyledButtonWrapper = styled.div<{
       : props.theme.mainButtonMobile?.buttonWrapper.background};
 `;
 
-StyledButtonWrapper.defaultProps = { theme: Base };
-
-const StyledProgressContainer = styled.div<{ isUploading?: boolean }>`
+const StyledProgressContainer = styled.div.attrs(injectDefaultTheme)<{
+  isUploading?: boolean;
+}>`
   display: ${(props) => (props.isUploading ? "flex" : "none")};
   flex-direction: column;
   background-color: ${(props) =>
@@ -264,13 +263,7 @@ const StyledProgressContainer = styled.div<{ isUploading?: boolean }>`
   padding: 0 24px 34px;
 `;
 
-StyledProgressContainer.defaultProps = {
-  theme: Base,
-};
-
-StyledButtonWrapper.defaultProps = { theme: Base };
-
-const StyledProgressBarContainer = styled.div<{
+const StyledProgressBarContainer = styled.div.attrs(injectDefaultTheme)<{
   isUploading?: boolean;
   error: boolean;
 }>`
@@ -341,9 +334,7 @@ const StyledProgressBarContainer = styled.div<{
   }
 `;
 
-StyledProgressBarContainer.defaultProps = { theme: Base };
-
-const StyledMobileProgressBar = styled.div`
+const StyledMobileProgressBar = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 4px;
   background-color: ${(props) =>
@@ -352,9 +343,9 @@ const StyledMobileProgressBar = styled.div`
   margin-top: 14px;
 `;
 
-StyledMobileProgressBar.defaultProps = { theme: Base };
-
-const StyledBar = styled.div<{ uploadPercent: number }>`
+const StyledBar = styled.div.attrs(injectDefaultTheme)<{
+  uploadPercent: number;
+}>`
   width: ${(props) => props.uploadPercent}%;
   height: 4px;
   opacity: 1;
@@ -368,8 +359,6 @@ const StyledAlertIcon = styled.div`
   top: 10px;
   inset-inline-end: 10px;
 `;
-
-StyledBar.defaultProps = { theme: Base };
 
 export {
   StyledFloatingButton,

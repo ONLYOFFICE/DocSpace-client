@@ -29,6 +29,7 @@ import { tablet, mobile } from "@docspace/shared/utils/device";
 
 import { TableContainer } from "@docspace/shared/components/table";
 import { Base, globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const WorkspacesContainer = styled.div`
   max-width: 700px;
@@ -171,7 +172,9 @@ export const UsersInfoBlock = styled.div`
   }
 `;
 
-export const StyledTableContainer = styled(TableContainer)`
+export const StyledTableContainer = styled(TableContainer).attrs(
+  injectDefaultTheme,
+)`
   margin: 0.5px 0px 20px;
 
   .table-container_header {
@@ -233,9 +236,7 @@ export const StyledTableContainer = styled(TableContainer)`
   }
 `;
 
-StyledTableContainer.defaultProps = { theme: Base };
-
-export const StyledUsersInfoWrapper = styled.div<{
+export const StyledUsersInfoWrapper = styled.div.attrs(injectDefaultTheme)<{
   selectedUsers: number;
   totalLicenceLimit: number;
 }>`

@@ -30,13 +30,12 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
-const StyledRowContainer = styled(RowContainer)`
+const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   .row-list-item:first-child {
     .row-wrapper {
       height: 57px;
@@ -58,8 +57,6 @@ const StyledRowContainer = styled(RowContainer)`
     margin-top: -1px;
   }
 `;
-
-StyledRowContainer.defaultProps = { theme: Base };
 
 const FilesRowContainer = ({
   filesList,

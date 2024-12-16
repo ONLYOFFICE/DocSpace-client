@@ -29,11 +29,11 @@ import styled from "styled-components";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-import { mobile, tablet, desktop } from "../../utils";
+import { mobile, tablet, desktop, injectDefaultTheme } from "../../utils";
 
-import { Base, TColorScheme, globalColors } from "../../themes";
+import { TColorScheme, globalColors } from "../../themes";
 
-const StyledArticle = styled.article<{
+const StyledArticle = styled.article.attrs(injectDefaultTheme)<{
   showText?: boolean;
   correctTabletHeight?: number;
   articleOpen?: boolean;
@@ -122,9 +122,9 @@ const StyledArticle = styled.article<{
   }
 `;
 
-StyledArticle.defaultProps = { theme: Base };
-
-const StyledArticleHeader = styled.div<{ showText?: boolean }>`
+const StyledArticleHeader = styled.div.attrs(injectDefaultTheme)<{
+  showText?: boolean;
+}>`
   height: 24px;
   padding-block: 23px 22px;
   padding-inline: 20px 21px;
@@ -151,8 +151,6 @@ const StyledArticleHeader = styled.div<{ showText?: boolean }>`
 
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
-
-StyledArticleHeader.defaultProps = { theme: Base };
 
 const StyledHeading = styled.div<{ showText?: boolean }>`
   height: 24px;
@@ -203,7 +201,7 @@ const StyledIconBox = styled.div<{ showText?: boolean }>`
   }
 `;
 
-const StyledMenuIcon = styled(MenuIcon)`
+const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
   display: block;
   width: 20px;
   height: 20px;
@@ -215,8 +213,6 @@ const StyledMenuIcon = styled(MenuIcon)`
   }
 `;
 
-StyledMenuIcon.defaultProps = { theme: Base };
-
 const StyledArticleMainButton = styled.div`
   padding: 0px 20px 16px;
   max-width: 100%;
@@ -227,7 +223,7 @@ const StyledArticleMainButton = styled.div`
   }
 `;
 
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   width: 17px;
   height: 17px;
   path {
@@ -235,9 +231,7 @@ const StyledCrossIcon = styled(CrossIcon)`
   }
 `;
 
-StyledCrossIcon.defaultProps = { theme: Base };
-
-const StyledArticleProfile = styled.div`
+const StyledArticleProfile = styled.div.attrs(injectDefaultTheme)`
   padding: 16px 20px;
   height: 40px !important;
   display: flex;
@@ -275,8 +269,6 @@ const StyledArticleProfile = styled.div`
   }
 `;
 
-StyledArticleProfile.defaultProps = { theme: Base };
-
 const StyledUserName = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -303,7 +295,7 @@ const StyledProfileWrapper = styled.div<{
   }
 `;
 
-const StyledArticleApps = styled.div<{
+const StyledArticleApps = styled.div.attrs(injectDefaultTheme)<{
   withDevTools: boolean;
   showText: boolean;
 }>`
@@ -333,8 +325,6 @@ const StyledArticleApps = styled.div<{
     gap: 8px;
   }
 `;
-
-StyledArticleApps.defaultProps = { theme: Base };
 
 const StyledWrapper = styled.div`
   cursor: pointer;
@@ -378,7 +368,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledHideArticleMenuButton = styled.div<{
+const StyledHideArticleMenuButton = styled.div.attrs(injectDefaultTheme)<{
   currentColorScheme: TColorScheme;
   hideProfileBlock: boolean;
   showText: boolean;
@@ -453,8 +443,6 @@ const StyledHideArticleMenuButton = styled.div<{
     }
   }
 `;
-
-StyledHideArticleMenuButton.defaultProps = { theme: Base };
 
 export {
   StyledHideArticleMenuButton,

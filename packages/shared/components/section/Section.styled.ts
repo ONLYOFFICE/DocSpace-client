@@ -36,6 +36,7 @@ import {
   mobileMore,
   desktop,
   NoUserSelect,
+  injectDefaultTheme,
 } from "../../utils";
 import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
@@ -63,8 +64,9 @@ const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
     `}
 `;
 
-const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
+const StyledInfoPanelWrapper = styled.div.attrs(({ id, theme }) => ({
   id,
+  theme: theme || Base,
 }))`
   user-select: none;
   height: auto;
@@ -78,7 +80,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   }
 `;
 
-const StyledInfoPanel = styled.div`
+const StyledInfoPanel = styled.div.attrs(injectDefaultTheme)`
   height: 100%;
   width: ${INFO_PANEL_WIDTH}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
@@ -106,7 +108,7 @@ const StyledInfoPanel = styled.div`
   }
 `;
 
-const StyledControlContainer = styled.div`
+const StyledControlContainer = styled.div.attrs(injectDefaultTheme)`
   display: none;
 
   width: 17px;
@@ -135,9 +137,7 @@ const StyledControlContainer = styled.div`
   }
 `;
 
-StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   width: 17px;
   height: 17px;
   z-index: 455;
@@ -145,10 +145,6 @@ const StyledCrossIcon = styled(CrossIcon)`
     stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
-StyledInfoPanelWrapper.defaultProps = { theme: Base };
-StyledInfoPanel.defaultProps = { theme: Base };
 
 const settingsStudioStyles = css<{ settingsStudio?: boolean }>`
   ${({ settingsStudio }) =>
@@ -368,7 +364,9 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
 const closeIconSize = "24px";
 const sizeBetweenIcons = "8px";
 
-const StyledSectionContainer = styled.section<SectionContainerProps>`
+const StyledSectionContainer = styled.section.attrs(
+  injectDefaultTheme,
+)<SectionContainerProps>`
   position: relative;
 
   ${(props) => !props.withBodyScroll && "padding-inline-start: 20px;"}
@@ -478,15 +476,11 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
     `}
 `;
 
-StyledSectionContainer.defaultProps = { theme: Base };
-
-const StyledSectionFilter = styled.div`
+const StyledSectionFilter = styled.div.attrs(injectDefaultTheme)`
   @media ${tablet} {
     margin-inline-end: 16px;
   }
 `;
-
-StyledSectionFilter.defaultProps = { theme: Base };
 
 const StyledSectionFooter = styled.div`
   margin-top: 40px;
@@ -496,7 +490,9 @@ const StyledSectionFooter = styled.div`
   }
 `;
 
-const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
+const StyledSectionHeader = styled.div.attrs(injectDefaultTheme)<{
+  isFormGallery?: boolean;
+}>`
   position: relative;
   display: flex;
 
@@ -544,9 +540,7 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
   }
 `;
 
-StyledSectionHeader.defaultProps = { theme: Base };
-
-const StyledSectionPaging = styled.div`
+const StyledSectionPaging = styled.div.attrs(injectDefaultTheme)`
   margin: 16px 0 0;
   padding-inline-end: 3px;
 
@@ -554,8 +548,6 @@ const StyledSectionPaging = styled.div`
     padding-inline-end: 0;
   }
 `;
-
-StyledSectionPaging.defaultProps = { theme: Base };
 
 const StyledSectionSubmenu = styled.div`
   background: ${(props) => props.theme.section.header.backgroundColor};

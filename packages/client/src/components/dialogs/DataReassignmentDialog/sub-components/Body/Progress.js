@@ -31,18 +31,16 @@ import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
-import { commonIconsStyles } from "@docspace/shared/utils";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import { withTranslation, Trans } from "react-i18next";
 
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${globalColors.lightStatusPositive} !important;
   }
 `;
-
-StyledCheckIcon.defaultProps = { theme: Base };
 
 const StyledProgress = styled.div`
   display: flex;

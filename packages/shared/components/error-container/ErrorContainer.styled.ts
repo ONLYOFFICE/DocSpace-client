@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
 
-import { desktop, mobile } from "@docspace/shared/utils";
+import { desktop, injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
 // doesn't require mirroring for RTL
 
-const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
+const StyledErrorContainer = styled.div.attrs(injectDefaultTheme)<{
+  isEditor: boolean;
+}>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
   width: ${(props) => (props.isEditor ? "100%" : "auto")};
@@ -1081,7 +1082,5 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     }
   }
 `;
-
-StyledErrorContainer.defaultProps = { theme: Base };
 
 export default StyledErrorContainer;

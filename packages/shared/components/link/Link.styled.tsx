@@ -28,8 +28,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { Text } from "../text";
-import { Base, globalColors } from "../../themes";
-import { NoUserSelect } from "../../utils";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, NoUserSelect } from "../../utils";
 import { LinkProps } from "./Link.types";
 
 const colorCss = css<LinkProps>`
@@ -50,7 +50,7 @@ const PureText = ({
   ...props
 }: LinkProps & { tag?: string; truncate?: boolean }) => <Text {...props} />;
 
-const StyledText = styled(PureText)`
+const StyledText = styled(PureText).attrs(injectDefaultTheme)`
   text-decoration: ${(props) => props.theme.link.textDecoration};
   text-underline-offset: 2px;
 
@@ -82,9 +82,5 @@ const StyledText = styled(PureText)`
       max-width: 100%;
     `}
 `;
-
-StyledText.defaultProps = {
-  theme: Base,
-};
 
 export default StyledText;

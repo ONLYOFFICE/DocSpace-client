@@ -26,9 +26,10 @@
 
 import styled from "styled-components";
 
-import { Base, globalColors } from "../../themes";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledPublicRoomBar = styled.div<{
+const StyledPublicRoomBar = styled.div.attrs(injectDefaultTheme)<{
   barIsVisible?: boolean;
 }>`
   display: flex;
@@ -77,7 +78,5 @@ const StyledPublicRoomBar = styled.div<{
     } */
   }
 `;
-
-StyledPublicRoomBar.defaultProps = { theme: Base };
 
 export { StyledPublicRoomBar };

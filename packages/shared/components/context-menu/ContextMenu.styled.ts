@@ -25,8 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TTheme, globalColors } from "../../themes";
-import { mobile, getCorrectFourValuesStyle } from "../../utils";
+import { TTheme, globalColors } from "../../themes";
+import {
+  mobile,
+  getCorrectFourValuesStyle,
+  injectDefaultTheme,
+} from "../../utils";
 
 const styledMobileView = css`
   position: fixed;
@@ -63,7 +67,7 @@ export const SubMenuItem = styled.li<{ noHover?: boolean }>`
   }
 `;
 
-const StyledContextMenu = styled.div<{
+const StyledContextMenu = styled.div.attrs(injectDefaultTheme)<{
   changeView?: boolean;
   articleWidth: number;
   theme: TTheme;
@@ -371,10 +375,6 @@ const StyledContextMenu = styled.div<{
     }
   }
 `;
-
-StyledContextMenu.defaultProps = {
-  theme: Base,
-};
 
 export const StyledList = styled.ul<{
   listHeight: number;

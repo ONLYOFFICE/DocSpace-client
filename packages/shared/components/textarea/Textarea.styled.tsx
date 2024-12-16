@@ -30,7 +30,7 @@ import TextareaAutosize from "react-autosize-textarea";
 
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg";
 
-import { commonInputStyles } from "../../utils";
+import { commonInputStyles, injectDefaultTheme } from "../../utils";
 import { Base, TColorScheme, TTheme } from "../../themes";
 
 import { Scrollbar, ScrollbarProps } from "../scrollbar";
@@ -55,7 +55,7 @@ const ClearScrollbar = ({
   // @ts-expect-error error from custom scrollbar
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
-const StyledScrollbar = styled(ClearScrollbar)`
+const StyledScrollbar = styled(ClearScrollbar).attrs(injectDefaultTheme)`
   ${commonInputStyles};
   :focus-within {
     border-color: ${(props) =>
@@ -83,10 +83,6 @@ const StyledScrollbar = styled(ClearScrollbar)`
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;
-
-StyledScrollbar.defaultProps = {
-  theme: Base,
-};
 
 const ClearTextareaAutosize = React.forwardRef(
   (
@@ -116,14 +112,17 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
     autoFocus,
     dir,
     minHeight,
+    theme,
   }: {
     autoFocus?: boolean;
     dir?: string;
     minHeight?: string;
+    theme: TTheme;
   }) => ({
     autoFocus,
     dir,
     style: { minHeight },
+    theme: theme || Base,
   }),
 )`
   ${commonInputStyles};
@@ -194,11 +193,9 @@ const StyledTextarea = styled(ClearTextareaAutosize).attrs(
       }`}
 `;
 
-StyledTextarea.defaultProps = { theme: Base };
-
 const StyledCopyIcon = styled(({ isJSONField, heightScale, ...props }) => (
   <CopyIcon {...props} />
-))`
+)).attrs(injectDefaultTheme)`
   width: 16px;
   height: 16px;
   z-index: 1;
@@ -209,9 +206,7 @@ const StyledCopyIcon = styled(({ isJSONField, heightScale, ...props }) => (
   }
 `;
 
-StyledCopyIcon.defaultProps = { theme: Base };
-
-const CopyIconWrapper = styled.div<{
+const CopyIconWrapper = styled.div.attrs(injectDefaultTheme)<{
   isJSONField: boolean;
   heightScale?: boolean;
 }>`
@@ -227,8 +222,6 @@ const CopyIconWrapper = styled.div<{
   justify-content: center;
   align-items: center;
 `;
-
-CopyIconWrapper.defaultProps = { theme: Base };
 
 const Wrapper = styled.div<{
   heightScale?: boolean;
@@ -257,7 +250,7 @@ const Wrapper = styled.div<{
   }
 `;
 
-const Numeration = styled.pre<{ fontSize: string }>`
+const Numeration = styled.pre.attrs(injectDefaultTheme)<{ fontSize: string }>`
   display: block;
   position: absolute;
   font-size: ${(props) => props.fontSize}px;
@@ -276,8 +269,6 @@ const Numeration = styled.pre<{ fontSize: string }>`
   user-select: none; /* Standard */
 `;
 
-Numeration.defaultProps = { theme: Base };
-
 const getDefaultStyles = ({
   $currentColorScheme,
   hasError,
@@ -295,10 +286,6 @@ const getDefaultStyles = ({
         : theme.textArea.focusBorderColor};
     }
   `;
-
-StyledScrollbar.defaultProps = {
-  theme: Base,
-};
 
 const StyledThemeTextarea = styled(StyledScrollbar)(getDefaultStyles);
 

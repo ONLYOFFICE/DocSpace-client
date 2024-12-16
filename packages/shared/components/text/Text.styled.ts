@@ -26,8 +26,11 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
-import { NoUserSelect, commonTextStyles } from "../../utils";
+import {
+  NoUserSelect,
+  commonTextStyles,
+  injectDefaultTheme,
+} from "../../utils";
 
 import { StyledTextProps, TextProps } from "./Text.types";
 
@@ -67,7 +70,9 @@ const styleCss = css<TextProps & StyledTextProps>`
       line-height: ${props.lineHeight};
     `}
 `;
-const StyledText = styled.p<TextProps & StyledTextProps>`
+const StyledText = styled.p.attrs(injectDefaultTheme)<
+  TextProps & StyledTextProps
+>`
   ${styleCss};
 
   ${commonTextStyles};
@@ -80,8 +85,6 @@ const StyledText = styled.p<TextProps & StyledTextProps>`
 
   ${(props) => props.noSelect && NoUserSelect}
 `;
-
-StyledText.defaultProps = { theme: Base };
 
 export const StyledAutoDirSpan = styled.span<StyledTextProps>`
   display: inherit;

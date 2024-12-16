@@ -29,13 +29,13 @@ import styled, { css } from "styled-components";
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { Tabs } from "../tabs";
-import { Base } from "../../themes";
 import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
 
 import { AccessRightSelect } from "../access-right-select";
+import { injectDefaultTheme } from "../../utils";
 
 const accessComboboxStyles = css`
   margin-bottom: 2px;
@@ -53,7 +53,7 @@ const accessComboboxStyles = css`
   }
 `;
 
-const StyledSelector = styled.div`
+const StyledSelector = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 100%;
 
@@ -63,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div<{
+const StyledHeader = styled.div.attrs(injectDefaultTheme)<{
   withoutBorder?: boolean;
   withoutIcon: boolean;
 }>`
@@ -100,9 +100,7 @@ const StyledHeader = styled.div<{
   }
 `;
 
-StyledHeader.defaultProps = { theme: Base };
-
-const StyledBody = styled.div<{
+const StyledBody = styled.div.attrs(injectDefaultTheme)<{
   footerVisible: boolean;
   withHeader?: boolean;
   footerHeight: number;
@@ -147,7 +145,7 @@ const StyledBody = styled.div<{
   }
 `;
 
-const StyledSelectAll = styled.div`
+const StyledSelectAll = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   max-height: 61px;
   height: 61px;
@@ -189,7 +187,7 @@ const selectedCss = css`
     props.theme.selector.item.selectedBackground} !important;
 `;
 
-const StyledItem = styled.div<{
+const StyledItem = styled.div.attrs(injectDefaultTheme)<{
   isSelected: boolean | undefined;
   isDisabled?: boolean;
   isMultiSelect: boolean;
@@ -300,7 +298,9 @@ const StyledItem = styled.div<{
   }
 `;
 
-const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
+const StyledEmptyScreen = styled.div.attrs(injectDefaultTheme)<{
+  withSearch: boolean;
+}>`
   width: 100%;
 
   display: flex;
@@ -374,7 +374,7 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   }
 `;
 
-const StyledNewEmptyScreen = styled.section`
+const StyledNewEmptyScreen = styled.section.attrs(injectDefaultTheme)`
   width: 100%;
 
   display: flex;
@@ -433,7 +433,7 @@ const StyledNewEmptyScreen = styled.section`
   }
 `;
 
-const StyledBreadCrumbs = styled.div<{
+const StyledBreadCrumbs = styled.div.attrs(injectDefaultTheme)<{
   itemsCount: number;
   gridTemplateColumns: string;
 }>`
@@ -462,9 +462,7 @@ const StyledBreadCrumbs = styled.div<{
   }
 `;
 
-StyledBreadCrumbs.defaultProps = { theme: Base };
-
-const StyledItemText = styled(Text)<{
+const StyledItemText = styled(Text).attrs(injectDefaultTheme)<{
   isCurrent: boolean;
   isLoading?: boolean;
 }>`
@@ -477,9 +475,7 @@ const StyledItemText = styled(Text)<{
     `}
 `;
 
-StyledItemText.defaultProps = { theme: Base };
-
-const StyledArrowRightSvg = styled(ArrowRightSvg)`
+const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   ${({ theme }) =>
     theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 
@@ -488,7 +484,7 @@ const StyledArrowRightSvg = styled(ArrowRightSvg)`
   }
 `;
 
-const StyledFooter = styled.div<{
+const StyledFooter = styled.div.attrs(injectDefaultTheme)<{
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
 }>`
@@ -525,8 +521,6 @@ const StyledFooter = styled.div<{
   }
 `;
 
-StyledFooter.defaultProps = { theme: Base };
-
 const StyledNewNameContainer = styled.div`
   margin-top: 16px;
 
@@ -549,7 +543,7 @@ const StyledButtonContainer = styled.div`
   margin-top: 16px;
 `;
 
-const StyledComboBox = styled(ComboBox)`
+const StyledComboBox = styled(ComboBox).attrs(injectDefaultTheme)`
   ${accessComboboxStyles}
 `;
 
@@ -566,7 +560,7 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
-const StyledInfo = styled.div`
+const StyledInfo = styled.div.attrs(injectDefaultTheme)`
   width: calc(100% - 32px);
 
   padding: 12px 16px;
@@ -582,7 +576,7 @@ const StyledInfo = styled.div`
   }
 `;
 
-const StyledInputWrapper = styled.div`
+const StyledInputWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 32px;
   height: 32px;
 
@@ -613,7 +607,9 @@ const StyledInputWrapper = styled.div`
 `;
 
 // fix empty container padding with calc +24px
-const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
+const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
+  isEmpty: boolean;
+}>`
   width: ${(props) =>
     props.isEmpty ? `calc(100% + 24px)` : `calc(100% - 32px)`};
   height: fit-content;
@@ -652,19 +648,6 @@ const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
     border-radius: 6px 6px 0 0;
   }
 `;
-
-StyledSelector.defaultProps = { theme: Base };
-StyledHeader.defaultProps = { theme: Base };
-StyledBody.defaultProps = { theme: Base };
-StyledSelectAll.defaultProps = { theme: Base };
-StyledItem.defaultProps = { theme: Base };
-StyledEmptyScreen.defaultProps = { theme: Base };
-StyledNewEmptyScreen.defaultProps = { theme: Base };
-StyledArrowRightSvg.defaultProps = { theme: Base };
-StyledComboBox.defaultProps = { theme: Base };
-StyledInfo.defaultProps = { theme: Base };
-StyledInputWrapper.defaultProps = { theme: Base };
-StyledCreateDropDown.defaultProps = { theme: Base };
 
 export {
   StyledSelector,

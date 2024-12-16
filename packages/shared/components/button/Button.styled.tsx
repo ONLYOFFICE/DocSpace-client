@@ -162,9 +162,10 @@ const ButtonWrapper = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 ButtonWrapper.displayName = "ButtonWrapper";
 
-const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
+const StyledButton = styled(ButtonWrapper).attrs<ButtonProps>((props) => ({
   disabled: props.isDisabled || props.isLoading ? "disabled" : "",
   tabIndex: props.tabIndex,
+  theme: props.theme || Base,
 }))`
   position: relative;
   height: ${(props) => heightStyle(props)};
@@ -274,8 +275,6 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   }
 `;
 
-StyledButton.defaultProps = { theme: Base };
-
 const themeActiveCss = css<ButtonThemeProps>`
   border-color: ${(props) => props.$currentColorScheme?.main?.buttons};
 
@@ -372,8 +371,6 @@ const getDefaultStyles = ({
           }
         `)}
   `;
-
-StyledButton.defaultProps = { theme: Base };
 
 const StyledThemeButton = styled(StyledButton)(getDefaultStyles);
 

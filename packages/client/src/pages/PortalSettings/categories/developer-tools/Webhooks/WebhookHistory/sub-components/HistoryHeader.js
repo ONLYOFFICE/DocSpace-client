@@ -37,7 +37,13 @@ import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet, mobile, isTablet, isMobile } from "@docspace/shared/utils";
+import {
+  tablet,
+  mobile,
+  isTablet,
+  isMobile,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -48,9 +54,9 @@ import { useParams } from "react-router-dom";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme.backgroundColor};
@@ -134,8 +140,6 @@ const HeaderContainer = styled.div`
     }
   }
 `;
-
-HeaderContainer.defaultProps = { theme: Base };
 
 const HistoryHeader = (props) => {
   const {

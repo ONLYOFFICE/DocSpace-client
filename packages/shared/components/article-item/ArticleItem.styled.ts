@@ -27,8 +27,8 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Base, TColorScheme, globalColors } from "../../themes";
-import { tablet } from "../../utils";
+import { TColorScheme, globalColors } from "../../themes";
+import { injectDefaultTheme, tablet } from "../../utils";
 
 import { Text } from "../text";
 
@@ -99,7 +99,9 @@ const StyledArticleItemHeaderContainer = styled.div<{
   }
 `;
 
-const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
+const StyledArticleItemBadgeWrapper = styled.div.attrs(injectDefaultTheme)<{
+  showText?: boolean;
+}>`
   z-index: 3;
 
   margin-inline-start: ${(props) =>
@@ -155,9 +157,7 @@ const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
   }
 `;
 
-StyledArticleItemBadgeWrapper.defaultProps = { theme: Base };
-
-const StyledArticleItemInitialText = styled(Text)`
+const StyledArticleItemInitialText = styled(Text).attrs(injectDefaultTheme)`
   position: absolute;
   top: 2px;
   inset-inline-start: 0;
@@ -179,9 +179,9 @@ const StyledArticleItemInitialText = styled(Text)`
   }
 `;
 
-StyledArticleItemInitialText.defaultProps = { theme: Base };
-
-const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
+const StyledArticleItemText = styled(Text).attrs(injectDefaultTheme)<{
+  isActive?: boolean;
+}>`
   width: ${(props) => props.theme.catalogItem.text.width};
 
   margin-inline-start: ${(props) => props.theme.catalogItem.text.marginLeft};
@@ -214,9 +214,9 @@ const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
   }
 `;
 
-StyledArticleItemText.defaultProps = { theme: Base };
-
-const StyledArticleItemImg = styled.div<{ isActive?: boolean }>`
+const StyledArticleItemImg = styled.div.attrs(injectDefaultTheme)<{
+  isActive?: boolean;
+}>`
   position: relative;
 
   display: flex;
@@ -256,8 +256,6 @@ const StyledArticleItemImg = styled.div<{ isActive?: boolean }>`
   }
 `;
 
-StyledArticleItemImg.defaultProps = { theme: Base };
-
 const draggingSiblingCss = css`
   background: ${(props) => props.theme.dragAndDrop.background} !important;
 
@@ -267,7 +265,7 @@ const draggingSiblingCss = css`
   }
 `;
 
-const StyledArticleItemSibling = styled.div<{
+const StyledArticleItemSibling = styled.div.attrs(injectDefaultTheme)<{
   isActive?: boolean;
   isDragActive?: boolean;
   isDragging?: boolean;
@@ -309,9 +307,7 @@ const StyledArticleItemSibling = styled.div<{
     `}
 `;
 
-StyledArticleItemSibling.defaultProps = { theme: Base };
-
-const StyledArticleItemContainer = styled.div<{
+const StyledArticleItemContainer = styled.div.attrs(injectDefaultTheme)<{
   showText?: boolean;
   isEndOfBlock?: boolean;
 }>`
@@ -369,9 +365,9 @@ const StyledArticleItemContainer = styled.div<{
   }
 `;
 
-StyledArticleItemContainer.defaultProps = { theme: Base };
-
-const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
+const StyledArticleItemTheme = styled(StyledArticleItemContainer).attrs(
+  injectDefaultTheme,
+)<{
   isActive?: boolean;
   $currentColorScheme?: TColorScheme;
 }>`
@@ -417,8 +413,6 @@ const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
     }
   }
 `;
-
-StyledArticleItemTheme.defaultProps = { theme: Base };
 
 export {
   StyledArticleItemContainer,

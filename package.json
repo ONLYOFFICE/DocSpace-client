@@ -31,8 +31,9 @@
     "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint",
     "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint:fix",
     "test:build": "yarn workspace @docspace/login test:build",
-    "test:e2e": "yarn workspace @docspace/login test:e2e",
-    "test:e2e:model": "yarn workspace @docspace/login test:e2e:model"
+    "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
+    "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
+    "test:e2e:docker:clear": "yarn workspace @docspace/login test:e2e:docker:clear"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",

@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { commonInputStyles } from "../../utils";
-import { Base, globalColors } from "../../themes";
+import { commonInputStyles, injectDefaultTheme } from "../../utils";
+import { globalColors } from "../../themes";
 
-const StyledIconBlock = styled.div<{
+const StyledIconBlock = styled.div.attrs(injectDefaultTheme)<{
   isDisabled?: boolean;
   isClickable?: boolean;
 }>`
@@ -44,14 +44,12 @@ const StyledIconBlock = styled.div<{
   padding-inline-start: ${(props) => props.theme.inputBlock.paddingLeft};
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
-StyledIconBlock.defaultProps = { theme: Base };
 
-const StyledChildrenBlock = styled.div`
+const StyledChildrenBlock = styled.div.attrs(injectDefaultTheme)`
   display: ${(props) => props.theme.inputBlock.display};
   align-items: ${(props) => props.theme.inputBlock.alignItems};
   padding: ${(props) => props.theme.inputBlock.padding};
 `;
-StyledChildrenBlock.defaultProps = { theme: Base };
 
 const CustomInputGroup = ({
   isIconFill,
@@ -73,7 +71,7 @@ const CustomInputGroup = ({
   style?: React.CSSProperties;
 }) => <div {...props} />;
 
-const StyledInputGroup = styled(CustomInputGroup)`
+const StyledInputGroup = styled(CustomInputGroup).attrs(injectDefaultTheme)`
   display: ${(props) => props.theme.inputBlock.display};
 
   input:-webkit-autofill,
@@ -124,6 +122,5 @@ const StyledInputGroup = styled(CustomInputGroup)`
     }
   }
 `;
-StyledInputGroup.defaultProps = { theme: Base };
 
 export { StyledInputGroup, StyledChildrenBlock, StyledIconBlock };

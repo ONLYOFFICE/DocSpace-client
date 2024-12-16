@@ -25,10 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
-import { BackdropProps } from "./Backdrop.types";
 
-const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
+import { BackdropProps } from "./Backdrop.types";
+import { injectDefaultTheme } from "../../utils";
+
+const StyledBackdrop = styled.div.attrs(injectDefaultTheme)<
+  BackdropProps & { needBackground: boolean }
+>`
   background-color: ${(props) =>
     props.needBackground
       ? props.theme.backdrop.backgroundColor
@@ -47,9 +50,5 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
   cursor: ${(props) =>
     props.needBackground && !props.isModalDialog ? "pointer" : "default"};
 `;
-
-StyledBackdrop.defaultProps = {
-  theme: Base,
-};
 
 export default StyledBackdrop;

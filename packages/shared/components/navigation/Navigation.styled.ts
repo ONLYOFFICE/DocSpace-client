@@ -29,8 +29,13 @@ import styled, { css } from "styled-components";
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
-import { tablet, mobile, commonIconsStyles } from "../../utils";
-import { Base, globalColors } from "../../themes";
+import {
+  tablet,
+  mobile,
+  commonIconsStyles,
+  injectDefaultTheme,
+} from "../../utils";
+import { globalColors } from "../../themes";
 
 import { ColorTheme } from "../color-theme";
 import { Heading } from "../heading";
@@ -238,7 +243,9 @@ const StyledContainer = styled.div<{
   }
 `;
 
-const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
+const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme).attrs(
+  injectDefaultTheme,
+)<{
   isInfoPanelVisible?: boolean;
   isRootFolder?: boolean;
 }>`
@@ -279,7 +286,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
     margin-inline-start: ${(props) => (props.isRootFolder ? "auto" : "0")};
   }
 `;
-StyledInfoPanelToggleColorThemeWrapper.defaultProps = { theme: Base };
 
 const StyledControlButtonContainer = styled.div<{
   isFrame?: boolean;
@@ -317,7 +323,7 @@ const StyledControlButtonContainer = styled.div<{
   }
 `;
 
-const StyledInfoPanelToggleWrapper = styled.div<{
+const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)<{
   isRootFolder: boolean;
   isInfoPanelVisible: boolean;
 }>`
@@ -351,9 +357,8 @@ const StyledInfoPanelToggleWrapper = styled.div<{
     }
   }
 `;
-StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
-const StyledTrashWarning = styled.div`
+const StyledTrashWarning = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   height: 32px;
   padding: 8px 12px;
@@ -383,8 +388,6 @@ const StyledTrashWarning = styled.div`
     margin-bottom: 16px;
   }
 `;
-
-StyledTrashWarning.defaultProps = { theme: Base };
 
 const StyledTextContainer = styled.div<{
   isRootFolder: boolean;
@@ -433,7 +436,9 @@ const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
   }
 `;
 
-const StyledExpanderDownIcon = styled(ExpanderDownIcon)`
+const StyledExpanderDownIcon = styled(ExpanderDownIcon).attrs(
+  injectDefaultTheme,
+)`
   min-width: 8px !important;
   width: 8px !important;
   min-height: 18px !important;
@@ -455,9 +460,9 @@ const StyledArrowIcon = styled(ArrowIcon)`
   }
 `;
 
-StyledExpanderDownIcon.defaultProps = { theme: Base };
-
-const StyledExpanderDownIconRotate = styled(ExpanderDownIcon)`
+const StyledExpanderDownIconRotate = styled(ExpanderDownIcon).attrs(
+  injectDefaultTheme,
+)`
   min-width: 8px !important;
   width: 8px !important;
   min-height: 18px !important;
@@ -471,8 +476,6 @@ const StyledExpanderDownIconRotate = styled(ExpanderDownIcon)`
 
   ${commonIconsStyles};
 `;
-
-StyledExpanderDownIconRotate.defaultProps = { theme: Base };
 
 const StyledItem = styled.div<{ isRoot: boolean; withLogo: boolean }>`
   height: auto;
@@ -500,7 +503,7 @@ const StyledText = styled(Text)<{ isRoot: boolean }>`
   bottom: ${(props) => (props.isRoot ? "2px" : "-1px")};
 `;
 
-const StyledBox = styled.div<{
+const StyledBox = styled.div.attrs(injectDefaultTheme)<{
   withLogo: boolean;
   height: number | null;
   dropBoxWidth: number;
@@ -552,8 +555,6 @@ const StyledBox = styled.div<{
     inset-inline-start: 0;
   }
 `;
-
-StyledBox.defaultProps = { theme: Base };
 
 const StyledTariffWrapper = styled.div`
   display: flex;

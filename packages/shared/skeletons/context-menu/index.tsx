@@ -37,7 +37,7 @@ const ContextMenuSkeleton = ({
   id,
   className,
   style,
-  isRectangle,
+  isRectangle = true,
   ...rest
 }: ContextMenuSkeletonProps & RectangleSkeletonProps) => {
   const {
@@ -83,13 +83,6 @@ const ContextMenuSkeleton = ({
       />
     </StyledContextMenu>
   );
-};
-
-ContextMenuSkeleton.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  isRectangle: true,
 };
 
 export { ContextMenuSkeleton };

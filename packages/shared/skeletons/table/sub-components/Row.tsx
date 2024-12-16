@@ -34,7 +34,7 @@ const TableRow = ({
   id,
   className,
   style,
-  isRectangle,
+  isRectangle = true,
   ...rest
 }: {
   id?: string;
@@ -116,13 +116,6 @@ const TableRow = ({
       />
     </StyledRow>
   );
-};
-
-TableRow.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  isRectangle: true,
 };
 
 export default TableRow;

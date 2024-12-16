@@ -28,7 +28,7 @@
 // import styled, { css } from "styled-components";
 // import Base from "../themes/base";
 
-// export const StyledBox = styled(Box)`
+// export const StyledBox = styled(Box).attrs(injectDefaultTheme)`
 //   position: relative;
 //   width: ${(props) => (props.scaled ? "100%" : props.theme.inputPhone.width)};
 //   border: 1px solid
@@ -243,5 +243,3 @@
 //     top: 48px;
 //   }
 // `;
-
-// StyledBox.defaultProps = { theme: Base };

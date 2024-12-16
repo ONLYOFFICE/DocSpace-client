@@ -46,7 +46,7 @@
     "re-resizable": "^6.10.0",
     "react": "^18.3.1",
     "react-autosize-textarea": "^7.1.0",
-    "react-content-loader": "^5.1.4",
+    "react-content-loader": "^7.0.2",
     "react-countdown": "2.3.6",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",

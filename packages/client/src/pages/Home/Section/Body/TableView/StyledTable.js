@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
@@ -462,7 +463,7 @@ const StyledBadgesContainer = styled.div`
   }
 `;
 
-const StyledQuickButtonsContainer = styled.div`
+const StyledQuickButtonsContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -497,8 +498,6 @@ const StyledQuickButtonsContainer = styled.div`
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
-
-StyledQuickButtonsContainer.defaultProps = { theme: Base };
 
 export {
   StyledBadgesContainer,

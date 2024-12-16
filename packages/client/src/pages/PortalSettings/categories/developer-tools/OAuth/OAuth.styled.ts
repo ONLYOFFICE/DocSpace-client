@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const OAuthContainer = styled.div`
   width: 100%;
@@ -60,7 +60,7 @@ export const StyledContainer = styled.div`
   padding-top: 16px;
 `;
 
-export const StyledPreviewContainer = styled.div`
+export const StyledPreviewContainer = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 152px;
 
@@ -91,8 +91,6 @@ export const StyledPreviewContainer = styled.div`
   }
 `;
 
-StyledPreviewContainer.defaultProps = { theme: Base };
-
 export const StyledBlocksContainer = styled.div`
   width: 100%;
   height: auto;
@@ -108,7 +106,7 @@ export const StyledBlocksContainer = styled.div`
   }
 `;
 
-export const StyledInfoContainer = styled.div<{
+export const StyledInfoContainer = styled.div.attrs(injectDefaultTheme)<{
   showDescription: boolean;
   withShowText: boolean;
 }>`
@@ -218,8 +216,6 @@ export const StyledInfoContainer = styled.div<{
     }
   }
 `;
-
-StyledInfoContainer.defaultProps = { theme: Base };
 
 export const StyledGenerateDevelopTokenContainer = styled.div`
   .dates {

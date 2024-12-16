@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -40,15 +40,13 @@ const InfoWrapper = styled.div`
   margin-bottom: 25px;
 `;
 
-const InfoText = styled(Text)`
+const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
   white-space: break-spaces;
   margin: 0 0 8px;
   line-height: 20px;
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;
-
-InfoText.defaultProps = { theme: Base };
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);

@@ -81,6 +81,7 @@ import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
+import { injectDefaultTheme } from "./injectDefaultTheme";
 
 export {
   isBetaLanguage,
@@ -134,6 +135,7 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  injectDefaultTheme,
   getTextColor,
 };
 

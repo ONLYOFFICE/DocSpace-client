@@ -53,7 +53,7 @@ const InputParam = React.forwardRef(
       onFocus,
       onBlur,
       isDisabled,
-      isValidTitle,
+      isValidTitle = true,
       isWrongTitle,
       errorMessage,
       isAutoFocussed,
@@ -103,9 +103,5 @@ const InputParam = React.forwardRef(
     );
   },
 );
-
-InputParam.defaultProps = {
-  isValidTitle: true,
-};
 
 export default InputParam;

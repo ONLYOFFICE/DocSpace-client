@@ -24,19 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import styled from "styled-components";
+import { tablet, mobile } from "@docspace/shared/utils";
 
-import { Text } from "@docspace/shared/components/text";
+export const StyledBar = styled.div`
+  border-radius: 6px;
+  padding: 12px 16px;
+  background-color: ${({ theme }) => theme.management.barBackground};
 
-import { StyledBar } from "./Bar.styled";
+  @media ${tablet} {
+    width: calc(100% - 32px);
+    padding: 8px 12px;
+    margin-bottom: 16px;
+  }
 
-export const Bar = ({ title }: { title: string }) => {
-  return (
-    <StyledBar className="bar">
-      <Text fontSize="12px" fontWeight="400" lineHeight="16px">
-        {title}
-      </Text>
-    </StyledBar>
-  );
-};
+  @media ${mobile} {
+    width: calc(100% - 48px);
+  }
+`;
 

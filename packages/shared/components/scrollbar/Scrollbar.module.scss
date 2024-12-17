@@ -111,7 +111,7 @@
     }
   }
 
-  @include tablet {
+  @include tablet-and-below {
     pointer-events: none;
 
     .thumb {

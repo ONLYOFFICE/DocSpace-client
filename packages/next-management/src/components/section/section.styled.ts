@@ -46,6 +46,10 @@ export const StyledSection = styled.section`
     padding-inline-start: 16px;
   }
 
+  @media ${mobile} {
+    width: calc(100% - 16px);
+  }
+
   .headline {
     display: flex;
     align-items: center;

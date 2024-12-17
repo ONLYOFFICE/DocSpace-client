@@ -74,7 +74,7 @@ export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
     }
 
     .settings-block {
-      max-width: calc(100% - 32px);
+      max-width: 100%;
     }
   }
 `;

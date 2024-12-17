@@ -78,6 +78,10 @@ export const WhiteLabelWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 40px;
+
+    @media ${mobile} {
+      margin-bottom: 64px;
+    }
   }
 
   .logo-wrapper {

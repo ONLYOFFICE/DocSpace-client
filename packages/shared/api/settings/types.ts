@@ -130,6 +130,7 @@ export type TSettings = {
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
   isAmi: boolean;
+  feedbackAndSupportLink: string;
 };
 
 export type TCustomSchema = {

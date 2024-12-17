@@ -213,12 +213,23 @@ class ConsumerModalDialog extends React.Component {
           color={this.props.theme.client.settings.integration.linkColor}
           isHovered={false}
           target="_blank"
-          href={this.props.urlSupport}
+          href={this.props.feedbackAndSupportLink}
         >
           Support Team
         </Link>
       </Trans>
     </StyledBox>
+  );
+
+  description = !this.props.feedbackAndSupportLink ? (
+    <Text as="div">
+      <StyledBox>{this.helpCenterDescription}</StyledBox>
+    </Text>
+  ) : (
+    <>
+      <Text as="div">{this.supportTeamDescription}</Text>
+      <Text as="div">{this.helpCenterDescription}</Text>
+    </>
   );
 
   inputsRender = (item, index) => {
@@ -262,9 +273,8 @@ class ConsumerModalDialog extends React.Component {
       state,
       updateConsumerValues,
       consumerInstruction,
-      helpCenterDescription,
-      supportTeamDescription,
       requiredRef,
+      description,
     } = this;
 
     const isDisabled = requiredRef.some((name) => state[name].trim() === "");
@@ -284,8 +294,7 @@ class ConsumerModalDialog extends React.Component {
               this.inputsRender(prop, i),
             )}
           </React.Fragment>
-          <Text as="div">{supportTeamDescription}</Text>
-          <Text as="div">{helpCenterDescription}</Text>
+          {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -322,13 +331,13 @@ ConsumerModalDialog.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   onChangeLoading: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
-  urlSupport: PropTypes.string,
+  feedbackAndSupportLink: PropTypes.string,
 };
 
 export default inject(({ setup, settingsStore }) => {
   const {
     theme,
-    urlSupport,
+    feedbackAndSupportLink,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
@@ -358,7 +367,7 @@ export default inject(({ setup, settingsStore }) => {
   return {
     theme,
     selectedConsumer,
-    urlSupport,
+    feedbackAndSupportLink,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,

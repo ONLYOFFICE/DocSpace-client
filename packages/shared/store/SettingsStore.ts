@@ -164,7 +164,7 @@ class SettingsStore {
 
   enabledJoin = false;
 
-  urlSupport = "https://helpdesk.onlyoffice.com/";
+  feedbackAndSupportLink = "";
 
   forumLink = null;
 

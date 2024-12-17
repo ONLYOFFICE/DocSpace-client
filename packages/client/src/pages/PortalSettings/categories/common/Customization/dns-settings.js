@@ -89,6 +89,7 @@ const DNSSettingsComponent = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
+    feedbackAndSupportLink,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -126,7 +127,7 @@ const DNSSettingsComponent = (props) => {
   }, [isLoadedSetting]);
 
   const onSendRequest = () => {
-    window.open("https://helpdesk.onlyoffice.com/hc/en-us/requests/new");
+    window.open(`${feedbackAndSupportLink}/hc/en-us/requests/new`);
   };
 
   const onSaveSettings = async () => {
@@ -330,6 +331,7 @@ export const DNSSettings = inject(
       standalone,
       dnsSettingsUrl,
       currentDeviceType,
+      feedbackAndSupportLink,
     } = settingsStore;
     const {
       isLoaded,
@@ -364,6 +366,7 @@ export const DNSSettings = inject(
       saveDNSSettings,
       dnsSettingsUrl,
       currentDeviceType,
+      feedbackAndSupportLink,
     };
   },
 )(

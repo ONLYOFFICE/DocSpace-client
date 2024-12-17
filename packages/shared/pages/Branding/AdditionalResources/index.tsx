@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-
+import { useTranslation } from "react-i18next";
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
@@ -33,7 +33,6 @@ import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
 
 export const AdditionalResources = ({
-  t,
   isSettingPaid,
   feedbackAndSupportEnabled,
   helpCenterEnabled,
@@ -42,6 +41,7 @@ export const AdditionalResources = ({
   isLoading,
   additionalResourcesIsDefault,
 }: IAdditionalResources) => {
+  const { t } = useTranslation("Common");
   const [feedbackEnabled, setFeedbackEnabled] = useState(
     feedbackAndSupportEnabled,
   );
@@ -77,11 +77,11 @@ export const AdditionalResources = ({
     <StyledAdditionalResources>
       <div className="header">
         <div className="additional-header settings_unavailable">
-          {t("Settings:AdditionalResources")}
+          {t("AdditionalResources")}
         </div>
       </div>
       <div className="settings_unavailable additional-description">
-        {t("Settings:AdditionalResourcesDescription", {
+        {t("AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>

@@ -26,6 +26,7 @@
 
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -43,7 +44,6 @@ import { StyledHeader } from "./WhiteLabel.styled";
 import { IHeaderProps } from "./WhiteLabel.types";
 
 export const WhiteLabelHeader = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
@@ -52,10 +52,12 @@ export const WhiteLabelHeader = ({
   logoTextWhiteLabel,
   onChangeCompanyName,
 }: IHeaderProps) => {
+  const { t } = useTranslation("Common");
+
   return (
     <StyledHeader>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-      {showNotAvailable && <NotAvailable t={t} />}
+      {showNotAvailable && <NotAvailable />}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}

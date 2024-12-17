@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../../types";
-
 export interface ILogoPath {
   light: string;
   dark: string;
@@ -52,7 +50,6 @@ export interface IWhiteLabelData {
 }
 
 export interface IHeaderProps {
-  t: TTranslation;
   showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
@@ -63,7 +60,6 @@ export interface IHeaderProps {
 }
 
 export interface IWhiteLabel {
-  t: TTranslation;
   isSettingPaid: boolean;
   showNotAvailable: boolean;
   standalone: boolean;

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Link } from "../../../components/link";
 import { FieldContainer } from "../../../components/field-container";
@@ -41,7 +41,6 @@ import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
 
 export const CompanyInfo = ({
-  t,
   isSettingPaid,
   onShowExample,
   companySettings,
@@ -50,6 +49,7 @@ export const CompanyInfo = ({
   isLoading,
   companyInfoSettingsIsDefault,
 }: ICompanyInfo) => {
+  const { t } = useTranslation("Common");
   const {
     address,
     companyName,
@@ -88,15 +88,15 @@ export const CompanyInfo = ({
   return (
     <StyledCompanyInfo isSettingPaid={isSettingPaid}>
       <div className="section-description settings_unavailable">
-        {t("Settings:BrandingSectionDescription", {
+        {t("BrandingSectionDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>
       <div className="header settings_unavailable">
-        {t("Settings:CompanyInfoSettings")}
+        {t("CompanyInfoSettings")}
       </div>
       <div className="description settings_unavailable">
-        <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Settings">
+        <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Common">
           &quot;This information will be displayed in the
           {isSettingPaid ? (
             <Link className="link" onClick={onShowExample} noHover>

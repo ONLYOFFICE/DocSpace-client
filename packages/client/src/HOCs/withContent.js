@@ -57,8 +57,9 @@ export default function withContent(WrappedContent) {
 
     componentDidUpdate() {
       const { titleWithoutExt } = this.props;
+      const { itemTitle } = this.state;
 
-      if (titleWithoutExt !== this.state.itemTitle) {
+      if (titleWithoutExt !== itemTitle) {
         this.setState({ itemTitle: titleWithoutExt });
       }
     }

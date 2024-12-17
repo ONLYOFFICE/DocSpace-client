@@ -135,7 +135,7 @@ class BackupCodesDialogComponent extends React.Component {
               key="PrintBtn"
               label={t("Common:CancelButton")}
               size="normal"
-              onClick={this.props.onClose}
+              onClick={onClose}
             />
             {isDesktop() && (
               <div className="backup-codes-print-link-wrapper">

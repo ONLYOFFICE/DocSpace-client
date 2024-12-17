@@ -51,11 +51,10 @@ const DownloadContent = (props) => {
 
   const getTitleExtensions = () => {
     let arr = [];
-    for (const item of items) {
+    items.forEach((item) => {
       const exst = item.fileExst;
-
       arr = [...arr, ...extsConvertible[exst]];
-    }
+    });
 
     arr = arr.filter((x, pos) => arr.indexOf(x) !== pos);
     arr = arr.filter((x, pos) => arr.indexOf(x) === pos);
@@ -70,7 +69,7 @@ const DownloadContent = (props) => {
       },
     ];
 
-    for (const f of arr) {
+    arr.forEach((f) => {
       formats.push({
         key: f,
         label: f,
@@ -78,7 +77,7 @@ const DownloadContent = (props) => {
         "data-format": f,
         "data-type": type,
       });
-    }
+    });
 
     return formats;
   };
@@ -95,7 +94,7 @@ const DownloadContent = (props) => {
         "data-file-id": item.id,
       },
     ];
-    for (const f of arrayFormats) {
+    arrayFormats.forEach((f) => {
       formats.push({
         key: f,
         label: f,
@@ -104,7 +103,7 @@ const DownloadContent = (props) => {
         "data-type": type,
         "data-file-id": item.id,
       });
-    }
+    });
 
     switch (type) {
       case "documents":

@@ -80,8 +80,14 @@ class ChangeEmailDialogComponent extends React.Component {
 
   onSendEmailChangeInstructions = () => {
     const { email } = this.state;
-    const { user, updateProfile, updateProfileInUsers, fromList, profile } =
-      this.props;
+    const {
+      user,
+      updateProfile,
+      updateProfileInUsers,
+      fromList,
+      profile,
+      onClose,
+    } = this.props;
     const { id } = user;
     const newProfile = user;
     newProfile.email = email;
@@ -97,9 +103,7 @@ class ChangeEmailDialogComponent extends React.Component {
         })
         .catch((error) => toastr.error(error))
         .finally(() => {
-          this.setState({ isRequestRunning: false }, () =>
-            this.props.onClose(),
-          );
+          this.setState({ isRequestRunning: false }, () => onClose());
         });
     });
   };

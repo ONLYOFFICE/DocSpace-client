@@ -120,10 +120,11 @@ const AvatarEditorDialog = (props) => {
     image,
     onChangeFile,
     isProfileUpload,
+    setPreview,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreviewState] = useState(null);
   const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const editorBorderRadius = isProfileUpload ? 400 : 110;
@@ -152,7 +153,7 @@ const AvatarEditorDialog = (props) => {
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
-    props.setPreview && props.setPreview("");
+    setPreview && setPreview("");
     onClose && onClose();
   };
 
@@ -208,7 +209,7 @@ const AvatarEditorDialog = (props) => {
             className="wrapper-image-editor"
             classNameWrapperImageCropper="avatar-editor"
             image={image}
-            setPreview={props.setPreview || setPreview}
+            setPreview={setPreview || setPreviewState}
             onChangeImage={onChangeImage}
             onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}

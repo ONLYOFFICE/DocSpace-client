@@ -94,13 +94,15 @@ class DownloadDialogComponent extends React.Component {
 
   onDownload = () => {
     const { setDownloadItems } = this.props;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
 
     const itemList = [
-      ...this.state.documents.files,
-      ...this.state.spreadsheets.files,
-      ...this.state.presentations.files,
-      ...this.state.masterForms.files,
-      ...this.state.other.files,
+      ...documents.files,
+      ...spreadsheets.files,
+      ...presentations.files,
+      ...masterForms.files,
+      ...other.files,
     ];
 
     if (itemList.length) {
@@ -132,14 +134,15 @@ class DownloadDialogComponent extends React.Component {
 
   getNewArrayFiles = (fileId, array, format) => {
     // Set all documents format
+    const { t } = this.props;
 
     if (!fileId) {
-      for (const file of array) {
+      array.forEach((file) => {
         file.format =
-          format === this.props.t("CustomFormat") || file.fileExst === format
-            ? this.props.t("OriginalFormat")
+          format === t("CustomFormat") || file.fileExst === format
+            ? t("OriginalFormat")
             : format;
-      }
+      });
 
       return array;
     }
@@ -153,19 +156,20 @@ class DownloadDialogComponent extends React.Component {
 
   onSelectFormat = (e) => {
     const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files;
+    const files = this.state[type].files; // eslint-disable-line react/destructuring-assignment
+    const { t } = this.props;
 
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState[type].files = this.getNewArrayFiles(fileId, files, format);
-      newState[type].format = !fileId ? format : this.props.t("CustomFormat");
+      newState[type].format = !fileId ? format : t("CustomFormat");
 
       const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
+        (f) => f.format && f.format !== t("OriginalFormat"),
       );
 
       if (index === -1) {
-        newState[type].format = this.props.t("OriginalFormat");
+        newState[type].format = t("OriginalFormat");
       }
 
       return { ...prevState, ...newState };
@@ -173,13 +177,13 @@ class DownloadDialogComponent extends React.Component {
   };
 
   updateDocsState = (fieldStateName, itemId) => {
-    const { isChecked, isIndeterminate, files } = this.state[fieldStateName];
+    const { isChecked, isIndeterminate, files } = this.state[fieldStateName]; // eslint-disable-line react/destructuring-assignment
 
     if (itemId === "All") {
       const checked = isIndeterminate ? false : !isChecked;
-      for (const file of files) {
+      files.forEach((file) => {
         file.checked = checked;
-      }
+      });
 
       this.setState((prevState) => {
         const newState = { ...prevState };
@@ -241,18 +245,15 @@ class DownloadDialogComponent extends React.Component {
    * @returns {number}
    */
   getCheckedFileLength = () => {
-    const documents = this.state.documents.files;
-    const spreadsheets = this.state.spreadsheets.files;
-    const presentations = this.state.presentations.files;
-    const masterForms = this.state.masterForms.files;
-    const other = this.state.other.files;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
 
     return (
-      documents.filter((f) => f.checked).length +
-      spreadsheets.filter((f) => f.checked).length +
-      presentations.filter((f) => f.checked).length +
-      masterForms.filter((f) => f.checked).length +
-      other.filter((f) => f.checked).length
+      documents.files.filter((f) => f.checked).length +
+      spreadsheets.files.filter((f) => f.checked).length +
+      presentations.files.filter((f) => f.checked).length +
+      masterForms.files.filter((f) => f.checked).length +
+      other.files.filter((f) => f.checked).length
     );
   };
 
@@ -355,39 +356,36 @@ class DownloadDialogComponent extends React.Component {
       isOnePasswordFile,
     } = this.props;
 
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
     const {
-      files: documents,
       isChecked: checkedDocTitle,
       isIndeterminate: indeterminateDocTitle,
       format: documentsTitleFormat,
-    } = this.state.documents;
+    } = documents;
 
     const {
-      files: spreadsheets,
       isChecked: checkedSpreadsheetTitle,
       isIndeterminate: isIndeterminateSpreadsheetTitle,
       format: spreadsheetsTitleFormat,
-    } = this.state.spreadsheets;
+    } = spreadsheets;
 
     const {
-      files: presentations,
       isChecked: checkedPresentationTitle,
       isIndeterminate: indeterminatePresentationTitle,
       format: presentationsTitleFormat,
-    } = this.state.presentations;
+    } = presentations;
 
     const {
-      files: masterForms,
       isChecked: checkedMasterFormsTitle,
       isIndeterminate: indeterminateMasterFormsTitle,
       format: masterFormsTitleFormat,
-    } = this.state.masterForms;
+    } = masterForms;
 
     const {
-      files: other,
       isChecked: checkedOtherTitle,
       isIndeterminate: indeterminateOtherTitle,
-    } = this.state.other;
+    } = other;
 
     const isCheckedLength = this.getCheckedFileLength();
 
@@ -403,16 +401,16 @@ class DownloadDialogComponent extends React.Component {
     };
 
     const totalItemsNum =
-      this.state.documents.files.length +
-      this.state.spreadsheets.files.length +
-      this.state.presentations.files.length +
-      this.state.masterForms.files.length +
-      this.state.other.files.length +
-      (this.state.documents.files.length > 1 && 1) +
-      (this.state.spreadsheets.files.length > 1 && 1) +
-      (this.state.presentations.files.length > 1 && 1) +
-      (this.state.masterForms.files.length > 1 && 1) +
-      (this.state.other.files.length > 1 && 1);
+      documents.files.length +
+      spreadsheets.files.length +
+      presentations.files.length +
+      masterForms.files.length +
+      other.files.length +
+      (documents.files.length > 1 && 1) +
+      (spreadsheets.files.length > 1 && 1) +
+      (presentations.files.length > 1 && 1) +
+      (masterForms.files.length > 1 && 1) +
+      (other.files.length > 1 && 1);
 
     const mainContent = (
       <>

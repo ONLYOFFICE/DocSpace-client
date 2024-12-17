@@ -51,11 +51,11 @@ const LogoItem = styled.div`
   }
 `;
 
-const NavLogoItem = (props) => {
+const NavLogoItem = ({ opened, onClick }) => {
   // console.log("NavLogoItem render");
   return (
-    <LogoItem opened={props.opened}>
-      <Link className="nav-logo-wrapper" to="/" onClick={props.onClick}>
+    <LogoItem opened={opened}>
+      <Link className="nav-logo-wrapper" to="/" onClick={onClick}>
         <img
           alt="logo"
           className="nav-logo-icon"

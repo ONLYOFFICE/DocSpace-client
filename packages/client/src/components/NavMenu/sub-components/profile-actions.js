@@ -70,7 +70,8 @@ class ProfileActions extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.userIsUpdate) {
+    const { userIsUpdate } = this.props;
+    if (userIsUpdate) {
       this.getAvatar();
     } else {
       this.setState((prevState) => ({ avatar: prevState.user.avatar }));
@@ -78,18 +79,19 @@ class ProfileActions extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
-      this.setState({ user: this.props.user });
+    const { user, opened, userIsUpdate, setUserIsUpdate } = this.props;
+    if (user !== prevProps.user) {
+      this.setState({ user });
       this.getAvatar();
     }
 
-    if (this.props.opened !== prevProps.opened) {
-      this.setOpened(this.props.opened);
+    if (opened !== prevProps.opened) {
+      this.setOpened(opened);
     }
 
-    if (this.props.userIsUpdate !== prevProps.userIsUpdate) {
+    if (userIsUpdate !== prevProps.userIsUpdate) {
       this.getAvatar();
-      this.props.setUserIsUpdate(false);
+      setUserIsUpdate(false);
     }
   }
 
@@ -98,6 +100,7 @@ class ProfileActions extends React.PureComponent {
   };
 
   onClose = (e) => {
+    const { opened } = this.state;
     const path = e.path || (e.composedPath && e.composedPath());
     const dropDownItem = path ? path.find((x) => x === this.ref.current) : null;
     if (dropDownItem) return;
@@ -108,10 +111,12 @@ class ProfileActions extends React.PureComponent {
       navElement[0].style.setProperty("z-index", 180, "important");
     }
 
-    this.setOpened(!this.state.opened);
+    this.setOpened(!opened);
   };
 
   onClick = (action, e) => {
+    const { opened } = this.state;
+
     action.onClick && action.onClick(e);
 
     const navElement = document.getElementsByClassName("profileMenuIcon");
@@ -120,11 +125,12 @@ class ProfileActions extends React.PureComponent {
       navElement[0].style.setProperty("z-index", 210, "important");
     }
 
-    this.setOpened(!this.state.opened);
+    this.setOpened(!opened);
   };
 
   onClickItemLink = (e) => {
-    this.setOpened(!this.state.opened);
+    const { opened } = this.state;
+    this.setOpened(!opened);
 
     e.preventDefault();
   };
@@ -137,11 +143,12 @@ class ProfileActions extends React.PureComponent {
 
   render() {
     // console.log("Layout sub-component ProfileActions render");
+    const { userActions, isProduct } = this.props;
     const { user, opened, avatar } = this.state;
     const userRole = getUserType(user);
 
     return (
-      <StyledDiv isProduct={this.props.isProduct} ref={this.ref}>
+      <StyledDiv isProduct={isProduct} ref={this.ref}>
         <Avatar
           onClick={this.onClick}
           role={userRole}
@@ -162,7 +169,7 @@ class ProfileActions extends React.PureComponent {
           forwardedRef={this.ref}
         >
           <div style={{ paddingTop: "8px" }}>
-            {this.props.userActions.map(
+            {userActions.map(
               (action) =>
                 action &&
                 (action?.isButton ? (

@@ -48,15 +48,16 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFileContextClick = (withSelect) => {
-      const { onSelectItem } = this.props;
-      const { id, isFolder } = this.props.item;
+      const { onSelectItem, item } = this.props;
+      const { id, isFolder } = item;
 
       id !== -1 && onSelectItem({ id, isFolder }, false, false, !withSelect);
     };
 
     onHideContextMenu = () => {
+      const { setEnabledHotkeys } = this.props;
       // this.props.setSelected("none");
-      this.props.setEnabledHotkeys(true);
+      setEnabledHotkeys(true);
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
@@ -75,9 +76,9 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
+      const { isTrashFolder, dragging, setDragging, isDisabledDropItem, item } =
         this.props;
-      const { fileExst, isFolder, id } = this.props.item;
+      const { fileExst, isFolder, id } = item;
 
       if (isTrashFolder || isDisabledDropItem)
         return dragging && setDragging(false);
@@ -102,9 +103,10 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         canDrag,
         viewAs,
+        isIndexEditingMode,
       } = this.props;
 
-      if (this.props.isIndexEditingMode) {
+      if (isIndexEditingMode) {
         if (
           e.target.closest(".change-index_icon") ||
           e.target.querySelector(".change-index_icon") ||
@@ -232,11 +234,13 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onSelectTag = (tag) => {
-      this.props.selectTag(tag);
+      const { selectTag } = this.props;
+      selectTag(tag);
     };
 
     onSelectOption = (selectedOption) => {
-      this.props.selectOption(selectedOption);
+      const { selectOption } = this.props;
+      selectOption(selectedOption);
     };
 
     getContextModel = () => {
@@ -245,17 +249,19 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDragOver = (e) => {
+      const { setDragging } = this.props;
       if (
         e.dataTransfer.items.length > 0 &&
         e.dataTransfer.dropEffect !== "none"
       ) {
-        this.props.setDragging(true);
+        setDragging(true);
       }
     };
 
     onDragLeave = (e) => {
+      const { setDragging } = this.props;
       if (!e.relatedTarget || !e.dataTransfer.items.length) {
-        this.props.setDragging(false);
+        setDragging(false);
       }
     };
 

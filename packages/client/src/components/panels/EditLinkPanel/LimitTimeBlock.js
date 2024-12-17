@@ -38,6 +38,8 @@ const LimitTimeBlock = (props) => {
     isExpired,
     language,
     isPrimary,
+    headerText,
+    bodyText,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -54,8 +56,8 @@ const LimitTimeBlock = (props) => {
   if (isPrimary) {
     return (
       <ToggleBlock
-        headerText={props.headerText}
-        bodyText={props.bodyText}
+        headerText={headerText}
+        bodyText={bodyText}
         withToggle={false}
       />
     );

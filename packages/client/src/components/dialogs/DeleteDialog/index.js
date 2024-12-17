@@ -52,13 +52,14 @@ const DeleteDialogComponent = (props) => {
     deleteRoomsAction,
     isPersonalRoom,
     isRoom,
+    selection: selectionProps,
   } = props;
 
   const selection = [];
   let i = 0;
 
-  while (props.selection.length !== i) {
-    const item = props.selection[i];
+  while (selectionProps.length !== i) {
+    const item = selectionProps[i];
 
     if (!item?.isEditing) {
       // if (item?.access === 0 || item?.access === 1 || unsubscribe) {

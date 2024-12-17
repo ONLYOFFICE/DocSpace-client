@@ -98,29 +98,29 @@ const useDynamicScript = (args) => {
 };
 
 const System = (props) => {
+  const { system } = props;
+
   const { ready, failed } = useDynamicScript({
-    url: props.system && props.system.url,
-    id: props.system && props.system.scope,
+    url: system && system.url,
+    id: system && system.scope,
   });
 
-  if (!props.system) {
+  if (!system) {
     console.log(`Not system specified`);
     return <Error404 />;
   }
 
   if (!ready) {
-    console.log(`Loading dynamic script: ${props.system.url}`);
+    console.log(`Loading dynamic script: ${system.url}`);
     return <AppLoader />;
   }
 
   if (failed) {
-    console.log(`Failed to load dynamic script: ${props.system.url}`);
+    console.log(`Failed to load dynamic script: ${system.url}`);
     return <Error520Component />;
   }
 
-  const Component = React.lazy(
-    loadComponent(props.system.scope, props.system.module),
-  );
+  const Component = React.lazy(loadComponent(system.scope, system.module));
 
   return (
     <React.Suspense fallback={<AppLoader />}>

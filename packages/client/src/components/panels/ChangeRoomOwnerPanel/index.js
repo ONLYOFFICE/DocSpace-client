@@ -99,7 +99,8 @@ const ChangeRoomOwner = (props) => {
   };
 
   const onClose = () => {
-    if (props.onClose) props.onClose();
+    const { onClose } = props;
+    if (onClose) onClose();
     setIsVisible(false);
   };
 

@@ -174,17 +174,12 @@ const FilesRowContent = ({
   createdDate,
   fileOwner,
   isDefaultRoomsQuotaSet,
-  isStatisticsAvailable,
-  showStorageInfo,
   isIndexing,
   displayFileExtension,
-  additionalInfo: additionalInfoProp,
 }) => {
   const {
     contentLength,
     fileExst,
-    filesCount,
-    foldersCount,
     providerKey,
     title,
     isRoom,
@@ -243,25 +238,6 @@ const FilesRowContent = ({
     }
   };
 
-  // const additionalComponent = () => {
-  //   if (isRooms) return getRoomTypeName(item.roomType, t);
-
-  //   if (!fileExst && !contentLength && !providerKey)
-  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-  //       "Translations:Files",
-  //     )}`;
-
-  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
-
-  //   return "";
-  // };
-
-  // const additionalInfo = additionalComponent();
-
-  const additionalInfo =
-    item.isTemplate && additionalInfoProp
-      ? additionalInfoProp
-      : additionalComponent();
   const mainInfo = contentComponent();
   const authorInfo = item.isTemplate ? decode(fileOwner) : "";
 
@@ -316,19 +292,6 @@ const FilesRowContent = ({
             {mainInfo}
           </Text>
         )}
-        {/* {additionalInfo && (
-          <Text
-            containerMinWidth="90px"
-            containerWidth="10%"
-            as="div"
-            className="row-content-text"
-            fontSize="12px"
-            fontWeight={400}
-            truncate={true}
-          >
-            {additionalInfo}
-          </Text>
-        )} */}
         {authorInfo && (
           <Text
             containerMinWidth="90px"
@@ -350,7 +313,13 @@ const FilesRowContent = ({
 
 export default inject(
   (
-    { currentQuotaStore, settingsStore, treeFoldersStore, filesStore, selectedFolderStore, },
+    {
+      currentQuotaStore,
+      settingsStore,
+      treeFoldersStore,
+      filesStore,
+      selectedFolderStore,
+    },
     { item },
   ) => {
     const { filter, roomsFilter } = filesStore;
@@ -365,16 +334,13 @@ export default inject(
         ? roomsFilter.sortBy
         : filter.sortBy;
 
-    const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
-      currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       filterSortBy,
       theme: settingsStore.theme,
       isTrashFolder: isRecycleBinFolder,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      showStorageInfo,
       isIndexing: isIndexedFolder,
     };
   },

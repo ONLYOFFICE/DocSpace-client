@@ -29,7 +29,7 @@ import React from "react";
 import { Scrollbar } from "../scrollbar";
 import { StyledAside } from "./Aside.styled";
 import { AsideProps } from "./Aside.types";
-import { AsideHeader } from "./AsideHeader";
+import { AsideHeader } from "../aside-header";
 
 const AsidePure = (props: AsideProps) => {
   const {

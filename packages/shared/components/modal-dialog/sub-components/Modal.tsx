@@ -32,7 +32,7 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
 import { Scrollbar } from "../../scrollbar";
-import { AsideHeader } from "../../aside";
+import { AsideHeader } from "../../aside-header";
 import {
   StyledModal,
   Content,

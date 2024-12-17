@@ -24,4 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Aside } from "./Aside";
+interface AsideBased {
+  header?: string | React.ReactNode;
+  className?: string;
+  id?: string;
+  headerIcons?: { key: string; url: string; onClick: () => void }[];
+  style?: React.CSSProperties;
+  isLoading?: boolean;
+  withoutBorder?: boolean;
+  headerHeight?: string;
+}
+
+export type AsideHeaderProps =
+  | (AsideBased & {
+      isCloseable?: never;
+      onCloseClick?: never;
+
+      isBackButton?: never;
+      onBackClick?: never;
+    })
+  | (AsideBased & {
+      isCloseable: boolean;
+      onCloseClick: () => void;
+
+      isBackButton: boolean;
+      onBackClick: () => void;
+    })
+  | (AsideBased & {
+      isCloseable?: never;
+      onCloseClick?: never;
+
+      isBackButton: boolean;
+      onBackClick: () => void;
+    })
+  | (AsideBased & {
+      isCloseable: boolean;
+      onCloseClick: () => void;
+
+      isBackButton?: never;
+      onBackClick?: never;
+    });

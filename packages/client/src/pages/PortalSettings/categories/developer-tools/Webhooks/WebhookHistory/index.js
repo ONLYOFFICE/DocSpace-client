@@ -45,7 +45,9 @@ const parseUrl = (url) => {
   const searchParams = urlObj.searchParams;
 
   const params = {};
-  for (const [key, value] of searchParams) {
+  const entries = Array.from(searchParams.entries());
+  for (let i = 0; i < entries.length; i++) {
+    const [key, value] = entries[i];
     params[key] = value;
   }
   params.deliveryDate =

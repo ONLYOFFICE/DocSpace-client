@@ -34,17 +34,15 @@ const TABLE_COLUMNS = `webhooksHistoryColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (const col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
+      return { ...(col || {}), enable: !!column };
+    });
 
-      columns.push(col);
-    }
     return columns;
   }
   return defaultColumns;

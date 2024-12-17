@@ -55,14 +55,11 @@ class SectionBodyContent extends React.Component {
   }
 
   componentDidMount() {
-    const { setFirstLoad } = this.props;
+    const { setFirstLoad, fileId, fileSecurity } = this.props;
 
-    const fileId = this.props.fileId;
+    this.getFileVersions(fileId, fileSecurity);
 
-    if (fileId && fileId !== this.props.fileId) {
-      this.getFileVersions(fileId, this.props.fileSecurity);
-      setFirstLoad(false);
-    }
+    setFirstLoad(false);
   }
 
   getFileVersions = (fileId, fileSecurity) => {
@@ -107,7 +104,8 @@ class SectionBodyContent extends React.Component {
   };
 
   getSize = (i) => {
-    return this.state.rowSizes[i] ? this.state.rowSizes[i] : 66;
+    const { rowSizes } = this.state;
+    return rowSizes[i] || 66;
   };
 
   renderRow = ({ index, style }) => {
@@ -139,9 +137,10 @@ class SectionBodyContent extends React.Component {
 
   render() {
     const { versions, isLoading } = this.props;
+    const { isRestoreProcess } = this.state;
 
     const renderList = ({ height, width }) => (
-      <StyledVersionList isRestoreProcess={this.state.isRestoreProcess}>
+      <StyledVersionList isRestoreProcess={isRestoreProcess}>
         <List
           ref={this.listRef}
           className="List"

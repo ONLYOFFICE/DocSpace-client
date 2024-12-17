@@ -167,13 +167,13 @@ class AmazonSettings extends React.Component {
     const { formSettings } = this.props;
 
     if (formSettings[REGION] !== prevProps.formSettings[REGION]) {
-      for (const value of this.regions) {
-        if (value.systemName === formSettings[REGION]) {
-          this.setState({
-            region: value,
-          });
-          return;
-        }
+      const selectedRegion = this.regions.find(
+        (value) => value.systemName === formSettings[REGION],
+      );
+      if (selectedRegion) {
+        this.setState({
+          region: selectedRegion,
+        });
       }
     }
   }

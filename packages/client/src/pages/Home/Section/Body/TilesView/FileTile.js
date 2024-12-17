@@ -87,6 +87,7 @@ const FileTile = (props) => {
     badgeUrl,
     icon,
     isDownload,
+    selectableRef,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -133,7 +134,7 @@ const FileTile = (props) => {
   };
 
   return (
-    <div ref={props.selectableRef} id={id}>
+    <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}

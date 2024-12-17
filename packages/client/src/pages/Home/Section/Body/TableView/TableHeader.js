@@ -80,10 +80,18 @@ class FilesTableHeader extends React.Component {
       roomsFilter,
       filter,
       changeDocumentsTabs,
+      withContent,
+      headerBorder,
     } = this.props;
 
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+
+    const {
+      isRecentTab: stateIsRecentTab,
+      sortBy: stateSortBy,
+      sortOrder: stateSortOrder,
+    } = this.state;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
@@ -93,25 +101,25 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== this.state.isRecentTab ||
+      isRecentTab !== stateIsRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
-      (!changeDocumentsTabs && sortBy !== this.state.sortBy) ||
-      (!changeDocumentsTabs && sortOrder !== this.state.sortOrder)
+      (!changeDocumentsTabs && sortBy !== stateSortBy) ||
+      (!changeDocumentsTabs && sortOrder !== stateSortOrder)
     ) {
       return this.updateTableColumns();
     }
 
     const { columns } = this.state;
 
-    if (this.props.withContent !== prevProps.withContent) {
+    if (withContent !== prevProps.withContent) {
       const columnIndex = columns.findIndex((c) => c.key === "Share");
       if (columnIndex === -1) return;
 
-      columns[columnIndex].enable = this.props.withContent;
+      columns[columnIndex].enable = withContent;
       this.setState({ columns });
     }
 
-    if (this.props.headerBorder) {
+    if (headerBorder) {
       const elem = document.getElementById("table-container_caption-header");
       elem?.classList?.add("hotkeys-lengthen-header");
     } else {
@@ -125,7 +133,7 @@ class FilesTableHeader extends React.Component {
   }
 
   onBeginScroll = () => {
-    const { firstElemChecked } = this.props;
+    const { firstElemChecked, headerBorder } = this.props;
 
     const currentScrollPosition = this.customScrollElm.scrollTop;
     const elem = document.getElementById("table-container_caption-header");
@@ -133,8 +141,7 @@ class FilesTableHeader extends React.Component {
     if (currentScrollPosition === 0) {
       this.isBeginScrolling = false;
 
-      this.props.headerBorder &&
-        elem?.classList?.add("hotkeys-lengthen-header");
+      headerBorder && elem?.classList?.add("hotkeys-lengthen-header");
 
       !firstElemChecked && elem?.classList?.remove("lengthen-header");
       return;
@@ -149,7 +156,8 @@ class FilesTableHeader extends React.Component {
   };
 
   setTableColumns = (tableColumns) => {
-    localStorage.setItem(this.props.tableStorageName, tableColumns);
+    const { tableStorageName } = this.props;
+    localStorage.setItem(tableStorageName, tableColumns);
   };
 
   updateTableColumns = () => {
@@ -201,13 +209,22 @@ class FilesTableHeader extends React.Component {
   };
 
   getFilesColumns = () => {
-    const { t, isPublicRoom } = this.props;
+    const {
+      t,
+      isPublicRoom,
+      authorColumnIsEnabled,
+      nameColumnIsEnabled,
+      typeColumnIsEnabled,
+      sizeColumnIsEnabled,
+      createdColumnIsEnabled,
+      modifiedColumnIsEnabled,
+    } = this.props;
 
     const authorBlock = !isPublicRoom
       ? {
           key: "Author",
           title: t("ByAuthor"),
-          enable: this.props.authorColumnIsEnabled,
+          enable: authorColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
@@ -220,7 +237,7 @@ class FilesTableHeader extends React.Component {
         key: "Name",
         title: t("Common:Name"),
         resizable: true,
-        enable: this.props.nameColumnIsEnabled,
+        enable: nameColumnIsEnabled,
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
@@ -230,7 +247,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Created",
         title: t("ByCreation"),
-        enable: this.props.createdColumnIsEnabled,
+        enable: createdColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
         // onClick: this.onFilter,
@@ -239,7 +256,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Modified",
         title: t("ByLastModified"),
-        enable: this.props.modifiedColumnIsEnabled,
+        enable: modifiedColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         onClick: this.onFilter,
@@ -248,7 +265,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Size",
         title: t("Common:Size"),
-        enable: this.props.sizeColumnIsEnabled,
+        enable: sizeColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
         onClick: this.onFilter,
@@ -257,7 +274,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: this.props.typeColumnIsEnabled,
+        enable: typeColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
@@ -269,13 +286,24 @@ class FilesTableHeader extends React.Component {
   };
 
   getIndexingColumns = () => {
-    const { t, isPublicRoom, indexColumnSize } = this.props;
+    const {
+      t,
+      isPublicRoom,
+      indexColumnSize,
+      authorVDRColumnIsEnabled,
+      indexVDRColumnIsEnabled,
+      nameColumnIsEnabled,
+      createdVDRColumnIsEnabled,
+      modifiedVDRColumnIsEnabled,
+      sizeVDRColumnIsEnabled,
+      typeVDRColumnIsEnabled,
+    } = this.props;
 
     const authorBlock = !isPublicRoom
       ? {
           key: "AuthorIndexing",
           title: t("ByAuthor"),
-          enable: this.props.authorVDRColumnIsEnabled,
+          enable: authorVDRColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
@@ -287,7 +315,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Index",
         title: "#",
-        enable: this.props.indexVDRColumnIsEnabled,
+        enable: indexVDRColumnIsEnabled,
         minWidth: indexColumnSize,
         resizable: false,
         isShort: true,
@@ -296,7 +324,7 @@ class FilesTableHeader extends React.Component {
         key: "Name",
         title: t("Common:Name"),
         resizable: true,
-        enable: this.props.nameColumnIsEnabled,
+        enable: nameColumnIsEnabled,
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
@@ -306,7 +334,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "CreatedIndexing",
         title: t("ByCreation"),
-        enable: this.props.createdVDRColumnIsEnabled,
+        enable: createdVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
         // onClick: this.onFilter,
@@ -315,7 +343,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "ModifiedIndexing",
         title: t("ByLastModified"),
-        enable: this.props.modifiedVDRColumnIsEnabled,
+        enable: modifiedVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         onClick: this.onFilter,
@@ -324,7 +352,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "SizeIndexing",
         title: t("Common:Size"),
-        enable: this.props.sizeVDRColumnIsEnabled,
+        enable: sizeVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
         onClick: this.onFilter,
@@ -333,7 +361,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "TypeIndexing",
         title: t("Common:Type"),
-        enable: this.props.typeVDRColumnIsEnabled,
+        enable: typeVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
@@ -345,13 +373,23 @@ class FilesTableHeader extends React.Component {
   };
 
   getRecentTabColumns = () => {
-    const { t, isPublicRoom } = this.props;
+    const {
+      t,
+      isPublicRoom,
+      authorRecentColumnIsEnabled,
+      nameColumnIsEnabled,
+      createdRecentColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
+      modifiedRecentColumnIsEnabled,
+      sizeRecentColumnIsEnabled,
+      typeRecentColumnIsEnabled,
+    } = this.props;
 
     const authorBlock = !isPublicRoom
       ? {
           key: "AuthorRecent",
           title: t("ByAuthor"),
-          enable: this.props.authorRecentColumnIsEnabled,
+          enable: authorRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
@@ -364,7 +402,7 @@ class FilesTableHeader extends React.Component {
         key: "Name",
         title: t("Common:Name"),
         resizable: true,
-        enable: this.props.nameColumnIsEnabled,
+        enable: nameColumnIsEnabled,
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
@@ -374,7 +412,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "CreatedRecent",
         title: t("ByCreation"),
-        enable: this.props.createdRecentColumnIsEnabled,
+        enable: createdRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
         // onClick: this.onFilter,
@@ -383,7 +421,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "LastOpened",
         title: t("DateLastOpened"),
-        enable: this.props.lastOpenedColumnIsEnabled,
+        enable: lastOpenedColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.LastOpened,
         onClick: this.onFilter,
@@ -392,7 +430,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "ModifiedRecent",
         title: t("ByLastModified"),
-        enable: this.props.modifiedRecentColumnIsEnabled,
+        enable: modifiedRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         // onClick: this.onFilter,
@@ -401,7 +439,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "SizeRecent",
         title: t("Common:Size"),
-        enable: this.props.sizeRecentColumnIsEnabled,
+        enable: sizeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
         onClick: this.onFilter,
@@ -410,7 +448,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "TypeRecent",
         title: t("Common:Type"),
-        enable: this.props.typeRecentColumnIsEnabled,
+        enable: typeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
@@ -421,14 +459,23 @@ class FilesTableHeader extends React.Component {
   };
 
   getTrashFolderColumns = () => {
-    const { t } = this.props;
+    const {
+      t,
+      nameColumnIsEnabled,
+      roomColumnIsEnabled,
+      authorTrashColumnIsEnabled,
+      createdTrashColumnIsEnabled,
+      erasureColumnIsEnabled,
+      enable: sizeTrashColumnIsEnabled,
+      typeTrashColumnIsEnabled,
+    } = this.props;
 
     const columns = [
       {
         key: "Name",
         title: t("Common:Name"),
         resizable: true,
-        enable: this.props.nameColumnIsEnabled,
+        enable: nameColumnIsEnabled,
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
@@ -437,7 +484,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Room",
         title: t("Common:Room"),
-        enable: this.props.roomColumnIsEnabled,
+        enable: roomColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Room,
         // onClick: this.onFilter,
@@ -446,7 +493,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "AuthorTrash",
         title: t("ByAuthor"),
-        enable: this.props.authorTrashColumnIsEnabled,
+        enable: authorTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Author,
         // onClick: this.onFilter,
@@ -455,7 +502,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "CreatedTrash",
         title: t("ByCreation"),
-        enable: this.props.createdTrashColumnIsEnabled,
+        enable: createdTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
         // onClick: this.onFilter,
@@ -464,7 +511,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Erasure",
         title: t("ByErasure"),
-        enable: this.props.erasureColumnIsEnabled,
+        enable: erasureColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         onClick: this.onFilter,
@@ -473,7 +520,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "SizeTrash",
         title: t("Common:Size"),
-        enable: this.props.sizeTrashColumnIsEnabled,
+        enable: sizeTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
         onClick: this.onFilter,
@@ -482,7 +529,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "TypeTrash",
         title: t("Common:Type"),
-        enable: this.props.typeTrashColumnIsEnabled,
+        enable: typeTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
@@ -494,15 +541,25 @@ class FilesTableHeader extends React.Component {
   };
 
   getRoomsColumns = () => {
-    const { t, isDefaultRoomsQuotaSet, showStorageInfo, isArchiveFolder } =
-      this.props;
+    const {
+      t,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isArchiveFolder,
+      roomColumnNameIsEnabled,
+      roomColumnOwnerIsEnabled,
+      roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
+      roomColumnTypeIsEnabled,
+      roomColumnTagsIsEnabled,
+    } = this.props;
 
     const columns = [
       {
         key: "Name",
         title: t("Common:Name"),
         resizable: true,
-        enable: this.props.roomColumnNameIsEnabled,
+        enable: roomColumnNameIsEnabled,
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
@@ -511,7 +568,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: this.props.roomColumnTypeIsEnabled,
+        enable: roomColumnTypeIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.RoomType,
         onChange: this.onColumnChange,
@@ -520,7 +577,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Tags",
         title: t("Common:Tags"),
-        enable: this.props.roomColumnTagsIsEnabled,
+        enable: roomColumnTagsIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Tags,
         withTagRef: true,
@@ -530,7 +587,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Owner",
         title: t("Common:Owner"),
-        enable: this.props.roomColumnOwnerIsEnabled,
+        enable: roomColumnOwnerIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
@@ -539,7 +596,7 @@ class FilesTableHeader extends React.Component {
       {
         key: "Activity",
         title: t("LastActivity"),
-        enable: this.props.roomColumnActivityIsEnabled,
+        enable: roomColumnActivityIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
         onChange: this.onColumnChange,
@@ -554,7 +611,7 @@ class FilesTableHeader extends React.Component {
           isDefaultRoomsQuotaSet && !isArchiveFolder
             ? t("Common:StorageAndQuota")
             : t("Common:Storage"),
-        enable: this.props.roomQuotaColumnIsEnable,
+        enable: roomQuotaColumnIsEnable,
         sortBy: SortByFieldName.UsedSpace,
         resizable: true,
         onChange: this.onColumnChange,
@@ -566,11 +623,12 @@ class FilesTableHeader extends React.Component {
 
   onColumnChange = (key) => {
     const { columns } = this.state;
+    const { setColumnEnable } = this.props;
 
     const columnIndex = columns.findIndex((c) => c.key === key);
     if (columnIndex === -1) return;
 
-    this.props.setColumnEnable(key);
+    setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });

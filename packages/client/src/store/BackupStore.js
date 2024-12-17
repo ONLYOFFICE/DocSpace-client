@@ -343,10 +343,12 @@ class BackupStore {
       const { period, day, hour } = cronParams;
 
       const defaultFormSettings = {};
-      for (const variable in storageParams) {
-        if (variable === "module") continue;
-        defaultFormSettings[variable] = storageParams[variable];
-      }
+      Object.keys(storageParams).forEach((variable) => {
+        if (variable !== "module") {
+          defaultFormSettings[variable] = storageParams[variable];
+        }
+      });
+
       if (defaultFormSettings) {
         this.setFormSettings({ ...defaultFormSettings });
         this.setDefaultFormSettings({ ...defaultFormSettings });
@@ -693,14 +695,13 @@ class BackupStore {
   };
 
   get isValidForm() {
-    if (Object.keys(this.requiredFormSettings).length == 0) return;
+    const requiredKeys = Object.keys(this.requiredFormSettings);
+    if (!requiredKeys.length) return;
 
-    for (const key of this.requiredFormSettings) {
-      const elem = this.formSettings[key];
-      if (!elem) return false;
-      if (!elem.trim()) return false;
-    }
-    return true;
+    return !requiredKeys.some((key) => {
+      const value = this.formSettings[key];
+      return !value || !value.trim();
+    });
   }
 
   isFormReady = () => {
@@ -733,9 +734,9 @@ class BackupStore {
       return;
     }
 
-    for (const [key, value] of Object.entries(values)) {
-      formSettingsTemp[key] = value;
-    }
+    Object.keys(values).forEach((key) => {
+      formSettingsTemp[key] = values[key];
+    });
 
     this.setFormSettings({ ...formSettingsTemp });
     this.setErrorsFormFields({});

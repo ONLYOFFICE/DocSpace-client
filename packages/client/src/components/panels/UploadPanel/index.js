@@ -80,12 +80,14 @@ class UploadPanelComponent extends React.Component {
   };
 
   clearUploadPanel = () => {
-    this.props.clearUploadData();
+    const { clearUploadData } = this.props;
+    clearUploadData();
     this.onClose();
   };
 
   onCancelUpload = () => {
-    this.props.cancelUpload(this.props.t);
+    const { cancelUpload, t } = this.props;
+    cancelUpload(t);
   };
 
   render() {

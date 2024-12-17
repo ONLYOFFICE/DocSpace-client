@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
@@ -35,17 +35,15 @@ const TABLE_COLUMNS = `webhooksConfigColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (const col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
+      return { ...(col || {}), enable: !!column };
+    });
 
-      columns.push(col);
-    }
     return columns;
   }
   return defaultColumns;

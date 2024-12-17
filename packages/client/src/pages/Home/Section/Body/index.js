@@ -247,9 +247,9 @@ const SectionBodyContent = (props) => {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          for (const cl of classElements) {
+          classElements.forEach((cl) => {
             cl.classList.remove("droppable-hover");
-          }
+          });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
           }
@@ -266,11 +266,11 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          for (const cl of classElements) {
+          classElements.forEach((cl) => {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }
-          }
+          });
           if (isIndexEditingMode) {
             parent.insertBefore(indexSeparatorNode, tableItem);
           }

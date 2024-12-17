@@ -155,14 +155,16 @@ class ThirdPartyServices extends React.Component {
   };
 
   onModalClose = () => {
+    const { setSelectedConsumer } = this.props;
     this.setState({
       dialogVisible: false,
     });
-    this.props.setSelectedConsumer();
+    setSelectedConsumer();
   };
 
   setConsumer = (e) => {
-    this.props.setSelectedConsumer(e.currentTarget.dataset.consumer);
+    const { setSelectedConsumer } = this.props;
+    setSelectedConsumer(e.currentTarget.dataset.consumer);
   };
 
   render() {
@@ -175,6 +177,7 @@ class ThirdPartyServices extends React.Component {
       theme,
       currentColorScheme,
       isThirdPartyAvailable,
+      supportEmail,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -188,8 +191,7 @@ class ThirdPartyServices extends React.Component {
 
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
 
-    const submitRequest = () =>
-      (window.location = `mailto:${this.props.supportEmail}`);
+    const submitRequest = () => (window.location = `mailto:${supportEmail}`);
 
     return (
       <>

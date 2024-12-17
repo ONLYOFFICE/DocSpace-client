@@ -267,6 +267,7 @@ const SectionHeaderContent = (props) => {
     getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
+    rootFolderId,
   } = props;
 
   const location = useLocation();
@@ -454,7 +455,7 @@ const SectionHeaderContent = (props) => {
   };
   const onLogoClick = () => {
     if (isFrame) return;
-    moveToPublicRoom(props.rootFolderId);
+    moveToPublicRoom(rootFolderId);
   };
 
   const headerMenu = isIndexEditingMode

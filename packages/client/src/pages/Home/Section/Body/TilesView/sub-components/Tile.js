@@ -506,16 +506,17 @@ class Tile extends React.PureComponent {
 
   getIconFile = () => {
     const { temporaryIcon, thumbnailClick, thumbnail, item } = this.props;
+    const { errorLoadSrc } = this.state;
 
     const icon = item.isPlugin
       ? item.fileTileIcon
-      : thumbnail && !this.state.errorLoadSrc
+      : thumbnail && !errorLoadSrc
         ? thumbnail
         : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
-        {thumbnail && !this.state.errorLoadSrc ? (
+        {thumbnail && !errorLoadSrc ? (
           <img
             src={thumbnail}
             className="thumbnail-image"
@@ -612,7 +613,9 @@ class Tile extends React.PureComponent {
       isHighlight,
       iconProgress,
       isDownload,
+      theme,
     } = this.props;
+
     const { isFolder, isRoom, id, fileExst } = item;
 
     const renderElement = hasOwnProperty(this.props, "element");
@@ -635,7 +638,7 @@ class Tile extends React.PureComponent {
       this.cm.current.show(e);
     };
     const contextMenuDirection =
-      this.props.theme.interfaceDirection === "rtl" ? "left" : "right";
+      theme.interfaceDirection === "rtl" ? "left" : "right";
     const icon = this.getIconFile();
     const [FilesTileContent, badges] = children;
     const quickButtons = contentElement;

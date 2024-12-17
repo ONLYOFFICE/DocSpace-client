@@ -143,9 +143,9 @@ class CreateEditRoomStore {
       return;
     }
 
-    for (const [key, value] of Object.entries(object)) {
-      this.watermarksSettings[key] = value;
-    }
+    Object.keys(object).forEach((key) => {
+      this.watermarksSettings[key] = object[key];
+    });
   };
 
   resetWatermarks = () => {

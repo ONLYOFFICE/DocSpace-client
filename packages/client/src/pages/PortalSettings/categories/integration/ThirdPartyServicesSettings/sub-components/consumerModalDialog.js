@@ -54,53 +54,51 @@ const maxLength = {
 const defaultMaxLength = 255;
 
 class ConsumerModalDialog extends React.Component {
-  consumerInstruction =
-    this.props.selectedConsumer.instruction &&
-    format(this.props.selectedConsumer.instruction, <Box marginProp="0" />);
-
-  helpCenterDescription = (
-    <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
-      Detailed instructions in our{" "}
-      <Link
-        id="help-center-link"
-        color={this.props.theme.client.settings.integration.linkColor}
-        isHovered={false}
-        target="_blank"
-        href={this.thirdPartyServicesUrl()}
-      >
-        Help Center
-      </Link>
-    </Trans>
-  );
-
-  supportTeamDescription = (
-    <StyledBox>
-      <Trans
-        t={this.props.t}
-        i18nKey="ThirdPartyBottomDescription"
-        ns="Settings"
-      >
-        If you still have some questions on how to connect this service or need
-        technical assistance, please feel free to contact our{" "}
-        <Link
-          id="support-team-link"
-          color={this.props.theme.client.settings.integration.linkColor}
-          isHovered={false}
-          target="_blank"
-          href={this.props.urlSupport}
-        >
-          Support Team
-        </Link>
-      </Trans>
-    </StyledBox>
-  );
-
   constructor(props) {
     super(props);
     this.state = {};
     const required = createRef();
     required.current = [];
     this.requiredRef = required.current;
+
+    const { selectedConsumer, t, theme, urlSupport } = this.props;
+
+    this.consumerInstruction =
+      selectedConsumer.instruction &&
+      format(selectedConsumer.instruction, <Box marginProp="0" />);
+
+    this.helpCenterDescription = (
+      <Trans t={t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
+        Detailed instructions in our{" "}
+        <Link
+          id="help-center-link"
+          color={theme.client.settings.integration.linkColor}
+          isHovered={false}
+          target="_blank"
+          href={this.thirdPartyServicesUrl()}
+        >
+          Help Center
+        </Link>
+      </Trans>
+    );
+
+    this.supportTeamDescription = (
+      <StyledBox>
+        <Trans t={t} i18nKey="ThirdPartyBottomDescription" ns="Settings">
+          If you still have some questions on how to connect this service or
+          need technical assistance, please feel free to contact our{" "}
+          <Link
+            id="support-team-link"
+            color={theme.client.settings.integration.linkColor}
+            isHovered={false}
+            target="_blank"
+            href={urlSupport}
+          >
+            Support Team
+          </Link>
+        </Trans>
+      </StyledBox>
+    );
   }
 
   componentDidMount() {
@@ -173,51 +171,77 @@ class ConsumerModalDialog extends React.Component {
   };
 
   thirdPartyServicesUrl = () => {
-    switch (this.props.selectedConsumer.name) {
-      case "docusign" || "docuSign":
-        return this.props.docuSignUrl;
+    const {
+      selectedConsumer,
+      portalSettingsUrl,
+      docuSignUrl,
+      dropboxUrl,
+      boxUrl,
+      mailRuUrl,
+      oneDriveUrl,
+      microsoftUrl,
+      googleUrl,
+      facebookUrl,
+      linkedinUrl,
+      clickatellUrl,
+      smsclUrl,
+      firebaseUrl,
+      appleIDUrl,
+      telegramUrl,
+      wordpressUrl,
+      awsUrl,
+      googleCloudUrl,
+      rackspaceUrl,
+      selectelUrl,
+      yandexUrl,
+      vkUrl,
+    } = this.props;
+    switch (selectedConsumer.name) {
+      case "docusign":
+      case "docuSign":
+        return docuSignUrl;
       case "dropbox":
-        return this.props.dropboxUrl;
+        return dropboxUrl;
       case "box":
-        return this.props.boxUrl;
+        return boxUrl;
       case "mailru":
-        return this.props.mailRuUrl;
+        return mailRuUrl;
       case "skydrive":
-        return this.props.oneDriveUrl;
+        return oneDriveUrl;
       case "microsoft":
-        return this.props.microsoftUrl;
+        return microsoftUrl;
       case "google":
-        return this.props.googleUrl;
+        return googleUrl;
       case "facebook":
-        return this.props.facebookUrl;
+        return facebookUrl;
       case "linkedin":
-        return this.props.linkedinUrl;
+        return linkedinUrl;
       case "clickatell":
-        return this.props.clickatellUrl;
+        return clickatellUrl;
       case "smsc":
-        return this.props.smsclUrl;
+        return smsclUrl;
       case "firebase":
-        return this.props.firebaseUrl;
+        return firebaseUrl;
       case "appleID":
-        return this.props.appleIDUrl;
+        return appleIDUrl;
       case "telegram":
-        return this.props.telegramUrl;
+        return telegramUrl;
       case "wordpress":
-        return this.props.wordpressUrl;
+        return wordpressUrl;
       case "s3":
-        return this.props.awsUrl;
+        return awsUrl;
       case "googlecloud":
-        return this.props.googleCloudUrl;
+        return googleCloudUrl;
       case "rackspace":
-        return this.props.rackspaceUrl;
+        return rackspaceUrl;
       case "selectel":
-        return this.props.selectelUrl;
+        return selectelUrl;
       case "yandex":
-        return this.props.yandexUrl;
+        return yandexUrl;
       case "vk":
-        return this.props.vkUrl;
+        return vkUrl;
       default:
-        return this.props.portalSettingsUrl;
+        return portalSettingsUrl;
     }
   };
 

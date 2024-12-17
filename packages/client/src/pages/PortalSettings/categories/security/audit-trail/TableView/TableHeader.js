@@ -79,20 +79,18 @@ class AuditTableHeader extends React.Component {
   }
 
   getColumns = (defaultColumns) => {
-    const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
-    );
-    const columns = [];
+    const { userId } = this.props;
+
+    const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
 
     if (storageColumns) {
       const splitColumns = storageColumns.split(",");
 
-      for (const col of defaultColumns) {
+      const columns = defaultColumns.map((col) => {
         const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
+        return { ...(col || {}), enable: !!column };
+      });
 
-        columns.push(col);
-      }
       return columns;
     }
     return defaultColumns;
@@ -100,6 +98,8 @@ class AuditTableHeader extends React.Component {
 
   onColumnChange = (key) => {
     const { columns } = this.state;
+    const { userId } = this.props;
+
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
@@ -108,7 +108,7 @@ class AuditTableHeader extends React.Component {
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   };
 
   render() {

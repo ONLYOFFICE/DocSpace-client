@@ -150,6 +150,8 @@ const SectionHeaderContent = (props) => {
     standalone,
     getHeaderMenuItems,
     setSelections,
+    selectorIsOpen,
+    toggleSelector,
   } = props;
 
   const navigate = useNavigate();
@@ -245,8 +247,7 @@ const SectionHeaderContent = (props) => {
     return arrayOfParams;
   };
 
-  const onToggleSelector = (isOpen = !props.selectorIsOpen) => {
-    const { toggleSelector } = props;
+  const onToggleSelector = (isOpen = !selectorIsOpen) => {
     toggleSelector(isOpen);
   };
 
@@ -279,7 +280,9 @@ const SectionHeaderContent = (props) => {
     isHeaderChecked,
     isHeaderVisible,
     selection,
+    addUsers,
   } = props;
+
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
@@ -372,7 +375,7 @@ const SectionHeaderContent = (props) => {
             <TariffBar />
           </div>
 
-          {props.addUsers && (
+          {addUsers && (
             <div className="action-wrapper">
               <IconButton
                 iconName={ActionsHeaderTouchReactSvgUrl}

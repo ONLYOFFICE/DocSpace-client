@@ -26,21 +26,24 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
+import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
 
 import { WhiteLabel } from "./Branding/whitelabel";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
-import MobileView from "./Branding/MobileView";
 
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+const baseUrl = "/portal-settings/customization";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -80,6 +83,7 @@ const Branding = ({
   portals,
   displayAbout,
 }) => {
+  const navigate = useNavigate();
   const isMobileView = deviceType === DeviceType.mobile;
 
   useEffect(() => {
@@ -90,12 +94,19 @@ const Branding = ({
 
   const showSettings = standalone && !hideBlock;
 
+  const onClickLink = (e) => {
+    e.preventDefault();
+    navigate(e.target.pathname);
+  };
+
   if (isMobileView)
     return (
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
-        showSettings={showSettings}
-        displayAbout={displayAbout}
+        displayAbout={showSettings && displayAbout}
+        displayAdditional={showSettings}
+        baseUrl={baseUrl}
+        onClickLink={onClickLink}
       />
     );
 

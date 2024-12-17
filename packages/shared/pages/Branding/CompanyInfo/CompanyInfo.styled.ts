@@ -51,6 +51,10 @@ export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
     padding-bottom: 20px;
   }
 
+  .settings-block {
+    max-width: 433px;
+  }
+
   .text-input {
     font-size: 13px;
   }
@@ -67,6 +71,10 @@ export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
   @media ${mobile} {
     .header {
       display: none;
+    }
+
+    .settings-block {
+      max-width: calc(100% - 32px);
     }
   }
 `;

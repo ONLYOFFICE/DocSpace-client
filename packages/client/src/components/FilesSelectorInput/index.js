@@ -65,6 +65,7 @@ const FilesSelectorInput = (props) => {
     isDocumentIcon,
     withCreate,
     checkCreating,
+    openRoot,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -142,6 +143,7 @@ const FilesSelectorInput = (props) => {
           withCreate={withCreate}
           {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
           checkCreating={checkCreating}
+          openRoot={openRoot}
         />
       </Aside>
     </>

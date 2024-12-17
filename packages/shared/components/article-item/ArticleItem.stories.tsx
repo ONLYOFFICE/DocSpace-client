@@ -40,7 +40,7 @@ const defaultLinkData = {
 };
 
 const meta = {
-  title: "Interactive Elements/ArticleItem",
+  title: "Base UI Components/ArticleItem",
   component: ArticleItemPure,
   parameters: {
     docs: {

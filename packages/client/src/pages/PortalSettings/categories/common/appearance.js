@@ -181,7 +181,7 @@ const Appearance = (props) => {
   };
 
   useEffect(() => {
-    getSettings();
+    // getSettings();
     setDocumentTitle(t("Common:Appearance"));
   }, []);
 
@@ -247,7 +247,7 @@ const Appearance = (props) => {
   useEffect(() => {
     onColorCheck(appearanceTheme);
 
-    if (appearanceTheme.find((theme) => theme.id == selectThemeId).name) {
+    if (appearanceTheme.find((theme) => theme.id == selectThemeId)?.name) {
       setIsDisabledEditButton(true);
       setIsDisabledDeleteButton(true);
       return;
@@ -727,7 +727,7 @@ const Appearance = (props) => {
         </div>
 
         <div className="theme-custom-container">
-          <div className="theme-name">{t("Settings:Custom")}</div>
+          <div className="theme-name">{t("Common:Custom")}</div>
 
           <div className="theme-container">
             <div className="custom-themes">

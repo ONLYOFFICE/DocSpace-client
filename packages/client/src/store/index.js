@@ -187,7 +187,6 @@ const dialogsStore = new DialogsStore(
 const profileActionsStore = new ProfileActionsStore(
   authStore,
   filesStore,
-  peopleStore,
   treeFoldersStore,
   selectedFolderStore,
   pluginStore,
@@ -207,8 +206,6 @@ const peopleStore = new PeopleStore(
   dialogsStore,
   currentQuotaStore,
 );
-
-profileActionsStore.peopleStore = peopleStore;
 
 const uploadDataStore = new UploadDataStore(
   settingsStore,
@@ -272,6 +269,7 @@ const hotkeyStore = new HotkeyStore(
   treeFoldersStore,
   uploadDataStore,
   selectedFolderStore,
+  indexingStore,
 );
 
 const tableStore = new TableStore(

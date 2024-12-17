@@ -85,7 +85,7 @@ const useEditorEvents = ({
   isSkipError,
   openOnNewPage,
   t,
-  frameConfig,
+  sdkConfig,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -221,7 +221,7 @@ const useEditorEvents = ({
 
     frameCallEvent({
       event: "onAppReady",
-      data: { frameId: frameConfig?.frameId },
+      data: { frameId: sdkConfig?.frameId },
     });
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
@@ -238,7 +238,7 @@ const useEditorEvents = ({
         docEditor,
       ); //Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage, frameConfig?.frameId]);
+  }, [config?.errorMessage, sdkConfig?.frameId]);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -269,7 +269,7 @@ const useEditorEvents = ({
   }, [fileInfo]);
 
   const onSDKRequestClose = React.useCallback(() => {
-    const editorGoBack = frameConfig?.editorGoBack;
+    const editorGoBack = sdkConfig?.editorGoBack;
 
     if (editorGoBack === "event") {
       frameCallEvent({ event: "onEditorCloseCallback" });
@@ -277,7 +277,7 @@ const useEditorEvents = ({
       const backUrl = getBackUrl();
       if (backUrl) window.location.replace(backUrl);
     }
-  }, [getBackUrl, frameConfig?.editorGoBack]);
+  }, [getBackUrl, sdkConfig?.editorGoBack]);
 
   const getDefaultFileName = React.useCallback(
     (withExt = false) => {

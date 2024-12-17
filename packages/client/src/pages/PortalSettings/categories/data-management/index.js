@@ -61,7 +61,7 @@ const DataManagementWrapper = (props) => {
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
@@ -124,7 +124,7 @@ const DataManagementWrapper = (props) => {
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
 
-    setIsLoading(true);
+    setIsLoaded(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -136,7 +136,7 @@ const DataManagementWrapper = (props) => {
     );
   };
 
-  if (!isLoading) return <AppLoader />;
+  if (!isLoaded) return null;
 
   return isNotPaidPeriod ? (
     <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />

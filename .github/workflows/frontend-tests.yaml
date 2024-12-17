@@ -2,17 +2,17 @@ name: Frontend tests
 
 on:
   push:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
   pull_request:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
 jobs:
   playwright:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.48.0-jammy
+      image: mcr.microsoft.com/playwright:v1.49.0-jammy
     steps:
       - uses: actions/checkout@v4
       - name: enable corepack

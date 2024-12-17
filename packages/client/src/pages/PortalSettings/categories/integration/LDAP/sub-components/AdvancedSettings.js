@@ -32,7 +32,12 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
+const AdvancedSettings = ({
+  isLdapEnabled,
+  isUIDisabled,
+  isSendWelcomeEmail,
+  setIsSendWelcomeEmail,
+}) => {
   const { t } = useTranslation("Ldap");
 
   const onChange = (e) => {
@@ -52,6 +57,7 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
           className="ldap_checkbox-send-welcome-email"
           label={t("LdapSendWelcomeLetter")}
           isChecked={isSendWelcomeEmail}
+          isDisabled={!isLdapEnabled || isUIDisabled}
           onChange={onChange}
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
@@ -61,8 +67,15 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
 };
 
 export default inject(({ ldapStore }) => {
-  const { setIsSendWelcomeEmail, isSendWelcomeEmail } = ldapStore;
+  const {
+    isLdapEnabled,
+    isUIDisabled,
+    setIsSendWelcomeEmail,
+    isSendWelcomeEmail,
+  } = ldapStore;
   return {
+    isLdapEnabled,
+    isUIDisabled,
     setIsSendWelcomeEmail,
     isSendWelcomeEmail,
   };

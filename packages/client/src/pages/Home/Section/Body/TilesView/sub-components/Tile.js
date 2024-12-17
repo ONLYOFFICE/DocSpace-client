@@ -141,8 +141,11 @@ const StyledTile = styled.div`
   cursor: ${(props) =>
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
-    props.inProgress &&
-    !props.isFolder &&
+    (props.inProgress && props.isFolder
+      ? props.iconProgress !== "duplicate" &&
+        props.iconProgress !== "duplicate-room" &&
+        !props.isDownload
+      : props.inProgress) &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -301,7 +304,7 @@ const StyledFileTileTop = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    object-fit: ${(props) => (props.thumbnails1280x720 ? "cover" : "none")};
+    object-fit: cover;
     object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
     z-index: 0;
     border-radius: 6px 6px 0 0;
@@ -607,7 +610,8 @@ class Tile extends React.PureComponent {
       selectTag,
       selectOption,
       isHighlight,
-      thumbnails1280x720,
+      iconProgress,
+      isDownload,
     } = this.props;
     const { isFolder, isRoom, id, fileExst } = item;
 
@@ -704,6 +708,8 @@ class Tile extends React.PureComponent {
         onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
+        iconProgress={iconProgress}
+        isDownload={isDownload}
       >
         {isFolder || (!fileExst && id === -1) ? (
           isRoom ? (
@@ -873,7 +879,6 @@ class Tile extends React.PureComponent {
               isActive={isActive}
               isMedia={item.canOpenPlayer}
               isHighlight={isHighlight}
-              thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
                 item?.viewAccessibility?.ImageView ||
                 item?.viewAccessibility?.MediaView

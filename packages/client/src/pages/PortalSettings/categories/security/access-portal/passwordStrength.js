@@ -213,7 +213,7 @@ const PasswordStrength = (props) => {
       saveToSessionStorage("defaultPasswordSettings", data);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (error) {
-      toastr.error(e);
+      toastr.error(error);
     }
 
     setIsSaving(false);

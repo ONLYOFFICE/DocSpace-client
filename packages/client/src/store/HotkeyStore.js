@@ -38,6 +38,7 @@ import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 
 class HotkeyStore {
   filesStore;
@@ -47,6 +48,7 @@ class HotkeyStore {
   treeFoldersStore;
   uploadDataStore;
   selectedFolderStore;
+  indexingStore;
 
   elemOffset = 0;
   hotkeysClipboardAction = null;
@@ -59,6 +61,7 @@ class HotkeyStore {
     treeFoldersStore,
     uploadDataStore,
     selectedFolderStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
@@ -68,6 +71,7 @@ class HotkeyStore {
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.indexingStore = indexingStore;
   }
 
   scrollToCaret = () => {
@@ -548,6 +552,15 @@ class HotkeyStore {
 
   deselectAll = () => {
     const { setSelected } = this.filesStore;
+    const { revokeFilesOrder } = this.filesActionsStore;
+    const { isIndexEditingMode, setIsIndexEditingMode } = this.indexingStore;
+
+    if (isIndexEditingMode) {
+      revokeFilesOrder();
+      setIsIndexEditingMode(false);
+
+      return;
+    }
 
     this.elemOffset = 0;
     setSelected("none");
@@ -702,7 +715,7 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return this.filesStore.getCountTilesInRow();
+    return getCountTilesInRow();
   }
 
   get division() {

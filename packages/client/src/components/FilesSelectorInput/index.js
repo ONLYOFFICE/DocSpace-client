@@ -63,6 +63,8 @@ const FilesSelectorInput = (props) => {
     isSelect,
     isRoomBackup,
     isDocumentIcon,
+    withCreate,
+    checkCreating,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -137,7 +139,9 @@ const FilesSelectorInput = (props) => {
           onClose={onClose}
           isPanelVisible={isPanelVisible}
           isSelect={isSelect}
+          withCreate={withCreate}
           {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+          checkCreating={checkCreating}
         />
       </Aside>
     </>

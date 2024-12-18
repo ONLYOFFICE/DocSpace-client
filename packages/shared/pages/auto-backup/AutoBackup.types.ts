@@ -40,11 +40,20 @@ import type { TColorScheme } from "@docspace/shared/themes";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
+export type Option = {
+  key: string;
+  value: string;
+};
+
 export interface AutomaticBackupProps {
   setDocumentTitle: (title: string) => void; // SRC_DIR/helpers/utils
   settingsFileSelector: FilesSelectorSettings;
   buttonSize?: ButtonSize;
   removeItem: ThirdPartyAccountType;
+  isNeedFilePath?: boolean;
+
+  isEnableAuto: boolean; // checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
+
   // authStore
   language: string;
   // end authStore
@@ -66,7 +75,7 @@ export interface AutomaticBackupProps {
   seStorageType: (type: string) => void;
   setSelectedEnableSchedule: VoidFunction;
   toDefault: VoidFunction;
-  selectedStorageType: string;
+  selectedStorageType: Nullable<string>;
   selectedFolderId: Nullable<number | string>;
   isFormReady: () => boolean;
   selectedMaxCopiesNumber: string;
@@ -83,11 +92,11 @@ export interface AutomaticBackupProps {
     isCheckedThirdPartyStorage: boolean,
     selectedFolderId: Nullable<string | number>,
     selectedStorageId?: string | null,
-  ) => TOption[];
+  ) => Option[];
 
   deleteSchedule: (weekdayArr: TOption[]) => void;
   downloadingProgress: number;
-  isEnableAuto: boolean; // checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
+
   isBackupProgressVisible: boolean;
   isChanged: boolean;
   isThirdStorageChanged: boolean;
@@ -132,11 +141,6 @@ export interface AutomaticBackupProps {
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   // end treeFoldersStore
 
-  // filesSelectorInput Store
-  resetNewFolderPath: VoidFunction;
-  updateBaseFolderPath: VoidFunction;
-  // end filesSelectorInput
-
   // settingsStore
   automaticBackupUrl: string;
   currentColorScheme: Nullable<TColorScheme>;
@@ -145,6 +149,8 @@ export interface AutomaticBackupProps {
   // filesSelectorInput store
   basePath: string;
   newPath: string;
+  resetNewFolderPath: VoidFunction;
+  updateBaseFolderPath: VoidFunction;
   toDefaultFileSelector: VoidFunction; // toDefault from filesSelectorInput store
   isErrorPath: boolean;
   setBasePath: (folders: TBreadCrumb[]) => void;

@@ -65,7 +65,6 @@ import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
 import type { Nullable } from "@docspace/shared/types";
-import type { TOption } from "@docspace/shared/components/combobox";
 
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -74,7 +73,7 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 import { ButtonContainer } from "./sub-components/ButtonContainer";
 
 import { StyledModules, StyledAutoBackup } from "./AutoBackup.styled";
-import type { AutomaticBackupProps } from "./AutoBackup.types";
+import type { AutomaticBackupProps, Option } from "./AutoBackup.types";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -176,6 +175,7 @@ const AutomaticBackup = ({
   providers,
   setThirdPartyProviders,
   removeItem,
+  isNeedFilePath = false,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -357,7 +357,7 @@ const AutomaticBackup = ({
 
   const createSchedule = async (
     storageType: string,
-    storageParams: TOption[],
+    storageParams: Option[],
     selectedMaxCopiesNum: string,
     period: string,
     time: string,
@@ -652,7 +652,7 @@ const AutomaticBackup = ({
                 setStorageId={setStorageId}
                 defaultStorageId={defaultStorageId}
                 setCompletedFormFields={setCompletedFormFields}
-                isNeedFilePath={false}
+                isNeedFilePath={isNeedFilePath}
                 errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
                 formSettings={formSettings}
                 addValueInFormSettings={addValueInFormSettings}

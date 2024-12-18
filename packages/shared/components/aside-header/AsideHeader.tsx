@@ -31,8 +31,8 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { AsideHeaderProps } from "./Aside.types";
-import { StyledHeaderContainer } from "./Aside.styled";
+import { AsideHeaderProps } from "./AsideHeader.types";
+import { StyledHeaderContainer } from "./AsideHeader.styled";
 import { RectangleSkeleton } from "../../skeletons/rectangle";
 import { Heading, HeadingSize } from "../heading";
 

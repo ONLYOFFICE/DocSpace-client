@@ -37,7 +37,7 @@ import {
   StyledIconBox,
 } from "../Article.styled";
 import { ArticleHeaderProps } from "../Article.types";
-import { AsideHeader } from "../../aside/AsideHeader";
+import { AsideHeader } from "../../aside-header";
 
 const ArticleHeader = ({
   showText,

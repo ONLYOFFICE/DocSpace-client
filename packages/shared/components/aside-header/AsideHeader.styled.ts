@@ -24,4 +24,64 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Aside } from "./Aside";
+import styled, { css } from "styled-components";
+
+interface StyledHeaderContainerProps {
+  withoutBorder?: boolean;
+  headerHeight?: string;
+}
+
+export const StyledHeaderContainer = styled.div<StyledHeaderContainerProps>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 0 16px;
+  height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
+  min-height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
+  position: relative;
+
+  .additional-icons-container {
+    display: flex;
+    margin-inline: 16px 16px;
+    gap: 16px;
+  }
+
+  .heading {
+    font-family: ${(props) => props.theme.fontFamily};
+    color: ${(props) => props.theme.modalDialog.textColor};
+    font-weight: 700;
+    font-size: 21px;
+  }
+
+  .arrow-button {
+    margin-inline: 0 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    }
+  }
+  .close-button {
+    margin-inline: auto 0;
+    min-width: 17px;
+  }
+  .header-component {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  ${(props) =>
+    !props.withoutBorder &&
+    css`
+      ::after {
+        content: "";
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+        width: calc(100% + 32px);
+        position: absolute;
+        inset-inline-end: -16px;
+        bottom: 0;
+      }
+    `}
+`;

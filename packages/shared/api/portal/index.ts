@@ -127,7 +127,7 @@ export function createBackupSchedule(
   backupsStored,
   Period,
   Hour,
-  Day = null,
+  Day: string | null = null,
   backupMail = false,
   dump = false,
 ) {

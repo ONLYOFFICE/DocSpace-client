@@ -45,16 +45,19 @@ interface RoomsModuleProps extends ScheduleComponentProps {
   settingsFileSelector: FilesSelectorSettings;
   currentDeviceType?: DeviceType;
 
-  // backup store
-  newPath: string;
+  // filesSelectorInput
   basePath: string;
+  newPath: string;
+  toDefault: VoidFunction;
   isErrorPath: boolean;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  // end filesSelectorInput
+
+  // backup store
   defaultStorageType: Nullable<string>;
   setSelectedFolder: (id: string) => void;
   defaultFolderId: Nullable<string>;
-  toDefault: VoidFunction;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
   // end back store
 }
 

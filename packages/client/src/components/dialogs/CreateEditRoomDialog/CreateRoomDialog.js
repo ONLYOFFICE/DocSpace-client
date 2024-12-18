@@ -224,6 +224,7 @@ const CreateRoomDialog = ({
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
             type="submit"
+            onClick={onCreateRoom}
           />
           <Button
             id="shared_create-room-modal_cancel"

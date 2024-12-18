@@ -107,7 +107,7 @@ const ColorPicker = ({
 
         <HexColorPicker
           color={
-            isPickerOnly ? appliedColor.toUpperCase() : color.toUpperCase()
+            isPickerOnly ? appliedColor?.toUpperCase() : color.toUpperCase()
           }
           onChange={isPickerOnly ? handleChange : setColor}
         />

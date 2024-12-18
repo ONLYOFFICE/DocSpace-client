@@ -53,7 +53,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
       autoFocus,
       tabIndex = -1,
       paddingAfterLastItem,
-      bodyPadding,
+      paddingInlineEnd,
       ...rest
     } = props;
 
@@ -155,7 +155,18 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
           paddingAfterLastItem,
         );
       }
-    }, [paddingAfterLastItem]);
+
+      if (paddingInlineEnd) {
+        scrollRef.current.holderElement.style.setProperty(
+          "--scrollbar-padding-inline-end",
+          paddingInlineEnd,
+        );
+        scrollRef.current.holderElement.style.setProperty(
+          "--scrollbar-padding-inline-end-mobile",
+          paddingInlineEnd,
+        );
+      }
+    }, [paddingAfterLastItem, paddingInlineEnd]);
 
     return (
       <CustomScrollbar

@@ -513,7 +513,7 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={"modalDialogToggle"}>
-          <Scrollbar bodyPadding="0px">
+          <Scrollbar paddingInlineEnd="0px">
             {needPassword ? (
               <PasswordContent
                 getItemIcon={this.getItemIcon}

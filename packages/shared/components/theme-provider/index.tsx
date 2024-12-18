@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-
 import { ThemeProvider as Provider } from "styled-components";
+
+import { InterfaceDirectionProvider } from "../../context/InterfaceDirectionContext";
+import { ThemeProvider as CustomThemeProvider } from "../../context/ThemeContext";
+
 import type { ThemeProviderProps } from "./ThemeProvider.types";
 import "./ThemeProvider.scss";
 
@@ -66,6 +69,10 @@ export const ThemeProvider = ({
   }, [currentColorScheme]);
 
   return (
-    <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
+    <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
+      <CustomThemeProvider theme={theme.isBase ? "base" : "dark"}>
+        <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
+      </CustomThemeProvider>
+    </InterfaceDirectionProvider>
   );
 };

@@ -53,10 +53,12 @@ const CompanyInfoSettingsComponent = (props) => {
     buildVersionInfo,
     deviceType,
     getCompanyInfoSettings,
+    standalone,
+    licenseUrl,
+    isEnterprise,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
@@ -101,42 +103,32 @@ const CompanyInfoSettingsComponent = (props) => {
     }
   }, [setIsLoading]);
 
-  const onShowExample = () => {
-    if (!isSettingPaid) return;
-
-    setShowModal(true);
-  };
-
-  const onCloseModal = () => {
-    setShowModal(false);
-  };
-
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
-    <>
-      <AboutDialog
-        visible={showModal}
-        onClose={onCloseModal}
-        buildVersionInfo={buildVersionInfo}
-        previewData={companyInfoSettingsData}
-      />
-      <CompanyInfo
-        t={t}
-        isSettingPaid={isSettingPaid}
-        onShowExample={onShowExample}
-        companySettings={companyInfoSettingsData}
-        onSave={onSave}
-        onRestore={onRestore}
-        isLoading={isLoading}
-        companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
-      />
-    </>
+    <CompanyInfo
+      t={t}
+      isSettingPaid={isSettingPaid}
+      companySettings={companyInfoSettingsData}
+      onSave={onSave}
+      onRestore={onRestore}
+      isLoading={isLoading}
+      companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
+      buildVersionInfo={buildVersionInfo}
+      standalone={standalone}
+      licenseUrl={licenseUrl}
+      isEnterprise={isEnterprise}
+    />
   );
 };
 
 export const CompanyInfoSettings = inject(
-  ({ settingsStore, brandingStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    brandingStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
@@ -149,7 +141,11 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
       deviceType,
       getCompanyInfoSettings,
+      standalone,
+      licenseUrl,
     } = settingsStore;
+
+    const { isEnterprise } = currentTariffStatusStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
@@ -163,6 +159,9 @@ export const CompanyInfoSettings = inject(
       isSettingPaid,
       deviceType,
       getCompanyInfoSettings,
+      standalone,
+      licenseUrl,
+      isEnterprise,
     };
   },
 )(

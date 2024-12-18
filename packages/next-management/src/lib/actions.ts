@@ -33,6 +33,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TSettings,
   TGetColorTheme,
+  TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
@@ -76,6 +77,22 @@ export async function getSettings(share?: string) {
   const settings = await settingsRes.json();
 
   return settings.response as TSettings;
+}
+
+export async function getVersionBuild() {
+  const [getSettings] = createRequest(
+    [`/settings/version/build`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const versionBuild = await res.json();
+
+  return versionBuild.response as TVersionBuild;
 }
 
 export async function getQuota() {

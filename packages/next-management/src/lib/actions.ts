@@ -36,7 +36,10 @@ import type {
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
-import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
+import type {
+  TPaymentQuota,
+  TPortalTariff,
+} from "@docspace/shared/api/portal/types";
 
 export async function getUser() {
   const hdrs = headers();
@@ -133,6 +136,28 @@ export async function getAllPortals() {
   const portals = await portalsRes.json();
 
   return portals as TGetAllPortals;
+}
+
+export async function getPortalTariff() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getPortalTariff] = createRequest(
+    [`/portal/tariff`],
+    [["", ""]],
+    "GET",
+  );
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const portalTariffRes = await fetch(getPortalTariff);
+
+  if (portalTariffRes.status === 401) return undefined;
+
+  if (!portalTariffRes.ok) return;
+
+  const portalTariff = await portalTariffRes.json();
+
+  return portalTariff.response as TPortalTariff;
 }
 
 export async function getColorTheme() {

@@ -49,3 +49,13 @@ export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
   }
 };
 
+export const getIsSettingsPaid = (
+  portals: unknown,
+  isCustomizationAvailable: boolean,
+) => {
+  return portals?.length === 1 ? false : isCustomizationAvailable;
+};
+
+export const getIsCustomizationAvailable = (quota: unknown) => {
+  return quota.features.find((obj) => obj.id === "customization")?.value;
+};

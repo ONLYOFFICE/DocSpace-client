@@ -24,74 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { Badge } from "@docspace/shared/components/badge";
-import { Link } from "@docspace/shared/components/link";
-import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
-import { isManagement } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "../text";
+import { Badge } from "../badge";
+import { Link } from "../link";
+import { isManagement } from "../../utils/common";
+import { globalColors } from "../../themes";
 
-const StyledArrowRightIcon = styled(ArrowRightIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.client.settings.security.arrowFill};
-  }
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-`;
+import {
+  StyledArrowRightIcon,
+  StyledMobileCategoryWrapper,
+} from "./MobileCategoryWrapper.styled";
+import { IMobileCategoryWrapperProps } from "./MobileCategoryWrapper.types";
 
-const StyledMobileCategoryWrapper = styled.div`
-  margin-bottom: 20px;
-
-  .category-item-heading {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-
-  .category-item-subheader {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-
-  .category-item-description {
-    color: ${(props) =>
-      props.isDisabled
-        ? props.theme.text.disableColor
-        : props.theme.client.settings.security.descriptionColor};
-    font-size: 12px;
-    max-width: 1024px;
-  }
-
-  .inherit-title-link {
-    margin-inline-end: 7px;
-    font-size: 16px;
-    font-weight: 600;
-    ${(props) => props.isDisabled && `color: ${props.theme.text.disableColor}`};
-  }
-
-  .link-text {
-    margin: 0;
-  }
-`;
-
-const MobileCategoryWrapper = (props) => {
-  const {
-    title,
-    url,
-    subtitle,
-    onClickLink,
-    isDisabled,
-    withPaidBadge,
-    badgeLabel,
-  } = props;
-
+export const MobileCategoryWrapper = ({
+  title,
+  url,
+  subtitle,
+  onClickLink,
+  isDisabled,
+  withPaidBadge,
+  badgeLabel,
+}: IMobileCategoryWrapperProps) => {
   const theme = useTheme();
 
   const onClickProp = isDisabled ? {} : { onClick: onClickLink };
@@ -104,7 +60,6 @@ const MobileCategoryWrapper = (props) => {
           className="inherit-title-link header"
           {...onClickProp}
           {...onHrefProp}
-          truncate
         >
           {title}
         </Link>
@@ -116,7 +71,7 @@ const MobileCategoryWrapper = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={badgeLabel}
-            isPaidBadge={true}
+            isPaidBadge
             className="paid-badge"
             fontWeight="700"
           />
@@ -127,5 +82,3 @@ const MobileCategoryWrapper = (props) => {
     </StyledMobileCategoryWrapper>
   );
 };
-
-export default MobileCategoryWrapper;

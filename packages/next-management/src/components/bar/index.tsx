@@ -25,21 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { tablet } from "@docspace/shared/utils";
 
-const StyledBar = styled.div`
-  border-radius: 6px;
-  padding: 12px 16px;
-  background-color: ${({ theme }) => theme.management.barBackground};
-
-  @media ${tablet} {
-    padding: 8px 12px;
-    margin-bottom: 16px;
-  }
-`;
+import { StyledBar } from "./Bar.styled";
 
 export const Bar = ({ title }: { title: string }) => {
   return (

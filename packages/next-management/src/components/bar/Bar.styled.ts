@@ -25,35 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile } from "../../../utils";
+import { tablet, mobile } from "@docspace/shared/utils";
 
-export const StyledAdditionalResources = styled.div`
+export const StyledBar = styled.div`
+  border-radius: 6px;
+  padding: 12px 16px;
+  background-color: ${({ theme }) => theme.management.barBackground};
+
+  @media ${tablet} {
+    width: calc(100% - 32px);
+    padding: 8px 12px;
+    margin-bottom: 16px;
+  }
+
   @media ${mobile} {
-    .header {
-      display: none;
-    }
-  }
-
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-
-  .additional-header {
-    padding-bottom: 2px;
-  }
-
-  .additional-description {
-    padding-bottom: 18px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
+    width: calc(100% - 48px);
   }
 `;
+

@@ -24,36 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../../utils";
-
-export const StyledAdditionalResources = styled.div`
-  @media ${mobile} {
-    .header {
-      display: none;
-    }
-  }
-
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-
-  .additional-header {
-    padding-bottom: 2px;
-  }
-
-  .additional-description {
-    padding-bottom: 18px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
-  }
-`;
+export interface IMobileCategoryWrapperProps {
+  title: string;
+  url: string;
+  subtitle: string;
+  onClickLink: (e: Event) => void;
+  isDisabled?: boolean;
+  withPaidBadge: boolean;
+  badgeLabel: string;
+}

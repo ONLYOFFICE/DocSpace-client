@@ -26,22 +26,24 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
+import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
 
 import { WhiteLabel } from "./Branding/whitelabel";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
-import MobileView from "./Branding/MobileView";
 
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+const baseUrl = "/portal-settings/customization";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -64,13 +66,6 @@ const StyledComponent = styled.div`
     max-width: 433px;
   }
 
-  .section-description {
-    color: ${(props) =>
-      props.theme.client.settings.common.brandingDescriptionColor};
-    line-height: 20px;
-    padding-bottom: 20px;
-  }
-
   hr {
     margin: 24px 0;
     border: none;
@@ -82,13 +77,13 @@ const StyledComponent = styled.div`
 
 const Branding = ({
   t,
-  isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
   deviceType,
   portals,
   displayAbout,
 }) => {
+  const navigate = useNavigate();
   const isMobileView = deviceType === DeviceType.mobile;
 
   useEffect(() => {
@@ -99,12 +94,19 @@ const Branding = ({
 
   const showSettings = standalone && !hideBlock;
 
+  const onClickLink = (e) => {
+    e.preventDefault();
+    navigate(e.target.pathname);
+  };
+
   if (isMobileView)
     return (
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
-        showSettings={showSettings}
-        displayAbout={displayAbout}
+        displayAbout={showSettings && displayAbout}
+        displayAdditional={showSettings}
+        baseUrl={baseUrl}
+        onClickLink={onClickLink}
       />
     );
 
@@ -114,22 +116,8 @@ const Branding = ({
       {showSettings && (
         <>
           <hr />
-          {displayAbout ? (
-            <>
-              {isLoadedCompanyInfoSettingsData ? (
-                <div className="section-description settings_unavailable">
-                  {t("Settings:BrandingSectionDescription", {
-                    productName: t("Common:ProductName"),
-                  })}
-                </div>
-              ) : (
-                <LoaderBrandingDescription />
-              )}
-              <CompanyInfoSettings />
-            </>
-          ) : (
-            <></>
-          )}
+          {displayAbout && <CompanyInfoSettings />}
+          <hr />
           <AdditionalResources />
         </>
       )}
@@ -137,9 +125,8 @@ const Branding = ({
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
+export default inject(({ settingsStore, currentQuotaStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = brandingStore;
   const {
     standalone,
     portals,
@@ -150,7 +137,6 @@ export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
-    isLoadedCompanyInfoSettingsData,
     isSettingPaid,
     standalone,
     portals,

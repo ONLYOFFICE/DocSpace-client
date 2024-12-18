@@ -24,28 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { isManagement } from "@docspace/shared/utils/common";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+
+import { MobileCategoryWrapper } from "../../components/mobile-category-wrapper";
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
-  const { t } = useTranslation(["Settings"]);
-  const navigate = useNavigate();
-  const baseUrl = isManagement()
-    ? "/management/settings"
-    : "/portal-settings/customization";
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
+export const MobileView = ({
+  isSettingPaid,
+  displayAbout,
+  displayAdditional,
+  baseUrl,
+  onClickLink,
+}: {
+  isSettingPaid: boolean;
+  displayAbout: boolean;
+  displayAdditional: boolean;
+  baseUrl: string;
+  onClickLink: (e: Event) => void;
+}) => {
+  const { t } = useTranslation("Common");
 
   return (
     <StyledWrapper>
@@ -54,35 +57,31 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
         subtitle={t("BrandingSubtitle")}
         url={`${baseUrl}/branding/white-label`}
         withPaidBadge={!isSettingPaid}
-        badgeLabel={t("Common:Paid")}
+        badgeLabel={t("Paid")}
         onClickLink={onClickLink}
       />
-      {showSettings && (
-        <>
-          {displayAbout && (
-            <MobileCategoryWrapper
-              title={t("CompanyInfoSettings")}
-              subtitle={t("BrandingSectionDescription", {
-                productName: t("Common:ProductName"),
-              })}
-              url={`${baseUrl}/branding/company-info-settings`}
-              withPaidBadge={!isSettingPaid}
-              badgeLabel={t("Common:Paid")}
-              onClickLink={onClickLink}
-            />
-          )}
-          <MobileCategoryWrapper
-            title={t("AdditionalResources")}
-            subtitle={t("AdditionalResourcesSubtitle")}
-            url={`${baseUrl}/branding/additional-resources`}
-            withPaidBadge={!isSettingPaid}
-            badgeLabel={t("Common:Paid")}
-            onClickLink={onClickLink}
-          />
-        </>
+      {displayAbout && (
+        <MobileCategoryWrapper
+          title={t("CompanyInfoSettings")}
+          subtitle={t("BrandingSectionDescription", {
+            productName: t("ProductName"),
+          })}
+          url={`${baseUrl}/branding/company-info`}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Paid")}
+          onClickLink={onClickLink}
+        />
+      )}
+      {displayAdditional && (
+        <MobileCategoryWrapper
+          title={t("AdditionalResources")}
+          subtitle={t("AdditionalResourcesSubtitle")}
+          url={`${baseUrl}/branding/additional-resources`}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Paid")}
+          onClickLink={onClickLink}
+        />
       )}
     </StyledWrapper>
   );
 };
-
-export default MobileView;

@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import MobileCategoryWrapper from "../../../../components/MobileCategoryWrapper";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
 const StyledWrapper = styled.div`
   margin-top: 24px;

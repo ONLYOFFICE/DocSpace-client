@@ -24,36 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import styled from "styled-components";
-import { mobile } from "../../../utils";
+import commonIconsStyles from "../../utils/common-icons-style";
 
-export const StyledAdditionalResources = styled.div`
-  @media ${mobile} {
-    .header {
-      display: none;
-    }
+export const StyledArrowRightIcon = styled(ArrowRightIcon)`
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.client.settings.security.arrowFill};
   }
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+`;
 
-  .branding-checkbox {
+export const StyledMobileCategoryWrapper = styled.div<{ isDisabled?: boolean }>`
+  margin-bottom: 20px;
+
+  .category-item-heading {
     display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
+    align-items: center;
+    margin-bottom: 5px;
   }
 
-  .additional-header {
-    padding-bottom: 2px;
+  .category-item-subheader {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
   }
 
-  .additional-description {
-    padding-bottom: 18px;
+  .category-item-description {
+    color: ${(props) =>
+      props.isDisabled
+        ? props.theme.text.disableColor
+        : props.theme.client.settings.security.descriptionColor};
+    font-size: 12px;
+    max-width: 1024px;
   }
 
-  .save-cancel-buttons {
-    margin-top: 24px;
+  .inherit-title-link {
+    margin-inline-end: 7px;
+    font-size: 16px;
+    font-weight: 600;
+    ${(props) => props.isDisabled && `color: ${props.theme.text.disableColor}`};
   }
 
-  .checkbox {
-    margin-inline-end: 9px;
+  .link-text {
+    margin: 0;
   }
 `;

@@ -24,36 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../../utils";
+"use client";
 
-export const StyledAdditionalResources = styled.div`
-  @media ${mobile} {
-    .header {
-      display: none;
+import { useEffect, useCallback } from "react";
+import { type NextRouter } from "next/router";
+import { DeviceType } from "@docspace/shared/enums";
+import { size } from "@docspace/shared/utils";
+
+interface IProps {
+  redirectUrl: string;
+  currentLocation: string;
+  deviceType: DeviceType;
+  router: NextRouter;
+  pathname: string;
+}
+
+export const useResponsiveNavigation = ({
+  redirectUrl,
+  currentLocation,
+  deviceType,
+  router,
+  pathname,
+}: IProps) => {
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const checkWidth = useCallback(() => {
+    if (
+      window.innerWidth > size.mobile &&
+      !isMobileView &&
+      pathname.includes(currentLocation)
+    ) {
+      router.push(redirectUrl);
     }
-  }
+  }, [isMobileView, redirectUrl, currentLocation, router, pathname]);
 
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
+  useEffect(() => {
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, [checkWidth]);
 
-  .additional-header {
-    padding-bottom: 2px;
-  }
-
-  .additional-description {
-    padding-bottom: 18px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
-  }
-`;
+  return null;
+};

@@ -26,6 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import isEqual from "lodash/isEqual";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "../../../components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
@@ -39,24 +40,23 @@ import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 
-export const WhiteLabel = (props: IWhiteLabel) => {
-  const {
-    t,
-    logoUrls,
-    isSettingPaid,
-    showAbout,
-    showNotAvailable,
-    standalone,
-    onSave,
-    onRestoreDefault,
-    isSaving,
-    enableRestoreButton,
-    setLogoUrls,
-    isWhiteLabelLoaded,
-    defaultLogoText,
-    defaultWhiteLabelLogoUrls,
-    logoText,
-  } = props;
+export const WhiteLabel = ({
+  logoUrls,
+  isSettingPaid,
+  showAbout,
+  showNotAvailable,
+  standalone,
+  onSave,
+  onRestoreDefault,
+  isSaving,
+  enableRestoreButton,
+  setLogoUrls,
+  isWhiteLabelLoaded,
+  defaultLogoText,
+  defaultWhiteLabelLogoUrls,
+  logoText,
+}: IWhiteLabel) => {
+  const { t } = useTranslation("Common");
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
 
@@ -175,7 +175,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   return (
     <WhiteLabelWrapper>
       <WhiteLabelHeader
-        t={t}
         showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}
         standalone={standalone}

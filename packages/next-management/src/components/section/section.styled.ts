@@ -43,7 +43,11 @@ export const StyledSection = styled.section`
   }
 
   @media ${tablet} {
-    padding: 0 16px;
+    padding-inline-start: 16px;
+  }
+
+  @media ${mobile} {
+    width: calc(100% - 16px);
   }
 
   .headline {

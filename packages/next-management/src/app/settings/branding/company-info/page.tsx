@@ -24,55 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { getQuota, getAllPortals, getCompanyInfo } from "@/lib/actions";
 
-import styled from "styled-components";
-import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../utils/commonSettingsStyles";
+import { CompanyInfoPage } from "./page.client";
 
-export const StyledArrowRightIcon = styled(ArrowRightIcon).attrs(
-  injectDefaultTheme,
-)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.client.settings.security.arrowFill};
-  }
+async function Page() {
+  const [quota, portals, companyInfo] = await Promise.all([
+    getQuota(),
+    getAllPortals(),
+    getCompanyInfo(),
+  ]);
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-`;
+  return (
+    <CompanyInfoPage
+      portals={portals}
+      quota={quota}
+      companyInfoSettingsData={companyInfo}
+    />
+  );
+}
 
-export const StyledMobileCategoryWrapper = styled.div.attrs(injectDefaultTheme)`
-  margin-bottom: 20px;
+export default Page;
 
-  .category-item-heading {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
-  .category-item-subheader {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-
-  .category-item-description {
-    color: ${(props) => props.theme.client.settings.security.descriptionColor};
-    font-size: 13px;
-    max-width: 1024px;
-    line-height: 20px;
-  }
-
-  .inherit-title-link {
-    margin-inline-end: 7px;
-    font-size: 16px;
-    font-weight: 700;
-  }
-
-  .link-text {
-    margin: 0;
-  }
-
-  ${(props) => props.disabled && UnavailableStyles}
-`;

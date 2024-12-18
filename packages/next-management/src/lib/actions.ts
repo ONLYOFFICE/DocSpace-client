@@ -29,9 +29,13 @@
 import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings, TGetColorTheme } from "@docspace/shared/api/settings/types";
-import { TGetAllPortals } from "@docspace/shared/api/management/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type {
+  TSettings,
+  TGetColorTheme,
+} from "@docspace/shared/api/settings/types";
+import type { TGetAllPortals } from "@docspace/shared/api/management/types";
+import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 
 export async function getUser() {
   const hdrs = headers();
@@ -93,7 +97,7 @@ export async function getQuota() {
 
   const quota = await quotaRes.json();
 
-  return quota.response;
+  return quota.response as TPaymentQuota;
 }
 
 export async function getAllPortals() {
@@ -176,5 +180,37 @@ export async function getWhiteLabelIsDefault() {
   const isDefault = await isDefaultRes.json();
 
   return isDefault.response;
+}
+
+export async function getAdditionalResources() {
+  const [getAdditionalResources] = createRequest(
+    [`/settings/rebranding/additional`],
+    [["", ""]],
+    "GET",
+  );
+
+  const additionalResourcesRes = await fetch(getAdditionalResources);
+
+  if (!additionalResourcesRes.ok) return;
+
+  const additionalResources = await additionalResourcesRes.json();
+
+  return additionalResources.response;
+}
+
+export async function getCompanyInfo() {
+  const [getCompanyInfo] = createRequest(
+    [`/settings/rebranding/company`],
+    [["", ""]],
+    "GET",
+  );
+
+  const companyInfoRes = await fetch(getCompanyInfo);
+
+  if (!companyInfoRes.ok) return;
+
+  const companyInfo = await companyInfoRes.json();
+
+  return companyInfo.response;
 }
 

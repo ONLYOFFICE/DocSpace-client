@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
-import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`

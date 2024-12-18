@@ -24,48 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { TCompanyInfo } from "../../api/settings/types";
 
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+export interface IBuildInfo {
+  docSpace: string;
+  communityServer: string;
+  documentServer: string;
+}
 
-import { AboutContent } from "./About.content";
-import { StyledBodyContent } from "./About.styled";
-import { IDialogProps } from "./About.types";
+export interface IDialogProps {
+  visible: boolean;
+  onClose: () => void;
+  buildVersionInfo: IBuildInfo;
+  previewData: TCompanyInfo;
+  companyInfoSettingsData: TCompanyInfo;
+  standalone: boolean;
+  licenseUrl: string;
+  isEnterprise: boolean;
+}
 
-export const AboutDialog = ({
-  visible,
-  onClose,
-  buildVersionInfo,
-  previewData,
-  companyInfoSettingsData,
-  standalone,
-  licenseUrl,
-  isEnterprise,
-}: IDialogProps) => {
-  const { t, ready } = useTranslation("Common");
-
-  return (
-    <ModalDialog
-      isLoading={!ready}
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.modal}
-      isLarge
-    >
-      <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <AboutContent
-            buildVersionInfo={buildVersionInfo}
-            previewData={previewData}
-            companyInfoSettingsData={companyInfoSettingsData}
-            standalone={standalone}
-            licenseUrl={licenseUrl}
-            isEnterprise={isEnterprise}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
-    </ModalDialog>
-  );
-};
+export interface IContentProps {
+  buildVersionInfo: IBuildInfo;
+  companyInfoSettingsData: TCompanyInfo;
+  previewData: TCompanyInfo;
+  standalone: boolean;
+  licenseUrl: string;
+  isEnterprise: boolean;
+}

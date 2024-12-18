@@ -36,6 +36,7 @@ import { getLogoUrl } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
 
 import { StyledAboutContent } from "./About.styled";
+import { IContentProps } from "./About.types";
 
 export const AboutContent = ({
   buildVersionInfo,
@@ -44,7 +45,7 @@ export const AboutContent = ({
   standalone,
   licenseUrl,
   isEnterprise,
-}) => {
+}: IContentProps) => {
   const { t } = useTranslation("Common");
   const theme = useTheme();
   const isCommercial = !standalone || isEnterprise;

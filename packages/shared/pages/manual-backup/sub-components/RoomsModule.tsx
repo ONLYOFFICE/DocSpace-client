@@ -137,7 +137,7 @@ const RoomsModule = ({
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
           filesSelectorSettings={settingsFileSelector}
-          {...(selectedFolder && { id: selectedFolder })}
+          {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
         />
       </div>
       <div className="manual-backup_buttons">

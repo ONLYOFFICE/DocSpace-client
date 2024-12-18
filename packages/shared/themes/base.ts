@@ -2728,6 +2728,7 @@ export const getBaseTheme = () => {
       background: grayLight,
       textColor: gray,
       iconFill: black,
+      warningColor: lightErrorStatus,
     },
 
     client: {

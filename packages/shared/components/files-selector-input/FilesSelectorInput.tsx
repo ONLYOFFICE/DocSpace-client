@@ -80,6 +80,8 @@ const FilesSelectorInput = ({
   currentDeviceType,
   setBackupToPublicRoomVisible,
   filesSelectorSettings,
+  checkCreating,
+  openRoot,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -202,10 +204,12 @@ const FilesSelectorInput = ({
           withBreadCrumbs
           withoutBackButton
           withCancelButton
+          openRoot={openRoot}
           isRoomsOnly={isRoomsOnly}
           headerLabel={headerLabel}
           currentFolderId={id ?? ""}
           filterParam={filterParam}
+          checkCreating={checkCreating}
           isThirdParty={isThirdParty}
           isPanelVisible={isPanelVisible}
           rootThirdPartyId={rootThirdPartyId}

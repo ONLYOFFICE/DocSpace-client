@@ -61,11 +61,12 @@ export type FilesSelectorInputProps = {
   isErrorPath: boolean;
 
   currentDeviceType?: DeviceType;
-
+  openRoot?: boolean;
   withCreate?: boolean;
   id?: string | number;
   isThirdParty?: boolean;
   isRoomsOnly?: boolean;
+  checkCreating?: boolean;
   isSelectFolder?: boolean;
   isDisabled?: boolean;
   isError?: boolean;

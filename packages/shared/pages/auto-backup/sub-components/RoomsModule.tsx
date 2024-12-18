@@ -107,6 +107,7 @@ const RoomsModule = ({
     <>
       <div className="auto-backup_folder-input">
         <FilesSelectorInput
+          withCreate
           isRoomBackup
           isSelectFolder
           newPath={newPath}
@@ -121,7 +122,7 @@ const RoomsModule = ({
           setNewPath={setNewPath}
           setBasePath={setBasePath}
           onSelectFolder={onSelectFolder}
-          {...(passedId && { id: passedId })}
+          {...(passedId ? { id: passedId } : { openRoot: true })}
         />
       </div>
       <ScheduleComponent

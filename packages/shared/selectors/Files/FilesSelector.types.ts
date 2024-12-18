@@ -230,4 +230,5 @@ export type FilesSelectorProps = TInfoBar &
     createDefineRoomType?: RoomsType;
     formProps?: FormPropsType;
     withPadding?: boolean;
+    checkCreating?: boolean;
   };

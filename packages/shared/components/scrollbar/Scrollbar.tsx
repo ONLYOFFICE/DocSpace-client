@@ -53,6 +53,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
       autoFocus,
       tabIndex = -1,
       paddingAfterLastItem,
+      bodyPadding,
       ...rest
     } = props;
 

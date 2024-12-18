@@ -46,15 +46,18 @@ export const CompanyInfoPage = ({
   portals,
   quota,
   companyInfoSettingsData,
+  standalone,
+  licenseUrl,
+  buildInfo,
+  isEnterprise,
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const pathname = usePathname();
 
   const [companyData, setCompanyData] = useState(companyInfoSettingsData);
   const [isLoading, startTransition] = useTransition();
-  const [showModal, setShowModal] = useState(false);
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
   const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
@@ -66,11 +69,6 @@ export const CompanyInfoPage = ({
     router: router,
     pathname: pathname,
   });
-
-  const onShowExample = () => {
-    if (!isSettingPaid) return;
-    setShowModal(true);
-  };
 
   const onSave = async (
     address: string,
@@ -106,14 +104,16 @@ export const CompanyInfoPage = ({
 
   return (
     <CompanyInfo
-      t={t}
       isSettingPaid={isSettingPaid}
-      onShowExample={onShowExample}
       companySettings={companyData}
       onSave={onSave}
       onRestore={onRestore}
       isLoading={isLoading}
       companyInfoSettingsIsDefault={companyData.isDefault}
+      standalone={standalone}
+      licenseUrl={licenseUrl}
+      buildVersionInfo={buildInfo}
+      isEnterprise={isEnterprise}
     />
   );
 };

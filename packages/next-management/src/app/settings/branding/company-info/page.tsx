@@ -24,22 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getQuota, getAllPortals, getCompanyInfo } from "@/lib/actions";
+import {
+  getSettings,
+  getVersionBuild,
+  getQuota,
+  getPortalTariff,
+  getAllPortals,
+  getCompanyInfo,
+} from "@/lib/actions";
 
 import { CompanyInfoPage } from "./page.client";
 
 async function Page() {
-  const [quota, portals, companyInfo] = await Promise.all([
-    getQuota(),
-    getAllPortals(),
-    getCompanyInfo(),
-  ]);
+  const [settings, buildInfo, quota, portalTariff, portals, companyInfo] =
+    await Promise.all([
+      getSettings(),
+      getVersionBuild(),
+      getQuota(),
+      getPortalTariff(),
+      getAllPortals(),
+      getCompanyInfo(),
+    ]);
+
+  const { standalone, licenseUrl } = settings;
+  const { enterprise } = portalTariff;
 
   return (
     <CompanyInfoPage
-      portals={portals}
+      portals={portals?.tenants}
       quota={quota}
       companyInfoSettingsData={companyInfo}
+      standalone={standalone}
+      licenseUrl={licenseUrl}
+      buildInfo={buildInfo}
+      isEnterprise={enterprise}
     />
   );
 }

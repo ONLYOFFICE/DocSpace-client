@@ -306,10 +306,12 @@ const DropDown = ({
     };
 
     const dropDownClasses = classNames(styles.dropDown, className, {
-      [styles.top]: state.directionY === "top",
-      [styles.bottom]: state.directionY === "bottom",
-      [styles.right]: state.directionX === "right" && !directionXStylesDisabled,
-      [styles.left]: state.directionX === "left" && !directionXStylesDisabled,
+      [styles.directionTop]: state.directionY === "top",
+      [styles.directionBottom]: state.directionY === "bottom",
+      [styles.directionRight]:
+        state.directionX === "right" && !directionXStylesDisabled,
+      [styles.directionLeft]:
+        state.directionX === "left" && !directionXStylesDisabled,
       [styles.open]: open,
       [styles.mobileView]: isMobileView,
       [styles.directionXStylesDisabled]: directionXStylesDisabled,

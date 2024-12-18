@@ -94,14 +94,6 @@
     }
   }
 
-  .roomIconCover {
-    svg {
-      path {
-        fill: var(--room-icon-color);
-      }
-    }
-  }
-
   &.isArchive {
     :global {
       .room-background {

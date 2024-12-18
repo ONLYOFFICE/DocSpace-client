@@ -27,7 +27,6 @@
 import React, { useMemo } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
@@ -36,6 +35,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useTheme } from "../../hooks/useTheme";
 import { globalColors } from "../../themes/globalColors";
 
 import { DropDown } from "../drop-down";
@@ -74,7 +74,7 @@ const RoomIcon = ({
   const iconRef = React.useRef<HTMLDivElement>(null);
   const inputFilesElement = React.useRef<HTMLInputElement>(null);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onInputClick = () => {
     if (inputFilesElement.current) {
@@ -210,9 +210,9 @@ const RoomIcon = ({
               style={
                 {
                   "--room-icon-text-color":
-                    theme.isBase && isWrongImage
+                    isBase && isWrongImage
                       ? globalColors.black
-                      : !theme.isBase && !isArchive
+                      : !isBase && !isArchive
                         ? `#${color}`
                         : textColor,
                 } as React.CSSProperties
@@ -228,9 +228,7 @@ const RoomIcon = ({
               className={classNames("room-icon-cover", styles.roomIconCover)}
               style={
                 {
-                  "--room-icon--text-color": theme.isBase
-                    ? textColor
-                    : `#${color}`,
+                  "--room-icon--text-color": isBase ? textColor : `#${color}`,
                 } as React.CSSProperties
               }
               src={imgSrc}

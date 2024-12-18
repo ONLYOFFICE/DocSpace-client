@@ -26,7 +26,6 @@
 
 import React, { memo } from "react";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
@@ -34,15 +33,16 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
 import { IconSizeType } from "../../utils";
-
-import { IconButton } from "../icon-button";
-import { Text } from "../text";
-import { TGetTooltipContent, Tooltip } from "../tooltip";
+import { useClickOutside } from "../../utils/useClickOutside";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useTheme } from "../../hooks/useTheme";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
-import { useClickOutside } from "../../utils/useClickOutside";
+import { IconButton } from "../icon-button";
+import { Text } from "../text";
+import { TGetTooltipContent, Tooltip } from "../tooltip";
 
 import styles from "./Avatar.module.scss";
 
@@ -69,7 +69,8 @@ const AvatarPure = ({
   hasAvatar,
   noClick = false,
 }: AvatarProps) => {
-  const defaultTheme = useTheme();
+  const { isRTL } = useInterfaceDirection();
+  const { isBase } = useTheme();
 
   const iconRef = React.useRef<HTMLDivElement>(null);
   const inputFilesElement = React.useRef<HTMLInputElement>(null);
@@ -81,8 +82,6 @@ const AvatarPure = ({
   useClickOutside(iconRef, () => {
     setOpenLogoEdit(false);
   });
-
-  const interfaceDirection = defaultTheme?.interfaceDirection;
 
   const onInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -108,7 +107,7 @@ const AvatarPure = ({
         alt=""
         style={
           {
-            "--avatar-default-image": `url(${defaultTheme?.isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
+            "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
           } as React.CSSProperties
         }
       />
@@ -122,7 +121,7 @@ const AvatarPure = ({
       alt=""
       style={
         {
-          "--avatar-default-image": `url(${defaultTheme?.isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
+          "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
         } as React.CSSProperties
       }
     />
@@ -133,7 +132,7 @@ const AvatarPure = ({
   const roleIcon = roleIconProp ?? getRoleIcon(role);
 
   const uniqueTooltipId = withTooltip ? `roleTooltip_${Math.random()}` : "";
-  const tooltipPlace = interfaceDirection === "rtl" ? "left" : "right";
+  const tooltipPlace = isRTL ? "left" : "right";
 
   const getTooltipContent = ({ content }: TGetTooltipContent) => (
     <Text fontSize="12px">{content}</Text>

@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import classNames from "classnames";
 import { isIOS, isMobile } from "react-device-detect";
 
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+
 import { Portal } from "../portal";
 import { DomHelpers } from "../../utils";
-
-import styles from "./DropDown.module.scss";
 
 import { VirtualList } from "./sub-components/VirtualList";
 import { Row } from "./sub-components/Row";
@@ -40,6 +39,7 @@ import { Row } from "./sub-components/Row";
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
 import { getItemHeight, hideDisabledItems } from "./DropDown.utils";
+import styles from "./DropDown.module.scss";
 
 const DropDown = ({
   directionY = "bottom",
@@ -72,7 +72,7 @@ const DropDown = ({
   topSpace,
   backDrop,
 }: DropDownProps) => {
-  const theme = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const dropDownRef = React.useRef<null | HTMLDivElement>(null);
 
@@ -122,7 +122,7 @@ const DropDown = ({
     }
 
     if (dropDown) {
-      if (theme?.interfaceDirection === "ltr") {
+      if (isRTL) {
         if (right) {
           dropDown.style.right = right;
         } else if (directionX === "right") {
@@ -176,7 +176,7 @@ const DropDown = ({
     forwardedRef,
     offsetLeft,
     right,
-    theme?.interfaceDirection,
+    isRTL,
     top,
     topSpace,
   ]);
@@ -191,7 +191,6 @@ const DropDown = ({
       return;
     }
 
-    const isRtl = theme?.interfaceDirection === "rtl";
     const rects = dropDownRef.current.getBoundingClientRect();
     const parentRects = forwardedRef?.current?.getBoundingClientRect();
 
@@ -212,7 +211,7 @@ const DropDown = ({
     let left;
     let rightVar;
 
-    if (isRtl) {
+    if (isRTL) {
       rightVar = rects.right > container.width && rects.width < container.width;
       left =
         rects.width &&
@@ -253,7 +252,7 @@ const DropDown = ({
     }));
   }, [
     fixedDirection,
-    theme?.interfaceDirection,
+    isRTL,
     forwardedRef,
     smallSectionWidth,
     state.directionX,

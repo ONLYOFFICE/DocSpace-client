@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import debounce from "lodash.debounce";
-import { inject, observer } from "mobx-react";
-import { withTranslation, Trans } from "react-i18next";
-import { useMemo, useState, useCallback, useEffect, useRef } from "react";
+import { withTranslation } from "react-i18next";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -44,8 +43,7 @@ import {
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { getAccessOptions, getTopFreeRole } from "../utils";
+import { getTopFreeRole } from "../utils";
 
 import {
   StyledSubHeader,
@@ -57,33 +55,24 @@ import {
   StyledDescription,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
-import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 const minSearchValue = 1;
-const PEOPLE_TAB_ID = "0";
 
 const InviteInput = ({
   t,
-  roomId = 281, //TODO: Templates
-  onClose,
+  roomId,
   roomType,
   inviteItems,
   setInviteItems,
-  addUsersPanelVisible,
   setAddUsersPanelVisible,
-  isMobileView,
-  isOwner,
-  standalone,
   isDisabled,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
+
   const [usersList, setUsersList] = useState([]);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
   const [dropDownWidth, setDropDownWidth] = useState(0);
   const searchRef = useRef();
-
-  console.log("roomId", roomId);
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -225,64 +214,13 @@ const InviteInput = ({
     );
   };
 
-  const addItems = (users) => {
-    console.log("addItems", users);
-    const topFreeRole = getTopFreeRole(t, roomType);
-    users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          role: topFreeRole.label,
-        });
-      }
-    });
-
-    const items = [...users, ...inviteItems];
-
-    const filtered = removeExist(items);
-
-    setInviteItems(filtered);
-    setInputValue("");
-    setUsersList([]);
-  };
-
-  const getSelectedTab = (item) => setSelectedTab(item);
-
   const openUsersPanel = () => {
     setInputValue("");
     setAddUsersPanelVisible(true);
     setIsAddEmailPanelBlocked(true);
   };
 
-  const closeUsersPanel = () => {
-    setAddUsersPanelVisible(false);
-  };
-
   const onClearInput = () => onChangeInput("");
-
-  const invitedUsers = useMemo(
-    () => inviteItems.map((item) => item.id),
-    [inviteItems],
-  );
-
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
-
-  const accessOptions = getAccessOptions(
-    t,
-    roomType,
-    false,
-    true,
-    isOwner,
-    standalone,
-  );
-
-  const infoText =
-    selectedTab === PEOPLE_TAB_ID ? (
-      <Trans i18nKey="AddUsersOrGroupsInfo" ns="Files" t={t}></Trans>
-    ) : (
-      <Trans i18nKey="AddUsersOrGroupsInfoGroups" ns="Files" t={t}></Trans>
-    );
 
   return (
     <>
@@ -338,46 +276,11 @@ const InviteInput = ({
             {foundUsers}
           </StyledDropDown>
         )}
-        {/* //TODO: Templates rewrite to PeopleSelector */}
-        {/* {addUsersPanelVisible && (
-          <AddUsersPanel
-            onParentPanelClose={onClose}
-            onClose={closeUsersPanel}
-            visible={addUsersPanelVisible}
-            tempDataItems={inviteItems}
-            accessOptions={accessOptions}
-            setDataItems={addItems}
-            isMultiSelect
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            roomId={roomId} // fixed groups request // need template id for correct working
-            withGroups={!isPublicRoomType}
-            withInfo
-            infoText={infoText}
-            withInfoBadge
-            invitedUsers={invitedUsers}
-            disableDisabledUsers
-            filter={filter}
-            setActiveTabId={getSelectedTab}
-            isUsersList
-            defaultAccess={getDefaultAccessUser(roomType)}
-          />
-        )} */}
       </StyledInviteInputContainer>
     </>
   );
 };
 
-export default inject(({ dialogsStore }) => {
-  const { invitePanelOptions } = dialogsStore;
-
-  return {
-    roomId: invitePanelOptions.roomId,
-  };
-})(
-  withCultureNames(
-    withTranslation(["InviteDialog", "Common", "Translations"])(
-      observer(InviteInput),
-    ),
-  ),
+export default withCultureNames(
+  withTranslation(["InviteDialog", "Common", "Translations"])(InviteInput),
 );

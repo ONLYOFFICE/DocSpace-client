@@ -265,7 +265,9 @@ const Members = ({
         bodyText={
           <>
             <div className="template-access_description">
-              {t("Files:TemplateAvailableDescription")}
+              {t("Files:TemplateAvailableDescription", {
+                productName: t("Common:ProductName"),
+              })}
             </div>
             <Link
               className="template-access_link"

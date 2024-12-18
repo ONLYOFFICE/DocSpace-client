@@ -33,7 +33,6 @@ import Item from "./Item";
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
 
-const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
 
 const Row = memo(({ data, index, style }) => {
@@ -65,7 +64,6 @@ const ItemsList = ({
   t,
   setInviteItems,
   inviteItems,
-  externalLinksVisible,
   scrollAllPanelContent,
   isDisabled,
 }) => {
@@ -83,8 +81,8 @@ const ItemsList = ({
     const listAreaHeight = heightList;
 
     const calculatedHeight = scrollAllPanelContent
-      ? Math.max(totalHeightItems, listAreaHeight, 0)
-      : heightList - FOOTER_HEIGHT;
+      ? Math.max(totalHeightItems, listAreaHeight)
+      : heightList;
 
     const finalHeight = scrollAllPanelContent
       ? totalHeightItems
@@ -106,13 +104,7 @@ const ItemsList = ({
 
   useEffect(() => {
     onBodyResize();
-  }, [
-    bodyRef.current,
-    externalLinksVisible,
-    height,
-    inviteItems.length,
-    scrollAllPanelContent,
-  ]);
+  }, [bodyRef.current, height, inviteItems.length, scrollAllPanelContent]);
 
   const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
 

@@ -211,6 +211,7 @@ const PeopleSelector = ({
   onClose,
   withoutBackground,
   withBlur,
+  setActiveTab,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -511,6 +512,7 @@ const PeopleSelector = ({
 
   const changeActiveTab = useCallback(
     (tab: number | string) => {
+      if (setActiveTab) setActiveTab(`${tab}`);
       setActiveTabId(`${tab}`);
       onSearch("");
       resetSelectorList();

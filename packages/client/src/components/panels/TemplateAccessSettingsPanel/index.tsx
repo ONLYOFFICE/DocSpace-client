@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { observer, inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
 
+import { EmployeeType } from "@docspace/shared/enums";
+import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
@@ -36,6 +38,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import PeopleSelector from "@docspace/shared/selectors/People";
 
 import {
   StyledBlock,
@@ -47,6 +50,8 @@ import {
 
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
+
+const PEOPLE_TAB_ID = "0";
 
 type TemplateAccessSettingsPanelProps = {
   t: TTranslation;
@@ -78,6 +83,7 @@ const TemplateAccessSettingsPanel = ({
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
+  const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
 
   useEffect(() => {
     const hasError = inviteItems.some(
@@ -106,6 +112,14 @@ const TemplateAccessSettingsPanel = ({
     if (templateItem && !templateEventVisible) {
       onCreateRoomFromTemplate({ ...templateItem, isEdit: true });
     }
+  };
+  const onCloseUsersPanel = () => {
+    setAddUsersPanelVisible(false);
+  };
+
+  const onClosePanels = () => {
+    onClose();
+    onCloseUsersPanel();
   };
 
   const onMouseDown = useCallback(
@@ -145,9 +159,66 @@ const TemplateAccessSettingsPanel = ({
     setIsLoading(false);
   };
 
+  const removeExist = (items) => {
+    const filtered = items.reduce((unique, o) => {
+      !unique.some((obj) =>
+        obj.isGroup ? obj.id === o.id : obj.email === o.email,
+      ) && unique.push(o);
+
+      return unique;
+    }, []);
+
+    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
+
+    return filtered;
+  };
+
+  const onSubmitItems = (users) => {
+    console.log("addItems", users);
+
+    const items = [...users, ...inviteItems];
+
+    const filtered = removeExist(items);
+
+    setInviteItems(filtered);
+    // setInputValue("");
+    // setUsersList([]);
+    onCloseUsersPanel();
+  };
+
+  const getSelectedTab = (id: string) => setSelectedTab(id);
+
+  const infoText =
+    selectedTab === PEOPLE_TAB_ID ? (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="AddUsersOrGroupsInfo"
+        values={{ productName: t("Common:ProductName") }}
+        components={{ 1: <strong /> }}
+      />
+    ) : (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="AddUsersOrGroupsInfoGroups"
+        values={{ productName: t("Common:ProductName") }}
+        components={{ 1: <strong /> }}
+      />
+    );
+
+  //////////
   const roomType = 2; // TODO: Templates
   // const roomType = -1;
   const hasInvitedUsers = !!inviteItems.length;
+
+  const filter = new Filter();
+  filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
+
+  const invitedUsers = useMemo(
+    () => inviteItems.map((item) => item.id),
+    [inviteItems],
+  );
 
   return (
     <ModalDialog
@@ -160,7 +231,44 @@ const TemplateAccessSettingsPanel = ({
       onBackClick={onClickBack}
       onSubmit={onSubmit}
       withForm
+      containerVisible={addUsersPanelVisible}
     >
+      {addUsersPanelVisible ? (
+        <ModalDialog.Container>
+          <PeopleSelector
+            useAside
+            onClose={onClosePanels}
+            onSubmit={onSubmitItems}
+            submitButtonLabel={t("Common:AddButton")}
+            disableSubmitButton={false}
+            isMultiSelect
+            disableDisabledUsers
+            withGroups
+            withInfo
+            infoText={infoText}
+            withoutBackground={isMobileView}
+            withBlur={!isMobileView}
+            withInfoBadge
+            roomId={36} // TODO: Templates
+            disableInvitedUsers={invitedUsers}
+            // withGuests
+            withHeader
+            filter={filter}
+            headerProps={{
+              headerLabel: t("Common:Contacts"),
+              withoutBackButton: false,
+              withoutBorder: true,
+              isCloseable: true,
+              onBackClick: onCloseUsersPanel,
+              onCloseClick: onClosePanels,
+            }}
+            setActiveTab={getSelectedTab}
+          />
+        </ModalDialog.Container>
+      ) : (
+        <></>
+      )}
+
       <ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <>
@@ -175,7 +283,9 @@ const TemplateAccessSettingsPanel = ({
               />
             </StyledSubHeader>
             <StyledDescription>
-              {t("Files:TemplateAvailableDescription")}
+              {t("Files:TemplateAvailableDescription", {
+                productName: t("Common:ProductName"),
+              })}
             </StyledDescription>
           </StyledBlock>
           <StyledBody isDisabled={isAvailable}>

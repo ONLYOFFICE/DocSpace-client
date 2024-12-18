@@ -30,9 +30,12 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { commonIconsStyles } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  mobile,
+  commonInputStyles,
+} from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
-import { isMobile, commonInputStyles } from "@docspace/shared/utils";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -41,19 +44,24 @@ const fillAvailableWidth = css`
   width: fill-available;
 `;
 
-const ScrollList = styled.div`
+const ScrollList = styled.div<{
+  scrollAllPanelContent?: boolean;
+  isTotalListHeight?: boolean;
+  offsetTop?: number;
+}>`
+  position: absolute;
+
   width: 100%;
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`
@@ -67,7 +75,7 @@ const StyledInviteUserBody = styled.div`
   overflow: auto;
 `;
 
-const StyledSubHeader = styled(Heading)`
+const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`
   font-weight: 700;
   font-size: 16px;
   margin: 16px 0 8px 0;
@@ -91,7 +99,7 @@ const StyledDescription = styled(Text)`
   line-height: 16px;
 `;
 
-const StyledRow = styled.div`
+const StyledRow = styled.div<{ hasWarning?: boolean }>`
   width: calc(100% - 32px) !important;
 
   display: inline-flex;
@@ -100,7 +108,6 @@ const StyledRow = styled.div`
 
   min-height: 41px;
 
-  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 
@@ -140,7 +147,7 @@ const StyledRow = styled.div`
   }
 `;
 
-const StyledInviteInput = styled.div`
+const StyledInviteInput = styled.div<{ isShowCross?: boolean }>`
   ${fillAvailableWidth}
 
   .input-link {
@@ -204,7 +211,7 @@ const StyledInviteInputContainer = styled.div`
   }
 `;
 
-const StyledDropDown = styled(DropDown)`
+const StyledDropDown = styled(DropDown)<{ width?: boolean }>`
   ${(props) => props.width && `width: ${props.width}px`};
 
   .list-item {
@@ -242,7 +249,11 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const SearchItemText = styled(Text)`
+const SearchItemText = styled(Text)<{
+  primary?: boolean;
+  info?: boolean;
+  disabled?: boolean;
+}>`
   line-height: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? `20px` : `16px`};
 
@@ -290,7 +301,7 @@ const StyledToggleButton = styled(ToggleButton)`
   margin-top: -4px;
 `;
 
-const StyledBody = styled.div`
+const StyledBody = styled.div<{ isDisabled?: boolean }>`
   display: contents;
 
   ${({ isDisabled, theme }) =>

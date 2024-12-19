@@ -33,13 +33,13 @@ const CreationBlock = ({ t, textStyles, keyTextStyles }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysUploadFile")}</Text>
-          <Text {...keyTextStyles}>Shift + u</Text>
+          <Text {...keyTextStyles}>Shift + u</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("Article:UploadFolder")}</Text>
-          <Text {...keyTextStyles}>Shift + i</Text>
+          <Text {...keyTextStyles}>Shift + i</Text>
         </>
       </Row>
     </>

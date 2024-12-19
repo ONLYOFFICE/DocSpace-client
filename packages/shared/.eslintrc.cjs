@@ -91,7 +91,6 @@ module.exports = {
     "react/forbid-prop-types": "off",
     "react-hooks/rules-of-hooks": "off",
     "class-methods-use-this": "off",
-    "no-irregular-whitespace": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

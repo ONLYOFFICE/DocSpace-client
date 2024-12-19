@@ -40,7 +40,7 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysRemove")}</Text>
-          <Text {...keyTextStyles}># {t("Common:Or")} Delete</Text>
+          <Text {...keyTextStyles}>{`# ${t("Common:Or")} Delete`}</Text>
         </>
       </Row>
       {/* <Row className="hotkeys_row">
@@ -58,25 +58,25 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysCopySelected")}</Text>
-          <Text {...keyTextStyles}> {CtrlKey} + c</Text>
+          <Text {...keyTextStyles}>{`${CtrlKey} + c`}</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysPasteSelected")}</Text>
-          <Text {...keyTextStyles}> {CtrlKey} + v</Text>
+          <Text {...keyTextStyles}>{`${CtrlKey} + v`}</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysCutSelected")}</Text>
-          <Text {...keyTextStyles}> {CtrlKey} + x</Text>
+          <Text {...keyTextStyles}>{`${CtrlKey} + x`}</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysRenameSelected")}</Text>
-          <Text {...keyTextStyles}> F2</Text>
+          <Text {...keyTextStyles}>F2</Text>
         </>
       </Row>
     </>

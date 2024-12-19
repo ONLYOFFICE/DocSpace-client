@@ -40,9 +40,6 @@ import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 
-const helpLink =
-  "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
-
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
     return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
@@ -55,10 +52,14 @@ const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   );
 };
 const QuotasComponent = (props) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation("Settings, Common");
   const theme = useTheme();
 
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, helpLink } = props;
+
+  const link = `${helpLink}/administration/docspace-settings.aspx#StorageManagement_block`;
+
+  console.log("helpLink", helpLink);
 
   return (
     <StyledBaseQuotaComponent>
@@ -81,18 +82,22 @@ const QuotasComponent = (props) => {
         )}
       </div>
       <Text className="quotas_description">
-        <Trans t={t} i18nKey="QuotasDescription" ns="Settings">
-          Here, you can set storage quota for users and rooms.
-          <ColorTheme
-            themeId={ThemeId.Link}
-            tag="a"
-            isHovered={false}
-            target="_blank"
-            href={helpLink}
-          >
-            Help Center
-          </ColorTheme>
-        </Trans>
+        {helpLink ? (
+          <>
+            {t("Settings:QuotasDescription")}{" "}
+            <ColorTheme
+              themeId={ThemeId.Link}
+              tag="a"
+              isHovered={false}
+              target="_blank"
+              href={link}
+            >
+              {t("Common:HelpCenter")}
+            </ColorTheme>
+          </>
+        ) : (
+          t("Settings:QuotasDescription")
+        )}
       </Text>
 
       <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
@@ -100,10 +105,12 @@ const QuotasComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { helpLink } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    helpLink,
   };
 })(observer(QuotasComponent));

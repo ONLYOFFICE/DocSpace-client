@@ -45,6 +45,19 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
+const TooltipContent = ({ t }) => (
+  <Text fontSize="12px" noSelect>
+    {t("Files:WarningCreationFormRoom")}
+  </Text>
+);
+TooltipContent.displayName = "TooltipContent";
+
+const getTooltipContent = (t) => {
+  const TooltipRenderer = () => <TooltipContent t={t} />;
+  TooltipRenderer.displayName = "TooltipRenderer";
+  return TooltipRenderer;
+};
+
 const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
@@ -58,11 +71,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
         place="bottom"
         id="create-room-tooltip"
         openOnClick={false}
-        getContent={() => (
-          <Text fontSize="12px" noSelect>
-            {t("Files:WarningCreationFormRoom")}
-          </Text>
-        )}
+        getContent={() => getTooltipContent(t)}
       />
 
       {RoomsTypeValues.map((roomType) => (

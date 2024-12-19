@@ -60,6 +60,8 @@ import {
 
 import User from "./User";
 
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
+
 const Members = ({
   t,
   selfId,
@@ -183,9 +185,7 @@ const Members = ({
                 <Tooltip
                   float={isDesktop()}
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
               )}

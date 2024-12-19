@@ -85,6 +85,18 @@ const StyledFooterContent = styled.div`
   }
 `;
 
+const MarkdownLink = ({ href, children }) => (
+  <ColorTheme
+    fontWeight="600"
+    target="_blank"
+    tag="a"
+    href={href}
+    themeId={ThemeId.Link}
+  >
+    {children}
+  </ColorTheme>
+);
+
 const DebugInfoDialog = (props) => {
   const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
 
@@ -130,25 +142,7 @@ const DebugInfoDialog = (props) => {
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    a: ({ href, children }) => (
-                      <ColorTheme
-                        fontWeight="600"
-                        target="_blank"
-                        tag="a"
-                        href={href}
-                        themeId={ThemeId.Link}
-                      >
-                        {children}
-                      </ColorTheme>
-                      // <a
-                      //   href={href}
-                      //   target="_blank"
-                      //   rel="noopener noreferrer"
-                      //   {...props}
-                      // >
-                      //   {children}
-                      // </a>
-                    ),
+                    a: MarkdownLink,
                   }}
                 >
                   {debugInfoData}

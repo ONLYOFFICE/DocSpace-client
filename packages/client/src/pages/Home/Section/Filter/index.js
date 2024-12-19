@@ -242,7 +242,7 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
-  const [setSelectedFilterValues] = React.useState(null);
+  const [, setSelectedFilterValues] = React.useState(null);
 
   const {
     onContactsFilter,

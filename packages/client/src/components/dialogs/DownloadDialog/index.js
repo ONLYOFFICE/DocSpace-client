@@ -42,6 +42,8 @@ import PasswordContent from "./PasswordContent";
 import { StyledBodyContent } from "./StyledDownloadDialog";
 import OnePasswordRow from "./OnePasswordRow";
 
+const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
+
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -339,7 +341,7 @@ class DownloadDialogComponent extends React.Component {
           svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
         }}
         src={icon}
-        loading={() => <div style={{ width: "96px" }} />}
+        loading={LoadingPlaceholder}
       />
     );
   };

@@ -37,6 +37,12 @@ const StyledLoadErrorIcon = styled(LoadErrorIcon)`
   }
 `;
 
+const TooltipContent = ({ content }) => (
+  <Text fontSize="13px" noSelect>
+    {content}
+  </Text>
+);
+
 const ErrorFileUpload = ({
   t,
   item,
@@ -55,11 +61,7 @@ const ErrorFileUpload = ({
       />
       <Tooltip
         id="errorTooltip"
-        getContent={({ content }) => (
-          <Text fontSize="13px" noSelect>
-            {content}
-          </Text>
-        )}
+        getContent={TooltipContent}
         place={placeTooltip}
         maxWidth="320"
         color={theme.tooltip.backgroundColor}

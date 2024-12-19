@@ -92,7 +92,6 @@ module.exports = {
     "react-hooks/rules-of-hooks": "off",
     "class-methods-use-this": "off",
     "no-irregular-whitespace": "off",
-    "react/no-unstable-nested-components": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

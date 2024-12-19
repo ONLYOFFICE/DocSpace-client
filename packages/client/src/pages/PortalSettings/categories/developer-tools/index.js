@@ -62,7 +62,7 @@ const DeveloperToolsWrapper = (props) => {
     "Common",
     "OAuth",
   ]);
-  const [startTransition] = useTransition();
+  // const [, startTransition] = useTransition();
 
   const sdkLabel = (
     <Box displayProp="flex" style={{ gap: "8px" }}>
@@ -107,9 +107,9 @@ const DeveloperToolsWrapper = (props) => {
     });
   }
 
-  const load = async () => {
-    // await loadBaseInfo();
-  };
+  // const load = async () => {
+  //   // await loadBaseInfo();
+  // };
 
   useEffect(() => {
     const path = location.pathname;
@@ -121,9 +121,9 @@ const DeveloperToolsWrapper = (props) => {
     setIsLoading(true);
   }, [location.pathname]);
 
-  useEffect(() => {
-    ready && startTransition(load);
-  }, [ready]);
+  // useEffect(() => {
+  //   ready && startTransition(load);
+  // }, [ready]);
 
   const onSelect = (e) => {
     navigate(

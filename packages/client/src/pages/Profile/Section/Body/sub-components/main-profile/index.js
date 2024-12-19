@@ -66,6 +66,8 @@ import {
   StyledAvatarWrapper,
 } from "./styled-main-profile";
 
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
+
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
@@ -365,9 +367,7 @@ const MainProfile = (props) => {
                 <Tooltip
                   float
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
               )}
@@ -511,9 +511,7 @@ const MainProfile = (props) => {
                   <Tooltip
                     float
                     id="emailTooltip"
-                    getContent={({ content }) => (
-                      <Text fontSize="12px">{content}</Text>
-                    )}
+                    getContent={TooltipContent}
                     place="bottom"
                   />
                 )}

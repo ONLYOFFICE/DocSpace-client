@@ -79,7 +79,7 @@ const WebhookHistory = (props) => {
   } = props;
 
   const [isFetchFinished, setIsFetchFinished] = useState(false);
-  const [startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const { id } = useParams();
 

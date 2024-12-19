@@ -139,6 +139,41 @@ const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
+const NavigationHeader = ({ t, onBack }) => (
+  <>
+    <IconButton
+      iconName={ArrowPathReactSvgUrl}
+      size="17"
+      isFill
+      onClick={onBack}
+      className="arrow-button"
+    />
+    <Headline type="content" truncate className="headline">
+      {t("InfoPanel:SubmenuHistory")}
+    </Headline>
+  </>
+);
+
+const GroupMenu = ({
+  menuItems,
+  handleGroupSelection,
+  headerMenu,
+  areAllIdsChecked,
+  isIndeterminate,
+  isRetryPending,
+}) => (
+  <TableGroupMenu
+    checkboxOptions={menuItems}
+    onChange={handleGroupSelection}
+    headerMenu={headerMenu}
+    isChecked={areAllIdsChecked}
+    isIndeterminate={isIndeterminate}
+    withoutInfoPanelToggler
+    isBlocked={isRetryPending}
+    withComboBox
+  />
+);
+
 const HistoryHeader = (props) => {
   const {
     isGroupMenuVisible,
@@ -232,34 +267,6 @@ const HistoryHeader = (props) => {
     </>
   );
 
-  const NavigationHeader = () => (
-    <>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Headline type="content" truncate className="headline">
-        {t("InfoPanel:SubmenuHistory")}
-      </Headline>
-    </>
-  );
-
-  const GroupMenu = () => (
-    <TableGroupMenu
-      checkboxOptions={menuItems}
-      onChange={handleGroupSelection}
-      headerMenu={headerMenu}
-      isChecked={areAllIdsChecked}
-      isIndeterminate={isIndeterminate}
-      withoutInfoPanelToggler
-      isBlocked={isRetryPending}
-      withComboBox
-    />
-  );
-
   useEffect(() => {
     return emptyCheckedIds;
   }, []);
@@ -268,13 +275,29 @@ const HistoryHeader = (props) => {
     <HeaderContainer isDisabled={isRetryPending}>
       {isMobile() ? (
         <>
-          {isGroupMenuVisible && <GroupMenu />}
-          <NavigationHeader />
+          {isGroupMenuVisible && (
+            <GroupMenu
+              menuItems={menuItems}
+              handleGroupSelection={handleGroupSelection}
+              headerMenu={headerMenu}
+              areAllIdsChecked={areAllIdsChecked}
+              isIndeterminate={isIndeterminate}
+              isRetryPending={isRetryPending}
+            />
+          )}
+          <NavigationHeader t={t} onBack={onBack} />
         </>
       ) : isGroupMenuVisible ? (
-        <GroupMenu />
+        <GroupMenu
+          menuItems={menuItems}
+          handleGroupSelection={handleGroupSelection}
+          headerMenu={headerMenu}
+          areAllIdsChecked={areAllIdsChecked}
+          isIndeterminate={isIndeterminate}
+          isRetryPending={isRetryPending}
+        />
       ) : (
-        <NavigationHeader />
+        <NavigationHeader t={t} onBack={onBack} />
       )}
 
       {isPendingVisible &&

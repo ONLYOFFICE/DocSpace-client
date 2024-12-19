@@ -120,7 +120,7 @@ const HistoryFilterHeader = (props) => {
   } = props;
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  const [startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const { id } = useParams();
 
   const openFiltersModal = () => {

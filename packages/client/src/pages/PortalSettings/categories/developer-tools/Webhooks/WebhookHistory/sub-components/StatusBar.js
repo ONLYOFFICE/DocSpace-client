@@ -45,6 +45,30 @@ const StatusBarWrapper = styled.div`
   }
 `;
 
+const SelectedDateTime = ({ historyFilters, clearDate }) => {
+  return (
+    <SelectedItem
+      label={`${moment(historyFilters.deliveryDate)
+        .tz(window.timezone)
+        .format("DD MMM YYYY")} ${moment(historyFilters.deliveryFrom)
+        .tz(window.timezone)
+        .format("HH:mm")} - ${moment(historyFilters.deliveryTo)
+        .tz(window.timezone)
+        .format("HH:mm")}`}
+      onClose={clearDate}
+      onClick={clearDate}
+    />
+  );
+};
+
+const SelectedDate = ({ historyFilters, clearDate }) => (
+  <SelectedItem
+    label={moment(historyFilters.deliveryDate).format("DD MMM YYYY")}
+    onClose={clearDate}
+    onClick={clearDate}
+  />
+);
+
 const StatusBar = (props) => {
   const {
     historyFilters,
@@ -64,30 +88,6 @@ const StatusBar = (props) => {
     );
     clearHistoryFilters();
   };
-
-  const SelectedDateTime = () => {
-    return (
-      <SelectedItem
-        label={`${moment(historyFilters.deliveryDate)
-          .tz(window.timezone)
-          .format("DD MMM YYYY")} ${moment(historyFilters.deliveryFrom)
-          .tz(window.timezone)
-          .format("HH:mm")} - ${moment(historyFilters.deliveryTo)
-          .tz(window.timezone)
-          .format("HH:mm")}`}
-        onClose={clearDate}
-        onClick={clearDate}
-      />
-    );
-  };
-
-  const SelectedDate = () => (
-    <SelectedItem
-      label={moment(historyFilters.deliveryDate).format("DD MMM YYYY")}
-      onClose={clearDate}
-      onClick={clearDate}
-    />
-  );
 
   const SelectedStatuses = historyFilters.status.map((statusCode) => (
     <SelectedItem
@@ -129,9 +129,12 @@ const StatusBar = (props) => {
           historyFilters.deliveryTo,
           historyFilters.deliveryTo.clone().endOf("day"),
         ) ? (
-          <SelectedDateTime />
+          <SelectedDateTime
+            historyFilters={historyFilters}
+            clearDate={clearDate}
+          />
         ) : (
-          <SelectedDate />
+          <SelectedDate historyFilters={historyFilters} clearDate={clearDate} />
         )
       ) : (
         ""

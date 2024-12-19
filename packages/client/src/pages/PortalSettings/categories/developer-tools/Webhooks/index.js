@@ -83,7 +83,7 @@ const Webhooks = (props) => {
 
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
 
-  const [startTranslation] = useTransition();
+  const [, startTranslation] = useTransition();
 
   setDocumentTitle(t("Webhooks"));
 

@@ -90,11 +90,15 @@ const RoomIcon = ({
 
   const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
 
-  const imgSrc = logo?.cover
-    ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
-    : logo?.medium
-      ? logo.medium
-      : logo;
+  const imgSrc = logo
+    ? typeof logo === "string"
+      ? logo
+      : logo.cover
+        ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
+        : typeof logo === "object" && logo.medium
+          ? logo.medium
+          : undefined
+    : undefined;
 
   const dropdownElement = (
     <DropDown
@@ -146,7 +150,12 @@ const RoomIcon = ({
   const textColor = color && getTextColor(`#${color}`, 202);
 
   const isWrongImage =
-    !correctImage && typeof imgSrc !== "string" && !imgSrc?.color;
+    !correctImage &&
+    imgSrc &&
+    typeof imgSrc !== "string" &&
+    logo &&
+    typeof logo !== "string" &&
+    !logo?.color;
 
   return (
     <>
@@ -221,7 +230,11 @@ const RoomIcon = ({
               {roomTitle}
             </Text>
           </>
-        ) : logo?.cover && typeof imgSrc === "string" && imgSrc ? (
+        ) : logo &&
+          typeof logo !== "string" &&
+          logo?.cover &&
+          typeof imgSrc === "string" &&
+          imgSrc ? (
           <>
             <div className="room-background hover-class" />
             <ReactSVG

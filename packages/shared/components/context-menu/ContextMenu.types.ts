@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { ICover } from "api/rooms/types";
+import { TLogo } from "../../api/rooms/types";
 
 export type ContextMenuRefType = {
   show: (e: React.MouseEvent | MouseEvent) => void;
@@ -77,8 +77,7 @@ export type ContextMenuType = {
   isLoader?: boolean;
   isHeader?: boolean;
   onLoad?: () => Promise<ContextMenuModel[]>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  template?: any;
+  template?: unknown;
   isOutsideLink?: boolean;
   withToggle?: boolean;
   checked?: boolean;
@@ -92,15 +91,14 @@ export type SeparatorType = {
   className?: string;
   disableColor?: string;
   isLoader?: boolean;
+  style?: React.CSSProperties;
 };
 
-export type HeaderType = {
+export type HeaderType = TLogo & {
   title: string;
-  icon?: string;
   avatar?: string;
-  color?: string;
-  cover?: ICover;
   logo?: string;
+  icon?: string;
 };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;

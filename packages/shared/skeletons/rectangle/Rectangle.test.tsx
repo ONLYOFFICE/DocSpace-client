@@ -25,19 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ContextMenu } from ".";
-import styles from "./ContextMenu.module.scss";
 
-describe("<ContextMenu />", () => {
+import { renderWithTheme } from "../../utils/render-with-theme";
+import { RectangleSkeleton } from ".";
+
+describe("<RectangleSkeleton />", () => {
   it("renders without error", () => {
-    render(<ContextMenu model={[]} />);
-    expect(screen.getByTestId("context-menu")).toBeInTheDocument();
-  });
-
-  it("has base contextMenu class", () => {
-    render(<ContextMenu model={[]} />);
-    expect(screen.getByTestId("context-menu")).toHaveClass(styles.contextMenu);
+    renderWithTheme(<RectangleSkeleton />);
+    expect(screen.getByTestId("rectangle-skeleton")).toBeInTheDocument();
   });
 });

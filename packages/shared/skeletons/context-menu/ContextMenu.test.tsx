@@ -24,29 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import React from "react";
+import { screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { injectDefaultTheme, tablet } from "../../utils";
+import { renderWithTheme } from "../../utils/render-with-theme";
+import { ContextMenuSkeleton } from ".";
 
-const StyledContextMenu = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  height: 32px;
-  display: grid;
-  grid-template-columns: 16px 1fr;
-  grid-column-gap: 8px;
-  justify-items: center;
-  align-items: center;
+jest.mock("../../utils", () => ({
+  ...jest.requireActual("../../utils"),
+  isDesktop: jest.fn(),
+}));
 
-  @media ${tablet} {
-    padding-block: 4px;
-    padding-inline: 16px 12px;
-    grid-column-gap: 0px;
-  }
+describe("<ContextMenuSkeleton />", () => {
+  it("renders without error", () => {
+    renderWithTheme(<ContextMenuSkeleton />);
+    expect(screen.getAllByTestId("rectangle-skeleton")[0]).toBeInTheDocument();
+    expect(screen.getAllByTestId("rectangle-skeleton")[1]).toBeInTheDocument();
+  });
 
-  .context-menu-rectangle {
-    margin-inline-end: auto;
-    margin-inline-start: 8px;
-  }
-`;
+  it("renders with custom id and className", () => {
+    const { container } = renderWithTheme(
+      <ContextMenuSkeleton id="test-id" className="test-class" />,
+    );
 
-export { StyledContextMenu };
+    const skeleton = container.firstChild;
+    expect(skeleton).toHaveAttribute("id", "test-id");
+    expect(skeleton).toHaveClass("test-class");
+  });
+});

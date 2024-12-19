@@ -27,8 +27,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
-import { useTheme } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
@@ -37,8 +35,8 @@ import {
   DomHelpers,
   trimSeparator,
   isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
 } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
@@ -47,7 +45,6 @@ import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { IconButton } from "../icon-button";
 import { RoomIcon } from "../room-icon";
 
-import { StyledContextMenu } from "./ContextMenu.styled";
 import { SubMenu } from "./sub-components/SubMenu";
 import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
@@ -56,8 +53,9 @@ import {
   ContextMenuProps,
   ContextMenuRefType,
 } from "./ContextMenu.types";
+import styles from "./ContextMenu.module.scss";
 
-const marginBorder = 16; // Indentation from the border of the screen
+const MARGIN_BORDER = 16; // Indentation from the border of the screen
 
 const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
   (props, ref) => {
@@ -72,18 +70,17 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
     >([]);
     const [mobileHeader, setMobileHeader] = React.useState<string>("");
 
-    const [articleWidth, setArticleWidth] = React.useState(0);
-
     const prevReshow = React.useRef(false);
     const menuRef = React.useRef<null | HTMLDivElement>(null);
-    const currentEvent = React.useRef<null | React.MouseEvent | MouseEvent>(
-      null,
-    );
-    const currentChangeEvent = React.useRef<
-      null | Event | React.ChangeEvent<HTMLInputElement>
+    const currentEvent = React.useRef<
+      | null
+      | React.MouseEvent
+      | MouseEvent
+      | React.ChangeEvent<HTMLInputElement>
+      | Event
     >(null);
 
-    const theme = useTheme();
+    const { isRTL } = useInterfaceDirection();
 
     const {
       getContextModel,
@@ -119,7 +116,13 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
     };
 
     const show = React.useCallback(
-      (e: React.MouseEvent | MouseEvent) => {
+      (
+        e:
+          | React.MouseEvent
+          | MouseEvent
+          | Event
+          | React.ChangeEvent<HTMLInputElement>,
+      ) => {
         if (getContextModel) {
           const m = trimSeparator(getContextModel());
           setModel(m);
@@ -129,6 +132,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         e.preventDefault();
 
         currentEvent.current = e;
+
         if (visible) {
           if (!isMobileUtils()) {
             setReshow(true);
@@ -150,12 +154,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           | Event
           | React.ChangeEvent<HTMLInputElement>,
       ) => {
-        if (e instanceof Event) {
-          currentChangeEvent.current = e;
-        } else {
-          // @ts-expect-error need fix
-          currentEvent.current = e;
-        }
+        currentEvent.current = e;
 
         onHide?.(e);
 
@@ -164,7 +163,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         prevReshow.current = false;
         setChangeView(false);
         setShowMobileMenu(false);
-        setArticleWidth(0);
       },
       [onHide],
     );
@@ -177,14 +175,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           | Event
           | React.ChangeEvent<HTMLInputElement>,
       ) => {
-        if (currentChangeEvent.current === e || currentEvent.current === e)
-          return;
+        if (currentEvent.current === e) return;
 
         if (visible) {
           hide(e);
           return false;
         }
-        // @ts-expect-error fix types
         show(e);
         return true;
       },
@@ -198,7 +194,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         prevReshow.current = false;
         setResetMenu(true);
         setChangeView(false);
-        setArticleWidth(0);
 
         if (currentEvent.current) show(currentEvent.current);
       }
@@ -244,13 +239,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           }
         }
 
-        if (theme.interfaceDirection === "rtl" && !rects && left > width) {
+        if (isRTL && !rects && left > width) {
           left = event.pageX - width + 1;
         }
 
         if (mobileView) {
           setChangeView(true);
-          setArticleWidth(0);
 
           return;
         }
@@ -272,7 +266,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
         // fit
         if (top < document.body.scrollTop) {
-          if (document.body.scrollTop === 0) top = marginBorder;
+          if (document.body.scrollTop === 0) top = MARGIN_BORDER;
           else top = document.body.scrollTop;
         }
 
@@ -287,7 +281,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           }
         }
         if (menuRef.current) {
-          menuRef.current.style.left = `${left || marginBorder}px`;
+          menuRef.current.style.left = `${left || MARGIN_BORDER}px`;
           menuRef.current.style.top = `${top}px`;
 
           if (!mobileView) menuRef.current.style.width = `${width}px`;
@@ -303,10 +297,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         );
       }
 
-      if (currentChangeEvent.current) {
-        currentChangeEvent.current = null;
+      if (currentEvent.current && "clientX" in currentEvent.current) {
+        position(currentEvent.current);
       }
-      if (currentEvent.current) position(currentEvent.current);
     };
 
     const onExited = () => {
@@ -411,7 +404,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           prevReshow.current = false;
           setChangeView(false);
           setShowMobileMenu(false);
-          setArticleWidth(0);
         }
 
         window.removeEventListener("resize", documentResizeListener);
@@ -456,14 +448,14 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       const isCoverExist = !!header?.cover;
 
       return (
-        <StyledContextMenu
-          changeView={changeView}
-          articleWidth={articleWidth}
-          isRoom={isRoom}
-          fillIcon={fillIcon}
-          isIconExist={isIconExist}
+        <div
           data-testid="context-menu"
-          isCoverExist={isCoverExist}
+          className={classNames(styles.contextMenu, {
+            [styles.isRoom]: isRoom,
+            [styles.coverExist]: isCoverExist,
+            [styles.isIconExist]: isIconExist,
+            [styles.fillIcon]: fillIcon,
+          })}
         >
           <CSSTransition
             nodeRef={menuRef}
@@ -506,7 +498,14 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                             imgClassName="drop-down-item_icon"
                             logo={
                               header?.cover
-                                ? { cover: header.cover }
+                                ? {
+                                    cover: header.cover,
+                                    color: header.color,
+                                    medium: header.medium,
+                                    small: header.small,
+                                    large: header.large,
+                                    original: header.original,
+                                  }
                                 : header?.logo
                                   ? header?.logo
                                   : header?.icon
@@ -562,7 +561,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
               )}
             </div>
           </CSSTransition>
-        </StyledContextMenu>
+        </div>
       );
     };
 

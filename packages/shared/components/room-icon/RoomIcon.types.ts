@@ -29,32 +29,16 @@ type RoomIconExpansion = {
   isEmptyIcon?: boolean;
   dropDownManualX?: string;
   model?: TModel[];
-  logo?: TLogo;
+  logo?: TLogo | string;
 };
 
 type RoomIconColor = {
   color: string;
-  logo?: undefined;
   imgClassName?: undefined;
-};
-
-type RoomIconCover = {
-  data: string;
-  id: string;
-};
-
-type Logo = {
-  color?: string;
-  large: string;
-  medium?: string;
-  original: string;
-  small: string;
-  cover?: RoomIconCover;
 };
 
 type RoomIconImage = {
   color?: string | undefined;
-  logo: Logo | string;
   imgClassName?: string;
 };
 

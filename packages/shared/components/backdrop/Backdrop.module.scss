@@ -1,10 +1,10 @@
-@import url(../../styles/variables/index.scss);
+@import "../../styles/variables/colors";
 
 :root {
-  --backdrop-background-color: $blur-light;
+  --backdrop-background-color: #{$blur-light};
 
   &[data-theme="dark"] {
-    --backdrop-background-color: $blur-dark;
+    --backdrop-background-color: #{$blur-dark};
   }
 }
 

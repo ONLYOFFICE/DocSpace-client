@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 
@@ -54,7 +54,7 @@ const DeveloperToolsWrapper = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
-  const { t, ready } = useTranslation([
+  const { t } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
     "Settings",

@@ -39,8 +39,9 @@ export const getOperationProgress = async (
           }
 
           const currentItem = res.find((x) => x.id === id);
+
           if (currentItem?.error) {
-            reject(currentItem.error);
+            reject(currentItem);
           }
           resolve(currentItem);
         });

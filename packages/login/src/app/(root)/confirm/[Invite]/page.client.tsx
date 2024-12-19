@@ -425,9 +425,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     }
 
     const providerName = targetElement.dataset.providername;
-    const url = targetElement.dataset.url || "";
+    let url = targetElement.dataset.url || "";
 
     try {
+      //Lifehack for Twitter
+      if (providerName == "twitter") {
+        url += "authCallback";
+      }
+
       const tokenGetterWin =
         window.AscDesktopEditor !== undefined
           ? (window.location.href = url)

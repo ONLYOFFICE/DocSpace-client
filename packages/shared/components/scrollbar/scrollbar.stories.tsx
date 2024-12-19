@@ -54,6 +54,10 @@ const meta = {
       control: "text",
       description: "Add padding after the last item",
     },
+    paddingInlineEnd: {
+      control: "text",
+      description: "Add padding-inline-end",
+    },
     style: {
       control: "object",
       description: "Custom styles for the scrollbar container",
@@ -168,6 +172,19 @@ export const WithPaddingAfterLastItem: Story = {
     style: { width: 300, height: 200 },
     autoHide: false,
     paddingAfterLastItem: "50px",
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
+};
+
+export const WithPaddingInlineEnd: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: false,
+    paddingInlineEnd: "100px",
   },
   render: (args) => (
     <Scrollbar {...args}>

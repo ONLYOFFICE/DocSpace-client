@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Authentifizierungsmethode",
   "AuthorizedApps": "Autorisierte Apps",
   "AuthorizeLink": "Autorisierungslink",
+  "BasicInfo": "Grundinformationen",
   "Client": "Client",
   "ClientCopy": "Client-ID erfolgreich in die Zwischenablage kopiert",
   "ClientHelpButton": "Anmeldedaten für die Nutzung von OAuth 2.0 als Authentifizierungstyp. <br/> <strong>Hinweis:</strong> Jeder Unternehmensadministrator, der die Client-ID der App kennt, kann Informationen über die App abrufen, einschließlich App-Name, Authentifizierungstyp, App-Berechtigungen und Weiterleitungs-URI.",

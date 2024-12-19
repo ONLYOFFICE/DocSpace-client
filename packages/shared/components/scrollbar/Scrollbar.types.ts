@@ -44,6 +44,8 @@ export type ScrollbarProps = PickedScrollbarLibraryProps & {
   tabIndex?: number | null;
   /** Add padding bottom to scroll-body */
   paddingAfterLastItem?: string;
+  /** Add custom padding-inline-end to scroll-body. */
+  paddingInlineEnd?: string;
   /** Add onScroll handler */
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   /** Add children */

@@ -27,18 +27,28 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledBodyContent } from "./StyledDownloadDialog";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ReactSVG } from "react-svg";
+
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+
 import DownloadContent from "./DownloadContent";
-import { UrlActionType } from "@docspace/shared/enums";
+import PasswordContent from "./PasswordContent";
+import { StyledBodyContent } from "./StyledDownloadDialog";
+import OnePasswordRow from "./OnePasswordRow";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
+
+    const { sortedFiles } = this.props;
     const { documents, spreadsheets, presentations, masterForms, other } =
-      this.props.sortedFiles;
+      sortedFiles;
 
     this.state = {
       documents: {
@@ -74,9 +84,61 @@ class DownloadDialogComponent extends React.Component {
     };
   }
 
-  onClose = () => this.props.setDownloadDialogVisible(false);
+  interruptingConversion = () => {
+    const { setSortedPasswordFiles, setDownloadItems } = this.props;
 
-  getDownloadItems = () => {
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
+
+    setDownloadItems([]);
+  };
+
+  onClosePanel = () => {
+    const { setDownloadDialogVisible } = this.props;
+
+    this.interruptingConversion();
+
+    setDownloadDialogVisible(false);
+  };
+
+  onClose = () => {
+    const { setDownloadDialogVisible, setSortedPasswordFiles } = this.props;
+
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
+
+    setDownloadDialogVisible(false);
+  };
+
+  getErrorsTranslation = () => {
+    const { t } = this.props;
+    const passwordError = (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="PasswordProtectedFiles"
+        components={{ 1: <span /> }}
+      />
+    );
+    const translations = {
+      label: t("Translations:ArchivingData"),
+      error: t("Common:ErrorInternalServer"),
+      passwordError,
+    };
+
+    return translations;
+  };
+  onDownload = () => {
+    const { setDownloadItems } = this.props;
+
     const itemList = [
       ...this.state.documents.files,
       ...this.state.spreadsheets.files,
@@ -85,45 +147,36 @@ class DownloadDialogComponent extends React.Component {
       ...this.state.other.files,
     ];
 
-    const files = [];
-    const folders = [];
-    let singleFileUrl = null;
+    if (itemList.length) {
+      setDownloadItems(itemList);
 
-    for (let item of itemList) {
-      if (item.checked) {
-        if (!!item.fileExst || item.contentLength) {
-          const format =
-            !item.format || item.format === this.props.t("OriginalFormat")
-              ? item.fileExst
-              : item.format;
-          if (!singleFileUrl) {
-            singleFileUrl = item.viewUrl;
-          }
-          files.push({ key: item.id, value: format });
-        } else {
-          folders.push(item.id);
-        }
-      }
+      this.onDownloadFunction(itemList);
     }
-
-    return [files, folders, singleFileUrl];
   };
 
-  onDownload = () => {
-    const { t, downloadFiles } = this.props;
-    const [fileConvertIds, folderIds] = this.getDownloadItems();
-    if (fileConvertIds.length || folderIds.length) {
-      downloadFiles(fileConvertIds, folderIds, {
-        label: t("Translations:ArchivingData"),
-        error: t("Common:ErrorInternalServer"),
-      });
-      this.props.setSelected("none");
-      this.onClose();
+  onDownloadFunction = (itemList) => {
+    const { downloadItems, downloadFiles, getDownloadItems, t } = this.props;
+
+    const files = itemList ?? downloadItems;
+
+    const [fileConvertIds, folderIds] = getDownloadItems(files, t);
+
+    downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
+
+    this.onClose();
+  };
+
+  onReDownload = () => {
+    const { downloadItems, isAllPasswordFilesSorted } = this.props;
+
+    if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
+      this.onDownloadFunction();
     }
   };
 
   getNewArrayFiles = (fileId, array, format) => {
     //Set all documents format
+
     if (!fileId) {
       for (let file of array) {
         file.format =
@@ -252,6 +305,15 @@ class DownloadDialogComponent extends React.Component {
    * @param {KeyboardEvent} event
    */
   handleKeyUp = (event) => {
+    const { isAllPasswordFilesSorted, needPassword } = this.props;
+
+    if (event.key === "Enter" && needPassword) {
+      if (!isAllPasswordFilesSorted) return;
+
+      this.onReDownload();
+      return;
+    }
+
     if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
       this.onDownload();
     }
@@ -265,8 +327,33 @@ class DownloadDialogComponent extends React.Component {
     document.removeEventListener("keyup", this.handleKeyUp);
   };
 
+  getItemIcon = (item) => {
+    const { getIcon, getFolderIcon } = this.props;
+    const extension = item.fileExst;
+    const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
+
+    return (
+      <ReactSVG
+        beforeInjection={(svg) => {
+          svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
+        }}
+        src={icon}
+        loading={() => <div style={{ width: "96px" }} />}
+      />
+    );
+  };
+
   render() {
-    const { t, tReady, visible, extsConvertible, theme } = this.props;
+    const {
+      t,
+      tReady,
+      visible,
+      extsConvertible,
+      theme,
+      needPassword,
+      isAllPasswordFilesSorted,
+      isOnePasswordFile,
+    } = this.props;
 
     const {
       files: documents,
@@ -327,11 +414,96 @@ class DownloadDialogComponent extends React.Component {
       (this.state.masterForms.files.length > 1 && 1) +
       (this.state.other.files.length > 1 && 1);
 
+    const mainContent = (
+      <>
+        <StyledBodyContent className="download-dialog-description">
+          <Text noSelect>{t("ChooseFormatText")}.</Text>
+          {!isSingleFile && (
+            <Text noSelect>
+              <Trans t={t} i18nKey="ConvertToZip" />
+            </Text>
+          )}
+        </StyledBodyContent>
+        {documents.length > 0 && (
+          <DownloadContent
+            {...downloadContentProps}
+            isChecked={checkedDocTitle}
+            isIndeterminate={indeterminateDocTitle}
+            items={documents}
+            titleFormat={documentsTitleFormat || t("OriginalFormat")}
+            type="documents"
+            title={t("Common:Documents")}
+          />
+        )}
+
+        {spreadsheets.length > 0 && (
+          <DownloadContent
+            {...downloadContentProps}
+            isChecked={checkedSpreadsheetTitle}
+            isIndeterminate={isIndeterminateSpreadsheetTitle}
+            items={spreadsheets}
+            titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
+            type="spreadsheets"
+            title={t("Translations:Spreadsheets")}
+          />
+        )}
+
+        {presentations.length > 0 && (
+          <DownloadContent
+            {...downloadContentProps}
+            isChecked={checkedPresentationTitle}
+            isIndeterminate={indeterminatePresentationTitle}
+            items={presentations}
+            titleFormat={presentationsTitleFormat || t("OriginalFormat")}
+            type="presentations"
+            title={t("Translations:Presentations")}
+          />
+        )}
+
+        {masterForms.length > 0 && (
+          <DownloadContent
+            {...downloadContentProps}
+            isChecked={checkedMasterFormsTitle}
+            isIndeterminate={indeterminateMasterFormsTitle}
+            items={masterForms}
+            titleFormat={masterFormsTitleFormat || t("OriginalFormat")}
+            type="masterForms"
+            title={t("Translations:FormTemplates")}
+          />
+        )}
+
+        {other.length > 0 && (
+          <DownloadContent
+            {...downloadContentProps}
+            isChecked={checkedOtherTitle}
+            isIndeterminate={indeterminateOtherTitle}
+            items={other}
+            type="other"
+            title={t("Translations:Other")}
+          />
+        )}
+
+        <div className="download-dialog-convert-message">
+          <Text noSelect>{t("ConvertMessage")}</Text>
+        </div>
+      </>
+    );
+
+    if (isOnePasswordFile) {
+      return (
+        <OnePasswordRow
+          getItemIcon={this.getItemIcon}
+          onDownload={this.onDownloadFunction}
+          onClosePanel={this.onClosePanel}
+        />
+      );
+    }
+
     return (
       <ModalDialog
         visible={visible}
-        displayType="aside"
-        onClose={this.onClose}
+        displayType={ModalDialogType.aside}
+        onClose={this.onClosePanel}
         autoMaxHeight
         autoMaxWidth
         isLarge
@@ -340,88 +512,32 @@ class DownloadDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
-        <ModalDialog.Body className={this.state.modalDialogToggle}>
-          <StyledBodyContent className="download-dialog-description">
-            <Text noSelect>{t("ChooseFormatText")}.</Text>
-            {!isSingleFile && (
-              <Text noSelect>
-                <Trans t={t} i18nKey="ConvertToZip" />
-              </Text>
+        <ModalDialog.Body className={"modalDialogToggle"}>
+          <Scrollbar paddingInlineEnd="0px">
+            {needPassword ? (
+              <PasswordContent
+                getItemIcon={this.getItemIcon}
+                onReDownload={this.onReDownload}
+              />
+            ) : (
+              mainContent
             )}
-          </StyledBodyContent>
-          {documents.length > 0 && (
-            <DownloadContent
-              {...downloadContentProps}
-              isChecked={checkedDocTitle}
-              isIndeterminate={indeterminateDocTitle}
-              items={documents}
-              titleFormat={documentsTitleFormat || t("OriginalFormat")}
-              type="documents"
-              title={t("Common:Documents")}
-            />
-          )}
-
-          {spreadsheets.length > 0 && (
-            <DownloadContent
-              {...downloadContentProps}
-              isChecked={checkedSpreadsheetTitle}
-              isIndeterminate={isIndeterminateSpreadsheetTitle}
-              items={spreadsheets}
-              titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
-              type="spreadsheets"
-              title={t("Translations:Spreadsheets")}
-            />
-          )}
-
-          {presentations.length > 0 && (
-            <DownloadContent
-              {...downloadContentProps}
-              isChecked={checkedPresentationTitle}
-              isIndeterminate={indeterminatePresentationTitle}
-              items={presentations}
-              titleFormat={presentationsTitleFormat || t("OriginalFormat")}
-              type="presentations"
-              title={t("Translations:Presentations")}
-            />
-          )}
-
-          {masterForms.length > 0 && (
-            <DownloadContent
-              {...downloadContentProps}
-              isChecked={checkedMasterFormsTitle}
-              isIndeterminate={indeterminateMasterFormsTitle}
-              items={masterForms}
-              titleFormat={masterFormsTitleFormat || t("OriginalFormat")}
-              type="masterForms"
-              title={t("Translations:FormTemplates")}
-            />
-          )}
-
-          {other.length > 0 && (
-            <DownloadContent
-              {...downloadContentProps}
-              isChecked={checkedOtherTitle}
-              isIndeterminate={indeterminateOtherTitle}
-              items={other}
-              type="other"
-              title={t("Translations:Other")}
-            />
-          )}
-
-          <div className="download-dialog-convert-message">
-            <Text noSelect>{t("ConvertMessage")}</Text>
-          </div>
+          </Scrollbar>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
           <Button
             key="DownloadButton"
             className="download-button"
-            label={t("Common:Download")}
+            label={
+              needPassword ? t("Common:ContinueButton") : t("Common:Download")
+            }
             size="normal"
             primary
-            onClick={this.onDownload}
-            isDisabled={isCheckedLength === 0}
+            onClick={needPassword ? this.onReDownload : this.onDownload}
+            isDisabled={
+              needPassword ? !isAllPasswordFilesSorted : isCheckedLength === 0
+            }
             scale
           />
           <Button
@@ -451,15 +567,35 @@ export default inject(
     filesActionsStore,
     filesSettingsStore,
     settingsStore,
+    uploadDataStore,
   }) => {
     const { sortedFiles, setSelected } = filesStore;
-    const { extsConvertible } = filesSettingsStore;
+    const { extsConvertible, getIcon, getFolderIcon } = filesSettingsStore;
     const { theme, openUrl } = settingsStore;
 
-    const { downloadDialogVisible: visible, setDownloadDialogVisible } =
-      dialogsStore;
+    const {
+      downloadDialogVisible: visible,
+      setDownloadDialogVisible,
+
+      setSortedPasswordFiles,
+      sortedDownloadFiles,
+      getDownloadItems,
+      setDownloadItems,
+      sortedPasswordFiles,
+      downloadItems,
+    } = dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
+
+    const { clearActiveOperations } = uploadDataStore;
+
+    const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
+    const needPassword = sortedPasswordFiles?.length > 0;
+
+    const isSortedFile =
+      sortedDownloadFiles?.remove?.length === 1 && downloadItems?.length === 1;
+
+    const isOnePasswordFile = !isSortedFile && downloadItems?.length === 1;
 
     return {
       sortedFiles,
@@ -472,6 +608,18 @@ export default inject(
 
       theme,
       openUrl,
+      sortedPasswordFiles,
+
+      setSortedPasswordFiles,
+      isAllPasswordFilesSorted,
+      clearActiveOperations,
+      getDownloadItems,
+      setDownloadItems,
+      downloadItems,
+      getIcon,
+      getFolderIcon,
+      isOnePasswordFile,
+      needPassword,
     };
   },
 )(observer(DownloadDialog));

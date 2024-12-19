@@ -23,45 +23,74 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import React from "react";
+$mobile-footer-height: 64px;
 
-import { Scrollbar } from "../scrollbar";
-import { StyledAside } from "./Aside.styled";
-import { AsideProps } from "./Aside.types";
-import { AsideHeader } from "../aside-header";
+:root {
+  --aside-bg-color: #{$white};
 
-const AsidePure = (props: AsideProps) => {
-  const {
-    visible,
-    children,
-    scale = false,
-    zIndex = 400,
-    className,
-    contentPaddingBottom,
-    withoutBodyScroll = false,
-    onClose,
-    withoutHeader = false,
-    ...rest
-  } = props;
-  const contentRef = React.useRef<HTMLElement | null>(null);
+  --aside-custom-z-index: unset;
+  --aside-content-padding-bottom: unset;
 
-  return (
-    <StyledAside
-      visible={visible}
-      scale={scale}
-      zIndex={zIndex}
-      contentPaddingBottom={contentPaddingBottom}
-      className={`${className} not-selectable aside`}
-      forwardRef={contentRef}
-      data-testid="aside"
-    >
-      {!withoutHeader && <AsideHeader onCloseClick={onClose} {...rest} />}
-      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
-    </StyledAside>
-  );
-};
+  &[data-theme="dark"] {
+    --aside-bg-color: #{$black};
+  }
 
-const Aside = React.memo(AsidePure);
+  &[data-dir="rtl"] .aside {
+    left: 0;
+    right: unset;
+    transform: translateX(-480px);
 
-export { Aside };
+    &.scale {
+      transform: translateX(-100%);
+    }
+
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+}
+
+.aside {
+  background-color: var(--aside-bg-color);
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+
+  right: 0;
+  transform: translateX(480px);
+  transition: transform 0.3s ease-in-out;
+  width: 480px;
+  box-sizing: border-box;
+
+  &.scale {
+    transform: translateX(100%);
+    width: 100%;
+  }
+
+  &.visible {
+    transform: translateX(0);
+  }
+
+  @include mobile {
+    bottom: 0;
+    top: unset;
+    height: calc(100% - $mobile-footer-height);
+
+    width: 100%;
+    max-width: 100%;
+    transform: translateY(100%);
+
+    &.visible {
+      transform: translateY(0);
+    }
+
+    aside:not(:first-child) {
+      height: 100%;
+    }
+  }
+}

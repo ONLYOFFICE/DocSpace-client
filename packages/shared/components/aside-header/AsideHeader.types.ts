@@ -32,7 +32,7 @@ type PickedDivProps = Pick<
 type BackButtonProps =
   | {
       /** Whether to show the back button */
-      isBackButton: true;
+      isBackButton: boolean;
       /** Click handler for the back button */
       onBackClick: () => void;
     }
@@ -44,7 +44,7 @@ type BackButtonProps =
 type CloseButtonProps =
   | {
       /** Whether to show the close button */
-      isCloseable: true;
+      isCloseable: boolean;
       /** Click handler for the close button */
       onCloseClick: () => void;
     }

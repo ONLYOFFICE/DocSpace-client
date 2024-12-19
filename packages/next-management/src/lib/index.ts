@@ -59,3 +59,8 @@ export const getIsSettingsPaid = (
 export const getIsCustomizationAvailable = (quota: unknown) => {
   return quota.features.find((obj) => obj.id === "customization")?.value;
 };
+
+export const getIsDefaultWhiteLabel = (whiteLabelIsDefault: unknown) => {
+  return whiteLabelIsDefault.map((item) => item?.default).includes(false);
+};
+

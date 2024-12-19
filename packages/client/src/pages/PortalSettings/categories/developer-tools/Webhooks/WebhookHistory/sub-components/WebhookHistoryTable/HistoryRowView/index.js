@@ -32,6 +32,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryRow from "./HistoryRow";
 
 const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
@@ -61,7 +62,6 @@ const HistoryRowView = (props) => {
     totalItems,
     fetchMoreItems,
     historyFilters,
-    formatFilters,
     currentDeviceType,
   } = props;
   const { id } = useParams();
@@ -106,7 +106,6 @@ export default inject(({ setup, webhooksStore, settingsStore }) => {
     hasMoreItems,
     totalItems,
     historyFilters,
-    formatFilters,
   } = webhooksStore;
 
   const { currentDeviceType } = settingsStore;
@@ -118,7 +117,6 @@ export default inject(({ setup, webhooksStore, settingsStore }) => {
     hasMoreItems,
     totalItems,
     historyFilters,
-    formatFilters,
     currentDeviceType,
   };
 })(observer(HistoryRowView));

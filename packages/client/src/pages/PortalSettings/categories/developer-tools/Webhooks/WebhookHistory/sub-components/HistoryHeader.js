@@ -54,6 +54,9 @@ import { FloatingButton } from "@docspace/shared/components/floating-button";
 
 import { globalColors } from "@docspace/shared/themes";
 
+import { retryWebhooks } from "@docspace/shared/api/settings";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
+
 const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   top: 0;
@@ -180,12 +183,10 @@ const HistoryHeader = (props) => {
     checkedEventIds,
     checkAllIds,
     emptyCheckedIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,
@@ -209,7 +210,7 @@ const HistoryHeader = (props) => {
       const timeout = setTimeout(() => {
         setIsPendingVisible(true);
       }, 300);
-      await retryWebhookEvents(checkedEventIds);
+      await retryWebhooks(checkedEventIds);
       await emptyCheckedIds();
       clearTimeout(timeout);
       setRetryPendingFalse();
@@ -312,12 +313,10 @@ export default inject(({ webhooksStore, settingsStore }) => {
     checkAllIds,
     emptyCheckedIds,
     checkedEventIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,
@@ -330,13 +329,11 @@ export default inject(({ webhooksStore, settingsStore }) => {
     checkAllIds,
     emptyCheckedIds,
     checkedEventIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
     theme,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,

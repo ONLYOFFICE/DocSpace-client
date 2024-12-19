@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled from "styled-components";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
+
+import { retryWebhook } from "@docspace/shared/api/settings";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -98,8 +99,7 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const DetailsNavigationHeader = (props) => {
-  const { retryWebhookEvent } = props;
+const DetailsNavigationHeader = () => {
   const { eventId } = useParams();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -108,7 +108,7 @@ const DetailsNavigationHeader = (props) => {
     navigate(-1);
   };
   const handleRetryEvent = async () => {
-    await retryWebhookEvent(eventId);
+    await retryWebhook(eventId);
     toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
   };
 
@@ -138,8 +138,4 @@ const DetailsNavigationHeader = (props) => {
   );
 };
 
-export default inject(({ webhooksStore }) => {
-  const { retryWebhookEvent } = webhooksStore;
-
-  return { retryWebhookEvent };
-})(observer(DetailsNavigationHeader));
+export default observer(DetailsNavigationHeader);

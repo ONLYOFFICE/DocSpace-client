@@ -32,6 +32,7 @@ import { inject, observer } from "mobx-react";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { Link } from "@docspace/shared/components/link";
 import { globalColors } from "@docspace/shared/themes";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 const StatusBarWrapper = styled.div`
   margin-top: 9px;
@@ -72,7 +73,6 @@ const SelectedDate = ({ historyFilters, clearDate }) => (
 const StatusBar = (props) => {
   const {
     historyFilters,
-    formatFilters,
     applyFilters,
     clearHistoryFilters,
     clearDate,
@@ -159,16 +159,10 @@ const StatusBar = (props) => {
 };
 
 export default inject(({ webhooksStore }) => {
-  const {
-    formatFilters,
-    historyFilters,
-    clearHistoryFilters,
-    clearDate,
-    unselectStatus,
-  } = webhooksStore;
+  const { historyFilters, clearHistoryFilters, clearDate, unselectStatus } =
+    webhooksStore;
 
   return {
-    formatFilters,
     historyFilters,
     clearHistoryFilters,
     clearDate,

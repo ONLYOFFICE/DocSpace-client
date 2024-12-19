@@ -23,70 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-const { createRandomTagId } = "@docspace/shared/utils/random";
 
-class TagHandler {
-  constructor(tags, setTags, fetchedTags) {
-    this.tags = tags;
-    this.setTags = setTags;
-    this.fetchedTags = fetchedTags;
-  }
-
-  refreshDefaultTag(name) {
-    const newTags = [...this.tags].filter((tag) => !tag.isDefault);
-    newTags.unshift({
-      id: createRandomTagId(),
-      name,
-      isDefault: true,
-    });
-
-    this.setTags(newTags);
-  }
-
-  addTag(name) {
-    const newTags = [...this.tags];
-
-    if (this.isAlreadyAdded(name)) {
-      return; // already added
-    }
-
-    newTags.push({
-      id: this.createRandomTagId(),
-      name,
-    });
-    this.setTags(newTags);
-  }
-
-  isAlreadyAdded(name) {
-    return !!this.tags.find((t) => t.name.toLowerCase() === name.toLowerCase());
-  }
-
-  isNew(name) {
-    return !this.fetchedTags.find(
-      (t) => t.toLowerCase() === name.toLowerCase(),
-    );
-  }
-
-  addNewTag(name) {
-    const newTags = [...this.tags];
-
-    if (this.isAlreadyAdded(name)) {
-      return; // already added
-    }
-
-    newTags.push({
-      id: this.createRandomTagId(),
-      isNew: this.isNew(name),
-      name,
-    });
-    this.setTags(newTags);
-  }
-
-  deleteTag(id) {
-    let newTags = [...this.tags];
-    newTags = newTags.filter((tag) => tag.id !== id);
-    this.setTags(newTags);
-  }
-}
-
-export default TagHandler;
+export const createRandomTagId = () => {
+  return `_${Math.random().toString(36).substr(2, 9)}`;
+};

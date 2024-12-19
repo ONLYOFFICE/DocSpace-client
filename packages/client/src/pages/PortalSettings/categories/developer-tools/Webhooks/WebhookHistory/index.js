@@ -30,6 +30,7 @@ import styled from "styled-components";
 
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryFilterHeader from "./sub-components/HistoryFilterHeader";
 import WebhookHistoryTable from "./sub-components/WebhookHistoryTable";
 import { WebhookHistoryLoader } from "../sub-components/Loaders";
@@ -75,7 +76,6 @@ const WebhookHistory = (props) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   } = props;
 
   const [isFetchFinished, setIsFetchFinished] = useState(false);
@@ -134,7 +134,6 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   } = webhooksStore;
 
   return {
@@ -143,6 +142,5 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   };
 })(observer(WebhookHistory));

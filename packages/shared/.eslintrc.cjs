@@ -79,6 +79,7 @@ module.exports = {
     "no-bitwise": "off",
     eqeqeq: "off",
 
+    "class-methods-use-this": "off",
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-unused-expressions": "off",
@@ -90,7 +91,6 @@ module.exports = {
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": "off",
     "react-hooks/rules-of-hooks": "off",
-    "class-methods-use-this": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

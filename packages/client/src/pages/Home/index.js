@@ -30,7 +30,11 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { addTagsToRoom, removeTagsFromRoom } from "@docspace/shared/api/rooms";
+import {
+  addTagsToRoom,
+  removeTagsFromRoom,
+  createTag,
+} from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
 
@@ -145,7 +149,6 @@ const PureHome = (props) => {
     getSettings,
     logout,
     login,
-    createTag,
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
@@ -422,7 +425,6 @@ export const Component = inject(
     peopleStore,
     filesActionsStore,
     oformsStore,
-    tagsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -481,8 +483,6 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
     } = filesStore;
-
-    const { createTag } = tagsStore;
 
     const { gallerySelected } = oformsStore;
 
@@ -649,8 +649,6 @@ export const Component = inject(
       getSettings,
       logout: authStore.logout,
       login: authStore.login,
-
-      createTag,
 
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,

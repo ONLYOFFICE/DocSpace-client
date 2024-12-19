@@ -142,11 +142,6 @@ class TargetUserStore {
     });
   };
 
-  getUserPhoto = async (id) => {
-    const res = await api.people.getUserPhoto(id);
-    return res;
-  };
-
   setIsEditTargetUser = (isEditTargetUser) => {
     this.isEditTargetUser = isEditTargetUser;
   };

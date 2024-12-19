@@ -41,6 +41,7 @@ import {
   getRoomTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import CommentEditor from "../sub-components/CommentEditor";
 
 // Property Content Components
@@ -111,47 +112,10 @@ class DetailsHelper {
   getPropertyList = () => {
     return this.getNeededProperties().map((propertyId) => ({
       id: propertyId,
-      className: this.getPropertyClassName(propertyId),
+      className: getPropertyClassName(propertyId),
       title: this.getPropertyTitle(propertyId),
       content: this.getPropertyContent(propertyId),
     }));
-  };
-
-  getPropertyClassName = (propertyId) => {
-    switch (propertyId) {
-      case "Owner":
-        return "info_details_owner";
-      case "Location":
-        return "info_details_location";
-      case "Type":
-        return "info_details_type";
-      case "Storage Type":
-        return "info_details_storage-type";
-      case "File extension":
-        return "info_details_file-extension";
-      case "Content":
-        return "info_details_content";
-      case "Size":
-        return "info_details_size";
-      case "Date modified":
-        return "info_details_date_modified";
-      case "Last modified by":
-        return "info_details_last-modified-by";
-      case "Creation date":
-        return "info_details_creation-date";
-      case "Versions":
-        return "info_details_versions";
-      case "Comments":
-        return "info_details_comments";
-      case "Tags":
-        return "info_details_tags";
-      case "Lifetime ends":
-        return "info_details_lifetime";
-      case "Storage":
-        return "info_details_storage";
-      default:
-        break;
-    }
   };
 
   getNeededProperties = () => {
@@ -253,7 +217,7 @@ class DetailsHelper {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
       case "Location":
-        return this.getItemLocation();
+        return text("...");
 
       case "Index":
         return this.getItemIndex();
@@ -263,7 +227,7 @@ class DetailsHelper {
       case "Storage Type":
         return this.getItemStorageType();
       case "Storage account":
-        return this.getItemStorageAccount();
+        return this.text("...");
 
       case "File extension":
         return this.getItemFileExtention();
@@ -314,10 +278,6 @@ class DetailsHelper {
       : link(name, onClick);
   };
 
-  getItemLocation = () => {
-    return text("...");
-  };
-
   getItemType = () => {
     return text(
       this.item.isRoom
@@ -334,10 +294,6 @@ class DetailsHelper {
 
   getItemStorageType = () => {
     return text(getProviderTranslation(this.item.providerKey, this.t));
-  };
-
-  getItemStorageAccount = () => {
-    return text("...");
   };
 
   getItemContent = () => {

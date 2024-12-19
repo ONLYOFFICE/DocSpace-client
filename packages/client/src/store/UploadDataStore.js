@@ -60,6 +60,33 @@ import {
 import { globalColors } from "@docspace/shared/themes";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 
+const removeDuplicate = (items) => {
+  const obj = {};
+  return items.filter((x) => {
+    if (obj[x.uniqueId]) return false;
+    obj[x.uniqueId] = true;
+    return true;
+  });
+};
+
+const getConversationProgress = async (fileId) => {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        getFileConversationProgress(fileId).then((res) => {
+          // console.log(`getFileConversationProgress fileId:${fileId}`, res);
+          resolve(res);
+        });
+      } catch (error) {
+        console.error(error);
+        reject(error);
+      }
+    }, 1000);
+  });
+
+  return promise;
+};
+
 class UploadDataStore {
   settingsStore;
 
@@ -399,24 +426,6 @@ class UploadDataStore {
     return newPercent;
   };
 
-  getConversationProgress = async (fileId) => {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        try {
-          getFileConversationProgress(fileId).then((res) => {
-            // console.log(`getFileConversationProgress fileId:${fileId}`, res);
-            resolve(res);
-          });
-        } catch (error) {
-          console.error(error);
-          reject(error);
-        }
-      }, 1000);
-    });
-
-    return promise;
-  };
-
   setConversionPercent = (percent, alert) => {
     const data = { icon: "file", percent, visible: true };
 
@@ -498,7 +507,7 @@ class UploadDataStore {
         let error = null;
 
         while (progress < 100) {
-          const res = await this.getConversationProgress(fileId);
+          const res = await getConversationProgress(fileId);
           progress = res && res[0] && res[0].progress;
           fileInfo = res && res[0] && res[0].result;
 
@@ -819,7 +828,7 @@ class UploadDataStore {
       convertSize += file.size;
     });
 
-    const countUploadingFiles = this.removeDuplicate([
+    const countUploadingFiles = removeDuplicate([
       ...this.files,
       ...newFiles,
     ]).length;
@@ -834,7 +843,7 @@ class UploadDataStore {
 
     // console.log("this.tempConversionFiles", this.tempConversionFiles);
 
-    const clearArray = this.removeDuplicate([
+    const clearArray = removeDuplicate([
       ...newFiles,
       ...this.uploadedFilesHistory,
     ]);
@@ -842,12 +851,9 @@ class UploadDataStore {
     this.uploadedFilesHistory = clearArray;
 
     const newUploadData = {
-      filesWithoutConversion: this.removeDuplicate([
-        ...this.files,
-        ...newFiles,
-      ]),
-      conversionFiles: this.removeDuplicate(this.tempConversionFiles),
-      files: this.removeDuplicate(allFiles),
+      filesWithoutConversion: removeDuplicate([...this.files, ...newFiles]),
+      conversionFiles: removeDuplicate(this.tempConversionFiles),
+      files: removeDuplicate(allFiles),
       filesSize,
       uploadedFiles: this.uploadedFiles,
       percent: this.percent,
@@ -1690,10 +1696,6 @@ class UploadDataStore {
       });
   };
 
-  fileCopyAs = async (fileId, title, folderId, enableExternalExt, password) => {
-    return fileCopyAs(fileId, title, folderId, enableExternalExt, password);
-  };
-
   itemOperationToFolder = (data) => {
     const {
       destFolderId,
@@ -1851,15 +1853,6 @@ class UploadDataStore {
   clearUploadedFilesHistory = () => {
     this.primaryProgressDataStore.clearPrimaryProgressData();
     this.uploadedFilesHistory = [];
-  };
-
-  removeDuplicate = (items) => {
-    const obj = {};
-    return items.filter((x) => {
-      if (obj[x.uniqueId]) return false;
-      obj[x.uniqueId] = true;
-      return true;
-    });
   };
 }
 

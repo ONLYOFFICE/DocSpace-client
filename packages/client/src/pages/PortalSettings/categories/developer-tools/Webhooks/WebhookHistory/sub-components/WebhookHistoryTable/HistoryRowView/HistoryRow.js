@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Row } from "@docspace/shared/components/row";
+import { retryWebhook } from "@docspace/shared/api/settings";
 
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -37,6 +38,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { useTranslation } from "react-i18next";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import { HistoryRowContent } from "./HistoryRowContent";
 
 const HistoryRow = (props) => {
@@ -45,10 +47,8 @@ const HistoryRow = (props) => {
     sectionWidth,
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = props;
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -58,7 +58,7 @@ const HistoryRow = (props) => {
   const redirectToDetails = () =>
     navigate(`${window.location.pathname}/${historyItem.id}`);
   const handleRetryEvent = async () => {
-    await retryWebhookEvent(historyItem.id);
+    await retryWebhook(historyItem.id);
     await fetchHistoryItems({
       ...(historyFilters ? formatFilters(historyFilters) : {}),
       configId: id,
@@ -123,20 +123,16 @@ export default inject(({ webhooksStore }) => {
   const {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = webhooksStore;
 
   return {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   };
 })(observer(HistoryRow));

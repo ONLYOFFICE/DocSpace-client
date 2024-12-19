@@ -29,8 +29,6 @@ import {
   getAllWebhooks,
   getWebhooksJournal,
   removeWebhook,
-  retryWebhook,
-  retryWebhooks,
   toggleEnabledWebhook,
   updateWebhook,
 } from "@docspace/shared/api/settings";
@@ -154,14 +152,6 @@ class WebhooksStore {
     );
   };
 
-  retryWebhookEvent = async (id) => {
-    return retryWebhook(id);
-  };
-
-  retryWebhookEvents = async (ids) => {
-    return retryWebhooks(ids);
-  };
-
   fetchConfigName = async (params) => {
     const historyData = await getWebhooksJournal({
       ...params,
@@ -235,37 +225,6 @@ class WebhooksStore {
       ...this.historyFilters,
       status: this.historyFilters.status.filter((item) => item !== statusCode),
     };
-  };
-
-  formatFilters = (filters) => {
-    const params = {};
-    if (filters.deliveryDate !== null) {
-      params.deliveryFrom = `${filters.deliveryDate.format(
-        "YYYY-MM-DD",
-      )}T${filters.deliveryFrom.format("HH:mm:ss")}`;
-
-      params.deliveryTo = `${filters.deliveryDate.format(
-        "YYYY-MM-DD",
-      )}T${filters.deliveryTo.format("HH:mm:ss")}`;
-    }
-
-    const statusEnum = {
-      "Not sent": 1,
-      "2XX": 2,
-      "3XX": 4,
-      "4XX": 8,
-      "5XX": 16,
-    };
-
-    if (filters.status.length > 0) {
-      const statusFlag = filters.status.reduce(
-        (sum, currentValue) => sum + statusEnum[currentValue],
-        0,
-      );
-      params.groupStatus = statusFlag;
-    }
-
-    return params;
   };
 
   toggleEventId = (id) => {

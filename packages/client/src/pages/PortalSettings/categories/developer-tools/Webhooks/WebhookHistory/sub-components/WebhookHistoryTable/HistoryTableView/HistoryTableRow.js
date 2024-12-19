@@ -31,6 +31,8 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
+import { retryWebhook } from "@docspace/shared/api/settings";
+
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -41,6 +43,7 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useTranslation } from "react-i18next";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledTableRow = styled(TableRow)`
@@ -80,11 +83,9 @@ const HistoryTableRow = (props) => {
     item,
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     hideColumns,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = props;
   const { t, i18n } = useTranslation(["Webhooks", "Common"]);
@@ -97,7 +98,7 @@ const HistoryTableRow = (props) => {
     if (isRetryPending) {
       return;
     }
-    await retryWebhookEvent(item.id);
+    await retryWebhook(item.id);
     await fetchHistoryItems({
       ...(historyFilters ? formatFilters(historyFilters) : {}),
       configId: id,
@@ -185,20 +186,16 @@ export default inject(({ webhooksStore }) => {
   const {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = webhooksStore;
 
   return {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   };
 })(observer(HistoryTableRow));

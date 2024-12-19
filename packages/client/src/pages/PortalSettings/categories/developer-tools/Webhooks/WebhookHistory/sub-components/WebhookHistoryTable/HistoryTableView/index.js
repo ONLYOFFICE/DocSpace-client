@@ -33,6 +33,7 @@ import { TableBody, TableContainer } from "@docspace/shared/components/table";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
 
@@ -100,7 +101,6 @@ const HistoryTableView = (props) => {
     hasMoreItems,
     totalItems,
     fetchMoreItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,
@@ -170,7 +170,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
   } = webhooksStore;
   const { id: userId } = userStore.user;
@@ -183,7 +182,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,

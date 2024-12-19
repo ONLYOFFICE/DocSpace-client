@@ -37,7 +37,7 @@ async function Page() {
 
   return (
     <AdditionalResourcesPage
-      portals={portals}
+      portals={portals?.tenants}
       quota={quota}
       additionalResourcesData={additionalResources}
     />

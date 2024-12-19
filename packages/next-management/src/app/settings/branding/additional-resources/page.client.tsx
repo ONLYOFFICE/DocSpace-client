@@ -47,7 +47,7 @@ export const AdditionalResourcesPage = ({
   quota,
   additionalResourcesData,
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const pathname = usePathname();
@@ -101,7 +101,6 @@ export const AdditionalResourcesPage = ({
 
   return (
     <AdditionalResources
-      t={t}
       isSettingPaid={isSettingPaid}
       feedbackAndSupportEnabled={feedbackAndSupportEnabled}
       helpCenterEnabled={helpCenterEnabled}

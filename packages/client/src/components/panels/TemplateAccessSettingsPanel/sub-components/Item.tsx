@@ -27,47 +27,83 @@
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";
-import { Avatar } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
+import { TTranslation } from "@docspace/shared/types";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { EmployeeType } from "@docspace/shared/enums";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
 
-const Item = ({ t, item, setInviteItems, inviteItems, isDisabled }) => {
+type ItemProps = {
+  t: TTranslation;
+  item: TSelectorItem;
+  setInviteItems: (items: TSelectorItem[]) => void;
+  inviteItems: TSelectorItem[];
+  isDisabled: boolean;
+};
+
+const Item = ({
+  t,
+  item,
+  setInviteItems,
+  inviteItems,
+  isDisabled,
+}: ItemProps) => {
   const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
   const name = isGroup
     ? groupName
-    : !!avatar
+    : avatar
       ? displayName !== ""
         ? displayName
         : email
       : email;
-  const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
-
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
-  };
+  const source = avatar || (isGroup ? "" : AtReactSvgUrl);
 
   const type = getUserType(item);
+
+  let avatarRole = AvatarRole.user;
+  switch (type) {
+    case EmployeeType.Owner:
+      avatarRole = AvatarRole.owner;
+      break;
+    case EmployeeType.Admin:
+      avatarRole = AvatarRole.admin;
+      break;
+    case EmployeeType.RoomAdmin:
+      avatarRole = AvatarRole.manager;
+      break;
+    case EmployeeType.User:
+      avatarRole = AvatarRole.collaborator;
+      break;
+    default:
+  }
+
   const typeLabel = getUserTypeTranslation(type, t);
 
   const removeItem = () => {
-    const newItems = inviteItems.filter((item) => item.id !== id);
+    const newItems = inviteItems.filter(
+      (inviteItem: TSelectorItem) => inviteItem.id !== id,
+    );
     setInviteItems(newItems);
   };
 
   // const canDelete = !isOwner; //TODO: Templates
-  const canDelete = isDisabled ? false : true; //TODO: Templates
+  const canDelete = isDisabled ? false : true; // TODO: Templates
 
   return (
     <>
       <Avatar
-        size="min"
-        role={type}
+        size={AvatarSize.min}
+        role={avatarRole}
         source={source}
         isGroup={isGroup}
         userName={groupName}

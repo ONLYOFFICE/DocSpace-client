@@ -211,7 +211,10 @@ const StyledInviteInputContainer = styled.div`
   }
 `;
 
-const StyledDropDown = styled(DropDown)<{ width?: boolean }>`
+const StyledDropDown = styled(DropDown)<{
+  width?: number;
+  isRequestRunning: boolean;
+}>`
   ${(props) => props.width && `width: ${props.width}px`};
 
   .list-item {
@@ -234,16 +237,22 @@ const StyledDropDown = styled(DropDown)<{ width?: boolean }>`
 
     .email-list_add-button {
       display: flex;
-      margin-left: auto;
+      margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
-      p {
-        color: #4781d1;
-      }
+      svg {
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
-      svg path {
-        fill: #4781d1;
+        path {
+          fill: ${(props) => props.theme.inputBlock.iconColor};
+          ${(props) =>
+            props.isRequestRunning &&
+            css`
+              opacity: 0.65;
+            `}
+        }
       }
     }
   }

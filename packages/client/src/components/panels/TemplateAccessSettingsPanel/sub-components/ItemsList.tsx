@@ -28,15 +28,37 @@ import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import Item from "./Item";
-
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
+import { TTranslation } from "@docspace/shared/types";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import Item from "./Item";
+import { StyledRow, ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 
-const Row = memo(({ data, index, style }) => {
-  const { inviteItems, setInviteItems, t, isDisabled } = data;
+type ItemsListProps = {
+  t: TTranslation;
+  setInviteItems: (items: TSelectorItem[]) => void;
+  inviteItems: TSelectorItem[];
+  scrollAllPanelContent: boolean;
+  isDisabled: boolean;
+};
+
+type RowData = {
+  t: TTranslation;
+  inviteItems: TSelectorItem[];
+  setInviteItems: (items: TSelectorItem[]) => void;
+  isDisabled: boolean;
+};
+
+type RowProps = {
+  data: RowData;
+  index: number;
+  style: React.CSSProperties;
+};
+
+const Row = memo(({ data, index, style }: RowProps) => {
+  const { t, inviteItems, setInviteItems, isDisabled } = data;
 
   if (inviteItems === undefined) return;
 
@@ -47,7 +69,7 @@ const Row = memo(({ data, index, style }) => {
       key={item.id}
       style={style}
       className="row-item"
-      hasWarning={!!item.warning}
+      // hasWarning={!!item.warning}
     >
       <Item
         t={t}
@@ -60,25 +82,28 @@ const Row = memo(({ data, index, style }) => {
   );
 });
 
+Row.displayName = "Row";
+
 const ItemsList = ({
   t,
   setInviteItems,
   inviteItems,
   scrollAllPanelContent,
   isDisabled,
-}) => {
+}: ItemsListProps) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
   const [isTotalListHeight, setIsTotalListHeight] = useState(false);
-  const bodyRef = useRef();
+  const bodyRef = useRef<HTMLDivElement>(null);
   const { height } = useResizeObserver({ ref: bodyRef });
   const { interfaceDirection } = useTheme();
 
   const onBodyResize = useCallback(() => {
-    const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
-    const heightList = height ? height : bodyRef.current.offsetHeight;
+    const bodyElem = bodyRef?.current?.firstChild as HTMLDivElement;
+    const scrollHeight = bodyElem?.scrollHeight;
+    const heightList = height ?? bodyRef?.current?.offsetHeight;
     const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
-    const listAreaHeight = heightList;
+    const listAreaHeight = heightList ?? 0;
 
     const calculatedHeight = scrollAllPanelContent
       ? Math.max(totalHeightItems, listAreaHeight)
@@ -88,23 +113,20 @@ const ItemsList = ({
       ? totalHeightItems
       : calculatedHeight;
 
-    setBodyHeight(finalHeight);
-    setOffsetTop(bodyRef.current.offsetTop);
+    const bodyRefOffsetTop = bodyRef?.current?.offsetTop ?? 0;
+
+    setBodyHeight(finalHeight ?? 0);
+    setOffsetTop(bodyRefOffsetTop);
 
     if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
       setIsTotalListHeight(
         totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
       );
-  }, [
-    height,
-    bodyRef?.current?.offsetHeight,
-    inviteItems.length,
-    scrollAllPanelContent,
-  ]);
+  }, [height, inviteItems.length, scrollAllPanelContent]);
 
   useEffect(() => {
     onBodyResize();
-  }, [bodyRef.current, height, inviteItems.length, scrollAllPanelContent]);
+  }, [height, inviteItems.length, scrollAllPanelContent, onBodyResize]);
 
   const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
 
@@ -128,7 +150,9 @@ const ItemsList = ({
           setInviteItems,
           isDisabled,
         }}
-        outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
+        outerElementType={
+          !scrollAllPanelContent ? CustomScrollbarsVirtualList : undefined
+        }
       >
         {Row}
       </List>

@@ -39,6 +39,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import PeopleSelector from "@docspace/shared/selectors/People";
+import { TSelectorItem } from "@docspace/shared/components/selector";
 
 import {
   StyledBlock,
@@ -84,6 +85,8 @@ const TemplateAccessSettingsPanel = ({
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
+
+  const roomId = 36; // TODO: Templates
 
   useEffect(() => {
     const hasError = inviteItems.some(
@@ -159,7 +162,7 @@ const TemplateAccessSettingsPanel = ({
     setIsLoading(false);
   };
 
-  const removeExist = (items) => {
+  const removeExist = (items: TSelectorItem[]) => {
     const filtered = items.reduce((unique, o) => {
       !unique.some((obj) =>
         obj.isGroup ? obj.id === o.id : obj.email === o.email,
@@ -173,7 +176,7 @@ const TemplateAccessSettingsPanel = ({
     return filtered;
   };
 
-  const onSubmitItems = (users) => {
+  const onSubmitItems = (users: TSelectorItem[]) => {
     console.log("addItems", users);
 
     const items = [...users, ...inviteItems];
@@ -213,7 +216,7 @@ const TemplateAccessSettingsPanel = ({
   const hasInvitedUsers = !!inviteItems.length;
 
   const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
+  // filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin  // TODO: Templates
 
   const invitedUsers = useMemo(
     () => inviteItems.map((item) => item.id),
@@ -249,7 +252,7 @@ const TemplateAccessSettingsPanel = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             withInfoBadge
-            roomId={36} // TODO: Templates
+            roomId={roomId}
             disableInvitedUsers={invitedUsers}
             // withGuests
             withHeader
@@ -290,8 +293,6 @@ const TemplateAccessSettingsPanel = ({
           </StyledBlock>
           <StyledBody isDisabled={isAvailable}>
             <InviteInput
-              t={t}
-              onClose={onClose}
               inviteItems={inviteItems}
               setInviteItems={setInviteItems}
               roomType={roomType}
@@ -299,6 +300,8 @@ const TemplateAccessSettingsPanel = ({
               setAddUsersPanelVisible={setAddUsersPanelVisible}
               isMobileView={isMobileView}
               isDisabled={isAvailable}
+              roomId={roomId}
+              removeExist={removeExist}
             />
             <StyledSubHeader className="invite-input-text">
               {t("Files:AccessToTemplate")}
@@ -339,14 +342,7 @@ const TemplateAccessSettingsPanel = ({
 };
 
 export default inject(
-  ({
-    settingsStore,
-    dialogsStore,
-    infoPanelStore,
-    filesStore,
-    filesActionsStore,
-  }: TStore) => {
-    const { theme } = settingsStore;
+  ({ dialogsStore, infoPanelStore, filesStore, filesActionsStore }: TStore) => {
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
     const { selection, bufferSelection } = filesStore;
     const { onCreateRoomFromTemplate } = filesActionsStore;
@@ -357,7 +353,6 @@ export default inject(
     } = dialogsStore;
 
     return {
-      theme,
       visible: templateAccessSettingsVisible,
       setIsVisible: setTemplateAccessSettingsVisible,
       setInfoPanelIsMobileHidden,

@@ -93,15 +93,13 @@ const ComponentPure = ({
 
     switch (componentName) {
       case PluginComponents.box: {
-        const childrenComponents = elementProps?.children?.map(
-          (item, index) => (
-            <PluginComponent
-              key={`box-${index}-${item.component}`}
-              component={item}
-              pluginName={pluginName}
-            />
-          ),
-        );
+        const childrenComponents = elementProps?.children?.map((item) => (
+          <PluginComponent
+            key={`box-${item.component}`}
+            component={item}
+            pluginName={pluginName}
+          />
+        ));
 
         return <Box {...elementProps}>{childrenComponents}</Box>;
       }

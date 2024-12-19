@@ -335,7 +335,7 @@ const Items = ({
 
         return (
           <Item
-            key={`${item.id}_${index}`}
+            key={item.id}
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}

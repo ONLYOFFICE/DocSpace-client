@@ -113,17 +113,17 @@ const Diagram = (props) => {
     <StyledDiagramComponent maxWidth={maxWidth}>
       <div className="diagram_slider">
         {!hidingSlider &&
-          elementsTags.map((tag, index) => (
+          elementsTags.map((tag) => (
             <StyledFolderTagSection
               width={tag.percentageSize}
-              key={index}
+              key={tag.name}
               color={tag.color}
             />
           ))}
       </div>
       <div className="diagram_description">
-        {elementsTags.map((tag, index) => (
-          <div className="diagram_folder-tag" key={index}>
+        {elementsTags.map((tag) => (
+          <div className="diagram_folder-tag" key={tag.name}>
             <StyledFolderTagColor color={tag.color} />
             <Text fontWeight={600}>{tag.name}</Text>:
             <Text className="tag_text">{tag.size}</Text>

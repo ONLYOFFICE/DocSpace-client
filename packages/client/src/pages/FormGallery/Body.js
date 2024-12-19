@@ -139,8 +139,8 @@ const SectionBodyContent = ({
       {submitToGalleryTileIsVisible && canSubmitToFormGallery() && (
         <SubmitToGalleryTile />
       )}
-      {oformFiles.map((item, index) => (
-        <FileTile key={`${item.id}_${index}`} item={item} />
+      {oformFiles.map((item) => (
+        <FileTile key={item.id} item={item} />
       ))}
     </TileContainer>
   );

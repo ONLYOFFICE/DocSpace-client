@@ -154,9 +154,9 @@ const CSP = ({
 
   const getChips = (domains) =>
     domains
-      ? domains.map((item, index) => (
+      ? domains.map((item) => (
           <SelectedItem
-            key={`${item}-${index}`}
+            key={item}
             isInline
             label={item}
             onClose={() => deleteDomain(item)}

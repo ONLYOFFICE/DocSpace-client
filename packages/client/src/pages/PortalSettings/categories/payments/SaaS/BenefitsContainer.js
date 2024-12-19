@@ -90,10 +90,10 @@ const BenefitsContainer = ({ t, features }) => {
       >
         {t("Benefits")}
       </Text>
-      {features.map((item, index) => {
+      {features.map((item) => {
         if (!item.title || !item.image) return;
         return (
-          <div className="payment-benefits" key={index}>
+          <div className="payment-benefits" key={item.title || item.image}>
             <div
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"

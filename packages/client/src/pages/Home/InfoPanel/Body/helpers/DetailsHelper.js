@@ -66,9 +66,9 @@ const link = (text, onClick) => (
 
 const tagList = (tags, selectTag) => (
   <div className="property-tag_list">
-    {tags.map((tag, i) => (
+    {tags.map((tag) => (
       <Tag
-        key={i}
+        key={tag}
         className="property-tag"
         label={tag}
         onClick={() => selectTag({ label: tag })}

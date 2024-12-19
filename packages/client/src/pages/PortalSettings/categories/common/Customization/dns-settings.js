@@ -209,10 +209,10 @@ const DNSSettingsComponent = (props) => {
           />
           <div style={{ marginTop: "5px" }}>
             {errorText &&
-              errorText.map((err, index) => (
+              errorText.map((err) => (
                 <Text
                   className="dns-error-text"
-                  key={index}
+                  key={err}
                   fontSize="12px"
                   fontWeight="400"
                 >

@@ -141,10 +141,10 @@ const UserFields = (props) => {
               : !regexp.test(input);
 
             return (
-              <StyledInputWrapper key={`user-input-${index}`}>
+              <StyledInputWrapper key={`user-input-${input}`}>
                 <TextInput
                   className={`${classNameAdditional}-input`}
-                  id={`user-input-${index}`}
+                  id={`user-input-${input}`}
                   isAutoFocussed={isAutoFocussed}
                   value={input}
                   onChange={(e) => onChangeInput(e, index)}

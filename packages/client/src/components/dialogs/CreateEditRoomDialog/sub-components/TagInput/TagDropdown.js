@@ -83,12 +83,12 @@ const TagDropdown = ({
   };
 
   const calcualateDisplayedDropdownItems = () => {
-    let res = tagsForDropdown.map((tag, i) => (
+    let res = tagsForDropdown.map((tag) => (
       <DropDownItem
         className="dropdown-item"
         height={32}
         heightTablet={32}
-        key={i}
+        key={tag}
         label={tag}
         onMouseDown={preventDefault}
         onClick={() => addFetchedTag(tag)}

@@ -691,11 +691,11 @@ const Appearance = (props) => {
           <div className="theme-name">{t("Common:Standard")}</div>
 
           <div className="theme-container">
-            {appearanceTheme.map((item, index) => {
+            {appearanceTheme.map((item) => {
               if (!item.name) return;
               return (
                 <StyledTheme
-                  key={index}
+                  key={item.name}
                   id={item.id}
                   colorCheckImgHover={colorCheckImgHover}
                   style={{ background: item.main?.accent }}
@@ -718,11 +718,11 @@ const Appearance = (props) => {
 
           <div className="theme-container">
             <div className="custom-themes">
-              {appearanceTheme.map((item, index) => {
+              {appearanceTheme.map((item) => {
                 if (item.name) return;
                 return (
                   <StyledTheme
-                    key={index}
+                    key={item.id}
                     id={item.id}
                     style={{ background: item.main?.accent }}
                     colorCheckImgHover={colorCheckImgHover}

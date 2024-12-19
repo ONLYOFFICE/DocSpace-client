@@ -78,7 +78,9 @@ module.exports = {
     "no-plusplus": "off",
     "no-bitwise": "off",
     eqeqeq: "off",
+    "react-hooks/rules-of-hooks": "off",
 
+    "react/forbid-prop-types": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
@@ -88,9 +90,6 @@ module.exports = {
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react/no-array-index-key": "off",
-    "react/forbid-prop-types": "off",
-    "react-hooks/rules-of-hooks": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

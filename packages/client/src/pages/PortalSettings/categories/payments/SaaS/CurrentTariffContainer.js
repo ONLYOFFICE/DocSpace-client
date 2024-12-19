@@ -69,7 +69,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
 
   return (
     <StyledCurrentTariffContainer style={style}>
-      {quotaCharacteristics.map((item, index) => {
+      {quotaCharacteristics.map((item) => {
         const maxValue = item.value;
         const usedValue = item.used.value;
 
@@ -89,7 +89,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
           item.type === "size" ? getConvertedSize(t, usedValue) : usedValue;
 
         return (
-          <div key={index}>
+          <div key={maxValue}>
             <Text isBold noSelect fontSize="14px">
               {item.used.title}
               <Text

@@ -24,9 +24,178 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tabs } from "./Tabs";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import classNames from "classnames";
 import { TabsTypes } from "./Tabs.enums";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
+
+import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
+import { useViewTab } from "./hooks/useViewTab";
+import { Scrollbar } from "../scrollbar";
+import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
+import styles from "./Tabs.module.scss";
+
+const Tabs = (props: TabsProps) => {
+  const {
+    items,
+    selectedItemId,
+    selectedItems = [],
+    type = TabsTypes.Primary,
+    stickyTop,
+    onSelect,
+    multiple = false,
+    ...rest
+  } = props;
+
+  const selectedItemIndex = !selectedItemId
+    ? 0
+    : items.findIndex((item) => item.id === selectedItemId);
+
+  const [currentItem, setCurrentItem] = useState(selectedItemIndex);
+  const [multipleItems, setMultipleItems] = useState(selectedItems);
+
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<ScrollbarType>(null);
+
+  const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
+  const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
+
+  const scrollToTab = useCallback((index: number): void => {
+    if (!scrollRef.current || !tabsRef.current) return;
+
+    const containerElement = scrollRef.current.scrollerElement;
+    const tabElement = tabsRef.current.children[index] as HTMLDivElement;
+
+    if (!containerElement || !tabElement) return;
+
+    const containerWidth = containerElement.offsetWidth;
+    const tabWidth = tabElement?.offsetWidth;
+    const tabOffsetLeft = tabElement?.offsetLeft;
+
+    if (document.dir === "ltr") {
+      if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
+        scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
+      } else if (
+        tabOffsetLeft + tabWidth >
+        containerElement.scrollLeft + containerWidth
+      ) {
+        scrollRef.current.scrollTo(
+          tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
+        );
+      }
+      return;
+    }
+
+    const scrollLeft = Math.abs(containerElement.scrollLeft);
+
+    if (tabOffsetLeft - OFFSET_LEFT < scrollLeft) {
+      scrollRef.current.scrollTo(-(tabOffsetLeft - OFFSET_LEFT));
+    } else if (tabOffsetLeft + tabWidth > scrollLeft + containerWidth) {
+      scrollRef.current.scrollTo(
+        -(tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT),
+      );
+    }
+  }, []);
+
+  const onSelectTab = (item: TTabItem, index: number) => {
+    if (item.isDisabled) return;
+
+    if (multiple) {
+      const indexOperation = () => {
+        const newArray = [...multipleItems];
+
+        const deletionIndex = newArray.indexOf(index);
+
+        if (deletionIndex !== -1) {
+          newArray.splice(deletionIndex, 1);
+
+          return newArray;
+        }
+
+        newArray.push(index);
+        return newArray;
+      };
+
+      const updatedActiveTab = indexOperation();
+      setMultipleItems(updatedActiveTab);
+      onSelect?.(item);
+    } else {
+      setCurrentItem(index);
+      onSelect?.(item);
+      scrollToTab(index);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedItemId) {
+      const index = items.findIndex((item) => item.id === selectedItemId);
+      if (index !== -1) {
+        setCurrentItem(index);
+        scrollToTab(index);
+      }
+    }
+  }, [selectedItemId, items, scrollToTab]);
+
+  const classes = classNames({
+    [styles.multiple]: multiple,
+    [styles.primary]: type === TabsTypes.Primary,
+    [styles.secondary]: type === TabsTypes.Secondary,
+  });
+
+  return (
+    <div className={classNames(styles.tabs, classes)} {...rest}>
+      <div className={styles.sticky} style={{ top: stickyTop }}>
+        <Scrollbar
+          ref={scrollRef}
+          className={classNames(styles.scrollbar, classes)}
+        >
+          {!isViewFirstTab && <div className={styles.blurAhead} />}
+          <div className={classNames(styles.tabList, classes)} ref={tabsRef}>
+            {items.map((item, index) => {
+              const isSelected = multiple
+                ? multipleItems.indexOf(index) !== -1
+                : index === currentItem;
+
+              return (
+                <div
+                  key={item.id}
+                  className={classNames(
+                    styles.tab,
+                    {
+                      [styles.selected]: isSelected,
+                      [styles.disabled]: item.isDisabled,
+                    },
+                    classes,
+                  )}
+                  onClick={() => onSelectTab(item, index)}
+                >
+                  <span className={styles.tabText}>{item.name}</span>
+                  <div
+                    className={classNames(
+                      styles.tabSubLine,
+                      {
+                        [styles.selected]: isSelected,
+                      },
+                      classes,
+                    )}
+                  />
+                  {item.badge && (
+                    <span className={styles.tabBadge}>{item.badge}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          {!isViewLastTab && <div className={styles.blurBack} />}
+        </Scrollbar>
+      </div>
+      <div className={styles.stickyIndent} />
+      {!multiple && items[currentItem]?.content && (
+        <div className={styles.tabsBody}>{items[currentItem].content}</div>
+      )}
+    </div>
+  );
+};
 
 export { Tabs };
 export { TabsTypes };

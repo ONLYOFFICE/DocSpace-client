@@ -280,6 +280,7 @@ const WelcomePageSettingsComponent = (props) => {
     setGreetingTitle(greetingTitle)
       .then(() => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
+        setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));
       })
       .catch((error) => toastr.error(error))
       .finally(() => {

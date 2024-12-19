@@ -200,7 +200,6 @@ const ContextMenuButtonPure = ({
     <div
       className={classNames(styles.outer, className, {
         [styles.displayIconBorder]: displayIconBorder,
-        [styles.isDisabled]: isDisabled,
       })}
       id={id}
       style={style}

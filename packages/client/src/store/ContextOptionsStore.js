@@ -648,7 +648,7 @@ class ContextOptionsStore {
   };
 
   onDuplicate = (item) => {
-    if (this.currentQuotaStore.isWarningRoomsDialog) {
+    if (item.isRoom && this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setQuotaWarningDialogVisible(true);
       return;
     }

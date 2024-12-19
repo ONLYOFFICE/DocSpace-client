@@ -24,64 +24,75 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-interface StyledHeaderContainerProps {
-  withoutBorder?: boolean;
-  headerHeight?: string;
+:root {
+  --aside-header-text-color: #{$black};
+  --aside-header-border-color: #{$gray-light-mid};
+
+  --aside-header-custom-height: 53px;
+
+  &[data-theme="dark"] {
+    --aside-header-text-color: #{$white};
+    --aside-header-border-color: #{$gray-dark-strong};
+  }
+
+  &[data-dir="rtl"] .container {
+    .arrowButton svg {
+      transform: scaleX(-1);
+    }
+  }
 }
 
-export const StyledHeaderContainer = styled.div<StyledHeaderContainerProps>`
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
   margin: 0 16px;
-  height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
-  min-height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
+  height: 53px;
+  min-height: 53px;
   position: relative;
 
-  .additional-icons-container {
+  &.customHeaderHeight {
+    height: var(--aside-header-custom-height);
+    min-height: var(--aside-header-custom-height);
+  }
+
+  .additionalIconsContainer {
     display: flex;
     margin-inline: 16px 16px;
     gap: 16px;
   }
 
   .heading {
-    font-family: ${(props) => props.theme.fontFamily};
-    color: ${(props) => props.theme.modalDialog.textColor};
+    color: var(--aside-header-text-color);
     font-weight: 700;
     font-size: 21px;
   }
 
-  .arrow-button {
+  .arrowButton {
     margin-inline: 0 12px;
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
-    }
   }
-  .close-button {
+
+  .closeButton {
     margin-inline: auto 0;
     min-width: 17px;
   }
-  .header-component {
+  .headerComponent {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  ${(props) =>
-    !props.withoutBorder &&
-    css`
-      ::after {
-        content: "";
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-        width: calc(100% + 32px);
-        position: absolute;
-        inset-inline-end: -16px;
-        bottom: 0;
-      }
-    `}
-`;
+
+  &:not(.withoutBorder)::after {
+    content: "";
+    border-bottom: 1px solid var(--aside-header-border-color);
+    width: calc(100% + 32px);
+    position: absolute;
+    inset-inline-end: -16px;
+    bottom: 0;
+  }
+}

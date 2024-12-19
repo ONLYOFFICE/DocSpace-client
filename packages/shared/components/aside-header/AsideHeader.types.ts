@@ -24,43 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-interface AsideBased {
-  header?: string | React.ReactNode;
-  className?: string;
-  id?: string;
-  headerIcons?: { key: string; url: string; onClick: () => void }[];
-  style?: React.CSSProperties;
-  isLoading?: boolean;
-  withoutBorder?: boolean;
-  headerHeight?: string;
-}
+type PickedDivProps = Pick<
+  React.ComponentPropsWithoutRef<"div">,
+  "className" | "id" | "style"
+>;
 
-export type AsideHeaderProps =
-  | (AsideBased & {
-      isCloseable?: never;
-      onCloseClick?: never;
-
+type BackButtonProps =
+  | {
+      /** Whether to show the back button */
+      isBackButton: true;
+      /** Click handler for the back button */
+      onBackClick: () => void;
+    }
+  | {
       isBackButton?: never;
       onBackClick?: never;
-    })
-  | (AsideBased & {
-      isCloseable: boolean;
-      onCloseClick: () => void;
+    };
 
-      isBackButton: boolean;
-      onBackClick: () => void;
-    })
-  | (AsideBased & {
+type CloseButtonProps =
+  | {
+      /** Whether to show the close button */
+      isCloseable: true;
+      /** Click handler for the close button */
+      onCloseClick: () => void;
+    }
+  | {
       isCloseable?: never;
       onCloseClick?: never;
+    };
 
-      isBackButton: boolean;
-      onBackClick: () => void;
-    })
-  | (AsideBased & {
-      isCloseable: boolean;
-      onCloseClick: () => void;
+type HeaderIcon = { key: string; url: string; onClick: () => void };
 
-      isBackButton?: never;
-      onBackClick?: never;
-    });
+export type AsideHeaderProps = PickedDivProps &
+  BackButtonProps &
+  CloseButtonProps & {
+    /** Header content - can be a string or a ReactNode */
+    header?: string | React.ReactNode;
+    /** Array of icons to display in the header */
+    headerIcons?: HeaderIcon[];
+    /** Whether the header is in a loading state */
+    isLoading?: boolean;
+    /** Whether to hide the bottom border */
+    withoutBorder?: boolean;
+    /** Custom height for the header */
+    headerHeight?: string;
+  };

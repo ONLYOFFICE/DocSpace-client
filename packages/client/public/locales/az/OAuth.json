@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Avtorizasiya üsulu",
   "AuthorizedApps": "İcazə verilmiş tətbiqlər",
   "AuthorizeLink": "Bağlantıya icazə verin",
+  "BasicInfo": "Əsas məlumat",
   "Client": "Müştəri",
   "ClientCopy": "Müştəri ID-si buferə uğurla kopyalandı",
   "ClientHelpButton": "Avtorizasiya növü kimi OAth 2.0 istifadə etmək üçün rekvizitlər.<br/> <strong>Qeyd:</strong> Tətbiqin müştəri identifikatorunu bilən hər hansı müəssisə administratoru tətbiqin adı, doğrulama növü, tətbiq dairələri və yönləndirmə URI daxil olmaqla, həmin tətbiq haqqında məlumat əldə edə biləcək.",

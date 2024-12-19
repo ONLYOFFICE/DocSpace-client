@@ -67,6 +67,7 @@ import useSocketHelper from "./hooks/useSocketHelper";
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
+import { createFolder, deleteFolder } from "../../api/files";
 
 const FilesSelectorComponent = ({
   disabledItems,
@@ -119,6 +120,7 @@ const FilesSelectorComponent = ({
 
   withPadding,
   folderIsShared,
+  checkCreating,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -156,6 +158,9 @@ const FilesSelectorComponent = ({
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
+  const [isDisabledFolder, setIsDisabledFolder] = React.useState<
+    boolean | undefined
+  >(checkCreating);
 
   const afterSearch = React.useRef(false);
   const currentSelectedItemId = React.useRef<undefined | number | string>(
@@ -303,8 +308,10 @@ const FilesSelectorComponent = ({
     ],
   );
 
+  const translation = t("Common:NewFolder");
+
   const onSelectAction = React.useCallback(
-    (
+    async (
       item: TSelectorItem,
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
@@ -340,6 +347,16 @@ const FilesSelectorComponent = ({
         } else {
           setSelectedItemType("files");
         }
+
+        if (checkCreating && breadCrumbs.length === 1 && item.id) {
+          try {
+            const folderInfo = await createFolder(item.id, translation);
+            await deleteFolder(folderInfo.id, true, true);
+            setIsDisabledFolder(false);
+          } catch (e) {
+            setIsDisabledFolder(true);
+          }
+        }
       } else if (item.id && item.label) {
         const inPublic =
           breadCrumbs.findIndex(
@@ -367,6 +384,8 @@ const FilesSelectorComponent = ({
       setIsFirstLoad,
       formProps?.isRoomFormAccessible,
       formProps?.message,
+      translation,
+      checkCreating,
     ],
   );
 
@@ -561,6 +580,7 @@ const FilesSelectorComponent = ({
       isRoot,
       selectedItemSecurity,
       selectedFileInfo,
+      isDisabledFolder,
     ),
   };
 

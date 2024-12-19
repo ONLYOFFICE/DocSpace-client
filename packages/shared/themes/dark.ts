@@ -2720,6 +2720,7 @@ const Dark: TTheme = {
     background: darkGrayLight,
     textColor: grayDark,
     iconFill: black,
+    warningColor: darkErrorStatus,
   },
 
   client: {

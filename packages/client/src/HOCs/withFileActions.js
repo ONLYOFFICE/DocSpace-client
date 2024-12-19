@@ -82,12 +82,11 @@ export default function withFileActions(WrappedFileItem) {
     onDrop = (items) => {
       const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
         this.props;
-      const { fileExst, id } = this.props.item;
+      const { fileExst, isFolder, id } = this.props.item;
 
       if (isTrashFolder || isDisabledDropItem)
         return dragging && setDragging(false);
-
-      if (!fileExst) {
+      if (!fileExst && isFolder) {
         this.onDropZoneUpload(items, id);
       } else {
         this.onDropZoneUpload(items);

@@ -152,4 +152,5 @@ export type FilesSelectorProps = TSelectorHeader & {
   filesSettings: TFilesSettings;
 
   withCreate?: boolean;
+  checkCreating?: boolean;
 };

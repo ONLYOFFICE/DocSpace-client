@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { classNames } from "../../../utils";
+import { classNames, isDesktop } from "../../../utils";
 import { AsideHeader } from "../../aside";
 
 import { FormFillingTipsState } from "../../../enums";
@@ -52,6 +52,8 @@ import { ModalDialogType } from "../../modal-dialog";
 import { getHeaderText, getGuidPosition } from "./Guid.utils";
 
 const GUID_MODAL_MARGIN = 16;
+const MAX_MODAL_HEIGHT = 190;
+const MODAL_WIDTH = 430;
 
 const Guid = ({
   formFillingTipsNumber,
@@ -61,6 +63,8 @@ const Guid = ({
   viewAs,
 }) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
+
+  const [modalBottom, setModalBottom] = React.useState<null | number>(null);
 
   const modalText = getHeaderText(formFillingTipsNumber, t);
 
@@ -100,13 +104,37 @@ const Guid = ({
     );
   }
 
+  const onResize = () => {
+    const screenHeight = document.documentElement.clientHeight;
+
+    if (
+      screenHeight <
+      guidPosition.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
+    ) {
+      return setModalBottom(
+        guidPosition.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT,
+      );
+    }
+    return setModalBottom(guidPosition.bottom + GUID_MODAL_MARGIN);
+  };
+
+  React.useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, [guidPosition.bottom]);
+
   return (
     <div>
       <StyledGuidBackdrop onClick={onCloseBackdrop} />
       <StyledClipped className="guid-element" position={guidPosition} />
       <StyledDialog
         id="modal-onMouseDown-close"
-        bottom={guidPosition.bottom + GUID_MODAL_MARGIN}
+        bottom={modalBottom}
+        left={
+          isLastTip && !isDesktop() ? guidPosition.left - MODAL_WIDTH : null
+        }
         className={
           classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""
         }

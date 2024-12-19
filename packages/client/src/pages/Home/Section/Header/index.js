@@ -577,16 +577,14 @@ const SectionHeaderContent = (props) => {
   ];
 
   React.useEffect(() => {
-    if (buttonRef?.current && !guidanceCoordinates.share) {
+    if (buttonRef?.current) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         share: buttonRef.current.getClientRects()[0],
       });
     }
 
-    if (addButtonRef?.current && !guidanceCoordinates.uploading) {
+    if (addButtonRef?.current?.clientWidth) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         uploading: addButtonRef.current.getClientRects()[0],
       });
     }
@@ -594,8 +592,6 @@ const SectionHeaderContent = (props) => {
     buttonRef?.current,
     addButtonRef?.current,
     guidanceCoordinates.ready,
-    guidanceCoordinates.share,
-    guidanceCoordinates.uploading,
     guidanceCoordinates.pdf,
   ]);
 

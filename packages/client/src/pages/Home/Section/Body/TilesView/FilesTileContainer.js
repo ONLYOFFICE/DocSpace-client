@@ -43,7 +43,7 @@ import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
 
-const FilesTileContainer = ({ filesList }) => {
+const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -106,6 +106,9 @@ const FilesTileContainer = ({ filesList }) => {
   }, []);
 
   const filesListNode = useMemo(() => {
+    const firstPdfItem = filesList.filter(
+      (item) => item?.fileExst === ".pdf",
+    )[0];
     return filesList.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
@@ -117,6 +120,7 @@ const FilesTileContainer = ({ filesList }) => {
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef={true}
+          firstPdfItem={firstPdfItem}
         />
       ) : (
         <FileTile
@@ -126,6 +130,7 @@ const FilesTileContainer = ({ filesList }) => {
           }
           item={item}
           itemIndex={index}
+          firstPdfItem={firstPdfItem}
         />
       );
     });
@@ -147,9 +152,10 @@ const FilesTileContainer = ({ filesList }) => {
 };
 
 export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
-  const { filesList } = filesStore;
+  const { filesList, setGuidanceCoordinates } = filesStore;
 
   return {
     filesList,
+    setGuidanceCoordinates,
   };
 })(observer(FilesTileContainer));

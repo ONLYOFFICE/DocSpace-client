@@ -4211,15 +4211,10 @@ class FilesStore {
       });
     }
 
-    if (this.guidanceCoordinates.pdf) {
-      return (this.guidanceCoordinates = {
-        pdf: this.guidanceCoordinates.pdf,
-        ready: value.ready,
-        share: value.share,
-        uploading: value.uploading,
-      });
-    }
-    this.guidanceCoordinates = value;
+    this.guidanceCoordinates = {
+      ...this.guidanceCoordinates,
+      ...value,
+    };
   };
 
   setInRoomFolder = (roomId, inRoom) => {

@@ -32,11 +32,12 @@ import { ClippedPosition } from "./Guid.types";
 const StyledDialog = styled(Dialog)<{
   isTourMode?: boolean;
   bottom?: number;
+  left?: number;
 }>`
   position: absolute;
-  left: 250px;
   min-height: auto;
   top: ${(props) => props.bottom && `${props.bottom}px`};
+  left: ${(props) => (props.left ? `${props.left}px` : "250px")};
 
   #modal-dialog {
     width: 430px;

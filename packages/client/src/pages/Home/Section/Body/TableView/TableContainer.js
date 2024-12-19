@@ -207,6 +207,9 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
+    const firstPdfItem = filesList.filter(
+      (item) => item?.fileExst === ".pdf",
+    )[0];
     return filesList.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -233,6 +236,7 @@ const Table = ({
         }
         icon={icon}
         isDownload={isDownload}
+        firstPdfItem={firstPdfItem}
       />
     ));
   }, [

@@ -81,6 +81,8 @@ const MobileView = ({
   isRoomsFolder,
   mainButtonMobileVisible,
   uploaded,
+  setGuidanceCoordinates,
+  guidanceCoordinates,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const [percentProgress, setPercentProgress] = React.useState(0);
@@ -88,6 +90,7 @@ const MobileView = ({
 
   const [primaryNumEl, setPrimaryNumEl] = React.useState(0);
   const primaryCurrentFile = React.useRef(null);
+  const mainButtonRef = React.useRef(null);
 
   const openButtonToggler = React.useCallback(() => {
     setIsOpenButton((prevState) => !prevState);
@@ -101,6 +104,18 @@ const MobileView = ({
     clearUploadData && clearUploadData();
     clearPrimaryProgressData && clearPrimaryProgressData();
   }, [clearUploadData, clearPrimaryProgressData]);
+
+  React.useEffect(() => {
+    if (mainButtonRef?.current) {
+      setGuidanceCoordinates({
+        uploading: mainButtonRef?.current.getClientRects()[0],
+      });
+    }
+  }, [
+    mainButtonRef?.current,
+    guidanceCoordinates.ready,
+    guidanceCoordinates.pdf,
+  ]);
 
   React.useEffect(() => {
     let currentPrimaryNumEl = primaryNumEl;
@@ -210,6 +225,7 @@ const MobileView = ({
         <StyledMainButtonMobile
           actionOptions={actionOptions}
           isOpenButton={isOpenButton}
+          mainButtonRef={mainButtonRef}
           onUploadClick={openButtonToggler}
           onClose={openButtonToggler}
           buttonOptions={buttonOptions}
@@ -228,7 +244,7 @@ const MobileView = ({
   );
 };
 
-export default inject(({ uploadDataStore, treeFoldersStore }) => {
+export default inject(({ uploadDataStore, treeFoldersStore, filesStore }) => {
   const { isRoomsFolder } = treeFoldersStore;
   const {
     files,
@@ -275,5 +291,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     clearSecondaryProgressData,
     isRoomsFolder,
     uploaded,
+    setGuidanceCoordinates: filesStore.setGuidanceCoordinates,
+    guidanceCoordinates: filesStore.guidanceCoordinates,
   };
 })(observer(MobileView));

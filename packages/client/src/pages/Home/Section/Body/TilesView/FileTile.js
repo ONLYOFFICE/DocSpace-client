@@ -90,7 +90,7 @@ const FileTile = (props) => {
     isDownload,
     setGuidanceCoordinates,
     guidanceCoordinates,
-    refs,
+    firstPdfItem,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -111,28 +111,36 @@ const FileTile = (props) => {
 
   const { thumbnailUrl } = item;
 
-  React.useEffect(() => {
+  const setGuidRects = () => {
     if (
       item?.fileExst === ".pdf" &&
-      tileRef?.current &&
-      !guidanceCoordinates.pdf
+      firstPdfItem.id === item.id &&
+      tileRef?.current
     ) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         pdf: tileRef?.current.getClientRects()[0],
       });
     }
-    if (
-      item?.type === FolderType.Done &&
-      tileRef?.current &&
-      !guidanceCoordinates.ready
-    ) {
+    if (item?.type === FolderType.Done && tileRef?.current) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         ready: tileRef?.current.getClientRects()[0],
       });
     }
-  }, [tileRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+  };
+
+  React.useEffect(() => {
+    setGuidRects();
+  }, [tileRef?.current]);
+
+  const onResize = () => {
+    setGuidRects();
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const element = (
     <ItemIcon

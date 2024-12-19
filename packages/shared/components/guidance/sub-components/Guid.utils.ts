@@ -31,6 +31,17 @@ const GUID_SHARE_OFFSET = 2;
 const GUID_UPLOADING_OFFSET = 5;
 
 export const getGuidPosition = (guidRects, state, viewAs) => {
+  if (viewAs === "row") {
+    return {
+      width: 0,
+      height: 0,
+      left: 0,
+      top: 0,
+      bottom: 0,
+    }
+  }
+
+
   switch (state) {
     case FormFillingTipsState.Starting:
       return {

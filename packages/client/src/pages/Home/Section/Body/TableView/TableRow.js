@@ -83,6 +83,7 @@ const FilesTableRow = (props) => {
     isDownload,
     setGuidanceCoordinates,
     guidanceCoordinates,
+    firstPdfItem,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -179,21 +180,15 @@ const FilesTableRow = (props) => {
   React.useEffect(() => {
     if (
       item?.fileExst === ".pdf" &&
-      rowRef?.current &&
-      !guidanceCoordinates.pdf
+      firstPdfItem.id === item.id &&
+      rowRef?.current
     ) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         pdf: rowRef.current.firstChild.offsetParent.getClientRects()[0],
       });
     }
-    if (
-      item?.type === FolderType.Done &&
-      rowRef?.current &&
-      !guidanceCoordinates.ready
-    ) {
+    if (item?.type === FolderType.Done && rowRef?.current) {
       setGuidanceCoordinates({
-        ...guidanceCoordinates,
         ready: rowRef.current.firstChild.offsetParent.getClientRects()[0],
       });
     }

@@ -73,7 +73,6 @@
   "ExportRoomIndex": "Export index de sală",
   "ExportRoomIndexAlreadyInProgressError": "Exportul indexului de sală este deja în desfășurare. Vă rugăm să așteptați până când exportul curent este încheiat înainte de a începe un export nou.",
   "FavoritesEmptyContainerDescription": "Marcați fișiere ca preferate sau le ștergeți din lista prin intermediu meniului contextual. ",
-  "FileCannotBeMoved": "Imposibil de deplasat fișierul în această sală.",
   "FileContents": "Conținut fișier",
   "FileDownloadingIsRestricted": "Descărcarea fişierelor este restricționată în această sală.",
   "FileExportedToMyDocuments": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea Documente",

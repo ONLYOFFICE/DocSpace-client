@@ -72,7 +72,7 @@ export const addLinksToHistory = (fetchedHistory, links) => {
     if (targetType !== "roomExternalLink") return feed;
     if (actionType === "rename" || actionType === "delete") return feed;
 
-    const link = links.find((link) => link.sharedTo.id === feed.data.id);
+    const link = links.find((l) => l.sharedTo.id === feed.data.id);
     if (!link) return feed;
 
     return { ...feed, data: link };

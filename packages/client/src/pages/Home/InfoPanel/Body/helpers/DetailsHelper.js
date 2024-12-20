@@ -46,13 +46,13 @@ import CommentEditor from "../sub-components/CommentEditor";
 
 // Property Content Components
 
-const text = (text) => (
+const text = (value) => (
   <Text truncate className="property-content">
-    {text}
+    {value}
   </Text>
 );
 
-const link = (text, onClick) => (
+const link = (txt, onClick) => (
   <Link
     isTextOverflow
     className="property-content"
@@ -60,7 +60,7 @@ const link = (text, onClick) => (
     onClick={onClick}
     enableUserSelect
   >
-    {text}
+    {txt}
   </Link>
 );
 

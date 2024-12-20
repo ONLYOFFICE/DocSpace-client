@@ -161,10 +161,10 @@ const InviteInput = ({
     }
   }, []);
 
-  const onLanguageSelect = (language) => {
-    setInviteLanguage(language);
-    setCultureKey(language.key);
-    if (language.key !== i18n.language) setIsChangeLangMail(true);
+  const onLanguageSelect = (newLanguage) => {
+    setInviteLanguage(newLanguage);
+    setCultureKey(newLanguage.key);
+    if (newLanguage.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };
 
@@ -278,7 +278,7 @@ const InviteInput = ({
 
       setUsersList(
         roomId === -1
-          ? users.items.map((value) => ({ ...value, shared: true }))
+          ? users.items.map((u) => ({ ...u, shared: true }))
           : users.items,
       );
 

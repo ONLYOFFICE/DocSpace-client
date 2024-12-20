@@ -248,12 +248,12 @@ const SectionPagingContent = ({
       });
     }
     if (filter.total < filter.pageCount) return [];
-    return [...Array(total).keys()].map((item) => {
+    return [...Array(totalPages).keys()].map((item) => {
       return {
         key: item,
         label: t("Common:PageOfTotalPage", {
           page: item + 1,
-          totalPage: total,
+          totalPage: totalPages,
         }),
       };
     });

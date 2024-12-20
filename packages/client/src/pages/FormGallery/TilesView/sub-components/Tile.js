@@ -81,7 +81,7 @@ const Tile = ({
   };
 
   const getOptions = () =>
-    getFormGalleryContextOptions(item, t, navigate).map((item) => item.key);
+    getFormGalleryContextOptions(item, t, navigate).map((elm) => elm.key);
 
   const onOpenContextMenu = (e) => {
     tileContextClick && tileContextClick();

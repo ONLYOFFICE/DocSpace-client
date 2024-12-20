@@ -167,7 +167,7 @@ const User = ({
               newMembersFilter,
             );
 
-            const newMembers = {
+            const newData = {
               administrators: [
                 ...newAdministrators,
                 ...fetchedMembers.administrators,
@@ -180,7 +180,7 @@ const User = ({
 
             setInfoPanelMembers({
               roomId: infoPanelSelection.id,
-              ...newMembers,
+              ...newData,
             });
 
             newMembersFilter.startIndex = oldStartIndex;

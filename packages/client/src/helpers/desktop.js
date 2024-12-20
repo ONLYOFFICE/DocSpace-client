@@ -48,13 +48,13 @@ export function setEncryptionAccess(file) {
             keys,
           },
           (obj) => {
-            let file = null;
+            let newFile = null;
             if (obj.isCrypto) {
               const bytes = obj.bytes;
               const filename = "temp_name";
-              file = new File([bytes], filename);
+              newFile = new File([bytes], filename);
             }
-            resolve(file);
+            resolve(newFile);
           },
         );
       } catch (e) {

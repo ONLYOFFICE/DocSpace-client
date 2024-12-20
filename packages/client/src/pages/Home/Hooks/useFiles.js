@@ -232,7 +232,7 @@ const useFiles = ({
     if (!dataObj) return;
 
     const { filter, itemId, type } = dataObj;
-    const newFilter = filter
+    let newFilter = filter
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea)
@@ -255,37 +255,37 @@ const useFiles = ({
         // console.warn("Filter restored by default", err);
       })
       .then((data) => {
-        const filter = data[0];
+        newFilter = data[0];
         const result = data[1];
         if (result) {
-          const type = result.displayName ? "user" : "group";
+          const newType = result.displayName ? "user" : "group";
           const selectedItem = {
             key: result.id,
-            label: type === "user" ? result.displayName : result.name,
-            type,
+            label: newType === "user" ? result.displayName : result.name,
+            type: newType,
           };
           if (!isRooms) {
-            filter.selectedItem = selectedItem;
+            newFilter.selectedItem = selectedItem;
           }
         }
 
-        if (filter) {
+        if (newFilter) {
           if (isRooms) {
             return fetchRooms(
               null,
-              filter,
+              newFilter,
               undefined,
               undefined,
               undefined,
               true,
             );
           }
-          const folderId = filter.folder;
-          return fetchFiles(folderId, filter)?.finally(() => {
-            const data = sessionStorage.getItem(CREATED_FORM_KEY);
-            if (data) {
+          const folderId = newFilter.folder;
+          return fetchFiles(folderId, newFilter)?.finally(() => {
+            const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
+            if (itemData) {
               wsCreatedPDFForm({
-                data,
+                data: itemData,
               });
               sessionStorage.removeItem(CREATED_FORM_KEY);
             }

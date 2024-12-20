@@ -39,7 +39,7 @@ const ShareButton = (props) => {
   if (isShared) color = theme.filesPanels.upload.shareButton.sharedColor;
 
   const onOpenSharingPanel = () => {
-    const { setSharingPanelVisible, selectUploadedFile, uploadedFile } = props;
+    const { setSharingPanelVisible, selectUploadedFile } = props;
 
     const file = uploadedFile[0].fileInfo;
     selectUploadedFile([file]);

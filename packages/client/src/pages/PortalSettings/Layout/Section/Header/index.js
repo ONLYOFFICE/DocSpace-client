@@ -152,6 +152,7 @@ const SectionHeaderContent = (props) => {
     setSelections,
     selectorIsOpen,
     toggleSelector,
+    removeAdmins,
   } = props;
 
   const navigate = useNavigate();
@@ -266,7 +267,7 @@ const SectionHeaderContent = (props) => {
     setSelected("all");
   };
 
-  const removeAdmins = () => {
+  const onClick = () => {
     if (!removeAdmins) return;
     removeAdmins();
   };
@@ -300,7 +301,7 @@ const SectionHeaderContent = (props) => {
         {
           label: t("Common:Delete"),
           disabled: !selection || !selection.length > 0,
-          onClick: removeAdmins,
+          onClick,
           iconUrl: DeleteReactSvgUrl,
         },
       ];

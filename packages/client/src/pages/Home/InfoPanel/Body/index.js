@@ -219,9 +219,7 @@ const InfoPanelBodyContent = ({
             image={image}
             onChangeImage={onChangeIcon}
             onClose={() => setAvatarEditorDialogVisible(false)}
-            onSave={(image) =>
-              onSaveRoomLogo(selection.id, image, selection, true)
-            }
+            onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
             onChangeFile={onChangeFile}
             classNameWrapperImageCropper="icon-editor"
             visible={image.uploadedFile}

@@ -97,9 +97,9 @@ const InfiniteGrid = (props) => {
   let cards = [];
   const list = [];
 
-  const addItemToList = (key, className, clear) => {
+  const addItemToList = (key, cls, clear) => {
     list.push(
-      <Item key={key} className={className}>
+      <Item key={key} className={cls}>
         {cards}
       </Item>,
     );
@@ -164,11 +164,11 @@ const InfiniteGrid = (props) => {
       } else {
         const isFile = child?.props?.className?.includes("file");
         const isRoom = child?.props?.className?.includes("room");
-        const className = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
+        const cls = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");
-          addItemToList(listKey, className, true);
+          addItemToList(listKey, cls, true);
         }
 
         const cardKey = uniqueid("card-item_");

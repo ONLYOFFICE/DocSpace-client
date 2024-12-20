@@ -328,14 +328,16 @@ const SectionBodyContent = (props) => {
       return;
     }
 
-    const folderId = value
+    const selectedFolderId = value
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    if (!isIndexEditingMode) return onMoveTo(folderId, title);
+    if (!isIndexEditingMode) return onMoveTo(selectedFolderId, title);
     if (filesList.length === 1) return;
 
-    const replaceableItemId = Number.isNaN(+folderId) ? folderId : +folderId;
+    const replaceableItemId = Number.isNaN(+selectedFolderId)
+      ? selectedFolderId
+      : +selectedFolderId;
 
     const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
     const isSectionTarget = elem && elem.className === sectionClass;

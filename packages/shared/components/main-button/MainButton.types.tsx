@@ -26,7 +26,7 @@
 
 import { ContextMenuModel } from "../context-menu";
 
-export interface MainButtonProps {
+export type MainButtonProps = {
   /** Button text */
   text?: string;
   /** Sets the button to present a disabled state */
@@ -45,8 +45,4 @@ export interface MainButtonProps {
   style?: React.CSSProperties;
   /** Data model menu */
   model: ContextMenuModel[];
-}
-
-export interface MainButtonThemeProps extends MainButtonProps {
-  onClick?: (e: React.MouseEvent) => void;
-}
+};

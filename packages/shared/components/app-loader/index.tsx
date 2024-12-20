@@ -28,13 +28,14 @@
 
 import React from "react";
 import { Loader, LoaderTypes } from "../loader";
+import styles from "./AppLoader.module.scss";
 
-import { StyledContainer } from "./AppLoader.styled";
-
-const AppLoader = () => (
-  <StyledContainer>
-    <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
-  </StyledContainer>
-);
+const AppLoader = () => {
+  return (
+    <div className={styles.loaderContainer}>
+      <Loader className={styles.loader} type={LoaderTypes.rombs} size="40px" />
+    </div>
+  );
+};
 
 export default AppLoader;

@@ -301,7 +301,7 @@ const DropDown = ({
       ["--max-height" as string]: `${maxHeight}px`,
       ["--manual-width" as string]: manualWidth,
       ["--manual-x" as string]: manualX,
-      ["--manual-y" as string]: manualY,
+      ["--manual-y" as string]: state.manualY,
     };
 
     const dropDownClasses = classNames(styles.dropDown, className, {

@@ -23,28 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import { screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import styled from "styled-components";
+import { renderWithTheme } from "../../utils/render-with-theme";
 
-import { injectDefaultTheme } from "../../utils";
+import AppLoader from "./index";
 
-export const StyledContainer = styled.div.attrs(injectDefaultTheme)`
-  width: 100vw;
-  height: 100vh;
+describe("AppLoader", () => {
+  it("renders loader with correct props", () => {
+    renderWithTheme(<AppLoader />);
 
-  display: flex;
-  align-item: center;
-  justify-content: center;
-  overflow: hidden;
-  background: ${(props) => props.theme.backgroundColor};
-  z-index: 5000;
-  position: fixed;
-  top: 0;
-  inset-inline-start: 0;
-
-  .pageLoader {
-    position: fixed;
-    inset-inline-start: calc(50%-20px);
-    top: 35%;
-  }
-`;
+    const loader = screen.getByTestId("app-loader");
+    expect(loader).toBeInTheDocument();
+  });
+});

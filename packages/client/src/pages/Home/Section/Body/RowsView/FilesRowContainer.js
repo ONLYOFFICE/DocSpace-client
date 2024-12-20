@@ -74,6 +74,7 @@ const FilesRowContainer = ({
   changeIndex,
   icon,
   isDownload,
+  setGuidanceCoordinates,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -84,6 +85,9 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
+    const firstPdfItem = filesList.filter(
+      (item) => item?.fileExst === ".pdf",
+    )[0];
     return filesList.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -102,6 +106,8 @@ const FilesRowContainer = ({
         isIndexEditingMode={isIndexEditingMode}
         icon={icon}
         isDownload={isDownload}
+        firstPdfItem={firstPdfItem}
+        setGuidanceCoordinates={setGuidanceCoordinates}
       />
     ));
   }, [
@@ -150,6 +156,7 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
+      setGuidanceCoordinates,
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
@@ -176,6 +183,7 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       icon,
       isDownload,
+      setGuidanceCoordinates,
     };
   },
 )(observer(FilesRowContainer));

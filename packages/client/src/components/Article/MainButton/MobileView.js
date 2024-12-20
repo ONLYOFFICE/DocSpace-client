@@ -105,17 +105,27 @@ const MobileView = ({
     clearPrimaryProgressData && clearPrimaryProgressData();
   }, [clearUploadData, clearPrimaryProgressData]);
 
-  React.useEffect(() => {
+  const setGuidRects = () => {
     if (mainButtonRef?.current) {
       setGuidanceCoordinates({
         uploading: mainButtonRef?.current.getClientRects()[0],
       });
     }
+  };
+
+  React.useEffect(() => {
+    setGuidRects();
   }, [
     mainButtonRef?.current,
     guidanceCoordinates.ready,
     guidanceCoordinates.pdf,
   ]);
+
+  React.useEffect(() => {
+    window.addEventListener("resize", setGuidRects);
+
+    return () => window.removeEventListener("resize", setGuidRects);
+  }, []);
 
   React.useEffect(() => {
     let currentPrimaryNumEl = primaryNumEl;

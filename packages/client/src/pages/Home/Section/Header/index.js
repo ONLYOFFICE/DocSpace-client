@@ -576,7 +576,7 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  React.useEffect(() => {
+  const setGuidRects = () => {
     if (buttonRef?.current) {
       setGuidanceCoordinates({
         share: buttonRef.current.getClientRects()[0],
@@ -588,12 +588,22 @@ const SectionHeaderContent = (props) => {
         uploading: addButtonRef.current.getClientRects()[0],
       });
     }
+  };
+
+  React.useEffect(() => {
+    setGuidRects();
   }, [
     buttonRef?.current,
     addButtonRef?.current,
     guidanceCoordinates.ready,
     guidanceCoordinates.pdf,
   ]);
+
+  React.useEffect(() => {
+    window.addEventListener("resize", setGuidRects);
+
+    return () => window.removeEventListener("resize", setGuidRects);
+  }, []);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;

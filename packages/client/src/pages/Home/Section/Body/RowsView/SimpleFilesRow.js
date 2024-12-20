@@ -40,6 +40,7 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 
+import { FolderType } from "@docspace/shared/enums";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
@@ -369,11 +370,15 @@ const SimpleFilesRow = (props) => {
     isFolder,
     icon,
     isDownload,
+    firstPdfItem,
+    setGuidanceCoordinates,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
   const [isDragActive, setIsDragActive] = React.useState(false);
+
+  const rowRef = React.useRef(null);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -381,6 +386,23 @@ const SimpleFilesRow = (props) => {
   const onChangeIndex = (action) => {
     return changeIndex(action, item, t);
   };
+
+  React.useEffect(() => {
+    if (
+      item?.fileExst === ".pdf" &&
+      firstPdfItem.id === item.id &&
+      rowRef?.current
+    ) {
+      setGuidanceCoordinates({
+        pdf: rowRef.current.getClientRects()[0],
+      });
+    }
+    if (item?.type === FolderType.Done && rowRef?.current) {
+      setGuidanceCoordinates({
+        ready: rowRef.current.getClientRects()[0],
+      });
+    }
+  }, [rowRef?.current]);
 
   const element = (
     <ItemIcon
@@ -427,6 +449,7 @@ const SimpleFilesRow = (props) => {
 
   return (
     <StyledWrapper
+      ref={rowRef}
       id={id}
       onDragOver={onDragOver}
       className={`row-wrapper ${

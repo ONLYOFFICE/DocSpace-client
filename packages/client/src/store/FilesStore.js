@@ -943,7 +943,6 @@ class FilesStore {
   };
 
   setViewAs = (viewAs) => {
-    this.setGuidanceCoordinates({}, true);
     this.privateViewAs = viewAs;
     localStorage.setItem("viewAs", viewAs);
     viewAs === "tile" && this.createThumbnails();
@@ -4201,16 +4200,7 @@ class FilesStore {
     this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
-  setGuidanceCoordinates = (value, clear = false) => {
-    if (clear) {
-      return (this.guidanceCoordinates = {
-        pdf: null,
-        ready: null,
-        share: null,
-        uploading: null,
-      });
-    }
-
+  setGuidanceCoordinates = (value) => {
     this.guidanceCoordinates = {
       ...this.guidanceCoordinates,
       ...value,

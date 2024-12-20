@@ -29,25 +29,18 @@ import { FormFillingTipsState } from "../../../enums";
 
 const GUID_SHARE_OFFSET = 2;
 const GUID_UPLOADING_OFFSET = 5;
+const ROW_VIEW_OFFSET = 15;
 
 export const getGuidPosition = (guidRects, state, viewAs) => {
-  if (viewAs === "row") {
-    return {
-      width: 0,
-      height: 0,
-      left: 0,
-      top: 0,
-      bottom: 0,
-    }
-  }
-
-
   switch (state) {
     case FormFillingTipsState.Starting:
       return {
-        width: viewAs === "table" ? 0 : guidRects.pdf.width,
+        width: viewAs === "table" || viewAs === "row" ? 0 : guidRects.pdf.width,
         height: guidRects.pdf.height,
-        left: guidRects.pdf.left,
+        left:
+          viewAs === "row"
+            ? guidRects.pdf.left - ROW_VIEW_OFFSET
+            : guidRects.pdf.left,
         top: guidRects.pdf.top,
         bottom: guidRects.pdf.bottom,
       };
@@ -64,9 +57,13 @@ export const getGuidPosition = (guidRects, state, viewAs) => {
     case FormFillingTipsState.Submitting:
     case FormFillingTipsState.Complete:
       return {
-        width: viewAs === "table" ? 0 : guidRects.ready.width,
+        width:
+          viewAs === "table" || viewAs === "row" ? 0 : guidRects.ready.width,
         height: guidRects.ready.height,
-        left: guidRects.ready.left,
+        left:
+          viewAs === "row"
+            ? guidRects.ready.left - ROW_VIEW_OFFSET
+            : guidRects.ready.left,
         top: guidRects.ready.top,
         bottom: guidRects.ready.bottom,
       };

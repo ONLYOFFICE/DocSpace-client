@@ -42,7 +42,7 @@ let requestsCount = 0;
 let timerId: ReturnType<typeof setInterval> | null;
 
 export const PreparationPortal = (props: IPreparationPortal) => {
-  const { withoutHeader, isDialog } = props;
+  const { withoutHeader, isDialog, style } = props;
 
   const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
 
@@ -157,7 +157,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>
       <ErrorContainer
         {...(ready && { headerText: withoutHeader ? "" : headerText })}
-        style={{ padding: "0" }}
+        style={style}
         className="restoring-portal"
       >
         <div className="preparation-portal_body-wrapper">

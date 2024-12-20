@@ -65,7 +65,6 @@ class ProfileActionsStore {
   userStore = null;
   settingsStore = null;
   filesStore = null;
-  peopleStore = null;
   treeFoldersStore = null;
   selectedFolderStore = null;
   pluginStore = null;
@@ -77,7 +76,6 @@ class ProfileActionsStore {
   constructor(
     authStore,
     filesStore,
-    peopleStore,
     treeFoldersStore,
     selectedFolderStore,
     pluginStore,
@@ -87,7 +85,6 @@ class ProfileActionsStore {
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
-    this.peopleStore = peopleStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.pluginStore = pluginStore;

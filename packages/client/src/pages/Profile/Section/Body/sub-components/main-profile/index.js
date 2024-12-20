@@ -246,6 +246,7 @@ const MainProfile = (props) => {
           model={model}
           editAction={() => setChangeAvatarVisible(true)}
           onChangeFile={onChangeFileContext}
+          currentColorScheme={currentColorScheme}
         />
         {profile.isSSO && (
           <div className="badges-wrapper">

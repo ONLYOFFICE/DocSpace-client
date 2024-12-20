@@ -809,13 +809,15 @@
       const loader = document.getElementById(this.config.frameId + "-loader");
 
       if (targetFrame) {
-        targetFrame.style.opacity = 1;
         targetFrame.style.position = "relative";
+        targetFrame.style.opacity = 1;
         targetFrame.style.width = this.config.width;
         targetFrame.style.height = this.config.height;
         targetFrame.parentNode.style.height = "inherit";
 
         if (loader) {
+          loader.style.opacity = 0;
+          targetFrame.style.transition = "opacity 350ms";
           loader.remove();
           this.config.events?.onContentReady &&
             this.config.events.onContentReady();

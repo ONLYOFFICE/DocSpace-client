@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { isMobile } from "@docspace/shared/utils";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
@@ -66,15 +65,12 @@ const UsersType = (props: UsersTypeProps) => {
         <Text fontWeight={600} fontSize="15px" lineHeight="16px">
           {t("LdapUsersType")}
         </Text>
-        <HelpButton
-          tooltipContent={t("LdapUserTypeTooltip", {
-            productName: t("Common:ProductName"),
-          })}
-        />
       </Box>
       <StyledInputWrapper>
         <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-          {t("LdapUsersTypeInfo")}
+          {t("LdapUserTypeTooltip", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <AccessSelector
           className="access-selector"

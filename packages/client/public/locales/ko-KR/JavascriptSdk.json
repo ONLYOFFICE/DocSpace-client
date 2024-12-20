@@ -81,6 +81,7 @@
   "MobileOnly": "모바일 장치만",
   "Page": "페이지 (숫자) 표시",
   "PortalDescription": "사용자가 모든 방, 파일, 설정과 상호 작용할 수 있도록 전체 {{productName}}를 임베드하세요.",
+  "PublicRoomPresetInfo": "사용자가 등록하지 않고도 모든 문서를 확인하고 편집하고 주석을 달거나 검토할 수 있도록 공개 룸을 임베드하세요",
   "RightPanelCollapsed": "오른쪽 패널이 숨겨졌습니다",
   "RoomFilter": "룸 필터",
   "RoomOrFolder": "방 또는 폴더",

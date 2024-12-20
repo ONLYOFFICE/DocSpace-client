@@ -14,9 +14,11 @@
   "EnterAppCodeDescription": "Ievadiet sešu ciparu ģenerētu kodu no savas lietotnes. Ja jums nav piekļuves tālrunim, izmantojiet rezerves kodus.",
   "EnterAppCodeTitle": "Ievadiet kodu no autentifikācijas lietotnes",
   "EnterCodePlaceholder": "Ievadiet kodu",
+  "EnterEmailHeader": "Ievadiet e-pasta adresi",
   "EnterPhone": "Ievadiet mobilā tālruņa numuru",
   "GetCode": "Iegūt kodu",
   "LoginRegistryButton": "Pievienoties",
+  "Newsletter": "Es vēlos abonēt {{organizationName}} informatīvo izdevumu",
   "PassworResetTitle": "Tagad jūs varat izveidot jaunu paroli.",
   "PhoneSubtitle": "Ir iespējota divu faktoru autentifikācija, lai nodrošinātu papildu drošību. Ievadiet savu mobilā tālruņa numuru, lai turpinātu darbu pie {{productName}}. Mobilā tālruņa numurs ir jāievada, izmantojot starptautisko formātu ar valsts kodu.",
   "PortalContinueTitle": "Lūdzu, apstipriniet, ka vēlaties atkārtoti aktivizēt savu {{productName}}.",
@@ -30,5 +32,6 @@
   "SignUp": "Reģistrēties",
   "SuccessDeactivate": "Jūsu konts ir veiksmīgi deaktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>vietni</1>.",
   "SuccessReactivate": "Jūsu konts ir veiksmīgi atkārtoti aktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>portālu</1>.",
-  "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm."
+  "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm.",
+  "TermsAndConditions": "Turpinot jūs saprotat un piekrītat mūsu <1>Noteikumiem un nosacījumiem</1> un <2>Paziņojumam par konfidencialitāti </2>."
 }

@@ -39,7 +39,7 @@ import {
 } from "@docspace/shared/api/people";
 import { toastr } from "@docspace/shared/components/toast";
 
-import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";
 
 import { showEmailActivationToast } from "../people-helpers";

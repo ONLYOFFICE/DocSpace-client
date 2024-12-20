@@ -80,7 +80,7 @@ const FilterBlock = ({
 
   const [filterData, setFilterData] = React.useState<TItem[]>([]);
   const [filterValues, setFilterValues] = React.useState<TGroupItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(isRooms);
 
   const setFilterDataFn = (data: TItem[]) => {
     const filterSubject = data.find(
@@ -307,7 +307,7 @@ const FilterBlock = ({
   );
 
   const getDefaultFilterData = React.useCallback(async () => {
-    setIsLoading(true);
+    if (isRooms) setIsLoading(true);
     const data = await getFilterData();
 
     const items = data.filter((item) => item.isHeader === true);
@@ -384,7 +384,7 @@ const FilterBlock = ({
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
-  }, [getFilterData, selectedFilterValue]);
+  }, [getFilterData, selectedFilterValue, isRooms]);
 
   React.useEffect(() => {
     getDefaultFilterData();

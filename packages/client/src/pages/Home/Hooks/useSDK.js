@@ -203,7 +203,7 @@ const useSDK = ({
   );
 
   const callSetIsLoad = useCallback(
-    () => setTimeout(() => frameCallCommand("setIsLoaded"), 10),
+    () => frameCallCommand("setIsLoaded"),
     [frameCallCommand],
   );
 

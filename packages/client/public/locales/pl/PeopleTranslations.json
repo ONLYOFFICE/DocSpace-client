@@ -8,6 +8,7 @@
   "EditGroup": "Edytuj grupę",
   "EmailChangeButton": "Zmień adres e-mail",
   "EnableUserButton": "Aktywuj",
+  "GuestsRemoved": "Goście zostali pomyślnie usunięci",
   "IndividualRights": "Indywidualne prawa w pokoju",
   "InviteLinkTitle": "Link z zaproszeniem",
   "LDAPAccountTooltip": "Dane konto użytkownika jest ładowane z LDAP. Aby zmienić nazwę użytkownika i adres e-mail lub wyłączyć konto użytkownika, należy odwołać się do katalogu LDAP.",

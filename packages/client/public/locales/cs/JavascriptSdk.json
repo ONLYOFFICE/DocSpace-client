@@ -81,6 +81,7 @@
   "MobileOnly": "pouze pro mobilní zařízení",
   "Page": "Zobrazení stránky (počet)",
   "PortalDescription": "Vložte celý {{productName}}, aby uživatelé mohli pracovat se všemi místnostmi, soubory a nastaveními.",
+  "PublicRoomPresetInfo": "Vložte veřejnou místnost, která uživatelům umožní prohlížet, upravovat, komentovat nebo kontrolovat všechny dokumenty uložené v této místnosti bez registrace",
   "RightPanelCollapsed": "Pravý panel byl sbalen",
   "RoomFilter": "Filtr místností",
   "RoomOrFolder": "Místnost nebo složka",

@@ -169,7 +169,7 @@ const PortalIntegration = (props) => {
           {" "}
           {t("APILink")}.
         </Link>
-        <CSP t={t} />
+        <CSP t={t} theme={theme} />
       </CategoryDescription>
       <CategoryHeader>
         {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}

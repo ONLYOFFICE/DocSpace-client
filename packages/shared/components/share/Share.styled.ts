@@ -145,6 +145,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     margin-inline-start: 0px;
   }
 
+  .link-time-info {
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
   .link-actions {
     display: flex;
     gap: 16px;

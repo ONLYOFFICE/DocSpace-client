@@ -38,6 +38,7 @@ import {
   frameCallCommand,
 } from "@docspace/shared/utils/common";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
 
 const Sdk = ({
   t,
@@ -52,7 +53,6 @@ const Sdk = ({
   userId,
   updateProfileCulture,
   getRoomsIcon,
-  getFilePrimaryLink,
   getFilesSettings,
   getPrimaryLink,
 }) => {
@@ -190,44 +190,46 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].icon === "") {
-        data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
-      } else {
-        data[0].icon = data[0].iconOriginal;
+      const enrichedData = data[0];
+
+      enrichedData.icon =
+        enrichedData.icon === ""
+          ? await getRoomsIcon(enrichedData.roomType, false, 32)
+          : enrichedData.iconOriginal;
+
+      const isSharedRoom =
+        enrichedData.roomType === RoomsType.PublicRoom ||
+        ((enrichedData.roomType === RoomsType.CustomRoom ||
+          enrichedData.roomType === RoomsType.FormRoom) &&
+          enrichedData.shared);
+
+      if (isSharedRoom) {
+        const { sharedTo } = await getPrimaryLink(enrichedData.id);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
-      if (
-        data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
-        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
-      ) {
-        const link = await getPrimaryLink(data[0].id);
-
-        const { id, title, requestToken, primary } = link.sharedTo;
-
-        data[0].requestTokens = [{ id, primary, title, requestToken }];
-      }
-
-      frameCallEvent({ event: "onSelectCallback", data });
+      frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
     },
-    [frameCallEvent],
+    [frameCallEvent, getRoomsIcon, getPrimaryLink],
   );
 
   const onSelectFile = useCallback(
     async (data) => {
-      data.icon = getIcon(64, data.fileExst);
+      const enrichedData = {
+        ...data,
+        icon: getIcon(64, data.fileExst),
+      };
 
       if (data.inPublic) {
-        const link = await getFilePrimaryLink(data.id);
-
-        const { id, title, requestToken, primary } = link.sharedTo;
-
-        data.requestTokens = [{ id, primary, title, requestToken }];
+        const { sharedTo } = await api.files.getFileLink(data.id);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
-      frameCallEvent({ event: "onSelectCallback", data });
+      frameCallEvent({ event: "onSelectCallback", data: enrichedData });
     },
-    [frameCallEvent],
+    [frameCallEvent, getIcon],
   );
 
   const onClose = useCallback(() => {
@@ -258,7 +260,7 @@ const Sdk = ({
             withHeader: true,
             headerProps: { headerLabel: "", isCloseable: false },
           }
-        : {};
+        : { withPadding: false };
 
       component = (
         <RoomSelector
@@ -297,6 +299,7 @@ const Sdk = ({
           openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
           headerProps={{ isCloseable: false }}
+          withPadding={frameConfig?.showSelectorHeader}
         />
       );
       break;
@@ -322,7 +325,7 @@ export const Component = inject(
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { getFilePrimaryLink, getPrimaryLink } = filesStore;
+    const { getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -337,7 +340,6 @@ export const Component = inject(
       isLoaded,
       updateProfileCulture,
       userId: user?.id,
-      getFilePrimaryLink,
       getFilesSettings,
       getPrimaryLink,
     };

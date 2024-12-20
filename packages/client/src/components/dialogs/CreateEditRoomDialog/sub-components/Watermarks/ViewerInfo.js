@@ -103,10 +103,10 @@ const rotateOptions = (t) => [
   { key: 0, label: t("Horizontal") },
 ];
 
-const getInitialRotate = (rotate, isEdit, t) => {
+const getInitialRotate = (rotate, isEdit, isImage, t) => {
   const dataRotate = rotateOptions(t);
 
-  if (!isEdit) return dataRotate[0];
+  if (!isEdit || (isEdit && isImage)) return dataRotate[0];
 
   const item = dataRotate.find((item) => {
     return item.key === rotate;
@@ -134,7 +134,7 @@ const ViewerInfoWatermark = ({
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
-      rotate: getInitialRotate(initialSettings?.rotate, isEdit, t),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
       text: getInitialText(initialSettings?.text, isEdit),
     };
 

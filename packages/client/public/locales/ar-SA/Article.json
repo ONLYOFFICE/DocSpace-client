@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "الملفات غير المحملة {{count}}",
   "FilesUploaded": "تم تحميل الملفات",
   "Upload": "رفع",
   "UploadFiles": "رفع الملفات",

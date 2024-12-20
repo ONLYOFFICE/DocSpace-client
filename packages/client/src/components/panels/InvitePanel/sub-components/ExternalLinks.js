@@ -60,6 +60,7 @@ import {
   getFreeUsersTypeArray,
 } from "../utils";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import api from "@docspace/shared/api";
 
 const ExternalLinks = ({
   t,
@@ -68,7 +69,6 @@ const ExternalLinks = ({
   defaultAccess,
   shareLinks,
   setShareLinks,
-  setInvitationLinks,
   isOwner,
   isAdmin,
   onChangeExternalLinksVisible,
@@ -114,14 +114,19 @@ const ExternalLinks = ({
 
   const disableLink = async () => {
     shareLinks?.length &&
-      (await setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
+      (await api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        0,
+        shareLinks[0].id,
+      ));
     return setShareLinks([]);
   };
 
   const editLink = async () => {
     const type = getDefaultAccessUser(roomType);
 
-    const link = await setInvitationLinks(roomId, "Invite", type);
+    const link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
 
     const { shareLink, id, title, expirationDate } = link.sharedTo;
 
@@ -149,7 +154,12 @@ const ExternalLinks = ({
 
       setActiveLink(link);
     } else {
-      setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id);
+      api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        +selectedAccess,
+        shareLinks[0].id,
+      );
 
       link = shareLinks[0];
       setActiveLink(shareLinks[0]);
@@ -316,21 +326,18 @@ export default inject(
   ({
     userStore,
     dialogsStore,
-    filesStore,
     peopleStore,
     currentQuotaStore,
     settingsStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
-    const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone } = settingsStore;
 
     return {
-      setInvitationLinks,
       roomId,
       hideSelector,
       defaultAccess,

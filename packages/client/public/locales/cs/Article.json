@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Soubory nebyly načteny: {{count}}",
   "FilesUploaded": "Soubory nahrány",
   "Upload": "Nahrát",
   "UploadFiles": "Nahrát soubory",

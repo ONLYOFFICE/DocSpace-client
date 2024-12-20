@@ -248,7 +248,6 @@ const DirectThirdPartyConnection = (props) => {
       </StyledComboBoxItem>
     );
   });
-
   return (
     <StyledBackup
       isConnectedAccount={
@@ -321,6 +320,9 @@ const DirectThirdPartyConnection = (props) => {
               isThirdParty
               isSelectFolder={isSelectFolder}
               isSelect={isSelect}
+              checkCreating={
+                selectedThirdPartyAccount?.provider_key === "WebDav"
+              }
             />
           )}
         </>

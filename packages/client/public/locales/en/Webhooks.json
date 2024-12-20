@@ -35,7 +35,6 @@
   "SecretKey": "Secret key",
   "SecretKeyHint": "Setting a webhook secret allows you to verify requests sent to the payload URL.",
   "SecretKeyWarning": "You cannot retrieve your secret key again once it has been saved. If you've lost or forgotten this secret key, you can reset it, but all integrations using this secret will need to be updated.",
-  "SelectDate": "Select date",
   "SelectDeliveryTime": "Select Delivery time",
   "SettingsWebhook": "Webhook settings",
   "SSLHint": "By default, we verify SSL certificates when delivering payloads.",

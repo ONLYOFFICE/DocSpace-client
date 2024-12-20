@@ -128,7 +128,7 @@ const RoomSelector = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {

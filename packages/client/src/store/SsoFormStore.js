@@ -502,7 +502,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
-    this.usersType = usersType;
+    this.usersType = usersType || EmployeeType.User;
   };
 
   setSsoUrls = (o) => {

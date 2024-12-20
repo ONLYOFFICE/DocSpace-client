@@ -46,7 +46,7 @@ const BackupToPublicRoomComponent = (props) => {
 
   const onKeyUp = (e) => {
     if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onMoveTo();
+    if (e.keyCode === 13 || e.which === 13) onBackupTo();
   };
 
   const onClose = () => {

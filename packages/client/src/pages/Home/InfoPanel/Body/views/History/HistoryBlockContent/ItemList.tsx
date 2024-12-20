@@ -101,13 +101,20 @@ const HistoryItemList = ({
     feed.data,
     ...feed.related.map((relatedFeeds) => relatedFeeds.data),
   ].map((item) => {
+    const fileExst = getFileExtension(item.title || item.newTitle);
+
     return {
       ...item,
       title: nameWithoutExtension!(item.title || item.newTitle),
-      fileExst: getFileExtension(item.title || item.newTitle),
-      isFolder,
+      fileExst,
+      isFolder: actionType === FeedAction.Change ? !fileExst : isFolder,
     };
   });
+
+  const sortItems =
+    actionType === FeedAction.Change
+      ? items.sort((a, b) => a?.oldIndex - b?.oldIndex)
+      : items;
 
   const oldItem = actionType === "rename" && {
     title: nameWithoutExtension!(feed.data.oldTitle),
@@ -148,7 +155,7 @@ const HistoryItemList = ({
 
   return (
     <StyledHistoryBlockFilesList>
-      {items.map((item, i) => {
+      {sortItems.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
           <Fragment key={`${feed.action.id}_${item.id}`}>

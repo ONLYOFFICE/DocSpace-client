@@ -18,6 +18,7 @@
   "StorageAndRoomHeader": "스토리지 공간 및 룸 수가 한도를 초과하려고 합니다",
   "StorageAndRoomLimitHeader": "스토리지 공간 및 룸 수가 한도에 도달했습니다",
   "StorageAndUserHeader": "스토리지 공간 및 관리자 수 제한이 곧 초과됩니다",
+  "StorageAndUserTariffLimitHeader": "스토리지 공간 및 관리자 수 제한에 도달했습니다",
   "StorageLimitHeader": "스토리지 공간이 한도에 도달했습니다: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "저장 공간 용량이 곧 초과될 예정입니다: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>스토리지 관리 설정</1>에서 할당량을 변경하거나 불필요한 파일을 삭제하세요.",

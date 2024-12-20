@@ -1,16 +1,6 @@
 {
-  "AdditionalSections": "追加セクション",
-  "DisplayFavorites": "お気に入りの表示",
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "DisplayNotification": "ゴミ箱への移動時に通知を表示",
-  "DisplayRecent": "最近の表示",
-  "DisplayTemplates": "テンプレートの表示",
-  "IntermediateVersion": "保存された中間バージョンをすべて残す",
-  "KeepIntermediateVersion": "編集時に中間バージョンを残す",
   "OpenSameTab": "{{organizationName}}エディタを同じタブで開く",
-  "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する",
-  "StoringFileVersion": "ファイルバージョンの保存",
-  "ThirdPartyAccounts": "サードパーティーアカウント",
-  "ThirdPartyBtn": "サードパーティストレージの接続を可能にする",
-  "UpdateOrCreate": "同じ名前の既存のファイルに対して、ファイルのバージョンを更新します。それ以外の場合は、ファイルのコピーが作成されます。"
+  "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する"
 }

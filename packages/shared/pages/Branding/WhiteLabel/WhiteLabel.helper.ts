@@ -25,19 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "../../../themes";
+import {
+  ILogoOptions,
+  IUploadedDimensions,
+  IUploadLogoResponse,
+} from "./WhiteLabel.types";
 
 export const generateLogo = (
-  width,
-  height,
-  text,
-  fontSize = 18,
-  fontColor = globalColors.darkBlack,
-  alignCenter = false,
-  isEditor = false,
-) => {
+  width: number,
+  height: number,
+  text: string,
+  fontSize: number = 18,
+  fontColor: string = globalColors.darkBlack,
+  alignCenter: boolean = false,
+  isEditor: boolean = false,
+): string => {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -45,18 +48,26 @@ export const generateLogo = (
   const ctx = canvas.getContext("2d");
   const x = alignCenter ? width / 2 : isEditor ? 10 : 0;
   const y = (height - fontSize) / 2;
-  ctx.fillStyle = "transparent";
-  ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = fontColor;
-  ctx.textAlign = alignCenter ? "center" : "start";
-  ctx.textBaseline = "top";
-  ctx.font = `${fontSize}px Arial`;
-  ctx.fillText(text, x, y);
+
+  if (ctx) {
+    ctx.fillStyle = "transparent";
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = fontColor;
+    ctx.textAlign = alignCenter ? "center" : "start";
+    ctx.textBaseline = "top";
+    ctx.font = `${fontSize}px Arial`;
+    ctx.fillText(text, x, y);
+  }
 
   return canvas.toDataURL();
 };
 
-export const getLogoOptions = (index, text, width, height) => {
+export const getLogoOptions = (
+  index: number,
+  text: string,
+  width: number,
+  height: number,
+): ILogoOptions => {
   const fontSize = height - 16;
 
   switch (index) {
@@ -117,39 +128,18 @@ export const getLogoOptions = (index, text, width, height) => {
         height,
       };
     default:
-      return { fontSize: 32, text: text, width: 422, height: 48 };
+      return { fontSize: 32, text, width: 422, height: 48 };
   }
 };
 
-export const uploadLogo = async (file, type) => {
-  try {
-    const { width, height } = await getUploadedFileDimensions(file);
-    let data = new FormData();
-    data.append("file", file);
-    data.append("width", width);
-    data.append("height", height);
-    data.append("logotype", type);
-
-    return await axios.post(
-      `${combineUrl(
-        window.ClientConfig?.proxy?.url,
-        config.homepage,
-      )}/logoUploader.ashx`,
-      data,
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const getUploadedFileDimensions = (file) =>
+const getUploadedFileDimensions = (file: File): Promise<IUploadedDimensions> =>
   new Promise((resolve, reject) => {
     try {
-      let img = new Image();
+      const img = new Image();
 
       img.onload = () => {
-        const width = img.naturalWidth,
-          height = img.naturalHeight;
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
 
         window.URL.revokeObjectURL(img.src);
 
@@ -161,3 +151,25 @@ const getUploadedFileDimensions = (file) =>
       return reject(exception);
     }
   });
+
+export const uploadLogo = async (
+  file: File | null,
+  type: string,
+): Promise<{ data: IUploadLogoResponse } | undefined> => {
+  try {
+    if (!file) throw new Error("Empty file");
+    const { width, height } = await getUploadedFileDimensions(file);
+    const data = new FormData();
+    data.append("file", file);
+    data.append("width", width.toString());
+    data.append("height", height.toString());
+    data.append("logotype", type);
+
+    return await axios.post(
+      `${window.ClientConfig?.proxy?.url}/logoUploader.ashx`,
+      data,
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};

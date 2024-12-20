@@ -41,7 +41,9 @@ const EmptyIcon = styled(CameraReactSvg).attrs(injectDefaultTheme)`
   border-radius: ${(props) => props.theme.avatar.image.borderRadius};
 `;
 
-const EditContainer = styled.div.attrs(injectDefaultTheme)`
+const EditContainer = styled.div.attrs(injectDefaultTheme)<{
+  hasAvatar: boolean;
+}>`
   position: absolute;
   display: flex;
 
@@ -49,7 +51,9 @@ const EditContainer = styled.div.attrs(injectDefaultTheme)`
 
   bottom: ${(props) => props.theme.avatar.editContainer.bottom};
   background-color: ${(props) =>
-    props.theme.avatar.editContainer.backgroundColor};
+    props.hasAvatar
+      ? props.theme.avatar.editContainer.backgroundColor
+      : props.currentColorScheme.main?.accent};
   border-radius: ${(props) => props.theme.avatar.editContainer.borderRadius};
   height: ${(props) => props.theme.avatar.editContainer.height};
   width: ${(props) => props.theme.avatar.editContainer.width};

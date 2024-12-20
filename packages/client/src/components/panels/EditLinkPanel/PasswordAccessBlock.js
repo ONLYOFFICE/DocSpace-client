@@ -123,6 +123,7 @@ const PasswordAccessBlock = (props) => {
                 simpleView={false}
                 placeholder={t("Common:Password")}
                 hasError={hasError}
+                isAutoFocussed
                 // onBlur={onBlurPassword}
                 onValidateInput={onValidatePassword}
                 isSimulateType

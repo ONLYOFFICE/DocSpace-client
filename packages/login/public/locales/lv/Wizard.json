@@ -1,6 +1,7 @@
 {
   "Desc": "Lūdzu, iestatiet {{productName}} reģistrācijas datus.",
   "ErrorEmail": "Nederīga e-pasta adrese",
+  "ErrorInstanceId": "Nederīgs instances ID",
   "ErrorLicenseBody": "Licence nav derīga. Pārliecinieties, ka esat izvēlējies pareizo failu.",
   "ErrorPassword": "Parole neatbilst prasībām",
   "ErrorUploadLicenseFile": "Atlasiet licences failu",

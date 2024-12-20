@@ -48,4 +48,6 @@ export type RoomSelectorProps = TSelectorHeader &
     withSearch?: boolean;
 
     disableThirdParty?: boolean;
+
+    withPadding?: boolean;
   };

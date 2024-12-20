@@ -1,6 +1,5 @@
 {
   "ExternalLink": "බාහිර සබැඳිය",
-  "FormFilling": "ආකෘතිපත්‍ර පිරවීම",
   "LinkName": "සබැඳියේ නම",
   "ShareEmailBody": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත. දැන් ලේඛනය ඇරීමට පහත සබැඳිය ඔබන්න: {{shareLink}}.",
   "ShareEmailSubject": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත"

@@ -1,16 +1,6 @@
 {
-  "AdditionalSections": "أقسام إضافية",
-  "DisplayFavorites": "اعرض المفضلة",
   "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "DisplayNotification": "اعرض الإشعار عند نقل العناصر إلى المهملات",
-  "DisplayRecent": "اعرض الأخيرة",
-  "DisplayTemplates": "اعرض النماذج",
-  "IntermediateVersion": "احتفظ بجميع النسخ الوسيطة المحفوظة",
-  "KeepIntermediateVersion": "احتفظ بالإصدارات الوسيطة عند التحرير",
   "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب",
-  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا",
-  "StoringFileVersion": "تخزين إصدارات الملفات",
-  "ThirdPartyAccounts": "حسابات الطرف الثالث",
-  "ThirdPartyBtn": "السماح بالاتصال بمساحات التخزين الطرف الثالث",
-  "UpdateOrCreate": "قم بتحديث إصدار الملف للملف الموجود بنفس الاسم. خلاف ذلك، سيتم إنشاء نسخة من الملف."
+  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا"
 }

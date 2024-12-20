@@ -46,7 +46,7 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";
@@ -59,6 +59,7 @@ import {
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingContainer } from "@/components/GreetingContainer";
+import { useSearchParams } from "next/navigation";
 
 type TfaActivationFormProps = {
   secretKey: string;
@@ -77,11 +78,15 @@ const TfaActivationForm = ({
   const { t } = useTranslation(["Confirm", "Common"]);
   const { currentColorScheme } = useTheme();
 
+  const searchParams = useSearchParams();
+
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const { confirmHeader = null } = linkData;
+
+  const linkUrlData = searchParams.get("linkData");
 
   const proxyBaseUrl = useRef("");
   useEffect(() => {
@@ -99,6 +104,19 @@ const TfaActivationForm = ({
         await loginWithTfaCode(userName, passwordHash, code);
       } else {
         await validateTfaCode(code, confirmHeader);
+      }
+
+      let confirmData = "";
+      try {
+        if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
+      } catch (e) {
+        console.error("parse error", e);
+      }
+
+      try {
+        if (confirmData) await checkConfirmLink(confirmData);
+      } catch (e) {
+        console.error(e);
       }
 
       sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");

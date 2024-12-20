@@ -1,16 +1,6 @@
 {
-  "AdditionalSections": "Əlavə bölmələr",
-  "DisplayFavorites": "Ən çox istifadə olunanları göstər",
   "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
   "DisplayNotification": "Zibil qutusuna atılan zaman bildirişi göstər",
-  "DisplayRecent": "Son istifadə olunanları göstər",
-  "DisplayTemplates": "Şablonları göstər",
-  "IntermediateVersion": "Bütün aralıq versiyalarını yadda saxla",
-  "KeepIntermediateVersion": "Aralıq versiyaları redaktə edəndə yadda saxla",
   "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın",
-  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla",
-  "StoringFileVersion": "Fayl versiyaları saxla",
-  "ThirdPartyAccounts": "Üçüncü tərəf hesabları",
-  "ThirdPartyBtn": "Üçüncü tərəf yaddaşının quraşdırılmasına icazə verin",
-  "UpdateOrCreate": "Eyni adı olan mövcud faylın fayl versiyasını yeniləyin. Əks halda, faylın bir nüsxəsi yaradılacaq. "
+  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla"
 }

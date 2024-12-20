@@ -81,6 +81,7 @@
   "MobileOnly": "tylko urządzenia mobilne",
   "Page": "Wyświetl stronę (numer)",
   "PortalDescription": "Osadź cały {{productName}}, aby umożliwić użytkownikom interakcję ze wszystkimi pokojami, plikami i ustawieniami.",
+  "PublicRoomPresetInfo": "Osadź pokój publiczny, aby umożliwić użytkownikom przeglądanie, edytowanie, komentowanie lub recenzowanie wszystkich przechowywanych w nim dokumentów bez rejestracji",
   "RightPanelCollapsed": "Zwinięty panel po prawej stronie",
   "RoomFilter": "Filtr pokoi",
   "RoomOrFolder": "Pokój lub Katalog",

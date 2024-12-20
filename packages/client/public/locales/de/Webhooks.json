@@ -35,7 +35,6 @@
   "SecretKey": "Geheimschlüssel",
   "SecretKeyHint": "Das Festlegen eines Webhook-Geheimnisses ermöglicht es Ihnen, an die Nutzlast-URL gesendete Anfragen zu überprüfen.",
   "SecretKeyWarning": "Sie können Ihren Geheimschlüssel nicht mehr abrufen, wenn er einmal gespeichert wurde. Wenn Sie diesen Geheimschlüssel verloren oder vergessen haben, können Sie ihn zurücksetzen, aber alle Integrationen, die diesen Geheimschlüssel verwenden, müssen aktualisiert werden.",
-  "SelectDate": "Datum auswählen",
   "SelectDeliveryTime": "Lieferzeit auswählen",
   "SettingsWebhook": "Webhook-Einstellungen",
   "SSLHint": "Standardmäßig werden SSL-Zertifikate bei der Übermittlung von Nutzdaten überprüft.",

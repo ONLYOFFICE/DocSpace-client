@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "Le cartelle condivise verranno importate nella sezione Stanze come stanze con utenti a cui è stato concesso l'accesso. Nota: alcuni diritti di accesso potrebbero andare persi durante l'importazione.",
   "ShowFeedbackAndSupport": "Mostra il link a Feedback e assistenza",
   "ShowHelpCenter": "Mostra il link al Centro assistenza",
-  "ShowVideoGuides": "Mostra il link alle videoguide",
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "Impostazioni SMTP",
   "SMTPSettingsDescription": "Le impostazioni SMTP ti permettono di configurare un account di posta elettronica che sarà usato per inviare le notifiche dal portale usando il proprio server SMTP invece di quello usato da {{organizationName}}. Compila tutti i campi e clicca sul pulsante 'Salva'. Puoi utilizzare il pulsante 'Invia messaggio di prova' per controllare le impostazioni inserite.",

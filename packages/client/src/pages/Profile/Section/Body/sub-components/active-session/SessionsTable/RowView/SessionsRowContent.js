@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobile } from "@docspace/shared/utils";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
 
+import { isMobile } from "@docspace/shared/utils";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
+
+import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 
 const StyledRowContent = styled(RowContent)`
   .rowMainContainer {
@@ -56,6 +58,7 @@ const SessionsRowContent = ({
   ip,
   sectionWidth,
   showTickIcon,
+  theme,
 }) => {
   return (
     <StyledRowContent
@@ -87,4 +90,8 @@ const SessionsRowContent = ({
   );
 };
 
-export default SessionsRowContent;
+export default inject(({ settingsStore }) => {
+  const { theme } = settingsStore;
+
+  return { theme };
+})(observer(SessionsRowContent));

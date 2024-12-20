@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "검색 LDAP 필터를 사용하여 가져오기 해야 하는 사용자를 선택하세요.",
   "LdapUserQuotaTooltip": "사용자에 대한 스토리지 할당량을 설정하려면 LDAP 디렉토리에 속성을 추가하고(예: UsersQuotaLimit) 이 속성에 대한 정수 값을 입력하세요. 할당량이 바이트 단위로 표시됩니다. 여기에서 속성 이름만 지정하세요. 이 속성은 첫 번째 설정 중에만 적용되며 나중에 {{contactsName}} 섹션에서 수동으로 변경할 수 있습니다. ",
   "LdapUsersType": "사용자 유형",
-  "LdapUsersTypeInfo": "사용자는 관리자가 초대한 룸에만 액세스할 수 있으며, 자신의 룸이나 폴더 또는 파일을 만들 수 없습니다. 아래에서 다른 유형을 선택하여 더 많은 권한을 제공하세요. 아니면 {{contactsName}} 섹션에서 수동으로 유형을 변경할 수 있습니다.",
   "LdapUserTypeTooltip": "모든 사용자가 선택한 유형으로 {{productName}}에 추가됩니다."
 }

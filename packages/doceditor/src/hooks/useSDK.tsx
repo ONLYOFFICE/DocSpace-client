@@ -34,8 +34,7 @@ import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const useSDK = () => {
-  const [frameConfig, setFrameConfig] = useState<TFrameConfig | null>(null);
-
+  const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
   const handleMessage = useCallback(
     (e: MessageEvent) => {
       const eventData =
@@ -51,13 +50,12 @@ const useSDK = () => {
         try {
           switch (methodName) {
             case "setConfig":
-              setFrameConfig(data);
+              setSdkConfig(data);
               res = data;
               break;
             case "getEditorInstance":
               const instance = window.DocEditor?.instances[EDITOR_ID];
-              const asc = window.Asc;
-              res = { instance, asc };
+              res = { instance, asc: window.Asc };
               break;
             default:
               res = "Wrong method for this mode";
@@ -66,12 +64,10 @@ const useSDK = () => {
           res = e;
         }
 
-        console.log("useSDK handleMessage", methodName, res);
-
         frameCallbackData(res);
       }
     },
-    [setFrameConfig],
+    [setSdkConfig],
   );
 
   useEffect(() => {
@@ -87,12 +83,12 @@ const useSDK = () => {
   }, []);
 
   useEffect(() => {
-    if (window.parent && !frameConfig?.frameId) {
+    if (window.parent && !sdkConfig?.frameId) {
       callSetConfig();
     }
-  }, [callSetConfig, frameConfig?.frameId]);
+  }, [sdkConfig?.frameId, callSetConfig]);
 
-  return { frameConfig };
+  return { sdkFrameConfig: sdkConfig };
 };
 
 export default useSDK;

@@ -40,7 +40,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const DialogBodyWrapper = styled.div`
-  margin-top: -4px;
+  margin-top: 16px;
 `;
 
 const Footer = styled.div`

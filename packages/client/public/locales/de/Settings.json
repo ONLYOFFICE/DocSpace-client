@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "Freigegebene Ordner werden in den Bereich „Räume“ als Räume mit Benutzern importiert, denen Zugriff gewährt wurde. Bitte beachten Sie: Beim Import können einige Zugriffsrechte verloren gehen",
   "ShowFeedbackAndSupport": "Link zum Feedback & Support anzeigen",
   "ShowHelpCenter": "Link zum Hilfe-Center anzeigen",
-  "ShowVideoGuides": "Link zu Videoanleitungen anzeigen",
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "SMTP-Einstellungen",
   "SMTPSettingsDescription": "Die SMTP-Einstellungen müssen Ihr E-Mail-Konto einrichten, es wird gebraucht, um Benachrichtigungen vom Portal mithilfe Ihres eigenen SMTP-Servers statt eines vom {{organizationName}} zu senden. Bitte füllen Sie alle Felder aus und klicken Sie auf den Button 'Speichern'. Sie können den Button 'Test-E-Mail senden' verwenden, um zu prüfen, ob alle eingegeben Einstellungen korrekt sind und wie vorgesehen funktionieren.",

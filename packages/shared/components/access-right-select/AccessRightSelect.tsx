@@ -142,6 +142,7 @@ export const AccessRightSelectPure = ({
           default: true,
           key: currentItem?.key,
           label: type === "onlyIcon" ? "" : currentItem?.label,
+          description: type === "onlyIcon" ? "" : currentItem?.description,
         } as TOption
       }
       forceCloseClickOutside

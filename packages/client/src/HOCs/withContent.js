@@ -157,7 +157,6 @@ export default function withContent(WrappedContent) {
     ) => {
       const {
         createFile,
-        createFolder,
 
         renameFolder,
         setIsLoading,
@@ -189,7 +188,6 @@ export default function withContent(WrappedContent) {
 
       return {
         createFile,
-        createFolder,
         culture,
 
         folderFormValidation,

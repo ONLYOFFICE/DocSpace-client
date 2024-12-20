@@ -285,7 +285,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   const onCloseConflictDialog = () => {
     if (isUploadConflict) {
       cancelUploadAction();
-      onCloseDialog();
+      onClose();
     } else onCloseDialog();
   };
 

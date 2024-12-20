@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "Gebruik Zoek LDAP filter om gebruikers te selecteren die zullen worden geïmporteerd.",
   "LdapUserQuotaTooltip": "Om een opslagquota voor gebruikers in te stellen, voegt u een attribuut toe in de LDAP-directory (bijvoorbeeld UsersQuotaLimit) en voert u een gehele waarde voor dit attribuut in. De quotumwaarde wordt in bytes weergegeven. Geef hier alleen de naam van het attribuut op. Dit attribuut wordt alleen toegepast tijdens de eerste installatie en kan later handmatig worden gewijzigd in de {{contactsName}} sectie.",
   "LdapUsersType": "Type gebruiker",
-  "LdapUsersTypeInfo": "Gebruikers hebben alleen toegang tot de kamers waarvoor ze door beheerders zijn uitgenodigd en kunnen geen eigen kamers, mappen of bestanden aanmaken. Selecteer hieronder een ander type om meer rechten te geven. Anders kunt u het type handmatig wijzigen in de {{contactsName}} sectie",
   "LdapUserTypeTooltip": "Alle gebruikers worden toegevoegd aan {{productName}} met het geselecteerde type."
 }

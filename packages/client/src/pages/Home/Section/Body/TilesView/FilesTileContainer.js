@@ -39,11 +39,11 @@ import { Context } from "@docspace/shared/utils";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
-import { elementResizeDetector, getThumbSize } from "./FileTile.utils";
+import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
 
-const FilesTileContainer = ({ filesList, thumbnails1280x720 }) => {
+const FilesTileContainer = ({ filesList }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -71,7 +71,7 @@ const FilesTileContainer = ({ filesList, thumbnails1280x720 }) => {
 
       if (width === 0) return;
 
-      const size = thumbnails1280x720 ? "1280x720" : getThumbSize(width);
+      const size = "1280x720";
 
       const widthWithoutPadding = width - 32;
 
@@ -87,7 +87,7 @@ const FilesTileContainer = ({ filesList, thumbnails1280x720 }) => {
 
       setThumbSize(size);
     },
-    [columnCount, thumbSize, thumbnails1280x720],
+    [columnCount, thumbSize],
   );
 
   const onSetTileRef = React.useCallback((node) => {
@@ -148,10 +148,8 @@ const FilesTileContainer = ({ filesList, thumbnails1280x720 }) => {
 
 export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
   const { filesList } = filesStore;
-  const { thumbnails1280x720 } = filesSettingsStore;
 
   return {
     filesList,
-    thumbnails1280x720,
   };
 })(observer(FilesTileContainer));

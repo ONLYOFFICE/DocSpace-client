@@ -35,7 +35,6 @@
   "SecretKey": "Skrivni ključ",
   "SecretKeyHint": "Če nastavite skrivnost webhook, lahko preverite zahteve, poslane na URL uporabnih podatkov.",
   "SecretKeyWarning": "Skrivnega ključa ne morete znova pridobiti, ko je shranjen. Če ste izgubili ali pozabili skrivni ključ, ga lahko ponastavite, vendar bo treba posodobiti vse integracije, ki uporabljajo ta skrivni ključ.",
-  "SelectDate": "Izberi datum",
   "SelectDeliveryTime": "Izberi čas dostave",
   "SettingsWebhook": "Webhook nastavitve",
   "SSLHint": "Privzeto preverjamo potrdila SSL, ko dostavljamo uporabne podatke.",

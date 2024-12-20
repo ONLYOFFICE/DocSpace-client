@@ -223,6 +223,7 @@ const VersionRow = (props) => {
       icon: DownloadReactSvgUrl,
       label: `${t("Common:Download")} (${info.contentLength})`,
       onClick: onDownloadAction,
+      disabled: !info.security.Download,
     },
   ];
 

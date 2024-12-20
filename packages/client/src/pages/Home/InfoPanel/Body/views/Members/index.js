@@ -37,7 +37,6 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import {
@@ -88,11 +87,6 @@ const Members = ({
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
 }) => {
-  const [visibleBar, setVisibleBar] = useLocalStorage(
-    `public-room-bar-${selfId}`,
-    true,
-  );
-
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
@@ -253,8 +247,7 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks &&
-    visibleBar;
+    !withoutTitlesAndLinks;
 
   const publicRoomItemsLength = publicRoomItems.length;
 
@@ -277,7 +270,6 @@ const Members = ({
                 ? t("CreateEditRoomDialog:FormRoomBarDescription")
                 : t("CreateEditRoomDialog:PublicRoomBarDescription")
             }
-            onClose={() => setVisibleBar(false)}
           />
         </StyledPublicRoomBarContainer>
       )}

@@ -34,6 +34,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledWrapper = styled.div`
   display: flex;

@@ -47,7 +47,6 @@ const TabsCommon = (props) => {
     setIsLoadedSubmenu,
     loadBaseInfo,
     isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
     currentDeviceType,
     isMobileView,
     isCommunity,
@@ -57,7 +56,6 @@ const TabsCommon = (props) => {
   useEffect(() => {
     return () => {
       resetSessionStorage();
-      getWhiteLabelLogoUrls();
     };
   }, []);
 
@@ -131,13 +129,8 @@ const TabsCommon = (props) => {
 
 export const Component = inject(
   ({ settingsStore, common, currentTariffStatusStore }) => {
-    const {
-      isLoaded,
-      setIsLoadedSubmenu,
-      initSettings,
-      isLoadedSubmenu,
-      getWhiteLabelLogoUrls,
-    } = common;
+    const { isLoaded, setIsLoadedSubmenu, initSettings, isLoadedSubmenu } =
+      common;
 
     const { isCommunity } = currentTariffStatusStore;
     const currentDeviceType = settingsStore.currentDeviceType;
@@ -150,7 +143,6 @@ export const Component = inject(
       isLoaded,
       setIsLoadedSubmenu,
       isLoadedSubmenu,
-      getWhiteLabelLogoUrls,
       currentDeviceType,
       isMobileView,
       isCommunity,

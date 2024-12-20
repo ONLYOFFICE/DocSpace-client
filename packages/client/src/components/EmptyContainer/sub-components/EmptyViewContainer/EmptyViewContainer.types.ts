@@ -94,6 +94,7 @@ export interface InjectedEmptyViewContainerProps
   setViewInfoPanel: TStore["infoPanelStore"]["setView"];
   isPublicRoom: boolean;
   isVisitor?: boolean;
+  isFrame?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

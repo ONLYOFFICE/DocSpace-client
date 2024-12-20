@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "Zdieľané priečinky budú importované do časti Miestnosti ako miestnosti s používateľmi, ktorým bol udelený prístup. Upozornenie: počas importu sa môžu stratiť niektoré prístupové práva.",
   "ShowFeedbackAndSupport": "Zobraziť odkaz na spätnú väzbu a podporu",
   "ShowHelpCenter": "Zobraziť odkaz na centrum pomoci",
-  "ShowVideoGuides": "Zobraziť odkaz na videonávody",
   "SingleSignOn": "Jednotné prihlásenie",
   "SMTPSettings": "SMTP Nastavenie",
   "SMTPSettingsDescription": "Nastavenia SMTP sú potrebné na nastavenie e-mailového účtu, ktorý sa použije na odosielanie upozornení z portálu pomocou vlastného SMTP servera namiesto toho, ktorý používa {{organizationName}}. Vyplňte všetky polia a kliknite na tlačidlo \"Uložiť\". Môžete použiť tlačidlo \"Odoslať testovací e-mail\", aby ste skontrolovali, či sú všetky zadané nastavenia správne a či fungujú podľa predpokladov.",

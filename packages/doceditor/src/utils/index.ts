@@ -209,27 +209,43 @@ export const getIsZoom = () =>
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
 // need for separate window in desktop editors
-export const calculateAsideHeight = () => {
+export const calculateAsideHeight = (callback?: () => void) => {
   const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();
 
-  if (!viewPort) return;
+  if (!viewPort?.widgetType || viewPort.widgetType !== "window") return;
 
-  if (viewPort.widgetType === "window") {
-    const { captionHeight } = viewPort;
-    const backdrop =
-      (document.getElementsByClassName("backdrop-active")[0] as HTMLElement) ??
-      (document.getElementsByClassName(
-        "modal-backdrop-active",
-      )[0] as HTMLElement);
-    const aside = document.getElementsByTagName("aside")[0];
+  const { captionHeight } = viewPort;
 
-    if (backdrop) {
-      backdrop.style.height = `calc(100dvh - ${captionHeight}px`;
-      backdrop.style.marginTop = `${captionHeight}px`;
-    }
-    if (aside) {
-      aside.style.height = `calc(100dvh - ${captionHeight}px`;
-      aside.style.top = `${captionHeight}px`;
-    }
+  const elements = {
+    backdrop: document.querySelector(
+      ".backdrop-active, .modal-backdrop-active",
+    ),
+    aside: document.querySelector("aside"),
+  };
+
+  const isElementInDom = !!elements.backdrop || !!elements.aside;
+
+  if (!isElementInDom)
+    return setTimeout(() => {
+      if (typeof callback === "function") callback();
+    }, 350);
+
+  const styles = {
+    height: `calc(100dvh - ${captionHeight}px)`,
+    top: `${captionHeight}px`,
+  };
+
+  if (elements.backdrop) {
+    Object.assign((elements.backdrop as HTMLElement).style, {
+      height: styles.height,
+      marginTop: styles.top,
+    });
+  }
+
+  if (elements.aside) {
+    Object.assign(elements.aside.style, {
+      height: styles.height,
+      top: styles.top,
+    });
   }
 };

@@ -184,6 +184,15 @@ const RoomLogoCover = ({
 
   const scrollRef = useRef(null);
 
+  const setWithoutIcon = (value: boolean) => {
+    if (roomCoverDialogProps.icon === roomTitle) return;
+
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      withoutIcon: value,
+    });
+  };
+
   const selectContainerBody = (
     <>
       <div className="color-select-container">
@@ -218,12 +227,7 @@ const RoomLogoCover = ({
               withoutIcon: false,
             })
           }
-          setWithoutIcon={(value) =>
-            setRoomCoverDialogProps({
-              ...roomCoverDialogProps,
-              withoutIcon: value,
-            })
-          }
+          setWithoutIcon={setWithoutIcon}
           covers={covers}
         />
       </div>

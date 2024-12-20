@@ -35,8 +35,11 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
 import UserFields from "../sub-components/user-fields";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 

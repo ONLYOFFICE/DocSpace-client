@@ -37,9 +37,13 @@ import {
 } from "./StyledPreview";
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
-import { isMobile, isTablet } from "@docspace/shared/utils";
+import {
+  isMobile,
+  isTablet,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 const Preview = (props) => {

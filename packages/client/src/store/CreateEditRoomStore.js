@@ -33,6 +33,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -167,12 +168,10 @@ class CreateEditRoomStore {
       });
     }
 
-    const { uploadRoomLogo } = this.filesStore;
-
     const uploadWatermarkData = new FormData();
     uploadWatermarkData.append(0, watermarkImage);
 
-    const response = await uploadRoomLogo(uploadWatermarkData);
+    const response = await api.rooms.uploadRoomLogo(uploadWatermarkData);
 
     const getMeta = (url) => {
       //url for this.watermarksSettings.image.viewUrl
@@ -197,8 +196,6 @@ class CreateEditRoomStore {
   };
 
   getLogoParams = (uploadedFile, icon) => {
-    const { calculateRoomLogoParams } = this.filesStore;
-
     const img = new Image();
     const url = URL.createObjectURL(uploadedFile);
 
@@ -217,7 +214,6 @@ class CreateEditRoomStore {
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
-    const { editRoom, removeLogoFromRoom } = this.filesStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
@@ -312,14 +308,14 @@ class CreateEditRoomStore {
       }
 
       if (Object.keys(editRoomParams).length)
-        await editRoom(room.id, editRoomParams);
+        await api.rooms.editRoom(room.id, editRoomParams);
 
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, roomOwner.id));
       }
 
       if (isDeleteLogo) {
-        requests.push(removeLogoFromRoom(room.id));
+        requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
       if (isIndexingChanged)
@@ -339,8 +335,7 @@ class CreateEditRoomStore {
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, createRoomInThirdpary, selection, bufferSelection } =
-      this.filesStore;
+    const { createRoom, selection, bufferSelection } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
     const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
@@ -431,7 +426,7 @@ class CreateEditRoomStore {
       withConfirm && this.setConfirmDialogIsLoading(true);
 
       const room = isThirdPartyRoom
-        ? await createRoomInThirdpary(storageFolderId, createRoomData)
+        ? await api.rooms.createRoomInThirdpary(storageFolderId, createRoomData)
         : await createRoom(createRoomData);
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
@@ -466,7 +461,7 @@ class CreateEditRoomStore {
   };
 
   onOpenNewRoom = async (room) => {
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
 
@@ -481,7 +476,7 @@ class CreateEditRoomStore {
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
 
-    setIsSectionFilterLoading(true);
+    setIsSectionBodyLoading(true);
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 

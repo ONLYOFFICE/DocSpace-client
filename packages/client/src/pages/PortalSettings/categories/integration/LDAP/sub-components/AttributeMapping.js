@@ -41,7 +41,6 @@ import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import LdapFieldComponent from "./LdapFieldComponent";
 import { Link } from "@docspace/shared/components/link";
-import { globalColors } from "@docspace/shared/themes";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -259,15 +258,10 @@ const AttributeMapping = (props) => {
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-            <HelpButton
-              tooltipContent={t("LdapUserTypeTooltip", {
-                productName: t("Common:ProductName"),
-              })}
-            />
           </Box>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo", {
-              contactsName: t("Common:Contacts"),
+            {t("LdapUserTypeTooltip", {
+              productName: t("Common:ProductName"),
             })}
           </Text>
         </Box>
@@ -286,6 +280,7 @@ const AttributeMapping = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
             directionX="left"
+            scaledOptions={!isMobile()}
           />
           <div></div>
         </Box>

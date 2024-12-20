@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "As pastas compartilhadas serão importadas para a seção salas como salas com usuários aos quais foi concedido acesso. Observação: alguns direitos de acesso podem ser perdidos durante a importação",
   "ShowFeedbackAndSupport": "Mostrar link de feedback e suporte",
   "ShowHelpCenter": "Mostrar link para a Central de Ajuda",
-  "ShowVideoGuides": "Mostrar link para guias de vídeo",
   "SingleSignOn": "Logon Único",
   "SMTPSettings": "Configurações de SMTP",
   "SMTPSettingsDescription": "As configurações de SMTP são necessárias para configurar uma conta de e-mail que será usada para enviar notificações do portal usando seu próprio servidor SMTP em vez do que o {{organizationName}} utiliza. Preencha todos os campos e clique no botão \"Salvar\". Você pode usar o botão \"Enviar E-mail de Teste\" para verificar se todas as configurações inseridas estão corretas e funcionam como deveria.",

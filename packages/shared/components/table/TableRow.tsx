@@ -85,7 +85,7 @@ const TableRow = (props: TableRowProps) => {
       {isIndexEditingMode ? (
         <></>
       ) : (
-        <div>
+        <div className="context-menu-container">
           <TableCell
             {...selectionProp}
             style={style}

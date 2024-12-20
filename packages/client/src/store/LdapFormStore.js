@@ -568,15 +568,10 @@ class LdapFormStore {
     if (!status.completed) return false;
 
     if (
-      status.certificateConfirmRequest &&
-      status.certificateConfirmRequest.requested
+      status.error ||
+      (status.certificateConfirmRequest &&
+        status.certificateConfirmRequest.requested)
     ) {
-      setCertificateDetails(status.certificateConfirmRequest);
-      // currentSettings = previousSettings;
-      return true;
-    }
-
-    if (status.error) {
       return true;
     }
 

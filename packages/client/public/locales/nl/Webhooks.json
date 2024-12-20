@@ -35,7 +35,6 @@
   "SecretKey": "Secret key",
   "SecretKeyHint": "Door een webhook geheim in te stellen, kunt u verzoeken verifiëren die naar de payload URL worden gestuurd.",
   "SecretKeyWarning": "U kunt uw secret key niet meer opvragen als deze eenmaal is opgeslagen. Als u deze secret key kwijt of vergeten bent, kunt u deze opnieuw instellen, maar dan moeten alle integraties die deze secret key gebruiken bijgewerkt worden.",
-  "SelectDate": "Selecteer datum",
   "SelectDeliveryTime": "Selecteer Levertijd",
   "SettingsWebhook": "Webhook instellingen",
   "SSLHint": "Standaard verifiëren we SSL-certificaten bij het leveren van payloads.",

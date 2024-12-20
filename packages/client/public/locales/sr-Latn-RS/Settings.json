@@ -244,7 +244,6 @@
   "SharedFoldersDescription": "Deljeni folderi će biti uvezeni u odeljak Sobe kao sobe sa korisnicima kojima je dat pristup. Molimo vas da imate na umu: neka prava pristupa mogu biti izgubljena tokom uvoza.",
   "ShowFeedbackAndSupport": "Prikaži link Povratne informacije i podrška",
   "ShowHelpCenter": "Prikaži link do Centra za pomoć",
-  "ShowVideoGuides": "Prikaži link do Video vodiča",
   "SingleSignOn": "Jednokratna prijava",
   "SMTPSettings": "SMTP podešavanja",
   "SMTPSettingsDescription": "SMTP podešavanja su potrebna kako biste postavili email nalog koji će se koristiti za slanje obaveštenja sa portala koristeći vaš SMTP server umesto onog koji koristi {{organizationName}}. Molimo vas da popunite sva polja i kliknete na dugme ‘Sačuvaj’. Možete koristiti dugme ‘Pošaljite probnu poštu’ da proverite da li su sva podešavanja koja ste uneli ispravna i rade kako treba.",

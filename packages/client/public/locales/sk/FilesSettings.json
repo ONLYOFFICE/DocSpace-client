@@ -1,16 +1,6 @@
 {
-  "AdditionalSections": "Dodatočné sekcie",
-  "DisplayFavorites": "Zobraziť obľúbené položky",
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
   "DisplayNotification": "Zobraziť upozornenie pri presúvaní položiek do koša",
-  "DisplayRecent": "Zobraziť posledné",
-  "DisplayTemplates": "Zobraziť šablóny",
-  "IntermediateVersion": "Ponechať všetky uložené priebežné verzie",
-  "KeepIntermediateVersion": "Pri úprave ponechať priebežné verzie",
   "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke",
-  "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte",
-  "StoringFileVersion": "Ukladanie verzií súborov",
-  "ThirdPartyAccounts": "Účty tretej strany",
-  "ThirdPartyBtn": "Povoliť pripojenie úložísk od tretích strán",
-  "UpdateOrCreate": "Aktualizujte verziu súboru pre existujúci súbor s rovnakým názvom. V opačnom prípade sa vytvorí kópia súboru."
+  "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte"
 }

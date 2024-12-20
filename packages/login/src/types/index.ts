@@ -113,6 +113,7 @@ export type TConfirmLinkParams = {
   type?: string;
   first?: string;
   roomId?: string;
+  linkData?: string;
 };
 
 export type TConfirmLinkResult = {
@@ -213,6 +214,7 @@ export type LoginFormProps = {
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
   clientId?: string;
+  oauthUrl?: string;
   client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;

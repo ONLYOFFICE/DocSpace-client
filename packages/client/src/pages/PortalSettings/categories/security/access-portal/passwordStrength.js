@@ -36,8 +36,11 @@ import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -213,7 +216,7 @@ const PasswordStrength = (props) => {
       saveToSessionStorage("defaultPasswordSettings", data);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (error) {
-      toastr.error(e);
+      toastr.error(error);
     }
 
     setIsSaving(false);

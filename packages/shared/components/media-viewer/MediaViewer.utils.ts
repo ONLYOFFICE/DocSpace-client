@@ -275,3 +275,7 @@ export const formatTime = (time: number): string => {
   }
   return `${convertedHours}:${convertedMinutes}:${convertedSeconds}`;
 };
+
+export const isTiff = (extension: string) =>
+  extension === ".tiff" || extension === ".tif";
+export const isHeic = (extension: string) => extension === ".heic";

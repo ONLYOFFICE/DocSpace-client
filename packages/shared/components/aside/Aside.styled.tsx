@@ -117,6 +117,7 @@ const StyledHeaderContainer = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 6px;
   margin: 0 16px;
   height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};
   min-height: ${(props) => (props.headerHeight ? props.headerHeight : "53px")};

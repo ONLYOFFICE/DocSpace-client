@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Nenaložene datoteke: {{count}}",
   "FilesUploaded": "Datoteke naložene",
   "Upload": "Naloži",
   "UploadFiles": "Naloži datoteke",

@@ -25,325 +25,113 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
-import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
 
-import api from "@docspace/shared/api";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import {
+  setAdditionalResources,
+  restoreAdditionalResources,
+} from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
-import { mobile, size } from "@docspace/shared/utils";
-import { isManagement } from "@docspace/shared/utils/common";
-import { DeviceType } from "@docspace/shared/enums";
+import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-
-const mobileCSS = css`
-  margin-top: 0px;
-
-  .header {
-    display: none;
-  }
-`;
-
-const StyledComponent = styled.div`
-  margin-top: 40px;
-
-  @media ${mobile} {
-    ${mobileCSS}
-  }
-
-  ${(props) => props.isMobile && mobileCSS}
-
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-
-  .additional-header {
-    padding-bottom: 2px;
-  }
-
-  .additional-description {
-    padding-bottom: 18px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
-  }
-`;
 
 const AdditionalResourcesComponent = (props) => {
   const {
     t,
     tReady,
     isSettingPaid,
-    getAdditionalResources,
-
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     deviceType,
+    getAdditionalResources,
   } = props;
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const isMobileView = deviceType === DeviceType.mobile;
-
-  const [additionalSettings, setAdditionalSettings] = useState({});
-  const [hasChange, setHasChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { feedbackAndSupportEnabled, videoGuidesEnabled, helpCenterEnabled } =
-    additionalSettings;
-
-  const getSettings = () => {
-    const additionalSettings = getFromSessionStorage("additionalSettings");
-
-    const defaultData = {
-      feedbackAndSupportEnabled:
-        additionalResourcesData?.feedbackAndSupportEnabled,
-      // videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
-      helpCenterEnabled: additionalResourcesData?.helpCenterEnabled,
-    };
-
-    saveToSessionStorage("defaultAdditionalSettings", defaultData);
-
-    if (additionalSettings) {
-      setAdditionalSettings({
-        feedbackAndSupportEnabled:
-          additionalSettings?.feedbackAndSupportEnabled,
-        // videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
-        helpCenterEnabled: additionalSettings?.helpCenterEnabled,
-      });
-    } else {
-      setAdditionalSettings(defaultData);
-    }
-  };
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, [isMobileView]);
-
-  const checkWidth = () => {
-    const url = isManagement()
-      ? "/management/settings/branding"
-      : "portal-settings/customization/branding";
-    window.innerWidth > size.mobile &&
-      !isMobileView &&
-      location.pathname.includes("additional-resources") &&
-      navigate(url);
-  };
-
-  useEffect(() => {
-    getSettings();
-  }, [additionalResourcesData]);
-
-  useEffect(() => {
-    const defaultAdditionalSettings = getFromSessionStorage(
-      "defaultAdditionalSettings",
-    );
-    const newSettings = {
-      feedbackAndSupportEnabled: additionalSettings.feedbackAndSupportEnabled,
-      // videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
-      helpCenterEnabled: additionalSettings.helpCenterEnabled,
-    };
-    saveToSessionStorage("additionalSettings", newSettings);
-
-    if (isEqual(defaultAdditionalSettings, newSettings)) {
-      setHasChange(false);
-    } else {
-      setHasChange(true);
-    }
-  }, [additionalSettings, additionalResourcesData]);
+  const { feedbackAndSupportEnabled, helpCenterEnabled } =
+    additionalResourcesData;
 
   useEffect(() => {
     if (!(additionalResourcesData && tReady)) return;
-
     setIsLoadedAdditionalResources(true);
   }, [additionalResourcesData, tReady]);
 
-  const onSave = useCallback(async () => {
-    setIsLoading(true);
-
-    const settings = JSON.parse(JSON.stringify(additionalResourcesData));
-
-    settings.feedbackAndSupportEnabled = feedbackAndSupportEnabled;
-    settings.videoGuidesEnabled = videoGuidesEnabled;
-    settings.helpCenterEnabled = helpCenterEnabled;
-
-    await api.settings
-      .setAdditionalResources(settings)
-      .then(() => {
+  const onSave = useCallback(
+    async (feedbackEnabled, helpEnabled) => {
+      setIsLoading(true);
+      try {
+        const settings = JSON.parse(JSON.stringify(additionalResourcesData));
+        settings.feedbackAndSupportEnabled = feedbackEnabled;
+        settings.helpCenterEnabled = helpEnabled;
+        await setAdditionalResources(settings);
+        await getAdditionalResources();
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      })
-      .catch((error) => {
+      } catch (error) {
         toastr.error(error);
-      });
-
-    await getAdditionalResources();
-
-    const data = {
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-      helpCenterEnabled,
-    };
-
-    saveToSessionStorage("additionalSettings", data);
-    saveToSessionStorage("defaultAdditionalSettings", data);
-    setIsLoading(false);
-  }, [setIsLoading, getAdditionalResources, additionalSettings]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setIsLoading],
+  );
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
-
-    await api.settings
-      .restoreAdditionalResources()
-      .then((res) => {
-        setAdditionalSettings(res);
-        saveToSessionStorage("additionalSettings", res);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      })
-      .catch((error) => {
-        toastr.error(error);
-      });
-
-    await getAdditionalResources();
-
-    setIsLoading(false);
-  }, [setIsLoading, getAdditionalResources]);
-
-  const onChangeFeedback = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      feedbackAndSupportEnabled: !feedbackAndSupportEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      feedbackAndSupportEnabled: !feedbackAndSupportEnabled,
-    });
-  };
-
-  const onChangeVideoGuides = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      videoGuidesEnabled: !videoGuidesEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      videoGuidesEnabled: !videoGuidesEnabled,
-    });
-  };
-
-  const onChangeHelpCenter = () => {
-    setAdditionalSettings({
-      ...additionalSettings,
-      helpCenterEnabled: !helpCenterEnabled,
-    });
-    saveToSessionStorage("additionalSettings", {
-      ...additionalSettings,
-      helpCenterEnabled: !helpCenterEnabled,
-    });
-  };
+    try {
+      await restoreAdditionalResources();
+      await getAdditionalResources();
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setIsLoading]);
 
   if (!isLoadedAdditionalResources) return <LoaderAdditionalResources />;
-
   return (
-    <>
-      <StyledComponent isMobile={isMobileView}>
-        <div className="header">
-          <div className="additional-header settings_unavailable">
-            {t("Settings:AdditionalResources")}
-          </div>
-        </div>
-        <div className="settings_unavailable additional-description">
-          {t("Settings:AdditionalResourcesDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </div>
-        <div className="branding-checkbox">
-          <Checkbox
-            tabIndex={12}
-            className="show-feedback-support checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowFeedbackAndSupport")}
-            isChecked={feedbackAndSupportEnabled}
-            onChange={onChangeFeedback}
-          />
-
-          {/*<Checkbox
-            tabIndex={13}
-            className="show-video-guides checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowVideoGuides")}
-            isChecked={videoGuidesEnabled}
-            onChange={onChangeVideoGuides}
-  />*/}
-          <Checkbox
-            tabIndex={14}
-            className="show-help-center checkbox"
-            isDisabled={!isSettingPaid}
-            label={t("ShowHelpCenter")}
-            isChecked={helpCenterEnabled}
-            onChange={onChangeHelpCenter}
-          />
-        </div>
-        <SaveCancelButtons
-          tabIndex={15}
-          onSaveClick={onSave}
-          onCancelClick={onRestore}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Restore")}
-          displaySettings={true}
-          reminderText={t("YouHaveUnsavedChanges")}
-          showReminder={(isSettingPaid && hasChange) || isLoading}
-          disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
-          additionalClassSaveButton="additional-resources-save"
-          additionalClassCancelButton="additional-resources-cancel"
-        />
-      </StyledComponent>
-    </>
+    <AdditionalResourcesPage
+      t={t}
+      isSettingPaid={isSettingPaid}
+      feedbackAndSupportEnabled={feedbackAndSupportEnabled}
+      helpCenterEnabled={helpCenterEnabled}
+      onSave={onSave}
+      onRestore={onRestore}
+      isLoading={isLoading}
+      additionalResourcesIsDefault={additionalResourcesIsDefault}
+      deviceType={deviceType}
+    />
   );
 };
 
 export const AdditionalResources = inject(
-  ({ settingsStore, common, currentQuotaStore }) => {
+  ({ brandingStore, settingsStore, currentQuotaStore }) => {
     const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
-      common;
+      brandingStore;
 
     const {
-      getAdditionalResources,
-
       additionalResourcesData,
       additionalResourcesIsDefault,
       checkEnablePortalSettings,
+      deviceType,
+      getAdditionalResources,
     } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
-      getAdditionalResources,
-
       additionalResourcesData,
       additionalResourcesIsDefault,
       setIsLoadedAdditionalResources,
       isLoadedAdditionalResources,
       isSettingPaid,
+      deviceType,
+      getAdditionalResources,
     };
   },
 )(

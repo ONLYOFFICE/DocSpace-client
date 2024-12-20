@@ -79,6 +79,8 @@ type LinkRowProps = {
   deleteExternalLink: (link: Nullable<TFileLink>, linkId: string) => void;
 };
 
+const MIN_LOADER_TIME = 200;
+
 const LinkRow = (props: LinkRowProps) => {
   const {
     t,
@@ -118,6 +120,7 @@ const LinkRow = (props: LinkRowProps) => {
       roomId,
       isPublic: isPublicRoomType,
       isFormRoom,
+      isCustomRoom,
     });
     onCloseContextMenu();
   };
@@ -130,7 +133,13 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setLinkParams({
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+      isCustomRoom,
+    });
     setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
   };
@@ -192,20 +201,22 @@ const LinkRow = (props: LinkRowProps) => {
       {
         key: "delete-link-key",
         label:
-          primary && isPublicRoomType
+          primary && (isPublicRoomType || isFormRoom)
             ? t("Files:RevokeLink")
             : t("Common:Delete"),
         icon:
-          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          primary && (isPublicRoomType || isFormRoom)
+            ? OutlineReactSvgUrl
+            : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
   };
 
   const editExternalLinkAction = (newLink: TFileLink) => {
-    const timerId = setTimeout(() => {
-      setLoadingLinks([newLink.sharedTo.id]);
-    }, 100);
+    setLoadingLinks([newLink.sharedTo.id]);
+
+    const startLoaderTime = new Date();
 
     editExternalLink(roomId, newLink)
       .then((linkData: TFileLink) => {
@@ -215,6 +226,7 @@ const LinkRow = (props: LinkRowProps) => {
           roomId,
           isPublic: isPublicRoomType,
           isFormRoom,
+          isCustomRoom,
         });
 
         if (linkData) {
@@ -223,7 +235,16 @@ const LinkRow = (props: LinkRowProps) => {
       })
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => {
-        clearTimeout(timerId);
+        const currentDate = new Date();
+
+        const ms = currentDate.getTime() - startLoaderTime.getTime();
+
+        if (ms < MIN_LOADER_TIME) {
+          return setTimeout(() => {
+            setLoadingLinks([]);
+          }, MIN_LOADER_TIME - ms);
+        }
+
         setLoadingLinks([]);
       });
   };
@@ -307,13 +328,13 @@ export default inject<TStore>(
       setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType:
-        roomType === RoomsType.PublicRoom || roomType === RoomsType.FormRoom,
+      isPublicRoomType: roomType === RoomsType.PublicRoom,
       isFormRoom: roomType === RoomsType.FormRoom,
       isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
       deleteExternalLink,
+      roomType,
     };
   },
 )(

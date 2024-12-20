@@ -71,7 +71,7 @@ const ControlButtons = ({
   };
 
   const navigationButtonBlock =
-    navigationButtonLabel && !isFrame ? (
+    navigationButtonLabel && !isFrame && !isRootFolder ? (
       <Button
         className="navigation_button"
         label={navigationButtonLabel}

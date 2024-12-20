@@ -406,7 +406,7 @@ const InviteInput = ({
           !usersList.find((value) => value.email === item.email)?.shared,
       )
       .map((item) => {
-        const userItem = usersList.find((value) => value.email === item.email);
+        let userItem = usersList.find((value) => value.email === item.email);
 
         if (!userItem) {
           const isRolePaid =
@@ -427,13 +427,13 @@ const InviteInput = ({
         }
 
         userItem.access = selectedAccess;
-        userItem.userType = getUserType(user);
+        userItem.userType = getUserType(item);
 
         const isAccessPaid = checkIfAccessPaid(userItem.access);
 
         if (
           isAccessPaid &&
-          (userItem.isGroup || user.isVisitor || user.isCollaborator)
+          (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator)
         ) {
           userItem = fixAccess(userItem, t, roomType);
 

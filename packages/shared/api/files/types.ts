@@ -433,4 +433,10 @@ export type TConnectingStorage = {
   redirectUrl: string;
 };
 
+export type TIndexItems = {
+  order: string;
+  entryType: number;
+  entryId: number;
+};
+
 export type TConnectingStorages = TConnectingStorage[];

@@ -57,7 +57,6 @@ class DialogsStore {
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
-  thirdPartyMoveDialogVisible = false;
   deleteDialogVisible = false;
   lifetimeDialogVisible = false;
   downloadDialogVisible = false;
@@ -120,6 +119,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   editMembersGroup = null;
+  closeEditIndexDialogVisible = false;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
@@ -171,6 +171,15 @@ class DialogsStore {
   };
 
   newFilesPanelFolderId = null;
+
+  sortedDownloadFiles = {
+    other: [],
+    password: [],
+    remove: [],
+    original: [],
+  };
+
+  downloadItems = [];
 
   constructor(
     authStore,
@@ -308,6 +317,134 @@ class DialogsStore {
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
     this.downloadDialogVisible = downloadDialogVisible;
+  };
+
+  getDownloadItems = (itemList, t) => {
+    const files = [];
+    const folders = [];
+    let singleFileUrl = null;
+
+    for (let item of itemList) {
+      if (item.checked) {
+        if (!!item.fileExst || item.contentLength) {
+          const format =
+            !item.format || item.format === t("OriginalFormat")
+              ? item.fileExst
+              : item.format;
+          if (!singleFileUrl) {
+            singleFileUrl = item.viewUrl;
+          }
+          files.push({
+            key: item.id,
+            value: format,
+            ...(item.password && { password: item.password }),
+          });
+        } else {
+          folders.push(item.id);
+        }
+      }
+    }
+
+    return [files, folders, singleFileUrl];
+  };
+
+  setDownloadItems = (downloadItems) => {
+    this.downloadItems = downloadItems;
+  };
+
+  get sortedPasswordFiles() {
+    const original = this.sortedDownloadFiles.original ?? [];
+    const other = this.sortedDownloadFiles.other ?? [];
+    const password = this.sortedDownloadFiles.password ?? [];
+    const remove = this.sortedDownloadFiles.remove ?? [];
+
+    return [...other, ...original, ...password, ...remove];
+  }
+
+  updateDownloadedFilePassword = (id, password, type) => {
+    let originItem;
+
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else originItem = item;
+    });
+
+    if (type === "remove") this.downloadItems.push({ ...originItem, password });
+    else
+      this.downloadItems.map((item) => {
+        if (item.id === id) {
+          item.password = password;
+          if (item.oldFormat) item.format = item.oldFormat;
+        }
+      });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.password = [
+      ...(this.sortedDownloadFiles.password ?? []),
+      originItem,
+    ];
+  };
+
+  resetDownloadedFileFormat = (id, fileExst, type) => {
+    let originItem;
+
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else originItem = item;
+    });
+
+    if (type === "remove")
+      this.downloadItems.push({
+        ...originItem,
+        format: fileExst,
+        oldFormat: originItem.format,
+      });
+    else
+      this.downloadItems.map((item) => {
+        if (item.id === id) {
+          item.oldFormat = item.format;
+          item.format = fileExst;
+        }
+      });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.original = [
+      ...(this.sortedDownloadFiles.original ?? []),
+      originItem,
+    ];
+  };
+
+  discardDownloadedFile = (id, type) => {
+    let removedItem = null;
+
+    const newFileIds = this.downloadItems.filter((item) => item.id !== id);
+    this.downloadItems = [...newFileIds];
+
+    const currentType = this.sortedDownloadFiles[type];
+
+    const newArray = currentType.filter((item) => {
+      if (item.id != id) return item;
+      else {
+        removedItem = item;
+      }
+    });
+
+    this.sortedDownloadFiles[type] = [...newArray];
+
+    this.sortedDownloadFiles.remove = [
+      ...(this.sortedDownloadFiles.remove ?? []),
+      removedItem,
+    ];
+  };
+
+  setSortedPasswordFiles = (object) => {
+    this.sortedDownloadFiles = { ...object };
   };
 
   setEmptyTrashDialogVisible = (emptyTrashDialogVisible) => {
@@ -585,6 +722,10 @@ class DialogsStore {
 
   setRoomLogoCoverDialogVisible = (visible) => {
     this.roomLogoCoverDialogVisible = visible;
+  };
+
+  setCloseEditIndexDialogVisible = (visible) => {
+    this.closeEditIndexDialogVisible = visible;
   };
 
   setCovers = (covers) => {

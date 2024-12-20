@@ -141,7 +141,6 @@ const SectionPagingContent = ({
     },
     [
       isAccountsPage,
-      accountsFiler,
       fetchPeople,
       filter,
       selectedFolderId,

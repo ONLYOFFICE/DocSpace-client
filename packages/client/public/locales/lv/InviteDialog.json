@@ -3,6 +3,8 @@
   "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, veicot dubultklikšķi uz tā.",
   "GroupMaxAvailableRoleWarning": "Grupas var pievienot telpai ar maksimālo {{roleName}} lomu. Tomēr jūs varat mainīt atsevišķu lietotāju lomu grupā pēc tam, kad tā ir veiksmīgi pievienota.",
   "InvitationLanguage": "Uzaicinājuma valoda",
+  "InviteMembersManuallyDescription": "Uzaicināt jaunus dalībniekus uz {{productName}} personīgi pa e-pastu",
+  "InviteMembersSearchPlaceholder": "Uzaicināt dalībniekus pa e-pastu",
   "InviteToRoomManuallyInfo": "Pievienot esošās {{productName}} kontaktpersonas. Vai uzaiciniet jaunus lietotājus personīgi pa e-pastu. Jūsu viesu sarakstam tiks pievienoti jauni lietotāji.",
   "InviteToRoomSearchPlaceholder": "Meklējiet un uzaiciniet pēc vārda vai e-pasta adreses",
   "InviteViaLink": "Uzaicināt, izmantojot saiti",

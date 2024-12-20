@@ -185,7 +185,7 @@ const Navigation = ({
 
   const navigationTitleNode = (
     <div className="title-block">
-      {titleIcon && (
+      {titleIcon && !isRootFolder && (
         <ReactSVG
           data-tooltip-id="iconTooltip"
           className="title-icon"

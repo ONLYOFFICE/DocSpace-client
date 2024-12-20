@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "徽章将通知您有关上传、创建和更改文件的行动。",
+  "ActionsWithFilesDescription": "通知弹窗将为您提醒操作相关信息，例如：上传、创建和更改文件等。",
   "Badges": "弹窗",
   "DailyFeed": "每日{{productName}}信息",
   "DailyFeedDescription": "在每日摘要中阅读来自{{productName}}的新闻和事件。",

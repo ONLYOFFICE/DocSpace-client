@@ -3,6 +3,8 @@
   "EmailErrorMessage": "Η διεύθυνση email δεν είναι έγκυρη. Μπορείτε να επεξεργαστείτε το email κάνοντας διπλό κλικ πάνω του.",
   "GroupMaxAvailableRoleWarning": "Μπορούν να προστεθούν ομάδες σε ένα δωμάτιο με τον ρόλο {{roleName}} ως μέγιστο. Ωστόσο, μπορείτε να αλλάξετε τον ρόλο μεμονωμένων χρηστών στην ομάδα μετά την επιτυχή προσθήκη της.",
   "InvitationLanguage": "Γλώσσα πρόσκλησης",
+  "InviteMembersManuallyDescription": "Πρόσκληση νέων μελών στο {{productName}} προσωπικά μέσω email",
+  "InviteMembersSearchPlaceholder": "Πρόσκληση μελών μέσω email",
   "InviteToRoomManuallyInfo": "Προσθέστε τις υπάρχουσες επαφές {{productName}}. Ή προσκαλέστε νέους χρήστες προσωπικά μέσω email. Οι νέοι χρήστες θα προστεθούν στη λίστα επισκεπτών σας.",
   "InviteToRoomSearchPlaceholder": "Αναζητήστε και προσκαλέστε με βάση το όνομα ή το email",
   "InviteViaLink": "Πρόσκληση μέσω συνδέσμου",

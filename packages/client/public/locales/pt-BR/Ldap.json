@@ -71,6 +71,5 @@
   "LdapUserFilterTooltip": "Utilize o filtro LDAP de pesquisa para selecionar os usuários que devem ser importados.",
   "LdapUserQuotaTooltip": "Para definir uma cota de armazenamento para o usuário, adicione um atributo no diretório LDAP (por exemplo, UsersQuotaLimit) e insira um valor inteiro para esse atributo. Ele exibirá o valor da cota em bytes. Aqui, especifique apenas o nome do atributo. Esse atributo será aplicado apenas durante a primeira configuração e pode ser alterado manualmente na seção {{contactsName}}.",
   "LdapUsersType": "Tipo de usuário",
-  "LdapUsersTypeInfo": "Os usuários só podem acessar as salas para as quais foram convidados pelos administradores e não podem criar salas, pastas ou arquivos próprios. Selecione outro tipo abaixo para fornecer mais permissões. Caso contrário, você pode alterar o tipo manualmente na seção {{contactsName}}.",
   "LdapUserTypeTooltip": "Todos os usuários serão adicionados ao {{productName}} com o tipo selecionado."
 }

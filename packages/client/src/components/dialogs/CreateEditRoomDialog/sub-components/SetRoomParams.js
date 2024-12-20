@@ -29,33 +29,28 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import RoomTypeDropdown from "./RoomTypeDropdown";
-import TagInput from "./TagInput";
+import { RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
+import { isMobile, mobile } from "@docspace/shared/utils";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 import RoomType from "@docspace/shared/components/room-type";
-import PermanentSettings from "./PermanentSettings";
-import InputParam from "./Params/InputParam";
-import ThirdPartyStorage from "./ThirdPartyStorage";
-// import IsPrivateParam from "./IsPrivateParam";
-
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
-import ItemIcon from "@docspace/client/src/components/ItemIcon";
-
-import ChangeRoomOwner from "./ChangeRoomOwner";
-import RoomQuota from "./RoomQuota";
-import { RoomsType } from "@docspace/shared/enums";
-
-import { isMobile, mobile } from "@docspace/shared/utils";
-import { isMobileOnly } from "react-device-detect";
-
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { globalColors } from "@docspace/shared/themes";
+import ItemIcon from "../../../ItemIcon";
+import withLoader from "../../../../HOCs/withLoader";
+import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+
+import TagInput from "./TagInput";
+import RoomQuota from "./RoomQuota";
+import InputParam from "./Params/InputParam";
+import ChangeRoomOwner from "./ChangeRoomOwner";
+import RoomTypeDropdown from "./RoomTypeDropdown";
+import PermanentSettings from "./PermanentSettings";
+import ThirdPartyStorage from "./ThirdPartyStorage";
+// import IsPrivateParam from "./IsPrivateParam";
 
 const StyledSetRoomParams = styled.div`
   display: flex;

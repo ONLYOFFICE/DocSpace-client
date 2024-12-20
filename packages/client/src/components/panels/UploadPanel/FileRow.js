@@ -278,6 +278,7 @@ class FileRow extends Component {
       downloadInCurrentTab,
       isPlugin,
       onPluginClick,
+      theme,
     } = this.props;
 
     const { showPasswordInput, password, passwordValid } = this.state;

@@ -35,8 +35,11 @@ import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import {
+  size,
+  saveToSessionStorage,
+  getFromSessionStorage,
+} from "@docspace/shared/utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 

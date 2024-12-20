@@ -116,6 +116,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
     option: TOption,
     event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
   ) => {
+    if (option.isSeparator) return;
+
     const { onSelect, setIsOpenItemAccess } = props;
 
     setSelectedOption({ ...option });
@@ -180,6 +182,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     withLabel = true,
     displayArrow,
     topSpace,
+    usePortalBackdrop,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -335,6 +338,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
           topSpace={topSpace}
+          usePortalBackdrop={usePortalBackdrop}
         >
           {dropDownBody}
         </DropDown>

@@ -89,11 +89,12 @@ class RoomsModule extends React.Component {
         <div className="manual-backup_folder-input">
           <FilesSelectorInput
             onSelectFolder={this.onSelectFolder}
-            {...(selectedFolder && { id: selectedFolder })}
+            {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
             withoutInitPath={!selectedFolder}
             isDisabled={isModuleDisabled}
             isRoomBackup
             isSelectFolder
+            withCreate
           />
         </div>
         <div className="manual-backup_buttons">

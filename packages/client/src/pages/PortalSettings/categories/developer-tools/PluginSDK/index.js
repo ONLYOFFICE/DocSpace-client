@@ -124,7 +124,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight={"20px"}
       >
-        {t("PluginSDKDescription")}
+        {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
       </Text>
       <Text
         className={"description"}
@@ -132,7 +132,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight={"20px"}
       >
-        {t("PluginSDKInstruction", { productName: t("Common:ProductName") })}
+        {t("PluginSDKInstruction")}
       </Text>
       <Button
         className={"read-instructions-button"}

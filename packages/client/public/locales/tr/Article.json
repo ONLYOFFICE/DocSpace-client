@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Yüklenmeyen dosyalar: {{count}}",
   "FilesUploaded": "Dosya Yüklendi",
   "Upload": "Yükle",
   "UploadFiles": "Dosya yükle",

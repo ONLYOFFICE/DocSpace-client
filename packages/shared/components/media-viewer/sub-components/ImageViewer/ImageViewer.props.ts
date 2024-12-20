@@ -32,13 +32,14 @@ import type { DevicesType } from "../../MediaViewer.types";
 interface ImageViewerProps {
   src?: string;
   thumbnailSrc?: string;
-  isTiff?: boolean;
+  isDecodedImage?: boolean;
   imageId: number;
   version: number;
   errorTitle: string;
   isFistImage: boolean;
   isLastImage: boolean;
   panelVisible: boolean;
+  backgroundBlack: boolean;
   isPublicFile?: boolean;
   mobileDetails: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
@@ -47,6 +48,7 @@ interface ImageViewerProps {
   onPrev?: VoidFunction;
   onNext?: VoidFunction;
   onMask?: VoidFunction;
+  setBackgroundBlack: Dispatch<SetStateAction<boolean>>;
   contextModel: (isError?: boolean) => ContextMenuModel[];
   resetToolbarVisibleTimer: VoidFunction;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;

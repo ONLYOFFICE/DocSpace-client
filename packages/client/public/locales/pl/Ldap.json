@@ -8,6 +8,7 @@
   "LdapAutoSyncToggleDescription": "Synchronizacja umożliwia przesyłanie wszystkich danych z portalu i aktualizację  nowych danych po zmianie ustawień. Synchronizuj za każdym razem, gdy masz nowe dane na temat użytkowników w portalu.",
   "LdapAvatar": "Zdjęcie profilowe",
   "LdapCertificateConfirm": "Potwierdź certyfikat",
+  "LdapConnectionType": "Typ połączenia",
   "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "Zadbaj o bezpieczeństwo i poufność ruchu LDAP za pomocą Secure Sockets Layer (SSL)",
   "LdapConnectionTypeStartTls": "StartTLS",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Użyj filtru wyszukiwania LDAP, aby wybrać użytkowników, którzy mają zostać zaimportowani.",
   "LdapUserQuotaTooltip": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla danego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Dany atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach {{contactsName}}.",
   "LdapUsersType": "Typ użytkowników",
-  "LdapUsersTypeInfo": "Użytkownicy mają dostęp wyłącznie do pokoi, do których zostali zaproszeni przez administratorów i nie mogą tworzyć własnych pokoi, katalogów ani plików. Wybierz inny typ poniżej, aby zapewnić więcej uprawnień. W przeciwnym razie możesz zmienić typ ręcznie w sekcji {{contactsName}}.",
   "LdapUserTypeTooltip": "Wszyscy użytkownicy zostaną dodani do {{productName}} z wybranym typem."
 }

@@ -3,6 +3,8 @@
   "EmailErrorMessage": "O Endereço de email não é válido. Pode editar o email ao clicar duas vezes sobre ele.",
   "GroupMaxAvailableRoleWarning": "Grupos podem ser adicionados a uma sala com a função {{roleName}} no máximo. No entanto, você pode alterar a função de usuários individuais no grupo após ele ter sido adicionado com êxito.",
   "InvitationLanguage": "Idioma do convite",
+  "InviteMembersManuallyDescription": "Convide novos membros para {{productName}} pessoalmente por e-mail",
+  "InviteMembersSearchPlaceholder": "Convide membros por e-mail",
   "InviteToRoomManuallyInfo": "Adicione contatos {{productName}} existentes. Ou convide novos usuários pessoalmente por e-mail. Novos usuários serão adicionados à sua lista de convidados.",
   "InviteToRoomSearchPlaceholder": "Pesquisar e convidar por nome ou e-mail",
   "InviteViaLink": "Convidar através de uma hiperligação",

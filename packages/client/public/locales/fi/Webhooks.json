@@ -35,7 +35,6 @@
   "SecretKey": "Secret key",
   "SecretKeyHint": "Webhookin secretin asettaminen mahdollistaa URL:ään lähetettyjen pyyntöjen varmentamisen.",
   "SecretKeyWarning": "Et voi korvata secret keytä, kun se on tallennettu. Jos olet hukannut tai unohtanut tämän secret keyn, voit nollata sen, mutta kaikki tätä käyttävät integraatiot pitää myös päivittää. ",
-  "SelectDate": "Valitse päivä",
   "SelectDeliveryTime": "Valitse toimitusaika",
   "SettingsWebhook": "Webhook-asetukset",
   "SSLHint": "Varmennamme SSL-sertifikaatit oletuksena tietosisältöjä toimitettaessa. ",

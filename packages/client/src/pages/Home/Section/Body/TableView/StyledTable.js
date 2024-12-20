@@ -206,7 +206,6 @@ const StyledTableRow = styled(TableRow)`
 
     ${(props) =>
       props.inProgress &&
-      !props.isFolder &&
       css`
         pointer-events: none;
         /* cursor: wait; */
@@ -217,6 +216,14 @@ const StyledTableRow = styled(TableRow)`
       css`
         z-index: 1;
         border-color: ${globalColors.lightSecondMain} !important;
+      `}
+  }
+
+  .context-menu-container {
+    ${(props) =>
+      props.inProgress &&
+      css`
+        pointer-events: none;
       `}
   }
 

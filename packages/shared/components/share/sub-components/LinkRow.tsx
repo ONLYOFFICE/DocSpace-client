@@ -32,7 +32,7 @@ import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
-import { classNames, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -184,7 +184,16 @@ const LinkRow = ({
             ) : (
               <Text className="link-options_title">{shareOption?.label}</Text>
             )}
-            {!isPrimaryLink && (
+            {isPrimaryLink ? (
+              <Text
+                fontSize="12px"
+                fontWeight="400"
+                lineHeight="16px"
+                className="link-time-info"
+              >
+                {t("Common:NoTimeLimit")}
+              </Text>
+            ) : (
               <ExpiredComboBox
                 link={link}
                 availableExternalRights={availableExternalRights}
@@ -220,9 +229,12 @@ const LinkRow = ({
                     type="onlyIcon"
                     manualWidth="300px"
                     isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                    withBlur={isMobileViewLink}
                     isMobileView={isMobileViewLink}
                     fixedDirection={isMobileViewLink}
+                    isAside={isMobileViewLink}
                     topSpace={16}
+                    usePortalBackdrop={isMobileViewLink}
                   />
                 )}
                 {!isArchiveFolder && (

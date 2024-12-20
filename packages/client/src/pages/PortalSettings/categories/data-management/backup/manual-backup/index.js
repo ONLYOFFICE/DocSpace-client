@@ -195,7 +195,7 @@ class ManualBackup extends React.Component {
     const name = e.target.name;
     newStateObj[name] = true;
     const newState = this.switches.filter((el) => el !== name);
-    newState.forEach((name) => (newStateObj[name] = false));
+    newState.forEach((key) => (newStateObj[key] = false));
     this.setState({
       ...newStateObj,
     });
@@ -216,7 +216,6 @@ class ManualBackup extends React.Component {
       clearLocalStorage,
       setTemporaryLink,
       getStorageParams,
-      saveToLocalStorage,
     } = this.props;
 
     clearLocalStorage();
@@ -441,7 +440,6 @@ export default inject(
       getStorageParams,
       setThirdPartyStorage,
       setStorageRegions,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
       isBackupProgressVisible,
     } = backup;
@@ -469,7 +467,6 @@ export default inject(
       getStorageParams,
       rootFoldersTitles,
       fetchTreeFolders,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
 
       dataBackupUrl,

@@ -267,7 +267,6 @@ const SectionHeaderContent = (props) => {
   };
 
   const removeAdmins = () => {
-    const { removeAdmins } = props;
     if (!removeAdmins) return;
     removeAdmins();
   };

@@ -185,7 +185,7 @@ const Manager = (props) => {
 
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
+          const { title, requestToken } = link.sharedTo;
           const linkSettings = [];
 
           if ("password" in link.sharedTo) {
@@ -199,7 +199,7 @@ const Manager = (props) => {
           }
 
           return {
-            key: id,
+            key: link.sharedTo.id,
             label: title,
             requestToken,
             settings: linkSettings,
@@ -217,79 +217,85 @@ const Manager = (props) => {
       setSharedLinks(null);
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 
   const onChangeSharedLink = (link) => {
     setSelectedLink(link);
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const onChangeSortBy = (item) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, sortby: item.key } };
+    setConfig((oldConfig) => {
+      return {
+        ...oldConfig,
+        filter: { ...oldConfig.filter, sortby: item.key },
+      };
     });
 
     setSortBy(item);
   };
 
   const onChangeSortOrder = (item) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, sortorder: item.key } };
+    setConfig((oldConfig) => {
+      return {
+        ...oldConfig,
+        filter: { ...oldConfig.filter, sortorder: item.key },
+      };
     });
 
     setSortOrder(item);
   };
 
   const onChangeShowHeader = () => {
-    setConfig((config) => {
-      return { ...config, showHeader: !config.showHeader };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showHeader: !config.showHeader };
     });
   };
 
   const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showTitle: !config.showTitle };
     });
   };
 
   const toggleShowSettings = () => {
-    setConfig((config) => {
-      return { ...config, showSettings: !config.showSettings };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showSettings: !config.showSettings };
     });
   };
 
   const toggleActionButton = () => {
-    setConfig((config) => {
-      return { ...config, disableActionButton: !config.disableActionButton };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, disableActionButton: !config.disableActionButton };
     });
   };
 
   const onChangeShowMenu = () => {
-    setConfig((config) => {
-      return { ...config, showMenu: !config.showMenu };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showMenu: !config.showMenu };
     });
   };
 
   const onChangeShowFilter = () => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showFilter: !config.showFilter };
     });
   };
 
   const changeColumnsOption = (e) => {
     if (e.target.value === "default") {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: "Index,Name,Type,Tags",
       }));
     } else if (e.target.value === "custom") {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: selectedColumns.map((column) => column.key).join(","),
       }));
     }
@@ -301,8 +307,8 @@ const Manager = (props) => {
       prevColumnsOptions.filter((column) => column.key !== option.key),
     );
     if (!selectedColumns.find((column) => column.key === option.key)) {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: [...selectedColumns, option]
           .map((column) => column.key)
           .join(","),
@@ -319,8 +325,8 @@ const Manager = (props) => {
     const filteredColumns = selectedColumns.filter(
       (column) => column.key !== option.key,
     );
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
     }));
     setSelectedColumns(filteredColumns);

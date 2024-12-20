@@ -242,7 +242,7 @@ const Appearance = (props) => {
   useEffect(() => {
     onColorCheck(appearanceTheme);
 
-    if (appearanceTheme.find((theme) => theme.id == selectThemeId)?.name) {
+    if (appearanceTheme.find((aTheme) => aTheme.id == selectThemeId)?.name) {
       setIsDisabledEditButton(true);
       setIsDisabledDeleteButton(true);
       return;
@@ -293,10 +293,9 @@ const Appearance = (props) => {
 
   const onColorCheck = useCallback(
     (themes) => {
-      const colorCheckImg = themes.find((theme) => theme.id == selectThemeId)
-        ?.text?.accent;
+      const img = themes.find((item) => item.id == selectThemeId)?.text?.accent;
 
-      setColorCheckImg(colorCheckImg);
+      setColorCheckImg(img);
     },
     [selectThemeId],
   );
@@ -306,19 +305,19 @@ const Appearance = (props) => {
       const id = e.target.id;
       if (!id) return;
 
-      const colorCheckImg = appearanceTheme.find((theme) => theme.id == id).text
+      const img = appearanceTheme.find((aTheme) => aTheme.id == id).text
         ?.accent;
 
-      setColorCheckImgHover(colorCheckImg);
+      setColorCheckImgHover(img);
     },
     [appearanceTheme],
   );
 
   const onColorSelection = useCallback(
     (e) => {
-      const theme = e.currentTarget;
-      const id = +theme.id;
-      const accent = appearanceTheme.find((theme) => theme.id == id).main
+      const currentTheme = e.currentTarget;
+      const id = +currentTheme.id;
+      const accent = appearanceTheme.find((aTheme) => aTheme.id == id).main
         ?.accent;
 
       setPreviewAccent(accent);
@@ -490,9 +489,9 @@ const Appearance = (props) => {
   );
 
   const onSaveNewThemes = useCallback(
-    async (theme) => {
+    async (newTheme) => {
       try {
-        await api.settings.sendAppearanceTheme({ theme });
+        await api.settings.sendAppearanceTheme({ theme: newTheme });
         await getAppearanceTheme();
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
@@ -524,7 +523,7 @@ const Appearance = (props) => {
 
     if (isAddThemeDialog) {
       // Saving a new custom theme
-      const theme = {
+      const newTheme = {
         main: {
           accent: currentColorAccent,
           buttons: currentColorButtons,
@@ -535,7 +534,7 @@ const Appearance = (props) => {
         },
       };
 
-      onSaveNewThemes(theme);
+      onSaveNewThemes(newTheme);
 
       setCurrentColorAccent(null);
       setCurrentColorButtons(null);

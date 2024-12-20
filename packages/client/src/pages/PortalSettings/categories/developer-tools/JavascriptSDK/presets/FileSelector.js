@@ -188,10 +188,10 @@ const FileSelector = (props) => {
 
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
+          const { title, requestToken } = link.sharedTo;
 
           return {
-            key: id,
+            key: link.sharedTo.id,
             label: title,
             requestToken,
           };
@@ -206,22 +206,22 @@ const FileSelector = (props) => {
       setSharedLinks(null);
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 
   const onChangeSharedLink = (link) => {
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const changeColumnsOption = (e) => {
     setTypeDisplay(e.target.value);
-    setConfig((config) => {
+    setConfig((oldConfig) => {
       return {
-        ...config,
+        ...oldConfig,
         filterParam:
           e.target.value === "SelectorTypes"
             ? selectedType.key
@@ -232,17 +232,23 @@ const FileSelector = (props) => {
 
   const onTypeSelect = (option) => {
     setSelectedType(option);
-    setConfig((config) => {
-      return { ...config, filterParam: option.key };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, filterParam: option.key };
     });
   };
 
   const toggleWithSearch = () => {
-    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSearch: !config.withSearch,
+    }));
   };
 
   const toggleWithSubtitle = () => {
-    setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSubtitle: !config.withSubtitle,
+    }));
   };
 
   const preview = (

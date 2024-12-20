@@ -37,10 +37,10 @@ export const SearchTerm = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.filter.filterValue);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
+    debounce((newValue) => {
       setConfig((oldConfig) => ({
         ...oldConfig,
-        filter: { ...oldConfig.filter, filterValue: value },
+        filter: { ...oldConfig.filter, filterValue: newValue },
       }));
     }, 500),
     [setConfig],

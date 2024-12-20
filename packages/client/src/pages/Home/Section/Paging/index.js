@@ -236,26 +236,24 @@ const SectionPagingContent = ({
 
   const pageItems = useMemo(() => {
     if (isAccountsPage) {
-      const totalPages = Math.ceil(
-        accountsFilter.total / accountsFilter.pageCount,
-      );
-      return [...Array(totalPages).keys()].map((item) => {
+      const total = Math.ceil(accountsFilter.total / accountsFilter.pageCount);
+      return [...Array(total).keys()].map((item) => {
         return {
           key: item,
           label: t("Common:PageOfTotalPage", {
             page: item + 1,
-            totalPage: totalPages,
+            totalPage: total,
           }),
         };
       });
     }
     if (filter.total < filter.pageCount) return [];
-    return [...Array(totalPages).keys()].map((item) => {
+    return [...Array(total).keys()].map((item) => {
       return {
         key: item,
         label: t("Common:PageOfTotalPage", {
           page: item + 1,
-          totalPage: totalPages,
+          totalPage: total,
         }),
       };
     });

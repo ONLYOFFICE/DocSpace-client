@@ -55,16 +55,13 @@ const LoaderSectionHeader = () => {
   const levelSettings = window.location.pathname.split("/").length - 1;
 
   const checkInnerWidth = () => {
-    const isTabletView = isTablet();
-
-    const isDesktopView = isDesktop();
-    if (isTabletView) {
+    if (isTablet()) {
       setIsTabletView(true);
     } else {
       setIsTabletView(false);
     }
 
-    if (isDesktopView) {
+    if (isDesktop()) {
       setIsDesktopView(true);
     } else {
       setIsDesktopView(false);

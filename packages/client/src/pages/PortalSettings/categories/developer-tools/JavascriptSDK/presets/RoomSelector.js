@@ -144,11 +144,14 @@ const RoomSelector = (props) => {
 
   const changeRoomType = (option) => {
     setRoomType(option);
-    setConfig((config) => ({ ...config, roomType: option.roomType }));
+    setConfig((oldConfig) => ({ ...oldConfig, roomType: option.roomType }));
   };
 
   const toggleWithSearch = () => {
-    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSearch: !config.withSearch,
+    }));
   };
 
   const preview = (

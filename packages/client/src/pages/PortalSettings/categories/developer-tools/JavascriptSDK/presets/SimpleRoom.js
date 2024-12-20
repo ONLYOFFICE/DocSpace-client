@@ -168,27 +168,27 @@ const SimpleRoom = (props) => {
     newConfig.requestToken = links[0].sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
 
-    setConfig((config) => {
-      return { ...config, ...newConfig, init: true };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig, init: true };
     });
   };
 
   const onChangeSharedLink = (link) => {
     setSelectedLink(link);
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showTitle: !config.showTitle };
     });
   };
 
   const onChangeShowFilter = () => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showFilter: !config.showFilter };
     });
   };
 

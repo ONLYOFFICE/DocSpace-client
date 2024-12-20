@@ -200,10 +200,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
   const onFilterSelect = (option) => {
     setFilterBy(option);
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       filter: {
-        ...config.filter,
+        ...oldConfig.filter,
         filterType: option.typeKey,
       },
     }));
@@ -284,12 +284,12 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       setAuthor("");
       setUsersList([]);
       setSelectedUser(displayName);
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         filter:
-          "id" in config
-            ? { ...config.filter, authorType: `user_${item.id}` }
-            : { ...config.filter, subjectId: item.id },
+          "id" in oldConfig
+            ? { ...oldConfig.filter, authorType: `user_${item.id}` }
+            : { ...oldConfig.filter, subjectId: item.id },
       }));
     };
 
@@ -316,7 +316,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     return () => {
       const filtered = { ...config.filter };
       delete filtered[filterProperty];
-      setConfig((config) => ({ ...config, filter: filtered }));
+      setConfig((oldConfig) => ({ ...oldConfig, filter: filtered }));
     };
   };
 
@@ -345,19 +345,19 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const toggleType = toggleConstructor(clearType, setIsTypeFilterSet);
 
   const toggleSubjectFilter = (e) => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       filter: {
-        ...config.filter,
+        ...oldConfig.filter,
         subjectFilter: e.target.checked ? 0 : 1,
       },
     }));
   };
 
   const selectRoomType = (option) => {
-    setConfig((config) => ({
-      ...config,
-      filter: { ...config.filter, type: option.roomType },
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      filter: { ...oldConfig.filter, type: option.roomType },
     }));
     setSelectedType(option.label);
   };

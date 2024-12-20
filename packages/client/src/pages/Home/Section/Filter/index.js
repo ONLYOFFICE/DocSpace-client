@@ -269,11 +269,11 @@ const SectionFilterContent = ({
     isDefaultRoomsQuotaSet,
   });
 
-  const onNavigate = (path, filter) => {
+  const onNavigate = (path, newFilter) => {
     if (isPublicRoom) {
-      navigate(`${path}?key=${publicRoomKey}&${filter.toUrlParams()}`);
+      navigate(`${path}?key=${publicRoomKey}&${newFilter.toUrlParams()}`);
     } else {
-      navigate(`${path}/filter?${filter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
     }
   };
 

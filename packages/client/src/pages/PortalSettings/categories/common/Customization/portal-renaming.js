@@ -66,7 +66,7 @@ const PortalRenamingComponent = (props) => {
 
   const navigate = useNavigate();
 
-  const portalNameFromSessionStorage = getFromSessionStorage("portalName");
+  let portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
   const portalNameDefaultFromSessionStorage =
     getFromSessionStorage("portalNameDefault");
@@ -175,7 +175,7 @@ const PortalRenamingComponent = (props) => {
   };
 
   const onCancelPortalName = () => {
-    const portalNameFromSessionStorage = getFromSessionStorage("portalName");
+    portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
     saveToSessionStorage("errorValue", null);
 

@@ -108,8 +108,8 @@ const Editor = (props) => {
       newConfig.requestToken = requestToken;
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 

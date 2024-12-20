@@ -81,7 +81,7 @@ const DirectThirdPartyConnection = (props) => {
   } = props;
 
   const [state, setState] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
+    (oldState, newState) => ({ ...oldState, ...newState }),
     initialState,
   );
 
@@ -174,7 +174,7 @@ const DirectThirdPartyConnection = (props) => {
   const onSelectAccount = (event) => {
     const data = event.currentTarget.dataset;
 
-    const account = accounts.find((t) => t.key === data.thirdPartyKey);
+    const account = accounts.find((a) => a.key === data.thirdPartyKey);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({

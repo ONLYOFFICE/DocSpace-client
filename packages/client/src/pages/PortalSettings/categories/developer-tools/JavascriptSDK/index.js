@@ -145,11 +145,11 @@ const PortalIntegration = (props) => {
   };
 
   useEffect(() => {
-    const observer = new ResizeObserver(onResize);
+    const rObserver = new ResizeObserver(onResize);
     const content = document.querySelector(".section-wrapper-content");
-    observer.observe(content);
+    rObserver.observe(content);
     return () => {
-      observer.unobserve(content);
+      rObserver.unobserve(content);
     };
   }, []);
 

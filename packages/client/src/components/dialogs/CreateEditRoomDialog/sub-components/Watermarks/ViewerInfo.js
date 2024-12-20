@@ -176,11 +176,11 @@ const ViewerInfoWatermark = ({
 
     elementsData[key] = !elementsData[item.id];
 
-    Object.keys(elementsData).forEach((key) => {
-      const value = elementsData[key];
+    Object.keys(elementsData).forEach((k) => {
+      const value = elementsData[k];
 
       if (value) {
-        flagsCount += WatermarkAdditions[key];
+        flagsCount += WatermarkAdditions[k];
       }
     });
 

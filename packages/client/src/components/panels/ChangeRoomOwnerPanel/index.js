@@ -105,7 +105,7 @@ const ChangeRoomOwner = (props) => {
   };
 
   const onBackClick = () => {
-    onClosePanel();
+    handleClosePanel();
   };
 
   const filter = useMemo(() => {

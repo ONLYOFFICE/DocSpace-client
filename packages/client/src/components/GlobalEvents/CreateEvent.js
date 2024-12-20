@@ -124,9 +124,9 @@ const CreateEvent = ({
         .then(() => {
           if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
         })
-        .catch((e) => {
-          isPaymentRequiredError(e);
-          toastr.error(e);
+        .catch((err) => {
+          isPaymentRequiredError(err);
+          toastr.error(err);
         })
         .finally(() => {
           const folderIds = [+id];

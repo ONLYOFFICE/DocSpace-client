@@ -58,8 +58,8 @@ const ChangeQuotaEvent = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState();
 
-  const onSetQuotaBytesSize = (size) => {
-    setSize(size);
+  const onSetQuotaBytesSize = (value) => {
+    setSize(value);
   };
 
   const updateFunction = (size) => {

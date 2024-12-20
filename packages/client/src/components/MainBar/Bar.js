@@ -216,7 +216,7 @@ const Bar = (props) => {
   const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
-      .filter((bar) => bar.length > 0);
+      .filter((elm) => elm.length > 0);
 
     const closed = JSON.parse(localStorage.getItem("barClose"));
 
@@ -292,10 +292,10 @@ const Bar = (props) => {
     }
 
     try {
-      const [htmlUrl, campaigns] = await loadLanguagePath();
+      const [htmlUrl, currentBar] = await loadLanguagePath();
 
       setHtmlLink(htmlUrl);
-      setCampaigns(campaigns);
+      setCampaigns(currentBar);
     } catch (e) {
       updateBanner();
     }

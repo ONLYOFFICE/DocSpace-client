@@ -78,13 +78,13 @@ const OnePasswordRow = ({
   const { t } = useTranslation(["DownloadDialog", "Files", "Common"]);
   const inputRef = useRef(null);
 
-  const onChangePassword = (password) => {
-    setPassword(password);
+  const onChangePassword = (pwd) => {
+    setPassword(pwd);
   };
 
   const updateDownloadItem = (fileId, updates) => {
     const files = [...downloadItems];
-    const itemToUpdate = files.find((item) => item.id === fileId);
+    const itemToUpdate = files.find((f) => f.id === fileId);
     Object.assign(itemToUpdate, updates);
     return files;
   };
@@ -106,7 +106,7 @@ const OnePasswordRow = ({
   const onRemoveFromDowload = () => {
     const fileId = item.id;
 
-    const files = downloadItems.filter((item) => item.id !== fileId);
+    const files = downloadItems.filter((f) => f.id !== fileId);
     if (!files.length) {
       onClosePanel();
       return;

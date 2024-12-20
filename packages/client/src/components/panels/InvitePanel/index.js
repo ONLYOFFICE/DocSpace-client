@@ -63,7 +63,7 @@ const InvitePanel = ({
   setInviteItems,
   setInvitePanelOptions,
   t,
-  visible,
+  isVisible,
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
@@ -124,8 +124,8 @@ const InvitePanel = ({
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const onChangeExternalLinksVisible = (visible) => {
-    setExternalLinksVisible(visible);
+  const onChangeExternalLinksVisible = (isVisible) => {
+    setExternalLinksVisible(isVisible);
   };
 
   const accessModel = [
@@ -176,7 +176,7 @@ const InvitePanel = ({
         if (link) {
           const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-          const activeLink = {
+          const newLink = {
             id,
             title,
             shareLink,
@@ -186,8 +186,8 @@ const InvitePanel = ({
 
           onChangeExternalLinksVisible(!!links.length);
 
-          setShareLinks([activeLink]);
-          setActiveLink(activeLink);
+          setShareLinks([newLink]);
+          setActiveLink(newLink);
         }
       });
   };
@@ -218,9 +218,11 @@ const InvitePanel = ({
   }, [roomId]);
 
   useEffect(() => {
-    const hasErrors = inviteItems.some((item) => !!item.errors?.length);
+    const hasValidationErrors = () => {
+      return inviteItems.some((item) => !!item.errors?.length);
+    };
 
-    setHasErrors(hasErrors);
+    setHasErrors(hasValidationErrors());
   }, [inviteItems]);
 
   useEffect(() => {
@@ -499,7 +501,7 @@ const InvitePanel = ({
 
   return (
     <ModalDialog
-      visible={visible}
+      visible={isVisible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector && addUsersPanelVisible}
@@ -616,7 +618,7 @@ export default inject(
       setInviteItems,
       setInvitePanelOptions,
       theme,
-      visible: invitePanelOptions.visible,
+      isVisible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
       setInfoPanelIsMobileHidden,

@@ -24,41 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  RackspaceSettings,
+  formNames,
+} from "@docspace/shared/components/rackspace-settings";
+import type { RackspaceStorageProps } from "./RackspaceStorage.types";
 
-class RackspaceStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { setCompletedFormFields } = this.props;
+const RackspaceStorage = ({
+  isLoading,
+  formSettings,
+  errorsFieldsBeforeSafe,
+  setCompletedFormFields,
+  addValueInFormSettings,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  selectedStorage,
+}: RackspaceStorageProps) => {
+  const { t } = useTranslation("Settings");
 
+  useEffect(() => {
     setCompletedFormFields({
-      ...RackspaceSettings.formNames(),
+      ...formNames(),
       filePath: "",
     });
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { t, selectedStorage } = this.props;
+  return (
+    <RackspaceSettings
+      t={t}
+      isNeedFilePath
+      isLoading={isLoading}
+      isLoadingData={false}
+      formSettings={formSettings}
+      selectedStorage={selectedStorage}
+      errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+      addValueInFormSettings={addValueInFormSettings}
+      setRequiredFormSettings={setRequiredFormSettings}
+      setIsThirdStorageChanged={setIsThirdStorageChanged}
+    />
+  );
+};
 
-    return (
-      <>
-        <RackspaceSettings
-          t={t}
-          selectedStorage={selectedStorage}
-          isNeedFilePath
-        />
-      </>
-    );
-  }
-}
+export default RackspaceStorage;
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields } = backup;
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields } = backup;
 
-  return {
-    setCompletedFormFields,
-  };
-})(observer(withTranslation("Settings")(RackspaceStorage)));
+//   return {
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation("Settings")(RackspaceStorage)));

@@ -23,6 +23,4 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { default as RackspaceSettings } from "./RackspaceSettings";
-export { formNames } from "./RackspaceSettings.helper";
-export type { RackspaceSettingsProps } from "./RackspaceSettings.types";
+export { default as RackspaceStorage } from "./RackspaceStorage";

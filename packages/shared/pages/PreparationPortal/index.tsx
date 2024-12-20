@@ -72,7 +72,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
         setMessage(error);
         return;
       }
-      console.log("getRecoveryProgress progress", progress);
+
       setPercent(progress);
 
       if (progress === 100) {

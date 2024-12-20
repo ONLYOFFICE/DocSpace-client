@@ -152,12 +152,12 @@ const ArticleBodyContent = (props) => {
           break;
         }
         default: {
-          const roomsFilter = RoomsFilter.getDefault(
+          const newRoomsFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Active,
           );
-          roomsFilter.searchArea = RoomSearchArea.Active;
-          params = roomsFilter.toUrlParams(userId, true);
+          newRoomsFilter.searchArea = RoomSearchArea.Active;
+          params = newRoomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
 
           break;
@@ -182,8 +182,6 @@ const ArticleBodyContent = (props) => {
   const onClick = React.useCallback(
     (e, folderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
-
-      const { toggleArticleOpen } = props;
 
       const isAccountsClick = folderId === "accounts";
 

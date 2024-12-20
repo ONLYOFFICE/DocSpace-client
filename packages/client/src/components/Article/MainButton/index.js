@@ -262,9 +262,9 @@ const ArticleMainButtonContent = (props) => {
 
   const onUploadFileClick = React.useCallback(() => {
     if (isPrivacy) {
-      encryptionUploadDialog((encryptedFile, encrypted) => {
-        encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t); // TODO: createFoldersTree
+      encryptionUploadDialog((f, isEncrypted) => {
+        f.encrypted = isEncrypted;
+        startUpload([f], null, t); // TODO: createFoldersTree
       });
     } else {
       inputFilesElement.current.click();
@@ -322,7 +322,7 @@ const ArticleMainButtonContent = (props) => {
   ]);
 
   const createActionsForFormRoom = React.useCallback(
-    (actions) => {
+    (actionList) => {
       const {
         formGallery,
         // uploadActions,
@@ -332,7 +332,7 @@ const ArticleMainButtonContent = (props) => {
         // createTemplateBlankDocxf,
         // createNewPresentationPptx,
         // createNewSpreadsheetXlsx,
-      } = actions;
+      } = actionList;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -459,10 +459,10 @@ const ArticleMainButtonContent = (props) => {
     if (isRoomsFolder || isSettingsPage) return;
 
     if (isAccountsPage) {
-      const model = getContactsModel(t);
+      const contactsModel = getContactsModel(t);
 
-      setModel(model);
-      setActions(model);
+      setModel(contactsModel);
+      setActions(contactsModel);
 
       return;
     }
@@ -547,7 +547,7 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
-    const uploadActions = [
+    const newUploadActions = [
       {
         id: "actions_upload-files",
         className: "main-button_drop-down",
@@ -559,7 +559,7 @@ const ArticleMainButtonContent = (props) => {
     ];
 
     if (!(isMobile || isTablet)) {
-      uploadActions.push({
+      newUploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
@@ -577,7 +577,7 @@ const ArticleMainButtonContent = (props) => {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
-          uploadActions,
+          newUploadActions,
           // createNewFolder,
           // showSelectorFormRoomDocx,
           // createNewDocumentDocx,
@@ -606,7 +606,7 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const actions = [
+    const newActions = [
       createNewDocumentDocx,
       createNewSpreadsheetXlsx,
       createNewPresentationPptx,
@@ -625,7 +625,7 @@ const ArticleMainButtonContent = (props) => {
       //   items: pluginItems,
       // });
 
-      actions.push({
+      newActions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
         icon: PluginMoreReactSvgUrl,
@@ -636,18 +636,18 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const menuModel = [...actions];
+    const menuModel = [...newActions];
 
     menuModel.push({
       isSeparator: true,
       key: "separator",
     });
 
-    menuModel.push(...uploadActions);
-    setUploadActions(uploadActions);
+    menuModel.push(...newUploadActions);
+    setUploadActions(newUploadActions);
 
     setModel(menuModel);
-    setActions(actions);
+    setActions(newActions);
   }, [
     t,
     isPrivacy,

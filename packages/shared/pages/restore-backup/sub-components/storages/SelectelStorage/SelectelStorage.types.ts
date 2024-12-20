@@ -23,58 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import type { SelectelSettingsProps } from "@docspace/shared/components/selectel-settings";
 
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  SelectelSettings,
-  formNames,
-} from "@docspace/shared/components/selectel-settings";
-import type { SelectelStorageProps } from "./SelectelStorage.types";
-
-const SelectelStorage = ({
-  setCompletedFormFields,
-  isLoading,
-  formSettings,
-  isLoadingData,
-  errorsFieldsBeforeSafe,
-  addValueInFormSettings,
-  setIsThirdStorageChanged,
-  setRequiredFormSettings,
-  selectedStorage,
-}: SelectelStorageProps) => {
-  const { t } = useTranslation("Settings");
-
-  useEffect(() => {
-    setCompletedFormFields({
-      ...formNames(),
-      filePath: "",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <SelectelSettings
-      t={t}
-      isNeedFilePath
-      isLoading={isLoading}
-      formSettings={formSettings}
-      isLoadingData={isLoadingData}
-      selectedStorage={selectedStorage}
-      errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-      addValueInFormSettings={addValueInFormSettings}
-      setRequiredFormSettings={setRequiredFormSettings}
-      setIsThirdStorageChanged={setIsThirdStorageChanged}
-    />
-  );
-};
-
-export default SelectelStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation("Settings")(SelectelStorage)));
+export interface SelectelStorageProps
+  extends Omit<SelectelSettingsProps, "t" | "isNeedFilePath"> {
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+}

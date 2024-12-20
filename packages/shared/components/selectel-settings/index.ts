@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 export { default as SelectelSettings } from "./SelectelSettings";
 export { formNames } from "./SelectelSettings.helpers";
+export type { SelectelSettingsProps } from "./SelectelSettings.types";

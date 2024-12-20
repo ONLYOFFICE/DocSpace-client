@@ -24,22 +24,70 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getQuota, getAllPortals, getAdditionalResources } from "@/lib/actions";
+import {
+  getSettings,
+  getVersionBuild,
+  getQuota,
+  getPortalTariff,
+  getAllPortals,
+  getWhiteLabelLogos,
+  getWhiteLabelText,
+  getWhiteLabelIsDefault,
+  getAdditionalResources,
+  getCompanyInfo,
+} from "@/lib/actions";
+import { getIsDefaultWhiteLabel } from "@/lib";
 
-import { AdditionalResourcesPage } from "./page.client";
+import BrandingPage from "./page.client";
 
 async function Page() {
-  const [quota, portals, additionalResources] = await Promise.all([
+  const [
+    settings,
+    buildInfo,
+    quota,
+    portalTariff,
+    portals,
+    whiteLabelLogos,
+    whiteLabelText,
+    whiteLabelIsDefault,
+    additionalResources,
+    companyInfo,
+  ] = await Promise.all([
+    getSettings(),
+    getVersionBuild(),
     getQuota(),
+    getPortalTariff(),
     getAllPortals(),
+    getWhiteLabelLogos(),
+    getWhiteLabelText(),
+    getWhiteLabelIsDefault(),
     getAdditionalResources(),
+    getCompanyInfo(),
   ]);
 
+  const { displayAbout, standalone, licenseUrl } = settings;
+  const { enterprise } = portalTariff;
+
+  const showAbout = standalone && displayAbout;
+
+  const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
+
   return (
-    <AdditionalResourcesPage
+    <BrandingPage
+      whiteLabelLogos={whiteLabelLogos}
+      defaultWhiteLabelLogoUrls={whiteLabelLogos}
+      logoText={whiteLabelText}
+      defaultLogoText={whiteLabelText}
+      showAbout={showAbout}
+      isDefaultWhiteLabel={isDefaultWhiteLabel}
+      standalone={standalone}
       portals={portals?.tenants}
       quota={quota}
-      additionalResourcesData={additionalResources}
+      additionalResources={additionalResources}
+      companyInfo={companyInfo}
+      buildInfo={buildInfo}
+      licenseUrl={licenseUrl}
+      isEnterprise={enterprise}
     />
   );
 }

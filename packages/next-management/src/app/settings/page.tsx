@@ -24,59 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { observer } from "mobx-react";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { redirect } from "next/navigation";
 
 const Settings = () => {
-  const { t } = useTranslation(["Common", "Settings"]);
-
-  const data = [
-    {
-      id: "branding",
-      name: t("Settings:Branding"),
-      content: <p>Branding</p>,
-    },
-    {
-      id: "data-backup",
-      name: t("Settings:DataBackup"),
-      content: <p>Backup</p>,
-    },
-    {
-      id: "auto-backup",
-      name: t("Settings:AutoBackup"),
-      content: <p>Auto backup</p>,
-    },
-    {
-      id: "restore",
-      name: t("Settings:RestoreBackup"),
-      content: <p>Restore</p>,
-    },
-  ];
-
-  const onSelect = (e) => {
-    console.log("e", e);
-  };
-
-  const getCurrentTab = () => {
-    const path = window.location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
-  };
-
-  const currentTab = getCurrentTab();
-
-  return (
-    <Tabs
-      items={data}
-      selectedItemId={currentTab}
-      onSelect={(e) => onSelect(e)}
-    />
-  );
+  return redirect("/settings/branding");
 };
 
-export default observer(Settings);
+export default Settings;
 

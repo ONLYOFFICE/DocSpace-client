@@ -24,22 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getQuota, getAllPortals, getAdditionalResources } from "@/lib/actions";
+import {
+  getSettings,
+  getQuota,
+  getAllPortals,
+  getWhiteLabelLogos,
+  getWhiteLabelText,
+  getWhiteLabelIsDefault,
+} from "@/lib/actions";
+import { getIsDefaultWhiteLabel } from "@/lib";
 
-import { AdditionalResourcesPage } from "./page.client";
+import { WhiteLabelPage } from "./page.client";
 
 async function Page() {
-  const [quota, portals, additionalResources] = await Promise.all([
+  const [
+    settings,
+    quota,
+    portals,
+    whiteLabelLogos,
+    whiteLabelText,
+    whiteLabelIsDefault,
+  ] = await Promise.all([
+    getSettings(),
     getQuota(),
     getAllPortals(),
-    getAdditionalResources(),
+    getWhiteLabelLogos(),
+    getWhiteLabelText(),
+    getWhiteLabelIsDefault(),
   ]);
 
+  const { displayAbout, standalone } = settings;
+  const showAbout = standalone && displayAbout;
+
+  const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
+
   return (
-    <AdditionalResourcesPage
+    <WhiteLabelPage
+      whiteLabelLogos={whiteLabelLogos}
+      logoText={whiteLabelText}
+      defaultLogoText={whiteLabelText}
+      defaultWhiteLabelLogoUrls={whiteLabelLogos}
+      showAbout={showAbout}
+      isDefaultWhiteLabel={isDefaultWhiteLabel}
+      standalone={standalone}
       portals={portals?.tenants}
       quota={quota}
-      additionalResourcesData={additionalResources}
     />
   );
 }

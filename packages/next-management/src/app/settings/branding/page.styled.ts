@@ -24,25 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getQuota, getAllPortals, getAdditionalResources } from "@/lib/actions";
+import styled from "styled-components";
 
-import { AdditionalResourcesPage } from "./page.client";
+export const StyledBrandingPage = styled.div`
+  max-width: 700px;
+  width: 100%;
+  margin-bottom: 16px;
 
-async function Page() {
-  const [quota, portals, additionalResources] = await Promise.all([
-    getQuota(),
-    getAllPortals(),
-    getAdditionalResources(),
-  ]);
+  hr {
+    margin: 24px 0;
+    border: none;
+    border-top: ${(props) => props.theme.client.settings.separatorBorder};
+  }
 
-  return (
-    <AdditionalResourcesPage
-      portals={portals?.tenants}
-      quota={quota}
-      additionalResourcesData={additionalResources}
-    />
-  );
-}
-
-export default Page;
+  .header {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    padding-bottom: 9px;
+  }
+`;
 

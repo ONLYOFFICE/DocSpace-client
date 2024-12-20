@@ -31,54 +31,50 @@ import { useTranslation } from "react-i18next";
 import { useRouter, usePathname } from "next/navigation";
 
 import {
-  setAdditionalResources,
-  restoreAdditionalResources,
-  getAdditionalResources,
+  setWhiteLabelSettings,
+  restoreWhiteLabelSettings,
 } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
-import { AdditionalResources } from "@docspace/shared/pages/Branding/AdditionalResources";
+import { toastr } from "@docspace/shared/components/toast";
+import { WhiteLabel } from "@docspace/shared/pages/Branding/WhiteLabel";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
 
-export const AdditionalResourcesPage = ({
+export const WhiteLabelPage = ({
+  whiteLabelLogos,
+  logoText,
+  defaultLogoText,
+  defaultWhiteLabelLogoUrls,
+  showAbout,
+  isDefaultWhiteLabel,
+  standalone,
   portals,
   quota,
-  additionalResourcesData,
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const pathname = usePathname();
-  const [additionalRes, setAdditionalRes] = useState(additionalResourcesData);
-  const [isLoading, startTransition] = useTransition();
+
+  const [logoUrls, setLogoUrls] = useState(whiteLabelLogos);
+  const [isSaving, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
   const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
 
-  const { feedbackAndSupportEnabled, helpCenterEnabled, isDefault } =
-    additionalRes;
-
   useResponsiveNavigation({
     redirectUrl: "/settings/branding",
-    currentLocation: "additional-resources",
+    currentLocation: "white-label",
     deviceType: currentDeviceType,
     router: router,
     pathname: pathname,
   });
 
-  const onSave = async (feedbackEnabled: boolean, helpEnabled: boolean) => {
+  const onSave = async (data) => {
     startTransition(async () => {
       try {
-        const updatedData = {
-          ...additionalRes,
-          feedbackAndSupportEnabled: feedbackEnabled,
-          helpCenterEnabled: helpEnabled,
-        };
-        await setAdditionalResources(updatedData);
-        const additional = await getAdditionalResources();
-        setAdditionalRes(additional);
+        await setWhiteLabelSettings(data, true);
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
@@ -86,28 +82,31 @@ export const AdditionalResourcesPage = ({
     });
   };
 
-  const onRestore = async () => {
-    startTransition(async () => {
-      try {
-        await restoreAdditionalResources();
-        const additional = await getAdditionalResources();
-        setAdditionalRes(additional);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      } catch (error) {
-        toastr.error(error);
-      }
-    });
+  const onRestoreDefault = async () => {
+    try {
+      await restoreWhiteLabelSettings(true);
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   return (
-    <AdditionalResources
+    <WhiteLabel
+      logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
-      feedbackAndSupportEnabled={feedbackAndSupportEnabled}
-      helpCenterEnabled={helpCenterEnabled}
+      showAbout={showAbout}
+      showNotAvailable={!isCustomizationAvailable}
+      standalone={standalone}
       onSave={onSave}
-      onRestore={onRestore}
-      isLoading={isLoading}
-      additionalResourcesIsDefault={isDefault}
+      onRestoreDefault={onRestoreDefault}
+      isSaving={isSaving}
+      enableRestoreButton={isDefaultWhiteLabel}
+      setLogoUrls={setLogoUrls}
+      isWhiteLabelLoaded={true}
+      defaultLogoText={defaultLogoText}
+      defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
+      logoText={logoText}
     />
   );
 };

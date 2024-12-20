@@ -50,7 +50,7 @@ const PreparationPortalDialog = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>
-          <PreparationPortal withoutHeader style={{ padding: "0" }} isDialog />
+          <PreparationPortal withoutHeader isDialog />
         </StyledPreparationPortalDialog>
       </ModalDialog.Body>
     </ModalDialog>

@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 export { default as AmazonSettings } from "./AmazonSettings";
 export { formNames } from "./AmazonSettings.helpers";
+export type { AmazonSettingsProps } from "./AmazonSettings.types";

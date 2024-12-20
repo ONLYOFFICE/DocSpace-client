@@ -24,42 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-class AmazonStorage extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { setCompletedFormFields, storageRegions } = this.props;
+import {
+  AmazonSettings,
+  formNames,
+} from "@docspace/shared/components/amazon-settings";
+import type { AmazonStorageProps } from "./AmazonStorage.types";
 
+const AmazonStorage = ({
+  setCompletedFormFields,
+
+  isLoading,
+  formSettings,
+  isLoadingData,
+  defaultRegion,
+  storageRegions,
+  selectedStorage,
+  addValueInFormSettings,
+  deleteValueFormSetting,
+  errorsFieldsBeforeSafe,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+}: AmazonStorageProps) => {
+  const { t } = useTranslation("Settings");
+
+  useEffect(() => {
     setCompletedFormFields({
-      ...AmazonSettings.formNames(storageRegions[0].systemName),
+      ...formNames(storageRegions[0].systemName),
       filePath: "",
     });
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { t, selectedStorage } = this.props;
+  return (
+    <AmazonSettings
+      t={t}
+      isNeedFilePath
+      isLoading={isLoading}
+      isLoadingData={isLoadingData}
+      formSettings={formSettings}
+      defaultRegion={defaultRegion}
+      storageRegions={storageRegions}
+      selectedStorage={selectedStorage}
+      errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+      deleteValueFormSetting={deleteValueFormSetting}
+      addValueInFormSettings={addValueInFormSettings}
+      setIsThirdStorageChanged={setIsThirdStorageChanged}
+      setRequiredFormSettings={setRequiredFormSettings}
+    />
+  );
+};
 
-    return (
-      <>
-        <AmazonSettings
-          selectedStorage={selectedStorage}
-          t={t}
-          isNeedFilePath
-        />
-      </>
-    );
-  }
-}
+export default AmazonStorage;
 
-export default inject(({ backup }) => {
-  const { storageRegions, setCompletedFormFields } = backup;
+// export default inject(({ backup }) => {
+//   const { storageRegions, setCompletedFormFields } = backup;
 
-  return {
-    storageRegions,
-    setCompletedFormFields,
-  };
-})(observer(withTranslation("Settings")(AmazonStorage)));
+//   return {
+//     storageRegions,
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation("Settings")(AmazonStorage)));

@@ -24,36 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBackupHistory } from "@docspace/shared/api/portal/types";
-import type { Nullable } from "@docspace/shared/types";
-import type { TenantStatus } from "@docspace/shared/enums";
+import type { AmazonSettingsProps } from "@docspace/shared/components/amazon-settings";
 
-export type TBackupListState = {
-  isLoading: boolean;
-  filesList: TBackupHistory[];
-  selectedFileIndex: Nullable<number>;
-  selectedFileId: Nullable<string>;
-  isChecked: boolean;
-};
-
-export interface BackupListModalDialogProps {
-  isNotify: boolean;
-  isVisibleDialog: boolean;
-  onModalClose: VoidFunction;
-  navigate: (path: string) => void;
-
-  // settingsStore
-  standalone: boolean;
-  setTenantStatus: (tenantStatus: TenantStatus) => void;
-  // backup
-  downloadingProgress: number;
-}
-
-export interface BackupListBodyProps {
-  filesList: TBackupHistory[];
-  onDeleteBackup: (backupId: string) => void;
-  onSelectFile: (
-    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+export interface AmazonStorageProps
+  extends Omit<AmazonSettingsProps, "t" | "isNeedFilePath"> {
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
   ) => void;
-  selectedFileIndex: Nullable<number>;
 }

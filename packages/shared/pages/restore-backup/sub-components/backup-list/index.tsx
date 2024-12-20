@@ -64,6 +64,7 @@ const BackupListModalDialog = ({
   isNotify,
   isVisibleDialog,
   onModalClose,
+  navigate,
 
   standalone,
   setTenantStatus,
@@ -158,8 +159,8 @@ const BackupListModalDialog = ({
       .then(() => {
         SocketHelper.emit(SocketCommands.RestoreBackup);
       })
-      .then(
-        () => {},
+      .then(() => {
+        navigate("/preparation-portal");
         // navigate(
         //   combineUrl(
         //     window.ClientConfig?.proxy?.url,
@@ -167,7 +168,7 @@ const BackupListModalDialog = ({
         //     "/preparation-portal",
         //   ),
         // ),
-      )
+      })
       .catch((error) => toastr.error(error))
       .finally(() =>
         setState((val) => ({

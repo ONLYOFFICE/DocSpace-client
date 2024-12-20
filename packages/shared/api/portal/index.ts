@@ -28,6 +28,7 @@ import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TBackupHistory,
   TPaymentQuota,
   TPortal,
   TPortalTariff,
@@ -156,15 +157,23 @@ export function deleteBackupHistory() {
   return request({ method: "delete", url: "/portal/deletebackuphistory" });
 }
 
-export function deleteBackup(id) {
+export function deleteBackup(id: string) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
 export function getBackupHistory() {
-  return request({ method: "get", url: "/portal/getbackuphistory" });
+  return request<TBackupHistory[]>({
+    method: "get",
+    url: "/portal/getbackuphistory",
+  });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId: string,
+  storageType: string,
+  storageParams,
+  notify: boolean,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,

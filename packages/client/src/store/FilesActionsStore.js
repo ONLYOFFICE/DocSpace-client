@@ -750,13 +750,13 @@ class FilesActionStore {
       return Promise.resolve();
     }
 
-    selection.forEach((item) => {
-      if (!item.fileExst && item.isFolder) {
-        folderIds.push(item.id);
-        items.push({ id: item.id });
+    selection.forEach((elem) => {
+      if (!elem.fileExst && elem.isFolder) {
+        folderIds.push(elem.id);
+        items.push({ id: elem.id });
       } else {
-        fileIds.push(item.id);
-        items.push({ id: item.id, fileExst: item.fileExst });
+        fileIds.push(elem.id);
+        items.push({ id: elem.id, fileExst: elem.fileExst });
       }
     });
 
@@ -1105,12 +1105,12 @@ class FilesActionStore {
     const withFinishedOperation = [];
     let isError = false;
 
-    const updatingFolderList = (items, isPin = false) => {
-      if (items.length === 0) return;
+    const updatingFolderList = (elems, isPin = false) => {
+      if (elems.length === 0) return;
 
-      this.updateCurrentFolder(null, items, true, operationId);
+      this.updateCurrentFolder(null, elems, true, operationId);
 
-      const itemCount = { count: items.length };
+      const itemCount = { count: elems.length };
 
       const translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
       const translationForSeverals = isPin
@@ -1118,7 +1118,7 @@ class FilesActionStore {
         : t("RoomsUnpinned", { ...itemCount });
 
       toastr.success(
-        items.length > 1 ? translationForSeverals : translationForOneItem,
+        elems.length > 1 ? translationForSeverals : translationForOneItem,
       );
     };
 
@@ -1151,11 +1151,11 @@ class FilesActionStore {
       const result = await Promise.allSettled(actions);
       if (!result) return;
 
-      result.forEach((result) => {
-        if (result.value) {
-          withFinishedOperation.push(result.value);
+      result.forEach((r) => {
+        if (r.value) {
+          withFinishedOperation.push(r.value);
         }
-        if (!result.value) toastr.error(result.reason.response?.data?.error);
+        if (!r.value) toastr.error(r.reason.response?.data?.error);
       });
 
       updatingFolderList(withFinishedOperation, isPin);
@@ -2840,7 +2840,7 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const { removeFiles, selection, bufferSelection } = this.filesStore;
+    const { selection, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const roomId = selection.length
@@ -2864,7 +2864,7 @@ class FilesActionStore {
               `rooms/shared/filter?${filter.toUrlParams()}`,
             );
           } else {
-            removeFiles(null, [roomId]);
+            this.filesStore.removeFiles(null, [roomId]);
           }
         } else if (!isRoot) {
           this.selectedFolderStore.setInRoom(false);

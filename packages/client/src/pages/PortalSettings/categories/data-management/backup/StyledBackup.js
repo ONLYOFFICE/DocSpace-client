@@ -567,8 +567,8 @@ const StyledBackupList = styled.div`
     ${(props) =>
       props.isChecked &&
       css`
-        background: ${(props) =>
-          props.theme.client.settings.backup.backupCheckedListItemBackground};
+        background: ${({ theme }) =>
+          theme.client.settings.backup.backupCheckedListItemBackground};
       `}
     padding-inline: 16px;
   }

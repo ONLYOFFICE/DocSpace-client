@@ -145,7 +145,7 @@ const StyledFileTileBottom = styled.div`
   ${(props) =>
     props.isSelected &&
     css`
-      border-top: ${(props) => props.theme.filesSection.tilesView.tile.border};
+      border-top: ${({ theme }) => theme.filesSection.tilesView.tile.border};
       border-radius: 0 0 6px 6px;
     `}
 

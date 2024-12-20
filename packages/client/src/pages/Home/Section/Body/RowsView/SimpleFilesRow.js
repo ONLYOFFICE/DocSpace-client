@@ -74,21 +74,21 @@ const StyledWrapper = styled.div`
     (props.checked || props.isActive) &&
     props.isFirstElem &&
     css`
-      border-top-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      border-top-color: ${({ theme }) =>
+        `${theme.filesSection.tableView.row.borderColor} !important`};
     `};
 
   ${(props) =>
     props.isIndexUpdated &&
     css`
-      background: ${(props) =>
-        props.isIndexEditingMode
-          ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
-          : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      background: ${({ theme, isIndexEditingMode }) =>
+        isIndexEditingMode
+          ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+          : `${theme.filesSection.tableView.row.backgroundActive} !important`};
 
       &:hover {
-        background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
       }
 
       ${marginStyles}
@@ -111,8 +111,8 @@ const StyledWrapper = styled.div`
     css`
       :hover {
         cursor: pointer;
-        background: ${(props) =>
-          props.theme.filesSection.tableView.row.indexActive};
+        background: ${({ theme }) =>
+          theme.filesSection.tableView.row.indexActive};
         ${marginStyles}
       }
     `};
@@ -136,7 +136,7 @@ const StyledWrapper = styled.div`
 
       @keyframes Highlight {
         0% {
-          background: ${(props) => props.theme.filesSection.animationColor};
+          background: ${({ theme }) => theme.filesSection.animationColor};
         }
 
         100% {

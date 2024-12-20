@@ -66,7 +66,7 @@ const StyledContainer = styled.header.attrs(injectDefaultTheme)`
               position: absolute;
               z-index: 160;
               top: 0;
-              // top: ${(props) => (props.isVisible ? "0" : "-48px")};
+              // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
 
               transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
               -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);

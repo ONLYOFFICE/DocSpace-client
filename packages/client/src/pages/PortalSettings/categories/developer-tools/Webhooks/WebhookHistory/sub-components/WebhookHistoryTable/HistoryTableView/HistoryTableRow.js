@@ -68,8 +68,8 @@ const StyledTableRow = styled(TableRow)`
     props.isHighlight &&
     css`
       .table-container_cell {
-        background-color: ${(props) =>
-          props.theme.client.settings.webhooks.tableCellBackground};
+        background-color: ${({ theme }) =>
+          theme.client.settings.webhooks.tableCellBackground};
       }
     `}
 `;

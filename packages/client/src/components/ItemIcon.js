@@ -42,7 +42,7 @@ const IconWrapper = styled.div.attrs(injectDefaultTheme)`
         content: "";
         position: absolute;
         inset: 0;
-        /* border: ${(props) => props.theme.itemIcon.borderColor}; */
+        /* border: ${({ theme }) => theme.itemIcon.borderColor}; */
         border: 1px solid transparent;
         border-radius: 5px;
         overflow: hidden;

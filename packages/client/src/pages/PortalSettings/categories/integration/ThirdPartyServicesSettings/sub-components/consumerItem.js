@@ -41,7 +41,7 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)`
       !props.isThirdPartyAvailable &&
       !props.isSet &&
       css`
-        color: ${(props) => props.theme.client.settings.integration.textColor};
+        color: ${({ theme }) => theme.client.settings.integration.textColor};
       `}
   }
 `;

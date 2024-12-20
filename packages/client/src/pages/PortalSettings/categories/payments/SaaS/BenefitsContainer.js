@@ -63,14 +63,14 @@ const StyledBody = styled.div`
         css`
           svg {
             path {
-              fill: ${(props) =>
-                props.theme.client.settings.payment.benefitsContainer
+              fill: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
                   .iconsColor} !important;
             }
             mask + path {
               fill: none !important;
-              stroke: ${(props) =>
-                props.theme.client.settings.payment.benefitsContainer
+              stroke: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
                   .iconsColor} !important;
             }
           }

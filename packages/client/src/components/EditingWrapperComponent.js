@@ -75,7 +75,7 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
       grid-column-start: 1;
       grid-column-end: -1;
 
-      border-bottom: ${(props) => props.theme.filesEditingWrapper.borderBottom};
+      border-bottom: ${({ theme }) => theme.filesEditingWrapper.borderBottom};
       padding-bottom: 4px;
       margin-top: 4px;
     `}
@@ -88,11 +88,11 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
       z-index: 1;
       gap: 4px;
 
-      background-color: ${(props) =>
-        props.theme.filesEditingWrapper.tile.background};
+      background-color: ${({ theme }) =>
+        theme.filesEditingWrapper.tile.background};
 
-      border: ${(props) => props.theme.filesEditingWrapper.border};
-      border-radius: ${(props) => (props.isFolder ? "6px" : "0 0 6px 6px")};
+      border: ${({ theme }) => theme.filesEditingWrapper.border};
+      border-radius: ${({ isFolder }) => (isFolder ? "6px" : "0 0 6px 6px")};
 
       height: 43px;
       bottom: 0;
@@ -145,20 +145,20 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
       props.viewAs === "tile" &&
       !props.isUpdatingRowItem &&
       css`
-        background: ${(props) =>
-          props.theme.filesEditingWrapper.tile.itemBackground};
-        border: ${(props) =>
-          `1px solid ${props.theme.filesEditingWrapper.tile.itemBorder}`};
+        background: ${({ theme }) =>
+          theme.filesEditingWrapper.tile.itemBackground};
+        border: ${({ theme }) =>
+          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:focus {
-          border: ${(props) =>
-            `1px solid ${props.theme.filesEditingWrapper.tile.itemActiveBorder}`};
+          border: ${({ theme }) =>
+            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
     ${({ isDisabled }) =>
       isDisabled &&
-      `background-color: ${(props) => props.theme.filesEditingWrapper.disabledBackground}`}
+      `background-color: ${({ theme }) => theme.filesEditingWrapper.disabledBackground}`}
   }
 
   .edit-button {
@@ -170,14 +170,14 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
       props.viewAs === "tile" &&
       css`
         margin-inline-start: 0;
-        background: ${(props) =>
-          props.theme.filesEditingWrapper.tile.itemBackground};
-        border: ${(props) =>
-          `1px solid ${props.theme.filesEditingWrapper.tile.itemBorder}`};
+        background: ${({ theme }) =>
+          theme.filesEditingWrapper.tile.itemBackground};
+        border: ${({ theme }) =>
+          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:hover {
-          border: ${(props) =>
-            `1px solid ${props.theme.filesEditingWrapper.tile.itemActiveBorder}`};
+          border: ${({ theme }) =>
+            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
@@ -193,7 +193,7 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
         justify-content: center;
 
         &:hover {
-          border: ${(props) => props.theme.filesEditingWrapper.border};
+          border: ${({ theme }) => theme.filesEditingWrapper.border};
         }
       `}
   }

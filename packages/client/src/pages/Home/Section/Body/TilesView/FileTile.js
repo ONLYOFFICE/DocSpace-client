@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 // import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";

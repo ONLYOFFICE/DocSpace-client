@@ -67,7 +67,7 @@ import styled, { css } from "styled-components";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 
 const StyledButton = styled(Button)`
   font-weight: 700;

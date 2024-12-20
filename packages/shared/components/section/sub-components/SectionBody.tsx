@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import DragAndDrop from "../../drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "../../drag-and-drop";
 
 import styles from "../Section.module.scss";
 import { SectionBodyProps } from "../Section.types";

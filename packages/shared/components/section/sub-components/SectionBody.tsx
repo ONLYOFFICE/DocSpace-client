@@ -25,16 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation } from "react-router-dom";
+import classNames from "classnames";
 
-// import { inject, observer } from "mobx-react";
+import DragAndDrop from "../../drag-and-drop/DragAndDrop";
 
-import {
-  StyledDropZoneBody,
-  StyledSpacer,
-  StyledSectionBody,
-} from "../Section.styled";
+import styles from "../Section.module.scss";
 import { SectionBodyProps } from "../Section.types";
+
 import SectionContextMenu from "./SectionContextMenu";
 
 const SectionBody = React.memo(
@@ -51,10 +48,9 @@ const SectionBody = React.memo(
     settingsStudio = false,
     getContextModel,
     isIndexEditingMode,
+    pathname,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
-
-    const location = useLocation();
 
     const focusSectionBody = React.useCallback(() => {
       if (focusRef.current) focusRef.current.focus({ preventScroll: true });
@@ -72,7 +68,7 @@ const SectionBody = React.memo(
       if (!autoFocus) return;
 
       focusSectionBody();
-    }, [autoFocus, location.pathname, focusSectionBody]);
+    }, [autoFocus, pathname, focusSectionBody]);
 
     React.useEffect(() => {
       if (!autoFocus) return;
@@ -93,59 +89,77 @@ const SectionBody = React.memo(
     const focusProps = autoFocus
       ? {
           ref: focusRef,
-          //tabIndex: -1,
         }
       : {};
 
     return uploadFiles ? (
-      <StyledDropZoneBody
-        isDropZone
+      <DragAndDrop
+        className={classNames(
+          styles.dropzone,
+          {
+            [styles.withScroll]: withScroll,
+            [styles.isDesktop]: isDesktop,
+            [styles.isRowView]: viewAs === "row",
+            [styles.isTile]: viewAs === "tile",
+            [styles.isSettingsView]: viewAs === "settings",
+            [styles.isProfileView]: viewAs === "profile",
+            [styles.isFormGallery]: isFormGallery,
+            [styles.isStudio]: settingsStudio,
+            [styles.common]: true,
+          },
+          "section-body",
+        )}
         onDrop={onDrop}
-        withScroll={withScroll}
-        viewAs={viewAs}
-        isDesktop={isDesktop}
-        settingsStudio={settingsStudio}
-        className="section-body"
+        isDropZone
       >
         {withScroll ? (
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <StyledSpacer />
+              <div className={classNames(styles.spacer)} />
             </div>
           </div>
         ) : (
           <div className="section-wrapper">
             {children}
-            <StyledSpacer />
+            <div className={classNames(styles.spacer)} />
           </div>
         )}
 
         {!isIndexEditingMode && (
           <SectionContextMenu getContextModel={getContextModel} />
         )}
-      </StyledDropZoneBody>
+      </DragAndDrop>
     ) : (
-      <StyledSectionBody
-        viewAs={viewAs}
-        withScroll={withScroll}
-        isDesktop={isDesktop}
-        settingsStudio={settingsStudio}
-        isFormGallery={isFormGallery}
-        className="section-body"
+      <div
+        className={classNames(
+          styles.sectionBody,
+          {
+            [styles.withScroll]: withScroll,
+            [styles.isDesktop]: isDesktop,
+            [styles.isRowView]: viewAs === "row",
+            [styles.isTile]: viewAs === "tile",
+            [styles.isSettingsView]: viewAs === "settings",
+            [styles.isProfileView]: viewAs === "profile",
+            [styles.isFormGallery]: isFormGallery,
+            [styles.isStudio]: settingsStudio,
+            [styles.common]: true,
+          },
+          "section-body",
+        )}
       >
         {withScroll ? (
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <StyledSpacer className="settings-mobile" />
+              <div className={classNames(styles.spacer, "settings-mobile")} />
             </div>
           </div>
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
         <SectionContextMenu getContextModel={getContextModel} />
-      </StyledSectionBody>
+      </div>
     );
   },
 );

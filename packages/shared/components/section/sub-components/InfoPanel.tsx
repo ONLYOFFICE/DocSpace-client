@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef } from "react";
+import classNames from "classnames";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 
-import { StyledInfoPanelWrapper, StyledInfoPanel } from "../Section.styled";
 import { InfoPanelProps } from "../Section.types";
+import styles from "../Section.module.scss";
 
 const InfoPanel = ({
   children,
@@ -62,13 +63,13 @@ const InfoPanel = ({
   }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
   const infoPanelComponent = (
-    <StyledInfoPanelWrapper
-      className="info-panel"
+    <div
+      className={classNames("info-panel", styles.infoPanelWrapper)}
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
-      <StyledInfoPanel>{children}</StyledInfoPanel>
-    </StyledInfoPanelWrapper>
+      <div className={styles.infoPanel}>{children}</div>
+    </div>
   );
 
   const renderPortalInfoPanel = () => {

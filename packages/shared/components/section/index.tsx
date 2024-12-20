@@ -37,7 +37,6 @@ import SubSectionHeader from "./sub-components/SectionHeader";
 import SubSectionFilter from "./sub-components/SectionFilter";
 import SubSectionBody from "./sub-components/SectionBody";
 import SubSectionBodyContent from "./sub-components/SectionBodyContent";
-import SubSectionPaging from "./sub-components/SectionPaging";
 import InfoPanel from "./sub-components/InfoPanel";
 import SubInfoPanelBody from "./sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "./sub-components/InfoPanelHeader";
@@ -53,7 +52,6 @@ import {
   SECTION_HEADER_NAME,
   SECTION_INFO_PANEL_BODY_NAME,
   SECTION_INFO_PANEL_HEADER_NAME,
-  SECTION_PAGING_NAME,
   SECTION_WARNING_NAME,
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
@@ -72,9 +70,6 @@ SectionBody.displayName = SECTION_BODY_NAME;
 
 const SectionFooter = ({ children }: { children: React.ReactNode }) => null;
 SectionFooter.displayName = SECTION_FOOTER_NAME;
-
-const SectionPaging = ({ children }: { children: React.ReactNode }) => null;
-SectionPaging.displayName = SECTION_PAGING_NAME;
 
 const InfoPanelBody = ({ children }: { children: React.ReactNode }) => null;
 InfoPanelBody.displayName = SECTION_INFO_PANEL_BODY_NAME;
@@ -118,6 +113,8 @@ const Section = (props: SectionProps) => {
     anotherDialogOpen,
     getContextModel,
     isIndexEditingMode,
+
+    pathname,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -133,7 +130,6 @@ const Section = (props: SectionProps) => {
     sectionFilterContent,
     sectionBodyContent,
     sectionFooterContent,
-    sectionPagingContent,
     sectionWarningContent,
     infoPanelBodyContent,
     infoPanelHeaderContent,
@@ -142,17 +138,13 @@ const Section = (props: SectionProps) => {
 
   const isSectionHeaderAvailable = !!sectionHeaderContent;
   const isSectionFilterAvailable = !!sectionFilterContent;
-  const isSectionPagingAvailable = !!sectionPagingContent;
   const isSectionSubmenuAvailable = !!sectionSubmenuContent;
   const isSectionBodyAvailable =
-    !!sectionBodyContent ||
-    isSectionFilterAvailable ||
-    isSectionPagingAvailable;
+    !!sectionBodyContent || isSectionFilterAvailable;
   const isSectionAvailable =
     isSectionHeaderAvailable ||
     isSectionFilterAvailable ||
-    isSectionBodyAvailable ||
-    isSectionPagingAvailable;
+    isSectionBodyAvailable;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -236,10 +228,7 @@ const Section = (props: SectionProps) => {
 
               {isSectionFilterAvailable &&
                 currentDeviceType === DeviceType.desktop && (
-                  <SubSectionFilter
-                    className="section-header_filter"
-                    viewAs={viewAs}
-                  >
+                  <SubSectionFilter className="section-header_filter">
                     {sectionFilterContent}
                   </SubSectionFilter>
                 )}
@@ -258,6 +247,7 @@ const Section = (props: SectionProps) => {
               currentDeviceType={currentDeviceType}
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
+              pathname={pathname}
             >
               {isSectionHeaderAvailable &&
                 currentDeviceType === DeviceType.mobile && (
@@ -277,10 +267,7 @@ const Section = (props: SectionProps) => {
                 )}
               {isSectionFilterAvailable &&
                 currentDeviceType !== DeviceType.desktop && (
-                  <SubSectionFilter
-                    className="section-body_filter"
-                    viewAs={viewAs}
-                  >
+                  <SubSectionFilter className="section-body_filter">
                     {sectionFilterContent}
                   </SubSectionFilter>
                 )}
@@ -288,9 +275,6 @@ const Section = (props: SectionProps) => {
                 {sectionBodyContent}
               </SubSectionBodyContent>
               <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
-              {isSectionPagingAvailable && (
-                <SubSectionPaging>{sectionPagingContent}</SubSectionPaging>
-              )}
             </SubSectionBody>
           )}
 
@@ -362,7 +346,6 @@ Section.SectionHeader = SectionHeader;
 Section.SectionFilter = SectionFilter;
 Section.SectionBody = SectionBody;
 Section.SectionFooter = SectionFooter;
-Section.SectionPaging = SectionPaging;
 Section.InfoPanelBody = InfoPanelBody;
 Section.InfoPanelHeader = InfoPanelHeader;
 Section.SectionWarning = SectionWarning;

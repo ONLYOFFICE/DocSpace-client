@@ -96,8 +96,6 @@ const FloatingButton = ({
 }: FloatingButtonProps) => {
   const animationCompleted = useProgressAnimation(percent);
 
-  console.log(color);
-
   const displayProgress = useMemo(() => {
     return (
       !(percent === 100 && animationCompleted) &&

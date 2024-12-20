@@ -35,11 +35,11 @@ export type FloatingButtonProps = {
   /** Accepts CSS style */
   style?: React.CSSProperties;
   /** Sets the icon on the button */
-  icon: FloatingButtonIcons;
+  icon?: FloatingButtonIcons;
   /** Displays the alert */
   alert?: boolean;
   /** Loading indicator */
-  percent: number;
+  percent?: number;
   /**  Sets a callback function that is triggered when the button is clicked */
   onClick?: (e: React.MouseEvent) => void;
   /** CSS color */

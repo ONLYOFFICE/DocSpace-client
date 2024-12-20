@@ -4,7 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import AppLoader from "./index";
 
 export default {
-  title: "Components/AppLoader",
+  title: "Layout components/AppLoader",
   component: AppLoader,
   parameters: {
     docs: {

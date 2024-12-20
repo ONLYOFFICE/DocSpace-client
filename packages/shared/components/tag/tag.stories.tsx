@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -29,7 +30,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Tag } from ".";
 
 const meta = {
-  title: "Data Display/Tag",
+  title: "Base UI components/Tag",
   component: Tag,
   parameters: {
     design: {

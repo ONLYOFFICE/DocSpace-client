@@ -408,12 +408,6 @@ const PureHome = (props) => {
         <Section.InfoPanelBody>
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
-
-        {/* {withPaging && !isSettingsPage && (
-          <Section.SectionPaging>
-            <SectionPagingContent tReady={tReady} />
-          </Section.SectionPaging>
-        )} */}
       </SectionWrapper>
     </>
   );

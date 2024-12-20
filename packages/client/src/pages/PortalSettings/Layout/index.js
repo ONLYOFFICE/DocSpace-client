@@ -27,7 +27,7 @@
 import React, { useEffect } from "react";
 import Article from "@docspace/shared/components/article";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
-import { SectionHeaderContent, SectionPagingContent } from "./Section";
+import { SectionHeaderContent } from "./Section";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -119,11 +119,6 @@ const Layout = ({
           </Section.SectionHeader>
 
           <Section.SectionBody>{children}</Section.SectionBody>
-          {addUsers && (
-            <Section.SectionPaging>
-              <SectionPagingContent />
-            </Section.SectionPaging>
-          )}
         </SectionWrapper>
       )}
     </>

@@ -1925,7 +1925,7 @@ class ContextOptionsStore {
       {
         id: "option_short-tour",
         key: "short-tour",
-        label: t("Take a short tour"),
+        label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
         icon: HelpCenterReactSvgUrl,
         onClick: this.onEnableFormFillingGuid,
         disabled: !isFormRoom,

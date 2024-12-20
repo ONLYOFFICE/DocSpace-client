@@ -23,17 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import isUndefined from "lodash/isUndefined";
+import { useTranslation } from "react-i18next";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import {
   deleteBackup,
@@ -43,69 +45,54 @@ import {
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import ListLoader from "@docspace/shared/skeletons/list";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import config from "PACKAGE_FILE";
-import { StyledBackupList } from "../../../StyledBackup";
-import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
-import styled from "styled-components";
 
-const StyledFooterContent = styled.div`
-  width: 100%;
-  .restore_dialog-button {
-    display: flex;
-    button:first-child {
-      margin-inline-end: 10px;
-      width: 50%;
-    }
-    button:last-child {
-      width: 50%;
-    }
-  }
-  #backup-list_help {
-    display: flex;
-    background-color: ${(props) => props.theme.backgroundColor};
-    margin-bottom: 16px;
-  }
+// import config from "PACKAGE_FILE";
+import { StyledBackupList } from "../../RestoreBackup.styled";
 
-  .backup-list_agreement-text {
-    user-select: none;
-    div:first-child {
-      display: inline-block;
-    }
-  }
+import BackupListBody from "./BackupListBody";
+import { StyledFooterContent } from "./BackupList.styled";
+import type {
+  BackupListModalDialogProps,
+  TBackupListState,
+} from "./BackupList.types";
+import { initState } from "./BackupList.constants";
 
-  .backup-list_tooltip {
-    margin-inline-start: 8px;
-  }
-`;
+const BackupListModalDialog = ({
+  isNotify,
+  isVisibleDialog,
+  onModalClose,
 
-const BackupListModalDialog = (props) => {
-  const [state, setState] = React.useState({
-    isLoading: true,
-    filesList: [],
-    selectedFileIndex: null,
-    selectedFileId: null,
-    isChecked: false,
-  });
+  standalone,
+  setTenantStatus,
 
-  const navigate = useNavigate();
+  downloadingProgress,
+}: BackupListModalDialogProps) => {
+  const { t } = useTranslation(["Settings", "Common", "Translations"]);
+
+  const [state, setState] = React.useState<TBackupListState>(() => initState);
+
+  const isCopyingToLocal = downloadingProgress !== 100;
 
   React.useEffect(() => {
     getBackupHistory()
-      .then((filesList) =>
+      ?.then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch(() => setState((val) => ({ ...val, isLoading: false })));
   }, []);
 
-  const onSelectFile = (e) => {
-    const fileInfo = e.target.name;
+  const onSelectFile = (
+    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const fileInfo = e.currentTarget.name;
     const fileArray = fileInfo.split("_");
     const id = fileArray.pop();
     const index = fileArray.shift();
+
+    if (isUndefined(id) || isUndefined(index)) return console.error(id, index);
 
     setState((val) => ({
       ...val,
@@ -114,28 +101,31 @@ const BackupListModalDialog = (props) => {
     }));
   };
 
-  const onCleanBackupList = () => {
-    setState((val) => ({ ...val, isLoading: true }));
-    deleteBackupHistory()
-      .then(() => getBackupHistory())
-      .then((filesList) =>
-        setState((val) => ({ ...val, filesList, isLoading: false })),
-      )
-      .catch((error) => {
-        toastr.error(error);
-        setState((val) => ({ ...val, isLoading: false }));
-      });
+  const onCleanBackupList = async () => {
+    try {
+      setState((val) => ({ ...val, isLoading: true }));
+      await deleteBackupHistory();
+      const filesList = await getBackupHistory();
+      setState((val) => ({
+        ...val,
+        filesList: filesList ?? val.filesList,
+        isLoading: false,
+      }));
+    } catch (error) {
+      toastr.error(error as Error);
+      setState((val) => ({ ...val, isLoading: false }));
+    }
   };
-  const onDeleteBackup = (backupId) => {
+  const onDeleteBackup = (backupId: string) => {
     if (!backupId) return;
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      .then(() => getBackupHistory())
+      ?.then(() => getBackupHistory())
       .then((filesList) =>
         setState((val) => ({
           ...val,
-          filesList,
+          filesList: filesList ?? [],
           isLoading: false,
           selectedFileIndex: null,
           selectedFileId: null,
@@ -148,7 +138,6 @@ const BackupListModalDialog = (props) => {
   };
   const onRestorePortal = () => {
     const { selectedFileId } = state;
-    const { isNotify, t, setTenantStatus } = props;
 
     if (!selectedFileId) {
       toastr.error(t("RecoveryFileNotSelected"));
@@ -165,18 +154,19 @@ const BackupListModalDialog = (props) => {
     ];
 
     startRestore(backupId, storageType, storageParams, isNotify)
-      .then(() => setTenantStatus(TenantStatus.PortalRestore))
+      ?.then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
         SocketHelper.emit(SocketCommands.RestoreBackup);
       })
-      .then(() =>
-        navigate(
-          combineUrl(
-            window.ClientConfig?.proxy?.url,
-            config.homepage,
-            "/preparation-portal",
-          ),
-        ),
+      .then(
+        () => {},
+        // navigate(
+        //   combineUrl(
+        //     window.ClientConfig?.proxy?.url,
+        //     config.homepage,
+        //     "/preparation-portal",
+        //   ),
+        // ),
       )
       .catch((error) => toastr.error(error))
       .finally(() =>
@@ -193,46 +183,32 @@ const BackupListModalDialog = (props) => {
     setState((val) => ({ ...val, isChecked: !val.isChecked }));
   };
 
-  const {
-    onModalClose,
-    isVisibleDialog,
-    t,
-    isCopyingToLocal,
-    theme,
-    standalone,
-  } = props;
   const { filesList, isLoading, selectedFileIndex, isChecked } = state;
 
   const helpContent = () => (
-    <>
-      <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", {
-          productName: t("Common:ProductName"),
-        })}{" "}
-        {!standalone && (
-          <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-        )}
-      </Text>
-    </>
+    <Text className="restore-backup_warning-description">
+      {t("RestoreBackupWarningText", {
+        productName: t("Common:ProductName"),
+      })}{" "}
+      {!standalone && (
+        <Text as="span" className="restore-backup_warning-link">
+          {t("RestoreBackupResetInfoWarningText", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      )}
+    </Text>
   );
 
   return (
     <ModalDialog
-      displayType="aside"
+      displayType={ModalDialogType.aside}
       visible={isVisibleDialog}
       onClose={onModalClose}
     >
       <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBackupList
-          isCopyingToLocal={isCopyingToLocal}
-          isEmpty={filesList?.length === 0}
-          theme={theme}
-        >
+        <StyledBackupList>
           <div className="backup-list_content">
             {filesList.length > 0 && (
               <div className="backup-restore_dialog-header">
@@ -294,7 +270,7 @@ const BackupListModalDialog = (props) => {
                 offsetLeft={100}
                 iconName={HelpReactSvgUrl}
                 getContent={helpContent}
-                tooltipMaxWidth={"286px"}
+                tooltipMaxWidth="286px"
               />
             </Text>
           </div>
@@ -303,14 +279,14 @@ const BackupListModalDialog = (props) => {
             <Button
               className="restore"
               primary
-              size="normal"
+              size={ButtonSize.normal}
               label={t("Common:Restore")}
               onClick={onRestorePortal}
               isDisabled={isCopyingToLocal || !isChecked}
             />
             <Button
               className="close"
-              size="normal"
+              size={ButtonSize.normal}
               label={t("Common:CloseButton")}
               onClick={onModalClose}
             />
@@ -321,24 +297,21 @@ const BackupListModalDialog = (props) => {
   );
 };
 
-BackupListModalDialog.propTypes = {
-  onModalClose: PropTypes.func.isRequired,
-  isVisibleDialog: PropTypes.bool.isRequired,
-};
+export default BackupListModalDialog;
 
-export default inject(({ settingsStore, backup }) => {
-  const { downloadingProgress } = backup;
-  const { theme, setTenantStatus, standalone } = settingsStore;
-  const isCopyingToLocal = downloadingProgress !== 100;
+// export default inject(({ settingsStore, backup }) => {
+//   const { downloadingProgress } = backup;
+//   const { theme, setTenantStatus, standalone } = settingsStore;
+//   const isCopyingToLocal = downloadingProgress !== 100;
 
-  return {
-    setTenantStatus,
-    theme,
-    isCopyingToLocal,
-    standalone,
-  };
-})(
-  withTranslation(["Settings", "Common", "Translations"])(
-    observer(BackupListModalDialog),
-  ),
-);
+//   return {
+//     setTenantStatus,
+//     theme,
+//     isCopyingToLocal,
+//     standalone,
+//   };
+// })(
+//   withTranslation(["Settings", "Common", "Translations"])(
+//     observer(BackupListModalDialog),
+//   ),
+// );

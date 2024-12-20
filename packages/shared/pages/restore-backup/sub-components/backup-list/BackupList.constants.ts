@@ -24,27 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import type { TBackupListState } from "./BackupList.types";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-// import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
-import type {
-  ScrollbarProps,
-  CustomScrollbarsVirtualListProps,
-} from "./Scrollbar.types";
-
-export type { CustomScrollbarsVirtualListProps };
-
-export {
-  Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-  // ScrollbarContext,
-};
+export const initState = {
+  isLoading: true,
+  filesList: [],
+  selectedFileIndex: null,
+  selectedFileId: null,
+  isChecked: false,
+} satisfies TBackupListState;

@@ -23,28 +23,34 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import styled from "styled-components";
 
-"use client";
+export const StyledFooterContent = styled.div`
+  width: 100%;
+  .restore_dialog-button {
+    display: flex;
+    button:first-child {
+      margin-inline-end: 10px;
+      width: 50%;
+    }
+    button:last-child {
+      width: 50%;
+    }
+  }
+  #backup-list_help {
+    display: flex;
+    background-color: ${(props) => props.theme.backgroundColor};
+    margin-bottom: 16px;
+  }
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-// import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
-import type {
-  ScrollbarProps,
-  CustomScrollbarsVirtualListProps,
-} from "./Scrollbar.types";
+  .backup-list_agreement-text {
+    user-select: none;
+    div:first-child {
+      display: inline-block;
+    }
+  }
 
-export type { CustomScrollbarsVirtualListProps };
-
-export {
-  Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-  // ScrollbarContext,
-};
+  .backup-list_tooltip {
+    margin-inline-start: 8px;
+  }
+`;

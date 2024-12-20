@@ -25,18 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
-import { FixedSizeList as List } from "react-window";
+import {
+  FixedSizeList as List,
+  type ListChildComponentProps,
+} from "react-window";
 import { ReactSVG } from "react-svg";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
-import { Text } from "@docspace/shared/components/text";
-import { RadioButton } from "@docspace/shared/components/radio-button";
+
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
-import { StyledBackupList } from "../../../StyledBackup";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
+
+import { Text } from "@docspace/shared/components/text";
+import {
+  CustomScrollbarsVirtualList,
+  type CustomScrollbarsVirtualListProps,
+} from "@docspace/shared/components/scrollbar";
+import { RadioButton } from "@docspace/shared/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
-const VirtualScroll = (props) => (
+import { StyledBackupList } from "../../RestoreBackup.styled";
+import type { BackupListBodyProps } from "./BackupList.types";
+
+const VirtualScroll = (props: CustomScrollbarsVirtualListProps) => (
   <CustomScrollbarsVirtualList
     {...props}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
@@ -48,20 +58,23 @@ const BackupListBody = ({
   onDeleteBackup,
   onSelectFile,
   selectedFileIndex,
-}) => {
+}: BackupListBodyProps) => {
   const isFileChecked = useCallback(
-    (index) => {
+    (index: number) => {
       return index === selectedFileIndex;
     },
     [selectedFileIndex],
   );
 
-  const onTrashClick = (id) => {
-    onDeleteBackup(id);
-  };
+  const onTrashClick = useCallback(
+    (id: string) => {
+      onDeleteBackup(id);
+    },
+    [onDeleteBackup],
+  );
 
   const Item = useCallback(
-    ({ index, style }) => {
+    ({ index, style }: ListChildComponentProps) => {
       const file = filesList[index];
       const fileId = file.id;
       const fileName = file.fileName;
@@ -80,7 +93,7 @@ const BackupListBody = ({
 
               <RadioButton
                 fontSize="13px"
-                fontWeight="400"
+                fontWeight={400}
                 value=""
                 isChecked={isChecked}
                 onClick={onSelectFile}
@@ -97,7 +110,7 @@ const BackupListBody = ({
         </div>
       );
     },
-    [filesList, isFileChecked],
+    [filesList, isFileChecked, onSelectFile, onTrashClick],
   );
 
   return (

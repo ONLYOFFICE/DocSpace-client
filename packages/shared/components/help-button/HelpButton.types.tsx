@@ -30,7 +30,7 @@ export interface HelpButtonProps {
   /** Displays the child elements  */
   children?: React.ReactNode;
   /** Sets the tooltip content  */
-  tooltipContent: string | React.ReactNode;
+  tooltipContent?: string | React.ReactNode;
   /** Required to set additional properties of the tooltip */
   tooltipProps?: TooltipProps;
   /** Sets the maximum width of the tooltip  */

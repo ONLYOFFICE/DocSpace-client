@@ -50,6 +50,7 @@ import {
 
 import { ModalDialogType } from "../../modal-dialog";
 import { getHeaderText, getGuidPosition } from "./Guid.utils";
+import { GuidProps } from "./Guid.types";
 
 const GUID_MODAL_MARGIN = 16;
 const MAX_MODAL_HEIGHT = 190;
@@ -61,7 +62,7 @@ const Guid = ({
   onClose,
   guidRects,
   viewAs,
-}) => {
+}: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   const [modalBottom, setModalBottom] = React.useState<null | number>(null);

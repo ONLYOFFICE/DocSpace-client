@@ -28,27 +28,10 @@ import React from "react";
 
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
+import { GuidProps } from "./sub-components/Guid.types";
 
-const Guidance = ({
-  formFillingTipsNumber,
-  setFormFillingTipsNumber,
-  onClose,
-  guidRects,
-  viewAs,
-}) => {
-  return (
-    <Portal
-      element={
-        <Guid
-          formFillingTipsNumber={formFillingTipsNumber}
-          setFormFillingTipsNumber={setFormFillingTipsNumber}
-          onClose={onClose}
-          guidRects={guidRects}
-          viewAs={viewAs}
-        />
-      }
-    />
-  );
+const Guidance = (props: GuidProps) => {
+  return <Portal element={<Guid {...props} />} />;
 };
 
 export { Guidance };

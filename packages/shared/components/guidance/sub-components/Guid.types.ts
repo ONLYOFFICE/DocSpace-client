@@ -34,3 +34,18 @@ export interface ClippedPosition {
 export interface ClippedProps {
   position: ClippedPosition;
 }
+
+type GuidRectsProps = {
+  pdf: DOMRect;
+  ready: DOMRect;
+  uploading: DOMRect;
+  share: DOMRect;
+};
+
+export interface GuidProps {
+  formFillingTipsNumber: number;
+  setFormFillingTipsNumber: (value: number) => void;
+  onClose: () => void;
+  guidRects: GuidRectsProps;
+  viewAs: string;
+}

@@ -24,41 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-class GoogleCloudStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { setCompletedFormFields } = this.props;
+import {
+  GoogleCloudSettings,
+  formNames,
+} from "@docspace/shared/components/google-cloud-settings";
+import type { GoogleCloudStorageProps } from "./GoogleCloudStorage.types";
 
+const GoogleCloudStorage = ({
+  setCompletedFormFields,
+
+  isLoading,
+  isLoadingData,
+  formSettings,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  addValueInFormSettings,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: GoogleCloudStorageProps) => {
+  const { t } = useTranslation("Settings");
+
+  useEffect(() => {
     setCompletedFormFields({
-      ...GoogleCloudSettings.formNames(),
+      ...formNames(),
       filePath: "",
     });
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { t, selectedStorage } = this.props;
+  return (
+    <GoogleCloudSettings
+      t={t}
+      isNeedFilePath
+      isLoading={isLoading}
+      formSettings={formSettings}
+      isLoadingData={isLoadingData}
+      selectedStorage={selectedStorage}
+      errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+      addValueInFormSettings={addValueInFormSettings}
+      setRequiredFormSettings={setRequiredFormSettings}
+      setIsThirdStorageChanged={setIsThirdStorageChanged}
+    />
+  );
+};
 
-    return (
-      <>
-        <GoogleCloudSettings
-          t={t}
-          selectedStorage={selectedStorage}
-          isNeedFilePath
-        />
-      </>
-    );
-  }
-}
+export default GoogleCloudStorage;
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields } = backup;
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields } = backup;
 
-  return {
-    setCompletedFormFields,
-  };
-})(observer(withTranslation("Settings")(GoogleCloudStorage)));
+//   return {
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation("Settings")(GoogleCloudStorage)));

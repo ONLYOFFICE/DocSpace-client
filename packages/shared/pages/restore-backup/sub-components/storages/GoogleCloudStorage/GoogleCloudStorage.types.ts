@@ -24,6 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as GoogleCloudSettings } from "./GoogleCloudSettings";
-export { formNames } from "./GoogleCloudSettings.helper";
-export type { GoogleCloudSettingsProps } from "./GoogleCloudSettings.types";
+import type { GoogleCloudSettingsProps } from "@docspace/shared/components/google-cloud-settings";
+
+export interface GoogleCloudStorageProps
+  extends Omit<GoogleCloudSettingsProps, "t" | "isNeedFilePath"> {
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+}

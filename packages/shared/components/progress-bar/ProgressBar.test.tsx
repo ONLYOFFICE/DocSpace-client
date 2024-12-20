@@ -29,7 +29,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ProgressBar } from "./ProgressBar";
+import { ProgressBar } from ".";
 
 describe("<ProgressBar />", () => {
   const defaultProps = {
@@ -46,7 +46,7 @@ describe("<ProgressBar />", () => {
       const label = "Uploading files...";
       render(<ProgressBar {...defaultProps} label={label} />);
       expect(screen.getByText(label)).toBeInTheDocument();
-      expect(screen.getByText(label)).toHaveClass("progress-bar_full-text");
+      expect(screen.getByText(label)).toHaveClass("fullText");
     });
 
     it("sets label as title attribute", () => {
@@ -60,25 +60,17 @@ describe("<ProgressBar />", () => {
     it("caps progress at 100% when exceeding", () => {
       render(<ProgressBar {...defaultProps} percent={150} />);
       const progressBar = screen.getByTestId("progress-bar");
-      expect(progressBar).toHaveAttribute("percent", "100");
+      expect(progressBar).toHaveAttribute("data-progress", "100");
     });
 
     it("shows infinite progress animation when enabled", () => {
       render(<ProgressBar {...defaultProps} isInfiniteProgress />);
-      expect(
-        screen
-          .getByTestId("progress-bar")
-          .querySelector(".progress-bar_animation"),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId("progress-bar-animation")).toBeInTheDocument();
     });
 
     it("shows regular progress bar when not infinite", () => {
       render(<ProgressBar {...defaultProps} />);
-      expect(
-        screen
-          .getByTestId("progress-bar")
-          .querySelector(".progress-bar_percent"),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId("progress-bar-percent")).toBeInTheDocument();
     });
   });
 
@@ -87,7 +79,7 @@ describe("<ProgressBar />", () => {
       const status = "Processing...";
       render(<ProgressBar {...defaultProps} status={status} />);
       const statusElement = screen.getByText(status);
-      expect(statusElement).toHaveClass("progress-bar_status-text");
+      expect(statusElement).toHaveClass("statusText");
       expect(statusElement).toHaveAttribute("title", status);
     });
 
@@ -95,7 +87,7 @@ describe("<ProgressBar />", () => {
       const error = "Upload failed";
       render(<ProgressBar {...defaultProps} error={error} />);
       const errorElement = screen.getByText(error);
-      expect(errorElement).toHaveClass("progress-bar_status-error");
+      expect(errorElement).toHaveClass("statusError");
       expect(errorElement).toHaveAttribute("title", error);
     });
   });

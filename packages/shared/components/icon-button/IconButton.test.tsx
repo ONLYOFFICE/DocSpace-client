@@ -168,8 +168,7 @@ describe("<IconButton />", () => {
     const customSize = 40;
     renderWithTheme(<IconButton {...baseProps} size={customSize} />);
     expect(screen.getByTestId("icon-button")).toHaveStyle({
-      width: `${customSize}px`,
-      height: `${customSize}px`,
+      "--icon-button-size": `${customSize}px`,
     });
   });
 

@@ -90,16 +90,14 @@ const IconButton = ({
   useEffect(() => {
     if (!buttonRef.current) return;
 
-    if (currentIcon.color) {
-      buttonRef.current.style.setProperty(
-        "--icon-button-color",
-        currentIcon.color,
-      );
-      buttonRef.current.style.setProperty(
-        "--icon-button-hover-color",
-        currentIcon.color,
-      );
-    }
+    buttonRef.current.style.setProperty(
+      "--icon-button-color",
+      currentIcon.color ?? "",
+    );
+    buttonRef.current.style.setProperty(
+      "--icon-button-hover-color",
+      currentIcon.color ?? "",
+    );
 
     if (size)
       buttonRef.current.style.setProperty(

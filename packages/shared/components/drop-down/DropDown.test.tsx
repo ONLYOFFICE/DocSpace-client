@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -62,10 +63,10 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("top");
-    expect(dropdown).toHaveClass("right");
-    expect(dropdown).not.toHaveClass("bottom");
-    expect(dropdown).not.toHaveClass("left");
+    expect(dropdown).toHaveClass("directionTop");
+    expect(dropdown).toHaveClass("directionRight");
+    expect(dropdown).not.toHaveClass("directionBottom");
+    expect(dropdown).not.toHaveClass("directionLeft");
   });
 
   it("applies mobile view class when isMobileView is true", () => {
@@ -189,7 +190,7 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("right");
+    expect(dropdown).toHaveClass("directionRight");
   });
 
   it("renders virtual list with correct props", () => {
@@ -220,8 +221,8 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("bottom");
-    expect(dropdown).toHaveClass("left");
+    expect(dropdown).toHaveClass("directionBottom");
+    expect(dropdown).toHaveClass("directionLeft");
   });
 
   it("updates maxHeight based on calculatedHeight", () => {
@@ -318,8 +319,8 @@ describe("<DropDown />", () => {
       );
 
       const dropdown = screen.getByTestId("dropdown");
-      expect(dropdown).toHaveClass("bottom");
-      expect(dropdown).toHaveClass("left");
+      expect(dropdown).toHaveClass("directionBottom");
+      expect(dropdown).toHaveClass("directionLeft");
 
       cleanup();
     });
@@ -340,8 +341,8 @@ describe("<DropDown />", () => {
       );
 
       const dropdown = screen.getByTestId("dropdown");
-      expect(dropdown).toHaveClass("bottom");
-      expect(dropdown).toHaveClass("left");
+      expect(dropdown).toHaveClass("directionBottom");
+      expect(dropdown).toHaveClass("directionLeft");
 
       cleanup();
     });

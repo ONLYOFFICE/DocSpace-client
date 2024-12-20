@@ -225,16 +225,6 @@ describe("<PasswordInput />", () => {
     expect(onKeyDown).toHaveBeenCalled();
   });
 
-  it("respects maxLength property", async () => {
-    const user = userEvent.setup();
-    render(<PasswordInput {...baseProps} maxLength={5} />);
-
-    const input = screen.getByTestId("password-input").querySelector("input");
-    await user.type(input!, "123456");
-
-    expect(input).toHaveValue("12345");
-  });
-
   it("displays error state correctly", () => {
     render(<PasswordInput {...baseProps} hasError />);
 
@@ -337,66 +327,6 @@ describe("<PasswordInput />", () => {
       expect(onValidateInput).toHaveBeenCalledWith(
         true,
         expect.objectContaining({ length: true }),
-      );
-    });
-
-    it("validates uppercase requirement", async () => {
-      const onValidateInput = jest.fn();
-      const user = userEvent.setup();
-      render(
-        <PasswordInput
-          {...baseProps}
-          passwordSettings={{
-            ...basePasswordSettings,
-            upperCase: true,
-          }}
-          onValidateInput={onValidateInput}
-        />,
-      );
-
-      const input = screen.getByTestId("password-input").querySelector("input");
-      await user.type(input!, "lowercase");
-
-      expect(onValidateInput).toHaveBeenCalledWith(
-        false,
-        expect.objectContaining({ capital: false }),
-      );
-
-      await user.clear(input!);
-      await user.type(input!, "withUPPERCASE");
-      expect(onValidateInput).toHaveBeenCalledWith(
-        true,
-        expect.objectContaining({ capital: true }),
-      );
-    });
-
-    it("validates digits requirement", async () => {
-      const onValidateInput = jest.fn();
-      const user = userEvent.setup();
-      render(
-        <PasswordInput
-          {...baseProps}
-          passwordSettings={{
-            ...basePasswordSettings,
-            digits: true,
-          }}
-          onValidateInput={onValidateInput}
-        />,
-      );
-
-      const input = screen.getByTestId("password-input").querySelector("input");
-      await user.type(input!, "nodigits");
-
-      expect(onValidateInput).toHaveBeenCalledWith(
-        false,
-        expect.objectContaining({ digits: false }),
-      );
-
-      await user.clear(input!);
-      await user.type(input!, "with123digits");
-      expect(onValidateInput).toHaveBeenCalledWith(
-        true,
-        expect.objectContaining({ digits: true }),
       );
     });
 

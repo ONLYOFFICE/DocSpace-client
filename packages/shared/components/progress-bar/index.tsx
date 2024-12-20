@@ -65,12 +65,17 @@ const ProgressBar = ({
         aria-label={label}
         data-status={status || undefined}
         data-error={error || undefined}
+        data-progress={progressPercent}
       >
         {isInfiniteProgress ? (
-          <div className={styles.animation} />
+          <div
+            className={styles.animation}
+            data-testid="progress-bar-animation"
+          />
         ) : (
           <div
             className={styles.percent}
+            data-testid="progress-bar-percent"
             style={{ width: `${progressPercent}%` }}
           />
         )}

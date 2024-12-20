@@ -511,7 +511,7 @@ class FilesStore {
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
-      const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.getFileIndex(opt?.id);
 
       const file = JSON.parse(opt?.data);
 
@@ -540,15 +540,13 @@ class FilesStore {
       );
 
       setTimeout(() => {
-        const foundIndex = this.files.findIndex((x) => x.id === file.id);
-        if (foundIndex > -1) {
+        if (this.getFileIndex(file.id) > -1) {
           // console.log("Skip in timeout");
           return null;
         }
 
         this.createNewFilesQueue.enqueue(() => {
-          const foundIndex = this.files.findIndex((x) => x.id === file.id);
-          if (foundIndex > -1) {
+          if (this.getFileIndex(file.id) > -1) {
             // console.log("Skip in queue");
             return null;
           }
@@ -1633,8 +1631,6 @@ class FilesStore {
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
 
-            const folderId = folder.id;
-
             // if (
             //   data.current.providerKey &&
             //   data.current.rootFolderType === Rooms &&
@@ -1643,11 +1639,11 @@ class FilesStore {
             //   folderId = this.treeFoldersStore.myRoomsId;
             // }
 
-            const isCurrentFolder = data.current.id == folderId;
+            const isCurrentFolder = data.current.id == folder.id;
 
             const folderInfo = isCurrentFolder
               ? data.current
-              : { ...folder, id: folderId };
+              : { ...folder, id: folder.id };
 
             const { title, roomType } = folderInfo;
 
@@ -1664,7 +1660,7 @@ class FilesStore {
               let room = data.current;
 
               if (!isCurrentFolder) {
-                room = await api.files.getFolderInfo(folderId);
+                room = await api.files.getFolderInfo(folder.id);
 
                 shared = room.shared;
                 external = room.external;
@@ -1695,7 +1691,7 @@ class FilesStore {
             }
 
             return {
-              id: folderId,
+              id: folder.id,
               title,
               isRoom: !!roomType,
               roomType,
@@ -1729,21 +1725,14 @@ class FilesStore {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
           if (filter && isEmptyList) {
-            const {
-              authorType,
-              roomId,
-              search,
-              withSubfolders,
-              filterType,
-              searchInContent,
-            } = filter;
+            const { authorType, roomId, search } = filter;
             const isFiltered =
               authorType ||
               roomId ||
               search ||
-              withSubfolders ||
-              filterType ||
-              searchInContent;
+              filter.withSubfolders ||
+              filter.filterType ||
+              filter.searchInContent;
 
             if (isFiltered) {
               this.setIsEmptyPage(false);
@@ -1971,20 +1960,18 @@ class FilesStore {
                 searchInContent: searchInContentRooms,
                 tags,
                 withoutTags,
-                quotaFilter,
-                provider,
               } = filter;
 
               const isFiltered =
                 subjectId ||
                 filterValue ||
                 type ||
-                provider ||
+                filter.provider ||
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
                 withoutTags ||
-                quotaFilter;
+                filter.quotaFilter;
 
               if (isFiltered) {
                 this.setIsEmptyPage(false);

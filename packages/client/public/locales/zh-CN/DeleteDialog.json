@@ -13,8 +13,8 @@
   "FilePermanentlyDeleted": "30 天后，文件会被永久删除。",
   "FolderPermanentlyDeleted": "30 天后，文件夹会被永久删除。",
   "ItemsPermanentlyDeleted": "30 天后，项目会被永久删除。",
-  "MoveToTrashButton": "移至垃圾箱",
-  "MoveToTrashTitle": "要移动到垃圾桶吗？",
+  "MoveToTrashButton": "移至回收站",
+  "MoveToTrashTitle": "要移动到回收站吗？",
   "UnsubscribeButton": "取消订阅",
   "UnsubscribeNote": "您确定要取消订阅列表中的选定项目吗？",
   "UnsubscribeTitle": "取消订阅确认"

@@ -26,7 +26,7 @@
 
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
+
 import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -39,30 +39,14 @@ const DownloadRow = (props) => {
     onRowSelect,
     type,
     dropdownItems,
-    getIcon,
-    getFolderIcon,
     isOther,
     isChecked,
+    getItemIcon,
   } = props;
 
   //console.log("DownloadRow render");
 
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
-
-  const getItemIcon = (item) => {
-    const extension = item.fileExst;
-    const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
-
-    return (
-      <ReactSVG
-        beforeInjection={(svg) => {
-          svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
-        }}
-        src={icon}
-        loading={() => <div style={{ width: "96px" }} />}
-      />
-    );
-  };
 
   const element = getItemIcon(file);
 

@@ -118,7 +118,7 @@ const StyledUsersContent = styled.div`
   .data__body {
     display: grid;
     grid-template-rows: 28px 28px 28px 1fr;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: fit-content(50%) 1fr;
     grid-gap: 0 24px;
     align-items: center;
 

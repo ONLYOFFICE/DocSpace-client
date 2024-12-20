@@ -47,6 +47,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       autoFocus,
       tabIndex = -1,
       paddingAfterLastItem,
+      bodyPadding,
       ...rest
     } = props;
 
@@ -138,6 +139,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
         disableTracksWidthCompensation
         $fixedSize={fixedSize}
         $paddingAfterLastItem={paddingAfterLastItem}
+        $bodyPadding={bodyPadding}
         rtl={isRtl}
         className={className}
         wrapperProps={{ className: "scroll-wrapper" }}

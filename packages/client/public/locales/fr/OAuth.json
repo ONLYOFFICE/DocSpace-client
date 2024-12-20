@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Méthode d'authentification",
   "AuthorizedApps": "Applications autorisées",
   "AuthorizeLink": "Autoriser le lien",
+  "BasicInfo": "Information de base",
   "Client": "Client",
   "ClientCopy": "L'identifiant du client a été copié avec succès dans le presse-papiers",
   "ClientHelpButton": "Les données d'identification pour l'utilisation de OAth 2.0 comme type d'authentification.<br/> <strong>Note :</strong> Tout administrateur d'entreprise connaissant l'identifiant client de l'application sera en mesure de récupérer des informations sur l'application, notamment le nom de l'application, le type d'authentification, les champs d'application et l'URL de redirection.",

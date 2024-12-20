@@ -30,6 +30,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { TTranslation } from "@docspace/shared/types";
+import { TFolder } from "@docspace/shared/api/files/types";
 
 export const showSuccessExportRoomIndexToast = (
   t: TTranslation,
@@ -50,6 +51,33 @@ export const showSuccessExportRoomIndexToast = (
             themeId={ThemeId.Link}
             href={fileUrl}
             target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+          />
+        ),
+      }}
+    />
+  );
+
+  toastr.success(toastMessage);
+};
+
+export const showSuccessCreateFolder = (
+  t: TTranslation,
+  item: TFolder,
+  onOpenFolder: (item: TFolder & { isFolder: true }) => void,
+) => {
+  const toastMessage = (
+    <Trans
+      t={t}
+      i18nKey="FolderSuccessfullyCreated"
+      ns="Files"
+      values={{ folderTitle: item.title }}
+      components={{
+        1: (
+          <ColorTheme
+            tag="a"
+            themeId={ThemeId.Link}
+            onClick={() => onOpenFolder({ ...item, isFolder: true })}
+            target={LinkTarget.self}
           />
         ),
       }}

@@ -1,6 +1,6 @@
 {
   "name": "@docspace/shared",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "scripts": {
     "build": "echo 'skip it'",
@@ -31,6 +31,7 @@
     "file-saver": "^2.0.5",
     "framer-motion": "^4.1.17",
     "global": "^4.4.0",
+    "heic2any": "^0.0.4",
     "html-to-react": "^1.7.0",
     "i18next": "^20.6.1",
     "lodash": "4.17.21",

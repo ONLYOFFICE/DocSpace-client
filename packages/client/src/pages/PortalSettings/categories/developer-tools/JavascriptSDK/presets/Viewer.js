@@ -56,9 +56,10 @@ import {
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { Integration } from "../sub-components/Integration";
+import api from "@docspace/shared/api";
 
 const Viewer = (props) => {
-  const { t, getFilePrimaryLink, theme, currentColorScheme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -79,7 +80,7 @@ const Viewer = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -102,7 +103,7 @@ const Viewer = (props) => {
     };
 
     if (file.inPublic) {
-      const link = await getFilePrimaryLink(file.id);
+      const link = await api.files.getFileLink(file.id);
       const { requestToken } = link.sharedTo;
 
       newConfig.requestToken = requestToken;
@@ -215,13 +216,11 @@ const Viewer = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, filesStore }) => {
+export const Component = inject(({ settingsStore }) => {
   const { theme, currentColorScheme } = settingsStore;
-  const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
-    getFilePrimaryLink,
     currentColorScheme,
   };
 })(

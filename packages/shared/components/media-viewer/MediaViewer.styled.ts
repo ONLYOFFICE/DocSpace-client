@@ -74,9 +74,9 @@ export const StyledDropDownItem = styled(DropDownItem)`
     }
   }
 
-  /* &:hover {
-    background: ${globalColors.black};
-  } */
+  &:hover {
+    background: ${globalColors.lightDarkGrayHover};
+  }
 `;
 
 export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`

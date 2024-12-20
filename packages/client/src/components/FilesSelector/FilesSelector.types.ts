@@ -57,6 +57,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   withSearch: boolean;
   withBreadCrumbs: boolean;
   withSubtitle: boolean;
+  withPadding?: boolean;
 
   isMove?: boolean;
   isCopy?: boolean;
@@ -71,6 +72,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   fromFolderId?: number;
   parentId: number;
   rootFolderType: number;
+  folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
 
@@ -147,4 +149,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   openRoot?: boolean;
 
   filesSettings: TFilesSettings;
+
+  withCreate?: boolean;
+  checkCreating?: boolean;
 };

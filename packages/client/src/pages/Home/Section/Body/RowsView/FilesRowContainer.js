@@ -72,6 +72,8 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
+  icon,
+  isDownload,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -98,6 +100,8 @@ const FilesRowContainer = ({
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
         isIndexEditingMode={isIndexEditingMode}
+        icon={icon}
+        isDownload={isDownload}
       />
     ));
   }, [
@@ -107,6 +111,8 @@ const FilesRowContainer = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    icon,
+    isDownload,
   ]);
 
   return (
@@ -133,6 +139,7 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
+    uploadDataStore,
   }) => {
     const {
       filesList,
@@ -151,6 +158,8 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
     return {
       filesList,
       viewAs,
@@ -165,6 +174,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
+      icon,
+      isDownload,
     };
   },
 )(observer(FilesRowContainer));

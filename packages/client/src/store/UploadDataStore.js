@@ -473,31 +473,29 @@ class UploadDataStore {
 
       const numberFiles = this.files.filter((f) => f.needConvert).length;
 
-      const res = convertFile(fileId, format, itemPassword)
-        .then((res) => res)
-        .catch(() => {
-          const error = t("FailedToConvert");
+      const res = convertFile(fileId, format, itemPassword).catch(() => {
+        const error = t("FailedToConvert");
 
-          runInAction(() => {
-            if (file) file.error = error;
-            if (historyFile) historyFile.error = error;
-          });
-
-          if (this.uploaded) {
-            const primaryProgressData = {
-              icon: "file",
-              alert: true,
-            };
-
-            this.primaryProgressDataStore.setPrimaryProgressBarData(
-              numberFiles === 1
-                ? { ...primaryProgressData, ...{ percent: 100 } }
-                : primaryProgressData,
-            );
-          }
-
-          return null;
+        runInAction(() => {
+          if (file) file.error = error;
+          if (historyFile) historyFile.error = error;
         });
+
+        if (this.uploaded) {
+          const primaryProgressData = {
+            icon: "file",
+            alert: true,
+          };
+
+          this.primaryProgressDataStore.setPrimaryProgressBarData(
+            numberFiles === 1
+              ? { ...primaryProgressData, ...{ percent: 100 } }
+              : primaryProgressData,
+          );
+        }
+
+        return null;
+      });
 
       const data = await res;
 
@@ -507,18 +505,18 @@ class UploadDataStore {
         let error = null;
 
         while (progress < 100) {
-          const res = await getConversationProgress(fileId);
-          progress = res && res[0] && res[0].progress;
-          fileInfo = res && res[0] && res[0].result;
+          const response = await getConversationProgress(fileId);
+          progress = response?.[0]?.progress;
+          fileInfo = response?.[0]?.result;
 
           runInAction(() => {
-            const file = this.files.find((file) => file.fileId === fileId);
-            if (file) file.convertProgress = progress;
+            const currentFile = this.files.find((f) => f.fileId === fileId);
+            if (currentFile) currentFile.convertProgress = progress;
 
-            const historyFile = this.uploadedFilesHistory.find(
-              (file) => file.fileId === fileId,
+            const hFile = this.uploadedFilesHistory.find(
+              (f) => f.fileId === fileId,
             );
-            if (historyFile) historyFile.convertProgress = progress;
+            if (hFile) hFile.convertProgress = progress;
           });
 
           error = res && res[0] && res[0].error;
@@ -527,21 +525,21 @@ class UploadDataStore {
             this.setConversionPercent(percent, !!error);
 
             runInAction(() => {
-              const file = this.files.find((file) => file.fileId === fileId);
-              if (file) {
-                file.error = error;
-                file.inConversion = false;
-                if (fileInfo === "password") file.needPassword = true;
+              const newFile = this.files.find((f) => f.fileId === fileId);
+              if (newFile) {
+                newFile.error = error;
+                newFile.inConversion = false;
+                if (fileInfo === "password") newFile.needPassword = true;
               }
 
-              const historyFile = this.uploadedFilesHistory.find(
-                (file) => file.fileId === fileId,
+              const hFile = this.uploadedFilesHistory.find(
+                (f) => f.fileId === fileId,
               );
 
-              if (historyFile) {
-                historyFile.error = error;
-                historyFile.inConversion = false;
-                if (fileInfo === "password") historyFile.needPassword = true;
+              if (hFile) {
+                hFile.error = error;
+                hFile.inConversion = false;
+                if (fileInfo === "password") hFile.needPassword = true;
               }
             });
 
@@ -566,31 +564,31 @@ class UploadDataStore {
           }
 
           runInAction(() => {
-            const file = this.files.find((file) => file.fileId === fileId);
+            const currentFile = this.files.find((f) => f.fileId === fileId);
 
-            if (file) {
-              file.error = error;
-              file.convertProgress = progress;
-              file.inConversion = false;
-              file.fileInfo = fileInfo;
+            if (currentFile) {
+              currentFile.error = error;
+              currentFile.convertProgress = progress;
+              currentFile.inConversion = false;
+              currentFile.fileInfo = fileInfo;
 
               if (error.indexOf("password") !== -1) {
-                file.needPassword = true;
-              } else file.action = "converted";
+                currentFile.needPassword = true;
+              } else currentFile.action = "converted";
             }
 
-            const historyFile = this.uploadedFilesHistory.find(
-              (file) => file.fileId === fileId,
+            const hFile = this.uploadedFilesHistory.find(
+              (f) => f.fileId === fileId,
             );
 
-            if (historyFile) {
-              historyFile.error = error;
-              historyFile.convertProgress = progress;
-              historyFile.inConversion = false;
+            if (hFile) {
+              hFile.error = error;
+              hFile.convertProgress = progress;
+              hFile.inConversion = false;
 
               if (error.indexOf("password") !== -1) {
-                historyFile.needPassword = true;
-              } else historyFile.action = "converted";
+                hFile.needPassword = true;
+              } else hFile.action = "converted";
             }
           });
 
@@ -619,7 +617,7 @@ class UploadDataStore {
                     }),
                   ),
                 )
-                .catch((error) => toastr.error(error));
+                .catch((err) => toastr.error(err));
           }
           const percent = this.getConversationPercent(index + 1);
           this.setConversionPercent(percent, !!error);
@@ -1251,7 +1249,7 @@ class UploadDataStore {
         }
 
         const res = await uploadFile(location, requestsDataArray[index]);
-        const resolve = (res) => Promise.resolve(res);
+        const resolve = (r) => Promise.resolve(r);
         const reject = (err) => Promise.reject(err);
 
         this.checkChunkUpload({
@@ -1371,33 +1369,30 @@ class UploadDataStore {
         return {
           location,
           requestsDataArray,
-          fileSize,
           path,
           operationId,
         };
       })
-      .then(
-        ({ location, requestsDataArray, fileSize, path, t, operationId }) => {
-          const fileIndex = this.uploadedFilesHistory.findIndex(
-            (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-          );
-          if (fileIndex > -1)
-            this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
+      .then(({ location, requestsDataArray, path, operationId }) => {
+        const fileIndex = this.uploadedFilesHistory.findIndex(
+          (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+        );
+        if (fileIndex > -1)
+          this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
 
-          return this.uploadFileChunks(
-            location,
-            requestsDataArray,
-            fileSize,
-            indexOfFile,
-            file,
-            path,
-            t,
-            operationId,
-            toFolderId,
-            createNewIfExist,
-          );
-        },
-      )
+        return this.uploadFileChunks(
+          location,
+          requestsDataArray,
+          fileSize,
+          indexOfFile,
+          file,
+          path,
+          t,
+          operationId,
+          toFolderId,
+          createNewIfExist,
+        );
+      })
       .catch((error) => {
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({

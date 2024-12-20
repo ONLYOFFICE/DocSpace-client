@@ -73,7 +73,6 @@
   "ExportRoomIndex": "Raumindex exportieren",
   "ExportRoomIndexAlreadyInProgressError": "Der Raumindex wird bereits exportiert. Bitte warten Sie, bis der aktuelle Export abgeschlossen ist, bevor Sie einen neuen starten.",
   "FavoritesEmptyContainerDescription": "Benutzen Sie das Kontext-Menü, um Dateien als Favoriten zu kennzeichnen oder sie aus dieser Liste zu entfernen.",
-  "FileCannotBeMoved": "Die Datei kann nicht in diesen Raum verschoben werden.",
   "FileContents": "Inhalt in der Datei",
   "FileDownloadingIsRestricted": "Das Herunterladen von Dateien ist in diesem Raum eingeschränkt.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> Datei in \"Dokumente\" exportiert",

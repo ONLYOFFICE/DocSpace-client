@@ -34,7 +34,7 @@ const isEditor = pathname.indexOf("doceditor") !== -1;
 const isGallery = pathname.indexOf("form-gallery") !== -1;
 
 const withLoader = (WrappedComponent) => (Loader) => {
-  const withLoader = (props) => {
+  const LoaderWrapper = (props) => {
     const {
       isInit,
       tReady,
@@ -105,6 +105,6 @@ const withLoader = (WrappedComponent) => (Loader) => {
         accountsViewAs,
       };
     },
-  )(observer(withLoader));
+  )(observer(LoaderWrapper));
 };
 export default withLoader;

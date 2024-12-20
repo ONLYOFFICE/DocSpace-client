@@ -54,9 +54,9 @@ const ConvertPasswordDialogComponent = (props) => {
   const [passwordValid, setPasswordValid] = useState(true);
 
   const onChangePassword = useCallback(
-    (password) => {
+    (pwd) => {
       !passwordValid && setPasswordValid(true);
-      setPassword(password);
+      setPassword(pwd);
     },
     [passwordValid],
   );

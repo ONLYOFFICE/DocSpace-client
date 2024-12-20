@@ -95,24 +95,24 @@ const ChangeRoomOwner = (props) => {
       await changeRoomOwner(t, user[0]?.id, isChecked);
       updateInfoPanelSelection();
     }
-    onClose();
+    handleClosePanel();
   };
 
-  const onClose = () => {
+  const handleClosePanel = () => {
     const { onClose } = props;
     if (onClose) onClose();
     setIsVisible(false);
   };
 
   const onBackClick = () => {
-    onClose();
+    onClosePanel();
   };
 
   const filter = useMemo(() => {
-    const filter = Filter.getDefault();
-    filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
-    filter.employeeStatus = EmployeeStatus.Active;
-    return filter;
+    const newFilter = Filter.getDefault();
+    newFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    newFilter.employeeStatus = EmployeeStatus.Active;
+    return newFilter;
   }, []);
 
   const ownerIsCurrentUser = roomOwnerId === userId;
@@ -120,14 +120,14 @@ const ChangeRoomOwner = (props) => {
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
-      onCancel={onClose}
+      onCancel={handleClosePanel}
       cancelButtonLabel=""
       disableSubmitButton={false}
       submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
       onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{
-        onCloseClick: onClose,
+        onCloseClick: handleClosePanel,
         onBackClick,
         withoutBackButton: !showBackButton,
         headerLabel: t("Files:ChangeTheRoomOwner"),
@@ -156,7 +156,7 @@ const ChangeRoomOwner = (props) => {
     <ModalDialog
       isLoading={!tReady}
       visible={visible}
-      onClose={onClose}
+      onClose={handleClosePanel}
       displayType={ModalDialogType.aside}
       withoutPadding
     >

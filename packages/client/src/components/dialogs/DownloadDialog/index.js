@@ -202,15 +202,15 @@ class DownloadDialogComponent extends React.Component {
 
       const disableFiles = files.find((x) => x.checked === false);
       const activeFiles = files.find((x) => x.checked === true);
-      const isIndeterminate = !activeFiles ? false : !!disableFiles;
-      const isChecked = !disableFiles;
 
       this.setState((prevState) => {
         const newState = { ...prevState };
 
         newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = isIndeterminate;
-        newState[fieldStateName].isChecked = isChecked;
+        newState[fieldStateName].isIndeterminate = !activeFiles
+          ? false
+          : !!disableFiles;
+        newState[fieldStateName].isChecked = !disableFiles;
 
         return { ...prevState, ...newState };
       });

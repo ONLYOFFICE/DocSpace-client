@@ -29,7 +29,7 @@ import { observer, inject } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 
 const withLoading = (WrappedComponent) => {
-  const withLoading = (props) => {
+  const LoaderWrapper = (props) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -171,6 +171,6 @@ const withLoading = (WrappedComponent) => {
       enablePortalRename,
       deviceType,
     };
-  })(observer(withLoading));
+  })(observer(LoaderWrapper));
 };
 export default withLoading;

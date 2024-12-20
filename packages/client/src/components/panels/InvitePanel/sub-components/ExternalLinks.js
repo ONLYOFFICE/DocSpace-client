@@ -113,7 +113,7 @@ const ExternalLinks = ({
 
     const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-    const activeLink = {
+    const newShareLink = {
       id,
       title,
       shareLink,
@@ -122,8 +122,8 @@ const ExternalLinks = ({
     };
 
     copyLink(shareLink);
-    setShareLinks([activeLink]);
-    return setActiveLink(activeLink);
+    setShareLinks([newShareLink]);
+    return setActiveLink(newShareLink);
   };
 
   const onSelectAccess = async (access) => {

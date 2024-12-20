@@ -45,12 +45,12 @@ const LimitTimeBlock = (props) => {
   const { t } = useTranslation(["Common"]);
 
   const onChange = (date) => {
-    const isExpired = date
+    const expired = date
       ? new Date(date).getTime() <= new Date().getTime()
       : false;
 
     setExpirationDate(date);
-    setIsExpired(isExpired);
+    setIsExpired(expired);
   };
 
   if (isPrimary) {

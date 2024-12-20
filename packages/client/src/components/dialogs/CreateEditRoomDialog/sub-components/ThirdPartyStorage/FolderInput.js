@@ -149,12 +149,13 @@ const FolderInput = ({
   const getPathValue = () => {
     if (!treeNode) return;
 
-    let path = treeNode.path;
-    path = path.slice(1);
+    let currentPath = treeNode.path;
+    currentPath = currentPath.slice(1);
 
     let result = "";
-    path.map(
-      (node, i) => (result += node.title + (i !== path.length - 1 ? "/" : "")),
+    currentPath.map(
+      (node, i) =>
+        (result += node.title + (i !== currentPath.length - 1 ? "/" : "")),
     );
 
     setPath(result);

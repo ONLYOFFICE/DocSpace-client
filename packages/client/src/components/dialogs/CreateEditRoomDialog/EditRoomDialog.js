@@ -68,12 +68,12 @@ const EditRoomDialog = ({
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
       prevParams.tags
-        .map((t) => t.name)
+        .map((tag) => tag.name)
         .sort()
         .join("|")
         .toLowerCase() ===
         currentParams.tags
-          .map((t) => t.name)
+          .map((tag) => tag.name)
           .sort()
           .join("|")
           .toLowerCase() &&

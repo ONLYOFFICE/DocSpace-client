@@ -62,8 +62,6 @@ async function Page() {
     <WhiteLabelPage
       whiteLabelLogos={whiteLabelLogos}
       logoText={whiteLabelText}
-      defaultLogoText={whiteLabelText}
-      defaultWhiteLabelLogoUrls={whiteLabelLogos}
       showAbout={showAbout}
       isDefaultWhiteLabel={isDefaultWhiteLabel}
       standalone={standalone}

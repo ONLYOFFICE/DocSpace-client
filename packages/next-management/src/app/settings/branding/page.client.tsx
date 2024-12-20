@@ -46,8 +46,6 @@ const baseUrl = "/settings";
 const BrandingPage = ({
   whiteLabelLogos,
   logoText,
-  defaultLogoText,
-  defaultWhiteLabelLogoUrls,
   showAbout,
   isDefaultWhiteLabel,
   standalone,
@@ -87,8 +85,6 @@ const BrandingPage = ({
       <WhiteLabelPage
         whiteLabelLogos={whiteLabelLogos}
         logoText={logoText}
-        defaultLogoText={defaultLogoText}
-        defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
         showAbout={showAbout}
         isDefaultWhiteLabel={isDefaultWhiteLabel}
         standalone={standalone}

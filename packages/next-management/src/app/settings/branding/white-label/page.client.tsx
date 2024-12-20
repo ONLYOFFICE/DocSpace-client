@@ -29,23 +29,29 @@
 import React, { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter, usePathname } from "next/navigation";
+import cloneDeep from "lodash/cloneDeep";
 
 import {
   setWhiteLabelSettings,
   restoreWhiteLabelSettings,
+  getLogoText,
+  getLogoUrls,
+  getIsDefaultWhiteLabel as getIsDefaultWhiteLabelRequest,
 } from "@docspace/shared/api/settings";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { toastr } from "@docspace/shared/components/toast";
 import { WhiteLabel } from "@docspace/shared/pages/Branding/WhiteLabel";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
+import {
+  getIsSettingsPaid,
+  getIsCustomizationAvailable,
+  getIsDefaultWhiteLabel,
+} from "@/lib";
 
 export const WhiteLabelPage = ({
   whiteLabelLogos,
   logoText,
-  defaultLogoText,
-  defaultWhiteLabelLogoUrls,
   showAbout,
   isDefaultWhiteLabel,
   standalone,
@@ -57,7 +63,14 @@ export const WhiteLabelPage = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const [logoUrls, setLogoUrls] = useState(whiteLabelLogos);
+  const [logoUrls, setLogoUrls] = useState(cloneDeep(whiteLabelLogos));
+  const [companyName, setCompanyName] = useState(logoText);
+  const [defaultLogoUrls, setDefaultLogoUrls] = useState(
+    cloneDeep(whiteLabelLogos),
+  );
+  const [defaultText, setDefaultText] = useState(logoText);
+  const [isDefault, setIsDefault] = useState(isDefaultWhiteLabel);
+
   const [isSaving, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
@@ -75,6 +88,15 @@ export const WhiteLabelPage = ({
     startTransition(async () => {
       try {
         await setWhiteLabelSettings(data, true);
+        const text = await getLogoText(true);
+        const logos = await getLogoUrls(null, true);
+        const isDefault = await getIsDefaultWhiteLabelRequest(true);
+
+        setCompanyName(text);
+        setDefaultText(text);
+        setLogoUrls(logos);
+        setDefaultLogoUrls(logos);
+        setIsDefault(getIsDefaultWhiteLabel(isDefault));
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
@@ -85,6 +107,15 @@ export const WhiteLabelPage = ({
   const onRestoreDefault = async () => {
     try {
       await restoreWhiteLabelSettings(true);
+      const text = await getLogoText(true);
+      const logos = await getLogoUrls(null, true);
+      const isDefault = await getIsDefaultWhiteLabelRequest(true);
+
+      setCompanyName(text);
+      setDefaultText(text);
+      setLogoUrls(logos);
+      setDefaultLogoUrls(logos);
+      setIsDefault(getIsDefaultWhiteLabel(isDefault));
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -101,12 +132,12 @@ export const WhiteLabelPage = ({
       onSave={onSave}
       onRestoreDefault={onRestoreDefault}
       isSaving={isSaving}
-      enableRestoreButton={isDefaultWhiteLabel}
+      enableRestoreButton={isDefault}
       setLogoUrls={setLogoUrls}
       isWhiteLabelLoaded={true}
-      defaultLogoText={defaultLogoText}
-      defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
-      logoText={logoText}
+      defaultLogoText={defaultText}
+      defaultWhiteLabelLogoUrls={defaultLogoUrls}
+      logoText={companyName}
     />
   );
 };

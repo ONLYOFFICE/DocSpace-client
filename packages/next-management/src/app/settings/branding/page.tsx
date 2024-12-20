@@ -75,9 +75,7 @@ async function Page() {
   return (
     <BrandingPage
       whiteLabelLogos={whiteLabelLogos}
-      defaultWhiteLabelLogoUrls={whiteLabelLogos}
       logoText={whiteLabelText}
-      defaultLogoText={whiteLabelText}
       showAbout={showAbout}
       isDefaultWhiteLabel={isDefaultWhiteLabel}
       standalone={standalone}

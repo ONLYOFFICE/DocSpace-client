@@ -114,10 +114,13 @@ export function deleteBackupSchedule() {
   return request(options);
 }
 
-export function getBackupSchedule() {
+export function getBackupSchedule(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }

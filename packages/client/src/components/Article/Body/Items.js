@@ -132,12 +132,12 @@ const Item = ({
   }, []);
 
   const onClickAction = React.useCallback(
-    (e, folderId) => {
+    (e, selectedFolderId) => {
       setBufferSelection(null);
 
       onClick?.(
         e,
-        folderId,
+        selectedFolderId,
         item.title,
         item.rootFolderType,
         item.security.Create,
@@ -322,8 +322,8 @@ const Items = ({
   };
 
   const getItems = React.useCallback(
-    (data) => {
-      const items = data.map((item, index) => {
+    (elm) => {
+      const items = elm.map((item, index) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -345,7 +345,7 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === data.length - 1}
+            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}

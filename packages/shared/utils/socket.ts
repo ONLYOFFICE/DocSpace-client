@@ -54,6 +54,7 @@ export const enum SocketEvents {
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
   BackupProgress = "s:backup-progress",
+  RestoreProgress = "s:restore-progress",
 }
 
 /**
@@ -214,6 +215,7 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.RestoreProgress]: (data: number) => void;
 };
 
 /**

@@ -166,7 +166,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
+    await this.settingsStore?.init();
 
     const requests = [];
 
@@ -174,6 +174,8 @@ class AuthStore {
 
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
+
+    if (!isPortalRestore) requests.push(this.getCapabilities());
 
     if (
       this.settingsStore?.isLoaded &&

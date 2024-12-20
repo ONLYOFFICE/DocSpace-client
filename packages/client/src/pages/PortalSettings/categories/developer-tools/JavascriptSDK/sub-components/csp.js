@@ -179,17 +179,17 @@ const CSP = ({
     const domains = trimmedDomain.split(" ");
 
     for (let i = 0; i < domains.length; i++) {
-      const domain = domains[i];
+      const newDomain = domains[i];
 
-      if (domain === "" || domainsSetting.includes(domain)) continue;
+      if (newDomain === "" || domainsSetting.includes(newDomain)) continue;
 
-      domainsSetting.push(domain);
+      domainsSetting.push(newDomain);
     }
 
     try {
       await setCSPSettings({ domains: domainsSetting });
-    } catch (error) {
-      setError(error?.response?.data?.error?.message);
+    } catch (err) {
+      setError(err?.response?.data?.error?.message);
     } finally {
       changeDomain("");
     }

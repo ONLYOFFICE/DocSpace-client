@@ -38,9 +38,9 @@ export const SearchTerm = ({ t, config, setConfig }) => {
 
   const debouncedSetConfig = useCallback(
     debounce((value) => {
-      setConfig((config) => ({
-        ...config,
-        filter: { ...config.filter, filterValue: value },
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        filter: { ...oldConfig.filter, filterValue: value },
       }));
     }, 500),
     [setConfig],
@@ -52,8 +52,8 @@ export const SearchTerm = ({ t, config, setConfig }) => {
   };
 
   const onChangeWithSubfolders = () => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       withSubfolders: !config.withSubfolders,
     }));
   };

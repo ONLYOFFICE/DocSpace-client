@@ -120,7 +120,7 @@ const DocumentService = ({
         setInitInternalUrl(result?.docServiceUrlInternal);
         setInitDocServiceUrl(result?.docServiceUrl);
       })
-      .catch((e) => toastr.error(e))
+      .catch((err) => toastr.error(err))
       .finally(() => setSaveIsLoading(false));
   };
 

@@ -68,8 +68,8 @@ export const MainElementParameter = ({
 
   const debouncedSetConfig = useCallback(
     debounce((key, value) => {
-      setConfig((config) => {
-        return { ...config, [key]: value };
+      setConfig((oldConfig) => {
+        return { ...oldConfig, [key]: value };
       });
     }, 500),
     [setConfig],
@@ -77,8 +77,8 @@ export const MainElementParameter = ({
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       isButtonMode: e.target.value === "button",
     }));
   };
@@ -93,8 +93,8 @@ export const MainElementParameter = ({
   };
 
   const toggleWithLogo = () => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       buttonWithLogo: !config.buttonWithLogo,
     }));
   };

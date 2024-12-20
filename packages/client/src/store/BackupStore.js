@@ -42,6 +42,8 @@ import {
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
+import i18n from "../i18n";
+
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
@@ -498,19 +500,24 @@ class BackupStore {
     }
   };
 
-  getProgress = async () => {
+  getProgress = async (isInitRequest = false) => {
     try {
       const response = await getBackupProgress();
 
       if (response) {
         const { progress, link, error } = response;
+
         if (!error) {
           this.downloadingProgress = progress;
 
+          if (progress === 100 && !isInitRequest) {
+            toastr.success(i18n.t("Settings:BackupCreatedSuccess"));
+          }
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
         } else {
+          toastr.error(error);
           this.downloadingProgress = 100;
         }
       }

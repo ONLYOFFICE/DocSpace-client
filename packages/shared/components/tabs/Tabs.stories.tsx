@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Tabs } from "./Tabs";
+import { Tabs } from ".";
 
 import { data } from "./data";
 import { TabsProps } from "./Tabs.types";

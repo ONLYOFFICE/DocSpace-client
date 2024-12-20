@@ -24,17 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
+import classNames from "classnames";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
+import { RectangleSkeleton } from "../../skeletons/rectangle";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { AsideHeaderProps } from "./AsideHeader.types";
-import { StyledHeaderContainer } from "./AsideHeader.styled";
-import { RectangleSkeleton } from "../../skeletons/rectangle";
 import { Heading, HeadingSize } from "../heading";
+
+import { AsideHeaderProps } from "./AsideHeader.types";
+import styles from "./AsideHeader.module.scss";
 
 const AsideHeader = (props: AsideHeaderProps) => {
   const {
@@ -52,9 +54,11 @@ const AsideHeader = (props: AsideHeaderProps) => {
     headerHeight,
   } = props;
 
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
   const backButtonRender = (
     <IconButton
-      className="arrow-button"
+      className={styles.arrowButton}
       iconName={ArrowPathReactSvgUrl}
       size={17}
       onClick={onBackClick}
@@ -66,7 +70,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
   const closeIconRender = (
     <IconButton
       size={17}
-      className="close-button"
+      className={styles.closeButton}
       iconName={CrossReactSvgUrl}
       onClick={onCloseClick}
       isClickable
@@ -81,13 +85,13 @@ const AsideHeader = (props: AsideHeaderProps) => {
       <Text
         fontSize="21px"
         fontWeight={700}
-        className="header-component"
+        className={styles.headerComponent}
         noSelect
       >
         {header}
       </Text>
     ) : (
-      <Heading className="heading" size={HeadingSize.medium} truncate>
+      <Heading className={styles.heading} size={HeadingSize.medium} truncate>
         {header}
       </Heading>
     );
@@ -97,12 +101,15 @@ const AsideHeader = (props: AsideHeaderProps) => {
       {isBackButton && backButtonRender}
       {header && headerComponent}
       {headerIcons.length > 0 && (
-        <div className="additional-icons-container">
+        <div
+          className={styles.additionalIconsContainer}
+          data-testid="icons-container"
+        >
           {headerIcons.map((item) => (
             <IconButton
               key={item.key}
               size={17}
-              className="close-button"
+              className={styles.closeButton}
               iconName={item.url}
               onClick={item.onClick}
               isClickable
@@ -115,19 +122,36 @@ const AsideHeader = (props: AsideHeaderProps) => {
     </>
   );
 
-  const loaderComponent = <RectangleSkeleton height="28" width="100%" />;
+  const loaderComponent = (
+    <RectangleSkeleton data-testid="loader" height="28" width="100%" />
+  );
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    if (headerHeight) {
+      containerRef.current.style.setProperty(
+        "--aside-header-custom-height",
+        headerHeight,
+      );
+    }
+  }, [headerHeight]);
 
   return (
-    <StyledHeaderContainer
+    <div
+      ref={containerRef}
       id={id}
-      className={className}
+      className={classNames(styles.container, className, {
+        [styles.withoutBorder]: withoutBorder,
+        [styles.customHeaderHeight]: headerHeight,
+      })}
       style={style}
-      withoutBorder={withoutBorder}
-      headerHeight={headerHeight}
+      data-testid="aside-header"
     >
       {isLoading ? loaderComponent : mainComponent}
-    </StyledHeaderContainer>
+    </div>
   );
 };
 
 export { AsideHeader };
+export type { AsideHeaderProps } from "./AsideHeader.types";

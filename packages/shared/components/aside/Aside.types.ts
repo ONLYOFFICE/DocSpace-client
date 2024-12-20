@@ -23,27 +23,27 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { AsideHeaderProps } from "../aside-header";
 
+/**
+ * Props for the Aside component.
+ */
 export type AsideProps = AsideHeaderProps & {
+  /** Controls the visibility of the aside panel */
   visible: boolean;
+  /** Enables scaling animation */
   scale?: boolean;
+  /** Additional CSS class names */
   className?: string;
-  contentPaddingBottom?: string;
+  /** Sets the z-index of the aside panel */
   zIndex?: number;
+  /** Content to be rendered inside the aside panel */
   children: React.ReactNode;
+  /** Disables body scroll when aside is open */
   withoutBodyScroll?: boolean;
+  /** Callback function when the aside is closed */
   onClose: () => void;
-
-  withoutHeader: boolean;
+  /** Removes the header section if true */
+  withoutHeader?: boolean;
 };
-
-export interface StyledAsideProps {
-  visible: boolean;
-  scale?: boolean;
-  zIndex?: number;
-  contentPaddingBottom?: string;
-  forwardRef?: React.LegacyRef<HTMLElement>;
-  children: React.ReactNode;
-  className: string;
-}

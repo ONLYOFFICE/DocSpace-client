@@ -23,45 +23,74 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import { TTooltipPlace, TooltipProps } from "../tooltip/Tooltip.types";
+$mobile-footer-height: 64px;
 
-export interface HelpButtonProps {
-  /** Displays the child elements  */
-  children?: React.ReactNode;
-  /** Sets the tooltip content  */
-  tooltipContent: string | React.ReactNode;
-  /** Required to set additional properties of the tooltip */
-  tooltipProps?: TooltipProps;
-  /** Sets the maximum width of the tooltip  */
-  tooltipMaxWidth?: string;
-  /** Sets the tooltip id */
-  tooltipId?: string;
-  /** Global tooltip placement */
-  place?: TTooltipPlace;
-  /** Specifies the icon name */
-  iconName?: string;
-  /** Icon color */
-  color?: string;
-  /** The data-* attribute is used to store custom data private to the page or application. Required to display a tip over the hovered element */
-  dataTip?: string;
-  /** Sets a callback function that generates the tip content dynamically */
-  getContent?: () => string | React.ReactNode;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style  */
-  style?: React.CSSProperties;
-  /** Button height and width value */
-  size?: number;
-  offset?: number;
-  afterShow?: () => void;
-  afterHide?: () => void;
-  offsetTop?: number;
-  offsetRight?: number;
-  offsetBottom?: number;
-  offsetLeft?: number;
-  openOnClick?: boolean;
-  isClickable?: boolean;
+:root {
+  --aside-bg-color: #{$white};
+
+  --aside-custom-z-index: unset;
+  --aside-content-padding-bottom: unset;
+
+  &[data-theme="dark"] {
+    --aside-bg-color: #{$black};
+  }
+
+  &[data-dir="rtl"] .aside {
+    left: 0;
+    right: unset;
+    transform: translateX(-480px);
+
+    &.scale {
+      transform: translateX(-100%);
+    }
+
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+}
+
+.aside {
+  background-color: var(--aside-bg-color);
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+
+  right: 0;
+  transform: translateX(480px);
+  transition: transform 0.3s ease-in-out;
+  width: 480px;
+  box-sizing: border-box;
+
+  &.scale {
+    transform: translateX(100%);
+    width: 100%;
+  }
+
+  &.visible {
+    transform: translateX(0);
+  }
+
+  @include mobile {
+    bottom: 0;
+    top: unset;
+    height: calc(100% - $mobile-footer-height);
+
+    width: 100%;
+    max-width: 100%;
+    transform: translateY(100%);
+
+    &.visible {
+      transform: translateY(0);
+    }
+
+    aside:not(:first-child) {
+      height: 100%;
+    }
+  }
 }

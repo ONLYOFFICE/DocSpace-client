@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const selectFirstChildItem = (rootKey, data) => {
-  const item = data.find((item) => item.key[0] === rootKey);
+  const item = data.find((element) => element.key[0] === rootKey);
   if (item.children) {
     return selectFirstChildItem(rootKey, item.children);
   }

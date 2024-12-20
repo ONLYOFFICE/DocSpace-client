@@ -219,10 +219,10 @@ const MainProfile = (props) => {
       label: "",
     };
 
-  const onLanguageSelect = (language) => {
-    if (profile.cultureName === language.key) return;
+  const onLanguageSelect = (newLanguage) => {
+    if (profile.cultureName === newLanguage.key) return;
 
-    updateProfileCulture(profile.id, language.key)
+    updateProfileCulture(profile.id, newLanguage.key)
       .then(() => window.location.reload())
       .catch((error) => {
         toastr.error(error && error.message ? error.message : error);

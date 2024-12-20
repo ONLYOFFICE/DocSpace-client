@@ -97,18 +97,18 @@ const InterfaceTheme = (props) => {
   } = props;
   const [currentTheme, setCurrentTheme] = useState(theme);
 
-  const themeChange = async (theme) => {
+  const themeChange = async (newTheme) => {
     showLoader();
 
     try {
-      setCurrentTheme(theme);
+      setCurrentTheme(newTheme);
 
       if (isDesktopClient) {
-        const editorTheme = getEditorTheme(theme);
+        const editorTheme = getEditorTheme(newTheme);
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }
 
-      await changeTheme(theme);
+      await changeTheme(newTheme);
     } catch (error) {
       console.error(error);
       toastr.error(error);

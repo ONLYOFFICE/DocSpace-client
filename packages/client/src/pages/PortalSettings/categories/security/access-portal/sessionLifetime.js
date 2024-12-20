@@ -215,7 +215,7 @@ const SessionLifetime = (props) => {
         });
         setShowReminder(false);
       })
-      .catch((error) => toastr.error(error));
+      .catch((err) => toastr.error(err));
   };
 
   const onCancelClick = () => {

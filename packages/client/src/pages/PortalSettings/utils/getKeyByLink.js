@@ -27,7 +27,7 @@
 export const getKeyByLink = (linkArr, data, index = 0) => {
   const length = linkArr.length;
   const currentElement = linkArr[index];
-  const item = data.find((item) => item.link === currentElement);
+  const item = data.find((element) => element.link === currentElement);
 
   if (index === length - 1 && item) {
     return item.key;

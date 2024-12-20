@@ -85,7 +85,7 @@ const ToggleLDAP = ({
       toggleLdap();
 
       if (!e.target.checked && isLdapEnabledOnServer) {
-        save(t, false, true).catch((e) => toastr.error(e));
+        save(t, false, true).catch((err) => toastr.error(err));
       }
     },
     [toggleLdap, t, save, isLdapEnabledOnServer],

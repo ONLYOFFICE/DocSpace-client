@@ -29,7 +29,7 @@ export const getTKeyByKey = (key, treeData, depth = 0) => {
   const keysCollection = key.split("-");
   const newKey = keysCollection.slice(0, depth + 1).join("-");
 
-  const item = treeData.find((item) => item.key === newKey);
+  const item = treeData.find((element) => element.key === newKey);
 
   if (item.children?.length === 1 && item.children[0].link === "") {
     return item.children[0].tKey;

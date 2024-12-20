@@ -91,7 +91,7 @@ const ToggleAutoSync = ({
           .then(() =>
             toastr.success(t("Settings:SuccessfullySaveSettingsMessage")),
           )
-          .catch((e) => toastr.error(e));
+          .catch((err) => toastr.error(err));
       }
     },
     [toggleCron],

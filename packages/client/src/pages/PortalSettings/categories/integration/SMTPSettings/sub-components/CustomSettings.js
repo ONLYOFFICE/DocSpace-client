@@ -86,12 +86,12 @@ const CustomSettings = (props) => {
   };
 
   const onValidateEmailInput = (result) => {
-    const { isValid, errors } = result;
+    const { isValid, errors: newErrors } = result;
 
     setEmailError({
       ...emailError,
       isValid,
-      errors,
+      errors: newErrors,
     });
   };
 

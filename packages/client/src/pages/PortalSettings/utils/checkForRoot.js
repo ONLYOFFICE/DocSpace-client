@@ -26,7 +26,7 @@
 
 export const checkForRoot = (key, treeData, depth = 0) => {
   const newKey = key.slice(0, 1 + 2 * depth);
-  const item = treeData.find((item) => item.key === newKey);
+  const item = treeData.find((element) => element.key === newKey);
   if (key === newKey) {
     return !!item.children;
   }

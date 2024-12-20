@@ -43,12 +43,12 @@ const LdapFieldComponent = (props) => {
   } = props;
 
   const onChangeFn = (e) => {
-    const { value, name } = e.target;
+    const { value, name: inputName } = e.target;
 
     if (value.trim() !== "") {
-      removeErrorField(name);
+      removeErrorField(inputName);
     } else {
-      setErrorField(name);
+      setErrorField(inputName);
     }
 
     onChange && onChange(e);

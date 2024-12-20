@@ -28,7 +28,7 @@ export const getSelectedLinkByKey = (key, treeData, depth = 0) => {
   const keysCollection = key.split("-");
   const newKey = keysCollection.slice(0, depth + 1).join("-");
 
-  const item = treeData.find((item) => item.key === newKey);
+  const item = treeData.find((element) => element.key === newKey);
 
   if (key === newKey) {
     if (!item.link) return "";

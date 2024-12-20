@@ -49,12 +49,12 @@ const SocialNetworks = (props) => {
 
   const fetchData = async () => {
     try {
-      const [providers] = await Promise.all([
+      const [newProviders] = await Promise.all([
         getAuthProviders(),
         getCapabilities(),
       ]);
 
-      setProviders(providers);
+      setProviders(newProviders);
     } catch (e) {
       console.error(e);
     }
@@ -92,8 +92,8 @@ const SocialNetworks = (props) => {
 
   const unlinkAccount = (providerName) => {
     unlinkOAuth(providerName).then(() => {
-      getAuthProviders().then((providers) => {
-        setProviders(providers);
+      getAuthProviders().then((providersAuth) => {
+        setProviders(providersAuth);
         toastr.success(t("ProviderSuccessfullyDisconnected"));
       });
     });
@@ -102,8 +102,8 @@ const SocialNetworks = (props) => {
   const loginCallback = (profile) => {
     linkOAuth(profile)
       .then(() => {
-        getAuthProviders().then((providers) => {
-          setProviders(providers);
+        getAuthProviders().then((providersAuth) => {
+          setProviders(providersAuth);
           toastr.success(t("ProviderSuccessfullyConnected"));
         });
       })

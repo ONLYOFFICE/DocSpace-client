@@ -137,7 +137,7 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings } = props;
+    const { setTfaSettings } = props;
     setIsSaving(true);
 
     try {

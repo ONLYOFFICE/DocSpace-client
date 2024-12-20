@@ -192,7 +192,7 @@ const IpSecurity = (props) => {
   };
 
   const onSaveClick = async () => {
-    const newIps = ips.filter((ips) => ips.trim() !== "");
+    const newIps = ips.filter((ip) => ip.trim() !== "");
 
     setIps(newIps);
     setIsSaving(true);

@@ -256,7 +256,7 @@ class CreateEditRoomStore {
 
     const tags = newParams.tags.map((tag) => tag.name);
     const prevTags = room.tags.sort();
-    const currTags = newParams.tags.map((t) => t.name).sort();
+    const currTags = newParams.tags.map((p) => p.name).sort();
     const isTagsChanged = !isEqual(prevTags, currTags);
 
     const editRoomParams = {

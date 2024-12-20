@@ -725,8 +725,10 @@ class SsoFormStore {
     }
   };
 
-  getUniqueItems = (array) => {
-    return array.filter((item, index, array) => array.indexOf(item) == index);
+  getUniqueItems = (inputArray) => {
+    return inputArray.filter(
+      (item, index) => inputArray.indexOf(item) === index,
+    );
   };
 
   setSpCertificate = (certificate, index, isEdit) => {

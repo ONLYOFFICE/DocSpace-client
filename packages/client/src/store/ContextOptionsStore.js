@@ -1037,10 +1037,10 @@ class ContextOptionsStore {
     if (loadingTime) {
       const currentDate = new Date();
 
-      const ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
+      let ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
 
       if (timer) {
-        const ms = Math.abs(ms - LOADER_TIMER);
+        ms = Math.abs(ms - LOADER_TIMER);
 
         clearTimeout(timer);
         timer = null;

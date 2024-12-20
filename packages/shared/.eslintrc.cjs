@@ -80,6 +80,7 @@ module.exports = {
     eqeqeq: "off",
     "react-hooks/rules-of-hooks": "off",
 
+    "@typescript-eslint/no-explicit-any": "off",
     "react/forbid-prop-types": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/no-loop-func": "off",
@@ -88,8 +89,6 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "off",
     "jsx-a11y/tabindex-no-positive": "off",
     "react-hooks/exhaustive-deps": "off",
-    "@typescript-eslint/no-shadow": "off",
-    "@typescript-eslint/no-explicit-any": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

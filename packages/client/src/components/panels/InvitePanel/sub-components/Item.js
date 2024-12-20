@@ -150,7 +150,7 @@ const Item = ({
 
     setSearchRequestRunning(false);
 
-    const user = users.items.find((item) => item.email === value);
+    const user = users.items.find((userItem) => userItem.email === value);
 
     setIsSharedUser(user && (roomId === -1 || user?.shared));
   };
@@ -207,7 +207,7 @@ const Item = ({
       : getUserTypeTranslation(type, t);
 
   const errorsInList = () => {
-    const hasErrors = inviteItems.some((item) => !!item.errors?.length);
+    const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
     setHasErrors(hasErrors);
   };
 
@@ -251,13 +251,13 @@ const Item = ({
   });
 
   const validateValue = (value) => {
-    const email = parseAddresses(value);
-    const parseErrors = email[0].parseErrors;
-    const errors = parseErrors.length ? parseErrors : [];
+    const parsedEmail = parseAddresses(value);
+    const validationErrors = parsedEmail[0].parseErrors;
+    const currentErrors = validationErrors.length ? validationErrors : [];
 
-    setParseErrors(errors);
-    changeInviteItem({ id, email: value, errors, access }).then(() =>
-      errorsInList(),
+    setParseErrors(currentErrors);
+    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
+      () => errorsInList(),
     );
   };
 
@@ -274,7 +274,7 @@ const Item = ({
   const hasError = parseErrors && !!parseErrors.length;
 
   const removeItem = () => {
-    const newItems = inviteItems.filter((item) => item.id !== id);
+    const newItems = inviteItems.filter((inviteItem) => inviteItem.id !== id);
 
     setInviteItems(newItems);
   };

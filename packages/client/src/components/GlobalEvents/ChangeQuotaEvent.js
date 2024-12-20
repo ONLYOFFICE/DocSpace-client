@@ -62,11 +62,12 @@ const ChangeQuotaEvent = (props) => {
     setSize(value);
   };
 
-  const updateFunction = (size) => {
+  const updateFunction = (sizeValue) => {
     return type === "user"
-      ? setCustomUserQuota(size, ids)
-      : setCustomRoomQuota(size, ids, inRoom);
+      ? setCustomUserQuota(sizeValue, ids)
+      : setCustomRoomQuota(sizeValue, ids, inRoom);
   };
+
   const onSaveClick = async () => {
     if (!size || size.trim() === "") {
       setIsError(true);

@@ -127,8 +127,8 @@ const SpaceQuota = (props) => {
       try {
         const items = await updateQuota(-1, [item.id], inRoom);
 
-        options.forEach((item) => {
-          if (item.key === "no-quota") item.label = t("Common:Unlimited");
+        options.forEach((o) => {
+          if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
         successCallback(items);
@@ -144,8 +144,8 @@ const SpaceQuota = (props) => {
     try {
       const items = await resetQuota([item.id], inRoom);
 
-      options.forEach((item) => {
-        if (item.key === "default-quota") item.label = defaultQuotaSize;
+      options.forEach((o) => {
+        if (o.key === "default-quota") o.label = defaultQuotaSize;
       });
 
       successCallback(items);

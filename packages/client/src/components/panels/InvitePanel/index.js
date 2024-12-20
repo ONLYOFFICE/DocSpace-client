@@ -124,8 +124,8 @@ const InvitePanel = ({
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const onChangeExternalLinksVisible = (isVisible) => {
-    setExternalLinksVisible(isVisible);
+  const onChangeExternalLinksVisible = (visible) => {
+    setExternalLinksVisible(visible);
   };
 
   const accessModel = [

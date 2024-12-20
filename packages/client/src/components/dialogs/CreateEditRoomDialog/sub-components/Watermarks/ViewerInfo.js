@@ -107,8 +107,8 @@ const getInitialRotate = (rotate, isEdit, isImage, t) => {
 
   if (!isEdit || (isEdit && isImage)) return dataRotate[0];
 
-  const item = dataRotate.find((item) => {
-    return item.key === rotate;
+  const item = dataRotate.find((elm) => {
+    return elm.key === rotate;
   });
 
   return !item ? dataRotate[0] : item;

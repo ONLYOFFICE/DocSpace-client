@@ -66,7 +66,6 @@ const ThirdPartyStorage = ({
   deleteThirdParty,
   openConnectWindow,
   setConnectItem,
-  getOAuthToken,
 
   isDisabled,
   currentColorScheme,
@@ -231,7 +230,6 @@ export default inject(
 
       openConnectWindow,
       setConnectItem,
-      getOAuthToken,
       currentColorScheme,
       isRoomAdmin,
       isAdmin,

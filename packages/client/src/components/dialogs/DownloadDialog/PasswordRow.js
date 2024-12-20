@@ -70,8 +70,8 @@ const PasswordRow = ({
     updateDownloadedFilePassword(item.id, password, type);
   };
 
-  const onChangePassword = (password) => {
-    setPassword(password);
+  const onChangePassword = (pwd) => {
+    setPassword(pwd);
   };
 
   const onChangeInOriginal = () => {

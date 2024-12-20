@@ -71,17 +71,16 @@ const SimulatePassword = memo(
 
       const oldPassword = password;
       const oldPasswordLength = oldPassword.length;
-      const caretPosition = forwardedRef.current.selectionStart;
+      const position = forwardedRef.current.selectionStart;
 
-      setCaretPosition(caretPosition);
-      const newCharactersUntilCaret = newPassword.substring(0, caretPosition);
+      setCaretPosition(position);
+      const newCharactersUntilCaret = newPassword.substring(0, position);
 
       const unchangedStartCharacters = newCharactersUntilCaret
         .split("")
         .filter((el) => el === bulletsFont).length;
 
-      const unchangedEndingCharacters =
-        newPassword.substring(caretPosition).length;
+      const unchangedEndingCharacters = newPassword.substring(position).length;
       const addedCharacters = newCharactersUntilCaret.substring(
         unchangedStartCharacters,
       );

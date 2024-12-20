@@ -3,13 +3,19 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
 import { usePathname, useRouter } from "next/navigation";
+
+import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
+import { DeviceType } from "@docspace/shared/enums";
+
+import useDeviceType from "@/hooks/useDeviceType";
+import { pathsWithoutTabs } from "@/lib/constants";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common", "Settings"]);
   const pathname = usePathname();
   const router = useRouter();
+  const { currentDeviceType } = useDeviceType();
 
   const data = [
     {
@@ -42,6 +48,13 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const onSelect = (e: TTabItem) => {
     router.push(`/settings/${e.id}`);
   };
+
+  if (
+    currentDeviceType === DeviceType.mobile &&
+    pathsWithoutTabs.some((item) => pathname.includes(item))
+  ) {
+    return children;
+  }
 
   return (
     <Tabs

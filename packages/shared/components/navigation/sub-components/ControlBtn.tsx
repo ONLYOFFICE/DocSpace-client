@@ -167,9 +167,7 @@ const ControlButtons = ({
     >
       {renderPlusButton()}
       {renderContextButton(
-        ((!isRootFolder || (isTrashFolder && !isEmptyFilesList)) &&
-          canCreate) ??
-          false,
+        (!isRootFolder || (isTrashFolder && !isEmptyFilesList)) ?? false,
       )}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}

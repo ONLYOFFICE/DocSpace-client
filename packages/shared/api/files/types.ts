@@ -447,3 +447,8 @@ export type SettingsThirdPartyType = {
   providerId: string;
   providerKey: string;
 };
+
+export type TUploadBackup = {
+  Message?: string;
+  EndUpload: boolean;
+};

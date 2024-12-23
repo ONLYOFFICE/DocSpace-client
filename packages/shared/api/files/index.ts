@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
 import {
   ConflictResolveType,
@@ -66,6 +66,7 @@ import {
   TConnectingStorages,
   SettingsThirdPartyType,
   TIndexItems,
+  TUploadBackup,
 } from "./types";
 
 export async function openEdit(
@@ -672,7 +673,7 @@ export function uploadFile(url: string, data: unknown) {
 
 // TODO: Need update res type and remove unknown
 export function uploadBackup(url: string, data: unknown) {
-  return axios.post(url, data);
+  return axios.post<unknown, AxiosResponse<TUploadBackup>>(url, data);
 }
 
 export async function downloadFiles(

@@ -26,49 +26,40 @@
 
 import React from "react";
 
-import {
-  StyledArrowIcon,
-  StyledExpanderDownIcon,
-  StyledExpanderDownIconRotate,
-  StyledHeading,
-  StyledTextContainer,
-} from "../Navigation.styled";
+import styles from "../Navigation.module.scss";
+import { TTextProps } from "../Navigation.types";
 
-import { ITextProps } from "../Navigation.types";
+import ArrowIcon from "./ArrowIcon";
+import Heading from "./Heading";
+import ExpanderIcon from "./ExpanderIcon";
 
 const Text = ({
   title,
-  isRootFolder,
   isOpen,
+  isRootFolder,
   isRootFolderTitle,
   onClick,
+  className,
   ...rest
-}: ITextProps) => {
+}: TTextProps) => {
   return (
-    <StyledTextContainer
-      isRootFolder={isRootFolder}
+    <div
+      className={`${className} ${styles.textContainer}`}
       onClick={onClick}
-      isRootFolderTitle={isRootFolderTitle}
+      data-root-folder={isRootFolder}
+      data-root-folder-title={isRootFolderTitle}
       {...rest}
     >
-      <StyledHeading
-        title={title}
-        truncate
-        isRootFolderTitle={isRootFolderTitle}
-      >
+      <Heading title={title} truncate isRootFolderTitle={isRootFolderTitle}>
         {title}
-      </StyledHeading>
+      </Heading>
 
-      {isRootFolderTitle && <StyledArrowIcon />}
+      {isRootFolderTitle && <ArrowIcon />}
 
-      {!isRootFolderTitle && !isRootFolder ? (
-        isOpen ? (
-          <StyledExpanderDownIconRotate />
-        ) : (
-          <StyledExpanderDownIcon />
-        )
-      ) : null}
-    </StyledTextContainer>
+      {!isRootFolderTitle && !isRootFolder && (
+        <ExpanderIcon isRotated={isOpen} />
+      )}
+    </div>
   );
 };
 

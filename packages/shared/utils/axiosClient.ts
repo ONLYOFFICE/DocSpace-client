@@ -94,9 +94,8 @@ class AxiosClient {
       };
     }
 
-    const publicRoomKey = new URLSearchParams(window.location.search).get(
-      "key",
-    );
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
 
     if (publicRoomKey) {
       headers = { ...headers, "Request-Token": publicRoomKey };

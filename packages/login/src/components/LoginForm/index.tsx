@@ -404,7 +404,9 @@ const LoginForm = ({
         return res;
       })
       .then(async (res: string | object | undefined) => {
-        if (isPublicAuth) {
+        const tfaIsEnabled = typeof res === "string" ? true : res?.tfa;
+
+        if (isPublicAuth && !tfaIsEnabled) {
           localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
           window.close();
         }
@@ -428,7 +430,9 @@ const LoginForm = ({
         }
 
         if (typeof res === "string")
-          window.location.replace(`${res}&linkData=${linkData}`);
+          window.location.replace(
+            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
+          );
         else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {

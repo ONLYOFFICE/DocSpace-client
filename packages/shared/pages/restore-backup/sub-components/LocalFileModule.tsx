@@ -24,29 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { FileInput } from "@docspace/shared/components/file-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 
-const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
-  const onClickInput = (file) => {
+export type LocalFileProps = {
+  setRestoreResource: (file: File) => void;
+  isEnableRestore: boolean;
+};
+
+const LocalFile = ({ setRestoreResource, isEnableRestore }: LocalFileProps) => {
+  const onClickInput = (result: File | File[]) => {
+    const file = Array.isArray(result) ? result[0] : result;
     setRestoreResource(file);
   };
 
   return (
     <FileInput
-      onInput={onClickInput}
       scale
+      size={InputSize.base}
+      onInput={onClickInput}
+      accept={[".tar", ".gz"]}
       className="restore-backup_input"
       isDisabled={!isEnableRestore}
-      accept={[".tar", ".gz"]}
     />
   );
 };
 
-export default inject(({ backup }) => {
-  const { setRestoreResource } = backup;
+export default LocalFile;
 
-  return {
-    setRestoreResource,
-  };
-})(observer(LocalFile));
+// export default inject(({ backup }) => {
+//   const { setRestoreResource } = backup;
+
+//   return {
+//     setRestoreResource,
+//   };
+// })(observer(LocalFile));

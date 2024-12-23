@@ -24,43 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../../styles/mixins";
+@import "../../../styles/variables/devices.scss";
 
-import { tablet, mobile } from "../../../utils";
-import { RectangleSkeleton } from "../../rectangle";
+.header {
+  max-width: 211px;
 
-const StyledContainer = styled.div<{ showText?: boolean }>`
-  margin: 0;
+  margin-inline-start: 1px;
 
-  max-width: 216px;
-  padding: 0 20px;
-
-  display: flex;
-  flex-direction: column;
-
-  @media ${tablet} {
-    width: ${(props) => (props.showText ? "240px" : "52px")};
-    padding: 0 16px;
-    box-sizing: border-box;
+  @include tablet-and-below {
+    margin-inline-start: 10px;
   }
 
-  @media ${mobile} {
-    width: 100%;
-    padding: 0 16px;
-    box-sizing: border-box;
+  &[data-show-text="false"] {
+    @include tablet-and-below {
+      margin-inline-start: 0px;
+    }
   }
-`;
-
-const StyledRectangleLoader = styled(RectangleSkeleton)`
-  height: 20px;
-  width: 216px;
-  padding: 0 0 16px;
-
-  @media ${tablet} {
-    height: 20px;
-    width: 20px;
-    padding: 0 0 24px;
-  }
-`;
-
-export { StyledContainer, StyledRectangleLoader };
+}

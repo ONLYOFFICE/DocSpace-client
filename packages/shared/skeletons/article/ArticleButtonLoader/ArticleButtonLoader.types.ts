@@ -24,35 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { RectangleSkeletonProps } from "../../rectangle";
 
-import { StyledContainer, StyledRectangleLoader } from "./GroupsLoader.styled";
-import { GroupsLoaderProps } from "./GroupsLoader.types";
-
-const ArticleGroupsLoader = ({
-  id,
-  className,
-  style,
-  showText,
-  ...rest
-}: GroupsLoaderProps) => {
-  return (
-    <StyledContainer
-      id={id}
-      className={className}
-      style={style}
-      showText={showText}
-    >
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-      <StyledRectangleLoader {...rest} />
-    </StyledContainer>
-  );
+export type ButtonLoaderProps = RectangleSkeletonProps & {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 };
-
-export default ArticleGroupsLoader;

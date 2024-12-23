@@ -45,9 +45,8 @@ const baseConfig = {
 
 const ArticleLiveChat = ({
   languageBaseName,
-  email,
-  displayName,
-  currentColorScheme,
+  zendeskEmail,
+  chatDisplayName,
   withMainButton,
   isMobileArticle,
   zendeskKey,
@@ -56,11 +55,10 @@ const ArticleLiveChat = ({
   isInfoPanelVisible,
 }: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
-  const { interfaceDirection } = useTheme();
+  const { interfaceDirection, currentColorScheme } = useTheme();
   const infoPanelOffset = isInfoPanelVisible ? 400 : 0;
 
   useEffect(() => {
-    // console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     zendeskAPI.addChanges("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
@@ -84,7 +82,6 @@ const ArticleLiveChat = ({
   ]);
 
   useEffect(() => {
-    // console.log("Zendesk useEffect", { languageBaseName });
     zendeskAPI.addChanges("webWidget", "setLocale", languageBaseName);
 
     if (ready)
@@ -101,7 +98,6 @@ const ArticleLiveChat = ({
   }, [languageBaseName, ready, t]);
 
   useEffect(() => {
-    // console.log("Zendesk useEffect", { currentColorScheme });
     zendeskAPI.addChanges("webWidget", "updateSettings", {
       color: {
         theme: currentColorScheme?.main?.accent,
@@ -110,18 +106,15 @@ const ArticleLiveChat = ({
   }, [currentColorScheme?.main?.accent]);
 
   useEffect(() => {
-    // console.log("Zendesk useEffect", { email, displayName });
     zendeskAPI.addChanges("webWidget", "prefill", {
       email: {
-        value: email,
-        // readOnly: true, // optional
+        value: zendeskEmail,
       },
       name: {
-        value: displayName ? displayName.trim() : "",
-        // readOnly: true, // optional
+        value: chatDisplayName ? chatDisplayName.trim() : "",
       },
     });
-  }, [email, displayName]);
+  }, [zendeskEmail, chatDisplayName]);
 
   useEffect(() => {
     zendeskAPI.addChanges("webWidget", "updateSettings", {

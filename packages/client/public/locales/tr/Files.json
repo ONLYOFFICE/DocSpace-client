@@ -71,7 +71,6 @@
   "ExportRoomIndex": "Oda dizinini dışa aktar",
   "ExportRoomIndexAlreadyInProgressError": "Oda dizini dışa aktarma işlemi halihazırda devam ediyor. Lütfen yenisini başlatmak için mevcut dışa aktarma tamamlanana kadar bekleyin.",
   "FavoritesEmptyContainerDescription": "Dosyaları favori olarak işaretlemek veya bu listeden kaldırmak için içerik menüsünü kullanın.",
-  "FileCannotBeMoved": "Dosya bu odaya taşınamıyor.",
   "FileContents": "Dosya içerikleri",
   "FileDownloadingIsRestricted": "Bu odada dosya indirme kısıtlanmıştır.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> dosyası Belgeler'e aktarıldı",

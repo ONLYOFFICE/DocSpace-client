@@ -208,7 +208,7 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:FileCannotBeMoved");
+      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
 
       const option = { organizationName: t("Common:OrganizationName") };
 

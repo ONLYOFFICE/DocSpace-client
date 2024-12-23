@@ -73,7 +73,6 @@
   "ExportRoomIndex": "Экспортировать индекс комнаты",
   "ExportRoomIndexAlreadyInProgressError": "Экспорт индекса комнат уже выполняется. Пожалуйста, подождите, пока текущий экспорт будет завершен, чтобы начать новый.",
   "FavoritesEmptyContainerDescription": "Чтобы добавить файлы в избранное или удалить их из этого списка, используйте контекстное меню.",
-  "FileCannotBeMoved": "Файл не может быть перемещен в эту комнату.",
   "FileContents": "Содержимое файла",
   "FileDownloadingIsRestricted": "Загрузка файлов в этой комнате ограничена.",
   "FileExportedToMyDocuments": "Файл <1>{{fileName}}</1> экспортирован в «Документы»",

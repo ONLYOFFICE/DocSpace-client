@@ -71,7 +71,6 @@
   "ExportRoomIndex": "Eksportēt telpas rādītāju",
   "ExportRoomIndexAlreadyInProgressError": "Jau notiek telpas indeksa eksportēšana. Uzgaidiet, līdz tiek pabeigta pašreizējā eksportēšana, lai sāktu jaunu eksportēšanu.",
   "FavoritesEmptyContainerDescription": "Izmantojiet konteksta izvēlni, lai failus atzīmētu kā izlases vai noņemtu no šī saraksta.",
-  "FileCannotBeMoved": "Failu nevar pārvietot uz šo telpu.",
   "FileContents": "Faila saturs",
   "FileDownloadingIsRestricted": "Failu lejupielāde šajā telpā ir ierobežota.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> fails ir eksportēts uz dokumentiem",

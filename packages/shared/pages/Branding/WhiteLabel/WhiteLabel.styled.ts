@@ -62,6 +62,12 @@ export const StyledHeader = styled.div`
     background-color: ${(props) =>
       props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
   }
+
+  @media ${mobile} {
+    .header-container {
+      display: none;
+    }
+  }
 `;
 
 export const WhiteLabelWrapper = styled.div`

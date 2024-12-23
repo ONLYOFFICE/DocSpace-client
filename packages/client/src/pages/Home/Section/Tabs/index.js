@@ -35,6 +35,7 @@ const SectionSubmenuContent = ({
   isPersonalRoom,
   isRecentTab,
   isRoomsFolder,
+  isTemplatesFolderRoot,
 }) => {
   const location = useLocation();
 
@@ -42,7 +43,7 @@ const SectionSubmenuContent = ({
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts) return <ContactsTabs />;
-  if (isRoomsFolder) return <RoomTemplatesTabs />;
+  if (isRoomsFolder || isTemplatesFolderRoot) return <RoomTemplatesTabs />;
   return null;
 };
 
@@ -50,4 +51,5 @@ export default inject(({ treeFoldersStore }) => ({
   isPersonalRoom: treeFoldersStore.isPersonalRoom,
   isRecentTab: treeFoldersStore.isRecentTab,
   isRoomsFolder: treeFoldersStore.isRoomsFolder,
+  isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
 }))(observer(SectionSubmenuContent));

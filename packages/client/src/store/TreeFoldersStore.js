@@ -341,7 +341,7 @@ class TreeFoldersStore {
   }
 
   get isTemplatesFolderRoot() {
-    return FolderType.Templates === this.selectedFolderStore.rootFolderType;
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
   }
 
   get isDocumentsFolder() {

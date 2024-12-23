@@ -35,7 +35,7 @@ import { RoomSearchArea } from "@docspace/shared/enums";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-const RoomTemplatesSubMenu = ({ setFilter, showBodyLoader, showTabs }) => {
+const RoomTemplatesTabs = ({ setFilter, showBodyLoader, showTabs }) => {
   const { t } = useTranslation(["Common"]);
 
   const tabs = [
@@ -100,4 +100,4 @@ export default inject(
         selectedFolderStore.security?.Create,
     };
   },
-)(observer(RoomTemplatesSubMenu));
+)(observer(RoomTemplatesTabs));

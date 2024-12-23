@@ -18,7 +18,7 @@
   --tabs-background-color-secondary: #{$white};
   --tabs-hover-background-color-secondary: #{$light-gray-hover};
   --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$light-blue-main};
+  --tabs-active-background-color-secondary: #{$blue-light-mid};
 
   /* Dark theme variables */
   &[data-theme="dark"] {
@@ -110,43 +110,43 @@
   }
 }
 
-.scrollbar {
-  &.scroller {
+.scroll {
+  :global(.scroller) {
     scroll-behavior: smooth;
   }
 
-  &.scroll-body {
+  .scroll-body {
     position: absolute;
     padding-inline-end: 0 !important;
   }
 
-  &.track {
+  :global(.track) {
     z-index: 0;
     padding: 0;
   }
 
-  &.track > .thumb-horizontal {
+  :global(.track > .thumb-horizontal) {
     height: 1px !important;
   }
 
-  &.thumb {
+  :global(.thumb) {
     background-color: rgba(100, 104, 112, 0.2) !important;
   }
 
   &.primary {
-    &.thumb {
+    :global(.thumb) {
       display: block;
     }
   }
 
   &.secondary {
-    &.thumb {
+    :global(.thumb) {
       display: none;
     }
   }
 
-  &.thumb:active,
-  &.thumb.dragging {
+  .thumb:active,
+  .thumb.dragging {
     background-color: rgba(6, 22, 38, 0.3) !important;
   }
 }
@@ -217,8 +217,12 @@
     border-radius: 16px;
 
     &.selected {
-      background-color: var(--tabs-pressed-background-color-secondary);
+      background-color: var(--tabs-active-background-color-secondary);
       border: 1px solid var(--tabs-hover-background-color-secondary);
+
+      .tabText {
+        color: var(--tabs-active-text-color-secondary);
+      }
     }
 
     &:hover:not(.selected) {

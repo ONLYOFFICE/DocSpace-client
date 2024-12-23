@@ -25,22 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { inject, observer } from "mobx-react";
-import config from "PACKAGE_FILE";
-import { useNavigate } from "react-router-dom";
+// import config from "PACKAGE_FILE";
+
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import {
+  FloatingButton,
+  FloatingButtonIcons,
+} from "@docspace/shared/components/floating-button";
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 
-const ButtonContainer = (props) => {
+import type { ButtonContainerProps } from "./ButtonContainer.types";
+
+const ButtonContainer = (props: ButtonContainerProps) => {
   const {
-    downloadingProgress,
-    isMaxProgress,
     isConfirmed,
+    navigate,
+    downloadingProgress,
     getStorageType,
     isNotification,
     restoreResource,
@@ -57,9 +60,8 @@ const ButtonContainer = (props) => {
     isBackupProgressVisible,
   } = props;
 
-  const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState(false);
+  const isMaxProgress = downloadingProgress === 100;
 
   const onRestoreClick = async () => {
     if (isCheckedThirdPartyStorage) {
@@ -68,8 +70,8 @@ const ButtonContainer = (props) => {
     }
     setIsLoading(true);
 
-    let storageParams = [],
-      tempObj = {};
+    let storageParams = [];
+    const tempObj: Record<string, string | null> = {};
 
     const backupId = "";
     const storageType = getStorageType().toString();
@@ -106,14 +108,15 @@ const ButtonContainer = (props) => {
       SocketHelper.emit(SocketCommands.RestoreBackup);
 
       navigate(
-        combineUrl(
-          window.ClientConfig?.proxy?.url,
-          config.homepage,
-          "/preparation-portal",
-        ),
+        "/preparation-portal",
+        // combineUrl(
+        //   window.ClientConfig?.proxy?.url,
+        //   config.homepage,
+        //   "/preparation-portal",
+        // ),
       );
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as Error);
 
       setIsLoading(false);
     }
@@ -137,13 +140,14 @@ const ButtonContainer = (props) => {
         isDisabled={isButtonDisabled}
         isLoading={isLoadingButton}
         size={buttonSize}
+        // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={10}
       />
 
       {isBackupProgressVisible && (
         <FloatingButton
           className="layout-progress-bar"
-          icon="file"
+          icon={FloatingButtonIcons.file}
           alert={false}
           percent={downloadingProgress}
         />
@@ -152,28 +156,30 @@ const ButtonContainer = (props) => {
   );
 };
 
-export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-  const { setTenantStatus } = settingsStore;
-  const {
-    downloadingProgress,
-    isFormReady,
-    getStorageParams,
-    restoreResource,
-    uploadLocalFile,
-    isBackupProgressVisible,
-  } = backup;
+export default ButtonContainer;
 
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-  const isMaxProgress = downloadingProgress === 100;
-  return {
-    uploadLocalFile,
-    isMaxProgress,
-    setTenantStatus,
-    isEnableRestore: isRestoreAndAutoBackupAvailable,
-    downloadingProgress,
-    isFormReady,
-    getStorageParams,
-    restoreResource,
-    isBackupProgressVisible,
-  };
-})(observer(ButtonContainer));
+// export default inject(({ settingsStore, backup, currentQuotaStore }) => {
+//   const { setTenantStatus } = settingsStore;
+//   const {
+//     downloadingProgress,
+//     isFormReady,
+//     getStorageParams,
+//     restoreResource,
+//     uploadLocalFile,
+//     isBackupProgressVisible,
+//   } = backup;
+
+//   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+//   const isMaxProgress = downloadingProgress === 100;
+//   return {
+//     uploadLocalFile,
+//     isMaxProgress,
+//     setTenantStatus,
+//     isEnableRestore: isRestoreAndAutoBackupAvailable,
+//     downloadingProgress,
+//     isFormReady,
+//     getStorageParams,
+//     restoreResource,
+//     isBackupProgressVisible,
+//   };
+// })(observer(ButtonContainer));

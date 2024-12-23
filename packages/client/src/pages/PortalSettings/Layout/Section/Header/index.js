@@ -168,6 +168,14 @@ const SectionHeaderContent = (props) => {
     isHeaderVisible: false,
   });
 
+  const getArrayOfParams = () => {
+    const path = location.pathname;
+    const arrayPath = path.split("/");
+    const arrayOfParams = arrayPath.filter((item) => item !== "");
+
+    return arrayOfParams;
+  };
+
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
@@ -237,15 +245,6 @@ const SectionHeaderContent = (props) => {
     newArrayOfParams.splice(-1, 1);
     const newPath = newArrayOfParams.join("/");
     navigate(newPath);
-  };
-
-  const getArrayOfParams = () => {
-    const resultPath = location.pathname;
-    const arrayOfParams = resultPath.split("/").filter((param) => {
-      return param !== "filter" && param && param !== "portal-settings";
-    });
-
-    return arrayOfParams;
   };
 
   const onToggleSelector = (isOpen = !selectorIsOpen) => {

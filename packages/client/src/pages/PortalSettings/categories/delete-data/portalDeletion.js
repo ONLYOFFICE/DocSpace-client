@@ -49,6 +49,11 @@ const PortalDeletion = (props) => {
   const [stripeUrl, setStripeUrl] = useState(null);
   const [isDesktopView, setIsDesktopView] = useState(false);
 
+  const onCheckView = () => {
+    if (isDesktop()) setIsDesktopView(true);
+    else setIsDesktopView(false);
+  };
+
   const fetchData = async () => {
     await getPortalOwner();
     const res = await getPaymentAccount();
@@ -64,11 +69,6 @@ const PortalDeletion = (props) => {
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (isDesktop()) setIsDesktopView(true);
-    else setIsDesktopView(false);
-  };
 
   const onDeleteClick = async () => {
     if (stripeUrl) {

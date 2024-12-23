@@ -87,6 +87,37 @@ const DirectThirdPartyConnection = (props) => {
 
   const { t } = useTranslation(["Translations", "Common"]);
 
+  const saveSettings = async (
+    token = "",
+    urlValue = "",
+    loginValue = "",
+    passwordValue = "",
+  ) => {
+    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
+    setState({ isLoading: true, isUpdatingInfo: true });
+    connectDialogVisible && setConnectDialogVisible(false);
+    onSelectFolder && onSelectFolder("");
+
+    try {
+      await saveSettingsThirdParty(
+        urlValue,
+        loginValue,
+        passwordValue,
+        token,
+        false,
+        label,
+        provider_key,
+        provider_id,
+      );
+
+      await setThirdPartyAccountsInfo(t);
+    } catch (e) {
+      toastr.error(e);
+    }
+
+    setState({ isLoading: false, isUpdatingInfo: false });
+  };
+
   const onSetSettings = async () => {
     try {
       await setThirdPartyAccountsInfo(t);
@@ -138,37 +169,6 @@ const DirectThirdPartyConnection = (props) => {
     } else {
       setConnectDialogVisible(true);
     }
-  };
-
-  const saveSettings = async (
-    token = "",
-    urlValue = "",
-    loginValue = "",
-    passwordValue = "",
-  ) => {
-    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
-    setState({ isLoading: true, isUpdatingInfo: true });
-    connectDialogVisible && setConnectDialogVisible(false);
-    onSelectFolder && onSelectFolder("");
-
-    try {
-      await saveSettingsThirdParty(
-        urlValue,
-        loginValue,
-        passwordValue,
-        token,
-        false,
-        label,
-        provider_key,
-        provider_id,
-      );
-
-      await setThirdPartyAccountsInfo(t);
-    } catch (e) {
-      toastr.error(e);
-    }
-
-    setState({ isLoading: false, isUpdatingInfo: false });
   };
 
   const onSelectAccount = (event) => {

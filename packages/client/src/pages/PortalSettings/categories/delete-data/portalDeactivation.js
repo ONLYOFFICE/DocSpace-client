@@ -43,6 +43,11 @@ const PortalDeactivation = (props) => {
     props;
   const [isDesktopView, setIsDesktopView] = useState(false);
 
+  const onCheckView = () => {
+    if (isDesktop()) setIsDesktopView(true);
+    else setIsDesktopView(false);
+  };
+
   const fetchData = async () => {
     await getPortalOwner();
   };
@@ -56,11 +61,6 @@ const PortalDeactivation = (props) => {
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (isDesktop()) setIsDesktopView(true);
-    else setIsDesktopView(false);
-  };
 
   const onDeactivateClick = async () => {
     try {

@@ -134,36 +134,8 @@ const CSP = ({
   t,
   theme,
 }) => {
-  useEffect(() => {
-    getCSPSettings();
-  }, []);
-
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
-
-  const onKeyPress = (e) => {
-    if (e.key === "Enter" && !!domain.length) {
-      addDomain();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
-  const getChips = (domains) =>
-    domains
-      ? domains.map((item) => (
-          <SelectedItem
-            key={item}
-            isInline
-            label={item}
-            onClose={() => deleteDomain(item)}
-            title={item}
-          />
-        ))
-      : null;
 
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
@@ -194,6 +166,34 @@ const CSP = ({
       changeDomain("");
     }
   };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter" && !!domain.length) {
+      addDomain();
+    }
+  };
+
+  useEffect(() => {
+    getCSPSettings();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyPress);
+    return () => document.removeEventListener("keyup", onKeyPress);
+  }, []);
+
+  const getChips = (domains) =>
+    domains
+      ? domains.map((item) => (
+          <SelectedItem
+            key={item}
+            isInline
+            label={item}
+            onClose={() => deleteDomain(item)}
+            title={item}
+          />
+        ))
+      : null;
 
   const onChangeDomain = (e) => {
     if (error) setError(null);

@@ -53,19 +53,6 @@ const TabsCommon = (props) => {
   } = props;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    return () => {
-      resetSessionStorage();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (tReady) setIsLoadedSubmenu(true);
-    if (isLoadedSubmenu) {
-      load();
-    }
-  }, [tReady, isLoadedSubmenu]);
-
   const data = [
     {
       id: "general",
@@ -93,17 +80,31 @@ const TabsCommon = (props) => {
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTabId = getCurrentTabId();
-
   const load = async () => {
+    const currentTabId = getCurrentTabId();
     await loadBaseInfo(
       !isMobileView
         ? currentTabId === "general"
-          ? "general"
-          : "branding"
-        : "",
+          ? "customization"
+          : currentTabId === "branding"
+            ? "branding"
+            : "appearance"
+        : "customization",
     );
   };
+
+  useEffect(() => {
+    return () => {
+      resetSessionStorage();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (tReady) setIsLoadedSubmenu(true);
+    if (isLoadedSubmenu) {
+      load();
+    }
+  }, [tReady, isLoadedSubmenu]);
 
   const onSelect = (e) => {
     navigate(
@@ -120,7 +121,7 @@ const TabsCommon = (props) => {
   return (
     <Tabs
       items={data}
-      selectedItemId={currentTabId}
+      selectedItemId={getCurrentTabId()}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />

@@ -70,8 +70,10 @@ const WebhookDialog = (props) => {
     additionalId,
   } = props;
 
-  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
+  const { t } = useTranslation(["Webhooks", "Common"]);
+  const submitButtonRef = useRef(null);
 
+  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -79,9 +81,6 @@ const WebhookDialog = (props) => {
     uri: true,
     secretKey: true,
   });
-
-  const { t } = useTranslation(["Webhooks", "Common"]);
-
   const [webhookInfo, setWebhookInfo] = useState({
     id: webhook ? webhook.id : 0,
     name: webhook ? webhook.name : "",
@@ -90,15 +89,22 @@ const WebhookDialog = (props) => {
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
   });
-
   const [passwordInputKey, setPasswordInputKey] = useState(0);
-
-  const submitButtonRef = useRef(null);
 
   const onModalClose = () => {
     onClose();
     isSettingsModal && setIsResetVisible(true);
   };
+
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onModalClose();
+
+  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+    return cleanUpEvent;
+  }, []);
 
   const onInputChange = (e) => {
     if (e.target.name) {
@@ -155,13 +161,6 @@ const WebhookDialog = (props) => {
     }
   };
 
-  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return cleanUpEvent;
-  }, []);
-
   useEffect(() => {
     setWebhookInfo({
       id: webhook ? webhook.id : 0,
@@ -172,9 +171,6 @@ const WebhookDialog = (props) => {
       ssl: webhook ? webhook.ssl : true,
     });
   }, [webhook]);
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
     <ModalDialog

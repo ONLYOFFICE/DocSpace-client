@@ -59,6 +59,23 @@ const HistoryTableHeader = (props) => {
   } = props;
   const { t, ready } = useTranslation(["Webhooks", "People"]);
 
+  const [columns, setColumns] = useState(getColumns([], userId));
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns.join(","));
+  }
+
   const defaultColumns = [
     {
       key: "Event ID",
@@ -86,26 +103,13 @@ const HistoryTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
-  function onColumnChange(key) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
-
   useEffect(() => {
     ready && setColumns(getColumns(defaultColumns, userId));
   }, [ready]);
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns, userId));
+  }, [userId, defaultColumns]);
 
   return (
     <TableHeader

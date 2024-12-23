@@ -87,6 +87,7 @@ const DNSSettingsComponent = (props) => {
     dnsSettingsUrl,
     currentDeviceType,
   } = props;
+
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
   const [isCustomizationView, setIsCustomizationView] = useState(false);
@@ -96,6 +97,25 @@ const DNSSettingsComponent = (props) => {
   const [errorText, setErrorText] = useState("");
 
   const theme = useTheme();
+
+  const checkInnerWidth = useCallback(() => {
+    if (!isMobileDevice()) {
+      setIsCustomizationView(true);
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setIsCustomizationView(false);
+    }
+  }, [isMobileDevice, setIsCustomizationView]);
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
@@ -167,24 +187,6 @@ const DNSSettingsComponent = (props) => {
     }
     setDNSName(value);
   };
-  const checkInnerWidth = useCallback(() => {
-    if (!isMobileDevice()) {
-      setIsCustomizationView(true);
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setIsCustomizationView(false);
-    }
-  }, [isMobileDevice, setIsCustomizationView]);
 
   const domainExampleText = " ourcompany.com";
 

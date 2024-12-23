@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import {
-  StyledContainer,
-  StyledBlock,
-  StyledRectangleLoader,
-} from "./FolderLoader.styled";
+import { RectangleSkeleton } from "../../rectangle";
+
+import styles from "./ArticleFolderLoader.module.scss";
 import { FolderLoaderProps } from "./FolderLoader.types";
 
-const ArticleFolderLoader = ({
+export const ArticleFolderLoader = ({
   id,
   className,
   style,
@@ -42,67 +41,82 @@ const ArticleFolderLoader = ({
   ...rest
 }: FolderLoaderProps) => {
   return (
-    <StyledContainer
+    <div
       id={id}
-      className={className}
+      className={`${styles.container} ${className || ""}`}
       style={style}
-      showText={showText}
+      data-show-text={showText}
+      data-testid="article-folder-loader"
     >
       {isVisitor ? (
         <>
-          <StyledBlock showText={showText}>
-            <StyledRectangleLoader
+          <div
+            className={styles.block}
+            data-show-text={showText ? "true" : "false"}
+            data-testid="article-folder-loader-block"
+          >
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-            <StyledRectangleLoader
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-          </StyledBlock>
+          </div>
 
-          <StyledBlock showText={showText}>
-            <StyledRectangleLoader
+          <div
+            className={styles.block}
+            data-show-text={showText ? "true" : "false"}
+            data-testid="article-folder-loader-block"
+          >
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-          </StyledBlock>
+          </div>
         </>
       ) : (
         <>
-          <StyledBlock showText={showText}>
-            <StyledRectangleLoader
+          <div
+            className={styles.block}
+            data-show-text={showText ? "true" : "false"}
+            data-testid="article-folder-loader-block"
+          >
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-            <StyledRectangleLoader
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-            <StyledRectangleLoader
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-          </StyledBlock>
+          </div>
 
-          <StyledBlock showText={showText}>
-            <StyledRectangleLoader
+          <div
+            className={styles.block}
+            data-show-text={showText ? "true" : "false"}
+            data-testid="article-folder-loader-block"
+          >
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-            <StyledRectangleLoader
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-            <StyledRectangleLoader
+            <RectangleSkeleton
               {...rest}
-              className="article-folder-loader"
+              className={classNames(styles.rectangle, "article-folder-loader")}
             />
-          </StyledBlock>
+          </div>
         </>
       )}
-    </StyledContainer>
+    </div>
   );
 };
-
-export default ArticleFolderLoader;

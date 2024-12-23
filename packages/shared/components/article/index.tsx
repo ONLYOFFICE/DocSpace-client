@@ -29,21 +29,20 @@ import React from "react";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
 import { DeviceType } from "../../enums";
-
 import { ArticleProfileLoader } from "../../skeletons/article";
 
-import SubArticleBackdrop from "./sub-components/Backdrop";
+import { Portal } from "../portal";
+import { Backdrop } from "../backdrop";
+import { Scrollbar } from "../scrollbar";
+
 import SubArticleHeader from "./sub-components/Header";
-import SubArticleMainButton from "./sub-components/MainButton";
-import SubArticleBody from "./sub-components/Body";
 import ArticleProfile from "./sub-components/Profile";
 import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
 import HideArticleMenuButton from "./sub-components/HideMenuButton";
-import { Portal } from "../portal";
 
-import { StyledArticle } from "./Article.styled";
+import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
 import { ArticleProps } from "./Article.types";
 
@@ -72,7 +71,6 @@ const Article = ({
   hideProfileBlock,
   hideAppsBlock,
 
-  currentColorScheme,
   setArticleOpen,
   withSendAgain,
   mainBarVisible,
@@ -87,7 +85,6 @@ const Article = ({
   isAdmin,
   withCustomArticleHeader,
 
-  onArticleHeaderClick,
   isBurgerLoading,
 
   isNonProfit,
@@ -228,20 +225,20 @@ const Article = ({
 
   const articleComponent = (
     <>
-      <StyledArticle
+      <div
         id="article-container"
-        showText={showText}
-        articleOpen={articleOpen}
-        $withMainButton={withMainButton}
-        isMobile={currentDeviceType === DeviceType.mobile}
+        data-show-text={showText ? "true" : "false"}
+        data-open={articleOpen ? "true" : "false"}
+        data-with-main-button={withMainButton ? "true" : "false"}
         {...rest}
+        className={styles.article}
+        data-testid="article"
       >
         <SubArticleHeader
           showText={showText}
           onLogoClickAction={onLogoClickAction}
           currentDeviceType={currentDeviceType}
           withCustomArticleHeader={withCustomArticleHeader}
-          onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
           onIconClick={toggleArticleOpen}
         >
@@ -251,12 +248,15 @@ const Article = ({
         {articleMainButtonContent &&
         withMainButton &&
         currentDeviceType !== DeviceType.mobile ? (
-          <SubArticleMainButton>
+          <div className={styles.articleMainButton}>
             {articleMainButtonContent.props.children}
-          </SubArticleMainButton>
+          </div>
         ) : null}
 
-        <SubArticleBody>
+        <Scrollbar
+          className="article-body__scrollbar"
+          scrollClass="article-scroller"
+        >
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
@@ -273,15 +273,14 @@ const Article = ({
               )}
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
-                  currentColorScheme={currentColorScheme}
                   isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
                     (withMainButton || false) && !!articleMainButtonContent
                   }
                   languageBaseName={languageBaseName}
-                  email={zendeskEmail}
+                  zendeskEmail={zendeskEmail}
                   isMobileArticle={isMobileArticle}
-                  displayName={chatDisplayName}
+                  chatDisplayName={chatDisplayName}
                   zendeskKey={zendeskKey}
                   showProgress={showProgress}
                   isShowLiveChat={isShowLiveChat}
@@ -289,12 +288,11 @@ const Article = ({
               )}
             </>
           )}
-        </SubArticleBody>
+        </Scrollbar>
         {!showArticleLoader && (
           <HideArticleMenuButton
             showText={showText}
             toggleShowText={toggleShowText}
-            currentColorScheme={currentColorScheme}
             hideProfileBlock={hideProfileBlock}
           />
         )}
@@ -312,15 +310,20 @@ const Article = ({
               onProfileClick={onProfileClick}
             />
           ))}
-      </StyledArticle>
+      </div>
       {articleOpen && currentDeviceType === DeviceType.mobile && (
-        <SubArticleBackdrop />
+        <Backdrop
+          onClick={toggleArticleOpen}
+          visible
+          zIndex={210}
+          withBackground
+        />
       )}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
-        <SubArticleMainButton>
+        <div className={styles.articleMainButton}>
           {articleMainButtonContent.props.children}
-        </SubArticleMainButton>
+        </div>
       ) : null}
     </>
   );
@@ -336,11 +339,6 @@ const Article = ({
       />
     );
   };
-
-  // console.log("Article render", {
-  //   articleMainButton: !!articleMainButtonContent,
-  //   withMainButton,
-  // });
 
   return currentDeviceType === DeviceType.mobile
     ? renderPortalArticle()

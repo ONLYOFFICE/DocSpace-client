@@ -90,6 +90,12 @@ const PasswordStrength = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("password") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
   const load = async () => {
     if (!isInit) await getPortalPasswordSettings();
     setIsLoading(true);
@@ -168,12 +174,6 @@ const PasswordStrength = (props) => {
       setShowReminder(true);
     }
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("password") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSliderChange = (e) => {
     setPasswordLen(Number(e.target.value));

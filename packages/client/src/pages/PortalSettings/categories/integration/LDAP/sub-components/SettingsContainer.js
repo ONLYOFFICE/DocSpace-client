@@ -63,6 +63,13 @@ const SettingsContainer = ({
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const navigate = useNavigate();
 
+  const onCheckView = () => {
+    if (!isMobile()) {
+      const newUrl = onChangeUrl();
+      if (newUrl) navigate(newUrl);
+    }
+  };
+
   useEffect(() => {
     isLdapAvailable && isMobileView && !isLoaded && load();
     isMobileView && setDocumentTitle(t("Ldap:LdapSettings"));
@@ -71,13 +78,6 @@ const SettingsContainer = ({
 
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (!isMobile()) {
-      const newUrl = onChangeUrl();
-      if (newUrl) navigate(newUrl);
-    }
-  };
 
   const renderBody = () => (
     <>

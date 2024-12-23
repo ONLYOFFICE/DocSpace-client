@@ -165,15 +165,8 @@ const DownLoadWrapper = styled.div`
 const HistoryMainContent = (props) => {
   const {
     t,
-    // loginHistory,
-    // latestText,
-    subHeader,
-    // storagePeriod,
     lifetime,
-    // saveButtonLabel,
-    // cancelButtonLabel,
-    // setLifetimeAuditSettings,
-    // securityLifetime,
+    subHeader,
     content,
     downloadReport,
     downloadReportDescription,
@@ -184,44 +177,8 @@ const HistoryMainContent = (props) => {
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
-  // const [loginLifeTimeReminder, setLoginLifeTimeReminder] = useState(false);
-  // const [auditLifeTimeReminder, setAuditLifeTimeReminder] = useState(false);
-
-  // const isLoginHistoryPage = window.location.pathname.includes("login-history");
 
   const theme = useTheme();
-
-  useEffect(() => {
-    getSettings();
-  }, []);
-
-  useEffect(() => {
-    const newSettings = {
-      loginHistoryLifeTime: loginLifeTime,
-      auditTrailLifeTime: auditLifeTime,
-    };
-    saveToSessionStorage("storagePeriod", newSettings);
-
-    // if (loginLifeTime === String(lifetime)) {
-    //   setLoginLifeTimeReminder(false);
-    // } else {
-    //   setLoginLifeTimeReminder(true);
-    // }
-  }, [loginLifeTime]);
-
-  useEffect(() => {
-    const newSettings = {
-      loginHistoryLifeTime: loginLifeTime,
-      auditTrailLifeTime: auditLifeTime,
-    };
-    saveToSessionStorage("storagePeriod", newSettings);
-
-    // if (auditLifeTime === String(lifetime)) {
-    //   setAuditLifeTimeReminder(false);
-    // } else {
-    //   setAuditLifeTimeReminder(true);
-    // }
-  }, [auditLifeTime]);
 
   const getSettings = () => {
     const storagePeriodSettings = getFromSessionStorage("storagePeriod");
@@ -240,74 +197,17 @@ const HistoryMainContent = (props) => {
     }
   };
 
-  // const setLifeTimeSettings = async () => {
-  //   if (loginHistory) {
-  //     const data = {
-  //       settings: {
-  //         loginHistoryLifeTime: loginLifeTime,
-  //         auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
-  //       },
-  //     };
-  //     try {
-  //       await setLifetimeAuditSettings(data);
-  //       saveToSessionStorage("defaultStoragePeriod", {
-  //         loginHistoryLifeTime: loginLifeTime,
-  //         auditTrailLifeTime: securityLifetime.auditTrailLifeTime,
-  //       });
-  //       setLoginLifeTimeReminder(false);
-  //       toastr.success(t("SuccessfullySaveSettingsMessage"));
-  //     } catch (error) {
-  //       console.error(error);
-  //       toastr.error(error);
-  //     }
-  //   } else {
-  //     const data = {
-  //       settings: {
-  //         loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
-  //         auditTrailLifeTime: auditLifeTime,
-  //       },
-  //     };
+  useEffect(() => {
+    getSettings();
+  }, []);
 
-  //     try {
-  //       await setLifetimeAuditSettings(data);
-  //       saveToSessionStorage("defaultStoragePeriod", {
-  //         loginHistoryLifeTime: securityLifetime.loginHistoryLifeTime,
-  //         auditTrailLifeTime: auditLifeTime,
-  //       });
-  //       setAuditLifeTimeReminder(false);
-  //       toastr.success(t("SuccessfullySaveSettingsMessage"));
-  //     } catch (error) {
-  //       console.error(error);
-  //       toastr.error(error);
-  //     }
-  //   }
-  // };
-
-  // const onChangeLoginLifeTime = (e) => {
-  //   const reg = new RegExp(/^(\d){1,3}$/g);
-  //   const condition = e.target.value === "";
-  //   if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
-  //     setLoginLifeTime(e.target.value);
-  //   }
-  // };
-
-  // const onChangeAuditLifeTime = (e) => {
-  //   const reg = new RegExp(/^(\d){1,3}$/g);
-  //   const condition = e.target.value === "";
-  //   if ((e.target.value.match(reg) && e.target.value <= 180) || condition) {
-  //     setAuditLifeTime(e.target.value);
-  //   }
-  // };
-
-  // const onCancelLoginLifeTime = () => {
-  //   const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
-  //   setLoginLifeTime(String(defaultSettings.loginHistoryLifeTime));
-  // };
-
-  // const onCancelAuditLifeTime = () => {
-  //   const defaultSettings = getFromSessionStorage("defaultStoragePeriod");
-  //   setAuditLifeTime(String(defaultSettings.auditTrailLifeTime));
-  // };
+  useEffect(() => {
+    const newSettings = {
+      loginHistoryLifeTime: loginLifeTime,
+      auditTrailLifeTime: auditLifeTime,
+    };
+    saveToSessionStorage("storagePeriod", newSettings);
+  }, [loginLifeTime, auditLifeTime]);
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>

@@ -56,6 +56,23 @@ const SessionsTableHeader = (props) => {
     columnInfoPanelStorageName,
   } = props;
 
+  const [columns, setColumns] = useState([]);
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
+  }
+
   const defaultColumns = [
     {
       key: "Sessions",
@@ -84,26 +101,9 @@ const SessionsTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
   useEffect(() => {
-    setColumns(getColumns(defaultColumns));
+    setColumns(getColumns(defaultColumns, userId));
   }, []);
-
-  function onColumnChange(key) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
 
   return (
     <TableHeader

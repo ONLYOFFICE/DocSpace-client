@@ -90,14 +90,6 @@ const Sdk = ({
     }),
   };
 
-  useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
-    };
-  }, [handleMessage]);
-
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
     [frameCallCommand],
@@ -187,6 +179,14 @@ const Sdk = ({
       frameCallbackData(res);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage, false);
+    return () => {
+      window.removeEventListener("message", handleMessage, false);
+      setFrameConfig(null);
+    };
+  }, [handleMessage]);
 
   const onSelectRoom = useCallback(
     async (data) => {

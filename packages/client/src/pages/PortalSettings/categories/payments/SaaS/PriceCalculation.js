@@ -74,6 +74,7 @@ const StyledBody = styled.div`
 
 let timeout = null;
 let controller;
+
 const PriceCalculation = ({
   t,
   theme,
@@ -82,7 +83,6 @@ const PriceCalculation = ({
   canUpdateTariff,
   isGracePeriod,
   isNotPaidPeriod,
-
   priceManagerPerMonth,
   currencySymbol,
   isAlreadyPaid,
@@ -91,18 +91,6 @@ const PriceCalculation = ({
   getPaymentLink,
 }) => {
   const didMountRef = useRef(false);
-
-  useEffect(() => {
-    didMountRef.current && !isAlreadyPaid && setShoppingLink();
-  }, [managersCount]);
-
-  useEffect(() => {
-    didMountRef.current = true;
-    return () => {
-      timeout && clearTimeout(timeout);
-      timeout = null;
-    };
-  }, []);
 
   const setShoppingLink = () => {
     if (managersCount > maxAvailableManagersCount) {
@@ -123,6 +111,18 @@ const PriceCalculation = ({
       });
     }, 1000);
   };
+
+  useEffect(() => {
+    didMountRef.current && !isAlreadyPaid && setShoppingLink();
+  }, [managersCount]);
+
+  useEffect(() => {
+    didMountRef.current = true;
+    return () => {
+      timeout && clearTimeout(timeout);
+      timeout = null;
+    };
+  }, []);
 
   const isDisabled = !canUpdateTariff;
 

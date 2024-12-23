@@ -75,6 +75,7 @@ const SessionLifetime = (props) => {
     currentDeviceType,
     getSessionLifetime,
   } = props;
+
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
   const [showReminder, setShowReminder] = useState(false);
@@ -83,6 +84,12 @@ const SessionLifetime = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("lifetime") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
@@ -160,12 +167,6 @@ const SessionLifetime = (props) => {
       setShowReminder(true);
     }
   }, [type, sessionLifetime]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("lifetime") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectType = (e) => {
     setType(e.target.value === "enable");

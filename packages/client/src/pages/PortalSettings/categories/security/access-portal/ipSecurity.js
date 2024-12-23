@@ -98,6 +98,12 @@ const IpSecurity = (props) => {
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("ip") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
     if (defaultSettings) {
@@ -161,12 +167,6 @@ const IpSecurity = (props) => {
       setShowReminder(true);
     }
   }, [enable, ips]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("ip") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectType = (e) => {
     const value = e.target.value;

@@ -58,34 +58,6 @@ const UpdatePlanButtonContainer = ({
   t,
   canPayTariff,
 }) => {
-  const onUpdateTariff = async () => {
-    try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
-
-      const res = await updatePayment(managersCount);
-
-      if (res === false) {
-        toastr.error(t("ErrorNotification"));
-
-        setIsLoading(false);
-        clearTimeout(timerId);
-        timerId = null;
-
-        return;
-      }
-
-      previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
-    } catch (e) {
-      toastr.error(t("ErrorNotification"));
-      setIsLoading(false);
-      clearTimeout(timerId);
-      timerId = null;
-    }
-  };
-
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
@@ -95,11 +67,7 @@ const UpdatePlanButtonContainer = ({
     intervalId = null;
     setIsLoading(false);
   };
-  useEffect(() => {
-    if (intervalId && maxCountManagersByQuota !== previousManagersCount) {
-      resetIntervalSuccess();
-    }
-  }, [maxCountManagersByQuota, intervalId, previousManagersCount]);
+
   const waitingForQuota = () => {
     isWaitRequest = false;
     let requestsCount = 0;
@@ -142,6 +110,40 @@ const UpdatePlanButtonContainer = ({
       isWaitRequest = false;
     }, 2000);
   };
+
+  const onUpdateTariff = async () => {
+    try {
+      timerId = setTimeout(() => {
+        setIsLoading(true);
+      }, 500);
+
+      const res = await updatePayment(managersCount);
+
+      if (res === false) {
+        toastr.error(t("ErrorNotification"));
+
+        setIsLoading(false);
+        clearTimeout(timerId);
+        timerId = null;
+
+        return;
+      }
+
+      previousManagersCount = maxCountManagersByQuota;
+      waitingForQuota();
+    } catch (e) {
+      toastr.error(t("ErrorNotification"));
+      setIsLoading(false);
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  };
+
+  useEffect(() => {
+    if (intervalId && maxCountManagersByQuota !== previousManagersCount) {
+      resetIntervalSuccess();
+    }
+  }, [maxCountManagersByQuota, intervalId, previousManagersCount]);
 
   const goToStripePortal = () => {
     paymentLink

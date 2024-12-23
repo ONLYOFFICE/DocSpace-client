@@ -80,6 +80,12 @@ const TrustedMail = (props) => {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("trusted-mail") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
     if (defaultSettings) {
@@ -140,12 +146,6 @@ const TrustedMail = (props) => {
       setShowReminder(true);
     }
   }, [type, domains]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("trusted-mail") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectDomainType = (e) => {
     if (type !== e.target.value) {

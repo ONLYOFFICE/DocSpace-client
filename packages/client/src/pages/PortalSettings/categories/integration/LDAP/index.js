@@ -56,6 +56,14 @@ const LDAP = ({
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
 
+  const onCheckView = () => {
+    if (isDesktop && window.innerWidth < 795) {
+      setIsSmallWindow(true);
+    } else {
+      setIsSmallWindow(false);
+    }
+  };
+
   useEffect(() => {
     isLdapAvailable && load(t);
     onCheckView();
@@ -64,14 +72,6 @@ const LDAP = ({
 
     return () => window.removeEventListener("resize", onCheckView);
   }, [isLdapAvailable, load, t]);
-
-  const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 795) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
 
   if (!isLoaded && isLdapAvailable) return <LdapLoader />;
   return (

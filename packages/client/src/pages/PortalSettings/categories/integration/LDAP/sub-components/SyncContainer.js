@@ -58,6 +58,13 @@ const SyncContainer = ({
   const { t } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
 
+  const onCheckView = () => {
+    if (!isMobile()) {
+      const newUrl = onChangeUrl();
+      if (newUrl) navigate(newUrl);
+    }
+  };
+
   React.useEffect(() => {
     isMobileView && setDocumentTitle(t("Ldap:LdapSyncTitle"));
     onCheckView();
@@ -65,13 +72,6 @@ const SyncContainer = ({
 
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (!isMobile()) {
-      const newUrl = onChangeUrl();
-      if (newUrl) navigate(newUrl);
-    }
-  };
 
   const onSaveClick = React.useCallback(() => {
     saveCronLdap()

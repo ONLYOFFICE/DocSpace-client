@@ -70,6 +70,12 @@ const AdminMessage = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("admin-message") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
       "defaultAdminMessageSettings",
@@ -128,12 +134,6 @@ const AdminMessage = (props) => {
       setShowReminder(true);
     }
   }, [type]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("admin-message") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectType = (e) => {
     if (type !== e.target.value) {

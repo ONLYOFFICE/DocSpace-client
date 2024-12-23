@@ -45,17 +45,17 @@ const SPSettings = ({ currentDeviceType }) => {
   const location = useLocation();
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
-
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("settings") &&
       navigate("/portal-settings/integration/sso");
   };
+
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
   return (
     <Box className="service-provider-settings">

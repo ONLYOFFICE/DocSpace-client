@@ -63,6 +63,7 @@ const TwoFactorAuth = (props) => {
     tfaSettings,
     getTfaType,
   } = props;
+
   const [type, setType] = useState("none");
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +71,12 @@ const TwoFactorAuth = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("tfa") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
@@ -123,12 +130,6 @@ const TwoFactorAuth = (props) => {
       setShowReminder(true);
     }
   }, [type]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("tfa") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectTfaType = (e) => {
     if (type !== e.target.value) {

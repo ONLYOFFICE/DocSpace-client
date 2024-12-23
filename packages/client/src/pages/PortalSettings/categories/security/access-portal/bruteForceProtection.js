@@ -83,6 +83,27 @@ const BruteForceProtection = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("brute-force-protection") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
+  const getSettings = () => {
+    const defaultData = {
+      numberAttempt: defaultNumberAttempt.replace(/^0+/, ""),
+      blockingTime: defaultBlockingTime.replace(/^0+/, ""),
+      checkPeriod: defaultCheckPeriod.replace(/^0+/, ""),
+    };
+    saveToSessionStorage("defaultBruteForceProtection", defaultData);
+
+    setCurrentNumberAttempt(defaultNumberAttempt);
+    setCurrentBlockingTime(defaultBlockingTime);
+    setCurrentCheckPeriod(defaultCheckPeriod);
+    setIsDefault(isDefaultPasswordProtection);
+    setIsGetSettingsLoaded(true);
+  };
+
   useEffect(() => {
     if (
       currentNumberAttempt == null ||
@@ -149,27 +170,6 @@ const BruteForceProtection = (props) => {
     currentCheckPeriod,
     isGetSettingsLoaded,
   ]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("brute-force-protection") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
-  const getSettings = () => {
-    const defaultData = {
-      numberAttempt: defaultNumberAttempt.replace(/^0+/, ""),
-      blockingTime: defaultBlockingTime.replace(/^0+/, ""),
-      checkPeriod: defaultCheckPeriod.replace(/^0+/, ""),
-    };
-    saveToSessionStorage("defaultBruteForceProtection", defaultData);
-
-    setCurrentNumberAttempt(defaultNumberAttempt);
-    setCurrentBlockingTime(defaultBlockingTime);
-    setCurrentCheckPeriod(defaultCheckPeriod);
-    setIsDefault(isDefaultPasswordProtection);
-    setIsGetSettingsLoaded(true);
-  };
 
   const onValidation = (inputValue) => {
     const isPositiveOrZeroNumber =

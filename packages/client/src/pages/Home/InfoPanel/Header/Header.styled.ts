@@ -43,14 +43,14 @@ export const StyledInfoPanelHeader = styled.div<{ withTabs: boolean }>`
       height: 52px;
     }
   }
+
   .tabs {
     display: flex;
     width: 100%;
     justify-content: center;
-    .sticky {
-      .scroll-body > div {
-        justify-content: center;
-      }
+
+    .scroll-body > div {
+      justify-content: center;
     }
   }
 `;

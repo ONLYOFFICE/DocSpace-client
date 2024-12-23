@@ -75,6 +75,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       onClick={onCloseClick}
       isClickable
       isStroke
+      aria-label="close"
     />
   );
 

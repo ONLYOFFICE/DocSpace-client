@@ -80,7 +80,7 @@ export const getCurrentDisplayType = (
 };
 
 export const parseChildren = (
-  children: React.ReactElement[] | React.ReactElement,
+  children: React.ReactElement[] | React.ReactElement | null,
   headerDisplayName: string,
   bodyDisplayName: string,
   footerDisplayName: string,

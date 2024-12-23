@@ -33,6 +33,11 @@ import { RoomsType } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
+export type Option = {
+  key: string;
+  value: string;
+};
+
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 

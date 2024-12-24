@@ -188,6 +188,8 @@ class AuthStore {
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
             this.getPaymentInfo();
+          } else {
+            this.isPortalInfoLoaded = true;
           }
         }),
       );

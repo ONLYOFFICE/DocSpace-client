@@ -38,6 +38,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
+import StatusMessage from "@docspace/shared/components/status-message";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -75,6 +76,7 @@ const RestoreBackup = (props) => {
     setRestoreResource,
     buttonSize,
     standalone,
+    downloadingProgressError,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -242,6 +244,13 @@ const RestoreBackup = (props) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
+      {downloadingProgressError && (
+        <StatusMessage
+          message={t(
+            "The last operation failed. Please start the process again.",
+          )}
+        />
+      )}
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}
@@ -310,6 +319,7 @@ export const Component = inject(
       setThirdPartyStorage,
       setConnectedThirdPartyAccount,
       setRestoreResource,
+      downloadingProgressError,
     } = backup;
 
     const buttonSize =
@@ -329,6 +339,7 @@ export const Component = inject(
       resetDownloadingProgress,
       getProgress,
       setRestoreResource,
+      downloadingProgressError,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

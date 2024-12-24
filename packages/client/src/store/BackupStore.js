@@ -88,6 +88,7 @@ class BackupStore {
   preparationPortalDialogVisible = false;
 
   downloadingProgress = 100;
+  downloadingProgressError = false;
 
   temporaryLink = null;
   timerId = null;
@@ -517,8 +518,17 @@ class BackupStore {
             this.temporaryLink = link;
           }
         } else {
-          toastr.error(error);
           this.downloadingProgress = 100;
+
+          if (isInitRequest) {
+            this.downloadingProgressError = true;
+            return;
+          }
+
+          if (this.downloadingProgressError)
+            this.downloadingProgressError = false;
+
+          toastr.error(error);
         }
       }
     } catch (e) {

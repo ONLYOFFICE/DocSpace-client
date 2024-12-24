@@ -34,12 +34,7 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
-import RoomsModule from "./sub-components/RoomsModule";
-import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-import { StyledModules, StyledManualBackup } from "./../StyledBackup";
-import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
+import { isManagement } from "@docspace/shared/utils/common";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
@@ -47,8 +42,16 @@ import {
 } from "@docspace/shared/api/settings";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import StatusMessage from "@docspace/shared/components/status-message";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+
+import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+import RoomsModule from "./sub-components/RoomsModule";
+import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
+import { StyledModules, StyledManualBackup } from "./../StyledBackup";
+import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
+//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 
 let selectedStorageType = "";
 
@@ -253,6 +256,7 @@ class ManualBackup extends React.Component {
       currentColorScheme,
       pageIsDisabled,
       isBackupProgressVisible,
+      downloadingProgressError,
     } = this.props;
     const {
       isInitialLoading,
@@ -286,6 +290,13 @@ class ManualBackup extends React.Component {
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>
+        {downloadingProgressError && (
+          <StatusMessage
+            message={t(
+              "The last operation failed. Please start the process again.",
+            )}
+          />
+        )}
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
@@ -436,6 +447,7 @@ export default inject(
       saveToLocalStorage,
       setConnectedThirdPartyAccount,
       isBackupProgressVisible,
+      downloadingProgressError,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -452,7 +464,7 @@ export default inject(
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-
+      downloadingProgressError,
       setDownloadingProgress,
       setTemporaryLink,
       setStorageRegions,

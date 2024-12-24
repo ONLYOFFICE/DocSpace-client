@@ -118,6 +118,52 @@ const LanguageAndTimeZoneComponent = (props) => {
   const prevProps = React.useRef({ language: "", tReady: "", isLoaded: "" });
   const prevState = React.useRef({ language: "", timezone: "" });
 
+  const checkInnerWidth = () => {
+    if (!isMobileDevice()) {
+      setState((val) => ({ ...val, isCustomizationView: true }));
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setState((val) => ({ ...val, isCustomizationView: false }));
+    }
+  };
+
+  const settingIsEqualInitialValue = (settingName, value) => {
+    const defaultValue = JSON.stringify(state[`${settingName}Default`]);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    settingNames.forEach((settingName) => {
+      const valueFromSessionStorage = getFromSessionStorage(settingName);
+      if (
+        valueFromSessionStorage &&
+        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
+      )
+        hasChanged = true;
+    });
+
+    if (hasChanged !== state.hasChanged) {
+      setState((val) => ({
+        ...val,
+        hasChanged,
+        showReminder: hasChanged,
+      }));
+    }
+  };
+
   React.useEffect(() => {
     languageFromSessionStorage = getFromSessionStorage("language");
     languageDefaultFromSessionStorage =
@@ -405,52 +451,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     setState((val) => ({ ...val, showReminder: false }));
 
     checkChanges();
-  };
-
-  const settingIsEqualInitialValue = (settingName, value) => {
-    const defaultValue = JSON.stringify(state[`${settingName}Default`]);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
-
-  const checkChanges = () => {
-    let hasChanged = false;
-
-    settingNames.forEach((settingName) => {
-      const valueFromSessionStorage = getFromSessionStorage(settingName);
-      if (
-        valueFromSessionStorage &&
-        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
-      )
-        hasChanged = true;
-    });
-
-    if (hasChanged !== state.hasChanged) {
-      setState((val) => ({
-        ...val,
-        hasChanged,
-        showReminder: hasChanged,
-      }));
-    }
-  };
-
-  const checkInnerWidth = () => {
-    if (!isMobileDevice()) {
-      setState((val) => ({ ...val, isCustomizationView: true }));
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setState((val) => ({ ...val, isCustomizationView: false }));
-    }
   };
 
   const {

@@ -315,11 +315,6 @@ export const getFreeUsersRoleArray = () => {
   ];
 };
 
-export const fixAccess = (item, t, roomType) => {
-  const topFreeRole = getTopFreeRole(t, roomType);
-  makeFreeRole(item, t, topFreeRole);
-};
-
 export const makeFreeRole = (item, t, freeRole) => {
   if (!freeRole) return item;
 
@@ -332,4 +327,9 @@ export const makeFreeRole = (item, t, freeRole) => {
         productName: t("Common:ProductName"),
       });
   return item;
+};
+
+export const fixAccess = (item, t, roomType) => {
+  const topFreeRole = getTopFreeRole(t, roomType);
+  makeFreeRole(item, t, topFreeRole);
 };

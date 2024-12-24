@@ -205,6 +205,15 @@ const Appearance = (props) => {
     defaultAppliedColorAccent,
   ]);
 
+  const onColorCheck = useCallback(
+    (themes) => {
+      const img = themes.find((item) => item.id == selectThemeId)?.text?.accent;
+
+      setColorCheckImg(img);
+    },
+    [selectThemeId],
+  );
+
   useEffect(() => {
     onColorCheck(appearanceTheme);
 
@@ -291,15 +300,6 @@ const Appearance = (props) => {
     previewAccent,
   ]);
 
-  const onColorCheck = useCallback(
-    (themes) => {
-      const img = themes.find((item) => item.id == selectThemeId)?.text?.accent;
-
-      setColorCheckImg(img);
-    },
-    [selectThemeId],
-  );
-
   const onColorCheckImgHover = useCallback(
     (e) => {
       const id = e.target.id;
@@ -355,6 +355,10 @@ const Appearance = (props) => {
       setOpenHexColorPickerButtons(true);
       setOpenHexColorPickerAccent(false);
     }
+  };
+
+  const onCloseDialogDelete = () => {
+    setVisibleDialog(false);
   };
 
   const onClickDeleteModal = useCallback(async () => {
@@ -563,10 +567,6 @@ const Appearance = (props) => {
     setCurrentColorButtons(appliedColorButtons);
 
     onCloseColorSchemeDialog();
-  };
-
-  const onCloseDialogDelete = () => {
-    setVisibleDialog(false);
   };
 
   const onOpenDialogDelete = () => {

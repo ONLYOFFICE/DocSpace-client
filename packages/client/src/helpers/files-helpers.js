@@ -60,13 +60,15 @@ export const getAccessIcon = (access) => {
 
 export const checkProtocol = (fileId, withRedirect) =>
   new Promise((resolve, reject) => {
+    let timeout;
+
     const onBlur = () => {
       clearTimeout(timeout);
       window.removeEventListener("blur", onBlur);
       resolve();
     };
 
-    const timeout = setTimeout(() => {
+    timeout = setTimeout(() => {
       reject();
       window.removeEventListener("blur", onBlur);
       withRedirect &&

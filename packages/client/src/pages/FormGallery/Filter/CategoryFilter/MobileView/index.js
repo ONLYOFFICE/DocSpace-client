@@ -50,6 +50,8 @@ const CategoryFilterMobile = ({
   const scrollRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [openedMenuItem, setOpenedMenuItem] = useState(null);
+
   const onCloseDropdown = () => {
     setIsOpen(false);
     setOpenedMenuItem(null);
@@ -64,7 +66,6 @@ const CategoryFilterMobile = ({
     onCloseDropdown();
   };
 
-  const [openedMenuItem, setOpenedMenuItem] = useState(null);
   const onOpenMenuItem = (category) => setOpenedMenuItem(category);
   const onHeaderArrowClick = () => setOpenedMenuItem(null);
 

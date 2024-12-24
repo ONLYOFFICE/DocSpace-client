@@ -367,27 +367,28 @@ export const PluginComponent = inject(({ pluginStore }) => {
     setSettingsPluginDialogVisible,
     setPluginDialogVisible,
     setPluginDialogProps,
-
     updateContextMenuItems,
     updateInfoPanelItems,
     updateMainButtonItems,
     updateProfileMenuItems,
     updateEventListenerItems,
     updateFileItems,
+    updatePlugin,
   } = pluginStore;
+
   return {
     updatePluginStatus,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
     setPluginDialogVisible,
     setPluginDialogProps,
-
     updateContextMenuItems,
     updateInfoPanelItems,
     updateMainButtonItems,
     updateProfileMenuItems,
     updateEventListenerItems,
     updateFileItems,
+    updatePlugin,
   };
 })(observer(ComponentPure));
 

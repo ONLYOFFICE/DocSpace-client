@@ -224,6 +224,17 @@ const Item = ({
     setIsSharedUser(false);
   };
 
+  const validateValue = (value) => {
+    const parsedEmail = parseAddresses(value);
+    const validationErrors = parsedEmail[0].parseErrors;
+    const currentErrors = validationErrors.length ? validationErrors : [];
+
+    setParseErrors(currentErrors);
+    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
+      () => errorsInList(),
+    );
+  };
+
   const saveEdit = async () => {
     if (searchRequestRunning) return;
 
@@ -249,17 +260,6 @@ const Item = ({
     document.addEventListener("keyup", onKeyPress);
     return () => document.removeEventListener("keyup", onKeyPress);
   });
-
-  const validateValue = (value) => {
-    const parsedEmail = parseAddresses(value);
-    const validationErrors = parsedEmail[0].parseErrors;
-    const currentErrors = validationErrors.length ? validationErrors : [];
-
-    setParseErrors(currentErrors);
-    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
-      () => errorsInList(),
-    );
-  };
 
   const changeValue = (e) => {
     const value = e.target.value.trim();

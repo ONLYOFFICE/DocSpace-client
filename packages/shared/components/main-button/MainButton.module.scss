@@ -28,12 +28,7 @@
 @import "../../styles/variables/_colors.scss";
 
 :root {
-  // MainButton variables
   --main-button-background-color: var(--accent-main, #{$light-blue-main});
-  //--main-button-disable-background-color: #{$light-blue-main-disabled};
-  // --main-button-hover-background-color: #{$light-blue-main-hover};
-  //--main-button-click-background-color: #{$light-blue-main-pressed};
-
   --main-button-padding: 5px 14px 5px 12px;
   --main-button-border-radius: 3px;
   --main-button-line-height: 22px;
@@ -63,9 +58,6 @@
 
   [data-theme="Dark"] {
     --main-button-background-color: #{$light-blue-main};
-    //   --main-button-disable-background-color: #{$light-blue-main-disabled};
-    // --main-button-hover-background-color: #{$light-blue-main-hover};
-    //  --main-button-click-background-color: #{$light-blue-main-pressed};
     --main-button-text-color: #{$white};
     --main-button-text-color-disabled: #{$white};
     --main-button-svg-fill: #{$white};
@@ -112,13 +104,11 @@
 
   &:not(.disabled) {
     &:hover {
-      // background-color: var(--main-button-hover-background-color);
       opacity: 0.85;
       cursor: pointer;
     }
 
     &:active {
-      //background-color: var(--main-button-click-background-color);
       opacity: 1;
       cursor: pointer;
 

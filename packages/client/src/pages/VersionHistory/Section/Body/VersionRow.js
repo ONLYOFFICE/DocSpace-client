@@ -39,6 +39,7 @@ import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import {
   commonIconsStyles,
   getCorrectDate,
@@ -90,6 +91,7 @@ const VersionRow = (props) => {
     openUrl,
     setIsVerHistoryPanel,
     openOnNewPage,
+    onSetDeleteVersionDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -194,6 +196,10 @@ const VersionRow = (props) => {
   //   );
   // };
 
+  const onDeleteVersion = () => {
+    onSetDeleteVersionDialogVisible(true);
+  };
+
   const onContextMenu = (event) => {
     if (showEditPanel) event.stopPropagation();
   };
@@ -224,6 +230,16 @@ const VersionRow = (props) => {
       label: `${t("Common:Download")} (${info.contentLength})`,
       onClick: onDownloadAction,
       disabled: !info.security.Download,
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    canChangeVersionFileHistory && {
+      key: "delete",
+      icon: DeleteIcon,
+      label: t("Common:Delete"),
+      onClick: onDeleteVersion,
     },
   ];
 
@@ -398,6 +414,7 @@ export default inject(
       isEditingVersion,
       fileSecurity,
       setIsVerHistoryPanel,
+      onSetDeleteVersionDialogVisible,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -422,6 +439,7 @@ export default inject(
       openUrl,
       setIsVerHistoryPanel,
       openOnNewPage,
+      onSetDeleteVersionDialogVisible,
     };
   },
 )(

@@ -68,6 +68,7 @@ import {
   ShareFolderDialog,
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
+  DeleteVersionDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -146,6 +147,7 @@ const Panels = (props) => {
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
+    deleteVersionDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -351,6 +353,9 @@ const Panels = (props) => {
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
+    deleteVersionDialogVisible && (
+      <DeleteVersionDialog key="delete-version-dialog" />
+    ),
   ];
 };
 
@@ -425,7 +430,10 @@ export default inject(
     const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
-    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
+    const {
+      isVisible: versionHistoryPanelVisible,
+      deleteVersionDialogVisible,
+    } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
@@ -511,6 +519,7 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      deleteVersionDialogVisible,
     };
   },
 )(observer(Panels));

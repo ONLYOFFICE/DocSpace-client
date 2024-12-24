@@ -41,6 +41,7 @@ class VersionHistoryStore {
   showProgressBar = false;
   timerId = null;
   isEditing = false;
+  deleteVersionDialogVisible = false;
 
   constructor(filesStore, settingsStore) {
     makeAutoObservable(this);
@@ -179,6 +180,10 @@ class VersionHistoryStore {
 
   setShowProgressBar = (show) => {
     this.showProgressBar = show;
+  };
+
+  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible) => {
+    this.deleteVersionDialogVisible = deleteVersionDialogVisible;
   };
 }
 

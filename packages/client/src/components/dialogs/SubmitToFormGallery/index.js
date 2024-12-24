@@ -60,6 +60,23 @@ const SubmitToFormGallery = ({
   let formItemIsSet = !!formItem;
 
   const [isSelectingForm, setIsSelectingForm] = useState(false);
+
+  const onClose = () => {
+    abortControllerRef.current?.abort();
+    setIsSubmitting(false);
+    setFormItem(null);
+    setIsSelectingForm(false);
+    setVisible(false);
+  };
+
+  const onError = (err) => {
+    if (!err.message === "canceled") {
+      console.error(err);
+      toastr.error(err);
+    }
+    onClose();
+  };
+
   const onOpenFormSelector = () => setIsSelectingForm(true);
   const onCloseFormSelector = () => {
     if (!formItemIsSet) onClose();
@@ -103,22 +120,6 @@ const SubmitToFormGallery = ({
       })
       .catch((err) => onError(err))
       .finally(() => onClose());
-  };
-
-  const onClose = () => {
-    abortControllerRef.current?.abort();
-    setIsSubmitting(false);
-    setFormItem(null);
-    setIsSelectingForm(false);
-    setVisible(false);
-  };
-
-  const onError = (err) => {
-    if (!err.message === "canceled") {
-      console.error(err);
-      toastr.error(err);
-    }
-    onClose();
   };
 
   useEffect(() => {

@@ -25,41 +25,108 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  DirectThirdPartyConnection,
+  DirectThirdPartyConnectionProps,
+} from "@docspace/shared/components/direct-third-party-connection";
+import type { FileInfoType } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
 
-const ThirdPartyResources = (props) => {
-  const { setRestoreResource, buttonSize } = props;
+export interface ThirdPartyResourcesProps
+  extends Omit<
+    DirectThirdPartyConnectionProps,
+    | "isSelect"
+    | "isMobileScale"
+    | "withoutInitPath"
+    | "onSelectFile"
+    | "descriptionText"
+    | "filterParam"
+  > {
+  setRestoreResource: (res: File | string | number) => void;
+}
 
+const ThirdPartyResources = ({
+  setRestoreResource,
+  buttonSize,
+
+  openConnectWindow,
+  connectDialogVisible,
+  deleteThirdPartyDialogVisible,
+  connectedThirdPartyAccount,
+  setConnectDialogVisible,
+  setDeleteThirdPartyDialogVisible,
+  clearLocalStorage,
+  setSelectedThirdPartyAccount,
+  isTheSameThirdPartyAccount,
+  selectedThirdPartyAccount,
+  accounts,
+  setThirdPartyAccountsInfo,
+  deleteThirdParty,
+  setConnectedThirdPartyAccount,
+  setThirdPartyProviders,
+  providers,
+  removeItem,
+  newPath,
+  basePath,
+  isErrorPath,
+  filesSelectorSettings,
+  setBasePath,
+  toDefault,
+  setNewPath,
+}: ThirdPartyResourcesProps) => {
   const { t } = useTranslation("Settings");
 
-  const onSelectFile = (file) => {
+  const onSelectFile = (file: FileInfoType) => {
     setRestoreResource(file.id);
   };
 
   return (
     <div className="restore-backup_third-party-module">
       <DirectThirdPartyConnection
-        className="restore-backup_input"
-        onSelectFile={onSelectFile}
-        filterParam={FilesSelectorFilterTypes.BackupOnly}
-        descriptionText={t("SelectFileInGZFormat")}
+        isSelect
+        isMobileScale
         withoutInitPath
         buttonSize={buttonSize}
-        isMobileScale
-        isSelect
+        onSelectFile={onSelectFile}
+        descriptionText={t("SelectFileInGZFormat")}
+        filterParam={FilesSelectorFilterTypes.BackupOnly}
+        openConnectWindow={openConnectWindow}
+        connectDialogVisible={connectDialogVisible}
+        deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+        connectedThirdPartyAccount={connectedThirdPartyAccount}
+        setConnectDialogVisible={setConnectDialogVisible}
+        setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+        clearLocalStorage={clearLocalStorage}
+        setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+        isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+        selectedThirdPartyAccount={selectedThirdPartyAccount}
+        accounts={accounts}
+        setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+        deleteThirdParty={deleteThirdParty}
+        setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+        setThirdPartyProviders={setThirdPartyProviders}
+        providers={providers}
+        removeItem={removeItem}
+        newPath={newPath}
+        basePath={basePath}
+        isErrorPath={isErrorPath}
+        filesSelectorSettings={filesSelectorSettings}
+        setBasePath={setBasePath}
+        toDefault={toDefault}
+        setNewPath={setNewPath}
       />
     </div>
   );
 };
 
-export default inject(({ backup }) => {
-  const { setRestoreResource } = backup;
+export default ThirdPartyResources;
 
-  return {
-    setRestoreResource,
-  };
-})(observer(ThirdPartyResources));
+// export default inject(({ backup }) => {
+//   const { setRestoreResource } = backup;
+
+//   return {
+//     setRestoreResource,
+//   };
+// })(observer(ThirdPartyResources));

@@ -55,8 +55,9 @@ const DropDown = (props: DropDownProps) => {
     usePortalBackdrop = false,
   } = props;
 
-  const toggleDropDown = () => {
+  const toggleDropDown = (e: React.MouseEvent) => {
     clickOutsideAction?.({} as Event, !open);
+    e.stopPropagation();
   };
 
   const eventTypesProp = forceCloseClickOutside

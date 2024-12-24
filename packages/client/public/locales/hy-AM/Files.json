@@ -73,7 +73,6 @@
   "ExportRoomIndex": "Արտահանման սենյակի ինդեքս",
   "ExportRoomIndexAlreadyInProgressError": "Սենյակի ինդեքսի արտահանումն արդեն ընթացքի մեջ է: Խնդրում ենք սպասել մինչև ընթացիկ արտահանումն ավարտվի՝ նորը սկսելու համար:",
   "FavoritesEmptyContainerDescription": "Ֆայլերը որպես ընտրյալներ նշելու կամ այս ցանկից հեռացնելու համար օգտագործեք համատեքստի ցանկը:",
-  "FileCannotBeMoved": "Ֆայլը չի կարող տեղափոխվել այս սենյակ:",
   "FileContents": "Ֆայլի բովանդակություն",
   "FileDownloadingIsRestricted": "Այս սենյակում ֆայլերի ներբեռնումը սահմանափակված է:",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> ֆայլ արտահանվել է Փաստաթղթեր",

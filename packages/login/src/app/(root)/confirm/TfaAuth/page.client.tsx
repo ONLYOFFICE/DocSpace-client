@@ -48,6 +48,7 @@ import { ButtonKeys } from "@docspace/shared/enums";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { useSearchParams } from "next/navigation";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
@@ -72,6 +73,7 @@ const TfaAuthForm = ({
   const { confirmHeader = null } = linkData;
 
   const linkUrlData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
 
   const onSubmit = async () => {
     try {
@@ -100,6 +102,11 @@ const TfaAuthForm = ({
 
       if (referenceUrl) {
         sessionStorage.removeItem("referenceUrl");
+      }
+
+      if (isPublicAuth) {
+        localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+        window.close();
       }
 
       window.location.replace(referenceUrl || defaultPage);

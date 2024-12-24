@@ -103,6 +103,59 @@ class AutomaticBackup extends React.PureComponent {
     this.getMonthNumbers();
     this.getMaxNumberCopies();
   }
+  setBasicSettings = async () => {
+    const {
+      setDefaultOptions,
+      t,
+      setThirdPartyStorage,
+      setBackupSchedule,
+      //setCommonThirdPartyList,
+      getProgress,
+      setStorageRegions,
+      setConnectedThirdPartyAccount,
+    } = this.props;
+
+    try {
+      getProgress(t);
+
+      const [
+        ///thirdPartyList,
+        account,
+        backupSchedule,
+        backupStorage,
+        storageRegions,
+      ] = await Promise.all([
+        //getThirdPartyCommonFolderTree(),
+        getSettingsThirdParty(),
+        getBackupSchedule(isManagement()),
+        getBackupStorage(),
+        getStorageRegions(),
+      ]);
+      setConnectedThirdPartyAccount(account);
+      setThirdPartyStorage(backupStorage);
+      setBackupSchedule(backupSchedule);
+      setStorageRegions(storageRegions);
+      //thirdPartyList && setCommonThirdPartyList(thirdPartyList);
+
+      setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);
+
+      clearTimeout(this.timerId);
+      this.timerId = null;
+
+      this.setState({
+        isEmptyContentBeforeLoader: false,
+        isInitialLoading: false,
+      });
+    } catch (error) {
+      toastr.error(error);
+      clearTimeout(this.timerId);
+      this.timerId = null;
+      this.setState({
+        isEmptyContentBeforeLoader: false,
+        isInitialLoading: false,
+      });
+    }
+  };
 
   componentDidMount() {
     const { fetchTreeFolders, rootFoldersTitles } = this.props;
@@ -385,7 +438,7 @@ class AutomaticBackup extends React.PureComponent {
         isManagement(),
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
-        getBackupSchedule(),
+        getBackupSchedule(isManagement()),
         getBackupStorage(),
       ]);
       setBackupSchedule(selectedSchedule);

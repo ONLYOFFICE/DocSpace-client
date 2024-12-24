@@ -25,40 +25,79 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import type {
+  FileInfoType,
+  FilesSelectorSettings,
+} from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+import { TBreadCrumb } from "components/selector/Selector.types";
 
-const RoomsModule = (props) => {
-  const { isEnableRestore, setRestoreResource } = props;
+export interface RoomsModuleProps {
+  settingsFileSelector: FilesSelectorSettings;
 
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
+  toDefault: VoidFunction;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+
+  // backup
+  setRestoreResource: (resource: number | string | File) => void;
+
+  // currentQuotaStore
+  isEnableRestore: boolean; // isRestoreAndAutoBackupAvailable,
+}
+
+const RoomsModule = ({
+  isEnableRestore,
+  setRestoreResource,
+
+  newPath,
+  basePath,
+  isErrorPath,
+  setBasePath,
+  toDefault,
+  setNewPath,
+  settingsFileSelector,
+}: RoomsModuleProps) => {
   const { t } = useTranslation("Settings");
 
-  const onSelectFile = (file) => {
+  const onSelectFile = (file: FileInfoType) => {
     setRestoreResource(file.id);
   };
 
   return (
     <FilesSelectorInput
+      isSelect
       className="restore-backup_input"
       isDisabled={!isEnableRestore}
       onSelectFile={onSelectFile}
       filterParam={FilesSelectorFilterTypes.BackupOnly}
       descriptionText={t("SelectFileInGZFormat")}
-      isSelect
+      newPath={newPath}
+      basePath={basePath}
+      isErrorPath={isErrorPath}
+      filesSelectorSettings={settingsFileSelector}
+      setBasePath={setBasePath}
+      toDefault={toDefault}
+      setNewPath={setNewPath}
     />
   );
 };
 
-export default inject(({ currentQuotaStore, backup }) => {
-  const { setRestoreResource } = backup;
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+export default RoomsModule;
 
-  return {
-    setRestoreResource,
-    isEnableRestore: isRestoreAndAutoBackupAvailable,
-  };
-})(observer(RoomsModule));
+// export default inject(({ currentQuotaStore, backup }) => {
+//   const { setRestoreResource } = backup;
+//   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+
+//   return {
+//     setRestoreResource,
+//     isEnableRestore: isRestoreAndAutoBackupAvailable,
+//   };
+// })(observer(RoomsModule));

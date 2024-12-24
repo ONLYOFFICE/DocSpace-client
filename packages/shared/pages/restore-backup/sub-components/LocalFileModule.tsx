@@ -28,7 +28,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 
 export type LocalFileProps = {
-  setRestoreResource: (file: File) => void;
+  setRestoreResource: (file: File | string) => void;
   isEnableRestore: boolean;
 };
 

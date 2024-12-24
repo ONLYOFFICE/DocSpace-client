@@ -88,7 +88,7 @@ class BackupStore {
   preparationPortalDialogVisible = false;
 
   downloadingProgress = 100;
-  downloadingProgressError = false;
+  downloadingProgressError = "";
 
   temporaryLink = null;
   timerId = null;
@@ -517,16 +517,17 @@ class BackupStore {
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
+
+          if (this.downloadingProgressError) this.downloadingProgressError = "";
         } else {
           this.downloadingProgress = 100;
 
           if (isInitRequest) {
-            this.downloadingProgressError = true;
+            this.downloadingProgressError = error;
             return;
           }
 
-          if (this.downloadingProgressError)
-            this.downloadingProgressError = false;
+          if (this.downloadingProgressError) this.downloadingProgressError = "";
 
           toastr.error(error);
         }

@@ -444,6 +444,35 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
+  const stateTitle = location?.state?.title;
+  const stateCanCreate = location?.state?.canCreate;
+  const stateIsRoot = location?.state?.isRoot;
+  const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsShared = location?.state?.isShared;
+  const stateIsExternal = location?.state?.isExternal;
+  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
+
+  const isRoot =
+    isLoading && typeof stateIsRoot === "boolean"
+      ? stateIsRoot
+      : isRootFolder || isContactsPage || isSettingsPage;
+
+  const isLifetimeEnabled = Boolean(
+    !isRoot &&
+      (selectedFolder?.lifetime ||
+        infoPanelRoom?.lifetime ||
+        (isLoading && stateIsLifetimeEnabled)),
+  );
+
+  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+
+  const getInsideGroupTitle = () => {
+    return isLoading && insideGroupTempTitle
+      ? insideGroupTempTitle
+      : currentGroup?.name;
+  };
+
   const getTitleIcon = () => {
     if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
@@ -453,6 +482,7 @@ const SectionHeaderContent = (props) => {
 
     return "";
   };
+
   const onLogoClick = () => {
     if (isFrame) return;
     moveToPublicRoom(rootFolderId);
@@ -510,35 +540,6 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.withoutInfoPanelToggler =
       isIndexEditingMode || isPublicRoom;
   }
-
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
-
-  const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
-  );
-
-  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
-
-  const getInsideGroupTitle = () => {
-    return isLoading && insideGroupTempTitle
-      ? insideGroupTempTitle
-      : currentGroup?.name;
-  };
 
   const currentTitle = isSettingsPage
     ? t("Common:Settings")

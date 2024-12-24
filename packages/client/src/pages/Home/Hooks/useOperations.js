@@ -48,39 +48,6 @@ const useOperations = ({
     isProgressFinished,
   });
 
-  React.useEffect(() => {
-    if (
-      isProgressFinished &&
-      itemsSelectionTitle &&
-      isProgressFinished !== prevProps.current.isProgressFinished
-    ) {
-      showOperationToast(
-        secondaryProgressDataStoreIcon,
-        itemsSelectionLength,
-        itemsSelectionTitle,
-      );
-      setItemsSelectionTitle(null);
-    }
-  }, [
-    isProgressFinished,
-
-    itemsSelectionTitle,
-    showOperationToast,
-    setItemsSelectionTitle,
-  ]);
-
-  React.useEffect(() => {
-    prevProps.current.isProgressFinished = isProgressFinished;
-  }, [isProgressFinished]);
-
-  const showUploadPanel = () => {
-    if (disableUploadPanelOpen) return;
-    setUploadPanelVisible(true);
-
-    if (primaryProgressDataVisible && uploaded && converted)
-      clearPrimaryProgressData();
-  };
-
   const showOperationToast = React.useCallback(
     (type, qty, title) => {
       switch (type) {
@@ -134,6 +101,39 @@ const useOperations = ({
     },
     [t],
   );
+
+  React.useEffect(() => {
+    if (
+      isProgressFinished &&
+      itemsSelectionTitle &&
+      isProgressFinished !== prevProps.current.isProgressFinished
+    ) {
+      showOperationToast(
+        secondaryProgressDataStoreIcon,
+        itemsSelectionLength,
+        itemsSelectionTitle,
+      );
+      setItemsSelectionTitle(null);
+    }
+  }, [
+    isProgressFinished,
+
+    itemsSelectionTitle,
+    showOperationToast,
+    setItemsSelectionTitle,
+  ]);
+
+  React.useEffect(() => {
+    prevProps.current.isProgressFinished = isProgressFinished;
+  }, [isProgressFinished]);
+
+  const showUploadPanel = () => {
+    if (disableUploadPanelOpen) return;
+    setUploadPanelVisible(true);
+
+    if (primaryProgressDataVisible && uploaded && converted)
+      clearPrimaryProgressData();
+  };
 
   return { showUploadPanel };
 };

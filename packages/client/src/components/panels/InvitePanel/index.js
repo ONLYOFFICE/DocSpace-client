@@ -60,6 +60,7 @@ const InvitePanel = ({
   getFolderInfo,
   inviteItems,
   roomId,
+  roomType,
   setInviteItems,
   setInvitePanelOptions,
   t,
@@ -102,15 +103,6 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
 
-  const onCheckHeight = () => {
-    setScrollAllPanelContent(!isDesktop());
-    setIsMobileView(isMobile());
-  };
-
-  const onMouseDown = (e) => {
-    if (e.target.id === "InvitePanelWrapper") onClose();
-  };
-
   const onClose = () => {
     setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
@@ -120,6 +112,15 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
     setInviteItems([]);
+  };
+
+  const onCheckHeight = () => {
+    setScrollAllPanelContent(!isDesktop());
+    setIsMobileView(isMobile());
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target.id === "InvitePanelWrapper") onClose();
   };
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;

@@ -122,11 +122,12 @@ const EditLinkPanel = (props) => {
 
   const onDenyDownloadChange = () => setDenyDownload(!denyDownload);
 
+  const onClose = () => setIsVisible(false);
+
   const onClosePanel = () => {
     hasChanges ? setUnsavedChangesDialog(true) : onClose();
   };
 
-  const onClose = () => setIsVisible(false);
   const onSave = () => {
     if (
       (!passwordValue.trim() || !isPasswordValid) &&

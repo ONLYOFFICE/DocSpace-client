@@ -301,11 +301,6 @@ const InviteInput = ({
     [],
   );
 
-  const onChange = (e) => {
-    const value = e.target.value;
-    onChangeInput(value);
-  };
-
   const onChangeInput = (value) => {
     const clearValue = value.trim();
 
@@ -319,6 +314,11 @@ const InviteInput = ({
 
     setSearchRequestRunning(true);
     debouncedSearch(clearValue);
+  };
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    onChangeInput(value);
   };
 
   const getItemContent = (item) => {

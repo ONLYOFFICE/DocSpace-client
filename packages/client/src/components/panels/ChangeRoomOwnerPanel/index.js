@@ -83,6 +83,12 @@ const ChangeRoomOwner = (props) => {
     useModal = true,
   } = props;
 
+  const handleClosePanel = () => {
+    const { onClose } = props;
+    if (onClose) onClose();
+    setIsVisible(false);
+  };
+
   const onChangeRoomOwner = async (
     user,
     selectedAccess,
@@ -96,12 +102,6 @@ const ChangeRoomOwner = (props) => {
       updateInfoPanelSelection();
     }
     handleClosePanel();
-  };
-
-  const handleClosePanel = () => {
-    const { onClose } = props;
-    if (onClose) onClose();
-    setIsVisible(false);
   };
 
   const onBackClick = () => {

@@ -38,14 +38,14 @@ const StyledBody = styled.div`
   box-shadow: 0px 5px 20px ${globalColors.menuShadow};
   border-radius: 6px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   margin-bottom: 16px;
 
   color: black;
 
   svg {
-    margin-inline-end: 8px;
+    margin-inline-end: 16px;
   }
 `;
 

@@ -103,6 +103,24 @@ const PortalRenamingComponent = (props) => {
 
   const [isShowModal, setIsShowModal] = useState(false);
 
+  const checkInnerWidth = useCallback(() => {
+    if (!isMobileDevice()) {
+      setIsCustomizationView(true);
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setIsCustomizationView(false);
+    }
+  }, [isMobileDevice, setIsCustomizationView]);
+
   useEffect(() => {
     setDocumentTitle(
       t("PortalRenaming", { productName: t("Common:ProductName") }),
@@ -125,6 +143,29 @@ const PortalRenamingComponent = (props) => {
     return () => window.removeEventListener("resize", checkInnerWidth);
   }, []);
 
+  const settingIsEqualInitialValue = (value) => {
+    const defaultValue = JSON.stringify(portalNameDefault);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    const valueFromSessionStorage = getFromSessionStorage("portalName");
+    if (
+      valueFromSessionStorage !== "none" &&
+      valueFromSessionStorage !== null &&
+      !settingIsEqualInitialValue(valueFromSessionStorage)
+    ) {
+      hasChanged = true;
+    }
+
+    if (hasChanged !== showReminder) {
+      setShowReminder(hasChanged);
+    }
+  };
+
   useEffect(() => {
     if (isLoadedSetting) setIsLoadedPortalRenaming(isLoadedSetting);
 
@@ -132,6 +173,10 @@ const PortalRenamingComponent = (props) => {
       checkChanges();
     }
   }, [isLoadedSetting, portalNameDefault, portalName]);
+
+  const onCloseModal = () => {
+    setIsShowModal(false);
+  };
 
   const onSavePortalRename = () => {
     if (errorValue) return;
@@ -192,23 +237,6 @@ const PortalRenamingComponent = (props) => {
     }
   };
 
-  const onChangePortalName = (e) => {
-    const value = e.target.value;
-
-    onValidateInput(value);
-
-    setPortalName(value);
-
-    if (settingIsEqualInitialValue(value)) {
-      saveToSessionStorage("portalName", "none");
-      saveToSessionStorage("portalNameDefault", "none");
-    } else {
-      saveToSessionStorage("portalName", value);
-    }
-
-    checkChanges();
-  };
-
   const onValidateInput = (value) => {
     const validDomain = new RegExp(domainValidator.regex);
 
@@ -243,53 +271,25 @@ const PortalRenamingComponent = (props) => {
     }
   };
 
-  const settingIsEqualInitialValue = (value) => {
-    const defaultValue = JSON.stringify(portalNameDefault);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
+  const onChangePortalName = (e) => {
+    const value = e.target.value;
 
-  const checkChanges = () => {
-    let hasChanged = false;
+    onValidateInput(value);
 
-    const valueFromSessionStorage = getFromSessionStorage("portalName");
-    if (
-      valueFromSessionStorage !== "none" &&
-      valueFromSessionStorage !== null &&
-      !settingIsEqualInitialValue(valueFromSessionStorage)
-    ) {
-      hasChanged = true;
-    }
+    setPortalName(value);
 
-    if (hasChanged !== showReminder) {
-      setShowReminder(hasChanged);
-    }
-  };
-
-  const checkInnerWidth = useCallback(() => {
-    if (!isMobileDevice()) {
-      setIsCustomizationView(true);
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+    if (settingIsEqualInitialValue(value)) {
+      saveToSessionStorage("portalName", "none");
+      saveToSessionStorage("portalNameDefault", "none");
     } else {
-      setIsCustomizationView(false);
+      saveToSessionStorage("portalName", value);
     }
-  }, [isMobileDevice, setIsCustomizationView]);
+
+    checkChanges();
+  };
 
   const onOpenModal = () => {
     setIsShowModal(true);
-  };
-
-  const onCloseModal = () => {
-    setIsShowModal(false);
   };
 
   const hasError = errorValue !== null;

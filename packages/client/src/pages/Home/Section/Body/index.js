@@ -105,38 +105,6 @@ const SectionBodyContent = (props) => {
   }, [currentDeviceType]);
 
   useEffect(() => {
-    window.addEventListener("beforeunload", onBeforeunload);
-    window.addEventListener("mousedown", onMouseDown);
-    startDrag && window.addEventListener("mouseup", onMouseUp);
-    startDrag && document.addEventListener("mousemove", onMouseMove);
-
-    document.addEventListener("dragover", onDragOver);
-    document.addEventListener("dragleave", onDragLeaveDoc);
-    document.addEventListener("drop", onDropEvent);
-
-    return () => {
-      window.removeEventListener("beforeunload", onBeforeunload);
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("mousemove", onMouseMove);
-
-      document.removeEventListener("dragover", onDragOver);
-      document.removeEventListener("dragleave", onDragLeaveDoc);
-      document.removeEventListener("drop", onDropEvent);
-    };
-  }, [
-    onMouseUp,
-    onMouseMove,
-    onClickBack,
-    startDrag,
-    folderId,
-    viewAs,
-    uploaded,
-    currentDeviceType,
-    filesList,
-  ]);
-
-  useEffect(() => {
     if (scrollToItem) {
       const { type, id } = scrollToItem;
 
@@ -298,6 +266,14 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  const onMoveTo = (destFolderId, title) => {
+    const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
+    moveDragItems(id, title, {
+      copy: t("Common:CopyOperation"),
+      move: t("Common:MoveToOperation"),
+    });
+  };
+
   const onMouseUp = (e) => {
     clearEdgeScrollingTimer();
     setStartDrag(false);
@@ -362,14 +338,6 @@ const SectionBodyContent = (props) => {
     changeIndex(VDRIndexingAction.MoveIndex, replaceable, t, isSectionTarget);
   };
 
-  const onMoveTo = (destFolderId, title) => {
-    const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, {
-      copy: t("Common:CopyOperation"),
-      move: t("Common:MoveToOperation"),
-    });
-  };
-
   const onDropEvent = () => {
     setDragging(false);
   };
@@ -390,6 +358,38 @@ const SectionBodyContent = (props) => {
       setDragging(false);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", onBeforeunload);
+    window.addEventListener("mousedown", onMouseDown);
+    startDrag && window.addEventListener("mouseup", onMouseUp);
+    startDrag && document.addEventListener("mousemove", onMouseMove);
+
+    document.addEventListener("dragover", onDragOver);
+    document.addEventListener("dragleave", onDragLeaveDoc);
+    document.addEventListener("drop", onDropEvent);
+
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeunload);
+      window.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("mousemove", onMouseMove);
+
+      document.removeEventListener("dragover", onDragOver);
+      document.removeEventListener("dragleave", onDragLeaveDoc);
+      document.removeEventListener("drop", onDropEvent);
+    };
+  }, [
+    onMouseUp,
+    onMouseMove,
+    onClickBack,
+    startDrag,
+    folderId,
+    viewAs,
+    uploaded,
+    currentDeviceType,
+    filesList,
+  ]);
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 

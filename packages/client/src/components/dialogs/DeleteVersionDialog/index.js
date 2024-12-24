@@ -48,7 +48,6 @@ const DeleteVersionDialogComponent = (props) => {
   }, []);
 
   const onKeyUp = (e) => {
-    /// &?????????
     if (e.keyCode === 27) onClose();
     if (e.keyCode === 13 || e.which === 13) onDelete();
   };
@@ -81,12 +80,13 @@ const DeleteVersionDialogComponent = (props) => {
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-      <ModalDialog.Header>Delete version</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("VersionHistory:DeleteVersion")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <DeleteVersionDialogContainer className="modal-dialog-content-body">
           <Text lineHeight="20px" noSelect>
-            You are about to delete a file version. It will be no possible to
-            see or restore it anymore. Are you sure you want to continue?
+            {t("VersionHistory:DeleteVersionDescription")}
           </Text>
         </DeleteVersionDialogContainer>
       </ModalDialog.Body>
@@ -115,7 +115,7 @@ const DeleteVersionDialogComponent = (props) => {
   );
 };
 
-const DeleteVersionDialog = withTranslation(["Common", "Files"])(
+const DeleteVersionDialog = withTranslation(["Common", "VersionHistory"])(
   DeleteVersionDialogComponent,
 );
 

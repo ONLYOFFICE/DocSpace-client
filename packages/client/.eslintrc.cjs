@@ -7,6 +7,31 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: "module",
   },
+  rules: {
+    "no-console": "off",
+    "no-continue": "off",
+    "no-fallthrough": "off",
+    "no-await-in-loop": "off",
+    "no-useless-escape": "off",
+    "react/no-danger": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "jsx-a11y/aria-role": "off",
+    "react/no-unescaped-entities": "off",
+    "no-plusplus": "off",
+    "no-bitwise": "off",
+    eqeqeq: "off",
+    "react-hooks/rules-of-hooks": "off",
+
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/forbid-prop-types": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-loop-func": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    /* "@typescript-eslint/no-use-before-define": "off", */
+    "jsx-a11y/tabindex-no-positive": "off",
+    "react-hooks/exhaustive-deps": "off",
+  },
 
   ignorePatterns: [
     "./tsconfig.json",

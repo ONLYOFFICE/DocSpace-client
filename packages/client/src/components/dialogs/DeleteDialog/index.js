@@ -83,33 +83,6 @@ const DeleteDialogComponent = (props) => {
     setDeleteDialogVisible(false);
   };
 
-  const onDeleteAction = () => {
-    if (isRoomDelete) {
-      onDeleteRoom();
-      return;
-    }
-
-    if (unsubscribe) {
-      onUnsubscribe();
-      return;
-    }
-
-    onDelete();
-  };
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
   const onDelete = () => {
     setSelected("none");
     onClose();
@@ -159,6 +132,33 @@ const DeleteDialogComponent = (props) => {
 
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
+
+  const onDeleteAction = () => {
+    if (isRoomDelete) {
+      onDeleteRoom();
+      return;
+    }
+
+    if (unsubscribe) {
+      onUnsubscribe();
+      return;
+    }
+
+    onDelete();
+  };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");

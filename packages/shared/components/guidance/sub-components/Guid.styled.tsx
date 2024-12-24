@@ -122,7 +122,10 @@ const StyledTipsCircle = styled.div<{ isSelected: boolean }>`
     `}
 `;
 
-const StyledClipped = styled.div<{ position: ClippedPosition }>`
+const StyledClipped = styled.div<{
+  position: ClippedPosition;
+  isBase: boolean;
+}>`
   position: absolute;
   border-radius: 7px;
   ${(props) =>
@@ -133,7 +136,8 @@ const StyledClipped = styled.div<{ position: ClippedPosition }>`
       width: ${props.position.width ? `${props.position.width}px` : "100%"};
       height: ${`${props.position.height}px`};
     `}
-  backdrop-filter: contrast(200%);
+  backdrop-filter: ${(props) =>
+    props.isBase ? "contrast(200%)" : "contrast(0.73)"};
 `;
 
 export { StyledDialog, StyledGuidBackdrop, StyledClipped, StyledTipsCircle };

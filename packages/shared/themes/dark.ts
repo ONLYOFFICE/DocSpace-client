@@ -3262,6 +3262,12 @@ const Dark: TTheme = {
     backgroundColor: black,
     borderColor: grayDarkStrong,
   },
+
+  formFillingTips: {
+    circleColor: grayDarkMid,
+    selectedColor: black,
+    circleBorder: `3px solid ${lightSecondMain}`,
+  },
 };
 
 export default Dark;

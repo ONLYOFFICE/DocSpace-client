@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { observer, inject } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
+import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
 
 import {
   ModalDialog,
@@ -53,6 +54,10 @@ const FormFillingTipsDialog = (props) => {
     setFormFillingTipsDialog,
     setWelcomeFormFillingTipsVisible,
   } = props;
+
+  const theme = useTheme();
+
+  const image = theme.isBase ? TutorialPreview : TutorialPreviewDark;
 
   const onOpenGuidance = () => {
     setWelcomeFormFillingTipsVisible(false);
@@ -83,7 +88,7 @@ const FormFillingTipsDialog = (props) => {
           >
             {t("WelcomeDescription")}
           </Text>
-          <img src={TutorialPreview} alt="tips-preview" />
+          <img src={image} alt="tips-preview" />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -27,10 +27,11 @@
 import React from "react";
 
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { classNames, isDesktop } from "../../../utils";
+import { classNames, isMobile } from "../../../utils";
 import { AsideHeader } from "../../aside";
 
 import { FormFillingTipsState } from "../../../enums";
@@ -66,6 +67,8 @@ const Guid = ({
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   const [modalBottom, setModalBottom] = React.useState<null | number>(null);
+
+  const theme = useTheme();
 
   const modalText = getHeaderText(formFillingTipsNumber, t);
 
@@ -126,10 +129,18 @@ const Guid = ({
     return () => window.removeEventListener("resize", onResize);
   }, [guidPosition.bottom]);
 
+  if (isMobile()) {
+    onClose();
+  }
+
   return (
     <div>
       <StyledGuidBackdrop onClick={onCloseBackdrop} />
-      <StyledClipped className="guid-element" position={guidPosition} />
+      <StyledClipped
+        isBase={theme.isBase}
+        className="guid-element"
+        position={guidPosition}
+      />
       <StyledDialog
         id="modal-onMouseDown-close"
         bottom={modalBottom}

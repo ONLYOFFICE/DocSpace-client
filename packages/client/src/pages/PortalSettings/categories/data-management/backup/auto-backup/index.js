@@ -103,13 +103,14 @@ class AutomaticBackup extends React.PureComponent {
     this.getMonthNumbers();
     this.getMaxNumberCopies();
   }
+
   setBasicSettings = async () => {
     const {
       setDefaultOptions,
       t,
       setThirdPartyStorage,
       setBackupSchedule,
-      //setCommonThirdPartyList,
+      // setCommonThirdPartyList,
       getProgress,
       setStorageRegions,
       setConnectedThirdPartyAccount,
@@ -119,13 +120,13 @@ class AutomaticBackup extends React.PureComponent {
       getProgress(t);
 
       const [
-        ///thirdPartyList,
+        /// thirdPartyList,
         account,
         backupSchedule,
         backupStorage,
         storageRegions,
       ] = await Promise.all([
-        //getThirdPartyCommonFolderTree(),
+        // getThirdPartyCommonFolderTree(),
         getSettingsThirdParty(),
         getBackupSchedule(isManagement()),
         getBackupStorage(),
@@ -135,7 +136,7 @@ class AutomaticBackup extends React.PureComponent {
       setThirdPartyStorage(backupStorage);
       setBackupSchedule(backupSchedule);
       setStorageRegions(storageRegions);
-      //thirdPartyList && setCommonThirdPartyList(thirdPartyList);
+      // thirdPartyList && setCommonThirdPartyList(thirdPartyList);
 
       setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);
 

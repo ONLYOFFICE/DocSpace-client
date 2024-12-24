@@ -84,21 +84,6 @@ const History = ({
     }
   };
 
-  useEffect(() => {
-    if (selectionHistory !== currentHistory) {
-      loading = false;
-      setCurrentHistory(selectionHistory);
-    }
-  }, [selectionHistory]);
-
-  useEffect(() => {
-    scrollElement?.addEventListener("scroll", onScroll);
-
-    return () => {
-      scrollElement?.removeEventListener("scroll", onScroll);
-    };
-  }, [scrollElement, selectionHistory]);
-
   const onFetchMoreHistory = async () => {
     setIsLoadingNextPage(true);
     loading = true;
@@ -138,7 +123,23 @@ const History = ({
     const hasNextPage = onCheckNextPage();
 
     if (hasNextPage) onCheckListScroll();
-  }, [selectionHistory, loading]);
+  }, [selectionHistory, loading, onCheckNextPage]);
+
+  useEffect(() => {
+    if (selectionHistory !== currentHistory) {
+      loading = false;
+      setCurrentHistory(selectionHistory);
+    }
+  }, [selectionHistory]);
+
+  useEffect(() => {
+    scrollElement?.addEventListener("scroll", onScroll);
+
+    return () => {
+      scrollElement?.removeEventListener("scroll", onScroll);
+    };
+  }, [scrollElement, onScroll]);
+
   useEffect(() => {
     if (!isMount.current || isThirdParty) return;
 

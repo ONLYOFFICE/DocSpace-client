@@ -60,7 +60,6 @@ const InvitePanel = ({
   getFolderInfo,
   inviteItems,
   roomId,
-  roomType,
   setInviteItems,
   setInvitePanelOptions,
   t,
@@ -123,6 +122,7 @@ const InvitePanel = ({
     if (e.target.id === "InvitePanelWrapper") onClose();
   };
 
+  const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -370,7 +370,6 @@ const InvitePanel = ({
     }
   };
 
-  const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
 
   const removeExist = (items) => {

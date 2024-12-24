@@ -104,8 +104,8 @@ const InfoPanelHeaderContent = ({
     !isLockedSharedRoom(selection as TRoom) &&
     !(external && expired === true);
 
-  // const isTemplate = selection?.rootFolderType === FolderType.Templates;
-  const isTemplate = false; // TODO: Templates
+  const isTemplate =
+    selection && "isTemplate" in selection && selection.isTemplate;
 
   const closeInfoPanel = () => setIsVisible(false);
 
@@ -144,7 +144,8 @@ const InfoPanelHeaderContent = ({
     selection &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.RoomTemplates);
 
   if (isRoomsType) tabsData.unshift(memberTab);
 

@@ -613,7 +613,8 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel = isTemplatesFolder ? t("Files:Template") : "";
+  const badgeLabel =
+    isTemplatesFolder && !isRootFolder ? t("Files:Template") : "";
 
   return (
     <Consumer key="header">

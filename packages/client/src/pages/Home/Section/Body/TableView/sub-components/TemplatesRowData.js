@@ -24,24 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import ContentCell from "./ContentCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import { StyledQuickButtonsContainer } from "../StyledTable";
 
 const TemplatesRowData = (props) => {
   const {
     t,
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
-    contentColumnsIsEnabled,
+    templatesRoomColumnTypeIsEnabled,
+    templatesContentColumnsIsEnabled,
+    templatesRoomColumnOwnerIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -54,8 +53,16 @@ const TemplatesRowData = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    tableStorageName,
     item,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -78,12 +85,13 @@ const TemplatesRowData = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
-      {roomColumnTypeIsEnabled ? (
+      {templatesRoomColumnTypeIsEnabled ? (
         <TableCell
           style={
-            !roomColumnTypeIsEnabled
+            !templatesRoomColumnTypeIsEnabled
               ? { background: "none !important" }
               : dragStyles.style
           }
@@ -93,15 +101,18 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "TypeTemplates" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
       )}
 
-      {contentColumnsIsEnabled ? (
+      {templatesContentColumnsIsEnabled ? (
         <TableCell
           style={
-            !contentColumnsIsEnabled ? { background: "none" } : dragStyles.style
+            !templatesContentColumnsIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
           }
           {...selectionProp}
         >
@@ -110,15 +121,20 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "ContentTemplates" ? (
+            quickButtonsComponentNode
+          ) : (
+            <></>
+          )}
         </TableCell>
       ) : (
         <div />
       )}
 
-      {roomColumnOwnerIsEnabled ? (
+      {templatesRoomColumnOwnerIsEnabled ? (
         <TableCell
           style={
-            !roomColumnOwnerIsEnabled
+            !templatesRoomColumnOwnerIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
@@ -128,27 +144,7 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-
-      {roomColumnQuickButtonsIsEnabled ? (
-        <TableCell
-          style={
-            !roomColumnQuickButtonsIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
+          {lastColumn === "OwnerTemplates" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -157,18 +153,18 @@ const TemplatesRowData = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, tableStore }) => {
+export default inject(({ tableStore }) => {
   const {
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
-    contentColumnsIsEnabled,
+    tableStorageName,
+    templatesRoomColumnTypeIsEnabled,
+    templatesContentColumnsIsEnabled,
+    templatesRoomColumnOwnerIsEnabled,
   } = tableStore;
 
   return {
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
-    contentColumnsIsEnabled,
+    tableStorageName,
+    templatesRoomColumnTypeIsEnabled,
+    templatesContentColumnsIsEnabled,
+    templatesRoomColumnOwnerIsEnabled,
   };
 })(observer(TemplatesRowData));

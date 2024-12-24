@@ -2110,7 +2110,7 @@ class FilesStore {
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isTemplate = false; //roomType, isTemplate //TODO: Templates
+    const isTemplate = item.rootFolderType === FolderType.RoomTemplates;
     const isFavorite =
       (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
@@ -3352,7 +3352,7 @@ class FilesStore {
             : folderUrl);
 
       const isRoom = !!roomType;
-      const isTemplate = false; //TODO: Templates
+      const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
       const icon =
         isRoom && logo?.medium

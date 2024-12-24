@@ -56,55 +56,47 @@ class FilesTableHeader extends React.Component {
         onClick: this.onRoomsFilter,
       },
       {
-        key: "Type",
+        key: "TypeTemplates",
         title: t("Common:Type"),
-        enable: this.props.roomColumnTypeIsEnabled,
+        enable: this.props.templatesRoomColumnTypeIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.RoomType,
         onChange: this.onColumnChange,
         onClick: this.onRoomsFilter,
       },
       {
-        key: "Content",
+        key: "ContentTemplates",
         title: t("Common:Content"),
-        enable: this.props.contentColumnsIsEnabled,
+        enable: this.props.templatesContentColumnsIsEnabled,
         resizable: true,
         // sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
         // onClick: this.onRoomsFilter,
       },
       {
-        key: "Owner",
+        key: "OwnerTemplates",
         title: t("Common:Owner"),
-        enable: this.props.roomColumnOwnerIsEnabled,
+        enable: this.props.templatesRoomColumnOwnerIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
         onClick: this.onRoomsFilter,
       },
-
-      {
-        key: "QuickButtons",
-        title: "",
-        enable: this.props.roomColumnQuickButtonsIsEnabled,
-        defaultSize: 52,
-        resizable: false,
-      },
     ];
 
-    showStorageInfo &&
-      columns.splice(columns.length - 1, 0, {
-        key: "Storage",
-        title:
-          isDefaultRoomsQuotaSet && !isArchiveFolder
-            ? t("Common:StorageAndQuota")
-            : t("Common:Storage"),
-        enable: this.props.roomQuotaColumnIsEnable,
-        sortBy: SortByFieldName.UsedSpace,
-        resizable: true,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      });
+    // showStorageInfo &&
+    //   columns.splice(columns.length - 1, 0, {
+    //     key: "Storage",
+    //     title:
+    //       isDefaultRoomsQuotaSet && !isArchiveFolder
+    //         ? t("Common:StorageAndQuota")
+    //         : t("Common:Storage"),
+    //     enable: this.props.roomQuotaColumnIsEnable,
+    //     sortBy: SortByFieldName.UsedSpace,
+    //     resizable: true,
+    //     onChange: this.onColumnChange,
+    //     onClick: this.onRoomsFilter,
+    //   });
 
     return [...columns];
   };
@@ -820,6 +812,10 @@ export default inject(
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
 
+      templatesRoomColumnTypeIsEnabled,
+      templatesContentColumnsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
@@ -883,6 +879,10 @@ export default inject(
       createdVDRColumnIsEnabled,
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
+
+      templatesRoomColumnTypeIsEnabled,
+      templatesContentColumnsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
 
       getColumns,
       setColumnEnable,

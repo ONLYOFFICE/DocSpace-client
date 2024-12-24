@@ -85,7 +85,6 @@ class TableStore {
   sizeColumnIsEnabled = true;
   typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
-  quickButtonsColumnIsEnabled = true;
 
   authorRecentColumnIsEnabled = true;
   modifiedRecentColumnIsEnabled = false;
@@ -93,7 +92,6 @@ class TableStore {
   sizeRecentColumnIsEnabled = true;
   typeRecentColumnIsEnabled = false;
   lastOpenedColumnIsEnabled = true;
-  contentColumnsIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
   createdTrashColumnIsEnabled = false;
@@ -124,6 +122,10 @@ class TableStore {
   sizeVDRColumnIsEnabled = true;
   typeVDRColumnIsEnabled = false;
 
+  templatesRoomColumnTypeIsEnabled = true;
+  templatesContentColumnsIsEnabled = true;
+  templatesRoomColumnOwnerIsEnabled = true;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -146,10 +148,6 @@ class TableStore {
 
   setRoomColumnType = (enable) => {
     this.roomColumnTypeIsEnabled = enable;
-  };
-
-  setTemplatesContent = (enable) => {
-    this.contentColumnsIsEnabled = enable;
   };
 
   setRoomColumnTags = (enable) => {
@@ -178,6 +176,10 @@ class TableStore {
 
   setAuthorVDRColumn = (enable) => {
     this.authorVDRColumnIsEnabled = enable;
+  };
+
+  setOwnerTemplatesColumn = (enable) => {
+    this.templatesRoomColumnOwnerIsEnabled = enable;
   };
 
   setCreatedColumn = (enable) => {
@@ -236,8 +238,12 @@ class TableStore {
     this.typeVDRColumnIsEnabled = enable;
   };
 
-  setQuickButtonsColumn = (enable) => {
-    this.quickButtonsColumnIsEnabled = enable;
+  setTypeTemplatesColumn = (enable) => {
+    this.templatesRoomColumnTypeIsEnabled = enable;
+  };
+
+  setTemplatesContent = (enable) => {
+    this.templatesContentColumnsIsEnabled = enable;
   };
 
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
@@ -308,9 +314,9 @@ class TableStore {
       const isRooms = isRoomsFolder || isArchiveFolder;
 
       if (isTemplatesFolder) {
-        this.setRoomColumnType(splitColumns.includes("Type"));
-        this.setTemplatesContent(splitColumns.includes("Content"));
-        this.setRoomColumnOwner(splitColumns.includes("Owner"));
+        this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
+        this.setTemplatesContent(splitColumns.includes("ContentTemplates"));
+        this.setOwnerTemplatesColumn(splitColumns.includes("OwnerTemplates"));
         return;
       }
 
@@ -370,7 +376,6 @@ class TableStore {
         this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
-        this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
 
@@ -388,7 +393,6 @@ class TableStore {
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
-      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
     }
   };
 
@@ -424,6 +428,9 @@ class TableStore {
         return;
       case "AuthorIndexing":
         this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
+        return;
+      case "OwnerTemplates":
+        this.setOwnerTemplatesColumn(!this.templatesRoomColumnOwnerIsEnabled);
         return;
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
@@ -485,9 +492,6 @@ class TableStore {
               : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
 
-      case "Content":
-        this.setTemplatesContent(!this.contentColumnsIsEnabled);
-
       case "TypeTrash":
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
         return;
@@ -500,13 +504,12 @@ class TableStore {
         this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
-      case "QuickButtons":
-        this.setQuickButtonsColumn(!this.quickButtonsColumnIsEnabled);
+      case "TypeTemplates":
+        this.setTypeTemplatesColumn(!this.templatesRoomColumnTypeIsEnabled);
         return;
 
-      case "Owner":
-        this.setRoomColumnOwner(!this.roomColumnOwnerIsEnabled);
-        return;
+      case "ContentTemplates":
+        this.setTemplatesContent(!this.templatesContentColumnsIsEnabled);
 
       case "Tags":
         this.setRoomColumnTags(!this.roomColumnTagsIsEnabled);

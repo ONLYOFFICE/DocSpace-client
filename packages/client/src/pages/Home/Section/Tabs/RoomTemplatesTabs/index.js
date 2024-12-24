@@ -71,8 +71,8 @@ const RoomTemplatesTabs = ({ setFilter, showBodyLoader, showTabs }) => {
   const startSelectId =
     getObjectByLocation(window.DocSpace.location)?.searchArea ===
     RoomSearchArea.Active
-      ? 0
-      : 1;
+      ? "rooms"
+      : "templates";
 
   if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
 
@@ -88,7 +88,7 @@ export default inject(
     clientLoadingStore,
     selectedFolderStore,
   }) => {
-    const { isRoomsFolderRoot, isTemplatesFolderRoot } = treeFoldersStore;
+    const { isRoomsFolderRoot, isTemplatesFolder, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
 
@@ -96,7 +96,8 @@ export default inject(
       setFilter,
       showBodyLoader,
       showTabs:
-        (isRoomsFolderRoot || isTemplatesFolderRoot) &&
+        (isRoomsFolderRoot || isTemplatesFolder) &&
+        isRoot &&
         selectedFolderStore.security?.Create,
     };
   },

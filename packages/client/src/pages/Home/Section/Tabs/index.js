@@ -34,8 +34,8 @@ import { inject, observer } from "mobx-react";
 const SectionSubmenuContent = ({
   isPersonalRoom,
   isRecentTab,
-  isRoomsFolder,
-  isTemplatesFolderRoot,
+  isRoomsFolderRoot,
+  isTemplatesFolder,
 }) => {
   const location = useLocation();
 
@@ -43,13 +43,13 @@ const SectionSubmenuContent = ({
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts) return <ContactsTabs />;
-  if (isRoomsFolder || isTemplatesFolderRoot) return <RoomTemplatesTabs />;
+  if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
   return null;
 };
 
 export default inject(({ treeFoldersStore }) => ({
   isPersonalRoom: treeFoldersStore.isPersonalRoom,
   isRecentTab: treeFoldersStore.isRecentTab,
-  isRoomsFolder: treeFoldersStore.isRoomsFolder,
-  isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+  isRoomsFolderRoot: treeFoldersStore.isRoomsFolderRoot,
+  isTemplatesFolder: treeFoldersStore.isTemplatesFolder,
 }))(observer(SectionSubmenuContent));

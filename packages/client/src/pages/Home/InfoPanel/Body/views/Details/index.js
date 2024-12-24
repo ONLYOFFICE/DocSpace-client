@@ -127,8 +127,8 @@ const Details = ({
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
 
-  // const isTemplate = selection.roomType === RoomsType.TemplateRoom; //TODO: Templates
-  const isTemplate = true; //TODO: Templates
+  const isTemplate =
+    selection && "isTemplate" in selection && selection.isTemplate;
 
   return (
     <>

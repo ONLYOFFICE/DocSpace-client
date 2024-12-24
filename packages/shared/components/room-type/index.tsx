@@ -78,7 +78,7 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo type={room.type} />
+        <RoomLogo type={room.type} isTemplate={isTemplate} />
       </div>
 
       <div className="choose_room-info_wrapper">

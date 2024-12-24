@@ -37,7 +37,7 @@ import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomDialog = ({
   t,
@@ -152,7 +152,7 @@ const CreateRoomDialog = ({
       setRoomParams((prev) => ({
         ...prev,
         title: "",
-        type: RoomsType.TemplateRoom,
+        type: null,
       }));
       return;
     }
@@ -178,14 +178,17 @@ const CreateRoomDialog = ({
     onClose();
   };
 
-  const onSubmitRoom = (item) => {
-    console.log("onSubmitRoom", item);
-    setIsTemplateSelected(item[0]);
+  const onSubmitRoom = (items) => {
+    console.log("onSubmitRoom", items);
+    const item = items[0];
+    setIsTemplateSelected(item);
 
     setRoomParams((prev) => ({
       ...prev,
-      title: item[0]?.label,
-      type: item[0]?.roomType,
+      title: item?.label,
+      type: item?.roomType,
+      roomId: item?.id,
+      isTemplate: item.rootFolderType === FolderType.RoomTemplates,
     }));
   };
 
@@ -194,8 +197,7 @@ const CreateRoomDialog = ({
     setTemplateDialogIsVisible(false);
   };
 
-  const isTemplate =
-    roomParams.type === RoomsType.TemplateRoom && !isTemplateSelected;
+  const isTemplate = !roomParams.type && !isTemplateSelected;
 
   const dialogHeader = !roomParams.type
     ? t("ChooseRoomType")
@@ -221,7 +223,7 @@ const CreateRoomDialog = ({
           <RoomSelector
             className="template-body_selector"
             onSubmit={onSubmitRoom}
-            roomType={RoomsType.CustomRoom}
+            searchArea="Templates"
             isMultiSelect={false}
             withHeader
             headerProps={{

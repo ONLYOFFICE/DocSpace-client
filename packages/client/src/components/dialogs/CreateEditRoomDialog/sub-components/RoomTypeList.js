@@ -55,11 +55,9 @@ const RoomTypeList = ({
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
 
-    if (roomType === RoomsType.TemplateRoom) {
+    if (!roomType) {
       setTemplateDialogIsVisible(true);
     }
-
-    console.log("create room handleClick", roomType);
 
     setRoomType(roomType);
   };
@@ -88,6 +86,14 @@ const RoomTypeList = ({
           disabledFormRoom={disabledFormRoom}
         />
       ))}
+      <RoomType
+        id="Template"
+        t={t}
+        isTemplate
+        type="listItem"
+        onClick={() => handleClick()}
+        disabledFormRoom={disabledFormRoom}
+      />
     </StyledRoomTypeList>
   );
 };

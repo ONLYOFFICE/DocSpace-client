@@ -53,6 +53,7 @@ const RoomLogoPure = ({
   type,
 
   isArchive = false,
+  isTemplate = false,
   withCheckbox = false,
   isChecked = false,
   isIndeterminate = false,
@@ -61,6 +62,10 @@ const RoomLogoPure = ({
   const getIcon = () => {
     if (isArchive) {
       return ArchiveSvg32Url;
+    }
+
+    if (isTemplate) {
+      return TemplateRoomsSvg32Url;
     }
 
     switch (type) {
@@ -80,8 +85,6 @@ const RoomLogoPure = ({
         return VirtualDataRoomRoomSvg32Url;
       case RoomsType.FormRoom:
         return FormRoomSvg32Url;
-      case RoomsType.TemplateRoom:
-        return TemplateRoomsSvg32Url;
       default:
         return "";
     }

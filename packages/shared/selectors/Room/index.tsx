@@ -73,6 +73,7 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  searchArea,
 
   disableThirdParty,
   emptyScreenHeader,
@@ -145,6 +146,7 @@ const RoomSelector = ({
       filter.pageCount = PAGE_COUNT;
       filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
+      filter.searchArea = searchArea || "";
 
       if (disableThirdParty)
         filter.storageFilter = RoomsStorageFilter.internal as unknown as string;

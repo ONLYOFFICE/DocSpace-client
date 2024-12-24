@@ -1470,7 +1470,7 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { id, isRoom, title, rootFolderType } = item;
+    const { id, isRoom, isTemplate, title, rootFolderType } = item;
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
@@ -1480,7 +1480,7 @@ class FilesActionStore {
     const shareKey = await this.getPublicKey(item);
     if (shareKey) filter.key = shareKey;
 
-    if (isRoom) {
+    if (isRoom || isTemplate) {
       const key =
         categoryType === CategoryType.Archive
           ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
@@ -2741,6 +2741,15 @@ class FilesActionStore {
 
     if (categoryType == CategoryType.Archive) {
       filter.searchArea = RoomSearchArea.Archive;
+    }
+
+    if (
+      this.selectedFolderStore?.navigationPath &&
+      this.selectedFolderStore?.navigationPath[
+        this.selectedFolderStore?.navigationPath?.length - 1
+      ]?.isTemplatesFolder
+    ) {
+      filter.searchArea = RoomSearchArea.Templates;
     }
 
     window.DocSpace.navigate(

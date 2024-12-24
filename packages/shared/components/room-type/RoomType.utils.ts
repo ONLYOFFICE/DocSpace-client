@@ -4,7 +4,10 @@ import { RoomsType } from "../../enums";
 export const getRoomTypeTitleTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
+  isTemplate: boolean = false,
 ) => {
+  if (isTemplate) return t("Common:FromTemplate");
+
   switch (roomType) {
     // case RoomsType.FillingFormsRoom:
     //   return t("Common:FillingFormsRoomTitle");
@@ -22,8 +25,6 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:PublicRoom");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomTitle");
-    case RoomsType.TemplateRoom:
-      return t("Common:FromTemplate");
     default:
       return "";
   }
@@ -32,7 +33,10 @@ export const getRoomTypeTitleTranslation = (
 export const getRoomTypeDescriptionTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
+  isTemplate: boolean = false,
 ) => {
+  if (isTemplate) return t("Common:FromTemplateRoomInfo");
+
   switch (roomType) {
     // case RoomsType.FillingFormsRoom:
     //   return t("Common:FillingFormsRoomDescription");
@@ -50,8 +54,6 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomInfo");
-    case RoomsType.TemplateRoom:
-      return t("Common:FromTemplateRoomInfo");
     default:
       return "";
   }

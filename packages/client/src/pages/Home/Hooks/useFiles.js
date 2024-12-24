@@ -105,9 +105,7 @@ const useFiles = ({
       case CategoryType.Shared:
         searchArea = RoomSearchArea.Shared;
         break;
-      case CategoryType.Templates:
-        searchArea = RoomSearchArea.Templates;
-        break;
+
       case CategoryType.Archive:
         searchArea = RoomSearchArea.Archive;
         break;
@@ -185,8 +183,7 @@ const useFiles = ({
     if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive ||
-        categoryType == CategoryType.Templates) &&
+        categoryType == CategoryType.Archive) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

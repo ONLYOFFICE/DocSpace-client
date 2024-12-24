@@ -54,20 +54,19 @@ const RoomType = ({
   id,
   selectedId,
   disabledFormRoom,
+  isTemplate,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType),
-    description: getRoomTypeDescriptionTranslation(t, roomType),
+    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
+    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
 
   const disabled = isFormRoom && disabledFormRoom;
-
-  const isTemplate = roomType === RoomsType.TemplateRoom;
 
   const arrowClassName =
     type === "dropdownButton"

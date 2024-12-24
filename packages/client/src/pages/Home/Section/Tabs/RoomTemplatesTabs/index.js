@@ -35,7 +35,14 @@ import { RoomSearchArea } from "@docspace/shared/enums";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-const RoomTemplatesTabs = ({ setFilter, showBodyLoader, showTabs }) => {
+const RoomTemplatesTabs = ({
+  setFilter,
+  showBodyLoader,
+  isRoot,
+  isRoomsFolderRoot,
+  isTemplatesFolder,
+  security,
+}) => {
   const { t } = useTranslation(["Common"]);
 
   const tabs = [
@@ -49,17 +56,18 @@ const RoomTemplatesTabs = ({ setFilter, showBodyLoader, showTabs }) => {
     },
   ];
 
+  const showTabs =
+    (isRoomsFolderRoot || isTemplatesFolder) && isRoot && security?.Create;
+
   const onSelect = (e) => {
     const filter = RoomsFilter.getDefault();
 
-    let path;
+    const path = getCategoryUrl(CategoryType.Shared);
 
     if (e.id === "templates") {
       filter.searchArea = RoomSearchArea.Templates;
-      path = getCategoryUrl(CategoryType.Templates);
     } else {
       filter.searchArea = RoomSearchArea.Active;
-      path = getCategoryUrl(CategoryType.Shared);
     }
 
     setFilter(filter);
@@ -70,9 +78,9 @@ const RoomTemplatesTabs = ({ setFilter, showBodyLoader, showTabs }) => {
 
   const startSelectId =
     getObjectByLocation(window.DocSpace.location)?.searchArea ===
-    RoomSearchArea.Active
-      ? "rooms"
-      : "templates";
+    RoomSearchArea.Templates
+      ? "templates"
+      : "rooms";
 
   if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
 
@@ -91,14 +99,15 @@ export default inject(
     const { isRoomsFolderRoot, isTemplatesFolder, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
+    const { security } = selectedFolderStore;
 
     return {
       setFilter,
       showBodyLoader,
-      showTabs:
-        (isRoomsFolderRoot || isTemplatesFolder) &&
-        isRoot &&
-        selectedFolderStore.security?.Create,
+      isRoot,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+      security,
     };
   },
 )(observer(RoomTemplatesTabs));

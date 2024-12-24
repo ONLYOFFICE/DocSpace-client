@@ -576,13 +576,13 @@ export function getCreateTemplateFromRoomProgress() {
 }
 
 export function createRoomFromTemplate(
-  roomId: number,
+  templateId: number,
   title: string,
   logo,
   tags,
 ) {
   const data = {
-    roomId,
+    templateId,
     title,
     logo,
     tags,

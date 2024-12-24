@@ -351,10 +351,8 @@ class CreateEditRoomStore {
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection, setRoomCreated } =
-      this.filesStore;
+    const { createRoom, selection, bufferSelection } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
-    const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
 
@@ -370,12 +368,12 @@ class CreateEditRoomStore {
       createAsNewFolder,
       icon,
       watermark,
-      roomType,
+      // roomType,
+      isTemplate,
+      roomId,
     } = roomParams;
 
     const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
-    // const isTemplate = roomType === RoomsType.TemplateRoom;
-    const isTemplate = true; // TODO: Templates
     const isThirdparty = storageLocation.isThirdparty;
     const storageFolderId = storageLocation.storageFolderId;
     const thirdpartyAccount = storageLocation.thirdpartyAccount;
@@ -384,6 +382,7 @@ class CreateEditRoomStore {
     const tagsToAddList = tags.map((tag) => tag.name);
 
     const createRoomData = {
+      roomId,
       roomType: type,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
@@ -431,7 +430,7 @@ class CreateEditRoomStore {
           createRoomData,
         );
       } else if (isTemplate) {
-        room = await this.onCreateTemplateRoom(roomParams);
+        room = await this.onCreateTemplateRoom(createRoomData);
       } else {
         room = await createRoom(createRoomData);
       }
@@ -485,16 +484,17 @@ class CreateEditRoomStore {
     this.filesStore.setRoomCreated(true);
 
     console.log("onCreateTemplateRoom", roomParams);
+    const { roomId, tags, title, logo } = roomParams;
 
     let isFinished = false;
     let progressData;
 
     // const room = await api.rooms.createRoomFromTemplate(roomParams);
     const room = await api.rooms.createRoomFromTemplate(
-      39, //roomId
-      "template room test", //title
-      null, //logo
-      [], //tags
+      roomId,
+      title,
+      logo,
+      tags,
     );
 
     console.log("room", room);

@@ -30,7 +30,7 @@ import {
   TSelectorItem,
 } from "../../components/selector/Selector.types";
 
-import { RoomsType } from "../../enums";
+import { RoomSearchArea, RoomsType } from "../../enums";
 
 export type RoomSelectorProps = TSelectorHeader &
   TSelectorCancelButton & {
@@ -42,6 +42,7 @@ export type RoomSelectorProps = TSelectorHeader &
 
     onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
     roomType?: RoomsType | RoomsType[];
+    searchArea?: RoomSearchArea | string;
     excludeItems?: (number | string | undefined)[];
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel?: string;

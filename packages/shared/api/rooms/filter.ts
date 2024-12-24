@@ -137,7 +137,11 @@ class RoomsFilter {
       const storageKey =
         defaultFilter.searchArea === RoomSearchArea.Active
           ? `UserRoomsSharedFilter=${userId}`
-          : `UserRoomsArchivedFilter=${userId}`;
+          : defaultFilter.searchArea === RoomSearchArea.Archive
+            ? `UserRoomsArchivedFilter=${userId}`
+            : defaultFilter.searchArea === RoomSearchArea.Templates
+              ? `UserRoomsTemplatesFilter=${userId}`
+              : "";
 
       try {
         const filterStorageItem = JSON.parse(
@@ -393,9 +397,11 @@ class RoomsFilter {
 
     const archivedFilterKey = `UserRoomsArchivedFilter=${userId}`;
     const sharedFilterKey = `UserRoomsSharedFilter=${userId}`;
+    const templatesFilterKey = `UserRoomsTemplatesFilter=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
+    let templatesStorageFilter = null;
 
     try {
       archivedStorageFilter = JSON.parse(
@@ -403,6 +409,9 @@ class RoomsFilter {
       );
       sharedStorageFilter = JSON.parse(
         localStorage.getItem(sharedFilterKey) || "{}",
+      );
+      templatesStorageFilter = JSON.parse(
+        localStorage.getItem(templatesFilterKey) || "{}",
       );
     } catch (e) {
       // console.log(e);
@@ -427,10 +436,20 @@ class RoomsFilter {
       archivedStorageFilter = filterJSON;
     }
 
+    if (isEmpty(templatesStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.Templates;
+      localStorage.setItem(templatesFilterKey, toJSON(defaultFilter));
+      templatesStorageFilter = filterJSON;
+    }
+
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
         ? sharedStorageFilter
-        : archivedStorageFilter;
+        : dtoFilter.searchArea === RoomSearchArea.Archive
+          ? archivedStorageFilter
+          : dtoFilter.searchArea === RoomSearchArea.Templates
+            ? templatesStorageFilter
+            : "";
 
     const urlParams =
       withLocalStorage && currentStorageFilter
@@ -440,8 +459,10 @@ class RoomsFilter {
     if (userId && !withLocalStorage) {
       if (dtoFilter.searchArea === RoomSearchArea.Active) {
         localStorage.setItem(sharedFilterKey, filterJSON);
-      } else {
+      } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
         localStorage.setItem(archivedFilterKey, filterJSON);
+      } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
+        localStorage.setItem(templatesFilterKey, filterJSON);
       }
     }
 

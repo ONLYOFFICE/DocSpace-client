@@ -1705,12 +1705,16 @@ class FilesStore {
               });
             }
 
+            const isTemplatesFolder =
+              data.current.rootFolderType === FolderType.RoomTemplates;
+
             return {
               id: folderId,
               title,
               isRoom: !!roomType,
               roomType,
               isRootRoom,
+              isTemplatesFolder,
               shared,
               external,
               quotaLimit,
@@ -2488,7 +2492,7 @@ class FilesStore {
         "select",
         "open",
         "separator0",
-        "create-room",
+        "create-room-from-template",
         "edit-template",
         "access-settings",
         "room-info",

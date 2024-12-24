@@ -1709,7 +1709,7 @@ class ContextOptionsStore {
       },
       {
         id: "option_create-room",
-        key: "create-room",
+        key: "create-room-from-template",
         label: t("CreateRoom"),
         icon: CreateRoomReactSvgUrl,
         onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),

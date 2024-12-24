@@ -101,21 +101,6 @@ const FilesMediaViewer = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (visible) {
-      resetSelection();
-    }
-  }, [visible]);
-
-  useEffect(() => {
-    const previewId = queryString.parse(location.search).preview;
-
-    if (previewId) {
-      removeQuery("preview");
-      onMediaFileClick(+previewId);
-    }
-  }, [removeQuery, onMediaFileClick]);
-
-  useEffect(() => {
     if (previewFile) {
       // fetch file after preview with
 
@@ -130,12 +115,6 @@ const FilesMediaViewer = (props) => {
     }
   }, [previewFile]);
 
-  useEffect(() => {
-    window.addEventListener("popstate", onButtonBackHandler);
-
-    return () => window.removeEventListener("popstate", onButtonBackHandler);
-  }, [onButtonBackHandler]);
-
   const onButtonBackHandler = () => {
     const hash = window.location.hash;
     const id = hash.slice(9);
@@ -145,6 +124,12 @@ const FilesMediaViewer = (props) => {
     }
     setMediaViewerData({ visible: true, id });
   };
+
+  useEffect(() => {
+    window.addEventListener("popstate", onButtonBackHandler);
+
+    return () => window.removeEventListener("popstate", onButtonBackHandler);
+  }, [onButtonBackHandler]);
 
   const onChangeUrl = useCallback(
     (id) => {
@@ -157,6 +142,12 @@ const FilesMediaViewer = (props) => {
   const resetSelection = () => {
     setSelection([]);
   };
+
+  useEffect(() => {
+    if (visible) {
+      resetSelection();
+    }
+  }, [visible]);
 
   const removeQuery = (queryName) => {
     const queryParams = new URLSearchParams(location.search);
@@ -177,6 +168,15 @@ const FilesMediaViewer = (props) => {
       setMediaViewerData(item);
     }
   };
+
+  useEffect(() => {
+    const previewId = queryString.parse(location.search).preview;
+
+    if (previewId) {
+      removeQuery("preview");
+      onMediaFileClick(+previewId);
+    }
+  }, [removeQuery, onMediaFileClick]);
 
   const onDeleteMediaFile = useCallback(
     (id) => {

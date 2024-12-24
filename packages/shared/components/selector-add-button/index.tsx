@@ -24,4 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { SelectorAddButton } from "./SelectorAddButton";
+import React from "react";
+import classNames from "classnames";
+import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
+
+import { IconButton } from "../icon-button";
+
+import styles from "./SelectorAddButton.module.scss";
+import { SelectorAddButtonProps } from "./SelectorAddButton.types";
+
+const SelectorAddButton = (props: SelectorAddButtonProps) => {
+  const {
+    isDisabled = false,
+    isAction,
+    title,
+    className,
+    id,
+    style,
+    iconName = ActionsHeaderTouchReactSvgUrl,
+    onClick,
+    iconSize = 12,
+    ...rest
+  } = props;
+
+  const onClickAction = (e: React.MouseEvent) => {
+    if (!isDisabled) onClick?.(e);
+  };
+
+  const buttonClassName = classNames(
+    styles.container,
+    {
+      [styles.isAction]: isAction,
+      [styles.isDisabled]: isDisabled,
+    },
+    className,
+  );
+
+  return (
+    <div
+      {...rest}
+      id={id}
+      style={style}
+      title={title}
+      className={buttonClassName}
+      onClick={onClickAction}
+      data-testid="selector-add-button"
+    >
+      <IconButton
+        size={iconSize}
+        iconName={iconName}
+        isFill
+        isDisabled={isDisabled}
+        isClickable={!isDisabled}
+      />
+    </div>
+  );
+};
+
+export { SelectorAddButton };

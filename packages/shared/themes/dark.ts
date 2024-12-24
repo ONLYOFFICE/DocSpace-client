@@ -2971,7 +2971,6 @@ const Dark: TTheme = {
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
         filterBorder: `1px solid ${black}`,
-        toastBackground: darkToastWarning,
         background: darkGrayLight,
       },
     },
@@ -2981,6 +2980,10 @@ const Dark: TTheme = {
       generatePasswordColor: darkGrayDark,
       textColor: grayDark,
     },
+  },
+
+  statusMessage: {
+    toastBackground: darkToastWarning,
   },
 
   tileLoader: {

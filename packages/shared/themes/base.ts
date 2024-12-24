@@ -2983,7 +2983,7 @@ export const getBaseTheme = () => {
           linkColor: link,
           spanBackground: lightBlueMain,
           filterBorder: `1px solid ${grayStrong}`,
-          toastBackground: lightToastWarning,
+
           background: grayLight,
         },
       },
@@ -2993,6 +2993,10 @@ export const getBaseTheme = () => {
         generatePasswordColor: lightGrayDark,
         textColor: gray,
       },
+    },
+
+    statusMessage: {
+      toastBackground: lightToastWarning,
     },
 
     tileLoader: {

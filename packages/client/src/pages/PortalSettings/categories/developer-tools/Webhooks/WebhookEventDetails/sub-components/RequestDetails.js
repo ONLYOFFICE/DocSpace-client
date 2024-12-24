@@ -30,9 +30,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { inject, observer } from "mobx-react";
 
-import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg?url";
 import { useTranslation } from "react-i18next";
-import { globalColors } from "@docspace/shared/themes";
+import StatusMessage from "@docspace/shared/components/status-message";
 
 const DetailsWrapper = styled.div`
   width: 100%;
@@ -53,28 +52,6 @@ const DetailsWrapper = styled.div`
     margin-bottom: 4px;
   }
 `;
-const ErrorMessageTooltip = styled.div`
-  box-sizing: border-box;
-
-  width: 100%;
-  max-width: 1200px;
-  padding: 8px 12px;
-  background: ${(props) =>
-    props.theme.client.settings.webhooks.toastBackground};
-
-  box-shadow: 0px 5px 20px ${globalColors.menuShadow};
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-
-  margin-bottom: 16px;
-
-  color: black;
-
-  img {
-    margin-inline-end: 8px;
-  }
-`;
 
 function isJSON(jsonString) {
   try {
@@ -91,10 +68,7 @@ const RequestDetails = ({ eventDetails }) => {
   return (
     <DetailsWrapper>
       {eventDetails.status === 0 && (
-        <ErrorMessageTooltip>
-          <img src={DangerIcon} alt="danger icon" />
-          {t("FailedToConnect")}
-        </ErrorMessageTooltip>
+        <StatusMessage message={t("FailedToConnect")} />
       )}
       <Text as="h3" fontWeight={600} className="mb-4 mt-7">
         {t("RequestPostHeader")}

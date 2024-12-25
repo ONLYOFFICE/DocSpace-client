@@ -1054,13 +1054,10 @@ export function saveSettingsThirdParty(
 }
 
 // TODO: Need update res type
-export function getSettingsThirdParty(dump: boolean = false) {
+export function getSettingsThirdParty() {
   return request({
     method: "get",
     url: "files/thirdparty/backup",
-    params: {
-      dump,
-    },
   });
 }
 

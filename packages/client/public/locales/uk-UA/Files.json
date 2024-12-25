@@ -71,7 +71,6 @@
   "ExportRoomIndex": "Експорт індексу кімнати",
   "ExportRoomIndexAlreadyInProgressError": "Експорт індексу кімнати вже відбувається. Дочекайтеся закінчення поточного експорту, щоб почати новий.",
   "FavoritesEmptyContainerDescription": "Щоб додати файли до вподобань або видалити їх із цього списку, скористайтеся контекстним меню.",
-  "FileCannotBeMoved": "Неможливо перемістити файл до цієї кімнати.",
   "FileContents": "Вміст файлу",
   "FileDownloadingIsRestricted": "Завантаження файлів у цій кімнаті обмежено.",
   "FileExportedToMyDocuments": "Файл <1>{{fileName}}</1> експортовано до Документів",

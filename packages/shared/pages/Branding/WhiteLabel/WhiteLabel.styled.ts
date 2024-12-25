@@ -62,16 +62,27 @@ export const StyledHeader = styled.div`
     background-color: ${(props) =>
       props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
   }
+
+  @media ${mobile} {
+    .header-container {
+      display: none;
+    }
+  }
 `;
 
 export const WhiteLabelWrapper = styled.div`
   .use-as-logo {
     margin-top: 12px;
     margin-bottom: 24px;
+    width: fit-content !important;
   }
 
   .input {
     max-width: 350px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
   }
 
   .logos-container {

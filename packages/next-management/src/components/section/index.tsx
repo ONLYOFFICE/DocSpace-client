@@ -26,15 +26,23 @@
 
 "use client";
 
+import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import Headline from "@docspace/shared/components/headline/Headline";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
 import { getHeaderByPathname } from "@/lib";
 import { Bar } from "@/components/bar";
-import { StyledSection, StyledSectionHeader } from "./section.styled";
+import {
+  StyledSection,
+  StyledSectionHeader,
+  StyledHeading,
+} from "./section.styled";
 
 export const Section = ({
   children,
@@ -44,18 +52,36 @@ export const Section = ({
   portals: unknown;
 }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const { t } = useTranslation(["Management", "Common"]);
   const { tenants } = portals;
   const showBar = pathname.includes("settings");
   const barTitle =
     tenants?.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
 
+  const onBack = () => {
+    router.back();
+  };
+
+  const { key, isSubPage } = getHeaderByPathname(pathname, t);
+
   return (
     <StyledSection>
       <StyledSectionHeader>
-        <Headline className="headline" type="content" truncate={true}>
-          {getHeaderByPathname(pathname, t)}
-        </Headline>
+        <StyledHeading>
+          {isSubPage && (
+            <IconButton
+              iconName={ArrowPathReactSvgUrl}
+              size={17}
+              isFill
+              onClick={onBack}
+              className="arrow-button"
+            />
+          )}
+          <Headline className="headline" type="content" truncate={true}>
+            {key}
+          </Headline>
+        </StyledHeading>
         {showBar && <Bar title={barTitle} />}
       </StyledSectionHeader>
       <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>

@@ -78,3 +78,9 @@ export const StyledSectionHeader = styled.div`
   }
 `;
 
+export const StyledHeading = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+

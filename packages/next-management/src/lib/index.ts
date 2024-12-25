@@ -38,14 +38,26 @@ export const getMinifyTitle = (title: string) => {
 };
 
 export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
-  if (pathname.includes("settings")) return t("Common:Settings");
-  switch (pathname) {
-    case "/spaces":
-      return t("Common:Spaces");
-    case "/payments":
-      return t("Common:PaymentsTitle");
+  const path = pathname.split("/").at(-1);
+
+  switch (path) {
+    case "spaces":
+      return { key: t("Common:Spaces"), isSubPage: false };
+    case "branding":
+    case "data-backup":
+    case "auto-backup":
+    case "restore":
+      return { key: t("Common:Settings"), isSubPage: false };
+    case "payments":
+      return { key: t("Common:PaymentsTitle"), isSubPage: false };
+    case "white-label":
+      return { key: t("Common:WhiteLabel"), isSubPage: true };
+    case "company-info":
+      return { key: t("Common:CompanyInfoSettings"), isSubPage: true };
+    case "additional-resources":
+      return { key: t("Common:AdditionalResources"), isSubPage: true };
     default:
-      return t("Common:Spaces");
+      return { key: t("Common:Spaces"), isSubPage: false };
   }
 };
 

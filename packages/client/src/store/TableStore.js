@@ -504,6 +504,10 @@ class TableStore {
         this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
+      case "Owner":
+        this.setRoomColumnOwner(!this.roomColumnOwnerIsEnabled);
+        return;
+
       case "TypeTemplates":
         this.setTypeTemplatesColumn(!this.templatesRoomColumnTypeIsEnabled);
         return;

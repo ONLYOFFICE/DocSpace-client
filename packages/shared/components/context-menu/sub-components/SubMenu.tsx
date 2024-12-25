@@ -388,7 +388,7 @@ const SubMenu = (props: {
           <Badge
             label={item.badgeLabel}
             className={`${subMenuIconClassName} p-submenu-badge`}
-            backgroundColor={globalColors.mainPurple}
+            backgroundColor={globalColors.lightBlueMain}
             fontSize="9px"
             fontWeight={700}
             borderRadius="50px"

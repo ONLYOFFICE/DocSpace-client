@@ -1821,7 +1821,7 @@ class ContextOptionsStore {
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onCreateRoomTemplate(item),
-        badgeLabel: t("New").toUpperCase(),
+        badgeLabel: t("New"),
         disabled: !item.security?.Create,
       },
       {

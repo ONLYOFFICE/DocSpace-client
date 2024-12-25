@@ -88,8 +88,8 @@ const RoomType = ({
           </Text>
           {isTemplate && (
             <Badge
-              label={t("New").toUpperCase()}
-              backgroundColor={globalColors.mainPurple}
+              label={t("New")}
+              backgroundColor={globalColors.lightBlueMain}
               fontSize="9px"
               fontWeight={700}
               borderRadius="50px"

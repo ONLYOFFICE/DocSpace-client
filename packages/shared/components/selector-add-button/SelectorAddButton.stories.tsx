@@ -24,19 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import { SelectorAddButton } from "./SelectorAddButton";
+import { SelectorAddButton } from ".";
 
 const meta = {
   title: "Components/SelectorAddButton",
   component: SelectorAddButton,
-  argTypes: { onClick: { action: "onClose" } },
+  tags: ["autodocs"],
+  argTypes: {
+    onClick: { action: "onClick" },
+    title: {
+      description: "Title text",
+      control: "text",
+    },
+    isDisabled: {
+      description: "Disable the button",
+      control: "boolean",
+    },
+    isAction: {
+      description: "Change colors to accent",
+      control: "boolean",
+    },
+    iconName: {
+      description: "Custom icon URL",
+      control: "text",
+    },
+    iconSize: {
+      description: "Specifies the icon size",
+      control: "number",
+    },
+    className: {
+      description: "Additional CSS class",
+      control: "text",
+    },
+    id: {
+      description: "HTML id attribute",
+      control: "text",
+    },
+    style: {
+      description: "Custom CSS styles",
+      control: "object",
+    },
+  },
 } satisfies Meta<typeof SelectorAddButton>;
-type Story = StoryObj<typeof meta>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { isDisabled: false, title: "Add item" },
+  args: {
+    title: "Add item",
+    isDisabled: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
+
+export const WithAction: Story = {
+  args: {
+    ...Default.args,
+    isAction: true,
+  },
 };

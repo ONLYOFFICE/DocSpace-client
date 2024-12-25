@@ -239,7 +239,6 @@ const FilesRowContent = ({
   };
 
   const mainInfo = contentComponent();
-  const authorInfo = item.isTemplate ? decode(fileOwner) : "";
 
   return (
     <>
@@ -290,20 +289,6 @@ const FilesRowContent = ({
             className="row_update-text"
           >
             {mainInfo}
-          </Text>
-        )}
-        {authorInfo && (
-          <Text
-            containerMinWidth="90px"
-            containerWidth="10%"
-            as="div"
-            className="row-content-text"
-            fontSize="12px"
-            fontWeight={400}
-            truncate={true}
-            title={decode(fileOwner)}
-          >
-            {authorInfo}
           </Text>
         )}
       </SimpleFilesRowContent>

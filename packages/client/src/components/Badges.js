@@ -114,8 +114,6 @@ const Badges = ({
   isArchiveFolder,
   isRecentTab,
   canEditing,
-  isTemplatesFolder,
-  onCreateRoom,
 }) => {
   const {
     id,
@@ -336,17 +334,6 @@ const Badges = ({
           size={sizeBadge}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
-        />
-      )}
-
-      {isTemplatesFolder && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          iconName={CreateRoomReactSvgUrl}
-          className="badge tablet-row-create-room icons-group  tablet-badge"
-          size="medium"
-          onClick={onCreateRoom}
-          title={t("Files:CreateRoom")}
         />
       )}
 

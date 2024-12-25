@@ -41,13 +41,10 @@ class FilesTableHeader extends React.Component {
   }
 
   getTemplatesColumns = () => {
-    const { t, isDefaultRoomsQuotaSet, showStorageInfo, isArchiveFolder } =
-      this.props;
-
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: this.props.t("Common:Name"),
         resizable: true,
         enable: this.props.roomColumnNameIsEnabled,
         default: true,
@@ -57,7 +54,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "TypeTemplates",
-        title: t("Common:Type"),
+        title: this.props.t("Common:Type"),
         enable: this.props.templatesRoomColumnTypeIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.RoomType,
@@ -66,7 +63,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "ContentTemplates",
-        title: t("Common:Content"),
+        title: this.props.t("Common:Content"),
         enable: this.props.templatesContentColumnsIsEnabled,
         resizable: true,
         // sortBy: SortByFieldName.Author,
@@ -75,7 +72,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "OwnerTemplates",
-        title: t("Common:Owner"),
+        title: this.props.t("Common:Owner"),
         enable: this.props.templatesRoomColumnOwnerIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Author,
@@ -83,20 +80,6 @@ class FilesTableHeader extends React.Component {
         onClick: this.onRoomsFilter,
       },
     ];
-
-    // showStorageInfo &&
-    //   columns.splice(columns.length - 1, 0, {
-    //     key: "Storage",
-    //     title:
-    //       isDefaultRoomsQuotaSet && !isArchiveFolder
-    //         ? t("Common:StorageAndQuota")
-    //         : t("Common:Storage"),
-    //     enable: this.props.roomQuotaColumnIsEnable,
-    //     sortBy: SortByFieldName.UsedSpace,
-    //     resizable: true,
-    //     onChange: this.onColumnChange,
-    //     onClick: this.onRoomsFilter,
-    //   });
 
     return [...columns];
   };

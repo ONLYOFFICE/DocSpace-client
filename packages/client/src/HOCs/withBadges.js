@@ -139,10 +139,6 @@ export default function withBadges(WrappedComponent) {
       checkAndOpenLocationAction?.(file);
     };
 
-    onCreateRoom = () => {
-      this.props.onCreateRoomFromTemplate(this.props.item);
-    };
-
     render() {
       const {
         t,
@@ -202,8 +198,6 @@ export default function withBadges(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
           canEditing={canEditing}
-          onCreateRoom={this.onCreateRoom}
-          isTemplatesFolder={isTemplatesFolder}
         />
       );
 

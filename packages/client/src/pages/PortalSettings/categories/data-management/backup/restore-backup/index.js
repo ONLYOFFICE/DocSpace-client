@@ -38,6 +38,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -93,7 +94,7 @@ const RestoreBackup = (props) => {
       getProgress(t);
 
       const [account, backupStorage, storageRegions] = await Promise.all([
-        getSettingsThirdParty(),
+        getSettingsThirdParty(isManagement()),
         getBackupStorage(),
         getStorageRegions(),
       ]);

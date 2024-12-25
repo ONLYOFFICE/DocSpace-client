@@ -39,6 +39,8 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
@@ -202,7 +204,7 @@ class BackupStore {
 
   setThirdPartyAccountsInfo = async (t) => {
     const [connectedAccount, providers] = await Promise.all([
-      getSettingsThirdParty(),
+      getSettingsThirdParty(isManagement()),
       this.thirdPartyStore.fetchConnectingStorages(),
     ]);
 

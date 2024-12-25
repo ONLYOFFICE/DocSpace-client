@@ -105,7 +105,7 @@ class ManualBackup extends React.Component {
       getProgress(t);
 
       const [account, backupStorage, storageRegions] = await Promise.all([
-        getSettingsThirdParty(),
+        getSettingsThirdParty(isManagement()),
         getBackupStorage(),
         getStorageRegions(),
       ]);

@@ -73,7 +73,6 @@
   "ExportRoomIndex": "导出房间索引",
   "ExportRoomIndexAlreadyInProgressError": "房间索引导出已在进行中。请等待当前导出完成后再开始新的导出。",
   "FavoritesEmptyContainerDescription": "使用上下文菜单收藏文件或将其从列表中移除。",
-  "FileCannotBeMoved": "文件无法移动至此房间。",
   "FileContents": "文件内容",
   "FileDownloadingIsRestricted": "在此房间内的下载文件受到限制。",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1>文件已导出到文档",

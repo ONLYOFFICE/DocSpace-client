@@ -127,8 +127,8 @@ class AutomaticBackup extends React.PureComponent {
       ] = await Promise.all([
         //getThirdPartyCommonFolderTree(),
         getSettingsThirdParty(),
-        getBackupSchedule(),
-        getBackupStorage(),
+        getBackupSchedule(isManagement()),
+        getBackupStorage(isManagement()),
         getStorageRegions(),
       ]);
       setConnectedThirdPartyAccount(account);
@@ -380,7 +380,7 @@ class AutomaticBackup extends React.PureComponent {
         isManagement(),
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
-        getBackupSchedule(),
+        getBackupSchedule(isManagement()),
         getBackupStorage(),
       ]);
       setBackupSchedule(selectedSchedule);

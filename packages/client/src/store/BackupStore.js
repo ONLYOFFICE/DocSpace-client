@@ -39,6 +39,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;

@@ -73,7 +73,6 @@
   "ExportRoomIndex": "Exporter l'index de la salle",
   "ExportRoomIndexAlreadyInProgressError": "L'exportation de l'index des salles est déjà en cours. Veuillez attendre que l'exportation en cours soit terminée pour commencer la nouvelle exportation.",
   "FavoritesEmptyContainerDescription": "Pour marquer des fichiers comme favoris ou les supprimer de cette liste, utilisez le menu contextuel.",
-  "FileCannotBeMoved": "Le fichier ne peut pas être déplacé dans cette salle.",
   "FileContents": "Contenu du fichier",
   "FileDownloadingIsRestricted": "Le téléchargement de fichiers est limité dans cette salle.",
   "FileExportedToMyDocuments": "Le fichier <1>{{fileName}}</1> exporté vers Documents",

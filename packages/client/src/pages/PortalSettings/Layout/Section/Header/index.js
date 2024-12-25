@@ -381,9 +381,11 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
-          <div className="tariff-bar">
-            <TariffBar />
-          </div>
+          {arrayOfParams[0] !== "payments" && (
+            <div className="tariff-bar">
+              <TariffBar />
+            </div>
+          )}
 
           {props.addUsers && (
             <div className="action-wrapper">

@@ -28,7 +28,6 @@ module.exports = {
     "@typescript-eslint/no-loop-func": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-unused-expressions": "off",
-    /* "@typescript-eslint/no-use-before-define": "off", */
     "jsx-a11y/tabindex-no-positive": "off",
     "react-hooks/exhaustive-deps": "off",
   },

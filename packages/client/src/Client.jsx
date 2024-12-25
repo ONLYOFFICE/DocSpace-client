@@ -72,6 +72,8 @@ const ClientArticle = React.memo(
   },
 );
 
+ClientArticle.displayName = "ClientArticle";
+
 const ClientContent = (props) => {
   const {
     loadClientInfo,

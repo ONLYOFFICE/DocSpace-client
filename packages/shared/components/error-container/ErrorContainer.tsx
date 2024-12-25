@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-
 import { Heading } from "@docspace/shared/components/heading";
 import PortalLogo from "../portal-logo/PortalLogo";
-
-import StyledErrorContainer from "./ErrorContainer.styled";
-import type { ErrorContainerProps } from "./ErrorContainer.types";
 import { Scrollbar } from "../scrollbar";
+
+import type { ErrorContainerProps } from "./ErrorContainer.types";
+import styles from "./ErrorContainer.module.scss";
 
 const ErrorContainer = (props: ErrorContainerProps) => {
   const {
@@ -45,18 +45,23 @@ const ErrorContainer = (props: ErrorContainerProps) => {
     customizedBodyText,
     isPrimaryButton = true,
     isEditor = false,
+    className,
     ...rest
   } = props;
 
   return (
     <Scrollbar style={{ height: "100dvh" }}>
-      <StyledErrorContainer
+      <div
         {...rest}
-        isEditor={isEditor}
+        className={classNames(
+          styles.container,
+          { [styles.isEditor]: isEditor },
+          className,
+        )}
         data-testid="ErrorContainer"
       >
         <PortalLogo isResizable />
-        <div id="container">
+        <div id="container-inner">
           <svg
             id="background"
             width="753"
@@ -380,7 +385,6 @@ const ErrorContainer = (props: ErrorContainerProps) => {
             {customizedBodyText}
           </Text>
         )}
-
         {buttonText && onClickButton && (
           <div id="button-container">
             <Button
@@ -394,7 +398,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
           </div>
         )}
         {children}
-      </StyledErrorContainer>
+      </div>
     </Scrollbar>
   );
 };

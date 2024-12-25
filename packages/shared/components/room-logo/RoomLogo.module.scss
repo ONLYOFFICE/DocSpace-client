@@ -24,10 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "../../utils";
-
-const StyledContainer = styled.div.attrs(injectDefaultTheme)`
+.container {
   width: 32px;
   height: 32px;
 
@@ -40,22 +37,24 @@ const StyledContainer = styled.div.attrs(injectDefaultTheme)`
 
   margin-inline-end: 12px;
 
-  .room-logo_checkbox {
-    display: none;
+  :global {
+    .room-logo_checkbox {
+      display: none;
 
-    .checkbox {
-      margin-inline-end: 0;
+      .checkbox {
+        margin-inline-end: 0;
+      }
     }
   }
-`;
+}
 
-const StyledLogoContainer = styled.div`
+.logoContainer {
   width: 32px;
   height: 32px;
 
-  .room-logo_icon {
-    border-radius: 6px;
+  :global {
+    .room-logo_icon {
+      border-radius: 6px;
+    }
   }
-`;
-
-export { StyledContainer, StyledLogoContainer };
+}

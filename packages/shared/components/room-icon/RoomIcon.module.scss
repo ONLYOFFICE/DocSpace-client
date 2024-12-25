@@ -5,7 +5,7 @@
   --room-icon-background-color: #{$white};
   --room-icon-link-icon-path: #{$moonstone};
   --room-icon-link-icon-background: #{$white};
-  --room-icon-empty-border: 2px dashed ${$gray-strong};
+  --room-icon-empty-border: 2px dashed #{$gray-strong};
   --room-icon-background-color-archive: #{$gray};
   --room-icon-button-color: #{$gray};
   --room-icon-opacity: 1;
@@ -15,7 +15,7 @@
     --room-icon-background-color: #{$black};
     --room-icon-link-icon-path: #{$blue-romb};
     --room-icon-link-icon-background: #{$black};
-    --room-icon-empty-border: 2px dashed ${$gray-dark-strong};
+    --room-icon-empty-border: 2px dashed #{$gray-dark-strong};
     --room-icon-background-color-archive: #{$white};
     --room-icon-button-color: #{$gray-dark};
     --room-icon-opacity: 0.1;

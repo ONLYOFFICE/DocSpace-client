@@ -34,6 +34,6 @@ import { CircleSkeleton } from ".";
 describe("<CircleSkeleton />", () => {
   it("renders without error", () => {
     renderWithTheme(<CircleSkeleton />);
-    expect(screen.getByTitle("Loading...")).toBeInTheDocument();
+    expect(screen.getByTestId("circle-skeleton")).toBeInTheDocument();
   });
 });

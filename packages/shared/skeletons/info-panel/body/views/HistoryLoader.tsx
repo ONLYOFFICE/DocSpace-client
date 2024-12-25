@@ -26,23 +26,19 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import {
-  StyledHistoryBlockLoader,
-  StyledHistoryLoader,
-  StyledHistorySubtitleLoader,
-} from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 
 const HistoryLoader = () => {
   return (
-    <StyledHistoryLoader>
-      <StyledHistorySubtitleLoader>
+    <div className={styles.historyLoader} data-testid="history-loader">
+      <div className={styles.historySubtitleLoader}>
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </StyledHistorySubtitleLoader>
+      </div>
 
       {[...Array(5).keys()].map((i) => (
-        <StyledHistoryBlockLoader key={i}>
+        <div className={styles.historyBlockLoader} key={i}>
           <div className="content">
             <RectangleSkeleton
               className="avatar"
@@ -69,9 +65,9 @@ const HistoryLoader = () => {
               borderRadius="3px"
             />
           </div>
-        </StyledHistoryBlockLoader>
+        </div>
       ))}
-    </StyledHistoryLoader>
+    </div>
   );
 };
 

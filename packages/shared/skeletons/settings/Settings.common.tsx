@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { Box } from "@docspace/shared/components/box";
+import { LOADER_STYLE } from "../../constants";
+import { Box } from "../../components/box";
+
+import { RectangleSkeleton } from "../rectangle";
 import {
   SectionTitleProps,
   SettingProps,

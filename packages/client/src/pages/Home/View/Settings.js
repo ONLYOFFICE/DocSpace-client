@@ -30,10 +30,7 @@ import { useLocation } from "react-router-dom";
 
 import { SettingsSectionBodyContent } from "../Section";
 
-import {
-  SettingsAdminSkeleton,
-  SettingsCommonSkeleton,
-} from "@docspace/shared/skeletons/settings";
+import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
 const SettingsView = ({
   isLoading,
@@ -53,9 +50,7 @@ const SettingsView = ({
       {inLoad ? (
         setting === "personal" ? (
           <SettingsCommonSkeleton isAdmin={isAdmin} />
-        ) : (
-          <SettingsAdminSkeleton />
-        )
+        ) : null
       ) : (
         <SettingsSectionBodyContent />
       )}

@@ -26,12 +26,12 @@
 
 import React, { useEffect, useState } from "react";
 
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "../../utils";
 
 import { RowsSkeleton } from "../rows";
 import { RectangleSkeleton } from "../rectangle";
 
-import { FooterBlock } from "./Profile.styled";
+import styles from "./Profile.module.scss";
 import { ProfileFooterLoaderProps } from "./Profile.types";
 
 export const ProfileFooterLoader = ({
@@ -65,7 +65,7 @@ export const ProfileFooterLoader = ({
 
   return (
     <div id={id} className={className} style={style}>
-      <FooterBlock>
+      <div className={styles.footerBlock} data-testid="profile-footer">
         <div className="header">
           <RectangleSkeleton
             title={title}
@@ -138,7 +138,7 @@ export const ProfileFooterLoader = ({
         )}
 
         <RowsSkeleton count={3} />
-      </FooterBlock>
+      </div>
     </div>
   );
 };

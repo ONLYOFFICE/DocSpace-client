@@ -28,8 +28,8 @@ import React from "react";
 import { RoomsType } from "../../../enums";
 import { RectangleSkeleton } from "../../rectangle";
 
-import { StyledBlock, StyledContainer } from "./FilterBlock.styled";
 import { FilterBlockProps } from "./FilterBlock.types";
+import styles from "../Filter.module.scss";
 
 const FilterBlockLoader = ({
   id,
@@ -41,7 +41,6 @@ const FilterBlockLoader = ({
   isContactsGroupsPage,
   isContactsInsideGroupPage,
   isContactsGuestsPage,
-
   ...rest
 }: FilterBlockProps) => {
   const roomTypeLoader = isRooms ? (
@@ -64,9 +63,15 @@ const FilterBlockLoader = ({
   ) : null;
 
   return (
-    <StyledContainer id={id} className={className} style={style} {...rest}>
+    <div
+      id={id}
+      className={`${styles.filterContainer} ${className || ""}`}
+      style={style}
+      {...rest}
+      data-testid="filter-block-loader"
+    >
       {!isRooms && !isContactsPage && (
-        <StyledBlock>
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -93,11 +98,11 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-        </StyledBlock>
+        </div>
       )}
 
       {!isContactsInsideGroupPage && (
-        <StyledBlock isLast={isContactsGroupsPage}>
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="51"
             height="16"
@@ -134,11 +139,11 @@ const FilterBlockLoader = ({
               />
             </div>
           )}
-        </StyledBlock>
+        </div>
       )}
 
       {(isRooms || isContactsPeoplePage || isContactsInsideGroupPage) && (
-        <StyledBlock>
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -171,13 +176,13 @@ const FilterBlockLoader = ({
               roomTypeLoader
             ) : null}
           </div>
-        </StyledBlock>
+        </div>
       )}
 
       {(isContactsPeoplePage ||
         isContactsGuestsPage ||
         isContactsInsideGroupPage) && (
-        <StyledBlock>
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -210,11 +215,11 @@ const FilterBlockLoader = ({
               className="loader-item tag-item"
             />
           </div>
-        </StyledBlock>
+        </div>
       )}
 
       {!isContactsGroupsPage && (
-        <StyledBlock isLast>
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -335,9 +340,9 @@ const FilterBlockLoader = ({
               </>
             )}
           </div>
-        </StyledBlock>
+        </div>
       )}
-    </StyledContainer>
+    </div>
   );
 };
 

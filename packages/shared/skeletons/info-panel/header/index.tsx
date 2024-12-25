@@ -29,13 +29,18 @@ import { isDesktop as isDesktopUtils } from "@docspace/shared/utils";
 
 import { RectangleSkeleton } from "../../rectangle";
 
-import { StyledInfoPanelHeader } from "./Header.styled";
+import styles from "./Header.module.scss";
 
 const InfoPanelHeaderLoader = () => {
   const isTablet = !isDesktopUtils();
 
   return (
-    <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={false}>
+    <div
+      className={styles.header}
+      data-is-tablet={isTablet ? "true" : "false"}
+      data-with-submenu="false"
+      data-testid="info-panel-header-loader"
+    >
       <div className="main">
         <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
         {!isTablet && (
@@ -44,7 +49,7 @@ const InfoPanelHeaderLoader = () => {
           </div>
         )}
       </div>
-    </StyledInfoPanelHeader>
+    </div>
   );
 };
 

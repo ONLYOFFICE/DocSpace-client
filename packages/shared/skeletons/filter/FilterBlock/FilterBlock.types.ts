@@ -26,7 +26,7 @@
 
 import { RectangleSkeletonProps } from "../../rectangle";
 
-export interface FilterBlockProps extends RectangleSkeletonProps {
+export type FilterBlockProps = RectangleSkeletonProps & {
   id?: string;
   className?: string;
   isRooms?: boolean;
@@ -35,4 +35,4 @@ export interface FilterBlockProps extends RectangleSkeletonProps {
   isContactsGroupsPage?: boolean;
   isContactsInsideGroupPage?: boolean;
   isContactsGuestsPage?: boolean;
-}
+};

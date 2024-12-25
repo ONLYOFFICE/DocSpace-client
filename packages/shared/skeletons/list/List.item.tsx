@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "../rectangle";
-
-import { StyledRow } from "./List.styled";
 import { ListItemLoaderProps } from "./List.types";
+import styles from "./List.module.scss";
 
 const ListItemLoader = ({
   id,
@@ -50,13 +50,17 @@ const ListItemLoader = ({
     animate,
   } = rest;
 
+  const rowClassName = classNames(styles.row, className, {
+    [styles.withoutFirstRectangle]: withoutFirstRectangle,
+    [styles.withoutLastRectangle]: withoutLastRectangle,
+  });
+
   return (
-    <StyledRow
+    <div
       id={id}
-      className={className}
+      className={rowClassName}
       style={style}
-      withoutFirstRectangle={withoutFirstRectangle}
-      withoutLastRectangle={withoutLastRectangle}
+      data-testid="list-item-loader"
     >
       {!withoutFirstRectangle && (
         <RectangleSkeleton
@@ -115,7 +119,7 @@ const ListItemLoader = ({
           animate={animate}
         />
       )}
-    </StyledRow>
+    </div>
   );
 };
 

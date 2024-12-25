@@ -26,13 +26,13 @@
 
 import type { RectangleSkeletonProps } from "skeletons/rectangle";
 
-export interface SectionHeaderSkeloton extends RectangleSkeletonProps {
+export type SectionHeaderSkeloton = RectangleSkeletonProps & {
   id?: string;
-}
+};
 
-export interface SectionSubmenuSkeletonProps {
+export type SectionSubmenuSkeletonProps = {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
   title?: string;
-}
+};

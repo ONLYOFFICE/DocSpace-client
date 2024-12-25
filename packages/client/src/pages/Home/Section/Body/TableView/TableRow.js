@@ -83,7 +83,7 @@ const FilesTableRow = (props) => {
     isDownload,
     setGuidanceCoordinates,
     guidanceCoordinates,
-    firstPdfItem,
+    isTutorialEnabled,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -153,13 +153,13 @@ const FilesTableRow = (props) => {
       } else {
         setFirsElemChecked(false);
       }
-      if (showHotkeyBorder) {
+      if (showHotkeyBorder && !isTutorialEnabled) {
         setHeaderBorder(true);
       } else {
         setHeaderBorder(false);
       }
     }
-  }, [checkedProps, isActive, showHotkeyBorder]);
+  }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -178,11 +178,7 @@ const FilesTableRow = (props) => {
   };
 
   React.useEffect(() => {
-    if (
-      item?.fileExst === ".pdf" &&
-      firstPdfItem.id === item.id &&
-      rowRef?.current
-    ) {
+    if (item?.isPDF && rowRef?.current) {
       setGuidanceCoordinates({
         pdf: rowRef.current.firstChild.offsetParent.getClientRects()[0],
       });
@@ -233,7 +229,7 @@ const FilesTableRow = (props) => {
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder}
+        showHotkeyBorder={showHotkeyBorder && !isTutorialEnabled}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder

@@ -370,8 +370,8 @@ const SimpleFilesRow = (props) => {
     isFolder,
     icon,
     isDownload,
-    firstPdfItem,
     setGuidanceCoordinates,
+    isTutorialEnabled,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -388,11 +388,7 @@ const SimpleFilesRow = (props) => {
   };
 
   React.useEffect(() => {
-    if (
-      item?.fileExst === ".pdf" &&
-      firstPdfItem.id === item.id &&
-      rowRef?.current
-    ) {
+    if (item?.isPDF && rowRef?.current) {
       setGuidanceCoordinates({
         pdf: rowRef.current.getClientRects()[0],
       });
@@ -461,7 +457,7 @@ const SimpleFilesRow = (props) => {
       }`}
       checked={checkedProps}
       isActive={isActive}
-      showHotkeyBorder={showHotkeyBorder}
+      showHotkeyBorder={showHotkeyBorder && !isTutorialEnabled}
       isIndexEditingMode={isIndexEditingMode}
       isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}

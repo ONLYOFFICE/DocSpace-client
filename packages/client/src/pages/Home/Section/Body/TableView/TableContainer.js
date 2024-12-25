@@ -45,6 +45,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import { fakeFormFillingList } from "../formFillingTourData";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -152,6 +153,7 @@ const Table = ({
   isDownload,
   setGuidanceCoordinates,
   guidanceCoordinates,
+  isTutorialEnabled,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -207,10 +209,8 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    const firstPdfItem = filesList.filter(
-      (item) => item?.fileExst === ".pdf",
-    )[0];
-    return filesList.map((item, index) => (
+    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -236,7 +236,7 @@ const Table = ({
         }
         icon={icon}
         isDownload={isDownload}
-        firstPdfItem={firstPdfItem}
+        isTutorialEnabled={isTutorialEnabled}
       />
     ));
   }, [
@@ -254,6 +254,7 @@ const Table = ({
     isIndexing,
     icon,
     isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
@@ -306,6 +307,7 @@ export default inject(
     filesActionsStore,
     selectedFolderStore,
     uploadDataStore,
+    dialogsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -315,6 +317,12 @@ export default inject(
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
+    const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
+      dialogsStore;
+
+    const isTutorialEnabled =
+      formFillingTipsVisible || welcomeFormFillingTipsVisible;
 
     const {
       filesList,
@@ -361,6 +369,7 @@ export default inject(
       guidanceCoordinates,
       icon,
       isDownload,
+      isTutorialEnabled,
     };
   },
 )(observer(Table));

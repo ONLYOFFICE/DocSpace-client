@@ -89,8 +89,6 @@ const FileTile = (props) => {
     icon,
     isDownload,
     setGuidanceCoordinates,
-    guidanceCoordinates,
-    firstPdfItem,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -112,11 +110,7 @@ const FileTile = (props) => {
   const { thumbnailUrl } = item;
 
   const setGuidRects = () => {
-    if (
-      item?.fileExst === ".pdf" &&
-      firstPdfItem.id === item.id &&
-      tileRef?.current
-    ) {
+    if (item?.isPDF && tileRef?.current) {
       setGuidanceCoordinates({
         pdf: tileRef?.current.getClientRects()[0],
       });
@@ -248,7 +242,6 @@ export default inject(
       withShiftSelect,
       highlightFile,
       setGuidanceCoordinates,
-      guidanceCoordinates,
     } = filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
@@ -269,7 +262,6 @@ export default inject(
       icon,
       isDownload,
       setGuidanceCoordinates,
-      guidanceCoordinates,
     };
   },
 )(

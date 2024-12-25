@@ -42,8 +42,9 @@ import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
+import { fakeFormFillingList } from "../formFillingTourData";
 
-const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
+const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -106,10 +107,8 @@ const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
   }, []);
 
   const filesListNode = useMemo(() => {
-    const firstPdfItem = filesList.filter(
-      (item) => item?.fileExst === ".pdf",
-    )[0];
-    return filesList.map((item, index) => {
+    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -120,7 +119,6 @@ const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef={true}
-          firstPdfItem={firstPdfItem}
         />
       ) : (
         <FileTile
@@ -130,11 +128,10 @@ const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
           }
           item={item}
           itemIndex={index}
-          firstPdfItem={firstPdfItem}
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth]);
+  }, [filesList, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
@@ -151,11 +148,17 @@ const FilesTileContainer = ({ filesList, setGuidanceCoordinates }) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
+export default inject(({ settingsStore, filesStore, dialogsStore }) => {
   const { filesList, setGuidanceCoordinates } = filesStore;
+  const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
+    dialogsStore;
+
+  const isTutorialEnabled =
+    formFillingTipsVisible || welcomeFormFillingTipsVisible;
 
   return {
     filesList,
     setGuidanceCoordinates,
+    isTutorialEnabled,
   };
 })(observer(FilesTileContainer));

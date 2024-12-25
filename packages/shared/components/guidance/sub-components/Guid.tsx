@@ -31,7 +31,7 @@ import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { classNames, isMobile } from "../../../utils";
+import { classNames, isMobile, isDesktop } from "../../../utils";
 import { AsideHeader } from "../../aside";
 
 import { FormFillingTipsState } from "../../../enums";

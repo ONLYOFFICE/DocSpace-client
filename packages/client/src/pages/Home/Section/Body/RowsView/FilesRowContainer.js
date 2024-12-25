@@ -34,6 +34,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SimpleFilesRow from "./SimpleFilesRow";
+import { fakeFormFillingList } from "../formFillingTourData";
 
 const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   .row-list-item:first-child {
@@ -75,6 +76,7 @@ const FilesRowContainer = ({
   icon,
   isDownload,
   setGuidanceCoordinates,
+  isTutorialEnabled,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -85,10 +87,8 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    const firstPdfItem = filesList.filter(
-      (item) => item?.fileExst === ".pdf",
-    )[0];
-    return filesList.map((item, index) => (
+    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
+    return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -106,8 +106,8 @@ const FilesRowContainer = ({
         isIndexEditingMode={isIndexEditingMode}
         icon={icon}
         isDownload={isDownload}
-        firstPdfItem={firstPdfItem}
         setGuidanceCoordinates={setGuidanceCoordinates}
+        isTutorialEnabled={isTutorialEnabled}
       />
     ));
   }, [
@@ -119,6 +119,7 @@ const FilesRowContainer = ({
     isTrashFolder,
     icon,
     isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
@@ -146,6 +147,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     uploadDataStore,
+    dialogsStore,
   }) => {
     const {
       filesList,
@@ -162,6 +164,12 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+
+    const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
+      dialogsStore;
+
+    const isTutorialEnabled =
+      formFillingTipsVisible || welcomeFormFillingTipsVisible;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -184,6 +192,7 @@ export default inject(
       icon,
       isDownload,
       setGuidanceCoordinates,
+      isTutorialEnabled,
     };
   },
 )(observer(FilesRowContainer));

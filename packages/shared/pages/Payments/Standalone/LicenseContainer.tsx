@@ -25,27 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { inject, observer } from "mobx-react";
+import { Text } from "../../../components/text";
+import { FileInput } from "../../../components/file-input";
+import { InputSize } from "../../../components/text-input";
+import { Button, ButtonSize } from "../../../components/button";
 
-import { Text } from "@docspace/shared/components/text";
-import { FileInput } from "@docspace/shared/components/file-input";
-import { Button } from "@docspace/shared/components/button";
-import { StyledButtonComponent } from "./StyledComponent";
+import { StyledButtonComponent } from "./Payments.styled";
+import { ILicenseProps } from "./Payments.types";
 
 let timerId;
-const LicenseContainer = (props) => {
-  const {
-    t,
-    setPaymentsLicense,
-    acceptPaymentsLicense,
-    isLicenseCorrect,
-    setIsLoading,
-    isLoading,
-    isTrial,
-  } = props;
 
+export const LicenseContainer = ({
+  setPaymentsLicense,
+  acceptPaymentsLicense,
+  isLicenseCorrect,
+  isTrial,
+}: ILicenseProps) => {
+  const { t } = useTranslation("Common");
   const [isLicenseUploading, setIsLicenseUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     return () => {
       clearTimeout(timerId);
@@ -95,7 +96,7 @@ const LicenseContainer = (props) => {
       <FileInput
         className="payments_file-input"
         scale
-        size="base"
+        size={InputSize.base}
         accept={[".lic"]}
         placeholder={t("UploadLicenseFile")}
         onInput={onLicenseFileHandler}
@@ -106,7 +107,7 @@ const LicenseContainer = (props) => {
         <Button
           primary
           label={t("Common:Activate")}
-          size="small"
+          size={ButtonSize.small}
           onClick={onClickUpload}
           isLoading={isLoading}
           isDisabled={!isLicenseCorrect}
@@ -115,24 +116,3 @@ const LicenseContainer = (props) => {
     </div>
   );
 };
-
-export default inject(({ paymentStore, currentQuotaStore }) => {
-  const {
-    setPaymentsLicense,
-    acceptPaymentsLicense,
-    isLicenseCorrect,
-    setIsLoading,
-    isLoading,
-  } = paymentStore;
-
-  const { isTrial } = currentQuotaStore;
-
-  return {
-    setPaymentsLicense,
-    acceptPaymentsLicense,
-    isLicenseCorrect,
-    setIsLoading,
-    isLoading,
-    isTrial,
-  };
-})(observer(LicenseContainer));

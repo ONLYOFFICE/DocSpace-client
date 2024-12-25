@@ -31,12 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
-
-import LicenseContainer from "./LicenseContainer";
-import { StyledComponent } from "./StyledComponent";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
-import EnterpriseContainer from "./EnterpriseContainer";
-import TrialContainer from "./TrialContainer";
+import { StandalonePage as StandalonePageComponent } from "@docspace/shared/pages/Payments/Standalone";
 
 const StandalonePage = (props) => {
   const {
@@ -46,6 +41,15 @@ const StandalonePage = (props) => {
     isLoadedCurrentQuota,
     isTrial,
     isUpdatingBasicSettings,
+    setPaymentsLicense,
+    acceptPaymentsLicense,
+    isLicenseCorrect,
+    trialDaysLeft,
+    paymentDate,
+    isLicenseDateExpired,
+    isDeveloper,
+    buyUrl,
+    salesEmail,
   } = props;
 
   const { t, ready } = useTranslation(["PaymentsEnterprise", "Common"]);
@@ -68,20 +72,41 @@ const StandalonePage = (props) => {
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
   return (
-    <StyledComponent>
-      {isTrial ? <TrialContainer t={t} /> : <EnterpriseContainer t={t} />}
-      <LicenseContainer t={t} />
-      <ContactContainer />
-    </StyledComponent>
+    <StandalonePageComponent
+      isTrial={isTrial}
+      setPaymentsLicense={setPaymentsLicense}
+      acceptPaymentsLicense={acceptPaymentsLicense}
+      isLicenseCorrect={isLicenseCorrect}
+      salesEmail={salesEmail}
+      isLicenseDateExpired={isLicenseDateExpired}
+      isDeveloper={isDeveloper}
+      buyUrl={buyUrl}
+      trialDaysLeft={trialDaysLeft}
+      paymentDate={paymentDate}
+    />
   );
 };
 
 export default inject(
   ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
-    const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
-      paymentStore;
+    const {
+      standaloneInit,
+      isInitPaymentPage,
+      isUpdatingBasicSettings,
+      setPaymentsLicense,
+      acceptPaymentsLicense,
+      isLicenseCorrect,
+      buyUrl,
+      salesEmail,
+    } = paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
+    const {
+      isLoaded: isLoadedTariffStatus,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+    } = currentTariffStatusStore;
 
     return {
       isTrial,
@@ -90,6 +115,15 @@ export default inject(
       isLoadedTariffStatus,
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
+      setPaymentsLicense,
+      acceptPaymentsLicense,
+      isLicenseCorrect,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+      buyUrl,
+      salesEmail,
     };
   },
 )(observer(StandalonePage));

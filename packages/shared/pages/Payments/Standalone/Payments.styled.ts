@@ -26,9 +26,9 @@
 
 import styled from "styled-components";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile } from "../../../utils";
 
-const StyledComponent = styled.div`
+export const StyledPageWrapper = styled.div`
   .payments_file-input {
     max-width: 350px;
     margin: 16px 0;
@@ -37,7 +37,8 @@ const StyledComponent = styled.div`
     margin-top: 12px;
   }
 `;
-const StyledButtonComponent = styled.div`
+
+export const StyledButtonComponent = styled.div`
   margin: 16px 0;
   button {
     @media ${tablet} {
@@ -50,22 +51,8 @@ const StyledButtonComponent = styled.div`
     }
   }
 `;
-const StyledContactComponent = styled.div`
-  margin-top: 20px;
-  max-width: 504px;
-  .payments_contact {
-    display: flex;
-    width: 100%;
-    p {
-      margin-inline-end: 4px;
-    }
-    a {
-      text-decoration: underline;
-    }
-  }
-`;
 
-const StyledEnterpriseComponent = styled.div`
+export const StyledEnterpriseComponent = styled.div`
   margin-bottom: 35px;
 
   .payments_renew-subscription {
@@ -79,7 +66,10 @@ const StyledEnterpriseComponent = styled.div`
   }
 `;
 
-const StyledTitleComponent = styled.div`
+export const StyledTitleComponent = styled.div<{
+  limitedWidth: boolean;
+  isLicenseDateExpired: boolean;
+}>`
   .payments_subscription {
     max-width: 660px;
     margin-top: 8px;
@@ -113,10 +103,10 @@ const StyledTitleComponent = styled.div`
   }
 `;
 
-export {
-  StyledComponent,
-  StyledContactComponent,
-  StyledEnterpriseComponent,
-  StyledButtonComponent,
-  StyledTitleComponent,
-};
+export const StyledContactContainer = styled.div`
+  display: flex;
+  width: 100%;
+  a {
+    margin-inline-start: 4px;
+  }
+`;

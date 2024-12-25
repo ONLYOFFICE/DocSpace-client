@@ -24,42 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+export interface IPaymentsProps {
+  isTrial: boolean;
+  setPaymentsLicense: () => void;
+  acceptPaymentsLicense: () => void;
+  isLicenseCorrect: boolean;
+  salesEmail: string;
+  isLicenseDateExpired: boolean;
+  isDeveloper: boolean;
+  buyUrl: string;
+  trialDaysLeft: string;
+  paymentDate: string;
+}
 
-import { inject, observer } from "mobx-react";
+export interface IEnterpriseProps {
+  salesEmail: string;
+  isLicenseDateExpired: boolean;
+  isDeveloper: boolean;
+}
 
-import { Text } from "@docspace/shared/components/text";
-
-import { StyledEnterpriseComponent } from "./StyledComponent";
-import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
-import ButtonContainer from "./sub-components/ButtonContainer";
-import TariffTitleContainer from "./sub-components/TariffTitleContainer";
-
-const TrialContainer = (props) => {
-  const { t, isDeveloper } = props;
-
-  return (
-    <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize={"16px"}>
-        {t("ActivateSwithToProHeader", {
-          license: isDeveloper
-            ? t("Common:DeveloperLicense")
-            : t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-      <TariffTitleContainer t={t} />
-
-      <BenefitsContainer t={t} />
-      <Text fontSize="14px" className="payments_renew-subscription">
-        {t("ActivatePurchaseBuyLicense")}
-      </Text>
-      <ButtonContainer t={t} />
-    </StyledEnterpriseComponent>
-  );
-};
-
-export default inject(({ currentTariffStatusStore }) => {
-  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
-
-  return { isLicenseDateExpired, isDeveloper };
-})(observer(TrialContainer));
+export interface ILicenseProps {
+  setPaymentsLicense: () => void;
+  acceptPaymentsLicense: () => void;
+  isLicenseCorrect: boolean;
+  isTrial: boolean;
+}

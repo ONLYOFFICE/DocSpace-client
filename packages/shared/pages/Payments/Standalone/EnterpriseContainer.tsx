@@ -26,23 +26,31 @@
 
 import React from "react";
 
-import { inject, observer } from "mobx-react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Text } from "../../../components/text";
+import { ColorTheme, ThemeId } from "../../../components/color-theme";
+import { LinkTarget } from "../../../components/link";
+// import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+import { ButtonContainer } from "./sub-components/ButtonContainer";
+import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
 
-import { StyledEnterpriseComponent } from "./StyledComponent";
-import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
-import ButtonContainer from "./sub-components/ButtonContainer";
-import TariffTitleContainer from "./sub-components/TariffTitleContainer";
+import { StyledEnterpriseComponent } from "./Payments.styled";
 
-const EnterpriseContainer = (props) => {
-  const { salesEmail, t, isLicenseDateExpired, isDeveloper } = props;
+export const EnterpriseContainer = ({
+  salesEmail,
+  isLicenseDateExpired,
+  isDeveloper,
+  buyUrl,
+  isTrial,
+  trialDaysLeft,
+  paymentDate,
+}) => {
+  const { t } = useTranslation("Common");
 
   return (
     <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize={"16px"}>
+      <Text fontWeight={700} fontSize="16px">
         {t("ActivateRenewSubscriptionHeader", {
           license: isDeveloper
             ? t("Common:DeveloperLicense")
@@ -50,15 +58,21 @@ const EnterpriseContainer = (props) => {
         })}
       </Text>
 
-      <TariffTitleContainer />
+      <TariffTitleContainer
+        isLicenseDateExpired={isLicenseDateExpired}
+        isTrial={isTrial}
+        trialDaysLeft={trialDaysLeft}
+        paymentDate={paymentDate}
+        isDeveloper={isDeveloper}
+      />
 
-      {isLicenseDateExpired && <BenefitsContainer t={t} />}
+      {/* isLicenseDateExpired && <BenefitsContainer t={t} /> */}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
           : t("ActivatePurchaseRenewLicense")}
       </Text>
-      <ButtonContainer t={t} />
+      <ButtonContainer buyUrl={buyUrl} />
 
       <div className="payments_support">
         <Text>
@@ -67,7 +81,7 @@ const EnterpriseContainer = (props) => {
             or write us at
             <ColorTheme
               fontWeight="600"
-              target="_blank"
+              target={LinkTarget.blank}
               tag="a"
               href={`mailto:${salesEmail}`}
               themeId={ThemeId.Link}
@@ -80,10 +94,3 @@ const EnterpriseContainer = (props) => {
     </StyledEnterpriseComponent>
   );
 };
-
-export default inject(({ paymentStore, currentTariffStatusStore }) => {
-  const { buyUrl, salesEmail } = paymentStore;
-
-  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
-  return { buyUrl, salesEmail, isLicenseDateExpired, isDeveloper };
-})(observer(EnterpriseContainer));

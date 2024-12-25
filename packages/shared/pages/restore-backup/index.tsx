@@ -38,6 +38,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { BackupStorageType } from "@docspace/shared/enums";
 import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import RoomsModule from "./sub-components/RoomsModule";
 import LocalFileModule from "./sub-components/LocalFileModule";
@@ -129,7 +130,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
       const [account, backupStorage, resStorageRegions] = await Promise.all([
         getSettingsThirdParty(),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
         getStorageRegions(),
       ]);
 

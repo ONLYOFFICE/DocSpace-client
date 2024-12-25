@@ -746,10 +746,13 @@ export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
-export function getBackupStorage() {
+export function getBackupStorage(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/settings/storage/backup",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }

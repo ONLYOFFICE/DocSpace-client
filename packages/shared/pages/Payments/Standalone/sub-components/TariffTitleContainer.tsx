@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { StyledTitleComponent } from "../StyledComponent";
+import { Text } from "../../../../components/text";
 
-import { getTwoDotsReplacing } from "../../utils";
+import { StyledTitleComponent } from "../Payments.styled";
+import { getTwoDotsReplacing } from "../Payments.helpers";
 
-const TariffTitleContainer = ({
+export const TariffTitleContainer = ({
   isLicenseDateExpired,
   isTrial,
   trialDaysLeft,
@@ -114,17 +113,3 @@ const TariffTitleContainer = ({
     </StyledTitleComponent>
   );
 };
-
-export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
-  const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
-    currentTariffStatusStore;
-  const { isTrial } = currentQuotaStore;
-
-  return {
-    isTrial,
-    trialDaysLeft,
-    paymentDate,
-    isLicenseDateExpired,
-    isDeveloper,
-  };
-})(observer(TariffTitleContainer));

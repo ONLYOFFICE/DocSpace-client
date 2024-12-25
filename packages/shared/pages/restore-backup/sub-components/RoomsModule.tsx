@@ -34,7 +34,8 @@ import type {
   FileInfoType,
   FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import { TBreadCrumb } from "components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/shared/components//selector/Selector.types";
+import type { Nullable } from "@docspace/shared/types";
 
 export interface RoomsModuleProps {
   settingsFileSelector: FilesSelectorSettings;
@@ -47,7 +48,7 @@ export interface RoomsModuleProps {
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
   // backup
-  setRestoreResource: (resource: number | string | File) => void;
+  setRestoreResource: (resource: Nullable<number | string | File>) => void;
 
   // currentQuotaStore
   isEnableRestore: boolean; // isRestoreAndAutoBackupAvailable,

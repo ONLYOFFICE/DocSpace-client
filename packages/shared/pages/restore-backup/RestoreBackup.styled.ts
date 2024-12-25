@@ -25,11 +25,211 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled, { css } from "styled-components";
 
+import { mobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+
 import type {
   StyledBackupListProps,
   StyledComboBoxItemProps,
+  StyledRestoreBackupProps,
 } from "./RestoreBackup.types";
+
+const INPUT_LENGTH = "350px";
+const TEXT_LENGTH = "700px";
+
+const commonStyles = css`
+  .backup_modules-description {
+    margin-bottom: 8px;
+    max-width: ${TEXT_LENGTH};
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+  }
+
+  .backup_modules-header_wrapper {
+    svg {
+      margin-block: 5px 0;
+      margin-inline: 4px 0;
+    }
+    .link-learn-more {
+      display: inline-block;
+      font-weight: 600;
+    }
+  }
+
+  .radio-button_text {
+    margin-inline-end: 7px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .backup_radio-button {
+    margin-bottom: 4px;
+  }
+
+  .backup_combo {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: ${INPUT_LENGTH};
+    .combo-button-label {
+      width: 100%;
+      max-width: ${INPUT_LENGTH};
+    }
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
+  }
+
+  .backup_text-input {
+    margin: 4px 0 10px 0;
+    width: 100%;
+    max-width: ${INPUT_LENGTH};
+    font-size: 13px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
+  }
+
+  .backup_checkbox {
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .backup_radio-button-settings {
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .backup_radio-button {
+    max-width: fit-content;
+    font-size: 12px;
+    line-height: 15px;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+  }
+`;
+
+export const UnavailableStyles = css`
+  .settings_unavailable {
+    color: ${(props) => props.theme.text.disableColor};
+    pointer-events: none;
+    cursor: default;
+
+    label {
+      color: ${(props) => props.theme.text.disableColor};
+    }
+
+    path {
+      fill: ${(props) => props.theme.text.disableColor};
+    }
+  }
+`;
+
+const floatingButtonStyles = css`
+  .layout-progress-bar {
+    position: fixed;
+    inset-inline-end: 24px;
+    bottom: 24px;
+  }
+`;
+
+export const StyledRestoreBackup = styled.div<StyledRestoreBackupProps>`
+  ${commonStyles}
+  ${floatingButtonStyles}
+
+  .restore-backup_third-party-module {
+    margin-top: 16px;
+
+    button {
+      margin-bottom: 16px;
+    }
+  }
+
+  .restore-description {
+    max-width: ${TEXT_LENGTH};
+    font-size: 13px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
+  }
+
+  .restore-backup_warning {
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: ${(props) => props.theme.client.settings.backup.warningColor};
+  }
+
+  .restore-backup_warning-link {
+    margin-top: 16px;
+    max-width: ${TEXT_LENGTH};
+  }
+
+  .restore-backup_warning-description {
+    max-width: ${TEXT_LENGTH};
+  }
+
+  .restore-backup-checkbox {
+    max-width: fit-content;
+    margin: 24px 0;
+  }
+  .restore-backup-checkbox_notification {
+    max-width: fit-content;
+    margin-top: 11px;
+
+    .checkbox-text {
+      white-space: normal;
+    }
+  }
+
+  .restore-backup_list {
+    text-decoration: underline dotted;
+    cursor: ${(props) => (props.isEnableRestore ? "pointer" : "cursor")};
+    font-weight: 600;
+  }
+
+  .restore-backup_input {
+    margin: 16px 0;
+    max-width: ${INPUT_LENGTH};
+
+    @media ${mobile} {
+      max-width: none;
+    }
+  }
+
+  .restore-description {
+    margin-bottom: 20px;
+  }
+
+  .restore-backup_modules {
+    margin-top: 24px;
+  }
+
+  .backup_radio-button {
+    margin-bottom: 16px;
+  }
+
+  .restore-backup_button-container {
+    position: sticky;
+    bottom: 0;
+    margin-top: 24px;
+    background-color: ${({ theme }) => theme.backgroundColor};
+
+    @media ${mobile} {
+      padding-block: 30px;
+      position: fixed;
+      padding-inline: 16px;
+      inset-inline: 0;
+    }
+  }
+
+  .restore-backup_button {
+    @media ${mobile} {
+      width: 100%;
+    }
+  }
+  ${(props) => !props.isEnableRestore && UnavailableStyles}
+`;
 
 export const StyledBackupList = styled.div<StyledBackupListProps>`
   height: 100%;

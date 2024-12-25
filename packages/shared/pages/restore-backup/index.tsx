@@ -25,48 +25,43 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+
 import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/shared/api/settings";
-import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
-import { toastr } from "@docspace/shared/components/toast";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { BackupStorageType } from "@docspace/shared/enums";
+import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
+import RoomsModule from "./sub-components/RoomsModule";
 import LocalFileModule from "./sub-components/LocalFileModule";
+import BackupListModalDialog from "./sub-components/backup-list";
+import { ButtonContainer } from "./sub-components/button-component";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
 import ThirdPartyResourcesModule from "./sub-components/ThirdPartyResourcesModule";
-import BackupListModalDialog from "./sub-components/backup-list";
-import RoomsModule from "./sub-components/RoomsModule";
-import ButtonContainer from "./sub-components/ButtonComponent";
-import { StyledRestoreBackup } from "../StyledBackup";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-const LOCAL_FILE = "localFile",
-  BACKUP_ROOM = "backupRoom",
-  DISK_SPACE = "thirdPartyDiskSpace",
-  STORAGE_SPACE = "thirdPartyStorageSpace";
+import { StyledRestoreBackup } from "./RestoreBackup.styled";
+import {
+  BACKUP_ROOM,
+  CONFIRMATION,
+  DISK_SPACE,
+  LOCAL_FILE,
+  NOTIFICATION,
+  STORAGE_SPACE,
+} from "./RestoreBackup.constants";
+import type { RestoreBackupProps } from "./RestoreBackup.types";
 
-const NOTIFICATION = "notification",
-  CONFIRMATION = "confirmation";
+// import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-const {
-  DocumentModuleType,
-  ResourcesModuleType,
-  StorageModuleType,
-  LocalFileModuleType,
-} = BackupStorageType;
-
-const RestoreBackup = (props) => {
+export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
     getProgress,
-    t,
     setThirdPartyStorage,
     setStorageRegions,
     setConnectedThirdPartyAccount,
@@ -75,7 +70,49 @@ const RestoreBackup = (props) => {
     setRestoreResource,
     buttonSize,
     standalone,
+    downloadingProgress,
+    navigate,
+    setTenantStatus,
+    settingsFileSelector,
+    basePath,
+    newPath,
+    isErrorPath,
+    toDefault,
+    setBasePath,
+    setNewPath,
+    openConnectWindow,
+    connectDialogVisible,
+    setConnectDialogVisible,
+    deleteThirdPartyDialogVisible,
+    setDeleteThirdPartyDialogVisible,
+    clearLocalStorage,
+    setSelectedThirdPartyAccount,
+    isTheSameThirdPartyAccount,
+    selectedThirdPartyAccount,
+    accounts,
+    setThirdPartyAccountsInfo,
+    deleteThirdParty,
+    setThirdPartyProviders,
+    providers,
+    removeItem,
+    defaultRegion,
+    storageRegions,
+    thirdPartyStorage,
+    setCompletedFormFields,
+    errorsFieldsBeforeSafe,
+    formSettings,
+    addValueInFormSettings,
+    setRequiredFormSettings,
+    deleteValueFormSetting,
+    setIsThirdStorageChanged,
+    isFormReady,
+    getStorageParams,
+    restoreResource,
+    uploadLocalFile,
+    isBackupProgressVisible,
   } = props;
+
+  const { t } = useTranslation(["Settings", "Common"]);
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
   const [checkboxState, setCheckboxState] = useState({
@@ -85,39 +122,39 @@ const RestoreBackup = (props) => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
     useState(false);
-  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
-    useState(false);
 
   const startRestoreBackup = useCallback(async () => {
     try {
       getProgress(t);
 
-      const [account, backupStorage, storageRegions] = await Promise.all([
+      const [account, backupStorage, resStorageRegions] = await Promise.all([
         getSettingsThirdParty(),
         getBackupStorage(),
         getStorageRegions(),
       ]);
 
-      setConnectedThirdPartyAccount(account);
+      if (account) setConnectedThirdPartyAccount(account);
       setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegions);
+      setStorageRegions(resStorageRegions);
 
       setIsInitialLoading(false);
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error as Error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    setDocumentTitle(t("RestoreBackup"));
+    // setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
     return () => {
       clearProgressInterval();
       setRestoreResource(null);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeRadioButton = (e) => {
+  const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === radioButtonState) return;
 
@@ -125,7 +162,7 @@ const RestoreBackup = (props) => {
     setRadioButtonState(value);
   };
 
-  const onChangeCheckbox = (e) => {
+  const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const checked = e.target.checked;
 
@@ -135,13 +172,15 @@ const RestoreBackup = (props) => {
   const getStorageType = () => {
     switch (radioButtonState) {
       case LOCAL_FILE:
-        return LocalFileModuleType;
+        return BackupStorageType.LocalFileModuleType;
       case BACKUP_ROOM:
-        return DocumentModuleType;
+        return BackupStorageType.DocumentModuleType;
       case DISK_SPACE:
-        return ResourcesModuleType;
+        return BackupStorageType.ResourcesModuleType;
       case STORAGE_SPACE:
-        return StorageModuleType;
+        return BackupStorageType.StorageModuleType;
+      default:
+        throw new Error("unknown case", { cause: { radioButtonState } });
     }
   };
 
@@ -149,60 +188,108 @@ const RestoreBackup = (props) => {
     setIsVisibleBackupListDialog(true);
   };
 
-  const onClickInput = () => {
-    setIsVisibleSelectFileDialog(true);
-  };
   const onModalClose = () => {
     setIsVisibleBackupListDialog(false);
-    setIsVisibleSelectFileDialog(false);
   };
 
-  const onSetStorageId = (id) => {
+  const onSetStorageId = (id: string) => {
     setRestoreResource(id);
   };
 
   const radioButtonContent = (
-    <>
-      <RadioButtonGroup
-        name="restore_backup"
-        orientation="vertical"
-        fontSize="13px"
-        fontWeight="400"
-        className="backup_radio-button"
-        options={[
-          { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
-          { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
-          {
-            id: "third-party-resource",
-            value: DISK_SPACE,
-            label: t("ThirdPartyResource"),
-          },
-          {
-            id: "third-party-storage",
-            value: STORAGE_SPACE,
-            label: t("Common:ThirdPartyStorage"),
-          },
-        ]}
-        onClick={onChangeRadioButton}
-        selected={radioButtonState}
-        spacing="16px"
-        isDisabled={!isEnableRestore}
-      />
-    </>
+    <RadioButtonGroup
+      name="restore_backup"
+      orientation="vertical"
+      fontSize="13px"
+      fontWeight={400}
+      className="backup_radio-button"
+      options={[
+        { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
+        { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
+        {
+          id: "third-party-resource",
+          value: DISK_SPACE,
+          label: t("ThirdPartyResource"),
+        },
+        {
+          id: "third-party-storage",
+          value: STORAGE_SPACE,
+          label: t("Common:ThirdPartyStorage"),
+        },
+      ]}
+      onClick={onChangeRadioButton}
+      selected={radioButtonState}
+      spacing="16px"
+      isDisabled={!isEnableRestore}
+    />
   );
 
   const backupModules = (
     <div className="restore-backup_modules">
       {radioButtonState === LOCAL_FILE && (
-        <LocalFileModule t={t} isEnableRestore={isEnableRestore} />
+        <LocalFileModule
+          isEnableRestore={isEnableRestore}
+          setRestoreResource={setRestoreResource}
+        />
       )}
 
-      {radioButtonState === BACKUP_ROOM && <RoomsModule />}
+      {radioButtonState === BACKUP_ROOM && (
+        <RoomsModule
+          settingsFileSelector={settingsFileSelector}
+          newPath={newPath}
+          basePath={basePath}
+          isErrorPath={isErrorPath}
+          toDefault={toDefault}
+          setBasePath={setBasePath}
+          setNewPath={setNewPath}
+          setRestoreResource={setRestoreResource}
+          isEnableRestore={false}
+        />
+      )}
       {radioButtonState === DISK_SPACE && (
-        <ThirdPartyResourcesModule buttonSize={buttonSize} />
+        <ThirdPartyResourcesModule
+          buttonSize={buttonSize}
+          setRestoreResource={setRestoreResource}
+          setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+          newPath={newPath}
+          basePath={basePath}
+          isErrorPath={isErrorPath}
+          setBasePath={setBasePath}
+          toDefault={toDefault}
+          setNewPath={setNewPath}
+          openConnectWindow={openConnectWindow}
+          connectDialogVisible={connectDialogVisible}
+          deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+          connectedThirdPartyAccount={null}
+          setConnectDialogVisible={setConnectDialogVisible}
+          setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+          clearLocalStorage={clearLocalStorage}
+          setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+          isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+          selectedThirdPartyAccount={selectedThirdPartyAccount}
+          accounts={accounts}
+          setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+          deleteThirdParty={deleteThirdParty}
+          setThirdPartyProviders={setThirdPartyProviders}
+          providers={providers}
+          removeItem={removeItem}
+          filesSelectorSettings={settingsFileSelector}
+        />
       )}
       {radioButtonState === STORAGE_SPACE && (
-        <ThirdPartyStoragesModule onSetStorageId={onSetStorageId} />
+        <ThirdPartyStoragesModule
+          onSetStorageId={onSetStorageId}
+          defaultRegion={defaultRegion}
+          storageRegions={storageRegions}
+          thirdPartyStorage={thirdPartyStorage}
+          setCompletedFormFields={setCompletedFormFields}
+          errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+          formSettings={formSettings}
+          addValueInFormSettings={addValueInFormSettings}
+          setRequiredFormSettings={setRequiredFormSettings}
+          deleteValueFormSetting={deleteValueFormSetting}
+          setIsThirdStorageChanged={setIsThirdStorageChanged}
+        />
       )}
     </div>
   );
@@ -210,8 +297,7 @@ const RestoreBackup = (props) => {
   const warningContent = (
     <>
       <Text className="restore-backup_warning settings_unavailable" noSelect>
-        {t("Common:Warning")}
-        {"!"}
+        {t("Common:Warning")}!
       </Text>
       <Text
         className="restore-backup_warning-description settings_unavailable"
@@ -263,6 +349,10 @@ const RestoreBackup = (props) => {
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
           isNotify={checkboxState.notification}
+          navigate={navigate}
+          standalone={standalone}
+          setTenantStatus={setTenantStatus}
+          downloadingProgress={downloadingProgress}
         />
       )}
       <Checkbox
@@ -293,42 +383,51 @@ const RestoreBackup = (props) => {
         isCheckedLocalFile={radioButtonState === LOCAL_FILE}
         t={t}
         buttonSize={buttonSize}
+        navigate={navigate}
+        downloadingProgress={downloadingProgress}
+        isFormReady={isFormReady}
+        getStorageParams={getStorageParams}
+        restoreResource={restoreResource}
+        uploadLocalFile={uploadLocalFile}
+        isBackupProgressVisible={isBackupProgressVisible}
+        isEnableRestore={isEnableRestore}
+        setTenantStatus={setTenantStatus}
       />
     </StyledRestoreBackup>
   );
 };
 
-export const Component = inject(
-  ({ settingsStore, backup, currentQuotaStore }) => {
-    const { currentDeviceType, standalone, checkEnablePortalSettings } =
-      settingsStore;
-    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const {
-      getProgress,
-      clearProgressInterval,
-      setStorageRegions,
-      setThirdPartyStorage,
-      setConnectedThirdPartyAccount,
-      setRestoreResource,
-    } = backup;
+// export const Component = inject(
+//   ({ settingsStore, backup, currentQuotaStore }) => {
+//     const { currentDeviceType, standalone, checkEnablePortalSettings } =
+//       settingsStore;
+//     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+//     const {
+//       getProgress,
+//       clearProgressInterval,
+//       setStorageRegions,
+//       setThirdPartyStorage,
+//       setConnectedThirdPartyAccount,
+//       setRestoreResource,
+//     } = backup;
 
-    const buttonSize =
-      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+//     const buttonSize =
+//       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
-    const isEnableRestore = checkEnablePortalSettings(
-      isRestoreAndAutoBackupAvailable,
-    );
+//     const isEnableRestore = checkEnablePortalSettings(
+//       isRestoreAndAutoBackupAvailable,
+//     );
 
-    return {
-      standalone,
-      isEnableRestore,
-      setStorageRegions,
-      setThirdPartyStorage,
-      buttonSize,
-      setConnectedThirdPartyAccount,
-      clearProgressInterval,
-      getProgress,
-      setRestoreResource,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));
+//     return {
+//       standalone,
+//       isEnableRestore,
+//       setStorageRegions,
+//       setThirdPartyStorage,
+//       buttonSize,
+//       setConnectedThirdPartyAccount,
+//       clearProgressInterval,
+//       getProgress,
+//       setRestoreResource,
+//     };
+//   },
+// )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

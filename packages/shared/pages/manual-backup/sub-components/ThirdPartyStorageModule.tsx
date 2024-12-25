@@ -31,7 +31,11 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
@@ -58,6 +62,7 @@ const DefaultParameters = {
 };
 
 type SelectType =
+  | TOption
   | React.MouseEvent<HTMLElement>
   | React.ChangeEvent<HTMLInputElement>;
 
@@ -136,6 +141,8 @@ const ThirdPartyStorageModule = ({
   const [isStartCopy, setIsStartCopy] = useState(false);
 
   const onSelect = (event: SelectType) => {
+    if (!("currentTarget" in event)) return;
+
     const data = event.currentTarget.dataset;
 
     const selectedStorageId = data.thirdPartyKey ?? "";

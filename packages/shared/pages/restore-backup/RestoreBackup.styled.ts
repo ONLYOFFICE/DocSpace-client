@@ -26,7 +26,10 @@
 import styled, { css } from "styled-components";
 
 import { globalColors } from "@docspace/shared/themes";
-import type { StyledBackupListProps } from "./RestoreBackup.types";
+import type {
+  StyledBackupListProps,
+  StyledComboBoxItemProps,
+} from "./RestoreBackup.types";
 
 export const StyledBackupList = styled.div<StyledBackupListProps>`
   height: 100%;
@@ -111,5 +114,29 @@ export const StyledBackupList = styled.div<StyledBackupListProps>`
     display: grid;
     height: 100%;
     grid-template-rows: max-content auto max-content;
+  }
+`;
+
+export const StyledComboBoxItem = styled.div<StyledComboBoxItemProps>`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
   }
 `;

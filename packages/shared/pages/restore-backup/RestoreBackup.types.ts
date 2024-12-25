@@ -27,3 +27,7 @@
 export type StyledBackupListProps = {
   isChecked?: boolean;
 };
+
+export type StyledComboBoxItemProps = {
+  isDisabled?: boolean;
+};

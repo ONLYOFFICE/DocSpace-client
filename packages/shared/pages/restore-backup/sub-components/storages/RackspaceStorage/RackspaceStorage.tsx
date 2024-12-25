@@ -41,6 +41,7 @@ const RackspaceStorage = ({
   setIsThirdStorageChanged,
   setRequiredFormSettings,
   selectedStorage,
+  isLoadingData = false,
 }: RackspaceStorageProps) => {
   const { t } = useTranslation("Settings");
 
@@ -57,7 +58,7 @@ const RackspaceStorage = ({
       t={t}
       isNeedFilePath
       isLoading={isLoading}
-      isLoadingData={false}
+      isLoadingData={isLoadingData}
       formSettings={formSettings}
       selectedStorage={selectedStorage}
       errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}

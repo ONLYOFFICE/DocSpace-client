@@ -43,6 +43,13 @@ import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
+async function* uploadBackupFile(requestsDataArray, url) {
+  const length = requestsDataArray.length;
+  for (let index = 0; index < length; index++) {
+    yield uploadBackup(url, requestsDataArray[index]);
+  }
+}
+
 class BackupStore {
   authStore = null;
 
@@ -778,18 +785,21 @@ class BackupStore {
   };
 
   uploadFileChunks = async (requestsDataArray, url) => {
-    const length = requestsDataArray.length;
     let res;
 
-    for (let index = 0; index < length; index++) {
-      res = await uploadBackup(
-        combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
-        requestsDataArray[index],
-      );
+    const uploadUrl = combineUrl(
+      window.ClientConfig?.proxy?.url,
+      config.homepage,
+      url,
+    );
 
-      if (!res) return false;
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
+      if (!value) return false;
 
-      if (res.data.Message || !res.data.Success) return res;
+      if (value.data.Message || !value.data.Success) return value;
+
+      res = value;
     }
 
     return res;

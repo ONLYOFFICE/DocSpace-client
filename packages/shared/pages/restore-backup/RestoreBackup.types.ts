@@ -59,7 +59,7 @@ export interface RestoreBackupProps {
   isEnableRestore: boolean;
   navigate: (path: string) => void;
   settingsFileSelector: FilesSelectorSettings;
-
+  isInitialLoading: boolean;
   // settingsStore
   standalone: boolean;
   setTenantStatus: (tenantStatus: TenantStatus) => void;
@@ -76,13 +76,9 @@ export interface RestoreBackupProps {
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   isTheSameThirdPartyAccount: boolean;
   downloadingProgress: number;
-  getProgress: (t: TTranslation) => Promise<void>;
-  setThirdPartyStorage: (list: unknown) => void;
-  setStorageRegions: (regions: unknown) => void;
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
-  clearProgressInterval: VoidFunction;
   setRestoreResource: (resource: Nullable<File | string | number>) => void;
   clearLocalStorage: VoidFunction;
   setSelectedThirdPartyAccount: (

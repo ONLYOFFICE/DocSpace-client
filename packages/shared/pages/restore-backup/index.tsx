@@ -24,21 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
 
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
 import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { BackupStorageType } from "@docspace/shared/enums";
 import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { isManagement } from "@docspace/shared/utils/common";
 
 import RoomsModule from "./sub-components/RoomsModule";
 import LocalFileModule from "./sub-components/LocalFileModule";
@@ -62,11 +55,7 @@ import type { RestoreBackupProps } from "./RestoreBackup.types";
 
 export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
-    getProgress,
-    setThirdPartyStorage,
-    setStorageRegions,
     setConnectedThirdPartyAccount,
-    clearProgressInterval,
     isEnableRestore,
     setRestoreResource,
     buttonSize,
@@ -111,6 +100,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     restoreResource,
     uploadLocalFile,
     isBackupProgressVisible,
+    isInitialLoading,
   } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
@@ -120,40 +110,9 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     notification: true,
     confirmation: false,
   });
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
   const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
     useState(false);
-
-  const startRestoreBackup = useCallback(async () => {
-    try {
-      getProgress(t);
-
-      const [account, backupStorage, resStorageRegions] = await Promise.all([
-        getSettingsThirdParty(),
-        getBackupStorage(isManagement()),
-        getStorageRegions(),
-      ]);
-
-      if (account) setConnectedThirdPartyAccount(account);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(resStorageRegions);
-
-      setIsInitialLoading(false);
-    } catch (error) {
-      toastr.error(error as Error);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    // setDocumentTitle(t("RestoreBackup"));
-    startRestoreBackup();
-    return () => {
-      clearProgressInterval();
-      setRestoreResource(null);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

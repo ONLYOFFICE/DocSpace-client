@@ -34,7 +34,6 @@ import type {
 } from "@docspace/shared/types";
 import type { TOption } from "@docspace/shared/components/combobox";
 import type { FolderType } from "@docspace/shared/enums";
-import type { TFolder } from "@docspace/shared/api/files/types";
 import type { ButtonSize } from "@docspace/shared/components/button";
 import type { TColorScheme } from "@docspace/shared/themes";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
@@ -46,7 +45,8 @@ export type Option = {
 };
 
 export interface AutomaticBackupProps {
-  setDocumentTitle: (title: string) => void; // SRC_DIR/helpers/utils
+  isInitialLoading: boolean;
+  isEmptyContentBeforeLoader: boolean;
   settingsFileSelector: FilesSelectorSettings;
   buttonSize?: ButtonSize;
   removeItem: ThirdPartyAccountType;
@@ -64,11 +64,10 @@ export interface AutomaticBackupProps {
     periodObj: TOption[],
     weekdayArr: TOption[],
   ) => void;
-  clearProgressInterval: VoidFunction;
+
   setThirdPartyStorage: (list: unknown) => void;
   setBackupSchedule: (list: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  setStorageRegions: (regions: unknown) => void;
+
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
@@ -138,7 +137,7 @@ export interface AutomaticBackupProps {
 
   // treeFoldersStore Store
   rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
+
   // end treeFoldersStore
 
   // settingsStore

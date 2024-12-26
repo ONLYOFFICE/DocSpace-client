@@ -24,26 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/auto-backup/AutoBackup.types";
+import moment from "moment";
+import { useLayoutEffect, useMemo } from "react";
+
 import type { TTranslation } from "@docspace/shared/types";
 
-export interface ExternalAutoBackupWrapperProps
-  extends Pick<AutomaticBackupProps, "buttonSize" | "isNeedFilePath"> {}
+export const useDefaultOptions = (t: TTranslation, language: string) => {
+  useLayoutEffect(() => {
+    moment.locale(language);
+  }, [language]);
 
-export interface InjectedAutoBackupWrapperProps
-  extends Omit<
-    AutomaticBackupProps,
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isEmptyContentBeforeLoader"
-    | "isInitialLoading"
-  > {
-  clearProgressInterval: VoidFunction;
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-}
+  const maxNumberCopiesArray = useMemo(() => {
+    return Array(30)
+      .fill(null)
+      .map((_, index) => ({
+        key: `${index + 1}`,
+        label: `${t("MaxCopies", { copiesCount: index + 1 })}`,
+      }));
+  }, [t]);
 
-export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &
-  ExternalAutoBackupWrapperProps;
+  const periodsObject = useMemo(
+    () => [
+      {
+        key: 0,
+        label: t("Common:EveryDay"),
+      },
+      {
+        key: 1,
+        label: t("Common:EveryWeek"),
+      },
+      {
+        key: 2,
+        label: t("Common:EveryMonth"),
+      },
+    ],
+    [t],
+  );
+
+  const weekdaysLabelArray = useMemo(() => {
+    const gettingWeekdays = moment.weekdays();
+    const temp = [];
+
+    const isEnglishLanguage = language === "en";
+
+    const shift = isEnglishLanguage ? 1 : 0;
+
+    for (let item = 0; item < gettingWeekdays.length; item += 1) {
+      const index = (shift + item) % gettingWeekdays.length;
+
+      temp.push({
+        key: `${index + 1}`,
+        label: `${gettingWeekdays[index]}`,
+      });
+    }
+
+    return temp;
+  }, [language]);
+
+  return { maxNumberCopiesArray, weekdaysLabelArray, periodsObject };
+};

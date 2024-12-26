@@ -74,7 +74,7 @@ export type TSortBy = "DateAndTime" | "Tags" | "AZ";
 
 export type TTranslation = (
   key: string,
-  params?: { [key: string]: string | string[] },
+  params?: { [key: string]: string | string[] | number },
 ) => string;
 
 export type Nullable<T> = T | null;

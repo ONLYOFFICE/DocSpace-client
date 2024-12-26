@@ -24,15 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
-import moment from "moment";
 import { Trans, useTranslation } from "react-i18next";
 
 import { RadioButton } from "@docspace/shared/components/radio-button";
@@ -49,10 +42,7 @@ import {
   FolderType,
 } from "@docspace/shared/enums";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
+import { getBackupStorage } from "@docspace/shared/api/settings";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
 import {
   FloatingButton,
@@ -60,7 +50,6 @@ import {
 } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
@@ -72,6 +61,7 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 
 import { ButtonContainer } from "./sub-components/ButtonContainer";
 
+import { useDefaultOptions } from "./hooks/index";
 import { StyledModules, StyledAutoBackup } from "./AutoBackup.styled";
 import type { AutomaticBackupProps, Option } from "./AutoBackup.types";
 
@@ -94,16 +84,11 @@ const monthNumbersArray = Array(31)
 
 const AutomaticBackup = ({
   language,
-  setDocumentTitle,
   setDefaultOptions,
   setThirdPartyStorage,
   setBackupSchedule,
-  getProgress,
   setConnectedThirdPartyAccount,
-  setStorageRegions,
-  fetchTreeFolders,
   rootFoldersTitles,
-  clearProgressInterval,
   seStorageType,
   setSelectedEnableSchedule,
   toDefault,
@@ -176,6 +161,8 @@ const AutomaticBackup = ({
   setThirdPartyProviders,
   removeItem,
   isNeedFilePath = false,
+  isEmptyContentBeforeLoader,
+  isInitialLoading,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -184,118 +171,15 @@ const AutomaticBackup = ({
   const isCheckedThirdPartyStorage =
     selectedStorageType === `${BackupStorageType.StorageModuleType}`;
 
-  const { t, ready } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Settings", "Common"]);
   const theme = useTheme();
 
   const [isLoadingData, setIsLoadingData] = useStateCallback(false);
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
+
   const [isError, setIsError] = useState(false);
 
-  const timerIdRef = useRef<number>();
-
-  useLayoutEffect(() => {
-    moment.locale(language);
-  }, [language]);
-
-  useLayoutEffect(() => {
-    if (ready) {
-      setDocumentTitle(t("AutoBackup"));
-    }
-  }, [ready, t, setDocumentTitle]);
-
-  const maxNumberCopiesArray = useMemo(() => {
-    return Array(30)
-      .fill(null)
-      .map((_, index) => ({
-        key: `${index + 1}`,
-        label: `${t("MaxCopies", { copiesCount: index + 1 })}`,
-      }));
-  }, [t]);
-
-  const periodsObject = useMemo(
-    () => [
-      {
-        key: 0,
-        label: t("Common:EveryDay"),
-      },
-      {
-        key: 1,
-        label: t("Common:EveryWeek"),
-      },
-      {
-        key: 2,
-        label: t("Common:EveryMonth"),
-      },
-    ],
-    [t],
-  );
-
-  const weekdaysLabelArray = useMemo(() => {
-    const gettingWeekdays = moment.weekdays();
-    const temp = [];
-
-    const isEnglishLanguage = language === "en";
-
-    const shift = isEnglishLanguage ? 1 : 0;
-
-    for (let item = 0; item < gettingWeekdays.length; item += 1) {
-      const index = (shift + item) % gettingWeekdays.length;
-
-      temp.push({
-        key: `${index + 1}`,
-        label: `${gettingWeekdays[index]}`,
-      });
-    }
-
-    return temp;
-  }, [language]);
-
-  const setBasicSettings = async () => {
-    try {
-      getProgress(t);
-      const [account, backupSchedule, backupStorage, newStorageRegions] =
-        await Promise.all([
-          getSettingsThirdParty(),
-          getBackupSchedule(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ]);
-
-      if (account) setConnectedThirdPartyAccount(account);
-
-      setThirdPartyStorage(backupStorage);
-      setBackupSchedule(backupSchedule);
-      setStorageRegions(newStorageRegions);
-
-      setDefaultOptions(t, periodsObject, weekdaysLabelArray);
-    } catch (error) {
-      toastr.error(error as Error);
-    } finally {
-      clearTimeout(timerIdRef.current);
-      timerIdRef.current = undefined;
-      setIsEmptyContentBeforeLoader(false);
-      setIsInitialLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    timerIdRef.current = window.setTimeout(() => {
-      setIsInitialLoading(true);
-    }, 200);
-
-    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
-
-    setBasicSettings();
-
-    return () => {
-      clearTimeout(timerIdRef.current);
-      timerIdRef.current = undefined;
-      clearProgressInterval();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { maxNumberCopiesArray, periodsObject, weekdaysLabelArray } =
+    useDefaultOptions(t, language);
 
   const onClickPermissions = () => {
     seStorageType(BackupStorageType.DocumentModuleType.toString());

@@ -23,9 +23,21 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useEffect, useRef, useState } from "react";
 import { observer, inject } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
+import {
+  getBackupStorage,
+  getStorageRegions,
+} from "@docspace/shared/api/settings";
+import { getBackupSchedule } from "@docspace/shared/api/portal";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
+
+import { toastr } from "@docspace/shared/components/toast";
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
+import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -35,8 +47,100 @@ import type {
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
 
-function AutoBackupWrapper(props: AutoBackupWrapperProps) {
-  return <AutomaticBackup setDocumentTitle={setDocumentTitle} {...props} />;
+function AutoBackupWrapper({
+  getProgress,
+  setConnectedThirdPartyAccount,
+  setStorageRegions,
+  setBackupSchedule,
+  setThirdPartyStorage,
+  setDefaultOptions,
+  fetchTreeFolders,
+  clearProgressInterval,
+  ...props
+}: AutoBackupWrapperProps) {
+  const timerIdRef = useRef<number>();
+  const { t, ready } = useTranslation(["Settings", "Common"]);
+  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
+    useState(true);
+  const [isInitialLoading, setIsInitialLoading] = useState(false);
+  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
+    t,
+    props.language,
+  );
+
+  useEffect(() => {
+    (async () => {
+      try {
+        timerIdRef.current = window.setTimeout(() => {
+          setIsInitialLoading(true);
+        }, 200);
+
+        if (Object.keys(props.rootFoldersTitles).length === 0)
+          fetchTreeFolders();
+
+        getProgress(t);
+        const [account, backupSchedule, backupStorage, newStorageRegions] =
+          await Promise.all([
+            getSettingsThirdParty(),
+            getBackupSchedule(),
+            getBackupStorage(),
+            getStorageRegions(),
+          ]);
+
+        if (account) setConnectedThirdPartyAccount(account);
+
+        setThirdPartyStorage(backupStorage);
+        setBackupSchedule(backupSchedule);
+        setStorageRegions(newStorageRegions);
+
+        setDefaultOptions(t, periodsObject, weekdaysLabelArray);
+      } catch (error) {
+        toastr.error(error as Error);
+      } finally {
+        clearTimeout(timerIdRef.current);
+        timerIdRef.current = undefined;
+        setIsEmptyContentBeforeLoader(false);
+        setIsInitialLoading(false);
+      }
+    })();
+  }, [
+    t,
+    fetchTreeFolders,
+    getProgress,
+    periodsObject,
+    props.rootFoldersTitles,
+    setBackupSchedule,
+    setConnectedThirdPartyAccount,
+    setDefaultOptions,
+    setStorageRegions,
+    setThirdPartyStorage,
+    weekdaysLabelArray,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerIdRef.current);
+      timerIdRef.current = undefined;
+      clearProgressInterval();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("DataBackup"));
+  }, [t, ready]);
+
+  return (
+    <AutomaticBackup
+      setDefaultOptions={setDefaultOptions}
+      setBackupSchedule={setBackupSchedule}
+      setThirdPartyStorage={setThirdPartyStorage}
+      setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+      isInitialLoading={isInitialLoading}
+      isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+      {...props}
+    />
+  );
 }
 
 export default inject<

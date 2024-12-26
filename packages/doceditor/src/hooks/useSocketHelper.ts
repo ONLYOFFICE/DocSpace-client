@@ -49,7 +49,7 @@ const useSocketHelper = ({
 
   React.useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "backup-restore",
+      roomParts: "restore",
     });
 
     SocketHelper.emit(SocketCommands.Subscribe, {

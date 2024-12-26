@@ -38,13 +38,14 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AppLoader from "@docspace/shared/components/app-loader";
-import config from "../../../../../package.json";
-import ManualBackup from "./backup/manual-backup";
-import AutoBackup from "./backup/auto-backup";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { DeviceType } from "@docspace/shared/enums";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+
+import config from "../../../../../package.json";
+import ManualBackup from "./backup/manual-backup";
+import AutoBackup from "./backup/auto-backup";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -118,6 +119,12 @@ const DataManagementWrapper = (props) => {
       ),
     },
   ];
+
+  useEffect(() => {
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup",
+    });
+  }, []);
 
   useEffect(() => {
     const path = location.pathname;

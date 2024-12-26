@@ -133,7 +133,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "backup-restore",
+      roomParts: "restore",
     });
 
     SocketHelper.emit(SocketCommands.Subscribe, {

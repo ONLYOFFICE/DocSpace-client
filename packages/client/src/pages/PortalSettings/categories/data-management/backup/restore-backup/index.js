@@ -39,6 +39,7 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -92,7 +93,7 @@ const RestoreBackup = (props) => {
 
   const startRestoreBackup = useCallback(async () => {
     try {
-      getProgress(true);
+      getProgress();
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
@@ -113,6 +114,11 @@ const RestoreBackup = (props) => {
   useEffect(() => {
     setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup",
+    });
+
     return () => {
       resetDownloadingProgress();
       setRestoreResource(null);

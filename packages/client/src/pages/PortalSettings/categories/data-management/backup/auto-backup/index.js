@@ -116,7 +116,7 @@ class AutomaticBackup extends React.PureComponent {
     } = this.props;
 
     try {
-      getProgress(true);
+      getProgress();
 
       const [
         ///thirdPartyList,

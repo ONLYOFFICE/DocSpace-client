@@ -40,7 +40,8 @@ import { addLog } from ".";
  * @readonly
  */
 export const enum SocketEvents {
-  RestoreBackup = "restore-backup",
+  RestoreBackup = "restore",
+  Backup = "backup",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
   ModifyRoom = "s:modify-room",

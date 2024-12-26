@@ -115,11 +115,24 @@ class BackupStore {
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
 
-    SocketHelper.on(SocketEvents.BackupProgress, (progress) => {
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const { progress, isCompleted, link, error } = opt;
       this.downloadingProgress = progress;
+      if (this.downloadingProgressError) this.downloadingProgressError = "";
 
-      if (progress === 100) {
-        this.getProgress();
+      if (isCompleted) {
+        if (error) {
+          this.downloadingProgress = 100;
+          toastr.error(error);
+
+          return;
+        }
+
+        if (link && link.slice(0, 1) === "/") {
+          this.temporaryLink = link;
+        }
+
+        toastr.success(i18n.t("Settings:BackupCreatedSuccess"));
       }
     });
   }
@@ -501,7 +514,7 @@ class BackupStore {
     }
   };
 
-  getProgress = async (isInitRequest = false) => {
+  getProgress = async () => {
     try {
       const response = await getBackupProgress();
 
@@ -511,25 +524,13 @@ class BackupStore {
         if (!error) {
           this.downloadingProgress = progress;
 
-          if (progress === 100 && !isInitRequest) {
-            toastr.success(i18n.t("Settings:BackupCreatedSuccess"));
-          }
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
-
           if (this.downloadingProgressError) this.downloadingProgressError = "";
         } else {
           this.downloadingProgress = 100;
-
-          if (isInitRequest) {
-            this.downloadingProgressError = error;
-            return;
-          }
-
-          if (this.downloadingProgressError) this.downloadingProgressError = "";
-
-          toastr.error(error);
+          this.downloadingProgressError = error;
         }
       }
     } catch (e) {

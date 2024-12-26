@@ -38,12 +38,12 @@ import {
   StyledLoader,
   StyledPlusBadge,
   DescriptiveContainer,
-} from "../ComboBox.styled";
+} from "../Combobox.styled";
 
 import { Text } from "../../text";
 import { Badge } from "../../badge";
 
-import ComboButtonTheme from "../ComboBox.theme";
+import ComboButtonTheme from "../Combobox.theme";
 
 import { ComboBoxSize } from "../ComboBox.enums";
 import type { TComboButtonProps } from "../ComboBox.types";
@@ -193,8 +193,8 @@ const ComboButton: React.FC<TComboButtonProps> = ({
         data-test-id="combo-button-arrow"
         aria-hidden="true"
       >
-        {displayArrow &&
-          (comboIcon ? (
+        {displayArrow ? (
+          comboIcon ? (
             <ReactSVG
               src={comboIcon}
               className="combo-buttons_expander-icon"

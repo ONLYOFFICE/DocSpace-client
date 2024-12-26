@@ -39,7 +39,7 @@ import {
 import { Loader } from "../loader";
 
 import { ComboBoxSize } from "./ComboBox.enums";
-import { TCombobox } from "./ComboBox.types";
+import type { TCombobox } from "./ComboBox.types";
 
 // for ComboButton with plusBadge (StyledGroupsCombobox)
 const alternativeComboButtonStyles = css<{

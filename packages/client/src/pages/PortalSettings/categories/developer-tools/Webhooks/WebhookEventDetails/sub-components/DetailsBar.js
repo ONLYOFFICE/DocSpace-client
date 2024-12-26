@@ -29,13 +29,13 @@ import moment from "moment-timezone";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import StatusBadge from "../../sub-components/StatusBadge";
 
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
 
 import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import StatusBadge from "../../sub-components/StatusBadge";
 
 const BarWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
@@ -84,14 +84,10 @@ const DetailsBar = ({ eventDetails }) => {
   const { t, i18n } = useTranslation("Webhooks");
 
   const formatDate = (date) => {
-    return (
-      moment(date)
-        .locale(i18n.language)
-        .tz(window.timezone)
-        .format("MMM D, YYYY, h:mm:ss A") +
-      " " +
-      t("Common:UTC")
-    );
+    return `${moment(date)
+      .locale(i18n.language)
+      .tz(window.timezone)
+      .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
   };
 
   const formattedDelivery = formatDate(eventDetails.delivery);

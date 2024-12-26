@@ -32,19 +32,17 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
-import UserFields from "../sub-components/user-fields";
-import {
-  size,
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
+import { size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
+import UserFields from "../sub-components/user-fields";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -74,13 +72,19 @@ const TrustedMail = (props) => {
   const location = useLocation();
 
   const regexp =
-    /^[a-zA-Z0-9][a-zA-Z0-9-]{0,255}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; //check domain name valid
+    /^[a-zA-Z0-9][a-zA-Z0-9-]{0,255}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; // check domain name valid
 
   const [type, setType] = useState("0");
   const [domains, setDomains] = useState([]);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("trusted-mail") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
@@ -131,8 +135,8 @@ const TrustedMail = (props) => {
     if (!isLoading) return;
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
     const newSettings = {
-      type: type,
-      domains: domains,
+      type,
+      domains,
     };
     saveToSessionStorage("currentTrustedMailSettings", newSettings);
 
@@ -142,12 +146,6 @@ const TrustedMail = (props) => {
       setShowReminder(true);
     }
   }, [type, domains]);
-
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("trusted-mail") &&
-      navigate("/portal-settings/security/access-portal");
-  };
 
   const onSelectDomainType = (e) => {
     if (type !== e.target.value) {
@@ -160,13 +158,13 @@ const TrustedMail = (props) => {
   };
 
   const onChangeInput = (e, index) => {
-    let newInputs = Array.from(domains);
+    const newInputs = Array.from(domains);
     newInputs[index] = e.target.value;
     setDomains(newInputs);
   };
 
   const onDeleteInput = (index) => {
-    let newInputs = Array.from(domains);
+    const newInputs = Array.from(domains);
     newInputs.splice(index, 1);
     setDomains(newInputs);
   };
@@ -184,17 +182,17 @@ const TrustedMail = (props) => {
     try {
       const data = {
         type: Number(type),
-        domains: domains,
+        domains,
         inviteUsersAsVisitors: true,
       };
       await setMailDomainSettings(data);
       saveToSessionStorage("currentTrustedMailSettings", {
-        type: type,
-        domains: domains,
+        type,
+        domains,
       });
       saveToSessionStorage("defaultTrustedMailSettings", {
-        type: type,
-        domains: domains,
+        type,
+        domains,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -285,7 +283,7 @@ const TrustedMail = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="trusted-mail-save"

@@ -55,10 +55,6 @@ const StyledFooterContent = styled.div`
 `;
 
 class BackupCodesDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getNewBackupCodes = async () => {
     const { setBackupCodes } = this.props;
     try {
@@ -86,7 +82,7 @@ class BackupCodesDialogComponent extends React.Component {
   };
 
   render() {
-    //console.log("Render BackupCodesDialog");
+    // console.log("Render BackupCodesDialog");
     const { t, tReady, visible, onClose, backupCodes, backupCodesCount } =
       this.props;
 
@@ -112,9 +108,9 @@ class BackupCodesDialogComponent extends React.Component {
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 
-            <Text className="backup-codes-codes" isBold={true}>
+            <Text className="backup-codes-codes" isBold>
               {backupCodes.length > 0 &&
-                backupCodes.map((item) => {
+                backupCodes.forEach((item) => {
                   if (!item.isUsed) {
                     return (
                       <strong key={item.code} dir="auto">
@@ -139,7 +135,7 @@ class BackupCodesDialogComponent extends React.Component {
               key="PrintBtn"
               label={t("Common:CancelButton")}
               size="normal"
-              onClick={this.props.onClose}
+              onClick={onClose}
             />
             {isDesktop() && (
               <div className="backup-codes-print-link-wrapper">
@@ -147,7 +143,7 @@ class BackupCodesDialogComponent extends React.Component {
                   type="action"
                   fontSize="13px"
                   fontWeight={600}
-                  isHovered={true}
+                  isHovered
                   onClick={this.printPage}
                 >
                   {t("PrintButton")}

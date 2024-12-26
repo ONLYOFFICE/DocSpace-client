@@ -33,8 +33,8 @@ import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
 import ImageWatermark from "./ImageWatermark";
 
-const imageWatermark = "image",
-  viewerInfoWatermark = "viewerInfo";
+const imageWatermark = "image";
+const viewerInfoWatermark = "viewerInfo";
 
 const options = (t) => [
   {

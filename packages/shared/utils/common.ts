@@ -86,6 +86,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+import { hasOwnProperty } from "./object";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -113,9 +114,9 @@ export function createPasswordHash(
     !hashSettings ||
     typeof password !== "string" ||
     typeof hashSettings !== "object" ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "salt") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "size") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "iterations") ||
+    !hasOwnProperty(hashSettings, "salt") ||
+    !hasOwnProperty(hashSettings, "size") ||
+    !hasOwnProperty(hashSettings, "iterations") ||
     typeof hashSettings.size !== "number" ||
     typeof hashSettings.iterations !== "number" ||
     typeof hashSettings.salt !== "string"

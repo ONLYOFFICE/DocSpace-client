@@ -62,7 +62,6 @@ const FilesRowContainer = ({
   filesList,
   viewAs,
   setViewAs,
-  infoPanelVisible,
   filterTotal,
   fetchMoreFiles,
   hasMoreFiles,

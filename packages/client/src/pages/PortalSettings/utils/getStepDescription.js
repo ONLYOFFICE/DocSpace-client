@@ -73,7 +73,6 @@ export const getGoogleStepDescription = (
         organizationName: t("Common:OrganizationName"),
       });
     default:
-      return;
   }
 };
 
@@ -128,6 +127,5 @@ export const getWorkspaceStepDescription = (
         organizationName: t("Common:OrganizationName"),
       });
     default:
-      return;
   }
 };

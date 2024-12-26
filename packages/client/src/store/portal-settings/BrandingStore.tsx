@@ -39,10 +39,15 @@ import { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.typ
 
 class BrandingStore {
   isLoadedAdditionalResources = false;
+
   isLoadedCompanyInfoSettingsData = false;
+
   logoUrls: ILogo[] = [];
+
   logoText = "";
+
   defaultLogoText = "";
+
   isDefaultWhiteLabel = false;
 
   settingsStore: SettingsStore = {} as SettingsStore;

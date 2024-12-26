@@ -116,7 +116,7 @@ const MobileCategoryWrapper = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={badgeLabel}
-            isPaidBadge={true}
+            isPaidBadge
             className="paid-badge"
             fontWeight="700"
           />

@@ -41,12 +41,11 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
-import BonusItem from "./BonusItem";
-import AccountsItem from "./AccountsItem";
-
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import AccountsItem from "./AccountsItem";
+import BonusItem from "./BonusItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -133,12 +132,12 @@ const Item = ({
   }, []);
 
   const onClickAction = React.useCallback(
-    (e, folderId) => {
+    (e, selectedFolderId) => {
       setBufferSelection(null);
 
       onClick?.(
         e,
-        folderId,
+        selectedFolderId,
         item.title,
         item.rootFolderType,
         item.security.Create,
@@ -163,7 +162,7 @@ const Item = ({
       dragging={dragging && isDragging}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className={"document-catalog"}
+      className="document-catalog"
     >
       <ArticleItem
         key={item.id}
@@ -215,8 +214,7 @@ const Items = ({
   isVisitor,
   isCollaborator,
   isAdmin,
-  myId,
-  commonId,
+
   currentId,
   draggableItems,
   setBufferSelection,
@@ -324,8 +322,8 @@ const Items = ({
   };
 
   const getItems = React.useCallback(
-    (data) => {
-      const items = data.map((item, index) => {
+    (elm) => {
+      const items = elm.map((item, index) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -337,7 +335,7 @@ const Items = ({
 
         return (
           <Item
-            key={`${item.id}_${index}`}
+            key={item.id}
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}
@@ -347,7 +345,7 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === data.length - 1}
+            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -415,7 +413,6 @@ Items.propTypes = {
   data: PropTypes.array,
   showText: PropTypes.bool,
   onClick: PropTypes.func,
-  onClickBadge: PropTypes.func,
   onHide: PropTypes.func,
 };
 

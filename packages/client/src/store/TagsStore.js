@@ -38,10 +38,6 @@ class TagsStore {
     this.tags = tags;
   };
 
-  createTag = (name) => {
-    return api.rooms.createTag(name);
-  };
-
   fetchTags = () => {
     const request = () =>
       api.rooms.getTags().then((res) => {

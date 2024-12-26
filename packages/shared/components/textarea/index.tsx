@@ -32,12 +32,13 @@ import TextareaAutosize from "react-autosize-textarea";
 import CopyIconUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { isJSON } from "../../utils/json";
 
 import { toastr } from "../toast";
 
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
-import { isJSON, jsonify } from "./Textarea.utils";
+import { jsonify } from "./Textarea.utils";
 import { TextareaProps } from "./Textarea.types";
 import styles from "./Textarea.module.scss";
 

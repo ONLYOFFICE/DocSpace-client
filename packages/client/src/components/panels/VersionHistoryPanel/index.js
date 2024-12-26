@@ -28,21 +28,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { withTranslation } from "react-i18next";
-import { SectionBodyContent } from "../../../pages/VersionHistory/Section/";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { SectionBodyContent } from "../../../pages/VersionHistory/Section";
 
 class PureVersionHistoryPanel extends React.Component {
-  onClose = () => {
-    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
-    setIsVerHistoryPanel(false);
-    setInfoPanelIsMobileHidden(false);
-  };
-
   componentDidMount() {
     document.addEventListener("keyup", this.onKeyPress);
   }
@@ -50,6 +44,12 @@ class PureVersionHistoryPanel extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("keyup", this.onKeyPress);
   }
+
+  onClose = () => {
+    const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
+    setIsVerHistoryPanel(false);
+    setInfoPanelIsMobileHidden(false);
+  };
 
   onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && this.onClose();
 

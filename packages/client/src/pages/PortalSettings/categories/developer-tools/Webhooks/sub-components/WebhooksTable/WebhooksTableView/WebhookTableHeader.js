@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
@@ -35,21 +35,18 @@ const TABLE_COLUMNS = `webhooksConfigColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (let col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
+      return { ...(col || {}), enable: !!column };
+    });
 
-      columns.push(col);
-    }
     return columns;
-  } else {
-    return defaultColumns;
   }
+  return defaultColumns;
 };
 
 const WebhookTableHeader = (props) => {
@@ -62,6 +59,23 @@ const WebhookTableHeader = (props) => {
     setHideColumns,
   } = props;
   const { t } = useTranslation(["Webhooks", "Common"]);
+
+  const [columns, setColumns] = useState([]);
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
+  }
 
   const defaultColumns = [
     {
@@ -90,22 +104,9 @@ const WebhookTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
-  function onColumnChange(key, e) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns, userId));
+  }, [userId, defaultColumns]);
 
   return (
     <TableHeader

@@ -27,8 +27,8 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import routes from "./routes";
 import Error404 from "@docspace/shared/components/errors/Error404";
+import routes from "./routes";
 
 import Root from "./Shell";
 

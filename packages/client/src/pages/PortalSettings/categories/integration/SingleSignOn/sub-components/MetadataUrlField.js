@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";

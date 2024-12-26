@@ -32,12 +32,11 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
+import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
-
-import { useParams, useNavigate } from "react-router-dom";
-
-import { useTranslation } from "react-i18next";
 
 const DialogBodyWrapper = styled.div`
   margin-top: 16px;
@@ -80,7 +79,6 @@ const FilterDialog = (props) => {
     visible,
     closeModal,
     applyFilters,
-    formatFilters,
     setHistoryFilters,
     historyFilters,
   } = props;
@@ -164,7 +162,7 @@ const FilterDialog = (props) => {
               className="apply-button"
               label={t("Common:ApplyButton")}
               size="normal"
-              primary={true}
+              primary
               onClick={handleApplyFilters}
               isDisabled={filters.deliveryTo <= filters.deliveryFrom}
             />
@@ -182,7 +180,7 @@ const FilterDialog = (props) => {
 };
 
 export default inject(({ webhooksStore }) => {
-  const { formatFilters, setHistoryFilters, historyFilters } = webhooksStore;
+  const { setHistoryFilters, historyFilters } = webhooksStore;
 
-  return { formatFilters, setHistoryFilters, historyFilters };
+  return { setHistoryFilters, historyFilters };
 })(observer(FilterDialog));

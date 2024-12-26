@@ -44,13 +44,11 @@ class SelectelStorage extends React.Component {
     const { t, selectedStorage } = this.props;
 
     return (
-      <>
-        <SelectelSettings
-          t={t}
-          isNeedFilePath
-          selectedStorage={selectedStorage}
-        />
-      </>
+      <SelectelSettings
+        t={t}
+        isNeedFilePath
+        selectedStorage={selectedStorage}
+      />
     );
   }
 }

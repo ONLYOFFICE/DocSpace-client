@@ -31,7 +31,7 @@ import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
+import pkg from "PACKAGE_FILE";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
@@ -293,7 +293,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     const url = combineUrl(
       window.location.origin,
       window.ClientConfig?.proxy?.url,
-      config.homepage,
+      pkg.homepage,
       "/portal-settings/developer-tools",
     );
 

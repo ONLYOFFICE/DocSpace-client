@@ -55,6 +55,10 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "react/jsx-filename-extension": [
+      1,
+      { extensions: [".js", ".ts", ".jsx", ".tsx"] },
+    ],
     "lines-between-class-members": [
       "error",
       "always",
@@ -91,6 +95,7 @@ module.exports = {
     "no-useless-escape": "off",
     "jsx-a11y/mouse-events-have-key-events": "off",
     "no-param-reassign": "off",
+    "@typescript-eslint/no-duplicate-enum-values": "off",
   },
   ignorePatterns: [
     "./tsconfig.json",

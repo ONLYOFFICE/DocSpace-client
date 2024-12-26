@@ -27,10 +27,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-//import { registerSW } from "@docspace/shared/sw/helper";
+// import { registerSW } from "@docspace/shared/sw/helper";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 if (root) root.render(<App />);
 
-//registerSW();
+// registerSW();

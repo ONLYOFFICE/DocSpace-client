@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { Hint } from "../styled-components";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
@@ -39,6 +38,7 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
+import { Hint } from "../styled-components";
 
 const SecretKeyWrapper = styled.div`
   .link {
@@ -150,7 +150,7 @@ const SecretKeyInput = (props) => {
             id="reset-key-link"
             type="action"
             fontWeight={600}
-            isHovered={true}
+            isHovered
             onClick={hideReset}
             className="link"
           >
@@ -160,7 +160,7 @@ const SecretKeyInput = (props) => {
       )}
       <div hidden={isResetVisible}>
         <PasswordInput
-          id={additionalId + "-secret-key-input"}
+          id={`${additionalId}-secret-key-input`}
           onChange={handleOnChange}
           inputValue={value}
           inputName={name}
@@ -168,9 +168,9 @@ const SecretKeyInput = (props) => {
           onValidateInput={handleInputValidation}
           ref={secretKeyInputRef}
           hasError={!isPasswordValid}
-          isDisableTooltip={true}
+          isDisableTooltip
           inputType="password"
-          isFullWidth={true}
+          isFullWidth
           passwordSettings={passwordSettings}
           key={passwordInputKey}
           isDisabled={isDisabled}
@@ -179,7 +179,7 @@ const SecretKeyInput = (props) => {
           id="generate-link"
           type="action"
           fontWeight={600}
-          isHovered={true}
+          isHovered
           onClick={generatePassword}
           className="link dotted"
         >

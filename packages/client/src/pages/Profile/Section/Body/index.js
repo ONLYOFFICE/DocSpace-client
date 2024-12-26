@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
@@ -34,16 +33,16 @@ import { useNavigate } from "react-router-dom";
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";
 
+import { tablet } from "@docspace/shared/utils";
+
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
 import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
 import AuthorizedApps from "./sub-components/authorized-apps";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -102,7 +101,7 @@ const SectionBodyContent = (props) => {
   });
 
   const getCurrentTabId = () => {
-    const path = location.pathname;
+    const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
@@ -110,7 +109,7 @@ const SectionBodyContent = (props) => {
   const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
-    const arrayPaths = location.pathname.split("/");
+    const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });

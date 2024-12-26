@@ -20,7 +20,6 @@ module.exports = {
     "no-plusplus": "off",
     "no-bitwise": "off",
     eqeqeq: "off",
-    "react-hooks/rules-of-hooks": "off",
 
     "@typescript-eslint/no-explicit-any": "off",
     "react/forbid-prop-types": "off",

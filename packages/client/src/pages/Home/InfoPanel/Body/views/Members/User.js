@@ -64,10 +64,12 @@ const User = ({
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
 }) => {
+  const theme = useTheme();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
-
-  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -75,8 +77,6 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,

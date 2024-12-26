@@ -65,9 +65,9 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
-  if (!isTile) return badge;
-
   const [isHovered, setIsHovered] = useState(false);
+
+  if (!isTile) return badge;
 
   const onMouseEnter = () => {
     setIsHovered(true);

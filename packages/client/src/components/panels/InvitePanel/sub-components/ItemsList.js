@@ -63,11 +63,11 @@ const Row = memo(({ data, index, style }) => {
     standalone,
   } = data;
 
+  const theme = useTheme();
+
   if (inviteItems === undefined) return;
 
   const item = inviteItems[index];
-
-  const theme = useTheme();
 
   return (
     <Item

@@ -69,7 +69,7 @@ class PeopleTableHeader extends React.Component<
 
     const nameColumn: TableHeaderColumn = {
       key: "Name",
-      title: t!("Common:Name"),
+      title: t!("Common:Label"),
       resizable: true,
       enable: true,
       default: true,

@@ -32,18 +32,21 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
-import { StyledComboBox } from "./Combobox.styled";
-import { ComboBoxSize } from "./Combobox.enums";
-import type { ComboboxProps, TOption } from "./Combobox.types";
+import { StyledComboBox } from "./ComboBox.styled";
+import { ComboBoxSize } from "./ComboBox.enums";
+import type { TComboboxProps, TOption } from "./ComboBox.types";
 
-const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
+const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
   const needUpdate = equal(prevProps, nextProps);
 
   return needUpdate;
 };
 
-const ComboBoxPure = (props: ComboboxProps) => {
-  const { selectedOption: selectedOptionProps } = props;
+const ComboBoxPure: React.FC<TComboboxProps> = ({
+  selectedOption: selectedOptionProps,
+  setIsOpenItemAccess,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedOption, setSelectedOption] =
     React.useState(selectedOptionProps);
@@ -59,8 +62,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
   // };
 
   const handleClickOutside = (e: Event) => {
-    const { withBackdrop, onBackdropClick, setIsOpenItemAccess, onToggle } =
-      props;
+    const { withBackdrop, onBackdropClick, onToggle } = props;
 
     const target = e.target as HTMLElement;
 
@@ -69,21 +71,20 @@ const ComboBoxPure = (props: ComboboxProps) => {
     if (onToggle && !(withBackdrop && onBackdropClick)) return;
 
     setIsOpenItemAccess?.(!isOpen);
-    setIsOpen((v) => {
-      return !v;
-    });
+    setIsOpen(false);
 
     if (withBackdrop) onBackdropClick?.(e);
   };
 
-  const comboBoxClick = (e: React.MouseEvent) => {
+  const comboBoxClick: React.MouseEventHandler<HTMLDivElement | Element> = (
+    e,
+  ) => {
     const {
       disableIconClick = true,
       disableItemClick,
       isDisabled,
       onToggle,
       isLoading,
-      setIsOpenItemAccess,
       disableItemClickFirstLevel = false,
     } = props;
 
@@ -104,7 +105,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     )
       return;
 
-    onToggle?.(e, !isOpen);
+    onToggle?.(e as React.MouseEvent<HTMLDivElement>, !isOpen);
     setIsOpenItemAccess?.(!isOpen);
 
     setIsOpen((v) => {
@@ -112,31 +113,88 @@ const ComboBoxPure = (props: ComboboxProps) => {
     });
   };
 
-  const optionClick = (
-    option: TOption,
-    event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
-  ) => {
-    if (option.isSeparator) return;
+  const { onSelect } = props;
 
-    const { onSelect, setIsOpenItemAccess } = props;
+  const optionClick = React.useCallback(
+    (
+      option: TOption,
+      event:
+        | React.ChangeEvent<HTMLInputElement>
+        | React.MouseEvent
+        | KeyboardEvent,
+    ) => {
+      if (option.isSeparator) return;
 
-    setSelectedOption({ ...option });
+      setIsOpen((v) => {
+        setIsOpenItemAccess?.(!v);
+        return !v;
+      });
 
-    setIsOpen((v) => {
-      setIsOpenItemAccess?.(!v);
-      return !v;
-    });
+      onSelect?.(option);
 
-    onSelect?.(option);
+      event?.stopPropagation();
+    },
+    [onSelect, setIsOpenItemAccess],
+  );
 
-    event?.stopPropagation();
-  };
+  const handleKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      const options = document.querySelectorAll(
+        '[data-testid="drop-down-item"]',
+      );
+      const currentFocusedIndex = Array.from(options).findIndex(
+        (opt) => opt.getAttribute("data-focused") === "true",
+      );
+
+      switch (e.key) {
+        case "ArrowDown": {
+          e.preventDefault();
+          const nextIndex =
+            currentFocusedIndex === -1
+              ? 0
+              : (currentFocusedIndex + 1) % options.length;
+          options.forEach((opt, i) => {
+            opt.setAttribute(
+              "data-focused",
+              i === nextIndex ? "true" : "false",
+            );
+          });
+          break;
+        }
+        case "Enter": {
+          e.preventDefault();
+          const focusedOption = Array.from(options).find(
+            (opt) => opt.getAttribute("data-focused") === "true",
+          );
+          if (focusedOption) {
+            const optionIndex = Array.from(options).indexOf(focusedOption);
+            const option = props.options?.[optionIndex];
+            if (option && !option.disabled) {
+              optionClick(option, e);
+            }
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    },
+    [isOpen, props.options, optionClick],
+  );
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown, isOpen, props.options]);
 
   const {
     dropDownMaxHeight,
     directionX,
     directionY,
-    scaled = true,
     size = ComboBoxSize.base,
     type,
     options,
@@ -146,7 +204,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
     noBorder,
     scaledOptions,
     displayType = "default",
-
     textOverflow,
     showDisabledItems,
     comboIcon,
@@ -172,7 +229,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
     forceCloseClickOutside,
     withoutBackground,
     opened,
-    setIsOpenItemAccess,
     dropDownId,
     title,
     className,
@@ -183,9 +239,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
     displayArrow,
     topSpace,
     usePortalBackdrop,
+    tabIndex,
+    onClickSelectedItem,
   } = props;
-
-  const { tabIndex, onClickSelectedItem } = props;
 
   React.useEffect(() => {
     setIsOpen(opened || false);
@@ -241,9 +297,10 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
   const disableMobileView = optionsCount < 4 || hideMobileView;
 
-  const dropDownBody =
-    (advancedOptions as React.ReactNode) ||
-    (options?.map((option: TOption) => {
+  const renderOptions = () => {
+    const dropDownBody = options?.map((option) => {
+      const { key, ...optionProps } = option;
+
       const disabled =
         option.disabled ||
         (!displaySelectedOption && option?.label === selectedOption?.label);
@@ -258,10 +315,15 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
       return (
         <DropDownItem
-          {...option}
+          key={key}
+          {...optionProps}
+          data-testid="drop-down-item"
+          data-focused={isOpen && option === selectedOption}
+          data-is-separator={option.isSeparator || undefined}
+          data-type={option.type || undefined}
+          aria-disabled={option.disabled || undefined}
           className={`drop-down-item ${"className" in option ? option.className : ""}`}
           textOverflow={textOverflow}
-          key={option.key}
           disabled={disabled}
           onClick={(e) => optionClick(option, e)}
           onClickSelectedItem={() => onClickSelectedItem?.(option)}
@@ -272,12 +334,64 @@ const ComboBoxPure = (props: ComboboxProps) => {
           style={optionStyle}
         />
       );
-    }) as React.ReactNode);
+    });
+
+    return advancedOptions ? (
+      <>
+        {dropDownBody}
+        {advancedOptions}
+      </>
+    ) : (
+      dropDownBody
+    );
+  };
+
+  const renderDropDown = () => {
+    const dropDownProps = {
+      isOpen,
+      directionX,
+      directionY,
+      manualWidth,
+      manualX,
+      manualY: manualY?.toString(),
+      fixedDirection,
+      withBlur,
+      offsetLeft,
+      withBackdrop,
+      isAside,
+      withBackground,
+      advancedOptionsCount,
+      isMobileView,
+      withoutPadding,
+      isNoFixedHeightOptions,
+      forceCloseClickOutside,
+      withoutBackground,
+      dropDownId,
+      eventTypes: ["mousedown"],
+      topSpace,
+      usePortalBackdrop,
+      style,
+      showDisabledItems,
+      isDefaultMode: true,
+      className,
+      clickOutsideAction: handleClickOutside,
+    };
+
+    return (
+      <DropDown
+        {...dropDownProps}
+        {...dropDownMaxHeightProp}
+        {...dropDownManualWidthProp}
+      >
+        {renderOptions()}
+        {advancedOptions}
+      </DropDown>
+    );
+  };
 
   return (
     <StyledComboBox
       ref={ref}
-      scaled={scaled}
       size={size}
       onClick={comboBoxClick}
       isOpen={isOpen}
@@ -286,7 +400,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
       data-testid="combobox"
       title={title}
       className={className}
-      // {...rest}
+      data-scaled={scaledOptions || undefined}
+      style={style}
     >
       <ComboButton
         noBorder={noBorder}
@@ -299,7 +414,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
         innerContainerClassName="optionalBlock"
         isOpen={isOpen}
         size={size}
-        scaled={scaled}
         comboIcon={comboIcon}
         modernView={modernView}
         fillIcon={fillIcon}
@@ -310,39 +424,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         displayArrow={displayArrow}
       />
 
-      {displayType !== "toggle" && (
-        <DropDown
-          id={dropDownId}
-          className="dropdown-container not-selectable"
-          directionX={directionX}
-          directionY={directionY}
-          manualY={manualY}
-          manualX={manualX}
-          open={isOpen}
-          forwardedRef={ref}
-          clickOutsideAction={handleClickOutside}
-          style={style}
-          {...dropDownMaxHeightProp}
-          {...dropDownManualWidthProp}
-          showDisabledItems={showDisabledItems}
-          isDefaultMode={isDefaultMode}
-          fixedDirection={fixedDirection}
-          withBlur={withBlur}
-          offsetLeft={offsetLeft}
-          withBackdrop={withBackdrop}
-          isAside={isAside}
-          withBackground={withBackground}
-          isMobileView={isMobileView && !disableMobileView}
-          isNoFixedHeightOptions={isNoFixedHeightOptions}
-          forceCloseClickOutside={forceCloseClickOutside}
-          withoutBackground={withoutBackground}
-          eventTypes={["mousedown"]}
-          topSpace={topSpace}
-          usePortalBackdrop={usePortalBackdrop}
-        >
-          {dropDownBody}
-        </DropDown>
-      )}
+      {displayType !== "toggle" && renderDropDown()}
     </StyledComboBox>
   );
 };

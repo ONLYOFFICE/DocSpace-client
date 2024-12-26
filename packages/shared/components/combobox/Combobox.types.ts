@@ -28,188 +28,258 @@ import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types"
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
-import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
-export type TOption =
-  | {
-      key: string | number;
-      icon?: string;
-      label: string;
-      color?: string;
-      backgroundColor?: string;
-      border?: string;
-      default?: boolean;
-      disabled?: boolean;
-      description?: string;
-      quota?: "free" | "paid";
-      isSeparator?: boolean;
-      isSelected?: boolean;
-      internal?: boolean;
-      access?: ShareAccessRights;
-      className?: string;
-      title?: string;
-      action?: unknown;
-      onClick?: (opt: TContextMenuValueTypeOnClick) => void;
-    }
-  | {
-      key: string | number;
-      icon?: undefined;
-      label?: undefined;
-      color?: undefined;
-      backgroundColor?: undefined;
-      border?: undefined;
-      default?: undefined;
-      disabled?: undefined;
-      description?: undefined;
-      quota?: undefined;
-      isSeparator: true;
-      isSelected?: undefined;
-      internal?: undefined;
-      access?: ShareAccessRights;
-      className?: string;
-      title?: string;
-      action?: unknown;
-      onClick?: (opt: TContextMenuValueTypeOnClick) => void;
-    };
+export type TBaseOption = {
+  key: string | number;
+  icon?: string;
+  label?: string;
+  color?: string;
+  backgroundColor?: string;
+  border?: string;
+  default?: boolean;
+  disabled?: boolean;
+  type?: string;
+  description?: string;
+  quota?: "free" | "paid";
+  isSelected?: boolean;
+  internal?: boolean;
+  access?: ShareAccessRights;
+  className?: string;
+  title?: string;
+  action?: unknown;
+  onClick?: (opt: TContextMenuValueTypeOnClick) => void;
+};
 
-export interface ComboboxProps {
+export type TRegularOption = TBaseOption & {
+  label: string;
+  isSeparator?: boolean;
+};
+
+export type TSeparatorOption = TBaseOption & {
+  isSeparator: true;
+};
+
+export type TOption = TRegularOption | TSeparatorOption;
+
+export type TComboboxProps = {
   /** Displays advanced options */
   advancedOptions?: React.ReactNode;
+  /** Number of advanced options */
+  advancedOptionsCount?: number;
   /** Children elements */
   children?: React.ReactNode;
   /** Accepts class */
   className?: string;
+  /** Icon for the combo button */
+  comboIcon?: string;
+  /** Disable icon click */
+  disableIconClick?: boolean;
+  /** Disable item click */
+  disableItemClick?: boolean;
+  /** Disable first level item click */
+  disableItemClickFirstLevel?: boolean;
   /** X direction position */
   directionX?: TDirectionX;
   /** Y direction position */
   directionY?: TDirectionY;
   /** Component Display Type */
   displayType?: ComboBoxDisplayType;
+  /** Display selected option */
+  displaySelectedOption?: boolean;
+  /** Display arrow */
+  displayArrow?: boolean;
   /** Height of Dropdown */
   dropDownMaxHeight?: number;
-  /** Displays disabled items when displayType !== toggle */
+  /** Shows disabled items when displayType !== toggle */
   showDisabledItems?: boolean;
+  /** Fill icon */
+  fillIcon?: boolean;
+  /** Fixed direction */
+  fixedDirection?: boolean;
+  /** Value to display in the plus badge */
+  plusBadgeValue?: number;
+  /** Force close on click outside */
+  forceCloseClickOutside?: boolean;
+  /** Hide mobile view */
+  hideMobileView?: boolean;
   /** Accepts id */
   id?: string;
   /** Accepts id for dropdown container */
   dropDownId?: string;
-  /** Indicates that component contains a backdrop */
-  withBackdrop?: boolean;
-  /** Indicates that component is disabled */
+  /** Is aside */
+  isAside?: boolean;
+  /** Is disabled */
   isDisabled?: boolean;
-  /** Indicates that component is displayed without borders */
+  /** Is loading */
+  isLoading?: boolean;
+  /** Is default mode */
+  isDefaultMode?: boolean;
+  /** Is mobile view */
+  isMobileView?: boolean;
+  /** Is no fixed height options */
+  isNoFixedHeightOptions?: boolean;
+  /** Manual width */
+  manualWidth?: string;
+  /** Manual X position */
+  manualX?: string;
+  /** Manual Y position */
+  manualY?: number;
+  /** Modern view */
+  modernView?: boolean;
+  /** No border */
   noBorder?: boolean;
-  /** Is triggered whenever ComboBox is a selected option */
-  onSelect: (option: TOption) => void;
-  /** Sets the component open */
+  /** Offset left */
+  offsetLeft?: number;
+  /** Opened state */
   opened?: boolean;
-  /** Combo box options */
+  /** List of options */
   options: TOption[];
-  /** Indicates that component is scaled by parent */
-  scaled?: boolean;
-  /** Indicates that component`s options are scaled by ComboButton */
-  scaledOptions?: boolean;
+  /** Option style */
+  optionStyle?: React.CSSProperties;
   /** Selected option */
   selectedOption: TOption;
-  /** Sets the component's width from the default settings */
-  size?: ComboBoxSize;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** The event is triggered by clicking on a component when `displayType: toggle` */
-  onToggle?: (e: Event | React.MouseEvent, isOpen: boolean) => void;
-  /** Accepts css text-overflow */
-  textOverflow?: boolean;
-  /** Disables clicking on the icon */
-  disableIconClick?: boolean;
-  /** Sets the operation mode of the component. The default option is set to portal mode */
-  isDefaultMode?: boolean;
-  /** Y offset */
-  offsetDropDownY?: string;
-  /** Sets an icon that is displayed in the combo button */
-  comboIcon?: string;
-  /** Sets the precise distance from the parent */
-  manualY?: string;
-  /** Sets the precise distance from the parent */
-  manualX?: string;
-  /** Dropdown manual width */
-  manualWidth?: string;
-  /** Displays the selected option */
-  displaySelectedOption?: boolean;
-  /** Disables position checking. Used for explicit direction setting */
-  fixedDirection?: boolean;
-  /** Disables clicking on the item */
-  disableItemClick?: boolean;
-  /** Indicates that component will fill selected item icon */
-  fillIcon?: boolean;
-  /** Sets the left offset for the dropdown */
-  offsetLeft?: number;
-  /** Sets the combo-box to be displayed in modern view */
-  modernView?: boolean;
-  /** Count of advanced options  */
-  advancedOptionsCount?: number;
-  /** Accepts css tab-index style */
-  tabIndex?: number;
-  /** Disables the combo box padding */
-  withoutPadding?: boolean;
-  /** Indicates when the component is loading */
-  isLoading?: boolean;
-  /** Type ComboBox */
-  type?: TCombobox;
-  /** Accepts css style */
-  optionStyle?: React.CSSProperties;
-  setIsOpenItemAccess?: (value: boolean) => void;
-  onClickSelectedItem?: (option: TOption) => void;
-  withoutBackground?: boolean;
-  forceCloseClickOutside?: boolean;
-  /** The event is triggered by clicking outside the component when `withBackdrop === true` */
-  onBackdropClick?: (e?: Event | React.MouseEvent) => void;
-  hideMobileView?: boolean;
-  isNoFixedHeightOptions?: boolean;
-  isMobileView?: boolean;
-  withBackground?: boolean;
-  isAside?: boolean;
-  withBlur?: boolean;
-  title?: string;
-  plusBadgeValue?: number;
-  withLabel?: boolean;
-  displayArrow?: boolean;
-  topSpace?: number;
-  disableItemClickFirstLevel?: boolean;
-  usePortalBackdrop?: boolean;
-}
-
-export interface ComboButtonProps {
-  noBorder?: boolean;
-  isDisabled?: boolean;
-  selectedOption: TOption;
-  withOptions?: boolean;
-  optionsLength?: number;
-  withAdvancedOptions?: boolean;
-  innerContainer?: React.ReactNode;
-  innerContainerClassName?: string;
-  isOpen?: boolean;
-  size?: ComboBoxSize;
+  /** Scaled */
   scaled?: boolean;
-  onClick?: () => void;
-  comboIcon?: string;
-  fillIcon?: boolean;
-  modernView?: boolean;
+  /** Scaled options */
+  scaledOptions?: boolean;
+  /** Set is open item access */
+  setIsOpenItemAccess?: (isOpen: boolean) => void;
+  /** Size */
+  size?: ComboBoxSize;
+  /** Style */
+  style?: React.CSSProperties;
+  /** Tab index */
   tabIndex?: number;
-  isLoading?: boolean;
+  /** Text overflow */
+  textOverflow?: boolean;
+  /** Title */
+  title?: string;
+  /** Top space */
+  topSpace?: number;
+  /** Type */
   type?: TCombobox;
-  plusBadgeValue?: number;
-  displayArrow?: boolean;
-}
+  /** Use portal backdrop */
+  usePortalBackdrop?: boolean;
+  /** With backdrop */
+  withBackdrop?: boolean;
+  /** With background */
+  withBackground?: boolean;
+  /** With blur */
+  withBlur?: boolean;
+  /** With label */
+  withLabel?: boolean;
+  /** Without background */
+  withoutBackground?: boolean;
+  /** Without padding */
+  withoutPadding?: boolean;
+  /** On backdrop click */
+  onBackdropClick?: (e: Event) => void;
+  /** On click selected item */
+  onClickSelectedItem?: (option: TOption) => void;
+  /** On select */
+  onSelect?: (option: TOption) => void;
+  /** On toggle */
+  onToggle?: (e: React.MouseEvent<HTMLDivElement>, isOpen: boolean) => void;
+};
 
-export interface ComboButtonThemeProps extends ComboButtonProps {
-  // ref: React.LegacyRef<HTMLDivElement>;
-  $currentColorScheme?: TColorScheme;
-  interfaceDirection?: string;
-  containOptions?: number;
-  isSelected?: boolean;
-  className?: string;
+export type TComboButtonProps = {
+  /** Indicates if the button has no border */
+  noBorder?: boolean;
+  /** Indicates if the button is disabled */
+  isDisabled?: boolean;
+  /** Selected option */
+  selectedOption: TOption;
+  /** Indicates if the button has options */
+  withOptions?: boolean;
+  /** Length of options */
+  optionsLength?: number;
+  /** Indicates if the button has advanced options */
+  withAdvancedOptions?: boolean;
+  /** Inner container content */
+  innerContainer?: React.ReactNode;
+  /** Inner container class name */
+  innerContainerClassName?: string;
+  /** Indicates if the dropdown is open */
+  isOpen?: boolean;
+  /** Size of the button */
+  size?: ComboBoxSize;
+  /** Indicates if the button is scaled */
+  scaled?: boolean;
+  /** Click handler */
+  onClick?: () => void;
+  /** Icon for the combo button */
+  comboIcon?: string;
+  /** Indicates if the icon should be filled */
+  fillIcon?: boolean;
+  /** Indicates if modern view should be used */
+  modernView?: boolean;
+  /** Tab index */
+  tabIndex?: number;
+  /** Indicates if the button is loading */
+  isLoading?: boolean;
+  /** Type of the combo box */
+  type?: TCombobox;
+  /** Value for plus badge */
+  plusBadgeValue?: number;
+  /** Indicates if arrow should be displayed */
   displayArrow?: boolean;
+};
+
+export interface TComboButtonThemeProps {
+  /** Current color scheme */
+  $currentColorScheme?: TColorScheme;
+  /** Interface direction */
+  interfaceDirection?: string;
+  /** Number of options */
+  containOptions?: number;
+  /** Indicates if option is selected */
+  isSelected?: boolean;
+  /** Class name */
+  className?: string;
+  /** Indicates if arrow should be displayed */
+  displayArrow?: boolean;
+  /** Children elements */
   children?: React.ReactNode;
+  /** Indicates if dropdown is open */
+  isOpen?: boolean;
+  /** Indicates if button is disabled */
+  isDisabled?: boolean;
+  /** Indicates if button has no border */
+  noBorder?: boolean;
+  /** Indicates if button has advanced options */
+  withAdvancedOptions?: boolean;
+  /** Indicates if button is scaled */
+  scaled?: boolean;
+  /** Size of the button */
+  size?: ComboBoxSize;
+  /** Indicates if modern view should be used */
+  modernView?: boolean;
+  /** Indicates if button is loading */
+  isLoading?: boolean;
+  /** Type of the combo box */
+  type?: TCombobox;
+  /** Selected option */
+  selectedOption?: TOption;
+  /** Value for plus badge */
+  plusBadgeValue?: number;
+  /** Click handler */
+  onClick?: () => void;
+  tabIndex?: number;
+  role?: string;
+  "aria-disabled"?: boolean;
+  "aria-expanded"?: boolean;
+  "aria-pressed"?: boolean;
+  "aria-haspopup"?:
+    | boolean
+    | "dialog"
+    | "grid"
+    | "listbox"
+    | "menu"
+    | "tree"
+    | "true"
+    | "false";
+  "data-test-id"?: string;
 }

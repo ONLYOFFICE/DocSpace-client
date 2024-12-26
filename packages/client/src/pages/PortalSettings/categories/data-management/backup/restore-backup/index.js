@@ -39,6 +39,7 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import StatusMessage from "@docspace/shared/components/status-message";
+import { isManagement } from "@docspace/shared/utils/common";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
@@ -97,7 +98,7 @@ const RestoreBackup = (props) => {
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
         getStorageRegions(),
       ]);
 

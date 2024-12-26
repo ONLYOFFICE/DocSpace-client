@@ -128,7 +128,7 @@ class AutomaticBackup extends React.PureComponent {
         //getThirdPartyCommonFolderTree(),
         getSettingsThirdParty(),
         getBackupSchedule(isManagement()),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
         getStorageRegions(),
       ]);
       setConnectedThirdPartyAccount(account);

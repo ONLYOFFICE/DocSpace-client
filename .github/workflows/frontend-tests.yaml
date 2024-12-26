@@ -33,7 +33,7 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: yarn install
-      - name: Lint login and doceditor
+      - name: Lint clients
         run: yarn lint
   common:
     name: "Common tests"

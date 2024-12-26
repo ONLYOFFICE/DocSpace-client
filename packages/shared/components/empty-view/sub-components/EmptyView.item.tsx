@@ -1,11 +1,11 @@
 import React from "react";
 import ArrowIcon from "PUBLIC_DIR/images/icons/12/arrow.right.svg";
 
-import { Text } from "../text";
-import { ContextMenu, ContextMenuRefType } from "../context-menu";
+import { Text } from "../../text";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 
-import { EmptyViewItemBody, EmptyViewItemWrapper } from "./EmptyView.styled";
-import type { EmptyViewItemProps } from "./EmptyView.types";
+import styles from "../EmptyView.module.scss";
+import type { EmptyViewItemProps } from "../EmptyView.types";
 
 export const EmptyViewItem = ({
   description,
@@ -27,29 +27,31 @@ export const EmptyViewItem = ({
   };
 
   return (
-    <EmptyViewItemWrapper
+    <div
       id={id}
       role="button"
+      tabIndex={0}
       aria-label={title}
       onClick={handleClick}
+      className={styles.itemWrapper}
     >
       <ContextMenu ref={contextRef} model={model ?? []} />
-      {React.cloneElement(icon, { className: "ev-item__icon" })}
-      <EmptyViewItemBody>
+      {React.cloneElement(icon, { className: styles.itemIcon })}
+      <div className={styles.itemBody}>
         <Text
           as="h4"
           fontWeight="600"
           lineHeight="20px"
-          className="ev-item-header"
+          className={styles.itemHeader}
           noSelect
         >
           {title}
         </Text>
-        <Text as="p" fontSize="12px" className="ev-item-subheading" noSelect>
+        <Text as="p" fontSize="12px" className={styles.itemSubheading} noSelect>
           {description}
         </Text>
-      </EmptyViewItemBody>
-      <ArrowIcon className="ev-item__arrow-icon" />
-    </EmptyViewItemWrapper>
+      </div>
+      <ArrowIcon className={styles.arrowIcon} />
+    </div>
   );
 };

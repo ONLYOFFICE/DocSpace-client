@@ -24,41 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+import { Text } from "../text";
+import styles from "./EmptyView.module.scss";
+import EmptyViewOption from "./sub-components/EmptyView.option";
+import type { EmptyViewProps } from "./EmptyView.types";
 
-import { mobile } from "@docspace/shared/utils";
+const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
+  return (
+    <div className={styles.wrapper} data-testid="empty-view">
+      <div className={styles.header}>
+        {icon}
+        <Text
+          as="h3"
+          fontWeight="700"
+          lineHeight="22px"
+          className={styles.headerTitle}
+          noSelect
+        >
+          {title}
+        </Text>
+        <Text as="p" fontSize="12px" className={styles.subheading} noSelect>
+          {description}
+        </Text>
+      </div>
+      {options ? (
+        <div className={styles.body}>
+          {options.map((option) => (
+            <EmptyViewOption key={option.key} option={option} />
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
-export const StyledWrapper = styled.div<{
-  isMobile?: boolean;
-  isResizable?: boolean;
-}>`
-  ${!isMobileOnly &&
-  css`
-    img {
-      width: 386px;
-    }
-  `}
-
-  @media ${mobile} {
-    ${(props) => !props.isResizable && "display: none"};
-
-    ${(props) =>
-      props.isMobile &&
-      props.isResizable &&
-      css`
-        display: flex;
-        background-color: ${props.theme.header.backgroundColor};
-        height: ${props.theme.header.height};
-        position: fixed;
-        top: 0;
-        width: 100%;
-        align-content: center;
-        text-align: center;
-        img {
-          height: 24px;
-          margin: auto;
-        }
-      `}
-  }
-`;
+export { EmptyView };
+export type {
+  EmptyViewItemType,
+  EmptyViewLinkType,
+  EmptyViewOptionsType,
+} from "./EmptyView.types";

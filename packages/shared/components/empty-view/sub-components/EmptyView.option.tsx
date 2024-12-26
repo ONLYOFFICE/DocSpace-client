@@ -26,19 +26,20 @@
 
 import { Link } from "react-router-dom";
 
-import { classNames } from "../../utils";
+import { classNames } from "../../../utils";
 
 import { EmptyViewItem } from "./EmptyView.item";
-import { isEmptyLinkOptions } from "./EmptyView.utils";
+import { isEmptyLinkOptions } from "../EmptyView.utils";
+import styles from "../EmptyView.module.scss";
 
-import type { EmptyViewOptionProps } from "./EmptyView.types";
+import type { EmptyViewOptionProps } from "../EmptyView.types";
 
 const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
   if (isEmptyLinkOptions(option))
     return (
       <Link
         id={option.key.toString()}
-        className={classNames("ev-link", option.className)}
+        className={classNames(styles.link, option.className)}
         to={option.to}
         state={option.state}
         onClick={option.onClick}

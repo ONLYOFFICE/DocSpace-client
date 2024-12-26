@@ -39,6 +39,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 

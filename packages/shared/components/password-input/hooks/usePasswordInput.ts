@@ -76,7 +76,7 @@ export const usePasswordInput = (
         }
       }
 
-      let value = e.target.value;
+      let { value } = e.target;
       if (isSimulateType && !isGenerated) {
         value = setPasswordSettings(e.target.value);
       }

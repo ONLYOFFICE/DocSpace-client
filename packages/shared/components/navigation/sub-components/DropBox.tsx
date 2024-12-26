@@ -128,12 +128,12 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
           data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
           data-is-desktop={isDesktop ? "true" : "false"}
         >
-          {withLogo && (
+          {withLogo ? (
             <NavigationLogo
               burgerLogo={burgerLogo}
               className="navigation-logo drop-box-logo"
             />
-          )}
+          ) : null}
           <ArrowButton
             isRootFolder={isRootFolder}
             onBackToParentFolder={onBackToParentFolder}

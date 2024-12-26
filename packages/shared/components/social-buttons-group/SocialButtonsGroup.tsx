@@ -68,8 +68,8 @@ export const SocialButtonsGroup = memo(
       onMoreAuthToggle?.(true);
     };
     const elements = showingProviders.map((item) => {
-      const provider = item.provider;
-      const url = item.url;
+      const { provider } = item;
+      const { url } = item;
 
       if (!PROVIDERS_DATA[provider as keyof ProvidersDataType]) return;
 
@@ -94,7 +94,7 @@ export const SocialButtonsGroup = memo(
 
     return (
       <StyledSocialButtonsGroup>
-        {ssoUrl && (
+        {ssoUrl ? (
           <SocialButton
             isDisabled={isDisabled}
             IconComponent={ssoSVG}
@@ -102,17 +102,17 @@ export const SocialButtonsGroup = memo(
             label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}
           />
-        )}
-        {providers.length !== 0 && (
+        ) : null}
+        {providers.length !== 0 ? (
           <div className="social-buttons-group">
             {elements}
-            {length > 2 && (
+            {length > 2 ? (
               <SocialButton
                 IconComponent={VerticalDotsReactSvg}
                 onClick={moreAuthOpen}
                 className="show-more-button"
               />
-            )}
+            ) : null}
 
             <MoreLoginModal
               t={t}
@@ -125,7 +125,7 @@ export const SocialButtonsGroup = memo(
               isSignUp
             />
           </div>
-        )}
+        ) : null}
       </StyledSocialButtonsGroup>
     );
   },

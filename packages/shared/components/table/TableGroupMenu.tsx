@@ -98,7 +98,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
         />
       )}
 
-      {withComboBox && (
+      {withComboBox ? (
         <ComboBox
           id="menu-combobox"
           comboIcon={TriangleNavigationDownReactSvgUrl}
@@ -113,7 +113,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           isMobileView={isMobileView}
           onSelect={() => {}}
         />
-      )}
+      ) : null}
       <div className="table-container_group-menu-separator" />
       <StyledScrollbar>
         {headerMenu.map((item) => (
@@ -124,7 +124,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           />
         ))}
       </StyledScrollbar>
-      {isCloseable && (
+      {isCloseable ? (
         <div className="table-header_icon">
           <IconButton
             className="table-header_icon-button"
@@ -134,8 +134,8 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             isFill
           />
         </div>
-      )}
-      {!withoutInfoPanelToggler && (
+      ) : null}
+      {!withoutInfoPanelToggler ? (
         <StyledInfoPanelToggleColorThemeWrapper
           themeId={ThemeId.InfoPanelToggle}
           isInfoPanelVisible={isInfoPanelVisible}
@@ -152,7 +152,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             />
           </div>
         </StyledInfoPanelToggleColorThemeWrapper>
-      )}
+      ) : null}
     </StyledTableGroupMenu>
   );
 };

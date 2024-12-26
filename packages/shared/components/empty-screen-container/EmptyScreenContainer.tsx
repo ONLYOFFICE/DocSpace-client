@@ -64,7 +64,7 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
         className="ec-image"
       />
 
-      {headerText && (
+      {headerText ? (
         <Text
           as="span"
           fontSize="19px"
@@ -74,25 +74,25 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
         >
           {headerText}
         </Text>
-      )}
+      ) : null}
 
-      {subheadingText && (
+      {subheadingText ? (
         <Text as="span" fontWeight="600" className="ec-subheading" noSelect>
           {subheadingText}
         </Text>
-      )}
+      ) : null}
 
-      {descriptionText && (
+      {descriptionText ? (
         <Text as="span" fontSize="12px" className="ec-desc" noSelect>
           {descriptionText}
         </Text>
-      )}
+      ) : null}
 
-      {buttons && (
+      {buttons ? (
         <div className="ec-buttons" style={buttonStyle}>
           {buttons}
         </div>
-      )}
+      ) : null}
     </EmptyContentBody>
   );
 };

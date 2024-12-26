@@ -172,9 +172,9 @@ const ControlButtons = ({
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderTrashWarning()}
-      {!isTabletView && renderNavigationButton()}
+      {!isTabletView ? renderNavigationButton() : null}
       {renderTariffBar()}
-      {isTabletView && renderNavigationButton()}
+      {isTabletView ? renderNavigationButton() : null}
     </div>
   );
 };

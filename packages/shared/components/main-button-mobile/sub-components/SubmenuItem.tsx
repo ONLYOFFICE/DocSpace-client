@@ -55,7 +55,7 @@ const SubmenuItem = ({
       setOpenedSubmenuKey(option.key);
       setIsOpenSubMenu(true);
     }
-  }, []);
+  }, [openByDefault, option.key, setOpenedSubmenuKey]);
 
   const onClick = () => {
     setOpenedSubmenuKey(option.key);
@@ -78,32 +78,33 @@ const SubmenuItem = ({
         isSubMenu
         noHover={noHover}
       />
-      {isOpenSubMenu &&
-        option.items?.map((suboption: ActionOption) => {
-          const subMenuOnClickAction = () => {
-            toggle(false);
-            setIsOpenSubMenu(false);
-            suboption.onClick?.({ action: suboption.action });
-          };
+      {isOpenSubMenu
+        ? option.items?.map((suboption: ActionOption) => {
+            const subMenuOnClickAction = () => {
+              toggle(false);
+              setIsOpenSubMenu(false);
+              suboption.onClick?.({ action: suboption.action });
+            };
 
-          return (
-            <DropDownItem
-              id={suboption.id}
-              key={suboption.key}
-              label={suboption.label}
-              className={classNames(
-                styles.dropDownItem,
-                styles.sublevel,
-                suboption.className,
-                "main-button_drop-down",
-              )}
-              onClick={subMenuOnClickAction}
-              icon={suboption.icon}
-              withoutIcon={suboption.withoutIcon}
-              noHover={noHover}
-            />
-          );
-        })}
+            return (
+              <DropDownItem
+                id={suboption.id}
+                key={suboption.key}
+                label={suboption.label}
+                className={classNames(
+                  styles.dropDownItem,
+                  styles.sublevel,
+                  suboption.className,
+                  "main-button_drop-down",
+                )}
+                onClick={subMenuOnClickAction}
+                icon={suboption.icon}
+                withoutIcon={suboption.withoutIcon}
+                noHover={noHover}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };

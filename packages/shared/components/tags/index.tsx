@@ -170,26 +170,27 @@ const Tags: FC<TagsProps> = ({
       style={style}
       ref={tagsRef}
     >
-      {renderedTags?.length > 0 &&
-        renderedTags.map((tag, idx) => {
-          return (
-            <Tag
-              {...tags}
-              key={tag.label}
-              tag={tag.label}
-              providerType={tag.providerType}
-              icon={tag.icon}
-              advancedOptions={tag.advancedOptions}
-              tagMaxWidth={tag.maxWidth}
-              isNewTag={false}
-              label={tag.label}
-              onClick={onSelectTag}
-              isLast={idx === renderedTags.length - 1}
-              removeTagIcon={removeTagIcon}
-              roomType={tag.roomType}
-            />
-          );
-        })}
+      {renderedTags?.length > 0
+        ? renderedTags.map((tag, idx) => {
+            return (
+              <Tag
+                key={tag.label}
+                {...tags}
+                tag={tag.label}
+                providerType={tag.providerType}
+                icon={tag.icon}
+                advancedOptions={tag.advancedOptions}
+                tagMaxWidth={tag.maxWidth}
+                isNewTag={false}
+                label={tag.label}
+                onClick={onSelectTag}
+                isLast={idx === renderedTags.length - 1}
+                removeTagIcon={removeTagIcon}
+                roomType={tag.roomType}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };

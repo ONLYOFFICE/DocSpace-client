@@ -1,4 +1,4 @@
-module.exports = function hexRgb(hex) {
+module.exports = function hexRgb() {
   return {
     red: 255,
     green: 255,

@@ -17,9 +17,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (S) => (
       <BrowserRouter>
-        <Story />
+        <S />
       </BrowserRouter>
     ),
   ],
@@ -65,7 +65,7 @@ const defaultProps: ArticleProps = {
       <h2>Article Header</h2>
     </Article.Header>,
     <Article.MainButton key="main-button">
-      <button>Main Action</button>
+      <button type="button">Main Action</button>
     </Article.MainButton>,
     <Article.Body key="body">
       <div>Article Content</div>

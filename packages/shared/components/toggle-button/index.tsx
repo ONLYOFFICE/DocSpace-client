@@ -129,7 +129,7 @@ const ToggleButton = ({
           isLoading={isLoading}
           noAnimation={noAnimation || false}
         />
-        {label && (
+        {label ? (
           <Text
             className={styles.toggleButtonText}
             as="span"
@@ -139,7 +139,7 @@ const ToggleButton = ({
           >
             {label}
           </Text>
-        )}
+        ) : null}
       </label>
     </div>
   );

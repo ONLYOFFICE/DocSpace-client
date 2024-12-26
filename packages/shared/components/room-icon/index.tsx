@@ -261,7 +261,7 @@ const RoomIcon = ({
           />
         )}
 
-        {hoverSrc && !isArchive && (
+        {hoverSrc && !isArchive ? (
           <div
             className={styles.roomIconContainer}
             onClick={onToggleOpenEditLogo}
@@ -275,9 +275,9 @@ const RoomIcon = ({
             />
             {dropdownElement}
           </div>
-        )}
+        ) : null}
 
-        {badgeUrl && !withEditing && (
+        {badgeUrl && !withEditing ? (
           <div
             className={classNames(styles.roomIconBadge, {
               [styles.isBig]: isBigSize,
@@ -298,9 +298,9 @@ const RoomIcon = ({
               isFill
             />
           </div>
-        )}
+        ) : null}
 
-        {withEditing && !isArchive && (
+        {withEditing && !isArchive ? (
           <div
             className={classNames(styles.editWrapper, styles.size20, {
               [styles.rtl]: isRTL,
@@ -315,9 +315,9 @@ const RoomIcon = ({
             />
             {dropdownElement}
           </div>
-        )}
+        ) : null}
       </div>
-      {onChangeFile && (
+      {onChangeFile ? (
         <input
           id="customFileInput"
           data-testid="customFileInput"
@@ -329,7 +329,7 @@ const RoomIcon = ({
           ref={inputFilesElement}
           style={{ display: "none" }}
         />
-      )}
+      ) : null}
     </>
   );
 };

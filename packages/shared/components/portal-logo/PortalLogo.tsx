@@ -74,13 +74,13 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
 
   return (
     <div className={wrapperClassName}>
-      {logo && (
+      {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
           alt=""
         />
-      )}
+      ) : null}
     </div>
   );
 };

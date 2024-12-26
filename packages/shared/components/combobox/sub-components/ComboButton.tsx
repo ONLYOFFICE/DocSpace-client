@@ -105,7 +105,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
       role="button"
       data-test-id="combo-button"
     >
-      {innerContainer && (
+      {innerContainer ? (
         <StyledOptionalItem
           className={innerContainerClassName}
           isDisabled={isDisabled}
@@ -115,8 +115,8 @@ const ComboButton: React.FC<TComboButtonProps> = ({
         >
           {innerContainer}
         </StyledOptionalItem>
-      )}
-      {selectedOption && selectedOption.icon && (
+      ) : null}
+      {selectedOption && selectedOption.icon ? (
         <StyledIcon
           className="combo-button_selected-icon-container"
           isDisabled={isDisabled}
@@ -129,7 +129,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
             className={fillIcon ? "combo-button_selected-icon" : ""}
           />
         </StyledIcon>
-      )}
+      ) : null}
 
       {type === "badge" ? (
         <Badge
@@ -178,11 +178,11 @@ const ComboButton: React.FC<TComboButtonProps> = ({
         </Text>
       ) : null}
 
-      {plusBadgeValue && (
+      {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
-      )}
+      ) : null}
 
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -206,12 +206,13 @@ const ComboButton: React.FC<TComboButtonProps> = ({
               className="combo-buttons_expander-icon"
               data-test-id="combo-button-default-icon"
             />
-          ))}
+          )
+        ) : null}
       </StyledArrowIcon>
 
-      {isLoading && (
+      {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
-      )}
+      ) : null}
     </ComboButtonTheme>
   );
 };

@@ -69,7 +69,7 @@ const Label = (props: LabelProps) => {
       aria-invalid={error}
     >
       {text}{" "}
-      {isRequired && (
+      {isRequired ? (
         <span
           style={{ color: globalColors.lightErrorStatus }}
           aria-hidden="true"
@@ -77,7 +77,7 @@ const Label = (props: LabelProps) => {
         >
           *
         </span>
-      )}{" "}
+      ) : null}{" "}
       {children}
     </Text>
   );

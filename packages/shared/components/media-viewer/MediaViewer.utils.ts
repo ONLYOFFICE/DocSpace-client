@@ -136,10 +136,12 @@ export const getImagePositionAndSize = (
 export const calculateAdjustImageUtil = (
   element: HTMLElement | null,
   container: HTMLElement | null,
-  point: Point,
+  pointProp: Point,
   diffScale: number = 1,
 ) => {
-  if (!element || !container) return point;
+  if (!element || !container) return pointProp;
+
+  const point = pointProp;
 
   // debugger;
 
@@ -208,10 +210,13 @@ export const calculateAdjustImageUtil = (
 };
 
 export const calculateAdjustBoundsUtils = (
-  x: number,
-  y: number,
+  xProp: number,
+  yProp: number,
   bounds: BoundsType | null,
 ): Point => {
+  let x = xProp;
+  let y = yProp;
+
   if (!bounds) return { x, y };
 
   const { left, right, top, bottom } = bounds;

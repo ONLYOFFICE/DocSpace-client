@@ -198,14 +198,14 @@ const TagPure = ({
           >
             {label}
           </Text>
-          {isNewTag && !!onDelete && (
+          {isNewTag && !!onDelete ? (
             <IconButton
               className={styles.tagIcon}
               iconName={CrossIconReactSvgUrl}
               size={12}
               onClick={onDeleteAction}
             />
-          )}
+          ) : null}
         </>
       )}
     </div>

@@ -72,14 +72,14 @@ const PublicRoomBar = forwardRef(
           </Text>
         </div>
 
-        {onClose && (
+        {onClose ? (
           <IconButton
             className={styles.closeIcon}
             size={12}
             iconName={CrossReactSvg}
             onClick={onClose}
           />
-        )}
+        ) : null}
       </div>
     );
   },

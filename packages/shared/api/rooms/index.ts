@@ -36,12 +36,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import {
-  TGetRooms,
-  TRoomLifetime,
-  TExportRoomIndexTask,
-  TPublicRoomPassword,
-} from "./types";
+import { TGetRooms, TExportRoomIndexTask, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;

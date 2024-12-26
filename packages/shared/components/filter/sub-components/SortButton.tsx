@@ -68,7 +68,8 @@ const SortButton = ({
     const value = getSortData?.();
     const selectedValue = getSelectedSortData?.();
 
-    const data = value.map((item) => {
+    const data = value.map((itemProp) => {
+      const item = { ...itemProp };
       item.className = "option-item";
 
       if (selectedValue.sortId === item.key) {
@@ -109,7 +110,7 @@ const SortButton = ({
       const key = (target.closest(".option-item") as HTMLDivElement)?.dataset
         .value;
 
-      let sortDirection = selectedSortData.sortDirection;
+      let { sortDirection } = selectedSortData;
 
       if (key === selectedSortData.sortId) {
         sortDirection = sortDirection === "desc" ? "asc" : "desc";
@@ -117,7 +118,8 @@ const SortButton = ({
 
       let data = sortData.map((item) => ({ ...item }));
 
-      data = data.map((item) => {
+      data = data.map((itemProp) => {
+        const item = { ...itemProp };
         item.className = "option-item";
         item.isSelected = false;
         if (key === item.key) {
@@ -144,7 +146,7 @@ const SortButton = ({
 
   const advancedOptions = (
     <>
-      {viewSelectorVisible && (
+      {viewSelectorVisible ? (
         <>
           <DropDownItem noHover className="view-selector-item">
             <Text fontWeight={600}>{view}</Text>
@@ -158,7 +160,7 @@ const SortButton = ({
 
           <DropDownItem isSeparator />
         </>
-      )}
+      ) : null}
       {sortData?.map((item) => (
         <DropDownItem
           id={item.id}

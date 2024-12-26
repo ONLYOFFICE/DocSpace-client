@@ -128,7 +128,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const scrollChangingBackground = React.useCallback(() => {
     if (scrollElem.current) {
       currentPosition.current = scrollElem.current.scrollTop;
-      const scrollHeight = scrollElem.current.scrollHeight;
+      const { scrollHeight } = scrollElem.current;
 
       if (currentPosition < prevPosition) {
         setDialogBackground(scrollHeight);
@@ -282,25 +282,26 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
             [styles.isUploading]: isUploading,
           })}
         >
-          {progressOptions &&
-            progressOptions.map((option: ProgressOption) => (
-              <ProgressBarMobile
-                key={option.key}
-                label={option.label}
-                icon={option.icon || ""}
-                className={option.className}
-                percent={option.percent || 0}
-                status={option.status}
-                open={option.open || false}
-                onCancel={option.onCancel}
-                onClickAction={option.onClick}
-                hideButton={() => toggle(false)}
-                error={option.error}
-              />
-            ))}
+          {progressOptions
+            ? progressOptions.map((option: ProgressOption) => (
+                <ProgressBarMobile
+                  key={option.key}
+                  label={option.label}
+                  icon={option.icon || ""}
+                  className={option.className}
+                  percent={option.percent || 0}
+                  status={option.status}
+                  open={option.open || false}
+                  onCancel={option.onCancel}
+                  onClickAction={option.onClick}
+                  hideButton={() => toggle(false)}
+                  error={option.error}
+                />
+              ))
+            : null}
         </div>
 
-        {buttonOptions && (
+        {buttonOptions ? (
           <div
             className={classNames(styles.buttonOptions, {
               [styles.withoutButton]: withoutButton,
@@ -344,7 +345,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
               );
             })}
           </div>
-        )}
+        ) : null}
       </div>
     );
   };
@@ -393,7 +394,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
           )}
         </DropDown>
 
-        {alert && !isOpen && (
+        {alert && !isOpen ? (
           <div className={styles.wrapperAlertIcon}>
             <ButtonAlertReactSvg
               className={styles.alertIcon}
@@ -401,7 +402,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
               onClick={onAlertClickAction}
             />
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );

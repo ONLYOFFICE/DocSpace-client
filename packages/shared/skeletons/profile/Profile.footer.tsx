@@ -94,7 +94,7 @@ export const ProfileFooterLoader = ({
           />
         </div>
 
-        {isDesktopView && (
+        {isDesktopView ? (
           <div className="table-header">
             <RectangleSkeleton
               title={title}
@@ -135,7 +135,7 @@ export const ProfileFooterLoader = ({
               animate={animate}
             />
           </div>
-        )}
+        ) : null}
 
         <RowsSkeleton count={3} />
       </div>

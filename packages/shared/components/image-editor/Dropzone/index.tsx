@@ -34,12 +34,10 @@ const Dropzone = ({
   t,
   setUploadedFile,
   isDisabled,
-  maxImageSize = ONE_MEGABYTE,
 }: {
   t: (key: string) => string;
   setUploadedFile: (f: File) => void;
   isDisabled?: boolean;
-  maxImageSize?: number;
 }) => {
   const [loadingFile, setLoadingFile] = useState(false);
   const mount = useRef(false);

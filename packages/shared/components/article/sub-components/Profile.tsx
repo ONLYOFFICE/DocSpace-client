@@ -146,7 +146,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
             rightOffset={Number(isRtl && 54)}
           />
         </div>
-        {(!isTabletView || showText) && (
+        {!isTabletView || showText ? (
           <>
             <div
               className={styles.userName}
@@ -180,7 +180,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
               />
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );

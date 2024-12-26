@@ -52,7 +52,10 @@ export const getClientList = async (
   return clients;
 };
 
-export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
+export const addClient = async (
+  dataParam: IClientReqDTO,
+): Promise<IClientProps> => {
+  const data = { ...dataParam };
   data.logout_redirect_uri = data.website_url;
 
   const client = (await request(

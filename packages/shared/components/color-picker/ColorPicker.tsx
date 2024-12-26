@@ -72,7 +72,7 @@ const ColorPicker = ({
       className={className}
       id={id}
     >
-      {isPickerOnly && (
+      {isPickerOnly ? (
         <div className="hex-header">
           <div className="hex-text">
             <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
@@ -89,10 +89,10 @@ const ColorPicker = ({
             />
           </div>
         </div>
-      )}
+      ) : null}
 
       <div className="hex-color-picker">
-        {!isPickerOnly && (
+        {!isPickerOnly ? (
           <div className="hex-value-container">
             <div className="hex-value-label">{hexCodeLabel}:</div>
 
@@ -103,7 +103,7 @@ const ColorPicker = ({
               onChange={setColor}
             />
           </div>
-        )}
+        ) : null}
 
         <HexColorPicker
           color={
@@ -112,7 +112,7 @@ const ColorPicker = ({
           onChange={isPickerOnly ? handleChange : setColor}
         />
 
-        {!isPickerOnly && (
+        {!isPickerOnly ? (
           <div className="hex-button">
             <Button
               label={applyButtonLabel}
@@ -130,7 +130,7 @@ const ColorPicker = ({
               onClick={onClose}
             />
           </div>
-        )}
+        ) : null}
       </div>
     </Wrapper>
   );

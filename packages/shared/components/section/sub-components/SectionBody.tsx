@@ -126,9 +126,9 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        {!isIndexEditingMode && (
+        {!isIndexEditingMode ? (
           <SectionContextMenu getContextModel={getContextModel} />
-        )}
+        ) : null}
       </DragAndDrop>
     ) : (
       <div

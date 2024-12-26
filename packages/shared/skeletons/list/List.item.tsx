@@ -62,7 +62,7 @@ const ListItemLoader = ({
       style={style}
       data-testid="list-item-loader"
     >
-      {!withoutFirstRectangle && (
+      {!withoutFirstRectangle ? (
         <RectangleSkeleton
           title={title}
           width="16"
@@ -76,7 +76,7 @@ const ListItemLoader = ({
           animate={animate}
           className="list-loader_rectangle"
         />
-      )}
+      ) : null}
 
       <RectangleSkeleton
         className="list-loader_rectangle-content"
@@ -105,7 +105,7 @@ const ListItemLoader = ({
         animate={animate}
       />
 
-      {!withoutLastRectangle && (
+      {!withoutLastRectangle ? (
         <RectangleSkeleton
           title={title}
           width="16"
@@ -118,7 +118,7 @@ const ListItemLoader = ({
           speed={speed}
           animate={animate}
         />
-      )}
+      ) : null}
     </div>
   );
 };

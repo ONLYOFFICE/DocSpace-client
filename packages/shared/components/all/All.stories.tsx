@@ -171,6 +171,7 @@ const rowContent = (
   <Row
     {...checkedProps}
     {...elementProps}
+    isIndexEditingMode={false}
     onRowClick={() => {}}
     contextOptions={[
       {
@@ -520,11 +521,6 @@ const Template = () => (
           onSelect={() => {}}
           selectedItemId={arrayItems[0].id}
         />
-      </div>
-      <div style={{ padding: "16px 0" }}>
-        <ToggleContent label="ToggleContent" isOpen={false}>
-          <span>Toggle content text</span>
-        </ToggleContent>
       </div>
     </div>
   </div>

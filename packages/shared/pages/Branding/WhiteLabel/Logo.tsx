@@ -63,7 +63,7 @@ export const Logo = (props: ILogoProps) => {
   return (
     <div>
       <div className="logo-item">
-        {title && (
+        {title ? (
           <Text
             fontSize="13px"
             fontWeight="600"
@@ -71,7 +71,7 @@ export const Logo = (props: ILogoProps) => {
           >
             {title}
           </Text>
-        )}
+        ) : null}
         {isEditor ? (
           <div className="logos-editor-wrapper" onClick={onLogoClick}>
             <div className="logos-editor-container">

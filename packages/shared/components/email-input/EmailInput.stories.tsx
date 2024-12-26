@@ -80,14 +80,14 @@ const Template = ({ value: initialValue, ...args }: EmailInputProps) => {
         onChange={(e) => setValue(e.target.value)}
         onValidateInput={(data) => setValidationState(data)}
       />
-      {validationState && (
+      {validationState ? (
         <div style={{ marginTop: "8px", fontSize: "12px" }}>
           <div>Valid: {validationState.isValid ? "Yes" : "No"}</div>
-          {(validationState.errors ?? []).length > 0 && (
+          {(validationState.errors ?? []).length > 0 ? (
             <div>Errors: {validationState.errors?.join(", ")}</div>
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

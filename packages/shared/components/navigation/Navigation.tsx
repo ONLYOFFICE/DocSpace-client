@@ -179,22 +179,22 @@ const Navigation = ({
 
   const navigationTitleNode = (
     <div className="title-block">
-      {titleIcon && !isRootFolder && (
+      {titleIcon && !isRootFolder ? (
         <ReactSVG
           data-tooltip-id="iconTooltip"
           className="title-icon"
           src={titleIcon}
         />
-      )}
+      ) : null}
 
-      {titleIconTooltip && (
+      {titleIconTooltip ? (
         <Tooltip
           id="iconTooltip"
           place="bottom"
           getContent={getContent}
           maxWidth="300px"
         />
-      )}
+      ) : null}
 
       <NavigationText
         className="title-block-text"
@@ -237,7 +237,7 @@ const Navigation = ({
     <Consumer>
       {(context) => (
         <>
-          {isOpen && haveItems && (
+          {isOpen && haveItems ? (
             <>
               <Backdrop
                 visible={isOpen}
@@ -270,7 +270,7 @@ const Navigation = ({
                 onCloseDropBox={onCloseDropBox}
               />
             </>
-          )}
+          ) : null}
           <div
             ref={containerRef}
             className={styles.container}
@@ -287,20 +287,20 @@ const Navigation = ({
             }
             data-is-drop-box-component="false"
           >
-            {withLogo && (
+            {withLogo ? (
               <NavigationLogo
                 className="navigation-logo"
                 logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
                 onClick={onLogoClick}
               />
-            )}
+            ) : null}
             <ArrowButton
               isRootFolder={isRootFolder}
               onBackToParentFolder={onBackToParentFolder}
             />
 
-            {showTitle && navigationTitleContainerNode}
+            {showTitle ? navigationTitleContainerNode : null}
 
             <ControlButtons
               isRootFolder={isRootFolder}
@@ -327,7 +327,7 @@ const Navigation = ({
               isMobile={currentDeviceType !== DeviceType.desktop}
             />
           </div>
-          {isDesktop && !hideInfoPanel && (
+          {isDesktop && !hideInfoPanel ? (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
@@ -335,7 +335,7 @@ const Navigation = ({
               isInfoPanelVisible={isInfoPanelVisible}
               titles={titles}
             />
-          )}
+          ) : null}
         </>
       )}
     </Consumer>

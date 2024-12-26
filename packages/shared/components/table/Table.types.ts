@@ -80,6 +80,7 @@ export interface TableHeaderProps {
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
   theme: TTheme;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableHeaderCellProps {

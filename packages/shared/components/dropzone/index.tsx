@@ -54,13 +54,13 @@ const Dropzone = ({
 
   return (
     <StyledDropzone $isLoading={isLoading}>
-      {isLoading && (
+      {isLoading ? (
         <Loader
           className="dropzone_loader"
           size="30px"
           type={LoaderTypes.track}
         />
-      )}
+      ) : null}
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
         <div className="dropzone-link">

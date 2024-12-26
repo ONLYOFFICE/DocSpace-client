@@ -34,7 +34,7 @@ import styles from "../EmptyView.module.scss";
 
 import type { EmptyViewOptionProps } from "../EmptyView.types";
 
-function EmptyViewOption({ option }: EmptyViewOptionProps) {
+const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
   if (isEmptyLinkOptions(option))
     return (
       <Link
@@ -51,6 +51,6 @@ function EmptyViewOption({ option }: EmptyViewOptionProps) {
 
   const { key, ...other } = option;
   return <EmptyViewItem id={option.key.toString()} {...other} />;
-}
+};
 
 export default EmptyViewOption;

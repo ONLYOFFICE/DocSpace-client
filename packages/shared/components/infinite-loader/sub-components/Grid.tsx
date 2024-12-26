@@ -182,8 +182,9 @@ const GridComponent = ({
       {({ onRowsRendered, registerChild }) => (
         <WindowScroller scrollElement={scroll}>
           {({ height, isScrolling, onChildScroll, scrollTop }) => {
+            let newHeight = height;
             if (height === undefined && scroll instanceof Element) {
-              height = scroll.getBoundingClientRect().height;
+              newHeight = scroll.getBoundingClientRect().height;
             }
 
             const width =
@@ -193,7 +194,7 @@ const GridComponent = ({
             return (
               <List
                 autoHeight
-                height={height}
+                height={newHeight}
                 onRowsRendered={onRowsRendered}
                 ref={(ref: List | null) => {
                   listRef.current = ref;

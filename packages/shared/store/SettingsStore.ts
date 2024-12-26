@@ -784,7 +784,7 @@ class SettingsStore {
   };
 
   setLogoUrl = (url: ILogo[]) => {
-    this.logoUrl = url[0];
+    [this.logoUrl] = url;
   };
 
   setLogoUrls = (urls: ILogo[]) => {

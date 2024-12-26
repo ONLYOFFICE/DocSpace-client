@@ -185,7 +185,7 @@ const FloatingButton = ({
             <div className={classNames(styles.iconBox, "icon-box")}>
               {iconComponent}
             </div>
-            {alert && (
+            {alert ? (
               <div
                 className={styles.alertIcon}
                 data-testid="floating-button-alert"
@@ -194,17 +194,17 @@ const FloatingButton = ({
                   style={{ overflow: "hidden", verticalAlign: "middle" }}
                 />
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
-      {clearUploadedFilesHistory && percent === 100 && (
+      {clearUploadedFilesHistory && percent === 100 ? (
         <CloseIcon
           className="layout-progress-bar_close-icon"
           onClick={handleProgressClear}
           data-testid="floating-button-close-icon"
         />
-      )}
+      ) : null}
     </div>
   );
 };

@@ -54,11 +54,11 @@ const Text = ({
         {title}
       </Heading>
 
-      {isRootFolderTitle && <ArrowIcon />}
+      {isRootFolderTitle ? <ArrowIcon /> : null}
 
-      {!isRootFolderTitle && !isRootFolder && (
+      {!isRootFolderTitle && !isRootFolder ? (
         <ExpanderIcon isRotated={isOpen} />
-      )}
+      ) : null}
     </div>
   );
 };

@@ -176,7 +176,7 @@ const Row = (props: RowProps) => {
         />
       ) : (
         <>
-          {mode === "default" && renderCheckbox && (
+          {mode === "default" && renderCheckbox ? (
             <StyledCheckbox mode={mode} className="not-selectable">
               <Checkbox
                 className="checkbox"
@@ -186,8 +186,8 @@ const Row = (props: RowProps) => {
                 isDisabled={isDisabled}
               />
             </StyledCheckbox>
-          )}
-          {mode === "modern" && renderCheckbox && renderElement && (
+          ) : null}
+          {mode === "modern" && renderCheckbox && renderElement ? (
             <StyledCheckbox
               className="not-selectable styled-checkbox-container"
               mode={mode}
@@ -207,13 +207,13 @@ const Row = (props: RowProps) => {
                 isDisabled={isDisabled}
               />
             </StyledCheckbox>
-          )}
+          ) : null}
 
-          {mode === "default" && renderElement && (
+          {mode === "default" && renderElement ? (
             <StyledElement onClick={onRowClick} className="styled-element">
               {element}
             </StyledElement>
-          )}
+          ) : null}
         </>
       )}
 
@@ -224,10 +224,10 @@ const Row = (props: RowProps) => {
         className="row_context-menu-wrapper"
         spacerWidth={contextButtonSpacerWidth}
       >
-        {badgesComponent && badgesComponent}
-        {renderContentElement && (
+        {badgesComponent || null}
+        {renderContentElement ? (
           <StyledContentElement>{contentElement}</StyledContentElement>
-        )}
+        ) : null}
         {isIndexEditingMode ? (
           <>
             <ColorTheme

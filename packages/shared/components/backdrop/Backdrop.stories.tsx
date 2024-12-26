@@ -177,7 +177,7 @@ const Template = (args: BackdropProps) => {
         onClick={toggleVisible}
       />
       <Backdrop {...args} visible={isVisible} onClick={toggleVisible} />
-      {isVisible && (
+      {isVisible ? (
         <div
           style={{
             position: "fixed",
@@ -191,7 +191,7 @@ const Template = (args: BackdropProps) => {
         >
           Click anywhere to close
         </div>
-      )}
+      ) : null}
     </>
   );
 };
@@ -250,7 +250,7 @@ const ModalTemplate = (args: BackdropProps) => {
         isModalDialog
         onClick={toggleVisible}
       />
-      {isVisible && (
+      {isVisible ? (
         <div
           style={{
             position: "fixed",
@@ -267,7 +267,7 @@ const ModalTemplate = (args: BackdropProps) => {
           <h2>Modal Content</h2>
           <p>Click outside to close</p>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

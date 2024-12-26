@@ -65,13 +65,13 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
 
   return (
     <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
-      {logo && (
+      {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
           alt=""
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

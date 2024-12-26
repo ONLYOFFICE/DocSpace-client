@@ -173,15 +173,15 @@ const InputBlock = React.memo(
         data-warning={hasWarning}
         data-disabled={isDisabled}
       >
-        {children && (
+        {children ? (
           <div className={styles.prepend}>
             <div className={styles.childrenBlock}>{children}</div>
           </div>
-        )}
+        ) : null}
 
         <TextInput {...inputProps} />
 
-        {!isDisabled && (
+        {!isDisabled ? (
           <div className={styles.append}>
             <div
               className={`${styles.iconBlock} ${iconButtonClassName}`}
@@ -200,7 +200,7 @@ const InputBlock = React.memo(
               />
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     );
   },

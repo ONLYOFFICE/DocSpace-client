@@ -416,7 +416,7 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
     return user;
   });
 
-  return users;
+  return res;
 }
 
 export function linkOAuth(serializedProfile) {

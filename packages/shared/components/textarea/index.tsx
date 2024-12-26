@@ -153,14 +153,14 @@ const Textarea = ({
       }
       onClick={handleTextareaClick}
     >
-      {enableCopy && (
+      {enableCopy ? (
         <IconButton
           className={`${styles.copyIconWrapper} ${classNameCopyIcon || ""}`}
           onClick={handleCopy}
           iconName={CopyIconUrl}
           size={16}
         />
-      )}
+      ) : null}
 
       <Scrollbar
         className={classNames(styles.scrollbar, className, {
@@ -181,14 +181,14 @@ const Textarea = ({
         data-error={isError || hasError}
         data-focus={isFocus}
       >
-        {hasNumeration && (
+        {hasNumeration ? (
           <pre
             className={styles.numeration}
             style={fontSize !== 13 ? { fontSize: `${fontSize}px` } : {}}
           >
             {numerationValue}
           </pre>
-        )}
+        ) : null}
         <TextareaAutosize
           id={id}
           className={classNames(styles.textarea, {

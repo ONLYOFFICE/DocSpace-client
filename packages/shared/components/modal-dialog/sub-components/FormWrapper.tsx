@@ -30,12 +30,12 @@ import classNames from "classnames";
 import { ModalDialogFormWrapperProps } from "../ModalDialog.types";
 import styles from "../ModalDialog.module.scss";
 
-function FormWrapper({
+const FormWrapper = ({
   withForm,
   children,
   className,
   onSubmit,
-}: ModalDialogFormWrapperProps) {
+}: ModalDialogFormWrapperProps) => {
   if (!withForm) return children;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -52,6 +52,6 @@ function FormWrapper({
       {children}
     </form>
   );
-}
+};
 
 export { FormWrapper };

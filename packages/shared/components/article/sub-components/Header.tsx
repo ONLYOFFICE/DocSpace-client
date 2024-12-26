@@ -84,7 +84,7 @@ const ArticleHeader = ({
 
   const mainComponent = (
     <>
-      {currentDeviceType === DeviceType.tablet && (
+      {currentDeviceType === DeviceType.tablet ? (
         <div
           className={styles.iconBox}
           data-show-text={showText ? "true" : "false"}
@@ -96,7 +96,7 @@ const ArticleHeader = ({
             onClick={onLogoClick}
           />
         </div>
-      )}
+      ) : null}
       <div
         className={styles.heading}
         data-show-text={showText ? "true" : "false"}

@@ -206,7 +206,7 @@ const LinkRow = ({
             )}
           </div>
           <div className="link-actions">
-            {!isArchiveFolder && (
+            {!isArchiveFolder ? (
               <IconButton
                 className="link-actions_copy-icon"
                 size={16}
@@ -215,10 +215,10 @@ const LinkRow = ({
                 title={t("Common:CreateAndCopy")}
                 isDisabled={isExpiredLink || isLoaded}
               />
-            )}
+            ) : null}
             {isRoomsLink ? (
               <>
-                {!isFormRoom && (
+                {!isFormRoom ? (
                   <AccessRightSelect
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
                     onSelect={onAccessRightsSelect}
@@ -236,8 +236,8 @@ const LinkRow = ({
                     topSpace={16}
                     usePortalBackdrop={isMobileViewLink}
                   />
-                )}
-                {!isArchiveFolder && (
+                ) : null}
+                {!isArchiveFolder ? (
                   <ContextMenuButton
                     getData={getData}
                     title={t("Files:ShowLinkActions")}
@@ -246,7 +246,7 @@ const LinkRow = ({
                     onClose={onCloseContextMenu}
                     isDisabled={isExpiredLink || isLoaded}
                   />
-                )}
+                ) : null}
               </>
             ) : (
               <ComboBox

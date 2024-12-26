@@ -304,7 +304,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
           >
             {tooltipPasswordLength}
           </Text>
-          {passwordSettings?.digits && (
+          {passwordSettings?.digits ? (
             <Text
               as="div"
               title={tooltipPasswordDigits}
@@ -316,8 +316,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             >
               {tooltipPasswordDigits}
             </Text>
-          )}
-          {passwordSettings?.upperCase && (
+          ) : null}
+          {passwordSettings?.upperCase ? (
             <Text
               as="div"
               title={tooltipPasswordCapital}
@@ -329,8 +329,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             >
               {tooltipPasswordCapital}
             </Text>
-          )}
-          {passwordSettings?.specSymbols && (
+          ) : null}
+          {passwordSettings?.specSymbols ? (
             <Text
               as="div"
               title={tooltipPasswordSpecial}
@@ -342,11 +342,11 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             >
               {tooltipPasswordSpecial}
             </Text>
-          )}
+          ) : null}
 
           {tooltipAllowedCharacters}
 
-          {generatePasswordTitle && (
+          {generatePasswordTitle ? (
             <div className="generate-btn-container">
               <Link
                 className="generate-btn"
@@ -358,7 +358,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
                 {generatePasswordTitle}
               </Link>
             </div>
-          )}
+          ) : null}
         </Text>
       </div>
     );
@@ -405,7 +405,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             isAutoFocussed={isAutoFocussed}
           />
 
-          {!isDisableTooltip && !isDisabled && (
+          {!isDisableTooltip && !isDisabled ? (
             <Tooltip
               place="top"
               clickable
@@ -416,7 +416,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             >
               {renderTooltipContent()}
             </Tooltip>
-          )}
+          ) : null}
         </>
       );
     };

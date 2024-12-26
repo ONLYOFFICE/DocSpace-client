@@ -80,7 +80,7 @@ const ProgressBar = ({
           />
         )}
       </div>
-      {(status || error) && (
+      {status || error ? (
         <Text
           className={error ? styles.statusError : styles.statusText}
           fontSize="12px"
@@ -91,7 +91,7 @@ const ProgressBar = ({
         >
           {error || status}
         </Text>
-      )}
+      ) : null}
     </div>
   );
 };

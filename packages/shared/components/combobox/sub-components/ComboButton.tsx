@@ -102,7 +102,7 @@ const ComboButton = (props: ComboButtonProps) => {
       selectedOption={selectedOption}
       plusBadgeValue={plusBadgeValue}
     >
-      {innerContainer && (
+      {innerContainer ? (
         <StyledOptionalItem
           className={innerContainerClassName}
           isDisabled={isDisabled}
@@ -112,8 +112,8 @@ const ComboButton = (props: ComboButtonProps) => {
         >
           {innerContainer}
         </StyledOptionalItem>
-      )}
-      {selectedOption && selectedOption.icon && (
+      ) : null}
+      {selectedOption && selectedOption.icon ? (
         <StyledIcon
           className="combo-button_selected-icon-container"
           isDisabled={isDisabled}
@@ -126,7 +126,7 @@ const ComboButton = (props: ComboButtonProps) => {
             className={fillIcon ? "combo-button_selected-icon" : ""}
           />
         </StyledIcon>
-      )}
+      ) : null}
 
       {type === "badge" ? (
         <Badge
@@ -175,11 +175,11 @@ const ComboButton = (props: ComboButtonProps) => {
         </Text>
       ) : null}
 
-      {plusBadgeValue && (
+      {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
-      )}
+      ) : null}
 
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -188,20 +188,21 @@ const ComboButton = (props: ComboButtonProps) => {
         isLoading={isLoading}
         isDisabled={isDisabled}
       >
-        {displayArrow &&
-          (comboIcon ? (
+        {displayArrow ? (
+          comboIcon ? (
             <ReactSVG src={comboIcon} className="combo-buttons_expander-icon" />
           ) : (
             <StyledTriangleDownIcon
               size={IconSizeType.scale}
               className="combo-buttons_expander-icon"
             />
-          ))}
+          )
+        ) : null}
       </StyledArrowIcon>
 
-      {isLoading && (
+      {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
-      )}
+      ) : null}
     </ComboButtonTheme>
   );
 };

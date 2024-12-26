@@ -103,8 +103,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         outerDate={date}
       />
       <TimeSelector>
-        {date !== null &&
-          (isTimeFocused ? (
+        {date !== null ? (
+          isTimeFocused ? (
             <TimePicker
               initialTime={date}
               onChange={handleChange}
@@ -118,7 +118,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               <ClockIcon className="clockIcon" />
               {date.format("HH:mm")}
             </TimeCell>
-          ))}
+          )
+        ) : null}
       </TimeSelector>
     </Selectors>
   );

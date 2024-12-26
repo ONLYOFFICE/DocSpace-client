@@ -146,7 +146,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             isVertical
             key="e-mail"
             labelVisible={false}
-            hasError={isShowError && emailErr}
+            hasError={isShowError ? emailErr : null}
             errorMessage={
               emailErrorMessage
                 ? t(`Common:${emailErrorMessage}`)
@@ -164,7 +164,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
               type={InputType.email}
               autoComplete="username"
               id="recover-access-modal_email"
-              hasError={isShowError && emailErr}
+              hasError={isShowError ? emailErr : null}
               placeholder={emailPlaceholderText}
               onBlur={onBlurEmail}
               onChange={onChangeEmail}

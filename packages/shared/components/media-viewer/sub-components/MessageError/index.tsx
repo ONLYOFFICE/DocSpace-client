@@ -58,7 +58,7 @@ export const MessageError = ({
           {errorTitle}
         </Text>
       </StyledMediaError>
-      {items.length !== 0 && (
+      {items.length !== 0 ? (
         <StyledErrorToolbar>
           {items.map((item) => {
             if (item.disabled || isSeparator(item)) return;
@@ -79,7 +79,7 @@ export const MessageError = ({
             );
           })}
         </StyledErrorToolbar>
-      )}
+      ) : null}
     </div>
   );
 };

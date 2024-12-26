@@ -24,55 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
-import equal from "fast-deep-equal/react";
-import { ReactSVG } from "react-svg";
+import React from "react";
 
-import { Text } from "../text";
+import { ProvidersProps } from "../Selector.types";
 
-import StyledSocialButton from "./SocialButton.styled";
-import type { SocialButtonProps } from "./SocialButton.types";
+import { BreadCrumbsProvider } from "./BreadCrumbs";
+import { EmptyScreenProvider } from "./EmptyScreen";
+import { InfoBarProvider } from "./InfoBar";
+import { SearchProvider } from "./Search";
+import { SelectAllProvider } from "./SelectAll";
+import { TabsProvider } from "./Tabs";
 
-export const SocialButton = memo((props: SocialButtonProps) => {
-  const {
-    label = "",
-    size = "base",
-    IconComponent,
-    tabIndex = -1,
-    iconName = "SocialButtonGoogleIcon",
-    isConnect = false,
-    isDisabled = false,
-    noHover = false,
-    ...otherProps
-  } = props;
-  return (
-    <StyledSocialButton
-      data-testid="social-button"
-      size={size}
-      noHover={noHover}
-      tabIndex={tabIndex}
-      isConnect={isConnect}
-      isDisabled={isDisabled}
-      {...otherProps}
-    >
-      <div
-        data-url={props["data-url"]}
-        data-providername={props["data-providername"]}
-        className="social-button-container"
-      >
-        {IconComponent ? (
-          <IconComponent className="iconWrapper" />
-        ) : (
-          <ReactSVG className="iconWrapper" src={iconName} />
-        )}
-        {label ? (
-          <Text as="div" className="social_button_text">
-            {label}
-          </Text>
-        ) : null}
-      </div>
-    </StyledSocialButton>
-  );
-}, equal);
-
-SocialButton.displayName = "SocialButton";
+export const Providers = ({
+  children,
+  breadCrumbsProps,
+  emptyScreenProps,
+  infoBarProps,
+  searchProps,
+  selectAllProps,
+  tabsProps,
+}: { children: React.ReactNode } & ProvidersProps) => (
+  <BreadCrumbsProvider {...breadCrumbsProps}>
+    <EmptyScreenProvider {...emptyScreenProps}>
+      <InfoBarProvider {...infoBarProps}>
+        <SearchProvider {...searchProps}>
+          <SelectAllProvider {...selectAllProps}>
+            <TabsProvider {...tabsProps}>{children}</TabsProvider>
+          </SelectAllProvider>
+        </SearchProvider>
+      </InfoBarProvider>
+    </EmptyScreenProvider>
+  </BreadCrumbsProvider>
+);

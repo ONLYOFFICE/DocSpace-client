@@ -81,7 +81,7 @@ export const Button = React.forwardRef<
       aria-disabled={isDisabled ? "true" : undefined}
       aria-busy={isLoading ? "true" : undefined}
     >
-      {isLoading && (
+      {isLoading ? (
         <Loader
           className={styles.loader}
           color=""
@@ -91,9 +91,9 @@ export const Button = React.forwardRef<
           primary={primary}
           isDisabled={isDisabled}
         />
-      )}
+      ) : null}
       <div className={contentClasses}>
-        {icon && <div className={styles.icon}>{icon}</div>}
+        {icon ? <div className={styles.icon}>{icon}</div> : null}
         {label}
       </div>
     </button>

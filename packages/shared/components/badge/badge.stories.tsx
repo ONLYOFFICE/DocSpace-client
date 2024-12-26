@@ -131,7 +131,7 @@ export const TextBadge: Story = {
 export const InteractiveBadge: Story = {
   args: {
     label: "Click me",
-    onClick: () => alert("Badge clicked!"),
+    onClick: () => {},
   },
   parameters: {
     docs: {

@@ -77,10 +77,10 @@ const Paging = (props: PagingProps) => {
         isDisabled={disablePrevious}
         disableHover={disableHover}
       />
-      {pageItems && (
+      {pageItems ? (
         <StyledPage>
           <ComboBox
-            isDisabled={disablePrevious && disableNext}
+            isDisabled={disablePrevious ? disableNext : null}
             className="manualWidth"
             directionY={openDirection}
             options={pageItems}
@@ -90,7 +90,7 @@ const Paging = (props: PagingProps) => {
             {...setDropDownMaxHeight}
           />
         </StyledPage>
-      )}
+      ) : null}
       <Button
         className="next-button not-selectable"
         size={ButtonSize.small}

@@ -183,7 +183,7 @@ export const EnableUserSelect: Story = {
 
 export const ActionLink: Story = {
   render: () => (
-    <Link type={LinkType.action} onClick={() => alert("Action link clicked!")}>
+    <Link type={LinkType.action} onClick={() => {}}>
       Action link
     </Link>
   ),

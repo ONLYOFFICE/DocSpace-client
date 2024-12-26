@@ -161,7 +161,7 @@ const DatePicker = (props: DatePickerProps) => {
         />
       )}
 
-      {isCalendarOpen && (
+      {isCalendarOpen ? (
         <StyledCalendar
           isMobile={isMobile}
           selectedDate={date ?? moment()}
@@ -173,7 +173,7 @@ const DatePicker = (props: DatePickerProps) => {
           locale={locale}
           initialDate={openDate}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

@@ -310,7 +310,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         displayArrow={displayArrow}
       />
 
-      {displayType !== "toggle" && (
+      {displayType !== "toggle" ? (
         <DropDown
           id={dropDownId}
           className="dropdown-container not-selectable"
@@ -332,7 +332,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           withBackdrop={withBackdrop}
           isAside={isAside}
           withBackground={withBackground}
-          isMobileView={isMobileView && !disableMobileView}
+          isMobileView={isMobileView ? !disableMobileView : null}
           isNoFixedHeightOptions={isNoFixedHeightOptions}
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
@@ -342,7 +342,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         >
           {dropDownBody}
         </DropDown>
-      )}
+      ) : null}
     </StyledComboBox>
   );
 };

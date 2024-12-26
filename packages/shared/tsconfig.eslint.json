@@ -12,7 +12,6 @@
     "skeletons",
     "HOC",
     "hooks",
-    "api",
     "sw",
     "selectors",
     "store",
@@ -30,6 +29,7 @@
     "index.d.ts",
     "tsconfig.eslint.json",
     "routes",
-    "polyfills"
+    "polyfills",
+    "api"
   ]
 }

@@ -79,7 +79,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       >
         {label}
       </StyledLabel>
-      {!hideCross && (
+      {!hideCross ? (
         <IconButton
           className={`selected-tag-removed ${classNameCloseButton}`}
           iconName={CrossReactSvgUrl}
@@ -88,7 +88,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
           isFill
           isDisabled={isDisabled}
         />
-      )}
+      ) : null}
     </StyledSelectedItem>
   );
 };

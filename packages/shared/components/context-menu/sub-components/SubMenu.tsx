@@ -184,7 +184,7 @@ const SubMenu = (props: SubMenuProps) => {
 
         const top = menuItemActive.offsetTop;
         const scroller = firstList.querySelector(".scroller") as HTMLElement;
-        const scrollTop = scroller.scrollTop;
+        const { scrollTop } = scroller;
         const positionActiveItem = top - scrollTop;
 
         subMenuRefTop = positionActiveItem - 2;
@@ -385,9 +385,9 @@ const SubMenu = (props: SubMenuProps) => {
         {icon}
         {label}
         {subMenuIcon}
-        {item.isOutsideLink && (
+        {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
-        )}
+        ) : null}
       </a>
     );
 

@@ -26,7 +26,6 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { HelpButton } from ".";
 
@@ -39,13 +38,18 @@ describe("<HelpButton />", () => {
   });
 
   it("renders with custom className", () => {
-    render(<HelpButton tooltipContent={tooltipContent} className="custom-class" />);
+    render(
+      <HelpButton tooltipContent={tooltipContent} className="custom-class" />,
+    );
     expect(screen.getByTestId("icon-button")).toHaveClass("custom-class");
   });
 
   it("renders with custom id", () => {
     render(<HelpButton tooltipContent={tooltipContent} id="custom-id" />);
-    expect(screen.getByTestId("icon-button")).toHaveAttribute("id", "custom-id");
+    expect(screen.getByTestId("icon-button")).toHaveAttribute(
+      "id",
+      "custom-id",
+    );
   });
 
   it("renders with custom style", () => {
@@ -90,18 +94,24 @@ describe("<HelpButton />", () => {
 
   it("renders with afterShow callback", () => {
     const afterShow = jest.fn();
-    render(<HelpButton tooltipContent={tooltipContent} afterShow={afterShow} />);
+    render(
+      <HelpButton tooltipContent={tooltipContent} afterShow={afterShow} />,
+    );
     expect(screen.getByTestId("help-button")).toBeInTheDocument();
   });
 
   it("renders with afterHide callback", () => {
     const afterHide = jest.fn();
-    render(<HelpButton tooltipContent={tooltipContent} afterHide={afterHide} />);
+    render(
+      <HelpButton tooltipContent={tooltipContent} afterHide={afterHide} />,
+    );
     expect(screen.getByTestId("help-button")).toBeInTheDocument();
   });
 
   it("renders with custom tooltipMaxWidth", () => {
-    render(<HelpButton tooltipContent={tooltipContent} tooltipMaxWidth="300px" />);
+    render(
+      <HelpButton tooltipContent={tooltipContent} tooltipMaxWidth="300px" />,
+    );
     expect(screen.getByTestId("help-button")).toBeInTheDocument();
   });
 

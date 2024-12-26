@@ -34,7 +34,7 @@ export default function getCorrectDate(
 ) {
   if (!date || date === "0001-01-01T00:00:00.0000000Z") return "—";
 
-  const timezone = window.timezone;
+  const { timezone } = window;
 
   const curDate = moment(date).locale(locale).tz(timezone).format(dateFormat);
   const curTime = moment(date).locale(locale).tz(timezone).format(timeFormat);

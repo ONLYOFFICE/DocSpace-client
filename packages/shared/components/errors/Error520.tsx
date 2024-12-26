@@ -77,10 +77,6 @@ const Error520 = ({
     }
   }, []);
 
-  const showDialog = () => {
-    setReportDialogVisible(true);
-  };
-
   const closeDialog = () => {
     setReportDialogVisible(false);
   };

@@ -67,12 +67,12 @@ const FilterButton = ({
         title={title}
       >
         <IconButton iconName={FilterReactSvrUrl} size={16} />
-        {selectedFilterValue && selectedFilterValue.length > 0 && (
+        {selectedFilterValue && selectedFilterValue.length > 0 ? (
           <ColorTheme themeId={ThemeId.IndicatorFilterButton} />
-        )}
+        ) : null}
       </StyledButton>
 
-      {showFilterBlock && (
+      {showFilterBlock ? (
         <FilterBlock
           filterHeader={filterHeader}
           selectedFilterValue={selectedFilterValue}
@@ -89,7 +89,7 @@ const FilterButton = ({
           userId={userId}
           disableThirdParty={disableThirdParty}
         />
-      )}
+      ) : null}
     </>
   );
 };

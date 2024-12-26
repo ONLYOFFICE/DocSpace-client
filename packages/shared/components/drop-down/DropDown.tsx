@@ -104,7 +104,7 @@ const DropDown = ({
       ? dropDown.offsetHeight
       : DomHelpers.getHiddenElementOuterHeight(dropDown);
 
-    let bottom = parentRects.bottom;
+    let { bottom } = parentRects;
 
     const viewport = DomHelpers.getViewport();
     const scrollBarWidth =
@@ -321,7 +321,7 @@ const DropDown = ({
 
     return (
       <>
-        {isDefaultMode && backDrop}
+        {isDefaultMode ? backDrop : null}
 
         <div
           ref={dropDownRef}

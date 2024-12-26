@@ -172,18 +172,18 @@ const Template = (args: RowContainerProps) => {
                 {user.userName}
               </Link>
               <>
-                {user.status === "pending" && (
+                {user.status === "pending" ? (
                   <SendClockIcon
                     size={IconSizeType.small}
                     color={globalColors.lightIcons}
                   />
-                )}
-                {user.status === "disabled" && (
+                ) : null}
+                {user.status === "disabled" ? (
                   <CatalogSpamIcon
                     size={IconSizeType.small}
                     color={globalColors.lightIcons}
                   />
-                )}
+                ) : null}
               </>
               {user.isHead ? (
                 <Link

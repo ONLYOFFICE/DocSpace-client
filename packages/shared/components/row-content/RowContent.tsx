@@ -109,7 +109,7 @@ const RowContent = (props: RowContentProps) => {
         }
         return null;
       })}
-      {!disableSideInfo && (
+      {!disableSideInfo ? (
         <TabletSideInfo
           className="row-content_tablet-side-info"
           color={sideColor}
@@ -118,7 +118,7 @@ const RowContent = (props: RowContentProps) => {
         >
           {sideInfo}
         </TabletSideInfo>
-      )}
+      ) : null}
     </StyledRowContent>
   );
 };

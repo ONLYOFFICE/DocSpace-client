@@ -108,7 +108,7 @@ const MainButton = (props: MainButtonProps) => {
         onClick={onMainButtonClick}
       >
         <Text className={styles.text}>{text}</Text>
-        {isDropdown && (
+        {isDropdown ? (
           <>
             <ReactSVG
               className={styles.img}
@@ -126,7 +126,7 @@ const MainButton = (props: MainButtonProps) => {
               }}
             />
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );

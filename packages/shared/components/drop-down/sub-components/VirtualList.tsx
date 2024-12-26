@@ -35,7 +35,7 @@ import { VariableSizeList } from "react-window";
 import { Scrollbar } from "../../scrollbar";
 import { VirtualListProps } from "../DropDown.types";
 
-function VirtualList({
+const VirtualList = ({
   Row,
   width,
   isOpen,
@@ -47,7 +47,7 @@ function VirtualList({
   isNoFixedHeightOptions,
   getItemSize,
   enableKeyboardEvents,
-}: VirtualListProps) {
+}: VirtualListProps) => {
   const listRef = useRef<VariableSizeList>(null);
 
   const activeIndex = useMemo(() => {
@@ -150,7 +150,7 @@ function VirtualList({
       {Row}
     </VariableSizeList>
   );
-}
+};
 
 VirtualList.displayName = "VirtualList";
 

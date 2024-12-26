@@ -215,7 +215,7 @@ const FilterInput = React.memo(
             isDisabled={isIndexEditingMode}
             onFocus={onInputFocus}
           />
-          {!isIndexEditingMode && (
+          {!isIndexEditingMode ? (
             <FilterButton
               id="filter-button"
               onFilter={onFilter}
@@ -233,9 +233,9 @@ const FilterInput = React.memo(
               userId={userId}
               disableThirdParty={disableThirdParty}
             />
-          )}
+          ) : null}
 
-          {!isIndexing && (
+          {!isIndexing ? (
             <SortButton
               id="sort-by-button"
               onSort={onSort}
@@ -247,30 +247,28 @@ const FilterInput = React.memo(
               onChangeViewAs={onChangeViewAs}
               onSortButtonClick={onSortButtonClick}
               viewSelectorVisible={
-                viewSettings &&
-                viewSelectorVisible &&
-                currentDeviceType !== DeviceType.desktop
+                viewSettings && viewSelectorVisible
+                  ? currentDeviceType !== DeviceType.desktop
+                  : null
               }
               title={sortByTitle}
             />
-          )}
+          ) : null}
           {viewSettings &&
-            !isIndexing &&
-            currentDeviceType === DeviceType.desktop &&
-            viewSelectorVisible && (
-              <ViewSelector
-                id={
-                  viewAs === "tile" ? "view-switch--row" : "view-switch--tile"
-                }
-                style={{ marginInlineStart: "8px" }}
-                viewAs={viewAs === "table" ? "row" : viewAs}
-                viewSettings={viewSettings}
-                onChangeView={onChangeViewAs}
-                isFilter
-              />
-            )}
+          !isIndexing &&
+          currentDeviceType === DeviceType.desktop &&
+          viewSelectorVisible ? (
+            <ViewSelector
+              id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
+              style={{ marginInlineStart: "8px" }}
+              viewAs={viewAs === "table" ? "row" : viewAs}
+              viewSettings={viewSettings}
+              onChangeView={onChangeViewAs}
+              isFilter
+            />
+          ) : null}
         </div>
-        {selectedItems && selectedItems.length > 0 && (
+        {selectedItems && selectedItems.length > 0 ? (
           <div className="filter-input_selected-row">
             {selectedItems.map((item) => (
               <SelectedItem
@@ -282,7 +280,7 @@ const FilterInput = React.memo(
                 onClick={removeSelectedItemAction}
               />
             ))}
-            {selectedItems.filter((item) => item.label).length > 1 && (
+            {selectedItems.filter((item) => item.label).length > 1 ? (
               <Link
                 className="clear-all-link"
                 isHovered
@@ -293,9 +291,9 @@ const FilterInput = React.memo(
               >
                 {t("Common:ClearAll")}
               </Link>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
       </StyledFilterInput>
     );
   },

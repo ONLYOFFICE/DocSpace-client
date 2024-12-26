@@ -476,10 +476,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
               onClick={onMenuClick}
               onMouseEnter={onMenuMouseEnter}
             >
-              {changeView && withHeader && (
+              {changeView && withHeader ? (
                 <div className="contextmenu-header">
-                  {isIconExist &&
-                    (showMobileMenu ? (
+                  {isIconExist ? (
+                    showMobileMenu ? (
                       <IconButton
                         className="edit_icon"
                         iconName={ArrowLeftReactUrl}
@@ -523,8 +523,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                           />
                         )}
                       </div>
-                    ))}
-                  {isAvatarExist && (
+                    )
+                  ) : null}
+                  {isAvatarExist ? (
                     <div className="avatar-wrapper">
                       <Avatar
                         role={AvatarRole.none}
@@ -533,13 +534,13 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                         className="drop-down-item_avatar"
                       />
                     </div>
-                  )}
+                  ) : null}
 
                   <Text className="text" truncate dir="auto">
                     {showMobileMenu ? mobileHeader : header.title}
                   </Text>
                 </div>
-              )}
+              ) : null}
 
               {showMobileMenu ? (
                 <MobileSubMenu
@@ -571,14 +572,14 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
     const contextMenu = (
       <>
-        {withBackdrop && (
+        {withBackdrop ? (
           <Backdrop
             visible={(visible && (changeView || ignoreChangeView)) || false}
             withBackground
             withoutBlur={false}
             zIndex={baseZIndex}
           />
-        )}
+        ) : null}
 
         <Portal element={element} appendTo={appendTo} />
       </>

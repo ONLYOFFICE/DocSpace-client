@@ -57,13 +57,13 @@ export const EmptyView = ({
           {description}
         </Text>
       </EmptyViewHeader>
-      {options && (
+      {options ? (
         <EmptyViewBody>
           {options.map((option) => (
             <EmptyViewOption key={option.key} option={option} />
           ))}
         </EmptyViewBody>
-      )}
+      ) : null}
     </EmptyViewWrapper>
   );
 };

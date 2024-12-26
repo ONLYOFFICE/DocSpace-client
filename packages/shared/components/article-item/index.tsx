@@ -138,25 +138,25 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
             })}
           >
             <ReactSVG className={styles.icon} src={icon} />
-            {!showText && (
+            {!showText ? (
               <>
-                {showInitial && (
+                {showInitial ? (
                   <Text className={styles.articleItemInitialText}>
                     {getInitial(text)}
                   </Text>
-                )}
-                {showBadge && !iconBadge && (
+                ) : null}
+                {showBadge && !iconBadge ? (
                   <div
                     className={classNames(styles.articleItemBadgeWrapper, {
                       [styles.showText]: showText,
                     })}
                     onClick={onClickBadgeAction}
                   />
-                )}
+                ) : null}
               </>
-            )}
+            ) : null}
           </div>
-          {showText && (
+          {showText ? (
             <Text
               className={classNames(styles.articleItemText, {
                 [styles.active]: isActive,
@@ -165,8 +165,8 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
             >
               {text}
             </Text>
-          )}
-          {showBadge && showText && (
+          ) : null}
+          {showBadge && showText ? (
             <div
               className={classNames(styles.articleItemBadgeWrapper, {
                 [styles.showText]: showText,
@@ -185,7 +185,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
                 ))
               )}
             </div>
-          )}
+          ) : null}
         </div>
       </Link>
     );

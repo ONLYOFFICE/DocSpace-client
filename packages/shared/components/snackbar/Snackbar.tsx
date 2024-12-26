@@ -159,11 +159,11 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
             this.setState({ isLoaded: true });
           }}
         />
-        {isLoaded && (
+        {isLoaded ? (
           <StyledAction className="action" onClick={this.onActionClick}>
             <StyledCrossIcon size={IconSizeType.medium} />
           </StyledAction>
-        )}
+        ) : null}
       </div>
     ) : (
       <StyledSnackBar
@@ -181,14 +181,14 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
         ) : (
           <div className="text-container">
             <div className="header-body" style={{ textAlign }}>
-              {showIcon && (
+              {showIcon ? (
                 <Box className="logo">
                   <StyledLogoIcon
                     size={IconSizeType.medium}
                     color={textColor}
                   />
                 </Box>
-              )}
+              ) : null}
 
               <Heading
                 size={HeadingSize.xsmall}
@@ -212,7 +212,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 {text}
               </Text>
 
-              {btnText && (
+              {btnText ? (
                 <Text
                   color={textColor}
                   className="button"
@@ -220,23 +220,23 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 >
                   {btnText}
                 </Text>
-              )}
+              ) : null}
 
-              {countDownTime > -1 && (
+              {countDownTime > -1 ? (
                 <Countdown
                   date={Date.now() + countDownTime}
                   renderer={this.countDownRenderer}
                   onComplete={this.onActionClick}
                 />
-              )}
+              ) : null}
             </div>
           </div>
         )}
-        {!btnText && (
+        {!btnText ? (
           <button className="action" type="submit" onClick={this.onActionClick}>
             <StyledCrossIcon size={IconSizeType.small} />
           </button>
-        )}
+        ) : null}
       </StyledSnackBar>
     );
   }

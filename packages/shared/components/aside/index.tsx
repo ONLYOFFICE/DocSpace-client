@@ -58,9 +58,9 @@ const AsidePure = (props: AsideProps) => {
 
   return (
     <aside className={asideClasses} style={{ zIndex }} data-testid="aside">
-      {!withoutHeader && (
+      {!withoutHeader ? (
         <AsideHeader isCloseable onCloseClick={onClose} {...rest} />
-      )}
+      ) : null}
       {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
     </aside>
   );

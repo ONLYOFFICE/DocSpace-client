@@ -50,7 +50,7 @@ const BetaBadge = ({
       {t("Common:BetaBadgeDescription", {
         productName: t("Common:ProductName"),
       })}
-      {!withOutFeedbackLink && (
+      {!withOutFeedbackLink ? (
         <Trans
           t={t}
           ns="Common"
@@ -76,7 +76,7 @@ const BetaBadge = ({
         >
           {`If you have found a bug, please submit it via <1> form </1> or contact us at <3>{{ supportEmail }}</3>`}
         </Trans>
-      )}
+      ) : null}
     </>
   );
 

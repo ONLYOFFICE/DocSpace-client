@@ -149,17 +149,17 @@ const DropDownItem = ({
       data-testid="drop-down-item"
       {...rest}
     >
-      {isHeader && withHeaderArrow && (
+      {isHeader && withHeaderArrow ? (
         <div className={styles.iconWrapper}>
           <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
         </div>
-      )}
+      ) : null}
 
-      {icon && !withoutIcon && (
+      {icon && !withoutIcon ? (
         <div className={styles.iconWrapper}>
           <IconComponent icon={icon} fillIcon={fillIcon} />
         </div>
-      )}
+      ) : null}
 
       {isSeparator ? (
         "\u00A0"
@@ -169,7 +169,7 @@ const DropDownItem = ({
         children
       )}
 
-      {isSubMenu && (
+      {isSubMenu ? (
         <div
           className={classNames(styles.iconWrapper, styles.submenuArrow, {
             [styles.RTL]: isRTL,
@@ -186,9 +186,9 @@ const DropDownItem = ({
             )}
           />
         </div>
-      )}
+      ) : null}
 
-      {withToggle && (
+      {withToggle ? (
         <div className={styles.wrapperToggle} onClick={handleToggleClick}>
           <ToggleButton
             isChecked={checked || false}
@@ -196,9 +196,9 @@ const DropDownItem = ({
             noAnimation
           />
         </div>
-      )}
+      ) : null}
 
-      {isBeta && (
+      {isBeta ? (
         <div className={styles.wrapperBadge}>
           <Badge
             noHover
@@ -209,11 +209,11 @@ const DropDownItem = ({
             label={t("Common:BetaLabel")}
           />
         </div>
-      )}
+      ) : null}
 
-      {additionalElement && (
+      {additionalElement ? (
         <div className={styles.elementWrapper}>{additionalElement}</div>
-      )}
+      ) : null}
     </div>
   );
 };

@@ -43,6 +43,8 @@ import { PluginComponents } from "./enums";
 
 import { messageActions } from "./utils";
 
+const PLUGIN_IFRAME_TITLE = "Plugin iframe";
+
 const PropsContext = React.createContext({});
 
 export const PluginComponent = inject(({ pluginStore }) => {
@@ -368,7 +370,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           case PluginComponents.iFrame: {
             return (
               <iframe
-                title="Plugin iframe"
+                title={PLUGIN_IFRAME_TITLE}
                 {...elementProps}
                 style={{
                   minHeight: "100%",

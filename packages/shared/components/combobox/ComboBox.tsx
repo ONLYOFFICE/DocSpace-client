@@ -37,9 +37,7 @@ import { ComboBoxSize } from "./ComboBox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
-  const needUpdate = equal(prevProps, nextProps);
-
-  return needUpdate;
+  return equal(prevProps, nextProps);
 };
 
 const ComboBoxPure: React.FC<TComboboxProps> = ({
@@ -307,7 +305,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
 
       const isActiveOption = withLabel
         ? option.label === selectedOption?.label
-        : option.key === selectedOption.key;
+        : option.key === selectedOption?.key;
 
       const isActive = displaySelectedOption && isActiveOption;
 
@@ -318,11 +316,11 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           key={key}
           {...optionProps}
           data-testid="drop-down-item"
-          data-focused={isOpen && option === selectedOption}
+          data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
           data-type={option.type || undefined}
           aria-disabled={option.disabled || undefined}
-          className={`drop-down-item ${"className" in option ? option.className : ""}`}
+          className={`drop-down-item ${option?.className || ""}`}
           textOverflow={textOverflow}
           disabled={disabled}
           onClick={(e) => optionClick(option, e)}
@@ -424,7 +422,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         displayArrow={displayArrow}
       />
 
-      {displayType !== "toggle" && renderDropDown()}
+      {displayType !== "toggle" ? renderDropDown() : null}
     </StyledComboBox>
   );
 };

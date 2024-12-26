@@ -125,7 +125,7 @@ const DropDownItem = ({
 
   return (
     <div
-      onClick={handleClick}
+      {...rest}
       className={classNames(
         styles.dropDownItem,
         {
@@ -142,12 +142,16 @@ const DropDownItem = ({
         },
         className,
       )}
+      onClick={handleClick}
       tabIndex={tabIndex}
+      data-testid="drop-down-item"
+      data-focused={isActiveDescendant}
+      role="option"
+      aria-selected={isSelected}
+      aria-disabled={disabled}
       style={
         { "--drop-down-min-width": minWidth, ...style } as React.CSSProperties
       }
-      data-testid="drop-down-item"
-      {...rest}
     >
       {isHeader && withHeaderArrow ? (
         <div className={styles.iconWrapper}>

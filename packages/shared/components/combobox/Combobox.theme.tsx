@@ -32,12 +32,12 @@ import React, {
 } from "react";
 import { ThemeContext } from "styled-components";
 
-import { StyledThemeComboButton } from "./Combobox.styled";
-import type { ComboButtonThemeProps } from "./Combobox.types";
+import { StyledThemeComboButton } from "./ComboBox.styled";
+import type { TComboButtonThemeProps } from "./ComboBox.types";
 
 const ComboButtonTheme = forwardRef(
   (
-    props: PropsWithChildren<ComboButtonThemeProps>,
+    props: PropsWithChildren<TComboButtonThemeProps>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const defaultTheme = useContext(ThemeContext);

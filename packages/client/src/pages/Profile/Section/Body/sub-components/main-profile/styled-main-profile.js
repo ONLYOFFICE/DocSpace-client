@@ -332,5 +332,5 @@ export const StyledLabel = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  margin-top: ${({ marginTopProp }) => (marginTopProp ? marginTopProp : 0)};
+  margin-top: ${({ marginTopProp }) => marginTopProp || 0};
 `;

@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import DragTooltip from "./DragTooltip";
 
-const Tooltip = ({ dragging }) => (dragging ? <DragTooltip /> : <></>);
+const Tooltip = ({ dragging }) => (dragging ? <DragTooltip /> : null);
 
 export default inject(({ filesStore }) => {
   const { dragging, selection, startDrag, bufferSelection } = filesStore;

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo, useEffect } from "react";
+import { useCallback, useMemo, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import { Paging } from "@docspace/shared/components/paging";
@@ -38,7 +38,6 @@ const SectionPagingContent = ({
   fetchFiles,
   fetchRooms,
   setIsLoading,
-  selectedCount,
   selectedFolderId,
   tReady,
   totalPages,
@@ -60,7 +59,7 @@ const SectionPagingContent = ({
           e.preventDefault();
           return;
         }
-        //console.log("Next Clicked", e);
+        // console.log("Next Clicked", e);
 
         const newFilter = accountsFilter.clone();
         newFilter.page++;
@@ -72,7 +71,7 @@ const SectionPagingContent = ({
           e.preventDefault();
           return;
         }
-        //console.log("Next Clicked", e);
+        // console.log("Next Clicked", e);
 
         const newFilter = filter.clone();
         newFilter.page++;
@@ -109,7 +108,7 @@ const SectionPagingContent = ({
           return;
         }
 
-        //console.log("Prev Clicked", e);
+        // console.log("Prev Clicked", e);
 
         const newFilter = accountsFilter.clone();
         newFilter.page--;
@@ -122,7 +121,7 @@ const SectionPagingContent = ({
           return;
         }
 
-        //console.log("Prev Clicked", e);
+        // console.log("Prev Clicked", e);
 
         const newFilter = filter.clone();
         newFilter.page--;
@@ -151,9 +150,9 @@ const SectionPagingContent = ({
 
   const onChangePageSize = useCallback(
     (pageItem) => {
-      //console.log("Paging onChangePageSize", pageItem);
+      // console.log("Paging onChangePageSize", pageItem);
       if (isAccountsPage) {
-        //console.log("Paging onChangePageSize", pageItem);
+        // console.log("Paging onChangePageSize", pageItem);
 
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
@@ -191,7 +190,7 @@ const SectionPagingContent = ({
 
   const onChangePage = useCallback(
     (pageItem) => {
-      //console.log("Paging onChangePage", pageItem);
+      // console.log("Paging onChangePage", pageItem);
       if (isAccountsPage) {
         const newFilter = accountsFilter.clone();
         newFilter.page = pageItem.key;
@@ -237,30 +236,27 @@ const SectionPagingContent = ({
 
   const pageItems = useMemo(() => {
     if (isAccountsPage) {
-      const totalPages = Math.ceil(
-        accountsFilter.total / accountsFilter.pageCount,
-      );
-      return [...Array(totalPages).keys()].map((item) => {
+      const total = Math.ceil(accountsFilter.total / accountsFilter.pageCount);
+      return [...Array(total).keys()].map((item) => {
         return {
           key: item,
           label: t("Common:PageOfTotalPage", {
             page: item + 1,
-            totalPage: totalPages,
-          }),
-        };
-      });
-    } else {
-      if (filter.total < filter.pageCount) return [];
-      return [...Array(totalPages).keys()].map((item) => {
-        return {
-          key: item,
-          label: t("Common:PageOfTotalPage", {
-            page: item + 1,
-            totalPage: totalPages,
+            totalPage: total,
           }),
         };
       });
     }
+    if (filter.total < filter.pageCount) return [];
+    return [...Array(totalPages).keys()].map((item) => {
+      return {
+        key: item,
+        label: t("Common:PageOfTotalPage", {
+          page: item + 1,
+          totalPage: totalPages,
+        }),
+      };
+    });
   }, [
     filter.total,
     filter.pageCount,
@@ -293,7 +289,7 @@ const SectionPagingContent = ({
       emptyCountSelection
     : countItems.find((x) => x.key === filter.pageCount) || emptyCountSelection;
 
-  //console.log("SectionPagingContent render", filter);
+  // console.log("SectionPagingContent render", filter);
 
   const showCountItem = useMemo(() => {
     if (isAccountsPage) return false;
@@ -306,9 +302,7 @@ const SectionPagingContent = ({
 
   return !tReady ||
     (filter.total <= filter.pageCount && filter.total < 26) ||
-    isHidePagination ? (
-    <></>
-  ) : (
+    isHidePagination ? null : (
     <Paging
       previousLabel={t("Common:Previous")}
       nextLabel={t("Common:Next")}
@@ -327,8 +321,8 @@ const SectionPagingContent = ({
       previousAction={onPrevClick}
       nextAction={onNextClick}
       openDirection="both"
-      selectedPageItem={selectedPageItem} //FILTER CURRENT PAGE
-      selectedCountItem={selectedCountItem} //FILTER PAGE COUNT
+      selectedPageItem={selectedPageItem} // FILTER CURRENT PAGE
+      selectedCountItem={selectedCountItem} // FILTER PAGE COUNT
       showCountItem={showCountItem}
     />
   );

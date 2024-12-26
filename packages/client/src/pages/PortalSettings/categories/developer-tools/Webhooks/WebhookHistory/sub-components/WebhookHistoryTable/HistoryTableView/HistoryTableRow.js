@@ -31,11 +31,11 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { retryWebhook } from "@docspace/shared/api/settings";
+
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import StatusBadge from "../../../../sub-components/StatusBadge";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -43,6 +43,8 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useTranslation } from "react-i18next";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
+import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledTableRow = styled(TableRow)`
   .textOverflow {
@@ -66,8 +68,8 @@ const StyledTableRow = styled(TableRow)`
     props.isHighlight &&
     css`
       .table-container_cell {
-        background-color: ${(props) =>
-          props.theme.client.settings.webhooks.tableCellBackground};
+        background-color: ${({ theme }) =>
+          theme.client.settings.webhooks.tableCellBackground};
       }
     `}
 `;
@@ -81,11 +83,9 @@ const HistoryTableRow = (props) => {
     item,
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     hideColumns,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = props;
   const { t, i18n } = useTranslation(["Webhooks", "Common"]);
@@ -93,12 +93,12 @@ const HistoryTableRow = (props) => {
   const { id } = useParams();
 
   const redirectToDetails = () =>
-    navigate(window.location.pathname + `/${item.id}`);
+    navigate(`${window.location.pathname}/${item.id}`);
   const handleRetryEvent = async () => {
     if (isRetryPending) {
       return;
     }
-    await retryWebhookEvent(item.id);
+    await retryWebhook(item.id);
     await fetchHistoryItems({
       ...(historyFilters ? formatFilters(historyFilters) : {}),
       configId: id,
@@ -124,13 +124,10 @@ const HistoryTableRow = (props) => {
     },
   ];
 
-  const formattedDelivery =
-    moment(item.delivery)
-      .tz(window.timezone)
-      .locale(i18n.language)
-      .format("MMM D, YYYY, h:mm:ss A") +
-    " " +
-    t("Common:UTC");
+  const formattedDelivery = `${moment(item.delivery)
+    .tz(window.timezone)
+    .locale(i18n.language)
+    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
 
   const onRowClick = (e) => {
     if (
@@ -189,20 +186,16 @@ export default inject(({ webhooksStore }) => {
   const {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   } = webhooksStore;
 
   return {
     toggleEventId,
     isIdChecked,
-    retryWebhookEvent,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
   };
 })(observer(HistoryTableRow));

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { isTablet, isDesktop } from "@docspace/shared/utils";
 
@@ -52,19 +52,16 @@ const LoaderSectionHeader = () => {
   const height = isTabletView ? "28" : "24";
   const width = isTabletView ? "163" : "140";
 
-  const levelSettings = location.pathname.split("/").length - 1;
+  const levelSettings = window.location.pathname.split("/").length - 1;
 
   const checkInnerWidth = () => {
-    const isTabletView = isTablet();
-
-    const isDesktopView = isDesktop();
-    if (isTabletView) {
+    if (isTablet()) {
       setIsTabletView(true);
     } else {
       setIsTabletView(false);
     }
 
-    if (isDesktopView) {
+    if (isDesktop()) {
       setIsDesktopView(true);
     } else {
       setIsDesktopView(false);

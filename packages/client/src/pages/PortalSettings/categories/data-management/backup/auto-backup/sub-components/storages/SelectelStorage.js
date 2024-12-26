@@ -30,13 +30,13 @@ import { inject, observer } from "mobx-react";
 import SelectelSettings from "../../../consumer-storage-settings/SelectelSettings";
 import ScheduleComponent from "../ScheduleComponent";
 import { StyledStoragesModule } from "../../../StyledBackup";
+
 class SelectelStorage extends React.Component {
   constructor(props) {
     super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+    const { setCompletedFormFields } = this.props;
 
     setCompletedFormFields(SelectelSettings.formNames(), "selectel");
-    this.isDisabled = !selectedStorage.isSet;
   }
 
   render() {

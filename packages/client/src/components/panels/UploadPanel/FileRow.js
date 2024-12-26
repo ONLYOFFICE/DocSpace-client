@@ -29,16 +29,15 @@ import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import LoadingButton from "./SubComponents/LoadingButton";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import SimulatePassword from "../../../components/SimulatePassword";
-import ErrorFileUpload from "./SubComponents/ErrorFileUpload.js";
-import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import { isMobile } from "react-device-detect";
-import { NoUserSelect } from "@docspace/shared/utils";
+import { NoUserSelect, tablet } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
-import { tablet } from "@docspace/shared/utils";
+import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
+import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
+import SimulatePassword from "../../SimulatePassword";
+import LoadingButton from "./SubComponents/LoadingButton";
 
 const StyledFileRow = styled(Row)`
   width: 100%;
@@ -185,7 +184,7 @@ class FileRow extends Component {
   };
 
   onCancelCurrentUpload = (e) => {
-    //console.log("cancel upload ", e);
+    // console.log("cancel upload ", e);
     const { id, action, fileId } = e.currentTarget.dataset;
     const { t, cancelCurrentUpload, cancelCurrentFileConversion } = this.props;
 
@@ -206,24 +205,13 @@ class FileRow extends Component {
     } = this.props;
     if (!isMediaActive) setCurrentItem(item);
 
-    const data = { visible: true, id: id };
+    const data = { visible: true, id };
     setMediaViewerData(data);
     setUploadPanelVisible(false);
 
     if (uploaded) {
       clearUploadedFilesHistory();
     }
-  };
-
-  hasError = () => {
-    const { password } = this.state;
-    const pass = password.trim();
-    if (!pass) {
-      this.setState({ passwordValid: false });
-      return true;
-    }
-
-    return false;
   };
 
   onButtonClick = () => {
@@ -233,11 +221,7 @@ class FileRow extends Component {
 
     if (this.hasError()) return;
 
-    let index;
-
-    uploadedFiles.reduce((acc, rec, id) => {
-      if (rec.fileId === fileId) index = id;
-    }, []);
+    const index = uploadedFiles.findIndex((f) => f.fileId === fileId);
 
     const newItem = {
       fileId,
@@ -254,17 +238,29 @@ class FileRow extends Component {
   };
 
   onChangePassword(password) {
-    this.setState({
+    this.setState((prevState) => ({
       password,
-      ...(!this.state.passwordValid && { passwordValid: true }),
-    });
+      ...(!prevState.passwordValid && { passwordValid: true }),
+    }));
   }
+
+  hasError = () => {
+    const { password } = this.state;
+    const pass = password.trim();
+    if (!pass) {
+      this.setState({ passwordValid: false });
+      return true;
+    }
+
+    return false;
+  };
 
   onKeyDown = (e) => {
     if (e.key === "Enter") {
       this.onButtonClick();
     }
   };
+
   render() {
     const {
       t,
@@ -287,9 +283,7 @@ class FileRow extends Component {
       <Text as="span" fontWeight="600" className="file-exst">
         {ext}
       </Text>
-    ) : (
-      <></>
-    );
+    ) : null;
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 
@@ -299,105 +293,103 @@ class FileRow extends Component {
     };
 
     return (
-      <>
-        <StyledFileRow
-          className="download-row"
-          key={item.uniqueId}
-          checkbox={false}
-          element={
-            <img className={item.error && "img_error"} src={fileIcon} alt="" />
-          }
-          isMediaActive={isMediaActive}
-          showPasswordInput={showPasswordInput}
-          withoutBorder
-          isError={item.error}
-        >
-          <>
-            {item.fileId ? (
-              isMedia || (isPlugin && onPluginClick) ? (
+      <StyledFileRow
+        className="download-row"
+        key={item.uniqueId}
+        checkbox={false}
+        element={
+          <img className={item.error && "img_error"} src={fileIcon} alt="" />
+        }
+        isMediaActive={isMediaActive}
+        showPasswordInput={showPasswordInput}
+        withoutBorder
+        isError={item.error}
+      >
+        <>
+          {item.fileId ? (
+            isMedia || (isPlugin && onPluginClick) ? (
+              <Link
+                className="upload-panel_file-row-link upload-panel-file-error_text"
+                fontWeight="600"
+                truncate
+                onClick={isMedia ? onMediaClick : onPluginClick}
+              >
+                {name}
+                {fileExtension}
+              </Link>
+            ) : (
+              <div className="upload-panel_file-name">
                 <Link
-                  className="upload-panel_file-row-link upload-panel-file-error_text"
+                  className="upload-panel-file-error_text"
+                  onClick={() =>
+                    onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                  }
                   fontWeight="600"
                   truncate
-                  onClick={isMedia ? onMediaClick : onPluginClick}
+                  // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                  // target={downloadInCurrentTab ? "_self" : "_blank"}
                 >
                   {name}
                   {fileExtension}
                 </Link>
-              ) : (
-                <div className="upload-panel_file-name">
-                  <Link
-                    className="upload-panel-file-error_text"
-                    onClick={() =>
-                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
-                    }
-                    fontWeight="600"
-                    truncate
-                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    // target={downloadInCurrentTab ? "_self" : "_blank"}
-                  >
-                    {name}
-                    {fileExtension}
-                  </Link>
-                </div>
-              )
-            ) : (
-              <div className="upload-panel_file-name">
-                <Text
-                  fontWeight="600"
-                  truncate
-                  className="upload-panel-file-error_text"
-                >
-                  {name}
-                  {fileExtension}
-                </Text>
               </div>
-            )}
-
-            {item.fileId && !item.error ? (
-              <ActionsUploadedFile
-                item={item}
-                onCancelCurrentUpload={this.onCancelCurrentUpload}
-              />
-            ) : item.error || (!item.fileId && uploaded) ? (
-              <ErrorFileUpload
-                t={t}
-                item={item}
-                theme={theme}
-                onTextClick={this.onTextClick}
-                showPasswordInput={showPasswordInput}
-              />
-            ) : (
-              <div
-                className="upload_panel-icon"
-                data-id={item.uniqueId}
-                onClick={this.onCancelCurrentUpload}
+            )
+          ) : (
+            <div className="upload-panel_file-name">
+              <Text
+                fontWeight="600"
+                truncate
+                className="upload-panel-file-error_text"
               >
-                <LoadingButton item={item} />
-              </div>
-            )}
-            {showPasswordInput && (
-              <div className="password-input">
-                <SimulatePassword
-                  onChange={this.onChangePassword}
-                  onKeyDown={this.onKeyDown}
-                  hasError={!passwordValid}
-                />
-                <Button
-                  id="conversion-button"
-                  className="conversion-password_button"
-                  size={"small"}
-                  scale
-                  primary
-                  label={t("Ready")}
-                  onClick={this.onButtonClick}
-                  isDisabled={!password}
-                />
-              </div>
-            )}
-          </>
-        </StyledFileRow>
-      </>
+                {name}
+                {fileExtension}
+              </Text>
+            </div>
+          )}
+
+          {item.fileId && !item.error ? (
+            <ActionsUploadedFile
+              item={item}
+              onCancelCurrentUpload={this.onCancelCurrentUpload}
+            />
+          ) : item.error || (!item.fileId && uploaded) ? (
+            <ErrorFileUpload
+              t={t}
+              item={item}
+              theme={theme}
+              onTextClick={this.onTextClick}
+              showPasswordInput={showPasswordInput}
+            />
+          ) : (
+            <div
+              className="upload_panel-icon"
+              data-id={item.uniqueId}
+              onClick={this.onCancelCurrentUpload}
+            >
+              <LoadingButton item={item} />
+            </div>
+          )}
+          {showPasswordInput && (
+            <div className="password-input">
+              <SimulatePassword
+                onChange={this.onChangePassword}
+                onKeyDown={this.onKeyDown}
+                hasError={!passwordValid}
+              />
+              <Button
+                id="conversion-button"
+                className="conversion-password_button"
+                size="small"
+                scale
+                primary
+                label={t("Ready")}
+                onClick={this.onButtonClick}
+                isDisabled={!password}
+              />
+            </div>
+          )}
+        </>
+      </StyledFileRow>
     );
   }
 }
@@ -413,23 +405,22 @@ export default inject(
     { item },
   ) => {
     let ext;
-    let name;
     let splitted;
 
     if (item.file) {
       const infoExt = item?.fileInfo?.fileExst;
       splitted = item.file.name.split(".");
 
-      if (!!infoExt) {
+      if (infoExt) {
         ext = infoExt;
         splitted.splice(-1);
       } else {
-        ext = splitted.length > 1 ? "." + splitted.pop() : "";
+        ext = splitted.length > 1 ? `.${splitted.pop()}` : "";
       }
     } else {
       ext = item.fileInfo.fileExst;
       splitted = item.fileInfo.title.split(".");
-      if (!!ext) splitted.splice(-1);
+      if (ext) splitted.splice(-1);
     }
 
     const { fileItemsList } = pluginStore;
@@ -457,7 +448,7 @@ export default inject(
       }
     }
 
-    name = splitted.join(".");
+    const name = splitted.join(".");
 
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =

@@ -139,9 +139,7 @@ const ButtonsComponent = (props) => {
         {...props}
         onInviteUsersClick={onInviteUsersClick}
       />
-    ) : (
-      <></>
-    );
+    ) : null;
   }
 
   if (!isRoot) {
@@ -161,7 +159,7 @@ const ButtonsComponent = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 const CommonButtons = (props) => {
@@ -253,7 +251,7 @@ const CommonButtons = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export default inject(

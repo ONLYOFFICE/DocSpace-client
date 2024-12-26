@@ -29,13 +29,13 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { TableBody } from "@docspace/shared/components/table";
-import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/shared/components/table";
 
-import HistoryTableRow from "./HistoryTableRow";
-import HistoryTableHeader from "./HistoryTableHeader";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
+import HistoryTableRow from "./HistoryTableRow";
+import HistoryTableHeader from "./HistoryTableHeader";
 
 const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
   margin-top: -2px;
@@ -101,7 +101,6 @@ const HistoryTableView = (props) => {
     hasMoreItems,
     totalItems,
     fetchMoreItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,
@@ -171,7 +170,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
   } = webhooksStore;
   const { id: userId } = userStore.user;
@@ -184,7 +182,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,

@@ -32,9 +32,9 @@ import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 
 const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");

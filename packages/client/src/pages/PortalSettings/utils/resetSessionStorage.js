@@ -24,10 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  getFromSessionStorage,
-  saveToSessionStorage,
-} from "@docspace/shared/utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 export const resetSessionStorage = () => {
   const portalNameFromSessionStorage = getFromSessionStorage("portalName");
@@ -89,7 +87,6 @@ export const resetSessionStorage = () => {
     "defaultStoragePeriod",
   );
 
-  const companyNameFromSessionStorage = getFromSessionStorage("companyName");
   const companySettingsFromSessionStorage =
     getFromSessionStorage("companySettings");
   const defaultCompanySettingsFromSessionStorage = getFromSessionStorage(

@@ -32,9 +32,9 @@ import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
+import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import LicenseContainer from "./LicenseContainer";
 import { StyledComponent } from "./StyledComponent";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import EnterpriseContainer from "./EnterpriseContainer";
 import TrialContainer from "./TrialContainer";
 

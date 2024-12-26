@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { useState } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -33,8 +31,8 @@ import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { Text } from "@docspace/shared/components/text";
-import { isMobile } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import * as Styled from "./index.styled";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +73,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
       />
 
       <Styled.SortButton
-        id={"oform-sort"}
+        id="oform-sort"
         title={t("Common:SortBy")}
         onClick={onToggleCombobox}
       >
@@ -84,38 +82,34 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           tabIndex={1}
           opened={isOpen}
           onToggle={onToggleCombobox}
-          className={"sort-combo-box"}
-          directionX={"right"}
-          directionY={"both"}
-          scaled={true}
-          size={"content"}
+          className="sort-combo-box"
+          directionX="right"
+          directionY="both"
+          scaled
+          size="content"
           disableIconClick={false}
-          disableItemClick={true}
+          disableItemClick
           isDefaultMode={false}
-          manualY={"102%"}
-          fixedDirection={true}
+          manualY="102%"
+          fixedDirection
           advancedOptionsCount={sortData.length}
           fillIcon={false}
           options={[]}
           selectedOption={{}}
-          manualWidth={"auto"}
-          advancedOptions={
-            <>
-              {sortData?.map((item) => (
-                <Styled.SortDropdownItem
-                  id={item.id}
-                  onClick={() => onSort(item.key)}
-                  key={item.key}
-                  data-value={item.key}
-                  isSelected={oformsFilter.sortBy === item.key}
-                  isDescending={oformsFilter.sortOrder === "desc"}
-                >
-                  <Text fontWeight={600}>{item.label}</Text>
-                  <SortDesc className="sortorder-arrow" />
-                </Styled.SortDropdownItem>
-              ))}
-            </>
-          }
+          manualWidth="auto"
+          advancedOptions={sortData?.map((item) => (
+            <Styled.SortDropdownItem
+              id={item.id}
+              onClick={() => onSort(item.key)}
+              key={item.key}
+              data-value={item.key}
+              isSelected={oformsFilter.sortBy === item.key}
+              isDescending={oformsFilter.sortOrder === "desc"}
+            >
+              <Text fontWeight={600}>{item.label}</Text>
+              <SortDesc className="sortorder-arrow" />
+            </Styled.SortDropdownItem>
+          ))}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </Styled.SortComboBox>

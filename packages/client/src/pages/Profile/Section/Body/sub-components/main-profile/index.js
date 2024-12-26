@@ -29,7 +29,7 @@ import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -49,24 +49,24 @@ import {
   getUserTypeName,
   getUserTypeDescription,
 } from "@docspace/shared/utils/common";
-import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
-
-import { Trans } from "react-i18next";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
-import {
-  StyledWrapper,
-  StyledInfo,
-  StyledLabel,
-  StyledAvatarWrapper,
-} from "./styled-main-profile";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { useTheme } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
+import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
+import {
+  StyledWrapper,
+  StyledInfo,
+  StyledLabel,
+  StyledAvatarWrapper,
+} from "./styled-main-profile";
+
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
 
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
@@ -81,7 +81,6 @@ const MainProfile = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
-    changeAvatarVisible,
     setChangeAvatarVisible,
     withActivationBar,
     sendActivationLink,
@@ -190,7 +189,7 @@ const MainProfile = (props) => {
         ones, feel free to write to us at
         <Link
           href={`mailto:${documentationEmail}`}
-          isHovered={true}
+          isHovered
           color={currentColorScheme?.main?.accent}
         >
           {{ supportEmail: documentationEmail }}
@@ -220,11 +219,11 @@ const MainProfile = (props) => {
       label: "",
     };
 
-  const onLanguageSelect = (language) => {
-    if (profile.cultureName === language.key) return;
+  const onLanguageSelect = (newLanguage) => {
+    if (profile.cultureName === newLanguage.key) return;
 
-    updateProfileCulture(profile.id, language.key)
-      .then(() => location.reload())
+    updateProfileCulture(profile.id, newLanguage.key)
+      .then(() => window.location.reload())
       .catch((error) => {
         toastr.error(error && error.message ? error.message : error);
       });
@@ -236,7 +235,7 @@ const MainProfile = (props) => {
     <StyledWrapper>
       <StyledAvatarWrapper className="avatar-wrapper">
         <Avatar
-          className={"avatar"}
+          className="avatar"
           size="max"
           role={role}
           source={userAvatar}
@@ -259,10 +258,10 @@ const MainProfile = (props) => {
                   ? globalColors.secondGreen
                   : globalColors.secondGreenDark
               }
-              fontSize={"9px"}
+              fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight={"13px"}
+              lineHeight="13px"
             />
           </div>
         )}
@@ -277,10 +276,10 @@ const MainProfile = (props) => {
                   ? globalColors.secondPurple
                   : globalColors.secondPurpleDark
               }
-              fontSize={"9px"}
+              fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight={"13px"}
+              lineHeight="13px"
             />
           </div>
         )}
@@ -307,10 +306,10 @@ const MainProfile = (props) => {
                       ? globalColors.secondGreen
                       : globalColors.secondGreenDark
                   }
-                  fontSize={"9px"}
+                  fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight={"13px"}
+                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
                   {t("PeopleTranslations:SSOAccountTooltip")}
@@ -330,10 +329,10 @@ const MainProfile = (props) => {
                       ? globalColors.secondPurple
                       : globalColors.secondPurpleDark
                   }
-                  fontSize={"9px"}
+                  fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight={"13px"}
+                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
                   {t("PeopleTranslations:LDAPAccountTooltip")}
@@ -368,9 +367,7 @@ const MainProfile = (props) => {
                 <Tooltip
                   float
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
               )}
@@ -432,14 +429,10 @@ const MainProfile = (props) => {
               scaled={isMobile()}
               scaledOptions={false}
               size="content"
-              showDisabledItems={true}
+              showDisabledItems
               dropDownMaxHeight={dropDownMaxHeight}
               manualWidth="280px"
-              isDefaultMode={
-                isMobileHorizontalOrientation
-                  ? isMobileHorizontalOrientation
-                  : !isMobile()
-              }
+              isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
               withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
               modernView={!isMobile()}
@@ -518,9 +511,7 @@ const MainProfile = (props) => {
                   <Tooltip
                     float
                     id="emailTooltip"
-                    getContent={({ content }) => (
-                      <Text fontSize="12px">{content}</Text>
-                    )}
+                    getContent={TooltipContent}
                     place="bottom"
                   />
                 )}
@@ -616,14 +607,10 @@ const MainProfile = (props) => {
                 scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
-                showDisabledItems={true}
+                showDisabledItems
                 dropDownMaxHeight={dropDownMaxHeight}
                 manualWidth="280px"
-                isDefaultMode={
-                  isMobileHorizontalOrientation
-                    ? isMobileHorizontalOrientation
-                    : !isMobile()
-                }
+                isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
                 withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
                 modernView={!isMobile()}
@@ -639,7 +626,7 @@ const MainProfile = (props) => {
           t={t}
           visible={image.uploadedFile}
           image={image}
-          isProfileUpload={true}
+          isProfileUpload
           onChangeImage={onChangeIcon}
           onChangeFile={onChangeFileContext}
           onClose={() => setAvatarEditorDialogVisible(false)}
@@ -650,13 +637,7 @@ const MainProfile = (props) => {
 };
 
 export default inject(
-  ({
-    settingsStore,
-    peopleStore,
-    userStore,
-    dialogsStore,
-    avatarEditorDialogStore,
-  }) => {
+  ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
     const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
       settingsStore;

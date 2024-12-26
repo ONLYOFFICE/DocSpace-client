@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
-import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";

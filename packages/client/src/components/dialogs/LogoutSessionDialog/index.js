@@ -56,7 +56,7 @@ const LogoutSessionDialog = ({
           label={t("Profile:LogoutBtn")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onClick}
           isLoading={isLoading}
         />

@@ -49,6 +49,7 @@ class ThirdPartyModule extends React.PureComponent {
 
     setSelectedFolder(`${id}`);
   };
+
   render() {
     const { isPanelVisible } = this.state;
     const {
@@ -57,7 +58,7 @@ class ThirdPartyModule extends React.PureComponent {
       isReset,
       buttonSize,
       passedId,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       isResourcesDefault,
       t,
       ...rest

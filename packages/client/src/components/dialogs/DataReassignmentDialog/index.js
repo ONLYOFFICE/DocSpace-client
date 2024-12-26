@@ -33,10 +33,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
-import Body from "./sub-components/Body";
-import Footer from "./sub-components/Footer";
 import api from "@docspace/shared/api";
 import { EmployeeType } from "@docspace/shared/enums";
+import Body from "./sub-components/Body";
+import Footer from "./sub-components/Footer";
+
 const { Filter } = api;
 
 const StyledBodyContent = styled.div`
@@ -98,45 +99,6 @@ const DataReassignmentDialog = ({
     filter.area = "people";
 
     getUsersList(filter, true);
-    return;
-  };
-
-  useEffect(() => {
-    //If click Delete user
-    if (isDeletingUserWithReassignment) onReassign();
-
-    return () => {
-      setIsDeletingUserWithReassignment(false);
-      setDataReassignmentDeleteProfile(false);
-      clearTimeout(timerId);
-    };
-  }, [isDeletingUserWithReassignment]);
-
-  const onToggleDeleteProfile = () => {
-    setIsDeleteProfile((remove) => !remove);
-  };
-
-  const onTogglePeopleSelector = () => {
-    setSelectorVisible((show) => !show);
-  };
-
-  const onClose = () => {
-    setDataReassignmentDialogVisible(false);
-  };
-
-  const onClosePeopleSelector = () => {
-    setSelectorVisible(false);
-  };
-
-  const onStartAgain = () => {
-    setShowProgress(false);
-    setPercent(0);
-    setIsAbortTransfer(false);
-  };
-
-  const onAccept = (item) => {
-    setSelectorVisible(false);
-    setSelectedUser({ ...item[0] });
   };
 
   const checkReassignCurrentUser = () => {
@@ -146,7 +108,7 @@ const DataReassignmentDialog = ({
   const checkProgress = () => {
     dataReassignmentProgress(user.id)
       .then((res) => {
-        //If the task has already been interrupted and killed
+        // If the task has already been interrupted and killed
         if (!res) return;
 
         if (res.error) {
@@ -188,19 +150,42 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const onTerminate = () => {
-    clearTimeout(timerId);
+  useEffect(() => {
+    // If click Delete user
+    if (isDeletingUserWithReassignment) onReassign();
 
-    dataReassignmentTerminate(user.id)
-      .then((res) => {
-        setPercent(res.percentage);
-        setIsAbortTransfer(true);
-        toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
-      })
-      .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
-      });
+    return () => {
+      setIsDeletingUserWithReassignment(false);
+      setDataReassignmentDeleteProfile(false);
+      clearTimeout(timerId);
+    };
+  }, [isDeletingUserWithReassignment]);
+
+  const onToggleDeleteProfile = () => {
+    setIsDeleteProfile((remove) => !remove);
+  };
+
+  const onTogglePeopleSelector = () => {
+    setSelectorVisible((show) => !show);
+  };
+
+  const onClose = () => {
+    setDataReassignmentDialogVisible(false);
+  };
+
+  const onClosePeopleSelector = () => {
+    setSelectorVisible(false);
+  };
+
+  const onStartAgain = () => {
+    setShowProgress(false);
+    setPercent(0);
+    setIsAbortTransfer(false);
+  };
+
+  const onAccept = (item) => {
+    setSelectorVisible(false);
+    setSelectedUser({ ...item[0] });
   };
 
   const filter = Filter.getDefault();
@@ -244,6 +229,16 @@ const DataReassignmentDialog = ({
       </ModalDialog>
     );
   }
+
+  const onTerminate = () => {
+    dataReassignmentTerminate(user.id)
+      .then(() => {
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
+      })
+      .catch((error) => {
+        toastr.error(error?.response?.data?.error?.message);
+      });
+  };
 
   return (
     <ModalDialog

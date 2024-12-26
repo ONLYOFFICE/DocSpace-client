@@ -27,19 +27,19 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { VDRIndexingAction } from "@docspace/shared/enums";
 
 const RowDataComponent = (props) => {
   const {
@@ -148,7 +148,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? lastColumnContent : <></>}
+        {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -169,7 +169,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? lastColumnContent : <></>}
+          {lastColumn === "Author" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -196,7 +196,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? lastColumnContent : <></>}
+          {lastColumn === "Created" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -220,7 +220,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? lastColumnContent : <></>}
+          {lastColumn === "Modified" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -242,7 +242,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? lastColumnContent : <></>}
+          {lastColumn === "Size" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -266,7 +266,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? lastColumnContent : <></>}
+          {lastColumn === "Type" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />

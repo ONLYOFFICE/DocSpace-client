@@ -28,12 +28,10 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import SessionsTableHeader from "./SessionsTableHeader";
-import SessionsTableRow from "./SessionsTableRow";
-
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import SessionsTableRow from "./SessionsTableRow";
+import SessionsTableHeader from "./SessionsTableHeader";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;

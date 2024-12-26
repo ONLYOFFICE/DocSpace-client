@@ -24,23 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
 
 const LinkBlock = (props) => {
-  const {
-    t,
-    isEdit,
-    isLoading,
-    shareLink,
-    linkNameValue,
-    setLinkNameValue,
-    linkValue,
-    setLinkValue,
-  } = props;
+  const { t, isEdit, isLoading, linkNameValue, setLinkNameValue, linkValue } =
+    props;
 
   const onChangeLinkName = (e) => {
     setLinkNameValue(e.target.value);

@@ -64,8 +64,8 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
   ${(props) =>
     !props.isSelected &&
     css`
-      background-color: ${(props) => props.theme.logoCover.backgroundColor};
-      border: 1px solid ${(props) => props.theme.logoCover.borderColor};
+      background-color: ${({ theme }) => theme.logoCover.backgroundColor};
+      border: 1px solid ${({ theme }) => theme.logoCover.borderColor};
     `}
 `;
 

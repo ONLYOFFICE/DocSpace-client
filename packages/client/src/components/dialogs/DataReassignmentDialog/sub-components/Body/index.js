@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Progress from "./Progress";
 import { DialogReassignmentSkeleton } from "@docspace/shared/skeletons/dialog";
+import Progress from "./Progress";
 import AccountInfo from "./AccountInfo";
 import Description from "./Description";
 import NewOwner from "./NewOwner";

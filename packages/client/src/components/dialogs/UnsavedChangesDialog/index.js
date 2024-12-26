@@ -41,6 +41,15 @@ const UnsavedChangesDialogComponent = (props) => {
     setEditLinkPanelIsVisible,
   } = props;
 
+  const onClose = () => {
+    setUnsavedChangesDialog(false);
+  };
+
+  const onCloseMenu = () => {
+    setEditLinkPanelIsVisible(false);
+    onClose();
+  };
+
   const onKeyPress = (e) => {
     if (e.keyCode === 13) {
       onCloseMenu();
@@ -52,15 +61,6 @@ const UnsavedChangesDialogComponent = (props) => {
 
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
-
-  const onCloseMenu = () => {
-    setEditLinkPanelIsVisible(false);
-    onClose();
-  };
-
-  const onClose = () => {
-    setUnsavedChangesDialog(false);
-  };
 
   return (
     <ModalDialog

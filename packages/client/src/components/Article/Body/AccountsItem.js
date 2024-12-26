@@ -44,7 +44,7 @@ const PureAccountsItem = ({
   setContactsTab,
 }) => {
   const onClickAction = React.useCallback(
-    (e, id) => {
+    (e) => {
       onClick && onClick(e, "accounts");
 
       setContactsTab("people");

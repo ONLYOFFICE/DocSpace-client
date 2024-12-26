@@ -26,8 +26,6 @@
 
 import React, { useEffect } from "react";
 import Article from "@docspace/shared/components/article";
-import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
-import { SectionHeaderContent, SectionPagingContent } from "./Section";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -36,6 +34,8 @@ import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
 
 import { useParams } from "react-router-dom";
+import { SectionHeaderContent, SectionPagingContent } from "./Section";
+import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
 import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
@@ -62,6 +62,8 @@ const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
     </ArticleWrapper>
   );
 });
+
+ArticleSettings.displayName = "ArticleSettings";
 
 const Layout = ({
   currentProductId,
@@ -100,11 +102,7 @@ const Layout = ({
         needPageReload={needPageReload}
       />
       {!isGeneralPage && (
-        <SectionWrapper
-          viewAs={"settings"}
-          withBodyScroll={true}
-          settingsStudio={true}
-        >
+        <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
             {currentPath === webhookHistoryPath ? (
               <HistoryHeader />

@@ -163,9 +163,6 @@ export const LabelContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 class ProfileMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   renderDropDown = () => {
     const {
       avatarRole,
@@ -188,9 +185,9 @@ class ProfileMenu extends React.Component {
         clickOutsideAction={clickOutsideAction}
         forwardedRef={forwardedRef}
         isDefaultMode={false}
-        withBlur={true}
+        withBlur
         isBannerVisible={isBannerVisible}
-        withPortal={true}
+        withPortal
       >
         <StyledProfileMenu>
           <MenuContainer>
@@ -224,7 +221,7 @@ class ProfileMenu extends React.Component {
 
     const wrapper = <StyledWrapper>{element}</StyledWrapper>;
 
-    return <>{<Portal element={wrapper} appendTo={root} visible={open} />}</>;
+    return <Portal element={wrapper} appendTo={root} visible={open} />;
   }
 }
 
@@ -236,9 +233,7 @@ ProfileMenu.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   displayName: PropTypes.string,
-  id: PropTypes.string,
   open: PropTypes.bool,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   clickOutsideAction: PropTypes.func,
 };
 

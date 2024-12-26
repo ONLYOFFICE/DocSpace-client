@@ -30,12 +30,14 @@ import FileRow from "./FileRow";
 
 const RowWrapper = memo(({ data, index, style }) => {
   const item = data[index];
-  //console.log("RowWrapper render");
+  // console.log("RowWrapper render");
   return (
     <div style={style}>
       <FileRow item={item} />
     </div>
   );
 }, areEqual);
+
+RowWrapper.displayName = "RowWrapper";
 
 export default RowWrapper;

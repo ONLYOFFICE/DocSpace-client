@@ -60,9 +60,8 @@ class ThirdPartyStorageModule extends React.PureComponent {
       selectedId: storageId || "",
       isStartCopy: false,
     };
-
-    this.isFirstSet = false;
   }
+
   componentDidMount() {
     const { thirdPartyStorage } = this.props;
 
@@ -169,9 +168,7 @@ class ThirdPartyStorageModule extends React.PureComponent {
                 src={ExternalLinkReactSvgUrl}
                 className="drop-down-item_icon"
               />
-            ) : (
-              <></>
-            )}
+            ) : null}
           </DropDownItem>
         </StyledComboBoxItem>
       );
@@ -185,13 +182,13 @@ class ThirdPartyStorageModule extends React.PureComponent {
             advancedOptions={advancedOptions}
             selectedOption={{ key: 0, label: selectedStorageTitle }}
             onSelect={this.onSelect}
-            isDisabled={!isMaxProgress || isStartCopy || !!!thirdPartyStorage}
+            isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
             size="content"
-            manualWidth={"400px"}
+            manualWidth="400px"
             directionY="both"
             displaySelectedOption
             noBorder={false}
-            isDefaultMode={true}
+            isDefaultMode
             hideMobileView={false}
             forceCloseClickOutside
             scaledOptions

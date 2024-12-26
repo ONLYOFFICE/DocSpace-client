@@ -81,6 +81,7 @@ export type TAvailableExternalRights = {
 };
 
 export type TFile = {
+  isFile: boolean;
   access: ShareAccessRights;
   canShare: boolean;
   comment: string;

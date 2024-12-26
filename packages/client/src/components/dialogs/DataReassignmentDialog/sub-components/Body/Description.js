@@ -24,32 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const Description = ({ t, dataReassignmentUrl }) => {
   return (
-    <>
-      <StyledAvailableList className="list-container">
-        <Text className="list-item" noSelect>
-          {t("DataReassignmentDialog:DescriptionDataReassignment")}
-        </Text>
-        <Text className="list-item" noSelect>
-          {t("DataReassignmentDialog:NoteDataReassignment")}
-        </Text>
+    <StyledAvailableList className="list-container">
+      <Text className="list-item" noSelect>
+        {t("DataReassignmentDialog:DescriptionDataReassignment")}
+      </Text>
+      <Text className="list-item" noSelect>
+        {t("DataReassignmentDialog:NoteDataReassignment")}
+      </Text>
 
-        <Link
-          target="_blank"
-          isHovered
-          fontWeight={600}
-          style={{ textDecoration: "underline" }}
-          href={dataReassignmentUrl}
-        >
-          {t("DataReassignmentDialog:MoreAboutDataTransfer")}
-        </Link>
-      </StyledAvailableList>
-    </>
+      <Link
+        target="_blank"
+        isHovered
+        fontWeight={600}
+        style={{ textDecoration: "underline" }}
+        href={dataReassignmentUrl}
+      >
+        {t("DataReassignmentDialog:MoreAboutDataTransfer")}
+      </Link>
+    </StyledAvailableList>
   );
 };
 

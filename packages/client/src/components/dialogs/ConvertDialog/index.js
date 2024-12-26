@@ -117,17 +117,17 @@ const ConvertDialogComponent = (props) => {
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
   const onChangeMessageVisible = () => setHideMessage(!hideMessage);
 
+  const onClose = () => {
+    setConvertDialogVisible(false);
+    setIsConvertSingleFile(false);
+  };
+
   const onCloseDialog = () => {
     if (isUploadAction && conversionFiles?.length) {
       cancelUploadAction(conversionFiles);
     }
 
     onClose();
-  };
-
-  const onClose = () => {
-    setConvertDialogVisible(false);
-    setIsConvertSingleFile(false);
   };
 
   const onConvert = () => {

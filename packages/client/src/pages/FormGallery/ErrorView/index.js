@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import * as Styled from "./index.styled";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
@@ -35,6 +34,7 @@ import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import * as Styled from "./index.styled";
 
 const ErrorView = ({
   t,

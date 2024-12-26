@@ -26,7 +26,7 @@
 
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
-import CodeBlock from "../sub-components/CodeBlock";
+import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 

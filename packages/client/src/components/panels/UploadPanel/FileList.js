@@ -29,9 +29,9 @@ import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/compo
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
-import FileRow from "./FileRow";
 import { isDesktop } from "@docspace/shared/utils";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import FileRow from "./FileRow";
 
 const mobileRowHeight = 48;
 const desktopRowHeight = 48;
@@ -87,20 +87,18 @@ const FileList = ({ uploadDataFiles }) => {
 
   const renderList = ({ height, width }) => {
     return (
-      <>
-        <List
-          ref={listRef}
-          className="List"
-          height={height}
-          width={width}
-          itemSize={getSize}
-          itemCount={uploadDataFiles.length}
-          itemData={uploadDataFiles}
-          outerElementType={VirtualScroll}
-        >
-          {renderRow}
-        </List>
-      </>
+      <List
+        ref={listRef}
+        className="List"
+        height={height}
+        width={width}
+        itemSize={getSize}
+        itemCount={uploadDataFiles.length}
+        itemData={uploadDataFiles}
+        outerElementType={VirtualScroll}
+      >
+        {renderRow}
+      </List>
     );
   };
 

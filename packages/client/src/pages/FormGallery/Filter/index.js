@@ -26,11 +26,11 @@
 
 import styled from "styled-components";
 
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -85,7 +85,7 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const SectionFilterContent = ({}) => {
+const SectionFilterContent = () => {
   return (
     <StyledFilter>
       <div className="form-only-filters">

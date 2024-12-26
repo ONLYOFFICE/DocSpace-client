@@ -85,14 +85,14 @@ class Profile extends React.Component {
     }
 
     if (!profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "none";
       }
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { fetchProfile, profile } = this.props;
+  componentDidUpdate() {
+    const { profile } = this.props;
     // const { userId } = match.params;
     // const prevUserId = prevProps.match.params.userId;
 
@@ -102,7 +102,7 @@ class Profile extends React.Component {
     // }
 
     if (profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "";
       }
     }
@@ -111,7 +111,7 @@ class Profile extends React.Component {
   render() {
     // console.log("Profile render");
 
-    const { profile, showCatalog, setIsLoading } = this.props;
+    const { profile, setIsLoading } = this.props;
 
     return (
       <>
@@ -136,7 +136,6 @@ class Profile extends React.Component {
 Profile.propTypes = {
   fetchProfile: PropTypes.func.isRequired,
   profile: PropTypes.object,
-  language: PropTypes.string,
 };
 
 const ComponentPure = inject(

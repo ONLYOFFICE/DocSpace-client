@@ -69,20 +69,20 @@ const SessionsRowContent = ({
       <Text fontSize="14px" fontWeight="600">
         {platform} <span className="session-browser">{`(${browser})`}</span>
       </Text>
-      {isMobile() && showTickIcon && (
+      {isMobile() && showTickIcon ? (
         <IconButton
           size={12}
           iconName={TickSvgUrl}
           color={globalColors.tickColor}
         />
-      )}
+      ) : null}
       <Text truncate>{convertTime(date)}</Text>
-      {(country || city) && (
+      {country || city ? (
         <Text fontSize="12px" fontWeight="600">
           {country}
-          {country && city && ` ${city}`}
+          {country && city ? ` ${city}` : null}
         </Text>
-      )}
+      ) : null}
       <Text truncate containerWidth="160px">
         {ip}
       </Text>

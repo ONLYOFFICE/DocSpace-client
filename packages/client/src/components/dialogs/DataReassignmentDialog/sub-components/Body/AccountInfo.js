@@ -62,9 +62,9 @@ const AccountInfo = ({ user }) => {
           <Text className="display-name" noSelect title={user.displayName}>
             {user.displayName}
           </Text>
-          {user.statusType === "disabled" && (
+          {user.statusType === "disabled" ? (
             <StyledCatalogSpamIcon size="small" />
-          )}
+          ) : null}
         </div>
 
         {StatusNode}

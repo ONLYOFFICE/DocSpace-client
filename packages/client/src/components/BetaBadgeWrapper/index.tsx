@@ -27,7 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import {BetaBadge, type BetaBadgeProp }from "@docspace/shared/components/beta-badge";
+import {
+  BetaBadge,
+  type BetaBadgeProps,
+} from "@docspace/shared/components/beta-badge";
 
 const BetaBadgeWrapper = (props: BetaBadgeProps) => {
   return <BetaBadge {...props} />;

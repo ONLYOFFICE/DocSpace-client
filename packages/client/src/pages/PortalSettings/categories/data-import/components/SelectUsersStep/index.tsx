@@ -125,9 +125,10 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       showReminder
       displaySettings
       saveButtonDisabled={
-        canDisable &&
-        (areCheckedUsersEmpty ||
-          (quota.max ? totalUsedUsers > quota.max : false))
+        canDisable
+          ? areCheckedUsersEmpty ||
+            (quota.max ? totalUsedUsers > quota.max : false)
+          : null
       }
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
@@ -154,14 +155,14 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
               t={t}
               numberOfItems={withEmailUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
         </>
       ) : (
         <>
@@ -172,9 +173,9 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
         </>
       )}
 
-      {filteredAccounts.length > 0 && Buttons}
+      {filteredAccounts.length > 0 ? Buttons : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -183,7 +184,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

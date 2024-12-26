@@ -211,14 +211,14 @@ const MembersList = (props) => {
 
   return (
     <MainStyles>
-      {!withoutTitlesAndLinks && (
+      {!withoutTitlesAndLinks ? (
         <StyledUserTypeHeader
           id="members-list-header"
           className="members-list-header"
         >
           <Text className="members-list-header_title title" />
         </StyledUserTypeHeader>
-      )}
+      ) : null}
       <StyledMembersList>
         <InfiniteLoader
           isRowLoaded={isItemLoaded}

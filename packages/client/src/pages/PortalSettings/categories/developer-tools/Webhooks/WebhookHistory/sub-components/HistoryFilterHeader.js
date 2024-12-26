@@ -160,7 +160,9 @@ const HistoryFilterHeader = (props) => {
           </FilterButton>
         </ListHeader>
       </Suspense>
-      {historyFilters !== null && <StatusBar applyFilters={applyFilters} />}
+      {historyFilters !== null ? (
+        <StatusBar applyFilters={applyFilters} />
+      ) : null}
       <FilterDialog
         visible={isFiltersVisible}
         closeModal={closeFiltersModal}

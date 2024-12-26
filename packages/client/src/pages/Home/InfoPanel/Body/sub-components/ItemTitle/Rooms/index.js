@@ -117,7 +117,7 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      {isRoomMembersPanel && showSearchBlock && <Search />}
+      {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
 
       <div className="item-icon">
         <RoomIcon
@@ -129,9 +129,9 @@ const RoomsItemHeader = ({
           logo={icon}
           badgeUrl={badgeUrl || ""}
           hoverSrc={
-            selection.isRoom &&
-            selection.security?.EditRoom &&
-            Camera10ReactSvgUrl
+            selection.isRoom && selection.security?.EditRoom
+              ? Camera10ReactSvgUrl
+              : null
           }
           model={model}
           onChangeFile={onChangeFileContext}
@@ -147,13 +147,13 @@ const RoomsItemHeader = ({
         truncate
       >
         {title}
-        {isFile && displayFileExtension && (
+        {isFile && displayFileExtension ? (
           <span className="file-extension">{selection.fileExst}</span>
-        )}
+        ) : null}
       </Text>
 
       <div className="info_title-icons">
-        {isRoomMembersPanel && (
+        {isRoomMembersPanel ? (
           <IconButton
             id="info_search"
             className="icon"
@@ -162,9 +162,9 @@ const RoomsItemHeader = ({
             onClick={onSearchClick}
             size={16}
           />
-        )}
+        ) : null}
 
-        {canInviteUserInRoomAbility && isRoomMembersPanel && (
+        {canInviteUserInRoomAbility && isRoomMembersPanel ? (
           <IconButton
             id="info_add-user"
             className="icon"
@@ -174,7 +174,7 @@ const RoomsItemHeader = ({
             onClick={onClickInviteUsers}
             size={16}
           />
-        )}
+        ) : null}
         {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent

@@ -103,11 +103,11 @@ const FormGallery = ({
           <SectionHeaderContent />
         </Section.SectionHeader>
 
-        {!oformsLoadError && (
+        {!oformsLoadError ? (
           <Section.SectionFilter>
             <SectionFilterContent />
           </Section.SectionFilter>
-        )}
+        ) : null}
 
         <Section.SectionBody isFormGallery>
           {!oformsLoadError ? <SectionBodyContent /> : <ErrorView />}

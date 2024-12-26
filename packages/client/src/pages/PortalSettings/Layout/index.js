@@ -34,7 +34,7 @@ import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
 
 import { useParams } from "react-router-dom";
-import { SectionHeaderContent } from "./Section/Header";
+import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";

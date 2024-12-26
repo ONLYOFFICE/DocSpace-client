@@ -297,15 +297,15 @@ const Item = ({
           displayProp="flex"
           alignItems="center"
           gapProp="8px"
-          className={isGroup && "group-name"}
+          className={isGroup ? "group-name" : null}
         >
           <Text {...textProps} truncate noSelect>
             {inputValue}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </Box>
 
-        {!isGroup && (
+        {!isGroup ? (
           <Text
             className="label about-label"
             fontWeight={400}
@@ -315,7 +315,7 @@ const Item = ({
           >
             {`${typeLabel} | ${email}`}
           </Text>
-        )}
+        ) : null}
       </StyledInviteUserBody>
 
       {hasError ? (
@@ -342,7 +342,7 @@ const Item = ({
           gapProp="8px"
           className="role-access"
         >
-          {warning && (
+          {warning ? (
             <div className="role-warning">
               <StyledHelpButton
                 tooltipContent={warning}
@@ -350,7 +350,7 @@ const Item = ({
                 size={16}
               />
             </div>
-          )}
+          ) : null}
           <AccessSelector
             className="user-access"
             t={t}

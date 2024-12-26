@@ -298,7 +298,11 @@ class FileRow extends Component {
         key={item.uniqueId}
         checkbox={false}
         element={
-          <img className={item.error && "img_error"} src={fileIcon} alt="" />
+          <img
+            className={item.error ? "img_error" : null}
+            src={fileIcon}
+            alt=""
+          />
         }
         isMediaActive={isMediaActive}
         showPasswordInput={showPasswordInput}
@@ -369,7 +373,7 @@ class FileRow extends Component {
               <LoadingButton item={item} />
             </div>
           )}
-          {showPasswordInput && (
+          {showPasswordInput ? (
             <div className="password-input">
               <SimulatePassword
                 onChange={this.onChangePassword}
@@ -387,7 +391,7 @@ class FileRow extends Component {
                 isDisabled={!password}
               />
             </div>
-          )}
+          ) : null}
         </>
       </StyledFileRow>
     );

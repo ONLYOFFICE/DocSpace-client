@@ -212,7 +212,7 @@ const CreateRoomDialog = ({
         )}
       </ModalDialog.Body>
 
-      {!!roomParams.type && (
+      {roomParams.type ? (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"
@@ -236,7 +236,7 @@ const CreateRoomDialog = ({
             onClick={onCloseAndDisconnectThirdparty}
           />
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

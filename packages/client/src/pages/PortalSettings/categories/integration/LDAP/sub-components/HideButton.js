@@ -47,7 +47,7 @@ const HideButton = (props) => {
       flexDirection="row"
       marginProp={marginProp}
     >
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
@@ -57,7 +57,7 @@ const HideButton = (props) => {
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         className="hide-button settings_unavailable"

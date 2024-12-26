@@ -226,7 +226,7 @@ const AttributeMapping = (props) => {
             }
             tabIndex={11}
           />
-          {!isDefaultUsersQuotaSet && (
+          {!isDefaultUsersQuotaSet ? (
             <Text as="span" fontWeight={400} fontSize="12px" lineHeight="16px">
               <Trans
                 t={t}
@@ -242,7 +242,7 @@ const AttributeMapping = (props) => {
                 ]}
               />
             </Text>
-          )}
+          ) : null}
         </FieldContainer>
       </Box>
       <Box marginProp="24px 0 24px 0">

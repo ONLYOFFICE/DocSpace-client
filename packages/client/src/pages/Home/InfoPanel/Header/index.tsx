@@ -214,7 +214,7 @@ const InfoPanelHeaderContent = ({
         isCloseable
       />
 
-      {withTabs && (
+      {withTabs ? (
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
@@ -222,7 +222,7 @@ const InfoPanelHeaderContent = ({
             selectedItemId={isRoomsType ? roomsView : fileView}
           />
         </div>
-      )}
+      ) : null}
     </StyledInfoPanelHeader>
   );
 };

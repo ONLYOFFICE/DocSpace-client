@@ -91,7 +91,7 @@ const SyncContainer = ({
 
   const renderBody = () => (
     <Box className="ldap_sync-container">
-      {!isMobileView && (
+      {!isMobileView ? (
         <Text
           fontSize="16px"
           fontWeight={700}
@@ -101,7 +101,7 @@ const SyncContainer = ({
         >
           {t("LdapSyncTitle")}
         </Text>
-      )}
+      ) : null}
       <Text
         fontSize="12px"
         fontWeight={400}
@@ -126,7 +126,7 @@ const SyncContainer = ({
 
       <ToggleAutoSync />
 
-      {cron && (
+      {cron ? (
         <>
           {" "}
           <Text
@@ -160,7 +160,7 @@ const SyncContainer = ({
             }
           />
         </>
-      )}
+      ) : null}
     </Box>
   );
 

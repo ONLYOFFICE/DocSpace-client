@@ -96,7 +96,9 @@ const FilesRowContainer = ({
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         isIndexEditingMode={isIndexEditingMode}
         icon={icon}

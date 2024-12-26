@@ -96,8 +96,10 @@ const TableView = (props: TableViewProps) => {
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
             isChecked={
-              usersWithFilledEmails.length > 0 &&
-              checkedUsers.withoutEmail.length === usersWithFilledEmails.length
+              usersWithFilledEmails.length > 0
+                ? checkedUsers.withoutEmail.length ===
+                  usersWithFilledEmails.length
+                : null
             }
             toggleAll={toggleAll}
           />

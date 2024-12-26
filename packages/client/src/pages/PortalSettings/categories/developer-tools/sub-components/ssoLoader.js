@@ -53,12 +53,12 @@ const SSOLoader = (props) => {
   const { isToggleSSO } = props;
   return (
     <StyledLoader>
-      {!isToggleSSO && (
+      {!isToggleSSO ? (
         <div className="submenu">
           <RectangleSkeleton className="item" height="28px" />
           <RectangleSkeleton className="item" height="28px" />
         </div>
-      )}
+      ) : null}
       <RectangleSkeleton className="description" height="60px" />
       <RectangleSkeleton height="64px" />
 

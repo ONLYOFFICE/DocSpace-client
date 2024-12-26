@@ -68,11 +68,11 @@ const UsersRowContent = (props: UsersRowContentProps) => {
     <div key={data.key}>
       <Box displayProp="flex">
         <Text className="username">{displayName}</Text>
-        {isDuplicate && (
+        {isDuplicate ? (
           <Text className="user-existing">
             ({t("Settings:AccountAlreadyExists")})
           </Text>
-        )}
+        ) : null}
       </Box>
 
       <Text className="user-email">{email}</Text>

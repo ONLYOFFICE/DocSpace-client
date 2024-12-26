@@ -77,9 +77,9 @@ const LoaderSectionHeader = () => {
 
   return (
     <StyledLoader isTabletView={isTabletView} isDesktopView={isDesktopView}>
-      {levelSettings === 4 && (
+      {levelSettings === 4 ? (
         <RectangleSkeleton width="17" height="17" className="arrow" />
-      )}
+      ) : null}
 
       <RectangleSkeleton width={width} height={height} className="loader" />
     </StyledLoader>

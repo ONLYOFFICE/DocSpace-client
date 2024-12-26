@@ -210,17 +210,18 @@ const DNSSettingsComponent = (props) => {
             hasError={isError}
           />
           <div style={{ marginTop: "5px" }}>
-            {errorText &&
-              errorText.map((err) => (
-                <Text
-                  className="dns-error-text"
-                  key={err}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err}
-                </Text>
-              ))}
+            {errorText
+              ? errorText.map((err) => (
+                  <Text
+                    className="dns-error-text"
+                    key={err}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err}
+                  </Text>
+                ))
+              : null}
           </div>
           <div style={{ marginTop: "3px" }}>
             <Text
@@ -283,10 +284,10 @@ const DNSSettingsComponent = (props) => {
       isSettingPaid={isSettingPaid}
       standalone={standalone}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && !standalone && (
+          {!isSettingPaid && !standalone ? (
             <Badge
               className="paid-badge"
               fontWeight="700"
@@ -298,9 +299,9 @@ const DNSSettingsComponent = (props) => {
               label={t("Common:Paid")}
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("DNSSettingsDescription")}

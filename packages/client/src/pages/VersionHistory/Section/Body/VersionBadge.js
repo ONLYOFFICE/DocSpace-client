@@ -113,12 +113,12 @@ const VersionBadge = ({
         fontSize="12px"
         reverse={isJapanese}
       >
-        {isVersion && (
+        {isVersion ? (
           <>
             <span>{t("Version")}</span>
             <span>{versionGroup}</span>
           </>
-        )}
+        ) : null}
       </VersionBadgeText>
     </ColorTheme>
   );

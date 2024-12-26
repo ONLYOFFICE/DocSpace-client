@@ -124,9 +124,9 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 
   return (
     <Wrapper>
-      {users.withoutEmail.length > 0 && (
+      {users.withoutEmail.length > 0 ? (
         <NoEmailUsersBlock t={t} users={users.withoutEmail.length} />
-      )}
+      ) : null}
 
       {users.withoutEmail.length > 0 ? (
         <>
@@ -146,14 +146,14 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {users.withoutEmail.length > PAGE_SIZE && (
+          {users.withoutEmail.length > PAGE_SIZE ? (
             <AccountsPaging
               t={t}
               numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
         </>
       ) : (
         <>
@@ -164,9 +164,9 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
         </>
       )}
 
-      {filteredAccounts.length > 0 && Buttons}
+      {filteredAccounts.length > 0 ? Buttons : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -175,7 +175,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

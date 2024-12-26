@@ -82,12 +82,12 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
 
   return (
     <StyledContainer withDelete={withDelete}>
-      {withSeparator && <StyledSeparator />}
+      {withSeparator ? <StyledSeparator /> : null}
       <Text fontSize="14px" fontWeight={600} lineHeight="16px" noSelect>
         {t("Metadata")}
       </Text>
       <StyledInfo>
-        {plugin.author && (
+        {plugin.author ? (
           <>
             <Text
               fontSize="13px"
@@ -102,9 +102,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {plugin.author}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {plugin.version && (
+        {plugin.version ? (
           <>
             <Text
               fontSize="13px"
@@ -119,9 +119,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {plugin.version}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && (
+        {!plugin.system ? (
           <>
             <Text
               fontSize="13px"
@@ -136,9 +136,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {plugin.createBy.displayName}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && uploadDate && (
+        {!plugin.system && uploadDate ? (
           <>
             <Text
               fontSize="13px"
@@ -153,7 +153,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {uploadDate}
             </Text>
           </>
-        )}
+        ) : null}
 
         <Text
           fontSize="13px"
@@ -168,7 +168,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
           {pluginStatus}
         </Text>
 
-        {plugin.homePage && (
+        {plugin.homePage ? (
           <>
             <Text
               fontSize="13px"
@@ -192,8 +192,8 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {plugin.homePage}
             </Link>
           </>
-        )}
-        {plugin.description && (
+        ) : null}
+        {plugin.description ? (
           <>
             <Text
               fontSize="13px"
@@ -208,7 +208,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               {plugin.description}
             </Text>
           </>
-        )}
+        ) : null}
       </StyledInfo>
     </StyledContainer>
   );

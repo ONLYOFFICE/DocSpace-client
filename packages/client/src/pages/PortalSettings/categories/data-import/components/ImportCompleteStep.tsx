@@ -142,17 +142,17 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
         })}
       </InfoText>
 
-      {importResult.failedUsers > 0 && (
+      {importResult.failedUsers > 0 ? (
         <ErrorText>
           {t("Settings:ErrorsWereFound", {
             errors: importResult.failedUsers,
           })}
         </ErrorText>
-      )}
+      ) : null}
 
-      {importResult.errors?.length > 0 && (
+      {importResult.errors?.length > 0 ? (
         <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
-      )}
+      ) : null}
 
       <Wrapper>
         <Checkbox

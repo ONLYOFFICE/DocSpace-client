@@ -305,7 +305,7 @@ const VersionRow = (props) => {
         </Box>
         <Box className="version-comment-wrapper" displayProp="flex">
           <>
-            {showEditPanel && (
+            {showEditPanel ? (
               <Textarea
                 className="version_edit-comment"
                 onChange={onChange}
@@ -316,14 +316,14 @@ const VersionRow = (props) => {
                 autoFocus
                 areaSelect
               />
-            )}
+            ) : null}
 
             <Text className="version_text" truncate>
               {info.comment}
             </Text>
           </>
         </Box>
-        {showEditPanel && (
+        {showEditPanel ? (
           <Box className="version_edit-comment" marginProp="8px 0 2px 70px">
             <Box
               className="version_edit-comment-button-primary"
@@ -351,7 +351,7 @@ const VersionRow = (props) => {
               />
             </Box>
           </Box>
-        )}
+        ) : null}
       </div>
     </StyledVersionRow>
   );

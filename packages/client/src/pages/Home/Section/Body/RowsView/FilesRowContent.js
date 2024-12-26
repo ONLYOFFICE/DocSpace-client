@@ -266,16 +266,16 @@ const FilesRowContent = ({
         dir="auto"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
       <div className="badges">
         {badgesComponent}
-        {!isRoom && !isRooms && quickButtons}
+        {!isRoom && !isRooms ? quickButtons : null}
       </div>
 
-      {isIndexing && (
+      {isIndexing ? (
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -285,8 +285,8 @@ const FilesRowContent = ({
         >
           {`${t("Files:Index")} ${order}`}
         </Text>
-      )}
-      {mainInfo && (
+      ) : null}
+      {mainInfo ? (
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -296,7 +296,7 @@ const FilesRowContent = ({
         >
           {mainInfo}
         </Text>
-      )}
+      ) : null}
 
       {/* {additionalInfo && (
           <Text

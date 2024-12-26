@@ -183,8 +183,8 @@ const Header = (props) => {
         </Heading>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) ||
-          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
+        {(isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}
@@ -194,27 +194,27 @@ const Header = (props) => {
             isDisabled={false}
             usePortal
           />
-        )}
+        ) : null}
 
         <div className="tariff-bar">
           <TariffBar />
         </div>
       </div>
 
-      {deleteSelfProfileDialog && (
+      {deleteSelfProfileDialog ? (
         <DeleteSelfProfileDialog
           visible={deleteSelfProfileDialog}
           onClose={() => setDeleteSelfProfileDialog(false)}
           email={profile?.email}
         />
-      )}
+      ) : null}
 
-      {deleteOwnerProfileDialog && (
+      {deleteOwnerProfileDialog ? (
         <DeleteOwnerProfileDialog
           visible={deleteOwnerProfileDialog}
           onClose={() => setDeleteOwnerProfileDialog(false)}
         />
-      )}
+      ) : null}
     </StyledHeader>
   );
 };

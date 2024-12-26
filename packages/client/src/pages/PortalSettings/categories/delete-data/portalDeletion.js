@@ -107,7 +107,7 @@ const PortalDeletion = (props) => {
           onClick={onDeleteClick}
           isDisabled={notActivatedEmail}
         />
-        {notActivatedEmail && (
+        {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
@@ -123,7 +123,7 @@ const PortalDeletion = (props) => {
               {t("MainBar:RequestActivation")}
             </Link>
           </Text>
-        )}
+        ) : null}
       </ButtonWrapper>
       <DeletePortalDialog
         visible={isDialogVisible}

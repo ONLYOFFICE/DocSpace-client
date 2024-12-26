@@ -95,11 +95,11 @@ export const WebhookRowContent = ({
           <StatusBadge status={webhook.status} />
         </FlexWrapper>
 
-        {!isMobile() && (
+        {!isMobile() ? (
           <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
             {webhook.uri}
           </Text>
-        )}
+        ) : null}
       </ContentWrapper>
 
       <ToggleButtonWrapper>

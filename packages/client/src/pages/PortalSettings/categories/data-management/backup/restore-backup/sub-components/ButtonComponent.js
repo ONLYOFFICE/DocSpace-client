@@ -140,14 +140,14 @@ const ButtonContainer = (props) => {
         tabIndex={10}
       />
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
           icon="file"
           alert={false}
           percent={downloadingProgress}
         />
-      )}
+      ) : null}
     </div>
   );
 };

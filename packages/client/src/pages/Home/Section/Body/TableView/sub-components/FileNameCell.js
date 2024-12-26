@@ -72,14 +72,14 @@ const FileNameCell = ({
         >
           <div className="table-container_element-container">
             <div className="table-container_element">{element}</div>
-            {!isIndexEditingMode && (
+            {!isIndexEditingMode ? (
               <Checkbox
                 className="table-container_row-checkbox"
                 onChange={onChange}
                 isChecked={checked}
                 title={t("Common:TitleSelectFile")}
               />
-            )}
+            ) : null}
           </div>
         </TableCell>
       )}
@@ -95,9 +95,9 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
     </>
   );

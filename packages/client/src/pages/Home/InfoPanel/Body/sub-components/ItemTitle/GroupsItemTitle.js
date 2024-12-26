@@ -76,15 +76,15 @@ const GroupsItemTitle = ({
             {groupName}
           </Text>
         </div>
-        {!!groupName && (
+        {groupName ? (
           <Text className="info-text__email" title={infoPanelSelection.email}>
             {t("PeopleTranslations:PeopleCount", {
               count: infoPanelSelection.membersCount,
             })}
           </Text>
-        )}
+        ) : null}
 
-        {infoPanelSelection?.isLDAP && (
+        {infoPanelSelection?.isLDAP ? (
           <>
             <Badge
               id="ldap-badge-info-panel"
@@ -101,16 +101,16 @@ const GroupsItemTitle = ({
               {t("PeopleTranslations:LDAPGroupTooltip")}
             </Tooltip>
           </>
-        )}
+        ) : null}
       </div>
 
-      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP && (
+      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP ? (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"
           getData={getContextOptions}
         />
-      )}
+      ) : null}
     </StyledUsersTitle>
   );
 };

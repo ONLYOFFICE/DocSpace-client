@@ -489,7 +489,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
           />
-          {isBetaLang && <BetaBadge place="right-start" />}
+          {isBetaLang ? <BetaBadge place="right-start" /> : null}
         </div>
       </FieldContainer>
       <FieldContainer
@@ -523,13 +523,13 @@ const LanguageAndTimeZoneComponent = (props) => {
       hasScroll={hasScroll}
       className="category-item-wrapper"
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("StudioTimeLanguageSettings")}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription", {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { CustomScrollbarsVirtualList } from "../../../../../scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
 import { Item, List, Text } from "./Bookmarks.styled";

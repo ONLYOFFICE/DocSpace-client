@@ -35,10 +35,8 @@ import React, {
   useState,
 } from "react";
 
-// import { IndexedDBStores } from "@docspace/shared/enums";
-// import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
+import { LOADER_TIMEOUT } from "../../../../constants";
 
 import {
   calculateAdjustBoundsUtils,

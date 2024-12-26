@@ -26,9 +26,9 @@
 
 import styled, { css } from "styled-components";
 
-import { globalColors } from "@docspace/shared/themes";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { globalColors } from "../../themes";
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
 import { injectDefaultTheme } from "../../utils";
 
 type StyledButtonScrollProps = {

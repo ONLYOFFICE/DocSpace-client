@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isDesktop as isDesktopUtils } from "@docspace/shared/utils";
+import { isDesktop as isDesktopUtils } from "../../../utils";
 
 import { RectangleSkeleton } from "../../rectangle";
 

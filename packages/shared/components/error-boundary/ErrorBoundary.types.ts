@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { PropsWithChildren } from "react";
-
-import type { DeviceType } from "@docspace/shared/enums";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
-import type { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { i18n } from "i18next";
+
+import type { DeviceType } from "../../enums";
+import type { TUser } from "../../api/people/types";
+import type FirebaseHelper from "../../utils/firebase";
+import type { TColorScheme, TTheme } from "../../themes";
 
 export interface ErrorBoundaryProps extends PropsWithChildren {
   onError?: VoidFunction;

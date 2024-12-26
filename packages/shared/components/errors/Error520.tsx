@@ -28,7 +28,7 @@ import React, { useState, useEffect } from "react";
 import { i18n } from "i18next";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
-import { getCrashReport } from "@docspace/shared/utils/crashReport";
+import { getCrashReport } from "../../utils/crashReport";
 
 import { Link, LinkType } from "../link";
 import ReportDialog from "../report-dialog";

@@ -26,9 +26,9 @@
 
 import React from "react";
 import classNames from "classnames";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Heading } from "@docspace/shared/components/heading";
+import { Text } from "../text";
+import { Button, ButtonSize } from "../button";
+import { Heading } from "../heading";
 import PortalLogo from "../portal-logo/PortalLogo";
 import { Scrollbar } from "../scrollbar";
 

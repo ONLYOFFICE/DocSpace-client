@@ -24,32 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link } from "react-router-dom";
+import { Text } from "../text";
+import styles from "./EmptyView.module.scss";
+import EmptyViewOption from "./sub-components/EmptyView.option";
+import type { EmptyViewProps } from "./EmptyView.types";
 
-import { classNames } from "../../utils";
+const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
+  return (
+    <div className={styles.wrapper} data-testid="empty-view">
+      <div className={styles.header}>
+        {icon}
+        <Text
+          as="h3"
+          fontWeight="700"
+          lineHeight="22px"
+          className={styles.headerTitle}
+          noSelect
+        >
+          {title}
+        </Text>
+        <Text as="p" fontSize="12px" className={styles.subheading} noSelect>
+          {description}
+        </Text>
+      </div>
+      {options && (
+        <div className={styles.body}>
+          {options.map((option) => (
+            <EmptyViewOption key={option.key} option={option} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-import { EmptyViewItem } from "./EmptyView.item";
-import { isEmptyLinkOptions } from "./EmptyView.utils";
-
-import type { EmptyViewOptionProps } from "./EmptyView.types";
-
-function EmptyViewOption({ option }: EmptyViewOptionProps) {
-  if (isEmptyLinkOptions(option))
-    return (
-      <Link
-        id={option.key.toString()}
-        className={classNames("ev-link", option.className)}
-        to={option.to}
-        state={option.state}
-        onClick={option.onClick}
-      >
-        {option.icon}
-        <span>{option.description}</span>
-      </Link>
-    );
-
-  const { key, ...other } = option;
-  return <EmptyViewItem id={option.key.toString()} {...other} />;
-}
-
-export default EmptyViewOption;
+export { EmptyView };
+export type {
+  EmptyViewItemType,
+  EmptyViewLinkType,
+  EmptyViewOptionsType,
+} from "./EmptyView.types";

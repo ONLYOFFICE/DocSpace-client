@@ -38,7 +38,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AppLoader from "@docspace/shared/components/app-loader";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";

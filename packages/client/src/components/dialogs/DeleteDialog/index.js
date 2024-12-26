@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 
@@ -38,7 +37,6 @@ const DeleteDialogComponent = (props) => {
   const {
     t,
     deleteAction,
-    unsubscribeAction,
     setBufferSelection,
     setSelected,
     setRemoveMediaItem,
@@ -54,13 +52,14 @@ const DeleteDialogComponent = (props) => {
     deleteRoomsAction,
     isPersonalRoom,
     isRoom,
+    selection: selectionProps,
   } = props;
 
   const selection = [];
   let i = 0;
 
-  while (props.selection.length !== i) {
-    const item = props.selection[i];
+  while (selectionProps.length !== i) {
+    const item = selectionProps[i];
 
     if (!item?.isEditing) {
       // if (item?.access === 0 || item?.access === 1 || unsubscribe) {
@@ -70,17 +69,18 @@ const DeleteDialogComponent = (props) => {
     i++;
   }
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  const onClose = () => {
+    if (
+      selection.length === 1 &&
+      selection[0].isArchive &&
+      selection[0].isRootFolder === false
+    ) {
+      setSelected("none");
+    }
+    setBufferSelection(null);
+    setRemoveMediaItem(null);
+    setIsRoomDelete(false);
+    setDeleteDialogVisible(false);
   };
 
   const onDelete = () => {
@@ -106,14 +106,12 @@ const DeleteDialogComponent = (props) => {
 
     if (!selection.length) return;
 
-    let filesId = [];
-    let foldersId = [];
+    const filesId = [];
+    const foldersId = [];
 
-    selection.map((item) => {
+    selection.forEach((item) => {
       item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);
     });
-
-    unsubscribeAction(filesId, foldersId).catch((err) => toastr.error(err));
   };
 
   const onDeleteRoom = async () => {
@@ -135,19 +133,32 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
-  const onClose = () => {
-    if (
-      selection.length === 1 &&
-      selection[0].isArchive &&
-      selection[0].isRootFolder === false
-    ) {
-      setSelected("none");
+  const onDeleteAction = () => {
+    if (isRoomDelete) {
+      onDeleteRoom();
+      return;
     }
-    setBufferSelection(null);
-    setRemoveMediaItem(null);
-    setIsRoomDelete(false);
-    setDeleteDialogVisible(false);
+
+    if (unsubscribe) {
+      onUnsubscribe();
+      return;
+    }
+
+    onDelete();
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
@@ -255,12 +266,6 @@ const DeleteDialogComponent = (props) => {
           ? t("UnsubscribeButton")
           : t("MoveToTrashButton");
 
-  const onDeleteAction = () => {
-    if (isRoomDelete) onDeleteRoom();
-    else if (unsubscribe) onUnsubscribe();
-    else onDelete();
-  };
-
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
@@ -310,8 +315,7 @@ export default inject(
       setBufferSelection,
       setSelected,
     } = filesStore;
-    const { deleteAction, unsubscribeAction, deleteRoomsAction } =
-      filesActionsStore;
+    const { deleteAction, deleteRoomsAction } = filesActionsStore;
     const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
       treeFoldersStore;
 
@@ -338,7 +342,6 @@ export default inject(
 
       setDeleteDialogVisible,
       deleteAction,
-      unsubscribeAction,
       unsubscribe,
 
       setRemoveMediaItem,

@@ -73,9 +73,8 @@ const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)`
           props.type === "privacy" &&
           css`
             path {
-              fill: ${(props) =>
-                props.theme.createEditRoomDialog.permanentSettings
-                  .isPrivateIcon};
+              fill: ${({ theme }) =>
+                theme.createEditRoomDialog.permanentSettings.isPrivateIcon};
             }
           `}
       }

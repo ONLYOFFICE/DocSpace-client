@@ -128,10 +128,10 @@ const StyledTableRow = styled(TableRow)`
       :hover {
         .table-container_cell {
           cursor: pointer;
-          background: ${(props) =>
-            props.isIndexEditingMode
-              ? `${props.theme.filesSection.tableView.row.indexActive} !important`
-              : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+          background: ${({ theme, isIndexEditingMode }) =>
+            isIndexEditingMode
+              ? `${theme.filesSection.tableView.row.indexActive} !important`
+              : `${theme.filesSection.tableView.row.backgroundActive} !important`};
         }
 
         .table-container_file-name-cell,
@@ -152,21 +152,21 @@ const StyledTableRow = styled(TableRow)`
     css`
       .table-container_cell {
         cursor: pointer;
-        background: ${(props) =>
-          props.isIndexEditingMode
-            ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
-            : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+        background: ${({ theme, isIndexEditingMode }) =>
+          isIndexEditingMode
+            ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+            : `${theme.filesSection.tableView.row.backgroundActive} !important`};
       }
 
       &:hover .table-container_cell {
-        background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
       }
 
       .table-container_file-name-cell,
       .table-container_index-cell {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
             ? css`
                 margin-right: -24px;
                 padding-right: 24px;
@@ -178,8 +178,8 @@ const StyledTableRow = styled(TableRow)`
       }
 
       .table-container_row-context-menu-wrapper {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
                 padding-left: 20px !important;
@@ -358,7 +358,7 @@ const StyledTableRow = styled(TableRow)`
 
         @keyframes Highlight {
           0% {
-            background: ${(props) => props.theme.filesSection.animationColor};
+            background: ${({ theme }) => theme.filesSection.animationColor};
           }
 
           100% {

@@ -120,33 +120,18 @@ const AvatarEditorDialog = (props) => {
     image,
     onChangeFile,
     isProfileUpload,
+    setPreview,
   } = props;
-  const [avatar, setAvatar] = useState({
-    uploadedFile: image.uploadedFile,
-    x: 0.5,
-    y: 0.5,
-    zoom: 1,
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [preview, setPreview] = useState(null);
-  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
-  const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
+  const [isLoading, setIsLoading] = useState(false);
+  const [preview, setPreviewState] = useState(null);
+  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const editorBorderRadius = isProfileUpload ? 400 : 110;
 
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
     : t("RoomLogoCover:RoomCover");
-
-  useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
 
   const onResize = () => {
     const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
@@ -157,9 +142,18 @@ const AvatarEditorDialog = (props) => {
     else setScrollBodyHeight(null);
   };
 
+  useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
-    props.setPreview && props.setPreview("");
+    setPreview && setPreview("");
     onClose && onClose();
   };
 
@@ -215,8 +209,8 @@ const AvatarEditorDialog = (props) => {
             className="wrapper-image-editor"
             classNameWrapperImageCropper="avatar-editor"
             image={image}
-            setPreview={props.setPreview || setPreview}
-            onChangeImage={onChangeImage || onChangeAvatar}
+            setPreview={setPreview || setPreviewState}
+            onChangeImage={onChangeImage}
             onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}
             editorBorderRadius={editorBorderRadius}
@@ -230,7 +224,7 @@ const AvatarEditorDialog = (props) => {
           label={t("Common:SaveButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSave ? () => onSave(image) : onSaveClick}
           isLoading={isLoading}
         />

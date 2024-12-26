@@ -30,27 +30,37 @@ import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
-import { isManagement } from "@docspace/shared/utils/common";
 
 class CommonStore {
   settingsStore = null;
 
   portalName = null;
+
   dnsSettings = {
     defaultObj: {},
     customObj: {},
   };
 
   isInit = false;
+
   isLoaded = false;
+
   isLoadedArticleBody = false;
+
   isLoadedSectionHeader = false;
+
   isLoadedSubmenu = false;
+
   isLoadedLngTZSettings = false;
+
   isLoadedDNSSettings = false;
+
   isLoadedPortalRenaming = false;
+
   isLoadedCustomization = false;
+
   isLoadedCustomizationNavbar = false;
+
   isLoadedWelcomePageSettings = false;
 
   greetingSettingsIsDefault = true;
@@ -96,16 +106,15 @@ class CommonStore {
     } else {
       switch (page) {
         case "general":
-          {
-            requests.push(
-              this.settingsStore.getPortalTimezones(),
-              this.settingsStore.getPortalCultures(),
-            );
+          requests.push(
+            this.settingsStore.getPortalTimezones(),
+            this.settingsStore.getPortalCultures(),
+          );
 
-            if (standalone) {
-              requests.push(this.getDNSSettings());
-            }
+          if (standalone) {
+            requests.push(this.getDNSSettings());
           }
+
           break;
         default:
           break;
@@ -129,6 +138,7 @@ class CommonStore {
       defaultObj.enable === customObj.enable
     );
   }
+
   setIsEnableDNS = (value) => {
     this.dnsSettings.customObj.enable = value;
   };
@@ -159,6 +169,7 @@ class CommonStore {
 
     this.setDNSSettings(tempObject);
   };
+
   saveDNSSettings = async () => {
     const { customObj } = this.dnsSettings;
     const { dnsName, enable } = customObj;

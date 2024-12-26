@@ -31,11 +31,11 @@ import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import LdapFieldComponent from "./LdapFieldComponent";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import LdapFieldComponent from "./LdapFieldComponent";
 
-const LOGIN = "login",
-  PASSWORD = "password";
+const LOGIN = "login";
+const PASSWORD = "password";
 
 const AuthenticationContainer = ({
   login,
@@ -62,6 +62,8 @@ const AuthenticationContainer = ({
       case PASSWORD:
         setPassword(value);
         break;
+      default:
+        break;
     }
   };
 
@@ -80,10 +82,10 @@ const AuthenticationContainer = ({
       <Box className="ldap_authentication">
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.login}
-          labelText={"Login"}
+          labelText="Login"
           tooltipContent={t("LdapLoginTooltip")}
           inlineHelpButton
           isRequired
@@ -101,7 +103,7 @@ const AuthenticationContainer = ({
 
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.password}
           labelText={t("Common:Password")}

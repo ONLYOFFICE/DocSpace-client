@@ -89,9 +89,9 @@ const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
       featuresArray.push(scalabilityClustering, mobileEditing, techSupport);
     }
 
-    return featuresArray.map((item, index) => {
+    return featuresArray.map((item) => {
       return (
-        <div className="payments-benefits" key={index}>
+        <div className="payments-benefits" key={item.title}>
           <ReactSVG src={item.imag} className="benefits-svg" />
           <div className="benefits-description">
             <Text fontWeight={600}>{item.title}</Text>
@@ -104,7 +104,7 @@ const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
 
   return (
     <StyledBenefitsBody className="benefits-container">
-      <Text fontSize={"16px"} fontWeight={600} className="benefits-title">
+      <Text fontSize="16px" fontWeight={600} className="benefits-title">
         {title}
       </Text>
       {features()}

@@ -115,7 +115,7 @@ const QuotaPerItemComponent = (props) => {
           <QuotaForm
             isButtonsEnable
             label={formLabel}
-            maxInputWidth={"214px"}
+            maxInputWidth="214px"
             isLoading={isLoading}
             isDisabled={isDisabled}
             onSave={onSaveQuota}

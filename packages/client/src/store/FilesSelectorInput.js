@@ -28,7 +28,9 @@ import { makeAutoObservable } from "mobx";
 
 class SelectFolderDialogStore {
   newPath = "";
+
   basePath = "";
+
   isErrorPath = false;
 
   constructor() {
@@ -51,18 +53,18 @@ class SelectFolderDialogStore {
     }
 
     if (foldersArray.length > 1) {
-      for (let item of foldersArray) {
+      foldersArray.forEach((item) => {
         if (!path) {
-          path = path + `${item.label}`;
-        } else path = path + " " + "/" + " " + `${item.label}`;
-      }
+          path += `${item.label}`;
+        } else path = `${path} / ${item.label}`;
+      });
     } else {
-      for (let item of foldersArray) {
+      foldersArray.forEach((item) => {
         path = `${item.label}`;
-      }
+      });
     }
 
-    if (fileName) path = path + " " + "/" + fileName;
+    if (fileName) path = `${path}/${fileName}`;
 
     return path;
   };

@@ -26,8 +26,8 @@
 
 import { authStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { CategoryType } from "./constants";
 import { FolderType } from "@docspace/shared/enums";
+import { CategoryType } from "./constants";
 
 // import router from "SRC_DIR/router";
 import i18n from "../i18n";
@@ -40,12 +40,12 @@ export const setDocumentTitle = (subTitle = "") => {
   let title;
   if (subTitle) {
     if (isAuthenticated && currentModule) {
-      title = subTitle + " - " + currentModule.title;
+      title = `${subTitle} - ${currentModule.title}`;
     } else {
-      title = subTitle + " - " + organizationName;
+      title = `${subTitle} - ${organizationName}`;
     }
   } else if (currentModule && organizationName) {
-    title = currentModule.title + " - " + organizationName;
+    title = `${currentModule.title} - ${organizationName}`;
   } else {
     title = organizationName;
   }
@@ -61,9 +61,8 @@ export const checkIfModuleOld = (link) => {
     link.includes("settings")
   ) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 };
 
 export const getLink = (link) => {

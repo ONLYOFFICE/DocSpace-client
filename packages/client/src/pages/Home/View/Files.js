@@ -32,13 +32,11 @@ import { SectionBodyContent } from "../Section";
 export const FilesView = () => {
   return (
     <Consumer>
-      {(context) => (
-        <>
-          {context.sectionWidth && (
-            <SectionBodyContent sectionWidth={context.sectionWidth} />
-          )}
-        </>
-      )}
+      {(context) =>
+        context.sectionWidth && (
+          <SectionBodyContent sectionWidth={context.sectionWidth} />
+        )
+      }
     </Consumer>
   );
 };

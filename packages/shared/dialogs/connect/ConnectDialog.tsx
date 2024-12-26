@@ -128,15 +128,15 @@ const ConnectDialog = ({
   };
   const onChangeFolderName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTitleValid(true);
-    let folderName = e.target.value;
+    let newTitle = e.target.value;
     // const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
 
-    if (folderName.match(folderFormValidation)) {
+    if (newTitle.match(folderFormValidation)) {
       toastr.warning(t("Files:ContainsSpecCharacter"));
     }
-    folderName = folderName.replace(folderFormValidation, "_");
+    newTitle = newTitle.replace(folderFormValidation, "_");
 
-    setCustomerTitleValue(folderName);
+    setCustomerTitleValue(newTitle);
   };
 
   const onClose = useCallback(() => {
@@ -153,26 +153,26 @@ const ConnectDialog = ({
   ]);
 
   const onSave = useCallback(() => {
-    const isCustomerTitleValid = !!customerTitle?.trim();
-    const isURLValueValid = !!urlValue.trim();
-    const isLoginValueValid = !!loginValue.trim();
-    const isPasswordValueValid = !!passwordValue.trim();
+    const isTitleValidCheck = !!customerTitle.trim();
+    const isUrlValidCheck = !!urlValue.trim();
+    const isLoginValidCheck = !!loginValue.trim();
+    const isPasswordValidCheck = !!passwordValue.trim();
 
     if (link) {
-      if (!isCustomerTitleValid) {
-        setIsTitleValid(!!customerTitle?.trim());
+      if (!isTitleValidCheck) {
+        setIsTitleValid(!!customerTitle.trim());
         return;
       }
     } else if (
-      !isCustomerTitleValid ||
-      !isLoginValueValid ||
-      !isPasswordValueValid ||
-      (showUrlField && !isURLValueValid)
+      !isTitleValidCheck ||
+      !isLoginValidCheck ||
+      !isPasswordValidCheck ||
+      (showUrlField && !isUrlValidCheck)
     ) {
-      setIsTitleValid(isCustomerTitleValid);
-      if (showUrlField) setIsUrlValid(isURLValueValid);
-      setIsLoginValid(isLoginValueValid);
-      setIsPasswordValid(isPasswordValueValid);
+      setIsTitleValid(isTitleValidCheck);
+      showUrlField && setIsUrlValid(isUrlValidCheck);
+      setIsLoginValid(isLoginValidCheck);
+      setIsPasswordValid(isPasswordValidCheck);
       return;
     }
 
@@ -254,9 +254,9 @@ const ConnectDialog = ({
       "height=600, width=1020",
     );
     openConnectWindow(provider_key, authModal).then((modal) =>
-      getOAuthToken(modal).then((responseToken) => {
+      getOAuthToken(modal).then((accessToken) => {
         authModal?.close();
-        setToken(responseToken);
+        setToken(accessToken);
       }),
     );
   };

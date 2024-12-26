@@ -24,23 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
 
-const CreationBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
+const CreationBlock = ({ t, textStyles, keyTextStyles }) => {
   return (
     <>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysUploadFile")}</Text>
-          <Text {...keyTextStyles}>Shift + u</Text>
+          <Text {...keyTextStyles}>Shift + u</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("Article:UploadFolder")}</Text>
-          <Text {...keyTextStyles}>Shift + i</Text>
+          <Text {...keyTextStyles}>Shift + i</Text>
         </>
       </Row>
     </>

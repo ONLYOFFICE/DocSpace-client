@@ -95,13 +95,33 @@ const Layout = (props) => {
   let intervalHandler;
   let timeoutHandler;
 
+  const onWidthChange = (e) => {
+    const { matches } = e;
+    setIsTabletView(matches);
+  };
+
+  const onResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const onOrientationChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
+    setWindowAngle(angle);
+    setWindowWidth(window.innerWidth);
+  };
+
   useEffect(() => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
+
   useEffect(() => {
     setIsTabletView(isTabletUtils());
 
-    let mediaQuery = window.matchMedia(tablet);
+    const mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
 
     return () => {
@@ -109,7 +129,7 @@ const Layout = (props) => {
       if (intervalHandler) clearInterval(intervalHandler);
       if (timeoutHandler) clearTimeout(timeoutHandler);
     };
-  }, []);
+  }, [onWidthChange]);
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -133,35 +153,17 @@ const Layout = (props) => {
         onOrientationChange,
       );
     };
-  }, [isTabletView]);
+  }, [isTabletView, isFrame, onResize, onOrientationChange]);
 
   useEffect(() => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    htmlEl.style.height = bodyEl.style.height = "100dvh";
+    htmlEl.style.height = "100dvh";
+    bodyEl.style.height = "100dvh";
 
     htmlEl.style.overflow = "hidden";
   }, []);
-
-  const onWidthChange = (e) => {
-    const { matches } = e;
-
-    setIsTabletView(matches);
-  };
-
-  const onResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  const onOrientationChange = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
-
-    setWindowAngle(angle);
-    setWindowWidth(window.innerWidth);
-  };
 
   return (
     <StyledContainer className="Layout" isPortrait={isPortrait}>

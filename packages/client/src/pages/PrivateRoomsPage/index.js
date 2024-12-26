@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
-import React, { useState } from "react";
-import { observer, inject } from "mobx-react";
+import { useState } from "react";
+import { observer } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -170,7 +170,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
               organizationName: t("Common:OrganizationName"),
             }}
             components={{
-              1: <strong></strong>,
+              1: <strong />,
             }}
           />
         </Text>

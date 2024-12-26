@@ -24,26 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect } from "react-router-dom";
-import { isMobileOnly, isMobile } from "react-device-detect";
-import { useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
 import {
   isDesktop,
-  tablet,
-  mobile,
   NoUserSelect,
   getLogoUrl,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import HeaderCatalogBurger from "./header-catalog-burger";
 import { globalColors } from "@docspace/shared/themes";
+import HeaderCatalogBurger from "./header-catalog-burger";
 
 const Header = styled.header.attrs(injectDefaultTheme)`
   display: flex;
@@ -88,76 +82,22 @@ const Header = styled.header.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledLink = styled.div.attrs(injectDefaultTheme)`
-  display: inline;
-  .nav-menu-header_link {
-    color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
-  }
-
-  a {
-    text-decoration: none;
-  }
-  :hover {
-    color: ${(props) => props.theme.header.linkColor};
-    -webkit-text-decoration: underline;
-    text-decoration: underline;
-  }
-`;
-
-const versionBadgeProps = {
-  fontWeight: "600",
-  fontSize: "13px",
-};
-
-const StyledNavigationIconsWrapper = styled.div`
-  height: 20px;
-  position: absolute;
-
-  inset-inline-start: ${isMobile ? "254px" : "275px"};
-  display: ${isMobileOnly ? "none" : "flex"};
-  justify-content: flex-start;
-  align-items: center;
-
-  @media ${tablet} {
-    inset-inline-start: 254px;
-  }
-
-  @media ${mobile} {
-    display: none;
-  }
-`;
-
 const HeaderComponent = ({
   currentProductName,
-  //totalNotifications,
-  onClick,
-  onNavMouseEnter,
-  onNavMouseLeave,
   defaultPage,
-  //mainModules,
-  isNavOpened,
   currentProductId,
-  toggleAside,
   isLoaded,
-  version,
   isAuthenticated,
-  isAdmin,
-  backdropClick,
   isPreparationPortal,
   theme,
   toggleArticleOpen,
-  logoUrl,
   customHeader,
-  ...props
 }) => {
-  const { t } = useTranslation("Common");
-
   const location = useLocation();
 
   const isFormGallery = location.pathname.includes("/form-gallery");
 
-  //const isNavAvailable = mainModules.length > 0;
+  // const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
   //   history.push(defaultPage);
@@ -178,13 +118,13 @@ const HeaderComponent = ({
   //   backdropClick();
   // }, []);
 
-  //const numberOfModules = mainModules.filter((item) => !item.separator).length;
-  //const needNavMenu = currentProductId !== "home";
+  // const numberOfModules = mainModules.filter((item) => !item.separator).length;
+  // const needNavMenu = currentProductId !== "home";
   // const mainModulesWithoutSettings = mainModules.filter(
   //   (module) => module.id !== "settings"
   // );
 
-  /*const navItems = mainModulesWithoutSettings.map(
+  /* const navItems = mainModulesWithoutSettings.map(
     ({ id, separator, iconUrl, notifications, link, title, dashed }) => {
       const itemLink = getLink(link);
       const shouldRenderIcon = checkIfModuleOld(link);
@@ -208,19 +148,19 @@ const HeaderComponent = ({
         </NavItem>
       );
     }
-  );*/
+  ); */
 
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 
   const onResize = () => {
-    const isDesktopView = isDesktop();
-    if (isDesktopView === isDesktopView) setIsDesktopView(isDesktopView);
+    const desktop = isDesktop();
+    setIsDesktopView((value) => (value !== desktop ? desktop : value));
   };
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  });
+  }, [onResize]);
 
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
@@ -239,7 +179,7 @@ const HeaderComponent = ({
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         )}
         {customHeader ? (
-          <>{customHeader}</>
+          { customHeader }
         ) : (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />
@@ -320,21 +260,9 @@ const HeaderComponent = ({
 HeaderComponent.displayName = "Header";
 
 HeaderComponent.propTypes = {
-  //totalNotifications: PropTypes.number,
-  onClick: PropTypes.func,
-
   defaultPage: PropTypes.string,
-
-  isNavOpened: PropTypes.bool,
-  onNavMouseEnter: PropTypes.func,
-  onNavMouseLeave: PropTypes.func,
-  toggleAside: PropTypes.func,
-  logoUrl: PropTypes.object,
   isLoaded: PropTypes.bool,
-  version: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  isAdmin: PropTypes.bool,
-  needNavMenu: PropTypes.bool,
 };
 
 export default inject(({ settingsStore, authStore }) => {
@@ -354,12 +282,12 @@ export default inject(({ settingsStore, authStore }) => {
     defaultPage,
     logoUrl,
 
-    //totalNotifications,
+    // totalNotifications,
     isLoaded,
     version,
     isAuthenticated,
     currentProductId,
     toggleArticleOpen,
-    //currentProductName: (product && product.title) || "",
+    // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

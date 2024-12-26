@@ -70,7 +70,7 @@ class ChangePhoneDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onChangePhone}
             isLoading={isRequestRunning}
           />

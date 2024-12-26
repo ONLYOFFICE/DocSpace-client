@@ -42,11 +42,12 @@ import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 
 class UploadPanelComponent extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    document.addEventListener("keyup", this.onKeyPress);
+  }
 
-    this.ref = React.createRef();
-    this.scrollRef = React.createRef();
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.onKeyPress);
   }
 
   onClose = () => {
@@ -71,12 +72,6 @@ class UploadPanelComponent extends React.Component {
       }
     }
   };
-  componentDidMount() {
-    document.addEventListener("keyup", this.onKeyPress);
-  }
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.onKeyPress);
-  }
 
   onKeyPress = (event) => {
     if (event.key === "Esc" || event.key === "Escape") {
@@ -85,30 +80,29 @@ class UploadPanelComponent extends React.Component {
   };
 
   clearUploadPanel = () => {
-    this.props.clearUploadData();
+    const { clearUploadData } = this.props;
+    clearUploadData();
     this.onClose();
   };
 
   onCancelUpload = () => {
-    this.props.cancelUpload(this.props.t);
+    const { cancelUpload, t } = this.props;
+    cancelUpload(t);
   };
 
   render() {
-    //console.log("UploadPanel render");
+    // console.log("UploadPanel render");
     const {
       t,
       uploadPanelVisible,
       uploaded,
       converted,
-      uploadDataFiles,
       cancelConversion,
       isUploading,
       isUploadingAndConversion,
-      theme,
     } = this.props;
 
     const visible = uploadPanelVisible;
-    const zIndex = 310;
 
     const title = isUploading
       ? t("Uploads")

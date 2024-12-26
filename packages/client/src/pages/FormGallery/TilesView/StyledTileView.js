@@ -25,17 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
-import TileContent from "./sub-components/TileContent";
+import { globalColors } from "@docspace/shared/themes";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   tablet,
   desktop,
   mobile,
-  mobileMore,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
+import TileContent from "./sub-components/TileContent";
 
 const FlexBoxStyles = css`
   display: flex;
@@ -146,7 +145,7 @@ const StyledFileTileBottom = styled.div`
   ${(props) =>
     props.isSelected &&
     css`
-      border-top: ${(props) => props.theme.filesSection.tilesView.tile.border};
+      border-top: ${({ theme }) => theme.filesSection.tilesView.tile.border};
       border-radius: 0 0 6px 6px;
     `}
 

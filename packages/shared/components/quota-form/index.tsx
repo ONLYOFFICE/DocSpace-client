@@ -104,15 +104,15 @@ export const QuotaForm = ({
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
 
-  useEffect(() => {
-    setSize(initSize);
-    setPower(initPower);
-  }, [initialSize]);
-
   const [power, setPower] = useState(initPower);
   const [size, setSize] = useState(initSize);
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(initialSize === -1);
+
+  useEffect(() => {
+    setSize(initSize);
+    setPower(initPower);
+  }, [initialSize]);
 
   const { t } = useTranslation(["Settings", "Common"]);
   const options = getOptions(t);
@@ -155,6 +155,15 @@ export const QuotaForm = ({
 
     return false;
   };
+
+  const onSaveClick = async () => {
+    if (isSizeError()) return;
+
+    onSave & onSave(conversionToBytes(size, power));
+
+    setHasError(false);
+  };
+
   const onKeyDownInput = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isButtonsEnable) {
@@ -163,17 +172,8 @@ export const QuotaForm = ({
         onSaveClick();
 
         setHasError(false);
-
-        return;
       }
     }
-  };
-  const onSaveClick = async () => {
-    if (isSizeError()) return;
-
-    onSave & onSave(conversionToBytes(size, power));
-
-    setHasError(false);
   };
 
   const onCancelClick = () => {
@@ -257,3 +257,5 @@ export const QuotaForm = ({
     </StyledBody>
   );
 };
+
+export default QuotaForm;

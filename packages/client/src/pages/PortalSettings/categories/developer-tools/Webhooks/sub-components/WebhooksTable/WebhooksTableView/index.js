@@ -29,8 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { TableBody } from "@docspace/shared/components/table";
-import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import WebhooksTableRow from "./WebhooksTableRow";

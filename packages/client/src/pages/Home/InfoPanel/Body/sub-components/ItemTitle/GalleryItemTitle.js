@@ -32,9 +32,9 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { inject } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { StyledTitle } from "../../styles/common";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { StyledTitle } from "../../styles/common";
 
 const StyledGalleryContextOptions = styled.div`
   height: 16px;

@@ -26,9 +26,10 @@
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import React from "react";
-import ShareButton from "./ShareButton";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import ShareButton from "./ShareButton";
 import LoadingButton from "./LoadingButton";
+
 const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
   const onCancelClick = !item.inConversion
     ? { onClick: onCancelCurrentUpload }
@@ -54,7 +55,7 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
             iconName={RefreshReactSvgUrl}
             className="convert_icon"
             size="medium"
-            isfill={true}
+            isfill
           />
         </div>
       )}

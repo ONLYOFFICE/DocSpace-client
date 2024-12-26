@@ -49,7 +49,7 @@ const NoGalleryItem = ({ t }) => {
       <img
         className="info-panel_gallery-empty-screen-img"
         src={FormGalleryEmptyInfoReactSvgUrl}
-        alt="Empty Screen Gallery image"
+        alt="Empty Screen Gallery"
       />
       <Text className="info-panel_gallery-empty-screen-text">
         {t("InfoPanel:GalleryEmptyScreenText")}

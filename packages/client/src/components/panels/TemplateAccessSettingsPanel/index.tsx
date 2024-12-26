@@ -29,7 +29,7 @@ import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
 
-import { EmployeeType } from "@docspace/shared/enums";
+// import { EmployeeType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -57,12 +57,12 @@ const PEOPLE_TAB_ID = "0";
 type TemplateAccessSettingsPanelProps = {
   t: TTranslation;
   tReady: boolean;
-  templateItem: object | null;
-  templateEventVisible: VoidFunction;
+  // templateItem: object | null;
+  // templateEventVisible: VoidFunction;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
   setInfoPanelIsMobileHidden: (visible: boolean) => void;
-  onCreateRoomFromTemplate: (item: object) => void;
+  // onCreateRoomFromTemplate: (item: object) => void;
 };
 
 const TemplateAccessSettingsPanel = ({
@@ -70,10 +70,10 @@ const TemplateAccessSettingsPanel = ({
   tReady,
   visible,
   setIsVisible,
-  templateItem,
+  // templateItem,
   setInfoPanelIsMobileHidden,
-  onCreateRoomFromTemplate,
-  templateEventVisible,
+  // onCreateRoomFromTemplate,
+  // templateEventVisible,
 }: TemplateAccessSettingsPanelProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
@@ -110,12 +110,13 @@ const TemplateAccessSettingsPanel = ({
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
 
-  const onClickBack = () => {
-    onClose();
-    if (templateItem && !templateEventVisible) {
-      onCreateRoomFromTemplate({ ...templateItem, isEdit: true });
-    }
-  };
+  // const onClickBack = () => {
+  //   onClose();
+  //   if (templateItem && !templateEventVisible) {
+  //     onCreateRoomFromTemplate({ ...templateItem, isEdit: true });
+  //   }
+  // };
+
   const onCloseUsersPanel = () => {
     setAddUsersPanelVisible(false);
   };
@@ -210,7 +211,6 @@ const TemplateAccessSettingsPanel = ({
       />
     );
 
-  //////////
   const roomType = 2; // TODO: Templates
   // const roomType = -1;
   const hasInvitedUsers = !!inviteItems.length;
@@ -230,8 +230,8 @@ const TemplateAccessSettingsPanel = ({
       onClose={onClose}
       withBodyScroll
       isLoading={!tReady}
-      isBackButton={true} // TODO: Templates
-      onBackClick={onClickBack}
+      // isBackButton={true} // TODO: Templates
+      // onBackClick={onClickBack} // TODO: Templates
       onSubmit={onSubmit}
       withForm
       containerVisible={addUsersPanelVisible}
@@ -268,9 +268,7 @@ const TemplateAccessSettingsPanel = ({
             setActiveTab={getSelectedTab}
           />
         </ModalDialog.Container>
-      ) : (
-        <></>
-      )}
+      ) : null}
 
       <ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
       <ModalDialog.Body>

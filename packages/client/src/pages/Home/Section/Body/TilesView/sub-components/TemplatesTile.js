@@ -26,10 +26,9 @@
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import styled, { css } from "styled-components";
+import styled, { css, withTheme } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { tablet } from "@docspace/shared/utils";
-import { withTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
@@ -162,10 +161,10 @@ const StyledElement = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-left: ${(props) => (props.isRoom ? "8px" : "4px")};
+          margin-left: ${props.isRoom ? "8px" : "4px"};
         `
       : css`
-          margin-right: ${(props) => (props.isRoom ? "8px" : "4px")};
+          margin-right: ${props.isRoom ? "8px" : "4px"};
         `}
   user-select: none;
   margin-top: 3px;
@@ -217,30 +216,29 @@ const TemplatesTile = (props) => {
   return (
     <StyledTemplatesTile checked={checked} isActive={isActive} isEdit={isEdit}>
       <div className="room-tile-template_top-content">
-        {renderElement && !(!fileExst && id === -1) && !isEdit && (
-          <>
-            {!inProgress ? (
-              <div className="file-icon_container" ref={cbRef}>
-                <StyledElement
-                  className="file-icon"
-                  isRoom={isRoom}
-                  onClick={onFileIconClick}
-                >
-                  {element}
-                </StyledElement>
+        {renderElement &&
+          !(!fileExst && id === -1) &&
+          !isEdit &&
+          (!inProgress ? (
+            <div className="file-icon_container" ref={cbRef}>
+              <StyledElement
+                className="file-icon"
+                isRoom={isRoom}
+                onClick={onFileIconClick}
+              >
+                {element}
+              </StyledElement>
 
-                <Checkbox
-                  className="checkbox file-checkbox"
-                  isChecked={checked}
-                  isIndeterminate={indeterminate}
-                  onChange={changeCheckbox}
-                />
-              </div>
-            ) : (
-              <Loader className="tile-folder-loader" type="oval" size="16px" />
-            )}
-          </>
-        )}
+              <Checkbox
+                className="checkbox file-checkbox"
+                isChecked={checked}
+                isIndeterminate={indeterminate}
+                onChange={changeCheckbox}
+              />
+            </div>
+          ) : (
+            <Loader className="tile-folder-loader" type="oval" size="16px" />
+          ))}
         <StyledContent
           isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
         >
@@ -266,7 +264,7 @@ const TemplatesTile = (props) => {
             getContextModel={getContextModel}
             ref={cmRef}
             header={contextMenuHeader}
-            withBackdrop={true}
+            withBackdrop
             isRoom={isRoom}
           />
         </StyledOptionButton>

@@ -28,11 +28,11 @@ import React from "react";
 import styled from "styled-components";
 import { Tabs } from "@docspace/shared/components/tabs";
 
-import RequestDetails from "./RequestDetails";
-import ResponseDetails from "./ResponseDetails";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
+import ResponseDetails from "./ResponseDetails";
+import RequestDetails from "./RequestDetails";
 
 const TabsWrapper = styled.div`
   .sticky {

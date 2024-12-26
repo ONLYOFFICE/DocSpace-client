@@ -63,67 +63,107 @@ const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPan
 
 class TableStore {
   authStore;
+
   treeFoldersStore;
+
   userStore;
+
   settingsStore;
+
   selectedFolderStore;
+
   peopleStore;
 
   roomColumnNameIsEnabled = true; // always true
+
   roomColumnTypeIsEnabled = false;
+
   roomColumnTagsIsEnabled = true;
+
   roomColumnOwnerIsEnabled = false;
+
   roomColumnActivityIsEnabled = true;
+
   roomQuotaColumnIsEnable = false;
 
   nameColumnIsEnabled = true; // always true
+
   authorColumnIsEnabled = false;
+
   roomColumnIsEnabled = true;
+
   erasureColumnIsEnabled = true;
+
   createdColumnIsEnabled = false;
+
   modifiedColumnIsEnabled = true;
+
   sizeColumnIsEnabled = true;
-  typeColumnIsEnabled = true;
+
   typeColumnIsEnabled = false;
 
   authorRecentColumnIsEnabled = true;
+
   modifiedRecentColumnIsEnabled = false;
+
   createdRecentColumnIsEnabled = false;
+
   sizeRecentColumnIsEnabled = true;
+
   typeRecentColumnIsEnabled = false;
+
   lastOpenedColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
+
   createdTrashColumnIsEnabled = false;
+
   sizeTrashColumnIsEnabled = true;
+
   typeTrashColumnIsEnabled = false;
 
   peopleGroupsColumnIsEnabled = true;
+
   managerGroupsColumnIsEnabled = true;
 
   typePeopleColumnIsEnabled = true;
+
   groupPeopleColumnIsEnabled = true;
+
   emailPeopleColumnIsEnabled = true;
+
   storagePeopleColumnIsEnabled = true;
 
   inviterGuestsColumnIsEnabled = true;
+
   emailGuestsColumnIsEnabled = true;
+
   invitedDateGuestsColumnIsEnabled = true;
 
   typeInsideGroupColumnIsEnabled = true;
+
   groupInsideGroupColumnIsEnabled = true;
+
   emailInsideGroupColumnIsEnabled = true;
+
   storageInsideGroupColumnIsEnabled = true;
 
   indexVDRColumnIsEnabled = true; // always true
+
   authorVDRColumnIsEnabled = true;
+
   modifiedVDRColumnIsEnabled = true;
+
   createdVDRColumnIsEnabled = false;
+
   sizeVDRColumnIsEnabled = true;
+
   typeVDRColumnIsEnabled = false;
 
   templatesRoomColumnTypeIsEnabled = true;
+
   templatesContentColumnsIsEnabled = true;
+
   templatesRoomColumnOwnerIsEnabled = true;
 
   constructor(
@@ -247,35 +287,48 @@ class TableStore {
   };
 
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
+
   setCreatedTrashColumn = (enable) =>
     (this.createdTrashColumnIsEnabled = enable);
+
   setSizeTrashColumn = (enable) => (this.sizeTrashColumnIsEnabled = enable);
+
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
+
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
   setGroupsColumnPeople = (enable) =>
     (this.peopleGroupsColumnIsEnabled = enable);
+
   setGroupsColumnManager = (enable) =>
     (this.managerGroupsColumnIsEnabled = enable);
 
   setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
+
   setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
+
   setPeopleColumnGroup = (enable) => (this.groupPeopleColumnIsEnabled = enable);
+
   setPeopleColumnStorage = (enable) =>
     (this.storagePeopleColumnIsEnabled = enable);
 
   setGuestsColumnInviter = (enable) =>
     (this.inviterGuestsColumnIsEnabled = enable);
+
   setGuestsColumnEmail = (enable) => (this.emailGuestsColumnIsEnabled = enable);
+
   setGuestsColumnInvitedDate = (enable) =>
     (this.invitedDateGuestsColumnIsEnabled = enable);
 
   setInsideGroupColumnType = (enable) =>
     (this.typeInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnEmail = (enable) =>
     (this.emailInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnGroup = (enable) =>
     (this.groupInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnStorage = (enable) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
@@ -560,10 +613,8 @@ class TableStore {
 
       case "Head of Group":
         this.setGroupsColumnManager(!this.managerGroupsColumnIsEnabled);
-        return;
 
       default:
-        return;
     }
   };
 
@@ -578,24 +629,24 @@ class TableStore {
     if (splitColumns) {
       this.setColumnsEnable(null, isRecentTab);
 
-      for (let col of defaultColumns) {
+      defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
         column ? (col.enable = true) : (col.enable = false);
 
         columns.push(col);
-      }
+      });
       return columns;
-    } else if (isFrame && frameTableColumns) {
+    }
+    if (isFrame && frameTableColumns) {
       this.setColumnsEnable(frameTableColumns);
 
       const frameTableArray = frameTableColumns.split(",");
       return defaultColumns.map((col) => {
-        col.enable = frameTableArray.includes(col.key) ? true : false;
+        col.enable = !!frameTableArray.includes(col.key);
         return col;
       });
-    } else {
-      return defaultColumns;
     }
+    return defaultColumns;
   };
 
   // Column names

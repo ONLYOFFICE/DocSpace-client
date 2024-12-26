@@ -46,7 +46,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
   return (
     <StyledComponent>
       <div className="official-documentation">
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemDocker")}{" "}
           <ColorTheme
@@ -60,8 +60,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
         </Text>
-
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemLinux")}{" "}
           <ColorTheme
@@ -75,8 +74,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
         </Text>
-
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemWindows")}{" "}
           <ColorTheme

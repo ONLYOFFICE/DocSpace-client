@@ -41,11 +41,6 @@ class ThirdPartyStorageModule extends React.PureComponent {
     super(props);
     const { thirdPartyStorage, defaultStorageId, setStorageId } = this.props;
 
-    this.state = {
-      availableOptions: [],
-      availableStorage: {},
-    };
-
     const { comboBoxOptions, storagesInfo, selectedStorageId } =
       getOptions(thirdPartyStorage);
 

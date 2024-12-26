@@ -26,10 +26,10 @@
 import { useLocation } from "react-router-dom";
 
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { inject, observer } from "mobx-react";
 import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
-import { inject, observer } from "mobx-react";
 
 const SectionSubmenuContent = ({
   isPersonalRoom,

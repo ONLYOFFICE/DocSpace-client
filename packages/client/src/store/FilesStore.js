@@ -330,6 +330,8 @@ class FilesStore {
           case "delete":
             this.wsModifyFolderDelete(opt);
             break;
+          default:
+            break;
         }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
@@ -348,19 +350,6 @@ class FilesStore {
         console.log("[WS] s:update-history", id);
         fetchHistory();
       }
-    });
-
-    SocketHelper.on(SocketEvents.RefreshFolder, (id) => {
-      const { socketSubscribers } = SocketHelper;
-      const pathParts = `DIR-${id}`;
-
-      if (!socketSubscribers.has(pathParts)) return;
-
-      if (!id || this.clientLoadingStore.isLoading) return;
-
-      // console.log(
-      //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
-      // );
     });
 
     SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
@@ -522,7 +511,7 @@ class FilesStore {
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
-      const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.getFileIndex(opt?.id);
 
       const file = JSON.parse(opt?.data);
 
@@ -551,15 +540,13 @@ class FilesStore {
       );
 
       setTimeout(() => {
-        const foundIndex = this.files.findIndex((x) => x.id === file.id);
-        if (foundIndex > -1) {
+        if (this.getFileIndex(file.id) > -1) {
           // console.log("Skip in timeout");
           return null;
         }
 
         this.createNewFilesQueue.enqueue(() => {
-          const foundIndex = this.files.findIndex((x) => x.id === file.id);
-          if (foundIndex > -1) {
+          if (this.getFileIndex(file.id) > -1) {
             // console.log("Skip in queue");
             return null;
           }
@@ -1348,7 +1335,7 @@ class FilesStore {
 
     let newSelections = JSON.parse(JSON.stringify(this.selection));
 
-    for (const item of added) {
+    added.forEach((item) => {
       if (!item) return;
 
       const value =
@@ -1383,9 +1370,9 @@ class FilesStore {
           newSelections.push(selectableFolder);
         }
       }
-    }
+    });
 
-    for (const item of removed) {
+    removed.forEach((item) => {
       if (!item) return;
 
       const value =
@@ -1413,7 +1400,7 @@ class FilesStore {
           (f) => !(f.id == id && f.isFolder),
         );
       }
-    }
+    });
 
     const removeDuplicate = (items) => {
       return items.filter(
@@ -1644,8 +1631,6 @@ class FilesStore {
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
 
-            const folderId = folder.id;
-
             // if (
             //   data.current.providerKey &&
             //   data.current.rootFolderType === Rooms &&
@@ -1654,11 +1639,11 @@ class FilesStore {
             //   folderId = this.treeFoldersStore.myRoomsId;
             // }
 
-            const isCurrentFolder = data.current.id == folderId;
+            const isCurrentFolder = data.current.id == folder.id;
 
             const folderInfo = isCurrentFolder
               ? data.current
-              : { ...folder, id: folderId };
+              : { ...folder, id: folder.id };
 
             const { title, roomType } = folderInfo;
 
@@ -1675,7 +1660,7 @@ class FilesStore {
               let room = data.current;
 
               if (!isCurrentFolder) {
-                room = await api.files.getFolderInfo(folderId);
+                room = await api.files.getFolderInfo(folder.id);
 
                 shared = room.shared;
                 external = room.external;
@@ -1709,7 +1694,7 @@ class FilesStore {
               data.current.rootFolderType === FolderType.RoomTemplates;
 
             return {
-              id: folderId,
+              id: folder.id,
               title,
               isRoom: !!roomType,
               roomType,
@@ -1744,21 +1729,14 @@ class FilesStore {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
           if (filter && isEmptyList) {
-            const {
-              authorType,
-              roomId,
-              search,
-              withSubfolders,
-              filterType,
-              searchInContent,
-            } = filter;
+            const { authorType, roomId, search } = filter;
             const isFiltered =
               authorType ||
               roomId ||
               search ||
-              withSubfolders ||
-              filterType ||
-              searchInContent;
+              filter.withSubfolders ||
+              filter.filterType ||
+              filter.searchInContent;
 
             if (isFiltered) {
               this.setIsEmptyPage(false);
@@ -1832,7 +1810,7 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        const isThirdPartyError = isNaN(+folderId);
+        const isThirdPartyError = Number.isNaN(+folderId);
 
         const isUserError = [
           NotFoundHttpCode,
@@ -1891,11 +1869,11 @@ class FilesStore {
     folderId,
     filter,
     clearFilter = true,
-    withSubfolders = false,
+    withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
     clearSelection = true,
-    withFilterLocalStorage = false,
+    withFilterLocalStorage = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
   ) => {
-    const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
+    const { setSelectedNode } = this.treeFoldersStore;
 
     const { setIsIndexEditingMode } = this.indexingStore;
 
@@ -1986,20 +1964,18 @@ class FilesStore {
                 searchInContent: searchInContentRooms,
                 tags,
                 withoutTags,
-                quotaFilter,
-                provider,
               } = filter;
 
               const isFiltered =
                 subjectId ||
                 filterValue ||
                 type ||
-                provider ||
+                filter.provider ||
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
                 withoutTags ||
-                quotaFilter;
+                filter.quotaFilter;
 
               if (isFiltered) {
                 this.setIsEmptyPage(false);
@@ -2061,7 +2037,12 @@ class FilesStore {
     return request();
   };
 
-  setCustomRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
+  setCustomRoomQuota = async (
+    quotaSize,
+    itemsIDs,
+    inRoom = false,
+    filter = null,
+  ) => {
     const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
@@ -2069,7 +2050,7 @@ class FilesStore {
     return rooms;
   };
 
-  resetRoomQuota = async (itemsIDs, inRoom = false, filter) => {
+  resetRoomQuota = async (itemsIDs, inRoom = false, filter = null) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
@@ -2115,10 +2096,7 @@ class FilesStore {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
     const isTemplate = item.rootFolderType === FolderType.RoomTemplates;
-    const isFavorite =
-      (item.fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
 
-    const isThirdPartyItem = !!item.providerKey;
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
     const canConvert = item.viewAccessibility?.CanConvert;
@@ -2487,8 +2465,9 @@ class FilesStore {
       fileOptions = removeSeparator(fileOptions);
 
       return fileOptions;
-    } else if (isTemplate) {
-      let templateOptions = [
+    }
+    if (isTemplate) {
+      const templateOptions = [
         "select",
         "open",
         "separator0",
@@ -2501,7 +2480,8 @@ class FilesStore {
       ];
 
       return templateOptions;
-    } else if (isRoom) {
+    }
+    if (isRoom) {
       const canInviteUserInRoom = item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
 
@@ -2509,7 +2489,6 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
-      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
       const canMuteRoom = item.security?.Mute;
@@ -2842,7 +2821,7 @@ class FilesStore {
     this.roomMembersFilter = roomMembersFilter;
   };
 
-  getRoomMembers = (id, clearFilter = true, membersFilter) => {
+  getRoomMembers = (id, clearFilter = true, membersFilter = null) => {
     let newFilter = membersFilter || clone(this.membersFilter);
 
     if (clearFilter) {
@@ -3151,11 +3130,12 @@ class FilesStore {
       case FolderType.USER:
       case FolderType.Rooms:
         return true;
-      case FolderType.SHARE:
+      case FolderType.SHARE: {
         const canCreateInSharedFolder = this.selectedFolderStore.access === 1;
         return (
           !this.selectedFolderStore.isRootFolder && canCreateInSharedFolder
         );
+      }
       case FolderType.Privacy:
         return (
           this.settingsStore.isDesktopClient &&
@@ -3225,15 +3205,15 @@ class FilesStore {
         : null;
 
       return folderUrl;
-    } else {
-      const url = combineUrl(
-        proxyURL,
-        config.homepage,
-        `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
-      );
-
-      return url;
     }
+
+    const newUrl = combineUrl(
+      proxyURL,
+      config.homepage,
+      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+    );
+
+    return newUrl;
   };
 
   getFilesListItems = (items) => {
@@ -3322,6 +3302,9 @@ class FilesStore {
 
       const canOpenPlayer =
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
+      const needConvert = item.viewAccessibility?.MustConvert;
+      const isEditing =
+        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
@@ -3331,17 +3314,13 @@ class FilesStore {
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       let isFolder = false;
-      this.folders.map((x) => {
+      this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
       });
 
       const { isRecycleBinFolder } = this.treeFoldersStore;
 
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
-
-      const needConvert = item.viewAccessibility?.MustConvert;
-      const isEditing =
-        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const docUrl =
         !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);
@@ -3386,7 +3365,7 @@ class FilesStore {
       const pluginOptions = {};
 
       if (enablePlugins && fileItemsList) {
-        fileItemsList.forEach(({ key, value }) => {
+        fileItemsList.forEach(({ value }) => {
           if (value.extension === fileExst) {
             if (value.fileTypeName)
               pluginOptions.fileTypeName = value.fileTypeName;
@@ -3537,16 +3516,16 @@ class FilesStore {
     const filesItems = [...this.files, ...this.folders];
 
     if (this.folders.length) {
-      for (const item of this.folders) {
+      this.folders.forEach((item) => {
         if (item.roomType && RoomsTypes[item.roomType]) {
           cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }
-      }
+      });
     }
 
-    for (const item of filesItems) {
+    filesItems.forEach((item) => {
       if (isDocument(item.fileExst)) cbMenu.push(FilterType.DocumentsOnly);
       else if (isPresentation(item.fileExst))
         cbMenu.push(FilterType.PresentationsOnly);
@@ -3557,7 +3536,7 @@ class FilesStore {
       else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
-    }
+    });
 
     const hasFiles = cbMenu.some(
       (elem) =>
@@ -3600,7 +3579,7 @@ class FilesStore {
 
     selection = JSON.parse(JSON.stringify(selection));
 
-    for (const item of selection) {
+    selection.forEach((item) => {
       item.checked = true;
       item.format = null;
 
@@ -3619,7 +3598,7 @@ class FilesStore {
       } else {
         sortedFiles.other.push(item);
       }
-    }
+    });
 
     return sortedFiles;
   }

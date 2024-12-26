@@ -51,10 +51,8 @@ import {
   DownloadDialog,
   ConflictResolveDialog,
   ConvertDialog,
-  CreateRoomDialog,
   InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
-  ChangeUserTypeDialog,
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
@@ -113,7 +111,6 @@ const Panels = (props) => {
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
-    createRoomDialogVisible,
     createRoomConfirmDialogVisible,
     confirmDialogIsLoading,
     restoreAllPanelVisible,
@@ -220,17 +217,17 @@ const Panels = (props) => {
     settingsPluginDialogVisible && (
       <SettingsPluginDialog
         isVisible={settingsPluginDialogVisible}
-        key={"settings-plugin-dialog"}
+        key="settings-plugin-dialog"
       />
     ),
     deletePluginDialogVisible && (
       <DeletePluginDialog
         isVisible={deletePluginDialogVisible}
-        key={"delete-plugin-dialog"}
+        key="delete-plugin-dialog"
       />
     ),
     pluginDialogVisible && (
-      <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+      <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
     guestReleaseTipDialogVisible && (
       <GuestReleaseTipDialog key="guest-release-tip-dialog" />
@@ -391,7 +388,7 @@ export default inject(
       createRoomDialogVisible,
       createRoomConfirmDialogVisible,
       convertPasswordDialogVisible,
-      connectItem, //TODO:
+      connectItem, // TODO:
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
@@ -472,7 +469,7 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
+      connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,

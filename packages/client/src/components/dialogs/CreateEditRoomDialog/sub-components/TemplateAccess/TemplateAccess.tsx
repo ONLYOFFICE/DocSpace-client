@@ -51,7 +51,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
 
   let index = 0;
   while (avatarList.length !== maxAvatarsCount) {
-    const user = usersList[index];
+    // const user = usersList[index];
 
     avatarList.push(
       <Avatar
@@ -67,7 +67,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
     index++;
   }
 
-  const isAvailableToEveryone = false; //TODO: Templates
+  const isAvailableToEveryone = false; // TODO: Templates
 
   return (
     <Styled.TemplateAccess>

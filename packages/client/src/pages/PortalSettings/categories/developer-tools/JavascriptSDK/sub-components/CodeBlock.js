@@ -80,8 +80,8 @@ const CodeBlock = ({ config, theme }) => {
         value={codeString}
         theme={theme.isBase ? baseTheme : darkTheme}
         extensions={extensions}
-        editable={true}
-        readOnly={true}
+        editable
+        readOnly
       />
     </StyledContainer>
   );

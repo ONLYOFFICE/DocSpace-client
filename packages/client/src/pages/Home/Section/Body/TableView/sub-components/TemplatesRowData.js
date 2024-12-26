@@ -24,16 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import ContentCell from "./ContentCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { StyledBadgesContainer } from "../StyledTable";
-import { StyledQuickButtonsContainer } from "../StyledTable";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 
 const TemplatesRowData = (props) => {
   const {
@@ -54,7 +55,6 @@ const TemplatesRowData = (props) => {
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
-    item,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -85,7 +85,7 @@ const TemplatesRowData = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {templatesRoomColumnTypeIsEnabled ? (
@@ -101,7 +101,7 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "TypeTemplates" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "TypeTemplates" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -121,11 +121,7 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "ContentTemplates" ? (
-            quickButtonsComponentNode
-          ) : (
-            <></>
-          )}
+          {lastColumn === "ContentTemplates" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -144,7 +140,7 @@ const TemplatesRowData = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "OwnerTemplates" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "OwnerTemplates" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />

@@ -29,15 +29,12 @@ import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
-import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
@@ -68,9 +65,9 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
-  if (!isTile) return badge;
-
   const [isHovered, setIsHovered] = useState(false);
+
+  if (!isTile) return badge;
 
   const onMouseEnter = () => {
     setIsHovered(true);
@@ -80,7 +77,7 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
     setIsHovered(false);
   };
 
-  const newBadge = React.cloneElement(badge, { isHovered: isHovered });
+  const newBadge = React.cloneElement(badge, { isHovered });
 
   return (
     <StyledWrapper
@@ -148,9 +145,6 @@ const Badges = ({
   const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
-
-  const iconForm =
-    sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
   const iconEdit = FileActionsConvertEditDocReactSvgUrl;
 
@@ -281,8 +275,8 @@ const Badges = ({
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
             label={t("VersionBadge", { version: countVersions })}
             {...onShowVersionHistoryProp}
-            noHover={true}
-            isVersionBadge={true}
+            noHover
+            isVersionBadge
             title={t("ShowVersionHistory")}
           />
         </BadgeWrapper>
@@ -311,8 +305,8 @@ const Badges = ({
   ) : (
     <div
       className={classNames("badges", {
-        ["folder__badges"]: isFolder && !isRoom,
-        ["room__badges"]: isRoom,
+        folder__badges: isFolder && !isRoom,
+        room__badges: isRoom,
       })}
     >
       {showCopyLinkIcon && (

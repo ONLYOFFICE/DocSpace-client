@@ -44,13 +44,7 @@ class AmazonStorage extends React.PureComponent {
     const { t, selectedStorage } = this.props;
 
     return (
-      <>
-        <AmazonSettings
-          selectedStorage={selectedStorage}
-          t={t}
-          isNeedFilePath
-        />
-      </>
+      <AmazonSettings selectedStorage={selectedStorage} t={t} isNeedFilePath />
     );
   }
 }

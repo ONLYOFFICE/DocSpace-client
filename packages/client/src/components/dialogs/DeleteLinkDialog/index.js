@@ -52,19 +52,6 @@ const DeleteLinkDialogComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDelete();
-  };
-
   const onClose = () => {
     setIsVisible(false);
   };
@@ -90,6 +77,19 @@ const DeleteLinkDialogComponent = (props) => {
         onClose();
       });
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDelete();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   const getDescription = () => {
     if (link.sharedTo.primary) {

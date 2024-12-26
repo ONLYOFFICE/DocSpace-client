@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
+
 const CreateRoomTemplateEvent = (props) => {
   const {
     visible,
@@ -37,6 +38,7 @@ const CreateRoomTemplateEvent = (props) => {
     setTemplateEventVisible,
     getThirdPartyIcon,
     isDefaultRoomsQuotaSet,
+    onClose,
   } = props;
 
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -90,8 +92,8 @@ const CreateRoomTemplateEvent = (props) => {
     fetchTagsAction();
   }, [fetchTagsAction]);
 
-  const onClose = () => {
-    props.onClose();
+  const onCloseEvent = () => {
+    onClose();
 
     setTemplateEventVisible(false);
   };
@@ -101,7 +103,7 @@ const CreateRoomTemplateEvent = (props) => {
       visible={visible}
       item={item}
       // onSaveClick={onSaveClick}
-      onClose={onClose}
+      onClose={onCloseEvent}
       fetchedTags={fetchedTags}
       fetchedRoomParams={fetchedRoomParams}
     />

@@ -69,13 +69,6 @@ const StyledLoader = styled.div`
 const Loader = () => {
   const [viewMobile, setViewMobile] = useState(false);
 
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => window.removeEventListener("resize", onCheckView);
-  }, []);
-
   const onCheckView = () => {
     if (isMobile()) {
       setViewMobile(true);
@@ -83,6 +76,13 @@ const Loader = () => {
       setViewMobile(false);
     }
   };
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   return (
     <StyledLoader>

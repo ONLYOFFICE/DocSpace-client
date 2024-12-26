@@ -27,12 +27,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
 import RoomCell from "./RoomCell";

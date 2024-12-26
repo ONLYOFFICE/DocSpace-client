@@ -96,8 +96,9 @@ const Item = ({
     setInviteItems(newItems);
   };
 
-  // const canDelete = !isOwner; //TODO: Templates
-  const canDelete = isDisabled ? false : true; // TODO: Templates
+  // const canDelete = !isOwner; // TODO: Templates
+
+  const canDelete = !isDisabled; // TODO: Templates
 
   return (
     <>

@@ -30,6 +30,7 @@ import SelectedFolderStore from "./SelectedFolderStore";
 
 class IndexingStore {
   infoPanelStore;
+
   selectedFolderStore;
 
   isIndexEditingMode: boolean = false;

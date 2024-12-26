@@ -26,17 +26,16 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/shared/components/link";
-import ProfileMenu from "./profile-menu";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Button } from "@docspace/shared/components/button";
 import { getUserType } from "@docspace/shared/utils/common";
+import ProfileMenu from "./profile-menu";
 
 const StyledDiv = styled.div`
   width: 32px;
@@ -70,35 +69,38 @@ class ProfileActions extends React.PureComponent {
     };
   }
 
-  setOpened = (opened) => {
-    this.setState({ opened: opened });
-  };
-
   componentDidMount() {
-    if (this.props.userIsUpdate) {
+    const { userIsUpdate } = this.props;
+    if (userIsUpdate) {
       this.getAvatar();
     } else {
-      this.setState({ avatar: this.state.user.avatar });
+      this.setState((prevState) => ({ avatar: prevState.user.avatar }));
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.user !== prevProps.user) {
-      this.setState({ user: this.props.user });
+  componentDidUpdate(prevProps) {
+    const { user, opened, userIsUpdate, setUserIsUpdate } = this.props;
+    if (user !== prevProps.user) {
+      this.setState({ user });
       this.getAvatar();
     }
 
-    if (this.props.opened !== prevProps.opened) {
-      this.setOpened(this.props.opened);
+    if (opened !== prevProps.opened) {
+      this.setOpened(opened);
     }
 
-    if (this.props.userIsUpdate !== prevProps.userIsUpdate) {
+    if (userIsUpdate !== prevProps.userIsUpdate) {
       this.getAvatar();
-      this.props.setUserIsUpdate(false);
+      setUserIsUpdate(false);
     }
   }
+
+  setOpened = (opened) => {
+    this.setState({ opened });
+  };
 
   onClose = (e) => {
+    const { opened } = this.state;
     const path = e.path || (e.composedPath && e.composedPath());
     const dropDownItem = path ? path.find((x) => x === this.ref.current) : null;
     if (dropDownItem) return;
@@ -109,10 +111,12 @@ class ProfileActions extends React.PureComponent {
       navElement[0].style.setProperty("z-index", 180, "important");
     }
 
-    this.setOpened(!this.state.opened);
+    this.setOpened(!opened);
   };
 
   onClick = (action, e) => {
+    const { opened } = this.state;
+
     action.onClick && action.onClick(e);
 
     const navElement = document.getElementsByClassName("profileMenuIcon");
@@ -121,11 +125,12 @@ class ProfileActions extends React.PureComponent {
       navElement[0].style.setProperty("z-index", 210, "important");
     }
 
-    this.setOpened(!this.state.opened);
+    this.setOpened(!opened);
   };
 
   onClickItemLink = (e) => {
-    this.setOpened(!this.state.opened);
+    const { opened } = this.state;
+    this.setOpened(!opened);
 
     e.preventDefault();
   };
@@ -133,16 +138,17 @@ class ProfileActions extends React.PureComponent {
   getAvatar = async () => {
     const user = await api.people.getUser();
     const avatar = user?.hasAvatar ? user.avatar : DefaultUserPhoto;
-    this.setState({ avatar: avatar });
+    this.setState({ avatar });
   };
 
   render() {
-    //console.log("Layout sub-component ProfileActions render");
+    // console.log("Layout sub-component ProfileActions render");
+    const { userActions, isProduct } = this.props;
     const { user, opened, avatar } = this.state;
     const userRole = getUserType(user);
 
     return (
-      <StyledDiv isProduct={this.props.isProduct} ref={this.ref}>
+      <StyledDiv isProduct={isProduct} ref={this.ref}>
         <Avatar
           onClick={this.onClick}
           role={userRole}
@@ -163,26 +169,26 @@ class ProfileActions extends React.PureComponent {
           forwardedRef={this.ref}
         >
           <div style={{ paddingTop: "8px" }}>
-            {this.props.userActions.map(
-              (action, index) =>
+            {userActions.map(
+              (action) =>
                 action &&
                 (action?.isButton ? (
                   <StyledButtonWrapper key={action.key}>
                     <Button
                       size="normal"
-                      scale={true}
+                      scale
                       label={action.label}
                       onClick={action.onClick}
                     />
                   </StyledButtonWrapper>
                 ) : (
                   <Link
-                    noHover={true}
+                    noHover
                     key={action.key}
                     href={action.url}
                     onClick={this.onClickItemLink}
                   >
-                    <StyledDropDownItem {...action} noHover={true} />
+                    <StyledDropDownItem {...action} noHover />
                   </Link>
                 )),
             )}

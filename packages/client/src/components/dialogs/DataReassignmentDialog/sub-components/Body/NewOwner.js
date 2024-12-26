@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import {
   StyledPeopleSelectorInfo,
   StyledPeopleSelector,
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "../../../ChangePortalOwnerDialog/StyledDialog";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 
 const ChoiceNewOwner = ({
   t,
@@ -52,7 +52,7 @@ const ChoiceNewOwner = ({
         </StyledSelectedOwner>
 
         <Link
-          type={"action"}
+          type="action"
           isHovered
           fontWeight={600}
           onClick={onTogglePeopleSelector}

@@ -49,7 +49,7 @@ const CreateRoomTemplate = (props) => {
     accessSettingsIsVisible,
     fetchedRoomParams,
   } = props;
-  const { title } = item;
+
   console.log("item", item);
 
   const [roomParams, setRoomParams] = useState({
@@ -62,7 +62,6 @@ const CreateRoomTemplate = (props) => {
 
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
-  const [roomName, setRoomName] = useState(title);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
 
@@ -75,13 +74,8 @@ const CreateRoomTemplate = (props) => {
       type: newRoomType,
     }));
 
-  const onKeyUp = (e: KeyboardEvent) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoomTemplate();
-  };
-
   const onCreateRoomTemplate = () => {
-    if (!roomName.trim()) {
+    if (!roomParams.title.trim()) {
       setIsValidTitle(false);
       return;
     }
@@ -94,6 +88,11 @@ const CreateRoomTemplate = (props) => {
 
   const setRoomTags = (newTags) => {
     setTags(newTags);
+  };
+
+  const onKeyUp = (e: KeyboardEvent) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onCreateRoomTemplate();
   };
 
   const onChangeOpenCreated = () => {
@@ -116,7 +115,7 @@ const CreateRoomTemplate = (props) => {
       withForm
       onSubmit={onCreateRoomTemplate}
       // withBodyScroll={!isTemplate}
-      // isScrollLocked={isScrollLocked}
+      isScrollLocked={isScrollLocked}
       hideContent={accessSettingsIsVisible}
       // containerVisible={}
     >
@@ -189,7 +188,7 @@ const CreateRoomTemplate = (props) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, dialogsStore }) => {
+export default inject<TStore>(({ dialogsStore }) => {
   const {
     setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     templateAccessSettingsVisible: accessSettingsIsVisible,

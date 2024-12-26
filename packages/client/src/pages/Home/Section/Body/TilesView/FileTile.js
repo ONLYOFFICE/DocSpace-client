@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -62,7 +62,7 @@ const FileTile = (props) => {
     getIcon,
     onFilesClick,
     onDoubleClick,
-    onMouseClick,
+
     isActive,
     isEdit,
     inProgress,
@@ -87,6 +87,7 @@ const FileTile = (props) => {
     badgeUrl,
     icon,
     isDownload,
+    selectableRef,
     additionalInfo,
   } = props;
 
@@ -135,7 +136,7 @@ const FileTile = (props) => {
   };
 
   return (
-    <div ref={props.selectableRef} id={id}>
+    <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}

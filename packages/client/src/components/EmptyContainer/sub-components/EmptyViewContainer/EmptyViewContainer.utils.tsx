@@ -429,7 +429,7 @@ export const getRoomIcon = (
         isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
       )
       // eslint-disable-next-line react/jsx-no-useless-fragment
-      .otherwise(() => <></>)
+      .otherwise(() => null)
   );
 };
 

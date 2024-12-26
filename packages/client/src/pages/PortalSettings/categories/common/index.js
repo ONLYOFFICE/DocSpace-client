@@ -31,14 +31,14 @@ import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { inject, observer } from "mobx-react";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
-import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const TabsCommon = (props) => {
   const {
@@ -52,19 +52,6 @@ const TabsCommon = (props) => {
     isCommunity,
   } = props;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    return () => {
-      resetSessionStorage();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (tReady) setIsLoadedSubmenu(true);
-    if (isLoadedSubmenu) {
-      load();
-    }
-  }, [tReady, isLoadedSubmenu]);
 
   const data = [
     {
@@ -88,22 +75,36 @@ const TabsCommon = (props) => {
   }
 
   const getCurrentTabId = () => {
-    const path = location.pathname;
+    const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTabId = getCurrentTabId();
-
   const load = async () => {
+    const currentTabId = getCurrentTabId();
     await loadBaseInfo(
       !isMobileView
         ? currentTabId === "general"
-          ? "general"
-          : "branding"
-        : "",
+          ? "customization"
+          : currentTabId === "branding"
+            ? "branding"
+            : "appearance"
+        : "customization",
     );
   };
+
+  useEffect(() => {
+    return () => {
+      resetSessionStorage();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (tReady) setIsLoadedSubmenu(true);
+    if (isLoadedSubmenu) {
+      load();
+    }
+  }, [tReady, isLoadedSubmenu]);
 
   const onSelect = (e) => {
     navigate(
@@ -120,7 +121,7 @@ const TabsCommon = (props) => {
   return (
     <Tabs
       items={data}
-      selectedItemId={currentTabId}
+      selectedItemId={getCurrentTabId()}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />

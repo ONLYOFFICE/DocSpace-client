@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -36,6 +35,8 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { RoomsType } from "@docspace/shared/enums";
 
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
@@ -55,8 +56,6 @@ import {
   Frame,
   Container,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RoomSelector = (props) => {
   const { t, theme, currentColorScheme } = props;
@@ -145,11 +144,14 @@ const RoomSelector = (props) => {
 
   const changeRoomType = (option) => {
     setRoomType(option);
-    setConfig((config) => ({ ...config, roomType: option.roomType }));
+    setConfig((oldConfig) => ({ ...oldConfig, roomType: option.roomType }));
   };
 
   const toggleWithSearch = () => {
-    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSearch: !config.withSearch,
+    }));
   };
 
   const preview = (
@@ -166,7 +168,7 @@ const RoomSelector = (props) => {
       }
       targetId={config.frameId}
     >
-      <Box id={config.frameId}></Box>
+      <Box id={config.frameId} />
     </Frame>
   );
 

@@ -146,7 +146,7 @@ const GridComponent = ({
       const isFile = itemClassNames?.includes("isFile");
       const isFolder = itemClassNames?.includes("isFolder");
       const isRoom = itemClassNames?.includes("isRoom");
-      const isTemplate = itemClassNames?.includes("isRoom"); //TODO: Templates
+      const isTemplate = itemClassNames?.includes("isRoom"); // TODO: Templates
       const isFolderHeader = itemClassNames?.includes("folder_header");
 
       const horizontalGap = 16;

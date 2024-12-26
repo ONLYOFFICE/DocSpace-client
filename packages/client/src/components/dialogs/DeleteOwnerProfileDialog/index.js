@@ -34,9 +34,6 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   onClick = () => {
     const { onClose, setChangeOwnerDialogVisible } = this.props;
 
@@ -64,7 +61,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             label={t("Translations:OwnerChange")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onClick}
           />
           <Button

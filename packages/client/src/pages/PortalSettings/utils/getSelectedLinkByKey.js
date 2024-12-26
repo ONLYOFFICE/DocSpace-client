@@ -26,17 +26,14 @@
 
 export const getSelectedLinkByKey = (key, treeData, depth = 0) => {
   const keysCollection = key.split("-");
-  let newKey = keysCollection.slice(0, depth + 1).join("-");
+  const newKey = keysCollection.slice(0, depth + 1).join("-");
 
-  const item = treeData.find((item) => item.key === newKey);
+  const item = treeData.find((element) => element.key === newKey);
 
   if (key === newKey) {
     if (!item.link) return "";
-    return "/" + item.link;
-  } else {
-    const depthLevel = depth + 1;
-    return (
-      "/" + item.link + getSelectedLinkByKey(key, item.children, depthLevel)
-    );
+    return `/${item.link}`;
   }
+  const depthLevel = depth + 1;
+  return `/${item.link}${getSelectedLinkByKey(key, item.children, depthLevel)}`;
 };

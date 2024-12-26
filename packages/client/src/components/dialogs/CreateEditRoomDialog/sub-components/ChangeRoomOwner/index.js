@@ -28,7 +28,7 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { decode } from "he";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import * as Styled from "./index.styled";
@@ -60,9 +60,9 @@ const ChangeRoomOwner = ({
       <div className="change-owner-display-wrapper">
         <div className="change-owner-display">
           <Avatar
-            className={"change-owner-display-avatar"}
+            className="change-owner-display-avatar"
             size="base"
-            role={""}
+            role={AvatarRole.none}
             isDefaultSource={roomOwner.hasAvatar}
             source={roomOwner.avatarSmall ?? roomOwner.avatar}
             userName={userName}

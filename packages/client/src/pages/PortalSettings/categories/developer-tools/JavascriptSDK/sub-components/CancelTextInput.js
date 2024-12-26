@@ -33,9 +33,9 @@ export const CancelTextInput = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.cancelButtonLabel);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => {
-        return { ...config, cancelButtonLabel: value };
+    debounce((newValue) => {
+      setConfig((oldConfig) => {
+        return { ...oldConfig, cancelButtonLabel: newValue };
       });
     }, 500),
     [setConfig],

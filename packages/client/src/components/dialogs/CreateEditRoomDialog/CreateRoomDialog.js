@@ -32,12 +32,11 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
+import RoomSelector from "@docspace/shared/selectors/Room";
+import { FolderType } from "@docspace/shared/enums";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { FolderType } from "@docspace/shared/enums";
 
 const CreateRoomDialog = ({
   t,
@@ -109,12 +108,7 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
-
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoom();
-  };
+  const isRoomTitleChanged = roomParams?.title?.trim() === "";
 
   const onCreateRoom = async () => {
     if (!roomParams?.title?.trim()) {
@@ -126,6 +120,11 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onCreateRoom();
   };
 
   /**
@@ -162,7 +161,7 @@ const CreateRoomDialog = ({
   const onCloseAndDisconnectThirdparty = async () => {
     if (isLoading) return;
 
-    if (!!roomParams.storageLocation.thirdpartyAccount) {
+    if (roomParams.storageLocation.thirdpartyAccount) {
       setIsLoading(true);
       await deleteThirdParty(
         roomParams.storageLocation.thirdpartyAccount.providerId,

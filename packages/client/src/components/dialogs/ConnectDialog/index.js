@@ -106,15 +106,15 @@ const PureConnectDialogContainer = (props) => {
   };
   const onChangeFolderName = (e) => {
     setIsTitleValid(true);
-    let title = e.target.value;
-    //const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
+    let newTitle = e.target.value;
+    // const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
 
-    if (title.match(folderFormValidation)) {
+    if (newTitle.match(folderFormValidation)) {
       toastr.warning(t("Files:ContainsSpecCharacter"));
     }
-    title = title.replace(folderFormValidation, "_");
+    newTitle = newTitle.replace(folderFormValidation, "_");
 
-    setCustomerTitleValue(title);
+    setCustomerTitleValue(newTitle);
   };
 
   const onClose = useCallback(() => {
@@ -131,29 +131,27 @@ const PureConnectDialogContainer = (props) => {
   ]);
 
   const onSave = useCallback(() => {
-    const isTitleValid = !!customerTitle.trim();
-    const isUrlValid = !!urlValue.trim();
-    const isLoginValid = !!loginValue.trim();
-    const isPasswordValid = !!passwordValue.trim();
+    const isTitleValidCheck = !!customerTitle.trim();
+    const isUrlValidCheck = !!urlValue.trim();
+    const isLoginValidCheck = !!loginValue.trim();
+    const isPasswordValidCheck = !!passwordValue.trim();
 
     if (link) {
-      if (!isTitleValid) {
+      if (!isTitleValidCheck) {
         setIsTitleValid(!!customerTitle.trim());
         return;
       }
-    } else {
-      if (
-        !isTitleValid ||
-        !isLoginValid ||
-        !isPasswordValid ||
-        (showUrlField && !isUrlValid)
-      ) {
-        setIsTitleValid(isTitleValid);
-        showUrlField && setIsUrlValid(isUrlValid);
-        setIsLoginValid(isLoginValid);
-        setIsPasswordValid(isPasswordValid);
-        return;
-      }
+    } else if (
+      !isTitleValidCheck ||
+      !isLoginValidCheck ||
+      !isPasswordValidCheck ||
+      (showUrlField && !isUrlValidCheck)
+    ) {
+      setIsTitleValid(isTitleValidCheck);
+      showUrlField && setIsUrlValid(isUrlValidCheck);
+      setIsLoginValid(isLoginValidCheck);
+      setIsPasswordValid(isPasswordValidCheck);
+      return;
     }
 
     setIsLoading(true);
@@ -226,15 +224,15 @@ const PureConnectDialogContainer = (props) => {
   ]);
 
   const onReconnect = () => {
-    let authModal = window.open(
+    const authModal = window.open(
       "",
       t("Common:Authorization"),
       "height=600, width=1020",
     );
     openConnectWindow(provider_key, authModal).then((modal) =>
-      getOAuthToken(modal).then((token) => {
+      getOAuthToken(modal).then((accessToken) => {
         authModal.close();
-        setToken(token);
+        setToken(accessToken);
       }),
     );
   };
@@ -300,7 +298,7 @@ const PureConnectDialogContainer = (props) => {
               >
                 <TextInput
                   id="connection-url-input"
-                  isAutoFocussed={true}
+                  isAutoFocussed
                   hasError={!isUrlValid}
                   isDisabled={isLoading}
                   tabIndex={1}
@@ -439,7 +437,7 @@ export default inject(
     } = dialogsStore;
 
     const item = backupConnectionItem ?? connectItem;
-    const isConnectionViaBackupModule = backupConnectionItem ? true : false;
+    const isConnectionViaBackupModule = !!backupConnectionItem;
 
     return {
       selectedFolderId: id,

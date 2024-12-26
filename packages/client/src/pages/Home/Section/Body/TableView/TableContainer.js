@@ -38,9 +38,7 @@ import React, {
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";

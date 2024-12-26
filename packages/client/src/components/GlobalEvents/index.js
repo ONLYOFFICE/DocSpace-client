@@ -28,9 +28,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FileAction } from "@docspace/shared/enums";
+import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
-import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CreateEvent from "./CreateEvent";
@@ -116,10 +115,10 @@ const GlobalEvents = ({
   const onCreate = useCallback((e) => {
     const { payload } = e;
 
-    const visible = payload.id ? true : false;
+    const visible = !!payload.id;
 
     setCreateDialogProps({
-      visible: visible,
+      visible,
       id: payload.id,
       type: FileAction.Create,
       extension: payload.extension,
@@ -152,10 +151,10 @@ const GlobalEvents = ({
   }, []);
 
   const onRename = useCallback((e) => {
-    const visible = e.item ? true : false;
+    const visible = !!e.item;
 
     setRenameDialogProps({
-      visible: visible,
+      visible,
       type: FileAction.Rename,
       item: e.item,
       onClose: () => {
@@ -189,7 +188,7 @@ const GlobalEvents = ({
     const visible = !!e.item;
 
     setEditRoomDialogProps({
-      visible: visible,
+      visible,
       item: e.item,
       onClose: () => {
         setCover();
@@ -215,7 +214,7 @@ const GlobalEvents = ({
     const visible = !!e.item;
 
     setEditGroupDialogProps({
-      visible: visible,
+      visible,
       item: e.item,
       onClose: () => {
         setEditGroupDialogProps({
@@ -227,7 +226,7 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onChangeUserType = useCallback((e) => {
+  const onChangeUserType = useCallback(() => {
     setChangeUserTypeDialogProps({
       visible: true,
       onClose: () => {
@@ -319,10 +318,10 @@ const GlobalEvents = ({
   }, []);
 
   const onSaveAsTemplate = (e) => {
-    const visible = e.item ? true : false;
+    const visible = !!e.item;
 
     setCreateRoomTemplateDialog({
-      visible: visible,
+      visible,
       item: e.item,
       onClose: () => {
         setCreateRoomTemplateDialog({

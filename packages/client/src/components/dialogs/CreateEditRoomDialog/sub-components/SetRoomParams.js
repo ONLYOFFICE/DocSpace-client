@@ -50,6 +50,7 @@ import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
+import TemplateAccess from "./TemplateAccess/TemplateAccess";
 // import IsPrivateParam from "./IsPrivateParam";
 
 const StyledSetRoomParams = styled.div`
@@ -145,6 +146,9 @@ const SetRoomParams = ({
   cover,
   covers,
   setCover,
+  isSaveAsTemplate,
+  onOpenAccessSettings,
+  createdBy,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -158,10 +162,13 @@ const SetRoomParams = ({
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
 
-  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
+  const isVDRRoom =
+    roomParams.type === RoomsType.VirtualDataRoom && !isSaveAsTemplate;
 
-  const isFormRoom = roomParams.type === RoomsType.FormRoom;
-  const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
+  const isFormRoom =
+    roomParams.type === RoomsType.FormRoom && !isSaveAsTemplate;
+  const isPublicRoom =
+    roomParams.type === RoomsType.PublicRoom && !isSaveAsTemplate;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -388,9 +395,20 @@ const SetRoomParams = ({
     />
   );
 
+  const tagsTitle =
+    !!isTemplateSelected || isSaveAsTemplate ? t("Files:RoomTags") : "";
+
+  const inputTitle =
+    !!isTemplateSelected || isSaveAsTemplate
+      ? `${t("Files:RoomName")}:`
+      : `${t("Common:Name")}:`;
+
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit || disabledChangeRoomType || !!isTemplateSelected ? (
+      {isEdit ||
+      disabledChangeRoomType ||
+      !!isTemplateSelected ||
+      isSaveAsTemplate ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -417,11 +435,7 @@ const SetRoomParams = ({
         {element}
         <InputParam
           id="shared_room-name"
-          title={
-            !!isTemplateSelected
-              ? `${t("Files:RoomName")}:`
-              : `${t("Common:Name")}:`
-          }
+          title={inputTitle}
           placeholder={t("Common:EnterName")}
           value={roomParams.title}
           onChange={onChangeName}
@@ -442,7 +456,7 @@ const SetRoomParams = ({
 
       <TagInput
         t={t}
-        title={!!isTemplateSelected ? t("Files:RoomTags") : ""}
+        title={tagsTitle}
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}
@@ -459,7 +473,14 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {isEdit && (
+      {isSaveAsTemplate && (
+        <TemplateAccess
+          roomOwner={createdBy}
+          onOpenAccessSettings={onOpenAccessSettings}
+        />
+      )}
+
+      {isEdit && !isSaveAsTemplate && (
         <ChangeRoomOwner
           canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}

@@ -28,15 +28,58 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { CreateRoomTemplateDialog } from "../dialogs";
+import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 const CreateRoomTemplateEvent = (props) => {
-  const { visible, item, fetchTags, setTemplateEventVisible } = props;
+  const {
+    visible,
+    item,
+    fetchTags,
+    setTemplateEventVisible,
+    getThirdPartyIcon,
+    isDefaultRoomsQuotaSet,
+  } = props;
 
   const [fetchedTags, setFetchedTags] = useState([]);
+  const startTags = Object.values(item.tags);
+  const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
+
+  const fetchedRoomParams = {
+    title: item.title,
+    type: item.roomType,
+    tags: startObjTags,
+    isThirdparty: !!item.providerKey,
+    storageLocation: {
+      title: item.title,
+      parentId: item.parentId,
+      providerKey: item.providerKey,
+      iconSrc: getThirdPartyIcon(item.providerKey),
+    },
+    isPrivate: false,
+    icon: {
+      uploadedFile: item.logo.original,
+      tmpFile: "",
+      x: 0.5,
+      y: 0.5,
+      zoom: 1,
+    },
+    roomOwner: item.createdBy,
+    canChangeRoomOwner: item?.security?.ChangeOwner || false,
+    indexing: item.indexing,
+    lifetime: item.lifetime,
+    denyDownload: item.denyDownload,
+    watermark: item.watermark,
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
+  };
 
   const fetchTagsAction = useCallback(async () => {
-    const tags = await fetchTags();
-    setFetchedTags(tags);
+    try {
+      const tags = await fetchTags();
+      setFetchedTags(tags);
+    } catch (err) {
+      toastr.error(err);
+    }
   }, []);
 
   useEffect(() => {
@@ -60,12 +103,23 @@ const CreateRoomTemplateEvent = (props) => {
       // onSaveClick={onSaveClick}
       onClose={onClose}
       fetchedTags={fetchedTags}
+      fetchedRoomParams={fetchedRoomParams}
     />
   );
 };
 
-export default inject(({ tagsStore, dialogsStore }) => {
-  const { fetchTags } = tagsStore;
-  const { setTemplateEventVisible } = dialogsStore;
-  return { fetchTags, setTemplateEventVisible };
-})(observer(CreateRoomTemplateEvent));
+export default inject(
+  ({ tagsStore, dialogsStore, filesSettingsStore, currentQuotaStore }) => {
+    const { fetchTags } = tagsStore;
+    const { setTemplateEventVisible } = dialogsStore;
+    const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
+    return {
+      fetchTags,
+      setTemplateEventVisible,
+      getThirdPartyIcon,
+      isDefaultRoomsQuotaSet,
+    };
+  },
+)(observer(CreateRoomTemplateEvent));

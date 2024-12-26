@@ -25,9 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { withTranslation } from "react-i18next";
-import { Avatar } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import * as Styled from "./TemplateAccess.styled";
 
@@ -52,8 +56,8 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
     avatarList.push(
       <Avatar
         className="template-access_avatar"
-        size="min"
-        role={""}
+        size={AvatarSize.min}
+        role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
         source={roomOwner.avatarSmall ?? roomOwner.avatar}
         userName={userName}
@@ -84,7 +88,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
               <Link
                 className="template-access_link"
                 isHovered
-                type="action"
+                type={LinkType.action}
                 fontWeight={600}
                 fontSize="13px"
                 onClick={onOpenAccessSettings}
@@ -100,8 +104,8 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
             {usersLength === 1 ? (
               <>
                 <Avatar
-                  size="min"
-                  role={""}
+                  size={AvatarSize.min}
+                  role={AvatarRole.none}
                   isDefaultSource={roomOwner.hasAvatar}
                   source={roomOwner.avatarSmall ?? roomOwner.avatar}
                   userName={userName}
@@ -127,7 +131,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
           <Link
             className="template-access_link"
             isHovered
-            type="action"
+            type={LinkType.action}
             fontWeight={600}
             fontSize="13px"
             onClick={onOpenAccessSettings}

@@ -68,12 +68,12 @@ import {
   ShareFolderDialog,
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
-  CreateRoomTemplateDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
+import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";

@@ -37,7 +37,7 @@ import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 
 const CreateRoomDialog = ({
   t,

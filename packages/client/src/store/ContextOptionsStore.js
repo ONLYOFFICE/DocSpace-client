@@ -815,6 +815,12 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
+  onSaveAsTemplate = (item) => {
+    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
   onCreateRoomTemplate = (item) => {
     this.filesActionsStore.onCreateRoomFromTemplate(item);
   };
@@ -1820,7 +1826,7 @@ class ContextOptionsStore {
         key: "save-as-template",
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
-        onClick: () => this.onCreateRoomTemplate(item),
+        onClick: () => this.onSaveAsTemplate(item),
         badgeLabel: t("New"),
         disabled: !item.security?.Create,
       },

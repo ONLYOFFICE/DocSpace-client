@@ -318,7 +318,7 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onCreateRoomTemplate = (e) => {
+  const onSaveAsTemplate = (e) => {
     const visible = e.item ? true : false;
 
     setCreateRoomTemplateDialog({
@@ -332,7 +332,6 @@ const GlobalEvents = ({
       },
     });
   };
-
 
   useEffect(() => {
     window.addEventListener(
@@ -357,7 +356,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
-    window.addEventListener(Events.CREATE_ROOM_TEMPLATE, onCreateRoomTemplate);
+    window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -385,10 +384,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
-      window.addEventListener(
-        Events.CREATE_ROOM_TEMPLATE,
-        onCreateRoomTemplate,
-      );
+      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (enablePlugins) {
         window.removeEventListener(

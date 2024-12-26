@@ -328,6 +328,7 @@ const DropDown = ({
           style={dropDownStyles}
           className={dropDownClasses}
           data-testid="dropdown"
+          role="listbox"
         >
           <VirtualList
             Row={Row}

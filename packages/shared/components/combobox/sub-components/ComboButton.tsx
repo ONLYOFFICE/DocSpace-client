@@ -193,8 +193,8 @@ const ComboButton: React.FC<TComboButtonProps> = ({
         data-test-id="combo-button-arrow"
         aria-hidden="true"
       >
-        {displayArrow &&
-          (comboIcon ? (
+        {displayArrow ? (
+          comboIcon ? (
             <ReactSVG
               src={comboIcon}
               className="combo-buttons_expander-icon"

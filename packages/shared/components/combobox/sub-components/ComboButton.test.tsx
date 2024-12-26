@@ -61,7 +61,7 @@ describe("ComboButton", () => {
   });
 
   test("renders disabled state correctly", () => {
-    renderWithTheme(<ComboButton {...baseProps} isDisabled={true} />);
+    renderWithTheme(<ComboButton {...baseProps} isDisabled />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveAttribute("aria-disabled", "true");
   });
@@ -80,19 +80,19 @@ describe("ComboButton", () => {
   });
 
   test("renders with loading state", () => {
-    renderWithTheme(<ComboButton {...baseProps} isLoading={true} />);
+    renderWithTheme(<ComboButton {...baseProps} isLoading />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toBeInTheDocument();
   });
 
   test("renders with modern view", () => {
-    renderWithTheme(<ComboButton {...baseProps} modernView={true} />);
+    renderWithTheme(<ComboButton {...baseProps} modernView />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveStyle({ border: "none" });
   });
 
   test("renders with open state", () => {
-    renderWithTheme(<ComboButton {...baseProps} isOpen={true} />);
+    renderWithTheme(<ComboButton {...baseProps} isOpen />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
@@ -103,7 +103,7 @@ describe("ComboButton", () => {
   });
 
   test("renders without border", () => {
-    renderWithTheme(<ComboButton {...baseProps} noBorder={true} />);
+    renderWithTheme(<ComboButton {...baseProps} noBorder />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveStyle({ border: "none" });
   });
@@ -146,7 +146,7 @@ describe("ComboButton", () => {
   });
 
   test("renders with advanced options", () => {
-    renderWithTheme(<ComboButton {...baseProps} withAdvancedOptions={true} />);
+    renderWithTheme(<ComboButton {...baseProps} withAdvancedOptions />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     if (!button) throw new Error("Button not found");
     const arrowIcon = button.querySelector(".combo-buttons_arrow-icon");
@@ -163,7 +163,7 @@ describe("ComboButton", () => {
   });
 
   test("renders with scaled option", () => {
-    renderWithTheme(<ComboButton {...baseProps} scaled={true} />);
+    renderWithTheme(<ComboButton {...baseProps} scaled />);
     expect(screen.getByText("Test Option")).toBeInTheDocument();
   });
 });

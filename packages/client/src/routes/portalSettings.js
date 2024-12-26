@@ -626,12 +626,13 @@ const PortalSettingsRoutes = {
     {
       path: "restore/restore-backup",
       lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
-            ),
-        ),
+        componentLoader(async () => {
+          const RestoreBackup = await import(
+            "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
+          );
+
+          return { Component: RestoreBackup.default };
+        }),
     },
     {
       path: "bonus",

@@ -7,7 +7,7 @@
   "DownloadOriginalFormat": "In original format",
   "FileProtectionMessage": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list.",
   "OriginalFormat": "Original format",
-  "ProtectedFiles": "Protected files",
   "PasswordEntered": "Password entered",
+  "ProtectedFiles": "Protected files",
   "RemovedFromList": "Removed from list"
 }

@@ -8,7 +8,7 @@ import {
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ThemeProvider } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base } from "../../themes";
 
 import PortalLogo from "./PortalLogo";
 
@@ -19,28 +19,6 @@ jest.mock("react-device-detect", () => ({
 const renderWithTheme = (ui: React.ReactElement) => {
   return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
 };
-
-jest.mock("@docspace/shared/utils", () => ({
-  ...jest.requireActual("@docspace/shared/utils"),
-  getLogoUrl: () => "test-logo-url",
-  classNames: (...args: string[]) => {
-    const classes = args.filter(Boolean);
-    return classes
-      .reduce((acc: string[], curr: string) => {
-        if (typeof curr === "string") {
-          acc.push(curr);
-        } else if (typeof curr === "object") {
-          Object.entries(curr).forEach(([key, value]) => {
-            if (value) {
-              acc.push(key);
-            }
-          });
-        }
-        return acc;
-      }, [])
-      .join(" ");
-  },
-}));
 
 describe("PortalLogo", () => {
   const mockResizeEvent = (width: number) => {

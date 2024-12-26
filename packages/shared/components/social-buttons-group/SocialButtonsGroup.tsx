@@ -27,9 +27,9 @@
 import React, { memo, useState } from "react";
 import equal from "fast-deep-equal/react";
 
-import { getProviderLabel } from "@docspace/shared/utils/common";
-
 import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
+
+import { getProviderLabel } from "../../utils/common";
 
 import { SocialButton } from "../social-button";
 import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";

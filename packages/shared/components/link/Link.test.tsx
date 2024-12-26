@@ -27,8 +27,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Base } from "@docspace/shared/themes";
 import { ThemeProvider } from "styled-components";
+
+import { Base } from "../../themes";
 import { Link, LinkType } from ".";
 
 // Mock CSS modules

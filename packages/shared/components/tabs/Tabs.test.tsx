@@ -28,7 +28,7 @@ import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ThemeProvider } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base } from "../../themes";
 import { Tabs } from ".";
 import { TabsTypes } from "./Tabs.enums";
 import { TTabItem } from "./Tabs.types";

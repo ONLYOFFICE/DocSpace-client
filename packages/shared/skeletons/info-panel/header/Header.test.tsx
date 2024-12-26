@@ -5,10 +5,6 @@ import "@testing-library/jest-dom";
 import InfoPanelHeaderLoader from "./index";
 import styles from "./Header.module.scss";
 
-jest.mock("@docspace/shared/utils", () => ({
-  isDesktop: jest.fn(() => true),
-}));
-
 describe("InfoPanelHeaderLoader", () => {
   it("renders without crashing", () => {
     render(<InfoPanelHeaderLoader />);

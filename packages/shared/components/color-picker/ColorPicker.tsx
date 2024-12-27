@@ -67,6 +67,7 @@ const ColorPicker = ({
 
   return (
     <Wrapper
+      data-testid="color-picker"
       ref={forwardedRef}
       isPickerOnly={isPickerOnly}
       className={className}

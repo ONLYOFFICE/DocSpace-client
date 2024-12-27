@@ -24,26 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ColorPickerProps {
-  /** Class name */
-  className?: string;
-  /** Used as HTML `id` property  */
-  id?: string;
-  /** Triggers function on color picker close */
-  onClose?: () => void;
-  /** Hides controls */
-  isPickerOnly: boolean;
-  /** Triggers function on color apply */
-  onApply?: (color: string) => void;
-  /** Selected color */
-  appliedColor: string;
-  /** Apply button text */
-  applyButtonLabel?: string;
-  /** Cancel button text */
-  cancelButtonLabel?: string;
-  /** Allows handling the changing values of the component */
-  handleChange?: (color: string) => void;
-  /** Hex code text */
-  hexCodeLabel?: string;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
-}
+import { screen, render } from "@testing-library/react";
+import { ColorInput } from "./ColorInput";
+import "@testing-library/jest-dom";
+
+describe("ColorInput component", () => {
+  it("renders without error", () => {
+    render(<ColorInput />);
+    expect(screen.getByTestId("color-input")).toBeInTheDocument();
+  });
+});

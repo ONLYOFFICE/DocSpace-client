@@ -32,7 +32,6 @@ describe("FormWrapper", () => {
   it("renders without error", () => {
     const children = <div>Test Children</div>;
     render(<FormWrapper>{children}</FormWrapper>);
-    
     const wrapper = screen.getByTestId("form-wrapper");
     expect(wrapper).toBeInTheDocument();
     expect(wrapper).toHaveAttribute("data-component", "form-wrapper");
@@ -42,13 +41,11 @@ describe("FormWrapper", () => {
   it("renders with custom className and style", () => {
     const children = <div>Test Children</div>;
     const customStyle = { backgroundColor: "red" };
-    
     render(
       <FormWrapper className="custom-class" style={customStyle}>
         {children}
-      </FormWrapper>
+      </FormWrapper>,
     );
-    
     const wrapper = screen.getByTestId("form-wrapper");
     expect(wrapper).toHaveClass("custom-class");
     expect(wrapper).toHaveStyle({ backgroundColor: "red" });
@@ -56,17 +53,15 @@ describe("FormWrapper", () => {
 
   it("renders with custom ARIA attributes", () => {
     const children = <div>Test Children</div>;
-    
     render(
-      <FormWrapper 
-        aria-label="Test Form" 
+      <FormWrapper
+        aria-label="Test Form"
         aria-labelledby="form-title"
         role="search"
       >
         {children}
-      </FormWrapper>
+      </FormWrapper>,
     );
-    
     const wrapper = screen.getByTestId("form-wrapper");
     expect(wrapper).toHaveAttribute("aria-label", "Test Form");
     expect(wrapper).toHaveAttribute("aria-labelledby", "form-title");
@@ -76,9 +71,7 @@ describe("FormWrapper", () => {
   it("renders children correctly", () => {
     const testId = "test-child";
     const children = <div data-testid={testId}>Test Children</div>;
-    
     render(<FormWrapper>{children}</FormWrapper>);
-    
     expect(screen.getByTestId(testId)).toBeInTheDocument();
     expect(screen.getByText("Test Children")).toBeInTheDocument();
   });

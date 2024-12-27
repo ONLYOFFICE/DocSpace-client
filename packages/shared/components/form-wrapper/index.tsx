@@ -69,8 +69,8 @@ type FormWrapperProps = {
 const FormWrapper = (props: FormWrapperProps) => {
   const { children, role = "form", ...rest } = props;
   return (
-    <StyledWrapper 
-      data-testid="form-wrapper" 
+    <StyledWrapper
+      data-testid="form-wrapper"
       data-component="form-wrapper"
       role={role}
       {...rest}

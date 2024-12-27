@@ -8,7 +8,8 @@ const meta: Meta<typeof FormWrapper> = {
   parameters: {
     docs: {
       description: {
-        component: "A wrapper component for forms that provides consistent styling and accessibility features.",
+        component:
+          "A wrapper component for forms that provides consistent styling and accessibility features.",
       },
     },
   },

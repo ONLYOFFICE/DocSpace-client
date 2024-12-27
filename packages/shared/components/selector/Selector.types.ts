@@ -516,6 +516,7 @@ export type TSelectorItemRoom = MergeTypes<
     icon?: string;
     color?: string;
     iconOriginal?: string;
+    cover?: ICover;
   }
 >;
 

@@ -127,6 +127,7 @@
     "@types/react-window": "^1.8.8",
     "@types/react-window-infinite-loader": "^1.0.9",
     "@types/sjcl": "^1.0.34",
+    "@types/utif": "^3.0.5",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",

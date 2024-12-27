@@ -41,6 +41,12 @@
   }
 }
 
+@mixin transitional-screen-size {
+  @media (max-width: #{$desktop + $info-panel-width}) {
+    @content;
+  }
+}
+
 @mixin animate($animation, $duration, $method, $times) {
   animation: $animation $duration $method $times;
 }

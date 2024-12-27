@@ -36,7 +36,7 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../context-menu-button";
-import { ContextMenu } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import { Loader, LoaderTypes } from "../loader";
 import {
   StyledOptionButton,
@@ -78,17 +78,7 @@ const Row = (props: RowProps) => {
     isIndexEditingMode,
   } = props;
 
-  const cm = useRef<null | {
-    show: (e: React.MouseEvent | MouseEvent) => void;
-    hide: (
-      e:
-        | React.MouseEvent
-        | MouseEvent
-        | Event
-        | React.ChangeEvent<HTMLInputElement>,
-    ) => void;
-    menuRef: { current: HTMLDivElement };
-  }>(null);
+  const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<null | HTMLDivElement>(null);
 
   const renderCheckbox = hasOwnProperty(props, "checked");
@@ -233,14 +223,18 @@ const Row = (props: RowProps) => {
               iconName={ArrowReactSvgUrl}
               className="index-up-icon"
               size="small"
-              onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+              onClick={(e: React.MouseEvent) =>
+                changeIndex(e, VDRIndexingAction.HigherIndex)
+              }
             />
             <ColorTheme
               themeId={ThemeId.IndexIconButton}
               iconName={ArrowReactSvgUrl}
               className="index-down-icon"
               size="small"
-              onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+              onClick={(e: React.MouseEvent) =>
+                changeIndex(e, VDRIndexingAction.LowerIndex)
+              }
             />
           </>
         ) : (

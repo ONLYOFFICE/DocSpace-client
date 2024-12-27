@@ -37,7 +37,10 @@ describe("PortalLogo", () => {
     renderWithTheme(<PortalLogo />);
     const img = screen.getByRole("img");
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute("src", "test-logo-url");
+    expect(img).toHaveAttribute(
+      "src",
+      "/logo.ashx?logotype=2&dark=false&default=false",
+    );
   });
 
   it("applies custom className when provided", () => {

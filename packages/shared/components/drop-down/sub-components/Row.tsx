@@ -35,7 +35,7 @@ const Row = memo(({ data, index, style }: RowProps) => {
 
   const option = Array.isArray(children) ? children[index] : null;
 
-  const optionStyle = option?.props.style ?? {};
+  const optionStyle = option?.props?.style ?? {};
 
   const newStyle = { ...style, ...optionStyle };
 

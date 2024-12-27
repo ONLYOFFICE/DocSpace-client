@@ -820,7 +820,7 @@ class SettingsStore {
       this.setPortals(res.tenants);
       return res;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
@@ -1217,7 +1217,7 @@ class SettingsStore {
     if (action === UrlActionType.Download) {
       return this.isFrame &&
         this.frameConfig?.downloadToEvent &&
-        this.frameConfig?.events.onDownload
+        this.frameConfig?.events?.onDownload
         ? frameCallEvent({ event: "onDownload", data: url })
         : replace
           ? (window.location.href = url)

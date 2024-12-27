@@ -275,7 +275,7 @@ const Article = ({
                 <ArticleLiveChat
                   isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
-                    withMainButton || false ? !!articleMainButtonContent : null
+                    withMainButton || false ? !!articleMainButtonContent : false
                   }
                   languageBaseName={languageBaseName}
                   zendeskEmail={zendeskEmail}

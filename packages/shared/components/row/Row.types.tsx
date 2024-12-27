@@ -78,4 +78,5 @@ export interface RowProps {
   badgeUrl?: string;
   /** Disables checkbox */
   isDisabled?: boolean;
+  onChangeIndex: VoidFunction;
 }

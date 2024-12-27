@@ -39,7 +39,9 @@ const baseProps = {
 
 describe("<Row />", () => {
   it("renders without error", () => {
-    render(<Row {...baseProps} onRowClick={() => {}} />);
+    render(
+      <Row {...baseProps} isIndexEditingMode={false} onRowClick={() => {}} />,
+    );
 
     expect(screen.getByTestId("row")).toBeInTheDocument();
   });

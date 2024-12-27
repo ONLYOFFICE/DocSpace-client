@@ -131,6 +131,7 @@ class BackupStore {
   requiredFormSettings = {};
 
   defaultFormSettings = {};
+
   /** @type {Record<string, boolean>} */
   errorsFieldsBeforeSafe = {};
 
@@ -139,10 +140,12 @@ class BackupStore {
   defaultEnableSchedule = false;
 
   storageRegions = [];
+
   /** @type {ThirdPartyAccountType | null} */
   selectedThirdPartyAccount = null;
 
   connectedThirdPartyAccount = null;
+
   /** @type {ThirdPartyAccountType[]} */
   accounts = [];
 

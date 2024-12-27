@@ -42,7 +42,6 @@ import {
 } from "@docspace/shared/components/scrollbar";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
-import { StyledBackupList } from "../../../StyledBackup";
 
 import { StyledBackupList } from "../../RestoreBackup.styled";
 import type { BackupListBodyProps } from "./BackupList.types";

@@ -38,7 +38,6 @@ import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
-import AboutDialog from "../../../../About/AboutDialog";
 import { brandingRedirectUrl } from "./constants";
 
 const CompanyInfoSettingsComponent = (props) => {

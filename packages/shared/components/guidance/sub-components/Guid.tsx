@@ -67,6 +67,7 @@ const Guid = ({
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   const [modalBottom, setModalBottom] = React.useState<null | number>(null);
+  const [directionX, setDirectionX] = React.useState<null | string>("left");
 
   const theme = useTheme();
 
@@ -110,6 +111,13 @@ const Guid = ({
 
   const onResize = () => {
     const screenHeight = document.documentElement.clientHeight;
+    const screenWidth = document.documentElement.clientWidth;
+
+    if (guidPosition.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
+      setDirectionX("right");
+    } else {
+      setDirectionX("left");
+    }
 
     if (
       screenHeight <
@@ -119,7 +127,7 @@ const Guid = ({
         guidPosition.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT,
       );
     }
-    return setModalBottom(guidPosition.bottom + GUID_MODAL_MARGIN);
+    setModalBottom(guidPosition.bottom + GUID_MODAL_MARGIN);
   };
 
   React.useEffect(() => {
@@ -147,6 +155,7 @@ const Guid = ({
         left={
           isLastTip && !isDesktop() ? guidPosition.left - MODAL_WIDTH : null
         }
+        directionX={directionX}
         className={
           classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""
         }

@@ -33,11 +33,20 @@ const StyledDialog = styled(Dialog)<{
   isTourMode?: boolean;
   bottom?: number;
   left?: number;
+  directionX?: string;
 }>`
   position: absolute;
   min-height: auto;
   top: ${(props) => props.bottom && `${props.bottom}px`};
-  left: ${(props) => (props.left ? `${props.left}px` : "250px")};
+
+  ${(props) =>
+    props.directionX === "left"
+      ? css`
+          left: ${() => (props.left ? `${props.left}px` : "250px")};
+        `
+      : css`
+          right: 0;
+        `}
 
   #modal-dialog {
     width: 430px;

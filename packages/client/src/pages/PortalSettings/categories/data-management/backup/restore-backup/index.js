@@ -39,8 +39,14 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import StatusMessage from "@docspace/shared/components/status-message";
-import { isManagement } from "@docspace/shared/utils/common";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import {
+  getBackupProgressInfo,
+  isManagement,
+} from "@docspace/shared/utils/common";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -50,6 +56,7 @@ import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { getBackupProgress } from "@docspace/shared/api/portal";
 
 const LOCAL_FILE = "localFile",
   BACKUP_ROOM = "backupRoom",
@@ -79,6 +86,8 @@ const RestoreBackup = (props) => {
     buttonSize,
     standalone,
     downloadingProgressError,
+    setDownloadingProgress,
+    setTemporaryLink,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -116,13 +125,39 @@ const RestoreBackup = (props) => {
     setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "backup",
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+
+      if (success) toastr.success(success);
     });
 
     return () => {
       resetDownloadingProgress();
       setRestoreResource(null);
+
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
     };
   }, []);
 
@@ -323,6 +358,8 @@ export const Component = inject(
       setConnectedThirdPartyAccount,
       setRestoreResource,
       downloadingProgressError,
+      setDownloadingProgress,
+      setTemporaryLink,
     } = backup;
 
     const buttonSize =
@@ -343,6 +380,8 @@ export const Component = inject(
       getProgress,
       setRestoreResource,
       downloadingProgressError,
+      setDownloadingProgress,
+      setTemporaryLink,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

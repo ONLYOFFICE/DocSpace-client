@@ -115,27 +115,6 @@ class BackupStore {
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
-
-    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
-      const { progress, isCompleted, link, error } = opt;
-      this.downloadingProgress = progress;
-      if (this.downloadingProgressError) this.downloadingProgressError = "";
-
-      if (isCompleted) {
-        if (error) {
-          this.downloadingProgress = 100;
-          toastr.error(error);
-
-          return;
-        }
-
-        if (link && link.slice(0, 1) === "/") {
-          this.temporaryLink = link;
-        }
-
-        toastr.success(i18n.t("Settings:BackupCreatedSuccess"));
-      }
-    });
   }
 
   setConnectedThirdPartyAccount = (account) => {
@@ -554,7 +533,8 @@ class BackupStore {
   }
 
   setDownloadingProgress = (progress) => {
-    this.downloadingProgress = progress;
+    if (progress !== this.downloadingProgress)
+      this.downloadingProgress = progress;
   };
 
   setTemporaryLink = (link) => {

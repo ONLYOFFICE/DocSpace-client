@@ -56,8 +56,8 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
-import { parseAddress } from "./email";
 
+import { parseAddress } from "./email";
 import {
   FolderType,
   RoomsType,
@@ -1323,4 +1323,32 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     { width, height },
     file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
   );
+};
+
+export const getBackupProgressInfo = (
+  opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  },
+  t: TTranslation,
+  setBackupProgress: (progress: number) => void,
+  setLink: (link: string) => void,
+) => {
+  const { isCompleted, link, error, progress } = opt;
+  setBackupProgress(progress);
+
+  if (isCompleted) {
+    if (error) {
+      setBackupProgress(100);
+      return { error };
+    }
+
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
+    return { success: t("Settings:BackupCreatedSuccess") };
+  }
 };

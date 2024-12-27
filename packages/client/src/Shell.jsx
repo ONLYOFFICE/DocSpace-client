@@ -137,6 +137,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
 
     SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "restore-backup",
+    });
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
@@ -151,25 +155,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    const callback = () => {
-      getRestoreProgress()
-        .then((response) => {
-          if (!response) {
-            console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response",
-            );
-            return;
-          }
-          setPreparationPortalDialogVisible(true);
-        })
-        .catch((e) => {
-          console.error("getRestoreProgress", e);
-        });
-    };
-    SocketHelper.on(SocketEvents.RestoreBackup, callback);
+    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+      setPreparationPortalDialogVisible(true);
+    });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+        setPreparationPortalDialogVisible(false);
+      });
     };
   }, [setPreparationPortalDialogVisible]);
 

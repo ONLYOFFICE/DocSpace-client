@@ -58,8 +58,15 @@ import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  getBackupProgressInfo,
+  isManagement,
+} from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -158,7 +165,36 @@ class AutomaticBackup extends React.PureComponent {
   };
 
   componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles } = this.props;
+    const {
+      fetchTreeFolders,
+      rootFoldersTitles,
+      setDownloadingProgress,
+      setTemporaryLink,
+      t,
+    } = this.props;
+
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    });
 
     this.getWeekdays();
 
@@ -182,6 +218,11 @@ class AutomaticBackup extends React.PureComponent {
     clearTimeout(this.timerId);
     this.timerId = null;
     resetDownloadingProgress();
+
+    SocketHelper.off(SocketEvents.BackupProgress);
+    SocketHelper.emit(SocketCommands.Unsubscribe, {
+      roomParts: "backup",
+    });
   }
 
   getTime = () => {
@@ -663,6 +704,8 @@ export default inject(
       setStorageRegions,
       defaultFolderId,
       isBackupProgressVisible,
+      setDownloadingProgress,
+      setTemporaryLink,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -728,6 +771,8 @@ export default inject(
       automaticBackupUrl,
       currentColorScheme,
       isBackupProgressVisible,
+      setDownloadingProgress,
+      setTemporaryLink,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

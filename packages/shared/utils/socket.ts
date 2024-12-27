@@ -40,8 +40,9 @@ import { addLog } from ".";
  * @readonly
  */
 export const enum SocketEvents {
-  RestoreBackup = "restore",
+  Restore = "restore",
   Backup = "backup",
+  RestoreBackup = "restore-backup",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
   ModifyRoom = "s:modify-room",
@@ -123,7 +124,7 @@ export type TEmitEventsDataMap = {
   [SocketCommands.Subscribe]: TSubscribeEmitData;
   [SocketCommands.Unsubscribe]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
-  [SocketCommands.RestoreBackup]: never;
+  [SocketCommands.Restore]: never;
 };
 
 /**
@@ -216,7 +217,11 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
-  [SocketEvents.RestoreProgress]: (data: number) => void;
+  [SocketEvents.RestoreProgress]: (opt: {
+    progress: number;
+    isCompleted: boolean;
+    error: string;
+  }) => void;
 };
 
 /**

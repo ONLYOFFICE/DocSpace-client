@@ -60,12 +60,6 @@ const useSocketHelper = ({
   React.useEffect(() => {
     const callback = async () => {
       try {
-        const response = await getRestoreProgress();
-
-        if (!response) {
-          console.log("Skip denyEditingRights - empty progress response");
-          return;
-        }
         // const message = t("Common:PreparationPortalTitle");
         const message = "Preparation portal title";
 
@@ -78,6 +72,7 @@ const useSocketHelper = ({
         console.error("getRestoreProgress", e);
       }
     };
+
     SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
     return () => {

@@ -34,7 +34,10 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  getBackupProgressInfo,
+  isManagement,
+} from "@docspace/shared/utils/common";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
@@ -43,7 +46,10 @@ import {
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import StatusMessage from "@docspace/shared/components/status-message";
-
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
@@ -136,7 +142,38 @@ class ManualBackup extends React.Component {
   };
 
   componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
+    const {
+      fetchTreeFolders,
+      rootFoldersTitles,
+      isNotPaidPeriod,
+      setDownloadingProgress,
+      setTemporaryLink,
+      t,
+    } = this.props;
+
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    });
 
     if (isNotPaidPeriod) {
       this.setState({
@@ -166,6 +203,11 @@ class ManualBackup extends React.Component {
     this.timerId = null;
 
     resetDownloadingProgress();
+
+    SocketHelper.off(SocketEvents.BackupProgress);
+    SocketHelper.emit(SocketCommands.Unsubscribe, {
+      roomParts: "backup",
+    });
   }
 
   onMakeTemporaryBackup = async () => {

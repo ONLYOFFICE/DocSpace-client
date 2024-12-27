@@ -1,0 +1,46 @@
+@import "../../styles/_mixins.scss";
+@import "../../styles/variables/devices.scss";
+
+.errorUnavailableWrapper {
+  width: 100%;
+  gap: 64px;
+}
+
+.error520Wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 16px;
+
+  @include mobile {
+    justify-content: start;
+  }
+
+  .container {
+    height: auto !important;
+  }
+
+  .logo {
+    margin-bottom: 28px;
+  }
+
+  .link {
+    margin-top: 24px;
+  }
+
+  #customized-text {
+    max-width: 480px;
+    text-align: center;
+  }
+}
+
+.accessRestrictedWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+}

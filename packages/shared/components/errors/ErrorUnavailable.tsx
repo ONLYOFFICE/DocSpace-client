@@ -28,20 +28,20 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "../error-container/ErrorContainer";
-import { ErrorUnavailableWrapper } from "./Errors.styled";
+import styles from "./Errors.module.scss";
 
 const ErrorUnavailable = () => {
   const { t, ready } = useTranslation("Common");
 
   return (
     ready && (
-      <ErrorUnavailableWrapper>
+      <div className={styles.errorUnavailableWrapper}>
         <ErrorContainer
           headerText={t("ErrorDeactivatedText", {
             productName: t("Common:ProductName"),
           })}
         />
-      </ErrorUnavailableWrapper>
+      </div>
     )
   );
 };

@@ -53,5 +53,9 @@ export const fakeFormFillingList = [
     icon: PDFIcon,
     isFolder: false,
     isPDF: true,
+    fileExst: ".pdf",
+    security: {
+      Lock: false,
+    },
   },
 ];

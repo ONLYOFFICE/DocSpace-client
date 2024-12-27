@@ -52,6 +52,10 @@ import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   getBackupProgressInfo,
@@ -699,6 +703,7 @@ export default inject(
       isBackupProgressVisible,
       setDownloadingProgress,
       setTemporaryLink,
+      resetDownloadingProgress,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -766,6 +771,7 @@ export default inject(
       isBackupProgressVisible,
       setDownloadingProgress,
       setTemporaryLink,
+      resetDownloadingProgress,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

@@ -56,16 +56,28 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-interface FormWrapperProps {
+type FormWrapperProps = {
   children: React.ReactNode;
   id?: string;
   className?: string;
   style?: React.CSSProperties;
-}
+  role?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+};
 
 const FormWrapper = (props: FormWrapperProps) => {
-  const { children } = props;
-  return <StyledWrapper {...props}>{children}</StyledWrapper>;
+  const { children, role = "form", ...rest } = props;
+  return (
+    <StyledWrapper 
+      data-testid="form-wrapper" 
+      data-component="form-wrapper"
+      role={role}
+      {...rest}
+    >
+      {children}
+    </StyledWrapper>
+  );
 };
 
 export { FormWrapper };

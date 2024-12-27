@@ -53,7 +53,7 @@ const Dropzone = ({
   });
 
   return (
-    <StyledDropzone $isLoading={isLoading}>
+    <StyledDropzone $isLoading={isLoading} data-testid="dropzone">
       {isLoading ? (
         <Loader
           className="dropzone_loader"

@@ -24,49 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../utils";
+import { render, screen } from "@testing-library/react";
+import Dropzone from "./index";
+import "@testing-library/jest-dom";
 
-export const ErrorUnavailableWrapper = styled.div`
-  width: 100%;
-  gap: 64px;
-`;
-
-export const Error520Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 16px;
-
-  @media ${mobile} {
-    justify-content: start;
-  }
-
-  .container {
-    height: auto !important;
-  }
-
-  .logo {
-    margin-bottom: 28px;
-  }
-
-  .link {
-    margin-top: 24px;
-  }
-
-  #customized-text {
-    max-width: 480px;
-    text-align: center;
-  }
-`;
-
-export const AccessRestrictedWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 64px;
-`;
+describe("Dropzone", () => {
+  it("renders without error", () => {
+    render(
+      <Dropzone
+        isLoading={false}
+        linkMainText={""}
+        linkSecondaryText={""}
+        exstsText={""}
+        accept={[]}
+      />,
+    );
+    expect(screen.getByTestId("dropzone")).toBeInTheDocument();
+  });
+});

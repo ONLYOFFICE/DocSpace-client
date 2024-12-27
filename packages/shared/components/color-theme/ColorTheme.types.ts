@@ -29,7 +29,7 @@ import { TColorScheme } from "../../themes";
 import { IconButtonProps } from "../icon-button/IconButton.types";
 import { LinkProps } from "../link/Link.types";
 import { TextProps } from "../text/Text.types";
-
+import type { TTheme } from "../../themes";
 import { ThemeId } from "./ColorTheme.enums";
 
 export interface DefaultColorThemeProps {
@@ -103,6 +103,7 @@ export interface ProgressColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.Progress;
   percent?: number;
   $currentColorScheme?: TColorScheme;
+  theme: TTheme;
 }
 
 export interface VersionBadgeTheme extends DefaultColorThemeProps {

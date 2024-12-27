@@ -198,6 +198,8 @@ const Modal = ({
         <div
           id="modal-onMouseDown-close"
           className={dialogClassName}
+          role="dialog"
+          aria-modal="true"
           style={style}
           onMouseDown={validateOnMouseDown}
         >

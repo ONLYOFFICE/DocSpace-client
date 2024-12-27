@@ -24,33 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-export const StyledBodyContent = styled.div`
+.bodyContent {
   display: contents;
+}
 
-  .report-description {
-    margin-bottom: 16px;
-  }
+.reportDescription {
+  margin-bottom: 16px;
+}
 
-  .report-wrapper {
-    margin-top: 8px;
-    height: 48px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
+.reportWrapper {
+  margin-top: 8px;
+  height: 48px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
 
-    .report-filename {
-      display: flex;
-    }
+.reportFilename {
+  display: flex;
+}
 
-    .file-icon {
-      width: 24px;
-      user-select: none;
-    }
+.fileIcon {
+  width: 24px;
+  user-select: none;
+}
 
-    .icon-button {
-      cursor: pointer;
-    }
-  }
-`;
+.iconButton {
+  cursor: pointer;
+}

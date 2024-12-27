@@ -287,19 +287,6 @@ const FilesRowContent = ({
           {mainInfo}
         </Text>
       )}
-      {/* {additionalInfo && (
-          <Text
-            containerMinWidth="90px"
-            containerWidth="10%"
-            as="div"
-            className="row-content-text"
-            fontSize="12px"
-            fontWeight={400}
-            truncate={true}
-          >
-            {additionalInfo}
-          </Text>
-        )} */}
     </SimpleFilesRowContent>
   );
 };

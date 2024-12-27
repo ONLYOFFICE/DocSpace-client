@@ -30,6 +30,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
@@ -37,8 +38,18 @@ import * as Styled from "./TemplateAccess.styled";
 
 const MAX_AVATARS_COUNT = 3;
 
-const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
-  const userName = roomOwner.displayName ?? roomOwner.label;
+type TemplateAccessType = {
+  t: TTranslation;
+  roomOwner: TCreatedBy;
+  onOpenAccessSettings: VoidFunction;
+};
+
+const TemplateAccess = ({
+  t,
+  roomOwner,
+  onOpenAccessSettings,
+}: TemplateAccessType) => {
+  const userName = roomOwner.displayName;
 
   const usersList = [{}, {}, {}];
   const groupsList = [{}, {}, {}];
@@ -59,7 +70,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
-        source={roomOwner.avatarSmall ?? roomOwner.avatar}
+        source={roomOwner.avatarSmall}
         userName={userName}
         key={index}
       />,
@@ -107,7 +118,7 @@ const TemplateAccess = ({ t, roomOwner, onOpenAccessSettings }) => {
                   size={AvatarSize.min}
                   role={AvatarRole.none}
                   isDefaultSource={roomOwner.hasAvatar}
-                  source={roomOwner.avatarSmall ?? roomOwner.avatar}
+                  source={roomOwner.avatarSmall}
                   userName={userName}
                 />
                 <div className="template-access_display-name">

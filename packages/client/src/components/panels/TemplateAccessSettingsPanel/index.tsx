@@ -39,7 +39,12 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import PeopleSelector from "@docspace/shared/selectors/People";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { TSelectorItem } from "@docspace/shared/components/selector";
+
+import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import {
   StyledBlock,
@@ -47,6 +52,10 @@ import {
   StyledToggleButton,
   StyledDescription,
   StyledBody,
+  StyledTemplateAccessSettingsContainer,
+  StyledTemplateAccessSettingsHeader,
+  StyledTemplateAccessSettingsBody,
+  StyledTemplateAccessSettingsFooter,
 } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";
@@ -54,26 +63,47 @@ import InviteInput from "./sub-components/InviteInput";
 
 const PEOPLE_TAB_ID = "0";
 
+type TemplateAccessSettingsContainer =
+  | {
+      isContainer: true;
+      usersPanelIsVisible: boolean;
+      setUsersPanelIsVisible: (visible: boolean) => void;
+      onClosePanels: VoidFunction;
+      onCloseAccessSettings: VoidFunction;
+    }
+  | {
+      isContainer?: undefined;
+      usersPanelIsVisible?: undefined;
+      setUsersPanelIsVisible?: undefined;
+      onClosePanels?: undefined;
+      onCloseAccessSettings?: undefined;
+    };
+
 type TemplateAccessSettingsPanelProps = {
   t: TTranslation;
   tReady: boolean;
-  // templateItem: object | null;
+  templateItem: object | null;
   // templateEventVisible: VoidFunction;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
   setInfoPanelIsMobileHidden: (visible: boolean) => void;
   // onCreateRoomFromTemplate: (item: object) => void;
-};
+} & TemplateAccessSettingsContainer;
 
 const TemplateAccessSettingsPanel = ({
   t,
   tReady,
   visible,
   setIsVisible,
-  // templateItem,
+  templateItem,
   setInfoPanelIsMobileHidden,
   // onCreateRoomFromTemplate,
   // templateEventVisible,
+  isContainer,
+  usersPanelIsVisible,
+  setUsersPanelIsVisible,
+  onClosePanels,
+  onCloseAccessSettings,
 }: TemplateAccessSettingsPanelProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
@@ -86,7 +116,9 @@ const TemplateAccessSettingsPanel = ({
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
 
-  const roomId = 36; // TODO: Templates
+  const templateId = templateItem?.id;
+
+  console.log("templateItem", templateItem);
 
   useEffect(() => {
     const hasError = inviteItems.some(
@@ -118,12 +150,13 @@ const TemplateAccessSettingsPanel = ({
   // };
 
   const onCloseUsersPanel = () => {
-    setAddUsersPanelVisible(false);
+    if (isContainer) setUsersPanelIsVisible(false);
+    else setAddUsersPanelVisible(false);
   };
 
-  const onClosePanels = () => {
-    onClose();
-    onCloseUsersPanel();
+  const setPanelVisible = (isVisible: boolean) => {
+    if (isContainer) setUsersPanelIsVisible(isVisible);
+    else setAddUsersPanelVisible(isVisible);
   };
 
   const onMouseDown = useCallback(
@@ -223,7 +256,101 @@ const TemplateAccessSettingsPanel = ({
     [inviteItems],
   );
 
-  return (
+  const TemplateAccessSettingsContent = (
+    <StyledTemplateAccessSettingsContainer>
+      <StyledTemplateAccessSettingsHeader>
+        <IconButton
+          className="arrow-button"
+          iconName={ArrowPathReactSvgUrl}
+          size={17}
+          onClick={onCloseAccessSettings}
+          isFill
+          isClickable
+        />
+        <Text
+          fontSize="21px"
+          fontWeight={700}
+          className="header-component"
+          noSelect
+        >
+          {t("Files:AccessSettings")}
+        </Text>
+        <IconButton
+          size={17}
+          className="close-button"
+          iconName={CrossReactSvgUrl}
+          onClick={onClosePanels}
+          isClickable
+          isStroke
+        />
+      </StyledTemplateAccessSettingsHeader>
+      <StyledTemplateAccessSettingsBody>
+        <StyledBlock>
+          <StyledSubHeader inline>
+            {t("Files:TemplateAvailable")}
+
+            <StyledToggleButton
+              className="invite-via-link"
+              isChecked={isAvailable}
+              onChange={onAvailableChange}
+            />
+          </StyledSubHeader>
+          <StyledDescription>
+            {t("Files:TemplateAvailableDescription", {
+              productName: t("Common:ProductName"),
+            })}
+          </StyledDescription>
+        </StyledBlock>
+        <StyledBody isDisabled={isAvailable}>
+          <InviteInput
+            inviteItems={inviteItems}
+            setInviteItems={setInviteItems}
+            roomType={roomType}
+            addUsersPanelVisible={usersPanelIsVisible}
+            setAddUsersPanelVisible={setPanelVisible}
+            isMobileView={isMobileView}
+            isDisabled={isAvailable}
+            roomId={templateId}
+            removeExist={removeExist}
+          />
+          <StyledSubHeader className="invite-input-text">
+            {t("Files:AccessToTemplate")}
+          </StyledSubHeader>
+          {hasInvitedUsers && (
+            <ItemsList
+              t={t}
+              inviteItems={inviteItems}
+              setInviteItems={setInviteItems}
+              scrollAllPanelContent={scrollAllPanelContent}
+              isDisabled={isAvailable}
+            />
+          )}
+        </StyledBody>
+      </StyledTemplateAccessSettingsBody>
+
+      <StyledTemplateAccessSettingsFooter>
+        <Button
+          className="send-invitation"
+          scale
+          size={ButtonSize.normal}
+          isDisabled={hasErrors || !hasInvitedUsers || isLoading}
+          primary
+          label={t("Common:SaveButton")}
+          onClick={onSubmit}
+        />
+        <Button
+          className="cancel-button"
+          scale
+          size={ButtonSize.normal}
+          isDisabled={isLoading}
+          onClick={onCloseUsersPanel}
+          label={t("Common:CancelButton")}
+        />
+      </StyledTemplateAccessSettingsFooter>
+    </StyledTemplateAccessSettingsContainer>
+  );
+
+  return !isContainer ? (
     <ModalDialog
       visible={visible}
       displayType={ModalDialogType.aside}
@@ -236,8 +363,8 @@ const TemplateAccessSettingsPanel = ({
       withForm
       containerVisible={addUsersPanelVisible}
     >
-      {addUsersPanelVisible ? (
-        <ModalDialog.Container>
+      <ModalDialog.Container>
+        {addUsersPanelVisible ? (
           <PeopleSelector
             useAside
             onClose={onClosePanels}
@@ -252,9 +379,8 @@ const TemplateAccessSettingsPanel = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             withInfoBadge
-            roomId={roomId}
+            roomId={templateId}
             disableInvitedUsers={invitedUsers}
-            // withGuests
             withHeader
             filter={filter}
             headerProps={{
@@ -267,8 +393,8 @@ const TemplateAccessSettingsPanel = ({
             }}
             setActiveTab={getSelectedTab}
           />
-        </ModalDialog.Container>
-      ) : null}
+        ) : null}
+      </ModalDialog.Container>
 
       <ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -294,11 +420,13 @@ const TemplateAccessSettingsPanel = ({
               inviteItems={inviteItems}
               setInviteItems={setInviteItems}
               roomType={roomType}
-              addUsersPanelVisible={addUsersPanelVisible}
+              addUsersPanelVisible={
+                isContainer ? usersPanelIsVisible : addUsersPanelVisible
+              }
               setAddUsersPanelVisible={setAddUsersPanelVisible}
               isMobileView={isMobileView}
               isDisabled={isAvailable}
-              roomId={roomId}
+              roomId={templateId}
               removeExist={removeExist}
             />
             <StyledSubHeader className="invite-input-text">
@@ -336,6 +464,8 @@ const TemplateAccessSettingsPanel = ({
         />
       </ModalDialog.Footer>
     </ModalDialog>
+  ) : (
+    TemplateAccessSettingsContent
   );
 };
 

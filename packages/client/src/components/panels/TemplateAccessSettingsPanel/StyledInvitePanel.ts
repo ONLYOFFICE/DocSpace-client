@@ -336,6 +336,62 @@ const StyledBody = styled.div<{ isDisabled?: boolean }>`
         `};
 `;
 
+const StyledTemplateAccessSettingsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+const StyledTemplateAccessSettingsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 0px 16px;
+  height: 53px;
+  min-height: 53px;
+  position: relative;
+  border-bottom: ${(props) => props.theme.selector.border};
+
+  .arrow-button {
+    margin-inline: 0 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    }
+  }
+
+  .close-button {
+    margin-inline: auto 0;
+    min-width: 17px;
+  }
+`;
+
+const StyledTemplateAccessSettingsBody = styled.div`
+  height: calc(100% - 73px);
+  padding: 0 16px;
+`;
+
+const StyledTemplateAccessSettingsFooter = styled.div`
+  width: calc(100% - 32px);
+  max-height: 73px;
+  height: 73px;
+  min-height: 73px;
+  padding: 0px 16px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  border-top: ${(props) => props.theme.selector.border};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+`;
+
 export {
   StyledBlock,
   StyledRow,
@@ -351,4 +407,8 @@ export {
   StyledDescription,
   StyledInviteUserBody,
   StyledBody,
+  StyledTemplateAccessSettingsContainer,
+  StyledTemplateAccessSettingsHeader,
+  StyledTemplateAccessSettingsBody,
+  StyledTemplateAccessSettingsFooter,
 };

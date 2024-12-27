@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
@@ -34,21 +33,32 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { RoomsType } from "@docspace/shared/enums";
 import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
 import { StyledFooter } from "./CreateRoomTemplate.styled";
+import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 
-const CreateRoomTemplate = (props) => {
-  const {
-    visible,
-    onClose,
-    item,
-    fetchedTags,
-    isEdit,
-    setAccessSettingsIsVisible,
-    accessSettingsIsVisible,
-    fetchedRoomParams,
-  } = props;
+type CreateRoomTemplateProps = {
+  visible: boolean;
+  onClose: VoidFunction;
+  item: TRoom & { isEdit: boolean };
+  fetchedTags: TRoom["tags"];
+  isEdit: boolean;
+  fetchedRoomParams: TRoom;
+};
+
+type NewTagsType = {
+  id: string | number;
+  isNew: boolean;
+  name: string;
+};
+
+const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
+  const { visible, onClose, item, fetchedTags, isEdit, fetchedRoomParams } =
+    props;
 
   console.log("item", item);
 
@@ -57,8 +67,12 @@ const CreateRoomTemplate = (props) => {
   });
 
   const startTags = Object.values(item.tags);
-  const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
-  const [tags, setTags] = useState(startObjTags);
+  const startObjTags = startTags.map((tag, i) => ({
+    id: i,
+    name: tag,
+    isNew: false,
+  }));
+  const [tags, setTags] = useState<NewTagsType[]>(startObjTags);
 
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -68,7 +82,10 @@ const CreateRoomTemplate = (props) => {
   const [openCreatedIsChecked, setOpenCreatedIsChecked] = useState(true);
   const [isScrollLocked, setIsScrollLocked] = useState(false);
 
-  const setRoomType = (newRoomType) =>
+  const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
+  const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+
+  const setRoomType = (newRoomType: RoomsType) =>
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
@@ -86,13 +103,13 @@ const CreateRoomTemplate = (props) => {
     // onClose();
   };
 
-  const setRoomTags = (newTags) => {
+  const setRoomTags = (newTags: NewTagsType[]) => {
     setTags(newTags);
   };
 
   const onKeyUp = (e: KeyboardEvent) => {
     if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoomTemplate();
+    if (e.key === "Enter") onCreateRoomTemplate();
   };
 
   const onChangeOpenCreated = () => {
@@ -101,6 +118,14 @@ const CreateRoomTemplate = (props) => {
 
   const onOpenAccessSettings = () => {
     setAccessSettingsIsVisible(true);
+  };
+
+  const onCloseAccessSettings = () => {
+    setAccessSettingsIsVisible(false);
+  };
+
+  const onCloseAddUsersPanel = () => {
+    setAddUsersPanelVisible(false);
   };
 
   const tagHandler = new TagHandler(tags, setRoomTags, fetchedTags);
@@ -116,9 +141,50 @@ const CreateRoomTemplate = (props) => {
       onSubmit={onCreateRoomTemplate}
       // withBodyScroll={!isTemplate}
       isScrollLocked={isScrollLocked}
-      hideContent={accessSettingsIsVisible}
-      // containerVisible={}
+      containerVisible={addUsersPanelVisible || accessSettingsIsVisible}
     >
+      <ModalDialog.Container>
+        {addUsersPanelVisible ? (
+          <PeopleSelector
+            useAside
+            // onClose={onClosePanels}
+            // onSubmit={onSubmitItems}
+            submitButtonLabel={t("Common:AddButton")}
+            disableSubmitButton={false}
+            isMultiSelect
+            disableDisabledUsers
+            withGroups
+            withInfo
+            // infoText={infoText}
+            // withoutBackground={isMobileView}
+            // withBlur={!isMobileView}
+            withInfoBadge
+            roomId={item.id}
+            // disableInvitedUsers={invitedUsers}
+            withHeader
+            // filter={filter}
+            headerProps={{
+              headerLabel: t("Common:Contacts"),
+              withoutBackButton: false,
+              withoutBorder: true,
+              isCloseable: true,
+              onBackClick: onCloseAddUsersPanel,
+              onCloseClick: onClose,
+            }}
+            // setActiveTab={getSelectedTab}
+          />
+        ) : (
+          <TemplateAccessSettingsPanel
+            templateItem={item}
+            usersPanelIsVisible={addUsersPanelVisible}
+            setUsersPanelIsVisible={setAddUsersPanelVisible}
+            onCloseAccessSettings={onCloseAccessSettings}
+            onClosePanels={onClose}
+            isContainer
+          />
+        )}
+      </ModalDialog.Container>
+
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
           {item.isEdit ? t("Files:EditTemplate") : t("Files:SaveAsTemplate")}
@@ -188,14 +254,4 @@ const CreateRoomTemplate = (props) => {
   );
 };
 
-export default inject<TStore>(({ dialogsStore }) => {
-  const {
-    setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
-    templateAccessSettingsVisible: accessSettingsIsVisible,
-  } = dialogsStore;
-
-  return {
-    accessSettingsIsVisible,
-    setAccessSettingsIsVisible,
-  };
-})(observer(CreateRoomTemplate));
+export default CreateRoomTemplate;

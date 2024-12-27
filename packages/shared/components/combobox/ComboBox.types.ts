@@ -139,6 +139,8 @@ export type TComboboxProps = {
   options: TOption[];
   /** Option style */
   optionStyle?: React.CSSProperties;
+  /** Placeholder for search option */
+  searchPlaceholder?: string;
   /** Selected option */
   selectedOption: TOption;
   /** Scaled */
@@ -175,6 +177,8 @@ export type TComboboxProps = {
   withoutBackground?: boolean;
   /** Without padding */
   withoutPadding?: boolean;
+  /** With search */
+  withSearch?: boolean;
   /** On backdrop click */
   onBackdropClick?: (e: Event) => void;
   /** On click selected item */

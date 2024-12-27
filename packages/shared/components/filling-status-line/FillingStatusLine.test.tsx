@@ -64,10 +64,10 @@ describe("FillingStatusLine", () => {
       <FillingStatusLine
         statusDone
         statusInterrupted={false}
-        id={""}
-        className={""}
-        statusDoneText={""}
-        statusInterruptedText={""}
+        id=""
+        className=""
+        statusDoneText=""
+        statusInterruptedText=""
       />,
     );
     expect(screen.getByTestId("filling-status-line")).toBeInTheDocument();
@@ -78,10 +78,10 @@ describe("FillingStatusLine", () => {
       <FillingStatusLine
         statusDone
         statusInterrupted={false}
-        id={""}
-        className={""}
-        statusDoneText={""}
-        statusInterruptedText={""}
+        id=""
+        className=""
+        statusDoneText=""
+        statusInterruptedText=""
       />,
     );
     mockData.forEach((data) => {

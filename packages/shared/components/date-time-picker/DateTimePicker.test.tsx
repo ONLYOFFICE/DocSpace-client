@@ -35,9 +35,9 @@ describe("DateTimePicker", () => {
         initialDate={moment()}
         selectDateText="Select Date"
         onChange={() => {}}
-        className={""}
-        id={""}
-        locale={""}
+        className=""
+        id=""
+        locale=""
         hasError={false}
         openDate={moment()}
       />,

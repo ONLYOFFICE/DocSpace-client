@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
-
-import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
+import { useRef, useState, useEffect } from "react";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
+import { StyledDropDown } from "../StyledDropdown";
 
 const TagDropdown = ({
   open,
@@ -37,7 +36,6 @@ const TagDropdown = ({
   tagInputValue,
   setTagInputValue,
   createTagLabel,
-  isDisabled,
   inputRef,
   closeDropdown,
 }) => {
@@ -45,27 +43,11 @@ const TagDropdown = ({
 
   const [dropdownMaxHeight, setDropdownMaxHeight] = useState(0);
 
-  const onKeyPress = (e) => e.key === "Enter" && addNewTag();
-
-  useEffect(() => {
-    inputRef?.current?.addEventListener("keyup", onKeyPress);
-
-    return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
-  }, [onKeyPress]);
-
-  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
-
-  const tagsForDropdown = tagHandler.fetchedTags.filter(
-    (tag) =>
-      tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
-      !chosenTags.includes(tag.toLowerCase()),
-  );
-
   const preventDefault = (e) => {
     e.preventDefault();
   };
 
-  const onClickOutside = (e) => {
+  const onClickOutside = () => {
     /*     if (!e) return;
     if (e.target.id === "shared_tags-input") return; */
     // inputRef?.current?.blur();
@@ -79,6 +61,21 @@ const TagDropdown = ({
     onClickOutside();
   };
 
+  const onKeyPress = (e) => e.key === "Enter" && addNewTag();
+
+  useEffect(() => {
+    inputRef?.current?.addEventListener("keyup", onKeyPress);
+    return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
+  }, [onKeyPress, inputRef]);
+
+  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
+
+  const tagsForDropdown = tagHandler.fetchedTags.filter(
+    (tag) =>
+      tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
+      !chosenTags.includes(tag.toLowerCase()),
+  );
+
   const addFetchedTag = (name) => {
     tagHandler.addTag(name);
     setTagInputValue("");
@@ -86,12 +83,12 @@ const TagDropdown = ({
   };
 
   const calcualateDisplayedDropdownItems = () => {
-    let res = tagsForDropdown.map((tag, i) => (
+    let res = tagsForDropdown.map((tag) => (
       <DropDownItem
         className="dropdown-item"
         height={32}
         heightTablet={32}
-        key={i}
+        key={tag}
         label={tag}
         onMouseDown={preventDefault}
         onClick={() => addFetchedTag(tag)}

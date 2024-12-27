@@ -27,15 +27,17 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { StyledBadgesContainer } from "../StyledTable";
-import { StyledQuickButtonsContainer } from "../StyledTable";
-import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 
 const RoomsRowDataComponent = (props) => {
   const {
@@ -89,7 +91,7 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -109,7 +111,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Type" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -128,7 +130,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Tags" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -151,7 +153,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Owner" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Owner" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -174,20 +176,20 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Activity" ? quickButtonsComponentNode : <></>}
+          {lastColumn === "Activity" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
       )}
       {showStorageInfo &&
         (roomQuotaColumnIsEnable ? (
-          <TableCell className={"table-cell_Storage/Quota"}>
+          <TableCell className="table-cell_Storage/Quota">
             <SpaceQuota
               item={item}
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
-            {lastColumn === "Storage" ? quickButtonsComponentNode : <></>}
+            {lastColumn === "Storage" ? quickButtonsComponentNode : null}
           </TableCell>
         ) : (
           <div />

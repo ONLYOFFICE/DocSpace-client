@@ -143,7 +143,7 @@ const ColorSchemeDialog = (props) => {
       onClose={onClose}
       displayType="aside"
       withFooterBorder={showSaveButtonDialog}
-      withBodyScroll={true}
+      withBodyScroll
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>

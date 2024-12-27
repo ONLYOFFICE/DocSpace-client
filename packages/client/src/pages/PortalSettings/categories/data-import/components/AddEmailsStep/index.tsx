@@ -180,50 +180,48 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
-    const {
-      incrementStep,
-      decrementStep,
-      searchValue,
-      setSearchValue,
-      users,
-      setResultUsers,
-      areCheckedUsersEmpty,
+export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
+  const {
+    incrementStep,
+    decrementStep,
+    searchValue,
+    setSearchValue,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
 
-      cancelMigration,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
-      totalUsedUsers,
-      quota,
-    } = importAccountsStore;
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+    totalUsedUsers,
+    quota,
+  } = importAccountsStore;
 
-    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-      dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
-    return {
-      incrementStep,
-      decrementStep,
-      searchValue,
-      setSearchValue,
-      users,
-      setResultUsers,
-      areCheckedUsersEmpty,
+  return {
+    incrementStep,
+    decrementStep,
+    searchValue,
+    setSearchValue,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
 
-      cancelMigration,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
 
-      cancelUploadDialogVisible,
-      setCancelUploadDialogVisible,
-      totalUsedUsers,
-      quota,
-    };
-  },
-)(observer(AddEmailsStep));
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
+    totalUsedUsers,
+    quota,
+  };
+})(observer(AddEmailsStep));

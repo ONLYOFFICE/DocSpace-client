@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
-import styled from "styled-components";
+
 import { Consumer } from "@docspace/shared/utils";
 import { Table } from "./TableView/TableView";
 import HistoryRowContainer from "./RowView/HistoryRowContainer";
@@ -61,52 +61,45 @@ const LoginHistory = (props) => {
 
   const getContent = () => {
     return (
-      <>
-        <div className="content-wrapper">
-          <Consumer>
-            {(context) =>
-              viewAs === "table" ? (
-                <>
-                  <Table
-                    theme={theme}
-                    historyUsers={historyUsers}
-                    sectionWidth={context.sectionWidth}
-                  />
-                </>
-              ) : (
-                <>
-                  <HistoryRowContainer sectionWidth={context.sectionWidth} />
-                </>
-              )
-            }
-          </Consumer>
-        </div>
-      </>
+      <div className="content-wrapper">
+        <Consumer>
+          {(context) =>
+            viewAs === "table" ? (
+              <Table
+                theme={theme}
+                historyUsers={historyUsers}
+                sectionWidth={context.sectionWidth}
+              />
+            ) : (
+              <HistoryRowContainer sectionWidth={context.sectionWidth} />
+            )
+          }
+        </Consumer>
+      </div>
     );
   };
 
   return (
-    <>
-      {securityLifetime && securityLifetime.loginHistoryLifeTime && (
-        <HistoryMainContent
-          t={t}
-          loginHistory={true}
-          subHeader={t("LoginSubheaderTitle")}
-          latestText={t("LoginLatestText")}
-          storagePeriod={t("StoragePeriod")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          lifetime={securityLifetime.loginHistoryLifeTime}
-          securityLifetime={securityLifetime}
-          setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
-          downloadReport={t("DownloadReportBtnText")}
-          downloadReportDescription={t("DownloadReportDescription")}
-          getReport={getLoginHistoryReport}
-          isSettingNotPaid={!isAuditAvailable}
-        />
-      )}
-    </>
+    securityLifetime &&
+    securityLifetime.loginHistoryLifeTime && (
+      <HistoryMainContent
+        t={t}
+        loginHistory
+        subHeader={t("LoginSubheaderTitle")}
+        latestText={t("LoginLatestText")}
+        storagePeriod={t("StoragePeriod")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        lifetime={securityLifetime.loginHistoryLifeTime}
+        securityLifetime={securityLifetime}
+        setLifetimeAuditSettings={setLifetimeAuditSettings}
+        content={getContent()}
+        downloadReport={t("DownloadReportBtnText")}
+        downloadReportDescription={t("DownloadReportDescription")}
+        getReport={getLoginHistoryReport}
+        isSettingNotPaid={!isAuditAvailable}
+      />
+    )
   );
 };
 

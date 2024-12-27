@@ -96,4 +96,9 @@ const UsersInfoBlock = inject<TStore>(({ importAccountsStore }) => {
   };
 })(observer(UsersInfo));
 
-export default () => <UsersInfoBlock />;
+const UsersInfoBlockWrapper = (props: UsersInfoBlockProps) => (
+  <UsersInfoBlock {...props} />
+);
+UsersInfoBlockWrapper.displayName = "UsersInfoBlockWrapper";
+
+export default UsersInfoBlockWrapper;

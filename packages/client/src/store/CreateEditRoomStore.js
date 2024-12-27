@@ -37,21 +37,35 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class CreateEditRoomStore {
   roomParams = null;
+
   isLoading = null;
+
   confirmDialogIsLoading = false;
+
   onClose = null;
 
   filesStore = null;
+
   tagsStore = null;
+
   selectedFolderStore = null;
+
   filesActionsStore = null;
+
   thirdPartyStore = null;
+
   settingsStore = null;
+
   infoPanelStore = null;
+
   currentQuotaStore = null;
+
   watermarksSettings = {};
+
   initialWatermarksSettings = {};
+
   isImageType = false;
+
   dialogsStore = null;
 
   selectedRoomType = null;
@@ -87,6 +101,7 @@ class CreateEditRoomStore {
   setSelectedRoomType = (type) => {
     this.selectedRoomType = type;
   };
+
   setRoomParams = (roomParams) => {
     this.roomParams = roomParams;
   };
@@ -128,9 +143,9 @@ class CreateEditRoomStore {
       return;
     }
 
-    for (const [key, value] of Object.entries(object)) {
-      this.watermarksSettings[key] = value;
-    }
+    Object.keys(object).forEach((key) => {
+      this.watermarksSettings[key] = object[key];
+    });
   };
 
   resetWatermarks = () => {
@@ -174,7 +189,7 @@ class CreateEditRoomStore {
     const response = await api.rooms.uploadRoomLogo(uploadWatermarkData);
 
     const getMeta = (url) => {
-      //url for this.watermarksSettings.image.viewUrl
+      // url for this.watermarksSettings.image.viewUrl
       return new Promise((resolve, reject) => {
         const img = new Image();
         const imgUrl = url ?? URL.createObjectURL(watermarkImage);
@@ -183,7 +198,7 @@ class CreateEditRoomStore {
         img.src = imgUrl;
       });
     };
-    return await getMeta().then((img) => {
+    return getMeta().then((img) => {
       return {
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
@@ -241,7 +256,7 @@ class CreateEditRoomStore {
 
     const tags = newParams.tags.map((tag) => tag.name);
     const prevTags = room.tags.sort();
-    const currTags = newParams.tags.map((t) => t.name).sort();
+    const currTags = newParams.tags.map((p) => p.name).sort();
     const isTagsChanged = !isEqual(prevTags, currTags);
 
     const editRoomParams = {
@@ -321,7 +336,7 @@ class CreateEditRoomStore {
       if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
-      if (!!requests.length) {
+      if (requests.length) {
         await Promise.all(requests);
       }
     } catch (e) {
@@ -329,7 +344,7 @@ class CreateEditRoomStore {
     }
   };
 
-  onCreateRoom = async (withConfirm = false, t) => {
+  onCreateRoom = async (t, withConfirm = false) => {
     const roomParams = this.roomParams;
 
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
@@ -355,12 +370,12 @@ class CreateEditRoomStore {
       watermark,
     } = roomParams;
 
-    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
-
     const isThirdparty = storageLocation.isThirdparty;
     const storageFolderId = storageLocation.storageFolderId;
     const thirdpartyAccount = storageLocation.thirdpartyAccount;
     const isThirdPartyRoom = isThirdparty && storageFolderId;
+
+    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 

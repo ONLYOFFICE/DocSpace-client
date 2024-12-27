@@ -82,10 +82,10 @@ const PasswordContent = (props) => {
           </Text>
         </div>
         <div>
-          {items.map((item, index) => {
+          {items.map((item) => {
             return (
               <PasswordRow
-                key={`${item.id}_${index}`}
+                key={item.id}
                 item={item}
                 type={type}
                 getItemIcon={getItemIcon}

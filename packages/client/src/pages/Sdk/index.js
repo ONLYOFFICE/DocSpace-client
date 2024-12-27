@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
@@ -39,6 +38,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import FilesSelector from "../../components/FilesSelector";
 
 const Sdk = ({
   t,
@@ -89,14 +89,6 @@ const Sdk = ({
       }),
     }),
   };
-
-  useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
-    };
-  }, [handleMessage]);
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
@@ -181,12 +173,20 @@ const Sdk = ({
           default:
             res = "Wrong method for this mode";
         }
-      } catch (e) {
-        res = e;
+      } catch (err) {
+        res = err;
       }
       frameCallbackData(res);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage, false);
+    return () => {
+      window.removeEventListener("message", handleMessage, false);
+      setFrameConfig(null);
+    };
+  }, [handleMessage]);
 
   const onSelectRoom = useCallback(
     async (data) => {
@@ -246,7 +246,7 @@ const Sdk = ({
     !frameConfig?.id;
 
   switch (mode) {
-    case "room-selector":
+    case "room-selector": {
       const cancelButtonProps = frameConfig?.showSelectorCancel
         ? {
             withCancelButton: true,
@@ -276,13 +276,14 @@ const Sdk = ({
         />
       );
       break;
+    }
     case "file-selector":
       component = (
         <FilesSelector
-          isPanelVisible={true}
-          embedded={true}
+          isPanelVisible
+          embedded
           withHeader={frameConfig?.showSelectorHeader}
-          isSelect={true}
+          isSelect
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}

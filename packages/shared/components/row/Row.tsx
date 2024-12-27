@@ -49,6 +49,7 @@ import {
   StyledRow,
 } from "./Row.styled";
 import { RowProps } from "./Row.types";
+import { hasOwnProperty } from "../../utils/object";
 
 const Row = (props: RowProps) => {
   const {
@@ -92,19 +93,16 @@ const Row = (props: RowProps) => {
   }>(null);
   const row = useRef<null | HTMLDivElement>(null);
 
-  const renderCheckbox = Object.prototype.hasOwnProperty.call(props, "checked");
+  const renderCheckbox = hasOwnProperty(props, "checked");
 
-  const renderElement = Object.prototype.hasOwnProperty.call(props, "element");
+  const renderElement = hasOwnProperty(props, "element");
 
-  const renderContentElement = Object.prototype.hasOwnProperty.call(
-    props,
-    "contentElement",
-  );
+  const renderContentElement = hasOwnProperty(props, "contentElement");
 
   const contextData = data?.contextOptions ? data : props;
 
   const renderContext =
-    Object.prototype.hasOwnProperty.call(contextData, "contextOptions") &&
+    hasOwnProperty(contextData, "contextOptions") &&
     contextData &&
     contextData.contextOptions &&
     contextData.contextOptions.length > 0;

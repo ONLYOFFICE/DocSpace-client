@@ -28,12 +28,19 @@ import { makeAutoObservable } from "mobx";
 
 class PrimaryProgressDataStore {
   percent = 0;
+
   label = "";
+
   visible = false;
+
   icon = "upload";
+
   alert = false;
+
   loadingFile = null;
+
   errors = 0;
+
   disableUploadPanelOpen = false;
 
   constructor() {
@@ -42,9 +49,9 @@ class PrimaryProgressDataStore {
 
   setPrimaryProgressBarData = (primaryProgressData) => {
     const progressDataItems = Object.keys(primaryProgressData);
-    for (let key of progressDataItems) {
+    progressDataItems.forEach((key) => {
       this[key] = primaryProgressData[key];
-    }
+    });
   };
 
   clearPrimaryProgressData = () => {

@@ -42,6 +42,8 @@ import PasswordContent from "./PasswordContent";
 import { StyledBodyContent } from "./StyledDownloadDialog";
 import OnePasswordRow from "./OnePasswordRow";
 
+const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
+
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -84,67 +86,25 @@ class DownloadDialogComponent extends React.Component {
     };
   }
 
-  interruptingConversion = () => {
-    const { setSortedPasswordFiles, setDownloadItems } = this.props;
+  componentDidMount() {
+    document.addEventListener("keyup", this.handleKeyUp);
+  }
 
-    setSortedPasswordFiles({
-      other: [],
-      password: [],
-      remove: [],
-      original: [],
-    });
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.handleKeyUp);
+  }
 
-    setDownloadItems([]);
-  };
-
-  onClosePanel = () => {
-    const { setDownloadDialogVisible } = this.props;
-
-    this.interruptingConversion();
-
-    setDownloadDialogVisible(false);
-  };
-
-  onClose = () => {
-    const { setDownloadDialogVisible, setSortedPasswordFiles } = this.props;
-
-    setSortedPasswordFiles({
-      other: [],
-      password: [],
-      remove: [],
-      original: [],
-    });
-
-    setDownloadDialogVisible(false);
-  };
-
-  getErrorsTranslation = () => {
-    const { t } = this.props;
-    const passwordError = (
-      <Trans
-        t={t}
-        ns="Files"
-        i18nKey="PasswordProtectedFiles"
-        components={{ 1: <span /> }}
-      />
-    );
-    const translations = {
-      label: t("Translations:ArchivingData"),
-      error: t("Common:ErrorInternalServer"),
-      passwordError,
-    };
-
-    return translations;
-  };
   onDownload = () => {
     const { setDownloadItems } = this.props;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
 
     const itemList = [
-      ...this.state.documents.files,
-      ...this.state.spreadsheets.files,
-      ...this.state.presentations.files,
-      ...this.state.masterForms.files,
-      ...this.state.other.files,
+      ...documents.files,
+      ...spreadsheets.files,
+      ...presentations.files,
+      ...masterForms.files,
+      ...other.files,
     ];
 
     if (itemList.length) {
@@ -175,42 +135,43 @@ class DownloadDialogComponent extends React.Component {
   };
 
   getNewArrayFiles = (fileId, array, format) => {
-    //Set all documents format
+    // Set all documents format
+    const { t } = this.props;
 
     if (!fileId) {
-      for (let file of array) {
+      array.forEach((file) => {
         file.format =
-          format === this.props.t("CustomFormat") || file.fileExst === format
-            ? this.props.t("OriginalFormat")
+          format === t("CustomFormat") || file.fileExst === format
+            ? t("OriginalFormat")
             : format;
-      }
+      });
 
       return array;
-    } else {
-      //Set single document format
-      const newDoc = array.find((x) => x.id == fileId);
-      if (newDoc.format !== format) {
-        newDoc.format = format;
-      }
-      return array;
     }
+    // Set single document format
+    const newDoc = array.find((x) => x.id == fileId);
+    if (newDoc.format !== format) {
+      newDoc.format = format;
+    }
+    return array;
   };
 
   onSelectFormat = (e) => {
     const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files;
+    const files = this.state[type].files; // eslint-disable-line react/destructuring-assignment
+    const { t } = this.props;
 
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState[type].files = this.getNewArrayFiles(fileId, files, format);
-      newState[type].format = !fileId ? format : this.props.t("CustomFormat");
+      newState[type].format = !fileId ? format : t("CustomFormat");
 
       const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
+        (f) => f.format && f.format !== t("OriginalFormat"),
       );
 
       if (index === -1) {
-        newState[type].format = this.props.t("OriginalFormat");
+        newState[type].format = t("OriginalFormat");
       }
 
       return { ...prevState, ...newState };
@@ -218,13 +179,13 @@ class DownloadDialogComponent extends React.Component {
   };
 
   updateDocsState = (fieldStateName, itemId) => {
-    const { isChecked, isIndeterminate, files } = this.state[fieldStateName];
+    const { isChecked, isIndeterminate, files } = this.state[fieldStateName]; // eslint-disable-line react/destructuring-assignment
 
     if (itemId === "All") {
       const checked = isIndeterminate ? false : !isChecked;
-      for (let file of files) {
+      files.forEach((file) => {
         file.checked = checked;
-      }
+      });
 
       this.setState((prevState) => {
         const newState = { ...prevState };
@@ -241,15 +202,15 @@ class DownloadDialogComponent extends React.Component {
 
       const disableFiles = files.find((x) => x.checked === false);
       const activeFiles = files.find((x) => x.checked === true);
-      const isIndeterminate = !activeFiles ? false : !!disableFiles;
-      const isChecked = disableFiles ? false : true;
 
       this.setState((prevState) => {
         const newState = { ...prevState };
 
         newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = isIndeterminate;
-        newState[fieldStateName].isChecked = isChecked;
+        newState[fieldStateName].isIndeterminate = !activeFiles
+          ? false
+          : !!disableFiles;
+        newState[fieldStateName].isChecked = !disableFiles;
 
         return { ...prevState, ...newState };
       });
@@ -286,18 +247,15 @@ class DownloadDialogComponent extends React.Component {
    * @returns {number}
    */
   getCheckedFileLength = () => {
-    const documents = this.state.documents.files;
-    const spreadsheets = this.state.spreadsheets.files;
-    const presentations = this.state.presentations.files;
-    const masterForms = this.state.masterForms.files;
-    const other = this.state.other.files;
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
 
     return (
-      documents.filter((f) => f.checked).length +
-      spreadsheets.filter((f) => f.checked).length +
-      presentations.filter((f) => f.checked).length +
-      masterForms.filter((f) => f.checked).length +
-      other.filter((f) => f.checked).length
+      documents.files.filter((f) => f.checked).length +
+      spreadsheets.files.filter((f) => f.checked).length +
+      presentations.files.filter((f) => f.checked).length +
+      masterForms.files.filter((f) => f.checked).length +
+      other.files.filter((f) => f.checked).length
     );
   };
 
@@ -319,12 +277,57 @@ class DownloadDialogComponent extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    document.addEventListener("keyup", this.handleKeyUp);
+  getErrorsTranslation = () => {
+    const { t } = this.props;
+    const passwordError = (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="PasswordProtectedFiles"
+        components={{ 1: <span /> }}
+      />
+    );
+    const translations = {
+      label: t("Translations:ArchivingData"),
+      error: t("Common:ErrorInternalServer"),
+      passwordError,
+    };
+
+    return translations;
   };
 
-  componentWillUnmount = () => {
-    document.removeEventListener("keyup", this.handleKeyUp);
+  onClose = () => {
+    const { setDownloadDialogVisible, setSortedPasswordFiles } = this.props;
+
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
+
+    setDownloadDialogVisible(false);
+  };
+
+  onClosePanel = () => {
+    const { setDownloadDialogVisible } = this.props;
+
+    this.interruptingConversion();
+
+    setDownloadDialogVisible(false);
+  };
+
+  interruptingConversion = () => {
+    const { setSortedPasswordFiles, setDownloadItems } = this.props;
+
+    setSortedPasswordFiles({
+      other: [],
+      password: [],
+      remove: [],
+      original: [],
+    });
+
+    setDownloadItems([]);
   };
 
   getItemIcon = (item) => {
@@ -338,7 +341,7 @@ class DownloadDialogComponent extends React.Component {
           svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
         }}
         src={icon}
-        loading={() => <div style={{ width: "96px" }} />}
+        loading={LoadingPlaceholder}
       />
     );
   };
@@ -355,39 +358,36 @@ class DownloadDialogComponent extends React.Component {
       isOnePasswordFile,
     } = this.props;
 
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      this.state;
     const {
-      files: documents,
       isChecked: checkedDocTitle,
       isIndeterminate: indeterminateDocTitle,
       format: documentsTitleFormat,
-    } = this.state.documents;
+    } = documents;
 
     const {
-      files: spreadsheets,
       isChecked: checkedSpreadsheetTitle,
       isIndeterminate: isIndeterminateSpreadsheetTitle,
       format: spreadsheetsTitleFormat,
-    } = this.state.spreadsheets;
+    } = spreadsheets;
 
     const {
-      files: presentations,
       isChecked: checkedPresentationTitle,
       isIndeterminate: indeterminatePresentationTitle,
       format: presentationsTitleFormat,
-    } = this.state.presentations;
+    } = presentations;
 
     const {
-      files: masterForms,
       isChecked: checkedMasterFormsTitle,
       isIndeterminate: indeterminateMasterFormsTitle,
       format: masterFormsTitleFormat,
-    } = this.state.masterForms;
+    } = masterForms;
 
     const {
-      files: other,
       isChecked: checkedOtherTitle,
       isIndeterminate: indeterminateOtherTitle,
-    } = this.state.other;
+    } = other;
 
     const isCheckedLength = this.getCheckedFileLength();
 
@@ -403,16 +403,16 @@ class DownloadDialogComponent extends React.Component {
     };
 
     const totalItemsNum =
-      this.state.documents.files.length +
-      this.state.spreadsheets.files.length +
-      this.state.presentations.files.length +
-      this.state.masterForms.files.length +
-      this.state.other.files.length +
-      (this.state.documents.files.length > 1 && 1) +
-      (this.state.spreadsheets.files.length > 1 && 1) +
-      (this.state.presentations.files.length > 1 && 1) +
-      (this.state.masterForms.files.length > 1 && 1) +
-      (this.state.other.files.length > 1 && 1);
+      documents.files.length +
+      spreadsheets.files.length +
+      presentations.files.length +
+      masterForms.files.length +
+      other.files.length +
+      (documents.files.length > 1 && 1) +
+      (spreadsheets.files.length > 1 && 1) +
+      (presentations.files.length > 1 && 1) +
+      (masterForms.files.length > 1 && 1) +
+      (other.files.length > 1 && 1);
 
     const mainContent = (
       <>
@@ -512,7 +512,7 @@ class DownloadDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
-        <ModalDialog.Body className={"modalDialogToggle"}>
+        <ModalDialog.Body className="modalDialogToggle">
           <Scrollbar bodyPadding="0px">
             {needPassword ? (
               <PasswordContent

@@ -21,7 +21,7 @@ jobs:
           test-container: tests-ci
           test-command: npx playwright test
   eslint:
-    name: "Login and doceditor lint"
+    name: "Lint tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: yarn install
-      - name: Lint login and doceditor
+      - name: Lint clients
         run: yarn lint
   common:
     name: "Common tests"

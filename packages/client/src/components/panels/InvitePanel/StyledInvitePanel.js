@@ -39,11 +39,12 @@ import {
   mobile,
   commonIconsStyles,
   injectDefaultTheme,
+  desktop,
+  commonInputStyles,
 } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 

@@ -62,7 +62,7 @@ const NavItemWrapper = styled(Link).attrs(injectDefaultTheme)`
     !props.noHover &&
     css`
       &:hover {
-        background: ${(props) => props.theme.navItem.wrapper.hoverBackground};
+        background: ${({ theme }) => theme.navItem.wrapper.hoverBackground};
         text-decoration: none;
       }
     `}
@@ -82,10 +82,8 @@ const NavItemWrapper = styled(Link).attrs(injectDefaultTheme)`
     css`
       svg {
         path {
-          fill: ${(props) =>
-            props.active
-              ? props.theme.navItem.activeColor
-              : props.theme.navItem.baseColor};
+          fill: ${({ theme, active }) =>
+            active ? theme.navItem.activeColor : theme.navItem.baseColor};
         }
       }
     `}
@@ -144,7 +142,7 @@ const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
 `;
 
 const NavItem = React.memo((props) => {
-  //console.log("NavItem render");
+  // console.log("NavItem render");
   const {
     separator,
     opened,
@@ -172,7 +170,7 @@ const NavItem = React.memo((props) => {
       {...rest}
     >
       {iconUrl ? (
-        <ReactSVG src={iconUrl} beforeInjection={(svg) => {}} />
+        <ReactSVG src={iconUrl} beforeInjection={() => {}} />
       ) : (
         <>
           {iconName === "MenuIcon" && <VersionBadge>BETA</VersionBadge>}

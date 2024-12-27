@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { StyledOwnerInfo } from "../../../ChangePortalOwnerDialog/StyledDialog";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -32,6 +31,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 import { commonIconsStyles } from "@docspace/shared/utils";
 import capitalize from "lodash/capitalize";
+import { StyledOwnerInfo } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
@@ -54,8 +54,8 @@ const AccountInfo = ({ user }) => {
         className="avatar"
         role="user"
         source={user.avatar}
-        size={"big"}
-        hideRoleIcon={true}
+        size="big"
+        hideRoleIcon
       />
       <div className="info">
         <div className="avatar-name">

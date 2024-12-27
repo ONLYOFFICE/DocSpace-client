@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import { mobile } from "@docspace/shared/utils";
@@ -77,7 +77,7 @@ const MainBar = ({
     !isPublicPreview();
 
   return (
-    <StyledContainer id={"main-bar"} className={"main-bar"}>
+    <StyledContainer id="main-bar" className="main-bar">
       {isVisibleBar && checkedMaintenance && !snackbarExist && (
         <Bar firstLoad={firstLoad} setMaintenanceExist={setMaintenanceExist} />
       )}
@@ -92,8 +92,12 @@ export default inject(
     filesStore,
     currentTariffStatusStore,
   }) => {
-    const { checkedMaintenance, setMaintenanceExist, snackbarExist, frameConfig } =
-      settingsStore;
+    const {
+      checkedMaintenance,
+      setMaintenanceExist,
+      snackbarExist,
+      frameConfig,
+    } = settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { firstLoad } = clientLoadingStore;
     const { isInit } = filesStore;
@@ -104,7 +108,7 @@ export default inject(
       snackbarExist,
       setMaintenanceExist,
       isNotPaidPeriod,
-      barTypeInFrame: frameConfig?.showHeaderBanner
+      barTypeInFrame: frameConfig?.showHeaderBanner,
     };
   },
 )(observer(MainBar));

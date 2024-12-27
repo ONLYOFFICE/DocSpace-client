@@ -2755,6 +2755,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-storybook: "npm:^0.9.0"
+    eslint-webpack-plugin: "npm:^4.2.0"
     external-remotes-plugin: "npm:^1.0.0"
     file-loader: "npm:^6.2.0"
     file-saver: "npm:^2.0.5"
@@ -8328,7 +8329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8.56.12":
+"@types/eslint@npm:^8.56.10, @types/eslint@npm:^8.56.12":
   version: 8.56.12
   resolution: "@types/eslint@npm:8.56.12"
   dependencies:
@@ -14835,6 +14836,22 @@ __metadata:
   version: 4.2.0
   resolution: "eslint-visitor-keys@npm:4.2.0"
   checksum: 10/9651b3356b01760e586b4c631c5268c0e1a85236e3292bf754f0472f465bf9a856c0ddc261fceace155334118c0151778effafbab981413dbf9288349343fa25
+  languageName: node
+  linkType: hard
+
+"eslint-webpack-plugin@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "eslint-webpack-plugin@npm:4.2.0"
+  dependencies:
+    "@types/eslint": "npm:^8.56.10"
+    jest-worker: "npm:^29.7.0"
+    micromatch: "npm:^4.0.5"
+    normalize-path: "npm:^3.0.0"
+    schema-utils: "npm:^4.2.0"
+  peerDependencies:
+    eslint: ^8.0.0 || ^9.0.0
+    webpack: ^5.0.0
+  checksum: 10/061d11a93832b82bd0362d6c546f51fe5e3a0eb811374b86536a2929ff46fea7e5ef30e32f0d3194b9da146a7c0ae43f13b2ec5ce0f65a9ca9c4d961d9e446b3
   languageName: node
   linkType: hard
 

@@ -162,8 +162,12 @@ describe("ReportDialog", () => {
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(screen.getByTestId("textarea")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /SendButton/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /CancelButton/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /SendButton/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /CancelButton/i }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("report-file")).toBeInTheDocument();
   });
 
@@ -189,7 +193,7 @@ describe("ReportDialog", () => {
 
   it("sends crash report and shows success message", async () => {
     mockSendCrashReport.mockResolvedValueOnce(true);
-    
+
     render(<ReportDialog {...defaultProps} />);
 
     const textarea = screen.getByTestId("textarea");
@@ -205,7 +209,7 @@ describe("ReportDialog", () => {
     expect(mockSendCrashReport).toHaveBeenCalledWith(
       expect.objectContaining({
         description: "Test description",
-      })
+      }),
     );
     expect(toastr.success).toHaveBeenCalledWith(t("ErrorReportSuccess"));
     expect(defaultProps.onClose).toHaveBeenCalled();
@@ -230,7 +234,7 @@ describe("ReportDialog", () => {
     expect(mockSendCrashReport).toHaveBeenCalledWith(
       expect.objectContaining({
         description: "Test description",
-      })
+      }),
     );
     expect(toastr.error).toHaveBeenCalledWith(error);
   });

@@ -39,7 +39,7 @@ const NoRoomItem = ({ t, theme }) => {
   return (
     <StyledNoItemContainer className="info-panel_gallery-empty-screen">
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No Room Image" />
+        <img src={imageSrc} alt="No Room" />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("RoomsEmptyScreenTent")}

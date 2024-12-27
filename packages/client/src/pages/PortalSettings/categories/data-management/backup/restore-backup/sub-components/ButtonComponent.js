@@ -68,8 +68,8 @@ const ButtonContainer = (props) => {
     }
     setIsLoading(true);
 
-    let storageParams = [],
-      tempObj = {};
+    let storageParams = [];
+    const tempObj = {};
 
     const backupId = "";
     const storageType = getStorageType().toString();
@@ -140,14 +140,14 @@ const ButtonContainer = (props) => {
         tabIndex={10}
       />
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
           icon="file"
           alert={false}
           percent={downloadingProgress}
         />
-      )}
+      ) : null}
     </div>
   );
 };

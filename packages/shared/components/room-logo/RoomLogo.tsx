@@ -98,14 +98,14 @@ const RoomLogoPure = ({
         <img className="room-logo_icon" alt="room-logo" src={icon} />
       </div>
 
-      {withCheckbox && (
+      {withCheckbox ? (
         <Checkbox
           className="room-logo_checkbox checkbox"
           isChecked={isChecked}
           isIndeterminate={isIndeterminate}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </div>
   );
 };

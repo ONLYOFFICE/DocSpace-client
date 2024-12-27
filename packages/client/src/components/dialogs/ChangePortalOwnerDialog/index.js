@@ -42,6 +42,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   StyledOwnerInfo,
   StyledPeopleSelectorInfo,
@@ -51,8 +52,6 @@ import {
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "./StyledDialog";
-
-import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -135,13 +134,13 @@ const ChangePortalOwnerDialog = ({
 
   return (
     <ModalDialog
-      displayType={"aside"}
+      displayType="aside"
       visible={visible}
       onClose={onCloseAction}
       withBodyScroll
       containerVisible={selectorVisible}
     >
-      {selectorVisible && (
+      {selectorVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
@@ -163,16 +162,11 @@ const ChangePortalOwnerDialog = ({
             filter={filter}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
       <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledOwnerInfo>
-          <Avatar
-            className="avatar"
-            role={"owner"}
-            source={avatar}
-            size={"big"}
-          />
+          <Avatar className="avatar" role="owner" source={avatar} size="big" />
           <div className="info">
             <Text className="display-name" noSelect title={displayName}>
               {displayName}
@@ -204,7 +198,7 @@ const ChangePortalOwnerDialog = ({
             </StyledSelectedOwner>
 
             <Link
-              type={"action"}
+              type="action"
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}

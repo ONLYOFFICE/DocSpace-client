@@ -47,13 +47,13 @@ const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
           {description}
         </Text>
       </div>
-      {options && (
+      {options ? (
         <div className={styles.body}>
           {options.map((option) => (
             <EmptyViewOption key={option.key} option={option} />
           ))}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

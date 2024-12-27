@@ -29,11 +29,11 @@ import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import Item from "./Item";
-
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import Item from "./Item";
+
+import { ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 
@@ -44,6 +44,8 @@ const VirtualScroll = React.forwardRef((props, ref) => (
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
 ));
+
+VirtualScroll.displayName = "VirtualScroll";
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -61,11 +63,11 @@ const Row = memo(({ data, index, style }) => {
     standalone,
   } = data;
 
+  const theme = useTheme();
+
   if (inviteItems === undefined) return;
 
   const item = inviteItems[index];
-
-  const theme = useTheme();
 
   return (
     <Item
@@ -88,6 +90,8 @@ const Row = memo(({ data, index, style }) => {
     />
   );
 });
+
+Row.displayName = "Row";
 
 const ItemsList = ({
   t,
@@ -115,7 +119,7 @@ const ItemsList = ({
 
   const onBodyResize = useCallback(() => {
     const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
-    const heightList = height ? height : bodyRef.current.offsetHeight;
+    const heightList = height || bodyRef.current.offsetHeight;
     const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
     const listAreaHeight = heightList;
     const heightBody = invitePanelBodyRef?.current?.clientHeight;
@@ -195,7 +199,7 @@ const ItemsList = ({
           t,
           standalone,
         }}
-        outerElementType={!scrollAllPanelContent && VirtualScroll}
+        outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
       >
         {Row}
       </List>

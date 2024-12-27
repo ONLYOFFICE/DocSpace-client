@@ -33,13 +33,12 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
-import { StyledDownloadContent } from "./StyledDownloadDialog";
-import SimulatePassword from "../../../components/SimulatePassword";
-
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import SimulatePassword from "../../SimulatePassword";
+import { StyledDownloadContent } from "./StyledDownloadDialog";
 
 const PasswordRow = ({
   item,
@@ -71,8 +70,8 @@ const PasswordRow = ({
     updateDownloadedFilePassword(item.id, password, type);
   };
 
-  const onChangePassword = (password) => {
-    setPassword(password);
+  const onChangePassword = (pwd) => {
+    setPassword(pwd);
   };
 
   const onChangeInOriginal = () => {
@@ -166,7 +165,7 @@ const PasswordRow = ({
           />
         </div>
       </div>
-      {showPasswordInput && (
+      {showPasswordInput ? (
         <div className="password-input">
           <SimulatePassword
             onChange={onChangePassword}
@@ -176,7 +175,7 @@ const PasswordRow = ({
           <Button
             id="conversion-button"
             className="conversion-password_button"
-            size={"small"}
+            size="small"
             scale
             primary
             label={t("Common:SaveButton")}
@@ -184,11 +183,11 @@ const PasswordRow = ({
             isDisabled={!password}
           />
         </div>
-      )}
+      ) : null}
     </StyledDownloadContent>
   );
 };
-export default inject(({ filesStore, dialogsStore }) => {
+export default inject(({ dialogsStore }) => {
   const {
     resetDownloadedFileFormat,
     discardDownloadedFile,

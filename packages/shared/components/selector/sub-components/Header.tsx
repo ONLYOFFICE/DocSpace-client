@@ -42,7 +42,7 @@ const Header = React.memo(
       <AsideHeader
         header={headerLabel}
         isBackButton={
-          !withoutBackButton && typeof withoutBackButton === "boolean"
+          !withoutBackButton ? typeof withoutBackButton === "boolean" : null
         }
         onBackClick={onBackClick}
         onCloseClick={onCloseClick}

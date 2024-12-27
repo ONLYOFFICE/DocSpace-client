@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { withTranslation } from "react-i18next";
 import find from "lodash/find";
@@ -36,20 +36,16 @@ import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/shared/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
-import { getUser, getUserById } from "@docspace/shared/api/people";
+import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
-  AccountLoginType,
   DeviceType,
-  EmployeeStatus,
-  EmployeeType,
   FilterGroups,
   FilterKeys,
   FilterSubject,
   FilterType,
-  PaymentsType,
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
@@ -98,7 +94,7 @@ const getAuthorType = (filterValues) => {
     "key",
   );
 
-  return authorType ? authorType : null;
+  return authorType || null;
 };
 
 const getRoomId = (filterValues) => {
@@ -151,7 +147,7 @@ const getSubjectId = (filterValues) => {
     "key",
   );
 
-  return filterOwner ? filterOwner : null;
+  return filterOwner || null;
 };
 
 const getFilterContent = (filterValues) => {
@@ -162,7 +158,7 @@ const getFilterContent = (filterValues) => {
     "key",
   );
 
-  return filterContent ? filterContent : null;
+  return filterContent || null;
 };
 
 const getTags = (filterValues) => {
@@ -215,12 +211,11 @@ const SectionFilterContent = ({
   isArchiveFolder,
   canSearchByContent,
 
-  //contacts
+  // contacts
   contactsViewAs,
   contactsTab,
-  groups,
 
-  //groups
+  // groups
   groupsFilter,
   setGroupsFilter,
 
@@ -247,7 +242,7 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
-  const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
+  const [, setSelectedFilterValues] = React.useState(null);
 
   const {
     onContactsFilter,
@@ -274,11 +269,11 @@ const SectionFilterContent = ({
     isDefaultRoomsQuotaSet,
   });
 
-  const onNavigate = (path, filter) => {
+  const onNavigate = (path, newFilter) => {
     if (isPublicRoom) {
-      navigate(`${path}?key=${publicRoomKey}&${filter.toUrlParams()}`);
+      navigate(`${path}?key=${publicRoomKey}&${newFilter.toUrlParams()}`);
     } else {
-      navigate(`${path}/filter?${filter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
     }
   };
 
@@ -301,8 +296,8 @@ const SectionFilterContent = ({
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
-        newFilter.provider = providerType ? providerType : null;
-        newFilter.type = type ? type : null;
+        newFilter.provider = providerType || null;
+        newFilter.type = type || null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -611,17 +606,17 @@ const SectionFilterContent = ({
         const user = await getUser(roomsFilter.subjectId);
         const isMe = userId === roomsFilter.subjectId;
 
-        let label = isMe ? t("Common:MeLabel") : user.displayName;
+        const label = isMe ? t("Common:MeLabel") : user.displayName;
 
         const subject = {
           key: isMe ? FilterKeys.me : roomsFilter.subjectId,
           group: FilterGroups.roomFilterSubject,
-          label: label,
+          label,
         };
 
         if (roomsFilter.subjectFilter?.toString()) {
           if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
-            subject.selectedLabel = t("Common:Owner") + ": " + label;
+            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
           }
 
           filterValues.push(subject);
@@ -641,8 +636,8 @@ const SectionFilterContent = ({
         const label = getRoomTypeName(key, t);
 
         filterValues.push({
-          key: key,
-          label: label,
+          key,
+          label,
           group: FilterGroups.roomFilterType,
         });
       }
@@ -656,7 +651,7 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: roomsFilter.quotaFilter,
-          label: label,
+          label,
           group: FilterGroups.filterQuota,
         });
       }
@@ -676,7 +671,7 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: provider,
-          label: label,
+          label,
           group: FilterGroups.roomFilterProviderType,
         });
       }
@@ -728,6 +723,8 @@ const SectionFilterContent = ({
           case FilterType.Pdf.toString():
             label = t("Forms");
             break;
+          default:
+            break;
         }
 
         filterValues.push({
@@ -758,7 +755,7 @@ const SectionFilterContent = ({
               : FilterKeys.me
             : filter.authorType.replace("user_", ""),
           group: FilterGroups.filterAuthor,
-          label: label,
+          label,
         });
       }
 
@@ -769,7 +766,7 @@ const SectionFilterContent = ({
         filterValues.push({
           key: filter.roomId,
           group: FilterGroups.filterRoom,
-          label: label,
+          label,
         });
       }
     }
@@ -799,13 +796,11 @@ const SectionFilterContent = ({
             if (isEqual) return item;
 
             return false;
-          } else {
-            if (item.key === v.key) return item;
-            return false;
           }
-        } else {
+          if (item.key === v.key) return item;
           return false;
         }
+        return false;
       });
 
       const newItems = filterValues.filter(
@@ -1355,24 +1350,6 @@ const SectionFilterContent = ({
       default: true,
     };
 
-    const room = {
-      id: "sort-by_room",
-      key: SortByFieldName.Room,
-      label: t("Common:Room"),
-      default: true,
-    };
-    const authorOption = {
-      id: "sort-by_author",
-      key: SortByFieldName.Author,
-      label: t("ByAuthor"),
-      default: true,
-    };
-    const creationDate = {
-      id: "sort-by_created",
-      key: SortByFieldName.CreationDate,
-      label: t("InfoPanel:CreationDate"),
-      default: true,
-    };
     const owner = {
       id: "sort-by_owner",
       key: SortByFieldName.Author,
@@ -1397,12 +1374,7 @@ const SectionFilterContent = ({
       label: t("Common:Size"),
       default: true,
     };
-    const type = {
-      id: "sort-by_type",
-      key: SortByFieldName.Type,
-      label: t("Common:Type"),
-      default: true,
-    };
+
     const roomType = {
       id: "sort-by_room-type",
       key: SortByFieldName.RoomType,

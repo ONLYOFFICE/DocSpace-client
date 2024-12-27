@@ -77,13 +77,13 @@ const PluginItem = ({
         <StyledPluginHeader>
           <Heading className="plugin-name">{name}</Heading>
           <div className="plugin-controls">
-            {withSettings && (
+            {withSettings ? (
               <IconButton
                 iconName={PluginSettingsIconUrl}
                 size={16}
                 onClick={onOpenSettingsDialog}
               />
-            )}
+            ) : null}
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}
@@ -100,7 +100,7 @@ const PluginItem = ({
           backgroundColor={globalColors.mainGreen}
         />
 
-        {imgSrc && description && (
+        {imgSrc && description ? (
           <Text
             className="plugin-description"
             fontWeight={400}
@@ -109,7 +109,7 @@ const PluginItem = ({
           >
             {description}
           </Text>
-        )}
+        ) : null}
       </div>
     </StyledPluginItem>
   );

@@ -81,7 +81,7 @@ const DropDown = (props: DropDownProps) => {
 
   return (
     <>
-      {!usePortalBackdrop && backDrop}
+      {!usePortalBackdrop ? backDrop : null}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}

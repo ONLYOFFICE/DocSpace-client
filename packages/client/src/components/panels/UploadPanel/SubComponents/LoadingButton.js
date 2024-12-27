@@ -62,24 +62,24 @@ const LoadingButton = (props) => {
         isAnimation={isAnimation}
       >
         <div className="circle__mask circle__full">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
         <div className="circle__mask">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
 
         <StyledLoadingButton
           className="loading-button"
           isConversion={isConversion}
         >
-          {!inConversion && <>&times;</>}
+          {!inConversion ? <>&times;</> : null}
         </StyledLoadingButton>
       </StyledCircle>
     </ColorTheme>
   );
 };
 
-export default inject(({}, { item }) => {
+export default inject((_, { item }) => {
   return {
     percent: item?.percent ? item.percent : null,
   };

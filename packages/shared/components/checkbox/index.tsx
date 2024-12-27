@@ -142,7 +142,7 @@ const CheckboxPure = ({
         isIndeterminate={isIndeterminate || false}
       />
       <div className={styles.wrapper}>
-        {label && (
+        {label ? (
           <Text
             as="span"
             title={title}
@@ -152,8 +152,8 @@ const CheckboxPure = ({
           >
             {label}
           </Text>
-        )}
-        {helpButton && (
+        ) : null}
+        {helpButton ? (
           <span
             className={styles.helpButton}
             onClick={onClick}
@@ -161,7 +161,7 @@ const CheckboxPure = ({
           >
             {helpButton}
           </span>
-        )}
+        ) : null}
       </div>
     </label>
   );

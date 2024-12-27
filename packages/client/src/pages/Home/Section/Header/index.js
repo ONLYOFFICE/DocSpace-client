@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -60,11 +60,12 @@ import { globalColors } from "@docspace/shared/themes";
 import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { useContactsHeader } from "./useContacts";
 import {
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "SRC_DIR/helpers/filesUtils";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -228,7 +229,6 @@ const SectionHeaderContent = (props) => {
     setUsersSelected,
     setGroupsSelected,
     isRoomAdmin,
-    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -267,6 +267,7 @@ const SectionHeaderContent = (props) => {
     getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
+    rootFolderId,
   } = props;
 
   const location = useLocation();
@@ -395,7 +396,7 @@ const SectionHeaderContent = (props) => {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
       isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
-      rootFolderType: rootFolderType,
+      rootFolderType,
       isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
         ? selectedFolder.navigationPath[itemIdx]?.roomType ===
           RoomsType.PublicRoom
@@ -443,6 +444,35 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
+  const stateTitle = location?.state?.title;
+  const stateCanCreate = location?.state?.canCreate;
+  const stateIsRoot = location?.state?.isRoot;
+  const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsShared = location?.state?.isShared;
+  const stateIsExternal = location?.state?.isExternal;
+  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
+
+  const isRoot =
+    isLoading && typeof stateIsRoot === "boolean"
+      ? stateIsRoot
+      : isRootFolder || isContactsPage || isSettingsPage;
+
+  const isLifetimeEnabled = Boolean(
+    !isRoot &&
+      (selectedFolder?.lifetime ||
+        infoPanelRoom?.lifetime ||
+        (isLoading && stateIsLifetimeEnabled)),
+  );
+
+  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+
+  const getInsideGroupTitle = () => {
+    return isLoading && insideGroupTempTitle
+      ? insideGroupTempTitle
+      : currentGroup?.name;
+  };
+
   const getTitleIcon = () => {
     if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
@@ -452,9 +482,10 @@ const SectionHeaderContent = (props) => {
 
     return "";
   };
+
   const onLogoClick = () => {
     if (isFrame) return;
-    moveToPublicRoom(props.rootFolderId);
+    moveToPublicRoom(rootFolderId);
   };
 
   const headerMenu = isIndexEditingMode
@@ -510,37 +541,6 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
-
-  const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
-  );
-
-  const navigationButtonIsVisible =
-    showNavigationButton || stateIsShared ? true : false;
-
-  const getInsideGroupTitle = () => {
-    return isLoading && insideGroupTempTitle
-      ? insideGroupTempTitle
-      : currentGroup?.name;
-  };
-
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isContactsPage
@@ -552,15 +552,16 @@ const SectionHeaderContent = (props) => {
         : title;
 
   const currentCanCreate =
-    isLoading && location?.state?.hasOwnProperty("canCreate")
+    isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
   const currentRootRoomTitle =
     isLoading && stateRootRoomTitle
       ? stateRootRoomTitle
-      : navigationPath?.length > 1 &&
-        navigationPath[navigationPath?.length - 2].title;
+      : navigationPath &&
+        navigationPath.length > 1 &&
+        navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -622,7 +623,7 @@ const SectionHeaderContent = (props) => {
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
-              withComboBox={!isIndexEditingMode && !!menuItems}
+              withComboBox={!isIndexEditingMode ? !!menuItems : null}
               {...tableGroupMenuProps}
               {...headerProps}
               {...closeProps}
@@ -632,11 +633,12 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot && !isContactsInsideGroupPage}
+                isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
-                  !isSettingsPage &&
-                  !isPublicRoom
+                  !isSettingsPage
+                    ? !isPublicRoom
+                    : null
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -676,12 +678,14 @@ const SectionHeaderContent = (props) => {
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  logo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? logo
+                    : null
                 }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  burgerLogo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? burgerLogo
+                    : null
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -697,7 +701,7 @@ const SectionHeaderContent = (props) => {
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
               />
-              {showSignInButton && (
+              {showSignInButton ? (
                 <Button
                   className="header_sign-in-button"
                   label={t("Common:LoginButton")}
@@ -706,10 +710,10 @@ const SectionHeaderContent = (props) => {
                   isDisabled={signInButtonIsDisabled}
                   primary
                 />
-              )}
+              ) : null}
             </div>
           )}
-          {isFrame && (
+          {isFrame ? (
             <>
               <input
                 id="customFileInput"
@@ -724,14 +728,14 @@ const SectionHeaderContent = (props) => {
                 id="customFolderInput"
                 className="custom-file-input"
                 webkitdirectory=""
-                mozdirectory=""
+                mozdirectory="" // eslint-disable-line react/no-unknown-property
                 type="file"
                 style={{ display: "none" }}
                 onChange={onFileChange}
                 onClick={onInputClick}
               />
             </>
-          )}
+          ) : null}
         </StyledContainer>
       )}
     </Consumer>
@@ -817,7 +821,6 @@ export default inject(
       security,
       rootFolderType,
       shared,
-      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -936,7 +939,6 @@ export default inject(
 
       selectedFolder,
 
-      isEmptyArchive,
       isGroupMenuBlocked,
 
       moveToRoomsPage,

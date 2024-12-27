@@ -32,9 +32,9 @@ import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollb
 import { Text } from "@docspace/shared/components/text";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
-import { StyledBackupList } from "../../../StyledBackup";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import { StyledBackupList } from "../../../StyledBackup";
 
 const VirtualScroll = (props) => (
   <CustomScrollbarsVirtualList

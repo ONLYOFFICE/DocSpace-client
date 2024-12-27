@@ -45,18 +45,25 @@ import { employeeWrapperToMemberModel } from "SRC_DIR/helpers/contacts";
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;
+
   userStore = null;
 
   targetUser = null;
+
   isEditTargetUser = false;
 
   changePasswordVisible = false;
+
   changeNameVisible = false;
+
   changeAvatarVisible = false;
 
   badgesSubscription = false;
+
   roomsActivitySubscription = false;
+
   dailyFeedSubscriptions = false;
+
   usefulTipsSubscription = false;
 
   isFirstSubscriptionsLoad = true;
@@ -80,19 +87,19 @@ class TargetUserStore {
   };
 
   getTargetUser = async (userName) => {
-    /*if (this.userStore.user.userName === userName) {
+    /* if (this.userStore.user.userName === userName) {
       return this.setTargetUser(this.userStore.user);
-    } else {*/
+    } else { */
     const user = await api.people.getUser(userName);
 
     this.setTargetUser(user);
     return user;
-    //}
+    // }
   };
 
   setTargetUser = (user) => {
     this.targetUser = user;
-    this.userStore.setUser(user); //TODO
+    this.userStore.setUser(user); // TODO
   };
 
   updateProfile = async (profile) => {
@@ -135,11 +142,6 @@ class TargetUserStore {
     });
   };
 
-  getUserPhoto = async (id) => {
-    const res = await api.people.getUserPhoto(id);
-    return res;
-  };
-
   setIsEditTargetUser = (isEditTargetUser) => {
     this.isEditTargetUser = isEditTargetUser;
   };
@@ -148,12 +150,12 @@ class TargetUserStore {
     (this.changePasswordVisible = visible);
 
   setChangeNameVisible = (visible) => {
-    //console.log("setChangeNameVisible", { visible });
+    // console.log("setChangeNameVisible", { visible });
     this.changeNameVisible = visible;
   };
 
   setChangeAvatarVisible = (visible) => {
-    //console.log("setChangeAvatarVisible", { visible });
+    // console.log("setChangeAvatarVisible", { visible });
     this.changeAvatarVisible = visible;
   };
 
@@ -161,7 +163,6 @@ class TargetUserStore {
     const res = await api.people.deleteAvatar(this.targetUser.id);
     this.updateCreatedAvatar(res);
     this.setHasAvatar(false);
-    return;
   };
 
   getProfileModel = (t) => {
@@ -194,19 +195,21 @@ class TargetUserStore {
   };
 
   changeSubscription = async (notificationType, isEnabled) => {
-    const setNotificationValue = (notificationType, isEnabled) => {
-      switch (notificationType) {
+    const setNotificationValue = (type, enabled) => {
+      switch (type) {
         case Badges:
-          this.badgesSubscription = isEnabled;
+          this.badgesSubscription = enabled;
           break;
         case DailyFeed:
-          this.dailyFeedSubscriptions = isEnabled;
+          this.dailyFeedSubscriptions = enabled;
           break;
         case RoomsActivity:
-          this.roomsActivitySubscription = isEnabled;
+          this.roomsActivitySubscription = enabled;
           break;
         case UsefulTips:
-          this.usefulTipsSubscription = isEnabled;
+          this.usefulTipsSubscription = enabled;
+          break;
+        default:
           break;
       }
     };

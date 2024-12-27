@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
-import { TableSkeleton } from "@docspace/shared/skeletons";
-import { RowsSkeleton } from "@docspace/shared/skeletons";
+import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
 const pathname = window.location.pathname.toLowerCase();
@@ -36,7 +34,7 @@ const isEditor = pathname.indexOf("doceditor") !== -1;
 const isGallery = pathname.indexOf("form-gallery") !== -1;
 
 const withLoader = (WrappedComponent) => (Loader) => {
-  const withLoader = (props) => {
+  const LoaderWrapper = (props) => {
     const {
       isInit,
       tReady,
@@ -65,15 +63,14 @@ const withLoader = (WrappedComponent) => (Loader) => {
       (isLoadingFilesFind && !Loader) ||
       !tReady ||
       !isInit ? (
-      Loader ? (
-        Loader
-      ) : !showLoader ? null : currentViewAs === "tile" ? (
-        <TilesSkeleton />
-      ) : currentViewAs === "table" ? (
-        <TableSkeleton />
-      ) : (
-        <RowsSkeleton />
-      )
+      Loader ||
+        (!showLoader ? null : currentViewAs === "tile" ? (
+          <TilesSkeleton />
+        ) : currentViewAs === "table" ? (
+          <TableSkeleton />
+        ) : (
+          <RowsSkeleton />
+        ))
     ) : (
       <WrappedComponent {...props} />
     );
@@ -108,6 +105,6 @@ const withLoader = (WrappedComponent) => (Loader) => {
         accountsViewAs,
       };
     },
-  )(observer(withLoader));
+  )(observer(LoaderWrapper));
 };
 export default withLoader;

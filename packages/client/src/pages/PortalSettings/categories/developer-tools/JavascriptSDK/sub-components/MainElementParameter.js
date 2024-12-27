@@ -34,13 +34,13 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
+import { globalColors } from "@docspace/shared/themes";
 import {
   CategorySubHeader,
   ControlsGroup,
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
-import { globalColors } from "@docspace/shared/themes";
 
 export const MainElementParameter = ({
   t,
@@ -68,8 +68,8 @@ export const MainElementParameter = ({
 
   const debouncedSetConfig = useCallback(
     debounce((key, value) => {
-      setConfig((config) => {
-        return { ...config, [key]: value };
+      setConfig((oldConfig) => {
+        return { ...oldConfig, [key]: value };
       });
     }, 500),
     [setConfig],
@@ -77,8 +77,8 @@ export const MainElementParameter = ({
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       isButtonMode: e.target.value === "button",
     }));
   };
@@ -93,8 +93,8 @@ export const MainElementParameter = ({
   };
 
   const toggleWithLogo = () => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       buttonWithLogo: !config.buttonWithLogo,
     }));
   };
@@ -109,9 +109,9 @@ export const MainElementParameter = ({
         selected={selectedElementType}
         onClick={toggleButtonMode}
         spacing="8px"
-        isDisabled={true}
+        isDisabled
       />
-      {config.isButtonMode && (
+      {config.isButtonMode ? (
         <>
           <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
           <ControlsGroup>
@@ -141,7 +141,7 @@ export const MainElementParameter = ({
             />
           </ControlsGroup>
         </>
-      )}
+      ) : null}
     </ControlsSection>
   );
 };

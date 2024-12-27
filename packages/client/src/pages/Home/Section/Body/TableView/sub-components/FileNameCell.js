@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
@@ -45,13 +43,11 @@ const FileNameCell = ({
   isIndexEditingMode,
   displayFileExtension,
 }) => {
-  const { title, viewAccessibility, fileExst } = item;
+  const { title, fileExst } = item;
 
   const onChange = (e) => {
     onContentSelect && onContentSelect(e.target.checked, item);
   };
-
-  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
   const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
   const linkProps = isIndexEditingMode ? null : { ...linkStyles };
@@ -68,22 +64,22 @@ const FileNameCell = ({
       ) : (
         <TableCell
           className={classNames("table-container_element-wrapper", {
-            ["table-container-index"]: isIndexEditingMode,
+            "table-container-index": isIndexEditingMode,
           })}
           style={{ background: "none !important" }}
-          hasAccess={true}
+          hasAccess
           checked={checked}
         >
           <div className="table-container_element-container">
             <div className="table-container_element">{element}</div>
-            {!isIndexEditingMode && (
+            {!isIndexEditingMode ? (
               <Checkbox
                 className="table-container_row-checkbox"
                 onChange={onChange}
                 isChecked={checked}
                 title={t("Common:TitleSelectFile")}
               />
-            )}
+            ) : null}
           </div>
         </TableCell>
       )}
@@ -99,9 +95,9 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
     </>
   );

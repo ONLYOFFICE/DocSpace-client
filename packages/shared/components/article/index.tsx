@@ -258,24 +258,24 @@ const Article = ({
           scrollClass="article-scroller"
         >
           {articleBodyContent ? articleBodyContent.props.children : null}
-          {!showArticleLoader && (
+          {!showArticleLoader ? (
             <>
-              {withDevTools && (
+              {withDevTools ? (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
                   currentDeviceType={currentDeviceType}
                   toggleArticleOpen={toggleArticleOpen}
                   showText={showText}
                 />
-              )}
-              {!hideAppsBlock && (
+              ) : null}
+              {!hideAppsBlock ? (
                 <ArticleApps withDevTools={withDevTools} showText={showText} />
-              )}
-              {!isMobile && isLiveChatAvailable && (
+              ) : null}
+              {!isMobile && isLiveChatAvailable ? (
                 <ArticleLiveChat
                   isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
-                    (withMainButton || false) && !!articleMainButtonContent
+                    withMainButton || false ? !!articleMainButtonContent : null
                   }
                   languageBaseName={languageBaseName}
                   zendeskEmail={zendeskEmail}
@@ -285,21 +285,20 @@ const Article = ({
                   showProgress={showProgress}
                   isShowLiveChat={isShowLiveChat}
                 />
-              )}
+              ) : null}
             </>
-          )}
+          ) : null}
         </Scrollbar>
-        {!showArticleLoader && (
+        {!showArticleLoader ? (
           <HideArticleMenuButton
             showText={showText}
             toggleShowText={toggleShowText}
             hideProfileBlock={hideProfileBlock}
           />
-        )}
+        ) : null}
 
-        {!hideProfileBlock &&
-          currentDeviceType !== DeviceType.mobile &&
-          (showArticleLoader ? (
+        {!hideProfileBlock && currentDeviceType !== DeviceType.mobile ? (
+          showArticleLoader ? (
             <ArticleProfileLoader showText={showText} />
           ) : (
             <ArticleProfile
@@ -309,16 +308,17 @@ const Article = ({
               getActions={getActions}
               onProfileClick={onProfileClick}
             />
-          ))}
+          )
+        ) : null}
       </div>
-      {articleOpen && currentDeviceType === DeviceType.mobile && (
+      {articleOpen && currentDeviceType === DeviceType.mobile ? (
         <Backdrop
           onClick={toggleArticleOpen}
           visible
           zIndex={210}
           withBackground
         />
-      )}
+      ) : null}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
         <div className={styles.articleMainButton}>

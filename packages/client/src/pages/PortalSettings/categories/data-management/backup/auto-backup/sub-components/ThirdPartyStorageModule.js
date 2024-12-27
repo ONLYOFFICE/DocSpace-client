@@ -41,11 +41,6 @@ class ThirdPartyStorageModule extends React.PureComponent {
     super(props);
     const { thirdPartyStorage, defaultStorageId, setStorageId } = this.props;
 
-    this.state = {
-      availableOptions: [],
-      availableStorage: {},
-    };
-
     const { comboBoxOptions, storagesInfo, selectedStorageId } =
       getOptions(thirdPartyStorage);
 
@@ -98,21 +93,21 @@ class ThirdPartyStorageModule extends React.PureComponent {
             showDisabledItems
           />
 
-          {selectedStorageId === GoogleId && (
+          {selectedStorageId === GoogleId ? (
             <GoogleCloudStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === RackspaceId && (
+          {selectedStorageId === RackspaceId ? (
             <RackspaceStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === SelectelId && (
+          {selectedStorageId === SelectelId ? (
             <SelectelStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === AmazonId && (
+          {selectedStorageId === AmazonId ? (
             <AmazonStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
         </div>
       </StyledAutoBackup>
     );

@@ -70,10 +70,10 @@ const MenuItem = ({
         role="menuitem"
       >
         {renderIcon()}
-        {item.label && (
+        {item.label ? (
           <span className="p-menuitem-text not-selectable">{item.label}</span>
-        )}
-        {item.items && <ArrowIcon className="p-submenu-icon" />}
+        ) : null}
+        {item.items ? <ArrowIcon className="p-submenu-icon" /> : null}
       </a>
     </li>
   );

@@ -32,11 +32,10 @@ import { useParams } from "react-router-dom";
 import { RoomsType } from "@docspace/shared/enums";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
-
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -114,7 +113,7 @@ const InfoPanelBodyContent = ({
   };
 
   const viewHelper = new ViewHelper({
-    defaultProps: defaultProps,
+    defaultProps,
     detailsProps: {},
     membersProps: {},
     historyProps: { selectedFolder },
@@ -152,12 +151,14 @@ const InfoPanelBodyContent = ({
         return viewHelper.DetailsView();
       case "info_share":
         return viewHelper.ShareView();
+      default:
+        break;
     }
 
     if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();
   };
 
-  //////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////
 
   // Updating SelectedItems only if
   // a) Length of an array changed
@@ -201,32 +202,30 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem && (
+      {!isNoItem ? (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}
           isNoItem={isNoItem}
         />
-      )}
+      ) : null}
       {getView()}
 
       {avatarEditorDialogVisible &&
-        !editRoomDialogProps.visible &&
-        !createRoomDialogProps.visible && (
-          <AvatarEditorDialog
-            t={t}
-            image={image}
-            onChangeImage={onChangeIcon}
-            onClose={() => setAvatarEditorDialogVisible(false)}
-            onSave={(image) =>
-              onSaveRoomLogo(selection.id, image, selection, true)
-            }
-            onChangeFile={onChangeFile}
-            classNameWrapperImageCropper={"icon-editor"}
-            visible={image.uploadedFile}
-            maxImageSize={maxImageUploadSize}
-          />
-        )}
+      !editRoomDialogProps.visible &&
+      !createRoomDialogProps.visible ? (
+        <AvatarEditorDialog
+          t={t}
+          image={image}
+          onChangeImage={onChangeIcon}
+          onClose={() => setAvatarEditorDialogVisible(false)}
+          onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
+          onChangeFile={onChangeFile}
+          classNameWrapperImageCropper="icon-editor"
+          visible={image.uploadedFile}
+          maxImageSize={maxImageUploadSize}
+        />
+      ) : null}
     </StyledInfoPanelBody>
   );
 };

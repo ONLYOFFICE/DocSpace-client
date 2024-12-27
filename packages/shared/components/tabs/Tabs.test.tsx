@@ -25,18 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { screen, render } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { ThemeProvider } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base } from "../../themes";
 import { Tabs } from ".";
 import { TabsTypes } from "./Tabs.enums";
 import { TTabItem } from "./Tabs.types";
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn();
-mockIntersectionObserver.mockImplementation(function (callback, options) {
+mockIntersectionObserver.mockImplementation(() => {
   return {
     observe: jest.fn(),
     unobserve: jest.fn(),
@@ -51,9 +50,9 @@ const arrayItems: TTabItem[] = [
     name: "Title1",
     content: (
       <div>
-        <button>BUTTON</button>
-        <button>BUTTON</button>
-        <button>BUTTON</button>
+        <button type="button">BUTTON</button>
+        <button type="button">BUTTON</button>
+        <button type="button">BUTTON</button>
       </div>
     ),
   },

@@ -158,7 +158,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
 
   return (
     <StyledRowContainer useReactWindow={false}>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             headerMenu={headerMenu}
@@ -169,7 +169,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <StyledRow key="Name">

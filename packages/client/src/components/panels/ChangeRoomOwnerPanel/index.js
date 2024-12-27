@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -83,7 +83,11 @@ const ChangeRoomOwner = (props) => {
     useModal = true,
   } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const handleClosePanel = () => {
+    const { onClose } = props;
+    if (onClose) onClose();
+    setIsVisible(false);
+  };
 
   const onChangeRoomOwner = async (
     user,
@@ -94,29 +98,21 @@ const ChangeRoomOwner = (props) => {
     if (showBackButton) {
       onOwnerChange && onOwnerChange(user[0]);
     } else {
-      setIsLoading(true);
-
       await changeRoomOwner(t, user[0]?.id, isChecked);
       updateInfoPanelSelection();
-      setIsLoading(false);
     }
-    onClose();
-  };
-
-  const onClose = () => {
-    if (props.onClose) props.onClose();
-    setIsVisible(false);
+    handleClosePanel();
   };
 
   const onBackClick = () => {
-    onClose();
+    handleClosePanel();
   };
 
   const filter = useMemo(() => {
-    const filter = Filter.getDefault();
-    filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
-    filter.employeeStatus = EmployeeStatus.Active;
-    return filter;
+    const newFilter = Filter.getDefault();
+    newFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    newFilter.employeeStatus = EmployeeStatus.Active;
+    return newFilter;
   }, []);
 
   const ownerIsCurrentUser = roomOwnerId === userId;
@@ -124,20 +120,20 @@ const ChangeRoomOwner = (props) => {
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
-      onCancel={onClose}
+      onCancel={handleClosePanel}
       cancelButtonLabel=""
       disableSubmitButton={false}
       submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
       onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{
-        onCloseClick: onClose,
+        onCloseClick: handleClosePanel,
         onBackClick,
         withoutBackButton: !showBackButton,
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+      withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -160,13 +156,13 @@ const ChangeRoomOwner = (props) => {
     <ModalDialog
       isLoading={!tReady}
       visible={visible}
-      onClose={onClose}
+      onClose={handleClosePanel}
       displayType={ModalDialogType.aside}
       withoutPadding
     >
       <ModalDialog.Body>
         <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
         >
           {selectorComponent}
         </StyledChangeRoomOwner>
@@ -193,9 +189,7 @@ export default inject(
 
     const room = selection.length
       ? selection[0]
-      : bufferSelection
-        ? bufferSelection
-        : selectedFolderStore;
+      : bufferSelection || selectedFolderStore;
 
     const { id } = userStore.user;
 

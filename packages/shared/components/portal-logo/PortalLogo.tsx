@@ -29,9 +29,8 @@
 import React, { useState } from "react";
 import { isMobileOnly } from "react-device-detect";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { classNames, getLogoUrl, size as deviceSize } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
-import { size as deviceSize } from "../../utils";
 import { useTheme } from "../../hooks/useTheme";
 import type { PortalLogoProps } from "./PortalLogo.types";
 import styles from "./PortalLogo.module.scss";
@@ -74,13 +73,13 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
 
   return (
     <div className={wrapperClassName}>
-      {logo && (
+      {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
           alt=""
         />
-      )}
+      ) : null}
     </div>
   );
 };

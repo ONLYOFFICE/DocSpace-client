@@ -74,7 +74,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
       borderColor={borderColor}
     >
       <BannerContent ref={ref}>
-        {hasTitle && (
+        {hasTitle ? (
           <TextComponent
             className="header"
             color={title?.color || globalColors.black}
@@ -84,9 +84,9 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           >
             {Header}
           </TextComponent>
-        )}
+        ) : null}
         <div>
-          {hasBodyText && (
+          {hasBodyText ? (
             <TextComponent
               color={body?.color || globalColors.black}
               fontSize={fontSize}
@@ -94,8 +94,8 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             >
               {SubHeader}
             </TextComponent>
-          )}
-          {hasText && (
+          ) : null}
+          {hasText ? (
             <TextComponent
               color={text?.color || globalColors.black}
               fontSize={text?.fontSize}
@@ -103,7 +103,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             >
               {Text}
             </TextComponent>
-          )}
+          ) : null}
         </div>
         {isButton ? (
           <BannerButton

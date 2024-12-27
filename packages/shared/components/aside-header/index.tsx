@@ -99,9 +99,9 @@ const AsideHeader = (props: AsideHeaderProps) => {
 
   const mainComponent = (
     <>
-      {isBackButton && backButtonRender}
-      {header && headerComponent}
-      {headerIcons.length > 0 && (
+      {isBackButton ? backButtonRender : null}
+      {header ? headerComponent : null}
+      {headerIcons.length > 0 ? (
         <div
           className={styles.additionalIconsContainer}
           data-testid="icons-container"
@@ -118,8 +118,8 @@ const AsideHeader = (props: AsideHeaderProps) => {
             />
           ))}
         </div>
-      )}
-      {isCloseable && closeIconRender}
+      ) : null}
+      {isCloseable ? closeIconRender : null}
     </>
   );
 

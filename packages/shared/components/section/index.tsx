@@ -211,31 +211,31 @@ const Section = (props: SectionProps) => {
           withBodyScroll={withBodyScroll}
           currentDeviceType={currentDeviceType}
         >
-          {currentDeviceType !== DeviceType.mobile && (
+          {currentDeviceType !== DeviceType.mobile ? (
             <div className="section-sticky-container">
-              {isSectionHeaderAvailable && (
+              {isSectionHeaderAvailable ? (
                 <SubSectionHeader
                   className="section-header_header"
                   isFormGallery={isFormGallery}
                 >
                   {sectionHeaderContent}
                 </SubSectionHeader>
-              )}
+              ) : null}
 
-              {isSectionSubmenuAvailable && (
+              {isSectionSubmenuAvailable ? (
                 <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-              )}
+              ) : null}
 
               {isSectionFilterAvailable &&
-                currentDeviceType === DeviceType.desktop && (
-                  <SubSectionFilter className="section-header_filter">
-                    {sectionFilterContent}
-                  </SubSectionFilter>
-                )}
+              currentDeviceType === DeviceType.desktop ? (
+                <SubSectionFilter className="section-header_filter">
+                  {sectionFilterContent}
+                </SubSectionFilter>
+              ) : null}
             </div>
-          )}
+          ) : null}
 
-          {isSectionBodyAvailable && (
+          {isSectionBodyAvailable ? (
             <SubSectionBody
               onDrop={onDrop}
               uploadFiles={uploadFiles}
@@ -250,33 +250,33 @@ const Section = (props: SectionProps) => {
               pathname={pathname}
             >
               {isSectionHeaderAvailable &&
-                currentDeviceType === DeviceType.mobile && (
-                  <SubSectionHeader
-                    className="section-body_header"
-                    isFormGallery={isFormGallery}
-                  >
-                    {sectionHeaderContent}
-                  </SubSectionHeader>
-                )}
-              {currentDeviceType !== DeviceType.desktop && (
+              currentDeviceType === DeviceType.mobile ? (
+                <SubSectionHeader
+                  className="section-body_header"
+                  isFormGallery={isFormGallery}
+                >
+                  {sectionHeaderContent}
+                </SubSectionHeader>
+              ) : null}
+              {currentDeviceType !== DeviceType.desktop ? (
                 <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
-              )}
+              ) : null}
               {isSectionSubmenuAvailable &&
-                currentDeviceType === DeviceType.mobile && (
-                  <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-                )}
+              currentDeviceType === DeviceType.mobile ? (
+                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+              ) : null}
               {isSectionFilterAvailable &&
-                currentDeviceType !== DeviceType.desktop && (
-                  <SubSectionFilter className="section-body_filter">
-                    {sectionFilterContent}
-                  </SubSectionFilter>
-                )}
+              currentDeviceType !== DeviceType.desktop ? (
+                <SubSectionFilter className="section-body_filter">
+                  {sectionFilterContent}
+                </SubSectionFilter>
+              ) : null}
               <SubSectionBodyContent>
                 {sectionBodyContent}
               </SubSectionBodyContent>
               <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
             </SubSectionBody>
-          )}
+          ) : null}
 
           {currentDeviceType === DeviceType.desktop ? (
             showTwoProgress ? (
@@ -321,7 +321,7 @@ const Section = (props: SectionProps) => {
           ) : null}
         </SectionContainer>
 
-        {isInfoPanelAvailable && (
+        {isInfoPanelAvailable ? (
           <InfoPanel
             isVisible={isInfoPanelVisible}
             setIsVisible={setIsInfoPanelVisible}
@@ -336,7 +336,7 @@ const Section = (props: SectionProps) => {
               {infoPanelBodyContent}
             </SubInfoPanelBody>
           </InfoPanel>
-        )}
+        ) : null}
       </Provider>
     )
   );

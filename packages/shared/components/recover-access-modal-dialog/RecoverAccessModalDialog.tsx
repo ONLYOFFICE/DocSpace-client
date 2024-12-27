@@ -28,20 +28,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { Text } from "../text";
+import { toastr } from "../toast";
+import { Button, ButtonSize } from "../button";
+import { Textarea } from "../textarea";
+import { EmailInput } from "../email-input";
+import { InputSize, InputType } from "../text-input";
+import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import { FieldContainer } from "../field-container";
+import { TValidate } from "../email-input/EmailInput.types";
 
-import { sendRecoverRequest } from "@docspace/shared/api/settings";
+import { sendRecoverRequest } from "../../api/settings";
 
 import {
   StyledBodyContent,
@@ -146,7 +143,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
             isVertical
             key="e-mail"
             labelVisible={false}
-            hasError={isShowError && emailErr}
+            hasError={isShowError ? emailErr : null}
             errorMessage={
               emailErrorMessage
                 ? t(`Common:${emailErrorMessage}`)
@@ -164,7 +161,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
               type={InputType.email}
               autoComplete="username"
               id="recover-access-modal_email"
-              hasError={isShowError && emailErr}
+              hasError={isShowError ? emailErr : null}
               placeholder={emailPlaceholderText}
               onBlur={onBlurEmail}
               onChange={onChangeEmail}

@@ -28,7 +28,7 @@ import React from "react";
 import { BoxProps } from "./Box.types";
 import { StyledBox } from "./Box.styled";
 
-function Box(props: BoxProps) {
+const Box = (props: BoxProps) => {
   const {
     as,
     displayProp = "block",
@@ -72,6 +72,6 @@ function Box(props: BoxProps) {
       tabIndex={tabIndex}
     />
   );
-}
+};
 
 export { Box };

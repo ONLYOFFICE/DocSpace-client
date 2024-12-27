@@ -79,7 +79,7 @@ const InfoPanel = ({
       <Portal
         element={infoPanelComponent}
         appendTo={rootElement || undefined}
-        visible={isVisible && !isMobileHidden && !anotherDialogOpen}
+        visible={isVisible && !isMobileHidden ? !anotherDialogOpen : null}
       />
     );
   };

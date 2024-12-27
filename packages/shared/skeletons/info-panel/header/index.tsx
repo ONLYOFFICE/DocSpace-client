@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isDesktop as isDesktopUtils } from "@docspace/shared/utils";
+import { isDesktop as isDesktopUtils } from "../../../utils";
 
 import { RectangleSkeleton } from "../../rectangle";
 
@@ -43,11 +43,11 @@ const InfoPanelHeaderLoader = () => {
     >
       <div className="main">
         <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
-        {!isTablet && (
+        {!isTablet ? (
           <div className="info-panel-toggle-bg">
             <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

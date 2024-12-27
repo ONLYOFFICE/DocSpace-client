@@ -134,9 +134,9 @@ const FilterBlockItem = ({
           showSelectorAction(event, selectorType, item.group, [])
         }
       >
-        {item?.displaySelectorType === "button" && (
+        {item?.displaySelectorType === "button" ? (
           <SelectorAddButton id="filter_add-author" />
-        )}
+        ) : null}
         <StyledFilterBlockItemSelectorText noSelect>
           {item.label}
         </StyledFilterBlockItemSelectorText>
@@ -163,11 +163,11 @@ const FilterBlockItem = ({
         >
           {item?.selectedLabel?.toLowerCase()}
         </StyledFilterBlockItemTagText>
-        {item.isSelected && (
+        {item.isSelected ? (
           <StyledFilterBlockItemTagIcon ref={clearSelectorRef}>
             <XIcon style={{ marginTop: "2px" }} />
           </StyledFilterBlockItemTagIcon>
-        )}
+        ) : null}
       </ColorTheme>
     );
   };
@@ -293,13 +293,13 @@ const FilterBlockItem = ({
 
   return (
     <StyledFilterBlockItem isFirst={isFirst} withoutHeader={withoutHeader}>
-      {!withoutHeader && (
+      {!withoutHeader ? (
         <StyledFilterBlockItemHeader>
           <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
             {label}
           </Heading>
         </StyledFilterBlockItemHeader>
-      )}
+      ) : null}
 
       <StyledFilterBlockItemContent
         withMultiItems={withMultiItems}
@@ -316,7 +316,7 @@ const FilterBlockItem = ({
           return getTagItem(item as TTagItem);
         })}
       </StyledFilterBlockItemContent>
-      {!isLast && !withoutSeparator && <StyledFilterBlockItemSeparator />}
+      {!isLast && !withoutSeparator ? <StyledFilterBlockItemSeparator /> : null}
     </StyledFilterBlockItem>
   );
 };

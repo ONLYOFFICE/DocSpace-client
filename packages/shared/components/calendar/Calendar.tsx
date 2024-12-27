@@ -29,7 +29,7 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import moment from "moment";
 
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "../scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
 import { getValidDates } from "./utils";

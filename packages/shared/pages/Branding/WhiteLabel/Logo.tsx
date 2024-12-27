@@ -30,8 +30,6 @@ import SpreadsheetSample from "PUBLIC_DIR/images/logo/spreadsheet_sample.svg?url
 import PresentationSample from "PUBLIC_DIR/images/logo/presentation_sample.svg?url";
 import EditorSample from "PUBLIC_DIR/images/logo/embedded_sample.svg?url";
 
-import React from "react";
-
 import { Text } from "../../../components/text";
 import { Link, LinkType } from "../../../components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
@@ -63,7 +61,7 @@ export const Logo = (props: ILogoProps) => {
   return (
     <div>
       <div className="logo-item">
-        {title && (
+        {title ? (
           <Text
             fontSize="13px"
             fontWeight="600"
@@ -71,7 +69,7 @@ export const Logo = (props: ILogoProps) => {
           >
             {title}
           </Text>
-        )}
+        ) : null}
         {isEditor ? (
           <div className="logos-editor-wrapper" onClick={onLogoClick}>
             <div className="logos-editor-container">

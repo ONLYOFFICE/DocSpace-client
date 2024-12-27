@@ -42,7 +42,7 @@ const RoomsListComponent = (props) => {
     textElement,
     quotaElement,
     buttonProps,
-    id,
+
     roomsListLength,
     roomFilterData,
   } = props;
@@ -85,7 +85,7 @@ const RoomsListComponent = (props) => {
     );
   });
 
-  if (roomsListLength === 0) return <></>;
+  if (roomsListLength === 0) return null;
 
   return (
     <StyledStatistics>
@@ -95,13 +95,13 @@ const RoomsListComponent = (props) => {
         </Text>
         {roomsList}
 
-        {roomsListLength > 5 && (
+        {roomsListLength > 5 ? (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
             onClick={onClickRooms}
           />
-        )}
+        ) : null}
       </div>
     </StyledStatistics>
   );

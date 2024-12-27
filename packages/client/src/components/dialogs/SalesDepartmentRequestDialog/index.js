@@ -55,7 +55,8 @@ const SalesDepartmentRequestDialog = ({
     "Common",
   ]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // TODO: setIsLoading is useless
+  const [isLoading, setIsLoading] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -108,7 +109,7 @@ const SalesDepartmentRequestDialog = ({
       isLoading={!ready}
     >
       <ModalDialog.Header>
-        <Text isBold={true} fontSize="21px">
+        <Text isBold fontSize="21px">
           {t("SalesDepartmentRequest")}
         </Text>
       </ModalDialog.Header>
@@ -196,7 +197,7 @@ const SalesDepartmentRequestDialog = ({
           className="send-button"
           label={isLoading ? t("Common:Sending") : t("Common:SendButton")}
           size="normal"
-          primary={true}
+          primary
           onClick={onSendRequest}
           isLoading={isLoading}
           isDisabled={isLoading}

@@ -42,6 +42,7 @@ import {
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import { StyledTableContainer } from "../../../../StyledDataImport";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
@@ -49,7 +50,6 @@ import {
   TypeSelectTableViewProps,
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const UserSelectTableContainer = styled(StyledTableContainer).attrs(
   injectDefaultTheme,
@@ -136,7 +136,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
 
   return (
     <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             checkboxOptions={[]}
@@ -148,7 +148,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader

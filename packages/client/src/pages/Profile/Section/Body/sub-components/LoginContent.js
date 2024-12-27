@@ -50,15 +50,15 @@ const LoginContent = (props) => {
       const codes = await getTfaBackupCodes();
       setBackupCodes(codes);
 
-      let backupCodesCount = 0;
+      let newBackupCodesCount = 0;
       if (codes && codes.length > 0) {
-        codes.map((item) => {
+        codes.forEach((item) => {
           if (!item.isUsed) {
-            backupCodesCount++;
+            newBackupCodesCount++;
           }
         });
       }
-      setBackupCodesCount(backupCodesCount);
+      setBackupCodesCount(newBackupCodesCount);
     }
   };
 
@@ -68,7 +68,7 @@ const LoginContent = (props) => {
 
   return (
     <StyledWrapper>
-      {tfaOn && <LoginSettings backupCodesCount={backupCodesCount} />}
+      {tfaOn ? <LoginSettings backupCodesCount={backupCodesCount} /> : null}
       <SocialNetworks />
       <ActiveSession />
     </StyledWrapper>

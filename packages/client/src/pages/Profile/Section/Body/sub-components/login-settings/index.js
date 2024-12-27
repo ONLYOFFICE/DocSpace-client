@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -51,7 +50,6 @@ const LoginSettings = (props) => {
     backupCodesCount,
     setBackupCodes,
   } = props;
-  const location = useLocation();
 
   const [resetAppDialogVisible, setResetAppDialogVisible] = useState(false);
   const [backupCodesDialogVisible, setBackupCodesDialogVisible] =
@@ -89,15 +87,15 @@ const LoginSettings = (props) => {
         </Link>
       </div>
 
-      {resetAppDialogVisible && (
+      {resetAppDialogVisible ? (
         <ResetApplicationDialog
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
           resetTfaApp={unlinkTfaApp}
           id={profile.id}
         />
-      )}
-      {backupCodesDialogVisible && (
+      ) : null}
+      {backupCodesDialogVisible ? (
         <BackupCodesDialog
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
@@ -105,7 +103,7 @@ const LoginSettings = (props) => {
           backupCodesCount={backupCodesCount}
           setBackupCodes={setBackupCodes}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

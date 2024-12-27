@@ -28,7 +28,6 @@ import { Navigate } from "react-router-dom";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 
-import PrivateRoute from "../components/PrivateRouteWrapper";
 import {
   GUESTS_ROUTE,
   GUESTS_ROUTE_WITH_FILTER,
@@ -40,6 +39,7 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
   CONTACTS_ROUTE,
 } from "SRC_DIR/helpers/contacts";
+import PrivateRoute from "../components/PrivateRouteWrapper";
 
 export const contanctsRoutes = [
   {

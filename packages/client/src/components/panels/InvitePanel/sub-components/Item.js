@@ -29,7 +29,7 @@ import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -45,17 +45,16 @@ import {
   EmployeeStatus,
   EmployeeType,
   RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-import {
-  getAccessOptions,
-  getFreeUsersRoleArray,
-  getFreeUsersTypeArray,
-  getTopFreeRole,
-  isPaidUserRole,
-} from "../utils";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import Filter from "@docspace/shared/api/people/filter";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import AccessSelector from "../../../AccessSelector";
 import {
   StyledEditInput,
   StyledEditButton,
@@ -67,13 +66,13 @@ import {
   ErrorWrapper,
   StyledRow,
 } from "../StyledInvitePanel";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
-import AccessSelector from "../../../AccessSelector";
-
-import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import Filter from "@docspace/shared/api/people/filter";
-import { Box } from "@docspace/shared/components/box";
-import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+  getTopFreeRole,
+  isPaidUserRole,
+} from "../utils";
 
 const Item = ({
   t,
@@ -112,12 +111,12 @@ const Item = ({
 
   const name = isGroup
     ? groupName
-    : !!avatar
+    : avatar
       ? displayName !== ""
         ? displayName
         : email
       : email;
-  const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
+  const source = avatar || (isGroup ? "" : AtReactSvgUrl);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -151,7 +150,7 @@ const Item = ({
 
     setSearchRequestRunning(false);
 
-    const user = users.items.find((item) => item.email === value);
+    const user = users.items.find((userItem) => userItem.email === value);
 
     setIsSharedUser(user && (roomId === -1 || user?.shared));
   };
@@ -208,7 +207,7 @@ const Item = ({
       : getUserTypeTranslation(type, t);
 
   const errorsInList = () => {
-    const hasErrors = inviteItems.some((item) => !!item.errors?.length);
+    const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
     setHasErrors(hasErrors);
   };
 
@@ -218,14 +217,25 @@ const Item = ({
     }
   };
 
-  const cancelEdit = (e) => {
+  const cancelEdit = () => {
     setInputValue(name);
     setEdit(false);
     setSearchRequestRunning(false);
     setIsSharedUser(false);
   };
 
-  const saveEdit = async (e) => {
+  const validateValue = (value) => {
+    const parsedEmail = parseAddresses(value);
+    const validationErrors = parsedEmail[0].parseErrors;
+    const currentErrors = validationErrors.length ? validationErrors : [];
+
+    setParseErrors(currentErrors);
+    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
+      () => errorsInList(),
+    );
+  };
+
+  const saveEdit = async () => {
     if (searchRequestRunning) return;
 
     if (isSharedUser) {
@@ -251,17 +261,6 @@ const Item = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
-  const validateValue = (value) => {
-    const email = parseAddresses(value);
-    const parseErrors = email[0].parseErrors;
-    const errors = !!parseErrors.length ? parseErrors : [];
-
-    setParseErrors(errors);
-    changeInviteItem({ id, email: value, errors, access }).then(() =>
-      errorsInList(),
-    );
-  };
-
   const changeValue = (e) => {
     const value = e.target.value.trim();
 
@@ -275,7 +274,7 @@ const Item = ({
   const hasError = parseErrors && !!parseErrors.length;
 
   const removeItem = () => {
-    const newItems = inviteItems.filter((item) => item.id !== id);
+    const newItems = inviteItems.filter((inviteItem) => inviteItem.id !== id);
 
     setInviteItems(newItems);
   };
@@ -298,15 +297,15 @@ const Item = ({
           displayProp="flex"
           alignItems="center"
           gapProp="8px"
-          className={isGroup && "group-name"}
+          className={isGroup ? "group-name" : null}
         >
           <Text {...textProps} truncate noSelect>
             {inputValue}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </Box>
 
-        {!isGroup && (
+        {!isGroup ? (
           <Text
             className="label about-label"
             fontWeight={400}
@@ -316,7 +315,7 @@ const Item = ({
           >
             {`${typeLabel} | ${email}`}
           </Text>
-        )}
+        ) : null}
       </StyledInviteUserBody>
 
       {hasError ? (
@@ -343,7 +342,7 @@ const Item = ({
           gapProp="8px"
           className="role-access"
         >
-          {warning && (
+          {warning ? (
             <div className="role-warning">
               <StyledHelpButton
                 tooltipContent={warning}
@@ -351,7 +350,7 @@ const Item = ({
                 size={16}
               />
             </div>
-          )}
+          ) : null}
           <AccessSelector
             className="user-access"
             t={t}
@@ -360,7 +359,7 @@ const Item = ({
             onSelectAccess={selectItemAccess}
             containerRef={inputsRef}
             isOwner={isOwner}
-            withRemove={true}
+            withRemove
             filteredAccesses={filteredAccesses}
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}

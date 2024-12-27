@@ -27,10 +27,7 @@
 /* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
 
-import {
-  setDefaultUserQuota,
-  setDefaultRoomQuota,
-} from "@docspace/shared/api/settings";
+import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
@@ -50,6 +47,7 @@ import {
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
+
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
@@ -411,14 +409,16 @@ class CurrentQuotasStore {
   };
 
   updateQuotaUsedValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId && elem.used) elem.used.value = value;
+    this.currentPortalQuotaFeatures.forEach((elem, index) => {
+      if (elem.id === featureId && this.currentPortalQuotaFeatures[index].used)
+        this.currentPortalQuotaFeatures[index].used.value = value;
     });
   };
 
   updateQuotaFeatureValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId) elem.value = value;
+    this.currentPortalQuotaFeatures.forEach((elem, index) => {
+      if (elem.id === featureId)
+        this.currentPortalQuotaFeatures[index].value = value;
     });
   };
 

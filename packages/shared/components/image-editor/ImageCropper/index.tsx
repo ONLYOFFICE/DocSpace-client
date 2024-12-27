@@ -161,39 +161,39 @@ const ImageCropper = ({
       </div>
 
       {typeof uploadedFile !== "string" &&
-        uploadedFile?.name &&
-        !disableImageRescaling && (
-          <div className="icon_cropper-zoom-container">
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomOutClick}
-              iconName={ZoomMinusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
+      uploadedFile?.name &&
+      !disableImageRescaling ? (
+        <div className="icon_cropper-zoom-container">
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={20}
+            onClick={handleZoomOutClick}
+            iconName={ZoomMinusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
 
-            <Slider
-              className="icon_cropper-zoom-container-slider"
-              max={5}
-              min={1}
-              onChange={handleSliderChange}
-              step={0.01}
-              value={image.zoom}
-              isDisabled={isDisabled}
-            />
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomInClick}
-              iconName={ZoomPlusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
-          </div>
-        )}
+          <Slider
+            className="icon_cropper-zoom-container-slider"
+            max={5}
+            min={1}
+            onChange={handleSliderChange}
+            step={0.01}
+            value={image.zoom}
+            isDisabled={isDisabled}
+          />
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={20}
+            onClick={handleZoomInClick}
+            iconName={ZoomPlusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
+        </div>
+      ) : null}
     </StyledImageCropper>
   );
 };

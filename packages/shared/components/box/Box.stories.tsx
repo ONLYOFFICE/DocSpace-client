@@ -177,7 +177,7 @@ export const AccessibleBox: Story = {
   args: {
     role: "button",
     "aria-label": "Interactive box",
-    onClick: () => alert("Box clicked"),
+    onClick: () => {},
     paddingProp: "16px",
     backgroundProp: "#007bff",
     style: {

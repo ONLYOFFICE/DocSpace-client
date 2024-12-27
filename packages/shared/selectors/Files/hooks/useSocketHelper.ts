@@ -29,12 +29,12 @@ import React from "react";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+  TOptSocket,
+} from "../../../utils/socket";
 
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
 import { TRoom } from "../../../api/rooms/types";
-import { TOptSocket } from "../../../utils/socket";
 
 import {
   convertFilesToItems,
@@ -128,7 +128,7 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        item = convertFilesToItems([data], getIcon, filterParam)[0];
+        [item] = convertFilesToItems([data], getIcon, filterParam);
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         item =
           "roomType" in data && data.roomType && "tags" in data
@@ -206,12 +206,12 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        item = convertFilesToItems([data], getIcon, filterParam)[0];
+        [item] = convertFilesToItems([data], getIcon, filterParam);
       } else if (opt?.type === "folder" && "roomType" in data) {
-        item =
+        [item] =
           data.roomType && "tags" in data
-            ? convertRoomsToItems([data])[0]
-            : convertFoldersToItems([data], disabledItems, filterParam)[0];
+            ? convertRoomsToItems([data])
+            : convertFoldersToItems([data], disabledItems, filterParam);
       }
 
       if (item?.id === subscribedId.current) {

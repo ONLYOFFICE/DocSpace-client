@@ -42,8 +42,8 @@ const DailyFeedContainer = ({
     const checked = e.currentTarget.checked;
     try {
       await changeSubscription(NotificationsType.DailyFeed, checked);
-    } catch (e) {
-      toastr.error(e);
+    } catch (err) {
+      toastr.error(err);
     }
   };
 

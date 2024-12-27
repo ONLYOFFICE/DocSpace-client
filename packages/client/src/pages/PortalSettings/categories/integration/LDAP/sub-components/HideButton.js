@@ -33,8 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 
 const HideButton = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const { text, label, isAdditionalParameters, value, setIsSettingsShown } =
-    props;
+  const { text, isAdditionalParameters, value, setIsSettingsShown } = props;
   const marginProp = isAdditionalParameters ? null : "24px 0 8px 0px";
 
   const onClick = () => {
@@ -48,7 +47,7 @@ const HideButton = (props) => {
       flexDirection="row"
       marginProp={marginProp}
     >
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
@@ -58,7 +57,7 @@ const HideButton = (props) => {
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         className="hide-button settings_unavailable"

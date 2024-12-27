@@ -27,9 +27,9 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { InfoBadge } from "@docspace/shared/components/info-badge";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/shared/enums";
+import { InfoBadge } from "../info-badge";
+import { Link, LinkTarget } from "../link";
+import { DeviceType } from "../../enums";
 
 import { type BetaBadgeProps } from "./BetaBadge.types";
 import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
@@ -50,7 +50,7 @@ const BetaBadge = ({
       {t("Common:BetaBadgeDescription", {
         productName: t("Common:ProductName"),
       })}
-      {!withOutFeedbackLink && (
+      {!withOutFeedbackLink ? (
         <Trans
           t={t}
           ns="Common"
@@ -76,7 +76,7 @@ const BetaBadge = ({
         >
           {`If you have found a bug, please submit it via <1> form </1> or contact us at <3>{{ supportEmail }}</3>`}
         </Trans>
-      )}
+      ) : null}
     </>
   );
 

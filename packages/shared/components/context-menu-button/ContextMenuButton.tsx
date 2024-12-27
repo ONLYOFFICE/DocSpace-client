@@ -224,7 +224,7 @@ const ContextMenuButtonPure = ({
         onMouseUp={onMouseOut}
         title={title}
       />{" "}
-      {state.displayType === ContextMenuButtonDisplayType.dropdown && (
+      {state.displayType === ContextMenuButtonDisplayType.dropdown ? (
         <DropDown
           className={dropDownClassName}
           directionX={directionX}
@@ -238,22 +238,25 @@ const ContextMenuButtonPure = ({
           isDefaultMode={usePortal}
           eventTypes={["click"]}
         >
-          {state.data?.map(
-            (item: ContextMenuModel, index: number) =>
+          {state.data?.map((item: ContextMenuModel, index: number) => {
+            if (!item) return null;
+            const { key, ...rest } = item;
+            return (
               item && (
                 <DropDownItem
-                  {...item}
+                  key={key || index}
+                  {...rest}
                   id={item.id}
-                  key={item.key || index}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
                 />
-              ),
-          )}
+              )
+            );
+          })}
         </DropDown>
-      )}
+      ) : null}
     </div>
   );
 };

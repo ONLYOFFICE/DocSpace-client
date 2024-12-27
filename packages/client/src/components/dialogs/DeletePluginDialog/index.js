@@ -69,7 +69,7 @@ const DeletePluginDialog = (props) => {
           label={t("Common:OkButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           isLoading={isRequestRunning}
           onClick={onDeleteClick}
         />

@@ -26,8 +26,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ToggleBlock from "./ToggleBlock";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
+import ToggleBlock from "./ToggleBlock";
 
 const LimitTimeBlock = (props) => {
   const {
@@ -38,24 +38,26 @@ const LimitTimeBlock = (props) => {
     isExpired,
     language,
     isPrimary,
+    headerText,
+    bodyText,
   } = props;
 
   const { t } = useTranslation(["Common"]);
 
   const onChange = (date) => {
-    const isExpired = date
+    const expired = date
       ? new Date(date).getTime() <= new Date().getTime()
       : false;
 
     setExpirationDate(date);
-    setIsExpired(isExpired);
+    setIsExpired(expired);
   };
 
   if (isPrimary) {
     return (
       <ToggleBlock
-        headerText={props.headerText}
-        bodyText={props.bodyText}
+        headerText={headerText}
+        bodyText={bodyText}
         withToggle={false}
       />
     );

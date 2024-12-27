@@ -255,7 +255,7 @@ const AvatarPure = ({
             </div>
           )
         )}
-        {withTooltip && (
+        {withTooltip ? (
           <Tooltip
             float
             id={uniqueTooltipId}
@@ -263,9 +263,9 @@ const AvatarPure = ({
             place={tooltipPlace}
             opacity={1}
           />
-        )}
+        ) : null}
       </div>
-      {onChangeFile && (
+      {onChangeFile ? (
         <input
           id="customAvatarInput"
           className="custom-file-input"
@@ -277,7 +277,7 @@ const AvatarPure = ({
           style={{ display: "none" }}
           data-testid="file-input"
         />
-      )}
+      ) : null}
     </>
   );
 };

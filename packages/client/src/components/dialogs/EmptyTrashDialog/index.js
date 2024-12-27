@@ -44,12 +44,6 @@ const EmptyTrashDialogComponent = (props) => {
     isArchiveFolder,
   } = props;
 
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
-
   const onClose = () => setEmptyTrashDialogVisible(false);
 
   const onEmptyTrash = () => {
@@ -73,6 +67,12 @@ const EmptyTrashDialogComponent = (props) => {
       onEmptyTrash();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, []);
 
   return (
     <ModalDialog

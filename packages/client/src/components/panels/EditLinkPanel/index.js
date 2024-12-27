@@ -39,14 +39,13 @@ import {
 } from "@docspace/shared/components/share/Share.helpers";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
+import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
-import moment from "moment";
 import { RoleLinkBlock } from "./RoleLinkBlock";
 
 const EditLinkPanel = (props) => {
@@ -123,11 +122,12 @@ const EditLinkPanel = (props) => {
 
   const onDenyDownloadChange = () => setDenyDownload(!denyDownload);
 
+  const onClose = () => setIsVisible(false);
+
   const onClosePanel = () => {
     hasChanges ? setUnsavedChangesDialog(true) : onClose();
   };
 
-  const onClose = () => setIsVisible(false);
   const onSave = () => {
     if (
       (!passwordValue.trim() || !isPasswordValid) &&
@@ -139,39 +139,41 @@ const EditLinkPanel = (props) => {
       return;
     }
 
-    const isExpired = expirationDate
+    const isExpiredCheck = expirationDate
       ? new Date(expirationDate).getTime() <= new Date().getTime()
       : false;
-    if (isExpired) {
-      setIsExpired(isExpired);
+    if (isExpiredCheck) {
+      setIsExpired(isExpiredCheck);
       return;
     }
 
     const externalLink = link ?? { access: 2, sharedTo: {} };
 
-    const newLink = JSON.parse(JSON.stringify(externalLink));
+    const updatedLink = JSON.parse(JSON.stringify(externalLink));
 
-    newLink.sharedTo.title = linkNameValue;
-    newLink.sharedTo.password = passwordAccessIsChecked ? passwordValue : null;
-    newLink.sharedTo.denyDownload = denyDownload;
-    newLink.access = selectedAccessOption.access;
-    if (!isSameDate) newLink.sharedTo.expirationDate = expirationDate;
+    updatedLink.sharedTo.title = linkNameValue;
+    updatedLink.sharedTo.password = passwordAccessIsChecked
+      ? passwordValue
+      : null;
+    updatedLink.sharedTo.denyDownload = denyDownload;
+    updatedLink.access = selectedAccessOption.access;
+    if (!isSameDate) updatedLink.sharedTo.expirationDate = expirationDate;
 
     setIsLoading(true);
-    editExternalLink(roomId, newLink)
-      .then((link) => {
-        setExternalLink(link);
-        setLinkParams({ link, roomId, isPublic, isFormRoom });
+    editExternalLink(roomId, updatedLink)
+      .then((response) => {
+        setExternalLink(response);
+        setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
           copyShareLink(linkValue);
           // toastr.success(t("Files:LinkEditedSuccessfully"));
         } else {
-          copyShareLink(link?.sharedTo?.shareLink);
+          copyShareLink(response?.sharedTo?.shareLink);
 
           // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
-        copyRoomShareLink(link, t, false);
+        copyRoomShareLink(response, t, false);
         onClose();
       })
       .catch((err) => {
@@ -200,10 +202,10 @@ const EditLinkPanel = (props) => {
       accessLink: selectedAccessOption.access,
     };
 
-    const isSameDate = moment(date).isSame(expirationDate);
-    setIsSameDate(isSameDate);
+    const isSameDateCheck = isEqual(date, expirationDate);
+    setIsSameDate(isSameDateCheck);
 
-    if (!isEqual(data, initState) || !isSameDate) {
+    if (!isEqual(data, initState) || !isSameDateCheck) {
       setHasChanges(true);
     } else setHasChanges(false);
   });
@@ -288,7 +290,7 @@ const EditLinkPanel = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledEditLinkBodyContent className="edit-link_body">
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <RoleLinkBlock
               t={t}
               accessOptions={roomAccessOptions}
@@ -296,7 +298,7 @@ const EditLinkPanel = (props) => {
               currentDeviceType={currentDeviceType}
               onSelect={handleSelectAccessOption}
             />
-          )}
+          ) : null}
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -322,7 +324,7 @@ const EditLinkPanel = (props) => {
             isPasswordErrorShow={isPasswordErrorShow}
             setIsPasswordErrorShow={setIsPasswordErrorShow}
           />
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <ToggleBlock
               isLoading={isLoading}
               headerText={t("Files:DisableDownload")}
@@ -330,7 +332,7 @@ const EditLinkPanel = (props) => {
               isChecked={denyDownload}
               onChange={onDenyDownloadChange}
             />
-          )}
+          ) : null}
 
           <LimitTimeBlock
             isExpired={isExpired}

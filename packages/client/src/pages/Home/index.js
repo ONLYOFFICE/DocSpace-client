@@ -25,14 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet, useParams } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { addTagsToRoom, removeTagsFromRoom } from "@docspace/shared/api/rooms";
+import {
+  addTagsToRoom,
+  removeTagsFromRoom,
+  createTag,
+} from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -67,10 +70,9 @@ const PureHome = (props) => {
     fetchFiles,
     fetchRooms,
 
-    //homepage,
+    // homepage,
     setIsSectionHeaderLoading,
     setIsSectionBodyLoading,
-    setIsSectionFilterLoading,
     isLoading,
 
     setToPreviewFile,
@@ -130,9 +132,7 @@ const PureHome = (props) => {
 
     secondaryProgressDataStoreAlert,
 
-    tReady,
     isFrame,
-    showTitle,
     showFilter,
     frameConfig,
     isEmptyPage,
@@ -146,11 +146,9 @@ const PureHome = (props) => {
 
     showFilterLoader,
 
-    enablePlugins,
     getSettings,
     logout,
     login,
-    createTag,
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
@@ -168,7 +166,7 @@ const PureHome = (props) => {
     setGuestReleaseTipDialogVisible,
   } = props;
 
-  //console.log(t("ComingSoon"))
+  // console.log(t("ComingSoon"))
 
   const location = useLocation();
 
@@ -353,9 +351,7 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? (
-        <></>
-      ) : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage ? (
         <>
           <AccountsDialogs />
           <ContactsSelectionArea />
@@ -368,38 +364,36 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {(!isErrorRoomNotAvailable || isContactsPage || isSettingsPage) && (
+        {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
-        )}
+        ) : null}
 
         <Section.SectionSubmenu>
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage && (
+        {isRecycleBinFolder && !isEmptyPage ? (
           <Section.SectionWarning>
             <SectionWarningContent />
           </Section.SectionWarning>
-        )}
+        ) : null}
 
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           (!isContactsEmptyView && isContactsPage)) &&
-          !isSettingsPage && (
-            <Section.SectionFilter>
-              {isFrame ? (
-                showFilter && <SectionFilterContent />
-              ) : (
-                <SectionFilterContent />
-              )}
-            </Section.SectionFilter>
-          )}
+        !isSettingsPage ? (
+          <Section.SectionFilter>
+            {isFrame ? (
+              showFilter && <SectionFilterContent />
+            ) : (
+              <SectionFilterContent />
+            )}
+          </Section.SectionFilter>
+        ) : null}
 
         <Section.SectionBody isAccounts={isContactsPage}>
-          <>
-            <Outlet />
-          </>
+          <Outlet />
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -425,7 +419,6 @@ export const Component = inject(
     peopleStore,
     filesActionsStore,
     oformsStore,
-    tagsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -485,8 +478,6 @@ export const Component = inject(
       wsCreatedPDFForm,
     } = filesStore;
 
-    const { createTag } = tagsStore;
-
     const { gallerySelected } = oformsStore;
 
     const {
@@ -535,7 +526,6 @@ export const Component = inject(
       setFrameConfig,
       frameConfig,
       isFrame,
-      showCatalog,
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
@@ -554,8 +544,7 @@ export const Component = inject(
       groupsStore;
 
     const isEmptyGroups =
-      !groupsIsFiltered &&
-      ((groups && groups.length === 0) || !Boolean(groups));
+      !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -566,7 +555,7 @@ export const Component = inject(
     // }
 
     return {
-      //homepage: config.homepage,
+      // homepage: config.homepage,
       firstLoad,
       dragging,
       viewAs,
@@ -654,8 +643,6 @@ export const Component = inject(
       getSettings,
       logout: authStore.logout,
       login: authStore.login,
-
-      createTag,
 
       loadCurrentUser: userStore.loadCurrentUser,
       getRooms,

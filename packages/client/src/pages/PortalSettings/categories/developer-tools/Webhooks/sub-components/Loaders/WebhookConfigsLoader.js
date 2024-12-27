@@ -74,21 +74,21 @@ const TableRowLoader = styled.div`
   margin-bottom: 27px;
 `;
 
-export const WebhookConfigsLoader = () => {
-  const RowLoader = () => (
-    <TableRowLoader>
-      <RectangleSkeleton width="888px" height="20px" />
-      <div className="iconsLoader">
-        <RectangleSkeleton
-          width="28px"
-          height="16px"
-          className="roundedStatusLoader"
-        />
-        <RectangleSkeleton width="16px" height="16px" />
-      </div>
-    </TableRowLoader>
-  );
+const RowLoader = () => (
+  <TableRowLoader>
+    <RectangleSkeleton width="888px" height="20px" />
+    <div className="iconsLoader">
+      <RectangleSkeleton
+        width="28px"
+        height="16px"
+        className="roundedStatusLoader"
+      />
+      <RectangleSkeleton width="16px" height="16px" />
+    </div>
+  </TableRowLoader>
+);
 
+export const WebhookConfigsLoader = () => {
   return (
     <LoaderWrapper>
       <NavContainerLoader>

@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "@docspace/shared/api/people/types";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
-import type { TColorScheme } from "@docspace/shared/themes";
-import type { DeviceType } from "@docspace/shared/enums";
+import type { TUser } from "../../api/people/types";
+import type FirebaseHelper from "../../utils/firebase";
+import type { TColorScheme } from "../../themes";
+import type { DeviceType } from "../../enums";
 
 export interface ErrorUnavailableProps {}
 

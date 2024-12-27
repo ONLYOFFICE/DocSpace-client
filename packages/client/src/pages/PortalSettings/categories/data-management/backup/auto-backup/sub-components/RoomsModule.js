@@ -27,8 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { BackupStorageType } from "@docspace/shared/enums";
-import ScheduleComponent from "./ScheduleComponent";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import ScheduleComponent from "./ScheduleComponent";
 
 class RoomsModule extends React.PureComponent {
   onSelectFolder = (id) => {

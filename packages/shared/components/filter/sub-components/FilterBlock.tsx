@@ -535,16 +535,14 @@ const FilterBlock = ({
             )}
           </StyledFilterBlock>
         </ModalDialog.Container>
-      ) : (
-        <></>
-      )}
+      ) : null}
 
       <ModalDialog.Header>
         <StyledFilterBlockHeader>
           {filterHeader}
 
           <div className="additional-icons-container">
-            {showClearFilterBtn && (
+            {showClearFilterBtn ? (
               <IconButton
                 key="filter-icon"
                 size={17}
@@ -554,7 +552,7 @@ const FilterBlock = ({
                 isClickable
                 isFill
               />
-            )}
+            ) : null}
           </div>
         </StyledFilterBlockHeader>
       </ModalDialog.Header>

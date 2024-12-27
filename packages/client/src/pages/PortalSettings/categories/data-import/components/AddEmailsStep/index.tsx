@@ -124,9 +124,9 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 
   return (
     <Wrapper>
-      {users.withoutEmail.length > 0 && (
+      {users.withoutEmail.length > 0 ? (
         <NoEmailUsersBlock t={t} users={users.withoutEmail.length} />
-      )}
+      ) : null}
 
       {users.withoutEmail.length > 0 ? (
         <>
@@ -146,14 +146,14 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 
           <AccountsTable t={t} accountsData={filteredAccounts} />
 
-          {users.withoutEmail.length > PAGE_SIZE && (
+          {users.withoutEmail.length > PAGE_SIZE ? (
             <AccountsPaging
               t={t}
               numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
         </>
       ) : (
         <>
@@ -164,9 +164,9 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
         </>
       )}
 
-      {filteredAccounts.length > 0 && Buttons}
+      {filteredAccounts.length > 0 ? Buttons : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -175,55 +175,53 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(
-  ({ importAccountsStore, currentQuotaStore, dialogsStore }) => {
-    const {
-      incrementStep,
-      decrementStep,
-      searchValue,
-      setSearchValue,
-      users,
-      setResultUsers,
-      areCheckedUsersEmpty,
+export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
+  const {
+    incrementStep,
+    decrementStep,
+    searchValue,
+    setSearchValue,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
 
-      cancelMigration,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
-      totalUsedUsers,
-      quota,
-    } = importAccountsStore;
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
+    totalUsedUsers,
+    quota,
+  } = importAccountsStore;
 
-    const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-      dialogsStore;
+  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+    dialogsStore;
 
-    return {
-      incrementStep,
-      decrementStep,
-      searchValue,
-      setSearchValue,
-      users,
-      setResultUsers,
-      areCheckedUsersEmpty,
+  return {
+    incrementStep,
+    decrementStep,
+    searchValue,
+    setSearchValue,
+    users,
+    setResultUsers,
+    areCheckedUsersEmpty,
 
-      cancelMigration,
-      clearCheckedAccounts,
-      setStep,
-      setWorkspace,
-      setMigratingWorkspace,
-      setMigrationPhase,
+    cancelMigration,
+    clearCheckedAccounts,
+    setStep,
+    setWorkspace,
+    setMigratingWorkspace,
+    setMigrationPhase,
 
-      cancelUploadDialogVisible,
-      setCancelUploadDialogVisible,
-      totalUsedUsers,
-      quota,
-    };
-  },
-)(observer(AddEmailsStep));
+    cancelUploadDialogVisible,
+    setCancelUploadDialogVisible,
+    totalUsedUsers,
+    quota,
+  };
+})(observer(AddEmailsStep));

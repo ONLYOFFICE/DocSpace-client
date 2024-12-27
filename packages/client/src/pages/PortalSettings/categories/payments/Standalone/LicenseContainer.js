@@ -57,7 +57,7 @@ const LicenseContainer = (props) => {
       setIsLicenseUploading(true);
     }, [100]);
 
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append("files", file);
 
     await setPaymentsLicense(null, fd);

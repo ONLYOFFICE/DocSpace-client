@@ -31,9 +31,9 @@ import React, {
   useMemo,
 } from "react";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
-import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
+import { DeviceType } from "../../../../enums";
+import { includesMethod } from "../../../../utils/typeGuards";
+import type { TContextMenuRef } from "../../../context-menu";
 
 import { isHeic, isTiff } from "../../MediaViewer.utils";
 import { StyledViewerContainer } from "../../MediaViewer.styled";
@@ -242,24 +242,24 @@ export const Viewer = (props: ViewerProps) => {
 
   return (
     <StyledViewerContainer dir="ltr" visible={visible}>
-      {!isFullscreen && !isMobile && panelVisible && !isPdf && (
+      {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails
           title={title}
           onMaskClick={handleMaskClick}
           showCloseButton={!isPublicFile}
         />
-      )}
+      ) : null}
 
-      {playlist.length > 1 && !isFullscreen && !isMobile && (
+      {playlist.length > 1 && !isFullscreen && !isMobile ? (
         <>
-          {isNotFirstElement && !isPDFSidebarOpen && (
+          {isNotFirstElement && !isPDFSidebarOpen ? (
             <PrevButton prevClick={onPrevClick} />
-          )}
-          {isNotLastElement && (
+          ) : null}
+          {isNotLastElement ? (
             <NextButton isPDFFile={isPdf} nextClick={onNextClick} />
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
 
       {isImage ? (
         <ImageViewer

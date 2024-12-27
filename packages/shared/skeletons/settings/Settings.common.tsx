@@ -90,7 +90,7 @@ const SettingsSection = ({
   withTitle = true,
 }: SettingsSectionProps) => (
   <Box displayProp="grid" style={{ gridGap: sectionGap }}>
-    {withTitle && <SectionTitle />}
+    {withTitle ? <SectionTitle /> : null}
     <Setting width={width1} />
     <Setting width={width2} />
   </Box>

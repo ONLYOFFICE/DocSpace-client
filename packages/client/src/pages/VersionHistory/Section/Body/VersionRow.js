@@ -28,22 +28,15 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import { useNavigate } from "react-router-dom";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
-import VersionBadge from "./VersionBadge";
-import { StyledVersionRow } from "./StyledVersionHistory";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import {
-  commonIconsStyles,
-  getCorrectDate,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
@@ -52,17 +45,10 @@ import {
   MAX_FILE_COMMENT_LENGTH,
   MEDIA_VIEW_URL,
 } from "@docspace/shared/constants";
-import moment from "moment-timezone";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-const StyledExternalLinkIcon = styled(ExternalLinkIcon).attrs(
-  injectDefaultTheme,
-)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.filesVersionHistory.fill};
-  }
-`;
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { StyledVersionRow } from "./StyledVersionHistory";
+import VersionBadge from "./VersionBadge";
 
 const VersionRow = (props) => {
   const {
@@ -146,7 +132,7 @@ const VersionRow = (props) => {
     setShowEditPanel(!showEditPanel);
   };
   const onOpenFile = () => {
-    const { MediaView, ImageView } = info?.viewAccessibility;
+    const { MediaView, ImageView } = info?.viewAccessibility ?? {};
 
     if (MediaView || ImageView) {
       return window.open(
@@ -280,7 +266,7 @@ const VersionRow = (props) => {
               fontWeight={600}
               fontSize="14px"
               title={versionDate}
-              isTextOverflow={true}
+              isTextOverflow
               className="version-link-file"
             >
               {versionDate}
@@ -300,7 +286,7 @@ const VersionRow = (props) => {
                 fontWeight={600}
                 fontSize="14px"
                 title={title}
-                isTextOverflow={true}
+                isTextOverflow
                 className="version-link-file"
               >
                 {title}
@@ -308,38 +294,36 @@ const VersionRow = (props) => {
             )}
           </Box>
 
-          {/*<Text
+          {/* <Text
             className="version_content-length"
             fontWeight={600}
             color={theme.filesVersionHistory.color}
             fontSize="14px"
           >
             {info.contentLength}
-          </Text>*/}
+          </Text> */}
         </Box>
         <Box className="version-comment-wrapper" displayProp="flex">
           <>
-            {showEditPanel && (
-              <>
-                <Textarea
-                  className="version_edit-comment"
-                  onChange={onChange}
-                  fontSize={12}
-                  heightTextArea="54px"
-                  value={commentValue}
-                  isDisabled={isSavingComment}
-                  autoFocus={true}
-                  areaSelect={true}
-                />
-              </>
-            )}
+            {showEditPanel ? (
+              <Textarea
+                className="version_edit-comment"
+                onChange={onChange}
+                fontSize={12}
+                heightTextArea="54px"
+                value={commentValue}
+                isDisabled={isSavingComment}
+                autoFocus
+                areaSelect
+              />
+            ) : null}
 
-            <Text className="version_text" truncate={true}>
+            <Text className="version_text" truncate>
               {info.comment}
             </Text>
           </>
         </Box>
-        {showEditPanel && (
+        {showEditPanel ? (
           <Box className="version_edit-comment" marginProp="8px 0 2px 70px">
             <Box
               className="version_edit-comment-button-primary"
@@ -348,7 +332,7 @@ const VersionRow = (props) => {
               <Button
                 isDisabled={isSavingComment}
                 size="extraSmall"
-                scale={true}
+                scale
                 primary
                 onClick={onSaveClick}
                 label={t("Common:SaveButton")}
@@ -361,13 +345,13 @@ const VersionRow = (props) => {
               <Button
                 isDisabled={isSavingComment}
                 size="extraSmall"
-                scale={true}
+                scale
                 onClick={onCancelClick}
                 label={t("Common:CancelButton")}
               />
             </Box>
           </Box>
-        )}
+        ) : null}
       </div>
     </StyledVersionRow>
   );

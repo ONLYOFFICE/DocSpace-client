@@ -67,9 +67,9 @@ const RowLoader = ({
       >
         <RectangleSkeleton className="avatar" width="32px" height="32px" />
         <RectangleSkeleton width="212px" height="16px" />
-        {isMultiSelect && (
+        {isMultiSelect ? (
           <RectangleSkeleton className="checkbox" width="16px" height="16px" />
-        )}
+        ) : null}
       </div>
     );
   };
@@ -92,12 +92,12 @@ const RowLoader = ({
       {...rest}
       data-testid="row-loader"
     >
-      {withAllSelect && (
+      {withAllSelect ? (
         <>
           {getRowItem(-1)}
           <div className={styles.divider} />
         </>
-      )}
+      ) : null}
       {getRowItems()}
     </div>
   ) : (

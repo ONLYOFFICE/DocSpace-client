@@ -58,15 +58,11 @@ const PaidQuotaLimitError = ({
   return (
     <>
       <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-      {!isRoomAdmin && (
-        <ColorTheme
-          themeId={ThemeId.Link}
-          isHovered={true}
-          onClick={onClickPayments}
-        >
+      {!isRoomAdmin ? (
+        <ColorTheme themeId={ThemeId.Link} isHovered onClick={onClickPayments}>
           {t("Common:PaymentsTitle")}
         </ColorTheme>
-      )}
+      ) : null}
     </>
   );
 };

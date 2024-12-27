@@ -133,7 +133,7 @@ const createToastContent = (
       <Icon size={IconSizeType.medium} type={type} />
     </div>
     <div className="toast-text-container">
-      {title && <Text className="toast-title">{title}</Text>}
+      {title ? <Text className="toast-title">{title}</Text> : null}
       {typeof data === "string"
         ? data && <Text className="toast-text">{data}</Text>
         : data}

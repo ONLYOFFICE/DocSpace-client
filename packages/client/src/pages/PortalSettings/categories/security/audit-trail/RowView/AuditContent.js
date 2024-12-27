@@ -76,7 +76,7 @@ const AuditContent = ({
         <Text
           fontWeight={600}
           fontSize="14px"
-          isTextOverflow={true}
+          isTextOverflow
           className="settings_unavailable"
         >
           {item.user}
@@ -87,7 +87,7 @@ const AuditContent = ({
         containerMinWidth="120px"
         fontSize="12px"
         fontWeight={600}
-        truncate={true}
+        truncate
         className="settings_unavailable"
       >
         {dateStr}
@@ -98,7 +98,7 @@ const AuditContent = ({
         fontWeight={600}
         className="settings_unavailable"
       >
-        {`${item.context ? item.context + " |" : ""} ${item.action}`}
+        {`${item.context ? `${item.context} |` : ""} ${item.action}`}
       </Text>
     </StyledRowContent>
   );

@@ -44,13 +44,11 @@ class GoogleCloudStorage extends React.Component {
     const { t, selectedStorage } = this.props;
 
     return (
-      <>
-        <GoogleCloudSettings
-          t={t}
-          selectedStorage={selectedStorage}
-          isNeedFilePath
-        />
-      </>
+      <GoogleCloudSettings
+        t={t}
+        selectedStorage={selectedStorage}
+        isNeedFilePath
+      />
     );
   }
 }

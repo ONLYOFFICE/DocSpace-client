@@ -152,12 +152,13 @@ export async function getFolderPath(folderId: number) {
 }
 
 export async function getFolder(
-  folderId: string | number,
+  folderIdParam: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
   share?: string,
 ) {
-  let params = folderId;
+  let params = folderIdParam;
+  let folderId = folderIdParam;
 
   if (folderId && typeof folderId === "string") {
     folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));

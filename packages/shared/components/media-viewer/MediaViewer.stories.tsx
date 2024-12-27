@@ -117,7 +117,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
   return (
     <>
       <Button label="Open viewer" onClick={openMediaViewer} />
-      {visible && (
+      {visible ? (
         <Portal
           visible
           element={
@@ -136,7 +136,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
             />
           }
         />
-      )}
+      ) : null}
     </>
   );
 };

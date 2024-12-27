@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
 import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
@@ -97,14 +96,14 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
-            !window.navigator.userAgent.includes("ZoomApps") && (
-              <Button
-                scale
-                label={t("Common:LogoutButton")}
-                size={"medium"}
-                onClick={onClick}
-              />
-            )}
+          !window.navigator.userAgent.includes("ZoomApps") ? (
+            <Button
+              scale
+              label={t("Common:LogoutButton")}
+              size="medium"
+              onClick={onClick}
+            />
+          ) : null}
 
           <ColorTheme
             textAlign="center"

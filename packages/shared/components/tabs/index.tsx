@@ -188,9 +188,9 @@ const Tabs = (props: TabsProps) => {
                 classes,
               )}
             />
-            {item.badge && (
+            {item.badge ? (
               <span className={styles.tabBadge}>{item.badge}</span>
-            )}
+            ) : null}
           </div>
         );
       })}
@@ -199,15 +199,15 @@ const Tabs = (props: TabsProps) => {
 
   return (
     <div className={classNames(styles.tabs, classes)} {...rest}>
-      {multiple && renderContent}
+      {multiple ? renderContent : null}
 
-      {!multiple && (
+      {!multiple ? (
         <div
           data-sticky
           className={classNames(styles.sticky, "sticky")}
           style={{ top: stickyTop }}
         >
-          {!isViewFirstTab && <div className={styles.blurAhead} />}
+          {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
           <Scrollbar
             ref={scrollRef}
             autoHide={false}
@@ -216,13 +216,13 @@ const Tabs = (props: TabsProps) => {
           >
             {renderContent}
           </Scrollbar>
-          {!isViewLastTab && <div className={styles.blurBack} />}
+          {!isViewLastTab ? <div className={styles.blurBack} /> : null}
         </div>
-      )}
+      ) : null}
       <div className={styles.stickyIndent} />
-      {!multiple && items[currentItem]?.content && (
+      {!multiple && items[currentItem]?.content ? (
         <div className={styles.tabsBody}>{items[currentItem].content}</div>
-      )}
+      ) : null}
     </div>
   );
 };

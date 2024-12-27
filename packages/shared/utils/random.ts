@@ -24,36 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  ForwardedRef,
-  PropsWithChildren,
-  forwardRef,
-  useContext,
-} from "react";
-import { ThemeContext } from "styled-components";
-
-import { StyledThemeComboButton } from "./Combobox.styled";
-import type { ComboButtonThemeProps } from "./Combobox.types";
-
-const ComboButtonTheme = forwardRef(
-  (
-    props: PropsWithChildren<ComboButtonThemeProps>,
-    ref: ForwardedRef<HTMLDivElement>,
-  ) => {
-    const defaultTheme = useContext(ThemeContext);
-
-    const currentColorScheme = defaultTheme?.currentColorScheme;
-
-    return (
-      <StyledThemeComboButton
-        {...props}
-        ref={ref}
-        $currentColorScheme={currentColorScheme}
-      />
-    );
-  },
-);
-
-ComboButtonTheme.displayName = "ComboButtonTheme";
-
-export default ComboButtonTheme;
+export const createRandomTagId = () => {
+  return `_${Math.random().toString(36).substr(2, 9)}`;
+};

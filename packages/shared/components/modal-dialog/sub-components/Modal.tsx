@@ -103,7 +103,7 @@ const Modal = ({
     : { className: "" };
 
   const onTouchMove = () => {
-    const activeElement = document.activeElement;
+    const { activeElement } = document;
     if (
       activeElement instanceof HTMLElement &&
       activeElement?.tagName === "INPUT"
@@ -201,7 +201,7 @@ const Modal = ({
           style={style}
           onMouseDown={validateOnMouseDown}
         >
-          {!hideContent && (
+          {!hideContent ? (
             <div
               id="modal-dialog"
               ref={contentRef}
@@ -228,7 +228,7 @@ const Modal = ({
                 containerComponent
               ) : (
                 <FormWrapper withForm={withForm || false} onSubmit={onSubmit}>
-                  {header && (
+                  {header ? (
                     <AsideHeader
                       id="modal-header-swipe"
                       className={headerClassName}
@@ -236,9 +236,9 @@ const Modal = ({
                       onCloseClick={onClose}
                       {...rest}
                     />
-                  )}
+                  ) : null}
 
-                  {body && (
+                  {body ? (
                     <div
                       {...bodyProps}
                       {...iOSActions}
@@ -258,16 +258,16 @@ const Modal = ({
                         bodyComponent
                       )}
                     </div>
-                  )}
-                  {footer && (
+                  ) : null}
+                  {footer ? (
                     <div {...footerProps} className={footerClassName}>
                       {footerComponent}
                     </div>
-                  )}
+                  ) : null}
                 </FormWrapper>
               )}
             </div>
-          )}
+          ) : null}
         </div>
       </ModalBackdrop>
     </div>

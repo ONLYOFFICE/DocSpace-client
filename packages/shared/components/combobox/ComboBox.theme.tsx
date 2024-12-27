@@ -24,27 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, StoryObj } from "@storybook/react";
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  forwardRef,
+  useContext,
+} from "react";
+import { ThemeContext } from "styled-components";
 
-import { CodeInput } from "./CodeInput";
+import { StyledThemeComboButton } from "./ComboBox.styled";
+import type { TComboButtonThemeProps } from "./ComboBox.types";
 
-const meta = {
-  title: "Components/CodeInput",
-  component: CodeInput,
-  parameters: {
-    docs: {
-      description: {
-        component: "Used to display an code input.",
-      },
-    },
+const ComboButtonTheme = forwardRef(
+  (
+    props: PropsWithChildren<TComboButtonThemeProps>,
+    ref: ForwardedRef<HTMLDivElement>,
+  ) => {
+    const defaultTheme = useContext(ThemeContext);
+
+    const currentColorScheme = defaultTheme?.currentColorScheme;
+
+    return (
+      <StyledThemeComboButton
+        {...props}
+        ref={ref}
+        $currentColorScheme={currentColorScheme}
+      />
+    );
   },
-} satisfies Meta<typeof CodeInput>;
-type Story = StoryObj<typeof CodeInput>;
+);
 
-export default meta;
+ComboButtonTheme.displayName = "ComboButtonTheme";
 
-export const Default: Story = {
-  args: {
-    onSubmit: () => {},
-  },
-};
+export default ComboButtonTheme;

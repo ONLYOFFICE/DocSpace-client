@@ -121,7 +121,6 @@ const Template = ({ ...args }) => {
   const [isOpenUploads, setIsOpenUploads] = useState(false);
   const [isOpenOperations, setIsOpenOperations] = useState(false);
   const [isOpenButton, setIsOpenButton] = useState(false);
-  const [opened, setOpened] = useState<boolean | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [state, setState] = useState({ uploads: 0, operations: 0 });
 
@@ -228,7 +227,7 @@ const Template = ({ ...args }) => {
         withButton
         isOpenButton={isOpenButton}
         percent={uploadPercent}
-        opened={opened ?? false}
+        opened={false}
       />
     </StyledWrapper>
   );

@@ -70,7 +70,7 @@ const FilterBlockLoader = ({
       {...rest}
       data-testid="filter-block-loader"
     >
-      {!isRooms && !isContactsPage && (
+      {!isRooms && !isContactsPage ? (
         <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
@@ -99,9 +99,9 @@ const FilterBlockLoader = ({
             />
           </div>
         </div>
-      )}
+      ) : null}
 
-      {!isContactsInsideGroupPage && (
+      {!isContactsInsideGroupPage ? (
         <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="51"
@@ -123,7 +123,7 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-          {(isRooms || isContactsGroupsPage) && (
+          {isRooms || isContactsGroupsPage ? (
             <div className="row-loader">
               <RectangleSkeleton
                 width="16"
@@ -138,11 +138,11 @@ const FilterBlockLoader = ({
                 className="loader-item"
               />
             </div>
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
 
-      {(isRooms || isContactsPeoplePage || isContactsInsideGroupPage) && (
+      {isRooms || isContactsPeoplePage || isContactsInsideGroupPage ? (
         <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
@@ -177,11 +177,11 @@ const FilterBlockLoader = ({
             ) : null}
           </div>
         </div>
-      )}
+      ) : null}
 
-      {(isContactsPeoplePage ||
-        isContactsGuestsPage ||
-        isContactsInsideGroupPage) && (
+      {isContactsPeoplePage ||
+      isContactsGuestsPage ||
+      isContactsInsideGroupPage ? (
         <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
@@ -216,9 +216,9 @@ const FilterBlockLoader = ({
             />
           </div>
         </div>
-      )}
+      ) : null}
 
-      {!isContactsGroupsPage && (
+      {!isContactsGroupsPage ? (
         <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="50"
@@ -341,7 +341,7 @@ const FilterBlockLoader = ({
             )}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

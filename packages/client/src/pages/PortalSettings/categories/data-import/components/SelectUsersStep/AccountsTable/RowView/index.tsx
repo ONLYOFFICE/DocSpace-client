@@ -156,13 +156,13 @@ const RowView = (props: RowViewProps) => {
         <>
           <StyledRow>
             <div className="row-header-item">
-              {checkedUsers.withEmail.length > 0 && (
+              {checkedUsers.withEmail.length > 0 ? (
                 <Checkbox
                   isIndeterminate={isIndeterminate}
                   isChecked={isChecked}
                   onChange={toggleAll}
                 />
-              )}
+              ) : null}
               <Text className="row-header-title">{t("Common:Name")}</Text>
             </div>
           </StyledRow>

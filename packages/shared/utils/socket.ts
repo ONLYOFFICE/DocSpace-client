@@ -365,7 +365,7 @@ class SocketHelper {
 
       const { url, publicRoomKey } = this.connectionSettings;
 
-      const origin = window.location.origin;
+      const { origin } = window.location;
 
       const config: TConfig = {
         withCredentials: true,

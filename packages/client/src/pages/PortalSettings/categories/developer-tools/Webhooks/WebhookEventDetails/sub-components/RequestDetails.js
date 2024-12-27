@@ -33,6 +33,7 @@ import { inject, observer } from "mobx-react";
 import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { globalColors } from "@docspace/shared/themes";
+import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`
   width: 100%;
@@ -76,26 +77,17 @@ const ErrorMessageTooltip = styled.div`
   }
 `;
 
-function isJSON(jsonString) {
-  try {
-    const parsedJson = JSON.parse(jsonString);
-    return parsedJson && typeof parsedJson === "object";
-  } catch (e) {}
-
-  return false;
-}
-
 const RequestDetails = ({ eventDetails }) => {
   const { t } = useTranslation(["Webhooks"]);
 
   return (
     <DetailsWrapper>
-      {eventDetails.status === 0 && (
+      {eventDetails.status === 0 ? (
         <ErrorMessageTooltip>
           <img src={DangerIcon} alt="danger icon" />
           {t("FailedToConnect")}
         </ErrorMessageTooltip>
-      )}
+      ) : null}
       <Text as="h3" fontWeight={600} className="mb-4 mt-7">
         {t("RequestPostHeader")}
       </Text>

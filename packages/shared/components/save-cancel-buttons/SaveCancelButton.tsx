@@ -138,9 +138,9 @@ const SaveCancelButtons = ({
           scale={isMobile()}
         />
       </div>
-      {showReminder && reminderText && (
+      {showReminder && reminderText ? (
         <Text className="unsaved-changes">{reminderText}</Text>
-      )}
+      ) : null}
     </StyledSaveCancelButtons>
   );
 };

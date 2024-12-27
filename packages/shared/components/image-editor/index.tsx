@@ -43,7 +43,6 @@ const ImageEditor = ({
   className,
   disableImageRescaling,
   editorBorderRadius,
-  maxImageSize,
   onChangeFile,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
@@ -56,7 +55,7 @@ const ImageEditor = ({
 
   return (
     <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
+      {image.uploadedFile && !isDefaultAvatar ? (
         <div className={classNameWrapperImageCropper}>
           <ImageCropper
             t={t}
@@ -72,7 +71,7 @@ const ImageEditor = ({
           />
           {Preview}
         </div>
-      )}
+      ) : null}
       {/* <Dropzone
         t={t}
         setUploadedFile={setUploadedFile}

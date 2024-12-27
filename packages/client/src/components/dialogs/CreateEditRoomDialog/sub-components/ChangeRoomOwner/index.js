@@ -59,9 +59,9 @@ const ChangeRoomOwner = ({
 
       <div className="change-owner-display">
         <Avatar
-          className={"change-owner-display-avatar"}
+          className="change-owner-display-avatar"
           size="min"
-          role={""}
+          role=""
           isDefaultSource={roomOwner.hasAvatar}
           source={roomOwner.avatarSmall ?? roomOwner.avatar}
           userName={userName}
@@ -70,15 +70,15 @@ const ChangeRoomOwner = ({
           <Text fontWeight={600} fontSize="13px" noSelect>
             {userName}
           </Text>
-          {roomOwner.id === currentUserId && (
+          {roomOwner.id === currentUserId ? (
             <Text className="me-label" noSelect>
               ({t("Common:MeLabel")})
             </Text>
-          )}
+          ) : null}
         </div>
       </div>
 
-      {canChangeOwner && (
+      {canChangeOwner ? (
         <Link
           className="change-owner-link"
           isHovered
@@ -90,7 +90,7 @@ const ChangeRoomOwner = ({
         >
           {t("Common:ChangeButton")}
         </Link>
-      )}
+      ) : null}
     </Styled.ChangeRoomOwner>
   );
 };

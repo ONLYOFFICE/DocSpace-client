@@ -192,18 +192,21 @@ const GroupMenuItem = ({
         ref={buttonRef}
         size={ButtonSize.extraSmall}
       />
-      {withDropDown && (
+      {withDropDown ? (
         <DropDown
           open={open}
           clickOutsideAction={onClickOutside}
           forwardedRef={buttonRef}
           zIndex={250}
         >
-          {options?.map((option) => (
-            <DropDownItem {...option} key={option.key} setOpen={setOpen} />
-          ))}
+          {options?.map((option) => {
+            const { key, ...rest } = option;
+            return (
+              <DropDownItem key={option.key} {...rest} setOpen={setOpen} />
+            );
+          })}
         </DropDown>
-      )}
+      ) : null}
     </>
   );
 };

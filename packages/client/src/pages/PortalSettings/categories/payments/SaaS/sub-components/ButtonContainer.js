@@ -28,9 +28,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
+import { toastr } from "@docspace/shared/components/toast";
 import RequestButtonContainer from "./RequestButtonContainer";
 import UpdatePlanButtonContainer from "./UpdatePlanButtonContainer";
-import { toastr } from "@docspace/shared/components/toast";
 
 const StyledBody = styled.div`
   button {
@@ -60,7 +60,7 @@ const ButtonContainer = ({
         <Button
           className="pay-button"
           label={t("Pay")}
-          size={"medium"}
+          size="medium"
           primary
           isDisabled={isLoading || isDisabled}
           onClick={goToStripeAccount}

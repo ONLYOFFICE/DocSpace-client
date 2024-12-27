@@ -260,12 +260,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               dir="auto"
             >
               {label}
-              {displayFileExtension && ext && (
+              {displayFileExtension && ext ? (
                 <span className="item-file-exst">{ext}</span>
-              )}
+              ) : null}
             </Text>
 
-            {lifetimeTooltip && (
+            {lifetimeTooltip ? (
               <>
                 <ReactSVG
                   data-tooltip-id={`${item.id}_iconTooltip`}
@@ -279,7 +279,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
                   maxWidth="300px"
                 />
               </>
-            )}
+            ) : null}
           </div>
         )}
 

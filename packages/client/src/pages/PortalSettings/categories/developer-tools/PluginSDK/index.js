@@ -64,22 +64,22 @@ const PluginSDK = ({
     if (isLoading) {
       return [
         <RectangleSkeleton
-          key={"plugin-1"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-1"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
         <RectangleSkeleton
-          key={"plugin-2"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-2"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
         <RectangleSkeleton
-          key={"plugin-3"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-3"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
       ];
     }
@@ -87,15 +87,19 @@ const PluginSDK = ({
     const list = systemPluginList.map((p) => (
       <div key={p.name} className="plugin-list__item">
         <div className="plugin-list__item-info">
-          <img className="plugin-logo" src={`${p.iconUrl}/assets/${p.image}`} />
+          <img
+            className="plugin-logo"
+            src={`${p.iconUrl}/assets/${p.image}`}
+            alt="Plugin logo"
+          />
           <div className="plugin-info-container">
             <Text>{p.name}</Text>
-            <Text className={"description"}>
+            <Text className="description">
               {t("VersionHistory:Version")} {p.version}
             </Text>
           </div>
         </div>
-        <Text className={"description-text"} title={p.description}>
+        <Text className="description-text" title={p.description}>
           {p.description}
         </Text>
         <Button
@@ -103,7 +107,7 @@ const PluginSDK = ({
           onClick={() => window.open(p.homePage, "_blank")}
           scale
           label={t("GoToRepo")}
-          size={"small"}
+          size="small"
         />
       </div>
     ));
@@ -115,41 +119,41 @@ const PluginSDK = ({
 
   return (
     <StyledContainer>
-      <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
+      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ExpandFunctionality")}
       </Text>
       <Text
-        className={"description"}
-        fontSize={"13px"}
+        className="description"
+        fontSize="13px"
         fontWeight={400}
-        lineHeight={"20px"}
+        lineHeight="20px"
       >
         {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
       </Text>
       <Text
-        className={"description"}
-        fontSize={"13px"}
+        className="description"
+        fontSize="13px"
         fontWeight={400}
-        lineHeight={"20px"}
+        lineHeight="20px"
       >
         {t("PluginSDKInstruction")}
       </Text>
       <Button
-        className={"read-instructions-button"}
+        className="read-instructions-button"
         label={t("Common:ReadInstructions")}
         primary
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(apiPluginSDKLink, "_blank")}
-      ></Button>
-      {!isEmptyList && list.length > 0 && (
+      />
+      {!isEmptyList && list.length > 0 ? (
         <>
-          <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
+          <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
           <div className="plugin-list">{list}</div>
         </>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

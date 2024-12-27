@@ -598,3 +598,15 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
+
+export type ProvidersProps = {
+  emptyScreenProps: TSelectorEmptyScreen;
+  breadCrumbsProps: TSelectorBreadCrumbs;
+  infoBarProps: TInfoBar;
+  searchProps: TSelectorSearch;
+  selectAllProps: TSelectorSelectAll & {
+    isAllChecked: boolean;
+    isAllIndeterminate: boolean;
+  };
+  tabsProps: TSelectorTabs;
+};

@@ -26,9 +26,9 @@
 
 import React from "react";
 import classNames from "classnames";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Heading } from "@docspace/shared/components/heading";
+import { Text } from "../text";
+import { Button, ButtonSize } from "../button";
+import { Heading } from "../heading";
 import PortalLogo from "../portal-logo/PortalLogo";
 import { Scrollbar } from "../scrollbar";
 
@@ -374,18 +374,18 @@ const ErrorContainer = (props: ErrorContainerProps) => {
             <ellipse cx="46" cy="46" rx="12" ry="46" fill="#D0E7F9" />
           </svg>
         </div>
-        {headerText && (
+        {headerText ? (
           <Heading id="header" type="header">
             {headerText}
           </Heading>
-        )}
-        {bodyText && <Text id="text">{bodyText}</Text>}
-        {customizedBodyText && (
+        ) : null}
+        {bodyText ? <Text id="text">{bodyText}</Text> : null}
+        {customizedBodyText ? (
           <Text id="customized-text" fontWeight={600} fontSize="13px">
             {customizedBodyText}
           </Text>
-        )}
-        {buttonText && onClickButton && (
+        ) : null}
+        {buttonText && onClickButton ? (
           <div id="button-container">
             <Button
               id="button"
@@ -396,7 +396,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
               primary={isPrimaryButton}
             />
           </div>
-        )}
+        ) : null}
         {children}
       </div>
     </Scrollbar>

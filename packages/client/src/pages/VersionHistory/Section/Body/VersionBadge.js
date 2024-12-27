@@ -94,7 +94,7 @@ const VersionBadge = ({
       className={className}
       marginProp="0 8px"
       displayProp="flex"
-      $isVersion={true}
+      $isVersion
       theme={theme}
       $isFirst={index === 0}
       {...rest}
@@ -113,12 +113,12 @@ const VersionBadge = ({
         fontSize="12px"
         reverse={isJapanese}
       >
-        {isVersion && (
+        {isVersion ? (
           <>
             <span>{t("Version")}</span>
             <span>{versionGroup}</span>
           </>
-        )}
+        ) : null}
       </VersionBadgeText>
     </ColorTheme>
   );

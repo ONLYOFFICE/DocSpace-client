@@ -28,9 +28,10 @@
 /* eslint-disable no-restricted-syntax */
 const arr = [];
 const each = arr.forEach;
-const slice = arr.slice;
+const { slice } = arr;
 
-export function defaults(obj) {
+export function defaults(objProp) {
+  const obj = { ...objProp };
   each.call(slice.call(arguments, 1), (source) => {
     if (source) {
       for (const prop in source) {

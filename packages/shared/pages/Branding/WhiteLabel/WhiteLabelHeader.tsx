@@ -55,19 +55,19 @@ export const WhiteLabelHeader = ({
   return (
     <StyledHeader>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-      {showNotAvailable && <NotAvailable t={t} />}
+      {showNotAvailable ? <NotAvailable t={t} /> : null}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && !standalone && (
+        {!isSettingPaid && !standalone ? (
           <Badge
             className="paid-badge"
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="wl-subtitle settings_unavailable" fontSize="12px">
         {t("WhiteLabelSubtitle")}

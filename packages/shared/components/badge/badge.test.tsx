@@ -29,7 +29,7 @@ import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { ThemeProvider } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base } from "../../themes";
 import { Badge } from ".";
 import styles from "./Badge.module.scss";
 

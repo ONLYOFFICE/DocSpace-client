@@ -145,7 +145,7 @@ const BodyComponent = ({
       <Text className="text-warning">{t("Common:Warning")}</Text>
       <Text className="text-delete-description">{warningMessage}</Text>
 
-      {needReassignData && (
+      {needReassignData ? (
         <Link
           className="reassign-data"
           type={LinkType.action}
@@ -156,7 +156,7 @@ const BodyComponent = ({
         >
           {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
         </Link>
-      )}
+      ) : null}
     </>
   );
 };

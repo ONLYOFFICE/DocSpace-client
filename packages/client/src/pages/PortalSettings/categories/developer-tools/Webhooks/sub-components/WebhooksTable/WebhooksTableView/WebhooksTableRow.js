@@ -26,21 +26,20 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
-import StatusBadge from "../../StatusBadge";
 
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
+import StatusBadge from "../../StatusBadge";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -78,7 +77,7 @@ const WebhooksTableRow = (props) => {
   const [isChecked, setIsChecked] = useState(webhook.enabled);
 
   const redirectToHistory = () => {
-    navigate(window.location.pathname + `/${webhook.id}`);
+    navigate(`${window.location.pathname}/${webhook.id}`);
   };
 
   const handleRowClick = (e) => {
@@ -135,40 +134,35 @@ const WebhooksTableRow = (props) => {
   ];
 
   return (
-    <>
-      <StyledWrapper onClick={handleRowClick}>
-        <StyledTableRow
-          contextOptions={contextOptions}
-          hideColumns={hideColumns}
-        >
-          <TableCell>
-            <Text as="span" fontWeight={600} className="mr-8 textOverflow">
-              {webhook.name}{" "}
-            </Text>
-            <StatusBadge status={webhook.status} />
-          </TableCell>
-          <TableCell>
-            <Text
-              as="span"
-              fontSize="11px"
-              color={globalColors.gray}
-              fontWeight={600}
-              className="textOverflow"
-            >
-              {webhook.uri}
-            </Text>
-          </TableCell>
-          <TableCell>
-            <ToggleButton
-              className="toggle toggleButton"
-              id="toggle id"
-              isChecked={isChecked}
-              onChange={handleToggleEnabled}
-            />
-          </TableCell>
-        </StyledTableRow>
-      </StyledWrapper>
-    </>
+    <StyledWrapper onClick={handleRowClick}>
+      <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
+        <TableCell>
+          <Text as="span" fontWeight={600} className="mr-8 textOverflow">
+            {webhook.name}{" "}
+          </Text>
+          <StatusBadge status={webhook.status} />
+        </TableCell>
+        <TableCell>
+          <Text
+            as="span"
+            fontSize="11px"
+            color={globalColors.gray}
+            fontWeight={600}
+            className="textOverflow"
+          >
+            {webhook.uri}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <ToggleButton
+            className="toggle toggleButton"
+            id="toggle id"
+            isChecked={isChecked}
+            onChange={handleToggleEnabled}
+          />
+        </TableCell>
+      </StyledTableRow>
+    </StyledWrapper>
   );
 };
 

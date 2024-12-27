@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile } from "../../utils";
 
 import { RectangleSkeleton } from "../rectangle";
 import { CircleSkeleton } from "../circle";

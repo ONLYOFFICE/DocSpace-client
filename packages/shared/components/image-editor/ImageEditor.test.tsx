@@ -24,41 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../types";
+import { render, screen } from "@testing-library/react";
+import { ImageEditor } from "./index";
+import "@testing-library/jest-dom";
 
-export type TImage = {
-  uploadedFile?: string | File;
-  zoom: number;
-  x: number;
-  y: number;
-};
-export type TChangeImage = (image: TImage) => void;
-export type TSetPreview = (preview: string) => void;
+const mockT = (key: string) => key;
+const mockOnChangeImage = jest.fn();
+const mockSetPreview = jest.fn();
+const mockOnChangeFile = jest.fn();
 
-export type ImageEditorProps = {
-  t: TTranslation;
-  image: TImage;
-  onChangeImage: TChangeImage;
-  Preview: React.ReactNode;
-  setPreview: TSetPreview;
-  isDisabled: boolean;
-  classNameWrapperImageCropper?: string;
-  className?: string;
-  disableImageRescaling?: boolean;
-  maxImageSize?: number;
-  editorBorderRadius: number;
-  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+const defaultProps = {
+  t: mockT,
+  image: {
+    uploadedFile: undefined,
+    zoom: 1,
+    x: 0,
+    y: 0,
+  },
+  onChangeImage: mockOnChangeImage,
+  Preview: <div data-testid="preview">Preview</div>,
+  setPreview: mockSetPreview,
+  isDisabled: false,
+  editorBorderRadius: 8,
+  onChangeFile: mockOnChangeFile,
 };
 
-export type ImageCropperProps = {
-  t: TTranslation;
-  image: TImage;
-  onChangeImage: TChangeImage;
-  uploadedFile: File | string;
-  setUploadedFile: (uploadedFile?: File) => void;
-  setPreviewImage: TSetPreview;
-  isDisabled: boolean;
-  disableImageRescaling?: boolean;
-  editorBorderRadius: number;
-  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+describe("ImageEditor", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders without crashing", () => {
+    render(<ImageEditor {...defaultProps} />);
+  });
+
+  it("does not render preview for default avatar", () => {
+    const props = {
+      ...defaultProps,
+      image: {
+        ...defaultProps.image,
+        uploadedFile: "default_user_photo.jpg",
+      },
+    };
+
+    render(<ImageEditor {...props} />);
+    expect(screen.queryByTestId("preview")).not.toBeInTheDocument();
+  });
+
+  it("applies custom className", () => {
+    const className = "custom-class";
+    render(<ImageEditor {...defaultProps} className={className} />);
+    expect(screen.getByRole("region")).toHaveClass(className);
+  });
+});

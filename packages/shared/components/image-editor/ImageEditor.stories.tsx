@@ -23,64 +23,61 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import Dropzone from "./Dropzone";
-import ImageCropper from "./ImageCropper";
-import ButtonDelete from "./ButtonDelete";
-
+import { Story, Meta } from "@storybook/react";
+import { ImageEditor } from "./index";
 import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
 
-const ImageEditor = ({
-  t,
-  image,
-  onChangeImage,
-  Preview,
-  setPreview,
-  isDisabled,
-  classNameWrapperImageCropper,
-  className,
-  disableImageRescaling,
-  editorBorderRadius,
-  onChangeFile,
-}: ImageEditorProps) => {
-  const setUploadedFile = (f?: File) => {
-    onChangeImage({ ...image, uploadedFile: f });
-  };
+export default {
+  title: "Components/ImageEditor",
+  component: ImageEditor,
+  argTypes: {
+    isDisabled: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    editorBorderRadius: {
+      control: "number",
+      defaultValue: 8,
+    },
+    disableImageRescaling: {
+      control: "boolean",
+      defaultValue: false,
+    },
+  },
+} as Meta;
 
-  const isDefaultAvatar =
-    typeof image.uploadedFile === "string" &&
-    image.uploadedFile.includes("default_user_photo");
+const Template: Story<ImageEditorProps> = (args) => <ImageEditor {...args} />;
 
-  return (
-    <div
-      className={className}
-      role="region"
-      aria-label="Image editor"
-      data-test-id="image-editor"
-    >
-      {image.uploadedFile && !isDefaultAvatar ? (
-        <div
-          className={classNameWrapperImageCropper}
-          data-test-id="image-cropper-wrapper"
-        >
-          <ImageCropper
-            t={t}
-            image={image}
-            onChangeImage={onChangeImage}
-            uploadedFile={image.uploadedFile}
-            setUploadedFile={setUploadedFile}
-            setPreviewImage={setPreview}
-            isDisabled={isDisabled}
-            disableImageRescaling={disableImageRescaling}
-            onChangeFile={onChangeFile}
-            editorBorderRadius={editorBorderRadius}
-          />
-          {Preview}
-        </div>
-      ) : null}
-    </div>
-  );
+export const Default = Template.bind({});
+Default.args = {
+  t: (key: string) => key,
+  image: {
+    uploadedFile: undefined,
+    zoom: 1,
+    x: 0,
+    y: 0,
+  },
+  onChangeImage: () => {},
+  Preview: <div>Preview</div>,
+  setPreview: () => {},
+  isDisabled: false,
+  editorBorderRadius: 8,
+  onChangeFile: () => {},
 };
 
-export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };
+export const WithImage = Template.bind({});
+WithImage.args = {
+  ...Default.args,
+  image: {
+    uploadedFile: "https://example.com/sample-image.jpg",
+    zoom: 1,
+    x: 0,
+    y: 0,
+  },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...Default.args,
+  isDisabled: true,
+};

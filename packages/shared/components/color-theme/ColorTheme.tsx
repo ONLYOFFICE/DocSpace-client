@@ -78,10 +78,16 @@ const ColorTheme = forwardRef<
         );
       }
       case ThemeId.IndexIconButton: {
+        const onClickAction = (e: React.MouseEvent<Element>) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          if ("onClick" in props) props.onClick?.(e);
+        };
+
         return (
           <StyledIndexWrapper
             $currentColorScheme={currentColorScheme}
-            onClick={props.onClick}
+            onClick={onClickAction}
           >
             <IconButtonTheme
               {...props}

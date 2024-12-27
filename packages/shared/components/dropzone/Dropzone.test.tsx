@@ -24,55 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useDropzone } from "react-dropzone";
+import { render, screen } from "@testing-library/react";
+import Dropzone from "./index";
+import "@testing-library/jest-dom";
 
-import { Loader, LoaderTypes } from "../loader";
-import { ColorTheme, ThemeId } from "../color-theme";
-
-import StyledDropzone from "./Dropzone.styled";
-import { DropzoneProps } from "./Dropzone.types";
-
-const Dropzone = ({
-  isLoading,
-  isDisabled,
-  onDrop,
-  accept,
-  maxFiles = 0,
-  linkMainText,
-  linkSecondaryText,
-  exstsText,
-}: DropzoneProps) => {
-  const { getRootProps, getInputProps } = useDropzone({
-    maxFiles,
-    noClick: isDisabled,
-    noKeyboard: isDisabled,
-    // maxSize: 1000000,
-    accept,
-    onDrop,
+describe("Dropzone", () => {
+  it("renders without error", () => {
+    render(
+      <Dropzone
+        isLoading={false}
+        linkMainText={""}
+        linkSecondaryText={""}
+        exstsText={""}
+        accept={[]}
+      />,
+    );
+    expect(screen.getByTestId("dropzone")).toBeInTheDocument();
   });
-
-  return (
-    <StyledDropzone $isLoading={isLoading} data-testid="dropzone">
-      {isLoading ? (
-        <Loader
-          className="dropzone_loader"
-          size="30px"
-          type={LoaderTypes.track}
-        />
-      ) : null}
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        <div className="dropzone-link">
-          <ColorTheme className="dropzone-link-main" themeId={ThemeId.Link}>
-            {linkMainText}
-          </ColorTheme>
-          <span className="dropzone-link-secondary">{linkSecondaryText}</span>
-        </div>
-        <div className="dropzone-exsts">{exstsText}</div>
-      </div>
-    </StyledDropzone>
-  );
-};
-
-export default Dropzone;
+});

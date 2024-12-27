@@ -90,7 +90,12 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   }, []);
 
   return (
-    <Selectors className={className} id={id} hasError={hasError}>
+    <Selectors
+      className={className}
+      id={id}
+      hasError={hasError}
+      data-testid="date-time-picker"
+    >
       <DatePicker
         initialDate={initialDate}
         // date={date}

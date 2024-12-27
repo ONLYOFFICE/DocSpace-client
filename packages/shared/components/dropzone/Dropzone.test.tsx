@@ -33,9 +33,9 @@ describe("Dropzone", () => {
     render(
       <Dropzone
         isLoading={false}
-        linkMainText={""}
-        linkSecondaryText={""}
-        exstsText={""}
+        linkMainText=""
+        linkSecondaryText=""
+        exstsText=""
         accept={[]}
       />,
     );

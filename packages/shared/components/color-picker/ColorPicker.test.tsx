@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 
 describe("ColorPicker component", () => {
   it("renders without error", () => {
-    render(<ColorPicker isPickerOnly={false} appliedColor={""} />);
+    render(<ColorPicker isPickerOnly={false} appliedColor="" />);
     expect(screen.getByTestId("color-picker")).toBeInTheDocument();
   });
 
@@ -42,7 +42,7 @@ describe("ColorPicker component", () => {
         applyButtonLabel="Custom Apply"
         cancelButtonLabel="Custom Cancel"
         isPickerOnly={false}
-        appliedColor={""}
+        appliedColor=""
       />,
     );
     expect(getByText("Custom Apply")).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe("ColorPicker component", () => {
   it("calls onApply callback", () => {
     const onApply = jest.fn();
     const { getByRole } = render(
-      <ColorPicker onApply={onApply} isPickerOnly={false} appliedColor={""} />,
+      <ColorPicker onApply={onApply} isPickerOnly={false} appliedColor="" />,
     );
     const applyButton = getByRole("button", { name: "Apply" });
     fireEvent.click(applyButton);

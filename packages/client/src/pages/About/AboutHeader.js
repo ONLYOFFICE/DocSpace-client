@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -69,11 +68,11 @@ const AboutHeader = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onBack}
         className="arrow-button"
       />
-      <Headline type="content" truncate={true}>
+      <Headline type="content" truncate>
         {t("AboutHeader")}
       </Headline>
     </HeaderContainer>

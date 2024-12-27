@@ -63,7 +63,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
-const Shell = ({ items = [], page = "home", ...rest }) => {
+const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
     loadBaseInfo,
@@ -76,15 +76,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     isBase,
     setTheme,
     setMaintenanceExist,
-    roomsMode,
     setSnackbarExist,
     userTheme,
-    //user,
     userId,
     userLoginEventId,
     currentDeviceType,
-    timezone,
-    showArticleLoader,
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
@@ -191,14 +187,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   let snackTimer = null;
   let fbInterval = null;
-  let lastCampaignStr = null;
+  // let lastCampaignStr = null;
   const LS_CAMPAIGN_DATE = "maintenance_to_date";
   const DATE_FORMAT = "YYYY-MM-DD";
   const SNACKBAR_TIMEOUT = 10000;
-
-  const setSnackBarTimer = (campaign) => {
-    snackTimer = setTimeout(() => showSnackBar(campaign), SNACKBAR_TIMEOUT);
-  };
 
   const clearSnackBarTimer = () => {
     if (!snackTimer) return;
@@ -208,7 +200,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   };
 
   const showSnackBar = (campaign) => {
-    clearSnackBarTimer();
+    const setSnackBarTimer = (campaignItem) => {
+      clearSnackBarTimer();
+      snackTimer = setTimeout(
+        () => showSnackBar(campaignItem),
+        SNACKBAR_TIMEOUT,
+      );
+    };
 
     let skipMaintenance;
 
@@ -265,14 +263,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     if (!document.getElementById("main-bar")) return;
 
-    const campaignStr = JSON.stringify(campaign);
+    // const campaignStr = JSON.stringify(campaign);
     // let skipRender = lastCampaignStr === campaignStr;
 
     const hasChild = document.getElementById("main-bar").hasChildNodes();
 
     if (hasChild) return;
 
-    lastCampaignStr = campaignStr;
+    // lastCampaignStr = campaignStr;
 
     const targetDate = to.locale(language).format("LL");
 
@@ -302,25 +300,22 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     SnackBar.show(barConfig);
   };
 
-  const fetchMaintenance = () => {
+  const fetchMaintenance = async () => {
     try {
       if (!FirebaseHelper.isEnabled) return;
 
-      FirebaseHelper.checkMaintenance()
-        .then((campaign) => {
-          console.log("checkMaintenance", campaign);
-          if (!campaign) {
-            setCheckedMaintenance(true);
-            clearSnackBarTimer();
-            SnackBar.close();
-            return;
-          }
+      const campaign = await FirebaseHelper.checkMaintenance();
 
-          setTimeout(() => showSnackBar(campaign), 1000);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      console.log("checkMaintenance", campaign);
+
+      if (!campaign) {
+        setCheckedMaintenance(true);
+        clearSnackBarTimer();
+        SnackBar.close();
+        return;
+      }
+
+      setTimeout(() => showSnackBar(campaign), 1000);
     } catch (e) {
       console.log(e);
     }
@@ -481,7 +476,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     <Layout>
       {toast}
       {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
-      {withoutNavMenu ? <></> : <NavMenu />}
+      {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />

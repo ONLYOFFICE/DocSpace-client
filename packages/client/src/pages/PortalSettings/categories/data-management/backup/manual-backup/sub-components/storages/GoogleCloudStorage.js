@@ -28,8 +28,8 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
-import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
+import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
 import { getFromLocalStorage } from "../../../../../../utils";
 
 class GoogleCloudStorage extends React.Component {

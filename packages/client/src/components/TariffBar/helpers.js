@@ -65,17 +65,16 @@ export const getEnterpriseBar = (
         label: t("Common:TrialDaysLeft", { count: trialDaysLeft }),
         color: ORANGE,
       };
-    } else {
-      if (isLicenseDateExpired)
-        return {
-          label: t("Common:SubscriptionExpiredTitle"),
-          color: RED,
-        };
-      return {
-        label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
-        color: ORANGE,
-      };
     }
+    if (isLicenseDateExpired)
+      return {
+        label: t("Common:SubscriptionExpiredTitle"),
+        color: RED,
+      };
+    return {
+      label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
+      color: ORANGE,
+    };
   }
 };
 

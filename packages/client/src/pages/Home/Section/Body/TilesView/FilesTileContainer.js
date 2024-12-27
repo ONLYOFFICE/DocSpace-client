@@ -116,7 +116,7 @@ const FilesTileContainer = ({ filesList }) => {
           item={item}
           itemIndex={index}
           selectableRef={onSetTileRef}
-          withRef={true}
+          withRef
         />
       ) : (
         <FileTile
@@ -146,7 +146,7 @@ const FilesTileContainer = ({ filesList }) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
+export default inject(({ filesStore }) => {
   const { filesList } = filesStore;
 
   return {

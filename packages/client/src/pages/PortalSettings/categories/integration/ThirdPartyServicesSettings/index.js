@@ -39,17 +39,16 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
-import { toastr } from "@docspace/shared/components/toast";
+
 import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -156,49 +155,16 @@ class ThirdPartyServices extends React.Component {
   };
 
   onModalClose = () => {
+    const { setSelectedConsumer } = this.props;
     this.setState({
       dialogVisible: false,
     });
-    this.props.setSelectedConsumer();
+    setSelectedConsumer();
   };
 
   setConsumer = (e) => {
-    this.props.setSelectedConsumer(e.currentTarget.dataset.consumer);
-  };
-
-  updateConsumerValues = (obj, isFill) => {
-    isFill && this.onChangeLoading(true);
-
-    const prop = [];
-    let i = 0;
-    let objLength = Object.keys(isFill ? obj : obj.props).length;
-
-    for (i = 0; i < objLength; i++) {
-      prop.push({
-        name: isFill ? Object.keys(obj)[i] : obj.props[i].name,
-        value: isFill ? Object.values(obj)[i] : "",
-      });
-    }
-
-    const data = {
-      name: isFill ? this.state.selectedConsumer : obj.name,
-      props: prop,
-    };
-
-    this.props
-      .updateConsumerProps(data)
-      .then(() => {
-        isFill && this.onChangeLoading(false);
-        isFill
-          ? toastr.success(this.props.t("ThirdPartyPropsActivated"))
-          : toastr.success(this.props.t("ThirdPartyPropsDeactivated"));
-      })
-      .catch((error) => {
-        isFill && this.onChangeLoading(false);
-        toastr.error(error);
-      })
-
-      .finally(isFill && this.onModalClose());
+    const { setSelectedConsumer } = this.props;
+    setSelectedConsumer(e.currentTarget.dataset.consumer);
   };
 
   render() {
@@ -211,6 +177,7 @@ class ThirdPartyServices extends React.Component {
       theme,
       currentColorScheme,
       isThirdPartyAvailable,
+      supportEmail,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -224,8 +191,7 @@ class ThirdPartyServices extends React.Component {
 
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
 
-    const submitRequest = () =>
-      (window.location = `mailto:${this.props.supportEmail}`);
+    const submitRequest = () => (window.location = `mailto:${supportEmail}`);
 
     return (
       <>
@@ -299,7 +265,7 @@ class ThirdPartyServices extends React.Component {
                     }
                     fontWeight="700"
                     label={t("Common:Paid")}
-                    isPaidBadge={true}
+                    isPaidBadge
                   />
                 </div>
               )}

@@ -32,6 +32,8 @@ import styled from "styled-components";
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WhiteLabel } from "./Branding/whitelabel";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
@@ -39,9 +41,6 @@ import MobileView from "./Branding/MobileView";
 
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
-
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -95,7 +94,7 @@ const Branding = ({
     setDocumentTitle(t("Branding"));
   }, []);
 
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+  const hideBlock = isManagement() ? false : portals?.length > 1;
 
   const showSettings = standalone && !hideBlock;
 
@@ -127,9 +126,7 @@ const Branding = ({
               )}
               <CompanyInfoSettings />
             </>
-          ) : (
-            <></>
-          )}
+          ) : null}
           <AdditionalResources />
         </>
       )}

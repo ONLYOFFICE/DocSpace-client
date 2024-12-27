@@ -44,13 +44,11 @@ class RackspaceStorage extends React.Component {
     const { t, selectedStorage } = this.props;
 
     return (
-      <>
-        <RackspaceSettings
-          t={t}
-          selectedStorage={selectedStorage}
-          isNeedFilePath
-        />
-      </>
+      <RackspaceSettings
+        t={t}
+        selectedStorage={selectedStorage}
+        isNeedFilePath
+      />
     );
   }
 }

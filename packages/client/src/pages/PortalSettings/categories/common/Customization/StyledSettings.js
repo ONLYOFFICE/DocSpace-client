@@ -31,7 +31,6 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import {
   commonIconsStyles,
   mobile,
-  desktop,
   mobileMore,
   injectDefaultTheme,
 } from "@docspace/shared/utils";

@@ -103,12 +103,12 @@ const FilesSelectorInput = (props) => {
   };
 
   const filesSelectionProps = {
-    onSelectFile: onSelectFile,
-    filterParam: filterParam,
+    onSelectFile,
+    filterParam,
   };
 
   const foldersSelectionProps = {
-    onSelectFolder: onSelectFolder,
+    onSelectFolder,
     onSetBaseFolderPath: onSetBasePath,
   };
 

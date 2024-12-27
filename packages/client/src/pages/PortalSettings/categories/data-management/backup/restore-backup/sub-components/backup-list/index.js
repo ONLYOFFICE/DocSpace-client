@@ -47,10 +47,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import config from "PACKAGE_FILE";
-import { StyledBackupList } from "../../../StyledBackup";
-import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
+import { StyledBackupList } from "../../../StyledBackup";
+import BackupListBody from "./BackupListBody";
 
 const StyledFooterContent = styled.div`
   width: 100%;
@@ -204,20 +204,18 @@ const BackupListModalDialog = (props) => {
   const { filesList, isLoading, selectedFileIndex, isChecked } = state;
 
   const helpContent = () => (
-    <>
-      <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", {
-          productName: t("Common:ProductName"),
-        })}{" "}
-        {!standalone && (
-          <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-        )}
-      </Text>
-    </>
+    <Text className="restore-backup_warning-description">
+      {t("RestoreBackupWarningText", {
+        productName: t("Common:ProductName"),
+      })}{" "}
+      {!standalone && (
+        <Text as="span" className="restore-backup_warning-link">
+          {t("RestoreBackupResetInfoWarningText", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      )}
+    </Text>
   );
 
   return (
@@ -294,7 +292,7 @@ const BackupListModalDialog = (props) => {
                 offsetLeft={100}
                 iconName={HelpReactSvgUrl}
                 getContent={helpContent}
-                tooltipMaxWidth={"286px"}
+                tooltipMaxWidth="286px"
               />
             </Text>
           </div>

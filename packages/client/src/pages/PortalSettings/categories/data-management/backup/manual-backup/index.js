@@ -34,10 +34,7 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import {
-  getBackupProgressInfo,
-  isManagement,
-} from "@docspace/shared/utils/common";
+// import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
@@ -51,13 +48,12 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
-import RoomsModule from "./sub-components/RoomsModule";
-import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-import { StyledModules, StyledManualBackup } from "./../StyledBackup";
+import { isManagement, getBackupProgressInfo } from "@docspace/shared/utils/common";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
+import { StyledModules, StyledManualBackup } from "../StyledBackup";
+import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
+import RoomsModule from "./sub-components/RoomsModule";
+import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 
 let selectedStorageType = "";
 
@@ -85,8 +81,6 @@ class ManualBackup extends React.Component {
     if (tReady) setDocumentTitle(t("DataBackup"));
 
     this.state = {
-      selectedFolder: "",
-      isPanelVisible: false,
       isInitialLoading: false,
       isEmptyContentBeforeLoader: true,
       isCheckedTemporaryStorage: checkedTemporary,
@@ -101,45 +95,6 @@ class ManualBackup extends React.Component {
       "isCheckedThirdPartyStorage",
     ];
   }
-
-  setBasicSettings = async () => {
-    const {
-      getProgress,
-      // setCommonThirdPartyList,
-
-      setThirdPartyStorage,
-      setStorageRegions,
-      setConnectedThirdPartyAccount,
-    } = this.props;
-    try {
-      getProgress();
-
-      const [account, backupStorage, storageRegions] = await Promise.all([
-        getSettingsThirdParty(),
-        getBackupStorage(isManagement()),
-        getStorageRegions(),
-      ]);
-
-      setConnectedThirdPartyAccount(account);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegions);
-      //   } else {
-      //    const commonThirdPartyList = await getThirdPartyCommonFolderTree();
-      // commonThirdPartyList && setCommonThirdPartyList(commonThirdPartyList);
-      //   }
-    } catch (error) {
-      toastr.error(error);
-      //this.clearLocalStorage();
-    }
-
-    clearTimeout(this.timerId);
-    this.timerId = null;
-
-    this.setState({
-      isInitialLoading: false,
-      isEmptyContentBeforeLoader: false,
-    });
-  };
 
   componentDidMount() {
     const {
@@ -210,6 +165,45 @@ class ManualBackup extends React.Component {
     });
   }
 
+  setBasicSettings = async () => {
+    const {
+      getProgress,
+      // setCommonThirdPartyList,
+      t,
+      setThirdPartyStorage,
+      setStorageRegions,
+      setConnectedThirdPartyAccount,
+    } = this.props;
+    try {
+      getProgress(t);
+
+      const [account, backupStorage, storageRegions] = await Promise.all([
+        getSettingsThirdParty(),
+        getBackupStorage(),
+        getStorageRegions(),
+      ]);
+
+      setConnectedThirdPartyAccount(account);
+      setThirdPartyStorage(backupStorage);
+      setStorageRegions(storageRegions);
+      //   } else {
+      //    const commonThirdPartyList = await getThirdPartyCommonFolderTree();
+      // commonThirdPartyList && setCommonThirdPartyList(commonThirdPartyList);
+      //   }
+    } catch (error) {
+      toastr.error(error);
+      // this.clearLocalStorage();
+    }
+
+    clearTimeout(this.timerId);
+    this.timerId = null;
+
+    this.setState({
+      isInitialLoading: false,
+      isEmptyContentBeforeLoader: false,
+    });
+  };
+
   onMakeTemporaryBackup = async () => {
     const { setDownloadingProgress, t, clearLocalStorage } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
@@ -223,22 +217,25 @@ class ManualBackup extends React.Component {
       toastr.error(e);
     }
   };
+
   onClickDownloadBackup = () => {
     const { temporaryLink } = this.props;
     const url = window.location.origin;
-    const downloadUrl = `${url}` + `${temporaryLink}`;
+    const downloadUrl = `${url}${temporaryLink}`;
     window.open(downloadUrl, "_self");
   };
+
   onClickShowStorage = (e) => {
-    let newStateObj = {};
+    const newStateObj = {};
     const name = e.target.name;
     newStateObj[name] = true;
     const newState = this.switches.filter((el) => el !== name);
-    newState.forEach((name) => (newStateObj[name] = false));
+    newState.forEach((key) => (newStateObj[key] = false));
     this.setState({
       ...newStateObj,
     });
   };
+
   onMakeCopy = async (
     selectedFolder,
     moduleName,
@@ -254,7 +251,6 @@ class ManualBackup extends React.Component {
       clearLocalStorage,
       setTemporaryLink,
       getStorageParams,
-      saveToLocalStorage,
     } = this.props;
 
     clearLocalStorage();
@@ -284,12 +280,13 @@ class ManualBackup extends React.Component {
       toastr.error(err);
     }
   };
+
   render() {
     const {
       t,
       temporaryLink,
       downloadingProgress,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       buttonSize,
 
       rootFoldersTitles,
@@ -326,9 +323,8 @@ class ManualBackup extends React.Component {
 
     const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
-    return isEmptyContentBeforeLoader && !isInitialLoading ? (
-      <></>
-    ) : isInitialLoading ? (
+    return isEmptyContentBeforeLoader &&
+      !isInitialLoading ? null : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>
@@ -357,7 +353,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
-            name={"isCheckedTemporaryStorage"}
+            name="isCheckedTemporaryStorage"
             key={0}
             isChecked={isCheckedTemporaryStorage}
             isDisabled={!isMaxProgress || pageIsDisabled}
@@ -388,8 +384,8 @@ class ManualBackup extends React.Component {
               )}
               {!isMaxProgress && (
                 <Button
-                  label={t("Common:CopyOperation") + "..."}
-                  isDisabled={true}
+                  label={`${t("Common:CopyOperation")}...`}
+                  isDisabled
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
@@ -401,7 +397,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
-            name={"isCheckedDocuments"}
+            name="isCheckedDocuments"
             key={1}
             isChecked={isCheckedDocuments}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -424,7 +420,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
-            name={"isCheckedThirdParty"}
+            name="isCheckedThirdParty"
             key={2}
             isChecked={isCheckedThirdParty}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -439,7 +435,7 @@ class ManualBackup extends React.Component {
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
-            name={"isCheckedThirdPartyStorage"}
+            name="isCheckedThirdPartyStorage"
             key={3}
             isChecked={isCheckedThirdPartyStorage}
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -482,7 +478,6 @@ export default inject(
       getStorageParams,
       setThirdPartyStorage,
       setStorageRegions,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
       isBackupProgressVisible,
       downloadingProgressError,
@@ -511,7 +506,6 @@ export default inject(
       getStorageParams,
       rootFoldersTitles,
       fetchTreeFolders,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
 
       dataBackupUrl,

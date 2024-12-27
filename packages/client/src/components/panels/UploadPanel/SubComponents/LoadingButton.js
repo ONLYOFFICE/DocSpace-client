@@ -62,10 +62,10 @@ const LoadingButton = (props) => {
         isAnimation={isAnimation}
       >
         <div className="circle__mask circle__full">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
         <div className="circle__mask">
-          <div className="circle__fill"></div>
+          <div className="circle__fill" />
         </div>
 
         <StyledLoadingButton
@@ -79,7 +79,7 @@ const LoadingButton = (props) => {
   );
 };
 
-export default inject(({}, { item }) => {
+export default inject((_, { item }) => {
   return {
     percent: item?.percent ? item.percent : null,
   };

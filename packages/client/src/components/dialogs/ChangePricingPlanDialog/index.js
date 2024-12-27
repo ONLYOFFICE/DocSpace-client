@@ -115,7 +115,7 @@ const ChangePricingPlanDialog = ({
           className="ok-button"
           label={t("Common:OKButton")}
           size="normal"
-          primary={true}
+          primary
           onClick={onCloseModal}
           tabIndex={3}
         />

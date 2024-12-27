@@ -27,8 +27,7 @@
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
@@ -117,7 +116,7 @@ const SessionsTableRow = (props) => {
               {country}
               {country && city && ", "}
               {city}
-              <span className="divider"></span>
+              <span className="divider" />
             </>
           )}
           {ip}

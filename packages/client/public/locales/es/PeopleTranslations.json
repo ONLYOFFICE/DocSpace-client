@@ -10,7 +10,6 @@
   "EnableUserButton": "Habilitar",
   "GuestsRemoved": "Invitado(s) eliminado(s) correctamente",
   "IndividualRights": "Permisos individuales en la sala",
-  "InviteLinkTitle": "Enlace de invitación",
   "LDAPAccountTooltip": "Esta cuenta de usuario se carga desde LDAP. Si necesita cambiar el nombre de usuario y la dirección de correo electrónico, o deshabilitar un usuario, consulte el directorio LDAP.",
   "LDAPGroupTooltip": "Este grupo se carga desde LDAP. Si necesita cambiarle el nombre, añadir o eliminar usuarios, consulte el directorio LDAP.",
   "NameChangeButton": "Cambiar nombre",

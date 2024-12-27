@@ -32,8 +32,8 @@ import {
   desktop,
 } from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
-import { showPreviewThreshold } from "../constants";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { showPreviewThreshold } from "../constants";
 
 export const SDKContainer = styled(Box)`
   .integration-examples-bottom {

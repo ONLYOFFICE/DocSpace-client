@@ -35,6 +35,7 @@ import ClearEmptyFilterIcon from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { globalColors } from "@docspace/shared/themes";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 const EmptyFilterWrapper = styled.div`
   width: 100%;
@@ -66,7 +67,7 @@ const EmptyFilterContent = styled.div`
 `;
 
 const EmptyFilter = (props) => {
-  const { applyFilters, formatFilters, clearHistoryFilters, theme } = props;
+  const { applyFilters, clearHistoryFilters, theme } = props;
   const { t } = useTranslation(["Webhooks", "Common"]);
 
   const clearFilters = () => {
@@ -125,8 +126,8 @@ const EmptyFilter = (props) => {
 };
 
 export default inject(({ webhooksStore, settingsStore }) => {
-  const { formatFilters, clearHistoryFilters } = webhooksStore;
+  const { clearHistoryFilters } = webhooksStore;
   const { theme } = settingsStore;
 
-  return { formatFilters, clearHistoryFilters, theme };
+  return { clearHistoryFilters, theme };
 })(observer(EmptyFilter));

@@ -24,11 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  ShareAccessRights,
-  EmployeeType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 
 class MembersHelper {
   constructor(props) {

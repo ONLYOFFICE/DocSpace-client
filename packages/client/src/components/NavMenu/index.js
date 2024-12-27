@@ -32,18 +32,18 @@ import { injectDefaultTheme, isMobile, mobile } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
-import Header from "./sub-components/header";
-import HeaderNav from "./sub-components/header-nav";
-import HeaderUnAuth from "./sub-components/header-unauth";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
 import { inject, observer } from "mobx-react";
-import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { DeviceType } from "@docspace/shared/enums";
 import { isPublicPreview } from "@docspace/shared/utils/common";
+
+import HeaderUnAuth from "./sub-components/header-unauth";
+import HeaderNav from "./sub-components/header-nav";
+import Header from "./sub-components/header";
 
 const StyledContainer = styled.header.attrs(injectDefaultTheme)`
   height: ${(props) => props.theme.header.height};
@@ -66,7 +66,7 @@ const StyledContainer = styled.header.attrs(injectDefaultTheme)`
               position: absolute;
               z-index: 160;
               top: 0;
-              // top: ${(props) => (props.isVisible ? "0" : "-48px")};
+              // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
 
               transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
               -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
@@ -86,7 +86,6 @@ const NavMenu = (props) => {
     isLoaded,
     asideContent,
 
-    isDesktop = false,
     isFrame,
     showHeader,
     currentDeviceType,
@@ -101,7 +100,6 @@ const NavMenu = (props) => {
 
   const timeout = React.useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
@@ -161,7 +159,7 @@ const NavMenu = (props) => {
   const hideHeader = (!showHeader && isFrame) || isPublicPreview();
 
   if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
-    return <></>;
+    return null;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
 
@@ -170,8 +168,8 @@ const NavMenu = (props) => {
       <Backdrop
         visible={isBackdropVisible}
         onClick={backdropClick}
-        withBackground={true}
-        withBlur={true}
+        withBackground
+        withBlur
       />
 
       {!hideHeader &&
@@ -211,7 +209,6 @@ NavMenu.propTypes = {
   isNavHoverEnabled: PropTypes.bool,
   isNavOpened: PropTypes.bool,
   isAsideVisible: PropTypes.bool,
-  isDesktop: PropTypes.bool,
 
   asideContent: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -243,4 +240,7 @@ const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
   };
 })(observer(withTranslation(["Common"])(NavMenu)));
 
-export default ({ ...props }) => <NavMenuWrapper {...props} />;
+const NavMenuComponent = ({ ...props }) => <NavMenuWrapper {...props} />;
+NavMenuComponent.displayName = "NavMenuComponent";
+
+export default NavMenuComponent;

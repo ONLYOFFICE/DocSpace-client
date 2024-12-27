@@ -56,7 +56,7 @@ const PortalRenamingDialog = (props) => {
           label={t("Common:ContinueButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSave}
           isLoading={isSaving}
           tabIndex={3}

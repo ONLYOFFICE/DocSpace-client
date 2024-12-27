@@ -35,9 +35,8 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
-import i18n from "../i18n";
-
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -90,6 +89,8 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
+    default:
+      break;
   }
 };
 
@@ -223,10 +224,15 @@ export const getCountTilesInRow = () => {
       .getComputedStyle(elem)
       ?.getPropertyValue("padding");
 
-    containerWidth =
-      elem?.clientWidth -
-      elemPadding.split("px")[1] -
-      elemPadding.split("px")[3];
+    if (elemPadding) {
+      const paddingValues = elemPadding.split("px");
+      if (paddingValues.length >= 4) {
+        containerWidth =
+          (elem.clientWidth || 0) -
+          parseInt(paddingValues[1], 10) -
+          parseInt(paddingValues[3], 10);
+      }
+    }
   }
 
   containerWidth += tileGap;

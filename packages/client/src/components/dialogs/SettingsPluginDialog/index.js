@@ -51,8 +51,6 @@ const SettingsPluginDialog = ({
   onClose,
   onDelete,
   updatePlugin,
-
-  ...rest
 }) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
@@ -124,7 +122,7 @@ const SettingsPluginDialog = ({
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
-              size={"normal"}
+              size="normal"
             />
           )}
         </div>

@@ -26,11 +26,6 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
-import {
-  saveToLocalStorage,
-  getFromLocalStorage,
-  removeLocalStorage,
-} from "../pages/PortalSettings/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -39,51 +34,81 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-
-import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
-
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+  removeLocalStorage,
+} from "../pages/PortalSettings/utils";
+import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
 import i18n from "../i18n";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
+async function* uploadBackupFile(requestsDataArray, url) {
+  const length = requestsDataArray.length;
+  for (let index = 0; index < length; index++) {
+    yield uploadBackup(url, requestsDataArray[index]);
+  }
+}
+
 class BackupStore {
   authStore = null;
+
   thirdPartyStore = null;
 
   restoreResource = null;
 
   backupSchedule = {};
+
   backupStorage = {};
 
   defaultDay = "0";
+
   defaultHour = "12:00";
+
   defaultPeriodNumber = "0";
+
   defaultPeriodLabel = "Every day";
+
   defaultMaxCopiesNumber = "10";
 
   defaultWeekday = null;
+
   defaultWeekdayLabel = "";
+
   defaultStorageType = null;
+
   defaultFolderId = null;
+
   defaultMonthDay = "1";
 
   selectedDay = "0";
+
   selectedHour = "12:00";
+
   selectedPeriodNumber = "0";
+
   selectedPeriodLabel = "Every day";
+
   selectedMaxCopiesNumber = "10";
 
   selectedWeekday = null;
+
   selectedWeekdayLabel = "";
+
   selectedStorageType = null;
+
   selectedFolderId = null;
+
   selectedMonthDay = "1";
 
   selectedStorageId = null;
+
   defaultStorageId = null;
 
   thirdPartyStorage = [];
+
   commonThirdPartyList = [];
 
   preparationPortalDialogVisible = false;
@@ -92,22 +117,31 @@ class BackupStore {
   downloadingProgressError = "";
 
   temporaryLink = null;
+
   timerId = null;
 
   isThirdStorageChanged = false;
 
   formSettings = {};
+
   requiredFormSettings = {};
+
   defaultFormSettings = {};
+
   errorsFieldsBeforeSafe = {};
 
   selectedEnableSchedule = false;
+
   defaultEnableSchedule = false;
 
   storageRegions = [];
+
   selectedThirdPartyAccount = null;
+
   connectedThirdPartyAccount = null;
+
   accounts = [];
+
   connectedAccount = [];
 
   constructor(authStore, thirdPartyStore) {
@@ -167,6 +201,7 @@ class BackupStore {
 
     this.setIsThirdStorageChanged(false);
   };
+
   get isChanged() {
     if (this.selectedHour !== this.defaultHour) {
       return true;
@@ -213,14 +248,14 @@ class BackupStore {
 
     this.setConnectedThirdPartyAccount(connectedAccount);
 
-    let accounts = [],
-      selectedAccount = {};
+    let accounts = [];
+    let selectedAccount = {};
     let index = 0;
 
-    providers.map((item) => {
+    providers.forEach((item) => {
       const { account, isConnected } = this.getThirdPartyAccount(item, t);
 
-      if (!account) return;
+      if (!account) return true; // continue
 
       accounts.push(account);
 
@@ -317,11 +352,13 @@ class BackupStore {
       const { folderId, module } = storageParams;
       const { period, day, hour } = cronParams;
 
-      let defaultFormSettings = {};
-      for (let variable in storageParams) {
-        if (variable === "module") continue;
-        defaultFormSettings[variable] = storageParams[variable];
-      }
+      const defaultFormSettings = {};
+      Object.keys(storageParams).forEach((variable) => {
+        if (variable !== "module") {
+          defaultFormSettings[variable] = storageParams[variable];
+        }
+      });
+
       if (defaultFormSettings) {
         this.setFormSettings({ ...defaultFormSettings });
         this.setDefaultFormSettings({ ...defaultFormSettings });
@@ -410,6 +447,7 @@ class BackupStore {
   setCommonThirdPartyList = (list) => {
     this.commonThirdPartyList = list;
   };
+
   setPeriod = (options) => {
     const key = options.key;
     const label = options.label;
@@ -427,14 +465,12 @@ class BackupStore {
   };
 
   setMonthNumber = (options) => {
-    const key = options.key;
     const label = options.label;
 
     this.selectedMonthDay = label;
   };
 
   setTime = (options) => {
-    const key = options.key;
     const label = options.label;
 
     this.selectedHour = label;
@@ -552,12 +588,13 @@ class BackupStore {
   deleteValueFormSetting = (key) => {
     delete this.formSettings[key];
   };
+
   getStorageParams = (
     isCheckedThirdPartyStorage,
     selectedFolderId,
     selectedStorageId,
   ) => {
-    let storageParams = [
+    const storageParams = [
       {
         key: isCheckedThirdPartyStorage ? "module" : "folderId",
         value: isCheckedThirdPartyStorage
@@ -589,25 +626,26 @@ class BackupStore {
   setStorageRegions = (regions) => {
     this.storageRegions = regions;
   };
+
   setDefaultFormSettings = (obj) => {
     this.defaultFormSettings = obj;
   };
 
   get isValidForm() {
-    if (Object.keys(this.requiredFormSettings).length == 0) return;
+    const requiredKeys = Object.keys(this.requiredFormSettings);
+    if (!requiredKeys.length) return;
 
-    for (let key of this.requiredFormSettings) {
-      const elem = this.formSettings[key];
-      if (!elem) return false;
-      if (!elem.trim()) return false;
-    }
-    return true;
+    return !requiredKeys.some((key) => {
+      const value = this.formSettings[key];
+      return !value || !value.trim();
+    });
   }
+
   isFormReady = () => {
-    let errors = {};
+    const errors = {};
     let firstError = false;
 
-    for (let key of this.requiredFormSettings) {
+    Object.keys(this.requiredFormSettings).forEach((key) => {
       const elem = this.formSettings[key];
 
       errors[key] = !elem.trim();
@@ -615,7 +653,7 @@ class BackupStore {
       if (!elem.trim() && !firstError) {
         firstError = true;
       }
-    }
+    });
     this.setErrorsFormFields(errors);
 
     return !firstError;
@@ -624,17 +662,18 @@ class BackupStore {
   setErrorsFormFields = (errors) => {
     this.errorsFieldsBeforeSafe = errors;
   };
+
   setCompletedFormFields = (values, module) => {
-    let formSettingsTemp = {};
+    const formSettingsTemp = {};
 
     if (module && module === this.defaultStorageId) {
       this.setFormSettings({ ...this.defaultFormSettings });
       return;
     }
 
-    for (const [key, value] of Object.entries(values)) {
-      formSettingsTemp[key] = value;
-    }
+    Object.keys(values).forEach((key) => {
+      formSettingsTemp[key] = values[key];
+    });
 
     this.setFormSettings({ ...formSettingsTemp });
     this.setErrorsFormFields({});
@@ -652,7 +691,7 @@ class BackupStore {
   };
 
   convertServiceName = (serviceName) => {
-    //Docusign, OneDrive, Wordpress
+    // Docusign, OneDrive, Wordpress
     switch (serviceName) {
       case "GoogleDrive":
         return "google";
@@ -676,28 +715,32 @@ class BackupStore {
   };
 
   uploadFileChunks = async (requestsDataArray, url) => {
-    const length = requestsDataArray.length;
     let res;
 
-    for (let index = 0; index < length; index++) {
-      res = await uploadBackup(
-        combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
-        requestsDataArray[index],
-      );
+    const uploadUrl = combineUrl(
+      window.ClientConfig?.proxy?.url,
+      config.homepage,
+      url,
+    );
 
-      if (!res) return false;
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
+      if (!value) return false;
 
-      if (res.data.Message || !res.data.Success) return res;
+      if (value.data.Message || !value.data.Success) return value;
+
+      res = value;
     }
 
     return res;
   };
+
   uploadLocalFile = async () => {
     try {
       const url = "/backupFileUpload.ashx";
 
       const getExst = (fileName) => {
-        if (fileName.endsWith("." + "tar.gz")) {
+        if (fileName.endsWith(".tar.gz")) {
           return "tar.gz";
         }
         return fileName.substring(fileName.lastIndexOf(".") + 1);

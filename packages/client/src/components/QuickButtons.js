@@ -30,8 +30,6 @@ import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
-import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
@@ -41,7 +39,6 @@ import styled from "styled-components";
 import { isTablet, classNames } from "@docspace/shared/utils";
 import {
   DeviceType,
-  FileStatus,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -70,12 +67,10 @@ const QuickButtons = (props) => {
     t,
     item,
     theme,
-    sectionWidth,
     onClickLock,
     onClickDownload,
     onCopyPrimaryLink,
     isDisabled,
-    onClickFavorite,
     viewAs,
     folderCategory,
     isPublicRoom,
@@ -92,10 +87,7 @@ const QuickButtons = (props) => {
 
   const isMobile = currentDeviceType === DeviceType.mobile;
 
-  const { id, locked, shared, fileStatus, title, fileExst } = item;
-
-  const isFavorite =
-    (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
+  const { id, locked, shared, fileExst } = item;
 
   const isTile = viewAs === "tile";
   const isRow = viewAs == "row";
@@ -112,14 +104,6 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
-  const iconFavorite = isFavorite
-    ? FileActionsFavoriteReactSvgUrl
-    : FavoriteReactSvgUrl;
-
-  const colorFavorite = isFavorite
-    ? theme.filesQuickButtons.sharedColor
-    : theme.filesQuickButtons.color;
-
   const colorShare = shared
     ? currentColorScheme.main?.accent
     : theme.filesQuickButtons.color;
@@ -132,8 +116,6 @@ const QuickButtons = (props) => {
     (isRow && locked && isMobile) ||
     isTile ||
     tabletViewQuickButton;
-
-  const setFavorite = () => onClickFavorite(isFavorite);
 
   const isAvailableLockFile =
     !folderCategory && fileExst && displayBadges && item.security.Lock;
@@ -200,7 +182,7 @@ const QuickButtons = (props) => {
               className="badge lock-file icons-group"
               size={sizeQuickButton}
               data-id={id}
-              data-locked={locked ? true : false}
+              data-locked={!!locked}
               onClick={onClickLock}
               color={colorLock}
               isDisabled={isDisabled}
@@ -239,7 +221,7 @@ const QuickButtons = (props) => {
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                ["create-share-link"]: !item.shared,
+                "create-share-link": !item.shared,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}

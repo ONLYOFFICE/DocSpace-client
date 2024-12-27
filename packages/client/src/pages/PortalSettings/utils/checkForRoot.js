@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const checkForRoot = (key, treeData, depth = 0) => {
-  let newKey = key.slice(0, 1 + 2 * depth);
-  const item = treeData.find((item) => item.key === newKey);
+  const newKey = key.slice(0, 1 + 2 * depth);
+  const item = treeData.find((element) => element.key === newKey);
   if (key === newKey) {
-    return item.children ? true : false;
-  } else {
-    const depthLevel = depth + 1;
-    return checkForRoot(key, item.children, depthLevel);
+    return !!item.children;
   }
+  const depthLevel = depth + 1;
+  return checkForRoot(key, item.children, depthLevel);
 };

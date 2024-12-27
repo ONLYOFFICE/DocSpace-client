@@ -86,7 +86,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
     },
   ];
 
-  const selectedInputValue = lifetime.value + "";
+  const selectedInputValue = `${lifetime.value}`;
   const selectedDateOption = dateOptions.find(
     (o) => o.value === lifetime.period,
   );
@@ -164,7 +164,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             isDisabled={isLoading}
             showDisabledItems
             selectedOption={selectedDate}
-            scaledOptions={true}
+            scaledOptions
             onSelect={onSelectDate}
             directionY="bottom"
           />

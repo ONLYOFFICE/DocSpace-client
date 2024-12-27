@@ -72,6 +72,8 @@ const ClientArticle = React.memo(
   },
 );
 
+ClientArticle.displayName = "ClientArticle";
+
 const ClientContent = (props) => {
   const {
     loadClientInfo,
@@ -173,9 +175,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
           />
         )
-      ) : (
-        <></>
-      )}
+      ) : null}
       <Outlet />
     </>
   );

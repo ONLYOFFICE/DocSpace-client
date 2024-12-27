@@ -51,7 +51,7 @@ const StyledTagList = styled.div`
   }
 `;
 
-const TagList = ({ defaultTagLabel, tagHandler, isDisabled }) => {
+const TagList = ({ tagHandler, isDisabled }) => {
   const { tags } = tagHandler;
 
   const onDeleteAction = (id) => {

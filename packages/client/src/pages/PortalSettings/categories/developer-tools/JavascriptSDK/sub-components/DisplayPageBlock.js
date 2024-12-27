@@ -35,10 +35,10 @@ export const DisplayPageBlock = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.filter.page);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => ({
-        ...config,
-        filter: { ...config.filter, page: value },
+    debounce((newValue) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        filter: { ...oldConfig.filter, page: newValue },
       }));
     }, 500),
     [setConfig],

@@ -240,8 +240,11 @@ class DialogsStore {
   };
 
   newFilesPanelFolderId = null;
+
   formFillingTipsVisible = false;
+
   welcomeFormFillingTipsVisible = false;
+
   formFillingTipsNumber = 1;
 
   sortedDownloadFiles = {
@@ -806,6 +809,7 @@ class DialogsStore {
   setCloseEditIndexDialogVisible = (visible) => {
     this.closeEditIndexDialogVisible = visible;
   };
+
   setFormFillingTipsDialog = (visible) => {
     this.formFillingTipsVisible = visible;
   };

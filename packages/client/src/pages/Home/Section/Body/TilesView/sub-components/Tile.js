@@ -494,7 +494,6 @@ class Tile extends React.PureComponent {
     };
 
     this.cm = React.createRef();
-    this.tile = React.createRef();
     this.checkboxContainerRef = React.createRef();
   }
 
@@ -634,7 +633,7 @@ class Tile extends React.PureComponent {
     const onContextMenu = (e) => {
       tileContextClick && tileContextClick(e.button === 2);
       if (!this.cm.current.menuRef.current) {
-        forwardedRef.current.click(e); //TODO: need fix context menu to global
+        forwardedRef.current.click(e); // TODO: need fix context menu to global
       }
       this.cm.current.show(e);
     };

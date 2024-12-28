@@ -27,6 +27,7 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -38,7 +39,6 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
-import { FolderType } from "@docspace/shared/enums";
 
 const FilesTableRow = (props) => {
   const {

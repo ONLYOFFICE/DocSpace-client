@@ -38,10 +38,10 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+import { FolderType } from "@docspace/shared/enums";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import FilesRowContent from "./FilesRowContent";
 
-import { FolderType } from "@docspace/shared/enums";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";

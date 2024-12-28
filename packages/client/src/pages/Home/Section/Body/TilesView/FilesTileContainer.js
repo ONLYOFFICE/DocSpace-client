@@ -148,7 +148,7 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore, dialogsStore }) => {
+export default inject(({ filesStore, dialogsStore }) => {
   const { filesList, setGuidanceCoordinates } = filesStore;
   const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
     dialogsStore;

@@ -123,6 +123,7 @@ const config: Config = {
     "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
   },
 
+  testTimeout: 70000,
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
 

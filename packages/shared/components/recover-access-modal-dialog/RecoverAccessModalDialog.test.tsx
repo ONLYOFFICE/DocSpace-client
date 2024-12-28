@@ -24,12 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type RecoverAccessModalDialogProps = {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-}
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import { screen, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-export type { RecoverAccessModalDialogProps };
+import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { language: "en" },
+  }),
+}));
+
+jest.mock("../../api/settings", () => ({
+  sendRecoverRequest: jest.fn(),
+}));
+
+const mockStore = configureStore([]);
+const store = mockStore({});
+
+describe("RecoverAccessModalDialog", () => {
+  const defaultProps = {
+    visible: true,
+    onClose: jest.fn(),
+    textBody: "Test body text",
+    emailPlaceholderText: "Enter email",
+    id: "test-modal",
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders correctly with default props", () => {
+    render(
+      <Provider store={store}>
+        <RecoverAccessModalDialog {...defaultProps} />
+      </Provider>,
+    );
+
+    expect(screen.getByTestId("recover-access-modal-text")).toHaveTextContent(
+      "Test body text",
+    );
+  });
+});

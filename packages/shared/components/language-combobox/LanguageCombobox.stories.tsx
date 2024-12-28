@@ -24,12 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type RecoverAccessModalDialogProps = {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-}
+import { Story, Meta } from "@storybook/react";
+import { LanguageCombobox } from "./LanguageCombobox";
+import { ComboboxProps } from "./LanguageCombobox.types";
 
-export type { RecoverAccessModalDialogProps };
+export default {
+  title: "Components/LanguageCombobox",
+  component: LanguageCombobox,
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  decorators: [(Story) => <Story />],
+  argTypes: {
+    withBorder: {
+      control: "boolean",
+      defaultValue: true,
+    },
+    isMobileView: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    selectedCulture: {
+      control: "select",
+      options: ["en", "de", "fr", "es", "it"],
+    },
+  },
+} as Meta;
+
+const Template: Story<ComboboxProps> = (args) => <LanguageCombobox {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  selectedCulture: "en",
+  cultures: ["en", "de", "fr", "es", "it"],
+  onSelectLanguage: (culture) => console.log("Selected culture:", culture),
+  className: "custom-class",
+  withBorder: true,
+  isMobileView: false,
+};
+
+export const MobileView = Template.bind({});
+MobileView.args = {
+  ...Default.args,
+  isMobileView: true,
+};
+
+export const WithoutBorder = Template.bind({});
+WithoutBorder.args = {
+  ...Default.args,
+  withBorder: false,
+};

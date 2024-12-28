@@ -24,12 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type RecoverAccessModalDialogProps = {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-}
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { LanguageCombobox } from "./LanguageCombobox";
 
-export type { RecoverAccessModalDialogProps };
+// Mock react-i18next
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ i18n: { language: "en" }, t: (key: string) => key }),
+}));
+
+const mockOnSelectLanguage = jest.fn();
+
+const defaultProps = {
+  selectedCulture: "en",
+  cultures: ["en", "de", "fr"],
+  onSelectLanguage: mockOnSelectLanguage,
+  className: "test-class",
+};
+
+describe("LanguageCombobox", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders without crashing", () => {
+    render(<LanguageCombobox {...defaultProps} />);
+    expect(screen.getByTestId("combobox")).toBeInTheDocument();
+  });
+
+  it("applies custom className", () => {
+    render(<LanguageCombobox {...defaultProps} />);
+    expect(screen.getByTestId("combobox")).toHaveClass("test-class");
+  });
+});

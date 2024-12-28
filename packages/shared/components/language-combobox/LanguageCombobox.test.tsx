@@ -23,39 +23,37 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
 
-import { ComboBox } from "../combobox";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { LanguageCombobox } from "./LanguageCombobox";
 
-export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
-  width: 41px;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 0;
+// Mock react-i18next
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ i18n: { language: "en" }, t: (key: string) => key }),
+}));
 
-  .combo-button {
-    padding: 7px;
+const mockOnSelectLanguage = jest.fn();
 
-    ${(props) =>
-      !props.withBorder &&
-      css`
-        border-width: 0;
-        background: transparent;
-      `};
+const defaultProps = {
+  selectedCulture: "en",
+  cultures: ["en", "de", "fr"],
+  onSelectLanguage: mockOnSelectLanguage,
+  className: "test-class",
+};
 
-    :hover {
-      ${(props) =>
-        props.theme.comboBox &&
-        css`
-          border-color: ${props.theme.comboBox.button.hoverBorderColor};
-        `};
-    }
-  }
+describe("LanguageCombobox", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  .combo-button_selected-icon-container {
-    margin-inline-end: 0px;
-  }
-  .combo-buttons_arrow-icon {
-    margin: 0;
-  }
-`;
+  it("renders without crashing", () => {
+    render(<LanguageCombobox {...defaultProps} />);
+    expect(screen.getByTestId("combobox")).toBeInTheDocument();
+  });
+
+  it("applies custom className", () => {
+    render(<LanguageCombobox {...defaultProps} />);
+    expect(screen.getByTestId("combobox")).toHaveClass("test-class");
+  });
+});

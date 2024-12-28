@@ -59,7 +59,7 @@ export type TRegularOption = TBaseOption & {
 };
 
 export type TSeparatorOption = TBaseOption & {
-  isSeparator: true;
+  isSeparator?: true;
 };
 
 export type TOption = TRegularOption | TSeparatorOption;
@@ -151,6 +151,8 @@ export type TComboboxProps = {
   setIsOpenItemAccess?: (isOpen: boolean) => void;
   /** Size */
   size?: ComboBoxSize;
+
+  role?: string;
   /** Style */
   style?: React.CSSProperties;
   /** Tab index */

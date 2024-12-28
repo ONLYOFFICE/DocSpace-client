@@ -23,39 +23,52 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
 
-import { ComboBox } from "../combobox";
+import { Story, Meta } from "@storybook/react";
+import { LanguageCombobox } from "./LanguageCombobox";
+import { ComboboxProps } from "./LanguageCombobox.types";
 
-export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
-  width: 41px;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 0;
+export default {
+  title: "Components/LanguageCombobox",
+  component: LanguageCombobox,
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  decorators: [(Story) => <Story />],
+  argTypes: {
+    withBorder: {
+      control: "boolean",
+      defaultValue: true,
+    },
+    isMobileView: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    selectedCulture: {
+      control: "select",
+      options: ["en", "de", "fr", "es", "it"],
+    },
+  },
+} as Meta;
 
-  .combo-button {
-    padding: 7px;
+const Template: Story<ComboboxProps> = (args) => <LanguageCombobox {...args} />;
 
-    ${(props) =>
-      !props.withBorder &&
-      css`
-        border-width: 0;
-        background: transparent;
-      `};
+export const Default = Template.bind({});
+Default.args = {
+  selectedCulture: "en",
+  cultures: ["en", "de", "fr", "es", "it"],
+  onSelectLanguage: (culture) => console.log("Selected culture:", culture),
+  className: "custom-class",
+  withBorder: true,
+  isMobileView: false,
+};
 
-    :hover {
-      ${(props) =>
-        props.theme.comboBox &&
-        css`
-          border-color: ${props.theme.comboBox.button.hoverBorderColor};
-        `};
-    }
-  }
+export const MobileView = Template.bind({});
+MobileView.args = {
+  ...Default.args,
+  isMobileView: true,
+};
 
-  .combo-button_selected-icon-container {
-    margin-inline-end: 0px;
-  }
-  .combo-buttons_arrow-icon {
-    margin: 0;
-  }
-`;
+export const WithoutBorder = Template.bind({});
+WithoutBorder.args = {
+  ...Default.args,
+  withBorder: false,
+};

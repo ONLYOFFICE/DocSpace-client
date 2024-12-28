@@ -24,25 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { PROVIDERS_DATA } from "../../constants";
+import { render, screen } from "@testing-library/react";
+import MoreLoginModal from "./index";
+import { MoreLoginModalProps } from "./MoreLoginModal.types";
+import "@testing-library/jest-dom";
 
-import { TTranslation } from "../../types";
+describe("<MoreLoginModal />", () => {
+  const baseProps: MoreLoginModalProps = {
+    visible: true,
+    onClose: jest.fn(),
+    onSocialLoginClick: jest.fn(),
+    ssoLabel: "SSO Login",
+    ssoUrl: "https://example.com/sso",
+    t: jest.fn((key: string) => key),
+    isSignUp: false,
+    providers: [
+      { linked: false, provider: "google", url: "https://example.com/google" },
+      {
+        linked: false,
+        provider: "facebook",
+        url: "https://example.com/facebook",
+      },
+    ],
+  };
 
-export type ProvidersDataType = typeof PROVIDERS_DATA;
-
-type Provider = {
-  linked: boolean;
-  provider: string;
-  url: string;
-};
-
-export type MoreLoginModalProps = {
-  visible: boolean;
-  onClose: VoidFunction;
-  providers?: Provider[];
-  onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
-  ssoLabel: string;
-  ssoUrl: string;
-  t: TTranslation;
-  isSignUp: boolean;
-};
+  it("renders without error", () => {
+    render(<MoreLoginModal {...baseProps} />);
+    expect(screen.getByTestId("modal")).toBeInTheDocument();
+  });
+});

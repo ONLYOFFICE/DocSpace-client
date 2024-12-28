@@ -32,19 +32,28 @@ import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";
 import type { TColorScheme, TTheme } from "../../themes";
 
-export interface ErrorBoundaryProps extends PropsWithChildren {
+export type ErrorBoundaryProps = PropsWithChildren & {
+  /** Callback function to be called when an error occurs */
   onError?: VoidFunction;
+  /** Current user information */
   user: TUser;
+  /** Application version string */
   version: string;
+  /** Firebase helper instance for error reporting and analytics */
   firebaseHelper: FirebaseHelper;
+  /** Current device type (desktop, mobile, etc.) */
   currentDeviceType: DeviceType;
+  /** Current color scheme (light/dark) */
   currentColorScheme?: TColorScheme;
-
+  /** Flag indicating if the app is running in Next.js environment */
   isNextJS?: boolean;
+  /** Current theme settings */
   theme?: TTheme;
+  /** i18next instance for translations */
   i18n?: i18n;
-}
+};
 
-export interface ErrorBoundaryState {
+export type ErrorBoundaryState = {
+  /** Current error object if an error occurred, null otherwise */
   error: Error | null;
-}
+};

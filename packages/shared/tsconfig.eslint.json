@@ -30,6 +30,7 @@
     "tsconfig.eslint.json",
     "routes",
     "polyfills",
-    "api"
+    "api",
+    "jest"
   ]
 }

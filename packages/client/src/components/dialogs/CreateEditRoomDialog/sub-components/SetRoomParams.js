@@ -389,10 +389,10 @@ const SetRoomParams = ({
   );
 
   const tagsTitle =
-    !!isTemplateSelected || isSaveAsTemplate ? t("Files:RoomTags") : "";
+    isTemplateSelected || isSaveAsTemplate ? t("Files:RoomTags") : "";
 
   const inputTitle =
-    !!isTemplateSelected || isSaveAsTemplate
+    isTemplateSelected || isSaveAsTemplate
       ? `${t("Files:RoomName")}:`
       : `${t("Common:Name")}:`;
 
@@ -400,7 +400,7 @@ const SetRoomParams = ({
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
       {isEdit ||
       disabledChangeRoomType ||
-      !!isTemplateSelected ||
+      isTemplateSelected ||
       isSaveAsTemplate ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (

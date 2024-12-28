@@ -2959,9 +2959,7 @@ class FilesActionStore {
   };
 
   onCreateRoomFromTemplate = (item) => {
-    console.log("onCreateRoomFromTemplate", item); // TODO: Templates
-
-    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    const event = new Event(Events.ROOM_CREATE);
     event.item = item;
     window.dispatchEvent(event);
   };

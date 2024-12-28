@@ -174,6 +174,7 @@ const GlobalEvents = ({
     );
     setCreateRoomDialogProps({
       ...startRoomParams,
+      item: e.item,
       visible: true,
       onClose: () =>
         setCreateRoomDialogProps({

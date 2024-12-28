@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TRoom } from "api/rooms/types";
 import { RoomsType } from "../enums";
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
@@ -53,6 +54,48 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   return startRoomParams;
 };
 
+const getFetchedRoomParams = (
+  item: TRoom,
+  getThirdPartyIcon: (provider: string) => string,
+  isDefaultRoomsQuotaSet: boolean,
+) => {
+  const startTags = Object.values(item.tags);
+  const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
+
+  const fetchedRoomParams = {
+    type: item.roomType,
+    title: item.title,
+    tags: startObjTags,
+    isThirdparty: !!item.providerKey,
+    storageLocation: {
+      title: item.title,
+      parentId: item.parentId,
+      providerKey: item.providerKey,
+      iconSrc: getThirdPartyIcon(item.providerKey || ""),
+    },
+    isPrivate: false,
+    icon: {
+      uploadedFile: item.logo.original,
+      tmpFile: "",
+      x: 0.5,
+      y: 0.5,
+      zoom: 1,
+    },
+    withCover: false,
+    previewIcon: null,
+    roomOwner: item.createdBy,
+    canChangeRoomOwner: item?.security?.ChangeOwner || false,
+    indexing: item.indexing,
+    lifetime: item.lifetime,
+    denyDownload: item.denyDownload,
+    watermark: item.watermark,
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
+  };
+  return fetchedRoomParams;
+};
+
 const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   const additionalParams = {
     indexing: roomType === RoomsType.VirtualDataRoom ? true : undefined,
@@ -67,4 +110,8 @@ const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   return additionalParams;
 };
 
-export { getStartRoomParams, getRoomCreationAdditionalParams };
+export {
+  getStartRoomParams,
+  getRoomCreationAdditionalParams,
+  getFetchedRoomParams,
+};

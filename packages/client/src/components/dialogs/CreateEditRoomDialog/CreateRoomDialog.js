@@ -57,6 +57,7 @@ const CreateRoomDialog = ({
   setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
+  fetchedRoomParams,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -81,13 +82,18 @@ const CreateRoomDialog = ({
     };
   });
 
-  const startRoomParams = getStartRoomParams(startRoomType, title);
+  const isTemplateItem = !!fetchedRoomParams;
+
+  const startRoomParams = isTemplateItem
+    ? { ...fetchedRoomParams, isTemplate: true }
+    : getStartRoomParams(startRoomType, title);
 
   const [roomParams, setRoomParams] = useState({
     ...startRoomParams,
   });
   const [isValidTitle, setIsValidTitle] = useState(true);
-  const [isTemplateSelected, setIsTemplateSelected] = useState(false);
+  const [isTemplateSelected, setIsTemplateSelected] =
+    useState(!!fetchedRoomParams);
 
   const setRoomTags = (newTags) =>
     setRoomParams({ ...roomParams, tags: newTags });
@@ -180,7 +186,7 @@ const CreateRoomDialog = ({
   const onSubmitRoom = (items) => {
     console.log("onSubmitRoom", items);
     const item = items[0];
-    setIsTemplateSelected(item);
+    setIsTemplateSelected(true);
 
     setRoomParams((prev) => ({
       ...prev,

@@ -27,6 +27,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
 import { CreateRoomDialog } from "../dialogs";
 
 const CreateRoomEvent = ({
@@ -57,6 +58,9 @@ const CreateRoomEvent = ({
   setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
+  getThirdPartyIcon,
+  isDefaultRoomsQuotaSet,
+  item,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -95,6 +99,16 @@ const CreateRoomEvent = ({
     };
   }, []);
 
+  const roomParams = item
+    ? {
+        fetchedRoomParams: getFetchedRoomParams(
+          item,
+          getThirdPartyIcon,
+          isDefaultRoomsQuotaSet,
+        ),
+      }
+    : {};
+
   return (
     <CreateRoomDialog
       title={title}
@@ -118,6 +132,7 @@ const CreateRoomEvent = ({
       setProcessCreatingRoomFromData={setProcessCreatingRoomFromData}
       selectionItems={selectionItems}
       setSelectedRoomType={setSelectedRoomType}
+      {...roomParams}
     />
   );
 };
@@ -131,6 +146,7 @@ export default inject(
     filesSettingsStore,
     filesStore,
     filesActionsStore,
+    currentQuotaStore,
   }) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -138,7 +154,7 @@ export default inject(
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       filesActionsStore;
 
-    const { deleteThirdParty, fetchThirdPartyProviders } =
+    const { deleteThirdParty, fetchThirdPartyProviders, getThirdPartyIcon } =
       filesSettingsStore.thirdPartyStore;
 
     const { enableThirdParty } = filesSettingsStore;
@@ -162,6 +178,8 @@ export default inject(
       isCorrectWatermark,
       setSelectedRoomType,
     } = createEditRoomStore;
+
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const selectionItems = selections;
 
@@ -187,6 +205,8 @@ export default inject(
       processCreatingRoomFromData,
       setSelectedRoomType,
       setProcessCreatingRoomFromData,
+      getThirdPartyIcon,
+      isDefaultRoomsQuotaSet,
     };
   },
 )(observer(CreateRoomEvent));

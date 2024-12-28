@@ -27,7 +27,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-
+import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
 import { EditRoomDialog } from "../dialogs";
 
 const EditRoomEvent = ({
@@ -48,38 +48,11 @@ const EditRoomEvent = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
 
-  const startTags = Object.values(item.tags);
-  const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
-
-  const fetchedRoomParams = {
-    title: item.title,
-    type: item.roomType,
-    tags: startObjTags,
-    isThirdparty: !!item.providerKey,
-    storageLocation: {
-      title: item.title,
-      parentId: item.parentId,
-      providerKey: item.providerKey,
-      iconSrc: getThirdPartyIcon(item.providerKey),
-    },
-    isPrivate: false,
-    icon: {
-      uploadedFile: item.logo.original,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-    roomOwner: item.createdBy,
-    canChangeRoomOwner: item?.security?.ChangeOwner || false,
-    indexing: item.indexing,
-    lifetime: item.lifetime,
-    denyDownload: item.denyDownload,
-    watermark: item.watermark,
-    ...(isDefaultRoomsQuotaSet && {
-      quota: item.quotaLimit,
-    }),
-  };
+  const fetchedRoomParams = getFetchedRoomParams(
+    item,
+    getThirdPartyIcon,
+    isDefaultRoomsQuotaSet,
+  );
 
   const onSave = async (roomParams) => {
     setIsLoading(true);

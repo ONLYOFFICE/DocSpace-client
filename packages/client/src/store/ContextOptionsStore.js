@@ -840,7 +840,9 @@ class ContextOptionsStore {
   };
 
   onEditRoomTemplate = (item) => {
-    this.filesActionsStore.onCreateRoomFromTemplate({ ...item, isEdit: true });
+    const event = new Event(Events.ROOM_EDIT);
+    event.item = { ...item, isEdit: true };
+    window.dispatchEvent(event);
   };
 
   onOpenTemplateAccessOptions = () => {

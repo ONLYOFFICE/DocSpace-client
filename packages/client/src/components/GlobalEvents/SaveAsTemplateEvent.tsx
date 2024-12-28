@@ -30,9 +30,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
+import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 
-type CreateRoomTemplateEventProps = {
+type SaveAsTemplateEventProps = {
   visible: boolean;
   item: TRoom & { isEdit: boolean };
   fetchTags: () => TRoom["tags"];
@@ -46,7 +46,7 @@ type CreateRoomTemplateEventProps = {
   ) => void;
 };
 
-const CreateRoomTemplateEvent = (props: CreateRoomTemplateEventProps) => {
+const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
   const {
     visible,
     item,
@@ -127,7 +127,7 @@ const CreateRoomTemplateEvent = (props: CreateRoomTemplateEventProps) => {
   };
 
   return (
-    <CreateRoomTemplateDialog
+    <CreateRoomTemplate
       visible={visible}
       item={item}
       // onSaveClick={onSaveClick}
@@ -163,4 +163,4 @@ export default inject<TStore>(
       onSaveAsTemplate,
     };
   },
-)(observer(CreateRoomTemplateEvent));
+)(observer(SaveAsTemplateEvent));

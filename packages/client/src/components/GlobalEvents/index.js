@@ -41,7 +41,7 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
-import CreateRoomTemplateEvent from "./CreateRoomTemplateEvent";
+import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
 const GlobalEvents = ({
@@ -97,7 +97,7 @@ const GlobalEvents = ({
     props: null,
     onClose: null,
   });
-  const [createRoomTemplateDialog, setCreateRoomTemplateDialog] = useState({
+  const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
     visible: false,
     props: null,
     onClose: null,
@@ -321,11 +321,11 @@ const GlobalEvents = ({
   const onSaveAsTemplate = (e) => {
     const visible = !!e.item;
 
-    setCreateRoomTemplateDialog({
+    setSaveAsTemplateDialog({
       visible,
       item: e.item,
       onClose: () => {
-        setCreateRoomTemplateDialog({
+        setSaveAsTemplateDialog({
           visible: false,
           item: null,
         });
@@ -445,10 +445,10 @@ const GlobalEvents = ({
         {...createPluginFileDialog}
       />
     ),
-    createRoomTemplateDialog.visible && (
-      <CreateRoomTemplateEvent
-        key={Events.CREATE_PLUGIN_FILE}
-        {...createRoomTemplateDialog}
+    saveAsTemplateDialog.visible && (
+      <SaveAsTemplateEvent
+        key={Events.SAVE_AS_TEMPLATE}
+        {...saveAsTemplateDialog}
       />
     ),
     changeQuotaDialog.visible && (

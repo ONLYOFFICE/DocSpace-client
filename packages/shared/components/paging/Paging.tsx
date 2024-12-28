@@ -80,7 +80,7 @@ const Paging = (props: PagingProps) => {
       {pageItems ? (
         <StyledPage>
           <ComboBox
-            isDisabled={disablePrevious ? disableNext : null}
+            isDisabled={disablePrevious ? disableNext : false}
             className="manualWidth"
             directionY={openDirection}
             options={pageItems}

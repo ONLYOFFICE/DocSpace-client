@@ -106,7 +106,7 @@ export type ModalDialogProps = Partial<
   >
 > & {
   /** Displays the child elements */
-  children?: React.ReactElement[] | React.ReactElement;
+  children: (React.ReactElement | null)[] | React.ReactElement;
   /** Displays type */
   displayType?: ModalDialogType;
   /** Detailed display type for each dimension */

@@ -145,7 +145,7 @@ const ModalDialog = ({
   }, []);
 
   const [header, body, footer, container] = parseChildren(
-    children || null,
+    children,
     Header.displayName,
     Body.displayName,
     Footer.displayName,

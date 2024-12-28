@@ -137,8 +137,6 @@ const SortButton = ({
         sortDirection,
       });
 
-      // toggleCombobox();
-
       onSort?.(key || "", sortDirection);
     },
     [onSort, sortData, selectedSortData],
@@ -208,7 +206,6 @@ const SortButton = ({
         disableIconClick={false}
         disableItemClick
         isDefaultMode={false}
-        manualY="102%"
         advancedOptionsCount={advancedOptionsCount}
         onSelect={() => {}}
         withBlur={false}

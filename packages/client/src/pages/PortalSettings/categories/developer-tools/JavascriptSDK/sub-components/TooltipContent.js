@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 
-import XImg from "PUBLIC_DIR/images/x.react.svg";
 import { globalColors } from "@docspace/shared/themes";
 
 const Wrapper = styled.div`

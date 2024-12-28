@@ -28,7 +28,7 @@ import CrossSidebarReactSvgUrl from "PUBLIC_DIR/images/cross.sidebar.react.svg?u
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { mobile } from "@docspace/shared/utils";
@@ -59,7 +59,6 @@ const MobileView = ({
   titleProp,
   actionOptions,
   buttonOptions,
-  isRooms,
   withoutButton,
   withMenu,
   files,
@@ -230,27 +229,24 @@ const MobileView = ({
   ]);
 
   return (
-    <>
-      {mainButtonMobileVisible && (
-        <StyledMainButtonMobile
-          actionOptions={actionOptions}
-          isOpenButton={isOpenButton}
-          mainButtonRef={mainButtonRef}
-          onUploadClick={openButtonToggler}
-          onClose={openButtonToggler}
-          buttonOptions={buttonOptions}
-          percent={percentProgress}
-          progressOptions={progressOptions}
-          title={titleProp}
-          withoutButton={withoutButton}
-          alert={primaryProgressDataAlert}
-          withMenu={withMenu}
-          onClick={onMainButtonClick}
-          onAlertClick={showUploadPanel}
-          withAlertClick={isRoomsFolder}
-        />
-      )}
-    </>
+    mainButtonMobileVisible && (
+      <StyledMainButtonMobile
+        actionOptions={actionOptions}
+        isOpenButton={isOpenButton}
+        onUploadClick={openButtonToggler}
+        onClose={openButtonToggler}
+        buttonOptions={buttonOptions}
+        percent={percentProgress}
+        progressOptions={progressOptions}
+        title={titleProp}
+        withoutButton={withoutButton}
+        alert={primaryProgressDataAlert}
+        withMenu={withMenu}
+        onClick={onMainButtonClick}
+        onAlertClick={showUploadPanel}
+        withAlertClick={isRoomsFolder}
+      />
+    )
   );
 };
 

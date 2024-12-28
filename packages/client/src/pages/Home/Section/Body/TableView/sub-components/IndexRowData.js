@@ -27,20 +27,20 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { VDRIndexingAction } from "@docspace/shared/enums";
 
 const IndexRowDataComponent = (props) => {
   const {
@@ -163,7 +163,7 @@ const IndexRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? lastColumnContent : <></>}
+        {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorVDRColumnIsEnabled ? (
@@ -182,7 +182,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "AuthorIndexing" ? lastColumnContent : <></>}
+          {lastColumn === "AuthorIndexing" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -205,7 +205,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "CreatedIndexing" ? lastColumnContent : <></>}
+          {lastColumn === "CreatedIndexing" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -227,7 +227,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "ModifiedIndexing" ? lastColumnContent : <></>}
+          {lastColumn === "ModifiedIndexing" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -249,7 +249,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "SizeIndexing" ? lastColumnContent : <></>}
+          {lastColumn === "SizeIndexing" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -271,7 +271,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "TypeIndexing" ? lastColumnContent : <></>}
+          {lastColumn === "TypeIndexing" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />

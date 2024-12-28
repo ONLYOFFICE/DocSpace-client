@@ -336,6 +336,8 @@ const StyledContainerTheme = styled(Container)<{
   ${HeaderActionIcon} {
     border-color: ${(props) => props.$currentColorScheme?.main?.accent};
   }
+
+  border: 1px solid ${({ theme }) => theme.calendar.containerBorderColor};
 `;
 
 const StyledDateItemTheme = styled(DateItem)<{

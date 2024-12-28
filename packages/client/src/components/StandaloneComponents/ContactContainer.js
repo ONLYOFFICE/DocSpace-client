@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
 import { StyledContactComponent } from "./StyledComponent";
+
 const ContactContainer = (props) => {
   const { t } = useTranslation("PaymentsEnterprise");
 

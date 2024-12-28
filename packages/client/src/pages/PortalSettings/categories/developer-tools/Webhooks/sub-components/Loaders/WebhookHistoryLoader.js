@@ -58,18 +58,18 @@ const HistoryRowWrapper = styled.div`
   }
 `;
 
-export const WebhookHistoryLoader = () => {
-  const HistoryRowLoader = () => (
-    <HistoryRowWrapper>
-      <RectangleSkeleton
-        width="20px"
-        height="20px"
-        className="historyIconLoader"
-      />
-      <RectangleSkeleton height="20px" className="historyContentLoader" />
-    </HistoryRowWrapper>
-  );
+const HistoryRowLoader = () => (
+  <HistoryRowWrapper>
+    <RectangleSkeleton
+      width="20px"
+      height="20px"
+      className="historyIconLoader"
+    />
+    <RectangleSkeleton height="20px" className="historyContentLoader" />
+  </HistoryRowWrapper>
+);
 
+export const WebhookHistoryLoader = () => {
   return (
     <LoaderWrapper>
       <NavContainerLoader>

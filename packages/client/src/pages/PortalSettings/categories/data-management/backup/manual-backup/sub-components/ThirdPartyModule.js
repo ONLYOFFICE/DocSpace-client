@@ -28,8 +28,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType } from "@docspace/shared/enums";
+import { getFromLocalStorage } from "../../../../../utils";
 import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";
 
 let folder = "";
@@ -46,23 +46,23 @@ class ThirdPartyModule extends React.Component {
 
     this.state = {
       isStartCopy: false,
-      selectedFolder: selectedFolder,
+      selectedFolder,
       isError: false,
-      isLoading: false,
     };
 
-    this._isMount = false;
+    this.isMount = false;
   }
 
   componentDidMount() {
-    this._isMount = true;
+    this.isMount = true;
   }
+
   componentWillUnmount() {
-    this._isMount = false;
+    this.isMount = false;
   }
 
   onSelectFolder = (folderId) => {
-    this._isMount &&
+    this.isMount &&
       this.setState({
         selectedFolder: folderId,
       });

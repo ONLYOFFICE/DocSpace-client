@@ -118,7 +118,7 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
           item={item}
           itemIndex={index}
           selectableRef={onSetTileRef}
-          withRef={true}
+          withRef
         />
       ) : (
         <FileTile

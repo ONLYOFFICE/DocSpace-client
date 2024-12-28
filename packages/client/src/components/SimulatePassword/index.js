@@ -40,15 +40,14 @@ const bulletsFont = "•";
 const StyledBody = styled.div`
   width: 100%;
 
-  #conversion-password {
+  .conversion-input {
+    width: 100%;
+    text-align: start;
+
     max-width: ${(props) =>
       props.inputMaxWidth ? props.inputMaxWidth : "382px"};
     width: 100%;
     margin: 0;
-  }
-  .conversion-input {
-    width: 100%;
-    text-align: start;
   }
 `;
 const SimulatePassword = memo(
@@ -72,19 +71,16 @@ const SimulatePassword = memo(
 
       const oldPassword = password;
       const oldPasswordLength = oldPassword.length;
-      const caretPosition = document.getElementById(
-        "conversion-password",
-      ).selectionStart;
+      const position = forwardedRef.current.selectionStart;
 
-      setCaretPosition(caretPosition);
-      const newCharactersUntilCaret = newPassword.substring(0, caretPosition);
+      setCaretPosition(position);
+      const newCharactersUntilCaret = newPassword.substring(0, position);
 
       const unchangedStartCharacters = newCharactersUntilCaret
         .split("")
         .filter((el) => el === bulletsFont).length;
 
-      const unchangedEndingCharacters =
-        newPassword.substring(caretPosition).length;
+      const unchangedEndingCharacters = newPassword.substring(position).length;
       const addedCharacters = newCharactersUntilCaret.substring(
         unchangedStartCharacters,
       );
@@ -134,9 +130,7 @@ const SimulatePassword = memo(
 
       caretPosition &&
         inputType === "password" &&
-        document
-          .getElementById("conversion-password")
-          .setSelectionRange(caretPosition, caretPosition);
+        forwardedRef.current?.setSelectionRange(caretPosition, caretPosition);
     }, [password]);
 
     useEffect(() => {
@@ -178,9 +172,12 @@ const SimulatePassword = memo(
   },
 );
 
+SimulatePassword.displayName = "SimulatePassword";
+
 SimulatePassword.propTypes = {
   inputMaxWidth: PropTypes.string,
   hasError: PropTypes.bool,
   onChange: PropTypes.func,
 };
+
 export default SimulatePassword;

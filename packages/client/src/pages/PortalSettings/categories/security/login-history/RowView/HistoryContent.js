@@ -74,7 +74,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
         <Text
           fontWeight={600}
           fontSize="14px"
-          isTextOverflow={true}
+          isTextOverflow
           className="settings_unavailable"
         >
           {item.user}
@@ -85,7 +85,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
         containerMinWidth="120px"
         fontSize="12px"
         fontWeight={600}
-        truncate={true}
+        truncate
         className="settings_unavailable date-text"
       >
         {dateStr}

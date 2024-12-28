@@ -77,7 +77,7 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 const Nav = React.memo((props) => {
-  //console.log("Nav render");
+  // console.log("Nav render");
   const { opened, onMouseEnter, onMouseLeave, children, numberOfModules } =
     props;
   return (

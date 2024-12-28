@@ -51,8 +51,9 @@ export default function withQuickButtons(WrappedComponent) {
     onClickLock = () => {
       const { item, lockFileAction, t } = this.props;
       const { locked, id, security } = item;
+      const { isLoading } = this.state;
 
-      if (security?.Lock && !this.state.isLoading) {
+      if (security?.Lock && !isLoading) {
         this.setState({ isLoading: true });
         return lockFileAction(id, !locked)
           .then(() =>
@@ -65,11 +66,11 @@ export default function withQuickButtons(WrappedComponent) {
             this.setState({ isLoading: false }),
           );
       }
-      return;
     };
 
     onClickDownload = () => {
-      window.open(this.props.item.viewUrl, "_self");
+      const { item } = this.props;
+      window.open(item.viewUrl, "_self");
     };
 
     onClickFavorite = (showFavorite) => {
@@ -118,8 +119,9 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     getStartDate = () => {
-      const { period, value } = this.props.roomLifetime;
-      const date = new Date(this.props.item.expired);
+      const { roomLifetime, item } = this.props;
+      const { period, value } = roomLifetime;
+      const date = new Date(item.expired);
 
       switch (period) {
         case 0:

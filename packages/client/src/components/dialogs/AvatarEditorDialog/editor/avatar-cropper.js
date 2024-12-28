@@ -139,7 +139,7 @@ const AvatarCropper = ({
     onChangeAvatar({ ...avatar, x: position.x, y: position.y });
 
   const handleSliderChange = (e, newZoom = null) =>
-    onChangeAvatar({ ...avatar, zoom: newZoom ? newZoom : +e.target.value });
+    onChangeAvatar({ ...avatar, zoom: newZoom || +e.target.value });
 
   const handleZoomInClick = () =>
     handleSliderChange({}, avatar.zoom <= 4.5 ? avatar.zoom + 0.5 : 5);
@@ -205,7 +205,7 @@ const AvatarCropper = ({
           size="16"
           onClick={handleZoomOutClick}
           iconName={ZoomMinusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
         />
         <Slider
@@ -221,7 +221,7 @@ const AvatarCropper = ({
           size="16"
           onClick={handleZoomInClick}
           iconName={ZoomPlusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
         />
       </div>

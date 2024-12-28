@@ -33,6 +33,7 @@ import { inject, observer } from "mobx-react";
 import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { globalColors } from "@docspace/shared/themes";
+import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`
   width: 100%;
@@ -75,15 +76,6 @@ const ErrorMessageTooltip = styled.div`
     margin-inline-end: 8px;
   }
 `;
-
-function isJSON(jsonString) {
-  try {
-    const parsedJson = JSON.parse(jsonString);
-    return parsedJson && typeof parsedJson === "object";
-  } catch (e) {}
-
-  return false;
-}
 
 const RequestDetails = ({ eventDetails }) => {
   const { t } = useTranslation(["Webhooks"]);

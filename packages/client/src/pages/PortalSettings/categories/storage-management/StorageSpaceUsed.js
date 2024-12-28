@@ -34,16 +34,15 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import ChangeStorageQuotaDialog from "SRC_DIR/components/dialogs/ChangeStorageQuotaDialog";
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
 import {
   StyledDiscSpaceUsedComponent,
   StyledMainTitle,
 } from "./StyledComponent";
-
-import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
-import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
-import ChangeStorageQuotaDialog from "SRC_DIR/components/dialogs/ChangeStorageQuotaDialog";
 
 const DiskSpaceUsedComponent = (props) => {
   const {
@@ -118,17 +117,13 @@ const DiskSpaceUsedComponent = (props) => {
       <div className="disk-space_content">
         <div className="disk-space_size-info">
           {(!standalone || (standalone && isTenantCustomQuotaSet)) && (
-            <Text
-              fontWeight={700}
-              fontSize={"14px"}
-              className="disk-space_title"
-            >
+            <Text fontWeight={700} fontSize="14px" className="disk-space_title">
               {t("TotalStorage", {
                 size: totalSize,
               })}
             </Text>
           )}
-          <Text fontWeight={700} fontSize={"14px"} className="disk-space_title">
+          <Text fontWeight={700} fontSize="14px" className="disk-space_title">
             {t("UsedStorage", {
               size: usedSize,
             })}

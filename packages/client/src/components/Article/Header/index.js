@@ -28,11 +28,11 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import withLoader from "../../../HOCs/withLoader";
 import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
+import withLoader from "../../../HOCs/withLoader";
 
 const ArticleHeaderContent = ({ currentModuleName }) => {
-  return <>{currentModuleName}</>;
+  return currentModuleName;
 };
 
 export default inject(({ authStore }) => {

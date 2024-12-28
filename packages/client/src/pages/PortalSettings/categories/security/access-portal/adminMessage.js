@@ -38,8 +38,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
 
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -67,6 +69,12 @@ const AdminMessage = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("admin-message") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
@@ -127,12 +135,6 @@ const AdminMessage = (props) => {
     }
   }, [type]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("admin-message") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectType = (e) => {
     if (type !== e.target.value) {
       setType(e.target.value);
@@ -140,7 +142,7 @@ const AdminMessage = (props) => {
   };
 
   const onSaveClick = () => {
-    const turnOn = type === "enable" ? true : false;
+    const turnOn = type === "enable";
     setMessageSettings(turnOn);
     toastr.success(t("SuccessfullySaveSettingsMessage"));
     saveToSessionStorage("currentAdminMessageSettings", type);
@@ -210,7 +212,7 @@ const AdminMessage = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="admin-message-save"
         additionalClassCancelButton="admin-message-cancel"

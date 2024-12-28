@@ -32,21 +32,17 @@ const TABLE_COLUMNS = `SessionsColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (let col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
-
-      columns.push(col);
-    }
+      return { ...(col || {}), enable: !!column };
+    });
     return columns;
-  } else {
-    return defaultColumns;
   }
+  return defaultColumns;
 };
 
 const SessionsTableHeader = (props) => {
@@ -59,6 +55,23 @@ const SessionsTableHeader = (props) => {
     columnStorageName,
     columnInfoPanelStorageName,
   } = props;
+
+  const [columns, setColumns] = useState([]);
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
+  }
 
   const defaultColumns = [
     {
@@ -88,26 +101,9 @@ const SessionsTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
   useEffect(() => {
-    setColumns(getColumns(defaultColumns));
+    setColumns(getColumns(defaultColumns, userId));
   }, []);
-
-  function onColumnChange(key, e) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
 
   return (
     <TableHeader

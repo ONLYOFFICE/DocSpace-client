@@ -51,6 +51,7 @@ TileContainer.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  useReactWindow: PropTypes.bool,
 };
 
 TileContainer.defaultProps = {

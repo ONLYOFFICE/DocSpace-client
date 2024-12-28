@@ -60,18 +60,50 @@ class ConsumerModalDialog extends React.Component {
     const required = createRef();
     required.current = [];
     this.requiredRef = required.current;
+
+    const { selectedConsumer, t, theme, urlSupport } = this.props;
+
+    this.consumerInstruction =
+      selectedConsumer.instruction &&
+      format(selectedConsumer.instruction, <Box marginProp="0" />);
+
+    this.helpCenterDescription = (
+      <Trans t={t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
+        Detailed instructions in our{" "}
+        <Link
+          id="help-center-link"
+          color={theme.client.settings.integration.linkColor}
+          isHovered={false}
+          target="_blank"
+          href={this.thirdPartyServicesUrl()}
+        >
+          Help Center
+        </Link>
+      </Trans>
+    );
+
+    this.supportTeamDescription = (
+      <StyledBox>
+        <Trans t={t} i18nKey="ThirdPartyBottomDescription" ns="Settings">
+          If you still have some questions on how to connect this service or
+          need technical assistance, please feel free to contact our{" "}
+          <Link
+            id="support-team-link"
+            color={theme.client.settings.integration.linkColor}
+            isHovered={false}
+            target="_blank"
+            href={urlSupport}
+          >
+            Support Team
+          </Link>
+        </Trans>
+      </StyledBox>
+    );
   }
 
-  mapTokenNameToState = () => {
-    const { selectedConsumer } = this.props;
-    selectedConsumer.props.map((prop) => {
-      this.requiredRef.push(prop.name);
-
-      this.setState({
-        [`${prop.name}`]: prop.value,
-      });
-    });
-  };
+  componentDidMount() {
+    this.mapTokenNameToState();
+  }
 
   onChangeHandler = (e) => {
     this.setState({
@@ -94,7 +126,7 @@ class ConsumerModalDialog extends React.Component {
     const prop = [];
 
     let i = 0;
-    let stateLength = Object.keys(state).length;
+    const stateLength = Object.keys(state).length;
     for (i = 0; i < stateLength; i++) {
       prop.push({
         name: Object.keys(state)[i],
@@ -127,99 +159,91 @@ class ConsumerModalDialog extends React.Component {
   //   return nextState !== this.state;
   // }
 
-  componentDidMount() {
-    this.mapTokenNameToState();
-  }
+  mapTokenNameToState = () => {
+    const { selectedConsumer } = this.props;
+    selectedConsumer.props.forEach((prop) => {
+      this.requiredRef.push(prop.name);
 
-  thirdPartyServicesUrl = () => {
-    switch (this.props.selectedConsumer.name) {
-      case "docusign" || "docuSign":
-        return this.props.docuSignUrl;
-      case "dropbox":
-        return this.props.dropboxUrl;
-      case "box":
-        return this.props.boxUrl;
-      case "mailru":
-        return this.props.mailRuUrl;
-      case "skydrive":
-        return this.props.oneDriveUrl;
-      case "microsoft":
-        return this.props.microsoftUrl;
-      case "google":
-        return this.props.googleUrl;
-      case "facebook":
-        return this.props.facebookUrl;
-      case "linkedin":
-        return this.props.linkedinUrl;
-      case "clickatell":
-        return this.props.clickatellUrl;
-      case "smsc":
-        return this.props.smsclUrl;
-      case "firebase":
-        return this.props.firebaseUrl;
-      case "appleID":
-        return this.props.appleIDUrl;
-      case "telegram":
-        return this.props.telegramUrl;
-      case "wordpress":
-        return this.props.wordpressUrl;
-      case "s3":
-        return this.props.awsUrl;
-      case "googlecloud":
-        return this.props.googleCloudUrl;
-      case "rackspace":
-        return this.props.rackspaceUrl;
-      case "selectel":
-        return this.props.selectelUrl;
-      case "yandex":
-        return this.props.yandexUrl;
-      case "vk":
-        return this.props.vkUrl;
-      default:
-        return this.props.portalSettingsUrl;
-    }
+      this.setState({
+        [`${prop.name}`]: prop.value,
+      });
+    });
   };
 
-  consumerInstruction =
-    this.props.selectedConsumer.instruction &&
-    format(this.props.selectedConsumer.instruction, <Box marginProp="0" />);
-
-  helpCenterDescription = (
-    <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
-      Detailed instructions in our{" "}
-      <Link
-        id="help-center-link"
-        color={this.props.theme.client.settings.integration.linkColor}
-        isHovered={false}
-        target="_blank"
-        href={this.thirdPartyServicesUrl()}
-      >
-        Help Center
-      </Link>
-    </Trans>
-  );
-
-  supportTeamDescription = (
-    <StyledBox>
-      <Trans
-        t={this.props.t}
-        i18nKey="ThirdPartyBottomDescription"
-        ns="Settings"
-      >
-        If you still have some questions on how to connect this service or need
-        technical assistance, please feel free to contact our{" "}
-        <Link
-          id="support-team-link"
-          color={this.props.theme.client.settings.integration.linkColor}
-          isHovered={false}
-          target="_blank"
-          href={this.props.urlSupport}
-        >
-          Support Team
-        </Link>
-      </Trans>
-    </StyledBox>
-  );
+  thirdPartyServicesUrl = () => {
+    const {
+      selectedConsumer,
+      portalSettingsUrl,
+      docuSignUrl,
+      dropboxUrl,
+      boxUrl,
+      mailRuUrl,
+      oneDriveUrl,
+      microsoftUrl,
+      googleUrl,
+      facebookUrl,
+      linkedinUrl,
+      clickatellUrl,
+      smsclUrl,
+      firebaseUrl,
+      appleIDUrl,
+      telegramUrl,
+      wordpressUrl,
+      awsUrl,
+      googleCloudUrl,
+      rackspaceUrl,
+      selectelUrl,
+      yandexUrl,
+      vkUrl,
+    } = this.props;
+    switch (selectedConsumer.name) {
+      case "docusign":
+      case "docuSign":
+        return docuSignUrl;
+      case "dropbox":
+        return dropboxUrl;
+      case "box":
+        return boxUrl;
+      case "mailru":
+        return mailRuUrl;
+      case "skydrive":
+        return oneDriveUrl;
+      case "microsoft":
+        return microsoftUrl;
+      case "google":
+        return googleUrl;
+      case "facebook":
+        return facebookUrl;
+      case "linkedin":
+        return linkedinUrl;
+      case "clickatell":
+        return clickatellUrl;
+      case "smsc":
+        return smsclUrl;
+      case "firebase":
+        return firebaseUrl;
+      case "appleID":
+        return appleIDUrl;
+      case "telegram":
+        return telegramUrl;
+      case "wordpress":
+        return wordpressUrl;
+      case "s3":
+        return awsUrl;
+      case "googlecloud":
+        return googleCloudUrl;
+      case "rackspace":
+        return rackspaceUrl;
+      case "selectel":
+        return selectelUrl;
+      case "yandex":
+        return yandexUrl;
+      case "vk":
+        return vkUrl;
+      default:
+        return portalSettingsUrl;
+    }
+  };
 
   inputsRender = (item, index) => {
     const { onChangeHandler, state, props } = this;
@@ -255,6 +279,7 @@ class ConsumerModalDialog extends React.Component {
       </React.Fragment>
     );
   };
+
   render() {
     const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
       this.props;
@@ -279,11 +304,11 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
           <Box paddingProp="16px 0 16px">{consumerInstruction}</Box>
-          <React.Fragment>
+          <>
             {selectedConsumer.props.map((prop, i) =>
               this.inputsRender(prop, i),
             )}
-          </React.Fragment>
+          </>
           <Text as="div">{supportTeamDescription}</Text>
           <Text as="div">{helpCenterDescription}</Text>
         </ModalDialog.Body>
@@ -315,7 +340,6 @@ class ConsumerModalDialog extends React.Component {
 
 ConsumerModalDialog.propTypes = {
   t: PropTypes.func.isRequired,
-  i18n: PropTypes.object.isRequired,
   selectedConsumer: PropTypes.object,
   onModalClose: PropTypes.func.isRequired,
   dialogVisible: PropTypes.bool.isRequired,

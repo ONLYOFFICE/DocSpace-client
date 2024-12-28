@@ -31,26 +31,22 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
-import Items from "./Items";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
-import Banner from "./Banner";
-
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { showProgress } from "@docspace/shared/utils/common";
+import Banner from "./Banner";
+import Items from "./Items";
 
 const ArticleBodyContent = (props) => {
   const {
     isDesktopClient,
     firstLoad,
-    FirebaseHelper,
-    theme,
 
     showText,
     toggleArticleOpen,
@@ -81,7 +77,6 @@ const ArticleBodyContent = (props) => {
 
   const getHashDate = () => new Date().getTime();
 
-  const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
   const [hashDate, setHashDate] = React.useState(getHashDate);
 
@@ -99,7 +94,7 @@ const ArticleBodyContent = (props) => {
       };
 
       switch (folderId) {
-        case myFolderId:
+        case myFolderId: {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
 
@@ -118,7 +113,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Personal);
 
           break;
-        case archiveFolderId:
+        }
+        case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Archive,
@@ -128,7 +124,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Archive);
 
           break;
-        case recycleBinFolderId:
+        }
+        case recycleBinFolderId: {
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
 
@@ -146,23 +143,25 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Trash);
 
           break;
-        case "accounts":
+        }
+        case "accounts": {
           const accountsFilter = AccountsFilter.getDefault();
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
           break;
-        case roomsFolderId:
-        default:
-          const roomsFilter = RoomsFilter.getDefault(
+        }
+        default: {
+          const newRoomsFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Active,
           );
-          roomsFilter.searchArea = RoomSearchArea.Active;
-          params = roomsFilter.toUrlParams(userId, true);
+          newRoomsFilter.searchArea = RoomSearchArea.Active;
+          params = newRoomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
 
           break;
+        }
       }
 
       path += `?${params}&date=${hashDate}`;
@@ -184,11 +183,9 @@ const ArticleBodyContent = (props) => {
     (e, folderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      const { toggleArticleOpen } = props;
-
       const isAccountsClick = folderId === "accounts";
 
-      let withTimer = isAccountsClick
+      const withTimer = isAccountsClick
         ? window.location.pathname.includes("accounts") &&
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;

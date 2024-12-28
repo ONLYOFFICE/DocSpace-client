@@ -45,16 +45,27 @@ const FILTER_COUNT = 6;
 
 class StorageManagement {
   isInit = false;
+
   portalInfo = {};
+
   activeUsersCount = null;
+
   filesUsedSpace = {};
+
   quotaSettings = {};
+
   intervalId = null;
+
   rooms = [];
+
   accounts = [];
+
   needRecalculating = false;
+
   isRecalculating = false;
+
   userFilterData = Filter.getDefault();
+
   roomFilterData = RoomsFilter.getDefault();
 
   constructor(
@@ -107,10 +118,12 @@ class StorageManagement {
     try {
       if (isInit) this.needRecalculating = await checkRecalculateQuota();
 
-      if(!this.needRecalculating && this.isRecalculating) this.setIsRecalculating(false);
+      if (!this.needRecalculating && this.isRecalculating)
+        this.setIsRecalculating(false);
 
-      let roomsList, accountsList;
-      
+      let roomsList;
+      let accountsList;
+
       [
         this.portalInfo,
         this.activeUsersCount,
@@ -128,7 +141,6 @@ class StorageManagement {
         );
 
       if (!this.quotaSettings.lastRecalculateDate && isInit) {
-      
         this.setIsRecalculating(true);
 
         try {
@@ -197,6 +209,7 @@ class StorageManagement {
   setIsRecalculating = (isRecalculating) => {
     this.isRecalculating = isRecalculating;
   };
+
   getIntervalCheckRecalculate = () => {
     let isWaitRequest = false;
 

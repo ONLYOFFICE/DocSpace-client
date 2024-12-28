@@ -24,6 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const getFromSessionStorage = (key) => {
-  return JSON.parse(sessionStorage.getItem(key));
+export const createRandomTagId = () => {
+  return `_${Math.random().toString(36).substr(2, 9)}`;
 };

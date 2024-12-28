@@ -29,9 +29,7 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import { Row } from "@docspace/shared/components/row";
-import FilesRowContent from "./FilesRowContent";
 import { isMobile, isMobileOnly } from "react-device-detect";
-
 import {
   isMobile as isMobileUtile,
   mobile,
@@ -39,6 +37,9 @@ import {
   classNames,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import FilesRowContent from "./FilesRowContent";
 
 import { FolderType } from "@docspace/shared/enums";
 import withFileActions from "../../../../../HOCs/withFileActions";
@@ -46,9 +47,6 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { globalColors } from "@docspace/shared/themes";
-
-import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
@@ -77,21 +75,21 @@ const StyledWrapper = styled.div`
     (props.checked || props.isActive) &&
     props.isFirstElem &&
     css`
-      border-top-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      border-top-color: ${({ theme }) =>
+        `${theme.filesSection.tableView.row.borderColor} !important`};
     `};
 
   ${(props) =>
     props.isIndexUpdated &&
     css`
-      background: ${(props) =>
-        props.isIndexEditingMode
-          ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
-          : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      background: ${({ theme, isIndexEditingMode }) =>
+        isIndexEditingMode
+          ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+          : `${theme.filesSection.tableView.row.backgroundActive} !important`};
 
       &:hover {
-        background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
       }
 
       ${marginStyles}
@@ -114,8 +112,8 @@ const StyledWrapper = styled.div`
     css`
       :hover {
         cursor: pointer;
-        background: ${(props) =>
-          props.theme.filesSection.tableView.row.indexActive};
+        background: ${({ theme }) =>
+          theme.filesSection.tableView.row.indexActive};
         ${marginStyles}
       }
     `};
@@ -139,7 +137,7 @@ const StyledWrapper = styled.div`
 
       @keyframes Highlight {
         0% {
-          background: ${(props) => props.theme.filesSection.animationColor};
+          background: ${({ theme }) => theme.filesSection.animationColor};
         }
 
         100% {
@@ -351,7 +349,6 @@ const SimpleFilesRow = (props) => {
     isEdit,
     isActive,
     inProgress,
-    isAdmin,
     getContextModel,
     showHotkeyBorder,
     id,
@@ -479,7 +476,7 @@ const SimpleFilesRow = (props) => {
           data={item}
           isEdit={isEdit}
           element={element}
-          mode={"modern"}
+          mode="modern"
           sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
@@ -513,7 +510,7 @@ const SimpleFilesRow = (props) => {
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
-          withoutBorder={true}
+          withoutBorder
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}

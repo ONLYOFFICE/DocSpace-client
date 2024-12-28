@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const saveToSessionStorage = (key, value) => {
-  sessionStorage.setItem(key, JSON.stringify(value));
+export const getFromSessionStorage = (key: string) => {
+  const item = sessionStorage.getItem(key);
+  return item ? JSON.parse(item) : null;
 };

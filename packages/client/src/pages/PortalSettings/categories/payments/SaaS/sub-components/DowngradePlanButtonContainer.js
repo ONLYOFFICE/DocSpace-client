@@ -75,7 +75,7 @@ const DowngradePlanButtonContainer = ({
       )}
       <Button
         label={buttonLabel}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={onDowngradeTariff}

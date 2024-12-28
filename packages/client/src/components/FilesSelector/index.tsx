@@ -143,6 +143,7 @@ const FilesSelectorWrapper = ({
 
   withCreate,
   folderIsShared,
+  checkCreating,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -191,6 +192,8 @@ const FilesSelectorWrapper = ({
   const formProps = useMemo(() => {
     let isRoomFormAccessible = true;
 
+    if (isSelect) return;
+
     if (isCopy || isMove)
       isRoomFormAccessible = selection.every(
         (item) => "isPDFForm" in item && item.isPDFForm,
@@ -205,7 +208,7 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:FileCannotBeMoved");
+      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
 
       const option = { organizationName: t("Common:OrganizationName") };
 
@@ -364,6 +367,7 @@ const FilesSelectorWrapper = ({
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -380,6 +384,7 @@ const FilesSelectorWrapper = ({
       !!selectedFileInfo,
       includeFolder,
       isRestore,
+      isDisabledFolder,
     );
   };
 
@@ -441,6 +446,7 @@ const FilesSelectorWrapper = ({
       filesSettings={filesSettings}
       headerProps={headerProps}
       formProps={formProps}
+      checkCreating={checkCreating}
     />
   );
 };

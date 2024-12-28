@@ -66,6 +66,7 @@ const {
 
   darkErrorStatus,
   favoritesStatus,
+  favoriteStatusDark,
   lightStatusWarning,
   darkStatusWarning,
   darkStatusPositive,
@@ -1604,6 +1605,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
+    containerBorderColor: grayDarkStrong,
     color: white,
     disabledColor: grayDarkStrong,
     pastColor: grayDark,
@@ -2717,6 +2719,7 @@ const Dark: TTheme = {
     background: darkGrayLight,
     textColor: grayDark,
     iconFill: black,
+    warningColor: darkErrorStatus,
   },
 
   client: {
@@ -2844,6 +2847,7 @@ const Dark: TTheme = {
           dataFontColorBlack: white,
           notAvailableBackground: grayDark,
           textColor: white,
+          paidBadgeBackground: favoriteStatusDark,
         },
 
         companyInfo: {

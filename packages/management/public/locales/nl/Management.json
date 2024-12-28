@@ -8,6 +8,7 @@
   "CurrentSpace": "Huidige ruimte",
   "DeleteEmptyPortalText": "U gaat de ruimte <1>{{domain}}</1> definitief verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
   "DeleteRequestSuccess": "Verwijderingsverzoek succesvol verzonden naar het e-mailadres van de eigenaar van {{productName}} <1>{{email}}</1>",
+  "DeleteSetupPortalText": "U gaat de ruimte <1>{{domain}}</1> met alle gegevens en accounts definitief verwijderen. Een verzoek om <1>{{domain}}</1> te verwijderen wordt naar de {{productName}} eigenaar gestuurd op het e-mailadres <1>{{email}}</1>.",
   "DeleteWarning": "De laatste volledige toegang tot de ruimte kan niet worden verwijderd",
   "DomainName": "Domeinnaam",
   "DomainNotFound": "Domein niet gevonden, controleer DNS-instellingen",

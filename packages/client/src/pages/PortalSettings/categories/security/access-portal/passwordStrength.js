@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -34,15 +34,16 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import PasswordLoader from "../sub-components/loaders/password-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import PasswordLoader from "../sub-components/loaders/password-loader";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -88,6 +89,12 @@ const PasswordStrength = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("password") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const load = async () => {
     if (!isInit) await getPortalPasswordSettings();
@@ -168,12 +175,6 @@ const PasswordStrength = (props) => {
     }
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("password") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSliderChange = (e) => {
     setPasswordLen(Number(e.target.value));
   };
@@ -188,6 +189,8 @@ const PasswordStrength = (props) => {
         break;
       case "special":
         setUseSpecialSymbols(e.target.checked);
+        break;
+      default:
         break;
     }
   };
@@ -261,7 +264,7 @@ const PasswordStrength = (props) => {
           min="8"
           max="30"
           step="1"
-          withPouring={true}
+          withPouring
           value={passwordLen}
           onChange={onSliderChange}
         />
@@ -302,7 +305,7 @@ const PasswordStrength = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="password-strength-save"

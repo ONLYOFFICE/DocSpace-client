@@ -34,21 +34,18 @@ const TABLE_COLUMNS = `webhooksHistoryColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (let col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
+      return { ...(col || {}), enable: !!column };
+    });
 
-      columns.push(col);
-    }
     return columns;
-  } else {
-    return defaultColumns;
   }
+  return defaultColumns;
 };
 
 const HistoryTableHeader = (props) => {
@@ -61,6 +58,23 @@ const HistoryTableHeader = (props) => {
     setHideColumns,
   } = props;
   const { t, ready } = useTranslation(["Webhooks", "People"]);
+
+  const [columns, setColumns] = useState(getColumns([], userId));
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns.join(","));
+  }
 
   const defaultColumns = [
     {
@@ -89,26 +103,13 @@ const HistoryTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
-  function onColumnChange(key, e) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
-
   useEffect(() => {
     ready && setColumns(getColumns(defaultColumns, userId));
   }, [ready]);
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns, userId));
+  }, [userId, defaultColumns]);
 
   return (
     <TableHeader

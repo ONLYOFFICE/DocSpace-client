@@ -32,6 +32,7 @@ import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import {
   ConflictResolveDialogProps,
@@ -285,7 +286,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   const onCloseConflictDialog = () => {
     if (isUploadConflict) {
       cancelUploadAction();
-      onCloseDialog();
+      onClose();
     } else onCloseDialog();
   };
 
@@ -350,13 +351,13 @@ export default inject<TStore>(
     } = filesStore;
 
     const files = items
-      ? items.filter((f) => {
-          if (f.isFile || f.fileExst || f.contentLength) return f;
+      ? items.filter((f: TFile) => {
+          return f.isFile || f.fileExst || f.contentLength;
         })
       : [];
     const folders = items
-      ? items.filter((f) => {
-          if (!f.fileExst && !f.contentLength && !f.isFile) return f;
+      ? items.filter((f: TFile) => {
+          return !f.fileExst && !f.contentLength && !f.isFile;
         })
       : [];
 

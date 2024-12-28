@@ -24,23 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import { Provider as MobxProvider } from "mobx-react";
-import store from "SRC_DIR/store";
-import CommonWhiteLabel from "./CommonWhiteLabel";
+import { TTranslation } from "../../../types";
+import { DeviceType } from "../../../enums";
 
-const { authStore } = store;
-
-const WhiteLabelWrapper = (props) => {
-  useEffect(() => {
-    authStore.init(true);
-  }, []);
-
-  return (
-    <MobxProvider {...store}>
-      <CommonWhiteLabel {...props} />
-    </MobxProvider>
-  );
-};
-
-export default WhiteLabelWrapper;
+export interface IAdditionalResources {
+  t: TTranslation;
+  isSettingPaid: boolean;
+  feedbackAndSupportEnabled: boolean;
+  helpCenterEnabled: boolean;
+  onSave: (feedbackEnabled: boolean, helpEnabled: boolean) => void;
+  onRestore: () => void;
+  isLoading: boolean;
+  additionalResourcesIsDefault: boolean;
+  deviceType: DeviceType;
+}

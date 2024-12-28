@@ -30,37 +30,40 @@ import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
-import { isManagement } from "@docspace/shared/utils/common";
 
 class CommonStore {
   settingsStore = null;
 
-  logoUrlsWhiteLabel = [];
-  whiteLabelLogoText = null;
-  defaultLogoTextWhiteLabel = null;
-
   portalName = null;
+
   dnsSettings = {
     defaultObj: {},
     customObj: {},
   };
 
   isInit = false;
+
   isLoaded = false;
+
   isLoadedArticleBody = false;
+
   isLoadedSectionHeader = false;
+
   isLoadedSubmenu = false;
+
   isLoadedLngTZSettings = false;
+
   isLoadedDNSSettings = false;
+
   isLoadedPortalRenaming = false;
+
   isLoadedCustomization = false;
+
   isLoadedCustomizationNavbar = false;
+
   isLoadedWelcomePageSettings = false;
-  isLoadedAdditionalResources = false;
-  isLoadedCompanyInfoSettingsData = false;
 
   greetingSettingsIsDefault = true;
-  enableRestoreButton = false;
 
   constructor(settingsStore) {
     this.settingsStore = settingsStore;
@@ -85,14 +88,6 @@ class CommonStore {
 
     if (isMobileView) {
       switch (page) {
-        case "white-label": {
-          requests.push(
-            this.getWhiteLabelLogoUrls(),
-            this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel(),
-          );
-          break;
-        }
         case "language-and-time-zone":
           requests.push(
             this.settingsStore.getPortalTimezones(),
@@ -111,25 +106,16 @@ class CommonStore {
     } else {
       switch (page) {
         case "general":
-          {
-            requests.push(
-              this.settingsStore.getPortalTimezones(),
-              this.settingsStore.getPortalCultures(),
-            );
-
-            if (standalone) {
-              requests.push(this.getDNSSettings());
-            }
-          }
-          break;
-        case "branding":
           requests.push(
-            this.getWhiteLabelLogoUrls(),
-            this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel(),
+            this.settingsStore.getPortalTimezones(),
+            this.settingsStore.getPortalCultures(),
           );
-          break;
 
+          if (standalone) {
+            requests.push(this.getDNSSettings());
+          }
+
+          break;
         default:
           break;
       }
@@ -137,86 +123,6 @@ class CommonStore {
 
     return Promise.all(requests).finally(() => this.setIsLoaded(true));
   };
-
-  setLogoUrlsWhiteLabel = (urls) => {
-    this.logoUrlsWhiteLabel = urls;
-  };
-
-  setLogoText = (text) => {
-    this.whiteLabelLogoText = text;
-  };
-
-  setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(
-      data,
-      isManagement(),
-    );
-    return Promise.resolve(response);
-  };
-
-  getWhiteLabelLogoUrls = async () => {
-    const { getWhiteLabelLogoUrls } = this.settingsStore;
-
-    const logos = await getWhiteLabelLogoUrls();
-
-    this.setLogoUrlsWhiteLabel(Object.values(logos));
-
-    return logos;
-  };
-
-  getWhiteLabelLogoText = async () => {
-    const res = await api.settings.getLogoText(isManagement());
-    this.setLogoText(res);
-    this.defaultLogoTextWhiteLabel = res;
-    return res;
-  };
-
-  applyNewLogos = (logos) => {
-    const theme = this.settingsStore.theme.isBase ? "light" : "dark";
-
-    const favicon = document.getElementById("favicon");
-    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
-    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
-
-    runInAction(() => {
-      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
-      logo && (logo.src = logos?.[0]?.path?.[theme]);
-      logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
-    });
-  };
-
-  saveWhiteLabelSettings = async (data) => {
-    await this.setWhiteLabelSettings(data);
-
-    const logos = await this.getWhiteLabelLogoUrls();
-    this.getIsDefaultWhiteLabel();
-    this.getWhiteLabelLogoText();
-
-    this.applyNewLogos(logos);
-  };
-
-  getIsDefaultWhiteLabel = async () => {
-    const res = await api.settings.getIsDefaultWhiteLabel(isManagement());
-    const enableRestoreButton = res.map((item) => item.default).includes(false);
-    this.enableRestoreButton = enableRestoreButton;
-  };
-
-  restoreWhiteLabelSettings = async () => {
-    await api.settings.restoreWhiteLabelSettings(isManagement());
-
-    const logos = await this.getWhiteLabelLogoUrls();
-    this.getIsDefaultWhiteLabel();
-    this.getWhiteLabelLogoText();
-
-    this.applyNewLogos(logos);
-  };
-
-  get isWhitelableLoaded() {
-    return (
-      this.logoUrlsWhiteLabel.length > 0 &&
-      this.whiteLabelLogoText !== undefined
-    );
-  }
 
   getGreetingSettingsIsDefault = async () => {
     const isDefault = await api.settings.getGreetingSettingsIsDefault();
@@ -232,6 +138,7 @@ class CommonStore {
       defaultObj.enable === customObj.enable
     );
   }
+
   setIsEnableDNS = (value) => {
     this.dnsSettings.customObj.enable = value;
   };
@@ -262,6 +169,7 @@ class CommonStore {
 
     this.setDNSSettings(tempObject);
   };
+
   saveDNSSettings = async () => {
     const { customObj } = this.dnsSettings;
     const { dnsName, enable } = customObj;
@@ -313,14 +221,6 @@ class CommonStore {
 
   setIsLoadedCustomizationNavbar = (isLoadedCustomizationNavbar) => {
     this.isLoadedCustomizationNavbar = isLoadedCustomizationNavbar;
-  };
-
-  setIsLoadedAdditionalResources = (isLoadedAdditionalResources) => {
-    this.isLoadedAdditionalResources = isLoadedAdditionalResources;
-  };
-
-  setIsLoadedCompanyInfoSettingsData = (isLoadedCompanyInfoSettingsData) => {
-    this.isLoadedCompanyInfoSettingsData = isLoadedCompanyInfoSettingsData;
   };
 
   setIsLoaded = (isLoaded) => {

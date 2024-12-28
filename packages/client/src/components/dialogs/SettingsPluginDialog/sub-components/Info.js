@@ -83,27 +83,22 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
   return (
     <StyledContainer withDelete={withDelete}>
       {withSeparator && <StyledSeparator />}
-      <Text fontSize={"14px"} fontWeight={600} lineHeight={"16px"} noSelect>
+      <Text fontSize="14px" fontWeight={600} lineHeight="16px" noSelect>
         {t("Metadata")}
       </Text>
       <StyledInfo>
         {plugin.author && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Files:ByAuthor")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.author}
             </Text>
           </>
@@ -112,20 +107,15 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
         {plugin.version && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Version")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.version}
             </Text>
           </>
@@ -134,20 +124,15 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
         {!plugin.system && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Uploader")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.createBy.displayName}
             </Text>
           </>
@@ -156,56 +141,51 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
         {!plugin.system && uploadDate && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:UploadDate")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {uploadDate}
             </Text>
           </>
         )}
 
         <Text
-          fontSize={"13px"}
+          fontSize="13px"
           fontWeight={400}
-          lineHeight={"20px"}
+          lineHeight="20px"
           noSelect
           truncate
         >
           {t("People:UserStatus")}
         </Text>
-        <Text fontSize={"13px"} fontWeight={600} lineHeight={"20px"} noSelect>
+        <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
           {pluginStatus}
         </Text>
 
         {plugin.homePage && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Homepage")}
             </Text>
             <Link
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={600}
-              lineHeight={"20px"}
-              type={"page"}
+              lineHeight="20px"
+              type="page"
               href={plugin?.homePage}
-              target={"_blank"}
+              target="_blank"
               noSelect
               isHovered
             >
@@ -216,20 +196,15 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
         {plugin.description && (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Description")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.description}
             </Text>
           </>

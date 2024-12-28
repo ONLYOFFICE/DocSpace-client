@@ -10,7 +10,6 @@
   "EnableUserButton": "Aktivovat",
   "GuestsRemoved": "Host(é) úspěšně odstraněn(i)",
   "IndividualRights": "Individuální práva v místnosti",
-  "InviteLinkTitle": "Odkaz s pozvánkou",
   "LDAPAccountTooltip": "Tento uživatelský účet je načten z LDAP. Pokud potřebujete změnit uživatelské jméno a e-mailovou adresu nebo uživatele zakázat, nahlédněte do adresáře LDAP.",
   "LDAPGroupTooltip": "Tato skupina je načtena z LDAP. Pokud ji potřebujete přejmenovat, přidat nebo odebrat uživatele, nahlédněte do adresáře LDAP.",
   "NameChangeButton": "Změna názvu",

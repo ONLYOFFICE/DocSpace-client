@@ -71,8 +71,8 @@ const Footer = ({
         updatePlugin={updatePlugin}
       />
       <Button
-        scale={true}
-        size={"normal"}
+        scale
+        size="normal"
         onClick={onCloseAction}
         label={t("Common:CancelButton")}
       />

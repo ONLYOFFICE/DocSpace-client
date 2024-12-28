@@ -38,8 +38,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
+import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -138,7 +138,6 @@ const ThirdPartyComboBox = ({
   setIsOauthWindowOpen,
 
   isDisabled,
-  setIsScrollLocked,
   isAdmin,
 }) => {
   const defaultSelectedItem = {
@@ -226,8 +225,8 @@ const ThirdPartyComboBox = ({
   const onSelect = (event) => {
     const data = event.currentTarget.dataset;
 
-    const thirdparty = thirdparties.find((t) => {
-      return t.id === data.thirdPartyId;
+    const thirdparty = thirdparties.find((elm) => {
+      return elm.id === data.thirdPartyId;
     });
 
     thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
@@ -249,36 +248,34 @@ const ThirdPartyComboBox = ({
   const advancedOptions = thirdparties
     .sort((storage) => (storage.isConnected ? -1 : 1))
     ?.map((item) => {
-      const isDisabled = !item.isConnected && !isAdmin;
+      const disabled = !item.isConnected && !isAdmin;
       const itemLabel =
         item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`);
 
-      const disabledData = isDisabled
+      const disabledData = disabled
         ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }
         : {};
 
       return (
-        <StyledComboBoxItem isDisabled={isDisabled} key={item.id}>
+        <StyledComboBoxItem isDisabled={disabled} key={item.id}>
           <DropDownItem
             onClick={onSelect}
             data-third-party-id={item.id}
-            disabled={isDisabled}
+            disabled={disabled}
             {...disabledData}
           >
             <Text className="drop-down-item_text" fontWeight={600}>
               {itemLabel}
             </Text>
 
-            {!isDisabled && !item.isConnected ? (
+            {!disabled && !item.isConnected ? (
               <ReactSVG
                 src={ExternalLinkReactSvgUrl}
                 className="drop-down-item_icon"
               />
-            ) : (
-              <></>
-            )}
+            ) : null}
           </DropDownItem>
-          {isDisabled && (
+          {disabled && (
             <Tooltip
               float={isDesktop()}
               id="file-links-tooltip"
@@ -301,12 +298,12 @@ const ThirdPartyComboBox = ({
           scaled
           withBackdrop={isMobile}
           size="content"
-          manualWidth={"auto"}
+          manualWidth="auto"
           isMobileView={isMobileOnly}
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          isDefaultMode={true}
+          isDefaultMode
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions

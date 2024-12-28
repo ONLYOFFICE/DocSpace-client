@@ -24,46 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+export const formatFilters = (filters) => {
+  const params = {};
+  if (filters.deliveryDate !== null) {
+    params.deliveryFrom = `${filters.deliveryDate.format(
+      "YYYY-MM-DD",
+    )}T${filters.deliveryFrom.format("HH:mm:ss")}`;
 
-import React from "react";
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
-import { Text } from "@docspace/shared/components/text";
-
-const StyledWrapper = styled.div`
-  background: ${(props) =>
-    props.theme.client.settings.common.whiteLabel.notAvailableBackground};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 16px;
-
-  .lock-icon {
-    width: 16px;
-    height: 16px;
-    div > svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.common.whiteLabel.textColor};
-      }
-    }
+    params.deliveryTo = `${filters.deliveryDate.format(
+      "YYYY-MM-DD",
+    )}T${filters.deliveryTo.format("HH:mm:ss")}`;
   }
-`;
 
-const NotAvailable = () => {
-  const { t } = useTranslation("Settings");
-  return (
-    <StyledWrapper>
-      <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </StyledWrapper>
-  );
+  const statusEnum = {
+    "Not sent": 1,
+    "2XX": 2,
+    "3XX": 4,
+    "4XX": 8,
+    "5XX": 16,
+  };
+
+  if (filters.status.length > 0) {
+    const statusFlag = filters.status.reduce(
+      (sum, currentValue) => sum + statusEnum[currentValue],
+      0,
+    );
+    params.groupStatus = statusFlag;
+  }
+
+  return params;
 };
-
-export default NotAvailable;

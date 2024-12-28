@@ -231,6 +231,7 @@ const MobileView = ({
   return (
     mainButtonMobileVisible && (
       <StyledMainButtonMobile
+        mainButtonRef={mainButtonRef}
         actionOptions={actionOptions}
         isOpenButton={isOpenButton}
         onUploadClick={openButtonToggler}

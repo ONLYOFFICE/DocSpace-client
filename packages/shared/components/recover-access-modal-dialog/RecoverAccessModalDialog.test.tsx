@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
@@ -42,9 +40,6 @@ jest.mock("../../api/settings", () => ({
   sendRecoverRequest: jest.fn(),
 }));
 
-const mockStore = configureStore([]);
-const store = mockStore({});
-
 describe("RecoverAccessModalDialog", () => {
   const defaultProps = {
     visible: true,
@@ -59,11 +54,7 @@ describe("RecoverAccessModalDialog", () => {
   });
 
   it("renders correctly with default props", () => {
-    render(
-      <Provider store={store}>
-        <RecoverAccessModalDialog {...defaultProps} />
-      </Provider>,
-    );
+    render(<RecoverAccessModalDialog {...defaultProps} />);
 
     expect(screen.getByTestId("recover-access-modal-text")).toHaveTextContent(
       "Test body text",

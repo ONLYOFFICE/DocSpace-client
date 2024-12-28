@@ -24,12 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type RecoverAccessModalDialogProps = {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-}
+import { Story, Meta } from "@storybook/react";
+import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
+import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 
-export type { RecoverAccessModalDialogProps };
+export default {
+  title: "Components/RecoverAccessModalDialog",
+  component: RecoverAccessModalDialog,
+  argTypes: {
+    onClose: { action: "closed" },
+  },
+} as Meta;
+
+const Template: Story<RecoverAccessModalDialogProps> = (args) => (
+  <RecoverAccessModalDialog {...args} />
+);
+
+export const Default = Template.bind({});
+Default.args = {
+  visible: true,
+  textBody:
+    "Please enter your email and describe your problem to recover access.",
+  emailPlaceholderText: "Enter your email",
+  id: "recover-modal",
+};
+
+export const WithError = Template.bind({});
+WithError.args = {
+  ...Default.args,
+  visible: true,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  ...Default.args,
+  visible: true,
+};

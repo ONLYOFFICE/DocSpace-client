@@ -280,7 +280,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     const advancedOptionsWithoutSeparator: TOption[] =
       React.isValidElement(advancedOptions) && advancedOptions.props
         ? (advancedOptions.props as { children: TOption[] }).children.filter(
-            (option: TOption) => option.key !== "s1",
+            (option: TOption) => option?.key !== "s1",
           )
         : [];
 

@@ -494,6 +494,65 @@ const StyledFilterBlockHeader = styled.div`
   }
 `;
 
+const StyledIndicator = styled.div.attrs(injectDefaultTheme)`
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  background: ${(props) => props.theme.filterInput.filter.indicatorColor};
+  position: absolute;
+  top: 25px;
+
+  inset-inline-start: 25px;
+
+  z-index: 10;
+
+  background: ${(props) => props.theme.currentColorScheme?.main.accent};
+
+  &:hover {
+    background: ${(props) => props.theme.currentColorScheme?.main.accent};
+  }
+`;
+
+const selectedItemTag = css`
+  background: ${(props) => props.theme.currentColorScheme?.main.accent};
+  border-color: ${(props) => props.theme.currentColorScheme?.main.accent};
+
+  .filter-text {
+    color: ${(props) => props.theme.currentColorScheme?.text.accent};
+  }
+
+  &:hover {
+    background: ${(props) => props.theme.currentColorScheme?.main.accent};
+    border-color: ${(props) => props.theme.currentColorScheme?.main.accent};
+  }
+`;
+
+const StyledFilterBlockItemTag = styled.div.attrs(injectDefaultTheme)<{
+  isSelected?: boolean;
+}>`
+  height: 28px;
+  max-height: 28px;
+
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border: ${(props) => props.theme.filterInput.filter.border};
+  border-radius: 16px;
+
+  box-sizing: border-box;
+
+  padding: 4px 15px;
+
+  cursor: pointer;
+
+  ${(props) => props.isSelected && selectedItemTag}
+
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+`;
+
 export {
   StyledSortButton,
   StyledFilterBlock,
@@ -510,6 +569,8 @@ export {
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
   StyledFilterBlockHeader,
+  StyledIndicator,
+  StyledFilterBlockItemTag,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

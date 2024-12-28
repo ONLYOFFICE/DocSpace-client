@@ -32,12 +32,10 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import FilterBlockItemTagTheme from "./styled-components/filterBlockItemTag";
 import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
 import IconWrapperTheme from "./styled-components/iconWrapper";
-import IndicatorFilterButtonTheme from "./styled-components/indicatorFilterButton";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
 import LinkTheme from "./styled-components/link";
@@ -58,16 +56,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.FilterBlockItemTag: {
-        return (
-          <FilterBlockItemTagTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.IconButton: {
         return (
           <IconButtonTheme
@@ -120,16 +108,6 @@ const ColorTheme = forwardRef<
       case ThemeId.IconWrapper: {
         return (
           <IconWrapperTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
-      case ThemeId.IndicatorFilterButton: {
-        return (
-          <IndicatorFilterButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

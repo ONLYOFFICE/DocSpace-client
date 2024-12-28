@@ -171,6 +171,7 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     displayType: ModalDialogType.modal,
+    children: <>test</>,
   },
 };
 
@@ -178,6 +179,7 @@ export const AsideDefault: Story = {
   render: (args) => <Template {...args} />,
   args: {
     displayType: ModalDialogType.aside,
+    children: <>test</>,
   },
 };
 
@@ -186,6 +188,7 @@ export const Loading: Story = {
   args: {
     displayType: ModalDialogType.modal,
     isLoading: true,
+    children: <>test</>,
   },
 };
 
@@ -194,6 +197,7 @@ export const AsideLoading: Story = {
   args: {
     displayType: ModalDialogType.aside,
     isLoading: true,
+    children: <>test</>,
   },
 };
 
@@ -203,6 +207,7 @@ export const AsideScrollLocked: Story = {
     displayType: ModalDialogType.aside,
     withBodyScroll: true,
     isScrollLocked: true,
+    children: <>test</>,
   },
 };
 
@@ -211,6 +216,7 @@ export const AsideWithBodyScroll: Story = {
   args: {
     displayType: ModalDialogType.aside,
     withBodyScroll: true,
+    children: <>test</>,
   },
 };
 
@@ -219,6 +225,7 @@ export const ModalLarge: Story = {
   args: {
     displayType: ModalDialogType.modal,
     isLarge: true,
+    children: <>test</>,
   },
 };
 
@@ -229,6 +236,7 @@ export const ModalHuge: Story = {
     isHuge: true,
     autoMaxWidth: true,
     autoMaxHeight: true,
+    children: <>test</>,
   },
 };
 
@@ -238,6 +246,7 @@ export const ModalAutoSize: Story = {
     displayType: ModalDialogType.modal,
     autoMaxWidth: true,
     autoMaxHeight: true,
+    children: <>test</>,
   },
 };
 
@@ -246,6 +255,7 @@ export const ModalWithFooterBorder: Story = {
   args: {
     displayType: ModalDialogType.modal,
     withFooterBorder: true,
+    children: <>test</>,
   },
 };
 
@@ -254,6 +264,7 @@ export const NonCloseable: Story = {
   args: {
     displayType: ModalDialogType.modal,
     isCloseable: false,
+    children: <>test</>,
   },
 };
 
@@ -262,5 +273,6 @@ export const AsideNonCloseable: Story = {
   args: {
     displayType: ModalDialogType.aside,
     isCloseable: false,
+    children: <>test</>,
   },
 };

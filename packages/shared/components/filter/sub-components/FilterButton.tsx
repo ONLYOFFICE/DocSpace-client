@@ -28,10 +28,9 @@ import React from "react";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ColorTheme, ThemeId } from "../../color-theme";
 
 import { FilterButtonProps } from "../Filter.types";
-import { StyledButton } from "../Filter.styled";
+import { StyledButton, StyledIndicator } from "../Filter.styled";
 
 import FilterBlock from "./FilterBlock";
 
@@ -67,8 +66,8 @@ const FilterButton = ({
         title={title}
       >
         <IconButton iconName={FilterReactSvrUrl} size={16} />
-        {selectedFilterValue && selectedFilterValue.length > 0 ? (
-          <ColorTheme themeId={ThemeId.IndicatorFilterButton} />
+        {selectedFilterValue && selectedFilterValue.size > 0 ? (
+          <StyledIndicator />
         ) : null}
       </StyledButton>
 

@@ -48,7 +48,7 @@ export const ThemeProvider = ({
   useEffect(() => {
     const root = document.documentElement;
 
-    if (currentColorScheme) {
+    if (currentColorScheme && currentColorScheme.main) {
       root.style.setProperty(
         "--color-scheme-main-accent",
         currentColorScheme.main.accent,

@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import cloneDeep from "lodash/cloneDeep";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
@@ -198,36 +199,24 @@ const FilterBlock = ({
     changeSelectedItems([]);
     setFilterValues([]);
 
-    if (selectedFilterValue && selectedFilterValue.length > 0 && onFilter)
-      onFilter([]);
+    if (selectedFilterValue.size > 0) onFilter([]);
   }, [changeSelectedItems, onFilter, selectedFilterValue]);
 
   const changeFilterValue = React.useCallback(
     (
       group: FilterGroups,
-      key: string | string[],
+      key: string,
       isSelected: boolean,
       label?: string,
       isMultiSelect?: boolean,
     ) => {
-      let value = filterValues.map((v: TGroupItem) => {
-        if (Array.isArray(v.key)) {
-          const newKey = [...v.key];
-          v.key = newKey;
-        }
-
-        return {
-          ...v,
-        };
-      });
+      let value: TGroupItem[] = cloneDeep(filterValues);
 
       if (isSelected && key !== "0") {
         if (isMultiSelect) {
-          const groupIdx = value.findIndex(
-            (item) => "group" in item && item.group === group,
-          );
-
-          const groupItemKey = value[groupIdx].key;
+          const groupItemKey = filterValues.find(
+            (item) => item.group === group,
+          )!.key;
 
           if (Array.isArray(groupItemKey)) {
             const itemIdx = groupItemKey.findIndex((item) => item === key);
@@ -235,14 +224,10 @@ const FilterBlock = ({
             groupItemKey.splice(itemIdx, 1);
 
             if (groupItemKey.length === 0)
-              value = value.filter(
-                (item) => "group" in item && item.group !== group,
-              );
+              value = value.filter((item) => item.group !== group);
           }
         } else {
-          value = value.filter(
-            (item) => "group" in item && item.group !== group,
-          );
+          value = value.filter((item) => item.group !== group);
         }
 
         value = removeGroupManagerFilterValueIfNeeded(value);
@@ -250,22 +235,37 @@ const FilterBlock = ({
         setFilterValues(value);
         changeSelectedItems(value);
 
-        const idx = selectedFilterValue.findIndex(
-          (item) => item.group === group,
-        );
-
-        if (idx > -1) {
+        if (selectedFilterValue.has(group)) {
           if (isMultiSelect) {
-            const groupItemKey = selectedFilterValue[idx].key;
+            const groupItems = selectedFilterValue.get(group)!;
 
-            if (Array.isArray(groupItemKey)) {
-              const itemIdx = groupItemKey.findIndex((item) => item === key);
+            if (groupItems.size > 1) {
+              if (!groupItems.has(key)) return;
 
-              if (itemIdx === -1) return;
+              const selectedFilterValues: TItem[] = [];
 
-              groupItemKey.splice(itemIdx, 1);
+              Object.entries(selectedFilterValue).forEach(
+                ([selectedGroup, items]) => {
+                  const item = {
+                    group: selectedGroup as FilterGroups,
+                    key:
+                      items.size === 1
+                        ? (Array.from(items.keys())[0] as string)
+                        : (Array.from(items.keys()) as string[]),
+                    label: Array.from(items.keys())[0] as string,
+                  };
 
-              return onFilter(selectedFilterValue);
+                  if (selectedGroup === group && Array.isArray(item.key)) {
+                    const idx = item.key.findIndex((val) => val === key);
+
+                    item.key.splice(idx, 1);
+                  }
+
+                  selectedFilterValues.push(item);
+                },
+              );
+
+              return onFilter(selectedFilterValues);
             }
 
             onFilter(value);
@@ -275,19 +275,19 @@ const FilterBlock = ({
         return;
       }
 
-      if (value.find((item) => "group" in item && item.group === group)) {
-        value.forEach((item) => {
-          if ("group" in item && item.group === group) {
+      if (value.find((item) => item.group === group)) {
+        value.forEach((item, idx) => {
+          if (item.group === group) {
             if (
               isMultiSelect &&
-              Array.isArray(item.key) &&
+              Array.isArray(value[idx].key) &&
               !Array.isArray(key)
             ) {
-              item.key.push(key);
+              value[idx].key.push(key);
             } else {
-              item.key = isSelected && key === "0" ? "1" : key;
+              value[idx].key = isSelected && key === "0" ? "1" : key;
               if (label) {
-                item.label = label;
+                value[idx].label = label;
               }
             }
           }
@@ -310,80 +310,74 @@ const FilterBlock = ({
     if (isRooms) setIsLoading(true);
     const data = await getFilterData();
 
-    const items = data.filter((item) => item.isHeader === true);
+    const headerItems = data.filter((item) => item.isHeader === true);
 
-    items.forEach((item) => {
-      const groupItem = data.filter(
+    const newFilterValues: TGroupItem[] = [];
+
+    headerItems.forEach((item, index) => {
+      const groupItems = data.filter(
         (val) => val.group === item.group && val.isHeader !== true,
-      );
+      ) as TGroupItem[];
 
-      groupItem.forEach((i) => (i.isSelected = false));
+      headerItems[index].groupItem = groupItems.map((groupItem) => {
+        if (!selectedFilterValue.has(item.group))
+          return {
+            ...groupItem,
+            isSelected: false,
+          };
 
-      item.groupItem = groupItem as TGroupItem[];
-    });
+        const groupSelectedItem = selectedFilterValue.get(item.group);
 
-    if (selectedFilterValue) {
-      selectedFilterValue.forEach((selectedValue) => {
-        items.forEach((item) => {
-          if (item.group === selectedValue.group) {
-            item.groupItem?.forEach((groupItem) => {
-              if (
-                groupItem.key === selectedValue.key ||
-                ("displaySelectorType" in groupItem &&
-                  groupItem.displaySelectorType)
-              ) {
-                groupItem.isSelected = true;
-                if (
-                  "displaySelectorType" in groupItem &&
-                  groupItem.displaySelectorType
-                ) {
-                  groupItem.selectedLabel = selectedValue.label;
-                  groupItem.selectedKey = Array.isArray(selectedValue.key)
-                    ? ""
-                    : selectedValue.key;
-                }
-              }
+        let isSelected = false;
 
-              if (
-                "isMultiSelect" in groupItem &&
-                groupItem.isMultiSelect &&
-                Array.isArray(selectedValue.key) &&
-                typeof groupItem.key === "string"
-              ) {
-                groupItem.isSelected = selectedValue.key.includes(
-                  groupItem.key,
-                );
-              }
+        if (!Array.isArray(groupItem.key) && groupItem.key) {
+          const selectedItem = groupSelectedItem?.get(groupItem.key);
 
-              if ("withOptions" in groupItem && groupItem.withOptions) {
-                groupItem.options.forEach(
-                  (option) =>
-                    (option.isSelected = option.key === selectedValue.key),
-                );
-              }
-            });
+          isSelected = !!selectedItem;
+
+          if (
+            "displaySelectorType" in groupItem &&
+            !!groupItem.displaySelectorType
+          ) {
+            groupItem.selectedLabel = selectedItem?.label;
+            groupItem.selectedKey = selectedItem?.key as string;
           }
-        });
+        }
+
+        if (
+          "isMultiSelect" in groupItem &&
+          groupItem.isMultiSelect &&
+          Array.isArray(groupItem.key)
+        ) {
+          isSelected = groupItem.key.some((key) => groupSelectedItem?.has(key));
+        }
+
+        if ("withOptions" in groupItem && groupItem.withOptions) {
+          isSelected = groupItem.options.some((option) =>
+            groupSelectedItem?.has(option.key),
+          );
+        }
+
+        return {
+          ...groupItem,
+          isSelected,
+        };
       });
-    }
-
-    const newFilterValues = selectedFilterValue.map((value) => {
-      if (Array.isArray(value.key)) {
-        const newKey = [...value.key];
-        value.key = newKey;
-      }
-
-      return {
-        ...value,
-      };
     });
 
-    setFilterDataFn(items);
-    setFilterValues(newFilterValues as TGroupItem[]);
+    selectedFilterValue.forEach((item) => {
+      Object.values(item).forEach((value) => {
+        newFilterValues.push(value);
+      });
+    });
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
+    setFilterDataFn(headerItems);
+    setFilterValues(newFilterValues);
+
+    if (isRooms)
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
   }, [getFilterData, selectedFilterValue, isRooms]);
 
   React.useEffect(() => {
@@ -420,15 +414,9 @@ const FilterBlock = ({
   const isEqualFilter = () => {
     let isEqual = true;
 
-    // if (
-    //   filterValues.length === 0 ||
-    //   selectedFilterValue.length > filterValues.length
-    // )
-    //   return !isEqual;
-
     if (
-      (selectedFilterValue.length === 0 && filterValues.length > 0) ||
-      selectedFilterValue.length !== filterValues.length
+      (selectedFilterValue.size === 0 && filterValues.length > 0) ||
+      selectedFilterValue.size !== filterValues.length
     ) {
       isEqual = false;
 
@@ -436,10 +424,7 @@ const FilterBlock = ({
     }
 
     filterValues.forEach((value) => {
-      const oldValue = selectedFilterValue.find(
-        (item) =>
-          "group" in item && "group" in value && item.group === value.group,
-      );
+      const oldValue = selectedFilterValue.get(value.group);
 
       let isMultiSelectEqual = false;
       let withOptionsEqual = false;
@@ -448,8 +433,7 @@ const FilterBlock = ({
         isMultiSelectEqual = true;
         value.key.forEach(
           (item) =>
-            (isMultiSelectEqual =
-              isMultiSelectEqual && oldValue.key.includes(item)),
+            (isMultiSelectEqual = isMultiSelectEqual && oldValue.has(item)),
         );
       }
 
@@ -457,14 +441,15 @@ const FilterBlock = ({
         withOptionsEqual = true;
         value.options.forEach(
           (option) =>
-            (withOptionsEqual =
-              isMultiSelectEqual && option.key === oldValue.key),
+            (withOptionsEqual = isMultiSelectEqual && oldValue.has(option.key)),
         );
       }
 
       isEqual =
         isEqual &&
-        (oldValue?.key === value.key || isMultiSelectEqual || withOptionsEqual);
+        ((!Array.isArray(value.key) && value.key && oldValue?.has(value.key)) ||
+          isMultiSelectEqual ||
+          withOptionsEqual);
     });
 
     return !isEqual;
@@ -472,7 +457,7 @@ const FilterBlock = ({
 
   const showFooter = isLoading ? false : isEqualFilter();
   const showClearFilterBtn =
-    !isLoading && (selectedFilterValue.length > 0 || filterValues.length > 0);
+    !isLoading && (selectedFilterValue.size > 0 || filterValues.length > 0);
 
   return (
     <ModalDialog

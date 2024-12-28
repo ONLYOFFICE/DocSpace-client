@@ -34,7 +34,6 @@ import { SelectorAddButton } from "../../selector-add-button";
 import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { ComboBox } from "../../combobox";
 import { Checkbox } from "../../checkbox";
-import { ColorTheme, ThemeId } from "../../color-theme";
 
 import {
   StyledFilterBlockItem,
@@ -49,6 +48,7 @@ import {
   StyledFilterBlockItemToggleButton,
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
+  StyledFilterBlockItemTag,
 } from "../Filter.styled";
 import {
   FilterBlockItemProps,
@@ -73,10 +73,9 @@ const FilterBlockItem = ({
   withMultiItems,
 }: FilterBlockItemProps) => {
   const changeFilterValueAction = (
-    key: string | string[],
+    key: string,
     isSelected?: boolean,
     isMultiSelect?: boolean,
-    withOptions?: boolean,
   ) => {
     changeFilterValue?.(
       group,
@@ -84,7 +83,6 @@ const FilterBlockItem = ({
       isSelected || false,
       undefined,
       isMultiSelect || false,
-      withOptions || false,
     );
   };
 
@@ -100,7 +98,7 @@ const FilterBlockItem = ({
       target = target.parentNode as HTMLDivElement;
 
       if (target === ref) {
-        changeFilterValue?.(g, [], true);
+        changeFilterValue?.(g, "", true);
         return;
       }
     }
@@ -142,7 +140,7 @@ const FilterBlockItem = ({
         </StyledFilterBlockItemSelectorText>
       </StyledFilterBlockItemSelector>
     ) : (
-      <ColorTheme
+      <StyledFilterBlockItemTag
         key={item.key}
         isSelected={item.isSelected}
         onClick={(event: React.MouseEvent) =>
@@ -153,7 +151,6 @@ const FilterBlockItem = ({
             clearSelectorRef.current || [],
           )
         }
-        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
@@ -168,7 +165,7 @@ const FilterBlockItem = ({
             <XIcon style={{ marginTop: "2px" }} />
           </StyledFilterBlockItemTagIcon>
         ) : null}
-      </ColorTheme>
+      </StyledFilterBlockItemTag>
     );
   };
 
@@ -181,7 +178,10 @@ const FilterBlockItem = ({
         <StyledFilterBlockItemToggleButton
           isChecked={item.isSelected || false}
           onChange={() =>
-            changeFilterValueAction(item.key, item.isSelected || false)
+            changeFilterValueAction(
+              item.key as string,
+              item.isSelected || false,
+            )
           }
         />
       </StyledFilterBlockItemToggle>
@@ -202,7 +202,6 @@ const FilterBlockItem = ({
             `${data.key}`,
             data.key === item.options[0].key,
             false,
-            item.withOptions,
           )
         }
         options={item.options}
@@ -226,7 +225,11 @@ const FilterBlockItem = ({
           label={item.label}
           isDisabled={item.isDisabled}
           onChange={() =>
-            changeFilterValueAction(item.key, item.isSelected || false, false)
+            changeFilterValueAction(
+              item.key as string,
+              item.isSelected || false,
+              false,
+            )
           }
         />
       </StyledFilterBlockItemCheckboxContainer>
@@ -261,10 +264,9 @@ const FilterBlockItem = ({
     }
 
     return (
-      <ColorTheme
+      <StyledFilterBlockItemTag
         key={Array.isArray(item.key) ? item.key[0] : item.key}
         isSelected={item.isSelected}
-        name={`${item.label}-${item.key}`}
         id={item.id}
         onClick={
           item.key === FilterKeys.other || item.key === "filter_group-other"
@@ -272,12 +274,11 @@ const FilterBlockItem = ({
                 showSelectorAction(event, selectorType, item.group, [])
             : () =>
                 changeFilterValueAction(
-                  item.key,
+                  item.key as string,
                   item.isSelected,
                   item.isMultiSelect,
                 )
         }
-        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
@@ -287,7 +288,7 @@ const FilterBlockItem = ({
         >
           {item.label}
         </StyledFilterBlockItemTagText>
-      </ColorTheme>
+      </StyledFilterBlockItemTag>
     );
   };
 

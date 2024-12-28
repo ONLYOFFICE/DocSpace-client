@@ -27,20 +27,18 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { isTablet, isIOS } from "react-device-detect";
-
 import { DeviceType, FilterGroups } from "../../enums";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
 import { SelectedItem } from "../selected-item";
-import { InputSize } from "../text-input";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
 
-import { StyledFilterInput, StyledSearchInput } from "./Filter.styled";
+import { StyledFilterInput } from "./Filter.styled";
 import { FilterProps, TItem } from "./Filter.types";
+import useSearch from "./hooks/useSearch";
 
 const FilterInput = React.memo(
   ({
@@ -87,20 +85,27 @@ const FilterInput = React.memo(
 
     disableThirdParty,
   }: FilterProps) => {
+    const { searchComponent } = useSearch({
+      onSearch,
+      onClearFilter,
+      clearSearch,
+      setClearSearch,
+      getSelectedInputValue,
+      placeholder,
+      isIndexEditingMode,
+    });
+
     const [viewSettings, setViewSettings] = React.useState<
       TViewSelectorOption[]
     >([]);
-    const [inputValue, setInputValue] = React.useState("");
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
-      TItem[]
-    >([]);
+      Map<FilterGroups, Map<string | number, TItem>>
+    >(new Map());
     const [selectedItems, setSelectedItems] = React.useState<TItem[]>([]);
 
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
-
-    const searchRef = React.useRef<HTMLInputElement | null>(null);
 
     React.useEffect(() => {
       const value = getViewSettingsData?.();
@@ -108,50 +113,42 @@ const FilterInput = React.memo(
       if (value) setViewSettings(value);
     }, [getViewSettingsData]);
 
-    React.useEffect(() => {
-      if (clearSearch) {
-        setInputValue("");
-        onClearFilter?.();
-        setClearSearch(false);
-      }
-    }, [clearSearch, onClearFilter, setClearSearch]);
-
-    React.useEffect(() => {
-      const value = getSelectedInputValue?.();
-
-      if (value) searchRef.current?.focus();
-
-      setInputValue(value);
-    }, [getSelectedInputValue]);
-
     const getSelectedFilterDataAction = React.useCallback(async () => {
       const value = await getSelectedFilterData();
 
       if (!mountRef.current) return;
-      setSelectedFilterValue(value);
 
+      const newValue: Map<
+        FilterGroups,
+        Map<string | number, TItem>
+      > = new Map();
       const newSelectedItems: TItem[] = [];
 
       value.forEach((item) => {
-        if (item.isMultiSelect && Array.isArray(item.key)) {
-          const newKeys = item.key.map((oldKey: string | {}) => ({
-            key:
-              typeof oldKey !== "string" && "key" in oldKey && oldKey.key
-                ? (oldKey.key as string)
-                : (oldKey as string),
-            group: item.group,
-            label:
-              typeof oldKey !== "string" && "label" in oldKey && oldKey.label
-                ? (oldKey.label as string)
-                : (oldKey as string),
-          }));
+        const groupItems = Array.isArray(item.key)
+          ? (item.key.map((key) => ({
+              key,
+              group: item.group,
+              label: key,
+            })) as TItem[])
+          : [item];
 
-          return newSelectedItems.push(...newKeys);
+        newSelectedItems.push(...groupItems);
+
+        if (!newValue.has(item.group)) {
+          const groupItemsMap = new Map(
+            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
+          );
+
+          newValue.set(item.group, groupItemsMap);
+        } else {
+          groupItems.forEach((groupItem) => {
+            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
+          });
         }
-
-        return newSelectedItems.push({ ...item });
       });
 
+      setSelectedFilterValue(newValue);
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 
@@ -159,13 +156,9 @@ const FilterInput = React.memo(
       getSelectedFilterDataAction();
     }, [getSelectedFilterDataAction, getSelectedFilterData]);
 
-    const onClearSearch = React.useCallback(() => {
-      onSearch?.("");
-    }, [onSearch]);
-
     const removeSelectedItemAction = React.useCallback(
       (
-        key: string,
+        key: string | number,
         label: string | React.ReactNode,
         group?: string | FilterGroups,
       ) => {
@@ -182,19 +175,6 @@ const FilterInput = React.memo(
       [selectedItems, removeSelectedItem],
     );
 
-    const onInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (isTablet && isIOS) {
-        const scrollEvent = () => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.scrollTo(0, 0);
-          window.onscroll = () => {};
-        };
-
-        window.onscroll = scrollEvent;
-      }
-    };
-
     React.useEffect(() => {
       return () => {
         mountRef.current = false;
@@ -204,17 +184,7 @@ const FilterInput = React.memo(
     return (
       <StyledFilterInput>
         <div className="filter-input_filter-row">
-          <StyledSearchInput
-            forwardedRef={searchRef}
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={onSearch}
-            onClearSearch={onClearSearch}
-            id="filter_search-input"
-            size={InputSize.base}
-            isDisabled={isIndexEditingMode}
-            onFocus={onInputFocus}
-          />
+          {searchComponent}
           {!isIndexEditingMode ? (
             <FilterButton
               id="filter-button"
@@ -249,7 +219,7 @@ const FilterInput = React.memo(
               viewSelectorVisible={
                 viewSettings && viewSelectorVisible
                   ? currentDeviceType !== DeviceType.desktop
-                  : null
+                  : false
               }
               title={sortByTitle}
             />

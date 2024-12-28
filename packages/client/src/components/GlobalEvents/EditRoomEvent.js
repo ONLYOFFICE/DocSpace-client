@@ -111,6 +111,7 @@ const EditRoomEvent = ({
       isLoading={isLoading}
       isInitLoading={isInitLoading}
       cover={cover}
+      isTemplate={item.isTemplate}
     />
   );
 };

@@ -47,20 +47,12 @@ type CreateRoomTemplateProps = {
   onSave: (params: TRoom) => void;
   item: TRoom & { isEdit: boolean };
   fetchedTags: TRoom["tags"];
-  isEdit: boolean;
   fetchedRoomParams: TRoom;
 };
 
 const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
-  const {
-    visible,
-    onClose,
-    onSave,
-    item,
-    fetchedTags,
-    isEdit,
-    fetchedRoomParams,
-  } = props;
+  const { visible, onClose, onSave, item, fetchedTags, fetchedRoomParams } =
+    props;
 
   console.log("item", item);
 
@@ -178,20 +170,19 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
 
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
-          {item.isEdit ? t("Files:EditTemplate") : t("Files:SaveAsTemplate")}
+          {t("Files:SaveAsTemplate")}
         </Text>
       </ModalDialog.Header>
 
       <ModalDialog.Body>
         <SetRoomParams
-          isSaveAsTemplate
+          isTemplate
           t={t}
           tagHandler={tagHandler}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
-          isEdit={isEdit}
           // isDisabled={isLoading}
           isValidTitle={isValidTitle}
           isWrongTitle={isWrongTitle}

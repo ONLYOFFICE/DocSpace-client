@@ -44,7 +44,7 @@ const EditRoomDialog = ({
   fetchedTags,
   fetchedImage,
   isInitLoading,
-
+  isTemplate,
   cover,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -168,7 +168,9 @@ const EditRoomDialog = ({
         </ModalDialog.Container>
       )}
 
-      <ModalDialog.Header>{t("RoomEditing")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isTemplate ? t("Files:EditTemplate") : t("Files:RoomEditing")}
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         <SetRoomParams
@@ -187,6 +189,7 @@ const EditRoomDialog = ({
           onKeyUp={onKeyUpHandler}
           onOwnerChange={onOwnerChange}
           canChangeOwner={roomParams?.security?.ChangeOwner}
+          isTemplate={isTemplate}
         />
       </ModalDialog.Body>
 

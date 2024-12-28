@@ -146,7 +146,7 @@ const SetRoomParams = ({
   cover,
   covers,
   setCover,
-  isSaveAsTemplate,
+  isTemplate,
   onOpenAccessSettings,
   createdBy,
 }) => {
@@ -163,10 +163,9 @@ const SetRoomParams = ({
     useState(false);
 
   const isVDRRoom =
-    roomParams.type === RoomsType.VirtualDataRoom && !isSaveAsTemplate;
+    roomParams.type === RoomsType.VirtualDataRoom && !isTemplate;
 
-  const isPublicRoom =
-    roomParams.type === RoomsType.PublicRoom && !isSaveAsTemplate;
+  const isPublicRoom = roomParams.type === RoomsType.PublicRoom && !isTemplate;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -388,20 +387,16 @@ const SetRoomParams = ({
     />
   );
 
-  const tagsTitle =
-    isTemplateSelected || isSaveAsTemplate ? t("Files:RoomTags") : "";
+  const tagsTitle = isTemplateSelected || isTemplate ? t("Files:RoomTags") : "";
 
   const inputTitle =
-    isTemplateSelected || isSaveAsTemplate
+    isTemplateSelected || isTemplate
       ? `${t("Files:RoomName")}:`
       : `${t("Common:Name")}:`;
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit ||
-      disabledChangeRoomType ||
-      isTemplateSelected ||
-      isSaveAsTemplate ? (
+      {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -466,14 +461,14 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {isSaveAsTemplate && (
+      {isTemplate && (
         <TemplateAccess
-          roomOwner={createdBy}
+          roomOwner={createdBy ?? roomParams.roomOwner} // TODO: Templates createdBy
           onOpenAccessSettings={onOpenAccessSettings}
         />
       )}
 
-      {isEdit && !isSaveAsTemplate && (
+      {isEdit && !isTemplate && (
         <ChangeRoomOwner
           canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}

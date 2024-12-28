@@ -23,56 +23,51 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useEffect } from "react";
-import { useTheme } from "styled-components";
+import { Meta, Story } from "@storybook/react";
 
-import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
-import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
-
-import { StyledOperationContainer } from "./OperationContainer.styled";
+import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
-import { Text } from "../text";
-import PortalLogo from "../portal-logo/PortalLogo";
 
-const OperationContainer = (props: OperationContainerProps) => {
-  const { url, authorized, title, description } = props;
+export default {
+  title: "Components/OperationContainer",
+  component: OperationContainer,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Operation container component for displaying operation status with title and description",
+      },
+    },
+  },
+  decorators: [
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    (Story) => <Story />,
+  ],
+} as Meta;
 
-  const theme = useTheme();
+const Template: Story<OperationContainerProps> = (args) => (
+  <OperationContainer {...args} />
+);
 
-  const logo = theme?.isBase ? (
-    <DownloadingReactSvg
-      className="operation-logo"
-      data-testid="operation-logo"
-      aria-hidden="true"
-    />
-  ) : (
-    <DownloadingDarkReactSvg
-      className="operation-logo"
-      data-testid="operation-logo"
-      aria-hidden="true"
-    />
-  );
-
-  useEffect(() => {
-    if (url && authorized) window.location.replace(url);
-  }, [url, authorized]);
-
-  return (
-    <StyledOperationContainer
-      role="main"
-      aria-label={title}
-      data-testid="operation-container"
-    >
-      <PortalLogo isResizable data-testid="portal-logo" />
-      {logo}
-      <Text className="operation-title" fontWeight={700} fontSize="23px">
-        {title}
-      </Text>
-      <Text className="operation-description" fontWeight={600} fontSize="13px">
-        {description}
-      </Text>
-    </StyledOperationContainer>
-  );
+export const Default = Template.bind({});
+Default.args = {
+  title: "Operation in Progress",
+  description: "Please wait while we process your request",
+  authorized: false,
 };
 
-export default OperationContainer;
+export const WithRedirect = Template.bind({});
+WithRedirect.args = {
+  title: "Redirecting",
+  description: "You will be redirected to the target page",
+  authorized: true,
+  url: "https://example.com",
+};
+
+export const Unauthorized = Template.bind({});
+Unauthorized.args = {
+  title: "Access Denied",
+  description: "You are not authorized to view this content",
+  authorized: false,
+  url: "https://example.com",
+};

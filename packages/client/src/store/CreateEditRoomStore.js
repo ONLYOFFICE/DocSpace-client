@@ -34,6 +34,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { createTemplate } from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -341,6 +342,32 @@ class CreateEditRoomStore {
       }
     } catch (e) {
       toastr.error(e);
+    }
+  };
+
+  onSaveAsTemplate = async (item, roomParams) => {
+    console.log("item, roomParams", item, roomParams);
+
+    const { title, icon, tags } = roomParams; // share // roomOwner???
+
+    const tagsToAddList = tags.map((tag) => tag.name);
+
+    const roomData = {
+      title,
+      roomId: item.id,
+      logo: null,
+      tags: tagsToAddList,
+    };
+
+    try {
+      if (icon.uploadedFile) {
+        const roomLogo = await this.getRoomLogo(icon);
+        roomData.logo = roomLogo;
+      }
+
+      createTemplate(roomData);
+    } catch (error) {
+      toastr.error(error);
     }
   };
 

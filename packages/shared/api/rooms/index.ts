@@ -41,6 +41,7 @@ import {
   TRoomLifetime,
   TExportRoomIndexTask,
   TPublicRoomPassword,
+  TRoom,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -543,13 +544,19 @@ export function setRoomCover(roomId, cover) {
   return request(options);
 }
 
-export function createTemplateFromRoom(
-  roomId: number,
-  title: string,
+export function createTemplate({
+  roomId,
+  title,
   logo,
   share,
   tags,
-) {
+}: {
+  roomId: number;
+  title: string;
+  logo: TRoom["logo"];
+  share;
+  tags: TRoom["tags"];
+}) {
   const data = {
     roomId,
     title,

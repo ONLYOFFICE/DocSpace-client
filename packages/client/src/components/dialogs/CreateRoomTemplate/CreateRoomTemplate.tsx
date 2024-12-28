@@ -44,35 +44,29 @@ import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPane
 type CreateRoomTemplateProps = {
   visible: boolean;
   onClose: VoidFunction;
+  onSave: (params: TRoom) => void;
   item: TRoom & { isEdit: boolean };
   fetchedTags: TRoom["tags"];
   isEdit: boolean;
   fetchedRoomParams: TRoom;
 };
 
-type NewTagsType = {
-  id: string | number;
-  isNew: boolean;
-  name: string;
-};
-
 const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
-  const { visible, onClose, item, fetchedTags, isEdit, fetchedRoomParams } =
-    props;
+  const {
+    visible,
+    onClose,
+    onSave,
+    item,
+    fetchedTags,
+    isEdit,
+    fetchedRoomParams,
+  } = props;
 
   console.log("item", item);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
-
-  const startTags = Object.values(item.tags);
-  const startObjTags = startTags.map((tag, i) => ({
-    id: i,
-    name: tag,
-    isNew: false,
-  }));
-  const [tags, setTags] = useState<NewTagsType[]>(startObjTags);
 
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -97,14 +91,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       return;
     }
 
-    // onSave(roomParams);
-
-    console.log("onCreateRoomTemplate");
-    // onClose();
+    onSave(roomParams);
   };
 
-  const setRoomTags = (newTags: NewTagsType[]) => {
-    setTags(newTags);
+  const setRoomTags = (newTags: TRoom["tags"]) => {
+    setRoomParams({ ...roomParams, tags: newTags });
   };
 
   const onKeyUp = (e: KeyboardEvent) => {
@@ -128,7 +119,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     setAddUsersPanelVisible(false);
   };
 
-  const tagHandler = new TagHandler(tags, setRoomTags, fetchedTags);
+  const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   return (
     <ModalDialog
@@ -232,7 +223,6 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
               size={ButtonSize.normal}
               primary
               scale
-              onClick={onCreateRoomTemplate}
               isDisabled={isWrongTitle}
               // isDisabled={isRoomTitleChanged || isWrongTitle}
               // isLoading={isLoading}

@@ -49,6 +49,12 @@ export type TLogo = {
 };
 
 export type TRoomSecurity = {
+  ChangeOwner: boolean;
+  CopyLink: boolean;
+  CreateRoomFrom: boolean;
+  Embed: boolean;
+  IndexExport: boolean;
+  Reconnect: boolean;
   Read: boolean;
   Create: boolean;
   Delete: boolean;
@@ -110,6 +116,11 @@ export type TRoom = {
   passwordProtected?: boolean;
   requestToken?: string;
   expired?: boolean;
+  indexing?: boolean;
+  denyDownload?: boolean;
+  watermark?: TWatermark;
+  providerKey?: string;
+  quotaLimit?: number;
 };
 
 export type TGetRooms = {

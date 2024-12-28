@@ -27,10 +27,26 @@
 import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 
-const CreateRoomTemplateEvent = (props) => {
+type CreateRoomTemplateEventProps = {
+  visible: boolean;
+  item: TRoom & { isEdit: boolean };
+  fetchTags: () => TRoom["tags"];
+  setTemplateEventVisible: (visible: boolean) => void;
+  getThirdPartyIcon: (provider: string) => string;
+  isDefaultRoomsQuotaSet: boolean;
+  onClose: VoidFunction;
+  onSaveAsTemplate: (
+    item: TRoom & { isEdit: boolean },
+    roomParams: TRoom & { isEdit: boolean },
+  ) => void;
+};
+
+const CreateRoomTemplateEvent = (props: CreateRoomTemplateEventProps) => {
   const {
     visible,
     item,
@@ -39,9 +55,12 @@ const CreateRoomTemplateEvent = (props) => {
     getThirdPartyIcon,
     isDefaultRoomsQuotaSet,
     onClose,
+    onSaveAsTemplate,
   } = props;
 
-  const [fetchedTags, setFetchedTags] = useState([]);
+  const [fetchedTags, setFetchedTags] = useState<TRoom["tags"]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
 
@@ -54,7 +73,7 @@ const CreateRoomTemplateEvent = (props) => {
       title: item.title,
       parentId: item.parentId,
       providerKey: item.providerKey,
-      iconSrc: getThirdPartyIcon(item.providerKey),
+      iconSrc: getThirdPartyIcon(item.providerKey || ""),
     },
     isPrivate: false,
     icon: {
@@ -80,9 +99,18 @@ const CreateRoomTemplateEvent = (props) => {
       const tags = await fetchTags();
       setFetchedTags(tags);
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as TData);
     }
   }, []);
+
+  const onSave = async (roomParams: TRoom & { isEdit: boolean }) => {
+    setIsLoading(true);
+
+    await onSaveAsTemplate(item, roomParams);
+
+    setIsLoading(false);
+    onClose();
+  };
 
   useEffect(() => {
     setTemplateEventVisible(true);
@@ -106,22 +134,33 @@ const CreateRoomTemplateEvent = (props) => {
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
       fetchedRoomParams={fetchedRoomParams}
+      //
+      onSave={onSave}
+      isLoading={isLoading}
     />
   );
 };
 
-export default inject(
-  ({ tagsStore, dialogsStore, filesSettingsStore, currentQuotaStore }) => {
+export default inject<TStore>(
+  ({
+    tagsStore,
+    dialogsStore,
+    filesSettingsStore,
+    currentQuotaStore,
+    createEditRoomStore,
+  }) => {
     const { fetchTags } = tagsStore;
     const { setTemplateEventVisible } = dialogsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { onSaveAsTemplate } = createEditRoomStore;
 
     return {
       fetchTags,
       setTemplateEventVisible,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
+      onSaveAsTemplate,
     };
   },
 )(observer(CreateRoomTemplateEvent));

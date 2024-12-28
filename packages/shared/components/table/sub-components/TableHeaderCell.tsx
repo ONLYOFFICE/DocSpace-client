@@ -101,7 +101,7 @@ const TableHeaderCell = ({
               iconName={SortDescReactSvgUrl}
               className="header-container-text-icon"
               size={12}
-              color={isActive ? globalColors.grayMain : globalColors.gray}
+              color={isActive ? globalColors.gray : globalColors.gray}
             />
           ) : null}
         </div>

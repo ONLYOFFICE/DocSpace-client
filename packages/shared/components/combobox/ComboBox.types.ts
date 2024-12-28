@@ -126,7 +126,7 @@ export type TComboboxProps = {
   /** Manual X position */
   manualX?: string;
   /** Manual Y position */
-  manualY?: number;
+  manualY?: number | string;
   /** Modern view */
   modernView?: boolean;
   /** No border */

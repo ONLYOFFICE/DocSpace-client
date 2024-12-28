@@ -71,6 +71,8 @@ export const data: TTabItem[] = [
         ]}
         onRowClick={() => {}}
         onSelect={() => {}}
+        isIndexEditingMode
+        onChangeIndex={() => {}}
       >
         <div
           style={{

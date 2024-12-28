@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 
@@ -47,6 +48,8 @@ let timerId: ReturnType<typeof setInterval> | null;
 
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, style, isDialog } = props;
+
+  const theme = useTheme();
 
   const { t } = useTranslation(["PreparationPortal", "Common"]);
 
@@ -148,7 +151,11 @@ export const PreparationPortal = (props: IPreparationPortal) => {
           {errorMessage ? (
             <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
           ) : (
-            <ColorTheme themeId={ThemeId.Progress} percent={percent}>
+            <ColorTheme
+              theme={theme}
+              themeId={ThemeId.Progress}
+              percent={percent}
+            >
               <div className="preparation-portal_progress">
                 <div className="preparation-portal_progress-bar">
                   <div className="preparation-portal_progress-line" />

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "api/files/types";
 import type { DeviceType, FolderType } from "../../enums";
 import type {
   ConnectedThirdPartyAccountType,
@@ -49,8 +48,9 @@ export interface ManualBackupProps {
   maxWidth?: string;
   buttonSize?: ButtonSize;
   isNeedFilePath?: boolean;
+  isInitialLoading: boolean;
   settingsFileSelector: FilesSelectorSettings;
-  setDocumentTitle: (title: string) => void; // SRC_DIR/helpers/utils
+  isEmptyContentBeforeLoader: boolean;
 
   // backup store
   isValidForm?: boolean;
@@ -68,13 +68,10 @@ export interface ManualBackupProps {
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
-  clearProgressInterval: VoidFunction;
+
   setTemporaryLink: (link: string) => void;
-  setStorageRegions: (regions: unknown) => void;
-  setThirdPartyStorage: (list: unknown) => void;
   deleteValueFormSetting: (key: string) => void;
   getIntervalProgress: (t: TTranslation) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
   setRequiredFormSettings: (arr: string[]) => void;
   setDownloadingProgress: (progress: number) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
@@ -132,7 +129,6 @@ export interface ManualBackupProps {
 
   // treeFoldersStore Store
   rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   // end treeFoldersStore
 
   // selectedThirdPartyAccount from backupStore

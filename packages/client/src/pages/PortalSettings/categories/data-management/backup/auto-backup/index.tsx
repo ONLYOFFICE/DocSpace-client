@@ -103,19 +103,7 @@ function AutoBackupWrapper({
         setIsInitialLoading(false);
       }
     })();
-  }, [
-    t,
-    fetchTreeFolders,
-    getProgress,
-    periodsObject,
-    props.rootFoldersTitles,
-    setBackupSchedule,
-    setConnectedThirdPartyAccount,
-    setDefaultOptions,
-    setStorageRegions,
-    setThirdPartyStorage,
-    weekdaysLabelArray,
-  ]);
+  }, []);
 
   useEffect(() => {
     return () => {

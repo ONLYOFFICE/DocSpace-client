@@ -24,14 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -41,19 +34,14 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
+
 import {
   FloatingButton,
   FloatingButtonIcons,
 } from "@docspace/shared/components/floating-button";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import { isManagement } from "@docspace/shared/utils/common";
-
-import { isObjectEmpty } from "../../utils/isObjectEmpty";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
 
@@ -70,6 +58,7 @@ const switches = [
 ];
 
 const ManualBackup = ({
+  isInitialLoading,
   buttonSize,
   temporaryLink,
   dataBackupUrl,
@@ -79,6 +68,7 @@ const ManualBackup = ({
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
+  isEmptyContentBeforeLoader,
   basePath,
   isErrorPath,
   newPath,
@@ -114,17 +104,11 @@ const ManualBackup = ({
   setRequiredFormSettings,
   addValueInFormSettings,
   setCompletedFormFields,
-  getProgress,
-  fetchTreeFolders,
-  setDocumentTitle,
   setTemporaryLink,
   getStorageParams,
   clearLocalStorage,
-  setStorageRegions,
   saveToLocalStorage,
   getIntervalProgress,
-  setThirdPartyStorage,
-  clearProgressInterval,
   setDownloadingProgress,
   setConnectedThirdPartyAccount,
   setConnectDialogVisible,
@@ -133,7 +117,7 @@ const ManualBackup = ({
   const { t } = useTranslation(["Settings", "Common"]);
 
   const selectedStorageType = useMemo(
-    () => JSON.parse(localStorage.getItem("LocalCopyStorageType") ?? "null"),
+    () => getFromLocalStorage<string>("LocalCopyStorageType"),
     [],
   );
 
@@ -150,45 +134,12 @@ const ManualBackup = ({
     () => selectedStorageType === "ThirdPartyStorage",
   );
 
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-
-  const timerId = useRef<number>();
-
-  const setBasicSettings = useCallback(async () => {
-    try {
-      getProgress(t);
-
-      const [account, backupStorage, storageRegionsS3] = await Promise.all([
-        getSettingsThirdParty(),
-        getBackupStorage(),
-        getStorageRegions(),
-      ]);
-
-      setConnectedThirdPartyAccount(account ?? null);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegionsS3);
-    } catch (error) {
-      toastr.error(error as Error);
-    } finally {
-      window.clearTimeout(timerId.current);
-      timerId.current = undefined;
-
-      setIsInitialLoading(false);
-      setIsEmptyContentBeforeLoader(false);
-    }
-  }, [
-    getProgress,
-    setConnectedThirdPartyAccount,
-    setStorageRegions,
-    setThirdPartyStorage,
-    t,
-  ]);
-
   const onMakeTemporaryBackup = async () => {
     clearLocalStorage();
-    localStorage.setItem("LocalCopyStorageType", "TemporaryStorage");
+    localStorage.setItem(
+      "LocalCopyStorageType",
+      JSON.stringify("TemporaryStorage"),
+    );
 
     try {
       await startBackup(
@@ -266,31 +217,6 @@ const ManualBackup = ({
       toastr.error(err as Error);
     }
   };
-
-  useLayoutEffect(() => {
-    setDocumentTitle(t("DataBackup"));
-  }, [setDocumentTitle, t]);
-
-  useEffect(() => {
-    if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
-
-    timerId.current = window.setTimeout(() => {
-      setIsInitialLoading(true);
-    }, 200);
-
-    if (isObjectEmpty(rootFoldersTitles)) fetchTreeFolders();
-
-    setBasicSettings();
-  }, [isNotPaidPeriod, rootFoldersTitles, fetchTreeFolders, setBasicSettings]);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timerId.current);
-      timerId.current = undefined;
-      clearProgressInterval();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const isMaxProgress = downloadingProgress === 100;
 

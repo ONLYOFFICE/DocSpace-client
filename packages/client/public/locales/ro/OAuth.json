@@ -18,6 +18,7 @@
   "AuthenticationMethod": "Metodă de autentificare",
   "AuthorizedApps": "Aplicații autorizate",
   "AuthorizeLink": "Autorizare link",
+  "BasicInfo": "Informații de bază",
   "Client": "Client",
   "ClientCopy": "ID client a fost copiat cu succes în clipboard",
   "ClientHelpButton": "Datele de autentificare pentru folosirea OAth 2.0 ca metodă de autentificare.<br/> <strong>Mențiune:</strong> Orice administrator care cunoaște ID-ul de client al aplicației va putea extrage informații despre aplicația, inclusiv denumirea aplicației, metodă de autentificare, domeniile de aplicare și URL-ul de redirecționare.",

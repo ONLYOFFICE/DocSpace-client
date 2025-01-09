@@ -21,10 +21,13 @@ const constants = {
 
 class LdapFormStore {
   isLoaded = false;
+
   isLdapEnabled = false;
 
   isSettingsShown = false;
+
   isTlsEnabled = false;
+
   isSslEnabled = false;
 
   requiredSettings = {
@@ -41,27 +44,43 @@ class LdapFormStore {
   };
 
   login = "";
+
   password = "";
+
   authentication = true;
+
   acceptCertificate = false;
+
   acceptCertificateHash = null;
+
   isSendWelcomeEmail = false;
+
   disableEmailVerification = false;
+
   errors = {};
 
   groupMembership = false;
+
   groupDN = "";
+
   userAttribute = "distinguishedName";
+
   groupFilter = "(objectClass=group)";
+
   groupAttribute = "member";
+
   groupNameAttribute = "cn";
 
   cron = null;
+
   serverCron = null;
 
   inProgress = false;
+
   progressBarIntervalId = null;
+
   alreadyChecking = false;
+
   lastWarning = "";
 
   progressStatus = {
@@ -87,7 +106,9 @@ class LdapFormStore {
   };
 
   defaultSettings = {};
+
   serverData = {};
+
   serverSettings = {};
 
   currentQuotaStore = null;
@@ -394,15 +415,16 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      for (var key in this.requiredSettings) {
+      const requiredSettingsKeys = Object.keys(this.requiredSettings);
+      requiredSettingsKeys.forEach((key) => {
         if (
-          typeof this.requiredSettings[key] == "string" &&
+          typeof this.requiredSettings[key] === "string" &&
           this.requiredSettings[key].trim() === ""
         ) {
           isErrorExist = true;
           this.errors[key] = true;
         }
-      }
+      });
 
       if (this.groupMembership) {
         const groupFields = [
@@ -413,11 +435,11 @@ class LdapFormStore {
           ["groupNameAttribute", this.groupNameAttribute],
         ];
 
-        for (var key of groupFields) {
-          if (key[1].trim() === "") {
-            this.errors[key[0]] = true;
+        groupFields.forEach(([key, value]) => {
+          if (value.trim() === "") {
+            this.errors[key] = true;
           }
-        }
+        });
       }
 
       if (this.authentication && !isErrorExist) {
@@ -451,13 +473,15 @@ class LdapFormStore {
   };
 
   scrollToField = () => {
-    for (let key in this.errors) {
+    Object.keys(this.errors).every((key) => {
       const element = document.getElementsByName(key)?.[0];
+
+      if (!element) return true; // continue loop
 
       element?.focus();
       element?.blur();
-      return;
-    }
+      return false; // break loop
+    });
   };
 
   checkStatus = (t, toDefault = false) => {
@@ -470,6 +494,7 @@ class LdapFormStore {
     getLdapStatus()
       .then((data) => this.onGetStatus(t, data, toDefault))
       .catch((e) => {
+        console.error(e);
         this.alreadyChecking = false;
       });
   };
@@ -500,10 +525,10 @@ class LdapFormStore {
         }
       }
 
-      var status = data;
+      let status = data;
       if (
         !data ||
-        (typeof data == "object" && Object.keys(data).length === 0)
+        (typeof data === "object" && Object.keys(data).length === 0)
       ) {
         status = {
           completed: true,
@@ -575,15 +600,10 @@ class LdapFormStore {
     if (!status.completed) return false;
 
     if (
-      status.certificateConfirmRequest &&
-      status.certificateConfirmRequest.requested
+      status.error ||
+      (status.certificateConfirmRequest &&
+        status.certificateConfirmRequest.requested)
     ) {
-      setCertificateDetails(status.certificateConfirmRequest);
-      // currentSettings = previousSettings;
-      return true;
-    }
-
-    if (status.error) {
       return true;
     }
 

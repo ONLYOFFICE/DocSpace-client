@@ -34,6 +34,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
@@ -50,9 +51,13 @@ class MediaViewerDataStore {
   autoPlay = true;
 
   id = null;
+
   visible = false;
+
   previewFile = null;
+
   currentItem = null;
+
   prevPostionIndex = 0;
 
   constructor(filesStore, publicRoomStore) {
@@ -192,7 +197,7 @@ class MediaViewerDataStore {
   prevMedia = () => {
     const { setBufferSelection, files } = this.filesStore;
 
-    let currentPlaylistPos = this.currentPostionIndex - 1;
+    const currentPlaylistPos = this.currentPostionIndex - 1;
 
     if (currentPlaylistPos === -1) {
       return;
@@ -243,7 +248,7 @@ class MediaViewerDataStore {
 
     if (this.currentItem) {
       playlist.push({
-        id: id,
+        id,
         fileId: this.currentItem.fileId,
         src: this.currentItem.fileInfo.viewUrl,
         title: this.currentItem.fileInfo.title,
@@ -264,7 +269,7 @@ class MediaViewerDataStore {
 
         if (canOpenPlayer) {
           playlist.push({
-            id: id,
+            id,
             fileId: file.id,
             src: file.viewUrl,
             title: file.title,
@@ -295,7 +300,7 @@ class MediaViewerDataStore {
     } else if (this.previewFile) {
       playlist.push({
         ...this.previewFile,
-        id: id,
+        id,
         fileId: this.previewFile.id,
         src: this.previewFile.viewUrl,
         version: this.previewFile.version,

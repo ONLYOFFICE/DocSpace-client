@@ -37,19 +37,18 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
+import { useNavigate } from "react-router-dom";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { RoomsType } from "@docspace/shared/enums";
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
-import { useNavigate } from "react-router-dom";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { RoomsType } from "@docspace/shared/enums";
-
-import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
-import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
-
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -72,8 +71,6 @@ import {
   ControlsSection,
   CheckboxGroup,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SimpleRoom = (props) => {
   const { t, fetchExternalLinks, currentColorScheme, theme } = props;
@@ -115,7 +112,7 @@ const SimpleRoom = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -133,7 +130,7 @@ const SimpleRoom = (props) => {
   const onChangeFolderId = async (rooms) => {
     const publicRoom = rooms[0];
 
-    let newConfig = {
+    const newConfig = {
       id: publicRoom.id,
       requestToken: null,
       rootPath: "/rooms/shared/",
@@ -159,7 +156,7 @@ const SimpleRoom = (props) => {
         return {
           key: id,
           label: title,
-          requestToken: requestToken,
+          requestToken,
           settings: linkSettings,
         };
       });
@@ -171,27 +168,27 @@ const SimpleRoom = (props) => {
     newConfig.requestToken = links[0].sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
 
-    setConfig((config) => {
-      return { ...config, ...newConfig, init: true };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig, init: true };
     });
   };
 
   const onChangeSharedLink = (link) => {
     setSelectedLink(link);
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showTitle: !config.showTitle };
     });
   };
 
-  const onChangeShowFilter = (e) => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
+  const onChangeShowFilter = () => {
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showFilter: !config.showFilter };
     });
   };
 
@@ -218,7 +215,7 @@ const SimpleRoom = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId}></Box>
+        <Box id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}

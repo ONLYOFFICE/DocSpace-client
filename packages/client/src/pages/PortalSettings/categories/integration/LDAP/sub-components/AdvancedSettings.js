@@ -33,12 +33,14 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 const AdvancedSettings = ({
+  isLdapEnabled,
+  isUIDisabled,
   isSendWelcomeEmail,
   setIsSendWelcomeEmail,
   disableEmailVerification,
   setDisableEmailVerification,
 }) => {
-  const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+  const { t } = useTranslation("Ldap");
 
   const onChangeSendWelcomeEmail = (e) => {
     const checked = e.target.checked;
@@ -52,7 +54,7 @@ const AdvancedSettings = ({
 
   return (
     <Box className="ldap_advanced-settings">
-      <Text fontWeight={600} fontSize={"14px"}>
+      <Text fontWeight={600} fontSize="14px">
         {t("LdapAdvancedSettings")}
       </Text>
 
@@ -62,6 +64,7 @@ const AdvancedSettings = ({
           label={t("LdapSendWelcomeLetter")}
           isChecked={isSendWelcomeEmail}
           onChange={onChangeSendWelcomeEmail}
+          isDisabled={!isLdapEnabled || isUIDisabled}
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
       </div>
@@ -86,12 +89,16 @@ const AdvancedSettings = ({
 
 export default inject(({ ldapStore }) => {
   const {
-    setIsSendWelcomeEmail,
-    isSendWelcomeEmail,
     disableEmailVerification,
     setDisableEmailVerification,
+    isLdapEnabled,
+    isUIDisabled,
+    setIsSendWelcomeEmail,
+    isSendWelcomeEmail,
   } = ldapStore;
   return {
+    isLdapEnabled,
+    isUIDisabled,
     setIsSendWelcomeEmail,
     isSendWelcomeEmail,
     disableEmailVerification,

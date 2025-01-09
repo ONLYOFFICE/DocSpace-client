@@ -57,24 +57,8 @@ const MoveToPublicRoomComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timerId);
-      timerId = null;
-    };
-  });
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onMoveTo();
+  const onClose = () => {
+    setIsVisible(false);
   };
 
   const onClosePanels = () => {
@@ -85,10 +69,6 @@ const MoveToPublicRoomComponent = (props) => {
     setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
-  };
-
-  const onClose = () => {
-    setIsVisible(false);
   };
 
   const onMoveTo = () => {
@@ -123,6 +103,25 @@ const MoveToPublicRoomComponent = (props) => {
         timerId = null;
       });
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onMoveTo();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, [onKeyUp]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerId);
+      timerId = null;
+    };
+  });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

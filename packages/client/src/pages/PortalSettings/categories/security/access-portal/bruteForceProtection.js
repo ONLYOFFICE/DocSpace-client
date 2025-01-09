@@ -26,21 +26,22 @@
 
 import { useState, useEffect } from "react";
 import api from "@docspace/shared/api";
+import { size } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledBruteForceProtection } from "../StyledSecurity";
 import isEqual from "lodash/isEqual";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
-import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
+import { StyledBruteForceProtection } from "../StyledSecurity";
 
 const BruteForceProtection = (props) => {
   const {
@@ -82,6 +83,27 @@ const BruteForceProtection = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("brute-force-protection") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
+  const getSettings = () => {
+    const defaultData = {
+      numberAttempt: defaultNumberAttempt.replace(/^0+/, ""),
+      blockingTime: defaultBlockingTime.replace(/^0+/, ""),
+      checkPeriod: defaultCheckPeriod.replace(/^0+/, ""),
+    };
+    saveToSessionStorage("defaultBruteForceProtection", defaultData);
+
+    setCurrentNumberAttempt(defaultNumberAttempt);
+    setCurrentBlockingTime(defaultBlockingTime);
+    setCurrentCheckPeriod(defaultCheckPeriod);
+    setIsDefault(isDefaultPasswordProtection);
+    setIsGetSettingsLoaded(true);
+  };
+
   useEffect(() => {
     if (
       currentNumberAttempt == null ||
@@ -90,9 +112,9 @@ const BruteForceProtection = (props) => {
     )
       return;
 
-    setHasErrorNumberAttempt(!parseInt(currentNumberAttempt));
-    setHasErrorBlockingTime(!parseInt(currentBlockingTime));
-    setHasErrorCheckPeriod(!parseInt(currentCheckPeriod));
+    setHasErrorNumberAttempt(!parseInt(currentNumberAttempt, 10));
+    setHasErrorBlockingTime(!parseInt(currentBlockingTime, 10));
+    setHasErrorCheckPeriod(!parseInt(currentCheckPeriod, 10));
   }, [currentNumberAttempt, currentBlockingTime, currentCheckPeriod]);
 
   useEffect(() => {
@@ -149,27 +171,6 @@ const BruteForceProtection = (props) => {
     isGetSettingsLoaded,
   ]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("brute-force-protection") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
-  const getSettings = () => {
-    const defaultData = {
-      numberAttempt: defaultNumberAttempt.replace(/^0+/, ""),
-      blockingTime: defaultBlockingTime.replace(/^0+/, ""),
-      checkPeriod: defaultCheckPeriod.replace(/^0+/, ""),
-    };
-    saveToSessionStorage("defaultBruteForceProtection", defaultData);
-
-    setCurrentNumberAttempt(defaultNumberAttempt);
-    setCurrentBlockingTime(defaultBlockingTime);
-    setCurrentCheckPeriod(defaultCheckPeriod);
-    setIsDefault(isDefaultPasswordProtection);
-    setIsGetSettingsLoaded(true);
-  };
-
   const onValidation = (inputValue) => {
     const isPositiveOrZeroNumber =
       Math.sign(inputValue) === 1 || Math.sign(inputValue) === 0;
@@ -210,9 +211,9 @@ const BruteForceProtection = (props) => {
     if (hasErrorNumberAttempt || hasErrorCheckPeriod) return;
     setIsLoadingSave(true);
 
-    const numberCurrentNumberAttempt = parseInt(currentNumberAttempt);
-    const numberCurrentBlockingTime = parseInt(currentBlockingTime);
-    const numberCurrentCheckPeriod = parseInt(currentCheckPeriod);
+    const numberCurrentNumberAttempt = parseInt(currentNumberAttempt, 10);
+    const numberCurrentBlockingTime = parseInt(currentBlockingTime, 10);
+    const numberCurrentCheckPeriod = parseInt(currentCheckPeriod, 10);
 
     api.settings
       .setBruteForceProtection(
@@ -267,9 +268,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("NumberOfAttempts")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorNumberAttempt}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -287,9 +288,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("BlockingTime")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorBlockingTime}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -307,9 +308,9 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
-        labelVisible={true}
+        labelVisible
         labelText={t("CheckPeriod")}
-        isVertical={true}
+        isVertical
         place="top"
         hasError={hasErrorCheckPeriod}
         errorMessage={t("ErrorMessageBruteForceProtection")}
@@ -332,7 +333,7 @@ const BruteForceProtection = (props) => {
         showReminder={showReminder}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("RestoreToDefault")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="brute-force-protection-save"
         additionalClassCancelButton="brute-force-protection-cancel"

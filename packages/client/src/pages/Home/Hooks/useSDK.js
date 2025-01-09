@@ -181,8 +181,8 @@ const useSDK = ({
           default:
             res = "Wrong method for this mode";
         }
-      } catch (e) {
-        res = e;
+      } catch (err) {
+        res = err;
       }
 
       frameCallbackData(res);
@@ -203,7 +203,7 @@ const useSDK = ({
   );
 
   const callSetIsLoad = useCallback(
-    () => setTimeout(() => frameCallCommand("setIsLoaded"), 10),
+    () => frameCallCommand("setIsLoaded"),
     [frameCallCommand],
   );
 

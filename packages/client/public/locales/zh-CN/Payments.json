@@ -35,7 +35,7 @@
   "PayerDescription": "此用户可以访问付款详情，并且是唯一可以调整配额和付款的用户。{{productName}}所有者以及付款经理本人可以使用 Stripe 客户门户重新分配付款经理角色。",
   "PriceCalculation": "计算价格",
   "RenewSubscription": "将订阅更新至{{planName}}版本",
-  "RoomManagerDescription": "房间管理和归档，用户邀请和管理可为房间指派多名管理员。",
+  "RoomManagerDescription": "房间管理和存档，用户邀请和管理可为房间指派多名管理员。",
   "RoomsQuotaAlmostExhausted": "房间配额已几乎用完。",
   "StartupSuggestion": "升级为{{planName}}版获得更多权限",
   "StartupTitle": "您正在使用免费{{planName}}版本",

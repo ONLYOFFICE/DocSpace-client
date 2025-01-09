@@ -79,26 +79,49 @@ const Layout = (props) => {
     isFrame,
   } = props;
 
-  const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
 
-  if (window.DocSpace) {
-    window.DocSpace.navigate = useNavigate();
-    window.DocSpace.location = useLocation();
-  } else {
-    window.DocSpace = { navigate: useNavigate(), location: useLocation() };
-  }
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  window.DocSpace = {
+    ...window.DocSpace,
+    navigate,
+    location,
+  };
+
+  const isSDKPath = window.DocSpace.location.pathname.includes("/sdk/");
 
   let intervalHandler;
   let timeoutHandler;
 
+  const onWidthChange = (e) => {
+    const { matches } = e;
+    setIsTabletView(matches);
+  };
+
+  const onResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const onOrientationChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+
+    setWindowAngle(angle);
+    setWindowWidth(window.innerWidth);
+  };
+
   useEffect(() => {
     setIsPortrait(window.innerHeight > window.innerWidth);
   });
+
   useEffect(() => {
     setIsTabletView(isTabletUtils());
 
-    let mediaQuery = window.matchMedia(tablet);
+    const mediaQuery = window.matchMedia(tablet);
     mediaQuery.addEventListener("change", onWidthChange);
 
     return () => {
@@ -106,7 +129,7 @@ const Layout = (props) => {
       if (intervalHandler) clearInterval(intervalHandler);
       if (timeoutHandler) clearTimeout(timeoutHandler);
     };
-  }, []);
+  }, [onWidthChange]);
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -130,43 +153,25 @@ const Layout = (props) => {
         onOrientationChange,
       );
     };
-  }, [isTabletView]);
+  }, [isTabletView, isFrame, onResize, onOrientationChange]);
 
   useEffect(() => {
     const htmlEl = document.getElementsByTagName("html")[0];
     const bodyEl = document.getElementsByTagName("body")[0];
 
-    htmlEl.style.height = bodyEl.style.height = "100dvh";
+    htmlEl.style.height = "100dvh";
+    bodyEl.style.height = "100dvh";
 
     htmlEl.style.overflow = "hidden";
   }, []);
 
-  const onWidthChange = (e) => {
-    const { matches } = e;
-
-    setIsTabletView(matches);
-  };
-
-  const onResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  const onOrientationChange = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const angle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
-
-    setWindowAngle(angle);
-    setWindowWidth(window.innerWidth);
-  };
-
   return (
-    <StyledContainer
-      className="Layout"
-      contentHeight={contentHeight}
-      isPortrait={isPortrait}
-    >
-      <Scrollbar id="customScrollBar">{children}</Scrollbar>
+    <StyledContainer className="Layout" isPortrait={isPortrait}>
+      {isSDKPath ? (
+        children
+      ) : (
+        <Scrollbar id="customScrollBar">{children}</Scrollbar>
+      )}
     </StyledContainer>
   );
 };
@@ -182,8 +187,8 @@ export default inject(({ settingsStore }) => {
     isTabletView,
     setIsTabletView,
     setWindowWidth,
-    isFrame,
     setWindowAngle,
+    isFrame,
   } = settingsStore;
   return {
     isTabletView,

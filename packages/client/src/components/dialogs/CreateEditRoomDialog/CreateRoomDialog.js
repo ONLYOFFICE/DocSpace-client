@@ -53,6 +53,7 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   processCreatingRoomFromData,
+  setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
 }) => {
@@ -69,7 +70,7 @@ const CreateRoomDialog = ({
     )
       return false;
 
-    return !selectionItems.every((item) => item.isPDFForm);
+    return !selectionItems.every((item) => item?.isPDFForm);
   }, [selectionItems, processCreatingRoomFromData]);
 
   React.useEffect(() => {
@@ -104,12 +105,7 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
-
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoom();
-  };
+  const isRoomTitleChanged = roomParams?.title?.trim() === "";
 
   const onCreateRoom = async () => {
     if (!roomParams?.title?.trim()) {
@@ -121,6 +117,11 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onCreateRoom();
   };
 
   /**
@@ -148,7 +149,7 @@ const CreateRoomDialog = ({
   const onCloseAndDisconnectThirdparty = async () => {
     if (isLoading) return;
 
-    if (!!roomParams.storageLocation.thirdpartyAccount) {
+    if (roomParams.storageLocation.thirdpartyAccount) {
       setIsLoading(true);
       await deleteThirdParty(
         roomParams.storageLocation.thirdpartyAccount.providerId,
@@ -156,6 +157,11 @@ const CreateRoomDialog = ({
 
       await fetchThirdPartyProviders();
     }
+
+    if (processCreatingRoomFromData) {
+      setProcessCreatingRoomFromData(false);
+    }
+
     onClose();
   };
 

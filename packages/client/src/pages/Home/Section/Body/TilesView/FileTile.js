@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -62,7 +62,7 @@ const FileTile = (props) => {
     getIcon,
     onFilesClick,
     onDoubleClick,
-    onMouseClick,
+
     isActive,
     isEdit,
     inProgress,
@@ -82,12 +82,12 @@ const FileTile = (props) => {
     withCtrlSelect,
     withShiftSelect,
     isHighlight,
-    thumbnails1280x720,
     onDragOver,
     onDragLeave,
     badgeUrl,
     icon,
     isDownload,
+    selectableRef,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -134,7 +134,7 @@ const FileTile = (props) => {
   };
 
   return (
-    <div ref={props.selectableRef} id={id}>
+    <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
@@ -184,7 +184,6 @@ const FileTile = (props) => {
           withCtrlSelect={withCtrlSelect}
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
-          thumbnails1280x720={thumbnails1280x720}
           iconProgress={icon}
           isDownload={isDownload}
         >
@@ -205,7 +204,7 @@ export default inject(
     { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
     { item },
   ) => {
-    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
+    const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
@@ -224,7 +223,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      thumbnails1280x720,
       icon,
       isDownload,
     };

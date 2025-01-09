@@ -68,8 +68,8 @@ const ButtonContainer = (props) => {
     }
     setIsLoading(true);
 
-    let storageParams = [],
-      tempObj = {};
+    let storageParams = [];
+    const tempObj = {};
 
     const backupId = "";
     const storageType = getStorageType().toString();

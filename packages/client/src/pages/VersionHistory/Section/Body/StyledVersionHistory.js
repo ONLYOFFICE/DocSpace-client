@@ -57,8 +57,8 @@ const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -75,7 +75,7 @@ const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
       ${(props) =>
         props.isRestoreProcess &&
         `
-          color:${(props) => props.theme.filesVersionHistory.versionList.color};
+          color:${({ theme }) => theme.filesVersionHistory.versionList.color};
           touch-action: none;
           pointer-events: none;
         `};
@@ -97,8 +97,8 @@ const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -110,8 +110,8 @@ const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              stroke: ${(props) =>
-                props.theme.filesVersionHistory.versionList.stroke};
+              stroke: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.stroke};
             `};
         }
       }
@@ -128,8 +128,7 @@ const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
       path {
         ${(props) =>
           props.isRestoreProcess &&
-          `fill: ${(props) =>
-            props.theme.filesVersionHistory.versionList.fill}`}
+          `fill: ${({ theme }) => theme.filesVersionHistory.versionList.fill}`}
       }
     }
   }
@@ -257,8 +256,8 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
           ${(props) =>
             props.isSavingComment &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -272,8 +271,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
       ${(props) =>
         props.isSavingComment &&
         `
-          color: ${(props) =>
-            props.theme.filesVersionHistory.versionList.color};
+          color: ${({ theme }) => theme.filesVersionHistory.versionList.color};
           touch-action: none;
           pointer-events: none;
         `}

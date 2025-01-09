@@ -44,12 +44,6 @@ const ArchiveDialogComponent = (props) => {
     items,
   } = props;
 
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
-
   const onClose = () => {
     setArchiveDialogVisible(false);
   };
@@ -60,10 +54,15 @@ const ArchiveDialogComponent = (props) => {
   };
 
   const onKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      onAction();
+    if (e.key === "Escape") {
+      onClose();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, []);
 
   const getDescription = () => {
     if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
@@ -86,7 +85,7 @@ const ArchiveDialogComponent = (props) => {
         {t("ArchiveDialog:ArchiveHeader")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>{description}</Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -24,16 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Tile from "./sub-components/Tile";
-import { SimpleFilesTileContent } from "./StyledTileView";
 import { Link } from "@docspace/shared/components/link";
 import { isDesktop } from "@docspace/shared/utils";
+import Tile from "./sub-components/Tile";
+import { SimpleFilesTileContent } from "./StyledTileView";
 
-const FileTile = (props) => {
-  const { item } = props;
-
+const FileTile = ({ item, selectableRef }) => {
   return (
-    <div ref={props.selectableRef}>
+    <div ref={selectableRef}>
       <Tile key={item.id} item={item}>
         <SimpleFilesTileContent>
           <Link

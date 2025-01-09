@@ -185,10 +185,6 @@ const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 class TileContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       children,
@@ -206,22 +202,22 @@ class TileContainer extends React.PureComponent {
     const Files = [];
 
     React.Children.map(children, (item) => {
-      const { isFolder, isRoom, fileExst, id } = item.props.item;
-      if ((isFolder || id === -1) && !fileExst && !isRoom) {
+      const { isFolder, isRoom, fileExst, id: itemId } = item.props.item;
+      if ((isFolder || itemId === -1) && !fileExst && !isRoom) {
         Folders.push(
-          <div className="tile-item-wrapper folder" key={id}>
+          <div className="tile-item-wrapper folder" key={itemId}>
             {item}
           </div>,
         );
       } else if (isRoom) {
         Rooms.push(
-          <div className="tile-item-wrapper room" key={id}>
+          <div className="tile-item-wrapper room" key={itemId}>
             {item}
           </div>,
         );
       } else {
         Files.push(
-          <div className="tile-item-wrapper file" key={id}>
+          <div className="tile-item-wrapper file" key={itemId}>
             {item}
           </div>,
         );
@@ -241,7 +237,7 @@ class TileContainer extends React.PureComponent {
         {Folders.length > 0 && (
           <Heading
             size="xsmall"
-            id={"folder-tile-heading"}
+            id="folder-tile-heading"
             className="tile-items-heading"
           >
             {headingFolders}
@@ -300,7 +296,7 @@ TileContainer.defaultProps = {
   id: "tileContainer",
 };
 
-export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
+export default inject(({ filesStore, treeFoldersStore }) => {
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 

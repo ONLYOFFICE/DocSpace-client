@@ -27,8 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { BackupStorageType } from "@docspace/shared/enums";
-import ScheduleComponent from "./ScheduleComponent";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import ScheduleComponent from "./ScheduleComponent";
 
 class RoomsModule extends React.PureComponent {
   onSelectFolder = (id) => {
@@ -54,12 +54,13 @@ class RoomsModule extends React.PureComponent {
         <div className="auto-backup_folder-input">
           <FilesSelectorInput
             onSelectFolder={this.onSelectFolder}
-            {...(passedId && { id: passedId })}
+            {...(passedId ? { id: passedId } : { openRoot: true })}
             withoutInitPath={!isDocumentsDefault}
             isError={isError}
             isDisabled={isLoadingData}
             isRoomBackup
             isSelectFolder
+            withCreate
           />
         </div>
         <ScheduleComponent isLoadingData={isLoadingData} {...rest} />

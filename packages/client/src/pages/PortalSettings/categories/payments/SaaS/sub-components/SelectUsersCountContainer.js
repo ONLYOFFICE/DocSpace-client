@@ -38,30 +38,36 @@ const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
 
-  .payment-slider {
+  .slider-wrapper {
     margin-top: 20px;
-  }
+    display: grid;
+    gap: 16px;
 
-  .slider-track {
-    display: flex;
-    position: relative;
-    margin-top: -8px;
-    margin-inline-start: -3px;
-    height: 16px;
-
-    .slider-track-value_min,
-    .slider-track-value_max {
-      color: ${(props) =>
-        props.theme.client.settings.payment.priceContainer.trackNumberColor};
+    .payment-slider {
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
-    .slider-track-value_max {
-      position: absolute;
-      inset-inline-end: 0;
-    }
-    .slider-track-value_min {
-      position: absolute;
-      inset-inline-start: 0;
+    .slider-track {
+      display: flex;
+      position: relative;
+      margin-inline-start: -3px;
+      height: 16px;
+
+      .slider-track-value_min,
+      .slider-track-value_max {
+        color: ${(props) =>
+          props.theme.client.settings.payment.priceContainer.trackNumberColor};
+      }
+
+      .slider-track-value_max {
+        position: absolute;
+        inset-inline-end: 0;
+      }
+      .slider-track-value_min {
+        position: absolute;
+        inset-inline-start: 0;
+      }
     }
   }
 
@@ -191,10 +197,8 @@ const SelectUsersCountContainer = ({
     if (operation === "minus") {
       if (managersCount > maxAvailableManagersCount) {
         value = maxAvailableManagersCount;
-      } else {
-        if (managersCount > minAvailableManagersValue) {
-          value -= step;
-        }
+      } else if (managersCount > minAvailableManagersValue) {
+        value -= step;
       }
     }
 
@@ -213,7 +217,7 @@ const SelectUsersCountContainer = ({
 
     const numberValue = +value;
 
-    if (isNaN(numberValue)) return;
+    if (Number.isNaN(numberValue)) return;
 
     if (numberValue === 0) {
       setManagersCount(minAvailableManagersValue);
@@ -226,8 +230,8 @@ const SelectUsersCountContainer = ({
   };
 
   const value = isNeedPlusSign
-    ? maxAvailableManagersCount + "+"
-    : managersCount + "";
+    ? `${maxAvailableManagersCount}+`
+    : `${managersCount}`;
 
   const isUpdatingTariff = isLoading && isAlreadyPaid;
 
@@ -251,7 +255,7 @@ const SelectUsersCountContainer = ({
         <div
           className="circle minus-icon"
           {...onClickProp}
-          data-operation={"minus"}
+          data-operation="minus"
         >
           <MinusIcon {...onClickProp} className="payment-score" />
         </div>
@@ -266,37 +270,41 @@ const SelectUsersCountContainer = ({
         <div
           className="circle plus-icon"
           {...onClickProp}
-          data-operation={"plus"}
+          data-operation="plus"
         >
           <PlusIcon {...onClickProp} className="payment-score" />
         </div>
       </div>
 
-      <Slider
-        thumbBorderWidth={"8px"}
-        thumbHeight={"32px"}
-        thumbWidth={"32px"}
-        runnableTrackHeight={"12px"}
-        isDisabled={isDisabled || isUpdatingTariff}
-        isReadOnly={isDisabled || isUpdatingTariff}
-        type="range"
-        min={minAvailableManagersValue}
-        max={(maxAvailableManagersCount + 1).toString()}
-        step={step}
-        withPouring
-        value={
-          isLessCountThanAcceptable ? minAvailableManagersValue : managersCount
-        }
-        {...onChangeSlideProp}
-        className="payment-slider"
-      />
-      <div className="slider-track">
-        <Text className="slider-track-value_min" noSelect>
-          {minAvailableManagersValue}
-        </Text>
-        <Text className="slider-track-value_max" noSelect>
-          {maxAvailableManagersCount + "+"}
-        </Text>
+      <div className="slider-wrapper">
+        <Slider
+          thumbBorderWidth="8px"
+          thumbHeight="32px"
+          thumbWidth="32px"
+          runnableTrackHeight="12px"
+          isDisabled={isDisabled || isUpdatingTariff}
+          isReadOnly={isDisabled || isUpdatingTariff}
+          type="range"
+          min={minAvailableManagersValue}
+          max={(maxAvailableManagersCount + 1).toString()}
+          step={step}
+          withPouring
+          value={
+            isLessCountThanAcceptable
+              ? minAvailableManagersValue
+              : managersCount
+          }
+          {...onChangeSlideProp}
+          className="payment-slider"
+        />
+        <div className="slider-track">
+          <Text className="slider-track-value_min" noSelect>
+            {minAvailableManagersValue}
+          </Text>
+          <Text className="slider-track-value_max" noSelect>
+            {`${maxAvailableManagersCount}+`}
+          </Text>
+        </div>
       </div>
     </StyledBody>
   );

@@ -2,10 +2,10 @@ name: Frontend tests
 
 on:
   push:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
   pull_request:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
 jobs:
   playwright:
@@ -21,7 +21,7 @@ jobs:
           test-container: tests-ci
           test-command: npx playwright test
   eslint:
-    name: "Login and doceditor lint"
+    name: "Lint tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: yarn install
-      - name: Lint login and doceditor
+      - name: Lint clients
         run: yarn lint
   common:
     name: "Common tests"

@@ -201,7 +201,7 @@ const IdpSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, ssoStore }) => {
+export default inject(({ ssoStore }) => {
   const {
     ssoBinding,
     enableSso,

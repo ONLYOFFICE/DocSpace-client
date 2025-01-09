@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -60,6 +59,7 @@ import {
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import api from "@docspace/shared/api";
 
 const observedKeys = [
   "id",
@@ -76,43 +76,59 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
-const infoPlugin = "info_plugin";
+// const infoPlugin = "info_plugin"; // Useless?
 
 class InfoPanelStore {
   userStore = null;
 
   isVisible = false;
+
   isMobileHidden = false;
 
   infoPanelSelection = null;
+
   selectionHistory = null;
+
   selectionHistoryTotal = null;
 
   roomsView = infoMembers;
+
   fileView = infoHistory;
 
   isScrollLocked = false;
+
   historyWithFileList = false;
 
   filesSettingsStore = null;
+
   peopleStore = null;
+
   filesStore = null;
+
   selectedFolderStore = null;
+
   treeFoldersStore = null;
+
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
   infoPanelRoom = null;
+
   membersIsLoading = false;
+
   isMembersPanelUpdating = false;
 
   shareChanged = false;
+
   calendarDay = null;
 
   showSearchBlock = false;
+
   searchValue = "";
 
   infoPanelSelectedGroup = null;
+
   historyFilter = {
     page: 0,
     pageCount: 100,
@@ -174,8 +190,6 @@ class InfoPanelStore {
     this.setShowSearchBlock(false);
     this.setSearchValue("");
   };
-
-  setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
   setSelectionHistory = (obj, total) => {
     this.selectionHistory = obj;
@@ -271,9 +285,7 @@ class InfoPanelStore {
       ? this.infoPanelSelection
       : selection.length
         ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
+        : bufferSelection || null;
   }
 
   get isRoomMembersPanelOpen() {
@@ -298,13 +310,12 @@ class InfoPanelStore {
       // if (!this.infoPanelSelection?.id) {
       return this.getInfoPanelSelectedFolder();
       // }
-    } else {
-      return this.infoPanelSelectedItems[0];
     }
+    return this.infoPanelSelectedItems[0];
   };
 
   setNewInfoPanelSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedItems = this.infoPanelSelectedItems; // files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
 
@@ -340,10 +351,10 @@ class InfoPanelStore {
     this.setInfoPanelSelection({
       ...this.infoPanelSelection,
       logo: {
-        small: logo.small.split("?")[0] + "?" + new Date().getTime(),
-        medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
-        large: logo.large.split("?")[0] + "?" + new Date().getTime(),
-        original: logo.original.split("?")[0] + "?" + new Date().getTime(),
+        small: `${logo.small.split("?")[0]}?${new Date().getTime()}`,
+        medium: `${logo.medium.split("?")[0]}?${new Date().getTime()}`,
+        large: `${logo.large.split("?")[0]}?${new Date().getTime()}`,
+        original: `${logo.original.split("?")[0]}?${new Date().getTime()}`,
       },
     });
   };
@@ -355,9 +366,8 @@ class InfoPanelStore {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
       return;
-    } else {
-      this.setNewInfoPanelSelection();
     }
+    this.setNewInfoPanelSelection();
 
     if (!this.getIsRooms) return;
 
@@ -563,7 +573,7 @@ class InfoPanelStore {
     groups,
     guests,
   ) => {
-    let hasPrevAdminsTitle = this.getHasPrevTitle(
+    const hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
     );
@@ -576,7 +586,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
+    const hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
 
     if (groups.length && !hasPrevGroupsTitle) {
       groups.unshift({
@@ -586,7 +596,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+    const hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
       users.unshift({
@@ -596,7 +606,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
+    const hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
 
     if (guests?.length && !hasPrevGuestsTitle) {
       guests.unshift({
@@ -606,7 +616,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevExpectedTitle = this.getHasPrevTitle(
+    const hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
       "expected",
     );
@@ -628,7 +638,7 @@ class InfoPanelStore {
     const groups = [];
     const guests = [];
 
-    members?.map((fetchedMember) => {
+    members?.forEach((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,
@@ -670,7 +680,7 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
-    membersFilter,
+    membersFilter = null,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
@@ -691,7 +701,11 @@ class InfoPanelStore {
       this.withPublicRoomBlock &&
       !withoutTitlesAndLinks
     ) {
-      requests.push(this.filesStore.getRoomLinks(roomId));
+      requests.push(
+        api.rooms
+          .getRoomMembers(roomId, { filterType: 2 }) // 2 (External link)
+          .then((res) => res.items),
+      );
     }
 
     let timerId;
@@ -726,7 +740,7 @@ class InfoPanelStore {
     const newMembers = this.convertMembers(t, data, false, true);
 
     const mergedMembers = {
-      roomId: roomId,
+      roomId,
       administrators: [
         ...oldMembers.administrators,
         ...newMembers.administrators,
@@ -773,7 +787,6 @@ class InfoPanelStore {
   };
 
   fetchHistory = async (abortControllerSignal = null) => {
-    const { getHistory, getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
 
     let selectionType = "file";
@@ -798,16 +811,19 @@ class InfoPanelStore {
       count: this.historyFilter.pageCount,
     };
 
-    return getHistory(
-      selectionType,
-      this.infoPanelSelection.id,
-      abortControllerSignal,
-      this.infoPanelSelection?.requestToken,
-      filter,
-    )
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        abortControllerSignal,
+        this.infoPanelSelection?.requestToken,
+        filter,
+      )
       .then(async (data) => {
         if (withLinks) {
-          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
           const historyWithLinks = addLinksToHistory(data, links);
           setExternalLinks(links);
           return historyWithLinks;
@@ -826,7 +842,6 @@ class InfoPanelStore {
   };
 
   fetchMoreHistory = async (abortControllerSignal = null) => {
-    const { getHistory, getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
     const oldHistory = this.selectionHistory;
 
@@ -841,7 +856,7 @@ class InfoPanelStore {
         this.infoPanelSelection.roomType,
       );
 
-    let newFilter = clone(this.historyFilter);
+    const newFilter = clone(this.historyFilter);
 
     newFilter.page += 1;
     newFilter.startIndex = newFilter.page * newFilter.pageCount;
@@ -853,16 +868,19 @@ class InfoPanelStore {
       count: this.historyFilter.pageCount,
     };
 
-    return getHistory(
-      selectionType,
-      this.infoPanelSelection.id,
-      abortControllerSignal,
-      this.infoPanelSelection?.requestToken,
-      filter,
-    )
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        abortControllerSignal,
+        this.infoPanelSelection?.requestToken,
+        filter,
+      )
       .then(async (data) => {
         if (withLinks) {
-          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
           const historyWithLinks = addLinksToHistory(data, links);
           setExternalLinks(links);
           return historyWithLinks;
@@ -911,6 +929,7 @@ class InfoPanelStore {
     this.setView(infoShare);
     this.isVisible = true;
   };
+
   openMembersTab = () => {
     this.setView(infoMembers);
     this.isVisible = true;

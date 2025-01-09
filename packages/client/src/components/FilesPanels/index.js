@@ -51,10 +51,8 @@ import {
   DownloadDialog,
   ConflictResolveDialog,
   ConvertDialog,
-  CreateRoomDialog,
   InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
-  ChangeUserTypeDialog,
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
@@ -84,6 +82,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
+import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 
 const Panels = (props) => {
   const {
@@ -91,7 +90,6 @@ const Panels = (props) => {
     copyPanelVisible,
     moveToPanelVisible,
     restorePanelVisible,
-    thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
@@ -111,7 +109,6 @@ const Panels = (props) => {
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
-    createRoomDialogVisible,
     createRoomConfirmDialogVisible,
     confirmDialogIsLoading,
     restoreAllPanelVisible,
@@ -145,6 +142,7 @@ const Panels = (props) => {
     roomLogoCoverDialogVisible,
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
+    closeEditIndexDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -215,17 +213,17 @@ const Panels = (props) => {
     settingsPluginDialogVisible && (
       <SettingsPluginDialog
         isVisible={settingsPluginDialogVisible}
-        key={"settings-plugin-dialog"}
+        key="settings-plugin-dialog"
       />
     ),
     deletePluginDialogVisible && (
       <DeletePluginDialog
         isVisible={deletePluginDialogVisible}
-        key={"delete-plugin-dialog"}
+        key="delete-plugin-dialog"
       />
     ),
     pluginDialogVisible && (
-      <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+      <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
     guestReleaseTipDialogVisible && (
       <GuestReleaseTipDialog key="guest-release-tip-dialog" />
@@ -347,6 +345,9 @@ const Panels = (props) => {
         isDownload={passwordEntryDialogDate.isDownload}
       />
     ),
+    closeEditIndexDialogVisible && (
+      <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
+    ),
   ];
 };
 
@@ -366,7 +367,6 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       deleteDialogVisible,
@@ -378,7 +378,7 @@ export default inject(
       createRoomDialogVisible,
       createRoomConfirmDialogVisible,
       convertPasswordDialogVisible,
-      connectItem, //TODO:
+      connectItem, // TODO:
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
@@ -415,6 +415,7 @@ export default inject(
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -455,8 +456,7 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
-      connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
+      connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
@@ -507,6 +507,7 @@ export default inject(
       isShowWarningDialog,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
     };
   },
 )(observer(Panels));

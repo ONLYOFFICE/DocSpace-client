@@ -29,18 +29,18 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
+import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
+
+import { isMobile, isTablet } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import {
   StyledComponent,
   StyledFloatingButton,
   IconBox,
   StyledMobilePreview,
 } from "./StyledPreview";
-
-import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-
-import { isMobile, isTablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const Preview = (props) => {
   const {
@@ -352,7 +352,7 @@ const Preview = (props) => {
               height="28"
               className="tablet-header"
             />
-            <div className="line"></div>
+            <div className="line" />
             <RectangleSkeleton
               animate={false}
               width="20"
@@ -389,7 +389,7 @@ const Preview = (props) => {
               height="20"
               className="tablet-category bottom"
             />
-            <div className="line"></div>
+            <div className="line" />
             <RectangleSkeleton
               animate={false}
               width="20"
@@ -415,7 +415,7 @@ const Preview = (props) => {
             />
           </div>
 
-          <img src={PlusPreviewSvgUrl} />
+          <img src={PlusPreviewSvgUrl} alt="Plus" />
         </div>
         <div className="section-search background border-color">
           <div className="section-search-loader">

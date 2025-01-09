@@ -27,7 +27,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
@@ -51,48 +50,46 @@ const StyledMain = styled.main`
 
 const Main = (props) => {
   const { mainBarVisible, isFrame } = props;
-  //console.log("Main render");
+  // console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
+
+  const onResize = React.useCallback(() => {
+    let correctHeight = window.innerHeight;
+
+    if (mainBarVisible && isMobileUtils()) {
+      const mainBar = document.getElementById("main-bar");
+
+      if (mainBar) {
+        const mainBarHeight = mainBar.offsetHeight || 0;
+        if (mainBarHeight === 0)
+          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
+
+        correctHeight -= mainBarHeight;
+      }
+    }
+
+    // 48 - its nav menu with burger, logo and user avatar
+    if (isMobileUtils() && !isFrame) {
+      correctHeight -= 48;
+    }
+
+    setMainHeight(correctHeight);
+  }, [mainBarVisible, isFrame]);
 
   React.useEffect(() => {
     window.addEventListener("resize", onResize);
 
     return () => {
       window.removeEventListener("resize", onResize);
-
       clearTimeout(updateSizeRef.current);
     };
-  }, [onResize, isFrame]);
+  }, [onResize]);
 
   React.useEffect(() => {
     onResize();
-  }, [mainBarVisible, isFrame]);
+  }, [mainBarVisible, isFrame, onResize]);
 
-  const onResize = React.useCallback(
-    (e) => {
-      let correctHeight = window.innerHeight;
-
-      if (mainBarVisible && isMobileUtils()) {
-        const mainBar = document.getElementById("main-bar");
-
-        if (mainBar) {
-          if (!mainBar?.offsetHeight)
-            return (updateSizeRef.current = setTimeout(() => onResize(), 0));
-
-          correctHeight -= mainBar?.offsetHeight;
-        }
-      }
-
-      // 48 - its nav menu with burger, logo and user avatar
-      if (isMobileUtils() && !isFrame) {
-        correctHeight -= 48;
-      }
-
-      setMainHeight(correctHeight);
-    },
-    [mainBarVisible, isFrame],
-  );
   return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
 };
 

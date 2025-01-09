@@ -17,7 +17,9 @@
     "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
-    "test:e2e:docker:clear": "docker rmi tests"
+    "test:e2e:docker:clear": "docker rmi tests",
+    "lint": "yarn build:translations && eslint ./src",
+    "lint:fix": "yarn build:translations && eslint-interactive ./src"
   },
   "old-scripts": {
     "build:test": "webpack --env minimize=false --mode production",
@@ -94,12 +96,15 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-webpack": "^0.13.9",
+    "eslint-interactive": "^11.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^0.9.0",
+    "eslint-webpack-plugin": "^4.2.0",
     "external-remotes-plugin": "^1.0.0",
     "file-loader": "^6.2.0",
     "html-loader": "^4.2.0",

@@ -24,10 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled, { css } from "styled-components";
 import hexRgb from "hex-rgb";
-import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";

@@ -32,8 +32,8 @@ import {
   desktop,
 } from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
-import { showPreviewThreshold } from "../constants";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { showPreviewThreshold } from "../constants";
 
 export const SDKContainer = styled(Box)`
   .integration-examples-bottom {
@@ -305,7 +305,6 @@ export const ColumnContainer = styled(Box)`
 
 export const Preview = styled(Box)`
   width: 100%;
-  min-width: 660px;
   flex-direction: row;
 
   .preview-description {
@@ -356,7 +355,7 @@ export const CodeWrapper = styled.div`
 
   margin-top: 16px;
 
-  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  width: 100%;
   max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

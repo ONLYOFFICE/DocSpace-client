@@ -37,6 +37,7 @@ import {
   StyledTriangleDownIcon,
   StyledLoader,
   StyledPlusBadge,
+  DescriptiveContainer,
 } from "../Combobox.styled";
 
 import { Text } from "../../text";
@@ -126,6 +127,7 @@ const ComboButton = (props: ComboButtonProps) => {
           />
         </StyledIcon>
       )}
+
       {type === "badge" ? (
         <Badge
           label={selectedOption.label}
@@ -135,6 +137,31 @@ const ComboButton = (props: ComboButtonProps) => {
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
         />
+      ) : type === "descriptive" ? (
+        <DescriptiveContainer>
+          <Text
+            title={selectedOption?.label}
+            as="div"
+            truncate
+            fontWeight={600}
+            className="combo-button-label"
+            fontSize="14px"
+            lineHeight="16px"
+            dir="auto"
+          >
+            {selectedOption?.label}
+          </Text>
+          <Text
+            textType="secondary"
+            title={selectedOption?.description}
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            dir="auto"
+          >
+            {selectedOption?.description}
+          </Text>
+        </DescriptiveContainer>
       ) : type !== "onlyIcon" ? (
         <Text
           title={selectedOption?.label}

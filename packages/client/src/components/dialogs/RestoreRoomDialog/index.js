@@ -45,12 +45,6 @@ const RestoreRoomDialogComponent = (props) => {
     hasPublicRoom,
   } = props;
 
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
-
   const onClose = () => {
     setRestoreAllArchive(false);
     setRestoreRoomDialogVisible(false);
@@ -72,6 +66,12 @@ const RestoreRoomDialogComponent = (props) => {
       onAction();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, []);
 
   const getDescription = () => {
     if (hasPublicRoom) {
@@ -98,7 +98,7 @@ const RestoreRoomDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>{description}</Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

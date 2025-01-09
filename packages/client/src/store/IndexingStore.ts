@@ -30,6 +30,7 @@ import SelectedFolderStore from "./SelectedFolderStore";
 
 class IndexingStore {
   infoPanelStore;
+
   selectedFolderStore;
 
   isIndexEditingMode: boolean = false;
@@ -118,6 +119,21 @@ class IndexingStore {
     }
 
     this.isIndexEditingMode = mode;
+  };
+
+  getIndexingArray = () => {
+    const items = this.updateSelection.reduce((res, item) => {
+      return [
+        ...res,
+        {
+          order: item.order,
+          entryId: item.id,
+          entryType: item.isFolder ? 1 : 2,
+        },
+      ];
+    }, []);
+
+    return items;
   };
 }
 

@@ -26,11 +26,17 @@
 
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import config from "PACKAGE_FILE";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 import {
   StyledContainer,
   StyledHeading,
@@ -38,11 +44,6 @@ import {
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
-import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({
   t,
@@ -129,7 +130,7 @@ const SectionHeaderContent = ({
               className="info-panel-toggle"
               iconName={PanelReactSvgUrl}
               size="16"
-              isFill={true}
+              isFill
               onClick={onToggleInfoPanel}
               title={t("Common:InfoPanel")}
             />

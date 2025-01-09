@@ -111,7 +111,9 @@ const Root = ({
     documentType: config?.documentType,
   });
 
-  useSDK({ sdkConfig, setSdkConfig });
+  const { sdkFrameConfig } = useSDK();
+
+  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
 
   const { getErrorMessage } = useError({
     error,
@@ -190,7 +192,7 @@ const Root = ({
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible
     ) {
-      calculateAsideHeight();
+      setTimeout(() => calculateAsideHeight(calculateAsideHeight), 10);
 
       const activeElement = document.activeElement as HTMLElement | null;
 
@@ -200,10 +202,6 @@ const Root = ({
       }
     } else if (editorRef.current) {
       editorRef.current.focus();
-    }
-
-    if (isSharingDialogVisible) {
-      setTimeout(calculateAsideHeight, 10);
     }
   }, [
     isSharingDialogVisible,

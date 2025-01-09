@@ -35,9 +35,9 @@ import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 
-import SsoTextInput from "./SsoTextInput";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import SsoTextInput from "./SsoTextInput";
 
 const StyledWrapper = styled.div`
   display: flex;

@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
@@ -47,8 +48,6 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const DocSpace = (props) => {
   const { t, theme, currentColorScheme } = props;
@@ -85,7 +84,7 @@ const DocSpace = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -106,7 +105,7 @@ const DocSpace = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId}></Box>
+      <Box id={config.frameId} />
     </Frame>
   );
 

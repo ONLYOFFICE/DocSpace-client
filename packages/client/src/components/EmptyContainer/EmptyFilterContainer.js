@@ -47,7 +47,6 @@ const EmptyFilterContainer = ({
   selectedFolderId,
   setIsLoading,
 
-  linkStyles,
   isRooms,
   isArchiveFolder,
   isRoomsFolder,

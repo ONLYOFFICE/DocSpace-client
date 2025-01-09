@@ -58,15 +58,16 @@ const ChangeQuotaEvent = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState();
 
-  const onSetQuotaBytesSize = (size) => {
-    setSize(size);
+  const onSetQuotaBytesSize = (value) => {
+    setSize(value);
   };
 
-  const updateFunction = (size) => {
+  const updateFunction = (sizeValue) => {
     return type === "user"
-      ? setCustomUserQuota(size, ids)
-      : setCustomRoomQuota(size, ids, inRoom);
+      ? setCustomUserQuota(sizeValue, ids)
+      : setCustomRoomQuota(sizeValue, ids, inRoom);
   };
+
   const onSaveClick = async () => {
     if (!size || size.trim() === "") {
       setIsError(true);
@@ -130,10 +131,7 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  (
-    { peopleStore, filesStore, auth, currentQuotaStore, infoPanelStore },
-    { type },
-  ) => {
+  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
     const { usersStore } = peopleStore;
     const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
       usersStore;

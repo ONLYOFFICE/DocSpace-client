@@ -80,7 +80,7 @@ const MobileView = ({
   isRoomsFolder,
   mainButtonMobileVisible,
   uploaded,
-  setGuidanceCoordinates,
+  setGuidanceUploading,
   guidanceCoordinates,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
@@ -106,25 +106,20 @@ const MobileView = ({
 
   const setGuidRects = () => {
     if (mainButtonRef?.current) {
-      setGuidanceCoordinates({
-        uploading: mainButtonRef?.current.getClientRects()[0],
-      });
+      setGuidanceUploading(mainButtonRef?.current.getClientRects()[0]);
     }
   };
 
   React.useEffect(() => {
     setGuidRects();
-  }, [
-    mainButtonRef?.current,
-    guidanceCoordinates.ready,
-    guidanceCoordinates.pdf,
-  ]);
-
-  React.useEffect(() => {
     window.addEventListener("resize", setGuidRects);
 
     return () => window.removeEventListener("resize", setGuidRects);
-  }, []);
+  }, [
+    mainButtonRef?.current,
+    guidanceCoordinates.pdf,
+    guidanceCoordinates.ready,
+  ]);
 
   React.useEffect(() => {
     let currentPrimaryNumEl = primaryNumEl;
@@ -298,7 +293,7 @@ export default inject(({ uploadDataStore, treeFoldersStore, filesStore }) => {
     clearSecondaryProgressData,
     isRoomsFolder,
     uploaded,
-    setGuidanceCoordinates: filesStore.setGuidanceCoordinates,
+    setGuidanceUploading: filesStore.setGuidanceUploading,
     guidanceCoordinates: filesStore.guidanceCoordinates,
   };
 })(observer(MobileView));

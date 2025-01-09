@@ -367,8 +367,10 @@ const SimpleFilesRow = (props) => {
     isFolder,
     icon,
     isDownload,
-    setGuidanceCoordinates,
+    setGuidancePdf,
+    setGuidanceReady,
     isTutorialEnabled,
+    // guidanceCoordinates,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -386,14 +388,10 @@ const SimpleFilesRow = (props) => {
 
   React.useEffect(() => {
     if (item?.isPDF && rowRef?.current) {
-      setGuidanceCoordinates({
-        pdf: rowRef.current.getClientRects()[0],
-      });
+      setGuidancePdf(rowRef.current.getClientRects()[0]);
     }
     if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidanceCoordinates({
-        ready: rowRef.current.getClientRects()[0],
-      });
+      setGuidanceReady(rowRef.current.getClientRects()[0]);
     }
   }, [rowRef?.current]);
 

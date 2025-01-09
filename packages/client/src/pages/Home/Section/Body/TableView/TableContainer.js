@@ -149,7 +149,8 @@ const Table = ({
   isIndexing,
   icon,
   isDownload,
-  setGuidanceCoordinates,
+  setGuidancePdf,
+  setGuidanceReady,
   guidanceCoordinates,
   isTutorialEnabled,
 }) => {
@@ -227,7 +228,8 @@ const Table = ({
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
-        setGuidanceCoordinates={setGuidanceCoordinates}
+        setGuidancePdf={setGuidancePdf}
+        setGuidanceReady={setGuidanceReady}
         guidanceCoordinates={guidanceCoordinates}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
@@ -333,7 +335,8 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
-      setGuidanceCoordinates,
+      setGuidancePdf,
+      setGuidanceReady,
       guidanceCoordinates,
     } = filesStore;
 
@@ -363,7 +366,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      setGuidanceCoordinates,
+      setGuidancePdf,
+      setGuidanceReady,
       guidanceCoordinates,
       icon,
       isDownload,

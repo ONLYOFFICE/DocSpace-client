@@ -80,9 +80,10 @@ const FilesTableRow = (props) => {
     displayFileExtension,
     icon,
     isDownload,
-    setGuidanceCoordinates,
-    guidanceCoordinates,
+    setGuidancePdf,
+    setGuidanceReady,
     isTutorialEnabled,
+    guidanceCoordinates,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -178,16 +179,16 @@ const FilesTableRow = (props) => {
 
   React.useEffect(() => {
     if (item?.isPDF && rowRef?.current) {
-      setGuidanceCoordinates({
-        pdf: rowRef.current.firstChild.offsetParent.getClientRects()[0],
-      });
+      setGuidancePdf(
+        rowRef.current.firstChild.offsetParent.getClientRects()[0],
+      );
     }
     if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidanceCoordinates({
-        ready: rowRef.current.firstChild.offsetParent.getClientRects()[0],
-      });
+      setGuidanceReady(
+        rowRef.current.firstChild.offsetParent.getClientRects()[0],
+      );
     }
-  }, [rowRef?.current, guidanceCoordinates.ready, guidanceCoordinates.pdf]);
+  }, [rowRef?.current, guidanceCoordinates.pdf, guidanceCoordinates.ready]);
 
   return (
     <StyledDragAndDrop

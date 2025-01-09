@@ -149,7 +149,7 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
 };
 
 export default inject(({ filesStore, dialogsStore }) => {
-  const { filesList, setGuidanceCoordinates } = filesStore;
+  const { filesList } = filesStore;
   const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
     dialogsStore;
 
@@ -158,7 +158,6 @@ export default inject(({ filesStore, dialogsStore }) => {
 
   return {
     filesList,
-    setGuidanceCoordinates,
     isTutorialEnabled,
   };
 })(observer(FilesTileContainer));

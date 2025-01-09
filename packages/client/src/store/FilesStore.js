@@ -4133,11 +4133,20 @@ class FilesStore {
     this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
-  setGuidanceCoordinates = (value) => {
-    this.guidanceCoordinates = {
-      ...this.guidanceCoordinates,
-      ...value,
-    };
+  setGuidancePdf = (pdfRect) => {
+    this.guidanceCoordinates.pdf = pdfRect;
+  };
+
+  setGuidanceReady = (readyRect) => {
+    this.guidanceCoordinates.ready = readyRect;
+  };
+
+  setGuidanceShare = (shareRect) => {
+    this.guidanceCoordinates.share = shareRect;
+  };
+
+  setGuidanceUploading = (uploadingRect) => {
+    this.guidanceCoordinates.uploading = uploadingRect;
   };
 
   setInRoomFolder = (roomId, inRoom) => {

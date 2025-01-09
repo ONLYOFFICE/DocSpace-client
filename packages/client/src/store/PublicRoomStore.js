@@ -32,21 +32,26 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/location";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/category";
 
-import { LinkType } from "../helpers/constants";
 import { ValidationStatus } from "@docspace/shared/enums";
 
 class PublicRoomStore {
   externalLinks = [];
+
   roomTitle = null;
+
   roomId = null;
+
   roomStatus = null;
+
   roomType = null;
+
   publicRoomKey = null;
 
   isLoaded = false;
+
   isLoading = false;
 
   clientLoadingStore;
@@ -77,7 +82,7 @@ class PublicRoomStore {
   };
 
   fetchPublicRoom = (fetchFiles) => {
-    let filterObj = FilesFilter.getFilter(window.location);
+    const filterObj = FilesFilter.getFilter(window.location);
 
     if (!filterObj) return;
 
@@ -116,14 +121,15 @@ class PublicRoomStore {
     return axios
       .all(requests)
       .catch((err) => {
+        console.log(err);
         Promise.resolve(FilesFilter.getDefault());
       })
       .then((data) => {
-        const filter = data[0];
+        const resolvedFilter = data[0];
 
-        if (filter) {
-          const folderId = filter.folder;
-          return fetchFiles(folderId, filter).catch((error) => {
+        if (resolvedFilter) {
+          const folderId = resolvedFilter.folder;
+          return fetchFiles(folderId, resolvedFilter).catch((error) => {
             if (error?.response?.status === 403) {
               window.location.replace(
                 combineUrl(window.ClientConfig?.proxy?.url, "/login"),
@@ -210,7 +216,7 @@ class PublicRoomStore {
 
     const url = getCategoryUrl(CategoryType.Shared);
 
-    filter.folder = subFolder ? subFolder : res.id;
+    filter.folder = subFolder || res.id;
     filter.key = key;
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
@@ -251,9 +257,8 @@ class PublicRoomStore {
           !l.sharedTo.isTemplate &&
           l.sharedTo.linkType === LinkType.External,
       );
-    } else {
-      return [];
     }
+    return [];
   }
 
   get primaryLink() {

@@ -49,21 +49,11 @@ import {
 import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
-  ({
-    withMainButton,
-    setIsHeaderLoading,
-    setIsFilterLoading,
-    showArticleLoader,
-    isInfoPanelVisible,
-  }) => {
+  ({ withMainButton, showArticleLoader, isInfoPanelVisible }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
-        onLogoClickAction={() => {
-          setIsFilterLoading(true, false);
-          setIsHeaderLoading(true, false);
-        }}
         showArticleLoader={showArticleLoader}
       >
         <Article.Header>
@@ -81,6 +71,8 @@ const ClientArticle = React.memo(
     );
   },
 );
+
+ClientArticle.displayName = "ClientArticle";
 
 const ClientContent = (props) => {
   const {
@@ -183,9 +175,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
           />
         )
-      ) : (
-        <></>
-      )}
+      ) : null}
       <Outlet />
     </>
   );

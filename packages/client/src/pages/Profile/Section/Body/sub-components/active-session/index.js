@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";
@@ -38,12 +38,11 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import SessionsTable from "./SessionsTable";
-
 import {
   LogoutSessionDialog,
   LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
+import SessionsTable from "./SessionsTable";
 
 const StyledWrapper = styled.div`
   .auto-delete-title {

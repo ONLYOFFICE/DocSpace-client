@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent } from "react";
-import { useState } from "react";
 import { Label } from "@docspace/shared/components/label";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import * as Styled from "./index.styled";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./index.styled";
+
 interface GroupNameParamProps {
   groupName: string;
   onChangeGroupName: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -45,22 +45,22 @@ const GroupNameParam = ({
   return (
     <Styled.GroupNameParam>
       <Label
-        title={t("Common:Name")}
+        title={t("Common:Label")}
         className="input-label"
         display="display"
-        htmlFor={"create-group-name"}
-        text={t("Common:Name")}
+        htmlFor="create-group-name"
+        text={t("Common:Label")}
       />
 
       <FieldContainer
-        isVertical={true}
+        isVertical
         labelVisible={false}
         // hasError={!isValidTitle || isWrongTitle}
         // errorMessage={errorMessage}
-        errorMessageWidth={"100%"}
+        errorMessageWidth="100%"
       >
         <TextInput
-          id={"create-group-name"}
+          id="create-group-name"
           type={InputType.text}
           value={groupName}
           onChange={onChangeGroupName}
@@ -71,7 +71,7 @@ const GroupNameParam = ({
           tabIndex={2}
           // isDisabled={isDisabled}
           // hasError={!isValidTitle}
-          isAutoFocussed={true}
+          isAutoFocussed
           // onKeyUp={onKeyUp}
           // onKeyDown={onKeyDown}
           maxLength={170}

@@ -371,11 +371,14 @@ export type SelectorProps = TSelectorHeader &
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
+
+    withPadding?: boolean;
   };
 
 export type BodyProps = TSelectorInfo & {
   footerVisible: boolean;
   withHeader?: boolean;
+  withPadding?: boolean;
 
   value?: string;
 

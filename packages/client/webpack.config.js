@@ -33,6 +33,7 @@ const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -272,6 +273,25 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
+    new ESLintPlugin({
+      configType: "eslintrc",
+      cacheLocation: path.resolve(
+        __dirname,
+        "../../node_modules/.cache/.eslint-plugin-cache",
+      ),
+      context: path.resolve(__dirname, "src"),
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
+      emitError: true,
+      emitWarning: true,
+      failOnError: true,
+      failOnWarning: false,
+      quiet: false,
+
+      outputReport: {
+        filePath: "eslint-report.json",
+        formatter: "json",
+      },
+    }),
     new ExternalTemplateRemotesPlugin(),
 
     new CopyPlugin({

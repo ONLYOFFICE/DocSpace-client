@@ -1,4 +1,5 @@
 {
+  "FilesNotLoaded": "Faili, kas netika ielādēti: {{count}}",
   "FilesUploaded": "Augšupielādēti faili",
   "Upload": "Augšupielādēt",
   "UploadFiles": "Augšupielādējiet failus",

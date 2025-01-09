@@ -33,15 +33,12 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import { authStore, settingsStore } from "@docspace/shared/store";
-import { FileType, RoomsType } from "@docspace/shared/enums";
-import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import i18n from "../i18n";
+import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
-import { request } from "@docspace/shared/api/client";
 import { getCategoryUrl } from "./category";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
+import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -94,6 +91,8 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
+    default:
+      break;
   }
 };
 
@@ -213,6 +212,45 @@ export const connectedCloudsTypeIcon = (key) => {
   }
 };
 
+// getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
+//   const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
+
+//   const url = getCategoryUrl(this.categoryType, id);
+
+//   if (canOpenPlayer) {
+//     if (this.publicRoomStore.isPublicRoom) {
+//       const key = this.publicRoomStore.publicRoomKey;
+//       const filterObj = FilesFilter.getFilter(window.location);
+
+//       return `${combineUrl(
+//         proxyURL,
+//         config.homepage,
+//         "/rooms/share",
+//         MEDIA_VIEW_URL,
+//         id,
+//       )}?key=${key}&${filterObj.toUrlParams()}`;
+//     }
+
+//     return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
+//   }
+
+//   if (isFolder) {
+//     const folderUrl = isFolder
+//       ? combineUrl(proxyURL, config.homepage, `${url}?folder=${id}`)
+//       : null;
+
+//     return folderUrl;
+//   }
+
+//   const newUrl = combineUrl(
+//     proxyURL,
+//     config.homepage,
+//     `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+//   );
+
+//   return newUrl;
+// };
+
 export const getItemUrl = (
   id,
   isFolder,
@@ -256,4 +294,178 @@ export const getItemUrl = (
 
     return url;
   }
+};
+
+// Used to update the number of tiles in a row after the window is resized.
+export const getCountTilesInRow = () => {
+  const isDesktopView = isDesktop();
+  const isMobileView = isMobile();
+  const tileGap = isDesktopView ? 16 : 14;
+  const minTileWidth = 216 + tileGap;
+
+  const elem = document.getElementsByClassName("section-wrapper-content")[0];
+  let containerWidth = 0;
+  if (elem) {
+    const elemPadding = window
+      .getComputedStyle(elem)
+      ?.getPropertyValue("padding");
+
+    if (elemPadding) {
+      const paddingValues = elemPadding.split("px");
+      if (paddingValues.length >= 4) {
+        containerWidth =
+          (elem.clientWidth || 0) -
+          parseInt(paddingValues[1], 10) -
+          parseInt(paddingValues[3], 10);
+      }
+    }
+  }
+
+  containerWidth += tileGap;
+  if (!isMobileView) containerWidth -= 1;
+  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
+
+  return Math.floor(containerWidth / minTileWidth);
+};
+
+export const getCheckboxItemId = (key) => {
+  switch (key) {
+    case "all":
+      return "selected-all";
+    case FilterType.FoldersOnly:
+      return "selected-only-folders";
+    case FilterType.DocumentsOnly:
+      return "selected-only-documents";
+    case FilterType.PresentationsOnly:
+      return "selected-only-presentations";
+    case FilterType.SpreadsheetsOnly:
+      return "selected-only-spreadsheets";
+    case FilterType.ImagesOnly:
+      return "selected-only-images";
+    case FilterType.MediaOnly:
+      return "selected-only-media";
+    case FilterType.ArchiveOnly:
+      return "selected-only-archives";
+    case FilterType.FilesOnly:
+      return "selected-only-files";
+    case `room-${RoomsType.FillingFormsRoom}`:
+      return "selected-only-filling-form-rooms";
+    case `room-${RoomsType.CustomRoom}`:
+      return "selected-only-custom-room";
+    case `room-${RoomsType.EditingRoom}`:
+      return "selected-only-collaboration-rooms";
+    case `room-${RoomsType.ReviewRoom}`:
+      return "selected-only-review-rooms";
+    case `room-${RoomsType.ReadOnlyRoom}`:
+      return "selected-only-view-rooms";
+    case `room-${RoomsType.PublicRoom}`:
+      return "selected-only-public-rooms";
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return "selected-only-vdr-rooms";
+
+    default:
+      return "";
+  }
+};
+
+export const getCheckboxItemLabel = (t, key) => {
+  switch (key) {
+    case "all":
+      return t("All");
+    case FilterType.FoldersOnly:
+      return t("Translations:Folders");
+    case FilterType.DocumentsOnly:
+      return t("Common:Documents");
+    case FilterType.PresentationsOnly:
+      return t("Translations:Presentations");
+    case FilterType.SpreadsheetsOnly:
+      return t("Translations:Spreadsheets");
+    case FilterType.ImagesOnly:
+      return t("Images");
+    case FilterType.MediaOnly:
+      return t("Media");
+    case FilterType.ArchiveOnly:
+      return t("Archives");
+    case FilterType.FilesOnly:
+      return t("Translations:Files");
+    case `room-${RoomsType.FillingFormsRoom}`:
+      return t("Common:FillingFormRooms");
+    case `room-${RoomsType.CustomRoom}`:
+      return t("Common:CustomRooms");
+    case `room-${RoomsType.EditingRoom}`:
+      return t("Common:CollaborationRooms");
+    case `room-${RoomsType.ReviewRoom}`:
+      return t("Common:Review");
+    case `room-${RoomsType.FormRoom}`:
+      return t("Common:FormRoom");
+    case `room-${RoomsType.ReadOnlyRoom}`:
+      return t("Common:ViewOnlyRooms");
+    case `room-${RoomsType.PublicRoom}`:
+      return t("Common:PublicRoomLabel");
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return t("Common:VirtualDataRoom");
+
+    default:
+      return "";
+  }
+};
+
+export const calculateRoomLogoParams = (img, x, y, zoom) => {
+  let imgWidth;
+  let imgHeight;
+  let dimensions;
+  if (img.width > img.height) {
+    imgWidth = Math.min(1280, img.width);
+    imgHeight = Math.round(img.height / (img.width / imgWidth));
+    dimensions = Math.round(imgHeight / zoom);
+  } else {
+    imgHeight = Math.min(1280, img.height);
+    imgWidth = Math.round(img.width / (img.height / imgHeight));
+    dimensions = Math.round(imgWidth / zoom);
+  }
+
+  const croppedX = Math.round(x * imgWidth - dimensions / 2);
+  const croppedY = Math.round(y * imgHeight - dimensions / 2);
+
+  return {
+    x: croppedX,
+    y: croppedY,
+    width: dimensions,
+    height: dimensions,
+  };
+};
+
+export const removeSeparator = (options) => {
+  const newOptions = options.map((o, index) => {
+    if (index === 0 && o.includes("separator")) {
+      return false;
+    }
+
+    if (index === options.length - 1 && o.includes("separator")) {
+      return false;
+    }
+
+    if (o?.includes("separator") && options[index + 1].includes("separator")) {
+      return false;
+    }
+
+    return o;
+  });
+
+  return newOptions.filter((o) => o);
+};
+
+export const removeOptions = (options, toRemoveArray) =>
+  options.filter((o) => !toRemoveArray.includes(o));
+
+export const mappingActiveItems = (items, destFolderId) => {
+  const arrayFormation = items.map((item) =>
+    typeof item === "object"
+      ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
+      : {
+          id: item,
+          destFolderId,
+        },
+  );
+  return arrayFormation;
 };

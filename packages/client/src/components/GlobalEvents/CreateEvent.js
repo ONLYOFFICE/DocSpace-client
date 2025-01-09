@@ -31,14 +31,14 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
+
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
 import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 
-import Dialog from "./sub-components/Dialog";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
   id,
@@ -48,9 +48,7 @@ const CreateEvent = ({
   templateId,
   fromTemplate,
   onClose,
-  setIsLoading,
 
-  createFolder,
   addActiveItems,
 
   gallerySelected,
@@ -92,39 +90,11 @@ const CreateEvent = ({
     onClose && onClose(e);
   };
 
-  React.useEffect(() => {
-    const defaultName = getDefaultFileName(extension);
-
-    if (title) {
-      const item = { fileExst: extension, title: title };
-
-      setStartValue(getTitleWithoutExtension(item, fromTemplate));
-    } else {
-      setStartValue(defaultName);
-    }
-
-    setHeaderTitle(defaultName);
-
-    if (!extension) return setEventDialogVisible(true);
-
-    if (!keepNewFileName && !withoutDialog) {
-      setEventDialogVisible(true);
-    } else {
-      onSave(null, title || defaultName);
-    }
-
-    return () => {
-      setEventDialogVisible(false);
-    };
-  }, [extension, title, fromTemplate, withoutDialog]);
-
   const onSave = async (e, value, open = true) => {
     let item;
     let createdFolderId;
 
-    const isMakeFormFromFile = templateId ? true : false;
-
-    setIsLoading(true);
+    const isMakeFormFromFile = !!templateId;
 
     let newValue = value;
 
@@ -142,7 +112,8 @@ const CreateEvent = ({
     };
 
     if (!extension) {
-      createFolder(parentId, newValue)
+      api.files
+        .createFolder(parentId, newValue)
         .then((folder) => {
           item = folder;
           createdFolderId = folder.id;
@@ -153,9 +124,9 @@ const CreateEvent = ({
         .then(() => {
           if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
         })
-        .catch((e) => {
-          isPaymentRequiredError(e);
-          toastr.error(e);
+        .catch((err) => {
+          isPaymentRequiredError(err);
+          toastr.error(err);
         })
         .finally(() => {
           const folderIds = [+id];
@@ -163,7 +134,6 @@ const CreateEvent = ({
 
           clearActiveOperations(null, folderIds);
           onCloseAction();
-          return setIsLoading(false);
         });
     } else {
       try {
@@ -211,7 +181,7 @@ const CreateEvent = ({
           return;
         }
 
-        return await createFile(
+        await createFile(
           +parentId,
           `${newValue}.${extension}`,
           templateId,
@@ -222,11 +192,36 @@ const CreateEvent = ({
       } catch (error) {
         toastr.error(error);
       } finally {
-        setIsLoading(false);
         onCloseAction();
       }
     }
   };
+
+  React.useEffect(() => {
+    const defaultName = getDefaultFileName(extension);
+
+    if (title) {
+      const item = { fileExst: extension, title };
+
+      setStartValue(getTitleWithoutExtension(item, fromTemplate));
+    } else {
+      setStartValue(defaultName);
+    }
+
+    setHeaderTitle(defaultName);
+
+    if (!extension) return setEventDialogVisible(true);
+
+    if (!keepNewFileName && !withoutDialog) {
+      setEventDialogVisible(true);
+    } else {
+      onSave(null, title || defaultName);
+    }
+
+    return () => {
+      setEventDialogVisible(false);
+    };
+  }, [extension, title, fromTemplate, withoutDialog, onSave]);
 
   return (
     <Dialog
@@ -238,7 +233,7 @@ const CreateEvent = ({
       onSave={onSave}
       onCancel={onCloseAction}
       onClose={onCloseAction}
-      isCreateDialog={true}
+      isCreateDialog
       extension={extension}
     />
   );
@@ -255,21 +250,13 @@ export default inject(
     dialogsStore,
     oformsStore,
     filesSettingsStore,
-    clientLoadingStore,
     currentTariffStatusStore,
     publicRoomStore,
   }) => {
-    const { setIsSectionBodyLoading } = clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionBodyLoading(param);
-    };
-
     const publicRoomKey = publicRoomStore.publicRoomKey;
 
     const {
       createFile,
-      createFolder,
       addActiveItems,
 
       setIsUpdatingRowItem,
@@ -303,9 +290,8 @@ export default inject(
       setPortalTariff,
       setEventDialogVisible,
       eventDialogVisible,
-      setIsLoading,
       createFile,
-      createFolder,
+
       addActiveItems,
 
       setIsUpdatingRowItem,

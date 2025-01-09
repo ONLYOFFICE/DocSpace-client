@@ -1,26 +1,13 @@
 import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
 
 const LifetimeDialogComponent = (props) => {
   const { t, setLifetimeDialogVisible, visible, tReady } = props;
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
 
   const onClose = () => {
     setLifetimeDialogVisible(false);
@@ -34,6 +21,19 @@ const LifetimeDialogComponent = (props) => {
   const onDeleteAction = () => {
     onAcceptClick();
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   return (
     <StyledLifetimeDialog

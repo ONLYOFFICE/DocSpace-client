@@ -69,7 +69,7 @@ const SsoComboBox = (props) => {
           dropDownMaxHeight={364}
           manualWidth="100%"
           directionY="both"
-          textOverflow={true}
+          textOverflow
         />
       </StyledInputWrapper>
     </FieldContainer>

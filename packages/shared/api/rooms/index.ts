@@ -328,7 +328,7 @@ export function removeLogoFromRoom(id) {
   });
 }
 
-export const setInvitationLinks = async (roomId, linkId, title, access) => {
+export const setInvitationLinks = async (roomId, title, access, linkId) => {
   const options = {
     method: "put",
     url: `/files/rooms/${roomId}/links`,

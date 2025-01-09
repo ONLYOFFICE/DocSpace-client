@@ -94,7 +94,7 @@ const VersionBadge = ({
       className={className}
       marginProp="0 8px"
       displayProp="flex"
-      $isVersion={true}
+      $isVersion
       theme={theme}
       $isFirst={index === 0}
       {...rest}

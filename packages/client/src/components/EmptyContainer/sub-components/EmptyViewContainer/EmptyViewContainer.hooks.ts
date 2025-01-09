@@ -154,6 +154,7 @@ export const useOptions = (
     setSelectFileFormRoomDialogVisible,
     inviteUser: inviteRootUser,
     isVisitor,
+    isFrame,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -192,8 +193,6 @@ export const useOptions = (
     };
 
     const path = getCategoryUrl(CategoryType.Personal);
-
-    // setIsSectionFilterLoading(true);
 
     return {
       to: {
@@ -246,7 +245,7 @@ export const useOptions = (
   );
 
   const onCreate = useCallback(
-    (extension: ExtensionType, withoutDialog?: boolean, t?: TTranslation) => {
+    (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
       const edit = extension === FileExtensions.PDF;
@@ -302,6 +301,7 @@ export const useOptions = (
           onGoToShared,
         },
         isVisitor,
+        isFrame,
       ),
     [
       type,
@@ -326,6 +326,7 @@ export const useOptions = (
       onGoToPersonal,
       onGoToShared,
       isVisitor,
+      isFrame,
     ],
   );
 

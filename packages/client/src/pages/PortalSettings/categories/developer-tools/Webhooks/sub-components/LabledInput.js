@@ -67,7 +67,7 @@ export const LabledInput = ({
         required={required}
         hasError={hasError}
         isDisabled={isDisabled}
-        {...(mask ? { mask: mask } : {})}
+        {...(mask ? { mask } : {})}
       />
     </StyledLabel>
   );

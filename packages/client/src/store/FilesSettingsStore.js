@@ -29,7 +29,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/shared/api/files";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -46,57 +46,99 @@ import { toastr } from "@docspace/shared/components/toast";
 
 class FilesSettingsStore {
   thirdPartyStore;
+
   treeFoldersStore;
+
   publicRoomStore;
+
   pluginStore;
+
   authStore;
+
   settingsStore;
 
   filesSettings = null;
 
   isErrorSettings = null;
+
   expandedSetting = null;
 
   confirmDelete = null;
+
   enableThirdParty = null;
+
   forcesave = null;
+
   storeForcesave = null;
+
   storeOriginalFiles = null;
+
   favoritesSection = null;
+
   recentSection = null;
+
   hideConfirmConvertSave = null;
+
   keepNewFileName = null;
+
   openEditorInSameTab = null;
+
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
+
   maxUploadThreadCount = 15;
+
   maxUploadFilesCount = 5;
+
   displayFileExtension = null;
 
   settingsIsLoaded = false;
 
   extsImagePreviewed = [];
+
   extsMediaPreviewed = [];
+
   extsWebPreviewed = [];
+
   extsWebEdited = [];
+
   extsWebEncrypt = [];
+
   extsWebReviewed = [];
+
   extsWebCustomFilterEditing = [];
+
   extsWebRestrictedEditing = [];
+
   extsWebCommented = [];
+
   extsWebTemplate = [];
+
   extsCoAuthoring = [];
+
   extsMustConvert = [];
+
   extsConvertible = [];
+
   extsUploadable = [];
+
   extsArchive = [];
+
   extsVideo = [];
+
   extsAudio = [];
+
   extsImage = [];
+
   extsSpreadsheet = [];
+
   extsPresentation = [];
+
   extsDocument = [];
+
   internalFormats = {};
+
   masterFormExtension = "";
+
   canSearchByContent = false;
 
   constructor(
@@ -138,9 +180,9 @@ class FilesSettingsStore {
   setFilesSettings = (settings) => {
     this.filesSettings = settings;
     const settingsItems = Object.keys(settings);
-    for (let key of settingsItems) {
+    settingsItems.forEach((key) => {
       this[key] = settings[key];
-    }
+    });
   };
 
   setIsErrorSettings = (isError) => {
@@ -174,10 +216,10 @@ class FilesSettingsStore {
             api.files.getThirdPartyList(),
           ])
           .then(([capabilities, providers]) => {
-            for (let item of capabilities) {
+            capabilities.forEach((item) => {
               item.splice(1, 1);
-            }
-            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+            });
+            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
           });
       })
@@ -237,15 +279,14 @@ class FilesSettingsStore {
           api.files.getThirdPartyList(),
         ])
         .then(([capabilities, providers]) => {
-          for (let item of capabilities) {
+          capabilities.forEach((item) => {
             item.splice(1, 1);
-          }
-          this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+          });
+          this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
           this.thirdPartyStore.setThirdPartyProviders(providers);
         });
-    } else {
-      return Promise.resolve();
     }
+    return Promise.resolve();
   };
 
   setForceSave = (data) =>
@@ -336,7 +377,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null,
+    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
     contentLength = null,
     roomType = null,
     isArchive = null,
@@ -359,21 +400,22 @@ class FilesSettingsStore {
         isEbookItem,
       );
       return icon;
-    } else if (roomType) {
-      return this.getRoomsIcon(roomType, isArchive, 32);
-    } else if (folderType) {
-      return this.getIconByFolderType(folderType, size);
-    } else {
-      return this.getFolderIcon(size);
     }
+    if (roomType) {
+      return this.getRoomsIcon(roomType, isArchive, 32);
+    }
+    if (folderType) {
+      return this.getIconByFolderType(folderType, size);
+    }
+    return this.getFolderIcon(size);
   };
 
   getIconByFolderType = (folderType, size = 32) => {
     const path = getIconPathByFolderType(folderType);
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
-  getIconBySize = (size = 32, path) => {
+  getIconBySize = (path, size = 32) => {
     const getOrDefault = (container) =>
       container.has(path) ? container.get(path) : container.get("file.svg");
 
@@ -386,6 +428,8 @@ class FilesSettingsStore {
         return getOrDefault(iconSize64);
       case 96:
         return getOrDefault(iconSize96);
+      default:
+        return getOrDefault(iconSize32);
     }
   };
 
@@ -416,18 +460,18 @@ class FilesSettingsStore {
       }
     }
 
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
   getFolderIcon = (size = 32) => {
-    return this.getIconBySize(size, "folder.svg");
+    return this.getIconBySize("folder.svg", size);
   };
 
   getIconUrl = (extension, size) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    let path = `${extension.replace(/^\./, "")}.svg`;
+    const path = `${extension.replace(/^\./, "")}.svg`;
 
     if (enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
@@ -438,7 +482,7 @@ class FilesSettingsStore {
       }
     }
 
-    return this.getIconBySize(size, path);
+    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -462,7 +506,7 @@ class FilesSettingsStore {
 
     if (ebook) path = "ebook.svg";
 
-    if (path) return this.getIconBySize(size, path);
+    if (path) return this.getIconBySize(path, size);
 
     return this.getIconUrl(extension, size);
   };
@@ -480,7 +524,7 @@ class FilesSettingsStore {
 
     if (presentInArray(EBOOK_EXST, ext, true)) path = "ebook.svg";
 
-    if (path) return this.getIconBySize(size, path);
+    if (path) return this.getIconBySize(path, size);
 
     const extension = ext.toLowerCase();
 

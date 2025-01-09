@@ -37,12 +37,12 @@ export const setDocumentTitle = (subTitle = "") => {
   let title;
   if (subTitle) {
     if (isAuthenticated && currentModule) {
-      title = subTitle + " - " + currentModule.title;
+      title = `${subTitle} - ${currentModule.title}`;
     } else {
-      title = subTitle + " - " + organizationName;
+      title = `${subTitle} - ${organizationName}`;
     }
   } else if (currentModule && organizationName) {
-    title = currentModule.title + " - " + organizationName;
+    title = `${currentModule.title} - ${organizationName}`;
   } else {
     title = organizationName;
   }
@@ -58,9 +58,8 @@ export const checkIfModuleOld = (link) => {
     link.includes("settings")
   ) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 };
 
 export const getLink = (link) => {

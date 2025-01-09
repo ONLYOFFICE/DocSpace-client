@@ -28,12 +28,13 @@ import React, { useState, useEffect, useTransition, Suspense } from "react";
 import moment from "moment-timezone";
 import styled from "styled-components";
 
+import { inject, observer } from "mobx-react";
+import { useParams } from "react-router-dom";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryFilterHeader from "./sub-components/HistoryFilterHeader";
 import WebhookHistoryTable from "./sub-components/WebhookHistoryTable";
 import { WebhookHistoryLoader } from "../sub-components/Loaders";
 
-import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
 import EmptyFilter from "./sub-components/EmptyFilter";
 
 const WebhookWrapper = styled.div`
@@ -45,7 +46,9 @@ const parseUrl = (url) => {
   const searchParams = urlObj.searchParams;
 
   const params = {};
-  for (const [key, value] of searchParams) {
+  const entries = Array.from(searchParams.entries());
+  for (let i = 0; i < entries.length; i++) {
+    const [key, value] = entries[i];
     params[key] = value;
   }
   params.deliveryDate =
@@ -73,11 +76,10 @@ const WebhookHistory = (props) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   } = props;
 
   const [isFetchFinished, setIsFetchFinished] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const { id } = useParams();
 
@@ -132,7 +134,6 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   } = webhooksStore;
 
   return {
@@ -141,6 +142,5 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
-    formatFilters,
   };
 })(observer(WebhookHistory));

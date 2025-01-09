@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
@@ -38,6 +38,8 @@ import {
   frameCallCommand,
 } from "@docspace/shared/utils/frame";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import FilesSelector from "../../components/FilesSelector";
 
 const Sdk = ({
   t,
@@ -52,7 +54,6 @@ const Sdk = ({
   userId,
   updateProfileCulture,
   getRoomsIcon,
-  getFilePrimaryLink,
   getFilesSettings,
   getPrimaryLink,
 }) => {
@@ -90,14 +91,6 @@ const Sdk = ({
     }),
   };
 
-  useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
-    };
-  }, [handleMessage]);
-
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
     [frameCallCommand],
@@ -126,7 +119,10 @@ const Sdk = ({
     getFilesSettings();
   }, []);
 
-  const { mode, selectorType } = useParams();
+  const { mode } = useParams();
+  const selectorType = new URLSearchParams(window.location.search).get(
+    "selectorType",
+  );
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -178,12 +174,20 @@ const Sdk = ({
           default:
             res = "Wrong method for this mode";
         }
-      } catch (e) {
-        res = e;
+      } catch (err) {
+        res = err;
       }
       frameCallbackData(res);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage, false);
+    return () => {
+      window.removeEventListener("message", handleMessage, false);
+      setFrameConfig(null);
+    };
+  }, [handleMessage]);
 
   const onSelectRoom = useCallback(
     async (data) => {
@@ -219,14 +223,14 @@ const Sdk = ({
       };
 
       if (data.inPublic) {
-        const { sharedTo } = await getFilePrimaryLink(data.id);
+        const { sharedTo } = await api.files.getFileLink(data.id);
         const { id, title, requestToken, primary } = sharedTo;
         enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
       frameCallEvent({ event: "onSelectCallback", data: enrichedData });
     },
-    [frameCallEvent, getIcon, getFilePrimaryLink],
+    [frameCallEvent, getIcon],
   );
 
   const onClose = useCallback(() => {
@@ -243,7 +247,7 @@ const Sdk = ({
     !frameConfig?.id;
 
   switch (mode) {
-    case "room-selector":
+    case "room-selector": {
       const cancelButtonProps = frameConfig?.showSelectorCancel
         ? {
             withCancelButton: true,
@@ -257,7 +261,7 @@ const Sdk = ({
             withHeader: true,
             headerProps: { headerLabel: "", isCloseable: false },
           }
-        : {};
+        : { withPadding: false };
 
       component = (
         <RoomSelector
@@ -273,13 +277,14 @@ const Sdk = ({
         />
       );
       break;
+    }
     case "file-selector":
       component = (
         <FilesSelector
-          isPanelVisible={true}
-          embedded={true}
+          isPanelVisible
+          embedded
           withHeader={frameConfig?.showSelectorHeader}
-          isSelect={true}
+          isSelect
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}
@@ -296,6 +301,7 @@ const Sdk = ({
           openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
           headerProps={{ isCloseable: false }}
+          withPadding={frameConfig?.showSelectorHeader}
         />
       );
       break;
@@ -321,7 +327,7 @@ export const Component = inject(
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { getFilePrimaryLink, getPrimaryLink } = filesStore;
+    const { getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -336,7 +342,6 @@ export const Component = inject(
       isLoaded,
       updateProfileCulture,
       userId: user?.id,
-      getFilePrimaryLink,
       getFilesSettings,
       getPrimaryLink,
     };

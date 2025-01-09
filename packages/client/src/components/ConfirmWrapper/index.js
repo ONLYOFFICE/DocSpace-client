@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
-import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
+import styled from "styled-components";
+import { isIOS, isFirefox } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/shared/utils/ui";
 import { mobile } from "@docspace/shared/utils";
@@ -82,7 +81,7 @@ const ConfirmWrapper = (props) => {
 
   return (
     <StyledWrapper height={height}>
-      {!!height ? content : <Scrollbar>{content}</Scrollbar>}
+      {height ? content : <Scrollbar>{content}</Scrollbar>}
     </StyledWrapper>
   );
 };

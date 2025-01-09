@@ -36,9 +36,10 @@ import {
   Wrapper,
   Numeration,
 } from "./Textarea.styled";
-import { isJSON, jsonify } from "./Textarea.utils";
+import { jsonify } from "./Textarea.utils";
 import { TextareaProps } from "./Textarea.types";
 import { TextareaTheme } from "./Textarea.theme";
+import { isJSON } from "../../utils/json";
 
 const WrappedStyledCopyIcon = ({
   heightScale,

@@ -67,6 +67,8 @@ const Selector = ({
   withHeader,
   headerProps,
 
+  withPadding = true,
+
   isBreadCrumbsLoading = false,
   breadCrumbsLoader,
   withBreadCrumbs,
@@ -629,6 +631,7 @@ const Selector = ({
                   {withHeader && <Header {...headerProps} />}
                   <Body
                     withHeader={withHeader}
+                    withPadding={withPadding}
                     footerVisible={footerVisible || !!alwaysShowFooter}
                     items={[...renderedItems]}
                     isMultiSelect={isMultiSelect}

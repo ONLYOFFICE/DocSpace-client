@@ -168,7 +168,7 @@ const AboutContent = (props) => {
             className="row-el select-el"
             fontSize="13px"
             fontWeight="600"
-            title={`${BUILD_AT}`}
+            title={`${BUILD_AT}`} // eslint-disable-line no-undef
           >
             v.
             <span className="version-document-management">

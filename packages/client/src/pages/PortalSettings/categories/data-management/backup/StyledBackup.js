@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+
+import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import {
   commonSettingsStyles,
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
-
-import { tablet, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -567,8 +567,8 @@ const StyledBackupList = styled.div`
     ${(props) =>
       props.isChecked &&
       css`
-        background: ${(props) =>
-          props.theme.client.settings.backup.backupCheckedListItemBackground};
+        background: ${({ theme }) =>
+          theme.client.settings.backup.backupCheckedListItemBackground};
       `}
     padding-inline: 16px;
   }

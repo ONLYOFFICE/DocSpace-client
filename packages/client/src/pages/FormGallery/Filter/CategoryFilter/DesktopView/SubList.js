@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./index.styled";
 
 const SubList = ({
   categoryType,
@@ -56,13 +56,13 @@ const SubList = ({
       marginTop={marginTop}
       id={`category-sub-list-${categoryType}`}
       className={`dropdown-sub sub-by-${categoryType}`}
-      directionX={"right"}
-      directionY={"bottom"}
-      manualY={"0px"}
-      manualX={"0px"}
+      directionX="right"
+      directionY="bottom"
+      manualY="0px"
+      manualX="0px"
       clickOutsideAction={() => {}}
       maxHeight={296}
-      manualWidth={"206px"}
+      manualWidth="206px"
       showDisabledItems={false}
       isDefaultMode={false}
       withBackdrop={false}

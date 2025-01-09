@@ -28,6 +28,7 @@ import { makeAutoObservable } from "mobx";
 
 class ConfirmStore {
   isLoading = false;
+
   isLoaded = false;
 
   constructor() {

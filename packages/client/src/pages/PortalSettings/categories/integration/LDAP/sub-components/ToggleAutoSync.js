@@ -91,7 +91,7 @@ const ToggleAutoSync = ({
           .then(() =>
             toastr.success(t("Settings:SuccessfullySaveSettingsMessage")),
           )
-          .catch((e) => toastr.error(e));
+          .catch((err) => toastr.error(err));
       }
     },
     [toggleCron],
@@ -125,7 +125,7 @@ const ToggleAutoSync = ({
               }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
           )}
         </div>

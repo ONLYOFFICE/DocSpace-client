@@ -64,6 +64,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  TIndexItems,
 } from "./types";
 
 export async function openEdit(
@@ -1054,7 +1055,10 @@ export function saveSettingsThirdParty(
 
 // TODO: Need update res type
 export function getSettingsThirdParty() {
-  return request({ method: "get", url: "files/thirdparty/backup" });
+  return request({
+    method: "get",
+    url: "files/thirdparty/backup",
+  });
 }
 
 export function deleteThirdParty(providerId: string) {
@@ -1514,16 +1518,11 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
-export async function changeIndex(
-  id: number,
-  order: number,
-  isFolder: boolean,
-) {
-  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+export async function changeIndex(items: TIndexItems[]) {
   return request({
     method: "put",
-    url,
-    data: { order },
+    url: "files/order",
+    data: { items },
   });
 }
 

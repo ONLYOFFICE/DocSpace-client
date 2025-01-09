@@ -26,7 +26,7 @@
 
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -61,20 +61,19 @@ const ProviderMetadata = (props) => {
   const { downloadMetadata, currentDeviceType, isSSOAvailable } = props;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
-
   const url = window.location.origin;
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("metadata") &&
       navigate("/portal-settings/integration/sso");
   };
+
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
   return (
     <StyledWrapper>

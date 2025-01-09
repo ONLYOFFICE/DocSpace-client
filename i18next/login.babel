@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="5.2.0" version="1.3">
+<babeledit_project be_version="4.1.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,6 +26,7 @@
 								<name>AccountWillBeCreated</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -157,6 +158,7 @@
 								<name>ChangePasswordSuccess</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -288,6 +290,7 @@
 								<name>ConfirmOwnerPortalSuccessMessage</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -419,6 +422,7 @@
 								<name>ConfirmOwnerPortalTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -550,6 +554,7 @@
 								<name>CurrentNumber</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -681,6 +686,7 @@
 								<name>DeleteProfileBtn</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -812,6 +818,7 @@
 								<name>DeleteProfileConfirmation</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -943,6 +950,7 @@
 								<name>DeleteProfileConfirmationInfo</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1074,6 +1082,7 @@
 								<name>DeleteProfileSuccessDescription</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1205,6 +1214,7 @@
 								<name>DeleteProfileSuccessMessage</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1336,6 +1346,7 @@
 								<name>DeleteProfileSuccessMessageInfo</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1467,6 +1478,7 @@
 								<name>EmailAndPasswordCopiedToClipboard</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1598,6 +1610,7 @@
 								<name>EnterAppCodeDescription</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1729,6 +1742,7 @@
 								<name>EnterAppCodeTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1860,6 +1874,7 @@
 								<name>EnterCodePlaceholder</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1991,6 +2006,7 @@
 								<name>EnterEmailHeader</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2122,6 +2138,7 @@
 								<name>EnterPhone</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2253,6 +2270,7 @@
 								<name>GetCode</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2384,6 +2402,7 @@
 								<name>LoginRegistryButton</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2515,6 +2534,7 @@
 								<name>Newsletter</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2646,6 +2666,7 @@
 								<name>PassworResetTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2777,6 +2798,7 @@
 								<name>PhoneSubtitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2908,6 +2930,7 @@
 								<name>PortalContinueTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3039,6 +3062,7 @@
 								<name>PortalDeactivateTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3170,6 +3194,7 @@
 								<name>PortalRemoveTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3301,6 +3326,7 @@
 								<name>Reactivate</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3432,6 +3458,7 @@
 								<name>SetAppButton</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3563,6 +3590,7 @@
 								<name>SetAppDescription</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3694,6 +3722,7 @@
 								<name>SetAppInstallDescription</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3825,6 +3854,7 @@
 								<name>SetAppTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3956,6 +3986,7 @@
 								<name>SignUp</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4087,6 +4118,7 @@
 								<name>SuccessDeactivate</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4218,6 +4250,7 @@
 								<name>SuccessReactivate</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4349,6 +4382,7 @@
 								<name>SuccessRemoved</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4480,6 +4514,7 @@
 								<name>TermsAndConditions</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4616,6 +4651,7 @@
 								<name>AllowButton</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4747,6 +4783,7 @@
 								<name>ConsentDescription</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -4878,6 +4915,7 @@
 								<name>ConsentSubHeader</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5009,6 +5047,7 @@
 								<name>DenyButton</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5140,6 +5179,7 @@
 								<name>NotYou</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5271,6 +5311,7 @@
 								<name>SignedInAs</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5402,6 +5443,7 @@
 								<name>ToContinue</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5538,6 +5580,7 @@
 								<name>ErrorConfirmURLError</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5669,6 +5712,7 @@
 								<name>ErrorExpiredActivationLink</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5800,6 +5844,7 @@
 								<name>ErrorInvalidActivationLink</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -5931,6 +5976,7 @@
 								<name>ErrorNotAllowedOption</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6062,6 +6108,7 @@
 								<name>ErrorUserNotFound</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6193,6 +6240,7 @@
 								<name>InvalidUsernameOrPassword</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6324,6 +6372,7 @@
 								<name>LoginWithAccountNotFound</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6455,6 +6504,7 @@
 								<name>LoginWithBruteForce</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6586,6 +6636,7 @@
 								<name>LoginWithBruteForceCaptcha</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6717,6 +6768,7 @@
 								<name>OAuthApplicationDisabled</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6848,6 +6900,7 @@
 								<name>OAuthApplicationEmpty</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -6979,6 +7032,7 @@
 								<name>OAuthClientEmpty</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7110,6 +7164,7 @@
 								<name>RecaptchaInvalid</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7241,6 +7296,7 @@
 								<name>SsoAttributesNotFound</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7372,6 +7428,7 @@
 								<name>SsoAuthFailed</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7503,6 +7560,7 @@
 								<name>SsoError</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7634,6 +7692,7 @@
 								<name>SsoSettingsCantCreateUser</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7765,6 +7824,7 @@
 								<name>SsoSettingsDisabled</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -7896,6 +7956,7 @@
 								<name>SsoSettingsEmptyToken</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8027,6 +8088,7 @@
 								<name>SsoSettingsNotValidToken</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8158,6 +8220,7 @@
 								<name>SsoSettingsUserTerminated</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8294,6 +8357,7 @@
 								<name>CodeTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8425,6 +8489,7 @@
 								<name>ErrorInvalidText</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8556,6 +8621,7 @@
 								<name>ForgotPassword</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8687,6 +8753,7 @@
 								<name>LDAPUsernamePlaceholder</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8818,6 +8885,7 @@
 								<name>MessageAuthorize</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -8949,6 +9017,7 @@
 								<name>MessageEmailConfirmed</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9080,6 +9149,7 @@
 								<name>MessageSendPasswordRecoveryInstructionsOnEmail</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9211,6 +9281,7 @@
 								<name>PasswordRecoveryTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9342,6 +9413,7 @@
 								<name>RecoverAccess</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9473,6 +9545,7 @@
 								<name>RecoverContactEmailPlaceholder</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9604,6 +9677,7 @@
 								<name>RecoverTextBody</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9735,6 +9809,7 @@
 								<name>Register</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9866,6 +9941,7 @@
 								<name>RegisterTextBodyAfterDomainsList</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -9997,6 +10073,7 @@
 								<name>RegisterTextBodyBeforeDomainsList</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10128,6 +10205,7 @@
 								<name>RegisterTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10259,6 +10337,7 @@
 								<name>RegistrationEmailWatermark</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10390,6 +10469,7 @@
 								<name>RememberHelper</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10521,6 +10601,7 @@
 								<name>SignInLDAP</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10652,6 +10733,7 @@
 								<name>SignInLdapHelper</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10783,6 +10865,7 @@
 								<name>UserIsAlreadyRegistered</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -10919,6 +11002,7 @@
 								<name>BackToSignIn</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11050,6 +11134,7 @@
 								<name>ChoosePortal</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11181,6 +11266,7 @@
 								<name>MorePortals</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11317,6 +11403,7 @@
 								<name>Desc</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11448,6 +11535,7 @@
 								<name>ErrorEmail</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11579,6 +11667,7 @@
 								<name>ErrorInstanceId</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11710,6 +11799,7 @@
 								<name>ErrorLicenseBody</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11841,6 +11931,7 @@
 								<name>ErrorPassword</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -11972,6 +12063,7 @@
 								<name>ErrorUploadLicenseFile</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -12103,6 +12195,7 @@
 								<name>License</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -12234,6 +12327,7 @@
 								<name>LicenseLink</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -12365,6 +12459,7 @@
 								<name>PlaceholderLicense</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -12496,6 +12591,7 @@
 								<name>Timezone</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -12627,6 +12723,7 @@
 								<name>WelcomeTitle</name>
 								<description/>
 								<comment/>
+								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -13003,7 +13100,6 @@
 				<code_for_machine_translation/>
 			</custom_language>
 		</custom_languages>
-		<id_extractor_ignores/>
 	</editor_configuration>
 	<primary_language>en-US</primary_language>
 	<configuration>

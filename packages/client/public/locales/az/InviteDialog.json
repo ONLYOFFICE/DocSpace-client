@@ -3,6 +3,8 @@
   "EmailErrorMessage": "E-poçt ünvanı etibarlı deyil. Siz e-poçtun üzərinə iki dəfə klikləməklə redaktə edə bilərsiniz.",
   "GroupMaxAvailableRoleWarning": "Qruplar maksimum {{roleName}} rolu olan otağa əlavə edilə bilər. Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilərsiniz.",
   "InvitationLanguage": "Dəvət dili",
+  "InviteMembersManuallyDescription": "E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin ",
+  "InviteMembersSearchPlaceholder": "Üzvləri e-poçtla dəvət edin",
   "InviteToRoomManuallyInfo": "Mövcud {{productName}} kontaktı əlavə edin. Və ya e-poçt vasitəsilə yeni istifadəçiləri şəxsən dəvət edin. Qonaqlar siyahısına yeni istifadəçilər əlavə olunacaq.",
   "InviteToRoomSearchPlaceholder": "Ad və ya e-poçt ilə axtarın və dəvət edin",
   "InviteViaLink": "Keçidlə dəvət edin",

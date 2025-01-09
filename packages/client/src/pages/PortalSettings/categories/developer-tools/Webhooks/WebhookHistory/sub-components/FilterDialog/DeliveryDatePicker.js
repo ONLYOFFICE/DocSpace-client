@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment-timezone";
 
 import { Text } from "@docspace/shared/components/text";
@@ -80,6 +80,63 @@ const StyledCalendar = styled(Calendar)`
       inset-inline-start: 0;
     `}
 `;
+
+const CalendarElement = ({
+  filters,
+  onDateSet,
+  closeCalendar,
+  calendarRef,
+  i18n,
+}) => (
+  <StyledCalendar
+    selectedDate={filters.deliveryDate}
+    setSelectedDate={onDateSet}
+    onChange={closeCalendar}
+    isMobile={isMobile()}
+    forwardedRef={calendarRef}
+    locale={i18n.language}
+  />
+);
+
+const SelectedDateTime = ({
+  isTimeEqual,
+  filters,
+  deleteSelectedDate,
+  toggleCalendar,
+  isCalendarOpen,
+  calendarRef,
+  onDateSet,
+  closeCalendar,
+  i18n,
+}) => {
+  const formattedTime = isTimeEqual
+    ? ""
+    : ` ${moment(filters.deliveryFrom).tz(window.timezone).format("HH:mm")} - ${moment(
+        filters.deliveryTo,
+      )
+        .tz(window.timezone)
+        .format("HH:mm")}`;
+
+  return (
+    <div>
+      <SelectedItem
+        className="selectedItem delete-delivery-date-button"
+        onClose={deleteSelectedDate}
+        label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
+        onClick={toggleCalendar}
+      />
+      {isCalendarOpen && (
+        <CalendarElement
+          filters={filters}
+          onDateSet={onDateSet}
+          closeCalendar={closeCalendar}
+          calendarRef={calendarRef}
+          i18n={i18n}
+        />
+      )}
+    </div>
+  );
+};
 
 const DeliveryDatePicker = ({
   filters,
@@ -139,39 +196,6 @@ const DeliveryDatePicker = ({
     setIsTimeOpen(true);
   };
 
-  const CalendarElement = () => (
-    <StyledCalendar
-      selectedDate={filters.deliveryDate}
-      setSelectedDate={onDateSet}
-      onChange={closeCalendar}
-      isMobile={isMobile()}
-      forwardedRef={calendarRef}
-      locale={i18n.language}
-    />
-  );
-
-  const SelectedDateTime = () => {
-    const formattedTime = isTimeEqual
-      ? ""
-      : ` ${moment(filters.deliveryFrom).tz(window.timezone).format("HH:mm")} - ${moment(
-          filters.deliveryTo,
-        )
-          .tz(window.timezone)
-          .format("HH:mm")}`;
-
-    return (
-      <div>
-        <SelectedItem
-          className="selectedItem delete-delivery-date-button"
-          onClose={deleteSelectedDate}
-          label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
-          onClick={toggleCalendar}
-        />
-        {isCalendarOpen && <CalendarElement />}
-      </div>
-    );
-  };
-
   const handleClick = (e) => {
     !selectorRef?.current?.contains(e.target) &&
       !calendarRef?.current?.contains(e.target) &&
@@ -216,14 +240,24 @@ const DeliveryDatePicker = ({
         {t("DeliveryDate")}
       </Text>
       <Selectors ref={selectorRef}>
-        {isApplied && filters.deliveryDate !== null ? (
-          <SelectedDateTime />
+        {filters.deliveryDate ? (
+          <SelectedDateTime
+            isTimeEqual={isTimeEqual}
+            filters={filters}
+            deleteSelectedDate={deleteSelectedDate}
+            toggleCalendar={toggleCalendar}
+            isCalendarOpen={isCalendarOpen}
+            calendarRef={calendarRef}
+            onDateSet={onDateSet}
+            closeCalendar={closeCalendar}
+            i18n={i18n}
+          />
         ) : (
           <DatePicker
             outerDate={filters.deliveryDate}
             isMobile={isMobile()}
             onChange={onDateSet}
-            selectedDateText={t("SelectDate")}
+            selectDateText={t("Common:SelectDate")}
             showCalendarIcon={false}
             locale={i18n.language}
           />

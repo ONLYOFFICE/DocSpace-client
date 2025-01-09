@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { withTranslation } from "react-i18next";
+import { classNames } from "@docspace/shared/utils";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
-import { withTranslation } from "react-i18next";
-import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
@@ -54,7 +54,6 @@ const FilesTableRow = (props) => {
     onMouseDown,
     isActive,
     onHideContextMenu,
-    onFilesClick,
     onDoubleClick,
     inProgress,
     index,
@@ -78,6 +77,8 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
     displayFileExtension,
+    icon,
+    isDownload,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -97,7 +98,7 @@ const FilesTableRow = (props) => {
       isArchive={item.isArchive}
       badgeUrl={badgeUrl}
       className={classNames({
-        ["icon-with-index-column"]: isIndexing,
+        "icon-with-index-column": isIndexing,
       })}
     />
   );
@@ -175,8 +176,8 @@ const FilesTableRow = (props) => {
       data-title={item.title}
       value={value}
       className={classNames("files-item", className, idWithFileExst, {
-        ["table-hotkey-border"]: showHotkeyBorder,
-        ["table-row-selected"]: !showHotkeyBorder && (checkedProps || isActive),
+        "table-hotkey-border": showHotkeyBorder,
+        "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
       })}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
@@ -195,7 +196,11 @@ const FilesTableRow = (props) => {
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
-        inProgress={inProgress}
+        inProgress={
+          inProgress && item.isFolder
+            ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
+            : inProgress
+        }
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}

@@ -60,6 +60,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
 import { ButtonDelete } from "@docspace/shared/components/image-editor";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledWatermark } from "./StyledComponent";
 
@@ -86,11 +87,11 @@ const getInitialScale = (scale, isEdit) => {
   });
 };
 
-const getInitialRotate = (rotate, isEdit) => {
-  if (!isEdit) return rotateOptions[0];
+const getInitialRotate = (rotate, isEdit, isImage) => {
+  if (!isEdit || (isEdit && !isImage)) return rotateOptions[0];
 
-  const item = rotateOptions.find((item) => {
-    return item.key === rotate;
+  const item = rotateOptions.find((elm) => {
+    return elm.key === rotate;
   });
 
   return !item ? rotateOptions[0] : item;
@@ -113,7 +114,7 @@ const ImageWatermark = ({
 
   if (initialInfo.current === null) {
     initialInfo.current = {
-      rotate: getInitialRotate(initialSettings?.rotate, isEdit),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage),
       scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
 

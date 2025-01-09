@@ -30,13 +30,13 @@ import { inject, observer } from "mobx-react";
 import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
 import ScheduleComponent from "../ScheduleComponent";
 import { StyledStoragesModule } from "../../../StyledBackup";
+
 class RackspaceStorage extends React.Component {
   constructor(props) {
     super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+    const { setCompletedFormFields } = this.props;
 
     setCompletedFormFields(RackspaceSettings.formNames(), "rackspace");
-    this.isDisabled = !selectedStorage?.isSet;
   }
 
   render() {

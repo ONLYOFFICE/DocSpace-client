@@ -228,6 +228,7 @@ export type EditorProps = {
   doc?: string;
   documentserverUrl: string;
   fileInfo?: TFile;
+  sdkConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
@@ -351,7 +352,7 @@ export interface UseEventsProps {
   openOnNewPage: boolean;
   t: TTranslation;
 
-  frameConfig?: TFrameConfig | null;
+  sdkConfig?: TFrameConfig | null;
 }
 
 export interface UseInitProps {

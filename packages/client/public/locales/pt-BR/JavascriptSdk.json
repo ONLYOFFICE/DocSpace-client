@@ -81,6 +81,7 @@
   "MobileOnly": "apenas dispositivos móveis",
   "Page": "Página de exibição (número)",
   "PortalDescription": "Incorpore todo o {{productName}} para permitir que os usuários interajam com todas as salas, arquivos e configurações.",
+  "PublicRoomPresetInfo": "Incorporar uma sala pública para permitir que os usuários visualizem, editem, comentem ou revisem todos os documentos armazenados nela sem registro",
   "RightPanelCollapsed": "Painel direito recolhido",
   "RoomFilter": "Filtro de sala",
   "RoomOrFolder": "Sala ou Pasta",

@@ -27,10 +27,11 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
-import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
 import { inject, observer } from "mobx-react";
-import { getFromLocalStorage } from "../../../../../../utils";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
+import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
+import { getFromLocalStorage } from "../../../../../../utils";
+
 class AmazonStorage extends React.Component {
   constructor(props) {
     super(props);

@@ -32,12 +32,12 @@ import { inject } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
 
-import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import AuditTrailLoader from "./AuditTrailLoader";
 
 let timerId = null;
@@ -86,21 +86,17 @@ const AuditTrail = (props) => {
         <Consumer>
           {(context) =>
             viewAs === "table" ? (
-              <>
-                <Table
-                  theme={theme}
-                  auditTrailUsers={auditTrailUsers}
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <Table
+                theme={theme}
+                auditTrailUsers={auditTrailUsers}
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             ) : (
-              <>
-                <AuditRowContainer
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <AuditRowContainer
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             )
           }
         </Consumer>
@@ -112,7 +108,7 @@ const AuditTrail = (props) => {
     return <AuditTrailLoader />;
   }
 
-  if (isLoading) return <></>;
+  if (isLoading) return null;
 
   if (auditTrailUsers.length === 0) {
     return (
@@ -129,29 +125,28 @@ const AuditTrail = (props) => {
   }
 
   return (
-    <>
-      {securityLifetime && securityLifetime.auditTrailLifeTime && (
-        <HistoryMainContent
-          t={t}
-          subHeader={t("AuditSubheader", {
-            productName: t("Common:ProductName"),
-          })}
-          latestText={t("LoginLatestText")}
-          storagePeriod={t("StoragePeriod")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          securityLifetime={securityLifetime}
-          lifetime={securityLifetime.auditTrailLifeTime}
-          setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
-          downloadReport={t("DownloadReportBtnText")}
-          downloadReportDescription={t("DownloadReportDescription")}
-          getReport={getAuditTrailReport}
-          isSettingNotPaid={!isAuditAvailable}
-          isLoadingDownloadReport={isLoadingDownloadReport}
-        />
-      )}
-    </>
+    securityLifetime &&
+    securityLifetime.auditTrailLifeTime && (
+      <HistoryMainContent
+        t={t}
+        subHeader={t("AuditSubheader", {
+          productName: t("Common:ProductName"),
+        })}
+        latestText={t("LoginLatestText")}
+        storagePeriod={t("StoragePeriod")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        securityLifetime={securityLifetime}
+        lifetime={securityLifetime.auditTrailLifeTime}
+        setLifetimeAuditSettings={setLifetimeAuditSettings}
+        content={getContent()}
+        downloadReport={t("DownloadReportBtnText")}
+        downloadReportDescription={t("DownloadReportDescription")}
+        getReport={getAuditTrailReport}
+        isSettingNotPaid={!isAuditAvailable}
+        isLoadingDownloadReport={isLoadingDownloadReport}
+      />
+    )
   );
 };
 

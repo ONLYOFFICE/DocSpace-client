@@ -31,7 +31,6 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
-import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 // import { createPasswordHash } from "@docspace/shared/utils/common";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
@@ -40,6 +39,7 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { ValidationStatus } from "@docspace/shared/enums";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
+import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 
 const RoomPassword = (props) => {
   const {
@@ -91,14 +91,14 @@ const RoomPassword = (props) => {
       setIsLoading(false);
 
       switch (res?.status) {
-        case ValidationStatus.Ok: {
+        case ValidationStatus.Ok:
           if (res.shared) {
             return gotoFolder(res);
           }
 
           setRoomData(res); // Ok
           return;
-        }
+
         // case ValidationStatus.Invalid: {
         //   setErrorMessage(""); // Invalid
         //   return;
@@ -107,10 +107,11 @@ const RoomPassword = (props) => {
         //   setErrorMessage(""); // Expired
         //   return;
         // }
-        case ValidationStatus.InvalidPassword: {
+        case ValidationStatus.InvalidPassword:
           setErrorMessage(t("Common:IncorrectPassword"));
-          return;
-        }
+
+        default:
+          break;
       }
     } catch (error) {
       toastr.error(error);
@@ -156,7 +157,7 @@ const RoomPassword = (props) => {
                 </div>
 
                 <FieldContainer
-                  isVertical={true}
+                  isVertical
                   labelVisible={false}
                   hasError={!!errorMessage}
                   errorMessage={errorMessage}

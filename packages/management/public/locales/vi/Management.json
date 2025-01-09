@@ -8,6 +8,7 @@
   "CurrentSpace": "Không gian hiện tại",
   "DeleteEmptyPortalText": "Bạn sẽ xóa vĩnh viễn không gian <1>{{domain}}</1>. Hành động này không thể được hoàn tác.",
   "DeleteRequestSuccess": "Yêu cầu xóa đã được gửi thành công đến địa chỉ email <1>{{email}}</1> của chủ sở hữu {{productName}}",
+  "DeleteSetupPortalText": "Bạn sẽ xóa vĩnh viễn không gian <1>{{domain}} </1> với tất cả dữ liệu và tài khoản. Yêu cầu xóa <1>{{domain}}</1> sẽ được gửi đến chủ sở hữu {{productName}} theo địa chỉ email <1>{{email}}</1>.",
   "DeleteWarning": "Không thể xóa không gian truy cập đầy đủ cuối cùng",
   "DomainName": "Tên miền",
   "DomainNotFound": "Không tìm thấy tên miền, vui lòng kiểm tra cài đặt DNS",

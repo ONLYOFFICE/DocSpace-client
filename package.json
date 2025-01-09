@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "workspaces": {
     "packages": [
@@ -28,8 +28,8 @@
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
     "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint",
-    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint:fix",
+    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint",
+    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint:fix",
     "test:build": "yarn workspace @docspace/login test:build",
     "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
     "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",

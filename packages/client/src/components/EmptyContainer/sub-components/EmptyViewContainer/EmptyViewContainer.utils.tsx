@@ -429,7 +429,7 @@ export const getRoomIcon = (
         isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
       )
       // eslint-disable-next-line react/jsx-no-useless-fragment
-      .otherwise(() => <></>)
+      .otherwise(() => null)
   );
 };
 
@@ -486,6 +486,7 @@ export const getRootIcon = (
 export const helperOptions = (
   actions: OptionActions,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isFrame?: boolean,
 ) => {
   const createInviteOption = (title: string, description: string) => {
     return {
@@ -494,7 +495,7 @@ export const helperOptions = (
       icon: <InviteUserFormIcon />,
       key: "invite-users",
       onClick: actions.inviteUser,
-      disabled: !security?.EditAccess,
+      disabled: !security?.EditAccess || isFrame,
     };
   };
 

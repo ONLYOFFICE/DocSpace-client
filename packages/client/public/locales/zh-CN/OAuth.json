@@ -18,6 +18,7 @@
   "AuthenticationMethod": "身份验证方式",
   "AuthorizedApps": "已认证的应用",
   "AuthorizeLink": "授权链接",
+  "BasicInfo": "基础信息",
   "Client": "客户端",
   "ClientCopy": "客户端 id 已复制到剪贴板",
   "ClientHelpButton": "用于将 OAuth 2.0 作为您的身份验证类型的凭据。<br/><strong>注意：</strong>任何知道应用程序客户端 ID 的企业管理员都能够检索关于该应用的信息，包括应用名称、身份验证类型、应用作用域和重定向 URI。",

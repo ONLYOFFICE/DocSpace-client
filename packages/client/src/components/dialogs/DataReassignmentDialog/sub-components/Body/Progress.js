@@ -163,7 +163,7 @@ const Progress = ({
     </div>
   );
 
-  const you = `${`(` + t("Common:You") + `)`}`;
+  const you = `${`(${t("Common:You")})`}`;
 
   const reassigningDataStart = isReassignCurrentUser ? (
     <Trans

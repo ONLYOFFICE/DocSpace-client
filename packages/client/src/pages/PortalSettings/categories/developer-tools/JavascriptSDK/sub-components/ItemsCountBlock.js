@@ -37,10 +37,10 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
   const [value, setValue] = useState(count);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
+    debounce((newValue) => {
       setConfig((config) => ({
         ...config,
-        filter: { ...config.filter, count: value },
+        filter: { ...config.filter, count: newValue },
       }));
     }, 500),
     [setConfig],

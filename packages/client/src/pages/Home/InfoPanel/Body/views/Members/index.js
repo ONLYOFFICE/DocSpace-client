@@ -37,7 +37,6 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import {
@@ -60,6 +59,8 @@ import {
 } from "./sub-components/Styled";
 
 import User from "./User";
+
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
 
 const Members = ({
   t,
@@ -88,11 +89,6 @@ const Members = ({
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
 }) => {
-  const [visibleBar, setVisibleBar] = useLocalStorage(
-    `public-room-bar-${selfId}`,
-    true,
-  );
-
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
@@ -116,7 +112,7 @@ const Members = ({
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
-  else if (!infoPanelMembers) return <></>;
+  if (!infoPanelMembers) return null;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId,
@@ -189,9 +185,7 @@ const Members = ({
                 <Tooltip
                   float={isDesktop()}
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
               )}
@@ -214,7 +208,7 @@ const Members = ({
     }
 
     if (additionalLinks.length && !withoutTitlesAndLinks) {
-      additionalLinks.map((link) => {
+      additionalLinks.forEach((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}
@@ -253,8 +247,7 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks &&
-    visibleBar;
+    !withoutTitlesAndLinks;
 
   const publicRoomItemsLength = publicRoomItems.length;
 
@@ -277,7 +270,6 @@ const Members = ({
                 ? t("CreateEditRoomDialog:FormRoomBarDescription")
                 : t("CreateEditRoomDialog:PublicRoomBarDescription")
             }
-            onClose={() => setVisibleBar(false)}
           />
         </StyledPublicRoomBarContainer>
       )}
@@ -380,7 +372,7 @@ export default inject(
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-      additionalLinks: additionalLinks,
+      additionalLinks,
       setLinkParams,
       setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,

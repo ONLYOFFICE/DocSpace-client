@@ -28,13 +28,21 @@ import { makeAutoObservable } from "mobx";
 
 class SecondaryProgressDataStore {
   percent = 0;
+
   label = "";
+
   visible = false;
+
   icon = "trash";
+
   alert = false;
+
   filesCount = 0;
+
   itemsSelectionLength = 0;
+
   itemsSelectionTitle = null;
+
   isDownload = false;
 
   secondaryOperationsArray = [];
@@ -53,8 +61,9 @@ class SecondaryProgressDataStore {
     }
 
     if (progressIndex === 0 || this.secondaryOperationsArray.length === 0) {
-      const progressDataItems = Object.keys(secondaryProgressData);
-      for (let key of progressDataItems) {
+      const progressDataItemsArray = Object.keys(secondaryProgressData);
+      for (let index = 0; index < progressDataItemsArray.length; index++) {
+        const key = progressDataItemsArray[index];
         if (key in this) {
           this[key] = secondaryProgressData[key];
         }

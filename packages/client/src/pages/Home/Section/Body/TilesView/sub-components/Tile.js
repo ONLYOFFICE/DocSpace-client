@@ -29,7 +29,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import PropTypes from "prop-types";
 import React from "react";
 import { ReactSVG } from "react-svg";
-import styled, { css } from "styled-components";
+import styled, { css, withTheme } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import {
   tablet,
@@ -37,13 +37,13 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
-import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
-import { Tag } from "@docspace/shared/components/tag";
+
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -145,8 +145,11 @@ const StyledTile = styled.div`
   cursor: ${(props) =>
     !props.isRecycleBin && !props.isArchiveFolder ? "pointer" : "default"};
   ${(props) =>
-    props.inProgress &&
-    !props.isFolder &&
+    (props.inProgress && props.isFolder
+      ? props.iconProgress !== "duplicate" &&
+        props.iconProgress !== "duplicate-room" &&
+        !props.isDownload
+      : props.inProgress) &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -305,7 +308,7 @@ const StyledFileTileTop = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    object-fit: ${(props) => (props.thumbnails1280x720 ? "cover" : "none")};
+    object-fit: cover;
     object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
     z-index: 0;
     border-radius: 6px 6px 0 0;
@@ -503,16 +506,17 @@ class Tile extends React.PureComponent {
 
   getIconFile = () => {
     const { temporaryIcon, thumbnailClick, thumbnail, item } = this.props;
+    const { errorLoadSrc } = this.state;
 
     const icon = item.isPlugin
       ? item.fileTileIcon
-      : thumbnail && !this.state.errorLoadSrc
+      : thumbnail && !errorLoadSrc
         ? thumbnail
         : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
-        {thumbnail && !this.state.errorLoadSrc ? (
+        {thumbnail && !errorLoadSrc ? (
           <img
             src={thumbnail}
             className="thumbnail-image"
@@ -607,23 +611,19 @@ class Tile extends React.PureComponent {
       selectTag,
       selectOption,
       isHighlight,
-      thumbnails1280x720,
+      iconProgress,
+      isDownload,
+      theme,
     } = this.props;
+
     const { isFolder, isRoom, id, fileExst } = item;
 
-    const renderElement = Object.prototype.hasOwnProperty.call(
-      this.props,
-      "element",
-    );
+    const renderElement = hasOwnProperty(this.props, "element");
 
-    const renderContentElement = Object.prototype.hasOwnProperty.call(
-      this.props,
-      "contentElement",
-    );
+    const renderContentElement = hasOwnProperty(this.props, "contentElement");
 
     const renderContext =
-      Object.prototype.hasOwnProperty.call(item, "contextOptions") &&
-      contextOptions.length > 0;
+      hasOwnProperty(item, "contextOptions") && contextOptions.length > 0;
 
     const getOptions = () => {
       tileContextClick && tileContextClick();
@@ -633,12 +633,12 @@ class Tile extends React.PureComponent {
     const onContextMenu = (e) => {
       tileContextClick && tileContextClick(e.button === 2);
       if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); //TODO: need fix context menu to global
+        this.tile.current.click(e); // TODO: need fix context menu to global
       }
       this.cm.current.show(e);
     };
     const contextMenuDirection =
-      this.props.theme.interfaceDirection === "rtl" ? "left" : "right";
+      theme.interfaceDirection === "rtl" ? "left" : "right";
     const icon = this.getIconFile();
     const [FilesTileContent, badges] = children;
     const quickButtons = contentElement;
@@ -704,43 +704,44 @@ class Tile extends React.PureComponent {
         onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
+        iconProgress={iconProgress}
+        isDownload={isDownload}
       >
         {isFolder || (!fileExst && id === -1) ? (
           isRoom ? (
             <>
               <div className="room-tile_top-content">
-                {renderElement && !(!fileExst && id === -1) && !isEdit && (
-                  <>
-                    {!inProgress ? (
-                      <div
-                        className="file-icon_container"
-                        ref={this.checkboxContainerRef}
+                {renderElement &&
+                  !(!fileExst && id === -1) &&
+                  !isEdit &&
+                  (!inProgress ? (
+                    <div
+                      className="file-icon_container"
+                      ref={this.checkboxContainerRef}
+                    >
+                      <StyledElement
+                        className="file-icon"
+                        isRoom={isRoom}
+                        onClick={this.onFileIconClick}
                       >
-                        <StyledElement
-                          className="file-icon"
-                          isRoom={isRoom}
-                          onClick={this.onFileIconClick}
-                        >
-                          {element}
-                        </StyledElement>
+                        {element}
+                      </StyledElement>
 
-                        <Checkbox
-                          className="checkbox file-checkbox"
-                          isChecked={checked}
-                          isIndeterminate={indeterminate}
-                          onChange={this.changeCheckbox}
-                        />
-                      </div>
-                    ) : (
-                      <Loader
-                        className="tile-folder-loader tile-room"
-                        color=""
-                        size="20px"
-                        type={LoaderTypes.track}
+                      <Checkbox
+                        className="checkbox file-checkbox"
+                        isChecked={checked}
+                        isIndeterminate={indeterminate}
+                        onChange={this.changeCheckbox}
                       />
-                    )}
-                  </>
-                )}
+                    </div>
+                  ) : (
+                    <Loader
+                      className="tile-folder-loader tile-room"
+                      color=""
+                      size="20px"
+                      type={LoaderTypes.track}
+                    />
+                  ))}
                 <StyledContent
                   isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
                 >
@@ -766,7 +767,7 @@ class Tile extends React.PureComponent {
                     getContextModel={getContextModel}
                     ref={this.cm}
                     header={contextMenuHeader}
-                    withBackdrop={true}
+                    withBackdrop
                     isRoom={isRoom}
                   />
                 </StyledOptionButton>
@@ -807,35 +808,34 @@ class Tile extends React.PureComponent {
             </>
           ) : (
             <>
-              {renderElement && !(!fileExst && id === -1) && !isEdit && (
-                <>
-                  {!inProgress ? (
-                    <div className="file-icon_container">
-                      <StyledElement
-                        className="file-icon"
-                        isRoom={isRoom}
-                        onClick={this.onFileIconClick}
-                      >
-                        {element}
-                      </StyledElement>
+              {renderElement &&
+                !(!fileExst && id === -1) &&
+                !isEdit &&
+                (!inProgress ? (
+                  <div className="file-icon_container">
+                    <StyledElement
+                      className="file-icon"
+                      isRoom={isRoom}
+                      onClick={this.onFileIconClick}
+                    >
+                      {element}
+                    </StyledElement>
 
-                      <Checkbox
-                        className="checkbox file-checkbox"
-                        isChecked={checked}
-                        isIndeterminate={indeterminate}
-                        onChange={this.changeCheckbox}
-                      />
-                    </div>
-                  ) : (
-                    <Loader
-                      className="tile-folder-loader"
-                      color=""
-                      size="20px"
-                      type={LoaderTypes.track}
+                    <Checkbox
+                      className="checkbox file-checkbox"
+                      isChecked={checked}
+                      isIndeterminate={indeterminate}
+                      onChange={this.changeCheckbox}
                     />
-                  )}
-                </>
-              )}
+                  </div>
+                ) : (
+                  <Loader
+                    className="tile-folder-loader"
+                    color=""
+                    size="20px"
+                    type={LoaderTypes.track}
+                  />
+                ))}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >
@@ -861,7 +861,7 @@ class Tile extends React.PureComponent {
                   getContextModel={getContextModel}
                   ref={this.cm}
                   header={contextMenuHeader}
-                  withBackdrop={true}
+                  withBackdrop
                 />
               </StyledOptionButton>
             </>
@@ -873,7 +873,6 @@ class Tile extends React.PureComponent {
               isActive={isActive}
               isMedia={item.canOpenPlayer}
               isHighlight={isHighlight}
-              thumbnails1280x720={thumbnails1280x720}
               isImageOrMedia={
                 item?.viewAccessibility?.ImageView ||
                 item?.viewAccessibility?.MediaView
@@ -895,30 +894,28 @@ class Tile extends React.PureComponent {
               isEdit={isEdit}
               className="file-tile-bottom"
             >
-              {id !== -1 && !isEdit && (
-                <>
-                  {!inProgress ? (
-                    <div className="file-icon_container">
-                      <div className="file-icon" onClick={this.onFileIconClick}>
-                        {element}
-                      </div>
-                      <Checkbox
-                        className="file-checkbox"
-                        isChecked={checked}
-                        isIndeterminate={indeterminate}
-                        onChange={this.changeCheckbox}
-                      />
+              {id !== -1 &&
+                !isEdit &&
+                (!inProgress ? (
+                  <div className="file-icon_container">
+                    <div className="file-icon" onClick={this.onFileIconClick}>
+                      {element}
                     </div>
-                  ) : (
-                    <Loader
-                      className="tile-file-loader"
-                      color=""
-                      size="20px"
-                      type={LoaderTypes.track}
+                    <Checkbox
+                      className="file-checkbox"
+                      isChecked={checked}
+                      isIndeterminate={indeterminate}
+                      onChange={this.changeCheckbox}
                     />
-                  )}
-                </>
-              )}
+                  </div>
+                ) : (
+                  <Loader
+                    className="tile-file-loader"
+                    color=""
+                    size="20px"
+                    type={LoaderTypes.track}
+                  />
+                ))}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >
@@ -973,6 +970,7 @@ Tile.propTypes = {
   viewAs: PropTypes.string,
   tileContextClick: PropTypes.func,
   contentElement: PropTypes.element,
+  item: PropTypes.object,
 };
 
 Tile.defaultProps = {

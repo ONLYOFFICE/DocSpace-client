@@ -813,4 +813,53 @@ describe("Locales Tests", () => {
 
     expect(exists, message).toBe(false);
   });
+
+  test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
+    let message = "The following keys are using incorrect namespaces:\r\n\r\n";
+    let incorrectUsages = [];
+
+    // Create a map of all available keys in each namespace
+    const namespaceKeys = {};
+    translationFiles.forEach(file => {
+      const namespace = path.basename(file.fileName, ".json");
+      namespaceKeys[namespace] = new Set(file.translations.map(t => t.key));
+    });
+
+    // Check each JavaScript file for translation key usage
+    javascriptFiles.forEach(jsFile => {
+      jsFile.translationKeys.forEach(key => {
+        const [namespace, translationKey] = key.split(":");
+        
+        // Skip if the key doesn't follow namespace:key format
+        if (!translationKey) return;
+
+        // Check if the key exists in the specified namespace
+        if (namespaceKeys[namespace] && !namespaceKeys[namespace].has(translationKey)) {
+          // Check if the key exists in other namespaces
+          const foundInNamespaces = Object.entries(namespaceKeys)
+            .filter(([ns, keys]) => ns !== namespace && keys.has(translationKey))
+            .map(([ns]) => ns);
+
+          if (foundInNamespaces.length > 0) {
+            incorrectUsages.push({
+              file: jsFile.path,
+              key: key,
+              correctNamespaces: foundInNamespaces
+            });
+          }
+        }
+      });
+    });
+
+    if (incorrectUsages.length > 0) {
+      let i = 1;
+      message += incorrectUsages
+        .map(usage => `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`)
+        .join("\n");
+
+      console.log(message);
+    }
+
+    expect(incorrectUsages.length, message).toBe(0);
+  });
 });

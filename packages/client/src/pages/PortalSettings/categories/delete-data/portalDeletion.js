@@ -30,7 +30,6 @@ import { inject } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
-import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
@@ -41,6 +40,7 @@ import {
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeletion = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
@@ -48,6 +48,11 @@ const PortalDeletion = (props) => {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [stripeUrl, setStripeUrl] = useState(null);
   const [isDesktopView, setIsDesktopView] = useState(false);
+
+  const onCheckView = () => {
+    if (isDesktop()) setIsDesktopView(true);
+    else setIsDesktopView(false);
+  };
 
   const fetchData = async () => {
     await getPortalOwner();
@@ -64,11 +69,6 @@ const PortalDeletion = (props) => {
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (isDesktop()) setIsDesktopView(true);
-    else setIsDesktopView(false);
-  };
 
   const onDeleteClick = async () => {
     if (stripeUrl) {

@@ -31,6 +31,7 @@ import React, { useEffect, useState } from "react";
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import { StyledCard, StyledItem } from "../StyledTileView";
 
 const Card = ({ children, countTilesInRow, ...rest }) => {
@@ -61,7 +62,6 @@ const InfiniteGrid = (props) => {
     fetchMoreFiles,
     filesLength,
     className,
-    getCountTilesInRow,
     ...rest
   } = props;
 
@@ -125,7 +125,7 @@ const InfiniteGrid = (props) => {
       cards.push(
         <TileSkeleton
           key={key}
-          className={"tiles-loader isFile"}
+          className="tiles-loader isFile"
           isFolder={false}
         />,
       );
@@ -156,11 +156,9 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ filesStore, oformsStore, infoPanelStore }) => {
+export default inject(({ oformsStore, infoPanelStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
-
-  const { getCountTilesInRow } = filesStore;
 
   const filesLength = oformFiles.length;
   const { isVisible } = infoPanelStore;
@@ -171,7 +169,6 @@ export default inject(({ filesStore, oformsStore, infoPanelStore }) => {
     filterTotal: oformsFilterTotal,
     fetchMoreFiles: fetchMoreOforms,
     filesLength,
-    getCountTilesInRow,
     isVisible,
   };
 })(observer(InfiniteGrid));

@@ -35,7 +35,6 @@
   "SecretKey": "Gizli şifrə",
   "SecretKeyHint": "Webhook sirrinin qurulması faydalı mübadilə yük URL-inə göndərilən sorğuları yoxlamağa imkan verir.",
   "SecretKeyWarning": "Gizli şifrəni saxladıqdan sonra onu geri ala bilməyəcəksiniz. Bu şifrəni itirmisinizsə və ya unutmusunuzsa, onu yenidən bərpa edə bilərsiniz, lakin bu şifrəni istifadə edən bütün inteqrasiyalar yenilənməlidir.",
-  "SelectDate": "Tarixi seçin",
   "SelectDeliveryTime": "Çatdırılma vaxtını seçin",
   "SettingsWebhook": "Webhook parametrləri",
   "SSLHint": "Qiyabi olaraq, faydalı mübadilə yüklərini çatdırarkən SSL sertifikatlarını yoxlayırıq.",

@@ -26,15 +26,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
-import { StyledWatermark } from "./StyledComponent";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { StyledWatermark } from "./StyledComponent";
 
 const tabsOptions = (t) => [
   {
@@ -73,7 +72,7 @@ const getInitialState = (initialTab) => {
     RoomName: false,
   };
 
-  initialTab.map((item) => {
+  initialTab.forEach((item) => {
     state[item.id] = true;
   });
 
@@ -103,13 +102,13 @@ const rotateOptions = (t) => [
   { key: 0, label: t("Horizontal") },
 ];
 
-const getInitialRotate = (rotate, isEdit, t) => {
+const getInitialRotate = (rotate, isEdit, isImage, t) => {
   const dataRotate = rotateOptions(t);
 
-  if (!isEdit) return dataRotate[0];
+  if (!isEdit || (isEdit && isImage)) return dataRotate[0];
 
-  const item = dataRotate.find((item) => {
-    return item.key === rotate;
+  const item = dataRotate.find((elm) => {
+    return elm.key === rotate;
   });
 
   return !item ? dataRotate[0] : item;
@@ -134,7 +133,7 @@ const ViewerInfoWatermark = ({
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
-      rotate: getInitialRotate(initialSettings?.rotate, isEdit, t),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
       text: getInitialText(initialSettings?.text, isEdit),
     };
 
@@ -146,7 +145,7 @@ const ViewerInfoWatermark = ({
         rotate: initialInfo.current.rotate.key,
         additions:
           roomParams.watermark?.additions || WatermarkAdditions.UserName,
-        //image: "",
+        // image: "",
         imageWidth: 0,
         imageHeight: 0,
         imageScale: 0,
@@ -170,20 +169,20 @@ const ViewerInfoWatermark = ({
   }, []);
 
   const onSelect = (item) => {
-    let elementsData = elements.current;
+    const elementsData = elements.current;
     let flagsCount = 0;
 
     const key = item.id;
 
     elementsData[key] = !elementsData[item.id];
 
-    for (const key in elementsData) {
-      const value = elementsData[key];
+    Object.keys(elementsData).forEach((k) => {
+      const value = elementsData[k];
 
       if (value) {
-        flagsCount += WatermarkAdditions[key];
+        flagsCount += WatermarkAdditions[k];
       }
-    }
+    });
 
     setRoomParams({
       ...roomParams,

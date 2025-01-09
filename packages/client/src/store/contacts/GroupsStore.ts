@@ -481,8 +481,7 @@ class GroupsStore {
     tempTitle: string,
     e?: React.MouseEvent<Element, MouseEvent>,
   ) => {
-    const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
-      this.clientLoadingStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
     this.peopleStore.usersStore!.setContactsTab("inside_group");
 
@@ -495,8 +494,7 @@ class GroupsStore {
     this.setCurrentGroup(null);
     this.setInsideGroupTempTitle(tempTitle);
 
-    setIsSectionFilterLoading(true);
-    setIsSectionBodyLoading(true);
+    setIsSectionBodyLoading(true, false);
 
     if (withBackURL) {
       const url = `${window.location.pathname}${window.location.search}`;

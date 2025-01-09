@@ -23,29 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
+
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { useState, useRef } from "react";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
-import { getUserType } from "@docspace/shared/utils/common";
 
-const StyledContextMenu = styled(ContextMenu)`
-  min-width: auto !important;
-`;
-
-const GroupMember = ({
-  userId,
-  groupMember,
-  isManager,
-  getUserContextOptions,
-  getUserContextOptionsModel,
-}) => {
+const GroupMember = ({ groupMember, isManager }) => {
   const { t } = useTranslation([
     "People",
     "Profile",
@@ -53,38 +38,38 @@ const GroupMember = ({
     "Common",
   ]);
 
-  const iconRef = useRef(null);
-  const buttonMenuRef = useRef(null);
+  // const iconRef = useRef(null);
+  // const buttonMenuRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const onClick = (e) => {
-    if (!isOpen) buttonMenuRef?.current?.show(e);
-    else buttonMenuRef?.current?.hide(e);
-    setIsOpen(!isOpen);
-  };
+  // const onClick = (e) => {
+  //   if (!isOpen) buttonMenuRef?.current?.show(e);
+  //   else buttonMenuRef?.current?.hide(e);
+  //   setIsOpen(!isOpen);
+  // };
 
-  const onHide = () => {
-    setIsOpen(false);
-  };
+  // const onHide = () => {
+  //   setIsOpen(false);
+  // };
 
-  const model = getUserContextOptionsModel(
-    t,
-    getUserContextOptions(
-      groupMember.id === userId,
-      getUserStatus(groupMember),
-      getUserType(groupMember),
-      groupMember.status,
-    ),
-    groupMember,
-  );
+  // const model = getUserContextOptionsModel(
+  //   t,
+  //   getUserContextOptions(
+  //     groupMember.id === userId,
+  //     getUserStatus(groupMember),
+  //     getUserType(groupMember),
+  //     groupMember.status,
+  //   ),
+  //   groupMember,
+  // );
 
   return (
     <div className="group-member">
       <Avatar
         className="avatar"
         role={groupMember.role || "user"}
-        size={"min"}
+        size="min"
         source={groupMember.avatar}
         noClick
       />

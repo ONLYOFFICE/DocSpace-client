@@ -24,26 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../types";
-import type { PROVIDERS_DATA } from "../../constants";
+import { Meta, Story } from "@storybook/react";
+import { SocialButtonsGroup } from "./index";
+import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
-export type ProvidersDataType = typeof PROVIDERS_DATA;
+export default {
+  title: "Components/SocialButtonsGroup",
+  component: SocialButtonsGroup,
+  argTypes: {
+    onClick: { action: "clicked" },
+    onMoreAuthToggle: { action: "more auth toggled" },
+  },
+} as Meta;
 
-type Provider = {
-  linked: boolean;
-  provider: string;
-  url: string;
+const Template: Story<SocialButtonProps> = (args) => (
+  <SocialButtonsGroup {...args} />
+);
+
+export const Default = Template.bind({});
+Default.args = {
+  providers: [
+    { provider: "google", url: "google.com", linked: false },
+    { provider: "facebook", url: "facebook.com", linked: false },
+  ],
+  t: (key: string) => key,
+  isDisabled: false,
 };
 
-export type SocialButtonProps = {
-  providers: Provider[] | undefined;
-  ssoLabel?: string;
-  ssoUrl?: string;
-  ssoSVG?: string;
-  t: TTranslation;
-  /** Sets a callback function that is triggered when the button is clicked */
-  onClick: (e: React.MouseEvent<Element, MouseEvent>) => void | Promise<void>;
-  onMoreAuthToggle?: (value: boolean) => void;
-  /** Sets the button to present a disabled state */
-  isDisabled: boolean;
+export const WithSSO = Template.bind({});
+WithSSO.args = {
+  ...Default.args,
+  ssoUrl: "sso-url.com",
+  ssoLabel: "SSO Login",
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...Default.args,
+  isDisabled: true,
+};
+
+export const WithMoreProviders = Template.bind({});
+WithMoreProviders.args = {
+  ...Default.args,
+  providers: [
+    { provider: "google", url: "google.com", linked: false },
+    { provider: "facebook", url: "facebook.com", linked: false },
+    { provider: "twitter", url: "twitter.com", linked: false },
+    { provider: "linkedin", url: "linkedin.com", linked: false },
+  ],
 };

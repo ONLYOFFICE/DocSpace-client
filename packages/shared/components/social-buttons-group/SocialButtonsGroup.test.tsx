@@ -24,26 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../types";
-import type { PROVIDERS_DATA } from "../../constants";
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { ThemeProvider } from "styled-components";
+import { Base } from "../../themes";
+import { SocialButtonsGroup } from ".";
+import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
-export type ProvidersDataType = typeof PROVIDERS_DATA;
-
-type Provider = {
-  linked: boolean;
-  provider: string;
-  url: string;
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
 };
 
-export type SocialButtonProps = {
-  providers: Provider[] | undefined;
-  ssoLabel?: string;
-  ssoUrl?: string;
-  ssoSVG?: string;
-  t: TTranslation;
-  /** Sets a callback function that is triggered when the button is clicked */
-  onClick: (e: React.MouseEvent<Element, MouseEvent>) => void | Promise<void>;
-  onMoreAuthToggle?: (value: boolean) => void;
-  /** Sets the button to present a disabled state */
-  isDisabled: boolean;
-};
+describe("<SocialButtonsGroup />", () => {
+  const baseProps: SocialButtonProps = {
+    providers: [
+      { provider: "google", url: "google.com", linked: false },
+      { provider: "facebook", url: "facebook.com", linked: false },
+    ],
+    t: (key: string) => key,
+    onClick: jest.fn(),
+    isDisabled: false,
+  };
+
+  it("renders without error", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    expect(container).toBeTruthy();
+  });
+
+  it("renders correct number of social buttons", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    expect(container.querySelectorAll(".social-button")).toHaveLength(2);
+  });
+
+  it("handles click events", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    const button = container.querySelector(".social-button");
+    if (button) fireEvent.click(button);
+    expect(baseProps.onClick).toHaveBeenCalled();
+  });
+});

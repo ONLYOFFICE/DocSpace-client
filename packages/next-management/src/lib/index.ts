@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment-timezone";
 import { TTranslation } from "@docspace/shared/types";
 
 export const getMinifyTitle = (title: string) => {
@@ -74,5 +75,22 @@ export const getIsCustomizationAvailable = (quota: unknown) => {
 
 export const getIsDefaultWhiteLabel = (whiteLabelIsDefault: unknown) => {
   return whiteLabelIsDefault.map((item) => item?.default).includes(false);
+};
+
+export const isValidDate = (date: Date) => {
+  return moment(date).tz(window.timezone).year() !== 9999;
+};
+
+export const getIsLicenseDateExpired = (dueDate: Date) => {
+  if (!isValidDate(dueDate)) return true;
+  return moment() > moment(dueDate).tz(window.timezone);
+};
+
+export const getPaymentDate = (dueDate: Date) => {
+  return moment(dueDate).tz(window.timezone).format("LL");
+};
+
+export const getDaysLeft = (dueDate: Date) => {
+  return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
 };
 

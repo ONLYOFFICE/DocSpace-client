@@ -34,6 +34,7 @@ import type {
   TSettings,
   TGetColorTheme,
   TVersionBuild,
+  TPaymentSettings,
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
@@ -254,5 +255,21 @@ export async function getCompanyInfo() {
   const companyInfo = await companyInfoRes.json();
 
   return companyInfo.response;
+}
+
+export async function getPaymentSettings() {
+  const [getPaymentSettings] = createRequest(
+    [`/settings/payment`],
+    [["", ""]],
+    "GET",
+  );
+
+  const paymentSettingsRes = await fetch(getPaymentSettings);
+
+  if (!paymentSettingsRes.ok) return;
+
+  const paymentSettings = await paymentSettingsRes.json();
+
+  return paymentSettings.response as TPaymentSettings;
 }
 

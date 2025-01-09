@@ -26,21 +26,23 @@
 
 import { Moment } from "moment";
 
-export interface TimePickerProps {
-  /** Default time */
-  initialTime: object;
-  /** Allows to set classname */
+export type TimePickerProps = {
+  /** Initial time value */
+  initialTime?: object | string | Date | Moment;
+  /** Callback function when time changes */
+  onChange?: (date: Moment) => void;
+  /** Additional CSS class */
   className?: string;
-  /** Allow you to handle changing events of component */
-  onChange: (value: Moment) => void;
-  /** Indicates error */
-  hasError?: boolean;
-  /** Triggers function on blur */
-  onBlur?: () => void;
-  /** Focus input on render */
-  focusOnRender?: boolean;
-  /** Passes ref to child component */
-  forwardedRef?: React.RefObject<HTMLInputElement>;
-  tabIndex?: number;
+  /** CSS class for input */
   classNameInput?: string;
-}
+  /** Whether the input has an error */
+  hasError?: boolean;
+  /** Tab index for keyboard navigation */
+  tabIndex?: number;
+  /** Callback function when input loses focus */
+  onBlur?: () => void;
+  /** Whether to focus the input on render */
+  focusOnRender?: boolean;
+  /** Forwarded ref */
+  forwardedRef?: React.RefObject<HTMLDivElement>;
+};

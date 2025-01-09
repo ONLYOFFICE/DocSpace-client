@@ -36,7 +36,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+} from "SRC_DIR/helpers/category";
 import {
   StyledContainer,
   StyledHeading,
@@ -44,11 +44,6 @@ import {
   StyledSubmitToGalleryButton,
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
-import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/category";
-import { getCategoryUrl } from "SRC_DIR/helpers/category";
 
 const SectionHeaderContent = ({
   t,

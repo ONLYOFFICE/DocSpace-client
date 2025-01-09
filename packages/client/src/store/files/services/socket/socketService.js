@@ -26,12 +26,16 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import SocketHelper, {
+  SocketCommands,
   // SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { FileStatus } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import merge from "lodash/merge";
+import cloneDeep from "lodash/cloneDeep";
 
-export class SocketService {
+class SocketService {
   constructor(rootStore) {
     this.rootStore = rootStore;
 
@@ -45,7 +49,7 @@ export class SocketService {
   initSocketEvents = () => {
     SocketHelper.on(SocketEvents.ModifyFolder, this.handleModifyFolder);
     SocketHelper.on(SocketEvents.UpdateHistory, this.handleUpdateHistory);
-    SocketHelper.on(SocketEvents.RefreshFolder, this.handleRefreshFolder);
+    // SocketHelper.on(SocketEvents.RefreshFolder, this.handleRefreshFolder);
     SocketHelper.on(SocketEvents.MarkAsNewFolder, this.handleMarkAsNewFolder);
     SocketHelper.on(SocketEvents.MarkAsNewFile, this.handleMarkAsNewFile);
     SocketHelper.on(SocketEvents.StartEditFile, this.handleStartEditFile);
@@ -91,6 +95,8 @@ export class SocketService {
         case "delete":
           this.wsModifyFolderDelete(opt);
           break;
+        default:
+          break;
       }
 
     this.rootStore.treeFoldersStore.updateTreeFoldersItem(opt);
@@ -111,18 +117,18 @@ export class SocketService {
     }
   };
 
-  handleRefreshFolder = (id) => {
-    const { socketSubscribers } = SocketHelper;
-    const pathParts = `DIR-${id}`;
+  // handleRefreshFolder = (id) => {
+  //   const { socketSubscribers } = SocketHelper;
+  //   const pathParts = `DIR-${id}`;
 
-    if (!socketSubscribers.has(pathParts)) return;
+  //   if (!socketSubscribers.has(pathParts)) return;
 
-    if (!id || this.rootStore.clientLoadingStore.isLoading) return;
+  //   if (!id || this.rootStore.clientLoadingStore.isLoading) return;
 
-    //console.log(
-    //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
-    //);
-  };
+  //   // console.log(
+  //   //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
+  //   // );
+  // };
 
   handleMarkAsNewFolder = ({ folderId, count }) => {
     const { socketSubscribers } = SocketHelper;
@@ -301,9 +307,7 @@ export class SocketService {
 
   wsModifyFolderCreate = async (opt) => {
     if (opt?.type === "file" && opt?.id) {
-      const foundIndex = this.rootStore.files.findIndex(
-        (x) => x.id === opt?.id,
-      );
+      let foundIndex = this.rootStore.files.findIndex((x) => x.id === opt?.id);
 
       const file = JSON.parse(opt?.data);
 
@@ -314,7 +318,7 @@ export class SocketService {
         return;
       }
 
-      //To update a file version
+      // To update a file version
       if (foundIndex > -1) {
         if (
           this.rootStore.files[foundIndex].version !== file.version ||
@@ -333,20 +337,16 @@ export class SocketService {
       );
 
       setTimeout(() => {
-        const foundIndex = this.rootStore.files.findIndex(
-          (x) => x.id === file.id,
-        );
+        foundIndex = this.rootStore.files.findIndex((x) => x.id === file.id);
         if (foundIndex > -1) {
-          //console.log("Skip in timeout");
+          // console.log("Skip in timeout");
           return null;
         }
 
         this.rootStore.createNewFilesQueue.enqueue(() => {
-          const foundIndex = this.rootStore.files.findIndex(
-            (x) => x.id === file.id,
-          );
+          foundIndex = this.rootStore.files.findIndex((x) => x.id === file.id);
           if (foundIndex > -1) {
-            //console.log("Skip in queue");
+            // console.log("Skip in queue");
             return null;
           }
 
@@ -405,7 +405,7 @@ export class SocketService {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      this.rootStore.getFileInfo(file.id); //this.setFile(file);
+      this.rootStore.getFileInfo(file.id); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
       if (

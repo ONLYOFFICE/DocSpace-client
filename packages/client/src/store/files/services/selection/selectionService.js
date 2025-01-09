@@ -26,10 +26,8 @@ class SelectionService {
     if (!item.parentId) {
       if (this.rootStore.activeFiles.some((elem) => elem.id === item.id))
         return;
-    } else {
-      if (this.rootStore.activeFolders.some((elem) => elem.id === item.id))
-        return;
-    }
+    } else if (this.rootStore.activeFolders.some((elem) => elem.id === item.id))
+      return;
 
     if (
       this.rootStore.bufferSelection?.id === item.id &&
@@ -39,7 +37,7 @@ class SelectionService {
     }
 
     const newSelection = this.rootStore.selection.filter(
-      (select) => !(select.id === item.id && select.fileType === item.fileType)
+      (select) => !(select.id === item.id && select.fileType === item.fileType),
     );
     this.setSelection(newSelection);
   }
@@ -47,7 +45,7 @@ class SelectionService {
   checkSelection(file) {
     if (this.rootStore.selection) {
       const foundIndex = this.rootStore.selection?.findIndex(
-        (x) => x.id === file.id
+        (x) => x.id === file.id,
       );
       if (foundIndex > -1) {
         runInAction(() => {
@@ -58,7 +56,7 @@ class SelectionService {
 
     if (this.rootStore.bufferSelection) {
       const foundIndex = [this.rootStore.bufferSelection].findIndex(
-        (x) => x.id === file.id
+        (x) => x.id === file.id,
       );
       if (foundIndex > -1) {
         runInAction(() => {

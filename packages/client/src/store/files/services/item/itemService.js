@@ -1,5 +1,9 @@
-import { RoomsProviderType, FileStatus, FilterType } from "@docspace/shared/enums";
-import { getDaysRemaining } from "@docspace/shared/utils";
+import {
+  RoomsProviderType,
+  FileStatus,
+  FilterType,
+} from "@docspace/shared/enums";
+import { getDaysRemaining } from "@docspace/shared/utils/date";
 import { getItemUrl } from "SRC_DIR/helpers/filesUtils";
 
 class ItemService {
@@ -9,14 +13,20 @@ class ItemService {
 
   getFilesList() {
     const newFolders = [...this.rootStore.folders];
-    const orderItems = [...this.rootStore.folders, ...this.rootStore.files].filter((x) => x.order);
+    const orderItems = [
+      ...this.rootStore.folders,
+      ...this.rootStore.files,
+    ].filter((x) => x.order);
 
     if (orderItems.length > 0) {
       this.rootStore.isEmptyPage && this.rootStore.setIsEmptyPage(false);
 
       orderItems.sort((a, b) => {
         if (a.order.includes(".")) {
-          return Number(a.order.split(".").at(-1)) - Number(b.order.split(".").at(-1));
+          return (
+            Number(a.order.split(".").at(-1)) -
+            Number(b.order.split(".").at(-1))
+          );
         }
 
         return Number(a.order) - Number(b.order);
@@ -129,7 +139,8 @@ class ItemService {
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
       const needConvert = item.viewAccessibility?.MustConvert;
-      const isEditing = (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
+      const isEditing =
+        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const previewUrl = canOpenPlayer
         ? getItemUrl(
@@ -146,7 +157,7 @@ class ItemService {
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
       let isFolder = false;
-      this.rootStore.folders.map((x) => {
+      this.rootStore.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
       });
 
@@ -177,13 +188,12 @@ class ItemService {
 
       const href = isRecycleBinFolder
         ? null
-        : previewUrl
-          ? previewUrl
-          : !isFolder
+        : previewUrl ||
+          (!isFolder
             ? item.fileType === FilterType.Archive
               ? item.webUrl
               : docUrl
-            : folderUrl;
+            : folderUrl);
 
       const isRoom = !!roomType;
 
@@ -215,7 +225,7 @@ class ItemService {
       const pluginOptions = {};
 
       if (enablePlugins && fileItemsList) {
-        fileItemsList.forEach(({ key, value }) => {
+        fileItemsList.forEach(({ value }) => {
           if (value.extension === fileExst) {
             if (value.fileTypeName)
               pluginOptions.fileTypeName = value.fileTypeName;

@@ -1,5 +1,6 @@
 import { runInAction } from "mobx";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { toJSON } from "@docspace/shared/api/rooms/filter";
 
 class FilterService {
   constructor(rootStore) {

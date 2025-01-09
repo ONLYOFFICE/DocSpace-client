@@ -1,8 +1,21 @@
-import { jest } from "@jest/globals";
+import {
+  expect,
+  jest,
+  it,
+  describe,
+  afterEach,
+  beforeEach,
+} from "@jest/globals";
 // import FilesStore from "../FilesStore.js";
-import FilesStore from "../FilesStore.js";
-// import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
+import api from "@docspace/shared/api";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { SocketEvents } from "@docspace/shared/utils/socket";
+import axios from "axios";
+import { frameCallEvent } from "@docspace/shared/utils/frame";
+import SocketHelper from "../../../__mocks__/socket";
+import FilesStore from "../FilesStore";
 
 // Mock dependencies
 jest.mock("@docspace/shared/api");
@@ -767,7 +780,9 @@ describe("FilesStore", () => {
         expect(store.selectedFolderStore.setFilesCount).toHaveBeenCalledWith(6);
 
         // Wait for the setTimeout
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => {
+          setTimeout(resolve, 300);
+        });
 
         expect(store.createNewFilesQueue.enqueue).toHaveBeenCalled();
       });
@@ -2806,8 +2821,8 @@ describe("FilesStore", () => {
         await store.fetchFiles("privacy-folder", null);
 
         expect(store.selectedFolderStore.setSelectedFolder).toHaveBeenCalled();
-        const setFolderArg =
-          store.selectedFolderStore.setSelectedFolder.mock.calls[0][0];
+        // const setFolderArg =
+        //   store.selectedFolderStore.setSelectedFolder.mock.calls[0][0];
         // Add assertions specific to privacy folder handling
       });
 

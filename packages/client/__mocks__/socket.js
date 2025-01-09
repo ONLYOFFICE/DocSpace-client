@@ -1,3 +1,5 @@
+import { jest } from "@jest/globals";
+
 const SocketEvents = {
   ModifyFolder: "s:modify-folder",
   UpdateHistory: "s:update-history",
@@ -11,12 +13,12 @@ const SocketEvents = {
   DELETE_FILE: "s:delete-file",
   UPDATE_FILE: "s:update-file",
   MOVE_FILE: "s:move-file",
-  COPY_FILE: "s:copy-file"
+  COPY_FILE: "s:copy-file",
 };
 
 const SocketCommands = {
   SUBSCRIBE: "subscribe",
-  UNSUBSCRIBE: "unsubscribe"
+  UNSUBSCRIBE: "unsubscribe",
 };
 
 const SocketHelper = {
@@ -24,11 +26,11 @@ const SocketHelper = {
   emit: jest.fn(),
   subscribe: jest.fn(),
   unsubscribe: jest.fn(),
-  socketSubscribers: new Map()
+  socketSubscribers: new Map(),
 };
 
 module.exports = {
   SocketEvents,
   SocketCommands,
-  default: SocketHelper
+  default: SocketHelper,
 };

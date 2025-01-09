@@ -24,14 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { isDesktop } from "@docspace/shared/utils/device";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryType } from "SRC_DIR/helpers/category";
+import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import debounce from "lodash.debounce";
+import Queue from "queue-promise";
 import ThumbnailService from "../services/thumbnail/thumbnailService";
 import SocketService from "../services/socket/socketService";
-import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import FileService from "../services/file/fileService";
 import SelectionService from "../services/selection/selectionService";
 import FilterService from "../services/filter/filterService";
@@ -45,71 +47,85 @@ class FilesStore {
    * @type {Object}
    */
   authStore;
+
   /**
    * User store instance
    * @type {Object}
    */
   userStore;
+
   /**
    * Current tariff status store instance
    * @type {Object}
    */
   currentTariffStatusStore;
+
   /**
    * Selected folder store instance
    * @type {Object}
    */
   selectedFolderStore;
+
   /**
    * Tree folders store instance
    * @type {Object}
    */
   treeFoldersStore;
+
   /**
    * Files settings store instance
    * @type {Object}
    */
   filesSettingsStore;
+
   /**
    * Third party integration store instance
    * @type {Object}
    */
   thirdPartyStore;
+
   /**
    * Client loading state store instance
    * @type {Object}
    */
   clientLoadingStore;
+
   /**
    * Info panel store instance
    * @type {Object}
    */
   infoPanelStore;
+
   /**
    * Access rights store instance
    * @type {Object}
    */
   accessRightsStore;
+
   /**
    * Public room store instance
    * @type {Object}
    */
   publicRoomStore;
+
   /**
    * Settings store instance
    * @type {Object}
    */
   settingsStore;
+
   /**
    * Current quota store instance
    * @type {Object}
    */
   currentQuotaStore;
+
   /**
    * Indexing store instance
    * @type {Object}
    */
   indexingStore;
+
   /**
    * Plugin store instance
    * @type {Object}
@@ -122,11 +138,13 @@ class FilesStore {
    */
   privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+
   /**
    * Flag indicating if drag operation is in progress
    * @type {boolean}
    */
   dragging = false;
+
   /**
    * URL for privacy instructions
    * @type {string}
@@ -138,26 +156,31 @@ class FilesStore {
    * @type {boolean}
    */
   isInit = false;
+
   /**
    * Flag indicating if a row item is being updated
    * @type {boolean}
    */
   isUpdatingRowItem = false;
+
   /**
    * Flag for password entry process
    * @type {boolean}
    */
   passwordEntryProcess = false;
+
   /**
    * X coordinate for tooltip positioning
    * @type {number}
    */
   tooltipPageX = 0;
+
   /**
    * Y coordinate for tooltip positioning
    * @type {number}
    */
   tooltipPageY = 0;
+
   /**
    * Flag indicating drag start
    * @type {boolean}
@@ -169,16 +192,19 @@ class FilesStore {
    * @type {boolean}
    */
   alreadyFetchingRooms = false;
+
   /**
    * Collection of files
    * @type {Array}
    */
   files = [];
+
   /**
    * Collection of folders
    * @type {Array}
    */
   folders = [];
+
   /**
    * Currently selected items
    * @type {Array}
@@ -190,11 +216,13 @@ class FilesStore {
    * @type {Object|null}
    */
   bufferSelection = null;
+
   /**
    * Selection state
    * @type {string}
    */
   selected = "close";
+
   /**
    * Filter for files
    * @type {Object}
@@ -229,11 +257,13 @@ class FilesStore {
    * @type {number|null}
    */
   loadTimeout = null;
+
   /**
    * Hotkey caret
    * @type {Object|null}
    */
   hotkeyCaret = null;
+
   /**
    * Hotkey caret start
    * @type {Object|null}
@@ -257,6 +287,7 @@ class FilesStore {
    * @type {boolean}
    */
   firstElemChecked = false;
+
   /**
    * Flag indicating if the header border is visible
    * @type {boolean}
@@ -274,6 +305,7 @@ class FilesStore {
    * @type {Object|null}
    */
   createdItem = null;
+
   /**
    * Item to scroll to
    * @type {Object|null}
@@ -303,16 +335,19 @@ class FilesStore {
    * @type {boolean}
    */
   isHidePagination = false;
+
   /**
    * Flag indicating if the trash is empty
    * @type {boolean}
    */
   trashIsEmpty = false;
+
   /**
    * Flag indicating if the main button is visible on mobile
    * @type {boolean}
    */
   mainButtonMobileVisible = true;
+
   /**
    * Flag indicating if files are being loaded
    * @type {boolean}
@@ -324,11 +359,13 @@ class FilesStore {
    * @type {boolean}
    */
   isEmptyPage = true;
+
   /**
    * Flag indicating if the page has been loaded
    * @type {boolean}
    */
   isLoadedFetchFiles = false;
+
   /**
    * Temporary action files IDs
    * @type {Array}
@@ -352,6 +389,7 @@ class FilesStore {
    * @type {AbortController}
    */
   roomsController = null;
+
   /**
    * Files controller
    * @type {AbortController}
@@ -369,16 +407,19 @@ class FilesStore {
    * @type {boolean}
    */
   isLoadedEmptyPage = false;
+
   /**
    * Flag indicating if the current room notifications are muted
    * @type {boolean}
    */
   isMuteCurrentRoomNotifications = false;
+
   /**
    * Flag indicating if the preview is enabled
    * @type {boolean}
    */
   isPreview = false;
+
   /**
    * Temporary filter
    * @type {Object|null}
@@ -390,16 +431,13 @@ class FilesStore {
    * @type {Object}
    */
   highlightFile = {};
-  /**
-   * Thumbnails
-   * @type {Set}
-   */
-  thumbnails = new Set();
+
   /**
    * Flag indicating if a move operation is in progress
    * @type {boolean}
    */
   movingInProgress = false;
+
   /**
    * Queue for creating new files
    * @type {Queue}

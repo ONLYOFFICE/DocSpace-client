@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import FilesSelector from "../../components/FilesSelector";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import {
   frameCallEvent,

@@ -2106,23 +2106,19 @@ class FilesStore {
         } else if (axios.isCancel(err)) {
           console.log("Request canceled", err.message);
         } else {
-          if (axios.isCancel(err)) {
-            console.log("Request canceled", err.message);
-          } else {
-            // toastr.error(err);
-            console.error(err);
-            if (isThirdPartyError) {
-              const userId = this.userStore?.user?.id;
-              const searchArea = window.DocSpace.location.pathname.includes(
-                "shared",
-              )
-                ? RoomSearchArea.Active
-                : RoomSearchArea.Archive;
+          // toastr.error(err);
+          console.error(err);
+          if (isThirdPartyError) {
+            const userId = this.userStore?.user?.id;
+            const searchArea = window.DocSpace.location.pathname.includes(
+              "shared",
+            )
+              ? RoomSearchArea.Active
+              : RoomSearchArea.Archive;
 
-              return window.DocSpace.navigate(
-                `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
-              );
-            }
+            return window.DocSpace.navigate(
+              `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
+            );
           }
         }
       })
@@ -2141,9 +2137,9 @@ class FilesStore {
   fetchRooms = (
     folderId,
     filter,
-    clearFilter = true,
+    clearFilter = true, // eslint-disable-line  @typescript-eslint/no-unused-vars
     withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
-    clearSelection = true,
+    clearSelection = true, // eslint-disable-line  @typescript-eslint/no-unused-vars
     withFilterLocalStorage = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
@@ -3150,7 +3146,7 @@ class FilesStore {
 
       this.folders.unshift(item);
 
-      //console.log("[WS] subscribe to folder changes", item.id, item.title);
+      // console.log("[WS] subscribe to folder changes", item.id, item.title);
 
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: `DIR-${item.id}`,
@@ -3160,7 +3156,7 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === item?.id);
       if (foundIndex > -1) return;
 
-      //console.log("[WS] subscribe to file changes", item.id, item.title);
+      // console.log("[WS] subscribe to file changes", item.id, item.title);
 
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: `FILE-${item.id}`,
@@ -3333,7 +3329,8 @@ class FilesStore {
         showToast && showToast();
       })
       .catch((err) => {
-        toastr.error(err);
+        console.error(err);
+        // toastr.error(err);
       })
       .finally(() => {
         this.setTempActionFilesIds([]);

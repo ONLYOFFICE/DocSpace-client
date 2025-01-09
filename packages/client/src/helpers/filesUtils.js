@@ -35,9 +35,12 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
-import { getCategoryUrl } from "./category";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import config from "PACKAGE_FILE";
+import { getCategoryUrl } from "./category";
 import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
@@ -261,7 +264,7 @@ export const getItemUrl = (
 ) => {
   const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
-  const url = getCategoryUrl(categoryType, id);
+  let url = getCategoryUrl(categoryType, id);
 
   if (canOpenPlayer) {
     if (publicRoomKey) {
@@ -285,15 +288,15 @@ export const getItemUrl = (
       : null;
 
     return folderUrl;
-  } else {
-    const url = combineUrl(
-      proxyURL,
-      config.homepage,
-      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
-    );
-
-    return url;
   }
+
+  url = combineUrl(
+    proxyURL,
+    config.homepage,
+    `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+  );
+
+  return url;
 };
 
 // Used to update the number of tiles in a row after the window is resized.

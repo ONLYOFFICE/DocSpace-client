@@ -41,7 +41,7 @@ class FileService {
       let i = folderIds.length;
       while (i !== 0) {
         const folder = this.rootStore.folders.find(
-          (x) => x.id === folderIds[i - 1]
+          (x) => x.id === folderIds[i - 1],
         );
         if (folder) deleteCount += 1;
 
@@ -67,10 +67,10 @@ class FileService {
 
       const hotkeysClipboard = fileIds
         ? this.rootStore.hotkeysClipboard.filter(
-            (f) => !fileIds.includes(f.id) && !f.isFolder
+            (f) => !fileIds.includes(f.id) && !f.isFolder,
           )
         : this.rootStore.hotkeysClipboard.filter(
-            (f) => !folderIds.includes(f.id) && f.isFolder
+            (f) => !folderIds.includes(f.id) && f.isFolder,
           );
 
       this.rootStore.setIsEmptyPage(newFilter.total <= 0);
@@ -149,40 +149,39 @@ class FileService {
           this.rootStore.setTempActionFilesIds([]);
           this.rootStore.setTempActionFoldersIds([]);
         });
-    } else {
-      api.files
-        .getFolder(newFilter.folder, newFilter)
-        .then((res) => {
-          const files = fileIds
-            ? this.rootStore.files.filter((x) => !fileIds.includes(x.id))
-            : this.rootStore.files;
-          const folders = folderIds
-            ? this.rootStore.folders.filter((x) => !folderIds.includes(x.id))
-            : this.rootStore.folders;
-
-          const newFiles = [...files, ...res.files];
-          const newFolders = [...folders, ...res.folders];
-
-          const filter = this.rootStore.filter.clone();
-          filter.total = res.total;
-
-          runInAction(() => {
-            this.rootStore.setFilter(filter);
-            this.rootStore.setFiles(newFiles);
-            this.rootStore.setFolders(newFolders);
-          });
-
-          showToast && showToast();
-        })
-        .catch((err) => {
-          // toastr.error(err);
-          console.error(err);
-        })
-        .finally(() => {
-          this.rootStore.setTempActionFilesIds([]);
-          this.rootStore.setTempActionFoldersIds([]);
-        });
     }
+    api.files
+      .getFolder(newFilter.folder, newFilter)
+      .then((res) => {
+        const files = fileIds
+          ? this.rootStore.files.filter((x) => !fileIds.includes(x.id))
+          : this.rootStore.files;
+        const folders = folderIds
+          ? this.rootStore.folders.filter((x) => !folderIds.includes(x.id))
+          : this.rootStore.folders;
+
+        const newFiles = [...files, ...res.files];
+        const newFolders = [...folders, ...res.folders];
+
+        const filter = this.rootStore.filter.clone();
+        filter.total = res.total;
+
+        runInAction(() => {
+          this.rootStore.setFilter(filter);
+          this.rootStore.setFiles(newFiles);
+          this.rootStore.setFolders(newFolders);
+        });
+
+        showToast && showToast();
+      })
+      .catch((err) => {
+        // toastr.error(err);
+        console.error(err);
+      })
+      .finally(() => {
+        this.rootStore.setTempActionFilesIds([]);
+        this.rootStore.setTempActionFoldersIds([]);
+      });
   };
 }
 

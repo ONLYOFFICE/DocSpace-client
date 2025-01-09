@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CategoryType } from "./constants";
 import { FolderType } from "@docspace/shared/enums";
+import { CategoryType } from "./constants";
 import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts/constants";
 
 export const getCategoryType = (location) => {

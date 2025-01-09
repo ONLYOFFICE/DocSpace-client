@@ -410,7 +410,7 @@ const SetRoomParams = ({
         {element}
         <InputParam
           id="shared_room-name"
-          title={`${t("Common:Name")}:`}
+          title={`${t("Common:Label")}:`}
           placeholder={t("Common:EnterName")}
           value={roomParams.title}
           onChange={onChangeName}

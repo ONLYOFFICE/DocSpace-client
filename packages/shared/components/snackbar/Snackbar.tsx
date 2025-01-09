@@ -174,6 +174,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       >
         {htmlContent ? (
           <div
+            data-testid="snackbar-html-content"
             dangerouslySetInnerHTML={{
               __html: htmlContent,
             }}
@@ -184,6 +185,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
               {showIcon ? (
                 <Box className="logo">
                   <StyledLogoIcon
+                    data-testid="snackbar-icon"
                     size={IconSizeType.medium}
                     color={textColor}
                   />
@@ -196,6 +198,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 className="text-header"
                 style={headerStyles}
                 color={textColor}
+                data-testid="snackbar-header"
               >
                 {headerText}
               </Heading>
@@ -208,6 +211,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 fontSize={fontSize}
                 fontWeight={fontWeight}
                 noSelect
+                data-testid="snackbar-message"
               >
                 {text}
               </Text>

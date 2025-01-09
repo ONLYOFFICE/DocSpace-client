@@ -27,7 +27,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 
-import { FilterGroups, DeviceType } from "../../enums";
+import { DeviceType } from "../../enums";
 import { renderWithTheme } from "../../utils/render-with-theme";
 import Filter from ".";
 import { TSortDataItem } from "./Filter.types";
@@ -113,29 +113,6 @@ const baseProps = {
   onFilter: jest.fn(),
   onSortButtonClick: jest.fn(() => Promise.resolve([])),
 };
-
-const mockFilterData = [
-  {
-    group: FilterGroups.filterType,
-    key: "documents",
-    label: "Documents",
-    isHeader: true,
-    groupItem: [
-      {
-        group: FilterGroups.filterType,
-        key: "doc",
-        label: "DOC",
-        isSelected: false,
-      },
-      {
-        group: FilterGroups.filterType,
-        key: "pdf",
-        label: "PDF",
-        isSelected: false,
-      },
-    ],
-  },
-];
 
 describe("Filter Component", () => {
   beforeEach(() => {

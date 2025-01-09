@@ -1,0 +1,56 @@
+@import "../../styles/mixins";
+@import "../../styles/variables/_colors.scss";
+
+:root {
+  --disabled-selected-item-color: #{$gray};
+  --filter-input-selected-items-background: #{$gray-light-mid};
+  --filter-input-selected-items-hover-background: #{$light-gray-hover};
+
+  &[data-theme="dark"] {
+    --disabled-selected-item-color: #{$gray-dark-text};
+    --filter-input-selected-items-background: #{$gray-dark-mid};
+    --filter-input-selected-items-hover-background: #{$light-dark-gray-hover};
+  }
+}
+
+.label {
+  line-height: 20px;
+  margin-inline-end: 10px;
+  max-width: 23ch;
+
+  @include no-user-select;
+
+  @include truncate;
+
+  &.disabled {
+    color: var(--disabled-selected-item-color);
+  }
+}
+
+.selectedItem {
+  width: 100%;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  border-radius: 3px;
+
+  padding: 6px 8px;
+
+  margin-inline-end: 4px;
+  margin-bottom: 4px;
+
+  background: var(--filter-input-selected-items-background);
+
+  &.isInline {
+    width: fit-content;
+  }
+
+  &:not(.disabled):hover {
+    background: var(--filter-input-selected-items-hover-background);
+  }
+}

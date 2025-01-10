@@ -35,6 +35,7 @@ import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const ButtonContainer = (props) => {
   const {
@@ -108,7 +109,7 @@ const ButtonContainer = (props) => {
       navigate(
         combineUrl(
           window.ClientConfig?.proxy?.url,
-          config.homepage,
+          isManagement() ? "management" : config.homepage,
           "/preparation-portal",
         ),
       );

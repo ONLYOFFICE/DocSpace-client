@@ -49,6 +49,7 @@ interface ISectionProps {
   snackbarExist?: boolean;
   showText?: boolean;
   isInfoPanelScrollLocked?: boolean;
+  isPortalRestoring?: boolean;
 }
 
 const SectionWrapper = ({
@@ -67,6 +68,7 @@ const SectionWrapper = ({
   snackbarExist,
   showText,
   isInfoPanelScrollLocked,
+  isPortalRestoring,
 }: ISectionProps) => {
   return (
     <Section
@@ -86,9 +88,13 @@ const SectionWrapper = ({
       showText={showText}
       isInfoPanelScrollLocked={isInfoPanelScrollLocked}
     >
-      <Section.SectionHeader>
-        <SectionHeaderContent />
-      </Section.SectionHeader>
+      {!isPortalRestoring ? (
+        <Section.SectionHeader>
+          <SectionHeaderContent />
+        </Section.SectionHeader>
+      ) : (
+        <></>
+      )}
       <Section.SectionWarning>
         <Bar />
       </Section.SectionWarning>
@@ -115,6 +121,7 @@ export default inject(
       maintenanceExist,
       snackbarExist,
       showText,
+      isPortalRestoring,
     } = settingsStore;
 
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
@@ -143,6 +150,7 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
+      isPortalRestoring,
     };
   }
 )(observer(SectionWrapper));

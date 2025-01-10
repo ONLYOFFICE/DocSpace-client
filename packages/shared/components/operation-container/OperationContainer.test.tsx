@@ -23,12 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { createGlobalStyle } from "styled-components";
 import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 jest.mock("PUBLIC_DIR/images/downloading.react.svg", () => {
   const MockSvgComponent = () => {
@@ -64,7 +63,7 @@ describe("OperationContainer", () => {
   };
 
   const renderComponent = (props: OperationContainerProps = defaultProps) => {
-    return renderWithTheme(
+    return render(
       <>
         <GlobalStyle />
         <OperationContainer {...props} />

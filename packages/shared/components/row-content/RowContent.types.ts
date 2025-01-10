@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface RowContentProps {
+export type RowContentProps = {
   /** Components displayed inside RowContent */
   children: React.ReactNode[];
   /** Accepts class */
@@ -43,4 +43,4 @@ export interface RowContentProps {
   sectionWidth?: number;
   /** Converts the SideInfo */
   convertSideInfo?: boolean;
-}
+};

@@ -1,0 +1,106 @@
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
+
+:root {
+  --row-content-margin: 0 6px;
+  --row-content-font-size: 12px;
+  --row-content-font-style: normal;
+  --row-content-font-weight: 600;
+  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-height: 56px;
+  --row-content-max-width: 100%;
+
+  --row-content-side-info-min-width: 160px;
+  --row-content-side-info-margin: 0 6px;
+  --row-content-side-info-width: 160px;
+
+  --row-content-main-wrapper-min-width: 140px;
+  --row-content-main-wrapper-margin-right: 8px;
+  --row-content-main-wrapper-margin-top: 8px;
+  --row-content-main-wrapper-width: 95%;
+
+  --row-content-icons-height: 19px;
+}
+
+.common {
+  margin: var(--row-content-margin);
+  font-family: var(--row-content-font-family);
+  font-size: var(--row-content-font-size);
+  font-style: var(--row-content-font-style);
+  font-weight: var(--row-content-font-weight);
+}
+
+.rowContent {
+  width: 100%;
+  display: inline-flex;
+
+  display: block;
+  height: var(--row-content-height);
+}
+
+.mainContainerWrapper {
+  @extend .common;
+  display: flex;
+  align-self: center;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  width: var(--main-container-width);
+  min-width: 140px;
+
+  @include truncate;
+
+  min-width: var(--row-content-main-wrapper-min-width);
+  margin-top: var(--row-content-main-wrapper-margin-top);
+  width: var(--row-content-main-wrapper-width);
+  margin-inline-end: var(--row-content-main-wrapper-margin-right);
+}
+
+.mainContainer {
+  height: 20px;
+  max-width: 100%;
+  margin-inline-end: 8px;
+
+  @include truncate;
+  max-width: var(--row-content-max-width);
+
+  @include tablet {
+    @include truncate;
+    max-width: var(--row-content-max-width);
+  }
+}
+
+.mainIcons {
+  height: var(--row-content-icons-height);
+  align-self: center;
+  white-space: nowrap;
+}
+
+.sideContainerWrapper {
+  @extend .common;
+  @include truncate;
+
+  @include tablet {
+    @include truncate;
+  }
+
+  align-self: center;
+  align-items: center;
+
+  > a {
+    vertical-align: middle;
+  }
+
+  display: none;
+}
+
+.tabletSideInfo {
+  display: none;
+  display: block;
+  min-width: var(--row-content-side-info-min-width);
+  @include truncate;
+
+  @include tablet {
+    display: block;
+  }
+}

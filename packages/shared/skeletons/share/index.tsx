@@ -92,7 +92,7 @@ const ShareSkeleton = ({ t }: ShareSkeletonProps) => {
   return (
     <StyledWrapper>
       <Text fontSize="14px" fontWeight={600} className="title-link">
-        {t("Files:SharedLinks")}
+        {t("Common:SharedLinks")}
       </Text>
       <RowSkeleton />
       <div className="title">

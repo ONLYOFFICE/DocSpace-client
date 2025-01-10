@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { VDRIndexingAction } from "enums";
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "../../context-menu";
 
 export type TData = {
   contextOptions: ContextMenuModel[];

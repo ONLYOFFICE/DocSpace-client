@@ -27,7 +27,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Row } from "./Row";
+import { Row } from ".";
 
 const baseProps = {
   checked: false,

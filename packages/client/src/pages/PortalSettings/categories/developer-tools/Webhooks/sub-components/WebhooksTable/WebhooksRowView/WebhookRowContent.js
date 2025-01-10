@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import { isMobile, tablet } from "@docspace/shared/utils";

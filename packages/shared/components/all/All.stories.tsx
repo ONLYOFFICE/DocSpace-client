@@ -53,7 +53,7 @@ import { FieldContainer } from "../field-container";
 import { Heading, HeadingSize } from "../heading";
 import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
-import { Row } from "../row";
+import { Row } from "../rows";
 import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";
 import { Text } from "../text";

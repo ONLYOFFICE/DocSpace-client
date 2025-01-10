@@ -27,7 +27,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { RowContainer } from "./RowContainer";
+import { RowContainer } from ".";
 
 const baseProps = {
   manualHeight: "500px",

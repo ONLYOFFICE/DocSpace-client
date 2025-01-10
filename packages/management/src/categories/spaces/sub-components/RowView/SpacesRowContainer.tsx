@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
 import SpacesRoomRow from "./SpacesRoomRow";
 import styled from "styled-components";
 import { TPortals } from "SRC_DIR/types/spaces";

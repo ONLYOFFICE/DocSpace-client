@@ -24,4 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Row } from "./Row";
+import React from "react";
+import classNames from "classnames";
+
+import { InfiniteLoaderComponent } from "../../infinite-loader";
+import { RowContainerProps } from "./RowContainer.types";
+import styles from "./RowContainer.module.scss";
+
+const RowContainer = (props: RowContainerProps) => {
+  const {
+    manualHeight,
+    itemHeight = 50,
+    children,
+    useReactWindow = true,
+    id = "rowContainer",
+    className,
+    style,
+    onScroll,
+    filesLength,
+    itemCount,
+    fetchMoreFiles,
+    hasMoreFiles,
+  } = props;
+
+  const containerStyle = manualHeight
+    ? ({ ...style, "--manual-height": manualHeight } as React.CSSProperties)
+    : style;
+
+  return (
+    <div
+      id={id}
+      className={classNames(styles.container, className, {
+        [styles.useReactWindow]: useReactWindow,
+        [styles.manualHeight]: manualHeight,
+      })}
+      style={containerStyle}
+      data-testid="row-container"
+    >
+      {useReactWindow ? (
+        <InfiniteLoaderComponent
+          className="List"
+          viewAs="row"
+          hasMoreFiles={hasMoreFiles}
+          filesLength={filesLength}
+          itemCount={itemCount}
+          loadMoreItems={fetchMoreFiles}
+          itemSize={itemHeight}
+          onScroll={onScroll}
+        >
+          {children}
+        </InfiniteLoaderComponent>
+      ) : (
+        children
+      )}
+    </div>
+  );
+};
+
+export { RowContainer };

@@ -28,9 +28,9 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { Link, LinkType } from "../link";
-import { RowContent } from "./RowContent";
-import { globalColors } from "../../themes";
+import { Link, LinkType } from "../../link";
+import { RowContent } from ".";
+import { globalColors } from "../../../themes";
 
 const mainLink = (
   <div style={{ width: "140px" }}>

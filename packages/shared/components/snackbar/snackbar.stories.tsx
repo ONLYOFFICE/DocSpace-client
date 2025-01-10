@@ -39,7 +39,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "SnackBar is a component for displaying temporary notifications, alerts, or messages to users. It can be customized with various styles and behaviors.",
+        component:
+          "SnackBar is a component for displaying temporary notifications, alerts, or messages to users. It can be customized with various styles and behaviors.",
       },
     },
   },
@@ -135,7 +136,8 @@ export const WithHtmlContent: Story = {
   render: (args) => <BaseTemplate {...args} />,
   args: {
     ...Default.args,
-    htmlContent: "<p>This is <strong>HTML</strong> content with <em>formatting</em></p>",
+    htmlContent:
+      "<p>This is <strong>HTML</strong> content with <em>formatting</em></p>",
     text: undefined,
   },
 };

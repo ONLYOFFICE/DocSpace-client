@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
 

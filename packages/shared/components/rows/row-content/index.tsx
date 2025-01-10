@@ -26,7 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 import styles from "./RowContent.module.scss";
 import { RowContentProps } from "./RowContent.types";
 import { getSideInfo } from "./RowContent.utils";
@@ -63,7 +63,11 @@ const RowContent = (props: RowContentProps) => {
 
   return (
     <div
-      className={classNames(styles.rowContent, className)}
+      className={classNames(
+        styles.rowContent,
+        { [styles.sectionWidth]: sectionWidth },
+        className,
+      )}
       id={id}
       onClick={onClick}
       style={style}

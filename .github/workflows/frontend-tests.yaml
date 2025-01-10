@@ -50,7 +50,7 @@ jobs:
         run: yarn cache clean
       - name: Install dependencies
         run: yarn install --no-immutable
-      - name: Lint clients
+      - name: Run unit tests
         run: yarn test
   common:
     name: "Common tests"

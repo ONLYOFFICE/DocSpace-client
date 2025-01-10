@@ -35,6 +35,21 @@ jobs:
         run: yarn install
       - name: Lint clients
         run: yarn lint
+  unit-tests:
+    name: "Unit tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: enable corepack
+        run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint clients
+        run: yarn test
   common:
     name: "Common tests"
     runs-on: ubuntu-latest

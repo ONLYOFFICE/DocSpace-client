@@ -73,7 +73,8 @@
     "screenfull": "^5.2.0",
     "sjcl": "^1.0.8",
     "socket.io-client": "^4.8.0",
-    "styled-components": "^5.3.11",
+    "styled-components": "^6.0.0",
+    "stylis": "^4.0.0",
     "utif": "^3.1.0",
     "workbox-window": "^6.6.0",
     "zoom-level": "^2.5.0"
@@ -127,6 +128,7 @@
     "@types/react-window": "^1.8.8",
     "@types/react-window-infinite-loader": "^1.0.9",
     "@types/sjcl": "^1.0.34",
+    "@types/stylis": "^4",
     "@types/utif": "^3.0.5",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",

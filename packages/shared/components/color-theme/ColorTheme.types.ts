@@ -77,7 +77,9 @@ export interface IndicatorFilterButtonColorTheme
   themeId: ThemeId.IndicatorFilterButton;
 }
 
-export interface IndexIconButton extends DefaultColorThemeProps {
+export interface IndexIconButton
+  extends IconButtonProps,
+    DefaultColorThemeProps {
   themeId: ThemeId.IndexIconButton;
 }
 

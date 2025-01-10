@@ -24,12 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { VDRIndexingAction } from "enums";
 import { ContextMenuModel } from "../context-menu";
 
-export type TData = { contextOptions: ContextMenuModel[] };
+export type TData = {
+  contextOptions: ContextMenuModel[];
+};
+
 export type TMode = "modern" | "default";
 
-export interface RowProps {
+export type RowProps = {
   /** Required for hosting the Checkbox component. Its location is always fixed in the first position.
    * If there is no value, the occupied space is distributed among the other child elements. */
   checked: boolean;
@@ -69,14 +73,22 @@ export interface RowProps {
   mode?: TMode;
   /** Removes the borders */
   withoutBorder?: boolean;
+  /** Required for index editing mode */
   isIndexEditingMode: boolean;
+  /** Indicates if the row represents a room */
   isRoom?: boolean;
+  /** Title for the context menu */
   contextTitle?: string;
+  /** Component for displaying badges */
   badgesComponent?: React.ReactNode;
+  /** Indicates if the row is archived */
   isArchive?: boolean;
+  /** Callback for closing the row context */
   rowContextClose?: () => void;
+  /** URL for the badge */
   badgeUrl?: string;
   /** Disables checkbox */
   isDisabled?: boolean;
-  onChangeIndex: VoidFunction;
-}
+  /** Callback for changing index */
+  onChangeIndex: (action: VDRIndexingAction) => VoidFunction;
+};

@@ -27,6 +27,9 @@
 import React, { useRef } from "react";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
+import classNames from "classnames";
+import { IconSizeType } from "../../utils";
+
 import { VDRIndexingAction } from "../../enums";
 import { isMobile as isMobileUtils } from "../../utils/device";
 
@@ -38,16 +41,9 @@ import {
 } from "../context-menu-button";
 import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import { Loader, LoaderTypes } from "../loader";
-import {
-  StyledOptionButton,
-  StyledContentElement,
-  StyledElement,
-  StyledCheckbox,
-  StyledContent,
-  StyledRow,
-} from "./Row.styled";
 import { RowProps } from "./Row.types";
 import { hasOwnProperty } from "../../utils/object";
+import styles from "./Row.module.scss";
 
 const Row = (props: RowProps) => {
   const {
@@ -112,14 +108,7 @@ const Row = (props: RowProps) => {
     if (cm.current) cm.current.show(e);
   };
 
-  let contextMenuHeader = {
-    title: "",
-    icon: "",
-    avatar: "",
-    color: "",
-    cover: "",
-    logo: "",
-  };
+  let contextMenuHeader;
   if (React.isValidElement(children) && children.props.item) {
     contextMenuHeader = {
       icon: children.props.item.icon,
@@ -130,6 +119,10 @@ const Row = (props: RowProps) => {
       color: children.props.item.logo?.color,
       logo: children.props.item.logo?.medium,
       cover: children.props.item.logo?.cover,
+      original: "",
+      large: "",
+      medium: "",
+      small: "",
     };
   }
 
@@ -139,21 +132,30 @@ const Row = (props: RowProps) => {
     onSelect?.(true, data);
   };
 
-  const changeIndex = (e, action) => {
+  const changeIndex = (
+    e: React.MouseEvent<HTMLElement>,
+    action: VDRIndexingAction,
+  ) => {
     e.stopPropagation();
     onChangeIndex(action);
   };
 
+  console.log("mode", mode);
+
   return (
-    <StyledRow
+    <div
       ref={row}
-      //   {...rest}
-      mode={mode}
       onContextMenu={onContextMenu}
-      withoutBorder={withoutBorder}
+      className={classNames(
+        styles.row,
+        {
+          [styles.withoutBorder]: withoutBorder,
+          [styles.modern]: mode === "modern",
+          [styles.checked]: checked,
+        },
+        className,
+      )}
       data-testid="row"
-      checked={checked}
-      className={className}
     >
       {inProgress ? (
         <Loader
@@ -165,7 +167,13 @@ const Row = (props: RowProps) => {
       ) : (
         <>
           {mode === "default" && renderCheckbox ? (
-            <StyledCheckbox mode={mode} className="not-selectable">
+            <div
+              className={classNames(
+                styles.checkboxElement,
+                { [styles.isIndexEditingMode]: isIndexEditingMode },
+                "not-selectable",
+              )}
+            >
               <Checkbox
                 className="checkbox"
                 isChecked={checked}
@@ -173,48 +181,60 @@ const Row = (props: RowProps) => {
                 onChange={changeCheckbox}
                 isDisabled={isDisabled}
               />
-            </StyledCheckbox>
+            </div>
           ) : null}
           {mode === "modern" && renderCheckbox && renderElement ? (
-            <StyledCheckbox
-              className="not-selectable styled-checkbox-container"
-              mode={mode}
-              isIndexEditingMode={isIndexEditingMode}
+            <div
+              className={classNames(
+                styles.checkboxElement,
+                {
+                  [styles.isIndexEditingMode]: isIndexEditingMode,
+                  [styles.modern]: mode === "modern",
+                  [styles.checked]: checked,
+                },
+                "not-selectable styled-checkbox-container",
+              )}
             >
-              <StyledElement
+              <div
                 onClick={onElementClick}
-                className="styled-element"
+                className={classNames(styles.element, "styled-element")}
               >
                 {element}
-              </StyledElement>
+              </div>
               <Checkbox
-                className="checkbox"
+                className={classNames(styles.checkbox, "checkbox")}
                 isChecked={checked}
                 isIndeterminate={indeterminate}
                 onChange={changeCheckbox}
                 isDisabled={isDisabled}
               />
-            </StyledCheckbox>
+            </div>
           ) : null}
 
           {mode === "default" && renderElement ? (
-            <StyledElement onClick={onRowClick} className="styled-element">
+            <div
+              onClick={onRowClick}
+              className={classNames(styles.element, "styled-element")}
+            >
               {element}
-            </StyledElement>
+            </div>
           ) : null}
         </>
       )}
 
-      <StyledContent onClick={onRowClick} className="row_content">
+      <div
+        className={classNames(styles.content, "row_content")}
+        onClick={onRowClick}
+      >
         {children}
-      </StyledContent>
-      <StyledOptionButton
-        className="row_context-menu-wrapper"
-        spacerWidth={contextButtonSpacerWidth}
+      </div>
+      <div
+        className={classNames(styles.optionButton, "row_context-menu-wrapper")}
+        style={{ ["--manual-width" as string]: contextButtonSpacerWidth }}
       >
         {badgesComponent || null}
         {renderContentElement ? (
-          <StyledContentElement>{contentElement}</StyledContentElement>
+          <div className={styles.contentElement}>{contentElement}</div>
         ) : null}
         {isIndexEditingMode ? (
           <>
@@ -222,8 +242,8 @@ const Row = (props: RowProps) => {
               themeId={ThemeId.IndexIconButton}
               iconName={ArrowReactSvgUrl}
               className="index-up-icon"
-              size="small"
-              onClick={(e: React.MouseEvent) =>
+              size={IconSizeType.small}
+              onClick={(e: React.MouseEvent<HTMLElement>) =>
                 changeIndex(e, VDRIndexingAction.HigherIndex)
               }
             />
@@ -231,8 +251,8 @@ const Row = (props: RowProps) => {
               themeId={ThemeId.IndexIconButton}
               iconName={ArrowReactSvgUrl}
               className="index-down-icon"
-              size="small"
-              onClick={(e: React.MouseEvent) =>
+              size={IconSizeType.small}
+              onClick={(e: React.MouseEvent<HTMLElement>) =>
                 changeIndex(e, VDRIndexingAction.LowerIndex)
               }
             />
@@ -265,8 +285,8 @@ const Row = (props: RowProps) => {
             />
           </>
         )}
-      </StyledOptionButton>
-    </StyledRow>
+      </div>
+    </div>
   );
 };
 

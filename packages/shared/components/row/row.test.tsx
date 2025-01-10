@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
 import { Row } from "./Row";
 
 const baseProps = {
@@ -35,6 +34,7 @@ const baseProps = {
   element: <span>1</span>,
   contextOptions: [{ key: "1", label: "test" }],
   children: <span>Some text</span>,
+  onChangeIndex: () => () => {},
 };
 
 describe("<Row />", () => {
@@ -46,84 +46,99 @@ describe("<Row />", () => {
     expect(screen.getByTestId("row")).toBeInTheDocument();
   });
 
-  // it("call changeCheckbox(e)", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onSelect = jest.fn();
-  //   const wrapper = shallow(
-  //     <Row
-  //       {...baseProps}
-  //       // @ts-expect-error TS(2322): Type '{ onChange: any; onSelect: any; data: { test... Remove this comment to see the full error message
-  //       onChange={onSelect}
-  //       onSelect={onSelect}
-  //       data={{ test: "test" }}
-  //     />,
-  //   );
+  it("renders checkbox with correct styling", () => {
+    render(
+      <Row
+        {...baseProps}
+        isIndexEditingMode={false}
+        onRowClick={() => {}}
+        mode="modern"
+      />,
+    );
 
-  //   wrapper.simulate("change", { target: { checked: true } });
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox.parentElement).toHaveClass("checkbox");
+  });
 
-  //   expect(onSelect).toHaveBeenCalled();
-  // });
+  it("handles checkbox state changes", () => {
+    const onSelect = jest.fn();
+    render(
+      <Row
+        {...baseProps}
+        onSelect={onSelect}
+        isIndexEditingMode={false}
+        onRowClick={() => {}}
+      />,
+    );
 
-  // it("renders with children", () => {
-  //   const wrapper = mount(<Row {...baseProps} />);
+    const checkbox = screen.getByRole("checkbox");
+    fireEvent.click(checkbox);
 
-  //   expect(wrapper).toHaveProp("children", baseProps.children);
-  // });
+    expect(onSelect).toHaveBeenCalled();
+  });
 
-  // it("renders with contentElement and sectionWidth", () => {
-  //   const element = <div>content</div>;
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ contentElement: Element; sectionWidth: num... Remove this comment to see the full error message
-  //     <Row {...baseProps} contentElement={element} sectionWidth={600} />,
-  //   );
+  it("shows checkbox when row is checked", () => {
+    render(
+      <Row
+        {...baseProps}
+        checked
+        isIndexEditingMode={false}
+        onRowClick={() => {}}
+      />,
+    );
 
-  //   expect(wrapper).toHaveProp("contentElement", element);
-  // });
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toBeVisible();
+    expect(checkbox).toBeChecked();
+  });
 
-  // it("can apply contextButtonSpacerWidth", () => {
-  //   const test = "10px";
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ contextButtonSpacerWidth: string; checked:... Remove this comment to see the full error message
-  //     <Row {...baseProps} contextButtonSpacerWidth={test} />,
-  //   );
+  it("applies modern styling class", () => {
+    render(
+      <Row
+        {...baseProps}
+        isIndexEditingMode={false}
+        onRowClick={() => {}}
+        mode="modern"
+      />,
+    );
 
-  //   expect(wrapper).toHaveProp("contextButtonSpacerWidth", test);
-  // });
+    const row = screen.getByTestId("row");
+    expect(row).toHaveClass("modern");
+  });
 
-  // it("can apply data property", () => {
-  //   const test = { test: "test" };
-  //   // @ts-expect-error TS(2322): Type '{ data: { test: string; }; checked: boolean;... Remove this comment to see the full error message
-  //   const wrapper = mount(<Row {...baseProps} data={test} />);
+  it("handles indeterminate checkbox state", () => {
+    render(
+      <Row
+        {...baseProps}
+        indeterminate
+        isIndexEditingMode={false}
+        onRowClick={() => {}}
+      />,
+    );
 
-  //   expect(wrapper).toHaveProp("data", test);
-  // });
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveProperty("indeterminate", true);
+  });
 
-  // it("can apply indeterminate", () => {
-  //   const test = true;
-  //   // @ts-expect-error TS(2322): Type '{ indeterminate: boolean; checked: boolean; ... Remove this comment to see the full error message
-  //   const wrapper = mount(<Row {...baseProps} indeterminate={test} />);
+  it("renders children content", () => {
+    render(
+      <Row {...baseProps} isIndexEditingMode={false} onRowClick={() => {}} />,
+    );
 
-  //   expect(wrapper).toHaveProp("indeterminate", test);
-  // });
+    expect(screen.getByText("Some text")).toBeInTheDocument();
+  });
 
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; checked: boolean; element: Ele... Remove this comment to see the full error message
-  //   const wrapper = mount(<Row {...baseProps} id="testId" />);
+  it("handles row click events", () => {
+    const onRowClick = jest.fn();
+    render(
+      <Row {...baseProps} isIndexEditingMode={false} onRowClick={onRowClick} />,
+    );
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; checked: boolean; eleme... Remove this comment to see the full error message
-  //   const wrapper = mount(<Row {...baseProps} className="test" />);
-
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // it("accepts style", () => {
-  //   // @ts-expect-error TS(2322): Type '{ style: { color: string; }; checked: boolea... Remove this comment to see the full error message
-  //   const wrapper = mount(<Row {...baseProps} style={{ color: "red" }} />);
-
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const content = screen.getByText("Some text").closest(".row_content");
+    expect(content).not.toBeNull();
+    if (content) {
+      fireEvent.click(content);
+      expect(onRowClick).toHaveBeenCalled();
+    }
+  });
 });

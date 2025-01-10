@@ -45,11 +45,11 @@ const GroupNameParam = ({
   return (
     <Styled.GroupNameParam>
       <Label
-        title={t("Common:Name")}
+        title={t("Common:Label")}
         className="input-label"
         display="display"
         htmlFor="create-group-name"
-        text={t("Common:Name")}
+        text={t("Common:Label")}
       />
 
       <FieldContainer

@@ -42,7 +42,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
     {
       id: "sort-by_name",
       key: "name_form",
-      label: t("Common:Name"),
+      label: t("Common:Label"),
       default: false,
       isSelected: false,
     },

@@ -45,7 +45,7 @@ import {
   MIN_SIZE_NAME_COLUMN,
   HANDLE_OFFSET,
 } from "./Table.constants";
-import { isDesktop } from "../../utils";
+import { isDesktop } from "../../utils/device";
 
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,
@@ -58,6 +58,8 @@ class TableHeaderComponent extends React.Component<
   headerRef: null | React.RefObject<HTMLDivElement> = null;
 
   throttledResize: null | DebouncedFunc<() => void> = null;
+
+  lastContainerWidth: number | null = null;
 
   constructor(props: TableHeaderProps) {
     super(props);
@@ -1040,14 +1042,13 @@ class TableHeaderComponent extends React.Component<
         this.resetColumns(true);
         return;
       }
-    } else {
+    } else if (!isResized) {
       this.resetColumns();
       return;
     }
 
     if (str) {
       container.style.gridTemplateColumns = str;
-
       this.updateTableRows(str);
 
       if (this.headerRef && this.headerRef.current) {
@@ -1217,7 +1218,12 @@ class TableHeaderComponent extends React.Component<
       }
     }
 
-    this.onResize(isResized);
+    // Only call onResize if not already resized and container width has changed
+    if (!isResized && container.clientWidth !== this.lastContainerWidth) {
+      // Cache lastContainerWidth result to prevent recursive calls
+      this.lastContainerWidth = container.clientWidth;
+      this.onResize(true);
+    }
   };
 
   render() {

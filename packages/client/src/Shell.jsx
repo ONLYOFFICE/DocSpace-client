@@ -133,10 +133,6 @@ const Shell = ({ page = "home", ...rest }) => {
     });
 
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "restore-backup",
-    });
-
-    SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 

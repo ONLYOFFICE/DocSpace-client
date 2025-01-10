@@ -48,7 +48,10 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement, getBackupProgressInfo } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  getBackupProgressInfo,
+} from "@docspace/shared/utils/common";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
 import { StyledModules, StyledManualBackup } from "../StyledBackup";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
@@ -205,7 +208,7 @@ class ManualBackup extends React.Component {
   };
 
   onMakeTemporaryBackup = async () => {
-    const { setDownloadingProgress, t, clearLocalStorage } = this.props;
+    const { setDownloadingProgress, clearLocalStorage } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
@@ -245,8 +248,6 @@ class ManualBackup extends React.Component {
   ) => {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
-      t,
-
       setDownloadingProgress,
       clearLocalStorage,
       setTemporaryLink,

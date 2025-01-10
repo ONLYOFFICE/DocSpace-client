@@ -34,14 +34,13 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+
 import {
   saveToLocalStorage,
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
-import i18n from "../i18n";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
@@ -114,6 +113,7 @@ class BackupStore {
   preparationPortalDialogVisible = false;
 
   downloadingProgress = 100;
+
   downloadingProgressError = "";
 
   temporaryLink = null;

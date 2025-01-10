@@ -46,6 +46,8 @@ jobs:
         with:
           node-version: 20
           cache: "yarn"
+      - name: Clear yarn cache
+        run: yarn cache clean
       - name: Install dependencies
         run: yarn install
       - name: Lint clients

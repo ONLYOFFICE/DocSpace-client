@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import StyledRowContainer from "./RowContainer.styled";
 import { InfiniteLoaderComponent } from "../infinite-loader";
 import { RowContainerProps } from "./RowContainer.types";
+import styles from "./RowContainer.module.scss";
 
 const RowContainer = (props: RowContainerProps) => {
   const {
@@ -46,13 +47,18 @@ const RowContainer = (props: RowContainerProps) => {
     hasMoreFiles,
   } = props;
 
+  const containerStyle = manualHeight
+    ? ({ ...style, "--manual-height": manualHeight } as React.CSSProperties)
+    : style;
+
   return (
-    <StyledRowContainer
+    <div
       id={id}
-      className={className}
-      style={style}
-      manualHeight={manualHeight}
-      useReactWindow={useReactWindow}
+      className={classNames(styles.container, className, {
+        [styles.useReactWindow]: useReactWindow,
+        [styles.manualHeight]: manualHeight,
+      })}
+      style={containerStyle}
       data-testid="row-container"
     >
       {useReactWindow ? (
@@ -71,7 +77,7 @@ const RowContainer = (props: RowContainerProps) => {
       ) : (
         children
       )}
-    </StyledRowContainer>
+    </div>
   );
 };
 

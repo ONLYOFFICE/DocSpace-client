@@ -25,117 +25,126 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
 import { RowContainer } from "./RowContainer";
 
 const baseProps = {
   manualHeight: "500px",
+  useReactWindow: true,
+  onScroll: jest.fn(),
+  fetchMoreFiles: jest.fn().mockResolvedValue(undefined),
+  hasMoreFiles: true,
+  itemCount: 2,
+  filesLength: 2,
+  itemHeight: 50,
 };
 
 describe("<RowContainer />", () => {
   it("renders without error", () => {
     render(
-      <RowContainer
-        {...baseProps}
-        useReactWindow
-        onScroll={() => {}}
-        fetchMoreFiles={async () => {}}
-        hasMoreFiles
-        itemCount={2}
-        filesLength={2}
-        itemHeight={50}
-      >
-        <span>Demo</span>
-        <span>Demo</span>
+      <RowContainer {...baseProps}>
+        <span>Demo1</span>
+        <span>Demo2</span>
       </RowContainer>,
     );
 
     expect(screen.getByTestId("row-container")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("row-container").querySelector(".List"),
+    ).toBeInTheDocument();
   });
 
-  // it("stop event on context click", () => {
-  //   const wrapper = shallow(
-  //     <RowContainer>
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
+  it("renders without react-window", () => {
+    render(
+      <RowContainer {...baseProps} useReactWindow={false}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  //   const event = { preventDefault: () => {} };
+    const container = screen.getByTestId("row-container");
+    expect(container).not.toHaveClass("useReactWindow");
+    expect(screen.getByText("Demo1")).toBeInTheDocument();
+    expect(screen.getByText("Demo2")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   jest.spyOn(event, "preventDefault");
+  it("renders with manual height", () => {
+    render(
+      <RowContainer {...baseProps}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  //   wrapper.simulate("contextmenu", event);
+    const container = screen.getByTestId("row-container");
+    expect(container).toHaveStyle({ "--manual-height": "500px" });
+  });
 
-  //   expect(event.preventDefault).not.toBeCalled();
-  // });
+  it("applies custom className", () => {
+    const customClass = "custom-class";
+    render(
+      <RowContainer {...baseProps} className={customClass}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  // it("renders like list", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <RowContainer useReactWindow={false}>
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
+    const container = screen.getByTestId("row-container");
+    expect(container).toHaveClass(customClass);
+  });
 
-  //   expect(wrapper).toExist();
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("height", "");
-  // });
+  it("applies custom id", () => {
+    const customId = "custom-id";
+    render(
+      <RowContainer {...baseProps} id={customId}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  // it("renders without manualHeight", () => {
-  //   const wrapper = mount(
-  //     <RowContainer>
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
+    const container = screen.getByTestId("row-container");
+    expect(container).toHaveAttribute("id", customId);
+  });
 
-  //   expect(wrapper).toExist();
-  // });
+  it("applies custom style", () => {
+    const customStyle = { backgroundColor: "red" };
+    render(
+      <RowContainer {...baseProps} style={customStyle}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  // it("render with normal rows", () => {
-  //   const wrapper = mount(
-  //     <RowContainer {...baseProps}>
-  //       // @ts-expect-error TS(2322): Type '{ children: string; contextOptions: { key: s... Remove this comment to see the full error message
-  //       <div contextOptions={[{ key: "1", label: "test" }]}>test</div>
-  //     </RowContainer>
-  //   );
+    const container = screen.getByTestId("row-container");
+    expect(container).toHaveStyle({ backgroundColor: "red" });
+  });
 
-  //   expect(wrapper).toExist();
-  // });
+  it("renders InfiniteLoaderComponent when useReactWindow is true", () => {
+    render(
+      <RowContainer {...baseProps}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <RowContainer {...baseProps} id="testId">
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
+    expect(
+      screen.getByTestId("row-container").querySelector(".List"),
+    ).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("renders children directly when useReactWindow is false", () => {
+    render(
+      <RowContainer {...baseProps} useReactWindow={false}>
+        <span>Demo1</span>
+        <span>Demo2</span>
+      </RowContainer>,
+    );
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <RowContainer {...baseProps} className="test">
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
-
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <RowContainer {...baseProps} style={{ color: "red" }}>
-  //       <span>Demo</span>
-  //     </RowContainer>
-  //   );
-
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    expect(
+      screen.getByTestId("row-container").querySelector(".List"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("Demo1")).toBeInTheDocument();
+    expect(screen.getByText("Demo2")).toBeInTheDocument();
+  });
 });

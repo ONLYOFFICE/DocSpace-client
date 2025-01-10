@@ -26,7 +26,7 @@
 
 import { IndexRange } from "react-virtualized";
 
-export interface RowContainerProps {
+export type RowContainerProps = {
   /** Height of one Row element. Required for the proper functioning of the scroll */
   itemHeight: number;
   /** Allows setting fixed block height for Row */
@@ -51,4 +51,4 @@ export interface RowContainerProps {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   /** The property required for the infinite loader */
   hasMoreFiles: boolean;
-}
+};

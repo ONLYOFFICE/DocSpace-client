@@ -61,7 +61,7 @@ const Guid = ({
   formFillingTipsNumber,
   setFormFillingTipsNumber,
   onClose,
-  guidRects,
+  position,
   viewAs,
 }: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
@@ -74,12 +74,6 @@ const Guid = ({
   const modalText = getHeaderText(formFillingTipsNumber, t);
 
   const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
-
-  const guidPosition = getGuidPosition(
-    guidRects,
-    formFillingTipsNumber,
-    viewAs,
-  );
 
   const onCloseBackdrop = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,21 +107,18 @@ const Guid = ({
     const screenHeight = document.documentElement.clientHeight;
     const screenWidth = document.documentElement.clientWidth;
 
-    if (guidPosition.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
+    if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
       setDirectionX("right");
     } else {
       setDirectionX("left");
     }
 
-    if (
-      screenHeight <
-      guidPosition.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
-    ) {
+    if (screenHeight < position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT) {
       return setModalBottom(
-        guidPosition.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT,
+        position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT,
       );
     }
-    setModalBottom(guidPosition.bottom + GUID_MODAL_MARGIN);
+    setModalBottom(position.bottom + GUID_MODAL_MARGIN);
   };
 
   React.useEffect(() => {
@@ -135,7 +126,7 @@ const Guid = ({
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [guidPosition.bottom]);
+  }, [position]);
 
   if (isMobile()) {
     onClose();
@@ -147,14 +138,12 @@ const Guid = ({
       <StyledClipped
         isBase={theme.isBase}
         className="guid-element"
-        position={guidPosition}
+        position={position}
       />
       <StyledDialog
         id="modal-onMouseDown-close"
         bottom={modalBottom}
-        left={
-          isLastTip && !isDesktop() ? guidPosition.left - MODAL_WIDTH : null
-        }
+        left={isLastTip && !isDesktop() ? position.left - MODAL_WIDTH : null}
         directionX={directionX}
         className={
           classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""

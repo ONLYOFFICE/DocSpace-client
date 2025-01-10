@@ -1470,6 +1470,10 @@ class FilesStore {
     this.setFilesFilter(this.tempFilter);
   };
 
+  get guidRects() {
+    return this.guidanceCoordinates;
+  }
+
   setRoomsFilter = (filter) => {
     filter.pageCount = 100;
 

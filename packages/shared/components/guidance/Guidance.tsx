@@ -29,9 +29,30 @@ import React from "react";
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
 import { GuidProps } from "./sub-components/Guid.types";
+import { getGuidPosition } from "./sub-components/Guid.utils";
 
 const Guidance = (props: GuidProps) => {
-  return <Portal element={<Guid {...props} />} />;
+  const { guidRects, formFillingTipsNumber, viewAs } = props;
+
+  const [position, setPosition] = React.useState();
+
+  const onResize = React.useCallback(() => {
+    const newPosition = getGuidPosition(
+      guidRects,
+      formFillingTipsNumber,
+      viewAs,
+    );
+    setPosition(newPosition);
+  }, [guidRects, formFillingTipsNumber, viewAs]);
+
+  React.useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, [guidRects, formFillingTipsNumber, viewAs, onResize]);
+
+  return <Portal element={<Guid position={position} {...props} />} />;
 };
 
 export { Guidance };

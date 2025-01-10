@@ -370,7 +370,6 @@ const SimpleFilesRow = (props) => {
     setGuidancePdf,
     setGuidanceReady,
     isTutorialEnabled,
-    // guidanceCoordinates,
   } = props;
 
   const isMobileDevice = isMobileUtile();

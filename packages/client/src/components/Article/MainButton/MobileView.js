@@ -81,7 +81,6 @@ const MobileView = ({
   mainButtonMobileVisible,
   uploaded,
   setGuidanceUploading,
-  guidanceCoordinates,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const [percentProgress, setPercentProgress] = React.useState(0);
@@ -115,11 +114,7 @@ const MobileView = ({
     window.addEventListener("resize", setGuidRects);
 
     return () => window.removeEventListener("resize", setGuidRects);
-  }, [
-    mainButtonRef?.current,
-    guidanceCoordinates.pdf,
-    guidanceCoordinates.ready,
-  ]);
+  }, [mainButtonRef?.current]);
 
   React.useEffect(() => {
     let currentPrimaryNumEl = primaryNumEl;

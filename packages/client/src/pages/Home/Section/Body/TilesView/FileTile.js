@@ -91,7 +91,6 @@ const FileTile = (props) => {
     selectableRef,
     setGuidancePdf,
     setGuidanceReady,
-    //    guidanceCoordinates,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -242,7 +241,6 @@ export default inject(
       highlightFile,
       setGuidancePdf,
       setGuidanceReady,
-      guidanceCoordinates,
     } = filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
@@ -264,7 +262,6 @@ export default inject(
       isDownload,
       setGuidancePdf,
       setGuidanceReady,
-      guidanceCoordinates,
     };
   },
 )(

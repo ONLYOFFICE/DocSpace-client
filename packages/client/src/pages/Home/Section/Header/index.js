@@ -270,7 +270,6 @@ const SectionHeaderContent = (props) => {
     rootFolderId,
     setGuidanceShare,
     setGuidanceUploading,
-    guidanceCoordinates,
   } = props;
 
   const location = useLocation();
@@ -579,7 +578,7 @@ const SectionHeaderContent = (props) => {
   ];
 
   const setGuidRects = () => {
-    if (buttonRef?.current) {
+    if (buttonRef?.current?.clientWidth) {
       setGuidanceShare(buttonRef.current.getClientRects()[0]);
     }
     if (addButtonRef?.current?.clientWidth) {
@@ -592,12 +591,7 @@ const SectionHeaderContent = (props) => {
     window.addEventListener("resize", setGuidRects);
 
     return () => window.removeEventListener("resize", setGuidRects);
-  }, [
-    buttonRef?.current,
-    addButtonRef?.current,
-    guidanceCoordinates.ready,
-    guidanceCoordinates.pdf,
-  ]);
+  }, [buttonRef?.current, addButtonRef?.current]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;

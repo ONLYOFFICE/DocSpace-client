@@ -103,8 +103,8 @@ const Shell = ({ page = "home", ...rest }) => {
     formFillingTipsNumber,
     setFormFillingTipsNumber,
     setFormFillingTipsDialog,
-    guidanceCoordinates,
     viewAs,
+    guidRects,
   } = rest;
 
   const theme = useTheme();
@@ -502,7 +502,7 @@ const Shell = ({ page = "home", ...rest }) => {
           formFillingTipsNumber={formFillingTipsNumber}
           setFormFillingTipsNumber={setFormFillingTipsNumber}
           onClose={onCloseGuidance}
-          guidRects={guidanceCoordinates}
+          guidRects={guidRects}
           viewAs={viewAs}
         />
       )}
@@ -546,7 +546,7 @@ const ShellWrapper = inject(
       clientError,
     } = authStore;
 
-    const { guidanceCoordinates, viewAs } = filesStore;
+    const { viewAs, guidRects } = filesStore;
 
     const {
       roomsMode,
@@ -641,8 +641,8 @@ const ShellWrapper = inject(
       barTypeInFrame: frameConfig?.showHeaderBanner,
       setShowGuestReleaseTip,
       releaseDate: buildVersionInfo.releaseDate,
-      guidanceCoordinates,
       viewAs,
+      guidRects,
     };
   },
 )(observer(Shell));

@@ -83,7 +83,6 @@ const FilesTableRow = (props) => {
     setGuidancePdf,
     setGuidanceReady,
     isTutorialEnabled,
-    guidanceCoordinates,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -188,7 +187,7 @@ const FilesTableRow = (props) => {
         rowRef.current.firstChild.offsetParent.getClientRects()[0],
       );
     }
-  }, [rowRef?.current, guidanceCoordinates.pdf, guidanceCoordinates.ready]);
+  }, [rowRef?.current]);
 
   return (
     <StyledDragAndDrop

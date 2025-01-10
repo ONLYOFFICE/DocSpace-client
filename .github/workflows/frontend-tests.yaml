@@ -32,7 +32,7 @@ jobs:
           node-version: 20
           cache: "yarn"
       - name: Install dependencies
-        run: yarn install --no-immutable
+        run: yarn install --no-immutable  --frozen-lockfile
       - name: Lint clients
         run: yarn lint
   unit-tests:
@@ -49,7 +49,7 @@ jobs:
       - name: Clear yarn cache
         run: yarn cache clean
       - name: Install dependencies
-        run: yarn install --no-immutable
+        run: yarn install --no-immutable  --mode=update-lockfile
       - name: Run unit tests
         run: yarn test
   common:

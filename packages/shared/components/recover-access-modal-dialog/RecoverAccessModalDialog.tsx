@@ -33,7 +33,7 @@ import { toastr } from "../toast";
 import { Button, ButtonSize } from "../button";
 import { Textarea } from "../textarea";
 import { EmailInput } from "../email-input";
-import { InputSize, InputType } from "../text-input";
+import { InputSize } from "../text-input";
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 import { FieldContainer } from "../field-container";
 import { TValidate } from "../email-input/EmailInput.types";

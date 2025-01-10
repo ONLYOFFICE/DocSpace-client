@@ -9,7 +9,7 @@ import { EmptyView } from ".";
 import type { EmptyViewProps } from "./EmptyView.types";
 
 const meta = {
-  title: "Components/EmptyView",
+  title: "Layout components/EmptyView",
   component: EmptyView,
   parameters: {
     docs: {

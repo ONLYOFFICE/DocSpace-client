@@ -36,9 +36,10 @@ import { SelectedItem } from "../selected-item";
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
 
-import { StyledFilterInput } from "./Filter.styled";
-import { FilterProps, TItem } from "./Filter.types";
 import useSearch from "./hooks/useSearch";
+
+import styles from "./Filter.module.scss";
+import { FilterProps, TItem } from "./Filter.types";
 
 const FilterInput = React.memo(
   ({
@@ -182,7 +183,7 @@ const FilterInput = React.memo(
     }, []);
 
     return (
-      <StyledFilterInput>
+      <div className={styles.filterInput}>
         <div className="filter-input_filter-row">
           {searchComponent}
           {!isIndexEditingMode ? (
@@ -264,7 +265,7 @@ const FilterInput = React.memo(
             ) : null}
           </div>
         ) : null}
-      </StyledFilterInput>
+      </div>
     );
   },
 );

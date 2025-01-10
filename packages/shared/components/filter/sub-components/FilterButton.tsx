@@ -25,12 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
+
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 
 import { IconButton } from "../../icon-button";
 
 import { FilterButtonProps } from "../Filter.types";
-import { StyledButton, StyledIndicator } from "../Filter.styled";
+
+import styles from "../Filter.module.scss";
 
 import FilterBlock from "./FilterBlock";
 
@@ -59,17 +62,20 @@ const FilterButton = ({
 
   return (
     <>
-      <StyledButton
+      <div
         id={id}
-        isOpen={showFilterBlock}
         onClick={changeShowFilterBlock}
         title={title}
+        className={classNames({
+          [styles.button]: true,
+          [styles.isOpen]: showFilterBlock,
+        })}
       >
         <IconButton iconName={FilterReactSvrUrl} size={16} />
         {selectedFilterValue && selectedFilterValue.size > 0 ? (
-          <StyledIndicator />
+          <div className={styles.indicator} />
         ) : null}
-      </StyledButton>
+      </div>
 
       {showFilterBlock ? (
         <FilterBlock

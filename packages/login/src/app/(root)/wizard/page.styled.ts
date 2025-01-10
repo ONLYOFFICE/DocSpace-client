@@ -65,7 +65,7 @@ export const WizardContainer = styled.div`
   }
 
   .password-field-wrapper {
-    width: 100%;
+    width: 100% !important;
   }
 
   .wizard-field {

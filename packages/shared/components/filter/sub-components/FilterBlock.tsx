@@ -38,9 +38,10 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Button, ButtonSize } from "../../button";
 import { TSelectorItem } from "../../selector";
+import { ModalDialog, ModalDialogType } from "../../modal-dialog";
+import { IconButton } from "../../icon-button";
 
-import { StyledFilterBlock, StyledFilterBlockHeader } from "../Filter.styled";
-
+import styles from "../Filter.module.scss";
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
 import {
   removeGroupManagerFilterValueIfNeeded,
@@ -48,8 +49,6 @@ import {
 } from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
-import { ModalDialog, ModalDialogType } from "../../modal-dialog";
-import { IconButton } from "../../icon-button";
 
 const FilterBlock = ({
   selectedFilterValue,
@@ -315,8 +314,8 @@ const FilterBlock = ({
     const newFilterValues: TGroupItem[] = [];
 
     headerItems.forEach((item, index) => {
-      const groupItems = data.filter(
-        (val) => val.group === item.group && val.isHeader !== true,
+      const groupItems = cloneDeep(
+        data.filter((i) => i.group === item.group && !i.isHeader),
       ) as TGroupItem[];
 
       headerItems[index].groupItem = groupItems.map((groupItem) => {
@@ -469,7 +468,7 @@ const FilterBlock = ({
     >
       {showSelector.show ? (
         <ModalDialog.Container>
-          <StyledFilterBlock>
+          <div className={styles.filterBlock}>
             {showSelector.type === FilterSelectorTypes.people ? (
               <PeopleSelector
                 withOutCurrentAuthorizedUser
@@ -518,12 +517,12 @@ const FilterBlock = ({
                 disableThirdParty={disableThirdParty}
               />
             )}
-          </StyledFilterBlock>
+          </div>
         </ModalDialog.Container>
       ) : null}
 
       <ModalDialog.Header>
-        <StyledFilterBlockHeader>
+        <div className={styles.filterBlockHeader}>
           {filterHeader}
 
           <div className="additional-icons-container">
@@ -539,7 +538,7 @@ const FilterBlock = ({
               />
             ) : null}
           </div>
-        </StyledFilterBlockHeader>
+        </div>
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="filter-body">

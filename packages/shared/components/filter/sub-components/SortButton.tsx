@@ -38,7 +38,7 @@ import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
-import { StyledSortButton } from "../Filter.styled";
+import styles from "../Filter.module.scss";
 
 const SortButton = ({
   id,
@@ -185,12 +185,13 @@ const SortButton = ({
   }
 
   return (
-    <StyledSortButton
-      viewAs={viewAs}
-      isDesc={selectedSortData.sortDirection === "desc"}
+    <div
       onClick={toggleCombobox}
       id={id}
       title={title}
+      className={styles.sortButton}
+      data-row-view={viewAs === "row" ? "true" : "false"}
+      data-desc={selectedSortData.sortDirection === "desc" ? "true" : "false"}
     >
       <ComboBox
         opened={isOpen}
@@ -214,7 +215,7 @@ const SortButton = ({
       >
         <IconButton iconName={SortReactSvgUrl} size={16} />
       </ComboBox>
-    </StyledSortButton>
+    </div>
   );
 };
 

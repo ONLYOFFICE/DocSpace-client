@@ -120,9 +120,9 @@ export function updateRoomMemberRole(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id,
-  signal = null,
   requestToken,
   filter,
+  signal = null,
 ) {
   let params = "";
 

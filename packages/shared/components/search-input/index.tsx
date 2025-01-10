@@ -136,7 +136,11 @@ const SearchInput = ({
 
   return (
     <div
-      className={classNames(styles.searchInputBlock, className)}
+      className={classNames(
+        styles.searchInputBlock,
+        { [styles.scale]: scale },
+        className,
+      )}
       id={id}
       style={style}
       data-testid="search-input"

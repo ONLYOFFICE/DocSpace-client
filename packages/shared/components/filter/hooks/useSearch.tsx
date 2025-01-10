@@ -27,8 +27,8 @@ import React from "react";
 import { isTablet, isIOS } from "react-device-detect";
 
 import { InputSize } from "../../text-input";
+import { SearchInput } from "../../search-input";
 
-import { StyledSearchInput } from "../Filter.styled";
 import { SearchInputProps } from "../Filter.types";
 
 const useSearch = ({
@@ -77,7 +77,7 @@ const useSearch = ({
   }, [getSelectedInputValue]);
 
   const searchComponent = (
-    <StyledSearchInput
+    <SearchInput
       forwardedRef={searchRef}
       placeholder={placeholder}
       value={inputValue}
@@ -87,6 +87,7 @@ const useSearch = ({
       size={InputSize.base}
       isDisabled={isIndexEditingMode}
       onFocus={onInputFocus}
+      scale
     />
   );
   return { searchComponent };

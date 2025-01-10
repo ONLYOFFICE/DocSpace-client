@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "../api/people/types";
 import {
   TGetColorTheme,
   TSettings,
@@ -89,7 +88,7 @@ declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     __ASC_INITIAL_EDITOR_STATE__?: {
-      user: TUser;
+      user: unknown;
       portalSettings: TSettings;
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;

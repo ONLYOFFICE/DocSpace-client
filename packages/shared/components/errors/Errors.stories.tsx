@@ -26,6 +26,12 @@
 
 import React from "react";
 import { Meta, Story } from "@storybook/react";
+import FirebaseHelper from "../../utils/firebase";
+import {
+  DeviceType,
+  EmployeeActivationStatus,
+  EmployeeStatus,
+} from "../../enums";
 
 import { Error401 } from "./Error401";
 import { Error403 } from "./Error403";
@@ -35,14 +41,9 @@ import { ErrorOfflineContainer } from "./ErrorOffline";
 import ErrorUnavailable from "./ErrorUnavailable";
 import { AccessRestricted } from "./AccessRestricted";
 import type { Error520Props } from "./Errors.types";
-import {
-  DeviceType,
-  EmployeeActivationStatus,
-  EmployeeStatus,
-} from "../../enums";
 
 export default {
-  title: "Components/Errors",
+  title: "Layout components/Errors",
   component: Error404,
   parameters: {
     docs: {
@@ -115,9 +116,6 @@ Error520Page.args = {
     hasAvatar: false,
   },
   version: "1.0.0",
-  firebaseHelper: {
-    init: () => {},
-    messaging: null,
-  },
+  firebaseHelper: {} as FirebaseHelper,
   currentDeviceType: DeviceType.desktop,
 };

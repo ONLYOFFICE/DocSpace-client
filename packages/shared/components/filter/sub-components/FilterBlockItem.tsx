@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import XIcon from "PUBLIC_DIR/images/x.react.svg";
 
@@ -34,22 +35,10 @@ import { SelectorAddButton } from "../../selector-add-button";
 import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { ComboBox } from "../../combobox";
 import { Checkbox } from "../../checkbox";
+import { Text } from "../../text";
+import { ToggleButton } from "../../toggle-button";
 
-import {
-  StyledFilterBlockItem,
-  StyledFilterBlockItemHeader,
-  StyledFilterBlockItemContent,
-  StyledFilterBlockItemSelector,
-  StyledFilterBlockItemSelectorText,
-  StyledFilterBlockItemTagText,
-  StyledFilterBlockItemTagIcon,
-  StyledFilterBlockItemToggle,
-  StyledFilterBlockItemToggleText,
-  StyledFilterBlockItemToggleButton,
-  StyledFilterBlockItemCheckboxContainer,
-  StyledFilterBlockItemSeparator,
-  StyledFilterBlockItemTag,
-} from "../Filter.styled";
+import styles from "../Filter.module.scss";
 import {
   FilterBlockItemProps,
   TCheckboxItem,
@@ -121,7 +110,8 @@ const FilterBlockItem = ({
       item.selectedKey === "me" ||
       item.selectedKey === FilterKeys.withoutGroup ||
       item.selectedKey === "other" ? (
-      <StyledFilterBlockItemSelector
+      <div
+        className={styles.filterBlockItemSelector}
         style={
           item?.displaySelectorType === "button"
             ? {}
@@ -135,14 +125,21 @@ const FilterBlockItem = ({
         {item?.displaySelectorType === "button" ? (
           <SelectorAddButton id="filter_add-author" />
         ) : null}
-        <StyledFilterBlockItemSelectorText noSelect>
+        <Text
+          fontSize="13px"
+          fontWeight={600}
+          lineHeight="15px"
+          noSelect
+          className={styles.filterBlockItemSelectorText}
+        >
           {item.label}
-        </StyledFilterBlockItemSelectorText>
-      </StyledFilterBlockItemSelector>
+        </Text>
+      </div>
     ) : (
-      <StyledFilterBlockItemTag
+      <div
         key={item.key}
-        isSelected={item.isSelected}
+        className={styles.filterBlockItemTag}
+        data-selected={item.isSelected ? "true" : "false"}
         onClick={(event: React.MouseEvent) =>
           showSelectorAction(
             event,
@@ -152,30 +149,38 @@ const FilterBlockItem = ({
           )
         }
       >
-        <StyledFilterBlockItemTagText
-          className="filter-text"
+        <Text
+          className={classNames(
+            styles.filterBlockItemTagText,
+
+            { [styles.selected]: item.isSelected },
+            "filter-text",
+          )}
           noSelect
-          isSelected={item.isSelected}
           truncate
+          fontSize="13px"
+          fontWeight={400}
+          lineHeight="20px"
         >
           {item?.selectedLabel?.toLowerCase()}
-        </StyledFilterBlockItemTagText>
+        </Text>
         {item.isSelected ? (
-          <StyledFilterBlockItemTagIcon ref={clearSelectorRef}>
+          <div className={styles.filterBlockItemTagIcon} ref={clearSelectorRef}>
             <XIcon style={{ marginTop: "2px" }} />
-          </StyledFilterBlockItemTagIcon>
+          </div>
         ) : null}
-      </StyledFilterBlockItemTag>
+      </div>
     );
   };
 
   const getToggleItem = (item: TToggleButtonItem) => {
     return (
-      <StyledFilterBlockItemToggle key={item.key}>
-        <StyledFilterBlockItemToggleText noSelect>
+      <div className={styles.filterBlockItemToggle} key={item.key}>
+        <Text fontSize="13px" fontWeight={600} lineHeight="36px" noSelect>
           {item.label}
-        </StyledFilterBlockItemToggleText>
-        <StyledFilterBlockItemToggleButton
+        </Text>
+        <ToggleButton
+          className={styles.filterBlockItemToggleButton}
           isChecked={item.isSelected || false}
           onChange={() =>
             changeFilterValueAction(
@@ -184,7 +189,7 @@ const FilterBlockItem = ({
             )
           }
         />
-      </StyledFilterBlockItemToggle>
+      </div>
     );
   };
 
@@ -218,7 +223,7 @@ const FilterBlockItem = ({
 
   const getCheckboxItem = (item: TCheckboxItem) => {
     return (
-      <StyledFilterBlockItemCheckboxContainer key={item.key}>
+      <div className={styles.filterBlockItemCheckboxContainer} key={item.key}>
         <Checkbox
           id={item.id}
           isChecked={item.isSelected}
@@ -232,7 +237,7 @@ const FilterBlockItem = ({
             )
           }
         />
-      </StyledFilterBlockItemCheckboxContainer>
+      </div>
     );
   };
 
@@ -264,9 +269,10 @@ const FilterBlockItem = ({
     }
 
     return (
-      <StyledFilterBlockItemTag
+      <div
         key={Array.isArray(item.key) ? item.key[0] : item.key}
-        isSelected={item.isSelected}
+        className={styles.filterBlockItemTag}
+        data-selected={item.isSelected ? "true" : "false"}
         id={item.id}
         onClick={
           item.key === FilterKeys.other || item.key === "filter_group-other"
@@ -280,31 +286,45 @@ const FilterBlockItem = ({
                 )
         }
       >
-        <StyledFilterBlockItemTagText
-          className="filter-text"
+        <Text
+          className={classNames(
+            styles.filterBlockItemTagText,
+
+            { [styles.selected]: item.isSelected },
+            "filter-text",
+          )}
           noSelect
-          isSelected={item.isSelected}
           truncate
+          fontSize="13px"
+          fontWeight={400}
+          lineHeight="20px"
         >
           {item.label}
-        </StyledFilterBlockItemTagText>
-      </StyledFilterBlockItemTag>
+        </Text>
+      </div>
     );
   };
 
   return (
-    <StyledFilterBlockItem isFirst={isFirst} withoutHeader={withoutHeader}>
+    <div
+      className={classNames(styles.filterBlockItem, {
+        [styles.isFirst]: isFirst,
+        [styles.withoutHeader]: withoutHeader,
+      })}
+    >
       {!withoutHeader ? (
-        <StyledFilterBlockItemHeader>
+        <div className={styles.filterBlockItemHeader}>
           <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
             {label}
           </Heading>
-        </StyledFilterBlockItemHeader>
+        </div>
       ) : null}
 
-      <StyledFilterBlockItemContent
-        withMultiItems={withMultiItems}
-        withoutSeparator={withoutSeparator}
+      <div
+        className={classNames(styles.filterBlockItemContent, {
+          [styles.withMultiItems]: withMultiItems,
+          [styles.withoutSeparator]: withoutSeparator,
+        })}
       >
         {groupItem.map((item: TGroupItem) => {
           if ("displaySelectorType" in item && item.displaySelectorType)
@@ -316,9 +336,11 @@ const FilterBlockItem = ({
             return getCheckboxItem(item);
           return getTagItem(item as TTagItem);
         })}
-      </StyledFilterBlockItemContent>
-      {!isLast && !withoutSeparator ? <StyledFilterBlockItemSeparator /> : null}
-    </StyledFilterBlockItem>
+      </div>
+      {!isLast && !withoutSeparator ? (
+        <div className={styles.filterBlockItemSeparator} />
+      ) : null}
+    </div>
   );
 };
 

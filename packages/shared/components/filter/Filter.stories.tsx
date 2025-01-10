@@ -1,5 +1,9 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
+
+import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
+
 import { DeviceType, FilterGroups } from "../../enums";
 import Filter from ".";
 import { FilterProps, TSortDataItem } from "./Filter.types";
@@ -34,21 +38,6 @@ const mockFilterData = [
         group: FilterGroups.filterType,
         key: "pdf",
         label: "PDF",
-        isSelected: false,
-      },
-    ],
-  },
-  {
-    group: FilterGroups.filterAuthor,
-    key: "people",
-    label: "People",
-    isHeader: true,
-    groupItem: [
-      {
-        group: FilterGroups.filterAuthor,
-        key: "people-selector",
-        label: "Select User",
-        displaySelectorType: "people",
         isSelected: false,
       },
     ],
@@ -90,8 +79,8 @@ Default.args = {
   getFilterData: () => Promise.resolve(mockFilterData),
   getSelectedFilterData: () => Promise.resolve([]),
   getViewSettingsData: () => [
-    { id: "1", label: "Grid", value: "tile", icon: "" },
-    { id: "2", label: "List", value: "row", icon: "" },
+    { id: "1", label: "Grid", value: "tile", icon: ViewTilesReactSvgUrl },
+    { id: "2", label: "List", value: "row", icon: ViewRowsReactSvgUrl },
   ],
   isRecentFolder: false,
   isRooms: false,

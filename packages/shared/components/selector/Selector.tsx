@@ -174,7 +174,7 @@ const Selector = ({
 
   const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
-  const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
+  const [requestRunning, setRequestRunning] = React.useState(false);
 
   const onSubmitAction = React.useCallback(
     async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
@@ -303,7 +303,6 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      // setNewSelectedItems(cloneItems);
       if (activeTabId) {
         setSelectedTabItems((value) => {
           const newValue = { ...value };
@@ -325,7 +324,6 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      // setNewSelectedItems([]);
 
       if (activeTabId) {
         setSelectedTabItems((value) => {

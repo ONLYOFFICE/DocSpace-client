@@ -30,6 +30,6 @@ type RecoverAccessModalDialogProps = {
   textBody: string;
   emailPlaceholderText: string;
   id?: string;
-}
+};
 
 export type { RecoverAccessModalDialogProps };

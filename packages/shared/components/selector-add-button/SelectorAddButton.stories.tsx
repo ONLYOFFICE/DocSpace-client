@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { SelectorAddButton } from ".";
 
 const meta = {
-  title: "Components/SelectorAddButton",
+  title: "Interactive elements/SelectorAddButton",
   component: SelectorAddButton,
   tags: ["autodocs"],
   argTypes: {

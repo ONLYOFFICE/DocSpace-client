@@ -1,5 +1,9 @@
 .searchInputBlock {
   max-height: 32px;
+
+  &.scale {
+    width: 100%;
+  }
 }
 
 .searchInputBlock > input {

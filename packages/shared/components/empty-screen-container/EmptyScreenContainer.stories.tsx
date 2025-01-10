@@ -40,7 +40,7 @@ const CrossReactSvgIcon = styled(CrossReactSvgUrl)`
 `;
 
 const meta = {
-  title: "Components/EmptyScreenContainer",
+  title: "Base UI Components/EmptyScreenContainer",
   component: EmptyScreenContainer,
   parameters: {
     docs: {

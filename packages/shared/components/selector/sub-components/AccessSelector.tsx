@@ -87,6 +87,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       withoutBackground={isMobileView}
       withBackground={!isMobileView}
       withBlur={isMobileView}
+      type="descriptive"
     />
   );
 };

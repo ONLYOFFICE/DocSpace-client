@@ -815,9 +815,9 @@ class InfoPanelStore {
       .getHistory(
         selectionType,
         this.infoPanelSelection.id,
-        abortControllerSignal,
         this.infoPanelSelection?.requestToken,
         filter,
+        abortControllerSignal,
       )
       .then(async (data) => {
         if (withLinks) {
@@ -872,9 +872,9 @@ class InfoPanelStore {
       .getHistory(
         selectionType,
         this.infoPanelSelection.id,
-        abortControllerSignal,
         this.infoPanelSelection?.requestToken,
         filter,
+        abortControllerSignal,
       )
       .then(async (data) => {
         if (withLinks) {

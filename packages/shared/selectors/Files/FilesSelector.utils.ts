@@ -59,7 +59,6 @@ export const convertFoldersToItems: (
     const {
       id,
       title,
-      //   roomType,
       filesCount,
       foldersCount,
       security,
@@ -84,7 +83,6 @@ export const convertFoldersToItems: (
       parentId,
       rootFolderType,
       isFolder: true,
-      //   roomType,
       isDisabled,
     };
   });
@@ -126,8 +124,8 @@ export const convertFilesToItems: (
 
 export const convertRoomsToItems: (
   rooms: TRoom[],
-  t?: TTranslation,
-) => TSelectorItem[] = (rooms: TRoom[], t?: TTranslation) => {
+  t: TTranslation,
+) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
   const items = rooms.map((room) => {
     const {
       id,

@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";

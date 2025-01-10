@@ -24,20 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-const StyledRowContainer = styled.div<{
-  useReactWindow?: boolean;
-  manualHeight?: string;
-}>`
-  user-select: none;
-  height: ${(props) =>
-    props.useReactWindow
-      ? props.manualHeight
-        ? props.manualHeight
-        : "100%"
-      : "auto"};
-  position: relative;
-`;
-
-export default StyledRowContainer;
+export { Row } from "./row";
+export { RowContent } from "./row-content";
+export { RowContainer } from "./row-container";

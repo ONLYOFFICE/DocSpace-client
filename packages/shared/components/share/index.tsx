@@ -386,7 +386,7 @@ const Share = (props: ShareProps) => {
   if (hideSharePanel) return null;
 
   return (
-    <div>
+    <div data-testid="shared-links">
       {visibleBar ? (
         <PublicRoomBar
           headerText={t("Common:ShareDocument")}

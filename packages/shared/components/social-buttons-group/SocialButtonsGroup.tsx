@@ -77,13 +77,19 @@ export const SocialButtonsGroup = memo(
         PROVIDERS_DATA[provider as keyof ProvidersDataType];
 
       return (
-        <div className="buttonWrapper" key={`${provider}ProviderItem`}>
+        <div
+          className="buttonWrapper"
+          key={`${provider}ProviderItem`}
+          data-test-id={`${provider}-button-wrapper`}
+        >
           <SocialButton
             isDisabled={isDisabled}
             label={length >= 2 ? "" : getProviderLabel(label, t)}
             $iconOptions={iconOptions}
             data-url={url}
             data-providername={provider}
+            data-test-id={`${provider}-social-button`}
+            aria-label={getProviderLabel(label, t)}
             IconComponent={icon}
             onClick={onClick}
             className="social-button"
@@ -98,6 +104,8 @@ export const SocialButtonsGroup = memo(
           <SocialButton
             isDisabled={isDisabled}
             IconComponent={ssoSVG}
+            data-test-id="sso-button"
+            aria-label={ssoLabel}
             className="sso-button social-button"
             label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}

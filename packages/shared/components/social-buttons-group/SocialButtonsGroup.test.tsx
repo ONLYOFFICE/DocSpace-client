@@ -24,31 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IndexRange } from "react-virtualized";
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { ThemeProvider } from "styled-components";
+import { Base } from "../../themes";
+import { SocialButtonsGroup } from ".";
+import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
-export interface RowContainerProps {
-  /** Height of one Row element. Required for the proper functioning of the scroll */
-  itemHeight: number;
-  /** Allows setting fixed block height for Row */
-  manualHeight?: string;
-  /** Child elements */
-  children: React.ReactNode[];
-  /** Enables react-window for efficient rendering of large lists */
-  useReactWindow: boolean;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets a callback function that is called when the list scroll positions change */
-  onScroll: () => void;
-  /** The property required for the infinite loader */
-  filesLength: number;
-  /** The property required for the infinite loader */
-  itemCount: number;
-  /** The property required for the infinite loader */
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  /** The property required for the infinite loader */
-  hasMoreFiles: boolean;
-}
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
+};
+
+describe("<SocialButtonsGroup />", () => {
+  const baseProps: SocialButtonProps = {
+    providers: [
+      { provider: "google", url: "google.com", linked: false },
+      { provider: "facebook", url: "facebook.com", linked: false },
+    ],
+    t: (key: string) => key,
+    onClick: jest.fn(),
+    isDisabled: false,
+  };
+
+  it("renders without error", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    expect(container).toBeTruthy();
+  });
+
+  it("renders correct number of social buttons", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    expect(container.querySelectorAll(".social-button")).toHaveLength(2);
+  });
+
+  it("handles click events", () => {
+    const { container } = renderWithTheme(
+      <SocialButtonsGroup {...baseProps} />,
+    );
+    const button = container.querySelector(".social-button");
+    if (button) fireEvent.click(button);
+    expect(baseProps.onClick).toHaveBeenCalled();
+  });
+});

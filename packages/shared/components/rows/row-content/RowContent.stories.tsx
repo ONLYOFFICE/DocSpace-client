@@ -30,13 +30,13 @@ import styled from "styled-components";
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
-import { IconSizeType, commonIconsStyles } from "../../utils";
-import { Link, LinkType } from "../link";
-import { Checkbox } from "../checkbox";
+import { IconSizeType, commonIconsStyles } from "../../../utils";
+import { Link, LinkType } from "../../link";
+import { Checkbox } from "../../checkbox";
 
-import { RowContent } from "./RowContent";
+import { RowContent } from ".";
 import { RowContentProps } from "./RowContent.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "../../../themes";
 
 export default {
   title: "Components/RowContent",

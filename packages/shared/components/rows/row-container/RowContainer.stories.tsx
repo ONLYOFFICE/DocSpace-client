@@ -30,17 +30,17 @@ import styled from "styled-components";
 
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
-import { IconSizeType, commonIconsStyles } from "../../utils";
+import { IconSizeType, commonIconsStyles } from "../../../utils";
 
 import { Row } from "../row";
 import { RowContent } from "../row-content";
-import { Avatar, AvatarRole, AvatarSize } from "../avatar";
-import { Link, LinkType } from "../link";
+import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import { Link, LinkType } from "../../link";
 
-import { RowContainer } from "./RowContainer";
+import { RowContainer } from ".";
 
 import { RowContainerProps } from "./RowContainer.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "../../../themes";
 
 const SendClockIcon = styled(SendClockReactSvg)`
   ${commonIconsStyles}

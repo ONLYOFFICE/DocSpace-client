@@ -49,7 +49,13 @@ type AlignValue =
   | "end";
 
 /** CSS text align values */
-type TextAlignValue = "left" | "right" | "center" | "justify" | "start" | "end";
+export type TextAlignValue =
+  | "left"
+  | "right"
+  | "center"
+  | "justify"
+  | "start"
+  | "end";
 
 /** CSS flex wrap values */
 type FlexWrapValue = "nowrap" | "wrap" | "wrap-reverse";

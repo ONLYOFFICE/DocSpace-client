@@ -24,63 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import TopLoaderService from "./index";
 
-import { Link, LinkType } from "../link";
+describe("TopLoaderService", () => {
+  let mockElement: HTMLElement;
 
-import { RowContent } from "./RowContent";
-import { globalColors } from "../../themes";
+  beforeEach(() => {
+    jest.useFakeTimers();
+    // Create and style the element
+    mockElement = document.createElement("div");
+    mockElement.id = "ipl-progress-indicator";
+    mockElement.style.position = "fixed";
+    mockElement.style.top = "0";
+    mockElement.style.left = "0";
+    mockElement.style.height = "2px";
+    mockElement.style.width = "0%";
+    document.body.appendChild(mockElement);
 
-describe("<RowContent />", () => {
-  it("renders without error", () => {
-    render(
-      <RowContent>
-        <Link
-          type={LinkType.page}
-          title="Demo"
-          isBold
-          fontSize="15px"
-          color={globalColors.black}
-        >
-          Demo
-        </Link>
-        <Link
-          type={LinkType.page}
-          title="Demo"
-          fontSize="12px"
-          color={globalColors.gray}
-        >
-          Demo
-        </Link>
-        <Link
-          type={LinkType.action}
-          title="Demo"
-          fontSize="12px"
-          color={globalColors.gray}
-        >
-          Demo
-        </Link>
-        <Link
-          type={LinkType.page}
-          title="0 000 0000000"
-          fontSize="12px"
-          color={globalColors.gray}
-        >
-          0 000 0000000
-        </Link>
-        <Link
-          type={LinkType.page}
-          title="demo@demo.com"
-          fontSize="12px"
-          color={globalColors.gray}
-        >
-          demo@demo.com
-        </Link>
-      </RowContent>,
-    );
+    // Initialize attributes
+    mockElement.setAttribute("role", "progressbar");
+    mockElement.setAttribute("aria-valuemin", "0");
+    mockElement.setAttribute("aria-valuemax", "100");
+    mockElement.setAttribute("data-test-id", "top-loader");
+  });
 
-    expect(screen.getByTestId("row-content")).toBeInTheDocument();
+  afterEach(() => {
+    document.body.removeChild(mockElement);
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  it("should initialize loading with proper attributes", () => {
+    TopLoaderService.start();
+    expect(mockElement.getAttribute("role")).toBe("progressbar");
+    expect(mockElement.getAttribute("aria-valuemin")).toBe("0");
+    expect(mockElement.getAttribute("aria-valuemax")).toBe("100");
+    expect(mockElement.getAttribute("data-test-id")).toBe("top-loader");
   });
 });

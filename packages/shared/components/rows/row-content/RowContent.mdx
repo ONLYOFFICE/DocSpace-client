@@ -8,12 +8,12 @@
 // any third-party rights.
 //
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
 //
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
 //
-// The  interactive user interfaces in modified source and object code versions of the Program must
+// The interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
 //
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
@@ -24,23 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface RowContentProps {
-  /** Components displayed inside RowContent */
-  children: React.ReactNode[];
-  /** Accepts class */
-  className?: string;
-  /** Disables SideElements */
-  disableSideInfo?: boolean;
-  /** Accepts id */
-  id?: string;
-  /** Sets the action initiated upon clicking the button */
-  onClick?: () => void;
-  /** Changes the side information color */
-  sideColor?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Width section */
-  sectionWidth?: number;
-  /** Converts the SideInfo */
-  convertSideInfo?: boolean;
-}
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/blocks";
+
+import { RowContent } from ".";
+import * as stories from "./RowContent.stories.tsx";
+
+<Meta title="Components/RowContent" component={RowContent} />
+
+# RowContent
+
+Required for formatted output of elements inside Row
+
+<Canvas>
+  <Story story={stories.basic} name="Default" />
+</Canvas>
+
+<ArgsTable story="Default" />
+
+## Description
+
+To correctly display components inside RowContent, you must specify them in a certain order.
+
+The first and second specified components will be interpreted as Main elements.
+First will be MainTitle and second MainIcons.
+All subsequent components will be located on the right and are considered SideElements.
+
+**_Consider location of components in advance, since when viewing in tablet mode, the markup will shift SideElements to second line._**
+
+Each not main child can take containerWidth property for task of width of child's container.

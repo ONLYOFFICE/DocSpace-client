@@ -24,55 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { SnackBar } from "./Snackbar";
 
-import StyledRowContainer from "./RowContainer.styled";
-import { InfiniteLoaderComponent } from "../infinite-loader";
-import { RowContainerProps } from "./RowContainer.types";
+describe("SnackBar", () => {
+  const defaultProps = {
+    text: "Test message",
+    headerText: "Test header",
+    btnText: "Action",
+    countDownTime: 5000,
+    sectionWidth: 400,
+  };
 
-const RowContainer = (props: RowContainerProps) => {
-  const {
-    manualHeight,
-    itemHeight = 50,
-    children,
-    useReactWindow = true,
-    id = "rowContainer",
-    className,
-    style,
-    onScroll,
-    filesLength,
-    itemCount,
-    fetchMoreFiles,
-    hasMoreFiles,
-  } = props;
+  it("renders with required props", () => {
+    render(<SnackBar {...defaultProps} />);
+    expect(screen.getByTestId("snackbar-message")).toHaveTextContent(
+      "Test message",
+    );
+    expect(screen.getByTestId("snackbar-header")).toHaveTextContent(
+      "Test header",
+    );
+  });
 
-  return (
-    <StyledRowContainer
-      id={id}
-      className={className}
-      style={style}
-      manualHeight={manualHeight}
-      useReactWindow={useReactWindow}
-      data-testid="row-container"
-    >
-      {useReactWindow ? (
-        <InfiniteLoaderComponent
-          className="List"
-          viewAs="row"
-          hasMoreFiles={hasMoreFiles}
-          filesLength={filesLength}
-          itemCount={itemCount}
-          loadMoreItems={fetchMoreFiles}
-          itemSize={itemHeight}
-          onScroll={onScroll}
-        >
-          {children}
-        </InfiniteLoaderComponent>
-      ) : (
-        children
-      )}
-    </StyledRowContainer>
-  );
-};
+  it("renders HTML content when provided", () => {
+    const htmlContent = "<p>HTML content</p>";
+    render(
+      <SnackBar {...defaultProps} htmlContent={htmlContent} text={undefined} />,
+    );
+    expect(screen.getByTestId("snackbar-html-content")).toBeInTheDocument();
+    expect(screen.getByTestId("snackbar-html-content")).toContainHTML(
+      htmlContent,
+    );
+  });
 
-export { RowContainer };
+  it("shows icon when showIcon is true", () => {
+    render(<SnackBar {...defaultProps} showIcon />);
+    expect(screen.getByTestId("snackbar-icon")).toBeInTheDocument();
+  });
+});

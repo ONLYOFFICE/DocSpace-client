@@ -26,7 +26,7 @@
 
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";

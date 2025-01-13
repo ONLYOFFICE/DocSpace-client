@@ -169,9 +169,9 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task",
           },
           {
-            "label": "Update yarn.lock",
-            "task": "Frontend | update yarn.lock",
-            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task",
+            "label": "Update dependencies",
+            "task": "Frontend | update dependencies",
+            "tooltip": "🛠️ Start the \"frontend update dependencies\" task",
           },
           {
             "label": "Build",

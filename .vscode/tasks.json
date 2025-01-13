@@ -348,7 +348,7 @@
       }
     },
     {
-      "label": "Frontend | update yarn.lock",
+      "label": "Frontend | update dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm wipe ; pnpm install",
       "group": {
@@ -592,14 +592,14 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build ; ",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
@@ -607,14 +607,14 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start ; ",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
@@ -622,15 +622,15 @@
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear ; ",
       "group": {
-          "kind": "build",
-          "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-          "reveal": "always",
-          "panel": "new",
-          "focus": true,
-          "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
-      }
+    }
   ]
 }

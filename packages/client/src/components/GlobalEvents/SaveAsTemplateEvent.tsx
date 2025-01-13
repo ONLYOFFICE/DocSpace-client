@@ -41,8 +41,9 @@ type SaveAsTemplateEventProps = {
   isDefaultRoomsQuotaSet: boolean;
   onClose: VoidFunction;
   onSaveAsTemplate: (
-    item: TRoom & { isEdit: boolean },
-    roomParams: TRoom & { isEdit: boolean },
+    item: TRoom & { isEdit?: boolean },
+    roomParams: TRoom & { isEdit?: boolean },
+    open: boolean,
   ) => void;
 };
 
@@ -103,10 +104,13 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     }
   }, []);
 
-  const onSave = async (roomParams: TRoom & { isEdit: boolean }) => {
+  const onSave = async (
+    roomParams: TRoom & { isEdit?: boolean },
+    openCreatedTemplate: boolean,
+  ) => {
     setIsLoading(true);
 
-    await onSaveAsTemplate(item, roomParams);
+    await onSaveAsTemplate(item, roomParams, openCreatedTemplate);
 
     setIsLoading(false);
     onClose();
@@ -130,11 +134,9 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     <CreateRoomTemplate
       visible={visible}
       item={item}
-      // onSaveClick={onSaveClick}
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
       fetchedRoomParams={fetchedRoomParams}
-      //
       onSave={onSave}
       isLoading={isLoading}
     />

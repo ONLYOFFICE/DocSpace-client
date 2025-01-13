@@ -58,10 +58,8 @@ const StyledTemplatesTile = styled.div`
     background: ${(props) =>
       props.theme.filesSection.tilesView.tile.backgroundColor};
 
-    border-radius: ${({ theme, isRooms }) =>
-      isRooms
-        ? theme.filesSection.tilesView.tile.roomsUpperBorderRadius
-        : theme.filesSection.tilesView.tile.upperBorderRadius};
+    border-radius: ${({ theme }) =>
+      theme.filesSection.tilesView.tile.roomsUpperBorderRadius};
   }
 
   .room-tile-template_bottom-content {
@@ -76,10 +74,8 @@ const StyledTemplatesTile = styled.div`
     padding: 0px 16px 8px;
     background: ${(props) =>
       props.theme.filesSection.tilesView.tile.backgroundColor};
-    border-radius: ${({ theme, isRooms }) =>
-      isRooms
-        ? theme.filesSection.tilesView.tile.roomsBottomBorderRadius
-        : theme.filesSection.tilesView.tile.bottomBorderRadius};
+    border-radius: ${({ theme }) =>
+      theme.filesSection.tilesView.tile.roomsBottomBorderRadius};
 
     .room-tile_bottom-content-wrapper {
       display: grid;
@@ -127,6 +123,10 @@ const StyledContent = styled.div`
 
   a {
     display: block !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .new-items {

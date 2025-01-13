@@ -345,8 +345,10 @@ class CreateEditRoomStore {
     }
   };
 
-  onSaveAsTemplate = async (item, roomParams) => {
-    console.log("item, roomParams", item, roomParams);
+  onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
+    console.log(
+      `item: ${item} roomParams: ${roomParams} openCreatedTemplate: ${openCreatedTemplate}`,
+    );
 
     const { title, icon, tags } = roomParams; // share // roomOwner???
 

@@ -43,6 +43,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 import TemplatesTile from "./TemplatesTile";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
@@ -169,8 +170,8 @@ const StyledTile = styled.div`
   width: 100%;
   border: ${(props) => props.theme.filesSection.tilesView.tile.border};
 
-  border-radius: ${({ isRooms, isTemplate, theme }) =>
-    isRooms && !isTemplate
+  border-radius: ${({ isRooms, theme }) =>
+    isRooms
       ? theme.filesSection.tilesView.tile.roomsBorderRadius
       : theme.filesSection.tilesView.tile.borderRadius};
   ${(props) =>

@@ -44,7 +44,7 @@ import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPane
 type CreateRoomTemplateProps = {
   visible: boolean;
   onClose: VoidFunction;
-  onSave: (params: TRoom) => void;
+  onSave: (params: TRoom & { isEdit?: boolean }, open: boolean) => void;
   item: TRoom & { isEdit: boolean };
   fetchedTags: TRoom["tags"];
   fetchedRoomParams: TRoom;
@@ -53,8 +53,6 @@ type CreateRoomTemplateProps = {
 const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   const { visible, onClose, onSave, item, fetchedTags, fetchedRoomParams } =
     props;
-
-  console.log("item", item);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
@@ -83,7 +81,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       return;
     }
 
-    onSave(roomParams);
+    onSave(roomParams, openCreatedIsChecked);
   };
 
   const setRoomTags = (newTags: TRoom["tags"]) => {

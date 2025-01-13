@@ -42,7 +42,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
-    font-size: 23px;
+    font-size: 23px !important;
   }
 
   .ec-image {
@@ -55,7 +55,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
   }
 
   .ec-desc {
-    font-size: 13px;
+    font-size: 13px !important;
     margin-top: 12px;
     margin-bottom: 22px;
   }

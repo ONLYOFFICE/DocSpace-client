@@ -65,7 +65,7 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
         src={imageSrc}
         alt={imageAlt}
         style={!isTablet() ? imageStyle : {}}
-        className={styles.image}
+        className={classNames(styles.image, "ec-image")}
       />
 
       {headerText ? (
@@ -73,7 +73,7 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           as="span"
           fontSize="19px"
           fontWeight="700"
-          className={styles.header}
+          className={classNames(styles.header, "ec-header")}
           noSelect
         >
           {headerText}
@@ -81,19 +81,32 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
       ) : null}
 
       {subheadingText ? (
-        <Text as="span" fontWeight="600" className={styles.subheading} noSelect>
+        <Text
+          as="span"
+          fontWeight="600"
+          className={classNames(styles.subheading, "ec-subheading")}
+          noSelect
+        >
           {subheadingText}
         </Text>
       ) : null}
 
       {descriptionText ? (
-        <Text as="span" fontSize="12px" className={styles.description} noSelect>
+        <Text
+          as="span"
+          fontSize="12px"
+          className={classNames(styles.description, "ec-desc")}
+          noSelect
+        >
           {descriptionText}
         </Text>
       ) : null}
 
       {buttons ? (
-        <div className={styles.buttons} style={buttonStyle}>
+        <div
+          className={classNames(styles.buttons, "ec-buttons")}
+          style={buttonStyle}
+        >
           {buttons}
         </div>
       ) : null}

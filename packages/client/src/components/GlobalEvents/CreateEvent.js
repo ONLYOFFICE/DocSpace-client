@@ -35,7 +35,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
-import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
+import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import Dialog from "./sub-components/Dialog";

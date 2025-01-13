@@ -29,7 +29,7 @@ import { withTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import api from "@docspace/shared/api";
 import AccountsFilter from "@docspace/shared/api/people/filter";

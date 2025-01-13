@@ -31,7 +31,7 @@ import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import FilesSelector from "@docspace/client/src/components/FilesSelector";
+import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 

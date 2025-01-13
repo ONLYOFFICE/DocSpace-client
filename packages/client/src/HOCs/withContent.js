@@ -42,7 +42,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 // import EditingWrapperComponent from "../components/EditingWrapperComponent";
 
-// import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
+// import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
 // import ItemIcon from "../components/ItemIcon";
 
 export default function withContent(WrappedContent) {

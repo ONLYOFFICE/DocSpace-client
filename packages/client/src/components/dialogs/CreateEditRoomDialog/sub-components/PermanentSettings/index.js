@@ -28,7 +28,7 @@
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "@docspace/client/src/helpers/filesUtils";
+import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "SRC_DIR/helpers/filesUtils";
 
 import PermanentSetting from "./PermanentSetting";
 

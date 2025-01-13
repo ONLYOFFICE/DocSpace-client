@@ -39,7 +39,7 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getFileTypeName,
   getRoomTypeName,
-} from "@docspace/client/src/helpers/filesUtils";
+} from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import CommentEditor from "../sub-components/CommentEditor";

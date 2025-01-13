@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";

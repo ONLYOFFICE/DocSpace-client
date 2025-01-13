@@ -64,7 +64,7 @@ import {
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
-import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
+import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import {
   LOADER_TIMEOUT,
   MEDIA_VIEW_URL,

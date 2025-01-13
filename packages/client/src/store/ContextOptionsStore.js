@@ -77,7 +77,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
-import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
@@ -101,7 +101,7 @@ import {
 import {
   connectedCloudsTypeTitleTranslation,
   removeOptions,
-} from "@docspace/client/src/helpers/filesUtils";
+} from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import {
   RoomsType,

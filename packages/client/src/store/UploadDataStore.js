@@ -26,7 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
-import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
+import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import uniqBy from "lodash/uniqBy";

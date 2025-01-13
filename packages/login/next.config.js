@@ -28,7 +28,6 @@
 
 const path = require("path");
 const pkg = require("./package.json");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const nextConfig = {
   basePath: "/login",
@@ -55,21 +54,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-};
-
-module.exports = {
-  webpack(config, { isServer, dev }) {
-    // Add MiniCssExtractPlugin
-    if (!isServer) {
-      config.plugins.push(
-        new MiniCssExtractPlugin({
-          filename: "static/css/[contenthash].css",
-          chunkFilename: "static/css/[contenthash].css",
-          ignoreOrder: true, // Disable order warnings
-        }),
-      );
-    }
-
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -82,12 +67,13 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
-    // Add CSS Modules configuration
+    // Configure CSS handling
     config.module.rules.push(
+      // Global styles
       {
         test: /\.module\.(scss|sass)$/,
         use: [
-          isServer ? "style-loader" : MiniCssExtractPlugin.loader,
+          "style-loader",
           {
             loader: "css-loader",
             options: {
@@ -103,25 +89,7 @@ module.exports = {
       // Regular SCSS files (non-modules)
       {
         test: /(?<!\.module)\.(scss|sass)$/,
-        use: [
-          isServer ? "style-loader" : MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: false,
-              sourceMap: true,
-              import: true,
-              esModule: true,
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       // Existing asset rules
       {
@@ -168,5 +136,6 @@ module.exports = {
 
     return config;
   },
-  ...nextConfig,
 };
+
+module.exports = nextConfig;

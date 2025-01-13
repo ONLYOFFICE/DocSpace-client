@@ -171,7 +171,9 @@ const SectionHeaderContent = (props) => {
   const getArrayOfParams = () => {
     const path = location.pathname;
     const arrayPath = path.split("/");
-    const arrayOfParams = arrayPath.filter((item) => item !== "");
+    const arrayOfParams = arrayPath.filter(
+      (item) => item !== "" && !item.includes("portal-settings"),
+    );
 
     return arrayOfParams;
   };

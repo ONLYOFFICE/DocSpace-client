@@ -217,7 +217,6 @@ const IconButton = ({
       [styles.stroke]: isStroke,
     },
     className,
-    "icon-button",
   );
 
   return (

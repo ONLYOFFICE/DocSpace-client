@@ -49,6 +49,7 @@ const Portal = ({ visible = true, element, appendTo = null }: PortalProps) => {
   React.useEffect(() => {
     const domExists = !!(
       typeof window !== "undefined" &&
+      typeof document !== "undefined" &&
       window.document &&
       window.document.createElement
     );

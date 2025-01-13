@@ -88,6 +88,8 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
   } = props;
 
   useEffect(() => {
@@ -395,7 +397,12 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return null;
 
-  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  if (
+    isEmptyFilesList &&
+    !welcomeFormFillingTipsVisible &&
+    !formFillingTipsVisible
+  )
+    return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -411,6 +418,7 @@ export default inject(
     filesActionsStore,
     uploadDataStore,
     indexingStore,
+    dialogsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -433,6 +441,9 @@ export default inject(
       movingInProgress,
       isErrorRoomNotAvailable,
     } = filesStore;
+
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
 
     return {
       dragging,
@@ -463,6 +474,8 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
     };
   },
 )(

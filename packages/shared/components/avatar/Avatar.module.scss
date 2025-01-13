@@ -56,7 +56,7 @@
   display: flex;
   inset-inline-end: 0px;
   bottom: 0px;
-  background-color: var(--avatar-edit-container-background);
+  background-color: var(--color-scheme-main-accent);
   border-radius: 50%;
   height: 32px;
   width: 32px;
@@ -64,7 +64,7 @@
   justify-content: center;
 
   &.hasAvatar {
-    background-color: var(--color-scheme-main-accent);
+    background-color: var(--avatar-edit-container-background);
   }
 
   :global(.edit_icon) {
@@ -82,7 +82,9 @@
 
   background-color: var(--avatar-image-container-background);
 
-  &[data-has-username="true"]:not([data-is-group="true"]) {
+  &[data-has-username="true"]:not([data-is-group="true"]):not(
+      [data-has-source="true"]
+    ) {
     background-color: var(--avatar-image-container-background-image);
   }
 
@@ -94,7 +96,7 @@
     background-color: var(--avatar-icon-background);
   }
 
-  svg {
+  & > svg {
     display: block;
     width: 50% !important;
     height: 100% !important;

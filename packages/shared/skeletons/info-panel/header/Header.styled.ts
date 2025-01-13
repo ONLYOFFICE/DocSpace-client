@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, tablet } from "../../../utils";
 
 import { StyledInfoPanelHeaderProps } from "./Header.types";
 

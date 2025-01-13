@@ -38,7 +38,7 @@
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
     "@babel/preset-typescript": "catalog:",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "catalog:",
     "@types/accept-language-parser": "catalog:",
     "@types/compression": "catalog:",
     "@types/cookie-parser": "catalog:",

@@ -30,7 +30,7 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
+    "@svgr/webpack": "catalog:",
     "@types/nconf": "catalog:",
     "@types/node": "^22.7.5",
     "@types/react": "catalog:",

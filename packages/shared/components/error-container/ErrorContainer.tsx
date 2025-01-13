@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "../text";
+import { Button, ButtonSize } from "../button";
 
 import PortalLogo from "../portal-logo/PortalLogo";
 import Headline from "../headline/Headline";

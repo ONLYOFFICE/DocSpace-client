@@ -24,7 +24,6 @@
   "dependencies": {
     "@babel/runtime": "catalog:",
     "@docspace/shared": "workspace:*",
-    "@docspace/client": "workspace:*",
     "@codemirror/lang-javascript": "catalog:",
     "@onlyoffice/docspace-sdk-js": "catalog:",
     "@uiw/codemirror-theme-github": "catalog:",
@@ -114,7 +113,7 @@
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
     "@babel/preset-typescript": "catalog:",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "catalog:",
     "@types/crypto-js": "catalog:",
     "@types/element-resize-detector": "catalog:",
     "@types/eslint": "catalog:",

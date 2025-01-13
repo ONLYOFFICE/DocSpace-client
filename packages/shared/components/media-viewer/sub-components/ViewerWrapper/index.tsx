@@ -28,7 +28,7 @@ import equal from "fast-deep-equal/react";
 // import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
-import { isSeparator } from "@docspace/shared/utils/typeGuards";
+import { isSeparator } from "../../../../utils/typeGuards";
 
 import { Viewer } from "../Viewer";
 import { getCustomToolbar, getPDFToolbar } from "../../MediaViewer.helpers";

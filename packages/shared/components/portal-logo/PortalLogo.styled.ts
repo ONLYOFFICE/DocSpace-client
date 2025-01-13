@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 
-import { mobile } from "@docspace/shared/utils";
+import { mobile } from "../../utils";
 
 export const StyledWrapper = styled.div<{
   isMobile?: boolean;

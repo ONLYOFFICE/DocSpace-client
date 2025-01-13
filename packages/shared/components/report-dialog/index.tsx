@@ -34,8 +34,8 @@ import {
   getCrashReport,
   downloadJson,
   getCurrentDate,
-} from "@docspace/shared/utils/crashReport";
-import { DeviceType } from "@docspace/shared/enums";
+} from "../../utils/crashReport";
+import { DeviceType } from "../../enums";
 
 import { Text } from "../text";
 import { toastr } from "../toast";

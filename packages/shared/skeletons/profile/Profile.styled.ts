@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { tablet } from "@docspace/shared/utils";
+import { tablet } from "../../utils";
 import { globalColors } from "../../themes";
 
 export const StyledWrapper = styled.div`

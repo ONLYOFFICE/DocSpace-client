@@ -24,23 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled from "styled-components";
-import { TTheme } from "@docspace/shared/themes";
+// import { TTheme } from "../../../themes";
 
 import { mobile } from "../../../utils";
 import { ModalDialogBackdropProps } from "../ModalDialog.types";
 
-const backdropBackground = (props: {
-  theme: TTheme;
-  modalSwipeOffset?: number;
-}) => {
-  const { r, g, b, a } = props.theme.modalDialog.backdrop.backgroundRGBA;
-  const swipeOffset = props.modalSwipeOffset;
+// const backdropBackground = (props: {
+//   theme: TTheme;
+//   modalSwipeOffset?: number;
+// }) => {
+//   const { r, g, b, a } = props.theme.modalDialog.backdrop.backgroundRGBA;
+//   const swipeOffset = props.modalSwipeOffset;
 
-  if (!swipeOffset) return `rgba(${r}, ${g}, ${b}, ${a})`;
-  return `rgba(${r}, ${g}, ${b}, ${a + swipeOffset * (a / 120)})`;
-};
+//   if (!swipeOffset) return `rgba(${r}, ${g}, ${b}, ${a})`;
+//   return `rgba(${r}, ${g}, ${b}, ${a + swipeOffset * (a / 120)})`;
+// };
 
 const StyledModalBackdrop = styled.div<{ zIndex?: number }>`
   display: block;

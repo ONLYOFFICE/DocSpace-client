@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { mobile } from "../../utils";
 
 const StyledSMTPContent = styled.div`
   .rectangle-loader_description {

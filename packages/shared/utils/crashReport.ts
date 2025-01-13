@@ -26,7 +26,7 @@
 
 import saveAs from "file-saver";
 import { deviceDetect } from "react-device-detect";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
+import type FirebaseHelper from "./firebase";
 
 export const getCrashReport = (
   userId: string,

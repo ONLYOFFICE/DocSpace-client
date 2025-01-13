@@ -32,11 +32,11 @@ import React, {
   useRef,
 } from "react";
 
-import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
-import { getFileExtension } from "@docspace/shared/utils/common";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { decodeTiff } from "@docspace/shared/utils/decodeTiff";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { isMobile as isMobileUtils, isTablet } from "../../utils";
+import { getFileExtension } from "../../utils/common";
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { decodeTiff } from "../../utils/decodeTiff";
+import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 

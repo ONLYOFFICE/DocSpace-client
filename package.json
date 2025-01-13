@@ -12,13 +12,13 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "build": "node ./common/scripts/before-build.js && pnpm --filter @docspace/client run build",
+    "build": "node ./common/scripts/before-build.js && pnpm --filter @docspace/login --filter @docspace/client run build",
     "bump": "pnpm version --workspace",
-    "temp": " --filter @docspace/login --filter @docspace/doceditor --filter @docspace/management",
+    "temp": "node ./common/scripts/before-build.js && pnpm --filter @docspace/client --filter @docspace/login --filter @docspace/doceditor --filter @docspace/management",
     "clean": "pnpm -r run clean",
     "deploy": "shx rm -rf ../publish/web && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "node ./common/scripts/before-build.js && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start",
-    "start-prod": "pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start-prod",
+    "start": "node ./common/scripts/before-build.js && pnpm --filter @docspace/client --filter @docspace/login run start",
+    "start-prod": "pnpm --filter @docspace/client --filter @docspace/login run start-prod",
     "start:internal": "node ./common/scripts/before-build.js && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start:internal",
     "start-prod:internal": "pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start-prod:internal",
     "storybook": "pnpm --filter @docspace/shared story",
@@ -49,7 +49,8 @@
     "he": "catalog:",
     "madge": "catalog:",
     "shx": "catalog:",
-    "terser": "catalog:"
+    "terser": "catalog:",
+    "react": "catalog:"
   },
   "packageManager": "pnpm@9.15.3"
 }

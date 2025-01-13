@@ -31,9 +31,9 @@ import React, {
   useMemo,
 } from "react";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
-import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
+import { DeviceType } from "../../../../enums";
+import { includesMethod } from "../../../../utils/typeGuards";
+import type { TContextMenuRef } from "../../../context-menu";
 
 import { isHeic, isTiff } from "../../MediaViewer.utils";
 import { StyledViewerContainer } from "../../MediaViewer.styled";

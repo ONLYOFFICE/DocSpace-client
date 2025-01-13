@@ -209,7 +209,9 @@ class Filter {
     public sortOrder: TSortOrder = DEFAULT_SORT_ORDER,
     public employeeStatus: Nullable<EmployeeStatus> = DEFAULT_EMPLOYEE_STATUS,
     public activationStatus: Nullable<EmployeeActivationStatus> = DEFAULT_ACTIVATION_STATUS,
-    public role: Nullable<EmployeeType> = DEFAULT_ROLE,
+    public role:
+      | Nullable<EmployeeType>
+      | Nullable<EmployeeType[]> = DEFAULT_ROLE,
     public search: string = DEFAULT_SEARCH,
     public group: Nullable<string> = DEFAULT_GROUP,
     public payments: Nullable<PaymentsType> = DEFAULT_PAYMENTS,

@@ -29,10 +29,12 @@ import { useState, useEffect, useRef } from "react";
 import isEqual from "lodash/isEqual";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
+import PeopleSelector from "@docspace/shared/selectors/People";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
+import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 
 const EditRoomDialog = ({
   t,
@@ -46,12 +48,15 @@ const EditRoomDialog = ({
   isInitLoading,
   isTemplate,
   cover,
+  item,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const [changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible] =
     useState(false);
+  const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
+  const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
@@ -146,6 +151,18 @@ const EditRoomDialog = ({
     setChangeRoomOwnerIsVisible(false);
   };
 
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
+  };
+
+  const onCloseAccessSettings = () => {
+    setAccessSettingsIsVisible(false);
+  };
+
+  const onCloseAddUsersPanel = () => {
+    setAddUsersPanelVisible(false);
+  };
+
   return (
     <ModalDialog
       displayType="aside"
@@ -154,7 +171,11 @@ const EditRoomDialog = ({
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
-      containerVisible={changeRoomOwnerIsVisible}
+      containerVisible={
+        changeRoomOwnerIsVisible ||
+        accessSettingsIsVisible ||
+        addUsersPanelVisible
+      }
     >
       {changeRoomOwnerIsVisible && (
         <ModalDialog.Container>
@@ -167,6 +188,48 @@ const EditRoomDialog = ({
           />
         </ModalDialog.Container>
       )}
+
+      <ModalDialog.Container>
+        {addUsersPanelVisible ? (
+          <PeopleSelector
+            useAside
+            // onClose={onClosePanels}
+            // onSubmit={onSubmitItems}
+            submitButtonLabel={t("Common:AddButton")}
+            disableSubmitButton={false}
+            isMultiSelect
+            disableDisabledUsers
+            withGroups
+            withInfo
+            // infoText={infoText}
+            // withoutBackground={isMobileView}
+            // withBlur={!isMobileView}
+            withInfoBadge
+            roomId={item.id}
+            // disableInvitedUsers={invitedUsers}
+            withHeader
+            // filter={filter}
+            headerProps={{
+              headerLabel: t("Common:Contacts"),
+              withoutBackButton: false,
+              withoutBorder: true,
+              isCloseable: true,
+              onBackClick: onCloseAddUsersPanel,
+              onCloseClick: onClose,
+            }}
+            // setActiveTab={getSelectedTab}
+          />
+        ) : (
+          <TemplateAccessSettingsPanel
+            templateItem={item}
+            usersPanelIsVisible={addUsersPanelVisible}
+            setUsersPanelIsVisible={setAddUsersPanelVisible}
+            onCloseAccessSettings={onCloseAccessSettings}
+            onClosePanels={onClose}
+            isContainer
+          />
+        )}
+      </ModalDialog.Container>
 
       <ModalDialog.Header>
         {isTemplate ? t("Files:EditTemplate") : t("Files:RoomEditing")}
@@ -188,6 +251,7 @@ const EditRoomDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           onOwnerChange={onOwnerChange}
+          onOpenAccessSettings={onOpenAccessSettings}
           canChangeOwner={roomParams?.security?.ChangeOwner}
           isTemplate={isTemplate}
         />

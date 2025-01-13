@@ -73,6 +73,15 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  .invite-input-item {
+    display: flex;
+    gap: 4px;
+  }
+
+  .invite-input-text_me {
+    color: ${({ theme }) => theme.text.disableColor};
+  }
 `;
 
 const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`

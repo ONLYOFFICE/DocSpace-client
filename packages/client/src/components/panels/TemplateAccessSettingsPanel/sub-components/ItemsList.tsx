@@ -31,6 +31,7 @@ import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import Item from "./Item";
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 
@@ -47,6 +48,7 @@ type ItemsListProps = {
 type RowData = {
   t: TTranslation;
   inviteItems: TSelectorItem[];
+  listItems: TSelectorItem[];
   setInviteItems: (items: TSelectorItem[]) => void;
   isDisabled: boolean;
 };
@@ -58,11 +60,11 @@ type RowProps = {
 };
 
 const Row = memo(({ data, index, style }: RowProps) => {
-  const { t, inviteItems, setInviteItems, isDisabled } = data;
+  const { t, inviteItems, setInviteItems, isDisabled, listItems } = data;
 
-  if (inviteItems === undefined) return;
+  if (listItems === undefined) return;
 
-  const item = inviteItems[index];
+  const item = listItems[index];
 
   return (
     <StyledRow
@@ -98,11 +100,15 @@ const ItemsList = ({
   const { height } = useResizeObserver({ ref: bodyRef });
   const { interfaceDirection } = useTheme();
 
+  const listItems = [...inviteItems].filter(
+    (l) => l.access !== ShareAccessRights.None,
+  );
+
   const onBodyResize = useCallback(() => {
     const bodyElem = bodyRef?.current?.firstChild as HTMLDivElement;
     const scrollHeight = bodyElem?.scrollHeight;
     const heightList = height ?? bodyRef?.current?.offsetHeight;
-    const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
+    const totalHeightItems = listItems.length * USER_ITEM_HEIGHT;
     const listAreaHeight = heightList ?? 0;
 
     const calculatedHeight = scrollAllPanelContent
@@ -122,11 +128,11 @@ const ItemsList = ({
       setIsTotalListHeight(
         totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
       );
-  }, [height, inviteItems.length, scrollAllPanelContent]);
+  }, [height, listItems.length, scrollAllPanelContent]);
 
   useEffect(() => {
     onBodyResize();
-  }, [height, inviteItems.length, scrollAllPanelContent, onBodyResize]);
+  }, [height, listItems.length, scrollAllPanelContent, onBodyResize]);
 
   const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
 
@@ -142,13 +148,14 @@ const ItemsList = ({
         direction={interfaceDirection}
         height={bodyHeight}
         width="auto"
-        itemCount={inviteItems.length}
+        itemCount={listItems.length}
         itemSize={USER_ITEM_HEIGHT}
         itemData={{
           t,
           inviteItems,
           setInviteItems,
           isDisabled,
+          listItems,
         }}
         outerElementType={
           !scrollAllPanelContent ? CustomScrollbarsVirtualList : undefined

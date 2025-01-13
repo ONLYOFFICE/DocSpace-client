@@ -33,13 +33,14 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import {
-  getUserType,
-  getUserTypeTranslation,
-} from "@docspace/shared/utils/common";
+// import {
+//   getUserType,
+//   getUserTypeTranslation,
+// } from "@docspace/shared/utils/common";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { EmployeeType } from "@docspace/shared/enums";
+// import { EmployeeType } from "@docspace/shared/enums";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
 
 type ItemProps = {
@@ -47,7 +48,7 @@ type ItemProps = {
   item: TSelectorItem;
   setInviteItems: (items: TSelectorItem[]) => void;
   inviteItems: TSelectorItem[];
-  isDisabled: boolean;
+  // isDisabled: boolean;
 };
 
 const Item = ({
@@ -55,7 +56,7 @@ const Item = ({
   item,
   setInviteItems,
   inviteItems,
-  isDisabled,
+  // isDisabled,
 }: ItemProps) => {
   const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
@@ -68,54 +69,65 @@ const Item = ({
       : email;
   const source = avatar || (isGroup ? "" : AtReactSvgUrl);
 
-  const type = getUserType(item);
+  // const type = getUserType(item);
 
-  let avatarRole = AvatarRole.user;
-  switch (type) {
-    case EmployeeType.Owner:
-      avatarRole = AvatarRole.owner;
-      break;
-    case EmployeeType.Admin:
-      avatarRole = AvatarRole.admin;
-      break;
-    case EmployeeType.RoomAdmin:
-      avatarRole = AvatarRole.manager;
-      break;
-    case EmployeeType.User:
-      avatarRole = AvatarRole.collaborator;
-      break;
-    default:
-  }
+  // let avatarRole = AvatarRole.user;
+  // switch (type) {
+  //   case EmployeeType.Owner:
+  //     avatarRole = AvatarRole.owner;
+  //     break;
+  //   case EmployeeType.Admin:
+  //     avatarRole = AvatarRole.admin;
+  //     break;
+  //   case EmployeeType.RoomAdmin:
+  //     avatarRole = AvatarRole.manager;
+  //     break;
+  //   case EmployeeType.User:
+  //     avatarRole = AvatarRole.collaborator;
+  //     break;
+  //   default:
+  // }
 
-  const typeLabel = getUserTypeTranslation(type, t);
+  // const typeLabel = getUserTypeTranslation(type, t);
 
   const removeItem = () => {
-    const newItems = inviteItems.filter(
-      (inviteItem: TSelectorItem) => inviteItem.id !== id,
+    const itemIndex = inviteItems.findIndex(
+      (inviteItem) => inviteItem.id === id,
     );
+
+    let newItems = [...inviteItems];
+    if (newItems[itemIndex].access) {
+      newItems[itemIndex].access = ShareAccessRights.None;
+    } else {
+      newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
+    }
+
     setInviteItems(newItems);
   };
 
-  // const canDelete = !isOwner; // TODO: Templates
-
-  const canDelete = !isDisabled; // TODO: Templates
+  const canDelete = !item.isOwner;
 
   return (
     <>
       <Avatar
         size={AvatarSize.min}
-        role={avatarRole}
+        role={AvatarRole.none} // avatarRole
         source={source}
         isGroup={isGroup}
         userName={groupName}
         className="invite-input-avatar"
       />
       <StyledInviteUserBody>
-        <Text truncate noSelect className="invite-input-text">
-          {name}
-        </Text>
+        <div className="invite-input-item">
+          <Text truncate noSelect className="invite-input-text">
+            {name}
+          </Text>
+          <Text truncate noSelect className="invite-input-text_me">
+            {item.isOwner && `(${t("Common:MeLabel")})`}
+          </Text>
+        </div>
 
-        {!isGroup && (
+        {/* {!isGroup && (
           <Text
             className="label"
             fontWeight={400}
@@ -126,7 +138,7 @@ const Item = ({
           >
             {`${typeLabel} | ${email}`}
           </Text>
-        )}
+        )} */}
       </StyledInviteUserBody>
       {canDelete && (
         <ReactSVG

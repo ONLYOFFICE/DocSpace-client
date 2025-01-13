@@ -79,7 +79,7 @@ type InviteInputProps = {
   setInviteItems: (items: TSelectorItem[]) => void;
   setAddUsersPanelVisible: (visible: boolean) => void;
   isDisabled: boolean;
-  removeExist: (items: TSelectorItem[]) => void;
+  // removeExist: (items: TSelectorItem[]) => void;
 };
 
 const InviteInput = ({
@@ -90,7 +90,7 @@ const InviteInput = ({
   setInviteItems,
   setAddUsersPanelVisible,
   isDisabled,
-  removeExist,
+  // removeExist,
 }: InviteInputProps) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -134,7 +134,7 @@ const InviteInput = ({
           ? AccountsSearchArea.People
           : AccountsSearchArea.Any;
 
-        // filter.role = [EmployeeType.Admin, EmployeeType.User]; // TODO: Templates
+        filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
         filter.search = query;
         filter.filterSeparator = FILTER_SEPARATOR;
 
@@ -239,9 +239,10 @@ const InviteInput = ({
 
     const newItems = [...filteredItems, ...inviteItems];
 
-    const filtered = removeExist(newItems);
+    // const filtered = removeExist(newItems);
+    // setInviteItems(filtered);
+    setInviteItems(newItems);
 
-    setInviteItems(filtered);
     setInputValue("");
     setIsAddEmailPanelBlocked(true);
     setUsersList([]);
@@ -249,7 +250,7 @@ const InviteInput = ({
     t,
     inputValue,
     inviteItems,
-    removeExist,
+    // removeExist,
     searchRequestRunning,
     setInviteItems,
     usersList,
@@ -276,8 +277,9 @@ const InviteInput = ({
         if (shared) {
           toastr.warning(t("UsersAlreadyAdded"));
         } else {
-          const items = removeExist([item, ...inviteItems]);
-          setInviteItems(items);
+          // const items = removeExist([item, ...inviteItems]);
+          // setInviteItems(items);
+          setInviteItems([item, ...inviteItems]);
         }
 
         setInputValue("");
@@ -315,7 +317,7 @@ const InviteInput = ({
         </DropDownItem>
       );
     },
-    [t, inviteItems, removeExist, setInviteItems],
+    [t, inviteItems, /* removeExist, */ setInviteItems],
   );
 
   const openUsersPanel = () => {

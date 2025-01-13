@@ -29,7 +29,7 @@ import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
 
-// import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -42,7 +42,11 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-
+import {
+  getRoomMembers,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
@@ -82,7 +86,7 @@ type TemplateAccessSettingsContainer =
 type TemplateAccessSettingsPanelProps = {
   t: TTranslation;
   tReady: boolean;
-  templateItem: object | null;
+  templateItem: TRoom;
   // templateEventVisible: VoidFunction;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
@@ -117,8 +121,6 @@ const TemplateAccessSettingsPanel = ({
   const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
 
   const templateId = templateItem?.id;
-
-  console.log("templateItem", templateItem);
 
   useEffect(() => {
     const hasError = inviteItems.some(
@@ -168,6 +170,32 @@ const TemplateAccessSettingsPanel = ({
     [onClose],
   );
 
+  const getTemplateMembers = async () => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const templateMembersData = await getRoomMembers(templateId, {});
+
+      if (templateMembersData?.items?.length) {
+        const convertedItems = templateMembersData.items.map(
+          ({ access, isOwner, sharedTo }) => {
+            return { access, isOwner, ...sharedTo };
+          },
+        );
+        setInviteItems(convertedItems);
+      }
+    } catch (error) {
+      toastr.error(error as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getTemplateMembers();
+  }, []);
+
   useEffect(() => {
     onCheckHeight();
     window.addEventListener("resize", onCheckHeight);
@@ -191,33 +219,48 @@ const TemplateAccessSettingsPanel = ({
 
   const onSubmit = () => {
     setIsLoading(true);
-    toastr.success("onSubmit");
-    console.log("onSave"); // TODO: Templates
-    setIsLoading(false);
+
+    const invitations = inviteItems
+      .filter((i) => !i.isOwner)
+      .map((inviteItem) => {
+        return {
+          id: inviteItem.id,
+          access: inviteItem.access ?? ShareAccessRights.RoomManager,
+        };
+      });
+
+    updateRoomMemberRole(templateId, {
+      invitations,
+      notify: false,
+      sharingMessage: "",
+    })
+      .catch((err) => toastr.error(err))
+      .finally(() => {
+        setIsLoading(false);
+        onClose();
+      });
   };
 
-  const removeExist = (items: TSelectorItem[]) => {
-    const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) =>
-        obj.isGroup ? obj.id === o.id : obj.email === o.email,
-      ) && unique.push(o);
+  // const removeExist = (items: TSelectorItem[]) => {
+  //   const obj1 = {};
+  //   const filtered = items.filter((x) => {
+  //     if (obj1[x.id]) return false;
+  //     obj1[x.id] = true;
+  //     return true;
+  //   });
 
-      return unique;
-    }, []);
+  //   if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
 
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
-
-    return filtered;
-  };
+  //   return filtered;
+  // };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
-    console.log("addItems", users);
+    const items = [...inviteItems, ...users];
 
-    const items = [...users, ...inviteItems];
+    // const filtered = removeExist(items);
+    // setInviteItems(filtered);
+    setInviteItems(items);
 
-    const filtered = removeExist(items);
-
-    setInviteItems(filtered);
     // setInputValue("");
     // setUsersList([]);
     onCloseUsersPanel();
@@ -244,12 +287,11 @@ const TemplateAccessSettingsPanel = ({
       />
     );
 
-  const roomType = 2; // TODO: Templates
-  // const roomType = -1;
+  const roomType = templateItem?.roomType;
   const hasInvitedUsers = !!inviteItems.length;
 
-  const filter = new Filter();
-  // filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin  // TODO: Templates
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   const invitedUsers = useMemo(
     () => inviteItems.map((item) => item.id),
@@ -311,7 +353,7 @@ const TemplateAccessSettingsPanel = ({
             isMobileView={isMobileView}
             isDisabled={isAvailable}
             roomId={templateId}
-            removeExist={removeExist}
+            // removeExist={removeExist}
           />
           <StyledSubHeader className="invite-input-text">
             {t("Files:AccessToTemplate")}
@@ -427,7 +469,7 @@ const TemplateAccessSettingsPanel = ({
               isMobileView={isMobileView}
               isDisabled={isAvailable}
               roomId={templateId}
-              removeExist={removeExist}
+              // removeExist={removeExist}
             />
             <StyledSubHeader className="invite-input-text">
               {t("Files:AccessToTemplate")}
@@ -449,6 +491,7 @@ const TemplateAccessSettingsPanel = ({
           className="send-invitation"
           scale
           size={ButtonSize.normal}
+          isLoading={isLoading}
           isDisabled={hasErrors || !hasInvitedUsers || isLoading}
           primary
           label={t("Common:SaveButton")}

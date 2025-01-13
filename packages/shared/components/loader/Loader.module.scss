@@ -28,13 +28,13 @@
 
 :root {
   --loader-color: #{$loader-light};
-  --button-loader-primary: #{$white};
-  --button-loader-base: var(--accent-button);
+  --button-loade-track-primary: #{$white};
+  --button-loader-track-base: var(--color-scheme-main-buttons);
 
   &[data-theme="dark"] {
     --loader-color: #{$loader-dark};
-    --button-loader-primary: #{$white};
-    --button-loader-base: #{$white};
+    --button-loader-track-primary: #{$white};
+    --button-loader-track-base: #{$white};
   }
 }
 
@@ -49,11 +49,11 @@
   height: var(--loader-size, 20px);
 
   &.primary {
-    color: var(--button-loader-primary);
+    color: var(--button-loader-track-primary);
   }
 
   &.base {
-    color: var(--button-loader-base);
+    color: var(--button-loader-track-base);
   }
 
   &.disabled {

@@ -101,7 +101,13 @@ const ButtonContainer = (props) => {
     }
 
     try {
-      await startRestore(backupId, storageType, storageParams, isNotification);
+      await startRestore(
+        backupId,
+        storageType,
+        storageParams,
+        isNotification,
+        isManagement(),
+      );
       setTenantStatus(TenantStatus.PortalRestore);
 
       SocketHelper.emit(SocketCommands.RestoreBackup);

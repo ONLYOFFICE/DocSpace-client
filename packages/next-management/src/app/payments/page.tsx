@@ -24,9 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const PaymentsPage = () => {
-  return <div>Payments</div>;
-};
+import {
+  getSettings,
+  getQuota,
+  getPortalTariff,
+  getPaymentSettings,
+} from "@/lib/actions";
 
-export default PaymentsPage;
+import PaymentsPage from "./page.client";
+
+async function Page() {
+  const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
+    getSettings(),
+    getQuota(),
+    getPortalTariff(),
+    getPaymentSettings(),
+  ]);
+
+  const { trial } = quota;
+  const { developer, dueDate } = portalTariff;
+  const { salesEmail, buyUrl } = paymentSettings;
+
+  return (
+    <PaymentsPage
+      isTrial={trial}
+      salesEmail={salesEmail}
+      isDeveloper={developer}
+      buyUrl={buyUrl}
+      dueDate={dueDate}
+    />
+  );
+}
+
+export default Page;
 

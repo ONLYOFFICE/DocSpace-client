@@ -23,6 +23,7 @@
     "i18next": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
+    "react-device-detect": "catalog:",
     "react-dom": "catalog:",
     "react-google-recaptcha": "catalog:",
     "react-hcaptcha": "catalog:",

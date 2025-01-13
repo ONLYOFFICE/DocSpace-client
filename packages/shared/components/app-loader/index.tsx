@@ -33,7 +33,11 @@ import styles from "./AppLoader.module.scss";
 const AppLoader = () => {
   return (
     <div className={styles.loaderContainer} data-testid="app-loader">
-      <Loader className={styles.loader} type={LoaderTypes.rombs} size="40px" />
+      <Loader
+        className={styles.pageLoader}
+        type={LoaderTypes.rombs}
+        size="40px"
+      />
     </div>
   );
 };

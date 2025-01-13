@@ -22,11 +22,9 @@
   top: 0;
   inset-inline-start: 0;
 
-  :global {
-    .pageLoader {
-      position: fixed;
-      inset-inline-start: calc(50% - 20px);
-      top: 35%;
-    }
+  .pageLoader {
+    position: fixed;
+    inset-inline-start: calc(50% - 20px);
+    top: 35%;
   }
 }

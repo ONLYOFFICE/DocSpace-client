@@ -70,36 +70,19 @@ import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 const StyledButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 700 !important;
+  font-size: 16px !important;
   padding: 0;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
-
-  background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main?.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
   ${(props) =>
     !props.isDisabled &&
     css`
       :hover {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
         opacity: 0.85;
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
       }
 
       :active {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
         opacity: 1;
         filter: brightness(90%);
         cursor: pointer;

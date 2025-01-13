@@ -16,7 +16,7 @@
     "@docspace/shared": "workspace:*",
     "@onlyoffice/document-editor-react": "catalog:",
     "@serdnam/pino-cloudwatch-transport": "catalog:",
-    "i18next": "^20.6.1",
+    "i18next": "catalog:",
     "moment": "catalog:",
     "nconf": "catalog:",
     "next": "catalog:",
@@ -25,7 +25,7 @@
     "pino-roll": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-i18next": "^13.5.0",
+    "react-i18next": "catalog:",
     "sass": "catalog:",
     "styled-components": "catalog:"
   },

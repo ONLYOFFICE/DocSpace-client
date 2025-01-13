@@ -20,13 +20,13 @@
   "dependencies": {
     "@docspace/shared": "workspace:*",
     "@hcaptcha/react-hcaptcha": "catalog:",
-    "i18next": "^20.6.1",
+    "i18next": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-google-recaptcha": "catalog:",
     "react-hcaptcha": "catalog:",
-    "react-i18next": "^13.5.0",
+    "react-i18next": "catalog:",
     "sass": "catalog:",
     "styled-components": "catalog:"
   },

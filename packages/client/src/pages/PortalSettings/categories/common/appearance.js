@@ -181,7 +181,7 @@ const Appearance = (props) => {
 
   useEffect(() => {
     // getSettings();
-    setDocumentTitle(t("Common:Appearance"));
+    setDocumentTitle(t("Settings:Appearance"));
   }, []);
 
   useEffect(() => {

@@ -9,46 +9,47 @@
   },
   "engines": {
     "node": ">=20",
-    "yarn": ">=4"
+    "pnpm": ">=8"
   },
   "scripts": {
-    "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run build",
-    "bump": "yarn version apply --all",
-    "clean": "yarn workspaces foreach -vptiR run clean",
-    "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run start",
-    "start-prod": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run start-prod",
-    "start:internal": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run start:internal",
-    "start-prod:internal": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management}' run start-prod:internal",
-    "storybook": "yarn workspace @docspace/shared storybook",
-    "storybook-build": "yarn workspace @docspace/shared run storybook-build",
-    "storybook-serve": "yarn workspace @docspace/shared run storybook-serve",
-    "test": "yarn workspace @docspace/shared test",
-    "wipe": "shx rm -rf node_modules yarn.lock packages/**/node_modules",
-    "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
-    "check-circular": "yarn madge --circular ./packages",
-    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint",
-    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint:fix",
-    "test:build": "yarn workspace @docspace/login test:build",
-    "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
-    "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
-    "test:e2e:docker:clear": "yarn workspace @docspace/login test:e2e:docker:clear"
+    "build": "node ./common/scripts/before-build.js && pnpm --filter @docspace/client run build",
+    "bump": "pnpm version --workspace",
+    "temp": " --filter @docspace/login --filter @docspace/doceditor --filter @docspace/management",
+    "clean": "pnpm -r run clean",
+    "deploy": "shx rm -rf ../publish/web && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
+    "start": "node ./common/scripts/before-build.js && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start",
+    "start-prod": "pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start-prod",
+    "start:internal": "node ./common/scripts/before-build.js && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start:internal",
+    "start-prod:internal": "pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start-prod:internal",
+    "storybook": "pnpm --filter @docspace/shared story",
+    "storybook-build": "pnpm --filter @docspace/shared run storybook-build",
+    "storybook-serve": "pnpm --filter @docspace/shared run storybook-serve",
+    "test": "pnpm --filter @docspace/shared test",
+    "wipe": "shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
+    "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
+    "check-circular": "pnpm madge --circular ./packages",
+    "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
+    "lint": "pnpm --filter {@docspace/login,@docspace/doceditor,@docspace/client} run lint",
+    "lint:fix": "pnpm --filter {@docspace/login,@docspace/doceditor,@docspace/client} run lint:fix",
+    "test:build": "pnpm --filter @docspace/login test:build",
+    "test:e2e:docker:build": "pnpm --filter @docspace/login test:e2e:docker:build",
+    "test:e2e:docker:start": "pnpm --filter @docspace/login test:e2e:docker:start",
+    "test:e2e:docker:clear": "pnpm --filter @docspace/login test:e2e:docker:clear"
   },
   "old-scripts": {
-    "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",
-    "build:test.translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test.translation",
-    "e2e.test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:sequential",
-    "e2e.test:sequential": "yarn workspace @docspace/client test:sequential && yarn workspace @docspace/login test:sequential",
-    "e2e.test:model": "yarn workspace @docspace/client test:model && yarn workspace @docspace/login test:model",
-    "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
+    "build:test": "pnpm --filter {@docspace/client,@docspace/login,@docspace/editor} run build:test",
+    "build:test.translation": "pnpm --filter {@docspace/client,@docspace/login,@docspace/editor} run build:test.translation",
+    "e2e.test": "pnpm --filter {@docspace/client,@docspace/login} run test:sequential",
+    "e2e.test:sequential": "pnpm --filter @docspace/client test:sequential && pnpm --filter @docspace/login test:sequential",
+    "e2e.test:model": "pnpm --filter @docspace/client test:model && pnpm --filter @docspace/login test:model",
+    "e2e.test:translation": "pnpm --filter {@docspace/client,@docspace/login} run test:translation:model"
   },
   "devDependencies": {
-    "@types/react-text-mask": "^5.4.14",
-    "he": "^1.2.0",
-    "madge": "^6.1.0",
-    "shx": "^0.3.4",
-    "terser": "^5.34.1"
+    "@types/react-text-mask": "catalog:",
+    "he": "catalog:",
+    "madge": "catalog:",
+    "shx": "catalog:",
+    "terser": "catalog:"
   },
-  "packageManager": "yarn@4.3.0"
+  "packageManager": "pnpm@9.15.3"
 }

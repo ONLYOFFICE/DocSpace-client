@@ -45,7 +45,7 @@ const StyledDialog = styled(Dialog)<{
           left: ${() => (props.left ? `${props.left}px` : "250px")};
         `
       : css`
-          right: 0;
+          right: 19px;
         `}
 
   #modal-dialog {

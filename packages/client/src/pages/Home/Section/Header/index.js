@@ -270,6 +270,7 @@ const SectionHeaderContent = (props) => {
     rootFolderId,
     setGuidanceShare,
     setGuidanceUploading,
+    maintenanceExist,
   } = props;
 
   const location = useLocation();
@@ -591,7 +592,7 @@ const SectionHeaderContent = (props) => {
     window.addEventListener("resize", setGuidRects);
 
     return () => window.removeEventListener("resize", setGuidRects);
-  }, [buttonRef?.current, addButtonRef?.current]);
+  }, [buttonRef?.current, addButtonRef?.current, maintenanceExist]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -848,8 +849,14 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
-      settingsStore;
+    const {
+      theme,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+      displayAbout,
+      maintenanceExist,
+    } = settingsStore;
 
     const isRoom = !!roomType;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
@@ -1019,6 +1026,7 @@ export default inject(
       setGuidanceShare,
       setGuidanceUploading,
       guidanceCoordinates,
+      maintenanceExist,
     };
   },
 )(

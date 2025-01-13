@@ -264,6 +264,7 @@ const FilesRowContent = ({
         {...linkStyles}
         isTextOverflow
         dir="auto"
+        truncate
       >
         {titleWithoutExt}
         {displayFileExtension ? (

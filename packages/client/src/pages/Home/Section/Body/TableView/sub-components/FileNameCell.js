@@ -93,6 +93,7 @@ const FileNameCell = ({
         {...linkProps}
         className={`item-file-name ${indexingClass}`}
         dir="auto"
+        truncate
       >
         {titleWithoutExt}
         {displayFileExtension ? (

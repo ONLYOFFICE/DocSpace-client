@@ -39,8 +39,6 @@ import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
 let requestsCount = 0;
 
-let timerId: ReturnType<typeof setInterval> | null;
-
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, isDialog, style } = props;
 
@@ -112,11 +110,6 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     SocketHelper.on(SocketEvents.RestoreProgress, (opt) => {
       const { progress, isCompleted, error } = opt;
 
-      if (timerId) {
-        clearInterval(timerId);
-        timerId = null;
-      }
-
       setPercent(progress);
 
       if (isCompleted) {
@@ -135,15 +128,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   useEffect(() => {
     if (!ready) return;
 
-    if (!timerId)
-      setTimeout(() => {
-        getRecoveryProgress();
-      }, 6000);
-
-    return () => {
-      if (timerId) clearInterval(timerId);
-      timerId = null;
-    };
+    getRecoveryProgress();
   }, [ready, getRecoveryProgress]);
 
   const headerText = errorMessage

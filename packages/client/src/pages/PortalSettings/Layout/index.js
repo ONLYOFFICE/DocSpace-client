@@ -28,12 +28,17 @@ import React, { useEffect } from "react";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
+
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { SectionHeaderContent, SectionPagingContent } from "./Section";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
@@ -86,6 +91,37 @@ const Layout = ({
   useEffect(() => {
     if (enablePlugins && !isInitPlugins) initPlugins();
   }, [enablePlugins, isInitPlugins, initPlugins]);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (
+      pathname.includes("backup") ||
+      pathname.includes("restore") ||
+      !socketSubscribers.has("backup")
+    )
+      return;
+
+    SocketHelper.off(SocketEvents.BackupProgress);
+    SocketHelper.emit(SocketCommands.Unsubscribe, {
+      roomParts: "backup",
+    });
+  }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      const { socketSubscribers } = SocketHelper;
+
+      if (!socketSubscribers.has("backup")) return;
+
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const { id, eventId } = useParams();
 

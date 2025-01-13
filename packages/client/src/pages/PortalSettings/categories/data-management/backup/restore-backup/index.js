@@ -129,6 +129,11 @@ const RestoreBackup = (props) => {
         roomParts: "backup",
       });
     }
+    if (!socketSubscribers.has("restore")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "restore",
+      });
+    }
 
     SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
       const options = getBackupProgressInfo(
@@ -150,6 +155,12 @@ const RestoreBackup = (props) => {
     return () => {
       resetDownloadingProgress();
       setRestoreResource(null);
+
+      if (!isManagement()) return;
+
+      const pathname = window.location.pathname;
+
+      if (pathname.includes("backup") || pathname.includes("restore")) return;
 
       SocketHelper.off(SocketEvents.BackupProgress);
       SocketHelper.emit(SocketCommands.Unsubscribe, {

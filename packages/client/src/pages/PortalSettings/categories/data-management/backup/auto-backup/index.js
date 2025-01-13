@@ -166,6 +166,12 @@ class AutomaticBackup extends React.PureComponent {
     this.timerId = null;
     resetDownloadingProgress();
 
+    if (!isManagement()) return;
+
+    const pathname = window.location.pathname;
+
+    if (pathname.includes("backup") || pathname.includes("restore")) return;
+
     SocketHelper.off(SocketEvents.BackupProgress);
     SocketHelper.emit(SocketCommands.Unsubscribe, {
       roomParts: "backup",

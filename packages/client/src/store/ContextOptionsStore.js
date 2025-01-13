@@ -88,6 +88,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   isDesktop,
+  isMobile as isMobileUtils,
   isLockedSharedRoom,
   trimSeparator,
 } from "@docspace/shared/utils";
@@ -1941,7 +1942,7 @@ class ContextOptionsStore {
         label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
         icon: HelpCenterReactSvgUrl,
         onClick: this.onEnableFormFillingGuid,
-        disabled: !isFormRoom,
+        disabled: !isFormRoom || isMobileUtils(),
       },
       {
         id: "option_leave-room",

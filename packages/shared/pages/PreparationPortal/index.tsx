@@ -112,6 +112,11 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     SocketHelper.on(SocketEvents.RestoreProgress, (opt) => {
       const { progress, isCompleted, error } = opt;
 
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+
       setPercent(progress);
 
       if (isCompleted) {

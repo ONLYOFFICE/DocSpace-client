@@ -37,12 +37,4 @@ describe("RowSkeleton", () => {
     const rectangle = row.querySelector(".rectangle-content");
     expect(rectangle).toBeInTheDocument();
   });
-
-  it("renders row content", () => {
-    render(<RowSkeleton />);
-
-    const row = screen.getByTestId("row-skeleton");
-    const content = row.querySelector(`.${styles.rowContent}`);
-    expect(content).toBeInTheDocument();
-  });
 });

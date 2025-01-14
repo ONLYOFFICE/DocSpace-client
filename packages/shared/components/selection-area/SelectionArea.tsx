@@ -496,7 +496,7 @@ const SelectionArea = ({
   return (
     <div
       ref={areaRef}
-      className={`${styles.selectionArea}selection-area`}
+      className={`${styles.selectionArea} selection-area`}
       data-testid="selection-area"
     />
   );

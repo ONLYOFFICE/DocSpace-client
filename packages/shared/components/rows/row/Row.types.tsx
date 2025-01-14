@@ -90,5 +90,5 @@ export type RowProps = {
   /** Disables checkbox */
   isDisabled?: boolean;
   /** Callback for changing index */
-  onChangeIndex: (action: VDRIndexingAction) => VoidFunction;
+  onChangeIndex: (action: VDRIndexingAction) => void;
 };

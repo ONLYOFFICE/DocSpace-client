@@ -160,6 +160,8 @@ const Template = (args: RowContainerProps) => {
             element={element}
             contextOptions={user.contextOptions}
             onRowClick={() => {}}
+            isIndexEditingMode={false}
+            onChangeIndex={() => {}}
           >
             <RowContent>
               <Link

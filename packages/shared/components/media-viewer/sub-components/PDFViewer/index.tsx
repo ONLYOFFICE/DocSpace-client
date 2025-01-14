@@ -361,7 +361,7 @@ export const PDFViewer = ({
           isPanelOpen={isPDFSidebarOpen}
           className="pdf-viewer_page-count"
           setIsOpenMobileDrawer={setIsOpenMobileDrawer}
-          visible={!isLoadingFile && !isLoadingScript ? isFileOpened : null}
+          visible={!isLoadingFile && !isLoadingScript ? isFileOpened : false}
         />
 
         {isDesktop && !(isLoadingFile || isLoadingScript) ? (

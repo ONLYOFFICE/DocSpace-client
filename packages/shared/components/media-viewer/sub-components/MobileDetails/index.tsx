@@ -31,7 +31,11 @@ import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 
 import { Text } from "../../../text";
-import { ContextMenu, TContextMenuRef } from "../../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+  TContextMenuRef,
+} from "../../../context-menu";
 
 import { StyledMobileDetails } from "../../MediaViewer.styled";
 
@@ -52,7 +56,7 @@ const MobileDetails = memo(
         onContextMenu,
         contextModel,
       }: MobileDetailsProps,
-      ref: ForwardedRef<TContextMenuRef>,
+      ref: ForwardedRef<ContextMenuRefType>,
     ): JSX.Element => {
       const contextMenuHeader = useMemo(
         () => ({

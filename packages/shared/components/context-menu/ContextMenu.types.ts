@@ -94,12 +94,14 @@ export type SeparatorType = {
   style?: React.CSSProperties;
 };
 
-export type HeaderType = TLogo & {
-  title: string;
-  avatar?: string;
-  logo?: string;
-  icon?: string;
-};
+export type HeaderType =
+  | (TLogo & {
+      title: string;
+      avatar?: string;
+      logo?: string;
+      icon?: string;
+    })
+  | { title: string; icon: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 

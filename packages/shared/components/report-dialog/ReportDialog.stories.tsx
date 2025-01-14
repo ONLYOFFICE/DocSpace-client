@@ -32,6 +32,7 @@ import { Button } from "../button";
 import { DeviceType } from "../../enums";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 import type { ReportDialogProps } from "./ReportDialog.types";
+import FirebaseHelper from "../../utils/firebase";
 
 const meta: Meta<typeof ReportDialog> = {
   title: "Components/ReportDialog",
@@ -102,8 +103,10 @@ const mockFirebaseHelper = {
   },
 };
 
-interface DialogWithToggleButtonProps
-  extends Omit<ReportDialogProps, "visible" | "onClose"> {}
+type DialogWithToggleButtonProps = Omit<
+  ReportDialogProps,
+  "visible" | "onClose"
+>;
 
 const DialogWithToggleButton = ({ ...args }: DialogWithToggleButtonProps) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -130,7 +133,7 @@ export const Default: Story = {
     error: mockError,
     user: mockUser,
     version: "1.0.0",
-    firebaseHelper: mockFirebaseHelper,
+    firebaseHelper: mockFirebaseHelper as unknown as FirebaseHelper,
     currentDeviceType: DeviceType.desktop,
   },
 };

@@ -142,6 +142,7 @@ const Template = ({ ...args }: RowProps) => {
 export const Default: Story = {
   args: {
     checked: true,
+    isIndexEditingMode: false,
   },
   render: (args) => <Template {...args} />,
 };

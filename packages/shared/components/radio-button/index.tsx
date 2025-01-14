@@ -58,7 +58,7 @@ const RadioButton = ({
   onChange,
   onClick,
   orientation = "vertical",
-  spacing = "15px",
+  spacing,
   isDisabled,
   id,
   className,
@@ -96,6 +96,7 @@ const RadioButton = ({
         [styles.disabled]: isDisabled,
         [styles.orientationVertical]: orientation === "vertical",
         [styles.orientationHorizontal]: orientation === "horizontal",
+        [styles.spacing]: spacing,
       })}
       style={style}
       data-testid="radio-button"
@@ -113,7 +114,7 @@ const RadioButton = ({
       <RadiobuttonIcon isChecked={isCheckedState} />
       <Text
         as="span"
-        className={styles.radioButtonText}
+        className={classNames(styles.radioButtonText, "radio-button_text")}
         fontSize={fontSize}
         fontWeight={fontWeight}
       >

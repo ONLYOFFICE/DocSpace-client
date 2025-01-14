@@ -92,6 +92,7 @@ export const Default: Story = {
     selected: "option1",
     onClick: (e: React.ChangeEvent<HTMLInputElement>) =>
       console.log("Selected:", e.target.value),
+    spacing: "15px",
   },
 };
 

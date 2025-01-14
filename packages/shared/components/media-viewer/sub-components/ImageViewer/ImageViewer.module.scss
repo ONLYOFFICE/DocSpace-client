@@ -24,34 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { animated } from "@react-spring/web";
-import { globalColors } from "../../../../themes";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/variables/colors";
 
-export const ImageViewerContainer = styled.div<{ $backgroundBlack: boolean }>`
+:root {
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: rgba(55, 55, 55, 0.6);
+}
+
+:root[data-theme="dark"] {
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: rgba(55, 55, 55, 0.6);
+}
+
+.container {
   width: 100%;
   height: 100%;
-
   position: fixed;
   inset: 0;
   overflow: hidden;
-
   z-index: 300;
-
   user-select: none;
   touch-action: none;
 
-  background-color: ${(props) =>
-    props.$backgroundBlack ? globalColors.darkBlack : "rgba(55, 55, 55, 0.6)"};
-`;
+  &.backgroundBlack {
+    background-color: var(--image-viewer-bg-black);
+  }
 
-export const ImageWrapper = styled.div<{ $isLoading: boolean }>`
+  &:not(.backgroundBlack) {
+    background-color: var(--image-viewer-bg-transparent);
+  }
+}
+
+.wrapper {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  visibility: ${(props) => (props.$isLoading ? "hidden" : "visible")};
-`;
 
-export const Image = styled(animated.img)`
+  &.loading {
+    visibility: hidden;
+  }
+}
+
+.image {
   will-change: opacity, transform, scale;
-`;
+}

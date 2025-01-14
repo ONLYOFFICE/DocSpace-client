@@ -25,17 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url";
 
 import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
 
-import { ControlBtn } from "../../MediaViewer.styled";
-
+import styles from "./DesktopDetails.module.scss";
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
-import { DesktopDetailsContainer } from "./DesktopDetails.styled";
-import { globalColors } from "../../../../themes";
 
 export const DesktopDetails = ({
   onMaskClick,
@@ -43,22 +41,27 @@ export const DesktopDetails = ({
   className,
   showCloseButton,
 }: DesktopDetailsProps) => {
+  console.log("title", title);
+
   return (
-    <DesktopDetailsContainer className={className}>
+    <div className={classNames(styles.container, className)}>
       <Text isBold fontSize="14px" className="title">
         {title}
       </Text>
 
       {showCloseButton ? (
-        <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
+        <div
+          onClick={onMaskClick}
+          className={classNames(styles.controlBtn, "mediaPlayerClose")}
+        >
           <IconButton
-            color={globalColors.white}
+            color="#FFFFFF"
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable
           />
-        </ControlBtn>
+        </div>
       ) : null}
-    </DesktopDetailsContainer>
+    </div>
   );
 };

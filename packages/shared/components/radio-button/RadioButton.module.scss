@@ -56,7 +56,7 @@
   --radio-button-disable-border-color: #{$gray-light-mid};
   --radio-button-hover-border-color: #{$gray};
 
-  --radio-button-spacing: 0;
+  --radio-button-spacing: unset;
 
   display: flex;
   align-items: center;
@@ -71,6 +71,7 @@
     path:first-child {
       stroke: var(--radio-button-border-color);
     }
+
     path:nth-child(even) {
       fill: var(--radio-button-fill-color);
     }
@@ -91,6 +92,7 @@
       path:first-child {
         stroke: var(--radio-button-disable-border-color);
       }
+
       path:nth-child(even) {
         fill: var(--radio-button-disable-fill-color);
       }
@@ -109,14 +111,12 @@
     }
   }
 
-  &.orientationHorizontal {
-    &:not(:first-child) {
+  &.spacing {
+    &.orientationHorizontal:not(:first-child) {
       margin-inline-start: var(--radio-button-spacing);
     }
-  }
 
-  &.orientationVertical {
-    &:not(:last-child) {
+    &.orientationVertical:not(:last-child) {
       margin-block-end: var(--radio-button-spacing);
     }
   }

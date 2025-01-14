@@ -103,6 +103,7 @@ export const EmailInput = ({
       onChange={handleChange}
       onBlur={onBlur}
       onAnimationStart={handleAnimationStart}
+      testId="email-input"
     />
   );
 };

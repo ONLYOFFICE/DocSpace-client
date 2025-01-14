@@ -92,7 +92,7 @@ const RowSkeleton = ({
         />
       )}
 
-      <div className={`${styles.rowContent} row-content`}>
+      <div className={`${styles.box} row-content`}>
         <RectangleSkeleton
           className="first-row-content__mobile"
           title={title}

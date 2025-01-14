@@ -168,6 +168,11 @@
   &.secondary {
     gap: 8px;
   }
+
+  &.multiple {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
 }
 
 .tab {
@@ -263,4 +268,11 @@
   &.secondary {
     display: none;
   }
+}
+
+.tabsBody {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  user-select: none;
 }

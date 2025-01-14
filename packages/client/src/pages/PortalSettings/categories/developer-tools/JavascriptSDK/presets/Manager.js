@@ -124,7 +124,7 @@ const Manager = (props) => {
   );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Index", label: t("Files:Index") },
-    { key: "Name", label: t("Common:Name") },
+    { key: "Name", label: t("Common:Label") },
     { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },

@@ -171,7 +171,9 @@ const SectionHeaderContent = (props) => {
   const getArrayOfParams = () => {
     const path = location.pathname;
     const arrayPath = path.split("/");
-    const arrayOfParams = arrayPath.filter((item) => item !== "");
+    const arrayOfParams = arrayPath.filter((param) => {
+      return param && param !== "filter" && param !== "portal-settings";
+    });
 
     return arrayOfParams;
   };
@@ -206,6 +208,8 @@ const SectionHeaderContent = (props) => {
     const keysCollection = key.split("-");
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
+
+    console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -320,6 +324,8 @@ const SectionHeaderContent = (props) => {
           organizationName: t("Common:OrganizationName"),
           license: t("Common:EnterpriseLicense"),
         });
+
+  console.log(translatedHeader, header);
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>

@@ -118,8 +118,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         options.isEditor,
       );
 
-      newLogos[i].path.light = logoLight;
-      newLogos[i].path.dark = logoDark;
+      logo.path.light = logoLight;
+      logo.path.dark = logoDark;
 
       return logo;
     });

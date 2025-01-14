@@ -33,7 +33,7 @@
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
   --main-button-mobile-progress-bar-color: #{$light-blue-main};
 
-  &[data-theme="Dark"] {
+  &[data-theme="dark"] {
     --background-color: #{$black};
     --status-warning: #{$dark-status-warning};
     --main-button-mobile-text-color: #{$dark-gray-dark};
@@ -44,13 +44,13 @@
     --main-button-mobile-bar-icon: #{$gray-dark};
     --main-button-mobile-button-wrapper-background: #{$black};
     --main-button-mobile-button-wrapper-uploading-background: #{$gray-dark-mid};
-    --main-button-mobile-button-options-background-color: #{$blue-light-mid};
-    --main-button-mobile-button-options-color: #{$black};
+    --main-button-mobile-button-options-background-color: #{$gray-dark-mid};
+    --main-button-mobile-button-options-color: #{$white};
 
     /* Dropdown variables */
     --main-button-mobile-dropdown-separator-background: #{$black};
-    --main-button-mobile-dropdown-button-color: #{$black};
-    --main-button-mobile-dropdown-hover-button-color: #{$light-blue-main-pressed};
+    --main-button-mobile-dropdown-button-color: #{$white};
+    --main-button-mobile-dropdown-hover-button-color: #{$black};
     --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
     --main-button-mobile-progress-bar-color: #{$light-blue-main};
   }

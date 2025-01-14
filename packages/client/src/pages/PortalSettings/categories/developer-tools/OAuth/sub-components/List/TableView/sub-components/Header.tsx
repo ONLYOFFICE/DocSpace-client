@@ -37,7 +37,7 @@ const Header = (props: HeaderProps) => {
   const defaultColumns: TTableColumn[] = [
     {
       key: "Name",
-      title: t("Common:Name"),
+      title: t("Common:Label"),
       resizable: true,
       enable: true,
       default: true,

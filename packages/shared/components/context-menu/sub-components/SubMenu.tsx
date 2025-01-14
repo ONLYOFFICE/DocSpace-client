@@ -258,6 +258,7 @@ const SubMenu = (props: SubMenuProps) => {
             const newWidth = containerOffsetLeft - 12;
 
             subMenuRef.current.style.width = `${newWidth}px`;
+
             setWidthSubMenu(newWidth);
           }
         } else {
@@ -273,6 +274,7 @@ const SubMenu = (props: SubMenuProps) => {
               SECTION_PADDING;
 
             subMenuRef.current.style.width = `${newWidth}px`;
+
             setWidthSubMenu(newWidth);
           }
         }

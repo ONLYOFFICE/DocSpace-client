@@ -56,7 +56,7 @@ const SearchInput = ({
   size,
   className,
   style,
-  scale = true,
+  scale = false,
   onClick,
   id,
   name,

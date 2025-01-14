@@ -182,9 +182,9 @@ const InputBlock = React.memo(
         <TextInput {...inputProps} />
 
         {!isDisabled ? (
-          <div className={styles.append}>
+          <div className="append">
             <div
-              className={`${styles.iconBlock} ${iconButtonClassName}`}
+              className={`${styles.iconBlock} ${iconButtonClassName} input-block-icon`}
               onClick={handleIconClick}
               data-size={size}
             >

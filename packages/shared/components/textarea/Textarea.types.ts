@@ -29,6 +29,8 @@ import { ChangeEvent } from "react";
 export type TextareaProps = {
   /** Class name */
   className?: string;
+  /** Wrapper class name */
+  wrapperClassName?: string;
   /** Used as HTML `id` property  */
   id?: string;
   /** Indicates that the field cannot be used */

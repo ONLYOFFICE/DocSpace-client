@@ -2764,6 +2764,7 @@ __metadata:
     html-loader: "npm:^4.2.0"
     html-webpack-plugin: "npm:5.6.0"
     json-loader: "npm:^0.5.7"
+    mini-css-extract-plugin: "npm:^2.9.2"
     prettier: "npm:^3.3.3"
     queue-promise: "npm:2.2.1"
     react-avatar-editor: "npm:^13.0.2"
@@ -20815,6 +20816,18 @@ __metadata:
   version: 1.0.1
   resolution: "min-indent@npm:1.0.1"
   checksum: 10/bfc6dd03c5eaf623a4963ebd94d087f6f4bbbfd8c41329a7f09706b0cb66969c4ddd336abeb587bc44bc6f08e13bf90f0b374f9d71f9f01e04adc2cd6f083ef1
+  languageName: node
+  linkType: hard
+
+"mini-css-extract-plugin@npm:^2.9.2":
+  version: 2.9.2
+  resolution: "mini-css-extract-plugin@npm:2.9.2"
+  dependencies:
+    schema-utils: "npm:^4.0.0"
+    tapable: "npm:^2.2.1"
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 10/db6ddb8ba56affa1a295b57857d66bad435d36e48e1f95c75d16fadd6c70e3ba33e8c4141c3fb0e22b4d875315b41c4f58550c6ac73b50bdbe429f768297e3ff
   languageName: node
   linkType: hard
 

@@ -54,10 +54,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-};
-
-module.exports = {
-  webpack(config) {
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -70,8 +67,9 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
-    // Add CSS Modules configuration
+    // Configure CSS handling
     config.module.rules.push(
+      // Global styles
       {
         test: /\.module\.(scss|sass)$/,
         use: [
@@ -138,5 +136,6 @@ module.exports = {
 
     return config;
   },
-  ...nextConfig,
 };
+
+module.exports = nextConfig;

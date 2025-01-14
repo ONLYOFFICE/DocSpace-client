@@ -84,7 +84,7 @@ export const Button = React.forwardRef<
       {isLoading ? (
         <Loader
           className={classNames(styles.loader, {
-            [styles.Pr]: primary,
+            [styles.primary]: primary,
           })}
           size="20px"
           type={LoaderTypes.track}

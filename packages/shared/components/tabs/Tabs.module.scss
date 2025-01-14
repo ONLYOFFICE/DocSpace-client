@@ -168,6 +168,11 @@
   &.secondary {
     gap: 8px;
   }
+
+  &.multiple {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
 }
 
 .tab {

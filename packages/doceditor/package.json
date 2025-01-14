@@ -15,30 +15,33 @@
   "dependencies": {
     "@docspace/shared": "workspace:*",
     "@onlyoffice/document-editor-react": "catalog:",
-    "@serdnam/pino-cloudwatch-transport": "catalog:",
     "i18next": "catalog:",
     "moment": "catalog:",
-    "nconf": "catalog:",
     "next": "catalog:",
-    "pino": "catalog:",
-    "pino-pretty": "catalog:",
-    "pino-roll": "catalog:",
     "react": "catalog:",
+    "react-device-detect": "catalog:",
     "react-dom": "catalog:",
     "react-i18next": "catalog:",
     "sass": "catalog:",
-    "styled-components": "catalog:"
+    "styled-components": "catalog:",
+    "ts-pattern": "catalog:"
   },
   "devDependencies": {
     "@svgr/webpack": "catalog:",
     "@types/nconf": "catalog:",
-    "@types/node": "^22.7.5",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@types/styled-components": "catalog:",
     "eslint": "catalog:",
     "eslint-config-next": "catalog:",
+    "nconf": "catalog:",
     "prettier": "catalog:",
+    "pino": "catalog:",
+    "pino-pretty": "catalog:",
+    "pino-roll": "catalog:",
     "shx": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "terser-webpack-plugin": "catalog:"
   }
 }

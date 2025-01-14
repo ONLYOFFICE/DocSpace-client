@@ -220,6 +220,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
             : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
         const viewport = DomHelpers.getViewport();
 
+        const borderWidth = menuRef.current
+          ? +window
+              .getComputedStyle(menuRef.current)
+              .borderWidth.replace("px", "")
+          : 0;
+
         const mobileView =
           isMobileUtils() && (height > 210 || ignoreChangeView);
 
@@ -269,6 +275,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           if (document.body.scrollTop === 0) top = MARGIN_BORDER;
           else top = document.body.scrollTop;
         }
+
+        if (borderWidth) width += borderWidth * 2;
 
         if (containerRef) {
           if (rects) top += rects.height + 4;

@@ -44,6 +44,7 @@ import styles from "./Textarea.module.scss";
 
 const Textarea = ({
   className,
+  wrapperClassName,
   id,
   isDisabled = false,
   isReadOnly = false,
@@ -139,7 +140,7 @@ const Textarea = ({
 
   return (
     <div
-      className={classNames(styles.wrapper, {
+      className={classNames(styles.wrapper, wrapperClassName, {
         [styles.heightScale]: heightScale,
         [styles.isFullHeight]: isFullHeight,
         [styles.defaultHeight]: !heightScale && !isFullHeight,
@@ -148,7 +149,7 @@ const Textarea = ({
       })}
       style={
         {
-          "--height-textarea": `${heightTextArea}px`,
+          "--height-textarea": stringifiedHeight,
           "--full-height": `${fullHeight}px`,
         } as React.CSSProperties
       }

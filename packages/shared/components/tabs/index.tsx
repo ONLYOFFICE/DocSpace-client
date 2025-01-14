@@ -221,7 +221,9 @@ const Tabs = (props: TabsProps) => {
       ) : null}
       <div className={styles.stickyIndent} />
       {!multiple && items[currentItem]?.content ? (
-        <div className={styles.tabsBody}>{items[currentItem].content}</div>
+        <div className={`${styles.tabsBody} tabs-body`}>
+          {items[currentItem].content}
+        </div>
       ) : null}
     </div>
   );

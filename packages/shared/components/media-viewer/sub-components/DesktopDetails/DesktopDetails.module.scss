@@ -38,15 +38,6 @@
   --media-viewer-control-btn-hover: #{$silver};
 }
 
-:root[data-theme="dark"] {
-  --media-viewer-title-color: #{$white};
-  --media-viewer-background: linear-gradient(
-    0deg,
-    #{$tapHighlight-color} 0%,
-    #{$background-color}100%
-  );
-}
-
 .container {
   direction: var(--interface-direction);
   padding-top: 21px;
@@ -73,6 +64,21 @@
     color: var(--media-viewer-title-color);
   }
 }
+
+// .mediaPlayerClose {
+//   position: fixed;
+//   top: 13px;
+//   inset-inline-end: 12px;
+//   height: 17px;
+//   &:hover {
+//     background-color: transparent;
+//   }
+//   svg {
+//     path {
+//       fill: $white;
+//     }
+//   }
+// }
 
 .controlBtn {
   display: inline-block;

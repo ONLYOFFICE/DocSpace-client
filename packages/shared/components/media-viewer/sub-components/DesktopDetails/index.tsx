@@ -34,6 +34,7 @@ import { IconButton } from "../../../icon-button";
 
 import styles from "./DesktopDetails.module.scss";
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
+import { globalColors } from "../../../../themes";
 
 export const DesktopDetails = ({
   onMaskClick,
@@ -41,10 +42,8 @@ export const DesktopDetails = ({
   className,
   showCloseButton,
 }: DesktopDetailsProps) => {
-  console.log("title", title);
-
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={`${styles.container} ${className}`}>
       <Text isBold fontSize="14px" className="title">
         {title}
       </Text>
@@ -52,10 +51,10 @@ export const DesktopDetails = ({
       {showCloseButton ? (
         <div
           onClick={onMaskClick}
-          className={classNames(styles.controlBtn, "mediaPlayerClose")}
+          className={`${styles.controlBtn} ${styles.mediaPlayerClose}`}
         >
           <IconButton
-            color="#FFFFFF"
+            color={globalColors.white}
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable

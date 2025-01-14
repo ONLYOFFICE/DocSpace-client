@@ -626,6 +626,7 @@ class Tile extends React.PureComponent {
       iconProgress,
       isDownload,
       theme,
+      openUser,
     } = this.props;
     const { isFolder, isRoom, isTemplate, id, fileExst } = item;
 
@@ -735,6 +736,7 @@ class Tile extends React.PureComponent {
               FilesTileContent={FilesTileContent}
               badges={badges}
               contextMenuTitle={title}
+              openUser={openUser}
             />
           ) : isRoom ? (
             <>

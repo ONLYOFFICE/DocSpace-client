@@ -30,6 +30,7 @@ import styled, { css, withTheme } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { tablet } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
 
@@ -121,12 +122,19 @@ const StyledContent = styled.div`
     overflow: hidden;
   }
 
+  .item-file-sub-name {
+    width: 100%;
+  }
+
   a {
     display: block !important;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
+
+    span {
+      display: block;
+    }
   }
 
   .new-items {
@@ -145,6 +153,10 @@ const StyledContent = styled.div`
 
     > div {
       margin: 0;
+    }
+
+    .tablet-row-create-room {
+      cursor: pointer;
     }
   }
 
@@ -210,6 +222,7 @@ const TemplatesTile = (props) => {
     badges,
     contextMenuTitle,
     isActive,
+    openUser,
   } = props;
   const { isFolder, isRoom, id, fileExst, createdBy } = item;
 
@@ -290,14 +303,16 @@ const TemplatesTile = (props) => {
             </Text>
           </div>
           <div className="room-tile_bottom-content_field">
-            <Text
+            <Link
+              isHovered
               truncate
               fontSize="13px"
               fontWeight={600}
               color={theme.filesSection.tilesView.subTextColor}
+              onClick={openUser}
             >
               {createdBy.displayName}
-            </Text>
+            </Link>
             <Text
               truncate
               fontSize="13px"

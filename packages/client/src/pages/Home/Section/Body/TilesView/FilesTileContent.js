@@ -46,6 +46,17 @@ const SimpleFilesTileContent = styled(TileContent)`
     align-items: flex-end;
   }
 
+  ${(props) =>
+    props.isTemplate &&
+    css`
+      overflow: hidden;
+
+      .row-main-container {
+        flex-direction: column;
+        align-items: start;
+      }
+    `}
+
   .main-icons {
     align-self: flex-end;
   }
@@ -128,13 +139,14 @@ const FilesTileContent = ({
 }) => {
   const { fileExst, title, isTemplate } = item;
 
-  const roomType = getRoomTypeTitleTranslation(item.roomType, t);
+  const roomType = getRoomTypeTitleTranslation(t, item.roomType);
 
   return (
     <SimpleFilesTileContent
       sideColor={theme.filesSection.tilesView.sideColor}
       isFile={fileExst}
       isRooms={isRooms}
+      isTemplate={isTemplate}
     >
       <Link
         className="item-file-name"

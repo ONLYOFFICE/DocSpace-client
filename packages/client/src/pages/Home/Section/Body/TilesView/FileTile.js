@@ -28,7 +28,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 // import { Context } from "@docspace/shared/utils";
 
@@ -89,7 +89,10 @@ const FileTile = (props) => {
     isDownload,
     selectableRef,
     additionalInfo,
+    openUser,
   } = props;
+
+  const navigate = useNavigate();
 
   // const { sectionWidth } = useContext(Context);
 
@@ -133,6 +136,10 @@ const FileTile = (props) => {
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
+  };
+
+  const onOpenUser = () => {
+    openUser(item.createdBy, navigate);
   };
 
   return (
@@ -189,6 +196,7 @@ const FileTile = (props) => {
           iconProgress={icon}
           isDownload={isDownload}
           additionalInfo={additionalInfo}
+          openUser={onOpenUser}
         >
           <FilesTileContent
             t={t}
@@ -205,7 +213,13 @@ const FileTile = (props) => {
 
 export default inject(
   (
-    { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
+    {
+      filesSettingsStore,
+      filesStore,
+      treeFoldersStore,
+      uploadDataStore,
+      infoPanelStore,
+    },
     { item },
   ) => {
     const { getIcon } = filesSettingsStore;
@@ -230,6 +244,7 @@ export default inject(
       isHighlight,
       icon,
       isDownload,
+      openUser: infoPanelStore.openUser,
     };
   },
 )(

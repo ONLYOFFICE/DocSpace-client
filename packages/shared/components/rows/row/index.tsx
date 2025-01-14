@@ -140,8 +140,6 @@ const Row = (props: RowProps) => {
     onChangeIndex(action);
   };
 
-  console.log("mode", mode);
-
   return (
     <div
       ref={row}

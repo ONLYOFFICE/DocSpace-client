@@ -27,16 +27,16 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, forwardRef, memo, ForwardedRef } from "react";
 
+import classNames from "classnames";
+
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 
 import { Text } from "../../../text";
 import { ContextMenu, TContextMenuRef } from "../../../context-menu";
 
-import { StyledMobileDetails } from "../../MediaViewer.styled";
-
+import styles from "./MobileDetails.module.scss";
 import type MobileDetailsProps from "./MobileDetails.props";
-import { globalColors } from "../../../../themes";
 
 const MobileDetails = memo(
   forwardRef(
@@ -63,17 +63,17 @@ const MobileDetails = memo(
       );
 
       return (
-        <StyledMobileDetails>
+        <div className={classNames(styles.container)}>
           {!isPublicFile ? (
-            <BackArrow className="mobile-close" onClick={onMaskClick} />
+            <BackArrow className={styles.mobileClose} onClick={onMaskClick} />
           ) : null}
-          <Text fontSize="14px" color={globalColors.white} className="title">
+          <Text fontSize="14px" className={styles.title}>
             {title}
           </Text>
           {!isPreviewFile && !isError ? (
             <div className="details-context">
               <MediaContextMenu
-                className="mobile-context"
+                className={styles.mobileContext}
                 onClick={onContextMenu}
               />
               <ContextMenu
@@ -86,7 +86,7 @@ const MobileDetails = memo(
               />
             </div>
           ) : null}
-        </StyledMobileDetails>
+        </div>
       );
     },
   ),

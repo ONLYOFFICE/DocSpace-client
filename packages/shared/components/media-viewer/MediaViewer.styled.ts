@@ -87,52 +87,6 @@ export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
   ${(props) => (props.orientation === "left" ? "left: 20px;" : "right: 20px;")}
 `;
 
-export const StyledMobileDetails = styled.div`
-  direction: ${({ theme }) => theme.interfaceDirection};
-  z-index: 307;
-  position: fixed;
-  top: 0;
-  inset-inline: 0;
-  height: 53px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(
-    0deg,
-    ${globalColors.tapHighlight} 0%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
-
-  svg {
-    path {
-      fill: ${globalColors.white};
-    }
-  }
-
-  .mobile-close {
-    position: fixed;
-    inset-inline-start: 21px;
-    top: 22px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
-  }
-
-  .mobile-context {
-    position: fixed;
-    inset-inline-end: 22px;
-    top: 22px;
-  }
-
-  .title {
-    font-weight: 600;
-    margin-top: 6px;
-    width: calc(100% - 100px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
-
 export const StyledSwitchToolbar = styled.div<StyledSwitchToolbarProps>`
   height: 100%;
   z-index: 306;

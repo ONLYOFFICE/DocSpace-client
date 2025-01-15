@@ -108,6 +108,7 @@ export default inject(
       paymentDate,
       isLicenseDateExpired,
       isDeveloper,
+      isEnterprise,
     } = currentTariffStatusStore;
 
     return {

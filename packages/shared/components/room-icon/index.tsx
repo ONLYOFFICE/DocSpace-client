@@ -162,7 +162,6 @@ const RoomIcon = ({
   const coverSize = size.replace("px", "") * 0.625;
   const textColor = color && getTextColor(`#${color}`, 202);
 
-  // TODO: Templates
   if (isTemplate) {
     return (
       <StyledTemplateIcon
@@ -173,14 +172,14 @@ const RoomIcon = ({
         data-testid="room-icon"
       >
         <ReactSVG className="room-icon-svg" src={TemplateRoomIcon} />
-        {correctImage ? (
+        {showDefault || !correctImage ? (
+          <Text className="room-title">{roomTitle}</Text>
+        ) : (
           <img
             className={classNames([imgClassName, "room-image"])}
             src={imgSrc}
             alt="room icon"
           />
-        ) : (
-          <Text className="room-title">{roomTitle}</Text>
         )}
       </StyledTemplateIcon>
     );

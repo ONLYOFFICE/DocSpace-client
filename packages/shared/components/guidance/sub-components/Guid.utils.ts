@@ -35,7 +35,7 @@ export const getGuidPosition = (guidRects, state, viewAs) => {
   switch (state) {
     case FormFillingTipsState.Starting:
       return {
-        width: viewAs === "table" || viewAs === "row" ? 0 : guidRects.pdf.width,
+        width: viewAs === "row" || viewAs === "table" ? 0 : guidRects.pdf.width,
         height: guidRects.pdf.height,
         left:
           viewAs === "row"
@@ -57,8 +57,7 @@ export const getGuidPosition = (guidRects, state, viewAs) => {
     case FormFillingTipsState.Submitting:
     case FormFillingTipsState.Complete:
       return {
-        width:
-          viewAs === "table" || viewAs === "row" ? 0 : guidRects.ready.width,
+        width: viewAs === "row" || viewAs === "table" ? 0 : guidRects.pdf.width,
         height: guidRects.ready.height,
         left:
           viewAs === "row"

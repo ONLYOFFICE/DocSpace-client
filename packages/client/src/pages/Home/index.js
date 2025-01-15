@@ -164,6 +164,8 @@ const PureHome = (props) => {
     isUsersEmptyView,
     showGuestReleaseTip,
     setGuestReleaseTipDialogVisible,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -380,7 +382,11 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
+        {(((!isEmptyPage ||
+          welcomeFormFillingTipsVisible ||
+          formFillingTipsVisible ||
+          showFilterLoader) &&
+          !isErrorRoomNotAvailable) ||
           (!isContactsEmptyView && isContactsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
@@ -552,6 +558,12 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
+
     // if (!firstLoad) {
     //   if (isLoading) {
     //     showLoader();
@@ -668,8 +680,9 @@ export const Component = inject(
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
       showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible:
-        dialogsStore.setGuestReleaseTipDialogVisible,
+      setGuestReleaseTipDialogVisible,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
     };
   },
 )(observer(Home));

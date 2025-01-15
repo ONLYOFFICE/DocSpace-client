@@ -122,16 +122,9 @@ const FileTile = (props) => {
 
   useEffect(() => {
     setGuidRects();
-  }, [tileRef?.current]);
+    window.addEventListener("resize", setGuidRects);
 
-  const onResize = () => {
-    setGuidRects();
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", setGuidRects);
   }, []);
 
   const element = (

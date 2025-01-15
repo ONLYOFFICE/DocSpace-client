@@ -35,7 +35,11 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
-import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  VDRIndexingAction,
+  RoomsType,
+} from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
@@ -68,6 +72,7 @@ const SectionBodyContent = (props) => {
     startDrag,
     setStartDrag,
     setTooltipPosition,
+    setWelcomeFormFillingTipsVisible,
     isRecycleBinFolder,
     moveDragItems,
     viewAs,
@@ -90,11 +95,22 @@ const SectionBodyContent = (props) => {
     isErrorRoomNotAvailable,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    roomType,
+    userId,
   } = props;
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
+
+  useEffect(() => {
+    const closedFormFillingTips = localStorage.getItem(
+      `closedFormFillingTips-${userId}`,
+    );
+    if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
+      setWelcomeFormFillingTipsVisible(true);
+    }
+  }, [roomType]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -419,6 +435,7 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
+    userStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -442,8 +459,11 @@ export default inject(
       isErrorRoomNotAvailable,
     } = filesStore;
 
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setWelcomeFormFillingTipsVisible,
+    } = dialogsStore;
 
     return {
       dragging,
@@ -453,6 +473,7 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
+      roomType: selectedFolderStore.roomType,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       moveDragItems: filesActionsStore.moveDragItems,
@@ -476,6 +497,8 @@ export default inject(
       isErrorRoomNotAvailable,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
+      setWelcomeFormFillingTipsVisible,
+      userId: userStore?.user?.id,
     };
   },
 )(

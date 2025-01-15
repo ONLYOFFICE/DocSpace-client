@@ -63,6 +63,7 @@ const Guid = ({
   onClose,
   position,
   viewAs,
+  infoPanelVisible,
 }: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
@@ -126,7 +127,14 @@ const Guid = ({
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [position]);
+  }, [
+    onResize,
+    position.bottom,
+    position.height,
+    position.left,
+    position.top,
+    position.width,
+  ]);
 
   if (isMobile()) {
     onClose();
@@ -139,6 +147,7 @@ const Guid = ({
         isBase={theme.isBase}
         className="guid-element"
         position={position}
+        infoPanelVisible={infoPanelVisible}
       />
       <StyledDialog
         id="modal-onMouseDown-close"

@@ -53,6 +53,7 @@ const FormFillingTipsDialog = (props) => {
     visible,
     setFormFillingTipsDialog,
     setWelcomeFormFillingTipsVisible,
+    userId,
   } = props;
 
   const theme = useTheme();
@@ -66,6 +67,7 @@ const FormFillingTipsDialog = (props) => {
 
   const onClose = () => {
     setWelcomeFormFillingTipsVisible(false);
+    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
   };
 
   const { t } = useTranslation(["FormFillingTipsDialog"]);
@@ -114,7 +116,7 @@ const FormFillingTipsDialog = (props) => {
   );
 };
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, userStore }) => {
   const {
     welcomeFormFillingTipsVisible: visible,
     setWelcomeFormFillingTipsVisible,
@@ -125,5 +127,6 @@ export default inject(({ dialogsStore }) => {
     visible,
     setWelcomeFormFillingTipsVisible,
     setFormFillingTipsDialog,
+    userId: userStore?.user?.id,
   };
 })(observer(FormFillingTipsDialog));

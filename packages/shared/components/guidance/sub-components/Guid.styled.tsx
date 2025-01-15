@@ -134,6 +134,7 @@ const StyledTipsCircle = styled.div<{ isSelected: boolean }>`
 const StyledClipped = styled.div<{
   position: ClippedPosition;
   isBase: boolean;
+  infoPanelVisible: boolean;
 }>`
   position: absolute;
   border-radius: 7px;
@@ -142,7 +143,11 @@ const StyledClipped = styled.div<{
     css`
       left: ${`${props.position.left}px`};
       top: ${`${props.position.top}px`};
-      width: ${props.position.width ? `${props.position.width}px` : "100%"};
+      width: ${props.position.width
+        ? `${props.position.width}px`
+        : props.infoPanelVisible
+          ? "calc(100% - 650px)"
+          : "100%"};
       height: ${`${props.position.height}px`};
     `}
   backdrop-filter: ${(props) =>

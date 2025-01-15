@@ -175,8 +175,7 @@ const FilesTableRow = (props) => {
     e.stopPropagation();
     onChangeIndex(action);
   };
-
-  React.useEffect(() => {
+  const setGuidRects = () => {
     if (item?.isPDF && rowRef?.current) {
       setGuidancePdf(
         rowRef.current.firstChild.offsetParent.getClientRects()[0],
@@ -187,7 +186,13 @@ const FilesTableRow = (props) => {
         rowRef.current.firstChild.offsetParent.getClientRects()[0],
       );
     }
-  }, [rowRef?.current]);
+  };
+  React.useEffect(() => {
+    setGuidRects();
+    window.addEventListener("resize", setGuidRects);
+
+    return () => window.removeEventListener("resize", setGuidRects);
+  }, []);
 
   return (
     <StyledDragAndDrop

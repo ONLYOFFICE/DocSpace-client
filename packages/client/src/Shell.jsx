@@ -105,6 +105,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setFormFillingTipsDialog,
     viewAs,
     guidRects,
+    infoPanelVisible,
   } = rest;
 
   const theme = useTheme();
@@ -493,6 +494,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const onCloseGuidance = () => {
     setFormFillingTipsNumber(FormFillingTipsState.Starting);
     setFormFillingTipsDialog(false);
+    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
   };
 
   return (
@@ -504,6 +506,8 @@ const Shell = ({ page = "home", ...rest }) => {
           onClose={onCloseGuidance}
           guidRects={guidRects}
           viewAs={viewAs}
+          currentDeviceType={currentDeviceType}
+          infoPanelVisible={infoPanelVisible}
         />
       )}
       {toast}
@@ -534,6 +538,7 @@ const ShellWrapper = inject(
     currentTariffStatusStore,
     dialogsStore,
     filesStore,
+    infoPanelStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -643,6 +648,7 @@ const ShellWrapper = inject(
       releaseDate: buildVersionInfo.releaseDate,
       viewAs,
       guidRects,
+      infoPanelVisible: infoPanelStore.isVisible,
     };
   },
 )(observer(Shell));

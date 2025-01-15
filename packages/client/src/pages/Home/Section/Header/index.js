@@ -271,6 +271,7 @@ const SectionHeaderContent = (props) => {
     setGuidanceShare,
     setGuidanceUploading,
     maintenanceExist,
+    welcomeFormFillingTipsVisible,
   } = props;
 
   const location = useLocation();
@@ -592,7 +593,12 @@ const SectionHeaderContent = (props) => {
     window.addEventListener("resize", setGuidRects);
 
     return () => window.removeEventListener("resize", setGuidRects);
-  }, [buttonRef?.current, addButtonRef?.current, maintenanceExist]);
+  }, [
+    buttonRef?.current,
+    addButtonRef?.current,
+    maintenanceExist,
+    welcomeFormFillingTipsVisible,
+  ]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -820,8 +826,11 @@ export default inject(
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
-    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
-      dialogsStore;
+    const {
+      setReorderDialogVisible,
+      setCloseEditIndexDialogVisible,
+      welcomeFormFillingTipsVisible,
+    } = dialogsStore;
 
     const {
       getHeaderMenu,
@@ -1027,6 +1036,7 @@ export default inject(
       setGuidanceUploading,
       guidanceCoordinates,
       maintenanceExist,
+      welcomeFormFillingTipsVisible,
     };
   },
 )(

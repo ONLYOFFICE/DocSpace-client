@@ -43,14 +43,22 @@ const Guidance = (props: GuidProps) => {
       viewAs,
     );
     setPosition(newPosition);
-  }, [guidRects, formFillingTipsNumber, viewAs]);
+  }, [formFillingTipsNumber, guidRects, viewAs]);
 
   React.useEffect(() => {
     onResize();
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [guidRects, formFillingTipsNumber, viewAs, onResize]);
+  }, [
+    guidRects.pdf,
+    guidRects.ready,
+    guidRects.share,
+    guidRects.uploading,
+    formFillingTipsNumber,
+    viewAs,
+    onResize,
+  ]);
 
   return <Portal element={<Guid position={position} {...props} />} />;
 };

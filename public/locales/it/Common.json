@@ -598,5 +598,19 @@
   "LogoAbout": "Logo per la pagina Informazioni",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo per l'intestazione degli editor",
-  "LogoDocsEditorEmbedded": "Logo per l’intestazione degli editor - modalità incorporata"
+  "LogoDocsEditorEmbedded": "Logo per l’intestazione degli editor - modalità incorporata",
+  "ActivatePurchaseBuyNow": "Acquista ora",
+  "FreeDaysLeft": "Sono rimasti {{count}} giorni gratuiti",
+  "ActivateTariffLicenseTrialExpiration": "La tua prova scade il {{date}}.",
+  "ActivatePaidTariffExpiration": "Il tuo abbonamento scade il {{date}}.",
+  "ActivateTariffDescr": "‎Stai usando‎ {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Rinnova abbonamento di {{license}}",
+  "ActivatePurchaseBuyLicense": "Per acquistare la licenza, fai clic sul pulsante in basso.",
+  "ActivatePurchaseRenewLicense": "Per continuare a ricevere assistenza e aggiornamenti, acquista un rinnovo.",
+  "ActivateRenewDescr": "Per ottenere i tuoi termini di rinnovo personali, contatta il tuo manager dedicato o scrivici a <1>{{email}}</1>",
+  "ActivateLicense": "Attiva la licenza",
+  "ActivateRenewalDescr": "Per attivare il rinnovo già acquistato, caricalo qui sotto e clicca sul pulsante Attiva.",
+  "ActivateUploadDescr": "Per attivare la tua licenza, caricala qui sotto e clicca su Attiva.",
+  "UploadLicenseFile": "Carica il file della licenza",
+  "ActivateSwithToProHeader": "Passa alla versione completa di {{license}}"
 }

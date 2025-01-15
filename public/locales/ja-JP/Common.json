@@ -598,5 +598,19 @@
   "LogoAbout": "「詳細情報」ページ用のロゴマーク",
   "LogoFavicon": "ファビコン",
   "LogoDocsEditor": "エディターズヘッダーのロゴ",
-  "LogoDocsEditorEmbedded": "エディタのヘッダー用のロゴマーク（埋め込みモード）"
+  "LogoDocsEditorEmbedded": "エディタのヘッダー用のロゴマーク（埋め込みモード）",
+  "ActivatePurchaseBuyNow": "すぐに購入",
+  "FreeDaysLeft": "残り無料日数：{{count}}",
+  "ActivateTariffLicenseTrialExpiration": "試用版の有効期限は{{date}}です。",
+  "ActivatePaidTariffExpiration": "サブスクリプションの有効期限は{{date}}です。",
+  "ActivateTariffDescr": "現在、{{organizationName}}の{{productName}}{{license}}を使用しています。",
+  "ActivateRenewSubscriptionHeader": "{{license}}版サブスクリプションを更新する",
+  "ActivatePurchaseBuyLicense": "ライセンスを購入するには、以下のボタンをクリックしてください。",
+  "ActivatePurchaseRenewLicense": "サポートとアップデートを継続するには、更新を購入する必要があります。",
+  "ActivateRenewDescr": "特別な更新条件を得るには、専属マネージャーに連絡するか、<1>{{email}}</1>までご連絡ください。",
+  "ActivateLicense": "ライセンスの有効化",
+  "ActivateRenewalDescr": "すでに購入済みの更新を有効にするには、以下にアップロードし、「有効化」ボタンをクリックしてください。",
+  "ActivateUploadDescr": "ライセンスを有効にするには、以下のようにアップロードし、「有効にする」をクリックしてください。",
+  "UploadLicenseFile": "ライセンスファイルのアップロード",
+  "ActivateSwithToProHeader": "{{license}}版への切り替え"
 }

@@ -597,5 +597,18 @@
   "LogoAbout": "شعار لصفحة \"من نحن",
   "LogoFavicon": "الأيقونة المفضلة",
   "LogoDocsEditor": "شعار ترويسة المحررين",
-  "LogoDocsEditorEmbedded": "شعار ترويسة المحررين - الوضع المضمن"
+  "LogoDocsEditorEmbedded": "شعار ترويسة المحررين - الوضع المضمن",
+  "ActivatePurchaseBuyNow": "اشتري الآن",
+  "FreeDaysLeft": "{{count}} أيام مجانية متبقية",
+  "ActivateTariffLicenseTrialExpiration": "تنتهي الفترة التجريبية الخاصة بك في {{date}}.",
+  "ActivatePaidTariffExpiration": "ينتهي اشتراكك في {{date}}.",
+  "ActivateTariffDescr": "أنت تستخدم {{organizationName}} {{productName}} {{license}}.",
+  "ActivatePurchaseBuyLicense": "لشراء الترخيص ، انقر فوق الزر أدناه.",
+  "ActivatePurchaseRenewLicense": "للاستمرار في الحصول على الدعم والتحديثات ، قم بشراء تجديد.",
+  "ActivateRenewDescr": "للحصول على شروط التجديد الشخصية ، اتصل بمديرك المخصص أو راسلنا على <1> {{email}} </1>",
+  "ActivateLicense": "تفعيل الترخيص",
+  "ActivateRenewalDescr": "لتفعيل التجديد الذي اشتريته مسبقًا، قم برفعه أدناه واضغط على زر التفعيل.",
+  "ActivateUploadDescr": "لتنشيط الترخيص الخاص بك ، قم بتحميله بالأسفل وانقر فوق تنشيط.",
+  "UploadLicenseFile": "تحميل ملف الترخيص",
+  "ActivateSwithToProHeader": "قم بالتبديل إلى الإصدار الكامل {{license}}."
 }

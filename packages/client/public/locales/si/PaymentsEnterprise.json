@@ -1,14 +1,5 @@
 {
-  "ActivateLicense": "බලපත්‍රය සක්‍රිය කරන්න",
   "ActivateLicenseActivated": "බලපත්‍රය සක්‍රියයි",
-  "ActivatePaidTariffExpiration": "ඔබගේ දායකත්‍වය {{date}} දී කල් ඉකුත් වේ.",
-  "ActivatePurchaseBuyLicense": "බලපත්‍රයක් මිලදී ගැනීමට, පහත බොත්තම ඔබන්න",
-  "ActivatePurchaseBuyNow": "මිලදී ගන්න",
-  "ActivatePurchaseRenewLicense": "දිගටම සහාය සහ යාවත්කාල ලැබීමට, අළුත් කරන්න.",
-  "ActivateRenewDescr": "ඔබේ පුද්ගලික අලුත් කිරීමේ නියමයන් ලබා ගැනීමට, ඔබේ කැප වූ කළමනාකරු අමතන්න හෝ <1>{{email}}</1> හිදී අපට ලියන්න",
-  "ActivateTariffLicenseTrialExpiration": "ඔබගේ නැහැසුම {{date}} දී කල් ඉකුත් වේ.",
-  "ActivateUploadDescr": "ඔබගේ බලපත්‍රය සක්‍රිය කිරීමට, එය පහතින් උඩුගත කර සක්‍රිය කරන්න ඔබන්න.",
-  "FreeDaysLeft": "නොමිලේ දවස් {{count}} ක් ඉතිරියි",
   "UpgradeToProBannerInformationDemo": "<1>මෙතනින්</1> ආදර්ශනයක් ඉල්ලන්න",
   "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1> හරහා මිලදී ගැනීමේ ප්‍රශ්න අසන්න",
   "UpgradeToProBannerInformationSupport": "<1>{{helpUrl}}</1> හරහා තාක්‍ෂණික සහාය ගන්න",
@@ -24,6 +15,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "ඔබගේ කණ්ඩායම කෙතරම් වුවත්, පහසුවෙන් සංස්කරණය කරන්න සහ ලේඛනවල සහයෝගයෙන් වැඩ කරන්න.",
   "UpgradeToProBannerItemScalabilityHeader": "පරිමාණය සහ පොකුරු කිරීම.",
   "UpgradeToProBannerItemSupportDescr": "ඔබ මුහුණ දෙන සියළුම ගැටළු සඳහා ඉක්මනින් සහාය ගන්න.",
-  "UpgradeToProBannerItemSupportHeader": "තාක්‍ෂණික සහාය",
-  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න"
+  "UpgradeToProBannerItemSupportHeader": "තාක්‍ෂණික සහාය"
 }

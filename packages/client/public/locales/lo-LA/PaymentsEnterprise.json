@@ -1,15 +1,5 @@
 {
-  "ActivateLicense": "ເປີດໃຊ້ໃບອະນຸຍາດ",
   "ActivateLicenseActivated": "ເປີດໃຊ້ໃບອະນຸຍາດແລ້ວ",
-  "ActivatePaidTariffExpiration": "ການສະໝັກສິດນຳໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນວັນທີ {{date}}.",
-  "ActivatePurchaseBuyLicense": "ເພື່ອຊື້ໃບອະນຸຍາດ, ໃຫ້ຄລິກໃສ່ປຸ່ມຂ້າງລຸ່ມນີ້.",
-  "ActivatePurchaseBuyNow": "ຊື້​ດຽວ​ນີ້",
-  "ActivatePurchaseRenewLicense": "ເພື່ອສືບຕໍ່ໄດ້ຮັບການສະໜັບສະໜູນ ແລະອັບເດດ, ໃຫ້ຊື້ ການຕໍ່ອາຍຸໃໝ່.",
-  "ActivateRenewDescr": "ເພື່ອ​ໄດ້​ຮັບ​ຂໍ້​ກໍາ​ນົດ​ການ​ຕໍ່​ອາ​ຍຸ​ສ່ວນ​ບຸກ​ຄົນ​ຂອງ​ທ່ານ​, ຕິດ​ຕໍ່​ຫາ​ຜູ້​ຈັດ​ການ​ທີ່​ອຸ​ທິດ​ຕົນ​ຂອງ​ທ່ານ​ຫຼື​ຂຽນ​ຫາ​ພວກ​ເຮົາ​ທີ່ <1>{{email}}</1>",
-  "ActivateTariffDescr": "ທ່ານກຳລັງໃຊ້ {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffLicenseTrialExpiration": "ໄລຍະທົດລອງໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນວັນທີ {{date}}.",
-  "ActivateUploadDescr": "ເພື່ອເປີດໃຊ້ໃບອະນຸຍາດຂອງທ່ານ, ອັບໂຫຼດມັນຢູ່ລຸ່ມນີ້ ແລະຄລິກທີ່ເປີດໃຊ້ງານ.",
-  "FreeDaysLeft": "ໄລຍະໃຊ້ຟຣີຍັງເຫຼືອ {{count}} ມື້",
   "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ {{license}} Edition ຢູ່<1>ໃນເວັບໄຊທ໌ທາງການ</1>",
   "UpgradeToProBannerInformationDemo": "ຮ້ອງຂໍການສາທິດ <1>ທີ່ນີ້</1>",
   "UpgradeToProBannerInformationPurchase": "ຖາມຄຳຖາມຊື້ຢູ່ <1>{{email}}</1>",
@@ -27,6 +17,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "ແກ້ໄຂ ແລະເຮັດວຽກຮ່ວມກັນໃນເອກະສານຢ່າງສະດວກສະບາຍ ບໍ່ວ່າທີມຂອງທ່ານຈະເປັນຂະໜາດໃດກໍຕາມ.",
   "UpgradeToProBannerItemScalabilityHeader": "ຄວາມສາມາດໃນການຂະຫຍາຍ ແລະການຈັດກຸ່ມ.",
   "UpgradeToProBannerItemSupportDescr": "ຂໍຄວາມຊ່ວຍເຫຼືອແບບມືອາຊີບດ່ວນສຳລັບທຸກບັນຫາທີ່ເຈົ້າປະເຊີນ.",
-  "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ.",
-  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ"
+  "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ."
 }

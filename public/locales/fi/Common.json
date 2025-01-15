@@ -597,5 +597,19 @@
   "LogoAbout": "Logo Sisällöstä-osioon",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Toimittajan otsikon logo",
-  "LogoDocsEditorEmbedded": "Logo editorin ylätunnisteeseen - upotettu tila"
+  "LogoDocsEditorEmbedded": "Logo editorin ylätunnisteeseen - upotettu tila",
+  "ActivatePurchaseBuyNow": "Osta",
+  "FreeDaysLeft": "{{count}} ilmaista päivää jäljellä",
+  "ActivateTariffLicenseTrialExpiration": "Koekäyttösi vanhenee {{date}}.",
+  "ActivatePaidTariffExpiration": "Tilauksesi vanhenee {{date}}.",
+  "ActivateTariffDescr": "Käytät {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Uusi {{license}} tilaus",
+  "ActivatePurchaseBuyLicense": "Klikkaa alla olevaa painiketta ostaaksesi lisenssin.",
+  "ActivatePurchaseRenewLicense": "Osta jatkotilaus saadaksesi jatkossakin tukea ja päivityksiä. ",
+  "ActivateRenewDescr": "Saadaksesi henkilökohtaiset jatkotilauksen ehdot, ota yhteyttä omaan yhteyshenkilöösi tai kirjoita meille <1>{{email}}</1>",
+  "ActivateLicense": "Aktivoi lisenssi",
+  "ActivateRenewalDescr": "Aktivoidaksesi tilauksen, jonka olet jo ostanut, lataa se alapuolelta ja klikkaa aktivoi-painiketta. ",
+  "ActivateUploadDescr": "Aktivoidaksesi lisenssisi, lataa se alta ja klikkaa aktivoi.",
+  "UploadLicenseFile": "Lataa lisenssitiedosto",
+  "ActivateSwithToProHeader": "Vaihda täyteen {{license}} -versioon"
 }

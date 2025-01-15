@@ -597,5 +597,19 @@
   "LogoAbout": "Logotip za stran O nas",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logotip za glavo urednika",
-  "LogoDocsEditorEmbedded": "Logotip za glavo urednikov - vdelan način"
+  "LogoDocsEditorEmbedded": "Logotip za glavo urednikov - vdelan način",
+  "ActivatePurchaseBuyNow": "Kupi zdaj",
+  "FreeDaysLeft": "{{count}} preostalih brezplačnih dni",
+  "ActivateTariffLicenseTrialExpiration": "Vaš preizkus poteče dne {{date}}.",
+  "ActivatePaidTariffExpiration": "Vaša naročnina poteče dne {{date}}.",
+  "ActivateTariffDescr": "Uporabljate {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Obnovite naročnino za {{license}}",
+  "ActivatePurchaseBuyLicense": "Za nakup licence kliknite spodnji na gumb.",
+  "ActivatePurchaseRenewLicense": "Če želite nadaljno podporo in prejemanje posodobitev, kupite obnovitev.",
+  "ActivateRenewDescr": "Za vaše pogoje podaljšanja se obrnite na svojega skrbnika ali nam pišite na <1>{{email}}</1>",
+  "ActivateLicense": "Aktivacija licence",
+  "ActivateRenewalDescr": "Če želite aktivirati podaljšanje, ki ste ga že kupili, ga naložite spodaj in kliknite gumb Aktiviraj.",
+  "ActivateUploadDescr": "Če želite aktivirati svojo licenco, jo prenesite spodaj in kliknite Aktiviraj.",
+  "UploadLicenseFile": "Naloži licenčno datoteko",
+  "ActivateSwithToProHeader": "Preklopite na polno verzijo {{license}}"
 }

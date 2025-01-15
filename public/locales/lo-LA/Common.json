@@ -388,5 +388,16 @@
   "LogoAbout": "ໂລໂກ້ສຳລັບໜ້າກ່ຽວກັບ",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ",
-  "LogoDocsEditorEmbedded": "ໂລໂກ້ສຳລັບສ່ວນຫົວບັນນາທິການ - ໂໝດຝັງ"
+  "LogoDocsEditorEmbedded": "ໂລໂກ້ສຳລັບສ່ວນຫົວບັນນາທິການ - ໂໝດຝັງ",
+  "ActivatePurchaseBuyNow": "ຊື້​ດຽວ​ນີ້",
+  "FreeDaysLeft": "ໄລຍະໃຊ້ຟຣີຍັງເຫຼືອ {{count}} ມື້",
+  "ActivateTariffLicenseTrialExpiration": "ໄລຍະທົດລອງໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນວັນທີ {{date}}.",
+  "ActivatePaidTariffExpiration": "ການສະໝັກສິດນຳໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນວັນທີ {{date}}.",
+  "ActivateTariffDescr": "ທ່ານກຳລັງໃຊ້ {{organizationName}} {{productName}} {{license}}.",
+  "ActivatePurchaseBuyLicense": "ເພື່ອຊື້ໃບອະນຸຍາດ, ໃຫ້ຄລິກໃສ່ປຸ່ມຂ້າງລຸ່ມນີ້.",
+  "ActivatePurchaseRenewLicense": "ເພື່ອສືບຕໍ່ໄດ້ຮັບການສະໜັບສະໜູນ ແລະອັບເດດ, ໃຫ້ຊື້ ການຕໍ່ອາຍຸໃໝ່.",
+  "ActivateRenewDescr": "ເພື່ອ​ໄດ້​ຮັບ​ຂໍ້​ກໍາ​ນົດ​ການ​ຕໍ່​ອາ​ຍຸ​ສ່ວນ​ບຸກ​ຄົນ​ຂອງ​ທ່ານ​, ຕິດ​ຕໍ່​ຫາ​ຜູ້​ຈັດ​ການ​ທີ່​ອຸ​ທິດ​ຕົນ​ຂອງ​ທ່ານ​ຫຼື​ຂຽນ​ຫາ​ພວກ​ເຮົາ​ທີ່ <1>{{email}}</1>",
+  "ActivateLicense": "ເປີດໃຊ້ໃບອະນຸຍາດ",
+  "ActivateUploadDescr": "ເພື່ອເປີດໃຊ້ໃບອະນຸຍາດຂອງທ່ານ, ອັບໂຫຼດມັນຢູ່ລຸ່ມນີ້ ແລະຄລິກທີ່ເປີດໃຊ້ງານ.",
+  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ"
 }

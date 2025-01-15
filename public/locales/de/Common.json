@@ -598,5 +598,19 @@
   "LogoAbout": "Logo für die Informationsseite",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo für Kopfzeile der Editoren",
-  "LogoDocsEditorEmbedded": "Logo für die Kopfzeile der Editoren - eingebetteter Modus"
+  "LogoDocsEditorEmbedded": "Logo für die Kopfzeile der Editoren - eingebetteter Modus",
+  "ActivatePurchaseBuyNow": "Jetzt kaufen",
+  "FreeDaysLeft": "{{count}} kostenlose Tage übrig",
+  "ActivateTariffLicenseTrialExpiration": "Ihre Testversion ist noch {{date}} Tage gültig.",
+  "ActivatePaidTariffExpiration": "Ihr Abonnement ist bis {{date}}, gültig.",
+  "ActivateTariffDescr": "Sie benutzen {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Abonnement für die {{license}}-Version verlängern",
+  "ActivatePurchaseBuyLicense": "Klicken Sie auf die Schaltfläche unten, wenn Sie eine Lizenz erwerben möchten.",
+  "ActivatePurchaseRenewLicense": "Verlängern Sie Ihr Abonnement, um Support und Updates weiter zu erhalten.",
+  "ActivateRenewDescr": "Wenn Sie besondere Bedingungen für Verlängerung brauchen, wenden Sie sich an Ihren Manager oder kontaktieren Sie uns unter <1>{{email}}</1>",
+  "ActivateLicense": "Lizenz freischalten",
+  "ActivateRenewalDescr": "Um die bereits gekaufte Verlängerung zu aktivieren, laden Sie sie unten hoch und klicken Sie auf die Schaltfläche \"Aktivieren\".",
+  "ActivateUploadDescr": "Um Ihre Lizenz zu aktivieren, laden Sie diese hoch und klicken Sie auf Aktivieren.",
+  "UploadLicenseFile": "Lizenzdatei hochladen",
+  "ActivateSwithToProHeader": "Erwerben Sie die vollständige {{license}}-Version"
 }

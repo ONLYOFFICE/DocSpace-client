@@ -599,5 +599,19 @@
   "LogoAbout": "Logo for the About page",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo for the editors header",
-  "LogoDocsEditorEmbedded": "Logo for the editors header - embedded mode"
+  "LogoDocsEditorEmbedded": "Logo for the editors header - embedded mode",
+  "ActivatePurchaseBuyNow": "Buy now",
+  "FreeDaysLeft": "{{count}} Free days left",
+  "ActivateTariffLicenseTrialExpiration": "Your trial expires on {{date}}.",
+  "ActivatePaidTariffExpiration": "Your subscription expires on {{date}}.",
+  "ActivateTariffDescr": "You are using {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Renew subscription for {{license}}",
+  "ActivatePurchaseBuyLicense": "To buy license, click the button below.",
+  "ActivatePurchaseRenewLicense": "To continue getting support and updates, buy a renewal.",
+  "ActivateRenewDescr": "To get your personal renewal terms, contact your dedicated manager or write us at <1>{{email}}</1>",
+  "ActivateLicense": "Activate license",
+  "ActivateRenewalDescr": "To activate the renewal you already bought, upload it below and click the Activate button.",
+  "ActivateUploadDescr": "To activate your license, upload it below and click the Activate.",
+  "UploadLicenseFile": "Upload license file",
+  "ActivateSwithToProHeader": "Switch to full {{license}} version"
 }

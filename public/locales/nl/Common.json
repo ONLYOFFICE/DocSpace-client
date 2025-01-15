@@ -597,5 +597,19 @@
   "LogoAbout": "Logo voor de Over pagina",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo voor de koptekst van de editors",
-  "LogoDocsEditorEmbedded": "Logo voor de koptekst van de editors - ingesloten modus"
+  "LogoDocsEditorEmbedded": "Logo voor de koptekst van de editors - ingesloten modus",
+  "ActivatePurchaseBuyNow": "Koop nu",
+  "FreeDaysLeft": "{{count}} Gratis dagen over",
+  "ActivateTariffLicenseTrialExpiration": "Uw proefperiode verloopt op {{date}}.",
+  "ActivatePaidTariffExpiration": "Uw abonnement verloopt op {{date}}.",
+  "ActivateTariffDescr": "U gebruikt {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Abonnement verlengen voor {{license}}",
+  "ActivatePurchaseBuyLicense": "Klik op de knop hieronder om een licentie te kopen.",
+  "ActivatePurchaseRenewLicense": "Koop een verlenging om ondersteuning en updates te blijven ontvangen.",
+  "ActivateRenewDescr": "Om uw persoonlijke verlengvoorwaarden te ontvangen, neemt u contact op met uw aangewezen manager of schrijft u ons op <1>{{email}}</1>",
+  "ActivateLicense": "Licentie activeren",
+  "ActivateRenewalDescr": "Om de verlenging die u al gekocht hebt te activeren, uploadt u deze hieronder en klikt u op de knop Activeren.",
+  "ActivateUploadDescr": "Om uw licentie te activeren, uploadt u deze hieronder en klikt u op Activeren.",
+  "UploadLicenseFile": "Upload licentiebestand",
+  "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie"
 }

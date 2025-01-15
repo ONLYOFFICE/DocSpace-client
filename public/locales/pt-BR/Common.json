@@ -598,5 +598,19 @@
   "LogoAbout": "Logotipo para a página Sobre",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo para o título dos editores",
-  "LogoDocsEditorEmbedded": "Logotipo para o cabeçalho dos editores - modo embutido"
+  "LogoDocsEditorEmbedded": "Logotipo para o cabeçalho dos editores - modo embutido",
+  "ActivatePurchaseBuyNow": "Comprar agora",
+  "FreeDaysLeft": "{{count}} dias livres restantes",
+  "ActivateTariffLicenseTrialExpiration": "Seu teste expira em {{date}}.",
+  "ActivatePaidTariffExpiration": "Sua assinatura expira em {{date}}.",
+  "ActivateTariffDescr": "Você está usando o {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Renovar assinatura para {{license}}",
+  "ActivatePurchaseBuyLicense": "Para comprar a licença, clique no botão abaixo.",
+  "ActivatePurchaseRenewLicense": "Para continuar recebendo suporte e atualizações, compre uma renovação.",
+  "ActivateRenewDescr": "Para obter seus termos de renovação pessoais, entre em contato com seu gerente dedicado ou escreva para <1>{{email}}</1>",
+  "ActivateLicense": "Ativar licença",
+  "ActivateRenewalDescr": "Para ativar a renovação que você já comprou, carregue-a abaixo e clique no botão Ativar.",
+  "ActivateUploadDescr": "Para ativar sua licença, faça o upload abaixo e clique no botão Ativar.",
+  "UploadLicenseFile": "Carregar arquivo de licença",
+  "ActivateSwithToProHeader": "Mudar para a versão {{license}} completa"
 }

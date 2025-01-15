@@ -597,5 +597,19 @@
   "LogoAbout": "Logotips lapai Par",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Redaktora galvenes logotips",
-  "LogoDocsEditorEmbedded": "Logotips redaktoru galvenei - iegultais režīms"
+  "LogoDocsEditorEmbedded": "Logotips redaktoru galvenei - iegultais režīms",
+  "ActivatePurchaseBuyNow": "Pirkt tagad",
+  "FreeDaysLeft": "Atlikušas {{count}} bezmaksas dienas",
+  "ActivateTariffLicenseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
+  "ActivatePaidTariffExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",
+  "ActivateTariffDescr": "Jūs izmantojat {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Atjaunojiet {{license}} abonementu",
+  "ActivatePurchaseBuyLicense": "Lai iegādātos licenci, noklikšķiniet uz zemāk esošās pogas.",
+  "ActivatePurchaseRenewLicense": "Lai turpinātu saņemt atbalstu un atjauninājumus, iegādājieties atjaunošanu.",
+  "ActivateRenewDescr": "Lai uzzinātu savus personīgos atjaunošanas noteikumus, sazinieties ar savu īpašo pārvaldnieku šajā jomā vai rakstiet mums uz <1>{{email}}</1>",
+  "ActivateLicense": "Aktivizēt licenci",
+  "ActivateRenewalDescr": "Lai aktivizētu jau iegādāto atjaunošanu, augšupielādējiet to zemāk un noklikšķiniet uz pogas Aktivizēt.",
+  "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",
+  "UploadLicenseFile": "Augšupielādējiet licences failu",
+  "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju"
 }

@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "Aktivizēt licenci",
   "ActivateLicenseActivated": "Licence ir aktivizēta",
-  "ActivatePaidTariffExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",
-  "ActivatePurchaseBuyLicense": "Lai iegādātos licenci, noklikšķiniet uz zemāk esošās pogas.",
-  "ActivatePurchaseBuyNow": "Pirkt tagad",
-  "ActivatePurchaseRenewLicense": "Lai turpinātu saņemt atbalstu un atjauninājumus, iegādājieties atjaunošanu.",
-  "ActivateRenewalDescr": "Lai aktivizētu jau iegādāto atjaunošanu, augšupielādējiet to zemāk un noklikšķiniet uz pogas Aktivizēt.",
-  "ActivateRenewDescr": "Lai uzzinātu savus personīgos atjaunošanas noteikumus, sazinieties ar savu īpašo pārvaldnieku šajā jomā vai rakstiet mums uz <1>{{email}}</1>",
-  "ActivateRenewSubscriptionHeader": "Atjaunojiet {{license}} abonementu",
-  "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",
-  "ActivateTariffDescr": "Jūs izmantojat {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffLicenseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
   "ActivateToProBannerHeaderTrial": "Iegādājieties pilnu {{license}} versiju, lai iegūtu:",
-  "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",
-  "FreeDaysLeft": "Atlikušas {{count}} bezmaksas dienas",
   "UpgradeToProBannerHeader": "Saņemiet bezmaksas piekļuvi uzņēmumam gatavam biroja komplektam uz 30 dienām",
   "UpgradeToProBannerInformationAboutShort": "Uzziniet vairāk par {{license}} versiju <1>oficiālajā vietnē</1>",
   "UpgradeToProBannerInformationDemo": "Pieprasiet demonstrāciju <1>šeit</1>",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "Ērti rediģējiet un sadarbojieties ar dokumentiem neatkarīgi no jūsu komandas lieluma.",
   "UpgradeToProBannerItemScalabilityHeader": "Mērogojamība un grupēšana.",
   "UpgradeToProBannerItemSupportDescr": "Saņemiet ātru profesionālu palīdzību jebkādām problēmām, ar kurām saskaraties.",
-  "UpgradeToProBannerItemSupportHeader": "Tehniskais atbalsts.",
-  "UploadLicenseFile": "Augšupielādējiet licences failu"
+  "UpgradeToProBannerItemSupportHeader": "Tehniskais atbalsts."
 }

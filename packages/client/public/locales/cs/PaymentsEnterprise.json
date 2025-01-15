@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "Aktivovat licenci",
   "ActivateLicenseActivated": "Licence aktivována",
-  "ActivatePaidTariffExpiration": "Vaše předplatné vyprší dne {{date}}.",
-  "ActivatePurchaseBuyLicense": "Chcete-li zakoupit licenci, klikněte na tlačítko níže.",
-  "ActivatePurchaseBuyNow": "Koupit teď",
-  "ActivatePurchaseRenewLicense": "Chcete-li i nadále dostávat podporu a aktualizace, zakupte si obnovení.",
-  "ActivateRenewalDescr": "Chcete-li aktivovat již zakoupené obnovení, nahrajte jej níže a klikněte na tlačítko Aktivovat.",
-  "ActivateRenewDescr": "Chcete-li získat osobní podmínky obnovení, kontaktujte svého specializovaného manažera nebo nám napište na <1>{{email}}</1>.",
-  "ActivateRenewSubscriptionHeader": "Obnovení firemního předplatného {{license}}",
-  "ActivateSwithToProHeader": "Přechod na plnou verzi {{license}}",
-  "ActivateTariffDescr": "Používáte aplikaci {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffLicenseTrialExpiration": "Platnost vaší zkušební verze končí dne {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakoupením plné verze {{license}} získáte:",
-  "ActivateUploadDescr": "Chcete-li aktivovat licenci, nahrajte ji níže a klikněte na tlačítko Aktivovat.",
-  "FreeDaysLeft": "Počet zbývajících volných dnů: {{count}}",
   "UpgradeToProBannerHeader": "Získejte bezplatný přístup k podnikovému kancelářskému balíku na 30 dní",
   "UpgradeToProBannerInformationAboutShort": "Více informací o edici {{license}} na <1>oficiálních stránkách</1>",
   "UpgradeToProBannerInformationDemo": "Požádejte o ukázku <1>zde</1>",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "Pohodlně upravujte dokumenty a spolupracujte na nich bez ohledu na velikost vašeho týmu.",
   "UpgradeToProBannerItemScalabilityHeader": "Škálovatelnost a clusterování.",
   "UpgradeToProBannerItemSupportDescr": "Získejte rychlou odbornou pomoc pro všechny problémy, se kterými se potýkáte.",
-  "UpgradeToProBannerItemSupportHeader": "Technická podpora.",
-  "UploadLicenseFile": "Nahrání licenčního souboru"
+  "UpgradeToProBannerItemSupportHeader": "Technická podpora."
 }

@@ -597,5 +597,19 @@
   "LogoAbout": "Λογότυπο για τη σελίδα «Σχετικά»",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Λογότυπο για την επικεφαλίδα των προγραμμάτων επεξεργασίας",
-  "LogoDocsEditorEmbedded": "Λογότυπο για την κεφαλίδα των συντακτών – ενσωματωμένη λειτουργία"
+  "LogoDocsEditorEmbedded": "Λογότυπο για την κεφαλίδα των συντακτών – ενσωματωμένη λειτουργία",
+  "ActivatePurchaseBuyNow": "Αγορά τώρα",
+  "FreeDaysLeft": "Απομένουν {{count}} δωρεάν ημέρες",
+  "ActivateTariffLicenseTrialExpiration": "Η δοκιμαστική σας συνδρομή λήγει στις {{date}}.",
+  "ActivatePaidTariffExpiration": "Η συνδρομή σας λήγει στις {{date}}.",
+  "ActivateTariffDescr": "Χρησιμοποιείτε το {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Ανανέωση συνδρομής για {{license}}",
+  "ActivatePurchaseBuyLicense": "Για να αγοράσετε άδεια χρήσης, κάντε κλικ στο παρακάτω κουμπί.",
+  "ActivatePurchaseRenewLicense": "Για να συνεχίσετε να λαμβάνετε υποστήριξη και ενημερώσεις, αγοράστε μια ανανέωση.",
+  "ActivateRenewDescr": "Για να λάβετε τους προσωπικούς σας όρους ανανέωσης, επικοινωνήστε με τον ειδικό διαχειριστή σας ή στείλτε μας email στο <1>{{email}}</1>",
+  "ActivateLicense": "Ενεργοποίηση άδειας χρήσης",
+  "ActivateRenewalDescr": "Για να ενεργοποιήσετε την ανανέωση που έχετε ήδη αγοράσει, μεταφορτώστε την παρακάτω και κάντε κλικ στο κουμπί Ενεργοποίηση.",
+  "ActivateUploadDescr": "Για να ενεργοποιήσετε την άδειά σας, ανεβάστε την παρακάτω και κάντε κλικ στο Ενεργοποίηση.",
+  "UploadLicenseFile": "Ανέβασμα αρχείου άδειας χρήσης",
+  "ActivateSwithToProHeader": "Αλλαγή σε πλήρη έκδοση {{license}}"
 }

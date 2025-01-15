@@ -599,5 +599,19 @@
   "LogoAbout": "Логотип для страницы \"О компании\"",
   "LogoFavicon": "Иконка сайта",
   "LogoDocsEditor": "Логотип для заголовка редакторов",
-  "LogoDocsEditorEmbedded": "Логотип для заголовка редакторов - встроенный режим"
+  "LogoDocsEditorEmbedded": "Логотип для заголовка редакторов - встроенный режим",
+  "ActivatePurchaseBuyNow": "Купить сейчас",
+  "FreeDaysLeft": "Осталось {{count}} бесплатных дней",
+  "ActivateTariffLicenseTrialExpiration": "Пробный период истекает {{date}}.",
+  "ActivatePaidTariffExpiration": "Подписка истекает {{date}}.",
+  "ActivateTariffDescr": "Вы используете {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Продлить подписку на {{license}}",
+  "ActivatePurchaseBuyLicense": "Чтобы купить лицензию, нажмите кнопку ниже.",
+  "ActivatePurchaseRenewLicense": "Чтобы продолжить получать техподдержку и обновления, купите продление подписки.",
+  "ActivateRenewDescr": "Чтобы получить персональные условия продления, свяжитесь со специально назначенным менеджером или напишите нам по адресу <1>{{email}}</1>",
+  "ActivateLicense": "Активировать лицензию",
+  "ActivateRenewalDescr": "Чтобы активировать уже купленное возобновление, загрузите его ниже и нажмите кнопку «Активировать».",
+  "ActivateUploadDescr": "Чтобы активировать лицензию, загрузите ее ниже и нажмите кнопку Активировать.",
+  "UploadLicenseFile": "Загрузить файл лицензии",
+  "ActivateSwithToProHeader": "Перейдите на полную версию {{license}}"
 }

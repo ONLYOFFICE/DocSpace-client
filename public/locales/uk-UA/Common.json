@@ -597,5 +597,19 @@
   "LogoAbout": "Логотип для сторінки «Інформація».",
   "LogoFavicon": "Фавікон",
   "LogoDocsEditor": "Логотип заголовка редакторів",
-  "LogoDocsEditorEmbedded": "Логотип для заголовка редакторів — вбудований режим"
+  "LogoDocsEditorEmbedded": "Логотип для заголовка редакторів — вбудований режим",
+  "ActivatePurchaseBuyNow": "Купити зараз",
+  "FreeDaysLeft": "Залишилося безплатних днів: {{count}}",
+  "ActivateTariffLicenseTrialExpiration": "Термін дії вашої пробної версії закінчується {{date}}.",
+  "ActivatePaidTariffExpiration": "Термін дії вашої підписки закінчується {{date}}.",
+  "ActivateTariffDescr": "Ви використовуєте {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Поновити підписку на {{license}}",
+  "ActivatePurchaseBuyLicense": "Щоб купити ліцензію, натисніть кнопку нижче.",
+  "ActivatePurchaseRenewLicense": "Щоб і надалі отримувати підтримку й оновлення, придбайте поновлення.",
+  "ActivateRenewDescr": "Щоб отримати персональні умови поновлення, зверніться до свого менеджера або напишіть нам на адресу <1>{{email}}</1>",
+  "ActivateLicense": "Активувати ліцензію",
+  "ActivateRenewalDescr": "Щоб активувати оновлення, яке ви вже купили, передайте його нижче та натисніть «Активувати».",
+  "ActivateUploadDescr": "Щоб активувати ліцензію, завантажте її нижче та натисніть «Активувати».",
+  "UploadLicenseFile": "Завантажити файл ліцензії",
+  "ActivateSwithToProHeader": "Перемкнутися на повну версію {{license}}"
 }

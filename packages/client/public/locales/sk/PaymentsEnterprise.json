@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "Aktivovať licenciu",
   "ActivateLicenseActivated": "Licencia aktivovaná",
-  "ActivatePaidTariffExpiration": "Platnosť vášho predplatného vyprší {{date}}.",
-  "ActivatePurchaseBuyLicense": "Ak si chcete kúpiť licenciu, kliknite na tlačidlo nižšie.",
-  "ActivatePurchaseBuyNow": "Kúpiť teraz",
-  "ActivatePurchaseRenewLicense": "Kúpte si obnovenie, aby ste aj naďalej získavali podporu a aktualizácie.",
-  "ActivateRenewalDescr": "Ak chcete aktivovať už zakúpené obnovenie, nahrajte ho nižšie a kliknite na tlačidlo Aktivovať.",
-  "ActivateRenewDescr": "V prípade, že by ste chceli získať špeciálne podmienky obnovenia, kontaktujte svojho osobného manažéra alebo nám napíšte na adresu <1>{{email}}</1>",
-  "ActivateRenewSubscriptionHeader": "Obnoviť predplatné pre verziu {{license}}",
-  "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}",
-  "ActivateTariffDescr": "Používate {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffLicenseTrialExpiration": "Platnosť vašej skúšobnej verzie vyprší {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakúpením plnej verzie {{license}} získate:",
-  "ActivateUploadDescr": "Aby ste aktivovali licenciu, nahrajte ju nižšie a kliknite na Aktivovať.",
-  "FreeDaysLeft": "Bezplatná verzia bude aktívna {{count}} deň (dní)",
   "UpgradeToProBannerHeader": "Získajte bezplatný prístup k kancelárskemu balíku pre firmy na 30 dní",
   "UpgradeToProBannerInformationAboutShort": "Viac informácií o {{license}} Edition nájdete na <1>oficiálnej webovej stránke</1>",
   "UpgradeToProBannerInformationDemo": "Požiadajte o ukážku <1>tu</1>",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "Pohodlne upravujte a spolupracujte na dokumentoch bez ohľadu na veľkosť vášho tímu.",
   "UpgradeToProBannerItemScalabilityHeader": "Škálovateľnosť a klastrovanie.",
   "UpgradeToProBannerItemSupportDescr": "Získajte rýchlu odbornú pomoc pri všetkých otázkach, ktoré sa vám môžu vyskytnúť.",
-  "UpgradeToProBannerItemSupportHeader": "Technická podpora.",
-  "UploadLicenseFile": "Nahrajte súbor s licenciou"
+  "UpgradeToProBannerItemSupportHeader": "Technická podpora."
 }

@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "ライセンスの有効化",
   "ActivateLicenseActivated": "ライセンス認証済み",
-  "ActivatePaidTariffExpiration": "サブスクリプションの有効期限は{{date}}です。",
-  "ActivatePurchaseBuyLicense": "ライセンスを購入するには、以下のボタンをクリックしてください。",
-  "ActivatePurchaseBuyNow": "すぐに購入",
-  "ActivatePurchaseRenewLicense": "サポートとアップデートを継続するには、更新を購入する必要があります。",
-  "ActivateRenewalDescr": "すでに購入済みの更新を有効にするには、以下にアップロードし、「有効化」ボタンをクリックしてください。",
-  "ActivateRenewDescr": "特別な更新条件を得るには、専属マネージャーに連絡するか、<1>{{email}}</1>までご連絡ください。",
-  "ActivateRenewSubscriptionHeader": "{{license}}版サブスクリプションを更新する",
-  "ActivateSwithToProHeader": "{{license}}版への切り替え",
-  "ActivateTariffDescr": "現在、{{organizationName}}の{{productName}}{{license}}を使用しています。",
-  "ActivateTariffLicenseTrialExpiration": "試用版の有効期限は{{date}}です。",
   "ActivateToProBannerHeaderTrial": "すべての機能を利用するには、{{license}}の完全版を購入してください。",
-  "ActivateUploadDescr": "ライセンスを有効にするには、以下のようにアップロードし、「有効にする」をクリックしてください。",
-  "FreeDaysLeft": "残り無料日数：{{count}}",
   "UpgradeToProBannerHeader": "エンタープライズ対応のオフィススイートを30日間無料でご利用いただけます。",
   "UpgradeToProBannerInformationAboutShort": "{{license}}版の詳細は<1>公式サイト</1>でご確認ください。",
   "UpgradeToProBannerInformationDemo": "でデモを依頼するには、<1>ここ</1>をクリック",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "チームの規模に関係なく、ドキュメントを快適に編集し、共同作業を行うことができます。",
   "UpgradeToProBannerItemScalabilityHeader": "スケーラビリティとクラスタリング。",
   "UpgradeToProBannerItemSupportDescr": "あらゆる問題に対して、プロフェッショナルが迅速に対応します。",
-  "UpgradeToProBannerItemSupportHeader": "技術サポート",
-  "UploadLicenseFile": "ライセンスファイルのアップロード"
+  "UpgradeToProBannerItemSupportHeader": "技術サポート"
 }

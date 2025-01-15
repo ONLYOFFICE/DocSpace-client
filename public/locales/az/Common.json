@@ -597,5 +597,19 @@
   "LogoAbout": "Haqqımızda səhifəsi üçün loqo",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
-  "LogoDocsEditorEmbedded": "Redaktor başlığı - quraşdırılmış rejim üçün loqo"
+  "LogoDocsEditorEmbedded": "Redaktor başlığı - quraşdırılmış rejim üçün loqo",
+  "ActivatePurchaseBuyNow": "İndi al",
+  "FreeDaysLeft": "{{count}} pulsuz gün qalıb",
+  "ActivateTariffLicenseTrialExpiration": "Sınaq müddətiniz {{date}} tarixində bitir.",
+  "ActivatePaidTariffExpiration": "Abunəliyiniz {{date}} tarixində bitir.",
+  "ActivateTariffDescr": "Siz {{organizationName}} {{productName}} {{license}} istifadə edirsiniz.",
+  "ActivateRenewSubscriptionHeader": "{{license}} üçün abunəliyi təzələyin",
+  "ActivatePurchaseBuyLicense": "Lisenziyanı almaq üçün aşağıdakı düyməyə klikləyin.",
+  "ActivatePurchaseRenewLicense": "Dəstək və yeniliklər əldə etməyə davam etmək üçün yeniləməni alın",
+  "ActivateRenewDescr": "Şəxsi yeniləmə şərtlərinizi əldə etmək üçün müvafiq menecerlə əlaqə saxlayın və ya bizə yazın <1>{{email}}</1>",
+  "ActivateLicense": "Lisenziyanı aktivləşdirin",
+  "ActivateRenewalDescr": "Əvvəllər aldığınız yeniləməni aktivləşdirmək üçün onu aşağıda yükləyin və Aktivləşdir düyməsinə klikləyin.",
+  "ActivateUploadDescr": "Lisenziyanızı aktivləşdirmək üçün onu aşağıda yükləyib aktivləşdirmə düyməsinə klikləyin.",
+  "UploadLicenseFile": "Lisenziya faylını yükləyin",
+  "ActivateSwithToProHeader": "Tam {{license}} versiyasına təkmilləşdirin"
 }

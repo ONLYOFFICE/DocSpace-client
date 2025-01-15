@@ -598,5 +598,19 @@
   "LogoAbout": "Siglă pentru pagina Despre",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
-  "LogoDocsEditorEmbedded": "Siglă pentru antetul editorului - modul încorporat"
+  "LogoDocsEditorEmbedded": "Siglă pentru antetul editorului - modul încorporat",
+  "ActivatePurchaseBuyNow": "Cumpărare acum",
+  "FreeDaysLeft": "{{count}} zile gratuite rămase",
+  "ActivateTariffLicenseTrialExpiration": "Versiunea dvs de încercare expiră pe {{date}}.",
+  "ActivatePaidTariffExpiration": "Abonamentul dvs expiră pe {{date}}.",
+  "ActivateTariffDescr": "Utilizați {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Reînnoire abonamentul {{license}}",
+  "ActivatePurchaseBuyLicense": "Pentru a procura licența, faceți clic pe butonul de mai jos.",
+  "ActivatePurchaseRenewLicense": "Pentru a continua să primiți asistență și actualizări, trebuie să procurați o reînnoire.",
+  "ActivateRenewDescr": "Pentru termeni și condiții de reînnoire personale, contactați managerul dvs personal sau trimiteți un mesaj email la <1>{{email}}</1>",
+  "ActivateLicense": "Activare licenţă",
+  "ActivateRenewalDescr": "Pentru a activa actualizarea cumpărată, încărcați-o mai jos și faceți clic pe butonul Activare.",
+  "ActivateUploadDescr": "Pentru a activa licența, încărcați-o mai jos și faceți clic pe butonul Activare.",
+  "UploadLicenseFile": "Încărcare fişier licenţă",
+  "ActivateSwithToProHeader": "Comutare la versiunea completă {{license}}"
 }

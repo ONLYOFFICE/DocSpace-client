@@ -597,5 +597,19 @@
   "LogoAbout": "Logo pre stránku Informácie",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo pre hlavičku editora",
-  "LogoDocsEditorEmbedded": "Logo pre hlavičku editorov - vložený režim"
+  "LogoDocsEditorEmbedded": "Logo pre hlavičku editorov - vložený režim",
+  "ActivatePurchaseBuyNow": "Kúpiť teraz",
+  "FreeDaysLeft": "Bezplatná verzia bude aktívna {{count}} deň (dní)",
+  "ActivateTariffLicenseTrialExpiration": "Platnosť vašej skúšobnej verzie vyprší {{date}}.",
+  "ActivatePaidTariffExpiration": "Platnosť vášho predplatného vyprší {{date}}.",
+  "ActivateTariffDescr": "Používate {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Obnoviť predplatné pre verziu {{license}}",
+  "ActivatePurchaseBuyLicense": "Ak si chcete kúpiť licenciu, kliknite na tlačidlo nižšie.",
+  "ActivatePurchaseRenewLicense": "Kúpte si obnovenie, aby ste aj naďalej získavali podporu a aktualizácie.",
+  "ActivateRenewDescr": "V prípade, že by ste chceli získať špeciálne podmienky obnovenia, kontaktujte svojho osobného manažéra alebo nám napíšte na adresu <1>{{email}}</1>",
+  "ActivateLicense": "Aktivovať licenciu",
+  "ActivateRenewalDescr": "Ak chcete aktivovať už zakúpené obnovenie, nahrajte ho nižšie a kliknite na tlačidlo Aktivovať.",
+  "ActivateUploadDescr": "Aby ste aktivovali licenciu, nahrajte ju nižšie a kliknite na Aktivovať.",
+  "UploadLicenseFile": "Nahrajte súbor s licenciou",
+  "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}"
 }

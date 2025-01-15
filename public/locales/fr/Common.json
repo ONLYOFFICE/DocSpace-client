@@ -598,5 +598,19 @@
   "LogoAbout": "Logo pour la page À propos",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo pour l'en-tête des éditeurs",
-  "LogoDocsEditorEmbedded": "Logo pour l’en-tête des éditeurs - mode intégré"
+  "LogoDocsEditorEmbedded": "Logo pour l’en-tête des éditeurs - mode intégré",
+  "ActivatePurchaseBuyNow": "Acheter maintenant",
+  "FreeDaysLeft": "{{count}} jours gratuits disponibles",
+  "ActivateTariffLicenseTrialExpiration": "Votre période d'essai expire le {{date}}.",
+  "ActivatePaidTariffExpiration": "Votre abonnement expire le {{date}}.",
+  "ActivateTariffDescr": "Vous utilisez {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Renouveler l'abonnement sur {{license}}",
+  "ActivatePurchaseBuyLicense": "Pour acheter la licence, cliquez sur le bouton ci-dessous.",
+  "ActivatePurchaseRenewLicense": "Pour profiter du support et des mises à jour, achetez un renouvellement.",
+  "ActivateRenewDescr": "Pour obtenir les conditions de renouvellement personnelles, contactez votre responsable ou écrivez-nous à <1>{{email}}</1>",
+  "ActivateLicense": "Activer la licence",
+  "ActivateRenewalDescr": "Pour activer le renouvellement que vous avez déjà acheté, téléchargez-le ci-dessous et cliquez sur le bouton Activer.",
+  "ActivateUploadDescr": "Pour activer votre licence, chargez-la ci-dessous et cliquez sur le bouton d'activation.",
+  "UploadLicenseFile": "Charger le fichier de licence",
+  "ActivateSwithToProHeader": "Passer à la version {{license}} complète"
 }

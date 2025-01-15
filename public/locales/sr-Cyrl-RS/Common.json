@@ -598,5 +598,19 @@
   "LogoAbout": "Логотип за У вези страницу",
   "LogoFavicon": "Фавикона",
   "LogoDocsEditor": "Логотип за заглавље уређивача",
-  "LogoDocsEditorEmbedded": "Логотип за заглавље уређивача - уграђени режим"
+  "LogoDocsEditorEmbedded": "Логотип за заглавље уређивача - уграђени режим",
+  "ActivatePurchaseBuyNow": "Купи сада",
+  "FreeDaysLeft": "{{count}} бесплатних дана остало",
+  "ActivateTariffLicenseTrialExpiration": "Ваш пробни период истиче {{date}}.",
+  "ActivatePaidTariffExpiration": "Ваша претплата истиче {{date}}.",
+  "ActivateTariffDescr": "Користите {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Обновите претплату за {{license}}",
+  "ActivatePurchaseBuyLicense": "Да бисте купили лиценцу, кликните на дугме испод.",
+  "ActivatePurchaseRenewLicense": "Да бисте наставили да добијате подршку и ажурирања, купите обнову.",
+  "ActivateRenewDescr": "Да бисте добили ваше личне услове обнове, контактирајте вашег посвећеног менаџера или нам пишите на <1>{{email}}</1>",
+  "ActivateLicense": "Активирај лиценцу",
+  "ActivateRenewalDescr": "Да бисте активирали обнову коју сте већ купили, поставите је испод и кликните на дугме Активирај.",
+  "ActivateUploadDescr": "Да бисте активирали вашу лиценцу, отпремите је испод и кликните на Активирај.",
+  "UploadLicenseFile": "Отпремите датотеку лиценце",
+  "ActivateSwithToProHeader": "Пребаците се на пуну {{license}} верзију"
 }

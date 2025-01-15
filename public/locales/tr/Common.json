@@ -597,5 +597,19 @@
   "LogoAbout": "Hakkında sayfası logosu",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Editörler başlığı için logo",
-  "LogoDocsEditorEmbedded": "Editör başlığı logosu – gömülü mod"
+  "LogoDocsEditorEmbedded": "Editör başlığı logosu – gömülü mod",
+  "ActivatePurchaseBuyNow": "Şimdi satın al",
+  "FreeDaysLeft": "{{count}} ücretsiz gün kaldı",
+  "ActivateTariffLicenseTrialExpiration": "Deneme süreniz {{date}} tarihinde sona eriyor.",
+  "ActivatePaidTariffExpiration": "Aboneliğiniz {{date}} tarihinde sona eriyor.",
+  "ActivateTariffDescr": "{{organizationName}} {{productName}} {{license}} kullanıyorsunuz.",
+  "ActivateRenewSubscriptionHeader": "{{license}} aboneliğini yenileyin",
+  "ActivatePurchaseBuyLicense": "Lisans satın almak için aşağıdaki düğmeye tıklayın.",
+  "ActivatePurchaseRenewLicense": "Destek ve güncelleme almaya devam etmek için yenileme satın alın.",
+  "ActivateRenewDescr": "Kişisel yenileme şartlarınızı öğrenmek için özel yöneticinizle iletişime geçin veya <1>{{email}}</1> adresinden bize yazın",
+  "ActivateLicense": "Lisansı etkinleştir",
+  "ActivateRenewalDescr": "Zaten satın aldığınız yenilemeyi etkinleştirmek için aşağıya yükleyin ve Etkinleştir düğmesine tıklayın.",
+  "ActivateUploadDescr": "Lisansınızı etkinleştirmek için aşağıya yükleyin ve Etkinleştir'e tıklayın.",
+  "UploadLicenseFile": "Lisans dosyasını yükle",
+  "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin"
 }

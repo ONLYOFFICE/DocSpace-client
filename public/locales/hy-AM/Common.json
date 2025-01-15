@@ -598,5 +598,19 @@
   "LogoAbout": "Մասին էջի լոգոն",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
-  "LogoDocsEditorEmbedded": "Խմբագիրների վերնագրի պատկերանշան՝ ներկառուցված ռեժիմ"
+  "LogoDocsEditorEmbedded": "Խմբագիրների վերնագրի պատկերանշան՝ ներկառուցված ռեժիմ",
+  "ActivatePurchaseBuyNow": "Գնիր հիմա",
+  "FreeDaysLeft": "Մնացել են {{count}} անվճար օրեր",
+  "ActivateTariffLicenseTrialExpiration": "Ձեր փորձաշրջանի ժամկետը լրանում է {{date}}-ին:",
+  "ActivatePaidTariffExpiration": "Ձեր բաժանորդագրության ժամկետը լրանում է {{date}}-ին:",
+  "ActivateTariffDescr": "Դուք օգտագործում եք {{organizationName}} {{productName}} {{license}}:",
+  "ActivateRenewSubscriptionHeader": "Թարմացրեք բաժանորդագրությունը {{license}}-ի համար",
+  "ActivatePurchaseBuyLicense": "Լիցենզիա գնելու համար սեղմեք ստորև նշված կոճակը:",
+  "ActivatePurchaseRenewLicense": "Աջակցություն և թարմացումներ ստանալը շարունակելու համար գնեք նորացում:",
+  "ActivateRenewDescr": "Ձեր անձնական նորացման պայմանները ստանալու համար դիմեք ձեր հատուկ մենեջերին կամ գրեք մեզ <1>{{email}}</1> հասցեով",
+  "ActivateLicense": "Ակտիվացնել լիցենզիան",
+  "ActivateRenewalDescr": "Արդեն գնած թարմացումը ակտիվացնելու համար վերբեռնեք այն ստորև և սեղմեք Ակտիվացնել կոճակը:",
+  "ActivateUploadDescr": "Ձեր լիցենզիան ակտիվացնելու համար վերբեռնեք այն ստորև և սեղմեք Ակտիվացնել:",
+  "UploadLicenseFile": "Վերբեռնեք լիցենզիայի ֆայլը",
+  "ActivateSwithToProHeader": "Անցում ամբողջական {{license}} տարբերակին"
 }

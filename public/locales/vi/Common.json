@@ -597,5 +597,18 @@
   "LogoAbout": "Logo cho trang Giới thiệu",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa",
-  "LogoDocsEditorEmbedded": "Logo cho tiêu đề của biên tập viên - chế độ nhúng"
+  "LogoDocsEditorEmbedded": "Logo cho tiêu đề của biên tập viên - chế độ nhúng",
+  "ActivatePurchaseBuyNow": "Mua ngay",
+  "FreeDaysLeft": "Còn {{count}} ngày miễn phí",
+  "ActivateTariffLicenseTrialExpiration": "Bản dùng thử của bạn sẽ hết hạn vào {{date}}.",
+  "ActivatePaidTariffExpiration": "Đăng ký dịch vụ của bạn hết hạn vào {{date}}.",
+  "ActivateTariffDescr": "Bạn đang sử dụng {{license}} {{productName}}{{organizationName}}.",
+  "ActivatePurchaseBuyLicense": "Để mua giấy phép, hãy nhấp vào nút bên dưới.",
+  "ActivatePurchaseRenewLicense": "Để tiếp tục nhận được hỗ trợ và cập nhật, hãy mua bản gia hạn.",
+  "ActivateRenewDescr": "Để nhận các điều khoản gia hạn cho riêng bạn, hãy liên hệ với người quản lý tận tâm của bạn hoặc gửi thư cho chúng tôi qua <1>{{email}}</1>",
+  "ActivateLicense": "Kích hoạt giấy phép",
+  "ActivateRenewalDescr": "Để kích hoạt gia hạn gói bạn đã mua, hãy tải lên bên dưới và nhấp vào nút Kích hoạt.",
+  "ActivateUploadDescr": "Để kích hoạt giấy phép của bạn, hãy tải nó lên bên dưới và nhấp vào Kích hoạt.",
+  "UploadLicenseFile": "Tải giấy phép lên",
+  "ActivateSwithToProHeader": "Chuyển sang phiên bản {{license}} đầy đủ"
 }

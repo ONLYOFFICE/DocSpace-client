@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "Lisansı etkinleştir",
   "ActivateLicenseActivated": "Lisans etkinleştirildi",
-  "ActivatePaidTariffExpiration": "Aboneliğiniz {{date}} tarihinde sona eriyor.",
-  "ActivatePurchaseBuyLicense": "Lisans satın almak için aşağıdaki düğmeye tıklayın.",
-  "ActivatePurchaseBuyNow": "Şimdi satın al",
-  "ActivatePurchaseRenewLicense": "Destek ve güncelleme almaya devam etmek için yenileme satın alın.",
-  "ActivateRenewalDescr": "Zaten satın aldığınız yenilemeyi etkinleştirmek için aşağıya yükleyin ve Etkinleştir düğmesine tıklayın.",
-  "ActivateRenewDescr": "Kişisel yenileme şartlarınızı öğrenmek için özel yöneticinizle iletişime geçin veya <1>{{email}}</1> adresinden bize yazın",
-  "ActivateRenewSubscriptionHeader": "{{license}} aboneliğini yenileyin",
-  "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin",
-  "ActivateTariffDescr": "{{organizationName}} {{productName}} {{license}} kullanıyorsunuz.",
-  "ActivateTariffLicenseTrialExpiration": "Deneme süreniz {{date}} tarihinde sona eriyor.",
   "ActivateToProBannerHeaderTrial": "Aşağıdakileri elde etmek için Tam {{license}} Sürümünü satın alın:",
-  "ActivateUploadDescr": "Lisansınızı etkinleştirmek için aşağıya yükleyin ve Etkinleştir'e tıklayın.",
-  "FreeDaysLeft": "{{count}} ücretsiz gün kaldı",
   "UpgradeToProBannerHeader": "Kurumsal kullanıma hazır ofis paketine 30 gün boyunca ücretsiz erişim elde edin",
   "UpgradeToProBannerInformationAboutShort": "<1>Resmî web</1> sitesinden {{license}} Edition hakkında daha fazla bilgi edinin",
   "UpgradeToProBannerInformationDemo": "Demoyu <1>buradan</1> talep edin",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "Ekibinizin boyutu ne olursa olsun, belgeleri rahatça düzenleyin ve ortak çalışın.",
   "UpgradeToProBannerItemScalabilityHeader": "Ölçeklendirilebilirlik ve kümelendirme.",
   "UpgradeToProBannerItemSupportDescr": "Karşılaştığınız tüm sorunlar için hızlı ve profesyonel yardım alın.",
-  "UpgradeToProBannerItemSupportHeader": "Teknik destek.",
-  "UploadLicenseFile": "Lisans dosyasını yükle"
+  "UpgradeToProBannerItemSupportHeader": "Teknik destek."
 }

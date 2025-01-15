@@ -462,5 +462,15 @@
   "LogoAbout": "පිළිබඳව පිටුව සඳහා ලාංඡනය",
   "LogoFavicon": "කුඩා නිරූපකය",
   "LogoDocsEditor": "සංස්කරකවල ශ්‍රීර්ෂයට ලාංඡනය",
-  "LogoDocsEditorEmbedded": "සංස්කරකවල ශ්‍රීර්ෂයට ලාංඡනය - කාවැද්දූ ප්‍රකාරය"
+  "LogoDocsEditorEmbedded": "සංස්කරකවල ශ්‍රීර්ෂයට ලාංඡනය - කාවැද්දූ ප්‍රකාරය",
+  "ActivatePurchaseBuyNow": "මිලදී ගන්න",
+  "FreeDaysLeft": "නොමිලේ දවස් {{count}} ක් ඉතිරියි",
+  "ActivateTariffLicenseTrialExpiration": "ඔබගේ නැහැසුම {{date}} දී කල් ඉකුත් වේ.",
+  "ActivatePaidTariffExpiration": "ඔබගේ දායකත්‍වය {{date}} දී කල් ඉකුත් වේ.",
+  "ActivatePurchaseBuyLicense": "බලපත්‍රයක් මිලදී ගැනීමට, පහත බොත්තම ඔබන්න",
+  "ActivatePurchaseRenewLicense": "දිගටම සහාය සහ යාවත්කාල ලැබීමට, අළුත් කරන්න.",
+  "ActivateRenewDescr": "ඔබේ පුද්ගලික අලුත් කිරීමේ නියමයන් ලබා ගැනීමට, ඔබේ කැප වූ කළමනාකරු අමතන්න හෝ <1>{{email}}</1> හිදී අපට ලියන්න",
+  "ActivateLicense": "බලපත්‍රය සක්‍රිය කරන්න",
+  "ActivateUploadDescr": "ඔබගේ බලපත්‍රය සක්‍රිය කිරීමට, එය පහතින් උඩුගත කර සක්‍රිය කරන්න ඔබන්න.",
+  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න"
 }

@@ -597,5 +597,19 @@
   "LogoAbout": "Logo dla strony O nas",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo dla nagłówka edytorów",
-  "LogoDocsEditorEmbedded": "Logo dla nagłówka edytorów – tryb osadzony"
+  "LogoDocsEditorEmbedded": "Logo dla nagłówka edytorów – tryb osadzony",
+  "ActivatePurchaseBuyNow": "Kup teraz",
+  "FreeDaysLeft": "Pozostałe darmowe dni: {{count}}",
+  "ActivateTariffLicenseTrialExpiration": "Twój okres próbny wygaśnie {{date}}.",
+  "ActivatePaidTariffExpiration": "Twoja subskrypcja wygaśnie {{date}}.",
+  "ActivateTariffDescr": "Korzystasz z {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Odnów subskrypcję {{license}}",
+  "ActivatePurchaseBuyLicense": "Kliknij poniższy przycisk, aby kupić licencję.",
+  "ActivatePurchaseRenewLicense": "Aby nadal mieć dostęp do wsparcia i aktualizacji, kup odnowienie.",
+  "ActivateRenewDescr": "Aby uzyskać indywidualne warunki odnowienia, skontaktuj się z osobistym menedżerem lub napisz do nas na adres <1>{{email}}</1>",
+  "ActivateLicense": "Aktywuj licencję",
+  "ActivateRenewalDescr": "Aby aktywować zakupione odnowienie, wgraj je poniżej i kliknij przycisk Aktywuj.",
+  "ActivateUploadDescr": "Aby aktywować swoją licencję, wgraj ją poniżej i kliknij Aktywuj.",
+  "UploadLicenseFile": "Wgraj plik licencyjny",
+  "ActivateSwithToProHeader": "Przełącz się na pełną wersję {{license}}"
 }

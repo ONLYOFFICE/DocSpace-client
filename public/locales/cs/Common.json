@@ -597,5 +597,19 @@
   "LogoAbout": "Logo pro stránku O nás",
   "LogoFavicon": "Favicon",
   "LogoDocsEditor": "Logo pro záhlaví editorů",
-  "LogoDocsEditorEmbedded": "Logo pro záhlaví editorů - vložený režim"
+  "LogoDocsEditorEmbedded": "Logo pro záhlaví editorů - vložený režim",
+  "ActivatePurchaseBuyNow": "Koupit teď",
+  "FreeDaysLeft": "Počet zbývajících volných dnů: {{count}}",
+  "ActivateTariffLicenseTrialExpiration": "Platnost vaší zkušební verze končí dne {{date}}.",
+  "ActivatePaidTariffExpiration": "Vaše předplatné vyprší dne {{date}}.",
+  "ActivateTariffDescr": "Používáte aplikaci {{organizationName}} {{productName}} {{license}}.",
+  "ActivateRenewSubscriptionHeader": "Obnovení firemního předplatného {{license}}",
+  "ActivatePurchaseBuyLicense": "Chcete-li zakoupit licenci, klikněte na tlačítko níže.",
+  "ActivatePurchaseRenewLicense": "Chcete-li i nadále dostávat podporu a aktualizace, zakupte si obnovení.",
+  "ActivateRenewDescr": "Chcete-li získat osobní podmínky obnovení, kontaktujte svého specializovaného manažera nebo nám napište na <1>{{email}}</1>.",
+  "ActivateLicense": "Aktivovat licenci",
+  "ActivateRenewalDescr": "Chcete-li aktivovat již zakoupené obnovení, nahrajte jej níže a klikněte na tlačítko Aktivovat.",
+  "ActivateUploadDescr": "Chcete-li aktivovat licenci, nahrajte ji níže a klikněte na tlačítko Aktivovat.",
+  "UploadLicenseFile": "Nahrání licenčního souboru",
+  "ActivateSwithToProHeader": "Přechod na plnou verzi {{license}}"
 }

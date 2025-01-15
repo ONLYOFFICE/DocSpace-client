@@ -1,19 +1,6 @@
 {
-  "ActivateLicense": "Activar licencia",
   "ActivateLicenseActivated": "Licencia activada",
-  "ActivatePaidTariffExpiration": "Su suscripción expira el {{date}}.",
-  "ActivatePurchaseBuyLicense": "Para comprar una licencia, haga clic en el botón de abajo.",
-  "ActivatePurchaseBuyNow": "Comprar ahora",
-  "ActivatePurchaseRenewLicense": "Para seguir recibiendo el soporte y las actualizaciones, compre una renovación.",
-  "ActivateRenewalDescr": "Para activar la renovación que ya ha comprado, cárguela a continuación y haga clic en el botón Activar.",
-  "ActivateRenewDescr": "Para obtener sus términos de renovación personal, contacte a su gerente dedicado o escríbanos a <1>{{email}}</1>",
-  "ActivateRenewSubscriptionHeader": "Renovar la suscripción para {{license}}",
-  "ActivateSwithToProHeader": "Pasar a la versión completa de {{license}}",
-  "ActivateTariffDescr": "Está usando {{organizationName}} {{productName}} {{license}}.",
-  "ActivateTariffLicenseTrialExpiration": "Su prueba expira el {{date}}.",
   "ActivateToProBannerHeaderTrial": "Compre la versión completa de {{license}} para obtener:",
-  "ActivateUploadDescr": "Para activar su licencia, cárguela a continuación y haga clic en el botón Activar.",
-  "FreeDaysLeft": "{{count}} días gratis restantes",
   "UpgradeToProBannerHeader": "Obtenga acceso gratuito al paquete ofimático para empresas durante 30 días",
   "UpgradeToProBannerInformationAboutShort": "Aprender más sobre {{license}} Edition en el sitio <1>web oficial</1>",
   "UpgradeToProBannerInformationDemo": "Solicitar demostración <1>aquí</1>",
@@ -33,6 +20,5 @@
   "UpgradeToProBannerItemScalabilityDescr": "Edite y colabore cómodamente en los documentos sin importar el tamaño de su equipo.",
   "UpgradeToProBannerItemScalabilityHeader": "Escalabilidad y clustering.",
   "UpgradeToProBannerItemSupportDescr": "Obtenga ayuda profesional rápida para todos los problemas que enfrenta.",
-  "UpgradeToProBannerItemSupportHeader": "Soporte técnico.",
-  "UploadLicenseFile": "Cargar archivo de licencia"
+  "UpgradeToProBannerItemSupportHeader": "Soporte técnico."
 }

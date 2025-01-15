@@ -95,7 +95,9 @@ export const Button = React.forwardRef<
         />
       ) : null}
       <div className={contentClasses}>
-        {icon ? <div className={styles.icon}>{icon}</div> : null}
+        {icon ? (
+          <div className={classNames(styles.icon, "icon")}>{icon}</div>
+        ) : null}
         {label}
       </div>
     </button>

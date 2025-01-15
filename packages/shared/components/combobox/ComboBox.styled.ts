@@ -75,6 +75,7 @@ const alternativeComboButtonStyles = css<{
 `;
 
 const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
+  scaled?: boolean;
   size?: ComboBoxSize;
   withoutPadding?: boolean;
   isOpen?: boolean;
@@ -88,6 +89,7 @@ const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
   ref?: React.RefObject<HTMLDivElement>;
 }>`
   width: ${(props) =>
+    (props.scaled && "100%") ||
     (props.size === ComboBoxSize.base && props.theme.comboBox.width.base) ||
     (props.size === ComboBoxSize.middle && props.theme.comboBox.width.middle) ||
     (props.size === ComboBoxSize.big && props.theme.comboBox.width.big) ||
@@ -170,6 +172,7 @@ const hoverModernViewButton = css<{
 const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
   type?: TCombobox;
   noBorder?: boolean;
+  scaled?: boolean;
   size?: ComboBoxSize;
   displayArrow?: boolean;
   isDisabled?: boolean;
@@ -194,6 +197,7 @@ const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
       ? props.theme.comboBox.button.height
       : props.theme.comboBox.button.heightWithBorder};
   width: ${(props) =>
+    (props.scaled && "100%") ||
     (props.size === ComboBoxSize.base && props.theme.comboBox.width.base) ||
     (props.size === ComboBoxSize.middle && props.theme.comboBox.width.middle) ||
     (props.size === ComboBoxSize.big && props.theme.comboBox.width.big) ||
@@ -326,7 +330,8 @@ const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
         ? props.theme.comboBox.label.disabledColor
         : props.theme.comboBox.label.selectedColor};
 
-    max-width: ${(props) => props.theme.comboBox.label.maxWidth};
+    max-width: ${(props) =>
+      props.scaled ? "100%" : props.theme.comboBox.label.maxWidth};
 
     ${(props) =>
       props.noBorder &&

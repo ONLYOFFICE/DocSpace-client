@@ -194,6 +194,29 @@
     padding: 0 32px;
   }
 
+  // Default variant
+  background: var(--button-background-base);
+  color: var(--button-color-base);
+  border: var(--button-border-base);
+
+  &:hover:not(:disabled) {
+    background: var(--button-background-base-hover);
+    color: var(--button-color-base-hover);
+    border: var(--button-border-base-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--button-background-base-active);
+    color: var(--button-color-base-active);
+    border: var(--button-border-base-active);
+  }
+
+  &:disabled {
+    background: var(--button-background-base-disabled);
+    color: var(--button-color-base-disabled);
+    border: var(--button-border-base-disabled);
+  }
+
   // Primary variant
   &.primary {
     background: var(--button-background-primary);
@@ -224,31 +247,6 @@
       border: var(--button-border-primary-disabled);
 
       opacity: 0.6;
-    }
-  }
-
-  // Default variant
-  &:not(.primary) {
-    background: var(--button-background-base);
-    color: var(--button-color-base);
-    border: var(--button-border-base);
-
-    &:hover:not(:disabled) {
-      background: var(--button-background-base-hover);
-      color: var(--button-color-base-hover);
-      border: var(--button-border-base-hover);
-    }
-
-    &:active:not(:disabled) {
-      background: var(--button-background-base-active);
-      color: var(--button-color-base-active);
-      border: var(--button-border-base-active);
-    }
-
-    &:disabled {
-      background: var(--button-background-base-disabled);
-      color: var(--button-color-base-disabled);
-      border: var(--button-border-base-disabled);
     }
   }
 
@@ -321,8 +319,14 @@
   }
 
   &.isClicked {
-    background-color: var(--accent-button, --button-background-base-active);
+    background-color: var(--button-background-base-active);
     color: var(--button-color-base-active);
+
+    &.primary {
+      background: var(--button-background-primary-active);
+      color: var(--button-color-primary-active);
+      filter: brightness(90%);
+    }
   }
 
   &.isDisabled {

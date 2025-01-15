@@ -24,9 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../../../styles/variables/colors";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/_mixins";
 
-export const StyledMediaError = styled.div`
+:root {
+  --message-error-bg: rgba(0, 0, 0, 0.7);
+  --message-error-border-radius: 20px;
+  --message-error-padding: 20px 24px;
+  --message-error-text-color: var(--white);
+}
+
+.mediaError {
   position: fixed;
   z-index: 1006;
 
@@ -35,27 +44,28 @@ export const StyledMediaError = styled.div`
   top: 50%;
 
   transform: translate(-50%, -50%);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: rgba(0, 0, 0, 0.7);
-
+  background: var(--message-error-bg);
   opacity: 1;
-  border-radius: 20px;
-  padding: 20px 24px;
-`;
+  border-radius: var(--message-error-border-radius);
+  padding: var(--message-error-padding);
 
-export const StyledErrorToolbar = styled.div`
+  .title {
+    color: var(--message-error-text-color);
+  }
+}
+
+.errorToolbar {
   position: fixed;
-  bottom: 24px;
+
   // doesn't require mirroring for RTL
-  left: 50%;
   z-index: 1006;
+  left: 50%;
 
+  bottom: 24px;
   transform: translateX(-50%);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,4 +99,12 @@ export const StyledErrorToolbar = styled.div`
       cursor: pointer;
     }
   }
-`;
+
+  // @include tablet-and-below {
+  //   bottom: 16px;
+  // }
+
+  // @include mobile {
+  //   bottom: 8px;
+  // }
+}

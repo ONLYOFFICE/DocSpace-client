@@ -81,7 +81,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
-      style={{ padding: "6px 0px" }}
+      //style={{ padding: "6px 0px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withBorder={withBorder}

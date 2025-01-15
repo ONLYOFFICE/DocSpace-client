@@ -2095,7 +2095,8 @@ class FilesStore {
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
-    const isTemplate = item.rootFolderType === FolderType.RoomTemplates;
+    const isTemplate =
+      item.rootFolderType === FolderType.RoomTemplates && isRoom;
 
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
@@ -3335,7 +3336,8 @@ class FilesStore {
             : folderUrl);
 
       const isRoom = !!roomType;
-      const isTemplate = rootFolderType === FolderType.RoomTemplates;
+      const isTemplate =
+        item.rootFolderType === FolderType.RoomTemplates && isRoom;
 
       const icon =
         isRoom && logo?.medium

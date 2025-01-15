@@ -309,6 +309,10 @@ const StyledTemplateIcon = styled.div<{
     width: 24px;
     height: 24px;
   }
+
+  .react-svg-icon {
+    border-radius: 6px;
+  }
 `;
 
 export { StyledIcon, EditWrapper, StyledTemplateIcon };

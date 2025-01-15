@@ -63,6 +63,7 @@ const getFetchedRoomParams = (
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
 
   const fetchedRoomParams = {
+    roomId: item.id,
     type: item.roomType,
     title: item.title,
     tags: startObjTags,

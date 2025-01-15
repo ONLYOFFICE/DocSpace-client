@@ -32,7 +32,7 @@ import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import { createTemplate } from "@docspace/shared/api/rooms";
 
@@ -528,13 +528,11 @@ class CreateEditRoomStore {
   onCreateTemplateRoom = async (roomParams) => {
     this.filesStore.setRoomCreated(true);
 
-    console.log("onCreateTemplateRoom", roomParams);
-    const { roomId, tags, title, logo } = roomParams;
+    const { roomId, tags, title, logo, roomType } = roomParams;
 
     let isFinished = false;
     let progressData;
 
-    // const room = await api.rooms.createRoomFromTemplate(roomParams);
     const room = await api.rooms.createRoomFromTemplate(
       roomId,
       title,
@@ -542,15 +540,13 @@ class CreateEditRoomStore {
       tags,
     );
 
-    console.log("room", room);
-
     progressData = room;
 
     while (!isFinished) {
       progressData = await this.getCreateTemplateRoomProgress();
       console.log("progressData", progressData);
 
-      isFinished = progressData.finished;
+      isFinished = progressData.isCompleted;
       // if (res?.percentage) {
       //   setSecondaryProgressBarData({
       //     icon: pbData.icon,
@@ -564,7 +560,12 @@ class CreateEditRoomStore {
       // }
     }
 
-    return progressData;
+    return {
+      id: progressData.roomId,
+      title,
+      roomType,
+      rootFolderType: FolderType.Rooms,
+    };
   };
 
   onOpenNewRoom = async (room) => {

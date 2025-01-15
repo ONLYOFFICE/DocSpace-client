@@ -24,40 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../../../../../themes";
+@import "../../../../../../styles/mixins";
+@import "../../../../../../styles/variables/devices";
+@import "../../../../../../styles/variables/colors";
 
-export const List = styled.ul`
+:root {
+  --bookmarks-text-color: #{$white};
+  --bookmarks-color: #{$gray-dark-strong};
+}
+
+.list {
   padding-inline-start: 16px;
   padding-inline-end: 30px;
-
   list-style: none;
   margin-top: 0px;
-
   display: flex;
   flex-direction: column;
-`;
+}
 
-export const Item = styled.li`
-  color: ${globalColors.white};
+.item {
+  color: var(--bookmarks-text-color);
   padding: 1px 16px 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-
   cursor: pointer;
-
   margin-top: -1px;
 
   @media (hover: hover) {
-    :hover {
-      background: ${globalColors.grayDarkStrong};
+    &:hover {
+      background: var(--bookmarks-color);
     }
   }
-`;
+}
 
-export const Text = styled.p`
+.text {
   margin: 0;
-  border-bottom: 1px solid ${globalColors.grayDarkStrong};
+  border-bottom: 1px solid var(--bookmarks-color);
   padding: 6px 0;
-`;
+}

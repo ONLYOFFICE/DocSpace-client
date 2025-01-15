@@ -298,7 +298,7 @@ const DropDown = ({
       ...dropDownMaxHeightProp,
       ...style,
       ["--z-index" as string]: zIndex,
-      ["--max-height" as string]: `${maxHeight}px`,
+      ["--max-height" as string]: maxHeight && `${maxHeight}px`,
       ["--manual-width" as string]: manualWidth,
       ["--manual-x" as string]: manualX,
       ["--manual-y" as string]: state.manualY,

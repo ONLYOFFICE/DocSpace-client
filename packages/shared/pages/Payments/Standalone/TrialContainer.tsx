@@ -29,9 +29,10 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 
-// import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
 import { ButtonContainer } from "./sub-components/ButtonContainer";
 import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
+
+import { BenefitsContainer } from "./BenefitsContainer";
 
 import { StyledEnterpriseComponent } from "./Payments.styled";
 
@@ -42,6 +43,7 @@ export const TrialContainer = ({
   isTrial,
   trialDaysLeft,
   paymentDate,
+  isEnterprise,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -63,7 +65,11 @@ export const TrialContainer = ({
         isDeveloper={isDeveloper}
       />
 
-      {/* <BenefitsContainer t={t} /> */}
+      <BenefitsContainer
+        isTrial={isTrial}
+        isEnterprise={isEnterprise}
+        isDeveloper={isDeveloper}
+      />
       <Text fontSize="14px" className="payments_renew-subscription">
         {t("ActivatePurchaseBuyLicense")}
       </Text>

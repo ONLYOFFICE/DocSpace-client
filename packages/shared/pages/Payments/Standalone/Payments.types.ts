@@ -35,6 +35,7 @@ export interface IPaymentsProps {
   buyUrl: string;
   trialDaysLeft: string;
   paymentDate: string;
+  isEnterprise: boolean;
 }
 
 export interface IEnterpriseProps {

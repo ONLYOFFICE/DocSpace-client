@@ -45,6 +45,7 @@ export const StandalonePage = ({
   buyUrl,
   trialDaysLeft,
   paymentDate,
+  isEnterprise,
 }: IPaymentsProps) => {
   return (
     <StyledPageWrapper>
@@ -56,6 +57,7 @@ export const StandalonePage = ({
           isTrial={isTrial}
           trialDaysLeft={trialDaysLeft}
           paymentDate={paymentDate}
+          isEnterprise={isEnterprise}
         />
       ) : (
         <EnterpriseContainer
@@ -66,6 +68,7 @@ export const StandalonePage = ({
           isTrial={isTrial}
           trialDaysLeft={trialDaysLeft}
           paymentDate={paymentDate}
+          isEnterprise={isEnterprise}
         />
       )}
       <LicenseContainer

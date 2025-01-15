@@ -31,10 +31,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { Text } from "../../../components/text";
 import { ColorTheme, ThemeId } from "../../../components/color-theme";
 import { LinkTarget } from "../../../components/link";
-// import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+
 import { ButtonContainer } from "./sub-components/ButtonContainer";
 import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
 
+import { BenefitsContainer } from "./BenefitsContainer";
 import { StyledEnterpriseComponent } from "./Payments.styled";
 
 export const EnterpriseContainer = ({
@@ -45,6 +46,7 @@ export const EnterpriseContainer = ({
   isTrial,
   trialDaysLeft,
   paymentDate,
+  isEnterprise,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -66,7 +68,14 @@ export const EnterpriseContainer = ({
         isDeveloper={isDeveloper}
       />
 
-      {/* isLicenseDateExpired && <BenefitsContainer t={t} /> */}
+      {isLicenseDateExpired && (
+        <BenefitsContainer
+          isTrial={isTrial}
+          isEnterprise={isEnterprise}
+          isDeveloper={isDeveloper}
+        />
+      )}
+
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")

@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Лиценца активирана",
-  "ActivateToProBannerHeaderTrial": "Купите пуну {{license}} верзију да добијете:",
-  "UpgradeToProBannerHeader": "Добијте бесплатни приступ напредних функција на 30 дана",
   "UpgradeToProBannerInformationAboutShort": "Сазнајте више о {{license}} издању <1>на званичном веб-сајту</1>",
   "UpgradeToProBannerInformationDemo": "Затражи демонстрацију <1>овде</1>",
   "UpgradeToProBannerInformationPurchase": "Поставите питања о куповини на <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux упутство.",
   "UpgradeToProBannerInstructionItemWindows": "Windows упутство.",
   "UpgradeToProBannerInstructionNote": "Молим обратите пажњу да ће уређивачи бити недоступни у току надоградње. Такође препоручујемо да <1>направите резервну копију ваших података</1> пре него што почнете.",
-  "UpgradeToProBannerInstructionReadNow": "Прочитај сада",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1-годишња претплата за функционалност и безбедносна ажурирања.",
-  "UpgradeToProBannerItemLicenseHeader": "Доживотна лиценца.",
-  "UpgradeToProBannerItemMobileDescr": "Уређујте документа, табеле и презентације у мобилним прегледачима.",
-  "UpgradeToProBannerItemMobileHeader": "Мобилно уређивање.",
-  "UpgradeToProBannerItemScalabilityDescr": "Удобно уређујте и сарађујте на документима без обзира на величину вашег тима.",
-  "UpgradeToProBannerItemScalabilityHeader": "Скалабилност и груписање.",
-  "UpgradeToProBannerItemSupportDescr": "Добијте брзу професионалну помоћ за све проблеме са којима се суочавате.",
-  "UpgradeToProBannerItemSupportHeader": "Техничка подршка."
+  "UpgradeToProBannerInstructionReadNow": "Прочитај сада"
 }

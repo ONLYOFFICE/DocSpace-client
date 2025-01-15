@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Η άδεια ενεργοποιήθηκε",
-  "ActivateToProBannerHeaderTrial": "Αγοράστε την πλήρη έκδοση {{license}} για να αποκτήσετε τα παρακάτω:",
-  "UpgradeToProBannerHeader": "Αποκτήστε δωρεάν πρόσβαση στην επιχειρησιακή σουίτα γραφείου για 30 ημέρες",
   "UpgradeToProBannerInformationAboutShort": "Μάθετε περισσότερα για την έκδοση {{license}} στην <1>επίσημη ιστοσελίδα</1>",
   "UpgradeToProBannerInformationDemo": "Ζητήστε μια επίδειξη <1>εδώ</1>",
   "UpgradeToProBannerInformationPurchase": "Στείλτε τις ερωτήσεις σας σχετικά με την αγορά στο <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Οδηγίες για Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Οδηγίες για Windows.",
   "UpgradeToProBannerInstructionNote": "Λάβετε υπόψη ότι τα προγράμματα επεξεργασίας δεν θα είναι διαθέσιμα κατά τη διάρκεια της αναβάθμισης. Συνιστούμε επίσης να <1>δημιουργήσετε αντίγραφα ασφαλείας για τα δεδομένα σας</1> πριν ξεκινήσετε.",
-  "UpgradeToProBannerInstructionReadNow": "Διαβάστε τώρα",
-  "UpgradeToProBannerItemLicenseDescr": "+ συνδρομή 1 έτους για ενημερώσεις λειτουργικότητας και ασφάλειας.",
-  "UpgradeToProBannerItemLicenseHeader": "Άδεια χρήσης για πάντα.",
-  "UpgradeToProBannerItemMobileDescr": "Επεξεργαστείτε έγγραφα, φύλλα και διαφάνειες σε προγράμματα περιήγησης για κινητές συσκευές.",
-  "UpgradeToProBannerItemMobileHeader": "Επεξεργασία μέσω κινητής συσκευής.",
-  "UpgradeToProBannerItemScalabilityDescr": "Επεξεργαστείτε και συνεργαστείτε άνετα σε έγγραφα, ανεξάρτητα από το μέγεθος της ομάδας σας.",
-  "UpgradeToProBannerItemScalabilityHeader": "Επεκτασιμότητα και ομαδοποίηση.",
-  "UpgradeToProBannerItemSupportDescr": "Αποκτήστε γρήγορη επαγγελματική βοήθεια για όλα τα ζητήματα που αντιμετωπίζετε.",
-  "UpgradeToProBannerItemSupportHeader": "Τεχνική υποστήριξη."
+  "UpgradeToProBannerInstructionReadNow": "Διαβάστε τώρα"
 }

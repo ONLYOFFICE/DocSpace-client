@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Lai aktivizētu jau iegādāto atjaunošanu, augšupielādējiet to zemāk un noklikšķiniet uz pogas Aktivizēt.",
   "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",
   "UploadLicenseFile": "Augšupielādējiet licences failu",
-  "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju"
+  "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",
+  "ActivateToProBannerHeaderTrial": "Iegādājieties pilnu {{license}} versiju, lai iegūtu:",
+  "UpgradeToProBannerHeader": "Saņemiet bezmaksas piekļuvi uzņēmumam gatavam biroja komplektam uz 30 dienām",
+  "UpgradeToProBannerItemSupportHeader": "Tehniskais atbalsts.",
+  "UpgradeToProBannerItemSupportDescr": "Saņemiet ātru profesionālu palīdzību jebkādām problēmām, ar kurām saskaraties.",
+  "UpgradeToProBannerItemMobileHeader": "Rediģēšana mobilajās ierīcēs.",
+  "UpgradeToProBannerItemMobileDescr": "Rediģējiet dokumentus, izklājlapas un slaidus mobilo ierīču pārlūkprogrammās.",
+  "UpgradeToProBannerItemLicenseHeader": "Mūža licence.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1 gada abonements funkcionalitātes un drošības atjauninājumiem.",
+  "UpgradeToProBannerItemScalabilityHeader": "Mērogojamība un grupēšana.",
+  "UpgradeToProBannerItemScalabilityDescr": "Ērti rediģējiet un sadarbojieties ar dokumentiem neatkarīgi no jūsu komandas lieluma."
 }

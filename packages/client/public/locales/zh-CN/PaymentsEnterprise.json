@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "许可证已激活",
-  "ActivateToProBannerHeaderTrial": "购买完整的 {{license}} 版本可获得：",
-  "UpgradeToProBannerHeader": "免费使用企业级办公套件 30 天",
   "UpgradeToProBannerInformationAboutShort": "要了解有关 {{license}} 版本的更多信息，请访问<1>官方网站</1>",
   "UpgradeToProBannerInformationDemo": "<1>点击这里</1>申请演示",
   "UpgradeToProBannerInformationPurchase": "通过邮箱 <1>{{email}}</1> 获得销售团队的咨询",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux 指南。",
   "UpgradeToProBannerInstructionItemWindows": "Windows 指南。",
   "UpgradeToProBannerInstructionNote": "请注意，在升级期间，编辑器将不可用。我们还建议在您开始进行更新之前<1>备份您的数据</1>。",
-  "UpgradeToProBannerInstructionReadNow": "立即阅读",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1年的功能和安全更新订阅。",
-  "UpgradeToProBannerItemLicenseHeader": "终身许可。",
-  "UpgradeToProBannerItemMobileDescr": "在移动浏览器中编辑文档、电子表格和演示文稿。",
-  "UpgradeToProBannerItemMobileHeader": "移动编辑。",
-  "UpgradeToProBannerItemScalabilityDescr": "任何规模的团队都可以易于编辑和协作文档。",
-  "UpgradeToProBannerItemScalabilityHeader": "可扩展性和集群。",
-  "UpgradeToProBannerItemSupportDescr": "获得快速的专业帮助，解决你的任何问题",
-  "UpgradeToProBannerItemSupportHeader": "技术支持。"
+  "UpgradeToProBannerInstructionReadNow": "立即阅读"
 }

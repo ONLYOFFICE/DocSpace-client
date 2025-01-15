@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Aktivoidaksesi tilauksen, jonka olet jo ostanut, lataa se alapuolelta ja klikkaa aktivoi-painiketta. ",
   "ActivateUploadDescr": "Aktivoidaksesi lisenssisi, lataa se alta ja klikkaa aktivoi.",
   "UploadLicenseFile": "Lataa lisenssitiedosto",
-  "ActivateSwithToProHeader": "Vaihda täyteen {{license}} -versioon"
+  "ActivateSwithToProHeader": "Vaihda täyteen {{license}} -versioon",
+  "ActivateToProBannerHeaderTrial": "Osta täysi {{license}} -versio saadaksesi:",
+  "UpgradeToProBannerHeader": "Ilmainen pääsy yrityksille sopivaan office suiteen 30 päivän ajaksi",
+  "UpgradeToProBannerItemSupportHeader": "Tekninen tuki.",
+  "UpgradeToProBannerItemSupportDescr": "Hanki nopeasti ammattilaisapua kaikkiin kohtaamiisi ongelmiin.",
+  "UpgradeToProBannerItemMobileHeader": "Mobiilimuokkaus",
+  "UpgradeToProBannerItemMobileDescr": "Muokkaa asiakirjoja, taulukoita ja dioja mobiiliselaimissa.",
+  "UpgradeToProBannerItemLicenseHeader": "Elinikäinen lisenssi.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1 vuoden tilaus toiminnallisuus- ja tietoturvapäivityksiin.",
+  "UpgradeToProBannerItemScalabilityHeader": "Skaalautuvuus ja klusterointi.",
+  "UpgradeToProBannerItemScalabilityDescr": "Mukava muokata ja tehdä yhteistyötä asiakirjoilla tiimin koosta riippumatta."
 }

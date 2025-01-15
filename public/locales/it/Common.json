@@ -612,5 +612,15 @@
   "ActivateRenewalDescr": "Per attivare il rinnovo già acquistato, caricalo qui sotto e clicca sul pulsante Attiva.",
   "ActivateUploadDescr": "Per attivare la tua licenza, caricala qui sotto e clicca su Attiva.",
   "UploadLicenseFile": "Carica il file della licenza",
-  "ActivateSwithToProHeader": "Passa alla versione completa di {{license}}"
+  "ActivateSwithToProHeader": "Passa alla versione completa di {{license}}",
+  "ActivateToProBannerHeaderTrial": "Acquista la versione {{license}} completa per ottenere:",
+  "UpgradeToProBannerHeader": "Ottieni l'accesso gratuito alla suite per ufficio di livello enterprise per 30 giorni",
+  "UpgradeToProBannerItemSupportHeader": "‎Supporto tecnico.‎",
+  "UpgradeToProBannerItemSupportDescr": "Ricevi un aiuto professionale e rapido per tutti i problemi che hai.",
+  "UpgradeToProBannerItemMobileHeader": "Modifica mobile.",
+  "UpgradeToProBannerItemMobileDescr": "‎Modifica documenti, fogli e diapositive nei browser per dispositivi mobili.‎",
+  "UpgradeToProBannerItemLicenseHeader": "‎Licenza a vita.‎",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1 anno di abbonamento per aggiornamenti di funzionalità e sicurezza.",
+  "UpgradeToProBannerItemScalabilityHeader": "Scalabilità e clustering.",
+  "UpgradeToProBannerItemScalabilityDescr": "‎Modifica e collabora comodamente sui documenti, indipendentemente dalle dimensioni del tuo team.‎"
 }

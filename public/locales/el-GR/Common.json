@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Για να ενεργοποιήσετε την ανανέωση που έχετε ήδη αγοράσει, μεταφορτώστε την παρακάτω και κάντε κλικ στο κουμπί Ενεργοποίηση.",
   "ActivateUploadDescr": "Για να ενεργοποιήσετε την άδειά σας, ανεβάστε την παρακάτω και κάντε κλικ στο Ενεργοποίηση.",
   "UploadLicenseFile": "Ανέβασμα αρχείου άδειας χρήσης",
-  "ActivateSwithToProHeader": "Αλλαγή σε πλήρη έκδοση {{license}}"
+  "ActivateSwithToProHeader": "Αλλαγή σε πλήρη έκδοση {{license}}",
+  "ActivateToProBannerHeaderTrial": "Αγοράστε την πλήρη έκδοση {{license}} για να αποκτήσετε τα παρακάτω:",
+  "UpgradeToProBannerHeader": "Αποκτήστε δωρεάν πρόσβαση στην επιχειρησιακή σουίτα γραφείου για 30 ημέρες",
+  "UpgradeToProBannerItemSupportHeader": "Τεχνική υποστήριξη.",
+  "UpgradeToProBannerItemSupportDescr": "Αποκτήστε γρήγορη επαγγελματική βοήθεια για όλα τα ζητήματα που αντιμετωπίζετε.",
+  "UpgradeToProBannerItemMobileHeader": "Επεξεργασία μέσω κινητής συσκευής.",
+  "UpgradeToProBannerItemMobileDescr": "Επεξεργαστείτε έγγραφα, φύλλα και διαφάνειες σε προγράμματα περιήγησης για κινητές συσκευές.",
+  "UpgradeToProBannerItemLicenseHeader": "Άδεια χρήσης για πάντα.",
+  "UpgradeToProBannerItemLicenseDescr": "+ συνδρομή 1 έτους για ενημερώσεις λειτουργικότητας και ασφάλειας.",
+  "UpgradeToProBannerItemScalabilityHeader": "Επεκτασιμότητα και ομαδοποίηση.",
+  "UpgradeToProBannerItemScalabilityDescr": "Επεξεργαστείτε και συνεργαστείτε άνετα σε έγγραφα, ανεξάρτητα από το μέγεθος της ομάδας σας."
 }

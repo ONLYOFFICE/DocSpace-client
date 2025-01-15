@@ -612,5 +612,15 @@
   "ActivateRenewalDescr": "Pour activer le renouvellement que vous avez déjà acheté, téléchargez-le ci-dessous et cliquez sur le bouton Activer.",
   "ActivateUploadDescr": "Pour activer votre licence, chargez-la ci-dessous et cliquez sur le bouton d'activation.",
   "UploadLicenseFile": "Charger le fichier de licence",
-  "ActivateSwithToProHeader": "Passer à la version {{license}} complète"
+  "ActivateSwithToProHeader": "Passer à la version {{license}} complète",
+  "ActivateToProBannerHeaderTrial": "Achetez la version complète d'{{license}} pour obtenir :",
+  "UpgradeToProBannerHeader": "Obtenez un accès gratuit à la suite bureautique prête à l'emploi pendant 30 jours",
+  "UpgradeToProBannerItemSupportHeader": "Assistance technique",
+  "UpgradeToProBannerItemSupportDescr": "Profitez d'une assistance professionnelle rapide pour toutes les difficultés rencontrées.",
+  "UpgradeToProBannerItemMobileHeader": "Édition mobile.",
+  "UpgradeToProBannerItemMobileDescr": "Editez les documents, les feuilles de calcul et les diapositives dans le navigateur web mobile.",
+  "UpgradeToProBannerItemLicenseHeader": "Licence à vie",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1 an d'abonnement sur les mises à jour au niveau des fonctionnalités et de la sécurité.",
+  "UpgradeToProBannerItemScalabilityHeader": "Scalabilité et regroupement en grappes",
+  "UpgradeToProBannerItemScalabilityDescr": "Editez et coéditez vos documents confortablement quelle que soit la taille de votre équipe."
 }

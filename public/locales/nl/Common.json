@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Om de verlenging die u al gekocht hebt te activeren, uploadt u deze hieronder en klikt u op de knop Activeren.",
   "ActivateUploadDescr": "Om uw licentie te activeren, uploadt u deze hieronder en klikt u op Activeren.",
   "UploadLicenseFile": "Upload licentiebestand",
-  "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie"
+  "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie",
+  "ActivateToProBannerHeaderTrial": "Koop de volledige {{license}} versie en ontvang het volgende:",
+  "UpgradeToProBannerHeader": "Krijg 30 dagen lang gratis toegang tot de office suite voor ondernemingen",
+  "UpgradeToProBannerItemSupportHeader": "Technische ondersteuning.",
+  "UpgradeToProBannerItemSupportDescr": "Ontvang snel professionele hulp voor alle problemen waarmee u te maken krijgt.",
+  "UpgradeToProBannerItemMobileHeader": "Mobiel bewerken.",
+  "UpgradeToProBannerItemMobileDescr": "Bewerk documenten, sheets en dia's in mobiele browsers.",
+  "UpgradeToProBannerItemLicenseHeader": "Levenslange licentie.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1-jarig abonnement voor functionaliteits- en beveiligingsupdates.",
+  "UpgradeToProBannerItemScalabilityHeader": "Schaalbaarheid en clustering.",
+  "UpgradeToProBannerItemScalabilityDescr": "Bewerk en werk comfortabel samen aan documenten, ongeacht hoe groot uw team is."
 }

@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Lisans etkinleştirildi",
-  "ActivateToProBannerHeaderTrial": "Aşağıdakileri elde etmek için Tam {{license}} Sürümünü satın alın:",
-  "UpgradeToProBannerHeader": "Kurumsal kullanıma hazır ofis paketine 30 gün boyunca ücretsiz erişim elde edin",
   "UpgradeToProBannerInformationAboutShort": "<1>Resmî web</1> sitesinden {{license}} Edition hakkında daha fazla bilgi edinin",
   "UpgradeToProBannerInformationDemo": "Demoyu <1>buradan</1> talep edin",
   "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1> adresinden satın alma soruları sorun",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux talimatı.",
   "UpgradeToProBannerInstructionItemWindows": "Windows talimatı.",
   "UpgradeToProBannerInstructionNote": "Yükseltme sırasında düzenleyicilerin kullanılamayacağını lütfen unutmayın. Aynı zamanda başlamadan önce <1>verilerinizi yedeklemenizi</1> öneririz.",
-  "UpgradeToProBannerInstructionReadNow": "Şimdi Oku",
-  "UpgradeToProBannerItemLicenseDescr": "İşlevsellik ve güvenlik güncellemeleri için +1 yıllık abonelik.",
-  "UpgradeToProBannerItemLicenseHeader": "Ömür boyu lisans.",
-  "UpgradeToProBannerItemMobileDescr": "Dokümanları, sayfaları ve slaytları mobil tarayıcılarda düzenleyin.",
-  "UpgradeToProBannerItemMobileHeader": "Mobil düzenleme.",
-  "UpgradeToProBannerItemScalabilityDescr": "Ekibinizin boyutu ne olursa olsun, belgeleri rahatça düzenleyin ve ortak çalışın.",
-  "UpgradeToProBannerItemScalabilityHeader": "Ölçeklendirilebilirlik ve kümelendirme.",
-  "UpgradeToProBannerItemSupportDescr": "Karşılaştığınız tüm sorunlar için hızlı ve profesyonel yardım alın.",
-  "UpgradeToProBannerItemSupportHeader": "Teknik destek."
+  "UpgradeToProBannerInstructionReadNow": "Şimdi Oku"
 }

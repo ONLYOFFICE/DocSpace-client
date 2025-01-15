@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Zaten satın aldığınız yenilemeyi etkinleştirmek için aşağıya yükleyin ve Etkinleştir düğmesine tıklayın.",
   "ActivateUploadDescr": "Lisansınızı etkinleştirmek için aşağıya yükleyin ve Etkinleştir'e tıklayın.",
   "UploadLicenseFile": "Lisans dosyasını yükle",
-  "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin"
+  "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin",
+  "ActivateToProBannerHeaderTrial": "Aşağıdakileri elde etmek için Tam {{license}} Sürümünü satın alın:",
+  "UpgradeToProBannerHeader": "Kurumsal kullanıma hazır ofis paketine 30 gün boyunca ücretsiz erişim elde edin",
+  "UpgradeToProBannerItemSupportHeader": "Teknik destek.",
+  "UpgradeToProBannerItemSupportDescr": "Karşılaştığınız tüm sorunlar için hızlı ve profesyonel yardım alın.",
+  "UpgradeToProBannerItemMobileHeader": "Mobil düzenleme.",
+  "UpgradeToProBannerItemMobileDescr": "Dokümanları, sayfaları ve slaytları mobil tarayıcılarda düzenleyin.",
+  "UpgradeToProBannerItemLicenseHeader": "Ömür boyu lisans.",
+  "UpgradeToProBannerItemLicenseDescr": "İşlevsellik ve güvenlik güncellemeleri için +1 yıllık abonelik.",
+  "UpgradeToProBannerItemScalabilityHeader": "Ölçeklendirilebilirlik ve kümelendirme.",
+  "UpgradeToProBannerItemScalabilityDescr": "Ekibinizin boyutu ne olursa olsun, belgeleri rahatça düzenleyin ve ortak çalışın."
 }

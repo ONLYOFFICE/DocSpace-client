@@ -613,5 +613,15 @@
   "ActivateRenewalDescr": "Чтобы активировать уже купленное возобновление, загрузите его ниже и нажмите кнопку «Активировать».",
   "ActivateUploadDescr": "Чтобы активировать лицензию, загрузите ее ниже и нажмите кнопку Активировать.",
   "UploadLicenseFile": "Загрузить файл лицензии",
-  "ActivateSwithToProHeader": "Перейдите на полную версию {{license}}"
+  "ActivateSwithToProHeader": "Перейдите на полную версию {{license}}",
+  "ActivateToProBannerHeaderTrial": "Купите полную версию {{license}}, чтобы получить:",
+  "UpgradeToProBannerHeader": "Получите бесплатный доступ к корпоративному офисному пакету на 30 дней",
+  "UpgradeToProBannerItemSupportHeader": "Техническая поддержка.",
+  "UpgradeToProBannerItemSupportDescr": "Получайте профессиональную помощь по всем возникшим вопросам.",
+  "UpgradeToProBannerItemMobileHeader": "Мобильное редактирование.",
+  "UpgradeToProBannerItemMobileDescr": "Редактируйте документы, таблицы и презентации в мобильном браузере.",
+  "UpgradeToProBannerItemLicenseHeader": "Бессрочная лицензия.",
+  "UpgradeToProBannerItemLicenseDescr": "+ обновления функциональных возможностей и безопасности в течение 1 года.",
+  "UpgradeToProBannerItemScalabilityHeader": "Масштабируемость и кластеризация.",
+  "UpgradeToProBannerItemScalabilityDescr": "Редактируйте документы и работайте над ними совместно в команде любого размера."
 }

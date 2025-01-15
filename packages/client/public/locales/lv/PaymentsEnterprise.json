@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Licence ir aktivizēta",
-  "ActivateToProBannerHeaderTrial": "Iegādājieties pilnu {{license}} versiju, lai iegūtu:",
-  "UpgradeToProBannerHeader": "Saņemiet bezmaksas piekļuvi uzņēmumam gatavam biroja komplektam uz 30 dienām",
   "UpgradeToProBannerInformationAboutShort": "Uzziniet vairāk par {{license}} versiju <1>oficiālajā vietnē</1>",
   "UpgradeToProBannerInformationDemo": "Pieprasiet demonstrāciju <1>šeit</1>",
   "UpgradeToProBannerInformationPurchase": "Uzdodiet jautājumus par pirkumu, rakstot uz e-pastu <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux instrukcija.",
   "UpgradeToProBannerInstructionItemWindows": "Windows instrukcija.",
   "UpgradeToProBannerInstructionNote": "Ņemiet vērā, ka jaunināšanas laikā redaktori nebūs pieejami. Pirms darba sākšanas iesakām arī <1>dublēt datus</1>.",
-  "UpgradeToProBannerInstructionReadNow": "Lasīt tagad",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1 gada abonements funkcionalitātes un drošības atjauninājumiem.",
-  "UpgradeToProBannerItemLicenseHeader": "Mūža licence.",
-  "UpgradeToProBannerItemMobileDescr": "Rediģējiet dokumentus, izklājlapas un slaidus mobilo ierīču pārlūkprogrammās.",
-  "UpgradeToProBannerItemMobileHeader": "Rediģēšana mobilajās ierīcēs.",
-  "UpgradeToProBannerItemScalabilityDescr": "Ērti rediģējiet un sadarbojieties ar dokumentiem neatkarīgi no jūsu komandas lieluma.",
-  "UpgradeToProBannerItemScalabilityHeader": "Mērogojamība un grupēšana.",
-  "UpgradeToProBannerItemSupportDescr": "Saņemiet ātru profesionālu palīdzību jebkādām problēmām, ar kurām saskaraties.",
-  "UpgradeToProBannerItemSupportHeader": "Tehniskais atbalsts."
+  "UpgradeToProBannerInstructionReadNow": "Lasīt tagad"
 }

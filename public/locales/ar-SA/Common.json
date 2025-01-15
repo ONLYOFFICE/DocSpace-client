@@ -610,5 +610,15 @@
   "ActivateRenewalDescr": "لتفعيل التجديد الذي اشتريته مسبقًا، قم برفعه أدناه واضغط على زر التفعيل.",
   "ActivateUploadDescr": "لتنشيط الترخيص الخاص بك ، قم بتحميله بالأسفل وانقر فوق تنشيط.",
   "UploadLicenseFile": "تحميل ملف الترخيص",
-  "ActivateSwithToProHeader": "قم بالتبديل إلى الإصدار الكامل {{license}}."
+  "ActivateSwithToProHeader": "قم بالتبديل إلى الإصدار الكامل {{license}}.",
+  "ActivateToProBannerHeaderTrial": "قم بشراء النسخة الكاملة من {{license}} للحصول على:",
+  "UpgradeToProBannerHeader": "احصل على وصول مجاني إلى مجموعة المكاتب الجاهزة للمؤسسات لمدة 30 يومًا",
+  "UpgradeToProBannerItemSupportHeader": "دعم تقني.",
+  "UpgradeToProBannerItemSupportDescr": "احصل على مساعدة احترافية سريعة لجميع المشكلات التي تواجهها.",
+  "UpgradeToProBannerItemMobileHeader": "تحرير الهاتف.",
+  "UpgradeToProBannerItemMobileDescr": "تعديل المستندات والجداول والعروض التقديمية على متصفحات الهواتف المحمولة.",
+  "UpgradeToProBannerItemLicenseHeader": "رخصة لمدى الحياة.",
+  "UpgradeToProBannerItemLicenseDescr": "+ اشتراك لمدة عام واحد للحصول على تحديثات الوظائف والأمان.",
+  "UpgradeToProBannerItemScalabilityHeader": "القابلية للتوسع والتجميع.",
+  "UpgradeToProBannerItemScalabilityDescr": "يمكنك تحرير المستندات والتعاون في العمل عليها بشكل مريح بغض النظر عن حجم فريقك."
 }

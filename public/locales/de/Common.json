@@ -612,5 +612,15 @@
   "ActivateRenewalDescr": "Um die bereits gekaufte Verlängerung zu aktivieren, laden Sie sie unten hoch und klicken Sie auf die Schaltfläche \"Aktivieren\".",
   "ActivateUploadDescr": "Um Ihre Lizenz zu aktivieren, laden Sie diese hoch und klicken Sie auf Aktivieren.",
   "UploadLicenseFile": "Lizenzdatei hochladen",
-  "ActivateSwithToProHeader": "Erwerben Sie die vollständige {{license}}-Version"
+  "ActivateSwithToProHeader": "Erwerben Sie die vollständige {{license}}-Version",
+  "ActivateToProBannerHeaderTrial": "Erwerben Sie die vollständige {{license}}-Version und erhalten Sie:",
+  "UpgradeToProBannerHeader": "Erhalten Sie 30 Tage lang kostenlosen Zugriff auf die Office-Suite für Unternehmen",
+  "UpgradeToProBannerItemSupportHeader": "Technischer Support.",
+  "UpgradeToProBannerItemSupportDescr": "Erhalten Sie den professionellen Support bei allen Schwierigkeiten.",
+  "UpgradeToProBannerItemMobileHeader": "Arbeit auf mobilen Geräten.",
+  "UpgradeToProBannerItemMobileDescr": "Bearbeiten Sie Textdokumente, Tabellenkalkulationen und Präsentationen in mobilen Browsern.",
+  "UpgradeToProBannerItemLicenseHeader": "Lebenslang gültige Lizenz.",
+  "UpgradeToProBannerItemLicenseDescr": "+ Updates von Funktionalität und Sicherheit innerhalb vom 1-jährigen Abonnement.",
+  "UpgradeToProBannerItemScalabilityHeader": "Skalierbarkeit und Clustering.",
+  "UpgradeToProBannerItemScalabilityDescr": "Komfortable Bearbeitung und Zusammenarbeit an Dokumenten für Teams jeder Größe."
 }

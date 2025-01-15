@@ -10,12 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "ຄໍາແນະນໍາສຳລັບ Linux.",
   "UpgradeToProBannerInstructionItemWindows": "ຄໍາແນະນໍາສຳລັບ Windows.",
   "UpgradeToProBannerInstructionNote": "ກະລຸນາຮັບຊາບວ່າຕົວແກ້ໄຂຈະບໍ່ສາມາດໃຊ້ໄດ້ໃນລະຫວ່າງການອັບເກຣດ. ພວກເຮົາຍັງແນະນໍາໃຫ້ <1>ສໍາຮອງຂໍ້ມູນຂໍ້ມູນຂອງທ່ານ</1> ກ່ອນທີ່ທ່ານຈະເລີ່ມຕົ້ນ.",
-  "UpgradeToProBannerInstructionReadNow": "ອ່ານດຽວນີ້",
-  "UpgradeToProBannerItemLicenseDescr": "+ ການສະໝັກສິດນຳໃຊ້ 1 ປີສຳລັບການອັບເດດການເຮັດວຽກ ແລະ ຄວາມປອດໄພ.",
-  "UpgradeToProBannerItemLicenseHeader": "ໃບອະນຸຍາດຕະຫຼອດຊີວິດ.",
-  "UpgradeToProBannerItemMobileDescr": "ແກ້ໄຂ ເອກະສານ, ຄຳນວນ, ແລະ ນຳສະເໜີ້ ໃນຕົວທ່ອງເວັບມືຖື.",
-  "UpgradeToProBannerItemScalabilityDescr": "ແກ້ໄຂ ແລະເຮັດວຽກຮ່ວມກັນໃນເອກະສານຢ່າງສະດວກສະບາຍ ບໍ່ວ່າທີມຂອງທ່ານຈະເປັນຂະໜາດໃດກໍຕາມ.",
-  "UpgradeToProBannerItemScalabilityHeader": "ຄວາມສາມາດໃນການຂະຫຍາຍ ແລະການຈັດກຸ່ມ.",
-  "UpgradeToProBannerItemSupportDescr": "ຂໍຄວາມຊ່ວຍເຫຼືອແບບມືອາຊີບດ່ວນສຳລັບທຸກບັນຫາທີ່ເຈົ້າປະເຊີນ.",
-  "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ."
+  "UpgradeToProBannerInstructionReadNow": "ອ່ານດຽວນີ້"
 }

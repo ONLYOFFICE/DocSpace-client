@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Əvvəllər aldığınız yeniləməni aktivləşdirmək üçün onu aşağıda yükləyin və Aktivləşdir düyməsinə klikləyin.",
   "ActivateUploadDescr": "Lisenziyanızı aktivləşdirmək üçün onu aşağıda yükləyib aktivləşdirmə düyməsinə klikləyin.",
   "UploadLicenseFile": "Lisenziya faylını yükləyin",
-  "ActivateSwithToProHeader": "Tam {{license}} versiyasına təkmilləşdirin"
+  "ActivateSwithToProHeader": "Tam {{license}} versiyasına təkmilləşdirin",
+  "ActivateToProBannerHeaderTrial": "Aşağıdakıları əldə etmək üçün tam {{license}} versiyasını alın:",
+  "UpgradeToProBannerHeader": "30 gün ərzində müəssisə üçün hazır ofis paketinə pulsuz giriş əldə edin",
+  "UpgradeToProBannerItemSupportHeader": "Texniki dəstək.",
+  "UpgradeToProBannerItemSupportDescr": "Qarşılaşdığınız hər hansı bir çətinlik üçün sürətli peşəkar yardımdan yararlanın.",
+  "UpgradeToProBannerItemMobileHeader": "Mobil redaktə.",
+  "UpgradeToProBannerItemMobileDescr": "Mobil veb brauzerdə sənədləri, cədvəlləri və slaydları redaktə edin.",
+  "UpgradeToProBannerItemLicenseHeader": "Həmişəlik lisenziya.",
+  "UpgradeToProBannerItemLicenseDescr": "Funksionallıq və təhlükəsizlik yeniləmələri üçün + 1 illik abunə.",
+  "UpgradeToProBannerItemScalabilityHeader": "Ölçüləbilənlik və klasterləşmə",
+  "UpgradeToProBannerItemScalabilityDescr": "Komandanızın ölçüsündən asılı olmayaraq sənədlərinizi rahat şəkildə redaktə edin və birlikdə işləyin."
 }

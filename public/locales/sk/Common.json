@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Ak chcete aktivovať už zakúpené obnovenie, nahrajte ho nižšie a kliknite na tlačidlo Aktivovať.",
   "ActivateUploadDescr": "Aby ste aktivovali licenciu, nahrajte ju nižšie a kliknite na Aktivovať.",
   "UploadLicenseFile": "Nahrajte súbor s licenciou",
-  "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}"
+  "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}",
+  "ActivateToProBannerHeaderTrial": "Zakúpením plnej verzie {{license}} získate:",
+  "UpgradeToProBannerHeader": "Získajte bezplatný prístup k kancelárskemu balíku pre firmy na 30 dní",
+  "UpgradeToProBannerItemSupportHeader": "Technická podpora.",
+  "UpgradeToProBannerItemSupportDescr": "Získajte rýchlu odbornú pomoc pri všetkých otázkach, ktoré sa vám môžu vyskytnúť.",
+  "UpgradeToProBannerItemMobileHeader": "Úpravy pomocou mobilných zariadení.",
+  "UpgradeToProBannerItemMobileDescr": "Upravujte dokumenty, hárky a snímky v mobilných prehliadačoch.",
+  "UpgradeToProBannerItemLicenseHeader": "Doživotná licencia.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1-ročné predplatné na aktualizácie funkčnosti a zabezpečenia.",
+  "UpgradeToProBannerItemScalabilityHeader": "Škálovateľnosť a klastrovanie.",
+  "UpgradeToProBannerItemScalabilityDescr": "Pohodlne upravujte a spolupracujte na dokumentoch bez ohľadu na veľkosť vášho tímu."
 }

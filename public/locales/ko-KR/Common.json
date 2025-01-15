@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "이미 구매한 갱신을 활성화하려면 아래에 업로드한 뒤 활성화 버튼을 클릭하세요.",
   "ActivateUploadDescr": "라이선스를 활성화하려면 아래에 라이선스를 업로드한 뒤 활성화를 클릭하세요.",
   "UploadLicenseFile": "라이선스 파일 업로드",
-  "ActivateSwithToProHeader": "{{license}} 정식 버전으로 전환하세요"
+  "ActivateSwithToProHeader": "{{license}} 정식 버전으로 전환하세요",
+  "ActivateToProBannerHeaderTrial": "{{license}} 정식 버전 구매 시 혜택:",
+  "UpgradeToProBannerHeader": "30일 동안 엔터프라이즈-레디 오피스 제품군을 무료로 이용하세요",
+  "UpgradeToProBannerItemSupportHeader": "기술 지원.",
+  "UpgradeToProBannerItemSupportDescr": "직면하는 모든 문제에 대해 신속하게 전문가의 도움을 받으세요.",
+  "UpgradeToProBannerItemMobileHeader": "모바일 편집.",
+  "UpgradeToProBannerItemMobileDescr": "모바일 브라우저에서 문서, 시트, 슬라이드를 편집하세요.",
+  "UpgradeToProBannerItemLicenseHeader": "평생 라이선스.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 기능 및 보안 업데이트에 대한 1년 구독.",
+  "UpgradeToProBannerItemScalabilityHeader": "확장성 및 클러스터링.",
+  "UpgradeToProBannerItemScalabilityDescr": "팀의 규모에 관계없이 편안하게 문서를 편집 및 공동 작업하세요."
 }

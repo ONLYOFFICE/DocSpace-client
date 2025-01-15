@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Лицензия активирована",
-  "ActivateToProBannerHeaderTrial": "Купите полную версию {{license}}, чтобы получить:",
-  "UpgradeToProBannerHeader": "Получите бесплатный доступ к корпоративному офисному пакету на 30 дней",
   "UpgradeToProBannerInformationAboutShort": "Узнайте больше об {{license}} Edition на <1>официальном сайте</1>",
   "UpgradeToProBannerInformationDemo": "Запросить демонстрацию <1>здесь</1>",
   "UpgradeToProBannerInformationPurchase": "Задать вопросы по покупке <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Инструкция для Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Инструкция для Windows.",
   "UpgradeToProBannerInstructionNote": "Пожалуйста, обратите внимание, что редакторы будут недоступны в ходе обновления. Сначала рекомендуется выполнить <1>резервное копирование данных</1>.",
-  "UpgradeToProBannerInstructionReadNow": "Читать",
-  "UpgradeToProBannerItemLicenseDescr": "+ обновления функциональных возможностей и безопасности в течение 1 года.",
-  "UpgradeToProBannerItemLicenseHeader": "Бессрочная лицензия.",
-  "UpgradeToProBannerItemMobileDescr": "Редактируйте документы, таблицы и презентации в мобильном браузере.",
-  "UpgradeToProBannerItemMobileHeader": "Мобильное редактирование.",
-  "UpgradeToProBannerItemScalabilityDescr": "Редактируйте документы и работайте над ними совместно в команде любого размера.",
-  "UpgradeToProBannerItemScalabilityHeader": "Масштабируемость и кластеризация.",
-  "UpgradeToProBannerItemSupportDescr": "Получайте профессиональную помощь по всем возникшим вопросам.",
-  "UpgradeToProBannerItemSupportHeader": "Техническая поддержка."
+  "UpgradeToProBannerInstructionReadNow": "Читать"
 }

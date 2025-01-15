@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Licencia aktivovaná",
-  "ActivateToProBannerHeaderTrial": "Zakúpením plnej verzie {{license}} získate:",
-  "UpgradeToProBannerHeader": "Získajte bezplatný prístup k kancelárskemu balíku pre firmy na 30 dní",
   "UpgradeToProBannerInformationAboutShort": "Viac informácií o {{license}} Edition nájdete na <1>oficiálnej webovej stránke</1>",
   "UpgradeToProBannerInformationDemo": "Požiadajte o ukážku <1>tu</1>",
   "UpgradeToProBannerInformationPurchase": "Pošlite vaše otázky ohľadom nákupu na <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Návod pre Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Návod pre Windows.",
   "UpgradeToProBannerInstructionNote": "Upozorňujeme, že redaktory budú počas aktualizácie nedostupné. Pred tým, ako sa aktualizácia začne, odporúčame vám <1>zálohovať si údaje</1>.",
-  "UpgradeToProBannerInstructionReadNow": "Čítať teraz",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1-ročné predplatné na aktualizácie funkčnosti a zabezpečenia.",
-  "UpgradeToProBannerItemLicenseHeader": "Doživotná licencia.",
-  "UpgradeToProBannerItemMobileDescr": "Upravujte dokumenty, hárky a snímky v mobilných prehliadačoch.",
-  "UpgradeToProBannerItemMobileHeader": "Úpravy pomocou mobilných zariadení.",
-  "UpgradeToProBannerItemScalabilityDescr": "Pohodlne upravujte a spolupracujte na dokumentoch bez ohľadu na veľkosť vášho tímu.",
-  "UpgradeToProBannerItemScalabilityHeader": "Škálovateľnosť a klastrovanie.",
-  "UpgradeToProBannerItemSupportDescr": "Získajte rýchlu odbornú pomoc pri všetkých otázkach, ktoré sa vám môžu vyskytnúť.",
-  "UpgradeToProBannerItemSupportHeader": "Technická podpora."
+  "UpgradeToProBannerInstructionReadNow": "Čítať teraz"
 }

@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Licentie geactiveerd",
-  "ActivateToProBannerHeaderTrial": "Koop de volledige {{license}} versie en ontvang het volgende:",
-  "UpgradeToProBannerHeader": "Krijg 30 dagen lang gratis toegang tot de office suite voor ondernemingen",
   "UpgradeToProBannerInformationAboutShort": "Meer informatie over {{license}} Editie op de <1>officiële website</1>",
   "UpgradeToProBannerInformationDemo": "Vraag <1>hier</1> een demonstratie aan",
   "UpgradeToProBannerInformationPurchase": "Stel vragen over de aankoop per <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux instructies.",
   "UpgradeToProBannerInstructionItemWindows": "Windows instructies.",
   "UpgradeToProBannerInstructionNote": "Houd er rekening mee dat de editors tijdens de upgrade niet beschikbaar zijn. Wij raden ook aan om <1>een back-up van uw gegevens</1> te maken voordat u begint.",
-  "UpgradeToProBannerInstructionReadNow": "Lees nu",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1-jarig abonnement voor functionaliteits- en beveiligingsupdates.",
-  "UpgradeToProBannerItemLicenseHeader": "Levenslange licentie.",
-  "UpgradeToProBannerItemMobileDescr": "Bewerk documenten, sheets en dia's in mobiele browsers.",
-  "UpgradeToProBannerItemMobileHeader": "Mobiel bewerken.",
-  "UpgradeToProBannerItemScalabilityDescr": "Bewerk en werk comfortabel samen aan documenten, ongeacht hoe groot uw team is.",
-  "UpgradeToProBannerItemScalabilityHeader": "Schaalbaarheid en clustering.",
-  "UpgradeToProBannerItemSupportDescr": "Ontvang snel professionele hulp voor alle problemen waarmee u te maken krijgt.",
-  "UpgradeToProBannerItemSupportHeader": "Technische ondersteuning."
+  "UpgradeToProBannerInstructionReadNow": "Lees nu"
 }

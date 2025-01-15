@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "تم تفعيل الترخيص",
-  "ActivateToProBannerHeaderTrial": "قم بشراء النسخة الكاملة من {{license}} للحصول على:",
-  "UpgradeToProBannerHeader": "احصل على وصول مجاني إلى مجموعة المكاتب الجاهزة للمؤسسات لمدة 30 يومًا",
   "UpgradeToProBannerInformationDemo": "اطلب العرض التوضيحي <1> هنا </ 1>",
   "UpgradeToProBannerInformationPurchase": "اطرح أسئلة الشراء على <1>{{email}}</1>",
   "UpgradeToProBannerInformationSupport": "احصل على المساعدة الفنية <1>{{helpUrl}}</1>",
@@ -11,13 +9,5 @@
   "UpgradeToProBannerInstructionItemLinux": "تعليمات لينكس.",
   "UpgradeToProBannerInstructionItemWindows": "تعليمات ويندوز.",
   "UpgradeToProBannerInstructionNote": "يرجى ملاحظة أن المحررين لن يكونوا متوفرين أثناء الترقية. نوصي أيضًا بـ <1> نسخ بياناتك احتياطيًا </ 1> قبل البدء.",
-  "UpgradeToProBannerInstructionReadNow": "اقرا الان",
-  "UpgradeToProBannerItemLicenseDescr": "+ اشتراك لمدة عام واحد للحصول على تحديثات الوظائف والأمان.",
-  "UpgradeToProBannerItemLicenseHeader": "رخصة لمدى الحياة.",
-  "UpgradeToProBannerItemMobileDescr": "تعديل المستندات والجداول والعروض التقديمية على متصفحات الهواتف المحمولة.",
-  "UpgradeToProBannerItemMobileHeader": "تحرير الهاتف.",
-  "UpgradeToProBannerItemScalabilityDescr": "يمكنك تحرير المستندات والتعاون في العمل عليها بشكل مريح بغض النظر عن حجم فريقك.",
-  "UpgradeToProBannerItemScalabilityHeader": "القابلية للتوسع والتجميع.",
-  "UpgradeToProBannerItemSupportDescr": "احصل على مساعدة احترافية سريعة لجميع المشكلات التي تواجهها.",
-  "UpgradeToProBannerItemSupportHeader": "دعم تقني."
+  "UpgradeToProBannerInstructionReadNow": "اقرا الان"
 }

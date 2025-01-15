@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "License activated",
-  "ActivateToProBannerHeaderTrial": "Buy the full {{license}} version to get:",
-  "UpgradeToProBannerHeader": "Get free access to enterprise-ready office suite for 30 days",
   "UpgradeToProBannerInformationAboutShort": "Learn more about {{license}} Edition on the <1>official website</1>",
   "UpgradeToProBannerInformationDemo": "Request demonstration <1>here</1>",
   "UpgradeToProBannerInformationPurchase": "Ask purchase questions at <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux instruction.",
   "UpgradeToProBannerInstructionItemWindows": "Windows instruction.",
   "UpgradeToProBannerInstructionNote": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
-  "UpgradeToProBannerInstructionReadNow": "Read now",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1-year subscription for functionality and security updates.",
-  "UpgradeToProBannerItemLicenseHeader": "Lifetime license.",
-  "UpgradeToProBannerItemMobileDescr": "Edit docs, sheets, and slides in mobile browsers.",
-  "UpgradeToProBannerItemMobileHeader": "Mobile editing.",
-  "UpgradeToProBannerItemScalabilityDescr": "Comfortably edit and collaborate on docs no matter what size your team is.",
-  "UpgradeToProBannerItemScalabilityHeader": "Scalability and clustering.",
-  "UpgradeToProBannerItemSupportDescr": "Get quick professional help for all the issues you face.",
-  "UpgradeToProBannerItemSupportHeader": "Tech support."
+  "UpgradeToProBannerInstructionReadNow": "Read now"
 }

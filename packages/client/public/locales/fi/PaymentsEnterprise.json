@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Lisenssi aktivoitu",
-  "ActivateToProBannerHeaderTrial": "Osta täysi {{license}} -versio saadaksesi:",
-  "UpgradeToProBannerHeader": "Ilmainen pääsy yrityksille sopivaan office suiteen 30 päivän ajaksi",
   "UpgradeToProBannerInformationAboutShort": "Lue lisää {{license}} -versiosta <1>official website</1>",
   "UpgradeToProBannerInformationDemo": "Pyydä esittelyä <1>tästä</1>",
   "UpgradeToProBannerInformationPurchase": "Esitä kysymyksiä ostoon liittyen <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linuxin ohje.",
   "UpgradeToProBannerInstructionItemWindows": "Windowsin ohje.",
   "UpgradeToProBannerInstructionNote": "Huomioithan, että muokkaukset eivät ole käytössä päivityksen aikana. Suosittelemme myös <1>varmuuskopioimaan tietosi</1> ennen kuin aloitat.",
-  "UpgradeToProBannerInstructionReadNow": "Lue nyt",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1 vuoden tilaus toiminnallisuus- ja tietoturvapäivityksiin.",
-  "UpgradeToProBannerItemLicenseHeader": "Elinikäinen lisenssi.",
-  "UpgradeToProBannerItemMobileDescr": "Muokkaa asiakirjoja, taulukoita ja dioja mobiiliselaimissa.",
-  "UpgradeToProBannerItemMobileHeader": "Mobiilimuokkaus",
-  "UpgradeToProBannerItemScalabilityDescr": "Mukava muokata ja tehdä yhteistyötä asiakirjoilla tiimin koosta riippumatta.",
-  "UpgradeToProBannerItemScalabilityHeader": "Skaalautuvuus ja klusterointi.",
-  "UpgradeToProBannerItemSupportDescr": "Hanki nopeasti ammattilaisapua kaikkiin kohtaamiisi ongelmiin.",
-  "UpgradeToProBannerItemSupportHeader": "Tekninen tuki."
+  "UpgradeToProBannerInstructionReadNow": "Lue nyt"
 }

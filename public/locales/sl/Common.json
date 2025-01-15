@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Če želite aktivirati podaljšanje, ki ste ga že kupili, ga naložite spodaj in kliknite gumb Aktiviraj.",
   "ActivateUploadDescr": "Če želite aktivirati svojo licenco, jo prenesite spodaj in kliknite Aktiviraj.",
   "UploadLicenseFile": "Naloži licenčno datoteko",
-  "ActivateSwithToProHeader": "Preklopite na polno verzijo {{license}}"
+  "ActivateSwithToProHeader": "Preklopite na polno verzijo {{license}}",
+  "ActivateToProBannerHeaderTrial": "Kupite polno verzijo {{license}} in dobite:",
+  "UpgradeToProBannerHeader": "Zagotovi si brezplačen dostop do pisarniškega paketa, pripravljenega za podjetja, za 30 dni",
+  "UpgradeToProBannerItemSupportHeader": "Tehnična podpora.",
+  "UpgradeToProBannerItemSupportDescr": "Poiščite hitro strokovno pomoč za vse težave, s katerimi se srečujete.",
+  "UpgradeToProBannerItemMobileHeader": "Mobilno urejanje.",
+  "UpgradeToProBannerItemMobileDescr": "Urejanje dokumentov, tabel in prezentacij v mobilnih brskalnikih.",
+  "UpgradeToProBannerItemLicenseHeader": "Časovno neomejena licenca.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1-letna naročnina na funkcionalnost in varnostne posodobitve.",
+  "UpgradeToProBannerItemScalabilityHeader": "Razširljivost in združevalnost.",
+  "UpgradeToProBannerItemScalabilityDescr": "Udobno urejanje in sodelovanje pri dokumentih, ne glede na velikost vaše ekipe."
 }

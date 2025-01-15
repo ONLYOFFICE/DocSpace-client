@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Licence activée",
-  "ActivateToProBannerHeaderTrial": "Achetez la version complète d'{{license}} pour obtenir :",
-  "UpgradeToProBannerHeader": "Obtenez un accès gratuit à la suite bureautique prête à l'emploi pendant 30 jours",
   "UpgradeToProBannerInformationAboutShort": "En savoir plus à propos d'{{license}} Edition sur le <1>site web officiel</1>",
   "UpgradeToProBannerInformationDemo": "Demandez la démo <1>ici</1>",
   "UpgradeToProBannerInformationPurchase": "Pour toute question d'achat contactez-nous à <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Consignes Linux",
   "UpgradeToProBannerInstructionItemWindows": "Consignes pour Windows.",
   "UpgradeToProBannerInstructionNote": "Veuillez noter que les éditeurs ne seront pas disponibles pendant la mise à jour. Nous vous conseillons également de <1>sauvegarder vos données</1> avant de démarrer.",
-  "UpgradeToProBannerInstructionReadNow": "Lire maintenant",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1 an d'abonnement sur les mises à jour au niveau des fonctionnalités et de la sécurité.",
-  "UpgradeToProBannerItemLicenseHeader": "Licence à vie",
-  "UpgradeToProBannerItemMobileDescr": "Editez les documents, les feuilles de calcul et les diapositives dans le navigateur web mobile.",
-  "UpgradeToProBannerItemMobileHeader": "Édition mobile.",
-  "UpgradeToProBannerItemScalabilityDescr": "Editez et coéditez vos documents confortablement quelle que soit la taille de votre équipe.",
-  "UpgradeToProBannerItemScalabilityHeader": "Scalabilité et regroupement en grappes",
-  "UpgradeToProBannerItemSupportDescr": "Profitez d'une assistance professionnelle rapide pour toutes les difficultés rencontrées.",
-  "UpgradeToProBannerItemSupportHeader": "Assistance technique"
+  "UpgradeToProBannerInstructionReadNow": "Lire maintenant"
 }

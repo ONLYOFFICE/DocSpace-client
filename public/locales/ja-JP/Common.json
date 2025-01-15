@@ -612,5 +612,15 @@
   "ActivateRenewalDescr": "すでに購入済みの更新を有効にするには、以下にアップロードし、「有効化」ボタンをクリックしてください。",
   "ActivateUploadDescr": "ライセンスを有効にするには、以下のようにアップロードし、「有効にする」をクリックしてください。",
   "UploadLicenseFile": "ライセンスファイルのアップロード",
-  "ActivateSwithToProHeader": "{{license}}版への切り替え"
+  "ActivateSwithToProHeader": "{{license}}版への切り替え",
+  "ActivateToProBannerHeaderTrial": "すべての機能を利用するには、{{license}}の完全版を購入してください。",
+  "UpgradeToProBannerHeader": "エンタープライズ対応のオフィススイートを30日間無料でご利用いただけます。",
+  "UpgradeToProBannerItemSupportHeader": "技術サポート",
+  "UpgradeToProBannerItemSupportDescr": "あらゆる問題に対して、プロフェッショナルが迅速に対応します。",
+  "UpgradeToProBannerItemMobileHeader": "モバイル編集。",
+  "UpgradeToProBannerItemMobileDescr": "モバイルブラウザでテキスト文書、シート、スライドを編集します。",
+  "UpgradeToProBannerItemLicenseHeader": "ライフタイムライセンス。",
+  "UpgradeToProBannerItemLicenseDescr": "機能およびセキュリティアップデートのための+ 1年間のサブスクリプション。",
+  "UpgradeToProBannerItemScalabilityHeader": "スケーラビリティとクラスタリング。",
+  "UpgradeToProBannerItemScalabilityDescr": "チームの規模に関係なく、ドキュメントを快適に編集し、共同作業を行うことができます。"
 }

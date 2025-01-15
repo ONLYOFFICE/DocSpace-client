@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Լիցենզիան ակտիվացված է",
-  "ActivateToProBannerHeaderTrial": "Գնեք ամբողջական {{license}} տարբերակը, ստանալու համար՝",
-  "UpgradeToProBannerHeader": "Ստացեք անվճար մուտք դեպի enterprise պատրաստի գրասենյակային փաթեթ 30 օրով кроме sr",
   "UpgradeToProBannerInformationAboutShort": "Իմացեք ավելին {{license}} Edition-ի մասին <1>պաշտոնական կայքում</1>",
   "UpgradeToProBannerInformationDemo": "Ցուցադրումը պահանջեք <1>այստեղ</1>",
   "UpgradeToProBannerInformationPurchase": "Գնման հարցեր տվեք <1>{{email}}</1> հասցեով",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux հրահանգ.",
   "UpgradeToProBannerInstructionItemWindows": "Windows հրահանգ.",
   "UpgradeToProBannerInstructionNote": "Խնդրում ենք նկատի ունենալ, որ թարմացման ընթացքում խմբագրիչներն անհասանելի կլինեն: Մենք նաև խորհուրդ ենք տալիս <1>պահուստավորել ձեր տվյալները</1> նախքան սկսելը:",
-  "UpgradeToProBannerInstructionReadNow": "Կարդացեք հիմա",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1 տարվա բաժանորդագրություն ֆունկցիոնալության և անվտանգության թարմացումների համար:",
-  "UpgradeToProBannerItemLicenseHeader": "Ցմահ լիցենզիա.",
-  "UpgradeToProBannerItemMobileDescr": "Խմբագրել փաստաթղթերը, թերթերը և սլայդները բջջային բրաուզերներում:",
-  "UpgradeToProBannerItemMobileHeader": "Բջջային խմբագրում",
-  "UpgradeToProBannerItemScalabilityDescr": "Հարմարավետ կերպով խմբագրեք և համագործակցեք փաստաթղթերի վրա՝ անկախ ձեր թիմի չափից:",
-  "UpgradeToProBannerItemScalabilityHeader": "Ընդարձակություն և կլաստերավորում:",
-  "UpgradeToProBannerItemSupportDescr": "Ստացեք արագ մասնագիտական օգնություն ձեր առջև ծառացած բոլոր խնդիրների համար:",
-  "UpgradeToProBannerItemSupportHeader": "Տեխնիկական աջակցություն."
+  "UpgradeToProBannerInstructionReadNow": "Կարդացեք հիմա"
 }

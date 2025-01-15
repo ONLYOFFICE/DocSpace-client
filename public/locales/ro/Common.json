@@ -612,5 +612,15 @@
   "ActivateRenewalDescr": "Pentru a activa actualizarea cumpărată, încărcați-o mai jos și faceți clic pe butonul Activare.",
   "ActivateUploadDescr": "Pentru a activa licența, încărcați-o mai jos și faceți clic pe butonul Activare.",
   "UploadLicenseFile": "Încărcare fişier licenţă",
-  "ActivateSwithToProHeader": "Comutare la versiunea completă {{license}}"
+  "ActivateSwithToProHeader": "Comutare la versiunea completă {{license}}",
+  "ActivateToProBannerHeaderTrial": "Cumpărați versiunea completă {{license}} și obțineți:",
+  "UpgradeToProBannerHeader": "Obțineți 30 zile de acces la suită de birou destinată intreprinderilor ",
+  "UpgradeToProBannerItemSupportHeader": "Asistența tehnică",
+  "UpgradeToProBannerItemSupportDescr": "Obțineți rapid asistența profesională pentru orice problemă  cu care vă confruntați.",
+  "UpgradeToProBannerItemMobileHeader": "Editare mobilă",
+  "UpgradeToProBannerItemMobileDescr": "Editați dicumente, foi de calcul și diapozitive din browsere mobile.",
+  "UpgradeToProBannerItemLicenseHeader": "Licența pe durata vieții",
+  "UpgradeToProBannerItemLicenseDescr": "Abonament de 1 an cu actualizări pentru îmbunătățirea funcționalității și securității",
+  "UpgradeToProBannerItemScalabilityHeader": "Scalabilitate și grupare.",
+  "UpgradeToProBannerItemScalabilityDescr": "Editați și colaborați la documente în mod confortabil, indiferent de mărimea echipei dvs."
 }

@@ -399,5 +399,12 @@
   "ActivateRenewDescr": "ເພື່ອ​ໄດ້​ຮັບ​ຂໍ້​ກໍາ​ນົດ​ການ​ຕໍ່​ອາ​ຍຸ​ສ່ວນ​ບຸກ​ຄົນ​ຂອງ​ທ່ານ​, ຕິດ​ຕໍ່​ຫາ​ຜູ້​ຈັດ​ການ​ທີ່​ອຸ​ທິດ​ຕົນ​ຂອງ​ທ່ານ​ຫຼື​ຂຽນ​ຫາ​ພວກ​ເຮົາ​ທີ່ <1>{{email}}</1>",
   "ActivateLicense": "ເປີດໃຊ້ໃບອະນຸຍາດ",
   "ActivateUploadDescr": "ເພື່ອເປີດໃຊ້ໃບອະນຸຍາດຂອງທ່ານ, ອັບໂຫຼດມັນຢູ່ລຸ່ມນີ້ ແລະຄລິກທີ່ເປີດໃຊ້ງານ.",
-  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ"
+  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ",
+  "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ.",
+  "UpgradeToProBannerItemSupportDescr": "ຂໍຄວາມຊ່ວຍເຫຼືອແບບມືອາຊີບດ່ວນສຳລັບທຸກບັນຫາທີ່ເຈົ້າປະເຊີນ.",
+  "UpgradeToProBannerItemMobileDescr": "ແກ້ໄຂ ເອກະສານ, ຄຳນວນ, ແລະ ນຳສະເໜີ້ ໃນຕົວທ່ອງເວັບມືຖື.",
+  "UpgradeToProBannerItemLicenseHeader": "ໃບອະນຸຍາດຕະຫຼອດຊີວິດ.",
+  "UpgradeToProBannerItemLicenseDescr": "+ ການສະໝັກສິດນຳໃຊ້ 1 ປີສຳລັບການອັບເດດການເຮັດວຽກ ແລະ ຄວາມປອດໄພ.",
+  "UpgradeToProBannerItemScalabilityHeader": "ຄວາມສາມາດໃນການຂະຫຍາຍ ແລະການຈັດກຸ່ມ.",
+  "UpgradeToProBannerItemScalabilityDescr": "ແກ້ໄຂ ແລະເຮັດວຽກຮ່ວມກັນໃນເອກະສານຢ່າງສະດວກສະບາຍ ບໍ່ວ່າທີມຂອງທ່ານຈະເປັນຂະໜາດໃດກໍຕາມ."
 }

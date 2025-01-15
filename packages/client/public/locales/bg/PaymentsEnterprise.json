@@ -1,7 +1,5 @@
 {
   "ActivateLicenseActivated": "Лицензът е активиран",
-  "ActivateToProBannerHeaderTrial": "Купете пълната {{license}} версия, за да получите:",
-  "UpgradeToProBannerHeader": "Получете безплатен достъп до готов за предприятие офис пакет за 30 дни",
   "UpgradeToProBannerInformationAboutShort": "Научете повече за {{license}} Edition на <1>официалния уебсайт</1>",
   "UpgradeToProBannerInformationDemo": "Поискайте демонстрация <1>тук</1>",
   "UpgradeToProBannerInformationPurchase": "Задавайте въпроси относно покупките на <1>{{email}}</1>",
@@ -12,13 +10,5 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux инструкции.",
   "UpgradeToProBannerInstructionItemWindows": "Windows инструкции.",
   "UpgradeToProBannerInstructionNote": "Моля, имайте предвид, че редакторите няма да бъдат достъпни по време на надстройката. Също така препоръчваме да <1>архивирате данните си</1>, преди да започнете.",
-  "UpgradeToProBannerInstructionReadNow": "Прочетете сега",
-  "UpgradeToProBannerItemLicenseDescr": "+ 1-годишен абонамент за функционалност и актуализации на сигурността.",
-  "UpgradeToProBannerItemLicenseHeader": "Доживотен лиценз.",
-  "UpgradeToProBannerItemMobileDescr": "Редактирайте документи, таблици и слайдове в мобилни браузъри.",
-  "UpgradeToProBannerItemMobileHeader": "Мобилно редактиране.",
-  "UpgradeToProBannerItemScalabilityDescr": "Удобно редактирайте и работете съвместно върху документи, независимо от размера на вашия екип.",
-  "UpgradeToProBannerItemScalabilityHeader": "Мащабируемост и групиране.",
-  "UpgradeToProBannerItemSupportDescr": "Получете бърза професионална помощ за всички проблеми, с които се сблъсквате.",
-  "UpgradeToProBannerItemSupportHeader": "Техническа поддръжка."
+  "UpgradeToProBannerInstructionReadNow": "Прочетете сега"
 }

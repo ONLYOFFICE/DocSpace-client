@@ -611,5 +611,15 @@
   "ActivateRenewalDescr": "Щоб активувати оновлення, яке ви вже купили, передайте його нижче та натисніть «Активувати».",
   "ActivateUploadDescr": "Щоб активувати ліцензію, завантажте її нижче та натисніть «Активувати».",
   "UploadLicenseFile": "Завантажити файл ліцензії",
-  "ActivateSwithToProHeader": "Перемкнутися на повну версію {{license}}"
+  "ActivateSwithToProHeader": "Перемкнутися на повну версію {{license}}",
+  "ActivateToProBannerHeaderTrial": "Придбайте повну версію {{license}}, щоб отримати:",
+  "UpgradeToProBannerHeader": "Отримайте безплатний доступ до корпоративного офісного пакета на 30 днів.",
+  "UpgradeToProBannerItemSupportHeader": "Технічна підтримка.",
+  "UpgradeToProBannerItemSupportDescr": "Швидка професійна допомога з будь-якими проблемами.",
+  "UpgradeToProBannerItemMobileHeader": "Мобільне редагування.",
+  "UpgradeToProBannerItemMobileDescr": "Редагування документів, таблиць та слайдів у мобільних браузерах.",
+  "UpgradeToProBannerItemLicenseHeader": "Довічна ліцензія.",
+  "UpgradeToProBannerItemLicenseDescr": "+ 1-річна підписка на оновлення функціонала та безпеки.",
+  "UpgradeToProBannerItemScalabilityHeader": "Масштабованість і кластеризація.",
+  "UpgradeToProBannerItemScalabilityDescr": "Комфортне редагування та спільна робота над документами незалежно від розміру команди."
 }

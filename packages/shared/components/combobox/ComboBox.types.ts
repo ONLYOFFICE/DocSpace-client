@@ -45,6 +45,7 @@ export type TBaseOption = {
   description?: string;
   quota?: "free" | "paid";
   isSelected?: boolean;
+  isBeta?: boolean;
   internal?: boolean;
   access?: ShareAccessRights;
   className?: string;

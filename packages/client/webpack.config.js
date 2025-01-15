@@ -298,7 +298,10 @@ const config = {
       quiet: true,
       formatter: "json",
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "static/styles/[name].[contenthash].css",
+      chunkFilename: "static/styles/[id].[contenthash].css",
+    }),
     new ExternalTemplateRemotesPlugin(),
 
     new CopyPlugin({

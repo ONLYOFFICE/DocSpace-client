@@ -65,4 +65,9 @@ jobs:
         run: npm install
       - name: Run common tests
         working-directory: ./common/tests
-        run: npm run test
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "develop" ]]; then
+            npm run test:skip-base-languages
+          else
+            npm run test
+          fi

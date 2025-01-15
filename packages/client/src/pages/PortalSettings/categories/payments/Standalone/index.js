@@ -50,6 +50,7 @@ const StandalonePage = (props) => {
     isDeveloper,
     buyUrl,
     salesEmail,
+    isEnterprise,
   } = props;
 
   const { t, ready } = useTranslation(["PaymentsEnterprise", "Common"]);
@@ -83,6 +84,7 @@ const StandalonePage = (props) => {
       buyUrl={buyUrl}
       trialDaysLeft={trialDaysLeft}
       paymentDate={paymentDate}
+      isEnterprise={isEnterprise}
     />
   );
 };
@@ -124,6 +126,7 @@ export default inject(
       isDeveloper,
       buyUrl,
       salesEmail,
+      isEnterprise,
     };
   },
 )(observer(StandalonePage));

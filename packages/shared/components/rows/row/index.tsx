@@ -157,7 +157,10 @@ const Row = (props: RowProps) => {
     >
       {inProgress ? (
         <Loader
-          className="row-progress-loader"
+          className={classNames(
+            styles.rowProgressLoader,
+            "row-progress-loader",
+          )}
           color=""
           size="20px"
           type={LoaderTypes.track}

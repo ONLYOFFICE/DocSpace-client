@@ -90,14 +90,12 @@
   }
 
   @include tablet-and-below {
-    width: calc(var(--infinite-loader-table-width-tablet) + 36px) !important;
+    width: calc(var(--infinite-loader-table-width) + 36px) !important;
 
     :global {
       .ReactVirtualized__Grid__innerScrollContainer {
         :local {
-          max-width: calc(
-            var(--infinite-loader-table-width-tablet) + 36px
-          ) !important;
+          max-width: calc(var(--infinite-loader-table-width) + 36px) !important;
         }
       }
     }
@@ -106,14 +104,12 @@
   @include mobile {
     margin-inline-start: -16px;
 
-    width: calc(var(--infinite-loader-table-width-tablet) + 32px) !important;
+    width: calc(var(--infinite-loader-table-width) + 32px) !important;
 
     :global {
       .ReactVirtualized__Grid__innerScrollContainer {
         :local {
-          max-width: calc(
-            var(--infinite-loader-table-width-tablet) + 32px
-          ) !important;
+          max-width: calc(var(--infinite-loader-table-width) + 32px) !important;
         }
       }
     }

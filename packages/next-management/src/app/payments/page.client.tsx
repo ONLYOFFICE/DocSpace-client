@@ -41,6 +41,7 @@ const PaymentsPage = ({
   isDeveloper,
   buyUrl,
   dueDate,
+  isEnterprise,
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -93,6 +94,7 @@ const PaymentsPage = ({
       buyUrl={buyUrl}
       trialDaysLeft={trialDaysLeft}
       paymentDate={paymentDate}
+      isEnterprise={isEnterprise}
     />
   );
 };

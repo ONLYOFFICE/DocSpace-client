@@ -42,7 +42,7 @@ async function Page() {
   ]);
 
   const { trial } = quota;
-  const { developer, dueDate } = portalTariff;
+  const { enterprise, developer, dueDate } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
 
   return (
@@ -52,6 +52,7 @@ async function Page() {
       isDeveloper={developer}
       buyUrl={buyUrl}
       dueDate={dueDate}
+      isEnterprise={enterprise}
     />
   );
 }

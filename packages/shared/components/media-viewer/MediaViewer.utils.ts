@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { BoundsType, PlaylistType, Point } from "./MediaViewer.types";

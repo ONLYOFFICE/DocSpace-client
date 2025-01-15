@@ -379,7 +379,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   useEffect(() => {
     if (fileLoadingStatus === "proceed") {
-      uploadInterval.current = window.setInterval(poolStatus, 1000);
+      uploadInterval.current = window.setInterval(() => poolStatus(), 1000);
     } else if (fileLoadingStatus === "done") {
       setIsSaveDisabled(false);
     }

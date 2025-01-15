@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { desktop, injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import { desktop, injectDefaultTheme, mobile } from "../../utils";
 
 // doesn't require mirroring for RTL
 

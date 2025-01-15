@@ -130,32 +130,30 @@ const PaymentContainer = (props) => {
   } = props;
   const renderTooltip = () => {
     return (
-      <>
-        <HelpButton
-          className="payment-tooltip"
-          offsetRight={0}
-          iconName={HelpReactSvgUrl}
-          tooltipContent={
-            <>
-              <Text isBold>{t("ManagerTypesDescription")}</Text>
-              <br />
-              <Text isBold>
-                {t("Common:PortalAdmin", {
-                  productName: t("Common:ProductName"),
-                })}
-              </Text>
-              <Text>
-                {t("AdministratorDescription", {
-                  productName: t("Common:ProductName"),
-                })}
-              </Text>
-              <br />
-              <Text isBold>{t("Common:RoomAdmin")}</Text>
-              <Text>{t("RoomManagerDescription")}</Text>
-            </>
-          }
-        />
-      </>
+      <HelpButton
+        className="payment-tooltip"
+        offsetRight={0}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <>
+            <Text isBold>{t("ManagerTypesDescription")}</Text>
+            <br />
+            <Text isBold>
+              {t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            <Text>
+              {t("AdministratorDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            <br />
+            <Text isBold>{t("Common:RoomAdmin")}</Text>
+            <Text>{t("RoomManagerDescription")}</Text>
+          </>
+        }
+      />
     );
   };
 
@@ -203,7 +201,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="StartupSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -218,7 +216,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="BusinessSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -233,7 +231,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="RenewSubscription" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -248,7 +246,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_grace-period"}
+          className="payment-info_grace-period"
           color={theme.client.settings.payment.warningColor}
         >
           <Trans t={t} i18nKey="DelayedPayment" ns="Payments">
@@ -257,8 +255,6 @@ const PaymentContainer = (props) => {
         </Text>
       );
     }
-
-    return;
   };
 
   const planDescription = () => {
@@ -266,7 +262,7 @@ const PaymentContainer = (props) => {
 
     if (isGracePeriod)
       return (
-        <Text noSelect fontSize={"14px"} lineHeight={"16px"}>
+        <Text noSelect fontSize="14px" lineHeight="16px">
           <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
             Grace period activated
             <strong>
@@ -287,8 +283,8 @@ const PaymentContainer = (props) => {
       return (
         <Text
           noSelect
-          fontSize={"14px"}
-          lineHeight={"16px"}
+          fontSize="14px"
+          lineHeight="16px"
           className="payment-info_managers-price"
         >
           <Trans t={t} i18nKey="BusinessFinalDateInfo" ns="Payments">
@@ -329,7 +325,7 @@ const PaymentContainer = (props) => {
                 <Text
                   noSelect
                   fontWeight={600}
-                  fontSize={"14px"}
+                  fontSize="14px"
                   className="payment-info_managers-price"
                 >
                   <Trans t={t} i18nKey="PerUserMonth" ns="Common">

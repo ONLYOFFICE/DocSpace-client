@@ -26,12 +26,8 @@
 
 import styled from "styled-components";
 
-import { Heading } from "@docspace/shared/components/heading";
-import {
-  injectDefaultTheme,
-  NoUserSelect,
-  tablet,
-} from "@docspace/shared/utils";
+import { Heading } from "../heading";
+import { injectDefaultTheme, NoUserSelect, tablet } from "../../utils";
 
 import { size, weight } from "./Headline.constants";
 import type { StyledHeadingProps } from "./Headline.types";

@@ -48,7 +48,7 @@ const AdvancedSettings = ({
 
   return (
     <Box className="ldap_advanced-settings">
-      <Text fontWeight={600} fontSize={"14px"}>
+      <Text fontWeight={600} fontSize="14px">
         {t("LdapAdvancedSettings")}
       </Text>
 

@@ -32,9 +32,9 @@ export { selectKeyOfTreeElement } from "./selectKeyOfTreeElement";
 export { getCurrentSettingsCategory } from "./getCurrentSettingsCategory";
 export { checkPropertyByLink } from "./checkPropertyByLink";
 export { getSettingsIndex } from "./getSettingsIndex";
-export { getFromLocalStorage } from "./getFromLocalStorage.js";
-export { saveToLocalStorage } from "./saveToLocalStorage.js";
-export { removeLocalStorage } from "./removeLocalStorage.js";
+export { getFromLocalStorage } from "./getFromLocalStorage";
+export { saveToLocalStorage } from "./saveToLocalStorage";
+export { removeLocalStorage } from "./removeLocalStorage";
 export { resetSessionStorage } from "./resetSessionStorage";
 export { getStepTitle } from "./getStepTitle";
 export {

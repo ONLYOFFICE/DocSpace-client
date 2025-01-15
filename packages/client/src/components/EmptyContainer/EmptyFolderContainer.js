@@ -42,7 +42,6 @@ const EmptyFolderContainer = ({
   t,
   onCreate,
   type, // folder type
-  folderId,
   linkStyles,
   sectionWidth,
   canCreateFiles,
@@ -50,7 +49,6 @@ const EmptyFolderContainer = ({
   roomType,
   isArchiveFolderRoot,
   isEmptyPage,
-  parentRoomType, // folder parent room type
 }) => {
   const isRoom = !!roomType;
   const displayRoomCondition = isRoom && !isArchiveFolderRoot;
@@ -95,7 +93,6 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     treeFoldersStore,
-    filesStore,
   }) => {
     const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
 

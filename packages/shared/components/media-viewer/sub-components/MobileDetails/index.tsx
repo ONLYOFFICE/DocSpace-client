@@ -27,14 +27,10 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, forwardRef, memo, ForwardedRef } from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import {
-  ContextMenu,
-  TContextMenuRef,
-} from "@docspace/shared/components/context-menu";
-
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
+import { ContextMenu, TContextMenuRef } from "../../../context-menu";
+import { Text } from "../../../text";
 
 import { StyledMobileDetails } from "../../MediaViewer.styled";
 

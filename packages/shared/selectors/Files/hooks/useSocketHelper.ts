@@ -29,12 +29,12 @@ import React from "react";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+  TOptSocket,
+} from "../../../utils/socket";
 
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
 import { TRoom } from "../../../api/rooms/types";
-import { TOptSocket } from "../../../utils/socket";
 
 import {
   convertFilesToItems,

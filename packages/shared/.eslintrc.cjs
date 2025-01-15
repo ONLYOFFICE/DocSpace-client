@@ -57,6 +57,10 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "react/jsx-filename-extension": [
+      1,
+      { extensions: [".js", ".ts", ".jsx", ".tsx"] },
+    ],
     "lines-between-class-members": [
       "error",
       "always",

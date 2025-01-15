@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile } from "../../utils";
 import { globalColors } from "../../themes";
 
 const Wrapper = styled.div<{ isPickerOnly: boolean }>`

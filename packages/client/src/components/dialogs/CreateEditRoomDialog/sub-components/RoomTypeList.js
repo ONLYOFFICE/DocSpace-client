@@ -29,13 +29,12 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
-import { isDesktop } from "@docspace/shared/utils";
 
 const StyledRoomTypeList = styled.div`
   margin-top: 20px;
@@ -45,6 +44,19 @@ const StyledRoomTypeList = styled.div`
   align-items: center;
   gap: 16px;
 `;
+
+const TooltipContent = ({ t }) => (
+  <Text fontSize="12px" noSelect>
+    {t("Files:WarningCreationFormRoom")}
+  </Text>
+);
+TooltipContent.displayName = "TooltipContent";
+
+const getTooltipContent = (t) => {
+  const TooltipRenderer = () => <TooltipContent t={t} />;
+  TooltipRenderer.displayName = "TooltipRenderer";
+  return TooltipRenderer;
+};
 
 const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
   const handleClick = (roomType) => {
@@ -59,11 +71,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
         place="bottom"
         id="create-room-tooltip"
         openOnClick={false}
-        getContent={() => (
-          <Text fontSize="12px" noSelect>
-            {t("Files:WarningCreationFormRoom")}
-          </Text>
-        )}
+        getContent={() => getTooltipContent(t)}
       />
 
       {RoomsTypeValues.map((roomType) => (
@@ -72,7 +80,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
           t={t}
           key={roomType}
           roomType={roomType}
-          type={"listItem"}
+          type="listItem"
           onClick={() => handleClick(roomType)}
           disabledFormRoom={disabledFormRoom}
         />

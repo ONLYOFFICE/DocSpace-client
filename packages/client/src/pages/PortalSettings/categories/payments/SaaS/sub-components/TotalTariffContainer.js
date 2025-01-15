@@ -93,7 +93,7 @@ const TotalTariffContainer = ({
         {isNeedRequest ? (
           <Text
             noSelect
-            fontSize={"14"}
+            fontSize="14"
             textAlign="center"
             fontWeight={600}
             className="total-tariff_description"
@@ -103,39 +103,37 @@ const TotalTariffContainer = ({
             </Trans>
           </Text>
         ) : (
-          <>
-            <Trans t={t} i18nKey="TotalPricePerMonth" ns="Payments">
-              ""
-              <Text
-                fontSize="48px"
-                as="span"
-                textAlign={"center"}
-                fontWeight={600}
-                className="payment_price_price-text"
-                noSelect
-              >
-                {{ currencySymbol }}
-              </Text>
-              <Text
-                fontSize="48px"
-                as="span"
-                fontWeight={600}
-                className="payment_price_price-text"
-                noSelect
-              >
-                {{ price: totalPrice }}
-              </Text>
-              <Text
-                as="span"
-                fontWeight={600}
-                fontSize="16px"
-                className="payment_price_month-text"
-                noSelect
-              >
-                /month
-              </Text>
-            </Trans>
-          </>
+          <Trans t={t} i18nKey="TotalPricePerMonth" ns="Payments">
+            ""
+            <Text
+              fontSize="48px"
+              as="span"
+              textAlign="center"
+              fontWeight={600}
+              className="payment_price_price-text"
+              noSelect
+            >
+              {{ currencySymbol }}
+            </Text>
+            <Text
+              fontSize="48px"
+              as="span"
+              fontWeight={600}
+              className="payment_price_price-text"
+              noSelect
+            >
+              {{ price: totalPrice }}
+            </Text>
+            <Text
+              as="span"
+              fontWeight={600}
+              fontSize="16px"
+              className="payment_price_month-text"
+              noSelect
+            >
+              /month
+            </Text>
+          </Trans>
         )}
       </div>
     </StyledBody>

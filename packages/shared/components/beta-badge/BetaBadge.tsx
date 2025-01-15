@@ -27,9 +27,9 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { InfoBadge } from "@docspace/shared/components/info-badge";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/shared/enums";
+import { InfoBadge } from "../info-badge";
+import { Link, LinkTarget } from "../link";
+import { DeviceType } from "../../enums";
 
 import type BetaBadgeProps from "./BetaBadge.props";
 import { MobileOffset, OtherOffset } from "./BetaBadge.constants";

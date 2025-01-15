@@ -34,12 +34,12 @@ import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
+import PropTypes from "prop-types";
 import AddIdpCertificateModal from "./sub-components/AddIdpCertificateModal";
 import AddSpCertificateModal from "./sub-components/AddSpCertificateModal";
 import CertificatesTable from "./sub-components/CertificatesTable";
 import CheckboxSet from "./sub-components/CheckboxSet";
 import HideButton from "./sub-components/HideButton";
-import PropTypes from "prop-types";
 import SsoComboBox from "./sub-components/SsoComboBox";
 import {
   decryptAlgorithmsOptions,
@@ -86,6 +86,8 @@ const Certificates = (props) => {
       prefix = "sp";
       additionalParameters = spShowAdditionalParameters;
       certificates = spCertificates;
+      break;
+    default:
       break;
   }
 
@@ -166,16 +168,14 @@ const Certificates = (props) => {
           <CheckboxSet prefix={prefix} />
 
           {provider === "IdentityProvider" && (
-            <>
-              <SsoComboBox
-                isDisabled={isDisabledIdpSigning}
-                labelText={t("idpSigningAlgorithm")}
-                name="idpVerifyAlgorithm"
-                options={verifyAlgorithmsOptions}
-                tabIndex={14}
-                value={idpVerifyAlgorithm}
-              />
-            </>
+            <SsoComboBox
+              isDisabled={isDisabledIdpSigning}
+              labelText={t("idpSigningAlgorithm")}
+              name="idpVerifyAlgorithm"
+              options={verifyAlgorithmsOptions}
+              tabIndex={14}
+              value={idpVerifyAlgorithm}
+            />
           )}
 
           {provider === "ServiceProvider" && (
@@ -192,7 +192,7 @@ const Certificates = (props) => {
               <SsoComboBox
                 isDisabled={isDisabledSpEncrypt}
                 labelText={t("StandardDecryptionAlgorithm")}
-                name={"spEncryptAlgorithm"}
+                name="spEncryptAlgorithm"
                 options={decryptAlgorithmsOptions}
                 tabIndex={15}
                 value={spEncryptAlgorithm}

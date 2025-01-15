@@ -27,10 +27,7 @@
 /* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
 
-import {
-  setDefaultUserQuota,
-  setDefaultRoomQuota,
-} from "@docspace/shared/api/settings";
+import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
@@ -50,6 +47,7 @@ import {
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
+
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 

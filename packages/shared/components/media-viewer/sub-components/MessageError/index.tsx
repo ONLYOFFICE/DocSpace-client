@@ -27,8 +27,8 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components/text";
-import { isSeparator } from "@docspace/shared/utils/typeGuards";
+import { Text } from "../../../text";
+import { isSeparator } from "../../../../utils/typeGuards";
 
 import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
 import type PlayerMessageErrorProps from "./MessageError.props";

@@ -30,9 +30,9 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import StyledBodyContent from "../styled-containers/StyledModalDialog";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
+import StyledBodyContent from "../styled-containers/StyledModalDialog";
 
 const AddIdpCertificateModal = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);

@@ -58,7 +58,7 @@ const ResetApplicationDialogComponent = (props) => {
           label={t("Common:ResetApplication")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={resetApp}
         />
         <Button

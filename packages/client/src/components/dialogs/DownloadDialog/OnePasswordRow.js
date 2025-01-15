@@ -49,7 +49,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -64,7 +64,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
 import { StyledSinglePasswordFile } from "./StyledDownloadDialog";
-import SimulatePassword from "../../../components/SimulatePassword";
+import SimulatePassword from "../../SimulatePassword";
 
 const OnePasswordRow = ({
   item,
@@ -78,13 +78,13 @@ const OnePasswordRow = ({
   const { t } = useTranslation(["DownloadDialog", "Files", "Common"]);
   const inputRef = useRef(null);
 
-  const onChangePassword = (password) => {
-    setPassword(password);
+  const onChangePassword = (pwd) => {
+    setPassword(pwd);
   };
 
   const updateDownloadItem = (fileId, updates) => {
     const files = [...downloadItems];
-    const itemToUpdate = files.find((item) => item.id === fileId);
+    const itemToUpdate = files.find((f) => f.id === fileId);
     Object.assign(itemToUpdate, updates);
     return files;
   };
@@ -106,7 +106,7 @@ const OnePasswordRow = ({
   const onRemoveFromDowload = () => {
     const fileId = item.id;
 
-    const files = downloadItems.filter((item) => item.id !== fileId);
+    const files = downloadItems.filter((f) => f.id !== fileId);
     if (!files.length) {
       onClosePanel();
       return;

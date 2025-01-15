@@ -395,15 +395,18 @@ const LoginForm = ({
           return;
         }
 
+        const isConfirm = typeof res === "string" && res.includes("confirm");
         try {
-          if (confirmData) await checkConfirmLink(confirmData);
+          if (confirmData && !isConfirm) await checkConfirmLink(confirmData);
         } catch (e) {
           console.error(e);
         }
         return res;
       })
       .then(async (res: string | object | undefined) => {
-        if (isPublicAuth) {
+        const tfaIsEnabled = typeof res === "string" ? true : res?.tfa;
+
+        if (isPublicAuth && !tfaIsEnabled) {
           localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
           window.close();
         }
@@ -417,7 +420,7 @@ const LoginForm = ({
 
         const redirectPath = referenceUrl || redirectPathStorage;
 
-        if (redirectPathStorage) {
+        if (redirectPathStorage && !isConfirm) {
           sessionStorage.removeItem("referenceUrl");
         }
 
@@ -426,7 +429,10 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string") window.location.replace(res);
+        if (typeof res === "string")
+          window.location.replace(
+            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
+          );
         else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {

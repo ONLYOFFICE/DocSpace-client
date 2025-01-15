@@ -38,8 +38,6 @@ import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -56,6 +54,7 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+import { flagsIcons } from "./image-flags";
 import { parseAddress } from "./email";
 
 import {
@@ -85,6 +84,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+import { hasOwnProperty } from "./object";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -112,9 +112,9 @@ export function createPasswordHash(
     !hashSettings ||
     typeof password !== "string" ||
     typeof hashSettings !== "object" ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "salt") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "size") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "iterations") ||
+    !hasOwnProperty(hashSettings, "salt") ||
+    !hasOwnProperty(hashSettings, "size") ||
+    !hasOwnProperty(hashSettings, "iterations") ||
     typeof hashSettings.size !== "number" ||
     typeof hashSettings.iterations !== "number" ||
     typeof hashSettings.salt !== "string"

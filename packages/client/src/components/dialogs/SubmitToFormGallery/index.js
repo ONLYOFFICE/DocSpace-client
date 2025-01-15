@@ -31,7 +31,7 @@ import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import FilesSelector from "@docspace/client/src/components/FilesSelector";
+import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -60,6 +60,23 @@ const SubmitToFormGallery = ({
   let formItemIsSet = !!formItem;
 
   const [isSelectingForm, setIsSelectingForm] = useState(false);
+
+  const onClose = () => {
+    abortControllerRef.current?.abort();
+    setIsSubmitting(false);
+    setFormItem(null);
+    setIsSelectingForm(false);
+    setVisible(false);
+  };
+
+  const onError = (err) => {
+    if (!err.message === "canceled") {
+      console.error(err);
+      toastr.error(err);
+    }
+    onClose();
+  };
+
   const onOpenFormSelector = () => setIsSelectingForm(true);
   const onCloseFormSelector = () => {
     if (!formItemIsSet) onClose();
@@ -105,22 +122,6 @@ const SubmitToFormGallery = ({
       .finally(() => onClose());
   };
 
-  const onClose = () => {
-    abortControllerRef.current?.abort();
-    setIsSubmitting(false);
-    setFormItem(null);
-    setIsSelectingForm(false);
-    setVisible(false);
-  };
-
-  const onError = (err) => {
-    if (!err.message === "canceled") {
-      console.error(err);
-      toastr.error(err);
-    }
-    onClose();
-  };
-
   useEffect(() => {
     (async () => {
       const fetchedGuideLink = await fetchGuideLink();
@@ -136,7 +137,7 @@ const SubmitToFormGallery = ({
         key="select-file-dialog"
         filterParam={FilesSelectorFilterTypes.PDF}
         descriptionText={t("Common:SelectPDFFormat")}
-        isPanelVisible={true}
+        isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
       />
@@ -160,8 +161,8 @@ const SubmitToFormGallery = ({
             <Link
               color={currentColorScheme.main?.accent}
               href={guideLink || "#"}
-              type={"page"}
-              target={"_blank"}
+              type="page"
+              target="_blank"
               isBold
               isHovered
             >
@@ -187,7 +188,7 @@ const SubmitToFormGallery = ({
                   ),
                 ]
               ) : (
-                <span className="name">{"" + formItem.fileExst}</span>
+                <span className="name">{`${formItem.fileExst}`}</span>
               )}
             </div>
           </Styled.FormItem>

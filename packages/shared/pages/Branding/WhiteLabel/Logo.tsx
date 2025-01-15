@@ -30,8 +30,6 @@ import SpreadsheetSample from "PUBLIC_DIR/images/logo/spreadsheet_sample.svg?url
 import PresentationSample from "PUBLIC_DIR/images/logo/presentation_sample.svg?url";
 import EditorSample from "PUBLIC_DIR/images/logo/embedded_sample.svg?url";
 
-import React from "react";
-
 import { Text } from "../../../components/text";
 import { Link, LinkType } from "../../../components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";

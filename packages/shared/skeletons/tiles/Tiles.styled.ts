@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 
 import type { StyledBottomProps } from "./Tiles.types";
 

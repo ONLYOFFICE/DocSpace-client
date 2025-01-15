@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile } from "../../utils";
 
 const StyledHeaderContainer = styled.div`
   width: 100%;

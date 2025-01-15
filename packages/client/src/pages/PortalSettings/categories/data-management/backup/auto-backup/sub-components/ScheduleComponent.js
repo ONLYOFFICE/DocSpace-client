@@ -30,10 +30,10 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { Text } from "@docspace/shared/components/text";
-import { StyledScheduleComponent } from "../../StyledBackup";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { StyledScheduleComponent } from "../../StyledBackup";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 const ScheduleComponent = ({

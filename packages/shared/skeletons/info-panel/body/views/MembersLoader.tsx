@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RectangleSkeleton } from "../../../rectangle";
 import {
   StyledMemberLoader,
   StyledMemberSubtitleLoader,

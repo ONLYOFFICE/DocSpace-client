@@ -41,7 +41,7 @@ import React, {
   useState,
 } from "react";
 
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
+import { includesMethod } from "../../../../utils/typeGuards";
 
 import type { Point } from "../../MediaViewer.types";
 import { KeyboardEventKeys } from "../../MediaViewer.enums";

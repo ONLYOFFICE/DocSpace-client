@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getSettingsIndex } from "./getSettingsIndex";
+
 export const getCurrentSettingsCategory = (arrayOfParams, settingsTree) => {
   let key = "0-0";
   let groupIndex = null;
@@ -40,7 +41,7 @@ export const getCurrentSettingsCategory = (arrayOfParams, settingsTree) => {
         groupIndex = getSettingsIndex(settingsTree, currentParam);
         key =
           groupIndex || groupIndex === 0
-            ? settingsTree[groupIndex].key + "-0"
+            ? `${settingsTree[groupIndex].key}-0`
             : key;
         break;
 

@@ -168,16 +168,13 @@ const LoaderCustomization = ({
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const checkInnerWidth = () => {
-    const isMobileView = window.innerWidth < 600;
-    const isDesktopView = window.innerWidth <= 1024;
-
-    if (isMobileView) {
+    if (window.innerWidth < 600) {
       setIsMobileView(true);
     } else {
       setIsMobileView(false);
     }
 
-    if (isDesktopView) {
+    if (window.innerWidth <= 1024) {
       setIsDesktopView(true);
     } else {
       setIsDesktopView(false);

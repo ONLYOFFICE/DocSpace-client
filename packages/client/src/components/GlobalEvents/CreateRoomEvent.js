@@ -75,11 +75,11 @@ const CreateRoomEvent = ({
       return;
     }
 
-    onCreateRoom(false, t);
+    onCreateRoom(t, false);
   };
 
   const fetchTagsAction = useCallback(async () => {
-    let tags = await fetchTags();
+    const tags = await fetchTags();
     setFetchedTags(tags);
   }, []);
 

@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { isMobile } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
 const withLoading = (WrappedComponent) => {
-  const withLoading = (props) => {
+  const LoaderWrapper = (props) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -65,7 +64,7 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    const pathname = location.pathname;
+    const pathname = window.location.pathname;
     const index = pathname.lastIndexOf("/");
     const setting = pathname.slice(index + 1);
 
@@ -172,6 +171,6 @@ const withLoading = (WrappedComponent) => {
       enablePortalRename,
       deviceType,
     };
-  })(observer(withLoading));
+  })(observer(LoaderWrapper));
 };
 export default withLoading;

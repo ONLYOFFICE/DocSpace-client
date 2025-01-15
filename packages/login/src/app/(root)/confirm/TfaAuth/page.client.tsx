@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Box } from "@docspace/shared/components/box";
@@ -47,6 +47,8 @@ import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { useSearchParams } from "next/navigation";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
@@ -62,11 +64,16 @@ const TfaAuthForm = ({
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
+  const searchParams = useSearchParams();
+
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const { confirmHeader = null } = linkData;
+
+  const linkUrlData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
 
   const onSubmit = async () => {
     try {
@@ -78,10 +85,28 @@ const TfaAuthForm = ({
         await validateTfaCode(code, confirmHeader);
       }
 
+      let confirmData = "";
+      try {
+        if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
+      } catch (e) {
+        console.error("parse error", e);
+      }
+
+      try {
+        if (confirmData) await checkConfirmLink(confirmData);
+      } catch (e) {
+        console.error(e);
+      }
+
       const referenceUrl = sessionStorage.getItem("referenceUrl");
 
       if (referenceUrl) {
         sessionStorage.removeItem("referenceUrl");
+      }
+
+      if (isPublicAuth) {
+        localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+        window.close();
       }
 
       window.location.replace(referenceUrl || defaultPage);

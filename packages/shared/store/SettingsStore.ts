@@ -85,8 +85,6 @@ import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
 
-// import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
-
 const themes = {
   Dark,
   Base,

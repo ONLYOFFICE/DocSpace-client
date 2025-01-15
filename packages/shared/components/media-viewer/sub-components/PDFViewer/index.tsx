@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
+import {
   useEffect,
   useLayoutEffect,
   useState,
@@ -33,9 +33,9 @@ import React, {
 } from "react";
 import { isDesktop, isMobile } from "react-device-detect";
 
-import { loadScript } from "@docspace/shared/utils/common";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getDocumentServiceLocation } from "@docspace/shared/api/files";
+import { loadScript } from "../../../../utils/common";
+import { combineUrl } from "../../../../utils/combineUrl";
+import { getDocumentServiceLocation } from "../../../../api/files";
 
 import type {
   ImperativeHandle,

@@ -59,11 +59,7 @@ const PaidQuotaLimitError = ({
     <>
       <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
       {!isRoomAdmin && (
-        <ColorTheme
-          themeId={ThemeId.Link}
-          isHovered={true}
-          onClick={onClickPayments}
-        >
+        <ColorTheme themeId={ThemeId.Link} isHovered onClick={onClickPayments}>
           {t("Common:PaymentsTitle")}
         </ColorTheme>
       )}

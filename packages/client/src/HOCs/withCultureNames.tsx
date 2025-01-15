@@ -28,9 +28,7 @@ import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
-import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
 

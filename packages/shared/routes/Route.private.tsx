@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
-import React from "react";
+
 import { Navigate, useLocation } from "react-router-dom";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
 

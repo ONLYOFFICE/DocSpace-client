@@ -28,10 +28,10 @@ import { Loader } from "@docspace/shared/components/loader";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import React, { useState } from "react";
-import { StyledText } from "./CellStyles";
 import { getFolderPath } from "@docspace/shared/api/files";
-import { CategoryType } from "@docspace/client/src/helpers/constants";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 import { globalColors } from "@docspace/shared/themes";
+import { StyledText } from "./CellStyles";
 
 const RoomCell = ({ sideColor, item }) => {
   const { originRoomTitle, originId, originTitle } = item;
@@ -65,16 +65,16 @@ const RoomCell = ({ sideColor, item }) => {
       color={sideColor}
       className="row_update-text"
       truncate
-      data-tooltip-id={"" + item.id}
-      data-tip={""}
+      data-tooltip-id={`${item.id}`}
+      data-tip=""
     >
       {originRoomTitle || originTitle || ""}
     </StyledText>,
 
     <Tooltip
       place="bottom"
-      key={"tooltip"}
-      id={"" + item.id}
+      key="tooltip"
+      id={`${item.id}`}
       afterShow={getPath}
       getContent={() => (
         <span>

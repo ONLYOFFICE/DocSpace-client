@@ -31,10 +31,10 @@ import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
 
-import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
+import { useClickOutside } from "../../utils/useClickOutside";
 
 import { Text } from "../text";
 

@@ -30,7 +30,7 @@ import difference from "lodash/difference";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
+import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -38,9 +38,9 @@ import { getBannerAttribute } from "@docspace/shared/utils";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
+import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
-import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const Bar = (props) => {
   const {
@@ -108,10 +108,115 @@ const Bar = (props) => {
 
   const { loadLanguagePath } = getBannerAttribute();
 
+  const onCloseQuota = (currentBar) => {
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+
+    const closed =
+      closeItems.length > 0 ? [...closeItems, currentBar] : [currentBar];
+
+    localStorage.setItem("barClose", JSON.stringify(closed));
+
+    switch (currentBar) {
+      case QuotaBarTypes.RoomsTariff:
+        setBarVisible((value) => ({ ...value, roomsTariff: false }));
+        break;
+      case QuotaBarTypes.RoomsTariffLimit:
+        setBarVisible((value) => ({ ...value, roomsTariffLimit: false }));
+        break;
+      case QuotaBarTypes.StorageTariff:
+        setBarVisible((value) => ({ ...value, storageTariff: false }));
+        break;
+      case QuotaBarTypes.StorageTariffLimit:
+        setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
+        break;
+      case QuotaBarTypes.StorageQuota:
+        setBarVisible((value) => ({ ...value, storageQuota: false }));
+        break;
+      case QuotaBarTypes.StorageQuotaLimit:
+        setBarVisible((value) => ({ ...value, storageQuotaLimit: false }));
+        break;
+      case QuotaBarTypes.UsersTariff:
+        setBarVisible((value) => ({
+          ...value,
+          usersTariff: false,
+        }));
+        break;
+      case QuotaBarTypes.UsersTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          usersTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.UserAndStorageTariff:
+        setBarVisible((value) => ({ ...value, storageAndUserTariff: false }));
+        break;
+      case QuotaBarTypes.UserAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          storageAndUserTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.RoomsAndStorageTariff:
+        setBarVisible((value) => ({ ...value, roomsAndStorageTariff: false }));
+        break;
+      case QuotaBarTypes.RoomsAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          roomsAndStorageTariffLimit: false,
+        }));
+        break;
+      case QuotaBarTypes.PersonalUserQuota:
+        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
+        break;
+      default:
+        break;
+    }
+
+    setMaintenanceExist(false);
+  };
+
+  const onClickTenantCustomQuota = (type) => {
+    const managementPageUrl = combineUrl(
+      "/portal-settings",
+      "/management/disk-space",
+    );
+
+    navigate(managementPageUrl);
+
+    onCloseQuota(type);
+  };
+
+  const onClickQuota = (type, e) => {
+    type === QuotaBarTypes.StorageQuota ||
+    type === QuotaBarTypes.PersonalUserQuota
+      ? onClickTenantCustomQuota(type)
+      : onPaymentsClick(e);
+
+    onCloseQuota(type);
+  };
+
+  const sendActivationLinkAction = () => {
+    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
+  };
+
+  const onCloseActivationBar = () => {
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+
+    const closed =
+      closeItems.length > 0
+        ? [...closeItems, QuotaBarTypes.ConfirmEmail]
+        : [QuotaBarTypes.ConfirmEmail];
+
+    localStorage.setItem("barClose", JSON.stringify(closed));
+
+    setBarVisible((value) => ({ ...value, confirmEmail: false }));
+    setMaintenanceExist(false);
+  };
+
   const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
-      .filter((bar) => bar.length > 0);
+      .filter((elm) => elm.length > 0);
 
     const closed = JSON.parse(localStorage.getItem("barClose"));
 
@@ -187,142 +292,25 @@ const Bar = (props) => {
     }
 
     try {
-      const [htmlUrl, campaigns] = await loadLanguagePath();
+      const [htmlUrl, currentBar] = await loadLanguagePath();
 
       setHtmlLink(htmlUrl);
-      setCampaigns(campaigns);
+      setCampaigns(currentBar);
     } catch (e) {
       updateBanner();
     }
 
     localStorage.setItem("barIndex", index);
-    return;
   }, []);
 
   useEffect(() => {
     const updateTimeout = setTimeout(() => updateBanner(), 1000);
-    const updateInterval = setInterval(updateBanner, ADS_TIMEOUT);
+    const updateInterval = setInterval(() => updateBanner(), ADS_TIMEOUT);
     return () => {
       clearTimeout(updateTimeout);
       clearInterval(updateInterval);
     };
   }, []);
-
-  const sendActivationLinkAction = () => {
-    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
-  };
-
-  const onCloseActivationBar = () => {
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
-
-    const closed =
-      closeItems.length > 0
-        ? [...closeItems, QuotaBarTypes.ConfirmEmail]
-        : [QuotaBarTypes.ConfirmEmail];
-
-    localStorage.setItem("barClose", JSON.stringify(closed));
-
-    setBarVisible((value) => ({ ...value, confirmEmail: false }));
-    setMaintenanceExist(false);
-  };
-
-  const onClickQuota = (type, e) => {
-    type === QuotaBarTypes.StorageQuota ||
-    type === QuotaBarTypes.PersonalUserQuota
-      ? onClickTenantCustomQuota()
-      : onPaymentsClick(e);
-
-    onCloseQuota(type);
-  };
-
-  const onClickTenantCustomQuota = (type) => {
-    const managementPageUrl = combineUrl(
-      "/portal-settings",
-      "/management/disk-space",
-    );
-
-    navigate(managementPageUrl);
-
-    onCloseQuota(type);
-  };
-
-  const onCloseQuota = (currentBar) => {
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
-
-    const closed =
-      closeItems.length > 0 ? [...closeItems, currentBar] : [currentBar];
-
-    localStorage.setItem("barClose", JSON.stringify(closed));
-
-    switch (currentBar) {
-      case QuotaBarTypes.RoomsTariff:
-        setBarVisible((value) => ({ ...value, roomsTariff: false }));
-        break;
-      case QuotaBarTypes.RoomsTariffLimit:
-        setBarVisible((value) => ({ ...value, roomsTariffLimit: false }));
-        break;
-      case QuotaBarTypes.StorageTariff:
-        setBarVisible((value) => ({ ...value, storageTariff: false }));
-        break;
-      case QuotaBarTypes.StorageTariffLimit:
-        setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
-        break;
-      case QuotaBarTypes.StorageQuota:
-        setBarVisible((value) => ({ ...value, storageQuota: false }));
-        break;
-      case QuotaBarTypes.StorageQuotaLimit:
-        setBarVisible((value) => ({ ...value, storageQuotaLimit: false }));
-        break;
-      case QuotaBarTypes.UsersTariff:
-        setBarVisible((value) => ({
-          ...value,
-          usersTariff: false,
-        }));
-        break;
-      case QuotaBarTypes.UsersTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          usersTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.UserAndStorageTariff:
-        setBarVisible((value) => ({ ...value, storageAndUserTariff: false }));
-        break;
-      case QuotaBarTypes.UserAndStorageTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          storageAndUserTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.RoomsAndStorageTariff:
-        setBarVisible((value) => ({ ...value, roomsAndStorageTariff: false }));
-        break;
-      case QuotaBarTypes.RoomsAndStorageTariffLimit:
-        setBarVisible((value) => ({
-          ...value,
-          roomsAndStorageTariffLimit: false,
-        }));
-        break;
-      case QuotaBarTypes.PersonalUserQuota:
-        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
-        break;
-    }
-
-    setMaintenanceExist(false);
-  };
-
-  const onClose = () => {
-    setMaintenanceExist(false);
-    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
-    const closed =
-      closeItems.length > 0 ? [...closeItems, campaigns] : [campaigns];
-    localStorage.setItem("barClose", JSON.stringify(closed));
-    setHtmlLink(null);
-  };
-
-  const onLoad = () => {
-    setMaintenanceExist(true);
-  };
 
   const getCurrentBar = () => {
     if (
@@ -467,6 +455,19 @@ const Bar = (props) => {
     firstLoad,
   ]);
 
+  const onClose = () => {
+    setMaintenanceExist(false);
+    const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
+    const closed =
+      closeItems.length > 0 ? [...closeItems, campaigns] : [campaigns];
+    localStorage.setItem("barClose", JSON.stringify(closed));
+    setHtmlLink(null);
+  };
+
+  const onLoad = () => {
+    setMaintenanceExist(true);
+  };
+
   return showQuotasBar ? (
     <QuotasBar
       currentColorScheme={currentColorScheme}
@@ -489,7 +490,7 @@ const Bar = (props) => {
     <SnackBar
       onLoad={onLoad}
       onAction={onClose}
-      isCampaigns={true}
+      isCampaigns
       htmlContent={htmlLink}
     />
   ) : null;

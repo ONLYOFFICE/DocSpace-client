@@ -71,7 +71,6 @@
   "ExportRoomIndex": "Xuất chỉ mục phòng",
   "ExportRoomIndexAlreadyInProgressError": "Việc xuất chỉ mục phòng đã được tiến hành. Vui lòng chờ cho đến khi quá trình xuất hiện tại hoàn tất để bắt đầu xuất mới.",
   "FavoritesEmptyContainerDescription": "Để đánh dấu các tệp là tệp yêu thích hoặc xóa chúng khỏi danh sách này, hãy sử dụng menu thuộc tính.",
-  "FileCannotBeMoved": "Không thể di chuyển tập tin đến phòng này.",
   "FileContents": "Nội dung tập tin",
   "FileDownloadingIsRestricted": "Việc tải tập tin xuống bị hạn chế trong phòng này.",
   "FileExportedToMyDocuments": "Tập tin <1>{{fileName}}</1> đã được xuất sang Tài liệu",

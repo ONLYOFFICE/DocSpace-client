@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo, useState } from "react";
+import { memo, useState } from "react";
 import equal from "fast-deep-equal/react";
-
-import { getProviderLabel } from "@docspace/shared/utils/common";
 
 import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
+import { getProviderLabel } from "../../utils/common";
 import { SocialButton } from "../social-button";
 import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";
 import type {

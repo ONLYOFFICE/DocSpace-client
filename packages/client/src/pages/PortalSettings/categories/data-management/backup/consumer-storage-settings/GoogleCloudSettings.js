@@ -60,6 +60,7 @@ class GoogleCloudSettings extends React.Component {
 
     addValueInFormSettings(name, value);
   };
+
   render() {
     const {
       errorsFieldsBeforeSafe: isError,

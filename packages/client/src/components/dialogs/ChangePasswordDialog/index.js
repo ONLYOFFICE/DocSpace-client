@@ -44,6 +44,21 @@ class ChangePasswordDialogComponent extends React.Component {
       isRequestRunning: false,
     };
   }
+
+  componentDidMount() {
+    window.addEventListener("keydown", this.keyPress, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.keyPress, false);
+  }
+
+  keyPress = (e) => {
+    if (e.keyCode === 13) {
+      this.onSendPasswordChangeInstructions();
+    }
+  };
+
   onSendPasswordChangeInstructions = () => {
     const { email, onClose } = this.props;
 
@@ -58,20 +73,6 @@ class ChangePasswordDialogComponent extends React.Component {
         });
     });
   };
-
-  keyPress = (e) => {
-    if (e.keyCode === 13) {
-      this.onSendPasswordChangeInstructions();
-    }
-  };
-
-  componentDidMount() {
-    addEventListener("keydown", this.keyPress, false);
-  }
-
-  componentWillUnmount() {
-    removeEventListener("keydown", this.keyPress, false);
-  }
 
   onClose = () => {
     const { onClose } = this.props;
@@ -125,7 +126,7 @@ class ChangePasswordDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onSendPasswordChangeInstructions}
             isLoading={isRequestRunning}
           />

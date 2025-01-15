@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledBodyContent = styled.div.attrs(injectDefaultTheme)`

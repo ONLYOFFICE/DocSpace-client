@@ -1,7 +1,6 @@
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { tablet } from "@docspace/shared/utils";
+import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import styled from "styled-components";
-import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 
 const StyledLifetimeDialog = styled(ModalDialog)`
   .modal-dialog-content-body {

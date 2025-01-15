@@ -26,13 +26,13 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-//import {toastr} from "@docspace/shared/components";
+// import {toastr} from "@docspace/shared/components";
 import {
   // FileAction,
   FileStatus,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-//import { combineUrl } from "@docspace/shared/utils/combineUrl";
+// import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   getCorrectDate,
   getCookie,
@@ -40,25 +40,26 @@ import {
 } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
-//import EditingWrapperComponent from "../components/EditingWrapperComponent";
+// import EditingWrapperComponent from "../components/EditingWrapperComponent";
 
-//import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
-//import ItemIcon from "../components/ItemIcon";
+// import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
+// import ItemIcon from "../components/ItemIcon";
 
 export default function withContent(WrappedContent) {
   class WithContent extends React.Component {
     constructor(props) {
       super(props);
 
-      let titleWithoutExt = props.titleWithoutExt;
+      const titleWithoutExt = props.titleWithoutExt;
 
       this.state = { itemTitle: titleWithoutExt };
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
       const { titleWithoutExt } = this.props;
+      const { itemTitle } = this.state;
 
-      if (titleWithoutExt !== this.state.itemTitle) {
+      if (titleWithoutExt !== itemTitle) {
         this.setState({ itemTitle: titleWithoutExt });
       }
     }
@@ -107,7 +108,7 @@ export default function withContent(WrappedContent) {
         access === ShareAccessRights.FullAccess || // only badges?
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
 
-      const linkStyles = isTrashFolder //|| window.innerWidth <= 1024
+      const linkStyles = isTrashFolder // || window.innerWidth <= 1024
         ? { noHover: true }
         : { onClick: onFilesClick };
 

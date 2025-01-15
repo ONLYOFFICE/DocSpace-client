@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../utils";
 
 import StyledHeading from "./Headline.styled";
 import { HeadlineProps } from "./Headline.types";

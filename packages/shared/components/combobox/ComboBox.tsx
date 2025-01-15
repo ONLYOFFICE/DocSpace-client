@@ -33,7 +33,7 @@ import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./ComboBox.styled";
-import { ComboBoxSize } from "./ComboBox.enums";
+import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
@@ -202,7 +202,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     noBorder,
     scaled = true,
     scaledOptions,
-    displayType = "default",
+    displayType = ComboBoxDisplayType.default,
     textOverflow,
     showDisabledItems,
     comboIcon,

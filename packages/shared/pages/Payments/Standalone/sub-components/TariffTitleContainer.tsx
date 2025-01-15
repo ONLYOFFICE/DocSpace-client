@@ -39,7 +39,7 @@ export const TariffTitleContainer = ({
   paymentDate,
   isDeveloper,
 }) => {
-  const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
+  const { t } = useTranslation("Common");
   const alertComponent = () => {
     if (isTrial) {
       return isLicenseDateExpired ? (
@@ -48,7 +48,7 @@ export const TariffTitleContainer = ({
           fontWeight={600}
           fontSize="14px"
         >
-          {t("Common:TrialExpired")}
+          {t("TrialExpired")}
         </Text>
       ) : (
         <Text
@@ -64,7 +64,7 @@ export const TariffTitleContainer = ({
     return (
       isLicenseDateExpired && (
         <Text className="payments_subscription-expired" isBold fontSize="14px">
-          {t("Common:SubscriptionExpired")}
+          {t("SubscriptionExpired")}
         </Text>
       )
     );

@@ -72,6 +72,7 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
+  const isTemplate = selection.isTemplate;
 
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
@@ -121,6 +122,7 @@ const RoomsItemHeader = ({
 
       <div className="item-icon">
         <RoomIcon
+          isTemplate={isTemplate}
           color={selection.logo?.color}
           title={title}
           isArchive={isArchive}

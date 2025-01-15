@@ -24,39 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import "pino-roll";
-import "pino-pretty";
-
-import { getData } from "@/utils/actions";
-
-import { RootPageProps } from "@/types";
-import Root from "@/components/Root";
-
-const initialSearchParams: RootPageProps["searchParams"] = {
-  fileId: undefined,
-  requestToken: undefined,
-  error: undefined,
-};
-
-async function Page({ searchParams }: RootPageProps) {
-  const { requestToken, error } = searchParams ?? initialSearchParams;
-
-  const data = await getData(requestToken);
-
-  if (data?.error?.status === "not-found" && error) {
-    data.error.message = error;
-  }
-
-  const rootProps = {
-    shareKey: requestToken,
-    ...(data || {}),
-  };
-
-  return (
-    <>
-      <Root {...rootProps} />
-    </>
-  );
+async function Page() {
+  return <div>Its SDK page</div>;
 }
 
 export default Page;

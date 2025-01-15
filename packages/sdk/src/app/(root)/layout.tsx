@@ -33,12 +33,8 @@ import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
-import { getColorTheme, getSettings, getUser } from "@/utils/actions";
-import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
-
-const log = logger.child({ module: "Root layout" });
 
 export default async function RootLayout({
   children,
@@ -54,17 +50,8 @@ export default async function RootLayout({
     | undefined;
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    log.info("get health check and return empty layout");
     return <></>;
   }
-
-  const [user, settings, colorTheme] = await Promise.all([
-    getUser(),
-    getSettings(),
-    getColorTheme(),
-  ]);
-
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
   return (
     <html lang="en" translate="no">
@@ -81,9 +68,10 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+          {/* <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}
-          </Providers>
+          </Providers> */}
+          <div>{children}</div>
         </StyledComponentsRegistry>
 
         <Scripts />

@@ -26,9 +26,10 @@
 
 "use client";
 
+import React from "react";
+
 import { DeviceType } from "@docspace/shared/enums";
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import React from "react";
 
 const useDeviceType = () => {
   const [currentDeviceType, setCurrentDeviceType] = React.useState(
@@ -57,4 +58,3 @@ const useDeviceType = () => {
 };
 
 export default useDeviceType;
-

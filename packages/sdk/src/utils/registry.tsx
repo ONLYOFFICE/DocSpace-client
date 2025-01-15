@@ -27,8 +27,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { useServerInsertedHTML } from "next/navigation";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 export default function StyledComponentsRegistry({
   children,
@@ -53,4 +53,3 @@ export default function StyledComponentsRegistry({
     </StyleSheetManager>
   );
 }
-

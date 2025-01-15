@@ -2,6 +2,11 @@
   "name": "@docspace/sdk",
   "version": "3.0.1",
   "private": true,
+  "packageManager": "pnpm@8.3.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
     "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
@@ -13,30 +18,35 @@
     "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
-    "@serdnam/pino-cloudwatch-transport": "^1.0.4",
-    "i18next": "^20.6.1",
-    "moment": "^2.30.1",
-    "nconf": "^0.12.1",
-    "next": "^14.2.15",
-    "pino": "^9.5.0",
-    "pino-pretty": "^11.3.0",
-    "pino-roll": "^2.2.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-i18next": "^13.5.0",
-    "sass": "^1.79.5",
-    "styled-components": "^5.3.11"
+    "@docspace/shared": "workspace:*",
+    "@onlyoffice/document-editor-react": "catalog:",
+    "i18next": "catalog:",
+    "moment": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-device-detect": "catalog:",
+    "react-dom": "catalog:",
+    "react-i18next": "catalog:",
+    "sass": "catalog:",
+    "styled-components": "catalog:",
+    "ts-pattern": "catalog:"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
-    "@types/nconf": "^0",
-    "@types/node": "^22.7.5",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.15",
-    "prettier": "^3.3.3",
-    "shx": "^0.3.4",
-    "typescript": "5.6.3"
+    "@svgr/webpack": "catalog:",
+    "@types/nconf": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/styled-components": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-next": "catalog:",
+    "nconf": "catalog:",
+    "prettier": "catalog:",
+    "pino": "catalog:",
+    "pino-pretty": "catalog:",
+    "pino-roll": "catalog:",
+    "shx": "catalog:",
+    "typescript": "catalog:",
+    "terser-webpack-plugin": "catalog:"
   }
 }

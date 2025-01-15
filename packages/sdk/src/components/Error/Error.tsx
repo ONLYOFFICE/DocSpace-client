@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
@@ -12,7 +13,11 @@ import useDeviceType from "@/hooks/useDeviceType";
 
 import pkg from "../../../package.json";
 
-import { ErrorProps } from "./Error.types";
+export type ErrorProps = {
+  user: TUser;
+  settings: TSettings;
+  error: Error;
+};
 
 const Error = ({ settings, user, error }: ErrorProps) => {
   const { i18n } = useI18N({ settings, user });

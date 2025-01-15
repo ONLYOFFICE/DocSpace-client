@@ -108,6 +108,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       withBackdrop,
       model: propsModel,
       badgeUrl,
+      headerOnlyMobile = false,
     } = props;
 
     const onMenuClick = () => {
@@ -454,6 +455,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       const withHeader = !!header?.title;
       const defaultIcon = !!header?.color;
       const isCoverExist = !!header?.cover;
+      const isHeaderMobileSubMenu = headerOnlyMobile && showMobileMenu;
 
       return (
         <StyledContextMenu
@@ -461,7 +463,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           articleWidth={articleWidth}
           isRoom={isRoom}
           fillIcon={fillIcon}
-          isIconExist={isIconExist}
+          isIconExist={isIconExist || isHeaderMobileSubMenu}
           data-testid="context-menu"
           isCoverExist={isCoverExist}
         >
@@ -484,9 +486,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
               onClick={onMenuClick}
               onMouseEnter={onMenuMouseEnter}
             >
-              {changeView && withHeader && (
+              {changeView && (withHeader || isHeaderMobileSubMenu) && (
                 <div className="contextmenu-header">
-                  {isIconExist &&
+                  {(isIconExist || isHeaderMobileSubMenu) &&
                     (showMobileMenu ? (
                       <IconButton
                         className="edit_icon"

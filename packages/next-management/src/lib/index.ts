@@ -78,7 +78,7 @@ export const getIsDefaultWhiteLabel = (whiteLabelIsDefault: unknown) => {
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+  return moment(date).tz(window.timezone)?.year() !== 9999;
 };
 
 export const getIsLicenseDateExpired = (dueDate: Date) => {
@@ -87,7 +87,7 @@ export const getIsLicenseDateExpired = (dueDate: Date) => {
 };
 
 export const getPaymentDate = (dueDate: Date) => {
-  return moment(dueDate).tz(window.timezone).format("LL");
+  return moment(dueDate).tz(window.timezone)?.format("LL");
 };
 
 export const getDaysLeft = (dueDate: Date) => {

@@ -64,13 +64,10 @@ export const Button = React.forwardRef<
     className,
   );
 
-  const contentClasses = classNames(
-    styles.buttonContent,
-    {
-      [styles.loading]: isLoading,
-    },
-    "button-content",
-  );
+  const contentClasses = classNames(styles.buttonContent, {
+    [styles.loading]: isLoading,
+    "button-content": true,
+  });
 
   return (
     <button

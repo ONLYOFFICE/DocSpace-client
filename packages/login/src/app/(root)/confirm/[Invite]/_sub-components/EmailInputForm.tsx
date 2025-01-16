@@ -86,7 +86,6 @@ const EmailInputForm = ({
         <EmailInput
           id="login"
           name="login"
-          type={InputType.email}
           size={InputSize.large}
           hasError={isEmailErrorShow && !emailValid}
           value={email}

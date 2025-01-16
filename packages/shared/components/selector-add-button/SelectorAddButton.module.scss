@@ -44,7 +44,7 @@
   cursor: pointer;
 
   svg path {
-    fill: var(--selector-add-button-icon-color) !important;
+    fill: var(--selector-add-button-icon-color);
   }
 
   &:hover {
@@ -90,23 +90,29 @@
   }
 
   &.isAction {
-    background-color: var(--accent-main) 1A;
+    background-color: var(--main-accent-button);
 
-    svg path {
+    & svg path {
       fill: var(--accent-main);
     }
 
     &:hover {
-      background-color: var(--accent-main) 1A;
-      svg path {
-        fill: var(--accent-main);
-        opacity: 0.85;
+      background-color: var(--main-accent-button);
+
+      &:not(.disabled) {
+        svg {
+          path {
+            fill: var(--accent-main);
+            opacity: 0.85;
+          }
+        }
       }
     }
 
     &:active {
-      background-color: var(--accent-main) 1A;
-      svg path {
+      background-color: var(--main-accent-button);
+
+      & svg path {
         fill: var(--accent-main);
         opacity: 1;
         filter: brightness(90%);

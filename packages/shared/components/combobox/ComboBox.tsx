@@ -33,7 +33,7 @@ import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./ComboBox.styled";
-import { ComboBoxSize } from "./ComboBox.enums";
+import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
@@ -200,8 +200,9 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     isDisabled,
     children,
     noBorder,
+    scaled = true,
     scaledOptions,
-    displayType = "default",
+    displayType = ComboBoxDisplayType.default,
     textOverflow,
     showDisabledItems,
     comboIcon,
@@ -297,15 +298,15 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
 
   const renderOptions = () => {
     const dropDownBody = options?.map((option) => {
-      const { key, ...optionProps } = option;
+      const { key, disabled, label, icon, isBeta } = option;
 
-      const disabled =
-        option.disabled ||
+      const optionDisabled =
+        disabled ||
         (!displaySelectedOption && option?.label === selectedOption?.label);
 
       const isActiveOption = withLabel
-        ? option.label === selectedOption?.label
-        : option.key === selectedOption?.key;
+        ? label === selectedOption?.label
+        : key === selectedOption?.key;
 
       const isActive = displaySelectedOption && isActiveOption;
 
@@ -314,7 +315,9 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       return (
         <DropDownItem
           key={key}
-          {...optionProps}
+          label={label}
+          icon={icon}
+          isBeta={isBeta}
           data-testid="drop-down-item"
           data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
@@ -322,7 +325,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           aria-disabled={option.disabled || undefined}
           className={`drop-down-item ${option?.className || ""}`}
           textOverflow={textOverflow}
-          disabled={disabled}
+          disabled={optionDisabled}
           onClick={(e) => optionClick(option, e)}
           onClickSelectedItem={() => onClickSelectedItem?.(option)}
           fillIcon={fillIcon}
@@ -334,25 +337,19 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       );
     });
 
-    return advancedOptions ? (
-      <>
-        {dropDownBody}
-        {advancedOptions}
-      </>
-    ) : (
-      dropDownBody
-    );
+    return dropDownBody;
   };
 
   const renderDropDown = () => {
     const dropDownProps = {
-      isOpen,
+      open: isOpen,
       directionX,
       directionY,
       manualWidth,
       manualX,
       manualY: manualY?.toString(),
       fixedDirection,
+      forwardedRef: ref,
       withBlur,
       offsetLeft,
       withBackdrop,
@@ -370,10 +367,11 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       usePortalBackdrop,
       style,
       showDisabledItems,
-      isDefaultMode: true,
-      className,
+      isDefaultMode,
       clickOutsideAction: handleClickOutside,
     };
+
+    const dropDownOptions = advancedOptions || renderOptions();
 
     return (
       <DropDown
@@ -381,8 +379,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         {...dropDownMaxHeightProp}
         {...dropDownManualWidthProp}
       >
-        {renderOptions()}
-        {advancedOptions}
+        {dropDownOptions}
       </DropDown>
     );
   };
@@ -391,6 +388,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     <StyledComboBox
       ref={ref}
       size={size}
+      scaled={scaled}
       onClick={comboBoxClick}
       isOpen={isOpen}
       disableMobileView={disableMobileView}
@@ -412,6 +410,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         innerContainerClassName="optionalBlock"
         isOpen={isOpen}
         size={size}
+        scaled={scaled}
         comboIcon={comboIcon}
         modernView={modernView}
         fillIcon={fillIcon}

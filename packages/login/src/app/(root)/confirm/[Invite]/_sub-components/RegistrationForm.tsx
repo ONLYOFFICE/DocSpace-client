@@ -267,6 +267,7 @@ const RegistrationForm = ({
             isChecked={isChecked}
             isDisabled={isLoading}
             label={newsletter}
+            truncate={false}
           />
         </div>
       )}

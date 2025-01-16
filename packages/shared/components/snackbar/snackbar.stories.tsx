@@ -149,6 +149,6 @@ export const Maintenance: Story = {
     isMaintenance: true,
     headerText: "Maintenance Notice",
     text: "System maintenance is scheduled for tonight at 10 PM",
-    backgroundColor: globalColors.lightWarning,
+    backgroundColor: globalColors.lightToastWarning,
   },
 };

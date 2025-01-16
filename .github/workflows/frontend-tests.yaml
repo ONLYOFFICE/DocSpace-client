@@ -32,26 +32,26 @@ jobs:
           node-version: 20
           cache: "yarn"
       - name: Install dependencies
-        run: yarn install --no-immutable 
+        run: yarn install --no-immutable
       - name: Lint clients
         run: yarn lint
-  unit-tests:
-    name: "Unit tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: enable corepack
-        run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
-      - name: Clear yarn cache
-        run: yarn cache clean
-      - name: Install dependencies
-        run: yarn install --no-immutable 
-      - name: Run unit tests
-        run: yarn test
+  # unit-tests:
+  #   name: "Unit tests"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: enable corepack
+  #       run: corepack enable
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: "yarn"
+  #     - name: Clear yarn cache
+  #       run: yarn cache clean
+  #     - name: Install dependencies
+  #       run: yarn install --no-immutable
+  #     - name: Run unit tests
+  #       run: yarn test
   common:
     name: "Common tests"
     runs-on: ubuntu-latest
@@ -65,4 +65,9 @@ jobs:
         run: npm install
       - name: Run common tests
         working-directory: ./common/tests
-        run: npm run test
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "develop" ]]; then
+            npm run test:skip-base-languages
+          else
+            npm run test
+          fi

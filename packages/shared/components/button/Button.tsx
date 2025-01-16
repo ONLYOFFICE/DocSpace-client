@@ -66,6 +66,7 @@ export const Button = React.forwardRef<
 
   const contentClasses = classNames(styles.buttonContent, {
     [styles.loading]: isLoading,
+    "button-content": true,
   });
 
   return (
@@ -94,7 +95,9 @@ export const Button = React.forwardRef<
         />
       ) : null}
       <div className={contentClasses}>
-        {icon ? <div className={styles.icon}>{icon}</div> : null}
+        {icon ? (
+          <div className={classNames(styles.icon, "icon")}>{icon}</div>
+        ) : null}
         {label}
       </div>
     </button>

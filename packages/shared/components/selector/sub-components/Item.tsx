@@ -224,7 +224,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           <RoomIcon
             color={color}
             title={label}
-            logo={{ cover, large: "", original: "", small: "" }}
+            logo={{ cover, large: "", original: "", small: "", medium: "" }}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"

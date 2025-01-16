@@ -50,6 +50,7 @@ const defaultProps: EmailInputProps = {
   onValidateInput: jest.fn(),
   handleAnimationStart: jest.fn(),
   onBlur: jest.fn(),
+  testId: "email-input",
 };
 
 describe("<EmailInput />", () => {
@@ -59,13 +60,13 @@ describe("<EmailInput />", () => {
 
   it("renders without error", () => {
     renderWithTheme(<EmailInput {...defaultProps} />);
-    expect(screen.getByTestId("text-input")).toBeInTheDocument();
+    expect(screen.getByTestId("email-input")).toBeInTheDocument();
   });
 
   it("renders with initial invalid value", () => {
     const email = "invalid-email";
     renderWithTheme(<EmailInput {...defaultProps} value={email} />);
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
     expect(input).toHaveValue(email);
   });
 
@@ -81,7 +82,7 @@ describe("<EmailInput />", () => {
       />,
     );
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
     const testEmail = "test@example.com";
 
     await user.type(input, testEmail);
@@ -106,7 +107,7 @@ describe("<EmailInput />", () => {
       "example@s.example",
     ];
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
 
     for (const email of validEmails) {
       await user.clear(input);
@@ -133,7 +134,7 @@ describe("<EmailInput />", () => {
       'this is"not\\allowed@example.com',
     ];
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
 
     for (const email of invalidEmails) {
       await user.clear(input);
@@ -163,7 +164,7 @@ describe("<EmailInput />", () => {
       />,
     );
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
 
     await user.type(input, "test@other-domain.com");
     expect(onValidateInput).toHaveBeenLastCalledWith({
@@ -183,12 +184,12 @@ describe("<EmailInput />", () => {
 
   it("handles disabled state", () => {
     renderWithTheme(<EmailInput {...defaultProps} isDisabled />);
-    expect(screen.getByTestId("text-input")).toBeDisabled();
+    expect(screen.getByTestId("email-input")).toBeDisabled();
   });
 
   it("handles readonly state", () => {
     renderWithTheme(<EmailInput {...defaultProps} isReadOnly />);
-    expect(screen.getByTestId("text-input")).toHaveAttribute("readonly");
+    expect(screen.getByTestId("email-input")).toHaveAttribute("readonly");
   });
 
   it("handles blur events", async () => {
@@ -203,7 +204,7 @@ describe("<EmailInput />", () => {
       />,
     );
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
     await user.click(input);
     await user.tab();
 
@@ -212,7 +213,10 @@ describe("<EmailInput />", () => {
 
   it("respects maxLength prop", () => {
     renderWithTheme(<EmailInput {...defaultProps} maxLength={10} />);
-    expect(screen.getByTestId("text-input")).toHaveAttribute("maxLength", "10");
+    expect(screen.getByTestId("email-input")).toHaveAttribute(
+      "maxLength",
+      "10",
+    );
   });
 
   it("validates empty value", () => {
@@ -254,7 +258,7 @@ describe("<EmailInput />", () => {
       />,
     );
 
-    const input = screen.getByTestId("text-input");
+    const input = screen.getByTestId("email-input");
     await user.type(input, testString);
 
     // Only first maxLength characters should be entered

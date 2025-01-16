@@ -275,7 +275,7 @@ class ManualBackup extends React.Component {
 
     const commonRadioButtonProps = {
       fontSize: "13px",
-      fontWeight: "400",
+      fontWeight: "600",
       value: "value",
       className: "backup_radio-button",
       onClick: this.onClickShowStorage,

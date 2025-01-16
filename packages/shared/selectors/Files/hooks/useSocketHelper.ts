@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import SocketHelper, {
   SocketCommands,
@@ -52,6 +53,7 @@ const useSocketHelper = ({
   setBreadCrumbs,
   setTotal,
 }: UseSocketHelperProps) => {
+  const { t } = useTranslation(["Common"]);
   const { getIcon } = React.useContext(SettingsContext);
 
   const folderSubscribers = React.useRef(new Set<string>());
@@ -132,7 +134,7 @@ const useSocketHelper = ({
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         item =
           "roomType" in data && data.roomType && "tags" in data
-            ? convertRoomsToItems([data])[0]
+            ? convertRoomsToItems([data], t)[0]
             : convertFoldersToItems([data], disabledItems, filterParam)[0];
       }
 
@@ -183,7 +185,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreate],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, t, withCreate],
   );
 
   const updateItem = React.useCallback(
@@ -210,7 +212,7 @@ const useSocketHelper = ({
       } else if (opt?.type === "folder" && "roomType" in data) {
         [item] =
           data.roomType && "tags" in data
-            ? convertRoomsToItems([data])
+            ? convertRoomsToItems([data], t)
             : convertFoldersToItems([data], disabledItems, filterParam);
       }
 
@@ -262,7 +264,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems],
+    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems, t],
   );
 
   const deleteItem = React.useCallback(

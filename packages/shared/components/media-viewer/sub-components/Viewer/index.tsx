@@ -33,7 +33,7 @@ import React, {
 
 import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
-import type { TContextMenuRef } from "../../../context-menu";
+import type { ContextMenuRefType } from "../../../context-menu";
 
 import { isHeic, isTiff } from "../../MediaViewer.utils";
 import { StyledViewerContainer } from "../../MediaViewer.styled";
@@ -91,7 +91,7 @@ export const Viewer = (props: ViewerProps) => {
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
 
-  const contextMenuRef = useRef<TContextMenuRef>(null);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 

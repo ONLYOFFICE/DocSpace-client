@@ -131,20 +131,20 @@ const createDefaultProps = (): ShareProps => ({
 });
 
 export const Default: Story = {
-  render: (args) => Template({ ...createDefaultProps(false), ...args }),
+  render: (args) => Template({ ...createDefaultProps(), ...args }),
   args: {},
 };
 
 export const Hidden: Story = {
-  render: (args) => Template({ ...createDefaultProps(true), ...args }),
+  render: (args) => Template({ ...createDefaultProps(), ...args }),
   args: {},
 };
 
 export const WithSharedInfo: Story = {
-  render: (args) => Template({ ...createDefaultProps(false), ...args }),
+  render: (args) => Template({ ...createDefaultProps(), ...args }),
   args: {
     infoPanelSelection: {
-      ...createDefaultProps(false).infoPanelSelection,
+      ...createDefaultProps().infoPanelSelection,
       shared: true,
     },
   },

@@ -141,13 +141,13 @@ const CheckboxPure = ({
         isChecked={checked || false}
         isIndeterminate={isIndeterminate || false}
       />
-      <div className={styles.wrapper}>
+      <div className={`${styles.wrapper} wrapper`}>
         {label ? (
           <Text
             as="span"
             title={title}
             truncate={truncate}
-            className={styles.checkboxText}
+            className={`${styles.checkboxText} checkbox-text`}
             lineHeight="16px"
           >
             {label}
@@ -155,7 +155,7 @@ const CheckboxPure = ({
         ) : null}
         {helpButton ? (
           <span
-            className={styles.helpButton}
+            className={`${styles.helpButton} help-button`}
             onClick={onClick}
             data-testid="checkbox-help-button"
           >

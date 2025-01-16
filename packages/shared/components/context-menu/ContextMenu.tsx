@@ -450,10 +450,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         : "p-contextmenu p-component";
 
       const isIconExist = !!header?.icon;
-      const isAvatarExist = header?.avatar;
-      const withHeader = !!header?.title;
-      const defaultIcon = !!header?.color;
-      const isCoverExist = !!header?.cover;
+      const isAvatarExist = header && "avatar" in header && header?.avatar;
+      const withHeader = header && "title" in header && !!header?.title;
+      const defaultIcon = header && "color" in header && !!header?.color;
+      const isCoverExist = header && "cover" in header && !!header?.cover;
 
       return (
         <div
@@ -496,16 +496,18 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        {(header?.icon && !header?.color) ||
-                        header?.cover ||
-                        header?.logo ? (
+                        {(header?.icon &&
+                          "color" in header &&
+                          !header?.color) ||
+                        ("cover" in header && header?.cover) ||
+                        ("logo" in header && header?.logo) ? (
                           <RoomIcon
                             title={header.title}
                             isArchive={isArchive}
                             showDefault={false}
                             imgClassName="drop-down-item_icon"
                             logo={
-                              header?.cover
+                              header && "cover" in header && header?.cover
                                 ? {
                                     cover: header.cover,
                                     color: header.color,
@@ -514,19 +516,25 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                                     large: header.large,
                                     original: header.original,
                                   }
-                                : header?.logo
+                                : header && "logo" in header && header?.logo
                                   ? header?.logo
                                   : header?.icon
                             }
                             badgeUrl={badgeUrl}
-                            color={header.color || ""}
+                            color={
+                              (header && "color" in header && header.color) ||
+                              ""
+                            }
                           />
                         ) : (
                           <RoomIcon
-                            color={header.color || ""}
+                            color={
+                              (header && "color" in header && header.color) ||
+                              ""
+                            }
                             title={header.title}
                             isArchive={isArchive}
-                            showDefault={defaultIcon}
+                            showDefault={defaultIcon ?? false}
                             badgeUrl={badgeUrl}
                           />
                         )}

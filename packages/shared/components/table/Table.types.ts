@@ -76,7 +76,6 @@ export interface TableHeaderProps {
   setHideColumns?: (value: boolean) => void;
   columnInfoPanelStorageName?: string;
   settingsTitle?: string;
-  isIndexEditingMode?: boolean;
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);

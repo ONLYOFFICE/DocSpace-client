@@ -68,10 +68,10 @@ interface NotifyConfig {
 }
 
 const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {
-  [ToastType.success]: { type: ToastType.success, defaultTitleKey: "Done" },
-  [ToastType.error]: { type: ToastType.error, defaultTitleKey: "Warning" },
-  [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: "Alert" },
-  [ToastType.info]: { type: ToastType.info, defaultTitleKey: "Info" },
+  [ToastType.success]: { type: ToastType.success, defaultTitleKey: "Done" }, // t("Common:Done")
+  [ToastType.error]: { type: ToastType.error, defaultTitleKey: "Warning" }, // t("Common:Warning")
+  [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: "Alert" }, // t("Common:Alert")
+  [ToastType.info]: { type: ToastType.info, defaultTitleKey: "Info" }, // t("Common:Info")
 };
 
 const getTitle = (type: "Done" | "Warning" | "Alert" | "Info") => {

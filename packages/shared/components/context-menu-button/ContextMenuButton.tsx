@@ -205,6 +205,7 @@ const ContextMenuButtonPure = ({
       style={style}
       data-testid="context-menu-button"
       onClick={callNewMenu}
+      ref={ref}
     >
       <IconButton
         className={iconClassName}

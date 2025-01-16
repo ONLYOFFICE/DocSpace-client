@@ -269,7 +269,7 @@ const DocumentService = ({
           onCancelClick={onReset}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Settings:DefaultSettings")}
-          reminderText={t("Settings:YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           saveButtonDisabled={saveButtonDisabled}
           disableRestoreToDefault={
             isDefaultSettings || isSaveLoading || isResetLoading

@@ -27,18 +27,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useDrag } from "@use-gesture/react";
-import { useSpring, config } from "@react-spring/web";
+import { useSpring, config, animated } from "@react-spring/web";
 
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import { Bookmarks } from "../Bookmarks";
 
-import {
-  MobileDrawerContainer,
-  MobileDrawerHeader,
-  MobileDrawerWrapper,
-} from "./MobileDrawer.styled";
+import styles from "./MobileDrawer.module.scss";
 import { Thumbnails } from "../SideBar/Sidebar.styled";
 
 import MobileDrawerProps from "./MobileDrawer.props";
@@ -179,15 +175,16 @@ export const MobileDrawer = ({
   const visibility = isOpenMobileDrawer ? "visible" : "hidden";
 
   return (
-    <MobileDrawerContainer ref={containerRef}>
-      <MobileDrawerWrapper
+    <section ref={containerRef} className={styles.container}>
+      <animated.div
+        className={styles.wrapper}
         style={{
           height,
           visibility,
           ...style,
         }}
       >
-        <MobileDrawerHeader {...bind()}>
+        <div className={styles.header} {...bind()}>
           {bookmarks.length > 0
             ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
                 onClick: handleToggle,
@@ -197,14 +194,14 @@ export const MobileDrawer = ({
             className="mobile-drawer_cross-icon"
             onClick={handleClose}
           />
-        </MobileDrawerHeader>
+        </div>
         <div style={{ height: height * 0.8 - 64 }}>
           {toggle ? (
             <Bookmarks bookmarks={bookmarks} navigate={navigate} />
           ) : null}
           <Thumbnails id="viewer-thumbnail" visible={!toggle} />
         </div>
-      </MobileDrawerWrapper>
-    </MobileDrawerContainer>
+      </animated.div>
+    </section>
   );
 };

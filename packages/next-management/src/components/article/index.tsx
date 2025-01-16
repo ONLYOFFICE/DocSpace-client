@@ -96,11 +96,11 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           text="Settings"
           icon={SettingsReactSvgUrl}
           showText={showText}
-          onClick={() => onItemClick("settings")}
+          onClick={() => onItemClick("settings/branding")}
           isActive={pathname.includes("/settings")}
           folderId="management_catalog-settings"
           $currentColorScheme={theme?.currentColorScheme}
-          linkData={{ path: "/settings", state: {} }}
+          linkData={{ path: "/settings/branding", state: {} }}
         />
         {!isCommunity ? (
           <ArticleItem

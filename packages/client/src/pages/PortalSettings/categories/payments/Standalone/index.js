@@ -53,7 +53,7 @@ const StandalonePage = (props) => {
     isEnterprise,
   } = props;
 
-  const { t, ready } = useTranslation(["PaymentsEnterprise", "Common"]);
+  const { t, ready } = useTranslation("Common");
 
   useEffect(() => {
     if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;

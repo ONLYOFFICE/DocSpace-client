@@ -17,10 +17,6 @@
       "path": "packages/doceditor",
     },
     {
-      "name": "🗂 @docspace/management",
-      "path": "packages/management",
-    },
-    {
       "name": "🗂 @docspace/next-management",
       "path": "packages/next-management",
     },
@@ -42,7 +38,7 @@
       "🚀 @docspace/client",
       "📄 @docspace/editor",
       "📦 @docspace/common",
-      "🗂 @docspace/management",
+      "🗂 @docspace/next-management",
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",

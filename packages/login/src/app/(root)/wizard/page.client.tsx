@@ -559,7 +559,6 @@ function WizardForm(props: WizardFormProps) {
           onChange={onAgreeTermsChange}
           isDisabled={isCreated}
           hasError={hasErrorAgree}
-          title=""
           truncate={false}
         />
         <Link

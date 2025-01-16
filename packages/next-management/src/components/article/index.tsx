@@ -29,6 +29,7 @@
 import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
+import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -111,6 +112,17 @@ export const Article = observer(() => {
           folderId="management_catalog-payments"
           $currentColorScheme={theme?.currentColorScheme}
           linkData={{ path: "/payments", state: {} }}
+        />
+        <ArticleItem
+          key="bonus"
+          text="Bonus"
+          icon={GiftReactSvgUrl}
+          showText={showText}
+          onClick={() => onItemClick("bonus")}
+          isActive={pathname === "/bonus"}
+          folderId="management_catalog-bonus"
+          $currentColorScheme={theme?.currentColorScheme}
+          linkData={{ path: "/bonus", state: {} }}
         />
       </div>
       <HideButton />

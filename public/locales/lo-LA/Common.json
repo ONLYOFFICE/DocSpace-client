@@ -417,5 +417,6 @@
   "UpgradeToProBannerInstructionItemLinux": "ຄໍາແນະນໍາສຳລັບ Linux.",
   "UpgradeToProBannerInstructionItemWindows": "ຄໍາແນະນໍາສຳລັບ Windows.",
   "UpgradeToProBannerInstructionNote": "ກະລຸນາຮັບຊາບວ່າຕົວແກ້ໄຂຈະບໍ່ສາມາດໃຊ້ໄດ້ໃນລະຫວ່າງການອັບເກຣດ. ພວກເຮົາຍັງແນະນໍາໃຫ້ <1>ສໍາຮອງຂໍ້ມູນຂໍ້ມູນຂອງທ່ານ</1> ກ່ອນທີ່ທ່ານຈະເລີ່ມຕົ້ນ.",
-  "UpgradeToProBannerInstructionReadNow": "ອ່ານດຽວນີ້"
+  "UpgradeToProBannerInstructionReadNow": "ອ່ານດຽວນີ້",
+  "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ {{license}} Edition ຢູ່<1>ໃນເວັບໄຊທ໌ທາງການ</1>"
 }

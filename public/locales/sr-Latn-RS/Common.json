@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux uputstvo.",
   "UpgradeToProBannerInstructionItemWindows": "Windows uputstvo.",
   "UpgradeToProBannerInstructionNote": "Molim obratite pažnju da će uređivači biti nedostupni u toku nadogradnje. Takođe preporučujemo da <1>napravite rezervnu kopiju vaših podataka</1> pre nego što počnete.",
-  "UpgradeToProBannerInstructionReadNow": "Pročitaj sada"
+  "UpgradeToProBannerInstructionReadNow": "Pročitaj sada",
+  "UpgradeToProBannerInformationAboutShort": "Saznajte više o {{license}} izdanju na <1>zvaničnom veb-sajtu</1>"
 }

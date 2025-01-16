@@ -631,5 +631,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Hướng dẫn Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Hướng dẫn Windows.",
   "UpgradeToProBannerInstructionNote": "Xin lưu ý rằng các các tính năng chỉnh sửa sẽ không hữu dụng trong quá trình nâng cấp. Chúng tôi cũng khuyên bạn nên <1>sao lưu dữ liệu của mình</1> trước khi bạn bắt đầu.",
-  "UpgradeToProBannerInstructionReadNow": "Đọc ngay"
+  "UpgradeToProBannerInstructionReadNow": "Đọc ngay",
+  "UpgradeToProBannerInformationAboutShort": "Tìm hiểu thêm về Phiên bản {{license}} trên <1> trang web chính thức </1>"
 }

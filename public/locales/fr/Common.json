@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Consignes Linux",
   "UpgradeToProBannerInstructionItemWindows": "Consignes pour Windows.",
   "UpgradeToProBannerInstructionNote": "Veuillez noter que les éditeurs ne seront pas disponibles pendant la mise à jour. Nous vous conseillons également de <1>sauvegarder vos données</1> avant de démarrer.",
-  "UpgradeToProBannerInstructionReadNow": "Lire maintenant"
+  "UpgradeToProBannerInstructionReadNow": "Lire maintenant",
+  "UpgradeToProBannerInformationAboutShort": "En savoir plus à propos d'{{license}} Edition sur le <1>site web officiel</1>"
 }

@@ -632,5 +632,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux설명서.",
   "UpgradeToProBannerInstructionItemWindows": "Windows설명서.",
   "UpgradeToProBannerInstructionNote": "업그레이드 중에는 편집기를 사용할 수 없습니다. 또한 시작하기 전에 <1>데이터를 백업</1>하는 것이 좋습니다.",
-  "UpgradeToProBannerInstructionReadNow": "지금 읽기"
+  "UpgradeToProBannerInstructionReadNow": "지금 읽기",
+  "UpgradeToProBannerInformationAboutShort": "<1>공식 웹사이트</1>에서 {{license}} 에디션에 대해 더 자세히 알아보세요"
 }

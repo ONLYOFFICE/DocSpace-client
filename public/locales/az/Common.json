@@ -632,5 +632,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux təlimatı",
   "UpgradeToProBannerInstructionItemWindows": "Windows üçün təlimatlar.",
   "UpgradeToProBannerInstructionNote": "Nəzərə alın ki, yeniləmə zamanı redaktorlar mövcud olmayacaq. Başlamazdan əvvəl <1>datanızın ehtiyat nüsxəsini çıxarmağınızı</1> tövsiyə edirik.",
-  "UpgradeToProBannerInstructionReadNow": "İndi oxu"
+  "UpgradeToProBannerInstructionReadNow": "İndi oxu",
+  "UpgradeToProBannerInformationAboutShort": "<1>Rəsmi vebsaytda</1> {{license}} Edition haqqında ətraflı məlumat əldə edin"
 }

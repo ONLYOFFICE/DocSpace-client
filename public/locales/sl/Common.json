@@ -632,5 +632,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Navodila za Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Navodila za Windows.",
   "UpgradeToProBannerInstructionNote": "Upoštevajte, da urejevalniki med nadgradnjo ne bodo na voljo. Priporočamo tudi, da pred začetkom <1>varnostno kopirate podatke</1>.",
-  "UpgradeToProBannerInstructionReadNow": "Preberi zdaj"
+  "UpgradeToProBannerInstructionReadNow": "Preberi zdaj",
+  "UpgradeToProBannerInformationAboutShort": "Izvedite več o {{license}} Edition na <1>uradni spletni strani</1>"
 }

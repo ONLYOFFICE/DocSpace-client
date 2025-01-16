@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Instrução do Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Instruções do Windows.",
   "UpgradeToProBannerInstructionNote": "Observe que os editores não estarão disponíveis durante a atualização. Também recomendamos que você faça um <1>backup de seus dados</1> antes de começar.",
-  "UpgradeToProBannerInstructionReadNow": "Leia agora"
+  "UpgradeToProBannerInstructionReadNow": "Leia agora",
+  "UpgradeToProBannerInformationAboutShort": "Saiba mais sobre a {{license}} Edition no <1>site oficial</1>"
 }

@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Linuxの説明。",
   "UpgradeToProBannerInstructionItemWindows": "Windowsの説明。",
   "UpgradeToProBannerInstructionNote": "アップグレード中は、エディターが利用できなくなりますのでご注意ください。また、事前に<1>データのバックアップ</1> を行うことをお勧めします。",
-  "UpgradeToProBannerInstructionReadNow": "今すぐ読む"
+  "UpgradeToProBannerInstructionReadNow": "今すぐ読む",
+  "UpgradeToProBannerInformationAboutShort": "{{license}}版の詳細は<1>公式サイト</1>でご確認ください。"
 }

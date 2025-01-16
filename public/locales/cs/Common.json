@@ -632,5 +632,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Návod pro Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Návod pro systém Windows.",
   "UpgradeToProBannerInstructionNote": "Upozorňujeme, že během upgradu nebudou editory dostupné. Doporučujeme také, abyste před zahájením <1>zálohovali svá data</1>.",
-  "UpgradeToProBannerInstructionReadNow": "Přečtěte si nyní"
+  "UpgradeToProBannerInstructionReadNow": "Přečtěte si nyní",
+  "UpgradeToProBannerInformationAboutShort": "Více informací o edici {{license}} na <1>oficiálních stránkách</1>"
 }

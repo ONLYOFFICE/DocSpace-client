@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Linux հրահանգ.",
   "UpgradeToProBannerInstructionItemWindows": "Windows հրահանգ.",
   "UpgradeToProBannerInstructionNote": "Խնդրում ենք նկատի ունենալ, որ թարմացման ընթացքում խմբագրիչներն անհասանելի կլինեն: Մենք նաև խորհուրդ ենք տալիս <1>պահուստավորել ձեր տվյալները</1> նախքան սկսելը:",
-  "UpgradeToProBannerInstructionReadNow": "Կարդացեք հիմա"
+  "UpgradeToProBannerInstructionReadNow": "Կարդացեք հիմա",
+  "UpgradeToProBannerInformationAboutShort": "Իմացեք ավելին {{license}} Edition-ի մասին <1>պաշտոնական կայքում</1>"
 }

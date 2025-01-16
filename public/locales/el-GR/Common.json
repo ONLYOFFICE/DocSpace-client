@@ -632,5 +632,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Οδηγίες για Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Οδηγίες για Windows.",
   "UpgradeToProBannerInstructionNote": "Λάβετε υπόψη ότι τα προγράμματα επεξεργασίας δεν θα είναι διαθέσιμα κατά τη διάρκεια της αναβάθμισης. Συνιστούμε επίσης να <1>δημιουργήσετε αντίγραφα ασφαλείας για τα δεδομένα σας</1> πριν ξεκινήσετε.",
-  "UpgradeToProBannerInstructionReadNow": "Διαβάστε τώρα"
+  "UpgradeToProBannerInstructionReadNow": "Διαβάστε τώρα",
+  "UpgradeToProBannerInformationAboutShort": "Μάθετε περισσότερα για την έκδοση {{license}} στην <1>επίσημη ιστοσελίδα</1>"
 }

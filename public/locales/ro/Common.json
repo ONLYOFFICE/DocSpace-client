@@ -633,5 +633,6 @@
   "UpgradeToProBannerInstructionItemLinux": "Instrucțiuni pentru Linux.",
   "UpgradeToProBannerInstructionItemWindows": "Instrucțiunei pentru Windows.",
   "UpgradeToProBannerInstructionNote": "Vă rugăm să rețineți că aplicaţiile de editare nu vor fi disponibile în curs de actualizare. De asemenea vă recomandăm <1>să creați o copie de rezervă</1> înainte de a începe.",
-  "UpgradeToProBannerInstructionReadNow": "Citiți acum"
+  "UpgradeToProBannerInstructionReadNow": "Citiți acum",
+  "UpgradeToProBannerInformationAboutShort": "Aflați mai multe despre Ediția {{license}} pe  <1>pagina oficială</1>"
 }

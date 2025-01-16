@@ -27,15 +27,11 @@
 import React, { useState } from "react";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
+import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg";
+import classNames from "classnames";
 import { Bookmarks } from "../Bookmarks";
-
+import styles from "./Sidebar.module.scss";
 import SidebarProps from "./Sidebar.props";
-import {
-  HideSidebarIcon,
-  SidebarContainer,
-  SidebarHeader,
-  Thumbnails,
-} from "./Sidebar.styled";
 
 export const Sidebar = ({
   bookmarks,
@@ -52,17 +48,28 @@ export const Sidebar = ({
   const closeSidebar = () => setIsPDFSidebarOpen(false);
 
   return (
-    <SidebarContainer isPanelOpen={isPanelOpen}>
-      <SidebarHeader>
+    <aside
+      className={classNames(styles.sidebarContainer, {
+        [styles.isPanelOpen]: isPanelOpen,
+      })}
+    >
+      <div className={styles.sidebarHeader}>
         {bookmarks.length > 0
           ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
               onClick: handleToggle,
             })
           : null}
-        <HideSidebarIcon onClick={closeSidebar} />
-      </SidebarHeader>
+        <ArticleShowMenuReactSvgUrl
+          className={styles.hideSidebarIcon}
+          onClick={closeSidebar}
+          // data-interface-dir={interfaceDir}
+        />
+      </div>
       {toggle ? <Bookmarks bookmarks={bookmarks} navigate={navigate} /> : null}
-      <Thumbnails id="viewer-thumbnail" visible={!toggle} />
-    </SidebarContainer>
+      <section
+        id="viewer-thumbnail"
+        className={classNames(styles.thumbnails, { [styles.visible]: !toggle })}
+      />
+    </aside>
   );
 };

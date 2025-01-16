@@ -25,51 +25,64 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @import "../../../../styles/variables/devices";
-@import "../../../../styles/variables/colors";
 @import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
 :root {
-  --mobile-drawer-bg: #{$black};
-  --mobile-drawer-svg: #{$dark-icon-color};
+  --sidebar-bg: #{$black};
+  --sidebar-icon-fill: #{$dark-icon-color};
 }
 
-.container {
-  position: fixed;
-  z-index: 308;
-  width: 100%;
-}
-
-.wrapper {
-  position: fixed;
-  bottom: 0;
+.sidebarContainer {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   width: 100%;
-  background: var(--mobile-drawer-bg);
-  touch-action: none;
+  background: var(--sidebar-bg);
   overflow: hidden;
+  visibility: hidden;
+  max-width: 0;
 
-  .block_elem {
-    position: absolute;
-    padding: 0;
-    margin: 0;
+  &.isPanelOpen {
+    max-width: 306px;
+    visibility: visible;
+    overflow: visible;
   }
 }
 
-.header {
+.sidebarHeader {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 30px;
 
-  padding: 24px 30px;
-
-  touch-action: none;
-
-  svg path {
-    fill: var(mobile-drawer-svg);
+  svg {
+    cursor: pointer;
+    path {
+      fill: var(--sidebar-icon-fill);
+    }
   }
+}
 
-  .mobile-drawer_cross-icon {
-    margin-inline-start: auto;
+.thumbnails {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+
+  &.visible {
+    display: block;
+    visibility: visible;
+    opacity: 1;
   }
+}
+
+.hideSidebarIcon {
+  margin-inline-start: auto;
+
+  // &:not([data-interface-dir="rtl"]) {
+  //   transform: rotate(180deg);
+  // }
 }

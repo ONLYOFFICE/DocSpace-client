@@ -26,7 +26,6 @@
 
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { observer, inject } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { LinkTarget } from "@docspace/shared/components/link";
@@ -34,7 +33,11 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { StyledBonus } from "./Bonus.styled";
 
-export const OfficialDocumentation = ({ dataBackupUrl }) => {
+export const OfficialDocumentation = ({
+  dataBackupUrl,
+}: {
+  dataBackupUrl: string;
+}) => {
   const { t } = useTranslation("Common");
 
   const dockerLink =

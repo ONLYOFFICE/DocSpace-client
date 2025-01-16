@@ -37,8 +37,13 @@ import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
 
 import { StyledBenefitsBody } from "./Payments.styled";
+import { IPaymentsProps } from "./Payments.types";
 
-export const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
+export const BenefitsContainer = ({
+  isTrial,
+  isEnterprise,
+  isDeveloper,
+}: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
   const title = isEnterprise

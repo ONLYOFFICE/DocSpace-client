@@ -24,54 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { Text } from "@docspace/shared/components/text";
-import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
-
-import { BenefitsContainer } from "../Standalone/BenefitsContainer";
-import { ContactContainer } from "./ContactContainer";
-import { OfficialDocumentation } from "./OfficialDocumentation";
-
-import { StyledBonus } from "./Bonus.styled";
-import { IBonusProps } from "./Bonus.types";
-
-export const Bonus = ({
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
-  helpUrl,
-  salesEmail,
-  dataBackupUrl,
-}: IBonusProps) => {
-  const { t, ready } = useTranslation("Common");
-
-  if (!ready) return <PaymentsStandaloneLoader />;
-
-  return (
-    <StyledBonus>
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontWeight={600}>
-        {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: t("Common:OrganizationName"),
-          license: t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-      <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
-
-      <OfficialDocumentation dataBackupUrl={dataBackupUrl} />
-
-      <ContactContainer
-        helpUrl={helpUrl}
-        salesEmail={salesEmail}
-        isCommunity={isCommunity}
-      />
-    </StyledBonus>
-  );
-};
+export interface IBonusProps {
+  isEnterprise: boolean;
+  isTrial: boolean;
+  isDeveloper: boolean;
+  isCommunity: boolean;
+  helpUrl: string;
+  salesEmail: string;
+  dataBackupUrl: string;
+}

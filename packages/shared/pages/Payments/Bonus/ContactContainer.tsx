@@ -32,8 +32,13 @@ import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 
 import { StyledContactComponent } from "./Bonus.styled";
+import { IBonusProps } from "./Bonus.types";
 
-export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
+export const ContactContainer = ({
+  helpUrl,
+  salesEmail,
+  isCommunity,
+}: Partial<IBonusProps>) => {
   const { t } = useTranslation("Common");
   const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
   const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";

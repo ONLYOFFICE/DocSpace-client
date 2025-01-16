@@ -31,6 +31,7 @@ import { Text } from "../../../../components/text";
 
 import { StyledTitleComponent } from "../Payments.styled";
 import { getTwoDotsReplacing } from "../Payments.helpers";
+import { IPaymentsProps } from "../Payments.types";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -38,7 +39,7 @@ export const TariffTitleContainer = ({
   trialDaysLeft,
   paymentDate,
   isDeveloper,
-}) => {
+}: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
   const alertComponent = () => {
     if (isTrial) {

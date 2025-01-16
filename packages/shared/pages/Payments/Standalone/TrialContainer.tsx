@@ -35,6 +35,7 @@ import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
 import { BenefitsContainer } from "./BenefitsContainer";
 
 import { StyledEnterpriseComponent } from "./Payments.styled";
+import { IPaymentsProps } from "./Payments.types";
 
 export const TrialContainer = ({
   isDeveloper,
@@ -44,7 +45,7 @@ export const TrialContainer = ({
   trialDaysLeft,
   paymentDate,
   isEnterprise,
-}) => {
+}: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
   return (

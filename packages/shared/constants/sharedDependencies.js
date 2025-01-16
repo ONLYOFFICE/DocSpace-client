@@ -38,6 +38,10 @@ module.exports = {
     singleton: true,
     requiredVersion: deps.react,
   },
+  "@docspace/shared/utils/socket": {
+    singleton: true,
+    requiredVersion: "*"
+  },
   "react-dom": {
     singleton: true,
     requiredVersion: deps["react-dom"],

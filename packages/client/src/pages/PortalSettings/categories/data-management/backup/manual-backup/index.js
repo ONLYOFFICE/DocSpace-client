@@ -43,10 +43,7 @@ import {
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import StatusMessage from "@docspace/shared/components/status-message";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-} from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   isManagement,
@@ -109,14 +106,6 @@ class ManualBackup extends React.Component {
       t,
     } = this.props;
 
-    const { socketSubscribers } = SocketHelper;
-
-    if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: "backup",
-      });
-    }
-
     SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
       const options = getBackupProgressInfo(
         opt,
@@ -162,16 +151,7 @@ class ManualBackup extends React.Component {
 
     resetDownloadingProgress();
 
-    if (!isManagement()) return;
-
-    const pathname = window.location.pathname;
-
-    if (pathname.includes("backup") || pathname.includes("restore")) return;
-
     SocketHelper.off(SocketEvents.BackupProgress);
-    SocketHelper.emit(SocketCommands.Unsubscribe, {
-      roomParts: "backup",
-    });
   }
 
   setBasicSettings = async () => {

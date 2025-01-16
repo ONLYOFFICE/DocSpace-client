@@ -43,10 +43,7 @@ import {
   getBackupProgressInfo,
   isManagement,
 } from "@docspace/shared/utils/common";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-} from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LocalFileModule from "./sub-components/LocalFileModule";
@@ -122,19 +119,6 @@ const RestoreBackup = (props) => {
     setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
 
-    const { socketSubscribers } = SocketHelper;
-
-    if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: "backup",
-      });
-    }
-    if (!socketSubscribers.has("restore")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: "restore",
-      });
-    }
-
     SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
       const options = getBackupProgressInfo(
         opt,
@@ -156,16 +140,7 @@ const RestoreBackup = (props) => {
       resetDownloadingProgress();
       setRestoreResource(null);
 
-      if (!isManagement()) return;
-
-      const pathname = window.location.pathname;
-
-      if (pathname.includes("backup") || pathname.includes("restore")) return;
-
       SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: "backup",
-      });
     };
   }, []);
 

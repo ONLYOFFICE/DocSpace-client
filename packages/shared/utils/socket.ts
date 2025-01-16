@@ -351,10 +351,17 @@ class SocketHelper {
    * @returns {SocketHelper} The singleton instance of the SocketHelper class.
    */
   static getInstance() {
-    if (this.instance) {
-      return this.instance;
+    if ((globalThis as any).SOCKET_INSTANCE) {
+      // [WS] Returning existing global socket instance
+      return (globalThis as any).SOCKET_INSTANCE;
     }
-    this.instance = new SocketHelper();
+
+    if (!this.instance) {
+      // [WS] Creating new socket instance
+      this.instance = new SocketHelper();
+      (globalThis as any).SOCKET_INSTANCE = this.instance;
+    }
+    // [WS] Returning existing socket instance
     return this.instance;
   }
 

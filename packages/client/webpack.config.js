@@ -350,6 +350,7 @@ module.exports = (env, argv) => {
       filename: "remoteEntry.js",
       remotes: [],
       exposes: {
+        "./socket": "@docspace/shared/utils/socket",
         "./shell": "./src/Shell",
         "./store": "./src/store",
         "./Layout": "./src/components/Layout",
@@ -381,6 +382,18 @@ module.exports = (env, argv) => {
       shared: {
         ...deps,
         ...sharedDeps,
+        "@docspace/shared/utils/socket": {
+          singleton: true,
+          strictVersion: false,
+          requiredVersion: false,
+          eager: true,
+        },
+        "socket.io-client": {
+          singleton: true,
+          strictVersion: false,
+          requiredVersion: false,
+          eager: true,
+        },
       },
     }),
   );

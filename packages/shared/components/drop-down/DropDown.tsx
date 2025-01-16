@@ -298,13 +298,14 @@ const DropDown = ({
       ...dropDownMaxHeightProp,
       ...style,
       ["--z-index" as string]: zIndex,
-      ["--max-height" as string]: `${maxHeight}px`,
+      ["--max-height" as string]: maxHeight && `${maxHeight}px`,
       ["--manual-width" as string]: manualWidth,
       ["--manual-x" as string]: manualX,
       ["--manual-y" as string]: state.manualY,
     };
 
     const dropDownClasses = classNames(styles.dropDown, className, {
+      "dropdown-container": true,
       [styles.directionTop]: state.directionY === "top",
       [styles.directionBottom]: state.directionY === "bottom",
       [styles.directionRight]:

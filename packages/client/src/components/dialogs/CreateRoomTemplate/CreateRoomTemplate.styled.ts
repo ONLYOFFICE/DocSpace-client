@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledFooter = styled.div`
   width: 100%;
@@ -36,11 +36,7 @@ const StyledFooter = styled.div`
 
     gap: 8px;
 
-    ${({ isEdit }: { isEdit: boolean }) =>
-      !isEdit &&
-      css`
-        margin-top: 16px;
-      `};
+    margin-top: 16px;
   }
 `;
 

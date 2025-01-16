@@ -28,6 +28,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
+import { getRoomMembers } from "@docspace/shared/api/rooms";
 import { EditRoomDialog } from "../dialogs";
 
 const EditRoomEvent = ({
@@ -45,6 +46,7 @@ const EditRoomEvent = ({
 
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
+  const [accessItems, setAccessItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
 
@@ -76,6 +78,19 @@ const EditRoomEvent = ({
     setFetchedImage(file);
   }, []);
 
+  const getTemplateMembers = useCallback(async () => {
+    const templateMembersData = await getRoomMembers(item.id, {});
+
+    if (templateMembersData?.items?.length) {
+      const convertedItems = templateMembersData.items.map(
+        ({ access, isOwner, sharedTo }) => {
+          return { access, isOwner, ...sharedTo };
+        },
+      );
+      setAccessItems(convertedItems);
+    }
+  }, []);
+
   useEffect(() => {
     setCreateRoomDialogVisible(true);
     setIsInitLoading(true);
@@ -84,6 +99,7 @@ const EditRoomEvent = ({
 
     const requests = [fetchTags()];
 
+    if (item.isTemplate) requests.push(getTemplateMembers());
     if (logo) requests.push(fetchLogoAction);
 
     const fetchInfo = async () => {
@@ -109,10 +125,12 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      setIsLoading={setIsLoading}
       isInitLoading={isInitLoading}
       cover={cover}
       item={item}
       isTemplate={item.isTemplate}
+      accessItems={accessItems}
     />
   );
 };

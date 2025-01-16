@@ -149,6 +149,7 @@ const SetRoomParams = ({
   isTemplate,
   onOpenAccessSettings,
   createdBy,
+  inviteItems,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -463,7 +464,8 @@ const SetRoomParams = ({
 
       {isTemplate && (
         <TemplateAccess
-          roomOwner={createdBy ?? roomParams.roomOwner} // TODO: Templates createdBy
+          roomOwner={createdBy ?? roomParams.roomOwner}
+          inviteItems={inviteItems}
           onOpenAccessSettings={onOpenAccessSettings}
         />
       )}

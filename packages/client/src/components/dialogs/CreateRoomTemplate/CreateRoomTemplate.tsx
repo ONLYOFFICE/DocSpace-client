@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
@@ -35,7 +35,9 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TUser } from "@docspace/shared/api/people/types";
 import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
 import { StyledFooter } from "./CreateRoomTemplate.styled";
@@ -44,30 +46,38 @@ import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPane
 type CreateRoomTemplateProps = {
   visible: boolean;
   onClose: VoidFunction;
-  onSave: (params: TRoom & { isEdit?: boolean }, open: boolean) => void;
-  item: TRoom & { isEdit: boolean };
+  onSave: (params: TRoom, open: boolean) => void;
+  item: TRoom;
   fetchedTags: TRoom["tags"];
   fetchedRoomParams: TRoom;
+  isLoading: boolean;
 };
 
 const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
-  const { visible, onClose, onSave, item, fetchedTags, fetchedRoomParams } =
-    props;
+  const {
+    visible,
+    onClose,
+    onSave,
+    item,
+    fetchedTags,
+    fetchedRoomParams,
+    isLoading,
+  } = props;
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
-
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
-
+  const [inviteItems, setInviteItems] = useState([
+    { ...item.createdBy, isOwner: true },
+  ]);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
-
   const [openCreatedIsChecked, setOpenCreatedIsChecked] = useState(true);
   const [isScrollLocked, setIsScrollLocked] = useState(false);
-
   const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+
+  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
   const setRoomType = (newRoomType: RoomsType) =>
     setRoomParams((prev) => ({
@@ -109,6 +119,32 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     setAddUsersPanelVisible(false);
   };
 
+  const onSetAccessSettings = () => {
+    onCloseAccessSettings();
+
+    const invitations = inviteItems
+      .filter((i) => !i.isOwner)
+      .map((inviteItem) => {
+        return {
+          id: inviteItem.id,
+          access: inviteItem.access ?? ShareAccessRights.RoomManager,
+        };
+      });
+
+    setRoomParams({ ...roomParams, invitations });
+  };
+
+  const checkIfUserInvited = (user: TUser) => {
+    return inviteItems.findIndex((x) => x.id === user.id) > -1;
+  };
+
+  const onSubmitItems = (users: TSelectorItem[]) => {
+    const items = [...inviteItems, ...users];
+
+    setInviteItems(items);
+    onCloseAddUsersPanel();
+  };
+
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   return (
@@ -129,7 +165,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
           <PeopleSelector
             useAside
             // onClose={onClosePanels}
-            // onSubmit={onSubmitItems}
+            onSubmit={onSubmitItems}
             submitButtonLabel={t("Common:AddButton")}
             disableSubmitButton={false}
             isMultiSelect
@@ -141,7 +177,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             // withBlur={!isMobileView}
             withInfoBadge
             roomId={item.id}
-            // disableInvitedUsers={invitedUsers}
+            checkIfUserInvited={checkIfUserInvited}
             withHeader
             // filter={filter}
             headerProps={{
@@ -162,6 +198,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             onCloseAccessSettings={onCloseAccessSettings}
             onClosePanels={onClose}
             isContainer
+            inviteItems={inviteItems}
+            setInviteItems={setInviteItems}
+            visible={accessSettingsIsVisible}
+            setIsVisible={setAccessSettingsIsVisible}
+            onSetAccessSettings={onSetAccessSettings}
           />
         )}
       </ModalDialog.Container>
@@ -181,7 +222,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
           setRoomParams={setRoomParams}
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
-          // isDisabled={isLoading}
+          isDisabled={isLoading}
           isValidTitle={isValidTitle}
           isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
@@ -189,32 +230,28 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
           onKeyUp={onKeyUp}
           onOpenAccessSettings={onOpenAccessSettings}
           createdBy={item.createdBy}
+          inviteItems={inviteItems}
         />
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <StyledFooter isEdit={item.isEdit}>
-          {!item.isEdit && (
-            <Checkbox
-              label={t("Files:OpenCreatedTemplate")}
-              isChecked={openCreatedIsChecked}
-              onChange={onChangeOpenCreated}
-            />
-          )}
+        <StyledFooter>
+          <Checkbox
+            label={t("Files:OpenCreatedTemplate")}
+            isChecked={openCreatedIsChecked}
+            onChange={onChangeOpenCreated}
+          />
 
           <div className="create-room-template_buttons">
             <Button
               id="create-room-template-modal_submit"
               tabIndex={5}
-              label={
-                item.isEdit ? t("Common:SaveButton") : t("Files:CreateTemplate")
-              }
+              label={t("Files:CreateTemplate")}
               size={ButtonSize.normal}
               primary
               scale
               isDisabled={isWrongTitle}
-              // isDisabled={isRoomTitleChanged || isWrongTitle}
-              // isLoading={isLoading}
+              isLoading={isLoading}
               type="submit"
             />
             <Button
@@ -223,7 +260,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
               label={t("Common:CancelButton")}
               size={ButtonSize.normal}
               scale
-              // isDisabled={isLoading}
+              isDisabled={isLoading}
               onClick={onClose}
             />
           </div>

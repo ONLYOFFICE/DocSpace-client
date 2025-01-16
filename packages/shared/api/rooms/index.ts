@@ -573,7 +573,7 @@ export function createTemplate({
   return request(options);
 }
 
-export function getCreateTemplateFromRoomProgress() {
+export function getCreateTemplateProgress() {
   const options = {
     method: "get",
     url: `/files/roomtemplate/status`,

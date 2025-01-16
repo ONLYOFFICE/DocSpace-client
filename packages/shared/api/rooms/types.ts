@@ -121,6 +121,7 @@ export type TRoom = {
   watermark?: TWatermark;
   providerKey?: string;
   quotaLimit?: number;
+  isTemplate?: boolean;
 };
 
 export type TGetRooms = {

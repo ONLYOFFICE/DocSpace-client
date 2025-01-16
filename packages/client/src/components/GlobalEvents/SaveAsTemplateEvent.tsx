@@ -34,17 +34,13 @@ import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate
 
 type SaveAsTemplateEventProps = {
   visible: boolean;
-  item: TRoom & { isEdit: boolean };
+  item: TRoom;
   fetchTags: () => TRoom["tags"];
   setTemplateEventVisible: (visible: boolean) => void;
   getThirdPartyIcon: (provider: string) => string;
   isDefaultRoomsQuotaSet: boolean;
   onClose: VoidFunction;
-  onSaveAsTemplate: (
-    item: TRoom & { isEdit?: boolean },
-    roomParams: TRoom & { isEdit?: boolean },
-    open: boolean,
-  ) => void;
+  onSaveAsTemplate: (item: TRoom, roomParams: TRoom, open: boolean) => void;
 };
 
 const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
@@ -104,10 +100,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     }
   }, []);
 
-  const onSave = async (
-    roomParams: TRoom & { isEdit?: boolean },
-    openCreatedTemplate: boolean,
-  ) => {
+  const onSave = async (roomParams: TRoom, openCreatedTemplate: boolean) => {
     setIsLoading(true);
 
     await onSaveAsTemplate(item, roomParams, openCreatedTemplate);

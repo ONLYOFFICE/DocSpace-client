@@ -34,6 +34,7 @@ import { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { TSelectorItem } from "@docspace/shared/components/selector";
 import * as Styled from "./TemplateAccess.styled";
 
 const MAX_AVATARS_COUNT = 3;
@@ -41,28 +42,31 @@ const MAX_AVATARS_COUNT = 3;
 type TemplateAccessType = {
   t: TTranslation;
   roomOwner: TCreatedBy;
+  inviteItems: TSelectorItem[];
   onOpenAccessSettings: VoidFunction;
 };
 
 const TemplateAccess = ({
   t,
   roomOwner,
+  inviteItems,
   onOpenAccessSettings,
 }: TemplateAccessType) => {
   const userName = roomOwner.displayName;
 
-  const usersList = [{}, {}, {}];
-  const groupsList = [{}, {}, {}];
+  const usersList = inviteItems.filter((i) => !i.isGroup);
+  const groupsList = inviteItems.filter((i) => i.isGroup);
+
   const avatarList = [];
 
-  const usersLength = usersList.length;
+  const itemsLength = inviteItems.length;
 
   const maxAvatarsCount =
-    usersLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : usersLength;
+    itemsLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : itemsLength;
 
   let index = 0;
   while (avatarList.length !== maxAvatarsCount) {
-    // const user = usersList[index];
+    const item = inviteItems[index];
 
     avatarList.push(
       <Avatar
@@ -70,8 +74,9 @@ const TemplateAccess = ({
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
-        source={roomOwner.avatarSmall}
-        userName={userName}
+        source={item?.avatarSmall}
+        isGroup={item?.isGroup}
+        userName={item.userName ?? item.name}
         key={index}
       />,
     );
@@ -112,7 +117,7 @@ const TemplateAccess = ({
       ) : (
         <div className="template-access_wrapper">
           <div className="template-access_avatar-container">
-            {usersLength === 1 ? (
+            {itemsLength === 1 ? (
               <>
                 <Avatar
                   size={AvatarSize.min}

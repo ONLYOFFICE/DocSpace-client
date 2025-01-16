@@ -33,6 +33,7 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
+import cloneDeep from "lodash/cloneDeep";
 // import {
 //   getUserType,
 //   getUserTypeTranslation,
@@ -95,7 +96,8 @@ const Item = ({
       (inviteItem) => inviteItem.id === id,
     );
 
-    let newItems = [...inviteItems];
+    let newItems = cloneDeep(inviteItems);
+
     if (newItems[itemIndex].access) {
       newItems[itemIndex].access = ShareAccessRights.None;
     } else {

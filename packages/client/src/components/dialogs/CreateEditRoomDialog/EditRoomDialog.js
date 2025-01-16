@@ -27,9 +27,11 @@
 import { useState, useEffect, useRef } from "react";
 
 import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import PeopleSelector from "@docspace/shared/selectors/People";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 
@@ -49,6 +51,7 @@ const EditRoomDialog = ({
   isTemplate,
   cover,
   item,
+  accessItems,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -57,6 +60,7 @@ const EditRoomDialog = ({
     useState(false);
   const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [inviteItems, setInviteItems] = useState([]);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
@@ -69,6 +73,18 @@ const EditRoomDialog = ({
   );
 
   const compareRoomParams = (prevParams, currentParams) => {
+    let prevInviteItems = prevParams.inviteItems;
+    let currentInviteItems = inviteItems;
+
+    if (prevParams.inviteItems && inviteItems) {
+      prevInviteItems = prevParams.inviteItems.map((x) => {
+        return { id: x.id, access: x.access };
+      });
+      currentInviteItems = inviteItems.map((x) => {
+        return { id: x.id, access: x.access };
+      });
+    }
+
     return (
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
@@ -90,7 +106,8 @@ const EditRoomDialog = ({
       prevParams.indexing === currentParams.indexing &&
       prevParams.denyDownload === currentParams.denyDownload &&
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
-      isEqual(prevParams.watermark, currentParams.watermark)
+      isEqual(prevParams.watermark, currentParams.watermark) &&
+      isEqual(prevInviteItems, currentInviteItems)
     );
   };
 
@@ -132,6 +149,17 @@ const EditRoomDialog = ({
     }
   }, [fetchedImage]);
 
+  useEffect(() => {
+    if (accessItems) {
+      setInviteItems(accessItems);
+
+      prevRoomParams.current = {
+        ...roomParams,
+        inviteItems: accessItems,
+      };
+    }
+  }, [accessItems]);
+
   const onCloseAction = () => {
     if (isLoading) return;
 
@@ -161,6 +189,44 @@ const EditRoomDialog = ({
 
   const onCloseAddUsersPanel = () => {
     setAddUsersPanelVisible(false);
+  };
+
+  const onSubmitItems = (users) => {
+    const newUsers = cloneDeep(users);
+    const items = inviteItems.map((i) => {
+      const userIndex = users.findIndex((u) => u.id === i.id);
+      if (userIndex > -1) {
+        newUsers.filter((x) => x.id === i.id);
+        return { ...users[userIndex], access: ShareAccessRights.RoomManager };
+      }
+      return i;
+    });
+
+    setInviteItems([...items, ...newUsers]);
+    onCloseAddUsersPanel();
+  };
+
+  const checkIfUserInvited = (user) => {
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.access !== ShareAccessRights.None,
+      ) > -1
+    );
+  };
+
+  const onSetAccessSettings = () => {
+    onCloseAccessSettings();
+
+    const invitations = inviteItems
+      .filter((i) => !i.isOwner)
+      .map((inviteItem) => {
+        return {
+          id: inviteItem.id,
+          access: inviteItem.access ?? ShareAccessRights.RoomManager,
+        };
+      });
+
+    setRoomParams({ ...roomParams, invitations });
   };
 
   return (
@@ -194,7 +260,7 @@ const EditRoomDialog = ({
           <PeopleSelector
             useAside
             // onClose={onClosePanels}
-            // onSubmit={onSubmitItems}
+            onSubmit={onSubmitItems}
             submitButtonLabel={t("Common:AddButton")}
             disableSubmitButton={false}
             isMultiSelect
@@ -207,6 +273,7 @@ const EditRoomDialog = ({
             withInfoBadge
             roomId={item.id}
             // disableInvitedUsers={invitedUsers}
+            checkIfUserInvited={checkIfUserInvited}
             withHeader
             // filter={filter}
             headerProps={{
@@ -227,6 +294,9 @@ const EditRoomDialog = ({
             onCloseAccessSettings={onCloseAccessSettings}
             onClosePanels={onClose}
             isContainer
+            inviteItems={inviteItems}
+            setInviteItems={setInviteItems}
+            onSetAccessSettings={onSetAccessSettings}
           />
         )}
       </ModalDialog.Container>
@@ -254,6 +324,7 @@ const EditRoomDialog = ({
           onOpenAccessSettings={onOpenAccessSettings}
           canChangeOwner={roomParams?.security?.ChangeOwner}
           isTemplate={isTemplate}
+          inviteItems={inviteItems}
         />
       </ModalDialog.Body>
 

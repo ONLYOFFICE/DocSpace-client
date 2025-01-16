@@ -42,10 +42,7 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import {
-  getRoomMembers,
-  updateRoomMemberRole,
-} from "@docspace/shared/api/rooms";
+import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
@@ -74,6 +71,7 @@ type TemplateAccessSettingsContainer =
       setUsersPanelIsVisible: (visible: boolean) => void;
       onClosePanels: VoidFunction;
       onCloseAccessSettings: VoidFunction;
+      onSetAccessSettings: VoidFunction;
     }
   | {
       isContainer?: undefined;
@@ -81,6 +79,7 @@ type TemplateAccessSettingsContainer =
       setUsersPanelIsVisible?: undefined;
       onClosePanels?: undefined;
       onCloseAccessSettings?: undefined;
+      onSetAccessSettings?: undefined;
     };
 
 type TemplateAccessSettingsPanelProps = {
@@ -90,8 +89,10 @@ type TemplateAccessSettingsPanelProps = {
   // templateEventVisible: VoidFunction;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
-  setInfoPanelIsMobileHidden: (visible: boolean) => void;
+  setInfoPanelIsMobileHidden?: (visible: boolean) => void;
   // onCreateRoomFromTemplate: (item: object) => void;
+  inviteItems: TSelectorItem[];
+  setInviteItems: () => void;
 } & TemplateAccessSettingsContainer;
 
 const TemplateAccessSettingsPanel = ({
@@ -108,10 +109,12 @@ const TemplateAccessSettingsPanel = ({
   setUsersPanelIsVisible,
   onClosePanels,
   onCloseAccessSettings,
+  inviteItems,
+  setInviteItems,
+  onSetAccessSettings,
 }: TemplateAccessSettingsPanelProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
-  const [inviteItems, setInviteItems] = useState([]);
 
   const [hasErrors, setHasErrors] = useState(false);
 
@@ -140,7 +143,10 @@ const TemplateAccessSettingsPanel = ({
   };
 
   const onClose = useCallback(() => {
-    setInfoPanelIsMobileHidden(false);
+    if (setInfoPanelIsMobileHidden) {
+      setInfoPanelIsMobileHidden(false);
+    }
+
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
 
@@ -170,32 +176,6 @@ const TemplateAccessSettingsPanel = ({
     [onClose],
   );
 
-  const getTemplateMembers = async () => {
-    if (isLoading) return;
-
-    setIsLoading(true);
-    try {
-      const templateMembersData = await getRoomMembers(templateId, {});
-
-      if (templateMembersData?.items?.length) {
-        const convertedItems = templateMembersData.items.map(
-          ({ access, isOwner, sharedTo }) => {
-            return { access, isOwner, ...sharedTo };
-          },
-        );
-        setInviteItems(convertedItems);
-      }
-    } catch (error) {
-      toastr.error(error as Error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getTemplateMembers();
-  }, []);
-
   useEffect(() => {
     onCheckHeight();
     window.addEventListener("resize", onCheckHeight);
@@ -218,6 +198,12 @@ const TemplateAccessSettingsPanel = ({
   });
 
   const onSubmit = () => {
+    if (isContainer) {
+      onSetAccessSettings();
+      // onClose();
+      return;
+    }
+
     setIsLoading(true);
 
     const invitations = inviteItems
@@ -385,7 +371,7 @@ const TemplateAccessSettingsPanel = ({
           scale
           size={ButtonSize.normal}
           isDisabled={isLoading}
-          onClick={onCloseUsersPanel}
+          onClick={onCloseAccessSettings}
           label={t("Common:CancelButton")}
         />
       </StyledTemplateAccessSettingsFooter>
@@ -518,14 +504,14 @@ export default inject(
     const { selection, bufferSelection } = filesStore;
     const { onCreateRoomFromTemplate } = filesActionsStore;
     const {
-      templateAccessSettingsVisible,
-      setTemplateAccessSettingsVisible,
+      // templateAccessSettingsVisible,
+      // setTemplateAccessSettingsVisible,
       templateEventVisible,
     } = dialogsStore;
 
     return {
-      visible: templateAccessSettingsVisible,
-      setIsVisible: setTemplateAccessSettingsVisible,
+      // visible: templateAccessSettingsVisible,
+      // setIsVisible: setTemplateAccessSettingsVisible,
       setInfoPanelIsMobileHidden,
       templateItem: selection.length ? selection[0] : bufferSelection,
       onCreateRoomFromTemplate,

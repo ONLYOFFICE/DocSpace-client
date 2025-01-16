@@ -34,7 +34,11 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
-import { createTemplate } from "@docspace/shared/api/rooms";
+import {
+  createTemplate,
+  getCreateTemplateProgress,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -349,8 +353,9 @@ class CreateEditRoomStore {
     console.log(
       `item: ${item} roomParams: ${roomParams} openCreatedTemplate: ${openCreatedTemplate}`,
     );
+    this.filesStore.setRoomCreated(true);
 
-    const { title, icon, tags } = roomParams; // share // roomOwner???
+    const { title, icon, tags, invitations, roomType } = roomParams;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
@@ -367,7 +372,47 @@ class CreateEditRoomStore {
         roomData.logo = roomLogo;
       }
 
-      createTemplate(roomData);
+      let isFinished = false;
+      let progressData;
+
+      const room = createTemplate(roomData);
+      progressData = room;
+
+      while (!isFinished) {
+        progressData = await this.getProgress(getCreateTemplateProgress);
+        isFinished = progressData.isCompleted;
+
+        // if (res?.progress) {
+        //   setSecondaryProgressBarData({
+        //     icon: pbData.icon,
+        //     visible: true,
+        //     percent: res.progress,
+        //     label: "",
+        //     alert: false,
+        //     operationId: pbData.operationId,
+        //     filesCount: pbData.filesCount,
+        //   });
+        // }
+      }
+
+      console.log("progressData", progressData);
+
+      if (!progressData) return;
+
+      await updateRoomMemberRole(progressData.templateId, {
+        invitations,
+        notify: false,
+        sharingMessage: "",
+      });
+
+      if (openCreatedTemplate) {
+        this.onOpenNewRoom({
+          id: progressData.templateId,
+          title,
+          roomType,
+          rootFolderType: FolderType.RoomTemplates,
+        });
+      }
     } catch (error) {
       toastr.error(error);
     }
@@ -511,11 +556,11 @@ class CreateEditRoomStore {
     }
   };
 
-  getCreateTemplateRoomProgress = () => {
+  getProgress = (request) => {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
         try {
-          await api.rooms.getCreateRoomFromTemplateProgress().then((res) => {
+          await request().then((res) => {
             resolve(res);
           });
         } catch (error) {
@@ -543,15 +588,17 @@ class CreateEditRoomStore {
     progressData = room;
 
     while (!isFinished) {
-      progressData = await this.getCreateTemplateRoomProgress();
+      progressData = await this.getProgress(
+        api.rooms.getCreateRoomFromTemplateProgress,
+      );
       console.log("progressData", progressData);
 
       isFinished = progressData.isCompleted;
-      // if (res?.percentage) {
+      // if (res?.progress) {
       //   setSecondaryProgressBarData({
       //     icon: pbData.icon,
       //     visible: true,
-      //     percent: res.percentage,
+      //     percent: res.progress,
       //     label: "",
       //     alert: false,
       //     operationId: pbData.operationId,

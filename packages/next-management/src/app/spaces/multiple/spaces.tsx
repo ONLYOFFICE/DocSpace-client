@@ -36,7 +36,12 @@ export const Spaces = ({ portals, tenantAlias }: IProps) => {
   return (
     <StyledRowContainer useReactWindow={false}>
       {portals.map((item) => (
-        <SpacesRow key={item.tenantId} item={item} tenantAlias={tenantAlias} />
+        <SpacesRow
+          key={item.tenantId}
+          item={item}
+          tenantAlias={tenantAlias}
+          portals={portals}
+        />
       ))}
     </StyledRowContainer>
   );

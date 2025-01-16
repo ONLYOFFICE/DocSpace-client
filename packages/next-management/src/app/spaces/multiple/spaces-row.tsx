@@ -39,13 +39,14 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { useStores } from "@/hooks/useStores";
 import { RowContent } from "./row-content";
 import { StyledSpaceRow } from "./multiple.styled";
 
-export const SpacesRow = ({ item, tenantAlias }) => {
-  const { t } = useTranslation(["Common", "Files"]);
+export const SpacesRow = ({ item, tenantAlias, portals }) => {
+  const { t } = useTranslation(["Common", "Management"]);
   const router = useRouter();
   const { spacesStore } = useStores();
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
@@ -59,6 +60,9 @@ export const SpacesRow = ({ item, tenantAlias }) => {
   const protocol = window?.location?.protocol;
 
   const onDelete = () => {
+    if (portals.length === 1) {
+      return toastr.error(t("Management:DeleteWarning"));
+    }
     setCurrentPortal(item);
     setDeletePortalDialogVisible(true);
   };

@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
-import { useSpring } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
 import { isDesktop } from "react-device-detect";
 
+import classNames from "classnames";
 import MainPanelProps from "./MainPanel.props";
-import { Content, Wrapper } from "./MainPanel.styled";
+import styles from "./MainPanel.module.scss";
 
 const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
   ({ isLoading, isFistImage, isLastImage, src, onNext, onPrev }, ref) => {
@@ -94,9 +95,20 @@ const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
     );
 
     return (
-      <Wrapper ref={wrapperRef} style={style}>
-        <Content id="mainPanel" ref={ref} isLoading={isLoading} />
-      </Wrapper>
+      <animated.section
+        ref={wrapperRef}
+        style={style}
+        className={classNames(styles.wrapper, {
+          [styles.isDesktop]: isDesktop,
+        })}
+      >
+        <div
+          id="mainPanel"
+          ref={ref}
+          className={styles.content}
+          data-loading={isLoading}
+        />
+      </animated.section>
     );
   },
 );

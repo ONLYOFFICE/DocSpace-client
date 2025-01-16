@@ -24,17 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { animated } from "@react-spring/web";
-import { isDesktop } from "react-device-detect";
+@import "../../../../../../styles/mixins";
+@import "../../../../../../styles/variables/devices";
+@import "../../../../../../styles/variables/colors";
 
-export const Wrapper = styled(animated.section)`
+:root {
+  --main-panel-margin-top-desktop: 85px;
+  --main-panel-margin-top-mobile: 66px;
+}
+
+.wrapper {
   width: 100%;
-  height: ${`calc(100vh - ${isDesktop ? "85" : "66"}px)`};
-  margin-top: ${isDesktop ? "85px" : "66px"};
+  height: calc(100vh - var(--main-panel-margin-top-mobile));
+  margin-top: var(--main-panel-margin-top-mobile);
   touch-action: none;
-`;
 
-export const Content = styled.div<{ isLoading: boolean }>`
-  visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-`;
+  &.isDesktop {
+    height: calc(100vh - var(--main-panel-margin-top-desktop));
+    margin-top: var(--main-panel-margin-top-desktop);
+  }
+}
+
+.content {
+  &[data-loading="true"] {
+    visibility: hidden;
+  }
+
+  &[data-loading="false"] {
+    visibility: visible;
+  }
+}

@@ -26,14 +26,14 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledGroupMemberLoader, StyledGroupsLoader } from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 
 const GroupsLoader = () => {
   return (
-    <StyledGroupsLoader>
+    <div className={styles.groupsLoader} data-testid="groups-loader">
       {[...Array(5).keys()].map((i) => (
-        <StyledGroupMemberLoader key={i}>
+        <div key={i} className={styles.groupMemberLoader}>
           <RectangleSkeleton
             className="avatar"
             width="32px"
@@ -49,9 +49,9 @@ const GroupsLoader = () => {
               borderRadius="3px"
             />
           </div>
-        </StyledGroupMemberLoader>
+        </div>
       ))}
-    </StyledGroupsLoader>
+    </div>
   );
 };
 

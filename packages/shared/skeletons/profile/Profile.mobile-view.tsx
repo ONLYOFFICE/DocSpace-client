@@ -28,7 +28,7 @@ import React from "react";
 import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
 import { CircleSkeleton } from "../circle";
 
-import { MobileView } from "./Profile.styled";
+import styles from "./Profile.module.scss";
 
 const MobileViewLoader = (props: RectangleSkeletonProps) => {
   const {
@@ -43,7 +43,7 @@ const MobileViewLoader = (props: RectangleSkeletonProps) => {
   } = props;
 
   return (
-    <MobileView>
+    <div className={styles.mobileView}>
       <CircleSkeleton
         className="avatar"
         title={title}
@@ -262,7 +262,7 @@ const MobileViewLoader = (props: RectangleSkeletonProps) => {
           </div>
         </div>
       </div>
-    </MobileView>
+    </div>
   );
 };
 

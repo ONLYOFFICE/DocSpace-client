@@ -87,13 +87,13 @@ const StatisticsComponent = (props) => {
       </Text>
       {usersList}
 
-      {peopleListLength > 5 && (
+      {peopleListLength > 5 ? (
         <Button
           {...buttonProps}
           label={t("Common:ShowMore")}
           onClick={onClickUsers}
         />
-      )}
+      ) : null}
     </StyledStatistics>
   );
 };

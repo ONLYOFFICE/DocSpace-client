@@ -1,0 +1,77 @@
+@import "../../styles/variables/index.scss";
+@import "../../styles/common-text-styles.scss";
+@import "../../styles/_mixins.scss";
+
+:root {
+  --heading-font-weight: 600;
+  --heading-color: #{$black};
+  --heading-font-size-xlarge: 27px;
+  --heading-font-size-large: 23px;
+  --heading-font-size-medium: 21px;
+  --heading-font-size-small: 19px;
+  --heading-font-size-xsmall: 15px;
+
+  &[data-theme="dark"] {
+    --heading-color: #{$white};
+  }
+}
+
+.heading {
+  @include common-text-styles;
+
+  font-weight: var(--heading-font-weight);
+  color: var(--heading-color);
+  margin: 0;
+
+  &.small {
+    font-size: var(--heading-font-size-small);
+  }
+
+  &.medium {
+    font-size: var(--heading-font-size-medium);
+  }
+
+  &.large {
+    font-size: var(--heading-font-size-large);
+  }
+
+  &.xlarge {
+    font-size: var(--heading-font-size-xlarge);
+  }
+
+  &.xsmall {
+    font-size: var(--heading-font-size-xsmall);
+  }
+
+  &.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.inline {
+    display: inline;
+  }
+
+  &.content {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+
+  &.menu {
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+
+  &.header {
+    font-size: 28px;
+    font-weight: var(--heading-font-weight);
+    line-height: 50px;
+  }
+
+  &.not-selectable {
+    @include no-user-select;
+  }
+}

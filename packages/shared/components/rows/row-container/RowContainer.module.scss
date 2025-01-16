@@ -1,0 +1,13 @@
+.container {
+  user-select: none;
+  position: relative;
+  height: auto;
+
+  &.useReactWindow {
+    height: 100%;
+
+    &.manualHeight {
+      height: var(--manual-height);
+    }
+  }
+}

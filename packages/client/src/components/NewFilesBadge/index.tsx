@@ -394,14 +394,14 @@ const NewFilesBadge = ({
         onMouseLeave={onMouseLeave}
         isMutedBadge={mute}
       />
-      {showPanel && (
+      {showPanel ? (
         <NewFilesPanel
           position={panelPosition}
           folderId={folderId}
           isRoom={isRoom}
           onClose={onPanelHide}
         />
-      )}
+      ) : null}
     </>
   );
 };

@@ -224,7 +224,7 @@ const Badges = ({
         />
       )} */}
 
-      {hasDraft && (
+      {hasDraft ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover
@@ -240,9 +240,9 @@ const Badges = ({
             onClick={onDraftClick}
           />
         </BadgeWrapper>
-      )}
+      ) : null}
 
-      {isEditing && !(isRecentTab && !canEditing) && (
+      {isEditing && !(isRecentTab && !canEditing) ? (
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}
@@ -253,21 +253,21 @@ const Badges = ({
           hoverColor={theme.filesBadges.hoverIconColor}
           title={t("Common:EditButton")}
         />
-      )}
+      ) : null}
       {item.viewAccessibility?.MustConvert &&
-        item.security?.Convert &&
-        !isTrashFolder &&
-        !isArchiveFolderRoot && (
-          <ColorTheme
-            themeId={ThemeId.IconButton}
-            onClick={setConvertDialogVisible}
-            iconName={iconRefresh}
-            className="badge tablet-badge icons-group can-convert"
-            size={sizeBadge}
-            hoverColor={theme.filesBadges.hoverIconColor}
-          />
-        )}
-      {version > 1 && (
+      item.security?.Convert &&
+      !isTrashFolder &&
+      !isArchiveFolderRoot ? (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          onClick={setConvertDialogVisible}
+          iconName={iconRefresh}
+          className="badge tablet-badge icons-group can-convert"
+          size={sizeBadge}
+          hoverColor={theme.filesBadges.hoverIconColor}
+        />
+      ) : null}
+      {version > 1 ? (
         <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
           <Badge
             {...versionBadgeProps}
@@ -280,8 +280,8 @@ const Badges = ({
             title={t("ShowVersionHistory")}
           />
         </BadgeWrapper>
-      )}
-      {showNew && (
+      ) : null}
+      {showNew ? (
         <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
           <Badge
             {...commonBadgeProps}
@@ -290,7 +290,7 @@ const Badges = ({
             onClick={onBadgeClick}
           />
         </BadgeWrapper>
-      )}
+      ) : null}
       {/* {isForm  && (
         <BadgeWrapper isTile={isTile}>
           <HelpButton
@@ -309,7 +309,7 @@ const Badges = ({
         room__badges: isRoom,
       })}
     >
-      {showCopyLinkIcon && (
+      {showCopyLinkIcon ? (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
@@ -318,9 +318,9 @@ const Badges = ({
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
         />
-      )}
+      ) : null}
 
-      {showCopyLinkIcon && (
+      {showCopyLinkIcon ? (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
@@ -329,9 +329,9 @@ const Badges = ({
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
         />
-      )}
+      ) : null}
 
-      {isRoom && mute && (
+      {isRoom && mute ? (
         <ColorTheme
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
@@ -340,8 +340,8 @@ const Badges = ({
           className="badge  is-mute tablet-badge"
           {...unmuteIconProps}
         />
-      )}
-      {isRoom && pinned && (
+      ) : null}
+      {isRoom && pinned ? (
         <ColorTheme
           themeId={ThemeId.IconButtonPin}
           onClick={onUnpinClick}
@@ -350,8 +350,8 @@ const Badges = ({
           size={sizeBadge}
           {...unpinIconProps}
         />
-      )}
-      {showNew && (
+      ) : null}
+      {showNew ? (
         <NewFilesBadge
           className="tablet-badge"
           newFilesCount={newItems}
@@ -359,7 +359,7 @@ const Badges = ({
           mute={mute}
           isRoom={isRoom}
         />
-      )}
+      ) : null}
     </div>
   );
 };

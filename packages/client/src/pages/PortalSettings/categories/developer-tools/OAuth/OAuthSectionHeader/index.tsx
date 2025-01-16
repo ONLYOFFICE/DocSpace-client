@@ -27,7 +27,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
@@ -52,7 +52,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
   return (
     <StyledContainer>
       <HeaderContainer>
-        <Headline type="content" truncate>
+        <Heading type="content" truncate>
           <div className="settings-section_header">
             <IconButton
               iconName={ArrowPathReactSvgUrl}
@@ -64,7 +64,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
 
             {isEdit ? t("EditApp") : t("NewApp")}
           </div>
-        </Headline>
+        </Heading>
       </HeaderContainer>
     </StyledContainer>
   );

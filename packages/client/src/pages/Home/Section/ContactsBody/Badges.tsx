@@ -118,7 +118,7 @@ const Badges = ({
       className="badges additional-badges"
       infoPanelVisible={infoPanelVisible}
     >
-      {isLDAP && (
+      {isLDAP ? (
         <Badge
           className="accounts-badge"
           label={t("Common:LDAP")}
@@ -134,8 +134,8 @@ const Badges = ({
           lineHeight="13px"
           onClick={onLDAPClick}
         />
-      )}
-      {isSSO && (
+      ) : null}
+      {isSSO ? (
         <Badge
           className="accounts-badge"
           label={t("SSO")}
@@ -151,8 +151,8 @@ const Badges = ({
           lineHeight="13px"
           onClick={onSSOClick}
         />
-      )}
-      {!withoutPaid && isPaid && (
+      ) : null}
+      {!withoutPaid && isPaid ? (
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
@@ -169,19 +169,19 @@ const Badges = ({
           isPaidBadge
           maxWidth="65px"
         />
-      )}
-      {statusType === "pending" && (
+      ) : null}
+      {statusType === "pending" ? (
         <StyledSendClockIcon
           className="pending-badge accounts-badge"
           size={IconSizeType.small}
         />
-      )}
-      {statusType === "disabled" && (
+      ) : null}
+      {statusType === "disabled" ? (
         <StyledCatalogSpamIcon
           className="disabled-badge accounts-badge"
           size={IconSizeType.small}
         />
-      )}
+      ) : null}
     </StyledBadgesContainer>
   );
 };

@@ -54,16 +54,19 @@ export function getCookie(name: string) {
 export function setCookie(
   name: string,
   value: string,
-  options: { [key: string]: unknown } = {},
+  optionsParam: { [key: string]: unknown } = {},
   disableEncoding = false,
 ) {
-  options = {
+  let options: { [key: string]: unknown } = {
     path: "/",
-    ...options,
+    ...optionsParam,
   };
 
   if (options.expires instanceof Date) {
-    options.expires = options.expires.toUTCString();
+    options = {
+      ...options,
+      expires: options.expires.toUTCString(),
+    };
   }
 
   let updatedCookie = disableEncoding

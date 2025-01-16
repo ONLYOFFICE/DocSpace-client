@@ -175,9 +175,9 @@ const HeaderComponent = ({
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {currentProductId !== "home" && !isFormGallery && (
+        {currentProductId !== "home" && !isFormGallery ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
-        )}
+        ) : null}
         {customHeader ? (
           { customHeader }
         ) : (

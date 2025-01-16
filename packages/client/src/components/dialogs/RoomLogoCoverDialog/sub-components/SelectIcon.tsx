@@ -154,25 +154,26 @@ export const SelectIcon = ({
       </div>
 
       <div className="cover-icon-container">
-        {covers &&
-          covers?.map((icon) => {
-            function createMarkup() {
-              return { __html: icon.data };
-            }
-            return (
-              <StyledIconContainer
-                isSelected={coverId === icon.id && !withoutIcon}
-                $currentColorScheme={$currentColorScheme}
-                onClick={
-                  coverId === icon.id
-                    ? toggleWithoutIcon
-                    : () => onSelectIcon(icon)
-                }
-                key={icon.id}
-                dangerouslySetInnerHTML={createMarkup()}
-              />
-            );
-          })}
+        {covers
+          ? covers?.map((icon) => {
+              function createMarkup() {
+                return { __html: icon.data };
+              }
+              return (
+                <StyledIconContainer
+                  isSelected={coverId === icon.id ? !withoutIcon : null}
+                  $currentColorScheme={$currentColorScheme}
+                  onClick={
+                    coverId === icon.id
+                      ? toggleWithoutIcon
+                      : () => onSelectIcon(icon)
+                  }
+                  key={icon.id}
+                  dangerouslySetInnerHTML={createMarkup()}
+                />
+              );
+            })
+          : null}
       </div>
     </div>
   );

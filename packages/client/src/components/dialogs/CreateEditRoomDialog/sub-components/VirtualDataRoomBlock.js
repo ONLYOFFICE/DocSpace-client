@@ -62,9 +62,9 @@ const Block = ({
       >
         {bodyText}
       </Text>
-      {isChecked && (
+      {isChecked ? (
         <div className="virtual-data-room-block_content">{children}</div>
-      )}
+      ) : null}
     </div>
   );
 };

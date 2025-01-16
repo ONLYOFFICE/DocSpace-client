@@ -95,13 +95,13 @@ const ButtonContainer = ({
         showReminder={null}
         getTopComponent={getTopComponent}
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={onResetClick}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </Box>
   );
 };

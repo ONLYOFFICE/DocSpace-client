@@ -108,7 +108,7 @@ class SelectelSettings extends React.Component {
           tabIndex={2}
         />
 
-        {isNeedFilePath && (
+        {isNeedFilePath ? (
           <TextInput
             id="file-path-input"
             name={filePath}
@@ -121,7 +121,7 @@ class SelectelSettings extends React.Component {
             tabIndex={3}
             hasError={isError[filePath]}
           />
-        )}
+        ) : null}
       </>
     );
   }

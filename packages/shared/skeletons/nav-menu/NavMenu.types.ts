@@ -26,6 +26,6 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface NavMenuHeaderLoaderProps extends RectangleSkeletonProps {
+export type NavMenuHeaderLoaderProps = RectangleSkeletonProps & {
   id?: string;
-}
+};

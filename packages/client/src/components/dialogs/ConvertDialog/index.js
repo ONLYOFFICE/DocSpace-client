@@ -177,7 +177,7 @@ const ConvertDialogComponent = (props) => {
             : t("ConversionMessage")}
         </Text>
 
-        {isXML && (
+        {isXML ? (
           <Box paddingProp="16px 0 0">
             <Text>{t("SelectFileType")}</Text>
             <RadioButtonGroup
@@ -190,7 +190,7 @@ const ConvertDialogComponent = (props) => {
               style={{ marginTop: "12px" }}
             />
           </Box>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <StyledFooterContent className="convert_dialog_footer">
@@ -201,7 +201,7 @@ const ConvertDialogComponent = (props) => {
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
             />
-            {convertSingleFile && sortedFolder && (
+            {convertSingleFile && sortedFolder ? (
               <div
                 className={`convert_dialog_file-destination ${
                   storeOriginalFiles ? "file-destination_visible" : ""
@@ -216,15 +216,15 @@ const ConvertDialogComponent = (props) => {
                   {{ folderTitle: rootFolderTitle }} folder
                 </Trans>
               </div>
-            )}
-            {!convertSingleFile && (
+            ) : null}
+            {!convertSingleFile ? (
               <Checkbox
                 className="convert_dialog_checkbox"
                 label={t("HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
               />
-            )}
+            ) : null}
           </div>
           <div className="convert_dialog_buttons">
             <Button

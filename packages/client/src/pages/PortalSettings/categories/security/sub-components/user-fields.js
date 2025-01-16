@@ -150,7 +150,7 @@ const UserFields = (props) => {
                   onChange={(e) => onChangeInput(e, index)}
                   onBlur={() => onBlur(index)}
                   onFocus={() => onFocus(index)}
-                  hasError={errors[index] && error}
+                  hasError={errors[index] ? error : null}
                 />
                 <StyledTrashIcon
                   className={`${classNameAdditional}-delete-icon`}

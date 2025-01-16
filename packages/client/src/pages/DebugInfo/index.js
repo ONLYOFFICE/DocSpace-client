@@ -123,9 +123,9 @@ const DebugInfoDialog = (props) => {
             <span className="version">{VERSION /* eslint-disable-line */}</span>
           </Text>
           <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
-          {user && (
+          {user ? (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
-          )}
+          ) : null}
           <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
         </StyledBodyContent>
       </ModalDialog.Body>
@@ -137,8 +137,8 @@ const DebugInfoDialog = (props) => {
             heightProp="362px"
           >
             <Scrollbar>
-              {!debugInfoData && <Loader size="20px" type="track" />}
-              {debugInfoData && (
+              {!debugInfoData ? <Loader size="20px" type="track" /> : null}
+              {debugInfoData ? (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
@@ -147,7 +147,7 @@ const DebugInfoDialog = (props) => {
                 >
                   {debugInfoData}
                 </ReactMarkdown>
-              )}
+              ) : null}
             </Scrollbar>
           </Box>
         </StyledFooterContent>

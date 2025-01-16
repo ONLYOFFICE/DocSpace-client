@@ -27,8 +27,8 @@
 import { useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { size } from "@docspace/shared/utils";
+import { DeviceType } from "../enums";
+import { size } from "../utils";
 
 interface IProps {
   redirectUrl: string;

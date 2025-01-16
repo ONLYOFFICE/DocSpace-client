@@ -28,7 +28,7 @@ import React from "react";
 
 import { InputSize } from "components/text-input";
 
-export interface SearchInputProps {
+export type SearchInputProps = {
   /** Used as HTML `id` property */
   id?: string;
   /** Forwarded ref */
@@ -64,4 +64,4 @@ export interface SearchInputProps {
   style?: React.CSSProperties;
   /** The callback function that is called when the field is focused  */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-}
+};

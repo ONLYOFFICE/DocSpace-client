@@ -103,13 +103,13 @@ const ConsumerItem = ({
           isLinkedIn={consumer.name === "linkedin"}
           isThirdPartyAvailable={isThirdPartyAvailable}
         >
-          {logo && (
+          {logo ? (
             <ReactSVG
               src={logo}
               className="consumer-icon"
               alt={consumer.name}
             />
-          )}
+          ) : null}
         </StyledBox>
         <Box onClick={setConsumer} data-consumer={consumer.name}>
           <ConsumerToggle

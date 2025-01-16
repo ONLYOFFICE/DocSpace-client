@@ -180,7 +180,7 @@ const ActiveSessions = ({
 
       <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 
-      {logoutDialogVisible && (
+      {logoutDialogVisible ? (
         <LogoutSessionDialog
           t={t}
           visible={logoutDialogVisible}
@@ -189,9 +189,9 @@ const ActiveSessions = ({
           onClose={() => setLogoutDialogVisible(false)}
           onRemoveSession={onClickRemoveSession}
         />
-      )}
+      ) : null}
 
-      {logoutAllDialogVisible && (
+      {logoutAllDialogVisible ? (
         <LogoutAllSessionDialog
           t={t}
           visible={logoutAllDialogVisible}
@@ -200,7 +200,7 @@ const ActiveSessions = ({
           onRemoveAllSessions={onClickRemoveAllSessions}
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

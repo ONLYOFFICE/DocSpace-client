@@ -39,7 +39,7 @@ import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
@@ -159,7 +159,7 @@ const Item = ({
       data-title={item.title}
       value={value}
       onDrop={onDrop}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       className="document-catalog"
@@ -178,7 +178,7 @@ const Item = ({
         onDrop={onMoveTo}
         isEndOfBlock={isLastItem}
         isDragging={isDragging}
-        isDragActive={isDragActive && isDragging}
+        isDragActive={isDragActive ? isDragging : null}
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}

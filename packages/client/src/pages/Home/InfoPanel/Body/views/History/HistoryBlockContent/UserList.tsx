@@ -84,7 +84,9 @@ const HistoryUserList = ({
             key={user.id}
             className="StyledHistoryLink"
             style={
-              withWrapping && { display: "inline", wordBreak: "break-all" }
+              withWrapping
+                ? { display: "inline", wordBreak: "break-all" }
+                : null
             }
           >
             {isVisitor || isCollaborator ? (
@@ -95,20 +97,22 @@ const HistoryUserList = ({
               <Link
                 className="text link"
                 onClick={() => openUser!(user, navigate)}
-                style={withWrapping && { display: "inline", textWrap: "wrap" }}
+                style={
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
+                }
                 title={userName}
               >
                 {userName}
               </Link>
             )}
 
-            {withComma && ","}
-            {feed.related.length > 0 && <div className="space" />}
+            {withComma ? "," : null}
+            {feed.related.length > 0 ? <div className="space" /> : null}
           </StyledHistoryLink>
         );
       })}
 
-      {!isExpanded && (
+      {!isExpanded ? (
         <StyledHistoryBlockExpandLink
           className="user-list-expand-link"
           onClick={onExpand}
@@ -121,7 +125,7 @@ const HistoryUserList = ({
             components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
-      )}
+      ) : null}
     </>
   );
 };

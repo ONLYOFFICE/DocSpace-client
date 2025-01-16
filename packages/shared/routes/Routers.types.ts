@@ -33,15 +33,7 @@ import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore
 
 export interface PrivateRouteProps
   extends PropsWithChildren,
-    Pick<
-      AuthStore,
-      | "isAuthenticated"
-      | "isLoaded"
-      | "isAdmin"
-      | "isLogout"
-      | "isCommunity"
-      | "isEnterprise"
-    >,
+    Pick<AuthStore, "isAuthenticated" | "isLoaded" | "isAdmin" | "isLogout">,
     Pick<
       SettingsStore,
       | "wizardCompleted"
@@ -58,6 +50,8 @@ export interface PrivateRouteProps
   withManager?: boolean;
   withCollaborator?: boolean;
   identityServerEnabled?: boolean;
+  isCommunity?: boolean;
+  isEnterprise?: boolean;
 }
 
 export interface PublicRouteProps

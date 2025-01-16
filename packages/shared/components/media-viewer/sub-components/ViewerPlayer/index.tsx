@@ -41,7 +41,7 @@ import React, {
   useState,
 } from "react";
 
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
+import { includesMethod } from "../../../../utils/typeGuards";
 
 import type { Point } from "../../MediaViewer.types";
 import { KeyboardEventKeys } from "../../MediaViewer.enums";
@@ -161,8 +161,9 @@ export const ViewerPlayer = ({
       onDrag: ({ offset: [dx, dy], movement: [mdx, mdy], memo, first }) => {
         if (isDesktop) return;
 
+        let memoLet = memo;
         if (first) {
-          memo = style.y.get();
+          memoLet = style.y.get();
         }
 
         api.start({
@@ -170,12 +171,12 @@ export const ViewerPlayer = ({
             (isFistImage && mdx > 0) || (isLastImage && mdx < 0) || isFullScreen
               ? style.x.get()
               : dx,
-          y: dy >= memo ? dy : style.y.get(),
+          y: dy >= memoLet ? dy : style.y.get(),
           opacity: mdy > 0 ? Math.max(1 - mdy / 120, 0) : style.opacity.get(),
           immediate: true,
         });
 
-        return memo;
+        return memoLet;
       },
       onDragEnd: ({ movement: [mdx, mdy] }) => {
         if (isDesktop) return;
@@ -633,7 +634,7 @@ export const ViewerPlayer = ({
 
   return (
     <>
-      {isMobile && panelVisible && mobileDetails}
+      {isMobile && panelVisible ? mobileDetails : null}
       <ContainerPlayer ref={containerRef} $isFullScreen={isFullScreen}>
         <VideoWrapper
           $visible={!isLoading}
@@ -663,17 +664,17 @@ export const ViewerPlayer = ({
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}
-            visible={!isPlaying && isVideo && !isError}
+            visible={!isPlaying && isVideo ? !isError : false}
           />
-          {isAudio && !isError && (
+          {isAudio && !isError ? (
             <div className="audio-container">
               <img src={audioIcon} alt="" />
             </div>
-          )}
+          ) : null}
           <ViewerLoader
             isError={isError}
             onClick={handleClickVideo}
-            withBackground={isWaiting && isPlaying}
+            withBackground={isWaiting ? isPlaying : false}
             isLoading={isLoading || (isWaiting && isPlaying)}
           />
         </VideoWrapper>
@@ -688,7 +689,7 @@ export const ViewerPlayer = ({
         />
       ) : (
         <StyledPlayerControls
-          $isShow={panelVisible && !isLoading}
+          $isShow={panelVisible ? !isLoading : false}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onClick={handleClickVideo}
@@ -710,14 +711,14 @@ export const ViewerPlayer = ({
               >
                 <PlayerPlayButton isPlaying={isPlaying} onClick={togglePlay} />
                 <PlayerDuration currentTime={currentTime} duration={duration} />
-                {!isMobile && (
+                {!isMobile ? (
                   <PlayerVolumeControl
                     volume={volume}
                     isMuted={isMuted}
                     onChange={handleVolumeChange}
                     toggleVolumeMute={toggleVolumeMute}
                   />
-                )}
+                ) : null}
               </div>
               <div
                 className="player_right-control"
@@ -734,7 +735,7 @@ export const ViewerPlayer = ({
                   isFullScreen={isFullScreen}
                   onClick={toggleVideoFullscreen}
                 />
-                {isDesktop && (
+                {isDesktop ? (
                   <PlayerDesktopContextMenu
                     canDownload={canDownload}
                     isPreviewFile={isPreviewFile}
@@ -742,7 +743,7 @@ export const ViewerPlayer = ({
                     onDownloadClick={onDownloadClick}
                     generateContextMenu={generateContextMenu}
                   />
-                )}
+                ) : null}
               </div>
             </ControlContainer>
           </PlayerControlsWrapper>

@@ -27,11 +27,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
+import { Text } from "../text";
 import { Checkbox } from "../checkbox";
 import { ComboBox, TOption } from "../combobox";
 import { IconButton } from "../icon-button";
@@ -98,7 +98,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
         />
       )}
 
-      {withComboBox && (
+      {withComboBox ? (
         <ComboBox
           id="menu-combobox"
           comboIcon={TriangleNavigationDownReactSvgUrl}
@@ -113,7 +113,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           isMobileView={isMobileView}
           onSelect={() => {}}
         />
-      )}
+      ) : null}
       <div className="table-container_group-menu-separator" />
       <StyledScrollbar>
         {headerMenu.map((item) => (
@@ -124,7 +124,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           />
         ))}
       </StyledScrollbar>
-      {isCloseable && (
+      {isCloseable ? (
         <div className="table-header_icon">
           <IconButton
             className="table-header_icon-button"
@@ -134,8 +134,8 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             isFill
           />
         </div>
-      )}
-      {!withoutInfoPanelToggler && (
+      ) : null}
+      {!withoutInfoPanelToggler ? (
         <StyledInfoPanelToggleColorThemeWrapper
           themeId={ThemeId.InfoPanelToggle}
           isInfoPanelVisible={isInfoPanelVisible}
@@ -152,7 +152,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             />
           </div>
         </StyledInfoPanelToggleColorThemeWrapper>
-      )}
+      ) : null}
     </StyledTableGroupMenu>
   );
 };

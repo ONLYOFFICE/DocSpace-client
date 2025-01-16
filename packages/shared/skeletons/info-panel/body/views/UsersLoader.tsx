@@ -26,22 +26,18 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import {
-  StyledUsersLoader,
-  StyledProperty,
-  StyledSubtitleLoader,
-} from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 import { propertyDimensions } from "../body.constant";
 
 const AccountsLoader = () => {
   return (
-    <StyledUsersLoader>
-      <StyledSubtitleLoader>
+    <div className={styles.usersLoader} data-testid="users-loader">
+      <div className={styles.subtitleLoader}>
         <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledSubtitleLoader>
+      </div>
 
-      <StyledProperty>
+      <div className={styles.property}>
         {propertyDimensions.map((property) => [
           <RectangleSkeleton
             key={property.titleKey}
@@ -58,8 +54,8 @@ const AccountsLoader = () => {
             borderRadius="3px"
           />,
         ])}
-      </StyledProperty>
-    </StyledUsersLoader>
+      </div>
+    </div>
   );
 };
 

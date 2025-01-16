@@ -172,7 +172,7 @@ const SubmitToFormGallery = ({
           </Trans>
         </div>
 
-        {formItem && (
+        {formItem ? (
           <Styled.FormItem>
             <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
             <div className="item-title">
@@ -192,7 +192,7 @@ const SubmitToFormGallery = ({
               )}
             </div>
           </Styled.FormItem>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         {!formItem ? (

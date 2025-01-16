@@ -141,14 +141,14 @@ const InputGroup = ({
                 hasError={isError}
               />
             )}
-            {buttonLabel && (
+            {buttonLabel ? (
               <Button
                 label={buttonLabel}
                 size={ButtonSize.small}
                 onClick={onButtonClickAction}
                 isDisabled={isRequestRunning}
               />
-            )}
+            ) : null}
           </>
         )}
       </FieldContainer>

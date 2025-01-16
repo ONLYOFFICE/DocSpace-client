@@ -263,7 +263,7 @@ const TrustedMail = (props) => {
         onClick={onSelectDomainType}
       />
 
-      {type === "1" && (
+      {type === "1" ? (
         <UserFields
           inputs={domains}
           buttonLabel={t("AddTrustedDomain")}
@@ -273,7 +273,7 @@ const TrustedMail = (props) => {
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
         />
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

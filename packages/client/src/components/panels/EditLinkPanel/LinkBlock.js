@@ -54,7 +54,7 @@ const LinkBlock = (props) => {
         isDisabled={isLoading}
       />
 
-      {isEdit && (
+      {isEdit ? (
         <TextInput
           scale
           size="base"
@@ -65,7 +65,7 @@ const LinkBlock = (props) => {
           value={linkValue}
           placeholder={t("LinkName")}
         />
-      )}
+      ) : null}
     </div>
   );
 };

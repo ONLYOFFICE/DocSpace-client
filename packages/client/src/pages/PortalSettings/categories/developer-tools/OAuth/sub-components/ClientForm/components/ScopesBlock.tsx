@@ -146,7 +146,7 @@ const ScopesBlock = ({
               {t(`Common:${name}`)}
             </Text>
 
-            {value.read?.name && (
+            {value.read?.name ? (
               <Text
                 className="scope-desc"
                 fontSize="12px"
@@ -164,8 +164,8 @@ const ScopesBlock = ({
                 </Text>{" "}
                 — {t(`Common:${value.read?.tKey}`)}
               </Text>
-            )}
-            {value.write?.name && (
+            ) : null}
+            {value.write?.name ? (
               <Text
                 className="scope-desc"
                 fontSize="12px"
@@ -183,7 +183,7 @@ const ScopesBlock = ({
                 </Text>{" "}
                 — {t(`Common:${value.write?.tKey}`)}
               </Text>
-            )}
+            ) : null}
           </StyledScopesName>
           <StyledScopesCheckbox>
             <Checkbox
@@ -200,7 +200,7 @@ const ScopesBlock = ({
             />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
-            {value.write?.name && (
+            {value.write?.name ? (
               <Checkbox
                 isChecked={isReadDisabled}
                 isDisabled={isEdit || !value.write?.name}
@@ -212,7 +212,7 @@ const ScopesBlock = ({
                   )
                 }
               />
-            )}
+            ) : null}
           </StyledScopesCheckbox>
         </React.Fragment>
       );
@@ -255,7 +255,7 @@ const ScopesBlock = ({
       >
         {t("Write")}
       </Text>
-      {isRequiredError && (
+      {isRequiredError ? (
         <>
           <Text
             className="header-error"
@@ -273,7 +273,7 @@ const ScopesBlock = ({
           <span />
           <span />
         </>
-      )}
+      ) : null}
       {list.map((item) => item)}
     </StyledScopesContainer>
   );

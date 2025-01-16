@@ -133,12 +133,12 @@ const Customization = (props) => {
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
 
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <>
           <StyledSettingsSeparator />
           <PortalRenaming isMobileView={viewMobile} />
         </>
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

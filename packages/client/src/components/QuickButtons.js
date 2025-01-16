@@ -151,9 +151,9 @@ const QuickButtons = (props) => {
 
   return (
     <StyledQuickButtons className="badges additional-badges badges__quickButtons">
-      {!isIndexEditingMode && (
+      {!isIndexEditingMode ? (
         <>
-          {showLifetimeIcon && (
+          {showLifetimeIcon ? (
             <>
               <ColorTheme
                 themeId={ThemeId.IconButton}
@@ -173,9 +173,9 @@ const QuickButtons = (props) => {
                 maxWidth="300px"
               />
             </>
-          )}
+          ) : null}
 
-          {isAvailableLockFile && (
+          {isAvailableLockFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={iconLock}
@@ -189,8 +189,8 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("UnblockVersion")}
             />
-          )}
-          {isAvailableDownloadFile && (
+          ) : null}
+          {isAvailableDownloadFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={FileActionsDownloadReactSvgUrl}
@@ -202,8 +202,8 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Common:Download")}
             />
-          )}
-          {showCopyLinkIcon && (
+          ) : null}
+          {showCopyLinkIcon ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
@@ -215,8 +215,8 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />
-          )}
-          {isAvailableShareFile && (
+          ) : null}
+          {isAvailableShareFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
@@ -230,7 +230,7 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />
-          )}
+          ) : null}
           {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
           themeId={ThemeId.IconButton}
@@ -246,7 +246,7 @@ const QuickButtons = (props) => {
         />
       )} */}
         </>
-      )}
+      ) : null}
     </StyledQuickButtons>
   );
 };

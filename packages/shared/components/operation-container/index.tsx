@@ -30,19 +30,27 @@ import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
 import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
 import { StyledOperationContainer } from "./OperationContainer.styled";
-import { IOperationContainer } from "./OperationContainer.types";
+import { OperationContainerProps } from "./OperationContainer.types";
 import { Text } from "../text";
 import PortalLogo from "../portal-logo/PortalLogo";
 
-const OperationContainer = (props: IOperationContainer) => {
+const OperationContainer = (props: OperationContainerProps) => {
   const { url, authorized, title, description } = props;
 
   const theme = useTheme();
 
-  const logo = theme.isBase ? (
-    <DownloadingReactSvg className="operation-logo" />
+  const logo = theme?.isBase ? (
+    <DownloadingReactSvg
+      className="operation-logo"
+      data-testid="operation-logo"
+      aria-hidden="true"
+    />
   ) : (
-    <DownloadingDarkReactSvg className="operation-logo" />
+    <DownloadingDarkReactSvg
+      className="operation-logo"
+      data-testid="operation-logo"
+      aria-hidden="true"
+    />
   );
 
   useEffect(() => {
@@ -50,8 +58,12 @@ const OperationContainer = (props: IOperationContainer) => {
   }, [url, authorized]);
 
   return (
-    <StyledOperationContainer>
-      <PortalLogo isResizable />
+    <StyledOperationContainer
+      role="main"
+      aria-label={title}
+      data-testid="operation-container"
+    >
+      <PortalLogo isResizable data-testid="portal-logo" />
       {logo}
       <Text className="operation-title" fontWeight={700} fontSize="23px">
         {title}

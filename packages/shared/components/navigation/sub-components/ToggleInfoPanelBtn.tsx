@@ -29,22 +29,22 @@ import React from "react";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ThemeId } from "../../color-theme";
-import { IToggleInfoPanelButtonProps } from "../Navigation.types";
-import { StyledInfoPanelToggleColorThemeWrapper } from "../Navigation.styled";
+
+import styles from "../Navigation.module.scss";
+import { TToggleInfoPanelButtonProps } from "../Navigation.types";
 
 const ToggleInfoPanelButton = ({
-  isRootFolder,
-  isInfoPanelVisible,
   toggleInfoPanel,
   id,
   titles,
-}: IToggleInfoPanelButtonProps) => {
+  isRootFolder,
+  isInfoPanelVisible,
+}: TToggleInfoPanelButtonProps) => {
   return (
-    <StyledInfoPanelToggleColorThemeWrapper
-      isRootFolder={isRootFolder}
-      themeId={ThemeId.InfoPanelToggle}
-      isInfoPanelVisible={isInfoPanelVisible}
+    <div
+      className={styles.infoPanelToggleWrapper}
+      data-visible={isInfoPanelVisible ? "true" : "false"}
+      data-root-folder={isRootFolder ? "true" : "false"}
     >
       <div className="info-panel-toggle-bg">
         <IconButton
@@ -57,7 +57,7 @@ const ToggleInfoPanelButton = ({
           onClick={toggleInfoPanel}
         />
       </div>
-    </StyledInfoPanelToggleColorThemeWrapper>
+    </div>
   );
 };
 

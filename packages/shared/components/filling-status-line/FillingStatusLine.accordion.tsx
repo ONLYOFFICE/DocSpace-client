@@ -112,7 +112,7 @@ const FillingStatusAccordion = ({
             </Text>
           </div>
 
-          {returnedByUser && (
+          {returnedByUser ? (
             <div className="accordion-item-history">
               <div className="accordion-item-wrapper">
                 <Text fontSize="12px" lineHeight="16px" className="status-text">
@@ -124,9 +124,9 @@ const FillingStatusAccordion = ({
                 {returnedDate}
               </Text>
             </div>
-          )}
+          ) : null}
 
-          {comment && (
+          {comment ? (
             <div className="accordion-item-history">
               <div className="accordion-item-wrapper">
                 <Text fontSize="12px" lineHeight="16px" className="status-text">
@@ -134,9 +134,9 @@ const FillingStatusAccordion = ({
                 </Text>
               </div>
             </div>
-          )}
+          ) : null}
 
-          {isDone && (
+          {isDone ? (
             <div className="accordion-item-history">
               <div className="accordion-item-wrapper">
                 <Text
@@ -152,7 +152,7 @@ const FillingStatusAccordion = ({
                 {filledAndSignedDate}
               </Text>
             </div>
-          )}
+          ) : null}
         </>
       ) : (
         <div className="accordion-item-history">

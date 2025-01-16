@@ -1,0 +1,43 @@
+@import "../../styles/variables/colors";
+@import "../../styles/variables/devices";
+@import "../../styles/mixins";
+
+:root {
+  --drag-and-drop-height: 100%;
+  --drag-and-drop-border: 1px solid transparent;
+  --drag-and-drop-accept-bg: #{$dnd-hover-color};
+  --drag-and-drop-bg: #{$dnd-color};
+
+  &[data-theme="dark"] {
+    --drag-and-drop-accept-bg: #{$dnd-dark-hover};
+    --drag-and-drop-bg: #{$dnd-dark-color};
+  }
+}
+
+.dragAndDrop {
+  height: var(--drag-and-drop-height);
+  border: var(--drag-and-drop-border);
+  margin-inline-start: -2px;
+  position: relative;
+  outline: none;
+
+  @include tablet {
+    margin-inline-start: 0;
+  }
+
+  &.dragging {
+    background: var(--drag-and-drop-bg);
+
+    &.dragAccept {
+      background: var(--drag-and-drop-accept-bg);
+    }
+  }
+
+  &:not(.dragging) {
+    background: none !important;
+  }
+}
+
+.droppableHover {
+  background: var(--drag-and-drop-accept-bg);
+}

@@ -64,7 +64,7 @@ const EmptyContainer = ({
     <EmptyViewContainer
       type={roomType}
       folderType={type}
-      isFolder={!isRoom && !isRootEmptyPage}
+      isFolder={!isRoom ? !isRootEmptyPage : null}
       folderId={folderId}
       isRootEmptyPage={isRootEmptyPage}
       parentRoomType={parentRoomType}

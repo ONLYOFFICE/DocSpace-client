@@ -454,7 +454,7 @@ class AutomaticBackup extends React.PureComponent {
     };
     const commonRadioButtonProps = {
       fontSize: "13px",
-      fontWeight: "400",
+      fontWeight: "600",
       value: "value",
       className: "backup_radio-button",
       onClick: this.onClickShowStorage,
@@ -473,7 +473,7 @@ class AutomaticBackup extends React.PureComponent {
               productName: t("Common:ProductName"),
             })}
           </Text>
-          {!isManagement() && (
+          {!isManagement() ? (
             <Link
               className="link-learn-more"
               href={automaticBackupUrl}
@@ -484,7 +484,7 @@ class AutomaticBackup extends React.PureComponent {
             >
               {t("Common:LearnMore")}
             </Link>
-          )}
+          ) : null}
         </div>
 
         <div className="backup_toggle-wrapper">
@@ -505,7 +505,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("EnableAutomaticBackup")}
               </Text>
-              {!isEnableAuto && !isManagement() && (
+              {!isEnableAuto && !isManagement() ? (
                 <Badge
                   backgroundColor={
                     theme.isBase
@@ -517,22 +517,22 @@ class AutomaticBackup extends React.PureComponent {
                   className="auto-backup_badge"
                   isPaidBadge
                 />
-              )}
+              ) : null}
             </div>
             <Text className="backup_toggle-btn-description settings_unavailable">
               {t("EnableAutomaticBackupDescription")}
             </Text>
           </div>
         </div>
-        {selectedEnableSchedule && isEnableAuto && (
+        {selectedEnableSchedule && isEnableAuto ? (
           <div className="backup_modules">
             <StyledModules>
               <RadioButton
+                key={0}
                 {...commonRadioButtonProps}
                 id="backup-room"
                 label={t("RoomsModule")}
                 name={`${DocumentModuleType}`}
-                key={0}
                 isChecked={isCheckedDocuments}
                 isDisabled={isLoadingData}
               />
@@ -541,9 +541,9 @@ class AutomaticBackup extends React.PureComponent {
                   {{ roomName }}
                 </Trans>
               </Text>
-              {isCheckedDocuments && (
+              {isCheckedDocuments ? (
                 <RoomsModule {...commonProps} isError={isError} />
-              )}
+              ) : null}
             </StyledModules>
 
             <StyledModules
@@ -563,13 +563,13 @@ class AutomaticBackup extends React.PureComponent {
               <Text className="backup-description">
                 {t("ThirdPartyResourceDescription")}
               </Text>
-              {isCheckedThirdParty && (
+              {isCheckedThirdParty ? (
                 <ThirdPartyModule
                   {...commonProps}
                   isError={isError}
                   buttonSize={buttonSize}
                 />
-              )}
+              ) : null}
             </StyledModules>
             <StyledModules>
               <RadioButton
@@ -584,12 +584,12 @@ class AutomaticBackup extends React.PureComponent {
                 {t("ThirdPartyStorageDescription")}
               </Text>
 
-              {isCheckedThirdPartyStorage && (
+              {isCheckedThirdPartyStorage ? (
                 <ThirdPartyStorageModule {...commonProps} />
-              )}
+              ) : null}
             </StyledModules>
           </div>
-        )}
+        ) : null}
 
         <ButtonContainer
           t={t}
@@ -599,14 +599,14 @@ class AutomaticBackup extends React.PureComponent {
           onCancelModuleSettings={this.onCancelModuleSettings}
         />
 
-        {isBackupProgressVisible && (
+        {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
             alert={false}
             percent={downloadingProgress}
           />
-        )}
+        ) : null}
       </StyledAutoBackup>
     );
   }

@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TagType = {
+  /** Accepts a unique key for the tag. */
   key?: string;
+  /** Indicates if the tag is a default tag. */
   isDefault?: boolean;
+  /** Indicates if the tag is associated with a third-party provider. */
   isThirdParty?: boolean;
   /** Accepts the tag label */
   label: string;
@@ -36,12 +39,15 @@ export type TagType = {
   advancedOptions?: React.ReactNode[];
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
+  /** Indicates the type of room associated with the tag. */
   roomType?: number;
+  /** Accepts the icon associated with the tag. */
   icon?: string;
+  /** Indicates the type of provider associated with the tag. */
   providerType?: number;
 };
 
-export interface TagsProps {
+export type TagsProps = {
   /** Accepts id */
   id?: string;
   /** Accepts the tags */
@@ -55,4 +61,4 @@ export interface TagsProps {
   /** Accepts the function that is called when the tag is selected */
   onSelectTag: (tag?: object) => void;
   removeTagIcon?: boolean;
-}
+};

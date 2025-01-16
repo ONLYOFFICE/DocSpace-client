@@ -275,14 +275,14 @@ const ThirdPartyComboBox = ({
               />
             ) : null}
           </DropDownItem>
-          {disabled && (
+          {disabled ? (
             <Tooltip
               float={isDesktop()}
               id="file-links-tooltip"
               getContent={getTextTooltip}
               place="bottom"
             />
-          )}
+          ) : null}
         </StyledComboBoxItem>
       );
     });

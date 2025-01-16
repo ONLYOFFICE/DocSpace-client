@@ -109,7 +109,7 @@ const ItemIcon = ({
           className={className}
         />
       </IconWrapper>
-      {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
+      {isPrivacy && fileExst ? <EncryptedFileIcon isEdit={false} /> : null}
     </>
   );
 };

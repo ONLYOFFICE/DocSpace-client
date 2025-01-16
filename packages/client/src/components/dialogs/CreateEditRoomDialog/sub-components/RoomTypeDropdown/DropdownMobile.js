@@ -67,7 +67,7 @@ const DropdownMobile = ({
             isAside
             zIndex={450}
           />
-          {!forceHideDropdown && (
+          {!forceHideDropdown ? (
             <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
               {RoomsTypeValues.map((roomType) => (
                 <RoomType
@@ -80,7 +80,7 @@ const DropdownMobile = ({
                 />
               ))}
             </StyledDropdownMobile>
-          )}
+          ) : null}
         </>
       }
     />

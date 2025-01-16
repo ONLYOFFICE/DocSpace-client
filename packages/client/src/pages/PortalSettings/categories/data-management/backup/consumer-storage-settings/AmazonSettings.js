@@ -430,7 +430,7 @@ class AmazonSettings extends React.Component {
           />
         </StyledBody>
 
-        {selectedEncryption === this.serverSideEncryption && (
+        {selectedEncryption === this.serverSideEncryption ? (
           <>
             <RadioButton
               id="sse-s3"
@@ -454,7 +454,7 @@ class AmazonSettings extends React.Component {
               isDisabled={this.isDisabled}
             />
 
-            {formSettings[sse] === sse_kms && (
+            {formSettings[sse] === sse_kms ? (
               <>
                 <Text isBold>Managed CMK</Text>
                 <ComboBox
@@ -475,7 +475,7 @@ class AmazonSettings extends React.Component {
                   showDisabledItems
                 />
 
-                {managedKeys.label === this.customerManager && (
+                {managedKeys.label === this.customerManager ? (
                   <>
                     <Text isBold>KMS Key Id:</Text>
                     <TextInput
@@ -490,13 +490,13 @@ class AmazonSettings extends React.Component {
                       tabIndex={9}
                     />
                   </>
-                )}
+                ) : null}
               </>
-            )}
+            ) : null}
           </>
-        )}
+        ) : null}
 
-        {selectedEncryption === this.clientSideEncryption && (
+        {selectedEncryption === this.clientSideEncryption ? (
           <>
             <Text isBold>KMS Key Id:</Text>
             <TextInput
@@ -511,9 +511,9 @@ class AmazonSettings extends React.Component {
               tabIndex={8}
             />
           </>
-        )}
+        ) : null}
 
-        {isNeedFilePath && (
+        {isNeedFilePath ? (
           <TextInput
             id="file-path-input"
             name="filePath"
@@ -525,7 +525,7 @@ class AmazonSettings extends React.Component {
             placeholder={t("Path")}
             hasError={isError[filePath]}
           />
-        )}
+        ) : null}
       </>
     );
   }

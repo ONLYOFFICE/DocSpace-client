@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TDirectionX, TDirectionY } from "../../types";
-import { TTheme } from "../../themes";
 
 export interface DropDownProps {
   /** Children elements */
@@ -90,30 +89,46 @@ export interface DropDownProps {
 }
 
 export interface VirtualListProps {
+  /** Width of the list */
   width: number;
-  theme: TTheme;
+  /** Whether the dropdown is open */
   isOpen: boolean;
+  /** Number of items in the list */
   itemCount: number;
+  /** Maximum height of the list */
   maxHeight?: number;
+  /** Calculated height based on items and maxHeight */
   calculatedHeight: number;
+  /** Whether to use fixed height options */
   isNoFixedHeightOptions: boolean;
+  /** Clean children elements */
   cleanChildren?: React.ReactNode;
+  /** Children elements */
   children: React.ReactElement | React.ReactNode;
+  /** Row component */
   Row: React.MemoExoticComponent<
     ({ data, index, style }: RowProps) => JSX.Element
   >;
+  /** Whether to enable keyboard events */
   enableKeyboardEvents: boolean;
+  /** Function to get item size */
   getItemSize: (index: number) => number;
 }
 
 export interface RowProps {
+  /** Row data */
   data: {
+    /** Children elements */
     children?: React.ReactNode;
-    theme: TTheme;
+    /** Currently active index */
     activeIndex?: number;
+    /** Currently selected index */
     activedescendant?: number;
+    /** Mouse move handler */
     handleMouseMove?: (index: number) => void;
   };
+  /** Row index */
   index: number;
+  /** Row style */
   style: React.CSSProperties;
 }

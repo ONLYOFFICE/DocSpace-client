@@ -116,7 +116,7 @@ const ToggleAutoSync = ({
           >
             {t("LdapAutoSyncToggle")}
           </Text>
-          {!isLdapAvailable && (
+          {!isLdapAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -127,7 +127,7 @@ const ToggleAutoSync = ({
               className="toggle-caption_title_badge"
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"

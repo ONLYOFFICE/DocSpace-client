@@ -84,8 +84,8 @@ const FillingRoleSelector = ({
   );
 
   return (
-    <StyledFillingRoleSelector {...props}>
-      {everyoneRole && everyoneRoleNode}
+    <StyledFillingRoleSelector {...props} data-testid="filling-role-selector">
+      {everyoneRole ? everyoneRoleNode : null}
       {sortedInOrderRoles.map((role: TRole) => {
         if (role.everyone) return;
         const roleWithUser = users?.find(

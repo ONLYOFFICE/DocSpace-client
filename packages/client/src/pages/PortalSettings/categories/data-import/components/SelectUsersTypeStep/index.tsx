@@ -119,7 +119,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
       <UsersInfoBlock />
 
-      {filteredUsers.length > 0 && (
+      {filteredUsers.length > 0 ? (
         <>
           <SearchInput
             id="search-checkedUsers-type-input"
@@ -134,20 +134,20 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
           <AccountsTable accountsData={filteredAccounts} />
 
-          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
               t={t}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
 
-          {filteredAccounts.length > 0 && Buttons}
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
-      )}
+      ) : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -156,7 +156,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile } from "../../../../utils";
 import { globalColors } from "../../../../themes";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`

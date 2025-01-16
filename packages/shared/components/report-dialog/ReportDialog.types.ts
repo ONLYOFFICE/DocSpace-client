@@ -28,12 +28,19 @@ import type FirebaseHelper from "../../utils/firebase";
 import type { TUser } from "../../api/people/types";
 import type { DeviceType } from "../../enums";
 
-export interface ReportDialogProps {
+export type ReportDialogProps = {
+  /** Function to handle dialog closure */
   onClose: VoidFunction;
+  /** Controls the visibility state of the dialog */
   visible: boolean;
+  /** Error object containing information about the occurred error */
   error: Error;
+  /** Current user information */
   user: TUser;
+  /** Application version string */
   version: string;
+  /** Firebase helper instance for crash reporting */
   firebaseHelper: FirebaseHelper;
+  /** Current device type (desktop, mobile, etc.) */
   currentDeviceType: DeviceType;
-}
+};

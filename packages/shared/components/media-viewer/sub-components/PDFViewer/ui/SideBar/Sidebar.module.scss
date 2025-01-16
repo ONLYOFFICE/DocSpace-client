@@ -82,7 +82,7 @@
 .hideSidebarIcon {
   margin-inline-start: auto;
 
-  // &:not([data-interface-dir="rtl"]) {
-  //   transform: rotate(180deg);
-  // }
+  &:not([data-interface-dir="rtl"]) {
+    transform: rotate(180deg);
+  }
 }

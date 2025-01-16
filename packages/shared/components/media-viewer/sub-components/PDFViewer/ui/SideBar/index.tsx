@@ -33,6 +33,8 @@ import { Bookmarks } from "../Bookmarks";
 import styles from "./Sidebar.module.scss";
 import SidebarProps from "./Sidebar.props";
 
+import { useInterfaceDirection } from "../../../../../../hooks/useInterfaceDirection";
+
 export const Sidebar = ({
   bookmarks,
   isPanelOpen,
@@ -40,7 +42,7 @@ export const Sidebar = ({
   navigate,
 }: SidebarProps) => {
   const [toggle, setToggle] = useState<boolean>(false);
-
+  const { isRTL } = useInterfaceDirection();
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
@@ -62,7 +64,7 @@ export const Sidebar = ({
         <ArticleShowMenuReactSvgUrl
           className={styles.hideSidebarIcon}
           onClick={closeSidebar}
-          // data-interface-dir={interfaceDir}
+          data-interface-dir={isRTL ? "rtl" : "ltr"}
         />
       </div>
       {toggle ? <Bookmarks bookmarks={bookmarks} navigate={navigate} /> : null}

@@ -620,5 +620,16 @@
   "UpgradeToProBannerItemLicenseHeader": "رخصة لمدى الحياة.",
   "UpgradeToProBannerItemLicenseDescr": "+ اشتراك لمدة عام واحد للحصول على تحديثات الوظائف والأمان.",
   "UpgradeToProBannerItemScalabilityHeader": "القابلية للتوسع والتجميع.",
-  "UpgradeToProBannerItemScalabilityDescr": "يمكنك تحرير المستندات والتعاون في العمل عليها بشكل مريح بغض النظر عن حجم فريقك."
+  "UpgradeToProBannerItemScalabilityDescr": "يمكنك تحرير المستندات والتعاون في العمل عليها بشكل مريح بغض النظر عن حجم فريقك.",
+  "ActivateLicenseActivated": "تم تفعيل الترخيص",
+  "UpgradeToProBannerInformationDemo": "اطلب العرض التوضيحي <1> هنا </ 1>",
+  "UpgradeToProBannerInformationPurchase": "اطرح أسئلة الشراء على <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "احصل على المساعدة الفنية <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "استخدم الوثائق الرسمية للترقية:",
+  "UpgradeToProBannerInstructionHeader": "للوصول إلى الميزات الاحترافية، ابدأ نسخة تجريبية مجانية لمدة 30 يومًا من إصدار {{organizationName}} {{license}}.",
+  "UpgradeToProBannerInstructionItemDocker": " تعليمات دوكر.",
+  "UpgradeToProBannerInstructionItemLinux": "تعليمات لينكس.",
+  "UpgradeToProBannerInstructionItemWindows": "تعليمات ويندوز.",
+  "UpgradeToProBannerInstructionNote": "يرجى ملاحظة أن المحررين لن يكونوا متوفرين أثناء الترقية. نوصي أيضًا بـ <1> نسخ بياناتك احتياطيًا </ 1> قبل البدء.",
+  "UpgradeToProBannerInstructionReadNow": "اقرا الان"
 }

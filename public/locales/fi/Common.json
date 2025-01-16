@@ -621,5 +621,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Elinikäinen lisenssi.",
   "UpgradeToProBannerItemLicenseDescr": "+ 1 vuoden tilaus toiminnallisuus- ja tietoturvapäivityksiin.",
   "UpgradeToProBannerItemScalabilityHeader": "Skaalautuvuus ja klusterointi.",
-  "UpgradeToProBannerItemScalabilityDescr": "Mukava muokata ja tehdä yhteistyötä asiakirjoilla tiimin koosta riippumatta."
+  "UpgradeToProBannerItemScalabilityDescr": "Mukava muokata ja tehdä yhteistyötä asiakirjoilla tiimin koosta riippumatta.",
+  "ActivateLicenseActivated": "Lisenssi aktivoitu",
+  "UpgradeToProBannerInformationDemo": "Pyydä esittelyä <1>tästä</1>",
+  "UpgradeToProBannerInformationPurchase": "Esitä kysymyksiä ostoon liittyen <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Hanki teknistä apua <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Käytä virallista dokumentaatiota päivittääksesi:",
+  "UpgradeToProBannerInstructionHeader": "Aloit {{organizationName}} {{license}} Edition:n 30 päivän ilmainen kokeilujakso saadaksesi pro-ominaisuudet käyttöön.",
+  "UpgradeToProBannerInstructionItemDocker": "Dockerin ohje.",
+  "UpgradeToProBannerInstructionItemLinux": "Linuxin ohje.",
+  "UpgradeToProBannerInstructionItemWindows": "Windowsin ohje.",
+  "UpgradeToProBannerInstructionNote": "Huomioithan, että muokkaukset eivät ole käytössä päivityksen aikana. Suosittelemme myös <1>varmuuskopioimaan tietosi</1> ennen kuin aloitat.",
+  "UpgradeToProBannerInstructionReadNow": "Lue nyt"
 }

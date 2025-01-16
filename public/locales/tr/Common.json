@@ -621,5 +621,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Ömür boyu lisans.",
   "UpgradeToProBannerItemLicenseDescr": "İşlevsellik ve güvenlik güncellemeleri için +1 yıllık abonelik.",
   "UpgradeToProBannerItemScalabilityHeader": "Ölçeklendirilebilirlik ve kümelendirme.",
-  "UpgradeToProBannerItemScalabilityDescr": "Ekibinizin boyutu ne olursa olsun, belgeleri rahatça düzenleyin ve ortak çalışın."
+  "UpgradeToProBannerItemScalabilityDescr": "Ekibinizin boyutu ne olursa olsun, belgeleri rahatça düzenleyin ve ortak çalışın.",
+  "ActivateLicenseActivated": "Lisans etkinleştirildi",
+  "UpgradeToProBannerInformationDemo": "Demoyu <1>buradan</1> talep edin",
+  "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1> adresinden satın alma soruları sorun",
+  "UpgradeToProBannerInformationSupport": "Teknik yardım alın <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Yükseltmek için resmî belgeleri kullanın:",
+  "UpgradeToProBannerInstructionHeader": "Profesyonel özelliklere erişmek için {{organizationName}} {{license}} Edition'ın 30 günlük ücretsiz denemesini başlatın.",
+  "UpgradeToProBannerInstructionItemDocker": "Docker talimatı.",
+  "UpgradeToProBannerInstructionItemLinux": "Linux talimatı.",
+  "UpgradeToProBannerInstructionItemWindows": "Windows talimatı.",
+  "UpgradeToProBannerInstructionNote": "Yükseltme sırasında düzenleyicilerin kullanılamayacağını lütfen unutmayın. Aynı zamanda başlamadan önce <1>verilerinizi yedeklemenizi</1> öneririz.",
+  "UpgradeToProBannerInstructionReadNow": "Şimdi Oku"
 }

@@ -623,5 +623,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Lifetime license.",
   "UpgradeToProBannerItemLicenseDescr": "+ 1-year subscription for functionality and security updates.",
   "UpgradeToProBannerItemScalabilityHeader": "Scalability and clustering.",
-  "UpgradeToProBannerItemScalabilityDescr": "Comfortably edit and collaborate on docs no matter what size your team is."
+  "UpgradeToProBannerItemScalabilityDescr": "Comfortably edit and collaborate on docs no matter what size your team is.",
+  "ActivateLicenseActivated": "License activated",
+  "UpgradeToProBannerInformationDemo": "Request demonstration <1>here</1>",
+  "UpgradeToProBannerInformationPurchase": "Ask purchase questions at <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Get tech assistance <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Use the official documentation to upgrade:",
+  "UpgradeToProBannerInstructionHeader": "To access pro features, start free 30-day trial of {{organizationName}} {{license}} Edition.",
+  "UpgradeToProBannerInstructionItemDocker": "Docker instruction.",
+  "UpgradeToProBannerInstructionItemLinux": "Linux instruction.",
+  "UpgradeToProBannerInstructionItemWindows": "Windows instruction.",
+  "UpgradeToProBannerInstructionNote": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
+  "UpgradeToProBannerInstructionReadNow": "Read now"
 }

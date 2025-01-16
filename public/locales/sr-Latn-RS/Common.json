@@ -622,5 +622,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Doživotna licenca.",
   "UpgradeToProBannerItemLicenseDescr": "+ 1-godišnja pretplata za funkcionalnost i bezbednosna ažuriranja.",
   "UpgradeToProBannerItemScalabilityHeader": "Skalabilnost i grupisanje.",
-  "UpgradeToProBannerItemScalabilityDescr": "Udobno uređujte i sarađujte na dokumentima bez obzira na veličinu vašeg tima."
+  "UpgradeToProBannerItemScalabilityDescr": "Udobno uređujte i sarađujte na dokumentima bez obzira na veličinu vašeg tima.",
+  "ActivateLicenseActivated": "Licenca aktivirana",
+  "UpgradeToProBannerInformationDemo": "Zatraži demonstraciju <1>ovde</1>",
+  "UpgradeToProBannerInformationPurchase": "Postavite pitanja o kupovini na <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Dobijte tehničku pomoć <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Koristite zvaničnu dokumentaciju za nadogradnju:",
+  "UpgradeToProBannerInstructionHeader": "Da biste pristupili naprednim funkcijama, započnite besplatni probni period od 30 dana za {{organizationName}} {{license}} Edition.",
+  "UpgradeToProBannerInstructionItemDocker": "Docker uputstvo.",
+  "UpgradeToProBannerInstructionItemLinux": "Linux uputstvo.",
+  "UpgradeToProBannerInstructionItemWindows": "Windows uputstvo.",
+  "UpgradeToProBannerInstructionNote": "Molim obratite pažnju da će uređivači biti nedostupni u toku nadogradnje. Takođe preporučujemo da <1>napravite rezervnu kopiju vaših podataka</1> pre nego što počnete.",
+  "UpgradeToProBannerInstructionReadNow": "Pročitaj sada"
 }

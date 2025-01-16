@@ -620,5 +620,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Giấy phép vĩnh viễn.",
   "UpgradeToProBannerItemLicenseDescr": "+ Đăng ký 1 năm để cập nhật chức năng và bảo mật.",
   "UpgradeToProBannerItemScalabilityHeader": "Khả năng mở rộng và phân cụm.",
-  "UpgradeToProBannerItemScalabilityDescr": "Chỉnh sửa và cộng tác thoải mái trên tài liệu cho dù nhóm của bạn có quy mô bao nhiêu."
+  "UpgradeToProBannerItemScalabilityDescr": "Chỉnh sửa và cộng tác thoải mái trên tài liệu cho dù nhóm của bạn có quy mô bao nhiêu.",
+  "ActivateLicenseActivated": "Giấy phép đã được kích hoạt",
+  "UpgradeToProBannerInformationDemo": "Yêu cầu demo <1>tại đây</1>",
+  "UpgradeToProBannerInformationPurchase": "Đặt câu hỏi mua hàng tại <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Nhận hỗ trợ kỹ thuật< 1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Sử dụng tài liệu chính thức để nâng cấp:",
+  "UpgradeToProBannerInstructionHeader": "Để truy cập các tính năng chuyên nghiệp, hãy bắt đầu dùng thử Phiên bản miễn phí {{license}} {{organizationName}} 30 ngày.",
+  "UpgradeToProBannerInstructionItemDocker": "Hướng dẫn Docker.",
+  "UpgradeToProBannerInstructionItemLinux": "Hướng dẫn Linux.",
+  "UpgradeToProBannerInstructionItemWindows": "Hướng dẫn Windows.",
+  "UpgradeToProBannerInstructionNote": "Xin lưu ý rằng các các tính năng chỉnh sửa sẽ không hữu dụng trong quá trình nâng cấp. Chúng tôi cũng khuyên bạn nên <1>sao lưu dữ liệu của mình</1> trước khi bạn bắt đầu.",
+  "UpgradeToProBannerInstructionReadNow": "Đọc ngay"
 }

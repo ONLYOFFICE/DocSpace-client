@@ -622,5 +622,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Licença Vitalícia.",
   "UpgradeToProBannerItemLicenseDescr": "+ 1 ano de assinatura para atualizações de funcionalidade e segurança.",
   "UpgradeToProBannerItemScalabilityHeader": "Escalabilidade e agrupamento.",
-  "UpgradeToProBannerItemScalabilityDescr": "Edite e colabore confortavelmente em documentos, independentemente do tamanho de sua equipe."
+  "UpgradeToProBannerItemScalabilityDescr": "Edite e colabore confortavelmente em documentos, independentemente do tamanho de sua equipe.",
+  "ActivateLicenseActivated": "Licença ativada",
+  "UpgradeToProBannerInformationDemo": "Solicite a demonstração <1>aqui</1>",
+  "UpgradeToProBannerInformationPurchase": "Faça perguntas sobre compra em <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Obtenha assistência técnica <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Use a documentação oficial para atualizar:",
+  "UpgradeToProBannerInstructionHeader": "Para acessar os recursos profissionais, comece a avaliação gratuita de 30 dias do {{organizationName}} {{license}} Edition.",
+  "UpgradeToProBannerInstructionItemDocker": "Instruções do Docker.",
+  "UpgradeToProBannerInstructionItemLinux": "Instrução do Linux.",
+  "UpgradeToProBannerInstructionItemWindows": "Instruções do Windows.",
+  "UpgradeToProBannerInstructionNote": "Observe que os editores não estarão disponíveis durante a atualização. Também recomendamos que você faça um <1>backup de seus dados</1> antes de começar.",
+  "UpgradeToProBannerInstructionReadNow": "Leia agora"
 }

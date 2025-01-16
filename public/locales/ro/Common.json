@@ -622,5 +622,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Licența pe durata vieții",
   "UpgradeToProBannerItemLicenseDescr": "Abonament de 1 an cu actualizări pentru îmbunătățirea funcționalității și securității",
   "UpgradeToProBannerItemScalabilityHeader": "Scalabilitate și grupare.",
-  "UpgradeToProBannerItemScalabilityDescr": "Editați și colaborați la documente în mod confortabil, indiferent de mărimea echipei dvs."
+  "UpgradeToProBannerItemScalabilityDescr": "Editați și colaborați la documente în mod confortabil, indiferent de mărimea echipei dvs.",
+  "ActivateLicenseActivated": "Licența a fost activată",
+  "UpgradeToProBannerInformationDemo": "Solicitare de demonstrație  <1>aici</1>",
+  "UpgradeToProBannerInformationPurchase": "Adresați întrebarea legată de cumpărarea <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Solicitați asistența tehnică <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Utilizați documentația oficială pentru actualizare:",
+  "UpgradeToProBannerInstructionHeader": "Pentru a accesa caracteristicile Pro, demarați versiunea de încercare a spaţiului {{organizationName}} Ediția {{license}} pe o perioada de 30 de zile.",
+  "UpgradeToProBannerInstructionItemDocker": "Instrucţiuni pentu Docker.",
+  "UpgradeToProBannerInstructionItemLinux": "Instrucțiuni pentru Linux.",
+  "UpgradeToProBannerInstructionItemWindows": "Instrucțiunei pentru Windows.",
+  "UpgradeToProBannerInstructionNote": "Vă rugăm să rețineți că aplicaţiile de editare nu vor fi disponibile în curs de actualizare. De asemenea vă recomandăm <1>să creați o copie de rezervă</1> înainte de a începe.",
+  "UpgradeToProBannerInstructionReadNow": "Citiți acum"
 }

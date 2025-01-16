@@ -622,5 +622,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Ցմահ լիցենզիա.",
   "UpgradeToProBannerItemLicenseDescr": "+ 1 տարվա բաժանորդագրություն ֆունկցիոնալության և անվտանգության թարմացումների համար:",
   "UpgradeToProBannerItemScalabilityHeader": "Ընդարձակություն և կլաստերավորում:",
-  "UpgradeToProBannerItemScalabilityDescr": "Հարմարավետ կերպով խմբագրեք և համագործակցեք փաստաթղթերի վրա՝ անկախ ձեր թիմի չափից:"
+  "UpgradeToProBannerItemScalabilityDescr": "Հարմարավետ կերպով խմբագրեք և համագործակցեք փաստաթղթերի վրա՝ անկախ ձեր թիմի չափից:",
+  "ActivateLicenseActivated": "Լիցենզիան ակտիվացված է",
+  "UpgradeToProBannerInformationDemo": "Ցուցադրումը պահանջեք <1>այստեղ</1>",
+  "UpgradeToProBannerInformationPurchase": "Գնման հարցեր տվեք <1>{{email}}</1> հասցեով",
+  "UpgradeToProBannerInformationSupport": "Ստացեք տեխնիկական աջակցություն <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Թարմացնելու համար օգտագործեք պաշտոնական փաստաթղթերը՝",
+  "UpgradeToProBannerInstructionHeader": "Պրոֆեսիոնալ(Pro) գործառույթներից օգտվելու համար սկսեք {{organizationName}} {{license}} Edition-ի 30-օրյա անվճար  փորձարկումը:",
+  "UpgradeToProBannerInstructionItemDocker": "Docker հրահանգ.",
+  "UpgradeToProBannerInstructionItemLinux": "Linux հրահանգ.",
+  "UpgradeToProBannerInstructionItemWindows": "Windows հրահանգ.",
+  "UpgradeToProBannerInstructionNote": "Խնդրում ենք նկատի ունենալ, որ թարմացման ընթացքում խմբագրիչներն անհասանելի կլինեն: Մենք նաև խորհուրդ ենք տալիս <1>պահուստավորել ձեր տվյալները</1> նախքան սկսելը:",
+  "UpgradeToProBannerInstructionReadNow": "Կարդացեք հիմա"
 }

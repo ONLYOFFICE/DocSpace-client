@@ -621,5 +621,16 @@
   "UpgradeToProBannerItemLicenseHeader": "평생 라이선스.",
   "UpgradeToProBannerItemLicenseDescr": "+ 기능 및 보안 업데이트에 대한 1년 구독.",
   "UpgradeToProBannerItemScalabilityHeader": "확장성 및 클러스터링.",
-  "UpgradeToProBannerItemScalabilityDescr": "팀의 규모에 관계없이 편안하게 문서를 편집 및 공동 작업하세요."
+  "UpgradeToProBannerItemScalabilityDescr": "팀의 규모에 관계없이 편안하게 문서를 편집 및 공동 작업하세요.",
+  "ActivateLicenseActivated": "라이선스가 활성화되었습니다",
+  "UpgradeToProBannerInformationDemo": "<1>여기</1>에서 데모를 요청하세요",
+  "UpgradeToProBannerInformationPurchase": "<1>{{email}}</1>로 구매 관련 질문을 보내주세요",
+  "UpgradeToProBannerInformationSupport": "기술 지원을 이용하세요: <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "업그레이드하려면 공식 문서를 사용하세요:",
+  "UpgradeToProBannerInstructionHeader": "프로 기능을 이용하려면 {{organizationName}} {{license}} 에디션의 30일 무료 체험을 시작하세요.",
+  "UpgradeToProBannerInstructionItemDocker": "Docker 설명서.",
+  "UpgradeToProBannerInstructionItemLinux": "Linux설명서.",
+  "UpgradeToProBannerInstructionItemWindows": "Windows설명서.",
+  "UpgradeToProBannerInstructionNote": "업그레이드 중에는 편집기를 사용할 수 없습니다. 또한 시작하기 전에 <1>데이터를 백업</1>하는 것이 좋습니다.",
+  "UpgradeToProBannerInstructionReadNow": "지금 읽기"
 }

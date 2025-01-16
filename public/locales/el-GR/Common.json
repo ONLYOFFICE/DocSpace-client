@@ -621,5 +621,16 @@
   "UpgradeToProBannerItemLicenseHeader": "Άδεια χρήσης για πάντα.",
   "UpgradeToProBannerItemLicenseDescr": "+ συνδρομή 1 έτους για ενημερώσεις λειτουργικότητας και ασφάλειας.",
   "UpgradeToProBannerItemScalabilityHeader": "Επεκτασιμότητα και ομαδοποίηση.",
-  "UpgradeToProBannerItemScalabilityDescr": "Επεξεργαστείτε και συνεργαστείτε άνετα σε έγγραφα, ανεξάρτητα από το μέγεθος της ομάδας σας."
+  "UpgradeToProBannerItemScalabilityDescr": "Επεξεργαστείτε και συνεργαστείτε άνετα σε έγγραφα, ανεξάρτητα από το μέγεθος της ομάδας σας.",
+  "ActivateLicenseActivated": "Η άδεια ενεργοποιήθηκε",
+  "UpgradeToProBannerInformationDemo": "Ζητήστε μια επίδειξη <1>εδώ</1>",
+  "UpgradeToProBannerInformationPurchase": "Στείλτε τις ερωτήσεις σας σχετικά με την αγορά στο <1>{{email}}</1>",
+  "UpgradeToProBannerInformationSupport": "Λάβετε τεχνική βοήθεια <1>{{helpUrl}}</1>",
+  "UpgradeToProBannerInstructionDescr": "Χρησιμοποιήστε την επίσημη τεκμηρίωση για την αναβάθμιση:",
+  "UpgradeToProBannerInstructionHeader": "Για να αποκτήσετε πρόσβαση στις pro λειτουργίες, ξεκινήστε τη δωρεάν δοκιμή 30 ημερών της έκδοσης {{license}} του {{organizationName}}.",
+  "UpgradeToProBannerInstructionItemDocker": "Οδηγίες για Docker.",
+  "UpgradeToProBannerInstructionItemLinux": "Οδηγίες για Linux.",
+  "UpgradeToProBannerInstructionItemWindows": "Οδηγίες για Windows.",
+  "UpgradeToProBannerInstructionNote": "Λάβετε υπόψη ότι τα προγράμματα επεξεργασίας δεν θα είναι διαθέσιμα κατά τη διάρκεια της αναβάθμισης. Συνιστούμε επίσης να <1>δημιουργήσετε αντίγραφα ασφαλείας για τα δεδομένα σας</1> πριν ξεκινήσετε.",
+  "UpgradeToProBannerInstructionReadNow": "Διαβάστε τώρα"
 }

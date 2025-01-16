@@ -160,6 +160,7 @@
   -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
   padding-right: 4px;
+  stroke: none;
 
   &:focus {
     outline: none;
@@ -245,7 +246,6 @@
       background: var(--button-background-primary-disabled);
       color: var(--button-color-primary-disabled);
       border: var(--button-border-primary-disabled);
-
       opacity: 0.6;
     }
   }
@@ -293,15 +293,14 @@
     width: 100%;
     height: 100%;
 
-    &:not(.primary) {
-      svg {
-        stroke: var(--accent-button) !important;
-      }
+    svg {
+      opacity: 1;
+      color: var(--accent-button);
     }
 
     &.primary {
       svg {
-        stroke: var(--button-loader-primary);
+        color: var(--button-loader-primary) !important;
       }
     }
   }
@@ -343,7 +342,9 @@
     }
 
     .loader {
-      opacity: 0.6;
+      svg {
+        opacity: 1;
+      }
     }
   }
 }

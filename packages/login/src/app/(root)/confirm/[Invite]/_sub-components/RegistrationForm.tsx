@@ -275,6 +275,7 @@ const RegistrationForm = ({
       {termsConditionsComponent}
 
       <Button
+        id="register-singup"
         className="login-button"
         primary
         size={ButtonSize.medium}

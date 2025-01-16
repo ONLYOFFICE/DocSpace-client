@@ -47,6 +47,7 @@ export const Button = React.forwardRef<
     isClicked,
     className,
     testId = "button",
+    id,
     ...rest
   } = props;
 
@@ -72,6 +73,7 @@ export const Button = React.forwardRef<
   return (
     <button
       {...rest}
+      id={id}
       ref={ref}
       type="button"
       className={buttonClasses}
@@ -84,7 +86,8 @@ export const Button = React.forwardRef<
     >
       {isLoading ? (
         <Loader
-          className={classNames(styles.loader, {
+          id={id}
+          className={classNames(styles.loader, "loader", {
             [styles.primary]: primary,
           })}
           size="20px"

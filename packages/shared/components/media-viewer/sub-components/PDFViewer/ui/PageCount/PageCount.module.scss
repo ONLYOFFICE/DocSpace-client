@@ -24,51 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { animated } from "@react-spring/web";
-import styled from "styled-components";
-import { globalColors } from "../../../../../../themes";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
-export const MobileDrawerContainer = styled.section`
-  position: fixed;
-  z-index: 308;
-  width: 100%;
-`;
+:root {
+  --page-count-background: var(--page-count-background);
+}
 
-export const MobileDrawerWrapper = styled(animated.div)`
-  position: fixed;
-  bottom: 0;
-
+.pageCountWrapper {
   display: flex;
-  flex-direction: column;
-
-  width: 100%;
-
-  background: ${globalColors.black};
-  touch-action: none;
-
-  overflow: hidden;
-
-  .block_elem {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-  }
-`;
-
-export const MobileDrawerHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
+  gap: 10px;
   align-items: center;
+  position: fixed;
 
-  padding: 24px 30px;
+  bottom: 108px;
+  z-index: 307;
+  transform: translateX(-50%);
+  padding: 16px 32px;
+  border-radius: 22px;
 
-  touch-action: none;
+  background: var(--page-count-background);
 
-  svg path {
-    fill: rgba(255, 255, 255, 0.6);
+  color: #{$white};
+  font-size: 12px;
+  line-height: 16px;
+
+  box-sizing: border-box;
+
+  svg {
+    path {
+      fill: #{$white};
+    }
   }
 
-  .mobile-drawer_cross-icon {
-    margin-inline-start: auto;
+  user-select: none;
+
+  transition: background 0.26s ease-out 0s;
+
+  &.isMobile {
+    bottom: 12px;
+    padding: 12px 16px;
   }
-`;
+
+  &.isPanelOpen {
+    left: calc(50% + 153px); // 306px / 2
+  }
+
+  &:not(.isPanelOpen) {
+    left: 50%;
+  }
+
+  [dir="rtl"] & {
+    &.isPanelOpen {
+      left: calc(50% - 153px);
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: #{$background-color};
+    }
+  }
+}

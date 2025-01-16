@@ -33,8 +33,10 @@ import React, {
 import { isMobile } from "react-device-detect";
 
 import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
+import classNames from "classnames";
 import PageCountProps, { PageCountRef } from "./PageCount.props";
-import { PageCountWrapper } from "./PageCount.styled";
+
+import styles from "./PageCount.module.scss";
 
 const PageCount = forwardRef<PageCountRef, PageCountProps>(
   ({ isPanelOpen, visible, className, setIsOpenMobileDrawer }, ref) => {
@@ -57,12 +59,21 @@ const PageCount = forwardRef<PageCountRef, PageCountProps>(
     if (!visible) return;
 
     return (
-      <PageCountWrapper isPanelOpen={isPanelOpen} className={className}>
+      <div
+        className={classNames(
+          styles.pageCountWrapper,
+          {
+            [styles.isPanelOpen]: isPanelOpen,
+            [styles.isMobile]: isMobile,
+          },
+          className,
+        )}
+      >
         {isMobile ? <PanelReactSvg onClick={openMobileDrawer} /> : null}
         <div>
           <span>{pageNumber}</span> / <span>{pagesCount}</span>
         </div>
-      </PageCountWrapper>
+      </div>
     );
   },
 );

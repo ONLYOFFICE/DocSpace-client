@@ -358,21 +358,6 @@ module.exports = (env, argv) => {
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
         "./utils": "./src/helpers/filesUtils.js",
-        "./BrandingPage":
-          "./src/pages/PortalSettings/categories/common/branding.js",
-        "./WhiteLabelPage":
-          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
-        "./AdditionalResPage":
-          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-        "./CompanyInfoPage":
-          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-        "./AutoBackupPage":
-          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
-        "./RestorePage":
-          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
-        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
-        "./BonusPage": "./src/pages/Bonus",
-        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
         ...deps,

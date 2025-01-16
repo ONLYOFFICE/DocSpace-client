@@ -497,11 +497,10 @@
             path {
               fill: var(--filter-sort-button-sort-fill);
             }
-
-            :hover {
-              .option-item__icon {
-                visibility: visible;
-              }
+          }
+          &:hover {
+            .option-item__icon {
+              visibility: visible;
             }
           }
         }
@@ -577,9 +576,7 @@
   &[data-desc="false"] {
     :global {
       .option-item__icon {
-        path {
-          transform: rotate(180deg);
-        }
+        transform: rotate(180deg);
       }
     }
   }

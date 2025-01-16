@@ -365,7 +365,7 @@
     {
       "label": "Frontend | build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm build",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build --projects=@docspace/client,@docspace/login,@docspace/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -380,7 +380,7 @@
     {
       "label": "Frontend | start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm start",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start --projects=@docspace/client,@docspace/login,@docspace/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -395,7 +395,7 @@
     {
       "label": "Frontend | start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm start-prod",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod --projects=@docspace/client,@docspace/login,@docspace/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -410,7 +410,7 @@
     {
       "label": "Frontend | start:internal",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm start:internal",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start:internal --projects=@docspace/client,@docspace/login,@docspace/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -425,22 +425,7 @@
     {
       "label": "Frontend | start-prod:internal",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm start-prod:internal",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | build-and-start-prod",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm build ; pnpm start-prod",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod:internal --projects=@docspace/client,@docspace/login,@docspace/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -558,7 +543,7 @@
       }
     },
     {
-      "label": "Frontend | Eslint",
+      "label": "Frontend | ESLint",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint ; ",
       "group": {
@@ -573,7 +558,7 @@
       }
     },
     {
-      "label": "Frontend | Eslint:fix",
+      "label": "Frontend | ESLint:fix",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint:fix ; ",
       "group": {

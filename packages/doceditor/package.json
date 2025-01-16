@@ -3,10 +3,11 @@
   "version": "3.0.1",
   "private": true,
   "scripts": {
-    "build": "node ./scripts/buildTranslations.js && next build",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "build:translations": "node ./scripts/buildTranslations.js",
+    "build": "next build",
+    "start": "NODE_ENV=development node server.js",
     "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
+    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
@@ -43,5 +44,34 @@
     "shx": "catalog:",
     "typescript": "catalog:",
     "terser-webpack-plugin": "catalog:"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start:internal": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod:internal": {
+        "dependsOn": [
+          "build"
+        ]
+      }
+    }
   }
 }

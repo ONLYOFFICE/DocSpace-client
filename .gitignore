@@ -34,3 +34,6 @@ licenses.csv
 packages/runtime.json
 playwright-report
 common/tests/reports/tests-results.html
+
+.nx/cache
+.nx/workspace-data

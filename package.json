@@ -12,13 +12,14 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "build": "node ./common/scripts/before-build.js && pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor run build",
+    "before-build": "node ./common/scripts/before-build.js",
+    "build": "pnpm run before-build && pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor run build",
     "bump": "pnpm version --workspace",
     "clean": "pnpm -r run clean",
     "deploy": "shx rm -rf ../publish/web && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "node ./common/scripts/before-build.js && pnpm --filter @docspace/client --filter @docspace/login --filter @docspace/doceditor run start",
+    "start": "pnpm run before-build && pnpm --filter @docspace/client --filter @docspace/login --filter @docspace/doceditor run start",
     "start-prod": "pnpm --filter @docspace/client --filter @docspace/login --filter @docspace/doceditor run start-prod",
-    "start:internal": "node ./common/scripts/before-build.js && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start:internal",
+    "start:internal": "pnpm run before-build && pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start:internal",
     "start-prod:internal": "pnpm --filter {@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management} run start-prod:internal",
     "storybook": "pnpm --filter @docspace/shared story",
     "storybook-build": "pnpm --filter @docspace/shared run storybook-build",
@@ -39,9 +40,10 @@
     "@types/react-text-mask": "catalog:",
     "he": "catalog:",
     "madge": "catalog:",
+    "nx": "20.3.1",
+    "react": "catalog:",
     "shx": "catalog:",
-    "terser": "catalog:",
-    "react": "catalog:"
+    "terser": "catalog:"
   },
   "packageManager": "pnpm@9.15.3"
 }

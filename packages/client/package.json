@@ -4,22 +4,22 @@
   "private": true,
   "homepage": "",
   "scripts": {
-    "build": "pnpm build:translations && webpack --mode production",
+    "build": "webpack --mode production",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",
-    "start": "pnpm build:translations && webpack-cli serve",
+    "start": "webpack-cli serve",
     "start-prod": "serve dist -s -p 5001",
-    "start:internal": "pnpm build:translations && webpack-cli serve",
+    "start:internal": "webpack-cli serve",
     "start-prod:internal": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
-    "test:build": "node ./scripts/buildTranslations.js && PORT=5110 E2E_TEST=true pnpm build",
+    "test:build": "PORT=5110 E2E_TEST=true pnpm build",
     "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
     "test:e2e:docker:clear": "docker rmi tests",
-    "lint": "pnpm build:translations && eslint ./src",
-    "lint:fix": "pnpm build:translations && eslint-interactive ./src"
+    "lint": "eslint ./src",
+    "lint:fix": "eslint-interactive ./src"
   },
   "dependencies": {
     "@babel/runtime": "catalog:",
@@ -157,5 +157,45 @@
     "webpack-cli": "catalog:",
     "webpack-dev-server": "catalog:"
   },
-  "title": "ONLYOFFICE"
+  "title": "ONLYOFFICE",
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start:internal": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start-prod": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod:internal": {
+        "dependsOn": [
+          "build:translations",
+          "build"
+        ]
+      },
+      "lint": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      }
+    }
+  }
 }

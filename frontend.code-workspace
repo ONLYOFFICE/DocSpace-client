@@ -179,11 +179,6 @@
             "tooltip": "🛠️ Start the \"frontend build\" task",
           },
           {
-            "label": "Build and start prod",
-            "task": "Frontend | build-and-start-prod",
-            "tooltip": "🛠️ Start the \"frontend build and start production\" task",
-          },
-          {
             "label": "Start",
             "task": "Frontend | start",
             "tooltip": "🛠️ Start the \"frontend start\" task",
@@ -215,12 +210,12 @@
           },
           {
             "label": "Lint",
-            "task": "Frontend | Eslint",
+            "task": "Frontend | ESLint",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task",
           },
           {
             "label": "Lint:fix",
-            "task": "Frontend | Eslint:fix",
+            "task": "Frontend | ESLint:fix",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task",
           },
         ],

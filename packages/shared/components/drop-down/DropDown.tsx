@@ -305,6 +305,7 @@ const DropDown = ({
     };
 
     const dropDownClasses = classNames(styles.dropDown, className, {
+      "dropdown-container": true,
       [styles.directionTop]: state.directionY === "top",
       [styles.directionBottom]: state.directionY === "bottom",
       [styles.directionRight]:

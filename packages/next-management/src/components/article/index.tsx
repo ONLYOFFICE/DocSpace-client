@@ -33,6 +33,7 @@ import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
 
@@ -55,6 +56,8 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const theme = useTheme();
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useTranslation("Common");
+
   const { currentDeviceType } = useDeviceType();
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         <ArticleHeader />
         <ArticleItem
           key="spaces"
-          text="Spaces"
+          text={t("Common:Spaces")}
           icon={SpacesSvgUrl}
           showText={showText}
           onClick={() => onItemClick("spaces")}
@@ -93,7 +96,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         />
         <ArticleItem
           key="settings"
-          text="Settings"
+          text={t("Common:Settings")}
           icon={SettingsReactSvgUrl}
           showText={showText}
           onClick={() => onItemClick("settings/branding")}
@@ -105,7 +108,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         {!isCommunity ? (
           <ArticleItem
             key="payments"
-            text="Payments"
+            text={t("Common:PaymentsTitle")}
             icon={PaymentIconUrl}
             showText={showText}
             onClick={() => onItemClick("payments")}
@@ -117,7 +120,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         ) : (
           <ArticleItem
             key="bonus"
-            text="Bonus"
+            text={t("Common:Bonus")}
             icon={GiftReactSvgUrl}
             showText={showText}
             onClick={() => onItemClick("bonus")}

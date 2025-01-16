@@ -25,48 +25,64 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
+import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 
-import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
-import StyledComponent from "./StyledComponent";
-import OfficialDocumentation from "./sub-components/OfficialDocumentation";
-
-const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
-  const { t, ready } = useTranslation("PaymentsEnterprise");
-
+const Bonus = ({
+  standaloneInit,
+  isInitPaymentPage,
+  isEnterprise,
+  isTrial,
+  isDeveloper,
+  isCommunity,
+  helpUrl,
+  salesEmail,
+  dataBackupUrl,
+}) => {
   useEffect(() => {
     standaloneInit();
   }, []);
 
-  if (!isInitPaymentPage || !ready) return <PaymentsStandaloneLoader />;
+  if (!isInitPaymentPage) return <PaymentsStandaloneLoader />;
 
   return (
-    <StyledComponent>
-      <BenefitsContainer />
-      <Text fontWeight={600}>
-        {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: t("Common:OrganizationName"),
-          license: t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-      <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
-
-      <OfficialDocumentation />
-
-      <ContactContainer />
-    </StyledComponent>
+    <BonusPage
+      isEnterprise={isEnterprise}
+      isTrial={isTrial}
+      isDeveloper={isDeveloper}
+      isCommunity={isCommunity}
+      helpUrl={helpUrl}
+      salesEmail={salesEmail}
+      dataBackupUrl={dataBackupUrl}
+    />
   );
 };
 
-export const Component = inject(({ paymentStore }) => {
-  const { standaloneInit, isInitPaymentPage } = paymentStore;
-  return {
-    standaloneInit,
-    isInitPaymentPage,
-  };
-})(observer(Bonus));
+export const Component = inject(
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    settingsStore,
+  }) => {
+    const { standaloneInit, isInitPaymentPage, helpUrl, salesEmail } =
+      paymentStore;
+    const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
+    const { isTrial } = currentQuotaStore;
+    const { dataBackupUrl } = settingsStore;
+
+    return {
+      standaloneInit,
+      isInitPaymentPage,
+      isCommunity,
+      isEnterprise,
+      isTrial,
+      isDeveloper,
+      helpUrl,
+      salesEmail,
+      dataBackupUrl,
+    };
+  },
+)(observer(Bonus));

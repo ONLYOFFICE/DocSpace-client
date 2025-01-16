@@ -361,7 +361,7 @@ class SocketHelper {
       this.instance = new SocketHelper();
       (globalThis as any).SOCKET_INSTANCE = this.instance;
     }
-    // [WS] Returning existing socket instance
+    // [WS] Returning existing socket instance
     return this.instance;
   }
 

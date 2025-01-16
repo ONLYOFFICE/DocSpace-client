@@ -28,6 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
+import { useTheme } from "styled-components";
 import { IconButton } from "../icon-button";
 
 import styles from "./SelectorAddButton.module.scss";
@@ -47,6 +48,9 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     ...rest
   } = props;
 
+  const { currentColorScheme } = useTheme();
+  const mainAccentColor = currentColorScheme?.main?.accent;
+
   const onClickAction = (e: React.MouseEvent) => {
     if (!isDisabled) onClick?.(e);
   };
@@ -60,11 +64,18 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     className,
   );
 
+  const buttonStyle = mainAccentColor
+    ? ({
+        ...style,
+        "--main-accent-button": `${mainAccentColor}1A`,
+      } as React.CSSProperties)
+    : style;
+
   return (
     <div
       {...rest}
       id={id}
-      style={style}
+      style={buttonStyle}
       title={title}
       className={buttonClassName}
       onClick={onClickAction}

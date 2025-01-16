@@ -45,7 +45,7 @@ export const Bonus = ({
   salesEmail,
   dataBackupUrl,
 }) => {
-  const { t, ready } = useTranslation("PaymentsEnterprise");
+  const { t, ready } = useTranslation("Common");
 
   if (!ready) return <PaymentsStandaloneLoader />;
 

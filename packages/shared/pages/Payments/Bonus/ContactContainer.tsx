@@ -34,7 +34,7 @@ import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { StyledContactComponent } from "./Bonus.styled";
 
 export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
-  const { t } = useTranslation("PaymentsEnterprise");
+  const { t } = useTranslation("Common");
   const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
   const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";
 
@@ -46,7 +46,7 @@ export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
             <Text className="text" fontWeight={600}>
               <Trans
                 i18nKey="UpgradeToProBannerInformationAboutShort"
-                ns="PaymentsEnterprise"
+                ns="Common"
                 t={t}
                 values={{ license: t("Common:EnterpriseLicense") }}
                 components={{
@@ -67,7 +67,7 @@ export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
             <Text className="text" fontWeight={600}>
               <Trans
                 i18nKey="UpgradeToProBannerInformationDemo"
-                ns="PaymentsEnterprise"
+                ns="Common"
                 t={t}
               >
                 Request demonstration
@@ -90,7 +90,7 @@ export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
           <Text className="text" fontWeight={600}>
             <Trans
               i18nKey="UpgradeToProBannerInformationPurchase"
-              ns="PaymentsEnterprise"
+              ns="Common"
               t={t}
             >
               Ask purchase questions at
@@ -110,7 +110,7 @@ export const ContactContainer = ({ helpUrl, salesEmail, isCommunity }) => {
           <Text className="text" fontWeight={600}>
             <Trans
               i18nKey="UpgradeToProBannerInformationSupport"
-              ns="PaymentsEnterprise"
+              ns="Common"
               t={t}
             >
               Get tech assistance

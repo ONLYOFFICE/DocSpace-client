@@ -85,7 +85,7 @@ export const EnterpriseContainer = ({
 
       <div className="payments_support">
         <Text>
-          <Trans i18nKey="ActivateRenewDescr" ns="PaymentsEnterprise" t={t}>
+          <Trans i18nKey="ActivateRenewDescr" ns="Common" t={t}>
             To get your personal renewal terms, contact your dedicated manager
             or write us at
             <ColorTheme

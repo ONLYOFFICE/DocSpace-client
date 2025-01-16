@@ -35,7 +35,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { StyledBonus } from "./Bonus.styled";
 
 export const OfficialDocumentation = ({ dataBackupUrl }) => {
-  const { t } = useTranslation("PaymentsEnterprise");
+  const { t } = useTranslation("Common");
 
   const dockerLink =
     "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
@@ -92,11 +92,7 @@ export const OfficialDocumentation = ({ dataBackupUrl }) => {
       </div>
 
       <Text className="upgrade-info">
-        <Trans
-          i18nKey="UpgradeToProBannerInstructionNote"
-          ns="PaymentsEnterprise"
-          t={t}
-        >
+        <Trans i18nKey="UpgradeToProBannerInstructionNote" ns="Common" t={t}>
           Please note that the editors will be unavailable during the upgrade.
           We also recommend to
           <ColorTheme

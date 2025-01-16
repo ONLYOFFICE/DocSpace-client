@@ -380,7 +380,6 @@ function WizardForm(props: WizardFormProps) {
         <EmailInput
           name="wizard-email"
           tabIndex={1}
-          type={InputType.email}
           size={InputSize.large}
           scale={true}
           value={email}
@@ -412,7 +411,6 @@ function WizardForm(props: WizardFormProps) {
           isDisabled={isCreated}
           placeholder={t("Common:Password")}
           isDisableTooltip={true}
-          isTextTooltipVisible={false}
           hasError={hasErrorPass}
           onChange={onChangePassword}
           autoComplete="current-password"
@@ -561,6 +559,8 @@ function WizardForm(props: WizardFormProps) {
           onChange={onAgreeTermsChange}
           isDisabled={isCreated}
           hasError={hasErrorAgree}
+          title=""
+          truncate={false}
         />
         <Link
           type={LinkType.page}

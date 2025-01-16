@@ -217,6 +217,7 @@ const IconButton = ({
       [styles.stroke]: isStroke,
     },
     className,
+    "icon-button_svg",
   );
 
   return (
@@ -240,7 +241,7 @@ const IconButton = ({
     >
       {iconNode || (
         <ReactSVG
-          className={classNames(styles.notSelectable)}
+          className={classNames(styles.notSelectable, "icon-button_svg")}
           src={currentIcon.name || ""}
           data-testid="icon-button-svg"
         />

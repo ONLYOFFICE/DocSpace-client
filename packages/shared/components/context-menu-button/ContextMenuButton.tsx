@@ -147,6 +147,7 @@ const ContextMenuButtonPure = ({
   }, [displayType, getTypeByWidth]);
 
   const onIconButtonClick = (e: React.MouseEvent) => {
+    console.log("cliecked", { ...state });
     if (isDisabled || state.displayType === "toggle") {
       e.preventDefault();
 
@@ -163,6 +164,8 @@ const ContextMenuButtonPure = ({
     const dropDownItem = path
       ? path.find((x: EventTarget) => x === ref.current)
       : null;
+
+    console.log("outside click");
 
     if (dropDownItem) return;
 
@@ -196,6 +199,8 @@ const ContextMenuButtonPure = ({
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
 
+  console.log(state.isOpen, state.displayType);
+
   return (
     <div
       className={classNames(styles.outer, className, {
@@ -205,6 +210,7 @@ const ContextMenuButtonPure = ({
       style={style}
       data-testid="context-menu-button"
       onClick={callNewMenu}
+      ref={ref}
     >
       <IconButton
         className={iconClassName}

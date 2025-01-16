@@ -185,7 +185,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreate],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, t, withCreate],
   );
 
   const updateItem = React.useCallback(
@@ -264,7 +264,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems],
+    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems, t],
   );
 
   const deleteItem = React.useCallback(

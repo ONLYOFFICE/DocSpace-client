@@ -29,7 +29,6 @@ import { FileInput } from "../file-input";
 import { Row } from "../rows";
 import { Text } from "../text";
 import { InputSize } from "../text-input";
-import { VDRIndexingAction } from "../../enums";
 
 export const data: TTabItem[] = [
   {
@@ -73,7 +72,7 @@ export const data: TTabItem[] = [
         onRowClick={() => {}}
         onSelect={() => {}}
         isIndexEditingMode
-        onChangeIndex={(action: VDRIndexingAction) => {}}
+        onChangeIndex={() => {}}
       >
         <div
           style={{

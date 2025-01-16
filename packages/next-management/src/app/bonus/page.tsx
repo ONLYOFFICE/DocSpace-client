@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
 import {
   getSettings,
   getQuota,
@@ -48,6 +51,8 @@ async function Page() {
 
   const helpUrl = "https://helpdesk.onlyoffice.com";
   const dataBackupUrl = `${helpLink}/administration/docspace-settings.aspx#CreatingBackup_block`;
+
+  if (!openSource) return redirect(`${getBaseUrl()}/error/403`);
 
   return (
     <BonusPage

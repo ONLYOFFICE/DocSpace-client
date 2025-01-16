@@ -34,14 +34,16 @@ import { Header } from "../header";
 export const LayoutWrapper = ({
   children,
   portals,
+  isCommunity,
 }: {
   children: React.ReactNode;
   portals: unknown;
+  isCommunity: boolean;
 }) => {
   return (
     <StyledLayout>
       <Header />
-      <Article />
+      <Article isCommunity={isCommunity} />
       <Section portals={portals}>{children}</Section>
     </StyledLayout>
   );

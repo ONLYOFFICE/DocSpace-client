@@ -48,7 +48,7 @@ import { StyledArticle, StyledCrossIcon } from "./article.styled";
 import { ArticleHeader } from "./article-header";
 import { HideButton } from "./article-hide-button";
 
-export const Article = observer(() => {
+export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const {
     articleStore: { showText, setShowText, articleOpen, setArticleOpen },
   } = useStores();
@@ -102,28 +102,31 @@ export const Article = observer(() => {
           $currentColorScheme={theme?.currentColorScheme}
           linkData={{ path: "/settings", state: {} }}
         />
-        <ArticleItem
-          key="payments"
-          text="Payments"
-          icon={PaymentIconUrl}
-          showText={showText}
-          onClick={() => onItemClick("payments")}
-          isActive={pathname === "/payments"}
-          folderId="management_catalog-payments"
-          $currentColorScheme={theme?.currentColorScheme}
-          linkData={{ path: "/payments", state: {} }}
-        />
-        <ArticleItem
-          key="bonus"
-          text="Bonus"
-          icon={GiftReactSvgUrl}
-          showText={showText}
-          onClick={() => onItemClick("bonus")}
-          isActive={pathname === "/bonus"}
-          folderId="management_catalog-bonus"
-          $currentColorScheme={theme?.currentColorScheme}
-          linkData={{ path: "/bonus", state: {} }}
-        />
+        {!isCommunity ? (
+          <ArticleItem
+            key="payments"
+            text="Payments"
+            icon={PaymentIconUrl}
+            showText={showText}
+            onClick={() => onItemClick("payments")}
+            isActive={pathname === "/payments"}
+            folderId="management_catalog-payments"
+            $currentColorScheme={theme?.currentColorScheme}
+            linkData={{ path: "/payments", state: {} }}
+          />
+        ) : (
+          <ArticleItem
+            key="bonus"
+            text="Bonus"
+            icon={GiftReactSvgUrl}
+            showText={showText}
+            onClick={() => onItemClick("bonus")}
+            isActive={pathname === "/bonus"}
+            folderId="management_catalog-bonus"
+            $currentColorScheme={theme?.currentColorScheme}
+            linkData={{ path: "/bonus", state: {} }}
+          />
+        )}
       </div>
       <HideButton />
     </StyledArticle>

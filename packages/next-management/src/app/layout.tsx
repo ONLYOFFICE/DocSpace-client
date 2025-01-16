@@ -38,6 +38,7 @@ import {
   getUser,
   getColorTheme,
   getAllPortals,
+  getPortalTariff,
 } from "@/lib/actions";
 import Providers from "@/providers";
 
@@ -51,12 +52,15 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, settings, colorTheme, portals] = await Promise.all([
-    getUser(),
-    getSettings(),
-    getColorTheme(),
-    getAllPortals(),
-  ]);
+  const [user, settings, colorTheme, portals, portalTariff] = await Promise.all(
+    [
+      getUser(),
+      getSettings(),
+      getColorTheme(),
+      getAllPortals(),
+      getPortalTariff(),
+    ],
+  );
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -69,6 +73,8 @@ export default async function RootLayout({
     | ThemeKeys
     | undefined;
 
+  const { openSource } = portalTariff;
+
   return (
     <html lang="en">
       <head>
@@ -79,7 +85,9 @@ export default async function RootLayout({
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             <Toast isSSR />
             <ManagementDialogs settings={settings} user={user} />
-            <LayoutWrapper portals={portals}>{children}</LayoutWrapper>
+            <LayoutWrapper portals={portals} isCommunity={openSource}>
+              {children}
+            </LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>
       </body>

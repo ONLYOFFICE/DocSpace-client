@@ -54,7 +54,7 @@ export const Body = ({ domainValidator }) => {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
   const { spacesStore } = useStores();
-  const { setReferenceLink, setSpaceCreatedDialogVisible } = spacesStore;
+  const { setReferenceLink } = spacesStore;
 
   const [domain, setDomain] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -111,10 +111,7 @@ export const Body = ({ domainValidator }) => {
       try {
         setIsLoading(true);
         await setDomainName(domain);
-        await setPortalName(name).then((result) => {
-          setReferenceLink(result);
-          setSpaceCreatedDialogVisible(true);
-        });
+        await setPortalName(name).then((result) => setReferenceLink(result));
       } catch (err) {
         console.error(err);
       } finally {
@@ -146,7 +143,7 @@ export const Body = ({ domainValidator }) => {
       </FieldContainer>
       <FieldContainer
         isVertical
-        labelText={t("DocSpaceName")}
+        labelText={t("PortalName")}
         labelVisible
         hasError={!!(portalNameError || checkDomainError)}
         errorMessage={portalNameError || checkDomainError}

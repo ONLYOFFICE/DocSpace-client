@@ -34,7 +34,6 @@ export class SpacesStore {
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
-  spaceCreatedDialogVisible = false;
 
   referenceLink: URL | string = "";
 
@@ -75,10 +74,6 @@ export class SpacesStore {
 
   setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
     this.deletePortalDialogVisible = deletePortalDialogVisible;
-  };
-
-  setSpaceCreatedDialogVisible = (spaceCreatedDialogVisible: boolean) => {
-    this.spaceCreatedDialogVisible = spaceCreatedDialogVisible;
   };
 }
 

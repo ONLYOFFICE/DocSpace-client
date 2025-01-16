@@ -32,7 +32,6 @@ import { useStores } from "@/hooks/useStores";
 import { ChangeDomainDialog } from "./change-domain";
 import { CreatePortalDialog } from "./create-portal";
 import { DeletePortalDialog } from "./delete-portal";
-import { SpaceCreatedDialog } from "./space-created";
 
 export const ManagementDialogs = observer(({ settings, user }) => {
   const { spacesStore } = useStores();
@@ -40,7 +39,6 @@ export const ManagementDialogs = observer(({ settings, user }) => {
     domainDialogVisible,
     createPortalDialogVisible,
     deletePortalDialogVisible,
-    spaceCreatedDialogVisible,
   } = spacesStore;
 
   const { tenantAlias, baseDomain, domainValidator } = settings;
@@ -57,7 +55,6 @@ export const ManagementDialogs = observer(({ settings, user }) => {
         />
       )}
       {deletePortalDialogVisible && <DeletePortalDialog />}
-      {spaceCreatedDialogVisible && <SpaceCreatedDialog />}
     </>
   );
 });

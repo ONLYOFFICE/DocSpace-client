@@ -35,6 +35,9 @@ export const Header = () => {
 
   return (
     <StyledHeader>
+      <Text fontSize="12px" fontWeight={400}>
+        {t("Subheader")}
+      </Text>
       <Text fontSize="16px" fontWeight={700}>
         {t("ConfigurationHeader")}
       </Text>

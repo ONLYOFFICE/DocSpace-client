@@ -29,6 +29,7 @@ import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useStores } from "@/hooks/useStores";
@@ -44,17 +45,23 @@ export const Header = observer(() => {
   };
 
   return (
-    <Button
-      size={
-        currentDeviceType === DeviceType.desktop
-          ? ButtonSize.small
-          : ButtonSize.normal
-      }
-      label={t("NewSpace")}
-      primary={true}
-      onClick={onNewSpaceClick}
-      scale={false}
-    />
+    <>
+      <Text fontSize="12px" fontWeight={400}>
+        {t("Subheader")}
+      </Text>
+
+      <Button
+        size={
+          currentDeviceType === DeviceType.desktop
+            ? ButtonSize.small
+            : ButtonSize.normal
+        }
+        label={t("NewSpace")}
+        primary={true}
+        onClick={onNewSpaceClick}
+        scale={false}
+      />
+    </>
   );
 });
 

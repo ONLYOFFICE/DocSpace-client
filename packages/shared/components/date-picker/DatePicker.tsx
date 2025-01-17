@@ -80,7 +80,7 @@ const DatePicker = (props: DatePickerProps) => {
   };
 
   const deleteSelectedDate = (
-    propKey: string,
+    propKey: string | number,
     label: string | React.ReactNode,
     group: string | undefined,
     e: React.MouseEvent | undefined,
@@ -161,7 +161,7 @@ const DatePicker = (props: DatePickerProps) => {
         />
       )}
 
-      {isCalendarOpen && (
+      {isCalendarOpen ? (
         <StyledCalendar
           isMobile={isMobile}
           selectedDate={date ?? moment()}
@@ -173,7 +173,7 @@ const DatePicker = (props: DatePickerProps) => {
           locale={locale}
           initialDate={openDate}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

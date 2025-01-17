@@ -44,7 +44,7 @@ const ContactContainer = (props) => {
 
   return (
     <>
-      {isCommunity && (
+      {isCommunity ? (
         <StyledContactComponent>
           <div className="payments_contact">
             <Text
@@ -98,7 +98,7 @@ const ContactContainer = (props) => {
             </Text>
           </div>
         </StyledContactComponent>
-      )}
+      ) : null}
       <StyledContactComponent>
         <div className="payments_contact">
           <Text

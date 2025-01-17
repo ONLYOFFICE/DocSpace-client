@@ -59,9 +59,9 @@ const RequestDetails = ({ eventDetails }) => {
 
   return (
     <DetailsWrapper>
-      {eventDetails.status === 0 && (
+      {eventDetails.status === 0 ? (
         <StatusMessage message={t("FailedToConnect")} />
-      )}
+      ) : null}
       <Text as="h3" fontWeight={600} className="mb-4 mt-7">
         {t("RequestPostHeader")}
       </Text>

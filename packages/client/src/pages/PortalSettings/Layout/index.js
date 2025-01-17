@@ -35,7 +35,7 @@ import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
 
 import { useParams } from "react-router-dom";
-import { SectionHeaderContent, SectionPagingContent } from "./Section";
+import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
@@ -71,7 +71,6 @@ const Layout = ({
   setCurrentProductId,
   language,
   children,
-  addUsers,
   isGeneralPage,
   enablePlugins,
   isInitPlugins,
@@ -102,7 +101,7 @@ const Layout = ({
         showArticleLoader={!isLoadedArticleBody}
         needPageReload={needPageReload}
       />
-      {!isGeneralPage && (
+      {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
             {currentPath === webhookHistoryPath ? (
@@ -118,13 +117,8 @@ const Layout = ({
           </Section.SectionHeader>
 
           <Section.SectionBody>{children}</Section.SectionBody>
-          {addUsers && (
-            <Section.SectionPaging>
-              <SectionPagingContent />
-            </Section.SectionPaging>
-          )}
         </SectionWrapper>
-      )}
+      ) : null}
     </>
   );
 };

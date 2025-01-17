@@ -125,7 +125,7 @@ const SelectedDateTime = ({
         label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
         onClick={toggleCalendar}
       />
-      {isCalendarOpen && (
+      {isCalendarOpen ? (
         <CalendarElement
           filters={filters}
           onDateSet={onDateSet}
@@ -133,7 +133,7 @@ const SelectedDateTime = ({
           calendarRef={calendarRef}
           i18n={i18n}
         />
-      )}
+      ) : null}
     </div>
   );
 };
@@ -262,9 +262,8 @@ const DeliveryDatePicker = ({
             locale={i18n.language}
           />
         )}
-        {filters.deliveryDate !== null &&
-          isDefaultTime &&
-          (isTimeOpen && !isApplied ? (
+        {filters.deliveryDate !== null && isDefaultTime ? (
+          isTimeOpen && !isApplied ? (
             <TimePickerCell>
               <span className="timePickerItem">
                 <Text
@@ -314,7 +313,8 @@ const DeliveryDatePicker = ({
                 {t("SelectDeliveryTime")}
               </Text>
             </TimePickerCell>
-          ))}
+          )
+        ) : null}
       </Selectors>
     </>
   );

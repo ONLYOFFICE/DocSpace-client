@@ -78,9 +78,9 @@ const MainBar = ({
 
   return (
     <StyledContainer id="main-bar" className="main-bar">
-      {isVisibleBar && checkedMaintenance && !snackbarExist && (
+      {isVisibleBar && checkedMaintenance && !snackbarExist ? (
         <Bar firstLoad={firstLoad} setMaintenanceExist={setMaintenanceExist} />
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

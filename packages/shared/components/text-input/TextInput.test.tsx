@@ -25,89 +25,258 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, render } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { TextInput } from "./TextInput";
+import { TextInput } from ".";
 import { InputSize, InputType } from "./TextInput.enums";
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("<TextInput />", () => {
-  it("renders without error", () => {
-    render(
-      <TextInput
-        value="text"
-        size={InputSize.base}
-        type={InputType.text}
-        onChange={jest.fn()}
-      />,
-    );
+  const defaultProps = {
+    value: "text",
+    size: InputSize.base,
+    type: InputType.text,
+    onChange: jest.fn(),
+  };
 
-    expect(screen.getByTestId("text-input")).toBeInTheDocument();
+  it("renders without error", () => {
+    renderWithTheme(<TextInput {...defaultProps} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveValue(defaultProps.value);
   });
 
-  //
-  // it("not re-render test", () => {
-  //
-  //   const onChange = jest.fn();
+  it("applies custom className and id", () => {
+    const testProps = {
+      ...defaultProps,
+      className: "custom-class",
+      id: "custom-id",
+    };
 
-  //   const wrapper = shallow(
-  //     <TextInput value="text" onChange={onChange} />
-  //   ).instance();
+    renderWithTheme(<TextInput {...testProps} />);
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(wrapper.props);
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveClass("custom-class");
+    expect(input).toHaveAttribute("id", "custom-id");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(false);
-  // });
+  it("handles disabled state correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} isDisabled />);
 
-  //
-  // it("re-render test by value", () => {
-  //
-  //   const onChange = jest.fn();
+    const input = screen.getByTestId("text-input");
+    expect(input).toBeDisabled();
+  });
 
-  //   const wrapper = shallow(
-  //     <TextInput value="text" onChange={onChange} />
-  //   ).instance();
+  it("handles readonly state correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} isReadOnly />);
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate({
-  //     ...wrapper.props,
-  //     value: "another text",
-  //   });
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("readonly");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+  it("shows placeholder text", () => {
+    const placeholder = "Enter text here";
+    renderWithTheme(<TextInput {...defaultProps} placeholder={placeholder} />);
 
-  //
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //
-  //     <TextInput value="text" onChange={jest.fn()} id="testId" />
-  //   );
+    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("calls onChange when text is entered", async () => {
+    const onChange = jest.fn();
+    renderWithTheme(<TextInput {...defaultProps} onChange={onChange} />);
 
-  //
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //
-  //     <TextInput value="text" onChange={jest.fn()} className="test" />
-  //   );
+    const input = screen.getByTestId("text-input");
+    await userEvent.type(input, "a");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    expect(onChange).toHaveBeenCalled();
+  });
 
-  //
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //
-  //     <TextInput value="text" onChange={jest.fn()} style={{ color: "red" }} />
-  //   );
+  it("calls onFocus when input is focused", () => {
+    const onFocus = jest.fn();
+    renderWithTheme(<TextInput {...defaultProps} onFocus={onFocus} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const input = screen.getByTestId("text-input");
+    fireEvent.focus(input);
+
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  it("calls onBlur when input loses focus", () => {
+    const onBlur = jest.fn();
+    renderWithTheme(<TextInput {...defaultProps} onBlur={onBlur} />);
+
+    const input = screen.getByTestId("text-input");
+    fireEvent.blur(input);
+
+    expect(onBlur).toHaveBeenCalled();
+  });
+
+  it("applies error styles when hasError is true", () => {
+    renderWithTheme(<TextInput {...defaultProps} hasError />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-error", "true");
+  });
+
+  it("applies warning styles when hasWarning is true", () => {
+    renderWithTheme(<TextInput {...defaultProps} hasWarning />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-warning", "true");
+  });
+
+  it("handles maxLength correctly", () => {
+    const maxLength = 5;
+    renderWithTheme(<TextInput {...defaultProps} maxLength={maxLength} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("maxLength", String(maxLength));
+  });
+
+  it("applies correct size class", () => {
+    renderWithTheme(<TextInput {...defaultProps} size={InputSize.large} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-size", InputSize.large);
+  });
+
+  it("applies correct type attribute", () => {
+    renderWithTheme(<TextInput {...defaultProps} type={InputType.password} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("type", "password");
+  });
+
+  it("handles name attribute correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} name="username" />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("name", "username");
+  });
+
+  it("handles tabIndex correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} tabIndex={2} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("tabindex", "2");
+  });
+
+  it("handles autoComplete attribute", () => {
+    renderWithTheme(<TextInput {...defaultProps} autoComplete="off" />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("autocomplete", "off");
+  });
+
+  it("handles custom style prop", () => {
+    const customStyle = { color: "red", marginTop: "10px" };
+    renderWithTheme(<TextInput {...defaultProps} style={customStyle} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveStyle(customStyle);
+  });
+
+  it("handles font weight props correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} fontWeight={700} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveStyle({ fontWeight: 700 });
+  });
+
+  it("applies bold style when isBold is true", () => {
+    renderWithTheme(<TextInput {...defaultProps} isBold />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveStyle({ fontWeight: 600 });
+  });
+
+  it("handles inputMode correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} inputMode="numeric" />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("inputmode", "numeric");
+  });
+
+  it("handles dir attribute", () => {
+    renderWithTheme(<TextInput {...defaultProps} dir="rtl" />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("dir", "rtl");
+  });
+
+  it("calls onKeyDown when key is pressed", () => {
+    const onKeyDown = jest.fn();
+    renderWithTheme(<TextInput {...defaultProps} onKeyDown={onKeyDown} />);
+
+    const input = screen.getByTestId("text-input");
+    fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
+
+    expect(onKeyDown).toHaveBeenCalled();
+  });
+
+  it("calls onClick when clicked", () => {
+    const onClick = jest.fn();
+    renderWithTheme(<TextInput {...defaultProps} onClick={onClick} />);
+
+    const input = screen.getByTestId("text-input");
+    fireEvent.click(input);
+
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it("calls onContextMenu on right click", () => {
+    const onContextMenu = jest.fn();
+    renderWithTheme(
+      <TextInput {...defaultProps} onContextMenu={onContextMenu} />,
+    );
+
+    const input = screen.getByTestId("text-input");
+    fireEvent.contextMenu(input);
+
+    expect(onContextMenu).toHaveBeenCalled();
+  });
+
+  it("handles scale prop correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} scale />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-scale", "true");
+  });
+
+  it("handles withBorder prop correctly", () => {
+    renderWithTheme(<TextInput {...defaultProps} withBorder={false} />);
+
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-without-border", "true");
+  });
+
+  describe("mask functionality", () => {
+    it("handles keepCharPositions prop with mask", () => {
+      const mask = [/\d/, /\d/, "-", /\d/, /\d/];
+      renderWithTheme(
+        <TextInput
+          {...defaultProps}
+          mask={mask}
+          keepCharPositions
+          value="1234"
+        />,
+      );
+
+      const input = screen.getByTestId("text-input");
+      expect(input).toHaveAttribute("data-keep-char-positions", "true");
+    });
+
+    it("handles guide prop with mask", () => {
+      const mask = [/\d/, /\d/, "-", /\d/, /\d/];
+      renderWithTheme(
+        <TextInput {...defaultProps} mask={mask} guide value="12" />,
+      );
+
+      const input = screen.getByTestId("text-input");
+      expect(input).toHaveAttribute("data-guide", "true");
+    });
+  });
 });

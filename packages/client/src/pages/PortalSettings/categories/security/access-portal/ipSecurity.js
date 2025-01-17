@@ -278,7 +278,7 @@ const IpSecurity = (props) => {
         onClick={onSelectType}
       />
 
-      {enable && (
+      {enable ? (
         <UserFields
           className="user-fields"
           inputs={ips}
@@ -290,9 +290,9 @@ const IpSecurity = (props) => {
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
         />
-      )}
+      ) : null}
 
-      {enable && (
+      {enable ? (
         <>
           <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
@@ -301,7 +301,7 @@ const IpSecurity = (props) => {
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

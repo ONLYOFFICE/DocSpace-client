@@ -381,7 +381,7 @@ class SocketHelper {
 
       const { url, publicRoomKey } = this.connectionSettings;
 
-      const origin = window.location.origin;
+      const { origin } = window.location;
 
       const config: TConfig = {
         withCredentials: true,
@@ -548,7 +548,10 @@ class SocketHelper {
       if (command === "subscribe") {
         if (this.subscribeEmits.has(id)) return;
 
-        this.subscribeEmits.set(id, data?.individual);
+        this.subscribeEmits.set(
+          id,
+          typeof data === "object" && data?.individual,
+        );
       }
 
       if (command === "unsubscribe") {

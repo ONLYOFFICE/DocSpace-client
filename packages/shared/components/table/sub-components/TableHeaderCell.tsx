@@ -95,23 +95,23 @@ const TableHeaderCell = ({
             {enable ? title : ""}
           </Text>
 
-          {sortingVisible && (
+          {sortingVisible ? (
             <IconButton
               onClick={column.onIconClick ? onIconClick : onClick}
               iconName={SortDescReactSvgUrl}
               className="header-container-text-icon"
               size={12}
-              color={isActive ? globalColors.grayMain : globalColors.gray}
+              color={isActive ? globalColors.gray : globalColors.gray}
             />
-          )}
+          ) : null}
         </div>
-        {resizable && (
+        {resizable ? (
           <div
             data-column={`${index}`}
             className="resize-handle not-selectable"
             onMouseDown={onMouseDown}
           />
-        )}
+        ) : null}
       </div>
     </StyledTableHeaderCell>
   ) : (
@@ -130,35 +130,35 @@ const TableHeaderCell = ({
     >
       <div className="table-container_header-item">
         <div className="header-container-text-wrapper" onClick={onClick}>
-          {checkbox && (checkbox.isIndeterminate || checkbox.value) && (
+          {checkbox && (checkbox.isIndeterminate || checkbox.value) ? (
             <Checkbox
               onChange={checkbox.onChange}
               isChecked={checkbox.value}
               isIndeterminate={checkbox.isIndeterminate}
             />
-          )}
+          ) : null}
 
           <Text fontWeight={600} className="header-container-text">
             {enable ? title : ""}
           </Text>
 
-          {sortingVisible && (
+          {sortingVisible ? (
             <IconButton
               onClick={column.onIconClick ? onIconClick : onClick}
               iconName={SortDescReactSvgUrl}
               className="header-container-text-icon"
               size={12}
-              color={isActive ? globalColors.grayMain : globalColors.gray}
+              color={globalColors.gray}
             />
-          )}
+          ) : null}
         </div>
-        {resizable && (
+        {resizable ? (
           <div
             data-column={`${index}`}
             className="resize-handle not-selectable"
             onMouseDown={onMouseDown}
           />
-        )}
+        ) : null}
       </div>
     </StyledTableHeaderCell>
   );

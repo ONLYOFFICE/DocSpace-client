@@ -110,7 +110,7 @@ const Branding = ({
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <WhiteLabel />
-      {showSettings && (
+      {showSettings ? (
         <>
           <hr />
           {displayAbout ? (
@@ -129,7 +129,7 @@ const Branding = ({
           ) : null}
           <AdditionalResources />
         </>
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

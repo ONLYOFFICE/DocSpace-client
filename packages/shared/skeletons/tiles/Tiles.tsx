@@ -29,8 +29,8 @@ import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
 import { TileSkeleton } from "./Tile";
-import { StyledTilesSkeleton, StyledTilesWrapper } from "./Tiles.styled";
 import type { TilesSkeletonProps } from "./Tiles.types";
+import styles from "./Tiles.module.scss";
 
 export const TilesSkeleton = ({
   foldersCount = 2,
@@ -50,7 +50,7 @@ export const TilesSkeleton = ({
   }
 
   return (
-    <StyledTilesWrapper>
+    <div className={styles.tilesWrapper}>
       {foldersCount > 0 ? (
         <RectangleSkeleton
           height="22px"
@@ -60,7 +60,7 @@ export const TilesSkeleton = ({
           {...rest}
         />
       ) : null}
-      <StyledTilesSkeleton>{folders}</StyledTilesSkeleton>
+      <div className={styles.tilesSkeleton}>{folders}</div>
 
       {filesCount > 0
         ? withTitle && (
@@ -73,7 +73,7 @@ export const TilesSkeleton = ({
             />
           )
         : null}
-      <StyledTilesSkeleton>{files}</StyledTilesSkeleton>
-    </StyledTilesWrapper>
+      <div className={styles.tilesSkeleton}>{files}</div>
+    </div>
   );
 };

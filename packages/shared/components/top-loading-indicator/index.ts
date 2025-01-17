@@ -37,10 +37,21 @@ let elem =
   typeof document !== "undefined" &&
   document.getElementById("ipl-progress-indicator");
 
+const setAttributes = (element: HTMLElement | null) => {
+  if (!element) return;
+  element.setAttribute("role", "progressbar");
+  element.setAttribute("aria-valuemin", "0");
+  element.setAttribute("aria-valuemax", "100");
+  element.setAttribute("data-test-id", "top-loader");
+};
+
 const cancelProgress = () => {
   if (timerId) clearTimeout(timerId);
   timerId = null;
-  if (elem) elem.style.width = "0px";
+  if (elem) {
+    elem.style.width = "0px";
+    elem.setAttribute("aria-valuenow", "0");
+  }
   width = 0;
 };
 
@@ -51,13 +62,19 @@ const animatingWidth = () => {
   }
 
   width += percentage !== MAX ? increasePercentage : moreIncreasePercentage;
-  if (elem) elem.style.width = `${width}%`;
+  if (elem) {
+    elem.style.width = `${width}%`;
+    elem.setAttribute("aria-valuenow", width.toString());
+  }
 };
 
 const startInterval = () => {
   if (timerId) return;
 
-  if (!elem) elem = document.getElementById("ipl-progress-indicator");
+  if (!elem) {
+    elem = document.getElementById("ipl-progress-indicator");
+    setAttributes(elem);
+  }
 
   timerId = setInterval(animatingWidth, intervalTimeout);
 };
@@ -65,6 +82,9 @@ const startInterval = () => {
 export default class TopLoaderService {
   static start() {
     percentage = 0;
+
+    if (elem) elem.setAttribute("aria-valuenow", "0");
+
     startInterval();
   }
 
@@ -74,5 +94,7 @@ export default class TopLoaderService {
 
   static end() {
     percentage = MAX;
+
+    if (elem) elem.setAttribute("aria-valuenow", "100");
   }
 }

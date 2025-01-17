@@ -222,7 +222,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         isDisabled={false}
       />
-      {hasCommonFiles && (
+      {hasCommonFiles ? (
         <ImportSection
           isChecked={importOptions.importCommonFiles}
           onChange={(e) => onChange(e, "importCommonFiles")}
@@ -242,9 +242,9 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           isDisabled={false}
         />
-      )}
+      ) : null}
 
-      {hasProjectFiles && (
+      {hasProjectFiles ? (
         <ImportSection
           isChecked={importOptions.importProjectFiles}
           onChange={(e) => onChange(e, "importProjectFiles")}
@@ -262,7 +262,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           isDisabled={false}
         />
-      )}
+      ) : null}
 
       <MigrationButtons
         className="save-cancel-buttons"
@@ -276,7 +276,7 @@ const ImportStep = (props: ImportStepProps) => {
         onMigrationCancelClick={showCancelDialog}
       />
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -285,7 +285,7 @@ const ImportStep = (props: ImportStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

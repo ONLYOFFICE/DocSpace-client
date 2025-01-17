@@ -150,7 +150,7 @@ const GroupMember = ({
             >
               {decode(user.displayName)}
             </Text>
-            {isExpect && <StyledSendClockIcon />}
+            {isExpect ? <StyledSendClockIcon /> : null}
           </Box>
           <Text className="email" noSelect>
             <span dir="auto">{typeLabel}</span> |{" "}
@@ -160,7 +160,7 @@ const GroupMember = ({
       </div>
 
       <div className="individual-rights-tooltip">
-        {hasIndividualRightsInRoom && (
+        {hasIndividualRightsInRoom ? (
           <HelpButton
             place="left"
             offsetRight={0}
@@ -171,10 +171,10 @@ const GroupMember = ({
               </Text>
             }
           />
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions ? (
         <div className="role-wrapper">
           {member.canEditAccess ? (
             <ComboBox
@@ -204,7 +204,7 @@ const GroupMember = ({
             </Text>
           )}
         </div>
-      )}
+      ) : null}
     </Styled.GroupMember>
   );
 };

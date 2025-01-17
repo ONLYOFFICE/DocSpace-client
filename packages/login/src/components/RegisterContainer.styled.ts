@@ -128,7 +128,7 @@ export const RegisterContainer = styled.div<{
     }
 
     span {
-      line-height: 20px;
+      line-height: 20px !important;
     }
 
     .checkbox-news {

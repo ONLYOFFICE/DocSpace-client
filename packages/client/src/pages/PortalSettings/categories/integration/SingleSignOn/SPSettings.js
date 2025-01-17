@@ -59,7 +59,7 @@ const SPSettings = ({ currentDeviceType }) => {
 
   return (
     <Box className="service-provider-settings">
-      {isMobileView && <ToggleSSO />}
+      {isMobileView ? <ToggleSSO /> : null}
       <IdpSettings />
       <Certificates provider="IdentityProvider" />
       <Certificates provider="ServiceProvider" />

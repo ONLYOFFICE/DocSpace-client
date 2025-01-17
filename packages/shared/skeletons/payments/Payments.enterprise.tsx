@@ -26,8 +26,7 @@
 
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
-
-import { StyledEnterpriseComponent } from "./Payments.styled";
+import styles from "./Payments.module.scss";
 import type { PaymentsLoaderProps } from "./Payments.types";
 
 const EnterpriseLoader = ({
@@ -47,7 +46,7 @@ const EnterpriseLoader = ({
   } = rest;
 
   return (
-    <StyledEnterpriseComponent>
+    <div className={styles.enterpriseComponent} data-testid="enterprise-loader">
       <RectangleSkeleton
         className="payments-loader_1"
         title={title}
@@ -191,7 +190,7 @@ const EnterpriseLoader = ({
         speed={speed}
         animate={animate}
       />
-    </StyledEnterpriseComponent>
+    </div>
   );
 };
 export default EnterpriseLoader;

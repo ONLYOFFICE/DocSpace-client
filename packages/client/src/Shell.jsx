@@ -48,6 +48,8 @@ import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import "@docspace/shared/styles/theme.scss";
+
 import config from "PACKAGE_FILE";
 
 import Main from "./components/Main";
@@ -470,15 +472,19 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
       {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
-        {barTypeInFrame !== "none" && <MainBar />}
+        {!isMobileOnly && !isFrame ? (
+          <ReactSmartBanner t={t} ready={ready} />
+        ) : null}
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
         <div className="main-container">
           <Outlet />
         </div>

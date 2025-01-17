@@ -42,7 +42,7 @@ export type TTabItem = {
   badge?: React.ReactNode;
 };
 
-export interface TabsProps {
+export type TabsProps = {
   /** Child elements. */
   items: TTabItem[];
   /** Selected item of tabs. */
@@ -60,4 +60,4 @@ export interface TabsProps {
   onSelect?: (element: TTabItem) => void;
 
   style?: React.CSSProperties;
-}
+};

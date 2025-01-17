@@ -172,12 +172,12 @@ const NavMenu = (props) => {
         withBlur
       />
 
-      {!hideHeader &&
-        (isLoaded && isAuthenticated ? (
+      {!hideHeader ? (
+        isLoaded && isAuthenticated ? (
           <>
-            {!isPreparationPortal && (
+            {!isPreparationPortal ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
-            )}
+            ) : null}
             <Header
               customHeader={customHeader}
               isPreparationPortal={isPreparationPortal}
@@ -193,13 +193,14 @@ const NavMenu = (props) => {
           <NavMenuHeaderLoader />
         ) : (
           <HeaderUnAuth />
-        ))}
+        )
+      ) : null}
 
-      {isAsideAvailable && (
+      {isAsideAvailable ? (
         <Aside visible={isAsideVisible} onClick={backdropClick}>
           {asideContent}
         </Aside>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

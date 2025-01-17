@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
@@ -96,7 +96,9 @@ const FilesRowContainer = ({
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         isIndexEditingMode={isIndexEditingMode}
         icon={icon}

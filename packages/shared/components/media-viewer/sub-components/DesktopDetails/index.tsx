@@ -28,8 +28,8 @@ import React from "react";
 
 import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "../../../text";
+import { IconButton } from "../../../icon-button";
 
 import { ControlBtn } from "../../MediaViewer.styled";
 
@@ -49,7 +49,7 @@ export const DesktopDetails = ({
         {title}
       </Text>
 
-      {showCloseButton && (
+      {showCloseButton ? (
         <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
           <IconButton
             color={globalColors.white}
@@ -58,7 +58,7 @@ export const DesktopDetails = ({
             isClickable
           />
         </ControlBtn>
-      )}
+      ) : null}
     </DesktopDetailsContainer>
   );
 };

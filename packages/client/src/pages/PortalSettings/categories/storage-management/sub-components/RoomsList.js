@@ -95,13 +95,13 @@ const RoomsListComponent = (props) => {
         </Text>
         {roomsList}
 
-        {roomsListLength > 5 && (
+        {roomsListLength > 5 ? (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
             onClick={onClickRooms}
           />
-        )}
+        ) : null}
       </div>
     </StyledStatistics>
   );

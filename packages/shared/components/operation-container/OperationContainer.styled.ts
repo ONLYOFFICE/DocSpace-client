@@ -24,10 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledOperationContainer = styled.div`
-  background: ${(props) => props.theme.errorContainer.background};
+  ${(props) =>
+    props.theme.errorContainer &&
+    css`
+      background: ${props.theme.errorContainer.background};
+    `};
+
   cursor: default;
   height: 100%;
   width: 100%;
@@ -47,8 +52,12 @@ const StyledOperationContainer = styled.div`
 
   .operation-description {
     margin-top: 16px;
-    color: ${(props) =>
-      props.theme.preparationPortalProgress.descriptionTextColor};
+
+    ${(props) =>
+      props.theme.preparationPortalProgress &&
+      css`
+        color: ${props.theme.preparationPortalProgress.descriptionTextColor};
+      `};
   }
 `;
 

@@ -66,11 +66,11 @@ const ErrorFileUpload = ({
         maxWidth="320"
         color={theme.tooltip.backgroundColor}
       />
-      {item.needPassword && (
+      {item.needPassword ? (
         <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
           {showPasswordInput ? t("HideInput") : t("EnterPassword")}
         </Text>
-      )}
+      ) : null}
     </div>
   );
 };

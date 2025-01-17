@@ -45,13 +45,13 @@ const UsersInfo = ({
         selectedUsers={totalUsedUsers}
         totalLicenceLimit={quota.max}
       >
-        {totalUsedUsers > quota.max && (
+        {totalUsedUsers > quota.max ? (
           <Text className="license-limit-warning">
             {t("Settings:UserLimitExceeded", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-        )}
+        ) : null}
 
         <Box className="users-info-wrapper">
           <Text className="selected-users-count" truncate>

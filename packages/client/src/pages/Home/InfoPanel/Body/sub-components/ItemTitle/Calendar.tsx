@@ -133,7 +133,7 @@ const CalendarComponent = ({
         />
       </div>
 
-      {isOpen && (
+      {isOpen ? (
         <StyledCalendar
           height={height}
           setSelectedDate={onDateSet}
@@ -145,7 +145,7 @@ const CalendarComponent = ({
           isScroll={!isMobile()}
           locale={locale}
         />
-      )}
+      ) : null}
     </StyledCalendarComponent>
   );
 };

@@ -102,7 +102,7 @@ const DiskSpaceUsedComponent = (props) => {
 
   return (
     <StyledDiscSpaceUsedComponent>
-      {standalone && isVisibleDialog && (
+      {standalone && isVisibleDialog ? (
         <ChangeStorageQuotaDialog
           isDisableQuota={isDisableQuota}
           isVisible={isVisibleDialog}
@@ -110,25 +110,25 @@ const DiskSpaceUsedComponent = (props) => {
           onClose={onClose}
           portalInfo={portalInfo}
         />
-      )}
+      ) : null}
       <StyledMainTitle fontSize="16px" fontWeight={700}>
         {t("DiskSpaceUsed")}
       </StyledMainTitle>
       <div className="disk-space_content">
         <div className="disk-space_size-info">
-          {(!standalone || (standalone && isTenantCustomQuotaSet)) && (
+          {!standalone || (standalone && isTenantCustomQuotaSet) ? (
             <Text fontWeight={700} fontSize="14px" className="disk-space_title">
               {t("TotalStorage", {
                 size: totalSize,
               })}
             </Text>
-          )}
+          ) : null}
           <Text fontWeight={700} fontSize="14px" className="disk-space_title">
             {t("UsedStorage", {
               size: usedSize,
             })}
           </Text>
-          {standalone && !isTenantCustomQuotaSet && (
+          {standalone && !isTenantCustomQuotaSet ? (
             <ColorTheme
               themeId={ThemeId.Link}
               fontWeight={700}
@@ -137,9 +137,9 @@ const DiskSpaceUsedComponent = (props) => {
             >
               {t("Common:ManageStorageQuota")}
             </ColorTheme>
-          )}
+          ) : null}
         </div>
-        {standalone && isTenantCustomQuotaSet && (
+        {standalone && isTenantCustomQuotaSet ? (
           <div className="disk-space_icon">
             <ContextMenu ref={ref} getContextModel={getContextModel} />
             <ContextMenuButton
@@ -149,7 +149,7 @@ const DiskSpaceUsedComponent = (props) => {
               displayType="toggle"
             />
           </div>
-        )}
+        ) : null}
       </div>
       <Diagram />
       <RecalculateButton />

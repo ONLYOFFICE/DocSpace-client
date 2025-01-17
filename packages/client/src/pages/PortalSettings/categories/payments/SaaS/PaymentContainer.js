@@ -300,17 +300,19 @@ const PaymentContainer = (props) => {
     <Consumer>
       {(context) => (
         <StyledBody
-          isChangeView={context.sectionWidth <= size.mobile && expandArticle}
+          isChangeView={
+            context.sectionWidth <= size.mobile ? expandArticle : null
+          }
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && isAlreadyPaid && (
+          {!isNonProfit && isAlreadyPaid ? (
             <PayerInformationContainer
               isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
             />
-          )}
+          ) : null}
 
           <CurrentTariffContainer />
 
@@ -318,33 +320,33 @@ const PaymentContainer = (props) => {
           {planDescription()}
 
           {!isNonProfit &&
-            !isGracePeriod &&
-            !isNotPaidPeriod &&
-            !isFreeAfterPaidPeriod && (
-              <div className="payment-info_wrapper">
-                <Text
-                  noSelect
-                  fontWeight={600}
-                  fontSize="14px"
-                  className="payment-info_managers-price"
-                >
-                  <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-                    From {{ currencySymbol }}
-                    {{ price: startValue }} per admin/month
-                  </Trans>
-                </Text>
+          !isGracePeriod &&
+          !isNotPaidPeriod &&
+          !isFreeAfterPaidPeriod ? (
+            <div className="payment-info_wrapper">
+              <Text
+                noSelect
+                fontWeight={600}
+                fontSize="14px"
+                className="payment-info_managers-price"
+              >
+                <Trans t={t} i18nKey="PerUserMonth" ns="Common">
+                  From {{ currencySymbol }}
+                  {{ price: startValue }} per admin/month
+                </Trans>
+              </Text>
 
-                {renderTooltip()}
-              </div>
-            )}
+              {renderTooltip()}
+            </div>
+          ) : null}
 
           <div className="payment-info">
-            {!isNonProfit && (
+            {!isNonProfit ? (
               <PriceCalculation
                 t={t}
                 isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
               />
-            )}
+            ) : null}
 
             <BenefitsContainer t={t} />
           </div>

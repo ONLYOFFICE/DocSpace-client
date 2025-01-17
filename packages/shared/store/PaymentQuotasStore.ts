@@ -94,7 +94,7 @@ class PaymentQuotasStore {
     if (!res) return;
 
     runInAction(() => {
-      this.portalPaymentQuotas = res[0];
+      [this.portalPaymentQuotas] = res;
 
       this.portalPaymentQuotasFeatures = res[0].features;
     });

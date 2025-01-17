@@ -114,6 +114,7 @@ const SaveCancelButtons = ({
       {getTopComponent?.()}
       <div className="buttons-flex">
         <Button
+          testId="save-button"
           tabIndex={tabIndexSaveButton}
           className={classNameSave}
           size={buttonSize}
@@ -126,6 +127,7 @@ const SaveCancelButtons = ({
           scale={isMobile()}
         />
         <Button
+          testId="cancel-button"
           tabIndex={tabIndexCancelButton}
           className={classNameCancel}
           size={buttonSize}
@@ -136,9 +138,9 @@ const SaveCancelButtons = ({
           scale={isMobile()}
         />
       </div>
-      {showReminder && reminderText && (
+      {showReminder && reminderText ? (
         <Text className="unsaved-changes">{reminderText}</Text>
-      )}
+      ) : null}
     </StyledSaveCancelButtons>
   );
 };

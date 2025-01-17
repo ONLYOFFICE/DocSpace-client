@@ -113,13 +113,13 @@ const HeaderNavigationIcon = ({
         {...rest}
       />
 
-      {badgeNumber > 0 && (
+      {badgeNumber > 0 ? (
         <Badge
           className="navigation-item__badge"
           label={badgeNumber}
           onClick={onBadgeClick}
         />
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

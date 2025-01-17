@@ -37,7 +37,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { toastr } from "@docspace/shared/components/toast";
 import { RoomContent } from "./RoomContent";
 

@@ -130,7 +130,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   return (
     <StyledAccessSelector className="access-selector">
-      {!(isMobile() && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -151,9 +151,9 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -177,7 +177,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
     </StyledAccessSelector>
   );
 };

@@ -29,9 +29,9 @@ import React, { useState, useRef } from "react";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ContextMenu, TContextMenuRef } from "../../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 
-import { IContextButtonProps } from "../Navigation.types";
+import { TContextButtonProps } from "../Navigation.types";
 
 const ContextButton = ({
   className,
@@ -40,13 +40,14 @@ const ContextButton = ({
   isTrashFolder,
   isMobile,
   id,
+  title,
   onCloseDropBox,
   onContextOptionsClick,
   ...rest
-}: IContextButtonProps) => {
+}: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
-  const menuRef = useRef<TContextMenuRef | null>(null);
+  const menuRef = useRef<ContextMenuRefType>(null);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {
@@ -81,7 +82,6 @@ const ContextButton = ({
       />
       <ContextMenu
         model={model}
-        // containerRef={ref}
         ref={menuRef}
         onHide={onHide}
         scaled={false}

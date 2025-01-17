@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
 import ButtonDelete from "./ButtonDelete";
@@ -43,7 +42,6 @@ const ImageEditor = ({
   className,
   disableImageRescaling,
   editorBorderRadius,
-  maxImageSize,
   onChangeFile,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
@@ -55,9 +53,17 @@ const ImageEditor = ({
     image.uploadedFile.includes("default_user_photo");
 
   return (
-    <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
-        <div className={classNameWrapperImageCropper}>
+    <div
+      className={className}
+      role="region"
+      aria-label="Image editor"
+      data-test-id="image-editor"
+    >
+      {image.uploadedFile && !isDefaultAvatar ? (
+        <div
+          className={classNameWrapperImageCropper}
+          data-test-id="image-cropper-wrapper"
+        >
           <ImageCropper
             t={t}
             image={image}
@@ -72,13 +78,7 @@ const ImageEditor = ({
           />
           {Preview}
         </div>
-      )}
-      {/* <Dropzone
-        t={t}
-        setUploadedFile={setUploadedFile}
-        isDisabled={isDisabled}
-        maxImageSize={maxImageSize}
-      /> */}
+      ) : null}
     </div>
   );
 };

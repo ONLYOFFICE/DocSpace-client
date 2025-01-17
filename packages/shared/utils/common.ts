@@ -1,4 +1,3 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -38,8 +37,6 @@ import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -57,11 +54,15 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
+import { AvatarRole } from "../components/avatar/Avatar.enums";
+
+import { flagsIcons } from "./image-flags";
+
 import { parseAddress } from "./email";
+
 import {
   FolderType,
   RoomsType,
-  ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
@@ -559,10 +560,11 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  obj: { [key: string]: {} },
+  objParam: { [key: string]: {} },
   keyPath: string[],
   value: {},
 ) {
+  let obj = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
@@ -753,7 +755,8 @@ export const getDaysRemaining = (autoDelete: Date) => {
   return `${daysRemaining}`;
 };
 
-export const getFileExtension = (fileTitle: string) => {
+export const getFileExtension = (fileTitleParam: string) => {
+  let fileTitle = fileTitleParam;
   if (!fileTitle) {
     return "";
   }
@@ -1271,8 +1274,8 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const maxImageSize = maxSize ?? ONE_MEGABYTE;
   const imageBitMap = await createImageBitmap(file);
 
-  const width = imageBitMap.width;
-  const height = imageBitMap.height;
+  const { width } = imageBitMap;
+  const { height } = imageBitMap;
 
   // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);

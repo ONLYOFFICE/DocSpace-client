@@ -40,6 +40,7 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
+import "../../../shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
@@ -126,7 +127,9 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers
             value={{

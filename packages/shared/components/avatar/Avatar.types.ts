@@ -25,10 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { AvatarRole, AvatarSize } from "./Avatar.enums";
-import { TColorScheme } from "../../themes";
+import { Nullable } from "../../types";
 
-export interface AvatarProps {
+import { AvatarRole, AvatarSize } from "./Avatar.enums";
+
+export type TAvarModel = { label: string; icon: string } & (
+  | {
+      key: string;
+      onClick: () => void;
+    }
+  | {
+      key: "upload";
+      onClick: (ref?: React.MutableRefObject<Nullable<HTMLDivElement>>) => void;
+    }
+);
+
+export type AvatarProps = {
   /** Size of avatar */
   size: AvatarSize;
   /** Adds a table of user roles */
@@ -63,5 +75,6 @@ export interface AvatarProps {
   noClick?: boolean;
   hasAvatar?: boolean;
   onChangeFile?: () => void;
-  currentColorScheme?: TColorScheme;
-}
+
+  model?: TAvarModel[];
+};

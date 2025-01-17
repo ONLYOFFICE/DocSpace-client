@@ -86,7 +86,7 @@ class GoogleCloudSettings extends React.Component {
           tabIndex={1}
         />
 
-        {isNeedFilePath && (
+        {isNeedFilePath ? (
           <TextInput
             id="file-path-input"
             name={filePath}
@@ -99,7 +99,7 @@ class GoogleCloudSettings extends React.Component {
             tabIndex={2}
             hasError={isError[filePath]}
           />
-        )}
+        ) : null}
       </>
     );
   }

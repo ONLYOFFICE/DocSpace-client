@@ -114,7 +114,7 @@ const ClientFormLoader = ({
           </StyledInputGroup>
         </StyledInputBlock>
       </StyledBlock>
-      {isEdit && (
+      {isEdit ? (
         <StyledBlock>
           <StyledHeaderRow>
             <RectangleSkeleton width="47px" height="22px" />
@@ -144,7 +144,7 @@ const ClientFormLoader = ({
             </StyledInputGroup>
           </StyledInputBlock>
         </StyledBlock>
-      )}
+      ) : null}
       <StyledBlock>
         <StyledHeaderRow>
           <RectangleSkeleton width="96px" height="22px" />

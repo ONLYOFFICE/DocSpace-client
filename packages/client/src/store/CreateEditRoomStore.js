@@ -248,6 +248,8 @@ class CreateEditRoomStore {
       title,
       roomOwner,
       icon,
+      invitations,
+      roomId,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -340,6 +342,16 @@ class CreateEditRoomStore {
 
       if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
+
+      if (room.isTemplate && invitations.length) {
+        requests.push(
+          updateRoomMemberRole(roomId, {
+            invitations,
+            notify: false,
+            sharingMessage: "",
+          }),
+        );
+      }
 
       if (requests.length) {
         await Promise.all(requests);

@@ -25,16 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useRef } from "react";
-
 import isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import PeopleSelector from "@docspace/shared/selectors/People";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
-
+import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 
@@ -61,7 +59,6 @@ const EditRoomDialog = ({
   const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [inviteItems, setInviteItems] = useState([]);
-
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
@@ -257,34 +254,13 @@ const EditRoomDialog = ({
 
       <ModalDialog.Container>
         {addUsersPanelVisible ? (
-          <PeopleSelector
-            useAside
-            // onClose={onClosePanels}
-            onSubmit={onSubmitItems}
-            submitButtonLabel={t("Common:AddButton")}
-            disableSubmitButton={false}
-            isMultiSelect
-            disableDisabledUsers
-            withGroups
-            withInfo
-            // infoText={infoText}
-            // withoutBackground={isMobileView}
-            // withBlur={!isMobileView}
-            withInfoBadge
+          <TemplateAccessSelector
             roomId={item.id}
-            // disableInvitedUsers={invitedUsers}
+            onSubmit={onSubmitItems}
+            onClose={onClose}
+            onBackClick={onCloseAddUsersPanel}
             checkIfUserInvited={checkIfUserInvited}
-            withHeader
-            // filter={filter}
-            headerProps={{
-              headerLabel: t("Common:Contacts"),
-              withoutBackButton: false,
-              withoutBorder: true,
-              isCloseable: true,
-              onBackClick: onCloseAddUsersPanel,
-              onCloseClick: onClose,
-            }}
-            // setActiveTab={getSelectedTab}
+            onCloseClick={onClose}
           />
         ) : (
           <TemplateAccessSettingsPanel
@@ -296,6 +272,7 @@ const EditRoomDialog = ({
             isContainer
             inviteItems={inviteItems}
             setInviteItems={setInviteItems}
+            setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
           />
         )}

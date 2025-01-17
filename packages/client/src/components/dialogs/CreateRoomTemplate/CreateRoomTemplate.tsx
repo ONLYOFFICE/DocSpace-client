@@ -33,7 +33,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import PeopleSelector from "@docspace/shared/selectors/People";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TSelectorItem } from "@docspace/shared/components/selector";
@@ -42,6 +41,7 @@ import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
 import { StyledFooter } from "./CreateRoomTemplate.styled";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
+import TemplateAccessSelector from "../../TemplateAccessSelector";
 
 type CreateRoomTemplateProps = {
   visible: boolean;
@@ -162,33 +162,13 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     >
       <ModalDialog.Container>
         {addUsersPanelVisible ? (
-          <PeopleSelector
-            useAside
-            // onClose={onClosePanels}
-            onSubmit={onSubmitItems}
-            submitButtonLabel={t("Common:AddButton")}
-            disableSubmitButton={false}
-            isMultiSelect
-            disableDisabledUsers
-            withGroups
-            withInfo
-            // infoText={infoText}
-            // withoutBackground={isMobileView}
-            // withBlur={!isMobileView}
-            withInfoBadge
+          <TemplateAccessSelector
             roomId={item.id}
+            onSubmit={onSubmitItems}
+            onClose={onClose}
+            onBackClick={onCloseAddUsersPanel}
             checkIfUserInvited={checkIfUserInvited}
-            withHeader
-            // filter={filter}
-            headerProps={{
-              headerLabel: t("Common:Contacts"),
-              withoutBackButton: false,
-              withoutBorder: true,
-              isCloseable: true,
-              onBackClick: onCloseAddUsersPanel,
-              onCloseClick: onClose,
-            }}
-            // setActiveTab={getSelectedTab}
+            onCloseClick={onClose}
           />
         ) : (
           <TemplateAccessSettingsPanel
@@ -200,7 +180,6 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             isContainer
             inviteItems={inviteItems}
             setInviteItems={setInviteItems}
-            visible={accessSettingsIsVisible}
             setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
           />

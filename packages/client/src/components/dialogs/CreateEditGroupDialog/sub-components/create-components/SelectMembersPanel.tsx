@@ -52,8 +52,6 @@ export const SelectMembersPanel = ({
 
   if (groupManager) invitedUsers.push(groupManager.id);
 
-  // const title = isTemplate ? t("Files:FromTemplate") : t("Files:CreateRoom"); // TODO: Templates
-
   return (
     <MembersSelector
       onClose={onClose}

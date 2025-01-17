@@ -107,7 +107,8 @@ const Item = ({
     setInviteItems(newItems);
   };
 
-  const canDelete = !item.isOwner;
+  const isAvailable = false; // TODO: Templates
+  const canDelete = !item.isOwner && !isAvailable;
 
   return (
     <>

@@ -26,7 +26,7 @@
 
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { observer, inject } from "mobx-react";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
 
 import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
@@ -38,11 +38,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import PeopleSelector from "@docspace/shared/selectors/People";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
+import {
+  getRoomMembers,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
@@ -58,11 +60,9 @@ import {
   StyledTemplateAccessSettingsBody,
   StyledTemplateAccessSettingsFooter,
 } from "./StyledInvitePanel";
-
+import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
-
-const PEOPLE_TAB_ID = "0";
 
 type TemplateAccessSettingsContainer =
   | {
@@ -72,6 +72,8 @@ type TemplateAccessSettingsContainer =
       onClosePanels: VoidFunction;
       onCloseAccessSettings: VoidFunction;
       onSetAccessSettings: VoidFunction;
+      inviteItems: TSelectorItem[];
+      setInviteItems: (inviteItems: TSelectorItem[]) => void;
     }
   | {
       isContainer?: undefined;
@@ -80,19 +82,19 @@ type TemplateAccessSettingsContainer =
       onClosePanels?: undefined;
       onCloseAccessSettings?: undefined;
       onSetAccessSettings?: undefined;
+      inviteItems?: undefined;
+      setInviteItems?: undefined;
     };
 
 type TemplateAccessSettingsPanelProps = {
   t: TTranslation;
   tReady: boolean;
-  templateItem: TRoom;
-  // templateEventVisible: VoidFunction;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
+  templateItem: TRoom;
+  // templateEventVisible: VoidFunction;
   setInfoPanelIsMobileHidden?: (visible: boolean) => void;
   // onCreateRoomFromTemplate: (item: object) => void;
-  inviteItems: TSelectorItem[];
-  setInviteItems: () => void;
 } & TemplateAccessSettingsContainer;
 
 const TemplateAccessSettingsPanel = ({
@@ -113,6 +115,8 @@ const TemplateAccessSettingsPanel = ({
   setInviteItems,
   onSetAccessSettings,
 }: TemplateAccessSettingsPanelProps) => {
+  const [accessItems, setAccessItems] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
 
@@ -121,17 +125,21 @@ const TemplateAccessSettingsPanel = ({
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
-  const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
 
   const templateId = templateItem?.id;
 
   useEffect(() => {
-    const hasError = inviteItems.some(
+    const hasError = accessItems.some(
       (inviteItem) => !!inviteItem.errors?.length,
     );
 
     setHasErrors(hasError);
-  }, [inviteItems]);
+  }, [accessItems]);
+
+  const setAccessItemsAction = (items) => {
+    if (isContainer) setInviteItems(items);
+    else setAccessItems(items);
+  };
 
   const onCheckHeight = () => {
     setScrollAllPanelContent(!isDesktop());
@@ -149,13 +157,6 @@ const TemplateAccessSettingsPanel = ({
 
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
-
-  // const onClickBack = () => {
-  //   onClose();
-  //   if (templateItem && !templateEventVisible) {
-  //     onCreateRoomFromTemplate({ ...templateItem, isEdit: true });
-  //   }
-  // };
 
   const onCloseUsersPanel = () => {
     if (isContainer) setUsersPanelIsVisible(false);
@@ -197,16 +198,47 @@ const TemplateAccessSettingsPanel = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
+  const getTemplateMembers = async () => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const templateMembersData = await getRoomMembers(templateId, {});
+
+      if (templateMembersData?.items?.length) {
+        const convertedItems = templateMembersData.items.map(
+          ({ access, isOwner, sharedTo }) => {
+            return { access, isOwner, ...sharedTo };
+          },
+        );
+        setAccessItems(convertedItems);
+      }
+    } catch (error) {
+      toastr.error(error as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isContainer) getTemplateMembers();
+  }, [isContainer]);
+
+  useEffect(() => {
+    if (isContainer) {
+      setAccessItems(inviteItems);
+    }
+  }, [isContainer, inviteItems]);
+
   const onSubmit = () => {
     if (isContainer) {
       onSetAccessSettings();
-      // onClose();
       return;
     }
 
     setIsLoading(true);
 
-    const invitations = inviteItems
+    const invitations = accessItems
       .filter((i) => !i.isOwner)
       .map((inviteItem) => {
         return {
@@ -241,47 +273,31 @@ const TemplateAccessSettingsPanel = ({
   // };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
-    const items = [...inviteItems, ...users];
+    const items = [...accessItems, ...users];
 
     // const filtered = removeExist(items);
     // setInviteItems(filtered);
-    setInviteItems(items);
+    setAccessItemsAction(items);
 
     // setInputValue("");
     // setUsersList([]);
     onCloseUsersPanel();
   };
 
-  const getSelectedTab = (id: string) => setSelectedTab(id);
-
-  const infoText =
-    selectedTab === PEOPLE_TAB_ID ? (
-      <Trans
-        t={t}
-        ns="Files"
-        i18nKey="AddUsersOrGroupsInfo"
-        values={{ productName: t("Common:ProductName") }}
-        components={{ 1: <strong /> }}
-      />
-    ) : (
-      <Trans
-        t={t}
-        ns="Files"
-        i18nKey="AddUsersOrGroupsInfoGroups"
-        values={{ productName: t("Common:ProductName") }}
-        components={{ 1: <strong /> }}
-      />
-    );
+  const onCloseClick = () => {
+    if (isContainer) onClosePanels();
+    else onClose();
+  };
 
   const roomType = templateItem?.roomType;
-  const hasInvitedUsers = !!inviteItems.length;
+  const hasInvitedUsers = !!accessItems.length;
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   const invitedUsers = useMemo(
-    () => inviteItems.map((item) => item.id),
-    [inviteItems],
+    () => accessItems.map((item) => item.id),
+    [accessItems],
   );
 
   const TemplateAccessSettingsContent = (
@@ -331,8 +347,8 @@ const TemplateAccessSettingsPanel = ({
         </StyledBlock>
         <StyledBody isDisabled={isAvailable}>
           <InviteInput
-            inviteItems={inviteItems}
-            setInviteItems={setInviteItems}
+            inviteItems={accessItems}
+            setInviteItems={setAccessItemsAction}
             roomType={roomType}
             addUsersPanelVisible={usersPanelIsVisible}
             setAddUsersPanelVisible={setPanelVisible}
@@ -347,8 +363,8 @@ const TemplateAccessSettingsPanel = ({
           {hasInvitedUsers && (
             <ItemsList
               t={t}
-              inviteItems={inviteItems}
-              setInviteItems={setInviteItems}
+              inviteItems={accessItems}
+              setInviteItems={setAccessItemsAction}
               scrollAllPanelContent={scrollAllPanelContent}
               isDisabled={isAvailable}
             />
@@ -385,41 +401,19 @@ const TemplateAccessSettingsPanel = ({
       onClose={onClose}
       withBodyScroll
       isLoading={!tReady}
-      // isBackButton={true} // TODO: Templates
-      // onBackClick={onClickBack} // TODO: Templates
       onSubmit={onSubmit}
       withForm
       containerVisible={addUsersPanelVisible}
     >
       <ModalDialog.Container>
         {addUsersPanelVisible ? (
-          <PeopleSelector
-            useAside
-            onClose={onClosePanels}
-            onSubmit={onSubmitItems}
-            submitButtonLabel={t("Common:AddButton")}
-            disableSubmitButton={false}
-            isMultiSelect
-            disableDisabledUsers
-            withGroups
-            withInfo
-            infoText={infoText}
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            withInfoBadge
+          <TemplateAccessSelector
             roomId={templateId}
+            onSubmit={onSubmitItems}
+            onClose={onClosePanels}
+            onCloseClick={onCloseClick}
+            onBackClick={onCloseUsersPanel}
             disableInvitedUsers={invitedUsers}
-            withHeader
-            filter={filter}
-            headerProps={{
-              headerLabel: t("Common:Contacts"),
-              withoutBackButton: false,
-              withoutBorder: true,
-              isCloseable: true,
-              onBackClick: onCloseUsersPanel,
-              onCloseClick: onClosePanels,
-            }}
-            setActiveTab={getSelectedTab}
           />
         ) : null}
       </ModalDialog.Container>
@@ -445,8 +439,8 @@ const TemplateAccessSettingsPanel = ({
           </StyledBlock>
           <StyledBody isDisabled={isAvailable}>
             <InviteInput
-              inviteItems={inviteItems}
-              setInviteItems={setInviteItems}
+              inviteItems={accessItems}
+              setInviteItems={setAccessItemsAction}
               roomType={roomType}
               addUsersPanelVisible={
                 isContainer ? usersPanelIsVisible : addUsersPanelVisible
@@ -463,8 +457,8 @@ const TemplateAccessSettingsPanel = ({
             {hasInvitedUsers && (
               <ItemsList
                 t={t}
-                inviteItems={inviteItems}
-                setInviteItems={setInviteItems}
+                inviteItems={accessItems}
+                setInviteItems={setAccessItemsAction}
                 scrollAllPanelContent={scrollAllPanelContent}
                 isDisabled={isAvailable}
               />
@@ -499,23 +493,34 @@ const TemplateAccessSettingsPanel = ({
 };
 
 export default inject(
-  ({ dialogsStore, infoPanelStore, filesStore, filesActionsStore }: TStore) => {
+  (
+    { dialogsStore, infoPanelStore, filesStore, filesActionsStore }: TStore,
+    {
+      isContainer = false,
+      setIsVisible,
+    }: {
+      isContainer: boolean;
+      setIsVisible: (visible: boolean) => void;
+    },
+  ) => {
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
     const { selection, bufferSelection } = filesStore;
     const { onCreateRoomFromTemplate } = filesActionsStore;
     const {
-      // templateAccessSettingsVisible,
-      // setTemplateAccessSettingsVisible,
+      templateAccessSettingsVisible,
+      setTemplateAccessSettingsVisible,
       templateEventVisible,
     } = dialogsStore;
 
     return {
-      // visible: templateAccessSettingsVisible,
-      // setIsVisible: setTemplateAccessSettingsVisible,
       setInfoPanelIsMobileHidden,
       templateItem: selection.length ? selection[0] : bufferSelection,
       onCreateRoomFromTemplate,
       templateEventVisible,
+      visible: isContainer ? false : templateAccessSettingsVisible,
+      setIsVisible: isContainer
+        ? setIsVisible
+        : setTemplateAccessSettingsVisible,
     };
   },
 )(

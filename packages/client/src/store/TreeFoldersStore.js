@@ -331,8 +331,15 @@ class TreeFoldersStore {
     );
   }
 
-  get isTemplatesFolder() {
+  get isTemplatesFolderRoot() {
     return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
   }
 
   get isRoomsFolderRoot() {

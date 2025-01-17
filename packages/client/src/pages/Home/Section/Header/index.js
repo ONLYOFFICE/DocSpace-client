@@ -252,7 +252,7 @@ const SectionHeaderContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     onCreateRoom,
-    isTemplatesFolder,
+    isTemplatesFolderRoot,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -615,7 +615,7 @@ const SectionHeaderContent = (props) => {
     : {};
 
   const badgeLabel =
-    isTemplatesFolder && !isRootFolder ? t("Files:Template") : "";
+    isTemplatesFolderRoot && !isRootFolder ? t("Files:Template") : "";
 
   return (
     <Consumer key="header">
@@ -800,7 +800,7 @@ export default inject(
       isRecycleBinFolder,
       isRoomsFolder,
       isArchiveFolder,
-      isTemplatesFolder,
+      isTemplatesFolderRoot,
     } = treeFoldersStore;
 
     const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
@@ -992,7 +992,7 @@ export default inject(
       startUpload,
       getFolderModel,
       onCreateRoom,
-      isTemplatesFolder,
+      isTemplatesFolderRoot,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,

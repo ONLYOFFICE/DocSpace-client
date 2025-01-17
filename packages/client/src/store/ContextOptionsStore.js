@@ -1325,6 +1325,7 @@ class ContextOptionsStore {
     }
 
     if (isTemplatesFolder) {
+      // TODO: Templates
       return [];
       // return [
       //   {

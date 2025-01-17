@@ -1654,7 +1654,7 @@ export default inject(
       isTemplatesFolder,
     } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;

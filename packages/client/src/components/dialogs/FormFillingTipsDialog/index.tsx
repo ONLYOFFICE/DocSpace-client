@@ -27,8 +27,12 @@ import React from "react";
 import { observer, inject } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import { TUser } from "@docspace/shared/api/people/types";
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
 import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
+
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import {
   ModalDialog,
@@ -48,7 +52,14 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-const FormFillingTipsDialog = (props) => {
+type FormFillingTipsDialogProps = {
+  visible: DialogsStore["welcomeFormFillingTipsVisible"];
+  setWelcomeFormFillingTipsVisible: DialogsStore["setWelcomeFormFillingTipsVisible"];
+  setFormFillingTipsDialog: DialogsStore["setFormFillingTipsDialog"];
+  userId: TUser["id"];
+};
+
+const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
   const {
     visible,
     setFormFillingTipsDialog,
@@ -116,17 +127,25 @@ const FormFillingTipsDialog = (props) => {
   );
 };
 
-export default inject(({ dialogsStore, userStore }) => {
-  const {
-    welcomeFormFillingTipsVisible: visible,
-    setWelcomeFormFillingTipsVisible,
-    setFormFillingTipsDialog,
-  } = dialogsStore;
+export default inject(
+  ({
+    dialogsStore,
+    userStore,
+  }: {
+    dialogsStore: DialogsStore;
+    userStore: UsersStore;
+  }) => {
+    const {
+      welcomeFormFillingTipsVisible: visible,
+      setWelcomeFormFillingTipsVisible,
+      setFormFillingTipsDialog,
+    } = dialogsStore;
 
-  return {
-    visible,
-    setWelcomeFormFillingTipsVisible,
-    setFormFillingTipsDialog,
-    userId: userStore?.user?.id,
-  };
-})(observer(FormFillingTipsDialog));
+    return {
+      visible,
+      setWelcomeFormFillingTipsVisible,
+      setFormFillingTipsDialog,
+      userId: userStore?.user?.id,
+    };
+  },
+)(observer(FormFillingTipsDialog));

@@ -31,7 +31,18 @@ const GUID_SHARE_OFFSET = 2;
 const GUID_UPLOADING_OFFSET = 5;
 const ROW_VIEW_OFFSET = 15;
 
-export const getGuidPosition = (guidRects, state, viewAs) => {
+type GuidRectsProps = {
+  pdf: DOMRect;
+  ready: DOMRect;
+  share: DOMRect;
+  uploading: DOMRect;
+};
+
+export const getGuidPosition = (
+  guidRects: GuidRectsProps,
+  state: number,
+  viewAs: string,
+) => {
   switch (state) {
     case FormFillingTipsState.Starting:
       return {

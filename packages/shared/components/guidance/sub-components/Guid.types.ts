@@ -29,23 +29,20 @@ export interface ClippedPosition {
   height: number;
   left: number;
   top: number;
+  bottom: number;
 }
-
-export interface ClippedProps {
-  position: ClippedPosition;
-}
-
-type GuidRectsProps = {
-  pdf: DOMRect;
-  ready: DOMRect;
-  uploading: DOMRect;
-  share: DOMRect;
-};
-
-export interface GuidProps {
+export interface GuidanceProps {
   formFillingTipsNumber: number;
   setFormFillingTipsNumber: (value: number) => void;
   onClose: () => void;
-  guidRects: GuidRectsProps;
+  pdfGuidRects: DOMRect;
+  readyGuidRects: DOMRect;
+  shareGuidRects: DOMRect;
+  uploadingGuidRects: DOMRect;
   viewAs: string;
+  infoPanelVisible: boolean;
+}
+
+export interface GuidProps extends GuidanceProps {
+  position: ClippedPosition;
 }

@@ -62,7 +62,6 @@ const Guid = ({
   setFormFillingTipsNumber,
   onClose,
   position,
-  viewAs,
   infoPanelVisible,
 }: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);

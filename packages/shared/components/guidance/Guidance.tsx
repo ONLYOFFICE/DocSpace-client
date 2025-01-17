@@ -28,10 +28,10 @@ import React from "react";
 
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
-import { GuidProps } from "./sub-components/Guid.types";
+import { GuidanceProps } from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
 
-const Guidance = (props: GuidProps) => {
+const Guidance = (props: GuidanceProps) => {
   const {
     formFillingTipsNumber,
     viewAs,
@@ -41,7 +41,13 @@ const Guidance = (props: GuidProps) => {
     uploadingGuidRects,
   } = props;
 
-  const [position, setPosition] = React.useState();
+  const [position, setPosition] = React.useState({
+    width: 0,
+    height: 0,
+    left: 0,
+    top: 0,
+    bottom: 0,
+  });
 
   const onResize = React.useCallback(() => {
     const guidRects = {

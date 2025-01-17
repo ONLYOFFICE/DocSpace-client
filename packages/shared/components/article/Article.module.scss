@@ -28,45 +28,19 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/mixins";
 
-:root {
-  --files-article-body-download-app-list-text-color: #{$gray};
-  --files-article-body-dev-tools-border: 1px solid #{$light-gray-selected};
-  --files-article-body-dev-tools-color: #{$gray};
-  --article-catalog-background: #{$gray-light};
-  --article-catalog-show-text: #{$light-gray-dark};
-  --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
-  --article-client-home-logo-color: #{$black};
-  --article-catalog-profile-border-top: 1px solid #{$gray-light-mid};
-  --article-catalog-vertical-line: 1px solid #{$gray-light-mid};
-  --article-catalog-profile-background: #{$light-gray-hover};
-
-  &[data-theme="dark"] {
-    --files-article-body-download-app-list-text-color: #{$gray-dark};
-    --files-article-body-dev-tools-border: 1px solid #{$gray-dark-strong};
-    --files-article-body-dev-tools-color: #{$gray-dark};
-    --article-catalog-background: #{$dark-gray-light};
-    --article-catalog-show-text: #{$dark-gray-dark};
-    --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
-    --article-client-home-logo-color: #{$white};
-    --article-catalog-profile-border-top: 1px solid #{$gray-dark-strong};
-    --article-catalog-vertical-line: 1px solid #{$gray-dark-strong};
-    --article-catalog-profile-background: #{$light-dark-gray-hover};
-  }
-
-  &[data-dir="rtl"] {
-    .wrapper {
-      :global(.arrow) {
-        svg {
-          transform: scaleX(-1);
-        }
-      }
-    }
-
-    .hideArticleMenuButton {
-      :global(.article-hide-menu-icon_svg),
-      :global(.article-show-menu-icon_svg) {
+:global(.rtl) {
+  :local(.wrapper) {
+    :global(.arrow) {
+      svg {
         transform: scaleX(-1);
       }
+    }
+  }
+
+  :local(.hideArticleMenuButton) {
+    :global(.article-hide-menu-icon_svg),
+    :global(.article-show-menu-icon_svg) {
+      transform: scaleX(-1);
     }
   }
 }

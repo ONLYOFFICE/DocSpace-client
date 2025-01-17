@@ -1,15 +1,6 @@
 @import "../../styles/variables/index.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --beta-badge-tooltip-box-shadow-color: #00000029;
-  --tooltip-text-color: #000000;
-
-  &[data-theme="Dark"] {
-    --tooltip-text-color: #ffffff;
-  }
-}
-
 .tooltip {
   :global {
     .__react_component_tooltip {

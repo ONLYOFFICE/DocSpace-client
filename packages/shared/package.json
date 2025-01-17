@@ -137,6 +137,7 @@
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "@wojtekmaj/enzyme-adapter-react-17": "catalog:",
+    "@types/styled-components": "catalog:",
     "babel-eslint": "catalog:",
     "babel-jest": "catalog:",
     "babel-loader": "catalog:",

@@ -30,6 +30,8 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
+import "@docspace/shared/styles/theme.scss";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
@@ -79,7 +81,9 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}

@@ -2,20 +2,6 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/variables/devices.scss";
 
-:root {
-  --empty-content-header-color: #{$black};
-  --empty-content-description-color: #{$gray-text};
-  --empty-content-button-color-link: #{$link};
-  --empty-content-button-color-text: #{$black};
-
-  &[data-theme="dark"] {
-    --empty-content-header-color: #{$white};
-    --empty-content-description-color: #{$dark-gray-dark};
-    --empty-content-button-color-link: #{$dark-link};
-    --empty-content-button-color-text: #{$white};
-  }
-}
-
 .body {
   margin: 0 auto;
   display: flex;

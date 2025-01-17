@@ -2,14 +2,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/variables/devices.scss";
 
-:root {
-  --filter-block-border-color: #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --filter-block-border-color: #{$gray-dark-strong};
-  }
-}
-
 .filterLoader {
   width: 100%;
   height: 40px;

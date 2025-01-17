@@ -3,59 +3,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/common-icons-style.scss";
 
-:root {
-  /* Light theme */
-  --background-color: #{$white};
-  --status-warning: #{$light-status-warning};
-  --main-button-mobile-text-color: #{$light-gray-dark};
-  --main-button-mobile-button-color: #{$light-status-warning};
-  --main-button-mobile-icon-fill: #{$white};
-  --main-button-mobile-circle-background: #{$white};
-  --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
-  --main-button-mobile-bar-icon: #{$gray};
-  --main-button-mobile-button-wrapper-background: #{$white};
-  --main-button-mobile-button-wrapper-uploading-background: #{$gray-light-mid};
-  --main-button-mobile-button-options-background-color: #{$blue-light-mid};
-  --main-button-mobile-button-options-color: #{$white};
-
-  /* Dropdown variables */
-  --main-button-mobile-dropdown-position: fixed;
-  --main-button-mobile-dropdown-width: 400px;
-  --main-button-mobile-dropdown-right: 48px;
-  --main-button-mobile-dropdown-bottom: 48px;
-  --main-button-mobile-dropdown-z-index: 202;
-  --main-button-mobile-dropdown-mobile-width: calc(100vw - 64px);
-  --main-button-mobile-dropdown-mobile-right: 32px;
-  --main-button-mobile-dropdown-mobile-bottom: 40px;
-  --main-button-mobile-dropdown-separator-background: #{$white};
-  --main-button-mobile-dropdown-button-color: #{$white};
-  --main-button-mobile-dropdown-hover-button-color: #{$light-blue-main-pressed};
-  --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: #{$light-blue-main};
-
-  &[data-theme="dark"] {
-    --background-color: #{$black};
-    --status-warning: #{$dark-status-warning};
-    --main-button-mobile-text-color: #{$dark-gray-dark};
-    --main-button-mobile-button-color: #{$dark-status-warning};
-    --main-button-mobile-icon-fill: #{$black};
-    --main-button-mobile-circle-background: #{$black};
-    --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
-    --main-button-mobile-bar-icon: #{$gray-dark};
-    --main-button-mobile-button-wrapper-background: #{$black};
-    --main-button-mobile-button-wrapper-uploading-background: #{$gray-dark-mid};
-    --main-button-mobile-button-options-background-color: #{$gray-dark-mid};
-    --main-button-mobile-button-options-color: #{$white};
-
-    /* Dropdown variables */
-    --main-button-mobile-dropdown-separator-background: #{$black};
-    --main-button-mobile-dropdown-button-color: #{$white};
-    --main-button-mobile-dropdown-hover-button-color: #{$black};
-    --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-    --main-button-mobile-progress-bar-color: #{$light-blue-main};
-  }
-}
-
 .floatingButton {
   position: relative;
   z-index: 1010;

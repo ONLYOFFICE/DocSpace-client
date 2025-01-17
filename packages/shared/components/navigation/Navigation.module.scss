@@ -3,28 +3,8 @@
 @import "../../styles/variables/colors";
 @import "../../styles/variables/devices.scss";
 
-:root {
-  --section-header-trash-erasure-label-background: #{$gray-light};
-  --section-header-trash-erasure-label-text: #{$gray-text};
-  --navigation-root-folder-title-color: #{$gray};
-  --navigation-expander-color: #{$black};
-  --background-and-substrate-color: #{$gray-light};
-  --navigation-background: #{$white};
-  --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
-  --navigation-icon-stroke: #{$light-gray-selected};
-
-  &[data-theme="dark"] {
-    --section-header-trash-erasure-label-background: #{$black};
-    --section-header-trash-erasure-label-text: #{$dark-gray-dark};
-    --navigation-root-folder-title-color: #{$dark-gray-dark};
-    --navigation-expander-color: #{$white};
-    --background-and-substrate-color: #{$dark-gray-light};
-    --navigation-background: #{$black};
-    --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
-    --navigation-icon-stroke: #{$gray-dark-strong};
-  }
-
-  &[data-dir="rtl"] {
+:global(.rtl) {
+  :local {
     .infoPanelToggleWrapper {
       :global {
         svg {

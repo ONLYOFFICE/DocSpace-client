@@ -3,44 +3,12 @@
 
 @import "../../styles/mixins";
 
-:root {
-  /* Light Theme */
-  --sub-menu-item-background-color: #{$white};
-  --sub-menu-item-hover-background-color: #{$gray-light};
-  --sub-menu-item-disabled-color: #{$gray};
-  --sub-menu-item-disabled-background-color: #{$white};
+:global(.rtl) {
+  --context-menu-header-text-margin: 0 8px 0 0;
+  --context-menu-submenu-list-margin: -4px;
 
-  --context-menu-background: #{$white};
-  --context-menu-border: none;
-  --context-menu-header-border: 1px solid #{$gray-light-mid};
-  --context-menu-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
-
-  --context-menu-header-text-margin: 0 0 0 8px;
-  --context-menu-header-text-color: #{$black};
-
-  --context-menu-submenu-list-margin: 4px;
-
-  /* Dark Theme */
-  &[data-theme="dark"] {
-    --sub-menu-item-background-color: #{$black};
-    --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};
-    --sub-menu-item-disabled-color: #{$gray};
-    --sub-menu-item-disabled-background-color: #{$black};
-
-    --context-menu-background: #{$black};
-    --context-menu-border: 1px solid #{$gray-dark-strong};
-    --context-menu-header-border: 1px solid #{$gray-dark-strong};
-    --context-menu-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
-    --context-menu-header-text-color: #{$white};
-  }
-
-  &[data-dir="rtl"] {
-    --context-menu-header-text-margin: 0 8px 0 0;
-    --context-menu-submenu-list-margin: -4px;
-
-    --context-menu-submenu-transoform: scaleX(-1);
-    --context-menu-submenu-transoform-box: content-box;
-  }
+  --context-menu-submenu-transoform: scaleX(-1);
+  --context-menu-submenu-transoform-box: content-box;
 }
 
 .contextMenu {

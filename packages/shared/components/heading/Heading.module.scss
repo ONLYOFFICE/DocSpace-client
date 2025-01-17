@@ -2,20 +2,6 @@
 @import "../../styles/common-text-styles.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --heading-font-weight: 600;
-  --heading-color: #{$black};
-  --heading-font-size-xlarge: 27px;
-  --heading-font-size-large: 23px;
-  --heading-font-size-medium: 21px;
-  --heading-font-size-small: 19px;
-  --heading-font-size-xsmall: 15px;
-
-  &[data-theme="dark"] {
-    --heading-color: #{$white};
-  }
-}
-
 .heading {
   @include common-text-styles;
 

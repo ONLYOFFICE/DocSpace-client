@@ -1,0 +1,1449 @@
+@import "./variables/_colors.scss";
+
+.light {
+  --background-color: #{$white};
+  --text-color: #{$black};
+  --interface-direction: ltr;
+
+  --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
+  --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
+  --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
+  --accent-button-text: var(--color-scheme-text-buttons, #{$white});
+
+  --app-loader-background-color: #{$white};
+
+  --files-article-body-download-app-list-text-color: #{$gray};
+  --files-article-body-dev-tools-border: 1px solid #{$light-gray-selected};
+  --files-article-body-dev-tools-color: #{$gray};
+  --article-catalog-background: #{$gray-light};
+  --article-catalog-show-text: #{$light-gray-dark};
+  --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
+  --article-client-home-logo-color: #{$black};
+  --article-catalog-profile-border-top: 1px solid #{$gray-light-mid};
+  --article-catalog-vertical-line: 1px solid #{$gray-light-mid};
+  --article-catalog-profile-background: #{$light-gray-hover};
+
+  --article-item-header-color: #{$gray};
+  --article-item-header-bg-color: #{$gray-strong};
+  --article-item-container-bg-color: #{$white};
+  --article-item-sibling-active-bg-color: #{$light-gray-selected};
+  --article-item-sibling-hover-bg-color: #{$gray-light-mid};
+  --article-item-img-svg-fill: #{$light-gray-dark};
+  --article-item-img-svg-active-fill: #{$light-blue-main};
+  --article-item-text-color: #{$gray-text};
+  --article-item-text-active-color: #{$light-blue-main};
+  --article-item-initial-text-color: #{$white};
+  --article-item-badge-without-text-bg-color: #{$light-status-warning};
+  --article-item-trash-icon-fill: #{$gray};
+  --article-item-dnd-bg-color: #{$dnd-color};
+  --article-item-dnd-hover-bg-color: #{$dnd-hover-color};
+
+  --story-wrapper-bg-color: #{$gray-light};
+
+  --aside-bg-color: #{$white};
+
+  --aside-custom-z-index: unset;
+  --aside-content-padding-bottom: unset;
+
+  --aside-header-text-color: #{$black};
+  --aside-header-border-color: #{$gray-light-mid};
+
+  --aside-header-custom-height: 53px;
+
+  --avatar-edit-container-background: #{$blue-light-mid};
+  --avatar-edit-container-fill: #{$white};
+  --avatar-image-container-background: #{$gray-strong};
+  --avatar-image-container-background-image: #{$light-second-main};
+  --avatar-image-container-group-background: #{$gray-light-mid};
+  --avatar-icon-background: #{$gray-light-mid};
+  --avatar-image-container-svg-fill: #{$white};
+  --avatar-icon-color: #{$gray};
+  --avatar-initials-color: #{$white};
+  --avatar-initials-group-color: #{$black};
+  --avatar-administrator-fill: #{$light-status-warning};
+  --avatar-administrator-stroke: #{$dark-black};
+  --avatar-administrator-color: #{$white};
+  --avatar-guest-fill: #{$light-icons};
+  --avatar-guest-stroke: #{$dark-black};
+  --avatar-guest-color: #{$white};
+  --avatar-owner-fill: #{$favorites-status};
+  --avatar-owner-stroke: #{$dark-black};
+  --avatar-owner-color: #{$white};
+
+  --backdrop-background-color: #{$blur-light};
+
+  --badge-border: 1px solid transparent;
+  --badge-padding: 1px;
+  --badge-line-height: 0.8;
+  --badge-overflow: hidden;
+  --badge-color: #{$white};
+  --badge-background-color: var(--accent-main, #{$light-status-warning});
+  --badge-disable-background-color: var(--accent-main, #{$gray});
+
+  --button-color-base: #{$black};
+  --button-color-base-hover: #{$black};
+  --button-color-base-active: #{$black};
+  --button-color-base-disabled: #{$gray-strong};
+
+  --button-brightness: brightness(90%);
+
+  --button-color-primary: #{$white};
+  --button-color-primary-hover: #{$white};
+  --button-color-primary-active: #{$white};
+  --button-color-primary-disabled: #{$white};
+
+  --button-background-base: #{$white};
+  --button-background-base-hover: #{$white};
+  --button-background-base-active: #{$gray-light-mid};
+  --button-background-base-disabled: #{$gray-light};
+
+  --button-background-primary: var(--accent-button, #{$light-second-main});
+  --button-background-primary-hover: var(
+    --accent-button,
+    #{$light-second-main-hover}
+  );
+  --button-background-primary-active: linear-gradient(
+      0deg,
+      #{$light-second-main},
+      #{$light-second-main}
+    ),
+    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
+  --button-background-primary-disabled: var(
+    --accent-button,
+    #{$light-second-main-disabled}
+  );
+
+  --button-border-base: 1px solid #{$gray-strong};
+  --button-border-base-hover: 1px solid
+    var(--accent-button, #{$light-second-main});
+  --button-border-base-active: 1px solid #{$gray-strong};
+  --button-border-base-disabled: 1px solid #{$gray-light-mid};
+
+  --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
+  --button-border-primary-hover: 1px solid
+    var(--accent-button, #{$light-second-main});
+  --button-border-primary-active: 1px solid
+    var(--accent-button, #{$light-second-main});
+  --button-border-primary-disabled: 1px solid
+    var(--accent-button, #{$light-second-main-disabled});
+
+  --button-loader-base: var(--accent-button, #{$light-second-main});
+  --button-loader-primary: #{$white};
+
+  --checkbox-fill-color: #{$white};
+  --checkbox-border-color: #{$gray-strong};
+  --checkbox-arrow-color: #{$black};
+  --checkbox-indeterminate-color: #{$black};
+  --checkbox-disable-arrow-color: #{$gray-strong};
+  --checkbox-disable-border-color: #{$gray-light-mid};
+  --checkbox-disable-fill-color: #{$gray-light};
+  --checkbox-disable-indeterminate-color: #{$gray};
+  --checkbox-hover-border-color: #{$gray};
+  --checkbox-hover-indeterminate-color: #{$black};
+  --checkbox-pressed-border-color: #{$gray-strong};
+  --checkbox-pressed-fill-color: #{$gray-light-mid};
+  --checkbox-focus-color: #{$gray};
+  --checkbox-error-color: #{$light-error-status};
+
+  --text-color: #{$black};
+  --text-disable-color: #{$gray};
+
+  --sub-menu-item-background-color: #{$white};
+  --sub-menu-item-hover-background-color: #{$gray-light};
+  --sub-menu-item-disabled-color: #{$gray};
+  --sub-menu-item-disabled-background-color: #{$white};
+
+  --context-menu-background: #{$white};
+  --context-menu-border: none;
+  --context-menu-header-border: 1px solid #{$gray-light-mid};
+  --context-menu-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
+
+  --context-menu-header-text-margin: 0 0 0 8px;
+  --context-menu-header-text-color: #{$black};
+
+  --context-menu-submenu-list-margin: 4px;
+
+  --context-menu-button-border: #{$gray-strong};
+  --context-menu-button-hover-border: #{$gray};
+
+  --drag-and-drop-height: 100%;
+  --drag-and-drop-border: 1px solid transparent;
+  --drag-and-drop-accept-bg: #{$dnd-hover-color};
+  --drag-and-drop-bg: #{$dnd-color};
+
+  --dropdown-background: #{$white};
+  --dropdown-border: none;
+  --dropdown-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
+
+  --drop-down-item-hover-color: #{$gray-light};
+  --drop-down-item-icon-color: #{$black};
+  --drop-down-item-icon-color-disabled: #{$black};
+  --dropdown-item-separator-border: #{$gray-light-mid};
+
+  --dropdown-item-disabled-color: #{$gray};
+  --dropdown-item-selected-color: #{$light-gray-hover};
+
+  --input-text-align: left;
+
+  --empty-content-header-color: #{$black};
+  --empty-content-description-color: #{$gray-text};
+  --empty-content-button-color-link: #{$link};
+  --empty-content-button-color-text: #{$black};
+
+  --empty-view-link-color: #{$light-blue-main};
+  --empty-view-link-bg-color: #{$white};
+  --empty-view-link-bg-color-hover: #{$light-gray-hover};
+  --empty-view-link-bg-color-press: #{$light-gray-selected};
+
+  --empty-view-items-hover: #{$gray-light};
+  --empty-view-items-press: #{$light-gray-selected};
+
+  /* Empty content variables */
+  --empty-view-header-color: #{$black};
+  --empty-view-description-color: #{$gray-text};
+
+  --error-container-background: #{$white};
+  --error-container-body-text: #{$gray};
+  --error-container-link-color: #{$link};
+
+  --filter-button-border: 1px solid #{$gray-strong};
+  --filter-button-hover-border: 1px solid #{$gray};
+
+  --filter-button-open-background: #{$gray};
+  --filter-button-open-fill: #{$white};
+
+  --filter-block-background: #{$white};
+  --filter-block-item-color: #{$gray};
+  --filter-block-selected-item-color: #{$white};
+  --filter-block-item-separator-background: #{$gray-light-mid};
+  --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
+
+  --filter-sort-button-background: #{$white};
+  --filter-sort-button-selected-icon: #{$light-gray-selected};
+  --filter-sort-button-unselected-icon: #{$gray};
+  --filter-sort-button-sort-fill: #{$light-gray-dark};
+  --filter-sort-button-selected-background: #{$light-gray-hover};
+
+  --floating-button-alert-fill: "";
+  --floating-button-alert-path: "";
+  --floating-button-icon-fill: #{$white};
+  --floating-button-background: #{$light-icons};
+  --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
+}
+
+.dark {
+  --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
+  --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
+  --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
+  --accent-button-text: var(--color-scheme-text-buttons, #{$black});
+
+  --background-color: #{$black};
+  --text-color: #{$white};
+  --interface-direction: ltr;
+
+  --toast-tap-highlight: #{$tap-highlight};
+  --toast-text-color-comp: #{$white};
+  --toast-close-button-color: #{$white};
+  --toast-transform: translate3d(150%, 0, 0);
+  --toast-top-offset: 16px;
+
+  --view-selector-items-count: unset;
+
+  --text-font-family: "Open Sans", sans-serif, Arial;
+
+  --text-input-transition: all 0.2s ease 0s;
+  --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
+  --text-input-font-weight: normal;
+
+  --context-menu-header-text-margin: 0 0 0 8px;
+  --context-menu-submenu-list-margin: 4px;
+  --drag-and-drop-border: 1px solid transparent;
+  --empty-view-link-color: #{$light-blue-main};
+
+  --aside-custom-z-index: unset;
+  --input-text-align: left;
+  --drag-and-drop-height: 100%;
+  --aside-content-padding-bottom: unset;
+  --aside-header-custom-height: 53px;
+  --badge-border: 1px solid transparent;
+  --badge-padding: 1px;
+  --badge-line-height: 0.8;
+  --badge-overflow: hidden;
+  --context-menu-header-text-margin: 0 0 0 8px;
+  --context-menu-submenu-list-margin: 4px;
+  --main-button-mobile-dropdown-position: fixed;
+  --main-button-mobile-dropdown-width: 400px;
+  --main-button-mobile-dropdown-right: 48px;
+  --main-button-mobile-dropdown-bottom: 48px;
+  --main-button-mobile-dropdown-z-index: 202;
+  --main-button-mobile-dropdown-mobile-width: calc(100vw - 64px);
+  --main-button-mobile-dropdown-mobile-right: 32px;
+  --main-button-mobile-dropdown-mobile-bottom: 40px;
+
+  --row-min-width: 160px;
+  --row-overflow: hidden;
+  --row-text-overflow: ellipsis;
+  --row-element-margin-right: 14px;
+  --row-element-margin-left: 2px;
+  --row-option-button-padding: 8px 0px 9px 7px;
+
+  --row-content-margin: 0 6px;
+  --row-content-font-size: 12px;
+  --row-content-font-style: normal;
+  --row-content-font-weight: 600;
+  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-max-width: 100%;
+  --row-content-side-info-min-width: 160px;
+  --row-content-side-info-margin: 0 6px;
+  --row-content-side-info-width: 160px;
+  --row-content-main-wrapper-min-width: 140px;
+  --row-content-main-wrapper-margin-right: 8px;
+  --row-content-main-wrapper-margin-top: 8px;
+  --row-content-main-wrapper-width: 95%;
+  --row-content-icons-height: 19px;
+
+  --selector-add-button-border: none;
+  --selector-add-button-box-sizing: border-box;
+  --selector-add-button-border-radius: 3px;
+  --selector-add-button-height: 32px;
+  --selector-add-button-width: 32px;
+  --selector-add-button-padding: 10px;
+
+  --scrollbar-padding-inline-end: 17px;
+  --scrollbar-padding-inline-end-mobile: 8px;
+  --scrollbar-padding-after-last-item: unset;
+
+  --app-loader-background-color: #{$black};
+
+  --files-article-body-download-app-list-text-color: #{$gray-dark};
+  --files-article-body-dev-tools-border: 1px solid #{$gray-dark-strong};
+  --files-article-body-dev-tools-color: #{$gray-dark};
+  --article-catalog-background: #{$dark-gray-light};
+  --article-catalog-show-text: #{$dark-gray-dark};
+  --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
+  --article-client-home-logo-color: #{$white};
+  --article-catalog-profile-border-top: 1px solid #{$gray-dark-strong};
+  --article-catalog-vertical-line: 1px solid #{$gray-dark-strong};
+  --article-catalog-profile-background: #{$light-dark-gray-hover};
+
+  --article-item-header-color: #{$gray-dark};
+  --article-item-header-bg-color: #{$gray-dark-strong};
+  --article-item-container-bg-color: #{$black};
+  --article-item-sibling-active-bg-color: #{$black};
+  --article-item-sibling-hover-bg-color: #{$black};
+  --article-item-img-svg-fill: #{$dark-gray-dark};
+  --article-item-img-svg-active-fill: #{$white};
+  --article-item-text-color: #{$dark-gray-dark};
+  --article-item-text-active-color: #{$white};
+  --article-item-initial-text-color: #{$black};
+  --article-item-badge-without-text-bg-color: #{$main-orange};
+  --article-item-trash-icon-fill: #{$gray-dark};
+  --article-item-dnd-bg-color: #{$dnd-dark-color};
+  --article-item-dnd-hover-bg-color: #{$dnd-dark-hover};
+
+  --story-wrapper-bg-color: #{$dark-gray-light};
+
+  --aside-bg-color: #{$black};
+
+  --aside-header-text-color: #{$white};
+  --aside-header-border-color: #{$gray-dark-strong};
+
+  --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
+  --avatar-edit-container-fill: #{$black};
+  --avatar-image-container-background: #{$gray-dark-strong};
+  --avatar-image-container-background-image: #{$gray-dark-strong};
+  --avatar-image-container-group-background: #{$gray-dark-mid};
+  --avatar-icon-background: #{$gray-dark-mid};
+  --avatar-image-container-svg-fill: #{$gray-dark};
+  --avatar-icon-color: #{$gray-dark};
+  --avatar-initials-color: #{$white};
+  --avatar-initials-group-color: #{$white};
+  --avatar-administrator-fill: #{$dark-status-warning};
+  --avatar-administrator-stroke: #{$dark-black};
+  --avatar-administrator-color: #{$white};
+  --avatar-guest-fill: #{$dark-icon};
+  --avatar-guest-stroke: #{$dark-black};
+  --avatar-guest-color: #{$white};
+  --avatar-owner-fill: #{$favorites-status};
+  --avatar-owner-stroke: #{$dark-black};
+  --avatar-owner-color: #{$white};
+
+  --backdrop-background-color: #{$blur-dark};
+
+  --badge-background-color: var(--accent-main, #{$dark-status-warning});
+  --badge-disable-background-color: var(--accent-main, #{$gray-dark});
+
+  --button-color-base: #{$white};
+  --button-color-base-hover: #{$white};
+  --button-color-base-active: #{$white};
+  --button-color-base-disabled: #{$gray-dark-strong};
+
+  --button-brightness: brightness(82%);
+
+  --button-color-primary: #{$white};
+  --button-color-primary-hover: #{$white};
+  --button-color-primary-active: #{$white};
+  --button-color-primary-disabled: #{$white};
+
+  --button-background-base: #{$black};
+  --button-background-base-hover: #{$black};
+  --button-background-base-active: #{$dark-gray-light};
+  --button-background-base-disabled: #{$dark-gray-light};
+
+  --button-background-primary: var(--accent-button, #{$light-second-main});
+  --button-background-primary-hover: var(
+    --accent-button,
+    #{$light-second-main-hover}
+  );
+  --button-background-primary-active: linear-gradient(
+      0deg,
+      #{$light-second-main},
+      #{$light-second-main}
+    ),
+    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
+  --button-background-primary-disabled: #{$light-second-main-disabled};
+
+  --button-border-base: 1px solid #{$gray-dark-strong};
+  --button-border-base-hover: 1px solid #{$gray-dark};
+  --button-border-base-active: 1px solid #{$gray-dark-strong};
+  --button-border-base-disabled: 1px solid #{$gray-dark-strong};
+
+  --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
+  --button-border-primary-hover: 1px solid
+    var(--accent-button, #{$light-second-main-hover});
+  --button-border-primary-active: 1px solid
+      linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
+    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
+  --button-border-primary-disabled: 1px solid
+    var(--accent-button, #{$light-second-main-disabled});
+
+  --button-loader-base: #{$white};
+  --button-loader-primary: #{$white};
+
+  --checkbox-fill-color: #{$dark-gray-light};
+  --checkbox-border-color: #{$gray-dark-strong};
+  --checkbox-arrow-color: #{$white};
+  --checkbox-indeterminate-color: #{$white};
+  --checkbox-disable-arrow-color: #{$gray-dark-strong};
+  --checkbox-disable-border-color: #{$gray-dark-mid};
+  --checkbox-disable-fill-color: #{$dark-gray-light};
+  --checkbox-disable-indeterminate-color: #{$gray-dark-strong};
+  --checkbox-hover-border-color: #{$gray-dark};
+  --checkbox-hover-indeterminate-color: #{$white};
+  --checkbox-pressed-border-color: #{$gray-dark-strong};
+  --checkbox-pressed-fill-color: #{$black};
+  --checkbox-focus-color: #{$gray-dark};
+  --checkbox-error-color: #{$dark-error-status};
+
+  --text-color: #{$white};
+  --text-disable-color: #{$gray-dark-text};
+
+  --sub-menu-item-background-color: #{$black};
+  --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};
+  --sub-menu-item-disabled-color: #{$gray};
+  --sub-menu-item-disabled-background-color: #{$black};
+
+  --context-menu-background: #{$black};
+  --context-menu-border: 1px solid #{$gray-dark-strong};
+  --context-menu-header-border: 1px solid #{$gray-dark-strong};
+  --context-menu-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
+  --context-menu-header-text-color: #{$white};
+
+  --context-menu-button-border: #{$gray-dark};
+  --context-menu-button-hover-border: #{$gray-dark};
+
+  --drag-and-drop-accept-bg: #{$dnd-dark-hover};
+  --drag-and-drop-bg: #{$dnd-dark-color};
+
+  --dropdown-background: #{$black};
+  --dropdown-border: 1px solid #{$gray-dark-strong};
+  --dropdown-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
+
+  --drop-down-item-hover-color: #{$light-dark-gray-hover};
+  --drop-down-item-icon-color: #{$white};
+  --drop-down-item-icon-color-disabled: #{$white};
+  --dropdown-item-separator-border: #{$gray-dark-strong};
+
+  --dropdown-item-disabled-color: #{$gray};
+  --dropdown-item-selected-color: #{$dark-gray-light};
+
+  --empty-content-header-color: #{$white};
+  --empty-content-description-color: #{$dark-gray-dark};
+  --empty-content-button-color-link: #{$dark-link};
+  --empty-content-button-color-text: #{$white};
+
+  --empty-view-link-bg-color: #{$black};
+  --empty-view-link-bg-color-hover: #{$dark-gray-light};
+  --empty-view-link-bg-color-press: #{$gray-dark-strong};
+
+  --empty-view-items-hover: #{$dark-gray-light};
+  --empty-view-items-press: #{$gray-dark-strong};
+
+  --empty-view-header-color: #{$white};
+  --empty-view-description-color: #{$dark-gray-dark};
+
+  --error-container-background: #{$black};
+  --error-container-body-text: #{$gray-dark};
+  --error-container-link-color: #{$dark-link};
+
+  --filter-button-border: 1px solid #{$gray-dark-strong};
+  --filter-button-hover-border: 1px solid #{$gray-dark};
+
+  --filter-button-open-background: #{$gray};
+  --filter-button-open-fill: #{$white};
+
+  --filter-block-background: #{$black};
+  --filter-block-item-color: #{$gray};
+  --filter-block-selected-item-color: #{$black};
+  --filter-block-item-separator-background: #{$gray-dark-strong};
+  --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
+
+  --filter-sort-button-background: #{$black};
+  --filter-sort-button-selected-icon: #{$light-gray-selected};
+  --filter-sort-button-unselected-icon: #{$gray-dark};
+  --filter-sort-button-sort-fill: #{$dark-gray-dark};
+  --filter-sort-button-selected-background: #{$gray-dark-strong};
+
+  --floating-button-alert-fill: #{$main-orange};
+  --floating-button-alert-path: #{$black};
+  --floating-button-icon-fill: #{$black};
+  --floating-button-background: #{$white};
+  --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
+}
+
+.light {
+  --form-wrapper-background: #{$white};
+  --form-wrapper-box-shadow: 0px 5px 20px #{$popup-shadow};
+}
+
+.dark {
+  --form-wrapper-background: #{$black};
+  --form-wrapper-box-shadow: 0px 5px 20px #{$badge-shadow};
+}
+
+.light {
+  --heading-font-weight: 600;
+  --heading-color: #{$black};
+  --heading-font-size-xlarge: 27px;
+  --heading-font-size-large: 23px;
+  --heading-font-size-medium: 21px;
+  --heading-font-size-small: 19px;
+  --heading-font-size-xsmall: 15px;
+}
+
+.dark {
+  --heading-color: #{$white};
+}
+
+.light {
+  --scrollbar-bg-color: #{$light-scroll};
+  --scrollbar-hover-bg-color: #{$light-scroll-hover};
+  --scrollbar-press-bg-color: #{$light-scroll-active};
+}
+
+.dark {
+  --scrollbar-bg-color: #{$dark-scroll};
+  --scrollbar-hover-bg-color: #{$dark-scroll-hover};
+  --scrollbar-press-bg-color: #{$dark-scroll-active};
+}
+
+.light {
+  --beta-badge-tooltip-box-shadow-color: #00000029;
+  --tooltip-text-color: #000000;
+}
+
+.dark {
+  --tooltip-text-color: #ffffff;
+}
+
+.light {
+  --link-color: #{$black};
+  --link-line-height: calc(100% + 6px);
+  --link-opacity: 0.5;
+  --link-text-decoration: none;
+  --link-cursor: pointer;
+  --link-display: inline-block;
+  --link-hover-text-decoration: underline dashed;
+  --link-hover-page-text-decoration: underline;
+}
+
+.dark {
+  --link-color: #{$white};
+  --link-line-height: calc(100% + 6px);
+  --link-hover-text-decoration: underline dashed;
+  --link-hover-page-text-decoration: underline;
+}
+
+.light {
+  --loader-color: #{$loader-light};
+  --button-loader-track-primary: #{$white};
+  --button-loader-track-base: var(--color-scheme-main-buttons);
+}
+
+.dark {
+  --loader-color: #{$loader-dark};
+  --button-loader-track-primary: #{$white};
+  --button-loader-track-base: #{$white};
+}
+
+.light {
+  --main-button-background-color: var(--accent-main, #{$light-blue-main});
+  --main-button-padding: 5px 14px 5px 12px;
+  --main-button-border-radius: 3px;
+  --main-button-line-height: 22px;
+  --main-button-font-size: 16px;
+  --main-button-font-weight: 700;
+  --main-button-text-color: #{$white};
+  --main-button-text-color-disabled: #{$white};
+
+  --main-button-corner-rounds-top-right: 0;
+  --main-button-corner-rounds-bottom-right: 0;
+
+  --main-button-svg-margin: auto;
+  --main-button-svg-height: 100%;
+  --main-button-svg-fill: #{$white};
+
+  --main-button-dropdown-top: 100%;
+
+  --main-button-arrow-dropdown-border-left: 4px solid transparent;
+  --main-button-arrow-dropdown-border-right: 4px solid transparent;
+  --main-button-arrow-dropdown-border-top: 5px solid #{$white};
+  --main-button-arrow-dropdown-border-top-disabled: 5px solid #{$white};
+  --main-button-arrow-dropdown-right: 14px;
+  --main-button-arrow-dropdown-top: 50%;
+  --main-button-arrow-dropdown-width: 0;
+  --main-button-arrow-dropdown-height: 0;
+  --main-button-arrow-dropdown-margin-top: -1px;
+}
+
+.dark {
+  --main-button-background-color: #{$light-blue-main};
+  --main-button-text-color: #{$white};
+  --main-button-text-color-disabled: #{$white};
+  --main-button-svg-fill: #{$white};
+  --main-button-arrow-dropdown-border-top: 5px solid #{$white};
+  --main-button-arrow-dropdown-border-top-disabled: 5px solid #{$black};
+  --main-button-arrow-dropdown-right: 14px;
+  --main-button-arrow-dropdown-top: 50%;
+  --main-button-arrow-dropdown-width: 0;
+  --main-button-arrow-dropdown-height: 0;
+  --main-button-arrow-dropdown-margin-top: -1px;
+  --main-button-arrow-dropdown-border-left: 4px solid transparent;
+  --main-button-arrow-dropdown-border-right: 4px solid transparent;
+  --main-button-padding: 5px 14px 5px 12px;
+  --main-button-border-radius: 3px;
+  --main-button-line-height: 22px;
+  --main-button-font-size: 16px;
+  --main-button-font-weight: 700;
+  --main-button-corner-rounds-top-right: 0;
+  --main-button-corner-rounds-bottom-right: 0;
+  --main-button-svg-margin: auto;
+  --main-button-svg-height: 100%;
+  --main-button-dropdown-top: 100%;
+}
+
+.light {
+  --status-warning: #{$light-status-warning};
+  --main-button-mobile-text-color: #{$light-gray-dark};
+  --main-button-mobile-button-color: #{$light-status-warning};
+  --main-button-mobile-icon-fill: #{$white};
+  --main-button-mobile-circle-background: #{$white};
+  --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
+  --main-button-mobile-bar-icon: #{$gray};
+  --main-button-mobile-button-wrapper-background: #{$white};
+  --main-button-mobile-button-wrapper-uploading-background: #{$gray-light-mid};
+  --main-button-mobile-button-options-background-color: #{$blue-light-mid};
+  --main-button-mobile-button-options-color: #{$white};
+
+  --main-button-mobile-dropdown-position: fixed;
+  --main-button-mobile-dropdown-width: 400px;
+  --main-button-mobile-dropdown-right: 48px;
+  --main-button-mobile-dropdown-bottom: 48px;
+  --main-button-mobile-dropdown-z-index: 202;
+  --main-button-mobile-dropdown-mobile-width: calc(100vw - 64px);
+  --main-button-mobile-dropdown-mobile-right: 32px;
+  --main-button-mobile-dropdown-mobile-bottom: 40px;
+  --main-button-mobile-dropdown-separator-background: #{$white};
+  --main-button-mobile-dropdown-button-color: #{$white};
+  --main-button-mobile-dropdown-hover-button-color: #{$light-blue-main-pressed};
+  --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
+  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+}
+
+.dark {
+  --status-warning: #{$dark-status-warning};
+  --main-button-mobile-text-color: #{$dark-gray-dark};
+  --main-button-mobile-button-color: #{$dark-status-warning};
+  --main-button-mobile-icon-fill: #{$black};
+  --main-button-mobile-circle-background: #{$black};
+  --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
+  --main-button-mobile-bar-icon: #{$gray-dark};
+  --main-button-mobile-button-wrapper-background: #{$black};
+  --main-button-mobile-button-wrapper-uploading-background: #{$gray-dark-mid};
+  --main-button-mobile-button-options-background-color: #{$gray-dark-mid};
+  --main-button-mobile-button-options-color: #{$white};
+
+  --main-button-mobile-dropdown-separator-background: #{$black};
+  --main-button-mobile-dropdown-button-color: #{$white};
+  --main-button-mobile-dropdown-hover-button-color: #{$black};
+  --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
+  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+}
+
+.light {
+  --modal-dialog-bg-color: #{$white};
+  --modal-dialog-text-color: #{$black};
+  --modal-dialog-backdrop-bg-color: #{$blur-light};
+  --modal-dialog-header-border-color: #{$gray-light-mid};
+
+  --modal-dialog-content-transform-x: 100%;
+}
+
+.dark {
+  --modal-dialog-bg-color: #{$black};
+  --modal-dialog-text-color: #{$white};
+  --modal-dialog-backdrop-bg-color: #{$blur-dark};
+  --modal-dialog-header-border-color: #{$gray-dark-strong};
+
+  --modal-dialog-content-transform-x: 100%;
+
+  --heading-font-weight: 600;
+  --heading-font-size-xlarge: 27px;
+  --heading-font-size-large: 23px;
+  --heading-font-size-medium: 21px;
+  --heading-font-size-small: 19px;
+  --heading-font-size-xsmall: 15px;
+
+  --link-opacity: 0.5;
+  --link-text-decoration: none;
+  --link-cursor: pointer;
+  --link-display: inline-block;
+
+  --beta-badge-tooltip-box-shadow-color: #00000029;
+}
+
+.light {
+  --section-header-trash-erasure-label-background: #{$gray-light};
+  --section-header-trash-erasure-label-text: #{$gray-text};
+  --navigation-root-folder-title-color: #{$gray};
+  --navigation-expander-color: #{$black};
+  --background-and-substrate-color: #{$gray-light};
+  --navigation-background: #{$white};
+  --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
+  --navigation-icon-stroke: #{$light-gray-selected};
+}
+
+.dark {
+  --section-header-trash-erasure-label-background: #{$black};
+  --section-header-trash-erasure-label-text: #{$dark-gray-dark};
+  --navigation-root-folder-title-color: #{$dark-gray-dark};
+  --navigation-expander-color: #{$white};
+  --background-and-substrate-color: #{$dark-gray-light};
+  --navigation-background: #{$black};
+  --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
+  --navigation-icon-stroke: #{$gray-dark-strong};
+}
+
+.light {
+  --password-input-tooltip-text-color: #{$black};
+  --password-input-icon-color: #{$gray-strong};
+  --password-input-icon-color-hover: #{$gray};
+  --password-input-icon-color-disabled: #{$gray-strong};
+}
+
+.dark {
+  --password-input-tooltip-text-color: #{$black};
+  --password-input-icon-color: #{$gray-dark-strong};
+  --password-input-icon-color-hover: #{$gray-dark};
+  --password-input-icon-color-disabled: #{$gray-dark};
+}
+
+.light {
+  --header-background-color: #{$gray-light};
+  --header-height: 48px;
+}
+
+.dark {
+  --header-background-color: #{$dark-gray-light};
+  --header-height: 48px;
+}
+
+.light {
+  --progress-bar-background-color: #{$light-gray-hover};
+  --progress-bar-percent-background: #{$light-blue-main};
+  --progress-bar-status-color: #{$black};
+  --progress-bar-error-color: #{$light-error-status};
+}
+
+.dark {
+  --progress-bar-background-color: #{$gray-dark};
+  --progress-bar-percent-background: #{$dark-status-warning};
+  --progress-bar-status-color: #{$white};
+  --progress-bar-error-color: #{$dark-error-status};
+}
+
+.light {
+  --info-block-background: #{$gray-light};
+  --info-block-header-color: #{$black};
+  --info-block-description-color: #{$gray-text};
+}
+
+.dark {
+  --info-block-background: #{$dark-gray-light};
+  --info-block-header-color: #{$white};
+  --info-block-description-color: #{$dark-gray-dark};
+}
+
+.light {
+  --room-icon-fill: #{$white};
+  --room-icon-background-color: #{$white};
+  --room-icon-link-icon-path: #{$moonstone};
+  --room-icon-link-icon-background: #{$white};
+  --room-icon-empty-border: 2px dashed #{$gray-strong};
+  --room-icon-background-color-archive: #{$gray};
+  --room-icon-button-color: #{$gray};
+  --room-icon-opacity: 1;
+}
+
+.dark {
+  --room-icon-fill: #{$black};
+  --room-icon-background-color: #{$black};
+  --room-icon-link-icon-path: #{$blue-romb};
+  --room-icon-link-icon-background: #{$black};
+  --room-icon-empty-border: 2px dashed #{$gray-dark-strong};
+  --room-icon-background-color-archive: #{$white};
+  --room-icon-button-color: #{$gray-dark};
+  --room-icon-opacity: 0.1;
+}
+
+.light {
+  --room-type-list-item-background: none;
+  --room-type-list-item-border: #{$gray-light-mid};
+  --room-type-list-item-hover-background: #{$gray-light};
+  --room-type-list-item-description-text: #{$gray};
+
+  --room-type-dropdown-button-background: none;
+  --room-type-dropdown-button-border: #{$gray-light-mid};
+  --room-type-dropdown-button-hover-background: #{$gray-light};
+  --room-type-dropdown-button-description-text: #{$gray};
+
+  --room-type-dropdown-item-background: #{$white};
+  --room-type-dropdown-item-hover-background: #{$gray-light};
+  --room-type-dropdown-item-description-text: #{$gray};
+
+  --room-type-display-item-background: #{$gray-light};
+  --room-type-display-item-border: #{$gray-light};
+  --room-type-display-item-description-text: #{$gray-text};
+}
+
+.dark {
+  --room-type-list-item-background: none;
+  --room-type-list-item-border: #{$gray-dark-strong};
+  --room-type-list-item-hover-background: #{$dark-gray-light};
+  --room-type-list-item-description-text: #{$gray};
+
+  --room-type-dropdown-button-background: none;
+  --room-type-dropdown-button-border: #{$gray-dark-strong};
+  --room-type-dropdown-button-hover-background: #{$dark-gray-light};
+  --room-type-dropdown-button-description-text: #{$gray};
+
+  --room-type-dropdown-item-background: #{$black};
+  --room-type-dropdown-item-hover-background: #{$dark-gray-light};
+  --room-type-dropdown-item-description-text: #{$gray};
+
+  --room-type-display-item-background: #{$dark-gray-light};
+  --room-type-display-item-border: #{$dark-gray-light};
+  --room-type-display-item-description-text: #{$gray-text};
+}
+
+.light {
+  --row-min-height: 47px;
+  --row-width: 100%;
+  --row-border-bottom: #{$gray-light-mid};
+  --row-background-color: #{$light-gray-hover};
+  --row-min-width: 160px;
+  --row-overflow: hidden;
+  --row-text-overflow: ellipsis;
+  --row-element-margin-right: 14px;
+  --row-element-margin-left: 2px;
+  --row-option-button-padding: 8px 0px 9px 7px;
+  --row-content-height: 56px;
+}
+
+.dark {
+  --row-border-bottom: #{$gray-dark-strong};
+  --row-background-color: #{$light-dark-gray-hover};
+
+  --row-min-height: 47px;
+  --row-width: 100%;
+  --row-min-width: 160px;
+  --row-overflow: hidden;
+  --row-text-overflow: ellipsis;
+  --row-element-margin-right: 14px;
+  --row-element-margin-left: 2px;
+  --row-option-button-padding: 8px 0px 9px 7px;
+  --row-content-height: 56px;
+
+  --row-content-margin: 0 6px;
+  --row-content-font-size: 12px;
+  --row-content-font-style: normal;
+  --row-content-font-weight: 600;
+  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-max-width: 100%;
+  --row-content-side-info-min-width: 160px;
+  --row-content-side-info-margin: 0 6px;
+  --row-content-side-info-width: 160px;
+  --row-content-main-wrapper-min-width: 140px;
+  --row-content-main-wrapper-margin-right: 8px;
+  --row-content-main-wrapper-margin-top: 8px;
+  --row-content-main-wrapper-width: 95%;
+  --row-content-icons-height: 19px;
+
+  --section-header-height: 69px;
+  --section-header-height-tablet: 61px;
+  --section-header-height-mobile: 53px;
+}
+
+.light {
+  --row-content-margin: 0 6px;
+  --row-content-font-size: 12px;
+  --row-content-font-style: normal;
+  --row-content-font-weight: 600;
+  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-height: 56px;
+  --row-content-max-width: 100%;
+
+  --row-content-side-info-min-width: 160px;
+  --row-content-side-info-margin: 0 6px;
+  --row-content-side-info-width: 160px;
+
+  --row-content-main-wrapper-min-width: 140px;
+  --row-content-main-wrapper-margin-right: 8px;
+  --row-content-main-wrapper-margin-top: 8px;
+  --row-content-main-wrapper-width: 95%;
+
+  --row-content-icons-height: 19px;
+}
+
+.light {
+  --scrollbar-bg-color: #{$light-scroll};
+  --scrollbar-hover-bg-color: #{$light-scroll-hover};
+  --scrollbar-press-bg-color: #{$light-scroll-active};
+
+  --scrollbar-padding-inline-end: 17px;
+  --scrollbar-padding-inline-end-mobile: 8px;
+  --scrollbar-padding-after-last-item: unset;
+}
+
+.dark {
+  --scrollbar-bg-color: #{$dark-scroll};
+  --scrollbar-hover-bg-color: #{$dark-scroll-hover};
+  --scrollbar-press-bg-color: #{$dark-scroll-active};
+}
+
+.light {
+  --section-header-height: 69px;
+  --section-header-height-tablet: 61px;
+  --section-header-height-mobile: 53px;
+
+  --section-header-bg: #{$white};
+  --info-panel-blur-color: #{$blur-light};
+  --info-panel-bg: #{$white};
+  --info-panel-border: #{$gray-light-mid};
+}
+
+.dark {
+  --section-header-bg: #{$black};
+  --info-panel-blur-color: #{$blur-dark};
+  --info-panel-bg: #{$black};
+  --info-panel-border: #{$gray-dark-strong};
+}
+
+.light {
+  --disabled-selected-item-color: #{$gray};
+  --filter-input-selected-items-background: #{$gray-light-mid};
+  --filter-input-selected-items-hover-background: #{$light-gray-hover};
+}
+
+.dark {
+  --disabled-selected-item-color: #{$gray-dark-text};
+  --filter-input-selected-items-background: #{$gray-dark-mid};
+  --filter-input-selected-items-hover-background: #{$light-dark-gray-hover};
+}
+
+.light {
+  --selector-add-button-background: #{$gray-light-mid};
+  --selector-add-button-hover-background: #{$light-gray-selected};
+  --selector-add-button-active-background: #{$gray-strong};
+
+  --selector-add-button-icon-color: #{$light-gray-dark};
+  --selector-add-button-icon-color-hover: #{$light-gray-dark};
+  --selector-add-button-icon-color-active: #{$light-gray-dark};
+
+  --selector-add-button-border: none;
+  --selector-add-button-box-sizing: border-box;
+  --selector-add-button-border-radius: 3px;
+  --selector-add-button-height: 32px;
+  --selector-add-button-width: 32px;
+  --selector-add-button-padding: 10px;
+  --selector-add-button-color: #{$light-gray-dark};
+  --selector-add-button-hover-color: #{$black};
+}
+
+.dark {
+  --selector-add-button-background: #{$gray-dark-mid};
+  --selector-add-button-hover-background: #{$dark-gray-light};
+  --selector-add-button-active-background: #{$gray-dark-mid};
+
+  --selector-add-button-icon-color: #{$gray-dark};
+  --selector-add-button-icon-color-hover: #{$white};
+  --selector-add-button-icon-color-active: #{$dark-gray-dark};
+
+  --selector-add-button-color: #{$gray-dark};
+  --selector-add-button-hover-color: #{$white};
+}
+
+.light {
+  /* Light theme variables */
+  --tabs-gradient-color: #{$white};
+  --tabs-line-color: #{$gray-light-mid};
+
+  /* Primary tabs */
+  --tabs-text-color-primary: #{$light-gray-dark};
+  --tabs-active-text-color-primary: #{$black};
+  --tabs-hover-text-color-primary: #{$gray};
+  --tabs-pressed-text-color-primary: #{$gray-text};
+  --tabs-background-color-primary: #{$white};
+
+  /* Secondary tabs */
+  --tabs-text-color-secondary: #{$black};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$white};
+  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-pressed-background-color-secondary: #{$gray-light-mid};
+  --tabs-active-background-color-secondary: #{$blue-light-mid};
+}
+
+/* Dark theme variables */
+.dark {
+  --tabs-gradient-color: #{$black};
+  --tabs-line-color: #{$gray-dark-strong};
+
+  /* Primary tabs */
+  --tabs-text-color-primary: #{$dark-gray-dark};
+  --tabs-active-text-color-primary: #{$white};
+  --tabs-hover-text-color-primary: #{$white};
+  --tabs-pressed-text-color-primary: #{$gray-dark-text};
+  --tabs-background-color-primary: #{$black};
+
+  /* Secondary tabs */
+  --tabs-text-color-secondary: #{$white};
+  --tabs-active-text-color-secondary: #{$black};
+  --tabs-background-color-secondary: #{$black};
+  --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+  --tabs-pressed-background-color-secondary: #{$dark-gray-light};
+  --tabs-active-background-color-secondary: #{$white};
+}
+
+.light {
+  --tag-background: #{$gray-light-mid};
+  --tag-hover-background: #{$light-gray-selected};
+  --tag-disabled-background: #{$gray-light-mid};
+  --tag-new-background: #{$gray-light-mid};
+  --tag-new-hover-background: #{$light-gray-hover};
+  --tag-deleted-background: #{$gray-light};
+  --tag-color: #{$black};
+  --tag-default-color: #{$black};
+  --tag-deleted-color: #{$gray};
+
+  --tag-padding: 2px 10px;
+  --tag-margin-end: 4px;
+  --tag-border-radius: 6px;
+  --tag-icon-margin-start: 12px;
+  --tag-dropdown-text-margin: 8px;
+
+  --tag-third-party-padding: 2px 0px;
+  --tag-third-party-size: 16px;
+
+  --tag-text-line-height: 20px;
+  --tag-dropdown-text-line-height: 30px;
+  --tag-font-size: 13px;
+}
+
+.dark {
+  --tag-background: #{$gray-dark-strong};
+  --tag-hover-background: #{$dark-gray-light};
+  --tag-disabled-background: #{$gray-dark};
+  --tag-new-background: #{$gray-dark-mid};
+  --tag-new-hover-background: #{$light-dark-gray-hover};
+  --tag-deleted-background: #{$dark-gray-light};
+  --tag-color: #{$white};
+  --tag-default-color: #{$gray};
+  --tag-deleted-color: #{$gray};
+}
+
+.light {
+  --text-input-appearance: none;
+  --text-input-display: flex;
+  --text-input-flex: 1 1 0%;
+  --text-input-outline: none;
+  --text-input-overflow: hidden;
+  --text-input-opacity: 1;
+  --text-input-transition: all 0.2s ease 0s;
+  --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
+  --text-input-font-weight: normal;
+}
+
+.dark {
+  --tag-padding: 2px 10px;
+  --tag-margin-end: 4px;
+  --tag-border-radius: 6px;
+  --tag-icon-margin-start: 12px;
+  --tag-dropdown-text-margin: 8px;
+  --tag-third-party-padding: 2px 0px;
+  --tag-third-party-size: 16px;
+  --tag-text-line-height: 20px;
+  --tag-dropdown-text-line-height: 30px;
+  --tag-font-size: 13px;
+
+  --text-input-appearance: none;
+  --text-input-display: flex;
+  --text-input-flex: 1 1 0%;
+  --text-input-outline: none;
+  --text-input-overflow: hidden;
+  --text-input-opacity: 1;
+  --text-input-transition: all 0.2s ease 0s;
+  --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
+  --text-input-font-weight: normal;
+
+  --toast-tap-highlight: #{$tap-highlight};
+  --toast-text-color-comp: #{$white};
+  --toast-close-button-color: #{$white};
+  --toast-transform: translate3d(150%, 0, 0);
+  --toast-top-offset: 16px;
+
+  --view-selector-items-count: unset;
+}
+
+.light {
+  --textarea-numeration-color: #{$gray};
+}
+
+.dark {
+  --textarea-numeration-color: #{$gray-dark};
+}
+
+.light {
+  --toastr-close-button-color: #{$black};
+  --toastr-text-color: #{$black};
+  --toast-text-color: #{$dark-black};
+
+  --toastr-title-success-color: #{$dark-black};
+  --toastr-title-error-color: #{$dark-black};
+  --toastr-title-warning-color: #{$dark-black};
+  --toastr-title-info-color: #{$dark-black};
+
+  --toastr-svg-success-color: #{$black};
+  --toastr-svg-error-color: #{$black};
+  --toastr-svg-warning-color: #{$black};
+  --toastr-svg-info-color: #{$black};
+
+  --toast-box-shadow: 0px 10px 16px -12px #{$popup-shadow};
+
+  --toast-success-bg: #{$light-toast-done};
+  --toast-error-bg: #{$light-toast-warning};
+  --toast-warning-bg: #{$light-toast-alert};
+  --toast-info-bg: #{$light-toast-info};
+
+  --toast-success-hover-bg: #{$light-toast-done};
+  --toast-error-hover-bg: #{$light-toast-warning};
+  --toast-warning-hover-bg: #{$light-toast-alert};
+  --toast-info-hover-bg: #{$light-toast-info};
+
+  --toast-success-border: none;
+  --toast-error-border: none;
+  --toast-warning-border: none;
+  --toast-info-border: none;
+
+  --toast-tap-highlight: #{$tap-highlight};
+  --toast-text-color-comp: #{$white};
+
+  --toast-close-button-color: #{$white};
+
+  --toast-transform: translate3d(150%, 0, 0);
+
+  --toast-top-offset: 16px;
+}
+
+.dark {
+  --toastr-close-button-color: #{$white};
+  --toastr-text-color: #{$white};
+  --toast-text-color: #{$white};
+
+  --toastr-title-success-color: #{$dark-toast-done};
+  --toastr-title-error-color: #{$dark-toast-alert};
+  --toastr-title-warning-color: #{$dark-toast-warning};
+  --toastr-title-info-color: #{$dark-toast-info};
+
+  --toastr-svg-success-color: #{$dark-toast-done};
+  --toastr-svg-error-color: #{$dark-toast-alert};
+  --toastr-svg-warning-color: #{$dark-toast-warning};
+  --toastr-svg-info-color: #{$dark-toast-info};
+
+  --toast-box-shadow: 0px 16px 16px #{$popup-shadow};
+
+  --toast-success-bg: #{$black};
+  --toast-error-bg: #{$black};
+  --toast-warning-bg: #{$black};
+  --toast-info-bg: #{$black};
+
+  --toast-success-hover-bg: #{$black};
+  --toast-error-hover-bg: #{$black};
+  --toast-warning-hover-bg: #{$black};
+  --toast-info-hover-bg: #{$black};
+
+  --toast-success-border: 2px solid #{$dark-toast-done};
+  --toast-error-border: 2px solid #{$dark-toast-alert};
+  --toast-warning-border: 2px solid #{$dark-toast-warning};
+  --toast-info-border: 2px solid #{$dark-toast-info};
+}
+
+.light {
+  --toggle-button-fill-color-default: #{$light-blue-main};
+  --toggle-button-fill-color-off: #{$gray-strong};
+  --toggle-button-hover-fill-color-off: #{$gray};
+  --toggle-button-fill-circle-color: #{$white};
+  --toggle-button-fill-circle-color-off: #{$white};
+
+  --toggle-button-text-color: #{$black};
+  --toggle-button-text-disable-color: #{$gray};
+}
+
+.dark {
+  --toggle-button-fill-color-default: #{$light-blue-main};
+  --toggle-button-fill-color-off: #{$gray-dark-mid};
+  --toggle-button-hover-fill-color-off: #{$light-dark-gray-hover};
+  --toggle-button-fill-circle-color: #{$white};
+  --toggle-button-fill-circle-color-off: #{$white};
+
+  --toggle-button-text-color: #{$white};
+  --toggle-button-text-disable-color: #{$gray-dark-text};
+}
+
+.light {
+  --view-selector-fill-color: #{$white};
+  --view-selector-checked-fill-color: #{$gray};
+  --view-selector-fill-disabled-color: #{$gray-light};
+  --view-selector-disabled-fill-color: #{$gray-light-mid};
+  --view-selector-disabled-fill-color-inner: #{$gray-strong};
+  --view-selector-border-color: #{$gray-strong};
+  --view-selector-hover-border-color: #{$gray};
+  --view-selector-icon-button-hover-color: #{$light-gray-dark};
+
+  --view-selector-items-count: unset;
+}
+
+.dark {
+  --view-selector-fill-color: #{$black};
+  --view-selector-checked-fill-color: #{$gray-dark};
+  --view-selector-fill-disabled-color: #{$gray-light};
+  --view-selector-disabled-fill-color: #{$gray-light-mid};
+  --view-selector-disabled-fill-color-inner: #{$gray-strong};
+  --view-selector-border-color: #{$gray-dark-strong};
+  --view-selector-hover-border-color: #{$gray-dark};
+  --view-selector-icon-button-hover-color: #{$white};
+}
+
+.light {
+  --catalog-profile-background: #{$light-gray-hover};
+  --catalog-profile-border-top: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --catalog-profile-background: #{$light-dark-gray-hover};
+  --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --modal-dialog-header-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --modal-dialog-header-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --filter-block-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --filter-block-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --body-info-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --body-info-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --header-info-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --header-info-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --selector-border: 1px solid #{$gray-light-mid};
+}
+.dark {
+  --selector-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
+}
+
+.dark {
+  --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --text-color: #{$black};
+  --text-font-family: "Open Sans", sans-serif, Arial;
+}
+
+.light {
+  // Input colors
+  --input-bg: #{$white};
+  --input-color: #{$black};
+  --input-border-color: #{$gray-strong};
+  --input-border-hover: #{$gray};
+  --input-border-focus: #{$light-second-main};
+
+  // Disabled state
+  --input-disabled-bg: #{$gray-light};
+  --input-disabled-color: #{$gray-strong};
+  --input-disabled-border: #{$gray-light-mid};
+  --input-disabled-border-hover: #{$gray-light-mid};
+  --input-disabled-border-focus: #{$gray-light-mid};
+
+  // Error state
+  --input-error-border: #{$light-error-status};
+  --input-error-border-hover: #{$light-error-status};
+  --input-error-border-focus: #{$light-error-status};
+
+  // Warning state
+  --input-warning-border: #{$light-status-warning};
+  --input-warning-border-hover: #{$light-status-warning};
+  --input-warning-border-focus: #{$light-status-warning};
+
+  // Dimensions
+  --input-border-radius: 3px;
+  --input-box-shadow: none;
+  --input-border: 1px solid;
+  --input-box-sizing: border-box;
+
+  // Sizes
+  --input-width-base: 173px;
+  --input-width-middle: 300px;
+  --input-width-big: 350px;
+  --input-width-huge: 500px;
+  --input-width-large: 550px;
+
+  // Line heights
+  --text-input-line-height-base: 20px;
+  --text-input-line-height-middle: 20px;
+  --text-input-line-height-big: 20px;
+  --text-input-line-height-huge: 21px;
+  --text-input-line-height-large: 20px;
+
+  // Font sizes
+  --text-input-font-size-base: 13px;
+  --text-input-font-size-middle: 14px;
+  --text-input-font-size-big: 16px;
+  --text-input-font-size-huge: 18px;
+  --text-input-font-size-large: 16px;
+
+  // Padding
+  --text-input-padding-base: 5px 6px;
+  --text-input-padding-middle: 8px 12px;
+  --text-input-padding-big: 8px 16px;
+  --text-input-padding-huge: 8px 20px;
+  --text-input-padding-large: 11px 12px;
+
+  // Placeholder colors
+  --text-input-placeholder-color: #{$gray};
+  --text-input-placeholder-disabled-color: #{$gray-strong};
+}
+
+// Dark theme overrides
+.dark {
+  --input-bg: #{$dark-gray-light};
+  --input-color: #{$white};
+  --input-border-color: #{$gray-dark-strong};
+  --input-border-hover: #{$gray-dark};
+  --input-border-focus: #{$white};
+
+  --input-disabled-bg: #{$gray-dark-strong};
+  --input-disabled-color: #{$gray-dark-text};
+  --input-disabled-border: #{$gray-dark-strong};
+
+  --input-error-border: #{$dark-error-status};
+  --input-error-border-hover: #{$dark-error-status};
+  --input-error-border-focus: #{$dark-error-status};
+
+  --input-warning-border: #{$dark-status-warning};
+  --input-warning-border-hover: #{$dark-status-warning};
+  --input-warning-border-focus: #{$dark-status-warning};
+
+  --text-input-placeholder-color: #{$gray-dark};
+  --text-input-placeholder-disabled-color: #{$gray-dark-strong};
+
+  // Dimensions
+  --input-border-radius: 3px;
+  --input-box-shadow: none;
+  --input-border: 1px solid;
+  --input-box-sizing: border-box;
+
+  // Sizes
+  --input-width-base: 173px;
+  --input-width-middle: 300px;
+  --input-width-big: 350px;
+  --input-width-huge: 500px;
+  --input-width-large: 550px;
+
+  // Line heights
+  --text-input-line-height-base: 20px;
+  --text-input-line-height-middle: 20px;
+  --text-input-line-height-big: 20px;
+  --text-input-line-height-huge: 21px;
+  --text-input-line-height-large: 20px;
+
+  // Font sizes
+  --text-input-font-size-base: 13px;
+  --text-input-font-size-middle: 14px;
+  --text-input-font-size-big: 16px;
+  --text-input-font-size-huge: 18px;
+  --text-input-font-size-large: 16px;
+
+  // Padding
+  --text-input-padding-base: 5px 6px;
+  --text-input-padding-middle: 8px 12px;
+  --text-input-padding-big: 8px 16px;
+  --text-input-padding-huge: 8px 20px;
+  --text-input-padding-large: 11px 12px;
+}
+
+:global(.rtl) {
+  --input-text-align: right;
+  --input-direction: rtl;
+}
+
+:global(.rtl) {
+  --modal-dialog-content-transform-x: -100%;
+  --toast-transform: translate3d(-150%, 0, 0);
+}

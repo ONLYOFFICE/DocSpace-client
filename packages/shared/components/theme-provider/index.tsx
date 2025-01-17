@@ -40,13 +40,24 @@ export const ThemeProvider = ({
 }: ThemeProviderProps) => {
   useEffect(() => {
     const root = document.documentElement;
-    root.setAttribute("data-theme", theme.isBase ? "light" : "dark");
-    root.setAttribute("data-dir", theme.interfaceDirection);
-    root.style.setProperty("--interface-direction", theme.interfaceDirection);
+
+    const themeStr = theme.isBase ? "light" : "dark";
+    const dir = theme.interfaceDirection;
+
+    root.setAttribute("data-theme", themeStr);
+    root.setAttribute("data-dir", dir);
+    root.style.setProperty("--interface-direction", dir);
+
+    const body = document.body;
+    body.classList.remove("light", "dark");
+    body.classList.remove("ltr", "rtl");
+    body.classList.add(themeStr);
+    body.classList.add(dir);
   }, [theme.isBase, theme.interfaceDirection]);
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
 
     if (currentColorScheme && currentColorScheme.main) {
       root.style.setProperty(
@@ -62,6 +73,23 @@ export const ThemeProvider = ({
         currentColorScheme.main.buttons,
       );
       root.style.setProperty(
+        "--color-scheme-text-buttons",
+        currentColorScheme.text.buttons,
+      );
+
+      body.style.setProperty(
+        "--color-scheme-main-accent",
+        currentColorScheme.main.accent,
+      );
+      body.style.setProperty(
+        "--color-scheme-text-accent",
+        currentColorScheme.text.accent,
+      );
+      body.style.setProperty(
+        "--color-scheme-main-buttons",
+        currentColorScheme.main.buttons,
+      );
+      body.style.setProperty(
         "--color-scheme-text-buttons",
         currentColorScheme.text.buttons,
       );

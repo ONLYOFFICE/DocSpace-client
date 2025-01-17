@@ -103,6 +103,7 @@ const EmailInputForm = ({
         />
       </FieldContainer>
       <Button
+        id="email-continue"
         className="login-button"
         primary
         size={ButtonSize.medium}

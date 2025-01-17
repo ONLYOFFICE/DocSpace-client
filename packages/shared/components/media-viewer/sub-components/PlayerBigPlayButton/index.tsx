@@ -26,7 +26,7 @@
 
 import React from "react";
 import BigIconPlay from "PUBLIC_DIR/images/media.bgplay.react.svg";
-import WrapperPlayerBigPlayButton from "./PlayerBigPlayButton.styled";
+import styles from "./PlayerBigPlayButton.module.scss";
 import PlayerBigPlayButtonProps from "./PlayerBigPlayButton.props";
 
 export const PlayerBigPlayButton = ({
@@ -36,10 +36,11 @@ export const PlayerBigPlayButton = ({
   if (!visible) return;
 
   return (
-    <WrapperPlayerBigPlayButton
+    <div
+      className={styles.wrapper}
       onContextMenu={(event) => event.preventDefault()}
     >
       <BigIconPlay onClick={onClick} />
-    </WrapperPlayerBigPlayButton>
+    </div>
   );
 };

@@ -27,44 +27,8 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --article-item-header-color: #{$gray};
-  --article-item-header-bg-color: #{$gray-strong};
-  --article-item-container-bg-color: #{$white};
-  --article-item-sibling-active-bg-color: #{$light-gray-selected};
-  --article-item-sibling-hover-bg-color: #{$gray-light-mid};
-  --article-item-img-svg-fill: #{$light-gray-dark};
-  --article-item-img-svg-active-fill: #{$light-blue-main};
-  --article-item-text-color: #{$gray-text};
-  --article-item-text-active-color: #{$light-blue-main};
-  --article-item-initial-text-color: #{$white};
-  --article-item-badge-without-text-bg-color: #{$light-status-warning};
-  --article-item-trash-icon-fill: #{$gray};
-  --article-item-dnd-bg-color: #{$dnd-color};
-  --article-item-dnd-hover-bg-color: #{$dnd-hover-color};
-
-  --story-wrapper-bg-color: #{$gray-light};
-
-  &[data-theme="dark"] {
-    --article-item-header-color: #{$gray-dark};
-    --article-item-header-bg-color: #{$gray-dark-strong};
-    --article-item-container-bg-color: #{$black};
-    --article-item-sibling-active-bg-color: #{$black};
-    --article-item-sibling-hover-bg-color: #{$black};
-    --article-item-img-svg-fill: #{$dark-gray-dark};
-    --article-item-img-svg-active-fill: #{$white};
-    --article-item-text-color: #{$dark-gray-dark};
-    --article-item-text-active-color: #{$white};
-    --article-item-initial-text-color: #{$black};
-    --article-item-badge-without-text-bg-color: #{$main-orange};
-    --article-item-trash-icon-fill: #{$gray-dark};
-    --article-item-dnd-bg-color: #{$dnd-dark-color};
-    --article-item-dnd-hover-bg-color: #{$dnd-dark-hover};
-
-    --story-wrapper-bg-color: #{$dark-gray-light};
-  }
-
-  &[data-theme="light"] {
+:global(.light) {
+  :local {
     .articleItemText.active {
       color: var(--color-scheme-main-accent);
 

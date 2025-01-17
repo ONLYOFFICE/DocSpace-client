@@ -28,24 +28,6 @@
 @import "../../styles/variables/devices.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --section-header-height: 69px;
-  --section-header-height-tablet: 61px;
-  --section-header-height-mobile: 53px;
-
-  --section-header-bg: #{$white};
-  --info-panel-blur-color: #{$blur-light};
-  --info-panel-bg: #{$white};
-  --info-panel-border: #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --section-header-bg: #{$black};
-    --info-panel-blur-color: #{$blur-dark};
-    --info-panel-bg: #{$black};
-    --info-panel-border: #{$gray-dark-strong};
-  }
-}
-
 .header {
   position: relative;
   display: flex;

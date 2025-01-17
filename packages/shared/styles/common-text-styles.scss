@@ -1,10 +1,5 @@
 @import "./variables/index.scss";
 
-:root {
-  --text-color: #{$black};
-  --text-font-family: "Open Sans", sans-serif, Arial;
-}
-
 @mixin common-text-styles {
   font-family: var(--text-font-family);
   color: var(--text-color);

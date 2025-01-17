@@ -27,7 +27,7 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root[data-theme="dark"] {
+:global(.dark) {
   .label {
     --radio-button-bg: #{$black};
     --radio-button-disable-bg: #{$dark-gray-light};

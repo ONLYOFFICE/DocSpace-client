@@ -1,24 +1,7 @@
-@use "../../styles/variables" as *;
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/theme.scss";
 
 $font-size: 13px;
-
-:root {
-  // Base colors
-  --background-color: #{$white};
-  --text-color: #{$black};
-  --interface-direction: ltr;
-
-  // Theme colors
-  --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
-  --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
-  --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
-  --accent-button-text: var(--color-scheme-text-buttons, #{$white});
-
-  &[data-theme="dark"] {
-    --background-color: #{$black};
-    --text-color: #{$white};
-  }
-}
 
 html,
 body {

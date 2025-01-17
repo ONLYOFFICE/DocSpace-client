@@ -2,14 +2,6 @@
 @import "../../styles/_mixins";
 @import "../../styles/common-input-styles";
 
-:root {
-  --textarea-numeration-color: #{$gray};
-
-  &[data-theme="dark"] {
-    --textarea-numeration-color: #{$gray-dark};
-  }
-}
-
 .copyIconWrapper {
   position: absolute;
   width: 20px;

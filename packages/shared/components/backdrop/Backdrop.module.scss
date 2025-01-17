@@ -1,13 +1,5 @@
 @import "../../styles/variables/colors";
 
-:root {
-  --backdrop-background-color: #{$blur-light};
-
-  &[data-theme="dark"] {
-    --backdrop-background-color: #{$blur-dark};
-  }
-}
-
 .backdrop {
   position: fixed;
   top: 0;

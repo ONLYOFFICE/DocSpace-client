@@ -27,12 +27,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import { isMobileOnly } from "react-device-detect";
 
-import {
-  DropDown,
-  DropDownItem,
-  SpeedControlWrapper,
-  ToastSpeed,
-} from "./PlayerSpeedControl.styled";
+import styles from "./PlayerSpeedControl.module.scss";
 
 import { PlayerSpeedControlProps } from "./PlayerSpeedControl.props";
 
@@ -100,16 +95,17 @@ const PlayerSpeedControl = memo(
     return (
       <>
         {speedToastVisible ? (
-          <ToastSpeed>{speedIcons[currentIndexSpeed]}</ToastSpeed>
+          <div className={styles.toast}>{speedIcons[currentIndexSpeed]}</div>
         ) : null}
-        <SpeedControlWrapper ref={ref} onClick={toggle}>
+        <div className={styles.wrapper} ref={ref} onClick={toggle}>
           {speedIcons[currentIndexSpeed]}
 
           {isOpenSpeedContextMenu ? (
-            <DropDown onMouseLeave={onMouseLeave}>
+            <div className={styles.dropdown} onMouseLeave={onMouseLeave}>
               {speeds.map((speed, index) => (
-                <DropDownItem
+                <div
                   key={speed}
+                  className={styles.dropdownItem}
                   onClick={() => {
                     setCurrentIndexSpeed(index);
                     handleSpeedChange(speedRecord[speed]);
@@ -117,11 +113,11 @@ const PlayerSpeedControl = memo(
                   }}
                 >
                   {speed}
-                </DropDownItem>
+                </div>
               ))}
-            </DropDown>
+            </div>
           ) : null}
-        </SpeedControlWrapper>
+        </div>
       </>
     );
   },

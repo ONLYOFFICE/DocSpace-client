@@ -1,17 +1,5 @@
 @import "../../styles/variables/colors";
 
-:root {
-  --info-block-background: #{$gray-light};
-  --info-block-header-color: #{$black};
-  --info-block-description-color: #{$gray-text};
-
-  &[data-theme="dark"] {
-    --info-block-background: #{$dark-gray-light};
-    --info-block-header-color: #{$white};
-    --info-block-description-color: #{$dark-gray-dark};
-  }
-}
-
 .container {
   display: flex;
   background-color: var(--info-block-background);

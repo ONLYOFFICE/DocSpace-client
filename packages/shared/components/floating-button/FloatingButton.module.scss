@@ -2,22 +2,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --floating-button-alert-fill: "";
-  --floating-button-alert-path: "";
-  --floating-button-icon-fill: #{$white};
-  --floating-button-background: #{$light-icons};
-  --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
-
-  &[data-theme="dark"] {
-    --floating-button-alert-fill: #{$main-orange};
-    --floating-button-alert-path: #{$black};
-    --floating-button-icon-fill: #{$black};
-    --floating-button-background: #{$white};
-    --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
-  }
-}
-
 .circle {
   :global {
     .circle__mask,

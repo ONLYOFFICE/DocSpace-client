@@ -27,45 +27,6 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --main-button-background-color: var(--accent-main, #{$light-blue-main});
-  --main-button-padding: 5px 14px 5px 12px;
-  --main-button-border-radius: 3px;
-  --main-button-line-height: 22px;
-  --main-button-font-size: 16px;
-  --main-button-font-weight: 700;
-  --main-button-text-color: #{$white};
-  --main-button-text-color-disabled: #{$white};
-
-  --main-button-corner-rounds-top-right: 0;
-  --main-button-corner-rounds-bottom-right: 0;
-
-  --main-button-svg-margin: auto;
-  --main-button-svg-height: 100%;
-  --main-button-svg-fill: #{$white};
-
-  --main-button-dropdown-top: 100%;
-
-  --main-button-arrow-dropdown-border-left: 4px solid transparent;
-  --main-button-arrow-dropdown-border-right: 4px solid transparent;
-  --main-button-arrow-dropdown-border-top: 5px solid #{$white};
-  --main-button-arrow-dropdown-border-top-disabled: 5px solid #{$white};
-  --main-button-arrow-dropdown-right: 14px;
-  --main-button-arrow-dropdown-top: 50%;
-  --main-button-arrow-dropdown-width: 0;
-  --main-button-arrow-dropdown-height: 0;
-  --main-button-arrow-dropdown-margin-top: -1px;
-
-  [data-theme="Dark"] {
-    --main-button-background-color: #{$light-blue-main};
-    --main-button-text-color: #{$white};
-    --main-button-text-color-disabled: #{$white};
-    --main-button-svg-fill: #{$white};
-    --main-button-arrow-dropdown-border-top: 5px solid #{$white};
-    --main-button-arrow-dropdown-border-top-disabled: 5px solid #{$black};
-  }
-}
-
 :global {
   .p-contextmenu {
     position: fixed;

@@ -44,7 +44,7 @@ type PortalProps = {
 };
 
 const Portal = ({ visible = true, element, appendTo = null }: PortalProps) => {
-  const [mounted, setMounted] = React.useState(visible);
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     const domExists = !!(

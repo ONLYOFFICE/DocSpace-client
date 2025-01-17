@@ -27,27 +27,13 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --scrollbar-bg-color: #{$light-scroll};
-  --scrollbar-hover-bg-color: #{$light-scroll-hover};
-  --scrollbar-press-bg-color: #{$light-scroll-active};
-
-  --scrollbar-padding-inline-end: 17px;
-  --scrollbar-padding-inline-end-mobile: 8px;
-  --scrollbar-padding-after-last-item: unset;
-
-  &[data-dir="rtl"] {
+:global(.rtl) {
+  :local {
     .trackHorizontal {
       left: unset !important;
       right: 0 !important;
     }
   }
-}
-
-:root[data-theme="dark"] {
-  --scrollbar-bg-color: #{$dark-scroll};
-  --scrollbar-hover-bg-color: #{$dark-scroll-hover};
-  --scrollbar-press-bg-color: #{$dark-scroll-active};
 }
 
 .scrollbar {
@@ -218,11 +204,11 @@
   // and there is no another nesting hovered scroll element, dragging thumb or backdrop
   &.scrollVisible:hover:not(
       :has(
-          &:hover:global(.trackYVisible),
-          &:hover:global(.trackXVisible),
-          .thumb:global(.dragging),
-          :global(.backdrop-active)
-        )
+        &:hover:global(.trackYVisible),
+        &:hover:global(.trackXVisible),
+        .thumb:global(.dragging),
+        :global(.backdrop-active)
+      )
     ) {
     > .track {
       opacity: 1;

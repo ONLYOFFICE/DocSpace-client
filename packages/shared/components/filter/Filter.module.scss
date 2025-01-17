@@ -27,46 +27,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/variables/devices.scss";
 
-:root {
-  --filter-button-border: 1px solid #{$gray-strong};
-  --filter-button-hover-border: 1px solid #{$gray};
-
-  --filter-button-open-background: #{$gray};
-  --filter-button-open-fill: #{$white};
-
-  --filter-block-background: #{$white};
-  --filter-block-item-color: #{$gray};
-  --filter-block-selected-item-color: #{$white};
-  --filter-block-item-separator-background: #{$gray-light-mid};
-  --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
-
-  --filter-sort-button-background: #{$white};
-  --filter-sort-button-selected-icon: #{$light-gray-selected};
-  --filter-sort-button-unselected-icon: #{$gray};
-  --filter-sort-button-sort-fill: #{$light-gray-dark};
-  --filter-sort-button-selected-background: #{$light-gray-hover};
-
-  &[data-theme="dark"] {
-    --filter-button-border: 1px solid #{$gray-dark-strong};
-    --filter-button-hover-border: 1px solid #{$gray-dark};
-
-    --filter-button-open-background: #{$gray};
-    --filter-button-open-fill: #{$white};
-
-    --filter-block-background: #{$black};
-    --filter-block-item-color: #{$gray};
-    --filter-block-selected-item-color: #{$black};
-    --filter-block-item-separator-background: #{$gray-dark-strong};
-    --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
-
-    --filter-sort-button-background: #{$black};
-    --filter-sort-button-selected-icon: #{$light-gray-selected};
-    --filter-sort-button-unselected-icon: #{$gray-dark};
-    --filter-sort-button-sort-fill: #{$dark-gray-dark};
-    --filter-sort-button-selected-background: #{$gray-dark-strong};
-  }
-}
-
 .filterInput {
   width: 100%;
 

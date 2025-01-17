@@ -2,50 +2,6 @@
 @import "../../styles/common-icons-style.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --avatar-edit-container-background: #{$blue-light-mid};
-  --avatar-edit-container-fill: #{$white};
-  --avatar-image-container-background: #{$gray-strong};
-  --avatar-image-container-background-image: #{$light-second-main};
-  --avatar-image-container-group-background: #{$gray-light-mid};
-  --avatar-icon-background: #{$gray-light-mid};
-  --avatar-image-container-svg-fill: #{$white};
-  --avatar-icon-color: #{$gray};
-  --avatar-initials-color: #{$white};
-  --avatar-initials-group-color: #{$black};
-  --avatar-administrator-fill: #{$light-status-warning};
-  --avatar-administrator-stroke: #{$dark-black};
-  --avatar-administrator-color: #{$white};
-  --avatar-guest-fill: #{$light-icons};
-  --avatar-guest-stroke: #{$dark-black};
-  --avatar-guest-color: #{$white};
-  --avatar-owner-fill: #{$favorites-status};
-  --avatar-owner-stroke: #{$dark-black};
-  --avatar-owner-color: #{$white};
-
-  &[data-theme="dark"] {
-    --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
-    --avatar-edit-container-fill: #{$black};
-    --avatar-image-container-background: #{$gray-dark-strong};
-    --avatar-image-container-background-image: #{$gray-dark-strong};
-    --avatar-image-container-group-background: #{$gray-dark-mid};
-    --avatar-icon-background: #{$gray-dark-mid};
-    --avatar-image-container-svg-fill: #{$gray-dark};
-    --avatar-icon-color: #{$gray-dark};
-    --avatar-initials-color: #{$white};
-    --avatar-initials-group-color: #{$white};
-    --avatar-administrator-fill: #{$dark-status-warning};
-    --avatar-administrator-stroke: #{$dark-black};
-    --avatar-administrator-color: #{$white};
-    --avatar-guest-fill: #{$dark-icon};
-    --avatar-guest-stroke: #{$dark-black};
-    --avatar-guest-color: #{$white};
-    --avatar-owner-fill: #{$favorites-status};
-    --avatar-owner-stroke: #{$dark-black};
-    --avatar-owner-color: #{$white};
-  }
-}
-
 .emptyIcon {
   @include common-icons-style;
   border-radius: var(--avatar-image-border-radius);

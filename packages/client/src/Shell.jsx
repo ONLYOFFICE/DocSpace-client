@@ -49,6 +49,8 @@ import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import "@docspace/shared/styles/theme.scss";
+
 import config from "PACKAGE_FILE";
 
 import Main from "./components/Main";

@@ -2,15 +2,6 @@
 @import "../../styles/variables/devices.scss";
 @import "../../styles/mixins.scss";
 
-:root {
-  --header-background-color: #{$gray-light};
-  --header-height: 48px;
-
-  &[data-theme="dark"] {
-    --header-background-color: #{$dark-gray-light};
-  }
-}
-
 .wrapper {
   @include mobile {
     &:not(.resizable) {

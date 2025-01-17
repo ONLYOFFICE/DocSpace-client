@@ -28,26 +28,6 @@
 @import "../../styles/variables/devices.scss";
 @import "../../styles/_mixins";
 
-:root {
-  --drop-down-item-hover-color: #{$gray-light};
-  --drop-down-item-icon-color: #{$black};
-  --drop-down-item-icon-color-disabled: #{$black};
-  --dropdown-item-separator-border: #{$gray-light-mid};
-
-  --dropdown-item-disabled-color: #{$gray};
-  --dropdown-item-selected-color: #{$light-gray-hover};
-
-  &[data-theme="dark"] {
-    --drop-down-item-hover-color: #{$light-dark-gray-hover};
-    --drop-down-item-icon-color: #{$white};
-    --drop-down-item-icon-color-disabled: #{$white};
-    --dropdown-item-separator-border: #{$gray-dark-strong};
-
-    --dropdown-item-disabled-color: #{$gray};
-    --dropdown-item-selected-color: #{$dark-gray-light};
-  }
-}
-
 .elementWrapper {
   display: flex;
   align-items: center;

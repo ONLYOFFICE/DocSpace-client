@@ -27,30 +27,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --view-selector-fill-color: #{$white};
-  --view-selector-checked-fill-color: #{$gray};
-  --view-selector-fill-disabled-color: #{$gray-light};
-  --view-selector-disabled-fill-color: #{$gray-light-mid};
-  --view-selector-disabled-fill-color-inner: #{$gray-strong};
-  --view-selector-border-color: #{$gray-strong};
-  --view-selector-hover-border-color: #{$gray};
-  --view-selector-icon-button-hover-color: #{$light-gray-dark};
-
-  --view-selector-items-count: unset;
-
-  &[data-theme="dark"] {
-    --view-selector-fill-color: #{$black};
-    --view-selector-checked-fill-color: #{$gray-dark};
-    --view-selector-fill-disabled-color: #{$gray-light};
-    --view-selector-disabled-fill-color: #{$gray-light-mid};
-    --view-selector-disabled-fill-color-inner: #{$gray-strong};
-    --view-selector-border-color: #{$gray-dark-strong};
-    --view-selector-hover-border-color: #{$gray-dark};
-    --view-selector-icon-button-hover-color: #{$white};
-  }
-}
-
 .viewSelector {
   height: 32px;
   width: calc(var(--view-selector-items-count) * 32px);

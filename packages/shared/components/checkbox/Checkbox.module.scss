@@ -25,46 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --checkbox-fill-color: #{$white};
-  --checkbox-border-color: #{$gray-strong};
-  --checkbox-arrow-color: #{$black};
-  --checkbox-indeterminate-color: #{$black};
-  --checkbox-disable-arrow-color: #{$gray-strong};
-  --checkbox-disable-border-color: #{$gray-light-mid};
-  --checkbox-disable-fill-color: #{$gray-light};
-  --checkbox-disable-indeterminate-color: #{$gray};
-  --checkbox-hover-border-color: #{$gray};
-  --checkbox-hover-indeterminate-color: #{$black};
-  --checkbox-pressed-border-color: #{$gray-strong};
-  --checkbox-pressed-fill-color: #{$gray-light-mid};
-  --checkbox-focus-color: #{$gray};
-  --checkbox-error-color: #{$light-error-status};
-
-  --text-color: #{$black};
-  --text-disable-color: #{$gray};
-}
-
-:root[data-theme="dark"] {
-  --checkbox-fill-color: #{$dark-gray-light};
-  --checkbox-border-color: #{$gray-dark-strong};
-  --checkbox-arrow-color: #{$white};
-  --checkbox-indeterminate-color: #{$white};
-  --checkbox-disable-arrow-color: #{$gray-dark-strong};
-  --checkbox-disable-border-color: #{$gray-dark-mid};
-  --checkbox-disable-fill-color: #{$dark-gray-light};
-  --checkbox-disable-indeterminate-color: #{$gray-dark-strong};
-  --checkbox-hover-border-color: #{$gray-dark};
-  --checkbox-hover-indeterminate-color: #{$white};
-  --checkbox-pressed-border-color: #{$gray-dark-strong};
-  --checkbox-pressed-fill-color: #{$black};
-  --checkbox-focus-color: #{$gray-dark};
-  --checkbox-error-color: #{$dark-error-status};
-
-  --text-color: #{$white};
-  --text-disable-color: #{$gray-dark-text};
-}
-
 .label {
   display: flex;
   align-items: center;

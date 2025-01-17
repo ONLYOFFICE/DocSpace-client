@@ -28,23 +28,8 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --toggle-button-fill-color-default: #{$light-blue-main};
-  --toggle-button-fill-color-off: #{$gray-strong};
-  --toggle-button-hover-fill-color-off: #{$gray};
-  --toggle-button-fill-circle-color: #{$white};
-  --toggle-button-fill-circle-color-off: #{$white};
-
-  --toggle-button-text-color: #{$black};
-  --toggle-button-text-disable-color: #{$gray};
-
-  &[data-dir="rtl"] {
-    .label svg {
-      transform: scaleX(-1);
-    }
-  }
-
-  &[data-theme="light"] {
+:global(.light) {
+  :local {
     .label.checked.disabled svg {
       rect {
         fill: var(
@@ -57,16 +42,13 @@
       }
     }
   }
+}
 
-  &[data-theme="dark"] {
-    --toggle-button-fill-color-default: #{$light-blue-main};
-    --toggle-button-fill-color-off: #{$gray-dark-mid};
-    --toggle-button-hover-fill-color-off: #{$light-dark-gray-hover};
-    --toggle-button-fill-circle-color: #{$white};
-    --toggle-button-fill-circle-color-off: #{$white};
-
-    --toggle-button-text-color: #{$white};
-    --toggle-button-text-disable-color: #{$gray-dark-text};
+:global(.rtl) {
+  :local {
+    .label svg {
+      transform: scaleX(-1);
+    }
   }
 }
 

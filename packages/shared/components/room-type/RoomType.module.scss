@@ -25,46 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --room-type-list-item-background: none;
-  --room-type-list-item-border: #{$gray-light-mid};
-  --room-type-list-item-hover-background: #{$gray-light};
-  --room-type-list-item-description-text: #{$gray};
-
-  --room-type-dropdown-button-background: none;
-  --room-type-dropdown-button-border: #{$gray-light-mid};
-  --room-type-dropdown-button-hover-background: #{$gray-light};
-  --room-type-dropdown-button-description-text: #{$gray};
-
-  --room-type-dropdown-item-background: #{$white};
-  --room-type-dropdown-item-hover-background: #{$gray-light};
-  --room-type-dropdown-item-description-text: #{$gray};
-
-  --room-type-display-item-background: #{$gray-light};
-  --room-type-display-item-border: #{$gray-light};
-  --room-type-display-item-description-text: #{$gray-text};
-
-  &[data-theme="dark"] {
-    --room-type-list-item-background: none;
-    --room-type-list-item-border: #{$gray-dark-strong};
-    --room-type-list-item-hover-background: #{$dark-gray-light};
-    --room-type-list-item-description-text: #{$gray};
-
-    --room-type-dropdown-button-background: none;
-    --room-type-dropdown-button-border: #{$gray-dark-strong};
-    --room-type-dropdown-button-hover-background: #{$dark-gray-light};
-    --room-type-dropdown-button-description-text: #{$gray};
-
-    --room-type-dropdown-item-background: #{$black};
-    --room-type-dropdown-item-hover-background: #{$dark-gray-light};
-    --room-type-dropdown-item-description-text: #{$gray};
-
-    --room-type-display-item-background: #{$dark-gray-light};
-    --room-type-display-item-border: #{$dark-gray-light};
-    --room-type-display-item-description-text: #{$gray-text};
-  }
-
-  &[data-dir="rtl"] {
+:global(.rtl) {
+  :local {
     .roomType {
       :global {
         .choose_room-forward_btn {

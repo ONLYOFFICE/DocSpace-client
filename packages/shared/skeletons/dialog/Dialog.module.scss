@@ -2,14 +2,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/mixins.scss";
 
-:root {
-  --modal-dialog-header-border-color: #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --modal-dialog-header-border-color: #{$gray-dark-strong};
-  }
-}
-
 .dialogLoader {
   height: auto;
 

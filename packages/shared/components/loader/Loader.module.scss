@@ -26,18 +26,6 @@
 
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --loader-color: #{$loader-light};
-  --button-loader-track-primary: #{$white};
-  --button-loader-track-base: var(--color-scheme-main-buttons);
-
-  &[data-theme="dark"] {
-    --loader-color: #{$loader-dark};
-    --button-loader-track-primary: #{$white};
-    --button-loader-track-base: #{$white};
-  }
-}
-
 .loader {
   width: var(--loader-size, 40px);
   height: var(--loader-size, 40px);

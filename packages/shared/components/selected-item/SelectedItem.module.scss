@@ -1,18 +1,6 @@
 @import "../../styles/mixins";
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --disabled-selected-item-color: #{$gray};
-  --filter-input-selected-items-background: #{$gray-light-mid};
-  --filter-input-selected-items-hover-background: #{$light-gray-hover};
-
-  &[data-theme="dark"] {
-    --disabled-selected-item-color: #{$gray-dark-text};
-    --filter-input-selected-items-background: #{$gray-dark-mid};
-    --filter-input-selected-items-hover-background: #{$light-dark-gray-hover};
-  }
-}
-
 .label {
   line-height: 20px;
   margin-inline-end: 10px;

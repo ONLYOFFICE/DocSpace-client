@@ -1,21 +1,6 @@
 @import "../../styles/variables/index.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
-  --badge-color: #{$white};
-  --badge-background-color: var(--accent-main, #{$light-status-warning});
-  --badge-disable-background-color: var(--accent-main, #{$gray});
-
-  &[data-theme="dark"] {
-    --badge-background-color: var(--accent-main, #{$dark-status-warning});
-    --badge-disable-background-color: var(--accent-main, #{$gray-dark});
-  }
-}
-
 .badge {
   display: flex;
   align-items: center;

@@ -28,24 +28,16 @@
 
 const path = require("path");
 const pkg = require("./package.json");
-const BannerPlugin = require("webpack").BannerPlugin;
-const TerserPlugin = require("terser-webpack-plugin");
-
-const version = pkg.version;
 
 const nextConfig = {
   basePath: "/sdk",
   output: "standalone",
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
-  },
   compiler: {
     styledComponents: true,
   },
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
-    return `${pkg.name}-${pkg.version}-${new Date().getTime()}`;
+    return `${pkg.name} - ${pkg.version} `;
   },
   images: {
     unoptimized: true,
@@ -64,51 +56,16 @@ const nextConfig = {
   },
 };
 
-const getBuildDate = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
-};
-
-const getBuildYear = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return today.getFullYear();
-};
-
 module.exports = {
   webpack(config) {
-    config.devtool = "source-map";
-
-    if (config.mode === "production") {
-      config.optimization = {
-        splitChunks: { chunks: "all" },
-        minimize: true,
-        minimizer: [
-          new TerserPlugin({
-            terserOptions: {
-              format: {
-                comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
-              },
-            },
-            extractComments: false,
-          }),
-        ],
-      };
-
-      config.plugins.push(
-        new BannerPlugin({
-          raw: true,
-          banner: `/*
-* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
-*
-* https://www.onlyoffice.com/
-*
-* Version: ${version} (build: ${getBuildDate()})
-*/`,
-        }),
-      );
-    }
+    // Add resolve configuration for shared package
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "@docspace/shared": path.resolve(__dirname, "../shared"),
+      },
+    };
 
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -122,8 +79,31 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
+    // Configure CSS handling
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+      // Global styles
+      {
+        test: /\.module\.(scss|sass)$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+              },
+              importLoaders: 1,
+            },
+          },
+          "sass-loader",
+        ],
+      },
+      // Regular SCSS files (non-modules)
+      {
+        test: /(?<!\.module)\.(scss|sass)$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      // Existing asset rules
       {
         type: "asset/resource",
         generator: {
@@ -131,14 +111,13 @@ module.exports = {
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
+      // SVG handling
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         loader: "@svgr/webpack",
         options: {
           prettier: false,
@@ -169,5 +148,6 @@ module.exports = {
 
     return config;
   },
-  ...nextConfig,
 };
+
+module.exports = nextConfig;

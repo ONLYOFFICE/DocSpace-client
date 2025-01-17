@@ -169,6 +169,7 @@ export const getOptions = (
   rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
   isVisitor: boolean = true,
+  isFrame: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -179,7 +180,7 @@ export const getOptions = (
     // createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,
-  } = helperOptions(actions, security);
+  } = helperOptions(actions, security, isFrame);
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
@@ -219,7 +220,7 @@ export const getOptions = (
     icon: <SharedIcon />,
     key: "share-room",
     onClick: actions.createAndCopySharedLink,
-    disabled: !security?.EditAccess,
+    disabled: !security?.EditAccess || isFrame,
   };
 
   const sharePublicRoom = {
@@ -228,7 +229,7 @@ export const getOptions = (
     icon: <SharedIcon />,
     key: "share-public-room",
     onClick: actions.createAndCopySharedLink,
-    disabled: false,
+    disabled: isFrame,
   };
 
   const createDoc = {

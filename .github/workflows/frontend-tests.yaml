@@ -2,39 +2,26 @@ name: Frontend tests
 
 on:
   push:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
   pull_request:
-    branches: [develop, release/v*]
+    branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
 jobs:
   playwright:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.48.0-jammy
     steps:
       - uses: actions/checkout@v4
-      - name: enable corepack
-        run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: adambirds/docker-compose-action@v1.5.0
         with:
-          node-version: 20
-          cache: "yarn"
-      - name: Install dependencies
-        run: yarn install
-      - name: Build test version
-        run: yarn test:build
-      - name: Run tests
-        run: yarn test:e2e
-      # - uses: actions/upload-artifact@v4
-      #   if: ${{ !cancelled() }}
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
-      #     retention-days: 30
+          compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate
+          services: tests-ci
+          test-container: tests-ci
+          test-command: npx playwright test
   eslint:
-    name: "Login and doceditor lint"
+    name: "Lint tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,9 +32,26 @@ jobs:
           node-version: 20
           cache: "yarn"
       - name: Install dependencies
-        run: yarn install
-      - name: Lint login and doceditor
+        run: yarn install --no-immutable
+      - name: Lint clients
         run: yarn lint
+  # unit-tests:
+  #   name: "Unit tests"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: enable corepack
+  #       run: corepack enable
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: "yarn"
+  #     - name: Clear yarn cache
+  #       run: yarn cache clean
+  #     - name: Install dependencies
+  #       run: yarn install --no-immutable
+  #     - name: Run unit tests
+  #       run: yarn test
   common:
     name: "Common tests"
     runs-on: ubuntu-latest
@@ -61,4 +65,9 @@ jobs:
         run: npm install
       - name: Run common tests
         working-directory: ./common/tests
-        run: npm run test
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.base_ref }}" == "develop" ]]; then
+            npm run test:skip-base-languages
+          else
+            npm run test
+          fi

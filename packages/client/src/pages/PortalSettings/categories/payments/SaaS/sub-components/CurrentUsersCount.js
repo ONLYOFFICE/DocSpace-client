@@ -46,7 +46,6 @@ const CurrentUsersCountContainer = (props) => {
   const {
     isNeedPlusSign,
     maxCountManagersByQuota,
-    t,
     isDisabled,
     theme,
     addedManagersCountTitle,

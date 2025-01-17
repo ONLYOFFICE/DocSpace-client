@@ -28,10 +28,10 @@
 import React from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
 
 import { commonIconsStyles } from "utils";
 
@@ -280,22 +280,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (!isLoaded) {
       return <AppLoader />;
     }
-
-    // const userLoaded = !isEmpty(user);
-    // if (!userLoaded) {
-    //   return <Component {...props} />;
-    // }
-
-    // if (!userLoaded) {
-    //   console.log("PrivateRoute render Loader", rest);
-    //   return (
-    //     <Section>
-    //       <Section.SectionBody>
-    //         <Loader className="pageLoader" type="rombs" size="40px" />
-    //       </Section.SectionBody>
-    //     </Section>
-    //   );
-    // }
 
     if (
       (isPortalRenameUrl && !enablePortalRename) ||

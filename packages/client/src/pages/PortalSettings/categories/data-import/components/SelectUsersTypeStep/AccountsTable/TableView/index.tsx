@@ -26,7 +26,7 @@
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -42,6 +42,7 @@ import {
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import { StyledTableContainer } from "../../../../StyledDataImport";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
@@ -50,7 +51,9 @@ import {
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
 
-const UserSelectTableContainer = styled(StyledTableContainer)`
+const UserSelectTableContainer = styled(StyledTableContainer).attrs(
+  injectDefaultTheme,
+)`
   .table-group-menu {
     height: 69px;
     position: sticky;
@@ -82,8 +85,6 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     }
   }
 `;
-
-UserSelectTableContainer.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
@@ -135,7 +136,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
 
   return (
     <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             checkboxOptions={[]}
@@ -147,7 +148,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader

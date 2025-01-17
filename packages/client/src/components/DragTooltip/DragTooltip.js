@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef } from "react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledTooltip = styled.div`
+const StyledTooltip = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   display: none;
   padding: 8px;
@@ -57,8 +57,6 @@ const StyledTooltip = styled.div`
   }
 `;
 
-StyledTooltip.defaultProps = { theme: Base };
-
 const DragTooltip = (props) => {
   const tooltipRef = useRef(null);
   const {
@@ -75,28 +73,29 @@ const DragTooltip = (props) => {
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
 
-  useEffect(() => {
-    setTooltipPosition();
-  }, [tooltipPageX, tooltipPageY]);
-
   const setTooltipPosition = useCallback(() => {
     const tooltip = tooltipRef.current;
     if (tooltip) {
       tooltip.style.display = "block";
 
       const margin = 8;
-      tooltip.style.left =
-        (isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin) +
-        "px";
-      tooltip.style.top = tooltipPageY + margin + "px";
+      tooltip.style.left = `${
+        isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin
+      }px`;
+      tooltip.style.top = `${tooltipPageY + margin}px`;
     }
-  }, [tooltipPageX, tooltipPageY]);
+  }, [tooltipPageX, tooltipPageY, isRtl]);
+
+  useEffect(() => {
+    setTooltipPosition();
+  }, [setTooltipPosition, tooltipPageX, tooltipPageY]);
 
   const renderFileMoveTooltip = useCallback(() => {
     const reg = /^([^\\]*)\.(\w+)/;
     const matches = title.match(reg);
 
-    let nameOfMovedObj, fileExtension;
+    let nameOfMovedObj;
+    let fileExtension;
     if (matches) {
       nameOfMovedObj = matches[1];
       fileExtension = matches.pop();
@@ -145,7 +144,7 @@ export default inject(({ filesStore }) => {
   } = filesStore;
 
   const isSingleItem = selection.length === 1 || bufferSelection;
-  const item = bufferSelection ? bufferSelection : selection[0];
+  const item = bufferSelection || selection[0];
 
   return {
     title: item?.title,

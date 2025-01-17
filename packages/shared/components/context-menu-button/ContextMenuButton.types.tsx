@@ -32,9 +32,9 @@ export interface ContextMenuButtonProps {
   /** Sets the button to present an opened state */
   opened?: boolean;
   /** Array of options for display */
-  data: ContextMenuModel[];
+  data?: ContextMenuModel[];
   /** Function for converting to inner data */
-  getData: () => ContextMenuModel[];
+  getData?: () => ContextMenuModel[];
   /** Specifies the icon title */
   title?: string;
   /** Specifies the icon name */

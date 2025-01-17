@@ -26,15 +26,15 @@
 
 import React from "react";
 
-import { StyledRow, StyledBox } from "../Rows.styled";
 import { RectangleSkeleton, RectangleSkeletonProps } from "../../rectangle";
 import { CircleSkeleton } from "../../circle";
+import styles from "../Rows.module.scss";
 
 const RowSkeleton = ({
   id,
   className,
   style,
-  isRectangle,
+  isRectangle = true,
   ...rest
 }: {
   id?: string;
@@ -55,7 +55,12 @@ const RowSkeleton = ({
   } = rest;
 
   return (
-    <StyledRow id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${className || ""} ${styles.row}`}
+      style={style}
+      data-testid="row-skeleton"
+    >
       {isRectangle ? (
         <RectangleSkeleton
           className="rectangle-content"
@@ -87,7 +92,7 @@ const RowSkeleton = ({
         />
       )}
 
-      <StyledBox className="row-content">
+      <div className={`${styles.box} row-content`}>
         <RectangleSkeleton
           className="first-row-content__mobile"
           title={title}
@@ -111,7 +116,7 @@ const RowSkeleton = ({
           speed={speed}
           animate={animate}
         />
-      </StyledBox>
+      </div>
 
       <RectangleSkeleton
         title={title}
@@ -125,15 +130,8 @@ const RowSkeleton = ({
         speed={speed}
         animate={animate}
       />
-    </StyledRow>
+    </div>
   );
-};
-
-RowSkeleton.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  isRectangle: true,
 };
 
 export default RowSkeleton;

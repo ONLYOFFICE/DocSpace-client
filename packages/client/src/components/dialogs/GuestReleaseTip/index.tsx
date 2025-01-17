@@ -70,7 +70,7 @@ const GuestReleaseTip = ({
   setGuestReleaseTipDialogVisible,
   showBodyLoader,
 }: GuestReleaseTipProps) => {
-  const { t } = useTranslation(["Common", "Translations"]);
+  const { t } = useTranslation(["Common", "Translations", "Files"]);
   const theme = useTheme();
 
   const icon = theme.isBase ? ChangeTypeTipSvgUrl : ChangeTypeTipDarkSvgUrl;
@@ -115,7 +115,7 @@ const GuestReleaseTip = ({
               >
                 {t("Common:Guest")}
               </Text>
-              <Badge label={t("Common:New")} noHover />
+              <Badge label={t("Files:New")} noHover />
             </div>
 
             <IconButton

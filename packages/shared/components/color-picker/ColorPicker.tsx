@@ -42,14 +42,14 @@ import { globalColors } from "../../themes";
 const ColorPicker = ({
   className,
   id,
-  onClose,
-  onApply,
-  appliedColor,
-  applyButtonLabel,
-  cancelButtonLabel,
-  isPickerOnly,
+  onClose = () => {},
+  onApply = () => {},
+  appliedColor = globalColors.lightBlueMain,
+  applyButtonLabel = "Apply",
+  cancelButtonLabel = "Cancel",
+  isPickerOnly = false,
   handleChange,
-  hexCodeLabel,
+  hexCodeLabel = "Hex code",
   forwardedRef,
 }: ColorPickerProps) => {
   const [color, setColor] = useState(
@@ -67,12 +67,13 @@ const ColorPicker = ({
 
   return (
     <Wrapper
+      data-testid="color-picker"
       ref={forwardedRef}
       isPickerOnly={isPickerOnly}
       className={className}
       id={id}
     >
-      {isPickerOnly && (
+      {isPickerOnly ? (
         <div className="hex-header">
           <div className="hex-text">
             <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
@@ -89,10 +90,10 @@ const ColorPicker = ({
             />
           </div>
         </div>
-      )}
+      ) : null}
 
       <div className="hex-color-picker">
-        {!isPickerOnly && (
+        {!isPickerOnly ? (
           <div className="hex-value-container">
             <div className="hex-value-label">{hexCodeLabel}:</div>
 
@@ -103,16 +104,16 @@ const ColorPicker = ({
               onChange={setColor}
             />
           </div>
-        )}
+        ) : null}
 
         <HexColorPicker
           color={
-            isPickerOnly ? appliedColor.toUpperCase() : color.toUpperCase()
+            isPickerOnly ? appliedColor?.toUpperCase() : color.toUpperCase()
           }
           onChange={isPickerOnly ? handleChange : setColor}
         />
 
-        {!isPickerOnly && (
+        {!isPickerOnly ? (
           <div className="hex-button">
             <Button
               label={applyButtonLabel}
@@ -130,20 +131,10 @@ const ColorPicker = ({
               onClick={onClose}
             />
           </div>
-        )}
+        ) : null}
       </div>
     </Wrapper>
   );
-};
-
-ColorPicker.defaultProps = {
-  isPickerOnly: false,
-  onClose: () => {},
-  onApply: () => {},
-  appliedColor: globalColors.lightBlueMain,
-  applyButtonLabel: "Apply",
-  cancelButtonLabel: "Cancel",
-  hexCodeLabel: "Hex code",
 };
 
 export { ColorPicker };

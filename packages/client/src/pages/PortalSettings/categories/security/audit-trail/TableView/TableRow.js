@@ -28,8 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 

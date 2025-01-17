@@ -24,29 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-import { Row } from "@docspace/shared/components/row";
-import FilesRowContent from "./FilesRowContent";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { Row } from "@docspace/shared/components/rows";
 import { isMobile, isMobileOnly } from "react-device-detect";
-
 import {
   isMobile as isMobileUtile,
   mobile,
   tablet,
   classNames,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import FilesRowContent from "./FilesRowContent";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base, globalColors } from "@docspace/shared/themes";
-
-import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
@@ -75,21 +74,21 @@ const StyledWrapper = styled.div`
     (props.checked || props.isActive) &&
     props.isFirstElem &&
     css`
-      border-top-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      border-top-color: ${({ theme }) =>
+        `${theme.filesSection.tableView.row.borderColor} !important`};
     `};
 
   ${(props) =>
     props.isIndexUpdated &&
     css`
-      background: ${(props) =>
-        props.isIndexEditingMode
-          ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
-          : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      background: ${({ theme, isIndexEditingMode }) =>
+        isIndexEditingMode
+          ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+          : `${theme.filesSection.tableView.row.backgroundActive} !important`};
 
       &:hover {
-        background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
       }
 
       ${marginStyles}
@@ -112,8 +111,8 @@ const StyledWrapper = styled.div`
     css`
       :hover {
         cursor: pointer;
-        background: ${(props) =>
-          props.theme.filesSection.tableView.row.indexActive};
+        background: ${({ theme }) =>
+          theme.filesSection.tableView.row.indexActive};
         ${marginStyles}
       }
     `};
@@ -137,7 +136,7 @@ const StyledWrapper = styled.div`
 
       @keyframes Highlight {
         0% {
-          background: ${(props) => props.theme.filesSection.animationColor};
+          background: ${({ theme }) => theme.filesSection.animationColor};
         }
 
         100% {
@@ -147,7 +146,7 @@ const StyledWrapper = styled.div`
     `}
 `;
 
-const StyledSimpleFilesRow = styled(Row)`
+const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
   height: 56px;
 
   position: unset;
@@ -326,8 +325,6 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 `;
 
-StyledSimpleFilesRow.defaultProps = { theme: Base };
-
 const SimpleFilesRow = (props) => {
   const {
     t,
@@ -351,7 +348,6 @@ const SimpleFilesRow = (props) => {
     isEdit,
     isActive,
     inProgress,
-    isAdmin,
     getContextModel,
     showHotkeyBorder,
     id,
@@ -392,7 +388,7 @@ const SimpleFilesRow = (props) => {
       title={item.title}
       logo={item.logo}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       color={item.logo?.color}
       isArchive={item.isArchive}
@@ -451,7 +447,7 @@ const SimpleFilesRow = (props) => {
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
@@ -461,12 +457,12 @@ const SimpleFilesRow = (props) => {
           data={item}
           isEdit={isEdit}
           element={element}
-          mode={"modern"}
+          mode="modern"
           sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice && badgesComponent}
+          badgesComponent={!isMobileDevice ? badgesComponent : null}
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -475,7 +471,7 @@ const SimpleFilesRow = (props) => {
           checked={checkedProps}
           contextOptions={item.contextOptions}
           contextButtonSpacerWidth={displayShareButton}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           isDragging={dragging}
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
@@ -495,7 +491,7 @@ const SimpleFilesRow = (props) => {
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
-          withoutBorder={true}
+          withoutBorder
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}
@@ -509,7 +505,7 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice && badgesComponent}
+            badgesComponent={isMobileDevice ? badgesComponent : null}
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>

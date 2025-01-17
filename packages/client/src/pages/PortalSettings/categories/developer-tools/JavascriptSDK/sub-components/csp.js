@@ -37,8 +37,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { tablet } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
@@ -50,7 +49,7 @@ const CategoryHeader = styled.div`
   line-height: 22px;
 `;
 
-const Container = styled.div`
+const Container = styled.div.attrs(injectDefaultTheme)`
   margin-bottom: 4px;
 
   &.description-holder {
@@ -74,8 +73,6 @@ const Container = styled.div`
     }
   }
 `;
-
-Container.defaultProps = { theme: Base };
 
 const ChipsContainer = styled.div`
   display: flex;
@@ -135,39 +132,10 @@ const CSP = ({
   setCSPSettings,
   standalone,
   t,
+  theme,
 }) => {
-  useEffect(() => {
-    getCSPSettings();
-  }, []);
-
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
-
-  const onKeyPress = (e) => {
-    if (e.key === "Enter" && !!domain.length) {
-      addDomain();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
-  const getChips = (domains) =>
-    domains ? (
-      domains.map((item, index) => (
-        <SelectedItem
-          key={`${item}-${index}`}
-          isInline
-          label={item}
-          onClose={() => deleteDomain(item)}
-          title={item}
-        />
-      ))
-    ) : (
-      <></>
-    );
 
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
@@ -182,20 +150,50 @@ const CSP = ({
     const trimmedDomain = domain.trim();
     const domains = trimmedDomain.split(" ");
 
-    domains.map((domain) => {
-      if (domain === "" || domainsSetting.includes(domain)) return;
+    for (let i = 0; i < domains.length; i++) {
+      const newDomain = domains[i];
 
-      domainsSetting.push(domain);
-    });
+      if (newDomain === "" || domainsSetting.includes(newDomain)) continue;
+
+      domainsSetting.push(newDomain);
+    }
 
     try {
       await setCSPSettings({ domains: domainsSetting });
-    } catch (error) {
-      setError(error?.response?.data?.error?.message);
+    } catch (err) {
+      setError(err?.response?.data?.error?.message);
     } finally {
       changeDomain("");
     }
   };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter" && !!domain.length) {
+      addDomain();
+    }
+  };
+
+  useEffect(() => {
+    getCSPSettings();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyPress);
+    return () => document.removeEventListener("keyup", onKeyPress);
+  }, []);
+
+  const getChips = (domains) =>
+    domains
+      ? domains.map((item) => (
+          <SelectedItem
+            key={item}
+            isInline
+            label={item}
+            onClose={() => deleteDomain(item)}
+            title={item}
+          />
+        ))
+      : null;
 
   const onChangeDomain = (e) => {
     if (error) setError(null);
@@ -216,7 +214,7 @@ const CSP = ({
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
       </Container>
-      {standalone && window.location.protocol !== "https:" && (
+      {standalone && window.location.protocol !== "https:" ? (
         <InfoBar>
           <div className="text-container">
             <div className="header-body">
@@ -246,7 +244,7 @@ const CSP = ({
             </div>
           </div>
         </InfoBar>
-      )}
+      ) : null}
       <Container className="input-holder">
         <TextInput
           onChange={onChangeDomain}
@@ -261,9 +259,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error
-          ? error
-          : t("CSPUrlHelp", { productName: t("Common:ProductName") })}
+        {error || t("CSPUrlHelp", { productName: t("Common:ProductName") })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

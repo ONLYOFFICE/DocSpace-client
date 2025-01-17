@@ -29,15 +29,15 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { Base } from "@docspace/shared/themes";
-import { TableBody } from "@docspace/shared/components/table";
-import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/shared/components/table";
 
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-const TableWrapper = styled(TableContainer)`
+const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
   margin-top: -2px;
 
   .table-container_header {
@@ -88,8 +88,6 @@ const TableWrapper = styled(TableContainer)`
   }
 `;
 
-TableWrapper.defaultProps = { theme: Base };
-
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `webhooksHistoryColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelWebhooksHistoryColumnsSize_ver-${TABLE_VERSION}`;
@@ -103,7 +101,6 @@ const HistoryTableView = (props) => {
     hasMoreItems,
     totalItems,
     fetchMoreItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,
@@ -173,7 +170,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
   } = webhooksStore;
   const { id: userId } = userStore.user;
@@ -186,7 +182,6 @@ export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
     fetchMoreItems,
     hasMoreItems,
     totalItems,
-    formatFilters,
     historyFilters,
     userId,
     currentDeviceType,

@@ -81,6 +81,7 @@
   "MobileOnly": "samo mobilne naprave",
   "Page": "Prikaz strani (številka)",
   "PortalDescription": "Vdelajte celoten prostor {{productName}}, da uporabnikom omogočite interakcijo z vsemi sobami, datotekami in nastavitvami.",
+  "PublicRoomPresetInfo": "Vdelajte javno sobo, da uporabnikom omogočite ogled, urejanje, komentiranje ali pregled vseh tam shranjenih dokumentov brez registracije",
   "RightPanelCollapsed": "Desni panel se je zrušil",
   "RoomFilter": "Filter sob",
   "RoomOrFolder": "Soba ali mapa",

@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import styled, { css } from "styled-components";
-import { commonIconsStyles } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
+import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-export const StyledSubmitToGalleryTile = styled.div`
+export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
   position: relative;
 
   width: 100%;
@@ -75,9 +74,7 @@ export const StyledSubmitToGalleryTile = styled.div`
   }
 `;
 
-StyledSubmitToGalleryTile.defaultProps = { theme: Base };
-
-const StyledCloseIcon = styled(CrossIcon)`
+const StyledCloseIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   position: absolute;
   top: 10px;
@@ -89,8 +86,6 @@ const StyledCloseIcon = styled(CrossIcon)`
       theme.oformGallery.submitToGalleryTile.closeIconFill};
   }
 `;
-
-StyledCloseIcon.defaultProps = { theme: Base };
 
 const SubmitToGalleryTile = ({
   t,

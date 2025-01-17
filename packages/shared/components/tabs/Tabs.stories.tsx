@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Tabs } from "./Tabs";
+import { Tabs } from ".";
 
 import { data } from "./data";
 import { TabsProps } from "./Tabs.types";
 import { TabsTypes } from "./Tabs.enums";
 
 const meta = {
-  title: "Components/Tabs",
+  title: "Data display/Tabs",
   component: Tabs,
 } satisfies Meta<typeof Tabs>;
 type Story = StoryObj<typeof meta>;

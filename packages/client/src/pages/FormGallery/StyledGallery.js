@@ -26,9 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
-import { Base } from "@docspace/shared/themes";
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import { Heading } from "@docspace/shared/components/heading";
 import { Button } from "@docspace/shared/components/button";
 
 const StyledContainer = styled.div`
@@ -90,7 +89,7 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledHeadline = styled(Headline)`
+const StyledHeadline = styled(Heading)`
   width: 100%;
   max-width: min-content;
   font-weight: 700;
@@ -109,16 +108,15 @@ const StyledHeadline = styled(Headline)`
   }
 `;
 
-const StyledSubmitToGalleryButton = styled(Button)`
+const StyledSubmitToGalleryButton = styled(Button).attrs(injectDefaultTheme)`
   margin-inline-start: auto;
 
   @media ${mobile} {
     display: none;
   }
 `;
-StyledSubmitToGalleryButton.defaultProps = { theme: Base };
 
-const StyledInfoPanelToggleWrapper = styled.div`
+const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
   align-items: center;
@@ -160,7 +158,6 @@ const StyledInfoPanelToggleWrapper = styled.div`
     }
   }
 `;
-StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
 export {
   StyledHeading,

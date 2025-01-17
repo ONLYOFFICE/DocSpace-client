@@ -74,7 +74,7 @@ export const WidthSetter = (props) => {
         <ComboBox
           size="content"
           scaled={false}
-          scaledOptions={true}
+          scaledOptions
           onSelect={onChangeWidthDimension}
           options={dataDimensions}
           selectedOption={widthDimension}

@@ -24,45 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme, TTheme } from "../../themes";
-
 export type ButtonOption = {
+  /** Unique identifier for the button option */
   key: string;
+  /** Display text for the button */
   label: string;
+  /** Icon URL or component for the button */
   icon?: string;
+  /** Click handler for the button */
   onClick?: () => void;
+  /** Indicates if the button is in error state */
   error?: boolean;
+  /** Optional HTML id attribute */
   id?: string;
+  /** If true, renders as a separator instead of a button */
   isSeparator?: boolean;
+  /** Nested button options for submenu */
   items?: ButtonOption[];
 };
+
 export type ProgressOption = {
+  /** Controls visibility of the progress item */
   open?: boolean;
+  /** Unique identifier for the progress option */
   key: string;
+  /** Display text for the progress item */
   label: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Icon URL or component */
   icon?: string;
+  /** Progress completion percentage */
   percent?: number;
+  /** Status text to display */
   status?: string;
+  /** Handler for canceling the operation */
   onCancel?: () => void;
+  /** Click handler for the progress item */
   onClick?: () => void;
+  /** Indicates if the progress is in error state */
   error?: boolean;
 };
+
 export type ActionOption = {
+  /** Action identifier */
   action?: string;
+  /** Unique identifier for the action */
   key: string;
+  /** Display text for the action */
   label: string;
+  /** Additional CSS classes */
   className?: string;
+  /** If true, renders as a separator */
   isSeparator?: boolean;
+  /** Icon URL or component */
   icon?: string;
+  /** Optional HTML id attribute */
   id?: string;
+  /** Click handler for the action */
   onClick?: ({ action }: { action?: string }) => void;
+  /** Nested action options for submenu */
   items?: ActionOption[];
+  /** If true, hides the icon */
   withoutIcon?: boolean;
+  /** If true, submenu is open by default */
   openByDefault?: boolean;
 };
 
-export interface MainButtonMobileProps {
+export type MainButtonMobileProps = {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Drop down items options */
@@ -91,47 +120,58 @@ export interface MainButtonMobileProps {
   opened?: boolean;
   /** Closes the drop down */
   onClose?: () => void;
-  /** If you need open upload panel when clicking on alert button  */
+  /** If you need open upload panel when clicking on alert button */
   onAlertClick?: () => void;
-  /** Enables alert click  */
+  /** Enables alert click */
   withAlertClick?: boolean;
   /** Enables the submenu */
   withMenu?: boolean;
+  /** If true, hides the main button */
   withoutButton?: boolean;
+  /** Shows alert indicator on the button */
   alert?: boolean;
+  /** Click handler for the main button */
   onClick?: (e: React.MouseEvent) => void;
+  /** Custom styles for the dropdown */
   dropdownStyle?: React.CSSProperties;
-}
+};
 
-export interface ProgressBarMobileProps {
+export type ProgressBarMobileProps = {
+  /** Display text for the progress bar */
   label?: string;
+  /** Status text to display */
   status?: string;
+  /** Progress completion percentage */
   percent: number;
+  /** Controls visibility of the progress bar */
   open: boolean;
+  /** Handler for canceling the operation */
   onCancel?: () => void;
+  /** Icon URL or component */
   icon: string;
-  /** The function called after the progress header is clicked  */
+  /** The function called after the progress header is clicked */
   onClickAction?: () => void;
   /** The function that facilitates hiding the button */
   hideButton?: () => void;
   /** Changes the progress bar color, if set to true */
   error?: boolean;
+  /** Additional CSS classes */
   className?: string;
-}
+};
 
-export interface SubmenuItemProps {
+export type SubmenuItemProps = {
+  /** Action option configuration */
   option: ActionOption;
+  /** Function to toggle submenu visibility */
   toggle: (value: boolean) => void;
+  /** Disables hover effects if true */
   noHover: boolean;
+  /** Function to recalculate submenu height */
   recalculateHeight: () => void;
+  /** Key of the currently opened submenu */
   openedSubmenuKey: string;
+  /** Function to set the opened submenu key */
   setOpenedSubmenuKey: (value: string) => void;
+  /** If true, submenu is open by default */
   openByDefault: boolean;
-}
-
-export interface ProgressBarMobileDefaultStyles {
-  $currentColorScheme?: TColorScheme;
-  interfaceDirection?: string;
-  theme: TTheme;
-  error?: boolean;
-}
+};

@@ -29,11 +29,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Base } from "@docspace/shared/themes";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledFolderInput = styled.div`
+const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -124,7 +124,6 @@ const StyledFolderInput = styled.div`
     }
   }
 `;
-StyledFolderInput.defaultProps = { theme: Base };
 
 const FolderInput = ({
   t,
@@ -150,12 +149,13 @@ const FolderInput = ({
   const getPathValue = () => {
     if (!treeNode) return;
 
-    let path = treeNode.path;
-    path = path.slice(1);
+    let currentPath = treeNode.path;
+    currentPath = currentPath.slice(1);
 
     let result = "";
-    path.map(
-      (node, i) => (result += node.title + (i !== path.length - 1 ? "/" : "")),
+    currentPath.map(
+      (node, i) =>
+        (result += node.title + (i !== currentPath.length - 1 ? "/" : "")),
     );
 
     setPath(result);
@@ -186,18 +186,18 @@ const FolderInput = ({
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
           </span>
           <span className="path">{path}</span>
-          {createNewFolderIsChecked && (
+          {createNewFolderIsChecked ? (
             <span className="room_title">
               {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
-          )}
+          ) : null}
         </div>
         <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>
       </StyledFolderInput>
 
-      {isDialogOpen && (
+      {isDialogOpen ? (
         <FilesSelector
           isPanelVisible={isDialogOpen}
           onClose={onClose}
@@ -207,7 +207,7 @@ const FolderInput = ({
           passedFoldersTree={[thirdpartyAccount]}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
-      )}
+      ) : null}
     </>
   );
 };

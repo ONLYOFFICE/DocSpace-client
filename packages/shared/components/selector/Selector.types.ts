@@ -371,11 +371,14 @@ export type SelectorProps = TSelectorHeader &
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
+
+    withPadding?: boolean;
   };
 
 export type BodyProps = TSelectorInfo & {
   footerVisible: boolean;
   withHeader?: boolean;
+  withPadding?: boolean;
 
   value?: string;
 
@@ -513,6 +516,7 @@ export type TSelectorItemRoom = MergeTypes<
     icon?: string;
     color?: string;
     iconOriginal?: string;
+    cover?: ICover;
   }
 >;
 
@@ -595,3 +599,15 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
+
+export type ProvidersProps = {
+  emptyScreenProps: TSelectorEmptyScreen;
+  breadCrumbsProps: TSelectorBreadCrumbs;
+  infoBarProps: TInfoBar;
+  searchProps: TSelectorSearch;
+  selectAllProps: TSelectorSelectAll & {
+    isAllChecked: boolean;
+    isAllIndeterminate: boolean;
+  };
+  tabsProps: TSelectorTabs;
+};

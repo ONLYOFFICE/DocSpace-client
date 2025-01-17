@@ -28,11 +28,10 @@ import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { NoUserSelect } from "@docspace/shared/utils";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div.attrs(injectDefaultTheme)`
   ${(props) =>
     props.isRoom &&
     css`
@@ -43,7 +42,7 @@ const IconWrapper = styled.div`
         content: "";
         position: absolute;
         inset: 0;
-        /* border: ${(props) => props.theme.itemIcon.borderColor}; */
+        /* border: ${({ theme }) => theme.itemIcon.borderColor}; */
         border: 1px solid transparent;
         border-radius: 5px;
         overflow: hidden;
@@ -59,8 +58,6 @@ const IconWrapper = styled.div`
       `}
   }
 `;
-
-IconWrapper.defaultProps = { theme: Base };
 
 const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
@@ -105,14 +102,14 @@ const ItemIcon = ({
           showDefault={showDefault || showDefaultRoomIcon}
           imgClassName={imgClassName || "react-svg-icon"}
           logo={isRoom ? logo : icon}
-          badgeUrl={badgeUrl ? badgeUrl : ""}
+          badgeUrl={badgeUrl || ""}
           withEditing={withEditing}
           model={model}
           onChangeFile={onChangeFile}
           className={className}
         />
       </IconWrapper>
-      {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
+      {isPrivacy && fileExst ? <EncryptedFileIcon isEdit={false} /> : null}
     </>
   );
 };

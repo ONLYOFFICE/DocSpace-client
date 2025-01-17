@@ -51,18 +51,18 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = useCallback(
-      (checked, user) => {
+      (isChecked, user) => {
         setBufferSelection(null);
-        checked ? selectUser(user) : deselectUser(user);
+        isChecked ? selectUser(user) : deselectUser(user);
       },
       [setBufferSelection, selectUser, deselectUser],
     );
 
     const onContextClick = useCallback(
-      (item, isSingleMenu) => {
+      (elm, isSingleMenu) => {
         isSingleMenu
-          ? singleContextMenuAction(item)
-          : multipleContextMenuAction(item);
+          ? singleContextMenuAction(elm)
+          : multipleContextMenuAction(elm);
       },
       [singleContextMenuAction, multipleContextMenuAction],
     );

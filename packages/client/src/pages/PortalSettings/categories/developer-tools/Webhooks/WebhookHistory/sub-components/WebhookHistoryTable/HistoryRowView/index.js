@@ -29,13 +29,13 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { isMobile } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import { RowContainer } from "@docspace/shared/components/rows";
 
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryRow from "./HistoryRow";
 
-const StyledRowContainer = styled(RowContainer)`
+const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   margin-top: 12px;
 
   .row-list-item {
@@ -52,8 +52,6 @@ const StyledRowContainer = styled(RowContainer)`
   }
 `;
 
-StyledRowContainer.defaultProps = { theme: Base };
-
 const HistoryRowView = (props) => {
   const {
     historyItems,
@@ -64,7 +62,6 @@ const HistoryRowView = (props) => {
     totalItems,
     fetchMoreItems,
     historyFilters,
-    formatFilters,
     currentDeviceType,
   } = props;
   const { id } = useParams();
@@ -87,7 +84,7 @@ const HistoryRowView = (props) => {
       hasMoreFiles={hasMoreItems}
       itemCount={totalItems}
       draggable
-      useReactWindow={true}
+      useReactWindow
       itemHeight={59}
     >
       {historyItems.map((item) => (
@@ -109,7 +106,6 @@ export default inject(({ setup, webhooksStore, settingsStore }) => {
     hasMoreItems,
     totalItems,
     historyFilters,
-    formatFilters,
   } = webhooksStore;
 
   const { currentDeviceType } = settingsStore;
@@ -121,7 +117,6 @@ export default inject(({ setup, webhooksStore, settingsStore }) => {
     hasMoreItems,
     totalItems,
     historyFilters,
-    formatFilters,
     currentDeviceType,
   };
 })(observer(HistoryRowView));

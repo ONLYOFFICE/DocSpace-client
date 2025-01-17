@@ -31,10 +31,13 @@ import { LANGUAGE } from "@docspace/shared/constants";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import {
+  getCorrectDate,
+  getCookie,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
-import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -46,7 +49,7 @@ const StyledContainer = styled.div`
     `}
 `;
 
-const StyledSeparator = styled.div`
+const StyledSeparator = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 1px;
 
@@ -54,8 +57,6 @@ const StyledSeparator = styled.div`
 
   background-color: ${(props) => props.theme.plugins.borderColor};
 `;
-
-StyledSeparator.defaultProps = { theme: Base };
 
 const StyledInfo = styled.div`
   margin-top: 24px;
@@ -81,158 +82,133 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
 
   return (
     <StyledContainer withDelete={withDelete}>
-      {withSeparator && <StyledSeparator />}
-      <Text fontSize={"14px"} fontWeight={600} lineHeight={"16px"} noSelect>
+      {withSeparator ? <StyledSeparator /> : null}
+      <Text fontSize="14px" fontWeight={600} lineHeight="16px" noSelect>
         {t("Metadata")}
       </Text>
       <StyledInfo>
-        {plugin.author && (
+        {plugin.author ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Files:ByAuthor")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.author}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {plugin.version && (
+        {plugin.version ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Version")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.version}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && (
+        {!plugin.system ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Uploader")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.createBy.displayName}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && uploadDate && (
+        {!plugin.system && uploadDate ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:UploadDate")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {uploadDate}
             </Text>
           </>
-        )}
+        ) : null}
 
         <Text
-          fontSize={"13px"}
+          fontSize="13px"
           fontWeight={400}
-          lineHeight={"20px"}
+          lineHeight="20px"
           noSelect
           truncate
         >
           {t("People:UserStatus")}
         </Text>
-        <Text fontSize={"13px"} fontWeight={600} lineHeight={"20px"} noSelect>
+        <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
           {pluginStatus}
         </Text>
 
-        {plugin.homePage && (
+        {plugin.homePage ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Homepage")}
             </Text>
             <Link
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={600}
-              lineHeight={"20px"}
-              type={"page"}
+              lineHeight="20px"
+              type="page"
               href={plugin?.homePage}
-              target={"_blank"}
+              target="_blank"
               noSelect
               isHovered
             >
               {plugin.homePage}
             </Link>
           </>
-        )}
-        {plugin.description && (
+        ) : null}
+        {plugin.description ? (
           <>
             <Text
-              fontSize={"13px"}
+              fontSize="13px"
               fontWeight={400}
-              lineHeight={"20px"}
+              lineHeight="20px"
               noSelect
               truncate
             >
               {t("Common:Description")}
             </Text>
-            <Text
-              fontSize={"13px"}
-              fontWeight={600}
-              lineHeight={"20px"}
-              noSelect
-            >
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
               {plugin.description}
             </Text>
           </>
-        )}
+        ) : null}
       </StyledInfo>
     </StyledContainer>
   );

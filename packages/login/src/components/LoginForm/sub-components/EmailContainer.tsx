@@ -150,7 +150,6 @@ const EmailContainer = ({
         <EmailInput
           id="login_username"
           name="login"
-          type={InputType.email}
           hasError={isEmailErrorShow}
           value={identifier}
           placeholder={t("RegistrationEmailWatermark")}

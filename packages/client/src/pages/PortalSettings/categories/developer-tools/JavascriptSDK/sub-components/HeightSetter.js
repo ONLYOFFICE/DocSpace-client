@@ -74,7 +74,7 @@ export const HeightSetter = (props) => {
         <ComboBox
           size="content"
           scaled={false}
-          scaledOptions={true}
+          scaledOptions
           onSelect={onChangeHeightDimension}
           options={dataDimensions}
           selectedOption={heightDimension}

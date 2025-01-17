@@ -43,7 +43,7 @@ import {
   StyledArrowRightSvg,
 } from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
-import { SearchContext, SearchDispatchContext } from "../contexts/Search";
+import { SearchDispatchContext } from "../contexts/Search";
 
 const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const {

@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { Box } from "@docspace/shared/components/box";
 import { size } from "@docspace/shared/utils";
 
+import { DeviceType } from "@docspace/shared/enums";
 import ToggleSSO from "./sub-components/ToggleSSO";
 import IdpSettings from "./IdpSettings";
 import Certificates from "./Certificates";
@@ -39,18 +40,10 @@ import SubmitResetButtons from "./SubmitButton";
 import AdvancedSettings from "./AdvancedSettings";
 import UsersType from "./UsersType";
 
-import { DeviceType } from "@docspace/shared/enums";
-
 const SPSettings = ({ currentDeviceType }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobileView = currentDeviceType === DeviceType.mobile;
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -58,9 +51,15 @@ const SPSettings = ({ currentDeviceType }) => {
       navigate("/portal-settings/integration/sso");
   };
 
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
   return (
     <Box className="service-provider-settings">
-      {isMobileView && <ToggleSSO />}
+      {isMobileView ? <ToggleSSO /> : null}
       <IdpSettings />
       <Certificates provider="IdentityProvider" />
       <Certificates provider="ServiceProvider" />

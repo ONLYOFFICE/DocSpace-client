@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:skip-base-languages": "SKIP_BASE_LANGUAGES_TEST=true jest",
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
     "test:colors": "jest colors.test.js"

@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
@@ -34,6 +32,7 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
+import * as Styled from "./index.styled";
 
 const CategoryFilterMobile = ({
   t,
@@ -51,6 +50,8 @@ const CategoryFilterMobile = ({
   const scrollRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [openedMenuItem, setOpenedMenuItem] = useState(null);
+
   const onCloseDropdown = () => {
     setIsOpen(false);
     setOpenedMenuItem(null);
@@ -65,7 +66,6 @@ const CategoryFilterMobile = ({
     onCloseDropdown();
   };
 
-  const [openedMenuItem, setOpenedMenuItem] = useState(null);
   const onOpenMenuItem = (category) => setOpenedMenuItem(category);
   const onHeaderArrowClick = () => setOpenedMenuItem(null);
 
@@ -80,7 +80,7 @@ const CategoryFilterMobile = ({
   let height = 0;
   const maxCalculatedHeight = 385;
 
-  let calculatedHeight =
+  const calculatedHeight =
     48 +
     (!openedMenuItem
       ? 36 + 13 + menuItems.length * 36
@@ -105,7 +105,7 @@ const CategoryFilterMobile = ({
               getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
           }}
           isOpen={isOpen}
-          scaled={true}
+          scaled
           onClick={onToggleDropdown}
           tabIndex={1}
         />
@@ -113,11 +113,11 @@ const CategoryFilterMobile = ({
         <Styled.CategoryFilterMobile
           open={isOpen}
           withBackdrop={false}
-          manualWidth={"100%"}
+          manualWidth="100%"
           directionY="bottom"
           directionX="right"
-          isMobile={true}
-          fixedDirection={true}
+          isMobile
+          fixedDirection
           isDefaultMode={false}
           className="mainBtnDropdown"
           forsedHeight={`${height}px`}
@@ -135,20 +135,22 @@ const CategoryFilterMobile = ({
               style={{ paddingLeft: "0" }}
             />
 
-            {!openedMenuItem && [
-              <Styled.CategoryFilterItemMobile
-                key={"view-all"}
-                className="dropdown-item"
-                label={t("FormGallery:ViewAllTemplates")}
-                onClick={onViewAllTemplates}
-                style={{ paddingLeft: "0" }}
-              />,
-              <DropDownItem
-                isSeparator
-                key={"separator"}
-                className={"huge-separator"}
-              />,
-            ]}
+            {!openedMenuItem
+              ? [
+                  <Styled.CategoryFilterItemMobile
+                    key="view-all"
+                    className="dropdown-item"
+                    label={t("FormGallery:ViewAllTemplates")}
+                    onClick={onViewAllTemplates}
+                    style={{ paddingLeft: "0" }}
+                  />,
+                  <DropDownItem
+                    isSeparator
+                    key="separator"
+                    className="huge-separator"
+                  />,
+                ]
+              : null}
 
             {!openedMenuItem
               ? menuItems.map((item) => (

@@ -30,14 +30,16 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 
-import { commonIconsStyles, tablet } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  tablet,
+} from "@docspace/shared/utils";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
-import { Base } from "@docspace/shared/themes";
-
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
@@ -47,9 +49,7 @@ const StyledCheckIcon = styled(CheckIcon)`
   }
 `;
 
-StyledCheckIcon.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
@@ -58,15 +58,13 @@ const StyledCrossIcon = styled(CrossIcon)`
     fill: ${(props) => props.theme.filesEditingWrapper.hoverFill} !important;
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 export const okIcon = <StyledCheckIcon className="edit-ok-icon" size="scale" />;
 export const cancelIcon = (
   <StyledCrossIcon className="edit-cancel-icon" size="scale" />
 );
 
-const EditingWrapper = styled.div`
+const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: inline-flex;
   align-items: center;
@@ -77,7 +75,7 @@ const EditingWrapper = styled.div`
       grid-column-start: 1;
       grid-column-end: -1;
 
-      border-bottom: ${(props) => props.theme.filesEditingWrapper.borderBottom};
+      border-bottom: ${({ theme }) => theme.filesEditingWrapper.borderBottom};
       padding-bottom: 4px;
       margin-top: 4px;
     `}
@@ -90,11 +88,11 @@ const EditingWrapper = styled.div`
       z-index: 1;
       gap: 4px;
 
-      background-color: ${(props) =>
-        props.theme.filesEditingWrapper.tile.background};
+      background-color: ${({ theme }) =>
+        theme.filesEditingWrapper.tile.background};
 
-      border: ${(props) => props.theme.filesEditingWrapper.border};
-      border-radius: ${(props) => (props.isFolder ? "6px" : "0 0 6px 6px")};
+      border: ${({ theme }) => theme.filesEditingWrapper.border};
+      border-radius: ${({ isFolder }) => (isFolder ? "6px" : "0 0 6px 6px")};
 
       height: 43px;
       bottom: 0;
@@ -147,20 +145,20 @@ const EditingWrapper = styled.div`
       props.viewAs === "tile" &&
       !props.isUpdatingRowItem &&
       css`
-        background: ${(props) =>
-          props.theme.filesEditingWrapper.tile.itemBackground};
-        border: ${(props) =>
-          `1px solid ${props.theme.filesEditingWrapper.tile.itemBorder}`};
+        background: ${({ theme }) =>
+          theme.filesEditingWrapper.tile.itemBackground};
+        border: ${({ theme }) =>
+          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:focus {
-          border: ${(props) =>
-            `1px solid ${props.theme.filesEditingWrapper.tile.itemActiveBorder}`};
+          border: ${({ theme }) =>
+            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
     ${({ isDisabled }) =>
       isDisabled &&
-      `background-color: ${(props) => props.theme.filesEditingWrapper.disabledBackground}`}
+      `background-color: ${({ theme }) => theme.filesEditingWrapper.disabledBackground}`}
   }
 
   .edit-button {
@@ -172,14 +170,14 @@ const EditingWrapper = styled.div`
       props.viewAs === "tile" &&
       css`
         margin-inline-start: 0;
-        background: ${(props) =>
-          props.theme.filesEditingWrapper.tile.itemBackground};
-        border: ${(props) =>
-          `1px solid ${props.theme.filesEditingWrapper.tile.itemBorder}`};
+        background: ${({ theme }) =>
+          theme.filesEditingWrapper.tile.itemBackground};
+        border: ${({ theme }) =>
+          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:hover {
-          border: ${(props) =>
-            `1px solid ${props.theme.filesEditingWrapper.tile.itemActiveBorder}`};
+          border: ${({ theme }) =>
+            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
@@ -195,7 +193,7 @@ const EditingWrapper = styled.div`
         justify-content: center;
 
         &:hover {
-          border: ${(props) => props.theme.filesEditingWrapper.border};
+          border: ${({ theme }) => theme.filesEditingWrapper.border};
         }
       `}
   }
@@ -212,8 +210,6 @@ const EditingWrapper = styled.div`
   }
 `;
 
-EditingWrapper.defaultProps = { theme: Base };
-
 const EditingWrapperComponent = (props) => {
   const {
     itemTitle,
@@ -221,7 +217,7 @@ const EditingWrapperComponent = (props) => {
     renameTitle,
     onClickUpdateItem,
     cancelUpdateItem,
-    //isLoading,
+    // isLoading,
     viewAs,
     elementIcon,
     isUpdatingRowItem,
@@ -243,7 +239,7 @@ const EditingWrapperComponent = (props) => {
   const onKeyUpUpdateItem = (e) => {
     if (isLoading) return;
 
-    var code = e.keyCode || e.which;
+    const code = e.keyCode || e.which;
     if (code === 13) {
       if (!isLoading) setIsLoading(true);
       return onClickUpdateItem(e);
@@ -280,21 +276,21 @@ const EditingWrapperComponent = (props) => {
   return (
     <EditingWrapper
       viewAs={viewAs}
-      isUpdatingRowItem={isUpdatingRowItem && !isTable}
+      isUpdatingRowItem={isUpdatingRowItem ? !isTable : null}
       isFolder={isFolder}
       isDisabled={isLoading}
     >
-      {isTable && elementIcon}
+      {isTable ? elementIcon : null}
       {isUpdatingRowItem && !isTable ? (
         <Text className="edit-text">{itemTitle}</Text>
       ) : (
         <TextInput
           className="edit-text"
           name="title"
-          scale={true}
+          scale
           value={itemTitle}
           tabIndex={1}
-          isAutoFocussed={true}
+          isAutoFocussed
           onChange={renameTitle}
           onKeyPress={onKeyUpUpdateItem}
           onKeyDown={onEscapeKeyPress}
@@ -306,7 +302,7 @@ const EditingWrapperComponent = (props) => {
           forwardedRef={inputRef}
         />
       )}
-      {!isUpdatingRowItem && (
+      {!isUpdatingRowItem ? (
         <>
           <Button
             className="edit-button not-selectable"
@@ -336,7 +332,7 @@ const EditingWrapperComponent = (props) => {
             title=""
           />
         </>
-      )}
+      ) : null}
     </EditingWrapper>
   );
 };

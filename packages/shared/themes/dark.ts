@@ -66,6 +66,7 @@ const {
 
   darkErrorStatus,
   favoritesStatus,
+  favoriteStatusDark,
   lightStatusWarning,
   darkStatusWarning,
   darkStatusPositive,
@@ -126,6 +127,9 @@ const Dark: TTheme = {
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
+    secondary: {
+      color: grayDark,
+    },
   },
 
   heading: {
@@ -413,7 +417,7 @@ const Dark: TTheme = {
     float: "left",
     height: "19px",
     overflow: "hidden",
-    padding: "0px",
+    padding: "",
 
     separator: {
       border: `1px solid ${grayDarkStrong}`,
@@ -1601,6 +1605,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
+    containerBorderColor: grayDarkStrong,
     color: white,
     disabledColor: grayDarkStrong,
     pastColor: grayDark,
@@ -2299,7 +2304,7 @@ const Dark: TTheme = {
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
         hoverColor: white,
-        color: darkGrayDark,
+        color: white,
         iconColor: darkGrayDark,
       },
     },
@@ -2714,6 +2719,7 @@ const Dark: TTheme = {
     background: darkGrayLight,
     textColor: grayDark,
     iconFill: black,
+    warningColor: darkErrorStatus,
   },
 
   client: {
@@ -2841,6 +2847,7 @@ const Dark: TTheme = {
           dataFontColorBlack: white,
           notAvailableBackground: grayDark,
           textColor: white,
+          paidBadgeBackground: favoriteStatusDark,
         },
 
         companyInfo: {

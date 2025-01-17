@@ -44,6 +44,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   disabled: props.isDisabled ? "disabled" : "",
   tabIndex: props.tabIndex,
   isConnect: props.isConnect,
+  theme: props.theme || Base,
 }))`
   font-family: ${(props) => props.theme.fontFamily};
 
@@ -51,31 +52,31 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-weight: ${(props) => props.theme.socialButton.fontWeight};
-  text-decoration: ${(props) => props.theme.socialButton.textDecoration};
-  padding: ${(props) => props.theme.socialButton.padding};
+  font-weight: ${(props) => props.theme.socialButton?.fontWeight};
+  text-decoration: ${(props) => props.theme.socialButton?.textDecoration};
+  padding: ${(props) => props.theme.socialButton?.padding};
 
-  width: ${(props) => props.theme.socialButton.width};
+  width: ${(props) => props.theme.socialButton?.width};
   height: ${(props) =>
     props.size === "base"
-      ? props.theme.socialButton.height
+      ? props.theme.socialButton?.height
       : props.theme.socialButton.heightSmall};
-  text-align: ${(props) => props.theme.socialButton.textAlign};
+  text-align: ${(props) => props.theme.socialButton?.textAlign};
   border: ${(props) =>
     props.isConnect
-      ? props.theme.socialButton.borderConnect
-      : props.theme.socialButton.border};
-  border-radius: ${(props) => props.theme.socialButton.borderRadius};
+      ? props.theme.socialButton?.borderConnect
+      : props.theme.socialButton?.border};
+  border-radius: ${(props) => props.theme.socialButton?.borderRadius};
 
   touch-callout: none;
   -o-touch-callout: none;
   -moz-touch-callout: none;
   -webkit-touch-callout: none;
 
-  stroke: ${(props) => props.theme.socialButton.stroke};
+  stroke: ${(props) => props.theme.socialButton?.stroke};
 
   &:focus {
-    outline: ${(props) => props.theme.socialButton.outline};
+    outline: ${(props) => props.theme.socialButton?.outline};
   }
 
   ${(props) =>
@@ -92,8 +93,8 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
       ? css<StyledSocialButtonProps>`
           background: ${({ theme }) =>
             props.isConnect
-              ? theme.socialButton.connectBackground
-              : theme.socialButton.background};
+              ? theme.socialButton?.connectBackground
+              : theme.socialButton?.background};
 
           ${() =>
             !props.noHover &&
@@ -104,37 +105,37 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
 
                 .social_button_text {
                   color: ${({ theme }) =>
-                    !props.isConnect && theme.socialButton.text.hoverColor};
+                    !props.isConnect && theme.socialButton?.text?.hoverColor};
                 }
               }
 
               :hover {
                 background: ${({ theme }) =>
                   props.isConnect
-                    ? theme.socialButton.hoverConnectBackground
-                    : theme.socialButton.hoverBackground};
+                    ? theme.socialButton?.hoverConnectBackground
+                    : theme.socialButton?.hoverBackground};
 
                 border: ${props.isConnect
-                  ? props.theme.socialButton.hoverConnectBorder
-                  : props.theme.socialButton.hoverBorder};
+                  ? props.theme.socialButton?.hoverConnectBorder
+                  : props.theme.socialButton?.hoverBorder};
               }
 
               :active {
                 background: ${({ theme }) =>
                   props.isConnect
-                    ? theme.socialButton.activeConnectBackground
-                    : theme.socialButton.activeBackground};
+                    ? theme.socialButton?.activeConnectBackground
+                    : theme.socialButton?.activeBackground};
                 border: ${props.isConnect
-                  ? props.theme.socialButton.activeConnectBorder
-                  : props.theme.socialButton.activeBorder};
+                  ? props.theme.socialButton?.activeConnectBorder
+                  : props.theme.socialButton?.activeBorder};
               }
             `}
         `
       : css`
      
           background: ${({ theme }) =>
-            theme.socialButton.disableBackgroundColor};
-          color: ${({ theme }) => theme.socialButton.disableColor};
+            theme.socialButton?.disableBackgroundColor};
+          color: ${({ theme }) => theme.socialButton?.disableColor};
 
           ${
             props.theme.isBase &&
@@ -205,7 +206,5 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     gap: 16px;
   }
 `;
-
-StyledSocialButton.defaultProps = { theme: Base };
 
 export default StyledSocialButton;

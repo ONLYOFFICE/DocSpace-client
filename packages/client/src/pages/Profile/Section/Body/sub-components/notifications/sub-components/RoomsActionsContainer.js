@@ -47,8 +47,8 @@ const RoomsActionsContainer = ({
     try {
       await changeSubscription(NotificationsType.Badges, checked);
       await fetchTreeFolders();
-    } catch (e) {
-      toastr.error(e);
+    } catch (err) {
+      toastr.error(err);
     }
   };
 

@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+
+import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import {
   commonSettingsStyles,
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
-
-import { tablet, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -63,8 +63,6 @@ const commonStyles = css`
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {
@@ -182,9 +180,6 @@ const StyledAutoBackup = styled.div`
   }
   .automatic-backup_main {
     margin-bottom: 30px;
-    .radio-button_text {
-      font-size: 13px;
-    }
   }
   .backup_toggle-btn {
     position: static;
@@ -567,8 +562,8 @@ const StyledBackupList = styled.div`
     ${(props) =>
       props.isChecked &&
       css`
-        background: ${(props) =>
-          props.theme.client.settings.backup.backupCheckedListItemBackground};
+        background: ${({ theme }) =>
+          theme.client.settings.backup.backupCheckedListItemBackground};
       `}
     padding-inline: 16px;
   }

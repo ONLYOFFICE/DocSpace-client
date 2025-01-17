@@ -27,7 +27,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "../utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";

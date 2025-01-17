@@ -45,13 +45,13 @@ const UsersInfo = ({
         selectedUsers={totalUsedUsers}
         totalLicenceLimit={quota.max}
       >
-        {totalUsedUsers > quota.max && (
+        {totalUsedUsers > quota.max ? (
           <Text className="license-limit-warning">
             {t("Settings:UserLimitExceeded", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-        )}
+        ) : null}
 
         <Box className="users-info-wrapper">
           <Text className="selected-users-count" truncate>
@@ -96,4 +96,9 @@ const UsersInfoBlock = inject<TStore>(({ importAccountsStore }) => {
   };
 })(observer(UsersInfo));
 
-export default () => <UsersInfoBlock />;
+const UsersInfoBlockWrapper = (props: UsersInfoBlockProps) => (
+  <UsersInfoBlock {...props} />
+);
+UsersInfoBlockWrapper.displayName = "UsersInfoBlockWrapper";
+
+export default UsersInfoBlockWrapper;

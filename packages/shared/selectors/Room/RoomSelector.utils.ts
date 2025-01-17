@@ -44,7 +44,7 @@ export const convertToItems = (folders: TRoom[]) => {
 
     const icon = logo.medium;
     const iconOriginal = logo.original;
-    const color = logo.color;
+    const { color } = logo;
     const cover = logo?.cover;
 
     return {

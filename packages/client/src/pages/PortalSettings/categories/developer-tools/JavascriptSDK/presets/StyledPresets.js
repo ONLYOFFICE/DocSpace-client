@@ -32,7 +32,7 @@ import {
   desktop,
 } from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import { showPreviewThreshold } from "../constants";
 
 export const SDKContainer = styled(Box)`
@@ -199,7 +199,7 @@ export const ControlsSection = styled(Box)`
   gap: 16px;
 `;
 
-export const Frame = styled(Box)`
+export const Frame = styled(Box).attrs(injectDefaultTheme)`
   margin-top: 16px;
   position: relative;
 
@@ -251,8 +251,6 @@ export const Frame = styled(Box)`
     height: 100% !important;
   }
 `;
-
-Frame.defaultProps = { theme: Base };
 
 export const Container = styled(Box)`
   width: 100%;
@@ -307,7 +305,6 @@ export const ColumnContainer = styled(Box)`
 
 export const Preview = styled(Box)`
   width: 100%;
-  min-width: 660px;
   flex-direction: row;
 
   .preview-description {
@@ -358,7 +355,7 @@ export const CodeWrapper = styled.div`
 
   margin-top: 16px;
 
-  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  width: 100%;
   max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

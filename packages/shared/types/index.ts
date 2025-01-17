@@ -93,8 +93,8 @@ declare global {
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
     };
-    zESettings: {};
-    zE: {};
+    zESettings: unknown;
+    zE: unknown;
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
@@ -136,8 +136,13 @@ declare global {
         checkDomain?: boolean;
       };
       logs: {
-        enableLogs: false;
-        logsToConsole: false;
+        enableLogs: boolean;
+        logsToConsole: boolean;
+      };
+      loaders: {
+        showLoader: boolean;
+        showLoaderTime: number;
+        loaderTime: number;
       };
     };
     AscDesktopEditor: {

@@ -267,6 +267,7 @@ const RegistrationForm = ({
             isChecked={isChecked}
             isDisabled={isLoading}
             label={newsletter}
+            truncate={false}
           />
         </div>
       )}
@@ -274,6 +275,7 @@ const RegistrationForm = ({
       {termsConditionsComponent}
 
       <Button
+        id="register-singup"
         className="login-button"
         primary
         size={ButtonSize.medium}

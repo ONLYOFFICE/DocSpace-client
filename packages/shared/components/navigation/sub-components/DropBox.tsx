@@ -32,15 +32,15 @@ import { DeviceType } from "../../../enums";
 
 import { CustomScrollbarsVirtualList } from "../../scrollbar";
 
-import { StyledBox, StyledContainer } from "../Navigation.styled";
-import { IDropBoxProps } from "../Navigation.types";
+import styles from "../Navigation.module.scss";
+import { TDropBoxProps } from "../Navigation.types";
 
 import NavigationLogo from "./LogoBlock";
 import ArrowButton from "./ArrowBtn";
 import ControlButtons from "./ControlBtn";
 import Row from "./Row";
 
-const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
+const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
   (
     {
       sectionHeight,
@@ -109,25 +109,31 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
     const isTabletView = currentDeviceType === DeviceType.tablet;
 
     return (
-      <StyledBox
+      <div
         ref={ref}
-        height={sectionHeight < dropBoxHeight ? sectionHeight : null}
-        dropBoxWidth={dropBoxWidth}
-        withLogo={withLogo}
+        className={styles.box}
+        data-with-logo={withLogo ? "true" : "false"}
+        style={
+          {
+            "--drop-box-width": `${dropBoxWidth}px`,
+            "--drop-box-height":
+              sectionHeight < dropBoxHeight ? `${sectionHeight}px` : null,
+          } as React.CSSProperties
+        }
       >
-        <StyledContainer
-          isDropBoxComponent
-          isInfoPanelVisible={isInfoPanelVisible}
-          isDesktopClient={isDesktopClient}
-          withLogo={!!withLogo && isTabletView}
-          isDesktop={isDesktop}
+        <div
+          className={styles.container}
+          data-is-drop-box-component="true"
+          data-is-desktop-client={isDesktopClient ? "true" : "false"}
+          data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
+          data-is-desktop={isDesktop ? "true" : "false"}
         >
-          {withLogo && (
+          {withLogo ? (
             <NavigationLogo
               burgerLogo={burgerLogo}
               className="navigation-logo drop-box-logo"
             />
-          )}
+          ) : null}
           <ArrowButton
             isRootFolder={isRootFolder}
             onBackToParentFolder={onBackToParentFolder}
@@ -148,7 +154,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
             onCloseDropBox={onCloseDropBox}
             showTitle
           />
-        </StyledContainer>
+        </div>
 
         <VariableSizeList
           direction={interfaceDirection as Direction}
@@ -165,7 +171,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
         >
           {Row}
         </VariableSizeList>
-      </StyledBox>
+      </div>
     );
   },
 );

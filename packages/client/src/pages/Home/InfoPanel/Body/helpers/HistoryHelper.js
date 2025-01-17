@@ -72,7 +72,7 @@ export const addLinksToHistory = (fetchedHistory, links) => {
     if (targetType !== "roomExternalLink") return feed;
     if (actionType === "rename" || actionType === "delete") return feed;
 
-    const link = links.find((link) => link.sharedTo.id === feed.data.id);
+    const link = links.find((l) => l.sharedTo.id === feed.data.id);
     if (!link) return feed;
 
     return { ...feed, data: link };
@@ -84,8 +84,8 @@ export const addLinksToHistory = (fetchedHistory, links) => {
 export const parseHistory = (fetchedHistory) => {
   if (!fetchedHistory) return null;
 
-  let feeds = fetchedHistory?.items;
-  let parsedFeeds = [];
+  const feeds = fetchedHistory?.items;
+  const parsedFeeds = [];
 
   for (let i = 0; i < feeds.length; i++) {
     const feedDay = moment(feeds[i].date).format("YYYY-MM-DD");

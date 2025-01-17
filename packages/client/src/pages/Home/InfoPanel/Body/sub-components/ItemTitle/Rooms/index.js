@@ -36,12 +36,11 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
-import RoomsContextBtn from "./context-btn";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import CalendarComponent from "../Calendar";
 import { FolderType } from "@docspace/shared/enums";
+import { StyledTitle } from "../../../styles/common";
+import RoomsContextBtn from "./context-btn";
 
 import Search from "../../Search";
 
@@ -57,14 +56,9 @@ const RoomsItemHeader = ({
   setSelection,
   setBufferSelection,
   isArchive,
-  isShared,
   showSearchBlock,
-  setCalendarDay,
-  openHistory,
   setShowSearchBlock,
   roomType,
-  setIsScrollLocked,
-  i18n,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
@@ -123,7 +117,7 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      {isRoomMembersPanel && showSearchBlock && <Search />}
+      {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
 
       <div className="item-icon">
         <RoomIcon
@@ -133,11 +127,11 @@ const RoomsItemHeader = ({
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
-          badgeUrl={badgeUrl ? badgeUrl : ""}
+          badgeUrl={badgeUrl || ""}
           hoverSrc={
-            selection.isRoom &&
-            selection.security?.EditRoom &&
-            Camera10ReactSvgUrl
+            selection.isRoom && selection.security?.EditRoom
+              ? Camera10ReactSvgUrl
+              : null
           }
           model={model}
           onChangeFile={onChangeFileContext}
@@ -153,13 +147,13 @@ const RoomsItemHeader = ({
         truncate
       >
         {title}
-        {isFile && displayFileExtension && (
+        {isFile && displayFileExtension ? (
           <span className="file-extension">{selection.fileExst}</span>
-        )}
+        ) : null}
       </Text>
 
       <div className="info_title-icons">
-        {isRoomMembersPanel && (
+        {isRoomMembersPanel ? (
           <IconButton
             id="info_search"
             className="icon"
@@ -168,19 +162,19 @@ const RoomsItemHeader = ({
             onClick={onSearchClick}
             size={16}
           />
-        )}
+        ) : null}
 
-        {canInviteUserInRoomAbility && isRoomMembersPanel && (
+        {canInviteUserInRoomAbility && isRoomMembersPanel ? (
           <IconButton
             id="info_add-user"
-            className={"icon"}
+            className="icon"
             title={t("Common:InviteContacts")}
             iconName={PersonPlusReactSvgUrl}
-            isFill={true}
+            isFill
             onClick={onClickInviteUsers}
             size={16}
           />
-        )}
+        ) : null}
         {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent
@@ -259,7 +253,6 @@ export default inject(
       roomType,
       setIsScrollLocked,
       isShared: selection?.shared,
-      roomType,
 
       displayFileExtension,
       maxImageUploadSize: settingsStore.maxImageUploadSize,

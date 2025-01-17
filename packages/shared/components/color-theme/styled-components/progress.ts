@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../../themes";
+import { globalColors } from "../../../themes";
 
 import StyledPreparationPortalProgress from "../sub-components/StyledPreparationPortalProgress";
 import { ProgressColorTheme } from "../ColorTheme.types";
+import { injectDefaultTheme } from "../../../utils";
 
 const getDefaultStyles = ({ $currentColorScheme, theme }: ProgressColorTheme) =>
   $currentColorScheme &&
@@ -40,6 +41,6 @@ const getDefaultStyles = ({ $currentColorScheme, theme }: ProgressColorTheme) =>
     }
   `;
 
-StyledPreparationPortalProgress.defaultProps = { theme: Base };
-
-export default styled(StyledPreparationPortalProgress)(getDefaultStyles);
+export default styled(StyledPreparationPortalProgress).attrs(
+  injectDefaultTheme,
+)(getDefaultStyles);

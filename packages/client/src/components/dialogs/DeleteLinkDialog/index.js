@@ -52,19 +52,6 @@ const DeleteLinkDialogComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDelete();
-  };
-
   const onClose = () => {
     setIsVisible(false);
   };
@@ -80,7 +67,7 @@ const DeleteLinkDialogComponent = (props) => {
         setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
-        if (link.sharedTo.primary && isPublicRoomType) {
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
@@ -90,6 +77,19 @@ const DeleteLinkDialogComponent = (props) => {
         onClose();
       });
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDelete();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   const getDescription = () => {
     if (link.sharedTo.primary) {
@@ -115,7 +115,7 @@ const DeleteLinkDialogComponent = (props) => {
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
-        {link.sharedTo.primary && isPublicRoomType
+        {link.sharedTo.primary && (isPublicRoomType || isFormRoom)
           ? t("Files:RevokeLink")
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
@@ -124,11 +124,11 @@ const DeleteLinkDialogComponent = (props) => {
           <Text lineHeight="20px" noSelect>
             {getDescription()}
           </Text>
-          {link.sharedTo.primary && (
+          {link.sharedTo.primary ? (
             <Text lineHeight="20px" noSelect>
               {t("Files:ActionCannotUndone")}
             </Text>
-          )}
+          ) : null}
         </DeleteLinkDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -136,7 +136,7 @@ const DeleteLinkDialogComponent = (props) => {
           id="delete-file-modal_submit"
           key="OkButton"
           label={
-            link.sharedTo.primary && isPublicRoomType
+            link.sharedTo.primary && (isPublicRoomType || isFormRoom)
               ? t("Files:RevokeLink")
               : t("Files:DeleteLink")
           }

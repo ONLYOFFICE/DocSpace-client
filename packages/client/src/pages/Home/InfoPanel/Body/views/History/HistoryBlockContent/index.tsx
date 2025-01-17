@@ -44,32 +44,38 @@ const HistoryBlockContent = ({
   return (
     <div className="info-panel_history-block">
       {(targetType === "user" || targetType === "group") &&
-        actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
+      actionType === "update" ? (
+        <HistoryUserGroupRoleChange feed={feed} />
+      ) : null}
 
       <HistoryMainText feed={feed} />
 
       {(targetType === "file" || targetType === "folder") &&
-        (actionType === "rename" ||
-          historyWithFileList ||
-          actionType === "changeIndex") && (
-          <HistoryItemList
-            feed={feed}
-            actionType={actionType}
-            targetType={targetType}
-          />
-        )}
+      (actionType === "rename" ||
+        historyWithFileList ||
+        actionType === "changeIndex") ? (
+        <HistoryItemList
+          feed={feed}
+          actionType={actionType}
+          targetType={targetType}
+        />
+      ) : null}
 
       {feed.related.length > 0 &&
-        targetType === "group" &&
-        actionType !== "update" && <HistoryGroupList feed={feed} />}
+      targetType === "group" &&
+      actionType !== "update" ? (
+        <HistoryGroupList feed={feed} />
+      ) : null}
 
       {feed.related.length > 0 &&
-        targetType === "user" &&
-        actionType !== "update" && <HistoryUserList feed={feed} />}
+      targetType === "user" &&
+      actionType !== "update" ? (
+        <HistoryUserList feed={feed} />
+      ) : null}
 
-      {targetType === "roomTag" && (
+      {targetType === "roomTag" ? (
         <HistoryRoomTagList feed={feed} actionType={actionType} />
-      )}
+      ) : null}
     </div>
   );
 };

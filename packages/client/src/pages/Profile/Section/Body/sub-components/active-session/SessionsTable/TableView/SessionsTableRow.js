@@ -25,20 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledTableRow = styled(TableRow)`
+const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
   .session-platform {
     font-weight: 600;
     margin-inline-end: 5px;
@@ -66,8 +64,6 @@ const StyledTableRow = styled(TableRow)`
     justify-content: flex-end;
   }
 `;
-
-StyledTableRow.defaultProps = { theme: Base };
 
 const SessionsTableRow = (props) => {
   const {
@@ -97,14 +93,14 @@ const SessionsTableRow = (props) => {
       <TableCell>
         <Text className="session-platform">{platform}</Text>
         <Text className="session-info">{`(${browser})`}</Text>
-        {showTickIcon && (
+        {showTickIcon ? (
           <IconButton
             size={12}
             className="tick-icon"
             color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
-        )}
+        ) : null}
       </TableCell>
 
       <TableCell>
@@ -115,19 +111,19 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {(country || city) && (
+          {country || city ? (
             <>
               {country}
-              {country && city && ", "}
+              {country && city ? ", " : null}
               {city}
-              <span className="divider"></span>
+              <span className="divider" />
             </>
-          )}
+          ) : null}
           {ip}
         </Text>
       </TableCell>
 
-      {showRemoveIcon && (
+      {showRemoveIcon ? (
         <TableCell className="remove-cell">
           <IconButton
             size={20}
@@ -136,7 +132,7 @@ const SessionsTableRow = (props) => {
             onClick={onRemoveClick}
           />
         </TableCell>
-      )}
+      ) : null}
     </StyledTableRow>
   );
 };

@@ -81,6 +81,9 @@ import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
+import { injectDefaultTheme } from "./injectDefaultTheme";
+import { getFromSessionStorage } from "./getFromSessionStorage";
+import { saveToSessionStorage } from "./saveToSessionStorage";
 
 export {
   isBetaLanguage,
@@ -134,7 +137,10 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  injectDefaultTheme,
   getTextColor,
+  getFromSessionStorage,
+  saveToSessionStorage,
 };
 
 export const getModalType = () => {

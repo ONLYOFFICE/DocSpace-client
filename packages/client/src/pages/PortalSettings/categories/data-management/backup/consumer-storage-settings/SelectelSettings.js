@@ -70,6 +70,7 @@ class SelectelSettings extends React.Component {
 
     addValueInFormSettings(name, value);
   };
+
   render() {
     const {
       formSettings,
@@ -86,7 +87,7 @@ class SelectelSettings extends React.Component {
           id="private-container-input"
           name={private_container}
           className="backup_text-input"
-          scale={true}
+          scale
           value={formSettings[private_container]}
           hasError={isError[private_container]}
           onChange={this.onChangeText}
@@ -98,7 +99,7 @@ class SelectelSettings extends React.Component {
           id="public-container-input"
           name={public_container}
           className="backup_text-input"
-          scale={true}
+          scale
           value={formSettings[public_container]}
           hasError={isError[public_container]}
           onChange={this.onChangeText}
@@ -107,7 +108,7 @@ class SelectelSettings extends React.Component {
           tabIndex={2}
         />
 
-        {isNeedFilePath && (
+        {isNeedFilePath ? (
           <TextInput
             id="file-path-input"
             name={filePath}
@@ -120,7 +121,7 @@ class SelectelSettings extends React.Component {
             tabIndex={3}
             hasError={isError[filePath]}
           />
-        )}
+        ) : null}
       </>
     );
   }

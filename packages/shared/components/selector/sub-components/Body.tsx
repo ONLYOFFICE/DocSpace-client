@@ -83,6 +83,7 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+  withPadding,
 
   withInfo,
   infoText,
@@ -244,23 +245,24 @@ const Body = ({
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}
+      withPadding={withPadding}
     >
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {withTabs && tabsData && (
+      {withTabs && tabsData ? (
         <StyledTabs
           items={tabsData}
           selectedItemId={activeTabId}
           className="selector_body_tabs"
         />
-      )}
+      ) : null}
 
       <Search isSearch={itemsCount > 0 || isSearch} />
 
-      {withInfo && !isLoading && (
+      {withInfo && !isLoading ? (
         <Info withInfo={withInfo} infoText={infoText} />
-      )}
+      ) : null}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
@@ -272,9 +274,9 @@ const Body = ({
         />
       ) : (
         <>
-          {!!descriptionText && (
+          {descriptionText ? (
             <Text className="body-description-text">{descriptionText}</Text>
-          )}
+          ) : null}
 
           <SelectAll
             show={showSelectAll}
@@ -282,7 +284,7 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight && (
+          {bodyHeight ? (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -317,7 +319,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          )}
+          ) : null}
         </>
       )}
     </StyledBody>

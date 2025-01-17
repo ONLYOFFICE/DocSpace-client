@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components/row";
-import { tablet } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
+import { Row } from "@docspace/shared/components/rows";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 
 const StyledBody = styled.div`
   height: 100%;
@@ -44,7 +43,7 @@ const StyledBody = styled.div`
   }
 `;
 
-const StyledVersionList = styled.div`
+const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
   .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>
@@ -58,8 +57,8 @@ const StyledVersionList = styled.div`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -76,7 +75,7 @@ const StyledVersionList = styled.div`
       ${(props) =>
         props.isRestoreProcess &&
         `
-          color:${(props) => props.theme.filesVersionHistory.versionList.color};
+          color:${({ theme }) => theme.filesVersionHistory.versionList.color};
           touch-action: none;
           pointer-events: none;
         `};
@@ -98,8 +97,8 @@ const StyledVersionList = styled.div`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -111,8 +110,8 @@ const StyledVersionList = styled.div`
           ${(props) =>
             props.isRestoreProcess &&
             `
-              stroke: ${(props) =>
-                props.theme.filesVersionHistory.versionList.stroke};
+              stroke: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.stroke};
             `};
         }
       }
@@ -129,16 +128,13 @@ const StyledVersionList = styled.div`
       path {
         ${(props) =>
           props.isRestoreProcess &&
-          `fill: ${(props) =>
-            props.theme.filesVersionHistory.versionList.fill}`}
+          `fill: ${({ theme }) => theme.filesVersionHistory.versionList.fill}`}
       }
     }
   }
 `;
 
-StyledVersionList.defaultProps = { theme: Base };
-
-const StyledVersionRow = styled(Row)`
+const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   .row_content {
     position: relative;
     padding-top: 13px;
@@ -260,8 +256,8 @@ const StyledVersionRow = styled(Row)`
           ${(props) =>
             props.isSavingComment &&
             `
-              fill: ${(props) =>
-                props.theme.filesVersionHistory.versionList.fill};
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionList.fill};
             `};
         }
       }
@@ -275,8 +271,7 @@ const StyledVersionRow = styled(Row)`
       ${(props) =>
         props.isSavingComment &&
         `
-          color: ${(props) =>
-            props.theme.filesVersionHistory.versionList.color};
+          color: ${({ theme }) => theme.filesVersionHistory.versionList.color};
           touch-action: none;
           pointer-events: none;
         `}
@@ -309,7 +304,5 @@ const StyledVersionRow = styled(Row)`
     max-width: 350px;
   }
 `;
-
-StyledVersionRow.defaultProps = { theme: Base };
 
 export { StyledBody, StyledVersionRow, StyledVersionList };

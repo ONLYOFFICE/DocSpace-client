@@ -108,7 +108,7 @@ const TariffBar = ({
         paymentDate,
       );
 
-  if (!tariffBar) return <></>;
+  if (!tariffBar) return null;
   return (
     <StyledWrapper>
       <Text
@@ -119,7 +119,7 @@ const TariffBar = ({
         lineHeight="16px"
         color={tariffBar.color}
         onClick={onClick}
-        truncate={true}
+        truncate
       >
         {tariffBar.label}
       </Text>

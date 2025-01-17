@@ -76,7 +76,7 @@ const Footer = React.memo(
         : submitButtonLabel;
 
     const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+      const { value } = e.target;
       setNewFooterInputValue?.(value);
     };
 
@@ -91,7 +91,7 @@ const Footer = React.memo(
         withFooterCheckbox={withFooterCheckbox}
         className="selector_footer"
       >
-        {withFooterInput && (
+        {withFooterInput ? (
           <StyledNewNameContainer>
             <StyledNewNameHeader
               lineHeight="20px"
@@ -109,24 +109,24 @@ const Footer = React.memo(
               scale
               onChange={onChangeFileName}
             />
-            {withFooterCheckbox && (
+            {withFooterCheckbox ? (
               <Checkbox
                 label={footerCheckboxLabel}
                 isChecked={isChecked}
                 onChange={onChangeCheckbox}
               />
-            )}
+            ) : null}
           </StyledNewNameContainer>
-        )}
+        ) : null}
 
-        {withFooterCheckbox && !withFooterInput && (
+        {withFooterCheckbox && !withFooterInput ? (
           <Checkbox
             label={footerCheckboxLabel}
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             className="selector_footer-checkbox"
           />
-        )}
+        ) : null}
 
         <StyledButtonContainer>
           <Button
@@ -145,7 +145,7 @@ const Footer = React.memo(
             onClick={onSubmit}
           />
 
-          {withAccessRights && (
+          {withAccessRights ? (
             <AccessSelector
               accessRights={accessRights}
               selectedAccessRight={selectedAccessRight}
@@ -153,9 +153,9 @@ const Footer = React.memo(
               footerRef={ref}
               accessRightsMode={accessRightsMode}
             />
-          )}
+          ) : null}
 
-          {withCancelButton && (
+          {withCancelButton ? (
             <Button
               id={cancelButtonId}
               className="button cancel-button"
@@ -165,7 +165,7 @@ const Footer = React.memo(
               onClick={onCancel}
               isDisabled={requestRunning}
             />
-          )}
+          ) : null}
         </StyledButtonContainer>
       </StyledFooter>
     );

@@ -31,18 +31,16 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { Base } from "@docspace/shared/themes";
 
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
 
-const StyledComponent = styled.div`
+const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   .combo-button-label {
     max-width: 100%;
   }
 `;
-
-StyledComponent.defaultProps = { theme: Base };
 
 const CustomizationNavbar = ({
   t,
@@ -88,14 +86,14 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <MobileCategoryWrapper
           title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
         />
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

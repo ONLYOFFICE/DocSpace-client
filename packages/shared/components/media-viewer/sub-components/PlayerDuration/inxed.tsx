@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { mobile } from "../../../../utils";
 import { formatTime } from "../../MediaViewer.utils";
 import { globalColors } from "../../../../themes";
 

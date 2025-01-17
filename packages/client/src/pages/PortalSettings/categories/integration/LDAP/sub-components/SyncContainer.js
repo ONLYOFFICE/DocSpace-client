@@ -34,14 +34,14 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
 import { toastr } from "@docspace/shared/components/toast";
 
-import ProgressContainer from "./ProgressContainer";
-import ToggleAutoSync from "./ToggleAutoSync";
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
-import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { onChangeUrl } from "../utils";
 import { useNavigate } from "react-router-dom";
 import { isMobile, isDesktop } from "@docspace/shared/utils/device";
+import ProgressContainer from "./ProgressContainer";
+import ToggleAutoSync from "./ToggleAutoSync";
+import StyledLdapPage from "../styled-components/StyledLdapPage";
+import { onChangeUrl } from "../utils";
 
 const SyncContainer = ({
   isMobileView,
@@ -58,6 +58,13 @@ const SyncContainer = ({
   const { t } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
 
+  const onCheckView = () => {
+    if (!isMobile()) {
+      const newUrl = onChangeUrl();
+      if (newUrl) navigate(newUrl);
+    }
+  };
+
   React.useEffect(() => {
     isMobileView && setDocumentTitle(t("Ldap:LdapSyncTitle"));
     onCheckView();
@@ -65,13 +72,6 @@ const SyncContainer = ({
 
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (!isMobile()) {
-      const newUrl = onChangeUrl();
-      if (newUrl) navigate(newUrl);
-    }
-  };
 
   const onSaveClick = React.useCallback(() => {
     saveCronLdap()
@@ -91,7 +91,7 @@ const SyncContainer = ({
 
   const renderBody = () => (
     <Box className="ldap_sync-container">
-      {!isMobileView && (
+      {!isMobileView ? (
         <Text
           fontSize="16px"
           fontWeight={700}
@@ -101,7 +101,7 @@ const SyncContainer = ({
         >
           {t("LdapSyncTitle")}
         </Text>
-      )}
+      ) : null}
       <Text
         fontSize="12px"
         fontWeight={400}
@@ -126,7 +126,7 @@ const SyncContainer = ({
 
       <ToggleAutoSync />
 
-      {cron && (
+      {cron ? (
         <>
           {" "}
           <Text
@@ -160,7 +160,7 @@ const SyncContainer = ({
             }
           />
         </>
-      )}
+      ) : null}
     </Box>
   );
 

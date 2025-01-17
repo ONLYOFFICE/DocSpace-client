@@ -34,13 +34,13 @@ import TimeInput from "./TimePicker.styled";
 
 const TimePicker = ({
   initialTime,
-  onChange,
-  className,
-  hasError,
+  onChange = () => {},
+  className = "",
+  hasError = false,
   tabIndex,
   classNameInput,
   onBlur,
-  focusOnRender,
+  focusOnRender = false,
   forwardedRef,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
@@ -193,6 +193,9 @@ const TimePicker = ({
       hasError={hasError}
       isFocused={isInputFocused}
       ref={forwardedRef}
+      data-test-id="time-picker"
+      role="group"
+      aria-label="Time picker"
     >
       <TextInput
         className={`${classNameInput}-hours-input`}
@@ -208,6 +211,8 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="hours-input"
+        aria-label="Hours"
       />
       :
       <TextInput
@@ -224,16 +229,11 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="minutes-input"
+        aria-label="Minutes"
       />
     </TimeInput>
   );
-};
-
-TimePicker.defaultProps = {
-  onChange: () => {},
-  className: "",
-  hasError: false,
-  focusOnRender: false,
 };
 
 export { TimePicker };

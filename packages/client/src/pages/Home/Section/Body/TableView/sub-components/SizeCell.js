@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { StyledText } from "./CellStyles";
 
-const SizeCell = ({ t, item, sideColor }) => {
-  const { fileExst, contentLength, providerKey, filesCount, foldersCount } =
-    item;
+const SizeCell = ({ item, sideColor }) => {
+  const { fileExst, contentLength } = item;
   const date = fileExst || contentLength ? contentLength : "";
 
   return (

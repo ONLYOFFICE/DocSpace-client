@@ -37,16 +37,16 @@ import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { FilterType } from "@docspace/shared/enums";
-
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { TooltipContent } from "../sub-components/TooltipContent";
-import { Integration } from "../sub-components/Integration";
+import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
 import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { TooltipContent } from "../sub-components/TooltipContent";
+import { Integration } from "../sub-components/Integration";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -69,8 +69,6 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const FileSelector = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -167,7 +165,7 @@ const FileSelector = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -183,19 +181,19 @@ const FileSelector = (props) => {
   }, []);
 
   const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+    const newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
-    if (!!publicInPath) {
+    if (publicInPath) {
       const links = await fetchExternalLinks(publicInPath.id);
 
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
+          const { title, requestToken } = link.sharedTo;
 
           return {
-            key: id,
+            key: link.sharedTo.id,
             label: title,
-            requestToken: requestToken,
+            requestToken,
           };
         });
 
@@ -208,22 +206,22 @@ const FileSelector = (props) => {
       setSharedLinks(null);
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 
   const onChangeSharedLink = (link) => {
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const changeColumnsOption = (e) => {
     setTypeDisplay(e.target.value);
-    setConfig((config) => {
+    setConfig((oldConfig) => {
       return {
-        ...config,
+        ...oldConfig,
         filterParam:
           e.target.value === "SelectorTypes"
             ? selectedType.key
@@ -234,17 +232,23 @@ const FileSelector = (props) => {
 
   const onTypeSelect = (option) => {
     setSelectedType(option);
-    setConfig((config) => {
-      return { ...config, filterParam: option.key };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, filterParam: option.key };
     });
   };
 
   const toggleWithSearch = () => {
-    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSearch: !config.withSearch,
+    }));
   };
 
   const toggleWithSubtitle = () => {
-    setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSubtitle: !config.withSubtitle,
+    }));
   };
 
   const preview = (
@@ -253,7 +257,7 @@ const FileSelector = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId}></Box>
+      <Box id={config.frameId} />
     </Frame>
   );
 
@@ -370,7 +374,7 @@ const FileSelector = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -394,7 +398,7 @@ const FileSelector = (props) => {
                   directionY="bottom"
                 />
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <ControlsSection>
@@ -408,22 +412,20 @@ const FileSelector = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {typeDisplay === "SelectorTypes" && (
-              <>
-                <ComboBox
-                  onSelect={onTypeSelect}
-                  options={
-                    fileOptions || {
-                      key: "Select",
-                      label: t("Common:SelectAction"),
-                    }
+            {typeDisplay === "SelectorTypes" ? (
+              <ComboBox
+                onSelect={onTypeSelect}
+                options={
+                  fileOptions || {
+                    key: "Select",
+                    label: t("Common:SelectAction"),
                   }
-                  scaled
-                  directionY="top"
-                  selectedOption={selectedType}
-                />
-              </>
-            )}
+                }
+                scaled
+                directionY="top"
+                selectedOption={selectedType}
+              />
+            ) : null}
           </ControlsSection>
 
           <Integration

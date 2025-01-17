@@ -62,9 +62,9 @@ const Block = ({
       >
         {bodyText}
       </Text>
-      {isChecked && (
+      {isChecked ? (
         <div className="virtual-data-room-block_content">{children}</div>
-      )}
+      ) : null}
     </div>
   );
 };
@@ -123,7 +123,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeAutomaticIndexing}
         isDisabled={false}
         isChecked={roomParams.indexing}
-      ></Block>
+      />
       <Block
         headerText={t("FileLifetime")}
         bodyText={t("FileLifetimeDescription")}
@@ -148,7 +148,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeRestrictCopyAndDownload}
         isDisabled={false}
         isChecked={copyAndDownloadChecked}
-      ></Block>
+      />
 
       <Block
         headerText={t("AddWatermarksToDocuments")}

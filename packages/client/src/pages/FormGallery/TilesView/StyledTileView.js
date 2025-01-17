@@ -25,11 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
-import TileContent from "./sub-components/TileContent";
+import { globalColors } from "@docspace/shared/themes";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
-import { tablet, desktop, mobile, mobileMore } from "@docspace/shared/utils";
+import {
+  tablet,
+  desktop,
+  mobile,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
+import TileContent from "./sub-components/TileContent";
 
 const FlexBoxStyles = css`
   display: flex;
@@ -140,7 +145,7 @@ const StyledFileTileBottom = styled.div`
   ${(props) =>
     props.isSelected &&
     css`
-      border-top: ${(props) => props.theme.filesSection.tilesView.tile.border};
+      border-top: ${({ theme }) => theme.filesSection.tilesView.tile.border};
       border-radius: 0 0 6px 6px;
     `}
 
@@ -192,7 +197,7 @@ const StyledElement = styled.div`
   width: 32px;
 `;
 
-const StyledOptionButton = styled.div`
+const StyledOptionButton = styled.div.attrs(injectDefaultTheme)`
   display: block;
 
   .expandButton > div:first-child {
@@ -200,8 +205,6 @@ const StyledOptionButton = styled.div`
     padding-inline: 12px 21px;
   }
 `;
-
-StyledOptionButton.defaultProps = { theme: Base };
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -277,7 +280,7 @@ const StyledGridWrapper = styled.div`
   }
 `;
 
-const StyledTileContainer = styled.div`
+const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   height: 100%;
 
@@ -391,8 +394,6 @@ const StyledTileContainer = styled.div`
     margin-inline-end: -3px;
   }
 `;
-
-StyledTileContainer.defaultProps = { theme: Base };
 
 const StyledCard = styled.div`
   display: block;

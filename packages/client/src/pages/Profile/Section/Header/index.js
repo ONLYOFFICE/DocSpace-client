@@ -39,16 +39,18 @@ import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";
-import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
+import {
+  DeleteSelfProfileDialog,
+  DeleteOwnerProfileDialog,
+} from "SRC_DIR/components/dialogs";
 
-import { StyledHeader } from "./StyledHeader";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { StyledHeader } from "./StyledHeader";
 
 const Header = (props) => {
   const {
@@ -170,19 +172,19 @@ const Header = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onClickBack}
         className="arrow-button"
       />
 
       <div>
-        <Headline className="header-headline" type="content">
+        <Heading className="header-headline" type="content">
           {t("Profile:MyProfile")}
-        </Headline>
+        </Heading>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) ||
-          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
+        {(isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}
@@ -190,29 +192,29 @@ const Header = (props) => {
             size={17}
             getData={getUserContextOptions}
             isDisabled={false}
-            usePortal={true}
+            usePortal
           />
-        )}
+        ) : null}
 
         <div className="tariff-bar">
           <TariffBar />
         </div>
       </div>
 
-      {deleteSelfProfileDialog && (
+      {deleteSelfProfileDialog ? (
         <DeleteSelfProfileDialog
           visible={deleteSelfProfileDialog}
           onClose={() => setDeleteSelfProfileDialog(false)}
           email={profile?.email}
         />
-      )}
+      ) : null}
 
-      {deleteOwnerProfileDialog && (
+      {deleteOwnerProfileDialog ? (
         <DeleteOwnerProfileDialog
           visible={deleteOwnerProfileDialog}
           onClose={() => setDeleteOwnerProfileDialog(false)}
         />
-      )}
+      ) : null}
     </StyledHeader>
   );
 };
@@ -231,7 +233,7 @@ export default inject(
 
     const { isVisitor, isCollaborator, user } = userStore.user;
 
-    const { targetUserStore, usersStore, dialogStore } = peopleStore;
+    const { targetUserStore, dialogStore } = peopleStore;
 
     const { targetUser, isMe } = targetUserStore;
 

@@ -110,13 +110,13 @@ const NewItem = ({
       >
         {label}
       </Text>
-      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 && (
+      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 ? (
         <NewItemDropDown
           dropDownItems={dropDownItems}
           onCloseDropDown={onCloseDropDown}
           listHeight={listHeight}
         />
-      )}
+      ) : null}
     </StyledItem>
   );
 };

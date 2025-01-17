@@ -38,7 +38,9 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
+import { isManagement } from "@docspace/shared/utils/common";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
 import ThirdPartyResourcesModule from "./sub-components/ThirdPartyResourcesModule";
@@ -46,15 +48,14 @@ import BackupListModalDialog from "./sub-components/backup-list";
 import RoomsModule from "./sub-components/RoomsModule";
 import ButtonContainer from "./sub-components/ButtonComponent";
 import { StyledRestoreBackup } from "../StyledBackup";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-const LOCAL_FILE = "localFile",
-  BACKUP_ROOM = "backupRoom",
-  DISK_SPACE = "thirdPartyDiskSpace",
-  STORAGE_SPACE = "thirdPartyStorageSpace";
+const LOCAL_FILE = "localFile";
+const BACKUP_ROOM = "backupRoom";
+const DISK_SPACE = "thirdPartyDiskSpace";
+const STORAGE_SPACE = "thirdPartyStorageSpace";
 
-const NOTIFICATION = "notification",
-  CONFIRMATION = "confirmation";
+const NOTIFICATION = "notification";
+const CONFIRMATION = "confirmation";
 
 const {
   DocumentModuleType,
@@ -85,8 +86,6 @@ const RestoreBackup = (props) => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
     useState(false);
-  const [isVisibleSelectFileDialog, setIsVisibleSelectFileDialog] =
-    useState(false);
 
   const startRestoreBackup = useCallback(async () => {
     try {
@@ -94,7 +93,7 @@ const RestoreBackup = (props) => {
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
         getStorageRegions(),
       ]);
 
@@ -142,6 +141,8 @@ const RestoreBackup = (props) => {
         return ResourcesModuleType;
       case STORAGE_SPACE:
         return StorageModuleType;
+      default:
+        break;
     }
   };
 
@@ -149,12 +150,8 @@ const RestoreBackup = (props) => {
     setIsVisibleBackupListDialog(true);
   };
 
-  const onClickInput = () => {
-    setIsVisibleSelectFileDialog(true);
-  };
   const onModalClose = () => {
     setIsVisibleBackupListDialog(false);
-    setIsVisibleSelectFileDialog(false);
   };
 
   const onSetStorageId = (id) => {
@@ -162,56 +159,53 @@ const RestoreBackup = (props) => {
   };
 
   const radioButtonContent = (
-    <>
-      <RadioButtonGroup
-        name="restore_backup"
-        orientation="vertical"
-        fontSize="13px"
-        fontWeight="400"
-        className="backup_radio-button"
-        options={[
-          { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
-          { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
-          {
-            id: "third-party-resource",
-            value: DISK_SPACE,
-            label: t("ThirdPartyResource"),
-          },
-          {
-            id: "third-party-storage",
-            value: STORAGE_SPACE,
-            label: t("Common:ThirdPartyStorage"),
-          },
-        ]}
-        onClick={onChangeRadioButton}
-        selected={radioButtonState}
-        spacing="16px"
-        isDisabled={!isEnableRestore}
-      />
-    </>
+    <RadioButtonGroup
+      name="restore_backup"
+      orientation="vertical"
+      fontSize="13px"
+      fontWeight="400"
+      className="backup_radio-button"
+      options={[
+        { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
+        { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
+        {
+          id: "third-party-resource",
+          value: DISK_SPACE,
+          label: t("ThirdPartyResource"),
+        },
+        {
+          id: "third-party-storage",
+          value: STORAGE_SPACE,
+          label: t("Common:ThirdPartyStorage"),
+        },
+      ]}
+      onClick={onChangeRadioButton}
+      selected={radioButtonState}
+      spacing="16px"
+      isDisabled={!isEnableRestore}
+    />
   );
 
   const backupModules = (
     <div className="restore-backup_modules">
-      {radioButtonState === LOCAL_FILE && (
+      {radioButtonState === LOCAL_FILE ? (
         <LocalFileModule t={t} isEnableRestore={isEnableRestore} />
-      )}
+      ) : null}
 
-      {radioButtonState === BACKUP_ROOM && <RoomsModule />}
-      {radioButtonState === DISK_SPACE && (
+      {radioButtonState === BACKUP_ROOM ? <RoomsModule /> : null}
+      {radioButtonState === DISK_SPACE ? (
         <ThirdPartyResourcesModule buttonSize={buttonSize} />
-      )}
-      {radioButtonState === STORAGE_SPACE && (
+      ) : null}
+      {radioButtonState === STORAGE_SPACE ? (
         <ThirdPartyStoragesModule onSetStorageId={onSetStorageId} />
-      )}
+      ) : null}
     </div>
   );
 
   const warningContent = (
     <>
       <Text className="restore-backup_warning settings_unavailable" noSelect>
-        {t("Common:Warning")}
-        {"!"}
+        {t("Common:Warning")}!
       </Text>
       <Text
         className="restore-backup_warning-description settings_unavailable"
@@ -221,7 +215,7 @@ const RestoreBackup = (props) => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      {!standalone && (
+      {!standalone ? (
         <Text
           className="restore-backup_warning-link settings_unavailable"
           noSelect
@@ -230,7 +224,7 @@ const RestoreBackup = (props) => {
             productName: t("Common:ProductName"),
           })}
         </Text>
-      )}
+      ) : null}
     </>
   );
 
@@ -258,13 +252,13 @@ const RestoreBackup = (props) => {
         {t("BackupList")}
       </Text>
 
-      {isVisibleBackupListDialog && (
+      {isVisibleBackupListDialog ? (
         <BackupListModalDialog
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
           isNotify={checkboxState.notification}
         />
-      )}
+      ) : null}
       <Checkbox
         truncate
         name={NOTIFICATION}

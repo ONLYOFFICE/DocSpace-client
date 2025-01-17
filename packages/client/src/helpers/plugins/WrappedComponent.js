@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
@@ -43,325 +43,9 @@ import { PluginComponents } from "./enums";
 
 import { messageActions } from "./utils";
 
+const PLUGIN_IFRAME_TITLE = "Plugin iframe";
+
 const PropsContext = React.createContext({});
-
-const ComponentPure = ({
-  component,
-
-  pluginName,
-
-  setSettingsPluginDialogVisible,
-  setCurrentSettingsDialogPlugin,
-  updatePluginStatus,
-  setPluginDialogVisible,
-  setPluginDialogProps,
-
-  updateContextMenuItems,
-  updateInfoPanelItems,
-  updateMainButtonItems,
-  updateProfileMenuItems,
-  updateEventListenerItems,
-  updateFileItems,
-  updatePlugin,
-}) => {
-  const [elementProps, setElementProps] = React.useState(component.props);
-
-  const {
-    contextProps,
-    updatePropsContext,
-    isRequestRunning,
-    setIsRequestRunning,
-    setModalRequestRunning,
-  } = React.useContext(PropsContext);
-
-  React.useEffect(() => {
-    if (
-      !component.contextName ||
-      (contextProps && !contextProps[component.contextName])
-    )
-      return;
-
-    contextProps && setElementProps(contextProps[component.contextName]);
-  }, [contextProps && contextProps[component.contextName]]);
-
-  React.useEffect(() => {
-    setElementProps(component.props);
-  }, [component.props]);
-
-  const getElement = () => {
-    const componentName = component.component;
-
-    switch (componentName) {
-      case PluginComponents.box: {
-        const childrenComponents = elementProps?.children?.map(
-          (item, index) => (
-            <PluginComponent
-              key={`box-${index}-${item.component}`}
-              component={item}
-              pluginName={pluginName}
-            />
-          ),
-        );
-
-        return <Box {...elementProps}>{childrenComponents}</Box>;
-      }
-
-      case PluginComponents.text: {
-        return <Text {...elementProps}>{elementProps.text}</Text>;
-      }
-
-      case PluginComponents.label: {
-        return <Label {...elementProps} />;
-      }
-
-      case PluginComponents.checkbox: {
-        const onChangeAction = () => {
-          const message = elementProps.onChange();
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          );
-        };
-
-        return <Checkbox {...elementProps} onChange={onChangeAction} />;
-      }
-
-      case PluginComponents.toggleButton: {
-        const onChangeAction = () => {
-          const message = elementProps.onChange();
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          );
-        };
-
-        return <ToggleButton {...elementProps} onChange={onChangeAction} />;
-      }
-
-      case PluginComponents.textArea: {
-        const onChangeAction = (e) => {
-          const message = elementProps.onChange(e.target.value);
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          );
-        };
-
-        return <Textarea {...elementProps} onChange={onChangeAction} />;
-      }
-
-      case PluginComponents.input: {
-        const onChangeAction = (e) => {
-          const message = elementProps.onChange(e.target.value);
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          );
-        };
-
-        return <TextInput {...elementProps} onChange={onChangeAction} />;
-      }
-
-      case PluginComponents.button: {
-        const {
-          withLoadingAfterClick,
-          disableWhileRequestRunning,
-          isSaveButton,
-          modalRequestRunning,
-          setSettingsModalRequestRunning,
-          onCloseAction,
-          ...rest
-        } = elementProps;
-
-        const onClickAction = async () => {
-          if (withLoadingAfterClick) {
-            setIsRequestRunning && setIsRequestRunning(true);
-            setModalRequestRunning && setModalRequestRunning(true);
-            if (isSaveButton) {
-              setSettingsModalRequestRunning &&
-                setSettingsModalRequestRunning(true);
-            }
-          }
-
-          const message = await elementProps.onClick();
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-
-            updatePlugin,
-          );
-
-          setIsRequestRunning && setIsRequestRunning(false);
-          setModalRequestRunning && setModalRequestRunning(false);
-          if (isSaveButton) {
-            setSettingsModalRequestRunning &&
-              setSettingsModalRequestRunning(false);
-            onCloseAction && onCloseAction();
-          }
-        };
-
-        const isLoading = withLoadingAfterClick
-          ? isSaveButton
-            ? modalRequestRunning
-            : isRequestRunning
-              ? isRequestRunning
-              : rest.isLoading
-          : rest.isLoading;
-        const isDisabled = disableWhileRequestRunning
-          ? isSaveButton
-            ? modalRequestRunning
-            : isRequestRunning
-              ? isRequestRunning
-              : rest.isDisabled
-          : rest.isDisabled;
-
-        return (
-          <Button
-            {...rest}
-            isLoading={isLoading}
-            isDisabled={isDisabled}
-            onClick={onClickAction}
-          />
-        );
-      }
-
-      case PluginComponents.comboBox: {
-        const onSelectAction = (option) => {
-          const message = elementProps.onSelect(option);
-
-          messageActions(
-            message,
-            setElementProps,
-
-            pluginName,
-
-            setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
-            updatePluginStatus,
-            updatePropsContext,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          );
-        };
-
-        return <ComboBox {...elementProps} onSelect={onSelectAction} />;
-      }
-
-      case PluginComponents.iFrame: {
-        return (
-          <iframe
-            {...elementProps}
-            style={{ minHeight: "100%", border: "none", ...elementProps.style }}
-          ></iframe>
-        );
-      }
-
-      case PluginComponents.img: {
-        return <img {...elementProps}></img>;
-      }
-
-      case PluginComponents.skeleton: {
-        return <RectangleSkeleton {...elementProps} />;
-      }
-    }
-  };
-
-  const element = getElement();
-
-  return element;
-};
 
 export const PluginComponent = inject(({ pluginStore }) => {
   const {
@@ -370,29 +54,351 @@ export const PluginComponent = inject(({ pluginStore }) => {
     setSettingsPluginDialogVisible,
     setPluginDialogVisible,
     setPluginDialogProps,
-
     updateContextMenuItems,
     updateInfoPanelItems,
     updateMainButtonItems,
     updateProfileMenuItems,
     updateEventListenerItems,
     updateFileItems,
+    updatePlugin,
   } = pluginStore;
+
   return {
     updatePluginStatus,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
     setPluginDialogVisible,
     setPluginDialogProps,
-
     updateContextMenuItems,
     updateInfoPanelItems,
     updateMainButtonItems,
     updateProfileMenuItems,
     updateEventListenerItems,
     updateFileItems,
+    updatePlugin,
   };
-})(observer(ComponentPure));
+})(
+  observer(
+    ({
+      component,
+
+      pluginName,
+
+      setSettingsPluginDialogVisible,
+      setCurrentSettingsDialogPlugin,
+      updatePluginStatus,
+      setPluginDialogVisible,
+      setPluginDialogProps,
+
+      updateContextMenuItems,
+      updateInfoPanelItems,
+      updateMainButtonItems,
+      updateProfileMenuItems,
+      updateEventListenerItems,
+      updateFileItems,
+      updatePlugin,
+    }) => {
+      const [elementProps, setElementProps] = React.useState(component.props);
+
+      const {
+        contextProps,
+        updatePropsContext,
+        isRequestRunning,
+        setIsRequestRunning,
+        setModalRequestRunning,
+      } = React.useContext(PropsContext);
+
+      React.useEffect(() => {
+        if (
+          !component.contextName ||
+          (contextProps && !contextProps[component.contextName])
+        )
+          return;
+
+        contextProps && setElementProps(contextProps[component.contextName]);
+      }, [contextProps && contextProps[component.contextName]]);
+
+      React.useEffect(() => {
+        setElementProps(component.props);
+      }, [component.props]);
+
+      const getElement = () => {
+        const componentName = component.component;
+
+        switch (componentName) {
+          case PluginComponents.box: {
+            const childrenComponents = elementProps?.children?.map((item) => (
+              <PluginComponent
+                key={`box-${item.component}`}
+                component={item}
+                pluginName={pluginName}
+              />
+            ));
+
+            return <Box {...elementProps}>{childrenComponents}</Box>;
+          }
+
+          case PluginComponents.text: {
+            return <Text {...elementProps}>{elementProps.text}</Text>;
+          }
+
+          case PluginComponents.label: {
+            return <Label {...elementProps} />;
+          }
+
+          case PluginComponents.checkbox: {
+            const onChangeAction = () => {
+              const message = elementProps.onChange();
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+              );
+            };
+
+            return <Checkbox {...elementProps} onChange={onChangeAction} />;
+          }
+
+          case PluginComponents.toggleButton: {
+            const onChangeAction = () => {
+              const message = elementProps.onChange();
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+              );
+            };
+
+            return <ToggleButton {...elementProps} onChange={onChangeAction} />;
+          }
+
+          case PluginComponents.textArea: {
+            const onChangeAction = (e) => {
+              const message = elementProps.onChange(e.target.value);
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+              );
+            };
+
+            return <Textarea {...elementProps} onChange={onChangeAction} />;
+          }
+
+          case PluginComponents.input: {
+            const onChangeAction = (e) => {
+              const message = elementProps.onChange(e.target.value);
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+              );
+            };
+
+            return <TextInput {...elementProps} onChange={onChangeAction} />;
+          }
+
+          case PluginComponents.button: {
+            const {
+              withLoadingAfterClick,
+              disableWhileRequestRunning,
+              isSaveButton,
+              modalRequestRunning,
+              setSettingsModalRequestRunning,
+              onCloseAction,
+              ...rest
+            } = elementProps;
+
+            const onClickAction = async () => {
+              if (withLoadingAfterClick) {
+                setIsRequestRunning && setIsRequestRunning(true);
+                setModalRequestRunning && setModalRequestRunning(true);
+                if (isSaveButton) {
+                  setSettingsModalRequestRunning &&
+                    setSettingsModalRequestRunning(true);
+                }
+              }
+
+              const message = await elementProps.onClick();
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+
+                updatePlugin,
+              );
+
+              setIsRequestRunning && setIsRequestRunning(false);
+              setModalRequestRunning && setModalRequestRunning(false);
+              if (isSaveButton) {
+                setSettingsModalRequestRunning &&
+                  setSettingsModalRequestRunning(false);
+                onCloseAction && onCloseAction();
+              }
+            };
+
+            const isLoading = withLoadingAfterClick
+              ? isSaveButton
+                ? modalRequestRunning
+                : isRequestRunning || rest.isLoading
+              : rest.isLoading;
+            const isDisabled = disableWhileRequestRunning
+              ? isSaveButton
+                ? modalRequestRunning
+                : isRequestRunning || rest.isDisabled
+              : rest.isDisabled;
+
+            return (
+              <Button
+                {...rest}
+                isLoading={isLoading}
+                isDisabled={isDisabled}
+                onClick={onClickAction}
+              />
+            );
+          }
+
+          case PluginComponents.comboBox: {
+            const onSelectAction = (option) => {
+              const message = elementProps.onSelect(option);
+
+              messageActions(
+                message,
+                setElementProps,
+
+                pluginName,
+
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+              );
+            };
+
+            return <ComboBox {...elementProps} onSelect={onSelectAction} />;
+          }
+
+          case PluginComponents.iFrame: {
+            return (
+              <iframe
+                title={PLUGIN_IFRAME_TITLE}
+                {...elementProps}
+                style={{
+                  minHeight: "100%",
+                  border: "none",
+                  ...elementProps.style,
+                }}
+              />
+            );
+          }
+
+          case PluginComponents.img: {
+            return <img alt="Plugin" {...elementProps} />;
+          }
+
+          case PluginComponents.skeleton: {
+            return <RectangleSkeleton {...elementProps} />;
+          }
+          default:
+            break;
+        }
+      };
+
+      const element = getElement();
+
+      return element;
+    },
+  ),
+);
 
 const WrappedComponent = ({
   pluginName,
@@ -422,16 +428,19 @@ const WrappedComponent = ({
     setContextProps(newProps);
   };
 
+  const contextValue = useMemo(
+    () => ({
+      contextProps,
+      updatePropsContext,
+      isRequestRunning,
+      setIsRequestRunning,
+      setModalRequestRunning,
+    }),
+    [contextProps, isRequestRunning, setModalRequestRunning],
+  );
+
   return (
-    <PropsContext.Provider
-      value={{
-        contextProps,
-        updatePropsContext,
-        isRequestRunning,
-        setIsRequestRunning,
-        setModalRequestRunning,
-      }}
-    >
+    <PropsContext.Provider value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
     </PropsContext.Provider>
   );

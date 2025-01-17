@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,15 +29,15 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { Base, globalColors } from "@docspace/shared/themes";
-import { mobile, getLogoUrl } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 
 import i18n from "../../../i18n";
 
-const Header = styled.header`
+const Header = styled.header.attrs(injectDefaultTheme)`
   align-items: start;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: flex;
@@ -85,10 +85,7 @@ const Header = styled.header`
   }
 `;
 
-Header.defaultProps = { theme: Base };
-
 const HeaderUnAuth = ({
-  enableAdmMess,
   wizardToken,
   isAuthenticated,
   isLoaded,
@@ -115,15 +112,13 @@ const HeaderUnAuth = ({
         {!isAuthenticated && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
-              <img className="header-logo-icon" src={logo} />
+              <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </Box>
 
-      {!wizardToken && (
+      {!wizardToken ? (
         <LanguageCombobox
           className="language-combo-box"
           onSelectLanguage={onSelect}
@@ -132,7 +127,7 @@ const HeaderUnAuth = ({
           withBorder={false}
           isMobileView
         />
-      )}
+      ) : null}
     </Header>
   );
 };
@@ -140,7 +135,6 @@ const HeaderUnAuth = ({
 HeaderUnAuth.displayName = "Header";
 
 HeaderUnAuth.propTypes = {
-  enableAdmMess: PropTypes.bool,
   wizardToken: PropTypes.string,
   isAuthenticated: PropTypes.bool,
   isLoaded: PropTypes.bool,

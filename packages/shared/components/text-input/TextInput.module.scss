@@ -1,0 +1,40 @@
+@import "../../styles/common-input-styles.scss";
+@import "../../styles/variables/_colors.scss";
+
+:root {
+  // Text Input specific variables
+  --text-input-appearance: none;
+  --text-input-display: flex;
+  --text-input-flex: 1 1 0%;
+  --text-input-outline: none;
+  --text-input-overflow: hidden;
+  --text-input-opacity: 1;
+  --text-input-transition: all 0.2s ease 0s;
+  --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
+  --text-input-font-weight: normal;
+}
+
+.textInput {
+  @include common-input-styles;
+
+  appearance: var(--text-input-appearance); // Standard property
+  -webkit-appearance: var(--text-input-appearance); // For Safari
+  -moz-appearance: var(--text-input-appearance); // For Firefox
+
+  display: var(--text-input-display);
+  flex: var(--text-input-flex);
+  outline: var(--text-input-outline);
+  overflow: var(--text-input-overflow);
+  opacity: var(--text-input-opacity);
+  transition: var(--text-input-transition);
+  box-shadow: var(--text-input-box-shadow);
+  font-weight: var(--text-input-font-weight);
+
+  &:disabled {
+    box-shadow: inset 0 0 0 30px var(--input-disabled-bg);
+  }
+
+  &[data-without-border="true"] {
+    border: none;
+  }
+}

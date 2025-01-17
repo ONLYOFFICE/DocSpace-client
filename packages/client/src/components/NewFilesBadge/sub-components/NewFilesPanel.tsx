@@ -42,6 +42,7 @@ import { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
 
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,
@@ -50,7 +51,6 @@ import { StyledPanel } from "../NewFilesBadge.styled";
 
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
 import { NewFilesPanelItem } from "./NewFilesPanelItem";
-import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const MIN_LOADER_TIMER = 500;
 
@@ -200,7 +200,7 @@ export const NewFilesPanelComponent = ({
         <Scrollbar>{content}</Scrollbar>
         {markAsReadButton}
       </StyledPanel>
-      {!isMobile() && <Backdrop visible withoutBackground withoutBlur />}
+      {!isMobile() ? <Backdrop visible withoutBackground withoutBlur /> : null}
     </>
   );
 

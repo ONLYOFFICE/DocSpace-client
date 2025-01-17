@@ -182,6 +182,7 @@ export type FilesSelectorProps = TSelectorHeader &
     currentFolderId: number | string;
     parentId?: number | string;
     rootFolderType: FolderType;
+    folderIsShared?: boolean;
     onCancel: () => void;
     onSubmit: (
       selectedItemId: string | number | undefined,
@@ -205,6 +206,7 @@ export type FilesSelectorProps = TSelectorHeader &
         | TRoomSecurity
         | undefined,
       selectedFileInfo: TSelectedFileInfo,
+      isDisabledFolder?: boolean,
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
     withHeader: boolean;
@@ -228,4 +230,6 @@ export type FilesSelectorProps = TSelectorHeader &
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
     formProps?: FormPropsType;
+    withPadding?: boolean;
+    checkCreating?: boolean;
   };

@@ -51,8 +51,6 @@ const SettingsPluginDialog = ({
   onClose,
   onDelete,
   updatePlugin,
-
-  ...rest
 }) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
@@ -119,14 +117,14 @@ const SettingsPluginDialog = ({
             withDelete={withDelete}
             withSeparator={!!customSettingsProps?.children}
           />
-          {withDelete && (
+          {withDelete ? (
             <Button
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
-              size={"normal"}
+              size="normal"
             />
-          )}
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

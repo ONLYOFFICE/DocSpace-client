@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -44,37 +43,33 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
   t,
   user,
   membersHelper,
   currentMember,
-  updateRoomMemberRole,
   infoPanelSelection,
-  changeUserType,
-  setIsScrollLocked,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
-  showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
-  resendEmailInvitations,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
 }) => {
+  const theme = useTheme();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
-
-  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -82,8 +77,6 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -97,7 +90,8 @@ const User = ({
       : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
-    resendEmailInvitations(infoPanelSelection.id, true)
+    api.rooms
+      .resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
         toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
@@ -105,11 +99,12 @@ const User = ({
   };
 
   const updateRole = (option) => {
-    return updateRoomMemberRole(infoPanelSelection.id, {
-      invitations: [{ id: user.id, access: option.access }],
-      notify: false,
-      sharingMessage: "",
-    })
+    return api.rooms
+      .updateRoomMemberRole(infoPanelSelection.id, {
+        invitations: [{ id: user.id, access: option.access }],
+        notify: false,
+        sharingMessage: "",
+      })
       .then(async () => {
         setIsLoading(false);
 
@@ -172,7 +167,7 @@ const User = ({
               newMembersFilter,
             );
 
-            const newMembers = {
+            const newData = {
               administrators: [
                 ...newAdministrators,
                 ...fetchedMembers.administrators,
@@ -185,7 +180,7 @@ const User = ({
 
             setInfoPanelMembers({
               roomId: infoPanelSelection.id,
-              ...newMembers,
+              ...newData,
             });
 
             newMembersFilter.startIndex = oldStartIndex;
@@ -218,10 +213,6 @@ const User = ({
         toastr.error(err);
         setIsLoading(false);
       });
-  };
-
-  const abortCallback = () => {
-    setIsLoading(false);
   };
 
   const onOptionClick = (option) => {
@@ -259,16 +250,16 @@ const User = ({
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
-      {showInviteIcon && (
+      {showInviteIcon ? (
         <IconButton
-          className={"icon"}
+          className="icon"
           title={t("Common:RepeatInvitation")}
           iconName={EmailPlusReactSvgUrl}
-          isFill={true}
+          isFill
           onClick={onRepeatInvitation}
           size={16}
         />
-      )}
+      ) : null}
     </StyledUserTypeHeader>
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
@@ -296,7 +287,7 @@ const User = ({
             </Link>
           ) : (
             <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {user?.displayName && decode(user.displayName)}
+              {user?.displayName ? decode(user.displayName) : null}
             </Text>
           )}
           {/* TODO: uncomment when information about online statuses appears */}
@@ -308,11 +299,11 @@ const User = ({
               place="bottom"
             />
           )} */}
-          {currentMember?.id === user.id && (
+          {currentMember?.id === user.id ? (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          )}
+          ) : null}
         </div>
-        {!user.isGroup && (
+        {!user.isGroup ? (
           <div className="role-email" style={{ display: "flex" }}>
             <Text
               className="label"
@@ -325,10 +316,10 @@ const User = ({
               {`${typeLabel} | ${user.email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox
@@ -353,7 +344,7 @@ const User = ({
             </div>
           )}
         </div>
-      )}
+      ) : null}
     </StyledUser>
   );
 };
@@ -369,12 +360,7 @@ export default inject(
       searchValue,
     } = infoPanelStore;
 
-    const {
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      membersFilter,
-      setMembersFilter,
-    } = filesStore;
+    const { membersFilter, setMembersFilter } = filesStore;
 
     const { changeType: changeUserType } = peopleStore.usersStore;
 
@@ -384,8 +370,6 @@ export default inject(
     return {
       infoPanelSelection,
       setIsScrollLocked,
-      updateRoomMemberRole,
-      resendEmailInvitations,
       changeUserType,
       membersFilter,
       setMembersFilter,

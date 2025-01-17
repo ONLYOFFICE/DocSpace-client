@@ -24,24 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
+// import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { objectToGetParams } from "@docspace/shared/utils/common";
+// import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+// import { IconButton } from "@docspace/shared/components/icon-button";
+// import { DropDown } from "@docspace/shared/components/drop-down";
+// import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 
+// import { globalColors } from "@docspace/shared/themes";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -52,14 +52,12 @@ import {
   StyledDescription,
   StyledExternalLink,
 } from "../StyledInvitePanel";
-import { globalColors } from "@docspace/shared/themes";
 
 import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
 } from "../utils";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 const ExternalLinks = ({
   t,
@@ -68,7 +66,6 @@ const ExternalLinks = ({
   defaultAccess,
   shareLinks,
   setShareLinks,
-  setInvitationLinks,
   isOwner,
   isAdmin,
   onChangeExternalLinksVisible,
@@ -82,9 +79,77 @@ const ExternalLinks = ({
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
-  const [actionLinksVisible, setActionLinksVisible] = useState(false);
+  // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
+
+  const copyLink = (link) => {
+    if (link) {
+      toastr.success(
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
+      );
+
+      copyShareLink(link);
+    }
+  };
+
+  const disableLink = async () => {
+    shareLinks?.length &&
+      (await api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        0,
+        shareLinks[0].id,
+      ));
+    return setShareLinks([]);
+  };
+
+  const editLink = async () => {
+    const type = getDefaultAccessUser(roomType);
+
+    const link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
+
+    const { shareLink, id, title, expirationDate } = link.sharedTo;
+
+    const newShareLink = {
+      id,
+      title,
+      shareLink,
+      expirationDate,
+      access: link.access || defaultAccess,
+    };
+
+    copyLink(shareLink);
+    setShareLinks([newShareLink]);
+    return setActiveLink(newShareLink);
+  };
+
+  const onSelectAccess = async (access) => {
+    let link = null;
+    const selectedAccess = access.access;
+
+    if (roomId === -1) {
+      link = shareLinks.find((l) => l.access === selectedAccess);
+
+      link.shareLink = await getPortalInviteLink(selectedAccess);
+
+      setActiveLink(link);
+    } else {
+      api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        +selectedAccess,
+        shareLinks[0].id,
+      );
+
+      link = shareLinks[0];
+      setActiveLink(shareLinks[0]);
+    }
+
+    copyLink(link.shareLink);
+  };
 
   const toggleLinks = async (e) => {
     if (isLinksToggling) return;
@@ -112,110 +177,48 @@ const ExternalLinks = ({
     }
   };
 
-  const disableLink = async () => {
-    shareLinks?.length &&
-      (await setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
-    return setShareLinks([]);
-  };
-
-  const editLink = async () => {
-    const type = getDefaultAccessUser(roomType);
-
-    const link = await setInvitationLinks(roomId, "Invite", type);
-
-    const { shareLink, id, title, expirationDate } = link.sharedTo;
-
-    const activeLink = {
-      id,
-      title,
-      shareLink,
-      expirationDate,
-      access: link.access || defaultAccess,
-    };
-
-    copyLink(shareLink);
-    setShareLinks([activeLink]);
-    return setActiveLink(activeLink);
-  };
-
-  const onSelectAccess = async (access) => {
-    let link = null;
-    const selectedAccess = access.access;
-
-    if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === selectedAccess);
-
-      link.shareLink = await getPortalInviteLink(selectedAccess);
-
-      setActiveLink(link);
-    } else {
-      setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id);
-
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
-    }
-
-    copyLink(link.shareLink);
-  };
-
-  const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
-
-      copyShareLink(link);
-    }
-  };
-
   const onCopyLink = () => copyLink(activeLink.shareLink);
 
-  const toggleActionLinks = () => {
-    setActionLinksVisible(!actionLinksVisible);
-  };
+  // const toggleActionLinks = () => {
+  //   setActionLinksVisible(!actionLinksVisible);
+  // };
 
-  const closeActionLinks = () => {
-    setActionLinksVisible(false);
-  };
+  // const closeActionLinks = () => {
+  //   setActionLinksVisible(false);
+  // };
 
-  const shareEmail = useCallback(
-    (link) => {
-      const { title, shareLink } = link;
-      const subject = t("SharingPanel:ShareEmailSubject", { title });
-      const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
+  // const shareEmail = useCallback(
+  //   (link) => {
+  //     const { title, shareLink } = link;
+  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
+  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
 
-      const mailtoLink =
-        "mailto:" +
-        objectToGetParams({
-          subject,
-          body,
-        });
+  //     const mailtoLink = `mailto:${objectToGetParams({
+  //       subject,
+  //       body,
+  //     })}`;
 
-      window.open(mailtoLink, "_self");
+  //     window.open(mailtoLink, "_self");
 
-      closeActionLinks();
-    },
-    [closeActionLinks, t],
-  );
+  //     closeActionLinks();
+  //   },
+  //   [closeActionLinks, t],
+  // );
 
-  const shareTwitter = useCallback(
-    (link) => {
-      const { shareLink } = link;
+  // const shareTwitter = useCallback(
+  //   (link) => {
+  //     const { shareLink } = link;
 
-      const twitterLink =
-        "https://twitter.com/intent/tweet" +
-        objectToGetParams({
-          text: shareLink,
-        });
+  //     const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
+  //       text: shareLink,
+  //     })}`;
 
-      window.open(twitterLink, "", "width=1000,height=670");
+  //     window.open(twitterLink, "", "width=1000,height=670");
 
-      closeActionLinks();
-    },
-    [closeActionLinks],
-  );
+  //     closeActionLinks();
+  //   },
+  //   [closeActionLinks],
+  // );
 
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
@@ -237,7 +240,7 @@ const ExternalLinks = ({
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
         {t("InviteViaLink")}
-        {false && ( //TODO: Change to linksVisible after added link information from backend
+        {/* {false ? (
           <div style={{ position: "relative" }}>
             <IconButton
               size={16}
@@ -251,7 +254,7 @@ const ExternalLinks = ({
               clickOutsideAction={closeActionLinks}
               withBackdrop={false}
               isDefaultMode={false}
-              fixedDirection={true}
+              fixedDirection
             >
               <DropDownItem
                 label={`${t("Common:ShareVia")} e-mail`}
@@ -263,7 +266,7 @@ const ExternalLinks = ({
               />
             </DropDown>
           </div>
-        )}
+        ) : null} */}
         <StyledToggleButton
           className="invite-via-link"
           isChecked={externalLinksVisible}
@@ -278,7 +281,7 @@ const ExternalLinks = ({
             })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
-      {externalLinksVisible && (
+      {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
           <StyledInviteInput isShowCross>
             <InputBlock
@@ -307,7 +310,7 @@ const ExternalLinks = ({
             availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
-      )}
+      ) : null}
     </StyledExternalLink>
   );
 };
@@ -316,21 +319,18 @@ export default inject(
   ({
     userStore,
     dialogsStore,
-    filesStore,
     peopleStore,
     currentQuotaStore,
     settingsStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
-    const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone } = settingsStore;
 
     return {
-      setInvitationLinks,
       roomId,
       hideSelector,
       defaultAccess,

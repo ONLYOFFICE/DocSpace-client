@@ -35,10 +35,9 @@ import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 
-import SsoTextInput from "./SsoTextInput";
 import { FileInput } from "@docspace/shared/components/file-input";
-import { Base } from "@docspace/shared/themes";
-import { mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import SsoTextInput from "./SsoTextInput";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -92,7 +91,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledUploadIcon = styled(UploadIcon)`
+const StyledUploadIcon = styled(UploadIcon).attrs(injectDefaultTheme)`
   path {
     stroke: ${(props) =>
       props.disabled
@@ -100,8 +99,6 @@ const StyledUploadIcon = styled(UploadIcon)`
         : props.theme.client.settings.integration.sso.iconButton} !important;
   }
 `;
-
-StyledUploadIcon.defaultProps = { theme: Base };
 
 const UploadXML = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);

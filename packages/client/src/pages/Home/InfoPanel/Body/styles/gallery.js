@@ -26,9 +26,10 @@
 
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledGalleryThumbnail = styled.div`
+const StyledGalleryThumbnail = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
@@ -56,16 +57,13 @@ const StyledGalleryNoThumbnail = styled.div`
   }
 `;
 
-const StyledGalleryFormDescription = styled.div`
+const StyledGalleryFormDescription = styled.div.attrs(injectDefaultTheme)`
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   color: ${(props) => props.theme.infoPanel.gallery.descriptionColor};
   white-space: pre-line;
 `;
-
-StyledGalleryThumbnail.defaultProps = { theme: Base };
-StyledGalleryFormDescription.defaultProps = { theme: Base };
 
 export {
   StyledGalleryThumbnail,

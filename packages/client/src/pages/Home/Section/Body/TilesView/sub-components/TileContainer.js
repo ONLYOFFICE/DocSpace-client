@@ -30,8 +30,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { Heading } from "@docspace/shared/components/heading";
-import { tablet, desktop } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { tablet, desktop, injectDefaultTheme } from "@docspace/shared/utils";
 import InfiniteGrid from "./InfiniteGrid";
 
 const paddingCss = css`
@@ -71,7 +70,7 @@ const StyledGridWrapper = styled.div`
   }
 `;
 
-const StyledTileContainer = styled.div`
+const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   height: 100%;
   user-select: none;
@@ -179,19 +178,13 @@ const StyledTileContainer = styled.div`
     }
   }
 
-  @media ${tablet} {  
-      margin-top: 16px;
+  @media ${tablet} {
+    margin-top: 16px;
     margin-inline-end: -3px;
   }
 `;
 
-StyledTileContainer.defaultProps = { theme: Base };
-
 class TileContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       children,
@@ -209,22 +202,22 @@ class TileContainer extends React.PureComponent {
     const Files = [];
 
     React.Children.map(children, (item) => {
-      const { isFolder, isRoom, fileExst, id } = item.props.item;
-      if ((isFolder || id === -1) && !fileExst && !isRoom) {
+      const { isFolder, isRoom, fileExst, id: itemId } = item.props.item;
+      if ((isFolder || itemId === -1) && !fileExst && !isRoom) {
         Folders.push(
-          <div className="tile-item-wrapper folder" key={id}>
+          <div className="tile-item-wrapper folder" key={itemId}>
             {item}
           </div>,
         );
       } else if (isRoom) {
         Rooms.push(
-          <div className="tile-item-wrapper room" key={id}>
+          <div className="tile-item-wrapper room" key={itemId}>
             {item}
           </div>,
         );
       } else {
         Files.push(
-          <div className="tile-item-wrapper file" key={id}>
+          <div className="tile-item-wrapper file" key={itemId}>
             {item}
           </div>,
         );
@@ -241,15 +234,15 @@ class TileContainer extends React.PureComponent {
           )
         ) : null}
 
-        {Folders.length > 0 && (
+        {Folders.length > 0 ? (
           <Heading
             size="xsmall"
-            id={"folder-tile-heading"}
+            id="folder-tile-heading"
             className="tile-items-heading"
           >
             {headingFolders}
           </Heading>
-        )}
+        ) : null}
         {Folders.length > 0 ? (
           useReactWindow ? (
             Folders
@@ -258,11 +251,11 @@ class TileContainer extends React.PureComponent {
           )
         ) : null}
 
-        {Files.length > 0 && (
+        {Files.length > 0 ? (
           <Heading size="xsmall" className="tile-items-heading">
             {headingFiles}
           </Heading>
-        )}
+        ) : null}
         {Files.length > 0 ? (
           useReactWindow ? (
             Files
@@ -303,7 +296,7 @@ TileContainer.defaultProps = {
   id: "tileContainer",
 };
 
-export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
+export default inject(({ filesStore, treeFoldersStore }) => {
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 

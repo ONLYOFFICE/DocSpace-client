@@ -34,12 +34,12 @@ import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
+import PropTypes from "prop-types";
 import AddIdpCertificateModal from "./sub-components/AddIdpCertificateModal";
 import AddSpCertificateModal from "./sub-components/AddSpCertificateModal";
 import CertificatesTable from "./sub-components/CertificatesTable";
 import CheckboxSet from "./sub-components/CheckboxSet";
 import HideButton from "./sub-components/HideButton";
-import PropTypes from "prop-types";
 import SsoComboBox from "./sub-components/SsoComboBox";
 import {
   decryptAlgorithmsOptions,
@@ -87,6 +87,8 @@ const Certificates = (props) => {
       additionalParameters = spShowAdditionalParameters;
       certificates = spCertificates;
       break;
+    default:
+      break;
   }
 
   return (
@@ -118,10 +120,10 @@ const Certificates = (props) => {
         />
       </Box>
 
-      {certificates.length > 0 && <CertificatesTable prefix={prefix} />}
+      {certificates.length > 0 ? <CertificatesTable prefix={prefix} /> : null}
 
       <Box alignItems="center" displayProp="flex" flexDirection="row">
-        {prefix === "idp" && (
+        {prefix === "idp" ? (
           <>
             <Button
               id="idp-add-certificate"
@@ -133,9 +135,9 @@ const Certificates = (props) => {
             />
             <AddIdpCertificateModal />
           </>
-        )}
+        ) : null}
 
-        {prefix === "sp" && (
+        {prefix === "sp" ? (
           <>
             <Button
               id="sp-add-certificate"
@@ -147,7 +149,7 @@ const Certificates = (props) => {
             />
             <AddSpCertificateModal />
           </>
-        )}
+        ) : null}
 
         <HideButton
           id={prefix === "idp" ? "idp-hide-button" : "sp-hide-button"}
@@ -161,24 +163,22 @@ const Certificates = (props) => {
         />
       </Box>
 
-      {additionalParameters && (
+      {additionalParameters ? (
         <>
           <CheckboxSet prefix={prefix} />
 
-          {provider === "IdentityProvider" && (
-            <>
-              <SsoComboBox
-                isDisabled={isDisabledIdpSigning}
-                labelText={t("idpSigningAlgorithm")}
-                name="idpVerifyAlgorithm"
-                options={verifyAlgorithmsOptions}
-                tabIndex={14}
-                value={idpVerifyAlgorithm}
-              />
-            </>
-          )}
+          {provider === "IdentityProvider" ? (
+            <SsoComboBox
+              isDisabled={isDisabledIdpSigning}
+              labelText={t("idpSigningAlgorithm")}
+              name="idpVerifyAlgorithm"
+              options={verifyAlgorithmsOptions}
+              tabIndex={14}
+              value={idpVerifyAlgorithm}
+            />
+          ) : null}
 
-          {provider === "ServiceProvider" && (
+          {provider === "ServiceProvider" ? (
             <>
               <SsoComboBox
                 isDisabled={isDisabledSpSigning}
@@ -192,15 +192,15 @@ const Certificates = (props) => {
               <SsoComboBox
                 isDisabled={isDisabledSpEncrypt}
                 labelText={t("StandardDecryptionAlgorithm")}
-                name={"spEncryptAlgorithm"}
+                name="spEncryptAlgorithm"
                 options={decryptAlgorithmsOptions}
                 tabIndex={15}
                 value={spEncryptAlgorithm}
               />
             </>
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

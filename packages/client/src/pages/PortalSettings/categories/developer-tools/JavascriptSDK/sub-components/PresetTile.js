@@ -24,18 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
-
-import { Base } from "@docspace/shared/themes";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const TileContainer = styled.div`
+const TileContainer = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
 
   width: 100%;
@@ -79,8 +77,6 @@ const TileContainer = styled.div`
     }
   }
 `;
-
-TileContainer.defaultProps = { theme: Base };
 
 const PresetTile = (props) => {
   const { t, title, description, image, handleOnClick } = props;

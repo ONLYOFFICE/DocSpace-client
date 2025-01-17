@@ -1,0 +1,65 @@
+@import "../../styles/variables/index.scss";
+@import "../../styles/_mixins.scss";
+
+:root {
+  --link-color: #{$black};
+  // --link-color: var(--accent-main, #{$black});
+  --link-line-height: calc(100% + 6px);
+  --link-opacity: 0.5;
+  --link-text-decoration: none;
+  --link-cursor: pointer;
+  --link-display: inline-block;
+  --link-hover-text-decoration: underline dashed;
+  --link-hover-page-text-decoration: underline;
+
+  &[data-theme="dark"] {
+    --link-color: #{$white};
+    //  --link-color: var(--accent-main, #{$white});
+    --link-line-height: calc(100% + 6px);
+    --link-hover-text-decoration: underline dashed;
+    --link-hover-page-text-decoration: underline;
+  }
+}
+
+.link {
+  text-decoration: var(--link-text-decoration);
+  text-underline-offset: 2px;
+  cursor: var(--link-cursor);
+  color: var(--link-color);
+  line-height: var(--link-line-height);
+
+  &.semitransparent {
+    opacity: var(--link-opacity);
+  }
+
+  &.textOverflow {
+    display: var(--link-display);
+    max-width: 100%;
+  }
+
+  &.enableUserSelect {
+    user-select: text;
+  }
+
+  &:not(.enableUserSelect) {
+    @include no-user-select;
+  }
+
+  &:hover:not(.noHover) {
+    text-decoration: var(--link-hover-text-decoration);
+  }
+
+  &.isHovered:not(.noHover) {
+    text-decoration: var(--link-hover-text-decoration);
+  }
+
+  &.page {
+    &:hover:not(.noHover) {
+      text-decoration: var(--link-hover-page-text-decoration);
+    }
+
+    &.isHovered:not(.noHover) {
+      text-decoration: var(--link-hover-page-text-decoration);
+    }
+  }
+}

@@ -32,7 +32,6 @@ import styled, { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
-import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { globalColors } from "@docspace/shared/themes";
 import { isManagement } from "@docspace/shared/utils/common";
@@ -109,7 +108,7 @@ const MobileCategoryWrapper = (props) => {
         >
           {title}
         </Link>
-        {withPaidBadge && !isManagement() && (
+        {withPaidBadge && !isManagement() ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -117,20 +116,16 @@ const MobileCategoryWrapper = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={badgeLabel}
-            isPaidBadge={true}
+            isPaidBadge
             className="paid-badge"
             fontWeight="700"
           />
-        )}
+        ) : null}
         <StyledArrowRightIcon className="settings_unavailable" size="small" />
       </div>
       <Text className="category-item-description">{subtitle}</Text>
     </StyledMobileCategoryWrapper>
   );
-};
-
-MobileCategoryWrapper.defaultProps = {
-  theme: Base,
 };
 
 export default MobileCategoryWrapper;

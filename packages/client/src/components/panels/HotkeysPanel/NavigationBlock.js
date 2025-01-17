@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 
-const NavigationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {
+const NavigationBlock = ({ t, textStyles, keyTextStyles }) => {
   return (
     <>
       <Row className="hotkeys_row">

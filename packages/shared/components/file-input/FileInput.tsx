@@ -46,18 +46,18 @@ const FileInputPure = ({
   onInput,
   size = InputSize.base,
   placeholder,
-  isDisabled,
-  scale,
-  hasError,
-  hasWarning,
-  accept,
+  isDisabled = false,
+  scale = false,
+  hasError = false,
+  hasWarning = false,
+  accept = [""],
   id,
   buttonLabel,
-  isLoading,
+  isLoading = false,
   fromStorage = false,
   path,
   idButton,
-  isDocumentIcon,
+  isDocumentIcon = false,
   isMultiple = true,
   ...rest
 }: FileInputProps) => {
@@ -152,7 +152,7 @@ const FileInputPure = ({
             withBorder
             {...onClickProp}
           />
-          {!fromStorage && (
+          {!fromStorage ? (
             <input
               type="file"
               id={id}
@@ -160,7 +160,7 @@ const FileInputPure = ({
               style={{ display: "none" }}
               {...getInputProps()}
             />
-          )}
+          ) : null}
 
           {buttonLabel ? (
             <Button
@@ -195,17 +195,6 @@ const FileInputPure = ({
       )}
     </Dropzone>
   );
-};
-
-FileInputPure.defaultProps = {
-  scale: false,
-  hasWarning: false,
-  hasError: false,
-  isDisabled: false,
-  isLoading: false,
-  accept: [""],
-  isDocumentIcon: false,
-  isMultiple: true,
 };
 
 export { FileInputPure };

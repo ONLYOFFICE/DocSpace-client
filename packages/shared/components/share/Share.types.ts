@@ -67,11 +67,12 @@ export type LinkRowProps =
       isRoomsLink?: undefined;
       isPrimaryLink?: undefined;
       isArchiveFolder?: undefined;
-      getData: () => undefined;
+      getData?: () => undefined;
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;
       isFormRoom?: boolean;
+      isCustomRoom?: boolean;
       removedExpiredLink?: never;
     }
   | {
@@ -89,6 +90,7 @@ export type LinkRowProps =
       isPrimaryLink: boolean;
       isArchiveFolder: boolean;
       isFormRoom?: boolean;
+      isCustomRoom?: boolean;
       getData: () => ContextMenuModel[];
       onOpenContextMenu: (e: React.MouseEvent) => void;
       onCloseContextMenu: () => void;

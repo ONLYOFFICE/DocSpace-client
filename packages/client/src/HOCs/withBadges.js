@@ -27,13 +27,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobileOnly } from "react-device-detect";
+import Badges from "../components/Badges";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -45,8 +43,6 @@ export default function withBadges(WrappedComponent) {
 
     onShowVersionHistory = () => {
       const {
-        homepage,
-        isTabletView,
         item,
         setIsVerHistoryPanel,
         fetchFileVersions,
@@ -54,12 +50,13 @@ export default function withBadges(WrappedComponent) {
         isTrashFolder,
       } = this.props;
       if (isTrashFolder) return;
-      fetchFileVersions(item.id + "", item.security);
+      fetchFileVersions(`${item.id}`, item.security);
       setIsVerHistoryPanel(true);
     };
 
     onBadgeClick = () => {
-      if (this.state.disableBadgeClick) return;
+      const { disableBadgeClick } = this.state;
+      if (disableBadgeClick) return;
 
       const { item, markAsRead } = this.props;
       this.setState(() => ({
@@ -78,7 +75,8 @@ export default function withBadges(WrappedComponent) {
     };
 
     onUnpinClick = (e) => {
-      if (this.state.disableUnpinClick) return;
+      const { disableUnpinClick } = this.state;
+      if (disableUnpinClick) return;
 
       this.setState({ disableUnpinClick: true });
 
@@ -107,10 +105,17 @@ export default function withBadges(WrappedComponent) {
     };
 
     setConvertDialogVisible = () => {
-      this.props.setConvertItem(this.props.item);
-      this.props.setConvertDialogVisible(true);
-      this.props.setConvertDialogData({
-        files: this.props.item,
+      const {
+        setConvertItem,
+        setConvertDialogVisible,
+        setConvertDialogData,
+        item,
+      } = this.props;
+
+      setConvertItem(item);
+      setConvertDialogVisible(true);
+      setConvertDialogData({
+        files: item,
       });
     };
 

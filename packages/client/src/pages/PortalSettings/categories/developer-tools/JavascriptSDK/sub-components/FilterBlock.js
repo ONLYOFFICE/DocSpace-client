@@ -44,7 +44,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const UserInputContainer = styled.div`
   position: relative;
@@ -89,7 +89,7 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const SearchItemText = styled(Text)`
+const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   line-height: 16px;
 
   text-overflow: ellipsis;
@@ -104,8 +104,6 @@ const SearchItemText = styled(Text)`
       : props.theme.text.emailColor};
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
-
-SearchItemText.defaultProps = { theme: Base };
 
 const minSearchValue = 3;
 
@@ -202,10 +200,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
   const onFilterSelect = (option) => {
     setFilterBy(option);
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       filter: {
-        ...config.filter,
+        ...oldConfig.filter,
         filterType: option.typeKey,
       },
     }));
@@ -247,7 +245,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
     if (!query) {
       closeInviteInputPanel();
-      setInputValue("");
+      setAuthor("");
       setUsersList([]);
     }
   };
@@ -286,12 +284,12 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       setAuthor("");
       setUsersList([]);
       setSelectedUser(displayName);
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         filter:
-          "id" in config
-            ? { ...config.filter, authorType: `user_${item.id}` }
-            : { ...config.filter, subjectId: item.id },
+          "id" in oldConfig
+            ? { ...oldConfig.filter, authorType: `user_${item.id}` }
+            : { ...oldConfig.filter, subjectId: item.id },
       }));
     };
 
@@ -318,7 +316,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     return () => {
       const filtered = { ...config.filter };
       delete filtered[filterProperty];
-      setConfig((config) => ({ ...config, filter: filtered }));
+      setConfig((oldConfig) => ({ ...oldConfig, filter: filtered }));
     };
   };
 
@@ -347,19 +345,19 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const toggleType = toggleConstructor(clearType, setIsTypeFilterSet);
 
   const toggleSubjectFilter = (e) => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       filter: {
-        ...config.filter,
+        ...oldConfig.filter,
         subjectFilter: e.target.checked ? 0 : 1,
       },
     }));
   };
 
   const selectRoomType = (option) => {
-    setConfig((config) => ({
-      ...config,
-      filter: { ...config.filter, type: option.roomType },
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      filter: { ...oldConfig.filter, type: option.roomType },
     }));
     setSelectedType(option.label);
   };
@@ -385,46 +383,44 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
       />
-      {isUserFilterSet && (
-        <>
-          {"authorType" in config.filter ? (
-            <SelectedItem
-              onClick={clearAuthorType}
-              onClose={() => {}}
-              label={selectedUser}
-            />
-          ) : (
-            <UserInputContainer>
-              <UserInput ref={searchRef}>
-                <TextInput
-                  scale
-                  onChange={onChangeAuthor}
-                  placeholder={t("SearchByNameEmail")}
-                  value={author}
-                  onFocus={openInviteInputPanel}
-                  isAutoFocussed
-                  onKeyDown={onKeyDown}
-                  tabIndex={5}
-                />
-              </UserInput>
-              {author.length >= minSearchValue && (
-                <StyledDropDown
-                  width={searchRef?.current?.offsetWidth}
-                  isDefaultMode={false}
-                  open={searchPanelVisible}
-                  manualX="16px"
-                  showDisabledItems
-                  clickOutsideAction={closeInviteInputPanel}
-                  eventTypes="click"
-                  {...dropDownMaxHeight}
-                >
-                  {!!usersList.length ? foundUsers : ""}
-                </StyledDropDown>
-              )}
-            </UserInputContainer>
-          )}
-        </>
-      )}
+      {isUserFilterSet ? (
+        "authorType" in config.filter ? (
+          <SelectedItem
+            onClick={clearAuthorType}
+            onClose={() => {}}
+            label={selectedUser}
+          />
+        ) : (
+          <UserInputContainer>
+            <UserInput ref={searchRef}>
+              <TextInput
+                scale
+                onChange={onChangeAuthor}
+                placeholder={t("SearchByNameEmail")}
+                value={author}
+                onFocus={openInviteInputPanel}
+                isAutoFocussed
+                onKeyDown={onKeyDown}
+                tabIndex={5}
+              />
+            </UserInput>
+            {author.length >= minSearchValue ? (
+              <StyledDropDown
+                width={searchRef?.current?.offsetWidth}
+                isDefaultMode={false}
+                open={searchPanelVisible}
+                manualX="16px"
+                showDisabledItems
+                clickOutsideAction={closeInviteInputPanel}
+                eventTypes="click"
+                {...dropDownMaxHeight}
+              >
+                {usersList.length ? foundUsers : ""}
+              </StyledDropDown>
+            ) : null}
+          </UserInputContainer>
+        )
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
@@ -432,8 +428,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         isChecked={isTypeFilterSet}
         isDisabled={!!config.requestToken}
       />
-      {isTypeFilterSet &&
-        ("filterType" in config.filter ? (
+      {isTypeFilterSet ? (
+        "filterType" in config.filter ? (
           <SelectedItem
             onClick={clearFilterType}
             onClose={() => {}}
@@ -448,7 +444,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             displaySelectedOption
             directionY="top"
           />
-        ))}
+        )
+      ) : null}
     </>
   ) : (
     <>
@@ -459,7 +456,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleMembers}
         isChecked={isUserFilterSet}
       />
-      {isUserFilterSet && (
+      {isUserFilterSet ? (
         <>
           {"subjectId" in config.filter ? (
             <SelectedItem
@@ -481,7 +478,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   tabIndex={5}
                 />
               </UserInput>
-              {author.length >= minSearchValue && (
+              {author.length >= minSearchValue ? (
                 <StyledDropDown
                   width={searchRef?.current?.offsetWidth}
                   isDefaultMode={false}
@@ -492,9 +489,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   eventTypes="click"
                   {...dropDownMaxHeight}
                 >
-                  {!!usersList.length ? foundUsers : ""}
+                  {usersList.length ? foundUsers : ""}
                 </StyledDropDown>
-              )}
+              ) : null}
             </UserInputContainer>
           )}
 
@@ -505,15 +502,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             isChecked={false}
           />
         </>
-      )}
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
         onChange={toggleType}
         isChecked={isTypeFilterSet}
       />
-      {isTypeFilterSet &&
-        ("type" in config.filter ? (
+      {isTypeFilterSet ? (
+        "type" in config.filter ? (
           <SelectedItem
             onClick={clearType}
             onClose={() => {}}
@@ -523,12 +520,13 @@ export const FilterBlock = ({ t, config, setConfig }) => {
           <ComboBox
             onSelect={selectRoomType}
             options={roomTypeOptions}
-            scaled={true}
+            scaled
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
           />
-        ))}
+        )
+      ) : null}
     </>
   );
 };

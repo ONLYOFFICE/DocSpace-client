@@ -49,7 +49,7 @@ const HotkeysPanel = ({
   visible,
   setHotkeyPanelVisible,
   t,
-  theme,
+  theme = Base,
   tReady,
   isVisitor,
 }) => {
@@ -97,7 +97,7 @@ const HotkeysPanel = ({
             keyTextStyles={keyTextStyles}
             AltKey={AltKey}
           />
-          {!isVisitor && (
+          {!isVisitor ? (
             <>
               <Heading className="hotkeys_sub-header">
                 {t("HotkeysCreatingObjects")}
@@ -117,7 +117,7 @@ const HotkeysPanel = ({
                 keyTextStyles={keyTextStyles}
               />
             </>
-          )}
+          ) : null}
           <Heading className="hotkeys_sub-header">
             {t("HotkeysSelection")}
           </Heading>
@@ -165,8 +165,6 @@ const HotkeysPanel = ({
     </ModalDialog>
   );
 };
-
-HotkeysPanel.defaultProps = { theme: Base };
 
 export default inject(({ settingsStore, publicRoomStore, userStore }) => {
   const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } = settingsStore;

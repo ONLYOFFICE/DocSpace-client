@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 
 import { TableRow, TableContainer } from "@docspace/shared/components/table";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const TableWrapper = styled(TableContainer)`
   margin-top: 0px;
@@ -44,7 +45,7 @@ const StyledRowWrapper = styled.div`
   display: contents;
 `;
 
-const StyledTableRow = styled(TableRow)`
+const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
   .table-container_cell {
     text-overflow: ellipsis;
 

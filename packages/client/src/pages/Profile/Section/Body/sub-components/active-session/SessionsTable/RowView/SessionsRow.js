@@ -27,12 +27,12 @@
 import { inject, observer } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import SessionsRowContent from "./SessionsRowContent";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
+import SessionsRowContent from "./SessionsRowContent";
 
 const SessionsRow = (props) => {
   const {
@@ -54,25 +54,21 @@ const SessionsRow = (props) => {
     });
   };
 
-  const contentElement = (
-    <>
-      {showTickIcon ? (
-        !isMobile() && (
-          <IconButton
-            size={16}
-            iconName={TickSvgUrl}
-            color={globalColors.tickColor}
-          />
-        )
-      ) : (
-        <IconButton
-          size={20}
-          iconName={RemoveSessionSvgUrl}
-          isClickable
-          onClick={onRemoveClick}
-        />
-      )}
-    </>
+  const contentElement = showTickIcon ? (
+    !isMobile() && (
+      <IconButton
+        size={16}
+        iconName={TickSvgUrl}
+        color={globalColors.tickColor}
+      />
+    )
+  ) : (
+    <IconButton
+      size={20}
+      iconName={RemoveSessionSvgUrl}
+      isClickable
+      onClick={onRemoveClick}
+    />
   );
 
   return (

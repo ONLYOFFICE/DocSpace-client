@@ -33,6 +33,9 @@ import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import api from "@docspace/shared/api";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -54,11 +57,9 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Editor = (props) => {
-  const { t, getFilePrimaryLink, theme, currentColorScheme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -78,7 +79,7 @@ const Editor = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -101,14 +102,14 @@ const Editor = (props) => {
     };
 
     if (file.inPublic) {
-      const link = await getFilePrimaryLink(file.id);
+      const link = await api.files.getFileLink(file.id);
       const { requestToken } = link.sharedTo;
 
       newConfig.requestToken = requestToken;
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 
@@ -127,7 +128,7 @@ const Editor = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId}></Box>
+        <Box id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -247,13 +248,11 @@ const Editor = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, filesStore }) => {
+export const Component = inject(({ settingsStore }) => {
   const { theme, currentColorScheme } = settingsStore;
-  const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
-    getFilePrimaryLink,
     currentColorScheme,
   };
 })(

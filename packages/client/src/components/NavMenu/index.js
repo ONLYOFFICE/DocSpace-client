@@ -28,25 +28,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, isMobile, mobile } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
-import Header from "./sub-components/header";
-import HeaderNav from "./sub-components/header-nav";
-import HeaderUnAuth from "./sub-components/header-unauth";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
 import { inject, observer } from "mobx-react";
-import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
-import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
 import { isPublicPreview } from "@docspace/shared/utils/common";
 
-const StyledContainer = styled.header`
+import HeaderUnAuth from "./sub-components/header-unauth";
+import HeaderNav from "./sub-components/header-nav";
+import Header from "./sub-components/header";
+
+const StyledContainer = styled.header.attrs(injectDefaultTheme)`
   height: ${(props) => props.theme.header.height};
   position: relative;
   align-items: center;
@@ -67,7 +66,7 @@ const StyledContainer = styled.header`
               position: absolute;
               z-index: 160;
               top: 0;
-              // top: ${(props) => (props.isVisible ? "0" : "-48px")};
+              // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
 
               transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
               -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
@@ -81,22 +80,35 @@ const StyledContainer = styled.header`
         `}
 `;
 
-StyledContainer.defaultProps = { theme: Base };
-
 const NavMenu = (props) => {
+  const {
+    isAuthenticated,
+    isLoaded,
+    asideContent,
+
+    isFrame,
+    showHeader,
+    currentDeviceType,
+
+    hideProfileMenu,
+    customHeader,
+    isAsideVisible: isAsideVisibleProp = false,
+    isNavOpened: isNavOpenedProp = false,
+    isNavHoverEnabled: isNavHoverEnabledProp = true,
+    isBackdropVisible: isBackdropVisibleProp = false,
+  } = props;
+
   const timeout = React.useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
-    props.isBackdropVisible,
+    isBackdropVisibleProp,
   );
-  const [isNavOpened, setIsNavOpened] = React.useState(props.isNavHoverEnabled);
-  const [isAsideVisible, setIsAsideVisible] = React.useState(props.isNavOpened);
-  const [isNavHoverEnabled, setIsNavHoverEnabled] = React.useState(
-    props.isAsideVisible,
-  );
+  const [isNavOpened, setIsNavOpened] = React.useState(isNavHoverEnabledProp);
+  const [isAsideVisible, setIsAsideVisible] = React.useState(isNavOpenedProp);
+  const [isNavHoverEnabled, setIsNavHoverEnabled] =
+    React.useState(isAsideVisibleProp);
 
   const backdropClick = () => {
     setIsBackdropVisible(false);
@@ -143,25 +155,11 @@ const NavMenu = (props) => {
     setIsNavHoverEnabled(false);
   };
 
-  const {
-    isAuthenticated,
-    isLoaded,
-    asideContent,
-
-    isDesktop,
-    isFrame,
-    showHeader,
-    currentDeviceType,
-
-    hideProfileMenu,
-    customHeader,
-  } = props;
-
   const isAsideAvailable = !!asideContent;
   const hideHeader = (!showHeader && isFrame) || isPublicPreview();
 
   if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
-    return <></>;
+    return null;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
 
@@ -170,16 +168,16 @@ const NavMenu = (props) => {
       <Backdrop
         visible={isBackdropVisible}
         onClick={backdropClick}
-        withBackground={true}
-        withBlur={true}
+        withBackground
+        withBlur
       />
 
-      {!hideHeader &&
-        (isLoaded && isAuthenticated ? (
+      {!hideHeader ? (
+        isLoaded && isAuthenticated ? (
           <>
-            {!isPreparationPortal && (
+            {!isPreparationPortal ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
-            )}
+            ) : null}
             <Header
               customHeader={customHeader}
               isPreparationPortal={isPreparationPortal}
@@ -195,13 +193,14 @@ const NavMenu = (props) => {
           <NavMenuHeaderLoader />
         ) : (
           <HeaderUnAuth />
-        ))}
+        )
+      ) : null}
 
-      {isAsideAvailable && (
+      {isAsideAvailable ? (
         <Aside visible={isAsideVisible} onClick={backdropClick}>
           {asideContent}
         </Aside>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };
@@ -211,7 +210,6 @@ NavMenu.propTypes = {
   isNavHoverEnabled: PropTypes.bool,
   isNavOpened: PropTypes.bool,
   isAsideVisible: PropTypes.bool,
-  isDesktop: PropTypes.bool,
 
   asideContent: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -220,14 +218,6 @@ NavMenu.propTypes = {
 
   isAuthenticated: PropTypes.bool,
   isLoaded: PropTypes.bool,
-};
-
-NavMenu.defaultProps = {
-  isBackdropVisible: false,
-  isNavHoverEnabled: true,
-  isNavOpened: false,
-  isAsideVisible: false,
-  isDesktop: false,
 };
 
 const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
@@ -251,4 +241,7 @@ const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
   };
 })(observer(withTranslation(["Common"])(NavMenu)));
 
-export default ({ ...props }) => <NavMenuWrapper {...props} />;
+const NavMenuComponent = ({ ...props }) => <NavMenuWrapper {...props} />;
+NavMenuComponent.displayName = "NavMenuComponent";
+
+export default NavMenuComponent;

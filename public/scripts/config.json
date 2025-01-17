@@ -35,5 +35,10 @@
   "logs": {
     "enableLogs": false,
     "logsToConsole": false
+  },
+  "loaders": {
+    "showLoader": true,
+    "showLoaderTime": 1000,
+    "loaderTime": null
   }
 }

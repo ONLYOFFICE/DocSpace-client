@@ -412,14 +412,14 @@ const ClientForm = ({
               onBlur={onBlur}
               maxImageSize={maxImageUploadSize}
             />
-            {isEdit && (
+            {isEdit ? (
               <ClientBlock
                 t={t}
                 idValue={clientId}
                 secretValue={clientSecret}
                 onResetClick={onResetClick}
               />
-            )}
+            ) : null}
             <OAuthBlock
               t={t}
               redirectUrisValue={form.redirect_uris}
@@ -459,7 +459,7 @@ const ClientForm = ({
           </>
         )}
       </StyledContainer>
-      {resetDialogVisible && <ResetDialog />}
+      {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );
 };

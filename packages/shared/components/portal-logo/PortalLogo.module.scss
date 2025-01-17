@@ -1,0 +1,42 @@
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/variables/devices.scss";
+@import "../../styles/mixins.scss";
+
+:root {
+  --header-background-color: #{$gray-light};
+  --header-height: 48px;
+
+  &[data-theme="dark"] {
+    --header-background-color: #{$dark-gray-light};
+  }
+}
+
+.wrapper {
+  @include mobile {
+    &:not(.resizable) {
+      display: none;
+    }
+
+    &.mobile.resizable {
+      display: flex;
+      background-color: var(--header-background-color);
+      height: var(--header-height);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      align-content: center;
+      text-align: center;
+
+      img {
+        height: 24px;
+        margin: auto;
+      }
+    }
+  }
+
+  &:global(.not-mobile) {
+    img {
+      width: 386px;
+    }
+  }
+}

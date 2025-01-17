@@ -1,0 +1,34 @@
+@import "../../styles/variables/_colors.scss";
+
+:root {
+  --context-menu-button-border: #{$gray-strong};
+  --context-menu-button-hover-border: #{$gray};
+
+  &[data-theme="dark"] {
+    --context-menu-button-border: #{$gray-dark};
+    --context-menu-button-hover-border: #{$gray-dark};
+  }
+}
+
+.outer {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: #{$tap-highlight};
+
+  &.displayIconBorder {
+    border: var(--context-menu-button-border);
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    svg {
+      padding: 6px 7px;
+    }
+
+    &:hover {
+      border-color: var(--context-menu-button-hover-border);
+    }
+  }
+}

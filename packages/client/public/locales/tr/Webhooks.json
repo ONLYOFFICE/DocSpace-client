@@ -35,7 +35,6 @@
   "SecretKey": "Gizli anahtar",
   "SecretKeyHint": "Webhook sırrı ayarlamak, payload URL'sine gönderilen istekleri doğrulamanıza olanak tanır.",
   "SecretKeyWarning": "Gizli anahtarınızı kaydettikten sonra tekrar geri alamazsınız. Bu gizli anahtarı kaybettiyseniz veya unuttuysanız sıfırlayabilirsiniz ancak bu sırrı kullanan tüm entegrasyonların güncellenmesi gerekecektir.",
-  "SelectDate": "Tarih seç",
   "SelectDeliveryTime": "Teslimat zamanını seç",
   "SettingsWebhook": "Webhook ayarları",
   "SSLHint": "Varsayılan olarak, yükleri teslim ederken SSL sertifikalarını doğruluyoruz.",

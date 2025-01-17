@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
 import SessionsRow from "./SessionsRow";
 
 const StyledRowContainer = styled(RowContainer)`

@@ -27,30 +27,37 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import { tablet, mobile, isTablet, isMobile } from "@docspace/shared/utils";
+import {
+  tablet,
+  mobile,
+  isMobile,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-const HeaderContainer = styled.div`
+import { retryWebhooks } from "@docspace/shared/api/settings";
+import { formatFilters } from "SRC_DIR/helpers/webhooks";
+
+const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme.backgroundColor};
@@ -135,7 +142,40 @@ const HeaderContainer = styled.div`
   }
 `;
 
-HeaderContainer.defaultProps = { theme: Base };
+const NavigationHeader = ({ t, onBack }) => (
+  <>
+    <IconButton
+      iconName={ArrowPathReactSvgUrl}
+      size="17"
+      isFill
+      onClick={onBack}
+      className="arrow-button"
+    />
+    <Heading type="content" truncate className="headline">
+      {t("InfoPanel:SubmenuHistory")}
+    </Heading>
+  </>
+);
+
+const GroupMenu = ({
+  menuItems,
+  handleGroupSelection,
+  headerMenu,
+  areAllIdsChecked,
+  isIndeterminate,
+  isRetryPending,
+}) => (
+  <TableGroupMenu
+    checkboxOptions={menuItems}
+    onChange={handleGroupSelection}
+    headerMenu={headerMenu}
+    isChecked={areAllIdsChecked}
+    isIndeterminate={isIndeterminate}
+    withoutInfoPanelToggler
+    isBlocked={isRetryPending}
+    withComboBox
+  />
+);
 
 const HistoryHeader = (props) => {
   const {
@@ -143,13 +183,10 @@ const HistoryHeader = (props) => {
     checkedEventIds,
     checkAllIds,
     emptyCheckedIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
-    theme,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,
@@ -173,7 +210,7 @@ const HistoryHeader = (props) => {
       const timeout = setTimeout(() => {
         setIsPendingVisible(true);
       }, 300);
-      await retryWebhookEvents(checkedEventIds);
+      await retryWebhooks(checkedEventIds);
       await emptyCheckedIds();
       clearTimeout(timeout);
       setRetryPendingFalse();
@@ -231,34 +268,6 @@ const HistoryHeader = (props) => {
     </>
   );
 
-  const NavigationHeader = () => (
-    <>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill={true}
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Headline type="content" truncate={true} className="headline">
-        {t("InfoPanel:SubmenuHistory")}
-      </Headline>
-    </>
-  );
-
-  const GroupMenu = () => (
-    <TableGroupMenu
-      checkboxOptions={menuItems}
-      onChange={handleGroupSelection}
-      headerMenu={headerMenu}
-      isChecked={areAllIdsChecked}
-      isIndeterminate={isIndeterminate}
-      withoutInfoPanelToggler
-      isBlocked={isRetryPending}
-      withComboBox
-    />
-  );
-
   useEffect(() => {
     return emptyCheckedIds;
   }, []);
@@ -267,17 +276,34 @@ const HistoryHeader = (props) => {
     <HeaderContainer isDisabled={isRetryPending}>
       {isMobile() ? (
         <>
-          {isGroupMenuVisible && <GroupMenu />}
-          <NavigationHeader />
+          {isGroupMenuVisible ? (
+            <GroupMenu
+              menuItems={menuItems}
+              handleGroupSelection={handleGroupSelection}
+              headerMenu={headerMenu}
+              areAllIdsChecked={areAllIdsChecked}
+              isIndeterminate={isIndeterminate}
+              isRetryPending={isRetryPending}
+            />
+          ) : null}
+          <NavigationHeader t={t} onBack={onBack} />
         </>
       ) : isGroupMenuVisible ? (
-        <GroupMenu />
+        <GroupMenu
+          menuItems={menuItems}
+          handleGroupSelection={handleGroupSelection}
+          headerMenu={headerMenu}
+          areAllIdsChecked={areAllIdsChecked}
+          isIndeterminate={isIndeterminate}
+          isRetryPending={isRetryPending}
+        />
       ) : (
-        <NavigationHeader />
+        <NavigationHeader t={t} onBack={onBack} />
       )}
 
-      {isPendingVisible &&
-        createPortal(<FloatingButton icon="refresh" />, document.body)}
+      {isPendingVisible
+        ? createPortal(<FloatingButton icon="refresh" />, document.body)
+        : null}
     </HeaderContainer>
   );
 };
@@ -288,12 +314,10 @@ export default inject(({ webhooksStore, settingsStore }) => {
     checkAllIds,
     emptyCheckedIds,
     checkedEventIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,
@@ -306,13 +330,11 @@ export default inject(({ webhooksStore, settingsStore }) => {
     checkAllIds,
     emptyCheckedIds,
     checkedEventIds,
-    retryWebhookEvents,
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
     theme,
     historyFilters,
-    formatFilters,
     isRetryPending,
     setRetryPendingFalse,
     setRetryPendingTrue,

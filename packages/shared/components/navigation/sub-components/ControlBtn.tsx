@@ -26,175 +26,156 @@
 
 import React from "react";
 
-import {
-  StyledControlButtonContainer,
-  StyledTariffWrapper,
-} from "../Navigation.styled";
-import { IControlButtonProps } from "../Navigation.types";
+import { isTablet } from "../../../utils";
+import { Button, ButtonSize } from "../../button";
+
+import styles from "../Navigation.module.scss";
+
+import { TControlButtonProps } from "../Navigation.types";
 
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
 import TrashWarning from "./TrashWarning";
-import { Button, ButtonSize } from "../../button";
-import { isTablet } from "../../../utils";
 
 const ControlButtons = ({
   isRootFolder,
-  canCreate,
-  getContextOptionsFolder,
-  getContextOptionsPlus,
-  isEmptyFilesList,
   isInfoPanelVisible,
   toggleInfoPanel,
   toggleDropBox,
-  isDesktop,
   titles,
+
+  // Plus button props
+  canCreate,
+  getContextOptionsPlus,
   withMenu,
   onPlusClick,
   isFrame,
-  isPublicRoom,
+  onCloseDropBox,
+
+  // Context button props
+  getContextOptionsFolder,
   isTrashFolder,
   isMobile,
-  showTitle,
+  onContextOptionsClick,
+  isPublicRoom,
+
+  // Navigation button props
   navigationButtonLabel,
   onNavigationButtonClick,
+
+  // Visibility controls
+  isDesktop,
+  isEmptyFilesList,
+  showTitle,
+  isEmptyPage,
+
+  // Tariff bar
   tariffBar,
   title,
-  isEmptyPage,
-  onCloseDropBox,
-  onContextOptionsClick,
-}: IControlButtonProps) => {
+}: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
 
-  const navigationButtonBlock =
-    navigationButtonLabel && !isFrame ? (
+  const isTabletView = isTablet();
+  const contextOptionsFolder = getContextOptionsFolder();
+  const containVisible = contextOptionsFolder.some((item) => !item.disabled);
+
+  const renderNavigationButton = () => {
+    if (!navigationButtonLabel || isFrame || isRootFolder) return null;
+
+    return (
       <Button
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
         onClick={onNavigationButtonClick}
       />
-    ) : null;
-  const children =
-    tariffBar && !isFrame ? React.cloneElement(tariffBar, { title }) : null;
-  const isTabletView = isTablet();
+    );
+  };
 
-  const contextOptionsFolder = getContextOptionsFolder();
-  const containVisible = contextOptionsFolder.some(
-    (item) => item.disabled === false,
-  );
+  const renderTariffBar = () => {
+    if (!tariffBar || isFrame) return null;
+    return (
+      <div className={styles.tariffWrapper}>
+        {React.cloneElement(tariffBar, { title })}
+      </div>
+    );
+  };
+
+  const renderPlusButton = () => {
+    if (isMobile || !canCreate) return null;
+
+    return (
+      <PlusButton
+        id="header_add-button"
+        className="add-button"
+        getData={getContextOptionsPlus}
+        withMenu={withMenu}
+        onPlusClick={onPlusClick}
+        isFrame={isFrame}
+        title={titles?.actions}
+        onCloseDropBox={onCloseDropBox}
+      />
+    );
+  };
+
+  const renderContextButton = (visible: boolean) => {
+    if (!visible) return null;
+
+    return (
+      <ContextButton
+        id="header_optional-button"
+        className="option-button"
+        getData={getContextOptionsFolder}
+        withMenu={withMenu}
+        title={titles?.actions}
+        isTrashFolder={isTrashFolder}
+        isMobile={isMobile || false}
+        onCloseDropBox={onCloseDropBox}
+        onContextOptionsClick={onContextOptionsClick}
+      />
+    );
+  };
+
+  const renderToggleInfoPanel = () => {
+    if (isDesktop) return null;
+
+    return (
+      <ToggleInfoPanelButton
+        isRootFolder={isRootFolder}
+        isInfoPanelVisible={isInfoPanelVisible}
+        toggleInfoPanel={toggleInfoPanelAction}
+        titles={titles}
+      />
+    );
+  };
+
+  const renderTrashWarning = () => {
+    if (!isDesktop || !isTrashFolder || isEmptyPage) return null;
+
+    return <TrashWarning title={titles?.trashWarning} />;
+  };
 
   return (
-    <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
-      {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
-        <>
-          {!isMobile && canCreate && (
-            <PlusButton
-              className="add-button"
-              getData={getContextOptionsPlus}
-              withMenu={withMenu}
-              onPlusClick={onPlusClick}
-              isFrame={isFrame}
-              title={titles?.actions}
-              onCloseDropBox={onCloseDropBox}
-            />
-          )}
-
-          {/* <ContextMenuButton
-            id="header_optional-button"
-            zIndex={402}
-            className="option-button"
-            directionX="right"
-            iconName={VerticalDotsReactSvgUrl}
-            size={15}
-            isFill
-            getData={getContextOptionsFolder}
-            isDisabled={false}
-            title={titles?.contextMenu}
-          /> */}
-
-          <ContextButton
-            id="header_optional-button"
-            className="option-button"
-            getData={getContextOptionsFolder}
-            withMenu={withMenu}
-            // onPlusClick={onPlusClick}
-            title={titles?.actions}
-            isTrashFolder={isTrashFolder}
-            isMobile={isMobile || false}
-            onCloseDropBox={onCloseDropBox}
-            onContextOptionsClick={onContextOptionsClick}
-          />
-
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-        </>
-      ) : canCreate ? (
-        <>
-          {!isMobile && (
-            <PlusButton
-              id="header_add-button"
-              className="add-button"
-              getData={getContextOptionsPlus}
-              withMenu={withMenu}
-              onPlusClick={onPlusClick}
-              isFrame={isFrame}
-              title={titles?.actions}
-              onCloseDropBox={onCloseDropBox}
-            />
-          )}
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-
-          {isPublicRoom && containVisible && (
-            <ContextButton
-              id="header_optional-button"
-              className="option-button"
-              getData={getContextOptionsFolder}
-              withMenu={withMenu}
-              title={titles?.contextMenu}
-              isTrashFolder={isTrashFolder}
-              isMobile={isMobile || false}
-              onCloseDropBox={onCloseDropBox}
-              onContextOptionsClick={onContextOptionsClick}
-            />
-          )}
-        </>
+    <div
+      className={styles.controlButtonContainer}
+      data-frame={isFrame}
+      data-show-title={showTitle}
+    >
+      {renderPlusButton()}
+      {renderContextButton(
+        (!isRootFolder || (isTrashFolder && !isEmptyFilesList)) ?? false,
       )}
-      {isDesktop && isTrashFolder && !isEmptyPage && (
-        <TrashWarning title={titles?.trashWarning} />
-      )}
-      {navigationButtonLabel && !isTabletView && navigationButtonBlock}
-      <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
-      {navigationButtonLabel && isTabletView && navigationButtonBlock}
-    </StyledControlButtonContainer>
+      {renderToggleInfoPanel()}
+      {renderContextButton((isPublicRoom && containVisible) ?? false)}
+      {renderTrashWarning()}
+      {!isTabletView ? renderNavigationButton() : null}
+      {renderTariffBar()}
+      {isTabletView ? renderNavigationButton() : null}
+    </div>
   );
 };
 

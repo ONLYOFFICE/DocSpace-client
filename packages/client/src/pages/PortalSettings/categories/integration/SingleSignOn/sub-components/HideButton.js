@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -54,7 +53,7 @@ const HideButton = (props) => {
 
   return (
     <StyledWrapper isAdditionalParameters={isAdditionalParameters}>
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
@@ -64,7 +63,7 @@ const HideButton = (props) => {
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         id={id}

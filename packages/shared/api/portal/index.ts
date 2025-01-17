@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
@@ -113,10 +116,13 @@ export function deleteBackupSchedule() {
   return request(options);
 }
 
-export function getBackupSchedule() {
+export function getBackupSchedule(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }

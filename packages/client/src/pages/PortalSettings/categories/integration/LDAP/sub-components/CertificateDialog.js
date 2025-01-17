@@ -35,8 +35,8 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 
-import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
 import { LDAPCertificateProblem } from "@docspace/shared/enums";
+import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
 
 const CertificateDialog = ({
   setCertificateDialogVisible,
@@ -48,15 +48,15 @@ const CertificateDialog = ({
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
-  const onCloseAction = useCallback((e) => {
+  const onCloseAction = useCallback(() => {
     setCertificateDialogVisible(false);
   }, []);
 
-  const onCancelAction = useCallback((e) => {
+  const onCancelAction = useCallback(() => {
     setCertificateDialogVisible(false);
   }, []);
 
-  const onSaveAction = useCallback((e) => {
+  const onSaveAction = useCallback(() => {
     setAcceptCertificate(true);
     setAcceptCertificateHash(cerficateIssue.uniqueHash);
     save(t);
@@ -90,6 +90,8 @@ const CertificateDialog = ({
       case LDAPCertificateProblem.CertRevocationFailure:
       case LDAPCertificateProblem.CertWrongUsage:
         return "";
+      default:
+        break;
     }
 
     return "";
@@ -138,15 +140,15 @@ const CertificateDialog = ({
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
           </Box>
-          {hasError && (
+          {hasError ? (
             <Box>
               {cerficateIssue.errors.map((err) => (
-                <Text className="ldap-error-text" key={`err-${index}`}>
+                <Text className="ldap-error-text" key={`err-${err}`}>
                   {mapError(err)}
                 </Text>
               ))}
             </Box>
-          )}
+          ) : null}
         </StyledCertificateDialogBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>

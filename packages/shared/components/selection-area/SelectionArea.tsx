@@ -27,14 +27,14 @@
 import React from "react";
 import { useTheme } from "styled-components";
 
-import { StyledSelectionArea } from "./SelectionArea.styled";
+import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
 
 const SelectionArea = ({
   onMove,
-  selectableClass,
+  selectableClass = "",
   scrollClass,
   viewAs,
   itemsContainerClass,
@@ -411,12 +411,6 @@ const SelectionArea = ({
       )
         return;
 
-      // if (e.target.tagName === "A") {
-      //   const node = e.target.closest("." + selectableClass);
-      //   node && onMove && onMove({ added: [node], removed: [], clear: true });
-      //   return;
-      // }
-
       const selectables = document.getElementsByClassName(selectableClass);
 
       if (!selectables.length) return;
@@ -499,11 +493,13 @@ const SelectionArea = ({
     arrayOfTypes.current = [];
   }, [isRooms, viewAs]);
 
-  return <StyledSelectionArea className="selection-area" ref={areaRef} />;
-};
-
-SelectionArea.defaultProps = {
-  selectableClass: "",
+  return (
+    <div
+      ref={areaRef}
+      className={`${styles.selectionArea} selection-area`}
+      data-testid="selection-area"
+    />
+  );
 };
 
 export { SelectionArea };

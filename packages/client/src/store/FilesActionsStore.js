@@ -201,8 +201,12 @@ class FilesActionStore {
     const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
       this.filesStore;
 
-    const { isRoomsFolder, isArchiveFolder, isArchiveFolderRoot } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isArchiveFolderRoot,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     let newFilter;
 
@@ -213,7 +217,12 @@ class FilesActionStore {
     }
 
     try {
-      if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
+      if (
+        isRoomsFolder ||
+        isArchiveFolder ||
+        isArchiveFolderRoot ||
+        isTemplatesFolder
+      ) {
         await fetchRooms(
           updatedFolder,
           newFilter || roomsFilter.clone(),

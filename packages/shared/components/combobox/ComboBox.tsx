@@ -367,8 +367,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       usePortalBackdrop,
       style,
       showDisabledItems,
-      isDefaultMode: true,
-      className,
+      isDefaultMode,
       clickOutsideAction: handleClickOutside,
     };
 

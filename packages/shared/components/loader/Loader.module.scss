@@ -28,7 +28,7 @@
 
 :root {
   --loader-color: #{$loader-light};
-  --button-loade-track-primary: #{$white};
+  --button-loader-track-primary: #{$white};
   --button-loader-track-base: var(--color-scheme-main-buttons);
 
   &[data-theme="dark"] {

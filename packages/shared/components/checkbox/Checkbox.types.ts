@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import type { TextProps } from "components/text/Text.types";
+import type { TextProps } from "../text/Text.types";
 
 type PickedTextProps = Pick<TextProps, "title" | "truncate">;
 

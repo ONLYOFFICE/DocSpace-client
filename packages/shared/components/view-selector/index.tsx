@@ -71,6 +71,7 @@ const ViewSelector = ({
       return (
         <div
           className={classNames(styles.iconWrapper, {
+            "view-selector-icon": true,
             [styles.disabled]: isDisabled,
             [styles.checked]: viewAs === value,
             [styles.firstItem]: indx === 0,

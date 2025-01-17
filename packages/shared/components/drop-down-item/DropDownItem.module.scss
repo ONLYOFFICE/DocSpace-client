@@ -133,20 +133,6 @@
   }
 }
 
-.separator {
-  padding: 0 16px;
-  background-color: var(--dropdown-item-separator-border);
-  cursor: default;
-  margin: 4px 16px 4px;
-  line-height: 1px;
-  height: 1px;
-  width: calc(100% - 32px);
-
-  &:hover {
-    cursor: default;
-  }
-}
-
 .submenuArrow {
   width: 12px;
   height: 12px;
@@ -176,7 +162,7 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  min-width: var(--drop-down-min-width, 100%);
+  min-width: var(--drop-down-min-width, unset);
 
   border: 0px;
   cursor: pointer;
@@ -208,6 +194,20 @@
   @include tablet-and-below {
     line-height: 36px;
     padding: 0 16px;
+  }
+}
+
+.separator {
+  padding: 0 16px;
+  background-color: var(--dropdown-item-separator-border);
+  cursor: default;
+  margin: 4px 16px 4px;
+  line-height: 1px;
+  height: 1px;
+  width: calc(100% - 32px);
+
+  &:hover {
+    cursor: default;
   }
 }
 

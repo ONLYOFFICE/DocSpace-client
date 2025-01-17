@@ -219,7 +219,7 @@ const Tabs = (props: TabsProps) => {
           {!isViewLastTab ? <div className={styles.blurBack} /> : null}
         </div>
       ) : null}
-      <div className={styles.stickyIndent} />
+      <div className={classNames(styles.stickyIndent, "sticky-indent")} />
       {!multiple && items[currentItem]?.content ? (
         <div className={`${styles.tabsBody} tabs-body`}>
           {items[currentItem].content}

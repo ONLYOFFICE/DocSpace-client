@@ -224,7 +224,6 @@ const LinkRow = ({
                     onSelect={onAccessRightsSelect}
                     accessOptions={roomAccessOptions}
                     modernView
-                    directionX="right"
                     directionY="both"
                     type="onlyIcon"
                     manualWidth="300px"

@@ -24,6 +24,7 @@
     "@use-gesture/react": "catalog:",
     "attr-accept": "catalog:",
     "axios": "catalog:",
+    "classnames": "^2.5.1",
     "cnbuilder": "catalog:",
     "copy-to-clipboard": "catalog:",
     "cross-fetch": "catalog:",
@@ -36,6 +37,7 @@
     "framer-motion": "catalog:",
     "global": "catalog:",
     "heic2any": "catalog:",
+    "hex-rgb": "catalog:",
     "html-to-react": "catalog:",
     "i18next": "catalog:",
     "lodash": "catalog:",
@@ -49,8 +51,8 @@
     "rc-tree": "catalog:",
     "re-resizable": "catalog:",
     "react": "catalog:",
-    "react-avatar-editor": "catalog:",
     "react-autosize-textarea": "catalog:",
+    "react-avatar-editor": "catalog:",
     "react-colorful": "catalog:",
     "react-content-loader": "catalog:",
     "react-countdown": "catalog:",
@@ -81,10 +83,9 @@
     "socket.io-client": "catalog:",
     "styled-components": "catalog:",
     "utif": "catalog:",
+    "windows-iana": "catalog:",
     "workbox-window": "catalog:",
-    "zoom-level": "catalog:",
-    "hex-rgb": "catalog:",
-    "windows-iana": "catalog:"
+    "zoom-level": "catalog:"
   },
   "devDependencies": {
     "@babel/cli": "catalog:",

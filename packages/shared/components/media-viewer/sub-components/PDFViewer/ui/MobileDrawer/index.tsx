@@ -32,10 +32,10 @@ import { useSpring, config, animated } from "@react-spring/web";
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import classNames from "classnames";
 import { Bookmarks } from "../Bookmarks";
 
-import styles from "./MobileDrawer.module.scss";
-import { Thumbnails } from "../SideBar/Sidebar.styled";
+import styles from "../../PDFViewer.module.scss";
 
 import MobileDrawerProps from "./MobileDrawer.props";
 
@@ -199,7 +199,12 @@ export const MobileDrawer = ({
           {toggle ? (
             <Bookmarks bookmarks={bookmarks} navigate={navigate} />
           ) : null}
-          <Thumbnails id="viewer-thumbnail" visible={!toggle} />
+          <section
+            id="viewer-thumbnail"
+            className={classNames(styles.thumbnails, {
+              [styles.visible]: !toggle,
+            })}
+          />
         </div>
       </animated.div>
     </section>

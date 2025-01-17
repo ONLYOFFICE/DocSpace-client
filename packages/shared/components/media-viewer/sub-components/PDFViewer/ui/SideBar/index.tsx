@@ -30,7 +30,7 @@ import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg";
 import classNames from "classnames";
 import { Bookmarks } from "../Bookmarks";
-import styles from "./Sidebar.module.scss";
+import styles from "../../PDFViewer.module.scss";
 import SidebarProps from "./Sidebar.props";
 
 import { useInterfaceDirection } from "../../../../../../hooks/useInterfaceDirection";

@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
+@import "../../../../../../styles/variables/devices.scss";
+@import "../../../../../../styles/mixins";
+@import "../../../../../../styles/variables/colors";
 
 :root {
   --page-count-background: var(--page-count-background);

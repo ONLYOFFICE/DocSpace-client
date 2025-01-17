@@ -32,18 +32,39 @@ import { GuidProps } from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
 
 const Guidance = (props: GuidProps) => {
-  const { guidRects, formFillingTipsNumber, viewAs } = props;
+  const {
+    formFillingTipsNumber,
+    viewAs,
+    pdfGuidRects,
+    readyGuidRects,
+    shareGuidRects,
+    uploadingGuidRects,
+  } = props;
 
   const [position, setPosition] = React.useState();
 
   const onResize = React.useCallback(() => {
+    const guidRects = {
+      pdf: pdfGuidRects,
+      ready: readyGuidRects,
+      share: shareGuidRects,
+      uploading: uploadingGuidRects,
+    };
+
     const newPosition = getGuidPosition(
       guidRects,
       formFillingTipsNumber,
       viewAs,
     );
     setPosition(newPosition);
-  }, [formFillingTipsNumber, guidRects, viewAs]);
+  }, [
+    formFillingTipsNumber,
+    pdfGuidRects,
+    readyGuidRects,
+    shareGuidRects,
+    uploadingGuidRects,
+    viewAs,
+  ]);
 
   React.useEffect(() => {
     onResize();
@@ -51,10 +72,10 @@ const Guidance = (props: GuidProps) => {
 
     return () => window.removeEventListener("resize", onResize);
   }, [
-    guidRects.pdf,
-    guidRects.ready,
-    guidRects.share,
-    guidRects.uploading,
+    pdfGuidRects,
+    readyGuidRects,
+    shareGuidRects,
+    uploadingGuidRects,
     formFillingTipsNumber,
     viewAs,
     onResize,

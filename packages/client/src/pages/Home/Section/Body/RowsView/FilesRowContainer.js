@@ -74,10 +74,9 @@ const FilesRowContainer = ({
   changeIndex,
   icon,
   isDownload,
-  setGuidancePdf,
-  setGuidanceReady,
+  setGuidRectsPdf,
+  setGuidRectsReady,
   isTutorialEnabled,
-  guidanceCoordinates,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -107,9 +106,8 @@ const FilesRowContainer = ({
         isIndexEditingMode={isIndexEditingMode}
         icon={icon}
         isDownload={isDownload}
-        setGuidancePdf={setGuidancePdf}
-        setGuidanceReady={setGuidanceReady}
-        guidanceCoordinates={guidanceCoordinates}
+        setGuidRectsPdf={setGuidRectsPdf}
+        setGuidRectsReady={setGuidRectsReady}
         isTutorialEnabled={isTutorialEnabled}
       />
     ));
@@ -161,9 +159,8 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
-      setGuidancePdf,
-      setGuidanceReady,
-      guidanceCoordinates,
+      setGuidRectsPdf,
+      setGuidRectsReady,
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
@@ -196,10 +193,9 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       icon,
       isDownload,
-      setGuidancePdf,
-      setGuidanceReady,
+      setGuidRectsPdf,
+      setGuidRectsReady,
       isTutorialEnabled,
-      guidanceCoordinates,
     };
   },
 )(observer(FilesRowContainer));

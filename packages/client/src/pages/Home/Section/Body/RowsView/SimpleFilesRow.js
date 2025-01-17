@@ -367,8 +367,8 @@ const SimpleFilesRow = (props) => {
     isFolder,
     icon,
     isDownload,
-    setGuidancePdf,
-    setGuidanceReady,
+    setGuidRectsPdf,
+    setGuidRectsReady,
     isTutorialEnabled,
   } = props;
 
@@ -387,10 +387,10 @@ const SimpleFilesRow = (props) => {
 
   React.useEffect(() => {
     if (item?.isPDF && rowRef?.current) {
-      setGuidancePdf(rowRef.current.getClientRects()[0]);
+      setGuidRectsPdf(rowRef.current.getClientRects()[0]);
     }
     if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidanceReady(rowRef.current.getClientRects()[0]);
+      setGuidRectsReady(rowRef.current.getClientRects()[0]);
     }
   }, [rowRef?.current]);
 

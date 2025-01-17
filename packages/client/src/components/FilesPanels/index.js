@@ -33,7 +33,10 @@ import {
   Events,
   FilesSelectorFilterTypes,
   FilterType,
+  FormFillingTipsState,
 } from "@docspace/shared/enums";
+
+import { Guidance } from "@docspace/shared/components/guidance";
 
 import {
   UploadPanel,
@@ -145,6 +148,18 @@ const Panels = (props) => {
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
+
+    setFormFillingTipsNumber,
+    setFormFillingTipsDialog,
+    formFillingTipsVisible,
+    formFillingTipsNumber,
+    viewAs,
+    pdfGuidRects,
+    readyGuidRects,
+    shareGuidRects,
+    uploadingGuidRects,
+    infoPanelVisible,
+    userId,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -210,6 +225,12 @@ const Panels = (props) => {
       resetQuotaItem();
     };
   }, [isShowWarningDialog]);
+
+  const onCloseGuidance = () => {
+    setFormFillingTipsNumber(FormFillingTipsState.Starting);
+    setFormFillingTipsDialog(false);
+    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
+  };
 
   return [
     settingsPluginDialogVisible && (
@@ -353,6 +374,21 @@ const Panels = (props) => {
     welcomeFormFillingTipsVisible && (
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
     ),
+
+    formFillingTipsVisible && (
+      <Guidance
+        formFillingTipsNumber={formFillingTipsNumber}
+        setFormFillingTipsNumber={setFormFillingTipsNumber}
+        onClose={onCloseGuidance}
+        viewAs={viewAs}
+        // currentDeviceType={currentDeviceType}
+        pdfGuidRects={pdfGuidRects}
+        readyGuidRects={readyGuidRects}
+        shareGuidRects={shareGuidRects}
+        uploadingGuidRects={uploadingGuidRects}
+        infoPanelVisible={infoPanelVisible}
+      />
+    ),
   ];
 };
 
@@ -367,6 +403,9 @@ export default inject(
     pluginStore,
     currentQuotaStore,
     filesActionsStore,
+    filesStore,
+    infoPanelStore,
+    userStore,
   }) => {
     const {
       copyPanelVisible,
@@ -422,7 +461,20 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+
+      setFormFillingTipsNumber,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      formFillingTipsNumber,
     } = dialogsStore;
+
+    const {
+      viewAs,
+      pdfGuidRects,
+      readyGuidRects,
+      shareGuidRects,
+      uploadingGuidRects,
+    } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
@@ -515,6 +567,17 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      setFormFillingTipsNumber,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      formFillingTipsNumber,
+      viewAs,
+      pdfGuidRects,
+      readyGuidRects,
+      shareGuidRects,
+      uploadingGuidRects,
+      infoPanelVisible: infoPanelStore.isVisible,
+      userId: userStore?.user?.id,
     };
   },
 )(observer(Panels));

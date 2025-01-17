@@ -251,12 +251,13 @@ class FilesStore {
     start: true,
   });
 
-  guidanceCoordinates = {
-    pdf: null,
-    ready: null,
-    share: null,
-    uploading: null,
-  };
+  pdfGuidRects = null;
+
+  readyGuidRects = null;
+
+  shareGuidRects = null;
+
+  uploadingGuidRects = null;
 
   hotkeysClipboard = [];
 
@@ -1469,10 +1470,6 @@ class FilesStore {
   resetUrl = () => {
     this.setFilesFilter(this.tempFilter);
   };
-
-  get guidRects() {
-    return this.guidanceCoordinates;
-  }
 
   setRoomsFilter = (filter) => {
     filter.pageCount = 100;
@@ -4137,20 +4134,20 @@ class FilesStore {
     this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
-  setGuidancePdf = (pdfRect) => {
-    this.guidanceCoordinates.pdf = pdfRect;
+  setGuidRectsPdf = (pdfRect) => {
+    this.pdfGuidRects = pdfRect;
   };
 
-  setGuidanceReady = (readyRect) => {
-    this.guidanceCoordinates.ready = readyRect;
+  setGuidRectsReady = (readyRect) => {
+    this.readyGuidRects = readyRect;
   };
 
-  setGuidanceShare = (shareRect) => {
-    this.guidanceCoordinates.share = shareRect;
+  setGuidRectsShare = (shareRect) => {
+    this.shareGuidRects = shareRect;
   };
 
-  setGuidanceUploading = (uploadingRect) => {
-    this.guidanceCoordinates.uploading = uploadingRect;
+  setGuidRectsUploading = (uploadingRect) => {
+    this.uploadingGuidRects = uploadingRect;
   };
 
   setInRoomFolder = (roomId, inRoom) => {

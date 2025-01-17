@@ -80,8 +80,8 @@ const FilesTableRow = (props) => {
     displayFileExtension,
     icon,
     isDownload,
-    setGuidancePdf,
-    setGuidanceReady,
+    setGuidRectsPdf,
+    setGuidRectsReady,
     isTutorialEnabled,
   } = props;
 
@@ -177,12 +177,12 @@ const FilesTableRow = (props) => {
   };
   const setGuidRects = () => {
     if (item?.isPDF && rowRef?.current) {
-      setGuidancePdf(
+      setGuidRectsPdf(
         rowRef.current.firstChild.offsetParent.getClientRects()[0],
       );
     }
     if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidanceReady(
+      setGuidRectsReady(
         rowRef.current.firstChild.offsetParent.getClientRects()[0],
       );
     }

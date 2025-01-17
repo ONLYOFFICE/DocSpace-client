@@ -149,9 +149,8 @@ const Table = ({
   isIndexing,
   icon,
   isDownload,
-  setGuidancePdf,
-  setGuidanceReady,
-  guidanceCoordinates,
+  setGuidRectsPdf,
+  setGuidRectsReady,
   isTutorialEnabled,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
@@ -228,9 +227,8 @@ const Table = ({
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
-        setGuidancePdf={setGuidancePdf}
-        setGuidanceReady={setGuidanceReady}
-        guidanceCoordinates={guidanceCoordinates}
+        setGuidRectsPdf={setGuidRectsPdf}
+        setGuidRectsReady={setGuidRectsReady}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
@@ -335,9 +333,8 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
-      setGuidancePdf,
-      setGuidanceReady,
-      guidanceCoordinates,
+      setGuidRectsPdf,
+      setGuidRectsReady,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -366,9 +363,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      setGuidancePdf,
-      setGuidanceReady,
-      guidanceCoordinates,
+      setGuidRectsPdf,
+      setGuidRectsReady,
       icon,
       isDownload,
       isTutorialEnabled,

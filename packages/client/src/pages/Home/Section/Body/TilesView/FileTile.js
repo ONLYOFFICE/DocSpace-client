@@ -89,8 +89,8 @@ const FileTile = (props) => {
     icon,
     isDownload,
     selectableRef,
-    setGuidancePdf,
-    setGuidanceReady,
+    setGuidRectsPdf,
+    setGuidRectsReady,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -113,10 +113,10 @@ const FileTile = (props) => {
 
   const setGuidRects = () => {
     if (item?.isPDF && tileRef?.current) {
-      setGuidancePdf(tileRef?.current.getClientRects()[0]);
+      setGuidRectsPdf(tileRef?.current.getClientRects()[0]);
     }
     if (item?.type === FolderType.Done && tileRef?.current) {
-      setGuidanceReady(tileRef?.current.getClientRects()[0]);
+      setGuidRectsReady(tileRef?.current.getClientRects()[0]);
     }
   };
 
@@ -232,8 +232,8 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       highlightFile,
-      setGuidancePdf,
-      setGuidanceReady,
+      setGuidRectsPdf,
+      setGuidRectsReady,
     } = filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
@@ -253,8 +253,8 @@ export default inject(
       isHighlight,
       icon,
       isDownload,
-      setGuidancePdf,
-      setGuidanceReady,
+      setGuidRectsPdf,
+      setGuidRectsReady,
     };
   },
 )(

@@ -39,16 +39,11 @@ import SocketHelper, {
 } from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
-import { Guidance } from "@docspace/shared/components/guidance";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import {
-  DeviceType,
-  IndexedDBStores,
-  FormFillingTipsState,
-} from "@docspace/shared/enums";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -99,13 +94,6 @@ const Shell = ({ page = "home", ...rest }) => {
     isAdmin,
     releaseDate,
     registrationDate,
-    formFillingTipsVisible,
-    formFillingTipsNumber,
-    setFormFillingTipsNumber,
-    setFormFillingTipsDialog,
-    viewAs,
-    guidRects,
-    infoPanelVisible,
   } = rest;
 
   const theme = useTheme();
@@ -491,25 +479,8 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
-  const onCloseGuidance = () => {
-    setFormFillingTipsNumber(FormFillingTipsState.Starting);
-    setFormFillingTipsDialog(false);
-    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
-  };
-
   return (
     <Layout>
-      {formFillingTipsVisible && (
-        <Guidance
-          formFillingTipsNumber={formFillingTipsNumber}
-          setFormFillingTipsNumber={setFormFillingTipsNumber}
-          onClose={onCloseGuidance}
-          guidRects={guidRects}
-          viewAs={viewAs}
-          currentDeviceType={currentDeviceType}
-          infoPanelVisible={infoPanelVisible}
-        />
-      )}
       {toast}
       {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? null : <NavMenu />}
@@ -537,8 +508,6 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    filesStore,
-    infoPanelStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -550,8 +519,6 @@ const ShellWrapper = inject(
       version,
       clientError,
     } = authStore;
-
-    const { viewAs, guidRects } = filesStore;
 
     const {
       roomsMode,
@@ -646,9 +613,6 @@ const ShellWrapper = inject(
       barTypeInFrame: frameConfig?.showHeaderBanner,
       setShowGuestReleaseTip,
       releaseDate: buildVersionInfo.releaseDate,
-      viewAs,
-      guidRects,
-      infoPanelVisible: infoPanelStore.isVisible,
     };
   },
 )(observer(Shell));

@@ -268,8 +268,8 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
-    setGuidanceShare,
-    setGuidanceUploading,
+    setGuidRectsShare,
+    setGuidRectsUploading,
     maintenanceExist,
     welcomeFormFillingTipsVisible,
   } = props;
@@ -581,10 +581,10 @@ const SectionHeaderContent = (props) => {
 
   const setGuidRects = () => {
     if (buttonRef?.current?.clientWidth) {
-      setGuidanceShare(buttonRef.current.getClientRects()[0]);
+      setGuidRectsShare(buttonRef.current.getClientRects()[0]);
     }
     if (addButtonRef?.current?.clientWidth) {
-      setGuidanceUploading(addButtonRef.current.getClientRects()[0]);
+      setGuidRectsUploading(addButtonRef.current.getClientRects()[0]);
     }
   };
 
@@ -807,9 +807,8 @@ export default inject(
 
       categoryType,
       setBufferSelection,
-      setGuidanceShare,
-      setGuidanceUploading,
-      guidanceCoordinates,
+      setGuidRectsShare,
+      setGuidRectsUploading,
     } = filesStore;
 
     const {
@@ -1032,9 +1031,8 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      setGuidanceShare,
-      setGuidanceUploading,
-      guidanceCoordinates,
+      setGuidRectsShare,
+      setGuidRectsUploading,
       maintenanceExist,
       welcomeFormFillingTipsVisible,
     };

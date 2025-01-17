@@ -50,7 +50,7 @@ import {
 } from "./Guid.styled";
 
 import { ModalDialogType } from "../../modal-dialog";
-import { getHeaderText, getGuidPosition } from "./Guid.utils";
+import { getHeaderText } from "./Guid.utils";
 import { GuidProps } from "./Guid.types";
 
 const GUID_MODAL_MARGIN = 16;

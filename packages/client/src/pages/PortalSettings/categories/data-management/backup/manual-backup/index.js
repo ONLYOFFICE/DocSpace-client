@@ -315,9 +315,9 @@ class ManualBackup extends React.Component {
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>
-        {downloadingProgressError && (
+        {downloadingProgressError ? (
           <StatusMessage message={downloadingProgressError} />
-        )}
+        ) : null}
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}

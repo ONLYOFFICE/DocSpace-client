@@ -264,9 +264,9 @@ const RestoreBackup = (props) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
-      {downloadingProgressError && (
+      {downloadingProgressError ? (
         <StatusMessage message={downloadingProgressError} />
-      )}
+      ) : null}
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}

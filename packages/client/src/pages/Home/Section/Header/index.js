@@ -252,7 +252,6 @@ const SectionHeaderContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     onCreateRoom,
-    isTemplatesFolderRoot,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -454,6 +453,9 @@ const SectionHeaderContent = (props) => {
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
+  const showTemplateBadge =
+    location?.state?.rootFolderType === FolderType.RoomTemplates &&
+    !stateIsRoot;
 
   const isRoot =
     isLoading && typeof stateIsRoot === "boolean"
@@ -614,8 +616,7 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel =
-    isTemplatesFolderRoot && !isRootFolder ? t("Files:Template") : "";
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   return (
     <Consumer key="header">
@@ -796,12 +797,8 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const {
-      isRecycleBinFolder,
-      isRoomsFolder,
-      isArchiveFolder,
-      isTemplatesFolderRoot,
-    } = treeFoldersStore;
+    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
+      treeFoldersStore;
 
     const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
       dialogsStore;
@@ -992,7 +989,6 @@ export default inject(
       startUpload,
       getFolderModel,
       onCreateRoom,
-      isTemplatesFolderRoot,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,

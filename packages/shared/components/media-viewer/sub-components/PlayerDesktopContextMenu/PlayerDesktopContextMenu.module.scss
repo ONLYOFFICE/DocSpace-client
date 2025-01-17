@@ -24,50 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../../../themes";
+@import "../../../../styles/variables/colors";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/_mixins";
 
-export const PlayerDesktopContextMenuWrapper = styled.div`
+:root {
+  --player-icon-fill: #{$white};
+}
+
+.playerDesktopContextMenuWrapper {
   position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 48px;
   height: 48px;
+
   &:hover {
     cursor: pointer;
   }
 
-  & > svg {
+  svg {
     padding-inline-start: 19px;
     padding-bottom: 3px;
     width: 18px;
     height: 20px;
 
     path {
-      fill: ${globalColors.white};
+      fill: var(--player-icon-fill);
     }
 
     rect {
-      stroke: ${globalColors.white};
+      stroke: var(--player-icon-fill);
     }
   }
-`;
+}
 
-export const DownloadIconWrapper = styled.div`
+.downloadIconWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 48px;
   height: 48px;
+
   &:hover {
     cursor: pointer;
   }
 
   svg {
     path {
-      fill: ${globalColors.white};
+      fill: var(--player-icon-fill);
     }
   }
-`;
+}

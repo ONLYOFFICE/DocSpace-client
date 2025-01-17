@@ -28,11 +28,8 @@ import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
+import styles from "./PlayerDesktopContextMenu.module.scss";
 
-import {
-  DownloadIconWrapper,
-  PlayerDesktopContextMenuWrapper,
-} from "./PlayerDesktopContextMenu.styled";
 import PlayerDesktopContextMenuProps from "./PlayerDesktopContextMenu.props";
 
 const ContextRight = "9";
@@ -72,9 +69,9 @@ const PlayerDesktopContextMenu = memo(
 
     if (hideContextMenu && canDownload) {
       return (
-        <DownloadIconWrapper onClick={onDownloadClick}>
+        <div className={styles.downloadIconWrapper} onClick={onDownloadClick}>
           <DownloadReactSvgUrl />
-        </DownloadIconWrapper>
+        </div>
       );
     }
     if (isPreviewFile) return;
@@ -82,10 +79,14 @@ const PlayerDesktopContextMenu = memo(
     if (!context) return;
 
     return (
-      <PlayerDesktopContextMenuWrapper ref={ref} onClick={toggleContext}>
+      <div
+        ref={ref}
+        className={styles.playerDesktopContextMenuWrapper}
+        onClick={toggleContext}
+      >
         <MediaContextMenu />
         {context}
-      </PlayerDesktopContextMenuWrapper>
+      </div>
     );
   },
 );

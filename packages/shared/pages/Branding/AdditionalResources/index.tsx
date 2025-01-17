@@ -97,6 +97,7 @@ export const AdditionalResources = ({
       </div>
       <div className="branding-checkbox">
         <Checkbox
+          data-testid="show-feedback-support"
           className="show-feedback-support checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowFeedbackAndSupport")}
@@ -105,6 +106,7 @@ export const AdditionalResources = ({
         />
 
         <Checkbox
+          data-testid="show-help-center"
           className="show-help-center checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowHelpCenter")}

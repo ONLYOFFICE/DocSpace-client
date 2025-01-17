@@ -429,7 +429,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         </FileUploadContainer>
       ) : (
         <ErrorBlock>
-          {isFileError && (
+          {isFileError ? (
             <Box>
               <ProgressBar
                 percent={100}
@@ -448,9 +448,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
             </Box>
-          )}
+          ) : null}
 
-          {isBackupEmpty && (
+          {isBackupEmpty ? (
             <Box>
               <ProgressBar
                 percent={100}
@@ -461,7 +461,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 {t("Settings:NoUsersInBackup")}
               </Text>
             </Box>
-          )}
+          ) : null}
 
           {isNetworkError ? (
             <SaveCancelButtons
@@ -490,7 +490,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         </ErrorBlock>
       )}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -499,9 +499,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
 
-      {warningQuotaDialogVisible && (
+      {warningQuotaDialogVisible ? (
         <WarningQuotaDialog
           t={t}
           visible={warningQuotaDialogVisible}
@@ -514,7 +514,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
           isTenantCustomQuotaSet={isTenantCustomQuotaSet}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

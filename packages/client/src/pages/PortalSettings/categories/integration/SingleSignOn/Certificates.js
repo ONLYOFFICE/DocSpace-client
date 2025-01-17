@@ -120,10 +120,10 @@ const Certificates = (props) => {
         />
       </Box>
 
-      {certificates.length > 0 && <CertificatesTable prefix={prefix} />}
+      {certificates.length > 0 ? <CertificatesTable prefix={prefix} /> : null}
 
       <Box alignItems="center" displayProp="flex" flexDirection="row">
-        {prefix === "idp" && (
+        {prefix === "idp" ? (
           <>
             <Button
               id="idp-add-certificate"
@@ -135,9 +135,9 @@ const Certificates = (props) => {
             />
             <AddIdpCertificateModal />
           </>
-        )}
+        ) : null}
 
-        {prefix === "sp" && (
+        {prefix === "sp" ? (
           <>
             <Button
               id="sp-add-certificate"
@@ -149,7 +149,7 @@ const Certificates = (props) => {
             />
             <AddSpCertificateModal />
           </>
-        )}
+        ) : null}
 
         <HideButton
           id={prefix === "idp" ? "idp-hide-button" : "sp-hide-button"}
@@ -163,11 +163,11 @@ const Certificates = (props) => {
         />
       </Box>
 
-      {additionalParameters && (
+      {additionalParameters ? (
         <>
           <CheckboxSet prefix={prefix} />
 
-          {provider === "IdentityProvider" && (
+          {provider === "IdentityProvider" ? (
             <SsoComboBox
               isDisabled={isDisabledIdpSigning}
               labelText={t("idpSigningAlgorithm")}
@@ -176,9 +176,9 @@ const Certificates = (props) => {
               tabIndex={14}
               value={idpVerifyAlgorithm}
             />
-          )}
+          ) : null}
 
-          {provider === "ServiceProvider" && (
+          {provider === "ServiceProvider" ? (
             <>
               <SsoComboBox
                 isDisabled={isDisabledSpSigning}
@@ -198,9 +198,9 @@ const Certificates = (props) => {
                 value={spEncryptAlgorithm}
               />
             </>
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

@@ -26,15 +26,16 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { SocialButton } from "./SocialButton";
 
 describe("<SocialButton />", () => {
   it("renders without error", () => {
-    render(<SocialButton iconName={ShareGoogleReactSvgUrl} />);
+    renderWithTheme(<SocialButton iconName={ShareGoogleReactSvgUrl} />);
 
     expect(screen.getByTestId("social-button"));
   });

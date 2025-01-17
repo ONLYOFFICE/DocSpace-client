@@ -97,7 +97,7 @@ const HotkeysPanel = ({
             keyTextStyles={keyTextStyles}
             AltKey={AltKey}
           />
-          {!isVisitor && (
+          {!isVisitor ? (
             <>
               <Heading className="hotkeys_sub-header">
                 {t("HotkeysCreatingObjects")}
@@ -117,7 +117,7 @@ const HotkeysPanel = ({
                 keyTextStyles={keyTextStyles}
               />
             </>
-          )}
+          ) : null}
           <Heading className="hotkeys_sub-header">
             {t("HotkeysSelection")}
           </Heading>

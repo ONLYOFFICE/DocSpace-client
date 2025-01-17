@@ -197,13 +197,19 @@ class ThirdPartyStorageModule extends React.PureComponent {
             className="backup_combo"
           />
 
-          {selectedId === GoogleId && <GoogleCloudStorage {...commonProps} />}
+          {selectedId === GoogleId ? (
+            <GoogleCloudStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === RackspaceId && <RackspaceStorage {...commonProps} />}
+          {selectedId === RackspaceId ? (
+            <RackspaceStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === SelectelId && <SelectelStorage {...commonProps} />}
+          {selectedId === SelectelId ? (
+            <SelectelStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === AmazonId && <AmazonStorage {...commonProps} />}
+          {selectedId === AmazonId ? <AmazonStorage {...commonProps} /> : null}
         </div>
       </StyledManualBackup>
     );

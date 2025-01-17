@@ -24,14 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import { StyledSeveralItemsLoader } from "../body.styled";
+import styles from "../Body.module.scss";
 
 const SeveralItemsLoader = () => {
   return (
-    <StyledSeveralItemsLoader>
+    <div
+      className={styles.severalItemsLoader}
+      data-testid="several-items-loader"
+    >
       <RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
-    </StyledSeveralItemsLoader>
+    </div>
   );
 };
 

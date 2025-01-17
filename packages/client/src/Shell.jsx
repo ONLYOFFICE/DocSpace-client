@@ -482,15 +482,19 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
       {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
-        {barTypeInFrame !== "none" && <MainBar />}
+        {!isMobileOnly && !isFrame ? (
+          <ReactSmartBanner t={t} ready={ready} />
+        ) : null}
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
         <div className="main-container">
           <Outlet />
         </div>

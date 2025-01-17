@@ -50,30 +50,12 @@ export type TOnSort = (key: string, sortDirection: string) => void;
 
 export type TOnSortButtonClick = (value: boolean) => void;
 
-export interface SortButtonProps {
-  id: string;
-  getSortData: TGetSortData;
-  getSelectedSortData: TGetSelectedSortData;
-
-  onChangeViewAs: TOnChangeViewAs;
-  view: string;
-  viewAs: TViewAs;
-  viewSettings: TViewSelectorOption[];
-
-  onSort: TOnSort;
-  viewSelectorVisible: boolean;
-
-  onSortButtonClick: TOnSortButtonClick;
-  title: string;
-}
-
 export type TChangeFilterValue = (
   group: FilterGroups,
-  key: string | number | string[],
+  key: string,
   isSelected: boolean,
   label?: string,
   isMultiSelect?: boolean,
-  withOptions?: boolean,
 ) => void;
 
 export type TShowSelector = (selectorType: string, group: FilterGroups) => void;
@@ -166,13 +148,16 @@ export type TItem = {
 export type TGetFilterData = () => Promise<TItem[]>;
 export type TOnFilter = (value: TItem[] | TGroupItem[]) => void;
 
-export interface FilterBlockProps {
-  selectedFilterValue: TItem[];
-  filterHeader: string;
+export type FilterBlockProps = {
   getFilterData: TGetFilterData;
-  hideFilterBlock: () => void;
   onFilter: TOnFilter;
+
+  selectedFilterValue: Map<FilterGroups, Map<string | number, TItem>>;
+
+  filterHeader: string;
   selectorLabel: string;
+
+  hideFilterBlock: () => void;
   userId: string;
   isRooms: boolean;
   isContactsPage: boolean;
@@ -180,75 +165,68 @@ export interface FilterBlockProps {
   isContactsGroupsPage: boolean;
   isContactsInsideGroupPage: boolean;
   isContactsGuestsPage: boolean;
-  disableThirdParty?: boolean;
-}
 
-export interface FilterButtonProps {
-  onFilter: TOnFilter;
-  getFilterData: TGetFilterData;
-  selectedFilterValue: TItem[];
-  filterHeader: string;
-  selectorLabel: string;
-  isRooms: boolean;
-  isContactsPage: boolean;
-  isContactsPeoplePage: boolean;
-  isContactsGroupsPage: boolean;
-  isContactsInsideGroupPage: boolean;
-  isContactsGuestsPage: boolean;
+  disableThirdParty?: boolean;
+};
+
+export type FilterButtonProps = Omit<FilterBlockProps, "hideFilterBlock"> & {
   id: string;
   title: string;
-  userId: string;
-  disableThirdParty?: boolean;
-}
+};
 
-export interface FilterProps {
-  onFilter: TOnFilter;
-  getFilterData: TGetFilterData;
-  getSelectedFilterData: () => Promise<TItem[]>;
-  onSort: TOnSort;
+export type SortButtonProps = {
+  id: string;
+  title: string;
+
   getSortData: TGetSortData;
   getSelectedSortData: TGetSelectedSortData;
+
+  onChangeViewAs: TOnChangeViewAs;
   view: string;
   viewAs: TViewAs;
+  viewSettings: TViewSelectorOption[];
+
+  onSort: TOnSort;
   viewSelectorVisible: boolean;
-  getViewSettingsData: () => TViewSelectorOption[];
-  onChangeViewAs: TOnChangeViewAs;
-  placeholder: string;
+
+  onSortButtonClick: TOnSortButtonClick;
+};
+
+export type SearchInputProps = {
   onSearch: (value: string) => void;
-  getSelectedInputValue: () => string;
-
-  filterHeader: string;
-  selectorLabel: string;
-  clearAll: () => void;
-
-  isRecentFolder: boolean;
-  removeSelectedItem: ({
-    key,
-    group,
-  }: {
-    key: string;
-    group?: FilterGroups;
-  }) => void;
-
-  isRooms: boolean;
-  isContactsPage: boolean;
-  isContactsPeoplePage: boolean;
-  isContactsGroupsPage: boolean;
-  isContactsInsideGroupPage: boolean;
-  isContactsGuestsPage: boolean;
-  isIndexing: boolean;
-  isIndexEditingMode: boolean;
-
-  filterTitle: string;
-  sortByTitle: string;
+  onClearFilter: () => void;
 
   clearSearch: boolean;
   setClearSearch: (value: boolean) => void;
 
-  onSortButtonClick: TOnSortButtonClick;
-  onClearFilter: () => void;
-  currentDeviceType: DeviceType;
-  userId: string;
+  getSelectedInputValue: () => string;
 
-  disableThirdParty?: boolean;
-}
+  placeholder: string;
+
+  isIndexEditingMode: boolean;
+};
+
+export type FilterProps = SearchInputProps &
+  Omit<SortButtonProps, "id" | "title" | "viewSettings"> &
+  Omit<FilterButtonProps, "id" | "title" | "selectedFilterValue"> & {
+    getSelectedFilterData: () => Promise<TItem[]>;
+    getViewSettingsData: () => TViewSelectorOption[];
+
+    clearAll: () => void;
+
+    isRecentFolder: boolean;
+    removeSelectedItem: ({
+      key,
+      group,
+    }: {
+      key: string | number;
+      group?: FilterGroups;
+    }) => void;
+
+    isIndexing: boolean;
+
+    filterTitle: string;
+    sortByTitle: string;
+
+    currentDeviceType: DeviceType;
+  };

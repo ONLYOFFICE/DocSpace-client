@@ -35,7 +35,7 @@ import ReportDialog from "../report-dialog";
 import ErrorContainer from "../error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
-import { Error520Wrapper } from "./Errors.styled";
+import styles from "./Errors.module.scss";
 import type { Error520Props } from "./Errors.types";
 
 const Error520 = ({
@@ -77,10 +77,6 @@ const Error520 = ({
     }
   }, []);
 
-  const showDialog = () => {
-    setReportDialogVisible(true);
-  };
-
   const closeDialog = () => {
     setReportDialogVisible(false);
   };
@@ -100,7 +96,7 @@ const Error520 = ({
     );
 
   return (
-    <Error520Wrapper>
+    <div className={styles.error520Wrapper}>
       <ErrorContainer
         className="container"
         isPrimaryButton={false}
@@ -126,7 +122,7 @@ const Error520 = ({
         firebaseHelper={firebaseHelper}
         currentDeviceType={currentDeviceType}
       />
-    </Error520Wrapper>
+    </div>
   );
 };
 
@@ -145,15 +141,3 @@ export const Error520SSR = ({
     </I18nextProvider>
   );
 };
-
-// const Error520Wrapper = inject(({ authStore, settingsStore, userStore }) => {
-//   const { currentColorScheme, firebaseHelper } = settingsStore;
-//   const { user } = userStore;
-
-//   return {
-//     currentColorScheme,
-//     FirebaseHelper: firebaseHelper,
-//     user,
-//     version: authStore.version,
-//   };
-// })(observer(Error520));

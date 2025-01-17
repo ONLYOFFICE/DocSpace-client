@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RectangleSkeleton } from "../../../rectangle";
-import { StyledHistoryBlockLoader, StyledHistoryLoader } from "../body.styled";
+import styles from "../Body.module.scss";
 
 const HistoryItemLoader = () => {
   return (
-    <StyledHistoryLoader>
-      <StyledHistoryBlockLoader>
+    <div className={styles.historyLoader}>
+      <div className={styles.historyBlockLoader}>
         <div className="content">
           <RectangleSkeleton
             className="avatar"
@@ -49,8 +49,8 @@ const HistoryItemLoader = () => {
             borderRadius="3px"
           />
         </div>
-      </StyledHistoryBlockLoader>
-    </StyledHistoryLoader>
+      </div>
+    </div>
   );
 };
 

@@ -364,33 +364,33 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {(!isErrorRoomNotAvailable || isContactsPage || isSettingsPage) && (
+        {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
-        )}
+        ) : null}
 
         <Section.SectionSubmenu>
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage && (
+        {isRecycleBinFolder && !isEmptyPage ? (
           <Section.SectionWarning>
             <SectionWarningContent />
           </Section.SectionWarning>
-        )}
+        ) : null}
 
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           (!isContactsEmptyView && isContactsPage)) &&
-          !isSettingsPage && (
-            <Section.SectionFilter>
-              {isFrame ? (
-                showFilter && <SectionFilterContent />
-              ) : (
-                <SectionFilterContent />
-              )}
-            </Section.SectionFilter>
-          )}
+        !isSettingsPage ? (
+          <Section.SectionFilter>
+            {isFrame ? (
+              showFilter && <SectionFilterContent />
+            ) : (
+              <SectionFilterContent />
+            )}
+          </Section.SectionFilter>
+        ) : null}
 
         <Section.SectionBody isAccounts={isContactsPage}>
           <Outlet />
@@ -402,12 +402,6 @@ const PureHome = (props) => {
         <Section.InfoPanelBody>
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
-
-        {/* {withPaging && !isSettingsPage && (
-          <Section.SectionPaging>
-            <SectionPagingContent tReady={tReady} />
-          </Section.SectionPaging>
-        )} */}
       </SectionWrapper>
     </>
   );

@@ -252,14 +252,14 @@ const ImageWatermark = ({
       scale={selectedScale.key / 100}
       mainHeight={50}
     >
-      {!selectedImageUrl && (
+      {!selectedImageUrl ? (
         <FileInput
           accept={["image/png", "image/jpeg"]}
           onInput={onInput}
           scale
           isMultiple={false}
         />
-      )}
+      ) : null}
 
       {/* <FilesSelectorInput
         onSelectFile={onSelectFile}
@@ -268,7 +268,7 @@ const ImageWatermark = ({
         scale
       /> */}
 
-      {selectedImageUrl && (
+      {selectedImageUrl ? (
         <div className="image-wrapper">
           <div>
             <div className="image-description">
@@ -329,7 +329,7 @@ const ImageWatermark = ({
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </StyledWatermark>
   );
 };

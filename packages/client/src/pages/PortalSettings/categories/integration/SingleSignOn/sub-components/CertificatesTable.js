@@ -125,11 +125,13 @@ const CertificatesTable = (props) => {
   return (
     <StyledCertificatesTable>
       <div className="body">
-        {prefix === "idp" &&
-          idpCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "idp"
+          ? idpCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
 
-        {prefix === "sp" &&
-          spCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "sp"
+          ? spCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
       </div>
     </StyledCertificatesTable>
   );

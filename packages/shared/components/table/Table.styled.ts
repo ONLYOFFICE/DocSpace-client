@@ -236,6 +236,7 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme).attrs(
   injectDefaultTheme,
 )<{
   isInfoPanelVisible?: boolean;
+  className?: string;
 }>`
   ${(props) =>
     props.isInfoPanelVisible &&

@@ -72,7 +72,7 @@ const DownloadRow = (props) => {
       </div>
 
       <div className="download-dialog-actions">
-        {file.checked && !isOther && (
+        {file.checked && !isOther ? (
           <LinkWithDropdown
             className="download-dialog-link"
             dropDownClassName="download-dialog-dropDown"
@@ -92,8 +92,8 @@ const DownloadRow = (props) => {
           >
             {file.format || t("OriginalFormat")}
           </LinkWithDropdown>
-        )}
-        {isOther && file.fileExst && (
+        ) : null}
+        {isOther && file.fileExst ? (
           <Text
             className="download-dialog-other-text"
             truncate
@@ -105,7 +105,7 @@ const DownloadRow = (props) => {
           >
             {t("OriginalFormat")}
           </Text>
-        )}
+        ) : null}
       </div>
     </div>
   );

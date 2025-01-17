@@ -26,6 +26,8 @@
 
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable func-names */
+
 /* global jest */
 
 const react_i18next: {
@@ -47,9 +49,10 @@ const react_i18next: {
 } = jest.genMockFromModule("react-i18next");
 
 const translate =
-  () =>
-  (Component: React.JSXElementConstructor<{ t: () => string }>) =>
-  (props: {}) => <Component t={() => ""} {...props} />;
+  () => (Component: React.JSXElementConstructor<{ t: () => string }>) =>
+    function (props: {}) {
+      return <Component t={() => ""} {...props} />;
+    };
 
 react_i18next.translate = translate;
 react_i18next.useTranslation = () => ({

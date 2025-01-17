@@ -1,0 +1,119 @@
+@import "../../styles/variables/index.scss";
+@import "../../styles/_mixins.scss";
+
+:root {
+  --badge-border: 1px solid transparent;
+  --badge-padding: 1px;
+  --badge-line-height: 0.8;
+  --badge-overflow: hidden;
+  --badge-color: #{$white};
+  --badge-background-color: var(--accent-main, #{$light-status-warning});
+  --badge-disable-background-color: var(--accent-main, #{$gray});
+
+  &[data-theme="dark"] {
+    --badge-background-color: var(--accent-main, #{$dark-status-warning});
+    --badge-disable-background-color: var(--accent-main, #{$gray-dark});
+  }
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--badge-border);
+  width: fit-content;
+  padding: var(--badge-padding);
+  overflow: var(--badge-overflow);
+  flex-shrink: 0;
+
+  &[data-hidden="true"] {
+    display: none;
+  }
+
+  &:hover:not([data-no-hover="true"]) {
+    cursor: pointer;
+    border-color: var(--badge-background-color);
+  }
+
+  &[data-is-hovered="true"]:not([data-no-hover="true"]) {
+    cursor: pointer;
+    border-color: var(--badge-background-color);
+  }
+
+  &[data-type="high"] {
+    border: none;
+    border-radius: 6px;
+  }
+
+  @include tablet-and-below {
+    &[data-version-badge="true"] {
+      width: auto;
+    }
+  }
+}
+
+.inner {
+  background-color: var(--badge-background-color);
+  text-align: center;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+
+  &[data-compact="true"] {
+    line-height: var(--badge-line-height);
+  }
+
+  &[data-type="high"] {
+    cursor: default;
+    padding: 3px 10px !important;
+    border-radius: 6px !important;
+
+    .text {
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+
+.text {
+  white-space: nowrap;
+  color: var(--badge-color) !important;
+}
+
+.themed {
+  &:not([data-version-badge="true"]) {
+    &[data-paid="true"] {
+      .text {
+        color: var(--badge-color) !important;
+      }
+    }
+
+    .inner {
+      background-color: var(--badge-background-color);
+
+      &:hover:not([data-no-hover="true"]) {
+        background-color: var(--badge-background-color);
+      }
+    }
+
+    &:hover:not([data-no-hover="true"]) {
+      border-color: var(--badge-background-color);
+    }
+
+    &[data-muted="true"] {
+      .inner {
+        background-color: var(--badge-disable-background-color);
+
+        &:hover:not([data-no-hover="true"]) {
+          background-color: var(--badge-disable-background-color);
+        }
+      }
+
+      &:hover:not([data-no-hover="true"]) {
+        border-color: var(--badge-disable-background-color);
+      }
+    }
+  }
+}

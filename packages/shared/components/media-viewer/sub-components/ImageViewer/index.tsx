@@ -174,8 +174,8 @@ export const ImageViewer = ({
   const resize = useCallback(() => {
     if (!imgRef.current || isLoading) return;
 
-    const naturalWidth = imgRef.current.naturalWidth;
-    const naturalHeight = imgRef.current.naturalHeight;
+    const { naturalWidth } = imgRef.current;
+    const { naturalHeight } = imgRef.current;
 
     const imagePositionAndSize = getImagePositionAndSize(
       naturalWidth,
@@ -202,8 +202,8 @@ export const ImageViewer = ({
         setShowOriginSrc(true);
       }
 
-      const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
-      const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
+      const { naturalWidth } = event.target as HTMLImageElement;
+      const { naturalHeight } = event.target as HTMLImageElement;
 
       const positionAndSize = getImagePositionAndSize(
         naturalWidth,
@@ -235,8 +235,8 @@ export const ImageViewer = ({
   const restartScaleAndSize = useCallback(() => {
     if (!imgRef.current || style.scale.isAnimating) return;
 
-    const naturalWidth = imgRef.current.naturalWidth;
-    const naturalHeight = imgRef.current.naturalHeight;
+    const { naturalWidth } = imgRef.current;
+    const { naturalHeight } = imgRef.current;
 
     const imagePositionAndSize = getImagePositionAndSize(
       naturalWidth,
@@ -598,6 +598,8 @@ export const ImageViewer = ({
         )
           return memo;
 
+        let memoLet = memo;
+
         if (!pinching) cancel();
 
         if (first) {
@@ -605,11 +607,11 @@ export const ImageViewer = ({
             imgRef.current.getBoundingClientRect();
           const tx = ox - (x + width / 2);
           const ty = oy - (y + height / 2);
-          memo = [style.x.get(), style.y.get(), tx, ty];
+          memoLet = [style.x.get(), style.y.get(), tx, ty];
         }
 
-        const x = memo[0] - (mScale - 1) * memo[2];
-        const y = memo[1] - (mScale - 1) * memo[3];
+        const x = memoLet[0] - (mScale - 1) * memoLet[2];
+        const y = memoLet[1] - (mScale - 1) * memoLet[3];
 
         const ratio = dScale / LScale;
 
@@ -639,7 +641,7 @@ export const ImageViewer = ({
           },
           config: config.default,
         });
-        return memo;
+        return memoLet;
       },
       onPinchEnd: ({
         movement: [, mRotate],
@@ -739,19 +741,21 @@ export const ImageViewer = ({
         )
           return memo;
 
+        let memoLet = memo;
+
         resetToolbarVisibleTimer();
         const dScale = (-1 * yWheel) / RatioWheel;
         const mScale = (-1 * mYWheel) / RatioWheel;
 
-        if (first || !memo) {
+        if (first || !memoLet) {
           const { width, height, x, y } =
             imgRef.current.getBoundingClientRect();
           const tx = (event.pageX - (x + width / 2)) / style.scale.get();
           const ty = (event.pageY - (y + height / 2)) / style.scale.get();
-          memo = [style.x.get(), style.y.get(), tx, ty];
+          memoLet = [style.x.get(), style.y.get(), tx, ty];
         }
-        const dx = memo[0] - mScale * memo[2];
-        const dy = memo[1] - mScale * memo[3];
+        const dx = memoLet[0] - mScale * memoLet[2];
+        const dy = memoLet[1] - mScale * memoLet[3];
 
         const ratio = dScale / style.scale.get();
 
@@ -776,7 +780,7 @@ export const ImageViewer = ({
           },
         });
 
-        return memo;
+        return memoLet;
       },
     },
     {
@@ -963,7 +967,7 @@ export const ImageViewer = ({
 
   return (
     <>
-      {isMobile && !backgroundBlack && mobileDetails}
+      {isMobile && !backgroundBlack ? mobileDetails : null}
       <ImageViewerContainer
         ref={containerRef}
         $backgroundBlack={backgroundBlack}
@@ -999,7 +1003,7 @@ export const ImageViewer = ({
         </ImageWrapper>
       </ImageViewerContainer>
 
-      {isDesktop && !isMobile && panelVisible && !isError && (
+      {isDesktop && !isMobile && panelVisible && !isError ? (
         <ViewerToolbar
           ref={toolbarRef}
           toolbar={toolbar}
@@ -1008,7 +1012,7 @@ export const ImageViewer = ({
           setIsOpenContextMenu={setIsOpenContextMenu}
           toolbarEvent={toolbarEvent}
         />
-      )}
+      ) : null}
     </>
   );
 };

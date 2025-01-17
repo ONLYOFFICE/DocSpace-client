@@ -105,7 +105,7 @@ export const Select = ({
 
   return (
     <SelectWrapper>
-      {prefix && <span>{prefix}</span>}
+      {prefix ? <span>{prefix}</span> : null}
       <ComboBox
         scaled
         scaledOptions

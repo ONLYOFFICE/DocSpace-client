@@ -24,8 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { RectangleSkeleton } from "../rectangle";
-import { StyledTrialComponent } from "./Payments.styled";
+import styles from "./Payments.module.scss";
 import { PaymentsLoaderProps } from "./Payments.types";
 
 const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
@@ -41,7 +42,7 @@ const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
   } = rest;
 
   return (
-    <StyledTrialComponent>
+    <div className={styles.trialComponent} data-testid="trial-loader">
       <RectangleSkeleton
         className="payments-loader_1"
         title={title}
@@ -172,7 +173,7 @@ const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
         speed={speed}
         animate={animate}
       />
-    </StyledTrialComponent>
+    </div>
   );
 };
 export default TrialLoader;

@@ -61,7 +61,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
     >
       <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {ssoUrl && (
+        {ssoUrl ? (
           <ProviderRow key="ProviderItemSSO">
             <ReactSVG src={SsoReactSvgUrl} />
             <Text
@@ -79,7 +79,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               onClick={() => (window.location.href = ssoUrl)}
             />
           </ProviderRow>
-        )}
+        ) : null}
         {providers?.map((item) => {
           if (!PROVIDERS_DATA[item.provider as keyof ProvidersDataType]) return;
 

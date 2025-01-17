@@ -75,18 +75,18 @@ const Banner = ({
   return (
     <StyledWrapper>
       {campaignBackground &&
-        campaignTranslate &&
-        campaignConfig &&
-        currentCampaign && (
-          <CampaignsBanner
-            campaignBackground={campaignBackground}
-            campaignIcon={campaignIcon}
-            campaignTranslate={campaignTranslate}
-            campaignConfig={campaignConfig}
-            onAction={onAction}
-            onClose={onClose}
-          />
-        )}
+      campaignTranslate &&
+      campaignConfig &&
+      currentCampaign ? (
+        <CampaignsBanner
+          campaignBackground={campaignBackground}
+          campaignIcon={campaignIcon}
+          campaignTranslate={campaignTranslate}
+          campaignConfig={campaignConfig}
+          onAction={onAction}
+          onClose={onClose}
+        />
+      ) : null}
     </StyledWrapper>
   );
 };

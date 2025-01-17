@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
@@ -33,12 +34,12 @@ import DeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.r
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { DeviceType } from "../../../enums";
+import { openingNewTab } from "../../../utils/openingNewTab";
 
 import { Text } from "../../text";
 
+import styles from "../Article.module.scss";
 import { ArticleDevToolsBarProps } from "../Article.types";
-import { StyledWrapper } from "../Article.styled";
-import { openingNewTab } from "../../../utils/openingNewTab";
 
 const ArticleDevToolsBar = ({
   showText,
@@ -69,13 +70,20 @@ const ArticleDevToolsBar = ({
   if (!showText) return null;
 
   return (
-    <StyledWrapper onClick={onClick} onMouseDown={onMouseDown}>
+    <div
+      className={classNames(styles.wrapper)}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      data-testid="dev-tools-bar"
+      data-show-text={showText ? "true" : "false"}
+      data-hide-profile-block={articleOpen ? "true" : "false"}
+    >
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
         {t("Common:DeveloperTools")}
       </Text>
       <ReactSVG src={ArrowReactSvgUrl} className="arrow" />
-    </StyledWrapper>
+    </div>
   );
 };
 

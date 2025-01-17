@@ -1,0 +1,37 @@
+@use "../../styles/variables" as *;
+
+$font-size: 13px;
+
+:root {
+  // Base colors
+  --background-color: #{$white};
+  --text-color: #{$black};
+  --interface-direction: ltr;
+
+  // Theme colors
+  --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
+  --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
+  --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
+  --accent-button-text: var(--color-scheme-text-buttons, #{$white});
+
+  &[data-theme="dark"] {
+    --background-color: #{$black};
+    --text-color: #{$white};
+  }
+}
+
+html,
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 13px;
+}
+
+* {
+  font-family: "Open Sans", sans-serif, Arial;
+}
+
+body {
+  direction: var(--interface-direction);
+}

@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  CustomScrollbarsVirtualList,
-  ScrollbarType,
-} from "../../../../../scrollbar";
+import React from "react";
+import { CustomScrollbarsVirtualList } from "../../../../../scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
 import { Item, List, Text } from "./Bookmarks.styled";
 
 export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
   return (
-    <CustomScrollbarsVirtualList stype={ScrollbarType.mediumBlack}>
+    <CustomScrollbarsVirtualList>
       <List>
         {bookmarks.map((item, index) => {
           return (

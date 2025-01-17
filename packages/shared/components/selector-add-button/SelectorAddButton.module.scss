@@ -1,0 +1,126 @@
+@import "../../styles/variables/_colors.scss";
+
+:root {
+  --selector-add-button-background: #{$gray-light-mid};
+  --selector-add-button-hover-background: #{$light-gray-selected};
+  --selector-add-button-active-background: #{$gray-strong};
+
+  --selector-add-button-icon-color: #{$light-gray-dark};
+  --selector-add-button-icon-color-hover: #{$light-gray-dark};
+  --selector-add-button-icon-color-active: #{$light-gray-dark};
+
+  --selector-add-button-border: none;
+  --selector-add-button-box-sizing: border-box;
+  --selector-add-button-border-radius: 3px;
+  --selector-add-button-height: 32px;
+  --selector-add-button-width: 32px;
+  --selector-add-button-padding: 10px;
+  --selector-add-button-color: #{$light-gray-dark};
+  --selector-add-button-hover-color: #{$black};
+
+  &[data-theme="dark"] {
+    --selector-add-button-background: #{$gray-dark-mid};
+    --selector-add-button-hover-background: #{$dark-gray-light};
+    --selector-add-button-active-background: #{$gray-dark-mid};
+
+    --selector-add-button-icon-color: #{$gray-dark};
+    --selector-add-button-icon-color-hover: #{$white};
+    --selector-add-button-icon-color-active: #{$dark-gray-dark};
+
+    --selector-add-button-color: #{$gray-dark};
+    --selector-add-button-hover-color: #{$white};
+  }
+}
+
+.container {
+  display: inline-block;
+  background: var(--selector-add-button-background);
+  border: var(--selector-add-button-border);
+  box-sizing: var(--selector-add-button-box-sizing);
+  border-radius: var(--selector-add-button-border-radius);
+  height: var(--selector-add-button-height);
+  width: var(--selector-add-button-width);
+  padding: var(--selector-add-button-padding);
+  cursor: pointer;
+
+  svg path {
+    fill: var(--selector-add-button-icon-color);
+  }
+
+  &:hover {
+    background: var(--selector-add-button-hover-background);
+
+    svg path {
+      fill: var(--selector-add-button-icon-color-hover);
+    }
+  }
+
+  &:active {
+    background: var(--selector-add-button-active-background);
+
+    svg path {
+      fill: var(--selector-add-button-icon-color-active);
+    }
+  }
+
+  -webkit-tap-highlight-color: #{$tap-highlight};
+
+  &.isDisabled {
+    cursor: default;
+
+    svg path {
+      fill: var(--selector-add-button-icon-color);
+    }
+
+    &:hover {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+
+    &:active {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+  }
+
+  &.isAction {
+    background-color: var(--main-accent-button);
+
+    & svg path {
+      fill: var(--accent-main);
+    }
+
+    &:hover {
+      background-color: var(--main-accent-button);
+
+      &:not(.disabled) {
+        svg {
+          path {
+            fill: var(--accent-main);
+            opacity: 0.85;
+          }
+        }
+      }
+    }
+
+    &:active {
+      background-color: var(--main-accent-button);
+
+      & svg path {
+        fill: var(--accent-main);
+        opacity: 1;
+        filter: brightness(90%);
+      }
+    }
+
+    div {
+      opacity: 1;
+    }
+  }
+}

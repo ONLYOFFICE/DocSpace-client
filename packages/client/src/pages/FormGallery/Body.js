@@ -136,9 +136,9 @@ const SectionBodyContent = ({
     />
   ) : (
     <TileContainer className="tile-container">
-      {submitToGalleryTileIsVisible && canSubmitToFormGallery() && (
+      {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
         <SubmitToGalleryTile />
-      )}
+      ) : null}
       {oformFiles.map((item) => (
         <FileTile key={item.id} item={item} />
       ))}

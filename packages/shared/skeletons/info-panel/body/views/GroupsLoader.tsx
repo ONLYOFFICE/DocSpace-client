@@ -24,14 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import { StyledGroupMemberLoader, StyledGroupsLoader } from "../body.styled";
+import styles from "../Body.module.scss";
 
 const GroupsLoader = () => {
   return (
-    <StyledGroupsLoader>
+    <div className={styles.groupsLoader} data-testid="groups-loader">
       {[...Array(5).keys()].map((i) => (
-        <StyledGroupMemberLoader key={i}>
+        <div key={i} className={styles.groupMemberLoader}>
           <RectangleSkeleton
             className="avatar"
             width="32px"
@@ -47,9 +49,9 @@ const GroupsLoader = () => {
               borderRadius="3px"
             />
           </div>
-        </StyledGroupMemberLoader>
+        </div>
       ))}
-    </StyledGroupsLoader>
+    </div>
   );
 };
 

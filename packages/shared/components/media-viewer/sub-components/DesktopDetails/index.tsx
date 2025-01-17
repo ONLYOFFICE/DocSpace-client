@@ -49,7 +49,7 @@ export const DesktopDetails = ({
         {title}
       </Text>
 
-      {showCloseButton && (
+      {showCloseButton ? (
         <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
           <IconButton
             color={globalColors.white}
@@ -58,7 +58,7 @@ export const DesktopDetails = ({
             isClickable
           />
         </ControlBtn>
-      )}
+      ) : null}
     </DesktopDetailsContainer>
   );
 };

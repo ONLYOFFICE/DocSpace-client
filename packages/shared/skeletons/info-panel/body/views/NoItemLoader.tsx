@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import { StyledNoItemLoader } from "../body.styled";
+import styles from "../Body.module.scss";
 
 const NoItemLoader = () => {
   return (
-    <StyledNoItemLoader>
+    <div className={styles.noItemLoader} data-testid="no-item-loader">
       <RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
       <RectangleSkeleton width="150px" height="16px" borderRadius="3px" />
-    </StyledNoItemLoader>
+    </div>
   );
 };
 

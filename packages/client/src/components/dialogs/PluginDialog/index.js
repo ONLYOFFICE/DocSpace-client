@@ -194,7 +194,7 @@ const PluginDialog = ({
           setModalRequestRunning={setModalRequestRunning}
         />
       </ModalDialog.Body>
-      {dialogFooterProps && (
+      {dialogFooterProps ? (
         <ModalDialog.Footer>
           <WrappedComponent
             pluginName={pluginName}
@@ -205,7 +205,7 @@ const PluginDialog = ({
             setModalRequestRunning={setModalRequestRunning}
           />
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 

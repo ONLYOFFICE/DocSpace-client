@@ -135,20 +135,22 @@ const CategoryFilterMobile = ({
               style={{ paddingLeft: "0" }}
             />
 
-            {!openedMenuItem && [
-              <Styled.CategoryFilterItemMobile
-                key="view-all"
-                className="dropdown-item"
-                label={t("FormGallery:ViewAllTemplates")}
-                onClick={onViewAllTemplates}
-                style={{ paddingLeft: "0" }}
-              />,
-              <DropDownItem
-                isSeparator
-                key="separator"
-                className="huge-separator"
-              />,
-            ]}
+            {!openedMenuItem
+              ? [
+                  <Styled.CategoryFilterItemMobile
+                    key="view-all"
+                    className="dropdown-item"
+                    label={t("FormGallery:ViewAllTemplates")}
+                    onClick={onViewAllTemplates}
+                    style={{ paddingLeft: "0" }}
+                  />,
+                  <DropDownItem
+                    isSeparator
+                    key="separator"
+                    className="huge-separator"
+                  />,
+                ]
+              : null}
 
             {!openedMenuItem
               ? menuItems.map((item) => (

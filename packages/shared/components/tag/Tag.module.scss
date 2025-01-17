@@ -1,0 +1,117 @@
+@import "./Tag.variables.scss";
+
+.tag {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--tag-padding);
+  margin-inline-end: var(--tag-margin-end);
+  background: var(--tag-background);
+  border-radius: var(--tag-border-radius);
+
+  &:last-child {
+    margin-inline-end: 0;
+  }
+
+  &.isDisabled {
+    background: var(--tag-disabled-background);
+  }
+
+  &.isNewTag {
+    background: var(--tag-new-background);
+  }
+
+  &.isDeleted {
+    background: var(--tag-deleted-background);
+
+    .tagText {
+      text-decoration: line-through;
+      color: var(--tag-deleted-color);
+    }
+  }
+
+  &.isLast {
+    margin-inline-end: 4px;
+  }
+
+  &.isClickable:not(.isDisabled):not(.isDeleted) {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--tag-hover-background);
+
+      &.isNewTag {
+        background: var(--tag-new-hover-background);
+      }
+    }
+  }
+}
+
+.tagText {
+  color: var(--tag-color);
+  line-height: var(--tag-text-line-height);
+  pointer-events: none;
+  font-size: var(--tag-font-size);
+
+  &.isDefault {
+    color: var(--tag-default-color);
+  }
+}
+
+.tagIcon {
+  margin-inline-start: var(--tag-icon-margin-start);
+  cursor: pointer;
+}
+
+.thirdPartyTag {
+  padding: var(--tag-third-party-padding);
+  width: var(--tag-third-party-size);
+  height: var(--tag-third-party-size);
+
+  [data-theme="Dark"] & {
+    svg {
+      path[fill] {
+        fill: $white;
+      }
+
+      path[stroke] {
+        stroke: $white;
+      }
+    }
+  }
+}
+
+.dropdownIcon {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+
+  [dir="rtl"] & {
+    transform: scaleX(-1);
+  }
+
+  svg {
+    path:first-child {
+      stroke: var(--tag-color);
+    }
+    path:last-child {
+      fill: var(--tag-color);
+    }
+  }
+}
+
+.dropdownText {
+  line-height: var(--tag-dropdown-text-line-height);
+  display: block;
+  pointer-events: none;
+
+  &:not(.removeTagIcon) {
+    [dir="rtl"] & {
+      margin-right: var(--tag-dropdown-text-margin) !important;
+    }
+    [dir="ltr"] & {
+      margin-left: var(--tag-dropdown-text-margin) !important;
+    }
+  }
+}

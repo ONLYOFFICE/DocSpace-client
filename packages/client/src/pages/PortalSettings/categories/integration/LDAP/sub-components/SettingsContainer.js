@@ -81,13 +81,13 @@ const SettingsContainer = ({
 
   const renderBody = () => (
     <>
-      {!isMobileView && (
+      {!isMobileView ? (
         <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
-      )}
+      ) : null}
 
-      {isMobileView && <ToggleLDAP />}
+      {isMobileView ? <ToggleLDAP /> : null}
 
-      {(isMobileView || isSettingsShown) && (
+      {isMobileView || isSettingsShown ? (
         <>
           <Box>
             <Text className="ldap-disclaimer">{t("LdapDisclaimer")}</Text>
@@ -101,13 +101,13 @@ const SettingsContainer = ({
           <AdvancedSettings />
           <ButtonsContainer />
 
-          {!isMobileView && (
+          {!isMobileView ? (
             <ProgressContainer operation={LDAPOperation.SaveAndSync} />
-          )}
+          ) : null}
 
-          {isCertificateDialogVisible && <CertificateDialog />}
+          {isCertificateDialogVisible ? <CertificateDialog /> : null}
         </>
-      )}
+      ) : null}
     </>
   );
 

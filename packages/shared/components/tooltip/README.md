@@ -7,37 +7,33 @@ Custom tooltip
 ### Usage with IconButton
 
 ```js
-import {Tooltip, IconButton, Text} from "@docspace/shared/components";
-import QuestionReactSvgUrl from 'PUBLIC_DIR/images/question.react.svg?url";
+import { Tooltip, IconButton, Text } from "@docspace/shared/components";
+import QuestionReactSvgUrl from "PUBLIC_DIR/images/question.react.svg?url";
 ```
 
 ```jsx
-  <div
-    style={BodyStyle}
-    data-for="tooltipContent"
-    data-tip="You tooltip content"
-    data-event="click focus"
-    data-offset="{'top': 100, 'right': 100}"
-    data-place="top"
-  >
-    <IconButton isClickable={true} size={20} iconName={QuestionReactSvgUrl} />
-  </div>
-  <Tooltip
-    id="tooltipContent"
-    getContent={dataTip => <Text fontSize='13px'>{dataTip}</Text>}
-    effect="float"
-    place="top"
-    maxWidth={320}
-  />
+<div
+  style={BodyStyle}
+  data-for="tooltipContent"
+  data-tip="Your tooltip content"
+  data-event="click focus"
+  data-place="top"
+>
+  <IconButton isClickable={true} size={20} iconName={QuestionReactSvgUrl} />
+</div>
+<Tooltip
+  id="tooltipContent"
+  getContent={dataTip => <Text fontSize="13px">{dataTip}</Text>}
+  place="top"
+  maxWidth="320px"
+/>
 ```
 
 ### Usage with array
 
 ```js
 import { Tooltip, Link, Text } from "@docspace/shared/components";
-```
 
-```js
 const arrayUsers = [
   { key: "user_1", name: "Bob", email: "Bob@gmail.com", position: "developer" },
   {
@@ -52,34 +48,19 @@ const arrayUsers = [
     email: "Kevin@gmail.com",
     position: "developer",
   },
-  {
-    key: "user_4",
-    name: "Alex",
-    email: "Alex@gmail.com",
-    position: "developer",
-  },
-  {
-    key: "user_5",
-    name: "Tomas",
-    email: "Tomas@gmail.com",
-    position: "developer",
-  },
 ];
 ```
 
 ```jsx
-  <h5 style={{ marginLeft: -5 }}>Hover group</h5>
-  <Link data-for="group" data-tip={0}>Bob</Link><br />
-  <Link data-for="group" data-tip={1}>John</Link><br />
-  <Link data-for="group" data-tip={2}>Kevin</Link><br />
-  <Link data-for="group" data-tip={3}>Alex</Link><br />
-  <Link data-for="group" data-tip={4}>Tomas</Link>
-```
+<div>
+  <h5>Hover group</h5>
+  <Link data-for="group" data-tip={0}>Bob</Link>
+  <Link data-for="group" data-tip={1}>John</Link>
+  <Link data-for="group" data-tip={2}>Kevin</Link>
+</div>
 
-```jsx
 <Tooltip
   id="group"
-  offsetRight={90}
   getContent={(dataTip) =>
     dataTip ? (
       <div>
@@ -96,28 +77,33 @@ const arrayUsers = [
 />
 ```
 
-### YouComponent Properties
+### Properties
 
-| Props         |   Type   | Required |              Values              | Default | Description                       |
-| ------------- | :------: | :------: | :------------------------------: | :-----: | --------------------------------- |
-| `data-event`  | `string` |    -     |          `click, focus`          |    -    | Custom event to trigger tooltip   |
-| `data-for`    | `string` |    ✅    |                -                 |    -    | Corresponds to the id of Tooltip  |
-| `data-offset` | `string` |    -     | `top`, `left`, `right`, `bottom` |    -    | Offset of current tooltip         |
-| `data-place`  | `string` |    -     | `top`, `right`, `bottom`, `left` |    -    | Tooltip placement                 |
-| `data-tip`    | `string` |    -     |                -                 |    -    | Required if you need to component |
+| Props                       |      Type      | Required |              Values              | Default | Description                                                  |
+| --------------------------- | :------------: | :------: | :------------------------------: | :-----: | ------------------------------------------------------------ |
+| `id`                        |    `string`    |    ✅    |                -                 |    -    | Used as HTML id property                                     |
+| `place`                     |    `string`    |    -     | `top`, `right`, `bottom`, `left` |  `top`  | Global tooltip placement                                     |
+| `getContent`                |     `func`     |    -     |                -                 |    -    | Generate the tip content dynamically                         |
+| `afterHide`                 |     `func`     |    -     |                -                 |    -    | Called after tooltip is hidden                               |
+| `afterShow`                 |     `func`     |    -     |                -                 |    -    | Called after tooltip is shown                                |
+| `className`                 |    `string`    |    -     |                -                 |    -    | Additional CSS class                                         |
+| `style`                     | `obj`, `array` |    -     |                -                 |    -    | Custom CSS styles                                            |
+| `color`                     |    `string`    |    -     |                -                 |    -    | Background color of the tooltip                              |
+| `maxWidth`                  |    `string`    |    -     |                -                 | `320px` | Maximum width of the tooltip                                 |
+| `isOpen`                    |     `bool`     |    -     |                -                 | `false` | Control tooltip visibility                                   |
+| `clickable`                 |     `bool`     |    -     |                -                 | `false` | Allow interaction with tooltip content                       |
+| `openOnClick`               |     `bool`     |    -     |                -                 | `false` | Open on click instead of hover                               |
+| `float`                     |     `bool`     |    -     |                -                 | `false` | Follow mouse position                                        |
+| `noArrow`                   |     `bool`     |    -     |                -                 | `true`  | Hide tooltip arrow                                           |
+| `opacity`                   |    `number`    |    -     |                -                 |   `1`   | Tooltip opacity                                              |
+| `imperativeModeOnly`        |     `bool`     |    -     |                -                 | `false` | Disable default tooltip behavior                             |
+| `fallbackAxisSideDirection` |    `string`    |    -     |      `none`, `start`, `end`      | `none`  | Fallback direction when preferred placement is not available |
 
-### ReactTooltip Properties
+### Anchor Element Properties
 
-| Props          |      Type      | Required |              Values              | Default | Description                          |
-| -------------- | :------------: | :------: | :------------------------------: | :-----: | ------------------------------------ |
-| `className`    |    `string`    |    -     |                -                 |    -    | Accepts class                        |
-| `effect`       |    `string`    |    -     |         `float`, `solid`         | `float` | Behavior of tooltip                  |
-| `getContent`   |     `func`     |    -     |                                  |    -    | Generate the tip content dynamically |
-| `id`           |    `string`    |    ✅    |                -                 |    -    | Used as HTML id property             |
-| `maxWidth`     |    `number`    |    -     |                -                 |  `340`  | Set max width of tooltip             |
-| `offsetBottom` |    `number`    |    -     |                -                 |    -    | Offset bottom all tooltips on page   |
-| `offsetLeft`   |    `number`    |    -     |                -                 |    -    | Offset left all tooltips on page     |
-| `offsetRight`  |    `number`    |    -     |                -                 |    -    | Offset right all tooltips on page    |
-| `offsetTop`    |    `number`    |    -     |                -                 |    -    | Offset top all tooltips on page      |
-| `place`        |    `string`    |    -     | `top`, `right`, `bottom`, `left` |  `top`  | Global tooltip placement             |
-| `style`        | `obj`, `array` |    -     |                -                 |    -    | Accepts css style                    |
+| Props        |   Type   | Required |              Values              | Default | Description                     |
+| ------------ | :------: | :------: | :------------------------------: | :-----: | ------------------------------- |
+| `data-for`   | `string` |    ✅    |                -                 |    -    | Corresponds to tooltip's id     |
+| `data-tip`   | `string` |    ✅    |                -                 |    -    | Tooltip content                 |
+| `data-event` | `string` |    -     |          `click, focus`          |    -    | Custom event to trigger tooltip |
+| `data-place` | `string` |    -     | `top`, `right`, `bottom`, `left` |  `top`  | Tooltip placement               |

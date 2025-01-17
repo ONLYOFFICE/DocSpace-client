@@ -27,6 +27,7 @@
 import React from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import WindowsReactSvgUrl from "PUBLIC_DIR/images/windows.react.svg?url";
 import MacOSReactSvgUrl from "PUBLIC_DIR/images/macOS.react.svg?url";
@@ -34,13 +35,13 @@ import LinuxReactSvgUrl from "PUBLIC_DIR/images/linux.react.svg?url";
 import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-
 import { LANGUAGE } from "../../../constants";
 import { getLanguage, getCookie } from "../../../utils";
 
-import { StyledArticleApps } from "../Article.styled";
+import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
+
+import styles from "../Article.module.scss";
 import { ArticleAppsProps } from "../Article.types";
 import { SUPPORTED_LANGUAGES } from "../Article.constants";
 
@@ -68,7 +69,13 @@ const ArticleApps = React.memo(
     if (!showText) return null;
 
     return (
-      <StyledArticleApps showText={showText} withDevTools={withDevTools}>
+      <div
+        data-showText={showText ? "true" : "false"}
+        data-with-dev-tools={withDevTools ? "true" : "false"}
+        className={classNames(styles.apps, {
+          [styles.withDevTools]: withDevTools,
+        })}
+      >
         <Text className="download-app-text" fontSize="14px" noSelect>
           {t("Common:DownloadApps")}
         </Text>
@@ -126,7 +133,7 @@ const ArticleApps = React.memo(
             })}
           />
         </div>
-      </StyledArticleApps>
+      </div>
     );
   },
 );

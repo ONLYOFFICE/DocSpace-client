@@ -49,7 +49,7 @@ export const getCrashReport = (
     errorStack: error?.stack,
     localStorage: lsObject,
     reportTime,
-    deviceInfo: deviceDetect(),
+    deviceInfo: deviceDetect(window.navigator.userAgent),
     errorUrl: window.location.href,
   };
 

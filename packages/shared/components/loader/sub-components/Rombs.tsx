@@ -111,7 +111,7 @@ const Romb = styled.div<{ size: string }>`
 
 const Rombs = ({ size = "40px" }: { size?: string }) => (
   <>
-    <Romb color="blue" size={size} />
+    <Romb color="blue" size={size} data-testid="rombs-loader" />
 
     <Romb color="green" size={size} />
 

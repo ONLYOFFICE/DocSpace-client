@@ -275,7 +275,7 @@ class ManualBackup extends React.Component {
 
     const commonRadioButtonProps = {
       fontSize: "13px",
-      fontWeight: "400",
+      fontWeight: "600",
       value: "value",
       className: "backup_radio-button",
       onClick: this.onClickShowStorage,
@@ -297,7 +297,7 @@ class ManualBackup extends React.Component {
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
           </Text>
-          {!isManagement() && (
+          {!isManagement() ? (
             <Link
               className="link-learn-more"
               href={dataBackupUrl}
@@ -308,7 +308,7 @@ class ManualBackup extends React.Component {
             >
               {t("Common:LearnMore")}
             </Link>
-          )}
+          ) : null}
         </div>
 
         <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
@@ -324,7 +324,7 @@ class ManualBackup extends React.Component {
           <Text className="backup-description settings_unavailable">
             {t("TemporaryStorageDescription")}
           </Text>
-          {isCheckedTemporaryStorage && (
+          {isCheckedTemporaryStorage ? (
             <div className="manual-backup_buttons">
               <Button
                 id="create-button"
@@ -334,7 +334,7 @@ class ManualBackup extends React.Component {
                 isDisabled={!isMaxProgress || pageIsDisabled}
                 size={buttonSize}
               />
-              {temporaryLink?.length > 0 && isMaxProgress && (
+              {temporaryLink?.length > 0 && isMaxProgress ? (
                 <Button
                   id="download-copy"
                   label={t("DownloadCopy")}
@@ -343,17 +343,17 @@ class ManualBackup extends React.Component {
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
-              )}
-              {!isMaxProgress && (
+              ) : null}
+              {!isMaxProgress ? (
                 <Button
                   label={`${t("Common:CopyOperation")}...`}
                   isDisabled
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
-              )}
+              ) : null}
             </div>
-          )}
+          ) : null}
         </StyledModules>
         <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
@@ -370,12 +370,12 @@ class ManualBackup extends React.Component {
               {{ roomName }}
             </Trans>
           </Text>
-          {isCheckedDocuments && (
+          {isCheckedDocuments ? (
             <RoomsModule
               {...commonModulesProps}
               isCheckedDocuments={isCheckedDocuments}
             />
-          )}
+          ) : null}
         </StyledModules>
 
         <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
@@ -391,7 +391,9 @@ class ManualBackup extends React.Component {
           <Text className="backup-description settings_unavailable">
             {t("ThirdPartyResourceDescription")}
           </Text>
-          {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
+          {isCheckedThirdParty ? (
+            <ThirdPartyModule {...commonModulesProps} />
+          ) : null}
         </StyledModules>
         <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
@@ -406,19 +408,19 @@ class ManualBackup extends React.Component {
           <Text className="backup-description settings_unavailable">
             {t("ThirdPartyStorageDescription")}
           </Text>
-          {isCheckedThirdPartyStorage && (
+          {isCheckedThirdPartyStorage ? (
             <ThirdPartyStorageModule {...commonModulesProps} />
-          )}
+          ) : null}
         </StyledModules>
 
-        {isBackupProgressVisible && (
+        {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
             alert={false}
             percent={downloadingProgress}
           />
-        )}
+        ) : null}
       </StyledManualBackup>
     );
   }

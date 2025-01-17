@@ -251,7 +251,7 @@ class ThirdPartyServices extends React.Component {
                   />
                 </Box>
               ))}
-              {!isThirdPartyAvailable && (
+              {!isThirdPartyAvailable ? (
                 <div className="business-plan">
                   <Text fontSize="16px" fontWeight={700}>
                     {t("IncludedInBusiness")}
@@ -268,7 +268,7 @@ class ThirdPartyServices extends React.Component {
                     isPaidBadge
                   />
                 </div>
-              )}
+              ) : null}
               {paidConsumers.map((consumer) => (
                 <Box className="consumer-item-wrapper" key={consumer.name}>
                   <ConsumerItem
@@ -288,7 +288,7 @@ class ThirdPartyServices extends React.Component {
             </div>
           )}
         </RootContainer>
-        {dialogVisible && (
+        {dialogVisible ? (
           <ConsumerModalDialog
             t={t}
             i18n={i18n}
@@ -298,7 +298,7 @@ class ThirdPartyServices extends React.Component {
             onChangeLoading={onChangeLoading}
             updateConsumerProps={updateConsumerProps}
           />
-        )}
+        ) : null}
       </>
     );
   }

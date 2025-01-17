@@ -213,12 +213,12 @@ const DefaultTemplate = ({
       <p>
         <strong>Error message: </strong> {error?.message ?? "undefined"}
       </p>
-      {date && (
+      {date ? (
         <p>
           <strong>Next synchronization: </strong>{" "}
           {`${date?.setLocale(locale).toFormat("DDDD TTTT")}`}
         </p>
-      )}
+      ) : null}
     </div>
   );
 };

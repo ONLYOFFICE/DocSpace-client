@@ -1,0 +1,278 @@
+@import "../../styles/variables/index.scss";
+
+:root {
+  /* Light theme variables */
+  --tabs-gradient-color: #{$white};
+  --tabs-line-color: #{$gray-light-mid};
+
+  /* Primary tabs */
+  --tabs-text-color-primary: #{$light-gray-dark};
+  --tabs-active-text-color-primary: #{$black};
+  --tabs-hover-text-color-primary: #{$gray};
+  --tabs-pressed-text-color-primary: #{$gray-text};
+  --tabs-background-color-primary: #{$white};
+
+  /* Secondary tabs */
+  --tabs-text-color-secondary: #{$black};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$white};
+  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-pressed-background-color-secondary: #{$gray-light-mid};
+  --tabs-active-background-color-secondary: #{$blue-light-mid};
+
+  /* Dark theme variables */
+  &[data-theme="dark"] {
+    --tabs-gradient-color: #{$black};
+    --tabs-line-color: #{$gray-dark-strong};
+
+    /* Primary tabs */
+    --tabs-text-color-primary: #{$dark-gray-dark};
+    --tabs-active-text-color-primary: #{$white};
+    --tabs-hover-text-color-primary: #{$white};
+    --tabs-pressed-text-color-primary: #{$gray-dark-text};
+    --tabs-background-color-primary: #{$black};
+
+    /* Secondary tabs */
+    --tabs-text-color-secondary: #{$white};
+    --tabs-active-text-color-secondary: #{$black};
+    --tabs-background-color-secondary: #{$black};
+    --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+    --tabs-pressed-background-color-secondary: #{$dark-gray-light};
+    --tabs-active-background-color-secondary: #{$white};
+  }
+}
+
+.stickyIndent {
+  height: 20px;
+}
+
+.blurAhead {
+  position: absolute;
+  height: 32px;
+  width: 60px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 20.48%,
+    var(--tabs-gradient-color) 100%
+  );
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  z-index: 1;
+
+  [dir="rtl"] & {
+    background: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      var(--tabs-gradient-color) 100%
+    );
+  }
+}
+
+.blurBack {
+  position: absolute;
+  height: 32px;
+  width: 60px;
+  inset-inline-end: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 20.48%,
+    var(--tabs-gradient-color) 100%
+  );
+
+  [dir="rtl"] & {
+    background: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 20.48%,
+      var(--tabs-gradient-color) 100%
+    );
+  }
+}
+
+.sticky {
+  height: 33px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: var(--tabs-background-color-primary);
+  z-index: 1;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.tabs {
+  font-family: var(--font-family);
+
+  &.multiple {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.scroll {
+  :global(.scroller) {
+    scroll-behavior: smooth;
+  }
+
+  .scroll-body {
+    position: absolute;
+    padding-inline-end: 0 !important;
+  }
+
+  :global(.track) {
+    z-index: 0;
+    padding: 0;
+  }
+
+  :global(.track > .thumb-horizontal) {
+    height: 1px !important;
+  }
+
+  :global(.thumb) {
+    background-color: rgba(100, 104, 112, 0.2) !important;
+  }
+
+  &.primary {
+    :global(.thumb) {
+      display: block;
+    }
+  }
+
+  &.secondary {
+    :global(.thumb) {
+      display: none;
+    }
+  }
+
+  .thumb:active,
+  .thumb.dragging {
+    background-color: rgba(6, 22, 38, 0.3) !important;
+  }
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+  justify-content: inherit;
+
+  width: 100%;
+  height: 32px;
+
+  &.primary {
+    gap: 20px;
+
+    border-bottom: 1px solid var(--tabs-line-color);
+  }
+
+  &.secondary {
+    gap: 8px;
+  }
+
+  &.multiple {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
+}
+
+.tab {
+  white-space: nowrap;
+  display: grid;
+  gap: 4px;
+
+  width: max-content;
+  height: inhert;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+
+  // opacity:
+  // pointer-events:
+
+  &.primary {
+    padding: 4px 0 0;
+
+    .tabText {
+      color: var(--tabs-text-color-primary);
+    }
+
+    &.selected {
+      .tabText {
+        color: var(--accent-main, --tabs-active-text-color-primary);
+      }
+    }
+
+    &:hover:not(.selected) {
+      .tabText {
+        color: var(--tabs-hover-text-color-primary);
+      }
+    }
+  }
+
+  &.secondary {
+    padding: 4px 16px;
+
+    .tabText {
+      color: var(--tabs-text-color-secondary);
+    }
+
+    background-color: var(--tabs-background-color-secondary);
+    border: 1px solid var(--tabs-line-color);
+    border-radius: 16px;
+
+    &.selected {
+      background-color: var(--tabs-active-background-color-secondary);
+      border: 1px solid var(--tabs-hover-background-color-secondary);
+
+      .tabText {
+        color: var(--tabs-active-text-color-secondary);
+      }
+    }
+
+    &:hover:not(.selected) {
+      background-color: var(--tabs-hover-background-color-secondary);
+      border: 1px solid var(--tabs-hover-background-color-secondary);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.tabText {
+  grid-area: 1/1;
+}
+
+.tabBadge {
+  grid-area: 1/2;
+}
+
+.tabSubLine {
+  grid-area: 2/1;
+  z-index: 1;
+  width: 100%;
+  height: 4px;
+  bottom: 0px;
+  border-radius: 4px 4px 0 0;
+  transition: transform 0.3s ease;
+
+  &.primary {
+    &.selected {
+      background-color: var(--accent-main);
+    }
+  }
+
+  &.secondary {
+    display: none;
+  }
+}
+
+.tabsBody {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}

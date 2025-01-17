@@ -30,19 +30,19 @@ import { TTranslation } from "../../types";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 
-interface IProvider {
+type Provider = {
   linked: boolean;
   provider: string;
   url: string;
-}
+};
 
-export interface MoreLoginModalProps {
+export type MoreLoginModalProps = {
   visible: boolean;
   onClose: VoidFunction;
-  providers?: IProvider[];
+  providers?: Provider[];
   onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
   ssoLabel: string;
   ssoUrl: string;
   t: TTranslation;
   isSignUp: boolean;
-}
+};

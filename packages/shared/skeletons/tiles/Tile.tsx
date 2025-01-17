@@ -24,16 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "..";
+import React from "react";
 
-import {
-  StyledTile,
-  StyledBottom,
-  StyledMainContent,
-  StyledRoomTile,
-  StyledRoomTileTopContent,
-  StyledRoomTileBottomContent,
-} from "./Tiles.styled";
+import classNames from "classnames";
+
+import { RectangleSkeleton } from "../rectangle";
+import styles from "./Tiles.module.scss";
+
 import type { TileSkeletonProps } from "./Tiles.types";
 
 export const TileSkeleton = ({
@@ -47,13 +44,14 @@ export const TileSkeleton = ({
   foregroundOpacity,
   speed,
   animate,
+  className,
   ...rest
 }: TileSkeletonProps) => {
   return isFolder ? (
-    <StyledTile {...rest}>
-      <StyledBottom className="bottom-content" isFolder>
+    <div className={classNames(styles.tile, className)} {...rest}>
+      <div className={classNames(styles.bottom, "bottom-content")}>
         <RectangleSkeleton
-          className="first-content"
+          className={styles.firstContent}
           title={title}
           width="100%"
           borderRadius={borderRadius}
@@ -65,7 +63,7 @@ export const TileSkeleton = ({
           animate
         />
         <RectangleSkeleton
-          className="second-content"
+          className={styles.secondContent}
           title={title}
           height="22px"
           borderRadius={borderRadius}
@@ -77,7 +75,7 @@ export const TileSkeleton = ({
           animate
         />
         <RectangleSkeleton
-          className="option-button"
+          className={styles.optionButton}
           title={title}
           height="16px"
           width="16px"
@@ -89,14 +87,14 @@ export const TileSkeleton = ({
           speed={speed}
           animate
         />
-      </StyledBottom>
-    </StyledTile>
+      </div>
+    </div>
   ) : isRoom ? (
-    <StyledTile {...rest}>
-      <StyledRoomTile>
-        <StyledRoomTileTopContent>
+    <div className={classNames(styles.tile, className)} {...rest}>
+      <div className={styles.roomTile}>
+        <div className={styles.roomTileTopContent}>
           <RectangleSkeleton
-            className="first-content"
+            className={styles.firstContent}
             title={title}
             width="32px"
             height="32px"
@@ -109,7 +107,7 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="second-content"
+            className={styles.secondContent}
             title={title}
             height="22px"
             borderRadius={borderRadius}
@@ -121,7 +119,7 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="option-button"
+            className={styles.optionButton}
             title={title}
             height="16px"
             width="16px"
@@ -133,10 +131,10 @@ export const TileSkeleton = ({
             speed={speed}
             animate
           />
-        </StyledRoomTileTopContent>
-        <StyledRoomTileBottomContent>
+        </div>
+        <div className={styles.roomTileBottomContent}>
           <RectangleSkeleton
-            className="main-content"
+            className={styles.content}
             title={title}
             height="24px"
             width="50px"
@@ -149,7 +147,7 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="main-content"
+            className={styles.content}
             title={title}
             height="24px"
             width="50px"
@@ -161,14 +159,14 @@ export const TileSkeleton = ({
             speed={speed}
             animate
           />
-        </StyledRoomTileBottomContent>
-      </StyledRoomTile>
-    </StyledTile>
+        </div>
+      </div>
+    </div>
   ) : (
-    <StyledTile {...rest}>
-      <StyledMainContent>
+    <div className={classNames(styles.tile, className)} {...rest}>
+      <div className={styles.mainContent}>
         <RectangleSkeleton
-          className="main-content"
+          className={styles.content}
           title={title}
           height="156px"
           borderRadius={borderRadius || "0"}
@@ -179,11 +177,11 @@ export const TileSkeleton = ({
           speed={speed}
           animate
         />
-      </StyledMainContent>
+      </div>
 
-      <StyledBottom className="bottom-content">
+      <div className={classNames(styles.bottom, styles.file, "bottom-content")}>
         <RectangleSkeleton
-          className="first-content"
+          className={styles.firstContent}
           title={title}
           width="100%"
           borderRadius={borderRadius}
@@ -195,7 +193,7 @@ export const TileSkeleton = ({
           animate
         />
         <RectangleSkeleton
-          className="second-content"
+          className={styles.secondContent}
           title={title}
           height="22px"
           borderRadius={borderRadius}
@@ -207,7 +205,7 @@ export const TileSkeleton = ({
           animate
         />
         <RectangleSkeleton
-          className="option-button"
+          className={styles.optionButton}
           title={title}
           height="16px"
           width="16px"
@@ -219,7 +217,7 @@ export const TileSkeleton = ({
           speed={speed}
           animate
         />
-      </StyledBottom>
-    </StyledTile>
+      </div>
+    </div>
   );
 };

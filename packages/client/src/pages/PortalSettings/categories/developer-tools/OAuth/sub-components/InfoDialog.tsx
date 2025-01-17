@@ -151,7 +151,7 @@ const InfoDialog = ({
               getData={getContextOptions}
             />
           </div>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -181,8 +181,8 @@ const InfoDialog = ({
                 </Text>
               </div>
             </>
-          )}
-          {!isProfile && (
+          ) : null}
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -205,7 +205,7 @@ const InfoDialog = ({
               >
                 {client?.description}
               </Text>
-              {withShowText && (
+              {withShowText ? (
                 <Link
                   className="desc-link"
                   fontSize="13px"
@@ -217,9 +217,9 @@ const InfoDialog = ({
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
-              )}
+              ) : null}
             </>
-          )}
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
@@ -276,7 +276,7 @@ const InfoDialog = ({
               />
             ))}
           </div>
-          {isProfile && (
+          {isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -299,7 +299,7 @@ const InfoDialog = ({
                 {modifiedDate}
               </Text>
             </>
-          )}
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
@@ -343,7 +343,7 @@ const InfoDialog = ({
               {t("TermsOfService")}
             </Link>
           </Text>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -366,7 +366,7 @@ const InfoDialog = ({
                 {modifiedDate}
               </Text>
             </>
-          )}
+          ) : null}
         </StyledInfoContainer>
       </ModalDialog.Body>
     </ModalDialog>

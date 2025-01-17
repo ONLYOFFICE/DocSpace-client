@@ -24,15 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../../../styles/variables/index.scss";
+@import "../../../../styles/_mixins.scss";
 
-export const WrapperPlayerPlayButton = styled.div`
+:root {
+  --player-play-button-cursor: pointer;
+}
+
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 48px;
   height: 48px;
   margin-inline-start: -10px;
-
-  cursor: pointer;
-`;
+  cursor: var(--player-play-button-cursor);
+}

@@ -28,17 +28,16 @@ import React, { memo } from "react";
 import IconExitFullScreen from "PUBLIC_DIR/images/videoplayer.exit.react.svg";
 import IconFullScreen from "PUBLIC_DIR/images/videoplayer.full.react.svg";
 import PlayerFullSceenProps from "./PlayerFullScreen.props";
-
-import { PlayerFullSceenWrapper } from "./PlayerFullScreen.styled";
+import styles from "./PlayerFullScreen.module.scss";
 
 const PlayerFullScreen = memo(
   ({ isAudio, onClick, isFullScreen }: PlayerFullSceenProps) => {
     if (isAudio) return;
 
     return (
-      <PlayerFullSceenWrapper onClick={onClick}>
+      <div className={styles.wrapper} onClick={onClick}>
         {isFullScreen ? <IconExitFullScreen /> : <IconFullScreen />}
-      </PlayerFullSceenWrapper>
+      </div>
     );
   },
 );

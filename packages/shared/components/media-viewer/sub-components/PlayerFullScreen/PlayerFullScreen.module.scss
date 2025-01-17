@@ -24,18 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../../../styles/variables/index.scss";
+@import "../../../../styles/_mixins.scss";
 
-export const PlayerFullSceenWrapper = styled.div`
+:root {
+  --player-fullscreen-hover-cursor: pointer;
+}
+
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 48px;
   height: 48px;
-
   padding-inline-start: 10px;
 
   &:hover {
-    cursor: pointer;
+    cursor: var(--player-fullscreen-hover-cursor);
   }
-`;
+}

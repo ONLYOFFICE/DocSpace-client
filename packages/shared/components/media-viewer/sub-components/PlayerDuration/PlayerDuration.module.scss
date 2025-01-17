@@ -24,40 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
-import { mobile } from "../../../../utils";
-import { formatTime } from "../../MediaViewer.utils";
-import { globalColors } from "../../../../themes";
+:root {
+  --player-duration-color: #{$white};
+}
 
-const PlayerDurationWrapper = styled.div`
+.wrapper {
   width: 102px;
-  color: ${globalColors.white};
+  color: var(--player-duration-color);
   user-select: none;
   font-size: 12px;
   font-weight: 700;
-
   margin-inline-start: 10px;
 
-  @media ${mobile} {
+  @include mobile {
     margin-inline-start: 0;
   }
-`;
-
-type PlayerDurationProps = {
-  currentTime: number;
-  duration: number;
-};
-
-export const PlayerDuration = ({
-  currentTime,
-  duration,
-}: PlayerDurationProps) => {
-  return (
-    <PlayerDurationWrapper>
-      <time>{formatTime(currentTime)}</time> /{" "}
-      <time>{formatTime(duration)}</time>
-    </PlayerDurationWrapper>
-  );
-};
+}

@@ -50,7 +50,7 @@ import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 import { PlayerBigPlayButton } from "../PlayerBigPlayButton";
 import { ViewerLoader } from "../ViewerLoader";
 import { PlayerPlayButton } from "../PlayerPlayButton";
-import { PlayerDuration } from "../PlayerDuration/inxed";
+import { PlayerDuration } from "../PlayerDuration";
 import { PlayerVolumeControl } from "../PlayerVolumeControl";
 import { PlayerTimeline } from "../PlayerTimeline";
 import { PlayerSpeedControl } from "../PlayerSpeedControl";

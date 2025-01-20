@@ -56,6 +56,7 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
+import OperationsProgress from "./sub-components/OperationsProgress";
 
 export type { SectionProps };
 
@@ -115,6 +116,9 @@ const Section = (props: SectionProps) => {
     isIndexEditingMode,
 
     pathname,
+    secondaryOperationsCompleted,
+    secondaryActiveOperations,
+    clearSecondaryProgressData,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -278,7 +282,17 @@ const Section = (props: SectionProps) => {
             </SubSectionBody>
           ) : null}
 
-          {currentDeviceType === DeviceType.desktop ? (
+          {secondaryActiveOperations.length ? (
+            <OperationsProgress
+              clearSecondaryProgressData={clearSecondaryProgressData}
+              secondaryActiveOperations={secondaryActiveOperations}
+              operationsCompleted={secondaryOperationsCompleted}
+              onOpenUploadPanel={onOpenUploadPanel}
+              operationsAlert={showSecondaryButtonAlert}
+            />
+          ) : null}
+
+          {/* {currentDeviceType === DeviceType.desktop ? (
             showTwoProgress ? (
               <div className="progress-bar_container">
                 <FloatingButton
@@ -318,7 +332,7 @@ const Section = (props: SectionProps) => {
                 />
               </div>
             ) : null
-          ) : null}
+          ) : null} */}
         </SectionContainer>
 
         {isInfoPanelAvailable ? (

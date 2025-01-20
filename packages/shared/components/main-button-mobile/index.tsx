@@ -40,13 +40,12 @@ import { DropDownItem } from "../drop-down-item";
 import styles from "./MainButtonMobile.module.scss";
 
 import SubmenuItem from "./sub-components/SubmenuItem";
-import {
-  ActionOption,
+import { ActionOption,
   ButtonOption,
   MainButtonMobileProps,
   ProgressOption,
 } from "./MainButtonMobile.types";
-import { ProgressBarMobile } from "./sub-components/ProgressBar";
+import { ProgressBarMobile } from "../progress-bar-mobile";
 
 const MainButtonMobile = (props: MainButtonMobileProps) => {
   const {

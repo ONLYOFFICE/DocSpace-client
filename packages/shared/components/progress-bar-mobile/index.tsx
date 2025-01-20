@@ -24,12 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IconButton } from "../../icon-button";
-import { Text } from "../../text";
-import { classNames } from "../../../utils";
+import { IconButton } from "../icon-button";
+import { Text } from "../text";
+import { classNames } from "../../utils";
 
-import styles from "../MainButtonMobile.module.scss";
-import { ProgressBarMobileProps } from "../MainButtonMobile.types";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+
+import styles from "./ProgressBarMobile.module.scss";
+import { ProgressBarMobileProps } from "./ProgressBarMobile.types";
 
 const ProgressBarMobile = ({
   label,
@@ -41,6 +45,12 @@ const ProgressBarMobile = ({
   onClickAction,
   hideButton,
   error,
+  withoutProgress,
+  iconUrl,
+  completed,
+  onClearProgress,
+  operationId,
+  operation,
 }: ProgressBarMobileProps) => {
   const uploadPercent = percent > 100 ? 100 : percent;
 
@@ -49,6 +59,13 @@ const ProgressBarMobile = ({
     hideButton?.();
   };
 
+  const onCloseClick = () => {
+    if (onClearProgress && operation) {
+      onClearProgress(null, operation);
+    }
+  };
+  console.log("====completed", completed);
+
   return (
     <div
       className={classNames(styles.progressBarContainer, {
@@ -56,41 +73,49 @@ const ProgressBarMobile = ({
       })}
     >
       <div className={styles.progressWrapper}>
-        <Text
-          className={styles.progressHeader}
-          fontSize="14px"
-          onClick={onClickHeaderAction}
-          truncate
-        >
-          {label}
-        </Text>
-        <div className={styles.progressInfoWrapper}>
+        <div className={styles.progressMainContainer}>
+          <div>
+            <IconButton onClick={onCancel} iconName={iconUrl} size={16} />
+            {/* {alert ? (
+              <div
+                className={styles.alertIcon}
+                data-testid="floating-button-alert"
+              >
+                <ButtonAlertIcon
+                  style={{ overflow: "hidden", verticalAlign: "middle" }}
+                />
+              </div>
+            ) : null} */}
+          </div>
           <Text
-            className={styles.progressCount}
-            fontSize="13px"
+            className={styles.progressHeader}
+            fontSize="14px"
+            fontWeight={600}
             truncate
-            onClick={onClickHeaderAction}
           >
-            {status}
+            {label}
           </Text>
-          <IconButton
-            className={classNames(styles.progressIcon, {
-              [styles.error]: error,
-            })}
-            onClick={error ? onClickHeaderAction : onCancel}
-            iconName={icon}
-            size={14}
-          />
         </div>
-      </div>
 
-      <div className={styles.mobileProgressBar}>
-        <div
-          className={classNames(styles.progressBar, { [styles.error]: error })}
-          style={
-            { "--upload-percent": `${uploadPercent}%` } as React.CSSProperties
-          }
-        />
+        <div className={styles.progressInfoWrapper}>
+          {withoutProgress ? (
+            completed ? (
+              <IconButton
+                onClick={onCloseClick}
+                iconName={CrossIcon}
+                size={16}
+              />
+            ) : (
+              <div className={styles.progressLoader} />
+            )
+          ) : (
+            <IconButton
+              onClick={onClickHeaderAction}
+              iconName={ArrowIcon}
+              size={14}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

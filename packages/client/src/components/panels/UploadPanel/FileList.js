@@ -29,14 +29,11 @@ import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/compo
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
-import { isDesktop } from "@docspace/shared/utils";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import FileRow from "./FileRow";
 
-const mobileRowHeight = 48;
-const desktopRowHeight = 48;
-const mobileRowIncreasedHeight = 92;
-const desktopRowIncreasedHeight = 88;
+const rowHeight = 52;
+const rowIncreasedHeight = 82;
 
 const VirtualScroll = (props) => (
   <CustomScrollbarsVirtualListWithAutoFocus
@@ -50,17 +47,14 @@ const FileList = ({ uploadDataFiles }) => {
   const listRef = useRef(null);
 
   const onUpdateHeight = (i, showInput) => {
-    const mobileHeight = showInput ? mobileRowIncreasedHeight : mobileRowHeight;
-    const desktopHeight = showInput
-      ? desktopRowIncreasedHeight
-      : desktopRowHeight;
+    const updatedHiaght = showInput ? rowIncreasedHeight : rowHeight;
 
     if (listRef.current) {
       listRef.current.resetAfterIndex(i, false);
     }
 
     const updatedValues = {
-      [i]: !isDesktop() ? mobileHeight : desktopHeight,
+      [i]: updatedHiaght,
     };
 
     setRowSizes((prevState) => ({
@@ -70,9 +64,7 @@ const FileList = ({ uploadDataFiles }) => {
   };
 
   const getSize = (i) => {
-    const standardHeight = !isDesktop() ? mobileRowHeight : desktopRowHeight;
-
-    return rowSizes[i] ? rowSizes[i] : standardHeight;
+    return rowSizes[i] ? rowSizes[i] : rowHeight;
   };
 
   const renderRow = useCallback(({ data, index, style }) => {

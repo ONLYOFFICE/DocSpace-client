@@ -34,4 +34,6 @@ export enum FloatingButtonIcons {
   minus = "minus",
   refresh = "refresh",
   exportIndex = "exportIndex",
+  dots = "dots",
+  arrow = "arrow",
 }

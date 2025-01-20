@@ -164,6 +164,9 @@ const PureHome = (props) => {
     isUsersEmptyView,
     showGuestReleaseTip,
     setGuestReleaseTipDialogVisible,
+    secondaryOperationsCompleted,
+    secondaryActiveOperations,
+    clearSecondaryProgressData,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -349,6 +352,9 @@ const PureHome = (props) => {
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
+  sectionProps.secondaryActiveOperations = secondaryActiveOperations;
+  sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
+  sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -508,6 +514,9 @@ export const Component = inject(
       itemsSelectionLength,
       itemsSelectionTitle,
       setItemsSelectionTitle,
+      secondaryActiveOperations,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
     } = secondaryProgressDataStore;
 
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
@@ -664,6 +673,10 @@ export const Component = inject(
       showGuestReleaseTip,
       setGuestReleaseTipDialogVisible:
         dialogsStore.setGuestReleaseTipDialogVisible,
+
+      secondaryActiveOperations,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
     };
   },
 )(observer(Home));

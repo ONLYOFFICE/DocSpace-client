@@ -383,3 +383,20 @@ export const mappingActiveItems = (items, destFolderId) => {
   );
   return arrayFormation;
 };
+
+export const getOperationsProgressTitle = (type) => {
+  switch (type) {
+    case "trash":
+      return "Moving to trash";
+    case "move":
+      return "Moving";
+    case "copy":
+      return "Copying";
+    case "download":
+      return "Downloading";
+    case "duplicate":
+      return "Duplicating";
+    default:
+      return "";
+  }
+};

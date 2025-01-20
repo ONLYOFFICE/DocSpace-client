@@ -136,29 +136,6 @@ export type MainButtonMobileProps = {
   dropdownStyle?: React.CSSProperties;
 };
 
-export type ProgressBarMobileProps = {
-  /** Display text for the progress bar */
-  label?: string;
-  /** Status text to display */
-  status?: string;
-  /** Progress completion percentage */
-  percent: number;
-  /** Controls visibility of the progress bar */
-  open: boolean;
-  /** Handler for canceling the operation */
-  onCancel?: () => void;
-  /** Icon URL or component */
-  icon: string;
-  /** The function called after the progress header is clicked */
-  onClickAction?: () => void;
-  /** The function that facilitates hiding the button */
-  hideButton?: () => void;
-  /** Changes the progress bar color, if set to true */
-  error?: boolean;
-  /** Additional CSS classes */
-  className?: string;
-};
-
 export type SubmenuItemProps = {
   /** Action option configuration */
   option: ActionOption;

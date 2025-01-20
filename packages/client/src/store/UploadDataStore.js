@@ -1767,8 +1767,9 @@ class UploadDataStore {
         : true;
 
       setSecondaryProgressBarData({
-        icon: pbData.icon,
-        label: pbData.label || label,
+        // icon: pbData.icon,
+        operation: pbData.operation,
+        // label: pbData.label || label,
         percent: progress,
         visible: true,
         alert: false,

@@ -37,6 +37,8 @@ import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
 import RefreshIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 import ExportRoomIndexIcon from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg";
+import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg";
+import ArrowIcon from "PUBLIC_DIR/images/icons/16/top-arrow.react.svg";
 
 import { classNames } from "../../utils";
 
@@ -62,6 +64,8 @@ const ICON_COMPONENTS = {
   [FloatingButtonIcons.exportIndex]: (
     <ExportRoomIndexIcon data-icon="exportIndex" />
   ),
+  [FloatingButtonIcons.dots]: <HorizontalDotsIcon data-icon="dots" />,
+  [FloatingButtonIcons.arrow]: <ArrowIcon data-icon="arrow" />,
 } as const;
 
 const useProgressAnimation = (percent: number) => {

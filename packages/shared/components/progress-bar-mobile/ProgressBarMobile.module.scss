@@ -1,0 +1,106 @@
+@import "../../styles/mixins.scss";
+
+.progressBarContainer {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 8px 16px;
+  background: var(--background-primary);
+  border-top: 1px solid var(--progress-bar-border);
+  border-bottom: 1px solid var(--progress-bar-border);
+
+  &.isUploading {
+    display: flex;
+  }
+}
+
+.progressWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.progressHeader {
+  color: var(--text-primary);
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.progressInfoWrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+.progressMainContainer {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+.progressCount {
+  color: var(--text-primary);
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.progressIcon {
+  path {
+    fill: var(--icon-primary);
+  }
+
+  &.error {
+    path {
+      fill: var(--alert);
+    }
+  }
+}
+
+// .mobileProgressBar {
+//   width: 100%;
+//   height: 4px;
+//   background: var(--progress-bar-background);
+//   border-radius: 2px;
+//   overflow: hidden;
+// }
+
+// .progressBar {
+//   width: var(--upload-percent);
+//   height: 100%;
+//   background: var(--progress-bar);
+//   border-radius: 2px;
+//   transition: width 0.3s ease-in-out;
+
+//   &.error {
+//     background: var(--alert);
+//   }
+// }
+
+.progressLoader {
+  margin: auto;
+  width: 12px;
+  height: 12px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+    conic-gradient(
+      from 0.25turn at 50% 30%,
+      rgb(85, 95, 101),
+      10deg,
+      rgb(85, 95, 101),
+      140deg,
+      white
+    );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  animation: loader 1.3s linear infinite;
+}
+
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}

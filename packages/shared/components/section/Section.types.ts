@@ -105,6 +105,27 @@ export type SectionSubmenuProps = {
   children: React.ReactNode;
 };
 
+export interface Operation {
+  operation: string;
+  label: string;
+  alert: boolean;
+  completed: boolean;
+  items: Array<{
+    operationId: string;
+    percent: number;
+  }>;
+}
+
+export interface OperationsProgressProps {
+  primaryActiveOperations?: Operation[];
+  secondaryActiveOperations?: Operation[];
+  onOpenUploadPanel?: () => void;
+  onOpenConvertPanel?: () => void;
+  operationsAlert?: boolean;
+  operationsCompleted?: boolean;
+  clearSecondaryProgressData: (operationId: string | null, operation: string) => void;
+}
+
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
   Omit<SectionSubmenuProps, "children"> &
   Omit<SubInfoPanelBodyProps, "children"> &

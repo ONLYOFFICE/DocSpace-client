@@ -91,6 +91,29 @@
   }
 }
 
+.styledDropDown {
+  background-color: #555f65;
+
+  :global {
+    .progress-list {
+      padding: 0px 8px;
+
+      svg {
+        path {
+          fill: white;
+        }
+      }
+    }
+  }
+
+  &:active {
+    background-color: #555f65;
+  }
+  @media (hover: hover) {
+    background-color: #555f65;
+  }
+}
+
 .scrollbar {
   &.scrollLocked {
     &:global(:first-child > .scroll-wrapper > .scroller) {
@@ -467,40 +490,11 @@
         margin-inline: -16px;
       }
     }
-
-    .progress-bar_container {
-      position: fixed;
-      bottom: 0;
-
-      display: grid;
-      grid-gap: 24px;
-      margin-bottom: 24px;
-      margin-inline-end: 24px;
-      inset-inline-end: 0px;
-
-      .layout-progress-bar_wrapper {
-        position: static;
-        width: fit-content;
-        height: fit-content;
-        display: flex;
-        grid-template-columns: 1fr 1fr;
-        flex-direction: row-reverse;
-        align-items: center;
-
-        .layout-progress-bar_close-icon {
-          position: static;
-          width: 24px;
-          height: 24px;
-
-          margin-inline-end: 8px;
-        }
-      }
-    }
   }
 
   &.infoPanelVisible {
     :global {
-      .progress-bar_container {
+      .progressBarContainer {
         inset-inline-end: 400px;
       }
     }
@@ -508,7 +502,7 @@
 
   &.showTwoProgress {
     :global {
-      .progress-bar_container {
+      .progressBarContainer {
         .layout-progress-bar_wrapper {
           .layout-progress-bar,
           .layout-progress-second-bar {
@@ -526,5 +520,54 @@
     width: 100vw !important;
     max-width: 100vw !important;
     box-sizing: border-box;
+  }
+}
+
+.progressBarContainer {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 400;
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
+
+  @keyframes hideButton {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  &.hidden {
+    animation: hideButton 0.3s ease-in-out 4s forwards;
+  }
+
+  &.hideImmediate {
+    animation: hideButton 0.3s ease-in-out forwards;
+    will-change: opacity, transform;
+  }
+
+  :global {
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: 24px;
+        height: 24px;
+        margin-inline-end: 8px;
+      }
+    }
   }
 }

@@ -25,17 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 class SecondaryProgressDataStore {
   percent = 0;
-
-  label = "";
-
-  visible = false;
-
-  icon = "trash";
-
-  alert = false;
 
   filesCount = 0;
 
@@ -45,34 +38,67 @@ class SecondaryProgressDataStore {
 
   isDownload = false;
 
-  secondaryOperationsArray = [];
+  secondaryOperationsArray = [
+    // {
+    //   label: "Duplicating",
+    //   operation: "duplicate",
+    //   alert: true,
+    //   items: [{ operationId: "operation_1", percent: 10, completed: false }],
+    // },
+    // {
+    //   label: "Downloading",
+    //   operation: "download",
+    //   alert: false,
+    //   items: [{ operationId: "operation_1", percent: 0, completed: false }],
+    // },
+  ];
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  get secondaryActiveOperations() {
+    return this.secondaryOperationsArray;
+  }
+
   setSecondaryProgressBarData = (secondaryProgressData) => {
-    const progressIndex = this.secondaryOperationsArray.findIndex(
-      (p) => p.operationId === secondaryProgressData.operationId,
+    const { operation, alert, ...progressInfo } = secondaryProgressData;
+
+    const operationIndex = this.secondaryOperationsArray.findIndex(
+      (object) => object.operation === operation,
     );
 
-    if (progressIndex !== -1) {
-      this.secondaryOperationsArray[progressIndex] = secondaryProgressData;
-    }
+    if (operationIndex !== -1) {
+      const operationObject = this.secondaryOperationsArray[operationIndex];
+      const itemIndex = operationObject.items.findIndex(
+        (item) => item.operationId === progressInfo.operationId,
+      );
 
-    if (progressIndex === 0 || this.secondaryOperationsArray.length === 0) {
-      const progressDataItemsArray = Object.keys(secondaryProgressData);
-      for (let index = 0; index < progressDataItemsArray.length; index++) {
-        const key = progressDataItemsArray[index];
-        if (key in this) {
-          this[key] = secondaryProgressData[key];
-        }
+      operationObject.alert = alert;
+
+      if (itemIndex !== -1) {
+        operationObject.items[itemIndex] = progressInfo;
+      } else {
+        operationObject.items.push(progressInfo);
       }
+
+      const allItemsCompleted = operationObject.items?.every(
+        (item) => item.completed,
+      );
+
+      operationObject.completed = allItemsCompleted;
+    } else {
+      const progress = {
+        operation,
+        alert,
+        items: [progressInfo],
+        label: getOperationsProgressTitle(operation),
+        completed: progressInfo.completed,
+      };
+      this.secondaryOperationsArray.push(progress);
     }
 
-    if (progressIndex === -1) {
-      this.secondaryOperationsArray.push(secondaryProgressData);
-    }
+    console.log("this.secondaryOperationsArray", this.secondaryOperationsArray);
   };
 
   setItemsSelectionTitle = (itemsSelectionTitle) => {
@@ -83,40 +109,50 @@ class SecondaryProgressDataStore {
     this.itemsSelectionLength = itemsSelectionLength;
   };
 
-  clearSecondaryProgressData = (operationId) => {
-    const progressIndex = this.secondaryOperationsArray.findIndex(
-      (p) => p.operationId === operationId,
-    );
-
-    if (progressIndex !== -1) {
-      this.secondaryOperationsArray = this.secondaryOperationsArray.filter(
-        (p) => p.operationId !== operationId,
+  clearSecondaryProgressData = (operationId, operation) => {
+    if (operation) {
+      const operationIndex = this.secondaryOperationsArray.findIndex(
+        (obj) => obj.operation === operation,
       );
 
-      if (this.secondaryOperationsArray.length > 0) {
-        const nextOperation = this.secondaryOperationsArray[0];
+      if (operationIndex !== -1) {
+        const operationObject = this.secondaryOperationsArray[operationIndex];
+        const allItemsCompleted = operationObject.items.every(
+          (item) => item.completed
+        );
 
-        this.percent = nextOperation.percent;
-        this.label = nextOperation.label;
-        this.visible = nextOperation.visible;
-        this.icon = nextOperation.icon;
-        this.alert = nextOperation.alert;
-        this.filesCount = nextOperation.filesCount;
-        this.isDownload = nextOperation.isDownload;
-        return;
+        // Only remove operation if all items are completed
+        if (allItemsCompleted) {
+          this.secondaryOperationsArray.splice(operationIndex, 1);
+        }
+      }
+    } else if (operationId) {
+      const operationIndex = this.secondaryOperationsArray.findIndex((obj) =>
+        obj.items.some((item) => item.operationId === operationId),
+      );
+
+      if (operationIndex === -1) return;
+
+      const operationObject = this.secondaryOperationsArray[operationIndex];
+
+      // If operationId is provided, remove specific item
+      operationObject.items = operationObject.items.filter(
+        (item) => item.operationId !== operationId,
+      );
+
+      if (operationObject.items.length === 0) {
+        this.secondaryOperationsArray.splice(operationIndex, 1);
       }
     }
-
-    if (this.secondaryOperationsArray.length <= 1) {
-      this.percent = 0;
-      this.label = "";
-      this.visible = false;
-      this.icon = "";
-      this.alert = false;
-      this.filesCount = 0;
-      this.isDownload = false;
-    }
   };
+
+  get alert() {
+    return this.secondaryOperationsArray.some((op) => op.alert);
+  }
+
+  get secondaryOperationsCompleted() {
+    return this.secondaryOperationsArray.some((op) => op.completed);
+  }
 
   get isSecondaryProgressFinished() {
     return this.percent === 100;

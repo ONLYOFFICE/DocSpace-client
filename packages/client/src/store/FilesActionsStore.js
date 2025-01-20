@@ -621,6 +621,7 @@ class FilesActionStore {
   downloadFiles = async (fileConvertIds, folderIds, translations) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
+
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
     const { openUrl } = this.settingsStore;
@@ -637,8 +638,7 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
-      icon: "file",
-      visible: true,
+      operation: "download",
       percent: 0,
       label,
       alert: false,
@@ -656,7 +656,7 @@ class FilesActionStore {
         async (res) => {
           const data = res[0] ? res[0] : null;
           const pbData = {
-            icon: "file",
+            operation: "download",
             label,
             operationId,
           };
@@ -677,13 +677,16 @@ class FilesActionStore {
             openUrl(item.url, UrlActionType.Download, true);
           } else {
             setSecondaryProgressBarData({
-              visible: true,
+              operation: "download",
               alert: true,
               operationId,
             });
           }
 
-          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+          setTimeout(
+            () => clearSecondaryProgressData(operationId, "download"),
+            TIMEOUT,
+          );
           !item.url && toastr.error(translations.error, null, 0, true);
         },
       );
@@ -691,13 +694,16 @@ class FilesActionStore {
       clearActiveOperations(fileIds, folderIds);
 
       setSecondaryProgressBarData({
-        visible: true,
+        operation: "download",
         alert: true,
         operationId,
       });
       const error = err.error;
 
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+      setTimeout(
+        () => clearSecondaryProgressData(operationId, "download"),
+        TIMEOUT,
+      );
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [
@@ -1005,12 +1011,10 @@ class FilesActionStore {
     const fileIds = [];
     item.fileExst ? fileIds.push(item.id) : folderIds.push(item.id);
 
-    const icon = item.isRoom ? "duplicate-room" : "duplicate";
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
-      icon,
-      visible: true,
+      operation: "duplicate",
       percent: 0,
       alert: false,
       operationId,
@@ -1024,7 +1028,7 @@ class FilesActionStore {
 
         if (lastResult?.error) return Promise.reject(lastResult.error);
 
-        const pbData = { icon, operationId };
+        const pbData = { operation: "duplicate", operationId };
         const data = lastResult || null;
 
         const operationData = await this.uploadDataStore.loopFilesOperations(
@@ -1038,19 +1042,29 @@ class FilesActionStore {
           );
         }
 
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
-        );
+        setSecondaryProgressBarData({
+          operation: "duplicate",
+          operationId,
+          percent: 100,
+          completed: true,
+        });
+
+        // Wait for animation to complete before clearing
+        //  return setTimeout(() => clearSecondaryProgressData(operationId), 5000); // Match ANIMATION_DELAY from FloatingButton
+        // return setTimeout(
+        //   () => clearSecondaryProgressData(operationId),
+        //   TIMEOUT,
+        // );
       })
       .catch((err) => {
         clearActiveOperations(fileIds, folderIds);
         setSecondaryProgressBarData({
-          icon,
-          visible: true,
+          operation: "duplicate",
           alert: true,
           operationId,
         });
+        // eslint-disable-next-line no-debugger
+        debugger;
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
       })

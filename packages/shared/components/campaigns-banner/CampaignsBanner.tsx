@@ -28,7 +28,6 @@ import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import React from "react";
 import { ReactSVG } from "react-svg";
-import classNames from "classnames";
 
 import { Text as TextComponent } from "../text";
 import { Link as LinkComponent, LinkType } from "../link";

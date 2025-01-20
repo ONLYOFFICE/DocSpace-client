@@ -26,14 +26,13 @@
 import React from "react";
 import styled from "styled-components";
 
+import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
+import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
+import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 import { StyledBody } from "./StatusMessage.styled";
 import commonIconsStyles, {
   IconSizeType,
 } from "../../utils/common-icons-style";
-
-import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
-import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
-import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 
 const enum ToastType {
   success = "success",

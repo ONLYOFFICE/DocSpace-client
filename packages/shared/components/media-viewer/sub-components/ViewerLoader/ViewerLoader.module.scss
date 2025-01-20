@@ -24,41 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { ViewerLoaderProps } from "./ViewerLoader.types";
-import { globalColors } from "../../../../themes";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
-export const StyledLoaderWrapper = styled.div<
-  Pick<ViewerLoaderProps, "withBackground">
->`
+:root {
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] {
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: rgba(0, 0, 0, 0.4);
+}
+
+.loaderWrapper {
   position: fixed;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  ${(props) => props.withBackground && "background-color: rgba(0, 0, 0, 0.4);"}
-`;
 
-export const StyledLoader = styled.div`
+  &.withBackground {
+    background-color: var(--viewer-loader-background);
+  }
+}
+
+.loader {
   width: 48px;
   height: 48px;
-  border: 4px solid ${globalColors.white};
+  border: 4px solid var(--viewer-loader-border-color);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
 
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
   }
-`;
+  100% {
+    transform: rotate(360deg);
+  }
+}

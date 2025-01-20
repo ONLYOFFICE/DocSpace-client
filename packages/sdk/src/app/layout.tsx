@@ -30,11 +30,17 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
+import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
 
+import "@docspace/shared/styles/theme.scss";
+import { Base } from "@docspace/shared/themes";
+
 import "@/styles/globals.scss";
+import { getColorTheme } from "@/api/settings";
 
 export default async function RootLayout({
   children,
@@ -43,15 +49,28 @@ export default async function RootLayout({
 }) {
   const hdrs = headers();
 
+  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    return <></>;
+  }
+
   const cookieStore = cookies();
+
+  const [colorTheme] = await Promise.all([getColorTheme()]);
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
     | undefined;
 
-  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    return <></>;
-  }
+  const currentColorScheme = colorTheme?.themes.find(
+    (theme) => theme.id === colorTheme.selected,
+  );
+
+  const styles = {
+    "--color-scheme-main-accent": currentColorScheme?.main.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+  } as React.CSSProperties;
 
   return (
     <html lang="en" translate="no">
@@ -66,12 +85,14 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body>
+      <body style={styles} className="light ltr">
         <StyledComponentsRegistry>
           {/* <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}
           </Providers> */}
-          <div>{children}</div>
+          <ComponentThemeProvider theme={Base}>
+            {children}
+          </ComponentThemeProvider>
         </StyledComponentsRegistry>
 
         <Scripts />

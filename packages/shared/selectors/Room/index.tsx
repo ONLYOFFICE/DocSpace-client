@@ -103,7 +103,7 @@ const RoomSelector = ({
       : [],
   );
 
-  const isFirstLoad = React.useRef(true);
+  const isFirstLoad = React.useRef(!withInit);
   const afterSearch = React.useRef(false);
 
   const onSelect = (
@@ -268,6 +268,7 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      isSSR={withInit}
     />
   );
 };

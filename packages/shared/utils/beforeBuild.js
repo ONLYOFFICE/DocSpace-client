@@ -37,6 +37,7 @@ const { readdir } = require("fs").promises;
 let appSettings = null;
 
 try {
+  // eslint-disable-next-line import/no-unresolved
   // @ts-expect-error path is correct
   appSettings = require("../../../../buildtools/config/appsettings.json");
 } catch (e) {

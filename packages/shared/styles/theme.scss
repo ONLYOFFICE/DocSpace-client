@@ -1438,6 +1438,16 @@
   --text-input-padding-large: 11px 12px;
 }
 
+.light {
+  --status-message-bg: #{$light-toast-warning};
+  --status-message-box-shadow: 0px 5px 20px #{$menu-shadow};
+}
+
+.dark {
+  --status-message-bg: #{$dark-toast-warning};
+  --status-message-box-shadow: 0px 5px 20px #{$menu-shadow};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

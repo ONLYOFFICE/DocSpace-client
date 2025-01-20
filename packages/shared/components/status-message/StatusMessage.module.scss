@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,30 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import styled from "styled-components";
-import { globalColors } from "../../themes";
-
-const StyledBody = styled.div`
+.body {
   box-sizing: border-box;
-
   width: 100%;
   max-width: 1200px;
   padding: 12px;
-  background: ${(props) => props.theme.statusMessage.toastBackground};
-
-  box-shadow: 0px 5px 20px ${globalColors.menuShadow};
+  background: var(--status-message-bg);
+  box-shadow: var(--status-message-box-shadow);
   border-radius: 6px;
   display: flex;
   align-items: flex-start;
-
   margin-bottom: 16px;
-
   color: black;
 
   svg {
     margin-inline-end: 16px;
   }
-`;
-
-export { StyledBody };
+}

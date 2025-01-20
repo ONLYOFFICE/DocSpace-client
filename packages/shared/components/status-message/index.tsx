@@ -24,56 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import styled from "styled-components";
+import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import { StyledBody } from "./StatusMessage.styled";
+import styled from "styled-components";
 import commonIconsStyles, {
   IconSizeType,
 } from "../../utils/common-icons-style";
-
-import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
-import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
-import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
-
-const enum ToastType {
-  success = "success",
-  warning = "warning",
-  info = "info",
-}
+import styles from "./StatusMessage.module.scss";
 
 interface StatusMessageProps {
   message: string;
-  type?: ToastType;
 }
 
-const StyledCheckToastIcon = styled(CheckToastReactSvg)`
-  ${commonIconsStyles}
-`;
-const StyledDangerToastIcon = styled(DangerToastReactSvg)`
-  ${commonIconsStyles}
-`;
-const StyledInfoToastIcon = styled(InfoToastReactSvg)`
+const StyledDangerIcon = styled(DangerToastReactSvg)`
   ${commonIconsStyles}
 `;
 
-const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) =>
-  type === ToastType.success ? (
-    <StyledCheckToastIcon size={size} />
-  ) : type === ToastType.warning ? (
-    <StyledDangerToastIcon size={size} />
-  ) : (
-    <StyledInfoToastIcon size={size} />
-  );
-
-const StatusMessage: React.FC<StatusMessageProps> = ({
-  message,
-  type = ToastType.warning,
-}) => {
+const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
   return (
-    <StyledBody>
-      <Icon size={IconSizeType.medium} type={type} />
+    <div className={styles.body}>
+      <StyledDangerIcon size={IconSizeType.medium} />
       {message}
-    </StyledBody>
+    </div>
   );
 };
 

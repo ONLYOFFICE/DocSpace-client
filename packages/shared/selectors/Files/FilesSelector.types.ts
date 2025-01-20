@@ -206,6 +206,7 @@ export type FilesSelectorProps = TSelectorHeader &
         | TRoomSecurity
         | undefined,
       selectedFileInfo: TSelectedFileInfo,
+      isDisabledFolder?: boolean,
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
     withHeader: boolean;

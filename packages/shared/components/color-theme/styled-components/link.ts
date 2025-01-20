@@ -26,16 +26,16 @@
 
 import styled from "styled-components";
 
-import StyledText from "../../link/Link.styled";
+import { Link } from "../../link";
 
 import { LinkColorTheme } from "../ColorTheme.types";
 
-const LinkTheme = styled(StyledText)<LinkColorTheme>`
-  color: ${(props) => props.$currentColorScheme?.main?.accent};
+const LinkTheme = styled(Link)<LinkColorTheme>`
+  color: ${(props) => props.$currentColorScheme?.main?.accent} !important;
 
   &:hover {
     color: ${(props) =>
-      !props.noHover && props.$currentColorScheme?.main?.accent};
+      !props.noHover && props.$currentColorScheme?.main?.accent} !important;
     text-decoration: underline;
   }
 `;

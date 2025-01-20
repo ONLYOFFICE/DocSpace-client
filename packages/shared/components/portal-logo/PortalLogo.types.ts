@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface PortalLogoProps {
+export type PortalLogoProps = {
+  /** Optional CSS class name to be applied to the component */
   className?: string;
+  /** Flag indicating whether the logo should be resizable based on screen width */
   isResizable?: boolean;
-}
+};

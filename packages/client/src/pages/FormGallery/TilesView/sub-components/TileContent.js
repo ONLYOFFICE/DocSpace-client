@@ -43,7 +43,9 @@ const TileContent = (props) => {
       onClick={onClick}
     >
       <MainContainerWrapper
-        mainContainerWidth={children.props && children.props.containerWidth}
+        mainContainerWidth={
+          children.props ? children.props.containerWidth : null
+        }
       >
         <MainContainer className="row-main-container">{children}</MainContainer>
       </MainContainerWrapper>

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { LOADER_STYLE } from "../../constants";
+import { RectangleSkeleton } from "../rectangle";
 
 const speed = 2;
 

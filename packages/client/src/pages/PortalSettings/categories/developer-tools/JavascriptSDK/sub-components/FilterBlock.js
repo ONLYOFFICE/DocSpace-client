@@ -383,8 +383,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
       />
-      {isUserFilterSet &&
-        ("authorType" in config.filter ? (
+      {isUserFilterSet ? (
+        "authorType" in config.filter ? (
           <SelectedItem
             onClick={clearAuthorType}
             onClose={() => {}}
@@ -404,7 +404,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 tabIndex={5}
               />
             </UserInput>
-            {author.length >= minSearchValue && (
+            {author.length >= minSearchValue ? (
               <StyledDropDown
                 width={searchRef?.current?.offsetWidth}
                 isDefaultMode={false}
@@ -417,9 +417,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
               >
                 {usersList.length ? foundUsers : ""}
               </StyledDropDown>
-            )}
+            ) : null}
           </UserInputContainer>
-        ))}
+        )
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
@@ -427,8 +428,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         isChecked={isTypeFilterSet}
         isDisabled={!!config.requestToken}
       />
-      {isTypeFilterSet &&
-        ("filterType" in config.filter ? (
+      {isTypeFilterSet ? (
+        "filterType" in config.filter ? (
           <SelectedItem
             onClick={clearFilterType}
             onClose={() => {}}
@@ -443,7 +444,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             displaySelectedOption
             directionY="top"
           />
-        ))}
+        )
+      ) : null}
     </>
   ) : (
     <>
@@ -454,7 +456,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleMembers}
         isChecked={isUserFilterSet}
       />
-      {isUserFilterSet && (
+      {isUserFilterSet ? (
         <>
           {"subjectId" in config.filter ? (
             <SelectedItem
@@ -476,7 +478,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   tabIndex={5}
                 />
               </UserInput>
-              {author.length >= minSearchValue && (
+              {author.length >= minSearchValue ? (
                 <StyledDropDown
                   width={searchRef?.current?.offsetWidth}
                   isDefaultMode={false}
@@ -489,7 +491,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 >
                   {usersList.length ? foundUsers : ""}
                 </StyledDropDown>
-              )}
+              ) : null}
             </UserInputContainer>
           )}
 
@@ -500,15 +502,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             isChecked={false}
           />
         </>
-      )}
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
         onChange={toggleType}
         isChecked={isTypeFilterSet}
       />
-      {isTypeFilterSet &&
-        ("type" in config.filter ? (
+      {isTypeFilterSet ? (
+        "type" in config.filter ? (
           <SelectedItem
             onClick={clearType}
             onClose={() => {}}
@@ -523,7 +525,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             displaySelectedOption
             directionY="top"
           />
-        ))}
+        )
+      ) : null}
     </>
   );
 };

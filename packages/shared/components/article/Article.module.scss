@@ -1,0 +1,492 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@import "../../styles/variables/devices.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/mixins";
+
+:global(.rtl) {
+  :local(.wrapper) {
+    :global(.arrow) {
+      svg {
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  :local(.hideArticleMenuButton) {
+    :global(.article-hide-menu-icon_svg),
+    :global(.article-show-menu-icon_svg) {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.apps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  margin-bottom: 16px;
+
+  &[data-with-dev-tools="false"] {
+    margin-top: auto;
+  }
+
+  &[data-with-dev-tools="true"] {
+    margin-top: 0;
+  }
+
+  @include tablet-and-below {
+    &[data-show-text="true"] {
+      margin-inline-start: 8px;
+    }
+  }
+
+  @include mobile {
+    position: relative;
+    bottom: 0px;
+    margin-top: 32px;
+
+    &[data-with-dev-tools="true"] {
+      margin-top: 16px;
+    }
+  }
+
+  :global(.download-app-text) {
+    color: var(--files-article-body-download-app-list-text-color);
+  }
+
+  :global(.download-app-list) {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.wrapper {
+  cursor: pointer;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: var(--files-article-body-dev-tools-border);
+  border-radius: 6px;
+
+  @include mobile {
+    bottom: 0px;
+    margin-top: 32px;
+  }
+
+  :global(.icon) {
+    height: 16px;
+  }
+
+  :global(.arrow) {
+    height: 16px;
+    margin-inline-start: auto;
+  }
+
+  :global(.label) {
+    color: var(--files-article-body-dev-tools-color);
+  }
+
+  svg {
+    path {
+      fill: var(--files-article-body-dev-tools-color);
+    }
+  }
+}
+
+.hideArticleMenuButton {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 44px;
+  z-index: 209;
+  background: var(--article-catalog-background);
+  inset-inline-start: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: #{$tap-highlight};
+
+  &[data-hide-profile-block="true"] {
+    bottom: 16px;
+  }
+
+  &[data-hide-profile-block="false"] {
+    bottom: 89px;
+  }
+
+  &[data-show-text="true"] {
+    min-width: 243px;
+    max-width: 243px;
+  }
+
+  &[data-show-text="false"] {
+    min-width: 60px;
+    max-width: 60px;
+  }
+
+  @include desktop {
+    display: none;
+  }
+
+  @include mobile {
+    display: none;
+  }
+
+  :global(.article-hide-menu-container) {
+    align-items: center;
+    margin-inline-start: 16px;
+
+    @include tablet {
+      &[data-show-text="true"] {
+        display: flex;
+      }
+      &[data-show-text="false"] {
+        display: none;
+      }
+    }
+
+    :global(.article-hide-menu-text) {
+      margin-inline-start: 8px;
+      color: var(--accent-main);
+    }
+  }
+
+  :global(.article-show-menu-container) {
+    justify-content: center;
+    width: 100%;
+  }
+
+  @include tablet {
+    &[data-show-text="true"] {
+      :global(.article-hide-menu-container) {
+        display: flex;
+      }
+      :global(.article-show-menu-container) {
+        display: none;
+      }
+    }
+    &[data-show-text="false"] {
+      :global(.article-hide-menu-container) {
+        display: none;
+      }
+      :global(.article-show-menu-container) {
+        display: flex;
+      }
+    }
+  }
+
+  :global(.article-hide-menu-icon_svg),
+  :global(.article-show-menu-icon_svg) {
+    height: 20px;
+  }
+
+  :global(.article-hide-menu-icon_svg) {
+    svg {
+      path {
+        fill: var(--accent-main);
+      }
+    }
+  }
+
+  :global(.article-show-menu-icon_svg) {
+    svg {
+      path {
+        fill: var(--article-catalog-show-text);
+      }
+    }
+  }
+}
+
+.articleHeader {
+  height: 24px;
+  padding-block: 23px 22px;
+  padding-inline: 20px 21px;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-tap-highlight-color: #{$tap-highlight};
+
+  @include tablet {
+    padding: 20px 8px 17px;
+    margin: 0;
+    height: 61px;
+    min-height: 61px;
+    max-height: 61px;
+    box-sizing: border-box;
+
+    &[data-show-text="true"] {
+      justify-content: flex-start;
+    }
+
+    &[data-show-text="false"] {
+      justify-content: center;
+    }
+  }
+
+  @include mobile {
+    border-bottom: var(--article-catalog-header-border-bottom);
+    padding: 12px 0;
+  }
+}
+
+.heading {
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  :global(img.logo-icon_svg) {
+    height: 24px;
+    width: 211px;
+  }
+
+  :global(.logo-icon_svg) {
+    svg {
+      path:last-child {
+        fill: var(--article-client-home-logo-color);
+      }
+    }
+  }
+
+  @include tablet {
+    margin-inline-start: 9px;
+
+    &[data-show-text="true"] {
+      display: block;
+    }
+
+    &[data-show-text="false"] {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    margin-inline-start: 0;
+  }
+}
+
+.iconBox {
+  cursor: pointer;
+  display: none;
+  align-items: center;
+
+  img {
+    height: 28px;
+    width: 28px;
+  }
+
+  @include tablet {
+    &[data-show-text="true"] {
+      display: none;
+    }
+
+    &[data-show-text="false"] {
+      display: flex;
+    }
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.profileWrapper {
+  z-index: 209;
+  position: absolute;
+  bottom: 0;
+  inset-inline-start: 0;
+  min-width: 251px;
+  max-width: 251px;
+  background-color: var(--article-catalog-profile-background);
+
+  @include tablet {
+    &[data-show-text="true"] {
+      min-width: 243px;
+      max-width: 243px;
+    }
+
+    &[data-show-text="false"] {
+      min-width: 60px;
+      max-width: 60px;
+    }
+  }
+}
+
+.articleProfile {
+  padding: 16px 20px;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: var(--article-catalog-profile-border-top);
+  border-inline-end: var(--article-catalog-vertical-line);
+  background-color: var(--article-catalog-profile-background);
+
+  @include tablet {
+    padding: 16px 14px;
+  }
+
+  :global(.profile-avatar) {
+    cursor: pointer;
+  }
+
+  :global(.option-button) {
+    margin-inline-start: auto;
+    height: 32px;
+    width: 32px;
+
+    :global(.injected-svg) {
+      width: 16px;
+      height: 16px;
+    }
+
+    :global(.option-button-icon) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.userName {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 131px;
+  min-width: 131px;
+  padding-inline-start: 12px;
+  cursor: pointer;
+}
+
+.article {
+  position: relative;
+  overflow: hidden;
+  background: var(--article-catalog-background);
+  min-width: 251px;
+  max-width: 251px;
+  box-sizing: border-box;
+  user-select: none;
+  border-inline-end: var(--article-catalog-vertical-line);
+  z-index: 205;
+
+  @include tablet {
+    height: 100%;
+  }
+
+  &[data-show-text="false"] {
+    @include tablet {
+      min-width: 60px;
+      max-width: 60px;
+    }
+  }
+
+  &[data-show-text="true"] {
+    @include tablet {
+      min-width: 243px;
+      max-width: 243px;
+    }
+  }
+
+  @include mobile {
+    z-index: 230;
+
+    &[data-open="true"] {
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+      width: 100%;
+      position: fixed;
+      margin: 0;
+      border: none;
+      height: calc(100% - 64px) !important;
+      position: absolute;
+      top: 64px;
+    }
+
+    &[data-open="false"] {
+      display: none;
+    }
+  }
+
+  &[data-with-main-button="true"] {
+    :global(.article-body__scrollbar) {
+      height: calc(100% - 190px) !important;
+    }
+  }
+  &[data-with-main-button="false"] {
+    :global(.article-body__scrollbar) {
+      height: calc(100% - 150px) !important;
+    }
+  }
+
+  :global(.article-body__scrollbar) {
+    @include tablet {
+      height: calc(100% - 184px) !important;
+    }
+
+    @include mobile {
+      height: 100% !important;
+    }
+
+    :global(.article-scroller) {
+      @include tablet {
+        height: 100% !important;
+      }
+    }
+
+    :global(.scroll-body) {
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden !important;
+      padding: 0 20px !important;
+      margin-bottom: 0px !important;
+
+      @include tablet {
+        padding: 0 8px !important;
+      }
+
+      @include mobile {
+        display: block;
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.articleMainButton {
+  padding: 0px 20px 16px;
+  max-width: 100%;
+
+  @include tablet-and-below {
+    padding: 0;
+    margin: 0;
+  }
+}

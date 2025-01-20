@@ -58,7 +58,7 @@ const PageCount = forwardRef<PageCountRef, PageCountProps>(
 
     return (
       <PageCountWrapper isPanelOpen={isPanelOpen} className={className}>
-        {isMobile && <PanelReactSvg onClick={openMobileDrawer} />}
+        {isMobile ? <PanelReactSvg onClick={openMobileDrawer} /> : null}
         <div>
           <span>{pageNumber}</span> / <span>{pagesCount}</span>
         </div>

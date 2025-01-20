@@ -173,11 +173,11 @@ const NavItem = React.memo((props) => {
         <ReactSVG src={iconUrl} beforeInjection={() => {}} />
       ) : (
         <>
-          {iconName === "MenuIcon" && <VersionBadge>BETA</VersionBadge>}
+          {iconName === "MenuIcon" ? <VersionBadge>BETA</VersionBadge> : null}
           <StyledMenuIcon active={active} size="big" />
         </>
       )}
-      {children && (
+      {children ? (
         <NavItemLabel
           opened={opened}
           active={active}
@@ -187,7 +187,7 @@ const NavItem = React.memo((props) => {
         >
           {children}
         </NavItemLabel>
-      )}
+      ) : null}
       <NavItemBadge
         opened={opened}
         label={badgeNumber}

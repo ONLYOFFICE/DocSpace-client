@@ -155,7 +155,7 @@ const FilterDialog = (props) => {
           <StatusPicker filters={filters} setFilters={setFilters} />
         </DialogBodyWrapper>
       </ModalDialog.Body>
-      {!areFiltersChanged && (
+      {!areFiltersChanged ? (
         <ModalDialog.Footer>
           <Footer>
             <Button
@@ -174,7 +174,7 @@ const FilterDialog = (props) => {
             />
           </Footer>
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

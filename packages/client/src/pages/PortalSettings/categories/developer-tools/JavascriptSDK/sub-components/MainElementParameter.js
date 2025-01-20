@@ -111,7 +111,7 @@ export const MainElementParameter = ({
         spacing="8px"
         isDisabled
       />
-      {config.isButtonMode && (
+      {config.isButtonMode ? (
         <>
           <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
           <ControlsGroup>
@@ -141,7 +141,7 @@ export const MainElementParameter = ({
             />
           </ControlsGroup>
         </>
-      )}
+      ) : null}
     </ControlsSection>
   );
 };

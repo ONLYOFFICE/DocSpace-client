@@ -24,25 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { PROVIDERS_DATA } from "@docspace/shared/constants";
+import type { PROVIDERS_DATA } from "../../constants";
 
 import { TTranslation } from "../../types";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 
-interface IProvider {
+type Provider = {
   linked: boolean;
   provider: string;
   url: string;
-}
+};
 
-export interface MoreLoginModalProps {
+export type MoreLoginModalProps = {
   visible: boolean;
   onClose: VoidFunction;
-  providers?: IProvider[];
+  providers?: Provider[];
   onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
   ssoLabel: string;
   ssoUrl: string;
   t: TTranslation;
   isSignUp: boolean;
-}
+};

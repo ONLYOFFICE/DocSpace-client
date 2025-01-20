@@ -26,7 +26,7 @@
 
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
-import { StyledComponent } from "./Notifications.styled";
+import styles from "./Notifications.module.scss";
 import { NotificationsLoaderProps } from "./Notifications.types";
 
 const NotificationsLoader = ({
@@ -89,9 +89,13 @@ const NotificationsLoader = ({
 
   for (let i = 0; i < count; i += 1) {
     items.push(
-      <StyledComponent key={`notification_loader_${i}`}>
+      <div
+        key={`notification_loader_${i}`}
+        className={styles.notification}
+        data-testid="notification-loader"
+      >
         {contentItem}
-      </StyledComponent>,
+      </div>,
     );
   }
   return items;

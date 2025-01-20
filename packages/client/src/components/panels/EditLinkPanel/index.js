@@ -290,7 +290,7 @@ const EditLinkPanel = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledEditLinkBodyContent className="edit-link_body">
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <RoleLinkBlock
               t={t}
               accessOptions={roomAccessOptions}
@@ -298,7 +298,7 @@ const EditLinkPanel = (props) => {
               currentDeviceType={currentDeviceType}
               onSelect={handleSelectAccessOption}
             />
-          )}
+          ) : null}
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -324,7 +324,7 @@ const EditLinkPanel = (props) => {
             isPasswordErrorShow={isPasswordErrorShow}
             setIsPasswordErrorShow={setIsPasswordErrorShow}
           />
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <ToggleBlock
               isLoading={isLoading}
               headerText={t("Files:DisableDownload")}
@@ -332,7 +332,7 @@ const EditLinkPanel = (props) => {
               isChecked={denyDownload}
               onChange={onDenyDownloadChange}
             />
-          )}
+          ) : null}
 
           <LimitTimeBlock
             isExpired={isExpired}

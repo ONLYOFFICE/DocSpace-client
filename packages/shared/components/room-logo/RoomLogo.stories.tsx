@@ -30,7 +30,7 @@ import { RoomsType } from "../../enums";
 import { RoomLogoPure } from "./RoomLogo";
 
 const meta = {
-  title: "Components/RoomLogo",
+  title: "Base UI components/RoomLogo",
   component: RoomLogoPure,
   parameters: {
     docs: {
@@ -40,12 +40,6 @@ const meta = {
       },
     },
   },
-  // argTypes: {
-  //   type: {
-  //     options: ["Editing Room", "Custom Room"],
-  //     control: { type: "select" },
-  //   },
-  // },
 } satisfies Meta<typeof RoomLogoPure>;
 type Story = StoryObj<typeof meta>;
 

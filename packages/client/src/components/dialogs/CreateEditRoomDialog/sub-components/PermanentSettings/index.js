@@ -45,7 +45,7 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
 
   return (
     <StyledPermanentSettings displayNone={!(isPrivate || isThirdparty)}>
-      {isThirdparty && (
+      {isThirdparty ? (
         <PermanentSetting
           type="storageLocation"
           isFull={!isPrivate}
@@ -63,7 +63,7 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
             </Trans>
           }
         />
-      )}
+      ) : null}
       {/* {isPrivate && (
         <PermanentSetting
           type="privacy"

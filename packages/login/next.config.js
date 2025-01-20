@@ -54,10 +54,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-};
-
-module.exports = {
-  webpack(config) {
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -70,8 +67,9 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
+    // Configure CSS handling
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+      // Existing asset rules
       {
         type: "asset/resource",
         generator: {
@@ -79,14 +77,13 @@ module.exports = {
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
+      // SVG handling
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         loader: "@svgr/webpack",
         options: {
           prettier: false,
@@ -117,5 +114,6 @@ module.exports = {
 
     return config;
   },
-  ...nextConfig,
 };
+
+module.exports = nextConfig;

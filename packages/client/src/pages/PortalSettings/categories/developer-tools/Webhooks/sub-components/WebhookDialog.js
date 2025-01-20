@@ -182,13 +182,13 @@ const WebhookDialog = (props) => {
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal && (
+          {!isSettingsModal ? (
             <Hint>
               {t("WebhookCreationHint", {
                 productName: t("Common:ProductName"),
               })}
             </Hint>
-          )}
+          ) : null}
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}

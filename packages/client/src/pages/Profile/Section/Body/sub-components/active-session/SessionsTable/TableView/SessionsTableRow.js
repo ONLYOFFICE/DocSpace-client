@@ -93,14 +93,14 @@ const SessionsTableRow = (props) => {
       <TableCell>
         <Text className="session-platform">{platform}</Text>
         <Text className="session-info">{`(${browser})`}</Text>
-        {showTickIcon && (
+        {showTickIcon ? (
           <IconButton
             size={12}
             className="tick-icon"
             color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
-        )}
+        ) : null}
       </TableCell>
 
       <TableCell>
@@ -111,19 +111,19 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {(country || city) && (
+          {country || city ? (
             <>
               {country}
-              {country && city && ", "}
+              {country && city ? ", " : null}
               {city}
               <span className="divider" />
             </>
-          )}
+          ) : null}
           {ip}
         </Text>
       </TableCell>
 
-      {showRemoveIcon && (
+      {showRemoveIcon ? (
         <TableCell className="remove-cell">
           <IconButton
             size={20}
@@ -132,7 +132,7 @@ const SessionsTableRow = (props) => {
             onClick={onRemoveClick}
           />
         </TableCell>
-      )}
+      ) : null}
     </StyledTableRow>
   );
 };

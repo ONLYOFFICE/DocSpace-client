@@ -211,7 +211,7 @@ const HistoryMainContent = (props) => {
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
-      {isSettingNotPaid && (
+      {isSettingNotPaid ? (
         <Badge
           className="paid-badge"
           fontWeight="700"
@@ -223,7 +223,7 @@ const HistoryMainContent = (props) => {
           label={t("Common:Paid")}
           isPaidBadge
         />
-      )}
+      ) : null}
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">
           {subHeader}

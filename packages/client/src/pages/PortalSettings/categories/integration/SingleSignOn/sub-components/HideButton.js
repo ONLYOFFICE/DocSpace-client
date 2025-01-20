@@ -53,7 +53,7 @@ const HideButton = (props) => {
 
   return (
     <StyledWrapper isAdditionalParameters={isAdditionalParameters}>
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
@@ -63,7 +63,7 @@ const HideButton = (props) => {
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         id={id}

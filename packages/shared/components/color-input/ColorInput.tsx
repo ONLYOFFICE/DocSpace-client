@@ -60,6 +60,7 @@ const ColorInput = ({
   };
   return (
     <Wrapper
+      data-testid="color-input"
       className={className}
       id={id}
       size={size}

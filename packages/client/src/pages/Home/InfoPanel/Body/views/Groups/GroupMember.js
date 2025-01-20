@@ -79,9 +79,9 @@ const GroupMember = ({ groupMember, isManager }) => {
           <div className="name" style={{}} title={groupMember.displayName}>
             {groupMember.displayName}
           </div>
-          {groupMember.status === EmployeeStatus.Pending && (
+          {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
-          )}
+          ) : null}
         </div>
         <div className="email" title={groupMember.email}>
           {groupMember.email}
@@ -89,9 +89,9 @@ const GroupMember = ({ groupMember, isManager }) => {
       </div>
 
       <div className="context-btn-wrapper">
-        {isManager && (
+        {isManager ? (
           <div className="group-manager-tag">{t("Common:HeadOfGroup")}</div>
-        )}
+        ) : null}
 
         {/* {!groupMember.isLDAP && (
           <div className="context-btn" ref={iconRef}>

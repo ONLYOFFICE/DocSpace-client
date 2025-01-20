@@ -148,7 +148,7 @@ const InputItem = ({
         <RoomIcon
           color={color}
           title={value}
-          logo={{ cover, large: "", original: "", small: "" }}
+          logo={{ cover, large: "", original: "", small: "", medium: "" }}
           showDefault={false}
           className="item-logo"
         />

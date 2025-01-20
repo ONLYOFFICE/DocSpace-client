@@ -26,11 +26,11 @@
 
 import React from "react";
 
-import { StyledSectionFooter } from "../Section.styled";
 import { SectionFooterProps } from "../Section.types";
+import styles from "../Section.module.scss";
 
 const SectionFooter = ({ children }: SectionFooterProps) => {
-  return <StyledSectionFooter>{children}</StyledSectionFooter>;
+  return <div className={styles.footer}>{children}</div>;
 };
 
 SectionFooter.displayName = "SectionFooter";

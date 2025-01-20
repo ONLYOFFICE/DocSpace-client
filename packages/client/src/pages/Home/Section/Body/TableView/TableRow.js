@@ -91,7 +91,7 @@ const FilesTableRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       logo={item.logo}
       color={item.logo?.color}
@@ -181,17 +181,17 @@ const FilesTableRow = (props) => {
       })}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
     >
       <StyledTableRow
+        key={item.id}
         className="table-row"
         {...dragStyles}
         isDragging={dragging}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
-        key={item.id}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}

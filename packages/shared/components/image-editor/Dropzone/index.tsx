@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect } from "react";
-import { imageProcessing } from "@docspace/shared/utils/common";
+import { imageProcessing } from "../../../utils/common";
 
 import DropzoneComponent from "../../dropzone";
 import { toastr } from "../../toast";
@@ -34,12 +34,10 @@ const Dropzone = ({
   t,
   setUploadedFile,
   isDisabled,
-  maxImageSize = ONE_MEGABYTE,
 }: {
   t: (key: string) => string;
   setUploadedFile: (f: File) => void;
   isDisabled?: boolean;
-  maxImageSize?: number;
 }) => {
   const [loadingFile, setLoadingFile] = useState(false);
   const mount = useRef(false);

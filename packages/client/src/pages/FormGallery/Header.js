@@ -114,16 +114,16 @@ const SectionHeaderContent = ({
         </StyledHeadline>
       </StyledHeading>
 
-      {!oformsLoadError && canSubmitToFormGallery() && (
+      {!oformsLoadError && canSubmitToFormGallery() ? (
         <StyledSubmitToGalleryButton
           primary
           size="small"
           onClick={onOpenSubmitToGalleryDialog}
           label={t("Common:SubmitToFormGallery")}
         />
-      )}
+      ) : null}
 
-      {!oformsLoadError && (
+      {!oformsLoadError ? (
         <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
           <div className="info-panel-toggle-bg">
             <IconButton
@@ -136,7 +136,7 @@ const SectionHeaderContent = ({
             />
           </div>
         </StyledInfoPanelToggleWrapper>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

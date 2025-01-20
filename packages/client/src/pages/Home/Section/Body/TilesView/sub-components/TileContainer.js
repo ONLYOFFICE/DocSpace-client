@@ -234,7 +234,7 @@ class TileContainer extends React.PureComponent {
           )
         ) : null}
 
-        {Folders.length > 0 && (
+        {Folders.length > 0 ? (
           <Heading
             size="xsmall"
             id="folder-tile-heading"
@@ -242,7 +242,7 @@ class TileContainer extends React.PureComponent {
           >
             {headingFolders}
           </Heading>
-        )}
+        ) : null}
         {Folders.length > 0 ? (
           useReactWindow ? (
             Folders
@@ -251,11 +251,11 @@ class TileContainer extends React.PureComponent {
           )
         ) : null}
 
-        {Files.length > 0 && (
+        {Files.length > 0 ? (
           <Heading size="xsmall" className="tile-items-heading">
             {headingFiles}
           </Heading>
-        )}
+        ) : null}
         {Files.length > 0 ? (
           useReactWindow ? (
             Files

@@ -65,7 +65,7 @@ export const WizardContainer = styled.div`
   }
 
   .password-field-wrapper {
-    width: 100%;
+    width: 100% !important;
   }
 
   .wizard-field {
@@ -95,8 +95,11 @@ export const StyledLink = styled.div`
   }
 
   .icon-button_svg {
-    svg > g > path {
-      fill: ${(props) => props.theme.client.wizard.generatePasswordColor};
+    svg {
+      path {
+        fill: ${(props) =>
+          props.theme.client.wizard.generatePasswordColor} !important;
+      }
     }
   }
 `;

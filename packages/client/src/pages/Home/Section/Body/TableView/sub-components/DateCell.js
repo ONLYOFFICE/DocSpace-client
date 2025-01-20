@@ -50,7 +50,7 @@ const DateCell = ({
       className="row_update-text"
       truncate
     >
-      {date && date}
+      {date || null}
     </StyledText>
   );
 };

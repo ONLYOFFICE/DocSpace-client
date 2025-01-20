@@ -287,7 +287,7 @@ const PureConnectDialogContainer = (props) => {
           </FieldContainer>
         ) : (
           <>
-            {showUrlField && (
+            {showUrlField ? (
               <FieldContainer
                 labelVisible
                 isRequired
@@ -307,7 +307,7 @@ const PureConnectDialogContainer = (props) => {
                   onChange={onChangeUrl}
                 />
               </FieldContainer>
-            )}
+            ) : null}
 
             <FieldContainer
               labelVisible
@@ -350,7 +350,7 @@ const PureConnectDialogContainer = (props) => {
             </FieldContainer>
           </>
         )}
-        {!(isConnectionViaBackupModule || roomCreation) && (
+        {!(isConnectionViaBackupModule || roomCreation) ? (
           <FieldContainer
             labelText={t("ConnectFolderTitle")}
             isRequired
@@ -367,7 +367,7 @@ const PureConnectDialogContainer = (props) => {
               onChange={onChangeFolderName}
             />
           </FieldContainer>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

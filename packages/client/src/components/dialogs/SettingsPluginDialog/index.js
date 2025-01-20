@@ -117,14 +117,14 @@ const SettingsPluginDialog = ({
             withDelete={withDelete}
             withSeparator={!!customSettingsProps?.children}
           />
-          {withDelete && (
+          {withDelete ? (
             <Button
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
               size="normal"
             />
-          )}
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

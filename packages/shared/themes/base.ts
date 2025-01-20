@@ -2314,6 +2314,7 @@ export const getBaseTheme = () => {
           borderColor: grayLight,
           hoverBorderColor: lightGrayHover,
           color: grayText,
+          hoverColor: grayText,
           iconColor: lightGrayDark,
         },
       },

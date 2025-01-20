@@ -249,7 +249,7 @@ const DirectThirdPartyConnection = (props) => {
   return (
     <StyledBackup
       isConnectedAccount={
-        connectedThirdPartyAccount && isTheSameThirdPartyAccount
+        connectedThirdPartyAccount ? isTheSameThirdPartyAccount : null
       }
       isMobileScale={isMobileScale}
     >
@@ -278,18 +278,18 @@ const DirectThirdPartyConnection = (props) => {
         />
 
         {connectedThirdPartyAccount?.id &&
-          selectedThirdPartyAccount &&
-          isTheSameThirdPartyAccount && (
-            <ContextMenuButton
-              zIndex={402}
-              className="backup_third-party-context"
-              iconName={VerticalDotsReactSvgUrl}
-              size={15}
-              getData={getContextOptions}
-              isDisabled={isDisabledComponent}
-              displayIconBorder
-            />
-          )}
+        selectedThirdPartyAccount &&
+        isTheSameThirdPartyAccount ? (
+          <ContextMenuButton
+            zIndex={402}
+            className="backup_third-party-context"
+            iconName={VerticalDotsReactSvgUrl}
+            size={15}
+            getData={getContextOptions}
+            isDisabled={isDisabledComponent}
+            displayIconBorder
+          />
+        ) : null}
       </div>
 
       {!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
@@ -322,13 +322,13 @@ const DirectThirdPartyConnection = (props) => {
           />
         )
       )}
-      {deleteThirdPartyDialogVisible && (
+      {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
           updateInfo={setThirdPartyAccountsInfo}
           key="thirdparty-delete-dialog"
           isConnectionViaBackupModule
         />
-      )}
+      ) : null}
     </StyledBackup>
   );
 };

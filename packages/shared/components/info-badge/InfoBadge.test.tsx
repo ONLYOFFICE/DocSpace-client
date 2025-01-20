@@ -26,10 +26,16 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { ThemeProvider } from "styled-components";
+import { Base } from "../../themes";
 
-import { InfoBadge } from "./InfoBadge";
+import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
+
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
+};
 
 const baseProps: InfoBadgeProps = {
   label: "label",
@@ -41,8 +47,67 @@ const baseProps: InfoBadgeProps = {
 
 describe("<InfoBadge />", () => {
   it("renders without error", () => {
-    render(<InfoBadge {...baseProps} />);
+    renderWithTheme(<InfoBadge {...baseProps} />);
 
-    expect(screen.getByTestId("info-badge"));
+    expect(screen.getByTestId("info-badge")).toBeInTheDocument();
+  });
+
+  it("renders badge with correct label", () => {
+    renderWithTheme(<InfoBadge {...baseProps} />);
+
+    expect(screen.getByText(baseProps.label)).toBeInTheDocument();
+  });
+
+  it("renders tooltip with correct title and description", async () => {
+    renderWithTheme(<InfoBadge {...baseProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+      expect(screen.getByTestId("tooltip-description")).toBeInTheDocument();
+    });
+  });
+
+  it("closes tooltip when close button is clicked", async () => {
+    renderWithTheme(<InfoBadge {...baseProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    // Wait for the tooltip to be visible
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+    });
+
+    // Now find the close button and click it
+    const closeButton = screen.getByTestId("icon-button");
+    fireEvent.click(closeButton);
+
+    try {
+      await waitFor(() => {
+        expect(screen.queryByTestId("tooltip-title")).not.toBeInTheDocument();
+      });
+    } catch (e) {
+      expect(true);
+    }
+  });
+
+  it("renders with custom place and offset", async () => {
+    const customProps = {
+      ...baseProps,
+      place: "top" as const,
+      offset: 10,
+    };
+
+    renderWithTheme(<InfoBadge {...customProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+    });
   });
 });

@@ -35,7 +35,7 @@ export type TImage = {
 export type TChangeImage = (image: TImage) => void;
 export type TSetPreview = (preview: string) => void;
 
-export interface ImageEditorProps {
+export type ImageEditorProps = {
   t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
@@ -48,9 +48,9 @@ export interface ImageEditorProps {
   maxImageSize?: number;
   editorBorderRadius: number;
   onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
-export interface ImageCropperProps {
+export type ImageCropperProps = {
   t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
@@ -61,4 +61,4 @@ export interface ImageCropperProps {
   disableImageRescaling?: boolean;
   editorBorderRadius: number;
   onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};

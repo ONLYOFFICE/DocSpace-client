@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants";
+import { LOADER_STYLE } from "../../constants";
 
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledSMTPContent } from "./Settings.styled";
+import styles from "./Settings.module.scss";
 
 const speed = 2;
 
@@ -183,7 +183,7 @@ export const SettingsDSConnectSkeleton = () => {
     </div>
   );
   return (
-    <StyledSMTPContent>
+    <div className={styles.smtpContent}>
       <RectangleSkeleton
         className="rectangle-loader_title"
         height="22"
@@ -212,6 +212,6 @@ export const SettingsDSConnectSkeleton = () => {
       {firstComponent}
 
       {buttonsComponent}
-    </StyledSMTPContent>
+    </div>
   );
 };

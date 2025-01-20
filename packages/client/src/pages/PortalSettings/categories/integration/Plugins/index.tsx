@@ -100,7 +100,7 @@ const PluginPage = ({
            
             withUpload={withUpload}
           /> */}
-      {withUpload && (
+      {withUpload ? (
         <>
           <Text>
             {t("UploadDescription", { productName: t("Common:ProductName") })}
@@ -111,7 +111,7 @@ const PluginPage = ({
             isLoading={false}
           />
         </>
-      )}
+      ) : null}
       <PluginListContainer>
         {pluginList.map((plugin) => (
           <PluginItem

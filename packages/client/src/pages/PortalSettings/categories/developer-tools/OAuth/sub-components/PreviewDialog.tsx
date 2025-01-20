@@ -259,7 +259,7 @@ const PreviewDialog = ({
               />
             </div>
 
-            {!isClientSecretPost && (
+            {!isClientSecretPost ? (
               <div className="block-container">
                 <Text
                   fontWeight={600}
@@ -276,7 +276,7 @@ const PreviewDialog = ({
                   value={codeVerifier}
                 />
               </div>
-            )}
+            ) : null}
           </StyledBlocksContainer>
         </StyledContainer>
       </ModalDialog.Body>

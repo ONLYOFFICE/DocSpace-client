@@ -110,7 +110,7 @@ const ToggleLDAP = ({
           >
             {t("LdapToggle")}
           </Text>
-          {!isLdapAvailable && (
+          {!isLdapAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -121,7 +121,7 @@ const ToggleLDAP = ({
               className="toggle-caption_title_badge"
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"

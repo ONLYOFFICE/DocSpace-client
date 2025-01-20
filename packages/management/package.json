@@ -13,6 +13,11 @@
     "start:internal": "yarn build && yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
     "start-prod:internal": "ws --port 5015 --directory dist --spa index.html"
   },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "styled-components": "^5.3.11"
+  },
   "devDependencies": {
     "@babel/core": "^7.25.8",
     "@babel/plugin-proposal-class-properties": "^7.18.6",

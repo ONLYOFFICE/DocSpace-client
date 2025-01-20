@@ -148,7 +148,7 @@ class TableHeaderComponent extends React.Component<
   moveToLeft = (
     widths: string[],
     newWidth: number,
-    isIndexEditingMode: boolean,
+    isIndexEditingMode?: boolean,
     index?: number,
   ) => {
     if (isIndexEditingMode) return;
@@ -199,7 +199,7 @@ class TableHeaderComponent extends React.Component<
   moveToRight = (
     widths: string[],
     newWidth: number,
-    isIndexEditingMode: boolean,
+    isIndexEditingMode?: boolean,
     index?: number,
   ) => {
     if (isIndexEditingMode) return;
@@ -250,14 +250,12 @@ class TableHeaderComponent extends React.Component<
     gridTemplateColumns: string[],
     activeColumnIndex: number,
     containerWidth: number,
-    isIndexEditingMode: boolean,
   ) => {
     const { columns } = this.props;
     const clearSize = gridTemplateColumns.map((c) => getSubstring(c));
-    // eslint-disable-next-line prefer-spread
-    const maxSize = Math.max.apply(Math, clearSize);
+    const maxSize = Math.max(...clearSize);
 
-    const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+    const { defaultSize } = columns[activeColumnIndex - 1];
 
     const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
@@ -923,7 +921,7 @@ class TableHeaderComponent extends React.Component<
 
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
-                  (column) => !column.defaultSize && column.enable,
+                  (с) => !с.defaultSize && с.enable,
                 ).length;
 
                 if (enableColumnsLength !== 1) {
@@ -1278,7 +1276,7 @@ class TableHeaderComponent extends React.Component<
               );
             })}
 
-            {showSettings && (
+            {showSettings ? (
               <div
                 className="table-container_header-settings"
                 title={settingsTitle}
@@ -1286,11 +1284,12 @@ class TableHeaderComponent extends React.Component<
                 <TableSettings
                   columns={columns}
                   disableSettings={
-                    infoPanelVisible || hideColumns || isIndexEditingMode
+                    (infoPanelVisible || hideColumns || isIndexEditingMode) ??
+                    false
                   }
                 />
               </div>
-            )}
+            ) : null}
           </StyledTableRow>
         </StyledTableHeader>
 

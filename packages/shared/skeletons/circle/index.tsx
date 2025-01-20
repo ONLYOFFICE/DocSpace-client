@@ -58,6 +58,7 @@ const CircleSkeleton = ({
     speed={speed}
     animate={animate}
     {...rest}
+    data-testid="circle-skeleton"
   >
     <circle cx={x} cy={y} r={radius} />
   </ContentLoader>

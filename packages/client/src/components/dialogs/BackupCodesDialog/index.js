@@ -109,16 +109,17 @@ class BackupCodesDialogComponent extends React.Component {
             </Text>
 
             <Text className="backup-codes-codes" isBold>
-              {backupCodes.length > 0 &&
-                backupCodes.forEach((item) => {
-                  if (!item.isUsed) {
-                    return (
-                      <strong key={item.code} dir="auto">
-                        {item.code} <br />
-                      </strong>
-                    );
-                  }
-                })}
+              {backupCodes.length > 0
+                ? backupCodes.forEach((item) => {
+                    if (!item.isUsed) {
+                      return (
+                        <strong key={item.code} dir="auto">
+                          {item.code} <br />
+                        </strong>
+                      );
+                    }
+                  })
+                : null}
             </Text>
           </StyledBodyContent>
         </ModalDialog.Body>
@@ -137,7 +138,7 @@ class BackupCodesDialogComponent extends React.Component {
               size="normal"
               onClick={onClose}
             />
-            {isDesktop() && (
+            {isDesktop() ? (
               <div className="backup-codes-print-link-wrapper">
                 <Link
                   type="action"
@@ -149,7 +150,7 @@ class BackupCodesDialogComponent extends React.Component {
                   {t("PrintButton")}
                 </Link>
               </div>
-            )}
+            ) : null}
           </StyledFooterContent>
         </ModalDialog.Footer>
       </ModalDialog>

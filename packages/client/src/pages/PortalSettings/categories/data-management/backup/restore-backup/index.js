@@ -216,17 +216,17 @@ const RestoreBackup = (props) => {
 
   const backupModules = (
     <div className="restore-backup_modules">
-      {radioButtonState === LOCAL_FILE && (
+      {radioButtonState === LOCAL_FILE ? (
         <LocalFileModule t={t} isEnableRestore={isEnableRestore} />
-      )}
+      ) : null}
 
-      {radioButtonState === BACKUP_ROOM && <RoomsModule />}
-      {radioButtonState === DISK_SPACE && (
+      {radioButtonState === BACKUP_ROOM ? <RoomsModule /> : null}
+      {radioButtonState === DISK_SPACE ? (
         <ThirdPartyResourcesModule buttonSize={buttonSize} />
-      )}
-      {radioButtonState === STORAGE_SPACE && (
+      ) : null}
+      {radioButtonState === STORAGE_SPACE ? (
         <ThirdPartyStoragesModule onSetStorageId={onSetStorageId} />
-      )}
+      ) : null}
     </div>
   );
 
@@ -243,7 +243,7 @@ const RestoreBackup = (props) => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      {!standalone && (
+      {!standalone ? (
         <Text
           className="restore-backup_warning-link settings_unavailable"
           noSelect
@@ -252,7 +252,7 @@ const RestoreBackup = (props) => {
             productName: t("Common:ProductName"),
           })}
         </Text>
-      )}
+      ) : null}
     </>
   );
 
@@ -264,9 +264,9 @@ const RestoreBackup = (props) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
-      {downloadingProgressError && (
+      {downloadingProgressError ? (
         <StatusMessage message={downloadingProgressError} />
-      )}
+      ) : null}
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}
@@ -283,13 +283,13 @@ const RestoreBackup = (props) => {
         {t("BackupList")}
       </Text>
 
-      {isVisibleBackupListDialog && (
+      {isVisibleBackupListDialog ? (
         <BackupListModalDialog
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
           isNotify={checkboxState.notification}
         />
-      )}
+      ) : null}
       <Checkbox
         truncate
         name={NOTIFICATION}

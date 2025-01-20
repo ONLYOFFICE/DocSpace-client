@@ -25,34 +25,53 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Scrollbar } from "../../scrollbar";
 import { DeviceType } from "../../../enums";
 
-import { StyledSectionContainer } from "../Section.styled";
 import { SectionContainerProps } from "../Section.types";
+import styles from "../Section.module.scss";
 
 const SectionContainer = React.forwardRef<
   HTMLDivElement,
   SectionContainerProps
->(({ withBodyScroll, children, currentDeviceType, ...props }, forwardRef) => {
-  return (
-    <StyledSectionContainer
-      ref={forwardRef}
-      id="section"
-      withBodyScroll={withBodyScroll}
-      {...props}
-    >
-      {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
-        <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
-          {children}
-        </Scrollbar>
-      ) : (
-        children
-      )}
-    </StyledSectionContainer>
-  );
-});
+>(
+  (
+    {
+      withBodyScroll,
+      children,
+      currentDeviceType,
+      isInfoPanelVisible,
+      showTwoProgress,
+      isSectionHeaderAvailable,
+      ...props
+    },
+    forwardRef,
+  ) => {
+    return (
+      <div
+        ref={forwardRef}
+        id="section"
+        className={classNames(styles.sectionContainer, {
+          [styles.withBodyScroll]: withBodyScroll,
+          [styles.infoPanelVisible]: isInfoPanelVisible,
+          [styles.showTwoProgress]: showTwoProgress,
+          [styles.withoutSectionHeader]: !isSectionHeaderAvailable,
+        })}
+        {...props}
+      >
+        {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
+          <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
+            {children}
+          </Scrollbar>
+        ) : (
+          children
+        )}
+      </div>
+    );
+  },
+);
 
 SectionContainer.displayName = "SectionContainer";
 

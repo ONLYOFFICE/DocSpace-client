@@ -65,11 +65,11 @@ export const SocialButton = memo((props: SocialButtonProps) => {
         ) : (
           <ReactSVG className="iconWrapper" src={iconName} />
         )}
-        {label && (
+        {label ? (
           <Text as="div" className="social_button_text">
             {label}
           </Text>
-        )}
+        ) : null}
       </div>
     </StyledSocialButton>
   );

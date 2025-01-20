@@ -100,13 +100,12 @@ const config = {
   resolve: {
     extensions: [".jsx", ".js", ".tsx", ".ts", ".json"],
     alias: {
-      "@docspace/shared/utils/socket": "client/socket",
-      "SRC_DIR": path.resolve(__dirname, "src"),
-      "PUBLIC_DIR": path.resolve(__dirname, "../../public"),
-      "ASSETS_DIR": path.resolve(__dirname, "public"),
-      "CLIENT_PUBLIC_DIR": path.resolve(__dirname, "../client/public"),
-      "PACKAGE_FILE": path.resolve(__dirname, "package.json"),
-      "COMMON_DIR": path.resolve(__dirname, "../common"),
+      SRC_DIR: path.resolve(__dirname, "src"),
+      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
+      ASSETS_DIR: path.resolve(__dirname, "public"),
+      CLIENT_PUBLIC_DIR: path.resolve(__dirname, "../client/public"),
+      PACKAGE_FILE: path.resolve(__dirname, "package.json"),
+      COMMON_DIR: path.resolve(__dirname, "../common"),
     },
     fallback: {
       crypto: false,
@@ -334,20 +333,6 @@ module.exports = (env, argv) => {
       shared: {
         ...deps,
         ...sharedDeps,
-        "@docspace/shared/utils/socket": {
-          singleton: true,
-          strictVersion: false,
-          requiredVersion: false,
-          eager: false,
-          import: false,
-        },
-        "socket.io-client": {
-          singleton: true,
-          strictVersion: false,
-          requiredVersion: false,
-          eager: false,
-          import: false,
-        },
       },
     })
   );

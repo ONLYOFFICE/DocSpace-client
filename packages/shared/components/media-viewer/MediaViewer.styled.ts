@@ -44,22 +44,6 @@ type StyledViewerContainerProps = {
   visible: boolean;
 };
 
-export const ControlBtn = styled.div.attrs(injectDefaultTheme)`
-  display: inline-block;
-  height: 30px;
-  line-height: 25px;
-  margin: 5px;
-  width: 40px;
-  border-radius: 2px;
-  cursor: pointer;
-  text-align: center;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.theme.mediaViewer.controlBtn.backgroundColor};
-  }
-`;
-
 export const StyledDropDown = styled(DropDown)`
   background: ${globalColors.black};
   direction: ${({ theme }) => theme.interfaceDirection};

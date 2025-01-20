@@ -161,6 +161,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
         {...(ready && { headerText: withoutHeader ? "" : headerText })}
         style={style}
         className="restoring-portal"
+        hideLogo
       >
         <div className="preparation-portal_body-wrapper">
           {!ready ? <PreparationPortalLoader /> : componentBody}

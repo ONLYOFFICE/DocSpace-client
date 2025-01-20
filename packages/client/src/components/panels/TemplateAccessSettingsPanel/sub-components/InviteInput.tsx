@@ -39,8 +39,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { LinkType } from "@docspace/shared/components/link";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { Box } from "@docspace/shared/components/box";
-import { Text } from "@docspace/shared/components/text";
-import { getParts, parseAddresses } from "@docspace/shared/utils";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
 import {
@@ -48,10 +46,7 @@ import {
   EmployeeType,
   RoomsType,
 } from "@docspace/shared/enums";
-import { getUserType } from "@docspace/shared/utils/common";
 import { TTranslation } from "@docspace/shared/types";
-import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
@@ -68,7 +63,6 @@ import {
 
 const MIN_SEARCH_VALUE = 2;
 const ITEM_HEIGHT = 48;
-const FILTER_SEPARATOR = ";";
 
 type InviteInputProps = {
   t: TTranslation;
@@ -79,7 +73,6 @@ type InviteInputProps = {
   setInviteItems: (items: TSelectorItem[]) => void;
   setAddUsersPanelVisible: (visible: boolean) => void;
   isDisabled: boolean;
-  // removeExist: (items: TSelectorItem[]) => void;
 };
 
 const InviteInput = ({
@@ -90,7 +83,6 @@ const InviteInput = ({
   setInviteItems,
   setAddUsersPanelVisible,
   isDisabled,
-  // removeExist,
 }: InviteInputProps) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -99,7 +91,6 @@ const InviteInput = ({
   const [dropDownWidth, setDropDownWidth] = useState(0);
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
-  const prevDropDownContent = useRef<React.ReactNode | null>(null);
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -114,7 +105,7 @@ const InviteInput = ({
 
   const searchByQuery = useCallback(
     async (value: string) => {
-      const query = getParts(value.trim()).join(FILTER_SEPARATOR);
+      const query = value.trim();
 
       if (!query) {
         setInputValue("");
@@ -136,7 +127,6 @@ const InviteInput = ({
 
         filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
         filter.search = query;
-        filter.filterSeparator = FILTER_SEPARATOR;
 
         const users = await getMembersList(searchArea, roomId, filter);
 
@@ -174,88 +164,6 @@ const InviteInput = ({
     debouncedSearch(clearValue);
   };
 
-  const toUserItems = (query: string) => {
-    const addresses = parseAddresses(query);
-    const uid = () => Math.random().toString(36).slice(-6);
-
-    if (addresses.length > 1) {
-      const itemsArray = addresses.map((address) => {
-        return {
-          email: address.email,
-          id: uid(),
-          displayName: address.email,
-          errors: address.parseErrors,
-          isEmailInvite: true,
-          userType: EmployeeType.Guest,
-        };
-      });
-
-      return itemsArray;
-    }
-
-    return [
-      {
-        email: addresses[0].email,
-        id: uid(),
-        displayName: addresses[0].email,
-        errors: addresses[0].parseErrors,
-        isEmailInvite: true,
-        userType: EmployeeType.Guest,
-      },
-    ];
-  };
-
-  const addEmail = useCallback(() => {
-    if (!inputValue.trim() || searchRequestRunning) return;
-
-    const items = toUserItems(inputValue);
-
-    const filteredItems = items
-      .filter((item) => {
-        const userItem = usersList.find((value) => value.email === item.email);
-
-        if (!userItem || userItem?.shared) return false;
-        return true;
-      })
-      .map((item) => {
-        const userItem = usersList.find((value) => value.email === item.email);
-
-        if (userItem) userItem.userType = getUserType(item);
-
-        return userItem;
-      });
-
-    if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
-    }
-
-    if (!filteredItems.length) {
-      setInputValue("");
-      setIsAddEmailPanelBlocked(true);
-      setUsersList([]);
-
-      return;
-    }
-
-    const newItems = [...filteredItems, ...inviteItems];
-
-    // const filtered = removeExist(newItems);
-    // setInviteItems(filtered);
-    setInviteItems(newItems);
-
-    setInputValue("");
-    setIsAddEmailPanelBlocked(true);
-    setUsersList([]);
-  }, [
-    t,
-    inputValue,
-    inviteItems,
-    // removeExist,
-    searchRequestRunning,
-    setInviteItems,
-    usersList,
-  ]);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     onChangeInput(value);
@@ -277,8 +185,6 @@ const InviteInput = ({
         if (shared) {
           toastr.warning(t("UsersAlreadyAdded"));
         } else {
-          // const items = removeExist([item, ...inviteItems]);
-          // setInviteItems(items);
           setInviteItems([item, ...inviteItems]);
         }
 
@@ -317,7 +223,7 @@ const InviteInput = ({
         </DropDownItem>
       );
     },
-    [t, inviteItems, /* removeExist, */ setInviteItems],
+    [t, inviteItems, setInviteItems],
   );
 
   const openUsersPanel = () => {
@@ -327,12 +233,6 @@ const InviteInput = ({
   };
 
   const onClearInput = () => onChangeInput("");
-
-  const onKeyPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      addEmail();
-    }
-  };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const keyCode = event.code;
@@ -345,53 +245,14 @@ const InviteInput = ({
     event.stopPropagation();
   };
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
   const dropDownContent = useMemo(() => {
-    const partsLength = getParts(inputValue).length;
-
-    if (searchRequestRunning && prevDropDownContent.current) {
-      return prevDropDownContent.current;
+    if (searchRequestRunning || !usersList.length) {
+      setIsAddEmailPanelBlocked(true);
+      return;
     }
 
-    if (partsLength === 1 && !!usersList.length) {
-      prevDropDownContent.current = usersList.map((user) =>
-        getItemContent(user),
-      );
-    } else {
-      prevDropDownContent.current = (
-        <DropDownItem
-          className="list-item"
-          style={{
-            width: "inherit",
-          }}
-          textOverflow
-          onClick={addEmail}
-          height={53}
-        >
-          <div className="email-list_avatar">
-            <Avatar
-              size={AvatarSize.min}
-              role={AvatarRole.user}
-              source={AtReactSvgUrl}
-            />
-            <div className="email-list_email-container">
-              <Text truncate fontSize="14px" fontWeight={600}>
-                {inputValue}
-              </Text>
-            </div>
-          </div>
-          <div className="email-list_add-button">
-            <ArrowIcon />
-          </div>
-        </DropDownItem>
-      );
-    }
-    return prevDropDownContent.current;
-  }, [usersList, inputValue, addEmail, getItemContent, searchRequestRunning]);
+    return usersList.map((user) => getItemContent(user));
+  }, [usersList, inputValue, getItemContent, searchRequestRunning]);
 
   return (
     <>

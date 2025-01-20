@@ -255,24 +255,9 @@ const TemplateAccessSettingsPanel = ({
       });
   };
 
-  // const removeExist = (items: TSelectorItem[]) => {
-  //   const obj1 = {};
-  //   const filtered = items.filter((x) => {
-  //     if (obj1[x.id]) return false;
-  //     obj1[x.id] = true;
-  //     return true;
-  //   });
-
-  //   if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
-
-  //   return filtered;
-  // };
-
   const onSubmitItems = (users: TSelectorItem[]) => {
     const items = [...accessItems, ...users];
 
-    // const filtered = removeExist(items);
-    // setInviteItems(filtered);
     setAccessItemsAction(items);
 
     // setInputValue("");
@@ -351,7 +336,6 @@ const TemplateAccessSettingsPanel = ({
             isMobileView={isMobileView}
             isDisabled={isAvailable}
             roomId={templateId}
-            // removeExist={removeExist}
           />
           <StyledSubHeader className="invite-input-text">
             {t("Files:AccessToTemplate")}
@@ -445,7 +429,6 @@ const TemplateAccessSettingsPanel = ({
               isMobileView={isMobileView}
               isDisabled={isAvailable}
               roomId={templateId}
-              // removeExist={removeExist}
             />
             <StyledSubHeader className="invite-input-text">
               {t("Files:AccessToTemplate")}

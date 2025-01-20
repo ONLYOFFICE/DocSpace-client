@@ -41,6 +41,7 @@ import React, {
   useState,
 } from "react";
 
+import classNames from "classnames";
 import { includesMethod } from "../../../../utils/typeGuards";
 
 import type { Point } from "../../MediaViewer.types";
@@ -61,19 +62,14 @@ import { MessageError } from "../MessageError";
 import type { PlayerTimelineRef } from "../PlayerTimeline/PlayerTimeline.props";
 
 import type ViewerPlayerProps from "./ViewerPlayer.props";
-import {
-  ContainerPlayer,
-  ControlContainer,
-  PlayerControlsWrapper,
-  StyledPlayerControls,
-  VideoWrapper,
-} from "./ViewerPlayer.styled";
+
 import {
   VolumeLocalStorageKey,
   audioHeight,
   audioWidth,
   defaultVolume,
 } from "./ViewerPlayer.constants";
+import styles from "./ViewerPlayer.module.scss";
 
 export const ViewerPlayer = ({
   src,
@@ -635,9 +631,16 @@ export const ViewerPlayer = ({
   return (
     <>
       {isMobile && panelVisible ? mobileDetails : null}
-      <ContainerPlayer ref={containerRef} $isFullScreen={isFullScreen}>
-        <VideoWrapper
-          $visible={!isLoading}
+      <div
+        className={classNames(styles.containerPlayer, {
+          [styles.isFullScreen]: isFullScreen,
+        })}
+        ref={containerRef}
+      >
+        <animated.div
+          className={classNames(styles.videoWrapper, {
+            [styles.visible]: !isLoading,
+          })}
           style={style}
           ref={playerWrapperRef}
         >
@@ -667,7 +670,7 @@ export const ViewerPlayer = ({
             visible={!isPlaying && isVideo ? !isError : false}
           />
           {isAudio && !isError ? (
-            <div className="audio-container">
+            <div className={styles.audioContainer}>
               <img src={audioIcon} alt="" />
             </div>
           ) : null}
@@ -677,9 +680,9 @@ export const ViewerPlayer = ({
             withBackground={isWaiting ? isPlaying : false}
             isLoading={isLoading || (isWaiting && isPlaying)}
           />
-        </VideoWrapper>
+        </animated.div>
         <ViewerLoader isError={isError} isLoading={isLoading} />
-      </ContainerPlayer>
+      </div>
       {isError ? (
         <MessageError
           model={model}
@@ -688,13 +691,18 @@ export const ViewerPlayer = ({
           isMobile={isMobile}
         />
       ) : (
-        <StyledPlayerControls
-          $isShow={panelVisible ? !isLoading : false}
+        <div
+          className={classNames(styles.playerControls, {
+            [styles.show]: panelVisible ? !isLoading : false,
+          })}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onClick={handleClickVideo}
         >
-          <PlayerControlsWrapper onClick={stopPropagation}>
+          <div
+            className={styles.playerControlsWrapper}
+            onClick={stopPropagation}
+          >
             <PlayerTimeline
               value={timeline}
               ref={timelineRef}
@@ -703,9 +711,9 @@ export const ViewerPlayer = ({
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
             />
-            <ControlContainer>
+            <div className={styles.controlContainer}>
               <div
-                className="player_left-control"
+                className={styles.playerLeftControl}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
               >
@@ -721,7 +729,7 @@ export const ViewerPlayer = ({
                 ) : null}
               </div>
               <div
-                className="player_right-control"
+                className={styles.playerRightControl}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
               >
@@ -745,9 +753,9 @@ export const ViewerPlayer = ({
                   />
                 ) : null}
               </div>
-            </ControlContainer>
-          </PlayerControlsWrapper>
-        </StyledPlayerControls>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

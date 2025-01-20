@@ -139,7 +139,6 @@ const DataManagementWrapper = (props) => {
     }
 
     return () => {
-
       SocketHelper.off(SocketEvents.BackupProgress);
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: "backup",

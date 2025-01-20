@@ -30,15 +30,10 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 
 import { Text as TextComponent } from "../text";
-import { Link as LinkComponent } from "../link";
+import { Link as LinkComponent, LinkType } from "../link";
 import { IconButton } from "../icon-button";
 
-import {
-  BannerWrapper,
-  BannerContent,
-  BannerButton,
-  BannerIcon,
-} from "./CampaignsBanner.styled";
+import styles from "./CampaignsBanner.module.scss";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
 import useFitText from "./useFitText";
@@ -66,20 +61,30 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     body?.fontSize,
   );
 
+  const wrapperStyle = {
+    "--campaign-background": `url(${campaignBackground})`,
+    "--campaign-border-color": borderColor,
+  } as React.CSSProperties;
+
+  const buttonStyle = {
+    "--campaign-button-background-color": action?.backgroundColor,
+    "--campaign-button-color": action?.color,
+  } as React.CSSProperties;
+
   return (
-    <BannerWrapper
+    <div
       ref={wrapperRef}
       data-testid="campaigns-banner"
-      background={campaignBackground}
-      borderColor={borderColor}
+      className={styles.wrapper}
+      style={wrapperStyle}
     >
-      <BannerContent ref={ref}>
+      <div ref={ref} className={styles.content}>
         {hasTitle ? (
           <TextComponent
             className="header"
-            color={title?.color || globalColors.black}
-            fontSize={title?.fontSize}
-            fontWeight={title?.fontWeight}
+            color={title?.color ?? globalColors.black}
+            fontSize={title?.fontSize ?? "13px"}
+            fontWeight={title?.fontWeight ?? "normal"}
             lineHeight="12px"
           >
             {Header}
@@ -88,53 +93,66 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         <div>
           {hasBodyText ? (
             <TextComponent
-              color={body?.color || globalColors.black}
-              fontSize={fontSize}
-              fontWeight={body?.fontWeight}
+              color={body?.color ?? globalColors.black}
+              fontSize={fontSize ?? "13px"}
+              fontWeight={body?.fontWeight ?? "normal"}
             >
               {SubHeader}
             </TextComponent>
           ) : null}
           {hasText ? (
             <TextComponent
-              color={text?.color || globalColors.black}
-              fontSize={text?.fontSize}
-              fontWeight={text?.fontWeight}
+              color={text?.color ?? globalColors.black}
+              fontSize={text?.fontSize ?? "13px"}
+              fontWeight={text?.fontWeight ?? "normal"}
             >
               {Text}
             </TextComponent>
           ) : null}
         </div>
         {isButton ? (
-          <BannerButton
-            buttonTextColor={action?.color}
-            buttonColor={action?.backgroundColor}
-            onClick={() => onAction(action?.type, Link)}
+          <button
+            style={buttonStyle}
+            className={styles.button}
+            onClick={() => onAction()}
+            type="button"
           >
-            {ButtonLabel}
-          </BannerButton>
+            <TextComponent
+              color={action?.color ?? globalColors.black}
+              fontSize={action?.fontSize ?? "13px"}
+              fontWeight={action?.fontWeight ?? "normal"}
+            >
+              {ButtonLabel}
+            </TextComponent>
+          </button>
         ) : (
           <LinkComponent
-            color={action?.color}
-            fontSize={action?.fontSize}
-            fontWeight={action?.fontWeight}
-            onClick={() => onAction(action?.type, Link)}
+            color={action?.color ?? globalColors.black}
+            type={LinkType.action}
             isHovered
+            onClick={() => onAction(action?.type, Link)}
           >
-            {ButtonLabel}
+            <TextComponent
+              color={action?.color ?? globalColors.black}
+              fontSize={action?.fontSize ?? "13px"}
+              fontWeight={action?.fontWeight ?? "normal"}
+            >
+              {ButtonLabel}
+            </TextComponent>
           </LinkComponent>
         )}
-      </BannerContent>
+
+        {campaignIcon ? (
+          <ReactSVG src={campaignIcon} className={styles.icon} />
+        ) : null}
+      </div>
       <IconButton
-        className="close-icon"
         size={12}
-        iconName={CrossReactSvg}
+        className={styles.closeIcon}
         onClick={onClose}
+        iconName={CrossReactSvg}
       />
-      <BannerIcon>
-        <ReactSVG src={campaignIcon} />
-      </BannerIcon>
-    </BannerWrapper>
+    </div>
   );
 };
 

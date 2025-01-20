@@ -28,13 +28,14 @@ import equal from "fast-deep-equal/react";
 // import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
+import classNames from "classnames";
 import { isSeparator } from "../../../../utils/typeGuards";
 
 import { Viewer } from "../Viewer";
 import { getCustomToolbar, getPDFToolbar } from "../../MediaViewer.helpers";
-
-import { StyledDropDown, StyledDropDownItem } from "../../MediaViewer.styled";
-
+import styles from "./ViewerWrapper.module.scss";
+import { DropDown } from "../../../drop-down";
+import { DropDownItem } from "../../../drop-down-item";
 import type ViewerWrapperProps from "./ViewerWrapper.props";
 
 const ViewerWrapper = memo(
@@ -96,7 +97,8 @@ const ViewerWrapper = memo(
       if (model.filter((m) => !m.disabled).length === 0) return null;
 
       return (
-        <StyledDropDown
+        <DropDown
+          className={styles.dropDown}
           open={isOpen}
           fixedDirection
           directionY="top"
@@ -111,8 +113,11 @@ const ViewerWrapper = memo(
             const isItemSeparator = isSeparator(item);
 
             return (
-              <StyledDropDownItem
-                className={`${item.isSeparator ? "is-separator" : ""}`}
+              <DropDownItem
+                className={classNames(
+                  styles.dropDownItem,
+                  `${item.isSeparator ? "is-separator" : ""}`,
+                )}
                 key={item.key}
                 label={isItemSeparator ? undefined : item.label}
                 icon={!isItemSeparator && item.icon ? item.icon : ""}
@@ -120,7 +125,7 @@ const ViewerWrapper = memo(
               />
             );
           })}
-        </StyledDropDown>
+        </DropDown>
       );
     };
 

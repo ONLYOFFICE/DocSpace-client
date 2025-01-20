@@ -27,8 +27,6 @@
 import styled, { css } from "styled-components";
 
 import { globalColors } from "../../themes";
-import { DropDown } from "../drop-down";
-import { DropDownItem } from "../drop-down-item";
 import { injectDefaultTheme } from "../../utils";
 
 type StyledButtonScrollProps = {
@@ -43,25 +41,6 @@ type StyledSwitchToolbarProps = {
 type StyledViewerContainerProps = {
   visible: boolean;
 };
-
-export const StyledDropDown = styled(DropDown)`
-  background: ${globalColors.black};
-  direction: ${({ theme }) => theme.interfaceDirection};
-`;
-
-export const StyledDropDownItem = styled(DropDownItem)`
-  color: ${globalColors.white};
-
-  .drop-down-item_icon svg {
-    path {
-      fill: ${globalColors.white} !important;
-    }
-  }
-
-  &:hover {
-    background: ${globalColors.lightDarkGrayHover};
-  }
-`;
 
 export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
   z-index: 307;

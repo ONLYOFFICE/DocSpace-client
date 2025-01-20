@@ -2,14 +2,6 @@
 @import "../../../styles/variables/_colors.scss";
 @import "../../../styles/variables/devices.scss";
 
-:root {
-  --header-info-border-color: #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --header-info-border-color: #{$gray-dark-strong};
-  }
-}
-
 .header {
   width: 100%;
   max-width: 100%;

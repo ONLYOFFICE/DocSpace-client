@@ -2,16 +2,6 @@
 @import "../../styles/variables/devices";
 @import "../../styles/variables/colors";
 
-:root {
-  --form-wrapper-background: #{$white};
-  --form-wrapper-box-shadow: 0px 5px 20px #{$popup-shadow};
-
-  &[data-theme="dark"] {
-    --form-wrapper-background: #{$black};
-    --form-wrapper-box-shadow: 0px 5px 20px #{$badge-shadow};
-  }
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;

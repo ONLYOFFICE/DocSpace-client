@@ -1,47 +1,5 @@
 @import "../../styles/variables/index.scss";
 
-:root {
-  /* Light theme variables */
-  --tabs-gradient-color: #{$white};
-  --tabs-line-color: #{$gray-light-mid};
-
-  /* Primary tabs */
-  --tabs-text-color-primary: #{$light-gray-dark};
-  --tabs-active-text-color-primary: #{$black};
-  --tabs-hover-text-color-primary: #{$gray};
-  --tabs-pressed-text-color-primary: #{$gray-text};
-  --tabs-background-color-primary: #{$white};
-
-  /* Secondary tabs */
-  --tabs-text-color-secondary: #{$black};
-  --tabs-active-text-color-secondary: #{$white};
-  --tabs-background-color-secondary: #{$white};
-  --tabs-hover-background-color-secondary: #{$light-gray-hover};
-  --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$blue-light-mid};
-
-  /* Dark theme variables */
-  &[data-theme="dark"] {
-    --tabs-gradient-color: #{$black};
-    --tabs-line-color: #{$gray-dark-strong};
-
-    /* Primary tabs */
-    --tabs-text-color-primary: #{$dark-gray-dark};
-    --tabs-active-text-color-primary: #{$white};
-    --tabs-hover-text-color-primary: #{$white};
-    --tabs-pressed-text-color-primary: #{$gray-dark-text};
-    --tabs-background-color-primary: #{$black};
-
-    /* Secondary tabs */
-    --tabs-text-color-secondary: #{$white};
-    --tabs-active-text-color-secondary: #{$black};
-    --tabs-background-color-secondary: #{$black};
-    --tabs-hover-background-color-secondary: #{$gray-dark-strong};
-    --tabs-pressed-background-color-secondary: #{$dark-gray-light};
-    --tabs-active-background-color-secondary: #{$white};
-  }
-}
-
 .stickyIndent {
   height: 20px;
 }

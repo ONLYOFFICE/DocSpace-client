@@ -27,14 +27,6 @@
 @import "../../../styles/variables/_colors.scss";
 @import "../../../styles/variables/devices.scss";
 
-:root {
-  --body-info-border-color: #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --body-info-border-color: #{$gray-dark-strong};
-  }
-}
-
 .usersLoader {
   width: 100%;
   display: flex;

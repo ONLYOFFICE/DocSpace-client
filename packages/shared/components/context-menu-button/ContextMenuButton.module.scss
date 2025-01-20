@@ -1,15 +1,5 @@
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  --context-menu-button-border: #{$gray-strong};
-  --context-menu-button-hover-border: #{$gray};
-
-  &[data-theme="dark"] {
-    --context-menu-button-border: #{$gray-dark};
-    --context-menu-button-hover-border: #{$gray-dark};
-  }
-}
-
 .outer {
   display: inline-block;
   position: relative;

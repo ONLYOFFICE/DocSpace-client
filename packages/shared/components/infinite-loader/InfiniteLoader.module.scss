@@ -27,18 +27,8 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/mixins.scss";
 
-:root {
-  --scrollbar-bg-color: #{$light-scroll};
-  --scrollbar-hover-bg-color: #{$light-scroll-hover};
-  --scrollbar-press-bg-color: #{$light-scroll-active};
-
-  &[data-theme="dark"] {
-    --scrollbar-bg-color: #{$dark-scroll};
-    --scrollbar-hover-bg-color: #{$dark-scroll-hover};
-    --scrollbar-press-bg-color: #{$dark-scroll-active};
-  }
-
-  &[data-dir="rtl"] {
+:global(.rtl) {
+  :local {
     .row {
       :global {
         .row-list-item,

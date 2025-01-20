@@ -2,27 +2,6 @@
 @import "../../../styles/variables/_colors.scss";
 @import "../../../styles/_mixins.scss";
 
-:root {
-  --row-content-margin: 0 6px;
-  --row-content-font-size: 12px;
-  --row-content-font-style: normal;
-  --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
-  --row-content-height: 56px;
-  --row-content-max-width: 100%;
-
-  --row-content-side-info-min-width: 160px;
-  --row-content-side-info-margin: 0 6px;
-  --row-content-side-info-width: 160px;
-
-  --row-content-main-wrapper-min-width: 140px;
-  --row-content-main-wrapper-margin-right: 8px;
-  --row-content-main-wrapper-margin-top: 8px;
-  --row-content-main-wrapper-width: 95%;
-
-  --row-content-icons-height: 19px;
-}
-
 .common {
   margin: var(--row-content-margin);
   font-family: var(--row-content-font-family);

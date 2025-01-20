@@ -28,20 +28,12 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --aside-header-text-color: #{$black};
-  --aside-header-border-color: #{$gray-light-mid};
-
-  --aside-header-custom-height: 53px;
-
-  &[data-theme="dark"] {
-    --aside-header-text-color: #{$white};
-    --aside-header-border-color: #{$gray-dark-strong};
-  }
-
-  &[data-dir="rtl"] .container {
-    .arrowButton svg {
-      transform: scaleX(-1);
+:global(.rtl) {
+  :local {
+    .container {
+      .arrowButton svg {
+        transform: scaleX(-1);
+      }
     }
   }
 }

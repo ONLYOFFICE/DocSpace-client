@@ -1,18 +1,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --error-container-background: #{$white};
-  --error-container-body-text: #{$gray};
-  --error-container-link-color: #{$link};
-
-  &[data-theme="dark"] {
-    --error-container-background: #{$black};
-    --error-container-body-text: #{$gray-dark};
-    --error-container-link-color: #{$dark-link};
-  }
-}
-
 .container {
   background: var(--error-container-background);
   cursor: default;

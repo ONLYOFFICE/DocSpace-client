@@ -32,8 +32,10 @@ import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url
 import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
 
-import styles from "./DesktopDetails.module.scss";
+import { ControlBtn } from "../../MediaViewer.styled";
+
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
+import styles from "./DesktopDetails.module.scss";
 import { globalColors } from "../../../../themes";
 
 export const DesktopDetails = ({
@@ -43,23 +45,20 @@ export const DesktopDetails = ({
   showCloseButton,
 }: DesktopDetailsProps) => {
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={classNames(styles.container, className)}>
       <Text isBold fontSize="14px" className="title">
         {title}
       </Text>
 
       {showCloseButton ? (
-        <div
-          onClick={onMaskClick}
-          className={`${styles.controlBtn} ${styles.mediaPlayerClose}`}
-        >
+        <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
           <IconButton
             color={globalColors.white}
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable
           />
-        </div>
+        </ControlBtn>
       ) : null}
     </div>
   );

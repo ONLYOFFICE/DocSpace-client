@@ -26,16 +26,18 @@
 
 @import "../../../../styles/variables/colors";
 @import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
+@import "../../../../styles/_mixins";
 
 :root {
   --media-viewer-title-color: #{$white};
-  --media-viewer-background: linear-gradient(
-    0deg,
-    #{$tapHighlight-color} 0%,
-    #{$background-color} 100%
-  );
-  --media-viewer-control-btn-hover: #{$silver};
+  --media-viewer-background-start: #{$tap-highlight};
+  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
+}
+
+:root[data-theme="dark"] {
+  --media-viewer-title-color: #{$white};
+  --media-viewer-background-start: #{tap-highlight};
+  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
 }
 
 .container {
@@ -43,7 +45,11 @@
   padding-top: 21px;
   height: 64px;
   width: 100%;
-  background: var(--media-viewer-background);
+  background: linear-gradient(
+    0deg,
+    var(--media-viewer-background-start) 0%,
+    var(--media-viewer-background-end) 100%
+  );
 
   position: fixed;
   top: 0;
@@ -58,60 +64,8 @@
     font-weight: 600;
     text-overflow: ellipsis;
     width: calc(100% - 50px);
-
     padding-inline-start: 16px;
     box-sizing: border-box;
     color: var(--media-viewer-title-color);
   }
-}
-
-// .mediaPlayerClose {
-//   position: fixed;
-//   top: 13px;
-//   inset-inline-end: 12px;
-//   height: 17px;
-//   &:hover {
-//     background-color: transparent;
-//   }
-//   svg {
-//     path {
-//       fill: $white;
-//     }
-//   }
-// }
-
-.controlBtn {
-  display: inline-block;
-  height: 30px;
-  line-height: 25px;
-  margin: 5px;
-  width: 40px;
-  border-radius: 2px;
-  cursor: pointer;
-  text-align: center;
-
-  // position: fixed;
-  // top: 22px;
-  // inset-inline-end: 21px;
-  // z-index: 307;
-
-  &:hover {
-    background-color: var(--media-viewer-control-btn-hover);
-  }
-
-  // svg {
-  //   path {
-  //     fill: $white;
-  //   }
-  // }
-
-  // @include tablet-and-below {
-  //   top: 18px;
-  //   inset-inline-end: 16px;
-  // }
-
-  // @include mobile {
-  //   top: 16px;
-  //   inset-inline-end: 14px;
-  // }
 }

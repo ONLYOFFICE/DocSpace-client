@@ -404,6 +404,8 @@ export type BodyProps = TSelectorInfo & {
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   descriptionText?: string;
+
+  isSSR?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &

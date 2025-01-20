@@ -242,7 +242,7 @@ const IconButton = ({
       {iconNode || (
         <ReactSVG
           className={classNames(styles.notSelectable, "icon-button_svg")}
-          src={currentIcon.name || ""}
+          src={iconName || ""}
           data-testid="icon-button-svg"
         />
       )}

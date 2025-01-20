@@ -656,6 +656,7 @@ const Selector = ({
           descriptionText={descriptionText}
           inputItemVisible={inputItemVisible}
           setInputItemVisible={setInputItemVisible}
+          isSSR={isSSR}
           // info
           {...infoProps}
         />

@@ -89,9 +89,9 @@ const Body = ({
   infoText,
   setInputItemVisible,
   inputItemVisible,
+
+  isSSR,
 }: BodyProps) => {
-  console.log("===init===");
-  console.log(items.length);
   const infoBarRef = useRef<HTMLDivElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
 
@@ -204,7 +204,7 @@ const Body = ({
     }
   }, [withInfoBar, itemsCount]);
 
-  let listHeight = 500 - CONTAINER_PADDING - infoBarHeight;
+  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
@@ -229,8 +229,6 @@ const Body = ({
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
     Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
-
-  console.log(bodyHeight);
 
   return (
     <StyledBody
@@ -269,7 +267,7 @@ const Body = ({
       ) : null}
 
       {isLoading ? (
-        <Scrollbar style={{ height: "auto" }}>{rowLoader}</Scrollbar>
+        <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch}
@@ -288,7 +286,36 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight || true ? (
+          {isSSR && !bodyHeight ? (
+            <Scrollbar
+              style={{ height: `calc(100% - ${CONTAINER_PADDING}px)` }}
+            >
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  style={{ height: 48, display: "flex", alignItems: "center" }}
+                >
+                  <Item
+                    index={index}
+                    style={{}}
+                    data={{
+                      items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                  />
+                </div>
+              ))}
+            </Scrollbar>
+          ) : (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -298,7 +325,7 @@ const Body = ({
               {({ onItemsRendered, ref }) => (
                 <List
                   className="items-list"
-                  height={bodyHeight ? listHeight : 50}
+                  height={listHeight}
                   width="100%"
                   itemCount={itemsCount}
                   itemData={{
@@ -323,7 +350,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          ) : null}
+          )}
         </>
       )}
     </StyledBody>

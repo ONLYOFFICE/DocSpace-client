@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { tablet } from "../../utils";
 import { globalColors } from "../../themes";
 
 const StyledPreparationPortal = styled.div<{

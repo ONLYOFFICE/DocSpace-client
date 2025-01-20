@@ -32,7 +32,8 @@ import React, {
 } from "react";
 
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
-
+import classNames from "classnames";
+import styles from "./ViewerToolbar.module.scss";
 import { useClickOutside } from "../../../../utils/useClickOutside";
 
 import ImageViewerToolbarProps, {
@@ -40,11 +41,6 @@ import ImageViewerToolbarProps, {
   ToolbarItemType,
 } from "./ViewerToolbar.props";
 
-import {
-  ImageViewerToolbarWrapper,
-  ListTools,
-  ToolbarItem,
-} from "./ViewerToolbar.styled";
 import { globalColors } from "../../../../themes";
 
 const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
@@ -84,7 +80,8 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       if (!contextMenu) return;
 
       return (
-        <ToolbarItem
+        <li
+          className={styles.toolbarItem}
           ref={contextMenuRef}
           style={{ position: "relative" }}
           key={item.key}
@@ -98,7 +95,7 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
             <MediaContextMenu />
           </div>
           {contextMenu}
-        </ToolbarItem>
+        </li>
       );
     }
 
@@ -131,9 +128,12 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       }
 
       return (
-        <ToolbarItem
-          $percent={item.percent ? percent : 100}
-          $isSeparator={item.actionType === -1}
+        <li
+          className={classNames(styles.toolbarItem, {
+            [styles.separator]: item.actionType === -1,
+            [styles.percent]: item.percent ? percent : 100,
+            [styles.disabled]: item.percent ? percent === 25 : false,
+          })}
           key={item.key}
           onClick={() => {
             toolbarEvent(item);
@@ -141,14 +141,16 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
           data-key={item.key}
         >
           {content}
-        </ToolbarItem>
+        </li>
       );
     }
 
     return (
-      <ImageViewerToolbarWrapper className={className}>
-        <ListTools>{toolbar.map((item) => renderToolbarItem(item))}</ListTools>
-      </ImageViewerToolbarWrapper>
+      <div className={`${className || ""} ${styles.toolbarWrapper}`}>
+        <ul className={styles.toolsList}>
+          {toolbar.map((item) => renderToolbarItem(item))}
+        </ul>
+      </div>
     );
   },
 );

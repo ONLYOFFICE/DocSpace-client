@@ -24,68 +24,89 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../../../themes";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
-export const ImageViewerToolbarWrapper = styled.div`
+:root {
+  --viewer-toolbar-bg: rgba(0, 0, 0, 0.4);
+  --viewer-toolbar-hover-bg: rgba(0, 0, 0, 0.8);
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
+}
+
+:root[data-theme="dark"] {
+  --viewer-toolbar-bg: rgba(0, 0, 0, 0.4);
+  --viewer-toolbar-hover-bg: rgba(0, 0, 0, 0.8);
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
+}
+
+.toolbarWrapper {
   height: 48px;
   padding: 10px 24px;
   border-radius: 18px;
-
   position: fixed;
   bottom: 24px;
-  // doesn't require mirroring for RTL
   left: 50%;
   z-index: 307;
-
   transform: translateX(-50%);
-
   text-align: center;
   transition: all 0.26s ease-out;
+  background: var(--viewer-toolbar-bg);
 
-  background: rgba(0, 0, 0, 0.4);
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--viewer-toolbar-hover-bg);
   }
-`;
+}
 
-export const ListTools = styled.ul`
+.toolsList {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  margin: 0px;
-`;
-export const ToolbarItem = styled.li<{
-  $isSeparator?: boolean;
-  $percent?: number;
-}>`
+  padding: 0;
+  margin: 0;
+}
+
+.toolbarItem {
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 48px;
-  width: ${(props) => (props.$isSeparator ? "33px" : "48px")};
+  width: 48px;
 
   &:hover {
-    cursor: ${(props) => (props.$isSeparator ? "default" : "pointer")};
+    cursor: pointer;
+  }
+
+  &.separator {
+    width: 33px;
+
+    &:hover {
+      cursor: default;
+    }
   }
 
   .zoomPercent {
     font-size: 10px;
     font-weight: 700;
-    user-select: none;
+    @include no-user-select;
   }
 
   svg {
     width: 16px;
     height: 16px;
+
     path,
     rect {
-      ${(props) =>
-        props.$percent !== 25
-          ? `fill: ${globalColors.white};`
-          : `fill: ${globalColors.gray};`}
+      fill: var(--viewer-toolbar-icon-color);
+    }
+
+    &.disabled {
+      path,
+      rect {
+        fill: var(--viewer-toolbar-icon-disabled);
+      }
     }
   }
 
@@ -95,4 +116,4 @@ export const ToolbarItem = styled.li<{
   .rotateRight {
     margin-top: 3px;
   }
-`;
+}

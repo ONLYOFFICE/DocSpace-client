@@ -550,8 +550,7 @@ class BackupStore {
         }
       }
     } catch (e) {
-      toastr.error(e);
-      this.downloadingProgressError = t("Commmon:UnexpectedError");
+      this.downloadingProgressError = t("Common:UnexpectedError");
     }
   };
 

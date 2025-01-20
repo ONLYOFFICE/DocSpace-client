@@ -21476,9 +21476,9 @@ __metadata:
   linkType: hard
 
 "node-fetch-native@npm:^1.6.3":
-  version: 1.6.4
-  resolution: "node-fetch-native@npm:1.6.4"
-  checksum: 10/39c4c6d0c2a4bed1444943e1647ad0d79eb6638cf159bc37dffeafd22cffcf6a998e006aa1f3dd1d9d2258db7d78dee96b44bee4ba0bbaf0440ed348794f2543
+  version: 1.6.5
+  resolution: "node-fetch-native@npm:1.6.5"
+  checksum: 10/92b868f330f18ce35aa54a3460b29580299b6942b38511c3812f2ae0619b040fcf361e1ccbe101970fc2c229cbfa23221c711a0201ae1c66678b5b7384673802
   languageName: node
   linkType: hard
 

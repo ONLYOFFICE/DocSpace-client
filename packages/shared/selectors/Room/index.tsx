@@ -75,18 +75,33 @@ const RoomSelector = ({
   roomType,
 
   disableThirdParty,
+
+  withInit,
+  initItems,
+  initTotal,
+  initHasNextPage,
+  initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [hasNextPage, setHasNextPage] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState(() =>
+    withInit ? initSearchValue : "",
+  );
+  const [hasNextPage, setHasNextPage] = React.useState(() =>
+    withInit ? initHasNextPage : false,
+  );
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
     null,
   );
-  const [total, setTotal] = React.useState(-1);
-
-  const [items, setItems] = React.useState<TSelectorItem[]>([]);
+  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+  const [items, setItems] = React.useState<TSelectorItem[]>(
+    withInit
+      ? convertToItems(initItems).filter((x) =>
+          excludeItems ? !excludeItems.includes(x.id) : true,
+        )
+      : [],
+  );
 
   const isFirstLoad = React.useRef(true);
   const afterSearch = React.useRef(false);

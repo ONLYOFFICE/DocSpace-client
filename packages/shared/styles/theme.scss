@@ -224,11 +224,12 @@
   --filter-sort-button-sort-fill: #{$light-gray-dark};
   --filter-sort-button-selected-background: #{$light-gray-hover};
 
-  --floating-button-alert-fill: "";
-  --floating-button-alert-path: "";
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
+
+  --status-icon-color-positive: #{$light-status-positive};
+  --status-icon-color-negative: #{$light-error-status};
 }
 
 .dark {
@@ -504,11 +505,12 @@
   --filter-sort-button-sort-fill: #{$dark-gray-dark};
   --filter-sort-button-selected-background: #{$gray-dark-strong};
 
-  --floating-button-alert-fill: #{$main-orange};
-  --floating-button-alert-path: #{$black};
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
+
+  --status-icon-color-positive: #{$dark-status-positive};
+  --status-icon-color-negative: #{$dark-error-status};
 }
 
 .light {

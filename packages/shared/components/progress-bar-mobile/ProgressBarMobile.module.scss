@@ -40,7 +40,11 @@
   gap: 8px;
   width: 100%;
   align-items: center;
+  div:first-child {
+    position: relative;
+  }
 }
+
 .progressCount {
   color: var(--text-primary);
   margin-right: 8px;
@@ -102,5 +106,35 @@
 @keyframes loader {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.infoIcon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  inset-inline-start: 20px;
+  top: -7px;
+  left: 9px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.alert {
+    svg {
+      path {
+        fill: var(--status-icon-color-negative) !important;
+      }
+    }
+  }
+
+  &.complete {
+    svg {
+      path {
+        fill: var(--status-icon-color-positive) !important;
+      }
+    }
   }
 }

@@ -1045,7 +1045,6 @@ class FilesActionStore {
         setSecondaryProgressBarData({
           operation: "duplicate",
           operationId,
-          percent: 100,
           completed: true,
         });
 
@@ -1058,15 +1057,18 @@ class FilesActionStore {
       })
       .catch((err) => {
         clearActiveOperations(fileIds, folderIds);
+
         setSecondaryProgressBarData({
           operation: "duplicate",
-          alert: true,
           operationId,
+          alert: true,
+          completed: true,
         });
-        // eslint-disable-next-line no-debugger
-        debugger;
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        return toastr.error(err.message ? err.message : err);
+
+        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        return toastr.error(
+          err.error ? err.error : err.message ? err.message : err,
+        );
       })
       .finally(() => {
         clearActiveOperations(fileIds, folderIds);

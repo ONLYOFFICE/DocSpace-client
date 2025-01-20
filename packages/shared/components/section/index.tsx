@@ -282,7 +282,7 @@ const Section = (props: SectionProps) => {
             </SubSectionBody>
           ) : null}
 
-          {secondaryActiveOperations.length ? (
+          {secondaryActiveOperations?.length ? (
             <OperationsProgress
               clearSecondaryProgressData={clearSecondaryProgressData}
               secondaryActiveOperations={secondaryActiveOperations}

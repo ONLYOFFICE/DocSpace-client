@@ -39,18 +39,20 @@ class SecondaryProgressDataStore {
   isDownload = false;
 
   secondaryOperationsArray = [
-    // {
-    //   label: "Duplicating",
-    //   operation: "duplicate",
-    //   alert: true,
-    //   items: [{ operationId: "operation_1", percent: 10, completed: false }],
-    // },
-    // {
-    //   label: "Downloading",
-    //   operation: "download",
-    //   alert: false,
-    //   items: [{ operationId: "operation_1", percent: 0, completed: false }],
-    // },
+    {
+      label: "Duplicating",
+      operation: "duplicate",
+      alert: true,
+      completed: true,
+      items: [{ operationId: "operation_1", percent: 10, completed: false }],
+    },
+    {
+      label: "Downloading",
+      operation: "download",
+      alert: false,
+      completed: true,
+      items: [{ operationId: "operation_1", percent: 0, completed: false }],
+    },
   ];
 
   constructor() {
@@ -118,10 +120,9 @@ class SecondaryProgressDataStore {
       if (operationIndex !== -1) {
         const operationObject = this.secondaryOperationsArray[operationIndex];
         const allItemsCompleted = operationObject.items.every(
-          (item) => item.completed
+          (item) => item.completed,
         );
 
-        // Only remove operation if all items are completed
         if (allItemsCompleted) {
           this.secondaryOperationsArray.splice(operationIndex, 1);
         }
@@ -135,7 +136,6 @@ class SecondaryProgressDataStore {
 
       const operationObject = this.secondaryOperationsArray[operationIndex];
 
-      // If operationId is provided, remove specific item
       operationObject.items = operationObject.items.filter(
         (item) => item.operationId !== operationId,
       );

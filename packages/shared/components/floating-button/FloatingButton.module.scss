@@ -132,11 +132,8 @@
   top: 0px;
 
   svg {
-    circle {
-      fill: var(--floating-button-alert-fill);
-    }
     path {
-      fill: var(--floating-button-alert-path);
+      fill: var(--status-icon-color-negative);
     }
   }
 }

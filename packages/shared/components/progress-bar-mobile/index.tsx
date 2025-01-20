@@ -24,19 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IconButton } from "../icon-button";
-import { Text } from "../text";
-import { classNames } from "../../utils";
-
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
-import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
+import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
+import { classNames } from "../../utils";
+import { Text } from "../text";
+import { IconButton } from "../icon-button";
 
 import styles from "./ProgressBarMobile.module.scss";
 import { ProgressBarMobileProps } from "./ProgressBarMobile.types";
 
 const ProgressBarMobile = ({
   label,
+  alert,
   status,
   percent,
   open,
@@ -64,7 +65,6 @@ const ProgressBarMobile = ({
       onClearProgress(null, operation);
     }
   };
-  console.log("====completed", completed);
 
   return (
     <div
@@ -75,17 +75,32 @@ const ProgressBarMobile = ({
       <div className={styles.progressWrapper}>
         <div className={styles.progressMainContainer}>
           <div>
-            <IconButton onClick={onCancel} iconName={iconUrl} size={16} />
-            {/* {alert ? (
+            <IconButton
+              onClick={onCancel}
+              iconName={iconUrl}
+              size={16}
+              color="white"
+            />
+            {alert || completed ? (
               <div
-                className={styles.alertIcon}
-                data-testid="floating-button-alert"
+                className={classNames(styles.infoIcon, {
+                  [styles.alert]: alert,
+                  [styles.complete]: !alert && completed,
+                })}
               >
-                <ButtonAlertIcon
-                  style={{ overflow: "hidden", verticalAlign: "middle" }}
-                />
+                {alert ? (
+                  <AlertIcon
+                    className="alert-icon"
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                ) : (
+                  <TickIcon
+                    className="tick-icon"
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                )}
               </div>
-            ) : null} */}
+            ) : null}
           </div>
           <Text
             className={styles.progressHeader}

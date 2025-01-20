@@ -54,19 +54,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-};
-
-module.exports = {
-  webpack(config) {
-    // Add resolve configuration for shared package
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "@docspace/shared": path.resolve(__dirname, "../shared"),
-      },
-    };
-
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -81,28 +69,6 @@ module.exports = {
 
     // Configure CSS handling
     config.module.rules.push(
-      // Global styles
-      {
-        test: /\.module\.(scss|sass)$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                localIdentName: "[name]__[local]--[hash:base64:5]",
-              },
-              importLoaders: 1,
-            },
-          },
-          "sass-loader",
-        ],
-      },
-      // Regular SCSS files (non-modules)
-      {
-        test: /(?<!\.module)\.(scss|sass)$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
       // Existing asset rules
       {
         type: "asset/resource",

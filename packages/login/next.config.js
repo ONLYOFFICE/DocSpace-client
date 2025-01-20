@@ -54,19 +54,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-};
-
-module.exports = {
-  webpack(config) {
-    // Add resolve configuration for shared package
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "@docspace/shared": path.resolve(__dirname, "../shared"),
-      },
-    };
-
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),

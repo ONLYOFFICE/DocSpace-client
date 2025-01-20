@@ -41,7 +41,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+// const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 //const fs = require("fs");
 //const { readdir } = require("fs").promises;
 
@@ -240,8 +240,8 @@ const config = {
               sourceMap: true,
               implementation: require("sass"),
               sassOptions: {
-                outputStyle: "compressed"
-              }
+                outputStyle: "compressed",
+              },
             },
           },
         ],
@@ -264,8 +264,8 @@ const config = {
               sourceMap: true,
               implementation: require("sass"),
               sassOptions: {
-                outputStyle: "compressed"
-              }
+                outputStyle: "compressed",
+              },
             },
           },
         ],
@@ -423,8 +423,24 @@ module.exports = (env, argv) => {
         "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
-        ...deps,
-        ...sharedDeps,
+        react: {
+          singleton: true,
+          requiredVersion: false,
+          version: "18.3.1",
+          eager: true,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: false,
+          version: "18.3.1",
+          eager: true,
+        },
+        "react/jsx-runtime": {
+          singleton: true,
+          requiredVersion: false,
+          version: "18.3.1",
+          eager: true,
+        },
         "@docspace/shared/utils/socket": {
           singleton: true,
           strictVersion: false,
@@ -434,6 +450,174 @@ module.exports = (env, argv) => {
         "socket.io-client": {
           singleton: true,
           strictVersion: false,
+          requiredVersion: false,
+          eager: true,
+        },
+
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "styled-components": {
+          singleton: true,
+          requiredVersion: false,
+          version: "5.3.11",
+          eager: true,
+        },
+        mobx: {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "mobx-react": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        moment: {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "email-addresses": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "fast-deep-equal": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        // "@babel/runtime": {
+        //   singleton: true,
+        //   requiredVersion: deps["@babel/runtime"],
+        // },
+        // "rc-tree": {
+        //   singleton: true,
+        //   requiredVersion: compDeps["rc-tree"],
+        // },
+        "react-autosize-textarea": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-content-loader": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-toastify": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-window-infinite-loader": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-virtualized-auto-sizer": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        // "re-resizable": {
+        //   singleton: true,
+        //   requiredVersion: deps["re-resizable"],
+        // },
+        // "workbox-window": {
+        //   singleton: true,
+        //   requiredVersion: deps["workbox-window"],
+        // },
+        axios: {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        i18next: {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-i18next": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "prop-types": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-device-detect": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-dropzone": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-onclickoutside": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        // "react-player": {
+        //   singleton: true,
+        //   requiredVersion: deps["react-player"],
+        // },
+        // "react-resize-detector": {
+        //   singleton: true,
+        //   requiredVersion: deps["react-resize-detector"],
+        // },
+        "react-svg": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-text-mask": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "resize-image": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-tooltip": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        // "react-viewer": {
+        //   singleton: true,
+        //   requiredVersion: deps["react-viewer"],
+        // },
+        "react-window": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        // "react-hammerjs": {
+        //   singleton: true,
+        //   requiredVersion: deps["react-hammerjs"],
+        // },
+        // screenfull: {
+        //   singleton: true,
+        //   requiredVersion: deps.screenfull,
+        // },
+        sjcl: {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "query-string": {
+          singleton: true,
           requiredVersion: false,
           eager: true,
         },

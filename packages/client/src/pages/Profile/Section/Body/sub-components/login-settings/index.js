@@ -87,15 +87,15 @@ const LoginSettings = (props) => {
         </Link>
       </div>
 
-      {resetAppDialogVisible && (
+      {resetAppDialogVisible ? (
         <ResetApplicationDialog
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
           resetTfaApp={unlinkTfaApp}
           id={profile.id}
         />
-      )}
-      {backupCodesDialogVisible && (
+      ) : null}
+      {backupCodesDialogVisible ? (
         <BackupCodesDialog
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
@@ -103,7 +103,7 @@ const LoginSettings = (props) => {
           backupCodesCount={backupCodesCount}
           setBackupCodes={setBackupCodes}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

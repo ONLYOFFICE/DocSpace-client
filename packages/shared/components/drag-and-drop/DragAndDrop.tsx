@@ -26,10 +26,12 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
+import classNames from "classnames";
 import { useDropzone } from "react-dropzone";
+
 import getFilesFromEvent from "./get-files-from-event";
 
-import StyledDragAndDrop from "./DragAndDrop.styled";
+import styles from "./DragAndDrop.module.scss";
 import { DragAndDropProps } from "./DragAndDrop.types";
 
 const DragAndDrop = (props: DragAndDropProps) => {
@@ -40,10 +42,12 @@ const DragAndDrop = (props: DragAndDropProps) => {
     className,
     forwardedRef,
 
+    onDragOver,
+    onDrop,
+    onDragLeave,
+
     ...rest
   } = props;
-
-  const { onDrop, onDragOver, onDragLeave } = props;
 
   const classNameProp = className || "";
 
@@ -67,18 +71,16 @@ const DragAndDrop = (props: DragAndDropProps) => {
     getFilesFromEvent: (event) => getFilesFromEvent(event),
   });
 
+  const rootClassName = classNames(styles.dragAndDrop, classNameProp, {
+    [styles.dragging]: dragging,
+    [styles.dragAccept]: isDragActive,
+    "drag-and-drop": true,
+  });
+
   return (
-    <StyledDragAndDrop
-      {...rest}
-      className={`drag-and-drop ${classNameProp}`}
-      dragging={dragging}
-      ref={forwardedRef}
-      isDragAccept={isDragActive}
-      drag={isDragActive && isDropZone && onDrop}
-      {...getRootProps()}
-    >
+    <div {...rest} className={rootClassName} {...getRootProps()}>
       {children}
-    </StyledDragAndDrop>
+    </div>
   );
 };
 

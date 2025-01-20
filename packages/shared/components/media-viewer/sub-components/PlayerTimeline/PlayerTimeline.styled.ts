@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { tablet, desktop } from "@docspace/shared/utils";
+import { tablet, desktop } from "../../../../utils";
 import { globalColors } from "../../../../themes";
 
 export const HoverProgress = styled.div`

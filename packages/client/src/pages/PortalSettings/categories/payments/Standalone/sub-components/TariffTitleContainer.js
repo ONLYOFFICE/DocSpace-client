@@ -103,11 +103,11 @@ const TariffTitleContainer = ({
                 : t("Common:EnterpriseLicense"),
             })}
           </Text>{" "}
-          {!isLicenseDateExpired && (
+          {!isLicenseDateExpired ? (
             <Text fontSize="14px" as="span">
               {expiresDate()}
             </Text>
-          )}
+          ) : null}
         </div>
         {alertComponent()}
       </div>

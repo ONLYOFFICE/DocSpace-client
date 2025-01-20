@@ -131,7 +131,7 @@ const CheckboxSet = (props) => {
         }
       />
 
-      {prefix === "sp" && (
+      {prefix === "sp" ? (
         <Checkbox
           id="sp-encrypt-assertions"
           className="checkbox-input"
@@ -142,7 +142,7 @@ const CheckboxSet = (props) => {
           tabIndex={13}
           isChecked={spEncryptAssertions}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

@@ -29,8 +29,8 @@ import React, { useState, useRef } from "react";
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ContextMenu, TContextMenuRef } from "../../context-menu";
-import { IPlusButtonProps } from "../Navigation.types";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { TPlusButtonProps } from "../Navigation.types";
 
 const PlusButton = ({
   className,
@@ -42,10 +42,10 @@ const PlusButton = ({
   onCloseDropBox,
   forwardedRef,
   ...rest
-}: IPlusButtonProps) => {
+}: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const menuRef = useRef<TContextMenuRef | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<ContextMenuRefType>(null);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {
@@ -84,7 +84,6 @@ const PlusButton = ({
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        // directionX="right"
         leftOffset={isFrame ? 190 : 150}
       />
     </div>

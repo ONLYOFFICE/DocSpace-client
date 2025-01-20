@@ -6,14 +6,8 @@ export const getRoomTypeTitleTranslation = (
   roomType: RoomsType = 1,
 ) => {
   switch (roomType) {
-    // case RoomsType.FillingFormsRoom:
-    //   return t("Common:FillingFormsRoomTitle");
     case RoomsType.EditingRoom:
       return t("Common:CollaborationRoomTitle");
-    // case RoomsType.ReviewRoom:
-    //   return t("Common:ReviewRoomTitle");
-    // case RoomsType.ReadOnlyRoom:
-    //   return t("Common:ViewOnlyRoomTitle");
     case RoomsType.VirtualDataRoom:
       return t("Common:VirtualDataRoom");
     case RoomsType.CustomRoom:
@@ -32,14 +26,8 @@ export const getRoomTypeDescriptionTranslation = (
   roomType: RoomsType = 1,
 ) => {
   switch (roomType) {
-    // case RoomsType.FillingFormsRoom:
-    //   return t("Common:FillingFormsRoomDescription");
     case RoomsType.EditingRoom:
       return t("Common:CollaborationRoomDescription");
-    // case RoomsType.ReviewRoom:
-    //   return t("Common:ReviewRoomDescription");
-    // case RoomsType.ReadOnlyRoom:
-    //   return t("Common:ViewOnlyRoomDescription");
     case RoomsType.VirtualDataRoom:
       return t("Common:VirtualDataRoomDescription");
     case RoomsType.CustomRoom:

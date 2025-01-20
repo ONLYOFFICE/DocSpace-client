@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface RectangleSkeletonProps {
+export type RectangleSkeletonProps = {
   title?: string;
   className?: string;
   x?: string;
@@ -39,4 +39,4 @@ export interface RectangleSkeletonProps {
   speed?: number;
   animate?: boolean;
   style?: React.CSSProperties;
-}
+};

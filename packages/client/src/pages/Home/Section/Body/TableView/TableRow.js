@@ -97,7 +97,7 @@ const FilesTableRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       logo={item.logo}
       color={item.logo?.color}
@@ -205,18 +205,18 @@ const FilesTableRow = (props) => {
       })}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
     >
       <StyledTableRow
+        key={item.id}
         className="table-row"
         forwardedRef={rowRef}
         {...dragStyles}
         isDragging={dragging}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
-        key={item.id}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
@@ -233,7 +233,7 @@ const FilesTableRow = (props) => {
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder && !isTutorialEnabled}
+        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder

@@ -152,7 +152,7 @@ const FileInputPure = ({
             withBorder
             {...onClickProp}
           />
-          {!fromStorage && (
+          {!fromStorage ? (
             <input
               type="file"
               id={id}
@@ -160,7 +160,7 @@ const FileInputPure = ({
               style={{ display: "none" }}
               {...getInputProps()}
             />
-          )}
+          ) : null}
 
           {buttonLabel ? (
             <Button

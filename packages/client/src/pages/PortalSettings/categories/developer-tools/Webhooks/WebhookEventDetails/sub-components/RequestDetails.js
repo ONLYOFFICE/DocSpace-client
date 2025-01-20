@@ -82,12 +82,12 @@ const RequestDetails = ({ eventDetails }) => {
 
   return (
     <DetailsWrapper>
-      {eventDetails.status === 0 && (
+      {eventDetails.status === 0 ? (
         <ErrorMessageTooltip>
           <img src={DangerIcon} alt="danger icon" />
           {t("FailedToConnect")}
         </ErrorMessageTooltip>
-      )}
+      ) : null}
       <Text as="h3" fontWeight={600} className="mb-4 mt-7">
         {t("RequestPostHeader")}
       </Text>

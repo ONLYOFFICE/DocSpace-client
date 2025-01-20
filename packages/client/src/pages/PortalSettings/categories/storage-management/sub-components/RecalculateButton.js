@@ -68,13 +68,13 @@ const RecalculateButton = (props) => {
       <div className="text-container">
         <Text>{t("UpdatingStatistics")}</Text>
 
-        {!isRecalculating && lastRecalculateDate && (
+        {!isRecalculating && lastRecalculateDate ? (
           <Text fontSize="12px" className="last-update">
             {t("LastUpdate", {
               date: moment(lastRecalculateDate).format("L LT"),
             })}
           </Text>
-        )}
+        ) : null}
       </div>
     </div>
   );

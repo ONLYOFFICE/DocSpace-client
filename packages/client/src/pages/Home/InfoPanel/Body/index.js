@@ -202,30 +202,30 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem && (
+      {!isNoItem ? (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}
           isNoItem={isNoItem}
         />
-      )}
+      ) : null}
       {getView()}
 
       {avatarEditorDialogVisible &&
-        !editRoomDialogProps.visible &&
-        !createRoomDialogProps.visible && (
-          <AvatarEditorDialog
-            t={t}
-            image={image}
-            onChangeImage={onChangeIcon}
-            onClose={() => setAvatarEditorDialogVisible(false)}
-            onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
-            onChangeFile={onChangeFile}
-            classNameWrapperImageCropper="icon-editor"
-            visible={image.uploadedFile}
-            maxImageSize={maxImageUploadSize}
-          />
-        )}
+      !editRoomDialogProps.visible &&
+      !createRoomDialogProps.visible ? (
+        <AvatarEditorDialog
+          t={t}
+          image={image}
+          onChangeImage={onChangeIcon}
+          onClose={() => setAvatarEditorDialogVisible(false)}
+          onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
+          onChangeFile={onChangeFile}
+          classNameWrapperImageCropper="icon-editor"
+          visible={image.uploadedFile}
+          maxImageSize={maxImageUploadSize}
+        />
+      ) : null}
     </StyledInfoPanelBody>
   );
 };

@@ -26,8 +26,8 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface PaymentsLoaderProps extends RectangleSkeletonProps {}
+export type PaymentsLoaderProps = RectangleSkeletonProps;
 
-export interface PaymentsStandaloneLoaderProps extends RectangleSkeletonProps {
+export type PaymentsStandaloneLoaderProps = PaymentsLoaderProps & {
   isEnterprise?: boolean;
-}
+};

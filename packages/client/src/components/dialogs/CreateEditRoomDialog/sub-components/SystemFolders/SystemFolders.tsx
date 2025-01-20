@@ -35,7 +35,7 @@ import {
 
 import type SystemFoldersProps from "./SystemFolders.props";
 
-function SystemFolders({ t }: SystemFoldersProps) {
+const SystemFolders = ({ t }: SystemFoldersProps) => {
   return (
     <section>
       <SystemFoldersHeader>
@@ -49,6 +49,6 @@ function SystemFolders({ t }: SystemFoldersProps) {
       </SystemFoldersDescription>
     </section>
   );
-}
+};
 
 export default SystemFolders;

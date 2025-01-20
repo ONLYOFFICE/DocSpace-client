@@ -100,10 +100,9 @@ const CreateRoomEvent = ({
       title={title}
       t={t}
       visible={
-        visible &&
-        !connectDialogVisible &&
-        !createRoomConfirmDialogVisible &&
-        !confirmDialogIsLoading
+        visible && !connectDialogVisible && !createRoomConfirmDialogVisible
+          ? !confirmDialogIsLoading
+          : null
       }
       onClose={onClose}
       onCreate={onCreate}

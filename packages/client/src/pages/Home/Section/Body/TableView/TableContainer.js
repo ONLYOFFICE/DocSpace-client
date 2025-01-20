@@ -230,7 +230,9 @@ const Table = ({
         setGuidRectsPdf={setGuidRectsPdf}
         setGuidRectsReady={setGuidRectsReady}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         icon={icon}
         isDownload={isDownload}

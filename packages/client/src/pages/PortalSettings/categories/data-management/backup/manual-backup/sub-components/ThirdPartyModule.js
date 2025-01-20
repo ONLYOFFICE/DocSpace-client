@@ -131,7 +131,7 @@ class ThirdPartyModule extends React.Component {
           isSelectFolder
         />
 
-        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (
+        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
           <Button
             label={t("Common:CreateCopy")}
             onClick={this.onMakeCopy}
@@ -139,7 +139,7 @@ class ThirdPartyModule extends React.Component {
             isDisabled={isModuleDisabled || selectedFolder === ""}
             size={buttonSize}
           />
-        )}
+        ) : null}
       </div>
     );
   }

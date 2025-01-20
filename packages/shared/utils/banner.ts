@@ -39,7 +39,7 @@ export function getLanguage(lng: string) {
     const splitted = lng.split("-");
 
     if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
-      language = splitted[0];
+      [language] = splitted;
     }
 
     return language;

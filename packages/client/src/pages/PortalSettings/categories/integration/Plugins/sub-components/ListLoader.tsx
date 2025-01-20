@@ -32,7 +32,7 @@ import { ListLoaderProps } from "../Plugins.types";
 const ListLoader = ({ withUpload }: ListLoaderProps) => {
   return (
     <>
-      {withUpload && <RectangleSkeleton width="144px" height="32px" />}
+      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
       <PluginListContainer>
         <RectangleSkeleton width="340px" height="135px" />
         <RectangleSkeleton width="340px" height="135px" />

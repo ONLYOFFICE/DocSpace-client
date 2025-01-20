@@ -95,7 +95,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           >
             {t("TurnOnSSO")}
           </Text>
-          {!isSSOAvailable && (
+          {!isSSOAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -107,7 +107,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
               className="toggle-caption_title_badge"
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"

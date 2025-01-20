@@ -26,9 +26,8 @@
 
 import React from "react";
 
-export interface ContextMenuSkeletonProps {
+export type ContextMenuSkeletonProps = {
   id?: string;
-
   style?: React.CSSProperties;
   isRectangle?: boolean;
-}
+};

@@ -37,8 +37,10 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
 
   return (
     <>
-      {item.action === "upload" && <ShareButton uniqueId={item.uniqueId} />}
-      {item.action === "convert" && (
+      {item.action === "upload" ? (
+        <ShareButton uniqueId={item.uniqueId} />
+      ) : null}
+      {item.action === "convert" ? (
         <div
           className="upload_panel-icon"
           data-id={item.uniqueId}
@@ -58,7 +60,7 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
             isfill
           />
         </div>
-      )}
+      ) : null}
     </>
   );
 };

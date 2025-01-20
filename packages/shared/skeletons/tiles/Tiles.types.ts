@@ -26,17 +26,17 @@
 
 import { RectangleSkeletonProps } from "skeletons/rectangle";
 
-export interface TilesSkeletonProps extends RectangleSkeletonProps {
+export type TilesSkeletonProps = RectangleSkeletonProps & {
   foldersCount?: number;
   filesCount?: number;
   withTitle?: boolean;
-}
+};
 
-export interface StyledBottomProps {
+export type StyledBottomProps = {
   isFolder?: boolean;
-}
+};
 
-export interface TileSkeletonProps extends RectangleSkeletonProps {
+export type TileSkeletonProps = RectangleSkeletonProps & {
   isFolder?: boolean;
   isRoom?: boolean;
-}
+};

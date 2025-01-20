@@ -143,7 +143,7 @@ const SecretKeyInput = (props) => {
           place="bottom"
         />
       </Header>
-      {isResetVisible && (
+      {isResetVisible ? (
         <Hint>
           {t("SecretKeyWarning")} <br />
           <Link
@@ -157,7 +157,7 @@ const SecretKeyInput = (props) => {
             {t("ResetKey")}
           </Link>
         </Hint>
-      )}
+      ) : null}
       <div hidden={isResetVisible}>
         <PasswordInput
           id={`${additionalId}-secret-key-input`}

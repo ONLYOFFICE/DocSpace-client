@@ -39,7 +39,7 @@ import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import {
@@ -178,13 +178,13 @@ const Header = (props) => {
       />
 
       <div>
-        <Headline className="header-headline" type="content">
+        <Heading className="header-headline" type="content">
           {t("Profile:MyProfile")}
-        </Headline>
+        </Heading>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) ||
-          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
+        {(isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}
@@ -194,27 +194,27 @@ const Header = (props) => {
             isDisabled={false}
             usePortal
           />
-        )}
+        ) : null}
 
         <div className="tariff-bar">
           <TariffBar />
         </div>
       </div>
 
-      {deleteSelfProfileDialog && (
+      {deleteSelfProfileDialog ? (
         <DeleteSelfProfileDialog
           visible={deleteSelfProfileDialog}
           onClose={() => setDeleteSelfProfileDialog(false)}
           email={profile?.email}
         />
-      )}
+      ) : null}
 
-      {deleteOwnerProfileDialog && (
+      {deleteOwnerProfileDialog ? (
         <DeleteOwnerProfileDialog
           visible={deleteOwnerProfileDialog}
           onClose={() => setDeleteOwnerProfileDialog(false)}
         />
-      )}
+      ) : null}
     </StyledHeader>
   );
 };

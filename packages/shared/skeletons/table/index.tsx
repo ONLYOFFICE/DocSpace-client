@@ -40,7 +40,7 @@ const TableSkeleton = ({
   for (let i = 0; i < count; i += 1) {
     items.push(<TableRow key={`row_loader_${i}`} {...props} />);
   }
-  return <div>{items}</div>;
+  return <div data-testid="table-skeleton">{items}</div>;
 };
 
 export { TableSkeleton };

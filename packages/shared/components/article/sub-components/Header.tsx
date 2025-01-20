@@ -31,18 +31,16 @@ import { useTheme } from "styled-components";
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
-import {
-  StyledArticleHeader,
-  StyledHeading,
-  StyledIconBox,
-} from "../Article.styled";
+
+import { AsideHeader } from "../../aside-header";
+
+import styles from "../Article.module.scss";
+
 import { ArticleHeaderProps } from "../Article.types";
-import { AsideHeader } from "../../aside/AsideHeader";
 
 const ArticleHeader = ({
   showText,
   children,
-  onClick,
   onLogoClickAction,
   isBurgerLoading,
 
@@ -86,17 +84,23 @@ const ArticleHeader = ({
 
   const mainComponent = (
     <>
-      {currentDeviceType === DeviceType.tablet && (
-        <StyledIconBox showText={showText}>
+      {currentDeviceType === DeviceType.tablet ? (
+        <div
+          className={styles.iconBox}
+          data-show-text={showText ? "true" : "false"}
+        >
           <img
             src={burgerLogo}
             className="burger-logo"
             alt="burger-logo"
             onClick={onLogoClick}
           />
-        </StyledIconBox>
-      )}
-      <StyledHeading showText={showText}>
+        </div>
+      ) : null}
+      <div
+        className={styles.heading}
+        data-show-text={showText ? "true" : "false"}
+      >
         {currentDeviceType === DeviceType.tablet ? (
           <img
             className="logo-icon_svg"
@@ -109,18 +113,22 @@ const ArticleHeader = ({
             <img className="logo-icon_svg" alt="burger-logo" src={logo} />
           </Link>
         )}
-      </StyledHeading>
+      </div>
     </>
   );
 
   return (
-    <StyledArticleHeader showText={showText} {...rest}>
+    <div
+      className={styles.articleHeader}
+      data-show-text={showText ? "true" : "false"}
+      {...rest}
+    >
       {withCustomArticleHeader && children
         ? children
         : isBurgerLoading
           ? isLoadingComponent
           : mainComponent}
-    </StyledArticleHeader>
+    </div>
   );
 };
 

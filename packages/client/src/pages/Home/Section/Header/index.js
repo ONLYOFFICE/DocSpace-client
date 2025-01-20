@@ -57,7 +57,7 @@ import {
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
@@ -651,7 +651,7 @@ const SectionHeaderContent = (props) => {
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
-              withComboBox={!isIndexEditingMode && !!menuItems}
+              withComboBox={!isIndexEditingMode ? !!menuItems : null}
               {...tableGroupMenuProps}
               {...headerProps}
               {...closeProps}
@@ -661,11 +661,12 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot && !isContactsInsideGroupPage}
+                isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
-                  !isSettingsPage &&
-                  !isPublicRoom
+                  !isSettingsPage
+                    ? !isPublicRoom
+                    : null
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -705,12 +706,14 @@ const SectionHeaderContent = (props) => {
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  logo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? logo
+                    : null
                 }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  burgerLogo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? burgerLogo
+                    : null
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -728,7 +731,7 @@ const SectionHeaderContent = (props) => {
                 buttonRef={buttonRef}
                 addButtonRef={addButtonRef}
               />
-              {showSignInButton && (
+              {showSignInButton ? (
                 <Button
                   className="header_sign-in-button"
                   label={t("Common:LoginButton")}
@@ -737,10 +740,10 @@ const SectionHeaderContent = (props) => {
                   isDisabled={signInButtonIsDisabled}
                   primary
                 />
-              )}
+              ) : null}
             </div>
           )}
-          {isFrame && (
+          {isFrame ? (
             <>
               <input
                 id="customFileInput"
@@ -762,7 +765,7 @@ const SectionHeaderContent = (props) => {
                 onClick={onInputClick}
               />
             </>
-          )}
+          ) : null}
         </StyledContainer>
       )}
     </Consumer>

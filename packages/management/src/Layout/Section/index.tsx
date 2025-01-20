@@ -26,6 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/shared/enums";
 import Section from "@docspace/shared/components/section";
@@ -68,6 +69,8 @@ const SectionWrapper = ({
   showText,
   isInfoPanelScrollLocked,
 }: ISectionProps) => {
+  const location = useLocation();
+
   return (
     <Section
       withBodyScroll
@@ -85,6 +88,7 @@ const SectionWrapper = ({
       snackbarExist={snackbarExist}
       showText={showText}
       isInfoPanelScrollLocked={isInfoPanelScrollLocked}
+      pathname={location.pathname}
     >
       <Section.SectionHeader>
         <SectionHeaderContent />

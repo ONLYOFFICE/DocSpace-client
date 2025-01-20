@@ -223,7 +223,7 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   /**
    * @description Current ScrollState (cached)
    */
-  private scrollValues: ScrollState;
+  public scrollValues: ScrollState;
 
   private _scrollDetectionTO: number | null = null;
 

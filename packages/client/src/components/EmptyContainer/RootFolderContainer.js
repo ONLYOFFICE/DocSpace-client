@@ -152,7 +152,7 @@ const RootFolderContainer = (props) => {
           </Box>
         ))}
       </Text>
-      {!isDesktop && (
+      {!isDesktop ? (
         <Text fontSize="12px">
           <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
             Work in Private Room is available via{" "}
@@ -167,7 +167,7 @@ const RootFolderContainer = (props) => {
             </Link>
           </Trans>
         </Text>
-      )}
+      ) : null}
     </>
   );
 

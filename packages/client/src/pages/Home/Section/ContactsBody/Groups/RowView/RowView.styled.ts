@@ -27,11 +27,13 @@
 import styled, { css } from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
+import {
+  RowContainer,
+  Row,
+  RowContent,
+} from "@docspace/shared/components/rows";
 import { globalColors } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils/device";
-import { RowContent } from "@docspace/shared/components/row-content";
 
 const marginStyles = css`
   margin-inline: -24px;

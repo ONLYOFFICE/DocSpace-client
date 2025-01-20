@@ -386,11 +386,13 @@ const InviteInput = ({
             <SearchItemText primary disabled={shared}>
               {displayName || groupName}
             </SearchItemText>
-            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+            {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
           </Box>
           <SearchItemText>{email}</SearchItemText>
         </div>
-        {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
+        {shared ? (
+          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+        ) : null}
       </DropDownItem>
     );
   };
@@ -558,7 +560,7 @@ const InviteInput = ({
     <>
       <StyledSubHeader>
         {t("AddManually")}
-        {!hideSelector && (
+        {!hideSelector ? (
           <StyledLink
             className="link-list"
             fontWeight="600"
@@ -568,7 +570,7 @@ const InviteInput = ({
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
@@ -602,11 +604,11 @@ const InviteInput = ({
             fillIcon={false}
             modernView
           />
-          {culture?.isBeta && (
+          {culture?.isBeta ? (
             <BetaBadge place="bottom-end" mobilePlace="bottom" />
-          )}
+          ) : null}
         </div>
-        {isChangeLangMail && !isMobileView && (
+        {isChangeLangMail && !isMobileView ? (
           <StyledLink
             className="list-link"
             fontWeight="600"
@@ -616,9 +618,9 @@ const InviteInput = ({
           >
             {t("ResetChange")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledInviteLanguage>
-      {isChangeLangMail && isMobileView && (
+      {isChangeLangMail && isMobileView ? (
         <ResetLink
           className="reset-link"
           fontWeight="600"
@@ -628,7 +630,7 @@ const InviteInput = ({
         >
           {t("ResetChange")}
         </ResetLink>
-      )}
+      ) : null}
 
       <StyledInviteInputContainer ref={inputsRef}>
         <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>

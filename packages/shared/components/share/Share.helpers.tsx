@@ -377,8 +377,8 @@ export const copyRoomShareLink = (
   toastr.success(
     <span>
       {roleText} {passwordText} {restrictionText} {date}
-      {date && <Strong>.</Strong>}
-      {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+      {date ? <Strong>.</Strong> : null}
+      {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <Link
           color={globalColors.lightBlueMain}
           isHovered
@@ -386,7 +386,7 @@ export const copyRoomShareLink = (
         >
           {t("Notifications:ManageNotifications")}
         </Link>
-      )}
+      ) : null}
     </span>,
   );
 };
@@ -428,7 +428,7 @@ export const copyDocumentShareLink = (
     <span>
       {head} {date}
       <Strong>.</Strong>
-      {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+      {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <>
           &nbsp;
           <Link
@@ -439,7 +439,7 @@ export const copyDocumentShareLink = (
             {t("Notifications:ManageNotifications")}
           </Link>
         </>
-      )}
+      ) : null}
     </span>,
     t("Common:LinkCopiedToClipboard"),
   );

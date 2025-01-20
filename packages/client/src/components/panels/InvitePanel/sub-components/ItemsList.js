@@ -199,7 +199,7 @@ const ItemsList = ({
           t,
           standalone,
         }}
-        outerElementType={!scrollAllPanelContent && VirtualScroll}
+        outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
       >
         {Row}
       </List>

@@ -213,15 +213,15 @@ const CreateGroupDialog = ({
         </ModalDialog.Footer>
       </ModalDialog>
 
-      {selectGroupMangerPanelIsVisible && (
+      {selectGroupMangerPanelIsVisible ? (
         <SelectGroupManagerPanel
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
         />
-      )}
+      ) : null}
 
-      {selectMembersPanelIsVisible && (
+      {selectMembersPanelIsVisible ? (
         <SelectMembersPanel
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
@@ -229,7 +229,7 @@ const CreateGroupDialog = ({
           groupMembers={groupParams.groupMembers}
           addMembers={addMembers}
         />
-      )}
+      ) : null}
     </>
   );
 };

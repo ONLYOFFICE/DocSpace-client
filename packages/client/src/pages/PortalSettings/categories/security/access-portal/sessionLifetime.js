@@ -272,7 +272,7 @@ const SessionLifetime = (props) => {
         onClick={onSelectType}
       />
 
-      {type && (
+      {type ? (
         <>
           <Text className="lifetime" fontSize="15px" fontWeight="600">
             {t("Lifetime")}
@@ -288,7 +288,7 @@ const SessionLifetime = (props) => {
             hasError={error}
           />
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

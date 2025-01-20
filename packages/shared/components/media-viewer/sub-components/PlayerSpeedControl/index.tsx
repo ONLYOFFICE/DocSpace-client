@@ -99,13 +99,13 @@ const PlayerSpeedControl = memo(
 
     return (
       <>
-        {speedToastVisible && (
+        {speedToastVisible ? (
           <ToastSpeed>{speedIcons[currentIndexSpeed]}</ToastSpeed>
-        )}
+        ) : null}
         <SpeedControlWrapper ref={ref} onClick={toggle}>
           {speedIcons[currentIndexSpeed]}
 
-          {isOpenSpeedContextMenu && (
+          {isOpenSpeedContextMenu ? (
             <DropDown onMouseLeave={onMouseLeave}>
               {speeds.map((speed, index) => (
                 <DropDownItem
@@ -120,7 +120,7 @@ const PlayerSpeedControl = memo(
                 </DropDownItem>
               ))}
             </DropDown>
-          )}
+          ) : null}
         </SpeedControlWrapper>
       </>
     );

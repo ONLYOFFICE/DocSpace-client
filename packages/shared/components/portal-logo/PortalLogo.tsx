@@ -27,16 +27,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "styled-components";
+import { isMobileOnly } from "react-device-detect";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { classNames, getLogoUrl, size as deviceSize } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
-import { size as deviceSize } from "../../utils";
-import { StyledWrapper } from "./PortalLogo.styled";
+import { useTheme } from "../../hooks/useTheme";
 import type { PortalLogoProps } from "./PortalLogo.types";
+import styles from "./PortalLogo.module.scss";
 
 const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [size, setSize] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0,
@@ -61,18 +61,26 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
       ? WhiteLabelLogoType.LightSmall
       : WhiteLabelLogoType.LoginPage;
 
-  const logo = getLogoUrl(logoSize, !theme.isBase);
+  const logo = getLogoUrl(logoSize, !isBase);
+
+  console.log("!isMobileOnly", !isMobileOnly);
+
+  const wrapperClassName = classNames(styles.wrapper, {
+    [styles.mobile]: isMobile,
+    [styles.resizable]: isResizable,
+    "not-mobile": !isMobileOnly,
+  });
 
   return (
-    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
-      {logo && (
+    <div className={wrapperClassName}>
+      {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
           alt=""
         />
-      )}
-    </StyledWrapper>
+      ) : null}
+    </div>
   );
 };
 

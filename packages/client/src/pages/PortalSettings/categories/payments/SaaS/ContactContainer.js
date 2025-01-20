@@ -40,7 +40,7 @@ const StyledContactContainer = styled.div`
 const ContactContainer = ({ t, salesEmail }) => {
   return (
     <StyledContactContainer>
-      {salesEmail && (
+      {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
           <ColorTheme
@@ -53,7 +53,7 @@ const ContactContainer = ({ t, salesEmail }) => {
             {salesEmail}
           </ColorTheme>
         </Text>
-      )}
+      ) : null}
     </StyledContactContainer>
   );
 };

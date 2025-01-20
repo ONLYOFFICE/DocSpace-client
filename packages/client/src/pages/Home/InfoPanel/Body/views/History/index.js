@@ -266,7 +266,7 @@ const History = ({
               isVisitor={isVisitor}
               isCollaborator={isCollaborator}
               withFileList={historyWithFileList}
-              isLastEntity={i === feeds.length - 1 && !isLoadingNextPage}
+              isLastEntity={i === feeds.length - 1 ? !isLoadingNextPage : null}
             />
           )),
         ])}

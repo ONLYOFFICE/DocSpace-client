@@ -159,7 +159,7 @@ const Cron = ({
         setPeriod={setPeriod}
         isDisabled={isDisabled}
       />
-      {isYear && (
+      {isYear ? (
         <Months
           unit={units[3]}
           t={t}
@@ -167,8 +167,8 @@ const Cron = ({
           setMonths={setMonths}
           isDisabled={isDisabled}
         />
-      )}
-      {(isYear || isMonth) && (
+      ) : null}
+      {isYear || isMonth ? (
         <MonthDays
           t={t}
           unit={units[2]}
@@ -177,8 +177,8 @@ const Cron = ({
           setMonthDays={setMonthDays}
           isDisabled={isDisabled}
         />
-      )}
-      {(isYear || isMonth || isWeek) && (
+      ) : null}
+      {isYear || isMonth || isWeek ? (
         <WeekDays
           t={t}
           unit={units[4]}
@@ -188,9 +188,9 @@ const Cron = ({
           setWeekDays={setWeekDays}
           isDisabled={isDisabled}
         />
-      )}
+      ) : null}
       <Wrapper>
-        {!isHour && !isMinute && (
+        {!isHour && !isMinute ? (
           <Hours
             unit={units[1]}
             t={t}
@@ -198,9 +198,9 @@ const Cron = ({
             setHours={setHours}
             isDisabled={isDisabled}
           />
-        )}
+        ) : null}
 
-        {!isMinute && (
+        {!isMinute ? (
           <Minutes
             t={t}
             unit={units[0]}
@@ -209,7 +209,7 @@ const Cron = ({
             setMinutes={setMinutes}
             isDisabled={isDisabled}
           />
-        )}
+        ) : null}
         <Suffix>{t("Common:UTC")}</Suffix>
       </Wrapper>
     </CronWrapper>

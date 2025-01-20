@@ -86,14 +86,14 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <MobileCategoryWrapper
           title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
         />
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

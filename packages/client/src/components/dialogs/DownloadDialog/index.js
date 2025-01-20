@@ -158,7 +158,7 @@ class DownloadDialogComponent extends React.Component {
 
   onSelectFormat = (e) => {
     const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files; // eslint-disable-line react/destructuring-assignment
+    const { files } = this.state[type]; // eslint-disable-line react/destructuring-assignment
     const { t } = this.props;
 
     this.setState((prevState) => {
@@ -418,13 +418,13 @@ class DownloadDialogComponent extends React.Component {
       <>
         <StyledBodyContent className="download-dialog-description">
           <Text noSelect>{t("ChooseFormatText")}.</Text>
-          {!isSingleFile && (
+          {!isSingleFile ? (
             <Text noSelect>
               <Trans t={t} i18nKey="ConvertToZip" />
             </Text>
-          )}
+          ) : null}
         </StyledBodyContent>
-        {documents.length > 0 && (
+        {documents.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedDocTitle}
@@ -434,9 +434,9 @@ class DownloadDialogComponent extends React.Component {
             type="documents"
             title={t("Common:Documents")}
           />
-        )}
+        ) : null}
 
-        {spreadsheets.length > 0 && (
+        {spreadsheets.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedSpreadsheetTitle}
@@ -446,9 +446,9 @@ class DownloadDialogComponent extends React.Component {
             type="spreadsheets"
             title={t("Translations:Spreadsheets")}
           />
-        )}
+        ) : null}
 
-        {presentations.length > 0 && (
+        {presentations.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedPresentationTitle}
@@ -458,9 +458,9 @@ class DownloadDialogComponent extends React.Component {
             type="presentations"
             title={t("Translations:Presentations")}
           />
-        )}
+        ) : null}
 
-        {masterForms.length > 0 && (
+        {masterForms.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedMasterFormsTitle}
@@ -470,9 +470,9 @@ class DownloadDialogComponent extends React.Component {
             type="masterForms"
             title={t("Translations:FormTemplates")}
           />
-        )}
+        ) : null}
 
-        {other.length > 0 && (
+        {other.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedOtherTitle}
@@ -481,7 +481,7 @@ class DownloadDialogComponent extends React.Component {
             type="other"
             title={t("Translations:Other")}
           />
-        )}
+        ) : null}
 
         <div className="download-dialog-convert-message">
           <Text noSelect>{t("ConvertMessage")}</Text>

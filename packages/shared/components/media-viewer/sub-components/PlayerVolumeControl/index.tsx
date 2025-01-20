@@ -30,11 +30,7 @@ import IconVolumeMax from "PUBLIC_DIR/images/media.volumemax.react.svg";
 import IconVolumeMuted from "PUBLIC_DIR/images/media.volumeoff.react.svg";
 import IconVolumeMin from "PUBLIC_DIR/images/media.volumemin.react.svg";
 
-import {
-  IconWrapper,
-  PlayerVolumeControlWrapper,
-  VolumeWrapper,
-} from "./PlayerVolumeControl.styled";
+import styles from "./PlayerVolumeControl.module.scss";
 
 type PlayerVolumeControlProps = {
   volume: number;
@@ -51,8 +47,8 @@ const PlayerVolumeControl = memo(
     toggleVolumeMute,
   }: PlayerVolumeControlProps) => {
     return (
-      <PlayerVolumeControlWrapper>
-        <IconWrapper onClick={toggleVolumeMute}>
+      <div className={styles.playerVolumeControlWrapper}>
+        <div className={styles.iconWrapper} onClick={toggleVolumeMute}>
           {isMuted ? (
             <IconVolumeMuted />
           ) : volume >= 50 ? (
@@ -60,8 +56,8 @@ const PlayerVolumeControl = memo(
           ) : (
             <IconVolumeMin />
           )}
-        </IconWrapper>
-        <VolumeWrapper>
+        </div>
+        <div className={styles.volumeWrapper}>
           <input
             style={{
               backgroundSize: `${volume}% 100%`,
@@ -72,8 +68,8 @@ const PlayerVolumeControl = memo(
             value={volume}
             onChange={onChange}
           />
-        </VolumeWrapper>
-      </PlayerVolumeControlWrapper>
+        </div>
+      </div>
     );
   },
 );

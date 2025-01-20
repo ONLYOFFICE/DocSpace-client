@@ -24,65 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@import "../../../../styles/variables/devices";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables/colors";
 
-import { tablet } from "../../../../utils";
-import { globalColors } from "../../../../themes";
+:root {
+  --volume-control-background: rgba(255, 255, 255, 0.3);
+  --volume-control-slider: #{$white};
+}
 
-export const PlayerVolumeControlWrapper = styled.div`
+:root[data-theme="dark"] {
+  --volume-control-background: rgba(255, 255, 255, 0.3);
+  --volume-control-slider: #{$white};
+}
+
+.playerVolumeControlWrapper {
   display: flex;
   align-items: center;
   margin-inline-start: 10px;
-`;
+}
 
-export const IconWrapper = styled.div`
+.iconWrapper {
   display: flex;
   align-items: center;
   cursor: pointer;
-`;
+}
 
-const mobilecss = css`
-  input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    visibility: visible;
-    opacity: 1;
-    background: ${globalColors.white};
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  input[type="range"]::-moz-range-thumb {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    visibility: visible;
-    opacity: 1;
-    background: ${globalColors.white};
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  input[type="range"]::-ms-fill-upper {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    visibility: visible;
-    opacity: 1;
-    background: ${globalColors.white};
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-`;
-
-export const VolumeWrapper = styled.div`
+.volumeWrapper {
   width: 123px;
   height: 28px;
   display: flex;
@@ -100,10 +68,10 @@ export const VolumeWrapper = styled.div`
 
     border-radius: 5px;
 
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--volume-control-background);
     background-image: linear-gradient(
-      ${globalColors.white},
-      ${globalColors.white}
+      var(--volume-control-slider),
+      var(--volume-control-slider)
     );
     background-repeat: no-repeat;
 
@@ -111,7 +79,7 @@ export const VolumeWrapper = styled.div`
       cursor: pointer;
     }
 
-    @media ${tablet} {
+    @include tablet-and-below {
       width: 63%;
     }
   }
@@ -122,7 +90,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: ${globalColors.white};
+    background: var(--volume-control-slider);
   }
 
   input[type="range"]::-moz-range-thumb {
@@ -131,7 +99,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: ${globalColors.white};
+    background: var(--volume-control-slider);
   }
 
   input[type="range"]::-ms-fill-upper {
@@ -140,7 +108,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: ${globalColors.white};
+    background: var(--volume-control-slider);
   }
 
   &:hover {
@@ -173,7 +141,44 @@ export const VolumeWrapper = styled.div`
     }
   }
 
-  @media ${tablet} {
-    ${mobilecss}
+  @include tablet-and-below {
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      visibility: visible;
+      opacity: 1;
+      background: var(--volume-control-slider);
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      visibility: visible;
+      opacity: 1;
+      background: var(--volume-control-slider);
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-ms-fill-upper {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      visibility: visible;
+      opacity: 1;
+      background: var(--volume-control-slider);
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
-`;
+}

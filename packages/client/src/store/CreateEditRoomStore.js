@@ -343,7 +343,7 @@ class CreateEditRoomStore {
       if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
-      if (room.isTemplate && invitations.length) {
+      if (room.isTemplate && invitations?.length) {
         requests.push(
           updateRoomMemberRole(roomId, {
             invitations,

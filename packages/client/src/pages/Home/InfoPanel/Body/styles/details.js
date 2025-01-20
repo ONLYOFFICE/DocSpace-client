@@ -71,7 +71,6 @@ const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-// TODO: Templates StyledPublicRoomBar
 const StyledPublicRoomBar = styled(PublicRoomBar)`
   margin-bottom: -2px;
 

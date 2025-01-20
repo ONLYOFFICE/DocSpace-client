@@ -257,7 +257,7 @@ const Members = ({
   const publicRoomItemsLength = publicRoomItems.length;
 
   const isTemplate = infoPanelSelection?.isTemplate;
-  const isAvailableToEveryone = true; // TODO: Templates
+  const isAvailableToEveryone = false; // TODO: Templates
   if (isTemplate && isAvailableToEveryone) {
     return (
       <PublicRoomBar

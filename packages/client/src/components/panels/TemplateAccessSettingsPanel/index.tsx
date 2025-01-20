@@ -92,9 +92,7 @@ type TemplateAccessSettingsPanelProps = {
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
   templateItem: TRoom;
-  // templateEventVisible: VoidFunction;
   setInfoPanelIsMobileHidden?: (visible: boolean) => void;
-  // onCreateRoomFromTemplate: (item: object) => void;
 } & TemplateAccessSettingsContainer;
 
 const TemplateAccessSettingsPanel = ({
@@ -104,8 +102,6 @@ const TemplateAccessSettingsPanel = ({
   setIsVisible,
   templateItem,
   setInfoPanelIsMobileHidden,
-  // onCreateRoomFromTemplate,
-  // templateEventVisible,
   isContainer,
   usersPanelIsVisible,
   setUsersPanelIsVisible,
@@ -494,7 +490,7 @@ const TemplateAccessSettingsPanel = ({
 
 export default inject(
   (
-    { dialogsStore, infoPanelStore, filesStore, filesActionsStore }: TStore,
+    { dialogsStore, infoPanelStore, filesStore }: TStore,
     {
       isContainer = false,
       setIsVisible,
@@ -505,7 +501,6 @@ export default inject(
   ) => {
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
     const { selection, bufferSelection } = filesStore;
-    const { onCreateRoomFromTemplate } = filesActionsStore;
     const {
       templateAccessSettingsVisible,
       setTemplateAccessSettingsVisible,
@@ -515,7 +510,6 @@ export default inject(
     return {
       setInfoPanelIsMobileHidden,
       templateItem: selection.length ? selection[0] : bufferSelection,
-      onCreateRoomFromTemplate,
       templateEventVisible,
       visible: isContainer ? false : templateAccessSettingsVisible,
       setIsVisible: isContainer

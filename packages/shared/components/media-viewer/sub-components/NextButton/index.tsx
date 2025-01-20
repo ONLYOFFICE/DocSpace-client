@@ -24,8 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import MediaNextIcon from "PUBLIC_DIR/images/viewer.next.react.svg";
-import styles from "./NextButton.module.scss";
+import {
+  StyledButtonScroll,
+  StyledSwitchToolbar,
+} from "../../MediaViewer.styled";
 
 type NextButtonProps = {
   nextClick?: VoidFunction;
@@ -34,14 +39,10 @@ type NextButtonProps = {
 
 export const NextButton = ({ nextClick, isPDFFile }: NextButtonProps) => {
   return (
-    <div
-      onClick={nextClick}
-      className={styles.switchToolbar}
-      data-is-pdf={isPDFFile}
-    >
-      <div className={styles.buttonScroll}>
+    <StyledSwitchToolbar onClick={nextClick} isPDFFile={isPDFFile}>
+      <StyledButtonScroll orientation="right">
         <MediaNextIcon />
-      </div>
-    </div>
+      </StyledButtonScroll>
+    </StyledSwitchToolbar>
   );
 };

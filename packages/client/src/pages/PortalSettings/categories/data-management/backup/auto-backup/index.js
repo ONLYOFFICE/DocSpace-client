@@ -170,7 +170,7 @@ class AutomaticBackup extends React.PureComponent {
     } = this.props;
 
     try {
-      getProgress();
+      getProgress(t);
 
       const [account, backupSchedule, backupStorage, storageRegions] =
         await Promise.all([

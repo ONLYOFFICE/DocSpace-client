@@ -530,7 +530,7 @@ class BackupStore {
     }
   };
 
-  getProgress = async () => {
+  getProgress = async (t) => {
     try {
       const response = await getBackupProgress();
 
@@ -551,7 +551,7 @@ class BackupStore {
       }
     } catch (e) {
       toastr.error(e);
-      this.downloadingProgressError = e;
+      this.downloadingProgressError = t("Commmon:UnexpectedError");
     }
   };
 

@@ -97,7 +97,7 @@ const RestoreBackup = (props) => {
 
   const startRestoreBackup = useCallback(async () => {
     try {
-      getProgress();
+      getProgress(t);
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),

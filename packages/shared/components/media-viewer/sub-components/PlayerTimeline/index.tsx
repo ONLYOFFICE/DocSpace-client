@@ -25,18 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useImperativeHandle, forwardRef } from "react";
-
+import classNames from "classnames";
+import { isMobile } from "react-device-detect";
 import { formatTime } from "../../MediaViewer.utils";
 
 import type {
   PlayerTimelineProps,
   PlayerTimelineRef,
 } from "./PlayerTimeline.props";
-import {
-  HoverProgress,
-  PlayerTimelineWrapper,
-  Progress,
-} from "./PlayerTimeline.styled";
+
+import styles from "./PlayerTimeline.module.scss";
 
 const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
   ({ value, duration, onChange, onMouseEnter, onMouseLeave }, ref) => {
@@ -132,15 +130,18 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
     }, []);
 
     return (
-      <PlayerTimelineWrapper
+      <div
+        className={classNames(styles.wrapper, {
+          [styles.isMobile]: isMobile,
+        })}
         ref={timelineRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
         <time ref={timelineTooltipRef}>00:00</time>
-        <Progress ref={progressRef} />
-        <HoverProgress ref={hoverProgressRef} />
+        <div ref={progressRef} className={styles.progress} />
+        <div ref={hoverProgressRef} className={styles.hoverProgress} />
         <input
           min="0"
           max="100"
@@ -152,7 +153,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
             backgroundSize: `${value}% 100%`,
           }}
         />
-      </PlayerTimelineWrapper>
+      </div>
     );
   },
 );

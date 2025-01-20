@@ -551,6 +551,7 @@ class BackupStore {
       }
     } catch (e) {
       toastr.error(e);
+      this.downloadingProgressError = error;
     }
   };
 

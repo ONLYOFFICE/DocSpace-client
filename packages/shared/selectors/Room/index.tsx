@@ -148,6 +148,7 @@ const RoomSelector = ({
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
+      if (withInit && startIndex === 0) return;
       setIsNextPageLoading(true);
 
       const page = startIndex / PAGE_COUNT;
@@ -192,7 +193,14 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [
+      disableThirdParty,
+      excludeItems,
+      roomType,
+      searchValue,
+      setIsDataReady,
+      withInit,
+    ],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader

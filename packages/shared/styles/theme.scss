@@ -1534,6 +1534,10 @@
   --viewer-toolbar-hover-bg: #{$background-color};
   --viewer-toolbar-icon-color: #{$white};
   --viewer-toolbar-icon-disabled: #{$gray};
+
+  --viewer-dropdown-bg: #{$black};
+  --viewer-dropdown-item-color: #{$white};
+  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
 }
 
 .dark {
@@ -1632,6 +1636,10 @@
   --viewer-toolbar-hover-bg: #{$background-color};
   --viewer-toolbar-icon-color: #{$white};
   --viewer-toolbar-icon-disabled: #{$gray};
+
+  --viewer-dropdown-bg: #{$black};
+  --viewer-dropdown-item-color: #{$white};
+  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
 }
 
 :global(.rtl) {

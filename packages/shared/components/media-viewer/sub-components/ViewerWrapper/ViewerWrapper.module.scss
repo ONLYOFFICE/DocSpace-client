@@ -24,22 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --viewer-dropdown-bg: #{$black};
-  --viewer-dropdown-item-color: #{$white};
-  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
-}
-
-:root[data-theme="dark"] {
-  --viewer-dropdown-bg: #{$black};
-  --viewer-dropdown-item-color: #{$white};
-  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
-}
-
 .dropDown {
   background: var(--viewer-dropdown-bg);
   direction: var(--interface-direction);

@@ -29,6 +29,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 
 const path = require("path");
 const fs = require("fs");
@@ -38,7 +39,13 @@ let appSettings = null;
 
 try {
   // @ts-expect-error path is correct
-  appSettings = require("../../../../buildtools/config/appsettings.json");
+  const appSettingsPath = path.resolve(
+    __dirname,
+    "../../../../buildtools/config/appsettings.json",
+  );
+  appSettings = fs.existsSync(appSettingsPath)
+    ? require("../../../../buildtools/config/appsettings.json")
+    : null;
 } catch (e) {
   console.log(e);
 }

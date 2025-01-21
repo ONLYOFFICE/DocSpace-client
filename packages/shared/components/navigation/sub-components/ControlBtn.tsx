@@ -73,6 +73,10 @@ const ControlButtons = ({
   // Tariff bar
   tariffBar,
   title,
+
+  // Guidance props
+  addButtonRef,
+  buttonRef,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -88,6 +92,7 @@ const ControlButtons = ({
 
     return (
       <Button
+        ref={buttonRef}
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
@@ -110,6 +115,7 @@ const ControlButtons = ({
 
     return (
       <PlusButton
+        forwardedRef={addButtonRef}
         id="header_add-button"
         className="add-button"
         getData={getContextOptionsPlus}

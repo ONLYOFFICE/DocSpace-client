@@ -69,6 +69,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     onAlertClick,
     withAlertClick,
     dropdownStyle,
+    mainButtonRef,
   } = props;
 
   const [isOpen, setIsOpen] = useState(opened);
@@ -77,7 +78,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
   const divRef = useRef<HTMLDivElement | null>(null);
-  const ref = useRef<HTMLDivElement | null>(null);
   const dropDownRef = useRef(null);
 
   const scrollElem = useRef<null | HTMLElement>(null);
@@ -217,7 +217,12 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   const outsideClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (isOpen && ref.current && ref.current.contains(target)) return;
+    if (
+      isOpen &&
+      mainButtonRef?.current &&
+      mainButtonRef?.current?.contains(target)
+    )
+      return;
     toggle(false);
   };
 
@@ -356,7 +361,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     <>
       <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
       <div
-        ref={ref}
+        ref={mainButtonRef}
         className={className}
         style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
         data-testid="main-button-mobile"

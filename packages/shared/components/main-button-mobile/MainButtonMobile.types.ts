@@ -134,6 +134,8 @@ export type MainButtonMobileProps = {
   onClick?: (e: React.MouseEvent) => void;
   /** Custom styles for the dropdown */
   dropdownStyle?: React.CSSProperties;
+  /** Main button ref, used for guidance */
+  mainButtonRef?: React.RefObject<HTMLDivElement>;
 };
 
 export type ProgressBarMobileProps = {

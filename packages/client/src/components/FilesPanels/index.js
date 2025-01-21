@@ -33,10 +33,10 @@ import {
   Events,
   FilesSelectorFilterTypes,
   FilterType,
-  // FormFillingTipsState,
+  FormFillingTipsState,
 } from "@docspace/shared/enums";
 
-// import { Guidance } from "@docspace/shared/components/guidance";
+import { Guidance } from "@docspace/shared/components/guidance";
 
 import {
   UploadPanel,
@@ -149,17 +149,17 @@ const Panels = (props) => {
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
 
-    // setFormFillingTipsNumber,
-    // setFormFillingTipsDialog,
-    // formFillingTipsVisible,
-    // formFillingTipsNumber,
-    // viewAs,
-    // pdfGuidRects,
-    // readyGuidRects,
-    // shareGuidRects,
-    // uploadingGuidRects,
-    // infoPanelVisible,
-    // userId,
+    setFormFillingTipsNumber,
+    setFormFillingTipsDialog,
+    formFillingTipsVisible,
+    formFillingTipsNumber,
+    viewAs,
+    pdfGuidRects,
+    readyGuidRects,
+    shareGuidRects,
+    uploadingGuidRects,
+    infoPanelVisible,
+    userId,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -226,11 +226,11 @@ const Panels = (props) => {
     };
   }, [isShowWarningDialog]);
 
-  // const onCloseGuidance = () => {
-  //   setFormFillingTipsNumber(FormFillingTipsState.Starting);
-  //   setFormFillingTipsDialog(false);
-  //   window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
-  // };
+  const onCloseGuidance = () => {
+    setFormFillingTipsNumber(FormFillingTipsState.Starting);
+    setFormFillingTipsDialog(false);
+    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
+  };
 
   return [
     settingsPluginDialogVisible && (
@@ -375,20 +375,20 @@ const Panels = (props) => {
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
     ),
 
-    // formFillingTipsVisible && (
-    //   <Guidance
-    //     formFillingTipsNumber={formFillingTipsNumber}
-    //     setFormFillingTipsNumber={setFormFillingTipsNumber}
-    //     onClose={onCloseGuidance}
-    //     viewAs={viewAs}
-    //     // currentDeviceType={currentDeviceType}
-    //     pdfGuidRects={pdfGuidRects}
-    //     readyGuidRects={readyGuidRects}
-    //     shareGuidRects={shareGuidRects}
-    //     uploadingGuidRects={uploadingGuidRects}
-    //     infoPanelVisible={infoPanelVisible}
-    //   />
-    // ),
+    formFillingTipsVisible && (
+      <Guidance
+        formFillingTipsNumber={formFillingTipsNumber}
+        setFormFillingTipsNumber={setFormFillingTipsNumber}
+        onClose={onCloseGuidance}
+        viewAs={viewAs}
+        // currentDeviceType={currentDeviceType}
+        pdfGuidRects={pdfGuidRects}
+        readyGuidRects={readyGuidRects}
+        shareGuidRects={shareGuidRects}
+        uploadingGuidRects={uploadingGuidRects}
+        infoPanelVisible={infoPanelVisible}
+      />
+    ),
   ];
 };
 

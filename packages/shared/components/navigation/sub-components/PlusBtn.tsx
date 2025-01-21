@@ -44,7 +44,6 @@ const PlusButton = ({
   ...rest
 }: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
   const menuRef = useRef<ContextMenuRefType>(null);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {

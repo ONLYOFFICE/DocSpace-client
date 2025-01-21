@@ -57,6 +57,7 @@ export type TPlusButtonProps = {
   onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
+  forwardedRef?: React.RefObject<HTMLDivElement>;
 };
 
 export type TToggleInfoPanelButtonProps = {
@@ -143,6 +144,9 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    /** Used for guidance */
+    addButtonRef: React.RefObject<HTMLDivElement>;
+    buttonRef?: React.LegacyRef<HTMLButtonElement>;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

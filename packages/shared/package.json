@@ -24,6 +24,7 @@
     "@use-gesture/react": "catalog:",
     "attr-accept": "catalog:",
     "axios": "catalog:",
+    "classnames": "catalog:",
     "cnbuilder": "catalog:",
     "copy-to-clipboard": "catalog:",
     "cross-fetch": "catalog:",

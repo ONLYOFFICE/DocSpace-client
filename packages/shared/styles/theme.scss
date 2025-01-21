@@ -1482,6 +1482,8 @@
   --sidebar-icon-fill: #{$dark-icon-color};
   --mobile-drawer-bg: #{$black};
   --mobile-drawer-svg: #{$dark-icon-color};
+
+  --player-big-play-button-cursor: pointer;
 }
 
 .dark {
@@ -1528,6 +1530,8 @@
   --sidebar-icon-fill: #{$dark-icon-color};
   --mobile-drawer-bg: #{$black};
   --mobile-drawer-svg: #{$dark-icon-color};
+
+  --player-big-play-button-cursor: pointer;
 }
 
 :global(.rtl) {

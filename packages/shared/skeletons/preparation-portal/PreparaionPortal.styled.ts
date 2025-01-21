@@ -23,19 +23,36 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import styled from "styled-components";
+import { RectangleSkeleton } from "../rectangle";
 
-const StyledPreparationPortalDialog = styled.div`
-  #container-inner {
-    max-width: 392px;
-    box-sizing: border-box;
-
-    margin: 12px 16px 36px 16px;
-  }
-  .preparation-portal_body-wrapper {
-    margin-bottom: 0;
-  }
+export const StyledPreparationPortal = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center align the skeletons
+  width: 100%; // Ensure it takes full width
+  margin: 0 auto; // Center the portal in its container
 `;
 
-export default StyledPreparationPortalDialog;
+export const StyledRectangleSkeleton1 = styled(RectangleSkeleton)`
+  max-width: 414px;
+  width: 100%; // Ensure it takes full width up to max-width
+  margin-bottom: 24px;
+`;
+
+export const StyledRectangleSkeleton2 = styled(RectangleSkeleton)`
+  max-width: 480px;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+export const StyledRectangleSkeleton3 = styled(RectangleSkeleton)`
+  max-width: 414px;
+  width: 100%;
+  margin-bottom: 4px;
+`;
+
+export const StyledRectangleSkeleton4 = styled(RectangleSkeleton)`
+  max-width: 293px;
+  width: 100%;
+`;

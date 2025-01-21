@@ -33,7 +33,10 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
 
 import { useStore } from "./store";
@@ -73,6 +76,32 @@ const App = observer(() => {
   useEffect(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!SocketHelper.isReady) return;
+
+    if (!socketSubscribers.has("restore")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "restore",
+      });
+    }
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+  }, [SocketHelper.isReady]);
+
+  useEffect(() => {
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const rootElement = document.getElementById("root") as HTMLElement;
 

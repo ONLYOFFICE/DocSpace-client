@@ -99,16 +99,16 @@ const config = {
   },
   resolve: {
     extensions: [".jsx", ".js", ".tsx", ".ts", ".json"],
-    fallback: {
-      crypto: false,
-    },
     alias: {
+      SRC_DIR: path.resolve(__dirname, "src"),
       PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-      ASSETS_DIR: path.resolve(__dirname, "./public"),
-      SRC_DIR: path.resolve(__dirname, "./src"),
+      ASSETS_DIR: path.resolve(__dirname, "public"),
       CLIENT_PUBLIC_DIR: path.resolve(__dirname, "../client/public"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+    },
+    fallback: {
+      crypto: false,
     },
   },
 

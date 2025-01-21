@@ -1492,6 +1492,15 @@
   --player-fullscreen-hover-cursor: pointer;
 
   --player-play-button-cursor: pointer;
+
+  --player-speed-control-cursor: pointer;
+  --player-speed-control-svg-fill: #{$white};
+  --player-speed-control-svg-stroke: #{$white};
+  --player-speed-control-dropdown-bg: #{$black};
+  --player-speed-control-dropdown-color: #{$white};
+  --player-speed-control-dropdown-item-hover-bg: #{$black};
+  --player-speed-control-toast-bg: #{$player-speed-control-background};
+  --player-speed-control-toast-color: #{$white};
 }
 
 .dark {
@@ -1548,6 +1557,15 @@
   --player-fullscreen-hover-cursor: pointer;
 
   --player-play-button-cursor: pointer;
+
+  --player-speed-control-cursor: pointer;
+  --player-speed-control-svg-fill: #{$white};
+  --player-speed-control-svg-stroke: #{$white};
+  --player-speed-control-dropdown-bg: #{$black};
+  --player-speed-control-dropdown-color: #{$white};
+  --player-speed-control-dropdown-item-hover-bg: #{$black};
+  --player-speed-control-toast-bg: #{$player-speed-control-background};
+  --player-speed-control-toast-color: #{$white};
 }
 
 :global(.rtl) {

@@ -24,20 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/index.scss";
-@import "../../../../styles/_mixins.scss";
-
-:root {
-  --player-speed-control-cursor: pointer;
-  --player-speed-control-svg-fill: #{$white};
-  --player-speed-control-svg-stroke: #{$white};
-  --player-speed-control-dropdown-bg: #{$black};
-  --player-speed-control-dropdown-color: #{$white};
-  --player-speed-control-dropdown-item-hover-bg: #{$black};
-  --player-speed-control-toast-bg: #{$player-speed-control-background};
-  --player-speed-control-toast-color: #{$white};
-}
-
 .wrapper {
   position: relative;
   display: flex;

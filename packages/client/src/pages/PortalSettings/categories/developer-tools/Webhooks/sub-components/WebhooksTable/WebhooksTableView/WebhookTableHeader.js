@@ -80,7 +80,7 @@ const WebhookTableHeader = (props) => {
   const defaultColumns = [
     {
       key: "Name",
-      title: t("Common:Name"),
+      title: t("Common:Label"),
       resizable: true,
       enable: true,
       default: true,

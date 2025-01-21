@@ -47,6 +47,7 @@ const FillingStatusLine = ({
 }: FillingStatusLineProps) => {
   return (
     <FillingStatusContainer
+      data-testid="filling-status-line"
       isDone={statusDone}
       isInterrupted={statusInterrupted}
     >

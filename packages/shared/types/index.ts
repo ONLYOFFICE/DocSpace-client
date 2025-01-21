@@ -93,8 +93,8 @@ declare global {
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
     };
-    zESettings: {};
-    zE: {};
+    zESettings: unknown;
+    zE: unknown;
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };

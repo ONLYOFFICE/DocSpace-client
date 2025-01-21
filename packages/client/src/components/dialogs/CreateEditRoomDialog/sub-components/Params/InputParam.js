@@ -84,7 +84,7 @@ const InputParam = React.forwardRef(
             htmlFor={id}
             text={title}
           />
-          {tooltipLabel && (
+          {tooltipLabel ? (
             <HelpButton
               place="right"
               tooltipContent={
@@ -93,7 +93,7 @@ const InputParam = React.forwardRef(
                 </Text>
               }
             />
-          )}
+          ) : null}
         </div>
 
         <FieldContainer

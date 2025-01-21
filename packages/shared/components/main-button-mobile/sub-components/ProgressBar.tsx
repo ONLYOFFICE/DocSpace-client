@@ -24,17 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
-import { ThemeContext } from "styled-components";
-
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
+import { classNames } from "../../../utils";
 
-import {
-  StyledMobileProgressBar,
-  StyledProgressBarContainer,
-  StyledProgressBarTheme,
-} from "../MainButtonMobile.styled";
+import styles from "../MainButtonMobile.module.scss";
 import { ProgressBarMobileProps } from "../MainButtonMobile.types";
 
 const ProgressBarMobile = ({
@@ -55,24 +49,24 @@ const ProgressBarMobile = ({
     hideButton?.();
   };
 
-  const defaultTheme = useContext(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
   return (
-    <StyledProgressBarContainer isUploading={open} error={!!error}>
-      <div className="progress-container">
+    <div
+      className={classNames(styles.progressBarContainer, {
+        [styles.isUploading]: open,
+      })}
+    >
+      <div className={styles.progressWrapper}>
         <Text
-          className="progress-header"
+          className={styles.progressHeader}
           fontSize="14px"
           onClick={onClickHeaderAction}
           truncate
         >
           {label}
         </Text>
-        <div className="progress_info-container">
+        <div className={styles.progressInfoWrapper}>
           <Text
-            className="progress_count"
+            className={styles.progressCount}
             fontSize="13px"
             truncate
             onClick={onClickHeaderAction}
@@ -80,7 +74,9 @@ const ProgressBarMobile = ({
             {status}
           </Text>
           <IconButton
-            className="progress_icon"
+            className={classNames(styles.progressIcon, {
+              [styles.error]: error,
+            })}
             onClick={error ? onClickHeaderAction : onCancel}
             iconName={icon}
             size={14}
@@ -88,14 +84,15 @@ const ProgressBarMobile = ({
         </div>
       </div>
 
-      <StyledMobileProgressBar>
-        <StyledProgressBarTheme
-          $currentColorScheme={currentColorScheme}
-          uploadPercent={uploadPercent}
-          error={!!error}
+      <div className={styles.mobileProgressBar}>
+        <div
+          className={classNames(styles.progressBar, { [styles.error]: error })}
+          style={
+            { "--upload-percent": `${uploadPercent}%` } as React.CSSProperties
+          }
         />
-      </StyledMobileProgressBar>
-    </StyledProgressBarContainer>
+      </div>
+    </div>
   );
 };
 

@@ -26,8 +26,8 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface ProfileFooterLoaderProps extends RectangleSkeletonProps {
+export type ProfileFooterLoaderProps = RectangleSkeletonProps & {
   id?: string;
-}
+};
 
-export interface ProfileViewLoaderProps extends ProfileFooterLoaderProps {}
+export type ProfileViewLoaderProps = ProfileFooterLoaderProps;

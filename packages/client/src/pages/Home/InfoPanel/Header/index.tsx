@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/shared/components/aside";
+import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
@@ -222,7 +222,7 @@ const InfoPanelHeaderContent = ({
         isCloseable
       />
 
-      {withTabs && (
+      {withTabs ? (
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
@@ -230,7 +230,7 @@ const InfoPanelHeaderContent = ({
             selectedItemId={isRoomsType ? roomsView : fileView}
           />
         </div>
-      )}
+      ) : null}
     </StyledInfoPanelHeader>
   );
 };

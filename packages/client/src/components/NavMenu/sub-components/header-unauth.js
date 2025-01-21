@@ -118,7 +118,7 @@ const HeaderUnAuth = ({
         ) : null}
       </Box>
 
-      {!wizardToken && (
+      {!wizardToken ? (
         <LanguageCombobox
           className="language-combo-box"
           onSelectLanguage={onSelect}
@@ -127,7 +127,7 @@ const HeaderUnAuth = ({
           withBorder={false}
           isMobileView
         />
-      )}
+      ) : null}
     </Header>
   );
 };

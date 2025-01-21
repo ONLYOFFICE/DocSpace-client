@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/default-param-last */
+// eslint-disable @typescript-eslint/default-param-last
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
@@ -38,11 +41,14 @@ import {
 import RoomsFilter from "./filter";
 import {
   TGetRooms,
-  TRoomLifetime,
   TExportRoomIndexTask,
   TPublicRoomPassword,
   TRoom,
 } from "./types";
+
+
+
+
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -123,9 +129,9 @@ export function updateRoomMemberRole(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id,
-  signal = null,
   requestToken,
   filter,
+  signal = null,
 ) {
   let params = "";
 

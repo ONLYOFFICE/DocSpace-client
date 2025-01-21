@@ -181,7 +181,7 @@ const Appearance = (props) => {
 
   useEffect(() => {
     // getSettings();
-    setDocumentTitle(t("Common:Appearance"));
+    setDocumentTitle(t("Settings:Appearance"));
   }, []);
 
   useEffect(() => {
@@ -701,11 +701,11 @@ const Appearance = (props) => {
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                 >
-                  {selectThemeId === item.id && (
+                  {selectThemeId === item.id ? (
                     <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                  )}
+                  ) : null}
 
-                  {selectThemeId !== item.id && checkImgHover}
+                  {selectThemeId !== item.id ? checkImgHover : null}
                 </StyledTheme>
               );
             })}
@@ -728,10 +728,10 @@ const Appearance = (props) => {
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                   >
-                    {selectThemeId === item.id && (
+                    {selectThemeId === item.id ? (
                       <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                    )}
-                    {selectThemeId !== item.id && checkImgHover}
+                    ) : null}
+                    {selectThemeId !== item.id ? checkImgHover : null}
                   </StyledTheme>
                 );
               })}
@@ -743,7 +743,7 @@ const Appearance = (props) => {
               className="theme-add"
               onClick={onAddTheme}
             />
-            {!abilityAddTheme && (
+            {!abilityAddTheme ? (
               <Tooltip
                 id="theme-add"
                 offsetBottom={0}
@@ -752,7 +752,7 @@ const Appearance = (props) => {
                 getContent={textTooltip}
                 maxWidth="300px"
               />
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -791,7 +791,7 @@ const Appearance = (props) => {
             size={buttonSize}
             isDisabled={isDisabledEditButton}
           />
-          {isShowDeleteButton && (
+          {isShowDeleteButton ? (
             <Button
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
@@ -799,7 +799,7 @@ const Appearance = (props) => {
               size={buttonSize}
               isDisabled={isDisabledDeleteButton}
             />
-          )}
+          ) : null}
         </div>
       </StyledComponent>
     </>

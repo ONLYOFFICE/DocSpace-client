@@ -52,7 +52,7 @@ const EnterpriseContainer = (props) => {
 
       <TariffTitleContainer />
 
-      {isLicenseDateExpired && <BenefitsContainer t={t} />}
+      {isLicenseDateExpired ? <BenefitsContainer t={t} /> : null}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")

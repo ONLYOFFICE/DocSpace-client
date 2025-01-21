@@ -71,91 +71,91 @@ const Dialogs = ({
 }) => {
   return (
     <>
-      {changeEmailVisible && (
+      {changeEmailVisible ? (
         <ChangeEmailDialog
           visible={changeEmailVisible}
           onClose={closeDialogs}
           user={data}
           fromList
         />
-      )}
-      {changePasswordVisible && (
+      ) : null}
+      {changePasswordVisible ? (
         <ChangePasswordDialog
           visible={changePasswordVisible}
           onClose={() => setChangePasswordVisible(false)}
           email={data.email}
         />
-      )}
-      {changeOwner && (
+      ) : null}
+      {changeOwner ? (
         <ChangePortalOwnerDialog visible={changeOwner} onClose={closeDialogs} />
-      )}
-      {deleteSelfProfile && (
+      ) : null}
+      {deleteSelfProfile ? (
         <DeleteSelfProfileDialog
           visible={deleteSelfProfile}
           onClose={closeDialogs}
           email={data.email}
         />
-      )}
-      {deleteProfileEver && (
+      ) : null}
+      {deleteProfileEver ? (
         <DeleteProfileEverDialog
           visible={deleteProfileEver}
           onClose={closeDialogs}
           users={data}
         />
-      )}
+      ) : null}
 
-      {changeUserStatusDialogVisible && (
+      {changeUserStatusDialogVisible ? (
         <ChangeUserStatusDialog
           visible={changeUserStatusDialogVisible}
           onClose={closeDialogs}
           {...data}
         />
-      )}
-      {sendInviteDialogVisible && (
+      ) : null}
+      {sendInviteDialogVisible ? (
         <SendInviteDialog
           visible={sendInviteDialogVisible}
           onClose={closeDialogs}
         />
-      )}
+      ) : null}
 
-      {changeNameVisible && (
+      {changeNameVisible ? (
         <ChangeNameDialog
           visible={changeNameVisible}
           onClose={() => setChangeNameVisible(false)}
           profile={profile}
           fromList
         />
-      )}
+      ) : null}
 
-      {resetAuthDialogVisible && (
+      {resetAuthDialogVisible ? (
         <ResetApplicationDialog
           visible={resetAuthDialogVisible}
           onClose={closeDialogs}
           resetTfaApp={unlinkTfaApp}
           id={data}
         />
-      )}
+      ) : null}
 
-      {dataReassignmentDialogVisible && (
+      {dataReassignmentDialogVisible ? (
         <DataReassignmentDialog
           visible={dataReassignmentDialogVisible}
           user={data}
         />
-      )}
+      ) : null}
 
-      {deleteGroupDialogVisible && (
+      {deleteGroupDialogVisible ? (
         <DeleteGroupDialog
           visible={deleteGroupDialogVisible}
           onClose={closeDialogs}
         />
-      )}
+      ) : null}
 
-      {removeGuestDialogVisible && (
+      {removeGuestDialogVisible ? (
         <RemoveGuestDialog
           visible={removeGuestDialogVisible}
           onClose={closeDialogs}
         />
-      )}
+      ) : null}
     </>
   );
 };

@@ -27,7 +27,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledRestoreBackup } from "./Backup.styled";
+import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";
 
 const RestoreBackupLoader = ({
@@ -48,7 +48,7 @@ const RestoreBackupLoader = ({
   } = rest;
 
   return (
-    <StyledRestoreBackup>
+    <div className={styles.restoreBackup} data-testid="restore-backup-loader">
       <RectangleSkeleton
         className="restore-backup-loader_title"
         title={title}
@@ -272,7 +272,7 @@ const RestoreBackupLoader = ({
         speed={speed}
         animate={animate}
       />
-    </StyledRestoreBackup>
+    </div>
   );
 };
 

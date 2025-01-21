@@ -1329,7 +1329,7 @@ const SectionFilterContent = ({
     const name = {
       id: "sort-by_name",
       key: SortByFieldName.Name,
-      label: t("Common:Name"),
+      label: t("Common:Label"),
       default: true,
     };
     const modifiedDate = {

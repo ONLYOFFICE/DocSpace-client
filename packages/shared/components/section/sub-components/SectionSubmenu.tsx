@@ -27,10 +27,10 @@
 import React from "react";
 
 import { SectionSubmenuProps } from "../Section.types";
-import { StyledSectionSubmenu } from "../Section.styled";
+import styles from "../Section.module.scss";
 
 const SectionSubmenu = ({ children }: SectionSubmenuProps) => {
-  return <StyledSectionSubmenu>{children}</StyledSectionSubmenu>;
+  return <div className={styles.submenu}>{children}</div>;
 };
 
 SectionSubmenu.displayName = "SectionSubmenu";

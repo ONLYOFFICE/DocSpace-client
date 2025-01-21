@@ -124,7 +124,7 @@ const Manager = (props) => {
   );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Index", label: t("Files:Index") },
-    { key: "Name", label: t("Common:Name") },
+    { key: "Name", label: t("Common:Label") },
     { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
@@ -541,7 +541,7 @@ const Manager = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -565,16 +565,16 @@ const Manager = (props) => {
                   directionY="bottom"
                 />
 
-                {selectedLink && (
+                {selectedLink ? (
                   <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
                   />
-                )}
+                ) : null}
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
@@ -621,7 +621,7 @@ const Manager = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {columnDisplay === "custom" && (
+            {columnDisplay === "custom" ? (
               <ControlsGroup>
                 <ComboBox
                   onSelect={onColumnSelect}
@@ -653,7 +653,7 @@ const Manager = (props) => {
                   ))}
                 </SelectedItemsContainer>
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <Integration

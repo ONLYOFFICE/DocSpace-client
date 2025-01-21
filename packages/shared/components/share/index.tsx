@@ -386,15 +386,15 @@ const Share = (props: ShareProps) => {
   if (hideSharePanel) return null;
 
   return (
-    <div>
-      {visibleBar && (
+    <div data-testid="shared-links">
+      {visibleBar ? (
         <PublicRoomBar
           headerText={t("Common:ShareDocument")}
           bodyText={t("Common:ShareDocumentDescription")}
           iconName={InfoIcon}
           onClose={() => setVisibleBar(false)}
         />
-      )}
+      ) : null}
 
       {isLoading ? (
         <ShareLoader t={t} />
@@ -404,7 +404,7 @@ const Share = (props: ShareProps) => {
             <Text fontSize="14px" fontWeight={600} className="title-link">
               {t("Common:SharedLinks")}
             </Text>
-            {fileLinks.length > 0 && (
+            {fileLinks.length > 0 ? (
               <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
                 <IconButton
                   className="link-to-viewing-icon"
@@ -413,16 +413,16 @@ const Share = (props: ShareProps) => {
                   size={16}
                   isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
                 />
-                {fileLinks.length > LINKS_LIMIT_COUNT && (
+                {fileLinks.length > LINKS_LIMIT_COUNT ? (
                   <Tooltip
                     float={isDesktop()}
                     id="file-links-tooltip"
                     getContent={getTextTooltip}
                     place="bottom"
                   />
-                )}
+                ) : null}
               </div>
-            )}
+            ) : null}
           </div>
           <LinkRow
             onAddClick={addGeneralLink}

@@ -370,7 +370,9 @@ const SetRoomParams = ({
       imgClassName="react-svg-icon"
       model={model}
       className="room-params-icon"
-      isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
+      isEmptyIcon={
+        !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : null
+      }
       color={cover ? cover.color : randomColor}
       logo={
         currentCover
@@ -392,7 +394,7 @@ const SetRoomParams = ({
 
   const inputTitle =
     isTemplateSelected || isTemplate
-      ? `${t("Common:RoomName")}:`
+      ? `${t("Common:Label")}:`
       : `${t("Common:Name")}:`;
 
   return (
@@ -409,7 +411,7 @@ const SetRoomParams = ({
           forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
-      {isEdit && (
+      {isEdit ? (
         <PermanentSettings
           t={t}
           title={roomParams.title}
@@ -418,7 +420,7 @@ const SetRoomParams = ({
           isPrivate={roomParams.isPrivate}
           isDisabled={isDisabled}
         />
-      )}
+      ) : null}
 
       <div className="logo-name-container">
         {element}
@@ -462,41 +464,41 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {isTemplate && (
+      {isTemplate ? (
         <TemplateAccess
           roomOwner={createdBy ?? roomParams.roomOwner}
           inviteItems={inviteItems}
           onOpenAccessSettings={onOpenAccessSettings}
         />
-      )}
+      ) : null}
 
-      {isEdit && !isTemplate && (
+      {isEdit && !isTemplate ? (
         <ChangeRoomOwner
           canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
         />
-      )}
+      ) : null}
 
-      {isVDRRoom && (
+      {isVDRRoom ? (
         <VirtualDataRoomBlock
           t={t}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isEdit={isEdit}
         />
-      )}
+      ) : null}
 
-      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey && (
+      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (
         <RoomQuota
           setRoomParams={setRoomParams}
           roomParams={roomParams}
           isEdit={isEdit}
           isLoading={isDisabled}
         />
-      )}
+      ) : null}
 
-      {!isEdit && enableThirdParty && isPublicRoom && (
+      {!isEdit && enableThirdParty && isPublicRoom ? (
         <ThirdPartyStorage
           t={t}
           roomTitle={roomParams.title}
@@ -508,10 +510,10 @@ const SetRoomParams = ({
           createNewFolderIsChecked={createNewFolderIsChecked}
           onCreateFolderChange={onCreateFolderChange}
         />
-      )}
+      ) : null}
 
       <div>
-        {avatarEditorDialogVisible && (
+        {avatarEditorDialogVisible ? (
           <AvatarEditorDialog
             t={t}
             isDisabled={isDisabled}
@@ -526,7 +528,7 @@ const SetRoomParams = ({
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
           />
-        )}
+        ) : null}
       </div>
     </StyledSetRoomParams>
   );

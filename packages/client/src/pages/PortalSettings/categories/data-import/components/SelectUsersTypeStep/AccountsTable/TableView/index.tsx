@@ -136,7 +136,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
 
   return (
     <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             checkboxOptions={[]}
@@ -148,7 +148,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader

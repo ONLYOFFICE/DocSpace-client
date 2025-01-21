@@ -214,7 +214,7 @@ const CSP = ({
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
       </Container>
-      {standalone && window.location.protocol !== "https:" && (
+      {standalone && window.location.protocol !== "https:" ? (
         <InfoBar>
           <div className="text-container">
             <div className="header-body">
@@ -244,7 +244,7 @@ const CSP = ({
             </div>
           </div>
         </InfoBar>
-      )}
+      ) : null}
       <Container className="input-holder">
         <TextInput
           onChange={onChangeDomain}

@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 
 import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { Button } from "@docspace/shared/components/button";
 
 const StyledContainer = styled.div`
@@ -89,7 +89,7 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledHeadline = styled(Headline)`
+const StyledHeadline = styled(Heading)`
   width: 100%;
   max-width: min-content;
   font-weight: 700;

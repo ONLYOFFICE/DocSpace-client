@@ -44,16 +44,16 @@ const ToggleBlock = ({
         <Text fontSize="16px" fontWeight={700}>
           {headerText}
         </Text>
-        {withToggle && (
+        {withToggle ? (
           <ToggleButton
             isDisabled={isLoading}
             isChecked={isChecked}
             onChange={onChange}
             className="edit-link-toggle"
           />
-        )}
+        ) : null}
       </div>
-      {bodyText && (
+      {bodyText ? (
         <Text
           className={
             isExpired
@@ -65,7 +65,7 @@ const ToggleBlock = ({
         >
           {bodyText}
         </Text>
-      )}
+      ) : null}
 
       {children}
     </div>

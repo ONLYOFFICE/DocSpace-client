@@ -138,12 +138,12 @@ const Webhooks = (props) => {
           />
         )}
 
-        {!isWebhooksEmpty && (
+        {!isWebhooksEmpty ? (
           <WebhooksTable
             openSettingsModal={openSettingsModal}
             openDeleteModal={openDeleteModal}
           />
-        )}
+        ) : null}
         <WebhookDialog
           visible={isCreateOpened}
           onClose={closeCreateModal}

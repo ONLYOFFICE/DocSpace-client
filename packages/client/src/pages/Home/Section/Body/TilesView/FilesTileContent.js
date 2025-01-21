@@ -163,11 +163,11 @@ const FilesTileContent = ({
         view="tile"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
-      {isTemplate && (
+      {isTemplate ? (
         <Text
           className="item-file-sub-name"
           color={theme.filesSection.tilesView.subTextColor}
@@ -177,7 +177,7 @@ const FilesTileContent = ({
         >
           {roomType}
         </Text>
-      )}
+      ) : null}
     </SimpleFilesTileContent>
   );
 };

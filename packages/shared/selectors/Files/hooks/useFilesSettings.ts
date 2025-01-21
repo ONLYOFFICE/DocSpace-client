@@ -104,13 +104,13 @@ const useFilesSettings = (
 
   const getIcon = React.useCallback(
     (fileExst: string) => {
-      if (getIconProp) return getIconProp(32, fileExst);
+      if (getIconProp) return getIconProp(32, fileExst) ?? "";
       if (!filesSettings) return "";
 
       const path = determineIconPath(fileExst);
       return iconSize32.has(path)
-        ? iconSize32.get(path)
-        : iconSize32.get("file.svg");
+        ? (iconSize32.get(path) ?? "")
+        : (iconSize32.get("file.svg") ?? "");
     },
     [filesSettings, getIconProp, determineIconPath],
   );

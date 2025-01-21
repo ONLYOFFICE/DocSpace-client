@@ -242,7 +242,7 @@ class FilesTableHeader extends React.Component {
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
@@ -329,7 +329,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
@@ -407,7 +407,7 @@ class FilesTableHeader extends React.Component {
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
@@ -480,7 +480,7 @@ class FilesTableHeader extends React.Component {
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
@@ -564,7 +564,7 @@ class FilesTableHeader extends React.Component {
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: roomColumnNameIsEnabled,
         default: true,

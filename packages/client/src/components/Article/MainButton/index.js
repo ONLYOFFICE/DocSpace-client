@@ -65,61 +65,63 @@ import styled, { css } from "styled-components";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 const StyledButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
-  padding: 0;
-  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+  && {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    padding: 0;
+    opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+    background-color: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent} !important;
+    background: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent};
+    border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
-  background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main?.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+    ${(props) =>
+      !props.isDisabled &&
+      css`
+        :hover {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 0.85;
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+        }
 
-  ${(props) =>
-    !props.isDisabled &&
-    css`
-      :hover {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 0.85;
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-      }
+        :active {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 1;
+          filter: brightness(90%);
+          cursor: pointer;
+        }
+      `}
 
-      :active {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 1;
-        filter: brightness(90%);
-        cursor: pointer;
-      }
-    `}
+    .button-content {
+      color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      vertical-align: middle;
+      box-sizing: border-box;
+      padding-block: 5px;
+      padding-inline: 12px 14px;
+      line-height: 22px;
+      border-radius: 3px;
 
-  .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
-    box-sizing: border-box;
-    padding-block: 5px;
-    padding-inline: 12px 14px;
-    line-height: 22px;
-    border-radius: 3px;
-
-    user-select: none;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+      user-select: none;
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    }
   }
 `;
 
@@ -721,11 +723,11 @@ const ArticleMainButtonContent = (props) => {
             t={t}
             titleProp={t("Upload")}
             actionOptions={actions}
-            buttonOptions={!isAccountsPage && uploadActions}
+            buttonOptions={!isAccountsPage ? uploadActions : null}
             withoutButton={isRoomsFolder || isAccountsPage}
             withMenu={!isRoomsFolder}
             mainButtonMobileVisible={
-              mainButtonMobileVisible && mainButtonVisible
+              mainButtonMobileVisible ? mainButtonVisible : null
             }
             onMainButtonClick={onCreateRoom}
           />
@@ -839,12 +841,12 @@ export default inject(
       settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
-    const security = selectedFolderStore.security;
+    const { security } = selectedFolderStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
-    const parentRoomType = selectedFolderStore.parentRoomType;
-    const isFolder = selectedFolderStore.isFolder;
+    const { parentRoomType } = selectedFolderStore;
+    const { isFolder } = selectedFolderStore;
 
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 

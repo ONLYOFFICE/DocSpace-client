@@ -175,7 +175,7 @@ const Members = ({
             {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && !isFormRoom && (
+          {!isArchiveFolder && !isFormRoom ? (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -191,16 +191,16 @@ const Members = ({
                 title={t("Files:AddNewLink")}
               />
 
-              {additionalLinks.length >= LINKS_LIMIT_COUNT && (
+              {additionalLinks.length >= LINKS_LIMIT_COUNT ? (
                 <Tooltip
                   float={isDesktop()}
                   id="emailTooltip"
                   getContent={TooltipContent}
                   place="bottom"
                 />
-              )}
+              ) : null}
             </div>
-          )}
+          ) : null}
         </LinksBlock>,
       );
     }
@@ -296,7 +296,7 @@ const Members = ({
 
   return (
     <>
-      {showPublicRoomBar && (
+      {showPublicRoomBar ? (
         <StyledPublicRoomBarContainer>
           <PublicRoomBar
             headerText={
@@ -311,13 +311,14 @@ const Members = ({
             }
           />
         </StyledPublicRoomBarContainer>
-      )}
+      ) : null}
 
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={
-          !isMembersPanelUpdating &&
-          membersList.length - headersCount < membersFilter.total
+          !isMembersPanelUpdating
+            ? membersList.length - headersCount < membersFilter.total
+            : null
         }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
@@ -336,8 +337,9 @@ const Members = ({
               membersHelper={membersHelper}
               currentMember={currentMember}
               hasNextPage={
-                !isMembersPanelUpdating &&
-                membersList.length - headersCount < membersFilter.total
+                !isMembersPanelUpdating
+                  ? membersList.length - headersCount < membersFilter.total
+                  : null
               }
             />
           );

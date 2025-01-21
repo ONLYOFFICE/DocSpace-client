@@ -36,12 +36,7 @@ export type TTitles = {
   trashWarning?: string;
 };
 
-export interface IArrowButtonProps {
-  isRootFolder: boolean;
-  onBackToParentFolder: TOnBackToParenFolder;
-}
-
-export interface IContextButtonProps {
+export type TContextButtonProps = {
   className: string;
   getData: TGetContextMenuModel;
   withMenu?: boolean;
@@ -51,55 +46,33 @@ export interface IContextButtonProps {
   title?: string;
   onCloseDropBox?: () => void;
   onContextOptionsClick?: () => void;
-}
+};
 
-export interface IPlusButtonProps {
+export type TPlusButtonProps = {
   className: string;
   getData: TGetContextMenuModel;
   withMenu?: boolean;
   id?: string;
   title?: string;
-  onPlusClick?: () => void;
+  onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
-}
+};
 
-export interface IToggleInfoPanelButtonProps {
+export type TToggleInfoPanelButtonProps = {
   isRootFolder: boolean;
   isInfoPanelVisible: boolean;
-  toggleInfoPanel: (e: React.MouseEvent) => void;
+  toggleInfoPanel: (e?: React.MouseEvent) => void;
   id?: string;
   titles?: TTitles;
-}
+};
 
-export interface IControlButtonProps {
+export type TArrowButtonProps = {
   isRootFolder: boolean;
-  canCreate: boolean;
-  getContextOptionsFolder: TGetContextMenuModel;
-  getContextOptionsPlus: TGetContextMenuModel;
-  isEmptyFilesList?: boolean;
-  isInfoPanelVisible: boolean;
-  toggleInfoPanel: () => void;
-  toggleDropBox?: () => void;
-  isDesktop: boolean;
-  titles?: TTitles;
-  withMenu?: boolean;
-  onPlusClick?: () => void;
-  isFrame?: boolean;
-  isPublicRoom?: boolean;
-  isTrashFolder?: boolean;
-  isMobile?: boolean;
-  showTitle?: boolean;
-  navigationButtonLabel?: string;
-  onNavigationButtonClick?: () => void;
-  tariffBar?: React.ReactElement;
-  title?: string;
-  isEmptyPage?: boolean;
-  onCloseDropBox?: () => void;
-  onContextOptionsClick?: () => void;
-}
+  onBackToParentFolder: TOnBackToParenFolder;
+};
 
-export interface ITextProps {
+export type TTextProps = {
   title: string;
   isOpen: boolean;
   isRootFolder: boolean;
@@ -109,19 +82,19 @@ export interface ITextProps {
   badgeLabel?: string;
 }
 
-export interface INavigationLogoProps {
+export type TNavigationLogoProps = {
   logo?: string;
   burgerLogo: string;
   className: string;
   onClick?: () => void;
-}
+};
 
 export type TOnNavigationItemClick = (
   id: string | number,
   isRootRoom: boolean,
 ) => void;
 
-export interface INavigationItemProps {
+export type TNavigationItemProps = {
   id: string | number;
   title: string;
   isRoot: boolean;
@@ -130,7 +103,7 @@ export interface INavigationItemProps {
   withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
-}
+};
 
 export type TNavigationItem = {
   id: string | number;
@@ -138,75 +111,95 @@ export type TNavigationItem = {
   isRootRoom: boolean;
 };
 
-export type TRowData = [
-  TNavigationItem[],
-  TOnNavigationItemClick,
-  { withLogo: boolean; currentDeviceType: DeviceType },
-];
+export type TRowParam = { withLogo: boolean; currentDeviceType: DeviceType };
 
-export interface IDropBoxProps {
-  sectionHeight: number;
-  dropBoxWidth: number;
-  isRootFolder: boolean;
-  onBackToParentFolder: TOnBackToParenFolder;
-  canCreate: boolean;
-  navigationItems: TNavigationItem[];
-  getContextOptionsFolder: TGetContextMenuModel;
-  getContextOptionsPlus: TGetContextMenuModel;
-  toggleInfoPanel: () => void;
-  toggleDropBox: () => void;
-  onClickAvailable: TOnNavigationItemClick;
-  isInfoPanelVisible: boolean;
-  isDesktop: boolean;
-  isDesktopClient: boolean;
-  withLogo: boolean;
-  burgerLogo: string;
-  currentDeviceType: DeviceType;
-  navigationTitleContainerNode: React.ReactNode;
-  onCloseDropBox: () => void;
-}
+export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
-export interface INavigationProps {
-  tReady: boolean;
-  showText: boolean;
-  isRootFolder: boolean;
-  title: string;
-  canCreate: boolean;
-  isTabletView: boolean;
-  onClickFolder: TOnNavigationItemClick;
-  navigationItems: TNavigationItem[];
-  onBackToParentFolder: TOnBackToParenFolder;
-  getContextOptionsFolder: TGetContextMenuModel;
-  getContextOptionsPlus: TGetContextMenuModel;
-  isTrashFolder: boolean;
-  isEmptyFilesList: boolean;
-  clearTrash: () => void;
-  showFolderInfo: () => void;
-  isCurrentFolderInfo: boolean;
-  toggleInfoPanel: () => void;
-  isInfoPanelVisible: boolean;
-  titles: TTitles;
-  withMenu: boolean;
-  onPlusClick: () => void;
-  isEmptyPage: boolean;
-  isDesktop: boolean;
-  isRoom: boolean;
-  isFrame: boolean;
-  hideInfoPanel: () => void;
-  withLogo: boolean;
-  burgerLogo: string;
-  showRootFolderTitle: boolean;
-  isPublicRoom: boolean;
-  titleIcon: string;
-  currentDeviceType: DeviceType;
-  rootRoomTitle: string;
-  showTitle: boolean;
-  navigationButtonLabel?: string;
-  onNavigationButtonClick?: () => void;
-  tariffBar: React.ReactElement;
-  showNavigationButton: boolean;
-  titleIconTooltip?: string;
-  badgeLabel?: string;
-  onContextOptionsClick?: () => void;
-  onLogoClick?: () => void;
-}
+export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
+  Omit<TPlusButtonProps, "getData" | "className"> &
+  Omit<TContextButtonProps, "getData" | "className" | "id"> & {
+    /** Controls visibility of PlusButton */
+    canCreate: boolean;
+    /** Used in ContextButton for folder options */
+    getContextOptionsFolder: TGetContextMenuModel;
+    /** Used in PlusButton for plus menu options */
+    getContextOptionsPlus: TGetContextMenuModel;
+    /** Controls visibility of ContextButton */
+    isEmptyFilesList?: boolean;
+    /** Used in toggleInfoPanelAction */
+    toggleDropBox?: () => void;
+    /** Controls visibility of ToggleInfoPanelButton */
+    isDesktop: boolean;
+    /** Controls visibility of ContextButton */
+    isPublicRoom?: boolean;
+    /** Used in styled component */
+    showTitle?: boolean;
+    /** Used for navigation button */
+    navigationButtonLabel?: string;
+    /** Used for navigation button click handler */
+    onNavigationButtonClick?: () => void;
+    /** Optional tariff bar element */
+    tariffBar?: React.ReactElement;
+    /** Controls visibility of TrashWarning */
+    isEmptyPage?: boolean;
+
+    isMobile?: boolean;
+  };
+
+export type TDropBoxProps = TArrowButtonProps &
+  Omit<
+    TControlButtonProps,
+    | "isEmptyPage"
+    | "tariffBar"
+    | "onNavigationButtonClick"
+    | "navigationButtonLabel"
+    | "showTitle"
+    | "isPublicRoom"
+    | "isMobile"
+  > &
+  TRowParam & {
+    sectionHeight: number;
+    dropBoxWidth: number;
+
+    navigationItems: TNavigationItem[];
+    onClickAvailable: TOnNavigationItemClick;
+    isInfoPanelVisible: boolean;
+    isDesktopClient: boolean;
+    burgerLogo: string;
+    navigationTitleContainerNode: React.ReactNode;
+    onCloseDropBox: () => void;
+  };
+
+export type TNavigationProps = Omit<
+  TDropBoxProps,
+  | "dropBoxWidth"
+  | "sectionHeight"
+  | "onCloseDropBox"
+  | "onClickAvailable"
+  | "isDesktopClient"
+  | "isTabletView"
+  | "navigationTitleContainerNode"
+> &
+  Omit<TControlButtonProps, "isMobile"> &
+  Omit<
+    TTextProps,
+    "isOpen" | "title" | "className" | "isRootFolderTitle" | "onClick"
+  > & {
+    showText: boolean;
+    title: string;
+    onClickFolder: TOnNavigationItemClick;
+
+    clearTrash: () => void;
+    showFolderInfo: () => void;
+    isCurrentFolderInfo: boolean;
+
+    isRoom: boolean;
+    hideInfoPanel: () => void;
+    burgerLogo: string;
+    showRootFolderTitle: boolean;
+    titleIcon: string;
+    rootRoomTitle: string;
+    showNavigationButton: boolean;
+    titleIconTooltip?: string;
+    onLogoClick?: () => void;
+  };

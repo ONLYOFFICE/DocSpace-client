@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface SelectorAddButtonProps {
+export type SelectorAddButtonProps = {
   /** Title text */
   title?: string;
   /** Sets a callback function that is triggered when the button is clicked */
@@ -41,6 +41,6 @@ export interface SelectorAddButtonProps {
   iconName?: string;
   /** Change colors to accent */
   isAction?: boolean;
-
+  /** Specifies the icon size */
   iconSize?: number;
-}
+};

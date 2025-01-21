@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
@@ -167,7 +170,13 @@ export function getBackupHistory() {
   return request({ method: "get", url: "/portal/getbackuphistory" });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId,
+  storageType,
+  storageParams,
+  notify,
+  dump = false,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,
@@ -176,6 +185,7 @@ export function startRestore(backupId, storageType, storageParams, notify) {
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }

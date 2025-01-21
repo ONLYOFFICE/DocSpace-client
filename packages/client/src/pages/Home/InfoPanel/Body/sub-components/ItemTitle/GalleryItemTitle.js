@@ -76,7 +76,7 @@ const GalleryItemTitle = ({
       <Text color={currentColorScheme.main?.accent} className="free-label">
         {t("Common:Free")}
       </Text>
-      {gallerySelected && (
+      {gallerySelected ? (
         <StyledGalleryContextOptions>
           <ContextMenu
             ref={contextMenuRef}
@@ -93,7 +93,7 @@ const GalleryItemTitle = ({
             displayType="toggle"
           />
         </StyledGalleryContextOptions>
-      )}
+      ) : null}
     </StyledTitle>
   );
 };

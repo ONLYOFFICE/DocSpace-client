@@ -133,7 +133,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+      withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -162,7 +162,7 @@ const ChangeRoomOwner = (props) => {
     >
       <ModalDialog.Body>
         <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
         >
           {selectorComponent}
         </StyledChangeRoomOwner>

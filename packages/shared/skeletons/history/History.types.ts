@@ -26,6 +26,6 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface HistoryProps extends RectangleSkeletonProps {
+export type HistoryProps = RectangleSkeletonProps & {
   id?: string;
-}
+};

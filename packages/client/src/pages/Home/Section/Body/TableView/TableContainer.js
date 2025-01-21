@@ -225,7 +225,9 @@ const Table = ({
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         icon={icon}
         isDownload={isDownload}

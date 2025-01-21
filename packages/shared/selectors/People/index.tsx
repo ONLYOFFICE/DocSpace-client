@@ -489,9 +489,9 @@ const PeopleSelector = ({
           >
             {label}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </Box>
-        {!isGroup && (
+        {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
               className="label"
@@ -505,7 +505,7 @@ const PeopleSelector = ({
               {`${userType} | ${email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
     );
   };

@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -171,7 +171,9 @@ const SectionHeaderContent = (props) => {
   const getArrayOfParams = () => {
     const path = location.pathname;
     const arrayPath = path.split("/");
-    const arrayOfParams = arrayPath.filter((item) => item !== "");
+    const arrayOfParams = arrayPath.filter((param) => {
+      return param && param !== "filter" && param !== "portal-settings";
+    });
 
     return arrayOfParams;
   };
@@ -206,6 +208,8 @@ const SectionHeaderContent = (props) => {
     const keysCollection = key.split("-");
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
+
+    console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -321,6 +325,8 @@ const SectionHeaderContent = (props) => {
           license: t("Common:EnterpriseLicense"),
         });
 
+  console.log(translatedHeader, header);
+
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -339,18 +345,18 @@ const SectionHeaderContent = (props) => {
       ) : (
         <HeaderContainer>
           {!isCategoryOrHeader &&
-            arrayOfParams[0] &&
-            (isMobile() ||
-              window.location.href.indexOf("/javascript-sdk/") > -1) && (
-              <IconButton
-                iconName={ArrowPathReactSvgUrl}
-                size="17"
-                isFill
-                onClick={onBackToParent}
-                className="arrow-button"
-              />
-            )}
-          <Headline type="content" truncate>
+          arrayOfParams[0] &&
+          (isMobile() ||
+            window.location.href.indexOf("/javascript-sdk/") > -1) ? (
+            <IconButton
+              iconName={ArrowPathReactSvgUrl}
+              size="17"
+              isFill
+              onClick={onBackToParent}
+              className="arrow-button"
+            />
+          ) : null}
+          <Heading type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
@@ -369,14 +375,14 @@ const SectionHeaderContent = (props) => {
                 ""
               )}
             </div>
-          </Headline>
-          {arrayOfParams[0] !== "payments" && (
+          </Heading>
+          {arrayOfParams[0] !== "payments" ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>
-          )}
+          ) : null}
 
-          {addUsers && (
+          {addUsers ? (
             <div className="action-wrapper">
               <IconButton
                 iconName={ActionsHeaderTouchReactSvgUrl}
@@ -386,7 +392,7 @@ const SectionHeaderContent = (props) => {
                 className="action-button"
               />
             </div>
-          )}
+          ) : null}
         </HeaderContainer>
       )}
     </StyledContainer>

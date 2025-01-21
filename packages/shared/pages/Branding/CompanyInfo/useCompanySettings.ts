@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useReducer, useCallback, useEffect } from "react";
-import isEqual from "lodash/isEqual";
 
 import { ICompanySettings } from "./CompanyInfo.types";
 

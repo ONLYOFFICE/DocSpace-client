@@ -240,7 +240,7 @@ const EditRoomDialog = ({
         addUsersPanelVisible
       }
     >
-      {changeRoomOwnerIsVisible && (
+      {changeRoomOwnerIsVisible ? (
         <ModalDialog.Container>
           <ChangeRoomOwnerPanel
             useModal={false}
@@ -250,7 +250,7 @@ const EditRoomDialog = ({
             onClose={onCloseRoomOwnerPanel}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
 
       <ModalDialog.Container>
         {addUsersPanelVisible ? (
@@ -314,9 +314,10 @@ const EditRoomDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !cover &&
-            (isWrongTitle ||
-              compareRoomParams(prevRoomParams.current, roomParams))
+            !cover
+              ? isWrongTitle ||
+                compareRoomParams(prevRoomParams.current, roomParams)
+              : null
           }
           isLoading={isLoading}
         />

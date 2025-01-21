@@ -80,7 +80,13 @@ export const AccessRightSelectPure = ({
         onSelect?.(option);
       }
     },
-    [onSelect],
+    [
+      availableAccess,
+      isSelectionDisabled,
+      onSelect,
+      selectedOption.access,
+      selectionErrorText,
+    ],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
@@ -95,16 +101,16 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon && (
+            {item.icon ? (
               <StyledItemIcon
                 src={item.icon}
                 isShortenIcon={type === "onlyIcon"}
               />
-            )}
+            ) : null}
             <StyledItemContent>
               <StyledItemTitle>
                 {item.label}
-                {item.quota && (
+                {item.quota ? (
                   <Badge
                     label={item.quota}
                     backgroundColor={item.color}
@@ -112,7 +118,7 @@ export const AccessRightSelectPure = ({
                     isPaidBadge
                     noHover
                   />
-                )}
+                ) : null}
               </StyledItemTitle>
               <StyledItemDescription>{item.description}</StyledItemDescription>
             </StyledItemContent>

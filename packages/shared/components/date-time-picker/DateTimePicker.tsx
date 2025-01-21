@@ -90,7 +90,12 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   }, []);
 
   return (
-    <Selectors className={className} id={id} hasError={hasError}>
+    <Selectors
+      className={className}
+      id={id}
+      hasError={hasError}
+      data-testid="date-time-picker"
+    >
       <DatePicker
         initialDate={initialDate}
         // date={date}
@@ -103,8 +108,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         outerDate={date}
       />
       <TimeSelector>
-        {date !== null &&
-          (isTimeFocused ? (
+        {date !== null ? (
+          isTimeFocused ? (
             <TimePicker
               initialTime={date}
               onChange={handleChange}
@@ -118,7 +123,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               <ClockIcon className="clockIcon" />
               {date.format("HH:mm")}
             </TimeCell>
-          ))}
+          )
+        ) : null}
       </TimeSelector>
     </Selectors>
   );

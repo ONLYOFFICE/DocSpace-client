@@ -28,10 +28,10 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -91,7 +91,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("loggedOutUserId");
     }
 
-    const isPortalUrl = location.pathname === "/preparation-portal";
+    const isPortalUrl =
+      location.pathname === "/preparation-portal" ||
+      location.pathname === "/management/preparation-portal";
 
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments";
@@ -254,22 +256,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (!isLoaded) {
       return <AppLoader />;
     }
-
-    // const userLoaded = !isEmpty(user);
-    // if (!userLoaded) {
-    //   return <Component {...props} />;
-    // }
-
-    // if (!userLoaded) {
-    //   console.log("PrivateRoute render Loader", rest);
-    //   return (
-    //     <Section>
-    //       <Section.SectionBody>
-    //         <Loader className="pageLoader" type="rombs" size="40px" />
-    //       </Section.SectionBody>
-    //     </Section>
-    //   );
-    // }
 
     if (
       (isPortalRenameUrl && !enablePortalRename) ||

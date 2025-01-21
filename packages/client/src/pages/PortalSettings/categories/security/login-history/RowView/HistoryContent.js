@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";

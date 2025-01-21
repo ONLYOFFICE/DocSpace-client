@@ -71,13 +71,13 @@ const ChangeRoomOwner = ({
             <Text fontWeight={600} fontSize="13px" noSelect>
               {userName}
             </Text>
-            {roomOwner.id === currentUserId && (
+            {roomOwner.id === currentUserId ? (
               <Text className="me-label">({t("Common:MeLabel")})</Text>
-            )}
+            ) : null}
           </div>
         </div>
 
-        {canChangeOwner && (
+        {canChangeOwner ? (
           <Link
             className="change-owner-link"
             isHovered
@@ -89,7 +89,7 @@ const ChangeRoomOwner = ({
           >
             {t("Common:ChangeButton")}
           </Link>
-        )}
+        ) : null}
       </div>
     </Styled.ChangeRoomOwner>
   );

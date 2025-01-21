@@ -52,8 +52,13 @@ import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  getBackupProgressInfo,
+  isManagement,
+} from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
@@ -105,7 +110,28 @@ class AutomaticBackup extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles } = this.props;
+    const {
+      fetchTreeFolders,
+      rootFoldersTitles,
+      setDownloadingProgress,
+      setTemporaryLink,
+      t,
+    } = this.props;
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    });
 
     this.getWeekdays();
 
@@ -125,10 +151,12 @@ class AutomaticBackup extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
+    const { resetDownloadingProgress } = this.props;
     clearTimeout(this.timerId);
     this.timerId = null;
-    clearProgressInterval();
+    resetDownloadingProgress();
+
+    SocketHelper.off(SocketEvents.BackupProgress);
   }
 
   setBasicSettings = async () => {
@@ -140,6 +168,7 @@ class AutomaticBackup extends React.PureComponent {
       getProgress,
       setStorageRegions,
       setConnectedThirdPartyAccount,
+      setErrorInformation,
     } = this.props;
 
     try {
@@ -167,12 +196,13 @@ class AutomaticBackup extends React.PureComponent {
         isInitialLoading: false,
       });
     } catch (error) {
-      toastr.error(error);
+      setErrorInformation(error, t);
       clearTimeout(this.timerId);
       this.timerId = null;
       this.setState({
         isEmptyContentBeforeLoader: false,
         isInitialLoading: false,
+        isInitialError: true,
       });
     }
   };
@@ -361,6 +391,7 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdParty,
       isCheckedDocuments,
       updateBaseFolderPath,
+      setErrorInformation,
     } = this.props;
 
     try {
@@ -387,8 +418,8 @@ class AutomaticBackup extends React.PureComponent {
       this.setState({
         isLoadingData: false,
       });
-    } catch (e) {
-      toastr.error(e);
+    } catch (error) {
+      setErrorInformation(error, t);
 
       (isCheckedThirdParty || isCheckedDocuments) && updateBaseFolderPath();
 
@@ -399,7 +430,7 @@ class AutomaticBackup extends React.PureComponent {
   };
 
   deleteSchedule = () => {
-    const { t, deleteSchedule } = this.props;
+    const { t, deleteSchedule, setErrorInformation } = this.props;
     this.setState({ isLoadingData: true }, () => {
       deleteBackupSchedule()
         .then(() => {
@@ -411,7 +442,7 @@ class AutomaticBackup extends React.PureComponent {
           });
         })
         .catch((error) => {
-          toastr.error(error);
+          setErrorInformation(error, t);
           this.setState({
             isLoadingData: false,
           });
@@ -435,6 +466,7 @@ class AutomaticBackup extends React.PureComponent {
       automaticBackupUrl,
       currentColorScheme,
       isBackupProgressVisible,
+      errorInformation,
     } = this.props;
 
     const {
@@ -442,6 +474,7 @@ class AutomaticBackup extends React.PureComponent {
       isLoadingData,
       isError,
       isEmptyContentBeforeLoader,
+      isInitialError,
     } = this.state;
 
     const commonProps = {
@@ -454,26 +487,26 @@ class AutomaticBackup extends React.PureComponent {
     };
     const commonRadioButtonProps = {
       fontSize: "13px",
-      fontWeight: "400",
+      fontWeight: "600",
       value: "value",
       className: "backup_radio-button",
       onClick: this.onClickShowStorage,
     };
 
     const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
     return isEmptyContentBeforeLoader &&
       !isInitialLoading ? null : isInitialLoading ? (
       <AutoBackupLoader />
     ) : (
       <StyledAutoBackup isEnableAuto={isEnableAuto}>
+        <StatusMessage message={errorInformation} />
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("AutoBackupDescription", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-          {!isManagement() && (
+          {!isManagement() ? (
             <Link
               className="link-learn-more"
               href={automaticBackupUrl}
@@ -484,7 +517,7 @@ class AutomaticBackup extends React.PureComponent {
             >
               {t("Common:LearnMore")}
             </Link>
-          )}
+          ) : null}
         </div>
 
         <div className="backup_toggle-wrapper">
@@ -492,7 +525,7 @@ class AutomaticBackup extends React.PureComponent {
             className="enable-automatic-backup backup_toggle-btn"
             onChange={this.onClickPermissions}
             isChecked={selectedEnableSchedule}
-            isDisabled={isLoadingData || !isEnableAuto}
+            isDisabled={isLoadingData || !isEnableAuto || isInitialError}
           />
 
           <div className="toggle-caption">
@@ -505,7 +538,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("EnableAutomaticBackup")}
               </Text>
-              {!isEnableAuto && !isManagement() && (
+              {!isEnableAuto && !isManagement() ? (
                 <Badge
                   backgroundColor={
                     theme.isBase
@@ -517,22 +550,22 @@ class AutomaticBackup extends React.PureComponent {
                   className="auto-backup_badge"
                   isPaidBadge
                 />
-              )}
+              ) : null}
             </div>
             <Text className="backup_toggle-btn-description settings_unavailable">
               {t("EnableAutomaticBackupDescription")}
             </Text>
           </div>
         </div>
-        {selectedEnableSchedule && isEnableAuto && (
+        {!isInitialError && selectedEnableSchedule && isEnableAuto ? (
           <div className="backup_modules">
             <StyledModules>
               <RadioButton
+                key={0}
                 {...commonRadioButtonProps}
                 id="backup-room"
                 label={t("RoomsModule")}
                 name={`${DocumentModuleType}`}
-                key={0}
                 isChecked={isCheckedDocuments}
                 isDisabled={isLoadingData}
               />
@@ -541,9 +574,9 @@ class AutomaticBackup extends React.PureComponent {
                   {{ roomName }}
                 </Trans>
               </Text>
-              {isCheckedDocuments && (
+              {isCheckedDocuments ? (
                 <RoomsModule {...commonProps} isError={isError} />
-              )}
+              ) : null}
             </StyledModules>
 
             <StyledModules
@@ -563,13 +596,13 @@ class AutomaticBackup extends React.PureComponent {
               <Text className="backup-description">
                 {t("ThirdPartyResourceDescription")}
               </Text>
-              {isCheckedThirdParty && (
+              {isCheckedThirdParty ? (
                 <ThirdPartyModule
                   {...commonProps}
                   isError={isError}
                   buttonSize={buttonSize}
                 />
-              )}
+              ) : null}
             </StyledModules>
             <StyledModules>
               <RadioButton
@@ -584,29 +617,29 @@ class AutomaticBackup extends React.PureComponent {
                 {t("ThirdPartyStorageDescription")}
               </Text>
 
-              {isCheckedThirdPartyStorage && (
+              {isCheckedThirdPartyStorage ? (
                 <ThirdPartyStorageModule {...commonProps} />
-              )}
+              ) : null}
             </StyledModules>
           </div>
-        )}
+        ) : null}
 
         <ButtonContainer
           t={t}
-          isLoadingData={isLoadingData}
+          isLoadingData={isLoadingData || isInitialError}
           buttonSize={buttonSize}
           onSaveModuleSettings={this.onSaveModuleSettings}
           onCancelModuleSettings={this.onCancelModuleSettings}
         />
 
-        {isBackupProgressVisible && (
+        {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
             alert={false}
             percent={downloadingProgress}
           />
-        )}
+        ) : null}
       </StyledAutoBackup>
     );
   }
@@ -660,6 +693,11 @@ export default inject(
       setStorageRegions,
       defaultFolderId,
       isBackupProgressVisible,
+      setDownloadingProgress,
+      setTemporaryLink,
+      resetDownloadingProgress,
+      errorInformation,
+      setErrorInformation,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -725,6 +763,11 @@ export default inject(
       automaticBackupUrl,
       currentColorScheme,
       isBackupProgressVisible,
+      setDownloadingProgress,
+      setTemporaryLink,
+      resetDownloadingProgress,
+      errorInformation,
+      setErrorInformation,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

@@ -146,14 +146,14 @@ const PluginSDK = ({
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(apiPluginSDKLink, "_blank")}
       />
-      {!isEmptyList && list.length > 0 && (
+      {!isEmptyList && list.length > 0 ? (
         <>
           <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
           <div className="plugin-list">{list}</div>
         </>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

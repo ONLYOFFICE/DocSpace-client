@@ -324,13 +324,13 @@ const PortalRenamingComponent = (props) => {
       hasScroll={hasScroll}
       className="category-item-wrapper"
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("PortalRenaming", { productName: t("Common:ProductName") })}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("PortalRenamingDescriptionText", { domain })}

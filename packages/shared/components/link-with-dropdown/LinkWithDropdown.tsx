@@ -132,17 +132,20 @@ const LinkWithDropdown = ({
   const showScroll = hasScroll && isMobileOnly;
   const scrollHeight = state.orientation === 90 ? 100 : 250;
 
-  const dropDownItem = data?.map((item) => (
-    <DropDownItem
-      {...item}
-      className="drop-down-item"
-      id={`${item.key}`}
-      key={item.key}
-      onClick={onClickDropDownItem}
-      data-key={item.key}
-      textOverflow={isTextOverflow}
-    />
-  ));
+  const dropDownItem = data?.map((item) => {
+    const { key, ...restProp } = item;
+    return (
+      <DropDownItem
+        key={key}
+        {...restProp}
+        className="drop-down-item"
+        id={`${item.key}`}
+        onClick={onClickDropDownItem}
+        data-key={item.key}
+        textOverflow={isTextOverflow}
+      />
+    );
+  });
 
   const styledText = (
     <StyledText

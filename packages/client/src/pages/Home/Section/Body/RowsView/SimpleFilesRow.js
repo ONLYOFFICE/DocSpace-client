@@ -27,8 +27,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-import { Row } from "@docspace/shared/components/row";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { Row } from "@docspace/shared/components/rows";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import {
   isMobile as isMobileUtile,
@@ -392,7 +392,7 @@ const SimpleFilesRow = (props) => {
       title={item.title}
       logo={item.logo}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       color={item.logo?.color}
       isArchive={item.isArchive}
@@ -452,7 +452,7 @@ const SimpleFilesRow = (props) => {
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
@@ -468,7 +468,7 @@ const SimpleFilesRow = (props) => {
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={
-            (!isMobileDevice || item.isTemplate) && badgesComponent
+            !isMobileDevice || item.isTemplate ? badgesComponent : null
           }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
@@ -478,7 +478,7 @@ const SimpleFilesRow = (props) => {
           checked={checkedProps}
           contextOptions={item.contextOptions}
           contextButtonSpacerWidth={displayShareButton}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           isDragging={dragging}
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
@@ -513,7 +513,7 @@ const SimpleFilesRow = (props) => {
             }
             isRooms={isRooms}
             badgesComponent={
-              isMobileDevice && !item.isTemplate && badgesComponent
+              isMobileDevice && !item.isTemplate ? badgesComponent : null
             }
           />
         </StyledSimpleFilesRow>

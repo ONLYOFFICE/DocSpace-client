@@ -45,7 +45,7 @@ import {
   MIN_SIZE_NAME_COLUMN,
   HANDLE_OFFSET,
 } from "./Table.constants";
-import { isDesktop } from "../../utils";
+import { isDesktop } from "../../utils/device";
 
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,
@@ -58,6 +58,8 @@ class TableHeaderComponent extends React.Component<
   headerRef: null | React.RefObject<HTMLDivElement> = null;
 
   throttledResize: null | DebouncedFunc<() => void> = null;
+
+  lastContainerWidth: number | null = null;
 
   constructor(props: TableHeaderProps) {
     super(props);
@@ -146,7 +148,7 @@ class TableHeaderComponent extends React.Component<
   moveToLeft = (
     widths: string[],
     newWidth: number,
-    isIndexEditingMode: boolean,
+    isIndexEditingMode?: boolean,
     index?: number,
   ) => {
     if (isIndexEditingMode) return;
@@ -197,7 +199,7 @@ class TableHeaderComponent extends React.Component<
   moveToRight = (
     widths: string[],
     newWidth: number,
-    isIndexEditingMode: boolean,
+    isIndexEditingMode?: boolean,
     index?: number,
   ) => {
     if (isIndexEditingMode) return;
@@ -248,14 +250,12 @@ class TableHeaderComponent extends React.Component<
     gridTemplateColumns: string[],
     activeColumnIndex: number,
     containerWidth: number,
-    isIndexEditingMode: boolean,
   ) => {
     const { columns } = this.props;
     const clearSize = gridTemplateColumns.map((c) => getSubstring(c));
-    // eslint-disable-next-line prefer-spread
-    const maxSize = Math.max.apply(Math, clearSize);
+    const maxSize = Math.max(...clearSize);
 
-    const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+    const { defaultSize } = columns[activeColumnIndex - 1];
 
     const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
@@ -921,7 +921,7 @@ class TableHeaderComponent extends React.Component<
 
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
-                  (column) => !column.defaultSize && column.enable,
+                  (с) => !с.defaultSize && с.enable,
                 ).length;
 
                 if (enableColumnsLength !== 1) {
@@ -1042,14 +1042,13 @@ class TableHeaderComponent extends React.Component<
         this.resetColumns(true);
         return;
       }
-    } else {
+    } else if (!isResized) {
       this.resetColumns();
       return;
     }
 
     if (str) {
       container.style.gridTemplateColumns = str;
-
       this.updateTableRows(str);
 
       if (this.headerRef && this.headerRef.current) {
@@ -1219,7 +1218,12 @@ class TableHeaderComponent extends React.Component<
       }
     }
 
-    this.onResize(isResized);
+    // Only call onResize if not already resized and container width has changed
+    if (!isResized && container.clientWidth !== this.lastContainerWidth) {
+      // Cache lastContainerWidth result to prevent recursive calls
+      this.lastContainerWidth = container.clientWidth;
+      this.onResize(true);
+    }
   };
 
   render() {
@@ -1272,7 +1276,7 @@ class TableHeaderComponent extends React.Component<
               );
             })}
 
-            {showSettings && (
+            {showSettings ? (
               <div
                 className="table-container_header-settings"
                 title={settingsTitle}
@@ -1280,11 +1284,12 @@ class TableHeaderComponent extends React.Component<
                 <TableSettings
                   columns={columns}
                   disableSettings={
-                    infoPanelVisible || hideColumns || isIndexEditingMode
+                    (infoPanelVisible || hideColumns || isIndexEditingMode) ??
+                    false
                   }
                 />
               </div>
-            )}
+            ) : null}
           </StyledTableRow>
         </StyledTableHeader>
 

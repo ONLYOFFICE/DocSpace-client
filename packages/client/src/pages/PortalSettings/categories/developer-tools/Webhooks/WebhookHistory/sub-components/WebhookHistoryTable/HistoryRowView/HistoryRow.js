@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { retryWebhook } from "@docspace/shared/api/settings";
 
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";

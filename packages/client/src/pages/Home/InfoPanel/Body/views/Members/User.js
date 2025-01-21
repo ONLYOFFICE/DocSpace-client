@@ -251,7 +251,7 @@ const User = ({
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
-      {showInviteIcon && (
+      {showInviteIcon ? (
         <IconButton
           className="icon"
           title={t("Common:RepeatInvitation")}
@@ -260,7 +260,7 @@ const User = ({
           onClick={onRepeatInvitation}
           size={16}
         />
-      )}
+      ) : null}
     </StyledUserTypeHeader>
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
@@ -288,7 +288,7 @@ const User = ({
             </Link>
           ) : (
             <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {user?.displayName && decode(user.displayName)}
+              {user?.displayName ? decode(user.displayName) : null}
             </Text>
           )}
           {/* TODO: uncomment when information about online statuses appears */}
@@ -300,11 +300,11 @@ const User = ({
               place="bottom"
             />
           )} */}
-          {currentMember?.id === user.id && (
+          {currentMember?.id === user.id ? (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          )}
+          ) : null}
         </div>
-        {!user.isGroup && (
+        {!user.isGroup ? (
           <div className="role-email" style={{ display: "flex" }}>
             <Text
               className="label"
@@ -317,10 +317,10 @@ const User = ({
               {`${typeLabel} | ${user.email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && !hideUserRole && (
+      {userRole && userRoleOptions && !hideUserRole ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox
@@ -345,7 +345,7 @@ const User = ({
             </div>
           )}
         </div>
-      )}
+      ) : null}
     </StyledUser>
   );
 };

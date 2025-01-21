@@ -51,12 +51,12 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
 
   return (
     <StyledBody>
-      {isVisibleDialog && (
+      {isVisibleDialog ? (
         <SalesDepartmentRequestDialog
           visible={isVisibleDialog}
           onClose={onClose}
         />
-      )}
+      ) : null}
       <Button
         className="send-request-button"
         label={t("Common:SendRequest")}

@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import { isMobile } from "../../utils";
+
+import { MAX_INFINITE_LOADER_SHIFT, isMobile } from "../../utils/device";
 
 import ListComponent from "./sub-components/List";
 import GridComponent from "./sub-components/Grid";
 
 import { InfiniteLoaderProps } from "./InfiniteLoader.types";
-import { MAX_INFINITE_LOADER_SHIFT } from "../../utils/device";
 
 const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   const { viewAs, isLoading } = props;

@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 // import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
@@ -117,7 +117,7 @@ const FileTile = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       title={item.title}
       logo={item.logo}
@@ -150,7 +150,7 @@ const FileTile = (props) => {
         className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
@@ -171,7 +171,7 @@ const FileTile = (props) => {
           tileContextClick={fileContextClick}
           isPrivacy={isPrivacy}
           isDragging={dragging}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           // onClick={onMouseClick}
           thumbnailClick={onFilesClick}
           onDoubleClick={onDoubleClick}

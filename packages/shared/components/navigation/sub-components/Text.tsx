@@ -27,39 +27,34 @@
 import React from "react";
 import { Badge } from "../../badge";
 
-import {
-  StyledArrowIcon,
-  StyledExpanderDownIcon,
-  StyledExpanderDownIconRotate,
-  StyledHeading,
-  StyledTextContainer,
-} from "../Navigation.styled";
+import styles from "../Navigation.module.scss";
+import { TTextProps } from "../Navigation.types";
 
-import { ITextProps } from "../Navigation.types";
+import ArrowIcon from "./ArrowIcon";
+import Heading from "./Heading";
+import ExpanderIcon from "./ExpanderIcon";
 
 const Text = ({
   title,
-  isRootFolder,
   isOpen,
+  isRootFolder,
   isRootFolderTitle,
   onClick,
   badgeLabel,
+  className,
   ...rest
-}: ITextProps) => {
+}: TTextProps) => {
   return (
-    <StyledTextContainer
-      isRootFolder={isRootFolder}
+    <div
+      className={`${className} ${styles.textContainer}`}
       onClick={onClick}
-      isRootFolderTitle={isRootFolderTitle}
+      data-root-folder={isRootFolder}
+      data-root-folder-title={isRootFolderTitle}
       {...rest}
     >
-      <StyledHeading
-        title={title}
-        truncate
-        isRootFolderTitle={isRootFolderTitle}
-      >
+      <Heading title={title} truncate isRootFolderTitle={isRootFolderTitle}>
         {title}
-      </StyledHeading>
+      </Heading>
       {badgeLabel && (
         <Badge
           className="title-block-badge"
@@ -72,15 +67,11 @@ const Text = ({
           isHovered={false}
         />
       )}
-      {isRootFolderTitle && <StyledArrowIcon />}
+      {isRootFolderTitle ? <ArrowIcon /> : null}
       {!isRootFolderTitle && !isRootFolder ? (
-        isOpen ? (
-          <StyledExpanderDownIconRotate />
-        ) : (
-          <StyledExpanderDownIcon />
-        )
+        <ExpanderIcon isRotated={isOpen} />
       ) : null}
-    </StyledTextContainer>
+    </div>
   );
 };
 

@@ -229,29 +229,30 @@ const TemplatesTile = (props) => {
   return (
     <StyledTemplatesTile checked={checked} isActive={isActive} isEdit={isEdit}>
       <div className="room-tile-template_top-content">
-        {renderElement &&
-          !(!fileExst && id === -1) &&
-          !isEdit &&
-          (!inProgress ? (
-            <div className="file-icon_container" ref={cbRef}>
-              <StyledElement
-                className="file-icon"
-                isRoom={isRoom}
-                onClick={onFileIconClick}
-              >
-                {element}
-              </StyledElement>
+        {renderElement
+          ? !(!fileExst && id === -1) &&
+            !isEdit &&
+            (!inProgress ? (
+              <div className="file-icon_container" ref={cbRef}>
+                <StyledElement
+                  className="file-icon"
+                  isRoom={isRoom}
+                  onClick={onFileIconClick}
+                >
+                  {element}
+                </StyledElement>
 
-              <Checkbox
-                className="checkbox file-checkbox"
-                isChecked={checked}
-                isIndeterminate={indeterminate}
-                onChange={changeCheckbox}
-              />
-            </div>
-          ) : (
-            <Loader className="tile-folder-loader" type="oval" size="16px" />
-          ))}
+                <Checkbox
+                  className="checkbox file-checkbox"
+                  isChecked={checked}
+                  isIndeterminate={indeterminate}
+                  onChange={changeCheckbox}
+                />
+              </div>
+            ) : (
+              <Loader className="tile-folder-loader" type="oval" size="16px" />
+            ))
+          : null}
         <StyledContent
           isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
         >

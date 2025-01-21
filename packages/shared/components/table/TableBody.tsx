@@ -44,7 +44,6 @@ const TableBodyPure = (props: TableBodyProps) => {
     useReactWindow = true,
     onScroll,
     infoPanelVisible = false,
-    isIndexEditingMode = false,
   } = props;
 
   if (!columnStorageName || !columnInfoPanelStorageName) return <div />;
@@ -67,7 +66,6 @@ const TableBodyPure = (props: TableBodyProps) => {
         itemSize={itemHeight}
         onScroll={onScroll}
         infoPanelVisible={infoPanelVisible}
-        isIndexEditingMode={isIndexEditingMode}
       >
         {children}
       </InfiniteLoaderComponent>

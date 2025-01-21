@@ -40,6 +40,8 @@ import { addLog } from ".";
  * @readonly
  */
 export const enum SocketEvents {
+  Restore = "restore",
+  Backup = "backup",
   RestoreBackup = "restore-backup",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
@@ -53,6 +55,8 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  BackupProgress = "s:backup-progress",
+  RestoreProgress = "s:restore-progress",
 }
 
 /**
@@ -213,6 +217,11 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.RestoreProgress]: (opt: {
+    progress: number;
+    isCompleted: boolean;
+    error: string;
+  }) => void;
 };
 
 /**
@@ -242,6 +251,10 @@ export type TCallback = {
   eventName: SocketEvents;
   callback: TSocketListener<SocketEvents>;
 };
+
+declare global {
+  let SOCKET_INSTANCE: SocketHelper | undefined;
+}
 
 const isEmitDataValid = (
   command: SocketCommands,
@@ -342,10 +355,22 @@ class SocketHelper {
    * @returns {SocketHelper} The singleton instance of the SocketHelper class.
    */
   static getInstance() {
-    if (this.instance) {
-      return this.instance;
+    // if (this.instance) return this.instance;
+
+    // this.instance = new SocketHelper();
+    // return this.instance;
+    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+      // [WS] Returning existing global socket instance
+      return globalThis.SOCKET_INSTANCE;
     }
-    this.instance = new SocketHelper();
+
+    if (!this.instance) {
+      // [WS] Creating new socket instance
+      this.instance = new SocketHelper();
+      if (typeof globalThis !== "undefined")
+        globalThis.SOCKET_INSTANCE = this.instance;
+    }
+    // [WS] Returning existing socket instance
     return this.instance;
   }
 
@@ -365,7 +390,7 @@ class SocketHelper {
 
       const { url, publicRoomKey } = this.connectionSettings;
 
-      const origin = window.location.origin;
+      const { origin } = window.location;
 
       const config: TConfig = {
         withCredentials: true,
@@ -532,7 +557,10 @@ class SocketHelper {
       if (command === "subscribe") {
         if (this.subscribeEmits.has(id)) return;
 
-        this.subscribeEmits.set(id, data?.individual);
+        this.subscribeEmits.set(
+          id,
+          typeof data === "object" && data?.individual,
+        );
       }
 
       if (command === "unsubscribe") {

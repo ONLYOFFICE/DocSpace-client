@@ -704,7 +704,7 @@ class Tile extends React.PureComponent {
         {...this.props}
         onContextMenu={onContextMenu}
         isDragging={isDragging}
-        dragging={dragging && isFolder}
+        dragging={dragging ? isFolder : null}
         isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
         isRecycleBin={isRecycleBin}
         isArchiveFolder={isArchiveFolder}
@@ -741,10 +741,8 @@ class Tile extends React.PureComponent {
           ) : isRoom ? (
             <>
               <div className="room-tile_top-content">
-                {renderElement &&
-                  !(!fileExst && id === -1) &&
-                  !isEdit &&
-                  (!inProgress ? (
+                {renderElement && !(!fileExst && id === -1) && !isEdit ? (
+                  !inProgress ? (
                     <div
                       className="file-icon_container"
                       ref={this.checkboxContainerRef}
@@ -771,7 +769,8 @@ class Tile extends React.PureComponent {
                       size="20px"
                       type={LoaderTypes.track}
                     />
-                  ))}
+                  )
+                ) : null}
                 <StyledContent
                   isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
                 >
@@ -838,10 +837,8 @@ class Tile extends React.PureComponent {
             </>
           ) : (
             <>
-              {renderElement &&
-                !(!fileExst && id === -1) &&
-                !isEdit &&
-                (!inProgress ? (
+              {renderElement && !(!fileExst && id === -1) && !isEdit ? (
+                !inProgress ? (
                   <div className="file-icon_container">
                     <StyledElement
                       className="file-icon"
@@ -865,7 +862,8 @@ class Tile extends React.PureComponent {
                     size="20px"
                     type={LoaderTypes.track}
                   />
-                ))}
+                )
+              ) : null}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >
@@ -914,9 +912,9 @@ class Tile extends React.PureComponent {
 
             <StyledIcons isBadges>{badges}</StyledIcons>
 
-            {renderContentElement && (
+            {renderContentElement ? (
               <StyledIcons isQuickButtons>{quickButtons}</StyledIcons>
-            )}
+            ) : null}
 
             <StyledFileTileBottom
               checked={checked}
@@ -924,9 +922,8 @@ class Tile extends React.PureComponent {
               isEdit={isEdit}
               className="file-tile-bottom"
             >
-              {id !== -1 &&
-                !isEdit &&
-                (!inProgress ? (
+              {id !== -1 && !isEdit ? (
+                !inProgress ? (
                   <div className="file-icon_container">
                     <div className="file-icon" onClick={this.onFileIconClick}>
                       {element}
@@ -945,7 +942,8 @@ class Tile extends React.PureComponent {
                     size="20px"
                     type={LoaderTypes.track}
                   />
-                ))}
+                )
+              ) : null}
               <StyledContent
                 isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
               >

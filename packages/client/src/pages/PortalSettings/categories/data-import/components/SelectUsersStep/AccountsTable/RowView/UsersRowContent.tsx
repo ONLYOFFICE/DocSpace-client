@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { UsersRowContentProps } from "../../../../types";
 
 const StyledRowContent = styled(RowContent)`
@@ -68,11 +68,11 @@ const UsersRowContent = (props: UsersRowContentProps) => {
     <div key={data.key}>
       <Box displayProp="flex">
         <Text className="username">{displayName}</Text>
-        {isDuplicate && (
+        {isDuplicate ? (
           <Text className="user-existing">
             ({t("Settings:AccountAlreadyExists")})
           </Text>
-        )}
+        ) : null}
       </Box>
 
       <Text className="user-email">{email}</Text>

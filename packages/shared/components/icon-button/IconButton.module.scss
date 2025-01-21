@@ -1,0 +1,82 @@
+@import "../../styles/_mixins.scss";
+@import "../../styles/variables/_colors.scss";
+
+:global(.dark) {
+  :local {
+    .iconButton {
+      --icon-button-color: #{$gray-dark};
+      --icon-button-hover-color: #{$white};
+    }
+  }
+}
+
+.iconButton {
+  --icon-button-color: #{$gray};
+  --icon-button-hover-color: #{$light-gray-dark};
+  --icon-button-size: 20px;
+
+  line-height: 0;
+  -webkit-tap-highlight-color: $tap-highlight;
+  cursor: pointer;
+
+  color: var(--icon-button-color);
+
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
+
+  &.disabled {
+    cursor: default;
+  }
+
+  &.notClickable {
+    cursor: default;
+  }
+
+  &.stroke {
+    svg {
+      &:not(:root) {
+        width: 100%;
+        height: 100%;
+      }
+
+      path {
+        stroke: var(--icon-button-color);
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.disabled) {
+        svg {
+          path {
+            stroke: var(--icon-button-hover-color);
+          }
+        }
+      }
+    }
+  }
+
+  &.fill {
+    svg {
+      width: 100%;
+      height: 100%;
+
+      path {
+        fill: var(--icon-button-color);
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.disabled) {
+        svg {
+          path {
+            fill: var(--icon-button-hover-color);
+          }
+        }
+      }
+    }
+  }
+
+  .notSelectable {
+    @include no-user-select;
+  }
+}

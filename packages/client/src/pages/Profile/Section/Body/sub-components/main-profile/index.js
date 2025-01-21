@@ -247,7 +247,7 @@ const MainProfile = (props) => {
           onChangeFile={onChangeFileContext}
           currentColorScheme={currentColorScheme}
         />
-        {profile.isSSO && (
+        {profile.isSSO ? (
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
@@ -264,8 +264,8 @@ const MainProfile = (props) => {
               lineHeight="13px"
             />
           </div>
-        )}
-        {profile.isLDAP && (
+        ) : null}
+        {profile.isLDAP ? (
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
@@ -282,7 +282,7 @@ const MainProfile = (props) => {
               lineHeight="13px"
             />
           </div>
-        )}
+        ) : null}
       </StyledAvatarWrapper>
       <StyledInfo
         withActivationBar={withActivationBar}
@@ -294,7 +294,7 @@ const MainProfile = (props) => {
             <Text fontWeight={600} truncate title={profile.displayName}>
               {profile.displayName}
             </Text>
-            {profile.isSSO && (
+            {profile.isSSO ? (
               <>
                 <Badge
                   id="sso-badge-profile"
@@ -315,9 +315,9 @@ const MainProfile = (props) => {
                   {t("PeopleTranslations:SSOAccountTooltip")}
                 </Tooltip>
               </>
-            )}
+            ) : null}
 
-            {profile.isLDAP && (
+            {profile.isLDAP ? (
               <>
                 <Badge
                   id="ldap-badge-profile"
@@ -338,16 +338,16 @@ const MainProfile = (props) => {
                   {t("PeopleTranslations:LDAPAccountTooltip")}
                 </Tooltip>
               </>
-            )}
+            ) : null}
 
-            {!profile.isSSO && !profile.isLDAP && (
+            {!profile.isSSO && !profile.isLDAP ? (
               <IconButton
                 className="edit-button"
                 iconName={PencilOutlineReactSvgUrl}
                 size="12"
                 onClick={() => setChangeNameVisible(true)}
               />
-            )}
+            ) : null}
           </div>
 
           <StyledLabel as="div">{t("Common:Email")}</StyledLabel>
@@ -363,24 +363,24 @@ const MainProfile = (props) => {
               >
                 {profile.email}
               </Text>
-              {withActivationBar && (
+              {withActivationBar ? (
                 <Tooltip
                   float
                   id="emailTooltip"
                   getContent={TooltipContent}
                   place="bottom"
                 />
-              )}
-              {!profile.isSSO && !profile.isLDAP && (
+              ) : null}
+              {!profile.isSSO && !profile.isLDAP ? (
                 <IconButton
                   className="edit-button email-edit-button"
                   iconName={PencilOutlineReactSvgUrl}
                   size="12"
                   onClick={onChangeEmailClick}
                 />
-              )}
+              ) : null}
             </div>
-            {withActivationBar && (
+            {withActivationBar ? (
               <div
                 className="send-again-container"
                 onClick={sendActivationLinkAction}
@@ -393,20 +393,20 @@ const MainProfile = (props) => {
                   {t("SendAgain")}
                 </Text>
               </div>
-            )}
+            ) : null}
           </div>
 
           <StyledLabel as="div">{t("Common:Password")}</StyledLabel>
           <div className="profile-block-field profile-block-password">
             <Text fontWeight={600}>********</Text>
-            {!profile.isSSO && !profile.isLDAP && (
+            {!profile.isSSO && !profile.isLDAP ? (
               <IconButton
                 className="edit-button password-edit-button"
                 iconName={PencilOutlineReactSvgUrl}
                 size="12"
                 onClick={onChangePasswordClick}
               />
-            )}
+            ) : null}
           </div>
 
           <StyledLabel as="div" className="profile-language">
@@ -437,7 +437,7 @@ const MainProfile = (props) => {
               fillIcon={false}
               modernView={!isMobile()}
             />
-            {isBetaLanguage && <BetaBadge place="bottom-end" />}
+            {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
           </div>
 
           <StyledLabel as="div">{t("Common:Type")}</StyledLabel>
@@ -452,7 +452,7 @@ const MainProfile = (props) => {
               )}
             </Text>
 
-            {!isOwner && (
+            {!isOwner ? (
               <HelpButton
                 size={12}
                 offsetRight={0}
@@ -464,7 +464,7 @@ const MainProfile = (props) => {
                   t,
                 )}
               />
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -507,16 +507,16 @@ const MainProfile = (props) => {
                     {profile.email}
                   </Text>
                 </div>
-                {withActivationBar && (
+                {withActivationBar ? (
                   <Tooltip
                     float
                     id="emailTooltip"
                     getContent={TooltipContent}
                     place="bottom"
                   />
-                )}
+                ) : null}
               </div>
-              {withActivationBar && (
+              {withActivationBar ? (
                 <div
                   className="send-again-container"
                   onClick={sendActivationLinkAction}
@@ -529,7 +529,7 @@ const MainProfile = (props) => {
                     {t("SendAgain")}
                   </Text>
                 </div>
-              )}
+              ) : null}
             </div>
             <IconButton
               className="edit-button"
@@ -569,7 +569,7 @@ const MainProfile = (props) => {
                 )}
               </Text>
             </div>
-            {!isOwner && (
+            {!isOwner ? (
               <div className="edit-button">
                 <HelpButton
                   size={12}
@@ -583,7 +583,7 @@ const MainProfile = (props) => {
                   )}
                 />
               </div>
-            )}
+            ) : null}
           </div>
 
           <div className="mobile-language">
@@ -615,13 +615,13 @@ const MainProfile = (props) => {
                 fillIcon={false}
                 modernView={!isMobile()}
               />
-              {isBetaLanguage && <BetaBadge place="bottom-end" />}
+              {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
             </div>
           </div>
         </div>
       </StyledInfo>
 
-      {avatarEditorDialogVisible && (
+      {avatarEditorDialogVisible ? (
         <AvatarEditorDialog
           t={t}
           visible={image.uploadedFile}
@@ -631,7 +631,7 @@ const MainProfile = (props) => {
           onChangeFile={onChangeFileContext}
           onClose={() => setAvatarEditorDialogVisible(false)}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

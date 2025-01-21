@@ -37,7 +37,7 @@ import {
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
@@ -254,18 +254,19 @@ const FilesRowContent = ({
         {...linkStyles}
         isTextOverflow
         dir="auto"
+        truncate
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
       <div className="badges">
         {badgesComponent}
-        {!isRoom && !isRooms && quickButtons}
+        {!isRoom && !isRooms ? quickButtons : null}
       </div>
 
-      {isIndexing && (
+      {isIndexing ? (
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -275,8 +276,8 @@ const FilesRowContent = ({
         >
           {`${t("Files:Index")} ${order}`}
         </Text>
-      )}
-      {mainInfo && (
+      ) : null}
+      {mainInfo ? (
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -286,7 +287,7 @@ const FilesRowContent = ({
         >
           {mainInfo}
         </Text>
-      )}
+      ) : null}
     </SimpleFilesRowContent>
   );
 };

@@ -140,7 +140,7 @@ const PayerInformationContainer = ({
         {unknownPayerDescription()}
       </Text>
       <div>
-        {isStripePortalAvailable && (
+        {isStripePortalAvailable ? (
           <ColorTheme
             noSelect
             fontWeight={600}
@@ -152,7 +152,7 @@ const PayerInformationContainer = ({
           >
             {t("ChooseNewPayer")}
           </ColorTheme>
-        )}
+        ) : null}
       </div>
     </div>
   );

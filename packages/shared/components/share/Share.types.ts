@@ -67,7 +67,7 @@ export type LinkRowProps =
       isRoomsLink?: undefined;
       isPrimaryLink?: undefined;
       isArchiveFolder?: undefined;
-      getData: () => undefined;
+      getData?: () => undefined;
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;

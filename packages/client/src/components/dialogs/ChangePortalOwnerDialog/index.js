@@ -140,7 +140,7 @@ const ChangePortalOwnerDialog = ({
       withBodyScroll
       containerVisible={selectorVisible}
     >
-      {selectorVisible && (
+      {selectorVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
@@ -162,7 +162,7 @@ const ChangePortalOwnerDialog = ({
             filter={filter}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
       <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledOwnerInfo>

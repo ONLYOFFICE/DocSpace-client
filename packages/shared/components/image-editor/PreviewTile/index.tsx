@@ -52,20 +52,18 @@ const PreviewTile = ({
           <div className="tile-header-sub-title">{subtitle}</div>
         </div>
       </div>
-      {tags && (
-        <div className="tile-tags">
-          {tags.length ? (
-            <Tags columnCount={2} tags={tags} />
-          ) : (
-            <Tag
-              className="type_tag"
-              tag="script"
-              label={defaultTagLabel}
-              isDefault
-            />
-          )}
-        </div>
-      )}
+      <div className="tile-tags">
+        {tags.length ? (
+          <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
+        ) : (
+          <Tag
+            className="type_tag"
+            tag="script"
+            label={defaultTagLabel}
+            isDefault
+          />
+        )}
+      </div>
     </StyledPreviewTile>
   );
 };

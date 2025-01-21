@@ -132,7 +132,7 @@ const useRoomsHelper = ({
       filter.pageCount = PAGE_COUNT;
 
       filter.filterValue = filterValue;
-      filter.type = createDefineRoomType;
+      filter.type = (createDefineRoomType as unknown as string) ?? undefined;
 
       const rooms = await getRooms(filter);
 

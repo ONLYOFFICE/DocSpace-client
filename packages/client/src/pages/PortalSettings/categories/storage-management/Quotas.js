@@ -66,7 +66,7 @@ const QuotasComponent = (props) => {
           {t("Quotas")}
         </StyledMainTitle>
 
-        {!isStatisticsAvailable && (
+        {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -77,7 +77,7 @@ const QuotasComponent = (props) => {
             className="paid-badge"
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="quotas_description">
         <Trans t={t} i18nKey="QuotasDescription" ns="Settings">

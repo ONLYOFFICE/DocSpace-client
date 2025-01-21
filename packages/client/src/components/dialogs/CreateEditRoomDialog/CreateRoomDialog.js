@@ -221,9 +221,9 @@ const CreateRoomDialog = ({
       onBackClick={goBack}
       onSubmit={handleSubmit}
       withForm
-      containerVisible={isTemplate && templateDialogIsVisible}
+      containerVisible={isTemplate ? templateDialogIsVisible : false}
     >
-      {isTemplate && (
+      {isTemplate ? (
         <ModalDialog.Container>
           <RoomSelector
             className="template-body_selector"
@@ -243,7 +243,7 @@ const CreateRoomDialog = ({
             emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -276,7 +276,7 @@ const CreateRoomDialog = ({
         )}
       </ModalDialog.Body>
 
-      {!!roomParams.type && !isTemplate && (
+      {!!roomParams.type && !isTemplate ? (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"
@@ -288,6 +288,7 @@ const CreateRoomDialog = ({
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
             type="submit"
+            onClick={onCreateRoom}
           />
           <Button
             id="shared_create-room-modal_cancel"
@@ -299,7 +300,7 @@ const CreateRoomDialog = ({
             onClick={onCloseAndDisconnectThirdparty}
           />
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

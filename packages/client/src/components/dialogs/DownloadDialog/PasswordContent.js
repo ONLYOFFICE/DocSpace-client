@@ -99,27 +99,31 @@ const PasswordContent = (props) => {
 
   return (
     <StyledPasswordContent>
-      {barIsVisible && (
+      {barIsVisible ? (
         <PublicRoomBar
           headerText={t("ProtectedFiles")}
           bodyText={t("FileProtectionMessage")}
           iconName={InfoSvgUrl}
           onClose={onClose}
         />
-      )}
-      {other?.length > 0 &&
-        passwordRow(
-          other,
-          t("Common:PasswordRequired"),
-          "other",
-          "warning-color",
-        )}
-      {original?.length > 0 &&
-        passwordRow(original, t("DownloadOriginalFormat"), "original")}
-      {password?.length > 0 &&
-        passwordRow(password, t("PasswordEntered"), "password")}
-      {remove?.length > 0 &&
-        passwordRow(remove, t("RemovedFromList"), "remove")}
+      ) : null}
+      {other?.length > 0
+        ? passwordRow(
+            other,
+            t("Common:PasswordRequired"),
+            "other",
+            "warning-color",
+          )
+        : null}
+      {original?.length > 0
+        ? passwordRow(original, t("DownloadOriginalFormat"), "original")
+        : null}
+      {password?.length > 0
+        ? passwordRow(password, t("PasswordEntered"), "password")
+        : null}
+      {remove?.length > 0
+        ? passwordRow(remove, t("RemovedFromList"), "remove")
+        : null}
     </StyledPasswordContent>
   );
 };

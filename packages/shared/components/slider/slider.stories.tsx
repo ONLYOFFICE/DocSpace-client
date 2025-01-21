@@ -49,7 +49,7 @@ const Template = ({ ...args }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target;
+    const { target } = e;
     setValue(+target.value);
   };
 

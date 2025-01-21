@@ -41,7 +41,6 @@ import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
@@ -131,7 +130,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "backup-restore",
+      roomParts: "restore",
     });
 
     SocketHelper.emit(SocketCommands.Subscribe, {
@@ -149,25 +148,14 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    const callback = () => {
-      getRestoreProgress()
-        .then((response) => {
-          if (!response) {
-            console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response",
-            );
-            return;
-          }
-          setPreparationPortalDialogVisible(true);
-        })
-        .catch((e) => {
-          console.error("getRestoreProgress", e);
-        });
-    };
-    SocketHelper.on(SocketEvents.RestoreBackup, callback);
+    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+      setPreparationPortalDialogVisible(true);
+    });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+        setPreparationPortalDialogVisible(false);
+      });
     };
   }, [setPreparationPortalDialogVisible]);
 

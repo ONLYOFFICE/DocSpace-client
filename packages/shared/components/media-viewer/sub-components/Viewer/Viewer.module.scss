@@ -131,21 +131,6 @@
     }
   }
 
-  .mediaPlayerClose {
-    position: fixed;
-    top: 13px;
-    inset-inline-end: 12px;
-    height: 17px;
-    &:hover {
-      background-color: transparent;
-    }
-    svg {
-      path {
-        fill: var(--viewer-fill);
-      }
-    }
-  }
-
   .containerVideo {
     position: fixed;
     inset: 0;

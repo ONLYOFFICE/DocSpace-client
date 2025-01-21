@@ -24,24 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/colors";
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/_mixins";
-
-:root {
-  --media-viewer-title-color: #{$white};
-  --media-viewer-background-start: #{$tap-highlight};
-  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
-  --control-btn-hover-bg: #{$silver};
-}
-
-:root[data-theme="dark"] {
-  --media-viewer-title-color: #{$white};
-  --media-viewer-background-start: #{tap-highlight};
-  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
-  --control-btn-hover-bg: #{$silver};
-}
-
 .container {
   direction: var(--interface-direction);
   padding-top: 21px;
@@ -83,6 +65,19 @@
   text-align: center;
 
   &:hover {
-    background-color: var(--control-btn-hover-bg);
+    background-color: var(--media-viewer-control-btn-hover-bg);
+  }
+
+  position: fixed;
+  top: 13px;
+  inset-inline-end: 12px;
+  height: 17px;
+  &:hover {
+    background-color: transparent;
+  }
+  svg {
+    path {
+      fill: var(--media-viewer-control-btn-svg);
+    }
   }
 }

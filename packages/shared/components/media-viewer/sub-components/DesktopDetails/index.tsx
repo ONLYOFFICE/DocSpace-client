@@ -44,9 +44,7 @@ export const DesktopDetails = ({
 }: DesktopDetailsProps) => {
   return (
     <div className={classNames(styles.container, className)}>
-      <Text isBold fontSize="14px" className="title">
-        {title}
-      </Text>
+      <Text className={styles.title}>{title}</Text>
 
       {showCloseButton ? (
         <div className={styles.controlBtn} onClick={onMaskClick}>

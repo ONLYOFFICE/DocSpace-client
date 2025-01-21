@@ -1438,6 +1438,22 @@
   --text-input-padding-large: 11px 12px;
 }
 
+.light {
+  --media-viewer-title-color: #{$white};
+  --media-viewer-background-start: #{$tap-highlight};
+  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
+  --media-viewer-control-btn-hover-bg: #{$silver};
+  --media-viewer-control-btn-svg: #{$white};
+}
+
+.dark {
+  --media-viewer-title-color: #{$white};
+  --media-viewer-background-start: #{tap-highlight};
+  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
+  --media-viewer-control-btn-hover-bg: #{$silver};
+  --media-viewer-control-btn-svg: #{$white};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

@@ -1446,9 +1446,9 @@
   --media-viewer-control-btn-svg: #{$white};
 
   --image-viewer-bg-black: #{$dark-black};
-  --image-viewer-bg-transparent: #{$image-viewer-dark-color};
+  --image-viewer-bg-transparent: #{$viewer-dark-color};
 
-  --message-error-bg: #{$message-error-bg-color};
+  --message-error-bg: #{$error-bg-color};
   --message-error-border-radius: 20px;
   --message-error-padding: 20px 24px;
   --message-error-text-color: #{$white};
@@ -1473,7 +1473,7 @@
   --page-count-hover-background: #{$background-color};
   --page-count-color: #{$white};
 
-  --media-viewer-background: #{$image-viewer-dark-color};
+  --media-viewer-background: #{$viewer-dark-color};
   --media-viewer-toolbar-hover: #{$background-color};
   --media-viewer-error-background: #{$media-viewer-dark};
   --media-viewer-icon-color: #{$white};
@@ -1521,6 +1521,14 @@
 
   --viewer-loader-border-color: #{$white};
   --viewer-loader-background: #{$brown-background};
+
+  --viewer-player-fullscreen-bg: #{$dark-black};
+  --viewer-player-bg: #{$viewer-dark-color};
+  --viewer-player-audio-bg: #{$error-bg-color};
+  --viewer-player-controls-gradient-start: #{$tap-highlight};
+  --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
+  --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
+  --viewer-player-controls-tablet-bg: #{$background-color};
 }
 
 .dark {
@@ -1531,9 +1539,9 @@
   --media-viewer-control-btn-svg: #{$white};
 
   --image-viewer-bg-black: #{$dark-black};
-  --image-viewer-bg-transparent: #{$image-viewer-dark-color};
+  --image-viewer-bg-transparent: #{$viewer-dark-color};
 
-  --message-error-bg: #{$message-error-bg-color};
+  --message-error-bg: #{$error-bg-color};
   --message-error-border-radius: 20px;
   --message-error-padding: 20px 24px;
   --message-error-text-color: #{$white};
@@ -1558,7 +1566,7 @@
   --page-count-hover-background: #{$background-color};
   --page-count-color: #{$white};
 
-  --media-viewer-background: #{$image-viewer-dark-color};
+  --media-viewer-background: #{$viewer-dark-color};
   --media-viewer-toolbar-hover: #{$background-color};
   --media-viewer-error-background: #{$media-viewer-dark};
   --media-viewer-icon-color: #{$white};
@@ -1606,6 +1614,14 @@
 
   --viewer-loader-border-color: #{$white};
   --viewer-loader-background: #{$brown-background};
+
+  --viewer-player-fullscreen-bg: #{$dark-black};
+  --viewer-player-bg: #{$viewer-dark-color};
+  --viewer-player-audio-bg: #{$error-bg-color};
+  --viewer-player-controls-gradient-start: #{$tap-highlight};
+  --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
+  --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
+  --viewer-player-controls-tablet-bg: #{$background-color};
 }
 
 :global(.rtl) {

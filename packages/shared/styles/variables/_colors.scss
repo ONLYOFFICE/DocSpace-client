@@ -123,13 +123,16 @@ $background-color: rgba(0, 0, 0, 0.8);
 $dark-icon-color: rgba(255, 255, 255, 0.6);
 $brown-background: rgba(0, 0, 0, 0.4);
 $player-speed-control-background: rgba(51, 51, 51, 0.65);
-$image-viewer-dark-color: rgba(55, 55, 55, 0.6);
-$message-error-bg-color: rgba(0, 0, 0, 0.7);
+$viewer-dark-color: rgba(55, 55, 55, 0.6);
+$error-bg-color: rgba(0, 0, 0, 0.7);
 $media-viewer-dark: rgba(0, 0, 0, 0.6);
 
 $player-timeline-hover: rgba(255, 255, 255, 0.5);
 $player-timeline-progress: rgba(255, 255, 255, 0.4);
 $player-background: rgba(255, 255, 255, 0.3);
+
+$viewer-player-controls-gradient: rgba(0, 0, 0, 0.64);
+$viewer-player-controls-gradient-end-color: rgba(0, 0, 0, 0.89);
 
 $logo-colors: (
   #ff6680,

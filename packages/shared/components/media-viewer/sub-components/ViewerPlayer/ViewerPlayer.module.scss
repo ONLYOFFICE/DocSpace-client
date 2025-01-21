@@ -26,27 +26,6 @@
 
 @import "../../../../styles/variables/devices";
 @import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --viewer-player-fullscreen-bg: #{$dark-black};
-  --viewer-player-bg: rgba(55, 55, 55, 0.6);
-  --viewer-player-audio-bg: rgba(0, 0, 0, 0.7);
-  --viewer-player-controls-gradient-start: #{$tap-highlight};
-  --viewer-player-controls-gradient-middle: rgba(0, 0, 0, 0.64);
-  --viewer-player-controls-gradient-end: rgba(0, 0, 0, 0.89);
-  --viewer-player-controls-tablet-bg: rgba(0, 0, 0, 0.8);
-}
-
-:root[data-theme="dark"] {
-  --viewer-player-fullscreen-bg: #{$dark-black};
-  --viewer-player-bg: rgba(55, 55, 55, 0.6);
-  --viewer-player-audio-bg: rgba(0, 0, 0, 0.7);
-  --viewer-player-controls-gradient-start: #{$tap-highlight};
-  --viewer-player-controls-gradient-middle: rgba(0, 0, 0, 0.64);
-  --viewer-player-controls-gradient-end: rgba(0, 0, 0, 0.89);
-  --viewer-player-controls-tablet-bg: rgba(0, 0, 0, 0.8);
-}
 
 .containerPlayer {
   position: fixed;

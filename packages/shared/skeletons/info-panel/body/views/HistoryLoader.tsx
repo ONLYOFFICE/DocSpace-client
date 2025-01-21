@@ -24,23 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import {
-  StyledHistoryBlockLoader,
-  StyledHistoryLoader,
-  StyledHistorySubtitleLoader,
-} from "../body.styled";
+import styles from "../Body.module.scss";
 
 const HistoryLoader = () => {
   return (
-    <StyledHistoryLoader>
-      <StyledHistorySubtitleLoader>
+    <div className={styles.historyLoader} data-testid="history-loader">
+      <div className={styles.historySubtitleLoader}>
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </StyledHistorySubtitleLoader>
+      </div>
 
       {[...Array(5).keys()].map((i) => (
-        <StyledHistoryBlockLoader key={i}>
+        <div className={styles.historyBlockLoader} key={i}>
           <div className="content">
             <RectangleSkeleton
               className="avatar"
@@ -67,9 +65,9 @@ const HistoryLoader = () => {
               borderRadius="3px"
             />
           </div>
-        </StyledHistoryBlockLoader>
+        </div>
       ))}
-    </StyledHistoryLoader>
+    </div>
   );
 };
 

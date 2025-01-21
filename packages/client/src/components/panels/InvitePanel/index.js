@@ -288,7 +288,7 @@ const InvitePanel = ({
       <>
         {error}
         &nbsp;
-        {!isRoomAdmin && paymentLink}
+        {!isRoomAdmin ? paymentLink : null}
       </>
     );
   };
@@ -419,7 +419,7 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {hasInvitedUsers && (
+        {hasInvitedUsers ? (
           <ItemsList
             t={t}
             setHasErrors={setHasErrors}
@@ -430,7 +430,7 @@ const InvitePanel = ({
             invitePanelBodyRef={invitePanelBodyRef}
             isMobileView={isMobileView}
           />
-        )}
+        ) : null}
       </div>
     );
   }, [
@@ -504,12 +504,12 @@ const InvitePanel = ({
       visible={isVisible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
-      containerVisible={!hideSelector && addUsersPanelVisible}
+      containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
     >
-      {!hideSelector && addUsersPanelVisible && (
+      {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             useAside
@@ -545,7 +545,7 @@ const InvitePanel = ({
             }}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
 
       <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>

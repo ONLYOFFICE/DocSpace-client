@@ -29,10 +29,10 @@ import { ReactSVG } from "react-svg";
 
 import { Text } from "../../../text";
 import { isSeparator } from "../../../../utils/typeGuards";
+import { globalColors } from "../../../../themes";
 
 import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
 import type PlayerMessageErrorProps from "./MessageError.props";
-import { globalColors } from "../../../../themes";
 
 export const MessageError = ({
   model,
@@ -58,7 +58,7 @@ export const MessageError = ({
           {errorTitle}
         </Text>
       </StyledMediaError>
-      {items.length !== 0 && (
+      {items.length !== 0 ? (
         <StyledErrorToolbar>
           {items.map((item) => {
             if (item.disabled || isSeparator(item)) return;
@@ -79,7 +79,7 @@ export const MessageError = ({
             );
           })}
         </StyledErrorToolbar>
-      )}
+      ) : null}
     </div>
   );
 };

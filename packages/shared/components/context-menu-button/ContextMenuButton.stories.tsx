@@ -34,7 +34,7 @@ import { ContextMenuButtonProps } from "./ContextMenuButton.types";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 
 const meta = {
-  title: "Components/ContextMenuButton",
+  title: "Interactive elements/ContextMenuButton",
   component: ContextMenuButton,
   argTypes: {
     clickColor: { control: "color" },

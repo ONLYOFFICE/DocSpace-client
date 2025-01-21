@@ -29,27 +29,29 @@ import React, { useRef, useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
 import { useTheme } from "styled-components";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
-import { isMobile as isMobileDevice } from "react-device-detect";
+
 import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
 import { ToggleButton } from "../../toggle-button";
 import { Scrollbar } from "../../scrollbar";
 
-import { SubMenuItem, StyledList } from "../ContextMenu.styled";
 import {
   ContextMenuModel,
   ContextMenuType,
   SeparatorType,
 } from "../ContextMenu.types";
 
-const submenuListMargin = 4; // Indentation of the second level menu from the first level
-const sectionPadding = 16; // Screen margin
+import styles from "../ContextMenu.module.scss";
 
-const SubMenu = (props: {
+const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the first level
+const SECTION_PADDING = 16; // Screen margin
+
+type SubMenuProps = {
   model: ContextMenuModel[];
   root?: boolean;
   className?: string;
@@ -66,13 +68,17 @@ const SubMenu = (props: {
   onLoad?: () => Promise<ContextMenuModel[]>;
   changeView?: boolean;
   withHeader?: boolean;
-}) => {
+};
+
+const SubMenu = (props: SubMenuProps) => {
   const {
-    onLeafClick,
     root,
     resetMenu,
+
+    onLeafClick,
     onMobileItemClick,
     onLoad,
+
     changeView,
     withHeader,
   } = props;
@@ -178,7 +184,7 @@ const SubMenu = (props: {
 
         const top = menuItemActive.offsetTop;
         const scroller = firstList.querySelector(".scroller") as HTMLElement;
-        const scrollTop = scroller.scrollTop;
+        const { scrollTop } = scroller;
         const positionActiveItem = top - scrollTop;
 
         subMenuRefTop = positionActiveItem - 2;
@@ -213,7 +219,7 @@ const SubMenu = (props: {
           if (!root && subListWidth > containerOffsetLeft) {
             // If the menu extends beyond the screen
             const newWidth =
-              containerOffsetLeft - submenuListMargin - sectionPadding;
+              containerOffsetLeft - SUBMENU_LIST_MARGIN - SECTION_PADDING;
 
             subMenuRef.current.style.width = `${newWidth}px`;
             setWidthSubMenu(newWidth);
@@ -225,7 +231,7 @@ const SubMenu = (props: {
 
           if (!root && subListWidth > freeSpaceRight) {
             // If the menu extends beyond the screen
-            const newWidth = freeSpaceRight - 3 * submenuListMargin;
+            const newWidth = freeSpaceRight - 3 * SUBMENU_LIST_MARGIN;
 
             subMenuRef.current.style.width = `${newWidth}px`;
             setWidthSubMenu(newWidth);
@@ -252,6 +258,7 @@ const SubMenu = (props: {
             const newWidth = containerOffsetLeft - 12;
 
             subMenuRef.current.style.width = `${newWidth}px`;
+
             setWidthSubMenu(newWidth);
           }
         } else {
@@ -263,10 +270,11 @@ const SubMenu = (props: {
               viewport.width -
               containerOffsetLeft -
               itemOuterWidth -
-              submenuListMargin -
-              sectionPadding;
+              SUBMENU_LIST_MARGIN -
+              SECTION_PADDING;
 
             subMenuRef.current.style.width = `${newWidth}px`;
+
             setWidthSubMenu(newWidth);
           }
         }
@@ -379,9 +387,9 @@ const SubMenu = (props: {
         {icon}
         {label}
         {subMenuIcon}
-        {item.isOutsideLink && (
+        {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
-        )}
+        ) : null}
       </a>
     );
 
@@ -406,11 +414,11 @@ const SubMenu = (props: {
 
     if (item.withToggle) {
       return (
-        <SubMenuItem
+        <li
           id={item.id}
           key={item.key}
           role="none"
-          className={className || ""}
+          className={classNames(className, styles.subMenuItem)}
           style={{ ...item.style, ...style }}
           onClick={onClick}
           onMouseDown={onMouseDown}
@@ -422,7 +430,7 @@ const SubMenu = (props: {
             onChange={onClick}
             noAnimation
           />
-        </SubMenuItem>
+        </li>
       );
     }
 
@@ -558,15 +566,24 @@ const SubMenu = (props: {
         unmountOnExit
         onEnter={onEnter}
       >
-        <StyledList
+        <ul
           ref={subMenuRef}
-          className={`${className} not-selectable`}
-          listHeight={height + paddingList}
-          widthSubMenu={widthSubMenu}
+          className={classNames(
+            className,
+            "not-selectable",
+            styles.styledList,
+            { [styles.withSubMenu]: !!widthSubMenu },
+          )}
+          style={
+            {
+              "--list-height": `${height + paddingList}px`,
+              "--submenu-width": `${widthSubMenu}px`,
+            } as React.CSSProperties
+          }
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}
-        </StyledList>
+        </ul>
       </CSSTransition>
     );
   }

@@ -51,8 +51,10 @@ const ImageCropper = ({
   editorBorderRadius,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
-  const inputFilesElement = React.useRef(null);
-  const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
+  const inputFilesElement = React.useRef<HTMLInputElement>(null);
+  const setEditorRef = (editor: AvatarEditor | null) => {
+    editorRef.current = editor;
+  };
   const theme = useTheme();
 
   const handlePositionChange = (position: Position) => {
@@ -84,14 +86,14 @@ const ImageCropper = ({
     handleSliderChange(undefined, image.zoom >= 1.5 ? image.zoom - 0.5 : 1);
   };
 
-  const handleChangeImage = (e) => {
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isDisabled) return;
     onChangeFile(e);
   };
 
   const onInputClick = () => {
     if (inputFilesElement.current) {
-      inputFilesElement.current.value = null;
+      inputFilesElement.current.value = "";
     }
   };
 
@@ -141,7 +143,7 @@ const ImageCropper = ({
       </div>
       <div
         className="icon_cropper-change_button"
-        onClick={() => inputFilesElement.current.click()}
+        onClick={() => inputFilesElement.current?.click()}
         title={t("Common:ChooseAnother")}
       >
         <ReactSVG src={RefreshReactSvgUrl} />
@@ -161,39 +163,39 @@ const ImageCropper = ({
       </div>
 
       {typeof uploadedFile !== "string" &&
-        uploadedFile?.name &&
-        !disableImageRescaling && (
-          <div className="icon_cropper-zoom-container">
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomOutClick}
-              iconName={ZoomMinusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
+      uploadedFile?.name &&
+      !disableImageRescaling ? (
+        <div className="icon_cropper-zoom-container">
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={20}
+            onClick={handleZoomOutClick}
+            iconName={ZoomMinusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
 
-            <Slider
-              className="icon_cropper-zoom-container-slider"
-              max={5}
-              min={1}
-              onChange={handleSliderChange}
-              step={0.01}
-              value={image.zoom}
-              isDisabled={isDisabled}
-            />
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomInClick}
-              iconName={ZoomPlusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
-          </div>
-        )}
+          <Slider
+            className="icon_cropper-zoom-container-slider"
+            max={5}
+            min={1}
+            onChange={handleSliderChange}
+            step={0.01}
+            value={image.zoom}
+            isDisabled={isDisabled}
+          />
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={20}
+            onClick={handleZoomInClick}
+            iconName={ZoomPlusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
+        </div>
+      ) : null}
     </StyledImageCropper>
   );
 };

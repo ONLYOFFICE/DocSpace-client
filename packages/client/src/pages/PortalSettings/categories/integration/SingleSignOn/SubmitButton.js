@@ -67,13 +67,13 @@ const SubmitResetButtons = (props) => {
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={confirmReset}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </>
   );
 };

@@ -92,9 +92,9 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
           widthProp="100%"
         >
           <div className="name">{groupMember.displayName}</div>
-          {groupMember.status === EmployeeStatus.Pending && (
+          {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
-          )}
+          ) : null}
         </Box>
         <div className="email">{`${getUserTypeTranslation(type, t)} | ${groupMember.email}`}</div>
       </div>

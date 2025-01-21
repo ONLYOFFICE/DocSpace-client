@@ -214,7 +214,7 @@ const PublicRoomPage = (props) => {
           />
         </Section.SectionHeader>
 
-        {!isEmptyPage && (
+        {!isEmptyPage ? (
           <Section.SectionFilter>
             {isFrame ? (
               frameConfig?.showFilter && <SectionFilterContent />
@@ -222,7 +222,7 @@ const PublicRoomPage = (props) => {
               <SectionFilterContent />
             )}
           </Section.SectionFilter>
-        )}
+        ) : null}
 
         <Section.SectionBody>
           <Outlet />

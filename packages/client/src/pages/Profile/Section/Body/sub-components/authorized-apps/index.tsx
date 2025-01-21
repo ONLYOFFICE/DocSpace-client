@@ -78,10 +78,10 @@ const AuthorizedApps = ({
       ) : (
         <EmptyScreen t={t} />
       )}
-      {infoDialogVisible && (
+      {infoDialogVisible ? (
         <InfoDialog visible={infoDialogVisible} isProfile />
-      )}
-      {revokeDialogVisible && (
+      ) : null}
+      {revokeDialogVisible ? (
         <RevokeDialog
           visible={revokeDialogVisible}
           onClose={() => setRevokeDialogVisible(false)}
@@ -90,7 +90,7 @@ const AuthorizedApps = ({
           selection={selection}
           bufferSelection={bufferSelection}
         />
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

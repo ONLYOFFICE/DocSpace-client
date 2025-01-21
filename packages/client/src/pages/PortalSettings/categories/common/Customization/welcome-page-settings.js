@@ -346,11 +346,11 @@ const WelcomePageSettingsComponent = (props) => {
       hasScroll={state.hasScroll}
       className="category-item-wrapper"
     >
-      {state.isCustomizationView && !isMobileView && (
+      {state.isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("CustomTitlesWelcome")}</div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("CustomTitlesDescription")}

@@ -109,10 +109,11 @@ const ChangeUserTypeDialog = ({
               values={{ secondType }}
             />
           )}{" "}
-          {!isGuestsDialog &&
-            t("ChangeUserTypeMessageWarning", {
-              productName: t("Common:ProductName"),
-            })}
+          {!isGuestsDialog
+            ? t("ChangeUserTypeMessageWarning", {
+                productName: t("Common:ProductName"),
+              })
+            : null}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

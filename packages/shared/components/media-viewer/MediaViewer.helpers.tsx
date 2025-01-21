@@ -45,6 +45,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+
 import type { TFile } from "../../api/files/types";
 
 import { ToolbarActionType } from "./MediaViewer.enums";

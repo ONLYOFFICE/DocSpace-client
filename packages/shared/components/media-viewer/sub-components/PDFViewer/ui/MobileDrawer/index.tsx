@@ -88,7 +88,7 @@ export const MobileDrawer = ({
   );
 
   const handleResize = useCallback(() => {
-    const innerHeight = window.innerHeight;
+    const { innerHeight } = window;
 
     setheight(innerHeight);
     if (isOpenMobileDrawer) {
@@ -188,17 +188,20 @@ export const MobileDrawer = ({
         }}
       >
         <MobileDrawerHeader {...bind()}>
-          {bookmarks.length > 0 &&
-            React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
-              onClick: handleToggle,
-            })}
+          {bookmarks.length > 0
+            ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
+                onClick: handleToggle,
+              })
+            : null}
           <CrossIcon
             className="mobile-drawer_cross-icon"
             onClick={handleClose}
           />
         </MobileDrawerHeader>
         <div style={{ height: height * 0.8 - 64 }}>
-          {toggle && <Bookmarks bookmarks={bookmarks} navigate={navigate} />}
+          {toggle ? (
+            <Bookmarks bookmarks={bookmarks} navigate={navigate} />
+          ) : null}
           <Thumbnails id="viewer-thumbnail" visible={!toggle} />
         </div>
       </MobileDrawerWrapper>

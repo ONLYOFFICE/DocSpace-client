@@ -409,14 +409,16 @@ class CurrentQuotasStore {
   };
 
   updateQuotaUsedValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId && elem.used) elem.used.value = value;
+    this.currentPortalQuotaFeatures.forEach((elem, index) => {
+      if (elem.id === featureId && this.currentPortalQuotaFeatures[index].used)
+        this.currentPortalQuotaFeatures[index].used.value = value;
     });
   };
 
   updateQuotaFeatureValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId) elem.value = value;
+    this.currentPortalQuotaFeatures.forEach((elem, index) => {
+      if (elem.id === featureId)
+        this.currentPortalQuotaFeatures[index].value = value;
     });
   };
 

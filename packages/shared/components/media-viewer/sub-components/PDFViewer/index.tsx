@@ -325,14 +325,14 @@ export const PDFViewer = ({
         <ViewerLoader
           isLoading={isLoadingFile || isLoadingScript || !isFileOpened}
         />
-        {isDesktop && (
+        {isDesktop ? (
           <Sidebar
             bookmarks={bookmarks}
             isPanelOpen={isPDFSidebarOpen}
             navigate={navigate}
             setIsPDFSidebarOpen={setIsPDFSidebarOpen}
           />
-        )}
+        ) : null}
         <MainPanel
           src={src}
           ref={containerRef}
@@ -345,7 +345,7 @@ export const PDFViewer = ({
         />
       </PDFViewerWrapper>
 
-      {isMobile && (
+      {isMobile ? (
         <MobileDrawer
           bookmarks={bookmarks}
           resizePDFThumbnail={resizePDFThumbnail}
@@ -353,7 +353,7 @@ export const PDFViewer = ({
           navigate={navigate}
           setIsOpenMobileDrawer={setIsOpenMobileDrawer}
         />
-      )}
+      ) : null}
 
       <PDFViewerToolbarWrapper>
         <PageCount
@@ -361,10 +361,10 @@ export const PDFViewer = ({
           isPanelOpen={isPDFSidebarOpen}
           className="pdf-viewer_page-count"
           setIsOpenMobileDrawer={setIsOpenMobileDrawer}
-          visible={!isLoadingFile && !isLoadingScript && isFileOpened}
+          visible={!isLoadingFile && !isLoadingScript ? isFileOpened : false}
         />
 
-        {isDesktop && !(isLoadingFile || isLoadingScript) && (
+        {isDesktop && !(isLoadingFile || isLoadingScript) ? (
           <PDFToolbar
             ref={toolbarRef}
             percentValue={1}
@@ -375,7 +375,7 @@ export const PDFViewer = ({
             generateContextMenu={generateContextMenu}
             setIsOpenContextMenu={setIsOpenContextMenu}
           />
-        )}
+        ) : null}
       </PDFViewerToolbarWrapper>
     </>
   );

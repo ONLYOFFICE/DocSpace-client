@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface InfoPanelViewLoaderProps {
+export type InfoPanelViewLoaderProps = {
   view:
     | "members"
     | "history"
@@ -34,4 +34,4 @@ export interface InfoPanelViewLoaderProps {
     | "severalItems"
     | "groups"
     | "users";
-}
+};

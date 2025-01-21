@@ -98,7 +98,7 @@ const ScheduleComponent = ({
           showDisabledItems
           directionY="both"
         />
-        {weeklySchedule && (
+        {weeklySchedule ? (
           <ComboBox
             options={weekdaysLabelArray}
             selectedOption={{
@@ -115,8 +115,8 @@ const ScheduleComponent = ({
             showDisabledItems
             directionY="both"
           />
-        )}
-        {monthlySchedule && (
+        ) : null}
+        {monthlySchedule ? (
           <ComboBox
             options={monthNumbersArray}
             selectedOption={{
@@ -133,7 +133,7 @@ const ScheduleComponent = ({
             showDisabledItems
             directionY="both"
           />
-        )}
+        ) : null}
         <ComboBox
           options={hoursArray}
           selectedOption={{

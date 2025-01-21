@@ -41,20 +41,20 @@ const DialogsWrapper = (props) => {
 
   return (
     <>
-      {isAboutDialogVisible && (
+      {isAboutDialogVisible ? (
         <AboutDialog
           t={t}
           visible={isAboutDialogVisible}
           onClose={() => setIsAboutDialogVisible(false)}
           buildVersionInfo={buildVersionInfo}
         />
-      )}
-      {isDebugDialogVisible && (
+      ) : null}
+      {isDebugDialogVisible ? (
         <DebugInfoDialog
           visible={isDebugDialogVisible}
           onClose={() => setIsDebugDialogVisible(false)}
         />
-      )}
+      ) : null}
     </>
   );
 };

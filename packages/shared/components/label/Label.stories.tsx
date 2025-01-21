@@ -30,40 +30,151 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Label } from "./Label";
 
 const meta = {
-  title: "Components/Label",
+  title: "Base UI components/Label",
   component: Label,
   parameters: {
     docs: {
       description: {
-        component: "Component displays the field name in the form",
+        component:
+          "Label component displays the field name in forms. It supports required field indication, error states, and various display options.",
       },
     },
   },
   argTypes: {
-    // color: { control: "color" },
-    // backgroundColor: { control: "color" },
-    // exampleText: {
-    //   table: {
-    //     disable: true,
-    //   },
-    // },
+    text: {
+      description: "The text content of the label",
+      control: "text",
+    },
+    title: {
+      description: "Title attribute for the label",
+      control: "text",
+    },
+    htmlFor: {
+      description: "Associates the label with a form control",
+      control: "text",
+    },
+    isRequired: {
+      description: "Shows a required field indicator (*)",
+      control: "boolean",
+    },
+    error: {
+      description: "Displays the label in error state",
+      control: "boolean",
+    },
+    truncate: {
+      description: "Truncates text that overflows",
+      control: "boolean",
+    },
+    isInline: {
+      description: "Displays the label inline",
+      control: "boolean",
+    },
+    display: {
+      description: "CSS display property",
+      control: "select",
+      options: ["block", "inline", "inline-block", "flex"],
+    },
+    style: {
+      description: "Custom CSS styles",
+      control: "object",
+    },
+    className: {
+      description: "Additional CSS class names",
+      control: "text",
+    },
   },
 } satisfies Meta<typeof Label>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
 export const Default: Story = {
+  args: {
+    text: "First name",
+    title: "Enter your first name",
+    htmlFor: "firstName",
+    isRequired: false,
+    error: false,
+    truncate: false,
+    isInline: false,
+    display: "block",
+  },
+};
+
+export const Required: Story = {
+  args: {
+    ...Default.args,
+    text: "Email address",
+    title: "Enter your email address",
+    htmlFor: "email",
+    isRequired: true,
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    ...Default.args,
+    text: "Password",
+    title: "Enter your password",
+    htmlFor: "password",
+    error: true,
+  },
+};
+
+export const Truncated: Story = {
   render: (args) => (
-    <div style={{ width: "100%" }}>
-      <Label {...args}>Test label</Label>
+    <div style={{ width: "150px", border: "1px solid #ccc", padding: "8px" }}>
+      <Label style={{ display: "block" }} {...args} />
     </div>
   ),
   args: {
-    title: "",
-    htmlFor: "",
-    truncate: false,
+    ...Default.args,
+    text: "This is a very long label that will be truncated",
+    title: "Full text shown on hover",
+    truncate: true,
+  },
+};
 
-    isInline: false,
+export const Inline: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <Label {...args} />
+      <input type="text" id={args.htmlFor} style={{ padding: "4px" }} />
+    </div>
+  ),
+  args: {
+    ...Default.args,
+    text: "Username",
+    title: "Enter username",
+    htmlFor: "username",
+    isInline: true,
+  },
+};
+
+export const WithChildren: Story = {
+  render: (args) => (
+    <Label {...args}>
+      <span style={{ marginLeft: "8px", color: "#666" }}>(optional)</span>
+    </Label>
+  ),
+  args: {
+    ...Default.args,
+    text: "Phone number",
+    title: "Enter phone number",
+    htmlFor: "phone",
+  },
+};
+
+export const CustomStyling: Story = {
+  args: {
+    ...Default.args,
+    text: "Custom Label",
+    className: "custom-label",
+    style: {
+      fontWeight: 700,
+      color: "#2c3e50",
+      textTransform: "uppercase",
+    },
   },
 };

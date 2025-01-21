@@ -96,14 +96,14 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
-            !window.navigator.userAgent.includes("ZoomApps") && (
-              <Button
-                scale
-                label={t("Common:LogoutButton")}
-                size="medium"
-                onClick={onClick}
-              />
-            )}
+          !window.navigator.userAgent.includes("ZoomApps") ? (
+            <Button
+              scale
+              label={t("Common:LogoutButton")}
+              size="medium"
+              onClick={onClick}
+            />
+          ) : null}
 
           <ColorTheme
             textAlign="center"

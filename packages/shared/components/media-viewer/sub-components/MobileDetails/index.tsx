@@ -29,8 +29,9 @@ import React, { useMemo, forwardRef, memo, ForwardedRef } from "react";
 
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
-import { ContextMenu, TContextMenuRef } from "../../../context-menu";
+
 import { Text } from "../../../text";
+import { ContextMenu, ContextMenuRefType } from "../../../context-menu";
 
 import { StyledMobileDetails } from "../../MediaViewer.styled";
 
@@ -51,7 +52,7 @@ const MobileDetails = memo(
         onContextMenu,
         contextModel,
       }: MobileDetailsProps,
-      ref: ForwardedRef<TContextMenuRef>,
+      ref: ForwardedRef<ContextMenuRefType>,
     ): JSX.Element => {
       const contextMenuHeader = useMemo(
         () => ({
@@ -63,13 +64,13 @@ const MobileDetails = memo(
 
       return (
         <StyledMobileDetails>
-          {!isPublicFile && (
+          {!isPublicFile ? (
             <BackArrow className="mobile-close" onClick={onMaskClick} />
-          )}
+          ) : null}
           <Text fontSize="14px" color={globalColors.white} className="title">
             {title}
           </Text>
-          {!isPreviewFile && !isError && (
+          {!isPreviewFile && !isError ? (
             <div className="details-context">
               <MediaContextMenu
                 className="mobile-context"
@@ -84,7 +85,7 @@ const MobileDetails = memo(
                 getContextModel={contextModel}
               />
             </div>
-          )}
+          ) : null}
         </StyledMobileDetails>
       );
     },

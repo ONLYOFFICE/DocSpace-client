@@ -64,8 +64,8 @@ export const SettingsContextProvider = ({
     () => ({
       getIcon,
       extsWebEdited: extsWebEdited ?? [],
-      filesSettingsLoading: isLoading,
-      displayFileExtension: displayExts,
+      filesSettingsLoading: isLoading!,
+      displayFileExtension: displayExts ?? false,
     }),
     [getIcon, extsWebEdited, isLoading, displayExts],
   );

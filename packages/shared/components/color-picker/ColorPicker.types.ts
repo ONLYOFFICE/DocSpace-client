@@ -30,19 +30,20 @@ export interface ColorPickerProps {
   /** Used as HTML `id` property  */
   id?: string;
   /** Triggers function on color picker close */
-  onClose: () => void;
+  onClose?: () => void;
   /** Hides controls */
   isPickerOnly: boolean;
   /** Triggers function on color apply */
-  onApply: (color: string) => void;
+  onApply?: (color: string) => void;
   /** Selected color */
   appliedColor: string;
   /** Apply button text */
-  applyButtonLabel: string;
+  applyButtonLabel?: string;
   /** Cancel button text */
-  cancelButtonLabel: string;
+  cancelButtonLabel?: string;
   /** Allows handling the changing values of the component */
   handleChange?: (color: string) => void;
   /** Hex code text */
   hexCodeLabel?: string;
+  forwardedRef?: React.RefObject<HTMLDivElement>;
 }

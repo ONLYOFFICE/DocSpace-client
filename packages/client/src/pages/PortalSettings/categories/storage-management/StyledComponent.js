@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
 

@@ -174,7 +174,7 @@ const Dialog = ({
             maxLength={165}
           />
         </FieldContainer>
-        {isCreateDialog && extension && (
+        {isCreateDialog && extension ? (
           <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
             <Checkbox
               className="dont-ask-again"
@@ -183,16 +183,16 @@ const Dialog = ({
               onChange={onChangeCheckbox}
             />
           </Box>
-        )}
+        ) : null}
 
-        {options && (
+        {options ? (
           <ComboBox
             style={{ marginTop: "16px" }}
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

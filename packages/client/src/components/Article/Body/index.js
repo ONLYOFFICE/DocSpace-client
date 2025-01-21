@@ -286,10 +286,12 @@ const ArticleBodyContent = (props) => {
       />
 
       {!isDesktopClient &&
-        showText &&
-        !firstLoad &&
-        campaigns.length > 0 &&
-        !isFrame && <Banner />}
+      showText &&
+      !firstLoad &&
+      campaigns.length > 0 &&
+      !isFrame ? (
+        <Banner />
+      ) : null}
     </>
   );
 };

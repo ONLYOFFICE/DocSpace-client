@@ -28,6 +28,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
+
 const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
@@ -101,7 +103,7 @@ const beforeBuild = async (
   localesFiles.forEach((file) => {
     const splitPath = file.path.split(path.sep);
 
-    const length = splitPath.length;
+    const { length } = splitPath;
 
     const url = [
       splitPath[length - 3],
@@ -122,7 +124,7 @@ const beforeBuild = async (
     const splitted = lng.split("-");
 
     if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
-      language = splitted[0];
+      [language] = splitted;
     }
 
     truthLng.set(language, language.replaceAll("-", ""));

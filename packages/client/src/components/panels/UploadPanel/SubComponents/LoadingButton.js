@@ -72,7 +72,7 @@ const LoadingButton = (props) => {
           className="loading-button"
           isConversion={isConversion}
         >
-          {!inConversion && <>&times;</>}
+          {!inConversion ? <>&times;</> : null}
         </StyledLoadingButton>
       </StyledCircle>
     </ColorTheme>

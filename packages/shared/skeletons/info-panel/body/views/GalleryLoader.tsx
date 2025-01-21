@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import {
-  StyledGalleryLoader,
-  StyledGalleryProperty,
-  StyledGallerySubtitleLoader,
-} from "../body.styled";
 import { propertyGalleryDimensions } from "../body.constant";
+import styles from "../Body.module.scss";
 
 const GalleryLoader = () => {
   return (
-    <StyledGalleryLoader>
+    <div className={styles.galleryLoader} data-testid="gallery-loader">
       <RectangleSkeleton
         className="thumbnail"
         width="360.2px"
@@ -42,29 +40,29 @@ const GalleryLoader = () => {
         borderRadius="3px"
       />
 
-      <StyledGallerySubtitleLoader>
+      <div className={styles.gallerySubtitleLoader}>
         <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledGallerySubtitleLoader>
+      </div>
 
-      <StyledGalleryProperty>
-        {propertyGalleryDimensions.map((property) => [
-          <RectangleSkeleton
-            key={property.propertyTitle}
-            className="property-title"
-            width={property.propertyTitle}
-            height="20px"
-            borderRadius="3px"
-          />,
-          <RectangleSkeleton
-            key={property.propertyContent}
-            className="property-content"
-            width={property.propertyContent}
-            height="20px"
-            borderRadius="3px"
-          />,
-        ])}
-      </StyledGalleryProperty>
-    </StyledGalleryLoader>
+      <div className={styles.galleryProperty}>
+        {propertyGalleryDimensions.map((property) => (
+          <React.Fragment key={property.propertyTitle}>
+            <RectangleSkeleton
+              className="property-title"
+              width={property.propertyTitle}
+              height="20px"
+              borderRadius="3px"
+            />
+            <RectangleSkeleton
+              className="property-content"
+              width={property.propertyContent}
+              height="20px"
+              borderRadius="3px"
+            />
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
   );
 };
 

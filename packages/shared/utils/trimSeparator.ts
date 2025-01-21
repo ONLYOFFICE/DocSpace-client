@@ -27,7 +27,7 @@
 export function trimSeparator(array: ContextMenuModel[]) {
   if (!array || !Array.isArray(array) || array.length === 0) return array;
 
-  const length = array.length;
+  const { length } = array;
   const result: ContextMenuModel[] = [];
 
   for (let index = 0; index < length; index += 1) {

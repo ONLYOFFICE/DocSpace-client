@@ -24,4 +24,104 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { RadioButton } from "./RadioButton";
+import React, { useLayoutEffect } from "react";
+import classNames from "classnames";
+
+import RadioButtonReactSvg from "PUBLIC_DIR/images/radiobutton.react.svg";
+import RadioButtonCheckedReactSvg from "PUBLIC_DIR/images/radiobutton.checked.react.svg";
+
+import { IconSizeType } from "../../utils";
+
+import { Text } from "../text";
+
+import styles from "./RadioButton.module.scss";
+import { RadioButtonProps } from "./RadioButton.types";
+
+const RadiobuttonIcon = ({ isChecked }: { isChecked?: boolean }) => {
+  const newProps = {
+    "data-size": IconSizeType.medium,
+    className: styles.radioButtonIcon,
+  };
+
+  return !isChecked ? (
+    <RadioButtonReactSvg {...newProps} />
+  ) : (
+    <RadioButtonCheckedReactSvg {...newProps} />
+  );
+};
+
+const RadioButton = ({
+  isChecked,
+  classNameInput,
+  name,
+  value,
+  onChange,
+  onClick,
+  orientation = "vertical",
+  spacing,
+  isDisabled,
+  id,
+  className,
+  style,
+  fontSize,
+  fontWeight,
+  label,
+  autoFocus,
+}: RadioButtonProps) => {
+  const [isCheckedState, setIsCheckedState] = React.useState(isChecked);
+  const labelRef = React.useRef<HTMLLabelElement>(null);
+
+  React.useEffect(() => {
+    setIsCheckedState(isChecked);
+  }, [isChecked]);
+
+  const onChangeAction = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckedState((s) => !s);
+    onClick?.(e);
+  };
+
+  useLayoutEffect(() => {
+    if (!labelRef.current) return;
+
+    if (spacing) {
+      labelRef.current.style.setProperty("--radio-button-spacing", spacing);
+    }
+  }, [spacing]);
+
+  return (
+    <label
+      id={id}
+      ref={labelRef}
+      className={classNames(styles.label, className, {
+        [styles.disabled]: isDisabled,
+        [styles.orientationVertical]: orientation === "vertical",
+        [styles.orientationHorizontal]: orientation === "horizontal",
+        [styles.spacing]: spacing,
+      })}
+      style={style}
+      data-testid="radio-button"
+    >
+      <input
+        className={classNames(styles.input, classNameInput)}
+        type="radio"
+        name={name}
+        value={value}
+        checked={isCheckedState}
+        onChange={onChange || onChangeAction}
+        disabled={isDisabled}
+        autoFocus={autoFocus}
+      />
+      <RadiobuttonIcon isChecked={isCheckedState} />
+      <Text
+        as="span"
+        className={classNames(styles.radioButtonText, "radio-button_text")}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
+      >
+        {label || value}
+      </Text>
+    </label>
+  );
+};
+
+export { RadioButton };

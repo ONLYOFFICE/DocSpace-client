@@ -146,9 +146,9 @@ const FilesTileContent = ({
         view="tile"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
     </SimpleFilesTileContent>
   );

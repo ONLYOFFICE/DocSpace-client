@@ -255,22 +255,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       return <AppLoader />;
     }
 
-    // const userLoaded = !isEmpty(user);
-    // if (!userLoaded) {
-    //   return <Component {...props} />;
-    // }
-
-    // if (!userLoaded) {
-    //   console.log("PrivateRoute render Loader", rest);
-    //   return (
-    //     <Section>
-    //       <Section.SectionBody>
-    //         <Loader className="pageLoader" type="rombs" size="40px" />
-    //       </Section.SectionBody>
-    //     </Section>
-    //   );
-    // }
-
     if (
       (isPortalRenameUrl && !enablePortalRename) ||
       (isCommunity && isBrandingPage)

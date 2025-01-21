@@ -67,7 +67,7 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
       />
       <DropDown
         className="table-container_settings"
-        directionX="right"
+        directionX="left"
         open={isOpen}
         clickOutsideAction={clickOutsideAction}
         forwardedRef={ref}

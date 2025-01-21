@@ -140,9 +140,9 @@ const StatusBar = (props) => {
         ""
       )}
       {SelectedStatuses}
-      {((historyFilters.deliveryDate !== null &&
+      {(historyFilters.deliveryDate !== null &&
         historyFilters.status.length > 0) ||
-        historyFilters.status.length > 1) && (
+      historyFilters.status.length > 1 ? (
         <Link
           type="action"
           fontWeight={600}
@@ -153,7 +153,7 @@ const StatusBar = (props) => {
         >
           Clear all
         </Link>
-      )}
+      ) : null}
     </StatusBarWrapper>
   );
 };

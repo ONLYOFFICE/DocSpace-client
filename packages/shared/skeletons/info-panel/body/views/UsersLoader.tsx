@@ -24,22 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import {
-  StyledUsersLoader,
-  StyledProperty,
-  StyledSubtitleLoader,
-} from "../body.styled";
+import styles from "../Body.module.scss";
 import { propertyDimensions } from "../body.constant";
 
 const AccountsLoader = () => {
   return (
-    <StyledUsersLoader>
-      <StyledSubtitleLoader>
+    <div className={styles.usersLoader} data-testid="users-loader">
+      <div className={styles.subtitleLoader}>
         <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledSubtitleLoader>
+      </div>
 
-      <StyledProperty>
+      <div className={styles.property}>
         {propertyDimensions.map((property) => [
           <RectangleSkeleton
             key={property.titleKey}
@@ -56,8 +54,8 @@ const AccountsLoader = () => {
             borderRadius="3px"
           />,
         ])}
-      </StyledProperty>
-    </StyledUsersLoader>
+      </div>
+    </div>
   );
 };
 

@@ -24,26 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { RectangleSkeleton } from "../../../rectangle";
-import {
-  StyledDetailsLoader,
-  StyledDetailsProperty,
-  StyledDetailsSubtitleLoader,
-} from "../body.styled";
 import { propertyDetailsDimensions } from "../body.constant";
+import styles from "../Body.module.scss";
 
 const DetailsLoader = () => {
   return (
-    <StyledDetailsLoader>
-      <StyledDetailsSubtitleLoader>
+    <div className={styles.detailsLoader} data-testid="details-loader">
+      <div className={styles.detailsSubtitleLoader}>
         <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledDetailsSubtitleLoader>
+      </div>
 
-      <StyledDetailsProperty>
+      <div className={styles.detailsProperty}>
         {propertyDetailsDimensions.map((property) => (
-          <>
+          <React.Fragment key={property.propertyTitle}>
             <RectangleSkeleton
-              key={property.propertyTitle}
               className="property-title"
               width={property.propertyTitle}
               height="20px"
@@ -56,11 +53,10 @@ const DetailsLoader = () => {
               height="20px"
               borderRadius="3px"
             />
-            ,
-          </>
+          </React.Fragment>
         ))}
-      </StyledDetailsProperty>
-    </StyledDetailsLoader>
+      </div>
+    </div>
   );
 };
 

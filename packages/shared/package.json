@@ -118,9 +118,11 @@
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
+    "@testing-library/user-event": "catalog:",
     "@types/element-resize-detector": "catalog:",
     "@types/eslint": "catalog:",
     "@types/file-saver": "catalog:",
+    "@types/identity-obj-proxy": "^3",
     "@types/jest": "catalog:",
     "@types/lodash": "catalog:",
     "@types/luxon": "catalog:",
@@ -132,6 +134,7 @@
     "@types/react-window": "catalog:",
     "@types/react-window-infinite-loader": "catalog:",
     "@types/sjcl": "catalog:",
+    "@types/styled-components": "catalog:",
     "@types/utif": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
@@ -144,7 +147,7 @@
     "babel-plugin-transform-react-remove-prop-types": "catalog:",
     "babel-plugin-transform-rename-import": "catalog:",
     "babel-preset-react-app": "catalog:",
-    "copy-webpack-plugin": "6.4.1",
+    "copy-webpack-plugin": "catalog:",
     "cross-env": "catalog:",
     "css-loader": "catalog:",
     "enzyme": "catalog:",
@@ -159,6 +162,7 @@
     "eslint-plugin-react-hooks": "catalog:",
     "eslint-plugin-storybook": "catalog:",
     "i18next-http-backend": "catalog:",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "catalog:",
     "jest-environment-jsdom": "catalog:",
     "jest-styled-components": "catalog:",
@@ -174,7 +178,12 @@
     "storybook-dark-mode": "catalog:",
     "style-loader": "^3.3.4",
     "svg-inline-loader": "catalog:",
+    "ts-jest": "^29.2.5",
     "ts-migrate": "catalog:",
     "ts-node": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
   }
 }

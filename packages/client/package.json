@@ -142,6 +142,7 @@
     "html-loader": "catalog:",
     "html-webpack-plugin": "catalog:",
     "json-loader": "catalog:",
+    "mini-css-extract-plugin": "^2.9.2",
     "prettier": "catalog:",
     "sass": "catalog:",
     "sass-loader": "^12.6.0",

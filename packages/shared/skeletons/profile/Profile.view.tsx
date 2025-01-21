@@ -24,20 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { isMobile } from "../../utils";
 
 import { RectangleSkeleton } from "../rectangle";
 import { CircleSkeleton } from "../circle";
 
 import MobileViewLoader from "./Profile.mobile-view";
-import {
-  StyledWrapper,
-  MainBlock,
-  LoginBlock,
-  SocialBlock,
-  SubBlock,
-  ThemeBlock,
-} from "./Profile.styled";
+import styles from "./Profile.module.scss";
+
 import { ProfileViewLoaderProps } from "./Profile.types";
 
 export const ProfileViewLoader = ({
@@ -59,14 +55,19 @@ export const ProfileViewLoader = ({
 
   if (isMobile())
     return (
-      <div id={id} className={className} style={style}>
+      <div
+        id={id}
+        className={className}
+        style={style}
+        data-testid="profile-view"
+      >
         <MobileViewLoader {...rest} />
       </div>
     );
   return (
-    <div id={id} className={className} style={style}>
-      <StyledWrapper>
-        <MainBlock>
+    <div id={id} className={className} style={style} data-testid="profile-view">
+      <div className={styles.wrapper}>
+        <div className={styles.mainBlock}>
           <CircleSkeleton
             className="avatar"
             title={title}
@@ -213,8 +214,8 @@ export const ProfileViewLoader = ({
               />
             </div>
           </div>
-        </MainBlock>
-        <LoginBlock>
+        </div>
+        <div className={styles.loginBlock}>
           <div>
             <RectangleSkeleton
               className="title"
@@ -267,8 +268,8 @@ export const ProfileViewLoader = ({
               animate={animate}
             />
           </div>
-        </LoginBlock>
-        <SocialBlock>
+        </div>
+        <div className={styles.socialBlock}>
           <RectangleSkeleton
             title={title}
             width="237"
@@ -333,8 +334,8 @@ export const ProfileViewLoader = ({
               animate={animate}
             />
           </div>
-        </SocialBlock>
-        <SubBlock>
+        </div>
+        <div className={styles.subBlock}>
           <RectangleSkeleton
             title={title}
             width="101"
@@ -373,8 +374,8 @@ export const ProfileViewLoader = ({
               animate={animate}
             />
           </div>
-        </SubBlock>
-        <ThemeBlock>
+        </div>
+        <div className={styles.themeBlock}>
           <RectangleSkeleton
             title={title}
             width="129"
@@ -455,8 +456,8 @@ export const ProfileViewLoader = ({
               animate={animate}
             />
           </div>
-        </ThemeBlock>
-      </StyledWrapper>
+        </div>
+      </div>
     </div>
   );
 };

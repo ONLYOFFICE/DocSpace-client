@@ -140,7 +140,7 @@ const CertificateDialog = ({
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
           </Box>
-          {hasError && (
+          {hasError ? (
             <Box>
               {cerficateIssue.errors.map((err) => (
                 <Text className="ldap-error-text" key={`err-${err}`}>
@@ -148,7 +148,7 @@ const CertificateDialog = ({
                 </Text>
               ))}
             </Box>
-          )}
+          ) : null}
         </StyledCertificateDialogBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -93,21 +93,21 @@ class ThirdPartyStorageModule extends React.PureComponent {
             showDisabledItems
           />
 
-          {selectedStorageId === GoogleId && (
+          {selectedStorageId === GoogleId ? (
             <GoogleCloudStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === RackspaceId && (
+          {selectedStorageId === RackspaceId ? (
             <RackspaceStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === SelectelId && (
+          {selectedStorageId === SelectelId ? (
             <SelectelStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
 
-          {selectedStorageId === AmazonId && (
+          {selectedStorageId === AmazonId ? (
             <AmazonStorage {...rest} {...commonProps} />
-          )}
+          ) : null}
         </div>
       </StyledAutoBackup>
     );

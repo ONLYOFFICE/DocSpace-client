@@ -25,15 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { isMobile } from "react-device-detect";
 
 import ArchiveSvg32Url from "PUBLIC_DIR/images/icons/32/room/archive.svg?url";
 import CustomSvg32Url from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
 import EditingSvg32Url from "PUBLIC_DIR/images/icons/32/room/editing.svg?url";
-// import FillingFormSvg32Url from "PUBLIC_DIR/images/icons/32/room/filling.form.svg?url";
-// import ReviewSvg32Url from "PUBLIC_DIR/images/icons/32/room/review.svg?url";
-// import ViewOnlySvg32Url from "PUBLIC_DIR/images/icons/32/room/view.only.svg?url";
 import PublicRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
 import VirtualDataRoomRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg?url";
@@ -42,8 +40,8 @@ import { RoomsType } from "../../enums";
 
 import { Checkbox } from "../checkbox";
 
-import { StyledContainer, StyledLogoContainer } from "./RoomLogo.styled";
 import { RoomLogoProps } from "./RoomLogo.types";
+import styles from "./RoomLogo.module.scss";
 
 const RoomLogoPure = ({
   id,
@@ -63,12 +61,6 @@ const RoomLogoPure = ({
     }
 
     switch (type) {
-      //   case RoomsType.ReadOnlyRoom:
-      //     return ViewOnlySvg32Url;
-      //   case RoomsType.ReviewRoom:
-      //     return ReviewSvg32Url;
-      //   case RoomsType.FillingFormsRoom:
-      //     return FillingFormSvg32Url;
       case RoomsType.EditingRoom:
         return EditingSvg32Url;
       case RoomsType.CustomRoom:
@@ -93,28 +85,28 @@ const RoomLogoPure = ({
   const icon = getIcon();
 
   return (
-    <StyledContainer
+    <div
       id={id}
-      className={className}
+      className={classNames(className, styles.container)}
       style={style}
       data-testid="room-logo"
     >
-      <StyledLogoContainer
-        className="room-logo_icon-container"
+      <div
+        className={classNames("room-logo_icon-container", styles.container)}
         onClick={onSelect}
       >
         <img className="room-logo_icon" alt="room-logo" src={icon} />
-      </StyledLogoContainer>
+      </div>
 
-      {withCheckbox && (
+      {withCheckbox ? (
         <Checkbox
           className="room-logo_checkbox checkbox"
           isChecked={isChecked}
           isIndeterminate={isIndeterminate}
           onChange={onChange}
         />
-      )}
-    </StyledContainer>
+      ) : null}
+    </div>
   );
 };
 

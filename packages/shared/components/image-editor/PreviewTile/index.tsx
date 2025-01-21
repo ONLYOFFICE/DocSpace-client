@@ -49,7 +49,7 @@ const PreviewTile = ({
       </div>
       <div className="tile-tags">
         {tags.length ? (
-          <Tags columnCount={2} tags={tags} />
+          <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
         ) : (
           <Tag
             className="type_tag"

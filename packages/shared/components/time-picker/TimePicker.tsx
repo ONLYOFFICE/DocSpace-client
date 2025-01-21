@@ -193,6 +193,9 @@ const TimePicker = ({
       hasError={hasError}
       isFocused={isInputFocused}
       ref={forwardedRef}
+      data-test-id="time-picker"
+      role="group"
+      aria-label="Time picker"
     >
       <TextInput
         className={`${classNameInput}-hours-input`}
@@ -208,6 +211,8 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="hours-input"
+        aria-label="Hours"
       />
       :
       <TextInput
@@ -224,6 +229,8 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="minutes-input"
+        aria-label="Minutes"
       />
     </TimeInput>
   );

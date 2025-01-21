@@ -1765,13 +1765,14 @@ class UploadDataStore {
           ? item.finished && item.url
           : item.finished
         : true;
+      console.log(" loopFilesOperations operationId", pbData.operationId);
 
       setSecondaryProgressBarData({
-        // icon: pbData.icon,
+        icon: pbData.icon,
         operation: pbData.operation,
-        // label: pbData.label || label,
+        label: pbData.label || label,
         percent: progress,
-        visible: true,
+        // visible: true,
         alert: false,
         currentFile: item,
         operationId: pbData.operationId,

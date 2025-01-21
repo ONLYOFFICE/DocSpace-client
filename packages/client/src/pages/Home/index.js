@@ -514,11 +514,10 @@ export const Component = inject(
       itemsSelectionLength,
       itemsSelectionTitle,
       setItemsSelectionTitle,
-      secondaryActiveOperations,
+      secondaryOperationsArray: secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
     } = secondaryProgressDataStore;
-
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
       uploadDataStore;
 

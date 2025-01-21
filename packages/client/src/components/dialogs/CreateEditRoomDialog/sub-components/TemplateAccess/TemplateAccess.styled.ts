@@ -38,7 +38,7 @@ export const TemplateAccess = styled.div`
     margin-top: 12px;
 
     .template-access_link {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 
@@ -51,7 +51,7 @@ export const TemplateAccess = styled.div`
       display: flex;
 
       .template-access_avatar:not(:first-child) {
-        margin-left: -8px;
+        margin-inline-start: -8px;
         z-index: 2;
       }
 

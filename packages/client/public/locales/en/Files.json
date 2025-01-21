@@ -49,7 +49,6 @@
   "DisableNotifications": "Disable notifications",
   "SaveAsTemplate": "Save as template",
   "TemplateName": "Template Name",
-  "RoomName": "Room Name",
   "RoomTags": "Room Tags",
   "RoomTagsTooltip": "Tags will apply to the room that will be created based on this template.",
   "CreateTemplate": "Create template",

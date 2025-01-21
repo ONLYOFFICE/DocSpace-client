@@ -392,7 +392,7 @@ const SetRoomParams = ({
 
   const inputTitle =
     isTemplateSelected || isTemplate
-      ? `${t("Files:RoomName")}:`
+      ? `${t("Common:RoomName")}:`
       : `${t("Common:Name")}:`;
 
   return (

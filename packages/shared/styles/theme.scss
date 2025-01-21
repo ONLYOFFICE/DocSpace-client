@@ -1176,18 +1176,18 @@
 }
 
 .dark {
-  --toastr-close-button-color: #{$gray-dark};
-  --toastr-text-color: #{$gray-dark};
-  --toast-text-color: #{$gray-dark};
+  --toastr-close-button-color: #{$dark-gray-dark};
+  --toastr-text-color: #{$dark-gray-dark};
+  --toast-text-color: #{$dark-gray-dark};
 
   --toastr-title-success-color: #{$dark-toast-done};
-  --toastr-title-error-color: #{$dark-toast-alert};
-  --toastr-title-warning-color: #{$dark-toast-warning};
+  --toastr-title-error-color: #{$dark-toast-warning};
+  --toastr-title-warning-color: #{$dark-toast-alert};
   --toastr-title-info-color: #{$dark-toast-info};
 
   --toastr-svg-success-color: #{$dark-toast-done};
-  --toastr-svg-error-color: #{$dark-toast-alert};
-  --toastr-svg-warning-color: #{$dark-toast-warning};
+  --toastr-svg-error-color: #{$dark-toast-warning};
+  --toastr-svg-warning-color: #{$dark-toast-alert};
   --toastr-svg-info-color: #{$dark-toast-info};
 
   --toast-box-shadow: 0px 16px 16px #{$popup-shadow};
@@ -1203,8 +1203,8 @@
   --toast-info-hover-bg: #{$black};
 
   --toast-success-border: 2px solid #{$dark-toast-done};
-  --toast-error-border: 2px solid #{$dark-toast-alert};
-  --toast-warning-border: 2px solid #{$dark-toast-warning};
+  --toast-error-border: 2px solid #{$dark-toast-warning};
+  --toast-warning-border: 2px solid #{$dark-toast-alert};
   --toast-info-border: 2px solid #{$dark-toast-info};
 }
 

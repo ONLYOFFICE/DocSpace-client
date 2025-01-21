@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
-import {
-  StyledButtonScroll,
-  StyledSwitchToolbar,
-} from "../../MediaViewer.styled";
+import styles from "../../MediaViewer.module.scss";
 
 type PrevButtonProps = {
   prevClick?: VoidFunction;
@@ -38,10 +36,13 @@ type PrevButtonProps = {
 
 export const PrevButton = ({ prevClick }: PrevButtonProps) => {
   return (
-    <StyledSwitchToolbar left onClick={prevClick}>
-      <StyledButtonScroll orientation="left">
+    <div
+      className={classNames(styles.switchToolbar, styles.left)}
+      onClick={prevClick}
+    >
+      <div className={classNames(styles.buttonScroll, styles.left)}>
         <MediaPrevIcon />
-      </StyledButtonScroll>
-    </StyledSwitchToolbar>
+      </div>
+    </div>
   );
 };

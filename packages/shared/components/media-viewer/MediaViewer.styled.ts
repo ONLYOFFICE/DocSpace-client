@@ -29,46 +29,9 @@ import styled, { css } from "styled-components";
 import { globalColors } from "../../themes";
 import { injectDefaultTheme } from "../../utils";
 
-type StyledButtonScrollProps = {
-  orientation: "left" | "right";
-};
-
-type StyledSwitchToolbarProps = {
-  left?: boolean;
-  isPDFFile?: boolean;
-};
-
 type StyledViewerContainerProps = {
   visible: boolean;
 };
-
-export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
-  z-index: 307;
-  position: fixed;
-  top: calc(50% - 20px);
-
-  ${(props) => (props.orientation === "left" ? "left: 20px;" : "right: 20px;")}
-`;
-
-export const StyledSwitchToolbar = styled.div<StyledSwitchToolbarProps>`
-  height: 100%;
-  z-index: 306;
-  position: fixed;
-  width: 73px;
-  background: inherit;
-  display: block;
-  opacity: 0;
-  transition: all 0.3s;
-  top: 0;
-
-  ${(props) =>
-    props.left ? "left: 0" : props.isPDFFile ? "right: 20px" : "right: 0"};
-
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 
 export const StyledViewerContainer = styled.div.attrs(
   injectDefaultTheme,

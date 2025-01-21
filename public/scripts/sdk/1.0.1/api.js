@@ -60,6 +60,7 @@
     disableActionButton: false,
     showSettings: false,
     waiting: false,
+    noLoader: false,
     withSearch: true,
     withBreadCrumbs: true,
     withSubtitle: true,
@@ -456,8 +457,13 @@
           break;
         }
 
+        case "room-selector-old": {
+          path = `/old-sdk/room-selector`;
+          break;
+        }
+
         case "room-selector": {
-          path = `/sdk/room-selector`;
+          path = `/sdk/room-selector?locale=${config.locale}&theme=${config.theme}`;
           break;
         }
 
@@ -530,6 +536,7 @@
       iframe.style.height = config.height;
       iframe.name = `${FRAME_NAME}__#${config.frameId}`;
       iframe.id = config.frameId;
+      iframe.title = config.name;
 
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
@@ -732,59 +739,53 @@
      */
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
-      Object.entries(configFull).map(([key, value]) => {
-        if (typeof value === "string")
-          configFull[key] = value.replaceAll(rlt, "<").replaceAll(rgt, ">");
+      Object.values(configFull).forEach((value) => {
+        if (typeof value === "string") {
+          value = value.replaceAll(rlt, "<").replaceAll(rgt, ">");
+        }
       });
       this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
+      if (!target) return null;
 
-      let iframe = null;
+      const container = document.createElement("div");
+      container.id = this.config.frameId + "-container";
+      container.className = "frame-container";
+      container.style.cssText = "position:relative; width:100%; height:100%;";
 
-      if (target) {
-        iframe = this.#createIframe(this.config);
+      this.#classNames = target.className;
 
-        iframe.style.opacity = this.#frameOpacity;
-        iframe.style.zIndex = 2;
-        iframe.style.position = "absolute";
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.top = 0;
-        iframe.style.left = 0;
+      const iframe = this.#createIframe(this.config);
+      const baseStyles = {
+        opacity: this.config.noLoader ? 1 : this.#frameOpacity,
+        zIndex: 2,
+        position: this.config.noLoader ? "relative" : "absolute",
+        width: this.config.noLoader ? this.config.width : "100%",
+        height: this.config.noLoader ? this.config.height : "100%",
+        top: 0,
+        left: 0,
+      };
+      Object.assign(iframe.style, baseStyles);
 
-        const frameLoader = this.#createLoader(this.config);
-
-        this.#classNames = target.className;
-
-        const renderContainer = document.createElement("div");
-        renderContainer.id = this.config.frameId + "-container";
-        renderContainer.classList = ["frame-container"];
-        renderContainer.style.position = "relative";
-        renderContainer.style.width = "100%";
-        renderContainer.style.height = "100%";
-
-        if (!this.config.waiting || this.config.mode === "system") {
-          renderContainer.appendChild(iframe);
-        }
-
-        renderContainer.appendChild(frameLoader);
-
-        const isSelfReplace = target.parentNode.isEqualNode(
-          document.getElementById(this.config.frameId + "-container")
-        );
-
-        target && isSelfReplace
-          ? target.parentNode.replaceWith(renderContainer)
-          : target.replaceWith(renderContainer);
-
-        window.addEventListener("message", this.#onMessage, false);
-
-        this.#isConnected = true;
+      if (!this.config.waiting || this.config.mode === "system") {
+        container.appendChild(iframe);
       }
 
-      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || {};
+      if (!this.config.noLoader) {
+        container.appendChild(this.#createLoader(this.config));
+      }
 
+      const isSelfReplace = target.parentNode.isEqualNode(
+        document.getElementById(this.config.frameId + "-container")
+      );
+      const parent = isSelfReplace ? target.parentNode : target;
+      parent.replaceWith(container);
+
+      window.addEventListener("message", this.#onMessage, false);
+      this.#isConnected = true;
+
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || {};
       window.DocSpace.SDK.frames[this.config.frameId] = this;
 
       return iframe;

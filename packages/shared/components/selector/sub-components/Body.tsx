@@ -204,7 +204,7 @@ const Body = ({
     }
   }, [withInfoBar, itemsCount]);
 
-  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
+  let listHeight = bodyHeight - infoBarHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
@@ -287,9 +287,7 @@ const Body = ({
           />
 
           {isSSR && !bodyHeight ? (
-            <Scrollbar
-              style={{ height: `calc(100% - ${CONTAINER_PADDING}px)` }}
-            >
+            <Scrollbar style={{ height: "100%" }}>
               {items.map((item, index) => (
                 <div
                   key={item.id}

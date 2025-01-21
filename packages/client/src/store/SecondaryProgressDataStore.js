@@ -38,22 +38,7 @@ class SecondaryProgressDataStore {
 
   isDownload = false;
 
-  secondaryOperationsArray = [
-    {
-      label: "Duplicating",
-      operation: "duplicate",
-      alert: true,
-      completed: true,
-      items: [{ operationId: "operation_1", percent: 10, completed: false }],
-    },
-    {
-      label: "Downloading",
-      operation: "download",
-      alert: false,
-      completed: true,
-      items: [{ operationId: "operation_1", percent: 0, completed: false }],
-    },
-  ];
+  secondaryOperationsArray = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -64,7 +49,7 @@ class SecondaryProgressDataStore {
   }
 
   setSecondaryProgressBarData = (secondaryProgressData) => {
-    const { operation, alert, ...progressInfo } = secondaryProgressData;
+    const { operation, ...progressInfo } = secondaryProgressData;
 
     const operationIndex = this.secondaryOperationsArray.findIndex(
       (object) => object.operation === operation,
@@ -76,31 +61,43 @@ class SecondaryProgressDataStore {
         (item) => item.operationId === progressInfo.operationId,
       );
 
-      operationObject.alert = alert;
+      let items = [...operationObject.items];
 
       if (itemIndex !== -1) {
-        operationObject.items[itemIndex] = progressInfo;
+        items[itemIndex] = progressInfo;
       } else {
-        operationObject.items.push(progressInfo);
+        items = [...items, progressInfo];
       }
 
-      const allItemsCompleted = operationObject.items?.every(
-        (item) => item.completed,
-      );
+      const updatedItems = items;
 
-      operationObject.completed = allItemsCompleted;
+      const isCompleted = updatedItems.every((item) => item.completed);
+
+      this.secondaryOperationsArray[operationIndex] = {
+        ...operationObject,
+        alert: progressInfo.alert,
+        items: updatedItems,
+        completed: isCompleted,
+      };
+
+      console.log(
+        "this.secondaryOperationsArray",
+        this.secondaryOperationsArray,
+      );
     } else {
       const progress = {
         operation,
-        alert,
+        alert: progressInfo.alert,
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
       };
-      this.secondaryOperationsArray.push(progress);
-    }
 
-    console.log("this.secondaryOperationsArray", this.secondaryOperationsArray);
+      this.secondaryOperationsArray = [
+        ...this.secondaryOperationsArray,
+        progress,
+      ];
+    }
   };
 
   setItemsSelectionTitle = (itemsSelectionTitle) => {
@@ -144,6 +141,8 @@ class SecondaryProgressDataStore {
         this.secondaryOperationsArray.splice(operationIndex, 1);
       }
     }
+
+    console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };
 
   get alert() {

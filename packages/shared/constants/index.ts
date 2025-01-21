@@ -198,4 +198,5 @@ export const OPERATIONS_NAME = Object.freeze({
   trash: "trash",
   download: "download",
   duplicate: "duplicate",
+  exportIndex: "export-index",
 });

@@ -101,8 +101,8 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-import { checkProtocol } from "../helpers/files-helpers";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
   settingsStore;
@@ -241,7 +241,6 @@ class FilesActionStore {
       setSecondaryProgressBarData({
         operation,
         completed: true,
-        alert: false,
         operationId,
       });
     }
@@ -377,7 +376,6 @@ class FilesActionStore {
     setSecondaryProgressBarData({
       operation: operationName,
       completed: true,
-      alert: false,
       operationId,
     });
     // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
@@ -437,16 +435,12 @@ class FilesActionStore {
     }
 
     if (!folderIds.length && !fileIds.length) return;
-    // const filesCount = folderIds.length + fileIds.length;
 
     const operationName = OPERATIONS_NAME.trash;
 
     setSecondaryProgressBarData({
       operation: operationName,
-      completed: false,
       percent: 0,
-      alert: false,
-      //  filesCount,
       operationId,
     });
 
@@ -660,14 +654,11 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
 
     const operationName = OPERATIONS_NAME.download;
+
     setSecondaryProgressBarData({
       operation: operationName,
       percent: 0,
-      label,
-      alert: false,
       operationId,
-      isDownload: true,
-      completed: false,
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
@@ -699,13 +690,14 @@ class FilesActionStore {
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
-          } else {
-            setSecondaryProgressBarData({
-              operation: operationName,
-              alert: true,
-              operationId,
-            });
           }
+
+          setSecondaryProgressBarData({
+            operation: operationName,
+            alert: !item.url,
+            completed: true,
+            operationId,
+          });
 
           // setTimeout(
           //   () => clearSecondaryProgressData(operationId, "download"),
@@ -720,8 +712,8 @@ class FilesActionStore {
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
-        operationId,
         completed: true,
+        operationId,
       });
       const error = err.error;
 
@@ -1044,10 +1036,11 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
+    const operationName = OPERATIONS_NAME.duplicate;
+
     setSecondaryProgressBarData({
-      operation: "duplicate",
+      operation: operationName,
       percent: 0,
-      alert: false,
       operationId,
     });
 
@@ -1059,7 +1052,7 @@ class FilesActionStore {
 
         if (lastResult?.error) return Promise.reject(lastResult.error);
 
-        const pbData = { operation: "duplicate", operationId };
+        const pbData = { operation: operationName, operationId };
         const data = lastResult || null;
 
         const operationData = await this.uploadDataStore.loopFilesOperations(
@@ -1074,7 +1067,7 @@ class FilesActionStore {
         }
 
         setSecondaryProgressBarData({
-          operation: "duplicate",
+          operation: operationName,
           operationId,
           completed: true,
         });
@@ -1090,7 +1083,7 @@ class FilesActionStore {
         clearActiveOperations(fileIds, folderIds);
 
         setSecondaryProgressBarData({
-          operation: "duplicate",
+          operation: operationName,
           operationId,
           alert: true,
           completed: true,
@@ -3212,13 +3205,10 @@ class FilesActionStore {
 
       if (res?.percentage) {
         setSecondaryProgressBarData({
-          icon: pbData.icon,
-          visible: true,
+          operation: pbData.operation,
           percent: res.percentage,
-          label: "",
           alert: false,
           operationId: pbData.operationId,
-          filesCount: pbData.filesCount,
         });
       }
     }
@@ -3255,23 +3245,19 @@ class FilesActionStore {
       return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
     }
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
+    const operationName = OPERATIONS_NAME.exportIndex;
+
     const pbData = {
-      icon: "exportIndex",
+      operation: operationName,
       operationId: uniqueid("operation_"),
-      filesCount: 1,
     };
 
     setSecondaryProgressBarData({
-      icon: pbData.icon,
-      visible: true,
-      percent: 0,
-      label: "",
-      alert: false,
+      operation: pbData.operation,
       operationId: pbData.operationId,
-      filesCount: pbData.filesCount,
     });
 
     this.alreadyExportingRoomIndex = true;
@@ -3285,18 +3271,32 @@ class FilesActionStore {
 
       if (res.status === ExportRoomIndexTaskStatus.Failed) {
         toastr.error(res.error);
+
+        setSecondaryProgressBarData({
+          operation: pbData.operation,
+          completed: true,
+          alert: true,
+          operationId: pbData.operationId,
+        });
+
         return;
       }
 
       if (res.status === ExportRoomIndexTaskStatus.Completed) {
         this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
       }
+
+      setSecondaryProgressBarData({
+        operation: pbData.operation,
+        completed: true,
+        operationId: pbData.operationId,
+      });
     } catch (e) {
       toastr.error(e);
     } finally {
       this.alreadyExportingRoomIndex = false;
 
-      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
   };
 

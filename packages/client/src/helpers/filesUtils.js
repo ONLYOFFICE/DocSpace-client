@@ -396,6 +396,8 @@ export const getOperationsProgressTitle = (type) => {
       return "Downloading";
     case "duplicate":
       return "Duplicating";
+    case "export-index":
+      return "Export room index";
     default:
       return "";
   }

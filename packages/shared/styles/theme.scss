@@ -1446,7 +1446,7 @@
   --media-viewer-control-btn-svg: #{$white};
 
   --image-viewer-bg-black: #{$dark-black};
-  --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
+  --image-viewer-bg-transparent: #{$image-viewer-dark-color};
 
   --message-error-bg: #{$message-error-bg-color};
   --message-error-border-radius: 20px;
@@ -1462,6 +1462,26 @@
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
   --mobile-details-z-index: 307;
+
+  --bookmarks-text-color: #{$white};
+  --bookmarks-color: #{$gray-dark-strong};
+
+  --main-panel-margin-top-desktop: 85px;
+  --main-panel-margin-top-mobile: 66px;
+
+  --page-count-background: #{$brown-background};
+  --page-count-hover-background: #{$background-color};
+  --page-count-color: #{$white};
+
+  --media-viewer-background: #{$image-viewer-dark-color};
+  --media-viewer-toolbar-hover: #{$background-color};
+  --media-viewer-error-background: #{$media-viewer-dark};
+  --media-viewer-icon-color: #{$white};
+  --text-color: #{$white};
+  --sidebar-bg: #{$black};
+  --sidebar-icon-fill: #{$dark-icon-color};
+  --mobile-drawer-bg: #{$black};
+  --mobile-drawer-svg: #{$dark-icon-color};
 }
 
 .dark {
@@ -1472,7 +1492,7 @@
   --media-viewer-control-btn-svg: #{$white};
 
   --image-viewer-bg-black: #{$dark-black};
-  --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
+  --image-viewer-bg-transparent: #{$image-viewer-dark-color};
 
   --message-error-bg: #{$message-error-bg-color};
   --message-error-border-radius: 20px;
@@ -1488,6 +1508,26 @@
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
   --mobile-details-z-index: 307;
+
+  --bookmarks-text-color: #{$white};
+  --bookmarks-color: #{$gray-dark-strong};
+
+  --main-panel-margin-top-desktop: 85px;
+  --main-panel-margin-top-mobile: 66px;
+
+  --page-count-background: #{$brown-background};
+  --page-count-hover-background: #{$background-color};
+  --page-count-color: #{$white};
+
+  --media-viewer-background: #{$image-viewer-dark-color};
+  --media-viewer-toolbar-hover: #{$background-color};
+  --media-viewer-error-background: #{$media-viewer-dark};
+  --media-viewer-icon-color: #{$white};
+  --text-color: #{$white};
+  --sidebar-bg: #{$black};
+  --sidebar-icon-fill: #{$dark-icon-color};
+  --mobile-drawer-bg: #{$black};
+  --mobile-drawer-svg: #{$dark-icon-color};
 }
 
 :global(.rtl) {

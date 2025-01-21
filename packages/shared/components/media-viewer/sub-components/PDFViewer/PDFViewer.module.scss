@@ -24,22 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --media-viewer-background: rgba(55, 55, 55, 0.6);
-  --media-viewer-toolbar-hover: rgba(0, 0, 0, 0.8);
-  --media-viewer-error-background: rgba(0, 0, 0, 0.6);
-  --media-viewer-icon-color: #{$white};
-  --text-color: #{$white};
-  --sidebar-bg: #{$black};
-  --sidebar-icon-fill: #{$dark-icon-color};
-  --mobile-drawer-bg: #{$black};
-  --mobile-drawer-svg: #{$dark-icon-color};
-}
-
 .toolbarWrapper {
   @media (hover: hover) {
     .pdf-viewer_page-count:hover + .pdf-viewer_toolbar {

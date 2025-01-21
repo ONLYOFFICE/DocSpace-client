@@ -24,15 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../../../styles/mixins";
-@import "../../../../../../styles/variables/devices";
-@import "../../../../../../styles/variables/colors";
-
-:root {
-  --bookmarks-text-color: #{$white};
-  --bookmarks-color: #{$gray-dark-strong};
-}
-
 .list {
   padding-inline-start: 16px;
   padding-inline-end: 30px;

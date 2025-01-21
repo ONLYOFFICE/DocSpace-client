@@ -25,12 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @import "../../../../../../styles/variables/devices.scss";
-@import "../../../../../../styles/mixins";
-@import "../../../../../../styles/variables/colors";
-
-:root {
-  --page-count-background: var(--brown-background);
-}
 
 .pageCountWrapper {
   display: flex;
@@ -46,7 +40,7 @@
 
   background: var(--page-count-background);
 
-  color: #{$white};
+  color: var(--page-count-color);
   font-size: 12px;
   line-height: 16px;
 
@@ -54,7 +48,7 @@
 
   svg {
     path {
-      fill: #{$white};
+      fill: var(--page-count-color);
     }
   }
 
@@ -83,7 +77,7 @@
 
   @media (hover: hover) {
     &:hover {
-      background: #{$background-color};
+      background: var(--page-count-hover-background);
     }
   }
 }

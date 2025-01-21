@@ -24,14 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../../../styles/mixins";
 @import "../../../../../../styles/variables/devices";
-@import "../../../../../../styles/variables/colors";
-
-:root {
-  --main-panel-margin-top-desktop: 85px;
-  --main-panel-margin-top-mobile: 66px;
-}
 
 .wrapper {
   width: 100%;

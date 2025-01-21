@@ -1484,6 +1484,8 @@
   --mobile-drawer-svg: #{$dark-icon-color};
 
   --player-big-play-button-cursor: pointer;
+
+  --player-icon-fill: #{$white};
 }
 
 .dark {
@@ -1532,6 +1534,8 @@
   --mobile-drawer-svg: #{$dark-icon-color};
 
   --player-big-play-button-cursor: pointer;
+
+  --player-icon-fill: #{$white};
 }
 
 :global(.rtl) {

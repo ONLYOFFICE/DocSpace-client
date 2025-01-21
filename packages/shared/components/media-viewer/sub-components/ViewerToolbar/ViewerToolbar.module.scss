@@ -24,23 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
 @import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --viewer-toolbar-bg: rgba(0, 0, 0, 0.4);
-  --viewer-toolbar-hover-bg: rgba(0, 0, 0, 0.8);
-  --viewer-toolbar-icon-color: #{$white};
-  --viewer-toolbar-icon-disabled: #{$gray};
-}
-
-:root[data-theme="dark"] {
-  --viewer-toolbar-bg: rgba(0, 0, 0, 0.4);
-  --viewer-toolbar-hover-bg: rgba(0, 0, 0, 0.8);
-  --viewer-toolbar-icon-color: #{$white};
-  --viewer-toolbar-icon-disabled: #{$gray};
-}
 
 .toolbarWrapper {
   height: 48px;

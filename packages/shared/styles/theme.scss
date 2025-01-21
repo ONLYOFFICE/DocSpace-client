@@ -1529,6 +1529,11 @@
   --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
   --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
   --viewer-player-controls-tablet-bg: #{$background-color};
+
+  --viewer-toolbar-bg: #{$brown-background};
+  --viewer-toolbar-hover-bg: #{$background-color};
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
 }
 
 .dark {
@@ -1622,6 +1627,11 @@
   --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
   --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
   --viewer-player-controls-tablet-bg: #{$background-color};
+
+  --viewer-toolbar-bg: #{$brown-background};
+  --viewer-toolbar-hover-bg: #{$background-color};
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
 }
 
 :global(.rtl) {

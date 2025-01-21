@@ -1506,8 +1506,11 @@
   --player-timeline-progress-bg: #{$player-timeline-progress};
   --player-timeline-thumb-bg: #{$white};
   --player-timeline-time-color: #{$white};
-  --player-timeline-input-bg: #{$player-timeline-input};
+  --player-timeline-input-bg: #{$player-background};
   --player-timeline-bg: #{$white};
+
+  --volume-control-background: #{$player-background};
+  --volume-control-slider: #{$white};
 }
 
 .dark {
@@ -1578,8 +1581,11 @@
   --player-timeline-progress-bg: #{$player-timeline-progress};
   --player-timeline-thumb-bg: #{$white};
   --player-timeline-time-color: #{$white};
-  --player-timeline-input-bg: #{$player-timeline-input};
+  --player-timeline-input-bg: #{$player-background};
   --player-timeline-bg: #{$white};
+
+  --volume-control-background: #{$player-background};
+  --volume-control-slider: #{$white};
 }
 
 :global(.rtl) {

@@ -26,17 +26,6 @@
 
 @import "../../../../styles/variables/devices";
 @import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --volume-control-background: rgba(255, 255, 255, 0.3);
-  --volume-control-slider: #{$white};
-}
-
-:root[data-theme="dark"] {
-  --volume-control-background: rgba(255, 255, 255, 0.3);
-  --volume-control-slider: #{$white};
-}
 
 .playerVolumeControlWrapper {
   display: flex;

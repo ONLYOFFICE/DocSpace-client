@@ -31,25 +31,13 @@ import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { classNames, isMobile, isDesktop } from "../../../utils";
-import { AsideHeader } from "../../aside";
+import { isMobile, isDesktop, classNames } from "../../../utils";
+import { AsideHeader } from "../../aside-header";
 
 import { FormFillingTipsState } from "../../../enums";
+import styles from "./Guid.module.scss";
+import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
 
-import {
-  Content,
-  StyledBody,
-  StyledFooter,
-} from "../../modal-dialog/ModalDialog.styled";
-
-import {
-  StyledClipped,
-  StyledDialog,
-  StyledGuidBackdrop,
-  StyledTipsCircle,
-} from "./Guid.styled";
-
-import { ModalDialogType } from "../../modal-dialog";
 import { getHeaderText } from "./Guid.utils";
 import { GuidProps } from "./Guid.types";
 
@@ -66,7 +54,7 @@ const Guid = ({
 }: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
-  const [modalBottom, setModalBottom] = React.useState<null | number>(null);
+  const [modalTop, setModalTop] = React.useState<null | number>(null);
   const [directionX, setDirectionX] = React.useState<null | string>("left");
 
   const theme = useTheme();
@@ -92,12 +80,14 @@ const Guid = ({
     setFormFillingTipsNumber(formFillingTipsNumber - 1);
   };
 
-  let tipsCircle = [];
+  const tipsCircle = [];
 
   for (let i = 1; i < 6; i++) {
     tipsCircle.push(
-      <StyledTipsCircle
-        isSelected={i === formFillingTipsNumber}
+      <div
+        className={classNames(styles.tipsCircle, {
+          [styles.isSelected]: i === formFillingTipsNumber,
+        })}
         key={`tips_circle_${i}`}
       />,
     );
@@ -114,11 +104,9 @@ const Guid = ({
     }
 
     if (screenHeight < position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT) {
-      return setModalBottom(
-        position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT,
-      );
+      return setModalTop(position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT);
     }
-    setModalBottom(position.bottom + GUID_MODAL_MARGIN);
+    setModalTop(position.bottom + GUID_MODAL_MARGIN);
   };
 
   React.useEffect(() => {
@@ -139,30 +127,64 @@ const Guid = ({
     onClose();
   }
 
+  const dialogClassName = classNames(
+    styles.dialog,
+    "not-selectable",
+    "dialog",
+    {
+      [styles.directionLeft]: directionX === "left",
+      [styles.directionRight]: directionX === "right",
+    },
+  );
+
+  const dialogStyles: React.CSSProperties = {
+    ["--manual-x" as string]:
+      directionX === "left"
+        ? isLastTip && !isDesktop()
+          ? `${position.left - MODAL_WIDTH}px`
+          : "250px"
+        : "20px",
+    top: `${modalTop}px`,
+  };
+
+  const contentClassName = classNames(styles.content, {
+    [styles.visible]: true,
+    [styles.displayTypeModal]: "modal",
+    [styles.autoMaxHeight]: true,
+  });
+
+  const bodyClassName = classNames(modalStyles.body, "modal-body", {
+    [styles.displayTypeModal]: "modal",
+  });
+
+  const clippedStyles: React.CSSProperties = {
+    ["--backdrop-filter-value" as string]: theme.isBase
+      ? "contrast(200%)"
+      : "contrast(0.73)",
+    left: `${position.left}px`,
+    top: `${position.top}px`,
+    width: position.width
+      ? `${position.width}px`
+      : infoPanelVisible
+        ? "calc(100% - 650px)"
+        : "100%",
+    height: `${position.height}px`,
+  };
+
   return (
-    <div>
-      <StyledGuidBackdrop onClick={onCloseBackdrop} />
-      <StyledClipped
-        isBase={theme.isBase}
-        className="guid-element"
-        position={position}
-        infoPanelVisible={infoPanelVisible}
+    <div className="guidance">
+      <div
+        className={classNames(styles.guidBackdrop)}
+        onClick={onCloseBackdrop}
       />
-      <StyledDialog
+      <div className={classNames(styles.guidElement)} style={clippedStyles} />
+      <div
         id="modal-onMouseDown-close"
-        bottom={modalBottom}
-        left={isLastTip && !isDesktop() ? position.left - MODAL_WIDTH : null}
-        directionX={directionX}
-        className={
-          classNames(["modalOnCloseBacdrop", "not-selectable", "dialog"]) || ""
-        }
+        role="dialog"
+        className={dialogClassName}
+        style={dialogStyles}
       >
-        <Content
-          id="modal-dialog"
-          visible
-          currentDisplayType={ModalDialogType.modal}
-          autoMaxHeight
-        >
+        <div id="modal-dialog" className={contentClassName}>
           <AsideHeader
             id="modal-header-swipe"
             className={classNames(["modal-header"]) || "modal-header"}
@@ -170,10 +192,7 @@ const Guid = ({
             onCloseClick={onClose}
           />
 
-          <StyledBody
-            className={classNames(["modal-body"]) || "modal-body"}
-            currentDisplayType={ModalDialogType.modal}
-          >
+          <div className={bodyClassName}>
             <Text
               className="tips-description"
               fontWeight="400"
@@ -183,37 +202,37 @@ const Guid = ({
               {" "}
               {modalText?.description}
             </Text>
-          </StyledBody>
+          </div>
 
-          <StyledFooter
-            className={classNames(["modal-footer"]) || "modal-footer"}
+          <div
+            className={
+              classNames(modalStyles.footer, ["modal-footer"]) || "modal-footer"
+            }
           >
-            <>
-              <div className="circle-container">{tipsCircle}</div>
-              <div className="button-container">
-                {formFillingTipsNumber !== FormFillingTipsState.Starting && (
-                  <Button
-                    id="form-filling_tips_back"
-                    key="TipsBack"
-                    label={t("Common:Back")}
-                    size={ButtonSize.extraSmall}
-                    onClick={onPrevTips}
-                  />
-                )}
-
+            <div className="circle-container">{tipsCircle}</div>
+            <div className="button-container">
+              {formFillingTipsNumber !== FormFillingTipsState.Starting ? (
                 <Button
-                  id="form-filling_tips_next"
-                  key="TipsNext"
-                  primary
-                  label={isLastTip ? t("Common:GotIt") : t("Common:Next")}
+                  id="form-filling_tips_back"
+                  key="TipsBack"
+                  label={t("Common:Back")}
                   size={ButtonSize.extraSmall}
-                  onClick={onNextTips}
+                  onClick={onPrevTips}
                 />
-              </div>
-            </>
-          </StyledFooter>
-        </Content>
-      </StyledDialog>
+              ) : null}
+
+              <Button
+                id="form-filling_tips_next"
+                key="TipsNext"
+                primary
+                label={isLastTip ? t("Common:GotIt") : t("Common:Next")}
+                size={ButtonSize.extraSmall}
+                onClick={onNextTips}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

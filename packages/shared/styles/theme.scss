@@ -1317,6 +1317,18 @@
 }
 
 .light {
+  --form-filling-tips-circle-selected-background-color: #{$white};
+  --form-filling-tips-circle-background-color: #{$gray-light-mid};
+  --form-filling-tips-circle-border: 3px solid #{$light-second-main};
+}
+
+.dark {
+  --form-filling-tips-circle-selected-background-color: #{$black};
+  --form-filling-tips-circle-background-color: #{$gray-dark-mid};
+  --form-filling-tips-circle-border: 3px solid #{$light-second-main};
+}
+
+.light {
   // Input colors
   --input-bg: #{$white};
   --input-color: #{$black};

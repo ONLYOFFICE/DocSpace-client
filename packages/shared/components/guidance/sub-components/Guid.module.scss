@@ -1,0 +1,135 @@
+@import "../../../styles/variables/index.scss";
+@import "../../../styles/variables/_colors.scss";
+@import "../../../styles/_mixins.scss";
+
+.content {
+  box-sizing: border-box;
+  position: relative;
+
+  background-color: var(--modal-dialog-bg-color);
+  color: var(--modal-dialog-text-color);
+  padding: 0 0 -16px;
+
+  &.displayTypeModal {
+    padding: 0;
+    height: auto;
+    max-height: 280px;
+    width: 430px;
+    border-radius: 6px;
+
+    &.autoMaxHeight {
+      max-height: unset;
+    }
+
+    @include mobile {
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+      border-radius: 6px 6px 0 0;
+
+      &.visible {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 430px;
+  margin: 0 auto;
+  min-height: auto;
+  position: absolute;
+  border-radius: 11px;
+
+  &.directionLeft {
+    left: var(--manual-x);
+  }
+
+  &.directionRight {
+    right: var(--manual-x);
+  }
+}
+
+
+:global {
+  .modal-header {
+    //   margin-bottom: 0px !important;
+    margin: 0 18px;
+    height: 54px;
+    min-height: 54px;
+
+    &::after {
+      border: none !important;
+    }
+
+    .header-component {
+      font-size: 16px;
+    }
+  }
+
+  .modal-body {
+    padding: 0px 18px 0px;
+  }
+
+  .modal-footer {
+    justify-content: space-between;
+    margin-bottom: 0px !important;
+    padding: 12px 20px 20px;
+  }
+
+  .button-container {
+    gap: 8px;
+    display: flex;
+  }
+
+  .circle-container {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.guidElement {
+  position: absolute;
+  border-radius: 7px;
+  backdrop-filter: var(--backdrop-filter-value);
+}
+
+.guidBackdrop {
+  display: block;
+  height: 100%;
+  min-height: fill-available;
+  max-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: var(--backdrop-background-color);
+
+  @include mobile {
+    position: absolute;
+  }
+
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+
+.tipsCircle {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--form-filling-tips-circle-background-color);
+
+  &.isSelected {
+    border: var(--form-filling-tips-circle-border);
+    background-color: var(--form-filling-tips-circle-selected-background-color);
+  }
+}

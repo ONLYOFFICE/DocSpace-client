@@ -29,10 +29,10 @@
   width: 100%;
   max-width: 1200px;
   padding: 8px 12px;
-  background: var(--toast-warning-bg);
+  background: var(--toast-error-bg);
   box-shadow: var(--toast-box-shadow);
   border-radius: 6px;
-  border: var(--toast-warning-border);
+  border: var(--toast-error-border);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -51,7 +51,7 @@
 
   svg {
     path {
-      fill: var(--toastr-svg-warning-color);
+      fill: var(--toastr-svg-error-color);
     }
   }
 }

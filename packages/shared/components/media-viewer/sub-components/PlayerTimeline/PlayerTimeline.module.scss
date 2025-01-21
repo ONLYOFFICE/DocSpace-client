@@ -26,15 +26,6 @@
 
 @import "../../../../styles/variables/devices";
 @import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --player-timeline-hover-bg: rgba(255, 255, 255, 0.5);
-  --player-timeline-progress-bg: rgba(255, 255, 255, 0.4);
-  --player-timeline-thumb-bg: #{$white};
-  --player-timeline-time-color: #{$white};
-  --player-timeline-input-bg: rgba(255, 255, 255, 0.3);
-}
 
 @mixin mobileStyles {
   margin-top: 16px;
@@ -45,7 +36,7 @@
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #{$white};
+    background: var(--player-timeline-bg);
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -58,7 +49,7 @@
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #{$white};
+    background: var(--player-timeline-bg);
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -72,7 +63,7 @@
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #{$white};
+    background: var(--player-timeline-bg);
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -152,7 +143,10 @@
     border-radius: 5px;
 
     background: var(--player-timeline-input-bg);
-    background-image: linear-gradient(#{$white}, #{$white});
+    background-image: linear-gradient(
+      var(--player-timeline-bg),
+      var(--player-timeline-bg)
+    );
     background-repeat: no-repeat;
 
     z-index: 1;
@@ -171,7 +165,7 @@
       -webkit-appearance: none;
       visibility: hidden;
       opacity: 0;
-      background: #{$white};
+      background: var(--player-timeline-bg);
 
       transition:
         opacity 0.3s ease 0s,
@@ -184,7 +178,7 @@
       -webkit-appearance: none;
       visibility: hidden;
       opacity: 0;
-      background: #{$white};
+      background: var(--player-timeline-bg);
       transition:
         opacity 0.3s ease 0s,
         visibility 0.3s ease 0s;
@@ -196,7 +190,7 @@
       -webkit-appearance: none;
       visibility: hidden;
       opacity: 0;
-      background: #{$white};
+      background: var(--player-timeline-bg);
       transition:
         opacity 0.3s ease 0s,
         visibility 0.3s ease 0s;

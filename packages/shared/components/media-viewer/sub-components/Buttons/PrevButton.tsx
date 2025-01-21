@@ -24,49 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+import React from "react";
+import classNames from "classnames";
 
-.buttonScroll {
-  z-index: 307;
-  position: fixed;
-  top: calc(50% - 20px);
+import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
+import styles from "./Buttons.module.scss";
 
-  &.left {
-    left: 20px;
-  }
+type PrevButtonProps = {
+  prevClick?: VoidFunction;
+};
 
-  &.right {
-    right: 20px;
-  }
-}
-
-.switchToolbar {
-  height: 100%;
-  z-index: 306;
-  position: fixed;
-  width: 73px;
-  background: inherit;
-  display: block;
-  opacity: 0;
-  transition: all 0.3s;
-  top: 0;
-
-  &.left {
-    left: 0;
-  }
-
-  &.right {
-    right: 0;
-  }
-
-  &.isPDFFile {
-    right: 20px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-}
+export const PrevButton = ({ prevClick }: PrevButtonProps) => {
+  return (
+    <div
+      className={classNames(styles.switchToolbar, styles.left)}
+      onClick={prevClick}
+    >
+      <div className={classNames(styles.buttonScroll, styles.left)}>
+        <MediaPrevIcon />
+      </div>
+    </div>
+  );
+};

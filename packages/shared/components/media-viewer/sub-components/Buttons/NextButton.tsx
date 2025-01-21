@@ -27,21 +27,25 @@
 import React from "react";
 import classNames from "classnames";
 
-import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
-import styles from "../../MediaViewer.module.scss";
+import MediaNextIcon from "PUBLIC_DIR/images/viewer.next.react.svg";
+import styles from "./Buttons.module.scss";
 
-type PrevButtonProps = {
-  prevClick?: VoidFunction;
+type NextButtonProps = {
+  nextClick?: VoidFunction;
+  isPDFFile?: boolean;
 };
 
-export const PrevButton = ({ prevClick }: PrevButtonProps) => {
+export const NextButton = ({ nextClick, isPDFFile }: NextButtonProps) => {
   return (
     <div
-      className={classNames(styles.switchToolbar, styles.left)}
-      onClick={prevClick}
+      className={classNames(styles.switchToolbar, {
+        [styles.right]: !isPDFFile,
+        [styles.isPDFFile]: isPDFFile,
+      })}
+      onClick={nextClick}
     >
-      <div className={classNames(styles.buttonScroll, styles.left)}>
-        <MediaPrevIcon />
+      <div className={classNames(styles.buttonScroll, styles.right)}>
+        <MediaNextIcon />
       </div>
     </div>
   );

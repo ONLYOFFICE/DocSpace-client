@@ -38,8 +38,8 @@ import type { ContextMenuRefType } from "../../../context-menu";
 import { isHeic, isTiff } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";
 
-import { NextButton } from "../NextButton";
-import { PrevButton } from "../PrevButton";
+import { NextButton } from "../Buttons/NextButton";
+import { PrevButton } from "../Buttons/PrevButton";
 import { ImageViewer } from "../ImageViewer";
 import { MobileDetails } from "../MobileDetails";
 import { DesktopDetails } from "../DesktopDetails";

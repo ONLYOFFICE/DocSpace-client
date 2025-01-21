@@ -1447,6 +1447,14 @@
 
   --image-viewer-bg-black: #{$dark-black};
   --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
+
+  --message-error-bg: #{$message-error-bg-color};
+  --message-error-border-radius: 20px;
+  --message-error-padding: 20px 24px;
+  --message-error-text-color: #{$white};
+  --message-error-toolbar-background: #{$brown-background};
+  --message-error-toolbar-hover-background: #{$background-color};
+  --message-error-svg: #{$white};
 }
 
 .dark {
@@ -1458,6 +1466,14 @@
 
   --image-viewer-bg-black: #{$dark-black};
   --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
+
+  --message-error-bg: #{$message-error-bg-color};
+  --message-error-border-radius: 20px;
+  --message-error-padding: 20px 24px;
+  --message-error-text-color: #{$white};
+  --message-error-toolbar-background: #{$brown-background};
+  --message-error-toolbar-hover-background: #{$background-color};
+  --message-error-svg: #{$white};
 }
 
 :global(.rtl) {

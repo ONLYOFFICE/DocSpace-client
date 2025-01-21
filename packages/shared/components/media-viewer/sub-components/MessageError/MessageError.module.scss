@@ -24,17 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/colors";
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/_mixins";
-
-:root {
-  --message-error-bg: rgba(0, 0, 0, 0.7);
-  --message-error-border-radius: 20px;
-  --message-error-padding: 20px 24px;
-  --message-error-text-color: var(--white);
-}
-
 .mediaError {
   position: fixed;
   z-index: 1006;
@@ -73,20 +62,20 @@
   padding: 10px 24px;
   border-radius: 18px;
 
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--message-error-toolbar-background);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--message-error-toolbar-hover-background);
   }
 
   svg {
     path {
-      fill: white;
+      fill: var(--message-error-svg);
     }
   }
 
   rect: {
-    stroke: white;
+    stroke: var(--message-error-svg);
   }
 
   .toolbar-item {
@@ -99,12 +88,4 @@
       cursor: pointer;
     }
   }
-
-  // @include tablet-and-below {
-  //   bottom: 16px;
-  // }
-
-  // @include mobile {
-  //   bottom: 8px;
-  // }
 }

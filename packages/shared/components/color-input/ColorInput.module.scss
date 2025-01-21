@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,58 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { commonInputStyles, injectDefaultTheme } from "../../utils";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
+@import "../../styles/common-input-styles.scss";
 
-export const Wrapper = styled.div.attrs(injectDefaultTheme)`
+.wrapper {
   position: relative;
-  .hex-value {
-    ${commonInputStyles}
-    box-sizing: border-box;
-    height: 32px;
-    padding: 6px 8px;
+}
 
-    :focus-visible {
-      outline: none;
-    }
+.hexValue {
+  @include common-input-styles;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 6px 8px;
+
+  :focus-visible {
+    outline: none;
   }
+}
 
-  .drop-down-item-hex {
-    cursor: auto;
-    background: ${(props) => props.theme.dropDown.background};
-  }
-`;
+.dropDownItemHex {
+  cursor: auto;
+  background: var(--dropdown-background);
+}
 
-export const InputWrapper = styled.div.attrs(injectDefaultTheme)<{
-  scale?: boolean;
-}>`
+.inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
+  width: fit-content;
 
-  width: ${(props) => (props.scale ? "100%" : "fit-content")};
-
-  input {
-    font-family: ${(props) => props.theme.fontFamily};
+  &.scale {
+    width: 100%;
   }
-`;
+}
 
-export const ColorBlock = styled.span<{ isDisabled?: boolean }>`
+.colorBlock {
   position: absolute;
   inset-inline-end: 8px;
   cursor: pointer;
-
   width: 20px;
   height: 20px;
-
   border-radius: 2px;
+  background-color: var(--block-color);
 
-  background-color: ${(props) => props.color};
-
-  ${(props) =>
-    props.isDisabled &&
-    css`
-      cursor: auto;
-      pointer-events: none;
-    `}
-`;
+  &.disabled {
+    cursor: auto;
+    pointer-events: none;
+  }
+}

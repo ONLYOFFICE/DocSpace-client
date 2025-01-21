@@ -26,14 +26,15 @@
 
 import { useState } from "react";
 import { HexColorInput } from "react-colorful";
+import classNames from "classnames";
 
-import { Wrapper, InputWrapper, ColorBlock } from "./ColorInput.styled";
 import { DropDownItem } from "../drop-down-item";
 import { DropDown } from "../drop-down";
 
 import { ColorInputProps } from "./ColorInput.types";
 import { ColorPicker } from "../color-picker";
 import { globalColors } from "../../themes";
+import styles from "./ColorInput.module.scss";
 
 const ColorInput = ({
   className,
@@ -58,30 +59,40 @@ const ColorInput = ({
     handleChange?.(value);
     setColor(value);
   };
+
+  const colorBlockStyles = {
+    "--block-color": color,
+  } as React.CSSProperties;
+
   return (
-    <Wrapper
+    <div
       data-testid="color-input"
-      className={className}
+      className={classNames(styles.wrapper, className)}
       id={id}
-      size={size}
-      scale={scale}
-      isDisabled={isDisabled}
-      hasError={hasError}
-      hasWarning={hasWarning}
     >
-      <InputWrapper scale={scale}>
+      <div
+        className={classNames(styles.inputWrapper, { [styles.scale]: scale })}
+      >
         <HexColorInput
-          className="hex-value"
+          className={styles.hexValue}
           prefixed
           color={color.toUpperCase()}
           onChange={onChange}
+          data-size={size}
+          data-error={hasError ? "true" : undefined}
+          data-warning={hasWarning ? "true" : undefined}
+          data-scale={scale ? "true" : undefined}
+          data-disabled={isDisabled ? "true" : undefined}
+          disabled={isDisabled}
         />
-        <ColorBlock
-          color={color}
+        <span
+          className={classNames(styles.colorBlock, {
+            [styles.disabled]: isDisabled,
+          })}
+          style={colorBlockStyles}
           onClick={togglePicker}
-          isDisabled={isDisabled}
         />
-      </InputWrapper>
+      </div>
 
       <DropDown
         directionX="left"
@@ -91,7 +102,7 @@ const ColorInput = ({
         open={isPickerOpen}
         clickOutsideAction={closePicker}
       >
-        <DropDownItem className="drop-down-item-hex">
+        <DropDownItem className={styles.dropDownItemHex}>
           <ColorPicker
             appliedColor={color}
             handleChange={onChange}
@@ -99,7 +110,7 @@ const ColorInput = ({
           />
         </DropDownItem>
       </DropDown>
-    </Wrapper>
+    </div>
   );
 };
 

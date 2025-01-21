@@ -93,7 +93,7 @@ const Guid = ({
     );
   }
 
-  const onResize = () => {
+  const onResize = React.useCallback(() => {
     const screenHeight = document.documentElement.clientHeight;
     const screenWidth = document.documentElement.clientWidth;
 
@@ -107,7 +107,7 @@ const Guid = ({
       return setModalTop(position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT);
     }
     setModalTop(position.bottom + GUID_MODAL_MARGIN);
-  };
+  }, [position.bottom, position.left, position.top]);
 
   React.useEffect(() => {
     onResize();

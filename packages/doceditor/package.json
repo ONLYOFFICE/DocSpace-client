@@ -25,7 +25,12 @@
     "react-i18next": "catalog:",
     "sass": "catalog:",
     "styled-components": "catalog:",
-    "ts-pattern": "catalog:"
+    "ts-pattern": "catalog:",
+    "@serdnam/pino-cloudwatch-transport": "catalog:",
+    "nconf": "catalog:",
+    "pino": "catalog:",
+    "pino-pretty": "catalog:",
+    "pino-roll": "catalog:"
   },
   "devDependencies": {
     "@svgr/webpack": "catalog:",

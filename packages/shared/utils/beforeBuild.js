@@ -38,7 +38,14 @@ let appSettings = null;
 
 try {
   // @ts-expect-error path is correct
-  appSettings = require("../../../../buildtools/config/appsettings.json");
+  /* eslint-disable-next-line import/no-unresolved */
+  const appSettingsPath = path.resolve(
+    __dirname,
+    "../../../../buildtools/config/appsettings.json",
+  );
+  appSettings = fs.existsSync(appSettingsPath)
+    ? require("../../../../buildtools/config/appsettings.json")
+    : null;
 } catch (e) {
   console.log(e);
 }

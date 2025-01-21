@@ -46,6 +46,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
     isPrimaryButton = true,
     isEditor = false,
     className,
+    hideLogo = false,
     ...rest
   } = props;
 
@@ -60,7 +61,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
         )}
         data-testid="ErrorContainer"
       >
-        <PortalLogo isResizable />
+        {!hideLogo ? <PortalLogo isResizable /> : null}
         <div id="container-inner">
           <svg
             id="background"

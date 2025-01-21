@@ -26,7 +26,6 @@
 
 /* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
 import moment from "moment";
 import classNames from "classnames";
 import { Scrollbar } from "../scrollbar";
@@ -52,8 +51,6 @@ const Calendar = ({
   isScroll = false,
 }: CalendarProps) => {
   moment.locale(locale);
-
-  const theme = useTheme();
 
   const handleDateChange = (date: moment.Moment) => {
     const formattedDate = moment(

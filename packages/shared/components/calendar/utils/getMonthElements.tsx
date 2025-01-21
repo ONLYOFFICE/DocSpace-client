@@ -40,7 +40,6 @@ export const getMonthElements = (
   selectedDate: moment.Moment,
   minDate: moment.Moment,
   maxDate: moment.Moment,
-  isMobile: boolean,
 ) => {
   const onDateClick = (dateString: string) => {
     setObservedDate(() =>

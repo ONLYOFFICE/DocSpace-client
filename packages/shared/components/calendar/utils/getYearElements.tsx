@@ -29,7 +29,6 @@ import moment from "moment";
 import classNames from "classnames";
 
 import styles from "../Calendar.module.scss";
-import { ButtonDelete } from "components/image-editor";
 
 export const getYearElements = (
   years: string[],
@@ -38,7 +37,6 @@ export const getYearElements = (
   selectedDate: moment.Moment,
   minDate: moment.Moment,
   maxDate: moment.Moment,
-  isMobile: boolean,
 ) => {
   const onDateClick = (year: string) => {
     setObservedDate((prevObservedDate) =>

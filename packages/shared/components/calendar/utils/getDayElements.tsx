@@ -37,7 +37,6 @@ export const getDayElements = (
   handleDateChange: (date: moment.Moment) => void,
   minDate: moment.Moment,
   maxDate: moment.Moment,
-  isMobile: boolean,
 ) => {
   const dateFormat = "YYYY-MM-D";
 

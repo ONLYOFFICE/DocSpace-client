@@ -26,11 +26,6 @@
 
 @import "../../../../styles/variables/devices";
 @import "../../../../styles/mixins";
-@import "../../../../styles/variables/colors";
-
-:root {
-  --player-duration-color: #{$white};
-}
 
 .wrapper {
   width: 102px;

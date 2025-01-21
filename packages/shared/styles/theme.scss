@@ -1486,6 +1486,8 @@
   --player-big-play-button-cursor: pointer;
 
   --player-icon-fill: #{$white};
+
+  --player-duration-color: #{$white};
 }
 
 .dark {
@@ -1536,6 +1538,8 @@
   --player-big-play-button-cursor: pointer;
 
   --player-icon-fill: #{$white};
+
+  --player-duration-color: #{$white};
 }
 
 :global(.rtl) {

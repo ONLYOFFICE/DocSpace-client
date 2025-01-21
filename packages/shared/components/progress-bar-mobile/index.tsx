@@ -107,6 +107,7 @@ const ProgressBarMobile = ({
             fontSize="14px"
             fontWeight={600}
             truncate
+            color="white"
           >
             {label}
           </Text>

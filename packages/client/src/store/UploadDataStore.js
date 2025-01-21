@@ -59,6 +59,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -1580,8 +1581,7 @@ class UploadDataStore {
     operationId,
     content,
   ) => {
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      this.secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     return copyToFolder(
       destFolderId,
@@ -1592,7 +1592,7 @@ class UploadDataStore {
       content,
     )
       .then((res) => {
-        const pbData = { icon: "duplicate", operationId };
+        const pbData = { operation: OPERATIONS_NAME.copy, operationId };
         let data = null;
 
         if (res && res.length > 0) {
@@ -1615,12 +1615,12 @@ class UploadDataStore {
       })
       .catch((err) => {
         setSecondaryProgressBarData({
-          visible: true,
+          completed: true,
           alert: true,
           operationId,
         });
         this.clearActiveOperations(fileIds, folderIds);
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return Promise.reject(err);
       });
   };
@@ -1692,28 +1692,19 @@ class UploadDataStore {
   };
 
   itemOperationToFolder = (data) => {
-    const {
-      destFolderId,
-      folderIds,
-      fileIds,
-      deleteAfter,
-      isCopy,
-      translations,
-      content,
-    } = data;
+    const { destFolderId, folderIds, fileIds, deleteAfter, isCopy, content } =
+      data;
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
+
     const conflictResolveType = data.conflictResolveType
       ? data.conflictResolveType
       : ConflictResolveType.Duplicate;
 
     const operationId = uniqueid("operation_");
 
-    this.secondaryProgressDataStore.setSecondaryProgressBarData({
-      icon: isCopy ? "duplicate" : "move",
-      visible: true,
+    setSecondaryProgressBarData({
+      operation: isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move,
       percent: 0,
-      label: isCopy ? translations.copy : translations.move,
-      alert: false,
-      filesCount: this.secondaryProgressDataStore.filesCount + fileIds.length,
       operationId,
     });
 
@@ -1805,31 +1796,29 @@ class UploadDataStore {
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
     const { removeFiles } = this.filesStore;
 
-    const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
-      this.secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       !isCopy && removeFiles(fileIds, folderIds);
       this.clearActiveOperations(fileIds, folderIds);
-      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
       isMovingSelectedFolder &&
         this.navigateToNewFolderLocation(this.selectedFolderStore.id);
       this.dialogsStore.setIsFolderActions(false);
     } else {
       this.clearActiveOperations(fileIds, folderIds);
-      setSecondaryProgressBarData({
-        icon: pbData.icon,
-        label: pbData.label || label,
-        percent: 100,
-        visible: true,
-        alert: false,
-        operationId: pbData.operationId,
-      });
 
-      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
+
+    setSecondaryProgressBarData({
+      operation: pbData.operation,
+      percent: 100,
+      completed: true,
+      operationId: pbData.operationId,
+    });
   };
 
   clearActiveOperations = (fileIds = [], folderIds = []) => {

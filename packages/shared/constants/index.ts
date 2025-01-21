@@ -199,4 +199,6 @@ export const OPERATIONS_NAME = Object.freeze({
   download: "download",
   duplicate: "duplicate",
   exportIndex: "export-index",
+  copy: "copy",
+  move: "move",
 });

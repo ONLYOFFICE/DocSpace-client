@@ -113,6 +113,7 @@ const Badges = ({
   isRecentTab,
   canEditing,
   isTemplatesFolder,
+  onCreateRoom,
 }) => {
   const {
     id,
@@ -121,7 +122,6 @@ const Badges = ({
     fileExst,
     isEditing,
     isRoom,
-    onCreateRoom,
     pinned,
     isFolder,
     mute,

@@ -24,24 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/colors";
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/_mixins";
-
-:root {
-  --mobile-details-gradient-start: #{$tapHighlight-color};
-  --mobile-details-gradient-end: rgba(0, 0, 0, 0.8);
-  --mobile-details-text-color: #{$white};
-  --mobile-details-icon-color: #{$white};
-  --mobile-details-height: 53px;
-  --mobile-details-z-index: 307;
-}
-
-:root[data-theme="dark"] {
-  --mobile-details-text-color: #{$white};
-  --mobile-details-icon-color: #{$white};
-}
-
 .container {
   direction: var(--interface-direction);
   z-index: var(--mobile-details-z-index);

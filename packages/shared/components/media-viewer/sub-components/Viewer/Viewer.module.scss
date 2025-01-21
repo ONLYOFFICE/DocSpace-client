@@ -33,7 +33,7 @@
   --viewer-fill: #{$white};
   --viewer-rtl-margin-left: 10px;
   --viewer-rtl-margin-right: 10px;
-  --media-viewer-tap-highlight: #{$tapHighlight-color};
+  --media-viewer-tap-highlight: #{$tap-highlight};
 }
 
 :root[data-theme="dark"] {
@@ -41,7 +41,7 @@
   --viewer-fill: #{$white};
   --viewer-rtl-margin-left: 10px;
   --viewer-rtl-margin-right: 10px;
-  --media-viewer-tap-highlight: #{$tapHighlight-color};
+  --media-viewer-tap-highlight: #{$tap-highlight};
 }
 
 .container {

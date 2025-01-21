@@ -1455,6 +1455,13 @@
   --message-error-toolbar-background: #{$brown-background};
   --message-error-toolbar-hover-background: #{$background-color};
   --message-error-svg: #{$white};
+
+  --mobile-details-gradient-start: #{$tap-highlight};
+  --mobile-details-gradient-end: #{$background-color};
+  --mobile-details-text-color: #{$white};
+  --mobile-details-icon-color: #{$white};
+  --mobile-details-height: 53px;
+  --mobile-details-z-index: 307;
 }
 
 .dark {
@@ -1474,6 +1481,13 @@
   --message-error-toolbar-background: #{$brown-background};
   --message-error-toolbar-hover-background: #{$background-color};
   --message-error-svg: #{$white};
+
+  --mobile-details-gradient-start: #{$tap-highlight};
+  --mobile-details-gradient-end: #{$background-color};
+  --mobile-details-text-color: #{$white};
+  --mobile-details-icon-color: #{$white};
+  --mobile-details-height: 53px;
+  --mobile-details-z-index: 307;
 }
 
 :global(.rtl) {

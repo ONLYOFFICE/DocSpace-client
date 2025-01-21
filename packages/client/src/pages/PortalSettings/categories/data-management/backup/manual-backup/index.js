@@ -42,8 +42,13 @@ import {
 } from "@docspace/shared/api/settings";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  getBackupProgressInfo,
+} from "@docspace/shared/utils/common";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
 import { StyledModules, StyledManualBackup } from "../StyledBackup";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
@@ -92,7 +97,30 @@ class ManualBackup extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
+    const {
+      fetchTreeFolders,
+      rootFoldersTitles,
+      isNotPaidPeriod,
+      setDownloadingProgress,
+      setTemporaryLink,
+      t,
+    } = this.props;
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    });
 
     if (isNotPaidPeriod) {
       this.setState({
@@ -117,11 +145,13 @@ class ManualBackup extends React.Component {
   }
 
   componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
+    const { resetDownloadingProgress } = this.props;
     clearTimeout(this.timerId);
     this.timerId = null;
 
-    clearProgressInterval();
+    resetDownloadingProgress();
+
+    SocketHelper.off(SocketEvents.BackupProgress);
   }
 
   setBasicSettings = async () => {
@@ -165,21 +195,22 @@ class ManualBackup extends React.Component {
 
   onMakeTemporaryBackup = async () => {
     const {
-      getIntervalProgress,
       setDownloadingProgress,
-      t,
       clearLocalStorage,
+      setErrorInformation,
+      t,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
+
+    setErrorInformation("");
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
-      getIntervalProgress(t);
-    } catch (e) {
-      toastr.error(e);
+    } catch (err) {
+      setErrorInformation(err, t);
     }
   };
 
@@ -210,15 +241,16 @@ class ManualBackup extends React.Component {
   ) => {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
-      t,
-      getIntervalProgress,
       setDownloadingProgress,
       clearLocalStorage,
       setTemporaryLink,
       getStorageParams,
+      setErrorInformation,
+      t,
     } = this.props;
 
     clearLocalStorage();
+    setErrorInformation("");
 
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
@@ -241,9 +273,8 @@ class ManualBackup extends React.Component {
       await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
-      getIntervalProgress(t);
     } catch (err) {
-      toastr.error(err);
+      setErrorInformation(err, t);
     }
   };
 
@@ -261,6 +292,7 @@ class ManualBackup extends React.Component {
       currentColorScheme,
       pageIsDisabled,
       isBackupProgressVisible,
+      errorInformation,
     } = this.props;
     const {
       isInitialLoading,
@@ -293,6 +325,8 @@ class ManualBackup extends React.Component {
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>
+        <StatusMessage message={errorInformation} />
+
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
@@ -429,12 +463,12 @@ class ManualBackup extends React.Component {
 export default inject(
   ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
     const {
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+
       setDownloadingProgress,
       setTemporaryLink,
       // setCommonThirdPartyList,
@@ -444,6 +478,8 @@ export default inject(
       setStorageRegions,
       setConnectedThirdPartyAccount,
       isBackupProgressVisible,
+      errorInformation,
+      setErrorInformation,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -455,12 +491,12 @@ export default inject(
     return {
       isNotPaidPeriod,
       setThirdPartyStorage,
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+      errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
       setStorageRegions,
@@ -475,6 +511,7 @@ export default inject(
       currentColorScheme,
       pageIsDisabled,
       isBackupProgressVisible,
+      setErrorInformation,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

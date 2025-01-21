@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { tablet } from "../../utils";
 import { globalColors } from "../../themes";
 
 const StyledPreparationPortal = styled.div<{
@@ -33,9 +32,6 @@ const StyledPreparationPortal = styled.div<{
   isDialog?: boolean;
 }>`
   width: 100%;
-  @media ${tablet} {
-    margin-top: ${(props) => (props.isDialog ? "0px" : "48px")};
-  }
 
   #header {
     font-size: 23px;

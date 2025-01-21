@@ -245,6 +245,8 @@ const StyledRestoreBackup = styled.div`
   ${commonStyles}
   ${floatingButtonStyles}
 
+  max-width: ${TEXT_LENGTH};
+
   .restore-backup_third-party-module {
     margin-top: 16px;
 

@@ -173,7 +173,7 @@
     "react-json-pretty": "catalog:",
     "react-values": "catalog:",
     "remark-gfm": "catalog:",
-    "sass-loader": "^13.3.3",
+    "sass-loader": "catalog:",
     "serve": "catalog:",
     "storybook-dark-mode": "catalog:",
     "storybook": "catalog:",

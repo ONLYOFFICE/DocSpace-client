@@ -204,6 +204,7 @@ catalog:
   remark-gfm: 4.0.0
   resize-image: 0.1.0
   sass: 1.79.5
+  sass-loader: 16.0.4
   screenfull: 5.2.0
   serve: 14.2.3
   shx: 0.3.4

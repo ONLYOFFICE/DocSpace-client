@@ -65,7 +65,7 @@
     "mochawesome": "catalog:",
     "nodemon": "catalog:",
     "npm-run-all": "catalog:",
-    "sass-loader": "^12.6.0",
+    "sass-loader": "catalog:",
     "sass": "catalog:",
     "shx": "catalog:",
     "source-map-loader": "catalog:",

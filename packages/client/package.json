@@ -144,7 +144,7 @@
     "json-loader": "catalog:",
     "mini-css-extract-plugin": "catalog:",
     "prettier": "catalog:",
-    "sass-loader": "^12.6.0",
+    "sass-loader": "catalog:",
     "sass": "catalog:",
     "serve": "catalog:",
     "shx": "catalog:",

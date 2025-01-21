@@ -56,6 +56,7 @@ const ButtonContainer = (props) => {
     getStorageParams,
     uploadLocalFile,
     isBackupProgressVisible,
+    setErrorInformation,
   } = props;
 
   const navigate = useNavigate();
@@ -100,6 +101,8 @@ const ButtonContainer = (props) => {
       }
     }
 
+    setErrorInformation("");
+
     try {
       await startRestore(
         backupId,
@@ -119,9 +122,8 @@ const ButtonContainer = (props) => {
           "/preparation-portal",
         ),
       );
-    } catch (e) {
-      toastr.error(e);
-
+    } catch (err) {
+      setErrorInformation(err, t);
       setIsLoading(false);
     }
   };
@@ -168,6 +170,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     restoreResource,
     uploadLocalFile,
     isBackupProgressVisible,
+    setErrorInformation,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -182,5 +185,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     getStorageParams,
     restoreResource,
     isBackupProgressVisible,
+    setErrorInformation,
   };
 })(observer(ButtonContainer));

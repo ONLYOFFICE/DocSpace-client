@@ -81,7 +81,7 @@ const RestoreBackup = (props) => {
     setRestoreResource,
     buttonSize,
     standalone,
-    downloadingProgressError,
+    errorInformation,
     setDownloadingProgress,
     setTemporaryLink,
   } = props;
@@ -264,9 +264,8 @@ const RestoreBackup = (props) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
-      {downloadingProgressError ? (
-        <StatusMessage message={downloadingProgressError} />
-      ) : null}
+      <StatusMessage message={errorInformation} />
+
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}
@@ -335,7 +334,7 @@ export const Component = inject(
       setThirdPartyStorage,
       setConnectedThirdPartyAccount,
       setRestoreResource,
-      downloadingProgressError,
+      errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
     } = backup;
@@ -357,7 +356,7 @@ export const Component = inject(
       resetDownloadingProgress,
       getProgress,
       setRestoreResource,
-      downloadingProgressError,
+      errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
     };

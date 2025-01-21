@@ -114,7 +114,7 @@ class BackupStore {
 
   downloadingProgress = 100;
 
-  downloadingProgressError = "";
+  errorInformation = "";
 
   temporaryLink = null;
 
@@ -530,6 +530,17 @@ class BackupStore {
     }
   };
 
+  setErrorInformation = (err, t) => {
+    let message = "";
+    if (typeof err === "string") message = err;
+    else
+      message =
+        ("response" in err && err.response?.data?.error?.message) ||
+        ("message" in err && err.message) ||
+        "";
+    this.errorInformation = message ?? t("Common:UnexpectedError");
+  };
+
   getProgress = async (t) => {
     try {
       const response = await getBackupProgress();
@@ -543,14 +554,14 @@ class BackupStore {
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
-          if (this.downloadingProgressError) this.downloadingProgressError = "";
+          this.setErrorInformation("");
         } else {
           this.downloadingProgress = 100;
-          this.downloadingProgressError = error;
+          this.setErrorInformation(error);
         }
       }
-    } catch (e) {
-      this.downloadingProgressError = t("Common:UnexpectedError");
+    } catch (err) {
+      this.setErrorInformation(err, t);
     }
   };
 

@@ -194,16 +194,23 @@ class ManualBackup extends React.Component {
   };
 
   onMakeTemporaryBackup = async () => {
-    const { setDownloadingProgress, clearLocalStorage } = this.props;
+    const {
+      setDownloadingProgress,
+      clearLocalStorage,
+      setErrorInformation,
+      t,
+    } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
+
+    setErrorInformation("");
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
-    } catch (e) {
-      toastr.error(e);
+    } catch (err) {
+      setErrorInformation(err, t);
     }
   };
 
@@ -238,9 +245,12 @@ class ManualBackup extends React.Component {
       clearLocalStorage,
       setTemporaryLink,
       getStorageParams,
+      setErrorInformation,
+      t,
     } = this.props;
 
     clearLocalStorage();
+    setErrorInformation("");
 
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
@@ -264,7 +274,7 @@ class ManualBackup extends React.Component {
       setDownloadingProgress(1);
       setTemporaryLink("");
     } catch (err) {
-      toastr.error(err);
+      setErrorInformation(err, t);
     }
   };
 
@@ -282,7 +292,7 @@ class ManualBackup extends React.Component {
       currentColorScheme,
       pageIsDisabled,
       isBackupProgressVisible,
-      downloadingProgressError,
+      errorInformation,
     } = this.props;
     const {
       isInitialLoading,
@@ -315,9 +325,8 @@ class ManualBackup extends React.Component {
       <DataBackupLoader />
     ) : (
       <StyledManualBackup pageIsDisabled={pageIsDisabled}>
-        {downloadingProgressError ? (
-          <StatusMessage message={downloadingProgressError} />
-        ) : null}
+        <StatusMessage message={errorInformation} />
+
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
@@ -469,7 +478,8 @@ export default inject(
       setStorageRegions,
       setConnectedThirdPartyAccount,
       isBackupProgressVisible,
-      downloadingProgressError,
+      errorInformation,
+      setErrorInformation,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -486,7 +496,7 @@ export default inject(
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      downloadingProgressError,
+      errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
       setStorageRegions,
@@ -501,6 +511,7 @@ export default inject(
       currentColorScheme,
       pageIsDisabled,
       isBackupProgressVisible,
+      setErrorInformation,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

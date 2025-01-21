@@ -41,10 +41,81 @@ const StyledDangerIcon = styled(DangerToastReactSvg)`
 `;
 
 const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
+  const [isVisible, setIsVisible] = React.useState(true);
+  const [isShowComponent, setIsShowComponent] = React.useState(!!message);
+  const messageRef = React.useRef<HTMLDivElement>(null);
+  const prevMessageRef = React.useRef<string | undefined>(message);
+  const shouldShowAfterAnimationRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (prevMessageRef.current) {
+      if (!message || prevMessageRef.current !== message) {
+        setIsVisible(false);
+        shouldShowAfterAnimationRef.current = true;
+        return;
+      }
+
+      if (!shouldShowAfterAnimationRef.current) {
+        setIsVisible(true);
+        prevMessageRef.current = message;
+      }
+
+      return;
+    }
+
+    prevMessageRef.current = message;
+    if (!message) return;
+
+    setIsShowComponent(true);
+    setIsVisible(true);
+  }, [message]);
+
+  React.useEffect(() => {
+    const element = messageRef.current;
+    if (!element) return;
+
+    const handleEnd = () => {
+      const resetStates = () => {
+        shouldShowAfterAnimationRef.current = false;
+        prevMessageRef.current = message;
+      };
+
+      if (!message) {
+        setIsShowComponent(false);
+        resetStates();
+        return;
+      }
+
+      if (shouldShowAfterAnimationRef.current && prevMessageRef.current) {
+        setIsShowComponent(true);
+        setIsVisible(true);
+        resetStates();
+        return;
+      }
+
+      if (!prevMessageRef.current) {
+        setIsShowComponent(false);
+      }
+    };
+
+    element.addEventListener("animationend", handleEnd);
+    element.addEventListener("transitionend", handleEnd);
+
+    return () => {
+      element.removeEventListener("animationend", handleEnd);
+      element.removeEventListener("transitionend", handleEnd);
+    };
+  }, [message]);
+
+  if (!isShowComponent) return null;
+
   return (
-    <div className={styles.body}>
+    <div
+      ref={messageRef}
+      className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
+    >
       <StyledDangerIcon size={IconSizeType.medium} />
-      {message}
+      {prevMessageRef.current}
     </div>
   );
 };

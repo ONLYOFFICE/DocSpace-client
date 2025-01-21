@@ -62,6 +62,7 @@ const RoomsItemHeader = ({
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
+  setTemplateAccessSettingsVisible,
 }) => {
   const itemTitleRef = useRef();
 
@@ -110,6 +111,10 @@ const RoomsItemHeader = ({
       hideSelector: false,
       defaultAccess: getDefaultAccessUser(roomType),
     });
+  };
+
+  const onOpenTemplateAccessOptions = () => {
+    setTemplateAccessSettingsVisible(true);
   };
 
   const onSearchClick = () => setShowSearchBlock(true);
@@ -170,10 +175,16 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_add-user"
             className="icon"
-            title={t("Common:InviteContacts")}
+            title={
+              isTemplate
+                ? t("Files:AccessSettings")
+                : t("Common:InviteContacts")
+            }
             iconName={PersonPlusReactSvgUrl}
             isFill
-            onClick={onClickInviteUsers}
+            onClick={
+              isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers
+            }
             size={16}
           />
         )}
@@ -221,7 +232,8 @@ export default inject(
 
     const { displayFileExtension } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
-    const { setCoverSelection } = dialogsStore;
+    const { setCoverSelection, setTemplateAccessSettingsVisible } =
+      dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -260,6 +272,7 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
       updateInfoPanelSelection,
       onChangeFile,
+      setTemplateAccessSettingsVisible,
     };
   },
 )(

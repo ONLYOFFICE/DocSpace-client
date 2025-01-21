@@ -74,6 +74,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings: VoidFunction;
       inviteItems: TSelectorItem[];
       setInviteItems: (inviteItems: TSelectorItem[]) => void;
+      updateInfoPanelMembers: undefined;
     }
   | {
       isContainer?: undefined;
@@ -84,6 +85,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings?: undefined;
       inviteItems?: undefined;
       setInviteItems?: undefined;
+      updateInfoPanelMembers: (t: TTranslation) => void;
     };
 
 type TemplateAccessSettingsPanelProps = {
@@ -110,27 +112,18 @@ const TemplateAccessSettingsPanel = ({
   inviteItems,
   setInviteItems,
   onSetAccessSettings,
+  updateInfoPanelMembers,
 }: TemplateAccessSettingsPanelProps) => {
   const [accessItems, setAccessItems] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
 
-  const [hasErrors, setHasErrors] = useState(false);
-
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
   const templateId = templateItem?.id;
-
-  useEffect(() => {
-    const hasError = accessItems.some(
-      (inviteItem) => !!inviteItem.errors?.length,
-    );
-
-    setHasErrors(hasError);
-  }, [accessItems]);
 
   const setAccessItemsAction = (items) => {
     if (isContainer) setInviteItems(items);
@@ -248,6 +241,7 @@ const TemplateAccessSettingsPanel = ({
       notify: false,
       sharingMessage: "",
     })
+      .then(() => updateInfoPanelMembers(t))
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoading(false);
@@ -259,9 +253,6 @@ const TemplateAccessSettingsPanel = ({
     const items = [...accessItems, ...users];
 
     setAccessItemsAction(items);
-
-    // setInputValue("");
-    // setUsersList([]);
     onCloseUsersPanel();
   };
 
@@ -357,7 +348,7 @@ const TemplateAccessSettingsPanel = ({
           className="send-invitation"
           scale
           size={ButtonSize.normal}
-          isDisabled={hasErrors || !hasInvitedUsers || isLoading}
+          isDisabled={!hasInvitedUsers || isLoading}
           primary
           label={t("Common:SaveButton")}
           onClick={onSubmit}
@@ -451,7 +442,7 @@ const TemplateAccessSettingsPanel = ({
           scale
           size={ButtonSize.normal}
           isLoading={isLoading}
-          isDisabled={hasErrors || !hasInvitedUsers || isLoading}
+          isDisabled={!hasInvitedUsers || isLoading}
           primary
           label={t("Common:SaveButton")}
           type="submit"
@@ -482,7 +473,10 @@ export default inject(
       setIsVisible: (visible: boolean) => void;
     },
   ) => {
-    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
+    const {
+      setIsMobileHidden: setInfoPanelIsMobileHidden,
+      updateInfoPanelMembers,
+    } = infoPanelStore;
     const { selection, bufferSelection } = filesStore;
     const {
       templateAccessSettingsVisible,
@@ -498,6 +492,7 @@ export default inject(
       setIsVisible: isContainer
         ? setIsVisible
         : setTemplateAccessSettingsVisible,
+      updateInfoPanelMembers,
     };
   },
 )(

@@ -162,7 +162,12 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
+  if (
+    isPublicRoomType &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks &&
+    !infoPanelSelection.isTemplate
+  ) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
@@ -376,22 +381,19 @@ export default inject(
       setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
 
+    const { showGuestReleaseTip } = settingsStore;
+
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
-
-    const isFormRoom = roomType === RoomsType.FormRoom;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      isFormRoom;
-
-    const isPublicRoom = roomType === RoomsType.PublicRoom;
 
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
-    const { showGuestReleaseTip } = settingsStore;
+    const isFormRoom = roomType === RoomsType.FormRoom;
+    const isPublicRoom = roomType === RoomsType.PublicRoom;
+    const isCustomRoom = roomType === RoomsType.CustomRoom;
+
+    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     return {
       infoPanelSelection: infoSelection,

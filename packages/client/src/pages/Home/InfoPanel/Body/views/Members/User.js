@@ -77,6 +77,7 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
+  const hideUserRole = infoPanelSelection.isTemplate;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -319,7 +320,7 @@ const User = ({
         )}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions && !hideUserRole && (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox

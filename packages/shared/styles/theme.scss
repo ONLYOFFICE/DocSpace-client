@@ -1488,6 +1488,8 @@
   --player-icon-fill: #{$white};
 
   --player-duration-color: #{$white};
+
+  --player-fullscreen-hover-cursor: pointer;
 }
 
 .dark {
@@ -1540,6 +1542,8 @@
   --player-icon-fill: #{$white};
 
   --player-duration-color: #{$white};
+
+  --player-fullscreen-hover-cursor: pointer;
 }
 
 :global(.rtl) {

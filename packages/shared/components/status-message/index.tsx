@@ -31,6 +31,7 @@ import commonIconsStyles, {
   IconSizeType,
 } from "../../utils/common-icons-style";
 import styles from "./StatusMessage.module.scss";
+import { Text } from "../text";
 
 interface StatusMessageProps {
   message: string;
@@ -115,7 +116,7 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
       className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
     >
       <StyledDangerIcon size={IconSizeType.medium} />
-      {prevMessageRef.current}
+      <Text>{prevMessageRef.current}</Text>
     </div>
   );
 };

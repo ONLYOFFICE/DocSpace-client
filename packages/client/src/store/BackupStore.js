@@ -538,6 +538,9 @@ class BackupStore {
         ("response" in err && err.response?.data?.error?.message) ||
         ("message" in err && err.message) ||
         "";
+
+    if (err?.response?.status === 502) message = t("Common:UnexpectedError");
+
     this.errorInformation = message ?? t("Common:UnexpectedError");
   };
 

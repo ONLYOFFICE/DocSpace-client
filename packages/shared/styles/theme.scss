@@ -1176,9 +1176,9 @@
 }
 
 .dark {
-  --toastr-close-button-color: #{$white};
-  --toastr-text-color: #{$white};
-  --toast-text-color: #{$white};
+  --toastr-close-button-color: #{$gray-dark};
+  --toastr-text-color: #{$gray-dark};
+  --toast-text-color: #{$gray-dark};
 
   --toastr-title-success-color: #{$dark-toast-done};
   --toastr-title-error-color: #{$dark-toast-alert};
@@ -1436,16 +1436,6 @@
   --text-input-padding-big: 8px 16px;
   --text-input-padding-huge: 8px 20px;
   --text-input-padding-large: 11px 12px;
-}
-
-.light {
-  --status-message-bg: #{$light-toast-warning};
-  --status-message-box-shadow: 0px 5px 20px #{$menu-shadow};
-}
-
-.dark {
-  --status-message-bg: #{$dark-toast-warning};
-  --status-message-box-shadow: 0px 5px 20px #{$menu-shadow};
 }
 
 :global(.rtl) {

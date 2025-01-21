@@ -29,24 +29,30 @@
   width: 100%;
   max-width: 1200px;
   padding: 8px 12px;
-  background: var(--status-message-bg);
-  box-shadow: var(--status-message-box-shadow);
+  background: var(--toast-warning-bg);
+  box-shadow: var(--toast-box-shadow);
   border-radius: 6px;
+  border: var(--toast-warning-border);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 16px;
   color: black;
   animation: SlideIn 0.3s ease-in-out;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 
+  p {
+    color: var(--toastr-text-color);
+  }
   &.hide {
     opacity: 0;
   }
 
   svg {
-    margin-inline-end: 16px;
+    path {
+      fill: var(--toastr-svg-warning-color);
+    }
   }
 }
 

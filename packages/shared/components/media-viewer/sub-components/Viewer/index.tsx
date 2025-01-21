@@ -36,7 +36,7 @@ import { includesMethod } from "../../../../utils/typeGuards";
 import type { ContextMenuRefType } from "../../../context-menu";
 
 import { isHeic, isTiff } from "../../MediaViewer.utils";
-import { StyledViewerContainer } from "../../MediaViewer.styled";
+import styles from "./Viewer.module.scss";
 
 import { NextButton } from "../NextButton";
 import { PrevButton } from "../PrevButton";
@@ -241,7 +241,7 @@ export const Viewer = (props: ViewerProps) => {
     isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
   return (
-    <StyledViewerContainer dir="ltr" visible={visible}>
+    <div dir="ltr" data-visible={visible} className={styles.container}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails
           title={title}
@@ -340,6 +340,6 @@ export const Viewer = (props: ViewerProps) => {
           />
         )
       )}
-    </StyledViewerContainer>
+    </div>
   );
 };

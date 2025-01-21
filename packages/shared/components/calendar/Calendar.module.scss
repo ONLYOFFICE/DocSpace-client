@@ -105,6 +105,7 @@
   row-gap: 0;
 
   @include mobile {
+    width: auto;
     column-gap: 2%;
     row-gap: 9px;
   }

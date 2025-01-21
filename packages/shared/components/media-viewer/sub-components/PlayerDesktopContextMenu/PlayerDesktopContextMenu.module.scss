@@ -36,7 +36,7 @@
     cursor: pointer;
   }
 
-  svg {
+  & > svg {
     padding-inline-start: 19px;
     padding-bottom: 3px;
     width: 18px;

@@ -1518,6 +1518,9 @@
   --viewer-rtl-margin-right: 10px;
   --media-viewer-tap-highlight: #{$tap-highlight};
   --viewer-details: #{$background-color};
+
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: #{$brown-background};
 }
 
 .dark {
@@ -1600,6 +1603,9 @@
   --viewer-rtl-margin-right: 10px;
   --media-viewer-tap-highlight: #{$tap-highlight};
   --viewer-details: #{$background-color};
+
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: #{$brown-background};
 }
 
 :global(.rtl) {

@@ -26,9 +26,10 @@
 
 import React from "react";
 
-import { CalendarContainer } from "../Calendar.styled";
+import classNames from "classnames";
 import { getCalendarYears, getYearElements } from "../utils";
 import { YearsProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const YearsBody = ({
   observedDate,
@@ -52,8 +53,13 @@ export const YearsBody = ({
   );
 
   return (
-    <CalendarContainer big isMobile={isMobile} isScroll={isScroll}>
+    <div
+      className={classNames(styles.calendarContainer, {
+        [styles.big]: true,
+        [styles.isScroll]: isScroll,
+      })}
+    >
       {yearElements}
-    </CalendarContainer>
+    </div>
   );
 };

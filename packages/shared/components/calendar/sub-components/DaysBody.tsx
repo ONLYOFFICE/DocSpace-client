@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import classNames from "classnames";
 import { getDayElements, getWeekdayElements } from "../utils";
-import { CalendarContainer } from "../Calendar.styled";
 import { DaysBodyProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const DaysBody = ({
   observedDate,
@@ -47,11 +47,15 @@ export const DaysBody = ({
     maxDate,
     isMobile,
   );
-  const weekdayElements = getWeekdayElements(isMobile);
+  const weekdayElements = getWeekdayElements();
 
   return (
-    <CalendarContainer isMobile={isMobile} isScroll={isScroll}>
+    <div
+      className={classNames(styles.calendarContainer, {
+        [styles.isScroll]: isScroll,
+      })}
+    >
       {weekdayElements} {daysElements}
-    </CalendarContainer>
+    </div>
   );
 };

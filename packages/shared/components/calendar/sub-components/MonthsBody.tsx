@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { CalendarContainer } from "../Calendar.styled";
+import classNames from "classnames";
 import { getCalendarMonths, getMonthElements } from "../utils";
 import { MonthsBodyProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const MonthsBody = ({
   observedDate,
@@ -51,8 +52,13 @@ export const MonthsBody = ({
   );
 
   return (
-    <CalendarContainer big isMobile={isMobile} isScroll={isScroll}>
+    <div
+      className={classNames(styles.calendarContainer, {
+        [styles.big]: true,
+        [styles.isScroll]: isScroll,
+      })}
+    >
       {monthsElements}
-    </CalendarContainer>
+    </div>
   );
 };

@@ -26,8 +26,10 @@
 
 import React from "react";
 import moment from "moment";
+import classNames from "classnames";
 
-import { StyledDateItemTheme } from "../Calendar.styled";
+import styles from "../Calendar.module.scss";
+import { ButtonDelete } from "components/image-editor";
 
 export const getYearElements = (
   years: string[],
@@ -49,39 +51,44 @@ export const getYearElements = (
   };
 
   const yearElements = years.map((year) => (
-    <StyledDateItemTheme
-      className="year"
-      isSecondary
-      big
-      focused={false}
+    <button
+      type="button"
+      className={classNames(styles.dateItem, "year", {
+        [styles.disabled]: moment(year).endOf("year").endOf("month") < minDate,
+        [styles.disabled]: moment(year) > maxDate,
+        [styles.big]: true,
+        [styles.isSecondary]: true,
+      })}
       key={year}
       onClick={() => onDateClick(year)}
       disabled={
         moment(year).endOf("year").endOf("month") < minDate ||
         moment(year) > maxDate
       }
-      isMobile={isMobile}
     >
       {year}
-    </StyledDateItemTheme>
+    </button>
   ));
 
   for (let i = 1; i < 11; i += 1) {
     yearElements[i] = (
-      <StyledDateItemTheme
-        className="year"
-        big
-        focused={false}
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "year", {
+          [styles.disabled]:
+            moment(years[i]).endOf("year").endOf("month") < minDate,
+          [styles.disabled]: moment(years[i]) > maxDate,
+          [styles.big]: true,
+        })}
         key={years[i]}
         onClick={() => onDateClick(years[i])}
         disabled={
           moment(years[i]).endOf("year").endOf("month") < minDate ||
           moment(years[i]) > maxDate
         }
-        isMobile={isMobile}
       >
         {years[i]}
-      </StyledDateItemTheme>
+      </button>
     );
   }
 
@@ -89,39 +96,48 @@ export const getYearElements = (
   const selectedYearIndex = years.indexOf(moment(selectedDate).format("YYYY"));
   if (selectedYearIndex !== -1) {
     yearElements[selectedYearIndex] = (
-      <StyledDateItemTheme
-        className="year"
-        big
-        focused
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "year", {
+          [styles.disabled]:
+            moment(years[selectedYearIndex]).endOf("year").endOf("month") <
+            minDate,
+          [styles.disabled]: moment(years[selectedYearIndex]) > maxDate,
+          [styles.big]: true,
+          [styles.focused]: true,
+        })}
         key={years[selectedYearIndex]}
         onClick={() => onDateClick(years[selectedYearIndex])}
         disabled={
           moment(years[selectedYearIndex]).endOf("year").endOf("month") <
             minDate || moment(years[selectedYearIndex]) > maxDate
         }
-        isMobile={isMobile}
       >
         {years[selectedYearIndex]}
-      </StyledDateItemTheme>
+      </button>
     );
   }
   if (currentYearIndex !== -1) {
     yearElements[currentYearIndex] = (
-      <StyledDateItemTheme
-        className="year"
-        isCurrent
-        big
-        focused={false}
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "year", {
+          [styles.disabled]:
+            moment(years[selectedYearIndex]).endOf("year").endOf("month") <
+            minDate,
+          [styles.disabled]: moment(years[selectedYearIndex]) > maxDate,
+          [styles.big]: true,
+          [styles.isCurrent]: true,
+        })}
         key={years[currentYearIndex]}
         onClick={() => onDateClick(years[currentYearIndex])}
         disabled={
           moment(years[currentYearIndex]).endOf("year").endOf("month") <
             minDate || moment(years[currentYearIndex]) > maxDate
         }
-        isMobile={isMobile}
       >
         {years[currentYearIndex]}
-      </StyledDateItemTheme>
+      </button>
     );
   }
 

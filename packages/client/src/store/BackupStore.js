@@ -579,7 +579,7 @@ class BackupStore {
   };
 
   get isBackupProgressVisible() {
-    return this.downloadingProgress > 0 && this.downloadingProgress !== 100;
+    return this.downloadingProgress >= 0 && this.downloadingProgress !== 100;
   }
 
   setDownloadingProgress = (progress) => {

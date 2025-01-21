@@ -45,7 +45,7 @@
     "@types/express": "catalog:",
     "@types/i18next-fs-backend": "catalog:",
     "@types/morgan": "catalog:",
-    "@types/node": "^18.19.55",
+    "@types/node": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react": "catalog:",
     "@types/styled-components": "catalog:",

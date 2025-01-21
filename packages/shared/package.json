@@ -127,7 +127,7 @@
     "@types/jest": "catalog:",
     "@types/lodash": "catalog:",
     "@types/luxon": "catalog:",
-    "@types/node": "^20.16.11",
+    "@types/node": "catalog:",
     "@types/react-avatar-editor": "catalog:",
     "@types/react-transition-group": "catalog:",
     "@types/react-virtualized": "catalog:",

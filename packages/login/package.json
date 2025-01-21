@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "catalog:",
-    "@types/node": "^22.7.5",
+    "@types/node": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react-google-recaptcha": "catalog:",
     "@types/react": "catalog:",

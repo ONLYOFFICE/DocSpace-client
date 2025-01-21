@@ -1441,17 +1441,23 @@
 .light {
   --media-viewer-title-color: #{$white};
   --media-viewer-background-start: #{$tap-highlight};
-  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
+  --media-viewer-background-end: #{$background-color};
   --media-viewer-control-btn-hover-bg: #{$silver};
   --media-viewer-control-btn-svg: #{$white};
+
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
 }
 
 .dark {
   --media-viewer-title-color: #{$white};
-  --media-viewer-background-start: #{tap-highlight};
-  --media-viewer-background-end: rgba(0, 0, 0, 0.8);
+  --media-viewer-background-start: #{$tap-highlight};
+  --media-viewer-background-end: #{$background-color};
   --media-viewer-control-btn-hover-bg: #{$silver};
   --media-viewer-control-btn-svg: #{$white};
+
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: #{$image-viewer-bg-transparent-color};
 }
 
 :global(.rtl) {

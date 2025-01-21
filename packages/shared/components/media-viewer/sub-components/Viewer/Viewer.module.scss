@@ -24,26 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/_colors.scss";
-@import "../../../../styles/variables/devices.scss";
-@import "../../../../styles/_mixins.scss";
-
-:root {
-  --viewer-color: $gray-strong;
-  --viewer-fill: #{$white};
-  --viewer-rtl-margin-left: 10px;
-  --viewer-rtl-margin-right: 10px;
-  --media-viewer-tap-highlight: #{$tap-highlight};
-}
-
-:root[data-theme="dark"] {
-  --viewer-color: $gray-dark-strong;
-  --viewer-fill: #{$white};
-  --viewer-rtl-margin-left: 10px;
-  --viewer-rtl-margin-right: 10px;
-  --media-viewer-tap-highlight: #{$tap-highlight};
-}
-
 .container {
   color: var(--viewer-color);
   overflow: hidden;
@@ -96,7 +76,7 @@
     background: linear-gradient(
       0deg,
       var(--media-viewer-tap-highlight) 0%,
-      rgba(0, 0, 0, 0.8) 100%
+      var(--viewer-details) 100%
     );
     position: fixed;
     top: 0;

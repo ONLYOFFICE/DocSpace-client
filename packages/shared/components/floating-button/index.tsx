@@ -47,8 +47,6 @@ import { FloatingButtonProps } from "./FloatingButton.types";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 import styles from "./FloatingButton.module.scss";
 
-const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
-
 const ANIMATION_DELAY = 1000;
 
 const ICON_COMPONENTS = {
@@ -154,32 +152,11 @@ const FloatingButton = ({
       >
         <div
           className={classNames(styles.circle, {
-            [styles.showProgress]:
-              percent > MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR &&
-              displayProgress,
-            [styles.loading]:
-              percent <= MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR &&
-              displayProgress,
+            [styles.loading]: !completed,
+            [styles.completed]: completed,
           })}
-          style={
-            {
-              "--circle-rotation-angle": `${percent * 1.8}deg`,
-            } as React.CSSProperties
-          }
-          data-testid="floating-button-progress"
         >
-          <div
-            className={classNames(
-              styles.circleMask,
-              "circle__mask circle__full",
-            )}
-          >
-            <div className={classNames(styles.circleFill, "circle__fill")} />
-          </div>
-          <div className={classNames(styles.circleMask, "circle__mask")}>
-            <div className={classNames(styles.circleFill, "circle__fill")} />
-          </div>
-
+          <div className={styles.loader} />
           <div
             className={classNames(
               styles.floatingButton,
@@ -193,7 +170,6 @@ const FloatingButton = ({
             <div className={classNames(styles.iconBox, "icon-box")}>
               {iconComponent}
             </div>
-
             {alert || completed ? (
               <div
                 data-testid="floating-button-alert"

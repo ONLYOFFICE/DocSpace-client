@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useState, useEffect } from "react";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
@@ -53,6 +54,7 @@ const ProgressBarMobile = ({
   operationId,
   operation,
 }: ProgressBarMobileProps) => {
+  const [isVisible, setIsVisible] = useState(true);
   const uploadPercent = percent > 100 ? 100 : percent;
 
   const onClickHeaderAction = () => {
@@ -62,7 +64,10 @@ const ProgressBarMobile = ({
 
   const onCloseClick = () => {
     if (onClearProgress && operation) {
-      onClearProgress(null, operation);
+      setIsVisible(false);
+      setTimeout(() => {
+        onClearProgress(null, operation);
+      }, 300);
     }
   };
 
@@ -70,6 +75,7 @@ const ProgressBarMobile = ({
     <div
       className={classNames(styles.progressBarContainer, {
         [styles.isUploading]: open,
+        [styles.fadeOut]: !isVisible,
       })}
     >
       <div className={styles.progressWrapper}>

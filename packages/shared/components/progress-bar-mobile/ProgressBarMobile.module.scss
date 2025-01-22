@@ -10,6 +10,16 @@
   border-top: 1px solid var(--progress-bar-border);
   border-bottom: 1px solid var(--progress-bar-border);
 
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+  opacity: 1;
+
+  &.fadeOut {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   &.isUploading {
     display: flex;
   }

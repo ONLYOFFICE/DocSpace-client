@@ -533,7 +533,18 @@
     }
     to {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
+    }
+  }
+
+  @keyframes hideButtonImmediate {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(30px);
     }
   }
 
@@ -542,8 +553,7 @@
   }
 
   &.hideImmediate {
-    animation: hideButton 0.3s ease-in-out forwards;
-    will-change: opacity, transform;
+    animation: hideButtonImmediate 0.3s ease-in-out forwards;
   }
 
   :global {

@@ -131,9 +131,19 @@
   inset-inline-start: 20px;
   top: 0px;
 
-  svg {
-    path {
-      fill: var(--status-icon-color-negative);
+  &.alert {
+    svg {
+      path {
+        fill: var(--status-icon-color-negative) !important;
+      }
+    }
+  }
+
+  &.complete {
+    svg {
+      path {
+        fill: var(--status-icon-color-positive) !important;
+      }
     }
   }
 }

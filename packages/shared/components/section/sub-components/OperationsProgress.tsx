@@ -24,7 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useLayoutEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useLayoutEffect,
+  useCallback,
+  useRef,
+  useEffect,
+} from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -48,12 +54,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
-      if (e.animationName.includes("hideButton")) {
+      if (
+        e.animationName.includes("hideButton") ||
+        e.animationName.includes("hideButtonImmediate")
+      ) {
         secondaryActiveOperations.forEach((item) => {
-          const allItemsCompleted = item.items?.every((op) => op.completed);
-          if (allItemsCompleted) {
-            clearSecondaryProgressData(null, item.operation);
-          }
+          // const allItemsCompleted = item.items?.every((op) => op.completed);
+          // if (allItemsCompleted) {
+          clearSecondaryProgressData(null, item.operation);
+          //   }
         });
       }
     },
@@ -95,23 +104,25 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     clearSecondaryProgressData,
   ]);
 
-  const onOpenProgressPanel = useCallback(() => {
+  const onOpenProgressPanel = () => {
     const willClose = isOpenPanel;
     setIsOpenPanel(!isOpenPanel);
 
     if (willClose && operationsCompleted && secondaryActiveOperations.length) {
       setShouldHideButton(true);
     }
-  }, [isOpenPanel, operationsCompleted, secondaryActiveOperations.length]);
+  };
 
-  if (!secondaryActiveOperations.length) return null;
+  const onCloseButton = () => {
+    setShouldHideButton(true);
+  };
 
   return (
     <div
       ref={containerRef}
       className={classNames(styles.progressBarContainer, {
-        [styles.hidden]: !isOpenPanel && operationsCompleted,
         [styles.hideImmediate]: shouldHideButton,
+        [styles.hidden]: !isOpenPanel && operationsCompleted,
       })}
     >
       <FloatingButton
@@ -120,8 +131,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           isOpenPanel ? FloatingButtonIcons.arrow : FloatingButtonIcons.dots
         }
         alert={operationsAlert}
+        completed={operationsCompleted}
         onClick={onOpenProgressPanel}
         percent={operationsCompleted ? 100 : 0}
+        onCloseButton={onCloseButton}
       />
 
       <DropDown

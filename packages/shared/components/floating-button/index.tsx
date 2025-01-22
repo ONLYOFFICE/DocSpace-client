@@ -39,6 +39,7 @@ import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 import ExportRoomIndexIcon from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg";
 import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/icons/16/top-arrow.react.svg";
+import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
 
 import { classNames } from "../../utils";
 
@@ -92,11 +93,13 @@ const FloatingButton = ({
   style,
   icon = FloatingButtonIcons.upload,
   alert = false,
+  completed = false,
   percent = 0,
   onClick,
   color,
   clearUploadedFilesHistory,
   showTwoProgress,
+  onCloseButton,
 }: FloatingButtonProps) => {
   const animationCompleted = useProgressAnimation(percent);
 
@@ -115,6 +118,7 @@ const FloatingButton = ({
 
   const handleProgressClear = () => {
     clearUploadedFilesHistory?.();
+    onCloseButton?.();
   };
 
   const buttonClassName = useMemo(() => {
@@ -189,20 +193,32 @@ const FloatingButton = ({
             <div className={classNames(styles.iconBox, "icon-box")}>
               {iconComponent}
             </div>
-            {alert ? (
+
+            {alert || completed ? (
               <div
-                className={styles.alertIcon}
                 data-testid="floating-button-alert"
+                className={classNames(styles.alertIcon, {
+                  [styles.alert]: alert,
+                  [styles.complete]: !alert && completed,
+                })}
               >
-                <ButtonAlertIcon
-                  style={{ overflow: "hidden", verticalAlign: "middle" }}
-                />
+                {alert ? (
+                  <ButtonAlertIcon
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                ) : (
+                  <TickIcon
+                    className="tick-icon"
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                )}
               </div>
             ) : null}
           </div>
         </div>
       </div>
-      {clearUploadedFilesHistory && percent === 100 ? (
+
+      {completed ? (
         <CloseIcon
           className="layout-progress-bar_close-icon"
           onClick={handleProgressClear}

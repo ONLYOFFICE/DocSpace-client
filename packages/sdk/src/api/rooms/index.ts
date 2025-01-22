@@ -26,6 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { headers } from "next/headers";
+
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { TGetRooms } from "@docspace/shared/api/rooms/types";
@@ -55,7 +57,7 @@ export async function getRooms(
     [signal],
   );
 
-  const res = IS_TEST ? roomListHandler() : await fetch(req);
+  const res = IS_TEST ? roomListHandler(headers()) : await fetch(req);
 
   if (!res.ok) return;
 

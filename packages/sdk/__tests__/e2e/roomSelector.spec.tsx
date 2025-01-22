@@ -24,18 +24,89 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { HEADER_ROOMS_LIST } from "@docspace/shared/__mocks__/e2e";
+
 import { expect, test } from "./fixtures/base";
 
 const path = "/sdk/room-selector";
 
-test.describe("Room Selector", () => {
-  test("should open /sdk/room-selector route", async ({ page }) => {
-    await page.goto(path);
+test("should open empty light /sdk/room-selector route", async ({ page }) => {
+  await page.goto(`${path}?theme=Base`);
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-room-selector.png",
-    ]);
-  });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "light-empty-room-selector.png",
+  ]);
+});
+
+test("should open empty light with ru locale /sdk/room-selector route", async ({
+  page,
+}) => {
+  await page.goto(`${path}?theme=Base&locale=ru`);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "light-ru-empty-room-selector.png",
+  ]);
+});
+
+test("should open empty dark /sdk/room-selector route", async ({ page }) => {
+  await page.goto(`${path}?theme=Dark`);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "dark-empty-room-selector.png",
+  ]);
+});
+
+test("should open light /sdk/room-selector route", async ({
+  page,
+  mockRequest,
+}) => {
+  const pageRoute = `${path}?theme=Base`;
+
+  await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+  await page.goto(pageRoute);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "light-room-selector.png",
+  ]);
+});
+
+test("should open light with ru locale /sdk/room-selector route", async ({
+  page,
+  mockRequest,
+}) => {
+  const pageRoute = `${path}?theme=Base&locale=ru`;
+
+  await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+  await page.goto(pageRoute);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "light-ru-room-selector.png",
+  ]);
+});
+
+test("should open dark /sdk/room-selector route", async ({
+  page,
+  mockRequest,
+}) => {
+  const pageRoute = `${path}?theme=Dark`;
+  await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+  await page.goto(pageRoute);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "room-selector",
+    "dark-room-selector.png",
+  ]);
 });

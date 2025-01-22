@@ -40,7 +40,7 @@ export type ICover = {
 };
 
 export type TLogo = {
-  cover: ICover;
+  cover?: ICover;
   original: string;
   large: string;
   medium: string;
@@ -64,6 +64,12 @@ export type TRoomSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  CreateRoomFrom: boolean;
+  CopyLink: boolean;
+  Embed: boolean;
+  ChangeOwner: boolean;
+  IndexExport: boolean;
+  Reconnect: boolean;
 };
 
 export type TRoomLifetime = {
@@ -93,6 +99,10 @@ export type TRoom = {
   private: boolean;
   inRoom: boolean;
   id: number;
+  indexing?: boolean;
+  denyDownload?: boolean;
+  usedSpace?: number;
+  fileEntryType: number;
   rootFolderId: number;
   canShare: boolean;
   title: string;
@@ -105,7 +115,7 @@ export type TRoom = {
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
-  lifetime: TRoomLifetime;
+  lifetime?: TRoomLifetime;
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;

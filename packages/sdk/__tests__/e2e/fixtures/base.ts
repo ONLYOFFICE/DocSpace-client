@@ -38,11 +38,11 @@ export const test = base.extend<{
       });
     });
     await page.route(
-      "*/**/login/_next/public/images/**/*",
+      "*/**/sdk/_next/public/images/**/*",
       async (route, request) => {
         const imagePath = request
           .url()
-          .split("/login/_next/public/images/")
+          .split("/sdk/_next/public/images/")
           .at(-1)!
           .split("?")[0];
         await route.fulfill({
@@ -50,6 +50,16 @@ export const test = base.extend<{
         });
       },
     );
+
+    await page.route(
+      "*/**/static/scripts/config.json",
+      async (route, request) => {
+        await route.fulfill({
+          path: `../../public/scripts/config.json`,
+        });
+      },
+    );
+
     await use(page);
   },
   mockRequest: async ({ page }, use) => {

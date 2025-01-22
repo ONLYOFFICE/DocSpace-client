@@ -103,7 +103,7 @@ export default async function RootLayout({
           </Providers>
         </StyledComponentsRegistry>
 
-        <Scripts />
+        {/* <Scripts /> */}
       </body>
     </html>
   );

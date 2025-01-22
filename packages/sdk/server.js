@@ -32,7 +32,7 @@ const config = require("./config/config.json");
 
 const dev = process.env.NODE_ENV === "development";
 
-const port = config.PORT ?? 5099;
+const port = process.env.PORT ?? 5099;
 const hostname = config.HOSTNAME ?? "localhost";
 
 // when using middleware `hostname` and `port` must be provided below

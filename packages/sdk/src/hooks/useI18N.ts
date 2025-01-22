@@ -34,13 +34,14 @@ import { getI18NInstance } from "@/utils/i18n";
 interface UseI18NProps {
   settings?: TSettings;
   user?: TUser;
+  locale?: string;
 }
 
-const useI18N = ({ settings, user }: UseI18NProps) => {
+const useI18N = ({ settings, user, locale }: UseI18NProps) => {
   const [i18n, setI18N] = React.useState<i18n>(
     () =>
       getI18NInstance(
-        user?.cultureName ?? settings?.culture ?? "en",
+        locale ?? user?.cultureName ?? settings?.culture ?? "en",
         settings?.culture ?? "en",
       ) ?? ({} as i18n),
   );
@@ -56,12 +57,12 @@ const useI18N = ({ settings, user }: UseI18NProps) => {
     isInit.current = true;
 
     const instance = getI18NInstance(
-      user?.cultureName ?? settings?.culture ?? "en",
+      locale ?? user?.cultureName ?? settings?.culture ?? "en",
       settings?.culture ?? "en",
     );
 
     if (instance) setI18N(instance);
-  }, [settings?.culture, user?.cultureName]);
+  }, [locale, settings?.culture, user?.cultureName]);
 
   return { i18n };
 };

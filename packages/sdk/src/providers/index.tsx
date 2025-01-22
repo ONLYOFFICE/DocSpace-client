@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Toast } from "@docspace/shared/components/toast/Toast";
+import { Toast } from "@docspace/shared/components/toast";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -41,6 +41,7 @@ export type TContextData = {
   settings: TSettings | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
+  locale?: string;
 };
 
 export type TProviders = {

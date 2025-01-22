@@ -48,13 +48,24 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("sdk")) {
-    return NextResponse.redirect(
-      `${redirectUrl}/sdk${request.nextUrl.search}`,
-    );
+    return NextResponse.redirect(`${redirectUrl}/sdk${request.nextUrl.search}`);
   }
+
+  const serchParams = new URLSearchParams(request.nextUrl.searchParams);
+  const theme = serchParams.get("theme");
+  const locale = serchParams.get("locale");
+
+  requestHeaders.set("x-sdk-config-theme", theme ?? "");
+  requestHeaders.set("x-sdk-config-locale", locale ?? "");
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/sdk"],
+  matcher: ["/health", "/sdk", "/room-selector"],
 };

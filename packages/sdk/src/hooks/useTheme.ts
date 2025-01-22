@@ -105,7 +105,7 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
+    let theme = systemTheme ?? SYSTEM_THEME;
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
     if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
@@ -123,7 +123,7 @@ const useTheme = ({
     });
 
     setCookie(SYSTEM_THEME_KEY, themeCookie);
-  }, [user?.theme, i18n, currentColorTheme, lang]);
+  }, [systemTheme, i18n, lang, user?.theme, currentColorTheme]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

@@ -30,17 +30,14 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
-
-import Providers from "@/providers";
-import Scripts from "@/components/Scripts";
-import StyledComponentsRegistry from "@/utils/registry";
-
 import "@docspace/shared/styles/theme.scss";
-import { Base } from "@docspace/shared/themes";
 
 import "@/styles/globals.scss";
 import { getColorTheme } from "@/api/settings";
+import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import Providers from "@/providers";
+import Scripts from "@/components/Scripts";
+import StyledComponentsRegistry from "@/utils/registry";
 
 export default async function RootLayout({
   children,
@@ -53,13 +50,16 @@ export default async function RootLayout({
     return <></>;
   }
 
+  const theme = hdrs.get(THEME_HEADER);
+  const locale = hdrs.get(LOCALE_HEADER) as string | undefined;
+
   const cookieStore = cookies();
 
   const [colorTheme] = await Promise.all([getColorTheme()]);
 
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+  const systemTheme = theme
+    ? (theme as ThemeKeys)
+    : (cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys | undefined);
 
   const currentColorScheme = colorTheme?.themes.find(
     (theme) => theme.id === colorTheme.selected,
@@ -85,14 +85,22 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body style={styles} className="light ltr">
+      <body
+        style={styles}
+        className={`ltr ${systemTheme === "Dark" ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
-          {/* <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+          <Providers
+            contextData={{
+              user: undefined,
+              settings: undefined,
+              systemTheme,
+              colorTheme,
+              locale,
+            }}
+          >
             {children}
-          </Providers> */}
-          <ComponentThemeProvider theme={Base}>
-            {children}
-          </ComponentThemeProvider>
+          </Providers>
         </StyledComponentsRegistry>
 
         <Scripts />

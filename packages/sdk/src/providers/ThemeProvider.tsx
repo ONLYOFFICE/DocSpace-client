@@ -45,6 +45,7 @@ type TThemeProvider = {
   user: TUser | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
+  locale?: string;
 };
 
 const ThemeProvider = ({
@@ -53,10 +54,11 @@ const ThemeProvider = ({
   settings,
   systemTheme,
   colorTheme,
+  locale,
 }: TThemeProvider) => {
-  const { i18n } = useI18N({ settings, user });
+  const { i18n } = useI18N({ settings, user, locale });
 
-  const lang = user?.cultureName ?? settings?.culture;
+  const lang = locale ?? user?.cultureName ?? settings?.culture;
 
   const { theme, currentColorTheme } = useTheme({
     user,

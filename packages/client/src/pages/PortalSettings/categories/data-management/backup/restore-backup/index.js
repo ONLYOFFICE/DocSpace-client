@@ -38,7 +38,12 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
-import { isManagement } from "@docspace/shared/utils/common";
+import StatusMessage from "@docspace/shared/components/status-message";
+import {
+  getBackupProgressInfo,
+  isManagement,
+} from "@docspace/shared/utils/common";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LocalFileModule from "./sub-components/LocalFileModule";
@@ -71,11 +76,14 @@ const RestoreBackup = (props) => {
     setThirdPartyStorage,
     setStorageRegions,
     setConnectedThirdPartyAccount,
-    clearProgressInterval,
+    resetDownloadingProgress,
     isEnableRestore,
     setRestoreResource,
     buttonSize,
     standalone,
+    errorInformation,
+    setDownloadingProgress,
+    setTemporaryLink,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -110,9 +118,29 @@ const RestoreBackup = (props) => {
   useEffect(() => {
     setDocumentTitle(t("RestoreBackup"));
     startRestoreBackup();
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+
+      if (success) toastr.success(success);
+    });
+
     return () => {
-      clearProgressInterval();
+      resetDownloadingProgress();
       setRestoreResource(null);
+
+      SocketHelper.off(SocketEvents.BackupProgress);
     };
   }, []);
 
@@ -236,6 +264,8 @@ const RestoreBackup = (props) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
+      <StatusMessage message={errorInformation} />
+
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}
@@ -299,11 +329,14 @@ export const Component = inject(
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const {
       getProgress,
-      clearProgressInterval,
+      resetDownloadingProgress,
       setStorageRegions,
       setThirdPartyStorage,
       setConnectedThirdPartyAccount,
       setRestoreResource,
+      errorInformation,
+      setDownloadingProgress,
+      setTemporaryLink,
     } = backup;
 
     const buttonSize =
@@ -320,9 +353,12 @@ export const Component = inject(
       setThirdPartyStorage,
       buttonSize,
       setConnectedThirdPartyAccount,
-      clearProgressInterval,
+      resetDownloadingProgress,
       getProgress,
       setRestoreResource,
+      errorInformation,
+      setDownloadingProgress,
+      setTemporaryLink,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

@@ -18,28 +18,28 @@
     "test:e2e:docker:clear": "docker rmi tests"
   },
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "^1.11.0",
-    "i18next": "^20.6.1",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-google-recaptcha": "^3.1.0",
-    "react-hcaptcha": "^0.1.1",
-    "react-i18next": "^13.5.0",
-    "sass": "^1.79.5",
-    "styled-components": "^5.3.11"
+    "@hcaptcha/react-hcaptcha": "1.11.0",
+    "i18next": "20.6.1",
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-google-recaptcha": "3.1.0",
+    "react-hcaptcha": "0.1.1",
+    "react-i18next": "13.5.0",
+    "sass": "1.79.5",
+    "styled-components": "5.3.11"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
-    "@types/node": "^22.7.5",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "@types/react-google-recaptcha": "^2.1.9",
-    "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^8.57.1",
+    "@svgr/webpack": "8.1.0",
+    "@types/node": "22.7.5",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "@types/react-google-recaptcha": "2.1.9",
+    "babel-plugin-styled-components": "2.1.4",
+    "eslint": "8.57.1",
     "eslint-config-next": "14.2.15",
-    "prettier": "^3.3.3",
-    "shx": "^0.3.4",
+    "prettier": "3.3.3",
+    "shx": "0.3.4",
     "typescript": "5.6.3"
   }
 }

@@ -209,7 +209,7 @@ const SectionHeaderContent = (props) => {
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
 
-    console.log(settingsTree, currKey);
+    // console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -325,7 +325,7 @@ const SectionHeaderContent = (props) => {
           license: t("Common:EnterpriseLicense"),
         });
 
-  console.log(translatedHeader, header);
+  // console.log(translatedHeader, header);
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>

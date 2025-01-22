@@ -26,9 +26,15 @@
 
 "use client";
 
+import React, { useEffect } from "react";
+
 import { TGetRooms } from "@docspace/shared/api/rooms/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import RoomSelectorComponent from "@docspace/shared/selectors/Room";
+import {
+  frameCallCommand,
+  frameCallEvent,
+} from "@docspace/shared/utils/common";
 
 type RoomSelectorProps = {
   roomList: TGetRooms;
@@ -39,6 +45,8 @@ export default function RoomSelector({
   roomList,
   pageCount,
 }: RoomSelectorProps) {
+  useEffect(() => frameCallCommand("setIsLoaded"), []);
+
   const onSubmit = (items: TSelectorItem[]) => {};
 
   const { folders, total } = roomList;
@@ -48,6 +56,7 @@ export default function RoomSelector({
       onSubmit={onSubmit}
       isMultiSelect={false}
       withPadding={false}
+      withSearch
       withInit
       initItems={folders}
       initTotal={total}

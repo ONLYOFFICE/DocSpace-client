@@ -26,32 +26,17 @@
 
 "use client";
 
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 
-import { TGetRooms } from "@docspace/shared/api/rooms/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import RoomSelectorComponent from "@docspace/shared/selectors/Room";
-import {
-  frameCallCommand,
-  frameCallEvent,
-} from "@docspace/shared/utils/common";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import { RoomsType } from "@docspace/shared/enums";
 
 import useSDK from "@/hooks/useSDK";
-
-type RoomSelectorProps = {
-  roomList: TGetRooms;
-  pageCount: number;
-  baseConfig: {
-    header?: boolean;
-    cancel?: boolean;
-    cancelLabel?: string;
-    acceptLabel?: string;
-    search?: boolean;
-    roomType?: RoomsType | RoomsType[] | null;
-  };
-};
+import { getRoomsIcon } from "@/utils";
+import { RoomSelectorProps } from "@/types";
 
 export default function RoomSelector({
   roomList,
@@ -60,25 +45,41 @@ export default function RoomSelector({
 }: RoomSelectorProps) {
   const { sdkConfig } = useSDK();
 
-  const onSubmit = useCallback(async (items: TSelectorItem[]) => {
-    const enrichedData = items[0];
+  const getPrimaryLink = async (roomId: string) => {
+    const res = await fetch(`/api/2.0/files/rooms/${roomId}/link`).then((r) =>
+      r.json(),
+    );
+    return res.response;
+  };
 
-    /*       enrichedData.icon =
-        enrichedData.icon === ""
-          ? await getRoomsIcon(enrichedData.roomType, false, 32)
-          : enrichedData.iconOriginal; */
+  const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
+    const enrichedData = {
+      ...selectedItem,
+      icon:
+        selectedItem.icon === ""
+          ? getRoomsIcon(selectedItem.roomType as RoomsType, false, 32)
+          : selectedItem.iconOriginal,
+    } as TSelectorItem & {
+      requestTokens?: {
+        id: string;
+        primary: boolean;
+        title: string;
+        requestToken: string;
+      }[];
+    };
 
     const isSharedRoom =
-      enrichedData.roomType === RoomsType.PublicRoom ||
-      ((enrichedData.roomType === RoomsType.CustomRoom ||
-        enrichedData.roomType === RoomsType.FormRoom) &&
-        enrichedData.shared);
+      selectedItem.roomType === RoomsType.PublicRoom ||
+      ((selectedItem.roomType === RoomsType.CustomRoom ||
+        selectedItem.roomType === RoomsType.FormRoom) &&
+        selectedItem.shared);
 
-    /*       if (isSharedRoom) {
-        const { sharedTo } = await getPrimaryLink(enrichedData.id);
-        const { id, title, requestToken, primary } = sharedTo;
-        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
-      } */
+    if (isSharedRoom) {
+      const {
+        sharedTo: { id, title, requestToken, primary },
+      } = await getPrimaryLink(selectedItem.id as string);
+      enrichedData.requestTokens = [{ id, primary, title, requestToken }];
+    }
 
     frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
   }, []);
@@ -106,18 +107,21 @@ export default function RoomSelector({
       }
     : { withPadding: false };
 
+  const roomTypeProps = baseConfig?.roomType
+    ? { roomType: baseConfig.roomType }
+    : {};
+
   const { folders, total } = roomList;
 
   return (
     <RoomSelectorComponent
       {...cancelButtonProps}
       {...headerProps}
+      {...roomTypeProps}
       onSubmit={onSubmit}
       isMultiSelect={false}
-      withPadding={false}
       withSearch={baseConfig?.search}
       submitButtonLabel={baseConfig?.acceptLabel}
-      roomType={baseConfig?.roomType}
       withInit
       initItems={folders}
       initTotal={total}

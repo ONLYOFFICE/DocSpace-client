@@ -55,9 +55,9 @@ const Text = ({
       <Heading title={title} truncate isRootFolderTitle={isRootFolderTitle}>
         {title}
       </Heading>
-      {badgeLabel && (
+      {badgeLabel ? (
         <Badge
-          className="title-block-badge"
+          className={`${styles.titleBlockBadge} ${isRootFolderTitle ? styles.rootFolderTitle : ""}`}
           label={badgeLabel}
           fontSize="9px"
           padding="2px 5px"
@@ -66,7 +66,7 @@ const Text = ({
           noHover
           isHovered={false}
         />
-      )}
+      ) : null}
       {isRootFolderTitle ? <ArrowIcon /> : null}
       {!isRootFolderTitle && !isRootFolder ? (
         <ExpanderIcon isRotated={isOpen} />

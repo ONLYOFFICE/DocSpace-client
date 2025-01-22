@@ -392,7 +392,7 @@ const SubMenu = (props: SubMenuProps) => {
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
         ) : null}
-        {item.badgeLabel && (
+        {item.badgeLabel ? (
           <Badge
             label={item.badgeLabel}
             className={`${subMenuIconClassName} p-submenu-badge`}
@@ -403,7 +403,7 @@ const SubMenu = (props: SubMenuProps) => {
             noHover
             isHovered={false}
           />
-        )}
+        ) : null}
       </a>
     );
 

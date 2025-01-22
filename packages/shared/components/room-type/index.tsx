@@ -84,7 +84,7 @@ const RoomType = ({
           <Text noSelect className="choose_room-title-text">
             {t(room.title)}
           </Text>
-          {isTemplate && (
+          {isTemplate ? (
             <Badge
               label={t("New")}
               backgroundColor={globalColors.lightBlueMain}
@@ -94,7 +94,7 @@ const RoomType = ({
               noHover
               isHovered={false}
             />
-          )}
+          ) : null}
         </div>
         <Text noSelect className="choose_room-description">
           {t(room.description)}

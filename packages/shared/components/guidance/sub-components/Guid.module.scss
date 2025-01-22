@@ -48,14 +48,13 @@
   border-radius: 11px;
 
   &.directionLeft {
-    left: var(--manual-x);
+    inset-inline-start: var(--manual-x);
   }
 
   &.directionRight {
-    right: var(--manual-x);
+    inset-inline-end: var(--manual-x);
   }
 }
-
 
 :global {
   .modal-header {

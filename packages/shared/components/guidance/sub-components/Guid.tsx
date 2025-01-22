@@ -40,6 +40,7 @@ import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
 
 import { getHeaderText } from "./Guid.utils";
 import { GuidProps } from "./Guid.types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 const GUID_MODAL_MARGIN = 16;
 const MAX_MODAL_HEIGHT = 190;
@@ -54,8 +55,12 @@ const Guid = ({
 }: GuidProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
+  const { isRTL } = useInterfaceDirection();
+
   const [modalTop, setModalTop] = React.useState<null | number>(null);
-  const [directionX, setDirectionX] = React.useState<null | string>("left");
+  const [directionX, setDirectionX] = React.useState<null | string>(
+    isRTL ? "right" : "left",
+  );
 
   const theme = useTheme();
 
@@ -98,6 +103,12 @@ const Guid = ({
     const screenWidth = document.documentElement.clientWidth;
 
     if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
+      if (isRTL) {
+        setDirectionX("right");
+      } else {
+        setDirectionX("left");
+      }
+    } else if (isRTL) {
       setDirectionX("right");
     } else {
       setDirectionX("left");
@@ -139,9 +150,11 @@ const Guid = ({
 
   const dialogStyles: React.CSSProperties = {
     ["--manual-x" as string]:
-      directionX === "left"
+      directionX === "left" || isRTL
         ? isLastTip && !isDesktop()
-          ? `${position.left - MODAL_WIDTH}px`
+          ? isRTL
+            ? `${position.right - MODAL_WIDTH}px`
+            : `${position.left - MODAL_WIDTH}px`
           : "250px"
         : "20px",
     top: `${modalTop}px`,

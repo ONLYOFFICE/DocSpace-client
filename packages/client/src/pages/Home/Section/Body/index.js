@@ -97,6 +97,7 @@ const SectionBodyContent = (props) => {
     formFillingTipsVisible,
     roomType,
     userId,
+    createPDFFormFileVisible,
   } = props;
 
   useEffect(() => {
@@ -107,10 +108,26 @@ const SectionBodyContent = (props) => {
     const closedFormFillingTips = localStorage.getItem(
       `closedFormFillingTips-${userId}`,
     );
-    if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
-      setWelcomeFormFillingTipsVisible(true);
+
+    if (createPDFFormFileVisible) {
+      return window.localStorage.setItem(
+        `closedFormFillingTips-${userId}`,
+        "true",
+      );
     }
-  }, [roomType]);
+
+    const timeoutId = setTimeout(() => {
+      if (
+        roomType === RoomsType.FormRoom &&
+        !closedFormFillingTips &&
+        !createPDFFormFileVisible
+      ) {
+        setWelcomeFormFillingTipsVisible(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [roomType, createPDFFormFileVisible]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -463,6 +480,7 @@ export default inject(
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       setWelcomeFormFillingTipsVisible,
+      createPDFFormFileProps,
     } = dialogsStore;
 
     return {
@@ -499,6 +517,7 @@ export default inject(
       formFillingTipsVisible,
       setWelcomeFormFillingTipsVisible,
       userId: userStore?.user?.id,
+      createPDFFormFileVisible: createPDFFormFileProps.visible,
     };
   },
 )(

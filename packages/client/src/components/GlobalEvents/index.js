@@ -51,6 +51,9 @@ const GlobalEvents = ({
   createRoomDialogProps,
   setCreateRoomDialogProps,
   setCover,
+
+  setCreatePDFFormFile,
+  createPDFFormFileProps,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -94,13 +97,6 @@ const GlobalEvents = ({
   const [createPluginFileDialog, setCreatePluginFileProps] = useState({
     visible: false,
     props: null,
-    onClose: null,
-  });
-
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
-    visible: false,
-    file: null,
-    localKey: "",
     onClose: null,
   });
 
@@ -424,10 +420,10 @@ const GlobalEvents = ({
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
-    createPDFFormFile.visible && !createDialogProps.visible && (
+    createPDFFormFileProps.visible && !createDialogProps.visible && (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
-        {...createPDFFormFile}
+        {...createPDFFormFileProps}
       />
     ),
   ];
@@ -442,6 +438,8 @@ export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
     createRoomDialogProps,
     setCreateRoomDialogProps,
     setCover,
+    setCreatePDFFormFile,
+    createPDFFormFileProps,
   } = dialogsStore;
 
   const { eventListenerItemsList } = pluginStore;
@@ -454,5 +452,7 @@ export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
     createRoomDialogProps,
     setCreateRoomDialogProps,
     setCover,
+    setCreatePDFFormFile,
+    createPDFFormFileProps,
   };
 })(observer(GlobalEvents));

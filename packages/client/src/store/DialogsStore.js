@@ -239,6 +239,13 @@ class DialogsStore {
     onClose: null,
   };
 
+  createPDFFormFileProps = {
+    visible: false,
+    file: null,
+    localKey: "",
+    onClose: null,
+  };
+
   newFilesPanelFolderId = null;
 
   formFillingTipsVisible = false;
@@ -284,6 +291,10 @@ class DialogsStore {
 
   setEditRoomDialogProps = (props) => {
     this.editRoomDialogProps = props;
+  };
+
+  setCreatePDFFormFile = (props) => {
+    this.createPDFFormFileProps = props;
   };
 
   setCreateRoomDialogProps = (props) => {

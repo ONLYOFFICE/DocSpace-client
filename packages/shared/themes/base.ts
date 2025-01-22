@@ -2185,45 +2185,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    mediaViewer: {
-      color: grayStrong,
-      backgroundColor: highlandGray,
-      fill: white,
-      titleColor: white,
-      iconColor: white,
-
-      controlBtn: {
-        backgroundColor: silver,
-      },
-
-      imageViewer: {
-        backgroundColor: silver,
-        inactiveBackgroundColor: highlandGray,
-        fill: white,
-      },
-
-      progressBar: {
-        background: grayStrong,
-        backgroundColor: silver,
-      },
-
-      scrollButton: {
-        backgroundColor: highlandGray,
-        background: silver,
-        border: `solid ${white}`,
-      },
-
-      videoViewer: {
-        fill: white,
-        stroke: white,
-        color: grayStrong,
-        colorError: white,
-        backgroundColorError: darkBlack,
-        backgroundColor: highlandGray,
-        background: silver,
-      },
-    },
-
     createEditRoomDialog: {
       commonParam: {
         descriptionColor: gray,

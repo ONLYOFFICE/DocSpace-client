@@ -1438,6 +1438,18 @@
   --text-input-padding-large: 11px 12px;
 }
 
+.light {
+  --color-picker-border: 1px solid #{$gray-strong};
+  --color-picker-background: #{$white};
+  --color-picker-color: #{$gray-text};
+}
+
+.dark {
+  --color-picker-border: 1px solid #{$gray-dark-strong};
+  --color-picker-background: #{$dark-gray-light};
+  --color-picker-color: #{$gray-dark-text};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

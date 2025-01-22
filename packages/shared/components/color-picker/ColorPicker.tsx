@@ -27,17 +27,17 @@
 import { useEffect, useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
-import { Button } from "../button";
+import { Button, ButtonSize } from "../button";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
-
-import Wrapper from "./ColorPicker.styled";
-import { ColorPickerProps } from "./ColorPicker.types";
-import { ButtonSize } from "../button/Button.enums";
 import { globalColors } from "../../themes";
+
+import styles from "./ColorPicker.module.scss";
+import { ColorPickerProps } from "./ColorPicker.types";
 
 const ColorPicker = ({
   className,
@@ -50,39 +50,31 @@ const ColorPicker = ({
   isPickerOnly = false,
   handleChange,
   hexCodeLabel = "Hex code",
-  forwardedRef,
 }: ColorPickerProps) => {
-  const [color, setColor] = useState(
-    appliedColor || globalColors.lightBlueMain,
-  );
-
+  const [color, setColor] = useState(appliedColor);
   const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
-    if (!isPickerOnly && appliedColor && appliedColor !== color) {
-      setColor(appliedColor);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setColor(appliedColor);
   }, [appliedColor]);
 
+  const onColorChange = (newColor: string) => {
+    setColor(newColor);
+    if (handleChange) handleChange(newColor);
+  };
+
   return (
-    <Wrapper
-      data-testid="color-picker"
-      ref={forwardedRef}
-      isPickerOnly={isPickerOnly}
-      className={className}
-      id={id}
-    >
+    <div className={classNames(styles.wrapper, className)} id={id}>
       {isPickerOnly ? (
-        <div className="hex-header">
-          <div className="hex-text">
+        <div className={styles.hexHeader}>
+          <div className={styles.hexText}>
             <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
               {t("Custom")}
             </Text>
           </div>
-          <div className="hex-close">
+          <div className={styles.hexClose}>
             <IconButton
-              className="table-header_icon-button"
+              className={styles.tableHeaderIconButton}
               size={16}
               onClick={onClose}
               iconName={CrossIconSvgUrl}
@@ -92,48 +84,42 @@ const ColorPicker = ({
         </div>
       ) : null}
 
-      <div className="hex-color-picker">
-        {!isPickerOnly ? (
-          <div className="hex-value-container">
-            <div className="hex-value-label">{hexCodeLabel}:</div>
+      <div className={styles.hexColorPicker}>
+        <HexColorPicker color={color} onChange={onColorChange} />
 
+        {!isPickerOnly ? (
+          <div className={styles.hexValueContainer}>
+            <Text className={styles.hexValueLabel}>{hexCodeLabel}:</Text>
             <HexColorInput
-              className="hex-value"
               prefixed
-              color={color.toUpperCase()}
-              onChange={setColor}
+              color={color}
+              onChange={onColorChange}
+              className={styles.hexValue}
             />
           </div>
         ) : null}
 
-        <HexColorPicker
-          color={
-            isPickerOnly ? appliedColor?.toUpperCase() : color.toUpperCase()
-          }
-          onChange={isPickerOnly ? handleChange : setColor}
-        />
-
         {!isPickerOnly ? (
-          <div className="hex-button">
+          <div className={styles.hexButton}>
             <Button
-              label={applyButtonLabel}
-              size={ButtonSize.small}
-              className="apply-button"
+              className={styles.applyButton}
               primary
               scale
+              size={ButtonSize.small}
+              label={applyButtonLabel}
               onClick={() => onApply(color)}
             />
             <Button
-              label={cancelButtonLabel}
-              className="cancel-button button"
-              size={ButtonSize.small}
+              className={styles.cancelButton}
               scale
+              size={ButtonSize.small}
+              label={cancelButtonLabel}
               onClick={onClose}
             />
           </div>
         ) : null}
       </div>
-    </Wrapper>
+    </div>
   );
 };
 

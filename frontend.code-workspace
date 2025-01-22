@@ -316,5 +316,6 @@
       "yaml",
       "yml",
     ],
+    "pnpmCatalogLens.enabled": true,
   },
 }

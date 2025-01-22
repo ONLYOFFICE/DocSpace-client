@@ -186,5 +186,8 @@
   "peerDependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
+  },
+  "resolutions": {
+    "@types/react": "catalog:"
   }
 }

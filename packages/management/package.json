@@ -79,5 +79,8 @@
     "webpack-merge": "catalog:",
     "webpack": "catalog:"
   },
-  "title": "ONLYOFFICE"
+  "title": "ONLYOFFICE",
+  "resolutions": {
+    "@types/react": "catalog:"
+  }
 }

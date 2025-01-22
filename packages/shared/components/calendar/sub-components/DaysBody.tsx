@@ -36,7 +36,6 @@ export const DaysBody = ({
   selectedDate,
   minDate,
   maxDate,
-  isMobile,
   isScroll,
 }: DaysBodyProps) => {
   const daysElements = getDayElements(
@@ -45,7 +44,6 @@ export const DaysBody = ({
     handleDateChange,
     minDate,
     maxDate,
-    isMobile,
   );
   const weekdayElements = getWeekdayElements();
 

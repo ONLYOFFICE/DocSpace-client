@@ -30,10 +30,10 @@
     "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
     "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared,@docspace/sdk}' run lint",
     "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared,@docspace/sdk}' run lint:fix",
-    "test:build": "yarn workspace @docspace/login test:build",
-    "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
-    "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
-    "test:e2e:docker:clear": "yarn workspace @docspace/login test:e2e:docker:clear"
+    "test:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:build",
+    "test:e2e:docker:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:build",
+    "test:e2e:docker:start": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:start",
+    "test:e2e:docker:clear": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:clear"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",

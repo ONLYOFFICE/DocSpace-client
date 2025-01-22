@@ -8406,7 +8406,7 @@ __metadata:
   version: 3.3.6
   resolution: "@types/hoist-non-react-statics@npm:3.3.6"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
     hoist-non-react-statics: "npm:^3.3.0"
   checksum: 10/f03e43bd081876c49584ffa0eb690d69991f258203efca44dcc30efdda49a50653ff06402917d1edc9cb7e2adebbe9e2d1d0e739bc99c1b5372103b1cc534e47
   languageName: node
@@ -8684,7 +8684,7 @@ __metadata:
   version: 1.3.15
   resolution: "@types/reach__router@npm:1.3.15"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/2f5da90e0a821b41da13ea4ff15f1aada8a5e4ce549103b409fd6647a410e75df0ded61f729ceb70700e4b835ffcac940356ce301208a2d49ff1c082349f9eaa
   languageName: node
   linkType: hard
@@ -8693,7 +8693,7 @@ __metadata:
   version: 13.0.3
   resolution: "@types/react-avatar-editor@npm:13.0.3"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/32c4d51874a186fb4542a9377ff35f3a41a06668d48c51ded84f0c40f379d34a2bf198ef5d1cca226d8b7d8c0e3cc4ff7b3eca9b0f72ff76568b012bd63296b3
   languageName: node
   linkType: hard
@@ -8711,7 +8711,7 @@ __metadata:
   version: 2.1.9
   resolution: "@types/react-google-recaptcha@npm:2.1.9"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/5a90bb50fe0a49f2e2ceb7950859cfdbe019aa0a75261451fb50ad83dcd4aa360a1941ab6c9b3c627f2b7a0dab2c6c09d6297469d3d4d02ebaf36b3fc34429b6
   languageName: node
   linkType: hard
@@ -8720,7 +8720,7 @@ __metadata:
   version: 11.0.4
   resolution: "@types/react-syntax-highlighter@npm:11.0.4"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/da93fcb498502e177c6b1a9f1dc4bc7efc1f0847889f487c65de167d0721b69738d0b444a9dedeabda58253af58b1e9f54a14ef3f253af8310df0ea666b24e03
   languageName: node
   linkType: hard
@@ -8729,7 +8729,7 @@ __metadata:
   version: 5.4.14
   resolution: "@types/react-text-mask@npm:5.4.14"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/52ddb3f68673a833da5c14fb21d3341f60975908849b99d7a3a6fde5f1c83d0a3e3a086f97fd3675788f15049dbd1988971e33263cdaead87ce825513e5b585c
   languageName: node
   linkType: hard
@@ -8738,7 +8738,7 @@ __metadata:
   version: 4.3.6
   resolution: "@types/react-textarea-autosize@npm:4.3.6"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/af30e35ff007daf7ba4d3269b12b1236f1620c88988f8f528271814d00a76bb1840b689197197bd2c493f23285072dcaaf47fb6e65cdb9ca853ab72f6b916617
   languageName: node
   linkType: hard
@@ -8757,7 +8757,7 @@ __metadata:
   resolution: "@types/react-virtualized@npm:9.22.0"
   dependencies:
     "@types/prop-types": "npm:*"
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/6c6380fcd758d4a24bb8dea5d192e190aec5f714520c5d30f23932eb24289e315f6bd3de782dc3a6181c332346b53868c0b8e8769777e14a7260645e6e6e54a5
   languageName: node
   linkType: hard
@@ -8766,7 +8766,7 @@ __metadata:
   version: 1.0.9
   resolution: "@types/react-window-infinite-loader@npm:1.0.9"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
     "@types/react-window": "npm:*"
   checksum: 10/9f2c27f24bfa726ceaef6612a4adbda745f3455c877193f68dfa48591274c670a6df4fa6870785cff5f948e289ceb9a247fb7cbf67e3cd555ab16d11866fd63f
   languageName: node
@@ -8776,27 +8776,27 @@ __metadata:
   version: 1.8.8
   resolution: "@types/react-window@npm:1.8.8"
   dependencies:
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
   checksum: 10/79b70b7c33161efb14bf69115792843de8e038594136a8373cfbbcc4066c49fd611dd2d3592a9a81d19d21c075bf14e5e73a64f4d9ad32e45d4d5493f5f53918
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
-  version: 19.0.7
-  resolution: "@types/react@npm:19.0.7"
-  dependencies:
-    csstype: "npm:^3.0.2"
-  checksum: 10/09522132bde715888e57c61fc89a87db06699872535450296f1c975c5014a7953ff08c3bff6b37d4a4515ceeb65b09cc5f841513cc8fede65fec788790b21154
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.3.11":
+"@types/react@npm:18.3.18, @types/react@npm:^18.3.11":
   version: 18.3.18
   resolution: "@types/react@npm:18.3.18"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10/7fdd8b853e0d291d4138133f93f8d5c333da918e5804afcea61a923aab4bdfc9bb15eb21a5640959b452972b8715ddf10ffb12b3bd071898b9e37738636463f2
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:>=16":
+  version: 19.0.7
+  resolution: "@types/react@npm:19.0.7"
+  dependencies:
+    csstype: "npm:^3.0.2"
+  checksum: 10/09522132bde715888e57c61fc89a87db06699872535450296f1c975c5014a7953ff08c3bff6b37d4a4515ceeb65b09cc5f841513cc8fede65fec788790b21154
   languageName: node
   linkType: hard
 
@@ -8879,7 +8879,7 @@ __metadata:
   resolution: "@types/styled-components@npm:5.1.34"
   dependencies:
     "@types/hoist-non-react-statics": "npm:*"
-    "@types/react": "npm:*"
+    "@types/react": "npm:18.3.18"
     csstype: "npm:^3.0.2"
   checksum: 10/3da291b46f03d378a0176c9d034deee7ee0684c5d62e1c5ce82f3be0972918eaa806f45c62e9a4f1c8d24c5ba6571c260caba2493fc7e82b528ac7d15903e2c1
   languageName: node

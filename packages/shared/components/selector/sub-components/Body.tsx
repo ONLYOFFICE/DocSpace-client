@@ -287,7 +287,7 @@ const Body = ({
           />
 
           {isSSR && !bodyHeight ? (
-            <Scrollbar style={{ height: "100%" }}>
+            <Scrollbar style={{ height: "100%", overflow: "hidden" }}>
               {items.map((item, index) => (
                 <div
                   key={item.id}

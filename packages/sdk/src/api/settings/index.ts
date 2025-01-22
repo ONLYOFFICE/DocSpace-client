@@ -29,6 +29,10 @@
 import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
+import { colorThemeHandler } from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
+
 export async function getSettings(
   withPassword = false,
 ): Promise<TSettings | string | undefined> {
@@ -54,7 +58,7 @@ export async function getSettings(
 export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
   const [req] = createRequest([`/settings/colortheme`], [["", ""]], "GET");
 
-  const res = await fetch(req);
+  const res = IS_TEST ? colorThemeHandler() : await fetch(req);
 
   if (!res.ok) return;
 

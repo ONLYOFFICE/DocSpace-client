@@ -27,7 +27,19 @@
  */
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import { TFilesSettings } from "@docspace/shared/api/files/types";
+import {
+  TFilesSettings,
+  type TFolder,
+  type TGetFolder,
+} from "@docspace/shared/api/files/types";
+import {
+  checkFilterInstance,
+  decodeDisplayName,
+  getFolderClassNameByType,
+  sortInDisplayOrder,
+} from "@docspace/shared/utils/common";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { FolderType } from "@docspace/shared/enums";
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const [req] = createRequest([`/files/settings`], [["", ""]], "GET");
@@ -39,4 +51,109 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const filesSettings = await res.json();
 
   return filesSettings.response;
+}
+
+export async function getFoldersTree(): Promise<TFolder[]> {
+  const [req] = createRequest(
+    [`/files/@root?filterType=2&count=1`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(req);
+
+  if (!res.ok) {
+    throw new Error("Failed to get folders tree");
+  }
+
+  const resJson = await res.json();
+  const folders = resJson.response as TGetFolder[];
+
+  const sortedFolders = sortInDisplayOrder(folders);
+
+  return sortedFolders.map((data, index) => {
+    const { new: newItems, pathParts, current } = data;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
+
+    const type = +rootFolderType;
+
+    const name = getFolderClassNameByType(type);
+
+    return {
+      ...current,
+      id,
+      key: `0-${index}`,
+      parentId,
+      title,
+      rootFolderType: type,
+      folderClassName: name,
+      folders: null,
+      pathParts,
+      foldersCount,
+      filesCount,
+      newItems,
+      security,
+      new: newItems,
+    } as TFolder;
+  });
+}
+
+export async function getFolder(
+  folderIdParam: string | number,
+  filter: FilesFilter,
+  signal?: AbortSignal,
+  share?: string,
+): Promise<TGetFolder> {
+  let params = folderIdParam;
+  let folderId = folderIdParam;
+
+  if (folderId && typeof folderId === "string") {
+    folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
+  }
+
+  if (filter) {
+    checkFilterInstance(filter, FilesFilter);
+
+    params = `${folderId}?${filter.toApiUrlParams()}`;
+  }
+
+  const shareHeader: [string, string] = share
+    ? ["Request-Token", share]
+    : ["", ""];
+
+  const [req] = createRequest(
+    [`/files/${params}`],
+    [shareHeader],
+    "GET",
+    undefined,
+    undefined,
+    [signal],
+  );
+
+  const res = await fetch(req);
+
+  if (!res.ok) {
+    throw new Error("Failed to get folder");
+  }
+
+  const resJson = await res.json();
+  const folder = resJson.response as TGetFolder;
+
+  folder.files = decodeDisplayName(folder.files);
+  folder.folders = decodeDisplayName(folder.folders);
+
+  folder.current.isArchive =
+    !!folder.current.roomType &&
+    folder.current.rootFolderType === FolderType.Archive;
+
+  return folder;
 }

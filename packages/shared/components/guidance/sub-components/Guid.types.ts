@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface ClippedPosition {
+  right: number;
   width: number;
   height: number;
   left: number;

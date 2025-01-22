@@ -206,7 +206,7 @@ catalog:
   sass: 1.79.5
   sass-loader: 16.0.4
   screenfull: 5.2.0
-  serve: 14.2.3
+  serve: 14.2.4
   shx: 0.3.4
   sjcl: 1.0.8
   socket.io-client: 4.8.0

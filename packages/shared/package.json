@@ -180,7 +180,6 @@
     "style-loader": "catalog:",
     "svg-inline-loader": "catalog:",
     "ts-jest": "catalog:",
-    "ts-migrate": "catalog:",
     "ts-node": "catalog:"
   },
   "peerDependencies": {

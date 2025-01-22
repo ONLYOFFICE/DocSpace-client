@@ -217,7 +217,6 @@ catalog:
   svg-inline-loader: 0.8.2
   terser-webpack-plugin: 5.3.10
   terser: 5.34.1
-  ts-migrate: 0.1.35
   ts-node: 10.9.2
   ts-pattern: 5.5.0
   ts-jest: 29.2.5

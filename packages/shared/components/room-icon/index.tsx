@@ -207,6 +207,7 @@ const RoomIcon = ({
         data-testid="room-icon"
         data-is-archive={isArchive}
         data-has-editing={withEditing}
+        data-is-template={isTemplate}
         data-is-empty={isEmptyIcon}
         onClick={onToggleOpenEditLogo}
       >

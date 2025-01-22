@@ -63,7 +63,6 @@
     "mocha-multi": "catalog:",
     "mocha": "catalog:",
     "mochawesome": "catalog:",
-    "nodemon": "catalog:",
     "npm-run-all": "catalog:",
     "sass-loader": "catalog:",
     "sass": "catalog:",

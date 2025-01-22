@@ -33,6 +33,38 @@
       position: absolute;
     }
 
+    .template-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--room-icon-size);
+      height: var(--room-icon-size);
+
+      .template-icon-svg {
+        position: absolute;
+        width: var(--room-icon-size);
+        height: var(--room-icon-size);
+
+        svg {
+          width: var(--room-icon-size);
+          height: var(--room-icon-size);
+
+          path {
+            fill: var(--room-icon-color);
+          }
+        }
+      }
+
+      .room-title {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+
+        color: var(--room-icon-color);
+        position: relative;
+      }
+    }
+
     .room-icon-empty {
       svg {
         width: 16px;

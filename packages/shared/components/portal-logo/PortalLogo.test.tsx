@@ -1,24 +1,14 @@
 import React from "react";
-import {
-  render,
-  screen,
-  fireEvent,
-  act,
-  waitFor,
-} from "@testing-library/react";
+import { screen, fireEvent, act, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 
 import PortalLogo from "./PortalLogo";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 jest.mock("react-device-detect", () => ({
   isMobileOnly: false,
 }));
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 describe("PortalLogo", () => {
   const mockResizeEvent = (width: number) => {

@@ -26,9 +26,10 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
+
 import { DeviceType } from "../../enums";
 
 import { BetaBadge, BetaBadgeProps } from ".";
@@ -47,10 +48,6 @@ jest.mock("react-i18next", () => ({
   }),
   Trans: ({ children }: { children: string }) => children,
 }));
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 const baseProps: BetaBadgeProps = {
   documentationEmail: "support@example.com",

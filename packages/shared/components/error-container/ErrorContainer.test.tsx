@@ -25,15 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent, render } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
+
 import ErrorContainer from "./ErrorContainer";
 
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("ErrorContainer", () => {
   const mockOnClick = jest.fn();

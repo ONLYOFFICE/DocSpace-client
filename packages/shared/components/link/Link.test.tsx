@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
 
-import { Base } from "../../themes";
 import { Link, LinkType } from ".";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock CSS modules
 jest.mock("./Link.module.scss", () => ({
@@ -42,10 +42,6 @@ jest.mock("./Link.module.scss", () => ({
   enableUserSelect: "enableUserSelect",
   page: "page",
 }));
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 const baseProps = {
   type: LinkType.page,

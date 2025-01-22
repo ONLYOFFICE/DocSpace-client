@@ -24,6 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+:global(.rtl) {
+  :local {
+    .container {
+      & > span {
+        left: 0;
+        margin-left: var(--viewer-rtl-margin-left);
+      }
+
+      .details {
+        right: 0;
+
+        .title {
+          padding-right: 16px;
+        }
+      }
+    }
+  }
+}
+
+:global(.ltr) {
+  :local {
+    .container {
+      & > span {
+        right: 0;
+        margin-right: var(--viewer-rtl-margin-right);
+      }
+
+      .details {
+        left: 0;
+
+        .title {
+          padding-left: 16px;
+        }
+      }
+    }
+  }
+}
+
 .container {
   color: var(--viewer-color);
   overflow: hidden;
@@ -37,20 +75,6 @@
     position: fixed;
     bottom: 5px;
     z-index: 305;
-  }
-
-  &[dir="rtl"] {
-    > span {
-      left: 0;
-      margin-left: var(--viewer-rtl-margin-left);
-    }
-  }
-
-  &[dir="ltr"] {
-    > span {
-      right: 0;
-      margin-right: var(--viewer-rtl-margin-right);
-    }
   }
 
   .deleteBtnContainer,
@@ -81,14 +105,6 @@
     position: fixed;
     top: 0;
 
-    [dir="rtl"] & {
-      right: 0;
-    }
-
-    [dir="ltr"] & {
-      left: 0;
-    }
-
     .title {
       text-align: center;
       white-space: nowrap;
@@ -97,14 +113,6 @@
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);
-
-      [dir="rtl"] & {
-        padding-right: 16px;
-      }
-
-      [dir="ltr"] & {
-        padding-left: 16px;
-      }
 
       box-sizing: border-box;
       color: var(--viewer-fill);

@@ -24,8 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+:global(.rtl) {
+  :local {
+    .container {
+      direction: rtl;
+    }
+  }
+}
+:global(.ltr) {
+  :local {
+    .container {
+      direction: ltr;
+    }
+  }
+}
+
 .container {
-  direction: var(--interface-direction);
   padding-top: 21px;
   height: 64px;
   width: 100%;

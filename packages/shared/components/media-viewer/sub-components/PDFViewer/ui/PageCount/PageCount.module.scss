@@ -26,6 +26,16 @@
 
 @import "../../../../../../styles/variables/devices.scss";
 
+:global(.rtl) {
+  :local {
+    .pageCountWrapper {
+      &.isPanelOpen {
+        left: calc(50% - 153px);
+      }
+    }
+  }
+}
+
 .pageCountWrapper {
   display: flex;
   gap: 10px;
@@ -67,12 +77,6 @@
 
   &:not(.isPanelOpen) {
     left: 50%;
-  }
-
-  [dir="rtl"] & {
-    &.isPanelOpen {
-      left: calc(50% - 153px);
-    }
   }
 
   @media (hover: hover) {

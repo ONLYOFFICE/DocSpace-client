@@ -24,8 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+:global(.rtl) {
+  :local {
+    .container {
+      direction: rtl;
+    }
+
+    .mobileClose {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+:global(.ltr) {
+  :local {
+    .container {
+      direction: ltr;
+    }
+  }
+}
+
 .container {
-  direction: var(--interface-direction);
   z-index: var(--mobile-details-z-index);
   position: fixed;
   top: 0;
@@ -51,9 +70,6 @@
   position: fixed;
   inset-inline-start: 21px;
   top: 22px;
-  [dir="rtl"] & {
-    transform: scaleX(-1);
-  }
 }
 
 .mobileContext {

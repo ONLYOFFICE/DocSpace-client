@@ -24,17 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
-
-import {
-  HEADER_HEADER,
-  ACCEPT_LABEL_HEADER,
-  CANCEL_HEADER,
-  CANCEL_LABEL_HEADER,
-  ROOM_TYPE_HEADER,
-  SEARCH_HEADER,
-} from "@/utils/constants";
-
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 
@@ -43,22 +32,12 @@ import RoomSelector from "./page.client";
 
 const PAGE_COUNT = 100;
 
-export default async function Page({}: {}) {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
   const filter = RoomsFilter.getDefault();
-  const hdrs = headers();
-
-  const baseConfig: Record<string, string | null> = {
-    header: hdrs.get(HEADER_HEADER),
-    cancel: hdrs.get(CANCEL_HEADER),
-    search: hdrs.get(SEARCH_HEADER),
-    roomType: hdrs.get(ROOM_TYPE_HEADER),
-    cancelLabel: hdrs.get(CANCEL_LABEL_HEADER),
-    acceptLabel: hdrs.get(ACCEPT_LABEL_HEADER),
-  };
-
-  Object.keys(baseConfig).forEach(
-    (key) => baseConfig[key] === undefined && delete baseConfig[key],
-  );
 
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
@@ -74,7 +53,7 @@ export default async function Page({}: {}) {
     <RoomSelector
       roomList={rooms}
       pageCount={PAGE_COUNT}
-      baseConfig={baseConfig}
+      baseConfig={searchParams}
     />
   );
 }

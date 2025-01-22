@@ -27,6 +27,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import {
+  LOCALE_HEADER,
+  THEME_HEADER,
+  HEADER_HEADER,
+  ACCEPT_LABEL_HEADER,
+  CANCEL_HEADER,
+  CANCEL_LABEL_HEADER,
+  ROOM_TYPE_HEADER,
+  SEARCH_HEADER,
+} from "@/utils/constants";
+
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host");
@@ -51,12 +62,25 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(`${redirectUrl}/sdk${request.nextUrl.search}`);
   }
 
-  const serchParams = new URLSearchParams(request.nextUrl.searchParams);
-  const theme = serchParams.get("theme");
-  const locale = serchParams.get("locale");
+  const searchParams = new URLSearchParams(request.nextUrl.searchParams);
 
-  requestHeaders.set("x-sdk-config-theme", theme ?? "");
-  requestHeaders.set("x-sdk-config-locale", locale ?? "");
+  const theme = searchParams.get("theme");
+  const locale = searchParams.get("locale");
+  const header = searchParams.get("header");
+  const cancel = searchParams.get("cancel");
+  const search = searchParams.get("search");
+  const roomType = searchParams.get("roomType");
+  const cancelLabel = searchParams.get("cancelLabel");
+  const acceptLabel = searchParams.get("acceptLabel");
+
+  requestHeaders.set(THEME_HEADER, theme ?? "");
+  requestHeaders.set(LOCALE_HEADER, locale ?? "");
+  requestHeaders.set(HEADER_HEADER, header ?? "");
+  requestHeaders.set(CANCEL_HEADER, cancel ?? "");
+  requestHeaders.set(SEARCH_HEADER, search ?? "");
+  requestHeaders.set(ROOM_TYPE_HEADER, roomType ?? "");
+  requestHeaders.set(CANCEL_LABEL_HEADER, cancelLabel ?? "");
+  requestHeaders.set(ACCEPT_LABEL_HEADER, acceptLabel ?? "");
 
   return NextResponse.next({
     request: {

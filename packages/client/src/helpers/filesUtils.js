@@ -36,6 +36,8 @@ import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.web
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
@@ -385,20 +387,34 @@ export const mappingActiveItems = (items, destFolderId) => {
 };
 
 export const getOperationsProgressTitle = (type) => {
+  const {
+    trash,
+    move,
+    copy,
+    download,
+    duplicate,
+    exportIndex,
+    markAsRead,
+    deletePermanently,
+  } = OPERATIONS_NAME;
   switch (type) {
-    case "trash":
+    case trash:
       return "Moving to trash";
-    case "move":
+    case move:
       return "Moving";
-    case "copy":
+    case copy:
       return "Copying";
-    case "download":
+    case download:
       return "Downloading";
-    case "duplicate":
+    case duplicate:
       return "Duplicating";
-    case "export-index":
-      return "Export room index";
+    case exportIndex:
+      return "Exporting index";
+    case markAsRead:
+      return "Marking is read";
+    case deletePermanently:
+      return "Deleting permanently";
     default:
-      return "";
+      return "Other processes";
   }
 };

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
@@ -38,7 +39,22 @@ class SecondaryProgressDataStore {
 
   isDownload = false;
 
-  secondaryOperationsArray = [];
+  secondaryOperationsArray = [
+    // {
+    //   label: "Duplicating",
+    //   operation: OPERATIONS_NAME.exportIndex,
+    //   // alert: true,
+    //   completed: true,
+    //   items: [{ operationId: "operation_1", percent: 10, completed: true }],
+    // },
+    // {
+    //   label: "Downloading",
+    //   operation: OPERATIONS_NAME.deletePermanently,
+    //   // alert: false,
+    //   completed: true,
+    //   items: [{ operationId: "operation_1", percent: 0, completed: true }],
+    // },
+  ];
 
   constructor() {
     makeAutoObservable(this);
@@ -79,11 +95,6 @@ class SecondaryProgressDataStore {
         items: updatedItems,
         completed: isCompleted,
       };
-
-      console.log(
-        "this.secondaryOperationsArray",
-        this.secondaryOperationsArray,
-      );
     } else {
       const progress = {
         operation,
@@ -108,7 +119,22 @@ class SecondaryProgressDataStore {
     this.itemsSelectionLength = itemsSelectionLength;
   };
 
-  clearSecondaryProgressData = (operationId, operation) => {
+  clearSecondaryProgressData = (operationId, operation, allOperations) => {
+    if (allOperations) {
+      const incompleteOperations = this.secondaryOperationsArray.filter(
+        (item) => !item.completed,
+      );
+
+      this.secondaryOperationsArray.splice(
+        0,
+        this.secondaryOperationsArray.length,
+        ...incompleteOperations,
+      );
+
+      console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
+      return;
+    }
+
     if (operation) {
       const operationIndex = this.secondaryOperationsArray.findIndex(
         (obj) => obj.operation === operation,
@@ -122,27 +148,55 @@ class SecondaryProgressDataStore {
 
         if (allItemsCompleted) {
           this.secondaryOperationsArray.splice(operationIndex, 1);
+        } else {
+          const updatedItems = operationObject.items.filter(
+            (item) => !item.completed,
+          );
+
+          const updatedOperation = {
+            ...operationObject,
+            items: updatedItems,
+            completed: false,
+          };
+
+          this.secondaryOperationsArray.splice(
+            operationIndex,
+            1,
+            updatedOperation,
+          );
         }
       }
     } else if (operationId) {
+      // Handle clearing by operationId
       const operationIndex = this.secondaryOperationsArray.findIndex((obj) =>
         obj.items.some((item) => item.operationId === operationId),
       );
 
-      if (operationIndex === -1) return;
+      if (operationIndex !== -1) {
+        const operationObject = this.secondaryOperationsArray[operationIndex];
+        const updatedItems = operationObject.items.filter(
+          (item) => item.operationId !== operationId,
+        );
 
-      const operationObject = this.secondaryOperationsArray[operationIndex];
+        if (updatedItems.length === 0) {
+          // Remove the operation if no items left
+          this.secondaryOperationsArray.splice(operationIndex, 1);
+        } else {
+          // Update with remaining items
+          const updatedOperation = {
+            ...operationObject,
+            items: updatedItems,
+            completed: updatedItems.every((item) => item.completed),
+          };
 
-      operationObject.items = operationObject.items.filter(
-        (item) => item.operationId !== operationId,
-      );
-
-      if (operationObject.items.length === 0) {
-        this.secondaryOperationsArray.splice(operationIndex, 1);
+          this.secondaryOperationsArray.splice(
+            operationIndex,
+            1,
+            updatedOperation,
+          );
+        }
       }
     }
-
-    console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };
 
   get alert() {
@@ -150,7 +204,7 @@ class SecondaryProgressDataStore {
   }
 
   get secondaryOperationsCompleted() {
-    return this.secondaryOperationsArray.some((op) => op.completed);
+    return this.secondaryOperationsArray.every((op) => op.completed);
   }
 
   get isSecondaryProgressFinished() {

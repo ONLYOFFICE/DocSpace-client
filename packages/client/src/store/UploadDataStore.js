@@ -1583,6 +1583,8 @@ class UploadDataStore {
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
+    const pbData = { operation: OPERATIONS_NAME.copy, operationId };
+
     return copyToFolder(
       destFolderId,
       folderIds,
@@ -1592,7 +1594,6 @@ class UploadDataStore {
       content,
     )
       .then((res) => {
-        const pbData = { operation: OPERATIONS_NAME.copy, operationId };
         let data = null;
 
         if (res && res.length > 0) {
@@ -1618,6 +1619,7 @@ class UploadDataStore {
           completed: true,
           alert: true,
           operationId,
+          operation: pbData.operation,
         });
         this.clearActiveOperations(fileIds, folderIds);
         // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
@@ -1633,10 +1635,9 @@ class UploadDataStore {
     deleteAfter,
     operationId,
   ) => {
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      this.secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const { refreshFiles, setMovingInProgress } = this.filesStore;
-
+    const pbData = { operation: OPERATIONS_NAME.move, operationId };
     return moveToFolder(
       destFolderId,
       folderIds,
@@ -1645,7 +1646,6 @@ class UploadDataStore {
       deleteAfter,
     )
       .then((res) => {
-        const pbData = { icon: "move", operationId };
         let data = null;
 
         if (res && res.length > 0) {
@@ -1668,12 +1668,13 @@ class UploadDataStore {
       })
       .catch((err) => {
         setSecondaryProgressBarData({
-          visible: true,
+          completed: true,
           alert: true,
           operationId,
+          operation: pbData.operation,
         });
         this.clearActiveOperations(fileIds, folderIds);
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return Promise.reject(err);
       })
       .finally(() => {
@@ -1702,8 +1703,10 @@ class UploadDataStore {
 
     const operationId = uniqueid("operation_");
 
+    const operation = isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move;
+
     setSecondaryProgressBarData({
-      operation: isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move,
+      operation,
       percent: 0,
       operationId,
     });
@@ -1729,15 +1732,20 @@ class UploadDataStore {
   };
 
   loopFilesOperations = async (data, pbData, isDownloadAction) => {
-    const { clearSecondaryProgressData, setSecondaryProgressBarData } =
-      this.secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     if (!data) {
-      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+      setSecondaryProgressBarData({
+        operation: pbData.operation,
+        alert: false,
+        completed: true,
+        operationId: pbData.operationId,
+      });
+
+      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
       return;
     }
 
-    const label = this.secondaryProgressDataStore.label;
     let progress = data.progress;
 
     let operationItem = data;
@@ -1756,14 +1764,10 @@ class UploadDataStore {
           ? item.finished && item.url
           : item.finished
         : true;
-      console.log(" loopFilesOperations operationId", pbData.operationId);
 
       setSecondaryProgressBarData({
-        icon: pbData.icon,
         operation: pbData.operation,
-        label: pbData.label || label,
         percent: progress,
-        // visible: true,
         alert: false,
         currentFile: item,
         operationId: pbData.operationId,

@@ -202,7 +202,9 @@ const Section = (props: SectionProps) => {
     }),
     [sectionSize.width, sectionSize.height],
   );
-
+  // console.log("==");
+  // console.log("secondaryActiveOperations", secondaryActiveOperations);
+  // console.log("==");
   return (
     isSectionAvailable && (
       <Provider value={providerValue}>

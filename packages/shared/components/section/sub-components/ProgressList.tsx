@@ -4,9 +4,16 @@ import { observer } from "mobx-react";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import DuplicateIconUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import OtherOperationsIconUrl from "PUBLIC_DIR/images/icons/16/other-operations.react.svg?url";
+import ListIconUrl from "PUBLIC_DIR/images/icons/16/list.react.svg?url";
+import DeletePermanentlyIconUrl from "PUBLIC_DIR/images/icons/16/delete-permanently.react.svg?url";
+import ExportIndexIconUrl from "PUBLIC_DIR/images/icons/16/export-index.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 
 import { ProgressBarMobile } from "../../progress-bar-mobile";
 import { Operation } from "../Section.types";
+import { OPERATIONS_NAME } from "../../../constants";
 
 interface ProgressListProps {
   operations: Operation[];
@@ -18,15 +25,24 @@ interface ProgressListProps {
 
 const getIcon = (icon: string): string => {
   switch (icon) {
-    case "download":
+    case OPERATIONS_NAME.download:
       return DownloadReactSvgUrl;
-    case "convert":
+    case OPERATIONS_NAME.convert:
       return RefreshReactSvgUrl;
-    case "copy":
-    case "duplicate":
+    case OPERATIONS_NAME.copy:
+      return CopyReactSvgUrl;
+    case OPERATIONS_NAME.duplicate:
       return DuplicateIconUrl;
+    case OPERATIONS_NAME.markAsRead:
+      return ListIconUrl;
+    case OPERATIONS_NAME.deletePermanently:
+      return DeletePermanentlyIconUrl;
+    case OPERATIONS_NAME.exportIndex:
+      return ExportIndexIconUrl;
+    case OPERATIONS_NAME.move:
+      return MoveReactSvgUrl;
     default:
-      return DuplicateIconUrl;
+      return OtherOperationsIconUrl;
   }
 };
 

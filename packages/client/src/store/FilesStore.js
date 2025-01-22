@@ -2275,13 +2275,13 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["delete"]);
       }
 
-      // if (!canMove) {
-      fileOptions = removeOptions(fileOptions, ["move-to"]);
-      // }
+      if (!canMove) {
+        fileOptions = removeOptions(fileOptions, ["move-to"]);
+      }
 
-      // if (!canCopy) {
-      fileOptions = removeOptions(fileOptions, ["copy-to"]);
-      // }
+      if (!canCopy) {
+        fileOptions = removeOptions(fileOptions, ["copy-to"]);
+      }
 
       if (!canDuplicate) {
         fileOptions = removeOptions(fileOptions, ["duplicate"]);

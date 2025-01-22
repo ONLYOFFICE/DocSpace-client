@@ -54,19 +54,16 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
+      const animation = e.animationName;
+
       if (
-        e.animationName.includes("hideButton") ||
-        e.animationName.includes("hideButtonImmediate")
+        animation.includes("hideButton") ||
+        animation.includes("hideButtonImmediate")
       ) {
-        secondaryActiveOperations.forEach((item) => {
-          // const allItemsCompleted = item.items?.every((op) => op.completed);
-          // if (allItemsCompleted) {
-          clearSecondaryProgressData(null, item.operation);
-          //   }
-        });
+        clearSecondaryProgressData(null, null, true);
       }
     },
-    [secondaryActiveOperations, clearSecondaryProgressData],
+    [clearSecondaryProgressData],
   );
 
   useLayoutEffect(() => {
@@ -89,12 +86,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   useLayoutEffect(() => {
     if (prevOperationsCompletedRef.current && !operationsCompleted) {
-      secondaryActiveOperations.forEach((item) => {
-        const allItemsCompleted = item.items?.every((op) => op.completed);
-        if (allItemsCompleted) {
-          clearSecondaryProgressData(null, item.operation);
-        }
-      });
+      clearSecondaryProgressData(null, null, true);
     }
 
     prevOperationsCompletedRef.current = operationsCompleted;

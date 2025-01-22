@@ -198,8 +198,5 @@
         ]
       }
     }
-  },
-  "resolutions": {
-    "@types/react": "catalog:"
   }
 }

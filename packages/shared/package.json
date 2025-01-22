@@ -115,6 +115,7 @@
     "@storybook/manager-api": "catalog:",
     "@storybook/react-webpack5": "catalog:",
     "@storybook/react": "catalog:",
+    "@storybook/theming": "catalog:",
     "@svgr/webpack": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
@@ -185,8 +186,5 @@
   "peerDependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
-  },
-  "resolutions": {
-    "@types/react": "catalog:"
   }
 }

@@ -78,8 +78,5 @@
         ]
       }
     }
-  },
-  "resolutions": {
-    "@types/react": "catalog:"
   }
 }

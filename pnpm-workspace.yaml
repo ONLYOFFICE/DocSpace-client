@@ -36,6 +36,7 @@ catalog:
   "@storybook/manager-api": 7.6.20
   "@storybook/react-webpack5": 7.6.20
   "@storybook/react": 7.6.20
+  "@storybook/theming": 7.6.20
   "@svgr/webpack": 5.5.0
   "@testing-library/dom": 9.3.4
   "@testing-library/jest-dom": 6.6.3

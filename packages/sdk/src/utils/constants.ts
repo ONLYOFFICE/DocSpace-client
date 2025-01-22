@@ -26,10 +26,3 @@
 
 export const THEME_HEADER = "x-sdk-config-theme";
 export const LOCALE_HEADER = "x-sdk-config-locale";
-
-export const HEADER_HEADER = "x-sdk-config-header";
-export const CANCEL_HEADER = "x-sdk-config-cancel";
-export const SEARCH_HEADER = "x-sdk-config-search";
-export const ROOM_TYPE_HEADER = "x-sdk-config-room-type";
-export const CANCEL_LABEL_HEADER = "x-sdk-config-cancel-label";
-export const ACCEPT_LABEL_HEADER = "x-sdk-config-accept-label";

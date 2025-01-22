@@ -41,8 +41,6 @@ import ImageViewerToolbarProps, {
   ToolbarItemType,
 } from "./ViewerToolbar.props";
 
-import { globalColors } from "../../../../themes";
-
 const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
   (
     {
@@ -83,7 +81,6 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
         <li
           className={styles.toolbarItem}
           ref={contextMenuRef}
-          style={{ position: "relative" }}
           key={item.key}
           onClick={() => {
             setIsOpenContextMenu((open) => !open);
@@ -100,18 +97,7 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
     }
 
     function getPercentCompoent() {
-      return (
-        <div
-          className="iconContainer zoomPercent"
-          style={{
-            width: "auto",
-            color: globalColors.white,
-            userSelect: "none",
-          }}
-        >
-          {`${percent}%`}
-        </div>
-      );
+      return <div className={styles.zoomPercent}>{`${percent}%`}</div>;
     }
 
     function renderToolbarItem(item: ToolbarItemType) {

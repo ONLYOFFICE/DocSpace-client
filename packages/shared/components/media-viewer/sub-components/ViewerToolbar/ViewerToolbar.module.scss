@@ -58,6 +58,7 @@
   align-items: center;
   height: 48px;
   width: 48px;
+  position: relative;
 
   &:hover {
     cursor: pointer;
@@ -74,6 +75,9 @@
   .zoomPercent {
     font-size: 10px;
     font-weight: 700;
+
+    width: auto;
+    color: var(--viewer-toolbar-percent-color);
     @include no-user-select;
   }
 

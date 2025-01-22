@@ -463,7 +463,26 @@
         }
 
         case "room-selector": {
-          path = `/sdk/room-selector?locale=${config.locale}&theme=${config.theme}`;
+          const roomSelectorConfig = {
+            locale: config.locale,
+            theme: config.theme,
+            header: config.showSelectorHeader,
+            cancel: config.showSelectorCancel,
+            cancelLabel: config.cancelButtonLabel,
+            acceptLabel: config.acceptButtonLabel,
+            search: config.withSearch,
+            roomType: config.roomType,
+          };
+
+          Object.keys(roomSelectorConfig).forEach(
+            (key) =>
+              roomSelectorConfig[key] === undefined &&
+              delete roomSelectorConfig[key]
+          );
+
+          const urlParams = new URLSearchParams(roomSelectorConfig).toString();
+
+          path = `/sdk/room-selector?${urlParams}`;
           break;
         }
 

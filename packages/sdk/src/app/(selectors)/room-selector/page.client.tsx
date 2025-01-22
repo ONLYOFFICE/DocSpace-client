@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 
 import { TGetRooms } from "@docspace/shared/api/rooms/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
@@ -36,27 +36,88 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 
+import { RoomsType } from "@docspace/shared/enums";
+
+import useSDK from "@/hooks/useSDK";
+
 type RoomSelectorProps = {
   roomList: TGetRooms;
   pageCount: number;
+  baseConfig: {
+    header?: boolean;
+    cancel?: boolean;
+    cancelLabel?: string;
+    acceptLabel?: string;
+    search?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+  };
 };
 
 export default function RoomSelector({
   roomList,
   pageCount,
+  baseConfig,
 }: RoomSelectorProps) {
-  useEffect(() => frameCallCommand("setIsLoaded"), []);
+  const { sdkConfig } = useSDK();
 
-  const onSubmit = (items: TSelectorItem[]) => {};
+  const onSubmit = useCallback(async (items: TSelectorItem[]) => {
+    const enrichedData = items[0];
+
+    /*       enrichedData.icon =
+        enrichedData.icon === ""
+          ? await getRoomsIcon(enrichedData.roomType, false, 32)
+          : enrichedData.iconOriginal; */
+
+    const isSharedRoom =
+      enrichedData.roomType === RoomsType.PublicRoom ||
+      ((enrichedData.roomType === RoomsType.CustomRoom ||
+        enrichedData.roomType === RoomsType.FormRoom) &&
+        enrichedData.shared);
+
+    /*       if (isSharedRoom) {
+        const { sharedTo } = await getPrimaryLink(enrichedData.id);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
+      } */
+
+    frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
+  }, []);
+
+  const onClose = useCallback(() => {
+    frameCallEvent({ event: "onCloseCallback" });
+  }, []);
+
+  const cancelButtonProps = baseConfig?.cancel
+    ? {
+        withCancelButton: true as const,
+        cancelButtonLabel: baseConfig?.cancelLabel as string,
+        onCancel: onClose,
+      }
+    : {};
+
+  const headerProps = baseConfig?.header
+    ? {
+        withHeader: true as const,
+        headerProps: {
+          headerLabel: "",
+          isCloseable: false,
+          onCloseClick: onClose,
+        },
+      }
+    : { withPadding: false };
 
   const { folders, total } = roomList;
 
   return (
     <RoomSelectorComponent
+      {...cancelButtonProps}
+      {...headerProps}
       onSubmit={onSubmit}
       isMultiSelect={false}
       withPadding={false}
-      withSearch
+      withSearch={baseConfig?.search}
+      submitButtonLabel={baseConfig?.acceptLabel}
+      roomType={baseConfig?.roomType}
       withInit
       initItems={folders}
       initTotal={total}

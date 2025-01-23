@@ -286,7 +286,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -302,7 +301,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -317,8 +315,6 @@ describe("Room selector light empty", () => {
     mockRequest,
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ru`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
 
     await page.goto(pageRoute);
 
@@ -335,8 +331,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -351,8 +345,6 @@ describe("Room selector light empty", () => {
     mockRequest,
   }) => {
     const pageRoute = `${path}?theme=Base&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
 
     await page.goto(pageRoute);
 
@@ -369,7 +361,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -385,7 +376,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -401,7 +391,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -417,7 +406,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -433,7 +421,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -449,7 +436,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ru&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -465,7 +451,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -481,7 +466,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -497,7 +481,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -513,7 +496,6 @@ describe("Room selector light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -594,7 +576,7 @@ describe("Render room rtl selector light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
+    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
 
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
@@ -646,8 +628,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -663,7 +643,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -679,7 +658,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ar-SA&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -695,7 +673,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -711,7 +688,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -743,7 +719,6 @@ describe("Room selector rtl light empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1006,7 +981,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1022,7 +996,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1037,8 +1010,6 @@ describe("Room selector dark empty", () => {
     mockRequest,
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ru`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
 
     await page.goto(pageRoute);
 
@@ -1055,8 +1026,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1071,8 +1040,6 @@ describe("Room selector dark empty", () => {
     mockRequest,
   }) => {
     const pageRoute = `${path}?theme=Dark&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
 
     await page.goto(pageRoute);
 
@@ -1089,7 +1056,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1105,7 +1071,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1121,7 +1086,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1137,7 +1101,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1153,7 +1116,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1169,7 +1131,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1185,7 +1146,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1201,7 +1161,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1217,7 +1176,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1233,7 +1191,6 @@ describe("Room selector dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1366,8 +1323,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1383,7 +1338,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1399,7 +1353,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ar-SA&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1415,7 +1368,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1431,7 +1383,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1447,7 +1398,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1463,7 +1413,6 @@ describe("Room selector rtl dark empty", () => {
   }) => {
     const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([

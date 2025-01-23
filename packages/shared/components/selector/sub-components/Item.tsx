@@ -210,6 +210,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         onClick={onClick}
         className="test-22"
         isDisabled={isDisabled}
+        data-testid={`selector-item-${index}`}
       >
         {avatar || isGroup ? (
           <Avatar

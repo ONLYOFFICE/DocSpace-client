@@ -53,6 +53,7 @@ export default function RoomSelector({
   };
 
   const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
+    console.log("call");
     const enrichedData = {
       ...selectedItem,
       icon:
@@ -82,10 +83,17 @@ export default function RoomSelector({
     }
 
     frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
+
+    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+    console.log(
+      JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
+    );
   }, []);
 
   const onClose = useCallback(() => {
     frameCallEvent({ event: "onCloseCallback" });
+    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+    console.log("onCloseCallback");
   }, []);
 
   const cancelButtonProps = baseConfig?.cancel

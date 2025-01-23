@@ -1,20 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import { StyledLifetimeDialog } from "./StyledLifetimeDialog";
+import { StyledBodyContent, StyledFooterContent } from "./StyledLifetimeDialog";
 
 const LifetimeDialogComponent = (props) => {
-  const { t, setLifetimeDialogVisible, visible, tReady } = props;
+  const { t, setLifetimeDialogVisible, visible, tReady, lifetimeDialogCB } =
+    props;
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const onChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const onClose = () => {
     setLifetimeDialogVisible(false);
   };
 
   const onAcceptClick = () => {
-    console.log("onAcceptClick");
+    lifetimeDialogCB();
     onClose();
   };
 
@@ -36,56 +44,65 @@ const LifetimeDialogComponent = (props) => {
   }, []);
 
   return (
-    <StyledLifetimeDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="modal-dialog-content-body">
+        <StyledBodyContent className="modal-dialog-content-body">
           <Text fontWeight={600} fontSize="13px" noSelect>
             {t("Files:LifetimeDialogDescriptionHeader")}
           </Text>
           <Text fontSize="13px" noSelect>
             {t("Files:LifetimeDialogDescription")}
           </Text>
-        </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          id="delete-file-modal_submit"
-          key="OkButton"
-          label={t("Common:OKButton")}
-          size="normal"
-          primary
-          scale
-          onClick={onDeleteAction}
-          // isDisabled={!selection.length}
-        />
-        <Button
-          id="delete-file-modal_cancel"
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-        />
+        <StyledFooterContent>
+          <Checkbox
+            className="modal-dialog_lifetime-checkbox"
+            label={t("ConvertDialog:HideMessage")}
+            isChecked={isChecked}
+            onChange={onChange}
+          />
+          <div className="modal-dialog_lifetime-buttons">
+            <Button
+              id="delete-file-modal_submit"
+              key="OkButton"
+              label={t("Common:OKButton")}
+              size="normal"
+              primary
+              scale
+              onClick={onAcceptClick}
+            />
+            <Button
+              id="delete-file-modal_cancel"
+              key="CancelButton"
+              label={t("Common:CancelButton")}
+              size="normal"
+              scale
+              onClick={onClose}
+            />
+          </div>
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </StyledLifetimeDialog>
+    </ModalDialog>
   );
 };
 
-const LifetimeDialog = withTranslation(["Common", "Files"])(
+const LifetimeDialog = withTranslation(["Common", "Files", "ConvertDialog"])(
   LifetimeDialogComponent,
 );
 
 export default inject(({ dialogsStore }) => {
-  const { lifetimeDialogVisible: visible, setLifetimeDialogVisible } =
-    dialogsStore;
+  const {
+    lifetimeDialogVisible: visible,
+    setLifetimeDialogVisible,
+    lifetimeDialogCB,
+  } = dialogsStore;
 
   return {
     visible,
     setLifetimeDialogVisible,
+    lifetimeDialogCB,
   };
 })(observer(LifetimeDialog));

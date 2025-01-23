@@ -71,6 +71,8 @@ class DialogsStore {
 
   lifetimeDialogVisible = false;
 
+  lifetimeDialogCB = null;
+
   downloadDialogVisible = false;
 
   emptyTrashDialogVisible = false;
@@ -377,8 +379,9 @@ class DialogsStore {
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
-  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+  setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
     this.lifetimeDialogVisible = lifetimeDialogVisible;
+    this.lifetimeDialogCB = cb;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {

@@ -454,6 +454,10 @@ export const isLanguageRtl = (lng: string) => {
   return RTL_LANGUAGES.includes(splittedLng[0]);
 };
 
+export const getDirectionByLanguage = (lng: string) => {
+  return isLanguageRtl(lng) ? "rtl" : "ltr";
+};
+
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
   userLng: string | undefined,

@@ -30,6 +30,7 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -70,11 +71,15 @@ export default async function RootLayout({
     (theme) => theme.id === colorTheme.selected,
   );
 
+  const dirClass = getDirectionByLanguage(locale || "en");
+
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
     "--color-scheme-text-accent": currentColorScheme?.text.accent,
     "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+
+    "--interface-direction": dirClass,
   } as React.CSSProperties;
 
   return (
@@ -92,7 +97,7 @@ export default async function RootLayout({
       </head>
       <body
         style={styles}
-        className={`ltr ${systemTheme === "Dark" ? "dark" : "light"}`}
+        className={`${dirClass} ${systemTheme === "Dark" ? "dark" : "light"}`}
       >
         <StyledComponentsRegistry>
           <Providers

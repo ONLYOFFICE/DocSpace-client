@@ -32,7 +32,7 @@ interface MobileDetailsProps {
   isPublicFile?: boolean;
   onHide: VoidFunction;
   onMaskClick: VoidFunction;
-  onContextMenu: VoidFunction;
+  onContextMenu: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
   contextModel: () => ContextMenuModel[];
 }
 

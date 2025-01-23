@@ -43,9 +43,11 @@ export const NextButton = ({ nextClick, isPDFFile }: NextButtonProps) => {
         [styles.isPDFFile]: isPDFFile,
       })}
       onClick={nextClick}
+      aria-label="Next"
+      data-testid="next-button"
     >
       <div className={classNames(styles.buttonScroll, styles.right)}>
-        <MediaNextIcon />
+        <MediaNextIcon aria-hidden="true" />
       </div>
     </div>
   );

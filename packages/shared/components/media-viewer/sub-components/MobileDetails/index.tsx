@@ -63,11 +63,25 @@ const MobileDetails = memo(
       );
 
       return (
-        <div className={classNames(styles.container)}>
+        <div
+          className={classNames(styles.container)}
+          role="dialog"
+          aria-label={title}
+        >
           {!isPublicFile ? (
-            <BackArrow className={styles.mobileClose} onClick={onMaskClick} />
+            <BackArrow
+              className={styles.mobileClose}
+              onClick={onMaskClick}
+              data-test-id="mobile-details-back"
+              role="button"
+              aria-label="Back"
+            />
           ) : null}
-          <Text fontSize="14px" className={styles.title}>
+          <Text
+            fontSize="14px"
+            className={styles.title}
+            data-test-id="mobile-details-title"
+          >
             {title}
           </Text>
           {!isPreviewFile && !isError ? (
@@ -75,6 +89,9 @@ const MobileDetails = memo(
               <MediaContextMenu
                 className={styles.mobileContext}
                 onClick={onContextMenu}
+                data-test-id="mobile-details-context"
+                role="button"
+                aria-label="Open context menu"
               />
               <ContextMenu
                 ref={ref}
@@ -83,6 +100,7 @@ const MobileDetails = memo(
                 onHide={onHide}
                 header={contextMenuHeader}
                 getContextModel={contextModel}
+                data-test-id="mobile-details-context-menu"
               />
             </div>
           ) : null}

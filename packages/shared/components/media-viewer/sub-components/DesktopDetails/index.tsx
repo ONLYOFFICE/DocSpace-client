@@ -43,16 +43,32 @@ export const DesktopDetails = ({
   showCloseButton,
 }: DesktopDetailsProps) => {
   return (
-    <div className={classNames(styles.container, className)}>
-      <Text className={styles.title}>{title}</Text>
+    <div
+      className={classNames(styles.container, className)}
+      data-testid="desktop-details"
+      role="dialog"
+      aria-labelledby="media-viewer-title"
+    >
+      <Text
+        id="media-viewer-title"
+        className={styles.title}
+        data-testid="desktop-details-title"
+      >
+        {title}
+      </Text>
 
       {showCloseButton ? (
-        <div className={styles.controlBtn} onClick={onMaskClick}>
+        <div
+          className={styles.controlBtn}
+          onClick={onMaskClick}
+          data-testid="desktop-details-close"
+        >
           <IconButton
             color={globalColors.white}
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable
+            aria-label="Close details"
           />
         </div>
       ) : null}

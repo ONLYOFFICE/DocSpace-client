@@ -969,6 +969,9 @@ export const ImageViewer = ({
         className={classNames(styles.container, {
           [styles.backgroundBlack]: backgroundBlack,
         })}
+        data-testid="image-viewer"
+        role="img"
+        aria-label={errorTitle || "Image viewer"}
       >
         {isError ? (
           <MessageError
@@ -986,6 +989,7 @@ export const ImageViewer = ({
             [styles.loading]: isLoading,
           })}
           ref={imgWrapperRef}
+          data-testid="image-wrapper"
         >
           <animated.img
             className={classNames(styles.image)}
@@ -1003,6 +1007,7 @@ export const ImageViewer = ({
             onLoad={imageLoaded}
             onError={onError}
             onContextMenu={(event) => event.preventDefault()}
+            data-testid="image-content"
           />
         </div>
       </div>
@@ -1015,6 +1020,7 @@ export const ImageViewer = ({
           generateContextMenu={generateContextMenu}
           setIsOpenContextMenu={setIsOpenContextMenu}
           toolbarEvent={toolbarEvent}
+          data-testid="image-toolbar"
         />
       ) : null}
     </>

@@ -241,7 +241,12 @@ export const Viewer = (props: ViewerProps) => {
     isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
   return (
-    <div dir="ltr" data-visible={visible} className={styles.container}>
+    <div
+      data-testid="media-viewer"
+      dir="ltr"
+      data-visible={visible}
+      className={styles.container}
+    >
       {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails
           title={title}

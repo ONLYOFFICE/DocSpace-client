@@ -39,9 +39,11 @@ export const PrevButton = ({ prevClick }: PrevButtonProps) => {
     <div
       className={classNames(styles.switchToolbar, styles.left)}
       onClick={prevClick}
+      aria-label="Previous"
+      data-testid="prev-button"
     >
       <div className={classNames(styles.buttonScroll, styles.left)}>
-        <MediaPrevIcon />
+        <MediaPrevIcon aria-hidden="true" />
       </div>
     </div>
   );

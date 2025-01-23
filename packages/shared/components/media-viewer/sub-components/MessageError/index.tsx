@@ -47,14 +47,22 @@ export const MessageError = ({
   ).filter((m) => !m.disabled);
 
   return (
-    <div>
-      <div className={classNames(styles.mediaError)}>
-        <Text fontSize="15px" textAlign="center" className={styles.title}>
-          {errorTitle}
-        </Text>
+    <div data-testid="message-error-container">
+      <div
+        className={classNames(styles.mediaError)}
+        data-testid="message-error"
+      >
+        <div data-testid="message-error-title">
+          <Text fontSize="15px" textAlign="center" className={styles.title}>
+            {errorTitle}
+          </Text>
+        </div>
       </div>
       {items.length !== 0 ? (
-        <div className={styles.errorToolbar}>
+        <div
+          className={styles.errorToolbar}
+          data-testid="message-error-toolbar"
+        >
           {items.map((item) => {
             if (item.disabled || isSeparator(item)) return;
 
@@ -71,6 +79,7 @@ export const MessageError = ({
               <div
                 className={styles.toolbarItem}
                 key={item.key}
+                data-testid={`toolbar-item-${item.key}`}
                 onClick={onClick}
               >
                 <ReactSVG src={item.icon} />

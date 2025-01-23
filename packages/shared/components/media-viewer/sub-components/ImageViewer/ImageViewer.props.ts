@@ -41,7 +41,7 @@ interface ImageViewerProps {
   panelVisible: boolean;
   backgroundBlack: boolean;
   isPublicFile?: boolean;
-  mobileDetails: JSX.Element;
+  mobileDetails?: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
   devices: DevicesType;
 

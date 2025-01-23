@@ -175,7 +175,12 @@ export const MobileDrawer = ({
   const visibility = isOpenMobileDrawer ? "visible" : "hidden";
 
   return (
-    <section ref={containerRef} className={styles.container}>
+    <section
+      ref={containerRef}
+      className={styles.container}
+      aria-label="Mobile drawer"
+      data-testid="mobile-drawer"
+    >
       <animated.div
         className={styles.wrapper}
         style={{
@@ -183,6 +188,7 @@ export const MobileDrawer = ({
           visibility,
           ...style,
         }}
+        data-testid="mobile-drawer-content"
       >
         <div className={styles.header} {...bind()}>
           {bookmarks.length > 0
@@ -193,9 +199,11 @@ export const MobileDrawer = ({
           <CrossIcon
             className="mobile-drawer_cross-icon"
             onClick={handleClose}
+            aria-label="Close drawer"
+            data-testid="close-drawer-button"
           />
         </div>
-        <div style={{ height: height * 0.8 - 64 }}>
+        <div style={{ height: height * 0.8 - 64 }} data-testid="drawer-content">
           {toggle ? (
             <Bookmarks bookmarks={bookmarks} navigate={navigate} />
           ) : null}

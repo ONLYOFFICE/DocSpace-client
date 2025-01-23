@@ -41,6 +41,8 @@ import type { ContextMenuModel } from "../context-menu/ContextMenu.types";
 import { MobileDetails } from "./sub-components/MobileDetails";
 import { Bookmarks } from "./sub-components/PDFViewer/ui/Bookmarks";
 import { MainPanel } from "./sub-components/PDFViewer/ui/MainPanel";
+import { BookMarkType } from "./sub-components/PDFViewer/PDFViewer.props";
+import { MobileDrawer } from "./sub-components/PDFViewer/ui/MobileDrawer";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -853,5 +855,110 @@ describe("MainPanel component", () => {
     // Simulate drag end with right swipe
     handlers.onDragEnd?.({ movement: [300] }); // More than width/4 (1024/4)
     expect(mockProps.onPrev).toHaveBeenCalled();
+  });
+});
+
+// Mock classNames
+jest.mock("classnames", () => ({
+  __esModule: true,
+  default: (...args: any[]) => args.join(" "),
+}));
+
+// Mock react-spring
+jest.mock("@react-spring/web", () => ({
+  useSpring: () => [{ y: 0, opacity: 1 }, { start: jest.fn() }],
+  config: {
+    stiff: {},
+    wobbly: {},
+  },
+  animated: {
+    div: ({ children, className, style, ...props }: any) => (
+      <div className={className} style={style} {...props}>
+        {children}
+      </div>
+    ),
+  },
+}));
+
+// Mock use-gesture
+jest.mock("@use-gesture/react", () => ({
+  useDrag: () => () => ({}),
+}));
+
+// Mock styles
+jest.mock("./sub-components/PDFViewer/PDFViewer.module.scss", () => ({
+  container: "container",
+  wrapper: "wrapper",
+  header: "header",
+  thumbnails: "thumbnails",
+  visible: "visible",
+}));
+
+// Mock Bookmarks component
+jest.mock("./sub-components/PDFViewer/ui/Bookmarks", () => ({
+  Bookmarks: ({
+    bookmarks,
+    navigate,
+  }: {
+    bookmarks: BookMarkType[];
+    navigate: (page: number) => void;
+  }) => (
+    <div data-testid="bookmarks-component">
+      {bookmarks.map((bookmark: BookMarkType) => (
+        <div key={bookmark.page} onClick={() => navigate(bookmark.page)}>
+          {bookmark.description}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+
+describe("MobileDrawer", () => {
+  const defaultProps = {
+    bookmarks: [] as BookMarkType[],
+    isOpenMobileDrawer: false,
+    navigate: jest.fn(),
+    setIsOpenMobileDrawer: jest.fn(),
+    resizePDFThumbnail: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Mock window.innerHeight
+    Object.defineProperty(window, "innerHeight", {
+      writable: true,
+      configurable: true,
+      value: 1000,
+    });
+  });
+
+  afterEach(() => {
+    jest.resetModules();
+  });
+
+  it("renders without crashing", () => {
+    const { container } = render(<MobileDrawer {...defaultProps} />);
+    expect(container).toBeTruthy();
+  });
+
+  it("opens and closes drawer correctly", () => {
+    render(<MobileDrawer {...defaultProps} isOpenMobileDrawer />);
+
+    const drawer = screen.getByTestId("mobile-drawer");
+    expect(drawer).toBeInTheDocument();
+
+    const closeButton = screen.getByTestId("close-drawer-button");
+    fireEvent.click(closeButton);
+    expect(defaultProps.setIsOpenMobileDrawer).toHaveBeenCalledWith(false);
+  });
+
+  it("has correct ARIA attributes", () => {
+    render(<MobileDrawer {...defaultProps} isOpenMobileDrawer />);
+
+    const drawer = screen.getByTestId("mobile-drawer");
+    expect(drawer).toHaveAttribute("aria-label", "Mobile drawer");
+
+    const closeButton = screen.getByTestId("close-drawer-button");
+    expect(closeButton).toHaveAttribute("aria-label", "Close drawer");
   });
 });

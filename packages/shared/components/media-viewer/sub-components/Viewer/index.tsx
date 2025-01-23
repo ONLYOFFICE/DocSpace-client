@@ -86,8 +86,6 @@ export const Viewer = (props: ViewerProps) => {
 
   const [isError, setIsError] = useState<boolean>(false);
 
-  // const [imageTimer, setImageTimer] = useState<NodeJS.Timeout>();
-
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
 
@@ -240,12 +238,25 @@ export const Viewer = (props: ViewerProps) => {
   const isDecodedImage =
     isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
+  const mediaType = isPdf
+    ? "PDF"
+    : isImage
+      ? "image"
+      : isVideo
+        ? "video"
+        : isAudio
+          ? "audio"
+          : "media";
+
   return (
     <div
       data-testid="media-viewer"
       dir="ltr"
       data-visible={visible}
       className={styles.container}
+      role="dialog"
+      aria-label={`${mediaType} viewer - ${title}`}
+      aria-modal="true"
     >
       {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails

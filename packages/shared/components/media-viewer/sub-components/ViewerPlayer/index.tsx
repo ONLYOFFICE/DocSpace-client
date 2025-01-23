@@ -664,6 +664,8 @@ export const ViewerPlayer = ({
             onLoadedMetadata={handleLoadedMetaDataVideo}
             onPlay={() => setIsPlaying(true)}
             onContextMenu={(event) => event.preventDefault()}
+            aria-label={isAudio ? "Audio player" : "Video player"}
+            data-testid="media-player"
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

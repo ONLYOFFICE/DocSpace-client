@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const PAGE_COUNT = 100;
+
 export const THEME_HEADER = "x-sdk-config-theme";
 export const LOCALE_HEADER = "x-sdk-config-locale";
 

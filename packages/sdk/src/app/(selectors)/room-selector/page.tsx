@@ -26,6 +26,9 @@
 
 import { headers } from "next/headers";
 
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
+
 import {
   HEADER_HEADER,
   ACCEPT_LABEL_HEADER,
@@ -33,15 +36,11 @@ import {
   CANCEL_LABEL_HEADER,
   ROOM_TYPE_HEADER,
   SEARCH_HEADER,
+  PAGE_COUNT,
 } from "@/utils/constants";
-
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
-
 import { getRooms } from "@/api/rooms";
-import RoomSelector from "./page.client";
 
-const PAGE_COUNT = 100;
+import RoomSelector from "./page.client";
 
 export default async function Page({}: {}) {
   const filter = RoomsFilter.getDefault();

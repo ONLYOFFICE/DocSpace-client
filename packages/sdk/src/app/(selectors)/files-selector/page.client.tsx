@@ -26,15 +26,110 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 import FilesSelectorComponent from "@docspace/shared/selectors/Files";
 import { frameCallCommand } from "@docspace/shared/utils/common";
+import {
+  TFile,
+  TFilesSettings,
+  TFolder,
+} from "@docspace/shared/api/files/types";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { Nullable } from "@docspace/shared/types";
+import { TFilesSelectorInit } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-type FilesSelectorClientProps = {};
+type FilesSelectorClientProps = {
+  items: (TFile | TFolder)[] | TRoom[];
+  breadCrumbs: TBreadCrumb[];
+  foldersTree: TFolder[];
+  filesSettings: TFilesSettings;
+  selectedItemType: "rooms" | "files";
+  selectedItemId: string | number;
+  searchValue: Nullable<string>;
+  total: number;
+  hasNextPage: boolean;
+  currentFolderId: number | string;
+  rootFolderType: FolderType;
+  roomsFolderId?: number;
+};
 
-export default function FilesSelectorClient({}: FilesSelectorClientProps) {
+export default function FilesSelectorClient({
+  items,
+  breadCrumbs,
+  foldersTree,
+  filesSettings,
+  selectedItemType,
+  selectedItemId,
+  searchValue,
+  total,
+  hasNextPage,
+  rootFolderType,
+  currentFolderId,
+  roomsFolderId,
+}: FilesSelectorClientProps) {
+  const { t } = useTranslation(["Common"]);
+
   useEffect(() => frameCallCommand("setIsLoaded"), []);
 
-  // return <FilesSelectorComponent />;
-  return <div>Files selector page</div>;
+  const onSubmit = useCallback(() => {}, []);
+
+  const onCancel = useCallback(() => {}, []);
+
+  const getIsDisabled = useCallback(() => false, []);
+
+  const initValues: TFilesSelectorInit = {
+    withInit: true,
+    initItems: items,
+    initBreadCrumbs: breadCrumbs,
+    initSelectedItemType: selectedItemType,
+    initSelectedItemId: selectedItemId,
+    initSearchValue: searchValue,
+    initTotal: total,
+    initHasNextPage: hasNextPage,
+  };
+
+  return (
+    <FilesSelectorComponent
+      withBreadCrumbs
+      withoutBackButton
+      withSearch
+      withHeader
+      headerLabel="Label"
+      cancelButtonLabel={t("Common:Cancel")}
+      disabledItems={[]}
+      onSubmit={onSubmit}
+      onCancel={onCancel}
+      isRoomsOnly={false}
+      isThirdParty={false}
+      getIsDisabled={getIsDisabled}
+      submitButtonLabel="Submit"
+      withCancelButton={false}
+      withCreate={true}
+      withFooterInput={false}
+      withFooterCheckbox={false}
+      footerInputHeader=""
+      footerCheckboxLabel=""
+      currentFooterInputValue=""
+      isPanelVisible
+      headerProps={{
+        headerLabel: "",
+        isCloseable: false,
+        onCloseClick: onCancel,
+      }}
+      filesSettings={filesSettings}
+      treeFolders={foldersTree}
+      currentDeviceType={DeviceType.desktop}
+      currentFolderId={currentFolderId}
+      rootFolderType={rootFolderType}
+      descriptionText=""
+      getFilesArchiveError={() => ""}
+      embedded
+      roomsFolderId={roomsFolderId}
+      {...initValues}
+    />
+  );
 }

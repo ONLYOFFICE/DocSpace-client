@@ -25,19 +25,88 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import FilesSelectorClient from "./page.client";
-import { getFolder, getFoldersTree } from "@/api/files";
+
 import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import {
+  TFolder,
+  TFilesSettings,
+  TGetFolder,
+} from "@docspace/shared/api/files/types";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 
-export default async function Page({}: {}) {
-  const foldersTree = await getFoldersTree();
-  const folder = await getFolder(
-    "@my",
-    FilesFilter.getDefault(),
-    undefined,
-    undefined,
+import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
+import { getRooms } from "@/api/rooms";
+import { PAGE_COUNT } from "@/utils/constants";
+import { TGetRooms } from "@docspace/shared/api/rooms/types";
+
+type TSearchParams = {
+  folderId?: string;
+};
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: TSearchParams;
+}) {
+  const { folderId } = searchParams;
+
+  const actions: Promise<unknown>[] = [getFoldersTree(), getFilesSettings()];
+
+  const filter = folderId ? FilesFilter.getDefault() : RoomsFilter.getDefault();
+
+  filter.page = 0;
+  filter.pageCount = PAGE_COUNT;
+
+  if (!folderId) {
+    filter.searchArea = RoomSearchArea.Active;
+
+    actions.push(getRooms(filter as RoomsFilter));
+  } else {
+    actions.push(getFolder(folderId, filter as FilesFilter));
+  }
+
+  const [foldersTree, filesSettings, itemsList] = await Promise.all(actions);
+
+  const { folders, files, current, pathParts, total } = itemsList as
+    | TGetFolder
+    | TGetRooms;
+
+  const roomsFolderId = (foldersTree as TFolder[]).find(
+    (x) => x.rootFolderType === FolderType.Rooms,
+  )?.id;
+
+  const items = [...folders, ...files];
+
+  const breadCrumbs = pathParts.map((part, index) => ({
+    id: part.id,
+    label: part.title,
+    roomType: part?.roomType,
+    isRoom: !folderId
+      ? true
+      : (index === 0 && typeof pathParts[0]?.roomType !== "undefined") ||
+        roomsFolderId === part.id,
+  }));
+
+  const currentFolderId = current.id;
+  const rootFolderType = current.rootFolderType;
+
+  console.log(breadCrumbs[0]);
+
+  return (
+    <FilesSelectorClient
+      foldersTree={foldersTree as TFolder[]}
+      filesSettings={filesSettings as TFilesSettings}
+      items={items}
+      selectedItemType={folderId ? "files" : "rooms"}
+      selectedItemId={current.id}
+      total={total}
+      hasNextPage={total > PAGE_COUNT}
+      breadCrumbs={breadCrumbs}
+      searchValue={"search" in filter ? filter.search : filter.filterValue}
+      currentFolderId={currentFolderId}
+      rootFolderType={rootFolderType}
+      roomsFolderId={roomsFolderId}
+    />
   );
-
-  console.log({ foldersTree, folder });
-
-  return <FilesSelectorClient />;
 }

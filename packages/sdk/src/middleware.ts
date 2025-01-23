@@ -91,5 +91,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/sdk", "/room-selector"],
+  matcher: ["/health", "/sdk", "/room-selector", "/files-selector"],
 };

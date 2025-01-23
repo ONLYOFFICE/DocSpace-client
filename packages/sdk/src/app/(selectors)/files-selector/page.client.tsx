@@ -41,6 +41,7 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { Nullable } from "@docspace/shared/types";
 import { TFilesSelectorInit } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 type FilesSelectorClientProps = {
   items: (TFile | TFolder)[] | TRoom[];
@@ -72,6 +73,7 @@ export default function FilesSelectorClient({
   roomsFolderId,
 }: FilesSelectorClientProps) {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("JavascriptSdk:FileSelector");
 
   useEffect(() => frameCallCommand("setIsLoaded"), []);
 

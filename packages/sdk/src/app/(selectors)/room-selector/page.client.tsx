@@ -37,6 +37,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import useSDK from "@/hooks/useSDK";
 import { getRoomsIcon } from "@/utils";
 import { RoomSelectorProps } from "@/types";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function RoomSelector({
   roomList,
@@ -44,6 +45,7 @@ export default function RoomSelector({
   baseConfig,
 }: RoomSelectorProps) {
   const { sdkConfig } = useSDK();
+  useDocumentTitle("JavascriptSdk:RoomSelector");
 
   const getPrimaryLink = async (roomId: string) => {
     const res = await fetch(`/api/2.0/files/rooms/${roomId}/link`).then((r) =>

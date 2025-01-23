@@ -42,7 +42,7 @@ import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
 
 export const metadata: Metadata = {
-  title: "SDK",
+  title: "ONLYOFFICE",
 };
 
 export default async function RootLayout({

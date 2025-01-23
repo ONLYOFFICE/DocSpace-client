@@ -26,8 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-const RoomSelectorLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
-};
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-export default RoomSelectorLayout;
+import { setDocumentTitle } from "@/utils";
+
+export const useDocumentTitle = (titleI18nKey: string) => {
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    setDocumentTitle(t, titleI18nKey);
+  }, [t, titleI18nKey]);
+};

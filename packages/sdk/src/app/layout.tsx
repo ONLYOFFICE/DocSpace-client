@@ -71,14 +71,16 @@ export default async function RootLayout({
     (theme) => theme.id === colorTheme.selected,
   );
 
+  const dirClass = getDirectionByLanguage(locale || "en");
+
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
     "--color-scheme-text-accent": currentColorScheme?.text.accent,
     "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
-  } as React.CSSProperties;
 
-  const dirClass = getDirectionByLanguage(locale || "en");
+    "--interface-direction": dirClass,
+  } as React.CSSProperties;
 
   return (
     <html lang="en" translate="no">

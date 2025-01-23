@@ -26,15 +26,14 @@
 
 /* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
 import moment from "moment";
-
+import classNames from "classnames";
 import { Scrollbar } from "../scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
 import { getValidDates } from "./utils";
 import { CalendarProps } from "./Calendar.types";
-import { StyledContainerTheme } from "./Calendar.styled";
+import styles from "./Calendar.module.scss";
 
 const Calendar = ({
   locale = "en",
@@ -52,8 +51,6 @@ const Calendar = ({
   isScroll = false,
 }: CalendarProps) => {
   moment.locale(locale);
-
-  const theme = useTheme();
 
   const handleDateChange = (date: moment.Moment) => {
     const formattedDate = moment(
@@ -150,18 +147,17 @@ const Calendar = ({
   );
 
   return (
-    <StyledContainerTheme
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.container, className, {
+        [styles.isScroll]: isScroll,
+      })}
       style={style}
-      isMobile={isMobile}
       ref={forwardedRef}
-      $currentColorScheme={theme?.currentColorScheme}
       data-testid="calendar"
-      isScroll={isScroll}
     >
       {CalendarNode}
-    </StyledContainerTheme>
+    </div>
   );
 };
 

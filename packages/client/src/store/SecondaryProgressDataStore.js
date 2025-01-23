@@ -204,7 +204,10 @@ class SecondaryProgressDataStore {
   }
 
   get secondaryOperationsCompleted() {
-    return this.secondaryOperationsArray.every((op) => op.completed);
+    return (
+      this.secondaryOperationsArray.length > 0 &&
+      this.secondaryOperationsArray.every((op) => op.completed)
+    );
   }
 
   get isSecondaryProgressFinished() {

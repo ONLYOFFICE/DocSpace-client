@@ -24,13 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useState,
-  useLayoutEffect,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import React, { useState, useLayoutEffect, useCallback, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -40,7 +34,20 @@ import { DropDown } from "../../drop-down";
 import ProgressList from "./ProgressList";
 import styles from "../Section.module.scss";
 import { OperationsProgressProps } from "../Section.types";
+import { OPERATIONS_NAME } from "../../../constants/index";
 
+const operationToIconMap: Record<string, FloatingButtonIcons> = {
+  [OPERATIONS_NAME.download]: FloatingButtonIcons.file,
+  [OPERATIONS_NAME.convert]: FloatingButtonIcons.refresh,
+  [OPERATIONS_NAME.copy]: FloatingButtonIcons.duplicate,
+  [OPERATIONS_NAME.duplicate]: FloatingButtonIcons.duplicate,
+  [OPERATIONS_NAME.markAsRead]: FloatingButtonIcons.file,
+  [OPERATIONS_NAME.deletePermanently]: FloatingButtonIcons.trash,
+  [OPERATIONS_NAME.exportIndex]: FloatingButtonIcons.exportIndex,
+  [OPERATIONS_NAME.move]: FloatingButtonIcons.move,
+  [OPERATIONS_NAME.trash]: FloatingButtonIcons.trash,
+  [OPERATIONS_NAME.other]: FloatingButtonIcons.file,
+};
 const OperationsProgress: React.FC<OperationsProgressProps> = ({
   secondaryActiveOperations = [],
   operationsAlert,
@@ -105,8 +112,20 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     }
   };
 
-  const onCloseButton = () => {
-    setShouldHideButton(true);
+  // const onCloseButton = () => {
+  //   setShouldHideButton(true);
+  // };
+
+  const isSeveralOperations = secondaryActiveOperations.length > 1;
+
+  const getIcons = () => {
+    if (isSeveralOperations) {
+      return isOpenPanel ? FloatingButtonIcons.arrow : FloatingButtonIcons.dots;
+    }
+    return (
+      operationToIconMap[secondaryActiveOperations[0].operation] ||
+      FloatingButtonIcons.file
+    );
   };
 
   return (
@@ -119,14 +138,12 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     >
       <FloatingButton
         className="layout-progress-bar"
-        icon={
-          isOpenPanel ? FloatingButtonIcons.arrow : FloatingButtonIcons.dots
-        }
+        icon={getIcons()}
         alert={operationsAlert}
         completed={operationsCompleted}
-        onClick={onOpenProgressPanel}
+        {...(isSeveralOperations && { onClick: onOpenProgressPanel })}
         percent={operationsCompleted ? 100 : 0}
-        onCloseButton={onCloseButton}
+        // onCloseButton={onCloseButton}
       />
 
       <DropDown

@@ -45,6 +45,7 @@ import { BookMarkType } from "./sub-components/PDFViewer/PDFViewer.props";
 import { MobileDrawer } from "./sub-components/PDFViewer/ui/MobileDrawer";
 import { PageCount } from "./sub-components/PDFViewer/ui/PageCount";
 import { Sidebar } from "./sub-components/PDFViewer/ui/SideBar";
+import { PlayerBigPlayButton } from "./sub-components/PlayerBigPlayButton";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -1124,5 +1125,69 @@ describe("Sidebar", () => {
     render(<Sidebar {...defaultProps} bookmarks={[]} />);
 
     expect(screen.queryByTestId("view-toggle-button")).not.toBeInTheDocument();
+  });
+});
+
+// Mock BigIconPlay SVG component
+jest.mock("PUBLIC_DIR/images/media.bgplay.react.svg", () => {
+  const DummyBigIconPlay = React.forwardRef((props: any, ref) => (
+    <div {...props} ref={ref}>
+      Play Icon
+    </div>
+  ));
+  DummyBigIconPlay.displayName = "BigIconPlay";
+  return DummyBigIconPlay;
+});
+
+// Mock styles
+jest.mock("./sub-components/PlayerBigPlayButton.module.scss", () => ({
+  wrapper: "wrapper",
+}));
+
+describe("PlayerBigPlayButton", () => {
+  const defaultProps = {
+    visible: true,
+    onClick: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders correctly when visible", () => {
+    render(<PlayerBigPlayButton {...defaultProps} />);
+
+    const button = screen.getByTestId("player-big-play-button");
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass("wrapper");
+    expect(button).toHaveAttribute("aria-label", "Play media");
+
+    const icon = screen.getByTestId("play-icon");
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveAttribute("role", "presentation");
+  });
+
+  it("does not render when not visible", () => {
+    render(<PlayerBigPlayButton {...defaultProps} visible={false} />);
+    expect(
+      screen.queryByTestId("player-big-play-button"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("prevents context menu", () => {
+    render(<PlayerBigPlayButton {...defaultProps} />);
+
+    const button = screen.getByTestId("player-big-play-button");
+    const mockEvent = new MouseEvent("contextmenu", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    Object.defineProperty(mockEvent, "preventDefault", {
+      value: jest.fn(),
+    });
+
+    fireEvent(button, mockEvent);
+    expect(mockEvent.preventDefault).toHaveBeenCalledTimes(1);
   });
 });

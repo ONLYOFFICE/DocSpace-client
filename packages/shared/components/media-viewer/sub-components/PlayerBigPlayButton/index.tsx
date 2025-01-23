@@ -39,8 +39,14 @@ export const PlayerBigPlayButton = ({
     <div
       className={styles.wrapper}
       onContextMenu={(event) => event.preventDefault()}
+      data-testid="player-big-play-button"
+      aria-label="Play media"
     >
-      <BigIconPlay onClick={onClick} />
+      <BigIconPlay
+        onClick={onClick}
+        data-testid="play-icon"
+        role="presentation"
+      />
     </div>
   );
 };

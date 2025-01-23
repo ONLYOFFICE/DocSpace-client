@@ -54,8 +54,10 @@ export const Sidebar = ({
       className={classNames(styles.sidebarContainer, {
         [styles.isPanelOpen]: isPanelOpen,
       })}
+      data-testid="pdf-sidebar"
+      aria-label="PDF sidebar"
     >
-      <div className={styles.sidebarHeader}>
+      <div className={styles.sidebarHeader} data-testid="sidebar-header">
         {bookmarks.length > 0
           ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
               onClick: handleToggle,
@@ -65,12 +67,22 @@ export const Sidebar = ({
           className={styles.hideSidebarIcon}
           onClick={closeSidebar}
           data-interface-dir={isRTL ? "rtl" : "ltr"}
+          data-testid="close-sidebar-button"
+          aria-label="Close sidebar"
         />
       </div>
-      {toggle ? <Bookmarks bookmarks={bookmarks} navigate={navigate} /> : null}
+      {toggle ? (
+        <Bookmarks
+          bookmarks={bookmarks}
+          navigate={navigate}
+          data-testid="bookmarks-component"
+        />
+      ) : null}
       <section
         id="viewer-thumbnail"
         className={classNames(styles.thumbnails, { [styles.visible]: !toggle })}
+        data-testid="viewer-thumbnail"
+        aria-label="PDF thumbnails"
       />
     </aside>
   );

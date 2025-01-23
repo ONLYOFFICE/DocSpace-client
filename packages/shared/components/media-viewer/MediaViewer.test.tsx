@@ -44,6 +44,7 @@ import { MainPanel } from "./sub-components/PDFViewer/ui/MainPanel";
 import { BookMarkType } from "./sub-components/PDFViewer/PDFViewer.props";
 import { MobileDrawer } from "./sub-components/PDFViewer/ui/MobileDrawer";
 import { PageCount } from "./sub-components/PDFViewer/ui/PageCount";
+import { Sidebar } from "./sub-components/PDFViewer/ui/SideBar";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -1018,5 +1019,110 @@ describe("PageCount", () => {
     render(<PageCount {...defaultProps} visible={false} ref={ref} />);
 
     expect(screen.queryByTestId("page-count")).not.toBeInTheDocument();
+  });
+});
+
+// Mock SVG components
+jest.mock("PUBLIC_DIR/images/view-rows.react.svg", () => {
+  return function DummyViewRowsIcon(props: any) {
+    return <div {...props}>View Rows Icon</div>;
+  };
+});
+
+jest.mock("PUBLIC_DIR/images/view-tiles.react.svg", () => {
+  return function DummyViewTilesIcon(props: any) {
+    return <div {...props}>View Tiles Icon</div>;
+  };
+});
+
+jest.mock("PUBLIC_DIR/images/article-show-menu.react.svg", () => {
+  return function DummyArticleShowMenuIcon(props: any) {
+    return <div {...props}>Article Show Menu Icon</div>;
+  };
+});
+
+// Mock classnames
+jest.mock("classnames", () => {
+  return function dummyClassnames(...args: any[]) {
+    const [className, conditionalClasses] = args;
+    if (typeof conditionalClasses === "object") {
+      return Object.entries(conditionalClasses)
+        .filter(([, condition]) => condition)
+        .map(([className]) => className)
+        .concat(className)
+        .join(" ");
+    }
+    return args.filter(Boolean).join(" ");
+  };
+});
+
+// Mock styles
+jest.mock("./sub-components/PDFViewer/PDFViewer.module.scss", () => ({
+  sidebarContainer: "sidebarContainer",
+  isPanelOpen: "isPanelOpen",
+  sidebarHeader: "sidebarHeader",
+  hideSidebarIcon: "hideSidebarIcon",
+  thumbnails: "thumbnails",
+  visible: "visible",
+}));
+
+// Mock Bookmarks component
+jest.mock("./sub-components/PDFViewer/ui/Bookmarks", () => ({
+  Bookmarks: ({
+    bookmarks,
+    navigate,
+  }: {
+    bookmarks: BookMarkType[];
+    navigate: (page: number) => void;
+  }) => (
+    <div data-testid="bookmarks-component">
+      {bookmarks.map((bookmark: BookMarkType) => (
+        <div key={bookmark.page} onClick={() => navigate(bookmark.page)}>
+          {bookmark.description}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+
+describe("Sidebar", () => {
+  const mockBookmarks: BookMarkType[] = [
+    { page: 1, description: "Bookmark 1", level: 1, y: 100 },
+    { page: 2, description: "Bookmark 2", level: 1, y: 200 },
+  ];
+
+  const defaultProps = {
+    bookmarks: mockBookmarks,
+    isPanelOpen: false,
+    setIsPDFSidebarOpen: jest.fn(),
+    navigate: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("applies correct classes when panel is open", () => {
+    render(<Sidebar {...defaultProps} isPanelOpen />);
+
+    const sidebar = screen.getByTestId("pdf-sidebar");
+    expect(sidebar.className).toContain("sidebarContainer");
+    expect(sidebar.className).toContain("isPanelOpen");
+  });
+
+  it("closes sidebar when close button is clicked", () => {
+    const setIsPDFSidebarOpen = jest.fn();
+    render(
+      <Sidebar {...defaultProps} setIsPDFSidebarOpen={setIsPDFSidebarOpen} />,
+    );
+
+    fireEvent.click(screen.getByTestId("close-sidebar-button"));
+    expect(setIsPDFSidebarOpen).toHaveBeenCalledWith(false);
+  });
+
+  it("does not show toggle button when there are no bookmarks", () => {
+    render(<Sidebar {...defaultProps} bookmarks={[]} />);
+
+    expect(screen.queryByTestId("view-toggle-button")).not.toBeInTheDocument();
   });
 });

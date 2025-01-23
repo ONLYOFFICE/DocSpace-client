@@ -23,3 +23,66 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { TIconContainer } from "@/types";
+import { RoomsType } from "@docspace/shared/enums";
+import {
+  iconSize24,
+  iconSize32,
+  iconSize64,
+  iconSize96,
+} from "@docspace/shared/utils/image-helpers";
+
+export const getIconBySize = (path: string, size: number = 32) => {
+  const getOrDefault = (container: TIconContainer): string =>
+    container.has(path)
+      ? (container.get(path) ?? "")
+      : (container.get("file.svg") ?? "");
+
+  switch (+size) {
+    case 24:
+      return getOrDefault(iconSize24);
+    case 32:
+      return getOrDefault(iconSize32);
+    case 64:
+      return getOrDefault(iconSize64);
+    case 96:
+      return getOrDefault(iconSize96);
+    default:
+      return getOrDefault(iconSize32);
+  }
+};
+
+export const getRoomsIcon = (
+  roomType: RoomsType,
+  isArchive: boolean,
+  size: number = 32,
+) => {
+  let path = "";
+
+  if (isArchive) {
+    path = "archiveRoom.svg";
+  } else {
+    switch (roomType) {
+      case RoomsType.CustomRoom:
+        path = "customRoom.svg";
+        break;
+      case RoomsType.EditingRoom:
+        path = "editingRoom.svg";
+        break;
+      case RoomsType.PublicRoom:
+        path = "publicRoom.svg";
+        break;
+      case RoomsType.VirtualDataRoom:
+        path = "virtualRoom.svg";
+        break;
+      case RoomsType.FormRoom:
+        path = "formRoom.svg";
+        break;
+      default:
+        path = "customRoom.svg";
+    }
+  }
+
+  return getIconBySize(path, size);
+};

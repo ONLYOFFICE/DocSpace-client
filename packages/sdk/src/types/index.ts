@@ -24,8 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TGetRooms } from "@docspace/shared/api/rooms/types";
+import { RoomsType } from "@docspace/shared/enums";
+
 export type TError = {
   message?: "unauthorized" | "restore-backup" | string;
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
+};
+
+export type TIconContainer = {
+  has(key: string): boolean;
+  get(key: string): string | undefined;
+};
+
+export type RoomSelectorProps = {
+  roomList: TGetRooms;
+  pageCount: number;
+  baseConfig: {
+    header?: boolean;
+    cancel?: boolean;
+    cancelLabel?: string;
+    acceptLabel?: string;
+    search?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+  };
 };

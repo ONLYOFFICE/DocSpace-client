@@ -31,19 +31,19 @@ import {
   SHOW_LOADER_TIMER,
 } from "../FilesSelector.constants";
 
-const useLoadersHelper = () => {
+const useLoadersHelper = ({ withInit }: { withInit?: boolean }) => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =
-    React.useState<boolean>(true);
+    React.useState<boolean>(!withInit);
   const [isNextPageLoading, setIsNextPageLoading] =
     React.useState<boolean>(false);
 
   const [showBreadCrumbsLoader, setShowBreadCrumbsLoader] =
-    React.useState<boolean>(true);
-  const [showLoader, setShowLoader] = React.useState<boolean>(true);
+    React.useState<boolean>(!withInit);
+  const [showLoader, setShowLoader] = React.useState<boolean>(!withInit);
 
-  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+  const [isFirstLoad, setIsFirstLoad] = React.useState(!withInit);
 
-  const startLoader = React.useRef<Date | null>(new Date());
+  const startLoader = React.useRef<Date | null>(withInit ? null : new Date());
   const loaderTimeout = React.useRef<NodeJS.Timeout | null>(null);
 
   const breadCrumbsLoaderTimeout = React.useRef<NodeJS.Timeout | null>(null);

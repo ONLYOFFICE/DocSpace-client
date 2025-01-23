@@ -56,7 +56,11 @@ export const SettingsContextProvider = ({
 
   let displayExts = displayFileExtension;
 
-  if (window.DocSpace && "displayFileExtension" in window.DocSpace) {
+  if (
+    typeof window !== "undefined" &&
+    window.DocSpace &&
+    "displayFileExtension" in window.DocSpace
+  ) {
     displayExts = window.DocSpace.displayFileExtension as boolean;
   }
 

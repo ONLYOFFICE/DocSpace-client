@@ -209,6 +209,10 @@ const Body = ({
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
+  if (!withTabs && withPadding) {
+    listHeight -= CONTAINER_PADDING;
+  }
+
   if (showSearch) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {

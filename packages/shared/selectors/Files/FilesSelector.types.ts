@@ -31,13 +31,15 @@ import {
   TSelectorHeader,
 } from "../../components/selector/Selector.types";
 import {
+  TFile,
   TFileSecurity,
   TFilesSettings,
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
 import { DeviceType, FolderType, RoomsType } from "../../enums";
-import { TRoomSecurity } from "../../api/rooms/types";
+import { TRoom, TRoomSecurity } from "../../api/rooms/types";
+import { Nullable } from "../../types";
 
 export type TCreateDefineRoom = {
   label: string;
@@ -96,6 +98,7 @@ export type UseRoomsHelperProps = {
     >
   >;
   subscribe: (id: number) => void;
+  withInit?: boolean;
 };
 
 export type UseFilesHelpersProps = {
@@ -134,6 +137,8 @@ export type UseFilesHelpersProps = {
   shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
   setSelectedItemType: (value?: "rooms" | "files") => void;
+
+  withInit?: boolean;
 };
 
 export type TUseInputItemHelper = {
@@ -152,8 +157,31 @@ export type TSelectedFileInfo = {
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
+export type TFilesSelectorInit =
+  | {
+      withInit: true;
+      initTotal: number;
+      initHasNextPage: boolean;
+      initItems: TRoom[] | (TFolder | TFile)[];
+      initBreadCrumbs: TBreadCrumb[];
+      initSelectedItemType: "rooms" | "files";
+      initSelectedItemId: string | number;
+      initSearchValue?: Nullable<string>;
+    }
+  | {
+      withInit?: never;
+      initItems?: never;
+      initTotal?: never;
+      initHasNextPage?: never;
+      initSearchValue?: never;
+      initSelectedItemType?: never;
+      initSelectedItemId?: never;
+      initBreadCrumbs?: never;
+    };
+
 export type FilesSelectorProps = TSelectorHeader &
   TInfoBar &
+  TFilesSelectorInit &
   (
     | {
         getIcon: TGetIcon;

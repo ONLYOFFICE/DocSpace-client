@@ -23,35 +23,3 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { createContext, ReactNode } from "react";
-
-import useLoadersHelper from "../hooks/useLoadersHelper";
-
-type TLoaderContext = ReturnType<typeof useLoadersHelper>;
-
-export const LoadersContext = createContext<TLoaderContext>({
-  isFirstLoad: true,
-  isBreadCrumbsLoading: true,
-  isNextPageLoading: false,
-  showBreadCrumbsLoader: true,
-  showLoader: true,
-
-  setIsBreadCrumbsLoading: () => {},
-  setIsFirstLoad: () => {},
-  setIsNextPageLoading: () => {},
-});
-
-export const LoadersContextProvider = ({
-  children,
-  withInit,
-}: {
-  children: ReactNode;
-  withInit?: boolean;
-}) => {
-  const value = useLoadersHelper({ withInit });
-
-  return (
-    <LoadersContext.Provider value={value}>{children}</LoadersContext.Provider>
-  );
-};

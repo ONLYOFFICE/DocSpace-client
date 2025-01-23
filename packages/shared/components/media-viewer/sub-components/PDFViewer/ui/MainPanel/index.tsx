@@ -101,12 +101,19 @@ const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
         className={classNames(styles.wrapper, {
           [styles.isDesktop]: isDesktop,
         })}
+        data-testid="main-panel-wrapper"
+        role="region"
+        aria-label="PDF viewer main panel"
       >
         <div
           id="mainPanel"
           ref={ref}
           className={styles.content}
           data-loading={isLoading}
+          data-testid="main-panel-content"
+          role="document"
+          aria-busy={isLoading}
+          aria-label={`PDF document ${src}`}
         />
       </animated.section>
     );

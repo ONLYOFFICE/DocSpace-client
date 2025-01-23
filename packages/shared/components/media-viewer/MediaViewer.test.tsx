@@ -40,6 +40,7 @@ import { MessageError } from "./sub-components/MessageError";
 import type { ContextMenuModel } from "../context-menu/ContextMenu.types";
 import { MobileDetails } from "./sub-components/MobileDetails";
 import { Bookmarks } from "./sub-components/PDFViewer/ui/Bookmarks";
+import { MainPanel } from "./sub-components/PDFViewer/ui/MainPanel";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -758,5 +759,99 @@ describe("Bookmarks component", () => {
       expect(getByTestId(`bookmark-item-${index}`)).toBeInTheDocument();
       expect(getByTestId(`bookmark-button-${index}`)).toBeInTheDocument();
     });
+  });
+});
+
+// Mock react-device-detect
+jest.mock("react-device-detect", () => ({
+  isDesktop: false,
+}));
+
+// Mock CSS module
+jest.mock("../MainPanel.module.scss", () => ({
+  wrapper: "wrapper",
+  content: "content",
+  isDesktop: "isDesktop",
+}));
+
+interface GestureHandlers {
+  onDrag?: (state: { offset: [number]; movement: [number] }) => void;
+  onDragEnd?: (state: { movement: [number] }) => void;
+}
+
+// Mock use-gesture
+jest.mock("@use-gesture/react", () => ({
+  useGesture: (handlers: GestureHandlers) => {
+    // Store handlers for testing
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (global as any).gestureHandlers = handlers;
+  },
+}));
+
+describe("MainPanel component", () => {
+  const mockProps = {
+    src: "test.pdf",
+    isLoading: false,
+    isLastImage: false,
+    isFistImage: false,
+    setZoom: jest.fn(),
+    onPrev: jest.fn(),
+    onNext: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Mock window.innerWidth for swipe gesture tests
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 1024,
+    });
+  });
+
+  it("renders with correct accessibility attributes", () => {
+    const { getByTestId } = render(<MainPanel {...mockProps} />);
+
+    const wrapper = getByTestId("main-panel-wrapper");
+    const content = getByTestId("main-panel-content");
+
+    expect(wrapper).toHaveAttribute("role", "region");
+    expect(wrapper).toHaveAttribute("aria-label", "PDF viewer main panel");
+
+    expect(content).toHaveAttribute("role", "document");
+    expect(content).toHaveAttribute("aria-busy", "false");
+    expect(content).toHaveAttribute("aria-label", "PDF document test.pdf");
+  });
+
+  it("updates loading state correctly", () => {
+    const { getByTestId, rerender } = render(
+      <MainPanel {...mockProps} isLoading />,
+    );
+
+    const content = getByTestId("main-panel-content");
+    expect(content).toHaveAttribute("data-loading", "true");
+    expect(content).toHaveAttribute("aria-busy", "true");
+
+    rerender(<MainPanel {...mockProps} isLoading={false} />);
+    expect(content).toHaveAttribute("data-loading", "false");
+    expect(content).toHaveAttribute("aria-busy", "false");
+  });
+
+  it("calls onNext when swiping left", () => {
+    render(<MainPanel {...mockProps} />);
+    const handlers = (global as any).gestureHandlers as GestureHandlers;
+
+    // Simulate drag end with left swipe
+    handlers.onDragEnd?.({ movement: [-300] }); // More than width/4 (1024/4)
+    expect(mockProps.onNext).toHaveBeenCalled();
+  });
+
+  it("calls onPrev when swiping right", () => {
+    render(<MainPanel {...mockProps} />);
+    const handlers = (global as any).gestureHandlers as GestureHandlers;
+
+    // Simulate drag end with right swipe
+    handlers.onDragEnd?.({ movement: [300] }); // More than width/4 (1024/4)
+    expect(mockProps.onPrev).toHaveBeenCalled();
   });
 });

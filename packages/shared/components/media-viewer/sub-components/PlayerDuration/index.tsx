@@ -38,9 +38,9 @@ export const PlayerDuration = ({
   duration,
 }: PlayerDurationProps) => {
   return (
-    <div className={styles.wrapper}>
-      <time>{formatTime(currentTime)}</time> /{" "}
-      <time>{formatTime(duration)}</time>
+    <div className={styles.wrapper} data-testid="player-duration">
+      <time data-testid="current-time">{formatTime(currentTime)}</time> /{" "}
+      <time data-testid="total-duration">{formatTime(duration)}</time>
     </div>
   );
 };

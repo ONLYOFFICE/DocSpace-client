@@ -42,8 +42,14 @@ export const ViewerLoader = ({
         [styles.withBackground]: withBackground,
       })}
       onClick={onClick}
+      data-testid="viewer-loader-wrapper"
     >
-      <div className={styles.loader} />
+      <div
+        className={styles.loader}
+        role="progressbar"
+        aria-label="Loading content"
+        data-testid="viewer-loader"
+      />
     </div>
   );
 };

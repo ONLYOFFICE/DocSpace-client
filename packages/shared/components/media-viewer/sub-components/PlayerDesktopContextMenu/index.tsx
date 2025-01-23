@@ -69,8 +69,13 @@ const PlayerDesktopContextMenu = memo(
 
     if (hideContextMenu && canDownload) {
       return (
-        <div className={styles.downloadIconWrapper} onClick={onDownloadClick}>
-          <DownloadReactSvgUrl />
+        <div
+          className={styles.downloadIconWrapper}
+          onClick={onDownloadClick}
+          data-testid="download-button"
+          aria-label="Download file"
+        >
+          <DownloadReactSvgUrl role="presentation" />
         </div>
       );
     }
@@ -83,8 +88,12 @@ const PlayerDesktopContextMenu = memo(
         ref={ref}
         className={styles.playerDesktopContextMenuWrapper}
         onClick={toggleContext}
+        data-testid="context-menu-button"
+        aria-haspopup="menu"
+        aria-expanded={isOpenContext}
+        aria-label="Open context menu"
       >
-        <MediaContextMenu />
+        <MediaContextMenu role="presentation" />
         {context}
       </div>
     );

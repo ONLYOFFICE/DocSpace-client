@@ -38,13 +38,22 @@ const PlayerPlayButton = memo(
       event.stopPropagation();
     };
 
+    const buttonLabel = isPlaying ? "Pause" : "Play";
+
     return (
       <div
         className={styles.wrapper}
         onClick={onClick}
         onTouchStart={onTouchStart}
+        data-testid="player-play-button"
+        aria-label={buttonLabel}
+        aria-pressed={isPlaying}
       >
-        {isPlaying ? <IconStop /> : <IconPlay />}
+        {isPlaying ? (
+          <IconStop data-testid="pause-icon" role="presentation" />
+        ) : (
+          <IconPlay data-testid="play-icon" role="presentation" />
+        )}
       </div>
     );
   },

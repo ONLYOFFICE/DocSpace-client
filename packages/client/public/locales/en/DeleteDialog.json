@@ -17,5 +17,7 @@
   "MoveToTrashTitle": "Move to Trash?",
   "UnsubscribeButton": "Unsubscribe",
   "UnsubscribeNote": "Are you sure you want to unsubscribe from the selected items from the list?",
-  "UnsubscribeTitle": "Unsubscribe confirmation"
+  "UnsubscribeTitle": "Unsubscribe confirmation",
+  "DeleteTemplate": "Do you really want to delete template room <1>«{{templateName}}»</1>? The template cannot be restored.",
+  "DeleteTemplates": "Do you really want to delete selected room templates? They cannot be restored."
 }

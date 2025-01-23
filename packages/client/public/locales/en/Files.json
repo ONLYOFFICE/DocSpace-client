@@ -234,5 +234,6 @@
   "RoomTemplate": "Room template",
   "RoomTemplateDescription": "Use this template to quickly create a new room.",
   "TemplateOwner": "Template owner",
-  "Template": "Template"
+  "Template": "Template",
+  "TemplateRemoved": "Selected room templates have been deleted"
 }

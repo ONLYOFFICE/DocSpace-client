@@ -946,9 +946,11 @@ class FilesActionStore {
         })
         .then(() =>
           toastr.success(
-            items.length > 1
-              ? translations?.successRemoveRooms
-              : translations?.successRemoveRoom,
+            translations?.successRemoveTemplate
+              ? translations.successRemoveTemplate
+              : items.length > 1
+                ? translations?.successRemoveRooms
+                : translations?.successRemoveRoom,
           ),
         )
         .finally(() => {

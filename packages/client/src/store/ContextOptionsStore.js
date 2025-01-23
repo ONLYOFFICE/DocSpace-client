@@ -87,7 +87,6 @@ import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
-  isDesktop,
   isMobile as isMobileUtils,
   isLockedSharedRoom,
   trimSeparator,
@@ -2580,21 +2579,19 @@ class ContextOptionsStore {
       });
     }
 
-    const formActions = isDesktop()
-      ? [
-          {
-            id: "personal_form-template",
-            icon: FormReactSvgUrl,
-            label: t("Translations:NewForm"),
-            key: "new-form-base",
-            items: [
-              createTemplateForm,
-              createTemplateNewFormFile,
-              templateOformsGallery,
-            ],
-          },
-        ]
-      : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
+    const formActions = [
+      {
+        id: "personal_form-template",
+        icon: FormReactSvgUrl,
+        label: t("Translations:NewForm"),
+        key: "new-form-base",
+        items: [
+          createTemplateForm,
+          createTemplateNewFormFile,
+          templateOformsGallery,
+        ],
+      },
+    ];
 
     const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder

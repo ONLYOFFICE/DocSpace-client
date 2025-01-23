@@ -43,7 +43,6 @@ import {
 const PlayerSpeedControl = memo(
   ({ handleSpeedChange, onMouseLeave, src }: PlayerSpeedControlProps) => {
     const ref = useRef<HTMLDivElement>(null);
-
     const timerRef = useRef<NodeJS.Timeout>();
 
     const [currentIndexSpeed, setCurrentIndexSpeed] =
@@ -61,7 +60,6 @@ const PlayerSpeedControl = memo(
         if (!ref.current || ref.current.contains(event.target as Node)) {
           return;
         }
-
         setIsOpenSpeedContextMenu(false);
       };
       document.addEventListener("mousedown", listener);
@@ -74,16 +72,11 @@ const PlayerSpeedControl = memo(
     const toggle = () => {
       if (isMobileOnly) {
         const nextIndexSpeed = getNextIndexSpeed(currentIndexSpeed);
-
         setCurrentIndexSpeed(nextIndexSpeed);
-
         const newSpeed = speedRecord[speeds[nextIndexSpeed]];
-
         handleSpeedChange(newSpeed);
-
         setSpeedToastVisible(true);
         clearTimeout(timerRef.current);
-
         timerRef.current = setTimeout(() => {
           setSpeedToastVisible(false);
         }, MillisecondShowSpeedToast);
@@ -97,15 +90,29 @@ const PlayerSpeedControl = memo(
         {speedToastVisible ? (
           <div className={styles.toast}>{speedIcons[currentIndexSpeed]}</div>
         ) : null}
-        <div className={styles.wrapper} ref={ref} onClick={toggle}>
+        <div
+          className={styles.wrapper}
+          ref={ref}
+          onClick={toggle}
+          data-testid="speed-control"
+          aria-expanded={isOpenSpeedContextMenu}
+          aria-haspopup="listbox"
+        >
           {speedIcons[currentIndexSpeed]}
 
           {isOpenSpeedContextMenu ? (
-            <div className={styles.dropdown} onMouseLeave={onMouseLeave}>
+            <div
+              className={styles.dropdown}
+              onMouseLeave={onMouseLeave}
+              data-testid="speed-menu"
+              aria-label="Select playback speed"
+            >
               {speeds.map((speed, index) => (
                 <div
                   key={speed}
                   className={styles.dropdownItem}
+                  data-testid={`speed-option-${speed}`}
+                  aria-selected={index === currentIndexSpeed}
                   onClick={() => {
                     setCurrentIndexSpeed(index);
                     handleSpeedChange(speedRecord[speed]);

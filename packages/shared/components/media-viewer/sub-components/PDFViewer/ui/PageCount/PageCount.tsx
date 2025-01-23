@@ -68,10 +68,19 @@ const PageCount = forwardRef<PageCountRef, PageCountProps>(
           },
           className,
         )}
+        data-testid="page-count"
+        aria-label="Page counter"
       >
-        {isMobile ? <PanelReactSvg onClick={openMobileDrawer} /> : null}
-        <div>
-          <span>{pageNumber}</span> / <span>{pagesCount}</span>
+        {isMobile ? (
+          <PanelReactSvg
+            onClick={openMobileDrawer}
+            data-testid="mobile-panel-button"
+            aria-label="Open mobile panel"
+          />
+        ) : null}
+        <div data-testid="page-numbers">
+          <span data-testid="current-page">{pageNumber}</span> /
+          <span data-testid="total-pages">{pagesCount}</span>
         </div>
       </div>
     );

@@ -34,11 +34,25 @@ import styles from "./Bookmarks.module.scss";
 export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
   return (
     <CustomScrollbarsVirtualList>
-      <ul className={styles.list}>
+      <ul
+        className={styles.list}
+        aria-label="PDF bookmarks"
+        data-testid="bookmarks-list"
+      >
         {bookmarks.map((item, index) => {
           return (
-            <li key={item.page} className={styles.item}>
-              <p className={styles.text} onClick={() => navigate(index)}>
+            <li
+              key={item.page}
+              className={styles.item}
+              data-testid={`bookmark-item-${index}`}
+            >
+              <p
+                className={styles.text}
+                onClick={() => navigate(index)}
+                aria-label={`Go to bookmark: ${item.description}`}
+                data-testid={`bookmark-button-${index}`}
+                data-page={item.page}
+              >
                 {item.description}
               </p>
             </li>

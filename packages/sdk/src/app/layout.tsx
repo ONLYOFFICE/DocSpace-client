@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
+import type { Metadata } from "next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -38,6 +39,10 @@ import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
+
+export const metadata: Metadata = {
+  title: "SDK",
+};
 
 export default async function RootLayout({
   children,

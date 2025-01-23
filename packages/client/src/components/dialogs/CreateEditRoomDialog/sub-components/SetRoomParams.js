@@ -150,6 +150,7 @@ const SetRoomParams = ({
   onOpenAccessSettings,
   createdBy,
   inviteItems,
+  setLifetimeDialogVisible,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -167,6 +168,10 @@ const SetRoomParams = ({
     roomParams.type === RoomsType.VirtualDataRoom && !isTemplate;
 
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom && !isTemplate;
+
+  const filesCount = selection
+    ? selection.filesCount + selection.foldersCount
+    : 0;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -483,9 +488,11 @@ const SetRoomParams = ({
       {isVDRRoom ? (
         <VirtualDataRoomBlock
           t={t}
+          filesCount={filesCount}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isEdit={isEdit}
+          setLifetimeDialogVisible={setLifetimeDialogVisible}
         />
       ) : null}
 
@@ -567,6 +574,7 @@ export default inject(
       cover,
       covers,
       setCover,
+      setLifetimeDialogVisible,
     } = dialogsStore;
 
     const selection =
@@ -595,6 +603,7 @@ export default inject(
       cover,
       covers,
       setCover,
+      setLifetimeDialogVisible,
     };
   },
 )(

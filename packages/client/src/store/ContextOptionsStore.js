@@ -87,11 +87,7 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  isDesktop,
-  isLockedSharedRoom,
-  trimSeparator,
-} from "@docspace/shared/utils";
+import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -2676,21 +2672,19 @@ class ContextOptionsStore {
       });
     }
 
-    const formActions = isDesktop()
-      ? [
-          {
-            id: "personal_form-template",
-            icon: FormReactSvgUrl,
-            label: t("Translations:NewForm"),
-            key: "new-form-base",
-            items: [
-              createTemplateForm,
-              createTemplateNewFormFile,
-              templateOformsGallery,
-            ],
-          },
-        ]
-      : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
+    const formActions = [
+      {
+        id: "personal_form-template",
+        icon: FormReactSvgUrl,
+        label: t("Translations:NewForm"),
+        key: "new-form-base",
+        items: [
+          createTemplateForm,
+          createTemplateNewFormFile,
+          templateOformsGallery,
+        ],
+      },
+    ];
 
     const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder

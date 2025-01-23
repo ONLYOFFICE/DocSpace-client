@@ -162,6 +162,7 @@ export interface ContextMenuProps {
   isArchive?: boolean;
   ref?: React.RefObject<HTMLDivElement>;
   badgeUrl?: string;
+  headerOnlyMobile?: boolean;
 }
 
 export type TContextMenuRef = {

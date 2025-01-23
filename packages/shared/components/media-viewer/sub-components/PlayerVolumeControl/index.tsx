@@ -47,8 +47,19 @@ const PlayerVolumeControl = memo(
     toggleVolumeMute,
   }: PlayerVolumeControlProps) => {
     return (
-      <div className={styles.playerVolumeControlWrapper}>
-        <div className={styles.iconWrapper} onClick={toggleVolumeMute}>
+      <div
+        className={styles.playerVolumeControlWrapper}
+        data-testid="player-volume-control"
+        role="group"
+        aria-label="Volume controls"
+      >
+        <div
+          className={styles.iconWrapper}
+          onClick={toggleVolumeMute}
+          data-testid="volume-mute-button"
+          aria-label={isMuted ? "Unmute" : "Mute"}
+          aria-pressed={isMuted}
+        >
           {isMuted ? (
             <IconVolumeMuted />
           ) : volume >= 50 ? (
@@ -57,7 +68,10 @@ const PlayerVolumeControl = memo(
             <IconVolumeMin />
           )}
         </div>
-        <div className={styles.volumeWrapper}>
+        <div
+          className={styles.volumeWrapper}
+          data-testid="volume-slider-wrapper"
+        >
           <input
             style={{
               backgroundSize: `${volume}% 100%`,
@@ -67,6 +81,12 @@ const PlayerVolumeControl = memo(
             max="100"
             value={volume}
             onChange={onChange}
+            data-testid="volume-slider"
+            aria-label="Volume"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={volume}
+            aria-valuetext={`${volume}%`}
           />
         </div>
       </div>

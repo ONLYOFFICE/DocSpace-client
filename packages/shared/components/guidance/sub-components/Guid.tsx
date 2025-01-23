@@ -53,6 +53,8 @@ const Guid = ({
   position,
   infoPanelVisible,
 }: GuidProps) => {
+  const theme = useTheme();
+
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   const { isRTL } = useInterfaceDirection();
@@ -61,8 +63,6 @@ const Guid = ({
   const [directionX, setDirectionX] = React.useState<null | string>(
     isRTL ? "right" : "left",
   );
-
-  const theme = useTheme();
 
   const modalText = getHeaderText(formFillingTipsNumber, t);
 
@@ -87,7 +87,7 @@ const Guid = ({
 
   const tipsCircle = [];
 
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 6; i += 1) {
     tipsCircle.push(
       <div
         className={classNames(styles.tipsCircle, {
@@ -118,7 +118,7 @@ const Guid = ({
       return setModalTop(position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT);
     }
     setModalTop(position.bottom + GUID_MODAL_MARGIN);
-  }, [position.bottom, position.left, position.top]);
+  }, [position.bottom, position.left, position.top, isRTL]);
 
   React.useEffect(() => {
     onResize();

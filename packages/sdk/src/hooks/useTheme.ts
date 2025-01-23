@@ -38,6 +38,7 @@ import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
@@ -67,7 +68,7 @@ const useTheme = ({
     });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
-    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
 
     const newTheme = match<MatchType>([user?.theme, systemTheme])
       .returnType<TTheme>()
@@ -106,7 +107,7 @@ const useTheme = ({
     const SYSTEM_THEME = getSystemTheme();
 
     let theme = systemTheme ?? SYSTEM_THEME;
-    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
 
     if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 

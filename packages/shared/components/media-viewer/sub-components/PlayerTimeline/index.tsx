@@ -138,10 +138,33 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
         onMouseMove={handleMouseMove}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        data-testid="player-timeline"
+        role="group"
+        aria-label="Video timeline"
       >
-        <time ref={timelineTooltipRef}>00:00</time>
-        <div ref={progressRef} className={styles.progress} />
-        <div ref={hoverProgressRef} className={styles.hoverProgress} />
+        <time
+          ref={timelineTooltipRef}
+          data-testid="timeline-tooltip"
+          aria-live="polite"
+        >
+          00:00
+        </time>
+        <div
+          ref={progressRef}
+          className={styles.progress}
+          data-testid="timeline-progress"
+          role="progressbar"
+          aria-label="Video progress"
+          aria-valuenow={value}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        />
+        <div
+          ref={hoverProgressRef}
+          className={styles.hoverProgress}
+          data-testid="timeline-hover-progress"
+          aria-hidden="true"
+        />
         <input
           min="0"
           max="100"
@@ -152,6 +175,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
           style={{
             backgroundSize: `${value}% 100%`,
           }}
+          data-testid="timeline-slider"
         />
       </div>
     );

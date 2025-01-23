@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen, render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 import { Tabs } from ".";
 import { TabsTypes } from "./Tabs.enums";
 import { TTabItem } from "./Tabs.types";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn();
@@ -68,10 +68,6 @@ const arrayItems: TTabItem[] = [
     ),
   },
 ];
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 describe("Tabs", () => {
   it("renders without errors", () => {

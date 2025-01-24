@@ -835,7 +835,7 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string } }[];
+  })) as { result: { webUrl: string; title: string } }[];
 
   return res;
 }

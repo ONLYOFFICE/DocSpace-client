@@ -24,23 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Dispatch, SetStateAction, ReactNode } from "react";
-import { ToolbarActionType } from "../../MediaViewer.enums";
+import type { Dispatch, SetStateAction } from "react";
+import type { getCustomToolbar } from "../../MediaViewer.helpers";
 
-export interface ToolbarItemType {
-  key: string;
-  title: string;
-  icon: ReactNode;
-  percent?: boolean;
-  disabled?: boolean;
-  actionType?: ToolbarActionType;
-  render?: JSX.Element;
-  onClick?: () => void;
-  noHover?: boolean;
-}
-
-export interface ImageViewerToolbarProps {
-  toolbar: ToolbarItemType[];
+interface ImageViewerToolbarProps {
+  toolbar: ReturnType<typeof getCustomToolbar>;
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
@@ -51,6 +39,8 @@ export interface ImageViewerToolbarProps {
   toolbarEvent: (item: ToolbarItemType) => void;
   className?: string;
 }
+
+export type ToolbarItemType = ReturnType<typeof getCustomToolbar>[number];
 
 export type ImperativeHandle = {
   setPercentValue: (percent: number) => void;

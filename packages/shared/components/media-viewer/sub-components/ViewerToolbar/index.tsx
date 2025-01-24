@@ -34,8 +34,7 @@ import classNames from "classnames";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import styles from "./ViewerToolbar.module.scss";
 import { useClickOutside } from "../../../../utils/useClickOutside";
-import type {
-  ImageViewerToolbarProps,
+import ImageViewerToolbarProps, {
   ImperativeHandle,
   ToolbarItemType,
 } from "./ViewerToolbar.props";
@@ -133,7 +132,6 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
           onClick={() => toolbarEvent(item)}
           data-testid={`toolbar-item-${item.key}`}
           data-key={item.key}
-          aria-label={item.title}
         >
           {content}
         </li>

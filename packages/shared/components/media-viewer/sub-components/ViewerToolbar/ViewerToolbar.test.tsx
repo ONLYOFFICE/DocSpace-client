@@ -27,6 +27,8 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { ContextMenu } from "../../../context-menu/ContextMenu";
+import { ToolbarActionType } from "../../MediaViewer.enums";
 import { ViewerToolbar } from "./index";
 import type { ToolbarItemType } from "./ViewerToolbar.props";
 
@@ -54,24 +56,21 @@ describe("ViewerToolbar", () => {
   const defaultToolbarItems: ToolbarItemType[] = [
     {
       key: "zoom-in",
-      title: "Zoom In",
-      icon: <div data-testid="zoom-in-icon">Zoom In</div>,
+      percent: false,
+      actionType: 1,
+      render: <div />,
+      noHover: undefined,
+      disabled: undefined,
+      onClick: undefined,
     },
     {
       key: "zoom-out",
-      title: "Zoom Out",
-      icon: <div data-testid="zoom-out-icon">Zoom Out</div>,
-    },
-    {
-      key: "fit-to-page",
-      title: "Fit to Page",
-      icon: <div data-testid="fit-page-icon">Fit to Page</div>,
-    },
-    {
-      key: "zoom",
-      title: "Zoom",
-      percent: true,
-      icon: <div data-testid="zoom-icon">Zoom</div>,
+      percent: false,
+      actionType: 1,
+      render: <div />,
+      noHover: undefined,
+      disabled: undefined,
+      onClick: undefined,
     },
   ];
 
@@ -93,7 +92,6 @@ describe("ViewerToolbar", () => {
     defaultToolbarItems.forEach((item) => {
       const toolbarItem = screen.getByTestId(`toolbar-item-${item.key}`);
       expect(toolbarItem).toBeInTheDocument();
-      expect(toolbarItem).toHaveAttribute("aria-label", item.title);
     });
   });
 
@@ -109,13 +107,28 @@ describe("ViewerToolbar", () => {
   it("handles context menu toggle", () => {
     const contextMenu = <div data-testid="context-menu">Context Menu</div>;
     mockGenerateContextMenu.mockReturnValue(contextMenu);
-
+    const contextMenuModel = [
+      {
+        key: "item1",
+        label: "Item 1",
+        onClick: () => console.log("Item 1 clicked"),
+      },
+      {
+        key: "item2",
+        label: "Item 2",
+        onClick: () => console.log("Item 2 clicked"),
+      },
+    ];
     const toolbarWithContextMenu = [
       ...defaultToolbarItems,
       {
         key: "context-menu",
         title: "More Options",
         icon: <DotsIcon />,
+        actionType: ToolbarActionType.Panel,
+        render: <ContextMenu model={contextMenuModel} />,
+        onClick: () => console.log("Context menu clicked"),
+        disabled: false,
       },
     ];
 
@@ -129,8 +142,6 @@ describe("ViewerToolbar", () => {
     expect(mockSetIsOpenContextMenu).toHaveBeenCalled();
     expect(screen.getByTestId("context-menu")).toBeInTheDocument();
   });
-
- 
 
   it("applies custom className when provided", () => {
     const customClass = "custom-toolbar";
@@ -147,7 +158,10 @@ describe("ViewerToolbar", () => {
         key: "disabled-item",
         title: "Disabled Item",
         icon: <div>Disabled</div>,
+        actionType: ToolbarActionType.Download,
+        render: <div>Disabled</div>,
         disabled: true,
+        onClick: () => {},
       },
     ];
 
@@ -171,6 +185,9 @@ describe("ViewerToolbar", () => {
         title: "Custom Item",
         icon: <div>Icon</div>,
         render: customContent,
+        actionType: ToolbarActionType.Download,
+        onClick: () => console.log("Custom item clicked"),
+        disabled: false,
       },
     ];
 

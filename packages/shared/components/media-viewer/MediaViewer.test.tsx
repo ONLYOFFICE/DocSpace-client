@@ -38,7 +38,6 @@ import { ImageViewer } from "./sub-components/ImageViewer";
 import { MessageError } from "./sub-components/MessageError";
 
 import type { ContextMenuModel } from "../context-menu/ContextMenu.types";
-import { MobileDetails } from "./sub-components/MobileDetails";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -654,55 +653,5 @@ describe("MessageError", () => {
     render(<MessageError {...propsWithNoIcon} />);
 
     expect(screen.queryByTestId("toolbar-item-noIcon")).not.toBeInTheDocument();
-  });
-});
-
-describe("MobileDetails", () => {
-  const defaultProps = {
-    icon: "test-icon",
-    title: "Test Title",
-    isError: false,
-    isPreviewFile: false,
-    isPublicFile: false,
-    onHide: jest.fn(),
-    onMaskClick: jest.fn(),
-    onContextMenu: jest.fn(),
-    contextModel: jest.fn(),
-  };
-
-  const setup = (props = {}) => {
-    return render(<MobileDetails {...defaultProps} {...props} />);
-  };
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("does not render back button when isPublicFile is true", () => {
-    setup({ isPublicFile: true });
-
-    expect(screen.queryByTestId("mobile-details-back")).not.toBeInTheDocument();
-  });
-
-  it("does not render context menu when isPreviewFile is true", () => {
-    setup({ isPreviewFile: true });
-
-    expect(
-      screen.queryByTestId("mobile-details-context"),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByTestId("mobile-details-context-menu"),
-    ).not.toBeInTheDocument();
-  });
-
-  it("does not render context menu when isError is true", () => {
-    setup({ isError: true });
-
-    expect(
-      screen.queryByTestId("mobile-details-context"),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByTestId("mobile-details-context-menu"),
-    ).not.toBeInTheDocument();
   });
 });

@@ -32,4 +32,5 @@ export interface LoadingButtonProps {
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   isConversion?: boolean;
   inConversion?: boolean;
+  color?: React.CSSProperties["color"];
 }

@@ -31,17 +31,19 @@ import StyledCircleWrap from "../sub-components/StyledCircleWrap";
 
 const getDefaultStyles = ({
   $currentColorScheme,
+  color,
 }: {
   $currentColorScheme?: TColorScheme;
+  color?: React.CSSProperties["color"];
 }) =>
   $currentColorScheme &&
   css`
     .circle__mask .circle__fill {
-      background-color: ${$currentColorScheme.main?.accent} !important;
+      background-color: ${color ?? $currentColorScheme.main?.accent};
     }
 
     .loading-button {
-      color: ${$currentColorScheme.main?.accent};
+      color: ${color ?? $currentColorScheme.main?.accent};
     }
   `;
 

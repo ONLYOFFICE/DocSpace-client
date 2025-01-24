@@ -38,6 +38,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
   onClick,
   isConversion = false,
   inConversion = false,
+  color,
 }) => {
   const progress = percent || null;
 
@@ -62,6 +63,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
       style={style}
       onClick={onClick}
       themeId={ThemeId.LoadingButton}
+      color={color}
     >
       <StyledCircle
         percent={progress}

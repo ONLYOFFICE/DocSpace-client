@@ -157,3 +157,21 @@ export type TNewFiles = {
   date: string;
   items: TNewFilesItem[];
 };
+
+export type TValidateShareRoom =
+  | {
+      id: string;
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+      title: string;
+    }
+  | {
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+    };

@@ -39,6 +39,7 @@ import {
   sortInDisplayOrder,
 } from "@docspace/shared/utils/common";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
@@ -156,4 +157,23 @@ export async function getFolder(
     folder.current.rootFolderType === FolderType.Archive;
 
   return folder;
+}
+
+export async function validateShareFolder(share: string) {
+  const shareHeader: [string, string] = share
+    ? ["Request-Token", share]
+    : ["", ""];
+
+  const [req] = createRequest([`/files/share/${share}`], [shareHeader], "GET");
+
+  const res = await fetch(req);
+
+  if (!res.ok) {
+    throw new Error("Failed to validate share folder");
+  }
+
+  const resJson = await res.json();
+  const shareKey = resJson.response as TValidateShareRoom;
+
+  return shareKey;
 }

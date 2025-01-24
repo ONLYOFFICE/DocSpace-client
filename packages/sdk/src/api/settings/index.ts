@@ -26,7 +26,12 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
+import {
+  TCapabilities,
+  TGetColorTheme,
+  TSettings,
+  TVersionBuild,
+} from "@docspace/shared/api/settings/types";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
 import { colorThemeHandler } from "@docspace/shared/__mocks__/e2e";
@@ -65,4 +70,28 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
   const colorTheme = await res.json();
 
   return colorTheme.response;
+}
+
+export async function getBuildInfo() {
+  const [req] = createRequest([`/settings/version/build`], [["", ""]], "GET");
+
+  const res = await fetch(req);
+
+  if (!res.ok) return;
+
+  const buildInfo = await res.json();
+
+  return buildInfo as TVersionBuild;
+}
+
+export async function getCapabilities() {
+  const [req] = createRequest([`/capabilities`], [["", ""]], "GET");
+
+  const res = await fetch(req);
+
+  if (!res.ok) return;
+
+  const capabilities = await res.json();
+
+  return capabilities.response as TCapabilities;
 }

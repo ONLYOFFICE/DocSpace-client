@@ -26,21 +26,18 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 
 import { Text } from "../text";
+import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";
 import { SelectedItem } from "../selected-item";
-import {
-  DateSelector,
-  SelectedLabel,
-  StyledCalendar,
-  Wrapper,
-} from "./DatePicker.styled";
 import { DatePickerProps } from "./DatePicker.types";
 import { globalColors } from "../../themes";
+import styles from "./DatePicker.module.scss";
 
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -129,29 +126,37 @@ const DatePicker = (props: DatePickerProps) => {
   }, [date, outerDate]);
 
   return (
-    <Wrapper className={className} id={id} data-testid="date-picker">
+    <div
+      className={classNames(styles.wrapper, className)}
+      id={id}
+      data-testid="date-picker"
+    >
       {!date ? (
-        <DateSelector onClick={toggleCalendar} ref={selectorRef}>
+        <div
+          className={styles.dateSelector}
+          onClick={toggleCalendar}
+          ref={selectorRef}
+        >
           <SelectorAddButton
             title={selectDateText}
-            className="mr-8 add-delivery-date-button"
+            className="add-delivery-date-button"
             iconName={CalendarIconUrl}
           />
           <Text isInline fontWeight={600} color={globalColors.gray}>
             {selectDateText}
           </Text>
-        </DateSelector>
+        </div>
       ) : (
         <SelectedItem
-          className="selectedItem"
+          className={styles.selectedItem}
           propKey=""
           onClose={deleteSelectedDate}
           label={
             showCalendarIcon ? (
-              <SelectedLabel>
-                <CalendarIcon className="calendarIcon" />
+              <span className={styles.selectedLabel}>
+                <CalendarIcon className={styles.calendarIcon} />
                 {date.format("DD MMM YYYY")}
-              </SelectedLabel>
+              </span>
             ) : (
               date.format("DD MMM YYYY")
             )
@@ -162,7 +167,8 @@ const DatePicker = (props: DatePickerProps) => {
       )}
 
       {isCalendarOpen ? (
-        <StyledCalendar
+        <Calendar
+          className={styles.calendar}
           isMobile={isMobile}
           selectedDate={date ?? moment()}
           setSelectedDate={handleChange}
@@ -174,7 +180,7 @@ const DatePicker = (props: DatePickerProps) => {
           initialDate={openDate}
         />
       ) : null}
-    </Wrapper>
+    </div>
   );
 };
 

@@ -36,28 +36,34 @@ import styles from "../Section.module.scss";
 import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
 
-const operationToIconMap: Record<string, FloatingButtonIcons> = {
-  [OPERATIONS_NAME.download]: FloatingButtonIcons.file,
+type OperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+const operationToIconMap: Record<OperationName, FloatingButtonIcons> = {
+  [OPERATIONS_NAME.download]: FloatingButtonIcons.download,
   [OPERATIONS_NAME.convert]: FloatingButtonIcons.refresh,
-  [OPERATIONS_NAME.copy]: FloatingButtonIcons.duplicate,
+  [OPERATIONS_NAME.copy]: FloatingButtonIcons.copy,
   [OPERATIONS_NAME.duplicate]: FloatingButtonIcons.duplicate,
-  [OPERATIONS_NAME.markAsRead]: FloatingButtonIcons.file,
-  [OPERATIONS_NAME.deletePermanently]: FloatingButtonIcons.trash,
+  [OPERATIONS_NAME.markAsRead]: FloatingButtonIcons.markAsRead,
+  [OPERATIONS_NAME.deletePermanently]: FloatingButtonIcons.deletePermanently,
   [OPERATIONS_NAME.exportIndex]: FloatingButtonIcons.exportIndex,
   [OPERATIONS_NAME.move]: FloatingButtonIcons.move,
   [OPERATIONS_NAME.trash]: FloatingButtonIcons.trash,
-  [OPERATIONS_NAME.other]: FloatingButtonIcons.file,
+  [OPERATIONS_NAME.other]: FloatingButtonIcons.other,
+  [OPERATIONS_NAME.upload]: FloatingButtonIcons.upload,
 };
+
 const OperationsProgress: React.FC<OperationsProgressProps> = ({
   secondaryActiveOperations = [],
+  primaryActiveOperations = [],
   operationsAlert,
   operationsCompleted = false,
   clearSecondaryProgressData,
+  clearPrimaryProgressData,
 }) => {
   const [isOpenPanel, setIsOpenPanel] = useState<boolean>(false);
   const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
+  // const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
@@ -68,9 +74,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         animation.includes("hideButtonImmediate")
       ) {
         clearSecondaryProgressData(null, null, true);
+        clearPrimaryProgressData();
       }
     },
-    [clearSecondaryProgressData],
+    [clearSecondaryProgressData, clearPrimaryProgressData],
   );
 
   useLayoutEffect(() => {
@@ -91,17 +98,24 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     };
   }, [handleAnimationEnd]);
 
-  useLayoutEffect(() => {
-    if (prevOperationsCompletedRef.current && !operationsCompleted) {
-      clearSecondaryProgressData(null, null, true);
-    }
+  // useLayoutEffect(() => {
+  //   if (prevOperationsCompletedRef.current && !operationsCompleted) {
+  //     clearSecondaryProgressData(null, null, true);
+  //   }
 
-    prevOperationsCompletedRef.current = operationsCompleted;
-  }, [
-    operationsCompleted,
-    secondaryActiveOperations,
-    clearSecondaryProgressData,
-  ]);
+  //   prevOperationsCompletedRef.current = operationsCompleted;
+  // }, [
+  //   operationsCompleted,
+  //   secondaryActiveOperations,
+  //   clearSecondaryProgressData,
+  // ]);
+
+  const isSeveralOperations =
+    primaryActiveOperations.length + secondaryActiveOperations.length > 1;
+
+  useLayoutEffect(() => {
+    if (isOpenPanel && !isSeveralOperations) setIsOpenPanel(false);
+  }, [isOpenPanel, isSeveralOperations]);
 
   const onOpenProgressPanel = () => {
     const willClose = isOpenPanel;
@@ -116,15 +130,16 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   //   setShouldHideButton(true);
   // };
 
-  const isSeveralOperations = secondaryActiveOperations.length > 1;
-
   const getIcons = () => {
     if (isSeveralOperations) {
       return isOpenPanel ? FloatingButtonIcons.arrow : FloatingButtonIcons.dots;
     }
+    const operation = secondaryActiveOperations.length
+      ? secondaryActiveOperations[0].operation
+      : primaryActiveOperations[0].operation;
+
     return (
-      operationToIconMap[secondaryActiveOperations[0].operation] ||
-      FloatingButtonIcons.file
+      operationToIconMap[operation as OperationName] || FloatingButtonIcons.file
     );
   };
 
@@ -157,8 +172,12 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         className={classNames(styles.styledDropDown, styles.progressDropdown)}
       >
         <ProgressList
-          operations={secondaryActiveOperations}
+          secondaryOperations={secondaryActiveOperations}
+          primaryOperations={primaryActiveOperations}
           clearSecondaryProgressData={clearSecondaryProgressData}
+          clearPrimaryProgressData={(operationId, operationName) =>
+            clearPrimaryProgressData(operationName, "")
+          }
         />
       </DropDown>
     </div>

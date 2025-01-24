@@ -6,17 +6,20 @@ import DuplicateIconUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import OtherOperationsIconUrl from "PUBLIC_DIR/images/icons/16/other-operations.react.svg?url";
-import ListIconUrl from "PUBLIC_DIR/images/icons/16/list.react.svg?url";
+import ListIconUrl from "PUBLIC_DIR/images/icons/16/mark-as-read.react.svg?url";
 import DeletePermanentlyIconUrl from "PUBLIC_DIR/images/icons/16/delete-permanently.react.svg?url";
 import ExportIndexIconUrl from "PUBLIC_DIR/images/icons/16/export-index.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
 import { ProgressBarMobile } from "../../progress-bar-mobile";
 import { Operation } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants";
 
 interface ProgressListProps {
-  operations: Operation[];
+  secondaryOperations: Operation[];
+  primaryOperations: Operation[];
   clearSecondaryProgressData: (
     operationId: string | null,
     operation: string,
@@ -41,18 +44,25 @@ const getIcon = (icon: string): string => {
       return ExportIndexIconUrl;
     case OPERATIONS_NAME.move:
       return MoveReactSvgUrl;
+    case OPERATIONS_NAME.upload:
+      return UploadIconUrl;
+    case OPERATIONS_NAME.trash:
+      return TrashReactSvgUrl;
     default:
       return OtherOperationsIconUrl;
   }
 };
 
 const ProgressList = observer(
-  ({ operations, clearSecondaryProgressData }: ProgressListProps) => {
-    if (!operations?.length) return null;
-
+  ({
+    secondaryOperations,
+    primaryOperations,
+    clearSecondaryProgressData,
+    clearPrimaryProgressData,
+  }: ProgressListProps) => {
     return (
       <div className="progress-container">
-        {operations.map((item) => (
+        {secondaryOperations.map((item) => (
           <div
             key={`${item.operation}-${item.items[0]?.operationId}-${item.completed}`}
             className="progress-list"
@@ -60,13 +70,27 @@ const ProgressList = observer(
             <ProgressBarMobile
               completed={item.completed}
               label={item.label}
-              percent={item.items[0]?.percent}
               alert={item.alert}
               open
               iconUrl={getIcon(item.operation)}
               onClickAction={() => {}}
               withoutProgress
               onClearProgress={clearSecondaryProgressData}
+              operation={item.operation}
+            />
+          </div>
+        ))}
+        {primaryOperations.map((item) => (
+          <div key={`${item.operation}`} className="progress-list">
+            <ProgressBarMobile
+              completed={item.completed}
+              label={item.label}
+              alert={item.alert}
+              percent={item.percent}
+              open
+              iconUrl={getIcon(item.operation)}
+              onClickAction={() => {}}
+              onClearProgress={clearPrimaryProgressData}
               operation={item.operation}
             />
           </div>

@@ -428,7 +428,11 @@ class UploadDataStore {
   };
 
   setConversionPercent = (percent, alert) => {
-    const data = { icon: "file", percent, visible: true };
+    const data = {
+      operation: OPERATIONS_NAME.upload,
+      percent,
+      completed: false,
+    };
 
     if (this.uploaded) {
       this.primaryProgressDataStore.setPrimaryProgressBarData(
@@ -484,7 +488,7 @@ class UploadDataStore {
 
         if (this.uploaded) {
           const primaryProgressData = {
-            icon: "file",
+            operation: OPERATIONS_NAME.upload,
             alert: true,
           };
 
@@ -991,6 +995,8 @@ class UploadDataStore {
     }
     const newPercent = this.getFilesPercent(uploadedSize);
 
+    console.log("newPercent", newPercent);
+
     const percentCurrentFile = (index / chunksLength) * 100;
 
     const fileIndex = this.uploadedFilesHistory.findIndex(
@@ -1000,13 +1006,13 @@ class UploadDataStore {
       this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
-      icon: "upload",
+      operation: OPERATIONS_NAME.upload,
       percent: newPercent,
-      visible: true,
-      loadingFile: {
-        uniqueId: this.files[indexOfFile].uniqueId,
-        percent: percentCurrentFile,
-      },
+      completed: newPercent >= 100,
+      // loadingFile: {
+      //   uniqueId: this.files[indexOfFile].uniqueId,
+      //   percent: percentCurrentFile,
+      // },
     });
 
     if (uploaded) {
@@ -1279,9 +1285,9 @@ class UploadDataStore {
     }
 
     const progressData = {
-      visible: true,
+      completed: false,
       percent: this.percent,
-      icon: "upload",
+      operation: OPERATIONS_NAME.upload,
       alert: false,
     };
 
@@ -1397,9 +1403,9 @@ class UploadDataStore {
       .catch((error) => {
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
-            icon: "upload",
+            operation: OPERATIONS_NAME.upload,
             percent: 0,
-            visible: false,
+            completed: true,
             alert: true,
           });
           return Promise.resolve();
@@ -1428,9 +1434,9 @@ class UploadDataStore {
         const newPercent = this.getFilesPercent(uploadedSize);
 
         this.primaryProgressDataStore.setPrimaryProgressBarData({
-          icon: "upload",
+          operation: OPERATIONS_NAME.upload,
           percent: newPercent,
-          visible: true,
+          completed: true,
           alert: true,
         });
 

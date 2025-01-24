@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+import ClearIcon from "PUBLIC_DIR/images/icons/16/clear.react.svg?url";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
@@ -67,11 +67,18 @@ const ProgressBarMobile = ({
     if (onClearProgress && operation) {
       setIsVisible(false);
       setTimeout(() => {
-        onClearProgress(null, operation);
+        onClearProgress(operationId, operation);
       }, 300);
     }
   };
 
+  const onClearClick = () => {
+    if (!onClearProgress || !operation) return;
+    setIsVisible(false);
+    setTimeout(() => {
+      onClearProgress(operationId, operation);
+    }, 300);
+  };
   return (
     <div
       className={classNames(styles.progressBarContainer, {
@@ -131,17 +138,14 @@ const ProgressBarMobile = ({
             ) : (
               <div className={styles.progressLoader} />
             )
+          ) : completed ? (
+            <IconButton onClick={onClearClick} iconName={ClearIcon} size={16} />
           ) : (
             <LoadingButton
               isConversion
-              // inConversion={item.inConversion}
               percent={percent}
+              color="white"
             />
-            // <IconButton
-            //   onClick={onClickHeaderAction}
-            //   iconName={ArrowIcon}
-            //   size={14}
-            // />
           )}
         </div>
       </div>

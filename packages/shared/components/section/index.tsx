@@ -119,6 +119,9 @@ const Section = (props: SectionProps) => {
     secondaryOperationsCompleted,
     secondaryActiveOperations,
     clearSecondaryProgressData,
+    primaryOperationsArray,
+    clearPrimaryProgressData,
+    primaryOperationsCompleted,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -205,6 +208,26 @@ const Section = (props: SectionProps) => {
   // console.log("==");
   // console.log("secondaryActiveOperations", secondaryActiveOperations);
   // console.log("==");
+
+  // const primaryActiveOperationsArray = uploadingOperation?.visible
+  //   ? [uploadingOperation]
+  //   : [];
+
+  const isShowOperationButton =
+    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+
+  const isCompletedOperations = () => {
+    if (!secondaryActiveOperations) return;
+    if (!primaryOperationsArray) return;
+
+    if (secondaryActiveOperations.length + primaryOperationsArray.length > 1)
+      return secondaryOperationsCompleted && primaryOperationsCompleted;
+
+    if (secondaryActiveOperations?.length > 0)
+      return secondaryOperationsCompleted;
+    return primaryOperationsCompleted;
+  };
+
   return (
     isSectionAvailable && (
       <Provider value={providerValue}>
@@ -284,13 +307,16 @@ const Section = (props: SectionProps) => {
             </SubSectionBody>
           ) : null}
 
-          {secondaryActiveOperations?.length ? (
+          {isShowOperationButton ? (
             <OperationsProgress
               clearSecondaryProgressData={clearSecondaryProgressData}
               secondaryActiveOperations={secondaryActiveOperations}
-              operationsCompleted={secondaryOperationsCompleted}
+              operationsCompleted={isCompletedOperations()}
+              primaryOperationsCompleted={primaryOperationsCompleted}
+              clearPrimaryProgressData={clearPrimaryProgressData}
               onOpenUploadPanel={onOpenUploadPanel}
               operationsAlert={showSecondaryButtonAlert}
+              primaryActiveOperations={primaryOperationsArray}
             />
           ) : null}
 

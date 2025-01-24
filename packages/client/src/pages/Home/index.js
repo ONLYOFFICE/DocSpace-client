@@ -128,9 +128,6 @@ const PureHome = (props) => {
     clearUploadedFilesHistory,
 
     secondaryProgressDataStoreVisible,
-    secondaryProgressDataStorePercent,
-
-    secondaryProgressDataStoreAlert,
 
     isFrame,
     showFilter,
@@ -165,8 +162,10 @@ const PureHome = (props) => {
     showGuestReleaseTip,
     setGuestReleaseTipDialogVisible,
     secondaryOperationsCompleted,
+    primaryOperationsCompleted,
     secondaryActiveOperations,
     clearSecondaryProgressData,
+    primaryOperationsArray,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -345,16 +344,16 @@ const PureHome = (props) => {
   sectionProps.primaryProgressBarValue = primaryProgressDataPercent;
   sectionProps.primaryProgressBarIcon = primaryProgressDataIcon;
   sectionProps.showPrimaryButtonAlert = primaryProgressDataAlert;
-  sectionProps.showSecondaryProgressBar = secondaryProgressDataStoreVisible;
-  sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
-  sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
-  sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
+
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
+  sectionProps.primaryOperationsArray = primaryOperationsArray;
+  sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
+  sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -503,17 +502,18 @@ export const Component = inject(
       alert: primaryProgressDataAlert,
       disableUploadPanelOpen,
       clearPrimaryProgressData,
+      primaryOperationsArray,
+      primaryOperationsCompleted,
     } = primaryProgressDataStore;
 
     const {
       visible: secondaryProgressDataStoreVisible,
-      percent: secondaryProgressDataStorePercent,
+
       icon: secondaryProgressDataStoreIcon,
-      alert: secondaryProgressDataStoreAlert,
-      isSecondaryProgressFinished: isProgressFinished,
       itemsSelectionLength,
       itemsSelectionTitle,
       setItemsSelectionTitle,
+      secondaryOperationsCompleted: isProgressFinished,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
@@ -523,11 +523,6 @@ export const Component = inject(
       uploadDataStore;
 
     const { createFoldersTree, onClickBack } = filesActionsStore;
-
-    const selectionLength = isProgressFinished ? selection.length : null;
-    const selectionTitle = isProgressFinished
-      ? filesStore.selectionTitle
-      : null;
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
@@ -585,13 +580,10 @@ export const Component = inject(
       clearUploadedFilesHistory,
 
       secondaryProgressDataStoreVisible,
-      secondaryProgressDataStorePercent,
-      secondaryProgressDataStoreIcon,
-      secondaryProgressDataStoreAlert,
 
-      selectionLength,
+      secondaryProgressDataStoreIcon,
+
       isProgressFinished,
-      selectionTitle,
 
       enablePlugins,
 
@@ -677,6 +669,9 @@ export const Component = inject(
       secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
+
+      primaryOperationsArray,
+      primaryOperationsCompleted,
     };
   },
 )(observer(Home));

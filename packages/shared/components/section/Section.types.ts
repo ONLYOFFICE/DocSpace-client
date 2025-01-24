@@ -110,7 +110,8 @@ export interface Operation {
   label: string;
   alert: boolean;
   completed: boolean;
-  items: Array<{
+  percent?: number;
+  items?: Array<{
     operationId: string;
     percent: number;
   }>;
@@ -123,7 +124,10 @@ export interface OperationsProgressProps {
   onOpenConvertPanel?: () => void;
   operationsAlert?: boolean;
   operationsCompleted?: boolean;
-  clearSecondaryProgressData: (operationId: string | null, operation: string) => void;
+  clearSecondaryProgressData: (
+    operationId: string | null,
+    operation: string,
+  ) => void;
 }
 
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &

@@ -396,6 +396,7 @@ export const getOperationsProgressTitle = (type) => {
     exportIndex,
     markAsRead,
     deletePermanently,
+    upload,
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
@@ -414,6 +415,8 @@ export const getOperationsProgressTitle = (type) => {
       return "Marking is read";
     case deletePermanently:
       return "Deleting permanently";
+    case upload:
+      return "Uploading";
     default:
       return "Other processes";
   }

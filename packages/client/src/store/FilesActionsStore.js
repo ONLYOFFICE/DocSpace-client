@@ -303,7 +303,7 @@ class FilesActionStore {
   };
 
   createFoldersTree = async (t, files, folderId) => {
-    // console.log("createFoldersTree", files, folderId);
+    console.log("createFoldersTree", files, folderId);
 
     const { setPrimaryProgressBarData, clearPrimaryProgressData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -341,11 +341,8 @@ class FilesActionStore {
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     const pbData = {
-      icon: "upload",
-      visible: true,
+      operation: "upload",
       percent: 0,
-      label: "",
-      alert: false,
     };
 
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
@@ -1089,11 +1086,7 @@ class FilesActionStore {
         });
 
         // Wait for animation to complete before clearing
-        //  return setTimeout(() => clearSecondaryProgressData(operationId), 5000); // Match ANIMATION_DELAY from FloatingButton
-        // return setTimeout(
-        //   () => clearSecondaryProgressData(operationId),
-        //   TIMEOUT,
-        // );
+        //  return setTimeout(() => clearSecondaryProgressData(operationId, operationName), 5000); // Match ANIMATION_DELAY from FloatingButton
       })
       .catch((err) => {
         clearActiveOperations(fileIds, folderIds);

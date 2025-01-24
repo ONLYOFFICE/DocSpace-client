@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import { OPERATIONS_NAME } from "@docspace/shared/constants";
+// import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 class SecondaryProgressDataStore {
   percent = 0;
-
-  filesCount = 0;
 
   itemsSelectionLength = 0;
 
@@ -42,16 +41,16 @@ class SecondaryProgressDataStore {
   secondaryOperationsArray = [
     // {
     //   label: "Duplicating",
-    //   operation: OPERATIONS_NAME.exportIndex,
+    //   operation: "other",
     //   // alert: true,
-    //   completed: true,
+    //   completed: false,
     //   items: [{ operationId: "operation_1", percent: 10, completed: true }],
     // },
     // {
     //   label: "Downloading",
-    //   operation: OPERATIONS_NAME.deletePermanently,
+    //   operation: OPERATIONS_NAME.upload,
     //   // alert: false,
-    //   completed: true,
+    //   completed: false,
     //   items: [{ operationId: "operation_1", percent: 0, completed: true }],
     // },
   ];
@@ -135,68 +134,27 @@ class SecondaryProgressDataStore {
       return;
     }
 
-    if (operation) {
-      const operationIndex = this.secondaryOperationsArray.findIndex(
-        (obj) => obj.operation === operation,
+    const operationIndex = this.secondaryOperationsArray.findIndex(
+      (obj) => obj.operation === operation,
+    );
+
+    if (operationIndex === -1) return;
+
+    const operationObject = this.secondaryOperationsArray[operationIndex];
+
+    if (operationId) {
+      const itemIndex = operationObject.items.findIndex(
+        (item) => item.operationId === operationId,
       );
-
-      if (operationIndex !== -1) {
-        const operationObject = this.secondaryOperationsArray[operationIndex];
-        const allItemsCompleted = operationObject.items.every(
-          (item) => item.completed,
-        );
-
-        if (allItemsCompleted) {
-          this.secondaryOperationsArray.splice(operationIndex, 1);
-        } else {
-          const updatedItems = operationObject.items.filter(
-            (item) => !item.completed,
-          );
-
-          const updatedOperation = {
-            ...operationObject,
-            items: updatedItems,
-            completed: false,
-          };
-
-          this.secondaryOperationsArray.splice(
-            operationIndex,
-            1,
-            updatedOperation,
-          );
-        }
+      if (itemIndex === -1) return;
+      operationObject.items.splice(itemIndex, 1);
+      if (operationObject.items.length === 0) {
+        this.secondaryOperationsArray.splice(operationIndex, 1);
       }
-    } else if (operationId) {
-      // Handle clearing by operationId
-      const operationIndex = this.secondaryOperationsArray.findIndex((obj) =>
-        obj.items.some((item) => item.operationId === operationId),
-      );
-
-      if (operationIndex !== -1) {
-        const operationObject = this.secondaryOperationsArray[operationIndex];
-        const updatedItems = operationObject.items.filter(
-          (item) => item.operationId !== operationId,
-        );
-
-        if (updatedItems.length === 0) {
-          // Remove the operation if no items left
-          this.secondaryOperationsArray.splice(operationIndex, 1);
-        } else {
-          // Update with remaining items
-          const updatedOperation = {
-            ...operationObject,
-            items: updatedItems,
-            completed: updatedItems.every((item) => item.completed),
-          };
-
-          this.secondaryOperationsArray.splice(
-            operationIndex,
-            1,
-            updatedOperation,
-          );
-        }
-      }
+    } else {
+      this.secondaryOperationsArray.splice(operationIndex, 1);
     }
+    console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };
 
   get alert() {
@@ -208,10 +166,6 @@ class SecondaryProgressDataStore {
       this.secondaryOperationsArray.length > 0 &&
       this.secondaryOperationsArray.every((op) => op.completed)
     );
-  }
-
-  get isSecondaryProgressFinished() {
-    return this.percent === 100;
   }
 }
 

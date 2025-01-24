@@ -73,7 +73,7 @@ export default function FilesSelectorClient({
   roomsFolderId,
 }: FilesSelectorClientProps) {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("JavascriptSdk:FileSelector");
+  useDocumentTitle("FileSelector");
 
   useEffect(() => frameCallCommand("setIsLoaded"), []);
 

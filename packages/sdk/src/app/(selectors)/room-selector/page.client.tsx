@@ -45,7 +45,7 @@ export default function RoomSelector({
   baseConfig,
 }: RoomSelectorProps) {
   const { sdkConfig } = useSDK();
-  useDocumentTitle("JavascriptSdk:RoomSelector");
+  useDocumentTitle("RoomSelector");
 
   const getPrimaryLink = async (roomId: string) => {
     const res = await fetch(`/api/2.0/files/rooms/${roomId}/link`).then((r) =>

@@ -44,7 +44,7 @@ export default async function Page({
 
   filter.searchArea = RoomSearchArea.Active;
 
-  const rooms = await getRooms(RoomsFilter.getDefault());
+  const rooms = await getRooms(filter);
 
   // TODO: handle error with throw new Error()
   if (!rooms) return null;

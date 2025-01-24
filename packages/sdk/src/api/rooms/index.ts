@@ -43,8 +43,6 @@ export async function getRooms(
   let params;
 
   if (filter) {
-    checkFilterInstance(filter, RoomsFilter);
-
     params = `?${filter.toApiUrlParams()}`;
   }
 

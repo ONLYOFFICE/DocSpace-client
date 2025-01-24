@@ -55,7 +55,6 @@ export default function RoomSelector({
   };
 
   const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
-    console.log("call");
     const enrichedData = {
       ...selectedItem,
       icon:

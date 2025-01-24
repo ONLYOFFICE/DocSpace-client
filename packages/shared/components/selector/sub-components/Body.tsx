@@ -213,7 +213,9 @@ const Body = ({
     listHeight -= CONTAINER_PADDING;
   }
 
-  if (showSearch) listHeight -= SEARCH_HEIGHT;
+  if (showSearch) {
+    listHeight -= SEARCH_HEIGHT;
+  }
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -291,7 +293,12 @@ const Body = ({
           />
 
           {isSSR && !bodyHeight ? (
-            <Scrollbar style={{ height: "100%", overflow: "hidden" }}>
+            <Scrollbar
+              style={{
+                height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                overflow: "hidden",
+              }}
+            >
               {items.map((item, index) => (
                 <div
                   key={item.id}

@@ -103,6 +103,7 @@ const RoomSelector = ({
       : [],
   );
 
+  const withInitRef = React.useRef<boolean>(withInit ?? false);
   const isFirstLoad = React.useRef(!withInit);
   const afterSearch = React.useRef(false);
 
@@ -148,7 +149,11 @@ const RoomSelector = ({
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
-      if (withInit && startIndex === 0) return;
+      if (withInitRef.current && startIndex === 0) {
+        withInitRef.current = false;
+        isFirstLoad.current = false;
+        return;
+      }
       setIsNextPageLoading(true);
 
       const page = startIndex / PAGE_COUNT;
@@ -175,7 +180,7 @@ const RoomSelector = ({
 
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad) {
+      if (isFirstLoad.current) {
         setTotal(totalCount);
 
         setItems([...rooms]);
@@ -193,14 +198,7 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [
-      disableThirdParty,
-      excludeItems,
-      roomType,
-      searchValue,
-      setIsDataReady,
-      withInit,
-    ],
+    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader

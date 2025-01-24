@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  endpoints,
   HEADER_ROOMS_LIST,
   roomListHandler,
 } from "@docspace/shared/__mocks__/e2e";
@@ -1538,5 +1539,146 @@ describe("Room selector actions", () => {
 
     // Verify console logs
     expect(logs).toHaveLength(1);
+  });
+});
+
+describe("Room selector search actions", () => {
+  test("should handle search input", async ({ page, mockRequest }) => {
+    const pageRoute = `${path}?theme=Base&search=true`;
+    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+    await page.goto(pageRoute);
+
+    await mockRequest.router([endpoints.filteredRoomList]);
+
+    await page.waitForTimeout(1000);
+
+    const searchInput = page.getByPlaceholder("Search");
+    await searchInput.fill("test");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-search-room-selector.png",
+    ]);
+
+    await mockRequest.router([endpoints.emptyRoomList]);
+
+    await searchInput.fill("Empty filter");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-empty-search-room-selector.png",
+    ]);
+  });
+
+  test("should handle search  input ar-SA", async ({ page, mockRequest }) => {
+    const pageRoute = `${path}?theme=Base&search=true&locale=ar-SA`;
+    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+    await page.goto(pageRoute);
+
+    await mockRequest.router([endpoints.filteredRoomList]);
+
+    await page.waitForTimeout(1000);
+
+    const searchInput = page.getByPlaceholder("بحث");
+    await searchInput.fill("test");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-ar-SA-search-room-selector.png",
+    ]);
+
+    await mockRequest.router([endpoints.emptyRoomList]);
+
+    await searchInput.fill("Empty filter");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-ar-SA-empty-search-room-selector.png",
+    ]);
+  });
+
+  test("should handle dark search input", async ({ page, mockRequest }) => {
+    const pageRoute = `${path}?theme=Dark&search=true`;
+    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+    await page.goto(pageRoute);
+
+    await mockRequest.router([endpoints.filteredRoomList]);
+
+    await page.waitForTimeout(1000);
+
+    const searchInput = page.getByPlaceholder("Search");
+    await searchInput.fill("test");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-search-dark-room-selector.png",
+    ]);
+
+    await mockRequest.router([endpoints.emptyRoomList]);
+
+    await searchInput.fill("Empty filter");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-empty-dark-search-room-selector.png",
+    ]);
+  });
+
+  test("should handle dark search input ar-SA", async ({
+    page,
+    mockRequest,
+  }) => {
+    const pageRoute = `${path}?theme=Dark&search=true&locale=ar-SA`;
+    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+
+    await page.goto(pageRoute);
+
+    await mockRequest.router([endpoints.filteredRoomList]);
+
+    await page.waitForTimeout(1000);
+
+    const searchInput = page.getByPlaceholder("بحث");
+    await searchInput.fill("test");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-ar-SA-dark-search-room-selector.png",
+    ]);
+
+    await mockRequest.router([endpoints.emptyRoomList]);
+
+    await searchInput.fill("Empty filter");
+
+    await page.waitForTimeout(1000);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "room-selector",
+      "action-ar-SA-dark-empty-search-room-selector.png",
+    ]);
   });
 });

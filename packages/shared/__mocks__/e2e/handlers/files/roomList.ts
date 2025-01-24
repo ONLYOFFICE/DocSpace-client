@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { HEADER_ROOMS_LIST } from "../../utils";
 import { TGetRooms, TRoom } from "../../../../api/rooms/types";
-// import { API_PREFIX, BASE_URL } from "../../utils";
+import { HEADER_FILTERED_ROOMS_LIST, HEADER_ROOMS_LIST } from "../../utils";
 
-// const PATH = "/files/rooms";
-
-// const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+export const PATH_ROOMS_LIST = "files/rooms?*";
 
 const current = {
   parentId: 0,
@@ -110,7 +107,7 @@ const current = {
   },
 };
 
-const getRoomList = () => {
+const getRoomList = (filtered: boolean = false) => {
   const folders: TRoom[] = [
     {
       parentId: 2,
@@ -1961,9 +1958,11 @@ const getRoomList = () => {
     },
   ];
 
+  const filteredFolder = folders.filter((f, i) => i > 20);
+
   return {
     files: [],
-    folders,
+    folders: filtered ? filteredFolder : folders,
     current,
     pathParts: [
       {
@@ -1997,6 +1996,10 @@ const getEmptyRoomList = (): TGetRooms => {
 };
 
 export const roomListHandler = (headers?: Headers): Response => {
+  if (headers?.get(HEADER_FILTERED_ROOMS_LIST)) {
+    return new Response(JSON.stringify({ response: getRoomList(true) }));
+  }
+
   if (headers?.get(HEADER_ROOMS_LIST)) {
     return new Response(JSON.stringify({ response: getRoomList() }));
   }

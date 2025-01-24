@@ -59,6 +59,8 @@ import {
   SUSPEND_PATH,
   suspendHandler,
 } from "./portal";
+import { PATH_ROOMS_LIST, roomListHandler } from "./files";
+import { HEADER_FILTERED_ROOMS_LIST, HEADER_ROOMS_LIST } from "../utils";
 
 export type TEndpoint = {
   url: string;
@@ -159,5 +161,20 @@ export const endpoints: TEndpoints = {
   deletePortal: {
     url: `${BASE_URL}${DELETE_PATH}`,
     dataHandler: deletePortalHandler,
+  },
+
+  roomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [HEADER_ROOMS_LIST]: "true" })),
+  },
+  filteredRoomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" })),
+  },
+  emptyRoomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: roomListHandler,
   },
 };

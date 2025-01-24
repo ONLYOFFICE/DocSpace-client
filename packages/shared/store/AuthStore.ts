@@ -182,7 +182,6 @@ class AuthStore {
       //   !isPublicRoom() &&
       !isPortalDeactivated
     ) {
-      //console.log("fetch user");
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore && this.userStore?.isAuthenticated) {
@@ -453,7 +452,7 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl // &&
+      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl
       // !isPublicRoom()
       //  this.userStore?.isAuthenticated
     );

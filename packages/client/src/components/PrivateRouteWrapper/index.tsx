@@ -53,6 +53,7 @@ const PrivateRouteWrapper = ({
   displayAbout,
   validatePublicRoomKey,
   publicRoomKey,
+  roomId,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -78,6 +79,7 @@ const PrivateRouteWrapper = ({
       displayAbout={displayAbout}
       validatePublicRoomKey={validatePublicRoomKey}
       publicRoomKey={publicRoomKey}
+      roomId={roomId}
     >
       {children}
     </PrivateRoute>
@@ -112,7 +114,7 @@ export default inject<TStore>(
       displayAbout,
     } = settingsStore;
 
-    const { validatePublicRoomKey, publicRoomKey } = publicRoomStore;
+    const { validatePublicRoomKey, publicRoomKey, roomId } = publicRoomStore;
 
     return {
       isPortalDeactivate,
@@ -134,6 +136,7 @@ export default inject<TStore>(
       displayAbout,
       validatePublicRoomKey,
       publicRoomKey,
+      roomId,
     };
   },
 )(observer(PrivateRouteWrapper));

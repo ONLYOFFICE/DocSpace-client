@@ -28,14 +28,11 @@
 import React from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
+import FilesFilter from "@docspace/shared/api/files/filter";
 import AppLoader from "../components/app-loader";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
-
-import { commonIconsStyles } from "utils";
-
-import FilesFilter from "@docspace/shared/api/files/filter";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -68,6 +65,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     validatePublicRoomKey,
     publicRoomKey,
+    roomId,
   } = props;
 
   const location = useLocation();
@@ -77,10 +75,16 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const key = searchParams.get("key");
 
     if (key && isLoadedUser && !user) {
-      const path = "/rooms/share";
       const filter = FilesFilter.getDefault();
+      const subFolder = new URLSearchParams(window.location.search).get(
+        "folder",
+      );
+      const path = "/rooms/share";
 
-      window.DocSpace.navigate(`${path}?key=${key}&${filter.toUrlParams()}`);
+      filter.folder = subFolder || roomId;
+      filter.key = key;
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
     }
 
     if (

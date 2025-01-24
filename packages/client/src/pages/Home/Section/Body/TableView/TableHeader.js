@@ -28,7 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events } from "@docspace/shared/enums";
+import { Events, RoomsType } from "@docspace/shared/enums";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 class FilesTableHeader extends React.Component {
@@ -642,8 +642,17 @@ class FilesTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, isPublicRoom, publicRoomKey } = this.props;
+    const {
+      filter,
+      setIsLoading,
+      isPublicRoom,
+      publicRoomKey,
+      isPublicRoomType,
+    } = this.props;
     const newFilter = filter.clone();
+
+    console.log("filter hereee");
+    console.log("NEW FILTER", newFilter);
 
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
@@ -654,7 +663,27 @@ class FilesTableHeader extends React.Component {
 
     setIsLoading(true);
 
-    if (isPublicRoom) {
+    const currentUrl = window.location.href;
+
+    console.log("currentUrl", currentUrl);
+    console.log(currentUrl.includes("key"));
+    console.log("publicRoomKey", publicRoomKey);
+
+    if (
+      isPublicRoom ||
+      (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
+    ) {
+      newFilter.key = publicRoomKey;
+    }
+
+    window.DocSpace.navigate(
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
+    );
+
+    /* if (
+      isPublicRoom ||
+      (isPublicRoomType && publicRoomKey && !currentUrl.includes("key"))
+    ) {
       window.DocSpace.navigate(
         `${
           window.DocSpace.location.pathname
@@ -664,7 +693,7 @@ class FilesTableHeader extends React.Component {
       window.DocSpace.navigate(
         `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
       );
-    }
+    } */
   };
 
   onRoomsFilter = (sortBy) => {
@@ -672,6 +701,8 @@ class FilesTableHeader extends React.Component {
       this.props;
 
     const newFilter = roomsFilter.clone();
+
+    console.log("newFilter", newFilter);
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
     } else {
@@ -816,7 +847,14 @@ export default inject(
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
+    console.log(publicRoomKey, "new");
+    const { changeDocumentsTabs, isIndexedFolder, roomType } =
+      selectedFolderStore;
+
+    const isPublicRoomType =
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     return {
       setRoomsFilter,
@@ -880,6 +918,7 @@ export default inject(
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,
+      isPublicRoomType,
 
       isFrame,
       isRecentTab,

@@ -26,11 +26,10 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { TOption } from "components/combobox";
+import { TOption, ComboBoxSize } from "../combobox";
 import { mapCulturesToArray } from "../../utils/common";
 import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
-import { ComboBoxSize } from "../combobox";
 
 const LanguageCombobox = (props: ComboboxProps) => {
   const {

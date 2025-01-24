@@ -56,8 +56,11 @@ class PublicRoomStore {
 
   clientLoadingStore;
 
-  constructor(clientLoadingStore) {
+  filesStore;
+
+  constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
+    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
@@ -145,6 +148,46 @@ class PublicRoomStore {
       });
   };
 
+  addPrimaryKeyToLink = (link, roomId) => {
+    const path = getCategoryUrl(CategoryType.SharedRoom, roomId);
+
+    // Get current filter from URL and modify it
+    const currentFilter = FilesFilter.getFilter(window.location);
+    const filter = currentFilter
+      ? currentFilter.clone()
+      : FilesFilter.getDefault();
+
+    // Update filter properties
+    filter.folder = roomId;
+    filter.key = link.sharedTo.requestToken;
+
+    // Update URL and trigger fetch
+    window.history.pushState("", "", `${path}?${filter.toUrlParams()}`);
+    this.publicRoomKey = link.sharedTo.requestToken;
+    this.filesStore.fetchFiles(roomId, filter);
+  };
+
+  removePrimaryKeyInLink = (roomId) => {
+    const path = getCategoryUrl(CategoryType.SharedRoom, roomId);
+
+    // Get current filter from URL and modify it
+    const currentFilter = FilesFilter.getFilter(window.location);
+    const filter = currentFilter
+      ? currentFilter.clone()
+      : FilesFilter.getDefault();
+
+    // Update filter properties
+    filter.folder = roomId;
+    filter.key = null;
+
+    // Update store state to trigger re-renders
+    this.publicRoomKey = null;
+
+    // Update URL and trigger fetch
+    window.history.pushState("", "", `${path}?${filter.toUrlParams()}`);
+    this.filesStore.fetchFiles(roomId, filter);
+  };
+
   fetchExternalLinks = (roomId) => {
     const type = 1;
     return api.rooms.getExternalLinks(roomId, type);
@@ -223,11 +266,11 @@ class PublicRoomStore {
   };
 
   validatePublicRoomKey = (key) => {
-    //console.log("key validatePublicRoomKey", key);
     this.setIsLoading(true);
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
+        console.log("here", key);
         this.publicRoomKey = key;
 
         const currentUrl = window.location.href;
@@ -240,7 +283,6 @@ class PublicRoomStore {
           return this.gotoFolder(res, key);
         }
 
-        //  this.publicRoomKey = key;
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));

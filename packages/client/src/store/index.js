@@ -166,6 +166,8 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+publicRoomStore.filesStore = filesStore;
+
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,

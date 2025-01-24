@@ -1464,6 +1464,20 @@
   --calendar-disabled-color: #{$gray-dark-strong};
 }
 
+.light {
+  --date-picker-background: #{$white};
+  --date-picker-border: 1px solid #{$gray-strong};
+  --date-picker-cell-background: #{$gray-light-mid};
+  --date-picker-icon-color: #{$light-gray-dark};
+}
+
+.dark {
+  --date-picker-background: #{$black};
+  --date-picker-border: 1px solid #{$gray-dark-strong};
+  --date-picker-cell-background: #{$gray-dark-mid};
+  --date-picker-icon-color: #{$dark-gray-dark};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

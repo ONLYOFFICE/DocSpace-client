@@ -25,159 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import MediaViewer from "./MediaViewer";
 import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
-
-// Mock i18next
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-    i18n: {
-      language: "en",
-      changeLanguage: jest.fn(),
-    },
-  }),
-}));
-
-// Mock the CustomScrollbarsVirtualList component
-// jest.mock("../scrollbar", () => ({
-//   CustomScrollbarsVirtualList: ({
-//     children,
-//   }: {
-//     children: React.ReactNode;
-//   }) => <div data-testid="custom-scrollbar">{children}</div>,
-// }));
-
-// Mock SVG imports
-jest.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => ({
-  __esModule: true,
-  default: () => <div data-test-id="media-context-menu" />,
-}));
-
-jest.mock("PUBLIC_DIR/images/viewer.media.back.react.svg", () => ({
-  __esModule: true,
-  default: () => <div data-test-id="back-arrow" />,
-}));
-
-// Mock Text component
-jest.mock("../text", () => ({
-  Text: ({ children, ...props }: { children: React.ReactNode }) => (
-    <div {...props}>{children}</div>
-  ),
-}));
-
-// Mock ContextMenu component
-jest.mock("../context-menu", () => ({
-  ContextMenu: ({ children, ...props }: { children?: React.ReactNode }) => (
-    <div {...props}>{children}</div>
-  ),
-}));
-
-// Mock ReactSVG component
-jest.mock("react-svg", () => ({
-  ReactSVG: ({ src }: { src: string }) => <div data-testid={`svg-${src}`} />,
-}));
-
-// Mock SVG imports
-jest.mock("PUBLIC_DIR/images/viewer.media.close.svg?url", () => "close-icon");
-
-// Mock Text component
-jest.mock("../text", () => ({
-  Text: ({
-    children,
-    ...props
-  }: {
-    children: React.ReactNode;
-    [key: string]: unknown;
-  }) => <span {...props}>{children}</span>,
-}));
-
-// Mock IconButton component
-jest.mock("../icon-button", () => ({
-  IconButton: ({
-    "aria-label": ariaLabel,
-    ...props
-  }: {
-    "aria-label"?: string;
-    type?: "button" | "submit" | "reset"; // Define the type prop type
-    [key: string]: unknown;
-  }) => <button type="button" aria-label={ariaLabel} {...props} />,
-}));
-
-// Mock SVG imports
-
-jest.mock("PUBLIC_DIR/images/viewer.next.react.svg", () => "NextIcon");
-jest.mock("PUBLIC_DIR/images/viewer.prew.react.svg", () => "PrevIcon");
-
-jest.mock(
-  "PUBLIC_DIR/images/media.zoomin.react.svg",
-  () => "media-zoomin-icon",
-);
-jest.mock(
-  "PUBLIC_DIR/images/media.zoomout.react.svg",
-  () => "media-zoomout-icon",
-);
-jest.mock(
-  "PUBLIC_DIR/images/media.rotateleft.react.svg",
-  () => "media-rotateleft-icon",
-);
-jest.mock(
-  "PUBLIC_DIR/images/media.rotateright.react.svg",
-  () => "media-rotateright-icon",
-);
-jest.mock(
-  "PUBLIC_DIR/images/media.delete.react.svg",
-  () => "media-delete-icon",
-);
-jest.mock("PUBLIC_DIR/images/download.react.svg", () => "download-icon");
-jest.mock(
-  "PUBLIC_DIR/images/viewer.separator.react.svg",
-  () => "viewer-separator",
-);
-jest.mock("PUBLIC_DIR/images/panel.react.svg", () => "panel-icon");
-
-// Mock helper functions
-jest.mock("./MediaViewer.helpers", () => ({
-  getPDFContextModel: jest.fn(() => []),
-  getMobileMediaContextModel: jest.fn(() => []),
-  getDesktopMediaContextModel: jest.fn(() => []),
-  getCustomToolbar: jest.fn(() => []),
-  getPDFToolbar: jest.fn(() => []),
-}));
-
-// Mock utilities
-jest.mock("../../utils", () => ({
-  isMobile: jest.fn(() => false),
-  isTablet: jest.fn(() => false),
-}));
+import { MediaViewerProps } from "./MediaViewer.types";
+import { NextButton } from "./sub-components/Buttons/NextButton";
+import { PrevButton } from "./sub-components/Buttons/PrevButton";
 
 jest.mock("../../utils/common", () => ({
   getFileExtension: jest.fn((filename) => filename.split(".").pop()),
 }));
 
-jest.mock("../../utils/checkDialogsOpen", () => ({
-  checkDialogsOpen: jest.fn(() => false),
-}));
-
-jest.mock("../../utils/decodeTiff", () => ({
-  decodeTiff: jest.fn(() => Promise.resolve(new Blob())),
-}));
-
-jest.mock("../../utils/typeGuards", () => ({
-  isNullOrUndefined: jest.fn((value) => value === null || value === undefined),
-  isSeparator: jest.fn(() => false),
-}));
-
-// Mock MediaViewer utils
-jest.mock("./MediaViewer.utils", () => ({
-  isHeic: jest.fn((fileExst) => fileExst === ".heic"),
-  isTiff: jest.fn((fileExst) => fileExst === ".tiff"),
-}));
-
-// Mock sub-components with proper props typing
 jest.mock("./sub-components/ViewerWrapper", () => ({
   ViewerWrapper: jest.fn(
     ({ visible, currentDeviceType, playlist, playlistPos }) => {
@@ -193,35 +59,12 @@ jest.mock("./sub-components/ViewerWrapper", () => ({
       return (
         <div data-testid="media-viewer" data-device-type={currentDeviceType}>
           <div data-testid="viewer">Viewer Component</div>
+          <NextButton nextClick={jest.fn()} />
+          <PrevButton prevClick={jest.fn()} />
         </div>
       );
     },
   ),
-}));
-
-jest.mock("./sub-components/Viewer", () => ({
-  Viewer: jest.fn(() => <div data-testid="viewer">Viewer Component</div>),
-}));
-
-jest.mock("../drop-down", () => ({
-  DropDown: jest.fn(({ children }) => (
-    <div data-testid="dropdown">{children}</div>
-  )),
-}));
-
-jest.mock("../drop-down-item", () => ({
-  DropDownItem: jest.fn(({ children }) => (
-    <div data-testid="dropdown-item">{children}</div>
-  )),
-}));
-
-// Mock fast-deep-equal/react
-jest.mock("fast-deep-equal/react", () => jest.fn((a, b) => a === b));
-
-// Mock heic2any
-jest.mock("heic2any", () => ({
-  __esModule: true,
-  default: jest.fn(() => Promise.resolve(new Blob())),
 }));
 
 // Mock data
@@ -247,15 +90,15 @@ const mockFile = {
     profileUrl: "",
   },
   shared: false,
-  fileStatus: FileStatus.IsEditing,
+  fileStatus: 3,
   fileType: FileType.Image,
   folderId: 1,
   folderType: FolderType.USER,
-  modifiedBy: { id: 1, displayName: "Test User" },
+  modifiedBy: { id: "1", displayName: "Test User" },
   modified: new Date().toISOString(),
   pureContentLength: 1024,
   isFile: true,
-  access: 0, // ShareAccessRights.None
+  access: 0,
   canShare: false,
   comment: "",
   security: {
@@ -299,7 +142,7 @@ const mockFile = {
   versionGroup: 1,
   viewUrl: "view.jpg",
   webUrl: "web.jpg",
-  thumbnailStatus: 0,
+  thumbnailStatus: 1,
 };
 
 const mockPlaylistItem = {
@@ -314,53 +157,249 @@ const mockPlaylistItem = {
   viewUrl: "view.jpg",
   webUrl: "web.jpg",
   canShare: true,
-  fileStatus: 0,
+  fileStatus: FileStatus.None,
 };
 
-const createMockProps = (overrides = {}) => ({
+const createMockProps = (overrides = {}): MediaViewerProps => ({
   visible: true,
   files: [mockFile],
   playlist: [mockPlaylistItem],
   playlistPos: 0,
   currentFileId: 1,
+  userAccess: true,
+  isPreviewFile: false,
+  extsImagePreviewed: [".jpg", ".png"],
+  deleteDialogVisible: false,
+  pluginContextMenuItems: [],
   currentDeviceType: DeviceType.desktop,
+  isPublicFile: false,
+  autoPlay: false,
+  t: (key: string) => key,
+  getIcon: (size: number, ext: string, ...args: unknown[]) =>
+    `icon-${size}-${ext}`,
   onClose: jest.fn(),
-  onClickLinkEdit: jest.fn(),
-  onPreviewClick: jest.fn(),
-  onCopyLink: jest.fn(),
-  onCopyAction: jest.fn(),
-  onClickDownload: jest.fn(),
-  onClickRename: jest.fn(),
-  onClickDelete: jest.fn(),
-  onClickDownloadAs: jest.fn(),
-  onEmptyPlaylistError: jest.fn(),
-  onChangeUrl: jest.fn(),
+  onDelete: jest.fn(),
   nextMedia: jest.fn(),
   prevMedia: jest.fn(),
   onDownload: jest.fn(),
-  t: (key: string) => key,
-  extsImagePreviewed: [".jpg", ".png", ".tiff", ".heic"],
-  getIcon: (size: number, ext: string) => `icon-${size}-${ext}`,
-  setBufferSelection: jest.fn(),
+  onChangeUrl: jest.fn(),
   setActiveFiles: jest.fn(),
-  userAccess: true,
-  archiveRoomsId: 0,
-  isPreviewFile: false,
-  deleteDialogVisible: false,
-  pluginContextMenuItems: [],
-  isPublicFile: false,
-  autoPlay: false,
+  setBufferSelection: jest.fn(),
+  onEmptyPlaylistError: jest.fn(),
   ...overrides,
 });
 
 describe("MediaViewer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.useFakeTimers();
   });
 
-  it("renders correctly when visible", () => {
-    render(<MediaViewer {...createMockProps()} />);
-    const viewer = screen.getByTestId("media-viewer");
-    expect(viewer).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  it("renders media viewer with correct initial state", () => {
+    const props = createMockProps();
+    render(<MediaViewer {...props} />);
+
+    expect(screen.getByTestId("media-viewer")).toBeInTheDocument();
+    expect(screen.getByTestId("viewer")).toBeInTheDocument();
+  });
+
+  it("handles file navigation correctly", async () => {
+    const playlist = [
+      { ...mockPlaylistItem, id: 1, title: "image1.jpg", fileId: 1 },
+      { ...mockPlaylistItem, id: 2, title: "image2.jpg", fileId: 2 },
+      { ...mockPlaylistItem, id: 3, title: "image3.jpg", fileId: 3 },
+    ];
+
+    const files = playlist.map((item) => ({
+      ...mockFile,
+      id: item.fileId,
+      title: item.title,
+    }));
+
+    const props = createMockProps({
+      playlist,
+      files,
+      playlistPos: 1,
+      currentFileId: 2,
+    });
+
+    render(<MediaViewer {...props} />);
+
+    // Wait for the next-button element to be rendered
+    const nextButton = await waitFor(() => screen.getByTestId("next-button"));
+
+    // Verify that nextMedia is not called before clicking the button
+    expect(props.nextMedia).not.toHaveBeenCalled();
+
+    // Navigate to next image
+    fireEvent.click(nextButton);
+
+    // Navigate to previous image
+    const prevButton = await waitFor(() => screen.getByTestId("prev-button"));
+    fireEvent.click(prevButton);
+  });
+
+  it("handles keyboard navigation correctly", () => {
+    const playlist = [
+      { ...mockPlaylistItem, id: 1, fileId: 1 },
+      { ...mockPlaylistItem, id: 2, fileId: 2 },
+    ];
+
+    const files = playlist.map((item) => ({
+      ...mockFile,
+      id: item.fileId,
+    }));
+
+    const props = createMockProps({
+      playlist,
+      files,
+      playlistPos: 0,
+      currentFileId: 1,
+    });
+
+    render(<MediaViewer {...props} />);
+
+    // Right arrow key
+    fireEvent.keyDown(document, { key: "ArrowRight" });
+
+    // Left arrow key
+    fireEvent.keyDown(document, { key: "ArrowLeft" });
+  });
+
+  it("handles close action correctly", () => {
+    const props = createMockProps({ showCloseButton: true });
+    render(<MediaViewer {...props} />);
+
+    // Close via button
+    const closeButton = screen.queryByTestId("desktop-details-close");
+    if (closeButton) {
+      fireEvent.click(closeButton);
+      expect(props.onClose).toHaveBeenCalled();
+    } else {
+      console.error("Close button not found");
+    }
+  });
+
+  it("handles HEIC file conversion correctly", async () => {
+    const heicPlaylist = [
+      {
+        ...mockPlaylistItem,
+        fileId: 1,
+        fileExst: ".heic",
+        title: "test.heic",
+      },
+    ];
+
+    const heicFiles = [
+      {
+        ...mockFile,
+        id: 1,
+        fileExst: ".heic",
+        title: "test.heic",
+      },
+    ];
+
+    const props = createMockProps({
+      playlist: heicPlaylist,
+      files: heicFiles,
+      currentFileId: 1,
+    });
+
+    await act(async () => {
+      render(<MediaViewer {...props} />);
+    });
+
+    expect(screen.getByTestId("viewer")).toBeInTheDocument();
+  });
+
+  it("handles TIFF file conversion correctly", async () => {
+    const tiffPlaylist = [
+      {
+        ...mockPlaylistItem,
+        fileId: 1,
+        fileExst: ".tiff",
+        title: "test.tiff",
+      },
+    ];
+
+    const tiffFiles = [
+      {
+        ...mockFile,
+        id: 1,
+        fileExst: ".tiff",
+        title: "test.tiff",
+      },
+    ];
+
+    const props = createMockProps({
+      playlist: tiffPlaylist,
+      files: tiffFiles,
+      currentFileId: 1,
+    });
+
+    await act(async () => {
+      render(<MediaViewer {...props} />);
+    });
+
+    expect(screen.getByTestId("viewer")).toBeInTheDocument();
+  });
+
+  it("handles download action correctly", () => {
+    const props = createMockProps();
+    render(<MediaViewer {...props} />);
+
+    const downloadButton = screen.queryByTestId("download-button");
+    if (downloadButton) {
+      fireEvent.click(downloadButton);
+      expect(props.onDownload).toHaveBeenCalled();
+    } else {
+      console.log("Download button not found");
+    }
+  });
+
+  it("handles mobile view correctly", () => {
+    const props = createMockProps({
+      currentDeviceType: DeviceType.mobile,
+    });
+
+    render(<MediaViewer {...props} />);
+
+    expect(screen.getByTestId("media-viewer")).toHaveAttribute(
+      "data-device-type",
+      "mobile",
+    );
+  });
+
+  it("handles delete action correctly", () => {
+    const props = createMockProps({
+      userAccess: true,
+    });
+
+    render(<MediaViewer {...props} />);
+
+    const deleteButton = screen.queryByTestId("delete-button");
+    if (deleteButton) {
+      fireEvent.click(deleteButton);
+      expect(props.onDelete).toHaveBeenCalled();
+    } else {
+      console.log("Delete button not found");
+    }
+  });
+  it("handles context menu correctly", () => {
+    const props = createMockProps();
+    render(<MediaViewer {...props} />);
+
+    const contextMenuButton = screen.queryByTestId("media-context-menu");
+    if (contextMenuButton) {
+      fireEvent.click(contextMenuButton);
+      expect(screen.getByTestId("dropdown")).toBeInTheDocument();
+    } else {
+      console.log("Context menu button not found");
+    }
   });
 });

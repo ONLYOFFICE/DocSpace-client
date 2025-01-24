@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 
 import { Tag } from ".";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps = {
   tag: "script",
@@ -41,10 +40,6 @@ const baseProps = {
   onClick: () => {},
 
   tagMaxWidth: "160px",
-};
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
 };
 
 describe("<Tag />", () => {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme, mobile } from "../../utils";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-export const CronWrapper = styled.div`
+.cronWrapper {
   display: flex;
   flex-direction: column;
   max-width: 340px;
 
-  @media ${mobile} {
+  @include mobile {
     max-width: 100%;
   }
-`;
+}
 
-export const Suffix = styled.span.attrs(injectDefaultTheme)`
+.suffix {
   font-size: 13px;
   line-height: 20px;
   font-weight: 400;
-`;
+}
 
-export const SelectWrapper = styled.div.attrs(injectDefaultTheme)`
+.selectWrapper {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -51,9 +52,9 @@ export const SelectWrapper = styled.div.attrs(injectDefaultTheme)`
   & > span {
     font-size: 13px;
   }
-`;
+}
 
-export const Wrapper = styled.div`
+.wrapper {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -65,4 +66,4 @@ export const Wrapper = styled.div`
   > div {
     flex-grow: 1;
   }
-`;
+}

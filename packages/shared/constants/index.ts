@@ -205,4 +205,5 @@ export const OPERATIONS_NAME = Object.freeze({
   move: "move",
   convert: "convert",
   other: "other",
+  upload: "upload",
 });

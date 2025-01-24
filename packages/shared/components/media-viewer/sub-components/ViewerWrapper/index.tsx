@@ -145,7 +145,9 @@ const ViewerWrapper = memo(
             )
           : [];
 
-      const { canShare } = playlist[playlistPos];
+      const currentItem = playlist?.[playlistPos];
+      const canShare = currentItem?.canShare ?? false;
+
       const toolbars =
         !canShare && userAccess
           ? customToolbar.filter(

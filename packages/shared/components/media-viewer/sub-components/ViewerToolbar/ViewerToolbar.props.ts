@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Dispatch, SetStateAction, ReactNode } from "react";
+import { ToolbarActionType } from "../../MediaViewer.enums";
 
 export interface ToolbarItemType {
   key: string;
@@ -32,8 +33,10 @@ export interface ToolbarItemType {
   icon: ReactNode;
   percent?: boolean;
   disabled?: boolean;
-  actionType?: number;
+  actionType?: ToolbarActionType;
   render?: JSX.Element;
+  onClick?: () => void;
+  noHover?: boolean;
 }
 
 export interface ImageViewerToolbarProps {

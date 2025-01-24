@@ -71,10 +71,10 @@ const Block = ({
 
 const VirtualDataRoomBlock = ({
   t,
-  filesCount,
   roomParams,
   setRoomParams,
   isEdit,
+  showLifetimeDialog,
   setLifetimeDialogVisible,
 }) => {
   const role = t("Translations:RoleViewer");
@@ -115,7 +115,7 @@ const VirtualDataRoomBlock = ({
     if (fileLifetimeChecked) {
       setRoomParams({ ...roomParams, lifetime: null });
       setFileLifetimeChecked(!fileLifetimeChecked);
-    } else if (isEdit && filesCount > 0) {
+    } else if (isEdit && showLifetimeDialog) {
       setLifetimeDialogVisible(true, () =>
         setFileLifetimeChecked(!fileLifetimeChecked),
       );

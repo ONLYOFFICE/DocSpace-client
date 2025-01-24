@@ -25,17 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import StyledLoadingButton from "@docspace/shared/components/color-theme/sub-components/StyledLoadingButton";
-import StyledCircle from "@docspace/shared/components/color-theme/sub-components/StyledCircle";
+import { ColorTheme, ThemeId } from "../color-theme";
+import StyledLoadingButton from "../color-theme/sub-components/StyledLoadingButton";
+import StyledCircle from "../color-theme/sub-components/StyledCircle";
+import type { LoadingButtonProps } from "./LoadingButton.types";
 
-const LoadingButton = (props) => {
-  const { id, className, style, percent, onClick, isConversion, inConversion } =
-    props;
-  const [isAnimation, setIsAnimation] = useState(true);
+const LoadingButton: React.FC<LoadingButtonProps> = ({
+  id,
+  className,
+  style,
+  percent = 0,
+  onClick,
+  isConversion = false,
+  inConversion = false,
+}) => {
+  const progress = percent || null;
 
-  const stopAnimation = () => {
+  const [isAnimation, setIsAnimation] = useState<boolean>(true);
+
+  const stopAnimation = (): void => {
     setIsAnimation(false);
   };
 
@@ -49,7 +57,6 @@ const LoadingButton = (props) => {
 
   return (
     <ColorTheme
-      {...props}
       id={id}
       className={className}
       style={style}
@@ -57,7 +64,7 @@ const LoadingButton = (props) => {
       themeId={ThemeId.LoadingButton}
     >
       <StyledCircle
-        percent={percent}
+        percent={progress}
         inConversion={inConversion}
         isAnimation={isAnimation}
       >
@@ -79,8 +86,4 @@ const LoadingButton = (props) => {
   );
 };
 
-export default inject((_, { item }) => {
-  return {
-    percent: item?.percent ? item.percent : null,
-  };
-})(observer(LoadingButton));
+export { LoadingButton };

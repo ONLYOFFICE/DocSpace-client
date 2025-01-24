@@ -24,45 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import React from "react";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { LoadingButton } from "@docspace/shared/components/loading-button";
-import ShareButton from "./ShareButton";
-
-const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
-  const onCancelClick = !item.inConversion
-    ? { onClick: onCancelCurrentUpload }
-    : {};
-
-  return (
-    <>
-      {item.action === "upload" ? (
-        <ShareButton uniqueId={item.uniqueId} />
-      ) : null}
-      {item.action === "convert" ? (
-        <div
-          className="upload_panel-icon"
-          data-id={item.uniqueId}
-          data-file-id={item.fileId}
-          data-action={item.action}
-          {...onCancelClick}
-        >
-          <LoadingButton
-            isConversion
-            inConversion={item.inConversion}
-            percent={item.convertProgress}
-          />
-          <IconButton
-            iconName={RefreshReactSvgUrl}
-            className="convert_icon"
-            size="medium"
-            isfill
-          />
-        </div>
-      ) : null}
-    </>
-  );
-};
-
-export default ActionsUploadedFile;
+export interface LoadingButtonProps {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  percent?: number;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  isConversion?: boolean;
+  inConversion?: boolean;
+}

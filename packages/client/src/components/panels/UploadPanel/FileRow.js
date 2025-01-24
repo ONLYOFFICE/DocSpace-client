@@ -29,6 +29,7 @@ import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { LoadingButton } from "@docspace/shared/components/loading-button";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
@@ -37,7 +38,6 @@ import { Button } from "@docspace/shared/components/button";
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
 import SimulatePassword from "../../SimulatePassword";
-import LoadingButton from "./SubComponents/LoadingButton";
 
 const StyledFileRow = styled(Row)`
   width: 100%;
@@ -368,9 +368,9 @@ class FileRow extends Component {
             <div
               className="upload_panel-icon"
               data-id={item.uniqueId}
-              onClick={this.onCancelCurrentUpload}
+              // onClick={this.onCancelCurrentUpload}
             >
-              <LoadingButton item={item} />
+              <LoadingButton item={item} onClick={this.onCancelCurrentUpload} />
             </div>
           )}
           {showPasswordInput ? (

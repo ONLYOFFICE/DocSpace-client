@@ -35,6 +35,7 @@ import { IconButton } from "../icon-button";
 
 import styles from "./ProgressBarMobile.module.scss";
 import { ProgressBarMobileProps } from "./ProgressBarMobile.types";
+import { LoadingButton } from "../loading-button";
 
 const ProgressBarMobile = ({
   label,
@@ -55,12 +56,12 @@ const ProgressBarMobile = ({
   operation,
 }: ProgressBarMobileProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  const uploadPercent = percent > 100 ? 100 : percent;
+  // const uploadPercent = percent > 100 ? 100 : percent;
 
-  const onClickHeaderAction = () => {
-    onClickAction?.();
-    hideButton?.();
-  };
+  // const onClickHeaderAction = () => {
+  //   onClickAction?.();
+  //   hideButton?.();
+  // };
 
   const onCloseClick = () => {
     if (onClearProgress && operation) {
@@ -131,11 +132,16 @@ const ProgressBarMobile = ({
               <div className={styles.progressLoader} />
             )
           ) : (
-            <IconButton
-              onClick={onClickHeaderAction}
-              iconName={ArrowIcon}
-              size={14}
+            <LoadingButton
+              isConversion
+              // inConversion={item.inConversion}
+              percent={percent}
             />
+            // <IconButton
+            //   onClick={onClickHeaderAction}
+            //   iconName={ArrowIcon}
+            //   size={14}
+            // />
           )}
         </div>
       </div>

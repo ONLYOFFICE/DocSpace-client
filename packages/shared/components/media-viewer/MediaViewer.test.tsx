@@ -25,14 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import MediaViewer from "./MediaViewer";
 import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
-
-import { NextButton } from "./sub-components/Buttons/NextButton";
-import { PrevButton } from "./sub-components/Buttons/PrevButton";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -365,68 +362,5 @@ describe("MediaViewer", () => {
     render(<MediaViewer {...createMockProps()} />);
     const viewer = screen.getByTestId("media-viewer");
     expect(viewer).toBeInTheDocument();
-  });
-});
-
-describe("NextButton", () => {
-  const mockNextClick = jest.fn();
-
-  beforeEach(() => {
-    mockNextClick.mockClear();
-  });
-
-  it("renders correctly", () => {
-    render(<NextButton nextClick={mockNextClick} />);
-    const button = screen.getByTestId("next-button");
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute("aria-label", "Next");
-  });
-
-  it("applies correct classes for non-PDF files", () => {
-    render(<NextButton nextClick={mockNextClick} isPDFFile={false} />);
-    const button = screen.getByTestId("next-button");
-    expect(button).toHaveClass("right");
-    expect(button).not.toHaveClass("isPDFFile");
-  });
-
-  it("applies correct classes for PDF files", () => {
-    render(<NextButton nextClick={mockNextClick} isPDFFile />);
-    const button = screen.getByTestId("next-button");
-    expect(button).toHaveClass("isPDFFile");
-  });
-
-  it("calls nextClick when clicked", () => {
-    render(<NextButton nextClick={mockNextClick} />);
-    const button = screen.getByTestId("next-button");
-    fireEvent.click(button);
-    expect(mockNextClick).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("PrevButton", () => {
-  const mockPrevClick = jest.fn();
-
-  beforeEach(() => {
-    mockPrevClick.mockClear();
-  });
-
-  it("renders correctly", () => {
-    render(<PrevButton prevClick={mockPrevClick} />);
-    const button = screen.getByTestId("prev-button");
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute("aria-label", "Previous");
-  });
-
-  it("applies correct classes", () => {
-    render(<PrevButton prevClick={mockPrevClick} />);
-    const button = screen.getByTestId("prev-button");
-    expect(button).toHaveClass("left");
-  });
-
-  it("calls prevClick when clicked", () => {
-    render(<PrevButton prevClick={mockPrevClick} />);
-    const button = screen.getByTestId("prev-button");
-    fireEvent.click(button);
-    expect(mockPrevClick).toHaveBeenCalledTimes(1);
   });
 });

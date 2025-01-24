@@ -43,7 +43,7 @@ import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
-  user?: TUser;
+  initialTheme?: ThemeKeys;
   i18n?: i18n;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
@@ -51,7 +51,7 @@ export interface UseThemeProps {
 }
 
 const useTheme = ({
-  user,
+  initialTheme,
   i18n,
   systemTheme,
   colorTheme,
@@ -70,7 +70,7 @@ const useTheme = ({
   const [theme, setTheme] = React.useState<TTheme>(() => {
     const interfaceDirection = getDirectionByLanguage(lang || "en");
 
-    const newTheme = match<MatchType>([user?.theme, systemTheme])
+    const newTheme = match<MatchType>([initialTheme, systemTheme])
       .returnType<TTheme>()
       .with([ThemeKeys.DarkStr, P._], () => Dark)
       .with([ThemeKeys.BaseStr, P._], () => Base)
@@ -106,10 +106,10 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = systemTheme ?? SYSTEM_THEME;
+    let theme = initialTheme ?? SYSTEM_THEME;
     const interfaceDirection = getDirectionByLanguage(lang || "en");
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (initialTheme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
@@ -124,7 +124,7 @@ const useTheme = ({
     });
 
     setCookie(SYSTEM_THEME_KEY, themeCookie);
-  }, [systemTheme, i18n, lang, user?.theme, currentColorTheme]);
+  }, [i18n, lang, initialTheme, currentColorTheme]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

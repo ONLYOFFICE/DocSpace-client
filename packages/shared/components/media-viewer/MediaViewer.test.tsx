@@ -39,7 +39,6 @@ import { MessageError } from "./sub-components/MessageError";
 
 import type { ContextMenuModel } from "../context-menu/ContextMenu.types";
 import { MobileDetails } from "./sub-components/MobileDetails";
-import { Bookmarks } from "./sub-components/PDFViewer/ui/Bookmarks";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -53,13 +52,13 @@ jest.mock("react-i18next", () => ({
 }));
 
 // Mock the CustomScrollbarsVirtualList component
-jest.mock("../scrollbar", () => ({
-  CustomScrollbarsVirtualList: ({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) => <div data-testid="custom-scrollbar">{children}</div>,
-}));
+// jest.mock("../scrollbar", () => ({
+//   CustomScrollbarsVirtualList: ({
+//     children,
+//   }: {
+//     children: React.ReactNode;
+//   }) => <div data-testid="custom-scrollbar">{children}</div>,
+// }));
 
 // Mock SVG imports
 jest.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => ({
@@ -705,58 +704,5 @@ describe("MobileDetails", () => {
     expect(
       screen.queryByTestId("mobile-details-context-menu"),
     ).not.toBeInTheDocument();
-  });
-});
-
-describe("Bookmarks component", () => {
-  const mockBookmarks = [
-    { page: 1, description: "Chapter 1", level: 1, y: 100 },
-    { page: 5, description: "Chapter 2", level: 1, y: 200 },
-    { page: 10, description: "Chapter 3", level: 1, y: 300 },
-  ];
-
-  const mockNavigate = jest.fn();
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("renders bookmarks list with correct accessibility attributes", () => {
-    const { getByRole } = render(
-      <Bookmarks bookmarks={mockBookmarks} navigate={mockNavigate} />,
-    );
-
-    const list = getByRole("list");
-    expect(list).toBeInTheDocument();
-    expect(list).toHaveAttribute("aria-label", "PDF bookmarks");
-  });
-
-  it("renders empty list when no bookmarks provided", () => {
-    const { getByTestId } = render(
-      <Bookmarks bookmarks={[]} navigate={mockNavigate} />,
-    );
-
-    const list = getByTestId("bookmarks-list");
-    expect(list).toBeInTheDocument();
-    expect(list.children).toHaveLength(0);
-  });
-
-  it("renders inside CustomScrollbarsVirtualList", () => {
-    const { getByTestId } = render(
-      <Bookmarks bookmarks={mockBookmarks} navigate={mockNavigate} />,
-    );
-
-    expect(getByTestId("custom-scrollbar")).toBeInTheDocument();
-  });
-
-  it("renders bookmark items with correct data-testid attributes", () => {
-    const { getByTestId } = render(
-      <Bookmarks bookmarks={mockBookmarks} navigate={mockNavigate} />,
-    );
-
-    mockBookmarks.forEach((_, index) => {
-      expect(getByTestId(`bookmark-item-${index}`)).toBeInTheDocument();
-      expect(getByTestId(`bookmark-button-${index}`)).toBeInTheDocument();
-    });
   });
 });

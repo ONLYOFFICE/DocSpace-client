@@ -102,7 +102,9 @@ const ColorInput = ({
         open={isPickerOpen}
         clickOutsideAction={closePicker}
       >
-        <DropDownItem className={styles.dropDownItemHex}>
+        <DropDownItem
+          className={classNames(styles.dropDownItemHex, "drop-down-item-hex")}
+        >
           <ColorPicker
             appliedColor={color}
             handleChange={onChange}

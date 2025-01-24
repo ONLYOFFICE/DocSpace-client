@@ -44,15 +44,15 @@ const useSocketHelper = ({
   shareKey,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
-    SocketHelper.connect(socketUrl, shareKey ?? "");
+    SocketHelper?.connect(socketUrl, shareKey ?? "");
   }, [shareKey, socketUrl]);
 
   React.useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: user?.id || "",
     });
   }, [user?.id]);
@@ -73,10 +73,10 @@ const useSocketHelper = ({
       }
     };
 
-    SocketHelper.on(SocketEvents.RestoreBackup, callback);
+    SocketHelper?.on(SocketEvents.RestoreBackup, callback);
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+      SocketHelper?.off(SocketEvents.RestoreBackup, callback);
     };
   }, []);
 
@@ -103,10 +103,10 @@ const useSocketHelper = ({
       }
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
   }, [user, user?.loginEventId]);
 };

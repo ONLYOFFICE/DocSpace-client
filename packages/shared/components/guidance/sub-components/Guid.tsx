@@ -160,7 +160,7 @@ const Guid = ({
     top: `${modalTop}px`,
   };
 
-  const contentClassName = classNames(styles.content, {
+  const contentClassName = classNames(styles.content, "guidance-dialog", {
     [styles.visible]: true,
     [styles.displayTypeModal]: "modal",
     [styles.autoMaxHeight]: true,

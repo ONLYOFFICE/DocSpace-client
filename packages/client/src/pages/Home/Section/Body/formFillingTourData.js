@@ -48,7 +48,7 @@ export const fakeFormFillingList = [
     icon: iconSize32.get(getIconPathByFolderType(FolderType.Done)),
   },
   {
-    title: "PDF Form Room",
+    title: "ONLYOFFICE Sample PDF form",
     updated: moment().format(),
     icon: PDFIcon,
     isFolder: false,

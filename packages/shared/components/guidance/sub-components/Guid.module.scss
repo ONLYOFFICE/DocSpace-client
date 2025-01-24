@@ -57,18 +57,21 @@
 }
 
 :global {
-  .modal-header {
-    //   margin-bottom: 0px !important;
-    margin: 0 18px;
-    height: 54px;
-    min-height: 54px;
+  .guidance-dialog {
+    .modal-header {
+      margin: 20px 20px 12px 20px;
+      height: auto;
+      min-height: auto;
+      align-items: start;
 
-    &::after {
-      border: none !important;
-    }
+      &::after {
+        border: none !important;
+      }
 
-    .header-component {
-      font-size: 16px;
+      p {
+        font-size: 16px !important;
+        white-space: normal;
+      }
     }
   }
 

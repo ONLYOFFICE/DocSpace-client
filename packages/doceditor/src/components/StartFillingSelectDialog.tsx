@@ -67,6 +67,10 @@ function StartFillingSelectorDialog({
     <FilesSelectorWrapper
       withCreate
       withHeader
+      headerProps={{
+        headerLabel,
+        onCloseClick: onClose,
+      }}
       withSearch
       isRoomsOnly
       withBreadCrumbs

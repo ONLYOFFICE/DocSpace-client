@@ -26,16 +26,12 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 
 import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
 
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps: InfoBadgeProps = {
   label: "label",

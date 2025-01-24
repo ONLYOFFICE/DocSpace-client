@@ -110,7 +110,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   }, [errorInternalServer]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreProgress, (opt) => {
+    SocketHelper?.on(SocketEvents.RestoreProgress, (opt) => {
       const { progress, isCompleted, error } = opt;
 
       setPercent(progress);

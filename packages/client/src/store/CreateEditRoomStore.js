@@ -362,9 +362,6 @@ class CreateEditRoomStore {
   };
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
-    console.log(
-      `item: ${item} roomParams: ${roomParams} openCreatedTemplate: ${openCreatedTemplate}`,
-    );
     this.filesStore.setRoomCreated(true);
 
     const { title, icon, tags, invitations, roomType } = roomParams;
@@ -378,56 +375,49 @@ class CreateEditRoomStore {
       tags: tagsToAddList,
     };
 
-    try {
-      if (icon.uploadedFile) {
-        const roomLogo = await this.getRoomLogo(icon);
-        roomData.logo = roomLogo;
-      }
-
-      let isFinished = false;
-      let progressData;
-
-      const room = createTemplate(roomData);
-      progressData = room;
-
-      while (!isFinished) {
-        progressData = await this.getProgress(getCreateTemplateProgress);
-        isFinished = progressData.isCompleted;
-
-        // if (res?.progress) {
-        //   setSecondaryProgressBarData({
-        //     icon: pbData.icon,
-        //     visible: true,
-        //     percent: res.progress,
-        //     label: "",
-        //     alert: false,
-        //     operationId: pbData.operationId,
-        //     filesCount: pbData.filesCount,
-        //   });
-        // }
-      }
-
-      console.log("progressData", progressData);
-
-      if (!progressData) return;
-
-      await updateRoomMemberRole(progressData.templateId, {
-        invitations,
-        notify: false,
-        sharingMessage: "",
-      });
-
-      if (openCreatedTemplate) {
-        this.onOpenNewRoom({
-          id: progressData.templateId,
-          title,
-          roomType,
-          rootFolderType: FolderType.RoomTemplates,
-        });
-      }
-    } catch (error) {
-      toastr.error(error);
+    if (icon.uploadedFile) {
+      const roomLogo = await this.getRoomLogo(icon);
+      roomData.logo = roomLogo;
     }
+
+    let isCompleted = false;
+    let isError = false;
+    let progressData;
+
+    const room = await createTemplate(roomData);
+    progressData = room;
+
+    isCompleted = progressData?.isCompleted;
+    isError = progressData?.error;
+
+    while (!isCompleted || !isError) {
+      progressData = await this.getProgress(getCreateTemplateProgress);
+      isCompleted = progressData.isCompleted;
+      isError = progressData.error;
+    }
+
+    if (isError) {
+      return Promise.reject(progressData.error);
+    }
+
+    if (!progressData) return;
+
+    await updateRoomMemberRole(progressData.templateId, {
+      invitations,
+      notify: false,
+      sharingMessage: "",
+    });
+
+    if (openCreatedTemplate) {
+      this.onOpenNewRoom({
+        id: progressData.templateId,
+        title,
+        roomType,
+        rootFolderType: FolderType.RoomTemplates,
+      });
+    }
+
+    return Promise.resolve(progressData);
   };
 
   getRoomLogo = async (icon) => {
@@ -606,17 +596,6 @@ class CreateEditRoomStore {
       console.log("progressData", progressData);
 
       isFinished = progressData.isCompleted;
-      // if (res?.progress) {
-      //   setSecondaryProgressBarData({
-      //     icon: pbData.icon,
-      //     visible: true,
-      //     percent: res.progress,
-      //     label: "",
-      //     alert: false,
-      //     operationId: pbData.operationId,
-      //     filesCount: pbData.filesCount,
-      //   });
-      // }
     }
 
     return {

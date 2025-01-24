@@ -235,5 +235,6 @@
   "RoomTemplateDescription": "Use this template to quickly create a new room.",
   "TemplateOwner": "Template owner",
   "Template": "Template",
-  "TemplateRemoved": "Selected room templates have been deleted"
+  "TemplateRemoved": "Selected room templates have been deleted",
+  "SaveAsTemplateToast": "Template <1>«{{title}}»</1> saved. <2>Go to template</2>"
 }

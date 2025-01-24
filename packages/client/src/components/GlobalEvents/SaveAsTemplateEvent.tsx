@@ -26,9 +26,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { toastr } from "@docspace/shared/components/toast";
+import { Trans, useTranslation } from "react-i18next";
+import { FolderType } from "@docspace/shared/enums";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { TColorScheme } from "@docspace/shared/themes";
+import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 
@@ -40,7 +45,24 @@ type SaveAsTemplateEventProps = {
   getThirdPartyIcon: (provider: string) => string;
   isDefaultRoomsQuotaSet: boolean;
   onClose: VoidFunction;
-  onSaveAsTemplate: (item: TRoom, roomParams: TRoom, open: boolean) => void;
+  onOpenNewRoom: (room: {
+    id: string | number;
+    title: string;
+    roomType: number;
+    rootFolderType: FolderType.RoomTemplates;
+  }) => void;
+
+  currentColorScheme: TColorScheme;
+  onSaveAsTemplate: (
+    item: TRoom,
+    roomParams: TRoom,
+    open: boolean,
+  ) => Promise<{
+    error: string;
+    isCompleted: boolean;
+    progress: number;
+    templateId: number;
+  }>;
 };
 
 const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
@@ -52,8 +74,12 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     getThirdPartyIcon,
     isDefaultRoomsQuotaSet,
     onClose,
+    currentColorScheme,
     onSaveAsTemplate,
+    onOpenNewRoom,
   } = props;
+
+  const { t } = useTranslation(["Files"]);
 
   const [fetchedTags, setFetchedTags] = useState<TRoom["tags"]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -103,7 +129,36 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
   const onSave = async (roomParams: TRoom, openCreatedTemplate: boolean) => {
     setIsLoading(true);
 
-    await onSaveAsTemplate(item, roomParams, openCreatedTemplate);
+    onSaveAsTemplate(item, roomParams, openCreatedTemplate)
+      .then((res) => {
+        if (openCreatedTemplate) return;
+        toastr.success(
+          <Trans
+            t={t}
+            ns="Files"
+            i18nKey="SaveAsTemplateToast"
+            values={{ title: roomParams.title }}
+            components={{
+              1: <Text as="span" fontWeight={600} fontSize="12px" />,
+              2: (
+                <Link
+                  color={currentColorScheme.main?.accent}
+                  fontSize="12px"
+                  onClick={() =>
+                    onOpenNewRoom({
+                      id: res.templateId,
+                      title: roomParams.title,
+                      roomType: roomParams.roomType,
+                      rootFolderType: FolderType.RoomTemplates,
+                    })
+                  }
+                />
+              ),
+            }}
+          />,
+        );
+      })
+      .catch((err) => toastr.error(err));
 
     setIsLoading(false);
     onClose();
@@ -143,12 +198,14 @@ export default inject<TStore>(
     filesSettingsStore,
     currentQuotaStore,
     createEditRoomStore,
+    settingsStore,
   }) => {
     const { fetchTags } = tagsStore;
     const { setTemplateEventVisible } = dialogsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { onSaveAsTemplate } = createEditRoomStore;
+    const { onSaveAsTemplate, onOpenNewRoom } = createEditRoomStore;
+    const { currentColorScheme } = settingsStore;
 
     return {
       fetchTags,
@@ -156,6 +213,8 @@ export default inject<TStore>(
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
       onSaveAsTemplate,
+      currentColorScheme,
+      onOpenNewRoom,
     };
   },
 )(observer(SaveAsTemplateEvent));

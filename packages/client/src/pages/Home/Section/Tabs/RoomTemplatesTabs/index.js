@@ -41,7 +41,7 @@ const RoomTemplatesTabs = ({
   isRoot,
   isRoomsFolderRoot,
   isTemplatesFolder,
-  security,
+  withTabs,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -57,7 +57,7 @@ const RoomTemplatesTabs = ({
   ];
 
   const showTabs =
-    (isRoomsFolderRoot || isTemplatesFolder) && isRoot && security?.Create;
+    (isRoomsFolderRoot || isTemplatesFolder) && isRoot && withTabs;
 
   const onSelect = (e) => {
     const filter = RoomsFilter.getDefault();
@@ -90,16 +90,11 @@ const RoomTemplatesTabs = ({
 };
 
 export default inject(
-  ({
-    treeFoldersStore,
-    filesStore,
-    clientLoadingStore,
-    selectedFolderStore,
-  }) => {
+  ({ authStore, treeFoldersStore, filesStore, clientLoadingStore }) => {
+    const { isRoomAdmin, isAdmin } = authStore;
     const { isRoomsFolderRoot, isTemplatesFolder, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
-    const { security } = selectedFolderStore;
 
     return {
       setFilter,
@@ -107,7 +102,7 @@ export default inject(
       isRoot,
       isRoomsFolderRoot,
       isTemplatesFolder,
-      security,
+      withTabs: isRoomAdmin || isAdmin,
     };
   },
 )(observer(RoomTemplatesTabs));

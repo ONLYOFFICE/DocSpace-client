@@ -1469,7 +1469,8 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await this.getPublicKey(item);
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+    const shareKey = await this.getPublicKey(selectedFolder);
     if (shareKey) filter.key = shareKey;
 
     if (isRoom) {
@@ -2421,7 +2422,7 @@ class FilesActionStore {
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
-    const { isOwner, isAdmin } = this.userStore.user;
+    //  const { isOwner, isAdmin } = this.userStore.user;
 
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
@@ -2693,7 +2694,7 @@ class FilesActionStore {
           ? CategoryType.Archive
           : categoryType;
 
-    let path = getCategoryUrl(correctCategoryType);
+    const path = getCategoryUrl(correctCategoryType);
 
     const state = {
       title:
@@ -2757,9 +2758,12 @@ class FilesActionStore {
     filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
+    console.log("folder id", id);
 
-    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
-    const shareKey = await this.getPublicKey(selectedFolder);
+    // const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+    const currentFolder = await this.filesStore.getFolderInfo(id);
+    console.log("currentFolder", currentFolder);
+    const shareKey = await this.getPublicKey(currentFolder);
     if (shareKey) filter.key = shareKey;
 
     const categoryType = getCategoryType(window.DocSpace.location);
@@ -3255,13 +3259,12 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    const { isOwner, isAdmin } = this.userStore.user;
+    //  const { isOwner, isAdmin } = this.userStore.user;
     const { setPublicRoomKey } = this.settingsStore;
 
     if (
-      folder?.shared &&
-      folder?.rootFolderType === FolderType.Rooms //&&
-      // (isOwner || isAdmin)
+      (folder.shared || this.selectedFolderStore.shared) &&
+      folder?.rootFolderType === FolderType.Rooms // &&
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 
@@ -3273,7 +3276,7 @@ class FilesActionStore {
         const link = await this.filesStore.getPrimaryLink(folder.id);
         const key = link?.sharedTo?.requestToken;
 
-        //  setPublicRoomKey(key);
+        //setPublicRoomKey(key);
 
         return key;
       } catch (error) {

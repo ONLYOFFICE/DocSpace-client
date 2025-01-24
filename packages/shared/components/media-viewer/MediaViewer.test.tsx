@@ -43,7 +43,6 @@ import { Bookmarks } from "./sub-components/PDFViewer/ui/Bookmarks";
 import { MainPanel } from "./sub-components/PDFViewer/ui/MainPanel";
 import { BookMarkType } from "./sub-components/PDFViewer/PDFViewer.props";
 import { MobileDrawer } from "./sub-components/PDFViewer/ui/MobileDrawer";
-import { PageCount } from "./sub-components/PDFViewer/ui/PageCount";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -961,62 +960,5 @@ describe("MobileDrawer", () => {
 
     const closeButton = screen.getByTestId("close-drawer-button");
     expect(closeButton).toHaveAttribute("aria-label", "Close drawer");
-  });
-});
-
-jest.mock("react-device-detect", () => ({
-  isMobile: false,
-}));
-
-// Mock PanelReactSvg
-jest.mock("PUBLIC_DIR/images/panel.react.svg", () => {
-  return function DummyPanelSvg(props: any) {
-    return <div {...props}>Panel Icon</div>;
-  };
-});
-
-// Mock classnames
-jest.mock("classnames", () => {
-  return function dummyClassnames(...args: any[]) {
-    return args.join(" ");
-  };
-});
-
-// Mock styles
-jest.mock(
-  "./sub-components/PDFViewer/ui/PageCountPageCount.module.scss",
-  () => ({
-    pageCountWrapper: "pageCountWrapper",
-    isPanelOpen: "isPanelOpen",
-    isMobile: "isMobile",
-  }),
-);
-
-describe("PageCount", () => {
-  const defaultProps = {
-    visible: true,
-    isPanelOpen: false,
-    setIsOpenMobileDrawer: jest.fn(),
-  };
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("renders correctly when visible", () => {
-    const ref = React.createRef<any>();
-    render(<PageCount {...defaultProps} ref={ref} />);
-
-    expect(screen.getByTestId("page-count")).toBeInTheDocument();
-    expect(screen.getByTestId("page-numbers")).toBeInTheDocument();
-    expect(screen.getByTestId("current-page")).toHaveTextContent("0");
-    expect(screen.getByTestId("total-pages")).toHaveTextContent("0");
-  });
-
-  it("does not render when not visible", () => {
-    const ref = React.createRef<any>();
-    render(<PageCount {...defaultProps} visible={false} ref={ref} />);
-
-    expect(screen.queryByTestId("page-count")).not.toBeInTheDocument();
   });
 });

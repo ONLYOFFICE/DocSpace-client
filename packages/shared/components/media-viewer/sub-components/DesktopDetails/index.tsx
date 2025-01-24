@@ -68,7 +68,6 @@ export const DesktopDetails = ({
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable
-            aria-label="Close details"
           />
         </div>
       ) : null}

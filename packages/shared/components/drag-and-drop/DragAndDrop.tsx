@@ -29,7 +29,7 @@ import React from "react";
 import classNames from "classnames";
 import { useDropzone } from "react-dropzone";
 
-import getFilesFromEvent from "./get-files-from-event";
+import getFilesFromEvent from "../../utils/get-files-from-event";
 
 import styles from "./DragAndDrop.module.scss";
 import { DragAndDropProps } from "./DragAndDrop.types";

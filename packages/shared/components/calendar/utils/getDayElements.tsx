@@ -26,9 +26,10 @@
 
 import React from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import { getCalendarDays } from "./getCalendarDays";
-import { StyledDateItemTheme } from "../Calendar.styled";
+import styles from "../Calendar.module.scss";
 
 export const getDayElements = (
   observedDate: moment.Moment,
@@ -36,7 +37,6 @@ export const getDayElements = (
   handleDateChange: (date: moment.Moment) => void,
   minDate: moment.Moment,
   maxDate: moment.Moment,
-  isMobile: boolean,
 ) => {
   const dateFormat = "YYYY-MM-D";
 
@@ -44,51 +44,57 @@ export const getDayElements = (
 
   const monthDays = {
     prevMonthDays: calendarDays.prevMonthDays.map((day) => (
-      <StyledDateItemTheme
-        className="day"
-        isSecondary
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "day", {
+          [styles.disabled]: moment(day.key, dateFormat) < minDate,
+          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+          [styles.isSecondary]: true,
+        })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
         disabled={
           moment(day.key, dateFormat) < minDate ||
           moment(day.key, dateFormat) > maxDate
         }
-        isMobile={isMobile}
-        focused={false}
       >
         {day.value}
-      </StyledDateItemTheme>
+      </button>
     )),
     currentMonthDays: calendarDays.currentMonthDays.map((day) => (
-      <StyledDateItemTheme
-        className="day"
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "day", {
+          [styles.disabled]: moment(day.key, dateFormat) < minDate,
+          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+        })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
         disabled={
           moment(day.key, dateFormat) < minDate ||
           moment(day.key, dateFormat) > maxDate
         }
-        isMobile={isMobile}
-        focused={false}
       >
         {day.value}
-      </StyledDateItemTheme>
+      </button>
     )),
     nextMonthDays: calendarDays.nextMonthDays.map((day) => (
-      <StyledDateItemTheme
-        className="day"
-        isSecondary
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "day", {
+          [styles.disabled]: moment(day.key, dateFormat) < minDate,
+          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+          [styles.isSecondary]: true,
+        })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
         disabled={
           moment(day.key, dateFormat) < minDate ||
           moment(day.key, dateFormat) > maxDate
         }
-        isMobile={isMobile}
-        focused={false}
       >
         {day.value}
-      </StyledDateItemTheme>
+      </button>
     )),
   };
 
@@ -105,36 +111,41 @@ export const getDayElements = (
       calendarDays[key].forEach((day, index) => {
         if (day.key === currentDate) {
           monthDays[key][index] = (
-            <StyledDateItemTheme
-              className="day"
-              isCurrent
+            <button
+              type="button"
+              className={classNames(styles.dateItem, "day", {
+                [styles.disabled]: moment(day.key, dateFormat) < minDate,
+                [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+                [styles.isCurrent]: true,
+              })}
               key={day.key}
               onClick={() => handleDateChange(moment(day.key, dateFormat))}
               disabled={
                 moment(day.key, dateFormat) < minDate ||
                 moment(day.key, dateFormat) > maxDate
               }
-              isMobile={isMobile}
-              focused={false}
             >
               {day.value}
-            </StyledDateItemTheme>
+            </button>
           );
         } else if (day.key === selectedDateFormated) {
           monthDays[key][index] = (
-            <StyledDateItemTheme
-              className="day"
+            <button
+              type="button"
+              className={classNames(styles.dateItem, "day", {
+                [styles.disabled]: moment(day.key, dateFormat) < minDate,
+                [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+                [styles.focused]: true,
+              })}
               key={day.key}
-              focused
               onClick={() => handleDateChange(moment(day.key, dateFormat))}
               disabled={
                 moment(day.key, dateFormat) < minDate ||
                 moment(day.key, dateFormat) > maxDate
               }
-              isMobile={isMobile}
             >
               {day.value}
-            </StyledDateItemTheme>
+            </button>
           );
         }
       });

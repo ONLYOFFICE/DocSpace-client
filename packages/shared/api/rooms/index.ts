@@ -540,3 +540,13 @@ export function setRoomCover(roomId, cover) {
 
   return request(options);
 }
+
+export function hideConfirmRoomLifetime(val: boolean) {
+  const options = {
+    method: "put",
+    url: "/files/hideconfirmroomlifetime",
+    data: { set: val },
+  };
+
+  return request(options);
+}

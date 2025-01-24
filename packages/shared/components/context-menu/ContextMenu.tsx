@@ -501,8 +501,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                         {(header?.icon &&
                           "color" in header &&
                           !header?.color) ||
-                        ("cover" in header && header?.cover) ||
-                        ("logo" in header && header?.logo) ? (
+                        (header && "cover" in header && header?.cover) ||
+                        (header && "logo" in header && header?.logo) ? (
                           <RoomIcon
                             title={header.title}
                             isArchive={isArchive}
@@ -534,7 +534,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                               (header && "color" in header && header.color) ||
                               ""
                             }
-                            title={header.title}
+                            title={
+                              header && "title" in header ? header.title : ""
+                            }
                             isArchive={isArchive}
                             showDefault={defaultIcon ?? false}
                             badgeUrl={badgeUrl}
@@ -555,7 +557,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                   ) : null}
 
                   <Text className="text" truncate dir="auto">
-                    {showMobileMenu ? mobileHeader : header.title}
+                    {showMobileMenu ? mobileHeader : (header?.title ?? "")}
                   </Text>
                 </div>
               ) : null}

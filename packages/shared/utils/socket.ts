@@ -26,10 +26,14 @@
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
-
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+
 import { addLog } from ".";
 
 /**
@@ -253,7 +257,18 @@ export type TCallback = {
 };
 
 declare global {
-  let SOCKET_INSTANCE: SocketHelper | undefined;
+  interface Window {
+    SOCKET_INSTANCE: SocketHelper | undefined;
+  }
+
+  // Extend the globalThis type to include SOCKET_INSTANCE
+  var SOCKET_INSTANCE: SocketHelper | undefined;
+
+  // @ts-ignore
+
+  interface globalThis {
+    SOCKET_INSTANCE: typeof SOCKET_INSTANCE;
+  }
 }
 
 const isEmitDataValid = (

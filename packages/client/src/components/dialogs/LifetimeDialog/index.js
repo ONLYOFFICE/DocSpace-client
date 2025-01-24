@@ -8,8 +8,14 @@ import { Text } from "@docspace/shared/components/text";
 import { StyledBodyContent, StyledFooterContent } from "./StyledLifetimeDialog";
 
 const LifetimeDialogComponent = (props) => {
-  const { t, setLifetimeDialogVisible, visible, tReady, lifetimeDialogCB } =
-    props;
+  const {
+    t,
+    setLifetimeDialogVisible,
+    visible,
+    tReady,
+    lifetimeDialogCB,
+    hideConfirmRoomLifetimeSetting,
+  } = props;
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -22,6 +28,10 @@ const LifetimeDialogComponent = (props) => {
   };
 
   const onAcceptClick = () => {
+    if (isChecked) {
+      hideConfirmRoomLifetimeSetting(isChecked);
+    }
+
     lifetimeDialogCB();
     onClose();
   };
@@ -93,16 +103,19 @@ const LifetimeDialog = withTranslation(["Common", "Files", "ConvertDialog"])(
   LifetimeDialogComponent,
 );
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, filesSettingsStore }) => {
   const {
     lifetimeDialogVisible: visible,
     setLifetimeDialogVisible,
     lifetimeDialogCB,
   } = dialogsStore;
 
+  const { hideConfirmRoomLifetimeSetting } = filesSettingsStore;
+
   return {
     visible,
     setLifetimeDialogVisible,
     lifetimeDialogCB,
+    hideConfirmRoomLifetimeSetting,
   };
 })(observer(LifetimeDialog));

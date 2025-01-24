@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { InputSize } from "components/text-input";
+import { InputSize } from "../text-input";
 
 export type SearchInputProps = {
   /** Used as HTML `id` property */

@@ -74,6 +74,10 @@ const SelectFolderDialog = ({
       filesSettings={filesSettings}
       {...cancelButtonProps}
       withHeader
+      headerProps={{
+        headerLabel: t("Common:SaveButton"),
+        onCloseClick: onClose,
+      }}
       withBreadCrumbs
       withSearch
       withoutBackButton

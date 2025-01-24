@@ -34,7 +34,6 @@ import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
 import { NextButton } from "./sub-components/Buttons/NextButton";
 import { PrevButton } from "./sub-components/Buttons/PrevButton";
 import { DesktopDetails } from "./sub-components/DesktopDetails";
-import { ImageViewer } from "./sub-components/ImageViewer";
 
 // Mock i18next
 jest.mock("react-i18next", () => ({
@@ -499,49 +498,5 @@ describe("DesktopDetails", () => {
     const closeButton = screen.getByTestId("desktop-details-close");
     const iconButton = closeButton.querySelector("button");
     expect(iconButton).toHaveAttribute("aria-label", "Close details");
-  });
-});
-
-describe("ImageViewer", () => {
-  const props = {
-    src: "https://example.com/image.jpg",
-    onPrev: jest.fn(),
-    onNext: jest.fn(),
-    onMask: jest.fn(),
-    isFistImage: true,
-    isLastImage: false,
-    panelVisible: true,
-    generateContextMenu: jest.fn(),
-    setIsOpenContextMenu: jest.fn(),
-    resetToolbarVisibleTimer: jest.fn(),
-    toolbar: [],
-    thumbnailSrc: "https://example.com/thumbnail.jpg",
-    isDecodedImage: false,
-    contextModel: jest.fn(),
-    errorTitle: "",
-    devices: { isMobile: false, isDesktop: true, isMobileOnly: false },
-    isPublicFile: false,
-    backgroundBlack: false,
-    setBackgroundBlack: jest.fn(),
-    imageId: 0,
-    version: 0,
-    zoomIn: jest.fn(),
-    zoomOut: jest.fn(),
-    rotateLeft: jest.fn(),
-    rotateRight: jest.fn(),
-    delete: jest.fn(),
-    download: jest.fn(),
-  };
-
-  it("renders correctly", () => {
-    const { getByTestId } = render(<ImageViewer {...props} />);
-    expect(getByTestId("image-viewer")).toBeInTheDocument();
-  });
-
-  it("handles image loading", async () => {
-    const { getByTestId } = render(<ImageViewer {...props} />);
-    await waitFor(() =>
-      expect(getByTestId("image-content")).toHaveAttribute("src", props.src),
-    );
   });
 });

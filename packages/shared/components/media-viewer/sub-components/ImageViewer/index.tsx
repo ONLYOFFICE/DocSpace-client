@@ -848,7 +848,7 @@ export const ImageViewer = ({
   const toolbarEvent = (item: ToolbarItemType) => {
     if (item.onClick) {
       item.onClick();
-    } else {
+    } else if (item.actionType !== undefined) {
       handleToolbarAction(item.actionType);
     }
   };

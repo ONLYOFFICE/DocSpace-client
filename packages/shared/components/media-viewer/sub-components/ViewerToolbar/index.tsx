@@ -30,13 +30,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-
-import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import classNames from "classnames";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import styles from "./ViewerToolbar.module.scss";
 import { useClickOutside } from "../../../../utils/useClickOutside";
-
-import ImageViewerToolbarProps, {
+import type {
+  ImageViewerToolbarProps,
   ImperativeHandle,
   ToolbarItemType,
 } from "./ViewerToolbar.props";
@@ -86,7 +85,9 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
             setIsOpenContextMenu((open) => !open);
             setIsOpen((open) => !open);
           }}
+          data-testid="toolbar-item-context-menu"
           data-key={item.key}
+          aria-label="More options"
         >
           <div className="context" style={{ height: "16px" }}>
             <MediaContextMenu />
@@ -97,7 +98,15 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
     }
 
     function getPercentCompoent() {
-      return <div className={styles.zoomPercent}>{`${percent}%`}</div>;
+      return (
+        <div
+          className={styles.zoomPercent}
+          data-testid="zoom-percent"
+          aria-label={`Zoom level ${percent}%`}
+        >
+          {`${percent}%`}
+        </div>
+      );
     }
 
     function renderToolbarItem(item: ToolbarItemType) {
@@ -121,10 +130,10 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
             [styles.disabled]: item.percent ? percent === 25 : false,
           })}
           key={item.key}
-          onClick={() => {
-            toolbarEvent(item);
-          }}
+          onClick={() => toolbarEvent(item)}
+          data-testid={`toolbar-item-${item.key}`}
           data-key={item.key}
+          aria-label={item.title}
         >
           {content}
         </li>
@@ -132,7 +141,12 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
     }
 
     return (
-      <div className={`${className || ""} ${styles.toolbarWrapper}`}>
+      <div
+        className={`${className || ""} ${styles.toolbarWrapper}`}
+        data-testid="viewer-toolbar"
+        role="toolbar"
+        aria-label="Media viewer toolbar"
+      >
         <ul className={styles.toolsList}>
           {toolbar.map((item) => renderToolbarItem(item))}
         </ul>

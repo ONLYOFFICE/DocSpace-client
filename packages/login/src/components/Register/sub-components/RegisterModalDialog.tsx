@@ -121,12 +121,11 @@ const RegisterModalDialog = ({
               isAutoFocussed
               id="registration-modal_email"
               name="e-mail"
-              type={InputType.email}
               size={InputSize.base}
               scale
               tabIndex={1}
               isDisabled={loading}
-              value={email}
+              value={email ?? ""}
               onChange={onChangeEmail}
               onValidateInput={onValidateEmail}
               onBlur={onBlurEmail}

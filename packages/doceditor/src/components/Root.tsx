@@ -276,6 +276,7 @@ const Root = ({
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
+          selfId={user?.id}
           onCancel={onCloseSharingDialog}
         />
       )}

@@ -32,7 +32,7 @@ import {
 } from "@docspace/shared/constants";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";

@@ -31,9 +31,9 @@ import { useTranslation } from "react-i18next";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
 import { fixFormatValue } from "../Cron.utils";
-import { SelectWrapper } from "../Cron.styled";
 
 import type { SelectProps } from "../Cron.types";
+import styles from "../Cron.module.scss";
 
 export const Select = ({
   unit,
@@ -104,7 +104,7 @@ export const Select = ({
   };
 
   return (
-    <SelectWrapper>
+    <div className={styles.selectWrapper}>
       {prefix ? <span>{prefix}</span> : null}
       <ComboBox
         scaled
@@ -120,6 +120,6 @@ export const Select = ({
         isDisabled={isDisabled}
         directionY="both"
       />
-    </SelectWrapper>
+    </div>
   );
 };

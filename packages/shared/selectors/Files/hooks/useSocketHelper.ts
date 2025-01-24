@@ -64,9 +64,9 @@ const useSocketHelper = ({
 
   const unsubscribe = React.useCallback((id?: number | string) => {
     if (!id) {
-      const roomParts = [...folderSubscribers.current];
+      const roomParts = [...Array.from(folderSubscribers.current)];
 
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts,
         individual: true,
       });
@@ -79,7 +79,7 @@ const useSocketHelper = ({
     const path = `DIR-${id}`;
 
     if (
-      SocketHelper.socketSubscribers.has(path) &&
+      SocketHelper?.socketSubscribers.has(path) &&
       folderSubscribers.current.has(path)
     ) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
@@ -95,7 +95,7 @@ const useSocketHelper = ({
     (id: number) => {
       const roomParts = `DIR-${id}`;
 
-      if (SocketHelper.socketSubscribers.has(roomParts)) {
+      if (SocketHelper?.socketSubscribers.has(roomParts)) {
         subscribedId.current = id;
 
         return;
@@ -106,7 +106,7 @@ const useSocketHelper = ({
       folderSubscribers.current.add(roomParts);
       subscribedId.current = id;
 
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts,
         individual: true,
       });
@@ -304,7 +304,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    SocketHelper.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
+    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);

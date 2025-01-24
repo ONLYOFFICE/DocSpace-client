@@ -143,6 +143,8 @@ class FilesSettingsStore {
 
   canSearchByContent = false;
 
+  hideConfirmRoomLifetime = false;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -531,6 +533,15 @@ class FilesSettingsStore {
     const extension = ext.toLowerCase();
 
     return this.getIconUrl(extension, size);
+  };
+
+  hideConfirmRoomLifetimeSetting = (set) => {
+    return api.rooms
+      .hideConfirmRoomLifetime(set)
+      .then((res) => {
+        this.setFilesSetting("hideConfirmRoomLifetime", res);
+      })
+      .catch((e) => toastr.error(e));
   };
 
   get openOnNewPage() {

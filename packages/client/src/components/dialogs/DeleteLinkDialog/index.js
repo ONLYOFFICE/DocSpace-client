@@ -25,11 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { withTranslation } from "react-i18next";
 import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
@@ -48,9 +51,13 @@ const DeleteLinkDialogComponent = (props) => {
     isFormRoom,
     isCustomRoom,
     setRoomShared,
+    linkParams,
+    addPrimaryKeyToLink,
+    removePrimaryKeyInLink,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onClose = () => {
     setIsVisible(false);
@@ -70,6 +77,18 @@ const DeleteLinkDialogComponent = (props) => {
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
+          if (filterObj.key !== res.sharedTo.requestToken) {
+            addPrimaryKeyToLink(link, roomId);
+          }
+        }
+
+        if (isCustomRoom && filterObj.key) {
+          removePrimaryKeyInLink(roomId);
+        }
       })
       .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
@@ -170,10 +189,16 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     setDeleteLinkDialogVisible: setIsVisible,
     linkParams,
   } = dialogsStore;
-  const { editExternalLink, deleteExternalLink } = publicRoomStore;
+  const {
+    editExternalLink,
+    deleteExternalLink,
+    addPrimaryKeyToLink,
+    removePrimaryKeyInLink,
+  } = publicRoomStore;
   const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
+    linkParams,
     visible,
     setIsVisible,
     roomId: linkParams.roomId,
@@ -184,5 +209,7 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
+    addPrimaryKeyToLink,
+    removePrimaryKeyInLink,
   };
 })(observer(DeleteLinkDialog));

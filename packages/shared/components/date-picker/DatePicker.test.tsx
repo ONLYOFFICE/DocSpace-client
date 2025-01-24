@@ -26,13 +26,16 @@
 
 import React from "react";
 import moment from "moment";
-
-import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
+import { screen, render } from "@testing-library/react";
 import { DatePicker } from "./DatePicker";
-// import { Calendar } from "../calendar";
-// import { InputBlock } from "../input-block";
+
+// Mock selector-add-button
+jest.mock("../selector-add-button", () => ({
+  SelectorAddButton: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="mock-selector-add-button">{children}</div>
+  ),
+}));
 
 const selectedDate = new Date("09/12/2019");
 const minDate = new Date("01/01/1970");
@@ -44,9 +47,9 @@ describe("DatePicker tests", () => {
       <DatePicker
         minDate={minDate}
         maxDate={maxDate}
-        selectDateText="Select date"
         initialDate={selectedDate}
         onChange={() => {}}
+        selectDateText="Select date"
         locale="en"
         openDate={moment()}
       />,

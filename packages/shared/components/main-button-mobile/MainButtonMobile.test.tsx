@@ -25,22 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent, render } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
+
 import { MainButtonMobile } from ".";
 import { ButtonOption } from "./MainButtonMobile.types";
 
-import { Base } from "../../themes";
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 jest.mock("PUBLIC_DIR/images/button.alert.react.svg", () => ({
   __esModule: true,
   default: () => <div className="alertIcon" data-testid="alert-icon" />,
 }));
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 describe("<MainButtonMobile />", () => {
   const mockOnClick = jest.fn();

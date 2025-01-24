@@ -53,11 +53,9 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
-import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
@@ -259,7 +257,8 @@ const LoginForm = ({
 
     let hasError = false;
 
-    const user = identifier.trim();
+    const user =
+      typeof identifier === "string" ? identifier.trim() : identifier[0].trim();
 
     if (!user) {
       hasError = true;
@@ -404,7 +403,8 @@ const LoginForm = ({
         return res;
       })
       .then(async (res: string | object | undefined) => {
-        const tfaIsEnabled = typeof res === "string" ? true : res?.tfa;
+        const tfaIsEnabled =
+          typeof res === "string" ? true : (res as { tfa?: boolean })?.tfa;
 
         if (isPublicAuth && !tfaIsEnabled) {
           localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
@@ -562,10 +562,14 @@ const LoginForm = ({
       )}
 
       <EmailContainer
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         isEmailErrorShow={isEmailErrorShow}
         errorText={errorText}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         isLoading={isLoading}
         onChangeLogin={onChangeLogin}
         onBlurEmail={onBlurEmail}
@@ -576,7 +580,11 @@ const LoginForm = ({
       />
       <PasswordContainer
         isLoading={isLoading}
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         passwordValid={passwordValid}
         passwordErrorMessage={passwordErrorMessage}
         password={password}
@@ -585,7 +593,7 @@ const LoginForm = ({
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
         isChecked={isChecked}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         onChangeCheckbox={onChangeCheckbox}
       />
 

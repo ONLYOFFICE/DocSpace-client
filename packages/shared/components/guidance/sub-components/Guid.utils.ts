@@ -108,7 +108,9 @@ export const getHeaderText = (state: number, t: TTranslation) => {
     case FormFillingTipsState.Sharing:
       return {
         header: t("HeaderSharing"),
-        description: t("TitleSharing"),
+        description: t("TitleSharing", {
+          productName: t("Common:ProductName"),
+        }),
       };
     case FormFillingTipsState.Submitting:
       return {
@@ -123,7 +125,9 @@ export const getHeaderText = (state: number, t: TTranslation) => {
     case FormFillingTipsState.Uploading:
       return {
         header: t("HeaderUploading"),
-        description: t("TitleUploading"),
+        description: t("TitleUploading", {
+          productName: t("Common:ProductName"),
+        }),
       };
 
     default:

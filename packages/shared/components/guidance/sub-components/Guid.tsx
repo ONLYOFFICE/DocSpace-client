@@ -55,7 +55,7 @@ const Guid = ({
 }: GuidProps) => {
   const theme = useTheme();
 
-  const { t } = useTranslation(["FormFillingTipsDialog"]);
+  const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
 
   const { isRTL } = useInterfaceDirection();
 

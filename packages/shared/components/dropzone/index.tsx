@@ -26,12 +26,13 @@
 
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import classNames from "classnames";
 
 import { Loader, LoaderTypes } from "../loader";
 import { ColorTheme, ThemeId } from "../color-theme";
 
-import StyledDropzone from "./Dropzone.styled";
 import { DropzoneProps } from "./Dropzone.types";
+import styles from "./Dropzone.module.scss";
 
 const Dropzone = ({
   isLoading,
@@ -53,25 +54,39 @@ const Dropzone = ({
   });
 
   return (
-    <StyledDropzone $isLoading={isLoading} data-testid="dropzone">
+    <div
+      className={classNames(styles.dropzoneWrapper, {
+        [styles.isLoading]: isLoading,
+      })}
+      data-testid="dropzone"
+    >
       {isLoading ? (
         <Loader
-          className="dropzone_loader"
+          className={styles.dropzoneLoader}
           size="30px"
           type={LoaderTypes.track}
         />
       ) : null}
-      <div {...getRootProps({ className: "dropzone" })}>
+      <div {...getRootProps({ className: styles.dropzone })}>
         <input {...getInputProps()} />
-        <div className="dropzone-link">
-          <ColorTheme className="dropzone-link-main" themeId={ThemeId.Link}>
+        <div className={styles.dropzoneLink}>
+          <ColorTheme
+            className={classNames(styles.dropzoneLink, { [styles.main]: true })}
+            themeId={ThemeId.Link}
+          >
             {linkMainText}
           </ColorTheme>
-          <span className="dropzone-link-secondary">{linkSecondaryText}</span>
+          <span
+            className={classNames(styles.dropzoneLink, {
+              [styles.secondary]: true,
+            })}
+          >
+            {linkSecondaryText}
+          </span>
         </div>
-        <div className="dropzone-exsts">{exstsText}</div>
+        <div className={styles.dropzoneExsts}>{exstsText}</div>
       </div>
-    </StyledDropzone>
+    </div>
   );
 };
 

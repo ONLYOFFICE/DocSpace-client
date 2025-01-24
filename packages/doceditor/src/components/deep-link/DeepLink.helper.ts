@@ -47,7 +47,7 @@ const openDeepLink = (
 ) => {
   const time = isSafari ? 3000 : 1000;
   let timeout: NodeJS.Timeout;
-  let interval: NodeJS.Timer;
+  let interval: NodeJS.Timeout;
   let visible: DocumentVisibilityState = "visible";
 
   const handleOpen = () => {
@@ -56,7 +56,7 @@ const openDeepLink = (
   };
   const handleResponse = () => {
     if (visible === "visible") return options?.onFail?.();
-    clearInterval(interval);
+    if (interval) clearInterval(interval);
     handleOpen();
   };
 

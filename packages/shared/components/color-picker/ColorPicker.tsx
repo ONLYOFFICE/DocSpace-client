@@ -64,11 +64,23 @@ const ColorPicker = ({
   };
 
   return (
-    <div className={classNames(styles.wrapper, className)} id={id}>
+    <div
+      className={classNames(styles.wrapper, className)}
+      id={id}
+      data-testid="color-picker"
+      role="dialog"
+      aria-label="Color picker"
+    >
       {isPickerOnly ? (
         <div className={styles.hexHeader}>
           <div className={styles.hexText}>
-            <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
+            <Text
+              fontSize="16px"
+              lineHeight="22px"
+              fontWeight={700}
+              truncate
+              data-testid="color-picker-title"
+            >
               {t("Custom")}
             </Text>
           </div>
@@ -79,28 +91,45 @@ const ColorPicker = ({
               onClick={onClose}
               iconName={CrossIconSvgUrl}
               isFill
+              data-testid="color-picker-close"
+              aria-label="Close color picker"
             />
           </div>
         </div>
       ) : null}
 
-      <div className={styles.hexColorPicker}>
-        <HexColorPicker color={color} onChange={onColorChange} />
+      <div className={styles.hexColorPicker} data-testid="color-picker-content">
+        <HexColorPicker
+          color={color}
+          onChange={onColorChange}
+          aria-label="Color selector"
+        />
 
         {!isPickerOnly ? (
-          <div className={styles.hexValueContainer}>
-            <Text className={styles.hexValueLabel}>{hexCodeLabel}:</Text>
+          <div
+            className={styles.hexValueContainer}
+            data-testid="color-picker-hex-container"
+          >
+            <Text
+              className={styles.hexValueLabel}
+              data-testid="color-picker-hex-label"
+            >
+              {hexCodeLabel}:
+            </Text>
             <HexColorInput
               prefixed
               color={color}
               onChange={onColorChange}
               className={styles.hexValue}
+              data-testid="color-picker-hex-input"
+              aria-label="Hex color value"
+              spellCheck="false"
             />
           </div>
         ) : null}
 
         {!isPickerOnly ? (
-          <div className={styles.hexButton}>
+          <div className={styles.hexButton} data-testid="color-picker-buttons">
             <Button
               className={styles.applyButton}
               primary
@@ -108,6 +137,8 @@ const ColorPicker = ({
               size={ButtonSize.small}
               label={applyButtonLabel}
               onClick={() => onApply(color)}
+              testId="color-picker-apply"
+              aria-label={applyButtonLabel}
             />
             <Button
               className={styles.cancelButton}
@@ -115,6 +146,8 @@ const ColorPicker = ({
               size={ButtonSize.small}
               label={cancelButtonLabel}
               onClick={onClose}
+              testId="color-picker-cancel"
+              aria-label={cancelButtonLabel}
             />
           </div>
         ) : null}

@@ -42,12 +42,12 @@ export type ColorPickerProps = {
   isPickerOnly: boolean;
 
   /** Callback function triggered when the color is applied
-   * @param color - The selected color in hex format (e.g., "#FF0000")
+   * @param color - The selected color in hex format
    * @returns void
    */
   onApply?: (color: string) => void;
 
-  /** The currently selected color in hex format (e.g., "#FF0000") */
+  /** The currently selected color in hex format */
   appliedColor: string;
 
   /** Custom label for the apply button
@@ -61,7 +61,7 @@ export type ColorPickerProps = {
   cancelButtonLabel?: string;
 
   /** Callback function triggered on every color change
-   * @param color - The current color in hex format (e.g., "#FF0000")
+   * @param color - The current color in hex format
    * @returns void
    */
   handleChange?: (color: string) => void;

@@ -36,7 +36,7 @@ import styles from "./Dropzone.module.scss";
 
 const Dropzone = ({
   isLoading,
-  isDisabled,
+  isDisabled = false,
   onDrop,
   accept,
   maxFiles = 0,
@@ -48,7 +48,6 @@ const Dropzone = ({
     maxFiles,
     noClick: isDisabled,
     noKeyboard: isDisabled,
-    // maxSize: 1000000,
     accept,
     onDrop,
   });
@@ -59,6 +58,8 @@ const Dropzone = ({
         [styles.isLoading]: isLoading,
       })}
       data-testid="dropzone"
+      aria-busy={isLoading}
+      aria-disabled={isDisabled}
     >
       {isLoading ? (
         <Loader
@@ -66,26 +67,54 @@ const Dropzone = ({
           size="30px"
           type={LoaderTypes.track}
         />
-      ) : null}
-      <div {...getRootProps({ className: styles.dropzone })}>
-        <input {...getInputProps()} />
-        <div className={styles.dropzoneLink}>
-          <ColorTheme
-            className={classNames(styles.dropzoneLink, { [styles.main]: true })}
-            themeId={ThemeId.Link}
-          >
-            {linkMainText}
-          </ColorTheme>
-          <span
-            className={classNames(styles.dropzoneLink, {
-              [styles.secondary]: true,
+      ) : (
+        <div
+          {...getRootProps({
+            className: styles.dropzone,
+            "aria-label": "File upload area",
+            "data-testid": "dropzone-input-area",
+          })}
+        >
+          <input
+            disabled={isDisabled}
+            {...getInputProps({
+              "aria-label": "File input",
+              "data-testid": "dropzone-input",
             })}
+          />
+          <div
+            className={styles.dropzoneLink}
+            data-testid="dropzone-text"
+            aria-live="polite"
+            aria-relevant="additions removals"
           >
-            {linkSecondaryText}
-          </span>
+            <ColorTheme
+              className={classNames(styles.dropzoneLink, {
+                [styles.main]: true,
+              })}
+              themeId={ThemeId.Link}
+              data-testid="dropzone-main-text"
+            >
+              {linkMainText}
+            </ColorTheme>
+            <span
+              className={classNames(styles.dropzoneLink, {
+                [styles.secondary]: true,
+              })}
+              data-testid="dropzone-secondary-text"
+            >
+              {linkSecondaryText}
+            </span>
+          </div>
+          <div
+            className={styles.dropzoneExsts}
+            data-testid="dropzone-file-types"
+            aria-label="Supported file types"
+          >
+            {exstsText}
+          </div>
         </div>
-        <div className={styles.dropzoneExsts}>{exstsText}</div>
-      </div>
+      )}
     </div>
   );
 };

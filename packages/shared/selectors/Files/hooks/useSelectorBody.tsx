@@ -76,7 +76,6 @@ const useSelectorBody = ({
   // header props
   withHeader,
   headerProps,
-  headerLabel,
 
   // search input
   withSearch,
@@ -140,7 +139,7 @@ const useSelectorBody = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel,
+          headerLabel: headerProps?.headerLabel || t("Common:Select"),
           onCloseClick: onCancel,
         },
       }

@@ -37,12 +37,12 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+// const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 
 const path = require("path");
 const runtime = require("../runtime.json");
 const pkg = require("./package.json");
-const deps = pkg.dependencies || {};
+// const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -108,9 +108,15 @@ const config = {
       COMMON_DIR: path.resolve(__dirname, "../common"),
       "@docspace/shared": path.resolve(__dirname, "../shared"),
       "@docspace/shared/utils": path.resolve(__dirname, "../shared/utils"),
-      "@docspace/shared/components": path.resolve(__dirname, "../shared/components"),
-      "@docspace/shared/skeletons": path.resolve(__dirname, "../shared/skeletons"),
-      "@docspace/shared/enums": path.resolve(__dirname, "../shared/enums")
+      "@docspace/shared/components": path.resolve(
+        __dirname,
+        "../shared/components"
+      ),
+      "@docspace/shared/skeletons": path.resolve(
+        __dirname,
+        "../shared/skeletons"
+      ),
+      "@docspace/shared/enums": path.resolve(__dirname, "../shared/enums"),
     },
     fallback: {
       crypto: false,
@@ -336,8 +342,31 @@ module.exports = (env, argv) => {
       remotes: remotes,
       exposes: {},
       shared: {
-        ...deps,
-        ...sharedDeps,
+        react: {
+          singleton: true,
+          requiredVersion: "18.3.1",
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "18.3.1",
+        },
+
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "6.27.0",
+        },
+        "styled-components": {
+          singleton: true,
+          requiredVersion: "5.3.11",
+        },
+        mobx: {
+          singleton: true,
+          requiredVersion: "6.13.5",
+        },
+        "mobx-react": {
+          singleton: true,
+          requiredVersion: "7.6.0",
+        },
       },
     })
   );

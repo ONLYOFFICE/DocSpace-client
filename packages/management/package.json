@@ -4,13 +4,13 @@
   "private": true,
   "homepage": "/management",
   "scripts": {
-    "build": "pnpm build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
+    "build": "webpack --mode production",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r dist/* ../../../publish/web/management",
-    "start": "pnpm build && pnpm build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
+    "start": "webpack-cli serve",
     "start-prod": "ws --port 5015 --directory dist --spa index.html",
-    "start:internal": "pnpm build && pnpm build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
+    "start:internal": "webpack-cli serve",
     "start-prod:internal": "ws --port 5015 --directory dist --spa index.html"
   },
   "dependencies": {
@@ -78,5 +78,45 @@
     "webpack-merge": "catalog:",
     "webpack": "catalog:"
   },
-  "title": "ONLYOFFICE"
+  "title": "ONLYOFFICE",
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start:internal": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start-prod": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod:internal": {
+        "dependsOn": [
+          "build:translations",
+          "build"
+        ]
+      },
+      "lint": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      }
+    }
+  }
 }

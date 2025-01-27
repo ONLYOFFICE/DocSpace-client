@@ -1439,6 +1439,18 @@
 }
 
 .light {
+  --color-picker-border: 1px solid #{$gray-strong};
+  --color-picker-background: #{$white};
+  --color-picker-color: #{$gray-text};
+}
+
+.dark {
+  --color-picker-border: 1px solid #{$gray-dark-strong};
+  --color-picker-background: #{$dark-gray-light};
+  --color-picker-color: #{$gray-dark-text};
+}
+
+.light {
   --calendar-title-color: #{$gray-text};
   --calendar-outline-color: #{$gray-light-mid};
   --calendar-arrow-color: #{$gray-text};

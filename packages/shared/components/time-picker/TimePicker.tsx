@@ -195,7 +195,7 @@ const TimePicker = ({
         [styles.isFocused]: isInputFocused,
       })}
       ref={forwardedRef}
-      data-test-id="time-picker"
+      data-testid="time-picker"
       role="group"
       aria-label="Time picker"
     >

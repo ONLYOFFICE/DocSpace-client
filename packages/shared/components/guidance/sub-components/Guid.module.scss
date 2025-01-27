@@ -15,7 +15,7 @@
     height: auto;
     max-height: 280px;
     width: 430px;
-    border-radius: 6px;
+    border-radius: 11px;
 
     &.autoMaxHeight {
       max-height: unset;
@@ -45,7 +45,6 @@
   margin: 0 auto;
   min-height: auto;
   position: absolute;
-  border-radius: 11px;
 
   &.directionLeft {
     inset-inline-start: var(--manual-x);
@@ -73,27 +72,35 @@
         white-space: normal;
       }
     }
-  }
 
-  .modal-body {
-    padding: 0px 18px 0px;
-  }
+    .modal-body {
+      padding: 0px 18px 0px;
+    }
 
-  .modal-footer {
-    justify-content: space-between;
-    margin-bottom: 0px !important;
-    padding: 12px 20px 20px;
-  }
+    .modal-footer {
+      justify-content: space-between;
+      margin-bottom: 0px !important;
+      padding: 12px 20px 20px;
+    }
 
-  .button-container {
-    gap: 8px;
-    display: flex;
-  }
+    .button-container {
+      gap: 8px;
+      display: flex;
+    }
 
-  .circle-container {
-    align-items: center;
-    display: flex;
-    gap: 10px;
+    .circle-container {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+    }
+
+    [data-testid="icon-button-svg"] {
+      position: relative;
+      right: -5px;
+      bottom: 3px;
+      width: 14px;
+      height: 14px;
+    }
   }
 }
 
@@ -131,6 +138,8 @@
   background-color: var(--form-filling-tips-circle-background-color);
 
   &.isSelected {
+    width: 6px;
+    height: 6px;
     border: var(--form-filling-tips-circle-border);
     background-color: var(--form-filling-tips-circle-selected-background-color);
   }

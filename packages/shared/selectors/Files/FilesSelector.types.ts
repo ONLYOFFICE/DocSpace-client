@@ -237,8 +237,6 @@ export type FilesSelectorProps = TSelectorHeader &
       isDisabledFolder?: boolean,
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
-    withHeader: boolean;
-    headerLabel: string;
     submitButtonLabel: string;
     withCancelButton: boolean;
     withFooterInput: boolean;

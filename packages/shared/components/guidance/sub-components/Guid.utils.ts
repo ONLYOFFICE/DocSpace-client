@@ -26,10 +26,13 @@
 
 import { TTranslation } from "@docspace/shared/types";
 import { FormFillingTipsState } from "../../../enums";
+import { isTablet } from "../../../utils";
 
 const GUID_SHARE_OFFSET = 2;
-const GUID_UPLOADING_OFFSET = 5;
+const GUID_UPLOADING_OFFSET = 9;
 const ROW_VIEW_OFFSET = 15;
+const TILE_VIEW_OFFSET = 4;
+const TILE_VIEW_POSITION_OFFSET = 2;
 
 type GuidRectsProps = {
   pdf: DOMRect;
@@ -46,13 +49,24 @@ export const getGuidPosition = (
   switch (state) {
     case FormFillingTipsState.Starting:
       return {
-        width: viewAs === "row" || viewAs === "table" ? 0 : guidRects.pdf.width,
-        height: guidRects.pdf.height,
+        width:
+          viewAs === "row" || viewAs === "table"
+            ? 0
+            : guidRects.pdf.width + TILE_VIEW_OFFSET,
+        height:
+          viewAs === "tile"
+            ? guidRects.pdf.height + TILE_VIEW_OFFSET
+            : guidRects.pdf.height,
         left:
           viewAs === "row"
             ? guidRects.pdf.left - ROW_VIEW_OFFSET
-            : guidRects.pdf.left,
-        top: guidRects.pdf.top,
+            : viewAs === "tile"
+              ? guidRects.pdf.left - TILE_VIEW_POSITION_OFFSET
+              : guidRects.pdf.left,
+        top:
+          viewAs === "tile"
+            ? guidRects.pdf.top - TILE_VIEW_POSITION_OFFSET
+            : guidRects.pdf.top,
         bottom: guidRects.pdf.bottom,
       };
 
@@ -68,23 +82,38 @@ export const getGuidPosition = (
     case FormFillingTipsState.Submitting:
     case FormFillingTipsState.Complete:
       return {
-        width: viewAs === "row" || viewAs === "table" ? 0 : guidRects.pdf.width,
-        height: guidRects.ready.height,
+        width:
+          viewAs === "row" || viewAs === "table"
+            ? 0
+            : guidRects.ready.width + TILE_VIEW_OFFSET,
+        height:
+          viewAs === "tile"
+            ? guidRects.ready.height + TILE_VIEW_OFFSET
+            : guidRects.ready.height,
         left:
           viewAs === "row"
             ? guidRects.ready.left - ROW_VIEW_OFFSET
-            : guidRects.ready.left,
-        top: guidRects.ready.top,
+            : viewAs === "tile"
+              ? guidRects.ready.left - TILE_VIEW_POSITION_OFFSET
+              : guidRects.ready.left,
+        top:
+          viewAs === "tile"
+            ? guidRects.ready.top - TILE_VIEW_POSITION_OFFSET
+            : guidRects.ready.top,
         bottom: guidRects.ready.bottom,
       };
 
     case FormFillingTipsState.Uploading:
       return {
-        width: guidRects.uploading.width + GUID_UPLOADING_OFFSET * 2,
-        height: guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2,
+        width: isTablet()
+          ? guidRects.uploading.width + GUID_UPLOADING_OFFSET * 2
+          : guidRects.uploading.width * 2,
+        height: isTablet()
+          ? guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2
+          : guidRects.uploading.height * 2,
         left: guidRects.uploading.left - GUID_UPLOADING_OFFSET,
         top: guidRects.uploading.top - GUID_UPLOADING_OFFSET,
-        bottom: guidRects.uploading.bottom,
+        bottom: guidRects.uploading.bottom + GUID_UPLOADING_OFFSET,
       };
 
     default:

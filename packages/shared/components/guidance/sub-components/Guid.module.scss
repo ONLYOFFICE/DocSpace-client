@@ -108,6 +108,10 @@
   position: absolute;
   border-radius: 7px;
   backdrop-filter: var(--backdrop-filter-value);
+
+  &.smallBorderRadius {
+    border-radius: 4px;
+  }
 }
 
 .guidBackdrop {

@@ -52,6 +52,7 @@ const Guid = ({
   onClose,
   position,
   infoPanelVisible,
+  viewAs,
 }: GuidProps) => {
   const theme = useTheme();
 
@@ -180,7 +181,9 @@ const Guid = ({
       ? `${position.width}px`
       : infoPanelVisible
         ? "calc(100% - 650px)"
-        : "100%",
+        : viewAs === "row"
+          ? "calc(100% - 63px)"
+          : "calc(100% - 253px)",
     height: `${position.height}px`,
   };
 
@@ -190,7 +193,14 @@ const Guid = ({
         className={classNames(styles.guidBackdrop)}
         onClick={onCloseBackdrop}
       />
-      <div className={classNames(styles.guidElement)} style={clippedStyles} />
+      <div
+        className={classNames(styles.guidElement, {
+          [styles.smallBorderRadius]:
+            formFillingTipsNumber === FormFillingTipsState.Sharing ||
+            formFillingTipsNumber === FormFillingTipsState.Uploading,
+        })}
+        style={clippedStyles}
+      />
       <div
         id="modal-onMouseDown-close"
         role="dialog"

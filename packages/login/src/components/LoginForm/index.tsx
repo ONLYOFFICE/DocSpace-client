@@ -543,7 +543,7 @@ const LoginForm = ({
     }
   };
 
-  const passwordErrorMessage = errorMessage();
+  const passwordErrorMessage = errorMessage() || "";
 
   return (
     <form className="auth-form-container">

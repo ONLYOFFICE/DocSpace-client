@@ -31,11 +31,6 @@ import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";
 import type { TColorScheme, TTheme } from "../../themes";
 
-import type { DeviceType } from "../../enums";
-import type { TUser } from "../../api/people/types";
-import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme, TTheme } from "../../themes";
-
 export type ErrorBoundaryProps = PropsWithChildren & {
   /** Callback function to be called when an error occurs */
   onError?: VoidFunction;

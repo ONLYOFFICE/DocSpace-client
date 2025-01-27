@@ -33,7 +33,8 @@ import { getStepsData } from "./Stepper";
 import SelectFileLoader from "../sub-components/SelectFileLoader";
 import StepLayout from "../sub-components/StepLayout";
 
-import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
+import { InjectedWorkspaceProps, WorkspaceProps } from "../types";
+import type { TFunction } from "i18next";
 
 const GoogleWorkspace = (props: WorkspaceProps) => {
   const {
@@ -47,7 +48,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     setIsMigrationInit,
   } = props as InjectedWorkspaceProps;
 
-  const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
+  const { t, ready }: { t: TFunction; ready: boolean } = useTranslation([
     "Common",
     "SMTPSettings",
     "Settings",

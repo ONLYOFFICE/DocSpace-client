@@ -204,12 +204,13 @@ const TfaActivationForm = ({
             t={t}
             i18nKey="SetAppInstallDescription"
             ns="Confirm"
-            key={secretKey}
-          >
-            To connect your apllication scan the QR code or manually enter your
-            secret key <strong>{{ secretKey }}</strong> then enter 6-digit code
-            from your application in the field below.
-          </Trans>
+            values={{
+              secretKey,
+            }}
+            components={{
+              1: <strong />,
+            }}
+          />
         </Text>
       </Box>
       <FormWrapper id="tfa-activation-form">

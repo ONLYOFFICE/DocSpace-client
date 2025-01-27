@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
 import { Trans } from "react-i18next";
-
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
 
@@ -44,6 +43,7 @@ import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 import { isFolder } from "../../utils/typeGuards";
 
+import type { TFunction } from "i18next";
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
@@ -283,7 +283,7 @@ export const getRoleNameByAccessRight = (
 
 export const getTranslationDate = (
   expirationDate: TFileLink["sharedTo"]["expirationDate"],
-  t: TTranslation,
+  t: TFunction,
 ) => {
   if (expirationDate) {
     const date = getDate(expirationDate);
@@ -335,7 +335,7 @@ export const canShowManageLink = (
 
 export const copyRoomShareLink = (
   link: TFileLink,
-  t: TTranslation,
+  t: TFunction,
   withCopy = true,
   linkOptions?: {
     canShowLink: boolean;
@@ -393,7 +393,7 @@ export const copyRoomShareLink = (
 
 export const copyDocumentShareLink = (
   link: TFileLink,
-  t: TTranslation,
+  t: TFunction,
   linkOptions?: {
     canShowLink: boolean;
     onClickLink: VoidFunction;

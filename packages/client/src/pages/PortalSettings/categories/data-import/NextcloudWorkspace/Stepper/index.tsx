@@ -38,9 +38,9 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-import { TFunciton } from "../../types";
+import type { TFunction } from "i18next";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
   return [
     {
       title: t("Common:SelectFile"),

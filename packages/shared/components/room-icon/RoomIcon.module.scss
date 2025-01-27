@@ -50,9 +50,14 @@
           height: var(--room-icon-size);
 
           path {
-            fill: var(--room-icon-color);
+            fill: var(--room-icon-color, var(--room-icon-button-color));
           }
         }
+      }
+
+      .room-image {
+        width: 24px;
+        height: 24px;
       }
 
       .room-title {

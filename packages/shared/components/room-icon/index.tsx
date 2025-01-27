@@ -199,7 +199,7 @@ const RoomIcon = ({
           {
             "--room-icon-size": size,
             "--room-icon-radius": radius,
-            "--room-icon-color": `#${color}`,
+            "--room-icon-color": color ? `#${color}` : null,
             "--room-icon-text-color": textColor,
             "--room-icon-cover-size": coverSize / 20,
           } as React.CSSProperties

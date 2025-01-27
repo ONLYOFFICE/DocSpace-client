@@ -440,7 +440,7 @@
     {
       "label": "Frontend | storybook",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm storybook",
+      "command": "cd ${workspaceFolder} ; pnpm nx storybook @docspace/shared",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -455,7 +455,7 @@
     {
       "label": "Frontend | storybook prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm storybook-build ; pnpm storybook-serve",
+      "command": "cd ${workspaceFolder} ; pnpm nx storybook-serve @docspace/shared",
       "group": {
         "kind": "build",
         "isDefault": true

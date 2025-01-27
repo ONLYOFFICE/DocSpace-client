@@ -11,11 +11,11 @@
     },
     "build": {
       "cache": true,
-      "outputs": [
-        "{projectRoot}/.next",
-        "{projectRoot}/dist",
-        "{projectRoot}/storybook-static"
-      ]
+      "outputs": ["{projectRoot}/.next", "{projectRoot}/dist"]
+    },
+    "storybook-build": {
+      "cache": true,
+      "outputs": ["{projectRoot}/storybook-static"]
     }
   },
   "defaultBase": "develop"

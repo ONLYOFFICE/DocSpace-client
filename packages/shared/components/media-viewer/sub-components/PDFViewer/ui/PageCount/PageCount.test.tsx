@@ -28,6 +28,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { PageCount } from "./PageCount";
+import { PageCountRef } from "./PageCount.props";
 
 jest.mock("react-device-detect", () => ({
   isMobile: false,
@@ -35,14 +36,14 @@ jest.mock("react-device-detect", () => ({
 
 // Mock PanelReactSvg
 jest.mock("PUBLIC_DIR/images/panel.react.svg", () => {
-  return function DummyPanelSvg(props: any) {
-    return <div {...props}>Panel Icon</div>;
+  return function DummyPanelSvg() {
+    return <div>Panel Icon</div>;
   };
 });
 
 // Mock classnames
 jest.mock("classnames", () => {
-  return function dummyClassnames(...args: any[]) {
+  return function dummyClassnames(...args: unknown[]) {
     return args.join(" ");
   };
 });
@@ -69,7 +70,7 @@ describe("PageCount", () => {
   });
 
   it("renders correctly when visible", () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<PageCountRef>();
     render(<PageCount {...defaultProps} ref={ref} />);
 
     expect(screen.getByTestId("page-count")).toBeInTheDocument();
@@ -79,7 +80,7 @@ describe("PageCount", () => {
   });
 
   it("does not render when not visible", () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<PageCountRef>();
     render(<PageCount {...defaultProps} visible={false} ref={ref} />);
 
     expect(screen.queryByTestId("page-count")).not.toBeInTheDocument();

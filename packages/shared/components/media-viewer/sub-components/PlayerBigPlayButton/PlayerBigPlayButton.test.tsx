@@ -24,18 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { PlayerBigPlayButton } from ".";
 
 // Mock BigIconPlay SVG component
 jest.mock("PUBLIC_DIR/images/media.bgplay.react.svg", () => {
-  const DummyBigIconPlay = React.forwardRef((props: any, ref) => (
-    <div {...props} ref={ref}>
-      Play Icon
-    </div>
-  ));
+  const DummyBigIconPlay = React.forwardRef<HTMLDivElement>(
+    (props: React.HTMLAttributes<HTMLDivElement>, ref) => (
+      <div {...props} ref={ref}>
+        Play Icon
+      </div>
+    ),
+  );
   DummyBigIconPlay.displayName = "BigIconPlay";
   return DummyBigIconPlay;
 });

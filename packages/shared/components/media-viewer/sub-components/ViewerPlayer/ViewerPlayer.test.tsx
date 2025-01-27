@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { ReactNode } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ViewerPlayer } from "./index";
@@ -58,18 +58,32 @@ jest.mock(
 );
 jest.mock("PUBLIC_DIR/images/media.viewer.audio.react.svg", () => "audio.svg");
 
+interface TextProps {
+  children: React.ReactNode;
+  [key: string]: React.HTMLAttributes<HTMLElement> | React.ReactNode;
+}
 // Mock external components
 jest.mock("../../../../components/text", () => ({
-  Text: ({ children, ...props }: any) => <span {...props}>{children}</span>,
+  Text: ({ children, ...props }: TextProps) => (
+    <span {...props}>{children}</span>
+  ),
 }));
 
 jest.mock("react-svg", () => ({
-  ReactSVG: ({ src }: any) => <div data-testid="svg-icon" data-src={src} />,
+  ReactSVG: ({ src }: { src: string }) => (
+    <div data-testid="svg-icon" data-src={src} />
+  ),
 }));
 
 // Mock child components
 jest.mock("../PlayerBigPlayButton", () => ({
-  PlayerBigPlayButton: ({ onClick, visible }: any) => (
+  PlayerBigPlayButton: ({
+    onClick,
+    visible,
+  }: {
+    onClick: () => void;
+    visible: boolean;
+  }) => (
     <div
       data-testid="big-play-button"
       onClick={onClick}
@@ -81,7 +95,7 @@ jest.mock("../PlayerBigPlayButton", () => ({
 }));
 
 jest.mock("../ViewerLoader", () => ({
-  ViewerLoader: ({ isLoading }: any) => (
+  ViewerLoader: ({ isLoading }: { isLoading: boolean }) => (
     <div
       data-testid="viewer-loader"
       style={{ display: isLoading ? "block" : "none" }}
@@ -92,7 +106,13 @@ jest.mock("../ViewerLoader", () => ({
 }));
 
 jest.mock("../PlayerPlayButton", () => ({
-  PlayerPlayButton: ({ isPlaying, onClick }: any) => (
+  PlayerPlayButton: ({
+    isPlaying,
+    onClick,
+  }: {
+    isPlaying: boolean;
+    onClick: () => void;
+  }) => (
     <div
       data-testid="play-button"
       onClick={onClick}
@@ -105,14 +125,14 @@ jest.mock("../PlayerPlayButton", () => ({
 
 jest.mock("../PlayerTimeline", () => ({
   PlayerTimeline: React.forwardRef(function PlayerTimelineMock(
-    { value, onChange }: any,
+    { onChange }: { onChange: (value: number) => void },
     ref: React.Ref<HTMLDivElement>,
   ) {
     React.useImperativeHandle(
       ref,
       () =>
         ({
-          setProgress: jest.fn(),
+          setProgress: onChange,
         }) as unknown as HTMLDivElement,
     );
 
@@ -130,7 +150,12 @@ jest.mock("../PlayerVolumeControl", () => ({
     isMuted,
     onChange,
     toggleVolumeMute,
-  }: any) => (
+  }: {
+    volume: number;
+    isMuted: boolean;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    toggleVolumeMute: () => void;
+  }) => (
     <div data-testid="volume-control">
       <button
         type="button"
@@ -145,7 +170,13 @@ jest.mock("../PlayerVolumeControl", () => ({
 }));
 
 jest.mock("../PlayerFullScreen", () => ({
-  PlayerFullScreen: ({ isAudio, isFullScreen, onClick }: any) => (
+  PlayerFullScreen: ({
+    isFullScreen,
+    onClick,
+  }: {
+    isFullScreen: boolean;
+    onClick: () => void;
+  }) => (
     <div data-testid="fullscreen-button" onClick={onClick}>
       {isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"}
     </div>
@@ -153,14 +184,20 @@ jest.mock("../PlayerFullScreen", () => ({
 }));
 
 jest.mock("../MessageError", () => ({
-  MessageError: ({ errorTitle }: any) => (
+  MessageError: ({ errorTitle }: { errorTitle: string }) => (
     <div data-testid="message-error">{errorTitle}</div>
   ),
 }));
 
 jest.mock("../PlayerDesktopContextMenu", () => ({
   PlayerDesktopContextMenu: jest.fn(
-    ({ onDownloadClick, generateContextMenu }: any) => (
+    ({
+      onDownloadClick,
+      generateContextMenu,
+    }: {
+      onDownloadClick: () => void;
+      generateContextMenu: () => void;
+    }) => (
       <div data-testid="context-menu">
         <div data-testid="download-button" onClick={onDownloadClick} />
         <div data-testid="context-menu-button" onClick={generateContextMenu} />
@@ -172,7 +209,7 @@ jest.mock("../PlayerDesktopContextMenu", () => ({
 // Mock lodash/omit
 jest.mock("lodash/omit", () => ({
   __esModule: true,
-  default: (obj: any, keys: string[]) => {
+  default: (obj: Record<string, unknown>, keys: string[]) => {
     const result = { ...obj };
     keys.forEach((key) => delete result[key]);
     return result;
@@ -200,15 +237,23 @@ jest.mock("@react-spring/web", () => ({
     },
   ],
   animated: {
-    div: ({ children, style, ...props }: any) => (
+    div: ({
+      children,
+      style,
+      ...props
+    }: React.HTMLAttributes<HTMLDivElement>) => (
       <div style={{ ...style }} {...props}>
         {children}
       </div>
     ),
-    video: ({ children, style, ...props }: any) => (
+    video: ({
+      children,
+      style,
+      ...props
+    }: React.HTMLAttributes<HTMLVideoElement>) => (
       <video data-testid="media-player" style={{ ...style }} {...props}>
         <track kind="captions" srcLang="en" src="captions.vtt" />
-        {children}
+        {children as ReactNode}
       </video>
     ),
   },

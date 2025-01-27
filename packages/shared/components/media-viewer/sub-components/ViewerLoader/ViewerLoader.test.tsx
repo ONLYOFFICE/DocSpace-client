@@ -56,12 +56,12 @@ describe("ViewerLoader", () => {
   });
 
   it("does not render when isError is true", () => {
-    render(<ViewerLoader {...defaultProps} isError={true} />);
+    render(<ViewerLoader {...defaultProps} isError />);
     expect(screen.queryByTestId("viewer-loader")).not.toBeInTheDocument();
   });
 
   it("adds background class when withBackground is true", () => {
-    render(<ViewerLoader {...defaultProps} withBackground={true} />);
+    render(<ViewerLoader {...defaultProps} withBackground />);
     const wrapper = screen.getByTestId("viewer-loader-wrapper");
     expect(wrapper).toHaveClass("withBackground");
   });

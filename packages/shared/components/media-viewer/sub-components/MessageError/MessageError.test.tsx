@@ -80,7 +80,7 @@ describe("MessageError", () => {
   });
 
   it("renders only delete and download buttons in mobile view", () => {
-    render(<MessageError {...defaultProps} isMobile={true} />);
+    render(<MessageError {...defaultProps} isMobile />);
 
     const toolbar = screen.getByTestId("message-error-toolbar");
     expect(toolbar).toBeInTheDocument();

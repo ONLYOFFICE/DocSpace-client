@@ -104,8 +104,6 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
-  silver,
-  highlandGray,
 
   blurDark,
   darkGreyAction,

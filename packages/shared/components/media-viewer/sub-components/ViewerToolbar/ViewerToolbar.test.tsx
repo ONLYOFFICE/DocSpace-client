@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ContextMenu } from "../../../context-menu/ContextMenu";
 import { ToolbarActionType } from "../../MediaViewer.enums";
@@ -36,8 +35,10 @@ const DotsIcon = () => <div data-testid="dots-icon">Dots</div>;
 
 // Mock useClickOutside hook
 jest.mock("../../../../utils/useClickOutside", () => ({
-  useClickOutside: (ref: any, callback: () => void) => {
+  useClickOutside: (ref: HTMLElement, callback: () => void) => {
     // Mock implementation that just stores the callback
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).clickOutsideCallback = callback;
   },
 }));
@@ -45,7 +46,7 @@ jest.mock("../../../../utils/useClickOutside", () => ({
 // Mock classnames
 jest.mock("classnames", () => ({
   __esModule: true,
-  default: (...args: any[]) => args.filter(Boolean).join(" "),
+  default: (...args: string[]) => args.filter(Boolean).join(" "),
 }));
 
 describe("ViewerToolbar", () => {

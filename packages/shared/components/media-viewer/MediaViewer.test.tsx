@@ -175,8 +175,7 @@ const createMockProps = (overrides = {}): MediaViewerProps => ({
   isPublicFile: false,
   autoPlay: false,
   t: (key: string) => key,
-  getIcon: (size: number, ext: string, ...args: unknown[]) =>
-    `icon-${size}-${ext}`,
+  getIcon: (size: number, ext: string) => `icon-${size}-${ext}`,
   onClose: jest.fn(),
   onDelete: jest.fn(),
   nextMedia: jest.fn(),

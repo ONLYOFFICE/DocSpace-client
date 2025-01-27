@@ -32,31 +32,50 @@ import { BookMarkType } from "../../PDFViewer.props";
 
 // Mock SVG components
 jest.mock("PUBLIC_DIR/images/view-rows.react.svg", () => {
-  return function DummyViewRowsIcon(props: any) {
-    return <div {...props}>View Rows Icon</div>;
+  return function DummyViewRowsIcon({
+    className,
+    style,
+  }: {
+    className?: string;
+    style?: React.CSSProperties;
+  }) {
+    return (
+      <div className={className} style={style}>
+        View Rows Icon
+      </div>
+    );
   };
 });
 
 jest.mock("PUBLIC_DIR/images/view-tiles.react.svg", () => {
-  return function DummyViewTilesIcon(props: any) {
-    return <div {...props}>View Tiles Icon</div>;
+  return function DummyViewTilesIcon({
+    className,
+    style,
+  }: {
+    className?: string;
+    style?: React.CSSProperties;
+  }) {
+    return (
+      <div className={className} style={style}>
+        View Tiles Icon
+      </div>
+    );
   };
 });
 
 jest.mock("PUBLIC_DIR/images/article-show-menu.react.svg", () => {
-  return function DummyArticleShowMenuIcon(props: any) {
+  return function DummyArticleShowMenuIcon(props: React.ComponentProps<"div">) {
     return <div {...props}>Article Show Menu Icon</div>;
   };
 });
-
 // Mock classnames
 jest.mock("classnames", () => {
-  return function dummyClassnames(...args: any[]) {
+  return function dummyClassnames(...args: string[]) {
     const [className, conditionalClasses] = args;
     if (typeof conditionalClasses === "object") {
       return Object.entries(conditionalClasses)
         .filter(([, condition]) => condition)
-        .map(([className]) => className)
+        .map(([innerClassName]) => innerClassName)
         .concat(className)
         .join(" ");
     }

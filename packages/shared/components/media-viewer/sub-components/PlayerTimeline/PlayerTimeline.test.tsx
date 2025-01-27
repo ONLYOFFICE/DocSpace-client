@@ -28,6 +28,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { PlayerTimeline } from "./index";
+import { PlayerTimelineRef } from "./PlayerTimeline.props";
 
 // Mock react-device-detect
 jest.mock("react-device-detect", () => ({
@@ -122,7 +123,7 @@ describe("PlayerTimeline", () => {
   });
 
   it("updates progress through ref", () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<PlayerTimelineRef>();
     render(<PlayerTimeline {...defaultProps} ref={ref} />);
 
     const progress = screen.getByTestId("timeline-progress");

@@ -105,8 +105,6 @@ const {
   lightScroll,
   lightScrollHover,
   lightScrollActive,
-  silver,
-  highlandGray,
 
   blurLight,
   lightBlueAction,

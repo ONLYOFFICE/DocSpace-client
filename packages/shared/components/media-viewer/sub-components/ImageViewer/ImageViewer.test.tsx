@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-import { render, fireEvent, act, waitFor } from "@testing-library/react";
+
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { TFile } from "api/files/types";
 

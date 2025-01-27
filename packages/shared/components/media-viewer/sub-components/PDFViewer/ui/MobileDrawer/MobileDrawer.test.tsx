@@ -33,7 +33,7 @@ import { BookMarkType } from "../../PDFViewer.props";
 // Mock classNames
 jest.mock("classnames", () => ({
   __esModule: true,
-  default: (...args: any[]) => args.join(" "),
+  default: (...args: unknown[]) => args.join(" "),
 }));
 
 // Mock react-spring
@@ -44,7 +44,12 @@ jest.mock("@react-spring/web", () => ({
     wobbly: {},
   },
   animated: {
-    div: ({ children, className, style, ...props }: any) => (
+    div: ({
+      children,
+      className,
+      style,
+      ...props
+    }: React.ComponentProps<"div">) => (
       <div className={className} style={style} {...props}>
         {children}
       </div>

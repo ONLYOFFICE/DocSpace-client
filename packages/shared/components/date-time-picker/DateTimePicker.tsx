@@ -97,10 +97,11 @@ const DateTimePicker = (props: DateTimePickerProps) => {
       })}
       id={id}
       data-testid="date-time-picker"
+      aria-label={selectDateText}
+      aria-invalid={hasError}
     >
       <DatePicker
         initialDate={initialDate}
-        // date={date}
         onChange={handleChange}
         selectDateText={selectDateText}
         minDate={minDate}
@@ -109,7 +110,10 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         openDate={openDate}
         outerDate={date}
       />
-      <span className={styles.timeSelector}>
+      <span
+        className={styles.timeSelector}
+        data-testid="date-time-picker-time-wrapper"
+      >
         {date !== null ? (
           isTimeFocused ? (
             <TimePicker
@@ -119,6 +123,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               onBlur={hideTimePicker}
               focusOnRender
               forwardedRef={timePickerRef}
+              aria-label="Time picker"
             />
           ) : (
             <span
@@ -126,8 +131,16 @@ const DateTimePicker = (props: DateTimePickerProps) => {
                 [styles.hasError]: hasError,
               })}
               onClick={showTimePicker}
+              data-testid="date-time-picker-time-display"
+              role="button"
+              aria-label={`Current time: ${date.format("HH:mm")}`}
+              tabIndex={0}
             >
-              <ClockIcon className="clockIcon" />
+              <ClockIcon
+                className="clockIcon"
+                aria-hidden="true"
+                data-testid="date-time-picker-clock-icon"
+              />
               {date.format("HH:mm")}
             </span>
           )

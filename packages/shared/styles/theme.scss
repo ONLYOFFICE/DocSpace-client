@@ -1476,6 +1476,18 @@
   --calendar-disabled-color: #{$gray-dark-strong};
 }
 
+.light {
+  --dropzone-border: 2px dashed #{$gray-light-mid};
+  --dropzone-secondary-link: #${black};
+  --dropzone-exsts-color: #{$gray};
+}
+
+.dark {
+  --dropzone-border: 2px dashed #{$gray-dark-strong};
+  --dropzone-secondary-link: #${white};
+  --dropzone-exsts-color: #{$gray};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

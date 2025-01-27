@@ -28,14 +28,13 @@ import { useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import type { TFunction } from "i18next";
 import { getStepsData } from "./Stepper";
 
 import SelectFileLoader from "../sub-components/SelectFileLoader";
 import StepLayout from "../sub-components/StepLayout";
 
 import { InjectedWorkspaceProps, WorkspaceProps } from "../types";
-
-import type { TFunction } from "i18next";
 
 const NextcloudWorkspace = (props: WorkspaceProps) => {
   const {

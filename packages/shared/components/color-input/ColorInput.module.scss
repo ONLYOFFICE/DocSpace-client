@@ -47,6 +47,10 @@
 .dropDownItemHex {
   cursor: auto;
   background: var(--dropdown-background);
+
+  &:hover {
+    background: var(--dropdown-background);
+  }
 }
 
 .inputWrapper {

@@ -109,6 +109,7 @@ const ColorInput = ({
             appliedColor={color}
             handleChange={onChange}
             isPickerOnly
+            onClose={closePicker}
           />
         </DropDownItem>
       </DropDown>

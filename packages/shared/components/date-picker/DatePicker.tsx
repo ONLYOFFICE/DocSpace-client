@@ -130,12 +130,18 @@ const DatePicker = (props: DatePickerProps) => {
       className={classNames(styles.wrapper, className)}
       id={id}
       data-testid="date-picker"
+      role="presentation"
     >
       {!date ? (
         <div
           className={styles.dateSelector}
           onClick={toggleCalendar}
           ref={selectorRef}
+          data-testid="date-selector"
+          role="button"
+          aria-label={selectDateText}
+          aria-expanded={isCalendarOpen}
+          tabIndex={0}
         >
           <SelectorAddButton
             title={selectDateText}
@@ -146,15 +152,23 @@ const DatePicker = (props: DatePickerProps) => {
             {selectDateText}
           </Text>
         </div>
-      ) : (
+      ) : null}
+
+      {date ? (
         <SelectedItem
           className={styles.selectedItem}
           propKey=""
           onClose={deleteSelectedDate}
           label={
             showCalendarIcon ? (
-              <span className={styles.selectedLabel}>
-                <CalendarIcon className={styles.calendarIcon} />
+              <span
+                className={styles.selectedLabel}
+                data-testid="selected-label"
+              >
+                <CalendarIcon
+                  className={styles.calendarIcon}
+                  data-testid="calendar-icon"
+                />
                 {date.format("DD MMM YYYY")}
               </span>
             ) : (
@@ -163,8 +177,10 @@ const DatePicker = (props: DatePickerProps) => {
           }
           onClick={toggleCalendar}
           forwardedRef={selectedItemRef}
+          aria-label={`Selected date: ${date.format("DD MMMM YYYY")}`}
+          aria-expanded={isCalendarOpen}
         />
-      )}
+      ) : null}
 
       {isCalendarOpen ? (
         <Calendar
@@ -178,6 +194,7 @@ const DatePicker = (props: DatePickerProps) => {
           maxDate={maxDate}
           locale={locale}
           initialDate={openDate}
+          aria-label="Date picker calendar"
         />
       ) : null}
     </div>

@@ -189,16 +189,6 @@
             "tooltip": "🛠️ Start the \"frontend start production\" task",
           },
           {
-            "label": "Start:internal",
-            "task": "Frontend | start:internal",
-            "tooltip": "🛠️ Start the \"frontend start internal\" task",
-          },
-          {
-            "label": "Start prod:internal",
-            "task": "Frontend | start-prod:internal",
-            "tooltip": "🛠️ Start the \"frontend start production internal\" task",
-          },
-          {
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task",

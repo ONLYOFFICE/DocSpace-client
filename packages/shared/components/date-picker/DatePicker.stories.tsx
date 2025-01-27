@@ -64,7 +64,6 @@ const locales = [
 const meta = {
   title: "Components/DatePicker",
   component: DatePicker,
-
   argTypes: {
     minDate: { control: "date" },
     maxDate: { control: "date" },
@@ -72,11 +71,14 @@ const meta = {
     openDate: { control: "date" },
     onChange: { action: "onChange" },
     locale: { control: "select", options: locales },
+    selectDateText: { control: "text" },
+    isMobile: { control: "boolean" },
   },
   parameters: {
     docs: {
       description: {
-        component: "Date input",
+        component:
+          "Date picker component that allows users to select dates with various configuration options",
       },
     },
     design: {
@@ -85,15 +87,15 @@ const meta = {
     },
   },
 } satisfies Meta<typeof DatePicker>;
-type Story = StoryObj<typeof meta>;
 
+type Story = StoryObj<typeof meta>;
 export default meta;
 
 const Wrapper = styled.div`
   height: 500px;
 `;
 
-const Template = ({ ...args }: DatePickerProps) => {
+const Template = (args: DatePickerProps) => {
   return (
     <Wrapper>
       <DatePicker {...args} />
@@ -102,12 +104,52 @@ const Template = ({ ...args }: DatePickerProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
-    maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
-    minDate: new Date("1970/01/01"),
-    openDate: moment(),
-    initialDate: moment(),
+    maxDate: moment().add(10, "years").startOf("year"),
+    minDate: moment("1970-01-01"),
+    openDate: moment("2025-01-27"),
+    initialDate: moment("2025-01-27"),
     locale: "en",
+    selectDateText: "Select date",
+    onChange: (date) =>
+      console.log("Date changed:", date?.format("YYYY-MM-DD")),
+  },
+};
+
+export const WithCustomDateRange: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    minDate: moment().subtract(1, "month"),
+    maxDate: moment().add(1, "month"),
+    selectDateText: "Select date within 2 months range",
+  },
+};
+
+export const WithDifferentLocale: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    locale: "fr",
+    selectDateText: "Sélectionnez une date",
+  },
+};
+
+export const MobileView: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isMobile: true,
+  },
+};
+
+export const WithCustomInitialDate: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    initialDate: moment("2025-12-31"),
+    openDate: moment("2025-12-31"),
+    selectDateText: "Select date with custom initial value",
   },
 };

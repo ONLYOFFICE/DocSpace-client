@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
+import moment from "moment";
 
 import { TimePicker } from "./TimePicker";
 import { TimePickerProps } from "./TimePicker.types";
@@ -35,28 +35,64 @@ const meta = {
   title: "Components/TimePicker",
   component: TimePicker,
   argTypes: {
+    initialTime: { control: "date" },
     hasError: { control: "boolean" },
     onChange: { action: "onChange" },
+    tabIndex: { control: "number" },
+    focusOnRender: { control: "boolean" },
+    className: { control: "text" },
+    classNameInput: { control: "text" },
   },
   parameters: {
     docs: {
       description: {
-        component: "Time input",
+        component:
+          "Time input component that allows users to select or input time in HH:mm format",
       },
     },
   },
 } satisfies Meta<typeof TimePicker>;
+
 type Story = StoryObj<typeof meta>;
 export default meta;
 
-const Template = ({ ...args }: TimePickerProps) => {
-  return <TimePicker hasError={false} {...args} />;
+const Template = (args: TimePickerProps) => {
+  return <TimePicker {...args} />;
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
-    initialTime: {},
-    onChange: () => {},
+    initialTime: moment("2025-01-27T10:30:00"),
+    hasError: false,
+    onChange: (time) => console.log("Time changed:", time?.format("HH:mm")),
+    tabIndex: 0,
+    focusOnRender: false,
+    className: "",
+  },
+};
+
+export const WithError: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    hasError: true,
+  },
+};
+
+export const FocusedOnRender: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    focusOnRender: true,
+  },
+};
+
+export const CustomStyle: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    className: "custom-time-picker",
+    classNameInput: "custom-time-input",
   },
 };

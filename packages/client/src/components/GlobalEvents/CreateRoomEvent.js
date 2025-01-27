@@ -26,8 +26,9 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
+import { Text } from "@docspace/shared/components/text";
 import { CreateRoomDialog } from "../dialogs";
 
 const CreateRoomEvent = ({
@@ -79,7 +80,21 @@ const CreateRoomEvent = ({
       return;
     }
 
-    onCreateRoom(t, false);
+    const successToast = roomParams.isTemplate ? (
+      <Trans
+        t={t}
+        ns="Files"
+        i18nKey="TemplateRoomCreated"
+        values={{
+          title: roomParams.title,
+        }}
+        components={{
+          1: <Text as="span" fontWeight={600} fontSize="12px" />,
+        }}
+      />
+    ) : null;
+
+    onCreateRoom(t, false, successToast);
   };
 
   const fetchTagsAction = useCallback(async () => {

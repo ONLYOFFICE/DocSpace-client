@@ -390,10 +390,12 @@ class CreateEditRoomStore {
     isCompleted = progressData?.isCompleted;
     isError = progressData?.error;
 
-    while (!isCompleted || !isError) {
+    while (!isCompleted) {
       progressData = await this.getProgress(getCreateTemplateProgress);
       isCompleted = progressData.isCompleted;
       isError = progressData.error;
+
+      if (isError) break;
     }
 
     if (isError) {
@@ -436,7 +438,7 @@ class CreateEditRoomStore {
     }
   };
 
-  onCreateRoom = async (t, withConfirm = false) => {
+  onCreateRoom = async (t, withConfirm = false, successToast = null) => {
     const roomParams = this.roomParams;
 
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
@@ -550,6 +552,8 @@ class CreateEditRoomStore {
     } catch (err) {
       toastr.error(err);
     } finally {
+      if (successToast) toastr.success(successToast);
+
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
@@ -593,7 +597,6 @@ class CreateEditRoomStore {
       progressData = await this.getProgress(
         api.rooms.getCreateRoomFromTemplateProgress,
       );
-      console.log("progressData", progressData);
 
       isFinished = progressData.isCompleted;
     }

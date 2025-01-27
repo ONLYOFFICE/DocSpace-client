@@ -236,5 +236,6 @@
   "TemplateOwner": "Template owner",
   "Template": "Template",
   "TemplateRemoved": "Selected room templates have been deleted",
-  "SaveAsTemplateToast": "Template <1>«{{title}}»</1> saved. <2>Go to template</2>"
+  "SaveAsTemplateToast": "Room template <1>«{{title}}»</1> saved",
+  "TemplateRoomCreated": "Room based on the template <1>«{{title}}»</1> created."
 }

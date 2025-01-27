@@ -365,7 +365,7 @@
     {
       "label": "Frontend | build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build --projects=@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build  -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -380,7 +380,7 @@
     {
       "label": "Frontend | start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start --projects=@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -395,37 +395,7 @@
     {
       "label": "Frontend | start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod --projects=@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | start:internal",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start:internal --projects=@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | start-prod:internal",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod:internal --projects=@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
       "group": {
         "kind": "build",
         "isDefault": true

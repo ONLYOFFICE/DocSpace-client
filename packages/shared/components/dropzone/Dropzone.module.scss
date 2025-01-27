@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,39 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import "@testing-library/jest-dom";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import { Tag } from ".";
+.dropzoneWrapper {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  height: 150px;
+  border: var(--dropzone-border);
+  border-radius: 6px;
 
-import { renderWithTheme } from "../../utils/render-with-theme";
+  position: relative;
+}
 
-const baseProps = {
-  tag: "script",
-  label: "Script",
-  isNewTag: false,
-  isDisabled: false,
-  onDelete: () => {},
-  onClick: () => {},
+.dropzoneLoader {
+  position: absolute;
+  top: 50%;
 
-  tagMaxWidth: "160px",
-};
+  // doesn't require mirroring for RTL
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-describe("<Tag />", () => {
-  it("renders without error", () => {
-    const { getByTestId } = renderWithTheme(<Tag {...baseProps} />);
-    expect(getByTestId("tag")).toBeInTheDocument();
-  });
+.dropzone {
+  height: 100%;
+  width: 100%;
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
-  it("accepts id", () => {
-    const { getByTestId } = renderWithTheme(<Tag {...baseProps} id="testId" />);
-    expect(getByTestId("tag")).toHaveAttribute("id", "testId");
-  });
+  user-select: none;
 
-  it("accepts className", () => {
-    const { getByTestId } = renderWithTheme(
-      <Tag {...baseProps} className="test" />,
-    );
-    expect(getByTestId("tag")).toHaveClass("test");
-  });
-});
+  &.isLoading {
+    visibility: hidden;
+  }
+}
+
+.dropzoneLink {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 20px;
+
+  &.main {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 1px;
+  }
+
+  &.secondary {
+    font-weight: 400;
+    color: var(--dropzone-secondary-link);
+  }
+
+  @include mobile {
+    &.secondary {
+      display: none;
+    }
+  }
+}
+
+.dropzoneExst {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--dropzone-exsts-color);
+}

@@ -31,6 +31,7 @@ import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { TPlusButtonProps } from "../Navigation.types";
+import { isMobile } from "../../../utils";
 
 const PlusButton = ({
   className,
@@ -84,6 +85,9 @@ const PlusButton = ({
         onHide={onHide}
         scaled={false}
         leftOffset={isFrame ? 190 : 150}
+        headerOnlyMobile
+        ignoreChangeView
+        withBackdrop={isMobile()}
       />
     </div>
   );

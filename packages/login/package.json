@@ -1,6 +1,6 @@
 {
   "name": "@docspace/login",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
+    "csvjson-json_beautifier": "catalog:",
     "@hcaptcha/react-hcaptcha": "catalog:",
     "i18next": "catalog:",
     "next": "catalog:",
@@ -28,6 +29,7 @@
     "react-google-recaptcha": "catalog:",
     "react-hcaptcha": "catalog:",
     "react-i18next": "catalog:",
+    "resize-image": "catalog:",
     "react": "catalog:",
     "sass": "catalog:",
     "styled-components": "catalog:"

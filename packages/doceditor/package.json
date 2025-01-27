@@ -1,6 +1,6 @@
 {
   "name": "@docspace/doceditor",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
@@ -17,6 +17,7 @@
     "@docspace/shared": "workspace:*",
     "@onlyoffice/document-editor-react": "catalog:",
     "@serdnam/pino-cloudwatch-transport": "catalog:",
+    "framer-motion": "catalog:",
     "i18next": "catalog:",
     "moment": "catalog:",
     "nconf": "catalog:",

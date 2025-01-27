@@ -33,3 +33,35 @@ declare module "*.svg?url" {
   const content: string;
   export default content;
 }
+
+declare module "resize-image" {
+  type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
+
+  type ImageTypes = {
+    [P in Uppercase<ImageFormat>]: Lowercase<P>;
+  };
+
+  interface ResizeImage extends ImageTypes {
+    resize2Canvas: (
+      img: HTMLImageElement,
+      width: number,
+      heigh: number,
+    ) => HTMLCanvasElement;
+    resize: (
+      img: HTMLImageElement,
+      width: number,
+      height: number,
+      type: ImageFormat,
+    ) => string;
+  }
+
+  const value: ResizeImage;
+  export default value;
+}
+
+declare module "csvjson-json_beautifier" {
+  export default function jsonBeautifier(
+    json: string,
+    options?: unknown,
+  ): string;
+}

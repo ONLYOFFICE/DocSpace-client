@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "workspaces": {
     "packages": [
@@ -37,13 +37,16 @@
     "test:e2e:docker:clear": "pnpm --filter @docspace/login test:e2e:docker:clear"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "@types/react-text-mask": "catalog:",
     "he": "catalog:",
     "madge": "catalog:",
     "nx": "catalog:",
     "react": "catalog:",
     "shx": "catalog:",
-    "terser": "catalog:"
+    "terser": "catalog:",
+    "ts-node": "catalog:",
+    "typescript": "catalog:"
   },
   "packageManager": "pnpm@9.15.3",
   "resolutions": {

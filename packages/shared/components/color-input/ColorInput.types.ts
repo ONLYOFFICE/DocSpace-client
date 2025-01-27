@@ -26,7 +26,7 @@
 
 import { InputSize } from "../text-input/TextInput.enums";
 
-export interface ColorInputProps {
+export type ColorInputProps = {
   /** Class name */
   className?: string;
   /** Used as HTML `id` property  */
@@ -45,4 +45,4 @@ export interface ColorInputProps {
   hasError?: boolean;
   /** Indicates the input field has a warning */
   hasWarning?: boolean;
-}
+};

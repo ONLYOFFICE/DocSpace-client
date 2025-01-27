@@ -1439,6 +1439,18 @@
 }
 
 .light {
+  --color-picker-border: 1px solid #{$gray-strong};
+  --color-picker-background: #{$white};
+  --color-picker-color: #{$gray-text};
+}
+
+.dark {
+  --color-picker-border: 1px solid #{$gray-dark-strong};
+  --color-picker-background: #{$dark-gray-light};
+  --color-picker-color: #{$gray-dark-text};
+}
+
+.light {
   --calendar-title-color: #{$gray-text};
   --calendar-outline-color: #{$gray-light-mid};
   --calendar-arrow-color: #{$gray-text};
@@ -1462,6 +1474,18 @@
   --calendar-on-hover-background: #{$light-dark-gray-hover};
   --calendar-past-color: #{$gray-dark};
   --calendar-disabled-color: #{$gray-dark-strong};
+}
+
+.light {
+  --dropzone-border: 2px dashed #{$gray-light-mid};
+  --dropzone-secondary-link: #${black};
+  --dropzone-exsts-color: #{$gray};
+}
+
+.dark {
+  --dropzone-border: 2px dashed #{$gray-dark-strong};
+  --dropzone-secondary-link: #${white};
+  --dropzone-exsts-color: #{$gray};
 }
 
 .light {

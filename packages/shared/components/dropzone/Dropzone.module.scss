@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ReactNode } from "react";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-type BaseDropzoneProps = {
-  /** Shows loading state of the dropzone */
-  isLoading: boolean;
-  /** Disables the dropzone */
-  isDisabled?: boolean;
-  /** Main text displayed in the dropzone */
-  linkMainText: string;
-  /** Secondary text displayed in the dropzone */
-  linkSecondaryText: string;
-  /** Text displaying supported file types */
-  exstsText: string;
-  /** Maximum number of files allowed (0 for unlimited) */
-  maxFiles?: number;
-  /** Optional children elements */
-  children?: ReactNode;
-};
+.dropzoneWrapper {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  height: 150px;
+  border: var(--dropzone-border);
+  border-radius: 6px;
 
-type FileDropHandler<T extends File = File> = (acceptedFiles: T[]) => void;
+  position: relative;
+}
 
-export type DropzoneProps = BaseDropzoneProps & {
-  /** Accepted file types (string[]) */
-  accept: string | string[];
-  /** Callback when files are dropped */
-  onDrop?: FileDropHandler;
-};
+.dropzoneLoader {
+  position: absolute;
+  top: 50%;
+
+  // doesn't require mirroring for RTL
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dropzone {
+  height: 100%;
+  width: 100%;
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  user-select: none;
+
+  &.isLoading {
+    visibility: hidden;
+  }
+}
+
+.dropzoneLink {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 20px;
+
+  &.main {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 1px;
+  }
+
+  &.secondary {
+    font-weight: 400;
+    color: var(--dropzone-secondary-link);
+  }
+
+  @include mobile {
+    &.secondary {
+      display: none;
+    }
+  }
+}
+
+.dropzoneExst {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--dropzone-exsts-color);
+}

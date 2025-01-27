@@ -27,7 +27,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router-dom";
 
 import {
   AccountLoginType,

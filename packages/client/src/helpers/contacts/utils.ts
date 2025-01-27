@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { matchPath } from "react-router-dom";
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router-dom";
 
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";

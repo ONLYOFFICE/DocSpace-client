@@ -29,8 +29,8 @@
     "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
-    "lint": "pnpm --filter {@docspace/login,@docspace/doceditor,@docspace/client} run lint",
-    "lint:fix": "pnpm --filter {@docspace/login,@docspace/doceditor,@docspace/client} run lint:fix",
+    "lint": "pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor --filter @docspace/management run lint",
+    "lint:fix": "pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor --filter @docspace/management run lint:fix",
     "test:build": "pnpm --filter @docspace/login test:build",
     "test:e2e:docker:build": "pnpm --filter @docspace/login test:e2e:docker:build",
     "test:e2e:docker:start": "pnpm --filter @docspace/login test:e2e:docker:start",
@@ -46,10 +46,9 @@
     "shx": "0.3.4",
     "terser": "5.34.1",
     "ts-node": "10.9.2",
-    "typescript": "5.6.3",
-    "js-yaml": "4.1.0"
+    "typescript": "5.6.3"
   },
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@9.15.4",
   "resolutions": {
     "@types/react": "18.3.1"
   }

@@ -88,7 +88,7 @@ const Wrapper = styled.div`
   height: 500px;
 `;
 
-const Template = ({ ...args }: DateTimePickerProps) => {
+const Template = (args: DateTimePickerProps) => {
   return (
     <Wrapper>
       <DateTimePicker {...args} />
@@ -97,11 +97,17 @@ const Template = ({ ...args }: DateTimePickerProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
     locale: "en",
     maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
     minDate: new Date("1970/01/01"),
     openDate: moment(),
+    selectDateText: "Select date",
+    className: "date-time-picker",
+    id: "default-date-time-picker",
+    hasError: false,
+    onChange: (date: null | moment.Moment) =>
+      console.log("Date changed:", date),
   },
 };

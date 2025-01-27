@@ -24,132 +24,83 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
+import type { Meta, StoryFn } from "@storybook/react";
 import moment from "moment";
-import { StoryObj, Meta } from "@storybook/react";
-import styled from "styled-components";
 
 import { DatePicker } from "./DatePicker";
 import { DatePickerProps } from "./DatePicker.types";
 
-const locales = [
-  "az",
-  "ar-SA",
-  "zh-cn",
-  "cs",
-  "nl",
-  "en-gb",
-  "en",
-  "fi",
-  "fr",
-  "de",
-  "de-ch",
-  "el",
-  "it",
-  "ja",
-  "ko",
-  "lv",
-  "pl",
-  "pt",
-  "pt-br",
-  "ru",
-  "sk",
-  "sl",
-  "es",
-  "tr",
-  "uk",
-  "vi",
-];
-
-const meta = {
+export default {
   title: "Components/DatePicker",
   component: DatePicker,
-  argTypes: {
-    minDate: { control: "date" },
-    maxDate: { control: "date" },
-    initialDate: { control: "date" },
-    openDate: { control: "date" },
-    onChange: { action: "onChange" },
-    locale: { control: "select", options: locales },
-    selectDateText: { control: "text" },
-    isMobile: { control: "boolean" },
-  },
   parameters: {
     docs: {
       description: {
-        component:
-          "Date picker component that allows users to select dates with various configuration options",
+        component: "DatePicker component",
       },
     },
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/9AtdOHnhjhZCIRDrj4Unta/Public-room?type=design&node-id=1846-218508&mode=design&t=xSsXehQdoxpp5o7F-4",
-    },
   },
-} satisfies Meta<typeof DatePicker>;
+} as Meta;
 
-type Story = StoryObj<typeof meta>;
-export default meta;
+const Template: StoryFn<typeof DatePicker> = ({
+  initialDate,
+  ...rest
+}: DatePickerProps) => {
+  const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(
+    initialDate ? moment(initialDate) : null,
+  );
 
-const Wrapper = styled.div`
-  height: 500px;
-`;
-
-const Template = (args: DatePickerProps) => {
   return (
-    <Wrapper>
-      <DatePicker {...args} />
-    </Wrapper>
+    <DatePicker
+      {...rest}
+      initialDate={initialDate}
+      onChange={(date) => {
+        rest.onChange?.(date);
+        setSelectedDate(date);
+      }}
+      outerDate={selectedDate}
+    />
   );
 };
 
-export const Default: Story = {
-  render: Template,
-  args: {
-    maxDate: moment().add(10, "years").startOf("year"),
-    minDate: moment("1970-01-01"),
-    openDate: moment("2025-01-27"),
-    initialDate: moment("2025-01-27"),
-    locale: "en",
-    selectDateText: "Select date",
-    onChange: (date) =>
-      console.log("Date changed:", date?.format("YYYY-MM-DD")),
-  },
+export const Default = Template.bind({});
+Default.args = {
+  maxDate: moment().add(10, "years").startOf("year"),
+  minDate: moment("1970-01-01"),
+  openDate: moment(),
+  locale: "en",
+  selectDateText: "Select date",
+  onChange: (date) =>
+    console.log("Selected date:", date?.format("DD MMM YYYY") ?? "No date"),
 };
 
-export const WithCustomDateRange: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    minDate: moment().subtract(1, "month"),
-    maxDate: moment().add(1, "month"),
-    selectDateText: "Select date within 2 months range",
-  },
+export const WithInitialDate = Template.bind({});
+WithInitialDate.args = {
+  ...Default.args,
+  initialDate: moment(),
+  selectDateText: "Date with initial value",
 };
 
-export const WithDifferentLocale: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    locale: "fr",
-    selectDateText: "Sélectionnez une date",
-  },
+export const WithCalendarIcon = Template.bind({});
+WithCalendarIcon.args = {
+  ...Default.args,
+  initialDate: moment(),
+  showCalendarIcon: true,
+  selectDateText: "Date with calendar icon",
 };
 
-export const MobileView: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    isMobile: true,
-  },
+export const WithCustomOpenDate = Template.bind({});
+WithCustomOpenDate.args = {
+  ...Default.args,
+  openDate: moment().add(1, "month"),
+  selectDateText: "Date with custom open date",
 };
 
-export const WithCustomInitialDate: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    initialDate: moment("2025-12-31"),
-    openDate: moment("2025-12-31"),
-    selectDateText: "Select date with custom initial value",
-  },
+export const WithDateRange = Template.bind({});
+WithDateRange.args = {
+  ...Default.args,
+  minDate: moment().subtract(1, "month"),
+  maxDate: moment().add(1, "month"),
+  selectDateText: "Date with range constraints",
 };

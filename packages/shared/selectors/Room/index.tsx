@@ -181,7 +181,14 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [
+      disableThirdParty,
+      excludeItems,
+      roomType,
+      searchValue,
+      searchArea,
+      setIsDataReady,
+    ],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader

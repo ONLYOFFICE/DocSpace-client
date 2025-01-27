@@ -37,6 +37,12 @@ import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
 import VirtualDataRoomRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg?url";
 import TemplateRoomsSvg32Url from "PUBLIC_DIR/images/icons/32/room/template.svg?url";
 
+import CollaborationTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/collaboration.svg?url";
+import CustomTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/custom.svg?url";
+import FormTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/form.svg?url";
+import PublicTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/public.svg?url";
+import VirtualDataTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/virtual-data.svg?url";
+
 import { RoomsType } from "../../enums";
 
 import { Checkbox } from "../checkbox";
@@ -55,6 +61,7 @@ const RoomLogoPure = ({
   withCheckbox = false,
   isChecked = false,
   isIndeterminate = false,
+  isTemplateRoom = false,
   onChange,
 }: RoomLogoProps) => {
   const getIcon = () => {
@@ -64,6 +71,23 @@ const RoomLogoPure = ({
 
     if (isTemplate) {
       return TemplateRoomsSvg32Url;
+    }
+
+    if (isTemplateRoom) {
+      switch (type) {
+        case RoomsType.EditingRoom:
+          return CollaborationTemplateSvg32Url;
+        case RoomsType.CustomRoom:
+          return CustomTemplateSvg32Url;
+        case RoomsType.PublicRoom:
+          return PublicTemplateSvg32Url;
+        case RoomsType.VirtualDataRoom:
+          return VirtualDataTemplateSvg32Url;
+        case RoomsType.FormRoom:
+          return FormTemplateSvg32Url;
+        default:
+          return "";
+      }
     }
 
     switch (type) {

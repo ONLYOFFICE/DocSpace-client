@@ -583,6 +583,7 @@ export type TSelectorItem = TSelectorItemType & {
   disabledText?: string;
   lifetimeTooltip?: string | null;
   viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {

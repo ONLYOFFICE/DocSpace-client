@@ -408,7 +408,12 @@ const SetRoomParams = ({
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
       {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (
-        <RoomType t={t} roomType={roomParams.type} type="displayItem" />
+        <RoomType
+          t={t}
+          roomType={roomParams.type}
+          type="displayItem"
+          isTemplateRoom={selection?.isTemplate || isTemplateSelected}
+        />
       ) : (
         <RoomTypeDropdown
           t={t}

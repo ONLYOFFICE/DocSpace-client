@@ -53,6 +53,7 @@ const RoomType = ({
   selectedId,
   disabledFormRoom,
   isTemplate,
+  isTemplateRoom,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -76,7 +77,11 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo type={room.type} isTemplate={isTemplate} />
+        <RoomLogo
+          type={room.type}
+          isTemplate={isTemplate}
+          isTemplateRoom={isTemplateRoom}
+        />
       </div>
 
       <div className="choose_room-info_wrapper">

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { FolderType } from "../../enums";
 import { TRoom } from "../../api/rooms/types";
 import { TSelectorItem } from "../../components/selector";
 
@@ -46,6 +47,7 @@ export const convertToItems = (folders: TRoom[]) => {
     const iconOriginal = logo.original;
     const { color } = logo;
     const cover = logo?.cover;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     return {
       id,
@@ -62,6 +64,7 @@ export const convertToItems = (folders: TRoom[]) => {
       rootFolderType,
       security,
       cover,
+      isTemplate,
     };
   });
 

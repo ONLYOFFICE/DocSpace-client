@@ -184,7 +184,6 @@ const CreateRoomDialog = ({
   };
 
   const onSubmitRoom = (items) => {
-    console.log("onSubmitRoom", items);
     const item = items[0];
     setIsTemplateSelected(true);
 

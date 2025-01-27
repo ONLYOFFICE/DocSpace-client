@@ -35,6 +35,8 @@ export interface RoomLogoProps {
   isArchive?: boolean;
   /** Adds template icon  */
   isTemplate?: boolean;
+  /** Adds template room icon  */
+  isTemplateRoom?: boolean;
   /** Adds checkbox when row/tile is hovered or checked  */
   withCheckbox?: boolean;
   /** Sets a checked state of the checkbox  */

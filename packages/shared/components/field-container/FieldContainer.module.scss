@@ -1,0 +1,100 @@
+@import "../../styles/mixins.scss";
+
+.container {
+  &.horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .fieldLabel {
+      line-height: 20px;
+      margin: 0 8px 0 0;
+      position: relative;
+    }
+
+    .fieldLabelIcon {
+      display: inline-flex;
+      min-width: var(--label-width, 110px);
+      width: var(--label-width, 110px);
+      align-items: center;
+    }
+
+    .fieldBody {
+      flex-grow: 1;
+    }
+
+    .iconButton {
+      position: relative;
+      margin-top: 2px;
+      margin-inline-start: 4px;
+    }
+  }
+
+  &.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .fieldLabel {
+      line-height: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+
+    .fieldLabelIcon {
+      display: inline-flex;
+      width: 100%;
+      margin: 0 0 4px;
+      align-items: center;
+
+      .helpButton {
+        margin-inline-start: 4px;
+      }
+    }
+
+    .fieldBody {
+      width: 100%;
+    }
+
+    .iconButton {
+      position: relative;
+      margin: 0 0 0 8px;
+      padding: 2px 0;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  &:not(.noMargin) {
+    &.horizontal {
+      margin: 0 0 16px;
+    }
+
+    &.vertical {
+      margin: 0 0 16px;
+    }
+  }
+}
+
+.errorContainer {
+  margin-top: 4px;
+  width: var(--error-width, 293px);
+}
+
+.errorText {
+  color: var(--error-color, #c96c27);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    &.horizontal {
+      flex-direction: column;
+
+      .fieldLabelIcon {
+        width: 100%;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}

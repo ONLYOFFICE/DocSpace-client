@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Label } from "../label";
 import { HelpButton } from "../help-button";
 import { Text } from "../text";
 
-import Container from "./FieldContainer.styled";
 import { FieldContainerProps } from "./FieldContainer.types";
+import styles from "./FieldContainer.module.scss";
 
 const displayInlineBlock = { display: "inline-block" };
 
@@ -57,34 +58,45 @@ const FieldContainer = ({
   errorMessage,
   errorColor,
 }: FieldContainerProps) => {
+  const containerStyle = {
+    ...style,
+    "--label-width": maxLabelWidth,
+    "--error-width": errorMessageWidth,
+    "--error-color": errorColor,
+  } as React.CSSProperties;
+
   return (
-    <Container
-      vertical={isVertical}
-      labelWidth={maxLabelWidth}
-      className={className}
+    <div
+      className={classNames(
+        styles.container,
+        {
+          [styles.vertical]: isVertical,
+          [styles.horizontal]: !isVertical,
+          [styles.noMargin]: removeMargin,
+        },
+        className,
+      )}
       id={id}
-      style={style}
-      maxwidth={errorMessageWidth}
-      removeMargin={removeMargin}
+      style={containerStyle}
       data-testid="field-container"
       data-vertical={isVertical}
       data-label-width={maxLabelWidth}
     >
       {labelVisible ? (
         !inlineHelpButton ? (
-          <div className="field-label-icon">
+          <div className={styles.fieldLabelIcon}>
             <Label
               isRequired={isRequired}
               // error={hasError}
               text={labelText}
               truncate
-              className="field-label"
+              className={styles.fieldLabel}
               tooltipMaxWidth={tooltipMaxWidth}
               htmlFor=""
             />
             {tooltipContent ? (
               <HelpButton
-                className={tooltipClass}
+                className={classNames(styles.helpButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
                 // helpButtonHeaderContent={helpButtonHeaderContent}
@@ -92,14 +104,14 @@ const FieldContainer = ({
             ) : null}
           </div>
         ) : (
-          <div className="field-label-icon">
+          <div className={styles.fieldLabelIcon}>
             <Label
               isRequired={isRequired}
               htmlFor=""
               // error={hasError}
               text={labelText}
               truncate
-              className="field-label"
+              className={styles.fieldLabel}
             >
               {tooltipContent ? (
                 <HelpButton
@@ -116,15 +128,15 @@ const FieldContainer = ({
         )
       ) : null}
 
-      <div className="field-body">
+      <div className={styles.fieldBody}>
         {children}
         {hasError && errorMessage ? (
-          <Text className="error-label" fontSize="12px" color={errorColor}>
+          <Text className={styles.errorText} fontSize="12px" color={errorColor}>
             {errorMessage}
           </Text>
         ) : null}
       </div>
-    </Container>
+    </div>
   );
 };
 

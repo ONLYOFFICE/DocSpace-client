@@ -94,14 +94,14 @@ const Members = ({
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
   setRoomShared,
-  addPrimaryKeyToLink,
   currentId,
+  setPublicRoomKey,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = useContext(ScrollbarContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -165,7 +165,11 @@ const Members = ({
 
         if (isPublicRoomType && !filterObj.key) {
           setRoomShared(currentId, true);
-          addPrimaryKeyToLink(link, currentId);
+          setPublicRoomKey(link.sharedTo.requestToken);
+          setSearchParams((prev) => {
+            prev.set("key", link.sharedTo.requestToken);
+            return prev;
+          });
         }
       });
     }
@@ -336,7 +340,6 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     settingsStore,
-    filesActionsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -352,12 +355,9 @@ export default inject(
     const { membersFilter, setRoomShared } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
 
-    const {
-      primaryLink,
-      additionalLinks,
-      setExternalLink,
-      addPrimaryKeyToLink,
-    } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
+      publicRoomStore;
+
     const { isArchiveFolderRoot } = treeFoldersStore;
     const {
       setLinkParams,
@@ -411,8 +411,8 @@ export default inject(
       setGuestReleaseTipDialogVisible,
       showGuestReleaseTip,
       setRoomShared,
-      addPrimaryKeyToLink,
       currentId: id,
+      setPublicRoomKey,
     };
   },
 )(

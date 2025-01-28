@@ -51,9 +51,7 @@ const DeleteLinkDialogComponent = (props) => {
     isFormRoom,
     isCustomRoom,
     setRoomShared,
-    linkParams,
-    addPrimaryKeyToLink,
-    removePrimaryKeyInLink,
+    setPublicRoomKey,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -82,12 +80,18 @@ const DeleteLinkDialogComponent = (props) => {
 
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           if (filterObj.key !== res.sharedTo.requestToken) {
-            addPrimaryKeyToLink(link, roomId);
+            setPublicRoomKey(res.sharedTo.requestToken);
+            setSearchParams((prev) => {
+              prev.set("key", res.sharedTo.requestToken);
+              return prev;
+            });
           }
         }
 
         if (isCustomRoom && filterObj.key) {
-          removePrimaryKeyInLink(roomId);
+          setPublicRoomKey(null);
+          searchParams.delete("key");
+          setSearchParams(searchParams);
         }
       })
       .catch((err) => toastr.error(err.response?.data?.error.message))
@@ -189,12 +193,8 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     setDeleteLinkDialogVisible: setIsVisible,
     linkParams,
   } = dialogsStore;
-  const {
-    editExternalLink,
-    deleteExternalLink,
-    addPrimaryKeyToLink,
-    removePrimaryKeyInLink,
-  } = publicRoomStore;
+  const { editExternalLink, deleteExternalLink, setPublicRoomKey } =
+    publicRoomStore;
   const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
@@ -209,7 +209,6 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
-    addPrimaryKeyToLink,
-    removePrimaryKeyInLink,
+    setPublicRoomKey,
   };
 })(observer(DeleteLinkDialog));

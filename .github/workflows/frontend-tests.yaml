@@ -19,7 +19,7 @@ jobs:
           up-flags: --build --force-recreate
           services: tests-ci
           test-container: tests-ci
-          test-command: npx playwright test
+          test-command: pnpx playwright test
   eslint:
     name: "Lint tests"
     runs-on: ubuntu-latest
@@ -29,12 +29,12 @@ jobs:
         run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "yarn"
+          node-version: "22.x"
+          cache: "pnpm"
       - name: Install dependencies
-        run: yarn install --no-immutable
+        run: pnpm install
       - name: Lint clients
-        run: yarn lint
+        run: pnpm lint
   # unit-tests:
   #   name: "Unit tests"
   #   runs-on: ubuntu-latest
@@ -44,14 +44,14 @@ jobs:
   #       run: corepack enable
   #     - uses: actions/setup-node@v4
   #       with:
-  #         node-version: 20
-  #         cache: "yarn"
-  #     - name: Clear yarn cache
-  #       run: yarn cache clean
+  #         node-version: "22.x"
+  #         cache: "pnpm"
+  #     - name: Clear pnpm cache
+  #       run: pnpm cache clean
   #     - name: Install dependencies
-  #       run: yarn install --no-immutable
+  #       run: pnpm install
   #     - name: Run unit tests
-  #       run: yarn test
+  #       run: pnpm test
   common:
     name: "Common tests"
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "22.x"
       - name: Install dependencies
         working-directory: ./common/tests
         run: npm install

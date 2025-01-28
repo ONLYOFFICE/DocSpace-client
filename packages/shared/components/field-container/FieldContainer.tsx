@@ -67,6 +67,8 @@ const FieldContainer = ({
       maxwidth={errorMessageWidth}
       removeMargin={removeMargin}
       data-testid="field-container"
+      data-vertical={isVertical}
+      data-label-width={maxLabelWidth}
     >
       {labelVisible ? (
         !inlineHelpButton ? (

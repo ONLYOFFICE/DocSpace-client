@@ -178,8 +178,6 @@ class AuthStore {
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
-      //  !isPublicPreview() &&
-      //   !isPublicRoom() &&
       !isPortalDeactivated
     ) {
       requests.push(

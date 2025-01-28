@@ -651,9 +651,6 @@ class FilesTableHeader extends React.Component {
     } = this.props;
     const newFilter = filter.clone();
 
-    console.log("filter hereee");
-    console.log("NEW FILTER", newFilter);
-
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
     } else {
@@ -665,10 +662,6 @@ class FilesTableHeader extends React.Component {
 
     const currentUrl = window.location.href;
 
-    console.log("currentUrl", currentUrl);
-    console.log(currentUrl.includes("key"));
-    console.log("publicRoomKey", publicRoomKey);
-
     if (
       isPublicRoom ||
       (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
@@ -679,21 +672,6 @@ class FilesTableHeader extends React.Component {
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
     );
-
-    /* if (
-      isPublicRoom ||
-      (isPublicRoomType && publicRoomKey && !currentUrl.includes("key"))
-    ) {
-      window.DocSpace.navigate(
-        `${
-          window.DocSpace.location.pathname
-        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
-      );
-    } else {
-      window.DocSpace.navigate(
-        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
-      );
-    } */
   };
 
   onRoomsFilter = (sortBy) => {
@@ -847,7 +825,7 @@ export default inject(
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    console.log(publicRoomKey, "new");
+
     const { changeDocumentsTabs, isIndexedFolder, roomType } =
       selectedFolderStore;
 

@@ -1862,6 +1862,7 @@ export const getBaseTheme = () => {
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
+        barIconColor: lightGrayDark,
       },
 
       members: {

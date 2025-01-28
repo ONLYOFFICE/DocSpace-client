@@ -685,6 +685,7 @@ class InfoPanelStore {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
     const roomType = this.infoPanelSelection.roomType;
+    const isTemplate = this.infoPanelSelection.isTemplate;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
@@ -699,7 +700,8 @@ class InfoPanelStore {
       isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
-      !withoutTitlesAndLinks
+      !withoutTitlesAndLinks &&
+      !isTemplate
     ) {
       requests.push(
         api.rooms

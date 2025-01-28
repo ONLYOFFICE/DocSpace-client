@@ -26,7 +26,6 @@
 
 import styled from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
-import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -71,19 +70,23 @@ const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledPublicRoomBar = styled(PublicRoomBar)`
-  margin-bottom: -2px;
+const StyledPublicRoomBar = styled.div`
+  display: contents;
 
-  .text-container_body {
-    margin-top: 2px;
+  .room-template_bar {
+    margin-top: 0;
+  }
 
-    .room-template_button {
-      margin-top: 10px;
-    }
+  .room-template_button {
+    margin-top: 10px;
+  }
 
-    .room-template_text {
-      color: ${({ theme }) => theme.infoPanel.links.primaryColor};
-    }
+  .room-template_text {
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  svg path {
+    fill: ${({ theme }) => theme.infoPanel.links.barIconColor};
   }
 `;
 

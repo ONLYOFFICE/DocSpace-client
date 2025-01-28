@@ -1854,6 +1854,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {

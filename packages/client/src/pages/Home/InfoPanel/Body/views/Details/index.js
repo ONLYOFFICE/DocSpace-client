@@ -36,7 +36,7 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { Button } from "@docspace/shared/components/button";
-
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import DetailsHelper from "../../helpers/DetailsHelper";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
@@ -134,29 +134,32 @@ const Details = ({
   return (
     <>
       {isTemplate ? (
-        <StyledPublicRoomBar
-          headerText={t("Files:RoomTemplate")}
-          iconName={FormReactSvgUrl} // #657077 // TODO: Templates
-          bodyText={
-            <>
-              <Text
-                fontSize="12px"
-                fontWeight={400}
-                className="room-template_text"
-              >
-                {t("Files:RoomTemplateDescription")}
-              </Text>
+        <StyledPublicRoomBar>
+          <PublicRoomBar
+            className="room-template_bar"
+            headerText={t("Files:RoomTemplate")}
+            iconName={FormReactSvgUrl}
+            bodyText={
+              <>
+                <Text
+                  fontSize="12px"
+                  fontWeight={400}
+                  className="room-template_text"
+                >
+                  {t("Files:RoomTemplateDescription")}
+                </Text>
 
-              <Button
-                label={t("Files:CreateRoom")}
-                className="room-template_button"
-                onClick={onCreateRoom}
-                size="extraSmall"
-                primary
-              />
-            </>
-          }
-        />
+                <Button
+                  label={t("Files:CreateRoom")}
+                  className="room-template_button"
+                  onClick={onCreateRoom}
+                  size="extraSmall"
+                  primary
+                />
+              </>
+            }
+          />
+        </StyledPublicRoomBar>
       ) : selection.thumbnailUrl && !isThumbnailError ? (
         <StyledThumbnail
           isImageOrMedia={

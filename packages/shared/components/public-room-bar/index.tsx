@@ -38,17 +38,28 @@ import { PublicRoomBarProps } from "./PublicRoomBar.types";
 
 const PublicRoomBar = forwardRef(
   (props: PublicRoomBarProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { headerText, bodyText, iconName, onClose, barIsVisible, ...rest } =
-      props;
+    const {
+      headerText,
+      bodyText,
+      iconName,
+      onClose,
+      barIsVisible,
+      className,
+      ...rest
+    } = props;
 
     const headerAs = typeof headerText !== "string" ? "div" : undefined;
     const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
 
     return (
       <div
-        className={classNames(styles.container, {
-          [styles.barVisible]: barIsVisible,
-        })}
+        className={classNames(
+          styles.container,
+          {
+            [styles.barVisible]: barIsVisible,
+          },
+          className,
+        )}
         {...rest}
         ref={ref}
         data-testid="public-room-bar"

@@ -46,7 +46,6 @@ import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
-import RoomIcon from "PUBLIC_DIR/images/icons/12/room.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
@@ -394,14 +393,6 @@ export const getOptions = (
         {
           ...actions.onGoToShared(),
           icon: <FolderIcon />,
-          description: t("Files:GoToMyRooms"),
-          key: "empty-view-goto-shared",
-        },
-      ])
-      .with([FolderType.RoomTemplates, P._, P._], () => [
-        {
-          ...actions.onGoToShared(),
-          icon: <RoomIcon />,
           description: t("Files:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },

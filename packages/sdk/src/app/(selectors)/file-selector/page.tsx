@@ -50,7 +50,7 @@ export default async function Page({
   );
 
   const { id } = baseConfig;
-  const folderId = JSON.parse(id as string);
+  const folderId = id ? JSON.parse(id as string) : null;
   const actions: Promise<unknown>[] = [getFoldersTree(), getFilesSettings()];
   const filter = folderId ? FilesFilter.getDefault() : RoomsFilter.getDefault();
 

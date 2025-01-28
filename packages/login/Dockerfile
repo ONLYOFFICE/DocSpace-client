@@ -8,7 +8,6 @@ WORKDIR /app
 COPY pnpm-lock.yaml .
 COPY pnpm-workspace.yaml .
 COPY package.json .
-COPY packages/runtime.json packages/runtime.json
 COPY packages/shared/package.json packages/shared/package.json
 COPY packages/login/package.json packages/login/package.json
 

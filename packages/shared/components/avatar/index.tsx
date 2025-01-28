@@ -218,11 +218,7 @@ const AvatarPure = ({
           {avatarContent}
         </div>
         {editing && size === "max" ? (
-          <div
-            className={classNames(styles.editContainer, {
-              [styles.hasAvatar]: hasAvatar,
-            })}
-          >
+          <div className={classNames(styles.editContainer)}>
             {hasAvatar ? (
               <>
                 <IconButton

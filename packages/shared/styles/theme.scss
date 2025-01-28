@@ -52,6 +52,8 @@
 
   --avatar-edit-container-background: #{$blue-light-mid};
   --avatar-edit-container-fill: #{$white};
+  --avatar-edit-container-fill-hover: #{$light-blue-main-hover};
+  --avatar-edit-container-fill-press: #{$light-blue-main-pressed};
   --avatar-image-container-background: #{$gray-strong};
   --avatar-image-container-background-image: #{$light-second-main};
   --avatar-image-container-group-background: #{$gray-light-mid};
@@ -349,7 +351,9 @@
   --aside-header-border-color: #{$gray-dark-strong};
 
   --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
-  --avatar-edit-container-fill: #{$black};
+  --avatar-edit-container-fill: #{$white};
+  --avatar-edit-container-fill-hover: #{$light-blue-main-hover};
+  --avatar-edit-container-fill-press: #{$light-blue-main-pressed};
   --avatar-image-container-background: #{$gray-dark-strong};
   --avatar-image-container-background-image: #{$gray-dark-strong};
   --avatar-image-container-group-background: #{$gray-dark-mid};

@@ -24,10 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { OPERATIONS_NAME } from "@docspace/shared/constants";
-// import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { toastr } from "@docspace/shared/components/toast";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
+import { Trans } from "react-i18next";
+
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
+
+import i18n from "../i18n";
 
 class SecondaryProgressDataStore {
   percent = 0;
@@ -43,15 +47,15 @@ class SecondaryProgressDataStore {
     //   label: "Duplicating",
     //   operation: "other",
     //   // alert: true,
-    //   completed: false,
-    //   items: [{ operationId: "operation_1", percent: 10, completed: true }],
+    //   completed: true,
+    //   items: [{ operationId: "operation_1", percent: 10, completed: false }],
     // },
     // {
     //   label: "Downloading",
-    //   operation: OPERATIONS_NAME.upload,
+    //   operation: ,
     //   // alert: false,
     //   completed: false,
-    //   items: [{ operationId: "operation_1", percent: 0, completed: true }],
+    //   items: [{ operationId: "operation_1", percent: 50, completed: false }],
     // },
   ];
 
@@ -62,6 +66,44 @@ class SecondaryProgressDataStore {
   get secondaryActiveOperations() {
     return this.secondaryOperationsArray;
   }
+
+  showSuccessToast = (cuttentOperation, operation) => {
+    if (
+      operation !== OPERATIONS_NAME.copy &&
+      operation !== OPERATIONS_NAME.duplicate &&
+      operation !== OPERATIONS_NAME.move
+    )
+      return;
+
+    const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
+    let i18nKey = "";
+    let toastTranslation = "";
+
+    if (cuttentOperation.itemsCount === 1) {
+      i18nKey = operation === OPERATIONS_NAME.move ? "MoveItem" : "CopyItem";
+
+      toastTranslation = (
+        <Trans
+          t={t}
+          i18nKey={i18nKey}
+          values={{ title: cuttentOperation.title }}
+        />
+      );
+    }
+
+    if (cuttentOperation.itemsCount > 1) {
+      i18nKey = operation === OPERATIONS_NAME.move ? "MoveItems" : "CopyItems";
+      toastTranslation = (
+        <Trans
+          t={t}
+          i18nKey={i18nKey}
+          values={{ qty: cuttentOperation.itemsCount }}
+        />
+      );
+    }
+
+    toastr.success(toastTranslation);
+  };
 
   setSecondaryProgressBarData = (secondaryProgressData) => {
     const { operation, ...progressInfo } = secondaryProgressData;
@@ -79,7 +121,10 @@ class SecondaryProgressDataStore {
       let items = [...operationObject.items];
 
       if (itemIndex !== -1) {
-        items[itemIndex] = progressInfo;
+        items[itemIndex] = {
+          ...operationObject.items[itemIndex],
+          ...progressInfo,
+        };
       } else {
         items = [...items, progressInfo];
       }
@@ -87,6 +132,12 @@ class SecondaryProgressDataStore {
       const updatedItems = items;
 
       const isCompleted = updatedItems.every((item) => item.completed);
+
+      const cuttentOperation = updatedItems[itemIndex];
+
+      if (progressInfo.completed && !progressInfo.alert) {
+        this.showSuccessToast(cuttentOperation, operation);
+      }
 
       this.secondaryOperationsArray[operationIndex] = {
         ...operationObject,

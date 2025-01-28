@@ -591,8 +591,7 @@ class FilesActionStore {
     const { setSecondaryProgressBarData } = secondaryProgressDataStore;
     const { isArchiveFolder } = this.treeFoldersStore;
     const { addActiveItems, roomsForDelete } = this.filesStore;
-    // eslint-disable-next-line no-debugger
-    debugger;
+
     const folderIds = roomsForDelete.map((f) => f.id);
     if (isArchiveFolder) addActiveItems(null, folderIds);
 
@@ -1056,6 +1055,8 @@ class FilesActionStore {
       operation: operationName,
       percent: 0,
       operationId,
+      itemsCount: 1,
+      title: item.title,
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);
@@ -1710,6 +1711,8 @@ class FilesActionStore {
       translations,
       folderTitle,
       isCopy,
+      itemsCount: selection.length,
+      ...(selection.length === 1 && { title: selection[0].title }),
     };
 
     selection.forEach((item) => {
@@ -2897,6 +2900,8 @@ class FilesActionStore {
         copy: t("Common:CopyOperation"),
       },
       content: oneFolder,
+      itemsCount: selections.length,
+      ...(selections.length === 1 && { title: selections[0].title }),
     };
 
     return this.uploadDataStore.itemOperationToFolder(operationData);

@@ -643,18 +643,28 @@ class HotkeyStore {
 
     const isPublic = roomType === RoomsType.PublicRoom;
 
+    let itemTitle = "";
+
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
         const fileInAction = activeFiles.includes(item.id);
-        !fileInAction && fileIds.push(item.id);
+        if (!fileInAction) {
+          fileIds.push(item.id);
+          itemTitle = item.title;
+        }
       } else if (item.id === selectedItemId) {
         toastr.error(t("Common:MoveToFolderMessage"));
       } else {
         const folderInAction = activeFolders.includes(item.id);
 
-        !folderInAction && folderIds.push(item.id);
+        if (!folderInAction) {
+          folderIds.push(item.id);
+          itemTitle = item.title;
+        }
       }
     });
+
+    const itemsLength = folderIds.length + fileIds.length;
 
     if (folderIds.length || fileIds.length) {
       const operationData = {
@@ -667,6 +677,8 @@ class HotkeyStore {
           copy: t("Common:CopyOperation"),
           move: t("Common:MoveToOperation"),
         },
+        itemsCount: itemsLength,
+        ...(itemsLength === 1 && { title: itemTitle }),
       };
 
       if (isPublic && !selections.rootFolderType) {

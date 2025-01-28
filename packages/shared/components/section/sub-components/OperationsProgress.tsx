@@ -39,6 +39,7 @@ import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
 
 type OperationName = keyof typeof OPERATIONS_NAME;
+let timerId = null;
 
 const operationToIconMap: Record<OperationName, FloatingButtonIcons> = {
   download: FloatingButtonIcons.download,
@@ -69,7 +70,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
+  // const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
@@ -127,8 +128,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     const willClose = isOpenDropdown;
     setIsOpenDropdown(!isOpenDropdown);
 
+    if (!willClose) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+
     if (willClose && operationsCompleted && secondaryActiveOperations.length) {
-      setShouldHideButton(true);
+      timerId = setTimeout(() => {
+        setShouldHideButton(true);
+      }, 4000);
     }
   };
 

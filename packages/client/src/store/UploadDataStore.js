@@ -1712,8 +1712,16 @@ class UploadDataStore {
   };
 
   itemOperationToFolder = (data) => {
-    const { destFolderId, folderIds, fileIds, deleteAfter, isCopy, content } =
-      data;
+    const {
+      destFolderId,
+      folderIds,
+      fileIds,
+      deleteAfter,
+      isCopy,
+      content,
+      title,
+      itemsCount,
+    } = data;
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     const conflictResolveType = data.conflictResolveType
@@ -1728,6 +1736,8 @@ class UploadDataStore {
       operation,
       percent: 0,
       operationId,
+      title,
+      itemsCount,
     });
 
     return isCopy

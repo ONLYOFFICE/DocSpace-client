@@ -78,12 +78,13 @@ class PrimaryProgressDataStore {
   };
 
   primaryOperationsArray = [
-    {
-      label: "Uploading",
-      operation: "convert",
-      // alert: true,
-      completed: false,
-    },
+    // {
+    //   label: "Uploading",
+    //   operation: "convert",
+    //   // alert: true,
+    //   completed: false,
+    //   percent: 50,
+    // },
   ];
 
   constructor() {
@@ -129,7 +130,7 @@ class PrimaryProgressDataStore {
         ...incompleteOperations,
       );
 
-      console.log("clearSecondaryProgressData", this.primaryOperationsArray);
+      console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
     }
 
@@ -141,7 +142,7 @@ class PrimaryProgressDataStore {
 
     this.primaryOperationsArray.splice(operationIndex, 1);
 
-    console.log("clearSecondaryProgressData", this.primaryOperationsArray);
+    console.log("clearPrimaryProgressData", this.primaryOperationsArray);
   };
 
   get primaryOperationsCompleted() {

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import MoreLoginModal from "./index";
 import { MoreLoginModalProps } from "./MoreLoginModal.types";
 import "@testing-library/jest-dom";
@@ -37,7 +37,6 @@ describe("<MoreLoginModal />", () => {
     ssoLabel: "SSO Login",
     ssoUrl: "https://example.com/sso",
     t: jest.fn((key: string) => key),
-    isSignUp: false,
     providers: [
       { linked: false, provider: "google", url: "https://example.com/google" },
       {
@@ -48,8 +47,35 @@ describe("<MoreLoginModal />", () => {
     ],
   };
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders without error", () => {
     render(<MoreLoginModal {...baseProps} />);
     expect(screen.getByTestId("modal")).toBeInTheDocument();
+  });
+
+  it("renders SSO button when ssoUrl is provided", () => {
+    render(<MoreLoginModal {...baseProps} />);
+    expect(screen.getByText("SSO Login")).toBeInTheDocument();
+  });
+
+  it("does not render SSO button when ssoUrl is empty", () => {
+    render(<MoreLoginModal {...baseProps} ssoUrl="" />);
+    expect(screen.queryByText("SSO Login")).not.toBeInTheDocument();
+  });
+
+  it("renders all provided social providers", () => {
+    render(<MoreLoginModal {...baseProps} />);
+    expect(screen.getByText("Common:ProviderGoogle")).toBeInTheDocument();
+    expect(screen.getByText("Common:ProviderFacebook")).toBeInTheDocument();
+  });
+
+  it("calls onSocialLoginClick when provider button is clicked", () => {
+    render(<MoreLoginModal {...baseProps} />);
+    const continueButtons = screen.getAllByText("Common:ContinueButton");
+    fireEvent.click(continueButtons[1]);
+    expect(baseProps.onSocialLoginClick).toHaveBeenCalled();
   });
 });

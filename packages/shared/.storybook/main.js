@@ -16,7 +16,6 @@ module.exports = {
     getAbsolutePath("@storybook/addon-actions"),
     getAbsolutePath("@storybook/addon-controls"),
     getAbsolutePath("@storybook/addon-viewport"),
-    getAbsolutePath("@storybook/addon-contexts"),
     getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",

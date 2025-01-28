@@ -105,7 +105,6 @@
     "@emotion/styled": "10.3.0",
     "@playwright/test": "1.48.0",
     "@storybook/addon-actions": "7.6.20",
-    "@storybook/addon-contexts": "5.3.21",
     "@storybook/addon-controls": "7.6.20",
     "@storybook/addon-designs": "8.0.3",
     "@storybook/addon-docs": "7.6.20",

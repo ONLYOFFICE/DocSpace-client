@@ -293,27 +293,24 @@ const FilesRowContent = ({
 };
 
 export default inject(
-  (
-    {
-      currentQuotaStore,
-      settingsStore,
-      treeFoldersStore,
-      filesStore,
-      selectedFolderStore,
-    },
-    { item },
-  ) => {
+  ({
+    currentQuotaStore,
+    settingsStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+  }) => {
     const { filter, roomsFilter } = filesStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+    } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
-    const filterSortBy = item.isTemplate
-      ? SortByFieldName.RoomType
-      : isRooms
-        ? roomsFilter.sortBy
-        : filter.sortBy;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 

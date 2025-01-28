@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const checkedStyle = css`
   background: ${({ theme }) =>
@@ -207,7 +208,6 @@ const TemplatesTile = (props) => {
     getContextModel,
     hideContextMenu,
     t,
-    additionalInfo,
     theme,
     onContextMenu,
     cmRef,
@@ -223,6 +223,7 @@ const TemplatesTile = (props) => {
     contextMenuTitle,
     isActive,
     openUser,
+    showStorageInfo,
   } = props;
   const { isFolder, isRoom, id, fileExst, createdBy } = item;
 
@@ -294,14 +295,16 @@ const TemplatesTile = (props) => {
             >
               {t("Common:Owner")}
             </Text>
-            <Text
-              truncate
-              fontSize="13px"
-              fontWeight={400}
-              color={theme.filesSection.tilesView.subTextColor}
-            >
-              {t("Common:Content")}
-            </Text>
+            {showStorageInfo ? (
+              <Text
+                truncate
+                fontSize="13px"
+                fontWeight={400}
+                color={theme.filesSection.tilesView.subTextColor}
+              >
+                {t("Common:Storage")}
+              </Text>
+            ) : null}
           </div>
           <div className="room-tile_bottom-content_field">
             <Link
@@ -314,14 +317,13 @@ const TemplatesTile = (props) => {
             >
               {createdBy.displayName}
             </Link>
-            <Text
-              truncate
-              fontSize="13px"
-              fontWeight={600}
-              color={theme.filesSection.tilesView.subTextColor}
-            >
-              {additionalInfo}
-            </Text>
+            {showStorageInfo ? (
+              <SpaceQuota
+                item={item}
+                type="room"
+                isReadOnly={!item?.security?.EditRoom}
+              />
+            ) : null}
           </div>
         </div>
       </div>

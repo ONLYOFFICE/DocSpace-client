@@ -162,9 +162,13 @@ class TableStore {
 
   templatesRoomColumnTypeIsEnabled = true;
 
-  templatesContentColumnsIsEnabled = true;
-
   templatesRoomColumnOwnerIsEnabled = true;
+
+  templateRoomColumnTagsIsEnabled = true;
+
+  templateRoomColumnActivityIsEnabled = true;
+
+  templateRoomQuotaColumnIsEnable = false;
 
   constructor(
     authStore,
@@ -194,6 +198,10 @@ class TableStore {
     this.roomColumnTagsIsEnabled = enable;
   };
 
+  setTemplateRoomColumnTags = (enable) => {
+    this.templateRoomColumnTagsIsEnabled = enable;
+  };
+
   setRoomColumnOwner = (enable) => {
     this.roomColumnOwnerIsEnabled = enable;
   };
@@ -202,8 +210,16 @@ class TableStore {
     this.roomColumnActivityIsEnabled = enable;
   };
 
+  setTemplateRoomColumnActivity = (enable) => {
+    this.templateRoomColumnActivityIsEnabled = enable;
+  };
+
   setRoomColumnQuota = (enable) => {
     this.roomQuotaColumnIsEnable = enable;
+  };
+
+  setTemplateRoomColumnQuota = (enable) => {
+    this.templateRoomQuotaColumnIsEnable = enable;
   };
 
   setAuthorColumn = (enable) => {
@@ -280,10 +296,6 @@ class TableStore {
 
   setTypeTemplatesColumn = (enable) => {
     this.templatesRoomColumnTypeIsEnabled = enable;
-  };
-
-  setTemplatesContent = (enable) => {
-    this.templatesContentColumnsIsEnabled = enable;
   };
 
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
@@ -368,8 +380,15 @@ class TableStore {
 
       if (isTemplatesFolder) {
         this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
-        this.setTemplatesContent(splitColumns.includes("ContentTemplates"));
+        this.setTemplateRoomColumnTags(splitColumns.includes("TagsTemplates"));
         this.setOwnerTemplatesColumn(splitColumns.includes("OwnerTemplates"));
+        this.setTemplateRoomColumnActivity(
+          splitColumns.includes("ActivityTemplates"),
+        );
+        this.setTemplateRoomColumnQuota(
+          splitColumns.includes("StorageTemplates"),
+        );
+
         return;
       }
 
@@ -565,15 +584,22 @@ class TableStore {
         this.setTypeTemplatesColumn(!this.templatesRoomColumnTypeIsEnabled);
         return;
 
-      case "ContentTemplates":
-        this.setTemplatesContent(!this.templatesContentColumnsIsEnabled);
-
       case "Tags":
         this.setRoomColumnTags(!this.roomColumnTagsIsEnabled);
         return;
 
+      case "TagsTemplates":
+        this.setTemplateRoomColumnTags(!this.templateRoomColumnTagsIsEnabled);
+        return;
+
       case "Activity":
-        this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
+        this.setRoomColumnActivity(!this.templateRoomColumnActivityIsEnabled);
+        return;
+
+      case "ActivityTemplates":
+        this.setTemplateRoomColumnActivity(
+          !this.templateRoomColumnActivityIsEnabled,
+        );
         return;
 
       case "LastOpened":
@@ -601,6 +627,10 @@ class TableStore {
                 !this.storageInsideGroupColumnIsEnabled,
               )
             : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        return;
+
+      case "StorageTemplates":
+        this.setTemplateRoomColumnQuota(!this.templateRoomQuotaColumnIsEnable);
         return;
 
       case "Inviter":

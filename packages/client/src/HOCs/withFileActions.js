@@ -31,7 +31,6 @@ import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
-import { isMobile as isMobileUtil } from "@docspace/shared/utils";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -266,16 +265,6 @@ export default function withFileActions(WrappedFileItem) {
       }
     };
 
-    additionalComponent = () => {
-      const { t, item } = this.props;
-      const { contentLength, providerKey, foldersCount, filesCount } = item;
-
-      if (!contentLength && !providerKey && !isMobileUtil())
-        return `${t("Translations:Folders")}: ${foldersCount} | ${t("Translations:Files")}: ${filesCount}`;
-
-      return "";
-    };
-
     render() {
       const {
         item,
@@ -331,8 +320,6 @@ export default function withFileActions(WrappedFileItem) {
 
       const badgeUrl = getRoomBadgeUrl(item);
 
-      const additionalInfo = this.additionalComponent();
-
       return (
         <WrappedFileItem
           onContentFileSelect={this.onContentFileSelect}
@@ -360,7 +347,6 @@ export default function withFileActions(WrappedFileItem) {
           badgeUrl={badgeUrl}
           isRecentTab={isRecentTab}
           canDrag={canDrag}
-          additionalInfo={additionalInfo}
           {...this.props}
         />
       );

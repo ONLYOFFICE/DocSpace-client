@@ -88,8 +88,8 @@ const FileTile = (props) => {
     icon,
     isDownload,
     selectableRef,
-    additionalInfo,
     openUser,
+    showStorageInfo,
   } = props;
 
   const navigate = useNavigate();
@@ -195,8 +195,8 @@ const FileTile = (props) => {
           isHighlight={isHighlight}
           iconProgress={icon}
           isDownload={isDownload}
-          additionalInfo={additionalInfo}
           openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
         >
           <FilesTileContent
             t={t}
@@ -219,6 +219,7 @@ export default inject(
       treeFoldersStore,
       uploadDataStore,
       infoPanelStore,
+      currentQuotaStore,
     },
     { item },
   ) => {
@@ -233,6 +234,8 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
       treeFoldersStore;
 
+    const { showStorageInfo } = currentQuotaStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     return {
@@ -245,6 +248,7 @@ export default inject(
       icon,
       isDownload,
       openUser: infoPanelStore.openUser,
+      showStorageInfo,
     };
   },
 )(

@@ -631,10 +631,15 @@ class FilesTableHeader extends React.Component {
   getTemplatesColumns = () => {
     const {
       t,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+      isArchiveFolder,
       roomColumnNameIsEnabled,
       templatesRoomColumnTypeIsEnabled,
-      templatesContentColumnsIsEnabled,
+      templateRoomColumnTagsIsEnabled,
       templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
     } = this.props;
 
     const columns = [
@@ -658,13 +663,14 @@ class FilesTableHeader extends React.Component {
         onClick: this.onRoomsFilter,
       },
       {
-        key: "ContentTemplates",
-        title: t("Common:Content"),
-        enable: templatesContentColumnsIsEnabled,
+        key: "TagsTemplates",
+        title: t("Common:Tags"),
+        enable: templateRoomColumnTagsIsEnabled,
         resizable: true,
-        // sortBy: SortByFieldName.Author,
+        sortBy: SortByFieldName.Tags,
+        withTagRef: true,
         onChange: this.onColumnChange,
-        // onClick: this.onRoomsFilter,
+        onClick: this.onRoomsFilter,
       },
       {
         key: "OwnerTemplates",
@@ -675,7 +681,30 @@ class FilesTableHeader extends React.Component {
         onChange: this.onColumnChange,
         onClick: this.onRoomsFilter,
       },
+      {
+        key: "ActivityTemplates",
+        title: t("LastActivity"),
+        enable: templateRoomColumnActivityIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
     ];
+
+    showStorageInfo &&
+      columns.splice(columns.length, 0, {
+        key: "StorageTemplates",
+        title:
+          isDefaultRoomsQuotaSet && !isArchiveFolder
+            ? t("Common:StorageAndQuota")
+            : t("Common:Storage"),
+        enable: templateRoomQuotaColumnIsEnable,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      });
 
     return [...columns];
   };
@@ -872,8 +901,10 @@ export default inject(
       typeVDRColumnIsEnabled,
 
       templatesRoomColumnTypeIsEnabled,
-      templatesContentColumnsIsEnabled,
+      templateRoomColumnTagsIsEnabled,
       templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -940,8 +971,10 @@ export default inject(
       typeVDRColumnIsEnabled,
 
       templatesRoomColumnTypeIsEnabled,
-      templatesContentColumnsIsEnabled,
+      templateRoomColumnTagsIsEnabled,
       templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,

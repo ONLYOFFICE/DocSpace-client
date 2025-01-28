@@ -27,21 +27,25 @@
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
-import ContentCell from "./ContentCell";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
+import TagsCell from "./TagsCell";
+import DateCell from "./DateCell";
 
 const TemplatesRowData = (props) => {
   const {
-    t,
     templatesRoomColumnTypeIsEnabled,
-    templatesContentColumnsIsEnabled,
+    templateRoomColumnTagsIsEnabled,
     templatesRoomColumnOwnerIsEnabled,
+    templateRoomColumnActivityIsEnabled,
+    templateRoomQuotaColumnIsEnable,
+    showStorageInfo,
 
     dragStyles,
     selectionProp,
@@ -55,6 +59,7 @@ const TemplatesRowData = (props) => {
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
+    item,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -107,21 +112,20 @@ const TemplatesRowData = (props) => {
         <div />
       )}
 
-      {templatesContentColumnsIsEnabled ? (
+      {templateRoomColumnTagsIsEnabled ? (
         <TableCell
           style={
-            !templatesContentColumnsIsEnabled
-              ? { background: "none" }
+            !templateRoomColumnTagsIsEnabled
+              ? { background: "none !important" }
               : dragStyles.style
           }
           {...selectionProp}
         >
-          <ContentCell
-            t={t}
+          <TagsCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "ContentTemplates" ? quickButtonsComponentNode : null}
+          {lastColumn === "TagsTemplates" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -145,22 +149,70 @@ const TemplatesRowData = (props) => {
       ) : (
         <div />
       )}
+
+      {templateRoomColumnActivityIsEnabled ? (
+        <TableCell
+          style={
+            !templateRoomColumnActivityIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "ActivityTemplates" ? "no-extra-space" : "",
+          )}
+        >
+          <DateCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+          {lastColumn === "ActivityTemplates"
+            ? quickButtonsComponentNode
+            : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
+      {showStorageInfo ? (
+        templateRoomQuotaColumnIsEnable ? (
+          <TableCell className="table-cell_Storage/Quota">
+            <SpaceQuota
+              item={item}
+              type="room"
+              isReadOnly={!item?.security?.EditRoom}
+            />
+            {lastColumn === "StorageTemplates"
+              ? quickButtonsComponentNode
+              : null}
+          </TableCell>
+        ) : (
+          <div />
+        )
+      ) : null}
     </>
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, currentQuotaStore }) => {
   const {
     tableStorageName,
     templatesRoomColumnTypeIsEnabled,
-    templatesContentColumnsIsEnabled,
+    templateRoomColumnTagsIsEnabled,
     templatesRoomColumnOwnerIsEnabled,
+    templateRoomColumnActivityIsEnabled,
+    templateRoomQuotaColumnIsEnable,
   } = tableStore;
+
+  const { showStorageInfo } = currentQuotaStore;
 
   return {
     tableStorageName,
     templatesRoomColumnTypeIsEnabled,
-    templatesContentColumnsIsEnabled,
+    templateRoomColumnTagsIsEnabled,
     templatesRoomColumnOwnerIsEnabled,
+    templateRoomColumnActivityIsEnabled,
+    templateRoomQuotaColumnIsEnable,
+    showStorageInfo,
   };
 })(observer(TemplatesRowData));

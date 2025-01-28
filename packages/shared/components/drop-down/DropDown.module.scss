@@ -1,18 +1,6 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/variables/_colors";
 
-:root {
-  --dropdown-background: #{$white};
-  --dropdown-border: none;
-  --dropdown-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
-
-  &[data-theme="dark"] {
-    --dropdown-background: #{$black};
-    --dropdown-border: 1px solid #{$gray-dark-strong};
-    --dropdown-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
-  }
-}
-
 .dropDown {
   font-style: normal;
   font-weight: 600;

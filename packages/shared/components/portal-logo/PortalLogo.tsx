@@ -63,8 +63,6 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
 
   const logo = getLogoUrl(logoSize, !isBase);
 
-  console.log("!isMobileOnly", !isMobileOnly);
-
   const wrapperClassName = classNames(styles.wrapper, {
     [styles.mobile]: isMobile,
     [styles.resizable]: isResizable,

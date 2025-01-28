@@ -1,25 +1,6 @@
 @import "../../../styles/mixins.scss";
 @import "../../../styles/variables/index.scss";
 
-:root {
-  --row-min-height: 47px;
-  --row-width: 100%;
-  --row-border-bottom: #{$gray-light-mid};
-  --row-background-color: #{$light-gray-hover};
-  --row-min-width: 160px;
-  --row-overflow: hidden;
-  --row-text-overflow: ellipsis;
-  --row-element-margin-right: 14px;
-  --row-element-margin-left: 2px;
-  --row-option-button-padding: 8px 0px 9px 7px;
-  --row-content-height: 56px;
-
-  &[data-theme="dark"] {
-    --row-border-bottom: #{$gray-dark-strong};
-    --row-background-color: #{$light-dark-gray-hover};
-  }
-}
-
 .row {
   cursor: default;
   position: relative;

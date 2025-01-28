@@ -27,26 +27,6 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-:root {
-  --modal-dialog-bg-color: #{$white};
-  --modal-dialog-text-color: #{$black};
-  --modal-dialog-backdrop-bg-color: #{$blur-light};
-  --modal-dialog-header-border-color: #{$gray-light-mid};
-
-  --modal-dialog-content-transform-x: 100%;
-
-  &[data-theme="dark"] {
-    --modal-dialog-bg-color: #{$black};
-    --modal-dialog-text-color: #{$white};
-    --modal-dialog-backdrop-bg-color: #{$blur-dark};
-    --modal-dialog-header-border-color: #{$gray-dark-strong};
-  }
-
-  &[data-dir="rtl"] {
-    --modal-dialog-content-transform-x: -100%;
-  }
-}
-
 .modal {
   #create-text-input::-webkit-search-decoration,
   #create-text-input::-webkit-search-cancel-button,
@@ -234,7 +214,7 @@
 .modalBackdrop {
   display: block;
   height: 100%;
-  min-height: fill-available;
+  min-height: stretch;
   max-height: 100vh;
   width: 100vw;
   overflow: hidden;

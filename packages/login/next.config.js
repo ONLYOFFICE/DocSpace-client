@@ -42,13 +42,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
   logging: {
     fetches: {
       fullUrl: true,
@@ -69,28 +62,6 @@ const nextConfig = {
 
     // Configure CSS handling
     config.module.rules.push(
-      // Global styles
-      {
-        test: /\.module\.(scss|sass)$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                localIdentName: "[name]__[local]--[hash:base64:5]",
-              },
-              importLoaders: 1,
-            },
-          },
-          "sass-loader",
-        ],
-      },
-      // Regular SCSS files (non-modules)
-      {
-        test: /(?<!\.module)\.(scss|sass)$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
       // Existing asset rules
       {
         type: "asset/resource",

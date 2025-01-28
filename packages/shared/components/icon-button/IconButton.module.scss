@@ -1,10 +1,12 @@
 @import "../../styles/_mixins.scss";
 @import "../../styles/variables/_colors.scss";
 
-:root[data-theme="dark"] {
-  .iconButton {
-    --icon-button-color: #{$gray-dark};
-    --icon-button-hover-color: #{$white};
+:global(.dark) {
+  :local {
+    .iconButton {
+      --icon-button-color: #{$gray-dark};
+      --icon-button-hover-color: #{$white};
+    }
   }
 }
 

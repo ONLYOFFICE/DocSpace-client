@@ -148,7 +148,6 @@ const ForgotPasswordModalDialog = ({
               isAutoFocussed
               id="forgot-password-modal_email"
               name="e-mail"
-              type={InputType.text}
               size={InputSize.base}
               scale
               tabIndex={2}

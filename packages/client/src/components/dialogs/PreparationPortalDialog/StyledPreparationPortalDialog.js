@@ -27,10 +27,11 @@
 import styled from "styled-components";
 
 const StyledPreparationPortalDialog = styled.div`
-  #container {
+  #container-inner {
     max-width: 392px;
     box-sizing: border-box;
-    margin-bottom: 40px;
+
+    margin: 12px 16px 36px 16px;
   }
   .preparation-portal_body-wrapper {
     margin-bottom: 0;

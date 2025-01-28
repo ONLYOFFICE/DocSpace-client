@@ -47,4 +47,6 @@ export type ErrorContainerProps = PropsWithChildren & {
   onClickButton?: VoidFunction;
   /** Whether the container is used in editor mode */
   isEditor?: boolean;
+  /** Whether to hide the portal logo */
+  hideLogo?: boolean;
 };

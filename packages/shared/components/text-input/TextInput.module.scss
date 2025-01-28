@@ -1,19 +1,6 @@
 @import "../../styles/common-input-styles.scss";
 @import "../../styles/variables/_colors.scss";
 
-:root {
-  // Text Input specific variables
-  --text-input-appearance: none;
-  --text-input-display: flex;
-  --text-input-flex: 1 1 0%;
-  --text-input-outline: none;
-  --text-input-overflow: hidden;
-  --text-input-opacity: 1;
-  --text-input-transition: all 0.2s ease 0s;
-  --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
-  --text-input-font-weight: normal;
-}
-
 .textInput {
   @include common-input-styles;
 

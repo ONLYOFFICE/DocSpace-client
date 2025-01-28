@@ -2,33 +2,6 @@
 @import "../../styles/variables/devices.scss";
 @import "../../styles/mixins.scss";
 
-:root {
-  --empty-view-link-color: #{$light-blue-main};
-  --empty-view-link-bg-color: #{$white};
-  --empty-view-link-bg-color-hover: #{$light-gray-hover};
-  --empty-view-link-bg-color-press: #{$light-gray-selected};
-
-  --empty-view-items-hover: #{$gray-light};
-  --empty-view-items-press: #{$light-gray-selected};
-
-  /* Empty content variables */
-  --empty-view-header-color: #{$black};
-  --empty-view-description-color: #{$gray-text};
-
-  &[data-theme="dark"] {
-    --empty-view-link-bg-color: #{$black};
-    --empty-view-link-bg-color-hover: #{$dark-gray-light};
-    --empty-view-link-bg-color-press: #{$gray-dark-strong};
-
-    --empty-view-items-hover: #{$dark-gray-light};
-    --empty-view-items-press: #{$gray-dark-strong};
-
-    /* Empty content variables */
-    --empty-view-header-color: #{$white};
-    --empty-view-description-color: #{$dark-gray-dark};
-  }
-}
-
 .wrapper {
   margin-inline: auto;
 

@@ -26,11 +26,13 @@
 
 @import "../../styles/variables/_colors.scss";
 
-:root[data-theme="dark"] {
-  .tooltip {
-    --tooltip-bg-color: #{$black};
-    --tooltip-text-color: #{$white};
-    --tooltip-max-width: 320px;
+:global(.dark) {
+  :local {
+    .tooltip {
+      --tooltip-bg-color: #{$black};
+      --tooltip-text-color: #{$white};
+      --tooltip-max-width: 320px;
+    }
   }
 }
 

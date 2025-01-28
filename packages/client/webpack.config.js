@@ -238,6 +238,10 @@ const config = {
             loader: "sass-loader",
             options: {
               sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
             },
           },
         ],
@@ -258,6 +262,10 @@ const config = {
             loader: "sass-loader",
             options: {
               sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
             },
           },
         ],
@@ -301,6 +309,7 @@ const config = {
     new MiniCssExtractPlugin({
       filename: "static/styles/[name].[contenthash].css",
       chunkFilename: "static/styles/[id].[contenthash].css",
+      ignoreOrder: true,
     }),
     new ExternalTemplateRemotesPlugin(),
 

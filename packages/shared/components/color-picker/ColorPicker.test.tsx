@@ -27,35 +27,155 @@
 import { screen, render, fireEvent } from "@testing-library/react";
 import { ColorPicker } from "./ColorPicker";
 import "@testing-library/jest-dom";
+import { globalColors } from "../../themes";
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: {
+      changeLanguage: () => new Promise(() => {}),
+    },
+  }),
+}));
 
 describe("ColorPicker component", () => {
+  const defaultProps = {
+    isPickerOnly: false,
+    appliedColor: globalColors.lightBlueMain,
+  };
+
+  const mockHandleChange = jest.fn();
+  const mockOnApply = jest.fn();
+  const mockOnClose = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders without error", () => {
-    render(<ColorPicker isPickerOnly={false} appliedColor="" />);
+    render(<ColorPicker {...defaultProps} />);
     expect(screen.getByTestId("color-picker")).toBeInTheDocument();
+    expect(screen.getByTestId("color-picker-hex-input")).toBeInTheDocument();
+    expect(screen.getByTestId("color-picker-hex-label")).toBeInTheDocument();
   });
 
   it("renders with custom props", () => {
-    const { getByText } = render(
+    render(
       <ColorPicker
+        {...defaultProps}
         className="custom-class"
         id="custom-id"
         applyButtonLabel="Custom Apply"
         cancelButtonLabel="Custom Cancel"
-        isPickerOnly={false}
-        appliedColor=""
+        hexCodeLabel="Custom Hex"
       />,
     );
-    expect(getByText("Custom Apply")).toBeInTheDocument();
-    expect(getByText("Custom Cancel")).toBeInTheDocument();
+
+    expect(screen.getByTestId("color-picker-apply")).toHaveTextContent(
+      "Custom Apply",
+    );
+    expect(screen.getByTestId("color-picker-cancel")).toHaveTextContent(
+      "Custom Cancel",
+    );
+    expect(screen.getByTestId("color-picker-hex-label")).toHaveTextContent(
+      "Custom Hex:",
+    );
   });
 
-  it("calls onApply callback", () => {
-    const onApply = jest.fn();
-    const { getByRole } = render(
-      <ColorPicker onApply={onApply} isPickerOnly={false} appliedColor="" />,
+  it("renders in picker-only mode", () => {
+    render(<ColorPicker {...defaultProps} isPickerOnly />);
+
+    expect(
+      screen.queryByTestId("color-picker-buttons"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("color-picker-hex-container"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("color-picker-close")).toBeInTheDocument();
+    expect(screen.getByTestId("color-picker-title")).toHaveTextContent(
+      "Custom",
     );
-    const applyButton = getByRole("button", { name: "Apply" });
+  });
+
+  it("calls handleChange when color is changed", () => {
+    render(<ColorPicker {...defaultProps} handleChange={mockHandleChange} />);
+
+    const hexInput = screen.getByTestId("color-picker-hex-input");
+    fireEvent.change(hexInput, { target: { value: "#ff0000" } });
+
+    expect(mockHandleChange).toHaveBeenCalledWith("#ff0000");
+  });
+
+  it("calls onApply with current color when Apply button is clicked", () => {
+    render(
+      <ColorPicker
+        {...defaultProps}
+        onApply={mockOnApply}
+        appliedColor="#ff0000"
+      />,
+    );
+
+    const applyButton = screen.getByTestId("color-picker-apply");
     fireEvent.click(applyButton);
-    expect(onApply).toHaveBeenCalledTimes(1);
+
+    expect(mockOnApply).toHaveBeenCalledWith("#ff0000");
+  });
+
+  it("calls onClose when Cancel button is clicked", () => {
+    render(<ColorPicker {...defaultProps} onClose={mockOnClose} />);
+
+    const cancelButton = screen.getByTestId("color-picker-cancel");
+    fireEvent.click(cancelButton);
+
+    expect(mockOnClose).toHaveBeenCalled();
+  });
+
+  it("calls onClose when close icon is clicked", () => {
+    render(
+      <ColorPicker {...defaultProps} onClose={mockOnClose} isPickerOnly />,
+    );
+
+    const closeButton = screen.getByTestId("color-picker-close");
+    fireEvent.click(closeButton);
+    expect(mockOnClose).toHaveBeenCalled();
+  });
+
+  it("displays the applied color in hex input", () => {
+    const testColor = "#ff0000";
+    render(<ColorPicker {...defaultProps} appliedColor={testColor} />);
+
+    const hexInput = screen.getByTestId("color-picker-hex-input");
+    expect(hexInput).toHaveValue(testColor);
+  });
+
+  it("updates internal color state when appliedColor prop changes", () => {
+    const { rerender } = render(
+      <ColorPicker {...defaultProps} appliedColor="#ff0000" />,
+    );
+
+    let hexInput = screen.getByTestId("color-picker-hex-input");
+    expect(hexInput).toHaveValue("#ff0000");
+
+    rerender(<ColorPicker {...defaultProps} appliedColor="#00ff00" />);
+
+    hexInput = screen.getByTestId("color-picker-hex-input");
+    expect(hexInput).toHaveValue("#00ff00");
+  });
+
+  it("has correct ARIA attributes", () => {
+    render(<ColorPicker {...defaultProps} />);
+
+    const colorPicker = screen.getByTestId("color-picker");
+    expect(colorPicker).toHaveAttribute("role", "dialog");
+    expect(colorPicker).toHaveAttribute("aria-label", "Color picker");
+
+    const hexInput = screen.getByTestId("color-picker-hex-input");
+    expect(hexInput).toHaveAttribute("aria-label", "Hex color value");
+
+    const applyButton = screen.getByTestId("color-picker-apply");
+    expect(applyButton).toHaveAttribute("aria-label", "Apply");
+
+    const cancelButton = screen.getByTestId("color-picker-cancel");
+    expect(cancelButton).toHaveAttribute("aria-label", "Cancel");
   });
 });

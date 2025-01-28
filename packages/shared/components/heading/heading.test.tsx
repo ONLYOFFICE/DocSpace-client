@@ -25,19 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ThemeProvider } from "styled-components";
 import { Heading } from ".";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
-
-import { Base } from "../../themes";
 import styles from "./Heading.module.scss";
 
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
+import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("<Heading />", () => {
   it("renders without error", () => {

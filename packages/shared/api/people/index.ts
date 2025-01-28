@@ -430,7 +430,10 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount, confirmKey = null) {
+export function signupOAuth(
+  signupAccount,
+  confirmKey: Nullable<string> = null,
+) {
   const options = {
     method: "post",
     url: "people/thirdparty/signup",

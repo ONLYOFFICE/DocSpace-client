@@ -29,27 +29,20 @@
 
 $mobile-footer-height: 64px;
 
-:root {
-  --aside-bg-color: #{$white};
+:global(.rtl) {
+  :local {
+    .aside {
+      left: 0;
+      right: unset;
+      transform: translateX(-480px);
 
-  --aside-custom-z-index: unset;
-  --aside-content-padding-bottom: unset;
+      &.scale {
+        transform: translateX(-100%);
+      }
 
-  &[data-theme="dark"] {
-    --aside-bg-color: #{$black};
-  }
-
-  &[data-dir="rtl"] .aside {
-    left: 0;
-    right: unset;
-    transform: translateX(-480px);
-
-    &.scale {
-      transform: translateX(-100%);
-    }
-
-    &.visible {
-      transform: translateX(0);
+      &.visible {
+        transform: translateX(0);
+      }
     }
   }
 }

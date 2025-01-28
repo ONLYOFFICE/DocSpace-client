@@ -23,46 +23,36 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import styled from "styled-components";
-import { injectDefaultTheme, mobile } from "../../utils";
+import { RectangleSkeleton } from "../rectangle";
 
-export const CronWrapper = styled.div`
+export const StyledPreparationPortal = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 340px;
-
-  @media ${mobile} {
-    max-width: 100%;
-  }
+  align-items: center; // Center align the skeletons
+  width: 100%; // Ensure it takes full width
+  margin: 0 auto; // Center the portal in its container
 `;
 
-export const Suffix = styled.span.attrs(injectDefaultTheme)`
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 400;
+export const StyledRectangleSkeleton1 = styled(RectangleSkeleton)`
+  max-width: 414px;
+  width: 100%; // Ensure it takes full width up to max-width
+  margin-bottom: 24px;
 `;
 
-export const SelectWrapper = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  & > span {
-    font-size: 13px;
-  }
-`;
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-
-  gap: 8px;
-
+export const StyledRectangleSkeleton2 = styled(RectangleSkeleton)`
+  max-width: 480px;
   width: 100%;
+  margin-bottom: 20px;
+`;
 
-  > div {
-    flex-grow: 1;
-  }
+export const StyledRectangleSkeleton3 = styled(RectangleSkeleton)`
+  max-width: 414px;
+  width: 100%;
+  margin-bottom: 4px;
+`;
+
+export const StyledRectangleSkeleton4 = styled(RectangleSkeleton)`
+  max-width: 293px;
+  width: 100%;
 `;

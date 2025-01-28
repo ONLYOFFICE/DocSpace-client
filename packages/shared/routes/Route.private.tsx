@@ -126,7 +126,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("loggedOutUserId");
     }
 
-    const isPortalUrl = location.pathname === "/preparation-portal";
+    const isPortalUrl =
+      location.pathname === "/preparation-portal" ||
+      location.pathname === "/management/preparation-portal";
 
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments";

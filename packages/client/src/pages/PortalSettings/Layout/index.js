@@ -28,6 +28,7 @@ import React, { useEffect } from "react";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
+
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 

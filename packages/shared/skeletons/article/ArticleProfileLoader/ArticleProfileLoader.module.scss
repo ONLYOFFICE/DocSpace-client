@@ -2,16 +2,6 @@
 @import "../../../styles/variables/colors.scss";
 @import "../../../styles/mixins.scss";
 
-:root {
-  --catalog-profile-background: #{$light-gray-hover};
-  --catalog-profile-border-top: 1px solid #{$gray-light-mid};
-
-  &[data-theme="dark"] {
-    --catalog-profile-background: #{$light-dark-gray-hover};
-    --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
-  }
-}
-
 .container {
   z-index: 209;
   position: absolute;

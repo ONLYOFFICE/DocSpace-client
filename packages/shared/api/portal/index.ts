@@ -170,7 +170,13 @@ export function getBackupHistory() {
   return request({ method: "get", url: "/portal/getbackuphistory" });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId,
+  storageType,
+  storageParams,
+  notify,
+  dump = false,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,
@@ -179,6 +185,7 @@ export function startRestore(backupId, storageType, storageParams, notify) {
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }

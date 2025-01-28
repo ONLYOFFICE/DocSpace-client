@@ -1720,6 +1720,8 @@ class FilesStore {
             ...data.current,
             inRoom: !!data.current.inRoom,
             isRoom: !!data.current.roomType,
+            isTemplate:
+              data.current.rootFolderType === FolderType.RoomTemplates,
             pathParts: data.pathParts,
             navigationPath,
             ...{ new: data.new },

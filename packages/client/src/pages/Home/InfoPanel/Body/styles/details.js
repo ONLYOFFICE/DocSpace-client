@@ -75,6 +75,7 @@ const StyledPublicRoomBar = styled.div`
 
   .room-template_bar {
     margin-top: 0;
+    margin-bottom: 1px;
   }
 
   .room-template_button {

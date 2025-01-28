@@ -46,6 +46,7 @@ import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
 import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
@@ -77,7 +78,8 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
-  const hideUserRole = infoPanelSelection.isTemplate;
+  const hideUserRole =
+    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,

@@ -105,7 +105,9 @@ const InfoPanelHeaderContent = ({
     !(external && expired === true);
 
   const isTemplate =
-    selection && "isTemplate" in selection && selection.isTemplate;
+    selection &&
+    "rootFolderType" in selection &&
+    selection.rootFolderType === FolderType.RoomTemplates;
 
   const closeInfoPanel = () => setIsVisible(false);
 

@@ -28,7 +28,7 @@ import { useContext, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -162,11 +162,14 @@ const Members = ({
 
   const publicRoomItems = [];
 
+  const isTemplate =
+    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
+
   if (
     isPublicRoomType &&
     withPublicRoomBlock &&
     !withoutTitlesAndLinks &&
-    !infoPanelSelection.isTemplate
+    !isTemplate
   ) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
@@ -261,7 +264,6 @@ const Members = ({
 
   const publicRoomItemsLength = publicRoomItems.length;
 
-  const isTemplate = infoPanelSelection?.isTemplate;
   const isAvailableToEveryone = false; // TODO: Templates
   if (isTemplate && isAvailableToEveryone) {
     return (

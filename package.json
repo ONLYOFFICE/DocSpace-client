@@ -50,6 +50,7 @@
   },
   "packageManager": "pnpm@9.15.4",
   "resolutions": {
-    "@types/react": "18.3.1"
+    "@types/react": "18.3.1",
+    "prismjs": "1.29.0"
   }
 }

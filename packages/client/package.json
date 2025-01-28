@@ -13,7 +13,7 @@
     "start:internal": "webpack-cli serve",
     "start-prod:internal": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
-    "test:build": "PORT=5110 E2E_TEST=true pnpm build",
+    "test:build": "PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",
     "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",

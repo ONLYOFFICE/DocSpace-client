@@ -210,6 +210,7 @@ class UploadDataStore {
   };
 
   clearUploadData = () => {
+    console.log("clearUploadData");
     this.files = [];
     this.filesToConversion = [];
     this.uploadedFilesHistory = [];
@@ -234,6 +235,8 @@ class UploadDataStore {
   };
 
   clearUploadedFiles = () => {
+    console.log("clearUploadedFiles");
+
     const uploadData = {
       filesSize: 0,
       uploadedFiles: 0,

@@ -27,6 +27,7 @@
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -51,26 +52,18 @@ class UploadPanelComponent extends React.Component {
   }
 
   onClose = () => {
-    const {
-      uploaded,
-      converted,
-      clearUploadData,
-      uploadPanelVisible,
-      clearUploadedFiles,
-      setUploadPanelVisible,
-      clearPrimaryProgressData,
-    } = this.props;
+    const { uploadPanelVisible, setUploadPanelVisible } = this.props;
 
     setUploadPanelVisible(!uploadPanelVisible);
 
-    if (uploaded) {
-      if (converted) {
-        clearUploadData();
-        clearPrimaryProgressData();
-      } else {
-        clearUploadedFiles();
-      }
-    }
+    // if (uploaded) {
+    //   if (converted) {
+    //     clearUploadData();
+    //     clearPrimaryProgressData();
+    //   } else {
+    //     clearUploadedFiles();
+    //   }
+    // }
   };
 
   onKeyPress = (event) => {
@@ -80,8 +73,9 @@ class UploadPanelComponent extends React.Component {
   };
 
   clearUploadPanel = () => {
-    const { clearUploadData } = this.props;
+    const { clearUploadData, clearPrimaryProgressData } = this.props;
     clearUploadData();
+    clearPrimaryProgressData(OPERATIONS_NAME.upload);
     this.onClose();
   };
 
@@ -149,7 +143,6 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     clearUploadData,
     cancelUpload,
     cancelConversion,
-    clearUploadedFiles,
     uploadPanelVisible,
     setUploadPanelVisible,
     files,
@@ -169,7 +162,6 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     clearUploadData,
     cancelUpload,
     cancelConversion,
-    clearUploadedFiles,
     uploadDataFiles: files,
     clearPrimaryProgressData,
     isUploading,

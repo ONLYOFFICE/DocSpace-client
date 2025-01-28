@@ -123,6 +123,7 @@ const Section = (props: SectionProps) => {
     clearPrimaryProgressData,
     primaryOperationsCompleted,
     cancelUpload,
+    secondaryOperationsAlert,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -317,7 +318,7 @@ const Section = (props: SectionProps) => {
               operationsCompleted={isCompletedOperations()}
               primaryOperationsCompleted={primaryOperationsCompleted}
               clearPrimaryProgressData={clearPrimaryProgressData}
-              operationsAlert={showSecondaryButtonAlert}
+              operationsAlert={secondaryOperationsAlert}
               primaryActiveOperations={primaryOperationsArray}
               cancelUpload={cancelUpload}
               onOpenPanel={onOpenUploadPanel}

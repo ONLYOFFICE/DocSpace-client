@@ -208,7 +208,7 @@ class SecondaryProgressDataStore {
     console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };
 
-  get alert() {
+  get secondaryOperationsAlert() {
     return this.secondaryOperationsArray.some((op) => op.alert);
   }
 

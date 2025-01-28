@@ -81,7 +81,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         animation.includes("hideButtonImmediate")
       ) {
         clearSecondaryProgressData(null, null, true);
-        clearPrimaryProgressData();
+        clearPrimaryProgressData(null, true);
       }
     },
     [clearSecondaryProgressData, clearPrimaryProgressData],
@@ -134,9 +134,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     }
 
     if (willClose && operationsCompleted && secondaryActiveOperations.length) {
+      const time = primaryActiveOperations.length > 0 ? 8000 : 4000;
+
       timerId = setTimeout(() => {
         setShouldHideButton(true);
-      }, 4000);
+      }, time);
     }
   };
 

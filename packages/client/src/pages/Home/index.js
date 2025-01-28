@@ -95,10 +95,10 @@ const PureHome = (props) => {
     setUploadPanelVisible,
     clearPrimaryProgressData,
     primaryProgressDataVisible,
-    secondaryProgressDataStoreIcon,
-    itemsSelectionLength,
-    itemsSelectionTitle,
-    setItemsSelectionTitle,
+    // secondaryProgressDataStoreIcon,
+    // itemsSelectionLength,
+    // itemsSelectionTitle,
+    // setItemsSelectionTitle,
     refreshFiles,
 
     setFrameConfig,
@@ -166,6 +166,9 @@ const PureHome = (props) => {
     clearSecondaryProgressData,
     primaryOperationsArray,
     cancelUpload,
+    secondaryOperationsAlert,
+    clearUploadData,
+    clearUploadedFiles,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -225,19 +228,22 @@ const PureHome = (props) => {
   });
 
   const { showUploadPanel } = useOperations({
-    t,
+    // t,
     setUploadPanelVisible,
     primaryProgressDataVisible,
     uploaded,
     converted,
     clearPrimaryProgressData,
     secondaryOperationsCompleted,
-    refreshFiles,
-    itemsSelectionTitle,
-    secondaryProgressDataStoreIcon,
-    itemsSelectionLength,
+    // refreshFiles,
+    // itemsSelectionTitle,
+    // secondaryProgressDataStoreIcon,
+    // itemsSelectionLength,
     disableUploadPanelOpen,
-    setItemsSelectionTitle,
+    // setItemsSelectionTitle,
+    clearUploadData,
+    clearUploadedFiles,
+    primaryOperationsArray,
   });
 
   useContacts({
@@ -355,6 +361,8 @@ const PureHome = (props) => {
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = cancelUpload;
+  sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -439,6 +447,8 @@ export const Component = inject(
       primaryProgressDataStore,
       clearUploadedFilesHistory,
       cancelUpload,
+      clearUploadData,
+      clearUploadedFiles,
     } = uploadDataStore;
 
     const {
@@ -507,7 +517,6 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
     } = primaryProgressDataStore;
-
     const {
       visible: secondaryProgressDataStoreVisible,
 
@@ -515,9 +524,11 @@ export const Component = inject(
       itemsSelectionLength,
       itemsSelectionTitle,
       setItemsSelectionTitle,
+
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsAlert,
     } = secondaryProgressDataStore;
     console.log("HOME", secondaryOperationsCompleted);
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
@@ -668,10 +679,12 @@ export const Component = inject(
       secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
-
+      secondaryOperationsAlert,
       primaryOperationsArray,
       primaryOperationsCompleted,
       cancelUpload,
+      clearUploadData,
+      clearUploadedFiles,
     };
   },
 )(observer(Home));

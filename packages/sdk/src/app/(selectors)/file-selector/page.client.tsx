@@ -107,7 +107,7 @@ export default function FilesSelectorClient({
 
   const getIsDisabled = useCallback(() => false, []);
 
-  const initValues: TFilesSelectorInit = {
+  const initProps: TFilesSelectorInit = {
     withInit: true,
     initItems: items,
     initBreadCrumbs: breadCrumbs,
@@ -122,7 +122,7 @@ export default function FilesSelectorClient({
     ? { roomType: baseConfig.roomType }
     : {};
 
-  const headerConfig = baseConfig?.header
+  const headerProps = baseConfig?.header
     ? {
         withHeader: true as true,
         headerProps: {
@@ -136,7 +136,9 @@ export default function FilesSelectorClient({
   return (
     <FilesSelector
       {...roomTypeProps}
-      {...headerConfig}
+      {...headerProps}
+      {...initProps}
+      withCreate={false}
       withBreadCrumbs={baseConfig?.breadCrumbs as boolean}
       withoutBackButton
       withSearch={baseConfig?.search as boolean}
@@ -149,7 +151,6 @@ export default function FilesSelectorClient({
       getIsDisabled={getIsDisabled}
       submitButtonLabel={baseConfig?.acceptLabel || t("Common:Select")}
       withCancelButton={baseConfig?.cancel as boolean}
-      withCreate={false}
       withFooterInput={false}
       withFooterCheckbox={false}
       footerInputHeader=""
@@ -171,7 +172,6 @@ export default function FilesSelectorClient({
       getFilesArchiveError={() => ""}
       embedded
       roomsFolderId={roomsFolderId}
-      {...initValues}
     />
   );
 }

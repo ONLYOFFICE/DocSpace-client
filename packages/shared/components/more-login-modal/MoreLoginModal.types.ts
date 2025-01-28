@@ -44,5 +44,4 @@ export type MoreLoginModalProps = {
   ssoLabel: string;
   ssoUrl: string;
   t: TTranslation;
-  isSignUp: boolean;
 };

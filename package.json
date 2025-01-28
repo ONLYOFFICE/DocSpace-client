@@ -14,6 +14,7 @@
   "scripts": {
     "before-build": "node ./common/scripts/before-build.js",
     "build": "pnpm run before-build && pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor --filter @docspace/management run build",
+    "build:translations": "pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor --filter @docspace/management run build:translations",
     "bump": "pnpm version --workspace",
     "clean": "pnpm -r run clean",
     "deploy": "shx rm -rf ../publish/web && pnpm --filter @docspace/login --filter @docspace/client --filter @docspace/doceditor --filter @docspace/management run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",

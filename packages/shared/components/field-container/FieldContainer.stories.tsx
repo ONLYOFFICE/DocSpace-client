@@ -38,25 +38,49 @@ const meta = {
   component: FieldContainer,
   argTypes: {
     errorColor: { control: "color" },
+    labelText: { control: "text" },
+    tooltipContent: { control: "text" },
+    maxLabelWidth: { control: "text" },
+    errorMessageWidth: { control: "text" },
+    place: {
+      control: "select",
+      options: ["top", "right", "bottom", "left"],
+    },
+    isVertical: { control: "boolean" },
+    isRequired: { control: "boolean" },
+    hasError: { control: "boolean" },
+    labelVisible: { control: "boolean" },
+    removeMargin: { control: "boolean" },
+    inlineHelpButton: { control: "boolean" },
   },
   parameters: {
     docs: {
       description: {
-        component: "Responsive form field container",
+        component: `
+A responsive form field container component that provides consistent layout and styling for form inputs.
+
+## Features
+- Horizontal and vertical layout options
+- Built-in error handling and display
+- Optional required field indicator
+- Configurable label width
+- Integrated tooltip support
+- Accessibility support with ARIA attributes
+`,
       },
     },
   },
 } satisfies Meta<typeof FieldContainer>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = (args: FieldContainerProps) => {
+const Template = ({ hasError, ...rest }: FieldContainerProps) => {
   const [value, setValue] = useState("");
 
-  const { hasError } = args;
   return (
-    <FieldContainer {...args}>
+    <FieldContainer {...rest}>
       <TextInput
         value={value}
         hasError={hasError}
@@ -72,22 +96,109 @@ const Template = (args: FieldContainerProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
-    isVertical: false,
-    isRequired: false,
-    hasError: false,
-    labelVisible: true,
     labelText: "Name:",
+    labelVisible: true,
     maxLabelWidth: "110px",
-    tooltipContent: "Paste you tooltip content here",
-    helpButtonHeaderContent: "Tooltip header",
+    tooltipContent: "Enter your full name",
     place: "top",
-    errorMessage:
-      "Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
+    children: null,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Default configuration with horizontal layout and tooltip",
+      },
+    },
+  },
+};
+
+export const Required: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isRequired: true,
+    labelText: "Email:",
+    tooltipContent: "Enter a valid email address",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Required field with visual indicator",
+      },
+    },
+  },
+};
+
+export const WithError: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    hasError: true,
+    errorMessage: "This field is required",
     errorColor: globalColors.lightErrorStatus,
     errorMessageWidth: "293px",
-    removeMargin: false,
-    children: null,
+    labelText: "Username:",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Field in error state with custom error message",
+      },
+    },
+  },
+};
+
+export const VerticalLayout: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isVertical: true,
+    maxLabelWidth: "100%",
+    labelText: "Description:",
+    tooltipContent: "Provide a brief description",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Vertical layout with full-width label",
+      },
+    },
+  },
+};
+
+export const WithInlineHelp: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    inlineHelpButton: true,
+    tooltipContent: "This is an inline help message",
+    helpButtonHeaderContent: "Help Information",
+    labelText: "Profile URL:",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Field with inline help button and custom tooltip header",
+      },
+    },
+  },
+};
+
+export const CustomStyling: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    className: "custom-field",
+    style: { backgroundColor: "#f5f5f5", padding: "16px", borderRadius: "4px" },
+    labelText: "Custom Field:",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Field with custom styling applied",
+      },
+    },
   },
 };

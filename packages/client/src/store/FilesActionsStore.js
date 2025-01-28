@@ -1469,8 +1469,7 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
-    const shareKey = await this.getPublicKey(selectedFolder);
+    const shareKey = await this.getPublicKey(item);
     if (shareKey) filter.key = shareKey;
 
     if (isRoom) {
@@ -2422,7 +2421,6 @@ class FilesActionStore {
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
-    //  const { isOwner, isAdmin } = this.userStore.user;
 
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
@@ -2431,6 +2429,10 @@ class FilesActionStore {
       this.dialogsStore;
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
+
+    const { filesList } = this.filesStore;
+
+    console.log("filesList", filesList);
 
     if (this.publicRoomStore.isPublicRoom && item.isFolder) {
       setSelection([]);
@@ -2758,11 +2760,8 @@ class FilesActionStore {
     filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
-    console.log("folder id", id);
 
-    // const selectedFolder = this.selectedFolderStore.getSelectedFolder();
     const currentFolder = await this.filesStore.getFolderInfo(id);
-    console.log("currentFolder", currentFolder);
     const shareKey = await this.getPublicKey(currentFolder);
     if (shareKey) filter.key = shareKey;
 
@@ -3259,12 +3258,11 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    //  const { isOwner, isAdmin } = this.userStore.user;
-    const { setPublicRoomKey } = this.settingsStore;
-
     if (
-      (folder.shared || this.selectedFolderStore.shared) &&
-      folder?.rootFolderType === FolderType.Rooms // &&
+      folder.shared &&
+      folder?.rootFolderType === FolderType.Rooms &&
+      folder?.type !== FolderType.Done &&
+      folder?.type !== FolderType.InProgress
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 
@@ -3275,8 +3273,6 @@ class FilesActionStore {
       try {
         const link = await this.filesStore.getPrimaryLink(folder.id);
         const key = link?.sharedTo?.requestToken;
-
-        //setPublicRoomKey(key);
 
         return key;
       } catch (error) {

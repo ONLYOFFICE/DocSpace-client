@@ -66,6 +66,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     validatePublicRoomKey,
     publicRoomKey,
     roomId,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
   } = props;
 
   const location = useLocation();
@@ -81,7 +83,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
       const path = "/rooms/share";
 
-      filter.folder = subFolder || roomId;
+      filter.folder = subFolder || roomId || "";
       filter.key = key;
 
       window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
@@ -89,8 +91,11 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     if (
       key &&
-      publicRoomKey !== key &&
-      location.pathname.includes("/rooms/shared")
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      validatePublicRoomKey
     ) {
       validatePublicRoomKey(key);
     }

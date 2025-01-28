@@ -379,8 +379,6 @@ class InfoPanelStore {
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
-    console.log("newInfoPanelSelection", newInfoPanelSelection);
-
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,
     );

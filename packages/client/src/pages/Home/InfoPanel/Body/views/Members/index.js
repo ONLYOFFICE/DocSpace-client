@@ -48,10 +48,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import MembersHelper from "../../helpers/MembersHelper";
 
 import MembersList from "./sub-components/MembersList";

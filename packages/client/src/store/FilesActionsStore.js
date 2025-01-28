@@ -2430,10 +2430,6 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    const { filesList } = this.filesStore;
-
-    console.log("filesList", filesList);
-
     if (this.publicRoomStore.isPublicRoom && item.isFolder) {
       setSelection([]);
       return this.moveToPublicRoom(item.id);

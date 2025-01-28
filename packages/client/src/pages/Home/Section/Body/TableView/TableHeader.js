@@ -680,7 +680,6 @@ class FilesTableHeader extends React.Component {
 
     const newFilter = roomsFilter.clone();
 
-    console.log("newFilter", newFilter);
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
     } else {

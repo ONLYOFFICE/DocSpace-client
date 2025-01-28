@@ -148,7 +148,6 @@
     "babel-eslint": "10.1.0",
     "babel-jest": "29.7.0",
     "babel-loader": "8.4.1",
-    "babel-plugin-inline-react-svg": "1.1.2",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "babel-plugin-transform-rename-import": "2.3.0",

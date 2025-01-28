@@ -130,7 +130,6 @@ export const SocialButtonsGroup = memo(
               onSocialLoginClick={onClick}
               ssoLabel={ssoLabel ?? ""}
               ssoUrl={ssoUrl ?? ""}
-              isSignUp
             />
           </div>
         ) : null}

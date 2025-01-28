@@ -343,6 +343,7 @@ class FilesActionStore {
     const pbData = {
       operation: "upload",
       percent: 0,
+      completed: false,
     };
 
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });

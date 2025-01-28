@@ -24,6 +24,9 @@ interface ProgressListProps {
     operationId: string | null,
     operation: string,
   ) => void;
+  clearPrimaryProgressData: () => void;
+  onCancel?: () => void;
+  onOpenPanel?: () => void;
 }
 
 const getIcon = (icon: string): string => {
@@ -59,12 +62,14 @@ const ProgressList = observer(
     primaryOperations,
     clearSecondaryProgressData,
     clearPrimaryProgressData,
+    onCancel,
+    onOpenPanel,
   }: ProgressListProps) => {
     return (
       <div className="progress-container">
         {secondaryOperations.map((item) => (
           <div
-            key={`${item.operation}-${item.items[0]?.operationId}-${item.completed}`}
+            key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
             className="progress-list"
           >
             <ProgressBarMobile
@@ -81,7 +86,10 @@ const ProgressList = observer(
           </div>
         ))}
         {primaryOperations.map((item) => (
-          <div key={`${item.operation}`} className="progress-list">
+          <div
+            key={`${item.operation}`}
+            className={`progress-list ${primaryOperations.length > 0 ? "withHover" : ""}`}
+          >
             <ProgressBarMobile
               completed={item.completed}
               label={item.label}
@@ -92,6 +100,8 @@ const ProgressList = observer(
               onClickAction={() => {}}
               onClearProgress={clearPrimaryProgressData}
               operation={item.operation}
+              onCancel={onCancel}
+              onOpenPanel={onOpenPanel}
             />
           </div>
         ))}

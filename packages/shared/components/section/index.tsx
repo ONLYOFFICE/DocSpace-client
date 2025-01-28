@@ -122,6 +122,7 @@ const Section = (props: SectionProps) => {
     primaryOperationsArray,
     clearPrimaryProgressData,
     primaryOperationsCompleted,
+    cancelUpload,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -217,14 +218,16 @@ const Section = (props: SectionProps) => {
     secondaryActiveOperations?.length || primaryOperationsArray?.length;
 
   const isCompletedOperations = () => {
-    if (!secondaryActiveOperations) return;
-    if (!primaryOperationsArray) return;
-
-    if (secondaryActiveOperations.length + primaryOperationsArray.length > 1)
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      primaryOperationsArray?.length > 0 &&
+      secondaryActiveOperations.length + primaryOperationsArray.length > 1
+    )
       return secondaryOperationsCompleted && primaryOperationsCompleted;
 
     if (secondaryActiveOperations?.length > 0)
       return secondaryOperationsCompleted;
+
     return primaryOperationsCompleted;
   };
 
@@ -314,9 +317,10 @@ const Section = (props: SectionProps) => {
               operationsCompleted={isCompletedOperations()}
               primaryOperationsCompleted={primaryOperationsCompleted}
               clearPrimaryProgressData={clearPrimaryProgressData}
-              onOpenUploadPanel={onOpenUploadPanel}
               operationsAlert={showSecondaryButtonAlert}
               primaryActiveOperations={primaryOperationsArray}
+              cancelUpload={cancelUpload}
+              onOpenPanel={onOpenUploadPanel}
             />
           ) : null}
 

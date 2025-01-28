@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import ClearIcon from "PUBLIC_DIR/images/icons/16/clear.react.svg?url";
-import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+import ClearIcon from "PUBLIC_DIR/images/icons/16/clear.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
+import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
+
 import { classNames } from "../../utils";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -54,6 +56,7 @@ const ProgressBarMobile = ({
   onClearProgress,
   operationId,
   operation,
+  onOpenPanel,
 }: ProgressBarMobileProps) => {
   const [isVisible, setIsVisible] = useState(true);
   // const uploadPercent = percent > 100 ? 100 : percent;
@@ -67,7 +70,7 @@ const ProgressBarMobile = ({
     if (onClearProgress && operation) {
       setIsVisible(false);
       setTimeout(() => {
-        onClearProgress(operationId, operation);
+        onClearProgress(operationId ?? null, operation);
       }, 300);
     }
   };
@@ -76,9 +79,10 @@ const ProgressBarMobile = ({
     if (!onClearProgress || !operation) return;
     setIsVisible(false);
     setTimeout(() => {
-      onClearProgress(operationId, operation);
+      onClearProgress(operationId ?? null, operation);
     }, 300);
   };
+
   return (
     <div
       className={classNames(styles.progressBarContainer, {
@@ -87,10 +91,15 @@ const ProgressBarMobile = ({
       })}
     >
       <div className={styles.progressWrapper}>
-        <div className={styles.progressMainContainer}>
+        <div
+          className={classNames(styles.progressMainContainer, {
+            [styles.withClick]: onOpenPanel,
+          })}
+          {...(onOpenPanel && { onClick: onOpenPanel })}
+        >
           <div>
             <IconButton
-              onClick={onCancel}
+              {...(onOpenPanel && { onClick: onOpenPanel })}
               iconName={iconUrl}
               size={16}
               color="white"
@@ -102,50 +111,35 @@ const ProgressBarMobile = ({
                   [styles.complete]: !alert && completed,
                 })}
               >
-                {alert ? (
-                  <AlertIcon
-                    className="alert-icon"
-                    style={{ overflow: "hidden", verticalAlign: "middle" }}
-                  />
-                ) : (
-                  <TickIcon
-                    className="tick-icon"
-                    style={{ overflow: "hidden", verticalAlign: "middle" }}
-                  />
-                )}
+                {alert ? <AlertIcon /> : <TickIcon />}
               </div>
             ) : null}
           </div>
-          <Text
-            className={styles.progressHeader}
-            fontSize="14px"
-            fontWeight={600}
-            truncate
-            color="white"
-          >
-            {label}
-          </Text>
+          <div className={styles.labelWrapper}>
+            <Text
+              className={styles.progressHeader}
+              fontSize="14px"
+              fontWeight={600}
+              truncate
+              color="white"
+            >
+              {label}
+            </Text>
+            {onOpenPanel ? <RightArrowIcon /> : null}
+          </div>
         </div>
 
         <div className={styles.progressInfoWrapper}>
           {withoutProgress ? (
             completed ? (
-              <IconButton
-                onClick={onCloseClick}
-                iconName={CrossIcon}
-                size={16}
-              />
+              <ClearIcon onClick={onCloseClick} />
             ) : (
               <div className={styles.progressLoader} />
             )
           ) : completed ? (
-            <IconButton onClick={onClearClick} iconName={ClearIcon} size={16} />
+            <ClearIcon onClick={onClearClick} />
           ) : (
-            <LoadingButton
-              isConversion
-              percent={percent}
-              color="white"
-            />
+            <LoadingButton isConversion percent={percent} onClick={onCancel} />
           )}
         </div>
       </div>

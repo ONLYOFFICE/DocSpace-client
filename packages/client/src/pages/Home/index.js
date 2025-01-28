@@ -95,7 +95,6 @@ const PureHome = (props) => {
     setUploadPanelVisible,
     clearPrimaryProgressData,
     primaryProgressDataVisible,
-    isProgressFinished,
     secondaryProgressDataStoreIcon,
     itemsSelectionLength,
     itemsSelectionTitle,
@@ -166,6 +165,7 @@ const PureHome = (props) => {
     secondaryActiveOperations,
     clearSecondaryProgressData,
     primaryOperationsArray,
+    cancelUpload,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -231,7 +231,7 @@ const PureHome = (props) => {
     uploaded,
     converted,
     clearPrimaryProgressData,
-    isProgressFinished,
+    secondaryOperationsCompleted,
     refreshFiles,
     itemsSelectionTitle,
     secondaryProgressDataStoreIcon,
@@ -354,6 +354,7 @@ const PureHome = (props) => {
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
+  sectionProps.cancelUpload = cancelUpload;
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -437,6 +438,7 @@ export const Component = inject(
       secondaryProgressDataStore,
       primaryProgressDataStore,
       clearUploadedFilesHistory,
+      cancelUpload,
     } = uploadDataStore;
 
     const {
@@ -513,12 +515,11 @@ export const Component = inject(
       itemsSelectionLength,
       itemsSelectionTitle,
       setItemsSelectionTitle,
-      secondaryOperationsCompleted: isProgressFinished,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
     } = secondaryProgressDataStore;
-
+    console.log("HOME", secondaryOperationsCompleted);
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
       uploadDataStore;
 
@@ -582,8 +583,6 @@ export const Component = inject(
       secondaryProgressDataStoreVisible,
 
       secondaryProgressDataStoreIcon,
-
-      isProgressFinished,
 
       enablePlugins,
 
@@ -672,6 +671,7 @@ export const Component = inject(
 
       primaryOperationsArray,
       primaryOperationsCompleted,
+      cancelUpload,
     };
   },
 )(observer(Home));

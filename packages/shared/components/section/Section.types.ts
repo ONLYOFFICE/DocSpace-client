@@ -120,14 +120,16 @@ export interface Operation {
 export interface OperationsProgressProps {
   primaryActiveOperations?: Operation[];
   secondaryActiveOperations?: Operation[];
-  onOpenUploadPanel?: () => void;
-  onOpenConvertPanel?: () => void;
   operationsAlert?: boolean;
   operationsCompleted?: boolean;
   clearSecondaryProgressData: (
     operationId: string | null,
-    operation: string,
+    operation: string | null,
+    allOperations: boolean,
   ) => void;
+  clearPrimaryProgressData: () => void;
+  cancelUpload: (t: (key: string) => string) => void;
+  onOpenPanel?: () => void;
 }
 
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &

@@ -98,6 +98,10 @@
     .progress-list {
       padding: 0px 8px;
     }
+
+    .progress-list.withHover:hover {
+      background-color: #657077;
+    }
   }
 
   &:active {

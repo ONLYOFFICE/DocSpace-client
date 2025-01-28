@@ -202,7 +202,7 @@ const FloatingButton = ({
         </div>
       </div>
 
-      {completed ? (
+      {completed && onCloseButton ? (
         <CloseIcon
           className="layout-progress-bar_close-icon"
           onClick={handleProgressClear}

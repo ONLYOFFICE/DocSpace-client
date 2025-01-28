@@ -487,6 +487,7 @@ class UploadDataStore {
         });
 
         if (this.uploaded) {
+          // debugger;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
@@ -494,7 +495,7 @@ class UploadDataStore {
 
           this.primaryProgressDataStore.setPrimaryProgressBarData(
             numberFiles === 1
-              ? { ...primaryProgressData, ...{ percent: 100 } }
+              ? { ...primaryProgressData, ...{ percent: 100, completed: true } }
               : primaryProgressData,
           );
         }
@@ -524,7 +525,9 @@ class UploadDataStore {
             if (hFile) hFile.convertProgress = progress;
           });
 
-          error = res && res[0] && res[0].error;
+          error = "";
+          if (res && res[0] && res[0].error) error = res[0].error;
+
           if (error.length) {
             const percent = this.getConversationPercent(index + 1);
             this.setConversionPercent(percent, !!error);
@@ -1008,7 +1011,7 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
       percent: newPercent,
-      completed: newPercent >= 100,
+      // completed: newPercent >= 100,
       // loadingFile: {
       //   uniqueId: this.files[indexOfFile].uniqueId,
       //   percent: percentCurrentFile,
@@ -1525,7 +1528,12 @@ class UploadDataStore {
           : toastr.error(f.error),
       );
 
-      this.primaryProgressDataStore.setPrimaryProgressBarShowError(true); // for empty file
+      // this.primaryProgressDataStore.setPrimaryProgressBarShowError(true); // for empty file
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        alert: true,
+      });
+
       this.primaryProgressDataStore.setPrimaryProgressBarErrors(
         totalErrorsCount,
       );
@@ -1558,6 +1566,11 @@ class UploadDataStore {
         });
       }
     }
+
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      completed: true,
+    });
 
     setTimeout(() => {
       if (!this.primaryProgressDataStore.alert) {

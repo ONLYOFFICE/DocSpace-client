@@ -44,6 +44,25 @@
 
   align-items: center;
   justify-content: space-between;
+
+  svg {
+    path {
+      fill: var(--progress-bar-icon-color) !important;
+    }
+    &:hover {
+      cursor: pointer;
+      path {
+        fill: var(--progress-bar-hover-icon) !important;
+      }
+    }
+  }
+
+  :global(.loading-button) {
+    color: var(--progress-bar-icon-color) !important;
+    &:hover {
+      color: var(--progress-bar-hover-icon) !important;
+    }
+  }
 }
 .progressMainContainer {
   display: flex;
@@ -52,6 +71,10 @@
   align-items: center;
   div:first-child {
     position: relative;
+  }
+
+  &.withClick {
+    cursor: pointer;
   }
 }
 
@@ -147,4 +170,9 @@
       }
     }
   }
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: baseline;
 }

@@ -775,6 +775,9 @@
   --progress-bar-percent-background: #{$light-blue-main};
   --progress-bar-status-color: #{$black};
   --progress-bar-error-color: #{$light-error-status};
+
+  --progress-bar-icon-color: #{$white};
+  --progress-bar-hover-icon: #{$gray};
 }
 
 .dark {
@@ -782,6 +785,9 @@
   --progress-bar-percent-background: #{$dark-status-warning};
   --progress-bar-status-color: #{$white};
   --progress-bar-error-color: #{$dark-error-status};
+
+  --progress-bar-icon-color: #{$white};
+  --progress-bar-hover-icon: #{$gray};
 }
 
 .light {

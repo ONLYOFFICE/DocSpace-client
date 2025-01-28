@@ -27,6 +27,8 @@
 import React, { useState, useLayoutEffect, useCallback, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+import type { AnimationEvent } from "react";
 
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
@@ -36,20 +38,20 @@ import styles from "../Section.module.scss";
 import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
 
-type OperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+type OperationName = keyof typeof OPERATIONS_NAME;
 
 const operationToIconMap: Record<OperationName, FloatingButtonIcons> = {
-  [OPERATIONS_NAME.download]: FloatingButtonIcons.download,
-  [OPERATIONS_NAME.convert]: FloatingButtonIcons.refresh,
-  [OPERATIONS_NAME.copy]: FloatingButtonIcons.copy,
-  [OPERATIONS_NAME.duplicate]: FloatingButtonIcons.duplicate,
-  [OPERATIONS_NAME.markAsRead]: FloatingButtonIcons.markAsRead,
-  [OPERATIONS_NAME.deletePermanently]: FloatingButtonIcons.deletePermanently,
-  [OPERATIONS_NAME.exportIndex]: FloatingButtonIcons.exportIndex,
-  [OPERATIONS_NAME.move]: FloatingButtonIcons.move,
-  [OPERATIONS_NAME.trash]: FloatingButtonIcons.trash,
-  [OPERATIONS_NAME.other]: FloatingButtonIcons.other,
-  [OPERATIONS_NAME.upload]: FloatingButtonIcons.upload,
+  download: FloatingButtonIcons.download,
+  convert: FloatingButtonIcons.refresh,
+  copy: FloatingButtonIcons.copy,
+  duplicate: FloatingButtonIcons.duplicate,
+  markAsRead: FloatingButtonIcons.markAsRead,
+  deletePermanently: FloatingButtonIcons.deletePermanently,
+  exportIndex: FloatingButtonIcons.exportIndex,
+  move: FloatingButtonIcons.move,
+  trash: FloatingButtonIcons.trash,
+  other: FloatingButtonIcons.other,
+  upload: FloatingButtonIcons.upload,
 };
 
 const OperationsProgress: React.FC<OperationsProgressProps> = ({
@@ -59,11 +61,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   operationsCompleted = false,
   clearSecondaryProgressData,
   clearPrimaryProgressData,
+  cancelUpload,
+  onOpenPanel,
 }) => {
-  const [isOpenPanel, setIsOpenPanel] = useState<boolean>(false);
+  const { t } = useTranslation("UploadPanel");
+
+  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  // const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
+  const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
@@ -114,12 +120,12 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     primaryActiveOperations.length + secondaryActiveOperations.length > 1;
 
   useLayoutEffect(() => {
-    if (isOpenPanel && !isSeveralOperations) setIsOpenPanel(false);
-  }, [isOpenPanel, isSeveralOperations]);
+    if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
+  }, [isOpenDropdown, isSeveralOperations]);
 
-  const onOpenProgressPanel = () => {
-    const willClose = isOpenPanel;
-    setIsOpenPanel(!isOpenPanel);
+  const onOpenDropdown = () => {
+    const willClose = isOpenDropdown;
+    setIsOpenDropdown(!isOpenDropdown);
 
     if (willClose && operationsCompleted && secondaryActiveOperations.length) {
       setShouldHideButton(true);
@@ -132,7 +138,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const getIcons = () => {
     if (isSeveralOperations) {
-      return isOpenPanel ? FloatingButtonIcons.arrow : FloatingButtonIcons.dots;
+      return isOpenDropdown
+        ? FloatingButtonIcons.arrow
+        : FloatingButtonIcons.dots;
     }
     const operation = secondaryActiveOperations.length
       ? secondaryActiveOperations[0].operation
@@ -143,12 +151,16 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     );
   };
 
+  const onCanelOperation = () => {
+    cancelUpload(t);
+  };
+  console.log("operationsCompleted", operationsCompleted);
   return (
     <div
       ref={containerRef}
       className={classNames(styles.progressBarContainer, {
         [styles.hideImmediate]: shouldHideButton,
-        [styles.hidden]: !isOpenPanel && operationsCompleted,
+        [styles.hidden]: !isOpenDropdown && operationsCompleted,
       })}
     >
       <FloatingButton
@@ -156,13 +168,16 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         icon={getIcons()}
         alert={operationsAlert}
         completed={operationsCompleted}
-        {...(isSeveralOperations && { onClick: onOpenProgressPanel })}
+        {...(isSeveralOperations && { onClick: onOpenDropdown })}
         percent={operationsCompleted ? 100 : 0}
+        {...(!isSeveralOperations &&
+          primaryActiveOperations.length && { onClick: onOpenPanel })}
+
         // onCloseButton={onCloseButton}
       />
 
       <DropDown
-        open={isOpenPanel}
+        open={isOpenDropdown}
         withBackdrop
         manualWidth="344px"
         directionY="top"
@@ -178,6 +193,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           clearPrimaryProgressData={(operationId, operationName) =>
             clearPrimaryProgressData(operationName, "")
           }
+          onCancel={onCanelOperation}
+          onOpenPanel={onOpenPanel}
         />
       </DropDown>
     </div>

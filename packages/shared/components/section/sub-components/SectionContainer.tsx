@@ -45,7 +45,6 @@ const SectionContainer = React.forwardRef<
       isInfoPanelVisible,
       showTwoProgress,
       isSectionHeaderAvailable,
-      ...props
     },
     forwardRef,
   ) => {
@@ -59,7 +58,6 @@ const SectionContainer = React.forwardRef<
           [styles.showTwoProgress]: showTwoProgress,
           [styles.withoutSectionHeader]: !isSectionHeaderAvailable,
         })}
-        {...props}
       >
         {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
           <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>

@@ -24,20 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment-timezone";
+import moment, { Moment } from "moment-timezone";
+import "moment/locale/en-GB";
 
 export default function getCorrectDate(
   locale: string,
   date: string | Date,
   dateFormat = "L",
   timeFormat = "LT",
+  tz?: string,
 ) {
   if (!date || date === "0001-01-01T00:00:00.0000000Z") return "—";
 
+  moment.locale(locale);
+
+  let curDate: Moment | string = moment(date).locale(locale);
+  let curTime: Moment | string = moment(date).locale(locale);
+
+  if (tz) {
+    curDate = curDate.tz(tz).format(dateFormat);
+    curTime = curTime.tz(tz).format(timeFormat);
+
+    const correctDate = `${curDate} ${curTime}`;
+
+    return correctDate;
+  }
+
   const { timezone } = window;
 
-  const curDate = moment(date).locale(locale).tz(timezone).format(dateFormat);
-  const curTime = moment(date).locale(locale).tz(timezone).format(timeFormat);
+  curDate = curDate.tz(timezone).format(dateFormat);
+  curTime = curTime.tz(timezone).format(timeFormat);
 
   const correctDate = `${curDate} ${curTime}`;
 

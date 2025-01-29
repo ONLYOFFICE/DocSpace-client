@@ -33,36 +33,10 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
+import { FilterType, RoomsType } from "@docspace/shared/enums";
 
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import i18n from "../i18n";
-
-export const getFileTypeName = (fileType) => {
-  switch (fileType) {
-    case FileType.Unknown:
-      return i18n.t("Common:Unknown");
-    case FileType.Archive:
-      return i18n.t("Common:Archive");
-    case FileType.Video:
-      return i18n.t("Common:Video");
-    case FileType.Audio:
-      return i18n.t("Common:Audio");
-    case FileType.Image:
-      return i18n.t("Common:Image");
-    case FileType.Spreadsheet:
-      return i18n.t("Files:Spreadsheet");
-    case FileType.Presentation:
-      return i18n.t("Files:Presentation");
-    case FileType.Document:
-    case FileType.OFormTemplate:
-    case FileType.OForm:
-    case FileType.PDF:
-      return i18n.t("Files:Document");
-    default:
-      return i18n.t("Files:Folder");
-  }
-};
 
 export const getRoomTypeName = (room, t) => {
   switch (room) {

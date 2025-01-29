@@ -605,7 +605,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       </>
     );
 
-    const root = document.getElementById("root");
+    const root =
+      typeof window !== "undefined" && document.getElementById("root");
     if (root && isMobileUtil) {
       const portal = <Portal element={contextMenu} appendTo={root} />;
 

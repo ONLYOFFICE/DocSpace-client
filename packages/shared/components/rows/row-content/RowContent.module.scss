@@ -79,6 +79,8 @@
   min-width: var(--row-content-side-info-min-width);
   @include truncate;
 
+  color: var(--row-side-color);
+
   @include tablet {
     display: block;
   }

@@ -236,27 +236,6 @@
       .people-row-container,
       .files-row-container {
         margin-top: 0px;
-
-        @include desktop {
-          margin-top: -17px;
-        }
-
-        @include mobile {
-          margin-top: 0px;
-        }
-      }
-    }
-  }
-
-  &.isRowView {
-    :global {
-      .section-wrapper-content {
-        .people-row-container,
-        .files-row-container {
-          @include desktop {
-            margin-top: -15px;
-          }
-        }
       }
     }
   }
@@ -416,6 +395,8 @@
 
   width: 100%;
   max-width: 100%;
+
+  height: 100%;
 
   @include tablet-and-below {
     width: 100%;

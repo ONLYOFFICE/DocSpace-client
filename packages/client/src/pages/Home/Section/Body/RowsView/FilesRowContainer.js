@@ -24,39 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { useMemo, useContext } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Context, injectDefaultTheme } from "@docspace/shared/utils";
+import { Context } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/rows";
 
+import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+
 import SimpleFilesRow from "./SimpleFilesRow";
-
-const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
-  .row-list-item:first-child {
-    .row-wrapper {
-      height: 57px;
-
-      margin-top: 1px;
-      border-top: 1px solid transparent;
-
-      .styled-checkbox-container {
-        padding-bottom: 5px;
-      }
-
-      .row_content {
-        padding-bottom: 5px;
-      }
-    }
-  }
-
-  .row-list-item {
-    margin-top: -1px;
-  }
-`;
 
 const FilesRowContainer = ({
   filesList,
@@ -117,8 +95,8 @@ const FilesRowContainer = ({
   ]);
 
   return (
-    <StyledRowContainer
-      className="files-row-container"
+    <RowContainer
+      className={`files-row-container ${styles.filesRowContainer}`}
       filesLength={filesList.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
@@ -128,7 +106,7 @@ const FilesRowContainer = ({
       itemHeight={58}
     >
       {filesListNode}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

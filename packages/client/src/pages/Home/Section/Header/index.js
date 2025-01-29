@@ -31,15 +31,16 @@ import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import React from "react";
+import classnames from "classnames";
+
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
 import { useLocation, useParams } from "react-router-dom";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
+import { Consumer, getLogoUrl } from "@docspace/shared/utils";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   RoomsType,
@@ -56,7 +57,6 @@ import {
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
 import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -65,115 +65,9 @@ import {
   getCheckboxItemLabel,
 } from "SRC_DIR/helpers/filesUtils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import styles from "@docspace/shared/styles/SectionHeader.module.scss";
+
 import { useContactsHeader } from "./useContacts";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  min-height: 33px;
-
-  .table-container_group-menu {
-    margin-block: 0;
-    margin-inline: -20px 0;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    width: calc(100% + 40px);
-    height: 68px;
-
-    @media ${tablet} {
-      height: 61px;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-
-    @media ${mobile} {
-      height: 52px !important;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-  }
-
-  .header-container {
-    min-height: 33px;
-    align-items: center;
-
-    @media ${tablet} {
-      height: 61px;
-    }
-
-    @media ${mobile} {
-      height: 53px;
-    }
-
-    .navigation_button {
-      display: block;
-      margin: 0 16px;
-      overflow: visible;
-      min-width: 50px;
-
-      .button-content {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        display: block;
-        padding-top: 3px;
-      }
-
-      @media ${tablet} {
-        display: ${({ isInfoPanelVisible }) =>
-          isInfoPanelVisible ? "none" : "block"};
-      }
-
-      @media ${mobile} {
-        display: none;
-      }
-    }
-
-    .title-icon {
-      svg {
-        path {
-          fill: ${({ theme, isExternalFolder }) =>
-            isExternalFolder
-              ? theme.roomIcon.linkIcon.path
-              : theme.backgroundColor};
-        }
-        rect {
-          stroke: ${(props) => props.theme.backgroundColor};
-        }
-      }
-    }
-
-    .header_sign-in-button {
-      margin-inline-start: auto;
-      display: block;
-
-      @media ${tablet} {
-        margin-inline-start: 16px;
-      }
-
-      @media ${mobile} {
-        display: none;
-      }
-    }
-  }
-
-  ${(props) =>
-    props.isLifetimeEnabled &&
-    css`
-      .title-icon {
-        svg {
-          path {
-            fill: ${({ theme }) =>
-              theme.navigation.lifetimeIconFill} !important;
-            stroke: ${({ theme }) =>
-              theme.navigation.lifetimeIconStroke} !important;
-          }
-        }
-      }
-    `}
-`;
 
 const SectionHeaderContent = (props) => {
   const {
@@ -236,7 +130,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    isVirtualDataRoomType,
 
     moveToPublicRoom,
     currentDeviceType,
@@ -615,11 +508,12 @@ const SectionHeaderContent = (props) => {
   return (
     <Consumer key="header">
       {(context) => (
-        <StyledContainer
-          isExternalFolder={stateIsExternal}
-          isRecycleBinFolder={isRecycleBinFolder}
-          isVirtualDataRoomType={isVirtualDataRoomType}
-          isLifetimeEnabled={isLifetimeEnabled}
+        <div
+          className={classnames(styles.headerContainer, {
+            [styles.infoPanelVisible]: isInfoPanelVisible,
+            [styles.isExternalFolder]: stateIsExternal,
+            [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          })}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
@@ -736,7 +630,7 @@ const SectionHeaderContent = (props) => {
               />
             </>
           ) : null}
-        </StyledContainer>
+        </div>
       )}
     </Consumer>
   );
@@ -829,7 +723,6 @@ export default inject(
       settingsStore;
 
     const isRoom = !!roomType;
-    const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -943,7 +836,6 @@ export default inject(
 
       moveToRoomsPage,
       onClickBack,
-      isVirtualDataRoomType,
       isPublicRoom,
 
       moveToPublicRoom,

@@ -1,6 +1,8 @@
 @import "./variables/_colors.scss";
 
 .light {
+  --row-side-color: #{$gray};
+
   --background-color: #{$white};
   --text-color: #{$black};
   --interface-direction: ltr;
@@ -232,6 +234,7 @@
 }
 
 .dark {
+  --row-side-color: #{$gray-dark};
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
   --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
@@ -731,6 +734,8 @@
   --navigation-background: #{$white};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
   --navigation-icon-stroke: #{$light-gray-selected};
+  --navigation-lifetime-enabled-fill: #{$main-red};
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .dark {
@@ -742,6 +747,8 @@
   --navigation-background: #{$black};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
+  --navigation-lifetime-enabled-fill: none;
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .light {
@@ -1472,4 +1479,12 @@
 :global(.rtl) {
   --modal-dialog-content-transform-x: -100%;
   --toast-transform: translate3d(-150%, 0, 0);
+}
+
+:global(.rtl) {
+  --context-menu-header-text-margin: 0 8px 0 0;
+  --context-menu-submenu-list-margin: -4px;
+
+  --context-menu-submenu-transoform: scaleX(-1);
+  --context-menu-submenu-transoform-box: content-box;
 }

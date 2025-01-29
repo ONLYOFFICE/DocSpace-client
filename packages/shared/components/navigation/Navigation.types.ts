@@ -110,7 +110,10 @@ export type TNavigationItem = {
   isRootRoom: boolean;
 };
 
-export type TRowParam = { withLogo: boolean; currentDeviceType: DeviceType };
+export type TRowParam = {
+  withLogo: boolean | string;
+  currentDeviceType: DeviceType;
+};
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 

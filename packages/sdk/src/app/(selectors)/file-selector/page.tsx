@@ -91,8 +91,6 @@ export default async function Page({
   const currentFolderId = current.id;
   const rootFolderType = current.rootFolderType;
 
-  console.log(breadCrumbs[0]);
-
   return (
     <FilesSelectorClient
       foldersTree={foldersTree as TFolder[]}

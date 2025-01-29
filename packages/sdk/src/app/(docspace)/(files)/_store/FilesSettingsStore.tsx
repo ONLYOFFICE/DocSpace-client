@@ -23,55 +23,42 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { headers } from "next/headers";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
+"use client";
 
-import { FILTER_HEADER, PAGE_COUNT, THEME_HEADER } from "@/utils/constants";
-import { getFolder } from "@/api/files";
+import React from "react";
+import { makeAutoObservable } from "mobx";
 
-import { Layout } from "./_components/layout";
-import { SectionWrapper as Section } from "./_components/section";
-import { Header, HeaderProps } from "./_components/header";
-import { Filter } from "./_components/filter";
+import { TFilesSettings } from "@docspace/shared/api/files/types";
+import { Nullable } from "@docspace/shared/types";
 
-export default async function DocspaceLayout({
+class FilesSettingsStore {
+  filesSettings: Nullable<TFilesSettings> = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setFilesSettings(settings: TFilesSettings) {
+    this.filesSettings = settings;
+  }
+}
+
+export const FilesSettingsStoreContext =
+  React.createContext<FilesSettingsStore>(new FilesSettingsStore());
+
+export const FilesSettingsStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  const hdrs = headers();
-
-  const filter = hdrs.get(FILTER_HEADER);
-  const theme = hdrs.get(THEME_HEADER);
-
-  const navigationProps: HeaderProps = { theme } as HeaderProps;
-
-  if (filter) {
-    const filesFilter = FilesFilter.getFilter({
-      search: `?${filter}`,
-    } as Location)!;
-
-    filesFilter.pageCount = PAGE_COUNT;
-
-    const folderList = await getFolder(filesFilter.folder, filesFilter);
-
-    const { current, pathParts, folders, files } = folderList;
-
-    navigationProps.current = current;
-    navigationProps.pathParts = pathParts;
-    navigationProps.isEmptyList = !folders.length && !files.length;
-  }
-
+}) => {
   return (
-    <main style={{ width: "100%", height: "100%" }}>
-      <Layout>
-        <Section
-          sectionHeaderContent={<Header {...navigationProps} />}
-          sectionFilterContent={<Filter />}
-          sectionBodyContent={children}
-        />
-      </Layout>
-    </main>
+    <FilesSettingsStoreContext.Provider value={new FilesSettingsStore()}>
+      {children}
+    </FilesSettingsStoreContext.Provider>
   );
-}
+};
+
+export const useFilesSettingsStore = () => {
+  return React.useContext(FilesSettingsStoreContext);
+};

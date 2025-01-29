@@ -41,6 +41,8 @@ import {
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
+import { headers } from "next/headers";
+import { SHARE_KEY_HEADER } from "@/utils/constants";
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const [req] = createRequest([`/files/settings`], [["", ""]], "GET");
@@ -114,6 +116,10 @@ export async function getFolder(
   signal?: AbortSignal,
   share?: string,
 ): Promise<TGetFolder> {
+  const hdrs = headers();
+
+  const shareKey = hdrs.get(SHARE_KEY_HEADER);
+
   let params = folderIdParam;
   let folderId = folderIdParam;
 
@@ -127,9 +133,10 @@ export async function getFolder(
     params = `${folderId}?${filter.toApiUrlParams()}`;
   }
 
-  const shareHeader: [string, string] = share
-    ? ["Request-Token", share]
-    : ["", ""];
+  const shareHeader: [string, string] =
+    share || shareKey
+      ? ["Request-Token", shareKey || shareKey || ""]
+      : ["", ""];
 
   const [req] = createRequest(
     [`/files/${params}`],

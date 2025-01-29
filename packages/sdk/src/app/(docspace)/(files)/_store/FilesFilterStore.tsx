@@ -23,55 +23,43 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { headers } from "next/headers";
 
+"use client";
+
+import React from "react";
+import { makeAutoObservable } from "mobx";
+
+import { Nullable } from "@docspace/shared/types";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { FILTER_HEADER, PAGE_COUNT, THEME_HEADER } from "@/utils/constants";
-import { getFolder } from "@/api/files";
+class FilesFilterStore {
+  filter: Nullable<FilesFilter> = FilesFilter.getDefault();
 
-import { Layout } from "./_components/layout";
-import { SectionWrapper as Section } from "./_components/section";
-import { Header, HeaderProps } from "./_components/header";
-import { Filter } from "./_components/filter";
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-export default async function DocspaceLayout({
+  setFilter(filter: FilesFilter) {
+    this.filter = filter;
+  }
+}
+
+export const FilesFilterStoreContext = React.createContext<FilesFilterStore>(
+  new FilesFilterStore(),
+);
+
+export const FilesFilterStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  const hdrs = headers();
-
-  const filter = hdrs.get(FILTER_HEADER);
-  const theme = hdrs.get(THEME_HEADER);
-
-  const navigationProps: HeaderProps = { theme } as HeaderProps;
-
-  if (filter) {
-    const filesFilter = FilesFilter.getFilter({
-      search: `?${filter}`,
-    } as Location)!;
-
-    filesFilter.pageCount = PAGE_COUNT;
-
-    const folderList = await getFolder(filesFilter.folder, filesFilter);
-
-    const { current, pathParts, folders, files } = folderList;
-
-    navigationProps.current = current;
-    navigationProps.pathParts = pathParts;
-    navigationProps.isEmptyList = !folders.length && !files.length;
-  }
-
+}) => {
   return (
-    <main style={{ width: "100%", height: "100%" }}>
-      <Layout>
-        <Section
-          sectionHeaderContent={<Header {...navigationProps} />}
-          sectionFilterContent={<Filter />}
-          sectionBodyContent={children}
-        />
-      </Layout>
-    </main>
+    <FilesFilterStoreContext.Provider value={new FilesFilterStore()}>
+      {children}
+    </FilesFilterStoreContext.Provider>
   );
-}
+};
+
+export const useFilesFilterStore = () => {
+  return React.useContext(FilesFilterStoreContext);
+};

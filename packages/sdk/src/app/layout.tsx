@@ -23,12 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
@@ -37,9 +35,8 @@ import "@docspace/shared/styles/theme.scss";
 import "@/styles/globals.scss";
 import { getColorTheme } from "@/api/settings";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
-import Providers from "@/providers";
-import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
+import Providers from "@/providers";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -112,8 +109,6 @@ export default async function RootLayout({
             {children}
           </Providers>
         </StyledComponentsRegistry>
-
-        {/* <Scripts /> */}
       </body>
     </html>
   );

@@ -3026,7 +3026,10 @@ __metadata:
     eslint-config-next: "npm:14.2.15"
     framer-motion: "npm:^12.0.3"
     i18next: "npm:20.6.1"
+    mobx: "npm:^6.13.5"
+    mobx-react: "npm:^9.2.0"
     moment: "npm:2.30.1"
+    moment-timezone: "npm:0.5.46"
     nconf: "npm:0.12.1"
     next: "npm:14.2.15"
     prettier: "npm:3.3.3"
@@ -21353,6 +21356,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mobx-react-lite@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "mobx-react-lite@npm:4.1.0"
+  dependencies:
+    use-sync-external-store: "npm:^1.4.0"
+  peerDependencies:
+    mobx: ^6.9.0
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10/3194d53ab730624c3d313e0f1e1e389c8f832fac37163ffa837ffe33a19dffad403592afa1cd2b13f8278d1fdb5bcb5c1234d9945fae19ecf64db6706956aa97
+  languageName: node
+  linkType: hard
+
 "mobx-react@npm:7.6.0":
   version: 7.6.0
   resolution: "mobx-react@npm:7.6.0"
@@ -21370,10 +21390,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mobx-react@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "mobx-react@npm:9.2.0"
+  dependencies:
+    mobx-react-lite: "npm:^4.1.0"
+  peerDependencies:
+    mobx: ^6.9.0
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10/5007b9f21aa96e9c8c5954dd6643384fff9a625846f73012879082aca89bfe13128f76763cff18bf667dc7dc133dfb370db602fa49b496414d8f4de7d5ba369b
+  languageName: node
+  linkType: hard
+
 "mobx@npm:6.13.3":
   version: 6.13.3
   resolution: "mobx@npm:6.13.3"
   checksum: 10/8b7fc25120460eb0a2cc30cb6a7326877de750c2a5c481f9dd17db19d85342f68128ecd97d081529f70d92fdd3c7c143d8529c8e84ceda27a5639dfe45159b87
+  languageName: node
+  linkType: hard
+
+"mobx@npm:^6.13.5":
+  version: 6.13.5
+  resolution: "mobx@npm:6.13.5"
+  checksum: 10/1b0842ae4f3d7319a532ee5fcb29d4ccde714248af9111e7c375bed4adbe49c4535c6383fd14933c4e7ec022c0b730deb55e32344dcfad025c711435b3e21c42
   languageName: node
   linkType: hard
 
@@ -28458,6 +28502,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/2fec05eb851cdfc4a4657b1dfb434e686f346c3265ffc9db8a974bb58f8128bd4a708a3cc00e8f51655fccf81822ed4419ebed42f41610589e3aab0cf2492edb
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "use-sync-external-store@npm:1.4.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/08bf581a8a2effaefc355e9d18ed025d436230f4cc973db2f593166df357cf63e47b9097b6e5089b594758bde322e1737754ad64905e030d70f8ff7ee671fd01
   languageName: node
   linkType: hard
 

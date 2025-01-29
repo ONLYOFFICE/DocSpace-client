@@ -1,0 +1,59 @@
+import { useCallback } from "react";
+
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+
+import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import { isLockedSharedRoom } from "@docspace/shared/utils";
+
+type UseItemContextMenuProps = {};
+
+export default function useItemContextMenu({}: UseItemContextMenuProps) {
+  const getFilesContextMenu = useCallback((file: TFile) => {
+    const model = new Set([
+      AVAILABLE_CONTEXT_ITEMS.select,
+      AVAILABLE_CONTEXT_ITEMS.preview,
+      AVAILABLE_CONTEXT_ITEMS.openPDF,
+      AVAILABLE_CONTEXT_ITEMS.view,
+      AVAILABLE_CONTEXT_ITEMS.pdfView,
+      AVAILABLE_CONTEXT_ITEMS.copyLink,
+      AVAILABLE_CONTEXT_ITEMS.download,
+      AVAILABLE_CONTEXT_ITEMS.downloadAs,
+    ]);
+
+    const isPdf = file.fileExst === ".pdf";
+    const canOpenPlayer =
+      file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
+
+    if (!file.security.Download) model.delete(AVAILABLE_CONTEXT_ITEMS.download);
+
+    if (!file.viewAccessibility.CanConvert)
+      model.delete(AVAILABLE_CONTEXT_ITEMS.downloadAs);
+
+    if (!file.viewAccessibility.WebView)
+      model.delete(AVAILABLE_CONTEXT_ITEMS.preview);
+
+    if (
+      !isPdf ||
+      (file.viewAccessibility.WebRestrictedEditing && file.security.FillForms)
+    ) {
+      model.delete(AVAILABLE_CONTEXT_ITEMS.openPDF);
+    }
+
+    if (!isPdf) model.delete(AVAILABLE_CONTEXT_ITEMS.pdfView);
+
+    if (!canOpenPlayer) model.delete(AVAILABLE_CONTEXT_ITEMS.view);
+
+    return Array.from(model);
+  }, []);
+
+  const getFoldersContextMenu = useCallback((folder: TFolder) => {
+    return [
+      AVAILABLE_CONTEXT_ITEMS.select,
+      AVAILABLE_CONTEXT_ITEMS.open,
+      AVAILABLE_CONTEXT_ITEMS.copyLink,
+      AVAILABLE_CONTEXT_ITEMS.download,
+    ];
+  }, []);
+
+  return { getFilesContextMenu, getFoldersContextMenu };
+}

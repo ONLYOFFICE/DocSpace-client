@@ -24,8 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-async function Page() {
-  return <div>Its SDK page</div>;
-}
+"use client";
 
-export default Page;
+import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+
+import RowView from "../_components/row-view";
+
+type PublicRoomPageProps = {
+  folderList: TGetFolder;
+  shareKey: string;
+  filesSettings: TFilesSettings;
+  portalSettings: TSettings;
+  filesFilter: string;
+};
+
+export default function PublicRoomPage({
+  folderList,
+  filesSettings,
+  filesFilter,
+  portalSettings,
+  shareKey,
+}: PublicRoomPageProps) {
+  const { folders, files, total } = folderList;
+
+  return (
+    <RowView
+      total={total}
+      folders={folders}
+      files={files}
+      shareKey={shareKey}
+      filesSettings={filesSettings}
+      portalSettings={portalSettings}
+      filesFilter={filesFilter}
+    />
+  );
+}

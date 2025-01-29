@@ -27,7 +27,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import {
+  FILTER_HEADER,
+  LOCALE_HEADER,
+  SHARE_KEY_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -57,9 +62,15 @@ export function middleware(request: NextRequest) {
 
   const theme = searchParams.get("theme");
   const locale = searchParams.get("locale");
+  const shareKey = searchParams.get("key");
 
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
+  requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+
+  if (request.nextUrl.pathname.includes("public-room")) {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+  }
 
   return NextResponse.next({
     request: {
@@ -70,5 +81,11 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/sdk", "/room-selector", "/files-selector"],
+  matcher: [
+    "/health",
+    "/sdk",
+    "/room-selector",
+    "/files-selector",
+    "/public-room",
+  ],
 };

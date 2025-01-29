@@ -45,6 +45,7 @@ export const getGuidPosition = (
   guidRects: GuidRectsProps,
   state: number,
   viewAs: string,
+  isRTL?: boolean,
 ) => {
   switch (state) {
     case FormFillingTipsState.Starting:
@@ -57,8 +58,9 @@ export const getGuidPosition = (
           viewAs === "tile"
             ? guidRects.pdf.height + TILE_VIEW_OFFSET
             : guidRects.pdf.height,
-        left:
-          viewAs === "row"
+        left: isRTL
+          ? 0
+          : viewAs === "row"
             ? guidRects.pdf.left - ROW_VIEW_OFFSET
             : viewAs === "tile"
               ? guidRects.pdf.left - TILE_VIEW_POSITION_OFFSET
@@ -92,8 +94,9 @@ export const getGuidPosition = (
           viewAs === "tile"
             ? guidRects.ready.height + TILE_VIEW_OFFSET
             : guidRects.ready.height,
-        left:
-          viewAs === "row"
+        left: isRTL
+          ? 0
+          : viewAs === "row"
             ? guidRects.ready.left - ROW_VIEW_OFFSET
             : viewAs === "tile"
               ? guidRects.ready.left - TILE_VIEW_POSITION_OFFSET

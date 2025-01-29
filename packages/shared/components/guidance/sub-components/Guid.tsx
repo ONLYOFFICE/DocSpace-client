@@ -94,48 +94,76 @@ const Guid = ({
     );
   }
 
+  const getXDirection = React.useCallback(
+    (screenWidth: number) => {
+      let xDirection = isRTL ? "right" : "left";
+      if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
+        xDirection = isRTL ? "right" : "left";
+      }
+      return xDirection;
+    },
+    [isRTL, position.left],
+  );
+
+  const calculateTopPosition = React.useCallback(
+    (screenHeight: number) => {
+      let top = position.bottom + GUID_MODAL_MARGIN;
+
+      if (isStartingTip && viewAs === "tile") {
+        top = position.top;
+      } else if (
+        screenHeight <
+        position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
+      ) {
+        top = position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
+      }
+      return top;
+    },
+    [position.bottom, position.top, isStartingTip, viewAs],
+  );
+
+  const calculateManualX = React.useCallback(
+    (xDirection: string) => {
+      let manualX = isRTL ? "20px" : "20px";
+      if (isLastTip && !isDesktop()) {
+        manualX = "15px";
+      } else if (isStartingTip && viewAs === "tile") {
+        manualX = isRTL
+          ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
+          : `${position.right + GUID_MODAL_MARGIN}px`;
+      } else if (isCompleteTip && viewAs === "tile") {
+        manualX = isRTL
+          ? `${position.right - MODAL_WIDTH}px`
+          : `${position.left}px`;
+      } else if (xDirection === "left" || isRTL) {
+        manualX = "250px";
+      }
+      return manualX;
+    },
+    [
+      isRTL,
+      position.left,
+      position.right,
+      isLastTip,
+      isStartingTip,
+      isCompleteTip,
+      viewAs,
+    ],
+  );
+
   const onResize = React.useCallback(() => {
     const screenHeight = document.documentElement.clientHeight;
     const screenWidth = document.documentElement.clientWidth;
 
-    let xDirection = isRTL ? "right" : "left";
-    if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
-      xDirection = isRTL ? "right" : "left";
-    }
-
-    let top = position.bottom + GUID_MODAL_MARGIN;
-    if (
-      formFillingTipsNumber === FormFillingTipsState.Starting &&
-      viewAs === "tile"
-    ) {
-      top = position.top;
-    } else if (
-      screenHeight <
-      position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
-    ) {
-      top = position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
-    }
-
-    let manualX = isRTL ? "20px" : "20px";
-    if (isLastTip && !isDesktop()) {
-      manualX = "15px";
-    } else if (isStartingTip && viewAs === "tile") {
-      manualX = isRTL
-        ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
-        : `${position.right + GUID_MODAL_MARGIN}px`;
-    } else if (isCompleteTip && viewAs === "tile") {
-      manualX = isRTL
-        ? `${position.right - MODAL_WIDTH}px`
-        : `${position.left}px`;
-    } else if (xDirection === "left" || isRTL) {
-      manualX = "250px";
-    }
+    const xDirection = getXDirection(screenWidth);
+    const top = calculateTopPosition(screenHeight);
+    const manualX = calculateManualX(xDirection);
 
     return {
       ["--manual-x" as string]: manualX,
       ["--manual-y" as string]: `${top}px`,
     };
-  }, [position, isRTL, formFillingTipsNumber, viewAs]);
+  }, [getXDirection, calculateTopPosition, calculateManualX]);
 
   React.useEffect(() => {
     onResize();

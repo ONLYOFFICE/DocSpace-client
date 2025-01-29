@@ -30,6 +30,7 @@ import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
 import { GuidanceProps } from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const Guidance = (props: GuidanceProps) => {
   const {
@@ -40,6 +41,8 @@ const Guidance = (props: GuidanceProps) => {
     shareGuidRects,
     uploadingGuidRects,
   } = props;
+
+  const { isRTL } = useInterfaceDirection();
 
   const [position, setPosition] = React.useState({
     width: 0,
@@ -61,6 +64,7 @@ const Guidance = (props: GuidanceProps) => {
       guidRects,
       formFillingTipsNumber,
       viewAs,
+      isRTL,
     );
     setPosition(newPosition);
   }, [
@@ -70,6 +74,7 @@ const Guidance = (props: GuidanceProps) => {
     shareGuidRects,
     uploadingGuidRects,
     viewAs,
+    isRTL,
   ]);
 
   React.useEffect(() => {
@@ -84,6 +89,7 @@ const Guidance = (props: GuidanceProps) => {
     uploadingGuidRects,
     formFillingTipsNumber,
     viewAs,
+    isRTL,
     onResize,
   ]);
 

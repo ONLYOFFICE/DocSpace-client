@@ -29,7 +29,10 @@
 import { TGetColorTheme, TSettings } from "@docspace/shared/api/settings/types";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
-import { colorThemeHandler } from "@docspace/shared/__mocks__/e2e";
+import {
+  colorThemeHandler,
+  settingsHandler,
+} from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
 
@@ -42,7 +45,7 @@ export async function getSettings(
     "GET",
   );
 
-  const res = await fetch(req);
+  const res = IS_TEST ? settingsHandler() : await fetch(req);
 
   if (res.status === 403) return `access-restricted`;
 

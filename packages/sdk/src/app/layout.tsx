@@ -74,8 +74,6 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  console.log({ locale });
-
   const cookieStore = cookies();
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys

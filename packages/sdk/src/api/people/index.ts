@@ -30,6 +30,9 @@ import { cookies } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { selfHandler } from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getSelf(): Promise<TUser | undefined> {
   const cookieStore = cookies();
@@ -38,7 +41,7 @@ export async function getSelf(): Promise<TUser | undefined> {
   if (!authToken) return;
 
   const [req] = createRequest([`/people/@self`], [["", ""]], "GET");
-  const res = await fetch(req);
+  const res = IS_TEST ? selfHandler() : await fetch(req);
 
   if (res.status === 401 || !res.ok) {
     return;

@@ -33,12 +33,11 @@ import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
-import { getSelf } from "@/api/people";
 import { getColorTheme, getSettings } from "@/api/settings";
-import { getThemeClass } from "@/utils";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
+import { getSelf } from "@/api/people";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -54,6 +53,8 @@ export default async function RootLayout({
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     return <></>;
   }
+
+  const cookieStore = cookies();
 
   const [self, portalSettings, colorTheme] = await Promise.all([
     getSelf(),
@@ -71,17 +72,15 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  const cookieStore = cookies();
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+  const systemTheme = theme
+    ? (theme as ThemeKeys)
+    : (cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys | undefined);
 
   const currentColorScheme = colorTheme?.themes.find(
     (theme) => theme.id === colorTheme.selected,
   );
 
-  const themeClass = getThemeClass(theme, systemTheme);
-  const dirClass = getDirectionByLanguage(locale);
+  const dirClass = getDirectionByLanguage(locale || "en");
 
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
@@ -105,7 +104,10 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body style={styles} className={`${dirClass} ${themeClass}`}>
+      <body
+        style={styles}
+        className={`${dirClass} ${systemTheme === "Dark" ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers
             contextData={{

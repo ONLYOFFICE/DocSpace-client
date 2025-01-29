@@ -11,7 +11,8 @@
     "test:skip-base-languages": "SKIP_BASE_LANGUAGES_TEST=true jest",
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
-    "test:colors": "jest colors.test.js"
+    "test:colors": "jest colors.test.js",
+    "test:deps": "jest deps.test.js"
   },
   "devDependencies": {
     "jest": "29.7.0",

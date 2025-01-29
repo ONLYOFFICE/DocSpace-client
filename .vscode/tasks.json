@@ -513,6 +513,21 @@
       }
     },
     {
+      "label": "Test | Jest:dependencies",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:deps ; open reports/tests-results.html",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | ESLint",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint ; ",

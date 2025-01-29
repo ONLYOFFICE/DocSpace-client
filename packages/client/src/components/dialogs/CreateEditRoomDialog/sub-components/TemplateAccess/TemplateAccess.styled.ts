@@ -63,6 +63,8 @@ export const TemplateAccess = styled.div`
         border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
         border-radius: 50%;
         z-index: 3;
+
+        min-width: 32px;
       }
     }
   }

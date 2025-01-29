@@ -54,7 +54,7 @@ const TemplateAccess = ({
 }: TemplateAccessType) => {
   const userName = roomOwner.displayName;
 
-  const usersList = inviteItems.filter((i) => !i.isGroup);
+  const usersList = inviteItems.filter((i) => !i.isGroup && !i.isOwner);
   const groupsList = inviteItems.filter((i) => i.isGroup);
 
   const avatarList = [];
@@ -84,6 +84,24 @@ const TemplateAccess = ({
   }
 
   const isAvailableToEveryone = false; // TODO: Templates
+
+  const getAccessLabel = () => {
+    if (usersList.length) {
+      if (groupsList.length) {
+        return t("Files:MeAndMembersAndGroups", {
+          membersCount: `${usersList.length}`,
+          groupsCount: `${groupsList.length}`,
+        });
+      }
+      return t("Files:MeAndMembers", { membersCount: `${usersList.length}` });
+    } else if (groupsList.length) {
+      return t("Files:MeAndGroups", { groupsCount: `${groupsList.length}` });
+    }
+
+    return "";
+  };
+
+  let accessLabel = getAccessLabel();
 
   return (
     <Styled.TemplateAccess>
@@ -137,8 +155,7 @@ const TemplateAccess = ({
               <>
                 <div className="access-avatar-container">{avatarList}</div>
                 <Text fontWeight={600} fontSize="14px">
-                  {t("Common:MeLabel")}
-                  {`and ${usersList.length} User and ${groupsList.length} Groups`}
+                  {accessLabel}
                 </Text>
               </>
             )}

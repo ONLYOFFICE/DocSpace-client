@@ -237,5 +237,8 @@
   "Template": "Template",
   "TemplateRemoved": "Selected room templates have been deleted",
   "SaveAsTemplateToast": "Room template <1>«{{title}}»</1> saved",
-  "TemplateRoomCreated": "Room based on the template <1>«{{title}}»</1> created."
+  "TemplateRoomCreated": "Room based on the template <1>«{{title}}»</1> created.",
+  "MeAndMembers": "Me and members ({{ membersCount }})",
+  "MeAndMembersAndGroups": " Me, members ({{ membersCount }}) and groups ({{ groupsCount }})",
+  "MeAndGroups": "Me and groups ({{ groupsCount }})"
 }

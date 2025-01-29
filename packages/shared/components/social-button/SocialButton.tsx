@@ -44,12 +44,13 @@ export const SocialButton = memo((props: SocialButtonProps) => {
     isConnect = false,
     isDisabled = false,
     noHover = false,
+    className,
     ...otherProps
   } = props;
   return (
     <button
       type="button"
-      className={classNames(styles.socialButton, {
+      className={classNames(styles.socialButton, className, {
         [styles.isConnect]: isConnect,
         [styles.disabled]: isDisabled,
         [styles.small]: size !== "base",

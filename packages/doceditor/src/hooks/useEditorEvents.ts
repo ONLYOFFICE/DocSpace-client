@@ -86,7 +86,7 @@ const useEditorEvents = ({
   openOnNewPage,
   t,
   sdkConfig,
-  logoText,
+  organizationName,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -598,7 +598,7 @@ const useEditorEvents = ({
               documentReady,
               successAuth ?? false,
               setDocTitle,
-              logoText,
+              organizationName,
             )
           : setDocumentTitle(
               t,
@@ -607,7 +607,7 @@ const useEditorEvents = ({
               documentReady,
               successAuth ?? false,
               setDocTitle,
-              logoText,
+              organizationName,
             );
       }, 500);
     },
@@ -618,7 +618,7 @@ const useEditorEvents = ({
       docTitle,
       documentReady,
       successAuth,
-      logoText,
+      organizationName,
     ],
   );
 
@@ -635,7 +635,7 @@ const useEditorEvents = ({
           documentReady,
           successAuth ?? false,
           setDocTitle,
-          logoText,
+          organizationName,
         );
         setDocTitle(newTitle);
       }
@@ -646,7 +646,7 @@ const useEditorEvents = ({
       docTitle,
       documentReady,
       successAuth,
-      logoText,
+      organizationName,
     ],
   );
 

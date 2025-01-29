@@ -209,7 +209,7 @@ const Root = ({
     selectFileDialogVisible,
   ]);
 
-  const logoText = settings?.logoText || t("Common:OrganizationName");
+  const organizationName = settings?.logoText || t("Common:OrganizationName");
 
   return isShowDeepLink ? (
     <DeepLink
@@ -247,7 +247,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           onSDKRequestStartFilling={onSDKRequestStartFilling}
-          logoText={logoText}
+          organizationName={organizationName}
         />
       )}
 
@@ -261,7 +261,7 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
-          logoText={logoText}
+          organizationName={organizationName}
         />
       )}
       {selectFileDialogVisible && fileInfo && (

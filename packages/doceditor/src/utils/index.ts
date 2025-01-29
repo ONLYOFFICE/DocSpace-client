@@ -161,9 +161,8 @@ export const setDocumentTitle = (
   documentReady: boolean,
   successAuth: boolean,
   callback?: (value: string) => void,
-  logoText?: string,
+  organizationName: string,
 ) => {
-  const organizationName = logoText;
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

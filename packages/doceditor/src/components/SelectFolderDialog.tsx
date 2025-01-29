@@ -45,7 +45,7 @@ const SelectFolderDialog = ({
   filesSettings,
 
   fileSaveAsExtension,
-  logoText,
+  organizationName,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -63,12 +63,12 @@ const SelectFolderDialog = ({
   const formProps = useMemo(() => {
     return {
       message: t("Common:WarningCopyToFormRoom", {
-        organizationName: logoText,
+        organizationName,
       }),
       isRoomFormAccessible:
         Boolean(fileInfo.isForm) && fileSaveAsExtension === "pdf",
     };
-  }, [fileInfo.isForm, t, fileSaveAsExtension, logoText]);
+  }, [fileInfo.isForm, t, fileSaveAsExtension, organizationName]);
 
   return (
     <FilesSelectorWrapper

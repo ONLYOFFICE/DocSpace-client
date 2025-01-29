@@ -42,7 +42,7 @@ const useInit = ({
   t,
   setDocTitle,
   documentReady,
-  logoText,
+  organizationName,
 }: UseInitProps) => {
   React.useEffect(() => {
     if (isIOS && deviceType === "tablet") {
@@ -61,9 +61,17 @@ const useInit = ({
       documentReady,
       successAuth ?? false,
       setDocTitle,
-      logoText,
+      organizationName,
     );
-  }, [t, config, documentReady, fileInfo, setDocTitle, successAuth, logoText]);
+  }, [
+    t,
+    config,
+    documentReady,
+    fileInfo,
+    setDocTitle,
+    successAuth,
+    organizationName,
+  ]);
 
   React.useEffect(() => {
     if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id) {

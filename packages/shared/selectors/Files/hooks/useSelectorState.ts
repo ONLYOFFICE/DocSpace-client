@@ -56,11 +56,11 @@ type UseSelectorStateProps = Pick<
 const transformInitItems = (
   items: (TFolder | TFile | TRoom)[],
   disabledItems: (string | number)[],
+  withCreate: boolean,
   t: TTranslation,
   getIcon: (fileExst: string) => string,
   initSelectedItemType?: string,
   filterParam?: string | number,
-  withCreate?: boolean,
 ) => {
   const rooms = convertRoomsToItems(
     items.filter((item) => "roomType" in item && item.roomType) as TRoom[],
@@ -101,6 +101,7 @@ const useSelectorState = ({
   checkCreating,
   disabledItems,
   filterParam,
+  withCreate,
 
   withInit,
   initBreadCrumbs,
@@ -110,8 +111,6 @@ const useSelectorState = ({
   initSelectedItemId,
   initSelectedItemType,
   initTotal,
-
-  withCreate,
 }: UseSelectorStateProps & TFilesSelectorInit) => {
   const { t } = useTranslation(["Common"]);
   const { getIcon } = useContext(SettingsContext);
@@ -127,11 +126,11 @@ const useSelectorState = ({
       ? transformInitItems(
           initItems,
           disabledItems,
+          withCreate,
           t,
           getIcon,
           initSelectedItemType,
           filterParam,
-          withCreate,
         )
       : [],
   );

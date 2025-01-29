@@ -28,6 +28,8 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
 import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
+import GoogleIcon from "PUBLIC_DIR/images/share.google.react.svg";
+import LinkedinIcon from "PUBLIC_DIR/images/share.linkedin.react.svg";
 
 import { SocialButton } from "./SocialButton";
 
@@ -40,7 +42,8 @@ const meta: Meta<SocialButtonType> = {
   parameters: {
     docs: {
       description: {
-        component: "Button is used for sign up with help social networks",
+        component:
+          "Button component for social network authentication and sharing",
       },
     },
   },
@@ -49,9 +52,38 @@ const meta: Meta<SocialButtonType> = {
     iconName: {
       control: {
         type: "select",
+        options: [ShareGoogleReactSvgUrl, ShareLinkedinReactSvgUrl],
       },
-      options: [ShareGoogleReactSvgUrl, ShareLinkedinReactSvgUrl],
     },
+    size: {
+      control: {
+        type: "radio",
+        options: ["base", "small"],
+      },
+    },
+    label: {
+      control: "text",
+    },
+    isConnect: {
+      control: "boolean",
+    },
+    isDisabled: {
+      control: "boolean",
+    },
+    noHover: {
+      control: "boolean",
+    },
+    $iconOptions: {
+      control: "object",
+    },
+  },
+  args: {
+    label: "Continue with Google",
+    size: "base",
+    isConnect: false,
+    isDisabled: false,
+    noHover: false,
+    tabIndex: 0,
   },
 };
 
@@ -59,9 +91,57 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    label: "Base SocialButton",
-    iconName: ShareGoogleReactSvgUrl,
-    isDisabled: false,
-    style: { maxWidth: "250px" },
+    IconComponent: GoogleIcon,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    size: "small",
+  },
+};
+
+export const Connected: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    isConnect: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    isDisabled: true,
+  },
+};
+
+export const CustomIconColor: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    $iconOptions: {
+      color: "#FF0000",
+    },
+  },
+};
+
+export const NoHover: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    noHover: true,
+  },
+};
+
+export const WithLinkedin: Story = {
+  args: {
+    IconComponent: LinkedinIcon,
+    label: "Continue with LinkedIn",
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    label: "",
   },
 };

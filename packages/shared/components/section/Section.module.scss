@@ -534,17 +534,17 @@
     transform 0.3s ease-in-out,
     bottom 0.3s ease-in-out;
 
-  @keyframes showButton {
-    from {
-      opacity: 0;
-      transform: translateY(0px);
-    }
+  // @keyframes showButton {
+  //   from {
+  //     opacity: 0;
+  //     transform: translateY(0px);
+  //   }
 
-    to {
-      opacity: 1;
-      transform: translateY(30px);
-    }
-  }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateY(30px);
+  //   }
+  // }
 
   @keyframes hideButton {
     from {
@@ -552,11 +552,10 @@
       transform: translateY(0);
     }
     to {
-      opacity: 0;
-      transform: translateY(30px);
+      // opacity: 0;
+      transform: translateY(72px);
     }
   }
-
   @keyframes hideButtonImmediate {
     from {
       opacity: 1;
@@ -564,7 +563,31 @@
     }
     to {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(72px);
+    }
+  }
+
+  @include tablet-and-below {
+    @keyframes hideButton {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        // opacity: 0;
+        transform: translateY(64px);
+      }
+    }
+
+    @keyframes hideButtonImmediate {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(64px);
+      }
     }
   }
 

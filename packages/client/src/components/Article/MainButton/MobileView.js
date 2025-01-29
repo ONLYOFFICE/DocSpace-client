@@ -52,15 +52,11 @@ const MobileView = ({
   buttonOptions,
   withoutButton,
   withMenu,
-  clearUploadData,
-  clearUploadedFiles,
+
   setUploadPanelVisible,
   onMainButtonClick,
   isRoomsFolder,
   mainButtonMobileVisible,
-  uploaded,
-  converted,
-  primaryOperationsArray,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
 
@@ -71,18 +67,6 @@ const MobileView = ({
   const showUploadPanel = React.useCallback(() => {
     setUploadPanelVisible && setUploadPanelVisible(true);
   }, [setUploadPanelVisible]);
-
-  // React.useEffect(() => {
-  //   if (primaryOperationsArray?.length === 0) {
-  //     if (uploaded) {
-  //       if (converted) {
-  //         clearUploadData();
-  //       } else {
-  //         clearUploadedFiles();
-  //       }
-  //     }
-  //   }
-  // }, [primaryOperationsArray?.length]);
 
   return (
     mainButtonMobileVisible && (
@@ -105,23 +89,10 @@ const MobileView = ({
 
 export default inject(({ uploadDataStore, treeFoldersStore }) => {
   const { isRoomsFolder } = treeFoldersStore;
-  const {
-    setUploadPanelVisible,
-    clearUploadData,
-    uploaded,
-    converted,
-    clearUploadedFiles,
-    primaryProgressDataStore,
-  } = uploadDataStore;
-  const { primaryOperationsArray } = primaryProgressDataStore;
+  const { setUploadPanelVisible } = uploadDataStore;
 
   return {
-    clearUploadData,
-    clearUploadedFiles,
     setUploadPanelVisible,
     isRoomsFolder,
-    uploaded,
-    converted,
-    primaryOperationsArray,
   };
 })(observer(MobileView));

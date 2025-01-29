@@ -108,6 +108,8 @@ class SecondaryProgressDataStore {
   setSecondaryProgressBarData = (secondaryProgressData) => {
     const { operation, ...progressInfo } = secondaryProgressData;
 
+    if (!operation) return;
+
     const operationIndex = this.secondaryOperationsArray.findIndex(
       (object) => object.operation === operation,
     );

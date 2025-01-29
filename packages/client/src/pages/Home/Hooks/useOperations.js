@@ -30,81 +30,14 @@ import React from "react";
 // import { toastr } from "@docspace/shared/components/toast";
 
 const useOperations = ({
-  // t,
   setUploadPanelVisible,
-  primaryProgressDataVisible,
   uploaded,
   converted,
-  clearPrimaryProgressData,
-  secondaryOperationsCompleted,
-  // refreshFiles,
-  // itemsSelectionTitle,
-  // secondaryProgressDataStoreIcon,
-  // itemsSelectionLength,
   disableUploadPanelOpen,
-  // setItemsSelectionTitle,
   clearUploadData,
   clearUploadedFiles,
   primaryOperationsArray,
 }) => {
-  const prevProps = React.useRef({
-    secondaryOperationsCompleted,
-  });
-
-  // const showOperationToast = React.useCallback(
-  //   (type, qty, title) => {
-  //     switch (type) {
-  //       case "move":
-  //         if (qty > 1) {
-  //           return (
-  //             toastr.success(
-  //               <Trans t={t} i18nKey="MoveItems" ns="Files">
-  //                 {{ qty }} elements has been moved
-  //               </Trans>,
-  //             ),
-  //             refreshFiles()
-  //           );
-  //         }
-  //         return (
-  //           toastr.success(
-  //             <Trans t={t} i18nKey="MoveItem" ns="Files">
-  //               {{ title }} moved
-  //             </Trans>,
-  //           ),
-  //           refreshFiles()
-  //         );
-  //       case "duplicate":
-  //         if (qty > 1) {
-  //           return (
-  //             toastr.success(
-  //               <Trans t={t} i18nKey="CopyItems" ns="Files">
-  //                 {{ qty }} elements copied
-  //               </Trans>,
-  //             ),
-  //             refreshFiles()
-  //           );
-  //         }
-  //         return (
-  //           toastr.success(
-  //             <Trans t={t} i18nKey="CopyItem" ns="Files">
-  //               {{ title }} copied
-  //             </Trans>,
-  //           ),
-  //           refreshFiles()
-  //         );
-  //       case "duplicate-room":
-  //         return toastr.success(
-  //           <Trans t={t} i18nKey="CopyItem" ns="Files">
-  //             {{ title }} copied
-  //           </Trans>,
-  //         );
-  //       default:
-  //         break;
-  //     }
-  //   },
-  //   [t],
-  // );
-
   React.useEffect(() => {
     if (primaryOperationsArray?.length === 0) {
       if (uploaded) {
@@ -117,39 +50,9 @@ const useOperations = ({
     }
   }, [primaryOperationsArray.length]);
 
-  // React.useEffect(() => {
-  //   if (
-  //     secondaryOperationsCompleted &&
-  //     itemsSelectionTitle &&
-  //     secondaryOperationsCompleted !==
-  //       prevProps.current.secondaryOperationsCompleted
-  //   ) {
-  //     showOperationToast(
-  //       secondaryProgressDataStoreIcon,
-  //       itemsSelectionLength,
-  //       itemsSelectionTitle,
-  //     );
-  //     setItemsSelectionTitle(null);
-  //   }
-  // }, [
-  //   secondaryOperationsCompleted,
-
-  //   itemsSelectionTitle,
-  //   showOperationToast,
-  //   setItemsSelectionTitle,
-  // ]);
-
-  React.useEffect(() => {
-    prevProps.current.secondaryOperationsCompleted =
-      secondaryOperationsCompleted;
-  }, [secondaryOperationsCompleted]);
-
   const showUploadPanel = () => {
     if (disableUploadPanelOpen) return;
     setUploadPanelVisible(true);
-
-    if (primaryProgressDataVisible && uploaded && converted)
-      clearPrimaryProgressData();
   };
 
   return { showUploadPanel };

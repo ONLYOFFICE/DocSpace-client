@@ -95,10 +95,7 @@ const PureHome = (props) => {
     setUploadPanelVisible,
     clearPrimaryProgressData,
     primaryProgressDataVisible,
-    // secondaryProgressDataStoreIcon,
-    // itemsSelectionLength,
-    // itemsSelectionTitle,
-    // setItemsSelectionTitle,
+
     refreshFiles,
 
     setFrameConfig,
@@ -126,7 +123,7 @@ const PureHome = (props) => {
     primaryProgressDataAlert,
     clearUploadedFilesHistory,
 
-    secondaryProgressDataStoreVisible,
+    isSecondaryProgressVisbile,
 
     isFrame,
     showFilter,
@@ -228,19 +225,10 @@ const PureHome = (props) => {
   });
 
   const { showUploadPanel } = useOperations({
-    // t,
     setUploadPanelVisible,
-    primaryProgressDataVisible,
     uploaded,
     converted,
-    clearPrimaryProgressData,
-    secondaryOperationsCompleted,
-    // refreshFiles,
-    // itemsSelectionTitle,
-    // secondaryProgressDataStoreIcon,
-    // itemsSelectionLength,
     disableUploadPanelOpen,
-    // setItemsSelectionTitle,
     clearUploadData,
     clearUploadedFiles,
     primaryOperationsArray,
@@ -336,7 +324,7 @@ const PureHome = (props) => {
       sectionProps.clearUploadedFilesHistory = clearUploadedFilesHistory;
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
-        primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+        primaryProgressDataVisible || isSecondaryProgressVisbile;
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
@@ -517,20 +505,15 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
     } = primaryProgressDataStore;
+
     const {
-      visible: secondaryProgressDataStoreVisible,
-
-      icon: secondaryProgressDataStoreIcon,
-      itemsSelectionLength,
-      itemsSelectionTitle,
-      setItemsSelectionTitle,
-
+      isSecondaryProgressVisbile,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
       secondaryOperationsAlert,
     } = secondaryProgressDataStore;
-    console.log("HOME", secondaryOperationsCompleted);
+
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
       uploadDataStore;
 
@@ -591,15 +574,10 @@ export const Component = inject(
 
       clearUploadedFilesHistory,
 
-      secondaryProgressDataStoreVisible,
-
-      secondaryProgressDataStoreIcon,
+      isSecondaryProgressVisbile,
 
       enablePlugins,
 
-      itemsSelectionLength,
-      setItemsSelectionTitle,
-      itemsSelectionTitle,
       isErrorRoomNotAvailable,
       isRoomsFolder,
       isArchiveFolder,

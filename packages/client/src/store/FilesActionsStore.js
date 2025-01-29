@@ -944,7 +944,10 @@ class FilesActionStore {
         if (res[0]?.error) return Promise.reject(res[0].error);
         const data = res[0] ? res[0] : null;
 
-        await this.uploadDataStore.loopFilesOperations(data, operation);
+        await this.uploadDataStore.loopFilesOperations(data, {
+          operationId,
+          operation,
+        });
 
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles(
@@ -992,7 +995,10 @@ class FilesActionStore {
     return deleteFolder(itemId).then(async (res) => {
       if (res[0]?.error) return Promise.reject(res[0].error);
       const data = res[0] ? res[0] : null;
-      await this.uploadDataStore.loopFilesOperations(data, operation);
+      await this.uploadDataStore.loopFilesOperations(data, {
+        operationId,
+        operation,
+      });
 
       this.updateFilesAfterDelete(operationId, operation);
       this.filesStore.removeFiles(
@@ -1282,6 +1288,10 @@ class FilesActionStore {
     const destFolder = action === "archive" ? archiveRoomsId : myRoomsId;
 
     addActiveItems(null, items, destFolder);
+    const pbData = {
+      operation,
+      operationId,
+    };
 
     switch (action) {
       case "archive":
@@ -1295,11 +1305,7 @@ class FilesActionStore {
             const data = lastResult || null;
 
             const operationData =
-              await this.uploadDataStore.loopFilesOperations(
-                data,
-                operationId,
-                operation,
-              );
+              await this.uploadDataStore.loopFilesOperations(data, pbData);
 
             if (
               !operationData ||
@@ -1320,8 +1326,7 @@ class FilesActionStore {
 
             setSecondaryProgressBarData({
               completed: true,
-              operation,
-              operationId,
+              ...pbData,
             });
 
             // return setTimeout(
@@ -1352,8 +1357,7 @@ class FilesActionStore {
             setSecondaryProgressBarData({
               completed: true,
               alert: true,
-              operation,
-              operationId,
+              ...pbData,
             });
             // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
             return toastr.error(err.message ? err.message : err);
@@ -1370,11 +1374,6 @@ class FilesActionStore {
 
             if (lastResult?.error) return Promise.reject(lastResult.error);
 
-            const pbData = {
-              icon: "move",
-              label: "Restore rooms from archive operation",
-              operationId,
-            };
             const data = lastResult || null;
 
             console.log(pbData.label, { data, res });
@@ -1385,8 +1384,7 @@ class FilesActionStore {
 
             setSecondaryProgressBarData({
               completed: true,
-              operation,
-              operationId,
+              ...pbData,
             });
 
             // return setTimeout(
@@ -1412,8 +1410,7 @@ class FilesActionStore {
             setSecondaryProgressBarData({
               completed: true,
               alert: true,
-              operation,
-              operationId,
+              ...pbData,
             });
             // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
             return toastr.error(err.message ? err.message : err);

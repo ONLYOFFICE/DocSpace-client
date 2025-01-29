@@ -316,7 +316,6 @@ const Section = (props: SectionProps) => {
               clearSecondaryProgressData={clearSecondaryProgressData}
               secondaryActiveOperations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
-              primaryOperationsCompleted={primaryOperationsCompleted}
               clearPrimaryProgressData={clearPrimaryProgressData}
               operationsAlert={secondaryOperationsAlert}
               primaryActiveOperations={primaryOperationsArray}

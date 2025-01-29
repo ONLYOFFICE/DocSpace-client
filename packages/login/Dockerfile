@@ -14,7 +14,7 @@ COPY packages/login/package.json packages/login/package.json
 # COPY  packages/client/package.json packages/client/package.json
 
 RUN pnpm install
-RUN pnpx playwright install chromium --with-deps
+RUN npx playwright install chromium --with-deps
 
 COPY packages/shared packages/shared/
 COPY packages/login packages/login/

@@ -19,7 +19,7 @@ jobs:
           up-flags: --build --force-recreate
           services: tests-ci
           test-container: tests-ci
-          test-command: pnpx playwright test
+          test-command: npx playwright test
   eslint:
     name: "Lint tests"
     runs-on: ubuntu-latest

@@ -29,7 +29,6 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import type { AnimationEvent } from "react";
-
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
 import { DropDown } from "../../drop-down";
@@ -37,6 +36,7 @@ import ProgressList from "./ProgressList";
 import styles from "../Section.module.scss";
 import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
+import { HelpButton } from "../../help-button";
 
 type OperationName = keyof typeof OPERATIONS_NAME;
 let timerId = null;
@@ -117,8 +117,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   //   clearSecondaryProgressData,
   // ]);
 
-  const isSeveralOperations =
-    primaryActiveOperations.length + secondaryActiveOperations.length > 1;
+  const operationsLength =
+    primaryActiveOperations.length + secondaryActiveOperations.length;
+
+  const isSeveralOperations = operationsLength > 1;
 
   useLayoutEffect(() => {
     if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
@@ -161,10 +163,22 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     );
   };
 
+  const getTooltioLabel = () => {
+    if (isSeveralOperations) {
+      return `Current process: ${operationsLength}`;
+    }
+
+    const isSecondaryActive = secondaryActiveOperations.length > 0;
+
+    return isSecondaryActive
+      ? secondaryActiveOperations[0].label
+      : primaryActiveOperations[0].label;
+  };
+
   const onCanelOperation = () => {
     cancelUpload(t);
   };
-  console.log("operationsCompleted", operationsCompleted);
+
   return (
     <div
       ref={containerRef}
@@ -173,18 +187,23 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         [styles.hidden]: !isOpenDropdown && operationsCompleted,
       })}
     >
-      <FloatingButton
+      <HelpButton
         className="layout-progress-bar"
-        icon={getIcons()}
-        alert={operationsAlert}
-        completed={operationsCompleted}
-        {...(isSeveralOperations && { onClick: onOpenDropdown })}
-        percent={operationsCompleted ? 100 : 0}
-        {...(!isSeveralOperations &&
-          primaryActiveOperations.length && { onClick: onOpenPanel })}
-
-        // onCloseButton={onCloseButton}
-      />
+        place="left"
+        tooltipContent={getTooltioLabel()}
+        openOnClick={false}
+      >
+        <FloatingButton
+          icon={getIcons()}
+          alert={operationsAlert}
+          completed={operationsCompleted}
+          {...(isSeveralOperations && { onClick: onOpenDropdown })}
+          percent={operationsCompleted ? 100 : 0}
+          {...(!isSeveralOperations &&
+            primaryActiveOperations.length && { onClick: onOpenPanel })}
+          onCloseButton={() => console.log("Click")}
+        />
+      </HelpButton>
 
       <DropDown
         open={isOpenDropdown}

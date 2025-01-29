@@ -50,51 +50,51 @@ const HelpButton = (props: HelpButtonProps) => {
     tooltipContent,
     openOnClick = true,
     isClickable = true,
+    children,
   } = props;
 
   const currentId = id || uniqueId();
   const ref = React.useRef(null);
-  const anchorSelect = `div[id='${currentId}'] svg`;
+  const anchorSelect = children
+    ? `div[id='${currentId}']`
+    : `div[id='${currentId}'] svg`;
+  const componentClass = classNames(className, "help-icon");
+
+  const tooltipProps = {
+    clickable: true,
+    openOnClick,
+    place: place || "top",
+    offset,
+    afterShow,
+    afterHide,
+    maxWidth: tooltipMaxWidth,
+    anchorSelect,
+  };
 
   return (
     <div ref={ref} style={style} data-testid="help-button">
-      <IconButton
-        id={currentId}
-        className={classNames(className, "help-icon")}
-        isClickable={isClickable}
-        iconName={iconName ?? InfoReactSvgUrl}
-        size={size}
-        color={color}
-        data-for={currentId}
-        dataTip={dataTip}
-      />
+      {children ? (
+        <div id={currentId} className={componentClass}>
+          {children}
+        </div>
+      ) : (
+        <IconButton
+          id={currentId}
+          className={componentClass}
+          isClickable={isClickable}
+          iconName={iconName ?? InfoReactSvgUrl}
+          size={size}
+          color={color}
+          data-for={currentId}
+          dataTip={dataTip}
+        />
+      )}
 
       {getContent ? (
-        <Tooltip
-          clickable
-          openOnClick={openOnClick}
-          place={place || "top"}
-          offset={offset}
-          afterShow={afterShow}
-          afterHide={afterHide}
-          maxWidth={tooltipMaxWidth}
-          getContent={getContent}
-          anchorSelect={anchorSelect}
-        />
-      ) : (
-        <Tooltip
-          clickable
-          openOnClick={openOnClick}
-          place={place}
-          offset={offset}
-          afterShow={afterShow}
-          afterHide={afterHide}
-          maxWidth={tooltipMaxWidth}
-          anchorSelect={anchorSelect}
-        >
-          {tooltipContent}
-        </Tooltip>
-      )}
+        <Tooltip {...tooltipProps} getContent={getContent} />
+      ) : tooltipContent ? (
+        <Tooltip {...tooltipProps}>{tooltipContent}</Tooltip>
+      ) : null}
     </div>
   );
 };

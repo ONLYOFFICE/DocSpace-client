@@ -31,33 +31,34 @@
       );
     background-origin: border-box;
     background-clip: content-box, border-box;
-    animation: loader 2s linear infinite;
+    animation: loader 1.2s linear infinite;
   }
 
   &.completed {
     .loader {
-      animation: completeLoader 1s ease-in-out forwards;
+      opacity: 0;
     }
   }
 }
 
 @keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }
 }
 
-@keyframes completeLoader {
-  20% {
-    background-image: linear-gradient(white, white),
-      conic-gradient(white, white);
-
-    opacity: 1;
+@keyframes highlight {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
   }
   100% {
-    background-image: linear-gradient(white, white),
-      conic-gradient(white, white);
-    opacity: 0;
+    filter: brightness(1);
   }
 }
 
@@ -65,10 +66,6 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: var(
-    --floating-circle-button-background,
-    var(--color-scheme-main-accent)
-  );
   text-align: center;
   margin: 5px;
   position: absolute;
@@ -90,31 +87,19 @@
   cursor: pointer;
   box-shadow: var(--floating-button-box-shadow);
 
-  .circle__background {
-    background: var(
-      --floating-circle-button-background,
-      var(--color-scheme-main-accent)
-    ) !important;
+  &.completed {
+    animation: highlight 0.5s ease-out;
   }
 
   :global {
     .icon-box {
       svg {
         path {
-          fill: var(--color-scheme-text-accent);
+          fill: white;
         }
-      }
-    }
-
-    .circle__mask .circle__fill {
-      background-color: transparent;
-    }
-  }
-
-  &[data-display-progress="true"] {
-    :global {
-      .circle__mask .circle__fill {
-        background-color: var(--color-scheme-text-accent);
+        // path:nth-child(2) {
+        //   fill: var(--color-scheme-main-accent);
+        // }
       }
     }
   }
@@ -174,18 +159,26 @@
   }
 
   :global(.layout-progress-bar_close-icon) {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     cursor: pointer;
     inset-inline-end: 77px;
     bottom: 33px;
+    transition:
+      opacity 0.4s ease,
+      visibility 0s linear 0.4s;
   }
 
   &:hover {
     :global(.layout-progress-bar_close-icon) {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s ease;
+    }
 
-      @include tablet {
+    @include tablet {
+      :global(.layout-progress-bar_close-icon) {
         display: none;
       }
     }

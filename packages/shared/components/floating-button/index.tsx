@@ -148,7 +148,10 @@ const FloatingButton = ({
         data-role="button"
         data-display-progress={displayProgress ? "true" : "false"}
         aria-label={`${icon} button`}
-        className={classNames(styles.circleWrap, buttonClassName)}
+        className={classNames(styles.circleWrap, buttonClassName, {
+          [styles.loading]: !completed,
+          [styles.completed]: completed,
+        })}
         style={
           color
             ? ({
@@ -166,11 +169,7 @@ const FloatingButton = ({
         >
           <div className={styles.loader} />
           <div
-            className={classNames(
-              styles.floatingButton,
-              styles.circle__background,
-              "circle__background",
-            )}
+            className={classNames(styles.floatingButton)}
             style={
               { "--floating-button-background": color } as React.CSSProperties
             }

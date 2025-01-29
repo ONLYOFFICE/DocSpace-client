@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,37 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-import { injectDefaultTheme } from "../../utils";
-
-const StyledSocialButtonsGroup = styled.div.attrs(injectDefaultTheme)`
+.container {
   width: 100%;
+}
 
-  .sso-button {
+.ssoButton {
+  margin-bottom: 8px;
+}
+
+.socialButtonsGroup {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 8px;
+
+  .buttonWrapper {
     margin-bottom: 8px;
-  }
-
-  .social-buttons-group {
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    gap: 8px;
-
-    .buttonWrapper {
-      margin-bottom: 8px;
-      width: 100%;
-    }
-
-    .show-more-button {
-      padding: 10px 16px;
-      width: 52px;
-
-      svg {
-        transform: rotate(90deg);
-      }
-    }
   }
-`;
 
-export default StyledSocialButtonsGroup;
+  .showMoreButton {
+    padding: 10px 16px;
+    width: 52px;
+  }
+}

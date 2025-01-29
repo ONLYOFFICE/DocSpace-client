@@ -45,13 +45,14 @@
   margin: 0 auto;
   min-height: auto;
   position: absolute;
+  top: var(--manual-y);
 
   &.directionLeft {
-    inset-inline-start: var(--manual-x);
+    left: var(--manual-x);
   }
 
   &.directionRight {
-    inset-inline-end: var(--manual-x);
+    right: var(--manual-x);
   }
 }
 

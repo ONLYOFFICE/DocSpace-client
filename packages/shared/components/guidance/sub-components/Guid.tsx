@@ -55,41 +55,36 @@ const Guid = ({
   viewAs,
 }: GuidProps) => {
   const theme = useTheme();
-
   const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
-
   const { isRTL } = useInterfaceDirection();
 
-  const [modalTop, setModalTop] = React.useState<null | number>(null);
-  const [directionX, setDirectionX] = React.useState<null | string>(
-    isRTL ? "right" : "left",
-  );
-
   const modalText = getHeaderText(formFillingTipsNumber, t);
-
   const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
+  const isStartingTip = formFillingTipsNumber === FormFillingTipsState.Starting;
+  const isCompleteTip =
+    formFillingTipsNumber === FormFillingTipsState.Complete ||
+    formFillingTipsNumber === FormFillingTipsState.Submitting;
 
-  const onCloseBackdrop = (e: React.MouseEvent) => {
+  const closeBackdrop = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     onClose();
   };
 
-  const onNextTips = () => {
+  const nextTips = () => {
     if (isLastTip) {
       return onClose();
     }
     setFormFillingTipsNumber(formFillingTipsNumber + 1);
   };
 
-  const onPrevTips = () => {
+  const prevTips = () => {
     setFormFillingTipsNumber(formFillingTipsNumber - 1);
   };
 
-  const tipsCircle = [];
-
+  const tipsCircles = [];
   for (let i = 1; i < 6; i += 1) {
-    tipsCircle.push(
+    tipsCircles.push(
       <div
         className={classNames(styles.tipsCircle, {
           [styles.isSelected]: i === formFillingTipsNumber,
@@ -103,63 +98,70 @@ const Guid = ({
     const screenHeight = document.documentElement.clientHeight;
     const screenWidth = document.documentElement.clientWidth;
 
+    let xDirection = isRTL ? "right" : "left";
     if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
-      if (isRTL) {
-        setDirectionX("right");
-      } else {
-        setDirectionX("left");
-      }
-    } else if (isRTL) {
-      setDirectionX("right");
-    } else {
-      setDirectionX("left");
+      xDirection = isRTL ? "right" : "left";
     }
 
-    if (screenHeight < position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT) {
-      return setModalTop(position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT);
+    let top = position.bottom + GUID_MODAL_MARGIN;
+    if (
+      formFillingTipsNumber === FormFillingTipsState.Starting &&
+      viewAs === "tile"
+    ) {
+      top = position.top;
+    } else if (
+      screenHeight <
+      position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
+    ) {
+      top = position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
     }
-    setModalTop(position.bottom + GUID_MODAL_MARGIN);
-  }, [position.bottom, position.left, position.top, isRTL]);
+
+    let manualX = isRTL ? "20px" : "20px";
+    if (isLastTip && !isDesktop()) {
+      manualX = "15px";
+    } else if (isStartingTip && viewAs === "tile") {
+      manualX = isRTL
+        ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
+        : `${position.right + GUID_MODAL_MARGIN}px`;
+    } else if (isCompleteTip && viewAs === "tile") {
+      manualX = isRTL
+        ? `${position.right - MODAL_WIDTH}px`
+        : `${position.left}px`;
+    } else if (xDirection === "left" || isRTL) {
+      manualX = "250px";
+    }
+
+    return {
+      ["--manual-x" as string]: manualX,
+      ["--manual-y" as string]: `${top}px`,
+    };
+  }, [position, isRTL, formFillingTipsNumber, viewAs]);
 
   React.useEffect(() => {
     onResize();
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [
-    onResize,
-    position.bottom,
-    position.height,
-    position.left,
-    position.top,
-    position.width,
-  ]);
+  }, [onResize]);
 
   if (isMobile()) {
     onClose();
   }
+
+  const directionX =
+    isLastTip && !isDesktop()
+      ? isRTL
+      : ((isStartingTip || isCompleteTip) && viewAs === "tile") || !isRTL;
 
   const dialogClassName = classNames(
     styles.dialog,
     "not-selectable",
     "dialog",
     {
-      [styles.directionLeft]: directionX === "left",
-      [styles.directionRight]: directionX === "right",
+      [styles.directionLeft]: directionX,
+      [styles.directionRight]: !directionX,
     },
   );
-
-  const dialogStyles: React.CSSProperties = {
-    ["--manual-x" as string]:
-      directionX === "left" || isRTL
-        ? isLastTip && !isDesktop()
-          ? isRTL
-            ? `${position.right - MODAL_WIDTH}px`
-            : `${position.left - MODAL_WIDTH}px`
-          : "250px"
-        : "20px",
-    top: `${modalTop}px`,
-  };
 
   const contentClassName = classNames(styles.content, "guidance-dialog", {
     [styles.visible]: true,
@@ -191,7 +193,7 @@ const Guid = ({
     <div className="guidance">
       <div
         className={classNames(styles.guidBackdrop)}
-        onClick={onCloseBackdrop}
+        onClick={closeBackdrop}
       />
       <div
         className={classNames(styles.guidElement, {
@@ -205,7 +207,7 @@ const Guid = ({
         id="modal-onMouseDown-close"
         role="dialog"
         className={dialogClassName}
-        style={dialogStyles}
+        style={onResize()}
       >
         <div id="modal-dialog" className={contentClassName}>
           <AsideHeader
@@ -232,7 +234,7 @@ const Guid = ({
               classNames(modalStyles.footer, ["modal-footer"]) || "modal-footer"
             }
           >
-            <div className="circle-container">{tipsCircle}</div>
+            <div className="circle-container">{tipsCircles}</div>
             <div className="button-container">
               {formFillingTipsNumber !== FormFillingTipsState.Starting ? (
                 <Button
@@ -240,7 +242,7 @@ const Guid = ({
                   key="TipsBack"
                   label={t("Common:Back")}
                   size={ButtonSize.extraSmall}
-                  onClick={onPrevTips}
+                  onClick={prevTips}
                 />
               ) : null}
 
@@ -250,7 +252,7 @@ const Guid = ({
                 primary
                 label={isLastTip ? t("Common:GotIt") : t("Common:Next")}
                 size={ButtonSize.extraSmall}
-                onClick={onNextTips}
+                onClick={nextTips}
               />
             </div>
           </div>

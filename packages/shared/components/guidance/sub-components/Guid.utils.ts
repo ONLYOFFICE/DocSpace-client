@@ -68,6 +68,7 @@ export const getGuidPosition = (
             ? guidRects.pdf.top - TILE_VIEW_POSITION_OFFSET
             : guidRects.pdf.top,
         bottom: guidRects.pdf.bottom,
+        right: guidRects.pdf.right,
       };
 
     case FormFillingTipsState.Sharing:
@@ -77,6 +78,7 @@ export const getGuidPosition = (
         left: guidRects.share.left - GUID_SHARE_OFFSET,
         top: guidRects.share.top - GUID_SHARE_OFFSET,
         bottom: guidRects.share.bottom,
+        right: guidRects.share.right,
       };
 
     case FormFillingTipsState.Submitting:
@@ -101,6 +103,7 @@ export const getGuidPosition = (
             ? guidRects.ready.top - TILE_VIEW_POSITION_OFFSET
             : guidRects.ready.top,
         bottom: guidRects.ready.bottom,
+        right: guidRects.ready.right,
       };
 
     case FormFillingTipsState.Uploading:
@@ -114,6 +117,7 @@ export const getGuidPosition = (
         left: guidRects.uploading.left - GUID_UPLOADING_OFFSET,
         top: guidRects.uploading.top - GUID_UPLOADING_OFFSET,
         bottom: guidRects.uploading.bottom + GUID_UPLOADING_OFFSET,
+        right: guidRects.uploading.right,
       };
 
     default:
@@ -123,6 +127,7 @@ export const getGuidPosition = (
         left: 0,
         top: 0,
         bottom: 0,
+        right: 0,
       };
   }
 };

@@ -33,7 +33,9 @@ import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
-import { getColorTheme } from "@/api/settings";
+import { getSelf } from "@/api/people";
+import { getColorTheme, getSettings } from "@/api/settings";
+import { getThemeClass } from "@/utils";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
@@ -53,22 +55,33 @@ export default async function RootLayout({
     return <></>;
   }
 
-  const theme = hdrs.get(THEME_HEADER);
-  const locale = hdrs.get(LOCALE_HEADER) as string | undefined;
+  const [self, portalSettings, colorTheme] = await Promise.all([
+    getSelf(),
+    getSettings(),
+    getColorTheme(),
+  ]);
+
+  const theme =
+    (hdrs.get(THEME_HEADER) as ThemeKeys | null) ||
+    self?.theme ||
+    ThemeKeys.BaseStr;
+  const locale =
+    (hdrs.get(LOCALE_HEADER) as string | null) ||
+    self?.cultureName ||
+    (typeof portalSettings === "object" && portalSettings.culture) ||
+    "en";
 
   const cookieStore = cookies();
-
-  const [colorTheme] = await Promise.all([getColorTheme()]);
-
-  const systemTheme = theme
-    ? (theme as ThemeKeys)
-    : (cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys | undefined);
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
     (theme) => theme.id === colorTheme.selected,
   );
 
-  const dirClass = getDirectionByLanguage(locale || "en");
+  const themeClass = getThemeClass(theme, systemTheme);
+  const dirClass = getDirectionByLanguage(locale);
 
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
@@ -92,15 +105,14 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body
-        style={styles}
-        className={`${dirClass} ${systemTheme === "Dark" ? "dark" : "light"}`}
-      >
+      <body style={styles} className={`${dirClass} ${themeClass}`}>
         <StyledComponentsRegistry>
           <Providers
             contextData={{
-              user: undefined,
-              settings: undefined,
+              initialTheme: theme,
+              user: self,
+              settings:
+                typeof portalSettings === "string" ? undefined : portalSettings,
               systemTheme,
               colorTheme,
               locale,

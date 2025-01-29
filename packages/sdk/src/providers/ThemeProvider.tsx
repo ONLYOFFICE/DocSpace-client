@@ -43,6 +43,7 @@ type TThemeProvider = {
   children: React.ReactNode;
   settings: TSettings | undefined;
   user: TUser | undefined;
+  initialTheme: ThemeKeys | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
   locale?: string;
@@ -52,20 +53,19 @@ const ThemeProvider = ({
   children,
   user,
   settings,
+  initialTheme,
   systemTheme,
   colorTheme,
   locale,
 }: TThemeProvider) => {
   const { i18n } = useI18N({ settings, user, locale });
 
-  const lang = locale ?? user?.cultureName ?? settings?.culture;
-
   const { theme, currentColorTheme } = useTheme({
-    user,
+    initialTheme,
     i18n,
     systemTheme,
     colorTheme,
-    lang,
+    lang: locale,
   });
 
   return (

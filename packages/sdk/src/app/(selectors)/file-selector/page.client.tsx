@@ -29,19 +29,24 @@
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorComponent from "@docspace/shared/selectors/Files";
-import { frameCallCommand } from "@docspace/shared/utils/common";
+import FilesSelector from "@docspace/shared/selectors/Files";
+import { frameCallEvent } from "@docspace/shared/utils/common";
+
+import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
+
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { Nullable } from "@docspace/shared/types";
 import {
   TFile,
   TFilesSettings,
   TFolder,
 } from "@docspace/shared/api/files/types";
-import { DeviceType, FolderType } from "@docspace/shared/enums";
-import { TRoom } from "@docspace/shared/api/rooms/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import { Nullable } from "@docspace/shared/types";
+
 import { TFilesSelectorInit } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+
+import useSDK from "@/hooks/useSDK";
 
 type FilesSelectorClientProps = {
   items: (TFile | TFolder)[] | TRoom[];
@@ -56,6 +61,19 @@ type FilesSelectorClientProps = {
   currentFolderId: number | string;
   rootFolderType: FolderType;
   roomsFolderId?: number;
+  baseConfig: {
+    header?: boolean;
+    cancel?: boolean;
+    subtitle?: boolean;
+    search?: boolean;
+    breadCrumbs?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+    selectorType?: string;
+    id?: string;
+    filter?: string;
+    cancelLabel?: string;
+    acceptLabel?: string;
+  };
 };
 
 export default function FilesSelectorClient({
@@ -71,19 +89,25 @@ export default function FilesSelectorClient({
   rootFolderType,
   currentFolderId,
   roomsFolderId,
+  baseConfig,
 }: FilesSelectorClientProps) {
-  const { t } = useTranslation(["Common"]);
-  useDocumentTitle("FileSelector");
+  const { sdkConfig } = useSDK();
 
-  useEffect(() => frameCallCommand("setIsLoaded"), []);
+  const { t } = useTranslation(["Common"]);
+
+  useDocumentTitle("FileSelector");
 
   const onSubmit = useCallback(() => {}, []);
 
-  const onCancel = useCallback(() => {}, []);
+  const onCancel = useCallback(() => {
+    frameCallEvent({ event: "onCloseCallback" });
+    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+    console.log("onCloseCallback");
+  }, []);
 
   const getIsDisabled = useCallback(() => false, []);
 
-  const initValues: TFilesSelectorInit = {
+  const initProps: TFilesSelectorInit = {
     withInit: true,
     initItems: items,
     initBreadCrumbs: breadCrumbs,
@@ -94,44 +118,60 @@ export default function FilesSelectorClient({
     initHasNextPage: hasNextPage,
   };
 
+  const roomTypeProps = baseConfig?.roomType
+    ? { roomType: baseConfig.roomType }
+    : {};
+
+  const headerProps = baseConfig?.header
+    ? {
+        withHeader: true as true,
+        headerProps: {
+          headerLabel: t("Common:Select"),
+          isCloseable: false,
+          onCloseClick: onCancel,
+        },
+      }
+    : {};
+
   return (
-    <FilesSelectorComponent
-      withBreadCrumbs
+    <FilesSelector
+      {...roomTypeProps}
+      {...headerProps}
+      {...initProps}
+      withCreate={false}
+      withBreadCrumbs={baseConfig?.breadCrumbs as boolean}
       withoutBackButton
-      withSearch
-      withHeader
-      headerLabel="Label"
-      cancelButtonLabel={t("Common:Cancel")}
+      withSearch={baseConfig?.search as boolean}
+      cancelButtonLabel={baseConfig?.cancelLabel || t("Common:Cancel")}
       disabledItems={[]}
       onSubmit={onSubmit}
       onCancel={onCancel}
-      isRoomsOnly={false}
+      isRoomsOnly={baseConfig?.selectorType === "roomsOnly"}
       isThirdParty={false}
       getIsDisabled={getIsDisabled}
-      submitButtonLabel="Submit"
-      withCancelButton={false}
-      withCreate={true}
+      submitButtonLabel={baseConfig?.acceptLabel || t("Common:Select")}
+      withCancelButton={baseConfig?.cancel as boolean}
       withFooterInput={false}
       withFooterCheckbox={false}
       footerInputHeader=""
       footerCheckboxLabel=""
       currentFooterInputValue=""
       isPanelVisible
-      headerProps={{
-        headerLabel: "",
-        isCloseable: false,
-        onCloseClick: onCancel,
-      }}
       filesSettings={filesSettings}
       treeFolders={foldersTree}
       currentDeviceType={DeviceType.desktop}
       currentFolderId={currentFolderId}
       rootFolderType={rootFolderType}
-      descriptionText=""
+      descriptionText={
+        !baseConfig?.subtitle ||
+        !baseConfig?.filter ||
+        baseConfig?.filter === "ALL"
+          ? ""
+          : baseConfig?.filter
+      }
       getFilesArchiveError={() => ""}
       embedded
       roomsFolderId={roomsFolderId}
-      {...initValues}
     />
   );
 }

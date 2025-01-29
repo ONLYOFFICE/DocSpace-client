@@ -40,19 +40,18 @@ import { getRooms } from "@/api/rooms";
 import { PAGE_COUNT } from "@/utils/constants";
 import { TGetRooms } from "@docspace/shared/api/rooms/types";
 
-type TSearchParams = {
-  folderId?: string;
-};
-
 export default async function Page({
   searchParams,
 }: {
-  searchParams: TSearchParams;
+  searchParams: { [key: string]: string };
 }) {
-  const { folderId } = searchParams;
+  const baseConfig = JSON.parse(JSON.stringify(searchParams), (k, v) =>
+    v === "true" ? true : v === "false" ? false : v,
+  );
 
+  const { id } = baseConfig;
+  const folderId = id ? JSON.parse(id as string) : null;
   const actions: Promise<unknown>[] = [getFoldersTree(), getFilesSettings()];
-
   const filter = folderId ? FilesFilter.getDefault() : RoomsFilter.getDefault();
 
   filter.page = 0;
@@ -105,6 +104,7 @@ export default async function Page({
       currentFolderId={currentFolderId}
       rootFolderType={rootFolderType}
       roomsFolderId={roomsFolderId}
+      baseConfig={baseConfig}
     />
   );
 }

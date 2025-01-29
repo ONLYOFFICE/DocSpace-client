@@ -32,12 +32,25 @@ import { TSelectorItem } from "@docspace/shared/components/selector";
 import RoomSelectorComponent from "@docspace/shared/selectors/Room";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 
+import { TGetRooms } from "@docspace/shared/api/rooms/types";
 import { RoomsType } from "@docspace/shared/enums";
 
 import useSDK from "@/hooks/useSDK";
 import { getRoomsIcon } from "@/utils";
-import { RoomSelectorProps } from "@/types";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+
+export type RoomSelectorProps = {
+  roomList: TGetRooms;
+  pageCount: number;
+  baseConfig: {
+    header?: boolean;
+    cancel?: boolean;
+    search?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+    cancelLabel?: string;
+    acceptLabel?: string;
+  };
+};
 
 export default function RoomSelector({
   roomList,
@@ -45,6 +58,7 @@ export default function RoomSelector({
   baseConfig,
 }: RoomSelectorProps) {
   const { sdkConfig } = useSDK();
+
   useDocumentTitle("RoomSelector");
 
   const getPrimaryLink = async (roomId: string) => {

@@ -486,8 +486,37 @@
           break;
         }
 
+        case "file-selector-old": {
+          path = `/old-sdk/file-selector?selectorType=${config.selectorType}`;
+          break;
+        }
+
         case "file-selector": {
-          path = `/sdk/file-selector?selectorType=${config.selectorType}`;
+          const fileSelectorConfig = {
+            locale: config.locale,
+            theme: config.theme,
+            selectorType: config.selectorType,
+            roomType: config.roomType,
+            id: config.id,
+            header: config.showSelectorHeader,
+            cancel: config.showSelectorCancel,
+            search: config.withSearch,
+            breadCrumbs: config.withBreadCrumbs,
+            subtitle: config.withSubtitle,
+            filter: config.filterParam,
+            cancelLabel: config.cancelButtonLabel,
+            acceptLabel: config.acceptButtonLabel,
+          };
+
+          Object.keys(fileSelectorConfig).forEach(
+            (key) =>
+              fileSelectorConfig[key] === undefined &&
+              delete fileSelectorConfig[key]
+          );
+
+          const urlParams = new URLSearchParams(fileSelectorConfig).toString();
+
+          path = `/sdk/file-selector?${urlParams}`;
           break;
         }
 

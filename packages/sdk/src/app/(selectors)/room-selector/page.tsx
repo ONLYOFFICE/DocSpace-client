@@ -37,11 +37,14 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string };
 }) {
+  const baseConfig = JSON.parse(JSON.stringify(searchParams), (k, v) =>
+    v === "true" ? true : v === "false" ? false : v,
+  );
+
   const filter = RoomsFilter.getDefault();
 
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
-
   filter.searchArea = RoomSearchArea.Active;
 
   const rooms = await getRooms(filter);
@@ -53,7 +56,7 @@ export default async function Page({
     <RoomSelector
       roomList={rooms}
       pageCount={PAGE_COUNT}
-      baseConfig={searchParams}
+      baseConfig={baseConfig}
     />
   );
 }

@@ -50,12 +50,13 @@ import { SettingsContext } from "../contexts/Settings";
 
 type UseSelectorStateProps = Pick<
   FilesSelectorProps,
-  "checkCreating" | "filterParam" | "disabledItems"
+  "checkCreating" | "filterParam" | "disabledItems" | "withCreate"
 >;
 
 const transformInitItems = (
   items: (TFolder | TFile | TRoom)[],
   disabledItems: (string | number)[],
+  withCreate: boolean,
   t: TTranslation,
   getIcon: (fileExst: string) => string,
   initSelectedItemType?: string,
@@ -79,14 +80,17 @@ const transformInitItems = (
   );
 
   return [
-    {
-      isCreateNewItem: true,
-      label: initSelectedItemType === "files" ? t("NewFolder") : t("NewRoom"),
-      id: "create-folder-item",
-      key: "create-folder-item",
-      hotkey: "f",
-      onBackClick: () => {},
-    },
+    ...((withCreate && [
+      {
+        isCreateNewItem: true,
+        label: initSelectedItemType === "files" ? t("NewFolder") : t("NewRoom"),
+        id: "create-folder-item",
+        key: "create-folder-item",
+        hotkey: "f",
+        onBackClick: () => {},
+      },
+    ]) ||
+      []),
     ...rooms,
     ...folders,
     ...files,
@@ -97,6 +101,7 @@ const useSelectorState = ({
   checkCreating,
   disabledItems,
   filterParam,
+  withCreate,
 
   withInit,
   initBreadCrumbs,
@@ -121,6 +126,7 @@ const useSelectorState = ({
       ? transformInitItems(
           initItems,
           disabledItems,
+          withCreate,
           t,
           getIcon,
           initSelectedItemType,

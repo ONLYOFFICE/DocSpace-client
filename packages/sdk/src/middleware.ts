@@ -60,9 +60,16 @@ export function middleware(request: NextRequest) {
 
   const searchParams = new URLSearchParams(request.nextUrl.searchParams);
 
-  const theme = searchParams.get("theme");
+  let theme = searchParams.get("theme");
   const locale = searchParams.get("locale");
   const shareKey = searchParams.get("key");
+
+  if (theme) {
+    const firstChar = theme[0].toUpperCase();
+    const rest = theme.slice(1).toLowerCase();
+
+    theme = `${firstChar}${rest}`;
+  }
 
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
@@ -85,7 +92,7 @@ export const config = {
     "/health",
     "/sdk",
     "/room-selector",
-    "/files-selector",
+    "/file-selector",
     "/public-room",
   ],
 };

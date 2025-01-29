@@ -152,7 +152,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     checkCreating,
     disabledItems,
     filterParam,
-
+    withCreate,
     ...withInitProps,
   });
 
@@ -627,6 +627,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
 const FilesSelector = (props: FilesSelectorProps) => {
   const { filesSettings, getIcon, withInit } = props;
+
   return (
     <LoadersContextProvider withInit={withInit}>
       <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>

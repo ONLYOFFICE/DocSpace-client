@@ -86,6 +86,7 @@ const useEditorEvents = ({
   openOnNewPage,
   t,
   sdkConfig,
+  logoText,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -597,6 +598,7 @@ const useEditorEvents = ({
               documentReady,
               successAuth ?? false,
               setDocTitle,
+              logoText,
             )
           : setDocumentTitle(
               t,
@@ -605,6 +607,7 @@ const useEditorEvents = ({
               documentReady,
               successAuth ?? false,
               setDocTitle,
+              logoText,
             );
       }, 500);
     },
@@ -615,6 +618,7 @@ const useEditorEvents = ({
       docTitle,
       documentReady,
       successAuth,
+      logoText,
     ],
   );
 
@@ -631,11 +635,19 @@ const useEditorEvents = ({
           documentReady,
           successAuth ?? false,
           setDocTitle,
+          logoText,
         );
         setDocTitle(newTitle);
       }
     },
-    [t, config?.document.fileType, docTitle, documentReady, successAuth],
+    [
+      t,
+      config?.document.fileType,
+      docTitle,
+      documentReady,
+      successAuth,
+      logoText,
+    ],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {

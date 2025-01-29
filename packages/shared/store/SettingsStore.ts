@@ -334,6 +334,8 @@ class SettingsStore {
 
   showGuestReleaseTip = false;
 
+  logoText = "";
+
   constructor() {
     makeAutoObservable(this);
   }

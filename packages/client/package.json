@@ -196,7 +196,12 @@
         "dependsOn": [
           "build:translations"
         ]
-      }
+      },
+	  "deploy": {
+		"dependsOn": [
+          "build"
+        ]
+	  }
     }
   }
 }

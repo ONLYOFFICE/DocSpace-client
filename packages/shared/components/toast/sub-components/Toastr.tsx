@@ -154,7 +154,7 @@ const getToastOptions = (
   closeButton: withCross && <CloseButton />,
   autoClose:
     timeout === 0
-      ? 0
+      ? false
       : timeout < MIN_TIMEOUT_THRESHOLD
         ? DEFAULT_TIMEOUT
         : timeout || 5000,
@@ -225,7 +225,7 @@ const createToastMethod =
       type,
       message,
       finalTitle,
-      timeout || DEFAULT_TIMEOUT,
+      timeout ?? DEFAULT_TIMEOUT,
       withCross,
       centerPosition,
     );

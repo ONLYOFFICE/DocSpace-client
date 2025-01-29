@@ -1488,6 +1488,46 @@
   --dropzone-exsts-color: #{$gray};
 }
 
+.light {
+  --file-input-border-color: #{$gray-strong};
+  --file-input-disabled-border-color: #{$gray-light-mid};
+  --file-input-warning-border-color: #{$light-status-warning};
+  --file-input-error-border-color: #{$light-error-status};
+  --file-input-hover-border-color: #{$gray};
+  --file-input-hover-disabled-border-color: #{$gray-light-mid};
+  --file-input-hover-warning-border-color: #{$light-status-warning};
+  --file-input-hover-error-border-color: #{$light-error-status};
+  --file-input-focus-border-color: #{$light-second-main};
+  --file-input-focus-disabled-border-color: #{$gray-light-mid};
+  --file-input-focus-warning-border-color: #{$light-status-warning};
+  --file-input-focus-error-border-color: #{$light-error-status};
+
+  --file-input-border-color1: #{$gray-strong};
+  --file-input-disabled-border-color1: #{$gray-light-mid};
+  --file-input-warning-border-color1: #{$light-status-warning};
+  --file-input-error-border-color1: #{$light-error-status};
+}
+
+.dark {
+  --file-input-disabled-border-color: #{$gray-dark-strong};
+  --file-input-border-color: #{$gray-dark-strong};
+  --file-input-warning-border-color: #{$dark-status-warning};
+  --file-input-error-border-color: #{$dark-error-status};
+  --file-input-hover-border-color: #{$gray-dark};
+  --file-input-hover-disabled-border-color: #{$gray-dark-strong};
+  --file-input-hover-warning-border-color: #{$dark-status-warning};
+  --file-input-hover-error-border-color: #{$dark-error-status};
+  --file-input-focus-border-color: #{$white};
+  --file-input-focus-disabled-border-color: #{$gray-dark-strong};
+  --file-input-focus-warning-border-color: #{$dark-status-warning};
+  --file-input-focus-error-border-color: #{$dark-error-status};
+
+  --file-input-border-color1: #{$gray-dark-strong};
+  --file-input-disabled-border-color1: #{$gray-dark-strong};
+  --file-input-warning-border-color1: #{$dark-status-warning};
+  --file-input-error-border-color1: #{$dark-error-status};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

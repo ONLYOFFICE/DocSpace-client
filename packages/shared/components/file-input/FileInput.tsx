@@ -32,13 +32,15 @@ import equal from "fast-deep-equal/react";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
 
+import classNames from "classnames";
 import { IconButton } from "../icon-button";
 import { Button, ButtonSize } from "../button";
 import { InputSize, InputType, TextInput } from "../text-input";
 import { Loader, LoaderTypes } from "../loader";
 import { toastr } from "../toast";
 
-import StyledFileInput from "./FileInput.styled";
+import styles from "./FileInput.module.scss";
+
 import { FileInputProps } from "./FileInput.types";
 import { globalColors } from "../../themes";
 
@@ -59,6 +61,7 @@ const FileInputPure = ({
   idButton,
   isDocumentIcon = false,
   isMultiple = true,
+  className,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -116,6 +119,28 @@ const FileInputPure = ({
 
   const { iconSize, buttonSize } = getSize();
 
+  const wrapperClasses = classNames(styles.container, className, {
+    [styles.scale]: scale ? 1 : 0,
+    [styles[size]]: size,
+    [styles.error]: hasError,
+    [styles.warning]: hasWarning,
+    [styles.disabled]: isDisabled,
+  });
+
+  const iconClasses = classNames(styles.icon, {
+    [styles[size]]: size,
+    [styles.disabled]: isDisabled,
+    [styles.error]: hasError,
+    [styles.warning]: hasWarning,
+  });
+
+  const textInputClasses = classNames(styles.textInput, {
+    [styles[size]]: size,
+    [styles.disabled]: isDisabled,
+    [styles.error]: hasError,
+    [styles.warning]: hasWarning,
+  });
+
   const onClickProp =
     fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
@@ -127,20 +152,17 @@ const FileInputPure = ({
       multiple={isMultiple}
     >
       {({ getRootProps, getInputProps }) => (
-        <StyledFileInput
-          scale={scale ? 1 : 0}
-          hasError={hasError}
-          hasWarning={hasWarning}
+        <div
+          className={wrapperClasses}
           id={idButton}
-          isDisabled={isDisabled}
+          data-testid="file-input"
           {...rest}
           {...getRootProps()}
-          size={size}
-          data-testid="file-input"
         >
           <TextInput
             isReadOnly
-            className="text-input"
+            // className="text-input"
+            className={textInputClasses}
             placeholder={placeholder}
             value={fromStorage && path ? path : fileName}
             size={size}
@@ -169,7 +191,7 @@ const FileInputPure = ({
               size={buttonSize}
             />
           ) : (
-            <div className="icon" {...onClickProp}>
+            <div className={iconClasses} {...onClickProp}>
               {isLoading ? (
                 <Loader
                   className="loader"
@@ -191,7 +213,7 @@ const FileInputPure = ({
               )}
             </div>
           )}
-        </StyledFileInput>
+        </div>
       )}
     </Dropzone>
   );

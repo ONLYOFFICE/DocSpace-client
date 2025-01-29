@@ -40,7 +40,8 @@ import { DropDownItem } from "../drop-down-item";
 import styles from "./MainButtonMobile.module.scss";
 
 import SubmenuItem from "./sub-components/SubmenuItem";
-import { ActionOption,
+import {
+  ActionOption,
   ButtonOption,
   MainButtonMobileProps,
   ProgressOption,
@@ -361,12 +362,10 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
         data-testid="main-button-mobile"
       >
         <FloatingButton
+          className={classNames(styles.floatingButton)}
           icon={isOpen ? FloatingButtonIcons.minus : FloatingButtonIcons.plus}
           onClick={onMainButtonClick}
-          percent={isOpen ? 0 : percent}
-          className={classNames(styles.floatingButton, {
-            [styles.hideLoading]: percent === 0 || percent === 100 || isOpen,
-          })}
+          withoutProgress
         />
 
         <DropDown

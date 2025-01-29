@@ -523,15 +523,16 @@
 
 .progressBarContainer {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  inset-inline-end: 24px;
+  bottom: 24px;
   z-index: 400;
   opacity: 1;
   transform: translateY(0);
   animation: none;
   transition:
     opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    transform 0.3s ease-in-out,
+    bottom 0.3s ease-in-out;
 
   @keyframes showButton {
     from {
@@ -565,6 +566,16 @@
       opacity: 0;
       transform: translateY(30px);
     }
+  }
+
+  @include tablet-and-below {
+    z-index: 200;
+    bottom: 88px;
+  }
+
+  @include mobile {
+    bottom: 80px;
+    inset-inline-end: 16px;
   }
 
   &.hidden {

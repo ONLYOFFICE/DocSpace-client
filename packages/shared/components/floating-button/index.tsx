@@ -75,23 +75,23 @@ const ICON_COMPONENTS = {
   [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon data-icon="markAsRead" />,
 } as const;
 
-const useProgressAnimation = (percent: number) => {
-  const [animationCompleted, setAnimationCompleted] = useState(false);
-  const timerId = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+// const useProgressAnimation = (percent: number) => {
+//   const [animationCompleted, setAnimationCompleted] = useState(false);
+//   const timerId = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    timerId.current = setTimeout(
-      () => setAnimationCompleted(percent === 100),
-      ANIMATION_DELAY,
-    );
+//   useEffect(() => {
+//     timerId.current = setTimeout(
+//       () => setAnimationCompleted(percent === 100),
+//       ANIMATION_DELAY,
+//     );
 
-    return () => {
-      if (timerId.current) clearTimeout(timerId.current);
-    };
-  }, [percent]);
+//     return () => {
+//       if (timerId.current) clearTimeout(timerId.current);
+//     };
+//   }, [percent]);
 
-  return animationCompleted;
-};
+//   return animationCompleted;
+// };
 
 const FloatingButton = ({
   id,
@@ -106,15 +106,16 @@ const FloatingButton = ({
   clearUploadedFilesHistory,
   showTwoProgress,
   onCloseButton,
+  withoutProgress,
 }: FloatingButtonProps) => {
-  const animationCompleted = useProgressAnimation(percent);
+  //  const animationCompleted = useProgressAnimation(percent);
 
-  const displayProgress = useMemo(() => {
-    return (
-      !(percent === 100 && animationCompleted) &&
-      icon !== FloatingButtonIcons.minus
-    );
-  }, [percent, animationCompleted, icon]);
+  // const displayProgress = useMemo(() => {
+  //   return (
+  //     !(percent === 100 && animationCompleted) &&
+  //     icon !== FloatingButtonIcons.minus
+  //   );
+  // }, [percent, animationCompleted, icon]);
 
   const iconComponent = useMemo(() => {
     return (
@@ -146,7 +147,7 @@ const FloatingButton = ({
         onClick={onClick}
         data-testid="floating-button"
         data-role="button"
-        data-display-progress={displayProgress ? "true" : "false"}
+        // data-display-progress={displayProgress ? "true" : "false"}
         aria-label={`${icon} button`}
         className={classNames(styles.circleWrap, buttonClassName, {
           [styles.loading]: !completed,
@@ -167,7 +168,7 @@ const FloatingButton = ({
             [styles.completed]: completed,
           })}
         >
-          <div className={styles.loader} />
+          {withoutProgress ? null : <div className={styles.loader} />}
           <div
             className={classNames(styles.floatingButton)}
             style={

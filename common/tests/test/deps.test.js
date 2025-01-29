@@ -20,31 +20,95 @@ describe("Dependencies Tests", () => {
   console.log("Base path =", basePath);
 
   // Helper function to get all files recursively
-  const getAllFiles = (dir, acc = []) => {
+  const getAllFiles = (dir, acc = [], options = {}) => {
     if (!fs.existsSync(dir)) return acc;
 
-    const files = fs.readdirSync(dir).reduce((files, file) => {
-      const name = path.join(dir, file);
-      const isDirectory = fs.statSync(name).isDirectory();
-      return isDirectory ? [...files, ...getAllFiles(name)] : [...files, name];
-    }, []);
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+      const filePath = path.join(dir, file);
+      const stats = fs.statSync(filePath);
 
-    return [...acc, ...files];
+      // Skip node_modules and other build/cache directories
+      if (filePath.includes("node_modules") || 
+          filePath.includes(".next") || 
+          filePath.includes("dist") || 
+          filePath.includes("storybook-static")) {
+        return;
+      }
+
+      if (stats.isDirectory()) {
+        getAllFiles(filePath, acc, options);
+      } else if (!options.extensions || options.extensions.includes(path.extname(filePath))) {
+        acc.push(filePath);
+      }
+    });
+    return acc;
   };
 
-  // Helper function to check if a path is within a workspace
-  const isInWorkspace = (filePath, workspacePath) => {
-    const relativePath = path.relative(workspacePath, filePath);
-    return relativePath && !relativePath.startsWith('..') && !path.isAbsolute(relativePath);
+  // Helper function to create dependency usage RegExp
+  const createDependencyPattern = (dep) => {
+    const depWithoutScope = dep.replace(/^@[^/]+\//, '');
+    return new RegExp(
+      // Match any of these patterns for both dep and depWithoutScope
+      `(?:` +
+        // Direct requires and imports
+        `require\\(['"](?:${dep}|${depWithoutScope})(?:/[^'"]*)?['"]\\)|` +
+        `import\\(['"](?:${dep}|${depWithoutScope})(?:/[^'"]*)?['"]\\)|` +
+        `from\\s+['"](?:${dep}|${depWithoutScope})(?:/[^'"]*)?['"]|` +
+        
+        // Named imports and requires
+        `import\\s+{[^}]*?\\b(?:${dep}|${depWithoutScope})\\b[^}]*?}\\s+from|` +
+        `(?:const|let|var)\\s+{[^}]*?\\b(?:${dep}|${depWithoutScope})\\b[^}]*?}\\s*=\\s*require|` +
+        
+        // Webpack requires
+        `require\\.resolve\\(['"](?:${dep}|${depWithoutScope})(?:/[^'"]*)?['"]\\)|` +
+        
+        // JSDoc comments
+        `@(?:requires|imports|dependency)\\s+(?:${dep}|${depWithoutScope})\\b` +
+      `)`
+    );
   };
 
-  test("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", () => {
-    // Get root package.json for workspaces info
-    const rootPackageJsonPath = path.join(basePath, "package.json");
-    const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, "utf8"));
-    const workspaceGlobs = rootPackageJson.workspaces?.packages || [];
+  // Helper function to get package.json dependencies
+  const getPackageDependencies = (packageJsonPath) => {
+    const pkgContent = fs.readFileSync(packageJsonPath, "utf8");
+    const packageJson = JSON.parse(pkgContent);
+    return { ...(packageJson.dependencies || {}), ...(packageJson.devDependencies || {}) };
+  };
 
+  // Helper function to check dependencies usage in a file
+  const checkDependenciesInFile = (filePath, dependencies) => {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const usedDeps = new Set();
+
+    dependencies.forEach(([dep, version]) => {
+      if (version === "workspace:*") return;
+      if (createDependencyPattern(dep).test(content)) {
+        usedDeps.add(dep);
+      }
+    });
+
+    return usedDeps;
+  };
+
+  // Helper function to get all package.json files in a directory
+  const findPackageJsonFiles = (dir) => {
+    return getAllFiles(dir, [], { extensions: ['.json'] })
+      .filter(file => path.basename(file) === 'package.json');
+  };
+
+  // Helper function to get all JS/TS files in a directory
+  const findJsFiles = (dir) => {
+    return getAllFiles(dir, [], {
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs']
+    });
+  };
+
+  test("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
+    const workspacePaths = [path.join(basePath, "packages")];
+    let sharedDependencyMap = new Map();
     const unusedDependencies = [];
+    let message = "Dependencies check results:\n";
 
     // Common development tools that are often used indirectly
     const commonDevTools = [
@@ -52,49 +116,141 @@ describe("Dependencies Tests", () => {
       '@babel/',
       '@types/',
       '@typescript-eslint/',
+      '@emotion/',
+      '@storybook/',
+      'storybook',
       'eslint',
       'prettier',
       'webpack',
       'typescript',
       'babel-',
       'ts-',
+      'sass',  // Used by webpack for SCSS/SASS files
+      '@svgr', // Used by webpack for SVG files
       
-      // Loaders and plugins
-      'sass-loader',
+      // Testing
+      'jest',
+      '@testing-library/',
+      '@wojtekmaj/',
+      'enzyme',
+      'identity-obj-proxy',
+      
+      // Loaders
       'css-loader',
       'style-loader',
       'file-loader',
-      'source-map',
       'html-loader',
       'json-loader',
       'svg-inline-loader',
       
-      // Testing and documentation
-      'jest',
-      'storybook',
-      '@storybook/',
-      '@testing-library/',
-      'enzyme',
-      '@wojtekmaj/enzyme-adapter-react-17',
-      'identity-obj-proxy',
+      // React ecosystem
+      'react-dom', // Used by React
+      'react-router', // Used by React Router DOM
       
       // Development utilities
       'cross-env',
+      'rimraf',
       'shx',
-      'serve',
-      'local-web-server',
-      'npm-run-all',
+      'concurrently',
+      'nodemon',
+      'dotenv',
+      'chalk',
+      'debug',
+      'source-map',
       'pino',
       '@serdnam/pino-cloudwatch-transport',
+      'pino-pretty',
+      'pino-roll',
+      'local-web-server',
+      'npm-run-all',
+      'serve', // Used for serving the built application
       
-      // React ecosystem
-      '@emotion/',
-      'react-lifecycles-compat',
-      'react-json-pretty'
+      // Type definitions
+      '@types/',
+      'prop-types',
+      
+      // Build tools
+      'terser',
+      'postcss',
+      'autoprefixer',
+      'cssnano',
+      'mini-css-extract-plugin',
+      'html-webpack-plugin',
+      'copy-webpack-plugin',
+      'webpack',
+      'workbox',
+      'clean-webpack-plugin',
+      'external-remotes-plugin'
     ];
 
-    // UI and Media components that might be dynamically imported
+    // Components and libraries that might be used dynamically or via webpack
     const dynamicComponents = [
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-dom',
+      'react-transition-group',
+      'react-virtualized',
+      'react-window',
+      'react-toastify',
+      'react-tooltip',
+      'react-markdown',
+      'react-svg',
+      'react-dropzone',
+      'react-colorful',
+      'react-device-detect',
+      'react-content-loader',
+      'react-countdown',
+      'react-draggable',
+      'react-i18next',
+      'react-smartbanner',
+      'react-string-format',
+      'react-text-mask',
+      'react-virtualized-auto-sizer',
+      'react-window-infinite-loader',
+      'react-json-pretty',
+      'react-autosize-textarea',
+      '@react-spring/web',
+      'remark-gfm',
+      'styled-components',
+      'framer-motion',
+      'mobx',
+      'mobx-react',
+      'i18next',
+      'moment',
+      'moment-timezone',
+      'luxon',
+      'lodash',
+      'lodash.debounce',
+      'fast-deep-equal',
+      'query-string',
+      'socket.io-client',
+      'firebase',
+      'global',
+      'cnbuilder',
+      'copy-to-clipboard',
+      'crypto-js',
+      'csvjson-json_beautifier',
+      'email-addresses',
+      'file-saver',
+      'heic2any',
+      'hex-rgb',
+      'queue-promise',
+      'resize-image',
+      'sjcl',
+      'utif',
+      'windows-iana',
+      'zoom-level',
+      'element-resize-detector',
+      'use-resize-observer',
+      '@use-gesture/react',
+      '@codemirror/lang-javascript',
+      '@uiw/codemirror-theme-github',
+      '@uiw/react-codemirror',
+      '@onlyoffice/docspace-sdk-js',
+      '@onlyoffice/document-editor-react',
+      'cross-fetch',
+      'axios',
       'rc-tree',
       're-resizable',
       'react-hammerjs',
@@ -104,158 +260,88 @@ describe("Dependencies Tests", () => {
       'react-viewer',
       'screenfull',
       'html-to-react',
-      'attr-accept'
+      'attr-accept',
+      'react-lifecycles-compat'
     ];
 
-    // Process each workspace
-    workspaceGlobs.forEach(workspaceGlob => {
-      const workspacePath = path.join(basePath, workspaceGlob.replace("/*", ""));
-      
-      // Get package.json files for this workspace
-      const packageJsonFiles = getAllFiles(workspacePath)
-        .filter(file => file && file.endsWith("package.json"))
-        .filter(file => !file.includes("node_modules"))
-        .filter(file => !file.includes(".next"))  // Exclude Next.js build directory
-        .filter(file => !file.includes("dist"))   // Exclude dist directories
-        .filter(file => !file.includes("storybook-static")); // Exclude storybook build
+    // Map of shared files to their dependencies
+    sharedDependencyMap = new Map();
 
-      // Get JS files for this workspace
-      const jsFiles = getAllFiles(workspacePath)
-        .filter(file => file && (
-          file.endsWith(".js") ||
-          file.endsWith(".jsx") ||
-          file.endsWith(".ts") ||
-          file.endsWith(".tsx")
-        ))
-        .filter(file => !file.includes("node_modules"))
-        .filter(file => !file.includes(".next"))
-        .filter(file => !file.includes("dist"))
-        .filter(file => !file.includes("storybook-static"));
+    // First, gather shared dependencies
+    workspacePaths.forEach(workspacePath => {
+      const subdirs = fs.readdirSync(workspacePath);
+      subdirs.forEach(subdir => {
+        const fullPath = path.join(workspacePath, subdir);
+        if (!fs.statSync(fullPath).isDirectory()) return;
 
-      // Process each package.json in the workspace
-      packageJsonFiles.forEach(filePath => {
-        try {
-          const content = fs.readFileSync(filePath, "utf8");
-          const packageJson = JSON.parse(content);
-          const dependencies = packageJson.dependencies || {};
-          const devDependencies = packageJson.devDependencies || {};
-          const scripts = packageJson.scripts || {};
+        // Get all JS/TS files
+        const jsFiles = findJsFiles(fullPath);
 
-          // For each dependency, check if it's used in any JS file
-          Object.entries({ ...dependencies, ...devDependencies }).forEach(([dep, version]) => {
-            // Skip checking dev tools and dynamic components
-            if (commonDevTools.some(tool => dep.startsWith(tool)) ||
-                dynamicComponents.includes(dep)) {
-              return;
-            }
+        // Check each JS/TS file for shared dependencies
+        jsFiles.forEach(jsFile => {
+          const relativePath = path.relative(basePath, jsFile);
+          const dependencies = new Set();
 
-            // Skip workspace dependencies
-            if (version === "workspace:*") {
-              return;
-            }
+          // Check for shared dependencies usage
+          if (sharedDependencyMap.size > 0) {
+            const usedDeps = checkDependenciesInFile(jsFile, Array.from(sharedDependencyMap.entries()));
+            usedDeps.forEach(dep => dependencies.add(dep));
+          }
 
-            const depWithoutScope = dep.replace(/^@[^/]+\//, '');
-            
-            // Check if dependency is used in package.json scripts
-            const isUsedInScripts = Object.values(scripts).some(script => 
-              script.includes(dep) || script.includes(depWithoutScope)
-            );
-
-            if (isUsedInScripts) {
-              return;
-            }
-
-            // Check if dependency is used in any JS file in the workspace
-            const isUsed = jsFiles.some(jsFile => {
-              const content = fs.readFileSync(jsFile, "utf8");
-              return (
-                // CommonJS require
-                content.includes(`require('${dep}')`) ||
-                content.includes(`require("${dep}")`) ||
-                content.includes(`require('${depWithoutScope}')`) ||
-                content.includes(`require("${depWithoutScope}")`) ||
-                
-                // ES6 imports
-                content.includes(`from '${dep}'`) ||
-                content.includes(`from "${dep}"`) ||
-                content.includes(`from '${depWithoutScope}'`) ||
-                content.includes(`from "${depWithoutScope}"`) ||
-                
-                // Dynamic imports
-                content.includes(`import('${dep}')`) ||
-                content.includes(`import("${dep}")`) ||
-                content.includes(`import('${depWithoutScope}')`) ||
-                content.includes(`import("${depWithoutScope}")`) ||
-                
-                // Submodule imports
-                content.includes(`'${dep}/`) ||
-                content.includes(`"${dep}/`) ||
-                content.includes(`'${depWithoutScope}/`) ||
-                content.includes(`"${depWithoutScope}/`) ||
-
-                // webpack/require context
-                content.includes(`webpackChunkName: "${dep}"`) ||
-                content.includes(`webpackChunkName: '${dep}'`) ||
-                
-                // React component usage
-                content.includes(`<${depWithoutScope}`) ||
-                content.includes(`<${dep}`) ||
-                content.includes(`<${depWithoutScope}.`) ||
-                content.includes(`<${dep}.`) ||
-                
-                // Comments and strings that might indicate usage
-                content.includes(`* ${dep}`) ||
-                content.includes(`// ${dep}`) ||
-                content.includes(`/* ${dep}`) ||
-                content.includes(`import ${dep}`) ||
-                content.includes(`import ${depWithoutScope}`) ||
-                
-                // Lazy loading and code splitting
-                content.includes(`lazy(() => import('${dep}')`) ||
-                content.includes(`lazy(() => import("${dep}")`) ||
-                content.includes(`lazy(() => import('${depWithoutScope}')`) ||
-                content.includes(`lazy(() => import("${depWithoutScope}")`)
-              );
-            });
-
-            if (!isUsed) {
-              // Get workspace name from package.json path
-              const workspaceName = path.basename(path.dirname(filePath));
-              unusedDependencies.push({
-                name: dep,
-                version,
-                packageJsonPath: filePath,
-                workspace: workspaceName
-              });
-            }
-          });
-        } catch (error) {
-          console.error(`Error processing ${filePath}:`, error);
-        }
+          if (dependencies.size > 0) {
+            sharedDependencyMap.set(relativePath, Array.from(dependencies));
+          }
+        });
       });
     });
 
-    // Generate error message for unused dependencies
-    let message = "";
-    if (unusedDependencies.length > 0) {
-      // Group by workspace
-      const byWorkspace = unusedDependencies.reduce((acc, dep) => {
-        acc[dep.workspace] = acc[dep.workspace] || [];
-        acc[dep.workspace].push(dep);
-        return acc;
-      }, {});
+    // Then, check each workspace for unused dependencies
+    workspacePaths.forEach(workspacePath => {
+      const subdirs = fs.readdirSync(workspacePath);
+      subdirs.forEach(subdir => {
+        const fullPath = path.join(workspacePath, subdir);
+        if (!fs.statSync(fullPath).isDirectory()) return;
 
-      message = "The following dependencies appear to be unused:\n\n";
-      
-      Object.entries(byWorkspace).forEach(([workspace, deps]) => {
-        message += `  In @docspace/${workspace}:\n`;
-        deps.forEach(({ name, version }) => {
-          message += `    - "${name}@${version}"\n`;
+        // Get package.json files
+        const packageJsonFiles = findPackageJsonFiles(fullPath);
+
+        // Process each package.json
+        packageJsonFiles.forEach(pkgFile => {
+          const allDeps = getPackageDependencies(pkgFile);
+          const packageName = JSON.parse(fs.readFileSync(pkgFile, "utf8")).name;
+
+          // Get all JS/TS files
+          const jsFiles = findJsFiles(fullPath);
+          const usedDeps = new Set();
+
+          // Check each JS/TS file for dependencies
+          jsFiles.forEach(jsFile => {
+            const fileUsedDeps = checkDependenciesInFile(jsFile, Object.entries(allDeps));
+            fileUsedDeps.forEach(dep => usedDeps.add(dep));
+          });
+
+          // Check for unused dependencies
+          const unused = Object.entries(allDeps)
+            .filter(([dep, version]) => {
+              if (version === "workspace:*") return false;
+              if (dynamicComponents.some(comp => dep.startsWith(comp))) return false;
+              if (commonDevTools.some(tool => dep.startsWith(tool))) return false;
+              return !usedDeps.has(dep);
+            })
+            .map(([dep, version]) => `${dep}@${version}`);
+
+          if (unused.length > 0) {
+            message += `\nIn ${packageName}:\n  Unused dependencies:\n`;
+            unused.forEach(dep => {
+              message += `    - "${dep}"\n`;
+            });
+            unusedDependencies.push(...unused);
+          }
         });
-        message += "\n";
       });
-    }
+    });
 
+    console.log(message);
     expect(unusedDependencies.length, message).toBe(0);
   });
 });

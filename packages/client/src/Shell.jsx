@@ -107,6 +107,8 @@ const Shell = ({ page = "home", ...rest }) => {
     setConvertPasswordDialogVisible,
   });
 
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+
   useEffect(() => {
     if (!logoText) setLogoText(t("Common:OrganizationName"));
   }, [logoText, setLogoText]);
@@ -185,8 +187,6 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId]);
-
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   let snackTimer = null;
   let fbInterval = null;

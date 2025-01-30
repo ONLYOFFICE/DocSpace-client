@@ -94,7 +94,7 @@ const PureHome = (props) => {
     converted,
     setUploadPanelVisible,
     clearPrimaryProgressData,
-    primaryProgressDataVisible,
+    isPrimaryProgressVisbile,
 
     refreshFiles,
 
@@ -321,7 +321,7 @@ const PureHome = (props) => {
 
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
-        primaryProgressDataVisible || isSecondaryProgressVisbile;
+        isPrimaryProgressVisbile || isSecondaryProgressVisbile;
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
@@ -498,6 +498,7 @@ export const Component = inject(
       primaryOperationsCompleted,
       primaryOperationsAlert,
       needErrorChecking,
+      isPrimaryProgressVisbile,
     } = primaryProgressDataStore;
 
     const {
@@ -564,6 +565,7 @@ export const Component = inject(
       disableUploadPanelOpen,
 
       isSecondaryProgressVisbile,
+      isPrimaryProgressVisbile,
 
       enablePlugins,
 

@@ -108,9 +108,9 @@ const Section = (props: SectionProps) => {
 
     pathname,
     secondaryOperationsCompleted,
-    secondaryActiveOperations,
+    secondaryActiveOperations = [],
     clearSecondaryProgressData,
-    primaryOperationsArray,
+    primaryOperationsArray = [],
     clearPrimaryProgressData,
     primaryOperationsCompleted,
     cancelUpload,

@@ -463,7 +463,6 @@ export default function withFileActions(WrappedFileItem) {
           operation !== OPERATIONS_NAME.copy;
       }
 
-
       const dragIsDisabled =
         isPrivacyFolder ||
         isRecycleBinFolder ||

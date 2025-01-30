@@ -81,6 +81,10 @@ class PrimaryProgressDataStore {
     makeAutoObservable(this);
   }
 
+  get isPrimaryProgressVisbile() {
+    return this.primaryOperationsArray.length > 0;
+  }
+
   setPrimaryProgressBarData = (primaryProgressData) => {
     const { operation, ...progressInfo } = primaryProgressData;
 

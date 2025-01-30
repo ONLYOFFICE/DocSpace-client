@@ -38,10 +38,14 @@ import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
 import { HelpButton } from "../../help-button";
 
-type OperationName = keyof typeof OPERATIONS_NAME;
-let timerId = null;
+type ValueOf<T> = T[keyof T];
 
-const operationToIconMap: Record<OperationName, FloatingButtonIcons> = {
+type OperationName = keyof typeof OPERATIONS_NAME;
+
+const operationToIconMap: Record<
+  OperationName,
+  ValueOf<typeof FloatingButtonIcons>
+> = {
   download: FloatingButtonIcons.download,
   convert: FloatingButtonIcons.refresh,
   copy: FloatingButtonIcons.copy,
@@ -84,7 +88,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         animation.includes("hideButtonImmediate")
       ) {
         clearSecondaryProgressData(null, null, true);
-        clearPrimaryProgressData(null, true);
+        clearPrimaryProgressData?.(null, true);
       }
     },
     [clearSecondaryProgressData, clearPrimaryProgressData],
@@ -197,8 +201,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       : primaryActiveOperations[0].label;
   };
 
-  const onCanelOperation = () => {
-    cancelUpload(t);
+  const onCancelOperation = () => {
+    cancelUpload?.(t);
   };
 
   return (
@@ -226,7 +230,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
           {...(!isSeveralOperations &&
             primaryActiveOperations.length && { onClick: onOpenPanel })}
-          {...(showCancelButton && { onCloseButton: onCanelOperation })}
+          {...(!isSeveralOperations &&
+            showCancelButton && {
+              clearUploadedFilesHistory: onCancelOperation,
+            })}
         />
       </HelpButton>
 
@@ -245,9 +252,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           primaryOperations={primaryActiveOperations}
           clearSecondaryProgressData={clearSecondaryProgressData}
           clearPrimaryProgressData={(operationId, operationName) =>
-            clearPrimaryProgressData(operationName)
+            clearPrimaryProgressData?.(operationName)
           }
-          onCancel={onCanelOperation}
+          onCancel={onCancelOperation}
           onOpenPanel={onOpenPanel}
         />
       </DropDown>

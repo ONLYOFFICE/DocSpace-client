@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import UploadIcon from "PUBLIC_DIR/images/icons/24/upload.react.svg";
 import TrashIcon from "PUBLIC_DIR/images/icons/24/trash.react.svg";
@@ -51,8 +51,6 @@ import { FloatingButtonProps } from "./FloatingButton.types";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 import styles from "./FloatingButton.module.scss";
 
-const ANIMATION_DELAY = 1000;
-
 const ICON_COMPONENTS = {
   [FloatingButtonIcons.upload]: <UploadIcon data-icon="upload" />,
   [FloatingButtonIcons.other]: <FileIcon data-icon="file" />,
@@ -75,24 +73,6 @@ const ICON_COMPONENTS = {
   [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon data-icon="markAsRead" />,
 } as const;
 
-// const useProgressAnimation = (percent: number) => {
-//   const [animationCompleted, setAnimationCompleted] = useState(false);
-//   const timerId = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-
-//   useEffect(() => {
-//     timerId.current = setTimeout(
-//       () => setAnimationCompleted(percent === 100),
-//       ANIMATION_DELAY,
-//     );
-
-//     return () => {
-//       if (timerId.current) clearTimeout(timerId.current);
-//     };
-//   }, [percent]);
-
-//   return animationCompleted;
-// };
-
 const FloatingButton = ({
   id,
   className,
@@ -100,24 +80,12 @@ const FloatingButton = ({
   icon = FloatingButtonIcons.upload,
   alert = false,
   completed = false,
-  percent = 0,
   onClick,
   color,
-  clearUploadedFilesHistory,
-  showTwoProgress,
   onCloseButton,
   withoutProgress,
   showCancelButton,
 }: FloatingButtonProps) => {
-  //  const animationCompleted = useProgressAnimation(percent);
-
-  // const displayProgress = useMemo(() => {
-  //   return (
-  //     !(percent === 100 && animationCompleted) &&
-  //     icon !== FloatingButtonIcons.minus
-  //   );
-  // }, [percent, animationCompleted, icon]);
-
   const iconComponent = useMemo(() => {
     return (
       ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.duplicate]
@@ -125,7 +93,6 @@ const FloatingButton = ({
   }, [icon]);
 
   const handleProgressClear = () => {
-    clearUploadedFilesHistory?.();
     onCloseButton?.();
   };
 
@@ -137,9 +104,6 @@ const FloatingButton = ({
     <div
       className={classNames(
         styles.floatingButtonWrapper,
-        {
-          [styles.showTwoProgress]: showTwoProgress,
-        },
         "layout-progress-bar_wrapper",
       )}
     >
@@ -148,7 +112,6 @@ const FloatingButton = ({
         onClick={onClick}
         data-testid="floating-button"
         data-role="button"
-        // data-display-progress={displayProgress ? "true" : "false"}
         aria-label={`${icon} button`}
         className={classNames(styles.circleWrap, buttonClassName, {
           [styles.loading]: !completed,
@@ -170,12 +133,7 @@ const FloatingButton = ({
           })}
         >
           {withoutProgress ? null : <div className={styles.loader} />}
-          <div
-            className={classNames(styles.floatingButton)}
-            style={
-              { "--floating-button-background": color } as React.CSSProperties
-            }
-          >
+          <div className={classNames(styles.floatingButton)}>
             <div className={classNames(styles.iconBox, "icon-box")}>
               {iconComponent}
             </div>

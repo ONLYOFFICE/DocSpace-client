@@ -498,22 +498,6 @@
     }
   }
 
-  &.showTwoProgress {
-    :global {
-      .progressBarContainer {
-        .layout-progress-bar_wrapper {
-          .layout-progress-bar,
-          .layout-progress-second-bar {
-            margin-inline-start: 32px;
-          }
-          .layout-progress-bar_close-icon {
-            margin-inline-end: -24px;
-          }
-        }
-      }
-    }
-  }
-
   &.withoutSectionHeader {
     width: 100vw !important;
     max-width: 100vw !important;

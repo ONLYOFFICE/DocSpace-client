@@ -72,7 +72,6 @@ export type SectionBodyProps = {
 };
 
 export type SectionContainerProps = {
-  showTwoProgress?: boolean;
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
@@ -125,11 +124,17 @@ export interface OperationsProgressProps {
   clearSecondaryProgressData: (
     operationId: string | null,
     operation: string | null,
-    allOperations: boolean,
+    clearAll?: boolean,
   ) => void;
-  clearPrimaryProgressData: () => void;
+  clearPrimaryProgressData: (
+    operation: string | null,
+    clearAll?: boolean | null,
+  ) => void;
   cancelUpload: (t: (key: string) => string) => void;
   onOpenPanel?: () => void;
+  mainButtonVisible?: boolean;
+  needErrorChecking?: boolean;
+  showCancelButton?: boolean;
 }
 
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
@@ -166,6 +171,25 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     clearUploadedFilesHistory?: () => void;
     isTrashFolder?: boolean;
     setIsInfoPanelVisible?: (value: boolean) => void;
+    secondaryOperationsCompleted?: boolean;
+    primaryOperationsCompleted?: boolean;
+    secondaryActiveOperations: Operation[];
+    primaryOperationsArray: Operation[];
+    clearSecondaryProgressData: (
+      operationId: string | null,
+      operation: string | null,
+      clearAll?: boolean,
+    ) => void;
+
+    clearPrimaryProgressData: (
+      operation: string | null,
+      clearAll?: boolean | null,
+    ) => void;
+    cancelUpload: (t: (key: string) => string) => void;
+    secondaryOperationsAlert?: boolean;
+    mainButtonVisible?: boolean;
+    primaryOperationsAlert?: boolean;
+    needErrorChecking?: boolean;
   };
 
 export type SectionContextMenuProps = {

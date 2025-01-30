@@ -38,14 +38,14 @@ export type FloatingButtonProps = {
   icon?: FloatingButtonIcons;
   /** Displays the alert */
   alert?: boolean;
-  /** Loading indicator */
-  percent?: number;
   /**  Sets a callback function that is triggered when the button is clicked */
   onClick?: (e: React.MouseEvent) => void;
   /** CSS color */
   color?: string;
-  clearUploadedFilesHistory?: () => void;
-  showTwoProgress?: boolean;
+  onCloseButton?: () => void;
+  withoutProgress?: boolean;
+  showCancelButton?: boolean;
+  completed?: boolean;
 };
 
 export type DefaultStylesProps = {

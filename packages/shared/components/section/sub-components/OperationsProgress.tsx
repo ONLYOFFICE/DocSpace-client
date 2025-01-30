@@ -222,12 +222,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           icon={getIcons()}
           alert={operationsAlert}
           completed={operationsCompleted}
+          showCancelButton={showCancelButton}
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
-          percent={operationsCompleted ? 100 : 0}
           {...(!isSeveralOperations &&
             primaryActiveOperations.length && { onClick: onOpenPanel })}
           {...(showCancelButton && { onCloseButton: onCanelOperation })}
-          showCancelButton={showCancelButton}
         />
       </HelpButton>
 
@@ -246,7 +245,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           primaryOperations={primaryActiveOperations}
           clearSecondaryProgressData={clearSecondaryProgressData}
           clearPrimaryProgressData={(operationId, operationName) =>
-            clearPrimaryProgressData(operationName, "")
+            clearPrimaryProgressData(operationName)
           }
           onCancel={onCanelOperation}
           onOpenPanel={onOpenPanel}

@@ -148,14 +148,7 @@
     inset-inline-end: 0;
     width: 100px;
     height: 70px;
-
-    &.showTwoProgress {
-      bottom: 96px;
-    }
-
-    &:not(.showTwoProgress) {
-      bottom: 0;
-    }
+    bottom: 0;
   }
 
   :global(.layout-progress-bar_close-icon) {

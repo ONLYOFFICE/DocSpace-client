@@ -87,14 +87,6 @@ SectionSubmenu.displayName = SECTION_SUBMENU_NAME;
 const Section = (props: SectionProps) => {
   const {
     onDrop,
-    showPrimaryProgressBar,
-    primaryProgressBarIcon,
-    primaryProgressBarValue,
-    showPrimaryButtonAlert,
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
     uploadFiles,
     viewAs,
     withBodyScroll = true,
@@ -102,7 +94,6 @@ const Section = (props: SectionProps) => {
     onOpenUploadPanel,
     isInfoPanelAvailable = true,
     settingsStudio = false,
-    clearUploadedFilesHistory,
     isInfoPanelScrollLocked,
     isFormGallery,
     currentDeviceType,
@@ -202,8 +193,6 @@ const Section = (props: SectionProps) => {
     };
   }, [onResize]);
 
-  const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
-
   const providerValue = useMemo(
     () => ({
       sectionWidth: sectionSize.width,
@@ -247,7 +236,6 @@ const Section = (props: SectionProps) => {
           ref={containerRef}
           isSectionHeaderAvailable={isSectionHeaderAvailable}
           isInfoPanelVisible={isInfoPanelVisible}
-          showTwoProgress={showTwoProgress}
           withBodyScroll={withBodyScroll}
           currentDeviceType={currentDeviceType}
         >
@@ -335,48 +323,6 @@ const Section = (props: SectionProps) => {
               showCancelButton={showCancelButton}
             />
           ) : null}
-
-          {/* {currentDeviceType === DeviceType.desktop ? (
-            showTwoProgress ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-                <FloatingButton
-                  className="layout-progress-second-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                  showTwoProgress={showTwoProgress}
-                />
-              </div>
-            ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-              </div>
-            ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                />
-              </div>
-            ) : null
-          ) : null} */}
         </SectionContainer>
 
         {isInfoPanelAvailable ? (

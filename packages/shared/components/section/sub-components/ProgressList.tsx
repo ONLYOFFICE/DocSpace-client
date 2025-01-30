@@ -24,7 +24,10 @@ interface ProgressListProps {
     operationId: string | null,
     operation: string,
   ) => void;
-  clearPrimaryProgressData: () => void;
+  clearPrimaryProgressData: (
+    operationId: string | null,
+    operation: string,
+  ) => void;
   onCancel?: () => void;
   onOpenPanel?: () => void;
 }

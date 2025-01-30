@@ -118,9 +118,6 @@ const PureHome = (props) => {
     isErrorRoomNotAvailable,
     isIndexEditingMode,
 
-    primaryProgressDataPercent,
-    primaryProgressDataIcon,
-    primaryProgressDataAlert,
     clearUploadedFilesHistory,
 
     isSecondaryProgressVisbile,
@@ -337,11 +334,6 @@ const PureHome = (props) => {
   }
 
   sectionProps.onOpenUploadPanel = showUploadPanel;
-  sectionProps.showPrimaryProgressBar = primaryProgressDataVisible;
-  sectionProps.primaryProgressBarValue = primaryProgressDataPercent;
-  sectionProps.primaryProgressBarIcon = primaryProgressDataIcon;
-  sectionProps.showPrimaryButtonAlert = primaryProgressDataAlert;
-
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
@@ -503,10 +495,6 @@ export const Component = inject(
     } = treeFoldersStore;
 
     const {
-      visible: primaryProgressDataVisible,
-      percent: primaryProgressDataPercent,
-      icon: primaryProgressDataIcon,
-      alert: primaryProgressDataAlert,
       disableUploadPanelOpen,
       clearPrimaryProgressData,
       primaryOperationsArray,
@@ -574,10 +562,7 @@ export const Component = inject(
       isVisitor: userStore.user.isVisitor,
       userId: userStore?.user?.id,
       folderSecurity,
-      primaryProgressDataVisible,
-      primaryProgressDataPercent,
-      primaryProgressDataIcon,
-      primaryProgressDataAlert,
+
       clearPrimaryProgressData,
       disableUploadPanelOpen,
 

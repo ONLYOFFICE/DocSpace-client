@@ -197,7 +197,7 @@ const FileInputPure = ({
             <div className={iconClasses} {...onClickProp}>
               {isLoading ? (
                 <Loader
-                  className="loader"
+                  className={styles.loader}
                   size="20px"
                   type={LoaderTypes.track}
                 />

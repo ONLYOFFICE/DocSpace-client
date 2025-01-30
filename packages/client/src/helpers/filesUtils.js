@@ -400,24 +400,24 @@ export const getOperationsProgressTitle = (type) => {
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
-      return "Moving to trash";
+      return i18n.t("Files:MovingToTrash");
     case move:
-      return "Moving";
+      return i18n.t("Files:Moving");
     case copy:
-      return "Copying";
+      return i18n.t("Files:Copying");
     case download:
-      return "Downloading";
+      return i18n.t("Files:Downloading");
     case duplicate:
-      return "Duplicating";
+      return i18n.t("Files:Duplicating");
     case exportIndex:
-      return "Exporting index";
+      return i18n.t("Files:ExportingIndex");
     case markAsRead:
-      return "Marking is read";
+      return i18n.t("Files:MarkingRead");
     case deletePermanently:
-      return "Deleting permanently";
+      return i18n.t("Files:DeletingPermanently");
     case upload:
-      return "Uploading";
+      return i18n.t("Files:Uploading");
     default:
-      return "Other processes";
+      return i18n.t("Files:OtherProcesses");
   }
 };

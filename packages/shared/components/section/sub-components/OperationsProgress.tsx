@@ -66,7 +66,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   onOpenPanel,
   mainButtonVisible,
 }) => {
-  const { t } = useTranslation("UploadPanel");
+  const { t } = useTranslation(["UploadPanel", "Files"]);
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
@@ -166,10 +166,30 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const getTooltioLabel = () => {
     if (isSeveralOperations) {
-      return `Current process: ${operationsLength}`;
+      return t("Files:Processes", { count: operationsLength });
     }
 
     const isSecondaryActive = secondaryActiveOperations.length > 0;
+
+    if (operationsAlert) {
+      const operationName = isSecondaryActive
+        ? secondaryActiveOperations[0].label
+        : primaryActiveOperations[0].label;
+
+      return t("Files:ErrorOperation", {
+        operationName,
+      });
+    }
+
+    if (operationsCompleted) {
+      const operationName = isSecondaryActive
+        ? secondaryActiveOperations[0].label
+        : primaryActiveOperations[0].label;
+
+      return t("Files:SuccessOperation", {
+        operationName,
+      });
+    }
 
     return isSecondaryActive
       ? secondaryActiveOperations[0].label

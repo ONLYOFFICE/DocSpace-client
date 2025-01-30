@@ -39,29 +39,30 @@ const meta = {
     size: {
       control: "select",
       options: Object.values(InputSize),
-      description: "Size of the input field"
+      description: "Size of the input field",
     },
     hasError: {
       control: "boolean",
-      description: "Shows error state"
+      description: "Shows error state",
     },
     hasWarning: {
       control: "boolean",
-      description: "Shows warning state"
+      description: "Shows warning state",
     },
     isDisabled: {
       control: "boolean",
-      description: "Disables the input"
+      description: "Disables the input",
     },
     isLoading: {
       control: "boolean",
-      description: "Shows loading state"
-    }
+      description: "Shows loading state",
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "File input component for handling file uploads with various states and sizes",
+        component:
+          "File input component for handling file uploads with various states and sizes",
       },
     },
   },

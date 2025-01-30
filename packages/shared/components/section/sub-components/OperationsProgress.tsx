@@ -64,6 +64,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   clearPrimaryProgressData,
   cancelUpload,
   onOpenPanel,
+  mainButtonVisible,
 }) => {
   const { t } = useTranslation("UploadPanel");
 
@@ -185,6 +186,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       className={classNames(styles.progressBarContainer, {
         [styles.hideImmediate]: shouldHideButton,
         [styles.hidden]: !isOpenDropdown && operationsCompleted,
+        [styles.mainButtonVisible]: mainButtonVisible,
       })}
     >
       <HelpButton

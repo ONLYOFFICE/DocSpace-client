@@ -166,6 +166,7 @@ const PureHome = (props) => {
     secondaryOperationsAlert,
     clearUploadData,
     clearUploadedFiles,
+    mainButtonVisible,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -351,6 +352,8 @@ const PureHome = (props) => {
   sectionProps.cancelUpload = cancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
 
+  sectionProps.mainButtonVisible = mainButtonVisible;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -481,6 +484,7 @@ export const Component = inject(
       getRooms,
       scrollToTop,
       wsCreatedPDFForm,
+      mainButtonVisible,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -663,6 +667,7 @@ export const Component = inject(
       cancelUpload,
       clearUploadData,
       clearUploadedFiles,
+      mainButtonVisible,
     };
   },
 )(observer(Home));

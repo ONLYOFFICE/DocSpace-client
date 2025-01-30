@@ -548,7 +548,7 @@
 
   @keyframes hideButton {
     from {
-      opacity: 1;
+      // opacity: 1;
       transform: translateY(0);
     }
     to {
@@ -558,47 +558,75 @@
   }
   @keyframes hideButtonImmediate {
     from {
-      opacity: 1;
+      // opacity: 1;
       transform: translateY(0);
     }
     to {
-      opacity: 0;
       transform: translateY(72px);
-    }
-  }
-
-  @include tablet-and-below {
-    @keyframes hideButton {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        // opacity: 0;
-        transform: translateY(64px);
-      }
-    }
-
-    @keyframes hideButtonImmediate {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(64px);
-      }
+      //  opacity: 0;
     }
   }
 
   @include tablet-and-below {
     z-index: 200;
-    bottom: 88px;
+    bottom: 16px;
+
+    @keyframes hideButton {
+      from {
+        // opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        // opacity: 0;
+        transform: translateY(16px);
+      }
+    }
+
+    @keyframes hideButtonImmediate {
+      from {
+        // opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        //  opacity: 0;
+        transform: translateY(16px);
+      }
+    }
+
+    &.mainButtonVisible {
+      bottom: 88px;
+
+      @keyframes hideButton {
+        from {
+          // opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          // opacity: 0;
+          transform: translateY(64px);
+        }
+      }
+
+      @keyframes hideButtonImmediate {
+        from {
+          // opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          //  opacity: 0;
+          transform: translateY(64px);
+        }
+      }
+    }
   }
 
   @include mobile {
-    bottom: 80px;
+    bottom: 16px;
     inset-inline-end: 16px;
+
+    &.mainButtonVisible {
+      bottom: 80px;
+    }
   }
 
   &.hidden {

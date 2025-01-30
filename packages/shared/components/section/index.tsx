@@ -124,6 +124,7 @@ const Section = (props: SectionProps) => {
     primaryOperationsCompleted,
     cancelUpload,
     secondaryOperationsAlert,
+    mainButtonVisible,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -321,6 +322,7 @@ const Section = (props: SectionProps) => {
               primaryActiveOperations={primaryOperationsArray}
               cancelUpload={cancelUpload}
               onOpenPanel={onOpenUploadPanel}
+              mainButtonVisible={mainButtonVisible}
             />
           ) : null}
 

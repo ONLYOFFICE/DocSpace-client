@@ -29,11 +29,11 @@ import moment from "moment-timezone";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 
-import StatusBadge from "../../../../sub-components/StatusBadge";
 import { useTranslation } from "react-i18next";
 import { globalColors } from "@docspace/shared/themes";
+import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -58,13 +58,10 @@ const StatusHeader = styled.div`
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
   const { t, i18n } = useTranslation("Webhooks");
 
-  const formattedDelivery =
-    moment(historyItem.delivery)
-      .tz(window.timezone)
-      .locale(i18n.language)
-      .format("MMM D, YYYY, h:mm:ss A") +
-    " " +
-    t("Common:UTC");
+  const formattedDelivery = `${moment(historyItem.delivery)
+    .tz(window.timezone)
+    .locale(i18n.language)
+    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
@@ -82,7 +79,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
           {formattedDelivery}
         </Text>
       </ContentWrapper>
-      <span></span>
+      <span />
     </StyledRowContent>
   );
 };

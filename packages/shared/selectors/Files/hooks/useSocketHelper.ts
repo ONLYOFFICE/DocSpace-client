@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+  TOptSocket,
+} from "../../../utils/socket";
 
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
 import { TRoom } from "../../../api/rooms/types";
-import { TOptSocket } from "../../../utils/socket";
 
 import {
   convertFilesToItems,
@@ -52,6 +53,7 @@ const useSocketHelper = ({
   setBreadCrumbs,
   setTotal,
 }: UseSocketHelperProps) => {
+  const { t } = useTranslation(["Common"]);
   const { getIcon } = React.useContext(SettingsContext);
 
   const folderSubscribers = React.useRef(new Set<string>());
@@ -62,9 +64,9 @@ const useSocketHelper = ({
 
   const unsubscribe = React.useCallback((id?: number | string) => {
     if (!id) {
-      const roomParts = [...folderSubscribers.current];
+      const roomParts = [...Array.from(folderSubscribers.current)];
 
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts,
         individual: true,
       });
@@ -77,7 +79,7 @@ const useSocketHelper = ({
     const path = `DIR-${id}`;
 
     if (
-      SocketHelper.socketSubscribers.has(path) &&
+      SocketHelper?.socketSubscribers.has(path) &&
       folderSubscribers.current.has(path)
     ) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
@@ -93,7 +95,7 @@ const useSocketHelper = ({
     (id: number) => {
       const roomParts = `DIR-${id}`;
 
-      if (SocketHelper.socketSubscribers.has(roomParts)) {
+      if (SocketHelper?.socketSubscribers.has(roomParts)) {
         subscribedId.current = id;
 
         return;
@@ -104,7 +106,7 @@ const useSocketHelper = ({
       folderSubscribers.current.add(roomParts);
       subscribedId.current = id;
 
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts,
         individual: true,
       });
@@ -128,11 +130,11 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        item = convertFilesToItems([data], getIcon, filterParam)[0];
+        [item] = convertFilesToItems([data], getIcon, filterParam);
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         item =
           "roomType" in data && data.roomType && "tags" in data
-            ? convertRoomsToItems([data])[0]
+            ? convertRoomsToItems([data], t)[0]
             : convertFoldersToItems([data], disabledItems, filterParam)[0];
       }
 
@@ -183,7 +185,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreate],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, t, withCreate],
   );
 
   const updateItem = React.useCallback(
@@ -206,12 +208,12 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        item = convertFilesToItems([data], getIcon, filterParam)[0];
+        [item] = convertFilesToItems([data], getIcon, filterParam);
       } else if (opt?.type === "folder" && "roomType" in data) {
-        item =
+        [item] =
           data.roomType && "tags" in data
-            ? convertRoomsToItems([data])[0]
-            : convertFoldersToItems([data], disabledItems, filterParam)[0];
+            ? convertRoomsToItems([data], t)
+            : convertFoldersToItems([data], disabledItems, filterParam);
       }
 
       if (item?.id === subscribedId.current) {
@@ -262,7 +264,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems],
+    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems, t],
   );
 
   const deleteItem = React.useCallback(
@@ -302,7 +304,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    SocketHelper.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
+    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);

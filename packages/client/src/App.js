@@ -30,10 +30,10 @@ import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router-dom";
 import { Provider as MobxProvider } from "mobx-react";
 
+import store from "SRC_DIR/store";
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
-import store from "SRC_DIR/store";
 import i18n from "./i18n";
 
 import "@docspace/shared/polyfills/broadcastchannel";

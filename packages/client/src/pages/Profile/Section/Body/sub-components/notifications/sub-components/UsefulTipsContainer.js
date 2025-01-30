@@ -42,8 +42,8 @@ const UsefulTipsContainer = ({
     const checked = e.currentTarget.checked;
     try {
       await changeSubscription(NotificationsType.UsefulTips, checked);
-    } catch (e) {
-      toastr.error(e);
+    } catch (err) {
+      toastr.error(err);
     }
   };
 

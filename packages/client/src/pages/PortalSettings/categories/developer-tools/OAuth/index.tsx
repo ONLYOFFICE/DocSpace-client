@@ -141,12 +141,18 @@ const OAuth = ({
         />
       )}
 
-      {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
-      {disableDialogVisible && <DisableDialog />}
-      {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}
-      {deleteDialogVisible && <DeleteDialog />}
-      {generateDeveloperTokenDialogVisible && <GenerateDeveloperTokenDialog />}
-      {revokeDeveloperTokenDialogVisible && <RevokeDeveloperTokenDialog />}
+      {infoDialogVisible ? <InfoDialog visible={infoDialogVisible} /> : null}
+      {disableDialogVisible ? <DisableDialog /> : null}
+      {previewDialogVisible ? (
+        <PreviewDialog visible={previewDialogVisible} />
+      ) : null}
+      {deleteDialogVisible ? <DeleteDialog /> : null}
+      {generateDeveloperTokenDialogVisible ? (
+        <GenerateDeveloperTokenDialog />
+      ) : null}
+      {revokeDeveloperTokenDialogVisible ? (
+        <RevokeDeveloperTokenDialog />
+      ) : null}
     </OAuthContainer>
   );
 };

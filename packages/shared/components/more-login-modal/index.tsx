@@ -29,14 +29,11 @@ import { ReactSVG } from "react-svg";
 
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { getProviderLabel } from "@docspace/shared/utils/common";
+import { Text } from "../text";
+import { Button, ButtonSize } from "../button";
+import { PROVIDERS_DATA } from "../../constants";
+import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import { getProviderLabel } from "../../utils/common";
 
 import { ProviderRow } from "./MoreLoginModal.styled";
 import type {
@@ -64,7 +61,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
     >
       <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {ssoUrl && (
+        {ssoUrl ? (
           <ProviderRow key="ProviderItemSSO">
             <ReactSVG src={SsoReactSvgUrl} />
             <Text
@@ -82,7 +79,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               onClick={() => (window.location.href = ssoUrl)}
             />
           </ProviderRow>
-        )}
+        ) : null}
         {providers?.map((item) => {
           if (!PROVIDERS_DATA[item.provider as keyof ProvidersDataType]) return;
 

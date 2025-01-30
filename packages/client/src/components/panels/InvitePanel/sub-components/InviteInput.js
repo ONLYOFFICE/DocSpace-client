@@ -34,31 +34,30 @@ import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";
-import { parseAddresses, getParts } from "@docspace/shared/utils";
+import {
+  parseAddresses,
+  getParts,
+  isBetaLanguage,
+} from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
-import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
   RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import {
-  fixAccess,
-  getTopFreeRole,
-  isPaidUserRole,
-  makeFreeRole,
-} from "../utils";
-import AccessSelector from "../../../AccessSelector";
-
+import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getUserType } from "@docspace/shared/utils/common";
 import {
   StyledSubHeader,
   StyledLink,
@@ -71,13 +70,14 @@ import {
   ResetLink,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
-
-import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { Box } from "@docspace/shared/components/box";
-import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
-import { getUserType } from "@docspace/shared/utils/common";
+import AccessSelector from "../../../AccessSelector";
+import BetaBadge from "../../../BetaBadgeWrapper";
+import {
+  fixAccess,
+  getTopFreeRole,
+  isPaidUserRole,
+  makeFreeRole,
+} from "../utils";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -161,10 +161,10 @@ const InviteInput = ({
     }
   }, []);
 
-  const onLanguageSelect = (language) => {
-    setInviteLanguage(language);
-    setCultureKey(language.key);
-    if (language.key !== i18n.language) setIsChangeLangMail(true);
+  const onLanguageSelect = (newLanguage) => {
+    setInviteLanguage(newLanguage);
+    setCultureKey(newLanguage.key);
+    if (newLanguage.key !== i18n.language) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };
 
@@ -278,7 +278,7 @@ const InviteInput = ({
 
       setUsersList(
         roomId === -1
-          ? users.items.map((value) => ({ ...value, shared: true }))
+          ? users.items.map((u) => ({ ...u, shared: true }))
           : users.items,
       );
 
@@ -301,11 +301,6 @@ const InviteInput = ({
     [],
   );
 
-  const onChange = (e) => {
-    const value = e.target.value;
-    onChangeInput(value);
-  };
-
   const onChangeInput = (value) => {
     const clearValue = value.trim();
 
@@ -319,6 +314,11 @@ const InviteInput = ({
 
     setSearchRequestRunning(true);
     debouncedSearch(clearValue);
+  };
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    onChangeInput(value);
   };
 
   const getItemContent = (item) => {
@@ -386,11 +386,13 @@ const InviteInput = ({
             <SearchItemText primary disabled={shared}>
               {displayName || groupName}
             </SearchItemText>
-            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+            {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
           </Box>
           <SearchItemText>{email}</SearchItemText>
         </div>
-        {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
+        {shared ? (
+          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+        ) : null}
       </DropDownItem>
     );
   };
@@ -558,7 +560,7 @@ const InviteInput = ({
     <>
       <StyledSubHeader>
         {t("AddManually")}
-        {!hideSelector && (
+        {!hideSelector ? (
           <StyledLink
             className="link-list"
             fontWeight="600"
@@ -568,7 +570,7 @@ const InviteInput = ({
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
@@ -586,7 +588,7 @@ const InviteInput = ({
         <div className="language-combo-box-wrapper">
           <ComboBox
             className="language-combo-box"
-            directionY={"both"}
+            directionY="both"
             options={cultureNamesNew}
             selectedOption={culture}
             onSelect={onLanguageSelect}
@@ -595,18 +597,18 @@ const InviteInput = ({
             scaledOptions={false}
             size="content"
             manualWidth="280px"
-            showDisabledItems={true}
+            showDisabledItems
             dropDownMaxHeight={364}
             withBlur={isMobileView}
             isDefaultMode={!isMobileView}
             fillIcon={false}
             modernView
           />
-          {culture?.isBeta && (
+          {culture?.isBeta ? (
             <BetaBadge place="bottom-end" mobilePlace="bottom" />
-          )}
+          ) : null}
         </div>
-        {isChangeLangMail && !isMobileView && (
+        {isChangeLangMail && !isMobileView ? (
           <StyledLink
             className="list-link"
             fontWeight="600"
@@ -616,9 +618,9 @@ const InviteInput = ({
           >
             {t("ResetChange")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledInviteLanguage>
-      {isChangeLangMail && isMobileView && (
+      {isChangeLangMail && isMobileView ? (
         <ResetLink
           className="reset-link"
           fontWeight="600"
@@ -628,7 +630,7 @@ const InviteInput = ({
         >
           {t("ResetChange")}
         </ResetLink>
-      )}
+      ) : null}
 
       <StyledInviteInputContainer ref={inputsRef}>
         <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
@@ -642,7 +644,7 @@ const InviteInput = ({
                 : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
-            isAutoFocussed={true}
+            isAutoFocussed
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}
@@ -652,9 +654,7 @@ const InviteInput = ({
             <StyledCrossIcon />
           </div>
         </StyledInviteInput>
-        {isAddEmailPanelBlocked ? (
-          <></>
-        ) : (
+        {isAddEmailPanelBlocked ? null : (
           <StyledDropDown
             width={dropDownWidth}
             isDefaultMode={false}

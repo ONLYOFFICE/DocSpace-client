@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
-import styled, { css } from "styled-components";
-import SalesDepartmentRequestDialog from "../../../../../../components/dialogs/SalesDepartmentRequestDialog";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import SalesDepartmentRequestDialog from "../../../../../../components/dialogs/SalesDepartmentRequestDialog";
 
 const StyledBody = styled.div`
   button {
@@ -51,16 +51,16 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
 
   return (
     <StyledBody>
-      {isVisibleDialog && (
+      {isVisibleDialog ? (
         <SalesDepartmentRequestDialog
           visible={isVisibleDialog}
           onClose={onClose}
         />
-      )}
+      ) : null}
       <Button
         className="send-request-button"
         label={t("Common:SendRequest")}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={isLoading || isDisabled}
         onClick={toDoRequest}

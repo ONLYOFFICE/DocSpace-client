@@ -49,12 +49,12 @@ const SocialNetworks = (props) => {
 
   const fetchData = async () => {
     try {
-      const [providers] = await Promise.all([
+      const [newProviders] = await Promise.all([
         getAuthProviders(),
         getCapabilities(),
       ]);
 
-      setProviders(providers);
+      setProviders(newProviders);
     } catch (e) {
       console.error(e);
     }
@@ -64,7 +64,7 @@ const SocialNetworks = (props) => {
     e.preventDefault();
 
     try {
-      //Lifehack for Twitter
+      // Lifehack for Twitter
       if (providerName == "twitter") {
         link += "loginCallback";
       }
@@ -92,8 +92,8 @@ const SocialNetworks = (props) => {
 
   const unlinkAccount = (providerName) => {
     unlinkOAuth(providerName).then(() => {
-      getAuthProviders().then((providers) => {
-        setProviders(providers);
+      getAuthProviders().then((providersAuth) => {
+        setProviders(providersAuth);
         toastr.success(t("ProviderSuccessfullyDisconnected"));
       });
     });
@@ -102,8 +102,8 @@ const SocialNetworks = (props) => {
   const loginCallback = (profile) => {
     linkOAuth(profile)
       .then(() => {
-        getAuthProviders().then((providers) => {
-          setProviders(providers);
+        getAuthProviders().then((providersAuth) => {
+          setProviders(providersAuth);
           toastr.success(t("ProviderSuccessfullyConnected"));
         });
       })
@@ -129,7 +129,7 @@ const SocialNetworks = (props) => {
     providers.map((item) => {
       if (!PROVIDERS_DATA[item.provider]) return;
       const { icon, label, iconOptions } = PROVIDERS_DATA[item.provider];
-      if (!icon || !label) return <></>;
+      if (!icon || !label) return null;
 
       const onClick = (e) => {
         if (item.linked) {
@@ -153,9 +153,9 @@ const SocialNetworks = (props) => {
       );
     });
 
-  if (!capabilities?.oauthEnabled) return <></>;
+  if (!capabilities?.oauthEnabled) return null;
 
-  if (providers.length === 0) return <></>;
+  if (providers.length === 0) return null;
 
   return (
     <StyledWrapper>

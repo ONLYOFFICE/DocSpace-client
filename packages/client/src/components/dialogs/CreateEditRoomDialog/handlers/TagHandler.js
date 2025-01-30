@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { createRandomTagId } from "@docspace/shared/utils/random";
+
 class TagHandler {
   constructor(tags, setTags, fetchedTags) {
     this.tags = tags;
@@ -31,14 +33,10 @@ class TagHandler {
     this.fetchedTags = fetchedTags;
   }
 
-  createRandomTagId() {
-    return "_" + Math.random().toString(36).substr(2, 9);
-  }
-
   refreshDefaultTag(name) {
-    let newTags = [...this.tags].filter((tag) => !tag.isDefault);
+    const newTags = [...this.tags].filter((tag) => !tag.isDefault);
     newTags.unshift({
-      id: this.createRandomTagId(),
+      id: createRandomTagId(),
       name,
       isDefault: true,
     });
@@ -47,14 +45,14 @@ class TagHandler {
   }
 
   addTag(name) {
-    let newTags = [...this.tags];
+    const newTags = [...this.tags];
 
     if (this.isAlreadyAdded(name)) {
-      return; //already added
+      return; // already added
     }
 
     newTags.push({
-      id: this.createRandomTagId(),
+      id: createRandomTagId(),
       name,
     });
     this.setTags(newTags);
@@ -71,14 +69,14 @@ class TagHandler {
   }
 
   addNewTag(name) {
-    let newTags = [...this.tags];
+    const newTags = [...this.tags];
 
     if (this.isAlreadyAdded(name)) {
-      return; //already added
+      return; // already added
     }
 
     newTags.push({
-      id: this.createRandomTagId(),
+      id: createRandomTagId(),
       isNew: this.isNew(name),
       name,
     });

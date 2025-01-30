@@ -1,9 +1,3 @@
-function Compare(...fns: Array<Function>) {
-  return (arg: string) => {
-    return fns.reduce((composed, fn) => fn(composed), arg);
-  };
-}
-
 function removeSpecialSymbol(text: string): string {
   return text.replace(/[-_[\]{}()*+!?.,&\\^$|#@%]/g, "");
 }
@@ -22,9 +16,10 @@ function toUpperCase(text: string) {
   return text.toUpperCase();
 }
 
-export const getRoomTitle = Compare(
-  removeSpecialSymbol,
-  trim,
-  getFirstAndLastChar,
-  toUpperCase,
-);
+export const getRoomTitle = (title: string) => {
+  const removeSpecSymbol = removeSpecialSymbol(title);
+  const trimText = trim(removeSpecSymbol);
+  const firstAndLastChar = getFirstAndLastChar(trimText);
+
+  return toUpperCase(firstAndLastChar);
+};

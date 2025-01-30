@@ -164,9 +164,9 @@ const ImportItem = ({
         {workspace}
       </Text>
       <div className="importSection">
-        {sectionIcon && (
+        {sectionIcon ? (
           <ReactSVG className="importSectionIcon" src={sectionIcon} />
-        )}
+        ) : null}
         {sectionName}
       </div>
     </ImportItemWrapper>

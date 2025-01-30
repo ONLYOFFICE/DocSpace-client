@@ -34,6 +34,7 @@ import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import HideButton from "./HideButton";
 import Checkboxes from "./Checkboxes";
 import ConnectionSettings from "./ConnectionSettings";
@@ -51,8 +52,6 @@ import StyledLdapPage from "../styled-components/StyledLdapPage";
 
 import { onChangeUrl } from "../utils";
 
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
 const SettingsContainer = ({
   isSettingsShown,
   isLdapAvailable,
@@ -64,6 +63,13 @@ const SettingsContainer = ({
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const navigate = useNavigate();
 
+  const onCheckView = () => {
+    if (!isMobile()) {
+      const newUrl = onChangeUrl();
+      if (newUrl) navigate(newUrl);
+    }
+  };
+
   useEffect(() => {
     isLdapAvailable && isMobileView && !isLoaded && load();
     isMobileView && setDocumentTitle(t("Ldap:LdapSettings"));
@@ -73,22 +79,15 @@ const SettingsContainer = ({
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
 
-  const onCheckView = () => {
-    if (!isMobile()) {
-      const newUrl = onChangeUrl();
-      if (newUrl) navigate(newUrl);
-    }
-  };
-
   const renderBody = () => (
     <>
-      {!isMobileView && (
+      {!isMobileView ? (
         <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
-      )}
+      ) : null}
 
-      {isMobileView && <ToggleLDAP />}
+      {isMobileView ? <ToggleLDAP /> : null}
 
-      {(isMobileView || isSettingsShown) && (
+      {isMobileView || isSettingsShown ? (
         <>
           <Box>
             <Text className="ldap-disclaimer">{t("LdapDisclaimer")}</Text>
@@ -102,13 +101,13 @@ const SettingsContainer = ({
           <AdvancedSettings />
           <ButtonsContainer />
 
-          {!isMobileView && (
+          {!isMobileView ? (
             <ProgressContainer operation={LDAPOperation.SaveAndSync} />
-          )}
+          ) : null}
 
-          {isCertificateDialogVisible && <CertificateDialog />}
+          {isCertificateDialogVisible ? <CertificateDialog /> : null}
         </>
-      )}
+      ) : null}
     </>
   );
 

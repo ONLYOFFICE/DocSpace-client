@@ -28,24 +28,19 @@ import React from "react";
 import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";
 import { isTablet as Tablet } from "react-device-detect";
+import classNames from "classnames";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
-import { desktop, isTablet, isMobile } from "../../utils";
+import { isTablet, isMobile } from "../../utils";
 
 import { DropDownItem } from "../drop-down-item";
 import { DropDown } from "../drop-down";
 import { IconButton } from "../icon-button";
-import { Backdrop } from "../backdrop";
-import { Aside } from "../aside";
-import { Link } from "../link";
-import { ContextMenuModel } from "../context-menu";
 
-import {
-  StyledBodyContent,
-  StyledContent,
-  StyledOuter,
-} from "./ContextMenuButton.styled";
+import type { ContextMenuModel } from "../context-menu";
+
+import styles from "./ContextMenuButton.module.scss";
 import { ContextMenuButtonProps } from "./ContextMenuButton.types";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 
@@ -81,7 +76,6 @@ const ContextMenuButtonPure = ({
   columnCount,
   zIndex,
   usePortal = true,
-  asideHeader,
   iconName = VerticalDotsReactSvgUrl,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -97,10 +91,6 @@ const ContextMenuButtonPure = ({
 
   const getTypeByWidth = React.useCallback(() => {
     if (displayType !== "auto") return displayType;
-    const desktopSize = desktop.match(/\d+/)?.[0] as number | undefined;
-    if (typeof desktopSize !== "undefined" && window.innerWidth < desktopSize) {
-      return ContextMenuButtonDisplayType.aside;
-    }
 
     return ContextMenuButtonDisplayType.dropdown;
   }, [displayType]);
@@ -113,10 +103,14 @@ const ContextMenuButtonPure = ({
 
   const resize = React.useCallback(() => {
     if (displayType !== "auto") return;
+
     const type = getTypeByWidth();
 
-    if (type === state.displayType) return;
-    setState((s) => ({ ...s, displayType: type }));
+    setState((s) => {
+      if (type === state.displayType) return s;
+
+      return { ...s, displayType: type };
+    });
   }, [displayType, getTypeByWidth, state.displayType]);
 
   React.useEffect(() => {
@@ -132,11 +126,6 @@ const ContextMenuButtonPure = ({
     };
   }, [resize]);
 
-  const stopAction = React.useCallback(
-    (e: React.MouseEvent) => e.preventDefault(),
-    [],
-  );
-
   const toggle = (o?: boolean) => {
     setState((s) => ({
       ...s,
@@ -149,27 +138,9 @@ const ContextMenuButtonPure = ({
     onClose?.();
   }, [onClose]);
 
-  const popstate = React.useCallback(() => {
-    window.removeEventListener("popstate", popstate, false);
-    onCloseAction();
-    window.history.go(1);
-  }, [onCloseAction]);
-
-  React.useEffect(() => {
-    return () => {
-      window.removeEventListener("popstate", popstate, false);
-    };
-  }, [popstate]);
-
   React.useEffect(() => {
     toggle(opened);
   }, [opened]);
-
-  React.useEffect(() => {
-    if (opened && state.displayType === "aside") {
-      window.addEventListener("popstate", popstate, false);
-    }
-  }, [opened, popstate, state.displayType]);
 
   React.useEffect(() => {
     setState((s) => ({ ...s, displayType: getTypeByWidth() }));
@@ -177,11 +148,12 @@ const ContextMenuButtonPure = ({
 
   const onIconButtonClick = (e: React.MouseEvent) => {
     if (isDisabled || state.displayType === "toggle") {
-      stopAction(e);
+      e.preventDefault();
+
       return;
     }
 
-    setState((s) => ({ ...s, data: getData(), isOpen: !s.isOpen }));
+    setState((s) => ({ ...s, data: getData!(), isOpen: !s.isOpen }));
 
     if (!isDisabled && state.isOpen) onClick?.(e);
   };
@@ -198,7 +170,7 @@ const ContextMenuButtonPure = ({
   };
 
   const getLabel = (item: ContextMenuModel) => {
-    return "label" in item ? item.label : "";
+    return item && "label" in item ? item.label : "";
   };
 
   const onDropDownItemClick = (
@@ -214,25 +186,26 @@ const ContextMenuButtonPure = ({
 
   const callNewMenu = (e: React.MouseEvent) => {
     if (isDisabled || state.displayType !== "toggle") {
-      stopAction(e);
+      e.preventDefault();
       return;
     }
 
-    setState((s) => ({ ...s, data: getData() }));
+    setState((s) => ({ ...s, data: getData!() }));
     onClick?.(e);
   };
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
 
   return (
-    <StyledOuter
-      ref={ref}
-      className={className}
+    <div
+      className={classNames(styles.outer, className, {
+        [styles.displayIconBorder]: displayIconBorder,
+      })}
       id={id}
       style={style}
-      onClick={callNewMenu}
-      displayIconBorder={displayIconBorder}
       data-testid="context-menu-button"
+      onClick={callNewMenu}
+      ref={ref}
     >
       <IconButton
         className={iconClassName}
@@ -251,8 +224,8 @@ const ContextMenuButtonPure = ({
         onMouseDown={onMouseOver}
         onMouseUp={onMouseOut}
         title={title}
-      />
-      {displayType === "dropdown" ? (
+      />{" "}
+      {state.displayType === ContextMenuButtonDisplayType.dropdown ? (
         <DropDown
           className={dropDownClassName}
           directionX={directionX}
@@ -266,77 +239,26 @@ const ContextMenuButtonPure = ({
           isDefaultMode={usePortal}
           eventTypes={["click"]}
         >
-          {state.data?.map(
-            (item: ContextMenuModel, index: number) =>
+          {state.data?.map((item: ContextMenuModel, index: number) => {
+            if (!item) return null;
+            const { key, ...rest } = item;
+            return (
               item && (
                 <DropDownItem
-                  {...item}
+                  key={key || index}
+                  {...rest}
                   id={item.id}
-                  key={item.key || index}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
                 />
-              ),
-          )}
+              )
+            );
+          })}
         </DropDown>
-      ) : (
-        displayType === "aside" && (
-          <>
-            <Backdrop
-              onClick={onCloseAction}
-              visible={state.isOpen || false}
-              zIndex={310}
-              isAside
-            />
-            <Aside
-              visible={state.isOpen || false}
-              scale={false}
-              zIndex={310}
-              onClose={onCloseAction}
-              header={asideHeader}
-            >
-              <StyledContent>
-                {/* <StyledHeaderContent>
-                  <Heading
-                    className="header"
-                    size={HeadingSize.medium}
-                    level={HeadingLevel.h1}
-                    truncate
-                  >
-                    {asideHeader}
-                  </Heading>
-                </StyledHeaderContent> */}
-                <StyledBodyContent>
-                  {state.data.map(
-                    (item: ContextMenuModel, index: number) =>
-                      item && (
-                        <Link
-                          className={`context-menu-button_link${
-                            "isHeader" in item && item.isHeader ? "-header" : ""
-                          }`}
-                          key={item.key || index}
-                          fontSize={
-                            "isHeader" in item && item.isHeader
-                              ? "15px"
-                              : "13px"
-                          }
-                          noHover={"isHeader" in item ? item.isHeader : false}
-                          fontWeight={600}
-                          onClick={(e) => onDropDownItemClick(item, e)}
-                        >
-                          {getLabel(item)}
-                        </Link>
-                      ),
-                  )}
-                </StyledBodyContent>
-              </StyledContent>
-            </Aside>
-          </>
-        )
-      )}
-    </StyledOuter>
+      ) : null}
+    </div>
   );
 };
 

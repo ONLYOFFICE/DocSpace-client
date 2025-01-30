@@ -33,8 +33,8 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 import { toastr } from "@docspace/shared/components/toast";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ const ToggleLDAP = ({
       toggleLdap();
 
       if (!e.target.checked && isLdapEnabledOnServer) {
-        save(t, false, true).catch((e) => toastr.error(e));
+        save(t, false, true).catch((err) => toastr.error(err));
       }
     },
     [toggleLdap, t, save, isLdapEnabledOnServer],
@@ -110,7 +110,7 @@ const ToggleLDAP = ({
           >
             {t("LdapToggle")}
           </Text>
-          {!isLdapAvailable && (
+          {!isLdapAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -119,9 +119,9 @@ const ToggleLDAP = ({
               }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"
@@ -138,9 +138,7 @@ const ToggleLDAP = ({
     </StyledWrapper>
   );
 
-  {
-    /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
-  }
+  /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
 };
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {

@@ -36,6 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`
   width: 100%;
@@ -80,15 +81,6 @@ const LargePayloadStub = styled.div`
     row-gap: 16px;
   `}
 `;
-
-function isJSON(jsonString) {
-  try {
-    const parsedJson = JSON.parse(jsonString);
-    return parsedJson && typeof parsedJson === "object";
-  } catch (e) {}
-
-  return false;
-}
 
 const ResponseDetails = ({ eventDetails }) => {
   const responsePayload = eventDetails.responsePayload?.trim();

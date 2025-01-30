@@ -35,7 +35,7 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 
-import DetailsHelper from "../../helpers/DetailsHelper.js";
+import DetailsHelper from "../../helpers/DetailsHelper";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
@@ -108,13 +108,17 @@ const Details = ({
 
   const badgeUrl = getRoomBadgeUrl(selection, 24);
 
-  //console.log("InfoPanel->Details render", { selection });
+  // console.log("InfoPanel->Details render", { selection });
 
   const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
 
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
+
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
 
   return (
     <>
@@ -128,8 +132,8 @@ const Details = ({
           <img
             src={`${selection.thumbnailUrl}&size=1280x720`}
             alt="thumbnail-image"
-            //height={260}
-            //width={360}
+            // height={260}
+            // width={360}
             onError={onThumbnailError}
           />
         </StyledThumbnail>
@@ -157,6 +161,8 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl}
+            tooltipContent={tooltipContent}
+            tooltipId="info-panel-details_icon-tooltip"
           />
         </StyledNoThumbnail>
       )}

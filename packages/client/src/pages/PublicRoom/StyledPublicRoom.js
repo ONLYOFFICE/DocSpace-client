@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 
-const StyledHeadline = styled(Headline)`
+const StyledHeadline = styled(Heading)`
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;

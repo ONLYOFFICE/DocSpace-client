@@ -32,7 +32,7 @@ import {
 } from "@docspace/shared/constants";
 
 import { toastr } from "@docspace/shared/components/toast";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
@@ -40,6 +40,7 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
+
   image = {
     uploadedFile: this.uploadedFile,
     x: 0.5,
@@ -71,7 +72,7 @@ class AvatarEditorDialogStore {
 
   onChangeFile = async (e, t) => {
     const uploadedFile = await this.uploadFile(t, e);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
   };
 
   getUploadedLogoData = async () => {
@@ -135,7 +136,7 @@ class AvatarEditorDialogStore {
     const uploadedFile = await this.uploadFileToImageEditor(t, file[0]);
 
     this.setUploadedFile(uploadedFile);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
     this.setAvatarEditorDialogVisible(true);
 
     return uploadedFile;
@@ -171,10 +172,11 @@ class AvatarEditorDialogStore {
       throw new Error("recursion depth exceeded");
     }
 
-    return new Promise((resolve) => {
-      return resolve(file);
-    }).then(() =>
-      this.resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
+    return this.resizeRecursiveAsync(
+      img,
+      canvas,
+      compressionRatio + 1,
+      depth + 1,
     );
   };
 

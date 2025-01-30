@@ -27,11 +27,10 @@
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
-  FilterType,
   ShareAccessRights,
+  Events,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/shared/enums";
 
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
@@ -45,84 +44,150 @@ import {
 
 class DialogsStore {
   authStore;
+
   treeFoldersStore;
+
   filesStore;
+
   selectedFolderStore;
+
   versionHistoryStore;
+
   infoPanelStore;
 
   moveToPanelVisible = false;
+
   restorePanelVisible = false;
+
   reorderDialogVisible = false;
+
   copyPanelVisible = false;
+
   deleteThirdPartyDialogVisible = false;
+
   connectDialogVisible = false;
+
   deleteDialogVisible = false;
+
   lifetimeDialogVisible = false;
+
+  lifetimeDialogCB = null;
+
   downloadDialogVisible = false;
+
   emptyTrashDialogVisible = false;
+
   editGroupMembersDialogVisible = false;
+
   conflictResolveDialogVisible = false;
+
   convertDialogVisible = false;
+
   convertDialogData = null;
+
   selectFileDialogVisible = false;
+
   selectFileFormRoomDialogVisible = false;
+
   convertPasswordDialogVisible = false;
+
   inviteQuotaWarningDialogVisible = false;
+
   changeQuotaDialogVisible = false;
+
   unsavedChangesDialogVisible = false;
+
   moveToPublicRoomVisible = false;
+
   moveToPublicRoomData = null;
+
   backupToPublicRoomVisible = false;
+
   backupToPublicRoomData = null;
+
   isFolderActions = false;
+
   roomCreation = false;
+
   culture = {
     key: "",
     label: "",
   };
+
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
     defaultAccess: ShareAccessRights.FullAccess,
   };
+
   restoreAllPanelVisible = false;
+
   archiveDialogVisible = false;
+
   restoreRoomDialogVisible = false;
+
   roomLogoCoverDialogVisible = false;
+
   eventDialogVisible = false;
+
   deleteLinkDialogVisible = false;
 
   removeItem = null;
+
   connectItem = null;
+
   formItem = null;
+
   destFolderId = null;
 
   conflictResolveDialogData = null;
+
   conflictResolveDialogItems = null;
+
   removeMediaItem = null;
+
   unsubscribe = null;
+
   isRoomDelete = false;
+
   convertItem = null;
+
   formCreationInfo = null;
+
   saveThirdpartyResponse = null;
+
   inviteItems = [];
+
   restoreAllArchive = false;
+
   isConnectDialogReconnect = false;
+
   saveAfterReconnectOAuth = false;
+
   createRoomDialogVisible = false;
+
   createRoomConfirmDialogVisible = false;
+
   editLinkPanelIsVisible = false;
+
   embeddingPanelData = { visible: false, item: null };
+
   submitToGalleryDialogVisible = false;
+
   linkParams = null;
+
   leaveRoomDialogVisible = false;
+
   changeRoomOwnerIsVisible = false;
+
   editMembersGroup = null;
+
   closeEditIndexDialogVisible = false;
 
   shareFolderDialogVisible = false;
+
   cancelUploadDialogVisible = false;
+
   passwordEntryDialogDate = {
     visible: false,
     item: null,
@@ -130,23 +195,29 @@ class DialogsStore {
   };
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
+
   selectFileFormRoomOpenRoot = false;
+
   fillPDFDialogData = {
     visible: false,
     data: null,
   };
+
   shareCollectSelector = {
     visible: false,
     file: null,
   };
 
   warningQuotaDialogVisible = false;
+
   isNewQuotaItemsByCurrentUser = false;
 
   guestReleaseTipDialogVisible = false;
 
   covers = null;
+
   cover = null;
+
   coverSelection = null;
 
   roomCoverDialogProps = {
@@ -218,6 +289,7 @@ class DialogsStore {
   setInviteLanguage = (culture) => {
     this.culture = culture;
   };
+
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };
@@ -307,8 +379,9 @@ class DialogsStore {
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
-  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+  setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
     this.lifetimeDialogVisible = lifetimeDialogVisible;
+    this.lifetimeDialogCB = cb;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {
@@ -324,7 +397,7 @@ class DialogsStore {
     const folders = [];
     let singleFileUrl = null;
 
-    for (let item of itemList) {
+    itemList.forEach((item) => {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
@@ -343,7 +416,7 @@ class DialogsStore {
           folders.push(item.id);
         }
       }
-    }
+    });
 
     return [files, folders, singleFileUrl];
   };
@@ -362,18 +435,20 @@ class DialogsStore {
   }
 
   updateDownloadedFilePassword = (id, password, type) => {
-    let originItem;
-
     const currentType = this.sortedDownloadFiles[type];
 
+    let originItem;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else originItem = item;
+      if (item.id === id) {
+        originItem = item;
+        return false;
+      }
+      return true;
     });
 
     if (type === "remove") this.downloadItems.push({ ...originItem, password });
     else
-      this.downloadItems.map((item) => {
+      this.downloadItems.forEach((item) => {
         if (item.id === id) {
           item.password = password;
           if (item.oldFormat) item.format = item.oldFormat;
@@ -389,13 +464,15 @@ class DialogsStore {
   };
 
   resetDownloadedFileFormat = (id, fileExst, type) => {
-    let originItem;
-
     const currentType = this.sortedDownloadFiles[type];
 
+    let originItem;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else originItem = item;
+      if (item.id === id) {
+        originItem = item;
+        return false;
+      }
+      return true;
     });
 
     if (type === "remove")
@@ -405,7 +482,7 @@ class DialogsStore {
         oldFormat: originItem.format,
       });
     else
-      this.downloadItems.map((item) => {
+      this.downloadItems.forEach((item) => {
         if (item.id === id) {
           item.oldFormat = item.format;
           item.format = fileExst;
@@ -421,18 +498,18 @@ class DialogsStore {
   };
 
   discardDownloadedFile = (id, type) => {
-    let removedItem = null;
-
     const newFileIds = this.downloadItems.filter((item) => item.id !== id);
     this.downloadItems = [...newFileIds];
 
     const currentType = this.sortedDownloadFiles[type];
 
+    let removedItem = null;
     const newArray = currentType.filter((item) => {
-      if (item.id != id) return item;
-      else {
+      if (item.id === id) {
         removedItem = item;
+        return false;
       }
+      return true;
     });
 
     this.sortedDownloadFiles[type] = [...newArray];
@@ -660,10 +737,12 @@ class DialogsStore {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
   };
+
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;
   };
+
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };

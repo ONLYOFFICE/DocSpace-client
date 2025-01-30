@@ -39,7 +39,7 @@ const linkStyles = {
 
 const EmptyContainer = ({
   isFiltered,
-  //isLoading,
+  // isLoading,
   parentId,
   theme,
   type,
@@ -64,7 +64,7 @@ const EmptyContainer = ({
     <EmptyViewContainer
       type={roomType}
       folderType={type}
-      isFolder={!isRoom && !isRootEmptyPage}
+      isFolder={!isRoom ? !isRootEmptyPage : null}
       folderId={folderId}
       isRootEmptyPage={isRootEmptyPage}
       parentRoomType={parentRoomType}
@@ -77,11 +77,8 @@ export default inject(
   ({
     settingsStore,
     filesStore,
-    dialogsStore,
-    currentQuotaStore,
     selectedFolderStore,
     clientLoadingStore,
-    currentTariffStatusStore,
     publicRoomStore,
     treeFoldersStore,
   }) => {

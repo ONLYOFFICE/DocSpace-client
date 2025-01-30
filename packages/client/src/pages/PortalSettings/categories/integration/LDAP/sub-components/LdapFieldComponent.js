@@ -43,12 +43,12 @@ const LdapFieldComponent = (props) => {
   } = props;
 
   const onChangeFn = (e) => {
-    const { value, name } = e.target;
+    const { value, name: inputName } = e.target;
 
     if (value.trim() !== "") {
-      removeErrorField(name);
+      removeErrorField(inputName);
     } else {
-      setErrorField(name);
+      setErrorField(inputName);
     }
 
     onChange && onChange(e);
@@ -76,7 +76,7 @@ const LdapFieldComponent = (props) => {
         inputName={name}
         inputValue={rest?.value || ""}
         onBlur={onBlur}
-        //onFocus={onFocus}
+        // onFocus={onFocus}
         onChange={onChangeFn}
         {...rest}
       />
@@ -87,7 +87,7 @@ const LdapFieldComponent = (props) => {
     <TextInput
       name={name}
       onBlur={onBlur}
-      //onFocus={onFocus}
+      // onFocus={onFocus}
       onChange={onChangeFn}
       {...rest}
     />

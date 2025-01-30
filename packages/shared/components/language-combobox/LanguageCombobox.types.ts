@@ -32,7 +32,7 @@ export type TCulture = {
 };
 
 export type TCultures = TCulture[];
-export interface ComboboxProps {
+export type ComboboxProps = {
   selectedCulture: string;
   cultures: string[];
   onSelectLanguage: (culture: TCulture) => void;
@@ -43,4 +43,4 @@ export interface ComboboxProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
-}
+};

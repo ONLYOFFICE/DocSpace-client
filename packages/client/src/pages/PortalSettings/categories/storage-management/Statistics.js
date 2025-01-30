@@ -67,7 +67,7 @@ const StatisticsComponent = (props) => {
         fileExst={fileExst}
         isRoom={isRoom}
         defaultRoomIcon={defaultRoomIcon}
-        showDefault={!(!!logo?.cover || !!logo?.medium) && isRoom}
+        showDefault={!(!!logo?.cover || !!logo?.medium) ? isRoom : null}
         title={title}
         color={color}
         logo={logo}
@@ -79,7 +79,7 @@ const StatisticsComponent = (props) => {
   );
   const textElement = (title) => (
     <div className="row_name">
-      <Text fontSize={"12px"} fontWeight={600}>
+      <Text fontSize="12px" fontWeight={600}>
         {title}
       </Text>
     </div>
@@ -88,10 +88,10 @@ const StatisticsComponent = (props) => {
   return (
     <StyledStatistics>
       <div className="title-container">
-        <StyledMainTitle fontWeight={700} fontSize={"16px"}>
+        <StyledMainTitle fontWeight={700} fontSize="16px">
           {t("Statistics")}
         </StyledMainTitle>
-        {!isStatisticsAvailable && (
+        {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -102,12 +102,12 @@ const StatisticsComponent = (props) => {
             className="paid-badge"
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="statistics-description">
         {t("StatisticDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {isStatisticsAvailable && (
+      {isStatisticsAvailable ? (
         <>
           <RoomsList
             buttonProps={buttonProps}
@@ -122,7 +122,7 @@ const StatisticsComponent = (props) => {
             iconElement={iconElement}
           />
         </>
-      )}
+      ) : null}
     </StyledStatistics>
   );
 };

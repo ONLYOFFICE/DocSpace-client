@@ -132,7 +132,7 @@ const PublicPreview = ({
 
   return (
     <div>
-      {playlist.length > 0 && (
+      {playlist.length > 0 ? (
         <MediaViewer
           t={t}
           visible
@@ -146,7 +146,7 @@ const PublicPreview = ({
           extsImagePreviewed={extsImagePreviewed ?? DEFAULT_EXTS_IMAGE}
           onDownload={onDownloadMediaFile}
         />
-      )}
+      ) : null}
     </div>
   );
 };

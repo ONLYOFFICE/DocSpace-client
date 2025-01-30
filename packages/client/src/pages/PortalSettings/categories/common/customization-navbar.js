@@ -32,9 +32,9 @@ import { inject, observer } from "mobx-react";
 
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   .combo-button-label {
@@ -86,14 +86,14 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <MobileCategoryWrapper
           title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
         />
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

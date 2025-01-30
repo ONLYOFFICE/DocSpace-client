@@ -111,11 +111,11 @@ const QuotaPerItemComponent = (props) => {
                 productName: t("Common:ProductName"),
               })}
         </Text>
-        {isToggleChecked && (
+        {isToggleChecked ? (
           <QuotaForm
             isButtonsEnable
             label={formLabel}
-            maxInputWidth={"214px"}
+            maxInputWidth="214px"
             isLoading={isLoading}
             isDisabled={isDisabled}
             onSave={onSaveQuota}
@@ -123,7 +123,7 @@ const QuotaPerItemComponent = (props) => {
             initialSize={initialSize}
             tabIndex={tabIndex}
           />
-        )}
+        ) : null}
       </div>
     </StyledBaseQuotaComponent>
   );

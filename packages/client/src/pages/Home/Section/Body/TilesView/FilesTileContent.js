@@ -24,20 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-
-import TileContent from "./sub-components/TileContent";
-import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
+import TileContent from "./sub-components/TileContent";
+import withContent from "../../../../../HOCs/withContent";
+import withBadges from "../../../../../HOCs/withBadges";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -126,38 +123,34 @@ const FilesTileContent = ({
   currentDeviceType,
   displayFileExtension,
 }) => {
-  const { fileExst, title, viewAccessibility } = item;
-
-  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
+  const { fileExst, title } = item;
 
   return (
-    <>
-      <SimpleFilesTileContent
-        sideColor={theme.filesSection.tilesView.sideColor}
-        isFile={fileExst}
-        isRooms={isRooms}
+    <SimpleFilesTileContent
+      sideColor={theme.filesSection.tilesView.sideColor}
+      isFile={fileExst}
+      isRooms={isRooms}
+    >
+      <Link
+        className="item-file-name"
+        containerWidth="100%"
+        type="page"
+        title={title}
+        fontWeight="600"
+        fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
+        target="_blank"
+        {...linkStyles}
+        color={theme.filesSection.tilesView.color}
+        isTextOverflow
+        dir="auto"
+        view="tile"
       >
-        <Link
-          className="item-file-name"
-          containerWidth="100%"
-          type="page"
-          title={title}
-          fontWeight="600"
-          fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
-          target="_blank"
-          {...linkStyles}
-          color={theme.filesSection.tilesView.color}
-          isTextOverflow
-          dir="auto"
-          view="tile"
-        >
-          {titleWithoutExt}
-          {displayFileExtension && (
-            <span className="item-file-exst">{fileExst}</span>
-          )}
-        </Link>
-      </SimpleFilesTileContent>
-    </>
+        {titleWithoutExt}
+        {displayFileExtension ? (
+          <span className="item-file-exst">{fileExst}</span>
+        ) : null}
+      </Link>
+    </SimpleFilesTileContent>
   );
 };
 

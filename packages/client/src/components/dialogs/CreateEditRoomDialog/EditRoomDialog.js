@@ -24,15 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { useState, useEffect, useRef } from "react";
 
 import isEqual from "lodash/isEqual";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 const EditRoomDialog = ({
@@ -69,12 +68,12 @@ const EditRoomDialog = ({
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
       prevParams.tags
-        .map((t) => t.name)
+        .map((tag) => tag.name)
         .sort()
         .join("|")
         .toLowerCase() ===
         currentParams.tags
-          .map((t) => t.name)
+          .map((tag) => tag.name)
           .sort()
           .join("|")
           .toLowerCase() &&
@@ -101,11 +100,6 @@ const EditRoomDialog = ({
       type: newRoomType,
     }));
 
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onEditRoom();
-  };
-
   const onEditRoom = () => {
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
@@ -113,6 +107,11 @@ const EditRoomDialog = ({
     }
 
     onSave(roomParams);
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onEditRoom();
   };
 
   useEffect(() => {
@@ -157,7 +156,7 @@ const EditRoomDialog = ({
       isLoading={isInitLoading}
       containerVisible={changeRoomOwnerIsVisible}
     >
-      {changeRoomOwnerIsVisible && (
+      {changeRoomOwnerIsVisible ? (
         <ModalDialog.Container>
           <ChangeRoomOwnerPanel
             useModal={false}
@@ -167,7 +166,7 @@ const EditRoomDialog = ({
             onClose={onCloseRoomOwnerPanel}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
 
       <ModalDialog.Header>{t("RoomEditing")}</ModalDialog.Header>
 
@@ -200,9 +199,10 @@ const EditRoomDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !cover &&
-            (isWrongTitle ||
-              compareRoomParams(prevRoomParams.current, roomParams))
+            !cover
+              ? isWrongTitle ||
+                compareRoomParams(prevRoomParams.current, roomParams)
+              : null
           }
           isLoading={isLoading}
         />

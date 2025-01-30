@@ -32,11 +32,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Box } from "@docspace/shared/components/box";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import ProgressContainer from "./ProgressContainer";
-
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 
 import ResetConfirmationModal from "SRC_DIR/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal";
+import ProgressContainer from "./ProgressContainer";
 
 const ButtonContainer = ({
   saveLdapSettings,
@@ -86,9 +85,9 @@ const ButtonContainer = ({
         onCancelClick={openResetModal}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
-        displaySettings={true}
-        hasScroll={true}
-        hideBorder={true}
+        displaySettings
+        hasScroll
+        hideBorder
         saveButtonDisabled={saveDisabled}
         disableRestoreToDefault={resetDisabled}
         additionalClassSaveButton="ldap-save"
@@ -96,13 +95,13 @@ const ButtonContainer = ({
         showReminder={null}
         getTopComponent={getTopComponent}
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={onResetClick}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </Box>
   );
 };

@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Nullable } from "../../types";
@@ -746,10 +749,13 @@ export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
-export function getBackupStorage() {
+export function getBackupStorage(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/settings/storage/backup",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }

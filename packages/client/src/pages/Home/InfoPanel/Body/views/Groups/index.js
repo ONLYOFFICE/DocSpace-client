@@ -173,7 +173,9 @@ const Groups = ({
     <Styled.GroupsContent>
       {isFirstLoad || !groupMembers ? null : (
         <>
-          {groupManager && <GroupMember groupMember={groupManager} isManager />}
+          {groupManager ? (
+            <GroupMember groupMember={groupManager} isManager />
+          ) : null}
           <GroupMembersList
             members={groupMembers}
             hasNextPage={groupMembers.length < totalWithoutManager}

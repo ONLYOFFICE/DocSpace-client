@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,7 +86,6 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 `;
 
 const HeaderUnAuth = ({
-  enableAdmMess,
   wizardToken,
   isAuthenticated,
   isLoaded,
@@ -113,15 +112,13 @@ const HeaderUnAuth = ({
         {!isAuthenticated && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
-              <img className="header-logo-icon" src={logo} />
+              <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </Box>
 
-      {!wizardToken && (
+      {!wizardToken ? (
         <LanguageCombobox
           className="language-combo-box"
           onSelectLanguage={onSelect}
@@ -130,7 +127,7 @@ const HeaderUnAuth = ({
           withBorder={false}
           isMobileView
         />
-      )}
+      ) : null}
     </Header>
   );
 };
@@ -138,7 +135,6 @@ const HeaderUnAuth = ({
 HeaderUnAuth.displayName = "Header";
 
 HeaderUnAuth.propTypes = {
-  enableAdmMess: PropTypes.bool,
   wizardToken: PropTypes.string,
   isAuthenticated: PropTypes.bool,
   isLoaded: PropTypes.bool,

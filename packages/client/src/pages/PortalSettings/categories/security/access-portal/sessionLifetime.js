@@ -34,17 +34,15 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
-import {
-  size,
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
+import { size } from "@docspace/shared/utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
-import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -77,6 +75,7 @@ const SessionLifetime = (props) => {
     currentDeviceType,
     getSessionLifetime,
   } = props;
+
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
   const [showReminder, setShowReminder] = useState(false);
@@ -85,6 +84,12 @@ const SessionLifetime = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("lifetime") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
@@ -151,7 +156,7 @@ const SessionLifetime = (props) => {
     );
     const newSettings = {
       lifetime: sessionLifetime?.toString(),
-      type: type,
+      type,
     };
 
     saveToSessionStorage("currentSessionLifetimeSettings", newSettings);
@@ -163,14 +168,8 @@ const SessionLifetime = (props) => {
     }
   }, [type, sessionLifetime]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("lifetime") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectType = (e) => {
-    setType(e.target.value === "enable" ? true : false);
+    setType(e.target.value === "enable");
   };
 
   const onChangeInput = (e) => {
@@ -204,7 +203,7 @@ const SessionLifetime = (props) => {
 
       saveToSessionStorage("currentSessionLifetimeSettings", {
         lifetime: sessionValue?.toString(),
-        type: type,
+        type,
       });
     }
 
@@ -213,11 +212,11 @@ const SessionLifetime = (props) => {
         toastr.success(t("SuccessfullySaveSettingsMessage"));
         saveToSessionStorage("defaultSessionLifetimeSettings", {
           lifetime: sessionValue?.toString(),
-          type: type,
+          type,
         });
         setShowReminder(false);
       })
-      .catch((error) => toastr.error(error));
+      .catch((err) => toastr.error(err));
   };
 
   const onCancelClick = () => {
@@ -273,7 +272,7 @@ const SessionLifetime = (props) => {
         onClick={onSelectType}
       />
 
-      {type && (
+      {type ? (
         <>
           <Text className="lifetime" fontSize="15px" fontWeight="600">
             {t("Lifetime")}
@@ -289,7 +288,7 @@ const SessionLifetime = (props) => {
             hasError={error}
           />
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
@@ -299,7 +298,7 @@ const SessionLifetime = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="session-lifetime-save"
         additionalClassCancelButton="session-lifetime-cancel"

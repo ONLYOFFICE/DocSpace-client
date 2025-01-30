@@ -35,15 +35,15 @@ import { Button } from "@docspace/shared/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
-import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteThirdPartyDialog";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { useTranslation } from "react-i18next";
+import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteThirdPartyDialog";
+import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
 import { ThirdPartyServicesUrlName } from "../../../../../../helpers/constants";
 
 const initialState = {
@@ -81,64 +81,11 @@ const DirectThirdPartyConnection = (props) => {
   } = props;
 
   const [state, setState] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
+    (oldState, newState) => ({ ...oldState, ...newState }),
     initialState,
   );
 
   const { t } = useTranslation(["Translations", "Common"]);
-
-  const onSetSettings = async () => {
-    try {
-      await setThirdPartyAccountsInfo(t);
-
-      setState({
-        isLoading: false,
-        isUpdatingInfo: false,
-        isInitialLoading: false,
-      });
-    } catch (e) {
-      if (!e) return;
-      toastr.error(e);
-    }
-  };
-
-  useEffect(() => {
-    onSetSettings();
-
-    return () => {
-      setSelectedThirdPartyAccount(null);
-    };
-  }, []);
-
-  const onConnect = () => {
-    clearLocalStorage();
-    onSelectFolder && onSelectFolder("");
-
-    const { provider_key, provider_link: directConnection } =
-      selectedThirdPartyAccount;
-
-    if (directConnection) {
-      let authModal = window.open(
-        "",
-        t("Common:Authorization"),
-        "height=600, width=1020",
-      );
-
-      openConnectWindow(provider_key, authModal)
-        .then((modal) => getOAuthToken(modal))
-        .then((token) => {
-          authModal.close();
-          saveSettings(token);
-        })
-        .catch((e) => {
-          if (!e) return;
-          toastr.error(e);
-          console.error(e);
-        });
-    } else {
-      setConnectDialogVisible(true);
-    }
-  };
 
   const saveSettings = async (
     token = "",
@@ -171,10 +118,63 @@ const DirectThirdPartyConnection = (props) => {
     setState({ isLoading: false, isUpdatingInfo: false });
   };
 
+  const onSetSettings = async () => {
+    try {
+      await setThirdPartyAccountsInfo(t);
+
+      setState({
+        isLoading: false,
+        isUpdatingInfo: false,
+        isInitialLoading: false,
+      });
+    } catch (e) {
+      if (!e) return;
+      toastr.error(e);
+    }
+  };
+
+  useEffect(() => {
+    onSetSettings();
+
+    return () => {
+      setSelectedThirdPartyAccount(null);
+    };
+  }, []);
+
+  const onConnect = () => {
+    clearLocalStorage();
+    onSelectFolder && onSelectFolder("");
+
+    const { provider_key, provider_link: directConnection } =
+      selectedThirdPartyAccount;
+
+    if (directConnection) {
+      const authModal = window.open(
+        "",
+        t("Common:Authorization"),
+        "height=600, width=1020",
+      );
+
+      openConnectWindow(provider_key, authModal)
+        .then((modal) => getOAuthToken(modal))
+        .then((token) => {
+          authModal.close();
+          saveSettings(token);
+        })
+        .catch((e) => {
+          if (!e) return;
+          toastr.error(e);
+          console.error(e);
+        });
+    } else {
+      setConnectDialogVisible(true);
+    }
+  };
+
   const onSelectAccount = (event) => {
     const data = event.currentTarget.dataset;
 
-    const account = accounts.find((t) => t.key === data.thirdPartyKey);
+    const account = accounts.find((a) => a.key === data.thirdPartyKey);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({
@@ -208,7 +208,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: selectedThirdPartyAccount?.storageIsConnected ? false : true,
+        disabled: !selectedThirdPartyAccount?.storageIsConnected,
         icon: AccessNoneReactSvgUrl,
       },
     ];
@@ -241,9 +241,7 @@ const DirectThirdPartyConnection = (props) => {
               src={ExternalLinkReactSvgUrl}
               className="drop-down-item_icon"
             />
-          ) : (
-            <></>
-          )}
+          ) : null}
         </DropDownItem>
       </StyledComboBoxItem>
     );
@@ -251,7 +249,7 @@ const DirectThirdPartyConnection = (props) => {
   return (
     <StyledBackup
       isConnectedAccount={
-        connectedThirdPartyAccount && isTheSameThirdPartyAccount
+        connectedThirdPartyAccount ? isTheSameThirdPartyAccount : null
       }
       isMobileScale={isMobileScale}
     >
@@ -266,11 +264,11 @@ const DirectThirdPartyConnection = (props) => {
           advancedOptions={advancedOptions}
           scaled
           size="content"
-          manualWidth={"auto"}
+          manualWidth="auto"
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          isDefaultMode={true}
+          isDefaultMode
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions
@@ -280,18 +278,18 @@ const DirectThirdPartyConnection = (props) => {
         />
 
         {connectedThirdPartyAccount?.id &&
-          selectedThirdPartyAccount &&
-          isTheSameThirdPartyAccount && (
-            <ContextMenuButton
-              zIndex={402}
-              className="backup_third-party-context"
-              iconName={VerticalDotsReactSvgUrl}
-              size={15}
-              getData={getContextOptions}
-              isDisabled={isDisabledComponent}
-              displayIconBorder
-            />
-          )}
+        selectedThirdPartyAccount &&
+        isTheSameThirdPartyAccount ? (
+          <ContextMenuButton
+            zIndex={402}
+            className="backup_third-party-context"
+            iconName={VerticalDotsReactSvgUrl}
+            size={15}
+            getData={getContextOptions}
+            isDisabled={isDisabledComponent}
+            displayIconBorder
+          />
+        ) : null}
       </div>
 
       {!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
@@ -304,36 +302,33 @@ const DirectThirdPartyConnection = (props) => {
           isDisabled={isDisabledComponent}
         />
       ) : (
-        <>
-          {folderList.id && selectedThirdPartyAccount && (
-            <FilesSelectorInput
-              className={"restore-backup_input"}
-              descriptionText={descriptionText}
-              filterParam={filterParam}
-              rootThirdPartyId={selectedThirdPartyAccount.id}
-              onSelectFolder={onSelectFolder}
-              onSelectFile={onSelectFile}
-              id={id ? id : folderList.id}
-              withoutInitPath={withoutInitPath}
-              isError={isError}
-              isDisabled={isDisabledSelector}
-              isThirdParty
-              isSelectFolder={isSelectFolder}
-              isSelect={isSelect}
-              checkCreating={
-                selectedThirdPartyAccount?.provider_key === "WebDav"
-              }
-            />
-          )}
-        </>
+        folderList.id &&
+        selectedThirdPartyAccount && (
+          <FilesSelectorInput
+            className="restore-backup_input"
+            descriptionText={descriptionText}
+            filterParam={filterParam}
+            rootThirdPartyId={selectedThirdPartyAccount.id}
+            onSelectFolder={onSelectFolder}
+            onSelectFile={onSelectFile}
+            id={id || folderList.id}
+            withoutInitPath={withoutInitPath}
+            isError={isError}
+            isDisabled={isDisabledSelector}
+            isThirdParty
+            isSelectFolder={isSelectFolder}
+            isSelect={isSelect}
+            checkCreating={selectedThirdPartyAccount?.provider_key === "WebDav"}
+          />
+        )
       )}
-      {deleteThirdPartyDialogVisible && (
+      {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
           updateInfo={setThirdPartyAccountsInfo}
           key="thirdparty-delete-dialog"
           isConnectionViaBackupModule
         />
-      )}
+      ) : null}
     </StyledBackup>
   );
 };

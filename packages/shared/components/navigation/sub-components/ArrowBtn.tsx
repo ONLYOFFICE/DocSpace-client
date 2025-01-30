@@ -30,12 +30,12 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 import { IconButton } from "../../icon-button";
 
-import { IArrowButtonProps } from "../Navigation.types";
+import { TArrowButtonProps } from "../Navigation.types";
 
 const ArrowButton = ({
   isRootFolder,
   onBackToParentFolder,
-}: IArrowButtonProps) => {
+}: TArrowButtonProps) => {
   return !isRootFolder ? (
     <div className="navigation-arrow-container">
       <IconButton

@@ -31,17 +31,22 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
-import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeactivation = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
     props;
   const [isDesktopView, setIsDesktopView] = useState(false);
+
+  const onCheckView = () => {
+    if (isDesktop()) setIsDesktopView(true);
+    else setIsDesktopView(false);
+  };
 
   const fetchData = async () => {
     await getPortalOwner();
@@ -56,11 +61,6 @@ const PortalDeactivation = (props) => {
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
   }, []);
-
-  const onCheckView = () => {
-    if (isDesktop()) setIsDesktopView(true);
-    else setIsDesktopView(false);
-  };
 
   const onDeactivateClick = async () => {
     try {
@@ -99,7 +99,7 @@ const PortalDeactivation = (props) => {
           onClick={onDeactivateClick}
           isDisabled={notActivatedEmail}
         />
-        {notActivatedEmail && (
+        {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
@@ -115,7 +115,7 @@ const PortalDeactivation = (props) => {
               {t("MainBar:RequestActivation")}
             </Link>
           </Text>
-        )}
+        ) : null}
       </ButtonWrapper>
     </MainContainer>
   );

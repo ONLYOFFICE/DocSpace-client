@@ -32,19 +32,17 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import {
-  isMobileDevice,
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { StyledSettingsComponent } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
 
 const PortalRenamingComponent = (props) => {
   const {
@@ -68,7 +66,7 @@ const PortalRenamingComponent = (props) => {
 
   const navigate = useNavigate();
 
-  const portalNameFromSessionStorage = getFromSessionStorage("portalName");
+  let portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
   const portalNameDefaultFromSessionStorage =
     getFromSessionStorage("portalNameDefault");
@@ -105,6 +103,24 @@ const PortalRenamingComponent = (props) => {
 
   const [isShowModal, setIsShowModal] = useState(false);
 
+  const checkInnerWidth = useCallback(() => {
+    if (!isMobileDevice()) {
+      setIsCustomizationView(true);
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setIsCustomizationView(false);
+    }
+  }, [isMobileDevice, setIsCustomizationView]);
+
   useEffect(() => {
     setDocumentTitle(
       t("PortalRenaming", { productName: t("Common:ProductName") }),
@@ -127,6 +143,29 @@ const PortalRenamingComponent = (props) => {
     return () => window.removeEventListener("resize", checkInnerWidth);
   }, []);
 
+  const settingIsEqualInitialValue = (value) => {
+    const defaultValue = JSON.stringify(portalNameDefault);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    const valueFromSessionStorage = getFromSessionStorage("portalName");
+    if (
+      valueFromSessionStorage !== "none" &&
+      valueFromSessionStorage !== null &&
+      !settingIsEqualInitialValue(valueFromSessionStorage)
+    ) {
+      hasChanged = true;
+    }
+
+    if (hasChanged !== showReminder) {
+      setShowReminder(hasChanged);
+    }
+  };
+
   useEffect(() => {
     if (isLoadedSetting) setIsLoadedPortalRenaming(isLoadedSetting);
 
@@ -134,6 +173,10 @@ const PortalRenamingComponent = (props) => {
       checkChanges();
     }
   }, [isLoadedSetting, portalNameDefault, portalName]);
+
+  const onCloseModal = () => {
+    setIsShowModal(false);
+  };
 
   const onSavePortalRename = () => {
     if (errorValue) return;
@@ -177,7 +220,7 @@ const PortalRenamingComponent = (props) => {
   };
 
   const onCancelPortalName = () => {
-    const portalNameFromSessionStorage = getFromSessionStorage("portalName");
+    portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
     saveToSessionStorage("errorValue", null);
 
@@ -192,23 +235,6 @@ const PortalRenamingComponent = (props) => {
       saveToSessionStorage("portalName", "none");
       setShowReminder(false);
     }
-  };
-
-  const onChangePortalName = (e) => {
-    const value = e.target.value;
-
-    onValidateInput(value);
-
-    setPortalName(value);
-
-    if (settingIsEqualInitialValue(value)) {
-      saveToSessionStorage("portalName", "none");
-      saveToSessionStorage("portalNameDefault", "none");
-    } else {
-      saveToSessionStorage("portalName", value);
-    }
-
-    checkChanges();
   };
 
   const onValidateInput = (value) => {
@@ -245,56 +271,28 @@ const PortalRenamingComponent = (props) => {
     }
   };
 
-  const settingIsEqualInitialValue = (value) => {
-    const defaultValue = JSON.stringify(portalNameDefault);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
+  const onChangePortalName = (e) => {
+    const value = e.target.value;
 
-  const checkChanges = () => {
-    let hasChanged = false;
+    onValidateInput(value);
 
-    const valueFromSessionStorage = getFromSessionStorage("portalName");
-    if (
-      valueFromSessionStorage !== "none" &&
-      valueFromSessionStorage !== null &&
-      !settingIsEqualInitialValue(valueFromSessionStorage)
-    ) {
-      hasChanged = true;
-    }
+    setPortalName(value);
 
-    if (hasChanged !== showReminder) {
-      setShowReminder(hasChanged);
-    }
-  };
-
-  const checkInnerWidth = useCallback(() => {
-    if (!isMobileDevice()) {
-      setIsCustomizationView(true);
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+    if (settingIsEqualInitialValue(value)) {
+      saveToSessionStorage("portalName", "none");
+      saveToSessionStorage("portalNameDefault", "none");
     } else {
-      setIsCustomizationView(false);
+      saveToSessionStorage("portalName", value);
     }
-  }, [isMobileDevice, setIsCustomizationView]);
+
+    checkChanges();
+  };
 
   const onOpenModal = () => {
     setIsShowModal(true);
   };
 
-  const onCloseModal = () => {
-    setIsShowModal(false);
-  };
-
-  const hasError = errorValue === null ? false : true;
+  const hasError = errorValue !== null;
 
   const settingsBlock = (
     <div className="settings-block">
@@ -302,12 +300,12 @@ const PortalRenamingComponent = (props) => {
         id="fieldContainerPortalRenaming"
         className="field-container-width"
         labelText={`${t("PortalRenamingLabelText")}`}
-        isVertical={true}
+        isVertical
       >
         <TextInput
           tabIndex={10}
           id="textInputContainerPortalRenaming"
-          scale={true}
+          scale
           value={portalName}
           onChange={onChangePortalName}
           isDisabled={isLoadingPortalNameSave}
@@ -320,19 +318,19 @@ const PortalRenamingComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization portalRenaming={true} />
+    <LoaderCustomization portalRenaming />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("PortalRenaming", { productName: t("Common:ProductName") })}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("PortalRenamingDescriptionText", { domain })}
@@ -361,7 +359,7 @@ const PortalRenamingComponent = (props) => {
         cancelButtonLabel={t("Common:CancelButton")}
         showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
-        displaySettings={true}
+        displaySettings
         hasScroll={hasScroll}
         saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"

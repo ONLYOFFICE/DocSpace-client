@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface IRecoverAccessModalDialogProps {
+type RecoverAccessModalDialogProps = {
   visible: boolean;
   onClose: () => void;
   textBody: string;
   emailPlaceholderText: string;
   id?: string;
-}
+};
+
+export type { RecoverAccessModalDialogProps };

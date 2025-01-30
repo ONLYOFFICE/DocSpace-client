@@ -60,6 +60,8 @@ import {
 
 import User from "./User";
 
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
+
 const Members = ({
   t,
   selfId,
@@ -110,7 +112,7 @@ const Members = ({
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
-  else if (!infoPanelMembers) return <></>;
+  if (!infoPanelMembers) return null;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId,
@@ -163,7 +165,7 @@ const Members = ({
             {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && !isFormRoom && (
+          {!isArchiveFolder && !isFormRoom ? (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -179,18 +181,16 @@ const Members = ({
                 title={t("Files:AddNewLink")}
               />
 
-              {additionalLinks.length >= LINKS_LIMIT_COUNT && (
+              {additionalLinks.length >= LINKS_LIMIT_COUNT ? (
                 <Tooltip
                   float={isDesktop()}
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
-              )}
+              ) : null}
             </div>
-          )}
+          ) : null}
         </LinksBlock>,
       );
     }
@@ -208,7 +208,7 @@ const Members = ({
     }
 
     if (additionalLinks.length && !withoutTitlesAndLinks) {
-      additionalLinks.map((link) => {
+      additionalLinks.forEach((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}
@@ -257,7 +257,7 @@ const Members = ({
 
   return (
     <>
-      {showPublicRoomBar && (
+      {showPublicRoomBar ? (
         <StyledPublicRoomBarContainer>
           <PublicRoomBar
             headerText={
@@ -272,13 +272,14 @@ const Members = ({
             }
           />
         </StyledPublicRoomBarContainer>
-      )}
+      ) : null}
 
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={
-          !isMembersPanelUpdating &&
-          membersList.length - headersCount < membersFilter.total
+          !isMembersPanelUpdating
+            ? membersList.length - headersCount < membersFilter.total
+            : null
         }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
@@ -297,8 +298,9 @@ const Members = ({
               membersHelper={membersHelper}
               currentMember={currentMember}
               hasNextPage={
-                !isMembersPanelUpdating &&
-                membersList.length - headersCount < membersFilter.total
+                !isMembersPanelUpdating
+                  ? membersList.length - headersCount < membersFilter.total
+                  : null
               }
             />
           );
@@ -372,7 +374,7 @@ export default inject(
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-      additionalLinks: additionalLinks,
+      additionalLinks,
       setLinkParams,
       setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,

@@ -26,10 +26,14 @@
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
-
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+
 import { addLog } from ".";
 
 /**
@@ -40,6 +44,8 @@ import { addLog } from ".";
  * @readonly
  */
 export const enum SocketEvents {
+  Restore = "restore",
+  Backup = "backup",
   RestoreBackup = "restore-backup",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
@@ -53,6 +59,8 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  BackupProgress = "s:backup-progress",
+  RestoreProgress = "s:restore-progress",
 }
 
 /**
@@ -213,6 +221,11 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.RestoreProgress]: (opt: {
+    progress: number;
+    isCompleted: boolean;
+    error: string;
+  }) => void;
 };
 
 /**
@@ -242,6 +255,21 @@ export type TCallback = {
   eventName: SocketEvents;
   callback: TSocketListener<SocketEvents>;
 };
+
+declare global {
+  interface Window {
+    SOCKET_INSTANCE: SocketHelper | undefined;
+  }
+
+  // Extend the globalThis type to include SOCKET_INSTANCE
+  var SOCKET_INSTANCE: SocketHelper | undefined;
+
+  // @ts-ignore
+
+  interface globalThis {
+    SOCKET_INSTANCE: typeof SOCKET_INSTANCE;
+  }
+}
 
 const isEmitDataValid = (
   command: SocketCommands,
@@ -342,10 +370,22 @@ class SocketHelper {
    * @returns {SocketHelper} The singleton instance of the SocketHelper class.
    */
   static getInstance() {
-    if (this.instance) {
-      return this.instance;
+    // if (this.instance) return this.instance;
+
+    // this.instance = new SocketHelper();
+    // return this.instance;
+    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+      // [WS] Returning existing global socket instance
+      return globalThis.SOCKET_INSTANCE;
     }
-    this.instance = new SocketHelper();
+
+    if (!this.instance) {
+      // [WS] Creating new socket instance
+      this.instance = new SocketHelper();
+      if (typeof globalThis !== "undefined")
+        globalThis.SOCKET_INSTANCE = this.instance;
+    }
+    // [WS] Returning existing socket instance
     return this.instance;
   }
 
@@ -365,7 +405,7 @@ class SocketHelper {
 
       const { url, publicRoomKey } = this.connectionSettings;
 
-      const origin = window.location.origin;
+      const { origin } = window.location;
 
       const config: TConfig = {
         withCredentials: true,
@@ -532,7 +572,10 @@ class SocketHelper {
       if (command === "subscribe") {
         if (this.subscribeEmits.has(id)) return;
 
-        this.subscribeEmits.set(id, data?.individual);
+        this.subscribeEmits.set(
+          id,
+          typeof data === "object" && data?.individual,
+        );
       }
 
       if (command === "unsubscribe") {

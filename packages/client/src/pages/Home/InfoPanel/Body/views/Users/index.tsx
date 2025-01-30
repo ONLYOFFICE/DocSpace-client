@@ -241,7 +241,7 @@ const Users = ({
         </Text>
         {typeData}
 
-        {isGuests && infoPanelSelection.createdBy?.displayName && (
+        {isGuests && infoPanelSelection.createdBy?.displayName ? (
           <>
             <Text className="info_field" noSelect title={t("Common:Inviter")}>
               {t("Common:Inviter")}
@@ -256,9 +256,9 @@ const Users = ({
               {infoPanelSelection.createdBy.displayName}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {isGuests && infoPanelSelection.status === EmployeeStatus.Active && (
+        {isGuests && infoPanelSelection.status === EmployeeStatus.Active ? (
           <>
             <Text
               className="info_field"
@@ -277,8 +277,8 @@ const Users = ({
               {infoPanelSelection.registrationDate}
             </Text>
           </>
-        )}
-        {!standalone && (
+        ) : null}
+        {!standalone ? (
           <>
             <Text className="info_field" noSelect title={t("UserStatus")}>
               {t("UserStatus")}
@@ -293,8 +293,8 @@ const Users = ({
               {statusText}
             </Text>
           </>
-        )}
-        {showStorageInfo && !isGuests && (
+        ) : null}
+        {showStorageInfo && !isGuests ? (
           <>
             <Text className="info_field" noSelect title={t("Common:Storage")}>
               {t("Common:Storage")}
@@ -307,9 +307,9 @@ const Users = ({
               onAbort={onAbort}
             />
           </>
-        )}
+        ) : null}
 
-        {infoPanelSelection?.groups?.length && !isGuests && (
+        {infoPanelSelection?.groups?.length && !isGuests ? (
           <>
             <Text
               className="info_field info_field_groups"
@@ -337,7 +337,7 @@ const Users = ({
               ))}
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </StyledUsersContent>
   );

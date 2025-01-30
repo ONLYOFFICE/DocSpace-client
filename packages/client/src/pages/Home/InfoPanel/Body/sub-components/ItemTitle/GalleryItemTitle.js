@@ -32,9 +32,9 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { inject } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { StyledTitle } from "../../styles/common";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { StyledTitle } from "../../styles/common";
 
 const StyledGalleryContextOptions = styled.div`
   height: 16px;
@@ -76,7 +76,7 @@ const GalleryItemTitle = ({
       <Text color={currentColorScheme.main?.accent} className="free-label">
         {t("Common:Free")}
       </Text>
-      {gallerySelected && (
+      {gallerySelected ? (
         <StyledGalleryContextOptions>
           <ContextMenu
             ref={contextMenuRef}
@@ -93,7 +93,7 @@ const GalleryItemTitle = ({
             displayType="toggle"
           />
         </StyledGalleryContextOptions>
-      )}
+      ) : null}
     </StyledTitle>
   );
 };

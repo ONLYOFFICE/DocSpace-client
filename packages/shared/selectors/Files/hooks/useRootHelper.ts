@@ -26,6 +26,7 @@
 
 import React, { useContext } from "react";
 
+import { useTranslation } from "react-i18next";
 import { FolderType } from "../../../enums";
 import { getFoldersTree } from "../../../api/files";
 import { TFolder } from "../../../api/files/types";
@@ -35,7 +36,6 @@ import { TSelectorItem } from "../../../components/selector";
 import { UseRootHelperProps } from "../FilesSelector.types";
 import { getDefaultBreadCrumb } from "../FilesSelector.utils";
 import { LoadersContext } from "../contexts/Loaders";
-import { useTranslation } from "react-i18next";
 
 const useRootHelper = ({
   setBreadCrumbs,

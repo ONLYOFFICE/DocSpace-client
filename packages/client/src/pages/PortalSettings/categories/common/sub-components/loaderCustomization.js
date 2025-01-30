@@ -168,16 +168,13 @@ const LoaderCustomization = ({
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const checkInnerWidth = () => {
-    const isMobileView = window.innerWidth < 600;
-    const isDesktopView = window.innerWidth <= 1024;
-
-    if (isMobileView) {
+    if (window.innerWidth < 600) {
       setIsMobileView(true);
     } else {
       setIsMobileView(false);
     }
 
-    if (isDesktopView) {
+    if (window.innerWidth <= 1024) {
       setIsDesktopView(true);
     } else {
       setIsDesktopView(false);
@@ -204,9 +201,9 @@ const LoaderCustomization = ({
     >
       <RectangleSkeleton height="22px" className="header" />
 
-      {portalRenaming && (
+      {portalRenaming ? (
         <RectangleSkeleton height="80px" className="description" />
-      )}
+      ) : null}
 
       {dnsSettings ? (
         <>
@@ -231,12 +228,12 @@ const LoaderCustomization = ({
         </>
       )}
 
-      {lngTZSettings && (
+      {lngTZSettings ? (
         <>
           <RectangleSkeleton height="20px" className="title-long" />
           <RectangleSkeleton height="32px" className="combo-box" />
         </>
-      )}
+      ) : null}
       <RectangleSkeleton
         height={heightSaveCancelButtons}
         className="save-cancel-buttons"

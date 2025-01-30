@@ -59,7 +59,6 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
@@ -76,22 +75,17 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
-import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  isDesktop,
-  isLockedSharedRoom,
-  trimSeparator,
-} from "@docspace/shared/utils";
+import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -105,13 +99,11 @@ import {
   removeOptions,
 } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
-import api from "@docspace/shared/api";
 import {
   RoomsType,
   Events,
   FolderType,
   UrlActionType,
-  EmployeeType,
   FilesSelectorFilterTypes,
   FilterType,
   FileExtensions,
@@ -122,8 +114,9 @@ import {
   getFolderLink,
   removeSharedFolder,
 } from "@docspace/shared/api/files";
-import { resendInvitesAgain } from "@docspace/shared/api/people";
+
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -138,23 +131,41 @@ const systemFolders = [
 
 class ContextOptionsStore {
   settingsStore;
+
   dialogsStore;
+
   filesActionsStore;
+
   filesStore;
+
   mediaViewerDataStore;
+
   treeFoldersStore;
+
   uploadDataStore;
+
   versionHistoryStore;
+
   filesSettingsStore;
+
   selectedFolderStore;
+
   publicRoomStore;
+
   oformsStore;
+
   pluginStore;
+
   infoPanelStore;
+
   currentTariffStatusStore;
+
   currentQuotaStore;
+
   userStore;
+
   indexingStore;
+
   clientLoadingStore;
 
   linksIsLoading = false;
@@ -231,7 +242,7 @@ class ContextOptionsStore {
     )
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
-    return this.gotoDocEditor(false, item, null, false, !isFormRoom);
+    return this.gotoDocEditor(item, false, null, false, !isFormRoom);
   };
 
   onClickReconnectStorage = async (item, t) => {
@@ -264,7 +275,7 @@ class ContextOptionsStore {
     };
 
     if (provider.isOauth) {
-      let authModal = window.open(
+      const authModal = window.open(
         "",
         t("Common:Authorization"),
         "height=600, width=1020",
@@ -384,7 +395,7 @@ class ContextOptionsStore {
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
-    fetchFileVersions(id + "", security, requestToken);
+    fetchFileVersions(`${id}`, security, requestToken);
     setIsVerHistoryPanel(true);
     setIsMobileHidden(true);
   };
@@ -411,8 +422,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setInfoPanelSelection: setInfoPanelSelection } =
-      this.infoPanelStore;
+    const { setInfoPanelSelection } = this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -436,7 +446,7 @@ class ContextOptionsStore {
         ? canOpenPlayer
           ? `${window.location.href}&preview=${id}`
           : webUrl
-        : `${window.location.origin + config.homepage}/filter?folder=${id}`, //TODO: Change url by category
+        : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category
     );
 
     toastr.success(t("Common:LinkCopySuccess"));
@@ -567,17 +577,17 @@ class ContextOptionsStore {
       });
       setConvertDialogVisible(true);
     } else {
-      this.gotoDocEditor(false, item);
+      this.gotoDocEditor(item, false);
     }
   };
 
   onPreviewClick = (item) => {
-    this.gotoDocEditor(true, item);
+    this.gotoDocEditor(item, true);
   };
 
   gotoDocEditor = (
-    preview = false,
     item,
+    preview = false,
     shareKey = null,
     editForm = false,
     fillForm = false,
@@ -778,7 +788,7 @@ class ContextOptionsStore {
   };
 
   filterModel = (model, filter) => {
-    let options = [];
+    const options = [];
     let index = 0;
     const last = model.length;
 
@@ -937,7 +947,7 @@ class ContextOptionsStore {
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
-        roomId: action ? action : e,
+        roomId: action || e,
         hideSelector: false,
         defaultAccess: getDefaultAccessUser(roomType),
       });
@@ -1019,37 +1029,36 @@ class ContextOptionsStore {
       return (timer = setTimeout(() => {
         this.linksIsLoading = true;
       }, LOADER_TIMER));
-    } else {
-      if (loadingTime) {
-        const currentDate = new Date();
+    }
+    if (loadingTime) {
+      const currentDate = new Date();
 
-        let ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
-
-        if (timer) {
-          let ms = Math.abs(ms - LOADER_TIMER);
-
-          clearTimeout(timer);
-          timer = null;
-        }
-
-        if (ms < LOADER_TIMER) {
-          return setTimeout(() => {
-            this.linksIsLoading = true;
-            loadingTime = null;
-            cb && cb();
-          }, LOADER_TIMER - ms);
-        }
-      }
+      let ms = Math.abs(loadingTime.getTime() - currentDate.getTime());
 
       if (timer) {
+        ms = Math.abs(ms - LOADER_TIMER);
+
         clearTimeout(timer);
         timer = null;
       }
 
-      loadingTime = null;
-      this.linksIsLoading = false;
-      cb && cb();
+      if (ms < LOADER_TIMER) {
+        return setTimeout(() => {
+          this.linksIsLoading = true;
+          loadingTime = null;
+          cb && cb();
+        }, LOADER_TIMER - ms);
+      }
     }
+
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    loadingTime = null;
+    this.linksIsLoading = false;
+    cb && cb();
   };
 
   onCreateOform = (navigate) => {
@@ -1353,7 +1362,7 @@ class ContextOptionsStore {
 
     const hasInfoPanel = contextOptions.includes("show-info");
 
-    //const emailSendIsDisabled = true;
+    // const emailSendIsDisabled = true;
     const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
 
     const { isGroupMenuBlocked } = this.filesActionsStore;
@@ -1553,7 +1562,7 @@ class ContextOptionsStore {
         key: "open-pdf",
         label: t("Open"),
         icon: EyeReactSvgUrl,
-        onClick: () => this.gotoDocEditor(false, item),
+        onClick: () => this.gotoDocEditor(item, false),
         disabled: false,
       },
       {
@@ -1902,7 +1911,7 @@ class ContextOptionsStore {
         id: "option_change-room-owner",
         key: "change-room-owner",
         label: t("Files:ChangeTheRoomOwner"),
-        icon: ReconnectReactSvgUrl,
+        icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
       },
@@ -2334,28 +2343,7 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter);
   };
 
-  getContextOptionsPlusFormRoom = (t, actions) => {
-    // const {
-    //   // createTemplateForm,
-    //   // createTemplateSelectFormFile,
-    //   // templateOformsGallery,
-    //   // createNewFolder,
-    //   // createNewDoc,
-    //   // createNewPresentation,
-    //   // createNewSpreadsheet,
-    //   // uploadFiles,
-    //   // uploadFolder,
-    // } = actions;
-
-    // const templatePDFForm = {
-    //   id: "personal_template-PDF-form",
-    //   className: "main-button_drop-down",
-    //   icon: FormReactSvgUrl,
-    //   label: t("Common:CreatePDFForm"),
-    //   key: "new-form",
-    //   items: [createTemplateForm, createTemplateSelectFormFile],
-    // };
-
+  getContextOptionsPlusFormRoom = (t) => {
     const showSelectorFormRoomDocx = {
       id: "actions_form-room_template_from-file",
       className: "main-button_drop-down_sub",
@@ -2460,7 +2448,7 @@ class ContextOptionsStore {
 
     const currentCanCreate =
       isLoading &&
-      window?.DocSpace?.location?.state?.hasOwnProperty("canCreate")
+      hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
         ? stateCanCreate
         : security?.Create;
 
@@ -2573,21 +2561,19 @@ class ContextOptionsStore {
       });
     }
 
-    const formActions = isDesktop()
-      ? [
-          {
-            id: "personal_form-template",
-            icon: FormReactSvgUrl,
-            label: t("Translations:NewForm"),
-            key: "new-form-base",
-            items: [
-              createTemplateForm,
-              createTemplateNewFormFile,
-              templateOformsGallery,
-            ],
-          },
-        ]
-      : [createTemplateForm, createTemplateNewFormFile, templateOformsGallery];
+    const formActions = [
+      {
+        id: "personal_form-template",
+        icon: FormReactSvgUrl,
+        label: t("Translations:NewForm"),
+        key: "new-form-base",
+        items: [
+          createTemplateForm,
+          createTemplateNewFormFile,
+          templateOformsGallery,
+        ],
+      },
+    ];
 
     const showUploadFolder = !(isMobile || isTablet);
     const options = isRoomsFolder
@@ -2637,7 +2623,7 @@ class ContextOptionsStore {
   getModel = (item, t) => {
     const { selection } = this.filesStore;
 
-    const { fileExst, contextOptions } = item;
+    const { contextOptions } = item;
 
     const contextOptionsProps =
       contextOptions && contextOptions.length > 0

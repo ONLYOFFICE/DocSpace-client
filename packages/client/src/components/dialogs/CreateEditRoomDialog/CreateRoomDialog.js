@@ -105,12 +105,7 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
-
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onCreateRoom();
-  };
+  const isRoomTitleChanged = roomParams?.title?.trim() === "";
 
   const onCreateRoom = async () => {
     if (!roomParams?.title?.trim()) {
@@ -122,6 +117,11 @@ const CreateRoomDialog = ({
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onCreateRoom();
   };
 
   /**
@@ -149,7 +149,7 @@ const CreateRoomDialog = ({
   const onCloseAndDisconnectThirdparty = async () => {
     if (isLoading) return;
 
-    if (!!roomParams.storageLocation.thirdpartyAccount) {
+    if (roomParams.storageLocation.thirdpartyAccount) {
       setIsLoading(true);
       await deleteThirdParty(
         roomParams.storageLocation.thirdpartyAccount.providerId,
@@ -212,7 +212,7 @@ const CreateRoomDialog = ({
         )}
       </ModalDialog.Body>
 
-      {!!roomParams.type && (
+      {roomParams.type ? (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"
@@ -224,6 +224,7 @@ const CreateRoomDialog = ({
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
             type="submit"
+            onClick={onCreateRoom}
           />
           <Button
             id="shared_create-room-modal_cancel"
@@ -235,7 +236,7 @@ const CreateRoomDialog = ({
             onClick={onCloseAndDisconnectThirdparty}
           />
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

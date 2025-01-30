@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -70,7 +69,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
 
   return (
     <StyledCurrentTariffContainer style={style}>
-      {quotaCharacteristics.map((item, index) => {
+      {quotaCharacteristics.map((item) => {
         const maxValue = item.value;
         const usedValue = item.used.value;
 
@@ -90,14 +89,14 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
           item.type === "size" ? getConvertedSize(t, usedValue) : usedValue;
 
         return (
-          <div key={index}>
-            <Text isBold noSelect fontSize={"14px"}>
+          <div key={maxValue}>
+            <Text isBold noSelect fontSize="14px">
               {item.used.title}
               <Text
                 className="current-tariff_count"
                 as="span"
                 isBold
-                fontSize={"14px"}
+                fontSize="14px"
               >
                 {resultingUsedValue}
                 {resultingMaxValue ? `/${resultingMaxValue}` : ""}

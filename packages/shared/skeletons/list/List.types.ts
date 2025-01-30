@@ -26,14 +26,14 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface ListItemLoaderProps extends RectangleSkeletonProps {
+export type ListItemLoaderProps = RectangleSkeletonProps & {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
   withoutFirstRectangle?: boolean;
   withoutLastRectangle?: boolean;
-}
+};
 
-export interface ListLoaderProps extends ListItemLoaderProps {
+export type ListLoaderProps = ListItemLoaderProps & {
   count: number;
-}
+};

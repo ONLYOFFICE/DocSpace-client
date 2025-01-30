@@ -75,11 +75,11 @@ const CreateRoomEvent = ({
       return;
     }
 
-    onCreateRoom(false, t);
+    onCreateRoom(t, false);
   };
 
   const fetchTagsAction = useCallback(async () => {
-    let tags = await fetchTags();
+    const tags = await fetchTags();
     setFetchedTags(tags);
   }, []);
 
@@ -100,10 +100,9 @@ const CreateRoomEvent = ({
       title={title}
       t={t}
       visible={
-        visible &&
-        !connectDialogVisible &&
-        !createRoomConfirmDialogVisible &&
-        !confirmDialogIsLoading
+        visible && !connectDialogVisible && !createRoomConfirmDialogVisible
+          ? !confirmDialogIsLoading
+          : null
       }
       onClose={onClose}
       onCreate={onCreate}

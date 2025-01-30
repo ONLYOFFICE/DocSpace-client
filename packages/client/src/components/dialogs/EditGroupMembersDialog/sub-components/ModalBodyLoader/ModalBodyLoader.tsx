@@ -35,7 +35,7 @@ interface ModalBodyLoaderProps {
 export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
   return (
     <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
-      {withSearch && <SearchLoader />}
+      {withSearch ? <SearchLoader /> : null}
       <div style={{ paddingInline: "16px" }}>
         <MemberLoader count={25} />
       </div>

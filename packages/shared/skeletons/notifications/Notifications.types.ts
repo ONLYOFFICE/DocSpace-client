@@ -26,6 +26,6 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface NotificationsLoaderProps extends RectangleSkeletonProps {
+export type NotificationsLoaderProps = RectangleSkeletonProps & {
   count?: number;
-}
+};

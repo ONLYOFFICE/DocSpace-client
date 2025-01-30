@@ -59,7 +59,7 @@ const FileManagement = ({
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
-  const getData = async () => await getFilesSettings();
+  const getData = () => getFilesSettings();
 
   useEffect(() => {
     const prefix =
@@ -184,9 +184,6 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
     setStoreOriginal,
 
     setConfirmDelete,
-
-    myFolderId,
-    commonFolderId,
 
     keepNewFileName,
     setKeepNewFileName,

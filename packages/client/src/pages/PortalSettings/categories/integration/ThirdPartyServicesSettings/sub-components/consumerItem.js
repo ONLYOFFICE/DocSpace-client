@@ -30,10 +30,10 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import ConsumerToggle from "./consumerToggle";
 import { globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import ConsumerToggle from "./consumerToggle";
 
 const StyledItem = styled.div.attrs(injectDefaultTheme)`
   .consumer-description {
@@ -41,7 +41,7 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)`
       !props.isThirdPartyAvailable &&
       !props.isSet &&
       css`
-        color: ${(props) => props.theme.client.settings.integration.textColor};
+        color: ${({ theme }) => theme.client.settings.integration.textColor};
       `}
   }
 `;
@@ -79,61 +79,53 @@ const StyledBox = styled(Box).attrs(injectDefaultTheme)`
   }
 `;
 
-class ConsumerItem extends React.Component {
-  render() {
-    const {
-      consumer,
-      onModalOpen,
-      setConsumer,
-      updateConsumerProps,
-      t,
-      isThirdPartyAvailable,
-    } = this.props;
+const ConsumerItem = ({
+  consumer,
+  onModalOpen,
+  setConsumer,
+  updateConsumerProps,
+  t,
+  isThirdPartyAvailable,
+}) => {
+  const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
+  const isSet = !!(!consumer.canSet || consumer.props.find((p) => p.value));
 
-    const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
-
-    const isSet =
-      !consumer.canSet || consumer.props.find((p) => p.value) ? true : false;
-
-    return (
-      <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
-        <Box
-          displayProp="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          widthProp="100%"
+  return (
+    <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
+      <Box
+        displayProp="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        widthProp="100%"
+      >
+        <StyledBox
+          canSet={consumer.canSet}
+          isLinkedIn={consumer.name === "linkedin"}
+          isThirdPartyAvailable={isThirdPartyAvailable}
         >
-          <StyledBox
-            canSet={consumer.canSet}
-            isLinkedIn={consumer.name === "linkedin"}
-            isThirdPartyAvailable={isThirdPartyAvailable}
-          >
-            {logo && (
-              <ReactSVG
-                src={logo}
-                className={"consumer-icon"}
-                alt={consumer.name}
-              />
-            )}
-          </StyledBox>
-          <Box onClick={setConsumer} data-consumer={consumer.name}>
-            <ConsumerToggle
-              consumer={consumer}
-              onModalOpen={onModalOpen}
-              updateConsumerProps={updateConsumerProps}
-              t={t}
-              isDisabled={!isThirdPartyAvailable}
+          {logo ? (
+            <ReactSVG
+              src={logo}
+              className="consumer-icon"
+              alt={consumer.name}
             />
-          </Box>
+          ) : null}
+        </StyledBox>
+        <Box onClick={setConsumer} data-consumer={consumer.name}>
+          <ConsumerToggle
+            consumer={consumer}
+            onModalOpen={onModalOpen}
+            updateConsumerProps={updateConsumerProps}
+            t={t}
+            isDisabled={!isThirdPartyAvailable}
+          />
         </Box>
+      </Box>
 
-        <Text className="consumer-description">{consumer.description}</Text>
-      </StyledItem>
-    );
-  }
-}
-
-export default ConsumerItem;
+      <Text className="consumer-description">{consumer.description}</Text>
+    </StyledItem>
+  );
+};
 
 ConsumerItem.propTypes = {
   consumer: PropTypes.shape({
@@ -148,3 +140,5 @@ ConsumerItem.propTypes = {
   setConsumer: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
 };
+
+export default ConsumerItem;

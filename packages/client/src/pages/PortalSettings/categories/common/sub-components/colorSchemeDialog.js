@@ -143,7 +143,7 @@ const ColorSchemeDialog = (props) => {
       onClose={onClose}
       displayType="aside"
       withFooterBorder={showSaveButtonDialog}
-      withBodyScroll={true}
+      withBodyScroll
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -160,7 +160,7 @@ const ColorSchemeDialog = (props) => {
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerAccent}
+            {!viewMobile ? nodeHexColorPickerAccent : null}
           </div>
 
           <div className="flex relative">
@@ -171,7 +171,7 @@ const ColorSchemeDialog = (props) => {
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerButtons}
+            {!viewMobile ? nodeHexColorPickerButtons : null}
           </div>
         </StyledBodyContent>
       </ModalDialog.Body>

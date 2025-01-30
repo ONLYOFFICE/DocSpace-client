@@ -1,6 +1,6 @@
 # EmailInput
 
-Email entry field with advanced capabilities for validation based on settings
+Email validation component with RFC 5322 support and customizable settings.
 
 ### Usage
 

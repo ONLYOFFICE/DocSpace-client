@@ -33,23 +33,19 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
-import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
-import {
-  isMobileDevice,
-  saveToSessionStorage,
-  getFromSessionStorage,
-} from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
-import LoaderCustomization from "../sub-components/loaderCustomization";
+import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { StyledSettingsComponent } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
@@ -122,6 +118,52 @@ const LanguageAndTimeZoneComponent = (props) => {
   const prevProps = React.useRef({ language: "", tReady: "", isLoaded: "" });
   const prevState = React.useRef({ language: "", timezone: "" });
 
+  const checkInnerWidth = () => {
+    if (!isMobileDevice()) {
+      setState((val) => ({ ...val, isCustomizationView: true }));
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setState((val) => ({ ...val, isCustomizationView: false }));
+    }
+  };
+
+  const settingIsEqualInitialValue = (settingName, value) => {
+    const defaultValue = JSON.stringify(state[`${settingName}Default`]);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    settingNames.forEach((settingName) => {
+      const valueFromSessionStorage = getFromSessionStorage(settingName);
+      if (
+        valueFromSessionStorage &&
+        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
+      )
+        hasChanged = true;
+    });
+
+    if (hasChanged !== state.hasChanged) {
+      setState((val) => ({
+        ...val,
+        hasChanged,
+        showReminder: hasChanged,
+      }));
+    }
+  };
+
   React.useEffect(() => {
     languageFromSessionStorage = getFromSessionStorage("language");
     languageDefaultFromSessionStorage =
@@ -157,18 +199,18 @@ const LanguageAndTimeZoneComponent = (props) => {
     ) {
       const timezones = mapTimezonesToArray(rawTimezones);
 
-      const timezone =
+      const selectedTimezone =
         timezoneFromSessionStorage ||
         findSelectedItemByKey(timezones, portalTimeZoneId) ||
         rawTimezones[0];
 
-      const timezoneDefault =
+      const selectedTimezoneDefault =
         findSelectedItemByKey(timezones, portalTimeZoneId) || timezones[0];
 
       setState((val) => ({
         ...val,
-        timezone,
-        timezoneDefault,
+        timezone: selectedTimezone,
+        timezoneDefault: selectedTimezoneDefault,
       }));
     }
 
@@ -178,17 +220,17 @@ const LanguageAndTimeZoneComponent = (props) => {
       tReady &&
       languageFromSessionStorage === ""
     ) {
-      const language =
+      const selectedLanguage =
         languageFromSessionStorage ||
         findSelectedItemByKey(cultureNames, portalLanguage) ||
         cultureNames[0];
 
-      const languageDefault =
+      const selectedLanguageDefault =
         findSelectedItemByKey(cultureNames, portalLanguage) || cultureNames[0];
       setState((val) => ({
         ...val,
-        language,
-        languageDefault,
+        language: selectedLanguage,
+        languageDefault: selectedLanguageDefault,
       }));
     }
 
@@ -213,9 +255,9 @@ const LanguageAndTimeZoneComponent = (props) => {
 
   React.useState(() => {
     prevProps.current = {
-      language: language,
-      tReady: tReady,
-      isLoaded: isLoaded,
+      language,
+      tReady,
+      isLoaded,
     };
   }, [language, tReady, isLoaded]);
 
@@ -248,30 +290,39 @@ const LanguageAndTimeZoneComponent = (props) => {
     ) {
       const timezones = mapTimezonesToArray(rawTimezones);
 
-      const timezone =
+      const selectedTimezone =
         timezoneFromSessionStorage ||
         findSelectedItemByKey(timezones, portalTimeZoneId) ||
         rawTimezones[0];
 
-      const timezoneDefault =
+      const selectedTimezoneDefault =
         timezoneDefaultFromSessionStorage ||
         findSelectedItemByKey(timezones, portalTimeZoneId) ||
         timezones[0];
 
-      setState((val) => ({ ...val, timezone, timezoneDefault }));
+      setState((val) => ({
+        ...val,
+        timezone: selectedTimezone,
+        timezoneDefault: selectedTimezoneDefault,
+      }));
     }
 
     if (cultures.length > 0 && isLoaded && tReady && state.language === "") {
-      const cultureNames = mapCulturesToArray(cultures, i18n);
-      const language =
+      const newCultureNames = mapCulturesToArray(cultures, i18n);
+      const selectedLanguage =
         languageFromSessionStorage ||
-        findSelectedItemByKey(cultureNames, portalLanguage) ||
-        cultureNames[0];
+        findSelectedItemByKey(newCultureNames, portalLanguage) ||
+        newCultureNames[0];
 
-      const languageDefault =
-        findSelectedItemByKey(cultureNames, portalLanguage) || cultureNames[0];
+      const selectedLanguageDefault =
+        findSelectedItemByKey(newCultureNames, portalLanguage) ||
+        newCultureNames[0];
 
-      setState((val) => ({ ...val, language, languageDefault }));
+      setState((val) => ({
+        ...val,
+        language: selectedLanguage,
+        languageDefault: selectedLanguageDefault,
+      }));
     }
 
     const checkScroll = checkScrollSettingsBlock();
@@ -319,45 +370,54 @@ const LanguageAndTimeZoneComponent = (props) => {
     initSettings,
   ]);
 
-  const onLanguageSelect = (language) => {
-    setState((val) => ({ ...val, language }));
-    if (settingIsEqualInitialValue("language", language)) {
+  const onSelectLanguage = (selectedLanguage) => {
+    setState((val) => ({
+      ...val,
+      language: selectedLanguage,
+    }));
+    if (settingIsEqualInitialValue("language", selectedLanguage)) {
       saveToSessionStorage("language", "");
       saveToSessionStorage("languageDefault", "");
     } else {
-      saveToSessionStorage("language", language);
+      saveToSessionStorage("language", selectedLanguage);
     }
     checkChanges();
   };
 
-  const onTimezoneSelect = (timezone) => {
-    setState((val) => ({ ...val, timezone }));
-    if (settingIsEqualInitialValue("timezone", timezone)) {
+  const onSelectTimezone = (selectedTimezone) => {
+    setState((val) => ({
+      ...val,
+      timezone: selectedTimezone,
+    }));
+    if (settingIsEqualInitialValue("timezone", selectedTimezone)) {
       saveToSessionStorage("timezone", "");
       saveToSessionStorage("timezoneDefault", "");
     } else {
-      saveToSessionStorage("timezone", timezone);
+      saveToSessionStorage("timezone", selectedTimezone);
     }
 
     checkChanges();
   };
 
-  const onSaveLngTZSettings = () => {
-    const { t, setLanguageAndTime, user, language: lng } = props;
-    const { language, timezone } = state;
+  const onSaveClick = () => {
+    const { translate, selectedLanguage, selectedTimezone } = state;
+    const { setLanguageAndTime, user, language: lng } = props;
 
     setState((val) => ({ ...val, isLoading: true }));
-    setLanguageAndTime(language.key, timezone.key)
+    setLanguageAndTime(selectedLanguage.key, selectedTimezone.key)
       .then(() => {
         !user.cultureName &&
-          setCookie(LANGUAGE, language.key || "en", {
+          setCookie(LANGUAGE, selectedLanguage.key || "en", {
             "max-age": COOKIE_EXPIRATION_YEAR,
           });
-        window.timezone = timezone.key;
+        window.timezone = selectedTimezone.key;
       })
-      .then(() => toastr.success(t("SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(translate("SuccessfullySaveSettingsMessage")))
       .then(
-        () => !user.cultureName && lng !== language.key && location.reload(),
+        () =>
+          !user.cultureName &&
+          lng !== selectedLanguage.key &&
+          window.location.reload(),
       )
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));
@@ -369,8 +429,8 @@ const LanguageAndTimeZoneComponent = (props) => {
       languageDefault: state.language,
     }));
 
-    saveToSessionStorage("languageDefault", language);
-    saveToSessionStorage("timezoneDefault", timezone);
+    saveToSessionStorage("languageDefault", selectedLanguage);
+    saveToSessionStorage("timezoneDefault", selectedTimezone);
   };
 
   const onCancelClick = () => {
@@ -381,7 +441,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         valueFromSessionStorage !== null &&
         !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
       ) {
-        const defaultValue = state[settingName + "Default"];
+        const defaultValue = state[`${settingName}Default`];
 
         setState((val) => ({ ...val, [settingName]: defaultValue || null }));
         saveToSessionStorage(settingName, "");
@@ -391,58 +451,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     setState((val) => ({ ...val, showReminder: false }));
 
     checkChanges();
-  };
-
-  const settingIsEqualInitialValue = (settingName, value) => {
-    const defaultValue = JSON.stringify(state[settingName + "Default"]);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
-
-  const checkChanges = () => {
-    let hasChanged = false;
-
-    settingNames.forEach((settingName) => {
-      const valueFromSessionStorage = getFromSessionStorage(settingName);
-      if (
-        valueFromSessionStorage &&
-        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
-      )
-        hasChanged = true;
-    });
-
-    if (hasChanged !== state.hasChanged) {
-      setState((val) => ({
-        ...val,
-        hasChanged: hasChanged,
-        showReminder: hasChanged,
-      }));
-    }
-  };
-
-  const checkInnerWidth = () => {
-    if (!isMobileDevice()) {
-      setState((val) => ({ ...val, isCustomizationView: true }));
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setState((val) => ({ ...val, isCustomizationView: false }));
-    }
-  };
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-
-    navigate(e.target.pathname);
   };
 
   const {
@@ -456,14 +464,14 @@ const LanguageAndTimeZoneComponent = (props) => {
   const timezones = mapTimezonesToArray(rawTimezones);
   const cultureNamesNew = mapCulturesToArray(cultures, i18n);
 
-  const isBetaLanguage = state?.language?.isBeta;
+  const isBetaLang = state?.language?.isBeta;
 
   const settingsBlock = !(state.language && state.timezone) ? null : (
     <div className="settings-block">
       <FieldContainer
         id="fieldContainerLanguage"
         labelText={`${t("Common:Language")}`}
-        isVertical={true}
+        isVertical
       >
         <div className="settings-block__wrapper-language">
           <ComboBox
@@ -471,23 +479,23 @@ const LanguageAndTimeZoneComponent = (props) => {
             id="comboBoxLanguage"
             options={cultureNamesNew}
             selectedOption={state.language}
-            onSelect={onLanguageSelect}
+            onSelect={onSelectLanguage}
             isDisabled={isLoading}
             directionY="both"
             noBorder={false}
-            scaled={true}
-            scaledOptions={true}
+            scaled
+            scaledOptions
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
-            showDisabledItems={true}
+            showDisabledItems
           />
-          {isBetaLanguage && <BetaBadge place={"right-start"} />}
+          {isBetaLang ? <BetaBadge place="right-start" /> : null}
         </div>
       </FieldContainer>
       <FieldContainer
         id="fieldContainerTimezone"
         labelText={`${t("TimeZone")}`}
-        isVertical={true}
+        isVertical
       >
         <ComboBox
           tabIndex={2}
@@ -495,33 +503,33 @@ const LanguageAndTimeZoneComponent = (props) => {
           options={timezones}
           directionY="both"
           selectedOption={state.timezone}
-          onSelect={onTimezoneSelect}
+          onSelect={onSelectTimezone}
           isDisabled={isLoading}
           noBorder={false}
-          scaled={true}
-          scaledOptions={true}
+          scaled
+          scaledOptions
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
-          showDisabledItems={true}
+          showDisabledItems
         />
       </FieldContainer>
     </div>
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization lngTZSettings={true} />
+    <LoaderCustomization lngTZSettings />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("StudioTimeLanguageSettings")}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription", {
@@ -545,13 +553,13 @@ const LanguageAndTimeZoneComponent = (props) => {
       <SaveCancelButtons
         tabIndex={3}
         className="save-cancel-buttons"
-        onSaveClick={onSaveLngTZSettings}
+        onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={hasScroll}
         additionalClassSaveButton="language-time-zone-save"
         additionalClassCancelButton="language-time-zone-cancel"

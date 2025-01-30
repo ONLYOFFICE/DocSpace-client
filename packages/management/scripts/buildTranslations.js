@@ -42,6 +42,7 @@ beforeBuild(
       "Translations.json",
       "Files.json",
       "Profile.json",
+      "PreparationPortal.json",
     ],
     alias: "CLIENT_PUBLIC_DIR",
   }

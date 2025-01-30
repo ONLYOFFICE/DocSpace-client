@@ -178,10 +178,14 @@ export default function FilesSelectorClient({
     cancel,
     cancelLabel,
     filter,
+    id,
     search,
     selectorType,
     subtitle,
   } = baseConfig;
+
+  const selectorOpenRoot =
+    selectorType !== "userFolderOnly" && selectorType !== "roomsOnly" && !id;
 
   const selectorProps = {
     cancelButtonLabel: cancelLabel || t("CancelButton"),
@@ -198,6 +202,8 @@ export default function FilesSelectorClient({
     isPanelVisible: true,
     isRoomsOnly: selectorType === "roomsOnly",
     isThirdParty: false,
+    isUserOnly: selectorType === "userFolderOnly",
+    openRoot: selectorOpenRoot,
     roomsFolderId,
     rootFolderType,
     submitButtonLabel: acceptLabel || t("SelectAction"),

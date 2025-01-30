@@ -1501,11 +1501,6 @@
   --file-input-focus-disabled-border-color: #{$gray-light-mid};
   --file-input-focus-warning-border-color: #{$light-status-warning};
   --file-input-focus-error-border-color: #{$light-error-status};
-
-  --file-input-border-color1: #{$gray-strong};
-  --file-input-disabled-border-color1: #{$gray-light-mid};
-  --file-input-warning-border-color1: #{$light-status-warning};
-  --file-input-error-border-color1: #{$light-error-status};
 }
 
 .dark {
@@ -1521,11 +1516,6 @@
   --file-input-focus-disabled-border-color: #{$gray-dark-strong};
   --file-input-focus-warning-border-color: #{$dark-status-warning};
   --file-input-focus-error-border-color: #{$dark-error-status};
-
-  --file-input-border-color1: #{$gray-dark-strong};
-  --file-input-disabled-border-color1: #{$gray-dark-strong};
-  --file-input-warning-border-color1: #{$dark-status-warning};
-  --file-input-error-border-color1: #{$dark-error-status};
 }
 
 :global(.rtl) {

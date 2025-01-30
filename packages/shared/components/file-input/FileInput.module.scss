@@ -229,14 +229,14 @@
   border: 1px solid;
   cursor: pointer;
 
-  border-color: var(--file-input-border-color1);
+  border-color: var(--file-input-border-color);
 
   .iconButton {
     cursor: pointer;
   }
 
   &.disabled {
-    border-color: var(--file-input-disabled-border-color1);
+    border-color: var(--file-input-disabled-border-color);
     cursor: default;
 
     .iconButton {
@@ -245,11 +245,11 @@
   }
 
   &.warning {
-    border-color: var(--file-input-warning-border-color1);
+    border-color: var(--file-input-warning-border-color);
   }
 
   &.error {
-    border-color: var(--file-input-error-border-color1);
+    border-color: var(--file-input-error-border-color);
   }
 
   .loader {

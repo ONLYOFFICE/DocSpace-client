@@ -54,6 +54,14 @@
     cursor: pointer;
     background: var(--social-button-hover-background);
     border: var(--social-button-hover-border);
+
+    .socialButtonText {
+      color: var(--social-button-hover-text-color);
+
+      &.isConnect {
+        color: var(--social-button-connect-text-color);
+      }
+    }
   }
 
   &.noHover {

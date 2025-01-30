@@ -170,6 +170,7 @@ export const getOptions = (
   actions: OptionActions,
   isVisitor: boolean = true,
   isFrame: boolean = false,
+  logoText: string,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -318,7 +319,7 @@ export const getOptions = (
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
       productName: t("Common:ProductName"),
-      organizationName: t("Common:OrganizationName"),
+      organizationName: logoText,
     }),
     icon: <InviteUserFormIcon />,
     key: "migration-data",

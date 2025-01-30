@@ -95,6 +95,8 @@ const Shell = ({ page = "home", ...rest }) => {
     isAdmin,
     releaseDate,
     registrationDate,
+    logoText,
+    setLogoText,
   } = rest;
 
   const theme = useTheme();
@@ -104,6 +106,10 @@ const Shell = ({ page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
+
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
 
   useEffect(() => {
     try {
@@ -276,7 +282,7 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -530,6 +536,8 @@ const ShellWrapper = inject(
       isPortalRestoring,
       setShowGuestReleaseTip,
       buildVersionInfo,
+      logoText,
+      setLogoText,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -599,6 +607,8 @@ const ShellWrapper = inject(
       barTypeInFrame: frameConfig?.showHeaderBanner,
       setShowGuestReleaseTip,
       releaseDate: buildVersionInfo.releaseDate,
+      logoText,
+      setLogoText,
     };
   },
 )(observer(Shell));

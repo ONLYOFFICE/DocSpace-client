@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `;
 
 const ReactSmartBanner = (props) => {
-  const { t, ready, isBannerVisible, setIsBannerVisible } = props;
+  const { t, ready, isBannerVisible, setIsBannerVisible, logoText } = props;
   const force = isIOS ? "ios" : "android";
   const location = useLocation();
 
@@ -94,7 +94,7 @@ const ReactSmartBanner = (props) => {
     <Wrapper>
       <SmartBanner
         title={t("SmartBanner:AppName", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         author="Ascensio System SIA"
         button={t("Common:View")}
@@ -110,9 +110,10 @@ const ReactSmartBanner = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { isBannerVisible, setIsBannerVisible } = settingsStore;
+  const { isBannerVisible, setIsBannerVisible, logoText } = settingsStore;
   return {
     isBannerVisible,
     setIsBannerVisible,
+    logoText,
   };
 })(observer(ReactSmartBanner));

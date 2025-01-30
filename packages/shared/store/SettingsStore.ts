@@ -340,6 +340,10 @@ class SettingsStore {
     makeAutoObservable(this);
   }
 
+  setLogoText = (logoText: string) => {
+    this.logoText = logoText;
+  };
+
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
   };

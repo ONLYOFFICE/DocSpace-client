@@ -58,13 +58,14 @@ export const getGuidPosition = (
           viewAs === "tile"
             ? guidRects.pdf.height + TILE_VIEW_OFFSET
             : guidRects.pdf.height,
-        left: isRTL
-          ? 0
-          : viewAs === "row"
-            ? guidRects.pdf.left - ROW_VIEW_OFFSET
-            : viewAs === "tile"
-              ? guidRects.pdf.left - TILE_VIEW_POSITION_OFFSET
-              : guidRects.pdf.left,
+        left:
+          isRTL && (viewAs === "row" || viewAs === "table")
+            ? 0
+            : viewAs === "row"
+              ? guidRects.pdf.left - ROW_VIEW_OFFSET
+              : viewAs === "tile"
+                ? guidRects.pdf.left - TILE_VIEW_POSITION_OFFSET
+                : guidRects.pdf.left,
         top:
           viewAs === "tile"
             ? guidRects.pdf.top - TILE_VIEW_POSITION_OFFSET
@@ -94,13 +95,14 @@ export const getGuidPosition = (
           viewAs === "tile"
             ? guidRects.ready.height + TILE_VIEW_OFFSET
             : guidRects.ready.height,
-        left: isRTL
-          ? 0
-          : viewAs === "row"
-            ? guidRects.ready.left - ROW_VIEW_OFFSET
-            : viewAs === "tile"
-              ? guidRects.ready.left - TILE_VIEW_POSITION_OFFSET
-              : guidRects.ready.left,
+        left:
+          isRTL && (viewAs === "row" || viewAs === "table")
+            ? 0
+            : viewAs === "row"
+              ? guidRects.ready.left - ROW_VIEW_OFFSET
+              : viewAs === "tile"
+                ? guidRects.ready.left - TILE_VIEW_POSITION_OFFSET
+                : guidRects.ready.left,
         top:
           viewAs === "tile"
             ? guidRects.ready.top - TILE_VIEW_POSITION_OFFSET

@@ -25,7 +25,24 @@ beforeAll(() => {
   const javascripts = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    const excludeDirs = [
+      ".nx",
+      "e2e",
+      ".yarn",
+      ".github",
+      ".vscode",
+      ".git",
+      "__mocks__",
+      "dist",
+      "test",
+      "tests",
+      ".next",
+      "campaigns",
+      "storybook-static",
+      "node_modules",
+    ];
+
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&

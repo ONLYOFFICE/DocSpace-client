@@ -59,10 +59,27 @@ beforeAll(() => {
   workspaces = getWorkSpaces();
   workspaces.push(path.resolve(BASE_DIR, "public/locales"));
 
+  const excludeDirs = [
+    ".nx",
+    "e2e",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "__mocks__",
+    "dist",
+    "test",
+    "tests",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+  ];
+
   const translations = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         filePath.endsWith(".json") &&
@@ -106,7 +123,7 @@ beforeAll(() => {
   const javascripts = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&
@@ -763,57 +780,62 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === 'true';
-  (skipBaseLanguagesTest ? test.skip : test)(`NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`, () => {
-    let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
+  const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === "true";
+  (skipBaseLanguagesTest ? test.skip : test)(
+    `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`,
+    () => {
+      let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
 
-    let exists = false;
-    let i = 0;
+      let exists = false;
+      let i = 0;
 
-    const enKeys = translationFiles.filter((file) => file.language === "en");
+      const enKeys = translationFiles.filter((file) => file.language === "en");
 
-    const allEnKeys = enKeys
-      .flatMap((item) =>
-        item.translations.map((t) => {
-          return item.fileName + " " + t.key;
-        })
-      )
-      .sort();
-
-    const allBaseLanguages = [];
-
-    for (const lng of BASE_LANGUAGES) {
-      const lngKeys = translationFiles.filter((file) => file.language === lng);
-
-      const keys = lngKeys
+      const allEnKeys = enKeys
         .flatMap((item) =>
-          item.translations
-            .filter((f) => f.value !== "")
-            .map((t) => {
-              return item.fileName + " " + t.key;
-            })
+          item.translations.map((t) => {
+            return item.fileName + " " + t.key;
+          })
         )
         .sort();
 
-      allBaseLanguages.push({ language: lng, keys: keys });
+      const allBaseLanguages = [];
+
+      for (const lng of BASE_LANGUAGES) {
+        const lngKeys = translationFiles.filter(
+          (file) => file.language === lng
+        );
+
+        const keys = lngKeys
+          .flatMap((item) =>
+            item.translations
+              .filter((f) => f.value !== "")
+              .map((t) => {
+                return item.fileName + " " + t.key;
+              })
+          )
+          .sort();
+
+        allBaseLanguages.push({ language: lng, keys: keys });
+      }
+
+      for (const lng of allBaseLanguages) {
+        const notFoundKeys = allEnKeys.filter((k) => !lng.keys.includes(k));
+
+        if (!notFoundKeys.length) continue;
+
+        exists = true;
+
+        message +=
+          `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
+          `Keys:\r\n\r\n`;
+
+        message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+      }
+
+      expect(exists, message).toBe(false);
     }
-
-    for (const lng of allBaseLanguages) {
-      const notFoundKeys = allEnKeys.filter((k) => !lng.keys.includes(k));
-
-      if (!notFoundKeys.length) continue;
-
-      exists = true;
-
-      message +=
-        `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
-        `Keys:\r\n\r\n`;
-
-      message += notFoundKeys.join("\r\n") + "\r\n\r\n";
-    }
-
-    expect(exists, message).toBe(false);
-  });
+  );
 
   test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
     let message = "The following keys are using incorrect namespaces:\r\n\r\n";
@@ -821,31 +843,36 @@ describe("Locales Tests", () => {
 
     // Create a map of all available keys in each namespace
     const namespaceKeys = {};
-    translationFiles.forEach(file => {
+    translationFiles.forEach((file) => {
       const namespace = path.basename(file.fileName, ".json");
-      namespaceKeys[namespace] = new Set(file.translations.map(t => t.key));
+      namespaceKeys[namespace] = new Set(file.translations.map((t) => t.key));
     });
 
     // Check each JavaScript file for translation key usage
-    javascriptFiles.forEach(jsFile => {
-      jsFile.translationKeys.forEach(key => {
+    javascriptFiles.forEach((jsFile) => {
+      jsFile.translationKeys.forEach((key) => {
         const [namespace, translationKey] = key.split(":");
-        
+
         // Skip if the key doesn't follow namespace:key format
         if (!translationKey) return;
 
         // Check if the key exists in the specified namespace
-        if (namespaceKeys[namespace] && !namespaceKeys[namespace].has(translationKey)) {
+        if (
+          namespaceKeys[namespace] &&
+          !namespaceKeys[namespace].has(translationKey)
+        ) {
           // Check if the key exists in other namespaces
           const foundInNamespaces = Object.entries(namespaceKeys)
-            .filter(([ns, keys]) => ns !== namespace && keys.has(translationKey))
+            .filter(
+              ([ns, keys]) => ns !== namespace && keys.has(translationKey)
+            )
             .map(([ns]) => ns);
 
           if (foundInNamespaces.length > 0) {
             incorrectUsages.push({
               file: jsFile.path,
               key: key,
-              correctNamespaces: foundInNamespaces
+              correctNamespaces: foundInNamespaces,
             });
           }
         }
@@ -855,7 +882,10 @@ describe("Locales Tests", () => {
     if (incorrectUsages.length > 0) {
       let i = 1;
       message += incorrectUsages
-        .map(usage => `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`)
+        .map(
+          (usage) =>
+            `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`
+        )
         .join("\n");
 
       console.log(message);

@@ -26,13 +26,30 @@ let allFiles = [];
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
+  const excludeDirs = [
+    ".nx",
+    "e2e",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "__mocks__",
+    "dist",
+    "test",
+    "tests",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+  ];
+
   const workspaces = getWorkSpaces();
   workspaces.push(path.resolve(BASE_DIR, "public"));
   const filesPattern = /\.(js|jsx|ts|tsx|html|css|scss|saas|json)$/i;
   const files = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         filesPattern.test(filePath) &&
@@ -54,7 +71,7 @@ beforeAll(() => {
   const images = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         imagesPattern.test(filePath) &&

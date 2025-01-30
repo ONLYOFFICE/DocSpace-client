@@ -14,10 +14,9 @@
 
 const fs = require("fs");
 const path = require("path");
-const crypto = require("crypto");
+
 const {
   getAllFiles,
-  convertPathToOS,
   getWorkSpaces,
   BASE_DIR,
   moduleWorkspaces,
@@ -28,8 +27,7 @@ let workspaceCodeImports = [];
 let workspaceDeps = [];
 
 // Helper function to get all dependencies from a package.json file
-const getPackageDependencies = (packageJsonPath) => {
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+const getPackageDependencies = (packageJson) => {
   const deps = [];
 
   // Helper to add dependencies with version info
@@ -51,13 +49,6 @@ const getPackageDependencies = (packageJsonPath) => {
   return deps;
 };
 
-// Helper function to get all package.json files in a directory
-const findPackageJsonFiles = (dir) => {
-  return getAllFiles(dir, [], { extensions: [".json"] }).filter(
-    (file) => path.basename(file) === "package.json"
-  );
-};
-
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
@@ -68,10 +59,23 @@ beforeAll(() => {
   let codeFiles = [];
   let packageJsonFiles = [];
 
+  const excludeDirs = [
+    ".nx",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "dist",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+  ];
+
   workspaces.forEach((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    const files = getAllFiles(clientDir);
+    const files = getAllFiles(clientDir, excludeDirs);
 
     codeFiles.push(
       ...files.filter((filePath) => filePath && searchPattern.test(filePath))
@@ -153,39 +157,14 @@ beforeAll(() => {
   const pattern2 = `import\\(['"](${depNamePattern})['"]\\)`;
   const pattern3 = `from\\s+['"](${depNamePattern})['"]`;
   const pattern4 = `loader:\\s+['"](${depNamePattern})['"]`;
+  const pattern5 = `target:\\s+['"](${depNamePattern})['"],`;
 
   const regexp = new RegExp(
-    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})`,
+    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})`,
     "gm"
   );
 
   const codeImports = [];
-
-  //   const text = fs.readFileSync(
-  //     path.resolve(
-  //       BASE_DIR,
-  //       "packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js"
-  //     ),
-  //     "utf8"
-  //   );
-
-  //   const matchesTest = [...text.matchAll(regexp)];
-
-  //   const importsTest = matchesTest
-  //     .map((m) => m[2] || m[4] || m[6])
-  //     .filter((m) => m != null)
-  //     .filter(
-  //       (m) =>
-  //         !(
-  //           m.startsWith(".") ||
-  //           m.startsWith("@docspace/shared") ||
-  //           webpackAliases.some((k) => m.startsWith(`${k}/`)) ||
-  //           builtInModules.has(m) ||
-  //           spicificNameModules.has(m)
-  //         )
-  //     );
-
-  //   console.log(importsTest);
 
   codeFiles.forEach((filePath) => {
     const jsFileText = fs.readFileSync(filePath, "utf8");
@@ -193,7 +172,7 @@ beforeAll(() => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const imports = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8])
+      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10])
       .filter((m) => m != null)
       .filter(
         (m) =>
@@ -230,7 +209,10 @@ beforeAll(() => {
   });
 
   packageJsonFiles.forEach((filePath) => {
-    const deps = getPackageDependencies(filePath);
+    const packageJson = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const deps = getPackageDependencies(packageJson);
+
+    const scripts = packageJson.scripts;
 
     console.log(`Found deps = ${deps.length}.`);
 
@@ -238,6 +220,7 @@ beforeAll(() => {
       workspace: moduleWorkspaces.find((ws) => filePath.includes(ws)),
       path: filePath,
       deps,
+      scripts,
     });
   });
 
@@ -257,6 +240,8 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     (d) => d.workspace === "packages/shared"
   );
 
+  const usedSomeWhere = new Set();
+
   workspaceDeps.forEach((wsDepsItem) => {
     const workspace = wsDepsItem.workspace;
     const currentWorkspaceCodeImports = workspaceCodeImports.find(
@@ -264,7 +249,24 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     );
 
     let missing = wsDepsItem.deps.filter((dep) => {
-      const success = currentWorkspaceCodeImports.uniqueImports.has(dep.name);
+      let success =
+        currentWorkspaceCodeImports.uniqueImports.has(dep.name) ||
+        currentWorkspaceCodeImports.uniqueImports.values().some((s) => {
+          return s.startsWith(`${dep.name}/`);
+        });
+
+      if (!success && dep.name.startsWith("@types/")) {
+        const name = dep.name.substring("@types/".length);
+        success =
+          currentWorkspaceCodeImports.uniqueImports.has(name) ||
+          currentWorkspaceCodeImports.uniqueImports.values().some((s) => {
+            return s.startsWith(`${name}/`);
+          });
+      }
+
+      if (success) {
+        usedSomeWhere.add(dep.name);
+      }
 
       return !success;
     });
@@ -273,34 +275,57 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       missing = missing.filter((m) => {
         const success = sharedDeps.deps.find((d) => d.name === m.name);
 
+        if (success) {
+          usedSomeWhere.add(m.name);
+        }
+
         return !success;
       });
     }
+
+    missing = missing.filter((m) => {
+      const success = Object.values(wsDepsItem.scripts).some(
+        (s) => s.indexOf(m.name) !== -1
+      );
+
+      if (success) {
+        usedSomeWhere.add(m.name);
+      }
+
+      return !success;
+    });
 
     if (missing.length > 0) {
       unusedDependencies.push({ workspace, missing });
     }
   });
 
-  //   workspaceCodeImports.forEach((wsImportsItem) => {
-  //     const workspace = wsImportsItem.workspace;
-  //     const currentWorkspaceDeps = workspaceDeps.find((d) => d.workspace === workspace);
-
-  //     const missing = currentWorkspaceDeps.deps.filter(
-  //       (dep) => !wsImportsItem.imports.includes(dep.name)
-  //     );
-
-  //     if (missing.length > 0) {
-  //       unusedDependencies.push({ workspace, missing });
-  //     }
-  //   });
-
   let message = "Unused Dependencies check results:\n";
   unusedDependencies.forEach(({ workspace, missing }) => {
-    message += `\nIn ${workspace}:\n  Unused dependencies:\n`;
-    missing.forEach((dep) => {
-      message += `    - "${dep.name}":"${dep.version}"\n`;
-    });
+    message += `\nIn ${workspace}:\n`;
+
+    const missingInSameWorkspace = missing.filter(
+      (dep) => !usedSomeWhere.has(dep.name)
+    );
+
+    if (missingInSameWorkspace.length > 0) {
+      message += `\n  Unused dependencies:\n`;
+
+      missingInSameWorkspace.forEach((dep) => {
+        message += `    - "${dep.name}":"${dep.version}"\n`;
+      });
+    }
+
+    const foundInOtherWorkspace = missing.filter((dep) =>
+      usedSomeWhere.has(dep.name)
+    );
+
+    if (foundInOtherWorkspace.length > 0) {
+      message += `\n  Found in other workspace:\n`;
+      foundInOtherWorkspace.forEach((dep) => {
+        message += `    - "${dep.name}":"${dep.version}"\n`;
+      });
+    }
   });
 
   if (unusedDependencies.length > 0) {

@@ -30,31 +30,20 @@ const getWorkSpaces = () => {
   return workspaces;
 };
 
-const getAllFiles = (dir) => {
+const getAllFiles = (dir, excludeDirs = []) => {
   const files = fs.readdirSync(dir);
   return files.flatMap((file) => {
     const filePath = path.join(dir, file);
     const isDirectory = fs.statSync(filePath).isDirectory();
     if (isDirectory) {
       if (
-        filePath.includes("e2e") ||
-        filePath.includes(".yarn") ||
-        filePath.includes(".github") ||
-        filePath.includes(".vscode") ||
-        filePath.includes(".git") ||
-        filePath.includes("__mocks__") ||
-        filePath.includes("dist") ||
-        filePath.includes("test") ||
-        filePath.includes("tests") ||
-        filePath.includes(".next") ||
-        filePath.includes("campaigns") ||
-        filePath.includes("storybook-static") ||
-        filePath.includes("node_modules")
+        excludeDirs.includes(filePath) ||
+        excludeDirs.some((ex) => filePath.includes(ex))
       ) {
         return null;
       }
 
-      return getAllFiles(filePath);
+      return getAllFiles(filePath, excludeDirs);
     } else {
       return filePath;
     }

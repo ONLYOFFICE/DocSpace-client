@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
+import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { Nullable } from "@docspace/shared/types";
@@ -40,7 +41,10 @@ import type {
   TFilesSettings,
   TFolder,
 } from "@docspace/shared/api/files/types";
-import type { TFilesSelectorInit } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  TFilesSelectorInit,
+  TSelectedFileInfo,
+} from "@docspace/shared/selectors/Files/FilesSelector.types";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useSDK from "@/hooks/useSDK";
@@ -94,7 +98,43 @@ export default function FilesSelectorClient({
 
   useDocumentTitle("FileSelector");
 
-  const onSubmit = useCallback(() => {}, []);
+  const onSubmit = useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+      selectedTreeNode: TFolder,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      const enrichedData = {
+        ...selectedFileInfo,
+        //icon: getIcon(64, selectedFileInfo.fileExst),
+      } as TSelectedFileInfo & {
+        requestTokens?: {
+          id: string;
+          primary: boolean;
+          title: string;
+          requestToken: string;
+        }[];
+      };
+
+      if (selectedFileInfo?.inPublic) {
+        const { sharedTo } = await getFileLink(selectedFileInfo.id as number);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
+      }
+
+      frameCallEvent({ event: "onSelectCallback", data: enrichedData });
+      // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log(
+        JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
+      );
+    },
+    [],
+  );
 
   const onCancel = useCallback(() => {
     frameCallEvent({ event: "onCloseCallback" });

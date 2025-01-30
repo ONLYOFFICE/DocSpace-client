@@ -41,6 +41,81 @@ type GuidRectsProps = {
   uploading: DOMRect;
 };
 
+const DEFAULT_POSITION = {
+  width: 0,
+  height: 0,
+  left: 0,
+  top: 0,
+  bottom: 0,
+  right: 0,
+} as const;
+
+const getViewTypeBasedDimensions = (rect: DOMRect, viewAs: string) => {
+  const isRowOrTable = viewAs === "row" || viewAs === "table";
+  const isTileView = viewAs === "tile";
+
+  return {
+    width: isRowOrTable ? 0 : rect.width + TILE_VIEW_OFFSET,
+    height: isTileView ? rect.height + TILE_VIEW_OFFSET : rect.height,
+    top: isTileView ? rect.top - TILE_VIEW_POSITION_OFFSET : rect.top,
+  };
+};
+
+const getLeftPosition = (rect: DOMRect, viewAs: string, isRTL?: boolean) => {
+  if (isRTL && (viewAs === "row" || viewAs === "table")) {
+    return 0;
+  }
+
+  switch (viewAs) {
+    case "row":
+      return rect.left - ROW_VIEW_OFFSET;
+    case "tile":
+      return rect.left - TILE_VIEW_POSITION_OFFSET;
+    default:
+      return rect.left;
+  }
+};
+
+const getUploadingPosition = (rect: DOMRect) => {
+  const offset = GUID_UPLOADING_OFFSET;
+  const baseSize = isTablet() ? rect.height + offset * 2 : rect.height * 2;
+
+  return {
+    width: baseSize,
+    height: baseSize,
+    left: rect.left - offset,
+    top: rect.top - offset,
+    bottom: rect.bottom + offset,
+    right: rect.right,
+  };
+};
+
+const getSharingPosition = (rect: DOMRect) => {
+  const offset = GUID_SHARE_OFFSET;
+  return {
+    width: rect.width + offset * 2,
+    height: rect.height + offset * 2,
+    left: rect.left - offset,
+    top: rect.top - offset,
+    bottom: rect.bottom,
+    right: rect.right,
+  };
+};
+
+const getStandardPosition = (
+  rect: DOMRect,
+  viewAs: string,
+  isRTL?: boolean,
+) => {
+  const dimensions = getViewTypeBasedDimensions(rect, viewAs);
+  return {
+    ...dimensions,
+    left: getLeftPosition(rect, viewAs, isRTL),
+    bottom: rect.bottom,
+    right: rect.right,
+  };
+};
+
 export const getGuidPosition = (
   guidRects: GuidRectsProps,
   state: number,
@@ -49,91 +124,20 @@ export const getGuidPosition = (
 ) => {
   switch (state) {
     case FormFillingTipsState.Starting:
-      return {
-        width:
-          viewAs === "row" || viewAs === "table"
-            ? 0
-            : guidRects.pdf.width + TILE_VIEW_OFFSET,
-        height:
-          viewAs === "tile"
-            ? guidRects.pdf.height + TILE_VIEW_OFFSET
-            : guidRects.pdf.height,
-        left:
-          isRTL && (viewAs === "row" || viewAs === "table")
-            ? 0
-            : viewAs === "row"
-              ? guidRects.pdf.left - ROW_VIEW_OFFSET
-              : viewAs === "tile"
-                ? guidRects.pdf.left - TILE_VIEW_POSITION_OFFSET
-                : guidRects.pdf.left,
-        top:
-          viewAs === "tile"
-            ? guidRects.pdf.top - TILE_VIEW_POSITION_OFFSET
-            : guidRects.pdf.top,
-        bottom: guidRects.pdf.bottom,
-        right: guidRects.pdf.right,
-      };
+      return getStandardPosition(guidRects.pdf, viewAs, isRTL);
 
     case FormFillingTipsState.Sharing:
-      return {
-        width: guidRects.share.width + GUID_SHARE_OFFSET * 2,
-        height: guidRects.share.height + GUID_SHARE_OFFSET * 2,
-        left: guidRects.share.left - GUID_SHARE_OFFSET,
-        top: guidRects.share.top - GUID_SHARE_OFFSET,
-        bottom: guidRects.share.bottom,
-        right: guidRects.share.right,
-      };
+      return getSharingPosition(guidRects.share);
 
     case FormFillingTipsState.Submitting:
     case FormFillingTipsState.Complete:
-      return {
-        width:
-          viewAs === "row" || viewAs === "table"
-            ? 0
-            : guidRects.ready.width + TILE_VIEW_OFFSET,
-        height:
-          viewAs === "tile"
-            ? guidRects.ready.height + TILE_VIEW_OFFSET
-            : guidRects.ready.height,
-        left:
-          isRTL && (viewAs === "row" || viewAs === "table")
-            ? 0
-            : viewAs === "row"
-              ? guidRects.ready.left - ROW_VIEW_OFFSET
-              : viewAs === "tile"
-                ? guidRects.ready.left - TILE_VIEW_POSITION_OFFSET
-                : guidRects.ready.left,
-        top:
-          viewAs === "tile"
-            ? guidRects.ready.top - TILE_VIEW_POSITION_OFFSET
-            : guidRects.ready.top,
-        bottom: guidRects.ready.bottom,
-        right: guidRects.ready.right,
-      };
+      return getStandardPosition(guidRects.ready, viewAs, isRTL);
 
     case FormFillingTipsState.Uploading:
-      return {
-        width: isTablet()
-          ? guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2
-          : guidRects.uploading.height * 2,
-        height: isTablet()
-          ? guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2
-          : guidRects.uploading.height * 2,
-        left: guidRects.uploading.left - GUID_UPLOADING_OFFSET,
-        top: guidRects.uploading.top - GUID_UPLOADING_OFFSET,
-        bottom: guidRects.uploading.bottom + GUID_UPLOADING_OFFSET,
-        right: guidRects.uploading.right,
-      };
+      return getUploadingPosition(guidRects.uploading);
 
     default:
-      return {
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0,
-        bottom: 0,
-        right: 0,
-      };
+      return DEFAULT_POSITION;
   }
 };
 

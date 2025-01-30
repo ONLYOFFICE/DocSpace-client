@@ -224,6 +224,7 @@
   "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
+  "RecentlyOpenedTooltip": "Recently opened via the link",
   "TemplateAvailable": "Template available to everyone",
   "TemplateAvailableDescription": "All {{productName}} and Room admins will be able to create rooms using this template.",
   "AddUsersOrGroups": "Add Users or Groups",

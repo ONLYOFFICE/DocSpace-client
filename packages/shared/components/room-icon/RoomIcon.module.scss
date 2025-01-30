@@ -246,6 +246,12 @@
         }
       }
     }
+
+    &.isHovered {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .roomIconButton:has(svg:not(:global(.link))) {

@@ -128,6 +128,10 @@ const Details = ({
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
 
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
+
   const isTemplate =
     selection && "isTemplate" in selection && selection.isTemplate;
 
@@ -199,6 +203,8 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl}
+            tooltipContent={tooltipContent}
+            tooltipId="info-panel-details_icon-tooltip"
           />
         </StyledNoThumbnail>
       )}

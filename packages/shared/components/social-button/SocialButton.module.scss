@@ -97,6 +97,14 @@
       cursor: default;
       background: var(--social-button-background);
       border: var(--social-button-border);
+
+      .socialButtonText {
+        color: var(--social-button-text-color);
+
+        &.isConnect {
+          color: var(--social-button-connect-text-color);
+        }
+      }
     }
 
     &.isConnect:hover {
